@@ -1,0 +1,6 @@
+
+*.safetensors
+/results
+/fine_tuning_model
+/fine_tuning_model
+/llama-2-7b-miniguanaco
