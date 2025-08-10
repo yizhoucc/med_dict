@@ -4,3 +4,4 @@ simple no eg.csv
 *.pkl
 *.Identifier
 *.csv
+*.token
