@@ -5,3 +5,6 @@ simple no eg.csv
 *.Identifier
 *.csv
 *.token
+data/
+output/
+textstats_plot
