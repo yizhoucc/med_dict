@@ -1,0 +1,49 @@
+1. Reason for Visit 
+•	New patient / second opinion
+•	Chemotherapy or immunotherapy visit
+•	Toxicity / side effect management
+•	Surveillance / remission follow-up
+•	Lab review or imaging review
+•	Symptom check / urgent visit
+•	Telehealth / refill
+
+2. What We Found 
+•	Summary of most recent imaging, biopsy, pathology, or genetic testing
+•	Key lab results (CBC, CMP, tumor markers)
+•	Performance status / weight / vital trends
+•	Any new findings or progression vs stable disease
+
+3. Treatment Summary
+•	Current oncologic medications or regimens (name, dose, schedule)
+•	Any recent changes (hold, dose reduction, delay, switch)
+•	Supportive medications (antiemetics, growth factors, steroids, anticoagulants)
+•	Drug interactions or precautions reviewed
+
+4. What We Discussed / Decided
+•	Goals of treatment: curative, palliative, maintenance, surveillance
+•	Response assessment: how the cancer is responding
+•	Side effects: which ones to watch for, how to manage them
+•	Symptom management / palliative care discussion if relevant
+•	Clinical trial options if applicable
+
+5. Plan Going Forward 
+•	Medication plan: start / continue / change / stop
+•	Imaging and labs: which, when, and purpose
+•	Referrals: nutrition, genetics, palliative care, radiation, surgery, PT, social work, fertility, etc.
+•	Next visit/follow up: when and what will be reviewed
+
+6. Administrative / Practical Notes
+•	Medication refills
+•	Advance directives or code status (if relevant)
+
+
+Referral
+Nutrition (diet optimization, appetite, weight maintenance), Genetics (germline testing, family counseling), 
+Palliative care (symptom or pain management, goals of care), Radiation oncology / surgical oncology, Physical or occupational therapy, Social work, financial counseling, Psychology / psychiatry for coping and mood support
+
+follow up/next visit
+1) Next clinic visit (in-person or telehealth): timing and purpose
+2) Interim labs or scans between visits
+
+Advance care planning
+Advance directives, health-care proxy, code status (if appropriate)、
