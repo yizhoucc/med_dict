@@ -208,6 +208,42 @@ def txt_to_dict(file_path):
 
     return data_dict
 
+        
+def clean_model_output(text: str, fix_incomplete=True) -> str:
+    """
+    Clean up model-generated text with common fixes, not currently using
+    """
+    if not text:
+        return ""
+    
+    # Basic cleanup
+    text = text.strip()
+    text = re.sub(r'\s+', ' ', text)  # Normalize all whitespace
+    
+    # Fix paragraph spacing
+    text = re.sub(r'\n\s*\n\s*\n+', '\n\n', text)
+    
+    # Fix punctuation spacing
+    text = re.sub(r'\s+([,.!?;:])', r'\1', text)
+    text = re.sub(r'([.!?])\s*([A-Z])', r'\1 \2', text)
+    
+    # Remove repetitive patterns (simple version)
+    lines = text.split('\n')
+    cleaned_lines = []
+    for line in lines:
+        if not cleaned_lines or line.strip() != cleaned_lines[-1].strip():
+            cleaned_lines.append(line)
+    text = '\n'.join(cleaned_lines)
+    
+    # Handle incomplete sentences
+    if fix_incomplete and text and not text.endswith(('.', '!', '?')):
+        sentences = re.split(r'[.!?]+', text)
+        if len(sentences) > 1 and len(sentences[-1].strip()) < 10:
+            # Remove likely incomplete last sentence
+            text = '.'.join(sentences[:-1]) + '.'
+    
+    return text.strip()
+
 
 def run_model_with_cache_manual(
     prompt_text: str, 
