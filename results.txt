@@ -451,6 +451,7 @@ RESULTS FOR ROW 54
     "goals_of_treatment": "prolongation of life, while maintaining a good quality of life without excessive toxicities",
     "response_assessment": "The cancer is treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities"
   },
+  
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
       "summary": "AC/T followed by surgery, palbociclib after radiation",
