@@ -178,3 +178,111 @@ TASK: write an ending sentence to show your support. Limit to one sentence maxim
 
 
 
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 45
+============================================================
+
+--- Column: coral_idx ---
+184
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Consult    Patient Name: ***** *****-*****   ***** MRN:  *****   Patient DOB:  07/23/1984   Date of Visit:  04/16/2022  Provider:  ***** ***** *****  Primary Care Provider:  None Per Patient Provider  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor negative (CMS code)         I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     37 year old female with a self palpated right T2N1 triple negative breast cancer treated with ***** Taxol ***** ***** . She did not complete taxol but had the equivalent of August 08 weeks. She reports the cancer was growing on the taxol. She went to surgery October 2020 and had a right lumpectomy and *****/ALND.  She had 3 cm of IDC, February 09 ***** positive *****, *****% PR and her 2 negative.   She had radiation and started on xeloda February 2021.  A CT of the chest was done December 2021 and biopsy February 18 showed metastatic breast cancer to lung. She has bilateral lung nodules and right hilar LN.  She has had no treatment since January 2022 when diagnosed with metastatic disease.  She is here for a second opinion.   Her tumor is ***** positive at 10%.  We discussed keynote 355 with gemzar, carboplatin and *****.  We discussed ***** for second line and a clinical trial with a FGFR inhibitor in the future.    Her genetic testing was negative so she does not qualify for a PARP inhibitor.  I encouraged her to start on treatment asap.  We discussed how metastatic triple negative breast cancer is not curable.     Oncologic history    Stage at *****:  Cancer Staging  Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor negative (CMS code)  Staging form: Breast, AJCC 8th \n Edition  - Clinical: Stage IIIB (*****, *****, *****, *****, ER-, PR-, *****-) - Signed by ***** ***** *****, MD on 04/16/2022      Medications:  No current outpatient medications on file.   Reishi mushroom   Papaya enzymes  ***** /sea *****  mullein extract      Allergies: Allergies/Contraindications  No Known Allergies    Medical History:   Past Medical History:   Diagnosis Date   \u0007 Autism    \u0007 GERD (gastroesophageal reflux disease)        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY Right     lumpectomy and *****/ALND       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Not Currently   \u0007 Drug use: Yes     Types: *****   \u0007 Sexual activity: Yes     Partners: Female     Birth control/protection: None   Social History Narrative   \u0007 Not on file       *****:  ***** ***** ***** ***** *****, ***** ***** *****.  *****. *****.     ***** Status: single but has a *****. Lesbian.    Gynecologic History:  G 0 P 0 AB 0    Menarche 11  Premenopausal    OCP 0 years    Fertility treatments 0    Family History:    Family History   Problem Relation Name Age of Onset   \u0007 Pancreatic cancer Maternal Grandmother     \u0007 Testicular cancer Maternal Grandfather                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding + gerd  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    04/16/22 0757   *****:  0     Code status: full code    Performance \n status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.        Psychologic/emotional well-being/support  She has good support.     Assessment / Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n"
+
+--- Column: assesment_and_plan ---
+"Assessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n\n\nAssessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n\n\nAssessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n\n\nAssessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n\n\nAssessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p dd AC x 4 and 8 weeks of taxol.  She had progression on taxol and went to surgery October 2020 with a lumpectomy and *****/ALND.  She had 3 cm of residual disease with 2 lymph nodes positive.  She had adjuvant radiation and xeloda.   3.  We discussed how metastatic breast cancer is not curable but is treatable.  I recommend starting on *****, gemzar carboplatin asap.  Second line she could use ***** and there are clinical trials ( such as a FGFR inhibitor)  or other ***** ( such as eribulin or doxil)  for more advanced line treatment.    4. All questions were answered.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 69 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses \n above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.              \n\n\nAssessment/Plan:    1.  Metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022.   2.  Stage IIIB right breast triple negative breast cancer s/p"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "Yes",
+    "in-person": "Televisit",
+    "summary": "Patient presents with new patient evaluation"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor negative",
+    "Stage_of_Cancer": "Stage IIIB",
+    "Distant Metastasis": "Yes, to the lung and right hilar lymph node",
+    "Metastasis": "Yes, to the lung and right hilar lymph node",
+    "lab_summary": "No lab results mentioned",
+    "findings": "Metastatic triple negative breast cancer to the lung and right hilar lymph node"
+  },
+  "Treatment_Summary": {
+    "current_meds": "Xeloda",
+    "recent_changes": "Started on taxol, but did not complete due to progression",
+    "supportive_meds": "Reishi mushroom, Papaya enzymes, Mullein extract"
+  },
+  "Goals of care": {
+    "goals_of_treatment": "We discussed how metastatic breast cancer is not curable but is treatable. The goal is to extend the duration and maintain the quality of life.",
+    "response_assessment": "We discussed how the cancer is not responding to the current treatment (taxol) and the patient has had progression."
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "Starting on ***** and gemzar carboplatin asap, second line could use ***** or clinical trials (such as a FGFR inhibitor) or other ***** (such as eribulin or doxil) for more advanced line treatment",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "radiotherapy": {
+      "summary": "Had adjuvant radiation",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "hormonal therapy": {
+      "summary": "Not mentioned",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "bone therapy": {
+      "summary": "Not mentioned",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "other treatment": {
+      "summary": "Xeloda",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "I recommend starting on ***** and gemzar carboplatin asap. Second line she could use ***** or other ***** (such as eribulin or doxil) for more advanced line treatment."
+  },
+  "Therapy plan": {
+    "therapy_plan": "Start on ***** and gemzar carboplatin asap. Second line could use ***** or clinical trials (such as a FGFR inhibitor) or other options (such as eribulin or doxil) for more advanced line treatment."
+  },
+  "radiotherapy plan": {
+    "radiotherapy": [
+      "She had adjuvant radiation and xeloda."
+    ]
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "We recommend starting on ***** and gemzar carboplatin asap. Second line she could use ***** or other ***** (such as eribulin or doxil) for more advanced line treatment."
+  },
+  "Imaging Plan": {
+    "imaging_plan": "No imaging plan mentioned."
+  },
+  "Lab Plan": {
+    "lab_plan": "No specific lab plan mentioned, but the patient is to start on chemotherapy (gemzar carboplatin) asap, and second line treatment options include clinical trials or other treatments such as eribulin or doxil, which may involve lab tests to monitor treatment response and toxicity."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "anti inflammatory and /or diabetes risk reducing diet",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": ""
+  },
+  "follow up/next visit": {
+    "Next clinic visit": "Not specified"
+  },
+  "Advance care planning": {
+    "Advance care": "There is no mention of advance care planning, advance directives, health-care proxy, or code status in the provided note."
+  }
+}
