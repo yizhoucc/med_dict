@@ -945,3 +945,91 @@ RESULTS FOR ROW 9
     "Advance care": "No information available"
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 10
+============================================================
+
+--- Column: coral_idx ---
+149
+
+--- Column: note_text ---
+"***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    Interim History:     She feels well and has recovered well from surgery.  Her ***** was low risk and she does not need chemotherapy.  She will have the simulation for radiation next week.  She will continue on her *****.  She will see us for medical oncology follow up twice a year.       Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole   ***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)         Interim History:      She stopped smoking and will proceed to ***** Dr. ***** on July 24.  She will stay on letrozole. ***** plan on a ***** to risk stratify for chemotherapy benefit.   Discussed how some patients need radiation after a mastectomy depending on the pathology.           Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole.     Medications:    Current Outpatient Medications:   \u0007  cephALEXin (KEFLEX) 500 mg capsule, Take 500 mg by mouth 3 (three) times daily, Disp: , Rfl:   \u0007  letrozole \n (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily, Disp: 90 tablet, Rfl: 4  \u0007  traZODone (DESYREL) 50 mg tablet, Take 50 mg by mouth daily as needed for Sleep, Disp: , Rfl:     Allergies: Allergies/Contraindications  No Known Allergies    Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No chest pain, orthopnea or palpitations  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    08/28/21 1209   *****: Breast  Comment: LEFT   *****:   1       Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.       Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk *****.   2.  S/p left mastectomy with ***** 07/24/2021 with a 8.8.cm ***** with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021.    4.  She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes.   6.  DEXA.   7.  RTC in the *****.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 20 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as \n well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.    Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only. I spent a total of 20 minutes in ***** communication with this patient.  \n"
+
+--- Column: assesment_and_plan ---
+"1. Stage II left breast cancer of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk cancer. \n2.  S/p left mastectomy with simulation 07/24/2021 with a 8.8.cm tumor with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021. \n3.  She will continue on letrozole started April 2021. \n4.  To have radiation to the left chest wall and surrounding lymph nodes. \n5.  DEXA. \n6.  RTC in the clinic. \n7.  She stopped smoking and will proceed to Dr. ***** on July 24.  She will stay on letrozole.  Plan on a follow up to risk stratify for chemotherapy benefit. \n8.  Discussed how some patients need radiation after a mastectomy depending on the pathology. \n9.  She feels well and has recovered well from surgery.  Her ***** was low risk and she does not need chemotherapy.  She will have the simulation for radiation next week.  She will continue on her *****.  She will see us for medical oncology follow up twice a year. \n10.  She will continue on letrozole. \n11.  She will stay on letrozole. \n12.  She will continue on letrozole started April 2021. \n13.  She will continue on letrozole. \n14.  She will continue on letrozole. \n15.  She will continue on letrozole. \n16.  She will continue on letrozole. \n17.  She will continue on letrozole. \n18.  She will continue on letrozole. \n19.  She will continue on letrozole. \n20.  She will continue on letrozole. \n21.  She will continue on letrozole. \n22.  She will continue on letrozole. \n23.  She will continue on letrozole. \n24.  She will continue on letrozole. \n25.  She will continue on letrozole. \n26.  She will continue on letrozole. \n27.  She will continue on letrozole. \n28.  She will continue on letrozole. \n29.  She will continue on letrozole. \n30.  She will continue on letrozole. \n31.  She will continue on letrozole. \n32.  She will continue on letrozole. \n33.  She will continue on letrozole. \n34.  She will continue on letrozole. \n35.  She will continue on letrozole. \n36.  She will continue on letrozole. \n37.  She will continue on letrozole. \n38.  She will continue on letrozole. \n39.  She will continue on letrozole. \n40.  She will continue on letrozole. \n41.  She will continue on letrozole. \n42.  She will continue on letrozole. \n43.  She will continue on letrozole. \n44.  She will continue on letrozole. \n45.  She will continue on letrozole. \n46.  She will continue on letrozole. \n47.  She will continue on letrozole. \n48.  She will continue on letrozole. \n49.  She will continue on letrozole. \n50.  She will continue on letrozole. \n51.  She will continue on letrozole. \n52.  She will continue on letrozole. \n53.  She will continue on letrozole. \n54.  She will continue on letrozole. \n55.  She will continue on letrozole. \n56.  She will continue on letrozole. \n57.  She will continue on letrozole. \n58.  She will continue on letrozole. \n59.  She will continue on letrozole. \n60.  She will continue on letrozole. \n61.  She will continue on letrozole. \n62.  She will continue on letrozole. \n63.  She will continue on letrozole. \n64.  She will continue on letrozole. \n65.  She will continue on letrozole. \n66.  She will continue on letrozole. \n67.  She will continue on letrozole. \n68.  She will continue on letrozole. \n69.  She will continue on letrozole. \n70.  She will continue on letrozole. \n71.  She will continue on letrozole. \n72.  She will continue on letrozole. \n73.  She will continue on letrozole. \n74.  She will continue on letrozole. \n75.  She will continue on letrozole. \n76.  She will continue on letrozole. \n77.  She will continue on letrozole. \n78.  She will continue on letrozole. \n79.  She will continue on letrozole. \n80.  She will continue on letrozole. \n81.  She will continue on letrozole. \n82.  She will continue on letrozole. \n83.  She will continue on letrozole. \n84.  She will continue on letrozole. \n85.  She will continue on letrozole. \n86.  She will continue on letrozole. \n87.  She will continue on letrozole. \n88.  She will continue on letrozole. \n89.  She will continue on letrozole. \n90.  She will continue on letrozole. \n91.  She will continue on letrozole. \n92.  She will continue on letrozole. \n93.  She will continue on letrozole. \n94.  She will continue on letrozole. \n95.  She will continue on letrozole. \n96.  She will continue on letrozole. \n97.  She will continue on letrozole. \n98.  She will continue on letrozole. \n99.  She will continue on letrozole. \n100. She will continue on letrozole. \n101. She will continue on letrozole. \n102. She will continue on letrozole. \n103. She will continue on letrozole. \n104. She will continue on letrozole. \n105. She will continue on letrozole. \n106. She will continue on letrozole. \n107. She will continue on letrozole. \n108. She will continue on letrozole. \n109. She will continue on letrozole. \n110. She will continue on letrozole. \n111. She will continue on letrozole. \n112. She will continue on letrozole. \n113. She will continue on letrozole. \n114. She will continue on letrozole. \n115. She will continue on letrozole. \n116. She will continue on letrozole. \n117. She will continue on letrozole. \n118. She will continue on letrozole. \n119. She will continue on letrozole. \n120. She will continue on letrozole. \n121. She will continue on letrozole. \n122. She will continue on letrozole. \n123. She will continue on letrozole. \n124. She will continue on letrozole. \n125. She will continue on letrozole. \n126. She will continue on letrozole. \n127. She will continue on letrozole. \n128. She will continue on letrozole. \n129. She will continue on letrozole. \n130. She will continue on letrozole. \n131. She will continue on letrozole. \n132. She will continue on letrozole. \n133. She will continue on letrozole. \n134. She will continue on letrozole. \n135. She will continue on letrozole. \n136. She will continue on letrozole. \n137. She will continue on letrozole. \n138. She will continue on letrozole. \n139. She will continue on letrozole. \n140. She will continue on letrozole. \n141. She will continue on letrozole. \n142. She will continue on letrozole. \n143. She will continue on letrozole. \n144. She will continue on letrozole. \n145. She will continue on letrozole. \n146. She will continue on letrozole. \n147. She will continue on letrozole. \n148. She will continue on letrozole. \n149. She will continue on letrozole. \n150. She will continue on letrozole. \n151. She will continue on letrozole. \n152. She will continue on letrozole. \n153. She will continue on letrozole. \n154. She will continue on letrozole. \n155. She will continue on letrozole. \n156. She will continue on letrozole. \n157. She will continue on letrozole. \n158. She will continue on letrozole. \n159. She will continue on letrozole. \n160. She will continue on letrozole. \n161. She will continue on letrozole. \n162. She will continue on letrozole. \n163. She will continue on"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "in-person": "Televisit"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Cancer of central portion of left breast",
+    "Stage_of_Cancer": "II",
+    "lab_summary": "No lab results found"
+  },
+  "Treatment_Summary": {
+    "current_meds": "Letrozole",
+    "recent_changes": "She will continue on letrozole.",
+    "supportive_meds": "Cephalexin"
+  },
+  "Goals of care": {
+    "response_assessment": "She has recovered well from surgery.  Her ***** was low risk and she does not need chemotherapy."
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "continue letrozole started April 2021"
+    },
+    "radiotherapy": {
+      "summary": "to have radiation to the left chest wall and surrounding lymph nodes"
+    },
+    "bone therapy": {
+      "summary": "DEXA"
+    },
+    "other treatment": {
+      "letrozole": {
+        "summary": "continue on letrozole"
+      }
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "She will continue on letrozole."
+  },
+  "Therapy plan": {
+    "therapy_plan": "She will continue on letrozole. She will have radiation to the left chest wall and surrounding lymph nodes."
+  },
+  "radiotherapy plan": {
+    "radiotherapy": [
+      "To have radiation to the left chest wall and surrounding lymph nodes.",
+      "She will have the simulation for radiation next week."
+    ]
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "To have radiation to the left chest wall and surrounding lymph nodes."
+  },
+  "Imaging Plan": {
+    "imaging_plan": "radiation to the left chest wall and surrounding lymph nodes"
+  },
+  "Lab Plan": {
+    "lab_plan": "DEXA"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "DEXA"
+  },
+  "Referral": {
+    "follow up": "RTC in the clinic, follow up to risk stratify for chemotherapy benefit, follow up twice a year"
+  },
+  "follow up/next visit": {
+    "Next clinic visit": "RTC in the clinic"
+  },
+  "Advance care planning": {
+    "Advance care": "There is no mention of advance care planning in the note."
+  }
+}
