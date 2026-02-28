@@ -10,5 +10,5 @@ output/
 textstats_plot
 file_organizer.ipynb
 sandbox/
-results/
+# results/
 __pyacache__/
