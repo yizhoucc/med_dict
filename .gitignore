@@ -5,7 +5,7 @@ simple no eg.csv
 *.Identifier
 *.csv
 *.token
-data/
+# data/
 output/
 textstats_plot
 file_organizer.ipynb
