@@ -7,6 +7,10 @@ model:
   dtype: "bfloat16"
   device_map: "auto"
   cache_dir: "/mnt/c/Users/yc/.cache/huggingface"
+  # quantization:        # uncomment to enable 4-bit quantization
+  #   type: "4bit"       # "4bit" or "8bit"
+  #   quant_type: "nf4"  # "nf4" or "fp4"
+  #   double_quant: true
 
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"

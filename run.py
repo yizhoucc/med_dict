@@ -19,6 +19,8 @@ import torch
 import yaml
 import pandas as pd
 
+from transformers import BitsAndBytesConfig
+
 from ult import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -332,11 +334,27 @@ def main():
     }
     torch_dtype = dtype_map.get(model_cfg.get("dtype", "bfloat16"), torch.bfloat16)
 
+    # Quantization config
+    quant_cfg = model_cfg.get("quantization")
+    quantization_config = None
+    if quant_cfg:
+        quant_type = quant_cfg.get("type", "4bit")
+        if quant_type == "4bit":
+            quantization_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch_dtype,
+                bnb_4bit_quant_type=quant_cfg.get("quant_type", "nf4"),
+                bnb_4bit_use_double_quant=quant_cfg.get("double_quant", True),
+            )
+        elif quant_type == "8bit":
+            quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+
     tokenizer = AutoTokenizer.from_pretrained(model_cfg["name"])
     model = AutoModelForCausalLM.from_pretrained(
         model_cfg["name"],
         device_map=model_cfg.get("device_map", "auto"),
         dtype=torch_dtype,
+        quantization_config=quantization_config,
     )
     print("Model loaded.")
 
