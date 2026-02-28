@@ -263,6 +263,8 @@ def run_model_with_cache_manual(
     # 2. Setup generation parameters
     max_new_tokens = generation_config.get("max_new_tokens", 256)
     eos_token_id = generation_config.get("eos_token_id", tokenizer.eos_token_id)
+    if not isinstance(eos_token_id, (list, set)):
+        eos_token_id = [eos_token_id]
     do_sample = generation_config.get("do_sample", False)
     
     # 3. Determine the starting position and build attention mask
@@ -310,7 +312,7 @@ def run_model_with_cache_manual(
         generated_tokens.append(token_id)
         
         # Check for EOS
-        if token_id == eos_token_id:
+        if token_id in eos_token_id:
             break
         
         # Prepare for next iteration - extend attention mask efficiently
@@ -345,3 +347,95 @@ def run_model_with_cache_manual(
     del attention_mask, next_token_logits, generated_tokens
     
     return raw_output.strip(), current_cache
+
+
+def build_base_cache(text, model, tokenizer):
+    """
+    Build a KV cache from a base prompt containing the note text.
+    Returns the base_cache for reuse across multiple extraction tasks.
+    """
+    base_prompt = (
+        f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
+        f"You are a medical data extraction expert. You will be given a long medical note. "
+        f"Your task is to answer a series of questions about it, one by one. "
+        f"Respond *only* with the valid JSON object requested. Do not add markdown backticks or any other text."
+        f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        f"Here is the medical note:\n\n"
+        f"--- BEGIN NOTE ---\n{text}\n--- END NOTE ---"
+        f"\n\nI will now ask you to extract specific sections. "
+        f"Please wait for my first extraction task."
+        f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+        f"{{\"status\": \"Understood. I have read the note and am ready.\"}}"
+    )
+
+    with torch.no_grad():
+        inputs = tokenizer(base_prompt, return_tensors="pt").to(model.device)
+        outputs = model(
+            input_ids=inputs["input_ids"],
+            attention_mask=inputs["attention_mask"],
+            use_cache=True
+        )
+        base_cache = outputs.past_key_values
+        del inputs, outputs
+        torch.cuda.empty_cache()
+        gc.collect()
+
+    return base_cache
+
+
+def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True):
+    """
+    Extract keypoints from a set of prompts using a shared KV cache,
+    with optional faithfulness verification.
+
+    Args:
+        prompts: dict of {key: task_prompt_text}
+        model: the loaded model
+        tokenizer: the loaded tokenizer
+        gen_config: generation config dict
+        base_cache: pre-computed KV cache from build_base_cache()
+        verify: whether to run faithfulness verification (default True)
+
+    Returns:
+        dict of {key: extracted_value}
+    """
+    keypoints = {}
+
+    for key, task in prompts.items():
+        task_prompt = (
+            f"<|start_header_id|>user<|end_header_id|>\n\n"
+            f"{task}"
+            f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+        )
+        answer, returned_cache = run_model_with_cache_manual(
+            task_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+        )
+        del returned_cache
+        torch.cuda.empty_cache()
+        gc.collect()
+
+        if verify:
+            verification_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"CONTEXT: You previously extracted the following information (Initial Answer):\n"
+                f"--- BEGIN INITIAL ANSWER ---\n{answer}\n--- END INITIAL ANSWER ---\n\n"
+                f"**CRITICAL TASK:** You must now act as a verifier. Review the Initial Answer against the original full medical note (which is stored in your memory/context).\n"
+                f"1. **Faithfulness Check:** Check if every statement in the Initial Answer is strictly supported by the original medical note.\n"
+                f"2. **Revision:** Generate a **Final Answer** by removing *any* part of the Initial Answer that is not supported by the original medical note. If the Initial Answer is fully supported, the Final Answer should be the same.\n"
+                f"Return the result strictly as a JSON object with the key 'final_answer'.\n"
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            final_answer_raw, _ = run_model_with_cache_manual(
+                verification_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+            try:
+                final_result = json.loads(final_answer_raw.strip().strip("```json").strip("```").strip())
+                keypoints[key] = final_result.get('final_answer', answer)
+            except json.JSONDecodeError:
+                keypoints[key] = answer
+        else:
+            keypoints[key] = answer
+
+    return keypoints
