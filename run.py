@@ -9,10 +9,14 @@ Usage:
 
 import argparse
 import hashlib
+import io
 import json
+import logging
 import os
 import random
+import re
 import shutil
+import sys
 from datetime import datetime
 
 import torch
@@ -20,6 +24,74 @@ import yaml
 import pandas as pd
 
 from transformers import BitsAndBytesConfig
+
+
+class LogTee(io.TextIOBase):
+    """Tee stdout/stderr to both terminal and a log file.
+
+    Filters out carriage-return progress bar lines so the log file
+    only contains the final state of each progress bar, not every tick.
+    """
+
+    def __init__(self, log_path, original_stream):
+        self._original = original_stream
+        self._log_file = open(log_path, "a", encoding="utf-8")
+        self._cr_buffer = ""  # buffer for \r-based progress lines
+
+    def write(self, text):
+        # Always write to terminal as-is
+        self._original.write(text)
+
+        # For the log file, filter progress bar updates:
+        # Lines using \r without \n are progress bar ticks - buffer them
+        # and only flush when a \n arrives (final state).
+        if "\r" in text and "\n" not in text:
+            # This is a progress bar update - just buffer the latest
+            self._cr_buffer = text.rstrip("\r").split("\r")[-1]
+            return len(text)
+
+        if self._cr_buffer:
+            # A \n arrived after \r-buffered content: write final state
+            final_line = self._cr_buffer
+            self._cr_buffer = ""
+            # If text starts with \r, the new text replaces the buffer
+            clean = text.lstrip("\r")
+            if clean.strip():
+                self._log_file.write(clean)
+            else:
+                self._log_file.write(final_line + "\n")
+        else:
+            self._log_file.write(text)
+
+        self._log_file.flush()
+        return len(text)
+
+    def flush(self):
+        self._original.flush()
+        self._log_file.flush()
+
+    def close(self):
+        if self._cr_buffer:
+            self._log_file.write(self._cr_buffer + "\n")
+            self._cr_buffer = ""
+        self._log_file.close()
+
+    def fileno(self):
+        return self._original.fileno()
+
+    @property
+    def encoding(self):
+        return self._original.encoding
+
+    def isatty(self):
+        return self._original.isatty()
+
+
+def setup_logging(run_dir):
+    """Redirect stdout and stderr to both terminal and run_dir/run.log."""
+    log_path = os.path.join(run_dir, "run.log")
+    sys.stdout = LogTee(log_path, sys.__stdout__)
+    sys.stderr = LogTee(log_path, sys.__stderr__)
 
 from ult import (
     AutoModelForCausalLM,
@@ -309,6 +381,9 @@ def main():
 
     # 4. Save config snapshot
     save_config_snapshot(config, run_dir)
+
+    # 4.5. Setup logging to run_dir/run.log
+    setup_logging(run_dir)
 
     # 5. Load model
     print("Loading model...")
