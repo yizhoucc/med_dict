@@ -1,0 +1,38 @@
+Reason_for_Visit: |
+  TASK: Extract 'Reason for Visit'.
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "Patient type": "either New patient or follow up",
+  "second opinion": "whether the visit is consultation/second opinion or not",
+  "in-person": "either Televisit or in-person. (note, video consult, televisit, telehealth are the same thing)",
+  "summary": "A brief summary of the reason for visit."
+  }
+
+What_We_Found: |
+  TASK: Extract 'What We Found'.
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "Type_of_Cancer": "list the type of cancer",
+  "Stage_of_Cancer": "list the stage if it is written in the note",
+  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No, local, not sure, need more evidence such as imaging.",
+  "Metastasis": "if there is met, Yes (to where), No, or Not sure",
+  "lab_summary": "Summary of key lab results.",
+  "findings": "Summary of new findings or disease status."
+  }
+
+Treatment_Summary: |
+  TASK: Extract 'Treatment Summary'.
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "current_meds": "List of current oncologic medications or regimens.",
+  "recent_changes": "Any holds, dose reductions, or switches.",
+  "supportive_meds": "List of supportive medications."
+  }
+
+Goals_of_care: |
+  TASK: Extract 'What We Discussed / Decided'.
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "goals_of_treatment": "eg, cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+  "response_assessment": "How the cancer is responding to the treatment, not responding or responding."
+  }
