@@ -8234,3 +8234,84 @@ Processing row 54 (55/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.6s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 2.8s
+      [EXTRACT] raw={
+  "Next clinic visit": "If she decides to take hormone therapy, I will schedule a 6 month follow-up for her."
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 41.4s
+  Row 54 total: 57.8s
+  Row 54 saved to progress
+
+Processing row 55 (56/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'estrogen receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1206 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 8.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "New patient evaluation for stage I triple negative breast cancer on the left side with 90% tumor 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "New patient evaluation for stage I triple negative breast ca" -> "New patient evaluation for stage I left breast cancer, estro"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 8.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Triple negative breast cancer",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "90% tumor size"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Type_of_Cancer: "Triple negative breast cancer" -> "Malignant neoplasm of overlapping sites of left breast in fe"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 4.6s
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 4.6s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 26.2s
