@@ -2,6 +2,11 @@ Medication_Plan_chatgpt: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   Include all current and future medication plans for both cancer therapy and supportive treatment. Cancer treatment could be one or many in chemotherapy, hormonal therapy, bone therapy, radiotherapy (eg. rad onc, xrt). Supportive treatment could be one or many in bowel regimen, pain medication, psychiatry medication, neuropathy or any blood transfusion plan.
 
+  IMPORTANT classification rules:
+  - "bowel regimen" means laxatives, stool softeners, anti-diarrheals (e.g., docusate, miralax, lomotil, imodium). Antibiotics like doxycycline are NOT bowel regimen — classify them under "other treatment" or "infection management".
+  - "pain medication" means analgesics (opioids, NSAIDs, muscle relaxants for pain).
+  - "psychiatry medication" means antidepressants, anxiolytics, antipsychotics.
+
   Include whether a medication is being started now (e.g,"will start", "Rx sent", "starting today" ), plan or discuss in the future after certain condition (e.g., "plan to start after radiation", "discussed addition of…"), continue or maintained("continue"), stop or change.
 
   Include an alterative, second-line or clinical trials options if dicussed.
@@ -17,17 +22,19 @@ Medication_Plan_chatgpt: |
 Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+  Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
   Respond *only* with a JSON object using this exact schema:
   {
-      "medication_plan": "A summary of the complete medication plan."
+      "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
   }
 
 Therapy_plan: |
   TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
   Include chemotherapy, radiotherapy, hormonal therapy, and bone-therapy plans. Include future plans, changes to current therapy (start, stop, continue). Do not include past therapies.
+  Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
   Respond *only* with a JSON object using this exact schema:
   {
-      "therapy_plan": "A summary of the complete therapy plan."
+      "therapy_plan": "A summary of the complete therapy plan with specific details."
   }
 
 radiotherapy_plan: |
@@ -35,6 +42,7 @@ radiotherapy_plan: |
   For radiotherapy, include ANY statement that indicates
   it is being considered, recommended, or may be used, even if no explicit
   start/continue/plan keywords are present.
+  Include referrals to radiation oncology (Rad Onc) as a radiotherapy-related plan.
   Respond *only* with a JSON object using this exact schema:
   {
       "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
@@ -42,29 +50,42 @@ radiotherapy_plan: |
 
 Procedure_Plan: |
   TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
-  Include future procedures including surgery, radiation therapy, or interventional procedures such as biopsy, lumbar puncture, or Chemo Port Insertion. Do not include past procedures.
-  Do not include imaging plan, lab plan, or medication plan.
+  Include ONLY future/planned procedures: surgery, biopsy, lumbar puncture, Chemo Port Insertion, or other interventional procedures.
+  DO NOT include:
+  - Procedures already completed or past results (e.g., "MRI showed..." is a past result, not a planned procedure)
+  - Imaging plans (CT, MRI, PET — these go in Imaging Plan)
+  - Lab plans
+  - Medication plans
+  - Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
+  If no future procedures are planned, say "No procedures planned."
   Respond *only* with a JSON object using this exact schema:
   {
-      "procedure_plan": "A summary of any planned procedures."
+      "procedure_plan": "A summary of any planned procedures, or 'No procedures planned.'"
   }
 
 Imaging_Plan: |
   TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
-  Include all future imaging like CT, MRI, PET/CT, ultrasound,  DEXA scans, including timing and rationale if mentioned.
-  Do not include any procedure plan, lab plan, or medication plan. Do not include past Imaging.
+  Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray.
+  Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
+  DO NOT include:
+  - Past imaging or imaging results (e.g., "MRI showed lesions" is a past result)
+  - Any procedure plan, lab plan, or medication plan
+  List SPECIFIC imaging types when mentioned. Do NOT use vague terms like "staging workup" — instead list the actual tests (e.g., "MRI brain, bone scan").
+  If no future imaging is planned, say "No imaging planned."
   Respond *only* with a JSON object using this exact schema:
   {
-      "imaging_plan": "A summary of any planned procedures."
+      "imaging_plan": "A summary of any planned imaging with specific test names, or 'No imaging planned.'"
   }
 
 Lab_Plan: |
   TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
-  Include future labs like CBC, CMP, tumor markers, coagulation profile. Specify frequency and rationale if mentioned.
-  Do not include any procedure plan, medication plan, or imagining plan. Do not include past labs.
+  Include ONLY future/planned labs: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
+  Specify frequency and rationale if mentioned.
+  DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
+  If no future labs are planned, say "No labs planned."
   Respond *only* with a JSON object using this exact schema:
   {
-      "lab_plan": "A summary of the future lab plan."
+      "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
   }
 
 Genetic_Testing_Plan: |
@@ -102,19 +123,22 @@ Genetic_Testing_Plan: |
 
 Referral: |
   TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
-  do not mistake the doctor's signature at the end of the note as a referral.
+  Do not mistake the doctor's signature at the end of the note as a referral.
+  Include ALL referrals mentioned, including integrative medicine, complementary medicine, or wellness referrals.
+  A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+  If no referral is mentioned for a category, set its value to "None".
   Respond *only* with a JSON object using this exact schema:
   {
-  "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance",
-  "Genetics": "eg, germline testing, family counseling",
-  "Specialty": "eg, Palliative care (symptom or pain management, goals of care), Radiation oncology, surgical oncology, Psychology, psychiatry for coping and mood support",
-  "Others": "Physical or occupational therapy, Social work, financial counseling",
-  "follow up": "follow up mentioned in the provided text. f/up[, f/p and fup all mean follow up."
+  "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
+  "Genetics": "eg, germline testing, family counseling, or 'None'",
+  "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, or 'None'",
+  "Others": "Physical or occupational therapy, Social work, financial counseling, home health, or 'None'",
+  "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
   }
 
 follow_up_next_visit: |
   TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
-
+  Be SPECIFIC about timing (e.g., "2 weeks", "after biopsy results", "3 months").
   Respond *only* with a JSON object using this exact schema:
   {
       "Next clinic visit": "(in-person or telehealth): timing and purpose"
@@ -122,8 +146,10 @@ follow_up_next_visit: |
 
 Advance_care_planning: |
   TASK: Extract the 'Advance care planning' from the given 'Assessment/Plan' section.
-  Include Advance directives, health-care proxy, code status (if appropriate).
+  Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI).
+  If a code status is mentioned anywhere in the note, include it.
+  If no advance care planning is discussed, say "Not discussed during this visit."
   Respond *only* with a JSON object using this exact schema:
   {
-      "Advance care": "A summary of any planned Advance care."
+      "Advance care": "A summary of any advance care planning including code status, or 'Not discussed during this visit.'"
   }
