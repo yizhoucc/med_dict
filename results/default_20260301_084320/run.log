@@ -626,3 +626,33 @@ Processing row 4 (5/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 20.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III, now metastatic",
+  "Distant Metastasis": "Yes, to cervical lymph nodes",
+  "Metastasis": "Y
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 21.7s
+      [EXTRACT] raw={
+  "current_meds": "leuprolide, anastrozole, palbociclib, amLODIPine, anastrozole, escitalopram oxalate, gabapentin, hydroCHLOROthiazide, ondansetron, palbociclib, potassium chloride, venlafaxine",
+ 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 8.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the patient is symptomatic and wil
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not responding to treatment"
+  Extraction prompts: 59.4s
