@@ -12461,3 +12461,69 @@ Processing row 83 (84/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note" -> "The patient's neurologic symptoms are getting progressively "
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 31.5s
+    Medication_Plan_chatgpt: 42.9s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Xeloda 1500mg BID",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": {
+    "summary": "fulve
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 7.5s
+      [EXTRACT] raw={
+  "medication_plan": "Xeloda 1500mg BID, continue zolendronic acid, consider starting low dose steroids, consider focal CNS radiation or whole brain radiation, consider fulvestrant + CDK4/6 inhibito
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.6s
+      [EXTRACT] raw={
+  "therapy_plan": "continue Xeloda 1500mg BID, consider focal CNS radiation or whole brain radiation, consider fulvestrant + CDK4/6 inhibitor (palbociclib) if progression"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "consider focal CNS radiation or whole brain radiation, referral to radiation oncology"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 4.2s
+      [EXTRACT] raw={
+  "imaging_plan": "Repeat MRI spine to r/o LMD in the spine, repeat brain MRIs, repeat CT CAP"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.0s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
