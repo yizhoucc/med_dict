@@ -4,7 +4,8 @@
   "completed_indices": [
     20,
     21,
-    22
+    22,
+    23
   ],
   "results": {
     "20": {
@@ -249,6 +250,79 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "3 months"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "23": {
+      "coral_idx": 163,
+      "note_text": "***** ***** is a 56 y.o. female with history ADH, now with right *****(sn) Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), ***** equiv by IHC (2) neg by FISH, ***** 5%. She is s/p partial mastectomy with excision and ***** and is here to discuss systemic therapy options.     HISTORY OF PRESENT ILLNESS:  10/11/14 Bilateral screening mammogram showed calcifications in the posterior upper region of the left breast. Right breast normal appearing.     10/24/14 left breast diagnostic mammogram with ***** showed 4mm calcifications with clustered distribution in the posterior upper outer region of left breast. BI-RADS 4.    11/11/14 stereotactic bx of left breast with/without calcifications pathology:  -L breast w/ calcification: proliferative fibrocystic changes with usual hyperplasia and apocrine metaplasia, associated with microcalcifications; neg for atypia   -L breast w/o calcification: non-proliferative fibrocystic change with rare microcalcification; neg for significant atypia    09/16/15 bilateral diagnostic mammogram showed new 7mm coarse heterogenous calcifications with grouped distribution in the middle region of the right breast at 3 o'clock. BI-RADS 4A.     09/23/15 right breast stereotactic guided bx of 3 o'clock calcifications pathology:  -R breast w/ calcification: ADH with associated mucin extravasation, proliferative and non-proliferative fibrocystic changes with microcalcifications  -R breast w/o calcification: proliferative and non-proliferative fibrocystic changes    12/02/15 right breast excision with needle localization pathology showed focal ADH, proliferative and non-proliferative fibrocystic changes with microcalcifications, benign glandular microcalcifications,     06/13/17 bilateral screening mammo showed ***** in either breast.     09/22/18 bilateral diagnostic mammogram showed a 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications. New \n right axillary LN with irregular morphology. U/s showed multiple solid hypoechoic irregular vascular masses, together measuring 50 x 21 x 55mm extending from 9:00 3cm from nipple to 9:00 7cm from nipple. Abnormal right axillary LN at 11:00, 15cm from nipple with focal cortical thickening up to 6mm. Left breast benign.     09/29/18 right breast FNA of 9 o'clock masses showed adenocarcinoma with mucinous differentiation; ER+ (90%), PR+ (30%), ***** equivocal (2) by IHC, neg by FISH (ratio 1.1)    10/05/18 PETCT showed slight hypermetabolism within right breast lesion, corresponding to patient's biopsy proven malignancy. No definite sites of hypermetabolic metastatic disease.  2.  Enhancing lesion within segment 8 of liver, incompletely characterized, but without significant hypermetabolism.    10/06/18 ***** axillary node FNA pathology was neg     10/26/18 ***** partial mastectomy with new anterior inferior margin excision and R axillary ***** pathology showed:  -5.***** *****(sn) Grade II micropapillary ***** of  mucinous carcinoma ER+ (>95%), PR+ (80%), ***** equiv by IHC (2) neg by FISH, ***** 5% . No *****, 2 sln ***** of micropapillary mucinous carcinoma (0.4mm) out of 4 ***** examined. No *****. Associated with ADH, multiple intraductal *****, cystically dilated ducts containing mucin, mucinous secretions within nipple ducts (no carcinoma identified in nipple), sclerosing adenosis, radial sclerosing lesion  -negative margins    10/23/18 A/P CT quad phase showed hypervascular mass in the liver measuring 1.9 cm with a hemangioma demonstrating discontinuous nodular enhancement with gradual fill in, several scattered subcentimeter hypervascular foci throughout the liver, could be due to flash filling. Additionally there is also a hypervascular mass in segment 6 measuring 3.5 cm which is mildly hypervascular demonstrating more homogeneous enhancement. This most likely represents a focal nodular hyperplasia. Hepatic lesions felt \n to be benign.     Feels well post-surgery.  For right axillary pain, she takes ***** q3-4hrs prn. Ibuprofen not enough.     Aside from her breast issues, she has L ankle torn ligament and sciatica. Taking *****, cymbalta, flexeril.     No new sxs -  No fevers, chills, rash, cough, sob, bone/joint pain, headaches, visual changes.         PAST MEDICAL HISTORY:  Past Medical History:   Diagnosis Date   \u0007 Anemia    \u0007 Anxiety    \u0007 Chronic low back pain    \u0007 Depression    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Leiomyoma of uterus    \u0007 PID (acute pelvic inflammatory disease) 2010       PAST SURGICAL HISTORY:  Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY         GYN HISTORY:  OB History    None         MEDICATIONS:  Current Outpatient Medications   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 2 tablets (1,000 mg total) by mouth every 8 (eight) hours as needed for Pain. 60 tablet 0   \u0007 acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet TAKE 1 TABLET BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED FOR PAIN. MAXIMUM OF 10 TABLETS IN 24 HOURS     \u0007 calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet Take 500 mg by mouth.     \u0007 cetirizine (ZYRTEC) 10 mg tablet Take 10 mg by mouth.     \u0007 cholecalciferol, vitamin D3, 1,000 unit CAP Take 1,000 Units by mouth.     \u0007 cyclobenzaprine (FLEXERIL) 5 mg tablet Take 5-10 mg by mouth 3 (three) times daily as needed.     \u0007 diclofenac (VOLTAREN) 1 % GEL gel Apply 2 g topically 3 (three) times daily as needed.     \u0007 docusate sodium (COLACE) 100 mg capsule Take 1 capsule (100 mg total) by mouth Twice a day. 60 capsule 2   \u0007 DULoxetine (CYMBALTA) 60 mg DR ***** Take 60 mg by mouth.     \u0007 gabapentin (NEURONTIN) 400 mg capsule Take 400 mg by mouth.     \u0007 ibuprofen (ADVIL,MOTRIN) 600 mg tablet Take 1 tablet (600 mg total) by mouth every 6 (six) hours as needed for Pain. 60 tablet 0   \u0007 losartan-hydrochlorothiazide \n (HYZAAR) 50-12.5 mg tablet TAKE 1 TABLET BY MOUTH DAILY     \u0007 meloxicam (MOBIC) 15 mg tablet Take 15 mg by mouth.     \u0007 naloxone 4 mg/actuation SPRAYNAERO 1 spray by Nasal route once as needed (suspected overdose). Call 911. Repeat if needed 1 each 0   \u0007 nicotine (NICODERM CQ) 21 mg/24 hr patch Place 1 patch onto the skin Once a day. Use as instructed 30 patch 1   \u0007 omeprazole (PRILOSEC) 20 mg capsule TAKE ONE CAPSULE BY MOUTH DAILY 30 capsule 0   \u0007 oxyCODONE (ROXICODONE) 5 mg tablet Take 1 tablet (5 mg total) by mouth every 4 (four) hours as needed for Pain. 20 tablet 0   \u0007 oxyCODONE (ROXICODONE) 5 mg tablet Take 1 tablet (5 mg total) by mouth every 4 (four) hours as needed for Pain. 5 tablet 0   \u0007 senna (SENOKOT) 8.6 mg tablet Take 17.2 mg by mouth.       No current facility-administered medications for this visit.        ALLERGIES:  Allergies/Contraindications   Allergen Reactions   \u0007 Pregabalin      Caused swelling    \u0007 Trazodone      Morning grogginess at 50mg dose.   \u0007 Penicillins Rash       FAMILY HISTORY:    SOCIAL HISTORY:  Social History     Social History Narrative   \u0007 Not on file       REVIEW OF SYSTEMS:  Review of Systems - 14 point review of systems negative except problems noted above.        PHYSICAL EXAM:  General appearance - alert, well appearing, and in no distress  HEENT: anicteric, OP clear  Mental status - alert, oriented to person, place, and time  Lymph nodes - no palpable cervical or supraclavicular lymphadenopathy   Axilla - R axillary *****. No axillary adenopathy.  Breasts - S/p right partial mastectomy no reconstruction with a well healed incision in R chest wall. There is edema in R chest wall. No masses.  Left breast without masses or suspicious lesions.   Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm  Abdomen - soft,ND/NT, no HSM  Neurological - A&Ox3, grossly non-focal  Musculoskeletal - No point tenderness in \n spine or other ***** tenderness  Extremities - no edema  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted      LABS:    IMAGING/PATHOLOGY:  As noted above in *****    ASSESSMENT/PLAN:  ***** ***** is a 56 y.o. female with history ADH, now with right *****(sn) Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), ***** equiv by IHC (2) neg by FISH, ***** 5%. She is s/p partial mastectomy with excision and ***** and is here to discuss systemic therapy options.     We reviewed her pathology, prognosis, and treatment options in detail. Given the extent of her cancer,  I would like to get a ***** test to evaluate her benefit, if any, of chemotherapy. We discussed the ***** trial which randomized patients with clinical high risk and ***** low risk to either chemotherapy or no chemotherapy. This trial showed that in these patients with discordant clinical and molecular results, that the 5year DFS is not statistically different (~1%) which shows that these tumors do not benefit from adjuvant chemotherapy.  We will send her sugical specimen for MP. If low risk, she can proceed with radiation and we will start adjuvant ***** hormone therapy. We reviewed the potential side effects of hormone therapy which include but are not limited to hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome, bone loss and increased risk of fractures.  On exam, she has right axillary *****. I recommended she see PT and placed a referral.     In the interim, I will order a ***** test today and reassess when her results returns. She is scheduled to see Dr. ***** in radiation oncology 12/07/18.     1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history. \n   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 60 min Total counseling time: 50 min    *****, ***** *****, am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM    The above scribed documentation as annotated by me accurately reflects the services I have provided.   ***** ***** *****, MD  *****/*****/***** 11:11 AM    \n",
+      "assessment_and_plan": "ASSESSMENT/PLAN:  ***** ***** is a 56 y.o. female with history ADH, now with right *****(sn) Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), ***** equiv by IHC (2) neg by FISH, ***** 5%. She is s/p partial mastectomy with excision and ***** and is here to discuss systemic therapy options.     We reviewed her pathology, prognosis, and treatment options in detail. Given the extent of her cancer,  I would like to get a ***** test to evaluate her benefit, if any, of chemotherapy. We discussed the ***** trial which randomized patients with clinical high risk and ***** low risk to either chemotherapy or no chemotherapy. This trial showed that in these patients with discordant clinical and molecular results, that the 5year DFS is not statistically different (~1%) which shows that these tumors do not benefit from adjuvant chemotherapy.  We will send her sugical specimen for MP. If low risk, she can proceed with radiation and we will start adjuvant ***** hormone therapy. We reviewed the potential side effects of hormone therapy which include but are not limited to hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome, bone loss and increased risk of fractures.  On exam, she has right axillary *****. I recommended she see PT and placed a referral.     In the interim, I will order a ***** test today and reassess when her results returns. She is scheduled to see Dr. ***** in radiation oncology 12/07/18.     1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history. \n   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 60 min Total counseling time: 50 min    *****, ***** *****, am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM    The above scribed documentation as annotated by me accurately reflects the services I have provided.   ***** ***** *****, MD  *****/*****/***** 11:11 AM    \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Patient with right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, HER2 5%, here to discuss systemic therapy options."
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, HER2 5%",
+          "Stage_of_Cancer": "Grade II, 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications in the right breast",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "Right axillary pain, edema in R chest wall, new 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications in the right breast, new right axillary LN with irregular morphology"
+        },
+        "Treatment_Summary": {
+          "current_meds": "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (Tums) 1250 mg (500 mg elemental) tablet, cetirizine (ZYRTEC) 10 mg tablet, cholecalciferol, vitamin D3, 1,000 unit CAP, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, DULoxetine (CYMBALTA) 60 mg DR, gabapentin (NEURONTIN) 400 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet, meloxicam (MOBIC) 15 mg tablet, nicotine (NICODERM CQ) 21 mg/24 hr patch, omeprazole (PRILOSEC) 20 mg capsule",
+          "recent_changes": "None",
+          "supportive_meds": "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "adjuvant",
+          "response_assessment": "Not applicable"
+        },
+        "Medication_Plan_chatgpt": {
+          "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+            "hormonal therapy": {
+              "summary": "will start",
+              "Short term side_effects_discussed": "hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome",
+              "Long term side_effects_discussed": "bone loss and increased risk of fractures"
+            }
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "will start hormone therapy, will send surgical specimen for MP, will order a test, will see Dr. ***** in radiation oncology on 12/07/18"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "will start hormone therapy, will get a test to evaluate benefit of chemotherapy, will send surgical specimen for MP"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "will see Dr. ***** in radiation oncology on 12/07/18"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "will send surgical specimen for MP, will schedule biopsy"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "will order a test to evaluate benefit of chemotherapy"
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Radiation oncology",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "12/07/18"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
