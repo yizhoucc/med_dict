@@ -1481,3 +1481,26 @@ Processing row 29 (10/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+  "Next clinic visit": "The patient will contact me after the weekend to let me know whether she plans to proceed with treatment here at ***** or elsewhere."
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 87.4s
+  Row 29 total: 108.0s
+  Row 29 saved to progress
+
+Total processing time: 1000.9s (16.7min)
+Done! Results copied to ./results.txt
+Full results in: results/testfix_20260228_223813/
