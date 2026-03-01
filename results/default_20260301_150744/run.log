@@ -3745,3 +3745,118 @@ Processing row 39 (20/20)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The patient has 1 positive lymph node. The other + LN was direct extension. Thus"
   Extraction prompts: 36.1s
+    Medication_Plan_chatgpt: 12.1s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Rx for letrozole given",
+    "Short term side_effects_discussed": "hot flashes, arthralgias, bone pain, hair thinning, dryness",
+    "Long term side_effects_d
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will start letrozole."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will start letrozole." -> "letrozole"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 2.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will start letrozole. If no radiation is planned, she can start letrozole immediately."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient will start letrozole. If no radiation is planned" -> "letrozole"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] therapy_plan: "letrozole" -> "adjuvant endocrine therapy with letrozole"
+    radiotherapy_plan: 1.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "No radiotherapy planned, but if no radiation is planned then she can start letrozole immediately."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "No radiotherapy planned, but if no radiation is planned then" -> "if no radiation is planned then she can start letrozole imme"
+      [G6-SEMANTIC] radiotherapy_plan: "if no radiation is planned then she can start letrozole immediately." -> "None"
+    Procedure_Plan: 1.8s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "PT referral, start letrozole immediately if no radiation is planned"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.4s [semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] imaging_plan: "DEXA" -> "No imaging planned"
+    Lab_Plan: 1.4s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "send an FISH"
+      [G6-SEMANTIC] lab_plan: "send an FISH" -> "No labs planned"
+    Genetic_Testing_Plan: 2.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "We could send an FISH or Oncotype DX but the patient is clear she is not interested in chemotherapy so there is no indication to send molecular tests."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "We could send an FISH or Oncotype DX but the patient is clea" -> "FISH or Oncotype DX"
+      [G6-SEMANTIC] genetic_testing_plan: "FISH or Oncotype DX" -> "We could send an FISH or Oncotype DX"
+    Referral: 1.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "PT",
+  "Others": "None",
+  "follow up": "RTC 3 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics', 'Others']
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 2.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "RTC 3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "RTC 3 months" -> "3 months"
+      [G6-SEMANTIC] Next clinic visit: "3 months" -> "RTC 3 months"
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 30.3s
+  Row 39 total: 66.4s
+  Row 39 saved to progress
+
+Total processing time: 1891.9s (31.5min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260301_150744/
