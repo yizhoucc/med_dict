@@ -3408,3 +3408,31 @@ Processing row 23 (24/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] summary: "Follow up for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%" -> "Patient with right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%)"
+    What_We_Found: 10.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2 equiv by IHC (2) neg by FISH, HER2 5% Grade II micropapillary mucinous carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Me
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Right axillary pain, edema in R chest wall" -> "Right axillary pain, edema in R chest wall, new 6.4cm irregu"
+      [G6-SEMANTIC] lab_summary: "" -> "ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, HER2 5%"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "Grade II, 6.4cm irregularly shaped masses with obscured margins and associated f"
+    Treatment_Summary: 22.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) " -> "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) "
+      [G6-SEMANTIC] current_meds: "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, aceta" -> "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, aceta"
+    Goals_of_care: 3.1s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The patient is scheduled to undergo a test to evaluate the benefit of chemothera"
+  Extraction prompts: 42.8s
