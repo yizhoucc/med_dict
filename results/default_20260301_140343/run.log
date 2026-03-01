@@ -2951,3 +2951,34 @@ Processing row 35 (16/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 4.9s [semantic-fixed]
+      [EXTRACT] raw=The patient has started cancer treatment, specifically chemotherapy (Abraxane) and endocrine therapy (tamoxifen and zoladex). The note mentions that she had a grade 3 infusion reaction with cycle 1, b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note" -> "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abra"
+  Extraction prompts: 47.9s
+    Medication_Plan_chatgpt: 39.9s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Started on 02/13/21, delayed due to grade 3 infusion reaction, changed to Abraxane after cycle 1.",
+    "Short term
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] pain medication: "{'summary': 'Continue ***** as premed, discussed more use of antiemetics zofran," -> "{'summary': 'Continue ***** as premed, will discuss more use of antiemetics zofr"
+      [G4-TEMPORAL] bone therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Tamoxifen started on 01/29/21', 'Short term side_effects_discussed'" -> "{'summary': 'Continue tamoxifen', 'Short term side_effects_discussed': '', 'Long"
+      [G4-TEMPORAL] psychiatry medication: "{'summary': 'Continue lexapro daily, ativan prn, started ambien today', 'Short t" -> "{'summary': 'Continue lexapro daily, will take ativan prn, will take ambien', 'S"
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'Radiation oncology referral, will see Dr. ***** next week', 'Short " -> "{'summary': 'Will see Dr. ***** next week', 'Short term side_effects_discussed':"
+      [G4-TEMPORAL] other treatment: "{'summary': 'Valtrex 1g every day throughout chemo as ppx, antibiotics for left " -> "{'summary': 'Continue valtrex 1g every day throughout chemo', 'Short term side_e"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Started on 02/13/21," -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles', 'Short term side_ef"
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'Will see Dr. ***** next week', 'Short term side_effects_discussed':" -> "{'summary': 'Radiation oncology referral, will see Dr. ***** next week', 'Short "
+    Medication_Plan: 13.4s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtrex 1g every day, Continue lexapro daily, Continue prilosec, Continue ativan prn, Continue small
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre"
+      [G6-SEMANTIC] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre"
