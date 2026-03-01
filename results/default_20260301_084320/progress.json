@@ -89,7 +89,8 @@
     84,
     85,
     86,
-    87
+    87,
+    88
   ],
   "results": {
     "0": {
@@ -8306,6 +8307,79 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "She will follow up with me prn or at progression."
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "88": {
+      "coral_idx": 228,
+      "note_text": "Medical Oncology Consult Note  Video Visit     Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  10/13/1966   Date of Visit:  07/19/2020  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 Video Visit   \u0007 Breast Cancer       Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (CMS code)       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     53 yo female with an abnormal mammogram which found a left breast cancer.  She had a lumpectomy with sentinel node procedure and had a 9 mm invasive ductal carcinoma, G2, , ER and PR and AR positive and her 2 neu negative, node negative.   She then had radiation in April.  She had genomic testing by ***** or ***** and was told she did not need chemotherapy.  She had not taken hormone blockade yet.  She had a change of insurance.  She has a family history of breast cancer in her mother and takes CBD as needed for neck pain.     Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Malignant neoplasm of overlapping sites of left female breast (CMS code) 04/07/2020       Stage at *****:  Cancer Staging  Malignant neoplasm of overlapping sites of left female breast (CMS code)  Staging form: Breast, AJCC 8th Edition  - Pathologic: Stage ***** (pT1b, *****, *****, G2, ER+, PR+, *****-) - Signed by ***** ***** *****, MD on 08/01/2020      Medications:    Current Outpatient Medications:   \u0007  losartan (COZAAR) 25 mg tablet,         1 tab orally every day  , Disp: , Rfl:   \u0007  tamoxifen (NOLVADEX) 20 mg tablet, Take 1 tablet (20 mg total) by mouth daily, Disp: 90 tablet, Rfl: 4    Allergies: Allergies/Contraindications  No Known Allergies    Medical \n History:   Past Medical History:   Diagnosis Date   \u0007 Allergy    \u0007 Hypertension        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 ARTHROSCOPY SHOULDER / OPEN SHOULDER Right    \u0007 BREAST REDUCTION SURGERY      bilateral    \u0007 BREAST SURGERY     \u0007 SKIN SURGERY         Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Comment: 2-6 per week   \u0007 Drug use: Never   \u0007 Sexual activity: Yes       Occupation: teacher 2nd grade      Marital Status: married     Gynecologic History:  G 2 P 2 AB 0    Menarche 12  Perimenopausal    OCP 4 years  Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Mother                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    07/16/20 1307   *****:  0       Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age      Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.     Lifestyle:   Stress was high working on reduction, her dad passed away with *****.   Sleep 7 hours   Exercise book ***** in the am   Eats well.     Psychologic/emotional well-being/support  She \n is well supported by her family and husband.     Assessment / Plan:    1. Stage I left breast cancer s/p lumpectomy and sentinel node March 2020 and radiation.  9 mm tumor, G2, node negative, ER and PR and AR positive and her 2 negative.   2.  S/p radiation to the left breast.   3.  I discussed the role of hormone blockade to decrease the risk of systemic recurrence.  She will proceed with tamoxifen. She is perimenopausal.  ***** plan to change to an ***** midway.   4.  RTC in 2-3 months for an exam to the ***** clinic.    5.  Mammogram in February 2021.   6.  ***** get her genomic profile of her tumor, she was told it was low risk so no chemotherapy given.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 65  minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family.      I performed this evaluation using real-time telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.               \n",
+      "assessment_and_plan": "Assessment / Plan:    1. Stage I left breast cancer s/p lumpectomy and sentinel node March 2020 and radiation.  9 mm tumor, G2, node negative, ER and PR and AR positive and her 2 negative.   2.  S/p radiation to the left breast.   3.  I discussed the role of hormone blockade to decrease the risk of systemic recurrence.  She will proceed with tamoxifen. She is perimenopausal.  ***** plan to change to an ***** midway.   4.  RTC in 2-3 months for an exam to the ***** clinic.    5.  Mammogram in February 2021.   6.  ***** get her genomic profile of her tumor, she was told it was low risk so no chemotherapy given.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 65  minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family.      I performed this evaluation using real-time telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.               \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "Televisit",
+          "summary": "Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive, Stage I, after lumpectomy and radiation"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+          "Stage_of_Cancer": "Stage I",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "9 mm tumor, G2"
+        },
+        "Treatment_Summary": {
+          "current_meds": "tamoxifen (NOLVADEX) 20 mg tablet, losartan (COZAAR) 25 mg tablet",
+          "recent_changes": "None",
+          "supportive_meds": "tamoxifen (NOLVADEX) 20 mg tablet"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "risk reduction",
+          "response_assessment": "Not mentioned in note."
+        },
+        "Medication_Plan_chatgpt": {
+          "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+            "hormonal therapy": {
+              "summary": "Tamoxifen, will start",
+              "Short term side_effects_discussed": null,
+              "Long term side_effects_discussed": null
+            }
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Tamoxifen"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Tamoxifen, will start"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "s/p radiation"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "lumpectomy and sentinel node, s/p radiation"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "Mammogram in February 2021"
+        },
+        "Lab_Plan": {
+          "lab_plan": "None"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "in 2-3 months"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
