@@ -3540,3 +3540,169 @@ Processing row 38 (19/20)...
       [G3-FAITH] bowel regimen: "{'summary': 'unknown', 'Short term side_effects_discussed': " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 5.3s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthracycline agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery, with goserel
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthra" -> "Weekly paclitaxel x 12 weeks, followed by AC x 4 cycles, then surgery, with gose"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 8.1s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Will start with weekly paclitaxel x 12 weeks, either with a platinum agent or replaced by a taxane agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery. Will
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Will start with weekly paclitaxel x 12 weeks, either with a " -> "Will start with weekly paclitaxel x 12 weeks, either with a "
+      [G4-TEMPORAL] trial_participation: "after chemotherapy results are obtained to one of the existing arms of the study" -> "to one of the existing arms of the study"
+      [G4-TEMPORAL] therapy_plan: "Will start with weekly paclitaxel x 12 weeks, either with a platinum agent or re" -> "weekly paclitaxel x 12 weeks, either with a platinum agent or replaced by a taxa"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 1.8s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "procedure_plan": "Biopsy, Port placement, Surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Biopsy, Port placement, Surgery" -> "['Port placement', 'Surgery']"
+      [G6-SEMANTIC] procedure_plan: "['Port placement', 'Surgery']" -> "Port placement, surgery"
+    Imaging_Plan: 2.2s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI of the breasts with additional evaluations as necessary"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "Laboratory studies for ISPY"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.5s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "on genetic testing results"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 5.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology consult",
+  "Others": "None",
+  "follow up": "MRI of the breasts with additional evaluations as necessary, Echocardiog
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Specialty: "Radiation oncology consult" -> "None"
+      [G6-SEMANTIC] Genetics: "None" -> "genetic testing results"
+      [G6-SEMANTIC] Others: "None" -> "Physical or occupational therapy, Social work, financial counseling, home health"
+    follow_up_next_visit: 1.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "within two weeks: to start therapy"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "within two weeks: to start therapy" -> "within two weeks"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 66.3s
+  Row 38 total: 102.0s
+  Row 38 saved to progress
+
+Processing row 39 (20/20)...
+  Injected 3 term definitions: ['mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (1699 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Newly diagnosed Stage 2 low grade IDC of the right breast, s/p right partial mastectomy, to discu
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] in-person: "in-person" -> "yes"
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
+      [G6-SEMANTIC] second opinion: "" -> "no"
+    Cancer_Diagnosis: 4.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR- HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Type_of_Cancer: "ER+/PR- HER2- invasive ductal carcinoma" -> "ER+/PR- HER2- IDC"
+      [G3-FAITH] Stage_of_Cancer: "Stage II" -> "Stage 2"
+      [G6-SEMANTIC] Type_of_Cancer: "ER+/PR- HER2- IDC" -> "low grade ER+/PR- HER2- IDC"
+    Lab_Results: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 5.1s
+      [EXTRACT] raw={
+  "findings": "Tumor size: 1.9 x 1.3 x 1.6 cm, 1.7 x 1.5 cm, 2.3 cm; Margins: widely negative; Node status: 1 positive lymph node, 0.04 cm; Grade: G1 IDC, G2 IDC, nuclear G1 DCIS"
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": [
+    "letrozole"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "['letrozole']" -> "['gabapentin', 'ondansetron', 'oxyCODONE-acetaminophen', 'SUMAtriptan', 'teriflu"
+    Treatment_Changes: 7.2s
+      [EXTRACT] raw={
+"recent_changes": "Patient started letrozole, switched from no radiation to starting letrozole immediately",
+"supportive_meds": ["ondansetron (ZOFRAN), oxyCODONE-acetaminophen (PERCOCET), SUMAtripta
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 6.5s
+      [EXTRACT] raw=The patient has early-stage invasive cancer (Stage 2) and has undergone surgery (partial mastectomy). The treatment plan includes adjuvant endocrine therapy with letrozole. Based on this information, 
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
