@@ -2982,3 +2982,72 @@ Processing row 20 (21/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] supportive_meds: "" -> "Vitamin D and calcium supplementation"
       [G6-SEMANTIC] current_meds: "" -> "Arimidex (as an example of an aromatase inhibitor)"
+    Goals_of_care: 2.2s
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 15.7s
+    Medication_Plan_chatgpt: 29.9s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 8.1s
+      [EXTRACT] raw={
+  "medication_plan": "She will start an aromatase inhibitor (e.g. Arimidex) after XRT, and may receive XRT +/- endocrine therapy to minimize her future risk of recurrent DCIS or progression to invas
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 8.2s
+      [EXTRACT] raw={
+  "therapy_plan": "She will receive XRT +/- endocrine therapy to minimize her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade, and will start an aromatase inh
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 3.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "She will receive XRT +/- endocrine therapy to minimize her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 4.5s
+      [EXTRACT] raw={
+  "procedure_plan": "She will be evaluated by Rad Onc and Med Onc to consider both adjuvant XRT and endocrine therapy to minimize her future risk of recurrent DCIS or progression to invasive ductal 
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.0s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
