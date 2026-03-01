@@ -97,6 +97,7 @@ def setup_logging(run_dir):
 from ult import (
     AutoModelForCausalLM,
     AutoTokenizer,
+    ChatTemplate,
     build_base_cache,
     extract_and_verify,
     extract_and_verify_v2,
@@ -312,8 +313,10 @@ def truncate_repeated_text(text, min_block_size=100):
     return text
 
 
-def extract_assessment_plan(note_text, model, tokenizer, config):
+def extract_assessment_plan(note_text, model, tokenizer, config, chat_tmpl=None):
     """Extract assessment/plan section: regex first, LLM fallback with chat template."""
+    if chat_tmpl is None:
+        chat_tmpl = ChatTemplate("llama3")
 
     # --- Step A: Try regex extraction first ---
     print("  Trying regex extraction...")
@@ -333,28 +336,22 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
 
     for attempt in range(max_retries):
         if attempt == 0:
-            current_prompt = (
-                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
-                f"You are a medical text extraction tool. You extract sections from medical notes exactly as written. "
-                f"Return ONLY the extracted text, nothing else. No commentary, no 'here is the text', no repetition."
-                f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+            current_prompt = chat_tmpl.system_user_assistant(
+                "You are a medical text extraction tool. You extract sections from medical notes exactly as written. "
+                "Return ONLY the extracted text, nothing else. No commentary, no 'here is the text', no repetition.",
                 f"Here is a medical note:\n\n{note_text}\n\n"
                 f"Extract the 'Assessment and Plan' or 'Assessment/Plan' section. "
                 f"Return ONLY the original text from that section to the end of the note. "
                 f"Do not modify, rephrase, or summarize. Do not repeat the text."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             current_config = gen_config_greedy
         else:
-            current_prompt = (
-                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
-                f"You are a copy-paste tool. Return ONLY the requested section, exactly as written. "
-                f"No commentary. No repetition. Stop after the section ends."
-                f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+            current_prompt = chat_tmpl.system_user_assistant(
+                "You are a copy-paste tool. Return ONLY the requested section, exactly as written. "
+                "No commentary. No repetition. Stop after the section ends.",
                 f"SOURCE TEXT:\n{note_text}\n\n"
                 f"Copy-paste the Assessment and Plan section exactly as written. "
                 f"Do not summarize. Do not fix grammar. Do not repeat."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             current_config = gen_config_retry
 
@@ -367,10 +364,8 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
         candidate_text = truncate_repeated_text(candidate_text)
 
         # LLM sanity check
-        sanity_check_prompt = (
-            f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
-            f"You are a strict text auditor. Your job is to verify data fidelity."
-            f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        sanity_check_prompt = chat_tmpl.system_user_assistant(
+            "You are a strict text auditor. Your job is to verify data fidelity.",
             f"I have a SOURCE text and an EXTRACTED snippet. \n"
             f"Task: Verify if the EXTRACTED snippet appears in the SOURCE text.\n"
             f"Rules:\n"
@@ -380,7 +375,6 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
             f"--- SOURCE TEXT START ---\n{note_text}\n--- SOURCE TEXT END ---\n\n"
             f"--- EXTRACTED SNIPPET START ---\n{candidate_text}\n--- EXTRACTED SNIPPET END ---\n\n"
             f'Does the snippet match? Reply with exactly one JSON object: {{"match": true}} or {{"match": false}}.'
-            f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
         )
 
         print("  Running LLM Sanity Check...")
@@ -537,6 +531,11 @@ def main():
     extract_fn = extract_and_verify_v2 if pipeline == "v2" else extract_and_verify
     print(f"Using pipeline: {pipeline}")
 
+    # Create chat template from config
+    chat_template_name = config.get("model", {}).get("chat_template", "llama3")
+    chat_tmpl = ChatTemplate(chat_template_name)
+    print(f"Chat template: {chat_template_name}")
+
     # 9. Results file
     results_path = os.path.join(run_dir, "results.txt")
     if progress and completed_indices:
@@ -584,22 +583,22 @@ def main():
         # Extract assessment/plan with retries
         ap_start = time.time()
         assessment_and_plan = extract_assessment_plan(
-            note_text, model, tokenizer, config
+            note_text, model, tokenizer, config, chat_tmpl=chat_tmpl
         )
         print(f"  A/P extraction: {time.time() - ap_start:.1f}s")
 
         # Extract keypoints from full note
         ext_start = time.time()
-        base_cache = build_base_cache(note_text, model, tokenizer, defs_context)
+        base_cache = build_base_cache(note_text, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
         keypoints = extract_fn(
-            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify
+            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl
         )
         print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
 
         # Extract plan keypoints from assessment/plan section
         if assessment_and_plan is not None:
             plan_start = time.time()
-            base_cache = build_base_cache(assessment_and_plan, model, tokenizer, defs_context)
+            base_cache = build_base_cache(assessment_and_plan, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
             plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
@@ -607,6 +606,7 @@ def main():
                 keypoint_config,
                 base_cache,
                 verify=verify,
+                chat_tmpl=chat_tmpl,
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")

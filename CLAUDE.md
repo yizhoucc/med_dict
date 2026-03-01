@@ -88,7 +88,7 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 **~~Pipeline Bug（P0）~~ → 审查误报（2026-03-01 已排查）**：
 - Row 16 ~~数据串行~~ 误报：keypoints 与自身 note_text 一致，审查 agent 对齐错误。真实问题是 LLM 重复退化（Treatment_Summary 中 "docusate" 重复）
 - Row 89 ~~数据重复~~ 误报：coral_idx 分别为 227 和 228，不同患者。审查 agent 对齐错误
-- 潜在风险：KV Cache in-place 修改（DynamicCache），建议在 `run_model_with_cache_manual()` 前 deepcopy
+- ~~潜在风险：KV Cache in-place 修改（DynamicCache）~~ → 已修复：所有调用前 `clone_cache(base_cache)`
 
 **已通过 prompt 改进的问题（2026-03-01 更新 `prompts/extraction.yaml`）**：
 - `Patient type`：~35行错误。新增详细判断规则（首次 med onc 会诊 = New patient）
@@ -109,8 +109,23 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 
 ## 模型配置
 - 模型：`meta-llama/Llama-3.1-8B-Instruct`，bfloat16，单 GPU
-- KV Cache 分叉：笔记编码一次，多任务复用缓存
-- 提取用贪婪解码，生成用采样（temperature=0.3）
+- Chat Template：通过 `ChatTemplate` 类抽象（`ult.py`），支持 llama3 和 mistral，通过 `exp/default.yaml` 的 `model.chat_template` 配置
+- KV Cache 分叉：笔记编码一次，多任务复用缓存。所有 gate 调用前 `clone_cache()` 防 DynamicCache in-place 修改
+- 提取用贪婪解码，`max_new_tokens: 768`（CoT 需要更多空间）
+
+### 2026-03-01 架构重构
+1. **ChatTemplate 抽象**：`ult.py` 和 `run.py` 中所有硬编码的 Llama chat token 替换为 `ChatTemplate` 类。切换模型只需改 config 的 `chat_template` 字段。
+2. **字段拆分**：`prompts/extraction.yaml` 从 4 个 prompt（多字段）拆为 8 个 prompt（1-4 字段/个），降低 8B 模型的认知负担：
+   - `Reason_for_Visit`（4 字段，保持不变）
+   - `Cancer_Diagnosis`（Type + Stage + Metastasis，原 What_We_Found 的一部分）
+   - `Lab_Results`（lab_summary，独立出来防幻觉）
+   - `Clinical_Findings`（findings，独立出来防答非所问）
+   - `Current_Medications`（current_meds，加 CoT 做时态判断）
+   - `Treatment_Changes`（recent_changes + supportive_meds）
+   - `Treatment_Goals`（goals_of_treatment，加 CoT 做决策树推理）
+   - `Response_Assessment`（response_assessment，加 CoT 先判断是否已开始治疗）
+3. **Chain-of-Thought**：3 个最易出错的字段（Current_Medications、Treatment_Goals、Response_Assessment）加入 "Think step by step" + "Write reasoning first, then JSON" 指令。`try_parse_json()` 已支持从混合文本中提取 JSON。
+4. **KV Cache 防御**：所有 `run_model_with_cache_manual()` 调用前 `clone_cache(base_cache)`，防止 DynamicCache 被 in-place 修改。
 
 ## 运行环境
 - WSL (Ubuntu 22.04)，通过 `ssh wsl` 从 Mac 访问

@@ -23,18 +23,23 @@ Reason_for_Visit: |
   "summary": "A specific summary including cancer type, stage if known, and purpose of this visit."
   }
 
-What_We_Found: |
-  TASK: Extract 'What We Found'.
+Cancer_Diagnosis: |
+  TASK: Extract cancer diagnosis details.
 
-  For Type_of_Cancer, be SPECIFIC — you MUST include ALL THREE of these when available in the note:
+  For Type_of_Cancer, be SPECIFIC — include as much of the following as the note provides:
   1. Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
-  2. Receptor status — ALL THREE receptors: ER, PR, and HER2. e.g., "ER+/PR+/HER2-"
+  2. Receptor status — ER, PR, and HER2. e.g., "ER+/PR+/HER2-"
   3. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH.
   - Example: "ER+/PR+/HER2- invasive ductal carcinoma" NOT just "breast cancer"
   - Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
   Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
-  Do NOT omit HER2 status — if the note mentions HER2 (or her2, her-2, her 2 neu), IHC score, or FISH result, you MUST include it.
-  IMPORTANT: If the treatment regimen includes Herceptin/trastuzumab/pertuzumab/T-DM1/Tykerb/lapatinib/TCHP/THP, the cancer is HER2+. Do NOT write HER2-.
+
+  HER2 status rules — follow strictly:
+  - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.
+  - If HER2 was NOT tested or NOT mentioned in the note, write "HER2: not tested" — do NOT guess or assume HER2- or HER2+.
+  - DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly stated.
+  - IMPORTANT: IHC 2+ with FISH NEGATIVE = HER2 negative. Do NOT write HER2+ for IHC 2+/FISH negative.
+  - IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/Tykerb/lapatinib/TCHP/THP, the cancer is HER2+. Do NOT write HER2-.
 
   For Stage_of_Cancer:
   - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
@@ -45,37 +50,73 @@ What_We_Found: |
   - If tumor size and node status are available, infer the approximate stage (e.g., "2.3 cm, 0/3 LN negative — approximately Stage I-II").
   - Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
 
-  For lab_summary:
-  - List SPECIFIC lab values with numbers (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos 183, CA 27.29 = 48").
-  - Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
-  - Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
-  - If lab results are older than 6 months, note the date. If no recent labs exist, write "No recent labs available."
-  For findings, summarize NEW clinical findings or current disease status from this visit. Include key pathology results (tumor size, margins, node status), imaging findings, and physical exam findings. Do NOT write only symptoms — write objective findings.
   Respond *only* with a JSON object using this exact schema:
   {
-  "Type_of_Cancer": "Specific cancer type with histologic subtype and ALL THREE receptor statuses (ER/PR/HER2). e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
+  "Type_of_Cancer": "Specific cancer type with histologic subtype and receptor statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
   "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage IIA, now metastatic (Stage IV)'",
   "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant.",
-  "Metastasis": "if there is met, Yes (to where), No, or Not sure",
-  "lab_summary": "Summary of key lab results with specific values. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests.",
+  "Metastasis": "if there is met, Yes (to where), No, or Not sure"
+  }
+
+Lab_Results: |
+  TASK: Extract lab results from this medical note.
+
+  List SPECIFIC lab values with numbers (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos 183, CA 27.29 = 48").
+  Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
+  Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
+  CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
+  If lab results are older than 6 months, note the date.
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "lab_summary": "Summary of key lab results with specific values. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests. If none found, write 'No labs in note.'"
+  }
+
+Clinical_Findings: |
+  TASK: Extract clinical findings and current disease status from this visit.
+
+  Summarize NEW clinical findings or current disease status. Include:
+  - Key pathology results: tumor size, margins, node status, grade
+  - Imaging findings: CT, MRI, PET, bone scan results
+  - Physical exam findings: palpable masses, skin changes, lymphadenopathy
+  Do NOT write only symptoms (e.g., "patient reports fatigue") — write OBJECTIVE findings.
+  Do NOT repeat the cancer type or stage (those are extracted separately).
+
+  Respond *only* with a JSON object using this exact schema:
+  {
   "findings": "Summary of new findings or disease status including pathology results, imaging findings, and exam findings."
   }
 
-Treatment_Summary: |
-  TASK: Extract 'Treatment Summary'.
+Current_Medications: |
+  TASK: Extract current oncologic medications.
 
   CRITICAL — distinguish CURRENT from PLANNED from PAST:
-  - CURRENT (include in current_meds): medications the patient is ACTIVELY taking right now.
+  - CURRENT (include): medications the patient is ACTIVELY taking right now.
     Look for: "continue", "currently on", "taking daily", "on [drug] since [date]"
-  - PLANNED/RECOMMENDED (do NOT include in current_meds): medications discussed, recommended, or scheduled to start.
+  - PLANNED/RECOMMENDED (do NOT include): medications discussed, recommended, or scheduled to start.
     Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]"
-  - PAST/COMPLETED (do NOT include in current_meds): medications already finished or stopped.
+  - PAST/COMPLETED (do NOT include): medications already finished or stopped.
     Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
 
-  For current_meds: List ONLY oncologic medications the patient is actively taking NOW. Include drug names.
+  List ONLY oncologic medications the patient is actively taking NOW. Include drug names.
   Do NOT include non-cancer medications (blood pressure, diabetes, psychiatric, allergy meds).
   Do NOT include medications the patient is "not taking" or that are marked as discontinued.
   If no oncologic medications are currently active, write empty string.
+
+  Think step by step before answering:
+  1. List ALL medications mentioned in the note.
+  2. For each one, determine: Is it oncologic (cancer-related)? Is it CURRENT, PLANNED, or PAST?
+  3. Only include medications that are BOTH oncologic AND currently active.
+
+  Write your reasoning first, then output the JSON on a new line starting with {
+
+  Respond with a JSON object using this exact schema:
+  {
+  "current_meds": "List of current oncologic medications or regimens the patient is ACTIVELY taking now."
+  }
+
+Treatment_Changes: |
+  TASK: Extract recent treatment changes and supportive medications.
 
   For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
   Do NOT include changes from months or years ago.
@@ -86,29 +127,46 @@ Treatment_Summary: |
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "current_meds": "List of current oncologic medications or regimens the patient is ACTIVELY taking now.",
   "recent_changes": "Any holds, dose reductions, or switches at or near this visit.",
   "supportive_meds": "List of cancer-treatment-related supportive medications."
   }
 
-Goals_of_care: |
-  TASK: Extract 'What We Discussed / Decided'.
+Treatment_Goals: |
+  TASK: Extract the goal/intent of cancer treatment.
 
-  For goals_of_treatment:
-  - Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", "neoadjuvant", or "symptom management".
-  - Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
-  - Use this decision tree:
-    * Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
-    * Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant" — that is a strategy, not a goal)
-    * Metastatic/Stage IV cancer → "palliative"
-    * DCIS only, no invasive cancer → "risk reduction"
-    * Completed curative treatment, now on surveillance endocrine therapy → "adjuvant" or "risk reduction"
-  - Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant chemotherapy — that is "curative" or "adjuvant".
-  - Do NOT write "neoadjuvant" as a goal — write "curative" instead (neoadjuvant is a treatment strategy, not a treatment intent).
+  Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
+  Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
 
-  For response_assessment:
-  - Write how the cancer is CURRENTLY responding based on evidence already available.
-  - Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
+  Think step by step before answering:
+  1. What is the cancer stage? (early-stage vs metastatic/Stage IV)
+  2. What treatment is planned or ongoing? (surgery, chemo, radiation, endocrine therapy)
+  3. Apply the decision tree:
+     - Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
+     - Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant")
+     - Metastatic/Stage IV cancer → "palliative"
+     - DCIS only, no invasive cancer → "risk reduction"
+     - Completed curative treatment, now on surveillance endocrine therapy → "adjuvant" or "risk reduction"
+  4. Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant chemo — that is "curative" or "adjuvant".
+  5. Do NOT write "neoadjuvant" as a goal — write "curative" instead (neoadjuvant is a treatment strategy, not a treatment intent).
+
+  Write your reasoning first, then output the JSON on a new line starting with {
+
+  Respond with a JSON object using this exact schema:
+  {
+  "goals_of_treatment": "The intent of cancer treatment: curative, palliative, adjuvant, risk reduction, or symptom management. NOT the purpose of this visit."
+  }
+
+Response_Assessment: |
+  TASK: Extract how the cancer is CURRENTLY responding to treatment.
+
+  Think step by step before answering:
+  1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+  2. If yes, what treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)
+  3. Is there any evidence of how the cancer is responding? Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
+  4. If no treatment started yet, write "Not yet on treatment — no response to assess."
+  5. If on treatment but no response data in the note, write "Not mentioned in note."
+
+  STRICT RULES — do NOT violate:
   - Do NOT include future plans ("will start", "plan to", "she will have radiation").
   - Do NOT include treatment discussions or recommendations.
   - Do NOT use generic boilerplate phrases. Every claim must be traceable to a specific sentence in the note.
@@ -116,27 +174,21 @@ Goals_of_care: |
   - Do NOT describe pathology results (tumor size, grade, margins) as a "response" — pathology is a diagnosis, not a treatment response.
   - Do NOT describe surgical recovery ("healing well", "recovering from surgery") as a response assessment.
   - Do NOT describe risk estimates or Oncotype scores as a response — those are prognostic tools, not treatment responses.
-  - If the patient has NOT yet started any cancer treatment (new diagnosis, pre-treatment, post-surgery but pre-adjuvant), write "Not yet on treatment — no response to assess."
-  - If the patient is on treatment but the note does not mention how the disease is responding, write "Not mentioned in note."
   - Do NOT write "Not applicable" or "Not specified".
   Examples:
   - GOOD: "CT stable, CA 15-3 decreased from 28 to 14"
   - GOOD: "no evidence of disease recurrence on imaging and exam"
   - GOOD: "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases"
-  - GOOD: "supraclavicular area appears to be breaking up on exam"
-  - GOOD: "Disease under great control as of imaging December 2021"
   - GOOD: "Axillary LN decreased from 8cm to 2-3cm after 2 cycles AC"
-  - BAD: "tolerating therapy well, symptoms improved" (generic boilerplate — WHAT symptoms? WHAT evidence?)
+  - BAD: "tolerating therapy well, symptoms improved" (generic boilerplate)
   - BAD: "She will continue on letrozole and have radiation" (this is a plan, not a response)
-  - BAD: "We discussed chemotherapy options" (this is a discussion, not a response)
   - BAD: "0.9 cm grade 1 IDC, margins negative" (this is pathology, not treatment response)
-  - BAD: "Healing well from surgery" (this is surgical recovery, not cancer treatment response)
-  - BAD: "Low Risk Oncotype score" (this is a prognostic tool, not a response to treatment)
-  - BAD: "The patient is at great risk of developing metastatic disease" (this is a risk assessment, not a response)
-  - BAD: "Neuropathy improving" (this is a side effect change, not cancer response — unless explicitly linked to tumor shrinkage)
+  - BAD: "Healing well from surgery" (surgical recovery, not cancer treatment response)
+  - BAD: "Low Risk Oncotype score" (prognostic tool, not a response to treatment)
 
-  Respond *only* with a JSON object using this exact schema:
+  Write your reasoning first, then output the JSON on a new line starting with {
+
+  Respond with a JSON object using this exact schema:
   {
-  "goals_of_treatment": "The intent of cancer treatment: curative, palliative, adjuvant, risk reduction, or symptom management. NOT the purpose of this visit. NOT a treatment strategy like 'neoadjuvant'.",
-  "response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence already available: imaging, labs, exam, symptoms. Do NOT include future plans, surgical recovery, or prognostic scores."
+  "response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence: imaging, labs, exam. Do NOT include future plans, surgical recovery, or prognostic scores."
   }

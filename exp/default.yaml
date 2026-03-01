@@ -4,6 +4,7 @@ experiment:
 
 model:
   name: "meta-llama/Llama-3.1-8B-Instruct"
+  chat_template: "llama3"
   dtype: "bfloat16"
   device_map: "auto"
   cache_dir: "/mnt/c/Users/yc/.cache/huggingface"
@@ -27,7 +28,7 @@ extraction:
 
 generation:
   keypoint:
-    max_new_tokens: 512
+    max_new_tokens: 768
     do_sample: false
   assessment_plan:
     max_new_tokens: 2048

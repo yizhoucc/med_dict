@@ -2,6 +2,7 @@ import csv
 import re
 import torch
 import time
+import copy
 from typing import Dict, List, Tuple, Optional
 import nltk
 from nltk.corpus import stopwords, words
@@ -19,6 +20,51 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 LINE_WIDTH = 140
 
+
+class ChatTemplate:
+    """Abstraction for model-specific chat formatting.
+
+    Eliminates hardcoded chat template tokens throughout the codebase.
+    Supports llama3 and mistral; add new entries to TEMPLATES for other models.
+    """
+
+    TEMPLATES = {
+        "llama3": {
+            "bos": "<|begin_of_text|>",
+            "system_start": "<|start_header_id|>system<|end_header_id|>\n\n",
+            "user_start": "<|start_header_id|>user<|end_header_id|>\n\n",
+            "assistant_start": "<|start_header_id|>assistant<|end_header_id|>\n",
+            "turn_end": "<|eot_id|>",
+        },
+        "mistral": {
+            "bos": "<s>",
+            "system_start": "[INST] ",
+            "user_start": "[INST] ",
+            "assistant_start": "",
+            "turn_end": " [/INST]",
+        },
+    }
+
+    def __init__(self, template_name="llama3"):
+        if template_name not in self.TEMPLATES:
+            raise ValueError(f"Unknown chat template: {template_name}. Available: {list(self.TEMPLATES.keys())}")
+        self.t = self.TEMPLATES[template_name]
+
+    def system_user_assistant(self, system_text, user_text):
+        """Full prompt: BOS + system + user + assistant start."""
+        return (
+            f"{self.t['bos']}{self.t['system_start']}{system_text}{self.t['turn_end']}"
+            f"{self.t['user_start']}{user_text}{self.t['turn_end']}"
+            f"{self.t['assistant_start']}"
+        )
+
+    def user_assistant(self, user_text):
+        """Continuation prompt appended to existing cache: user turn + assistant start."""
+        return (
+            f"{self.t['user_start']}{user_text}{self.t['turn_end']}"
+            f"{self.t['assistant_start']}"
+        )
+
 def mysave(df, base_filename='output/keysummary', extension = 'csv'):
     
     counter = 1
@@ -33,7 +79,19 @@ def mysave(df, base_filename='output/keysummary', extension = 'csv'):
     df.to_csv(output_filename, index=True)
     print(f"DataFrame saved to '{output_filename}'")
 
-    
+
+def clone_cache(cache):
+    """Clone KV cache to prevent in-place modification.
+
+    DynamicCache (transformers >= 4.36) can be modified in-place during
+    generation, polluting the shared base_cache. Tuple-of-tuples format
+    is safe because generate creates new tensors.
+    """
+    if hasattr(cache, 'get_seq_length'):  # DynamicCache
+        return copy.deepcopy(cache)
+    return cache  # tuple format is safe
+
+
 def repair_json_agent(model, tokenizer, broken_json_string: str) -> str:
     """
     Uses an LLM to repair a syntactically incorrect JSON string.
@@ -453,7 +511,7 @@ def format_definitions_context(definitions):
     return "\n".join(lines)
 
 
-def build_base_cache(text, model, tokenizer, definitions_context=""):
+def build_base_cache(text, model, tokenizer, definitions_context="", chat_tmpl=None):
     """
     Build a KV cache from a base prompt containing the note text.
     Returns the base_cache for reuse across multiple extraction tasks.
@@ -463,25 +521,31 @@ def build_base_cache(text, model, tokenizer, definitions_context=""):
         model: The loaded model
         tokenizer: The loaded tokenizer
         definitions_context: Optional medical term definitions to inject
+        chat_tmpl: ChatTemplate instance (defaults to llama3)
     """
+    if chat_tmpl is None:
+        chat_tmpl = ChatTemplate("llama3")
+
     defs_section = ""
     if definitions_context:
         defs_section = f"\n\n{definitions_context}\n"
 
-    base_prompt = (
-        f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
+    system_msg = (
         f"You are a medical data extraction expert. You will be given a long medical note. "
         f"Your task is to answer a series of questions about it, one by one. "
         f"You MUST respond with valid JSON only. Match the exact schema provided in each task. "
         f"No markdown backticks, no explanations, no text before or after the JSON object."
         f"{defs_section}"
-        f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+    )
+    user_msg = (
         f"Here is the medical note:\n\n"
         f"--- BEGIN NOTE ---\n{text}\n--- END NOTE ---"
         f"\n\nI will now ask you to extract specific sections. "
         f"Please wait for my first extraction task."
-        f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
-        f"{{\"status\": \"Understood. I have read the note and am ready.\"}}"
+    )
+    base_prompt = (
+        chat_tmpl.system_user_assistant(system_msg, user_msg)
+        + '{"status": "Understood. I have read the note and am ready."}'
     )
 
     with torch.no_grad():
@@ -568,7 +632,7 @@ def extract_schema_keys(prompt_text):
     return set(keys) if keys else set()
 
 
-def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True):
+def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None):
     """
     Extract keypoints with agentic self-correction:
     1. Extract answer from model
@@ -583,10 +647,14 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         gen_config: generation config dict
         base_cache: pre-computed KV cache from build_base_cache()
         verify: whether to run faithfulness verification (default True)
+        chat_tmpl: ChatTemplate instance (defaults to llama3)
 
     Returns:
         dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
     """
+    if chat_tmpl is None:
+        chat_tmpl = ChatTemplate("llama3")
+
     keypoints = {}
 
     for key, task in prompts.items():
@@ -595,13 +663,9 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         re_extracted = False
 
         # --- Step 1: Extract ---
-        task_prompt = (
-            f"<|start_header_id|>user<|end_header_id|>\n\n"
-            f"{task}"
-            f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
-        )
+        task_prompt = chat_tmpl.user_assistant(task)
         answer, returned_cache = run_model_with_cache_manual(
-            task_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            task_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
         )
         del returned_cache
         torch.cuda.empty_cache()
@@ -611,16 +675,14 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         parsed = try_parse_json(answer)
         if parsed is None:
             schema = extract_schema_from_prompt(task)
-            repair_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            repair_prompt = chat_tmpl.user_assistant(
                 f"Your previous response was:\n{answer}\n\n"
                 f"This is not valid JSON. Reformat it into valid JSON matching this exact schema:\n"
                 f"{schema}\n"
                 f"Return ONLY the JSON object, nothing else."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             repaired_answer, _ = run_model_with_cache_manual(
-                repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -632,8 +694,7 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 
         # --- Step 3: Faithfulness verify ---
         if verify:
-            verification_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            verification_prompt = chat_tmpl.user_assistant(
                 f"CONTEXT: You previously extracted the following information:\n"
                 f"--- BEGIN EXTRACTED ---\n{answer}\n--- END EXTRACTED ---\n\n"
                 f"Check if every statement in the extraction is strictly supported by "
@@ -641,12 +702,11 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                 f"Return a JSON object: {{\"faithful\": true}} if fully supported, "
                 f"or {{\"faithful\": false, \"issues\": \"describe what is not supported\"}} if not.\n"
                 f"Return ONLY the JSON object."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             check_raw, _ = run_model_with_cache_manual(
                 verification_prompt, model, tokenizer,
                 {"max_new_tokens": 200, "do_sample": False, "eos_token_id": gen_config.get("eos_token_id", tokenizer.eos_token_id)},
-                kv_cache=base_cache
+                kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -663,16 +723,14 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 
             if not is_faithful:
                 # Re-extract with guidance
-                re_extract_prompt = (
-                    f"<|start_header_id|>user<|end_header_id|>\n\n"
+                re_extract_prompt = chat_tmpl.user_assistant(
                     f"Your previous extraction had issues: {issues}\n"
                     f"Please re-extract. Here is the original task:\n{task}\n"
                     f"Be very careful to only include information that is explicitly stated in the note. "
                     f"Do not infer or add information."
-                    f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
                 )
                 answer, _ = run_model_with_cache_manual(
-                    re_extract_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                    re_extract_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
                 torch.cuda.empty_cache()
                 gc.collect()
@@ -682,15 +740,13 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                 parsed = try_parse_json(answer)
                 if parsed is None:
                     schema = extract_schema_from_prompt(task)
-                    repair_prompt = (
-                        f"<|start_header_id|>user<|end_header_id|>\n\n"
+                    repair_prompt = chat_tmpl.user_assistant(
                         f"Your previous response was:\n{answer}\n\n"
                         f"Reformat as valid JSON matching this schema:\n{schema}\n"
                         f"Return ONLY the JSON object."
-                        f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
                     )
                     repaired_answer, _ = run_model_with_cache_manual(
-                        repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                        repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                     )
                     torch.cuda.empty_cache()
                     gc.collect()
@@ -705,8 +761,7 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         plan_keys = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
                       'Medication_Plan', 'Medication_Plan_chatgpt'}
         if key in plan_keys and parsed is not None:
-            temporal_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            temporal_prompt = chat_tmpl.user_assistant(
                 f"Review this extraction for a PLAN section:\n"
                 f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
                 f"This should contain ONLY current or future plans.\n"
@@ -717,10 +772,9 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                 f"Return the cleaned JSON with only current/future items. "
                 f"If nothing remains, return the appropriate 'None' or 'No ... planned.' value.\n"
                 f"Return ONLY the JSON object."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             cleaned_raw, _ = run_model_with_cache_manual(
-                temporal_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -772,7 +826,7 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True):
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None):
     """
     V2 extraction pipeline with 6 independent gates.
     Each gate fixes one specific issue (trim, don't redo).
@@ -792,10 +846,14 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         gen_config: generation config dict
         base_cache: pre-computed KV cache from build_base_cache()
         verify: whether to run faithfulness/temporal/specificity gates (default True)
+        chat_tmpl: ChatTemplate instance (defaults to llama3)
 
     Returns:
         dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
     """
+    if chat_tmpl is None:
+        chat_tmpl = ChatTemplate("llama3")
+
     keypoints = {}
 
     for key, task in prompts.items():
@@ -804,15 +862,12 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         gate_log = []  # per-gate detailed log
 
         # --- Step 1: Extract ---
-        task_prompt = (
-            f"<|start_header_id|>user<|end_header_id|>\n\n"
-            f"{task}"
-            f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
-        )
+        task_prompt = chat_tmpl.user_assistant(task)
+        cache_for_extract = clone_cache(base_cache)
         answer, returned_cache = run_model_with_cache_manual(
-            task_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            task_prompt, model, tokenizer, gen_config, kv_cache=cache_for_extract
         )
-        del returned_cache
+        del returned_cache, cache_for_extract
         torch.cuda.empty_cache()
         gc.collect()
 
@@ -822,16 +877,14 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         parsed = try_parse_json(answer)
         if parsed is None:
             schema = extract_schema_from_prompt(task)
-            repair_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            repair_prompt = chat_tmpl.user_assistant(
                 f"Your previous response was:\n{answer}\n\n"
                 f"This is not valid JSON. Reformat into valid JSON matching this exact schema:\n"
                 f"{schema}\n"
                 f"Return ONLY the JSON object."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             repaired_answer, _ = run_model_with_cache_manual(
-                repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -851,17 +904,15 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             expected_keys = extract_schema_keys(task)
             if expected_keys and not (expected_keys & set(parsed.keys())):
                 actual_keys = list(parsed.keys())
-                schema_fix_prompt = (
-                    f"<|start_header_id|>user<|end_header_id|>\n\n"
+                schema_fix_prompt = chat_tmpl.user_assistant(
                     f"Your JSON has incorrect keys.\n"
                     f"Expected keys: {sorted(expected_keys)}\n"
                     f"Your keys: {actual_keys}\n"
                     f"Rewrite using the correct keys from the schema. Keep your extracted content.\n"
                     f"Return ONLY the JSON object."
-                    f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
                 )
                 fixed_raw, _ = run_model_with_cache_manual(
-                    schema_fix_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                    schema_fix_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
                 torch.cuda.empty_cache()
                 gc.collect()
@@ -881,8 +932,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         if verify and parsed is not None:
             original_keys = set(parsed.keys())
             before_values = {k: str(v)[:80] for k, v in parsed.items()}
-            faith_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            faith_prompt = chat_tmpl.user_assistant(
                 f"Review this extraction against the original medical note in your context:\n"
                 f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
                 f"For each key-value pair, check: is the value explicitly stated or directly "
@@ -898,10 +948,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 f"- When in doubt, KEEP the original value.\n"
                 f"- Do NOT remove any keys. Return ALL original keys.\n"
                 f"Return ONLY the JSON object with all original keys preserved."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             cleaned_raw, _ = run_model_with_cache_manual(
-                faith_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                faith_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -946,8 +995,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         if verify and parsed is not None and key in PLAN_KEYS:
             original_keys = set(parsed.keys())
             before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
-            temporal_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            temporal_prompt = chat_tmpl.user_assistant(
                 f"Review this extraction for a PLAN section:\n"
                 f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
                 f"Remove any PAST/COMPLETED items (past tense, past dates, "
@@ -956,10 +1004,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 f"(\"will\", \"plan to\", \"pending\") items.\n"
                 f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
                 f"Return ONLY the JSON object."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             cleaned_raw, _ = run_model_with_cache_manual(
-                temporal_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -986,8 +1033,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         if verify and parsed is not None and _has_vague_terms(answer):
             original_keys = set(parsed.keys())
             before_g5 = {k: str(v)[:80] for k, v in parsed.items()}
-            specificity_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            specificity_prompt = chat_tmpl.user_assistant(
                 f"This extraction contains vague language. Replace vague terms with SPECIFIC "
                 f"details from the original medical note:\n"
                 f"- \"staging workup\" → list the actual tests ordered "
@@ -997,10 +1043,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 f"- \"as above\" or \"as discussed\" → state what was actually discussed\n\n"
                 f"Original extraction:\n{answer}\n\n"
                 f"Return the improved JSON with specific details. Return ONLY the JSON object."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             improved_raw, _ = run_model_with_cache_manual(
-                specificity_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                specificity_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
@@ -1029,8 +1074,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             schema_str = extract_schema_from_prompt(task)
             original_keys_g6 = set(parsed.keys())
             before_g6 = {k: str(v)[:80] for k, v in parsed.items()}
-            semantic_prompt = (
-                f"<|start_header_id|>user<|end_header_id|>\n\n"
+            semantic_prompt = chat_tmpl.user_assistant(
                 f"Check if each value in this extraction actually answers the question asked by its field.\n\n"
                 f"The field definitions are:\n{schema_str}\n\n"
                 f"The extraction is:\n{answer}\n\n"
@@ -1048,10 +1092,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 f"when no treatment has started).\n"
                 f"If all values correctly answer their fields, return the JSON unchanged.\n"
                 f"Return ONLY the JSON object with all keys preserved."
-                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             semantic_raw, _ = run_model_with_cache_manual(
-                semantic_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                semantic_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
             torch.cuda.empty_cache()
             gc.collect()
