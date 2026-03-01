@@ -9098,3 +9098,34 @@ Processing row 61 (62/100)...
   Regex matched: 'Assessment:'
   Regex extraction succeeded (1993 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 10.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for invasive ductal carcinoma of the right breast, pT1aN0(sn)M0, grade 1, ER+(>95%)PR+(>9
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for invasive ductal carcinoma of the right breast," -> "Invasive ductal carcinoma of the right breast, grade 1, ER+("
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 20.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT1aN0(sn)M0",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Negative m
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "" -> "lab results pending"
+    Treatment_Summary: 20.2s
+      [EXTRACT] raw={
+  "current_meds": "None mentioned",
+  "recent_changes": "",
+  "supportive_meds": "ascorbic acid, betaine HCL, cannabidiol, cholecalciferol, evening primrose oil, lysine, milk thistle, omega-3 fatty 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
