@@ -656,3 +656,115 @@ The value for "goals_of_treatment" is correct, as the note mentions that the pat
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not responding to treatment"
   Extraction prompts: 59.4s
+    Medication_Plan_chatgpt: 38.3s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "palbociclib started April 2019",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": {
+    "sum
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.9s
+      [EXTRACT] raw={
+  "medication_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Labs monthly. Radiation oncology referral for symptomatic disease in the left neck and brachial plexus. 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 6.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Radiation oncology referral for symptomatic disease in the left neck and brachial plexus."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Continue current therapy with leuprolide, anastrozole, and p" -> "Continue current therapy with leuprolide, anastrozole, and p"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "Radiation oncology referral" -> "Radiation oncology referral for symptomatic disease in the l"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "procedure_plan": "Radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "Radiation oncology referral" -> "Radiation oncology referral for symptomatic disease in the l"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "imaging_plan": "CT and bone scan"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "CT and bone scan" -> "CT and bone scan ordered and can be done once authorized."
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "Labs monthly"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.1s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 0.9s
+      [EXTRACT] raw={
+  "Next clinic visit": "Next visit with the patient"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.8s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 70.8s
+  Row 4 total: 130.2s
+  Row 4 saved to progress
+
+Processing row 5 (6/100)...
+  Injected 4 term definitions: ['lumpectomy', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1599 chars)
+  A/P extraction: 0.0s
