@@ -5,7 +5,8 @@
     0,
     1,
     2,
-    3
+    3,
+    4
   ],
   "results": {
     "0": {
@@ -386,6 +387,107 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "None"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "4": {
+      "coral_idx": 144,
+      "note_text": "***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/26/1988   Date of Visit:  12/07/2019  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD      Reason for visit:   Chief Complaint   Patient presents with   \u0007 Follow-up       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.      Diagnosis:    1. Recurrent breast cancer, left (HCC)  Complete Blood Count with Differential    Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)    Estradiol, Ultrasensitive    Cancer Antigen 15-3    Carcinoembryonic Antigen    Ambulatory referral to Radiation Oncology    CT Abdomen /Pelvis with Contrast    CT Chest with Contrast    NM Whole Body Bone Scan   2. Cervical lymphadenopathy  CT Neck with Contrast   3. Neck pain  CT Neck with Contrast       Interim History:  She had a MRI of the brain that was normal and a MRI of the c spine showing adenopathy and left brachial plexus involvement with her cancer.  She is symptomatic and I will refer her to radiation oncology.  I refilled her zofran which she uses only occasionally and otherwise she I tolerating the therapy with ibrance/lupron/*****.  She is overdue for her labs and will have them on the days she gets lupron.  She is using some tylenol for pain.  She does not want anything stronger. She is taking a PPI for reflux and had one episode of chest pain that resolved.     Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Recurrent breast cancer, left (HCC) 12/28/2018     July 2013 Palpated mass in left breast while breastfeeding  08/03/13 Bilateral breast US: Irregular somewhat scalloped ***** hypoechoic focus (2 cm) in left axillary tail  US-guided core biopsy of 2.2 cm palpable nodule in upper-outer left breast: IDC with micropapillary features  ER+ (H score 290, or >75%), PR+ (H score \n 290, or >75%), *****- (FISH ratio 1.0), *****-67 5%   08/10/13 Bilateral diagnostic digital mammogram: Extensive, segmentally distributed, clustered calcifications (13 cm in extent) in upper outer quadrant of left breast; associated focal, poorly defined, dense and irregular mass (2.3 cm) present superolaterally in upper outer quadrant of left breast  Left axillary US: Two adjacent LN demonstrating focal, nodular thickening of parenchyma (1.8 cm and 1.9 cm)  US-guided left axillary LN biopsy: Metastatic carcinoma with ER+ (H score 290, or >75%), PR+ (H score 290, or >75%), *****- (FISH ratio 1.02), *****-67 5%   09/08/13 Bilateral breast skin-sparing mastectomy + left axillary ***** with *****: left breast - 8.0 cm grade 2 IDC micropapillary type, ***** present, final margins clear; intermediate nuclear grade DCIS present, March 16 *****+ (1.2 cm with extracapsular extension) *****; right breast - no carcinoma  09/17/13 Whole body bone scan: Usual symmetric radiotracer uptake in axial and appendicular skeleton is observed, no findings suggesting metastatic disease   09/18/13 CT CAP: no evidence of metastases   11/12/13 started dose dense Adriamycin/cytoxan - decided to stop active treatment after 3 cycles.  Had severe nausea, vomiting, fevers, chills as well as ***** body pains - per pt.   12/18/13 CT CAP: Soft tissue swelling of bilateral breast reconstructions without obvious loculated fluid collection in visualized lower breast reconstructions, region of abdominoplasty wound in midline there is a sinus tract extending to open would on skin filled with fluid (4.1 x 2.2 x 1.3 cm), induration and soft tissue swelling about this region   Bilateral breast US: Moderate bilateral subcutaneous soft tissue swelling; no evidence of loculated fluid collection   03/10/15 CT CAP: increased size of mildly hypermetabolic right deep pectoral and axillary LN (1.4 cm short axis ***** suv 4.9), mildly hypermetabolic right axillary LN (1.1 short axis ***** \n suv 4.9) are larger, area of right outer lower breast central fat density (4.3 x 4.9 cm SUV max 4.1) most compatible with fat necrosis, similar area is seen in upper and lower medial left breast  03/21/15 *****-guided right breast LN biopsy: Benign axillary node hyperplasia  2015 Started on 4 week Lupron x 1-2 years plus exemestane and later tamoxifen by Dr. *****  08/18/15 CT chest: No pulmonary embolus or other acute abnormality   09/13/15 Bilateral US complete: Previously examined right axillary LN decreased in size with decreased cortical thickening, consistent with benign path results     Recurrence   June 2018 Patient noticed a left breast lump increasing in size and ***** of the associated skin    10/26/18 Left breast US (at *****):  Irregular lobulated solid mass (3.1 x 1.8 x 3.0 cm) with a satellite mass (1.2 x 0.9 x 0.9 cm) at 1:00 position, 7 cm from nipple; mass appearing to involve overlying skin  US-guided biopsy of mass at 2:00 position of left breast: grade 2 IDC ER+(>95%), PR+(>95%), *****- (IHC 1+) *****-67 30%-40%  01/27/19 PET/CT: Left breast subcutaneous mass (2.1 x 3.2 cm SUV 8.4), left axillary node (1.3 x 1.4 cm SUV 6.0), left level 5B LN conglomerate (1.8 x 2.5 cm SUV 9.23), left internal mammary LN (1.2 x 2.0 cm SUV 6.8); left axillary, left supraclavicular, left level VB and left internal mammary hypermetabolic LAD are suspicious for metastatic diease; hypermetabolic subcutaneous masses overlying the left breast  02/22/19 started goserelin  Left neck LN FNA: metastatic adenocarcinoma with ER+ >90%, PR+ >90%, *****- (IHC 1; FISH ratio 1.1)  03/12/19 started anastrozole  04/04/19 started palbociclib  08/23/19 CT neck and CAP: decreased size of left cervical chain LNs (largest - 1.8 cm -> 1.2 cm) as well as additional bilateral subcentimeter lymph nodes that did not meet criteria for LAD; stable borderline enlargement of mediastinal LN (ex - right upper paratracheal LN (0.9 cm), stably enlarged left IM LN, \n decreased dominant more anterior nodule (3.2 x 2.6 cm -> 2.5 x 1.7 cm) ***** skin of lateral left breast, but, increased size of left axillary LN or satellite nodule (1.5 x 1.2 cm -> 1.9 x 1.2 cm), and new focal ***** within sternum, suspicious for osseous metastases  bone scan: questionable subtle correlate of tracer uptake for new sternal sclerotic lesion seen on same-day chest CT         HEME-ONC TREATMENT :    Medications:    Current Outpatient Medications:   \u0007  amLODIPine (NORVASC) 10 mg tablet, , Disp: , Rfl:   \u0007  anastrozole (ARIMIDEX) 1 mg tablet, Take 1 tablet (1 mg total) by mouth Daily., Disp: 30 tablet, Rfl: 11  \u0007  escitalopram oxalate (LEXAPRO) 10 mg tablet, Take 1 tablet (10 mg total) by mouth Daily., Disp: 30 tablet, Rfl: 6  \u0007  gabapentin (NEURONTIN) 300 mg capsule, Take 3 capsules (900 mg total) by mouth 3 (three) times daily., Disp: 270 capsule, Rfl: 3  \u0007  hydroCHLOROthiazide (HYDRODIURIL) 25 mg tablet, Take 1 tablet (25 mg total) by mouth Daily., Disp: 30 tablet, Rfl: 2  \u0007  ondansetron (ZOFRAN) 8 mg tablet, Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed for Nausea (Vomiting), Disp: 30 tablet, Rfl: 11  \u0007  palbociclib (IBRANCE) 125 mg capsule, 1 tab (125 mg) PO daily for 21 days followed by a 7 day break. Have blood drawn on day 7 of 7 day break, call MD for results., Disp: 21 capsule, Rfl: 3  \u0007  potassium chloride (KLOR-CON *****) 10 mEq ER tablet, Take 1 tablet (10 mEq total) by mouth Daily., Disp: 30 tablet, Rfl: 3  \u0007  venlafaxine (EFFEXOR-XR) 75 mg 24 hr capsule, Take 1 capsule (75 mg total) by mouth Daily., Disp: 30 capsule, Rfl: 6    Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Gadoterate Meglumine Nausea And Vomiting     ***** nauseous and vomited after gad injection. Had had not problem with gad in past. First time for nausea.    \u0007 Hydrocodone-Acetaminophen    \u0007 Ibuprofen        Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, \n loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No chest pain, orthopnea or palpitations  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    12/07/19 0941   *****: Arm  Comment: neck and left arm   *****:   4       Code status:     full code      Performance status:  1 - Symptomatic but completely ambulatory    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age      Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Hospital Outpatient Visit on 08/23/2019   Component Date Value Ref Range Status   \u0007 Creatinine Whole Blood 08/23/2019 0.6  0.6 - 1.3 mg/dL Final     MRI of C spine and brain:    IMPRESSION:     1. Normal MRI of the brain for age. Specifically, no evidence for intracranial metastatic disease.    2. Interval enlargement of a left level 5B presumed metastatic lymph node compared to the CT of the neck from 08/23/2019. Involvement of the left brachial plexus by this node may account for the patient's reported left arm symptoms. MRI of the cervical spine otherwise demonstrates minimal degenerative changes without significant canal or foraminal narrowing.    Assessment \\Plan :    1. ***** ***** is a 31 y.o. premenopausal patient with a history of a Stage III *****+/*****- IDC of the left breast (*****/*****; *****, bilateral mastectomies/left *****, AC x 3 only, no radiation, 1-2 years anti-estrogen therapy), now with biopsy proven metastatic recurrence (involving left cervical LN), returning to clinic while on leuprolide (OS started January 2019), anastrozole \n (started March 2019), and palbociclib (started April 2019).  2. Continue current therapy and will get restaging studies prior to next visit with me.   3.  Left brachial plexus involvement.  Radiation oncology referral.   4. Labs monthly.  The patient agrees to have them done on the day of her lupron injection.   5.  CT and bone scan ordered and can be done once authorized prior to next visit.   6.  Radiation referral for symptomatic disease in her left neck and brachial plexus.      ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 25 minutes evaluating patient, reviewing chart, coordinating care, discussing with patient and/or family.    I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.         \n",
+      "assessment_and_plan": "Assessment \\Plan :    1. ***** ***** is a 31 y.o. premenopausal patient with a history of a Stage III *****+/*****- IDC of the left breast (*****/*****; *****, bilateral mastectomies/left *****, AC x 3 only, no radiation, 1-2 years anti-estrogen therapy), now with biopsy proven metastatic recurrence (involving left cervical LN), returning to clinic while on leuprolide (OS started January 2019), anastrozole \n (started March 2019), and palbociclib (started April 2019).  2. Continue current therapy and will get restaging studies prior to next visit with me.   3.  Left brachial plexus involvement.  Radiation oncology referral.   4. Labs monthly.  The patient agrees to have them done on the day of her lupron injection.   5.  CT and bone scan ordered and can be done once authorized prior to next visit.   6.  Radiation referral for symptomatic disease in her left neck and brachial plexus.      ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 25 minutes evaluating patient, reviewing chart, coordinating care, discussing with patient and/or family.    I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.         \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "Follow up",
+          "second opinion": "no",
+          "in-person": "Televisit",
+          "summary": "Recurrent breast cancer, left (HCC), with cervical lymphadenopathy and neck pain"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "breast cancer",
+          "Stage_of_Cancer": "",
+          "Distant Metastasis": "Yes, to neck, arm, and possibly sternum",
+          "Metastasis": "Yes, to neck, arm, and possibly sternum",
+          "lab_summary": "Creatinine 0.6 mg/dL",
+          "findings": "Left brachial plexus involvement, cervical lymphadenopathy, neck pain, and possibly osseous metastases in the sternum"
+        },
+        "Treatment_Summary": {
+          "current_meds": "leuprolide, anastrozole, palbociclib, zofran",
+          "recent_changes": "refilled zofran",
+          "supportive_meds": "amLODIPine, escitalopram oxalate, gabapentin, hydroCHLOROthiazide, ondansetron, potassium chloride, venlafaxine"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "palliative",
+          "response_assessment": "stable disease, with some progression in the left axillary LN and possibly the sternum"
+        },
+        "Medication_Plan_chatgpt": {
+          "chemotherapy": {
+            "summary": "palbociclib started April 2019",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "hormonal therapy": {
+            "summary": "anastrozole started March 2019, leuprolide started January 2019",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "radiotherapy": {
+            "summary": "Radiation oncology referral",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "bowel regimen": {
+            "summary": "Labs monthly",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "pain medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "psychiatry medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "other treatment": {
+            "summary": "CT and bone scan ordered and can be done once authorized prior to next visit",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Labs monthly on the day of lupron injection. CT and bone scan ordered and can be done once authorized prior to next visit. Radiation oncology referral for symptomatic disease in the left neck and brachial plexus."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Plan to get restaging studies prior to next visit. Radiation oncology referral."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "Radiation oncology referral for symptomatic disease in the left neck and brachial plexus."
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "CT and bone scan ordered and can be done once authorized prior to next visit"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "CT and bone scan ordered and can be done once authorized prior to next visit"
+        },
+        "Lab_Plan": {
+          "lab_plan": "Labs monthly"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Radiation oncology",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "prior to next visit"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
