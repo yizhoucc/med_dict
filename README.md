@@ -2,6 +2,16 @@
 
 Structured extraction from medical oncology notes using Llama 3.1 8B Instruct.
 
+## Goal
+
+Extract structured information from oncology clinical notes and generate **patient-facing** plain-language summaries.
+
+Four non-negotiable principles:
+1. **Faithful** — Never hallucinate. Better to say less than to say something wrong.
+2. **Complete** — Cover all important clinical information. Don't drop key details.
+3. **Simple** — Eighth-grade reading level. Patients must be able to understand it.
+4. **Clear** — Avoid medical jargon; if unavoidable, explain in plain language.
+
 ## Quick Start
 
 ```bash
@@ -55,18 +65,19 @@ model:
 
 data:
   dataset_path: "data/CORAL/.../breastca_unannotated.csv"
-  row_range: [0, 20]
+  row_range: [0, 20]          # contiguous range
+  # row_indices: [0, 4, 11]   # OR specific rows (mutually exclusive with row_range)
 
 extraction:
   pipeline: "v2"       # "v1" or "v2"
-  verify: true          # enable faithfulness/temporal/specificity gates
+  verify: true          # enable gates 3-6
 ```
 
 ## Pipeline
 
 Two pipeline versions, selected via `extraction.pipeline` in config.
 
-### V2 (default) — 5-Gate Agentic Extraction
+### V2 (default) — 6-Gate Agentic Extraction
 
 Each gate fixes one specific issue by trimming/correcting, never re-extracting from scratch:
 
@@ -75,10 +86,12 @@ Each gate fixes one specific issue by trimming/correcting, never re-extracting f
 3. **FAITHFULNESS** — Review each value against the original note. Only empty values that clearly contradict or are fabricated. "When in doubt, keep." Dropped keys are auto-restored from the original extraction.
 4. **TEMPORAL** — Plan keys only (`Therapy_plan`, `Procedure_Plan`, `Imaging_Plan`, `Lab_Plan`, `Medication_Plan`, `Medication_Plan_chatgpt`): remove past/completed items, keep current/future
 5. **SPECIFICITY** — Conditional trigger: only runs if vague terms detected ("staging workup", "as above", etc.). Replaces with specific details from the note.
+6. **SEMANTIC** — Check if each extracted value actually answers the question asked by its field definition. Fixes "right answer, wrong field" errors (e.g., writing visit purpose in `goals_of_treatment` instead of treatment intent).
 
 Key design decisions:
 - Gate 3 uses "keep unless clearly wrong" policy (not "keep only if explicitly stated"), avoiding over-trimming of reasonable clinical summaries
-- Gates 3-5 all validate key overlap before accepting changes, preventing schema leakage (e.g. `{"faithful": true}`)
+- Gate 6 addresses a gap Gate 3 cannot: values that are faithful to the note but placed in the wrong field (semantically mismatched)
+- All gates validate key overlap before accepting changes, preventing schema leakage (e.g. `{"faithful": true}`)
 - Per-gate logging in `run.log` shows before/after for every field change
 
 ### V1 — 3-Gate Pipeline (legacy)
@@ -105,12 +118,13 @@ V1 issues: re-extraction can introduce new hallucinations; no schema validation;
 V2 logs detailed gate activity to `run.log`:
 
 ```
-Reason_for_Visit: 3.0s [faith-trimmed]
+Reason_for_Visit: 3.0s [faith-trimmed, semantic-fixed]
   [EXTRACT] raw={"Patient type": "follow up", ...
   [G1-FORMAT] ok, keys=['Patient type', 'second opinion', ...]
   [G2-SCHEMA] ok
   [G3-FAITH] summary: "Follow up for ER+/PR+ IDC..." -> "Follow up for IDC..."
   [G3-FAITH] EMPTIED: []
+  [G6-SEMANTIC] ok (all values answer their fields)
 ```
 
 Each gate reports: `ok`, field-level changes (`before -> after`), `EMPTIED: [fields]`, `FAILED`, or `REJECTED`.
