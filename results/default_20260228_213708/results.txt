@@ -1913,3 +1913,124 @@ RESULTS FOR ROW 15
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 16
+============================================================
+
+--- Column: coral_idx ---
+155
+
+--- Column: note_text ---
+"ID: ***** ***** is a 54 y.o. postmenopausal patient with a recent diagnosis of a Stage I HR+/*****- IDC of the right breast (UOQ) s/p lumpectomy/*****, presenting to clinic to establish care.    Date of Service: 11/17/20    HPI: The patient had an abnormal screening mammogram in July 2020 and subsequent evaluation and treatment are as follows:    08/18/20 Screening mammogram (*****): asymmetry (0.7 cm) in posterior central right breast; left breast unremarkable    08/28/20 Right diag mammo (*****): extremely dense breast tissue; focal asymmetry in middle region of UOQ of right breast  Targeted right breast US: hypoechoic structure (0.5 cm) at 10 position, 4 *****; no right axillary LAD    09/08/20 *****-guided right breast core biopsy at 10 position (*****): atypical borderline lesion, possible tubular carcinoma with ER+ >50%, PR+ >50%, *****- (0+), *****-67 <10%    10/20/20 Right lumpectomy: 0.3 cm grade 1 IDC; no DCIS, margins negative, no *****    The patient underwent menarche at 12 years of age.  She is G0P0.  She is postmenopausal and never took HRT.  Suffers from dyspareunia.    She reports that she has had significant stress ***** ***** job over the last year.  Currently working from home.  She reports history of hip bursitis that she manages through stretching and a yoga practice.  She also has had right sided sciatica that worsens with running.     Past Medical History:   Diagnosis Date   \u0007 Allergic state    \u0007 Bursitis     Mild bursitis, right hip   \u0007 Dyspareunia in female    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Hypercholesteremia    \u0007 Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS code) 11/29/2020   \u0007 Sciatica      Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  05/30/1990    Left breast - small cyst removed       Family History   Problem Relation Name Age of Onset   \u0007 Brain cancer Mother          monitored   \u0007 Colon cancer \n Father ***** ***** 45        He had it twice before 50 years old   \u0007 Cancer Father ***** *****         stomach cancer, 60   \u0007 Osteoporosis Maternal Grandmother     \u0007 Diabetes Neg Hx     \u0007 Clotting disorder Neg Hx     \u0007 Anesth problems Neg Hx       Social History     Socioeconomic History   \u0007 Marital status: Divorced     Spouse name: Not on file   \u0007 Number of children: Not on file   \u0007 Years of education: Not on file   \u0007 Highest education level: Not on file   Occupational History   \u0007 Not on file   Social Needs   \u0007 Financial resource strain: Not on file   \u0007 Food insecurity     Worry: Not on file     Inability: Not on file   \u0007 Transportation needs     Medical: Not on file     Non-medical: Not on file   Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 4.0 standard drinks     Types: 4 Glasses of wine per week   \u0007 Drug use: Yes     Frequency: 1.0 times per week     Types: *****     *****: Very little   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None     Comment: Denies possibility of pregnancy   Lifestyle   \u0007 Physical activity     Days per week: Not on file     Minutes per session: Not on file   \u0007 Stress: Not on file   Relationships   \u0007 Social connections     Talks on phone: Not on file     Gets together: Not on file     Attends religious service: Not on file     Active member of club or organization: Not on file     Attends meetings of clubs or organizations: Not on file     Relationship status: Not on file   \u0007 Intimate partner violence     ***** of current or ex partner: Not on file     Emotionally abused: Not on file     Physically abused: Not on file     Forced sexual activity: Not on file   Other Topics Concern   \u0007 Not on file   Social History Narrative    Lives w boyfriend.  Denies IPV    Exercise currently limited by pandemic restrictions.  Does some YouTube exercises, \n yoga, HIIT, and walking    Diet: Has high LDL and is trying to manage through diet. Eating lots of fruit and vegetables.  Eats everything overall.  Tries to avoid some foods for her heartburn     Outpatient Encounter Medications as of 11/17/2020   Medication Sig Dispense Refill   \u0007 CALCIUM CARBONATE (CALCIUM 500 ORAL) Take by mouth.     \u0007 DIPHENHYDRAMINE HCL (***** SLEEP AID ORAL) Take by mouth. Herbal sleep aid     \u0007 DOCOSAHEXANOIC ACID/EPA (FISH OIL ORAL) Take 1 capsule by mouth Daily.     \u0007 licorice,***** (LICORICE,*****, *****, MISC) by Misc.(Non-Drug; Combo Route) route.     \u0007 multivitamin (MULTIVITAMIN) tablet Take 1 tablet by mouth Daily.     \u0007 ibuprofen (ADVIL,MOTRIN) 600 mg tablet Take 1 tablet (600 mg total) by mouth every 8 (eight) hours. (Patient not taking: Reported on 11/17/2020  ) 60 tablet 0   \u0007 [DISCONTINUED] omeprazole (PRILOSEC) 10 mg capsule Take 1 capsule (10 mg total) by mouth Daily. (Patient not taking: Reported on 05/11/2018) 30 capsule 0   \u0007 [DISCONTINUED] omeprazole (PRILOSEC) 20 mg capsule TAKE 1 CAPSULE (20 MG TOTAL) BY MOUTH DAILY. (Patient not taking: Reported on 05/11/2018) 90 capsule 2     No facility-administered encounter medications on file ***** of 11/17/2020.      Allergies/Contraindications  No Known Allergies      Review of Systems   Genitourinary:        Dyspareunia   Psychiatric/Behavioral: The patient is nervous/anxious.         Physical Exam:   No exam as ZOOM telehealth visit    Studies:  Reviewed above in *****.     Assessment and Recommendations:  54 y.o. postmenopausal patient with a recent diagnosis of a Stage I (*****) *****+/*****- IDC of the right breast, who will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years.    I discussed with the patient in great detail the natural history and treatment of Stage I HR+/*****- breast cancer.  We reviewed her imaging and pathology reports.  She did not have a *****; it is not clear to me, but \n it is possible that Dr. ***** performed lumpectomy alone because she was thought to have a tubular carcinoma which carries a lower risk?  It is not clear to me what the value of a lymph node biopsy would be at this point, but I will reach out to Dr. ***** to clarify.  Additionally, I noted that it was strange how her biomarkers (on her pathology report) were reported >50% for ER and PR - generally the degree of positivity would be more exact.  I will see if there is a way to speak with her pathologist.  .     I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.  I stated that she would start this after radiation.    She will need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.    Finally, she has not had a breast MRI.  She has extremely dense breast tissue.  We should have a conversation with her breast surgeon about surveillance breast MRI moving forward.    Recommendations in *****:  - proceed with radiation oncology evaluation  - plan to treat with aromatase inhibitor; would check estradiol level  - obtain DEXA  - will speak with Dr. \n ***** about absence of *****  - will see if I can speak with pathologist about ER and PR assessments from her biopsy   - given her father's history of colon cancer and her breast cancer history, would refer for genetic testing  - consider surveillance breast MRI in c/o extreme breast density     I spent a total of 80 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Recommendations:  54 y.o. postmenopausal patient with a recent diagnosis of a Stage I (*****) *****+/*****- IDC of the right breast, who will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years.    I discussed with the patient in great detail the natural history and treatment of Stage I HR+/*****- breast cancer.  We reviewed her imaging and pathology reports.  She did not have a *****; it is not clear to me, but \n it is possible that Dr. ***** performed lumpectomy alone because she was thought to have a tubular carcinoma which carries a lower risk?  It is not clear to me what the value of a lymph node biopsy would be at this point, but I will reach out to Dr. ***** to clarify.  Additionally, I noted that it was strange how her biomarkers (on her pathology report) were reported >50% for ER and PR - generally the degree of positivity would be more exact.  I will see if there is a way to speak with her pathologist.  .     I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.  I stated that she would start this after radiation.    She will need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.    Finally, she has not had a breast MRI.  She has extremely dense breast tissue.  We should have a conversation with her breast surgeon about surveillance breast MRI moving forward.    Recommendations in *****:  - proceed with radiation oncology evaluation  - plan to treat with aromatase inhibitor; would check estradiol level  - obtain DEXA  - will speak with Dr. \n ***** about absence of *****  - will see if I can speak with pathologist about ER and PR assessments from her biopsy   - given her father's history of colon cancer and her breast cancer history, would refer for genetic testing  - consider surveillance breast MRI in c/o extreme breast density     I spent a total of 80 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "Telehealth",
+    "summary": "54 y.o. postmenopausal patient with a recent diagnosis of a Stage I HR+/HER2- IDC of the right breast, presenting to clinic to establish care"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "IDC",
+    "Stage_of_Cancer": "Stage I",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "ER+ >50%, PR+ >50%, HER2-",
+    "findings": "0.3 cm grade 1 IDC; no DCIS, margins negative, no lymphovascular invasion"
+  },
+  "Treatment_Summary": {
+    "current_meds": "aromatase inhibitor, calcium, docusate, fish oil, multivitamin",
+    "recent_changes": "Patient not taking ibuprofen, omeprazole",
+    "supportive_meds": "docusate, ibuprofen"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "adjuvant therapy to reduce risk of distant metastasis",
+    "response_assessment": "The patient will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years, which can reduce the risk of distant metastatic recurrence"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "an aromatase inhibitor for 5 years",
+      "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+      "Long term side_effects_discussed": "bone density loss"
+    },
+    "radiotherapy": {
+      "summary": "evaluation and treatment",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "bone therapy": {
+      "summary": "calcium and vitamin D",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "chemotherapy": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "other treatment": {
+      "summary": "DEXA, genetic testing",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "psychiatry medication": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "pain medication": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "bowel regimen": {
+      "summary": "calcium and vitamin D",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "The patient will take an aromatase inhibitor for 5 years, starting after radiation. She will also take calcium and vitamin D."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "The patient will take an aromatase inhibitor for 5 years, starting after radiation."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "evaluation and treatment"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "surveillance breast MRI"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No genetic testing planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "None"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
