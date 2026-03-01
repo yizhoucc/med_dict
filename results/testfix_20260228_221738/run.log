@@ -265,3 +265,88 @@ Processing row 1 (2/7)...
       [G1-FORMAT] ok, keys=['Next clinic visit']
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 59.4s
+  Row 1 total: 83.0s
+  Row 1 saved to progress
+
+Processing row 4 (3/7)...
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1420 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow-up for recurrent breast cancer, left (HCC), with cervical lymphadenopathy and neck pain"
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow-up for recurrent breast cancer, left (HCC), with cerv" -> "Recurrent breast cancer, left (HCC), with cervical lymphaden"
+    What_We_Found: 5.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III, now metastatic",
+  "Distant Metastasis": "Yes, to cervical lymph nodes",
+  "Metastasis": "Y
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Distant Metastasis: "Yes, to cervical lymph nodes" -> "Yes, to cervical lymph nodes and left axillary, left level 5"
+    Treatment_Summary: 8.0s
+      [EXTRACT] raw={
+  "current_meds": "leuprolide, anastrozole, palbociclib, amLODIPine, anastrozole, escitalopram oxalate, gabapentin, hydroCHLOROthiazide, ondansetron, palbociclib, potassium chloride, venlafaxine",
+ 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 2.8s
+      [EXTRACT] raw={
+  "goals_of_treatment": "Palliative",
+  "response_assessment": "Cervical lymphadenopathy and neck pain, left brachial plexus involvement; will continue current therapy and get restaging studies prio
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 19.4s
+    Medication_Plan_chatgpt: 28.6s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "palbociclib started April 2019",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": {
+    "sum
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+  "medication_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Labs monthly on the day of lupron injection. CT and bone scan ordered and can be done once authorized pr
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 3.4s
+      [EXTRACT] raw={
+  "therapy_plan": "Continue current therapy with leuprolide, anastrozole, and palbociclib. Plan to get restaging studies prior to next visit. Radiation oncology referral."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    radiotherapy_plan: 1.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "Radiation oncology referral" -> "Radiation oncology referral for symptomatic disease in the l"
