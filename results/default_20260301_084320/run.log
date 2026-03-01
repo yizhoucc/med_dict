@@ -14288,3 +14288,87 @@ Processing row 95 (96/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] findings: "Patient is recovering well after surgery" -> "recovering well after surgery, planned to see Dr. ***** for consideration of adj"
+    Treatment_Summary: 8.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Tamoxifen",
+  "recent_changes": "",
+  "supportive_meds": "cholecalciferol, folic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "None"
+    Goals_of_care: 8.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note discusses the use of locoregional therapies 
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "recovering well after surgery, low-grade, low proliferation rate"
+  Extraction prompts: 44.4s
+    Medication_Plan_chatgpt: 32.8s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Tamoxifen after completion of adjuvant radiation. If ***** test is in the higher end of intermediate, may discuss the potential benefit of *****/*****.",
+    
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 5.6s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "Tamoxifen after completion of adjuvant radiation, and ***** test results will determine if an aromatase inhibitor will be added."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Tamoxifen after completion of adjuvant radiation, and ***** " -> "Tamoxifen after completion of adjuvant radiation, and ***** "
+      [G4-TEMPORAL] medication_plan: "Tamoxifen after completion of adjuvant radiation, and ***** test results will de" -> "Tamoxifen after completion of adjuvant radiation, ***** test results will determ"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.7s
+      [EXTRACT] raw={
+  "therapy_plan": "Tamoxifen after completion of adjuvant radiation, ***** test results will determine if an aromatase inhibitor will be added, or if ***** test is in the higher end of intermediate,
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Proceed with adjuvant radiation consult, wait to start xrt until after ***** comes back."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.0s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
