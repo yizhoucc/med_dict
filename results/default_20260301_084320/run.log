@@ -6793,3 +6793,74 @@ Processing row 45 (46/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The patient has 3.5 cm residual disease, positive margins, 2"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 40.7s
+    Medication_Plan_chatgpt: 44.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "completed Taxol followed by radiation therapy on 05/26/21",
+    "Short term side_effects_discussed": "myalgias",
+    "Long term side_effects_discussed": "joint ac
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.4s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "continue naproxen 500mg BID, APAP prn, tramadol prn, letrozole, iron PO, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "continue naproxen 500mg BID, APAP prn, tramadol prn, letrozole, iron PO, allegra" -> "naproxen 500mg BID, APAP prn, tramadol prn, letrozole, iron PO, allegra daily"
+      [G6-SEMANTIC] medication_plan: "naproxen 500mg BID, APAP prn, tramadol prn, letrozole, iron PO, allegra daily" -> "continue naproxen 500mg BID, APAP prn, tramadol prn, letrozole, iron PO, allegra"
+    Therapy_plan: 2.0s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "continue letrozole"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "continue letrozole" -> "will start letrozole"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.9s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "completed on 05/26/21"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "Right breast cancer S/p right partial mastectomy with 3.5 cm residual disease with positive margins, 2/2 positive nodes with extranodal extension. Re-excision of margins pending
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Right breast cancer S/p right partial mastectomy with 3.5 cm residual disease wi" -> "Re-excision of margins pending"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "imaging_plan": "PFT, chest imaging, sarcoid related blood tests"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] imaging_plan: "PFT, chest imaging, sarcoid related blood tests" -> "chest imaging"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.0s [temporal-cleaned]
+      [EXTRACT] raw={
+  "lab_plan": "iron panel, baseline dexa"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] lab_plan: "iron panel, baseline dexa" -> "baseline dexa"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
