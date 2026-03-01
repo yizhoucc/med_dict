@@ -6608,3 +6608,73 @@ Processing row 44 (45/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "New patient evaluation for metastatic triple negative breast" -> "Malignant neoplasm of overlapping sites of right breast in f"
       [G6-SEMANTIC] summary: "Malignant neoplasm of overlapping sites of right breast in female, estrogen rece" -> "Patient with metastatic triple negative breast cancer to the lung and right hila"
+    What_We_Found: 5.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Triple negative breast cancer",
+  "Stage_of_Cancer": "Stage IIIB",
+  "Distant Metastasis": "Yes, to lung",
+  "Metastasis": "Yes",
+  "lab_summary": "",
+  "findings": "Metastatic 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Metastatic disease to the lung and right hilar lymph node" -> "Metastatic breast cancer to the lung and right hilar lymph n"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Xeloda",
+  "recent_changes": "",
+  "supportive_meds": "Reishi mushroom, Papaya enzymes, ****** /sea  mullein extract"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "She did not complete taxol but had the equivalent of August "
+      [G6-SEMANTIC] recent_changes: "She did not complete taxol but had the equivalent of August 08 weeks" -> "Did not complete taxol"
+    Goals_of_care: 2.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note" -> "We discussed how metastatic triple negative breast cancer is"
+      [G6-SEMANTIC] response_assessment: "We discussed how metastatic triple negative breast cancer is not curable but is " -> "The cancer is not curable but is treatable."
+  Extraction prompts: 17.9s
+    Medication_Plan_chatgpt: 39.2s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Starting on ***** and gemzar carboplatin asap, second line treatment options include ***** and clinical trials (FGFR inhibitor) or other (eribulin or doxil)",
+   
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'adjuvant radiation', 'Short term side_effects_discussed': None, 'Lo" -> "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff"
+      [G4-TEMPORAL] other treatment: "{'summary': 'xeloda', 'Short term side_effects_discussed': None, 'Long term side" -> "{'summary': 'plan to start after certain conditions', 'Short term side_effects_d"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Starting on ***** and gemzar carboplatin asap, second line treatmen" -> "{'summary': 'Starting on ***** and gemzar carboplatin asap', 'Short term side_ef"
+      [G6-SEMANTIC] radiotherapy: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> "{'summary': 'adjuvant radiation', 'Short term side_effects_discussed': None, 'Lo"
+      [G6-SEMANTIC] other treatment: "{'summary': 'plan to start after certain conditions', 'Short term side_effects_d" -> "{'summary': 'plan to start ***** and clinical trials (FGFR inhibitor) or other ("
+    Medication_Plan: 5.2s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Starting on ***** and gemzar carboplatin asap, plan to start ***** and clinical trials (FGFR inhibitor) or other (eribulin or doxil) after current treatment, xeloda"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Starting on ***** and gemzar carboplatin asap, plan to start ***** and clinical " -> "plan to start gemzar carboplatin asap, plan to start ***** and clinical trials ("
+      [G6-SEMANTIC] medication_plan: "plan to start gemzar carboplatin asap, plan to start ***** and clinical trials (" -> "gemzar carboplatin asap, ***** and clinical trials (FGFR inhibitor) or other (er"
+    Therapy_plan: 5.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "adjuvant radiation, plan to start ***** and gemzar carboplatin asap, plan to start ***** and clinical trials (FGFR inhibitor) or other (eribulin or doxil) after current treatment"
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "adjuvant radiation, plan to start ***** and gemzar carboplat" -> "adjuvant radiation, plan to start gemzar carboplatin asap, p"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] therapy_plan: "adjuvant radiation, plan to start gemzar carboplatin asap, plan to start ***** a" -> "adjuvant radiation, gemzar carboplatin asap, clinical trials (FGFR inhibitor) or"
+    radiotherapy_plan: 1.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "adjuvant radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
