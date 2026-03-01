@@ -1,4 +1,4 @@
-Source: default.yaml | Run started: 2026-02-28 20:05:45
+Source: default_v1.yaml | Run started: 2026-02-28 20:12:29
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -221,26 +221,26 @@ RESULTS FOR ROW 11
 {
   "Reason_for_Visit": {
     "Patient type": "Follow up",
-    "second opinion": "",
+    "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient with metastatic breast cancer, stage III C infiltrating ductal carcinoma, for follow up and evaluation of worsening symptoms including jaw numbness, leg pain, and numbness."
+    "summary": "Patient with metastatic breast cancer, for follow up and evaluation of worsening symptoms including jaw numbness, leg pain, and numbness."
   },
   "What_We_Found": {
     "Type_of_Cancer": "breast cancer",
-    "Stage_of_Cancer": "III C",
+    "Stage_of_Cancer": "not mentioned",
     "Distant Metastasis": "Yes, to bone",
     "Metastasis": "Yes, to bone",
-    "lab_summary": "WBC 5.6, RBC 5.25, Hemoglobin 15.0, Hematocrit 46.3, MCV 88, MCH 28.6, MCHC 32.5, Platelet Count 221, Neutrophil Absolute Count 3.49, Lymphocyte Abs Cnt 1.47, Monocyte Abs Count 0.49, Eosinophil Abs Ct 0.14, Basophil Abs Count 0.03, Alanine transaminase 10, Aspartate transaminase 17, Urea Nitrogen, Serum / Plasma 9, Bilirubin, Total 0.9, Chloride, Serum / Plasma 105, Carbon Dioxide, Total 23, Anion Gap 9, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 4.2, Glucose, non-fasting 117, Creatinine 0.49, eGFR ",
-    "findings": "Patient has metastatic breast cancer with metastasis to bone, jaw numbness, leg pain, and numbness, and thrush."
+    "lab_summary": "WBC 5.6, RBC 5.25, Hemoglobin 15.0, Hematocrit 46.3, MCV 88, MCH 28.6, MCHC 32.5, Platelet Count 221, Neutrophil Absolute Count 3.49, Lymphocyte Abs Cnt 1.47, Monocyte Abs Count 0.49, Eosinophil Abs Ct 0.14, Basophil Abs Count 0.03, Alanine transaminase 10, Aspartate transaminase 17, Urea Nitrogen, Serum / Plasma 9, Bilirubin, Total 0.9, Chloride, Serum / Plasma 105, Carbon Dioxide, Total 23, Anion Gap 9, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 4.2, Glucose, non-fasting 117, Creatinine 0.49, eGFR >60",
+    "findings": "Patient has metastatic breast cancer, jaw numbness, leg pain, and numbness, with worsening symptoms over the last 2 weeks."
   },
   "Treatment_Summary": {
-    "current_meds": "Faslodex, Denosumab",
-    "recent_changes": "",
-    "supportive_meds": "Acetaminophen, Aspirin, Docusate sodium, Hydrocodone-acetaminophen, Levothyroxine, Lovastatin, Metformin, Multivitamin, Senna-docusate"
+    "current_meds": "Fulvestrant (Faslodex), Denosumab (Xgeva), Letrozole",
+    "recent_changes": "None mentioned",
+    "supportive_meds": "Acetaminophen (Tylenol), Aspirin, Docusate (Colace), Hydrocodone-Acetaminophen (Lortab, Vicodin), Levothyroxine (Synthroid), Lovastatin (Mevacor), Metformin (Glucophage), Multivitamin"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "To evaluate and extend",
+    "response_assessment": "The cancer is not explicitly stated to be responding or not responding to treatment, but the patient is experiencing worsening symptoms."
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -258,23 +258,8 @@ RESULTS FOR ROW 11
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     },
-    "radiotherapy": {
-      "summary": "S/p xrt to jaw",
-      "Short term side_effects_discussed": "improved pain with residual numbness",
-      "Long term side_effects_discussed": null
-    },
     "bowel regimen": {
       "summary": "Mycelex ***** qid for 14 days",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "pain medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "psychiatry medication": {
-      "summary": null,
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     },
@@ -285,22 +270,22 @@ RESULTS FOR ROW 11
     }
   },
   "Medication_Plan": {
-    "medication_plan": "Continue on Faslodex, Continue on Denosumab, Mycelex ***** qid for 14 days, salt and soda rinses"
+    "medication_plan": "Continue on Faslodex, Continue on Denosumab, Mycelex ***** qid for 14 days"
   },
   "Therapy_plan": {
-    "therapy_plan": "Continue on Faslodex, Continue on Denosumab"
+    "therapy_plan": "Continue on Faslodex as part of chemotherapy, Continue on Denosumab as part of bone therapy"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "S/p xrt to jaw"
   },
   "Procedure_Plan": {
-    "procedure_plan": "MRI of lumbar, pelvis and right femur, PET/CT to evaluate Femur"
+    "procedure_plan": "surgery"
   },
   "Imaging_Plan": {
-    "imaging_plan": "MRI of lumbar, pelvis and right femur, PET/CT to evaluate Femur"
+    "imaging_plan": "MRI of lumbar, pelvis and right femur, PETCT to evaluate Femur"
   },
   "Lab_Plan": {
-    "lab_plan": "None"
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
@@ -308,12 +293,12 @@ RESULTS FOR ROW 11
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "None",
+    "Specialty": "Radiation oncology",
     "Others": "None",
-    "follow up": "None"
+    "follow up": "f/u"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "None"
+    "Next clinic visit": "f/u"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -341,31 +326,31 @@ RESULTS FOR ROW 12
 --- Column: keypoints ---
 {
   "Reason_for_Visit": {
-    "Patient type": "",
+    "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Metastatic breast cancer, stage IV, follow up visit for restaging and management of metastatic disease"
+    "summary": "Metastatic breast cancer, follow up visit"
   },
   "What_We_Found": {
     "Type_of_Cancer": "breast cancer",
-    "Stage_of_Cancer": "IV",
-    "Distant Metastasis": "Yes, to lung, nodes, brain, and bone",
-    "Metastasis": "Yes, to lung, nodes, brain, and bone",
+    "Stage_of_Cancer": "not specified",
+    "Distant Metastasis": "Yes, to brain, lung, nodes, bone",
+    "Metastasis": "Yes, to brain, lung, nodes, bone",
     "lab_summary": "",
-    "findings": "New CNS lesions on MRI brain, stable appearance of diffuse osseous metastatic lesions, slight interval decrease in size of 7 mm celiac axis lymph node"
+    "findings": "stable diffuse osseous metastatic disease, interval resolution of right pleural effusion, new enhancing lesions in the left superior frontal gyrus and right precentral gyrus"
   },
   "Treatment_Summary": {
-    "current_meds": "herceptin, ***** (no chemo given due to anemia), letrozole",
-    "recent_changes": "",
-    "supportive_meds": "aspirin, letrozole, cholecalciferol, guaifenesin-codeine, magnesium oxide"
+    "current_meds": "herceptin, letrozole",
+    "recent_changes": "cont letrozole qd, cont ***** q12 wks, cont off chemotherapy for now, due to intolerance to multiple agents",
+    "supportive_meds": "aspirin, magnesium oxide"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "continue treatment with herceptin, ***** and letrozole to extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "continue herceptin and ***** alone, continue letrozole qd, continue ***** q12 wks, off chemotherapy for now",
+    "response_assessment": "compatible with treatment response"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
-      "summary": "continue herceptin and ***** alone, continue letrozole qd, continue *****; now q12 wks given stable bone status, stopped due to intolerance",
+      "summary": "continue herceptin and ***** alone, continue letrozole qd, continue *****; now q12 wks given stable bone status",
       "Short term side_effects_discussed": "not mentioned",
       "Long term side_effects_discussed": "not mentioned"
     },
@@ -406,19 +391,19 @@ RESULTS FOR ROW 12
     }
   },
   "Medication_Plan": {
-    "medication_plan": "continue herceptin, continue letrozole qd, continue *****; continue *****; await GK / Rad Onc input, and potential plan for repeat GK"
+    "medication_plan": "Continue herceptin, ***** and letrozole qd. Continue *****. Continue ***** q12 wks. Await GK/Rad Onc input and potential plan for repeat GK."
   },
   "Therapy_plan": {
-    "therapy_plan": "continue herceptin, continue letrozole qd, continue *****"
+    "therapy_plan": "Await GK/Rad Onc input and potential plan for repeat GK."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+    "radiotherapy_plan": "Await GK / Rad Onc input, and potential plan for repeat GK."
   },
   "Procedure_Plan": {
-    "procedure_plan": "GK"
+    "procedure_plan": "plan for repeat GK"
   },
   "Imaging_Plan": {
-    "imaging_plan": "MRI brain every 4 months, CT CAP every 4 months"
+    "imaging_plan": "MRI brain every 4 months, CT CAP every 4 months, bone scan with next evaluation in 4 months"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -462,52 +447,52 @@ RESULTS FOR ROW 13
 --- Column: keypoints ---
 {
   "Reason_for_Visit": {
-    "Patient type": "",
+    "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
     "summary": "Recently diagnosed left ER+ nuclear grade 2 DCIS, s/p left partial mastectomy, to discuss systemic therapy options"
   },
   "What_We_Found": {
     "Type_of_Cancer": "DCIS",
-    "Stage_of_Cancer": "",
+    "Stage_of_Cancer": "nuclear grade 2 DCIS",
     "Distant Metastasis": "No",
     "Metastasis": "No",
     "lab_summary": "",
-    "findings": "status post left partial mastectomy with clear margins, no evidence of infection or expanding seroma, no palpable lymphadenopathy"
+    "findings": "Margins clear after left partial mastectomy"
   },
   "Treatment_Summary": {
     "current_meds": "Tamoxifen",
     "recent_changes": "",
-    "supportive_meds": "ibuprofen, multivitamin, turmeric"
+    "supportive_meds": "Ibuprofen, multivitamin, turmeric"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "The primary treatment is definitive surgery, goal is to reduce local/regional recurrence, and the patient is considering the role of tamoxifen to reduce recurrence risk",
+    "goals_of_treatment": "Discuss adjuvant radiation and its benefit in reducing local/regional recurrence, and the role of tamoxifen in reducing recurrence risk",
     "response_assessment": ""
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
       "summary": "Tamoxifen for 5 years",
       "Short term side_effects_discussed": "hot flashes, vaginal discharge, headache/migraines, vaginal dryness, mood instability, sexual dysfunction, ovarian cysts, increase in fibroids, impact on uterus including endometrial changes and abnormal vaginal bleeding",
-      "Long term side_effects_discussed": ""
+      "Long term side_effects_discussed": "small increase risk of endometrial cancer (0.5%) and thrombosis (1-2%)"
     }
   },
   "Medication_Plan": {
     "medication_plan": "Tamoxifen for 5 years"
   },
   "Therapy_plan": {
-    "therapy_plan": "discussed starting tamoxifen, plan to discuss adjuvant radiation and its benefit in reducing local/regional recurrence"
+    "therapy_plan": "The patient will discuss with radiation oncology to discuss adjuvant radiation and its benefit in reducing local/regional recurrence."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "discussed adjuvant radiation and its benefit in reducing local/regional recurrence"
+    "radiotherapy_plan": "discussed with radiation oncology to discuss adjuvant radiation and its benefit in reducing local/regional recurrence"
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "MRI"
+    "imaging_plan": "No imaging planned."
   },
   "Lab_Plan": {
-    "lab_plan": ""
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
@@ -549,51 +534,31 @@ RESULTS FOR ROW 14
 {
   "Reason_for_Visit": {
     "Patient type": "follow up",
-    "second opinion": "",
+    "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Follow up for metastatic ER+ breast cancer, stage not specified, for follow-up after extensive spine surgery and radiation therapy"
+    "summary": "Follow up for metastatic ER+ breast cancer, for follow-up after extensive spine surgery and postoperative radiotherapy to the spine"
   },
   "What_We_Found": {
-    "Type_of_Cancer": "Metastatic ER+ breast cancer",
-    "Stage_of_Cancer": "",
+    "Type_of_Cancer": "breast cancer",
+    "Stage_of_Cancer": "not specified",
     "Distant Metastasis": "Yes, to bone, liver, and nodes",
     "Metastasis": "Yes, to bone, liver, and nodes",
     "lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin 0.7, Urea Nitrogen 6, Calcium 8.7, Chloride 109, Creatinine 0.47, eGFR 109, Potassium 4.3, Sodium 145, Protein 7.4, Carbon Dioxide 22, Anion Gap 9, Glucose 117",
-    "findings": "Patient's nerve pain in lower right rib is slightly improved, lower back is less numb, mobility is better, and she is able to walk more now."
+    "findings": "Patient's nerve pain in lower right rib is slightly improved, lower back is less numb, she is able to walk more now, and she has intermittent cramping in her feet"
   },
   "Treatment_Summary": {
-    "current_meds": "Faslodex, Palbociclib, low dose chemo combination of Tamoxifen 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly, Metabolic therapy 2x/week, immunological vaccines once a week, pamidronate once weekly",
-    "recent_changes": "Stopped Palbociclib and Fulvestrant, reduced dose of bone drug",
+    "current_meds": "Faslodex, Palbociclib, low dose chemo (Gemcitabine, Docetaxel), pamidronate, immunological vaccines",
+    "recent_changes": "Patient stopped taking Ibrance and Fulvestrant",
     "supportive_meds": "Cymbalta, Nerve support, Sulfur, CBD"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "The goal is to extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "Cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+    "response_assessment": "Patient is tolerating her therapy well"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
-      "summary": "currently on low dose chemo combination of ***** 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week and gets immunological vaccines once a week, Receives pamidronate once weekly",
+      "summary": "currently on low dose chemo combination of Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week",
       "Short term side_effects_discussed": "chills after bone drug, still felt sick afterwards",
-      "Long term side_effects_discussed": ""
-    },
-    "hormonal therapy": {
-      "summary": "stopped palbociclib and fulvestrant",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "Receives pamidronate once weekly",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "postoperative radiotherapy to the spine including T1 through T10 on *****/*****/*****-*****/*****/18, only received total of 6 treatments (supposed to get 10 total radiation treatments) due to esophagitis",
-      "Short term side_effects_discussed": "esophagitis",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "Rx given for Cymbalta",
-      "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     },
     "bowel regimen": {
@@ -601,37 +566,37 @@ RESULTS FOR ROW 14
       "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     },
-    "psychiatry medication": {
-      "summary": "",
+    "pain medication": {
+      "summary": "Rx given for Cymbalta",
       "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     },
     "other treatment": {
-      "summary": "Gabapentin, insulin",
-      "Short term side_effects_discussed": "Gabapentin without much relief",
+      "summary": "insulin",
+      "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     }
   },
   "Medication_Plan": {
-    "medication_plan": "continue topical cannabis and sulfur, Cymbalta, low dose chemo combination of  10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week and gets immunological vaccines once a week, Receives pamidronate once weekly, insulin"
+    "medication_plan": "She is currently on low dose chemo combination of Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week, and pamidronate once weekly. A prescription was given for Cymbalta. She wants to schedule CT CAP and Total Spine MRI for May. She will continue topical cannabis and sulfur. She will start insulin."
   },
   "Therapy_plan": {
-    "therapy_plan": "continue, will start low dose chemo combination of  10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, postoperative radiotherapy to the spine including T1 through T10, Receives pamidronate once weekly"
+    "therapy_plan": "She is currently on faslodex and palbociclib. She will start chemotherapy combination of Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, and pamidronate once weekly."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "postoperative radiotherapy to the spine including T1 through T10"
+    "radiotherapy_plan": "postoperative radiotherapy to the spine including T1 through T10 on *****/*****/*****-*****/*****/18, only received total of 6 treatments (supposed to get 10 total radiation treatments) due to esophagitis"
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "CT CAP and Total Spine MRI for May"
+    "imaging_plan": "She will schedule CT CAP and Total Spine MRI for May."
   },
   "Lab_Plan": {
-    "lab_plan": "labs every 2 weeks"
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
   },
   "Referral": {
     "Nutrition": "None",
@@ -669,31 +634,31 @@ RESULTS FOR ROW 15
 --- Column: keypoints ---
 {
   "Reason_for_Visit": {
-    "Patient type": "",
+    "Patient type": "New patient",
     "second opinion": "Yes",
     "in-person": "in-person",
     "summary": "Newly diagnosed breast cancer, mixed infiltrating ductal and lobular carcinoma, seeking second opinion on diagnosis, prognosis, and treatment options"
   },
   "What_We_Found": {
     "Type_of_Cancer": "Mixed Infiltrating Ductal and Lobular Carcinoma",
-    "Stage_of_Cancer": "",
+    "Stage_of_Cancer": "Clin st I/II",
     "Distant Metastasis": "No",
     "Metastasis": "No",
     "lab_summary": "Estrogen receptor: Positive (>95%), Progesterone receptor: Positive (80-90%), HER2-neu: Equivocal (2+)",
     "findings": "Left breast cancer, known periareolar carcinoma, no evidence of multifocal or multicentric disease"
   },
   "Treatment_Summary": {
-    "current_meds": "",
-    "recent_changes": "",
-    "supportive_meds": ""
+    "current_meds": "None",
+    "recent_changes": "None",
+    "supportive_meds": "None"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Pt is young, fit and stands to have large potential benefit from HER2-targeted Rx if HER2-driven, so would consider her HER2-targeted Rx and would therefore treat her accordingly",
-    "response_assessment": ""
+    "goals_of_treatment": "The patient is a young, fit patient and the goal is to consider treatment options that may have a large potential benefit, including targeted therapy",
+    "response_assessment": "Not applicable, as this is an initial consultation"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
-      "summary": "TCHP regimen",
+      "summary": "will favor TCHP regimen",
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     },
@@ -702,43 +667,23 @@ RESULTS FOR ROW 15
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     },
-    "radiotherapy": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "bowel regimen": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "pain medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "psychiatry medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
     "other treatment": {
-      "summary": null,
+      "summary": "discussed that an alternative, equally reasonable option would be to receive hormone therapy first",
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     }
   },
   "Medication_Plan": {
-    "medication_plan": "will consider hormone therapy, if opted, would favor TCHP regimen"
+    "medication_plan": "Will favor TCHP regimen. Will consider her hormone therapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "will consider hormone therapy, if opted, would favor TCHP regimen"
+    "therapy_plan": "Will favor TCHP regimen. Will favor TCHP regimen if pt proceeds with chemotherapy."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "discussed with Dr. ***** *****"
+    "radiotherapy_plan": "We will explore this option further with breast surg/Dr. *****"
   },
   "Procedure_Plan": {
-    "procedure_plan": "plan for breast surgery"
+    "procedure_plan": "We will explore this option further with breast surg/Dr. *****. Pt will explore this option further with breast surg/Dr. *****"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -752,12 +697,12 @@ RESULTS FOR ROW 15
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Radiation oncology",
+    "Specialty": "None",
     "Others": "None",
     "follow up": "None"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "will be seen by Dr. ***** *****"
+    "Next clinic visit": "Pt will see Dr. ***** later today."
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
