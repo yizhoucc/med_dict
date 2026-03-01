@@ -10540,3 +10540,99 @@ RESULTS FOR ROW 95
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 96
+============================================================
+
+--- Column: coral_idx ---
+235
+
+--- Column: note_text ---
+"Patient name  ***** ***** *****     Date of service  03/31/2021        Subjective      ***** ***** ***** is a 47 y.o. pre-menopausal female referred by ***** ***** *****, MD for initial consideration of systemic treatments. She was recently diagnosed with ***** *****+/*****- invasive carcinoma with tubular features and is s/p partial mastectomy on 03/11/21 with ***** *****+/*****- mixed ductal and cribiform carcinoma.     Her full oncologic history is as detailed below:       ONCOLOGIC HISTORY  Specialty Problems        Malignant Neoplasms    1. Breast cancer, left (CMS code)     Overview      October 2013 last normal screening mammo   12/05/20 Screening mammo 11 mm spiculated mass in the left breast at 4:00 -   5:00  12/10/20 left breast u/s no correlate for the mass seen on screening mammo  12/10/20 stereotactic guided vacuum assisted core biopsy of the left breast   mass. Path = grade I invasive carcinoma with tubular features. ER (3+,   91-100%), PR (3+, 91-100%), ***** 1+ and FISH 1.February 11.6 = 1.2, *****-67 1%. AR+   (91-100%). Low grade DCIS  12/21/20 ***** MRI:  Left breast spiculated enhancing mass measuring 13 mm x 17mm x 13mm. 12mm   of NME medial to primary mass. And another 13mm of linear NME around 2:00.   Axillary LN with minimal asymmetrical ***** thickening.   Right breast *****  12/30/20 MRI guided biopsy of 2:00 lesion attempted but not done as it   didn't look suspicious on this exam  01/20/21 Invitae genetic testing: negative (but only 9 genes were analyzed)   Had a more extensive panel which showed some VUS - report not available   02/05/21 Initial UCSF consultation with Dr. *****  03/11/21 Left breast partial mastectomy. Path = 1.8cm of grade I mixed   ductal and cribiform carcinoma. No *****, Negative margins. ER (June 13+, ~60%),   PR (June 14+, ~50%), ***** 0 and FISH 2.June 12.8 = 1.2, *****-67 ~5%. Also had ALH,   apocrine metaplasia and cysts, and ***** in association with   invasive. carcinoma. 0/2 LN with carcinoma.  \n pT1cN0(sn)              History of Present Illness  She is overall recovering well after surgery. She is planned to see Dr. ***** next week for consideration of adjuvant RT      Past Medical History:   Diagnosis Date   \u0007 Allergy 2005   \u0007 Breast cancer (CMS code) 12/10/2020   \u0007 Cervical polyp    \u0007 GERD (gastroesophageal reflux disease) 2012                Past Surgical History:   Procedure Laterality Date   \u0007 APPENDECTOMY  1990   \u0007 CYSTOSCOPY     \u0007 egg *****       x 2    \u0007 MASTECTOMY COMPLETE / SIMPLE W/ SENTINEL NODE BIOPSY Left 03/11/2021       Social History     Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 0.10     Years: 10.00     ***** years: 1.00     Types: Cigarettes     Start date: 01/11/1996     Quit date: 06/12/2006     Years since quitting: 14.8   \u0007 Smokeless tobacco: Never Used   \u0007 Tobacco comment: I mainly smoked socially (light user). I had to quit to force my husband to quit (heavy user).   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 0.0 standard drinks     Comment: socially/occasionally   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male     Birth control/protection: None   Social History Narrative    Menarche: 14 previously regular, but irregular more recently     *****       Family History   Problem Relation Name Age of Onset   \u0007 Other (gallbladder cancer) Paternal Grandmother ***** 80   \u0007 Prostate cancer Maternal Grandfather ion 70   \u0007 Cervical cancer Sister ***** 40       Allergies/Contraindications   Allergen Reactions   \u0007 Other      coffee   \u0007 Apple      Allergy skin test   \u0007 ***** Analogues      Allergy skin test       Current Outpatient Medications   Medication Instructions   \u0007 cholecalciferol, vitamin D3, 400 unit CAP 1 capsule, Oral   \u0007 folic acid (FOLVITE) 400 mcg, Oral, Daily Scheduled              Objective         Vitals    03/31/21 1125   BP: (!) *****/*****   Pulse: 88   Resp: 16   Temp: 36.6 C (97.8 F)   TempSrc: Temporal \n   SpO2: 99%   Weight: 94.3 kg (208 lb)   Height: 173.5 cm (5' 8.31\")   *****:  0       Wt Readings from Last 3 Encounters:   03/11/21 90.7 kg (200 lb)   03/04/21 90.7 kg (200 lb)       ECOG performance status: 0 - Asymptomatic    Physical Exam      Constitutional:  WD, WN, NAD  Skin: warm, moist, no rashes or lesions  Eyes: sclera anicteric, PERRL, EOMI.   HENT: sinuses nontender, nasal mucosa intact, pharynx without erythema, no thrush.   Lymph Nodes: no cervical, supraclavicular, or axillary lymphadenopathy.    Respiratory: BL lungs CTA, resonant to percussion, no wheezes, rhonchi, or crackles  Cardiovascular: normal heart rate, normal rhythm, no murmurs, no edema  Breast: s/p left lumpectomy. Mild ***** of left arm. No lymphadenopathy  GI: bowel sounds normal, soft, nontender, no distention, no organomegaly   Musculoskeletal: no point tenderness over bones or joints   Neurologic: alert & oriented x 3, no focal motor or sensory deficits  Psychiatric: mood stable      Review of Prior Testing  LABS  I personally reviewed and interpreted each of the patient's relevant lab tests as outlined in my Assessment/Plan and in my HPI/Oncologic History    No results found for this or any previous visit.       RADIOLOGY  I personally reviewed and interpreted the patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as outlined in my Assessment/Plan and in my HPI/Oncologic History    Per onc timeline        PATHOLOGY and GENOMICS/BIOMARKERS    Per Onc timeline      Assessment and Plan       ***** ***** ***** is a 47 y.o. pre-menopausal woman with recently diagnosed ***** *****+/*****- invasive carcinoma with tubular features and is s/p partial mastectomy on 03/11/21 with ***** *****+/*****- mixed ductal and cribiform carcinoma on final pathology.     We had a lengthy discussion with the patient in which we reviewed her breast cancer diagnosis, workup and treatment history to date. We \n reviewed all of the relevant and available clinic notes, imaging, and pathology reports.     We discussed the use of locoregional therapies to reduce risk of locoregional disease and the use of systemic therapies to primarily reduce risk of systemic recurrence, which can potentially be incurable.     Because she has HR+ disease, she will need at least 5 years of hormonal therapy. Data from *****/TEXT trial demonstrated that patient who were premenopausal at their breast cancer diagnosis and recovered ovarian function after completion of chemotherapy, the combination of ovarian suppression and an aromatase inhibitor was superior to tamoxifen in terms of preventing distant recurrence. However, given the low grade and low proliferation rate of her tumor, we do not believe she will benefit chemotherapy. We discussed that molecular tests such as ***** can be helpful for situations where the decision regarding chemotherapy may not be as clear. She is interested in her ***** score and we will order. In the meantime she can proceed with radiation consult and sim, not to start xrt until after ***** result comes back.    Given she is pre-menopausal, and has a low grade/low proliferation tumor, we would recommend she start with tamoxifen after completion of adjuvant radiation. If her ***** test is in the higher end of intermediate we can discuss the potential benefit of *****/*****, otherwise tamoxifen will likely be sufficient.     We discussed the importance of exercise - at least 150min of aerobic exercises per week, weight bearing exercises at least 2x a week, and to reduce alcohol and sugar/***** intake.       Plan  - ***** send for ***** testing  - Proceed with adjuvant radiation consult, wait to start xrt until after ***** comes back.  - Tamoxifen after completion of adjuvant radiation       RTC after radiation to discuss hormone therapy in greater detail.      Below for billing only    I reviewed external \n records from 1 providers outside my specialty or healthcare organization as summarized in the note.    I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.        {Problems: patient's active cancer represents a life-threatening illness    \n"
+
+--- Column: assessment_and_plan ---
+"Assessment/Plan and in my HPI/Oncologic History    No results found for this or any previous visit.       RADIOLOGY  I personally reviewed and interpreted the patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as outlined in my Assessment/Plan and in my HPI/Oncologic History    Per onc timeline        PATHOLOGY and GENOMICS/BIOMARKERS    Per Onc timeline      Assessment and Plan       ***** ***** ***** is a 47 y.o. pre-menopausal woman with recently diagnosed ***** *****+/*****- invasive carcinoma with tubular features and is s/p partial mastectomy on 03/11/21 with ***** *****+/*****- mixed ductal and cribiform carcinoma on final pathology.     We had a lengthy discussion with the patient in which we reviewed her breast cancer diagnosis, workup and treatment history to date. We \n reviewed all of the relevant and available clinic notes, imaging, and pathology reports.     We discussed the use of locoregional therapies to reduce risk of locoregional disease and the use of systemic therapies to primarily reduce risk of systemic recurrence, which can potentially be incurable.     Because she has HR+ disease, she will need at least 5 years of hormonal therapy. Data from *****/TEXT trial demonstrated that patient who were premenopausal at their breast cancer diagnosis and recovered ovarian function after completion of chemotherapy, the combination of ovarian suppression and an aromatase inhibitor was superior to tamoxifen in terms of preventing distant recurrence. However, given the low grade and low proliferation rate of her tumor, we do not believe she will benefit chemotherapy. We discussed that molecular tests such as ***** can be helpful for situations where the decision regarding chemotherapy may not be as clear. She is interested in her ***** score and we will order. In the meantime she can proceed with radiation consult and sim, not to start xrt until after ***** result comes back.    Given she is pre-menopausal, and has a low grade/low proliferation tumor, we would recommend she start with tamoxifen after completion of adjuvant radiation. If her ***** test is in the higher end of intermediate we can discuss the potential benefit of *****/*****, otherwise tamoxifen will likely be sufficient.     We discussed the importance of exercise - at least 150min of aerobic exercises per week, weight bearing exercises at least 2x a week, and to reduce alcohol and sugar/***** intake.       Plan  - ***** send for ***** testing  - Proceed with adjuvant radiation consult, wait to start xrt until after ***** comes back.  - Tamoxifen after completion of adjuvant radiation       RTC after radiation to discuss hormone therapy in greater detail.      Below for billing only    I reviewed external \n records from 1 providers outside my specialty or healthcare organization as summarized in the note.    I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.        {Problems: patient's active cancer represents a life-threatening illness    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "pre-menopausal female with recently diagnosed ***** *****+/*****- invasive carcinoma with tubular features, s/p partial mastectomy, for initial consideration of systemic treatments"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive carcinoma with tubular features",
+    "Stage_of_Cancer": "pT1cN0(sn)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "recovering well after surgery, planned to see Dr. ***** for consideration of adjuvant RT"
+  },
+  "Treatment_Summary": {
+    "current_meds": "Tamoxifen",
+    "recent_changes": "None",
+    "supportive_meds": "cholecalciferol, folic acid"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "recovering well after surgery, low-grade, low proliferation rate"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Tamoxifen after completion of adjuvant radiation. If ***** test is in the higher end of intermediate, may discuss the potential benefit of *****/*****.",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "radiotherapy": {
+      "summary": "Proceed with adjuvant radiation consult, wait to start xrt until after ***** comes back.",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    },
+    "other treatment": {
+      "summary": "Exercise - at least 150min of aerobic exercises per week, weight bearing exercises at least 2x a week, and to reduce alcohol and sugar/***** intake.",
+      "Short term side_effects_discussed": "Not mentioned",
+      "Long term side_effects_discussed": "Not mentioned"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Tamoxifen after completion of adjuvant radiation, ***** test results will determine if an aromatase inhibitor will be added, or if ***** test is in the higher end of intermediate, may discuss the potential benefit of *****/*****."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Tamoxifen after completion of adjuvant radiation, ***** test results will determine if an aromatase inhibitor will be added, or if ***** test is in the higher end of intermediate, may discuss the potential benefit of *****/*****."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Proceed with adjuvant radiation consult, wait to start xrt until after ***** comes back."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "We discussed the use of ***** and will order."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC after radiation to discuss hormone therapy in greater detail."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

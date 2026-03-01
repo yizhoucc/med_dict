@@ -14372,3 +14372,49 @@ The value for "goals_of_treatment" is correct, as the note discusses the use of 
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.0s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "We discussed the use of ***** and will order."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.7s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 2.1s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC after radiation to discuss hormone therapy in greater detail."
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 60.7s
+  Row 95 total: 105.1s
+  Row 95 saved to progress
+
+Processing row 96 (97/100)...
+  Injected 7 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'PR positive', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
