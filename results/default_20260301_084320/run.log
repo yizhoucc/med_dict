@@ -351,3 +351,154 @@ Processing row 2 (3/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not yet on treatment — no response to assess."
   Extraction prompts: 37.4s
+    Medication_Plan_chatgpt: 36.7s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "hormonal blockade to decrease the risk of systemic recurrence",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.5s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Hormonal blockade to decrease the risk of systemic recurrence, lifestyle modifications, limiting alcohol, exercise, stress reduction and sleep management, anti inflammatory and
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Hormonal blockade to decrease the risk of systemic recurrence, lifestyle modific" -> "lifestyle modifications, limiting alcohol, exercise, stress reduction and sleep "
+      [G6-SEMANTIC] medication_plan: "lifestyle modifications, limiting alcohol, exercise, stress reduction and sleep " -> "Hormonal blockade to decrease the risk of systemic recurrence, lifestyle modific"
+    Therapy_plan: 2.2s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "Hormonal therapy, will start chemotherapy to decrease the risk of systemic recurrence, to decrease the risk of local recurrence"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Hormonal therapy, will start chemotherapy to decrease the risk of systemic recur" -> "will start chemotherapy to decrease the risk of systemic recurrence"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.6s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "to decrease the risk of local recurrence"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.9s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.9s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No genetic testing planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.9s
+      [EXTRACT] raw={
+  "Next clinic visit": "follow up after pet and ***** are back"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 60.0s
+  Row 2 total: 97.4s
+  Row 2 saved to progress
+
+Processing row 3 (4/100)...
+  Injected 4 term definitions: ['progesterone receptor', 'estrogen receptor', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2309 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for ER+/PR+ left breast invasive ductal carcinoma, status post left mastectomy with SLN b
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for ER+/PR+ left breast invasive ductal carcinoma," -> "ER+/PR+ left breast invasive ductal carcinoma, status post l"
+      [G6-SEMANTIC] summary: "ER+/PR+ left breast invasive ductal carcinoma, status post left mastectomy with " -> "75-year-old female with ER+/PR+ left breast invasive ductal carcinoma, status po"
+    What_We_Found: 6.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "L
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> "Grade 2, 2.8 cm tumor"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 6.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole, aspirin, calcium carbonate, cholecalciferol, loratadine, metoprolol succinate, metoprolol tartrate, pravastatin",
+  "recent_changes": "",
+  "supportive_meds": "calcium 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "She continues to take Letrozole daily."
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 3.1s
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "No evidence of disease recurrence on imaging, exam, and review of systems"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 21.4s
