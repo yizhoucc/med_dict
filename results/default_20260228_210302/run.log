@@ -2451,3 +2451,95 @@ Processing row 18 (19/20)...
   Trying regex extraction...
   Regex failed, falling back to LLM extraction...
   LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Attempt 1 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 2...
+  Running LLM Sanity Check...
+  Attempt 2 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 3...
+  Running LLM Sanity Check...
+  Attempt 3 failed LLM sanity check. Retrying...
+  All attempts failed. Skipping plan-specific extraction.
+  A/P extraction: 17.4s
+    Reason_for_Visit: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial consult for newly diagnosed breast cancer, specifically left breast invasive ductal carci
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Initial consult for newly diagnosed breast cancer, specifica" -> "Initial consult for newly diagnosed breast cancer, specifica"
+    What_We_Found: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Invasive ductal carcinoma",
+  "Stage_of_Cancer": "",
+  "Distant Metastasis": "No",
+  "Metastasis": "Yes (axillary lymph nodes)",
+  "lab_summary": "ER 90%, PR 90%, HER2 3+ (FISH 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "" -> "Not mentioned"
+    Treatment_Summary: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "TCHP (chemotherapy regimen)",
+  "recent_changes": "",
+  "supportive_meds": "aspirin, atorvastatin, glyBURIDE, glyBURIDE micronized, lisinopril"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "None"
+    Goals_of_care: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "The patient is a candidate for neoadjuvant chemotherapy vs. mastectomy",
+  "response_assessment": ""
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "" -> "The cancer is treatable and the goal is to extend the durati"
+  Extraction prompts: 14.0s
+  Row 18 total: 31.4s
+  Row 18 saved to progress
+
+Processing row 19 (20/20)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (3461 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.6s
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Metastatic recurrence of ER+/HER2- breast cancer, initial consultation regarding metastatic recurre
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    What_We_Found: 4.5s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "breast cancer",
+  "Stage_of_Cancer": "",
+  "Distant Metastasis": "Yes, bone, lymph nodes",
+  "Metastasis": "Yes, bone, lymph nodes",
+  "lab_summary": "Glucose, meter download 10
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 4.6s
+      [EXTRACT] raw={
+  "current_meds": "Letrozole, Palbociclib",
+  "recent_changes": "Letrozole and Palbociclib sent to pharmacy",
+  "supportive_meds": "Aspirin, ATELVIA, Calcium carbonate, Cholecalciferol, Cyanocobalam
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+  "response_assessment": "not applicable"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "not applicable" -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+  Extraction prompts: 14.6s
