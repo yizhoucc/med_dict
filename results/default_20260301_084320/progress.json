@@ -81,7 +81,8 @@
     76,
     77,
     78,
-    79
+    79,
+    80
   ],
   "results": {
     "0": {
@@ -7540,6 +7541,107 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "RTC cycle 2"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "80": {
+      "coral_idx": 220,
+      "note_text": "Medical Oncology Consult Note  Video Visit     Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  04/19/1960   Date of Visit:  07/18/2020  Provider:  ***** ***** *****  Primary Care Provider:  Not Confirmed Provider  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation     Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (CMS code)          I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:      60 year old female with a left breast cancer diagnosed in May.  She had felt poorly and had an implant rupture on the right MRI without contrast ordered but it was delayed due to ***** 19. She had a mammogram for breast implant surgery that was planned due to the rupture and the mammogram noted her left breast cancers.  She had a lumpectomy on the left with sentinel node and a bilateral reduction and the right side pathology was negative.  Her left breast had two primary cancers: the first an invasive ductal carcinoma, tubular type ( 3 mm, G1, ER and PR positive and her 2 negative) the second an invasive lobular carcinoma (2 mm, G1, ER and PR positive and her 2 negative).  One sentinel lymph node was negative.  Implants were removed as one of them was ruptured.  She is here today for a second opinion.       She is a ob gyn doctor.  She is to start as an ob hospitalist soon.  she had BRCA 1 and 2 testing that was negative.   Her doctor sent an ***** *****.  Her surgeon did not recommend further surgery.   She is scheduled to see a radiation oncologist and I discussed an ***** after radiation.     I do not recommend chemotherapy.        Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Malignant neoplasm of overlapping sites of left female breast \n (CMS code) 07/24/2020     left breast had two primary cancers: the first an invasive ductal carcinoma, tubular type ( 3 mm, G1, ER and PR positive and her 2 negative) the second an invasive lobular carcinoma (2 mm, G1, ER and PR positive and her 2 negative).  One sentinel lymph node was negative.       BRCA 1 and 2 testing negative.          Stage at *****:  Cancer Staging  Malignant neoplasm of overlapping sites of left female breast (CMS code)  Staging form: Breast, AJCC 8th Edition  - Pathologic: Stage ***** (pT1a, *****, *****, G1, ER+, PR+, *****-) - Signed by ***** ***** *****, MD on 07/24/2020      Medications:  No current outpatient medications on file.    Allergies: Allergies/Contraindications  Not on File    Medical History:   Past Medical History:   Diagnosis Date   \u0007 Diabetes mellitus (CMS code)    \u0007 Hypertension    \u0007 Varicose vein of leg        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST ENHANCEMENT SURGERY     \u0007 DILATION AND CURETTAGE OF UTERUS     \u0007 ENDOMETRIAL ABLATION     \u0007 KNEE SURGERY Bilateral     meniscus repair   \u0007 LIPOSUCTION         Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Comment: 7/ week    \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently       *****:  *****     ***** Status: single     Gynecologic History:  G 2 P 0 AB 2    Menarche 13  Menopause  51   OCP 15 years HRT 7 years   Fertility treatments 0  ***** exposure no.     Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Mother     \u0007 Sarcoma Mother     \u0007 Prostate cancer Father     \u0007 Pancreatic cancer Maternal Aunt     \u0007 Skin ca. oth/unk Maternal Aunt     \u0007 Pancreatic cancer Maternal Uncle     \u0007 Ovarian cancer Maternal Grandmother     \u0007 Colon cancer Maternal Grandfather                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night \n sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    07/24/20 1558   *****:  0     Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.        Part 1. Left breast, needle-localized partial mastectomy.  1.  Residual invasive ductal carcinoma adjacent to biopsy site, modified  ***** grade 1, 0.3 cm (slide 1N deeper recut), margins negative.  2.  Invasive lobular carcinoma, modified ***** grade 1, at least 0.2 cm  (slides 1B and 1P), margins negative; see comment.  3.  Ductal carcinoma in situ, low nuclear grade, cribriform pattern with  focal necrosis; see comment.  4.  Atypical ductal hyperplasia.  5.  Atypical lobular hyperplasia.  6.  Proliferative fibrocystic changes, including usual ductal  hyperplasia, sclerosing adenosis, columnar cell change/hyperplasia,  apocrine metaplasia and microcysts.  7.  Biopsy site changes.  8.  Calcifications associated with ductal carcinoma in situ, atypical  ductal hyperplasia and benign ducts.  9.  Benign skin.    Part 2. Left breast tissue, mastopexy:  1.  Benign breast tissue with apocrine metaplasia and calcifications in  benign ducts.  2.  Benign skin.  3.  Dense fibrous tissue consistent with implant capsule.    Part 3. Left axillary sentinel lymph node, excision:  \n No carcinoma in  one lymph node (0/1).    Part 6. Right breast tissue, mastopexy:  1.  Benign breast tissue and skin.  2.  Dense fibrous tissue with synovial metaplasia consistent with  implant capsule.    Part 7. Left breast tissue, \"3:00 relative to tumor\", excision:  1.  Focal atypical ductal hyperplasia; see comment.  2.  Atypical lobular hyperplasia.    Psychologic/emotional well-being/support  She is well.     Assessment / Plan:    1.  Two stage I primary cancers in the left breast. S/p lumpectomy with *****.  One sentinel lymph node was negative.    -there first an invasive ductal carcinoma, tubular type ( 3 mm, G1, ER and PR positive and her 2 negative)    -the second an invasive lobular carcinoma (2 mm, G1, ER and PR positive and her 2 negative).    2.  We discussed the role of radiation to decrease the risk of local recurrence.  She has been referred to a radiation oncologist.   3. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.  I would recommend an ***** after radiation.   4.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.  There is no indication for chemotherapy.  She did have an ***** sent by one of her doctors but does not technically meet criteria to need one.   5. RTC post radiation to start hormone blockade.    6. Baseline dexa.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 65 minutes evaluating patient, reviewing chart, coordinating care, discussing with patient and/or family.       I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.                \n",
+      "assessment_and_plan": "Assessment / Plan:    1.  Two stage I primary cancers in the left breast. S/p lumpectomy with *****.  One sentinel lymph node was negative.    -there first an invasive ductal carcinoma, tubular type ( 3 mm, G1, ER and PR positive and her 2 negative)    -the second an invasive lobular carcinoma (2 mm, G1, ER and PR positive and her 2 negative).    2.  We discussed the role of radiation to decrease the risk of local recurrence.  She has been referred to a radiation oncologist.   3. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.  I would recommend an ***** after radiation.   4.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.  There is no indication for chemotherapy.  She did have an ***** sent by one of her doctors but does not technically meet criteria to need one.   5. RTC post radiation to start hormone blockade.    6. Baseline dexa.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 65 minutes evaluating patient, reviewing chart, coordinating care, discussing with patient and/or family.       I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.                \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "Yes",
+          "in-person": "Televisit",
+          "summary": "Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive, stage not specified, for a second opinion"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma and ER+/PR+ invasive lobular carcinoma",
+          "Stage_of_Cancer": "Not mentioned in note",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "Two stage I primary cancers in the left breast, one sentinel lymph node was negative"
+        },
+        "Treatment_Summary": {
+          "current_meds": "",
+          "recent_changes": "",
+          "supportive_meds": ""
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "risk reduction",
+          "response_assessment": "Not mentioned in note"
+        },
+        "Medication_Plan_chatgpt": {
+          "radiotherapy": {
+            "summary": "to decrease the risk of local recurrence",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "hormonal therapy": {
+            "summary": "to decrease the risk of systemic recurrence, plan to start after radiation",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "chemotherapy": {
+            "summary": "no indication for chemotherapy",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "bowel regimen": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "pain medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "psychiatry medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "other treatment": {
+            "summary": "baseline dexa",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "hormone blockade after radiation, baseline dexa"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "plan to start radiation, plan to start hormone therapy"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "discussed the role of radiation to decrease the risk of local recurrence, referred to a radiation oncologist"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "lumpectomy"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "baseline dexa"
+        },
+        "Lab_Plan": {
+          "lab_plan": "None"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Radiation oncologist",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "RTC"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
