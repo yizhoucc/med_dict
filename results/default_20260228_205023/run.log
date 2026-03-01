@@ -38,3 +38,139 @@ Processing row 10 (1/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] recent_changes: "None mentioned" -> ""
       [G3-FAITH] EMPTIED: ['recent_changes']
+    Goals_of_care: 2.2s
+      [EXTRACT] raw={
+  "goals_of_treatment": "Continue treatment to manage symptoms and maintain quality of life",
+  "response_assessment": "The cancer is not responding to treatment, as evidenced by worsening symptoms"
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 28.0s
+    Medication_Plan_chatgpt: 26.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Continue on Faslodex",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": {
+    "summary": "Co
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 3.0s
+      [EXTRACT] raw={
+  "medication_plan": "Continue on Faslodex, Continue on Denosumab, Mycelex ***** qid for 14 days, salt and soda rinses"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 3.1s
+      [EXTRACT] raw={
+  "therapy_plan": "Continue on Faslodex, Continue on Denosumab, plan to order PETCT to evaluate Femur, plan to order PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    radiotherapy_plan: 1.0s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "S/p xrt to jaw"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 2.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "MRI of lumbar, pelvis and right femur, PETCT to evaluate Femur, PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "MRI of lumbar, pelvis and right femur, PETCT to evaluate Femur, PETCT to toes" -> "PETCT to evaluate Femur, PETCT to toes"
+    Imaging_Plan: 2.4s [temporal-cleaned]
+      [EXTRACT] raw={
+  "imaging_plan": "MRI of lumbar, pelvis and right femur, PETCT to evaluate Femur, PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] imaging_plan: "MRI of lumbar, pelvis and right femur, PETCT to evaluate Femur, PETCT to toes" -> "PETCT to evaluate Femur, PETCT to toes"
+    Lab_Plan: 1.0s
+      [EXTRACT] raw={
+  "lab_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.4s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 0.8s
+      [EXTRACT] raw={
+  "Next clinic visit": "None"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 45.0s
+  Row 10 total: 73.0s
+  Row 10 saved to progress
+
+Processing row 11 (2/5)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1955 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.8s
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Metastatic breast cancer, stage IV, follow up visit for restaging and management of metastatic dise
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    What_We_Found: 5.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "breast cancer",
+  "Stage_of_Cancer": "IV",
+  "Distant Metastasis": "Yes, to lung, nodes, brain, and bone",
+  "Metastasis": "Yes, to lung, nodes, brain, and bone",
+  "lab_summary
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Hgb, Albumin, Alk Phos, EF 76%" -> "EF 76%"
+    Treatment_Summary: 4.0s
+      [EXTRACT] raw={
+  "current_meds": "herceptin, letrozole, *****",
+  "recent_changes": "cont herceptin/***** q12 wks given stable bone status, cont letrozole qd",
+  "supportive_meds": "aspirin, cholecalciferol, guaif
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
