@@ -1347,3 +1347,101 @@ Processing row 26 (7/20)...
       [G6-SEMANTIC] Others: "" -> "None"
       [G6-SEMANTIC] Specialty: "" -> "None"
       [G6-SEMANTIC] Nutrition: "" -> "None"
+    follow_up_next_visit: 3.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks, to reassess lower back pain"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: 2 weeks, to reassess lower back pain" -> "2 weeks"
+      [G6-SEMANTIC] Next clinic visit: "2 weeks" -> "Reassess lower back pain"
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 46.4s
+  Row 26 total: 80.3s
+  Row 26 saved to progress
+
+Processing row 27 (8/20)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial visit for newly diagnosed early stage breast cancer, specifically a clinical stage I HR+/
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 4.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC",
+  "Stage_of_Cancer": "Originally clinical stage I, now clinical stage I",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally clinical stage I, now clinical stage I" -> "I"
+      [G6-SEMANTIC] Stage_of_Cancer: "I" -> "Stage I"
+    Lab_Results: 8.1s
+      [EXTRACT] raw={
+"lab_summary": "Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calcium 10.0, AST 37,
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 8.3s
+      [EXTRACT] raw={
+"findings": "MRI-guided core biopsy: 0.8 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no lymphovascular invasion, no DCIS. Right lumpectomy: 0.9 cm grade 1 IDC, n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 5.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": [
+    "pregabalin",
+    "lamoTRIgine",
+    "lamoTRIgine",
+    "lurasidone"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "['pregabalin', 'lamoTRIgine', 'lamoTRIgine', 'lurasidone']" -> "['pregabalin', '', '', 'lurasidone']"
+      [G6-SEMANTIC] current_meds: "['pregabalin', '', '', 'lurasidone']" -> "['pregabalin', 'lurasidone', 'rosuvastatin', 'calcium citrate-vitamin D', 'diclo"
+    Treatment_Changes: 3.1s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Switched from gabapentin to pregabalin for pain",
+"supportive_meds": ["pregabalin", "calcium", "vitamin D"]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Switched from gabapentin to pregabalin for pain" -> "No recent changes"
+    Treatment_Goals: 6.7s
+      [EXTRACT] raw=The cancer stage is early-stage (Stage I IDC), and the treatment planned is surgery (lumpectomy) followed by 5 years of anti-estrogen therapy with an aromatase inhibitor. This is an adjuvant treatment
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 5.6s [semantic-fixed]
+      [EXTRACT] raw=The patient has undergone a lumpectomy, which is a surgical procedure, but it is not considered a treatment for response assessment purposes. However, the note does mention that the margins were negat
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The patient has a 0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH r"
+  Extraction prompts: 47.6s
