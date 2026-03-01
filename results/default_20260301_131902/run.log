@@ -272,3 +272,92 @@ Processing row 21 (2/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.6s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: -0.3s
+      [EXTRACT] raw={
+  "Next clinic visit": "None"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 45.7s
+  Row 21 total: 68.7s
+  Row 21 saved to progress
+
+Processing row 22 (3/20)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'sentinel lymph node', 'aromatase inhibitor', 'estrogen receptor', 'ER negative', 'PR negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "The patient is a 63-year-old female with high-grade DCIS (ER negative/weakly PR positive) and inv
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "The patient is a 63-year-old female with high-grade DCIS (ER" -> "Recently diagnosed breast cancer, high-grade DCIS (ER negati"
+      [G6-SEMANTIC] summary: "Recently diagnosed breast cancer, high-grade DCIS (ER negative/weakly PR positiv" -> "Recently diagnosed breast cancer, high-grade DCIS (ER negative/weakly PR positiv"
+    What_We_Found: 16.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER negative/weakly PR positive high-grade DCIS, invasive carcinoma with ductal and lobular features, ER+/PR+ (>95%)/HER2 1+ by IHC and negative by FISH",
+  "Stage_of_Cancer": "N
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Left breast mastectomy scar healing well with tissue expande" -> "Left breast mastectomy scar healing well with tissue expande"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "Stage I"
+      [G6-SEMANTIC] Type_of_Cancer: "ER negative/weakly PR positive high-grade DCIS, invasive carcinoma with ductal a" -> "ER negative/weakly PR positive high-grade DCIS, invasive carcinoma with ductal a"
+      [G6-SEMANTIC] findings: "Left breast mastectomy scar healing well with tissue expander in place, no domin" -> "Left breast mastectomy scar healing well with tissue expander in place, no domin"
+    Treatment_Summary: 7.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "switch to another aromatase inhibitor if not able to tolerate, or switch to a different medication or tamoxifen if not able to tolerate an aromatase inhibi
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen, atorvastatin, cholecalciferol, docusate sodiu"
+      [G6-SEMANTIC] recent_changes: "switch to another aromatase inhibitor if not able to tolerate, or switch to a di" -> ""
+    Goals_of_care: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is low risk and I do not recommend adjuvant chemo"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 33.0s
+    Medication_Plan_chatgpt: 21.3s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Starting letrozole, will receive at least 5 years of adjuvant hormonal therapy",
+    "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] bone therapy: "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the " -> "{'summary': 'will discuss bone targeted therapies in the future', 'Short term si"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo" -> "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short"
+      [G6-SEMANTIC] bone therapy: "{'summary': 'will discuss bone targeted therapies in the future', 'Short term si" -> "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the "
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short" -> "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo"
