@@ -2294,3 +2294,30 @@ Processing row 15 (16/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "54 y.o. postmenopausal patient with a recent diagnosis of a " -> "54 y.o. postmenopausal patient with a recent diagnosis of a "
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 22.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/HER2- IDC",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "0.3 cm grade 1 IDC; no DCIS, margins nega
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Type_of_Cancer: "ER+/HER2- IDC" -> "ER+/PR+/HER2- IDC"
+    Treatment_Summary: 25.0s
+      [EXTRACT] raw={
+  "current_meds": "aromatase inhibitor, calcium carbonate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate,
+      [G1-FORMAT] repair FAILED, raw={
+  "current_meds": "aromatase inhibitor, calcium carbonate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate, docusate,
+    Goals_of_care: 9.2s
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 69.0s
