@@ -1088,3 +1088,63 @@ Processing row 27 (8/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] findings: "0.9 cm grade 1 IDC, no DCIS, 0/3 LN-" -> "0.9 cm grade 1 IDC, no DCIS, 0/3 LN-, margins negative"
+    Treatment_Summary: 7.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "aromatase inhibitor, baclofen, pregabalin, rosuvastatin, lurasidone, omeprazole, prazosin, duloxetine, lortazepam, losartan, turmeric",
+  "recent_changes": "switched from gabapent
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "aromatase inhibitor, baclofen, pregabalin, rosuvastatin, lur" -> "aromatase inhibitor, baclofen, pregabalin, rosuvastatin, lur"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 4.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The patient was informed of the natural history and treatment of Stage I HR+/HER"
+  Extraction prompts: 31.3s
+    Medication_Plan_chatgpt: 36.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+    "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+    "Long
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] radiotherapy: "{'summary': 'will proceed with radiation', 'Short term side_" -> "{'summary': 'will proceed with radiation', 'Short term side_"
+      [G3-FAITH] other treatment: "{'summary': 'DEXA to assess bone health', 'Short term side_e" -> "{'summary': 'DEXA to assess bone health', 'Short term side_e"
+      [G3-FAITH] bone therapy: "{'summary': 'calcium and vitamin D to improve bone health', " -> "{'summary': 'calcium and vitamin D to improve bone health', "
+      [G3-FAITH] pain medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] psychiatry medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] bowel regimen: "{'summary': 'calcium and vitamin D', 'Short term side_effect" -> "{'summary': 'calcium and vitamin D', 'Short term side_effect"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 4.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "The patient will take an aromatase inhibitor for 5 years, calcium and vitamin D, and will proceed with radiation. She will have a DEXA to assess her bone health."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "The patient will take an aromatase inhibitor for 5 years, calcium and vitamin D," -> "The patient will take an aromatase inhibitor for 5 years, calcium and vitamin D,"
+    Therapy_plan: 3.5s
+      [EXTRACT] raw={
+  "therapy_plan": "The patient will take an aromatase inhibitor for 5 years and will proceed with radiation."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "will proceed with radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
