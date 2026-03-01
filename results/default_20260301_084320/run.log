@@ -12681,3 +12681,92 @@ The value for "goals_of_treatment" is correct, as the note mentions that the pat
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.0s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Rad Onc referral",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.4s
+      [EXTRACT] raw={
+  "Next clinic visit": "2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 68.4s
+  Row 84 total: 119.8s
+  Row 84 saved to progress
+
+Processing row 85 (86/100)...
+  Injected 1 term definitions: ['FISH']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 2382 chars)
+  A/P extraction: 13.0s
+    Reason_for_Visit: 4.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Recurrent and metastatic breast cancer, recurrent bone and liver metastasis, seeking medical oncolo
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Recurrent and metastatic breast cancer, recurrent bone and l" -> "Recurrent and metastatic breast cancer, seeking medical onco"
+      [G6-SEMANTIC] summary: "Recurrent and metastatic breast cancer, seeking medical oncology consultation" -> "Recurrent and metastatic breast cancer, bone and liver metastasis, seeking medic"
+    What_We_Found: 9.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IV, now metastatic",
+  "Distant_Metastasis": "Yes, bone, liver",
+  "Metastasis": "Yes",
+  "lab_summary
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Distant_Metastasis: "Yes, bone, liver" -> "Yes, bone, liver, ovary"
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IV, now metastatic" -> "Originally 6.9 cm tumor, Grade III, mixed IDC/ILC, Stage IV"
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally 6.9 cm tumor, Grade III, mixed IDC/ILC, Stage IV" -> "Originally Stage IV, now metastatic"
+    Treatment_Summary: 6.9s
+      [EXTRACT] raw={
+  "current_meds": "Letrozole, ribociclib, oxycodone, levothyroxine, Vit D, adderall XR",
+  "recent_changes": "Switch to fulvestrant +/- everolimus recommended",
+  "supportive_meds": "Oxycodone, levo
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note" -> "Bone metastasis is increasing, liver metastases are stable"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 24.2s
