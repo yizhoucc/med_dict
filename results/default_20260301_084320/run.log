@@ -9597,3 +9597,119 @@ Processing row 64 (65/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note" -> "No evidence of distant metastatic disease on PET/CT"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 26.2s
+    Medication_Plan_chatgpt: 51.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Neoadjuvant chemotherapy with AC/T, possibly paclitaxel first, followed by 4 cycles of TC. Also discussed participation in ISPY clinical trial with various experi
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 11.3s
+      [EXTRACT] raw={
+  "medication_plan": "Will start neoadjuvant chemotherapy with paclitaxel, followed by 4 cycles of AC/T. Also discussed participation in ISPY clinical trial with various experimental regimens, inclu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.6s
+      [EXTRACT] raw={
+  "therapy_plan": "Will start neoadjuvant chemotherapy with paclitaxel, followed by 4 cycles of AC/T. Also plan to recommend post-operative radiation and 5-10 years of endocrine therapy after surger
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.8s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Plan to recommend post-operative radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "Port placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.2s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI, PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.2s
+      [EXTRACT] raw={
+  "lab_plan": "F/u results of genetic testing"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.8s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "F/u results of genetic testing"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.9s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 2.4s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC in 1-2 weeks in person to start chemo"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.8s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 86.9s
+  Row 64 total: 113.2s
+  Row 64 saved to progress
+
+Processing row 65 (66/100)...
+  Injected 4 term definitions: ['adjuvant chemotherapy', 'lumpectomy', 'mastectomy', 'TNBC']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (3561 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "Yes",
+  "in-person": "in-person",
+  "summary": "Initial consultation for a 53 y.o. female with recently diagnosed right breast metaplastic carci
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Initial consultation for a 53 y.o. female with recently diag" -> "Recently diagnosed right breast metaplastic carcinoma, ER 5-"
+      [G6-SEMANTIC] summary: "Recently diagnosed right breast metaplastic carcinoma, ER 5-10%, HER2 negative, " -> "Recently diagnosed right breast metaplastic carcinoma, ER 5-10%, HER2 negative, "
