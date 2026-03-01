@@ -2006,3 +2006,99 @@ Processing row 30 (11/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 19.2s
+      [EXTRACT] raw=The patient has started treatment, specifically Doxil chemo, on 07/01/2021. The note mentions that the patient is scheduled to start Doxil on 07/01/2021, and it is noted that the patient is to repeat 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 53.2s
+    Medication_Plan_chatgpt: 19.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Doxil IV every 28 days starting 07/01/2021",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "bowel regimen": {
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Doxil IV every 28 days starting 07/01/2021', 'Short term side_effec" -> "{'summary': 'Cycle 1 Doxil IV every 28 days on 07/01/2021', 'Short term side_eff"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 2.8s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Doxil IV every 28 days starting 07/01/2021"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Doxil IV every 28 days starting 07/01/2021" -> "Doxil IV every 28 days on 07/01/2021"
+      [G4-TEMPORAL] medication_plan: "Doxil IV every 28 days on 07/01/2021" -> "Cycle 1 Doxil IV every 28 days on 07/01/2021"
+      [G6-SEMANTIC] medication_plan: "Cycle 1 Doxil IV every 28 days on 07/01/2021" -> "Doxil IV every 28 days, starting on 07/01/2021"
+    Therapy_plan: 7.1s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Scheduled to start Doxil on 07/01/2021, Cycle 1 Doxil IV every 28 days, PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right fro
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Scheduled to start Doxil on 07/01/2021, Cycle 1 Doxil IV eve" -> "Scheduled to start Doxil on 07/01/2021, Cycle 1 Doxil IV eve"
+      [G4-TEMPORAL] therapy_plan: "Scheduled to start Doxil on 07/01/2021, Cycle 1 Doxil IV every 28 days, PETCT sc" -> "Cycle 1 Doxil IV every 28 days, PETCT scan after 3 cycles of Doxil, Brain MRI to"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.3s [semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Need to do Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "Need to do Brain MRI to assess region of increased focal uptake in the right fro" -> "None"
+    Procedure_Plan: 3.4s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "Cycle 1 Doxil IV every 28 days on 07/01/2021, Brain MRI, MRI pelvis"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Cycle 1 Doxil IV every 28 days on 07/01/2021, Brain MRI, MRI pelvis" -> "Cycle 1 Doxil IV every 28 days, Brain MRI, MRI pelvis"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 7.3s
+      [EXTRACT] raw={
+    "imaging_plan": "PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 3.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Cycle 1 Doxil IV every 28 days on 07/01/2021, Repeat Echo in 3 months while on D"
+      [G6-SEMANTIC] lab_plan: "Cycle 1 Doxil IV every 28 days on 07/01/2021, Repeat Echo in 3 months while on D" -> "No labs planned"
+    Genetic_Testing_Plan: 2.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Need to do Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] genetic_testing_plan: "Need to do Brain MRI to assess region of increased focal uptake in the right fro" -> "Not yet planned — no genetic testing mentioned."
+    Referral: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "GI, Oral Medicine",
+  "Others": "Physical therapy",
+  "follow up": "4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics']
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
