@@ -3523,3 +3523,58 @@ Processing row 38 (19/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] findings: "3.6 x 2.8 x 2.0 cm hypoechoic mass in the left breast at the 1:00 position, 4-5 " -> "Core biopsy: grade 3 IDC, ER/PR/HER2 negative, 3.6 x 2.8 x 2.0 cm hypoechoic mas"
+    Current_Medications: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FL"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 5.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "We would start with weekly paclitaxel x 12 weeks, either with a ***** agent or replaced by a ***** agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery.",
+"sup
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "We would start with weekly paclitaxel x 12 weeks, either wit" -> "weekly paclitaxel x 12 weeks, either with a taxane agent or "
+      [G6-SEMANTIC] supportive_meds: "fluticasone (FLONASE) 50 mcg/actuation nasal spray" -> "fluticasone (FLONASE) 50 mcg/actuation nasal spray, cholecalciferol, vitamin D3,"
+      [G6-SEMANTIC] recent_changes: "weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by an anthr" -> "No recent changes"
+    Treatment_Goals: 2.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] goals_of_treatment: "curative" -> "adjuvant"
+    Response_Assessment: 4.2s [format-repaired]
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note mentions "We will obtain screening biopsies today with Dr. *****" and "We hope to start therapy within two weeks." There is no evidenc
+      [G1-FORMAT] repaired -> keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 30.9s
+    Medication_Plan_chatgpt: 36.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Weekly paclitaxel x 12 weeks, followed by AC x 4 cycles, then surgery. Will start with weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a a
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] hormonal therapy: "{'summary': 'Goserelin monthly during chemotherapy', 'Short " -> "{'summary': 'Goserelin monthly during chemotherapy', 'Short "
+      [G3-FAITH] pain medication: "{'summary': 'unknown', 'Short term side_effects_discussed': " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] radiotherapy: "{'summary': 'MRI scans are obtained throughout treatment as " -> "{'summary': 'MRI scans are obtained throughout treatment as "
+      [G3-FAITH] psychiatry medication: "{'summary': 'unknown', 'Short term side_effects_discussed': " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] other treatment: "{'summary': 'Echocardiogram, Port placement, Laboratory stud" -> "{'summary': 'Echocardiogram, Port placement, Laboratory stud"
+      [G3-FAITH] chemotherapy: "{'summary': 'Weekly paclitaxel x 12 weeks, followed by AC x " -> "{'summary': 'Weekly paclitaxel x 12 weeks, either with a tax"
+      [G3-FAITH] bowel regimen: "{'summary': 'unknown', 'Short term side_effects_discussed': " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 5.1s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthracycline agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery, with goserel
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthra" -> "Weekly paclitaxel x 12 weeks, followed by AC x 4 cycles, then surgery, with gose"
+      [G6-SEMANTIC] ok (all values answer their fields)
