@@ -7,7 +7,8 @@
     22,
     23,
     24,
-    25
+    25,
+    26
   ],
   "results": {
     "20": {
@@ -507,6 +508,102 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "RTC at her post op visit to review final pathology report and make recommendations."
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "26": {
+      "coral_idx": 166,
+      "note_text": "SUBJECTIVE  Subjective  ***** ***** is a 41 y.o. female who presents today for hormone therapy follow-up for her metastatic breast cancer. Femara since April 2011. She reports feeling unwell with lightheadedness since mid July, and has recently required corrective lenses for reading. She reports new lower back pain with activity, easy bruising, and frequent urination without pain or hematuria.         Patient Active Problem List   Diagnoses Date Noted   \u0007 Metastatic Breast Cancer to bone 09/22/2011     Priority: High     1999 early stage node neg IDC ER/PR + ***** neg treated with lumpectomy and XRT  April 2006 mets to L1  Tamoxifen May 05 - August 08  2007 progressive disease  ***** January 2007 -  Zoladex July 2009 -  Femara 05/12/2011 -       ROS  General: energy good, weight stable   Skin: no rashes or lesions  Eyes: require corrective lenses for reading  ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat  Breast: no breast pain or swelling  Respiratory: no cough but has incidental shortness of breath  Cardiovascular: no CP, edema  GI: no nausea, vomiting, diarrhea or constipation  GU: frequency, no dysuria, no hematuria, or vaginal bleeding  Musculoskeletal: occasional low back pain with activity  Neurological: gait steady, no headaches, dizziness, falls,   Psychological: mood stable  All other review of systems negative, except for those noted.    MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 calcium-vitamin D 500-125 mg-unit tablet Take 1 tablet by mouth 2 (two) times daily.         \u0007 goserelin (ZOLADEX) 3.6 mg injection Inject into the skin once.         \u0007 letrozole (FEMARA) 2.5 mg tablet Take 2.5 mg by mouth Daily.         \u0007 zolendronic acid (*****) 4 mg/5 mL injection Inject into the vein once.             ALLERGIES  Allergies no known allergies    PHYSICAL EXAM  Objective  Vital Signs:  BP 102/72 | Pulse 73 | Temp(Src) 36.6 C (97.8 F) \n (Oral) | Resp 16 | Ht 173 cm (5' 8.11\") | Wt 62.052 kg (136 lb 12.8 oz) | BMI 20.73 kg/m2 | SpO2 100% | LMP 07/31/2009  Constitutional:  Well-developed, no acute distress  Skin: no rash, no lesions, no diaphoresis.   Eyes: sclera anicteric, PERRL, EOMI  HENT: sinuses nontender, TMs intact, nasal mucosa intact, pharynx without erythema, no thrush  Lymph Nodes: soft movable left axillary node, no supraclavicular or axillary adenopathy  Respiratory:  Normal breath sounds, No respiratory distress, No wheezing, No chest tenderness.   Cardiovascular:  Normal heart rate, Normal rhythm, No murmurs, No rubs, No gallops. No LE edema  Breast: Right breast with firmness at lumpectomy site in upper outer quadrant  GI:  Bowel sounds normal, Soft, No tenderness or distention,No hepatomegaly or masses  Musculoskeletal: No point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema  Neurologic:  Alert & oriented x 3, CN intact, ambulates w/o difficulty, ***** (-), DTRs 2+throughout.    Psychiatric: mood stable. No HI, SI, hallucinations, paranoia, or delusions.    RESULTS  09/27/11 *****:  Brain: Unremarkable, symmetric, FDG uptake is seen throughout   the cortical gray matter, basal ganglia and the cerebellum. No   mass effect. While these images appear within normal limits, MRI   is recommended to rule out intracranial and/or skull base   metastases if clinically indicated.   Neck: No hypermetabolic neck masses or lymphadenopathy.   Chest: 3-mm right middle lobe noncalcified nodules not   significantly changed since prior study. Small anterior   mediastinal soft tissue is consistent with rebound thymus.   Calcified right hilar lymph node is consistent with sequela of   remote granulomatous disease. No hypermetabolic lymphadenopathy.   Abdomen/Pelvis: Multiple low-attenuation lesions throughout the   liver some of which represent cysts and some of which are too   small to \n characterize are again noted. Left renal cysts are   seen. The remainder of the abdomen and pelvis is unremarkable.   No hypermetabolic lymphadenopathy.   Musculoskeletal: Multiple osseous lesions involving the   thoracolumbar and sternum are not changed in size since prior   study and do not demonstrate hypermetabolic activity, consistent   with treated metastases. Left iliac wing sclerotic lesion is   unchanged in size and metabolic activity with an SUV of 3.1.   Persistent FDG uptake within left L1 pedicle (SUV 6) and anterior   vertebral body (SUV 9) is not significantly changed since prior.   Interval decrease in activity of previously described L2   vertebral body sclerotic focus with no residual hypermetabolic   activity seen. No new osseous lesions are identified.   IMPRESSION:   1. Stable to slightly decreased metabolic activity of osseous   metastases. No new metastases are identified.   This study was reviewed by attendings Dr. ***** ***** from   Abdominal Imaging and Dr. ***** ***** ***** of Nuclear   Medicine.  I have individually visualized and interpreted the above *****     ASSESSMENT & PLAN    Hormone positive MBC to bone with stable disease. Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens.    Possible UTI vs. Genital-urinary symptoms from estrogen depletion. Obtain UA    Easy bruising per patient, obtain CBC with platelets.    The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history.  I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** *****, *****/*****/***** *****:***** PM      \n",
+      "assessment_and_plan": "ASSESSMENT & PLAN    Hormone positive MBC to bone with stable disease. Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens.    Possible UTI vs. Genital-urinary symptoms from estrogen depletion. Obtain UA    Easy bruising per patient, obtain CBC with platelets.    The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history.  I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** *****, *****/*****/***** *****:***** PM      \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Metastatic breast cancer, hormone therapy follow-up for stable disease"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+          "Stage_of_Cancer": "Originally stage 0, now metastatic",
+          "Distant Metastasis": "Yes, to bone",
+          "Metastasis": "Yes, to bone",
+          "lab_summary": "",
+          "findings": "Lightheadedness, lower back pain, easy bruising, frequent urination"
+        },
+        "Treatment_Summary": {
+          "current_meds": "Femara, Zoladex, calcium-vitamin D",
+          "recent_changes": "None",
+          "supportive_meds": "calcium-vitamin D"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "palliative",
+          "response_assessment": "Stable disease"
+        },
+        "Medication_Plan_chatgpt": {
+          "hormonal therapy": {
+            "summary": "Continue on ***** and femara",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "bone therapy": {
+            "summary": "Continue on zoladex",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "pain medication": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "bowel regimen": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "psychiatry medication": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "other treatment": {
+            "summary": "UA",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Continue on ***** and femara. Plan to reassess lower back pain at two weeks and consider MRI of the spine. Obtain CBC with platelets for easy bruising. UA for possible UTI or genital-urinary symptoms from estrogen depletion."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Continue on ***** and femara. Plan to reassess lower back pain at two weeks and consider MRI of the spine."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "consider MRI of the spine"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "MRI of the spine"
+        },
+        "Lab_Plan": {
+          "lab_plan": "CBC with platelets"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "return if pain worsens"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
