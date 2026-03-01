@@ -2183,3 +2183,177 @@ Processing row 31 (12/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] goals_of_treatment: "palliative" -> "curative"
+    Response_Assessment: 8.9s [semantic-fixed]
+      [EXTRACT] raw=The patient has started cancer treatment, which includes herceptin and exemestane. The note mentions that the patient had a PET-CT in June 2019, which shows "No abnormal areas of FDG uptake to suggest
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "No abnormal areas of FDG uptake to suggest active metastatic disease on PET-CT i" -> "No abnormal areas of FDG uptake to suggest active metastatic disease on PET-CT i"
+  Extraction prompts: 42.6s
+    Medication_Plan_chatgpt: 19.9s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "TCH chemotherapy x 6",
+    "Short term side_effects_discussed": "",
+    "Long term side_effects_discussed": ""
+  },
+  "hormonal therapy": {
+    "summary": "adjuva
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bowel regimen', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bowel regimen', 'radiotherapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'adjuvant tamoxifen, herceptin', 'Short term side_effects_discussed'" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'TCH chemotherapy x 6', 'Short term side_effects_discussed': '', 'Lo" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] bowel regimen: "{'summary': '***** (medication name not specified), imodium', 'Short term side_e" -> "{'summary': '', 'Short term side_effects_discussed': 'diarrhea', 'Long term side"
+      [G6-SEMANTIC] hormonal therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'adjuvant tamoxifen followed by ***** completed 05/16/15', 'Short te"
+      [G6-SEMANTIC] chemotherapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'TCH chemotherapy x 6', 'Short term side_effects_discussed': '', 'Lo"
+    Medication_Plan: 2.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Set up infusion at *****. Herceptin."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Set up infusion at *****. Herceptin." -> "infusion at *****. Herceptin"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "infusion at *****. Herceptin" -> "Herceptin"
+    Therapy_plan: 2.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue herceptin, start ***** and ***** in December 2018, stopped ***** due to diarrhea, plan to continue herceptin, set up infusion at *****"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Continue herceptin, start ***** and ***** in December 2018, stopped ***** due to" -> "Continue herceptin, plan to start ***** and *****"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 2.7s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "Set up infusion at *****."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "Set up infusion at *****." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutritio"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.6s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G3-FAITH] EMPTIED: ['imaging_plan']
+      [G4-TEMPORAL] imaging_plan: "" -> "Set up infusion at *****"
+      [G6-SEMANTIC] imaging_plan: "Set up infusion at *****" -> "No imaging planned"
+    Lab_Plan: 2.6s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutritio"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Genetic testing negative."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "Genetic testing negative." -> "negative"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "Exercise counseling",
+  "Genetics": "Genetic testing",
+  "Specialty": "Medical Oncology/Hematology",
+  "Others": "Physical therapy",
+  "follow up": "3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "Genetic testing" -> "negative"
+      [G3-FAITH] Others: "Physical therapy" -> ""
+      [G3-FAITH] Nutrition: "Exercise counseling" -> "Exercise counseling and nutrition consult for weight loss"
+      [G3-FAITH] EMPTIED: ['Others']
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 1.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in 3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in 3 and 6 weeks" -> "3 and 6 weeks"
+      [G6-SEMANTIC] Next clinic visit: "3 and 6 weeks" -> "RTC in 3 and 6 weeks"
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 40.8s
+  Row 31 total: 83.4s
+  Row 31 saved to progress
+
+Processing row 32 (13/20)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1638 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for left ER+ LN+ breast cancer on letrozole since January 2011"
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for left ER+ LN+ breast cancer on letrozole since " -> "left ER+ LN+ breast cancer on letrozole since January 2011"
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] summary: "left ER+ LN+ breast cancer on letrozole since January 2011" -> "63 y.o. female with left ER+ breast cancer s/p bilateral mastectomies, adjuvant "
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ ILC",
+  "Stage_of_Cancer": "Originally Stage IIIA, now no evidence of recurrence",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIIA, now no evidence of recurrence" -> "Stage IIIA"
+      [G6-SEMANTIC] Type_of_Cancer: "ER+/PR+ ILC" -> "ER+/PR+ invasive lobular carcinoma"
+      [G6-SEMANTIC] Stage_of_Cancer: "Stage IIIA" -> "Stage IIB"
+    Lab_Results: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G6-SEMANTIC] parse FAILED
+    Clinical_Findings: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "findings": "No new findings. Exam shows no evidence of recurrence."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "No new findings. Exam shows no evidence of recurrence." -> "no evidence of recurrence"
+      [G6-SEMANTIC] ok (all values answer their fields)

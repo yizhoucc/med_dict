@@ -1889,3 +1889,134 @@ RESULTS FOR ROW 31
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 32
+============================================================
+
+--- Column: coral_idx ---
+171
+
+--- Column: note_text ---
+"Medical Oncology Consult Note    Patient Name: ***** ***** *****   ***** MRN:  *****   Patient DOB:  07/18/1937   Date of Visit:  07/30/2019  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (HCC)  Ambulatory Referral to Exercise Counseling - Cancer Center    Ambulatory referral to Nutrition Services       History of Present Illness: 82 year old with metastatic breast cancer to the lymph nodes who has been followed at ***** Hospital and is being treated with herceptin and *****.  She was also on ***** but had an infusion reaction that was resolved with ***** but has been having diarrhea so it was stopped and her diarrhea resolved as well.  She had a pet ct with shows a CR in June and she wants to change her care to our clinic due to being closer to home.  She had her original cancer treated in 2011 with a left lumpectomy and sentinel node biopsy, TCH x 6 and maintenance herceptin, radiation and hormone blockade for 5 years with tamoxifen and *****.  She feels fatigued and I will refer her to exercise counseling and a nutrition consult.     Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, left (HCC)      Diagnosed January 2010         Stage at *****:  Cancer Staging  Breast cancer, left (HCC)  Staging form: Breast, AJCC 7th Edition  - Pathologic stage from 07/30/2019: Stage IIA (T2, *****(i+), *****) - Signed by ***** ***** *****, MD on 08/06/2019      Medications:    Current Outpatient Medications:   \u0007  ascorbic acid, vitamin C, (VITAMIN C) 500 mg tablet, Take 500 mg by mouth daily, Disp: , Rfl:   \u0007  bismuth subsalicylate (PEPTO BISMOL) suspension, Take by mouth, Disp: , Rfl:   \u0007  cholecalciferol, \n vitamin D3, 1,000 unit CAP, Take by mouth Daily., Disp: , Rfl:   \u0007  coenzyme Q10 100 mg capsule, Take by mouth Daily., Disp: , Rfl:   \u0007  cyanocobalamin (VITAMIN B-12) 500 mcg tablet, Take 500 mcg by mouth Daily., Disp: , Rfl:   \u0007  diphenhydrAMINE (BENADRYL) 25 mg tablet, Take 25 mg by mouth every 6 (six) hours as needed for Itching, Disp: , Rfl:   \u0007  EPINEPHrine (EPIPEN) 0.3 mg/0.3 mL injection, Inject 0.3 mg into the muscle, Disp: , Rfl:   \u0007  exemestane (*****) 25 mg tablet, exemestane 25 mg tablet, Disp: , Rfl:   \u0007  fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, 1 spray by Nasal route daily, Disp: , Rfl:   \u0007  latanoprost (XALATAN) 0.005 % ophthalmic solution, 1 drop nightly at bedtime., Disp: , Rfl:   \u0007  levothyroxine (SYNTHROID) 112 mcg tablet, Synthroid 112 mcg tablet, Disp: , Rfl:   \u0007  loperamide (IMODIUM) 2 mg capsule, Take 2 mg by mouth 4 (four) times daily as needed for Diarrhea, Disp: , Rfl:   \u0007  loratadine (CLARITIN) 10 mg tablet, Take 10 mg by mouth As Needed for Allergies, Disp: , Rfl:   \u0007  magnesium oxide (MAG-OX) 400 mg tablet, Take 400 mg by mouth Daily., Disp: , Rfl:   \u0007  melatonin 5 mg tablet, Take 5 mg by mouth nightly at bedtime, Disp: , Rfl:   \u0007  omega-3 fatty acids 1,000 mg capsule, Take 2 g by mouth Daily., Disp: , Rfl:   \u0007  omeprazole (PRILOSEC) 20 mg capsule, TAKE 1 CAPSULE BY MOUTH EVERY DAY, Disp: , Rfl:   \u0007  pertuzumab (*****) 420 mg/14 mL (30 mg/mL) injection, Inject into the vein, Disp: , Rfl:   \u0007  thiamine HCl, vitamin B1, (VITAMIN B-1) 100 mg tablet, Take 100 mg by mouth daily, Disp: , Rfl:   \u0007  trastuzumab (HERCEPTIN IV), Herceptin, Disp: , Rfl:     Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Amoxicillin-Pot Clavulanate Anaphylaxis, Palpitations, Other (See Comments) and Abdominal Pain     chest pain ,tingling feet heaviness in calves both legs     \u0007 Amoxicillin    \u0007 *****    \u0007 Clarithromycin Unknown   \u0007 Erythromycin Unknown   \u0007 Levofloxacin \n Other (See Comments)     Rapid heart rate   \u0007 Meperidine Other (See Comments)     *****   \u0007 Pentobarbital Sodium Other (See Comments) and Unknown     In h and p     \u0007 Pentosan Polysulfate Sodium    \u0007 Sodium    \u0007 Thiopental Other (See Comments)     States Lungs filled with fluid   \u0007 Thiopental Sodium      Lungs filled with fluid .   \u0007 Codeine Rash   \u0007 Codeine-Guaifenesin Rash   \u0007 Epinephrine Rash   \u0007 Levothyroxine Rash   \u0007 Tetracyclines Rash       Medical History:   Past Medical History:   Diagnosis Date   \u0007 Anemia    \u0007 Angina    \u0007 Arrhythmia    \u0007 Arthritis    \u0007 Atrial fibrillation (HCC)    \u0007 Autoimmune disease (HCC)    \u0007 Borderline glaucoma    \u0007 Breast cancer (HCC) February 2010    Lumpectomy left breast    \u0007 Breast cancer, left (HCC)     Diagnosed January 2010   \u0007 Chest pain    \u0007 Easy bruising    \u0007 GERD (gastroesophageal reflux disease)    \u0007 *****'s disease     Radioactive iodine in 1998   \u0007 Heart murmur    \u0007 Hiatal hernia    \u0007 Hypertension    \u0007 Immune deficiency disorder (HCC)    \u0007 Intestinal disease    \u0007 Migraine headache    \u0007 Myasthenia ***** (HCC)     Diagnosed in 1986, resolved on its own   \u0007 Palpitations        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  2011    ***** lumpectomy   \u0007 CHOLECYSTECTOMY  January 2011   \u0007 GALLBLADDER SURGERY  02/13/2011   \u0007 JOINT REPLACEMENT Right October 2013    knee    \u0007 JOINT REPLACEMENT Left August 2015    knee   \u0007 OTHER SURGICAL HISTORY  1971    dc   \u0007 RHINOPLASTY  1980   \u0007 TOTAL KNEE ARTHROPLASTY Right 2014   \u0007 TOTAL KNEE ARTHROPLASTY Left August 2015       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 0.30     Years: 20.00     ***** years: 6.00     Types: Cigarettes     Last attempt to quit: 05/27/2012     Years since quitting: 7.1   \u0007 Smokeless tobacco: Never Used   \u0007 Tobacco comment: occasionally, not every day, only *****   Substance and Sexual Activity   \u0007 Alcohol use: No   Social History Narrative \n    Retired, lives alone in *****.        *****:  ***** ***** ***** ***** ***** ***** ***** ***** ***** *****.     ***** Status: divorced, lives alone.     Gynecologic History:  G 0 P 0 AB 0    Menarche 11  Menopause  57   OCP 6 years HRT 0 years   Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Mother  98        d. 101   \u0007 Breast cancer Sister  74   \u0007 Esophageal cancer Sister  76        d. 77   \u0007 Colon polyps Sister          hyperplastic polyps   \u0007 Endometrial cancer Sister  79        tx surgery alone   \u0007 Lung cancer Maternal Uncle          hx of smoking   \u0007 Other (Brain tumor) Maternal Uncle     \u0007 Heart disease Father     \u0007 Colon cancer Maternal Aunt          d. 95   \u0007 Breast cancer Maternal Aunt          Died of breast cancer   \u0007 Bladder Cancer Maternal Aunt     \u0007 Brain cancer Maternal Uncle  70           Genetic testing negative     Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  + chronic abdominal pain, +nausea, vomiting, or bleeding +diarrhea recently resolve off of *****.   GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC: sciatica bilaterally and back pain due to scoliosis.   PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    07/30/19 0941   *****: Knee  Comment: 5 in the left knee and 4 in the left knee .   *****:   5     I addressed any existing pain symptoms with management plan as below, today 08/06/19   She does exercises for her knees, not cancer related.     Code status:   Advance Care Planning   Full code.  She has a living will scanned in.       Performance status:  0 - Asymptomatic    Physical exam:  BP 138/72  | Pulse 96  | \n Temp 36.7 C (98.1 F) (Oral)  | Resp 16  | Ht 157 cm (5' 1.81\") Comment: @cc July 2019 weighted with shoes on was to hard to take them o | Wt 58.6 kg (129 lb 3.2 oz)  | SpO2 98%  | BMI 23.78 kg/m   GEN: No acute distress, awake and alert, appears stated age  HEENT: No oral lesions  Neck supple no lymphadenopathy  Cardiac: Regular rate, rhythm no murmur  Lungs:  clear to ascultation    Abdomen: Soft, non tender, non distended,  no *****   Extremity: No edema  Lymph: no peripheral adenopathy  Neuro: *****-12 grossly intact, normal UE and LE strength.   Skin: No rash  Breast bilaterally no mass or skin changes. Left lumpectomy site with scar tissue and no skin changes. Small lymph node felt in left axilla <1cm.     Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Hospital Outpatient Visit on 05/18/2016   Component Date Value Ref Range Status   \u0007 Sedimentation Rate (MB) 05/18/2016 27  3.0 - 46.0 mm/h Final   \u0007 C-Reactive Protein 05/18/2016 3.1  <6.3 mg/L Final      pet ct done June 2019  CONCLUSION:    No abnormal areas of FDG uptake to suggest active metastatic disease.    Decreased prominence of uptake in the head and neck region consistent   with brown fat.      No pulmonary consolidations or metastases noted.    Psychologic/emotional well-being/support  She is well.     Assessment / Plan:  1. Stage II left breast cancer diagnosed in February 2010 s/p lumpectomy with sentinel node. 2.15 cm pleomorphic lobular cancer ER+/PR-/her 2 neu positive.  S/p TCH chemotherapy x 6 and maintenance herceptin.  S/p adjuvant tamoxifen followed by ***** completed 05/16/15.   2.  Metastatic relapse in October 2018 in the lymph nodes of the left neck, chest, abdomen and pelvis.  She also had a left adnexal lesion. She started on *****, herceptin and ***** in December 2018 and recently dropped the ***** due to diarrhea.  The diarrhea has resolved.     3.  Set up infusion at \n *****.   4.  RTC in 3 and 6 weeks.   5.  Exercise counseling and nutrition consult for weight loss.  6.  Genetic testing negative.   7.  Neuropathy in both feet, stable.      ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family    \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:  1. Stage II left breast cancer diagnosed in February 2010 s/p lumpectomy with sentinel node. 2.15 cm pleomorphic lobular cancer ER+/PR-/her 2 neu positive.  S/p TCH chemotherapy x 6 and maintenance herceptin.  S/p adjuvant tamoxifen followed by ***** completed 05/16/15.   2.  Metastatic relapse in October 2018 in the lymph nodes of the left neck, chest, abdomen and pelvis.  She also had a left adnexal lesion. She started on *****, herceptin and ***** in December 2018 and recently dropped the ***** due to diarrhea.  The diarrhea has resolved.     3.  Set up infusion at \n *****.   4.  RTC in 3 and 6 weeks.   5.  Exercise counseling and nutrition consult for weight loss.  6.  Genetic testing negative.   7.  Neuropathy in both feet, stable.      ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "Patient with a history of breast cancer, stage IIA, estrogen receptor positive, metastatic disease, seeking care at our clinic due to convenience"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+    "Stage_of_Cancer": "Stage IIA",
+    "Distant_Metastasis": "Yes, to neck, chest, abdomen, and pelvis",
+    "Metastasis": "Yes"
+  },
+  "Lab_Results": {
+    "lab_summary": {
+      "Sedimentation Rate (MB)": "27",
+      "C-Reactive Protein": "3.1"
+    }
+  },
+  "Clinical_Findings": {
+    "findings": "No abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown fat. No pulmonary consolidations or metastases noted. Small lymph node felt in left axilla <1cm."
+  },
+  "Current_Medications": {
+    "current_meds": [
+      "trastuzumab (HERCEPTIN IV), exemestane (Aromasin), levothyroxine (SYNTHROID), loperamide (IMODIUM), loratadine (CLARITIN), magnesium oxide (MAG-OX), melatonin 5 mg tablet, omega-3 fatty acids 1,000 mg capsule, omeprazole (PRILOSEC), pertuzumab (Perjeta), thiamine HCl, vitamin B1, (VITAMIN B-1), ascorbic acid, vitamin C, (VITAMIN C) 500 mg tablet, bismuth subsalicylate (PEPTO BISMOL) suspension, cholecalciferol, vitamin D3, 1,000 unit CAP, coenzyme Q10 100 mg capsule, cyanocobalamin (VITAMIN B-12) 500 mcg tablet, diphenhydrAMINE (BENADRYL) 25 mg tablet, EPINEPHrine (EPIPEN) 0.3 mg/0.3 mL injection, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, latanoprost (XALATAN) 0.005 % ophthalmic solution"
+    ]
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Dropped ***** due to diarrhea, which resolved.",
+    "supportive_meds": [
+      "omeprazole",
+      "loratadine",
+      "loperamide",
+      "diphenhydrAMINE",
+      "epinephrine",
+      "melatonin",
+      "omega-3 fatty acids"
+    ]
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "response_assessment": "stable",
+    "current_meds": "herceptin, exemestane, levothyroxine, loperamide, melatonin, omega-3 fatty acids, omeprazole, thiamine HCl, trastuzumab"
+  },
+  "Response_Assessment": {
+    "response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET-CT in June 2019",
+    "goals_of_treatment": "Not specified",
+    "current_meds": "ascorbic acid, bismuth subsalicylate, cholecalciferol, coenzyme Q10, cyanocobalamin, diphenhydrAMINE, EPINEPHrine, exemestane, fluticasone propionate, latanoprost, levothyroxine, loperamide, loratadine, magnesium oxide, melatonin, omega-3 fatty acids, omeprazole, pertuzumab, thiamine HCl, trastuzumab"
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "TCH chemotherapy x 6",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "hormonal therapy": {
+      "summary": "adjuvant tamoxifen followed by ***** completed 05/16/15",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bowel regimen": {
+      "summary": "",
+      "Short term side_effects_discussed": "diarrhea",
+      "Long term side_effects_discussed": ""
+    },
+    "radiotherapy": {
+      "summary": "",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "other treatment": {
+      "summary": "herceptin",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Herceptin"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue herceptin, plan to start ***** and *****"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutrition consult for weight loss."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutrition consult for weight loss."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "negative"
+  },
+  "Referral": {
+    "Nutrition": "Exercise counseling and nutrition consult for weight loss",
+    "Genetics": "negative",
+    "Specialty": "Medical Oncology/Hematology",
+    "Others": "None",
+    "follow up": "3 and 6 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC in 3 and 6 weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
