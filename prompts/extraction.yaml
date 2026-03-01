@@ -14,13 +14,27 @@ Reason_for_Visit: |
 
 What_We_Found: |
   TASK: Extract 'What We Found'.
+
+  For Type_of_Cancer, be SPECIFIC — include:
+  - Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
+  - Receptor status if mentioned: ER+/PR+/HER2-, triple negative, etc.
+  - Example: "ER+/PR+/HER2- invasive ductal carcinoma" NOT just "breast cancer"
+  Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
+
+  For Stage_of_Cancer:
+  - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
+  - If the patient was originally diagnosed at one stage but now has metastatic recurrence, write BOTH:
+    e.g., "Originally Stage IIA, now metastatic (Stage IV)"
+  - If only grade or tumor size is mentioned without a formal stage, write what is available (e.g., "Grade 2, 2.3 cm tumor")
+  - If no staging information exists in the note, write "Not mentioned in note"
+
   For lab_summary, list SPECIFIC lab values and results (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos 183").
   Do NOT substitute imaging results for lab results.
   For findings, summarize NEW clinical findings or current disease status from this visit.
   Respond *only* with a JSON object using this exact schema:
   {
-  "Type_of_Cancer": "list the type of cancer",
-  "Stage_of_Cancer": "list the stage if it is written in the note",
+  "Type_of_Cancer": "Specific cancer type with histologic subtype and receptor status. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
+  "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage IIA, now metastatic'",
   "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No, local, not sure, need more evidence such as imaging.",
   "Metastasis": "if there is met, Yes (to where), No, or Not sure",
   "lab_summary": "Summary of key lab results with specific values. Only include laboratory tests (blood work), NOT imaging.",
