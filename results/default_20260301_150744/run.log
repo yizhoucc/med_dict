@@ -1640,3 +1640,77 @@ Processing row 28 (9/20)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The cancer is currently not assessable due to lack of treatment."
   Extraction prompts: 34.1s
+    Medication_Plan_chatgpt: 27.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Start letrozole 2.5mg PO daily now",
+    "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+    "Long term side_effects_discussed": "poss
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-FAITH] radiotherapy: "{'summary': 'Plan to pursue locally in *****', 'Short term s" -> "{'summary': 'Plan to pursue locally in *****', 'Short term s"
+      [G3-FAITH] other treatment: "{'summary': 'Calcium supplementation with 1200mg/day combina" -> "{'summary': 'Calcium supplementation with 1200mg/day combina"
+      [G3-FAITH] bone therapy: "{'summary': 'Bone density scan can be completed when she ret" -> "{'summary': 'Bone density scan can be completed when she ret"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'Plan to pursue locally in *****', 'Short term side_effects_discusse" -> "{'summary': 'In regards to radiation therapy plan, she is at risk for local recu"
+    Medication_Plan: 5.3s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending, consider bisphosphonate pending bone
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 18.0s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Continue use of vaginal moisturizer. Plan to undergo bone density scan in September. Plan to start bisphosphonate if bone density scan shows 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Start letrozole 2.5mg PO daily now. Continue use of vaginal moisturizer. Plan to" -> "Plan to start letrozole 2.5mg PO daily. Continue use of vaginal moisturizer. Pla"
+      [G4-TEMPORAL] surgery: "Surgically planned for September 2019" -> ""
+      [G6-SEMANTIC] therapy_plan: "Plan to start letrozole 2.5mg PO daily. Continue use of vaginal moisturizer. Pla" -> "1. Start letrozole 2.5mg PO daily now (prescription sent) 2. Calcium supplementa"
+      [G6-SEMANTIC] surgery: "" -> "mastectomy"
+    radiotherapy_plan: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "In regards to her radiation therapy plan, she is at risk for local recurrence in her right breast for which ***** is recommending additional radiation. Given her surgical p
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "In regards to her radiation therapy plan, she is at risk for" -> "additional radiation to the right breast, no adjuvant radiat"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.4s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "procedure_plan": "Surgical planning per Dr. ***** tentatively scheduled for September 2019, RT planning per ***** likely pursued locally in *****"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Surgical planning per Dr. ***** tentatively scheduled for September 2019, RT pla" -> "RT planning per ***** likely pursued locally in *****"
+      [G6-SEMANTIC] procedure_plan: "RT planning per ***** likely pursued locally in *****" -> "Surgical planning per Dr. ***** tentatively scheduled for September 2019, RT pla"
+    Imaging_Plan: 2.1s
+      [EXTRACT] raw={
+    "imaging_plan": "Bone density scan in September 2019"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "lab_plan": "Bone density scan"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] lab_plan: "Bone density scan" -> "Bone density scan can be completed when she returns from travel"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
