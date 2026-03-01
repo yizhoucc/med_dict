@@ -14418,3 +14418,46 @@ Processing row 96 (97/100)...
   Regex failed, falling back to LLM extraction...
   LLM Extraction Attempt 1...
   Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 7095 chars)
+  A/P extraction: 51.3s
+    Reason_for_Visit: 4.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for breast cancer, specifically invasive ductal carcinoma, stage pT1bN0(sn), to discuss p
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for breast cancer, specifically invasive ductal ca" -> "Follow up for breast cancer, specifically invasive ductal ca"
+      [G6-SEMANTIC] summary: "Follow up for breast cancer, specifically invasive ductal carcinoma, to discuss " -> "Follow up for breast cancer, specifically invasive ductal carcinoma, grade 1, ER"
+    What_We_Found: 8.8s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT1bN0(sn)",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Patient has a smal
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 8.4s
+      [EXTRACT] raw={
+  "current_meds": "atorvastatin, buPROPion, clonazePAM, escitalopram, fingolimod, gabapentin, ibuprofen, lamoTRIgine, melatonin, nicotine, POTASSIUM CHLORIDE, traZODone",
+  "recent_changes": "",
+  "
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 4.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "No evidence of disease progression or recurrence, and treatment is expected to b"
+  Extraction prompts: 27.6s
