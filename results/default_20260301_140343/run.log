@@ -1811,3 +1811,27 @@ Processing row 29 (10/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] REJECTED (no key overlap), kept original
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 24.0s
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note states "After an extensive discussion, the patient completely understands the rationale for neoadjuvant treatment and will spend the w
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] parse FAILED
+  Extraction prompts: 65.8s
+    Medication_Plan_chatgpt: 40.0s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 10.4s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive chemotherapy with either 12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin 60mg/m2 and cycl
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will receive chemotherapy with either 12 cycles " -> "12 cycles of weekly paclitaxel plus trastuzumab and pertuzum"
+      [G4-TEMPORAL] medication_plan: "12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cy" -> "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, fol"
+      [G6-SEMANTIC] ok (all values answer their fields)
