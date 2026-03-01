@@ -3137,3 +3137,153 @@ Processing row 21 (22/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The patient is currently on treatment and the note mentions that the PET scan on"
   Extraction prompts: 31.0s
+    Medication_Plan_chatgpt: 22.8s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "ER and PR positive, started on arimidex, previously on letrozole, previously on hormone blockade for 6 years",
+    "Short term side_effects_discussed": "None 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.4s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "Continue arimidex. If PET CT shows progression, use faslodex with or without a CDK4/6 inhibitor if she has a CDK4/6 mutation."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Continue arimidex. If PET CT shows progression, use faslodex with or without a C" -> "Continue arimidex. If PET CT shows progression, use faslodex with or without a C"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.0s
+      [EXTRACT] raw={
+  "therapy_plan": "Continue arimidex. If PET CT shows progression, use faslodex with or without a CDK4/6 inhibitor."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "PET CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.3s
+      [EXTRACT] raw={
+  "Next clinic visit": "None"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 47.8s
+  Row 21 total: 78.8s
+  Row 21 saved to progress
+
+Processing row 22 (23/100)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'sentinel lymph node', 'aromatase inhibitor', 'estrogen receptor', 'ER negative', 'PR negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for newly diagnosed breast cancer, specifically high grade DCIS and invasive carcinoma wi
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for newly diagnosed breast cancer, specifically hi" -> "Discussion of treatment options for breast cancer, specifica"
+      [G6-SEMANTIC] summary: "Discussion of treatment options for breast cancer, specifically high grade DCIS " -> "Discussion of treatment options for breast cancer, specifically high grade DCIS "
+    What_We_Found: 10.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR- invasive carcinoma with ductal and lobular features",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Left breast mastectomy scar healing well with tissue expande" -> "Left breast mastectomy scar healing well with tissue expande"
+      [G3-FAITH] Type_of_Cancer: "ER+/PR- invasive carcinoma with ductal and lobular features" -> "ER+/PR- invasive carcinoma with ductal and lobular features,"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "1 cm grade 2 invasive carcinoma, 0.7 cm focus of grade 2 invasive carcinoma with"
+    Treatment_Summary: 7.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole",
+  "recent_changes": "",
+  "supportive_meds": "acetaminophen, atorvastatin, cholecalciferol, docusate sodium, ibuprofen, LORazepam, MULTIVIT-MINERALS/FERROUS FUM, oxyCO
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "None"
+      [G6-SEMANTIC] recent_changes: "None" -> ""
+    Goals_of_care: 2.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The cancer is low risk and I do not recommend adjuvant chemotherapy."
+  Extraction prompts: 24.6s
