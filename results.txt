@@ -1,4 +1,4 @@
-Source: test_2row.yaml | Run started: 2026-02-28 17:50:38
+Source: test_2row.yaml | Run started: 2026-02-28 18:04:56
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -175,14 +175,14 @@ RESULTS FOR ROW 1
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient presents with new symptoms and a history of breast cancer, seeking further evaluation and treatment options."
+    "summary": "Patient presents with new symptoms."
   },
   "What_We_Found": {
     "Type_of_Cancer": "Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive",
-    "Stage_of_Cancer": "Stage II",
+    "Stage_of_Cancer": "Stage IIA",
     "Distant Metastasis": "Yes, to lungs, peritoneum, liver, and ovary",
     "Metastasis": "Yes, to lungs, peritoneum, liver, and ovary",
-    "lab_summary": "CT chest, abdomen and pelvis shows widespread metastases consistent with metastatic breast carcinoma",
+    "lab_summary": "CT chest, abdomen and pelvis 12/24/2019",
     "findings": "Widespread metastases consistent with metastatic breast carcinoma, right axillary adenopathy, multiple small pulmonary nodules, large hepatic masses, peritoneal carcinomatosis, and mildly enlarged and hyperdense ovaries"
   },
   "Treatment_Summary": {
@@ -191,45 +191,49 @@ RESULTS FOR ROW 1
     "supportive_meds": "None"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "treatment would be palliative, but could improve quality of life and length of life",
+    "goals_of_treatment": "treatment would be palliative and could improve quality of life and length of life",
     "response_assessment": "Not applicable"
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
-      "summary": "Ibrance and *****",
+      "summary": "Ibrance and another medication, will recommend if HR+/HER2 negative",
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     }
   },
   "Medication_Plan": {
-    "medication_plan": "Will start Ibrance and ***** after biopsy results confirm HR+/her2 negative"
+    "medication_plan": "Will recommend Ibrance and another medication if HR+/HER2 negative, will ask nurse to send information about the treatment."
   },
   "Therapy_plan": {
-    "therapy_plan": "Will recommend Ibrance and ***** if she is HR+/her2 negative"
+    "therapy_plan": "Biopsy to be done"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Biopsy in the office"
+    "procedure_plan": "Biopsy"
   },
   "Imaging_Plan": {
-    "imaging_plan": "Staging work up"
+    "imaging_plan": "Staging workup"
   },
   "Lab_Plan": {
-    "lab_plan": "Staging work up"
+    "lab_plan": null
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Tissue confirmation"
+    "genetic_testing_plan": "No new genetic or molecular tests were planned"
   },
   "Referral": {
-    "Genetics": "Referral"
+    "Nutrition": null,
+    "Genetics": null,
+    "Specialty": "Palliative care",
+    "Others": null,
+    "follow up": "with me"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Thursday to biopsy"
+    "Next clinic visit": "with me"
   },
   "Advance_care_planning": {
-    "Advance care": "None"
+    "Advance care": null
   }
 }
 
@@ -255,46 +259,26 @@ RESULTS FOR ROW 2
 {
   "Reason_for_Visit": {
     "Patient type": "Follow up",
-    "second opinion": "No",
+    "second opinion": "no",
     "in-person": "in-person",
-    "summary": "The patient is here for cycle 3 day 1 of irinotecan treatment, which has been delayed due to transaminitis and diarrhea."
+    "summary": "The patient presents today for cycle 3 day 1 of irinotecan due to missed day 8 treatments with every cycles so far due to transaminitis and diarrhea."
   },
   "What_We_Found": {
-    "Type_of_Cancer": [
-      "breast cancer",
-      "endometrial cancer",
-      "colon cancer"
-    ],
-    "Stage_of_Cancer": "Stage IIB, early stage",
-    "Distant Metastasis": "Yes, to liver, bone, lymph nodes, chest wall",
-    "Metastasis": "Yes, to liver, bone, lymph nodes, chest wall",
-    "lab_summary": "Normal CBC, low hemoglobin, low albumin, high alkaline phosphatase, low sodium, low potassium",
-    "findings": "Metastatic breast cancer, metastases in liver, bone, lymph nodes, and chest wall, new hypermetabolic lesions in bilateral femoral necks, possible intracranial and/or skull base involvement, numerous bone marrow replacing lesions in the lumbar spine and pelvis, endplate fracture at S1"
+    "Type_of_Cancer": "Triple negative breast cancer, colon cancer, endometrial cancer",
+    "Stage_of_Cancer": "",
+    "Distant Metastasis": "Yes, to liver, bone, chest wall, and other locations",
+    "Metastasis": "Yes, to multiple locations",
+    "lab_summary": "low hemoglobin, low albumin, elevated alkaline phosphatase, low sodium, low potassium",
+    "findings": "Metastatic breast cancer, worsening back pain, worsening sacral pain, cellulitis, fever, chest pain, fatigue, diarrhea, nausea, vomiting, protein shakes, anxiety, depression"
   },
   "Treatment_Summary": {
-    "current_meds": [
-      "irinotecan",
-      "MS contin 30mg TID",
-      "flexeril 5mg TID",
-      "oxycodone 15mg",
-      "effexor",
-      "ativan 1 tab TID"
-    ],
-    "recent_changes": "Irinotecan dose increased to 150mg/m2 days 1 and 15 every 28 days, switched to every other week due to poor tolerance",
-    "supportive_meds": [
-      "MS contin",
-      "flexeril",
-      "oxycodone",
-      "ativan",
-      "effexor",
-      "compazine",
-      "laxatives",
-      "antacids"
-    ]
+    "current_meds": "irinotecan, MS contin 30mg TID, flexeril 5mg TID, oxycodone, effexor, ativan 1 tab TID",
+    "recent_changes": "switched to irinotecan 150mg/m2 days 1 and 15 every 28 days due to poor tolerance",
+    "supportive_meds": "albuterol, ambien CR, cyclobenzaprine, docusate sodium, gabapentin, loperamide, lorazepam, magnesium oxide, omeprazole, ondansetron, polyethylene glycol, pregabalin, rivaroxaban"
   },
   "Goals_of_care": {
     "goals_of_treatment": "Continue current therapy until clear evidence of progression",
-    "response_assessment": "Not applicable"
+    "response_assessment": "The cancer is not responding well to treatment"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -317,50 +301,67 @@ RESULTS FOR ROW 2
       "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     },
-    "supportive treatment": {
-      "pain medication": {
-        "summary": "oxycodone 5mg prn, ***** will take over pain management",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      },
-      "psychiatry medication": {
-        "summary": "Increase effexor-XR to 75 mg qd",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      },
-      "blood transfusion plan": {
-        "summary": "1 unit pRBC",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      }
+    "bowel regimen": {
+      "summary": "Doxycycline 100mg BID x 7d for infection",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "pain medication": {
+      "summary": "Oxycodone 5mg prn",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "psychiatry medication": {
+      "summary": "Cymbalta",
+      "Short term side_effects_discussed": "RLS",
+      "Long term side_effects_discussed": ""
+    },
+    "neuropathy": {
+      "summary": "*****",
+      "Short term side_effects_discussed": "improved",
+      "Long term side_effects_discussed": ""
+    },
+    "blood transfusion plan": {
+      "summary": "1 unit pRBC",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
     },
     "other treatment": {
-      "Doxycycline": {
-        "summary": "100mg BID x 7d for chest wall infection",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      },
-      "NS IV": {
-        "summary": "500ml",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      }
+      "*****": "*****"
     }
   },
-  "Medication_Plan": "Irinotecan changed to every other week, increased to 150mg/m2 days 1 and 15 every 28 days; Doxycycline 100mg BID x 7d for chest wall infection; oxycodone 5mg prn; Effexor-XR increased to 75 mg qd; 1 unit pRBC; 500ml NS IV",
-  "Therapy_plan": "Irinotecan changed to every other week, increased to 150mg/m2 days 1 and 15 every 28 days",
-  "radiotherapy_plan": "XRT consult",
-  "Procedure_Plan": "MRI with numerous bone marrow replacing lesion in the lumbar spine and in the pelvis, XRT consult",
-  "Imaging_Plan": "MRI, MRI with numerous bone marrow replacing lesion in the lumbar spine and in the pelvis, Scans again in 3 months",
-  "Lab_Plan": "ALT, hepatitis B surface antigen, HBV DNA every 4 months",
-  "Genetic_Testing_Plan": "No new genetic or molecular tests were planned during this visit",
+  "Medication_Plan": {
+    "medication_plan": "Irinotecan changed to every other week, increased to 150mg/m2 days 1 and 15 every 28 days, Doxycycline 100mg BID x 7d for infection, Oxycodone 5mg prn, Effexor-XR increased to 75 mg qd, will start ***** 30mg TID and flexeril TID for sacral pain, 1 unit pRBC"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Irinotecan changed to every other week, increased to 150mg/m2 days 1 and 15 every 28 days, XRT consult, Effexor-XR increased to 75 mg qd, will start ***** 30mg TID and flexeril TID for sacral pain"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "XRT consult"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "MRI, XRT consult"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI in 3 months"
+  },
+  "Lab_Plan": {
+    "lab_plan": "ALT, hepatitis B surface antigen, HBV DNA, every 4 months"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+  },
   "Referral": {
     "Nutrition": "",
     "Genetics": "",
     "Specialty": "Radiation oncology",
     "Others": "Home health, Physical therapy",
-    "follow up": "Follow up in 2 weeks"
+    "follow up": "2 weeks, XRT consult"
   },
-  "follow_up_next_visit": "Follow up in 2 weeks",
-  "Advance_care_planning": "Goals of care"
+  "follow_up_next_visit": {
+    "Next clinic visit": "2 weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Goals of care discussed"
+  }
 }

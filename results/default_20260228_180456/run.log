@@ -47,3 +47,19 @@ Processing row 1 (2/2)...
   Extraction prompts: 23.6s
     Medication_Plan_chatgpt: 21.8s [re-extracted]
     Medication_Plan: 6.2s [re-extracted]
+    Therapy_plan: 4.8s [re-extracted]
+    radiotherapy_plan: 0.6s
+    Procedure_Plan: 0.6s
+    Imaging_Plan: 1.8s [re-extracted]
+    Lab_Plan: 0.9s
+    Genetic_Testing_Plan: 0.9s
+    Referral: 1.5s
+    follow_up_next_visit: 0.7s
+    Advance_care_planning: 0.6s
+  Plan extraction prompts: 40.5s
+  Row 1 total: 81.8s
+  Row 1 saved to progress
+
+Total processing time: 122.6s (2.0min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_180456/
