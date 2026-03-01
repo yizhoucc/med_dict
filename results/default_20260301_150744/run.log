@@ -265,3 +265,134 @@ Processing row 21 (2/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 8.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has started treatment, specifically endocrine therapy with anastrozole (arimidex) and denosumab (Xgeva). The note mentions that the patient had a PET scan on 11/03/20 and 04/24/21, which s
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "PET-CT shows stable to slightly decreased metabolic activity" -> "PET-CT shows a good response"
+      [G6-SEMANTIC] symptoms: "" -> "no"
+      [G6-SEMANTIC] response_assessment: "PET-CT shows a good response" -> "stable to slightly decreased metabolic activity of osseous metastases"
+  Extraction prompts: 47.6s
+    Medication_Plan_chatgpt: 17.5s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "ER and PR positive, started on arimidex, previously on letrozole, previously on hormone blockade for 6 years",
+    "Short term side_effects_discussed": "None 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G3-FAITH] hormonal therapy: "{'summary': 'ER and PR positive, started on arimidex, previo" -> "{'summary': 'ER and PR positive, started on arimidex, previo"
+      [G3-FAITH] radiotherapy: "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term si" -> "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term si"
+      [G3-FAITH] other treatment: "{'summary': 'steroids for pneumonitis', 'Short term side_eff" -> "{'summary': 'steroids for pneumonitis', 'Short term side_eff"
+      [G3-FAITH] chemotherapy: "{'summary': 'abemaciclib, previously AC x 4', 'Short term si" -> "{'summary': 'abemaciclib, previously AC x 4', 'Short term si"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'ER and PR positive, started on arimidex, previously on letrozole, p" -> "{'summary': 'continue arimidex', 'Short term side_effects_discussed': '', 'Long "
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term side_effects_discussed" -> "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff"
+      [G4-TEMPORAL] other treatment: "{'summary': 'steroids for pneumonitis', 'Short term side_effects_discussed': ''," -> "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'abemaciclib, previously AC x 4', 'Short term side_effects_discussed" -> "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff"
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff" -> "{'summary': 'XRT to L4 and T10', 'Short term side_effects_discussed': '', 'Long "
+      [G6-SEMANTIC] other treatment: "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff" -> "{'summary': 'abemaciclib', 'Short term side_effects_discussed': 'pneumonitis', '"
+      [G6-SEMANTIC] chemotherapy: "{'summary': 'None', 'Short term side_effects_discussed': '', 'Long term side_eff" -> "{'summary': 'AC x 4', 'Short term side_effects_discussed': '', 'Long term side_e"
+    Medication_Plan: 6.2s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex, consider faslodex with ***** if pet ct shows progression and she has a ***** mutation, future options include hormone blockade with afinitor or xeloda or a
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Continue arimidex, consider faslodex with ***** if pet ct shows progression and " -> "Continue arimidex, consider faslodex with ***** if pet ct shows progression and "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue arimidex, if PET CT shows progression, consider faslodex with a specific mutation, future options include hormone blockade with afinitor or xeloda or a clinical trial."
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Continue arimidex, if PET CT shows progression, consider faslodex with a specifi" -> "Continue arimidex, will consider faslodex with a specific mutation, plan to incl"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.8s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.4s
+      [EXTRACT] raw={
+    "procedure_plan": "PET CT"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "PET CT now"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "PET CT now" -> "PET CT"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 4.5s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows "
+      [G6-SEMANTIC] lab_plan: "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows " -> "PET CT now, and if stable, continue arimidex alone. If PET CT shows progression,"
+    Genetic_Testing_Plan: 2.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "If pet ct shows progression could use faslodex with ***** if" -> "faslodex with ***** if she has a ***** mutation"
+      [G6-SEMANTIC] genetic_testing_plan: "faslodex with ***** if she has a ***** mutation" -> "If pet ct shows progression could use faslodex with ***** if she has a ***** mut"
+    Referral: 1.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "XRT, Rad Onc consult",
+  "Others": "None",
+  "follow up": "PET CT"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Specialty: "XRT, Rad Onc consult" -> "Medical Oncology/Hematology"
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics', 'Others']
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "pet ct now"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "pet ct now" -> "pet ct"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 47.6s
+  Row 21 total: 95.2s
+  Row 21 saved to progress
+
+Processing row 22 (3/20)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'ER negative', 'PR negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
