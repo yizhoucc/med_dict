@@ -4324,3 +4324,34 @@ Processing row 29 (30/100)...
       [G3-FAITH] summary: "Initial consultation for newly diagnosed early stage breast " -> "early stage breast cancer, who presents in consultation to d"
       [G6-SEMANTIC] second opinion: "no" -> "yes"
       [G6-SEMANTIC] summary: "early stage breast cancer, who presents in consultation to discuss treatment opt" -> "early stage IDC, to discuss treatment options and establish care"
+    What_We_Found: 11.1s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER- PR- HER2+ IDC",
+  "Stage_of_Cancer": "Stage II-III",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "Creatinine 0.74, CA 27.29 16.6-106.2, CA 15-3 60.9
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 2.1s
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 4.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> "The patient has a large, enhancing hypermetabolic right brea"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 22.8s
