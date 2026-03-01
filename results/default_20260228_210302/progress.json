@@ -20,7 +20,8 @@
     15,
     16,
     17,
-    18
+    18,
+    19
   ],
   "results": {
     "0": {
@@ -1805,7 +1806,91 @@
           "response_assessment": "The cancer is treatable and the goal is to extend the duration and maintain the quality of life"
         }
       }
+    },
+    "19": {
+      "coral_idx": 159,
+      "note_text": "  Patient name  ***** ***** *****     ***** of service  02/04/2021          Subjective      ***** ***** ***** is an 75 y.o. female with history of HTN, DM, osteoporosis, and recurrent UTI who ***** consultation regarding a metastatic recurrence of her *****+/*****- breast cancer.        History of Present Illness  Her oncologic history is as summarized in the problem list.     Briefly, she had screen detected left breast cancer diagnosed on core biopsy in 2009. She underwent bilateral mastectomy with ***** and was found to have *****=/*****- 0.9cm grade II IDC with 0/2 LN involved with carcinoma and 1.8cm of DCIS. She took 5 years of tamoxifen and was only on letrozole for 6 months prior to discontinuation.     She was feeling well until April 2020 when she started to have low back pain and sought evaluation. She did not have imaging done, but her pain seem to resolve intermittently without any intervention. She then had severe diarrhea in December 2020 and had a CT of the abdomen obtain which showed colitis and incidentally noted a pulmonary nodule. A PET/CT was reportedly ordered to work this up further and revealed axillary hypermetabolic lymph nodes, multiple ***** and hilar FDG avid nodes, and innumerable osseous lesions throughout. A right ***** crest lesion was biopsied and found to be consistent with breast primary. It was also ER+ and ***** negative by FISH.     She is overall feeling well, but endorses having some left sided pain in the rib and mid axillary region. She otherwise ***** pain elsewhere. She has not had any cough, headaches, or neuro symptoms.       ONCOLOGIC HISTORY  Specialty Problems        Malignant Neoplasms    1. Metastatic breast cancer (CMS code)     Overview      Left breast cancer  April 2009 Screening mammogram done as part of annual exam (In kuwait)  04/25/2009 Dx by core Bx - grade I IDC, low grade DCIS   ***** associated with invasive carcinoma  05/10/2009 s/p bilateral mastectomy \n    Left Breast 0.9cm grade II IDC, 0/2 SLN with carcinoma, ER+PR+*****-, and   1.8 cm of DCIS . LCIS also present. No *****, Negative margins   Right Breast no carcinoma  November 2009 pt had not started hormonal therapy   November 2009 - 2015: 5 years of Tamoxifen   02/04/2015 Genetic testing (21 genes) negative  2015 Letrozole taken for 6month (did not feel well on it)    Metastatic Disease  April 2020 Started to have back pain   01/02/21 6 mm left lower lobe pulmonary nodule incidentally noted on CT   abdomen obtained for diarrhea work up. PET/CT recommended  01/09/21 PET/CT   Few hypermetabolic right axillary lymph nodes are noted, with the   largest one measure 1.3 x 0.5 cm with a maximum SUV of 3.1.   7 mm pulmonary nodule in ***** without increased FDG uptake    Multiple mediastinal and hilar hypermetabolic ***** are   noted   Innumerable osseous lesions are seen throughout the bones  01/22/21 Right iliac crest Bx: involved by carcinoma, consistent w/ breast   primary. ER+ (80%), PR+ (50%), ***** 2+ (FISH *****/***** ratio: 1.05)              Past Medical History:   Diagnosis Date   \u0007 Arthritis    \u0007 Diabetes mellitus (CMS code) 05/05/12    pre diabetic, labeled type II, no meds   \u0007 GERD (gastroesophageal reflux disease)    \u0007 History of recurrent urinary tract infection     1 times per year   \u0007 History of shingles 2000   \u0007 Hypertension    \u0007 Irritable bowel syndrome with constipation 07/14/2016   \u0007 Metastatic breast cancer (CMS code) 2021   \u0007 Osteoporosis         OB History     Gravida   1    Para   1    Term        Preterm        AB        Living           SAB        TAB        Ectopic        *****        Multiple        ***** Births                            Past Surgical History:   Procedure Laterality Date   \u0007 BREAST BIOPSY  1970s, 04/25/2009    1970s: right breast; 2009: Ultrasound-guided core biopsy   \u0007 CESAREAN SECTION  1978   \u0007 CYST INCISION AND DRAINAGE  1970    right breast cyst   \u0007 DILATION AND \n CURETTAGE OF UTERUS  1999   \u0007 MASTECTOMY Bilateral 05/07/2009    bilateral with sentinel lymph node biopsy       Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 1.0 standard drinks     Types: 1 Glasses of wine per week     Comment: Occasionally   \u0007 Drug use: No   \u0007 Sexual activity: Not Currently     Comment: Old age   Social History Narrative    Menarche - 12    Menopause - 47 (Took HRT for 10 year- stopped as she was given estrace cream)    ***** - First at *****    ***** here in ***** ***** and lives with her husband     Retired in 2003 - used to be a medical tech. Then in ***** ***** ***** technician (daughter is neurologist)           Family History   Problem Relation Name Age of Onset   \u0007 Throat cancer Paternal Uncle          non smoker   \u0007 Ovarian cancer Paternal Aunt          dx late 50s   \u0007 Breast cancer Sister ***** ***** 42   \u0007 Breast cancer Sister ***** ***** 51   \u0007 Breast cancer Sister ***** ***** 48        Diseased in 2005   \u0007 Colon polyps Neg Hx         Allergies/Contraindications   Allergen Reactions   \u0007 Latex, Natural Rubber Itching       Current Outpatient Medications   Medication Instructions   \u0007 aspirin 81 mg, Oral, Every 3 Days   \u0007 ATELVIA 35 mg, Every 7 Days Scheduled   \u0007 CALCIUM CARBONATE (CALTRATE 600 ORAL) 600 mg, Daily Scheduled   \u0007 cholecalciferol, vitamin D3, 1000 UNITS tablet 1 tablet, Oral, Daily Scheduled   \u0007 cyanocobalamin, vitamin B-12, 1,000 mcg ***** Oral, Every 3 Days   \u0007 estradioL (ESTRACE) 2 g, Daily Scheduled   \u0007 metFORMIN (*****) 500 mg, Oral, Daily With ***** Scheduled   \u0007 multivitamin capsule 1 tablet, Oral, Daily Scheduled   \u0007 rosuvastatin (CRESTOR) 2.5 mg, Oral, Four Times Weekly Scheduled   \u0007 telmisartan (*****) 80 mg, Oral, Daily Scheduled              Objective         Vitals    02/04/21 1530   BP: 129/64   Pulse: 70   Resp: 16   Temp: 36.2 C (97.1 \n F)   TempSrc: Tympanic   SpO2: 100%   Weight: 58.7 kg (129 lb 4.8 oz)   Height: 157.3 cm (5' 1.93\")   *****:   6   *****: Rib *****         Wt Readings from Last 3 Encounters:   02/04/21 58.7 kg (129 lb 4.8 oz)   02/28/15 59.7 kg (131 lb 9.6 oz)   01/08/15 60.2 kg (132 lb 11.2 oz)       ECOG Performance Status: 0 - Asymptomatic    Physical Exam          General appearance: NAD, WD, WN; well-nourished; well-appearing; conversant, appropriately interactive  HEENT: normocephalic; no temporal wasting; normal conjunctiva; no scleral icterus; normal hearing; oropharynx clear; mucous membranes moist; no oral lesions  Neck: full range of motion, supple, no lymphadenopathy  Breast: s/p bilateral mastectomies without reconstruction  Cardiovascular: RRR; normal S1 S2; no murmurs, gallops, or rubs  Pulmonary: clear to auscultation bilaterally; normal respiratory effort  Abdomen: soft, NT, ND, normal BS; no palpable masses, ascites, or hepatomegaly  Back: no point spinal tenderness  Extremities: no peripheral edema or discoloration   Skin: no rash, ulcers or subcutaneous nodules visualized or palpated; normal pallor; no jaundice  Neurologic: alert & oriented x 3; no focal sensorimotor deficits; normal gait  Psychiatric: affect normal, mood normal, behavior normal, thought content normal, judgement normal            Review of Prior Testing  LABS  I personally reviewed and interpreted each of the patient's relevant lab tests as outlined   Results for orders placed or performed in visit on 03/01/13   POCT glucose, Fingerstick   Result Value Ref Range    Glucose, meter download 104 70 - 199 mg/dL        RADIOLOGY  I personally reviewed and interpreted the patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as outlined   No results found.      PATHOLOGY   Per Onc timeline    GENOMICS    Per Onc timeline    Assessment and Plan    ***** ***** ***** is a 75 y.o. post-menopausal female with \n early stage *****+/*****- IDC of the left breast diagnosed in 2009 s/p bilateral mastectomies and 5 years of Tamoxifen, now with metastatic recurrence with disease in the bone and lymph nodes.     We had an extensive discussion regarding her diagnosis and potential treatment options.     Given her cancer is HR+ and *****- we discussed that her treatment will include hormonal therapy. We discussed use of CDK February 26 inhibitors in combination with ***** for first line treatment. We reviewed the data from the ***** ***** which demonstrated ***** postmenopausal women with ER-positive, *****-negative breast cancer who were randomized to receive letrozole plus palbociclib had a median PFS of 24.8 months (compared with 14.5 months in the placebo). The most common adverse events were neutropenia, anemia, and fatigue. We also reviewed the anticipated side effects and risks associated with aromatase inhibitors including but not limited to arthralgias, urogenital atrophy, and possible acceleration of bone density loss/fractures, and discussed strategies to mitigate these side effects. She has consented to treatment and thus letrozole has been sent to ***** *****. Palbociclib has been sent to the ***** ***** *****. We discussed potential palbociclib side effects including but not limited to myelosuppression in particular neutropenia requiring count checks every 4 weeks before the start of the next cycle, as well as mucositis, fatigue, n/v, hair thinning, pneumonitis.      Since she has extensive bony mets and new pain, we recommend obtaining new scans and ordered MRI of total spine and CAP CT. We will request her outside PET/CT for comparison. We also discussed that in patients with breast cancer with bone metastases, use of bone modifying agents reduce the risk of skeletal related events. Thus, we recommend initiation of denosumab.We recommend that she have dental clearance prior to its initiation and reviewed potential AEs \n associated with this including *****. We also referred to radiation oncology for consult however her rib and back pain seem migratory and it is not clear if she has a focal site of pain.      We will request her outside pathology and request foundation one testing on this. If there are not enough cells, will send for ***** 360 testing.       Plan  - MRI Total Spine  - CT Chest, Abdomen, Pelvis  - Rad Onc referral  - Xgeva - needs dental evaluation first   - Obtain outside PET/CT  - Obtain outside path and send for foundation one, if this is not possible, would send for ***** 360  - Start Letrozole, Rx given  - Rx for Palbociclib. OK to start.  She will need monthly blood work on Palbociclib   - Repeat imaging after 3 months on treatment  -labs including tumor markers      RTC in ~ 1 month      Patient seen and discussed with breast oncology attending *****. ***** ***** *****, MD    ***** *****, MD PGY-5  Hematology/Oncology Fellow        I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n",
+      "assessment_and_plan": "Assessment and Plan    ***** ***** ***** is a 75 y.o. post-menopausal female with \n early stage *****+/*****- IDC of the left breast diagnosed in 2009 s/p bilateral mastectomies and 5 years of Tamoxifen, now with metastatic recurrence with disease in the bone and lymph nodes.     We had an extensive discussion regarding her diagnosis and potential treatment options.     Given her cancer is HR+ and *****- we discussed that her treatment will include hormonal therapy. We discussed use of CDK February 26 inhibitors in combination with ***** for first line treatment. We reviewed the data from the ***** ***** which demonstrated ***** postmenopausal women with ER-positive, *****-negative breast cancer who were randomized to receive letrozole plus palbociclib had a median PFS of 24.8 months (compared with 14.5 months in the placebo). The most common adverse events were neutropenia, anemia, and fatigue. We also reviewed the anticipated side effects and risks associated with aromatase inhibitors including but not limited to arthralgias, urogenital atrophy, and possible acceleration of bone density loss/fractures, and discussed strategies to mitigate these side effects. She has consented to treatment and thus letrozole has been sent to ***** *****. Palbociclib has been sent to the ***** ***** *****. We discussed potential palbociclib side effects including but not limited to myelosuppression in particular neutropenia requiring count checks every 4 weeks before the start of the next cycle, as well as mucositis, fatigue, n/v, hair thinning, pneumonitis.      Since she has extensive bony mets and new pain, we recommend obtaining new scans and ordered MRI of total spine and CAP CT. We will request her outside PET/CT for comparison. We also discussed that in patients with breast cancer with bone metastases, use of bone modifying agents reduce the risk of skeletal related events. Thus, we recommend initiation of denosumab.We recommend that she have dental clearance prior to its initiation and reviewed potential AEs \n associated with this including *****. We also referred to radiation oncology for consult however her rib and back pain seem migratory and it is not clear if she has a focal site of pain.      We will request her outside pathology and request foundation one testing on this. If there are not enough cells, will send for ***** 360 testing.       Plan  - MRI Total Spine  - CT Chest, Abdomen, Pelvis  - Rad Onc referral  - Xgeva - needs dental evaluation first   - Obtain outside PET/CT  - Obtain outside path and send for foundation one, if this is not possible, would send for ***** 360  - Start Letrozole, Rx given  - Rx for Palbociclib. OK to start.  She will need monthly blood work on Palbociclib   - Repeat imaging after 3 months on treatment  -labs including tumor markers      RTC in ~ 1 month      Patient seen and discussed with breast oncology attending *****. ***** ***** *****, MD    ***** *****, MD PGY-5  Hematology/Oncology Fellow        I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Metastatic recurrence of ER+/HER2- breast cancer, initial consultation regarding metastatic recurrence"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "breast cancer",
+          "Stage_of_Cancer": "",
+          "Distant Metastasis": "Yes, bone, lymph nodes",
+          "Metastasis": "Yes, bone, lymph nodes",
+          "lab_summary": "Glucose, meter download 104",
+          "findings": "Metastatic recurrence of breast cancer with disease in the bone and lymph nodes"
+        },
+        "Treatment_Summary": {
+          "current_meds": "Letrozole, Palbociclib",
+          "recent_changes": "Letrozole and Palbociclib sent to pharmacy",
+          "supportive_meds": "Aspirin, ATELVIA, Calcium carbonate, Cholecalciferol, Cyanocobalamin, Estradiol, Metformin, Multivitamin, Rosuvastatin, Telmisartan"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+          "response_assessment": ""
+        },
+        "Medication_Plan_chatgpt": {
+          "Hormonal therapy": {
+            "summary": "Letrozole and Palbociclib",
+            "Short term side_effects_discussed": "neutropenia, anemia, fatigue",
+            "Long term side_effects_discussed": "arthritis, urogenital atrophy, possible acceleration of bone density loss/fractures"
+          },
+          "Bone therapy": {
+            "summary": "Denosumab",
+            "Short term side_effects_discussed": "not specified",
+            "Long term side_effects_discussed": "not specified"
+          },
+          "Radiotherapy": {
+            "summary": "Rad Onc referral",
+            "Short term side_effects_discussed": "not specified",
+            "Long term side_effects_discussed": "not specified"
+          },
+          "Other treatment": {
+            "summary": "Dental clearance before starting Denosumab"
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Letrozole will be started. Palbociclib will be started. Denosumab will be started after dental clearance. Rad Onc referral is pending."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Will start Letrozole and Palbociclib. Will start Denosumab after dental clearance. Plan to obtain outside PET/CT and outside pathology and send for Foundation One testing if necessary. Plan to repeat imaging after 3 months on treatment. Plan to repeat labs including tumor markers."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "Rad Onc referral"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "MRI of total spine, CT Chest, Abdomen, Pelvis, PET/CT, biopsy"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "MRI of total spine, CT Chest, Abdomen, Pelvis, PET/CT"
+        },
+        "Lab_Plan": {
+          "lab_plan": "labs including tumor markers"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "Will send outside pathology and send for Foundation One testing if necessary."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Rad Onc referral",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "RTC in ~ 1 month"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
     }
   },
-  "completed": false
+  "completed": true
 }

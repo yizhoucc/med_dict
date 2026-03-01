@@ -2543,3 +2543,97 @@ Processing row 19 (20/20)...
       [G3-FAITH] response_assessment: "not applicable" -> ""
       [G3-FAITH] EMPTIED: ['response_assessment']
   Extraction prompts: 14.6s
+    Medication_Plan_chatgpt: 22.0s
+      [EXTRACT] raw={
+  "Hormonal therapy": {
+    "summary": "Letrozole and Palbociclib",
+    "Short term side_effects_discussed": "neutropenia, anemia, fatigue",
+    "Long term side_effects_discussed": "arthritis, uroge
+      [G1-FORMAT] ok, keys=['Hormonal therapy', 'Bone therapy', 'Radiotherapy', 'Other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['Hormonal therapy', 'Bone therapy', 'Radiotherapy', 'Other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 3.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "Letrozole and Palbociclib have been sent. Letrozole will be started. Palbociclib will be started. Denosumab will be started after dental clearance. Rad Onc referral is pending.
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Letrozole and Palbociclib have been sent. Letrozole will be started. Palbociclib" -> "Letrozole will be started. Palbociclib will be started. Denosumab will be starte"
+    Therapy_plan: 5.1s
+      [EXTRACT] raw={
+  "therapy_plan": "Will start Letrozole and Palbociclib. Will start Denosumab after dental clearance. Plan to obtain outside PET/CT and outside pathology and send for Foundation One testing if neces
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    radiotherapy_plan: 0.8s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Rad Onc referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "procedure_plan": "MRI of total spine, CT Chest, Abdomen, Pelvis, Xgeva, biopsy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "MRI of total spine, CT Chest, Abdomen, Pelvis, Xgeva, biopsy" -> "MRI of total spine, CT Chest, Abdomen, Pelvis, PET/CT, biops"
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 2.4s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI of total spine, CT Chest, Abdomen, Pelvis, PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.2s
+      [EXTRACT] raw={
+  "lab_plan": "labs including tumor markers"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Will send outside pathology and send for Foundation One testing if necessary."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.3s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Rad Onc referral",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 1.0s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC in ~ 1 month"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 43.6s
+  Row 19 total: 58.2s
+  Row 19 saved to progress
+
+Total processing time: 1214.8s (20.2min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_210302/
