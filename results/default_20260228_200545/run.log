@@ -13,3 +13,14 @@ Processing row 10 (1/5)...
   Regex extraction succeeded (1231 chars)
   A/P extraction: 0.0s
     Reason_for_Visit: 3.8s [faith-trimmed]
+    What_We_Found: 14.7s [faith-trimmed]
+    Treatment_Summary: 4.0s [faith-trimmed]
+    Goals_of_care: 2.9s [faith-trimmed]
+  Extraction prompts: 26.5s
+    Medication_Plan_chatgpt: 28.0s
+    Medication_Plan: 3.0s
+    Therapy_plan: 1.8s
+    radiotherapy_plan: 1.0s
+    Procedure_Plan: 2.3s
+    Imaging_Plan: 2.3s
+    Lab_Plan: 1.0s
