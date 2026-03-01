@@ -11703,3 +11703,67 @@ Processing row 78 (79/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The patient is here to discuss treatment options with Dr ***"
       [G6-SEMANTIC] response_assessment: "The patient is here to discuss treatment options with Dr ***** to then be follow" -> "Not mentioned in note."
   Extraction prompts: 30.2s
+    Medication_Plan_chatgpt: 44.1s
+      [EXTRACT] raw={
+  "pain medication": {
+    "summary": "Continue methadone 10mg q8h, will take 5mg oxycodone for breakthrough pain",
+    "Short term side_effects_discussed": "None mentioned",
+    "Long term side_eff
+      [G1-FORMAT] ok, keys=['pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment', 'radiotherapy', 'hormonal therapy', 'bone therapy', 'chemotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment', 'radiotherapy', 'hormonal therapy', 'bone therapy', 'chemotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 4.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "Continue methadone 10mg q8h, take 5mg oxycodone for breakthrough pain, consider cymbalta/lyrica for diabetic neuropathic pain"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Continue methadone 10mg q8h, take 5mg oxycodone for breakthr" -> "Continue methadone 10mg q8h, will take 5mg oxycodone for bre"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.1s
+      [EXTRACT] raw={
+  "therapy_plan": "Needs staging to make a decision on treatment, will switch access to a power port, will take thoracentesis and use fluid for ER and PR"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.8s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Needs staging to make a decision on treatment"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.3s
+      [EXTRACT] raw={
+  "procedure_plan": "Needs thoracentesis and use fluid for ER and PR, will switch access to a power port"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.2s
+      [EXTRACT] raw={
+  "imaging_plan": "Needs to continue PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.5s
+      [EXTRACT] raw={
+  "lab_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
