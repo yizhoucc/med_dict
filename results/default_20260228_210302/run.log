@@ -135,3 +135,55 @@ Processing row 0 (1/20)...
       [G1-FORMAT] ok, keys=['Next clinic visit']
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 34.4s
+  Row 0 total: 49.0s
+  Row 0 saved to progress
+
+Processing row 1 (2/20)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Patient with metastatic breast cancer, stage unknown, presents for cycle 3 day 1 of irinotecan trea
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Patient with metastatic breast cancer, stage unknown, presen" -> "Patient with metastatic breast cancer who started irinotecan"
+    What_We_Found: 12.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "metastatic breast cancer, colon cancer, endometrial cancer",
+  "Stage_of_Cancer": "",
+  "Distant Metastasis": "Yes, to multiple sites",
+  "Metastasis": "Yes, multiple sites",
+  
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 9.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "irinotecan, MS contin 30mg TID, flexeril 5mg TID, oxycodone 15mg, effexor, ativan 1 tab TID",
+  "recent_changes": "Irinotecan changed to every other week, dose increased to 150mg/
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "albuterol, AMBIEN CR, cyclobenzaprine, diphenoxylate-atropin" -> "albuterol, AMBIEN CR, cyclobenzaprine, diphenoxylate-atropin"
+    Goals_of_care: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "Continue current therapy until clear evidence of progression",
+  "response_assessment": "Not applicable"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not applicable" -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+  Extraction prompts: 26.8s
