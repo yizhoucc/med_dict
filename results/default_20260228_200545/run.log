@@ -24,3 +24,23 @@ Processing row 10 (1/5)...
     Procedure_Plan: 2.3s
     Imaging_Plan: 2.3s
     Lab_Plan: 1.0s
+    Genetic_Testing_Plan: 1.4s
+    Referral: 2.2s
+    follow_up_next_visit: 0.7s
+    Advance_care_planning: 1.0s
+  Plan extraction prompts: 44.7s
+  Row 10 total: 71.2s
+  Row 10 saved to progress
+
+Processing row 11 (2/5)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1955 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.9s [faith-trimmed]
+    What_We_Found: 5.5s
+    Treatment_Summary: 3.7s [faith-trimmed]
+    Goals_of_care: 2.3s [faith-trimmed]
+  Extraction prompts: 15.2s
+    Medication_Plan_chatgpt: 35.1s
+    Medication_Plan: 3.7s [faith-trimmed, temporal-cleaned]
