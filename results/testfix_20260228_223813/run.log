@@ -367,3 +367,118 @@ Processing row 22 (3/10)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] medication_plan: "starting letrozole, will receive at least 5 years of adjuvant hormonal therapy, " -> "will receive at least 5 years of adjuvant hormonal therapy, will discuss further"
       [G6-SEMANTIC] medication_plan: "will receive at least 5 years of adjuvant hormonal therapy, will discuss further" -> "starting letrozole, will receive at least 5 years of adjuvant hormonal therapy, "
+    Therapy_plan: 4.8s
+      [EXTRACT] raw={
+  "therapy_plan": "will start letrozole, will receive at least 5 years of adjuvant hormonal therapy, will discuss further treatment options after baseline DEXA, will discuss bone-targeted therapies"
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.2s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "none mentioned"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline DEXA"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.1s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 2.9s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.3s
+      [EXTRACT] raw={
+  "Next clinic visit": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 54.5s
+  Row 22 total: 81.6s
+  Row 22 saved to progress
+
+Processing row 23 (4/10)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 6.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] summary: "Follow up for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%" -> "Patient with right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%)"
+    What_We_Found: 10.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, HER2 5%",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastas
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Right axillary pain, edema in R chest wall" -> "Right axillary pain, edema in R chest wall, new 6.4cm irregu"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "Grade II, 6.4cm irregularly shaped masses with obscured margins and associated f"
+    Treatment_Summary: 26.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "OxyCODONE (ROXICODONE) 5 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (Tums) 1250 mg (500 mg elemental)
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "None mentioned" -> ""
+      [G3-FAITH] EMPTIED: ['recent_changes']
+      [G6-SEMANTIC] recent_changes: "" -> "None"
