@@ -1,1 +1,14 @@
 Loading model...
+Loading weights: 100%|██| 291/291 [01:06<00:00,  5.88it/s, Materializing param=model.norm.weight]
+Loading weights: 100%|██| 291/291 [01:06<00:00,  4.39it/s, Materializing param=model.norm.weight]
+Model loaded.
+Data loaded: 7 rows (indices [0, 1, 4, 6, 10, 11, 19])
+Using pipeline: v2
+
+Processing 7 rows...
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 635, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 566, in main
+    print(f"\nProcessing row {index} ({index - row_range[0] + 1}/{len(df)})...")
+UnboundLocalError: local variable 'row_range' referenced before assignment
