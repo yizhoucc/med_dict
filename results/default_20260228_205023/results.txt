@@ -440,3 +440,89 @@ RESULTS FOR ROW 12
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 13
+============================================================
+
+--- Column: coral_idx ---
+152
+
+--- Column: note_text ---
+"*****-***** ***** is a 41 y.o. female with recently diagnosed left ER+ nuclear grade 2 DCIS s/p left partial mastectomy here to discuss systemic therapy options.     HISTORY OF PRESENT ILLNESS:    Breast history:    08/01/18 left diagnostic mammo - grouped and slightly pleomorphic microcalcifications in the upper outer aspect of the left breast measuring 10mm.      08/01/18 left stereotactic core biopsy - G2 DCIS with ***** and microcalcifications; ER 80-90%  ***** path review - high grade DCIS, possible focus of microinvasion     08/06/18 MRI - confirmed known area of NME in left breast ***** 2 cm, additional focal NME in the posterior ***** breast.   Right breast demonstrated a 1.3 cm oval mass in the *****.     08/10/18 targeted bilateral u/s - 14 mm solid mass in upper inner right breast is suspicious (1:00, 3CFN)  Right breast mass biopsy c/w fibroadenoma  No u/s correlate for the upper outer left breast finding on MRI     08/17/18 - left breast 2:00  MRI guided vacuum assisted core biopsy - benign with focal adenosis and pseudoangiomatous stromal hyperplasia    09/21/18 left partial mastectomy (***** ***** *****) with local tissue rearrangement (Dr. ***** *****) - 18 mm DCIS, cribriform, solid, nuclear G2, margins clear     ***** DCIS score 60    Invitae 46 ***** panel negative     She is having regular menses, she is not interested in future child bearing.  She feels well. She denies bone pain, sob, cough, abd pain, n/v, headache, visual changes, or other concerning *****.     PAST MEDICAL HISTORY:  Past Medical History:   Diagnosis Date   \u0007 Breast cancer        PAST SURGICAL HISTORY:  Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY     \u0007 DILATION AND CURETTAGE OF UTERUS  2013       GYN HISTORY:  OB History     Gravida Para Term Preterm AB Living    1 0            SAB TAB Ectopic ***** Multiple ***** Births                       Obstetric Comments    Age at menarche: 13  OCP use: \n None  Pre-menopausal          MEDICATIONS:  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 ibuprofen (ADVIL,MOTRIN) 200 mg tablet Take 200 mg by mouth.     \u0007 multivitamin (MULTIPLE VITAMINS) tablet Take by mouth.     \u0007 TURMERIC ***** EXTRACT ORAL Take by mouth.       No current facility-administered medications for this visit.        ALLERGIES:  Allergies/Contraindications   Allergen Reactions   \u0007 Amoxicillin Nausea Only       FAMILY HISTORY:  Family History   Problem Relation Name Age of Onset   \u0007 Colon cancer Mother     \u0007 Diabetes Maternal Grandmother     \u0007 Colon cancer Maternal Grandfather     \u0007 Breast cancer Maternal Aunt     \u0007 Melanoma Neg Hx     \u0007 Basal cell carcinoma Neg Hx     \u0007 Squamous cell carcinoma Neg Hx     \u0007 Skin ca. unk/oth Neg Hx         SOCIAL HISTORY:  Social History     Social History Narrative    Lives in ***** *****. Works as an attorney.     Has a domestic partner        Tob: none    Etoh: min    Illicits: none       REVIEW OF SYSTEMS:  Review of Systems - 14 point review of systems negative except problems noted above.        PHYSICAL EXAM:  General appearance - alert, well appearing, and in no distress  HEENT: anicteric, OP clear  Mental status - alert, oriented to person, place, and time  Lymph nodes - no palpable cervical or supraclavicular lymphadenopathy   Axilla - no axillary adenopathy  Breasts - s/p left partial mastectomy with well-healed incision in upper outer quadrant with mild overlying edema. No evidence of infection or expanding seroma. Right breast without dominant mass or suspicious lesions.    Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm  Abdomen - soft,ND/NT, no HSM  Neurological - A&Ox3, grossly non-focal  Musculoskeletal - No point tenderness in spine or other ***** tenderness  Extremities - no edema  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions \n noted    LABS:    IMAGING/PATHOLOGY:  As noted above in *****    ASSESSMENT/PLAN:  *****-***** ***** is a 41 y.o. female with recently diagnosed left nuclear grade 2 ER+ DCIS s/p left partial mastectomy here to discuss systemic therapy options.     We discussed that DCIS is a surgical disease. The primary treatment is definitive surgery which she has had. I encouraged to meet with radiation oncology to discuss adjuvant radiation and its benefit in reducing local/regional recurrence. I explained that DCIS can return 50% of the time as another insitu disease and 50% of the time as invasive disease, but technically it should not result in distant recurrence due to lack of invasion. We discussed the role of systemic therapy with tamoxifen. We reviewed the ***** B-24 study that did show a statistically significant reduction in recurrence risk with 5 years of *****, albeit the benefit was small and the side effects are not insignificant. In particular the reduction in invasive disease was 3% with tamoxifen, the remaining benefit in non-invasive disease.  No difference in distant recurrence or survival. We discussed the potential side effects including but not limited to hot flashes, vaginal discharge, headache/migraines, vaginal dryness, mood instability, sexual dysfunction, ovarian cysts, increase in fibroids, impact on uterus including ***** and abnormal vaginal bleeding, as well as small increase risk of endometrial cancer (0.5%) and thrombosis (1-2%). We discussed that she is unable to get pregnant on tamoxifen.     The patient will think about the risk/benefit. I reassured her that her prognosis is excellent. We discussed other lifestyle factors to consider including exercise, healthy BMI <30, reducing etoh.       1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. \n I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 60 min Total counseling time: 50 min     \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT/PLAN:  *****-***** ***** is a 41 y.o. female with recently diagnosed left nuclear grade 2 ER+ DCIS s/p left partial mastectomy here to discuss systemic therapy options.     We discussed that DCIS is a surgical disease. The primary treatment is definitive surgery which she has had. I encouraged to meet with radiation oncology to discuss adjuvant radiation and its benefit in reducing local/regional recurrence. I explained that DCIS can return 50% of the time as another insitu disease and 50% of the time as invasive disease, but technically it should not result in distant recurrence due to lack of invasion. We discussed the role of systemic therapy with tamoxifen. We reviewed the ***** B-24 study that did show a statistically significant reduction in recurrence risk with 5 years of *****, albeit the benefit was small and the side effects are not insignificant. In particular the reduction in invasive disease was 3% with tamoxifen, the remaining benefit in non-invasive disease.  No difference in distant recurrence or survival. We discussed the potential side effects including but not limited to hot flashes, vaginal discharge, headache/migraines, vaginal dryness, mood instability, sexual dysfunction, ovarian cysts, increase in fibroids, impact on uterus including ***** and abnormal vaginal bleeding, as well as small increase risk of endometrial cancer (0.5%) and thrombosis (1-2%). We discussed that she is unable to get pregnant on tamoxifen.     The patient will think about the risk/benefit. I reassured her that her prognosis is excellent. We discussed other lifestyle factors to consider including exercise, healthy BMI <30, reducing etoh.       1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. \n I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 60 min Total counseling time: 50 min     \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Recently diagnosed left ER+ nuclear grade 2 DCIS, s/p left partial mastectomy, to discuss systemic therapy options"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "DCIS",
+    "Stage_of_Cancer": "nuclear grade 2",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "Patient has recently diagnosed nuclear grade 2 ER+ DCIS, with clear margins after left partial mastectomy"
+  },
+  "Treatment_Summary": {
+    "current_meds": "Tamoxifen",
+    "recent_changes": "",
+    "supportive_meds": "ibuprofen, multivitamin, turmeric"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "Discuss adjuvant radiation and its benefit in reducing local/regional recurrence, and the role of tamoxifen in reducing recurrence risk",
+    "response_assessment": "Patient will think about the risk/benefit"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Tamoxifen for 5 years",
+      "Short term side_effects_discussed": "hot flashes, vaginal discharge, headache/migraines, vaginal dryness, mood instability, sexual dysfunction, ovarian cysts, increase in fibroids, impact on uterus including endometrial changes and abnormal vaginal bleeding",
+      "Long term side_effects_discussed": "small increase risk of endometrial cancer (0.5%) and thrombosis (1-2%)"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Tamoxifen for 5 years"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "plan to discuss radiation and its benefit in reducing local/regional recurrence, discussed starting tamoxifen"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "discussed with radiation oncology to discuss adjuvant radiation and its benefit in reducing local/regional recurrence"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "None"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
