@@ -1723,3 +1723,57 @@ Processing row 11 (12/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The previously described, now treated metastases are no longer visible, consiste"
   Extraction prompts: 22.6s
+    Medication_Plan_chatgpt: 45.7s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "continue herceptin and ***** alone, continue letrozole qd, continue *****; now q12 wks given stable bone status, stopped due to intolerance",
+    "Short term side
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "continue herceptin, continue letrozole qd, continue *****; now q12 wks given stable bone status, cont herceptin/*****"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "continue herceptin, continue letrozole qd, continue *****; now q12 wks given sta" -> "continue herceptin, continue letrozole qd, continue *****; cont herceptin/*****"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.8s
+      [EXTRACT] raw={
+  "therapy_plan": "continue herceptin and ***** alone, continue letrozole qd, cont herceptin/*****; plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "GK on 09/07/18, plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "GK"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] procedure_plan: "GK" -> "No procedures planned."
+    Imaging_Plan: 3.1s [temporal-cleaned]
+      [EXTRACT] raw={
+  "imaging_plan": "MRI brain on 01/31, CT CAP on 09/05/18 was stable"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] imaging_plan: "MRI brain on 01/31, CT CAP on 09/05/18 was stable" -> "MRI brain on 01/31, CT CAP"
+      [G6-SEMANTIC] ok (all values answer their fields)
