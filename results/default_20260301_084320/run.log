@@ -2745,3 +2745,101 @@ Processing row 18 (19/100)...
   Attempt 2 failed LLM sanity check. Retrying...
   LLM Extraction Attempt 3...
   Running LLM Sanity Check...
+  Attempt 3 failed LLM sanity check. Retrying...
+  All attempts failed. Skipping plan-specific extraction.
+  A/P extraction: 17.3s
+    Reason_for_Visit: 6.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial consult for newly diagnosed breast cancer, specifically invasive ductal carcinoma (IDC) w
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Initial consult for newly diagnosed breast cancer, specifica" -> "Initial consult for newly diagnosed breast cancer, specifica"
+      [G6-SEMANTIC] summary: "Initial consult for newly diagnosed breast cancer, specifically invasive ductal " -> "70-year-old female with newly diagnosed breast cancer, specifically invasive duc"
+    What_We_Found: 10.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "L
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "" -> "ER 90%, PR 90%"
+      [G6-SEMANTIC] Metastasis: "No" -> "Yes, to axilla"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "Grade 3, 1.7 cm tumor"
+    Treatment_Summary: 2.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "atorvastatin, glyBURIDE, glyBURIDE, lisinopril, aspirin",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "None"
+    Goals_of_care: 2.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "neoadjuvant",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note" -> "The patient is a candidate for neoadjuvant chemotherapy vs. mastectomy."
+  Extraction prompts: 22.9s
+  Row 18 total: 40.2s
+  Row 18 saved to progress
+
+Processing row 19 (20/100)...
+  Injected 5 term definitions: ['sentinel lymph node', 'aromatase inhibitor', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (3461 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Metastatic recurrence of ER+ breast cancer, metastatic recurrence of IDC, initial consultation rega
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] second opinion: "no" -> "yes"
+      [G6-SEMANTIC] summary: "Metastatic recurrence of ER+ breast cancer, metastatic recurrence of IDC, initia" -> "Metastatic recurrence of ER+ IDC, initial consultation regarding metastatic recu"
+    What_We_Found: 8.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage 0, now metastatic",
+  "Distant Metastasis": "Yes, to bone",
+  "Metastasis": "Yes, to bone",
+  "lab_s
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage 0, now metastatic" -> "Originally 0.9cm grade II IDC, now metastatic"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 6.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole, Palbociclib",
+  "recent_changes": "None",
+  "supportive_meds": "Aspirin, ATELVIA, Calcium carbonate, Cholecalciferol, Cyanocobalamin, EstradioL, Metformin, Multivitamin
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "None" -> ""
+      [G3-FAITH] EMPTIED: ['recent_changes']
+      [G6-SEMANTIC] recent_changes: "" -> "Letrozole was sent to patient, Palbociclib was sent to patient"
+    Goals_of_care: 3.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is currently responding to treatment with letrozo"
+      [G6-SEMANTIC] response_assessment: "The cancer is currently responding to treatment with letrozole and palbociclib, " -> "Not mentioned in note."
+  Extraction prompts: 24.1s
