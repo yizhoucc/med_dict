@@ -2230,3 +2230,139 @@ Processing row 16 (17/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] therapy_plan: "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years" -> "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years"
       [G4-TEMPORAL] therapy_plan: "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherap" -> "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherap"
+    radiotherapy_plan: 1.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "breast radiotherapy to complete breast conservation management, referral to see Rad Onc tomorrow"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 1.0s
+      [EXTRACT] raw={
+  "procedure_plan": "surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 1.4s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline DXA scan"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.3s
+      [EXTRACT] raw={
+  "lab_plan": "hormone levels check"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 0.9s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "referral to genetics"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.8s
+      [EXTRACT] raw={
+  "Nutrition": "referral to nutritionist",
+  "Genetics": "referral to genetics",
+  "Specialty": "referral to Rad Onc",
+  "Others": "None",
+  "follow up": "F/U visit"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 0.8s
+      [EXTRACT] raw={
+  "Next clinic visit": "tomorrow"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 45.5s
+  Row 16 total: 57.1s
+  Row 16 saved to progress
+
+Processing row 17 (18/20)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1752 chars)
+  A/P extraction: 11.3s
+    Reason_for_Visit: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial follow-up for newly diagnosed invasive ductal carcinoma of the left breast, stage pT1b, wit
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Initial follow-up for newly diagnosed invasive ductal carcin" -> "Initial follow-up for newly diagnosed invasive ductal carcin"
+    What_We_Found: 6.5s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Invasive ductal carcinoma, Encapsulated papillary carcinoma",
+  "Stage_of_Cancer": "pT1b",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "ER 100%, PR 95%,
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 1.8s
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 2.4s
+      [EXTRACT] raw={
+  "goals_of_treatment": "Curative",
+  "response_assessment": "The patient is a low risk for recurrence and is recommended to receive adjuvant endocrine therapy for 5-10 years."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 14.8s
+    Medication_Plan_chatgpt: 16.5s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 3.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen, plan to obtain blood sample for genetic counseling, DEXA ordered"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen, plan to" -> "plan to obtain blood sample for genetic counseling, strongly recommend adjuvant "
+    Therapy_plan: 3.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen, plan to obtain blood sample for genetic counseling, plan to start radiotherapy after Rad Onc eval +/- XRT"
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen, plan to" -> "plan to start radiotherapy after Rad Onc eval +/- XRT, strongly recommend adjuva"
