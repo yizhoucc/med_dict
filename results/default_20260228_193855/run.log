@@ -48,3 +48,28 @@ Processing row 6 (2/5)...
     Medication_Plan: 4.1s
     Therapy_plan: 2.8s
     radiotherapy_plan: 0.8s
+    Procedure_Plan: 1.2s
+    Imaging_Plan: 1.3s
+    Lab_Plan: 1.2s
+    Genetic_Testing_Plan: 1.3s
+    Referral: 2.3s
+    follow_up_next_visit: 0.7s
+    Advance_care_planning: 0.9s
+  Plan extraction prompts: 48.8s
+  Row 6 total: 70.2s
+  Row 6 saved to progress
+
+Processing row 7 (3/5)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2476 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 3.3s [faith-trimmed]
+    What_We_Found: 4.8s [faith-trimmed]
+    Treatment_Summary: 5.1s [faith-trimmed]
+    Goals_of_care: 2.7s
+  Extraction prompts: 16.4s
+    Medication_Plan_chatgpt: 29.0s
+    Medication_Plan: 2.4s [temporal-cleaned]
+    Therapy_plan: 2.1s [temporal-cleaned]
+    radiotherapy_plan: 0.8s [faith-trimmed]
