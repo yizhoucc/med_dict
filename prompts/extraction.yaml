@@ -98,21 +98,36 @@ Current_Medications: |
   - PAST/COMPLETED (do NOT include): medications already finished or stopped.
     Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
 
-  List ONLY oncologic medications the patient is actively taking NOW. Include drug names.
-  Do NOT include non-cancer medications (blood pressure, diabetes, psychiatric, allergy meds).
-  Do NOT include medications the patient is "not taking" or that are marked as discontinued.
-  If no oncologic medications are currently active, write empty string.
+  ONLY include drugs from this oncology drug list (or close variants). If a drug is NOT on this list, do NOT include it:
+  --- CHEMOTHERAPY ---
+  doxorubicin, adriamycin, cyclophosphamide, cytoxan, paclitaxel, taxol, nab-paclitaxel, abraxane,
+  docetaxel, taxotere, carboplatin, capecitabine, xeloda, gemcitabine, gemzar, eribulin, halaven,
+  ixabepilone, irinotecan, epirubicin, fluorouracil, 5-FU, methotrexate, vinorelbine, navelbine,
+  cisplatin, sacituzumab, trodelvy, doxil, liposomal doxorubicin
+  --- HORMONAL THERAPY ---
+  tamoxifen, letrozole, femara, anastrozole, arimidex, exemestane, aromasin, fulvestrant, faslodex,
+  goserelin, zoladex, leuprolide, lupron, megestrol, megace, raloxifene
+  --- TARGETED THERAPY ---
+  trastuzumab, herceptin, pertuzumab, perjeta, T-DM1, ado-trastuzumab, kadcyla, trastuzumab deruxtecan,
+  enhertu, lapatinib, tykerb, neratinib, nerlynx, tucatinib, tukysa, palbociclib, ibrance, ribociclib,
+  kisqali, abemaciclib, verzenio, everolimus, afinitor, alpelisib, piqray, olaparib, lynparza,
+  talazoparib, talzenna, elacestrant, orserdu, capivasertib, truqap, bevacizumab, avastin
+  --- IMMUNOTHERAPY ---
+  pembrolizumab, keytruda, atezolizumab, tecentriq, nivolumab, opdivo, durvalumab, imfinzi
+  --- BONE AGENTS ---
+  denosumab, xgeva, prolia, zoledronic acid, zometa, pamidronate
 
-  Think step by step before answering:
-  1. List ALL medications mentioned in the note.
-  2. For each one, determine: Is it oncologic (cancer-related)? Is it CURRENT, PLANNED, or PAST?
-  3. Only include medications that are BOTH oncologic AND currently active.
+  Do NOT include: blood pressure meds, diabetes meds, psychiatric meds, allergy meds, antibiotics,
+  pain meds, laxatives, vitamins, supplements, thyroid meds, cholesterol meds, or any other
+  non-cancer medication. These are NOT oncologic: amlodipine, atorvastatin, metformin, levothyroxine,
+  losartan, omeprazole, gabapentin, duloxetine, lorazepam, oxycodone, acetaminophen, ibuprofen,
+  cetirizine, multivitamin, calcium, vitamin D, docusate, senna, iron.
 
-  Write your reasoning first, then output the JSON on a new line starting with {
+  If no oncologic medications from the list above are currently active, write empty string "".
 
-  Respond with a JSON object using this exact schema:
+  Respond *only* with a JSON object using this exact schema:
   {
-  "current_meds": "List of current oncologic medications or regimens the patient is ACTIVELY taking now."
+  "current_meds": "List of current oncologic medications the patient is ACTIVELY taking now, or empty string if none."
   }
 
 Treatment_Changes: |
@@ -137,23 +152,18 @@ Treatment_Goals: |
   Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
   Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
 
-  Think step by step before answering:
-  1. What is the cancer stage? (early-stage vs metastatic/Stage IV)
-  2. What treatment is planned or ongoing? (surgery, chemo, radiation, endocrine therapy)
-  3. Apply the decision tree:
-     - Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
-     - Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant")
-     - Metastatic/Stage IV cancer → "palliative"
-     - DCIS only, no invasive cancer → "risk reduction"
-     - Completed curative treatment, now on surveillance endocrine therapy → "adjuvant" or "risk reduction"
-  4. Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant chemo — that is "curative" or "adjuvant".
-  5. Do NOT write "neoadjuvant" as a goal — write "curative" instead (neoadjuvant is a treatment strategy, not a treatment intent).
+  Use this decision tree:
+  - Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
+  - Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant")
+  - Metastatic/Stage IV cancer → "palliative"
+  - DCIS only, no invasive cancer → "risk reduction"
+  - Completed curative treatment, now on surveillance endocrine therapy → "adjuvant" or "risk reduction"
+  - Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant chemo — that is "curative" or "adjuvant".
+  - Do NOT write "neoadjuvant" as a goal — write "curative" instead.
 
-  Write your reasoning first, then output the JSON on a new line starting with {
-
-  Respond with a JSON object using this exact schema:
+  Respond *only* with a JSON object using this exact schema (NO other keys):
   {
-  "goals_of_treatment": "The intent of cancer treatment: curative, palliative, adjuvant, risk reduction, or symptom management. NOT the purpose of this visit."
+  "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, or symptom management"
   }
 
 Response_Assessment: |
@@ -187,8 +197,9 @@ Response_Assessment: |
   - BAD: "Low Risk Oncotype score" (prognostic tool, not a response to treatment)
 
   Write your reasoning first, then output the JSON on a new line starting with {
+  IMPORTANT: Your JSON must contain ONLY the key "response_assessment". Do NOT add any other keys.
 
-  Respond with a JSON object using this exact schema:
+  Respond with a JSON object using this exact schema (NO other keys):
   {
   "response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence: imaging, labs, exam. Do NOT include future plans, surgical recovery, or prognostic scores."
   }
