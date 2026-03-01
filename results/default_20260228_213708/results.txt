@@ -1237,3 +1237,114 @@ RESULTS FOR ROW 9
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 10
+============================================================
+
+--- Column: coral_idx ---
+149
+
+--- Column: note_text ---
+"***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    Interim History:     She feels well and has recovered well from surgery.  Her ***** was low risk and she does not need chemotherapy.  She will have the simulation for radiation next week.  She will continue on her *****.  She will see us for medical oncology follow up twice a year.       Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole   ***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)         Interim History:      She stopped smoking and will proceed to ***** Dr. ***** on July 24.  She will stay on letrozole. ***** plan on a ***** to risk stratify for chemotherapy benefit.   Discussed how some patients need radiation after a mastectomy depending on the pathology.           Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole.     Medications:    Current Outpatient Medications:   \u0007  cephALEXin (KEFLEX) 500 mg capsule, Take 500 mg by mouth 3 (three) times daily, Disp: , Rfl:   \u0007  letrozole \n (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily, Disp: 90 tablet, Rfl: 4  \u0007  traZODone (DESYREL) 50 mg tablet, Take 50 mg by mouth daily as needed for Sleep, Disp: , Rfl:     Allergies: Allergies/Contraindications  No Known Allergies    Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No chest pain, orthopnea or palpitations  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    08/28/21 1209   *****: Breast  Comment: LEFT   *****:   1       Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.       Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk *****.   2.  S/p left mastectomy with ***** 07/24/2021 with a 8.8.cm ***** with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021.    4.  She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes.   6.  DEXA.   7.  RTC in the *****.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 20 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as \n well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.    Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only. I spent a total of 20 minutes in ***** communication with this patient.  \n"
+
+--- Column: assessment_and_plan ---
+"Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk *****.   2.  S/p left mastectomy with ***** 07/24/2021 with a 8.8.cm ***** with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021.    4.  She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes.   6.  DEXA.   7.  RTC in the *****.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 20 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as \n well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.    Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only. I spent a total of 20 minutes in ***** communication with this patient.  \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow up for Cancer of central portion of left breast, Stage II, to discuss treatment plan and next steps."
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Cancer of central portion of left breast",
+    "Stage_of_Cancer": "II",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "She has recovered well from surgery, is low risk, does not need chemotherapy, and will have radiation next week."
+  },
+  "Treatment_Summary": {
+    "current_meds": "Letrozole",
+    "recent_changes": "She will continue on letrozole.",
+    "supportive_meds": "Cephalexin, Tramadol"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "Compatible with treatment response. She will continue on letrozole. She will have radiation to the left chest wall and surrounding lymph nodes."
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "continue on letrozole started April 2021",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "radiotherapy": {
+      "summary": "to have radiation to the left chest wall and surrounding lymph nodes",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "bowel regimen": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "pain medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "psychiatry medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "other treatment": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "continue on letrozole"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "continue on letrozole"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "radiation to the left chest wall and surrounding lymph nodes"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "DEXA"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "None"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
