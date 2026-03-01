@@ -444,6 +444,20 @@ def extract_schema_from_prompt(prompt_text):
     return "{}"
 
 
+def extract_schema_keys(prompt_text):
+    """Extract expected JSON keys from the schema in a prompt.
+
+    Returns a set of key names, or empty set if parsing fails.
+    """
+    schema_str = extract_schema_from_prompt(prompt_text)
+    parsed = try_parse_json(schema_str)
+    if parsed and isinstance(parsed, dict):
+        return set(parsed.keys())
+    # Fallback: regex extract quoted keys before colons
+    keys = re.findall(r'"([^"]+)"\s*:', schema_str)
+    return set(keys) if keys else set()
+
+
 def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True):
     """
     Extract keypoints with agentic self-correction:
@@ -627,6 +641,215 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
             flags.append("re-extracted")
         if temporal_cleaned:
             flags.append("temporal-cleaned")
+        flag_str = f" [{', '.join(flags)}]" if flags else ""
+        print(f"    {key}: {elapsed:.1f}s{flag_str}")
+
+    return keypoints
+
+
+# --- V2 Pipeline constants ---
+PLAN_KEYS = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
+             'Medication_Plan', 'Medication_Plan_chatgpt'}
+
+VAGUE_TERMS = ["staging workup", "new symptoms", "will start medications",
+               "further workup", "appropriate treatment", "as above",
+               "as discussed", "per discussion"]
+
+
+def _has_vague_terms(text):
+    """Check if text contains any vague terms that need specificity improvement."""
+    text_lower = text.lower()
+    return any(term in text_lower for term in VAGUE_TERMS)
+
+
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True):
+    """
+    V2 extraction pipeline with 5 independent gates.
+    Each gate fixes one specific issue (trim, don't redo).
+
+    Gates:
+      1. FORMAT   - Parse JSON, LLM reformat if needed
+      2. SCHEMA   - Validate keys match expected schema
+      3. FAITHFUL - Trim unsupported claims (not re-extract)
+      4. TEMPORAL - Remove past/completed items from plan keys
+      5. SPECIFIC - Replace vague language with specifics
+
+    Args:
+        prompts: dict of {key: task_prompt_text}
+        model: the loaded model
+        tokenizer: the loaded tokenizer
+        gen_config: generation config dict
+        base_cache: pre-computed KV cache from build_base_cache()
+        verify: whether to run faithfulness/temporal/specificity gates (default True)
+
+    Returns:
+        dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
+    """
+    keypoints = {}
+
+    for key, task in prompts.items():
+        key_start = time.time()
+        flags = []
+
+        # --- Step 1: Extract ---
+        task_prompt = (
+            f"<|start_header_id|>user<|end_header_id|>\n\n"
+            f"{task}"
+            f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+        )
+        answer, returned_cache = run_model_with_cache_manual(
+            task_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+        )
+        del returned_cache
+        torch.cuda.empty_cache()
+        gc.collect()
+
+        # --- Gate 1: FORMAT ---
+        parsed = try_parse_json(answer)
+        if parsed is None:
+            schema = extract_schema_from_prompt(task)
+            repair_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"Your previous response was:\n{answer}\n\n"
+                f"This is not valid JSON. Reformat into valid JSON matching this exact schema:\n"
+                f"{schema}\n"
+                f"Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            repaired_answer, _ = run_model_with_cache_manual(
+                repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            parsed = try_parse_json(repaired_answer)
+            if parsed is not None:
+                answer = repaired_answer
+                flags.append("format-repaired")
+
+        # --- Gate 2: SCHEMA ---
+        if parsed is not None:
+            expected_keys = extract_schema_keys(task)
+            if expected_keys and not (expected_keys & set(parsed.keys())):
+                actual_keys = list(parsed.keys())
+                schema_fix_prompt = (
+                    f"<|start_header_id|>user<|end_header_id|>\n\n"
+                    f"Your JSON has incorrect keys.\n"
+                    f"Expected keys: {sorted(expected_keys)}\n"
+                    f"Your keys: {actual_keys}\n"
+                    f"Rewrite using the correct keys from the schema. Keep your extracted content.\n"
+                    f"Return ONLY the JSON object."
+                    f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+                )
+                fixed_raw, _ = run_model_with_cache_manual(
+                    schema_fix_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                )
+                torch.cuda.empty_cache()
+                gc.collect()
+
+                fixed_parsed = try_parse_json(fixed_raw)
+                if fixed_parsed is not None and (expected_keys & set(fixed_parsed.keys())):
+                    parsed = fixed_parsed
+                    answer = fixed_raw
+                    flags.append("schema-fixed")
+
+        # --- Gate 3: FAITHFULNESS (trim mode) ---
+        if verify and parsed is not None:
+            original_keys = set(parsed.keys())
+            faith_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"Review this extraction against the original medical note in your context:\n"
+                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                f"For each claim, check: is it explicitly stated or directly supported by the note?\n"
+                f"- If ALL claims are supported, return the JSON exactly unchanged.\n"
+                f"- If any claim is NOT supported by the note, remove ONLY that unsupported claim "
+                f"and return the cleaned JSON.\n"
+                f"Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            cleaned_raw, _ = run_model_with_cache_manual(
+                faith_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            cleaned_parsed = try_parse_json(cleaned_raw)
+            if cleaned_parsed is not None:
+                cleaned_keys = set(cleaned_parsed.keys())
+                if original_keys & cleaned_keys:
+                    if cleaned_parsed != parsed:
+                        flags.append("faith-trimmed")
+                    parsed = cleaned_parsed
+                    answer = cleaned_raw
+
+        # --- Gate 4: TEMPORAL (plan keys only) ---
+        if verify and parsed is not None and key in PLAN_KEYS:
+            original_keys = set(parsed.keys())
+            temporal_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"Review this extraction for a PLAN section:\n"
+                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                f"Remove any PAST/COMPLETED items (past tense, past dates, "
+                f"\"underwent\", \"s/p\", \"completed\").\n"
+                f"Keep only CURRENT (\"continue\", \"currently on\") and FUTURE "
+                f"(\"will\", \"plan to\", \"pending\") items.\n"
+                f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
+                f"Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            cleaned_raw, _ = run_model_with_cache_manual(
+                temporal_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            cleaned_parsed = try_parse_json(cleaned_raw)
+            if cleaned_parsed is not None:
+                cleaned_keys = set(cleaned_parsed.keys())
+                if original_keys & cleaned_keys:
+                    if cleaned_parsed != parsed:
+                        flags.append("temporal-cleaned")
+                    parsed = cleaned_parsed
+                    answer = cleaned_raw
+
+        # --- Gate 5: SPECIFICITY (conditional) ---
+        if verify and parsed is not None and _has_vague_terms(answer):
+            original_keys = set(parsed.keys())
+            specificity_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"This extraction contains vague language. Replace vague terms with SPECIFIC "
+                f"details from the original medical note:\n"
+                f"- \"staging workup\" → list the actual tests ordered "
+                f"(e.g., \"CT chest/abd/pelvis, bone scan, MRI brain\")\n"
+                f"- \"new symptoms\" → describe the specific symptoms\n"
+                f"- \"will start medications\" → name the specific drugs and doses\n"
+                f"- \"as above\" or \"as discussed\" → state what was actually discussed\n\n"
+                f"Original extraction:\n{answer}\n\n"
+                f"Return the improved JSON with specific details. Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            improved_raw, _ = run_model_with_cache_manual(
+                specificity_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            improved_parsed = try_parse_json(improved_raw)
+            if improved_parsed is not None:
+                improved_keys = set(improved_parsed.keys())
+                if original_keys & improved_keys:
+                    if improved_parsed != parsed:
+                        flags.append("specificity-improved")
+                    parsed = improved_parsed
+                    answer = improved_raw
+
+        # --- Store result ---
+        if parsed is not None:
+            keypoints[key] = parsed
+        else:
+            keypoints[key] = answer
+
+        elapsed = time.time() - key_start
         flag_str = f" [{', '.join(flags)}]" if flags else ""
         print(f"    {key}: {elapsed:.1f}s{flag_str}")
 

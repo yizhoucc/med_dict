@@ -25,7 +25,8 @@ med_dict/
 │   ├── extraction.yaml     # Extraction prompts (4 keys: visit reason, findings, treatment, goals)
 │   └── plan_extraction.yaml # Plan extraction prompts (12 keys: meds, procedures, imaging, etc.)
 ├── exp/
-│   ├── default.yaml        # Default config (10 rows, bfloat16)
+│   ├── default.yaml        # Default config (5 rows, bfloat16, v2 pipeline)
+│   ├── default_v1.yaml     # V1 pipeline config (for comparison)
 │   ├── test_2row.yaml      # Quick test config (2 rows)
 │   └── test_mac.yaml       # Mac MPS config (float16)
 ├── results/                # Auto-generated run outputs
@@ -60,10 +61,35 @@ data:
 
 ## Pipeline
 
-1. **Assessment/Plan extraction** - Copy-paste from note (3 retries + LLM verification)
-2. **Keypoint extraction** - From full note: visit reason, findings, treatment, goals
-3. **Plan extraction** - From A/P section: meds, procedures, imaging, labs, genetics, referrals, follow-up
-4. **Faithfulness check** - Verify each extraction against source text
+Two pipeline versions are available, selected via `extraction.pipeline` in config:
+
+### V2 (default) — 5-Gate Agentic Extraction
+
+Each gate fixes one specific issue by trimming/correcting, not re-extracting:
+
+1. **FORMAT** — Parse JSON; if invalid, LLM reformats to match schema
+2. **SCHEMA** — Validate output keys against expected schema; LLM fixes mismatched keys
+3. **FAITHFULNESS** — Trim unsupported claims (removes only unfaithful parts, keeps the rest)
+4. **TEMPORAL** — Plan keys only: remove past/completed items, keep current/future
+5. **SPECIFICITY** — Conditional: replace vague terms ("staging workup", "as above") with specific details from the note
+
+### V1 — 3-Gate Pipeline
+
+1. **FORMAT** — Parse JSON; LLM repair if needed
+2. **FAITHFULNESS** — Full re-extraction if unfaithful (may introduce new errors)
+3. **TEMPORAL** — Remove past items from plan keys
+
+### Switching Pipelines
+
+```bash
+# V2 (default)
+python run.py exp/default.yaml
+
+# V1 (for comparison)
+python run.py exp/default_v1.yaml
+```
+
+Or set `extraction.pipeline` to `"v1"` or `"v2"` in any config YAML.
 
 ## Features
 

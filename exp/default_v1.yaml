@@ -1,5 +1,5 @@
 experiment:
-  name: "default"
+  name: "default_v1"
   seed: 42
 
 model:
@@ -21,7 +21,7 @@ prompts:
   plan_extraction: "prompts/plan_extraction.yaml"
 
 extraction:
-  pipeline: "v2"
+  pipeline: "v1"
   max_retries: 3
   verify: true
 

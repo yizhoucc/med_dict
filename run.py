@@ -99,6 +99,7 @@ from ult import (
     AutoTokenizer,
     build_base_cache,
     extract_and_verify,
+    extract_and_verify_v2,
     run_model,
     gc,
 )
@@ -523,6 +524,11 @@ def main():
 
     verify = config.get("extraction", {}).get("verify", True)
 
+    # Select pipeline version
+    pipeline = config.get("extraction", {}).get("pipeline", "v1")
+    extract_fn = extract_and_verify_v2 if pipeline == "v2" else extract_and_verify
+    print(f"Using pipeline: {pipeline}")
+
     # 9. Results file
     results_path = os.path.join(run_dir, "results.txt")
     if progress and completed_indices:
@@ -566,7 +572,7 @@ def main():
         # Extract keypoints from full note
         ext_start = time.time()
         base_cache = build_base_cache(note_text, model, tokenizer)
-        keypoints = extract_and_verify(
+        keypoints = extract_fn(
             extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify
         )
         print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
@@ -575,7 +581,7 @@ def main():
         if assessment_and_plan is not None:
             plan_start = time.time()
             base_cache = build_base_cache(assessment_and_plan, model, tokenizer)
-            plan_keypoints = extract_and_verify(
+            plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
                 tokenizer,
