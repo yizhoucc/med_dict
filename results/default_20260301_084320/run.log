@@ -7400,3 +7400,90 @@ Processing row 49 (50/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Metastatic disease is under good control as of December 2021" -> "Not mentioned in note"
   Extraction prompts: 26.5s
+    Medication_Plan_chatgpt: 37.0s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Tamoxifen, Letrozole, Ibrance",
+    "Short term side_effects_discussed": "",
+    "Long term side_effects_discussed": ""
+  },
+  "radiotherapy": {
+    "summary"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.2s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "Tamoxifen, Letrozole, Ibrance, Lupron, 2nd line Lupron"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Tamoxifen, Letrozole, Ibrance, Lupron, 2nd line Lupron" -> "Letrozole, Ibrance, 2nd line Lupron"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 2.8s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "continue Letrozole, plan to start Ibrance, 2nd line Lupron"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "continue Letrozole, plan to start Ibrance, 2nd line Lupron" -> "plan to start Ibrance, 2nd line Lupron"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 3.2s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "XRT to right pelvis and sternum in 2015, Lumpectomy and XRT mid 2019, referral to Rad Onc"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "Lumpectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.7s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.4s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Referral to genetics for pathogenic PMS 2 mutation"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "Referral to genetics for pathogenic PMS 2 mutation",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
