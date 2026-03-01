@@ -1,0 +1,238 @@
+Source: test_2row.yaml | Run started: 2026-02-28 18:20:05
+============================================================
+extraction_prompts
+{'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
+Respond *only* with a JSON object using this exact schema:
+{
+"Patient type": "either New patient or follow up",
+"second opinion": "whether the visit is consultation/second opinion or not",
+"in-person": "either Televisit or in-person. (note, video consult, televisit, telehealth are the same thing)",
+"summary": "A brief summary of the reason for visit."
+}
+', 'What_We_Found': 'TASK: Extract 'What We Found'.
+Respond *only* with a JSON object using this exact schema:
+{
+"Type_of_Cancer": "list the type of cancer",
+"Stage_of_Cancer": "list the stage if it is written in the note",
+"Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No, local, not sure, need more evidence such as imaging.",
+"Metastasis": "if there is met, Yes (to where), No, or Not sure",
+"lab_summary": "Summary of key lab results.",
+"findings": "Summary of new findings or disease status."
+}
+', 'Treatment_Summary': 'TASK: Extract 'Treatment Summary'.
+Respond *only* with a JSON object using this exact schema:
+{
+"current_meds": "List of current oncologic medications or regimens.",
+"recent_changes": "Any holds, dose reductions, or switches.",
+"supportive_meds": "List of supportive medications."
+}
+', 'Goals_of_care': 'TASK: Extract 'What We Discussed / Decided'.
+Respond *only* with a JSON object using this exact schema:
+{
+"goals_of_treatment": "eg, cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+"response_assessment": "How the cancer is responding to the treatment, not responding or responding."
+}
+'}
+============================================================
+plan_extraction_prompts
+{'Medication_Plan_chatgpt': 'TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+Include all current and future medication plans for both cancer therapy and supportive treatment. Cancer treatment could be one or many in chemotherapy, hormonal therapy, bone therapy, radiotherapy (eg. rad onc, xrt). Supportive treatment could be one or many in bowel regimen, pain medication, psychiatry medication, neuropathy or any blood transfusion plan.
+
+Include whether a medication is being started now (e.g,"will start", "Rx sent", "starting today" ), plan or discuss in the future after certain condition (e.g., "plan to start after radiation", "discussed addition of…"), continue or maintained("continue"), stop or change.
+
+Include an alterative, second-line or clinical trials options if dicussed.
+Include an 'other treatment' section for any other medications that only briefly mentioned in the plan section.
+Respond *only* with a JSON object using this exact schema:
+{
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy":
+{"summary":"the summary of this type of medication, including start/stop/cotinue if applicable",
+"Short term side_effects_discussed": "short term Side effects of this particular medications.",
+"Long term side_effects_discussed": "long term Side effects of this particular medications.."}
+}
+', 'Medication_Plan': 'TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+Respond *only* with a JSON object using this exact schema:
+{
+    "medication_plan": "A summary of the complete medication plan."
+}
+', 'Therapy_plan': 'TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
+Include chemotherapy, radiotherapy, hormonal therapy, and bone-therapy plans. Include future plans, changes to current therapy (start, stop, continue). Do not include past therapies.
+Respond *only* with a JSON object using this exact schema:
+{
+    "therapy_plan": "A summary of the complete therapy plan."
+}
+', 'radiotherapy_plan': 'TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
+For radiotherapy, include ANY statement that indicates
+it is being considered, recommended, or may be used, even if no explicit
+start/continue/plan keywords are present.
+Respond *only* with a JSON object using this exact schema:
+{
+    "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
+}
+', 'Procedure_Plan': 'TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
+Include future procedures including surgery, radiation therapy, or interventional procedures such as biopsy, lumbar puncture, or Chemo Port Insertion. Do not include past procedures.
+Do not include imaging plan, lab plan, or medication plan.
+Respond *only* with a JSON object using this exact schema:
+{
+    "procedure_plan": "A summary of any planned procedures."
+}
+', 'Imaging_Plan': 'TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
+Include all future imaging like CT, MRI, PET/CT, ultrasound,  DEXA scans, including timing and rationale if mentioned.
+Do not include any procedure plan, lab plan, or medication plan. Do not include past Imaging.
+Respond *only* with a JSON object using this exact schema:
+{
+    "imaging_plan": "A summary of any planned procedures."
+}
+', 'Lab_Plan': 'TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
+Include future labs like CBC, CMP, tumor markers, coagulation profile. Specify frequency and rationale if mentioned.
+Do not include any procedure plan, medication plan, or imagining plan. Do not include past labs.
+Respond *only* with a JSON object using this exact schema:
+{
+    "lab_plan": "A summary of the future lab plan."
+}
+', 'Genetic_Testing_Plan': 'TASK: Extract the 'Genetic Testing Plan' from the given 'Assessment/Plan' section.
+
+1. Scope of section:
+- First, find the 'Assessment/Plan' section of the note (usually the final section).
+- Only look for plans that are clearly about FUTURE genetic or molecular TESTING.
+
+2. What COUNTS as 'genetic or molecular testing':
+- Diagnostic, prognostic, or predictive laboratory assays, such as:
+  - Tumor genomic sequencing / NGS / panel testing
+  - Germline genetic panels (e.g., hereditary cancer panel, BRCA testing)
+  - Liquid biopsy / circulating tumor DNA (ctDNA) tests
+  - Specific biomarker tests (e.g., PD-L1 testing, MSI testing, EGFR mutation testing)
+  - Any plan to "send", "order", "check", or "obtain" a genetic, genomic, or molecular TEST
+
+3. What MUST be EXCLUDED:
+- DO NOT include any medications, systemic therapies, or treatment plans:
+  - Chemotherapy, immunotherapy, targeted therapies (e.g., FGFR inhibitor, PARP inhibitor, CDK4/6 inhibitor, TKIs)
+  - Hormonal therapy, radiation therapy, surgery
+  - Clinical trial options, even if the trial involves targeted drugs or inhibitors
+- DO NOT include tests that are already completed, historic, or only mentioned in past oncology history.
+- DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine labs (CBC, CMP).
+
+4. If there is NO new genetic or molecular test planned in the Assessment/Plan:
+- Set the value to a clear negative statement, for example:
+  "No new genetic or molecular tests were planned during this visit."
+
+5. Output format:
+Respond *only* with a JSON object using this exact schema:
+{
+    "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or a clear statement that none are planned."
+}
+', 'Referral': 'TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
+do not mistake the doctor's signature at the end of the note as a referral.
+Respond *only* with a JSON object using this exact schema:
+{
+"Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance",
+"Genetics": "eg, germline testing, family counseling",
+"Specialty": "eg, Palliative care (symptom or pain management, goals of care), Radiation oncology, surgical oncology, Psychology, psychiatry for coping and mood support",
+"Others": "Physical or occupational therapy, Social work, financial counseling",
+"follow up": "follow up mentioned in the provided text. f/up[, f/p and fup all mean follow up."
+}
+', 'follow_up_next_visit': 'TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
+
+Respond *only* with a JSON object using this exact schema:
+{
+    "Next clinic visit": "(in-person or telehealth): timing and purpose"
+}
+', 'Advance_care_planning': 'TASK: Extract the 'Advance care planning' from the given 'Assessment/Plan' section.
+Include Advance directives, health-care proxy, code status (if appropriate).
+Respond *only* with a JSON object using this exact schema:
+{
+    "Advance care": "A summary of any planned Advance care."
+}
+'}
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 1
+============================================================
+
+--- Column: coral_idx ---
+140
+
+--- Column: note_text ---
+"Medical Oncology Consult Note    Patient Name: ***** *****   Patient MRN:  *****   Patient DOB:  11/23/1963   Date of Visit:  12/30/2019  Provider:  ***** ***** *****  Primary Care Provider:  None Per Patient Provider  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive (CMS code)  NM Whole Body Bone Scan    MR Brain with and without Contrast    Complete Blood Count with Differential    Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)    Cancer Antigen 15-3    Carcinoembryonic Antigen    Activated Partial Thromboplastin Time    Prothrombin Time    Ambulatory Referral to Integrative Medicine       History of Present Illness:   56 year old female diagnosed in May 2013 with a multifocal Stage IIA right breast cancer.  She had a mastectomy with sentinel node and implant reconstruction in June 2013 and had  2.3 and 2.4 cm tumors found with a negative sentinel node.  The tumors were G2,  ER and PR positive and her 2 neu negative.  She did not have radiation or chemotherapy and declined tamoxifen.  She has had ***** but no other imaging since her diagnosis for screening and was treated at *****.     She reports feeling discomfort and pressure in her waist and back for a few months and nausea and burping for a week.  She went to the ER and had a CT scan which shows widely metastatic cancer.  She has involvement of the lungs, peritoneum, liver and ovary with a local recurrence near the right axilla and implant.  She takes a long list of supplements which she will send to me.  She wants to have natural therapies.  She is very scared and appears anxious.  Her husband is here and very supportive.  We discussed how we need to get a biopsy to evaluate the phenotype of the cancer and she is agreeable.  I will set her up to see Dr. \n ***** this week for a biopsy of the right axilla in the office.  We discussed how treatment would be palliative but that treatment could improve her quality of life as well as length of life.  She asked me multiple times if this can be cured.       I will refer her to the ***** center.  I also ordered a MRI of brain and bone scan as well as labs to complete her work up.          Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive (CMS code) 01/02/2020   \u0007 Mass of right chest wall 01/01/2020       Stage at *****:  Cancer Staging  Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive (CMS code)  Staging form: Breast, AJCC 8th Edition  - Pathologic stage from 07/04/2013: Stage ***** (pT2, *****(sn), *****, G2, ER+, PR+, *****-) - Signed by ***** ***** *****, MD on 01/02/2020      Medications:  No current outpatient medications on file.  No current facility-administered medications for this visit.     Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Penicillins Rash     Rash  Rash         Medical History:   Past Medical History:   Diagnosis Date   \u0007 Anxiety    \u0007 Breast cancer (CMS code)    \u0007 Hyperlipidemia        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 CYST REMOVAL      neck   \u0007 MASTECTOMY Right     with sentinel node and implant placement.    \u0007 MYOMECTOMY         Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Comment: rare   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male       *****:  *****    ***** Status: married ***** husband    Gynecologic History:  G 3 P 1 AB 2    Menarche 12  Menopause  52   OCP 0 years HRT 0 years   Fertility treatments 1-2 years of IVF     Family History:   Family \n History   Problem Relation Name Age of Onset   \u0007 Lung cancer Mother     \u0007 Lung cancer Father     \u0007 Esophageal cancer Maternal Uncle                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    12/30/19 1611   *****:  0       Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  BP 117/74  | Pulse 96  | Temp 36 C (96.8 F)  | Resp 20  | Ht 154.1 cm (5' 0.67\") Comment: 12/30/2019@***** | Wt 63.5 kg (140 lb 1.6 oz)  | SpO2 99%  | BMI 26.76 kg/m   GEN: No acute distress, awake and alert, appears stated age  HEENT: No oral lesions  Neck supple no lymphadenopathy  Cardiac: Regular rate, rhythm no murmur  Lungs:  clear to ascultation    Abdomen: Soft, non tender, non distended, she has hepatomegaly and omental masses that are palpable in the upper and mid abdomen.  Non tender.   Extremity: No edema  Lymph: no peripheral adenopathy  Neuro: *****-12 grossly intact, normal UE and LE strength.   Skin: No rash  Breast left breast without mass or skin changes, right mastectomy site with mass in the axilla felt 3 cm in size.       Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Hospital Outpatient Visit on 12/11/2001   Component Date Value Ref Range Status   \u0007 Human Chorionic Gonadotropin for P***** 12/11/2001 <2  IU/L Final   IMPRESSION: CT chest, abdomen and pelvis 12/24/2019    1. Widespread metastases consistent with metastatic \n breast  carcinoma.    2. Right axillary adenopathy with 1.8 cm spiculated mass along  superolateral margin of right breast implant, suspicious for  regional recurrence.    3. Multiple small pulmonary nodules, right greater than left,  likely metastatic.    4. Large anterior right and left lobe hepatic masses likely  metastatic.    5. Peritoneal carcinomatosis with omental *****, nodularity, and  small possibly malignant effusion.    6. Mildly enlarged and hyperdense ovaries which could reflect  breast metastases to ovaries.    7. Appendix distended with fluid without associated inflammatory  wall thickening. A mucocele of the appendix would be a  consideration.    8. No CT evidence of osseous metastasis.     Psychologic/emotional well-being/support  She is distressed.  She has good support from her husband who is here today.     Assessment / Plan:    1.  Stage II right breast cancer s/p right mastectomy with sentinel node in June 2013 ( 2.4 and 2.3 cm tumors, node negative ER and PR positive and her 2 negative.)  No further adjuvant therapy given and patient declined tamoxifen.   2.  Metastatic relapse of her breast cancer.  She needs tissue confirmation and we will complete her staging work up.    3.  Appointment with Dr. ***** on Thursday to biopsy mass in right axilla in the office.   4.  RTC with me after completed work up to formulate a plan.  If she is HR+/ her 2 negative on biopsy will recommend ibrance and *****.    5.  I will ask the nurse to send her information about the treatment.   6. ***** ***** Referral asap.          ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 75 minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family.     \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:    1.  Stage II right breast cancer s/p right mastectomy with sentinel node in June 2013 ( 2.4 and 2.3 cm tumors, node negative ER and PR positive and her 2 negative.)  No further adjuvant therapy given and patient declined tamoxifen.   2.  Metastatic relapse of her breast cancer.  She needs tissue confirmation and we will complete her staging work up.    3.  Appointment with Dr. ***** on Thursday to biopsy mass in right axilla in the office.   4.  RTC with me after completed work up to formulate a plan.  If she is HR+/ her 2 negative on biopsy will recommend ibrance and *****.    5.  I will ask the nurse to send her information about the treatment.   6. ***** ***** Referral asap.          ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 75 minutes examining patient, reviewing chart, coordinating care, discussing with patient and/or family.     \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient presents with new symptoms."
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive",
+    "Stage_of_Cancer": "Stage IIA",
+    "Distant Metastasis": "Yes, to lungs, peritoneum, liver, and ovary",
+    "Metastasis": "Yes, to lungs, peritoneum, liver, and ovary",
+    "lab_summary": "CT chest, abdomen and pelvis 12/24/2019",
+    "findings": "Widespread metastases consistent with metastatic breast carcinoma, right axillary adenopathy, multiple small pulmonary nodules, large hepatic masses, peritoneal carcinomatosis, and mildly enlarged and hyperdense ovaries"
+  },
+  "Treatment_Summary": {
+    "current_meds": "None",
+    "recent_changes": "None",
+    "supportive_meds": "None"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "treatment would be palliative and could improve quality of life and length of life",
+    "response_assessment": "Not applicable"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Ibrance and another medication (name not specified) if HR+/HER2-",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will start Ibrance and another medication (name not specified) if HR+ after biopsy results, and will send information about treatment to the patient"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Biopsy to confirm metastatic relapse, then staging workup, then plan to be made after biopsy results"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Biopsy"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "staging workup"
+  },
+  "Lab_Plan": {
+    "lab_plan": "staging workup"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned"
+  },
+  "Referral": {
+    "Nutrition": null,
+    "Genetics": null,
+    "Specialty": "Palliative care",
+    "Others": null,
+    "follow up": "with me after completed workup"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "with me after completed workup"
+  },
+  "Advance_care_planning": {
+    "Advance care": "goals of care"
+  }
+}
