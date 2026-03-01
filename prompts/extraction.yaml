@@ -152,7 +152,13 @@ Treatment_Goals: |
   Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
   Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
 
-  Use this decision tree:
+  FIRST — check the note for EXPLICIT intent words:
+  - If the note says "palliative" or "palliative intent" or "palliative care" → write "palliative". Done.
+  - If the note says "curative" or "curative intent" → write "curative". Done.
+  - If the note says "adjuvant" → write "adjuvant" (unless metastatic, then "palliative").
+  - If the note explicitly states an intent, USE IT. Do NOT override the physician's own words.
+
+  ONLY if no explicit intent word is found, use this decision tree:
   - Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
   - Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant")
   - Metastatic/Stage IV cancer → "palliative"
