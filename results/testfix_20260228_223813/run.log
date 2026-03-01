@@ -482,3 +482,50 @@ Processing row 23 (4/10)...
       [G3-FAITH] recent_changes: "None mentioned" -> ""
       [G3-FAITH] EMPTIED: ['recent_changes']
       [G6-SEMANTIC] recent_changes: "" -> "None"
+    Goals_of_care: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> "We will order a test to evaluate her benefit, if any, of che"
+      [G6-SEMANTIC] response_assessment: "We will order a test to evaluate her benefit, if any, of chemotherapy. We discus" -> "Not applicable"
+  Extraction prompts: 47.4s
+    Medication_Plan_chatgpt: 11.2s [schema-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "will start",
+    "Short term side_effects_discussed": "hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome",
+    "Long term
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 5.5s
+      [EXTRACT] raw={
+  "medication_plan": "will start hormone therapy, will send surgical specimen for MP, will order a test, will see Dr. ***** in radiation oncology on 12/07/18"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 8.3s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "will start hormone therapy"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "will start hormone therapy" -> "will start hormone therapy, will get a test to evaluate benefit of chemotherapy,"
+      [G6-SEMANTIC] therapy_plan: "will start hormone therapy, will get a test to evaluate benefit of chemotherapy," -> "will start hormone therapy, will get a test to evaluate benefit of chemotherapy,"
+    radiotherapy_plan: 25.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "will see Dr. ***** in radiation oncology on 12/07/18"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
