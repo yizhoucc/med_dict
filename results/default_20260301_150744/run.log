@@ -1419,3 +1419,60 @@ Processing row 27 (8/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 19.0s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, amLODIPine (NORVASC) "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 3.2s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Switched from gabapentin to pregabalin for pain",
+"supportive_meds": ["pregabalin", "calcium", "vitamin D"]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Switched from gabapentin to pregabalin for pain" -> "No recent changes"
+    Treatment_Goals: 5.5s
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 6.6s [format-repaired, faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has undergone a lumpectomy, which is a surgical procedure, but it is not considered a treatment for response assessment purposes. However, the note does mention that the margins were negat
+      [G1-FORMAT] repaired -> keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "There is no evidence of how the cancer is currently respondi" -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "The patient has a 0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH r"
+  Extraction prompts: 61.1s
+    Medication_Plan_chatgpt: 26.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+    "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+    "Long
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] pain medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] radiotherapy: "{'summary': 'will proceed with radiation', 'Short term side_" -> "{'summary': 'will proceed with radiation', 'Short term side_"
+      [G3-FAITH] psychiatry medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] other treatment: "{'summary': 'DEXA to assess bone health', 'Short term side_e" -> "{'summary': 'DEXA to assess bone health', 'Short term side_e"
+      [G3-FAITH] bowel regimen: "{'summary': 'calcium and vitamin D', 'Short term side_effect" -> "{'summary': 'calcium and vitamin D', 'Short term side_effect"
+      [G3-FAITH] bone therapy: "{'summary': 'calcium and vitamin D to improve bone health', " -> "{'summary': 'calcium and vitamin D to improve bone health', "
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 4.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "The patient will take an aromatase inhibitor (*****), calcium, and vitamin D. The specific name of the aromatase inhibitor is not mentioned, but it is recommended to be taken f
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will take an aromatase inhibitor (*****), calciu" -> "an aromatase inhibitor, calcium, and vitamin D"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
