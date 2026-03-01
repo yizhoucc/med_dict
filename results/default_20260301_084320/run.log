@@ -13815,3 +13815,37 @@ Processing row 92 (93/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 23.4s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-PR-+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Multiple foci of inva
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Stage_of_Cancer: "Stage I" -> "Not mentioned in note"
+    Treatment_Summary: 18.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "acetaminophen, docusate sodium, fluoxetine, ibuprofen, oxycodone",
+  "recent_changes": "",
+  "supportive_meds": "acetaminophen, docusate sodium, fluoxetine, ibuprofen, oxycodone"
+
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "acetaminophen, docusate sodium, fluoxetine, ibuprofen, oxycodone" -> "acetaminophen, docusate sodium, ibuprofen"
+    Goals_of_care: 8.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the patient is being discussed for a
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not responding well to treatment"
+  Extraction prompts: 63.1s
