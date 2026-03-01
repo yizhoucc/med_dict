@@ -563,7 +563,7 @@ def main():
             continue
 
         row_start = time.time()
-        print(f"\nProcessing row {index} ({index - row_range[0] + 1}/{len(df)})...")
+        print(f"\nProcessing row {index} ({list(df.index).index(index) + 1}/{len(df)})...")
 
         note_text = row["note_text"]
 
