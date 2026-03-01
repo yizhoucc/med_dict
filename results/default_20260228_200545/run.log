@@ -88,3 +88,11 @@ Processing row 13 (4/5)...
   Regex extraction succeeded (5675 chars)
   A/P extraction: 0.0s
     Reason_for_Visit: 3.1s [faith-trimmed]
+    What_We_Found: 10.8s
+    Treatment_Summary: 6.2s
+    Goals_of_care: 2.2s [faith-trimmed]
+  Extraction prompts: 23.0s
+    Medication_Plan_chatgpt: 36.6s
+    Medication_Plan: 5.9s [faith-trimmed]
+    Therapy_plan: 5.1s
+    radiotherapy_plan: 2.1s [faith-trimmed]
