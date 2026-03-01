@@ -13911,3 +13911,91 @@ The value for "goals_of_treatment" is correct, as the note mentions that the pat
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 3.6s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "no mutation identified, but variants of uncertain significance in APC, CHEK2, DIS3L2, and BRCA2"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.3s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 2.5s
+      [EXTRACT] raw={
+  "Next clinic visit": "appointment to see radiation oncology Dr. ***** today at 3pm"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 82.5s
+  Row 92 total: 145.5s
+  Row 92 saved to progress
+
+Processing row 93 (94/100)...
+  Injected 2 term definitions: ['estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1466 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor p
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for Malignant neoplasm of overlapping sites of lef" -> "Follow up for breast cancer, estrogen receptor positive, sta"
+      [G6-SEMANTIC] summary: "Follow up for breast cancer, estrogen receptor positive, stage not specified, to" -> "Malignant neoplasm of overlapping sites of left breast in female, estrogen recep"
+    What_We_Found: 32.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT1b, N1, G2",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "WBC Count 6.5, RBC Count 4.3
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "No acute distress, awake and alert, appears stated age" -> ""
+      [G3-FAITH] EMPTIED: ['findings']
+      [G6-SEMANTIC] findings: "" -> "No acute distress, awake and alert, appears stated age"
+    Treatment_Summary: 3.6s
+      [EXTRACT] raw={
+  "current_meds": "gabapentin 600 mg daily, letrozole 2.5 mg daily",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.4s
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 43.4s
