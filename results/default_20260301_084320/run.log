@@ -14738,3 +14738,59 @@ Processing row 98 (99/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "49 y.o. female with stage III left-sided breast cancer and s" -> "49 y.o. female with stage III left-sided breast cancer diagn"
       [G6-SEMANTIC] summary: "49 y.o. female with stage III left-sided breast cancer diagnosed in 2009, and a " -> "49 y.o. female with stage III left-sided breast cancer diagnosed in 2009, stage "
+    What_We_Found: 7.1s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III, now metastatic",
+  "Distant Metastasis": "Yes, lung",
+  "Metastasis": "Yes, lung",
+  "lab_s
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 10.8s
+      [EXTRACT] raw={
+  "current_meds": "fulvestrant (FASLODEX) 250 mg/5 mL injection, every 30 (thirty) days",
+  "recent_changes": "switched from tamoxifen to anastrozole, then to letrozole",
+  "supportive_meds": "fludr
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 9.9s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "The patient has a new left lung mass and mediastinal lymphadenopathy, and the lung mass has increased in size, and the mediastinal lym
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 34.6s
+    Medication_Plan_chatgpt: 24.6s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Ongoing hormonal therapy with fulvestrant, may be combined with Exemestane and Afinitor if cancer is estrogen receptor positive",
+    "Short term side_effects
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "The patient is currently on fulvestrant, and may be started on Exemestane and Afinitor if cancer is estrogen receptor positive. Xeloda may be considered as an alternative. The 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient is currently on fulvestrant, and may be started " -> "The patient is currently on fulvestrant, may be started on E"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "The patient is currently on fulvestrant, may be started on Exemestane and Afinit" -> "The patient is currently on fulvestrant, may be started on Exemestane and Afinit"
+    Therapy_plan: 5.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "The patient is currently on fulvestrant, and may be started on Exemestane and Afinitor. Xeloda may be considered as an alternative."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient is currently on fulvestrant, and may be started " -> "The patient is currently on fulvestrant, and may be started "
+      [G4-TEMPORAL] therapy_plan: "The patient is currently on fulvestrant, and may be started on Exemestane and Af" -> "The patient is currently on fulvestrant, and may be started on Exemestane and Af"
+      [G6-SEMANTIC] therapy_plan: "The patient is currently on fulvestrant, and may be started on Exemestane and Af" -> "The patient is currently on fulvestrant, may be started on Exemestane and Afinit"
