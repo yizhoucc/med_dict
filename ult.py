@@ -354,17 +354,127 @@ def run_model_with_cache_manual(
     return raw_output.strip(), current_cache
 
 
-def build_base_cache(text, model, tokenizer):
+def load_medical_dictionary(dict_path="data/formaldef.txt"):
+    """Load medical dictionary from formaldef.txt.
+    Returns dict of {term_lower: (original_term, definition)}.
+    """
+    terms = {}
+    if not os.path.exists(dict_path):
+        return terms
+    with open(dict_path) as f:
+        lines = f.readlines()
+    i = 0
+    while i < len(lines):
+        term_line = lines[i].strip()
+        term = re.sub(r'Listen to pronunciation.*', '', term_line).strip()
+        if term and i + 1 < len(lines):
+            definition = lines[i + 1].strip()
+            if definition and len(term) > 2:
+                terms[term.lower()] = (term, definition)
+            i += 2
+        else:
+            i += 1
+    return terms
+
+
+# Terms that are abbreviations or have ambiguous/specialized meanings.
+# These are the ones an 8B model is most likely to misunderstand.
+# Scored by confusion risk: abbreviations > biomarkers with numbers > ambiguous terms.
+INJECT_PRIORITY_TERMS = {
+    # Abbreviations - highest priority (model may not know what these stand for)
+    "dcis", "idc", "ilc", "fish", "ihc", "suv",
+    "brca1", "brca2", "tnbc",
+    # Biomarkers with numeric values - model confuses units/meaning
+    "ki-67 proliferation index", "ki-67 score", "ki-67",
+    "her2", "her2 positive", "her2 negative", "her2/neu",
+    "er positive", "er negative",
+    "pr positive", "pr negative",
+    # Response classification terms - model confuses with common English
+    "stable disease", "progressive disease", "partial response", "complete response",
+    # Treatment intent terms - model confuses with visit purpose
+    "neoadjuvant therapy", "adjuvant therapy", "adjuvant chemotherapy",
+    "palliative therapy", "palliative care",
+    # Staging/grading - model confuses grade vs stage vs size
+    "sentinel lymph node", "sentinel node biopsy",
+    "lymphovascular invasion",
+    # Procedures model may confuse
+    "lumpectomy", "mastectomy",
+    "aromatase inhibitor",
+    # Receptor/molecular testing
+    "estrogen receptor", "progesterone receptor",
+    "triple-negative breast cancer", "triple negative breast cancer",
+}
+
+
+def find_relevant_definitions(note_text, dictionary, max_terms=15):
+    """Scan note for medical terms and return definitions for terms
+    the model is most likely to misunderstand.
+
+    Strategy:
+    1. Only match terms in INJECT_PRIORITY_TERMS (curated high-confusion list)
+    2. Prefer longer/more specific term matches over short ones
+    3. Cap at max_terms to control context size (~50 tokens per definition)
+
+    Returns list of (term, definition) tuples.
+    """
+    if not dictionary:
+        return []
+
+    note_lower = note_text.lower()
+    matched = []
+
+    for priority_term in INJECT_PRIORITY_TERMS:
+        if priority_term in note_lower and priority_term in dictionary:
+            term_orig, definition = dictionary[priority_term]
+            matched.append((term_orig, definition))
+
+    # Deduplicate: if both "ki-67" and "ki-67 score" matched, keep only the longer one
+    matched.sort(key=lambda x: -len(x[0]))
+    seen_short = set()
+    deduped = []
+    for term, defn in matched:
+        short = term.lower().split()[0]  # first word
+        if short not in seen_short:
+            deduped.append((term, defn))
+            seen_short.add(short)
+
+    return deduped[:max_terms]
+
+
+def format_definitions_context(definitions):
+    """Format matched definitions into a context string for injection."""
+    if not definitions:
+        return ""
+    lines = ["Medical term definitions for reference:"]
+    for term, defn in definitions:
+        # Truncate long definitions to ~150 chars
+        short_defn = defn[:200].rsplit(' ', 1)[0] if len(defn) > 200 else defn
+        lines.append(f"- {term}: {short_defn}")
+    return "\n".join(lines)
+
+
+def build_base_cache(text, model, tokenizer, definitions_context=""):
     """
     Build a KV cache from a base prompt containing the note text.
     Returns the base_cache for reuse across multiple extraction tasks.
+
+    Args:
+        text: The medical note text
+        model: The loaded model
+        tokenizer: The loaded tokenizer
+        definitions_context: Optional medical term definitions to inject
     """
+    defs_section = ""
+    if definitions_context:
+        defs_section = f"\n\n{definitions_context}\n"
+
     base_prompt = (
         f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
         f"You are a medical data extraction expert. You will be given a long medical note. "
         f"Your task is to answer a series of questions about it, one by one. "
         f"You MUST respond with valid JSON only. Match the exact schema provided in each task. "
         f"No markdown backticks, no explanations, no text before or after the JSON object."
+        f"{defs_section}"
         f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
         f"Here is the medical note:\n\n"
         f"--- BEGIN NOTE ---\n{text}\n--- END NOTE ---"

@@ -100,6 +100,9 @@ from ult import (
     build_base_cache,
     extract_and_verify,
     extract_and_verify_v2,
+    load_medical_dictionary,
+    find_relevant_definitions,
+    format_definitions_context,
     run_model,
     gc,
 )
@@ -554,7 +557,12 @@ def main():
         "completed": False,
     }
 
-    # 11. Main loop
+    # 11. Load medical dictionary
+    med_dict = load_medical_dictionary()
+    if med_dict:
+        print(f"Medical dictionary loaded: {len(med_dict)} terms")
+
+    # 12. Main loop
     global_start = time.time()
     print(f"\nProcessing {len(df)} rows...")
     for index, row in df.iterrows():
@@ -567,6 +575,12 @@ def main():
 
         note_text = row["note_text"]
 
+        # Find relevant medical term definitions for this note
+        definitions = find_relevant_definitions(note_text, med_dict)
+        defs_context = format_definitions_context(definitions)
+        if definitions:
+            print(f"  Injected {len(definitions)} term definitions: {[d[0] for d in definitions]}")
+
         # Extract assessment/plan with retries
         ap_start = time.time()
         assessment_and_plan = extract_assessment_plan(
@@ -576,7 +590,7 @@ def main():
 
         # Extract keypoints from full note
         ext_start = time.time()
-        base_cache = build_base_cache(note_text, model, tokenizer)
+        base_cache = build_base_cache(note_text, model, tokenizer, defs_context)
         keypoints = extract_fn(
             extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify
         )
@@ -585,7 +599,7 @@ def main():
         # Extract plan keypoints from assessment/plan section
         if assessment_and_plan is not None:
             plan_start = time.time()
-            base_cache = build_base_cache(assessment_and_plan, model, tokenizer)
+            base_cache = build_base_cache(assessment_and_plan, model, tokenizer, defs_context)
             plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
