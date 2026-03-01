@@ -13352,3 +13352,39 @@ Processing row 89 (90/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Patient with Breast CA, stage not specified, presented with " -> "Patient with Breast CA, stage II/III, presented with palpabl"
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 34.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II/III",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "Thyroid Stimulating Hormone 6.01 (
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "Thyroid Stimulating Hormone 6.01 (H), Free T4 12, Albumin 3.9, Alkaline Phosphat" -> ""
+    Treatment_Summary: 14.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "AC, Zofran, Dexmethylprednisolone, Olanzapine",
+  "recent_changes": "Dose delay of AC, reduced GCSF dose to 50%",
+  "supportive_meds": "Zofran, Dexmethylprednisolone, Olanzapine"
+
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "Zofran, Dexmethylprednisolone, Olanzapine" -> "Dexmethylprednisolone, Olanzapine"
+      [G6-SEMANTIC] current_meds: "AC, Zofran, Dexmethylprednisolone, Olanzapine" -> "AC, Dexmethylprednisolone, Olanzapine"
+    Goals_of_care: 6.1s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "Risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct.
+
+The value for "response_assessment" is correct.
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 65.1s
