@@ -37,3 +37,16 @@ Processing row 1 (2/2)...
   Regex extraction succeeded (2678 chars)
   A/P extraction: 0.0s
     Reason_for_Visit: 2.1s
+    What_We_Found: 8.5s [re-extracted]
+    Treatment_Summary: 10.3s [re-extracted]
+    Goals_of_care: 1.2s
+  Extraction prompts: 22.9s
+    Medication_Plan_chatgpt: 25.3s [re-extracted]
+    Medication_Plan: 8.7s [re-extracted]
+    Therapy_plan: 3.8s [re-extracted]
+    radiotherapy_plan: 0.8s
+    Procedure_Plan: 2.6s [re-extracted]
+    Imaging_Plan: 1.2s
+    Lab_Plan: 0.9s
+    Genetic_Testing_Plan: 0.9s
+    Referral: 1.5s
