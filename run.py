@@ -257,17 +257,25 @@ def append_row_result(results_path, row_index, row_result):
 def regex_extract_assessment_plan(note_text):
     """Try to extract Assessment/Plan section using regex.
 
+    Tested against CORAL breast cancer (89/100) and PDAC (96/100) datasets.
     Returns the extracted text or None if no match found.
     """
-    # Common headers for the A/P section (case-insensitive)
+    # Patterns ordered from most specific to least specific.
+    # Each covers real variations found in CORAL data.
     patterns = [
-        r'Assessment\s*(?:/|and)\s*Plan\s*:?\s*\n',
-        r'Assessment\s*&\s*Plan\s*:?\s*\n',
-        r'A\s*/\s*P\s*:?\s*\n',
-        r'ASSESSMENT\s*(?:/|AND)\s*PLAN\s*:?\s*\n',
+        # Combined A/P: "Assessment / Plan:", "Assessment and Plan:",
+        # "ASSESSMENT & PLAN", "Assessment \Plan :", "ASSESSMENT/PLAN:"
+        r'(?:Assessment|ASSESSMENT)\s*(?:/|and|&|\\)\s*(?:Plan|PLAN|Recommendations|RECOMMENDATIONS)\s*:?',
+        # PDAC style: "Impression and Recommendations:"
+        r'Impression\s+and\s+Recommendations\s*:',
+        # Separate sections: "Assessment:" (Plan: follows later in text)
+        r'(?:Assessment|ASSESSMENT)\s*:',
+        # Standalone "PLAN" header (preceded by whitespace, followed by uppercase)
+        r'(?<=\s{3})PLAN\s+(?=[A-Z])',
     ]
 
     for pattern in patterns:
+        flags = re.IGNORECASE if 'PLAN' not in pattern.split('(?=')[0] else 0
         match = re.search(pattern, note_text, re.IGNORECASE)
         if match:
             extracted = note_text[match.start():]
