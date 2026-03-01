@@ -9290,3 +9290,31 @@ Processing row 62 (63/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is not responding as expected, as the patient's o"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 55.9s
+    Medication_Plan_chatgpt: 50.5s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Paclitaxel was started on 06/10/19 but discontinued on 06/24/19 due to elevated transaminases. Abraxane was given from 07/05/19 to 08/30/19.",
+    "Short term sid
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Will start letrozole, will discuss abemaciclib, will have baseline DEXA scan to see if bisphosphonate is needed, will discuss oophorectomy if she recovers ovarian function."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Will start letrozole, will discuss abemaciclib, will have ba" -> "Will start letrozole, will discuss abemaciclib, will have ba"
+      [G4-TEMPORAL] medication_plan: "Will start letrozole, will discuss abemaciclib, will have baseline DEXA scan to " -> "Will start letrozole, will discuss abemaciclib, will have baseline DEXA scan to "
+      [G6-SEMANTIC] medication_plan: "Will start letrozole, will discuss abemaciclib, will have baseline DEXA scan to " -> "Start letrozole, discuss abemaciclib, have baseline DEXA scan to see if bisphosp"
+    Therapy_plan: 5.6s
+      [EXTRACT] raw={
+  "therapy_plan": "Will start letrozole, will discuss abemaciclib, will have XRT to the left breast and regional nodes, will have baseline DEXA scan to see if bisphosphonate is needed."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
