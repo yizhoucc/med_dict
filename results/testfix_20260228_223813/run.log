@@ -794,3 +794,155 @@ Reviewing each field:
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 52.0s
+    Medication_Plan_chatgpt: 23.3s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "to decrease the risk of systemic recurrence",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "radiotherapy": {
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence and the role of radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "We discussed the role of chemotherapy to decrease the risk o" -> "We discussed the role of chemotherapy to decrease the risk o"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence, plan to start chemotherapy, and plan to have radiation to decrease the risk of local recurrence.
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "We discussed the role of chemotherapy to decrease the risk of systemic recurrenc" -> "plan to start chemotherapy, plan to have radiation"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.7s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "to decrease the risk of local recurrence"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "surgery, port placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "surgery, port placement" -> "port placement"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.1s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.0s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 2.2s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC at her post op visit to review final pathology report and make recommendations."
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 46.8s
+  Row 25 total: 98.8s
+  Row 25 saved to progress
+
+Processing row 26 (7/10)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (831 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Hormone therapy follow-up for metastatic breast cancer to bone"
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Hormone therapy follow-up for metastatic breast cancer to bo" -> "Metastatic breast cancer, hormone therapy follow-up"
+      [G6-SEMANTIC] summary: "Metastatic breast cancer, hormone therapy follow-up" -> "Metastatic breast cancer, hormone therapy follow-up for stable disease"
+    What_We_Found: 6.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage 0, now metastatic",
+  "Distant Metastasis": "Yes, to bone",
+  "Metastasis": "Yes, to bone",
+  "lab_sum
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage 0, now metastatic" -> "Originally early stage node negative IDC, now metastatic"
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally early stage node negative IDC, now metastatic" -> "Originally stage 0, now metastatic"
+    Treatment_Summary: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Femara, Zoladex, calcium-vitamin D",
+  "recent_changes": "",
+  "supportive_meds": "calcium-vitamin D"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.2s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Stable disease"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 16.2s

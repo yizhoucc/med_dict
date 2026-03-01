@@ -717,3 +717,114 @@ RESULTS FOR ROW 25
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 26
+============================================================
+
+--- Column: coral_idx ---
+165
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Visit     Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  05/06/1963   Date of Visit:  12/17/2019  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor negative (CMS code)  Ambulatory Referral to Social Work - Cancer Center       History of Present Illness:   56 year old female with a right breast cancer found on screening mammogram.  She had a biopsy of breast and lymph node which showed a triple negative breast cancer with a ***** of 75%, node negative.  Dr. ***** saw her and scheduled a MRI of the breasts and she saw Dr. ***** to discuss reductions at the time of lumpectomy.   She has been referred to genetics.  We discussed adjuvant chemotherapy and how I would recommend a port. She will consider having it placed when she has her surgery and I will let Dr. ***** know.  We discussed the role of radiation to prevent a local recurrence and chemotherapy to prevent a systemic recurrence.       Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer of upper-outer quadrant of right female breast (CMS code) 12/06/2019       Stage at *****:  Cancer Staging  Breast cancer of upper-outer quadrant of right female breast (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: Stage IB (*****, *****(f), *****, *****, ER-, PR-, *****-) - Signed by ***** ***** *****, DO on 12/06/2019      Medications:    Current Outpatient Medications:   \u0007  amoxicillin (AMOXIL) 500 mg capsule, amoxicillin 500 mg capsule, Disp: , Rfl:   \u0007  ascorbic acid, vitamin C, 500 mg *****, Take by mouth daily, Disp: , Rfl:   \u0007  cephALEXin (KEFLEX) 500 mg capsule, cephalexin 500 mg capsule, Disp: , Rfl:   \u0007  \n cetirizine (ZYRTEC) 10 mg tablet, cetirizine 10 mg tablet, Disp: , Rfl:   \u0007  diphenhydrAMINE (BENADRYL) 25 mg capsule, Take 25 mg by mouth every 6 (six) hours as needed, Disp: , Rfl:   \u0007  levothyroxine 125 mcg tablet, Take 125 mcg by mouth daily, Disp: , Rfl:     Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Latex Other (See Comments)     Rash, itchy, redness, swelling, throat closes with prolonged use  SEPTIC , SWOLLEN, FEVER, CAN'T BREATH     \u0007 Hydrocodone-Acetaminophen Other (See Comments)     Other reaction(s): Other (See Comments)  ***** out, vomiting  Rash on back per rn 08/17/12  Pt states she can take percocet, darvocet per charge rn 08/17/12  DIZZINESS, THROWING     \u0007 Sulfur Other (See Comments)     TONGUE SWOLLEN     \u0007 Acetaminophen    \u0007 Allergenic Extracts      Throat *****       \u0007 ***** Hair Standardized Allergenic Extract Other (See Comments)   \u0007 *****    \u0007 Hydrocodone Bitartrate    \u0007 Prednisone Other (See Comments)     swelling     \u0007 Amoxicillin Rash     Rash, itching, temp.     \u0007 Sulfa (Sulfonamide Antibiotics) Rash     itching         Medical History:   Past Medical History:   Diagnosis Date   \u0007 Allergy    \u0007 Breast cancer of upper-outer quadrant of right female breast (CMS code) 12/06/2019   \u0007 Breast cancer of upper-outer quadrant of right female breast (CMS code)    \u0007 Constipation Sometimes due to hypo-thyroid disorder   \u0007 Migraine headache Since my neck got infected, on & off migraines.   \u0007 Thyroid disease        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 ABDOMINOPLASTY  2014   \u0007 CESAREAN SECTION  1997   \u0007 DENTAL SURGERY     \u0007 MYOMECTOMY  2014   \u0007 TONSILLECTOMY  Tonsils removed 1984       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Never   \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently     Partners: Male     Birth \n control/protection: Abstinence, Condom Male     Comment: Menopause since January 20,2019       *****:  ***** ***** ***** ***** ***** *****.     ***** Status: single, has her son  *****.    Gynecologic History:  G 1 P 1 AB 0    Menarche 17  Menopause  50   OCP 25 years HRT 0 years   Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 No Known Problems Mother     \u0007 Other (heart surgery) Father     \u0007 Breast cancer Maternal Aunt ***** ***** 56        Not sure exact date but she got cancer in the 90's.   \u0007 Throat cancer Maternal Grandmother                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    12/14/19 1600   *****: Arm  Comment: RIGHT ARMPIT PAIN   *****: 4  Comment: PAIN RATE 10 AT NIGHT DURING SLEEP     I addressed any existing pain symptoms with management plan as below, today 12/17/19    Code status:   Advance Care Planning   Full code      Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Orders Only on 09/20/2019   Component Date Value Ref Range Status   \u0007 WBC Count 09/20/2019 5.4  3.8 - 10.8 *****/uL Final   \u0007 RBC Count 09/20/2019 4.80  3.80 - 5.10 *****/uL Final   \u0007 Hemoglobin 09/20/2019 13.0  11.7 - 15.5 g/dL Final   \u0007 Hematocrit \n 09/20/2019 37.4  35.0 - 45.0 % Final   \u0007 MCV 09/20/2019 77.9***** 80.0 - 100.0 fL Final   \u0007 MCH 09/20/2019 27.1  27.0 - 33.0 pg Final   \u0007 MCHC 09/20/2019 34.8  32.0 - 36.0 g/dL Final   \u0007 RDW 09/20/2019 15.3***** 11.0 - 15.0 % Final   \u0007 Platelet Count 09/20/2019 *****  140 - 400 *****/uL Final   \u0007 MPV 09/20/2019 9.6  7.5 - 12.5 fL Final   \u0007 Neutrophil Absolute Count 09/20/2019 *****  1500 - 7800 cells/uL Final   \u0007 Lymphs, Blood 09/20/2019 *****  850 - 3900 cells/uL Final   \u0007 Monocyte Abs Count 09/20/2019 *****  200 - 950 cells/uL Final   \u0007 Eosinophils Absolute 09/20/2019 *****  15 - 500 cells/uL Final   \u0007 Basophil Abs Count 09/20/2019 11  0 - 200 cells/uL Final   \u0007 Neutrophils 09/20/2019 39.7  % Final   \u0007 Lymphs 09/20/2019 46.7  % Final   \u0007 Monocytes % 09/20/2019 9.1  % Final   \u0007 Eos 09/20/2019 4.3  % Final   \u0007 BASOS 09/20/2019 0.2  % Final      Lifestyle:  Exercises but gained weight since she could not go to the gym.    Fruits and *****,  ***** tooth, discussed ***** sugar free, ***** fruit as alternatives. She has poor sleep  She is stressed taking care of her dad, and due to ***** ***** ***** job.     Psychologic/emotional well-being/support  She has good support from her son. I will refer to social work.     Assessment / Plan:   1.  Stage I triple negative breast cancer who is planning to go to surgery first for reductions bilaterally and a right lumpectomy with sentinel node.   2.  Port placement at surgery.   3.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.   4.  We discussed the role of radiation to decrease the risk of local recurrence.  5.  Genetics consult.   6.  RTC at her post op visit to review final pathology report and make recommendations.           ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes of face to face time with the patient.       I performed this consultation using real-time Telehealth tools, including a live video connection \n between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:   1.  Stage I triple negative breast cancer who is planning to go to surgery first for reductions bilaterally and a right lumpectomy with sentinel node.   2.  Port placement at surgery.   3.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.   4.  We discussed the role of radiation to decrease the risk of local recurrence.  5.  Genetics consult.   6.  RTC at her post op visit to review final pathology report and make recommendations.           ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes of face to face time with the patient.       I performed this consultation using real-time Telehealth tools, including a live video connection \n between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "New patient evaluation for newly diagnosed malignant neoplasm of upper-outer quadrant of right breast, stage IB triple negative breast cancer, for initial consult and discussion of treatment options."
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Triple negative breast cancer",
+    "Stage_of_Cancer": "Stage IB",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "Right breast cancer, 75% tumor size, lymph node negative"
+  },
+  "Treatment_Summary": {
+    "current_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine",
+    "recent_changes": "",
+    "supportive_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "radiotherapy": {
+      "summary": "to decrease the risk of local recurrence",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "chemotherapy": {
+      "summary": "to decrease the risk of systemic recurrence",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "bowel regimen": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "pain medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "psychiatry medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "other treatment": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence and the role of radiation to decrease the risk of local recurrence, and also discussed the role of chemotherapy, and port placement at surgery."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "plan to start chemotherapy, plan to have radiation"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "to decrease the risk of local recurrence"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "port placement"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC at her post op visit to review final pathology report and make recommendations."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
