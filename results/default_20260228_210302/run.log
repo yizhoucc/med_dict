@@ -319,3 +319,136 @@ Processing row 2 (3/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
   Extraction prompts: 11.0s
+    Medication_Plan_chatgpt: 36.4s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "discussed the role of chemotherapy to decrease the risk of systemic recurrence",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discus
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 3.8s
+      [EXTRACT] raw={
+  "medication_plan": "discussed the role of chemotherapy, hormonal blockade, surgery and radiation to decrease the risk of recurrence, recommend an anti inflammatory and/or diabetes risk reducing di
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 2.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "discussed the role of chemotherapy, plan to start, discussed the role of surgery and radiation to decrease the risk of local recurrence, discussed the role of hormonal blockade to
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "discussed the role of chemotherapy, plan to start, discussed the role of surgery" -> "plan to start"
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "discussed the role of surgery and radiation to decrease the risk of local recurrence"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 1.2s
+      [EXTRACT] raw={
+  "procedure_plan": "surgery and biopsy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 1.3s
+      [EXTRACT] raw={
+  "imaging_plan": "PET and MRI"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.5s
+      [EXTRACT] raw={
+  "lab_plan": "genetic testing and other tests pending"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "genetic testing sent and is pending"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.5s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "genetic testing",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 1.1s
+      [EXTRACT] raw={
+  "Next clinic visit": "follow up after PET and genetic testing are back"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 54.3s
+  Row 2 total: 65.3s
+  Row 2 saved to progress
+
+Processing row 3 (4/20)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2309 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for ER+/PR+ left breast invasive ductal carcinoma, stage not specified, to review treatme
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for ER+/PR+ left breast invasive ductal carcinoma," -> "Follow up for ER+/PR+ left breast invasive ductal carcinoma,"
+    What_We_Found: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ left breast invasive ductal carcinoma",
+  "Stage_of_Cancer": "2",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "No evidence of 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "2" -> "2.8 cm grade 2 IDC"
+    Treatment_Summary: 4.2s
+      [EXTRACT] raw={
+  "current_meds": "Letrozole 2.5 mg daily",
+  "recent_changes": "",
+  "supportive_meds": "Aspirin 81 mg, Calcium carbonate, Cholecalciferol (Vitamin D3) 1000 Units, Loratadine, Metoprolol succinate,
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "The patient will continue to take Letrozole 2.5 mg daily to treat the breast cancer, and to continue annual right breast mammogram.",
+  "response_assessment": "The cancer is
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "The cancer is not mentioned as not responding or responding," -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+  Extraction prompts: 14.8s
