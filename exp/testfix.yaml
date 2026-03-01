@@ -1,0 +1,35 @@
+experiment:
+  name: "testfix"
+  seed: 42
+
+model:
+  name: "meta-llama/Llama-3.1-8B-Instruct"
+  dtype: "bfloat16"
+  device_map: "auto"
+  cache_dir: "/mnt/c/Users/yc/.cache/huggingface"
+
+data:
+  dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
+  row_indices: [0, 1, 4, 6, 10, 11, 19]
+
+prompts:
+  extraction: "prompts/extraction.yaml"
+  plan_extraction: "prompts/plan_extraction.yaml"
+
+extraction:
+  pipeline: "v2"
+  max_retries: 3
+  verify: true
+
+generation:
+  keypoint:
+    max_new_tokens: 512
+    do_sample: false
+  assessment_plan:
+    max_new_tokens: 2048
+    do_sample: false
+  retry:
+    max_new_tokens: 2048
+    do_sample: true
+    temperature: 0.6
+    top_p: 0.9

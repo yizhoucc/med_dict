@@ -510,9 +510,14 @@ def main():
     # 6. Load data
     data_cfg = config["data"]
     df = pd.read_csv(data_cfg["dataset_path"])
-    row_range = data_cfg.get("row_range", [0, len(df)])
-    df = df.iloc[row_range[0] : row_range[1]]
-    print(f"Data loaded: {len(df)} rows (range {row_range})")
+    row_indices = data_cfg.get("row_indices", None)
+    if row_indices:
+        df = df.iloc[row_indices]
+        print(f"Data loaded: {len(df)} rows (indices {row_indices})")
+    else:
+        row_range = data_cfg.get("row_range", [0, len(df)])
+        df = df.iloc[row_range[0] : row_range[1]]
+        print(f"Data loaded: {len(df)} rows (range {row_range})")
 
     # 7. Load prompts
     extraction_prompts = config["_prompts"]["extraction"]
