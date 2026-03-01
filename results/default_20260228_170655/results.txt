@@ -575,3 +575,76 @@ RESULTS FOR ROW 6
   "follow_up_next_visit": "RTC 3 months or sooner as needed",
   "Advance_care_planning": "We will document her diagnosis for various aid she can apply for."
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 7
+============================================================
+
+--- Column: coral_idx ---
+146
+
+--- Column: note_text ---
+"*****  ***** with MBC ***** 2008    CC  2nd opinion    HPI  First dx'd 1998 with Stage II T2N1 left sided IDC, presented with BSE. W/u included positive mammogram. On October 97 S/p left lumpectomy, ALND showed August 07 nodes positive. Biomarker results unclear. Rec'd adjuvant AC+T chemotherapy. Rec'd adjuvant XRT. Did not receive adjuvant hormonal Rx.    Suffered recurrence in 2008 with left supraclav node, January 25 bx positive for metastatic poorly diff CA, c/w breast primary. ER/PR neg. ***** by IHC. Also found to have mediastinal dz.  Rx Taxotere/xeloda +  Herceptin. Described as \"transient\" response, then progression. Rec'd XRT to both regions in 2009.Rx Tykerb+herceptin, responded initially and then progressed. Rx capecitabine/Herceptin. Noted to have rising *****. Rx changed in September 29 to pertuzumab/herceptin/taxotere. May also have had tykerb or herceptin monotherapy at some point (?), pt unsure.    Today comes to clinic with husband. Has been off of rx since last wk. Notes some improvement of *****. C/o left sided CW discomfort, mild.       PMH  HTN  Hx thyroid dz  Depression  PSH: left meniscus 2001.  Meds: Lisinopril. Paxil.  ALL: Clindamycin: itching. CT contrast: anaphylaxis.  OB: ***** P2. Menses 11 yo. LMP 2009 with chemo.    FH  Son with neuroblastoma. Mother with breast CA at 72 yo. BRCA testing negative in *****.    SH  RN / case manager in *****. Married, lives in ***** ***** husband.    ROS  Review of Systems -   General ROS: + mild alopecia. + nausea with chemo  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + L CW pain, mild.  Respiratory ROS: negative  Cardiovascular ROS: negative  Gastrointestinal ROS: negative  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: + numbness, tingling in fingers.  Dermatological ROS: + pruritus, scattered sites.  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    PE  BP 104/71 | \n Pulse 122 | Temp(Src) 36.4 C (97.6 F) (Oral) | Resp 22 | Ht 163 cm (5' 4.17\") | Wt 93.486 kg (206 lb 1.6 oz) | BMI 35.19 kg/m2 | SpO2 96%    General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic. Mod alopecia.   Eyes:    PERRL, conjunctiva/corneas clear, EOM's intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity    Heart:    Regular rate and rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality on R. L is s/p Lx with significant volume loss; no masses, lesions otherwise.   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical and axillary nodes normal L supraclav with healed excision site; no masses, lesions.   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     throughout     STUDIES  *****  06/23/13: 14.*****    ***** ***** 06/30/13:  Probable mild progression in the left breast and possibly the left ant CW.  Stable mediastinal adenopathy    Brain MRI with/without contrast 02/14/13:  No evidence of mets.    ***** 06/15/13:   lvef somewhat decreased, 52%.    IMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. Recent PET-CT ***** as probable PD. However, evidence is equivocal for progression. CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8). ***** persistently elevated at 14.8 but not increased since previous. Pt does note some L CW discomfort, however.     2. ***** metastasis.    3. Mediastinal metastasis.    4. Decreased LVEF, likely due to current combination rx incl herceptin (with *****/taxotere)    REC  - Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx (*****/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec ***** as next line of Rx  - Would recheck ***** prior to above  - Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight  - Discussed current clinical trial possibilities, here at ***** and nationally. Discussed multiple alternative ***** directed therapies under development. However, would proceed with ***** at this point based on substantial demonstrated clinical benefit e.g. ***** trial    \n"
+
+--- Column: assessment_and_plan ---
+"The extracted section is below:\n\n\nIMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. Recent PET-CT ***** as probable PD. However, evidence is equivocal for progression. CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8). ***** persistently elevated at 14.8 but not increased since previous. Pt does note some L CW discomfort, however.     2. ***** metastasis.    3. Mediastinal metastasis.    4. Decreased LVEF, likely due to current combination rx incl herceptin (with *****/taxotere)    REC  - Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx (*****/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec ***** as next line of Rx  - Would recheck ***** prior to above  - Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight  - Discussed current clinical trial possibilities, here at ***** and nationally. Discussed multiple alternative ***** directed therapies under development. However, would proceed with ***** at this point based on substantial demonstrated clinical benefit e.g. ***** trial   \n\n\nANSWER: IMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. Recent PET-CT ***** as probable PD. However, evidence is equivocal for progression. CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8). ***** persistently elevated at 14.8 but not increased since previous. Pt does note some L CW discomfort, however.     2. ***** metastasis.    3. Mediastinal metastasis.    4. Decreased LVEF, likely due to current combination rx incl herceptin (with *****/taxotere)    REC  - Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx (*****/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec ***** as next line of Rx  - Would recheck ***** prior to above  - Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight  - Discussed current clinical trial possibilities, here at ***** and nationally. Discussed multiple alternative ***** directed therapies under development. However, would proceed with ***** at this point based on substantial demonstrated clinical benefit e.g. ***** trial   ."
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "Yes",
+    "in-person": "in-person",
+    "summary": "2nd opinion"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "MBC",
+    "Stage_of_Cancer": "Stage II",
+    "Distant Metastasis": "Yes, left supraclav node, mediastinum",
+    "Metastasis": "Yes, left supraclav node, mediastinum",
+    "lab_summary": "Biomarker results unclear, ER/PR neg, SUV 2.1, LVEF 52%",
+    "findings": "Probable mild progression in the left breast and possibly the left ant CW, stable mediastinal adenopathy"
+  },
+  "Treatment_Summary": "{\n  \"current_meds\": \"Taxotere, Xeloda, Herceptin, Pertuzumab\",\n  \"recent_changes\": \"d/c current rx (Taxotere/Herceptin/Taxotere) due to decreased LVEF\",\n  \"supportive_meds\": \"Lisinopril, Paxil\"\n}",
+  "Goals_of_care": "{\n  \"goals_of_treatment\": \"cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life\",\n  \"response_assessment\": \"probable minor degree of progression\"\n}",
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "will stop Herceptin (with Taxotere)",
+      "Short term side_effects_discussed": "none",
+      "Long term side_effects_discussed": "none"
+    },
+    "hormonal therapy": {
+      "summary": "will not consider at this time",
+      "Short term side_effects_discussed": "none",
+      "Long term side_effects_discussed": "slight evidence for hormone responsiveness"
+    },
+    "other treatment": {
+      "summary": "discussed alternative therapies under development",
+      "Short term side_effects_discussed": "none",
+      "Long term side_effects_discussed": "none"
+    }
+  },
+  "Medication_Plan": "will stop current chemotherapy regimen (Herceptin with Taxotere) and will consider alternative therapies under development",
+  "Therapy_plan": "will stop current chemotherapy regimen (Herceptin with Taxotere) and will consider alternative therapies under development",
+  "radiotherapy_plan": {
+    "radiotherapy": "discussed"
+  },
+  "Procedure_Plan": "none",
+  "Imaging_Plan": "PET-CT",
+  "Lab_Plan": "none",
+  "Genetic_Testing_Plan": "none",
+  "Referral": {
+    "Nutrition": "none",
+    "Genetics": "none",
+    "Specialty": "Palliative care",
+    "Others": "none",
+    "follow up": "recheck before next treatment"
+  },
+  "follow_up_next_visit": "recheck before next treatment",
+  "Advance_care_planning": "discussed goals of care"
+}
