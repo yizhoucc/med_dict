@@ -93,3 +93,28 @@ Processing row 3 (4/5)...
     Goals_of_care: 4.2s [re-extracted]
   Extraction prompts: 17.5s
     Medication_Plan_chatgpt: 16.9s [re-extracted, temporal-cleaned]
+    Medication_Plan: 5.9s [re-extracted]
+    Therapy_plan: 2.8s [re-extracted]
+    radiotherapy_plan: 0.6s
+    Procedure_Plan: 1.0s
+    Imaging_Plan: 2.1s
+    Lab_Plan: 1.0s
+    Genetic_Testing_Plan: 0.9s
+    Referral: 1.4s
+    follow_up_next_visit: 1.0s
+    Advance_care_planning: 0.7s
+  Plan extraction prompts: 34.5s
+  Row 3 total: 52.0s
+  Row 3 saved to progress
+
+Processing row 4 (5/5)...
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1420 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 1.6s
+    What_We_Found: 8.1s [re-extracted]
+    Treatment_Summary: 8.5s [re-extracted]
+    Goals_of_care: 1.2s
+  Extraction prompts: 19.8s
+    Medication_Plan_chatgpt: 22.0s [re-extracted, temporal-cleaned]
