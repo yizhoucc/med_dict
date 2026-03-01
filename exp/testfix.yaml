@@ -10,7 +10,7 @@ model:
 
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
-  row_indices: [0, 1, 4, 6, 10, 11, 19]
+  row_indices: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
 
 prompts:
   extraction: "prompts/extraction.yaml"

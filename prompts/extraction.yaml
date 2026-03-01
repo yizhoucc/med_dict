@@ -53,17 +53,30 @@ Treatment_Summary: |
 Goals_of_care: |
   TASK: Extract 'What We Discussed / Decided'.
 
-  For response_assessment, look for:
-  - Imaging results: "CT shows stable disease", "PET-CT shows progression", "MRI stable"
-  - Tumor markers: "CA 15-3 decreased/increased/stable", "CEA trending down"
-  - Clinical assessment: "no evidence of disease recurrence", "probable PD", "compatible with treatment response", "exam stable"
-  - Symptom-based: "symptoms worsening", "pain improved", "tolerating therapy well"
-  If the patient is newly diagnosed and has NOT yet started treatment, write "Not yet on treatment — no response to assess."
-  If there is no mention of disease status or treatment response anywhere in the note, write "Not mentioned in note."
-  Do NOT write "Not applicable" or "Not specified".
+  For goals_of_treatment:
+  - Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", "neoadjuvant", or "symptom management".
+  - Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
+  - If the note discusses reducing recurrence risk, write "risk reduction".
+  - If the note discusses palliative care or life-prolonging treatment for metastatic disease, write "palliative".
+  - If treatment aims to cure, write "curative".
+
+  For response_assessment:
+  - Write how the cancer is CURRENTLY responding based on evidence already available.
+  - Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
+  - Do NOT include future plans ("will start", "plan to", "she will have radiation").
+  - Do NOT include treatment discussions or recommendations.
+  - If the patient is newly diagnosed and has NOT yet started treatment, write "Not yet on treatment — no response to assess."
+  - If there is no mention of disease status or treatment response anywhere in the note, write "Not mentioned in note."
+  - Do NOT write "Not applicable" or "Not specified".
+  Examples:
+  - GOOD: "CT stable, CA 15-3 decreased from 28 to 14"
+  - GOOD: "no evidence of disease recurrence on imaging and exam"
+  - GOOD: "tolerating therapy well, symptoms improved"
+  - BAD: "She will continue on letrozole and have radiation" (this is a plan, not a response)
+  - BAD: "We discussed chemotherapy options" (this is a discussion, not a response)
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "goals_of_treatment": "The stated goal or intent of treatment, e.g., curative, palliative, risk reduction, symptom management.",
-  "response_assessment": "How is the cancer responding? Cite specific evidence: imaging findings, lab trends, or clinical status. e.g., 'CT stable, CA 15-3 decreased from 28 to 14' or 'no evidence of disease recurrence on imaging and exam'."
+  "goals_of_treatment": "The intent of cancer treatment: curative, palliative, risk reduction, adjuvant, neoadjuvant, or symptom management. NOT the purpose of this visit.",
+  "response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence already available: imaging, labs, exam, symptoms. Do NOT include future plans."
   }

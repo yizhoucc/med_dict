@@ -664,7 +664,7 @@ def _has_vague_terms(text):
 
 def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True):
     """
-    V2 extraction pipeline with 5 independent gates.
+    V2 extraction pipeline with 6 independent gates.
     Each gate fixes one specific issue (trim, don't redo).
 
     Gates:
@@ -673,6 +673,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
       3. FAITHFUL - Trim unsupported claims (not re-extract)
       4. TEMPORAL - Remove past/completed items from plan keys
       5. SPECIFIC - Replace vague language with specifics
+      6. SEMANTIC - Check each value answers its field's question
 
     Args:
         prompts: dict of {key: task_prompt_text}
@@ -908,6 +909,62 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     gate_log.append(f"      [G5-SPECIFIC] REJECTED (no key overlap)")
             else:
                 gate_log.append(f"      [G5-SPECIFIC] parse FAILED")
+
+        # --- Gate 6: SEMANTIC RELEVANCE ---
+        if verify and parsed is not None:
+            # Extract the field descriptions from the prompt schema
+            schema_str = extract_schema_from_prompt(task)
+            original_keys_g6 = set(parsed.keys())
+            before_g6 = {k: str(v)[:80] for k, v in parsed.items()}
+            semantic_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"Check if each value in this extraction actually answers the question asked by its field.\n\n"
+                f"The field definitions are:\n{schema_str}\n\n"
+                f"The extraction is:\n{answer}\n\n"
+                f"For each field, check: does the value answer what the field is asking for?\n"
+                f"Common errors to catch:\n"
+                f"- goals_of_treatment should be the INTENT of treatment (curative, palliative, risk reduction), "
+                f"NOT the purpose of this visit (follow-up, discuss options)\n"
+                f"- response_assessment should be how the cancer is CURRENTLY responding (imaging, labs, exam), "
+                f"NOT future plans (will start, plan to, she will have)\n"
+                f"- current_meds should be medications the patient is CURRENTLY taking, "
+                f"NOT medications being discussed or planned\n\n"
+                f"If a value does not answer its field's question, replace it with the correct answer "
+                f"from the original medical note. If no correct answer exists in the note, use an appropriate "
+                f"default (e.g., 'Not yet on treatment — no response to assess.' for response_assessment "
+                f"when no treatment has started).\n"
+                f"If all values correctly answer their fields, return the JSON unchanged.\n"
+                f"Return ONLY the JSON object with all keys preserved."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            semantic_raw, _ = run_model_with_cache_manual(
+                semantic_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            semantic_parsed = try_parse_json(semantic_raw)
+            if semantic_parsed is not None:
+                semantic_keys = set(semantic_parsed.keys())
+                if original_keys_g6 & semantic_keys:
+                    # Restore any dropped keys
+                    for mk in original_keys_g6 - semantic_keys:
+                        semantic_parsed[mk] = parsed[mk]
+                    changed = False
+                    for k in original_keys_g6:
+                        if parsed.get(k) != semantic_parsed.get(k):
+                            changed = True
+                            gate_log.append(f"      [G6-SEMANTIC] {k}: \"{before_g6.get(k,'')}\" -> \"{str(semantic_parsed.get(k,''))[:80]}\"")
+                    if changed:
+                        flags.append("semantic-fixed")
+                    else:
+                        gate_log.append(f"      [G6-SEMANTIC] ok (all values answer their fields)")
+                    parsed = semantic_parsed
+                    answer = json.dumps(semantic_parsed, ensure_ascii=False)
+                else:
+                    gate_log.append(f"      [G6-SEMANTIC] REJECTED (no key overlap)")
+            else:
+                gate_log.append(f"      [G6-SEMANTIC] parse FAILED")
 
         # --- Store result ---
         if parsed is not None:
