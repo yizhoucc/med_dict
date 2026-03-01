@@ -982,3 +982,125 @@ Processing row 7 (8/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] findings: "No residual invasive carcinoma in breast, 3 of 28 lymph node" -> "No residual invasive carcinoma in breast, 3 of 28 lymph node"
       [G3-FAITH] lab_summary: "" -> "Negative for estrogen and progesterone receptors, HER2 posit"
+    Treatment_Summary: 5.5s
+      [EXTRACT] raw={
+  "current_meds": "TCHP (switched to weekly paclitaxel, and continued q3 week carboplatin, trastuzumab, pertuzumab)",
+  "recent_changes": "held weekly paclitaxel due to side effects, switched to wee
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 3.3s
+      [EXTRACT] raw={
+  "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+  "response_assessment": "patient is at great risk of dev
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 17.0s
+    Medication_Plan_chatgpt: 29.1s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "adjuvant AC x 4 cycles, followed by T-DM1",
+    "Short term side_effects_discussed": "fatigue, myelosuppression, nausea, hair loss, brain fog",
+    "Long term sid
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 2.5s
+      [EXTRACT] raw={
+  "medication_plan": "adjuvant AC x 4 cycles, followed by T-DM1, port placement, echocardiogram"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 2.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "adjuvant AC x 4 cycles, followed by T-DM1, radiation after completing AC"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "adjuvant AC x 4 cycles, followed by T-DM1, radiation after completing AC" -> "adjuvant AC x 4 cycles, followed by T-DM1, radiation"
+    radiotherapy_plan: 1.0s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "radiation after completing AC"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 1.1s
+      [EXTRACT] raw={
+  "procedure_plan": "port placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 1.2s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.4s
+      [EXTRACT] raw={
+  "lab_plan": "CMP, echocardiogram"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.4s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.4s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "follow up"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 0.9s
+      [EXTRACT] raw={
+  "Next clinic visit": "this coming week"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 44.3s
+  Row 7 total: 61.3s
+  Row 7 saved to progress
+
+Processing row 8 (9/20)...
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1311 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow-up visit for a 64-year-old female with a history of malignant neoplasm of the upper-outer qu
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow-up visit for a 64-year-old female with a history of m" -> "Follow-up visit for a 64-year-old female with a history of m"
