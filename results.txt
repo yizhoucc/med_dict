@@ -1,4 +1,4 @@
-Source: default.yaml | Run started: 2026-02-28 18:49:53
+Source: default_v1.yaml | Run started: 2026-02-28 19:16:15
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -472,7 +472,7 @@ RESULTS FOR ROW 3
     "imaging_plan": "No imaging planned."
   },
   "Lab_Plan": {
-    "faithful": true
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "Genetic testing sent and is pending."
