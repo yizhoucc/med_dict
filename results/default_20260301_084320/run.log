@@ -13509,3 +13509,35 @@ Processing row 90 (91/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Follow up for metastatic breast cancer, stage 4, to review d" -> "Metastatic breast cancer, stage 4, to review disease progres"
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 20.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ breast cancer",
+  "Stage_of_Cancer": "Stage IV",
+  "Distant Metastasis": "Yes, to bone",
+  "Metastasis": "Yes",
+  "lab_summary": "Hemoglobin 12.4, Hematocrit 37.5, MCV 8
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 12.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "exemestane, denosumab, everolimus, lasix, potassium chloride",
+  "recent_changes": "Patient started lasix 10mg daily with KCL 10Meq daily, patient took medrol (oral steroid) x 1/2
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "aspirin, triamcinolone (topical)" -> "ascorbic acid, calcium-vitamin D, cholecalciferol, triamcinolone (topical)"
+      [G6-SEMANTIC] current_meds: "exemestane, denosumab, everolimus, lasix, potassium chloride" -> "exemestane, denosumab, everolimus, lasix, potassium chloride, medrol"
+    Goals_of_care: 9.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the patient is on treatment for me
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Likely responding to treatment as per discussion with Dr. ***** and review of di"
+  Extraction prompts: 51.3s
