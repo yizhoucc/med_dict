@@ -3555,3 +3555,31 @@ Processing row 24 (25/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] summary: "Patient with metastatic breast cancer, stage not specified, for follow-up visit " -> "Patient with metastatic breast cancer, stage not specified, currently on Xeloda "
+    What_We_Found: 25.8s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic",
+  "Distant Metastasis": "Yes, to multiple sites",
+  "Metastasis": "Yes",
+  "lab_
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 14.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Xeloda 1500mg/1000mg 14 days and 7 days off, Ixabepilone, Amiodipine, Calcium, Cholecalciferol, Docusate, Ferrous fumarate, Levitiracetam, Metoprolol, Ondansetron, OxyCodone, Lora
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "Xeloda 1500mg/1000mg 14 days and 7 days off, Ixabepilone, Am" -> "Xeloda 1500mg/1000mg 14 days and 7 days off, Ixabepilone, Am"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Patient is experiencing pain in both breasts, supraclavicular area appears to be"
+  Extraction prompts: 47.1s
