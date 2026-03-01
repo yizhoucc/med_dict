@@ -35,6 +35,10 @@ radiotherapy_plan: |
   For radiotherapy, include ANY statement that indicates
   it is being considered, recommended, or may be used, even if no explicit
   start/continue/plan keywords are present.
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
+  }
 
 Procedure_Plan: |
   TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.

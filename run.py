@@ -253,8 +253,65 @@ def append_row_result(results_path, row_index, row_result):
                 f.write(str(value) + "\n")
 
 
+def regex_extract_assessment_plan(note_text):
+    """Try to extract Assessment/Plan section using regex.
+
+    Returns the extracted text or None if no match found.
+    """
+    # Common headers for the A/P section (case-insensitive)
+    patterns = [
+        r'Assessment\s*(?:/|and)\s*Plan\s*:?\s*\n',
+        r'Assessment\s*&\s*Plan\s*:?\s*\n',
+        r'A\s*/\s*P\s*:?\s*\n',
+        r'ASSESSMENT\s*(?:/|AND)\s*PLAN\s*:?\s*\n',
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, note_text, re.IGNORECASE)
+        if match:
+            extracted = note_text[match.start():]
+            if len(extracted) > 20:
+                print(f"  Regex matched: '{match.group().strip()}'")
+                return extracted
+
+    return None
+
+
+def truncate_repeated_text(text, min_block_size=100):
+    """Detect and remove repeated blocks in model output.
+
+    The model sometimes repeats the A/P text multiple times.
+    Keep only the first occurrence.
+    """
+    if len(text) < min_block_size * 2:
+        return text
+
+    # Try to find a repeated block by checking if the first chunk
+    # appears again later in the text
+    for block_size in range(min_block_size, len(text) // 2 + 1, 50):
+        first_block = text[:block_size]
+        # Look for this block appearing again
+        second_pos = text.find(first_block, block_size)
+        if second_pos != -1:
+            # Found repetition - keep everything up to the repeat
+            return text[:second_pos].rstrip()
+
+    return text
+
+
 def extract_assessment_plan(note_text, model, tokenizer, config):
-    """Extract assessment/plan section with retries and LLM verification."""
+    """Extract assessment/plan section: regex first, LLM fallback with chat template."""
+
+    # --- Step A: Try regex extraction first ---
+    print("  Trying regex extraction...")
+    regex_result = regex_extract_assessment_plan(note_text)
+    if regex_result is not None:
+        print(f"  Regex extraction succeeded ({len(regex_result)} chars)")
+        return regex_result
+
+    print("  Regex failed, falling back to LLM extraction...")
+
+    # --- Step B: LLM extraction with proper chat template ---
     max_retries = config.get("extraction", {}).get("max_retries", 3)
     gen_config_greedy = config["generation"]["assessment_plan"].copy()
     gen_config_greedy["eos_token_id"] = tokenizer.eos_token_id
@@ -264,30 +321,37 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
     for attempt in range(max_retries):
         if attempt == 0:
             current_prompt = (
-                "here is a medical note \n\n"
-                + note_text
-                + "\n\n "
-                'now, return me all the ORIGINAL TEXT (do not do any modifications, do no rephrase and summarize) '
-                'after the words like "Assessment and Plan" or "Assessment/Plan". '
-                "ignore anything before that. ignore the line breaking characters."
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
+                f"You are a medical text extraction tool. You extract sections from medical notes exactly as written. "
+                f"Return ONLY the extracted text, nothing else. No commentary, no 'here is the text', no repetition."
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                f"Here is a medical note:\n\n{note_text}\n\n"
+                f"Extract the 'Assessment and Plan' or 'Assessment/Plan' section. "
+                f"Return ONLY the original text from that section to the end of the note. "
+                f"Do not modify, rephrase, or summarize. Do not repeat the text."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             current_config = gen_config_greedy
         else:
             current_prompt = (
-                "The previous attempt failed because it was not an exact copy. "
-                'Your task is to COPY-PASTE the "Assessment and Plan" section.'
-                "\n\nSOURCE TEXT:\n"
-                + note_text
-                + "\n\n"
-                "INSTRUCTION: Extract the Assessment and Plan section exactly as written. "
-                "Do not summarize. Do not fix grammar. Do not change punctuation."
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
+                f"You are a copy-paste tool. Return ONLY the requested section, exactly as written. "
+                f"No commentary. No repetition. Stop after the section ends."
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                f"SOURCE TEXT:\n{note_text}\n\n"
+                f"Copy-paste the Assessment and Plan section exactly as written. "
+                f"Do not summarize. Do not fix grammar. Do not repeat."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             current_config = gen_config_retry
 
-        print(f"  Extraction Attempt {attempt + 1}...")
+        print(f"  LLM Extraction Attempt {attempt + 1}...")
         candidate_text, _ = run_model(
             current_prompt, model, tokenizer, current_config
         )
+
+        # --- Step C: Truncate repeated text ---
+        candidate_text = truncate_repeated_text(candidate_text)
 
         # LLM sanity check
         sanity_check_prompt = (
@@ -316,13 +380,52 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
 
         is_pass = "true" in check_output.lower()
         if is_pass and len(candidate_text) > 20:
-            print(f"  Success on attempt {attempt + 1} (Verified by LLM)")
+            print(f"  Success on attempt {attempt + 1} (Verified by LLM, {len(candidate_text)} chars)")
             return candidate_text
 
         print(f"  Attempt {attempt + 1} failed LLM sanity check. Retrying...")
 
     print("  All attempts failed. Skipping plan-specific extraction.")
     return None
+
+
+def normalize_keypoints(keypoints):
+    """Normalize all keypoint values to a consistent format.
+
+    extract_and_verify sometimes returns dict, sometimes JSON string,
+    sometimes plain text. This normalizes:
+    - JSON strings → parsed dict
+    - Already-dict → kept as-is
+    - Plain text → kept as string
+    """
+    normalized = {}
+    for key, value in keypoints.items():
+        if isinstance(value, dict):
+            normalized[key] = value
+        elif isinstance(value, str):
+            # Try to parse as JSON
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, dict):
+                    normalized[key] = parsed
+                else:
+                    normalized[key] = value
+            except (json.JSONDecodeError, ValueError):
+                # Try to fix common JSON issues (single quotes, trailing commas)
+                try:
+                    fixed = value.replace("'", '"')
+                    # Remove trailing commas before closing braces
+                    fixed = re.sub(r',\s*}', '}', fixed)
+                    parsed = json.loads(fixed)
+                    if isinstance(parsed, dict):
+                        normalized[key] = parsed
+                    else:
+                        normalized[key] = value
+                except (json.JSONDecodeError, ValueError):
+                    normalized[key] = value
+        else:
+            normalized[key] = value
+    return normalized
 
 
 def main():
@@ -491,6 +594,7 @@ def main():
         keypoints = extract_and_verify(
             extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify
         )
+        keypoints = normalize_keypoints(keypoints)
         print("  Keypoints from extraction_prompts done")
 
         # Extract plan keypoints from assessment/plan section
@@ -504,6 +608,7 @@ def main():
                 base_cache,
                 verify=verify,
             )
+            plan_keypoints = normalize_keypoints(plan_keypoints)
             keypoints.update(plan_keypoints)
         print("  Keypoints from plan_extraction_prompts done")
 
