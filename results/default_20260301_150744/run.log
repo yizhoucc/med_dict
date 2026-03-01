@@ -788,3 +788,76 @@ Processing row 24 (5/20)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1288 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 5.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for metastatic breast cancer, metastasized to multiple sites, on Xeloda 1500mg/1000mg 14 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] summary: "Follow up for metastatic breast cancer, metastasized to multiple sites, on Xelod" -> "Metastatic breast cancer, metastasized to multiple sites, on Xeloda 1500mg/1000m"
+      [G6-SEMANTIC] second opinion: "" -> "Not mentioned"
+    Cancer_Diagnosis: 5.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, multiple sites",
+  "Metastasis": 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "metastatic (Stage IV)"
+      [G3-FAITH] Metastasis: "Yes, multiple sites" -> "multiple sites"
+      [G3-FAITH] Distant_Metastasis: "Yes, multiple sites" -> "Yes"
+      [G6-SEMANTIC] Metastasis: "multiple sites" -> "Yes, to multiple sites"
+      [G6-SEMANTIC] Distant_Metastasis: "Yes" -> "Yes, to multiple sites"
+    Lab_Results: 15.6s
+      [EXTRACT] raw={
+"lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin 0.6, BUN 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC 35.2, Platelet Count 364, Neutrophil 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 9.8s
+      [EXTRACT] raw={
+  "findings": "Imaging findings: PET/CT on 03/12/2011 showed progression of disease including liver, bones, lymph nodes, and breast skin metastases. MRI of the brain on 12/11/2010 revealed a 4 cm le
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.6s
+      [EXTRACT] raw={
+"current_meds": [
+"capecitabine (Xeloda)",
+"ixabepilone"
+]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 6.4s
+      [EXTRACT] raw={
+"recent_changes": "Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off, started ixabepilone 40mg/m2, started denosumab",
+"supportive_meds": "ondansetron, oxyCODONE, LORazepam, p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 6.4s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 7.1s [semantic-fixed]
+      [EXTRACT] raw=The patient has started cancer treatment, specifically chemotherapy with Xeloda 1500mg/1000mg 14 days and 7 days off, and ixabepilone. The note mentions that the patient is on the off week of Xeloda, 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "New chest wall/breast skin metastases on PET/CT, labs reviewed okay to proceed w" -> "New chest wall/breast skin metastases on PET/CT"
+  Extraction prompts: 59.7s
