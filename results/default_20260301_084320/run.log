@@ -13663,3 +13663,35 @@ Processing row 91 (92/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 33.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+, PR-, HER2- breast cancer",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "Yes, to multiple sites",
+  "Metastasis": "Yes",
+  "lab_summary": "Cancer A
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Type_of_Cancer: "ER+, PR-, HER2- breast cancer" -> "breast cancer"
+    Treatment_Summary: 23.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Epirubicin, Neupogen, brinzolamide, denosumab, dexmethylphenidate, dronabinol, loratadine, metoclopramide, senna-docusate, timolol, venlafaxine, zolpidem",
+  "recent_changes": "in
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "increase to 30 mg/m2, increase to 110 mg/m2" -> ""
+      [G3-FAITH] EMPTIED: ['recent_changes']
+      [G6-SEMANTIC] recent_changes: "" -> "increase to 30 mg/m2, increase to 110 mg/m2"
+    Goals_of_care: 10.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the patient has metastatic breast 
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> "The patient's cancer is currently responding to treatment, a"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 77.5s
