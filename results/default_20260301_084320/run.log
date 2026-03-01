@@ -12324,3 +12324,140 @@ Processing row 82 (83/100)...
       [G3-FAITH] REJECTED (no key overlap), kept original
       [G4-TEMPORAL] REJECTED (no key overlap)
       [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 2.7s
+      [EXTRACT] raw={
+  "medication_plan": "continue neoadjuvant endocrine therapy with letrozole"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 2.8s
+      [EXTRACT] raw={
+  "therapy_plan": "continue neoadjuvant endocrine therapy with letrozole"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "discussed that pt will have reassessment of status and treatment plan after surgery and pathology are complete"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "discussed that pt will have reassessment of status and treatment plan after surg" -> "None"
+    Procedure_Plan: 1.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "breast surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] procedure_plan: "breast surgery" -> "No procedures planned."
+    Imaging_Plan: 0.6s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.9s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.6s
+      [EXTRACT] raw={
+  "Next clinic visit": "upcoming breast surgery"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 33.5s
+  Row 82 total: 69.2s
+  Row 82 saved to progress
+
+Processing row 83 (84/100)...
+  Injected 5 term definitions: ['progesterone receptor', 'estrogen receptor', 'lumpectomy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (4232 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Patient with metastatic breast cancer, ER+, seeking recommendations for ongoing management and trea
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] summary: "Patient with metastatic breast cancer, ER+, seeking recommendations for ongoing " -> "Patient with metastatic breast cancer, ER+, PR-, CHEK2 mutation, with disease in"
+    What_We_Found: 12.7s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic",
+  "Distant Metastasis": "Yes, to bone, liver, soft tissue, and possibly meninges
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 7.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "capecitabine 1500mg BID, zolendronic acid",
+  "recent_changes": "switched to 1500mg BID in late September",
+  "supportive_meds": "atorvastatin, citalopram, cyclobenzaprine, dalfam
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "capecitabine 1500mg BID, zolendronic acid" -> "capecitabine 1500mg BID, zolendronic acid, atorvastatin, citalopram, cyclobenzap"
+    Goals_of_care: 4.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note" -> "The patient's neurologic symptoms are getting progressively "
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 31.5s
