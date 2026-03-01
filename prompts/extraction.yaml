@@ -38,8 +38,18 @@ Treatment_Summary: |
 
 Goals_of_care: |
   TASK: Extract 'What We Discussed / Decided'.
+
+  For response_assessment, look for:
+  - Imaging results: "CT shows stable disease", "PET-CT shows progression", "MRI stable"
+  - Tumor markers: "CA 15-3 decreased/increased/stable", "CEA trending down"
+  - Clinical assessment: "no evidence of disease recurrence", "probable PD", "compatible with treatment response", "exam stable"
+  - Symptom-based: "symptoms worsening", "pain improved", "tolerating therapy well"
+  If the patient is newly diagnosed and has NOT yet started treatment, write "Not yet on treatment — no response to assess."
+  If there is no mention of disease status or treatment response anywhere in the note, write "Not mentioned in note."
+  Do NOT write "Not applicable" or "Not specified".
+
   Respond *only* with a JSON object using this exact schema:
   {
-  "goals_of_treatment": "eg, cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-  "response_assessment": "How the cancer is responding to the treatment, not responding or responding."
+  "goals_of_treatment": "The stated goal or intent of treatment, e.g., curative, palliative, risk reduction, symptom management.",
+  "response_assessment": "How is the cancer responding? Cite specific evidence: imaging findings, lab trends, or clinical status. e.g., 'CT stable, CA 15-3 decreased from 28 to 14' or 'no evidence of disease recurrence on imaging and exam'."
   }
