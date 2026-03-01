@@ -21,3 +21,41 @@ Processing row 2 (1/2)...
     Therapy_plan: 3.6s [re-extracted]
     radiotherapy_plan: 0.9s
     Procedure_Plan: 2.3s [re-extracted]
+    Imaging_Plan: 2.2s [re-extracted]
+    Lab_Plan: 0.9s [temporal-cleaned]
+    Genetic_Testing_Plan: 0.8s
+    Referral: 1.5s
+    follow_up_next_visit: 0.8s
+    Advance_care_planning: 0.7s
+  Plan extraction prompts: 31.3s
+  Row 2 total: 44.1s
+  Row 2 saved to progress
+
+Processing row 3 (2/2)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2309 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 1.8s
+    What_We_Found: 6.4s [re-extracted]
+    Treatment_Summary: 5.2s [re-extracted]
+    Goals_of_care: 4.2s [re-extracted]
+  Extraction prompts: 17.9s
+    Medication_Plan_chatgpt: 16.7s [re-extracted, temporal-cleaned]
+    Medication_Plan: 5.8s [re-extracted]
+    Therapy_plan: 2.8s [re-extracted]
+    radiotherapy_plan: 0.6s
+    Procedure_Plan: 1.0s
+    Imaging_Plan: 2.0s
+    Lab_Plan: 1.0s
+    Genetic_Testing_Plan: 1.0s
+    Referral: 1.3s
+    follow_up_next_visit: 1.0s
+    Advance_care_planning: 0.7s
+  Plan extraction prompts: 34.0s
+  Row 3 total: 51.9s
+  Row 3 saved to progress
+
+Total processing time: 96.0s (1.6min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_184314/

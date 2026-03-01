@@ -1,4 +1,4 @@
-Source: test_2row.yaml | Run started: 2026-02-28 18:31:34
+Source: test_2row.yaml | Run started: 2026-02-28 18:43:14
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -69,11 +69,18 @@ Respond *only* with a JSON object using this exact schema:
     "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
 }
 ', 'Therapy_plan': 'TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
-Include chemotherapy, radiotherapy, hormonal therapy, and bone-therapy plans. Include future plans, changes to current therapy (start, stop, continue). Do not include past therapies.
+Include ONLY current or future therapy: chemotherapy, radiotherapy, hormonal therapy, and bone-therapy.
+Include future plans, changes to current therapy (start, stop, continue).
+
+CRITICAL — distinguish PAST from CURRENT/FUTURE:
+- PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018"
+- CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
+- FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
+
 Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
 Respond *only* with a JSON object using this exact schema:
 {
-    "therapy_plan": "A summary of the complete therapy plan with specific details."
+    "therapy_plan": "A summary of the current and future therapy plan with specific details."
 }
 ', 'radiotherapy_plan': 'TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
 For radiotherapy, include ANY statement that indicates
@@ -86,8 +93,13 @@ Respond *only* with a JSON object using this exact schema:
 }
 ', 'Procedure_Plan': 'TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
 Include ONLY future/planned procedures: surgery, biopsy, lumbar puncture, Chemo Port Insertion, or other interventional procedures.
-DO NOT include:
-- Procedures already completed or past results (e.g., "MRI showed..." is a past result, not a planned procedure)
+
+CRITICAL — distinguish PAST from FUTURE:
+- PAST (DO NOT include): "underwent mastectomy on 10/29/16", "s/p colectomy in June 2018", "had biopsy on 05/25", "completed radiation"
+- FUTURE (include): "will schedule biopsy", "plan for port placement", "surgery pending", "scheduled for colectomy next week"
+If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
+
+Also DO NOT include:
 - Imaging plans (CT, MRI, PET — these go in Imaging Plan)
 - Lab plans
 - Medication plans
@@ -100,10 +112,13 @@ Respond *only* with a JSON object using this exact schema:
 ', 'Imaging_Plan': 'TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
 Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray.
 Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
-DO NOT include:
-- Past imaging or imaging results (e.g., "MRI showed lesions" is a past result)
-- Any procedure plan, lab plan, or medication plan
-List SPECIFIC imaging types when mentioned. Do NOT use vague terms like "staging workup" — instead list the actual tests (e.g., "MRI brain, bone scan").
+
+CRITICAL — distinguish PAST from FUTURE:
+- PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed..."
+- FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening"
+
+DO NOT include any procedure plan, lab plan, or medication plan.
+List SPECIFIC imaging types. Do NOT use vague terms like "staging workup".
 If no future imaging is planned, say "No imaging planned."
 Respond *only* with a JSON object using this exact schema:
 {
@@ -240,35 +255,35 @@ RESULTS FOR ROW 3
     }
   },
   "Medication_Plan": {
-    "medication_plan": "No medication plan is mentioned in the note, only lifestyle modifications are recommended."
+    "medication_plan": "No medication plan mentioned, but discussed the role of chemotherapy, hormonal therapy, and radiotherapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "Chemotherapy was discussed as a role in the treatment plan to decrease the risk of systemic recurrence, radiotherapy was discussed as a role in the treatment plan to decrease the risk of local recurrence, and hormonal therapy was discussed as a role in the treatment plan to decrease the risk of systemic recurrence."
+    "therapy_plan": "Will discuss the role of chemotherapy, hormonal therapy, and radiotherapy."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "discussed the role of surgery and radiation to decrease the risk of local recurrence"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned."
+    "procedure_plan": "surgery and biopsy are planned"
   },
   "Imaging_Plan": {
-    "imaging_plan": "PET and PET are pending."
+    "imaging_plan": "No imaging planned."
   },
   "Lab_Plan": {
-    "lab_plan": "Genetic testing is pending."
+    "faithful": true
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Genetic testing is pending."
+    "genetic_testing_plan": "Genetic testing sent and is pending."
   },
   "Referral": {
     "Nutrition": "None",
-    "Genetics": "Genetic testing is pending",
-    "Specialty": "None",
+    "Genetics": "Genetic testing",
+    "Specialty": "Medical Oncology/Hematology",
     "Others": "None",
     "follow up": "None"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "follow up after PET and PET are back"
+    "Next clinic visit": "Will follow up after PET and genetic testing are back."
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -320,12 +335,7 @@ RESULTS FOR ROW 4
   },
   "Medication_Plan_chatgpt": {
     "Hormonal therapy": {
-      "summary": "Letrozole 2.5 mg daily, started on 12/02/2016",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "Pain medication": {
-      "summary": "Ibuprofen, heat, massage",
+      "summary": "Continue Letrozole 2.5 mg daily",
       "Short term side_effects_discussed": null,
       "Long term side_effects_discussed": null
     },
@@ -346,19 +356,19 @@ RESULTS FOR ROW 4
     }
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will continue Letrozole 2.5 mg daily, ibuprofen, and continue calcium and Vitamin D supplements. She will discuss taking OTC Magnesium supplement. If BMD falls below -2.5, she will start Prolia 60 mg SQ every 6 months."
+    "medication_plan": "Continue Letrozole 2.5 mg daily, continue calcium and Vitamin D supplements, consider taking OTC Magnesium supplement, Prolia 60 mg SQ every 6 months if BMD falls below -2.5"
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient underwent a left mastectomy with SLN biopsy on 10/29/16. She is currently on Letrozole 2.5 mg daily, which she has been taking since 12/02/2016."
+    "therapy_plan": "Continue Letrozole 2.5 mg daily"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Left mastectomy with SLN biopsy on 10/29/16"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "Annual right breast mammogram, DEXA scan in July 2019"
+    "imaging_plan": "DEXA in 1 year, due July 2019, annual mammogram next due July 2019"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -371,7 +381,7 @@ RESULTS FOR ROW 4
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "Follow up in 6 months or sooner if she has new or worsening symptoms"
+    "follow up": "None"
   },
   "follow_up_next_visit": {
     "Next clinic visit": "Follow up in 6 months or sooner if she has new or worsening symptoms"
