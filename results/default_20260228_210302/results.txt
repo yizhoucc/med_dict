@@ -1787,3 +1787,220 @@ RESULTS FOR ROW 14
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 15
+============================================================
+
+--- Column: coral_idx ---
+154
+
+--- Column: note_text ---
+"*****  ***** ***** is a 46 yo woman with newly diagnosed breast cancer.     CC  New breast ca;  2nd opinion to discuss diagnosis, prognosis, and treatment options.    HPI  Had prev screening *****; negative in past.  Patient found lump under nipple of left breast in 2017. 07/02/2016- mammogram - extremely dense breasts  US left breast - Targeted ultrasound evaluation of the left 6:00 periareolar breast in the area of palpable concern demonstrates a suspicious 0.9 x 1.2 x 1.0 cm  hypoechoic mass with indistinct margins, increased vascularity, and punctate echogenic foci.  Ultrasound evaluation of the left 7:00 breast, 2 to 3 cm from the nipple in area of clinical concern demonstrates a 2.7 x 0.3 x 0.8 cm oval, circumscribed  hypoechoic mass with apparent vascular fatty hilum is compatible with a benign lymph node.   US guided biopsy - mixed infiltrating ductal and lobular carcinoma - well-diff lobular cancer, mod diff IDC. ***** February 27+, >95%. ***** January 27+, 80-90%. Her-2-neu equivocal. FISH positive with ratio 2.0, avg her-2-neu signal/nucleus 4.7.    Here w son for 2nd opinion. To see Dr. ***** ***** today for breast surg 2nd opinion also.    RISK FACTORS FOR BREAST CANCER:  GYN: Menarche at 13. ***** with first live birth at   38, LMP 07/13/2016. BCP for 2 years without problem.  FH: No family history of breast or ovarian cancer    PMH:   no surgeries  MEDS: None  ALLERGIES: Codeine - rash    SH:   From *****, came here at 4, RN who now ***** ***** ***** ***** in clinical trials. She is ***** divorce. 8 yo son will be living with her on the Peninsula. Planning move to ***** *****.    FH:   mother and father - well in their 60's  1 sister and 2 brothers - all well  No cancer in the family    ROS   Review of Systems -   General ROS: negative  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + s/p bx, healing. + central lesion, palp, approx 2 cm greatest diam. No skin change, rash \n otherwise.  Respiratory ROS: negative  Cardiovascular ROS: negative  Gastrointestinal ROS: negative  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: negative  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    PE  BP 90/50 | Pulse 75 | Temp 35.8 C (96.4 F) (Oral)  | Resp 18 | Ht 154.9 cm (5' 1\") | Wt 46.1 kg (101 lb 9.6 oz) | LMP 07/13/2016 | SpO2 99% | BMI 19.2 kg/m2    General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic   Eyes:    PERRL, conjunctiva/corneas clear, EOM's intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity    Heart:    Regular rate and rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical, supraclavicular, and axillary nodes normal   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     throughout     STUDIES  IMPRESSION:    Right breast: Incomplete:Need Additional Imaging Evaluation \n and/or Comparison  with prior Mammograms     Recommend second look ultrasound in the 6:00 position in the region of MRI  enhancement to exclude underlying concerning lesion.    Left breast: BI-RADS 6:Known ***** Surgical Excision when  Clinically Appropriate    Known left periareolar carcinoma. No evidence of multifocal or multicentric  disease.      Read by:***** ***** *****, MD *****/*****/***** 11:47 AM     Result Narrative     INDICATION: New left breast cancer, extremely dense breasts    COMPARISON:07/02/2016, 07/14/2016, 02/04/2015    TECHNIQUE:Coronal STIR, Axial T2 ***** Sat, Axial T1, ***** Axial Pre  Contrast, ***** Axial Multiphase Post Contrast, ***** Sagittal Post Contrast  High resolution scans.  (10 cc IV Gadolinium dynamic injection, 5 post-Gadolinium  sequences), ***** image processing with subtraction, MIP,reformats, and  *****.    REPORT:There is extreme fibroglandular tissue present. Left breast with a few  scattered T2 bright nonenhancing cysts. Overall, moderate background parenchymal  enhancement.    Right breast: Normal skin, chest wall, axilla, and nipple areolar region. 5 to 6  mm focal linear region of early enhancement and washout, anterior 6:00 breast  perhaps slightly medial to the nipple. Overall multifocal patchy regions of  predominantly progressive enhancement, benign in pattern.    Left breast: Biopsy proved carcinoma, left medial subareolar breasts measures 12  x 10 x 13 mm. This is contiguous with the undersurface of the nipple. Normal  skin, chest wall, and axilla. No abnormal internal mammary adenopathy. No  additional regions of abnormal enhancement. Patchy multifocal regions of  predominantly progressive enhancement, similar to those on the right, benign in  pattern.    Other:There are 2 small foci of T2 hyperintensity within the liver, too small  to characterize, statistically most likely tiny cysts.     IMPRESSION: Left breast ultrasound-guided core \n biopsy was performed. Imaging  finding and malignant pathology results are considered concordant. Recommend  breast surgery referral.     Read by:***** ***** *****, MD *****/*****/***** 11:56 AM   Result Narrative   INDICATION:Left periareolar breast mass.    COMPARISON:07/02/2016    REPORT: By discussion and use of the consent form, risks, benefits and  alternatives were covered.Signed informed consent was obtained.    The left breast was prepped and draped in usual sterile fashion. The hypoechoic  mass at the 6:00 periareolar position was again identified sonographically.  Buffered 1% lidocaine was used for local anesthesia with additional buffered 1%  lidocaine with epinephrine for deep anesthesia. A nick was made in the skin  using 11 blade scalpel. Under direct ultrasound guidance, 2 14-gauge core biopsy  specimens were obtained. Pressure was held for several minutes to achieve  hemostasis. The patient tolerated the procedure well with no immediate  complication. Discharge instructions were given.     PATHOLOGY RESULTS:Malignant. Mixed infiltrating ductal and lobular carcinoma.     CASE: *****-*****-*****  PATIENT: ***** *****    CLINICAL HISTORY: Ultrasound-guided, 14 GA core needle biopsy. Left  breast, two passes at 11:30 AM, r/o CA.      SPECIMEN: ULTRASOUND GUIDED LARGE CORE BREAST BIOPSY, LEFT        DIAGNOSIS (MICROSCOPIC):  BREAST, LEFT, ULTRASOUND GUIDED CORE BIOPSY  -- MIXED INFILTRATING DUCTAL AND LOBULAR CARCINOMA; SEE COMMENT    COMMENT: The tumor demonstrates a single cell infiltrative growth  pattern.An immunoperoxidase stain for e-cadherin was obtained and  demonstrates areas of tumor with strong membranous staining, consistent  with ductal differentiation, blending with foci of smaller cells *****  staining for e-cadherin, consistent with lobular differentiation.Thus,  the biopsy material for this lesion has the appearance of a mixed  moderately-differentiated infiltrating ductal carcinoma \n and  well-differentiated infiltrating lobular carcinoma; however, the final  histologic subtype and grade will await the excision and pathologic  evaluation of the entire lesion.    Estrogen receptor, progesterone receptor and HER-2 prognostic markers by  immunohistochemistry have been ordered and results will be reported in  an addendum.     This immunologic test was developed and its performance  characteristics determined by ***** ***** ***** Foundation Pathology  Laboratory.Unless indicated otherwise, it has not been cleared or  approved by the *****, although such approval is not required for  analyte-specific reagents of this type.     Immunohistochemical stain(s) positive and negative controls stain  appropriately.    GROSS:  Received in 10% buffered formalin are multiple fragments of fibrotic and  fatty large core needle biopsy tissue that measure in aggregate  approximately 19 x 4 x 2 mm.Entirely submitted in one cassette.The  specimen is fixed from 11:30 AM on 07/14/2016 to 8:40 PM 07/14/2016.(BV  07/14/2016)    This report was created with voice recognition software.Some  typographical errors may occur despite editing.        ***** ***** *****, M.D.  Pathologist  Electronically signed 07/16/2016    ADDENDUM: (07/16/2016)   Studies for estrogen receptor, progesterone receptor have been  requested by the ***** ***** ***** Foundation Oncology Department to aid  in determining treatment.    This addendum is issued to report the results of immunohistochemical  stains for estrogen receptor and progesterone receptor performed in this  laboratory.Only the invasive component is evaluated.Very good  correlation has been reported between these stains and the presence of  estrogen and progesterone receptor by enzyme immunoassay.     Estrogen receptor:Positive (February 27+, >95%)   Progesterone receptor: Positive (January 27+, 80-90%)     The ductal carcinoma and lobular carcinoma components have \n a  similar staining pattern. Results of *****/neu analysis by IHC and FISH  will be reported in a separate addendum.     This immunologic test was developed and its performance  characteristics determined by ***** ***** ***** Foundation Pathology  Laboratory.Unless indicated otherwise, it has not been cleared or  approved by the *****, although such approval is not required for  analyte-specific reagents of this type.      ***** ***** *****, M.D.  Pathologist  Electronically signed 07/16/2016    ADDENDUM 2: (07/20/2016)  ***** studies have been done at the request of the ***** *****  ***** Foundation Oncology Department to aid in determining treatment.    Immunohistochemical staining for ***** has been done at *****  Laboratory, ***** Diagnostic Services, ***** *****, *****, using  the ***** Pathway System (clone 4B5), approved by the *****.Only the  invasive component is evaluated. Staining in less than 10% of cells is  scored as 0 or 1+ and is considered negative for overexpression.  Staining in greater than 10% of the cells is designated equivocal (2+)  or strong overexpression (3+) depending on the intensity of staining.    *****/neu: Equivocal (2+)     The result for ***** FISH analysis will be reported in an addendum.    This immunologic test was developed and its performance characteristics  determined by ***** Diagnostic Services, ***** *****, *****.Unless  indicated otherwise, it has not been cleared or approved by the *****,  although such approval is not required for analyte-specific reagents of  this type.     Immunohistochemical stain(s) positive and negative  control(s) stain appropriately.    ***** ***** *****, M.D.  Pathologist  Electronically signed 07/20/2016    ADDENDUM 3: (07/21/2016)  Fluorescence in situ hybridization (FISH) for *****/neu *****  amplification was performed by ***** Laboratory, *****  Diagnostic Services, ***** *****, *****.This \n is reported to be positive  for ***** amplification (*****- *****).    -- POSITIVE FOR ***** ***** AMPLIFICATION BY FISH (*****:***** RATIO 2.0)  -- AVERAGE ***** *****/NUCLEUS 4.7    ***** ***** *****, M.D.  Pathologist  Electronically signed 07/21/2016    IMP  #. Breast CA, Left. Clin st I/II, based on imaging and exam. ***** *****. Admittedly, ***** status is not completely clear, given IHC 2+, FISH ratio = 2.0 and ***** copy # 4.7. All 3 parameters are equivocal or close to *****. However, pt is ***** by revised *****/CAP based on ratio = 2.0. Since pt is young, fit and stands to have large potential benefit from ***** targeted Rx if ***** driven, I agree with *****/CAP guidelines in this case and would consider her *****, and would therefore treat her accordingly.     REC  - reviewed pathology, biomarker testing, natural hx primary breast CA  - agree that it is reasonable for pt to proceed to breast surg, with finalization of adj Rx recommendations post op based on final path  - we also discussed that an alternative, equally reasonable option would be to receive ***** Rx first. We discussed that survival outcomes have historically been equivalent independent of sequencing of chemo and breast surg. However, a potential advantage in this case is that the pt may have sufficient tumor reduction from ***** Rx to facilitate smaller surgery; pt is very concerned about the central location of this tumor and impact on her nipple. We will explore this option further w breast surg/Dr. ***** *****. I discussed the case briefly with Dr. *****, who will see the pt formally later today.  - if pt opts for ***** rx, would favor TCHP regimen    Pt visit was 50 min, with >50% of the time spent on counseling.     \n"
+
+--- Column: assessment_and_plan ---
+"IMP  #. Breast CA, Left. Clin st I/II, based on imaging and exam. ***** *****. Admittedly, ***** status is not completely clear, given IHC 2+, FISH ratio = 2.0 and ***** copy # 4.7. All 3 parameters are equivocal or close to *****. However, pt is ***** by revised *****/CAP based on ratio = 2.0. Since pt is young, fit and stands to have large potential benefit from ***** targeted Rx if ***** driven, I agree with *****/CAP guidelines in this case and would consider her *****, and would therefore treat her accordingly.     REC  - reviewed pathology, biomarker testing, natural hx primary breast CA  - agree that it is reasonable for pt to proceed to breast surg, with finalization of adj Rx recommendations post op based on final path  - we also discussed that an alternative, equally reasonable option would be to receive ***** Rx first. We discussed that survival outcomes have historically been equivalent independent of sequencing of chemo and breast surg. However, a potential advantage in this case is that the pt may have sufficient tumor reduction from ***** Rx to facilitate smaller surgery; pt is very concerned about the central location of this tumor and impact on her nipple. We will explore this option further w breast surg/Dr. ***** *****. I discussed the case briefly with Dr. *****, who will see the pt formally later today.  - if pt opts for ***** rx, would favor TCHP regimen    Pt visit was 50 min, with >50% of the time spent on counseling."
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "Yes",
+    "in-person": "in-person",
+    "summary": "Newly diagnosed breast cancer, mixed infiltrating ductal and lobular carcinoma, 2nd opinion to discuss diagnosis, prognosis, and treatment options"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "Mixed Infiltrating Ductal and Lobular Carcinoma",
+    "Stage_of_Cancer": "I/II",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "Estrogen receptor: Positive (>95%), Progesterone receptor: Positive (80-90%), HER2-neu: Equivocal (2+), FISH positive with ratio 2.0, average HER2-neu signal/nucleus 4.7",
+    "findings": "Left breast cancer, known periareolar carcinoma, no evidence of multifocal or multicentric disease"
+  },
+  "Treatment_Summary": {
+    "current_meds": "",
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "breast surgery referral, possible chemotherapy",
+    "response_assessment": ""
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "TCHP regimen",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "hormonal therapy": {
+      "summary": "will consider her hormone therapy",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "radiotherapy": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "bowel regimen": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "pain medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "psychiatry medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "other treatment": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "will consider hormone therapy, if opted, would favor TCHP regimen"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "will consider hormone therapy, if opted, would favor TCHP regimen"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "discussed with Dr. ***** *****"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "plan for breast surgery"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology consult",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "will be seen by Dr. ***** *****"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 16
+============================================================
+
+--- Column: coral_idx ---
+155
+
+--- Column: note_text ---
+"ID: ***** ***** is a 54 y.o. postmenopausal patient with a recent diagnosis of a Stage I HR+/*****- IDC of the right breast (UOQ) s/p lumpectomy/*****, presenting to clinic to establish care.    Date of Service: 11/17/20    HPI: The patient had an abnormal screening mammogram in July 2020 and subsequent evaluation and treatment are as follows:    08/18/20 Screening mammogram (*****): asymmetry (0.7 cm) in posterior central right breast; left breast unremarkable    08/28/20 Right diag mammo (*****): extremely dense breast tissue; focal asymmetry in middle region of UOQ of right breast  Targeted right breast US: hypoechoic structure (0.5 cm) at 10 position, 4 *****; no right axillary LAD    09/08/20 *****-guided right breast core biopsy at 10 position (*****): atypical borderline lesion, possible tubular carcinoma with ER+ >50%, PR+ >50%, *****- (0+), *****-67 <10%    10/20/20 Right lumpectomy: 0.3 cm grade 1 IDC; no DCIS, margins negative, no *****    The patient underwent menarche at 12 years of age.  She is G0P0.  She is postmenopausal and never took HRT.  Suffers from dyspareunia.    She reports that she has had significant stress ***** ***** job over the last year.  Currently working from home.  She reports history of hip bursitis that she manages through stretching and a yoga practice.  She also has had right sided sciatica that worsens with running.     Past Medical History:   Diagnosis Date   \u0007 Allergic state    \u0007 Bursitis     Mild bursitis, right hip   \u0007 Dyspareunia in female    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Hypercholesteremia    \u0007 Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS code) 11/29/2020   \u0007 Sciatica      Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  05/30/1990    Left breast - small cyst removed       Family History   Problem Relation Name Age of Onset   \u0007 Brain cancer Mother          monitored   \u0007 Colon cancer \n Father ***** ***** 45        He had it twice before 50 years old   \u0007 Cancer Father ***** *****         stomach cancer, 60   \u0007 Osteoporosis Maternal Grandmother     \u0007 Diabetes Neg Hx     \u0007 Clotting disorder Neg Hx     \u0007 Anesth problems Neg Hx       Social History     Socioeconomic History   \u0007 Marital status: Divorced     Spouse name: Not on file   \u0007 Number of children: Not on file   \u0007 Years of education: Not on file   \u0007 Highest education level: Not on file   Occupational History   \u0007 Not on file   Social Needs   \u0007 Financial resource strain: Not on file   \u0007 Food insecurity     Worry: Not on file     Inability: Not on file   \u0007 Transportation needs     Medical: Not on file     Non-medical: Not on file   Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 4.0 standard drinks     Types: 4 Glasses of wine per week   \u0007 Drug use: Yes     Frequency: 1.0 times per week     Types: *****     *****: Very little   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None     Comment: Denies possibility of pregnancy   Lifestyle   \u0007 Physical activity     Days per week: Not on file     Minutes per session: Not on file   \u0007 Stress: Not on file   Relationships   \u0007 Social connections     Talks on phone: Not on file     Gets together: Not on file     Attends religious service: Not on file     Active member of club or organization: Not on file     Attends meetings of clubs or organizations: Not on file     Relationship status: Not on file   \u0007 Intimate partner violence     ***** of current or ex partner: Not on file     Emotionally abused: Not on file     Physically abused: Not on file     Forced sexual activity: Not on file   Other Topics Concern   \u0007 Not on file   Social History Narrative    Lives w boyfriend.  Denies IPV    Exercise currently limited by pandemic restrictions.  Does some YouTube exercises, \n yoga, HIIT, and walking    Diet: Has high LDL and is trying to manage through diet. Eating lots of fruit and vegetables.  Eats everything overall.  Tries to avoid some foods for her heartburn     Outpatient Encounter Medications as of 11/17/2020   Medication Sig Dispense Refill   \u0007 CALCIUM CARBONATE (CALCIUM 500 ORAL) Take by mouth.     \u0007 DIPHENHYDRAMINE HCL (***** SLEEP AID ORAL) Take by mouth. Herbal sleep aid     \u0007 DOCOSAHEXANOIC ACID/EPA (FISH OIL ORAL) Take 1 capsule by mouth Daily.     \u0007 licorice,***** (LICORICE,*****, *****, MISC) by Misc.(Non-Drug; Combo Route) route.     \u0007 multivitamin (MULTIVITAMIN) tablet Take 1 tablet by mouth Daily.     \u0007 ibuprofen (ADVIL,MOTRIN) 600 mg tablet Take 1 tablet (600 mg total) by mouth every 8 (eight) hours. (Patient not taking: Reported on 11/17/2020  ) 60 tablet 0   \u0007 [DISCONTINUED] omeprazole (PRILOSEC) 10 mg capsule Take 1 capsule (10 mg total) by mouth Daily. (Patient not taking: Reported on 05/11/2018) 30 capsule 0   \u0007 [DISCONTINUED] omeprazole (PRILOSEC) 20 mg capsule TAKE 1 CAPSULE (20 MG TOTAL) BY MOUTH DAILY. (Patient not taking: Reported on 05/11/2018) 90 capsule 2     No facility-administered encounter medications on file ***** of 11/17/2020.      Allergies/Contraindications  No Known Allergies      Review of Systems   Genitourinary:        Dyspareunia   Psychiatric/Behavioral: The patient is nervous/anxious.         Physical Exam:   No exam as ZOOM telehealth visit    Studies:  Reviewed above in *****.     Assessment and Recommendations:  54 y.o. postmenopausal patient with a recent diagnosis of a Stage I (*****) *****+/*****- IDC of the right breast, who will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years.    I discussed with the patient in great detail the natural history and treatment of Stage I HR+/*****- breast cancer.  We reviewed her imaging and pathology reports.  She did not have a *****; it is not clear to me, but \n it is possible that Dr. ***** performed lumpectomy alone because she was thought to have a tubular carcinoma which carries a lower risk?  It is not clear to me what the value of a lymph node biopsy would be at this point, but I will reach out to Dr. ***** to clarify.  Additionally, I noted that it was strange how her biomarkers (on her pathology report) were reported >50% for ER and PR - generally the degree of positivity would be more exact.  I will see if there is a way to speak with her pathologist.  .     I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.  I stated that she would start this after radiation.    She will need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.    Finally, she has not had a breast MRI.  She has extremely dense breast tissue.  We should have a conversation with her breast surgeon about surveillance breast MRI moving forward.    Recommendations in *****:  - proceed with radiation oncology evaluation  - plan to treat with aromatase inhibitor; would check estradiol level  - obtain DEXA  - will speak with Dr. \n ***** about absence of *****  - will see if I can speak with pathologist about ER and PR assessments from her biopsy   - given her father's history of colon cancer and her breast cancer history, would refer for genetic testing  - consider surveillance breast MRI in c/o extreme breast density     I spent a total of 80 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Recommendations:  54 y.o. postmenopausal patient with a recent diagnosis of a Stage I (*****) *****+/*****- IDC of the right breast, who will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years.    I discussed with the patient in great detail the natural history and treatment of Stage I HR+/*****- breast cancer.  We reviewed her imaging and pathology reports.  She did not have a *****; it is not clear to me, but \n it is possible that Dr. ***** performed lumpectomy alone because she was thought to have a tubular carcinoma which carries a lower risk?  It is not clear to me what the value of a lymph node biopsy would be at this point, but I will reach out to Dr. ***** to clarify.  Additionally, I noted that it was strange how her biomarkers (on her pathology report) were reported >50% for ER and PR - generally the degree of positivity would be more exact.  I will see if there is a way to speak with her pathologist.  .     I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.  I stated that she would start this after radiation.    She will need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.    Finally, she has not had a breast MRI.  She has extremely dense breast tissue.  We should have a conversation with her breast surgeon about surveillance breast MRI moving forward.    Recommendations in *****:  - proceed with radiation oncology evaluation  - plan to treat with aromatase inhibitor; would check estradiol level  - obtain DEXA  - will speak with Dr. \n ***** about absence of *****  - will see if I can speak with pathologist about ER and PR assessments from her biopsy   - given her father's history of colon cancer and her breast cancer history, would refer for genetic testing  - consider surveillance breast MRI in c/o extreme breast density     I spent a total of 80 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "Telehealth",
+    "summary": "54 y.o. postmenopausal patient with a recent diagnosis of a Stage I HR+/HER2- IDC of the right breast, presenting to clinic to establish care"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "IDC",
+    "Stage_of_Cancer": "Stage I",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "ER+ >50%, PR+ >50%, HER2-",
+    "findings": "0.3 cm grade 1 IDC; no DCIS, margins negative, no lymphovascular invasion"
+  },
+  "Treatment_Summary": {
+    "current_meds": "aromatase inhibitor, calcium, docusate, fish oil, multivitamin",
+    "recent_changes": "Patient not taking ibuprofen, omeprazole",
+    "supportive_meds": "docusate, ibuprofen"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "to extend the duration and maintain the quality of life",
+    "response_assessment": "The patient is not mentioned as not responding or responding, but the note does mention a small, but serious risk of distant, metastatic recurrence, so it can be inferred that the cancer is not responding"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "an aromatase inhibitor for 5 years",
+      "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+      "Long term side_effects_discussed": "bone density loss"
+    },
+    "radiotherapy": {
+      "summary": "evaluation and treatment",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "chemotherapy": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "other treatment": {
+      "summary": "DEXA, genetic testing",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "The patient will take an aromatase inhibitor for 5 years after radiation. She will also take calcium and vitamin D."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "The patient will take an aromatase inhibitor for 5 years after radiation."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "evaluation and treatment"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "will schedule a biopsy"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "DEXA, MRI"
+  },
+  "Lab_Plan": {
+    "lab_plan": "will check estradiol level"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "will refer for genetic testing"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "genetic testing",
+    "Specialty": "Radiation oncology",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "will discuss with Dr.  about absence of lymph node biopsy"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
