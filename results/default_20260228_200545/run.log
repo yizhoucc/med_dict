@@ -123,3 +123,17 @@ Processing row 14 (5/5)...
     Medication_Plan: 2.0s [faith-trimmed]
     Therapy_plan: 2.0s
     radiotherapy_plan: 1.0s
+    Procedure_Plan: 1.2s
+    Imaging_Plan: 1.3s
+    Lab_Plan: 1.2s
+    Genetic_Testing_Plan: 1.4s
+    Referral: 2.3s
+    follow_up_next_visit: 1.1s
+    Advance_care_planning: 0.9s
+  Plan extraction prompts: 38.0s
+  Row 14 total: 59.8s
+  Row 14 saved to progress
+
+Total processing time: 315.0s (5.3min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_200545/
