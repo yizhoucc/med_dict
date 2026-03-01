@@ -8679,3 +8679,148 @@ Processing row 58 (59/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "She is currently without evidence of recurrence either local"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 29.6s
+    Medication_Plan_chatgpt: 33.4s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Tamoxifen for 5 years, switched to Exemestane after 2-3 weeks if tolerated, due to no symptom improvement on Letrozole",
+    "Short term side_effects_discusse
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'pain medication', 'bowel regimen', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'pain medication', 'bowel regimen', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.3s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Patient is currently on Pristiq 75 mg, will start Exemestane after 2-3 weeks if tolerated, after stopping Letrozole due to no symptom improvement. MRI and mammogram every 6 mon
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Patient is currently on Pristiq 75 mg, will start Exemestane after 2-3 weeks if " -> "will start Exemestane after 2-3 weeks if tolerated, after stopping Letrozole due"
+      [G6-SEMANTIC] medication_plan: "will start Exemestane after 2-3 weeks if tolerated, after stopping Letrozole due" -> "Currently on Pristiq 75 mg, will start Exemestane after 2-3 weeks if tolerated, "
+    Therapy_plan: 4.5s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "Currently on Tamoxifen, will switch to Exemestane after 2-3 weeks if tolerated, after stopping Letrozole due to no symptom improvement."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Currently on Tamoxifen, will switch to Exemestane after 2-3 weeks if tolerated, " -> "will switch to Exemestane after 2-3 weeks if tolerated, after stopping Letrozole"
+      [G6-SEMANTIC] therapy_plan: "will switch to Exemestane after 2-3 weeks if tolerated, after stopping Letrozole" -> "Currently on Tamoxifen, will switch to Exemestane after 2-3 weeks if tolerated."
+    radiotherapy_plan: 1.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "completed"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "completed" -> "None"
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.6s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI and mammogram every 6 months"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 0.4s
+      [EXTRACT] raw={
+  "Next clinic visit": "in 6 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 59.9s
+  Row 58 total: 89.5s
+  Row 58 saved to progress
+
+Processing row 59 (60/100)...
+  Injected 5 term definitions: ['progesterone receptor', 'estrogen receptor', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Attempt 1 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 2...
+  Running LLM Sanity Check...
+  Success on attempt 2 (Verified by LLM, 882 chars)
+  A/P extraction: 14.9s
+    Reason_for_Visit: 5.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for invasive ductal carcinoma (IDC) of the left breast, stage pT1bNX, with ER positive an
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for invasive ductal carcinoma (IDC) of the left br" -> "Follow up for invasive ductal carcinoma (IDC) of the left br"
+      [G6-SEMANTIC] summary: "Follow up for invasive ductal carcinoma (IDC) of the left breast, grade 2, with " -> "Patient with invasive ductal carcinoma (IDC) of the left breast, grade 2, ER pos"
+    What_We_Found: 6.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT1bNX",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Patient has been heali
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 2.1s
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)

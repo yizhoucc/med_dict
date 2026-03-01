@@ -6461,3 +6461,112 @@ RESULTS FOR ROW 58
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 59
+============================================================
+
+--- Column: coral_idx ---
+198
+
+--- Column: note_text ---
+"***** ***** is a 52 y.o. female with a *****  *****+/PR+/*****- right  breast cancer diagnosed in September 2016. Her cancer was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17. For complete details of her medical and treatment history, please refer to the problem list.     Interim History:  She was seen by ***** ***** in December 2017 in ***** and complained of weight gain, body aches, and arthralgia. ***** suggested a 2-3 week break off Tamoxifen to see if her symptoms improved. Despite being off Tamoxifen, her symptoms did not improve. She also tried Ibuprofen which provided no relief for her arthralgias. In a follow up in March 2018, she admitted that she had not restarted Tamoxifen. At this time, ***** suggested starting letrozole. ***** notes that the symptoms worsened on Letrozole. Her weight stabilized since November/December 2017.     She then saw Dr. ***** on 06/07/18 regarding the ongoing pain and aches. In early June 2018, she was advised to switch to Exemestane and a prescription was sent in but she has not tried it yet.      Patient Active Problem List    Diagnosis Date Noted   \u0007 Asthma 11/16/2016   \u0007 Hypothyroid 11/16/2016   \u0007 Allergic rhinitis 11/16/2016   \u0007 Malignant neoplasm of central portion of right breast in female, estrogen receptor positive (HCC) 11/08/2016     Late August 2016: Patient palpated a mass in her right breast.  09/07/2016: Bilateral mammogram and right breast US revealed a 1.4 cm mass in the right breast at 12:00 (***** with palpable mass). Left breast was negative.   09/09/16: US guided core biopsy of the right breast mass revealed grade 2 IDC (ER+ (100%)/PR + 40%)/*****/neu equivocal by IHC and *****,  *****-67 25%-60%).   11/18/16 Right partial mastectomy with *****: 1.5 cm grade 3 IDC, high grade DCIS, negative nodes (0/5); Margins negative; ER pos >95% PR pos 50% \n ***** equivocal on IHC and negative by FISH , *****-67 25%. ***** High Risk (-0.294)  01/10/17: Started TC, had allergic reaction and switched to Abraxane/Cytoxan for the last dose  05/19/17: completed XRT  05/27/17: started tamoxifen  March 2018 Stopped Tamoxifen and advised to start letrozole after a 2 week break  June 2018 Stopped letrozole and advised to start exemestane       MEDICATIONS  Current Outpatient Medications   Medication Sig Dispense Refill   \u0007 ALBUTEROL INH Inhale into the lungs.     \u0007 desvenlafaxine succinate (PRISTIQ ORAL) Take by mouth.     \u0007 desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet Take 1 tablet (25 mg total) by mouth Daily. Take with 50 mg dose for a total of 75 mg 60 tablet 6   \u0007 ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL) Take 1,000 Units by mouth Daily.     \u0007 exemestane (*****) 25 mg tablet Take 1 tablet (25 mg total) by mouth Daily. 30 tablet 11   \u0007 gabapentin (NEURONTIN) 300 mg capsule Take 300 mg in the morning and afternoon and two tablets at night., 120 capsule 3   \u0007 letrozole (FEMARA) 2.5 mg tablet Take 1 tablet (2.5 mg total) by mouth Daily. 60 tablet 3   \u0007 levothyroxine 25 mcg tablet Take 1.12 mcg by mouth Daily.      \u0007 montelukast (SINGULAIR) 10 mg tablet Take by mouth.     \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 1 tablet (500 mg total) by mouth every 6 (six) hours as needed (Headache). (Patient not taking: Reported on 01/28/2017)     \u0007 CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL) Take 5 mg by mouth As needed after meals.     \u0007 IBUPROFEN ORAL Take 800 mg by mouth.     \u0007 triamcinolone (KENALOG) 0.1 % cream Apply topically Twice a day. (Patient not taking: Reported on 03/31/2018) 15 g 1     No current facility-administered medications for this visit.      OB History   Obstetric Comments   Her last menses was 3 years ago (in 2015). She denies H/A's.      ALLERGIES  Allergies/Contraindications   Allergen Reactions   \u0007 Docetaxel      5 minutes into the infusion, patient c/o \n facial flushing and tightness of throat.  Benadryl and hydrocortisone IV given, symptoms resolved. , Infusion restarted at February 10 rate then February 08 rate then April 11 rate the full rate, patient tolerated remainder of infusion well    \u0007 Morphine Itching and Swelling     Face gets itchy and swollen   \u0007 Paclitaxel-Protein ***** Other (See Comments)     After Abraxane infusion was completed, c/o coughing, itchy throat, itchy chest, SOB, anxious.  No rescue meds were given, symptoms resolved after 20min   \u0007 Sulfa (Sulfonamide Antibiotics) Other (See Comments)     Small Hives and Itching        PAST, FAMILY, and SOCIAL HISTORY  Past Medical History:   Diagnosis Date   \u0007 Breast cancer, right (HCC)        Social History     Tobacco Use   \u0007 Smoking status: Former Smoker   \u0007 Smokeless tobacco: Never Used   Substance Use Topics   \u0007 Alcohol use: No   \u0007 Drug use: No     Social Documentation          Lives in ***** ***** her mother. Works as a *****        Review of Systems -  Positive for body aches, arthralgias. Patient denies sleep disturbance, sore throat, nasal congestion, vision changes, cough, chest pain, dyspnea, nausea, vomiting, abdominal pain, headaches, fevers, and change in bladder or bowel function. Remaining systems reviewed and are negative except that outlined above    Objective   PHYSICAL EXAM  Vital Signs:  BP 106/70  | Pulse 90  | Temp 37.2 ***** (98.9 F) (Oral)  | Resp 16  | Ht 153 cm (5' 0.24\") Comment: 11/09/2017 @***** | Wt 89.8 kg (197 lb 14.4 oz)  | SpO2 96%  | BMI 38.35 kg/m    13 lb wt gain since starting Tamoxifen May 2017, stable since November/December 2017.   ECOG: 1  Mental status - alert, oriented to person, place, and time  Eyes - PERRL, EOMI  Mouth - mucous membranes moist, pharynx normal without lesions  Neck - supple, no significant adenopathy  Lymphatics - no palpable lymphadenopathy, no hepatosplenomegaly  Chest - clear to auscultation, no wheezes, symmetric air entry  Heart - normal heart rate and regular \n rhythm  Abdomen - soft, nontender, nondistended, no masses or organomegaly  Breasts - Lumpectomy scar well healed. No dominant mass in either breast  Back exam - full range of motion, no tenderness, palpable spasm or pain on motion  Neurological - cranial nerves II through XII intact, motor and sensory grossly normal bilaterally  Musculoskeletal - no muscular tenderness noted  Skin - no rashes, no suspicious skin lesions noted  Psychiatric - Normal mood and affect.     RESULTS    Results for orders placed or performed in visit on 03/31/18   Vitamin D, 25-Hydroxy   Result Value Ref Range    Vitamin D, 25-Hydroxy 32 20 - 50 ng/mL   Follicle stimulating hormone   Result Value Ref Range    Follicle stimulating hormone 32.5 IU/L   Estradiol, Ultrasensitive   Result Value Ref Range    Estradiol, Ultrasensitive 5 pg/mL   Free T4   Result Value Ref Range    Free T4 13 10 - 18 pmol/L   Thyroid Stimulating Hormone   Result Value Ref Range    Thyroid Stimulating Hormone 0.68 0.45 - 4.12 mIU/L     ASSESSMENT & PLAN  ***** ***** is a 52 y.o. female  with stage 1 right sided ER+/PR+/*****- breast cancer in September 2016 which was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17.    1. Right Breast cancer: ***** is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. She has been seen in the Survivorship clinic  and was advised to stop Tamoxifen and switch to letrozole. However, there was no symptom improvement on letrozole so she was recently advised to switch to Exemestane. She was not aware of this recommendation. I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better. She understands that we still recommend at least 5 years of hormonal therapy and \n despite her side effects, she does have intentions of continuing hormone therapy for 5 years.    She is due for her right mammogram in July. Continue mammograms alternating with MRI  and every 6 month clinical breast exam.    2. Depression: She is currently on Pristiq 75 mg. I discussed with her the value of Duloxetine for ***** induced joint pain but I am concerned about the drug interaction of these two medications. I will refer her to psychiatry to determine how to best proceed with a transition from ***** to duloxetine. I discussed with her the most common side effects of Duloxetine including fatigue, nausea, headache, and dry mouth.     3. Weight: Her weight has been stable since November/December 2017.     ***** with me in 6 months.     I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 40 minutes face-to-face with the patient and 25 minutes of that time was spent counseling regarding the treatment plan, medication risks, lifestyle modification, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.    *****, ***** ***** am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM     The above scribed documentation accurately reflects the services I have provided.    ***** ***** *****, MD   *****/*****/***** *****:***** PM        \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  ***** ***** is a 52 y.o. female  with stage 1 right sided ER+/PR+/*****- breast cancer in September 2016 which was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17.    1. Right Breast cancer: ***** is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. She has been seen in the Survivorship clinic  and was advised to stop Tamoxifen and switch to letrozole. However, there was no symptom improvement on letrozole so she was recently advised to switch to Exemestane. She was not aware of this recommendation. I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better. She understands that we still recommend at least 5 years of hormonal therapy and \n despite her side effects, she does have intentions of continuing hormone therapy for 5 years.    She is due for her right mammogram in July. Continue mammograms alternating with MRI  and every 6 month clinical breast exam.    2. Depression: She is currently on Pristiq 75 mg. I discussed with her the value of Duloxetine for ***** induced joint pain but I am concerned about the drug interaction of these two medications. I will refer her to psychiatry to determine how to best proceed with a transition from ***** to duloxetine. I discussed with her the most common side effects of Duloxetine including fatigue, nausea, headache, and dry mouth.     3. Weight: Her weight has been stable since November/December 2017.     ***** with me in 6 months.     I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 40 minutes face-to-face with the patient and 25 minutes of that time was spent counseling regarding the treatment plan, medication risks, lifestyle modification, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.    *****, ***** ***** am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM     The above scribed documentation accurately reflects the services I have provided.    ***** ***** *****, MD   *****/*****/***** *****:***** PM        \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "52-year-old female with stage 1 ER+/PR+/HER2- breast cancer, lumpectomy and radiation therapy completed, experiencing side effects from tamoxifen and letrozole, switching to exemestane"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage 1",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "Vitamin D 32, Follicle stimulating hormone 32.5, Estradiol 5, Free T4 13, Thyroid Stimulating Hormone 0.68",
+    "findings": "She is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  },
+  "Treatment_Summary": {
+    "current_meds": "Tamoxifen, Letrozole, Exemestane, Pristiq, Albuterol, Gabapentin, Levothyroxine, Montelukast, Acetaminophen, Cyclobenzaprine, Triamcinolone",
+    "recent_changes": "Switched from Tamoxifen to Letrozole, then stopped Letrozole and advised to start Exemestane",
+    "supportive_meds": "Albuterol, Gabapentin, Levothyroxine, Montelukast, Acetaminophen, Cyclobenzaprine, Triamcinolone"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "She is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Tamoxifen for 5 years, switched to Exemestane after 2-3 weeks if tolerated, due to no symptom improvement on Letrozole",
+      "Short term side_effects_discussed": "unknown",
+      "Long term side_effects_discussed": "unknown"
+    },
+    "pain medication": {
+      "summary": "Pristiq 75 mg, plan to transition to Duloxetine, discussed with patient",
+      "Short term side_effects_discussed": "fatigue, nausea, headache, dry mouth",
+      "Long term side_effects_discussed": "unknown"
+    },
+    "bowel regimen": {
+      "summary": "none",
+      "Short term side_effects_discussed": "unknown",
+      "Long term side_effects_discussed": "unknown"
+    },
+    "radiotherapy": {
+      "summary": "completed",
+      "Short term side_effects_discussed": "unknown",
+      "Long term side_effects_discussed": "unknown"
+    },
+    "chemotherapy": {
+      "summary": "TC for 3 cycles, Abraxane and Cytoxan for 1 cycle",
+      "Short term side_effects_discussed": "unknown",
+      "Long term side_effects_discussed": "unknown"
+    },
+    "other treatment": {
+      "summary": "MRI and mammogram every 6 months, clinical breast exam every 6 months"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Currently on Pristiq 75 mg, will start Exemestane after 2-3 weeks if tolerated, after stopping Letrozole due to no symptom improvement."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Currently on Tamoxifen, will switch to Exemestane after 2-3 weeks if tolerated."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI and mammogram every 6 months"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in 6 months"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
