@@ -37,3 +37,8 @@ Processing row 11 (2/5)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1955 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 3.8s [re-extracted]
+    What_We_Found: 20.5s [repaired, re-extracted]
+    Treatment_Summary: 5.4s [re-extracted]
+    Goals_of_care: 4.5s [re-extracted]
+  Extraction prompts: 35.2s
