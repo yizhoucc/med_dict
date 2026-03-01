@@ -1204,3 +1204,146 @@ Processing row 26 (7/20)...
       [G3-FAITH] lab_summary: "No labs in note." -> ""
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 10.6s
+      [EXTRACT] raw={
+  "findings": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified. No palpable masses, skin changes, or lymphadenopathy noted on physical exam. I
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": [
+    "Femara",
+    "Zoladex",
+    "Zometa"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "['Femara', 'Zoladex', 'Zometa']" -> "['Femara', 'Zoladex', 'Zolendronic acid']"
+      [G6-SEMANTIC] current_meds: "['Femara', 'Zoladex', 'Zolendronic acid']" -> "['Femara', 'Zoladex', 'Zolendronic acid', 'calcium-vitamin D']"
+    Treatment_Changes: 2.9s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Continue on Femara, zoladex",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Continue on Femara, zoladex" -> "Hormone positive MBC to bone with stable disease."
+    Treatment_Goals: 3.3s
+      [EXTRACT] raw=The cancer is metastatic (Stage IV) as indicated by the note "metastatic breast cancer to bone". The treatment mentioned is hormone therapy with Femara, Zoladex, and calcium-vitamin D. 
+
+{
+  "goals_of
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 6.3s
+      [EXTRACT] raw=The patient has started treatment with hormone therapy, specifically Femara (letrozole) since May 2011, and Zoladex (goserelin) since July 2009. The note mentions that the patient has been on Femara s
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 33.9s
+    Medication_Plan_chatgpt: 19.5s [temporal-cleaned]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Continue on Femara and Zoladex",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "bone therapy": {
+    "sum
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'chemotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'chemotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] bone therapy: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] psychiatry medication: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] other treatment: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] bowel regimen: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 3.6s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Continue on ***** (dose not specified), zoladex, and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Continue on ***** (dose not specified), zoladex, and femara." -> "Continue on *****, zoladex and femara"
+      [G4-TEMPORAL] medication_plan: "Continue on *****, zoladex and femara" -> "Continue on zoladex and femara"
+      [G6-SEMANTIC] medication_plan: "Continue on zoladex and femara" -> "Continue on *****, zoladex and femara"
+    Therapy_plan: 4.9s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on letrozole and zoladex. Consider MRI of the spine and reassess lower back pain at two weeks. Consider switching to a different treatment plan if pain worsens."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Continue on letrozole and zoladex. Consider MRI of the spine" -> "Continue on *****, zoladex and femara"
+      [G4-TEMPORAL] switch_to_different_plan: "if pain worsens" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: -0.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 4.9s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "Reassess lower back pain at two weeks and consider MRI of the spine, Obtain CBC with platelets"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Reassess lower back pain at two weeks and consider MRI of the spine, Obtain CBC " -> "Continue on *****, zoladex and femara, Reassess lower back pain at two weeks, Ob"
+      [G6-SEMANTIC] procedure_plan: "Continue on *****, zoladex and femara, Reassess lower back pain at two weeks, Ob" -> "No procedures planned."
+    Imaging_Plan: 2.3s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI of the spine in 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "CBC with platelets"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 3.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology consult",
+  "Others": "None",
+  "follow up": "two weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Specialty: "Radiation oncology consult" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Others', 'Specialty', 'Nutrition']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
