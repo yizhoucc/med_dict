@@ -37,3 +37,8 @@ Processing row 1 (2/5)...
   Regex extraction succeeded (2678 chars)
   A/P extraction: 0.0s
     Reason_for_Visit: 4.1s [re-extracted]
+    What_We_Found: 13.4s [re-extracted]
+    Treatment_Summary: 11.4s [re-extracted]
+    Goals_of_care: 3.7s [re-extracted]
+  Extraction prompts: 33.4s
+    Medication_Plan_chatgpt: 30.6s [re-extracted, temporal-cleaned]
