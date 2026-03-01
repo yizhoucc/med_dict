@@ -1066,3 +1066,31 @@ Processing row 27 (8/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] summary: "Initial visit for newly diagnosed early stage breast cancer, specifically clinic" -> "Patient with a recent diagnosis of early stage breast cancer, specifically clini"
+    What_We_Found: 13.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "Hemoglobin 15.3, Hematocrit 48.8,
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Stage I" -> "Stage I HR+/HER2- grade 1 IDC"
+      [G6-SEMANTIC] findings: "No new findings or disease status mentioned." -> "The patient has a 0.9 cm grade 1 IDC, no lymph nodes involved, margins negative,"
+    Treatment_Summary: 11.6s
+      [EXTRACT] raw={
+  "current_meds": "aromatase inhibitor, baclofen, pregabalin, rosuvastatin, omeprazole, prazosin, lurasidone, duloxetine, acetaminophen, amLODIPine, artificial tears, ascorbic acid, biotin, diclofen
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 3.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The patient has a 0.9 cm grade 1 IDC, no lymph nodes involved, margins negative,"
+  Extraction prompts: 34.0s
