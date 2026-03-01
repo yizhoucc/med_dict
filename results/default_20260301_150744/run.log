@@ -619,3 +619,46 @@ Processing row 23 (4/20)...
       [G3-FAITH] lab_summary: "No labs in note." -> ""
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 15.0s
+      [EXTRACT] raw={
+  "findings": "Right breast: 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications. New right axillary LN with irregular morphology. Ultrasound showed 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 15.0s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 8.1s
+      [EXTRACT] raw={
+"recent_changes": "None",
+"supportive_meds": [
+"acetaminophen-codeine (TYLENOL #4)",
+"diclofenac (VOLTAREN) 1 % GEL",
+"oxyCODONE (ROXICODONE) 5 mg tablet"
+]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] parse FAILED
+    Treatment_Goals: 8.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
+    Response_Assessment: 12.1s [semantic-fixed]
+      [EXTRACT] raw=The patient has undergone partial mastectomy and excision, but this is considered surgery alone, not a treatment for cancer response assessment. There is no evidence of chemotherapy, endocrine therapy
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The cancer is currently not assessable due to lack of treatment."
+  Extraction prompts: 73.1s
