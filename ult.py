@@ -269,7 +269,11 @@ def run_model_with_cache_manual(
     
     # 3. Determine the starting position and build attention mask
     if kv_cache is not None:
-        past_seq_len = kv_cache[0][0].shape[2]
+        # Support both legacy tuple format and DynamicCache
+        if hasattr(kv_cache, 'get_seq_length'):
+            past_seq_len = kv_cache.get_seq_length()
+        else:
+            past_seq_len = kv_cache[0][0].shape[2]
         
         # Build full attention mask ONCE upfront
         attention_mask_cached = torch.ones((1, past_seq_len), dtype=torch.long, device=model.device)
