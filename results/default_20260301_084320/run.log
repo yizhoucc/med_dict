@@ -9713,3 +9713,102 @@ Processing row 65 (66/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Initial consultation for a 53 y.o. female with recently diag" -> "Recently diagnosed right breast metaplastic carcinoma, ER 5-"
       [G6-SEMANTIC] summary: "Recently diagnosed right breast metaplastic carcinoma, ER 5-10%, HER2 negative, " -> "Recently diagnosed right breast metaplastic carcinoma, ER 5-10%, HER2 negative, "
+    What_We_Found: 14.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Metaplastic carcinoma, ER 5-10%, HER2 negative",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findin
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Palpable 6 x 4 cm firm area in the 7 o'clock position, and a" -> "Palpable 6 x 4 cm firm area in the 7 o'clock position, and a"
+      [G6-SEMANTIC] lab_summary: "" -> "WBC 5.6, HGB 14.8, HCT 44.6, MCV 96, PLT 198, NEUTA 2.6, NA 140, ***** 4.2, ****"
+    Treatment_Summary: 8.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": "cholcalciferol (VITAMIN D3) 400 unit (10 mcg) Tab, cyanocobalamin (VITAMIN B-12) 1000 MCG tablet"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "cholcalciferol (VITAMIN D3) 400 unit (10 mcg) Tab, cyanocoba"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.7s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 30.8s
+    Medication_Plan_chatgpt: 29.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "neoadjuvant chemotherapy, then adjuvant chemotherapy",
+    "Short term side_effects_discussed": "not mentioned",
+    "Long term side_effects_discussed": "not ment
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] psychiatry medication: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': 'not me"
+      [G3-FAITH] pain medication: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': 'not me"
+      [G3-FAITH] bowel regimen: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': 'not me"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 6.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "The patient will start neoadjuvant chemotherapy, then adjuvant chemotherapy and radiation. Pembrolizumab for early stage TNBC was discussed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will start neoadjuvant chemotherapy, then adjuva" -> "The patient will start neoadjuvant chemotherapy, then adjuva"
+      [G4-TEMPORAL] no changes
+      [G5-SPECIFIC] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "The patient will start neoadjuvant chemotherapy, then adjuvant chemotherapy and radiation."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient will start neoadjuvant chemotherapy, then adjuva" -> "The patient will start neoadjuvant chemotherapy, then adjuva"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "adjuvant radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.2s
+      [EXTRACT] raw={
+  "procedure_plan": "plan for neoadjuvant chemotherapy, plan for lumpectomy, plan for mastectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
