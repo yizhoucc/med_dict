@@ -1401,3 +1401,83 @@ Processing row 29 (10/10)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "The patient has a large, enhancing hypermetabolic right breast mass, multiple en" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 20.5s
+    Medication_Plan_chatgpt: 44.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every
+      [G1-FORMAT] ok, keys=['chemotherapy', 'biological therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'biological therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 12.4s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "The patient will start 12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab 8mg/kg and pertuzumab 840mg, followed by 4 cycles of doxorubicin 60mg/m2 and cyclophosphamide 600
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will start 12 cycles of weekly paclitaxel 80mg/m" -> "The patient will start 12 cycles of weekly paclitaxel plus t"
+      [G4-TEMPORAL] medication_plan: "The patient will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzuma" -> "will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) foll"
+      [G6-SEMANTIC] medication_plan: "will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) foll" -> "12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab 8mg/kg and pertuzumab 84"
+    Therapy_plan: 12.7s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "The patient will start 12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab 8mg/kg and pertuzumab 840mg, followed by 4 cycles of doxorubicin 60mg/m2 and cyclophosphamide 600mg/
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient will start 12 cycles of weekly paclitaxel 80mg/m" -> "The patient will start 12 cycles of weekly paclitaxel plus t"
+      [G4-TEMPORAL] therapy_plan: "The patient will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzuma" -> "will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) foll"
+      [G6-SEMANTIC] therapy_plan: "will start 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) foll" -> "12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab 8mg/kg and pertuzumab 84"
+    radiotherapy_plan: 1.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "not mentioned"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.2s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "TTE, Mediport placement, chemotherapy teaching session"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "TTE, Mediport placement, chemotherapy teaching session" -> "Mediport placement, chemotherapy teaching session"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.6s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
