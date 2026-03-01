@@ -6299,3 +6299,93 @@ Processing row 42 (43/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] summary: "Follow-up visit for stage I triple negative left breast cancer, treated with lum" -> "Patient presents with stage I triple negative left breast cancer, undergoing adj"
+    What_We_Found: 13.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "WBC 5.9, RBC 1.71, Hemoglobin 5
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "WBC 5.9, RBC 1.71, Hemoglobin 5.4, Hematocrit 16.8, MCV 98, " -> "WBC 5.9, RBC 1.71, Hemoglobin 5.4, Hematocrit 16.8, MCV 98, "
+      [G3-FAITH] Stage_of_Cancer: "Stage I" -> "Stage I triple negative"
+      [G6-SEMANTIC] Stage_of_Cancer: "Stage I triple negative" -> "Stage I"
+    Treatment_Summary: 3.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "taxol and carboplatin",
+  "recent_changes": "",
+  "supportive_meds": "ibuprofen, granisetron HCL, prochlorperazine, senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "She will proceed with taxol carboplatin x 4 cycles for adjuv"
+      [G6-SEMANTIC] recent_changes: "She will proceed with taxol carboplatin x 4 cycles for adjuvant therapy." -> ""
+    Goals_of_care: 2.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Healing well from surgery, minimal pain"
+  Extraction prompts: 25.6s
+    Medication_Plan_chatgpt: 38.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Taxol and carboplatin x 4 cycles",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "radiotherapy": {
+    "summa
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'hormonal therapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'hormonal therapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.3s
+      [EXTRACT] raw={
+  "medication_plan": "She will proceed with taxol and carboplatin x 4 cycles for adjuvant therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.3s
+      [EXTRACT] raw={
+  "therapy_plan": "She will proceed with taxol and carboplatin x 4 cycles for adjuvant therapy."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "followed by radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "None mentioned"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "None mentioned" -> "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "imaging_plan": "None mentioned"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "None mentioned" -> "None"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
