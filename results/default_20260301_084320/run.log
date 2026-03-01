@@ -8009,3 +8009,57 @@ Processing row 53 (54/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The patient is doing well, able to move more, breast pain an"
       [G6-SEMANTIC] response_assessment: "The patient is doing well, able to move more, breast pain and soreness improving" -> "Not mentioned in note."
   Extraction prompts: 50.1s
+    Medication_Plan_chatgpt: 46.4s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "AC/T followed by mastectomy, palbociclib after radiation",
+    "Short term side_effects_discussed": "not mentioned",
+    "Long term side_effects_discussed": "not 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 5.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "continue leuprolide every 4 weeks, continue letrozole, start palbociclib after radiation, zoledronic acid every 3 months, calcium 1250 mg daily, vitamin D 1000 to 2000 units da
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "continue leuprolide every 4 weeks, continue letrozole, start palbociclib after r" -> "continue leuprolide every 4 weeks, continue letrozole, will start palbociclib, w"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.8s
+      [EXTRACT] raw={
+  "therapy_plan": "continue AC/T, continue letrozole, post-mastectomy radiation, will start palbociclib after radiation"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.6s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "referred to radiation oncology"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.4s
+      [EXTRACT] raw={
+  "procedure_plan": "bilateral mastectomies with left mastectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.5s
+      [EXTRACT] raw={
+  "imaging_plan": "PET/CT in ~3-4 months"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
