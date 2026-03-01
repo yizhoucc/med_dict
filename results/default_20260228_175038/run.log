@@ -23,3 +23,8 @@ Processing row 1 (2/2)...
   Running LLM Sanity Check...
   Success on attempt 1 (Verified by LLM, 2652 chars)
   Keypoints from extraction_prompts done
+  Keypoints from plan_extraction_prompts done
+  Row 1 saved to progress
+
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_175038/
