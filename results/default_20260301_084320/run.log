@@ -5235,3 +5235,38 @@ Processing row 35 (36/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 31.2s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
+  "Stage_of_Cancer": "pT3N0",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "WBC Count 8.8, 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Distant Metastasis: "No" -> "Yes, to the left breast"
+      [G6-SEMANTIC] Metastasis: "No" -> "Yes, to the left breast"
+    Treatment_Summary: 16.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Abraxane, tamoxifen, zoladex",
+  "recent_changes": "Grade 3 infusion reaction with cycle 1, switched to Abraxane",
+  "supportive_meds": "Lorazepam, Zofran, compazine, omeprazole, 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "Abraxane, tamoxifen, zoladex" -> "Abraxane, tamoxifen, zoladex, lorazepam, zofran, compazine, "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 9.2s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct.
+
+The value for "response_assessment" is correct.
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 68.3s
