@@ -101,3 +101,86 @@ Processing row 0 (1/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
+    Lab_Plan: 1.3s
+      [EXTRACT] raw={
+  "lab_plan": "will complete staging work up"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.1s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 1.0s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC with me after completed work up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 33.6s
+  Row 0 total: 49.3s
+  Row 0 saved to progress
+
+Processing row 1 (2/20)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Patient with metastatic breast cancer, stage unknown, presents for cycle 3 day 1 of irinotecan trea
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Patient with metastatic breast cancer, stage unknown, presen" -> "Patient with metastatic breast cancer who started irinotecan"
+    What_We_Found: 11.8s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "metastatic breast cancer, colon cancer, endometrial cancer",
+  "Stage_of_Cancer": "",
+  "Distant Metastasis": "Yes, to multiple sites",
+  "Metastasis": "Yes, multiple sites",
+  
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 8.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "irinotecan, MS contin 30mg TID, flexeril 5mg TID, oxycodone 15mg, effexor, ativan 1 tab TID",
+  "recent_changes": "Irinotecan changed to every other week, dose increased to 150mg/
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "albuterol, AMBIEN CR, cyclobenzaprine, diphenoxylate-atropin" -> "albuterol, AMBIEN CR, cyclobenzaprine, diphenoxylate-atropin"
+    Goals_of_care: 3.3s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Metastatic breast cancer is progressing, with worsening symptoms and new findings of chest wall infection, back pain, and sacral pain 
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 27.5s
