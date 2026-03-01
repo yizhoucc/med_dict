@@ -2180,3 +2180,138 @@ Processing row 16 (17/20)...
   Regex matched: 'PLAN'
   Regex extraction succeeded (1787 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for breast cancer, invasive ductal carcinoma, stage not specified, to discuss further man
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for breast cancer, invasive ductal carcinoma, stag" -> "Follow up for breast cancer, invasive ductal carcinoma, grad"
+    What_We_Found: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "invasive ductal carcinoma",
+  "Stage_of_Cancer": "",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "ER positive (>95%), PR positive (>95%), HER2 negative 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "The patient has completed the surgical management of her lef" -> "The patient has completed the surgical management of her lef"
+      [G3-FAITH] Stage_of_Cancer: "" -> "pathologic prognostic stage"
+    Treatment_Summary: 1.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "" -> "none"
+    Goals_of_care: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "to reduce the risk of recurrence",
+  "response_assessment": ""
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "" -> "The patient has completed the surgical management of her lef"
+  Extraction prompts: 11.1s
+    Medication_Plan_chatgpt: 29.0s [faith-restored-3keys, faith-trimmed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years",
+    "Short term side_effects_discussed": "hot flashes, mood effects, increased incidence of thr
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] other treatment: "{'summary': 'baseline DXA scan, hormone levels check, referr" -> "{'summary': 'baseline DXA scan, hormone levels check, referr"
+      [G3-FAITH] radiotherapy: "{'summary': 'breast radiotherapy to complete breast conserva" -> "{'summary': 'breast radiotherapy to complete breast conserva"
+      [G4-TEMPORAL] no changes
+    Medication_Plan: 3.9s
+      [EXTRACT] raw={
+  "medication_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy, baseline DXA scan, hormone levels check, referral to nutritionist, referral to genetics"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 3.0s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy, baseline DXA scan"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherap" -> "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherap"
+    radiotherapy_plan: 1.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "breast radiotherapy to complete breast conservation management, referral to see Rad Onc tomorrow"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 1.2s
+      [EXTRACT] raw={
+  "procedure_plan": "surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 1.4s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline DXA scan"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.4s
+      [EXTRACT] raw={
+  "lab_plan": "hormone levels check"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.0s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "referral to genetics"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.9s
+      [EXTRACT] raw={
+  "Nutrition": "referral to nutritionist",
+  "Genetics": "referral to genetics",
+  "Specialty": "referral to Rad Onc",
+  "Others": "None",
+  "follow up": "F/U visit"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 0.8s
+      [EXTRACT] raw={
+  "Next clinic visit": "tomorrow"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 46.8s
+  Row 16 total: 58.0s
+  Row 16 saved to progress
+
+Processing row 17 (18/20)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
