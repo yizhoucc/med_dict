@@ -11985,3 +11985,97 @@ Processing row 80 (81/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] Stage_of_Cancer: "Stage not specified" -> "Not mentioned in note"
+    Treatment_Summary: 2.3s
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 1.0s
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 15.5s
+    Medication_Plan_chatgpt: 38.7s
+      [EXTRACT] raw={
+  "radiotherapy": {
+    "summary": "to decrease the risk of local recurrence",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": 
+      [G1-FORMAT] ok, keys=['radiotherapy', 'hormonal therapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy', 'hormonal therapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 2.5s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "She will start hormone blockade after radiation, baseline dexa"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "She will start hormone blockade after radiation, baseline dexa" -> "hormone blockade after radiation, baseline dexa"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "lumpectomy, plan to start radiation, plan to start hormone therapy"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "lumpectomy, plan to start radiation, plan to start hormone therapy" -> "plan to start radiation, plan to start hormone therapy"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.6s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "discussed the role of radiation to decrease the risk of local recurrence, referred to a radiation oncologist"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "lumpectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline dexa"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
