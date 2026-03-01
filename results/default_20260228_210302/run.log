@@ -1512,3 +1512,68 @@ Processing row 11 (12/20)...
       [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
+    What_We_Found: 6.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "breast cancer",
+  "Stage_of_Cancer": "IV",
+  "Distant Metastasis": "Yes, to lung, nodes, brain, and bone",
+  "Metastasis": "Yes, to lung, nodes, brain, and bone",
+  "lab_summary
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Hgb, Albumin, Alk Phos, EF 76%" -> "EF 76%"
+    Treatment_Summary: 3.8s
+      [EXTRACT] raw={
+  "current_meds": "herceptin, letrozole, *****",
+  "recent_changes": "cont herceptin/***** q12 wks given stable bone status, cont letrozole qd",
+  "supportive_meds": "aspirin, cholecalciferol, guaif
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Goals_of_care: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "Metastatic breast cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
+  "response_assessment": "The cancer is
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "The cancer is responding to treatment" -> "compatible with treatment response"
+  Extraction prompts: 16.4s
+    Medication_Plan_chatgpt: 36.5s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "continue herceptin and ***** alone, continue letrozole qd, continue *****; now q12 wks given stable bone status, stopped due to intolerance",
+    "Short term side
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 3.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "continue herceptin, continue letrozole qd, continue *****; now q12 wks given stable bone status, continue *****; await GK / Rad Onc input, and potential plan for repeat GK, con
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "continue herceptin, continue letrozole qd, continue *****; now q12 wks given sta" -> "continue herceptin, continue letrozole qd, continue *****; continue *****; await"
+    Therapy_plan: 2.9s
+      [EXTRACT] raw={
+  "therapy_plan": "continue herceptin, continue letrozole qd, continue *****; await GK / Rad Onc input, and potential plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Procedure_Plan: 1.2s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "await GK"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "await GK" -> "No procedures planned."
