@@ -6,7 +6,8 @@
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "results": {
     "0": {
@@ -488,6 +489,102 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "prior to next visit"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "5": {
+      "coral_idx": 145,
+      "note_text": "  HPI:  ***** ***** is a 34 y.o. female with ER+/PR+ IDC of the right breast.     On June 21 she underwent a partial mastectomy with sentinel node biopsy with expander placement. She reports recovering well although is still experiencing tightness in the area.     Experiences night sweats for four days after injection. Otherwise manageable.     Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast Cancer Right 04/25/2019     December 2018 self-palpated right breast mass  03/05/2019 Bilateral breast US (***** ***** Hospital in *****): 6x7 mm mass with ductal extension at 1 o'clock, likely DCIS.   03/17/2019 Gynecology at ***** for lower abdomen swelling, urethral discomfort and breast mass in the breast US (*****). On exam 1 cm firm, mobile, nontender mass approximately 5 cm from nipple at 1 o'clock.  03/17/2019: Right breast FNA at 1 o'clock (UCSF): Benign and could be seen in the setting of fibrocystic change or fibroadenoma.  03/17/2018 Abdomen-pelvic CT: No acute findings (for abdominal pain).  03/28/2019 Bilateral breast diagnostic mammogram (UCSF): A focal asymmetry is suggested in the region. Triangular marker denotes site of focal pain in the lower slightly outer right breast, with no underlying mammographic correlate. Scattered and occasionally grouped benign-appearing microcalcifications, both breasts, predominantly coarse dystrophic, likely the sequelae of reported fat grafting.  03/28/2019 Bilateral breast diagnostic US(UCSF): 22 x 10 x 15 mm oval complex solid and cystic mass with peripheral echogenicity and an irregular, antiparallel hypoechoic central component in the right upper inner quadrant, 1:00, 8 cm from nipple. The central hypoechoic component measures up to 10 mm. No sonographic correlate to site of focal pain in the lower outer right breast at 7 o'clock, 5 cm from nipple. No sonographic correlate to clinician's site of concern in the left axilla. A few normal-appearing nodes are identified. \n Left breast: benign  03/30/2019 Right breast US guided core biopsy at 1 o'clock 8 cm from nipple (UCSF): Grade 1 IDC, ER+(>95%), PR(~90% ranging from weak to strong nuclear staining), ***** equivocal(IHC 2), FISH non-amplified (0.55 cm largest dimension in a core; multiple core involved), *****-67: ~10%. Focal atypical ductal hyperplasia. Pseudoangiomatous stromal hyperplasia. DCIS not present.  04/24/2019 Dr. ***** at *****. genetics referral   04/24/2019 Dr. ***** at *****: discussed bilateral ***** with expander/implant reconstruction  04/25/2019 Dr. ***** (Surgeon) discussed surgical options lumpectomy vs bilateral mastectomy, recommended genetic testing.  04/25/2019 Myriad Genetic Result: Negative  05/08/2019 Dr. ***** (***** *****) planned double mastectomy with reconstruction with Dr. ***** ***** (CPMC)  05/24/2019 ***** (*****): Low risk: +0.287  06/08/19 zoladex  06/21/19 bilateral mastectomy and expanders  Left breast: benign  Right breast: 15 x 10 mm grade I IDC, Extensive DCIS (*****-3); 0/1 nodes.  *****-95%, PR 90%, ***** not repeated  07/05/19 letrozole     \u0007 Family history of *****'s disease 04/25/2019   \u0007 Bipolar 2 disorder (HCC) 04/04/2019   \u0007 Insomnia 04/04/2019       PAST MEDICAL/SURGICAL HISTORY, FAMILY HISTORY AND SOCIAL HISTORY: were reviewed and updated as appropriate.      Current Outpatient Medications:   \u0007  ascorbic acid, vitamin C, 500 mg *****, Take by mouth daily., Disp: , Rfl:   \u0007  B-complex with vitamin C tablet, Take by mouth daily., Disp: , Rfl:   \u0007  estradioL (*****) 2 mg (7.5 mcg /24 hour) vaginal ring, Use as instructed, Disp: 1 each, Rfl: 4  \u0007  fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, INSTILL 1 TO 2 SPRAYS ***** ***** ***** ONCE DAILY, Disp: , Rfl:   \u0007  gabapentin (NEURONTIN) 300 mg capsule, Take 1 capsule (300 mg total) by mouth 3 (three) times daily, Disp: 90 capsule, Rfl: 3  \u0007  ***** ***** ORAL, Take by mouth. ***** tincture-  Use 1/2 -1 teaspoon by mouth ***** \n for anxiety, Disp: , Rfl:   \u0007  Lactobacillus acidophilus (PROBIOTIC ORAL), Take 1 capsule by mouth. PROBIOTIC-10PO, Disp: , Rfl:   \u0007  lamoTRIgine (LAMICTAL XR) 200 mg 24 hr ER tablet, Take 1 tablet (200 mg total) by mouth daily, Disp: 30 tablet, Rfl: 11  \u0007  letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily, Disp: 30 tablet, Rfl: 11  \u0007  loratadine (CLARITIN) 10 mg tablet, TAKE ONE TABLET BY MOUTH DAILY AS NEEDED, Disp: , Rfl:   \u0007  multivitamin capsule, Take 1 capsule by mouth daily. Multiple Vitamin, Disp: , Rfl:   \u0007  naproxen (NAPROSYN) 500 mg tablet, TAKE ONE TABLET BY MOUTH TWICE A DAY, Disp: , Rfl:   \u0007  traMADoL (ULTRAM) 50 mg tablet, Take 50 mg by mouth every 6 (six) hours as needed, Disp: , Rfl:   \u0007  tretinoin microspheres (RETIN-A MICRO *****) 0.08 % *****, Apply 1 Application topically Daily., Disp: 50 g, Rfl: 5  \u0007  TURMERIC ORAL, Take 1 capsule by mouth. TURMERIC PO take 1 cap by mouth daily, Disp: , Rfl:   \u0007  UNABLE TO FIND, Med Name: ***** ***** ***** ***** mouth daily., Disp: , Rfl:   \u0007  zolpidem (AMBIEN) 5 mg tablet, Take 1 tablet (5 mg total) by mouth nightly as needed for Sleep for up to 30 days, Disp: 5 tablet, Rfl: 3    Review of Systems - All other systems were reviewed and are negative except that outlined above.      BP 105/60  | Pulse 65  | Temp 36.5 C (97.7 F) (Temporal)  | Resp 16  | Ht 160.3 cm (5' 3.11\") Comment: 07/04/2019 @***** | Wt 62.2 kg (137 lb 3.2 oz)  | SpO2 99%  | BMI 24.22 kg/m   Physical Examination: General appearance - alert, well appearing, and in no distress  Mental status - alert, oriented to person, place, and time  Eyes - pupils equal and reactive, extraocular eye movements intact  Mouth - mucous membranes moist, pharynx normal without lesions  Neck - supple, no significant adenopathy  Lymphatics - no palpable lymphadenopathy  Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm, normal \n S1, S2, no murmurs, rubs, clicks or gallops  Abdomen - soft, nontender, nondistended, no masses or organomegaly  Breasts - Bilateral nipple sparing mastectomies with healing inferior scars  One stitch at 12 o'clock in R breast  Mild edema   Resolving ecchymosis in inferior medial aspect of R breast  Back exam - full range of motion, no tenderness, palpable spasm or pain on motion  Neurological - alert, oriented, normal speech, no focal findings or movement disorder noted  Musculoskeletal - no joint tenderness, deformity or swelling  Extremities - peripheral pulses normal, no pedal edema, no clubbing or cyanosis  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted    I personally reviewed and interpreted the following results:  Results for orders placed or performed in visit on 06/08/19   Estradiol, Ultrasensitive   Result Value Ref Range    Estradiol, Ultrasensitive 172 pg/mL   Vitamin D, 25-Hydroxy   Result Value Ref Range    Vitamin D, 25-Hydroxy 24 20 - 50 ng/mL   Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)   Result Value Ref Range    Albumin, Serum / Plasma 4.6 3.5 - 5.0 g/dL    Alkaline Phosphatase 60 38 - 108 U/L    Alanine transaminase 48 10 - 61 U/L    Aspartate transaminase 31 5 - 44 U/L    Bilirubin, Total 0.8 0.2 - 1.2 mg/dL    Urea Nitrogen, Serum / Plasma 13 7 - 25 mg/dL    Calcium, total, Serum / Plasma 9.5 8.4 - 10.5 mg/dL    Chloride, Serum / Plasma ***** ***** - 110 mmol/L    Creatinine 0.96 0.55 - 1.02 mg/dL    eGFR if non-African American 77 >60 mL/min    eGFR if African ***** 89 >60 mL/min    Potassium, Serum / Plasma 3.8 3.5 - 5.0 mmol/L    Sodium, Serum / Plasma ***** ***** - 145 mmol/L    Protein, Total, Serum / Plasma 7.6 6.3 - 8.6 g/dL    Carbon Dioxide, Total 25 22 - 29 mmol/L    Anion Gap 10 4 - 14    Glucose, non-fasting 88 70 - 199 mg/dL   Complete Blood Count with Differential   Result Value Ref Range    WBC Count 7.4 3.4 - 10 x10E9/L    RBC \n Count 4.07 4.0 - 5.2 x10E12/L    Hemoglobin 13.4 12.0 - 15.5 g/dL    Hematocrit 38.6 36 - 46 %    MCV 95 80 - 100 fL    MCH 32.9 26 - 34 pg    MCHC 34.7 31 - 36 g/dL    Platelet Count ***** ***** - 450 x10E9/L    Neutrophil Absolute Count 4.65 1.8 - 6.8 x10E9/L    Lymphocyte Abs Cnt 2.24 1.0 - 3.4 x10E9/L    Monocyte Abs Count 0.44 0.2 - 0.8 x10E9/L    Eosinophil Abs Ct 0.06 0.0 - 0.4 x10E9/L    Basophil Abs Count 0.02 0.0 - 0.1 x10E9/L    Imm Gran, Left Shift 0.02 <0.1 x10E9/L       Lab Results   Component Value Date    Alanine transaminase 48 06/08/2019    Aspartate transaminase 31 06/08/2019    Alkaline Phosphatase 60 06/08/2019    Bilirubin, Total 0.8 06/08/2019       Assessment and Plan:  Patient Active Problem List   Diagnosis   \u0007 Bipolar 2 disorder (HCC)   \u0007 Insomnia   \u0007 Breast Cancer Right   \u0007 Family history of *****'s disease     IMP  ***** 34 year old woman with bipolar disorder, and ER/PR+ ***** low risk right breast cancer  Underwent bilateral mastectomy with expanders on 06/21/2019.  Started zoladex one month ago.    Reviewed surgery results.  Left breast benign, right breast with 1.5 cm node neg, grade 1 and ER/PR+ IDC.    Discussed ***** with her psychiatrist who said it could make her manic.  Gabapentin is okay.  Rare hot flashes although she had night sweats after the injection.    Recovering nicely with some residual nerve irritation.    Discussed starting letrozole today.  ***** try to continue the ***** for at least 3 years and can sequence with tamoxifen    Start ***** per her request    Estradiol monthly.    Gabapentin prescribed as needed per her request.    We will document her diagnosis for various aid she can apply for.  She is going to go to school online! And study anthropology.    RTC 3 months or sooner as needed.    Patient ready and able to be educated, verbalizes understanding of information/instructions given.  Treatment options, side effects and nutrition reviewed in detail.  \n Total face to face time: 40  Total counseling time: 35    *****, ***** ***** am acting as a scribe for services provided by ***** *****. *****, MD on *****/*****/***** *****:***** PM    The above scribed documentation accurately reflects the services I have provided.    ***** *****. *****, MD   *****/*****/***** *****:***** PM      \n",
+      "assessment_and_plan": "Assessment and Plan:  Patient Active Problem List   Diagnosis   \u0007 Bipolar 2 disorder (HCC)   \u0007 Insomnia   \u0007 Breast Cancer Right   \u0007 Family history of *****'s disease     IMP  ***** 34 year old woman with bipolar disorder, and ER/PR+ ***** low risk right breast cancer  Underwent bilateral mastectomy with expanders on 06/21/2019.  Started zoladex one month ago.    Reviewed surgery results.  Left breast benign, right breast with 1.5 cm node neg, grade 1 and ER/PR+ IDC.    Discussed ***** with her psychiatrist who said it could make her manic.  Gabapentin is okay.  Rare hot flashes although she had night sweats after the injection.    Recovering nicely with some residual nerve irritation.    Discussed starting letrozole today.  ***** try to continue the ***** for at least 3 years and can sequence with tamoxifen    Start ***** per her request    Estradiol monthly.    Gabapentin prescribed as needed per her request.    We will document her diagnosis for various aid she can apply for.  She is going to go to school online! And study anthropology.    RTC 3 months or sooner as needed.    Patient ready and able to be educated, verbalizes understanding of information/instructions given.  Treatment options, side effects and nutrition reviewed in detail.  \n Total face to face time: 40  Total counseling time: 35    *****, ***** ***** am acting as a scribe for services provided by ***** *****. *****, MD on *****/*****/***** *****:***** PM    The above scribed documentation accurately reflects the services I have provided.    ***** *****. *****, MD   *****/*****/***** *****:***** PM      \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Follow up for ER+/PR+ IDC, grade 1, 1.5 cm node negative, to review surgery results and start letrozole"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ IDC",
+          "Stage_of_Cancer": "grade 1",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "Estradiol 172 pg/mL, Vitamin D 24 ng/mL, Albumin 4.6 g/dL, Alkaline Phosphatase 60 U/L, Alanine transaminase 48 U/L, Aspartate transaminase 31 U/L, Bilirubin 0.8 mg/dL, Urea Nitrogen 13 mg/dL, Calcium 9.5 mg/dL, Potassium 3.8 mmol/L, Protein 7.6 g/dL, Anion Gap 10, Glucose 88 mg/dL, WBC Count 7.4 x10E9/L, RBC Count 4.07 x10E12/L, Hemoglobin 13.4 g/dL, Hematocrit 38.6 %, MCV 95 fL, MCH 32.9 pg, MCHC 34.7 g/dL, Neutrophil Absolute Count 4.65 x10E9/L, Lymphocyte Abs Cnt 2.24 x10E9/L, Monocyte Abs Count 0.44 x10E9/L, Eosinophil Abs Ct 0.06 x10E9/L, Basophil Abs Count 0.02 x10E9/L, Imm Gran, Left Shift 0.02 x10E9/L",
+          "findings": "Bilateral nipple sparing mastectomies with healing inferior scars, mild edema, resolving ecchymosis in inferior medial aspect of R breast, right breast with 1.5 cm node negative, grade 1 IDC"
+        },
+        "Treatment_Summary": {
+          "current_meds": "Letrozole 2.5 mg tablet, Estradiol 2 mg vaginal ring, Gabapentin as needed, Zoladex",
+          "recent_changes": "Started letrozole today",
+          "supportive_meds": "Ascorbic acid, B-complex with vitamin C, Flonase, Lactobacillus acidophilus, LamoTrigine, Loratadine, Multivitamin, Naproxen, Tretinoin microspheres, Turmeric, Zolpidem"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "Risk reduction",
+          "response_assessment": "Compatible with treatment response, recovering nicely with some residual nerve irritation"
+        },
+        "Medication_Plan_chatgpt": {
+          "chemotherapy": {
+            "summary": "",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "hormonal therapy": {
+            "summary": "plan to start Letrozole today, will continue for at least 3 years, can sequence with Tamoxifen",
+            "Short term side_effects_discussed": "rare hot flashes, night sweats after injection",
+            "Long term side_effects_discussed": ""
+          },
+          "radiotherapy": {
+            "summary": "",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "bone therapy": {
+            "summary": "",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "psychiatry medication": {
+            "summary": "Gabapentin prescribed as needed",
+            "Short term side_effects_discussed": "rare hot flashes",
+            "Long term side_effects_discussed": ""
+          },
+          "other treatment": {
+            "summary": "Estradiol monthly",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "start Letrozole today, continue Gabapentin as needed, Estradiol monthly"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "start Letrozole"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "discussed"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "3 months"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
