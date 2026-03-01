@@ -11,4 +11,6 @@ textstats_plot
 file_organizer.ipynb
 sandbox/
 # results/
-__pyacache__/
+__pycache__/
+.venv/
+xet/
