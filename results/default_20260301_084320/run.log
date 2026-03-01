@@ -3287,3 +3287,124 @@ Processing row 22 (23/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The cancer is low risk and I do not recommend adjuvant chemotherapy."
   Extraction prompts: 24.6s
+    Medication_Plan_chatgpt: 20.8s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Starting letrozole, will receive at least 5 years of adjuvant hormonal therapy",
+    "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] bone therapy: "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the " -> "{'summary': 'will discuss bone targeted therapies in the future', 'Short term si"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo" -> "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short"
+      [G6-SEMANTIC] bone therapy: "{'summary': 'will discuss bone targeted therapies in the future', 'Short term si" -> "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the "
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short" -> "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo"
+    Medication_Plan: 8.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "Starting letrozole, a baseline DEXA will be ordered, and the patient will discuss bone targeted therapies in the future. The patient will maintain a calcium rich diet, take Vit
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Starting letrozole, a baseline DEXA will be ordered, and the" -> "Starting letrozole, a baseline DEXA will be ordered, and the"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "Starting letrozole, will discuss bone targeted therapies in the future, and if not able to tolerate, will switch to another aromatase inhibitor or tamoxifen."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Starting letrozole, will discuss bone targeted therapies in " -> "Starting letrozole, will discuss bone targeted therapies in "
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.2s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.6s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.0s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline DEXA"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.7s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.4s
+      [EXTRACT] raw={
+  "Next clinic visit": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 49.3s
+  Row 22 total: 73.9s
+  Row 22 saved to progress
+
+Processing row 23 (24/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 6.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] summary: "Follow up for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%" -> "Patient with right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%)"
