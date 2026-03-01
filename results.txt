@@ -1,4 +1,4 @@
-Source: default.yaml | Run started: 2026-02-28 21:03:02
+Source: default.yaml | Run started: 2026-02-28 21:37:08
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -34,10 +34,20 @@ Respond *only* with a JSON object using this exact schema:
 "supportive_meds": "List of supportive medications."
 }
 ', 'Goals_of_care': 'TASK: Extract 'What We Discussed / Decided'.
+
+For response_assessment, look for:
+- Imaging results: "CT shows stable disease", "PET-CT shows progression", "MRI stable"
+- Tumor markers: "CA 15-3 decreased/increased/stable", "CEA trending down"
+- Clinical assessment: "no evidence of disease recurrence", "probable PD", "compatible with treatment response", "exam stable"
+- Symptom-based: "symptoms worsening", "pain improved", "tolerating therapy well"
+If the patient is newly diagnosed and has NOT yet started treatment, write "Not yet on treatment — no response to assess."
+If there is no mention of disease status or treatment response anywhere in the note, write "Not mentioned in note."
+Do NOT write "Not applicable" or "Not specified".
+
 Respond *only* with a JSON object using this exact schema:
 {
-"goals_of_treatment": "eg, cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-"response_assessment": "How the cancer is responding to the treatment, not responding or responding."
+"goals_of_treatment": "The stated goal or intent of treatment, e.g., curative, palliative, risk reduction, symptom management.",
+"response_assessment": "How is the cancer responding? Cite specific evidence: imaging findings, lab trends, or clinical status. e.g., 'CT stable, CA 15-3 decreased from 28 to 14' or 'no evidence of disease recurrence on imaging and exam'."
 }
 '}
 ============================================================
@@ -239,8 +249,8 @@ RESULTS FOR ROW 1
     "supportive_meds": ""
   },
   "Goals_of_care": {
-    "goals_of_treatment": "treatment will be palliative, but can improve quality of life and length of life",
-    "response_assessment": ""
+    "goals_of_treatment": "palliative",
+    "response_assessment": "Metastatic disease, with involvement of the lungs, peritoneum, liver, and ovary, with a local recurrence near the right axilla and implant"
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -345,8 +355,8 @@ RESULTS FOR ROW 2
     "supportive_meds": "albuterol, AMBIEN CR, cyclobenzaprine, diphenoxylate-atropine, docusate sodium, gabapentin, loperamide, lurasidone, magnesium oxide, ondansetron, oxyCODONE, polyethylene glycol, pregabalin, prochlorperazine, rivaroxaban, simethicone, venlafaxine"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Continue current therapy until clear evidence of progression",
-    "response_assessment": ""
+    "goals_of_treatment": "palliative",
+    "response_assessment": "Metastatic breast cancer is progressing, with worsening symptoms and new findings of chest wall infection, back pain, and sacral pain due to metastases; lab values are stable; patient is tolerating therapy poorly"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -462,7 +472,7 @@ RESULTS FOR ROW 3
   },
   "Goals_of_care": {
     "goals_of_treatment": "decrease the risk of systemic recurrence",
-    "response_assessment": ""
+    "response_assessment": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence, the role of surgery and radiation to decrease the risk of local recurrence, and the role of hormonal blockade to decrease the risk of systemic recurrence"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -577,8 +587,8 @@ RESULTS FOR ROW 4
     "supportive_meds": "Aspirin 81 mg, Calcium carbonate, Cholecalciferol (Vitamin D3) 1000 Units, Loratadine, Metoprolol succinate, Metoprolol tartrate, Pravastatin"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "The patient will continue to take Letrozole 2.5 mg daily to treat the breast cancer, and to continue annual right breast mammogram.",
-    "response_assessment": ""
+    "goals_of_treatment": "Review of treatment plan and symptom management",
+    "response_assessment": "No evidence of disease recurrence on imaging, exam, and review of systems"
   },
   "Medication_Plan_chatgpt": {
     "Hormonal therapy": {
@@ -683,8 +693,8 @@ RESULTS FOR ROW 5
     "supportive_meds": "amLODIPine, escitalopram oxalate, gabapentin, hydroCHLOROthiazide, ondansetron, potassium chloride, venlafaxine"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Continue current therapy to extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "palliative",
+    "response_assessment": "stable disease, with some progression in the left axillary LN and possibly the sternum"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -799,8 +809,8 @@ RESULTS FOR ROW 6
     "supportive_meds": "Ascorbic acid, B-complex with vitamin C, Flonase, Lactobacillus acidophilus, LamoTrigine, Loratadine, Multivitamin, Naproxen, Tretinoin microspheres, Turmeric, Zolpidem"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "To continue treatment for at least 3 years and sequence with tamoxifen",
-    "response_assessment": "The cancer is responding well to treatment"
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "Compatible with treatment response, recovering nicely with some residual nerve irritation"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -910,8 +920,8 @@ RESULTS FOR ROW 7
     "supportive_meds": "Lisinopril, Paxil"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-    "response_assessment": "probable minor progression"
+    "goals_of_treatment": "palliative",
+    "response_assessment": "probable minor progression, PET-CT shows equivocal evidence of progression, but with some improvement of symptoms"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1031,8 +1041,8 @@ RESULTS FOR ROW 8
     "supportive_meds": "acetaminophen, ibuprofen, oxycodone"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-    "response_assessment": "patient is at great risk of developing metastatic breast cancer due to incomplete course of systemic therapy"
+    "goals_of_treatment": "adjuvant therapy to reduce risk of metastatic breast cancer",
+    "response_assessment": "The patient is at great risk of developing metastatic breast cancer due to her incomplete course of systemic therapy for her high-risk disease. The patient's cancer is not curable, but she can reduce this risk by proceeding with recommended systemic therapy of AC followed by T-DM1."
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1147,8 +1157,8 @@ RESULTS FOR ROW 9
     "supportive_meds": "acetaminophen, fluconazole, omeprazole, ondansetron, polyethylene glycol, prochlorperazine, tramadol, lorazepam, fosamax, ginger"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "The goal is to extend the duration and maintain the quality of life",
-    "response_assessment": "The cancer is responding to the treatment"
+    "goals_of_treatment": "Follow-up and further treatment planning",
+    "response_assessment": "The patient's neuropathy is improving, the cancer is estrogen receptor positive, stage II IDC, with 1 lymph node involved, 0.21 cm with extranodal extension, and the patient is scheduled to have drains out on Thursday and will have radiation and letrozole after that."
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1268,8 +1278,8 @@ RESULTS FOR ROW 10
     "supportive_meds": "Cephalexin, Tramadol"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "To extend the duration and maintain the quality of life",
-    "response_assessment": "She will have radiation to the left chest wall and surrounding lymph nodes."
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "Compatible with treatment response. She will continue on letrozole. She will have radiation to the left chest wall and surrounding lymph nodes."
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -1379,8 +1389,8 @@ RESULTS FOR ROW 11
     "supportive_meds": "Acetaminophen, Aspirin, Docusate sodium, Hydrocodone-acetaminophen, Levothyroxine, Lovastatin, Metformin, Multivitamin, Senna-docusate"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Continue treatment to manage symptoms and maintain quality of life",
-    "response_assessment": "The cancer is not responding to treatment, as evidenced by worsening symptoms"
+    "goals_of_treatment": "palliative",
+    "response_assessment": "Patient has metastatic breast cancer, jaw numbness, leg pain, and numbness, with worsening symptoms, particularly in the right leg. PETCT to evaluate Femur and toes is ordered."
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1500,8 +1510,8 @@ RESULTS FOR ROW 12
     "supportive_meds": "aspirin, cholecalciferol, guaifenesin-codeine, magnesium oxide"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Metastatic breast cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-    "response_assessment": "compatible with treatment response"
+    "goals_of_treatment": "management of metastatic disease",
+    "response_assessment": "compatible with treatment response, slight interval decrease in size of 7 mm celiac axis lymph node"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1621,8 +1631,8 @@ RESULTS FOR ROW 13
     "supportive_meds": "ibuprofen, multivitamin, turmeric"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Discuss adjuvant radiation and its benefit in reducing local/regional recurrence, and the role of tamoxifen in reducing recurrence risk",
-    "response_assessment": "Patient will think about the risk/benefit"
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "The patient will think about the risk/benefit of tamoxifen, with a small reduction in invasive disease risk and a small increase in risk of endometrial cancer and thrombosis."
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -1707,8 +1717,8 @@ RESULTS FOR ROW 14
     "supportive_meds": "Cymbalta"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "Follow-up and management of metastatic ER+ breast cancer, extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "Palliative",
+    "response_assessment": "Patient is tolerating therapy well, symptoms of right rib pain and back pain have improved, weight loss is a concern, lab results are okay"
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1828,8 +1838,8 @@ RESULTS FOR ROW 15
     "supportive_meds": ""
   },
   "Goals_of_care": {
-    "goals_of_treatment": "breast surgery referral, possible chemotherapy",
-    "response_assessment": ""
+    "goals_of_treatment": "Discuss diagnosis, prognosis, and treatment options",
+    "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan_chatgpt": {
     "chemotherapy": {
@@ -1944,8 +1954,8 @@ RESULTS FOR ROW 16
     "supportive_meds": "docusate, ibuprofen"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "to extend the duration and maintain the quality of life",
-    "response_assessment": "The patient is not mentioned as not responding or responding, but the note does mention a small, but serious risk of distant, metastatic recurrence, so it can be inferred that the cancer is not responding"
+    "goals_of_treatment": "adjuvant therapy to reduce risk of distant metastasis",
+    "response_assessment": "The patient will benefit from adjuvant radiation and an adjuvant aromatase inhibitor x 5 years, which can reduce the risk of distant metastatic recurrence"
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -1958,6 +1968,11 @@ RESULTS FOR ROW 16
       "Short term side_effects_discussed": "not mentioned",
       "Long term side_effects_discussed": "not mentioned"
     },
+    "bone therapy": {
+      "summary": "calcium and vitamin D",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
     "chemotherapy": {
       "summary": "not mentioned",
       "Short term side_effects_discussed": "not mentioned",
@@ -1967,38 +1982,53 @@ RESULTS FOR ROW 16
       "summary": "DEXA, genetic testing",
       "Short term side_effects_discussed": "not mentioned",
       "Long term side_effects_discussed": "not mentioned"
+    },
+    "psychiatry medication": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "pain medication": {
+      "summary": "not mentioned",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "bowel regimen": {
+      "summary": "calcium and vitamin D",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
     }
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will take an aromatase inhibitor for 5 years after radiation. She will also take calcium and vitamin D."
+    "medication_plan": "The patient will take an aromatase inhibitor for 5 years, starting after radiation. She will also take calcium and vitamin D."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will take an aromatase inhibitor for 5 years after radiation."
+    "therapy_plan": "The patient will take an aromatase inhibitor for 5 years, starting after radiation."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "evaluation and treatment"
   },
   "Procedure_Plan": {
-    "procedure_plan": "will schedule a biopsy"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "DEXA, MRI"
+    "imaging_plan": "surveillance breast MRI"
   },
   "Lab_Plan": {
-    "lab_plan": "will check estradiol level"
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "will refer for genetic testing"
+    "genetic_testing_plan": "No genetic testing planned."
   },
   "Referral": {
     "Nutrition": "None",
-    "Genetics": "genetic testing",
+    "Genetics": "None",
     "Specialty": "Radiation oncology",
     "Others": "None",
     "follow up": "None"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "will discuss with Dr.  about absence of lymph node biopsy"
+    "Next clinic visit": "None"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -2045,8 +2075,8 @@ RESULTS FOR ROW 17
     "supportive_meds": "none"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "to reduce the risk of recurrence",
-    "response_assessment": "The patient has completed the surgical management of her left breast cancer."
+    "goals_of_treatment": "Further management of invasive ductal carcinoma",
+    "response_assessment": "The patient has completed the surgical management of her left breast cancer and is asymptomatic except for minor post-operative numbness."
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -2074,6 +2104,11 @@ RESULTS FOR ROW 17
       "Short term side_effects_discussed": "",
       "Long term side_effects_discussed": ""
     },
+    "psychiatry medication": {
+      "summary": "none mentioned",
+      "Short term side_effects_discussed": "none mentioned",
+      "Long term side_effects_discussed": "none mentioned"
+    },
     "pain medication": {
       "summary": "none mentioned",
       "Short term side_effects_discussed": "none mentioned",
@@ -2083,15 +2118,10 @@ RESULTS FOR ROW 17
       "summary": "none mentioned",
       "Short term side_effects_discussed": "none mentioned",
       "Long term side_effects_discussed": "none mentioned"
-    },
-    "psychiatry medication": {
-      "summary": "none mentioned",
-      "Short term side_effects_discussed": "none mentioned",
-      "Long term side_effects_discussed": "none mentioned"
     }
   },
   "Medication_Plan": {
-    "medication_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy, baseline DXA scan, hormone levels check, referral to nutritionist, referral to genetics"
+    "medication_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy"
   },
   "Therapy_plan": {
     "therapy_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy"
@@ -2166,8 +2196,8 @@ RESULTS FOR ROW 18
     "supportive_meds": ""
   },
   "Goals_of_care": {
-    "goals_of_treatment": "extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "Curative",
+    "response_assessment": "The patient is a low risk for recurrence and is recommended to receive adjuvant endocrine therapy for 5-10 years."
   },
   "Medication_Plan_chatgpt": {
     "hormonal therapy": {
@@ -2262,8 +2292,8 @@ null
     "supportive_meds": "aspirin, atorvastatin, glyBURIDE, glyBURIDE micronized, lisinopril"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "The patient is a candidate for neoadjuvant chemotherapy vs. mastectomy",
-    "response_assessment": "The cancer is treatable and the goal is to extend the duration and maintain the quality of life"
+    "goals_of_treatment": "Curative",
+    "response_assessment": "Patient is a candidate for neoadjuvant chemotherapy vs. mastectomy. Neoadjuvant chemotherapy recommended as a standard of care: TCHP. Prefer to avoid anthracycline containing regimen given history of CAD. Patient will require: chemo teaching, port placement, echocardiogram, and authorization for TCHP with GCSF."
   }
 }
 
@@ -2307,8 +2337,8 @@ RESULTS FOR ROW 20
     "supportive_meds": "Aspirin, ATELVIA, Calcium carbonate, Cholecalciferol, Cyanocobalamin, Estradiol, Metformin, Multivitamin, Rosuvastatin, Telmisartan"
   },
   "Goals_of_care": {
-    "goals_of_treatment": "cancer is not curable, but it's treatable and the goal is to extend the duration and maintain the quality of life",
-    "response_assessment": ""
+    "goals_of_treatment": "palliative",
+    "response_assessment": "Metastatic recurrence of breast cancer with disease in the bone and lymph nodes, compatible with treatment response"
   },
   "Medication_Plan_chatgpt": {
     "Hormonal therapy": {
