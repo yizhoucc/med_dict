@@ -8,7 +8,8 @@
     23,
     24,
     25,
-    26
+    26,
+    27
   ],
   "results": {
     "20": {
@@ -604,6 +605,107 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "return if pain worsens"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "27": {
+      "coral_idx": 167,
+      "note_text": "ID: ***** ***** ***** is a 60 y.o. ***** patient with a recent diagnosis of early stage breast cancer, who presents to discuss treatment options and to establish care.    Date of Service: 04/17/22    HPI: The patient developed pain in her right axilla in the ***** ***** *****.  She sought evaluation and a mammogram in October 2021 was abnormal, and a breast MRI was recommended for optimal assessment.  MRI and MRI-guided biopsy in January 2022 led to a diagnosis of a clinical stage I HR+/*****- grade 1 IDC of the right breast.  Her evaluation and treatment to date are as follows:    09/26/20 Screening mammogram: asymmetry in upper right breast; left breast with clip (fibroadenoma, 2014)    10/02/20 Right diag mammo: no asymmetry in right breast, no mammographic features of malignancy    ***** ***** Developed right axillary pain    10/01/21 Bilat diag mammo: no correlate to palpable lump in right axilla; mass in upper right breast  Right breast US: no sonographic correlate to palpable lump in right axilla; no sonographic correlate to mass in upper right breast; follow up MRI recommended as mass is far posterior and not amenable to stereotactic core biopsy    01/29/22 Breast MRI: mass (0.9 x 0.7 cm) in ***** of right breast, ***** with mass on mammogram; left breast unremarkable; axillae unremarkable    02/05/22 MRI-guided core biopsy of UIQ of right breast: 0.8 cm grade 1 IDC with ER+ 99%, PR+ 95%, *****- (IHC 0; FISH ratio 1.1), *****-67 3-4%, no *****, no DCIS    03/22/22 Right lumpectomy/*****: 0.9 cm grade 1 IDC, no *****, margins negative, no DCIS, 0/3 LN+    Presents to clinic alone today.  Has history of chronic pain (shoulder, neck, clavicle) for over at least 5 years.  Reports very tight muscles.    Has found the process of grieving over her breast cancer diagnosis to be more difficult than expected.  Has used the ***** app to help with rumination over dark thoughts.    Gynecologic History: Menarche at 11. Took OCP <1 year; later \n used DepoProvera. She is *****. No breast-feeding. First pregnancy at 25 years. Menopause at 40; partial *****.  No history of HRT.     Has taken black cohosh and red ***** for hot flashes.  Also takes vitamin D, Calcium, Biotin, and ginger root.    Social History: Works in customer service; up until breast surgery was walking 3 miles 3 days a week.  Lost ~100 pounds with bariatric surgery.    Past Medical History:   Diagnosis Date   \u0007 Adenomyosis 2002    with menometrorrhagia and pelvic pain; s/p supracervical hysterectomy   \u0007 Allergy     Seasonal allergies   \u0007 Anemia    \u0007 Anemia    \u0007 Anxiety 2006    Because of depression   \u0007 Asthma 07/27/2020   \u0007 Breast cancer (CMS code) 03/04/2022   \u0007 Chronic back pain    \u0007 Chronic left-sided low back pain with left-sided sciatica 05/08/2020   \u0007 CKD, stage II (GFR 60-89 ml/min) 10/30/2020   \u0007 Depression     on meds   \u0007 GERD (gastroesophageal reflux disease)    \u0007 History of DVT 07/27/2020   \u0007 HLD (hyperlipidemia)     on meds   \u0007 HTN (hypertension)     on meds   \u0007 Prediabetes 03/17/2017    Hemoglobin A1c (PERCENT) Date Value 02/03/2017 5.4    \u0007 Vitamin D deficiency      Past Surgical History:   Procedure Laterality Date   \u0007  ENDO ADULT EGD WITH ULTRASOUND (N/A ); ENDO ADULT EGD EUS-FNA (N/A )  04/30/2016   \u0007 BACK SURGERY  08/21/2021    Have to check mychart   \u0007 CESAREAN SECTION  1986   \u0007 CESAREAN SECTION  1994   \u0007 COLONOSCOPY     \u0007 HERNIA REPAIR  Early 1960's    ***** ***** surgery   \u0007 HYSTERECTOMY  2002    Supracervical   \u0007 lap sleeve gastrectomy      preop weight 258 lbs   \u0007 TONSILLECTOMY  1970   \u0007 TUBAL LIGATION  1996   \u0007 UMBILICAL HERNIA REPAIR  1966      Family History   Problem Relation Name Age of Onset   \u0007 Diabetes Mother ***** *****. *****         Age 76   \u0007 Hypertension Mother ***** *****. *****    \u0007 Depression Mother ***** *****. *****    \u0007 Stroke Mother ***** *****. *****         *****   \u0007 Arthritis Mother ***** *****. *****         Hip   \u0007 Cataracts Mother ***** *****. *****    \u0007 Colon \n polyps Mother ***** *****. *****         Found a couple they were removed negative findings   \u0007 Other (Other) Mother ***** *****. *****    \u0007 Cirrhosis Father ***** *****    \u0007 Prostate cancer Father ***** *****         Deceased   \u0007 Alcohol abuse Father ***** *****    \u0007 Early death Father ***** *****    \u0007 Alcoholism Father ***** *****         *****   \u0007 Diabetes Paternal Grandmother ***** *****         Deceased   \u0007 Other (Thyroid Problems) Sister          hole in heart?   \u0007 Drug abuse Brother          Crack   \u0007 Other (Kidney problem ?cyst) Brother     \u0007 Heart attack Brother  46   \u0007 Diabetes Maternal Aunt     \u0007 Diabetes Maternal Uncle     \u0007 Diabetes Maternal Grandmother     \u0007 Diabetes Paternal Aunt ***** *****         Deceased   \u0007 Depression Sister ***** *****    \u0007 Other (heart problem) Sister ***** *****    \u0007 Melanoma Neg Hx     \u0007 Basal cell carcinoma Neg Hx     \u0007 Squamous cell carcinoma Neg Hx     \u0007 Anesth problems Neg Hx     \u0007 Bleeding disorder Neg Hx     \u0007 Amblyopia Neg Hx     \u0007 Blindness Neg Hx     \u0007 Glaucoma Neg Hx     \u0007 Keratoconus Neg Hx     \u0007 Macular degen Neg Hx     \u0007 Retinal detachment Neg Hx     \u0007 Strabismus Neg Hx     \u0007 Breast cancer Neg Hx       Outpatient Encounter Medications as of 04/17/2022   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 2 tablets (1,000 mg total) by mouth every 6 (six) hours as needed for Pain (Moderate pain) (Patient taking differently: Take 1,000 mg by mouth every 6 (six) hours as needed for Pain (Moderate pain) Taking 6 pills every 6 hours  ) 100 tablet 0   \u0007 amLODIPine (NORVASC) 5 mg tablet TAKE 1 TABLET BY MOUTH DAILY FOR BLOOD PRESSURE (Patient taking differently: Take 5 mg by mouth every morning   ) 90 tablet 0   \u0007 artificial tears (TEARS RENEWED) ophthalmic solution Place 1 drop into both eyes 3 (three) times daily as needed (dry eyes) 30 mL 1   \u0007 ascorbic acid, vitamin C, (VITAMIN C) 1,000 mg tablet Take 1,000 mg by \n mouth daily     \u0007 baclofen (LIORESAL) 10 mg tablet TAKE 1 TABLET BY MOUTH THREE TIMES A DAY 270 tablet 1   \u0007 BARIATRIC MULTIVITAMINS 45 mg iron- 800 mcg-120 mcg capsule TAKE 1 CAPSULE BY MOUTH EVERY NIGHT ***** ***** (Patient taking differently: every morning   ) 30 capsule 0   \u0007 biotin 10,000 mcg CAP Take 1 capsule by mouth Daily.     \u0007 busPIRone (BUSPAR) 30 mg tablet Take 1 tablet (30 mg total) by mouth 2 (two) times daily. ***** this medication for 3 months.     \u0007 calcium citrate-vitamin D 315 mg-5 mcg (200 unit) tablet TAKE 2 TABLETS BY MOUTH TWICE A DAY 100 tablet 3   \u0007 diclofenac (VOLTAREN) 1 % gel APPLY TO AFFECTED AREA 4 TIMES A DAY (Patient taking differently: Twice a day   ) 100 g 11   \u0007 docusate sodium (COLACE) 100 mg capsule Take 1 capsule (100 mg total) by mouth 2 (two) times daily as needed for Constipation (Patient not taking: Reported on 04/08/2022  ) 60 capsule 1   \u0007 DULoxetine (CYMBALTA) 60 mg DR ***** Take 60 mg by mouth Twice a day.      \u0007 ELDERBERRY ***** ORAL Take 630 mg by mouth every morning        \u0007 fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray SPRAY 2 SPRAYS INTO EACH NOSTRIL EVERY DAY (Patient not taking: Reported on 03/13/2022) 48 mL 3   \u0007 gabapentin (NEURONTIN) 300 mg capsule TAKE 3 CAPSULES BY MOUTH 3 TIMES DAILY. 270 capsule 0   \u0007 lamoTRIgine (LAMICTAL) 200 mg tablet Take 1 tablet (200 mg total) by mouth nightly at bedtime. ***** this medication for 3 months.     \u0007 lamoTRIgine (LAMICTAL) 25 mg tablet Take 2 tablets (50 mg total) by mouth every evening. ***** this medication for 3 months. (Patient not taking: Reported on 03/29/2022  )     \u0007 LORazepam (ATIVAN) 0.5 mg tablet Take 1 tablet (0.5 mg total) by mouth every 30 (thirty) minutes as needed for Anxiety (prior to imaging study or procedure) for up to 2 doses 2 tablet 0   \u0007 losartan (COZAAR) 50 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY (Patient taking differently: every morning   ) 90 tablet 3   \u0007 lurasidone (LATUDA) 80 \n mg tablet Take 1 tablet (80 mg total) by mouth every evening. ***** this medication for 3 months.     \u0007 omeprazole (PRILOSEC) 20 mg capsule TAKE 1 CAPSULE BY MOUTH EVERY DAY 90 capsule 3   \u0007 prazosin (MINIPRESS) 1 mg capsule Take 2 mg by mouth nightly at bedtime.      \u0007 pregabalin (*****) 75 mg capsule Take 1 capsule (75 mg total) by mouth 3 (three) times daily Replaces gabapentin for pain 90 capsule 0   \u0007 rosuvastatin (CRESTOR) 20 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY (Patient taking differently: TAKE 1 TABLET BY MOUTH EVERY morning  ) 90 tablet 11   \u0007 TURMERIC ORAL Take 1,000 mg by mouth Daily        \u0007 UNABLE TO FIND 1,500 mg daily after dinner Take 1 daily  CBD *****     \u0007 zinc gluconate 50 mg tablet Take 50 mg by mouth daily       No facility-administered encounter medications on file ***** of 04/17/2022.     Allergies/Contraindications   Allergen Reactions   \u0007 Atorvastatin Nausea Only   \u0007 *****    \u0007 Nsaids (Non-Steroidal Anti-Inflammatory Drug)       Physical Exam:   ECOG Performance Status - 1 - Symptomatic but completely ambulatory  Vital signs - ***** (!) *****/*****  | Pulse 82  | Temp 36.4 C (97.6 F) (Temporal)  | Resp 16  | Ht 168.3 cm (5' 6.26\") Comment: January 2022 @ ***** | Wt 81.1 kg (178 lb 12.8 oz)  | LMP  (LMP Unknown)  | SpO2 100%  | BMI 28.63 kg/m   Constitutional - WDWN, NAD  Eyes - sclera anicteric  HENT - wearing mask   Lymph Nodes - no cervical, supraclavicular, or axillary lymphadenopathy  Respiratory - resonant to percussion throughout  Breast - no masses bilaterally  GI - soft, *****, no hepatomegaly  Musculoskeletal - No tenderness over spine  Neurologic - ambulates w/o difficulty, good strength throughout  Psychiatric - Mood appropriate  Skin - warm without rashes or lesions    Studies:  Available labs, pathology, and imaging were reviewed and independently interpreted, as described above in the HPI.  Lab Results   Component Value Date    WBC Count 4.3 08/03/2021    Hemoglobin 15.3 08/03/2021    \n Hematocrit 48.8 (H) 08/03/2021    Platelet Count 217 08/03/2021     Lab Results   Component Value Date    Sodium, Serum / Plasma 145 09/26/2021    Potassium, Serum / Plasma 4.0 09/26/2021    Chloride, Serum / Plasma 109 09/26/2021    Carbon Dioxide, Total 26 09/26/2021    Urea Nitrogen, Serum / Plasma 15 09/26/2021    Creatinine 1.02 09/26/2021    Glucose, non-fasting 72 09/26/2021     Lab Results   Component Value Date    Calcium, total, Serum / Plasma 10.0 09/26/2021     Lab Results   Component Value Date    AST 37 08/03/2021    Alanine transaminase 49 08/03/2021    Alkaline Phosphatase 67 08/03/2021    Bilirubin, Total 0.7 08/03/2021    Albumin, Serum / Plasma 3.9 08/03/2021     Assessment and Recommendations:  60 y.o. postmenopausal patient with a recent diagnosis of a Stage ***** *****+/*****- grade 1 IDC of the right breast, for whom I recommend 5 years of anti-estrogen therapy with an aromatase inhibitor.     I discussed with the patient the natural history and treatment of Stage ***** *****+/*****- breast cancer.  We reviewed her pathology and imaging reports.  I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.     She will need a DEXA at this time to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and \n vitamin D. We also discussed the importance of aerobic activity (150 minutes a week).    I expect that she will proceed with radiation.  We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** start.  She stated clear understanding and was in agreement with this plan.       Recommendations in *****:  - proceed with radiation oncology consultation; ***** ***** she will have radiation  - obtain DEXA   - calcium/vitamin D  - aim to resume her daily aerobic activities    RTC after radiation course is completed    I spent a total of 90 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.  \n",
+      "assessment_and_plan": "Assessment and Recommendations:  60 y.o. postmenopausal patient with a recent diagnosis of a Stage ***** *****+/*****- grade 1 IDC of the right breast, for whom I recommend 5 years of anti-estrogen therapy with an aromatase inhibitor.     I discussed with the patient the natural history and treatment of Stage ***** *****+/*****- breast cancer.  We reviewed her pathology and imaging reports.  I explained that there is a small, but serious risk of distant, metastatic recurrence even after optimal local control, which can be reduced with the addition of anti-estrogen therapy that is given to eradicate micrometastatic deposits of tumor. I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with *****+/*****- breast cancer is an aromatase inhibitor (*****), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an ***** for at least 5 years.     She will need a DEXA at this time to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and \n vitamin D. We also discussed the importance of aerobic activity (150 minutes a week).    I expect that she will proceed with radiation.  We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** start.  She stated clear understanding and was in agreement with this plan.       Recommendations in *****:  - proceed with radiation oncology consultation; ***** ***** she will have radiation  - obtain DEXA   - calcium/vitamin D  - aim to resume her daily aerobic activities    RTC after radiation course is completed    I spent a total of 90 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.  \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Patient with a recent diagnosis of early stage breast cancer, specifically clinical stage I HR+/HER2- grade 1 IDC of the right breast, presents to discuss treatment options and establish care."
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+          "Stage_of_Cancer": "Stage I HR+/HER2- grade 1 IDC",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "Hemoglobin 15.3, Hematocrit 48.8, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calcium 10.0, AST 37, Alanine transaminase 49, Alkaline Phosphatase 67, Bilirubin 0.7, Albumin 3.9",
+          "findings": "The patient has a 0.9 cm grade 1 IDC, no lymph nodes involved, margins negative, no DCIS."
+        },
+        "Treatment_Summary": {
+          "current_meds": "aromatase inhibitor, baclofen, pregabalin, rosuvastatin, omeprazole, prazosin, lurasidone, duloxetine, acetaminophen, amLODIPine, artificial tears, ascorbic acid, biotin, diclofenac, docusate sodium, fluticasone, gabapentin, losartan, pregabalin, TURMERIC, zinc gluconate",
+          "recent_changes": "switched from gabapentin to pregabalin",
+          "supportive_meds": "artificial tears, ascorbic acid, biotin, diclofenac, fluticasone"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "curative",
+          "response_assessment": "The patient has a 0.9 cm grade 1 IDC, no lymph nodes involved, margins negative, no DCIS."
+        },
+        "Medication_Plan_chatgpt": {
+          "hormonal therapy": {
+            "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+            "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+            "Long term side_effects_discussed": "bone density loss"
+          },
+          "radiotherapy": {
+            "summary": "will proceed with radiation",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "bone therapy": {
+            "summary": "calcium and vitamin D to improve bone health",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "bowel regimen": {
+            "summary": "calcium and vitamin D",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "pain medication": {
+            "summary": "",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "psychiatry medication": {
+            "summary": "",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "other treatment": {
+            "summary": "DEXA to assess current bone health",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "The patient will take an aromatase inhibitor for 5 years. She will also take calcium and vitamin D. She will have radiation."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "The patient will take an aromatase inhibitor for 5 years. She will have radiation."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "will proceed with radiation"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Radiation oncology",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "RTC after radiation course is complete"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
