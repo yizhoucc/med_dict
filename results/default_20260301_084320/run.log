@@ -13849,3 +13849,65 @@ The value for "goals_of_treatment" is correct, as the note mentions that the pat
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Not responding well to treatment"
   Extraction prompts: 63.1s
+    Medication_Plan_chatgpt: 47.9s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Weekly Paclitaxel and Trastuzumab x 12 weeks followed by Trastuzumab every 3 weeks for an additional 9 months",
+    "Short term side_effects_discussed": "not ment
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'bowel regimen', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'bowel regimen', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "Patient will start Paclitaxel and Trastuzumab x 12 weeks followed by Trastuzumab every 3 weeks for an additional 9 months. Mediport placement is also planned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Patient will start Paclitaxel and Trastuzumab x 12 weeks fol" -> "Patient will start Paclitaxel and Trastuzumab x 12 weeks fol"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 6.1s
+      [EXTRACT] raw={
+  "therapy_plan": "Patient will start chemotherapy with Paclitaxel and Trastuzumab x 12 weeks followed by Trastuzumab every 3 weeks for an additional 9 months. Plan to discuss radiotherapy with radi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "plan to discuss with radiation oncology Dr. ***** today at 3pm"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.6s
+      [EXTRACT] raw={
+  "procedure_plan": "wire-localized partial mastectomy, mediport placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.9s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI Breast from 01/15/2021"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
