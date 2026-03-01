@@ -3,7 +3,9 @@
   "seed": 42,
   "completed_indices": [
     0,
-    1
+    1,
+    2,
+    3
   ],
   "results": {
     "0": {
@@ -166,6 +168,196 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "2 weeks"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "2": {
+      "coral_idx": 142,
+      "note_text": "Medical Oncology Consult Note  Video Consult    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  02/12/1968   Date of Visit:  08/31/2021  Provider:  ***** ***** *****  Primary Care Provider:  Name Unknown Provider  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS code)         I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     53 year old female with a mammogram detected right breast cancer.  She had a right breast and axillary lymph node that were positive for HR+ her 2 neu negative IDC ( 1.7 cm on imaging at 10 o clock with a 1.5 cm lymph node,  *****, HR+, her 2 2+, fish negative.  ***** 67 30-35%) and she saw Dr. ***** ***** who recommended neoadjuvant therapy.  She has had several opinions and is here for a medical oncology consult.     She is scheduled for a pet ct and genetic testing.  She had an echo yesterday.   She reports being pre *****.  ***** ***** has been sent and is pending.  We discussed how she does not qualify for ISPY. She lives by ***** but is deciding where to be treated.      Oncologic history    Stage at *****:  Cancer Staging  Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: Stage IIA (*****, *****, *****, *****, ER+, PR+, *****-) - Signed by ***** ***** *****, DO on 08/20/2021      Medications:  No current outpatient medications on file.    Allergies: Allergies/Contraindications  No Known Allergies    Medical History:   Past Medical History:   Diagnosis Date   \u0007 Hyperlipidemia    \u0007 Pre-diabetes        Surgical History: History reviewed. No pertinent surgical \n history.    Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Not on file   Substance and Sexual Activity   \u0007 Alcohol use: Never   \u0007 Drug use: Never   \u0007 Sexual activity: Not on file   Social History Narrative   \u0007 Not on file       *****:  *****     ***** Status: single     Gynecologic History:  G 0 P 0 AB 0    Menarche 10  Menopause  50   OCP 0 years HRT 0 years   Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Leukemia Father     \u0007 Breast cancer Paternal Aunt  60   \u0007 Breast cancer Maternal Aunt                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    08/31/21 1500   *****:  0       Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.    Lifestyle:  Exercise walks occasionally  Diet moderate sweet tooth.  Sleep:  5-6 hours takes ***** 5 mg.   Stress: medium     Psychologic/emotional well-being/support  She has good support.     Assessment / Plan:    1. Stage IIA right IDC of the breast 1.7 cm, node positive, HR+, her 2 neu negative by FISH.    2. ***** sent and is pending. We discussed the role of chemotherapy to decrease the risk of \n systemic recurrence.  3.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  4.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.   6.  Genetic testing sent and is pending.   7.  ***** follow up after pet and ***** are back.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.        \n",
+      "assessment_and_plan": "Assessment / Plan:    1. Stage IIA right IDC of the breast 1.7 cm, node positive, HR+, her 2 neu negative by FISH.    2. ***** sent and is pending. We discussed the role of chemotherapy to decrease the risk of \n systemic recurrence.  3.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  4.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.    5.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.   6.  Genetic testing sent and is pending.   7.  ***** follow up after pet and ***** are back.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.        \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "Yes",
+          "in-person": "Televisit"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive",
+          "Stage_of_Cancer": "Stage IIA",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "53 year old female with a 1.7 cm IDC in the right breast and a 1.5 cm lymph node, HR+, HER2 negative"
+        },
+        "Treatment_Summary": {
+          "current_meds": "",
+          "recent_changes": "",
+          "supportive_meds": ""
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence, the role of surgery and radiation to decrease the risk of local recurrence, the role of hormonal blockade to decrease the risk of systemic recurrence, and lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction",
+          "response_assessment": ""
+        },
+        "Medication_Plan_chatgpt": {
+          "chemotherapy": {
+            "summary": "discussed the role of chemotherapy to decrease the risk of systemic recurrence",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "hormonal therapy": {
+            "summary": "discussed the role of hormonal blockade to decrease the risk of systemic recurrence",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "radiotherapy": {
+            "summary": "discussed the role of surgery and radiation to decrease the risk of local recurrence",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "bowel regimen": {
+            "summary": "recommend an anti inflammatory and/or diabetes risk reducing diet",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "pain medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "psychiatry medication": {
+            "summary": null,
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "other treatment": {
+            "summary": "limiting alcohol, exercise, stress reduction and sleep management",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "discussed the role of chemotherapy, hormonal blockade, surgery and radiation to decrease the risk of recurrence, recommend an anti inflammatory and/or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "discussed the role of chemotherapy to decrease the risk of systemic recurrence, discussed the role of surgery and radiation to decrease the risk of local recurrence, discussed the role of hormonal blockade to decrease the risk of systemic recurrence"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "discussed the role of surgery and radiation to decrease the risk of local recurrence"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "surgery pending"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "PET and MRI pending"
+        },
+        "Lab_Plan": {
+          "lab_plan": "genetic testing pending"
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "genetic testing sent and is pending"
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "genetic testing",
+          "Specialty": "Radiation oncology",
+          "Others": "None",
+          "follow up": "follow up after PET and genetic testing are back"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "follow up after PET and genetic testing are back"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "3": {
+      "coral_idx": 143,
+      "note_text": "This is an independent visit      SUBJECTIVE    ***** ***** is a 75 y.o. female with ER+/PR+/***** negative left breast invasive ductal carcinoma. On 10/29/16 she underwent a left mastectomy with SLN biopsy. She is currently on Letrozole since 12/02/2016.     She is accompanied today by her son, *****. An in-person interpreter was also present who provided language assistance during this visit.     She is feeling well today. No new symptoms since last visit visit. She continues to take Letrozole daily.     She received physical therapy treatment and she reports that the pain on the left upper back, left arm, and left leg are better. She doesn't take anything for pain. She continues to use the Chinese herb pain patch as needed which helps. She feels the pain is related to her arthritis.     The hot flashes are less now.     Eating good. She doesn't sleep much at night which she feels is related to aging.     She continues to do exercises - stretching at home, sometimes does walking.     No shortness of breath. She has occasional cough which she feels is allergy related.     The muscle cramps continue, mostly at night, better when she stretches/exercise more.     No stomach pain. Sometimes certain foods can cause stomach discomfort. No nausea and vomiting. Stools are loose. Whenever she eats, she has a bowel movements. Sometimes have loose BMs 2-3x a day. She has constipation at times so she eats lots of vegetables. She's unable to tolerate dairy.    She gets left sided temporal headaches often, not everyday but occurs usually after breakfast. Headaches improves with applying chinese/peppermint oil and nap. No changes with vision. She's had this for over 10 years.       ROS  Positive for improved joint aches, occasional cough, loose stools, constipation, occasional headaches.   Constitutional: Negative for fever, chills, diaphoresis, appetite change, +fatigue and unexpected weight change.   HENT: Negative for hearing loss, \n nosebleeds, congestion, sore throat, mouth sores, neck pain, sinus pressure, or tinnitus.    Eyes: Negative for photophobia, pain, discharge, redness, itching and visual disturbance.   Respiratory: Negative for apnea, chest tightness, shortness of breath, wheezing.  Cardiovascular: Negative for chest pain, palpitations and leg swelling.   Gastrointestinal: Negative for nausea, vomiting, blood in stool, or abdominal distention.   Genitourinary: Negative for dysuria, urgency, frequency, hematuria, vaginal bleeding or discharge or difficulty urinating.   Musculoskeletal: Negative for +myalgias, back pain, joint swelling, or +arthralgias.   Skin: Negative for itching or rash.   Neurological: Negative for neuropathy, dizziness, tremors, seizures, syncope, speech difficulty, weakness, light-headedness, numbness  Hematological: Negative for adenopathy. Does not bruise/bleed easily.   Psychiatric/Behavioral: Negative for suicidal ideas, +sleep disturbance, decreased concentration.   Remaining systems were reviewed and are negative.    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, left (HCC) 10/29/2016     July 2016 : Presented with palpable mass to left breast.  07/16/2016: Mammogram of left breast showed a mass at inframammary fold at 6 o'clock, 5 cm from the nipple. No findings to suggest malignancy in the right breast.  07/30/2016: Left breast ultrasound 1.3 cm hypoechoic mass at 6 o'clock 5 cm from the nipple, measuring 1.2 x 1.3 x 1.1 cm.  09/02/2016: Left breast core biopsy and clip placement,6 o'clock, revealed grade 3 invasive ductal carcinoma estrogen receptor positive/progesterone receptor positive/ HER-2 negative  10/29/2016: Left Simple Mastectomy with SLN biopsy:  2.8 cm grade 2 IDC (*****+/***** 2+ by IHC but FISH negative).     \u0007 HTN (hypertension) 10/20/2016   \u0007 Hypercholesteremia 10/20/2016     Past Medical History:   Diagnosis Date   \u0007 Allergic rhinitis     takes OTC allergy medication   \u0007 \n Breast cancer (HCC)    \u0007 Hepatitis A    \u0007 Hypercholesterolemia    \u0007 Hyperlipidemia    \u0007 Hypertension      Past Surgical History:   Procedure Laterality Date   \u0007 CATARACT SURGERY, NON-PHACO/IOL Bilateral    \u0007 COLONOSCOPY     \u0007 MASTECTOMY Left 10/29/2016           Current Outpatient Medications:   \u0007  aspirin 81 mg EC tablet, Take 81 mg by mouth Daily., Disp: , Rfl:   \u0007  CALCIUM CARBONATE (CALCIUM 500 ORAL), Take by mouth 2 (two) times daily., Disp: , Rfl:   \u0007  cholecalciferol, vitamin D3, 1000 UNITS TAB tablet, Take 1,000 Units by mouth Daily., Disp: , Rfl:   \u0007  letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth Daily., Disp: 30 tablet, Rfl: 11  \u0007  loratadine (CLARITIN) 10 mg tablet, Take 10 mg by mouth Daily., Disp: , Rfl:   \u0007  metoprolol succinate (TOPROL-XL) 50 mg 24 hr tablet, Take 50 mg by mouth Daily., Disp: , Rfl:   \u0007  metoprolol tartrate (LOPRESSOR) 50 mg tablet, , Disp: , Rfl:   \u0007  pravastatin (PRAVACHOL) 40 mg tablet, nightly at bedtime. , Disp: , Rfl:     Gynecologic history: Menarche at 16. Patient is *****, first child was at 20. She has no use of HRT. Menopause was at age 45.    Social History     Social History Narrative    Widowed, lives with son    Walks about 30 minutes     Social History     Tobacco Use   Smoking Status Passive ***** Exposure - Never Smoker   Smokeless Tobacco Never Used     Social History     Substance and Sexual Activity   Alcohol Use No     Family History   Problem Relation Name Age of Onset   \u0007 Cancer Father          colon cancer   \u0007 Hypertension Mother     \u0007 Anesth problems Neg Hx     \u0007 Bleeding disorder Neg Hx         Physical Examination:     Vitals:    09/21/18 1358   BP: 118/59   Pulse: 72   Resp: 14   Temp: 36.6 C (97.8 F)   TempSrc: Temporal   SpO2: 97%   Weight: 48.8 kg (107 lb 9.6 oz)   Height: 147 cm (4' 9.87\")     ECOG - 1  General appearance -  well appearing, and in no distress  Mental status - normal mood, dress, motor activity, quite quiet \n and reserved affect  Eyes - pupils equal and reactive, extraocular eye movements intact  Mouth - mucous membranes moist, pharynx normal without lesions. Poor dentition.   Neck - supple, no significant adenopathy  Lymphatics - no palpable lymphadenopathy  Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate and regular rhythm, no murmurs noted  Abdomen - soft, nontender, nondistended, no masses or organomegaly  Breasts - Left mastectomy with no reconstruction. No suspicious nodules or masses noted.  Right breast without masses.  Back exam - full range of motion, no tenderness, palpable spasm or pain on motion  Neurological - cranial nerves II through XII intact, motor and sensory grossly normal bilaterally  Musculoskeletal - No point tenderness   Extremities - no pedal edema noted  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted    RESULTS    Please see Scanned Clinical Documents for Mammogram and Bone Density Scan last July 2018 at the Chinese Hospital.       Assessment and Plan:    ***** ***** is a 75 y.o. female with ER+/PR+/***** negative left breast invasive ductal carcinoma. On 10/29/16 she underwent a left mastectomy with SLN biopsy. She is currently on Letrozole since 12/02/2016.     1. Breast Cancer. The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. Her leg, upper back, and arm pain are better after completing physical therapy. We discussed alarming signs and symptoms and when to seek care. She will continue to take Letrozole 2.5 mg daily. She will continue annual right breast mammogram, next due July 2019 (Chinese Hospital *****).     2. Occasional muscle cramping, improved with stretching/exercises. Continue exercises and muscle stretching. She can consider taking OTC Magnesium supplement.     3. Upper left back pain due to muscle tightness. Recc heat, massage, and ibuprofen. This improved \n after completing physical therapy.     4. Left buttock and anterior thigh pain, stable and likely due to OA. Recc heat, massage, and ibuprofen. This improved after completing physical therapy.     5. Osteoporosis, currently on *****. The patient's baseline bone density scan showed osteoporosis in the low back. She had a repeat bone density scan last July 2018 which showed slight improvement of bone density at the femur neck with T-score (-2.4) now in the osteopenia range. The T-scores of her lumbar spine and femur are stable from last year which is in the osteopenia range. Advised patient to continue calcium and Vitamin D supplements and to continue weight bearing exercises. ***** continue monitor DEXA scan. If the patient's BMD falls below -2.5, she will need to see a dentist, then we could start the her on Prolia 60 mg SQ every 6 months. We can check again her DEXA in 1 year to assess change, due July 2019.     6. Headaches, intermittent, chronic: Seek care if worsening. Advised to follow-up with PCP. If worsening, consider brain MRI.     7. Loose stools, grade 1, mostly after meals. Discussed trying daily probiotics.        Follow up in 6 months or sooner if she has new or worsening symptoms.     I spent a total of 40 minutes face-to-face with the patient and 30 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options.         \n",
+      "assessment_and_plan": "Assessment and Plan:    ***** ***** is a 75 y.o. female with ER+/PR+/***** negative left breast invasive ductal carcinoma. On 10/29/16 she underwent a left mastectomy with SLN biopsy. She is currently on Letrozole since 12/02/2016.     1. Breast Cancer. The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. Her leg, upper back, and arm pain are better after completing physical therapy. We discussed alarming signs and symptoms and when to seek care. She will continue to take Letrozole 2.5 mg daily. She will continue annual right breast mammogram, next due July 2019 (Chinese Hospital *****).     2. Occasional muscle cramping, improved with stretching/exercises. Continue exercises and muscle stretching. She can consider taking OTC Magnesium supplement.     3. Upper left back pain due to muscle tightness. Recc heat, massage, and ibuprofen. This improved \n after completing physical therapy.     4. Left buttock and anterior thigh pain, stable and likely due to OA. Recc heat, massage, and ibuprofen. This improved after completing physical therapy.     5. Osteoporosis, currently on *****. The patient's baseline bone density scan showed osteoporosis in the low back. She had a repeat bone density scan last July 2018 which showed slight improvement of bone density at the femur neck with T-score (-2.4) now in the osteopenia range. The T-scores of her lumbar spine and femur are stable from last year which is in the osteopenia range. Advised patient to continue calcium and Vitamin D supplements and to continue weight bearing exercises. ***** continue monitor DEXA scan. If the patient's BMD falls below -2.5, she will need to see a dentist, then we could start the her on Prolia 60 mg SQ every 6 months. We can check again her DEXA in 1 year to assess change, due July 2019.     6. Headaches, intermittent, chronic: Seek care if worsening. Advised to follow-up with PCP. If worsening, consider brain MRI.     7. Loose stools, grade 1, mostly after meals. Discussed trying daily probiotics.        Follow up in 6 months or sooner if she has new or worsening symptoms.     I spent a total of 40 minutes face-to-face with the patient and 30 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options.         \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ left breast invasive ductal carcinoma",
+          "Stage_of_Cancer": "grade 2 IDC",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "No evidence of disease recurrence on imaging, exam, and review of systems"
+        },
+        "Treatment_Summary": {
+          "current_meds": "Letrozole 2.5 mg daily",
+          "recent_changes": "",
+          "supportive_meds": "Aspirin 81 mg, Calcium carbonate, Cholecalciferol (Vitamin D3) 1000 Units, Loratadine, Metoprolol succinate, Metoprolol tartrate, Pravastatin"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "The patient will continue to take Letrozole 2.5 mg daily to treat the breast cancer, and the goal is to prevent recurrence.",
+          "response_assessment": "The cancer is not mentioned as not responding or responding, but it is stated that the patient is without any evidence of disease recurrence on imaging, exam, and review of systems."
+        },
+        "Medication_Plan_chatgpt": {
+          "Hormonal therapy": {
+            "summary": "Letrozole 2.5 mg daily",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "Pain medication": {
+            "summary": "Ibuprofen",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "Bowel regimen": {
+            "summary": "Consider taking OTC Magnesium supplement",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "Bone therapy": {
+            "summary": "Continue calcium and Vitamin D supplements",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "Other treatment": {
+            "summary": "Prolia 60 mg SQ every 6 months (if BMD falls below -2.5)",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Continue Letrozole 2.5 mg daily, consider taking OTC Magnesium supplement, continue calcium and Vitamin D supplements"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Continue Letrozole"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "None"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "DEXA in 1 year, annual mammogram next due July 2019"
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "Follow up in 6 months or sooner if she has new or worsening symptoms."
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
