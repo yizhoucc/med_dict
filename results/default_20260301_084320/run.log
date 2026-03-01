@@ -12205,3 +12205,122 @@ Processing row 81 (82/100)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.0s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.5s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 2.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.6s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC after radiation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Full code"
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 105.5s
+  Row 81 total: 128.1s
+  Row 81 saved to progress
+
+Processing row 82 (83/100)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 2244 chars)
+  A/P extraction: 13.5s
+    Reason_for_Visit: 4.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Patient with breast cancer, lobular carcinoma with metastasis to right axilla, for medical oncology
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Patient with breast cancer, lobular carcinoma with metastasi" -> "Patient with breast cancer, lobular carcinoma with metastasi"
+      [G6-SEMANTIC] second opinion: "no" -> "yes"
+      [G6-SEMANTIC] summary: "Patient with breast cancer, lobular carcinoma with metastasis to right axilla, f" -> "Patient with breast cancer, lobular carcinoma with metastasis to right axilla, f"
+    What_We_Found: 7.3s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Lobular carcinoma, ER/PR status not mentioned",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "Yes, to right axilla",
+  "Metastasis": "Yes",
+  "lab_summa
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 6.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole",
+  "recent_changes": "",
+  "supportive_meds": "Buspirone, Carvedilol, Celecoxib, Gabapentin, Levothyroxine, Losartan, Sertraline, Zolpidem, Erythromycin, Metronidazole"
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "Pt started neoadjuvant therapy with letrozole under Dr *****"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 3.6s
+      [EXTRACT] raw={
+  "goals_of_treatment": "neoadjuvant",
+  "response_assessment": "Significant response to neoadjuvant therapy, with improved axillary nodes"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 22.2s
+    Medication_Plan_chatgpt: 12.0s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "continue neoadjuvant endocrine therapy with letrozole",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  }
+}
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
