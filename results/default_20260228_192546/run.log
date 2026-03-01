@@ -126,3 +126,12 @@ Processing row 4 (5/5)...
     Lab_Plan: 1.2s
     Genetic_Testing_Plan: 1.3s
     Referral: 2.3s
+    follow_up_next_visit: 0.8s
+    Advance_care_planning: 0.9s
+  Plan extraction prompts: 47.2s
+  Row 4 total: 61.4s
+  Row 4 saved to progress
+
+Total processing time: 306.1s (5.1min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_192546/
