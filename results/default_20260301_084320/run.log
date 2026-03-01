@@ -10202,3 +10202,110 @@ Processing row 68 (69/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 36.4s
+    Medication_Plan_chatgpt: 32.9s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "5-10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy",
+    "Short term side_effects_discussed": "not men
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 7.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "She will receive 5-10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy. She may receive chemotherapy, but this is not yet d
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "She will receive 5-10 years of hormonal therapy with an arom" -> "She will receive 5-10 years of hormonal therapy with an arom"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "She will receive 5-10 years of hormonal therapy with an aromatase inhibitor as a" -> "She will receive 5-10 years of hormonal therapy with an aromatase inhibitor as a"
+    Therapy_plan: 9.4s
+      [EXTRACT] raw={
+  "therapy_plan": "She will receive 5-10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy. If her cancer ends up being low risk, she may receive 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "not mentioned"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.5s
+      [EXTRACT] raw={
+  "procedure_plan": "PET/CT, repeat MRI breast and biopsy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "not mentioned"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Awaiting results of molecular profiling assay (ie. ***** *****)"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.8s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.9s
+      [EXTRACT] raw={
+  "Next clinic visit": "F/U with Dr. [name]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 67.0s
+  Row 68 total: 103.4s
+  Row 68 saved to progress
+
+Processing row 69 (70/100)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'ER positive', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1575 chars)
+  A/P extraction: 0.0s
