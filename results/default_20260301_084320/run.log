@@ -4612,3 +4612,41 @@ Processing row 31 (32/100)...
   Regex matched: 'Assessment / Plan:'
   Regex extraction succeeded (946 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 8.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for metastatic breast cancer, stage IIA, to change care to our clinic due to proximity to
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for metastatic breast cancer, stage IIA, to change" -> "Metastatic breast cancer, stage IIA, ambulatory referral to "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 21.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2+ invasive breast cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic",
+  "Distant Metastasis": "Yes, to lymph nodes of the left neck, chest, abdomen
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic" -> "Originally Stage IIA"
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally Stage IIA" -> "Originally Stage IIA, now metastatic"
+    Treatment_Summary: 11.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "trastuzumab (HERCEPTIN IV), exemestane, levothyroxine, loperamide",
+  "recent_changes": "switched from ***** to no ***** due to diarrhea",
+  "supportive_meds": "omeprazole, diphen
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "switched from ***** to no ***** due to diarrhea" -> "switched from ***** to no ***** due to an infusion reaction"
+    Goals_of_care: 7.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "No evidence of active disease on PET-CT, CR in June"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "No evidence of active disease on PET-CT, CR in June" -> "CR in June"
+  Extraction prompts: 49.6s
