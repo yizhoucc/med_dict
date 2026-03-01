@@ -14136,3 +14136,34 @@ Processing row 94 (95/100)...
       [G3-FAITH] Metastasis: "No" -> "Yes (to axillary lymph node)"
       [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> "AJCC stage not specified"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 13.5s
+      [EXTRACT] raw={
+  "current_meds": "Pembrolizumab and AC",
+  "recent_changes": "Patient is starting AC",
+  "supportive_meds": "Acetaminophen, gabapentin, ibuprofen, lidocaine-prilocaine, potassium chloride"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 8.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note" -> "The patient achieved a good response to NAC with 3 smallish "
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 46.9s
+    Medication_Plan_chatgpt: 45.2s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Pembrolizumab and other (not specified) arm, started 09/30/18, AC (adjuvant chemotherapy) started",
+    "Short term side_effects_discussed": "None mentioned",
+   
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
