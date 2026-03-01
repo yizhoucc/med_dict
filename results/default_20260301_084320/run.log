@@ -10499,3 +10499,22 @@ Processing row 70 (71/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is currently responding to neoadjuvant chemothera"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 22.2s
+    Medication_Plan_chatgpt: 40.0s [faith-restored-2keys, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor support followed by taxol given either in 4 doses of 175mg/m2 q2weeks or in 12 weekly doses 
+      [G1-FORMAT] ok, keys=['summary', 'Short term side_effects_discussed', 'Long term side_effects_discussed']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['summary', 'Short term side_effects_discussed', 'Long term side_effects_discussed']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] Long term side_effects_discussed: "1-2% incidence of cardiomyopathy and 0.5% incidence of secondary myeloid neoplas" -> ""
+      [G4-TEMPORAL] Short term side_effects_discussed: "nausea, vomiting, alopecia, immune suppression and infections, fatigue, neuropat" -> ""
+      [G4-TEMPORAL] summary: "4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor support fo" -> ""
+      [G6-SEMANTIC] chemotherapy: "{'Short term side_effects_discussed': 'nausea, vomiting, alopecia, immune suppre" -> "{'summary': '4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth fact"
+    Medication_Plan: 17.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "She will start 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor support followed by taxol given either in 4 doses of 175mg/m2 q2weeks or in 12 weekly doses
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "She will start 4 cycles of AC at 60/600 mg/m2 given every 2 " -> "She has already started on neo-adjuvant AC/taxol chemotherap"
+      [G4-TEMPORAL] medication_plan: "She has already started on neo-adjuvant AC/taxol chemotherapy. She will start 4 " -> "She will start 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth fa"
+      [G6-SEMANTIC] medication_plan: "She will start 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth fa" -> "She has already started on neo-adjuvant AC/taxol chemotherapy. She will start 4 "
