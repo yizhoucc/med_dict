@@ -361,3 +361,139 @@ Processing row 22 (3/20)...
       [G4-TEMPORAL] hormonal therapy: "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo" -> "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short"
       [G6-SEMANTIC] bone therapy: "{'summary': 'will discuss bone targeted therapies in the future', 'Short term si" -> "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the "
       [G6-SEMANTIC] hormonal therapy: "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short" -> "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo"
+    Medication_Plan: 6.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "Starting letrozole, a baseline DEXA will be ordered, and the patient will discuss bone targeted therapies in the future. The patient will maintain a calcium rich diet, take Vit
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Starting letrozole, a baseline DEXA will be ordered, and the" -> "Starting letrozole, a baseline DEXA will be ordered, and the"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "Starting letrozole, will discuss bone targeted therapies in the future, and if not able to tolerate, will switch to another aromatase inhibitor or tamoxifen."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Starting letrozole, will discuss bone targeted therapies in " -> "Starting letrozole, will discuss bone targeted therapies in "
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "baseline DEXA"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.7s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.5s
+      [EXTRACT] raw={
+  "Next clinic visit": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.6s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 49.0s
+  Row 22 total: 82.0s
+  Row 22 saved to progress
+
+Processing row 23 (4/20)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 7.4s [semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up visit for right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%),
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] summary: "Follow up visit for right breast Grade II micropapillary mucinous carcinoma, ER+" -> "Right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), "
+    What_We_Found: 9.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Grade II micropapillary mucinous carcinoma, ER+/PR+/HER2 equiv",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "No recent 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "No recent labs available." -> ""
+    Treatment_Summary: 10.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "oxyCODONE (ROXICODONE), acetaminophen-codeine (TYLENOL #4), acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), cyclobenzaprine (FLEXERIL), diclofenac (VOLTAREN), meloxicam (MOBIC)
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "oxyCODONE (ROXICODONE), acetaminophen-codeine (TYLENOL #4), acetaminophen (TYLEN" -> "oxyCODONE (ROXICODONE), acetaminophen-codeine (TYLENOL #4), acetaminophen (TYLEN"
+    Goals_of_care: 3.3s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The patient is s/p partial mastectomy with excision and axillary dissection and "
+  Extraction prompts: 31.5s
