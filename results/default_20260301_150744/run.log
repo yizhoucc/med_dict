@@ -396,3 +396,76 @@ Processing row 22 (3/20)...
   Regex matched: 'Assessment and Plan:'
   Regex extraction succeeded (2648 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 6.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "The patient is a 63-year-old female with high-grade DCIS (ER negative/weakly PR positive) and inv
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] summary: "The patient is a 63-year-old female with high-grade DCIS (ER negative/weakly PR " -> "The patient is a 63-year-old female with invasive carcinoma with ductal and lobu"
+      [G6-SEMANTIC] second opinion: "" -> "No"
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
+    Cancer_Diagnosis: 9.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH 5-10% invasive carcinoma with ductal and lobular features, ER negative/weakly PR + (1%) high grade DCIS",
+  "Stage_of_Can
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally 1 cm grade 2 invasive carcinoma, 0.7 cm focus of grade 2 invasive car" -> "Not specified"
+    Lab_Results: 2.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "Glucose, meter download: 105, 185, 236, 116 mg/dL"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Glucose, meter download: 105, 185, 236, 116 mg/dL" -> "Glucose, meter download: 70 - 199 mg/dL"
+      [G6-SEMANTIC] lab_summary: "Glucose, meter download: 70 - 199 mg/dL" -> "Glucose, meter download: 105 mg/dL, Glucose, meter download: 185 mg/dL, Glucose,"
+    Clinical_Findings: 7.1s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology results: 1 cm invasive lobular carcinoma, 0.7 cm invasive carcinoma with ductal and lobular features, intermediate and high grade DCIS, negative margins. Physical exam: left b
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Pathology results: 1 cm invasive lobular carcinoma, 0.7 cm i" -> "Pathology results: 1 cm grade 2 invasive lobular carcinoma, "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 11.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, Take 2 tablets (1,000"
+      [G6-SEMANTIC] current_meds: "acetaminophen (TYLENOL) 500 mg tablet, Take 2 tablets (1,000 mg total) by mouth " -> "acetaminophen (TYLENOL), atorvastatin (LIPITOR), cholecalciferol, docusate sodiu"
+    Treatment_Changes: 10.4s
+      [EXTRACT] raw={
+"recent_changes": "No recent changes mentioned.",
+"supportive_meds": [
+"acetaminophen (TYLENOL)",
+"atorvastatin (LIPITOR)",
+"cholecalciferol, vitamin D3",
+"docusate sodium (COLACE)",
+"ibuprofen (ADV
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
+    Response_Assessment: 4.1s [format-repaired, faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has undergone surgery (mastectomy and SLN Bx) but has not started any additional cancer treatment (chemo, endocrine therapy, targeted therapy, immunotherapy) yet. The note does not mention
+      [G1-FORMAT] repaired -> keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not applicable, as no treatment has been initiated." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "The patient's cancer is currently being assessed as low risk, with no evidence o"
+  Extraction prompts: 55.9s
