@@ -13,3 +13,29 @@ Processing row 0 (1/5)...
   Regex extraction succeeded (894 chars)
   A/P extraction: 0.0s
     Reason_for_Visit: 2.4s [faith-trimmed]
+    What_We_Found: 7.2s [faith-trimmed]
+    Treatment_Summary: 1.4s [faith-trimmed]
+    Goals_of_care: 1.9s [faith-trimmed]
+  Extraction prompts: 13.5s
+    Medication_Plan_chatgpt: 15.1s [faith-trimmed, temporal-cleaned]
+    Medication_Plan: 1.3s
+    Therapy_plan: 1.4s
+    radiotherapy_plan: 1.5s
+    Procedure_Plan: 2.2s
+    Imaging_Plan: 1.4s
+    Lab_Plan: 1.4s
+    Genetic_Testing_Plan: 1.3s
+    Referral: 2.5s
+    follow_up_next_visit: 1.0s
+    Advance_care_planning: 0.9s
+  Plan extraction prompts: 30.1s
+  Row 0 total: 43.5s
+  Row 0 saved to progress
+
+Processing row 1 (2/5)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 2.3s [faith-trimmed]
+    What_We_Found: 12.0s
