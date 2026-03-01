@@ -14,7 +14,7 @@ model:
 
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
-  row_range: [0, 10]
+  row_range: [0, 5]
 
 prompts:
   extraction: "prompts/extraction.yaml"

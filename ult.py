@@ -603,8 +603,19 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 
             cleaned_parsed = try_parse_json(cleaned_raw)
             if cleaned_parsed is not None:
-                # Only use cleaned version if it's different (model actually removed something)
-                if cleaned_parsed != parsed:
+                # Validate: cleaned result must have at least one key from original,
+                # or be a plausible plan output. Reject leaked artifacts like {"faithful": true}
+                original_keys = set(parsed.keys()) if isinstance(parsed, dict) else set()
+                cleaned_keys = set(cleaned_parsed.keys())
+                is_valid_plan = (
+                    # Has overlapping keys with original extraction
+                    bool(original_keys & cleaned_keys)
+                    # Or has a key that looks like a plan field (contains 'plan', 'summary', etc.)
+                    or any(k.lower().replace('_', '') in cleaned_keys or
+                           any(pk in k.lower() for pk in ['plan', 'summary', 'therapy', 'medication', 'procedure', 'imaging', 'lab'])
+                           for k in cleaned_keys)
+                )
+                if is_valid_plan and cleaned_parsed != parsed:
                     parsed = cleaned_parsed
                     answer = cleaned_raw
                     temporal_cleaned = True
