@@ -11527,3 +11527,29 @@ Processing row 77 (78/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Follow up for metastatic triple negative breast cancer, stag" -> "Patient has metastatic triple negative breast cancer, wishes"
       [G6-SEMANTIC] summary: "Patient has metastatic triple negative breast cancer, wishes to explore targeted" -> "Patient has metastatic triple negative breast cancer, stage not specified, to di"
+    What_We_Found: 22.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Triple negative breast cancer, ER-/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage not specified, now metastatic",
+  "Distant Metastasis": "Yes, to 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage not specified, now metastatic" -> "Originally de novo metastatic, now metastatic"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 10.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Capecitabine, gemcitabine, bevacizumab",
+  "recent_changes": "Gemcitabine discontinued due to progressive fatigue and development of pericardial effusion, dose reduction of bevaci
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "lisinopril, carvedilol, amLODIPine, cholecalciferol, ferrous" -> "lisinopril, carvedilol, amLODIPine, cholecalciferol, ferrous"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Worsening of metastatic disease, interval enlargement of hepatic and nodal metastases, new 7 mm nodule in the right middle lobe suspic
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Worsening of metastatic disease, interval enlargement of hepatic and nodal metas" -> "Not mentioned in note."
+  Extraction prompts: 42.2s
