@@ -9251,3 +9251,42 @@ Processing row 62 (63/100)...
   Regex matched: 'Assessment and Plan:'
   Regex extraction succeeded (3414 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 13.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "yes",
+  "in-person": "Televisit",
+  "summary": "Locally advanced ER+/PR-/HER2- left breast cancer, stage IIIA, seeking second opinion on treatment
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Locally advanced ER+/PR-/HER2- left breast cancer, stage III" -> "Locally advanced ER+/PR- left breast cancer, stage IIIA, see"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 19.5s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIIA (S/P neoadjuvant chemotherapy), now locally advanced",
+  "Distant Metastasis": "No",
+  "Met
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Patient is seeking a second opinion on treatment options aft" -> "Locally advanced ER+/PR-/HER2- left breast cancer, stage III"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 13.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole 2.5 mg tablet, Ondansetron 8 mg rapid dissolve tablet",
+  "recent_changes": "Paclitaxel held due to neutropenia, Paclitaxel held due to elevated transaminases",
+  "suppo
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "" -> "Ondansetron 8 mg rapid dissolve tablet"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 8.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is not responding as expected, as the patient's o"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 55.9s
