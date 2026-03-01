@@ -9566,3 +9566,34 @@ Processing row 64 (65/100)...
       [G3-FAITH] in-person: "Televisit" -> "Telehealth"
       [G3-FAITH] summary: "Follow up for right breast IDC with axillary LN involvement " -> "Recent diagnosis of right breast IDC which is ER weak positi"
       [G6-SEMANTIC] second opinion: "no" -> "yes"
+    What_We_Found: 12.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER weak positive (2%), PR low positive (7%), HER2 neg (IHC 2+, FISH 2.March 09.8=1.4) invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metast
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Right breast IDC with axillary LN involvement" -> "Right breast IDC with axillary LN involvement, 2.6 x 1.9 x 2"
+      [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> "Locally advanced disease with axillary LN involvement, no ev"
+      [G6-SEMANTIC] lab_summary: "" -> "WBC, HGB, HCT, MCV, PLT, ALB, ALKP, ALT, AST, TBILI, CL, CO2, CREAT, GLU, GTFC, "
+    Treatment_Summary: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": "fexofenadine (180 mg tablet), montelukast (10 mg tablet)"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "None"
+      [G3-FAITH] current_meds: "" -> "fexofenadine (180 mg tablet), montelukast (10 mg tablet)"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "neoadjuvant",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note" -> "No evidence of distant metastatic disease on PET/CT"
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 26.2s
