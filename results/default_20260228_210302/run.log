@@ -1788,3 +1788,48 @@ Processing row 13 (14/20)...
       [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 6.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Faslodex, Palbociclib, low dose chemo combination of Tamoxifen 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly, Metabolic therapy 2x/week, immunological vaccines once a 
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "Stopped Palbociclib and Fulvestrant, reduced dose of bone dr" -> "Stopped palbociclib and fulvestrant, reduced dose of bone dr"
+      [G3-FAITH] current_meds: "Faslodex, Palbociclib, low dose chemo combination of Tamoxif" -> "Faslodex, palbociclib, low dose chemo combination of Tamoxif"
+    Goals_of_care: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "Follow-up and management of metastatic ER+ breast cancer, extend the duration and maintain the quality of life",
+  "response_assessment": "Not specified"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not specified" -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+  Extraction prompts: 23.1s
+    Medication_Plan_chatgpt: 37.1s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "currently on low dose chemo combination of ***** 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week and gets immunolog
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+    Medication_Plan: 5.9s
+      [EXTRACT] raw={
+  "medication_plan": "continue topical cannabis and sulfur, Cymbalta, low dose chemo combination of ***** 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/we
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Therapy_plan: 5.8s
+      [EXTRACT] raw={
+  "therapy_plan": "continue topical cannabis and sulfur, Cymbalta, low dose chemo combination of ***** 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    radiotherapy_plan: 3.2s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "postoperative radiotherapy to the spine including T1 through T10 on *****/*****/*****-*****/*****/18, only received total of 6 treatments (supposed to get 10 total radiation 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
