@@ -2619,3 +2619,129 @@ Processing row 17 (18/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] current_meds: "" -> "adjuvant endocrine therapy"
+    Goals_of_care: 8.4s
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 37.2s
+    Medication_Plan_chatgpt: 20.9s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.3s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "strongly recommend adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "strongly recommend adjuvant endocrine therapy, 5-10 yrs, wit" -> "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+      [G4-TEMPORAL] medication_plan: "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen" -> "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+      [G6-SEMANTIC] medication_plan: "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen" -> "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+    Therapy_plan: 3.3s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "therapy_plan": "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxi" -> "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+      [G4-TEMPORAL] therapy_plan: "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen" -> "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+      [G6-SEMANTIC] therapy_plan: "will start adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen" -> "adjuvant endocrine therapy, 5-10 yrs, with Tamoxifen"
+    radiotherapy_plan: 1.6s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "RTC after Rad Onc eval +/- XRT"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] procedure_plan: "surgery pending" -> "No procedures planned."
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "DEXA ordered"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.0s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.6s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.4s [semantic-fixed]
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Next clinic visit: "RTC" -> "RTC after Rad Onc eval +/- XRT"
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 43.0s
+  Row 17 total: 90.5s
+  Row 17 saved to progress
+
+Processing row 18 (19/100)...
+  Injected 6 term definitions: ['progesterone receptor', 'adjuvant chemotherapy', 'neoadjuvant therapy', 'estrogen receptor', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Attempt 1 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 2...
+  Running LLM Sanity Check...
+  Attempt 2 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 3...
+  Running LLM Sanity Check...
