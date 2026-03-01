@@ -65,15 +65,21 @@ Goals_of_care: |
   - Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
   - Do NOT include future plans ("will start", "plan to", "she will have radiation").
   - Do NOT include treatment discussions or recommendations.
-  - If the patient is newly diagnosed and has NOT yet started treatment, write "Not yet on treatment — no response to assess."
-  - If there is no mention of disease status or treatment response anywhere in the note, write "Not mentioned in note."
+  - Do NOT use generic boilerplate phrases. Every claim must be traceable to a specific sentence in the note.
+  - Do NOT write "tolerating therapy well" or "symptoms improved" unless the note EXPLICITLY uses those exact words.
+  - Do NOT describe pathology results (tumor size, grade, margins) as a "response" — pathology is a diagnosis, not a treatment response.
+  - If the patient has NOT yet started any cancer treatment, write "Not yet on treatment — no response to assess."
+  - If the patient is on treatment but the note does not mention how the disease is responding, write "Not mentioned in note."
   - Do NOT write "Not applicable" or "Not specified".
   Examples:
   - GOOD: "CT stable, CA 15-3 decreased from 28 to 14"
   - GOOD: "no evidence of disease recurrence on imaging and exam"
-  - GOOD: "tolerating therapy well, symptoms improved"
+  - GOOD: "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases"
+  - GOOD: "supraclavicular area appears to be breaking up on exam"
+  - BAD: "tolerating therapy well, symptoms improved" (generic boilerplate — WHAT symptoms? WHAT evidence?)
   - BAD: "She will continue on letrozole and have radiation" (this is a plan, not a response)
   - BAD: "We discussed chemotherapy options" (this is a discussion, not a response)
+  - BAD: "0.9 cm grade 1 IDC, margins negative" (this is pathology, not treatment response)
 
   Respond *only* with a JSON object using this exact schema:
   {
