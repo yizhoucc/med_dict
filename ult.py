@@ -690,6 +690,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
     for key, task in prompts.items():
         key_start = time.time()
         flags = []
+        gate_log = []  # per-gate detailed log
 
         # --- Step 1: Extract ---
         task_prompt = (
@@ -703,6 +704,8 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         del returned_cache
         torch.cuda.empty_cache()
         gc.collect()
+
+        gate_log.append(f"      [EXTRACT] raw={answer[:200]}")
 
         # --- Gate 1: FORMAT ---
         parsed = try_parse_json(answer)
@@ -726,6 +729,11 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             if parsed is not None:
                 answer = repaired_answer
                 flags.append("format-repaired")
+                gate_log.append(f"      [G1-FORMAT] repaired -> keys={list(parsed.keys())}")
+            else:
+                gate_log.append(f"      [G1-FORMAT] repair FAILED, raw={repaired_answer[:150]}")
+        else:
+            gate_log.append(f"      [G1-FORMAT] ok, keys={list(parsed.keys())}")
 
         # --- Gate 2: SCHEMA ---
         if parsed is not None:
@@ -752,18 +760,29 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     parsed = fixed_parsed
                     answer = fixed_raw
                     flags.append("schema-fixed")
+                    gate_log.append(f"      [G2-SCHEMA] fixed: {actual_keys} -> {list(fixed_parsed.keys())}")
+                else:
+                    gate_log.append(f"      [G2-SCHEMA] fix FAILED, expected={sorted(expected_keys)}, got={actual_keys}")
+            else:
+                gate_log.append(f"      [G2-SCHEMA] ok")
 
         # --- Gate 3: FAITHFULNESS (trim mode) ---
         if verify and parsed is not None:
             original_keys = set(parsed.keys())
+            before_values = {k: str(v)[:80] for k, v in parsed.items()}
             faith_prompt = (
                 f"<|start_header_id|>user<|end_header_id|>\n\n"
                 f"Review this extraction against the original medical note in your context:\n"
                 f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
-                f"For each claim, check: is it explicitly stated or directly supported by the note?\n"
-                f"- If ALL claims are supported, return the JSON exactly unchanged.\n"
-                f"- If any claim is NOT supported, replace ONLY the unsupported value with "
-                f"an empty string. Do NOT remove any keys.\n"
+                f"For each key-value pair, check: is the value explicitly stated or directly "
+                f"inferable from the note?\n"
+                f"Rules:\n"
+                f"- KEEP the value if it is supported by the note, even if the wording differs slightly.\n"
+                f"- KEEP the value if it is a reasonable clinical summary of what the note says.\n"
+                f"- ONLY replace a value with an empty string if it contains information that "
+                f"clearly CONTRADICTS the note or is completely fabricated (not mentioned at all).\n"
+                f"- When in doubt, KEEP the original value.\n"
+                f"- Do NOT remove any keys. Return ALL original keys.\n"
                 f"Return ONLY the JSON object with all original keys preserved."
                 f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
@@ -783,14 +802,36 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                         cleaned_parsed[mk] = parsed[mk]
                     if missing_keys:
                         flags.append(f"faith-restored-{len(missing_keys)}keys")
-                    if cleaned_parsed != parsed:
+                    # Log per-field changes
+                    changed_fields = []
+                    emptied_fields = []
+                    for k in original_keys:
+                        old_val = parsed.get(k)
+                        new_val = cleaned_parsed.get(k)
+                        if old_val != new_val:
+                            old_s = str(old_val)[:60]
+                            new_s = str(new_val)[:60]
+                            changed_fields.append(k)
+                            if not new_val or new_val == "":
+                                emptied_fields.append(k)
+                            gate_log.append(f"      [G3-FAITH] {k}: \"{old_s}\" -> \"{new_s}\"")
+                    if changed_fields:
                         flags.append("faith-trimmed")
+                        if emptied_fields:
+                            gate_log.append(f"      [G3-FAITH] EMPTIED: {emptied_fields}")
+                    else:
+                        gate_log.append(f"      [G3-FAITH] no changes (all supported)")
                     parsed = cleaned_parsed
                     answer = json.dumps(cleaned_parsed, ensure_ascii=False)
+                else:
+                    gate_log.append(f"      [G3-FAITH] REJECTED (no key overlap), kept original")
+            else:
+                gate_log.append(f"      [G3-FAITH] parse FAILED, kept original")
 
         # --- Gate 4: TEMPORAL (plan keys only) ---
         if verify and parsed is not None and key in PLAN_KEYS:
             original_keys = set(parsed.keys())
+            before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
             temporal_prompt = (
                 f"<|start_header_id|>user<|end_header_id|>\n\n"
                 f"Review this extraction for a PLAN section:\n"
@@ -815,12 +856,22 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 if original_keys & cleaned_keys:
                     if cleaned_parsed != parsed:
                         flags.append("temporal-cleaned")
+                        for k in original_keys:
+                            if parsed.get(k) != cleaned_parsed.get(k):
+                                gate_log.append(f"      [G4-TEMPORAL] {k}: \"{before_g4.get(k,'')}\" -> \"{str(cleaned_parsed.get(k,''))[:80]}\"")
+                    else:
+                        gate_log.append(f"      [G4-TEMPORAL] no changes")
                     parsed = cleaned_parsed
                     answer = cleaned_raw
+                else:
+                    gate_log.append(f"      [G4-TEMPORAL] REJECTED (no key overlap)")
+            else:
+                gate_log.append(f"      [G4-TEMPORAL] parse FAILED")
 
         # --- Gate 5: SPECIFICITY (conditional) ---
         if verify and parsed is not None and _has_vague_terms(answer):
             original_keys = set(parsed.keys())
+            before_g5 = {k: str(v)[:80] for k, v in parsed.items()}
             specificity_prompt = (
                 f"<|start_header_id|>user<|end_header_id|>\n\n"
                 f"This extraction contains vague language. Replace vague terms with SPECIFIC "
@@ -846,8 +897,17 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 if original_keys & improved_keys:
                     if improved_parsed != parsed:
                         flags.append("specificity-improved")
+                        for k in original_keys:
+                            if parsed.get(k) != improved_parsed.get(k):
+                                gate_log.append(f"      [G5-SPECIFIC] {k}: \"{before_g5.get(k,'')}\" -> \"{str(improved_parsed.get(k,''))[:80]}\"")
+                    else:
+                        gate_log.append(f"      [G5-SPECIFIC] no changes")
                     parsed = improved_parsed
                     answer = improved_raw
+                else:
+                    gate_log.append(f"      [G5-SPECIFIC] REJECTED (no key overlap)")
+            else:
+                gate_log.append(f"      [G5-SPECIFIC] parse FAILED")
 
         # --- Store result ---
         if parsed is not None:
@@ -858,5 +918,8 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         elapsed = time.time() - key_start
         flag_str = f" [{', '.join(flags)}]" if flags else ""
         print(f"    {key}: {elapsed:.1f}s{flag_str}")
+        # Print gate details
+        for line in gate_log:
+            print(line)
 
     return keypoints
