@@ -529,3 +529,38 @@ Processing row 23 (4/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 15.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "will send surgical specimen for MP"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "will send surgical specimen for MP" -> "will send surgical specimen for MP, will schedule biopsy"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 15.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "imaging_plan": "will order a test"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] imaging_plan: "will order a test" -> "will order a test to evaluate benefit of chemotherapy"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 14.1s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 14.1s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
