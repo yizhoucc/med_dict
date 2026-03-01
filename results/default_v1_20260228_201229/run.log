@@ -93,3 +93,30 @@ Processing row 13 (4/5)...
     Goals_of_care: 4.4s [re-extracted]
   Extraction prompts: 27.8s
     Medication_Plan_chatgpt: 28.1s [re-extracted, temporal-cleaned]
+    Medication_Plan: 8.3s [re-extracted, temporal-cleaned]
+    Therapy_plan: 6.8s [re-extracted, temporal-cleaned]
+    radiotherapy_plan: 4.2s [re-extracted]
+    Procedure_Plan: 1.1s
+    Imaging_Plan: 1.7s
+    Lab_Plan: 1.1s
+    Genetic_Testing_Plan: 1.0s
+    Referral: 1.4s
+    follow_up_next_visit: 0.7s
+    Advance_care_planning: 0.7s
+  Plan extraction prompts: 55.2s
+  Row 13 total: 83.0s
+  Row 13 saved to progress
+
+Processing row 14 (5/5)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1465 chars)
+  A/P extraction: 8.6s
+    Reason_for_Visit: 1.7s
+    What_We_Found: 6.7s [re-extracted]
+    Treatment_Summary: 1.0s
+    Goals_of_care: 1.6s
+  Extraction prompts: 11.5s
+    Medication_Plan_chatgpt: 17.4s [re-extracted, temporal-cleaned]
