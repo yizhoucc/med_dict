@@ -622,3 +622,131 @@ Processing row 24 (5/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 13.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Xeloda 1500/1000mg 14 days and 7 days off, ixabepilone, denosumab, amiodipine, calcium, cholecalciferol, docusate sodium, ferrous fumarate, levetiracetam, metoprolol, ondansetron,
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "Xeloda 1500/1000mg 14 days and 7 days off, ixabepilone, deno" -> "Xeloda 1500/1000mg 14 days and 7 days off, ixabepilone, deno"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.8s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Patient is tolerating therapy well, symptoms improved"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 33.0s
+    Medication_Plan_chatgpt: 26.9s [temporal-cleaned]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone",
+    "Short term side_effects_discussed": "",
+    "Long term side_effects_discussed": ""
+  },
+  "bowel
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'bowel regimen', 'pain medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] other treatment: "{'summary': 'port placed on 9th prior to starting xeloda and just after irinotec" -> "{'summary': 'will start cycle again', 'Short term side_effects_discussed': '', '"
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.8s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Taking 1500/1000mg ixabepilone 14 days and 7 days off, Xeloda, ibuprofen, tylenol, oxycodone as needed, and will start cycle again with ixabepilone"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Taking 1500/1000mg ixabepilone 14 days and 7 days off, Xelod" -> "Taking 1500/1000mg ixabepilone 14 days and 7 days off, Xelod"
+      [G4-TEMPORAL] medication_plan: "Taking 1500/1000mg ixabepilone 14 days and 7 days off, Xeloda, ibuprofen, tyleno" -> "Xeloda, ibuprofen, tylenol, oxycodone as needed, will start cycle again with ixa"
+      [G6-SEMANTIC] medication_plan: "Xeloda, ibuprofen, tylenol, oxycodone as needed, will start cycle again with ixa" -> "Xeloda, ibuprofen, tylenol, oxycodone as needed"
+    Therapy_plan: 2.3s
+      [EXTRACT] raw={
+  "therapy_plan": "will start cycle again with ixabepilone"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.6s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.0s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.6s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.5s
+      [EXTRACT] raw={
+  "Next clinic visit": "in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.4s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 48.9s
+  Row 24 total: 81.9s
+  Row 24 saved to progress
+
+Processing row 25 (6/10)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (966 chars)
+  A/P extraction: 0.0s

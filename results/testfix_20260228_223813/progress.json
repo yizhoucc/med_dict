@@ -5,7 +5,8 @@
     20,
     21,
     22,
-    23
+    23,
+    24
   ],
   "results": {
     "20": {
@@ -323,6 +324,92 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "12/07/18"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "24": {
+      "coral_idx": 164,
+      "note_text": "SUBJECTIVE  Subjective  ***** ***** is a 45 y.o. female who presents with metastatic breast cancer on Xeloda 1500mg/1000mg 14 days and Irinotecan *****     HPI: On Xeloda 3 tablets in am and 2 tablets in pm. Currently on off week due to start 04/12/2011. Had constipation until last 4 days of cycle on xeloda. Denies hand and foot syndrome. Up and able to do more in the day. ***** on knitting project. In bed now 50% of the time. Denies going outside due to ***** hard to get up and down without assistance due to weakness. Denies dizziness or headache. Occasionally 1-2 times a month taking pain medication. Nausea and vomiting not a problem this cycle.Pain is happening in      Patient Active Problem List   Diagnoses Date Noted   \u0007 Breast cancer metastasized to multiple sites 01/28/2011     Priority: High     December 2006 patient had a mammogram and ultrasound of the right breast to evaluate a palpable mass.  In January 2007 patient underwent fine-needle aspiration that revealed invasive ductal carcinoma.  03/29/2007 the patient underwent a right lumpectomy and sentinel lymph node biopsy revealing a 3.5 cm invasive ductal carcinoma which was estrogen receptor positive, progesterone receptor positive, and HER-2/neu. Sentinel lymph node biopsy was positive and therefore the patient underwent a full axillary lymph node dissection on 04/12/2007 revealing April 07 lymph nodes positive.  The patient received 4 cycles of Adriamycin and Cytoxan followed by 4 cycles of Taxotere.  January 2008 the patient completed radiation to the right breast.  March 2008 the patient started adjuvant tamoxifen.  However she had a CT scan of the chest abdomen and pelvis that revealed an abnormality in the left breast.  08/23/2008 the patient underwent an MRI of bilateral breasts revealing a 12 mm mass in the lower inner quadrant of the left breast.  10/11/2008 the patient underwent left breast mammogram revealing a \n suspicious mass in the left breast.  10/30/2008 the patient underwent a fine-needle aspiration that revealed an invasive ductal carcinoma which was estrogen receptor positive, progesterone receptor negative, and HER-2/neu negative.  12/18/2008 the patient underwent a left breast lumpectomy and sentinel lymph node biopsy.  Pathology revealed a 1.5 cm grade 3 invasive ductal carcinoma which was estrogen receptor positive, progesterone receptor negative, and HER-2 negative by immunohistochemistry.  One out of the 3 sentinel lymph nodes was positive.  In December 2008 the patient had a completion axillary lymph node dissection and only 2 lymph nodes were seen both negative for cancer.  In January 2009, the patient initiated chemotherapy with Cytoxan, methotrexate, and 5-*****.  She also started Lupron at this time.  The patient underwent genetic testing and was negative for BRCA1 and 2.  08/27/2009 the patient underwent a CT scan of the chest abdomen and pelvis revealing enhancing tissue in the right anterior breast, a sclerotic focus in the left sacral ala, and a new sclerotic focus in the right anterior superior acetabulum. A bone scan on 09/04/2009 revealed no uptake to suggest osseous metastasis.  09/12/2009 the patient initiated postoperative radiation to the left breast, supraclavicular, and axillary regions receiving 1800 cGY to these regions.  09/20/2009, the patient underwent a core biopsy of a mass in the 12:00 position of the right breast which revealed a grade 1 invasive ductal carcinoma.  11/08/2009, the patient underwent a PET CT scan at ***** revealing skin thickening in the right breast, a 1.1 cm area of soft tissue enhancement in the right breast, no axillary or internal mammary adenopathy, and no clear evidence of distant metastatic disease.  12/14/2009 the patient underwent bilateral mastectomies, bilateral ***** flap reconstruction, and a left completion axillary \n dissection. Pathology from the left breast revealed no cancer, and 0/8 axillary lymph nodes contained metastatic cancer.  However in the right breast mastectomy specimen, there was was 2 cm of grade 1 invasive ductal cancer.  0 of 6 lymph nodes removed contained cancer on the right side.  The invasive cancer was again estrogen receptor positive, progesterone receptor negative, and HER-2/neu negative.  November 2009 the patient initiated letrozole.  October 2010 the patient began to experience some lightheadedness when standing.  She then developed more severe headaches.  Finally she noted a lump in the left side of her neck.  12/06/2010 the patient underwent a fine-needle aspiration of a left supraclavicular lymph node which revealed metastatic adenocarcinoma which was very weakly estrogen receptor positive with only 1-5% of the cells staining, progesterone receptor negative, and HER-2/neu negative.  12/11/2010 the patient underwent a PET CT scan which revealed a new right frontal dural based metastasis with SUV of 28.2 with surrounding vasogenic edema and mass effect.  The scan also revealed multiple hypermetabolic left cervical and supraclavicular lymph nodes consistent with metastatic disease.  There was hypermetabolism along the right parasternal chest wall consistent with recurrent disease possibly invading the sternum.  There was also bilateral subpectoral lymphadenopathy with maximum SUV of 11.4 on the left and 4.1 on the right.  There was an area of focal hypermetabolism in the hepatic segment ***** ***** ***** ***** ***** ***** a maximum SUV of 7.0 suspicious for early hepatic metastasis.  There was multifocal osseous metastatic disease identified within the C2, L2 vertebral bodies as well as in the sacrum.  12/11/2010 the patient underwent an MRI of the brain which revealed a 4 cm left inferior frontal extra-axial mass new since 11/08/2009.  Patient met with radiation oncology as \n well as neurosurgery to discuss treatment options.  12/30/2010 the patient underwent resection of the frontal brain metastasis.  Pathology confirmed that it was consistent with a metastatic adenocarcinoma of breast primary, and was estrogen receptor negative, progesterone receptor negative, and HER-2/neu negative.  02/10/2011 - Whole brain RT: 30 gray in 10 fractions  03/01/2011 - Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off  03/12/2011 - PET/CT (during cycle 1 Xeloda) with PD including liver, bones, LNs, breast.  Exam with new chest wall/breast skin metastases.  03/19/2011 - Started ixabepilone 40mg/m2 *****, Xeloda continued, started denosumab             ROS  General: energy good, weight stable  Skin: no rashes or lesions  Eyes: no vision changes  ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat  Breast: no breast pain or swelling  Respiratory: no cough or shortness of breath  Cardiovascular: no CP, edema  GI: no nausea, vomiting, diarrhea or constipation  GU: no dysuria or vaginal bleeding  Musculoskeletal: no pain  Neurological: no headaches, dizziness, falls  Psychological: mood stable  All other review of systems negative, except for those noted in assessment below.  MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 AMLODIPINE BESYLATE (NORVASC ORAL) Take by mouth.         \u0007 CALCIUM ORAL Take by mouth.         \u0007 capecitabine (XELODA) 500 mg tablet Take 500 mg by mouth Twice a day. 3 tablets in am and 2 tablets in pm        \u0007 cholecalciferol, vitamin D3, 1000 UNITS TAB Take 1,000 Units by mouth Daily.         \u0007 docusate sodium (COLACE) 250 mg capsule Take 1 capsule (250 mg total) by mouth 2 (two) times daily as needed for Constipation (hold for loose stools).  60 capsule  11   \u0007 FERROUS FUMARATE (IRON ORAL) Take by mouth.         \u0007 IXABEPILONE IV Inject 1 mg into the \n vein every 21 (twenty-one) days.         \u0007 LEVETIRACETAM (KEPPRA ORAL) Take 500 mg by mouth Twice a day.        \u0007 METOPROLOL TARTRATE (LOPRESSOR ORAL) Take by mouth 2 (two) times daily.        \u0007 ondansetron (ZOFRAN) 8 mg tablet Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed for Nausea.  30 tablet  3   \u0007 oxyCODONE (ROXICODONE) 5 mg immediate release tablet Take 5 mg by mouth every 8 (eight) hours as needed.         \u0007 *****: LORAZEPAM (ATIVAN ORAL) Take by mouth.         \u0007 LORazepam (ATIVAN) 1 mg tablet Take 1 tablet (1 mg total) by mouth every 6 (six) hours as needed for Anxiety (nause and vomiting).  30 tablet  3   \u0007 multivitamin (*****) per tablet Take 1 tablet by mouth Daily.         \u0007 prochlorperazine (COMPAZINE) 10 mg tablet Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed.  30 tablet  3   \u0007 SODIUM CHLORIDE ORAL Take by mouth.        \u0007 *****: polyethylene glycol (MIRALAX) 17 gram packet Take 17 g by mouth Daily. As needed for constipation.  510 g  3   ALLERGIES  No Known Allergies    PHYSICAL EXAM  Objective  Vital Signs:  BP 146/90 | Pulse 89 | Temp(Src) 36.6 C (97.9 F) (Oral) | Resp 20 | Ht 162.6 cm (5' 4\") | Wt 89.449 kg (197 lb 3.2 oz) | BMI 33.85 kg/m2 | SpO2 98%  Body surface area is 2.01 meters squared.    ECOG:2  Physical Exam   Constitutional: She appears well-developed.   Pulmonary/Chest:         RESULTS  I have individually visualized and interpreted the laboratory results  Results for orders placed in visit on 03/19/11   ALKALINE PHOSPHATASE       Component Value Range    Alkaline Phosphatase 308 (*****) 31 - 95 (U/L)   AST       Component Value Range    Aspartate transaminase 55 (*****) 17 - 42 (U/L)   BILIRUBIN, TOTAL       Component Value Range    Bilirubin, Total 0.6  0.2 - 1.3 (mg/dL)   BUN       Component Value Range    Urea Nitrogen, Serum / Plasma 11  6 - 22 (mg/dL)   CBC AND DIFFERENTIAL       Component Value Range    WBC Count 5.0  3.4 - 10 \n (x10E9/L)    RBC Count 3.46 (*****) 4.0 - 5.2 (x10E12/L)    Hemoglobin 11.2 (*****) 12.0 - 15.5 (g/dL)    Hematocrit 31.9 (*****) 36 - 46 (%)    MCV 92  80 - 100 (fL)    MCH 32.5  26 - 34 (pg)    MCHC 35.2  31 - 36 (g/dL)    Platelet Count 364  140 - 450 (x10E9/L)    Neutrophil Absolute Count 2.62  1.8 - 6.8 (x10E9/L)    Lymphocyte Abs Cnt 1.63  1.0 - 3.4 (x10E9/L)    Monocyte Abs Count 0.63  0.2 - 0.8 (x10E9/L)    Eosinophil Abs Ct 0.12  0.0 - 0.4 (x10E9/L)    Basophil Abs Count 0.02  0.0 - 0.1 (x10E9/L)   CREATININE WITH EGFR       Component Value Range    Creatinine 0.73  0.52 - 1.06 (mg/dL)    eGFR if Caucasian >60  >60 (mL/min)    eGFR if African ***** >60  >60 (mL/min)   ELECTROLYTES       Component Value Range    Sodium, Serum / Plasma 137  135 - 145 (mmol/L)    Potassium, Serum / Plasma 4.0  3.8 - 5.1 (mmol/L)    Chloride, Serum / Plasma 103  97 - 108 (mmol/L)    Carbon Dioxide, Total 26  22 - 32 (mmol/L)    Anion Gap 8  4 - 14    ALBUMIN       Component Value Range    Albumin, Serum / Plasma 3.1 (*****) 3.5 - 4.8 (g/dL)   CALCIUM       Component Value Range    Calcium, total, Serum / Plasma 9.0  8.8 - 10.3 (mg/dL)   PHOSPHORUS       Component Value Range    Phosphorus, Serum / Plasma 3.8  2.6 - 4.9 (mg/dL)   ASSESSMENT & PLAN  Breast cancer metastasized to multiple sites  Taking 1500/1000mg 14 days and 7 days off with ixabepilone *****  Today is off week 04/12/2011 will start cycle again.  Feels good  Scan in 3 weeks  Port placed on 9th prior to starting xeloda and just after irinotecan  ***** calendars given to track Xeloda when on and off drug.  Exam supraclavicular area appears to be breaking up.   Labs reviewed okay to proceed with chemotherapy     Pain  Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap  Rx filled last visit for oxycodone pt reports only taking a couple since last visit  Reports pain in both breasts a July 10  Reviewed principles of pain management with family member and \n patient.   Wrote instructions for plan of morning and evening medications.        The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** 10:33 AM      \n",
+      "assessment_and_plan": "ASSESSMENT & PLAN  Breast cancer metastasized to multiple sites  Taking 1500/1000mg 14 days and 7 days off with ixabepilone *****  Today is off week 04/12/2011 will start cycle again.  Feels good  Scan in 3 weeks  Port placed on 9th prior to starting xeloda and just after irinotecan  ***** calendars given to track Xeloda when on and off drug.  Exam supraclavicular area appears to be breaking up.   Labs reviewed okay to proceed with chemotherapy     Pain  Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap  Rx filled last visit for oxycodone pt reports only taking a couple since last visit  Reports pain in both breasts a July 10  Reviewed principles of pain management with family member and \n patient.   Wrote instructions for plan of morning and evening medications.        The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** 10:33 AM      \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Patient with metastatic breast cancer, stage not specified, currently on Xeloda and irinotecan, follow up visit to review treatment and discuss pain management"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR- invasive ductal carcinoma",
+          "Stage_of_Cancer": "Originally Stage IIA, now metastatic",
+          "Distant Metastasis": "Yes, to multiple sites",
+          "Metastasis": "Yes",
+          "lab_summary": "Hemoglobin 11.2, Albumin 3.1, Alkaline Phosphatase 308, Bilirubin 0.6, Creatinine 0.73, eGFR >60, Potassium 4.0, Sodium 137",
+          "findings": "Patient reports pain in both breasts, supraclavicular area appears to be breaking up"
+        },
+        "Treatment_Summary": {
+          "current_meds": "Xeloda 1500/1000mg 14 days and 7 days off, ixabepilone, denosumab, amlodipine, calcium, cholecalciferol, docusate sodium, ferrous fumarate, levetiracetam, metoprolol, ondansetron, oxycodone, lorazepam, multivitamin, prochlorperazine, sodium chloride, polyethylene glycol",
+          "recent_changes": "Patient reports only taking a couple of oxycodone tablets since last visit",
+          "supportive_meds": "amlodipine, calcium, cholecalciferol, docusate sodium, ferrous fumarate, levetiracetam, metoprolol, multivitamin, prochlorperazine, sodium chloride, polyethylene glycol"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "palliative",
+          "response_assessment": "Patient is tolerating therapy well, symptoms improved"
+        },
+        "Medication_Plan_chatgpt": {
+          "chemotherapy": {
+            "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "bowel regimen": {
+            "summary": "Xeloda",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "pain medication": {
+            "summary": "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "other treatment": {
+            "summary": "will start cycle again",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Xeloda, ibuprofen, tylenol, oxycodone as needed"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "will start cycle again with ixabepilone"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "None"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "Scan in 3 weeks"
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "in 3 weeks"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
