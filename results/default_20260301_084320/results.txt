@@ -9869,3 +9869,119 @@ RESULTS FOR ROW 89
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 90
+============================================================
+
+--- Column: coral_idx ---
+229
+
+--- Column: note_text ---
+"  I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.      ID  51 y.o.    CC  Breast CA R    HPI    ***** ***** is a 51 y.o. female is currently enrolled in ***** and randomized to *****/***** today Cycle 12 treatment. S/p ***** with *****/*****. Currently on cycle 2 of AC.    INTERVAL     She completed cycle 1 of AC on 06/10/20. Most recent is cycle 3, 2 wks ago.     Pt notes increasing sx's with each cycle.    Cycle 3 was \"like a freight train\". *****, *****, achiness, worsening of GERD.    ***** was worst on D5. Did not take zofran due to induction of *****    Neuropathy in the hands and feet has largely resolved,    PMH  Illnesses:   Diagnosis Date   \u0007 Adenocarcinoma of right breast (HCC) 01/15/2020   \u0007 Allergy 1976   \u0007 Arthritis 2015   \u0007 GERD (gastroesophageal reflux disease)         GYN  Personal history of cancer: no  History of previous breast biopsy: no  Age at first Menarche: 12  Obstetrics: G0  Uterus/Ovaries intact: yes  LMP December 19. Irregular  History of hormone use: no, ~7 yrs (BCP only in 20's)  Radiation Exposure:none   ***** Jewish or ***** European ethnicity: no     Family History   Family History   Adopted: Yes   Family history unknown: Yes      Positive for a single mutation in the BLM *****:   This means that Ms. ***** does not have ***** Syndrome but is a carrier for the condition.    Being a carrier for ***** Syndrome is preliminarily linked to a moderate increase in cancer risk.     Social History           Socioeconomic History   \u0007 Marital status: Unknown/Declined     Spouse name: *****   \u0007 Number of children: None   \u0007 Years of education: None   \u0007 Highest education level: None   Occupational History   \u0007 \n None   Social Needs   \u0007 Financial resource strain: None   \u0007 Food insecurity:     Worry: None     Inability: None   \u0007 Transportation needs:     Medical: None     Non-medical: None   Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 0.25     Years: 5.00     ***** years: 1.25     Start date: 11/20/1999     Last attempt to quit: 11/20/2009     Years since quitting: 10.1   \u0007 Smokeless tobacco: Never Used   \u0007 Tobacco comment: social and sporadic - not a daily thing   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 4.0 standard drinks     Types: 4 Glasses of wine per week   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male     Birth control/protection: Condom Male   Lifestyle   \u0007 Physical activity:     Days per week: None     Minutes per session: None   \u0007 Stress: None   Relationships   \u0007 Social connections:     Talks on phone: None     Gets together: None     Attends religious service: None     Active member of club or organization: None     Attends meetings of clubs or organizations: None     Relationship status: None   \u0007 Intimate partner violence:     ***** of current or ex partner: None     Emotionally abused: None     Physically abused: None     Forced sexual activity: None   Other Topics Concern   \u0007 None   Social History Narrative    ***** up in ***** *****, *****. ***** with non blood related brother. Mother died recently (2019) and father is elderly, 84. She finished fashion degree. Lives in the *****. Single, many supportive friends. Has *****/raised money for breast cancer causes for the past 20 years.         ROS  Review of Systems -   General ROS: + fatigue  Psychological ROS: + anxiety  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + breast sug site well healed + slight tissue swelling in the axilla, no erythema, drainage.  Respiratory ROS: negative  Cardiovascular ROS: +palpitations, + port site tenderness \n (port reinserted at same site on *****, pain stable)  Gastrointestinal ROS: +constipation, mild nausea. No vomiting  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: +headaches  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    ECOG 0    Physical Exam  There were no vitals taken for this visit.  PHYSICAL EXAM via video observation:   Vitals  There were no vitals filed for this visit.  Constitutional: Patient appears well-developed and well-nourished. Pleasant and appropriately interactive.  Head: Normocephalic and atraumatic.   Eyes: No *****. Conjunctivae and EOM are normal.   Neck: Normal range of motion.   Pulmonary/Chest: Effort normal. No respiratory distress. No cough.  Abdomen: No abdominal distension.  Neurological: Alert and oriented to person, place, and time. Able to stand from sitting and walk.  Psychiatric: Normal mood and affect. Behavior is normal. Judgment and thought content normal.   Skin: No jaundice or visible rash.       STUDIES    Results for orders placed or performed during the hospital encounter of 07/08/20   Thyroid Stimulating Hormone   Result Value Ref Range    Thyroid Stimulating Hormone 6.01 (H) 0.45 - 4.12 mIU/L   Free T4   Result Value Ref Range    Free T4 12 10 - 18 pmol/L   Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)   Result Value Ref Range    Albumin, Serum / Plasma 3.9 3.5 - 5.0 g/dL    Alkaline Phosphatase 125 (H) 38 - 108 U/L    Alanine transaminase 19 10 - 61 U/L    Aspartate transaminase 17 5 - 44 U/L    Bilirubin, Total 0.2 0.2 - 1.2 mg/dL    Urea Nitrogen, Serum / Plasma 12 7 - 25 mg/dL    Calcium, total, Serum / Plasma 9.2 8.4 - 10.5 mg/dL    Chloride, Serum / Plasma ***** ***** - 110 mmol/L    Creatinine 0.80 0.55 - 1.02 mg/dL    eGFR if non-African American 85 >60 mL/min    eGFR if African ***** 99 >60 mL/min    Potassium, Serum / \n Plasma 4.3 3.5 - 5.0 mmol/L    Sodium, Serum / Plasma ***** ***** - 145 mmol/L    Protein, Total, Serum / Plasma 7.2 6.3 - 8.6 g/dL    Carbon Dioxide, Total 26 22 - 29 mmol/L    Anion Gap 8 4 - 14    Glucose, non-fasting 82 70 - 199 mg/dL   Complete Blood Count with Differential   Result Value Ref Range    WBC Count 11.8 (H) 3.4 - 10 x10E9/L    RBC Count 3.84 (L) 4.0 - 5.2 x10E12/L    Hemoglobin 11.3 (L) 12.0 - 15.5 g/dL    Hematocrit 34.9 (L) 36 - 46 %    MCV 91 80 - 100 fL    MCH 29.4 26 - 34 pg    MCHC 32.4 31 - 36 g/dL    Platelet Count ***** ***** - 450 x10E9/L    Neutrophil Absolute Count 8.57 (H) 1.8 - 6.8 x10E9/L    Lymphocyte Abs Cnt 1.32 1.0 - 3.4 x10E9/L    Monocyte Abs Count 0.73 0.2 - 0.8 x10E9/L    Eosinophil Abs Ct 0.01 0.0 - 0.4 x10E9/L    Basophil Abs Count 0.09 0.0 - 0.1 x10E9/L    Imm Gran, Left Shift 1.12 (H) <0.1 x10E9/L    Toxic Granulation Present    HCG Pregnancy, Serum, >= 18 years   Result Value Ref Range    HCG Pregnancy, Serum, >= 18 years 1 <5 IU/L       A/P  # Breast CA, R  Presented with palpable lesion. Clinical st II/III. Approx 3 cm tumor on initial imaging. ***** *****.  ***** High Risk. s/p Taxol, with randomization on ***** to *****/*****  - s/p R Lx, with path showing 2.2 cm residual IDC, approx 60% cellularity. *****.  - ***** will continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's   - we will reduce GCSF dose to ***** 50%    # *****  Has had difficulty with zofran inducing *****; does not want to take. Had significant N/V on D5, then *****  - pt is willing to try granisetron.   - will add PO dex at home prn N/V  - will add olanzapine 10 mg prn N/V.     # ***** flashes with *****, *****  Likely due to ovarian function disruption with chemo. Also possible contribution from thyroid *****  -She tried utilizing effexor which caused significant headaches.     # Low TSH c/w autoimmune thyroiditis, followed by hypothyroidism  - followed by \n Endo    # L neck/chest discomfort around port site    likely due to Extravasation   -Port was reinserted into left chest wall  -Continue lidocaine patches,analgesics prn    # Neuropathy, resolved  Mild, involving hands and arms  - continue gabapentin. .    RTC after XRT, approx 1-1.5 mos    I spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.          \n"
+
+--- Column: assessment_and_plan ---
+"# Breast CA, R  Presented with palpable lesion. Clinical st II/III. Approx 3 cm tumor on initial imaging. ***** *****.  ***** High Risk. s/p Taxol, with randomization on ***** to *****/*****  - s/p R Lx, with path showing 2.2 cm residual IDC, approx 60% cellularity. *****.  - ***** will continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's   - we will reduce GCSF dose to ***** 50%    # *****  Has had difficulty with zofran inducing *****; does not want to take. Had significant N/V on D5, then *****  - pt is willing to try granisetron.   - will add PO dex at home prn N/V  - will add olanzapine 10 mg prn N/V.     # ***** flashes with *****, *****  Likely due to ovarian function disruption with chemo. Also possible contribution from thyroid *****  -She tried utilizing effexor which caused significant headaches.     # Low TSH c/w autoimmune thyroiditis, followed by hypothyroidism  - followed by \n Endo    # L neck/chest discomfort around port site    likely due to Extravasation   -Port was reinserted into left chest wall  -Continue lidocaine patches,analgesics prn    # Neuropathy, resolved  Mild, involving hands and arms  - continue gabapentin..    RTC after XRT, approx 1-1.5 mos    I spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed."
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Patient with Breast CA, stage II/III, presented with palpable lesion, seeking management of side effects and continuation of treatment."
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage II/III",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "Palpable lesion, port site tenderness, constipation, mild nausea, palpitations, port site tenderness, headaches"
+  },
+  "Treatment_Summary": {
+    "current_meds": "AC, Dexmethylprednisolone, Olanzapine",
+    "recent_changes": "Dose delay of AC, reduced GCSF dose to 50%",
+    "supportive_meds": "Dexmethylprednisolone, Olanzapine"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "Taxol, AC",
+      "Short term side_effects_discussed": "N/V",
+      "Long term side_effects_discussed": "ovarian function disruption, thyroid issues"
+    },
+    "hormonal therapy": {
+      "summary": "dexamethasone (dex)",
+      "Short term side_effects_discussed": "N/V",
+      "Long term side_effects_discussed": ""
+    },
+    "radiotherapy": {
+      "summary": "XRT",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bowel regimen": {
+      "summary": "laxatives, stool softeners, anti-diarrheals",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "pain medication": {
+      "summary": "analgesics, lidocaine patches",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "psychiatry medication": {
+      "summary": "olanzapine, granisetron",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "other treatment": {
+      "summary": "GCSF, gabapentin, zofran",
+      "Short term side_effects_discussed": "N/V",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will continue Taxol, AC, with cycle 4 in 1 week. Will reduce GCSF dose to 50%. Will start granisetron. Will add dexamethasone (dex) PO prn for N/V. Will add olanzapine 10 mg prn for N/V. Continue lidocaine patches, gabapentin."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Will continue Taxol, with cycle 4 in 1 week. Will start granisetron. Will continue lidocaine patches, gabapentin."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "XRT"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port was reinserted into left chest wall"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC after XRT, approx 1-1.5 mos"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
