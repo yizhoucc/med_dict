@@ -2455,3 +2455,69 @@ Processing row 16 (17/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 12.1s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "" -> "nutritionist"
+    Goals_of_care: 6.1s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "10-15% risk of recurrence without adjuvant therapy, can be reduced with adjuvant"
+  Extraction prompts: 40.0s
+    Medication_Plan_chatgpt: 37.3s [faith-restored-3keys, faith-trimmed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years",
+    "Short term side_effects_discussed": "hot flashes, mood effects, increased incidence of thr
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] radiotherapy: "{'summary': 'breast radiotherapy', 'Short term side_effects_" -> "{'summary': 'breast radiotherapy', 'Short term side_effects_"
+      [G3-FAITH] other treatment: "{'summary': 'baseline DXA scan, hormone levels check, referr" -> "{'summary': 'baseline DXA scan, hormone levels check, referr"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 3.8s
+      [EXTRACT] raw={
+  "medication_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.7s
+      [EXTRACT] raw={
+  "therapy_plan": "Tamoxifen or Aromatase Inhibitors (AIs) for at least 5 years, breast radiotherapy"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "breast radiotherapy"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.2s
+      [EXTRACT] raw={
+  "procedure_plan": "lumpectomy, referral to genetics"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
