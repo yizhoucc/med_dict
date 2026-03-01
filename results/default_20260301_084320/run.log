@@ -10049,3 +10049,50 @@ Processing row 67 (68/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "good response after 6 cycles of TCHP" -> "Not mentioned in note"
   Extraction prompts: 15.3s
+    Medication_Plan_chatgpt: 40.4s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "6 cycles of TCHP",
+    "Short term side_effects_discussed": "not mentioned",
+    "Long term side_effects_discussed": "not mentioned"
+  },
+  "hormonal therapy": {
+
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 8.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "The patient was discussed treatment options, treatment side effects in detail. The patient will have a bilateral mastectomy. If she chooses a lumpectomy, she will have radiatio
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "The patient was discussed treatment options, treatment side effects in detail. T" -> "The patient will have a bilateral mastectomy. If she chooses a lumpectomy, she w"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "The patient has been discussed treatment options, treatment side effects in detail. The patient will have a bilateral mastectomy. If she chooses a lumpectomy, she will have radiat
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient has been discussed treatment options, treatment " -> "The patient will have a bilateral mastectomy. If she chooses"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Post-mastectomy radiation will be considered if extensive disease is left and lymph nodes are involved."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.7s
+      [EXTRACT] raw={
+  "procedure_plan": "The patient will have a bilateral mastectomy. If she chooses a lumpectomy, she will have radiation."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
