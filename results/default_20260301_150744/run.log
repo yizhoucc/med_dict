@@ -2102,3 +2102,136 @@ Processing row 30 (11/20)...
       [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics']
       [G6-SEMANTIC] Nutrition: "" -> "None"
       [G6-SEMANTIC] Genetics: "" -> "None"
+    follow_up_next_visit: 2.4s
+      [EXTRACT] raw={
+    "Next clinic visit": "in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 56.3s
+  Row 30 total: 109.5s
+  Row 30 saved to progress
+
+Processing row 31 (12/20)...
+  Injected 2 term definitions: ['estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (946 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (HCC
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] summary: "Malignant neoplasm of overlapping sites of left breast in female, estrogen recep" -> "Patient with a history of breast cancer, stage IIA, estrogen receptor positive, "
+      [G6-SEMANTIC] second opinion: "" -> "No"
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
+    Cancer_Diagnosis: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to neck, chest, abdomen, and pel
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "Stage IIA"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Sedimentation Rate (MB) 27, C-Reactive Protein 3.1"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Sedimentation Rate (MB) 27, C-Reactive Protein 3.1" -> "{'Sedimentation Rate (MB)': '27', 'C-Reactive Protein': '3.1"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 4.7s
+      [EXTRACT] raw={
+"findings": "No abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown fat. No pulmonary consolidations o
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.8s
+      [EXTRACT] raw={
+  "current_meds": [
+    "exemestane",
+    "trastuzumab",
+    "pertuzumab"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 5.1s
+      [EXTRACT] raw={
+"recent_changes": "Dropped ***** due to diarrhea, which resolved.",
+"supportive_meds": [
+"omeprazole",
+"loratadine",
+"loperamide",
+"diphenhydrAMINE",
+"epinephrine",
+"melatonin",
+"omega-3 fatty acids
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 4.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "curative"
+    Response_Assessment: 5.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has started treatment with herceptin and an unspecified medication (*****), which was recently stopped due to diarrhea, but the diarrhea has resolved. The note mentions that a PET-CT done 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "No evidence of active metastatic disease on PET-CT, diarrhea" -> "No evidence of active metastatic disease on PET-CT, diarrhea"
+      [G6-SEMANTIC] response_assessment: "No evidence of active metastatic disease on PET-CT, diarrhea resolved after stop" -> "No abnormal areas of FDG uptake to suggest active metastatic disease, decreased "
+  Extraction prompts: 33.3s
+    Medication_Plan_chatgpt: 18.1s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "TCH chemotherapy x 6",
+    "Short term side_effects_discussed": "",
+    "Long term side_effects_discussed": ""
+  },
+  "hormonal therapy": {
+    "summary": "adjuva
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bowel regimen', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bowel regimen', 'radiotherapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'adjuvant tamoxifen, herceptin', 'Short term side_effects_discussed'" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'TCH chemotherapy x 6', 'Short term side_effects_discussed': '', 'Lo" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] bowel regimen: "{'summary': '***** (medication name not specified), imodium', 'Short term side_e" -> "{'summary': '', 'Short term side_effects_discussed': 'diarrhea', 'Long term side"
+      [G6-SEMANTIC] hormonal therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'adjuvant tamoxifen followed by ***** completed 05/16/15', 'Short te"
+      [G6-SEMANTIC] chemotherapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'TCH chemotherapy x 6', 'Short term side_effects_discussed': '', 'Lo"
+    Medication_Plan: 1.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Set up infusion at *****. Herceptin."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Set up infusion at *****. Herceptin." -> "infusion at *****. Herceptin"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "infusion at *****. Herceptin" -> "Herceptin"
