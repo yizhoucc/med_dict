@@ -813,3 +813,43 @@ Processing row 24 (5/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] REJECTED (no key overlap), kept original
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 9.7s
+      [EXTRACT] raw={
+  "findings": "Imaging findings: PET/CT on 03/12/2011 showed progression of disease including liver, bones, lymph nodes, and breast skin metastases. MRI of the brain on 12/11/2010 revealed a 4 cm le
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 5.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": [
+    "Xeloda",
+    "Irinotecan",
+    "Ixabepilone"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "['Xeloda', 'Irinotecan', 'Ixabepilone']" -> "['Xeloda', 'Irinotecan', 'Ixabepilone', 'Amlodipine', 'Calci"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 6.1s
+      [EXTRACT] raw={
+"recent_changes": "Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off, started ixabepilone 40mg/m2, started denosumab",
+"supportive_meds": "ondansetron, oxyCODONE, LORazepam, p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 8.3s
+      [EXTRACT] raw=The patient has metastatic breast cancer, which is a stage IV cancer. The treatment plan includes chemotherapy (Xeloda and ixabepilone), which is ongoing. There is no mention of surgery or radiation t
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 8.2s [semantic-fixed]
+      [EXTRACT] raw=The patient has started cancer treatment, specifically chemotherapy with Xeloda 1500mg/1000mg 14 days and 7 days off, and ixabepilone. The note mentions that the patient is currently on the off week, 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note" -> "Breast cancer metastasized to multiple sites"
+  Extraction prompts: 64.8s
