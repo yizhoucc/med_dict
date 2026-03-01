@@ -580,3 +580,70 @@ Processing row 23 (4/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 3.0s
+      [EXTRACT] raw={
+  "Next clinic visit": "She is scheduled to see Dr. ***** in radiation oncology on 12/07/18."
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 66.4s
+  Row 23 total: 97.9s
+  Row 23 saved to progress
+
+Processing row 24 (5/20)...
+  Injected 5 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'lumpectomy', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1288 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for metastatic breast cancer, metastasized to multiple sites, on Xeloda 1500mg/1000mg 14 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for metastatic breast cancer, metastasized to mult" -> "metastatic breast cancer, metastasized to multiple sites, on"
+      [G6-SEMANTIC] summary: "metastatic breast cancer, metastasized to multiple sites, on Xeloda 1500mg/1000m" -> "Metastatic breast cancer, metastasized to multiple sites, currently on Xeloda 15"
+    What_We_Found: 23.4s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to multiple sites",
+  "Metastasis
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 6.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Xeloda, ixabepilone, denosumab, ondansetron, levetiracetam, metoprolol, lorazepam, multivitamin, prochlorperazine, oxycodone",
+  "recent_changes": "Patient reports only taking a c
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "ondansetron, lorazepam, prochlorperazine, oxycodone" -> "ondansetron, lorazepam, prochlorperazine, oxyCODONE"
+      [G3-FAITH] current_meds: "Xeloda, ixabepilone, denosumab, ondansetron, levetiracetam, " -> "Xeloda, ixabepilone, denosumab, ondansetron, levetiracetam, "
+      [G6-SEMANTIC] recent_changes: "Patient reports only taking a couple of oxycodone since last visit" -> ""
+      [G6-SEMANTIC] supportive_meds: "ondansetron, lorazepam, prochlorperazine, oxyCODONE" -> "ondansetron, lorazepam, prochlorperazine, oxycodone"
+      [G6-SEMANTIC] current_meds: "Xeloda, ixabepilone, denosumab, ondansetron, levetiracetam, metoprolol, lorazepa" -> "Xeloda, ixabepilone, denosumab, ondansetron, levetiracetam, metoprolol, lorazepa"
+    Goals_of_care: 3.4s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "The patient is feeling well, exam supraclavicular area appears to be breaking up"
+  Extraction prompts: 38.7s
