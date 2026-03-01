@@ -1714,3 +1714,117 @@ Processing row 28 (9/20)...
       [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
       [G3-FAITH] EMPTIED: ['genetic_testing_plan']
       [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology consult",
+  "Others": "None",
+  "follow up": "September"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Specialty: "Radiation oncology consult" -> "None"
+      [G3-FAITH] Nutrition: "None" -> "Calcium supplementation with 1200mg/day combination of diet "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 5.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "In-person: September, for surgery and bone density scan"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "In-person: September, for surgery and bone density scan" -> "September"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 75.8s
+  Row 28 total: 109.8s
+  Row 28 saved to progress
+
+Processing row 29 (10/20)...
+  Injected 6 term definitions: ['progesterone receptor', 'adjuvant chemotherapy', 'estrogen receptor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (3607 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial consultation for early stage breast cancer, specifically IDC, to discuss treatment option
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Initial consultation for early stage breast cancer, specific" -> "early stage breast cancer, specifically IDC, to discuss trea"
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] in-person: "in-person" -> "yes"
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "no"
+    Cancer_Diagnosis: 5.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally DCIS, now Stage IV",
+  "Distant_Metastasis": "Yes, to liver, spleen, coccyx",
+  "Metastasis": "Yes"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally DCIS, now Stage IV" -> "Stage II-III"
+      [G3-FAITH] Distant_Metastasis: "Yes, to liver, spleen, coccyx" -> ""
+      [G3-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G6-SEMANTIC] Metastasis: "Yes" -> "Yes (to axillary lymph nodes and subcutaneous fat of the right chest wall)"
+      [G6-SEMANTIC] Distant_Metastasis: "" -> "No"
+    Lab_Results: 10.0s [semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "Creatinine 0.74 (12/11/2016), CA 27.29 67.7 (11/16/15), CA 27.29 78.3 (01/26/16), CA 27.29 98.8 (02/27/16), CA 27.29 106.2 (05/12/16), CA 27.29 78 (07/20/16), CA 15-3 60.9 (11/16/15)
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "Creatinine 0.74 (12/11/2016), CA 27.29 67.7 (11/16/15), CA 27.29 78.3 (01/26/16)" -> "No labs in note."
+    Clinical_Findings: 14.4s
+      [EXTRACT] raw={
+"findings": "Right breast mass (6 x 11 cm) in outer quadrants; multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue; PET/CT: large enhancing right breast mass (9.0 x
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 1.1s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "" -> "No medications"
+    Treatment_Changes: 2.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "bloody right nipple discharge for the last 2 years and itchy"
+      [G6-SEMANTIC] supportive_meds: "" -> "None"
+      [G6-SEMANTIC] recent_changes: "bloody right nipple discharge for the last 2 years and itchy rash over her right" -> "None"
+    Treatment_Goals: 1.9s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 4.1s [format-repaired]
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note states "After an extensive discussion, the patient completely understands the rationale for neoadjuvant treatment and will spend the w
+      [G1-FORMAT] repaired -> keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 43.6s
