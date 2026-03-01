@@ -3857,3 +3857,38 @@ Processing row 26 (27/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Follow up for metastatic breast cancer, specifically metasta" -> "Metastatic breast cancer to bone, with stable disease, for h"
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 13.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "Yes, to bone",
+  "Metastasis": "Yes, to bone",
+  "lab_summary": "",
+  
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "" -> "CBC with platelets to be ordered"
+      [G6-SEMANTIC] Stage_of_Cancer: "Not mentioned in note" -> "Originally early stage, now metastatic"
+    Treatment_Summary: 7.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Femara, Zoladex, calcium-vitamin D",
+  "recent_changes": "",
+  "supportive_meds": "calcium-vitamin D"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "None"
+      [G6-SEMANTIC] recent_changes: "None" -> "CBC with platelets to be ordered"
+    Goals_of_care: 7.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "stable disease"
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the cancer is metastatic and the treatment
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "stable disease" -> "stable to slightly decreased"
+  Extraction prompts: 39.1s
