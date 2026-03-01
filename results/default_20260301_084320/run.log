@@ -7708,3 +7708,155 @@ The value for "goals_of_treatment" is correct, as the note mentions "the goal wo
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Healed well from surgery, denies any pain symptoms"
   Extraction prompts: 43.1s
+    Medication_Plan_chatgpt: 40.1s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Will start an aromatase inhibitor, possibly with ovarian suppression",
+    "Short term side_effects_discussed": "urogenital atrophy, vasomotor symptoms, muscu
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'chemotherapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "medication_plan": "Will start an aromatase inhibitor, possibly with Zoladex (leuprolide) for ovarian suppression, and will order a bone scan."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Will start an aromatase inhibitor, possibly with Zoladex (le" -> "Will start an aromatase inhibitor, possibly with Zoladex (le"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "therapy_plan": "Will start an aromatase inhibitor, possibly with ovarian suppression with Zoladex (leuprolide), and will order a bone scan, and a CT scan for staging"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Will start an aromatase inhibitor, possibly with ovarian sup" -> "Will start an aromatase inhibitor, possibly with Zoladex (le"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.3s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.9s
+      [EXTRACT] raw={
+  "imaging_plan": "Will order a bone scan, and a CT scan for staging"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.4s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.7s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 0.4s
+      [EXTRACT] raw={
+  "Next clinic visit": "RTC 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 66.5s
+  Row 51 total: 109.6s
+  Row 51 saved to progress
+
+Processing row 52 (53/100)...
+  Injected 7 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'ER positive', 'PR positive', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (3682 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "59 y.o. female with recently diagnosed breast cancer, stage II/III, ER/PR positive, seeking consu
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "59 y.o. female with recently diagnosed breast cancer, stage " -> "59 y.o. female with recently diagnosed breast cancer, ER/PR "
+      [G6-SEMANTIC] second opinion: "no" -> "yes"
+      [G6-SEMANTIC] summary: "59 y.o. female with recently diagnosed breast cancer, ER/PR positive, seeking co" -> "59 y.o. female with invasive ductal carcinoma, stage II/III, ER/PR positive, lum"
+    What_We_Found: 6.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II/III",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Left breast inci
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Type_of_Cancer: "ER+/PR+ invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma, neuroendocrine differenti"
+      [G6-SEMANTIC] Type_of_Cancer: "ER+/PR+ invasive ductal carcinoma, neuroendocrine differentiation" -> "ER+/PR+/HER2+ invasive ductal carcinoma"
+    Treatment_Summary: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "AC/THP chemotherapy, Arimidex",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "discussed alternative regimens (TCHP)"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.3s
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 17.1s
