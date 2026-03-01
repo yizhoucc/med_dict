@@ -87,7 +87,8 @@
     82,
     83,
     84,
-    85
+    85,
+    86
   ],
   "results": {
     "0": {
@@ -8117,6 +8118,107 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "6 weeks"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "86": {
+      "coral_idx": 226,
+      "note_text": "Subjective:       Patient ID: ***** ***** ***** ***** 79 y.o. female.    HPI  Review of Systems   Constitutional: Negative for fever, activity change, appetite change, fatigue and unexpected weight change.   HENT: Negative.    Eyes: Negative.    Respiratory: Negative.  Negative for cough, chest tightness, shortness of breath and wheezing.    Cardiovascular: Negative for chest pain, palpitations and leg swelling.   Gastrointestinal: Negative for nausea, vomiting, abdominal pain and abdominal distention.   Musculoskeletal: Negative.  Negative for back pain, joint swelling and arthralgias.   Neurological: Positive for tremors. Negative for dizziness and headaches.         Ms. ***** comes to our clinic today for a second opinion concerning treatment of her recently diagnosed right primary breast cancer.  On 06/19/2011 a palpable mass in the right breast was needle biopsied and showed invasive ductal carcinoma.  On 07/07/2011 palpable right axillary lymph node that was suspicious to clinical exam was also needle biopsy and shown to be adenocarcinoma consistent with the previously biopsied breast lesion.on 07/23/2011 a needle localized excisional biopsy was performed of the right breast mass and pathology showed invasive ductal carcinoma grade 2 measuring 2.2 cm in greatest dimension.  There was also a separate focus of an incidental well-differentiated adenocarcinoma of 0.6 cm.  The larger tumor nearest dimension to the margin was 0.6 cm smaller tumors nearest dimension to the margin was 0.2 cm.  A right axillary lymph node dissection was performed in 4 of 19 lymph nodes were involved with metastatic carcinoma.  Extracapsular extension was present in 1 lymph node of 0.5 cm dimension.  At this time Ms. ***** is doing well and recovering from her surgery.  She has no pain, her activities are full, her appetite is good, her bowel and bladder function is within normal limits, and her weight is stable.    Ms. *****'s \n other pertinent medical history includes a history of Parkinson's disease currently being treated.  This was diagnosed several years ago is confined to her right side and is of moderate severity his had gallbladder surgery in the past and has been recently diagnosed with mild hypertension    Gynecological history is significant for menarche at age 16 she was on the women's health initiative study and was on the estrogen only arm is currently taking no hormone supplementation her hormone supplementation started at the age of 57.  She is ***** P4 age at first birth was 18    Family history of cancer is significant for a mother who had leukemia and a sister who had cancer of the cervix a daughter who had breast and colorectal cancer of early onset at age 40 a maternal grandmother with ovarian cancer  Objective:      Physical Exam   Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Eyes: Conjunctivae and EOM are normal. Pupils are equal, round, and reactive to light.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate, regular rhythm and normal heart sounds.    Pulmonary/Chest: Effort normal and breath sounds normal. She has no wheezes. She has no rales.   Abdominal: Soft. Bowel sounds are normal. She exhibits no distension and no mass. There is no tenderness.   Lymphadenopathy:     She has no cervical adenopathy.   Neurological: She is alert and oriented to person, place, and time. No cranial nerve deficit.        Ms. ***** had the obvious pill-rolling tremor of Parkinson's disease isolated to her right side   Skin: Skin is warm.           Assessment:       Ms. ***** is a 79-year-old woman with a 2.2 cm multifocal tumor in the right breast which was resected with clear margins.  There was 4 of 19 lymph nodes positive with a small area of extracapsular extension.  Estrogen and progesterone receptors \n were positive and HER-2/neu was negative.  The tumor grade was assessed as 2.    A long discussion with Ms. ***** about the general approach to the treatment of primary breast cancer with the use of surgery and radiation to remove the tumor from the chest wall and prevent its recurrence locally as well as the use of chemotherapy and hormonal therapy as systemic therapy peak to prevent distant metastatic recurrence.given the tumor parameters mentioned above I assessed th at she had a reasonably high risk of breast cancer recurrence in the range of about 40-45%.I discussed the process of risk estimation with her and the various parameters that we use to assess  risk she seemed to understand as well.  Ms. ***** that it would be very reasonable to pursue a course of hormonal therapy to decrease the risk of metastatic recurrence and that the risk-benefit ratio for hormonal treatment would be favorable. Although I believe there would be some benefit from a course of chemotherapy in this case I believe her age (even though she appears vigorous for her stated age) and her history of Parkinson's disease would make the risk benefit ratio for a course of chemotherapy less favorable.  Since a course of chemotherapy added to a course of hormonal therapy only give her an additional benefit of 3-4% I suggested I could not strongly recommend a course of chemotherapy that would be a personal decision will depend on how aggressively she wanted to approach his situation with Ms. ***** told me that she was leaning against the course of chemotherapy and would prefer to receive a course of hormonal therapy alone and I to initiate therapy could support her in that decision.  Plan:     Ms. ***** will return to ***** ***** medical oncologist Dr. ***** for further discussions and definitive treatment          \n",
+      "assessment_and_plan": "Assessment:       Ms. ***** is a 79-year-old woman with a 2.2 cm multifocal tumor in the right breast which was resected with clear margins.  There was 4 of 19 lymph nodes positive with a small area of extracapsular extension.  Estrogen and progesterone receptors \n were positive and HER-2/neu was negative.  The tumor grade was assessed as 2.    A long discussion with Ms. ***** about the general approach to the treatment of primary breast cancer with the use of surgery and radiation to remove the tumor from the chest wall and prevent its recurrence locally as well as the use of chemotherapy and hormonal therapy as systemic therapy peak to prevent distant metastatic recurrence.given the tumor parameters mentioned above I assessed th at she had a reasonably high risk of breast cancer recurrence in the range of about 40-45%.I discussed the process of risk estimation with her and the various parameters that we use to assess  risk she seemed to understand as well.  Ms. ***** that it would be very reasonable to pursue a course of hormonal therapy to decrease the risk of metastatic recurrence and that the risk-benefit ratio for hormonal treatment would be favorable. Although I believe there would be some benefit from a course of chemotherapy in this case I believe her age (even though she appears vigorous for her stated age) and her history of Parkinson's disease would make the risk benefit ratio for a course of chemotherapy less favorable.  Since a course of chemotherapy added to a course of hormonal therapy only give her an additional benefit of 3-4% I suggested I could not strongly recommend a course of chemotherapy that would be a personal decision will depend on how aggressively she wanted to approach his situation with Ms. ***** told me that she was leaning against the course of chemotherapy and would prefer to receive a course of hormonal therapy alone and I to initiate therapy could support her in that decision.  Plan:     Ms. ***** will return to ***** ***** medical oncologist Dr. ***** for further discussions and definitive treatment          \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "yes",
+          "in-person": "in-person",
+          "summary": "Recently diagnosed right primary breast cancer, invasive ductal carcinoma, with 4 of 19 lymph nodes involved and extracapsular extension, seeking a second opinion."
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+          "Stage_of_Cancer": "pT2N1M0",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "Tremors"
+        },
+        "Treatment_Summary": {
+          "current_meds": "",
+          "recent_changes": "",
+          "supportive_meds": ""
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "risk reduction",
+          "response_assessment": "Not mentioned in note."
+        },
+        "Medication_Plan_chatgpt": {
+          "hormonal therapy": {
+            "summary": "will start",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "chemotherapy": {
+            "summary": "discussed, not recommended due to risk-benefit ratio, patient declined",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "radiotherapy": {
+            "summary": "discussed as part of general approach to treatment",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "bowel regimen": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "pain medication": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "psychiatry medication": {
+            "summary": "not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          },
+          "other treatment": {
+            "summary": "Parkinson's disease management not mentioned",
+            "Short term side_effects_discussed": "not mentioned",
+            "Long term side_effects_discussed": "not mentioned"
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Ms. ***** will start hormonal therapy."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "will start hormonal therapy"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "discussed as part of general approach to treatment"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "will return to medical oncologist for further discussions and definitive treatment"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
