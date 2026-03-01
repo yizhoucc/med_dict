@@ -1,1 +1,56 @@
 Loading model...
+Loading weights: 100%|██| 291/291 [01:06<00:00,  5.84it/s, Materializing param=model.norm.weight]
+Loading weights: 100%|██| 291/291 [01:06<00:00,  4.39it/s, Materializing param=model.norm.weight]
+Model loaded.
+Data loaded: 10 rows (indices [20, 21, 22, 23, 24, 25, 26, 27, 28, 29])
+Using pipeline: v2
+
+Processing 10 rows...
+
+Processing row 20 (1/10)...
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (2168 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "No",
+  "in-person": "in-person",
+  "summary": "Follow up for consideration of adjunct therapy following recent diagnosis of right breast ductal ca
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for consideration of adjunct therapy following rec" -> "Follow up for consideration of adjunct therapy following rec"
+      [G6-SEMANTIC] summary: "Follow up for consideration of adjunct therapy following recent diagnosis of rig" -> "Recent diagnosis of right breast ductal carcinoma in situ (DCIS), considering ad"
+    What_We_Found: 6.3s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ ductal carcinoma in situ (DCIS)",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "I
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 2.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "" -> "Vitamin D and calcium supplementation"
+      [G6-SEMANTIC] current_meds: "" -> "Vitamin D and calcium supplementation"
+    Goals_of_care: 2.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "Intermediate grade DCIS, 5cm area of suspicious microcalcifications, comedo necr"
+  Extraction prompts: 17.4s
