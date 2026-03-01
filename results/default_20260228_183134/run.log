@@ -45,3 +45,17 @@ Processing row 3 (2/2)...
     Medication_Plan: 4.9s [re-extracted]
     Therapy_plan: 4.2s [re-extracted]
     radiotherapy_plan: 0.6s
+    Procedure_Plan: 2.1s [re-extracted]
+    Imaging_Plan: 2.7s [re-extracted]
+    Lab_Plan: 0.6s
+    Genetic_Testing_Plan: 0.9s
+    Referral: 1.6s
+    follow_up_next_visit: 0.9s
+    Advance_care_planning: 0.7s
+  Plan extraction prompts: 31.9s
+  Row 3 total: 50.4s
+  Row 3 saved to progress
+
+Total processing time: 86.6s (1.4min)
+Done! Results copied to ./results.txt
+Full results in: results/default_20260228_183134/
