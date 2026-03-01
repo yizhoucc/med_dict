@@ -15,3 +15,102 @@ Processing row 20 (1/20)...
   Regex matched: 'Assessment:'
   Regex extraction succeeded (2168 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 5.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Patient is a 70 y.o. female with a recent diagnosis of right breast ductal carcinoma in situ (DCI
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow-up"
+    Cancer_Diagnosis: 4.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "DCIS, ER+/PR+",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G3-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G6-SEMANTIC] Stage_of_Cancer: "" -> "T4a"
+    Lab_Results: 1.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 4.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "findings": "Intermediate grade DCIS spanning ~5.0 cm, clear surgical margins, no invasive ductal cancer, ER+ (98%), PR+ (90%), no palpable masses, no skin changes, no lymphadenopathy."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Intermediate grade DCIS spanning ~5.0 cm, clear surgical mar" -> "Intermediate grade DCIS spanning ~5.0 cm, clear surgical mar"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 1.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "" -> "She is not on any prescription meds, including no drug treatments for her dyslip"
+    Treatment_Changes: 2.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "None",
+"supportive_meds": "Vitamin D, calcium"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "None" -> "Vitamin D and calcium supplementation"
+      [G6-SEMANTIC] recent_changes: "Vitamin D and calcium supplementation" -> "No recent changes"
+    Treatment_Goals: 1.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant" -> "risk reduction"
+    Response_Assessment: 4.6s
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note mentions that she is being referred to Rad Onc and Med Onc for consideration of adjuvant radiation and endocrine therapy, and that she
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 26.7s
+    Medication_Plan_chatgpt: 22.0s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G3-FAITH] radiotherapy: "{'summary': 'XRT +/- endocrine therapy to minimize her futur" -> "{'summary': 'XRT +/- endocrine therapy to minimize her futur"
+      [G3-FAITH] bone therapy: "{'summary': 'Bisphosphonate therapy to mitigate bone density" -> "{'summary': 'Bisphosphonate therapy to mitigate bone density"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce" -> "{'summary': 'Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 4.4s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT, and may also consider bisphosphonate therapy to mitigate the risk
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arim" -> "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arim"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 11.7s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. Sh
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Patient is inclined toward undertaking additional adjuvant treatment(s) to minim" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
