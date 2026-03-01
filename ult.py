@@ -762,9 +762,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
                 f"For each claim, check: is it explicitly stated or directly supported by the note?\n"
                 f"- If ALL claims are supported, return the JSON exactly unchanged.\n"
-                f"- If any claim is NOT supported by the note, remove ONLY that unsupported claim "
-                f"and return the cleaned JSON.\n"
-                f"Return ONLY the JSON object."
+                f"- If any claim is NOT supported, replace ONLY the unsupported value with "
+                f"an empty string. Do NOT remove any keys.\n"
+                f"Return ONLY the JSON object with all original keys preserved."
                 f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
             cleaned_raw, _ = run_model_with_cache_manual(
@@ -777,10 +777,16 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             if cleaned_parsed is not None:
                 cleaned_keys = set(cleaned_parsed.keys())
                 if original_keys & cleaned_keys:
+                    # Restore any keys that were dropped by the LLM
+                    missing_keys = original_keys - cleaned_keys
+                    for mk in missing_keys:
+                        cleaned_parsed[mk] = parsed[mk]
+                    if missing_keys:
+                        flags.append(f"faith-restored-{len(missing_keys)}keys")
                     if cleaned_parsed != parsed:
                         flags.append("faith-trimmed")
                     parsed = cleaned_parsed
-                    answer = cleaned_raw
+                    answer = json.dumps(cleaned_parsed, ensure_ascii=False)
 
         # --- Gate 4: TEMPORAL (plan keys only) ---
         if verify and parsed is not None and key in PLAN_KEYS:
