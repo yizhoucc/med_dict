@@ -11095,3 +11095,30 @@ Processing row 74 (75/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 8.1s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "neoadjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] goals_of_treatment: "neoadjuvant" -> "neoadjuvant chemotherapy"
+  Extraction prompts: 34.9s
+    Medication_Plan_chatgpt: 41.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab) or weekly paclitaxel with carboplatin, administered every t
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 9.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab) or weekly paclitaxel with carboplatin, administered every three weeks or 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trast" -> "TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trast"
