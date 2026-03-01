@@ -2022,3 +2022,63 @@ Processing row 13 (14/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note" -> "The patient is currently on a combination of treatments, inc"
       [G6-SEMANTIC] response_assessment: "The patient is currently on a combination of treatments, including low dose chem" -> "Not mentioned in note"
   Extraction prompts: 33.8s
+    Medication_Plan_chatgpt: 49.2s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "currently on low dose chemo combination of letrozole 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week and gets immun
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'bowel regimen', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'bowel regimen', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 9.2s
+      [EXTRACT] raw={
+  "medication_plan": "currently on low dose chemo combination of letrozole 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday, Metabolic therapy 2x/week and gets immunological vacci
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "currently on postoperative radiotherapy to the spine including T1 through T10, plan to get CT CAP and Total Spine MRI in May, continue topical cannabis and sulfur, continue Cymbal
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "currently on postoperative radiotherapy to the spine including T1 through T10, p" -> "plan to get CT CAP and Total Spine MRI in May, continue topical cannabis and sul"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "postoperative radiotherapy to the spine including T1 through T10"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.6s
+      [EXTRACT] raw={
+  "imaging_plan": "CT CAP and Total Spine MRI in May"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
