@@ -17,6 +17,7 @@ import random
 import re
 import shutil
 import sys
+import time
 from datetime import datetime
 
 import torch
@@ -389,45 +390,6 @@ def extract_assessment_plan(note_text, model, tokenizer, config):
     return None
 
 
-def normalize_keypoints(keypoints):
-    """Normalize all keypoint values to a consistent format.
-
-    extract_and_verify sometimes returns dict, sometimes JSON string,
-    sometimes plain text. This normalizes:
-    - JSON strings → parsed dict
-    - Already-dict → kept as-is
-    - Plain text → kept as string
-    """
-    normalized = {}
-    for key, value in keypoints.items():
-        if isinstance(value, dict):
-            normalized[key] = value
-        elif isinstance(value, str):
-            # Try to parse as JSON
-            try:
-                parsed = json.loads(value)
-                if isinstance(parsed, dict):
-                    normalized[key] = parsed
-                else:
-                    normalized[key] = value
-            except (json.JSONDecodeError, ValueError):
-                # Try to fix common JSON issues (single quotes, trailing commas)
-                try:
-                    fixed = value.replace("'", '"')
-                    # Remove trailing commas before closing braces
-                    fixed = re.sub(r',\s*}', '}', fixed)
-                    parsed = json.loads(fixed)
-                    if isinstance(parsed, dict):
-                        normalized[key] = parsed
-                    else:
-                        normalized[key] = value
-                except (json.JSONDecodeError, ValueError):
-                    normalized[key] = value
-        else:
-            normalized[key] = value
-    return normalized
-
-
 def main():
     parser = argparse.ArgumentParser(description="Run medical extraction experiment")
     parser.add_argument("config", help="Path to experiment YAML config")
@@ -574,31 +536,36 @@ def main():
     }
 
     # 11. Main loop
+    global_start = time.time()
     print(f"\nProcessing {len(df)} rows...")
     for index, row in df.iterrows():
         if index in completed_indices:
             print(f"Skipping row {index} (already completed)")
             continue
 
+        row_start = time.time()
         print(f"\nProcessing row {index} ({index - row_range[0] + 1}/{len(df)})...")
 
         note_text = row["note_text"]
 
         # Extract assessment/plan with retries
+        ap_start = time.time()
         assessment_and_plan = extract_assessment_plan(
             note_text, model, tokenizer, config
         )
+        print(f"  A/P extraction: {time.time() - ap_start:.1f}s")
 
         # Extract keypoints from full note
+        ext_start = time.time()
         base_cache = build_base_cache(note_text, model, tokenizer)
         keypoints = extract_and_verify(
             extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify
         )
-        keypoints = normalize_keypoints(keypoints)
-        print("  Keypoints from extraction_prompts done")
+        print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
 
         # Extract plan keypoints from assessment/plan section
         if assessment_and_plan is not None:
+            plan_start = time.time()
             base_cache = build_base_cache(assessment_and_plan, model, tokenizer)
             plan_keypoints = extract_and_verify(
                 plan_extraction_prompts,
@@ -608,9 +575,10 @@ def main():
                 base_cache,
                 verify=verify,
             )
-            plan_keypoints = normalize_keypoints(plan_keypoints)
             keypoints.update(plan_keypoints)
-        print("  Keypoints from plan_extraction_prompts done")
+            print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
+
+        print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 
         # Build row result
         row_result = {
@@ -634,10 +602,13 @@ def main():
     current_progress["completed"] = True
     save_progress(run_dir, current_progress)
 
+    total_time = time.time() - global_start
+    print(f"\nTotal processing time: {total_time:.1f}s ({total_time/60:.1f}min)")
+
     # 13. Copy results.txt to project root
     project_root = os.path.dirname(os.path.abspath(__file__))
     shutil.copy2(results_path, os.path.join(project_root, "results.txt"))
-    print(f"\nDone! Results copied to ./results.txt")
+    print(f"Done! Results copied to ./results.txt")
     print(f"Full results in: {run_dir}/")
 
 

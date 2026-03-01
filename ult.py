@@ -1,6 +1,7 @@
 import csv
 import re
 import torch
+import time
 from typing import Dict, List, Tuple, Optional
 import nltk
 from nltk.corpus import stopwords, words
@@ -362,7 +363,8 @@ def build_base_cache(text, model, tokenizer):
         f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
         f"You are a medical data extraction expert. You will be given a long medical note. "
         f"Your task is to answer a series of questions about it, one by one. "
-        f"Respond *only* with the valid JSON object requested. Do not add markdown backticks or any other text."
+        f"You MUST respond with valid JSON only. Match the exact schema provided in each task. "
+        f"No markdown backticks, no explanations, no text before or after the JSON object."
         f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
         f"Here is the medical note:\n\n"
         f"--- BEGIN NOTE ---\n{text}\n--- END NOTE ---"
@@ -387,10 +389,68 @@ def build_base_cache(text, model, tokenizer):
     return base_cache
 
 
+def try_parse_json(text):
+    """Try to parse text as JSON with common cleanup.
+
+    Strips markdown backticks, fixes single quotes, removes trailing commas.
+    Returns parsed dict on success, None on failure.
+    """
+    if not text or not isinstance(text, str):
+        return None
+
+    cleaned = text.strip()
+    # Strip markdown code fences
+    cleaned = cleaned.strip("```json").strip("```").strip()
+
+    # Try direct parse first
+    try:
+        result = json.loads(cleaned)
+        return result if isinstance(result, dict) else None
+    except (json.JSONDecodeError, ValueError):
+        pass
+
+    # Try fixing common issues
+    try:
+        fixed = cleaned.replace("'", '"')
+        fixed = re.sub(r',\s*}', '}', fixed)
+        fixed = re.sub(r',\s*]', ']', fixed)
+        result = json.loads(fixed)
+        return result if isinstance(result, dict) else None
+    except (json.JSONDecodeError, ValueError):
+        pass
+
+    # Try extracting JSON from surrounding text
+    match = re.search(r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', cleaned, re.DOTALL)
+    if match:
+        try:
+            result = json.loads(match.group())
+            return result if isinstance(result, dict) else None
+        except (json.JSONDecodeError, ValueError):
+            pass
+
+    return None
+
+
+def extract_schema_from_prompt(prompt_text):
+    """Extract the JSON schema example from a prompt string.
+
+    Looks for the {...} block that serves as the expected output format.
+    """
+    # Find JSON-like blocks in the prompt
+    matches = list(re.finditer(r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', prompt_text, re.DOTALL))
+    if matches:
+        # Return the last match (usually the schema is at the end of the prompt)
+        return matches[-1].group()
+    return "{}"
+
+
 def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True):
     """
-    Extract keypoints from a set of prompts using a shared KV cache,
-    with optional faithfulness verification.
+    Extract keypoints with agentic self-correction:
+    1. Extract answer from model
+    2. Format repair: if not valid JSON, ask model to reformat
+    3. Faithfulness verify: check if answer is supported by source text
+       - If not faithful, re-extract with guidance
 
     Args:
         prompts: dict of {key: task_prompt_text}
@@ -401,11 +461,16 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         verify: whether to run faithfulness verification (default True)
 
     Returns:
-        dict of {key: extracted_value}
+        dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
     """
     keypoints = {}
 
     for key, task in prompts.items():
+        key_start = time.time()
+        repaired = False
+        re_extracted = False
+
+        # --- Step 1: Extract ---
         task_prompt = (
             f"<|start_header_id|>user<|end_header_id|>\n\n"
             f"{task}"
@@ -418,28 +483,111 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
         torch.cuda.empty_cache()
         gc.collect()
 
-        if verify:
-            verification_prompt = (
+        # --- Step 2: Format repair ---
+        parsed = try_parse_json(answer)
+        if parsed is None:
+            schema = extract_schema_from_prompt(task)
+            repair_prompt = (
                 f"<|start_header_id|>user<|end_header_id|>\n\n"
-                f"CONTEXT: You previously extracted the following information (Initial Answer):\n"
-                f"--- BEGIN INITIAL ANSWER ---\n{answer}\n--- END INITIAL ANSWER ---\n\n"
-                f"**CRITICAL TASK:** You must now act as a verifier. Review the Initial Answer against the original full medical note (which is stored in your memory/context).\n"
-                f"1. **Faithfulness Check:** Check if every statement in the Initial Answer is strictly supported by the original medical note.\n"
-                f"2. **Revision:** Generate a **Final Answer** by removing *any* part of the Initial Answer that is not supported by the original medical note. If the Initial Answer is fully supported, the Final Answer should be the same.\n"
-                f"Return the result strictly as a JSON object with the key 'final_answer'.\n"
+                f"Your previous response was:\n{answer}\n\n"
+                f"This is not valid JSON. Reformat it into valid JSON matching this exact schema:\n"
+                f"{schema}\n"
+                f"Return ONLY the JSON object, nothing else."
                 f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
             )
-            final_answer_raw, _ = run_model_with_cache_manual(
-                verification_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            repaired_answer, _ = run_model_with_cache_manual(
+                repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
             )
             torch.cuda.empty_cache()
             gc.collect()
-            try:
-                final_result = json.loads(final_answer_raw.strip().strip("```json").strip("```").strip())
-                keypoints[key] = final_result.get('final_answer', answer)
-            except json.JSONDecodeError:
-                keypoints[key] = answer
+
+            parsed = try_parse_json(repaired_answer)
+            if parsed is not None:
+                answer = repaired_answer
+                repaired = True
+
+        # --- Step 3: Faithfulness verify ---
+        if verify:
+            verification_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"CONTEXT: You previously extracted the following information:\n"
+                f"--- BEGIN EXTRACTED ---\n{answer}\n--- END EXTRACTED ---\n\n"
+                f"Check if every statement in the extraction is strictly supported by "
+                f"the original medical note in your context.\n"
+                f"Return a JSON object: {{\"faithful\": true}} if fully supported, "
+                f"or {{\"faithful\": false, \"issues\": \"describe what is not supported\"}} if not.\n"
+                f"Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            check_raw, _ = run_model_with_cache_manual(
+                verification_prompt, model, tokenizer,
+                {"max_new_tokens": 200, "do_sample": False, "eos_token_id": gen_config.get("eos_token_id", tokenizer.eos_token_id)},
+                kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            check_parsed = try_parse_json(check_raw)
+            is_faithful = True
+            issues = ""
+            if check_parsed:
+                is_faithful = check_parsed.get("faithful", True)
+                issues = check_parsed.get("issues", "")
+            else:
+                # Fallback: look for "false" in the raw output
+                is_faithful = "false" not in check_raw.lower()
+
+            if not is_faithful:
+                # Re-extract with guidance
+                re_extract_prompt = (
+                    f"<|start_header_id|>user<|end_header_id|>\n\n"
+                    f"Your previous extraction had issues: {issues}\n"
+                    f"Please re-extract. Here is the original task:\n{task}\n"
+                    f"Be very careful to only include information that is explicitly stated in the note. "
+                    f"Do not infer or add information."
+                    f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+                )
+                answer, _ = run_model_with_cache_manual(
+                    re_extract_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                )
+                torch.cuda.empty_cache()
+                gc.collect()
+                re_extracted = True
+
+                # Format repair again on re-extracted answer
+                parsed = try_parse_json(answer)
+                if parsed is None:
+                    schema = extract_schema_from_prompt(task)
+                    repair_prompt = (
+                        f"<|start_header_id|>user<|end_header_id|>\n\n"
+                        f"Your previous response was:\n{answer}\n\n"
+                        f"Reformat as valid JSON matching this schema:\n{schema}\n"
+                        f"Return ONLY the JSON object."
+                        f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+                    )
+                    repaired_answer, _ = run_model_with_cache_manual(
+                        repair_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+                    )
+                    torch.cuda.empty_cache()
+                    gc.collect()
+                    new_parsed = try_parse_json(repaired_answer)
+                    if new_parsed is not None:
+                        parsed = new_parsed
+                        answer = repaired_answer
+
+        # --- Step 4: Store result ---
+        if parsed is not None:
+            keypoints[key] = parsed
         else:
             keypoints[key] = answer
+
+        elapsed = time.time() - key_start
+        flags = []
+        if repaired:
+            flags.append("repaired")
+        if re_extracted:
+            flags.append("re-extracted")
+        flag_str = f" [{', '.join(flags)}]" if flags else ""
+        print(f"    {key}: {elapsed:.1f}s{flag_str}")
 
     return keypoints
