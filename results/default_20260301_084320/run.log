@@ -6944,3 +6944,154 @@ Processing row 46 (47/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 34.4s
+    Medication_Plan_chatgpt: 21.9s
+      [EXTRACT] raw={
+  "radiotherapy": {
+    "summary": "Will strongly encourage a course of radiation therapy to decrease the risk of recurrence of her ductal carcinoma in-situ",
+    "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['radiotherapy', 'hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy', 'hormonal therapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.4s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Will start tamoxifen prophylaxis. Will strongly encourage a course of radiation therapy to decrease the risk of recurrence of her ductal carcinoma in-situ."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Will start tamoxifen prophylaxis. Will strongly encourage a " -> "Will start tamoxifen prophylaxis and strongly encourage a co"
+      [G4-TEMPORAL] medication_plan: "Will start tamoxifen prophylaxis and strongly encourage a course of radiation th" -> "Will start tamoxifen prophylaxis and will strongly encourage a course of radiati"
+      [G6-SEMANTIC] medication_plan: "Will start tamoxifen prophylaxis and will strongly encourage a course of radiati" -> "Will start tamoxifen prophylaxis and strongly encourage a course of radiation th"
+    Therapy_plan: 4.3s
+      [EXTRACT] raw={
+  "therapy_plan": "Will strongly encourage a course of radiation therapy to decrease the risk of recurrence of her ductal carcinoma in-situ and will start tamoxifen prophylaxis."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.7s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Will strongly encourage a course of radiation therapy to decrease the risk of recurrence of her ductal carcinoma in-situ"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 2.7s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.3s
+      [EXTRACT] raw={
+  "Next clinic visit": "None"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 46.3s
+  Row 46 total: 80.7s
+  Row 46 saved to progress
+
+Processing row 47 (48/100)...
+  Injected 4 term definitions: ['progesterone receptor', 'estrogen receptor', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (731 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "New patient with newly diagnosed DCIS, purpose of visit is medical oncology consult"
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "New patient with newly diagnosed DCIS, purpose of visit is m" -> "New patient with DCIS, purpose of visit is medical oncology "
+      [G6-SEMANTIC] summary: "New patient with DCIS, purpose of visit is medical oncology consult for DCIS" -> "46-year-old woman with DCIS, purpose of visit is medical oncology consult for DC"
+    What_We_Found: 6.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "DCIS, ER+/PR+",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "Left breast mass, palpable 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 8.0s
+      [EXTRACT] raw={
+  "current_meds": "albuterol, desonide, diclofenac, hydrocortisone, lidocaine, omeprazole, triamcinolone, naproxen",
+  "recent_changes": "",
+  "supportive_meds": "albuterol, desonide, diclofenac, hy
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Goals_of_care: 2.3s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not mentioned in note"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 21.1s
