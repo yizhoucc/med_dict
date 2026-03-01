@@ -575,7 +575,41 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                         parsed = new_parsed
                         answer = repaired_answer
 
-        # --- Step 4: Store result ---
+        # --- Step 4: Temporal check (for plan-related keys) ---
+        # Verify that plan extractions don't include past/completed items
+        temporal_cleaned = False
+        plan_keys = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
+                      'Medication_Plan', 'Medication_Plan_chatgpt'}
+        if key in plan_keys and parsed is not None:
+            temporal_prompt = (
+                f"<|start_header_id|>user<|end_header_id|>\n\n"
+                f"Review this extraction for a PLAN section:\n"
+                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                f"This should contain ONLY current or future plans.\n"
+                f"Remove any items that are PAST/COMPLETED (indicated by past tense, "
+                f"past dates, 'underwent', 's/p', 'completed', 'had', 'was done').\n"
+                f"Keep items that are current ('continue', 'currently on') or future "
+                f"('will', 'plan to', 'pending', 'scheduled', 'next due', 'consider').\n"
+                f"Return the cleaned JSON with only current/future items. "
+                f"If nothing remains, return the appropriate 'None' or 'No ... planned.' value.\n"
+                f"Return ONLY the JSON object."
+                f"<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
+            )
+            cleaned_raw, _ = run_model_with_cache_manual(
+                temporal_prompt, model, tokenizer, gen_config, kv_cache=base_cache
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            cleaned_parsed = try_parse_json(cleaned_raw)
+            if cleaned_parsed is not None:
+                # Only use cleaned version if it's different (model actually removed something)
+                if cleaned_parsed != parsed:
+                    parsed = cleaned_parsed
+                    answer = cleaned_raw
+                    temporal_cleaned = True
+
+        # --- Step 5: Store result ---
         if parsed is not None:
             keypoints[key] = parsed
         else:
@@ -587,6 +621,8 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
             flags.append("repaired")
         if re_extracted:
             flags.append("re-extracted")
+        if temporal_cleaned:
+            flags.append("temporal-cleaned")
         flag_str = f" [{', '.join(flags)}]" if flags else ""
         print(f"    {key}: {elapsed:.1f}s{flag_str}")
 

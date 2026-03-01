@@ -30,11 +30,18 @@ Medication_Plan: |
 
 Therapy_plan: |
   TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
-  Include chemotherapy, radiotherapy, hormonal therapy, and bone-therapy plans. Include future plans, changes to current therapy (start, stop, continue). Do not include past therapies.
+  Include ONLY current or future therapy: chemotherapy, radiotherapy, hormonal therapy, and bone-therapy.
+  Include future plans, changes to current therapy (start, stop, continue).
+
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018"
+  - CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
+  - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
+
   Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
   Respond *only* with a JSON object using this exact schema:
   {
-      "therapy_plan": "A summary of the complete therapy plan with specific details."
+      "therapy_plan": "A summary of the current and future therapy plan with specific details."
   }
 
 radiotherapy_plan: |
@@ -51,8 +58,13 @@ radiotherapy_plan: |
 Procedure_Plan: |
   TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
   Include ONLY future/planned procedures: surgery, biopsy, lumbar puncture, Chemo Port Insertion, or other interventional procedures.
-  DO NOT include:
-  - Procedures already completed or past results (e.g., "MRI showed..." is a past result, not a planned procedure)
+
+  CRITICAL — distinguish PAST from FUTURE:
+  - PAST (DO NOT include): "underwent mastectomy on 10/29/16", "s/p colectomy in June 2018", "had biopsy on 05/25", "completed radiation"
+  - FUTURE (include): "will schedule biopsy", "plan for port placement", "surgery pending", "scheduled for colectomy next week"
+  If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
+
+  Also DO NOT include:
   - Imaging plans (CT, MRI, PET — these go in Imaging Plan)
   - Lab plans
   - Medication plans
@@ -67,10 +79,13 @@ Imaging_Plan: |
   TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
   Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray.
   Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
-  DO NOT include:
-  - Past imaging or imaging results (e.g., "MRI showed lesions" is a past result)
-  - Any procedure plan, lab plan, or medication plan
-  List SPECIFIC imaging types when mentioned. Do NOT use vague terms like "staging workup" — instead list the actual tests (e.g., "MRI brain, bone scan").
+
+  CRITICAL — distinguish PAST from FUTURE:
+  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed..."
+  - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening"
+
+  DO NOT include any procedure plan, lab plan, or medication plan.
+  List SPECIFIC imaging types. Do NOT use vague terms like "staging workup".
   If no future imaging is planned, say "No imaging planned."
   Respond *only* with a JSON object using this exact schema:
   {
