@@ -48,7 +48,8 @@
     43,
     44,
     45,
-    46
+    46,
+    47
   ],
   "results": {
     "0": {
@@ -4382,6 +4383,112 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "None"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "47": {
+      "coral_idx": 187,
+      "note_text": "*****  46 yo F    CC  New L breast CA    HPI  Ms. ***** noted a breast mass in the left breast in May.  She had a diagnostic mammogram which showed a 3.8 cm complex solid/***** mass. She underwent core biopsy on June 12 and path came back as \"scant detached fragments of carcinoma with necrosis.  She had a breast mri on July 05 which indicated a 31 mm span of disease. R breast was wnl.     No family hx of breast cancer.  No use of hormones.   First child born at age 34    Repeat Left breast MRI directed core biopsy on 07/06/2017.    Left breast core biopsy confirmed palpable DCIS.  FINAL PATHOLOGIC DIAGNOSIS  Left breast, ultrasound-guided core biopsy:   1. At least ductal carcinoma in situ, intermediate nuclear grade; see  comment.  2. Biopsy site changes and necrosis.  3. Microcalcifications with stroma and as detached fragments.  The test for estrogen receptors is positive. There is moderate to  strong nuclear staining in ~90% of tumor cells. Internal positive  control is present, and external positive control is appropriate.    The test for progesterone receptors is positive. There is variable  (ranging from weak to strong) nuclear staining in ~60% of tumor cells.  Internal positive control is present, and external positive control is  Appropriate.    Pt here for med onc *****.          Patient Active Problem List    Diagnosis Date Noted   \u0007 Anxiety 05/21/2017   \u0007 Bilateral arm pain 12/07/2016   \u0007 Ganglion cyst of foot, right 11/29/2016   \u0007 Trichomonal infection 03/13/2016   \u0007 Preventative health care 03/13/2016   \u0007 Midline low back pain without sciatica 08/11/2015   \u0007 GERD (gastroesophageal reflux disease) 01/22/2013           Patient Active Problem List   Diagnosis   \u0007 GERD (gastroesophageal reflux disease)   \u0007 Midline low back pain without sciatica   \u0007 Trichomonal infection   \u0007 Preventative health care   \u0007 Ganglion cyst of foot, right   \u0007 Bilateral arm pain   \u0007 Anxiety            Past Medical \n History:   Diagnosis Date   \u0007 Asthma    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Seasonal allergies        No past surgical history on file.           Allergies   Allergen Reactions   \u0007 Cyclobenzaprine Itching and Rash   \u0007 Other      Shrimp- Hives    Only when consuming too much   \u0007 Shellfish Containing Products        Current Medications          Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 albuterol 90 mcg/actuation metered dose inhaler Inhale 2 puffs into the lungs every 4 (four) hours as needed for Wheezing. 1 Inhaler 3   \u0007 desonide (DESOWEN) 0.05 % ointment Apply topically 3 (three) times daily as needed (itching). Use as instructed 30 g 0   \u0007 diclofenac (VOLTAREN) 1 % GEL gel Apply 2 g topically 4 (four) times daily. 1 Tube 1   \u0007 hydrocortisone 2.5 % cream Use as instructed 30 g 1   \u0007 lidocaine (LIDODERM) 5 % patch Place 1 patch onto the skin Once a day. Leave patch on for 12 hours and then remove for 12 hours 30 patch 0   \u0007 omeprazole (PRILOSEC) 20 mg capsule TAKE 1 CAPSULE(20 MG) BY MOUTH DAILY FOR ACID REFLUX 30 capsule 0   \u0007 triamcinolone (KENALOG) 0.1 % ointment Apply to affected area twice daily for up to 2 weeks. 15 g 1   \u0007 naproxen (NAPROSYN) 500 mg tablet Take 1 tablet (500 mg total) by mouth 2 (two) times daily with meals. (Patient not taking: Reported on 07/04/2017) 60 tablet 0     No current facility-administered medications for this visit.           There are no discontinued medications.      Social History   Social History           Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: 1   \u0007 Years of education: N/A           Occupational *****   \u0007 ***** ***** - *****     ***** ***** ***** ***** *****          ***** History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use No   \u0007 Drug use: No   \u0007 Sexual activity: No          Other Topics Concern   \u0007 Not on file \n         Social History Narrative    Lives with son, who is 12, and mother.     Divorced.                    Family History   Problem Relation Age of Onset   \u0007 Lung cancer Father    \u0007 Other Brother    \u0007 Breast cancer Neg Hx    \u0007 Ovarian cancer Neg Hx    \u0007 Colon cancer Neg Hx    \u0007 Melanoma Neg Hx    \u0007 Basal cell carcinoma Neg Hx    \u0007 Squamous cell carcinoma Neg Hx    ROS  Review of Systems -   General ROS: negative  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + s/p bx, healing. + L breast mass in place.  Respiratory ROS: negative  Cardiovascular ROS: negative  Gastrointestinal ROS: negative  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: negative  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative          PHYSICAL EXAM  BP 111/55 (BP Location: Right upper arm, Patient Position: Sitting, Cuff Size: Adult)  | Pulse 74  | Temp 36.6 ***** (97.9 F) (Oral)  | Resp 16  | Ht 146.7 cm (4' 9.76\") Comment: 08/06/17 @***** | Wt 52.1 kg (114 lb 14.4 oz)  | SpO2 100%  | BMI 24.22 kg/m     General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic   Eyes:    PERRL, conjunctiva/corneas clear, EOM's intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity    Heart:    Regular rate and \n rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality on R. + L breast mass, approx 3 cm greatest diam. + tenderness, mild.   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical, supraclavicular, and axillary nodes normal   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     throughout           RESULTS  I have independently visualized and interpreted the labs and images and have discussed with patient.  06/06/17 mammo  Mammographic Findings:  The breasts are heterogeneously dense, which may obscure small masses.  ***** ***** skin marker indicates site of patient's reported lump in the inner left breast. There is a corresponding irregular mass with indistinct margins, measuring approximately 4 cm in the inner central left breast, middle depth. There are associated fine pleomorphic calcifications within the mass.  Immediately lateral to the previously described mass, there is a second oval shaped low-density mass with obscured margins in the central lower left breast, middle depth, measuring approximately 3 cm.  In the outer central right breast, very posterior depth, there is a oval-shaped isodense mass with partially circumscribed, though some obscured margins measuring approximately 1 cm.    Ultrasound Findings:  Targeted ultrasound of both breasts was performed by a physician. At the patient-reported lump, at the 9 o'clock position, 3 cm from the nipple, there is a 3.8 x 2.1 x 3.0 cm irregular complex solid and cystic mass with surrounding vascularity.  Corresponding to the second mass in the left breast on mammogram, in the left ***** region 6 o'clock position and \n immediately adjacent to the previously described complex solid and cystic mass, there is a 2.8 x 1.8 x 2.6 cm simple cyst.  Corresponding to the mass in the right breast on mammogram, in the inner central right breast, at the 9 o'clock position 3 cm the nipple, there is a conglomerate of simple cysts measuring up to 1.1 cm.  Benign appearing lymph nodes are seen in both axillae.    IMPRESSION:   Left breast: Highly suggestive of malignancy (BI-RADS 5).  Right breast: Benign (BI-RADS 2).    06/12/17 path core  FINAL PATHOLOGIC DIAGNOSIS    Left breast, ultrasound-guided core biopsy: Scant detached fragments of  carcinoma with necrosis and calcifications    07/05/17 mri  MRI Findings:  This bilateral breast MRI exam demonstrates mild background enhancement.  There are scattered areas of fibroglandular tissue.    RIGHT Breast:  No abnormal areas of enhancement or other MRI features of malignancy are identified.    LEFT Breast:  There is a heterogeneous 23 anteroposterior x 23 transverse x 24 craniocaudal mm (axial post contrast image 47/*****, sagittal reformat image 118/*****) oval mass with irregular margins and rim enhancement in the inner central left breast. ***** intensity/time curve demonstrates rapid initial rise and washout enhancement kinetics.  Extending anterolateral from the index malignancy is non-mass enhancement with clumped internal enhancement, with a total extent of disease measuring 31 mm (axial post contrast image 52/***** of series 2).    IMPRESSION:   Left breast: Known biopsy proven malignancy (BI-RADS 6).  Right breast: Negative (BI-RADS 1).    July 06 bx:  FINAL PATHOLOGIC DIAGNOSIS    Left breast, ultrasound-guided core biopsy:   1. At least ductal carcinoma in situ, intermediate nuclear grade; see  comment.  2. Biopsy site changes and necrosis.  3. Microcalcifications with stroma and as detached fragments.       COMMENT:  The biopsy consists mostly of granulation tissue, foamy \n macrophages,  hemosiderin and fibrin, consistent with biopsy site changes. Also noted  are fragments of necrotic tissue. Relatively scant carcinoma is sampled,  most with smooth round contour while some partially disrupted by the  granulation tissue and foamy macrophages. To further characterize the  carcinoma, the following immunostains are performed and evaluated on  block A1:    - *****: Positive around some tumor nests; negative around other tumor  nests.  - SMM: Positive around some tumor nests; negative around other tumor  nests.  - *****/6: Positive around some tumor nests; negative around other tumor  nests. Negative in tumor cells.    Positive *****, SMM and *****/6 around some tumor nests supports the  presence of DCIS. Tumor nests with negative *****, SMM and *****/6 are  largely associated with and disrupted by granulation tissue, which may  impact the staining for myoepithelial markers. Overall, the findings are  not diagnostic of invasion in this limited biopsy. Patient's prior  biopsy (*****-*****) is reviewed concurrently. Given two biopsies with  findings not diagnostic of invasion, we would recommend complete  excision for definite evaluation of invasion.    Dr. ***** ***** has reviewed this case and agrees with the diagnosis.    Immunohistochemical tests for estrogen and progesterone receptors were  performed by manual morphometry on block A1.    The test for estrogen receptors is positive. There is moderate to  strong nuclear staining in ~90% of tumor cells. Internal positive  control is present, and external positive control is appropriate.    The test for progesterone receptors is positive. There is variable  (ranging from weak to strong) nuclear staining in ~60% of tumor cells.  Internal positive control is present, and external positive control is  appropriate.      Methodology  Fixative: 10% Neutral-buffered formalin  Cold ischemia time: < 1 hour  Duration of fixation: 6-72 hours   ER antibody \n clone: SP1 (*****)  PR antibody clone: 1E2 (*****)       Interpretive criteria  ER/PR:  Positive: reported when = 1% of invasive tumor cells shows any nuclear  staining  Negative: reported when < 1% of invasive cells shows any nuclear  staining.          Specimen(s) Received  A:Left breast mass ultrasound guided core biopsy (time in formalin   4:20pm)      Clinical History  ***** ***** is a 46 year-old woman with a 2.5 cm left breast mass at  9:00, 3 cm from nipple. Previous biopsy shows detached fragment of  carcinoma (*****-*****). The patient now undergoes re-sampling for  additional testing.      Gross Description  The specimen is received in formalin, labeled with patient's name,  medical record number and \"left breast mass,\" and consists of multiple  irregular cores and fragments of soft white-pink to dark red tissue (1.2  x 0.8 x 0.1 cm in aggregate). The specimen is entirely submitted in  cassette *****. (lds)    All controls performed with the immunohistochemical stains reported  above reacted appropriately. These immunohistochemical stains were  developed and their performance characteristics determined by the *****  Medical Center Department of Pathology. They have not been cleared or  approved by the U. S. Food and Drug Administration. The FDA has  determined that such clearance or approval is not necessary. These tests  are used for clinical purposes. They should not be regarded as  investigational or for research. This laboratory is certified under the  Clinical Laboratory Improvement Amendments of 1988 (\"CLIA\") as qualified  to perform high-complexity clinical testing.        Diagnosis based on gross and microscopic examinations. Final diagnosis  made by attending pathologist following review of all pathology slides.   The attending pathologist has reviewed all dictations, including  prosector work, and preliminary interpretations performed by any  resident involved in the case and performed \n all necessary edits before  signing the final report.    ***** *****/Pathology Resident  *****-***** *****/Pathologist    Electronically signed out on *****/*****/***** *****:*****       Accession #   *****-*****   Pathologist   *****-***** *****, MD         ASSESSMENT & PLAN  # Breast tumor, Left. Bx positive for DCIS. ***** ***** ***** is a 46 y.o. female with left breast mass and biopsy showing component of  Adenocarcinoma. *****. *****.    - reviewed path results from recent Bx's, showing DCIS. Discussed that pt's stage is not yet final, pending definitive breast surg.  - discussed that breast surg should be performed for her tumor, which is at least DCIS  - discussed that if DCIS only is found, pt is potentially a candidate for further adj rx, e.g. XRT +/- adj endocrine Rx  - discussed that if invasive cancer is found, pt will require LN bx and consideration of adj Rx    RTC after surg completed    Pt visit was 50 min, with >50% of the time spent on counseling.         \n",
+      "assessment_and_plan": "ASSESSMENT & PLAN  # Breast tumor, Left. Bx positive for DCIS. ***** ***** ***** is a 46 y.o. female with left breast mass and biopsy showing component of  Adenocarcinoma. *****. *****.    - reviewed path results from recent Bx's, showing DCIS. Discussed that pt's stage is not yet final, pending definitive breast surg.  - discussed that breast surg should be performed for her tumor, which is at least DCIS  - discussed that if DCIS only is found, pt is potentially a candidate for further adj rx, e.g. XRT +/- adj endocrine Rx  - discussed that if invasive cancer is found, pt will require LN bx and consideration of adj Rx    RTC after surg completed    Pt visit was 50 min, with >50% of the time spent on counseling.         \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "46-year-old woman with DCIS, purpose of visit is medical oncology consult for DCIS"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "DCIS, ER+/PR+",
+          "Stage_of_Cancer": "Not mentioned in note",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "",
+          "findings": "Left breast mass, palpable DCIS, 3 cm greatest diameter"
+        },
+        "Treatment_Summary": {
+          "current_meds": "albuterol, desonide, diclofenac, hydrocortisone, lidocaine, omeprazole, triamcinolone, naproxen",
+          "recent_changes": "",
+          "supportive_meds": "albuterol, desonide, diclofenac, hydrocortisone, lidocaine, omeprazole, triamcinolone, naproxen"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "curative",
+          "response_assessment": "Not mentioned in note"
+        },
+        "Medication_Plan_chatgpt": {
+          "chemotherapy": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "hormonal therapy": {
+            "summary": "discussed XRT +/- adj endocrine Rx",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "radiotherapy": {
+            "summary": "discussed XRT +/- adj endocrine Rx",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "bone therapy": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "bowel regimen": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "pain medication": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "psychiatry medication": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          },
+          "other treatment": {
+            "summary": "",
+            "Short term side_effects_discussed": null,
+            "Long term side_effects_discussed": null
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "discussed XRT +/- adj endocrine Rx"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "discussed XRT +/- adj endocrine Rx"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "discussed XRT"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "surgery"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "RTC after surg completed"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
