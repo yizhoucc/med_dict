@@ -12615,3 +12615,69 @@ The value for "goals_of_treatment" is correct, as the note mentions that the pat
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Symptoms have improved, patient is taking morphine for pain."
   Extraction prompts: 51.3s
+    Medication_Plan_chatgpt: 42.3s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "AC/T chemotherapy, completed",
+    "Short term side_effects_discussed": "not mentioned",
+    "Long term side_effects_discussed": "not mentioned"
+  },
+  "hormonal 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 4.0s
+      [EXTRACT] raw={
+  "medication_plan": "continue pain meds as prescribed, continue steroid taper per Dr. *** for bowel regimen, 2-week radiation washout for trial"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 2.1s
+      [EXTRACT] raw={
+  "therapy_plan": "continue fulvestrant/palbociclib, 2-week radiation washout for trial"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 3.4s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "palliative radiation to the left clavicle and left glenoid region, palliative radiation, 2-week radiation washout for trial"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.4s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "palliative radiation to the left clavicle and left glenoid region, palliative radiation, 2-week radiation washout for trial, Rad Onc referral"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "palliative radiation to the left clavicle and left glenoid region, palliative ra" -> "Rad Onc referral"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.9s
+      [EXTRACT] raw={
+  "imaging_plan": "Brain MRI"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
