@@ -1369,3 +1369,97 @@ Processing row 9 (10/100)...
   Regex matched: 'Assessment \Plan :'
   Regex extraction succeeded (1525 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 11.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "Follow up for Cancer of central portion of left breast (Stage II), HR+, post-neoadjuvant letrozole,
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for Cancer of central portion of left breast (Stag" -> "Cancer of central portion of left breast, Stage II, HR+, pos"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 14.0s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/HR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "No new findings ment
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 7.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole",
+  "recent_changes": "",
+  "supportive_meds": "Cephalexin, Trazodone"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "She stopped smoking"
+    Goals_of_care: 11.5s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+
+Reviewing each field:
+- "goals_of_treatment" is correct, as the note mentions "She will have the simula
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "cancer is low risk and not requiring chemotherapy"
+  Extraction prompts: 44.9s
+    Medication_Plan_chatgpt: 12.6s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "continue letrozole started April 2021",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "radiotherapy": {
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.0s
+      [EXTRACT] raw={
+  "medication_plan": "continue letrozole, to have radiation to the left chest wall and surrounding lymph nodes"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.1s
+      [EXTRACT] raw={
+  "therapy_plan": "continue letrozole, to have radiation to the left chest wall and surrounding lymph nodes"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.1s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "to have radiation to the left chest wall and surrounding lymph nodes"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 3.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "procedure_plan": "s/p left mastectomy with a 8.8cm tumor with 7/20 lymph nodes involved, bilateral breast reductions with re-excision for margins 8/7/2021"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "s/p left mastectomy with a 8.8cm tumor with 7/20 lymph nodes involved, bilateral" -> "No procedures planned."
+      [G6-SEMANTIC] ok (all values answer their fields)
