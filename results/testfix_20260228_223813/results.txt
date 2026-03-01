@@ -235,3 +235,99 @@ Respond *only* with a JSON object using this exact schema:
 
 
 
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 21
+============================================================
+
+--- Column: coral_idx ---
+160
+
+--- Column: note_text ---
+"Subjective:       Patient ID: ***** ***** ***** ***** ***** 70 y.o. female referred for consideration of adjunct therapy following her recent diagnosis of right breast ductal carcinoma in situ (DCIS).    HPI  This postmenopausal ***** female is referred by breast surgeon Dr. ***** ***** following recent partial mastectomy for biopsy proven DCIS. She has ***** General Medicine history of care at ***** for osteopenia, dyslipidemia, impaired glucose tolerance, and also general health screening. Her recent mammographic screen (on 10/09/2018, compared with 05/10/2016 and earlier screens) identified an increase in suspicious, segmental, heterogeneously dense microcalcifications in her right upper outer breast; and imaged guided biopsy of these calcifications showed intermediate grade DCIS, ER+ (98%) PR+ (90%).  Her right breast 11/08/2018 stereotactic core biopsy showed intermediate grade DCIS associated with calcifications; and her ***** localized right upper quadrant partial mastectomy on 12/28/2017 showed intermediate nuclear grade DCIS, mixed solid papillary, cribiform pattern with some comedo necrosis, no invasive ductal cancer but DCIS spanning ~5.0 cm (9 contiguous slices), clear surgical margins. She has had an uncomplicated post-surgical course and was last seen by Dr. ***** on January 10 when she was referred to ***** ***** (today's visit) and also Rad Onc (scheduled for 02/01/2019) for consideration of adjuvant radiation +/- endocrine therapy to reduce her risk of right breast DCIS recurrence or progression to invasive cancer.    Medical, surgical, reproductive, family and social histories: menarche age 13, G0P0, menopause age 51, no history of hormone replacement therapy. She had benign right breast FNA in 2001 (*****, *****) and was evaluated for the UCSF ***** breast screening study in 2016 when she was estimated to have ***** 1.21% ***** 5 year risk of developing breast cancer (not elevated) and ***** ***** model 5 year risk of \n 2.97%. Due to her strong family history of breast cancer (two sisters in their 50s, plus multiple ***** in their 50s and ***** niece in her 40s with breast cancer) she had genetic testing (Invitae) on 09/20/2016 which evaluated 52 genes all of which were negative for any pathogenic variant sequences. She's had ***** recent bone density study 10/11/2018 (compared to 07/01/2014) showing continued osteopenia for which she's been on treatment with vitamin D and calcium supplementation; her bone density study will be repeated in 2 years. Apart from colonoscopy screening several years ago, she has never had any other surgical procedure. She is not on any prescription meds, including no drug treatments for her dyslipidemia or impaired glucose tolerance; and she has no known allergies. Her parents emigrated from ***** China when she was an infant and she has been ***** ***** ***** resident all her life. She is ***** never smoker and does not consume alcohol.    Review of Systems  Constitutional: Negative.  Negative for chills, fever, malaise/fatigue and weight loss.   HENT: Negative.  Negative for congestion and hearing loss.    Eyes: Negative.  Negative for blurred vision and double vision.   Respiratory: Negative.  Negative for cough, shortness of breath, wheezing and stridor.    Cardiovascular: Negative.  Negative for chest pain and palpitations.   Gastrointestinal: Negative.  Negative for abdominal pain, blood in stool, melena, nausea and vomiting.   Genitourinary: Negative.  Negative for dysuria, flank pain and hematuria.   Skin: Negative.  Negative for itching and rash.   Neurological: Negative.  Negative for dizziness, focal weakness, seizures and loss of consciousness.   Endo/Heme/Allergies: Negative.  Negative for environmental allergies.   Musculoskeletal: describes some chronic ***** (prior right shoulder strain)        Objective:      Physical Exam  BP 113/69  | Pulse 68  | Temp 36.5 C (97.7 F) (Temporal)  | Resp \n 18  | Ht 159 cm (5' 2.6\") Comment: 01/14/2019 @***** | Wt 46.5 kg (102 lb 9.6 oz) Comment: with shoes | LMP 12/07/1998  | SpO2 100%  | BMI 18.41 kg/m   Constitutional:       Appearance: She is ***** well-developed and well-nourished ***** female appearing somewhat younger than her chronologic age.   HEENT:      Head: Normocephalic and atraumatic. Scalp and hair normal.     Nose: Nose normal.      Mouth/Throat: clear mucosa.     Dentition: Normal.   Neck:      Normal range of motion and neck supple. No cervical adenopathy or thyromegaly.  Chest and Back:      Breasts: Breasts are symmetrical. No ***** or axillary adenopathy by palpation        Right: small well healing partial mastectomy wound, sutures recently removed, no evidence of exudate or erythema.         Left: Normal by inspection and palpation     Back: nontender   Cardiovascular:      Rate and Rhythm: Normal rate and regular rhythm.      Heart sounds: Normal heart sounds.   Pulmonary:      Effort: Pulmonary effort is normal.      Breath sounds: Normal breath sounds.   Abdomen: nontender, BS+; no distention, organomegaly, masses or fluid  Extremities: good peripheral color, no edema; full joint ROM; symmetric pulses and reflexes bilaterally  Neurological:      Mental Status: She is alert and oriented to person, place, and time.   Psychiatric:         Mood and Affect: Mood and affect normal.       Assessment:       Nulliparous postmenopausal ***** female who, despite strong family history of breast cancer, negative genetic screen, and relatively low estimates of ever developing breast DCIS or breast cancer, showed progressing ~5cm area of suspicious ***** microcalcifications that, following complete resection, revealed intermediate grade ER+/PR+ DCIS spanning 5cm and including areas of comedo necrosis. I discussed with her Dr. *****'s recommendation that she be evaluated by Rad Onc and Med Onc to consider both adjuvant XRT and endocrine therapy to minimize \n her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade, given her overall excellent health and likelihood of living another 20 years. I informed her that, overall, patients with DCIS may have up to 25-30% recurrence risk which could be reduced to 15% or less if given breast XRT; and that adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT would further reduce her risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast. I emphasized that these options would not likely enhance her longevity.  I also pointed out that by the MSKCC nomogram for DCIS recurrence risk, inputting her age and all other features, her 10 year risk might be closer to 15%, but that XRT +/- endocrine therapy would provide significant risk reduction that she should consider further after her pending UCSF Rad Onc consultation. We also discussed the side effects and MSS and bone density complications of aromatase inhibitor therapy given her present diagnosis of osteopenia, and how this latter risk could be mitigated with bisphosphonate therapy.       Plan:       She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She understands and looks forward to her ***** evaluation in two weeks which requires her first decision. She will then plan to return for ***** follow-up visit in 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted.         \n"
+
+--- Column: assessment_and_plan ---
+"Assessment:       Nulliparous postmenopausal ***** female who, despite strong family history of breast cancer, negative genetic screen, and relatively low estimates of ever developing breast DCIS or breast cancer, showed progressing ~5cm area of suspicious ***** microcalcifications that, following complete resection, revealed intermediate grade ER+/PR+ DCIS spanning 5cm and including areas of comedo necrosis. I discussed with her Dr. *****'s recommendation that she be evaluated by Rad Onc and Med Onc to consider both adjuvant XRT and endocrine therapy to minimize \n her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade, given her overall excellent health and likelihood of living another 20 years. I informed her that, overall, patients with DCIS may have up to 25-30% recurrence risk which could be reduced to 15% or less if given breast XRT; and that adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT would further reduce her risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast. I emphasized that these options would not likely enhance her longevity.  I also pointed out that by the MSKCC nomogram for DCIS recurrence risk, inputting her age and all other features, her 10 year risk might be closer to 15%, but that XRT +/- endocrine therapy would provide significant risk reduction that she should consider further after her pending UCSF Rad Onc consultation. We also discussed the side effects and MSS and bone density complications of aromatase inhibitor therapy given her present diagnosis of osteopenia, and how this latter risk could be mitigated with bisphosphonate therapy.       Plan:       She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She understands and looks forward to her ***** evaluation in two weeks which requires her first decision. She will then plan to return for ***** follow-up visit in 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted.         \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "Recent diagnosis of right breast ductal carcinoma in situ (DCIS), considering adjunct therapy to reduce risk of recurrence or progression to invasive cancer"
+  },
+  "What_We_Found": {
+    "Type_of_Cancer": "ER+/PR+ ductal carcinoma in situ (DCIS)",
+    "Stage_of_Cancer": "Not mentioned in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No",
+    "lab_summary": "",
+    "findings": "Intermediate grade DCIS, 5cm area of suspicious microcalcifications, comedo necrosis"
+  },
+  "Treatment_Summary": {
+    "current_meds": "Vitamin D and calcium supplementation",
+    "recent_changes": "",
+    "supportive_meds": "Vitamin D and calcium supplementation"
+  },
+  "Goals_of_care": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Intermediate grade DCIS, 5cm area of suspicious microcalcifications, comedo necrosis"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT",
+      "Short term side_effects_discussed": "side effects and MSS and bone density complications",
+      "Long term side_effects_discussed": "bone density complications, which could be mitigated with bisphosphonate therapy"
+    },
+    "radiotherapy": {
+      "summary": "XRT +/- endocrine therapy",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    },
+    "bone therapy": {
+      "summary": "bisphosphonate therapy to mitigate bone density complications",
+      "Short term side_effects_discussed": "not mentioned",
+      "Long term side_effects_discussed": "not mentioned"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "She will start adjuvant endocrine therapy (e.g. Arimidex) for 5 years after XRT, and may also receive XRT +/- endocrine therapy. She will also be on bisphosphonate therapy to mitigate bone density complications."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "She will receive XRT +/- endocrine therapy, and will start adjuvant endocrine therapy (e.g. Arimidex) for 5 years after XRT."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "XRT +/- endocrine therapy"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "She will return for follow-up in 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
