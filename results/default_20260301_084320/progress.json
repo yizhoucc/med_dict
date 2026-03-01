@@ -49,7 +49,8 @@
     44,
     45,
     46,
-    47
+    47,
+    48
   ],
   "results": {
     "0": {
@@ -4489,6 +4490,77 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "RTC after surg completed"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "48": {
+      "coral_idx": 188,
+      "note_text": "BREAST ONCOLOGY INITIAL CONSULTATION    Name: ***** *****  *****: *****    ID: ***** ***** is a 50 y.o. female patient with a recent diagnosis of a left breast ductal carcinoma, biopsy positive LN in ipsilateral axilla, here to establish care with medical oncology prior to planned left breast mastectomy, currently scheduled for 01/06/17.     HPI: The patient presented to the ***** ***** ***** on 09/10/16 with a painful lump in her left axilla which she thought had been exacerbated after several days of intense exercise including upper body weights.  She was provided with a prescription for dicloxacillin at the ED and told to follow up with her PCP, who then referred her for a mammogram and ultrasound.     A diagnostic mammogram on 09/29/16 was notable for extremely dense breast tissue and possibly a new, partially circumscribed, partially obscured nodule (1.2 cm) at the 2:00 position in the right breast.  A targeted right breast ultrasound at the 2:00 position was notable for a hypoechoic structure (1.4 cm) that corresponded to the mammographic nodule, likely a cyst with debris.  Targeted ultrasound of a palpable abnormality in the upper outer right breast was notable for multiple simple cysts (largest 3.8 cm).  A targeted left axillary ultrasound of the palpable mass demonstrated a solid, hypoechoic mass (1.6 x 1.3 x 1.4 cm).    She underwent an US-guided left axillary LN biopsy on 10/28/16 which demonstrated metastatic carcinoma of mammary origin, with the lymph node largely replaced.  Biomarkers were notable for ER+ (60%), PR+ (70%), *****- (IHC 2+; FISH ratio 1.4).  She underwent a right breast needle aspiration of the nodule at the 2:00 position which was consistent with a cyst with reactive/degenerative cellular changes and no malignancy.    ***** underwent a breast MRI on 11/09/16 which was notable for an area of irregular asymmetric non-mass enhancement (4 x 2.5 x 3 cm) in the upper left breast, posterior third at the \n 12:00 position, 7 cm from the nipple with extension posteriorly to the pectoralis muscle without muscle involvement.  In addition, in the upper inner left breast, middle third, there was a bilobed enhancing nodule (1 cm), located 5 cm from the nipple, and 3 cm from the chest wall.  A lymph node (2.5 cm) was present in the left axilla with associated clip as well as additional prominent asymmetric left axillary LN.  The right breast was notable for scattered cysts, but no suspicious enhancing masses.    She then underwent a left breast US to look at the MRI-findings at the 12:00 position demonstrated an area of hypoechogenicity (2.3 cm). A left breast US-guided core biopsy at the 12:00 position was notable for invasive ductal carcinoma with ER+ (100%), PR+ (100%), *****- (IHC 2+; FISH ratio 1.4).  A left breast US to look at the MRI-findings at the 10:00 position demonstrated a vague hypoechoic area.  A left breast US-guided core biopsy at the 10:00 position was notable for invasive ductal carcinoma, also with ER+ (100%), PR+ (100%), *****- (IHC 0).  This biopsy was sent for ***** and resulted as low risk with a score of 11.    She underwent a PET with CT for attenuation purposes on 11/22/16 demonstrated no uptake in known left axillary LN metastasis or in the left breast, however, uptake in the bone marrow of T7-L1 was slightly more prominent, of unclear significance.  A thoracic spine MRI on 12/07/16 was notable for no evidence of metastases.    She has met with Dr. ***** ***** in ***** ***** who recommended neoadjuvant dose-dense AC followed by paclitaxel as well as Dr. ***** at ***** ***** ***** who recommended proceeding with surgical resection first to assess extent of disease.  Today patient also met with Drs. ***** and ***** regarding L breast mastectomy and reconstruction and has scheduled her surgery for 01/06/17.     She had prior biopsies in both breasts several years ago which patient reports \n returned benign. When directly *****, patient does retrospectively recall noticing an area of fullness in the center of her L breast for the past few months which did not wax and wane as she is used to seeing with the cystic changes she experiences during her menstrual cycles.    Functional status is excellent, runs ***** ***** company in collaboration with her sister who is here at the visit with her. Patient does the sales ***** ***** company and has been traveling less since her diagnosis but still working full-*****. ***** ***** ***** ***** ***** ***** ***** ***** of treadmill and does weights as well as nightly yoga and meditation.     Past Medical History   Diagnosis Date   \u0007 Breast cancer    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Hemorrhoids    \u0007 History of bilateral breast biopsy      remote, results were benign   \u0007 Hypertension         Past Surgical History   Procedure Laterality Date   \u0007 Rhinoplasty  2015        Family History   Problem Relation Age of Onset   \u0007 Other Mother    \u0007 Diabetes Father    \u0007 Hypertension Father    \u0007 High Cholesterol Father    \u0007 Pulmonary embolism Father      in setting of ?pneumonia, 10 years ago   \u0007 Other Maternal Uncle    \u0007 Breast cancer Neg Hx        Social History     Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Occupational *****   \u0007 *****-***** ***** *****      ***** History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use Yes      Comment: very special ***** less than 1 per month   \u0007 Drug use: No   \u0007 Sexual activity: Not on file     Other Topics Concern   \u0007 Not on file     Social History Narrative    ***** is 14 years old, a ***** ***** ***** *****    Lives in *****    ***** of the patient's parents living in *****, *****    Gynecologic History:     Menarche at *****    ***** pre-menopausal, regular menstrual cycles except currently a few days late \n for expected cycle     ***** age 36, breastfed for several years, NSVD without complications    Unclear what age mother was menopausal (mother had hysterectomy)            Outpatient Encounter Prescriptions as of 12/16/2016   Medication Sig Dispense Refill   \u0007 ACETAMINOPHEN (TYLENOL ORAL) Take 325 mg by mouth.      \u0007 ALPRAZOLAM ORAL Take 0.5 mg by mouth daily as needed (before MRI, biopsy, health appointments).      \u0007 hydroCHLOROthiazide (HYDRODIURIL) 12.5 mg tablet Take 12.5 mg by mouth.     \u0007 [DISCONTINUED] aluminum-magnesium hydroxide-simethicone (MAALOX PLUS) *****-*****-***** mg/5 mL suspension Take 5-10 mLs by mouth.     \u0007 [DISCONTINUED] lansoprazole (PREVACID) 30 mg capsule Take 30 mg by mouth.     \u0007 [DISCONTINUED] sucralfate (CARAFATE) 1 gram tablet Take 1 g by mouth.     \u0007 [DISCONTINUED] dicyclomine (BENTYL) 10 mg capsule Take 10 mg by mouth.       No facility-administered encounter medications on file ***** of 12/16/2016.         Allergies as of 12/16/2016  Review Complete On: 11/24/2016 By: ***** ***** *****    No Known Allergies          Review of Systems   Constitutional: Negative for chills, diaphoresis and fever. *****/fatigue: occasionally tired at the end of the day, accompanied by headaches. worse over past few days, patient attributes this to recent stress. Weight loss: patient has changed her diet after cancer diagnosis, is eating large salads that a friend recommended as potentially helpful with cancer treatment. has resulted in weight loss.    HENT: Negative for congestion and sore throat.    Eyes: Negative.    Respiratory: Negative.    Cardiovascular: Negative.    Gastrointestinal: Negative.    Genitourinary: Negative.    Musculoskeletal: Negative.    Skin: Negative for itching and rash.   Neurological: Positive for headaches. Negative for weakness.   Endo/Heme/Allergies: Negative.    Psychiatric/Behavioral: Negative.          OBJECTIVE ASSESSMENT  Visit Vitals   \u0007 BP 145/69  Comment: TRANSFERRED   \u0007 \n Pulse 81  Comment: TRANSFERRED   \u0007 Temp 35.8 C (96.4 F) (Oral)  Comment: TRANSFERRED   \u0007 Resp 16  Comment: TRANSFERRED   \u0007 Ht 162 cm (5' 3.78\")  Comment: October 2016   \u0007 Wt 63.6 kg (140 lb 3.4 oz)  Comment: TRANSFERRED   \u0007 SpO2 99%  Comment: TRANSFERRED   \u0007 BMI 24.23 kg/m2      Physical Exam   Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished. No distress.   HENT:   Head: Normocephalic and atraumatic.   Mouth/Throat: No oropharyngeal exudate.   Eyes: EOM are normal. Pupils are equal, round, and reactive to light. Right eye exhibits no discharge. Left eye exhibits no discharge. No scleral icterus.   Cardiovascular: Normal rate and regular rhythm.  Exam reveals no gallop and no friction rub.    No murmur heard.  Pulmonary/Chest: Effort normal and breath sounds normal. No respiratory distress. She has no wheezes.   Abdominal: Soft. Bowel sounds are normal. She exhibits no distension and no mass. There is no tenderness.   Musculoskeletal: Normal range of motion. She exhibits no edema or deformity.   Lymphadenopathy:   Palpable 1cm LN in L anterior axillary fold   Neurological: She is alert and oriented to person, place, and time. No cranial nerve deficit. Coordination normal.   Skin: Skin is warm and dry. No rash noted.   Breast exam: R breast with 1.5cm cyst at 4 o'clock, no nipple exudate, no R axillary nodes. L breast with visible fixation against chest wall in 12 o'clock position when patient is upright, ***** in size palpable firm mass, non-tender as well as a tender mass palpable at 5 o'clock, October 31.5cm in size. No nipple exudate. L axillary node palpable as above.     LABORATORY RESULTS  Reviewed via CareEverywhere.   Last CBC available is from December 2015  WBC 7.5  Hgb 13.0  plt 287    RADIOGRAPHIC RESULTS   Summarized above in ***** and specialty problem overview.     Impression/Plan: 50 y.o. female with new diagnosis of L breast cancer with biopsy-proven nodal \n disease at diagnosis. PET-CT done, MRI BL breasts done and based on her initial evaluation, patient appears to have likely stage 2 disease, ER/PR positive and ***** negative, with favorable ***** score. The size of the primary tumor is certainly concerning.      L breast ductal carcinoma  1. Patient to have L mastectomy with ***** 01/06/17  2. Follow up with Dr ***** same day that she comes for post-operative follow-up  3. Discussed with patient that the current plan for adjuvant endocrine therapy is subject to change based on the results of the surgery and lymph node evaluation. Patient reports that her father has a history of PE and is currently on warfarin for the past 10 years, although he may also have history of heart arrhythmia. We have asked her to obtain more records to assess the patient's personal risk of thrombophilia given plan to put her on tamoxifen. Also discussed this visit: role of XRT in management of lymph-node positive disease, as well as possibility of recurrence after treatment. All of the patient's questions were answered to her satisfaction.     Advance care planning  This patient has named a surrogate decision maker. Surrogate decision maker(s):     Name:  ***** *****    Relationship:  spouse    Contact Information:  *****-*****-*****   Language:   English  Surrogate documented: orally  Surrogate decision maker last confirmed: 12/16/16    Discussed with attending *****. ***** *****.  Please see Dr. *****'s notation for further details of assessment and plan.    *****,  ***** ***** *****, MD PhD  *****/*****/*****  *****:***** PM    \n",
+      "assessment_and_plan": "assessment and plan.    *****,  ***** ***** *****, MD PhD  *****/*****/*****  *****:***** PM    \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "yes",
+          "in-person": "in-person",
+          "summary": "Initial consultation for newly diagnosed left breast ductal carcinoma with biopsy-proven nodal disease at diagnosis, stage 2 disease, ER/PR positive and HER2 negative"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+          "Stage_of_Cancer": "likely stage 2",
+          "Distant Metastasis": "No",
+          "Metastasis": "No",
+          "lab_summary": "WBC 7.5, Hgb 13.0, plt 287",
+          "findings": "Palpable 1cm LN in L anterior axillary fold, palpable firm mass in L breast"
+        },
+        "Treatment_Summary": {
+          "current_meds": "ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROthiazide (HYDRODIURIL)",
+          "recent_changes": "",
+          "supportive_meds": "aluminum-magnesium hydroxide-simethicone (MAALOX PLUS), lansoprazole (PREVACID), sucralfate (CARAFATE), dicyclomine (BENTYL)"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "curative",
+          "response_assessment": "Not mentioned in note."
+        },
+        "Medication_Plan_chatgpt": {
+          "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+            "summary": "None",
+            "Short term side_effects_discussed": "None",
+            "Long term side_effects_discussed": "None"
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "None"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "None"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "None"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": ""
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
