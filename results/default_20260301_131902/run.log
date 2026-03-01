@@ -2141,3 +2141,58 @@ Processing row 34 (15/20)...
   Regex matched: 'Assessment:'
   Regex extraction succeeded (412 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 10.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Follow up for invasive lobular carcinoma, stage pT1cN0(sn), to continue adjuvant tamoxifen therapy"
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] summary: "Follow up for invasive lobular carcinoma, stage pT1cN0(sn), " -> "invasive lobular carcinoma, stage pT1cN0(sn), to continue ad"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 20.8s [semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "invasive lobular carcinoma, ER-, PR-, HER2-",
+  "Stage_of_Cancer": "pT1cN0(sn)",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "No signs
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "" -> "No recent labs available."
+    Treatment_Summary: 12.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "tamoxifen",
+  "recent_changes": "",
+  "supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "menstrual cycles have become somewhat irregular and intermittent"
+    Goals_of_care: 12.0s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions that the patient is on adjuvant tamoxifen
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "doing well, no severe pain, full activities, good appetite, stable weight"
+  Extraction prompts: 55.9s
+    Medication_Plan_chatgpt: 5.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "continuing on anastrozole without significant side effect",
+    "Short term side_effects_discussed": "no side effects mentioned",
+    "Long term side_effects_
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-FAITH] hormonal therapy: "{'summary': 'continuing on anastrozole without significant s" -> "{'summary': 'continuing on anastrozole without significant s"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'continuing on anastrozole without significant side effect', 'Short " -> "{'summary': 'continuing on anastrozole', 'Short term side_effects_discussed': 'n"
