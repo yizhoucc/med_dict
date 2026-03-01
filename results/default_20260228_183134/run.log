@@ -1,1 +1,18 @@
 Loading model...
+Loading weights: 100%|██████████████| 291/291 [01:05<00:00,  6.02it/s, Materializing param=model.norm.weight]
+Loading weights: 100%|██████████████| 291/291 [01:05<00:00,  4.43it/s, Materializing param=model.norm.weight]
+Model loaded.
+Data loaded: 2 rows (range [2, 4])
+
+Processing 2 rows...
+
+Processing row 2 (1/2)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1571 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 1.9s
+    What_We_Found: 6.1s [re-extracted]
+    Treatment_Summary: 0.9s
+    Goals_of_care: 3.3s [re-extracted]
+  Extraction prompts: 12.8s
