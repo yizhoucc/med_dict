@@ -1257,3 +1257,165 @@ Processing row 26 (7/20)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 32.9s
+    Medication_Plan_chatgpt: 17.4s [temporal-cleaned]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Continue on Femara and Zoladex",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "bone therapy": {
+    "sum
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'chemotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'chemotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] psychiatry medication: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] other treatment: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] bowel regimen: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G4-TEMPORAL] bone therapy: "{'summary': None, 'Short term side_effects_discussed': None, 'Long term side_eff" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 3.5s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Continue on ***** (dose not specified), zoladex, and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Continue on ***** (dose not specified), zoladex, and femara." -> "Continue on *****, zoladex and femara"
+      [G4-TEMPORAL] medication_plan: "Continue on *****, zoladex and femara" -> "Continue on zoladex and femara"
+      [G6-SEMANTIC] medication_plan: "Continue on zoladex and femara" -> "Continue on *****, zoladex and femara"
+    Therapy_plan: 5.1s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on letrozole and zoladex. Consider MRI of the spine and reassess lower back pain at two weeks. Consider switching to a different treatment plan if pain worsens."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "Continue on letrozole and zoladex. Consider MRI of the spine" -> "Continue on *****, zoladex and femara"
+      [G4-TEMPORAL] switch_to_different_plan: "if pain worsens" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 4.5s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "Reassess lower back pain at two weeks and consider MRI of the spine, Obtain CBC with platelets"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Reassess lower back pain at two weeks and consider MRI of the spine, Obtain CBC " -> "Continue on *****, zoladex and femara, Reassess lower back pain at two weeks, Ob"
+      [G6-SEMANTIC] procedure_plan: "Continue on *****, zoladex and femara, Reassess lower back pain at two weeks, Ob" -> "No procedures planned."
+    Imaging_Plan: 2.2s
+      [EXTRACT] raw={
+  "imaging_plan": "MRI of the spine in 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.6s
+      [EXTRACT] raw={
+  "lab_plan": "CBC with platelets"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 3.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology consult",
+  "Others": "None",
+  "follow up": "two weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Specialty: "Radiation oncology consult" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Specialty', 'Nutrition', 'Genetics', 'Others']
+      [G6-SEMANTIC] Specialty: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 4.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks, to reassess lower back pain"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: 2 weeks, to reassess lower back pain" -> "2 weeks"
+      [G6-SEMANTIC] Next clinic visit: "2 weeks" -> "Reassess lower back pain"
+    Advance_care_planning: 1.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 45.7s
+  Row 26 total: 78.6s
+  Row 26 saved to progress
+
+Processing row 27 (8/20)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 3.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Initial visit for newly diagnosed early stage breast cancer, specifically a clinical stage I HR+/
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 4.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC",
+  "Stage_of_Cancer": "Originally clinical stage I, now clinical stage I",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally clinical stage I, now clinical stage I" -> "I"
+      [G6-SEMANTIC] Stage_of_Cancer: "I" -> "Stage I"
+    Lab_Results: 9.8s
+      [EXTRACT] raw={
+"lab_summary": "Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calcium 10.0, AST 37,
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 8.4s
+      [EXTRACT] raw={
+"findings": "MRI-guided core biopsy: 0.8 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no lymphovascular invasion, no DCIS. Right lumpectomy: 0.9 cm grade 1 IDC, n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
