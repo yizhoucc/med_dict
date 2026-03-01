@@ -1229,3 +1229,54 @@ Processing row 28 (9/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] lab_summary: "" -> "Not mentioned in note"
+    Treatment_Summary: 8.4s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "Letrozole 2.5mg PO daily",
+  "recent_changes": "",
+  "supportive_meds": "Calcium 1200mg/day, Vitamin D supplement"
+}
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "None"
+    Goals_of_care: 8.3s
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative",
+  "response_assessment": "Not yet on treatment — no response to assess."
+}
+
+Review:
+- "goals_of_treatment" is correct, as the note discusses the intent of treatme
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 45.7s
+    Medication_Plan_chatgpt: 40.1s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Start letrozole 2.5mg PO daily now",
+    "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+    "Long term side_effects_discussed": "poss
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+  "medication_plan": "Start letrozole 2.5mg PO daily now, continue calcium supplementation with 1200mg/day combination of diet and supplement, and vitamin D supplement pending *****-***** ***** ****
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.7s
+      [EXTRACT] raw={
+  "therapy_plan": "Start letrozole 2.5mg PO daily now, continue, RT planning per ***** likely pursued locally in *****"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
