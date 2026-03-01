@@ -7676,3 +7676,35 @@ Processing row 51 (52/100)...
       [G2-SCHEMA] ok
       [G3-FAITH] summary: "Initial consultation for newly diagnosed IDC, ER+, PR+, HER2" -> "Initial consultation for IDC, ER+, PR+, HER2-, s/p left part"
       [G6-SEMANTIC] ok (all values answer their fields)
+    What_We_Found: 11.0s [faith-trimmed]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  "Metastasis": "No",
+  "lab_summary": "",
+  "findings": "H
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Healed well from surgery, no pain symptoms" -> "Healed well from surgery, denies any pain symptoms"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 15.7s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN, ondansetron (ZOFRAN) 8 mg, Oral, Every 8 Hours PRN",
+  "recent
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, ibuprofen (ADVIL,MOTR" -> "acetaminophen (TYLENOL) 1,000 mg, ibuprofen (ADVIL,MOTRIN) 600 mg, ondansetron ("
+    Goals_of_care: 6.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "risk reduction",
+  "response_assessment": "Not mentioned in note."
+}
+
+The value for "goals_of_treatment" is correct, as the note mentions "the goal would be to reduced her r
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note." -> "Healed well from surgery, denies any pain symptoms"
+  Extraction prompts: 43.1s
