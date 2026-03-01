@@ -350,3 +350,103 @@ Processing row 4 (3/7)...
       [G1-FORMAT] ok, keys=['radiotherapy_plan']
       [G2-SCHEMA] ok
       [G3-FAITH] radiotherapy_plan: "Radiation oncology referral" -> "Radiation oncology referral for symptomatic disease in the l"
+    Procedure_Plan: 2.0s
+      [EXTRACT] raw={
+  "procedure_plan": "CT and bone scan ordered and can be done once authorized prior to next visit"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Imaging_Plan: 2.1s
+      [EXTRACT] raw={
+  "imaging_plan": "CT and bone scan ordered and can be done once authorized prior to next visit"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Lab_Plan: 1.2s
+      [EXTRACT] raw={
+  "lab_plan": "Labs monthly"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.3s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Referral: 2.4s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    follow_up_next_visit: 0.9s
+      [EXTRACT] raw={
+  "Next clinic visit": "prior to next visit"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Advance_care_planning: 1.0s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Plan extraction prompts: 49.6s
+  Row 4 total: 69.1s
+  Row 4 saved to progress
+
+Processing row 6 (4/7)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1259 chars)
+  A/P extraction: 7.8s
+    Reason_for_Visit: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "Patient type": "follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Patient with metastatic breast cancer (MBC) since 2008, recurrent and metastatic, ER/PR neg, for fo
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> "yes"
+      [G3-FAITH] summary: "Patient with metastatic breast cancer (MBC) since 2008, recu" -> "Patient with MBC, recurrent and metastatic, ER/PR neg, for e"
+    What_We_Found: 4.9s
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER/PR neg, poorly differentiated carcinoma",
+  "Stage_of_Cancer": "Originally Stage II, now metastatic",
+  "Distant_Metastasis": "Yes, to supraclavicular lymph node, mediastinum
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis', 'lab_summary', 'findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+    Treatment_Summary: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "current_meds": "Taxotere, Xeloda, Herceptin, Pertuzumab",
+  "recent_changes": "Changed to pertuzumab/herceptin/taxotere in September 29, previously had Tykerb/Herceptin, and possibly Tykerb or He
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "Lisinopril, Paxil" -> "Lisinopril, Paxil, Clindamycin"
+    Goals_of_care: 2.5s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "probable minor progression, with probable mild progression in the left breast and possibly the left anterior chest wall, stable medias
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+  Extraction prompts: 15.0s
