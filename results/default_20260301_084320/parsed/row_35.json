@@ -1,0 +1,71 @@
+{
+  "coral_idx": "174",
+  "note_text": "Subjective:       Patient ID: ***** ***** ***** ***** 40 y.o. female.    HPI  Ms. ***** is a 40-year-old woman who comes to our clinic today for follow up. She was diagnosed with an invasive lobular carcinoma early in 2018. Details of her workup are available in my note of 05/10/18 . The pathology from her primary surgery is as follows:    02/02/18:Right breast lumpectomy, *****, mastopexy/tissue rearrangement (Drs. ***** and *****)  Pathology showed:  -invasive lobular carcinoma  -mixed alveolar and  -1.2 cm.  -grade 2.  -lymphatic/vascular invasion not identified.  -Margins negative  -DCIS not present  -LCIS focally present, classic type  -0/4 LN involved, including 0/2 SLN  -AJCC Anatomic Stage: pT1cN0(sn)    after some discussions and outlining the possibilities for her adjuvant therapy with a discussion of both the risks and benefits of adjuvant therapy Ms. ***** decided to embark on a course of adjuvant tamoxifen therapy which she began April 2018 . Since beginning her tamoxifen she has noted occasional night hot flashes and a slight weight gain of about 3 pounds but no other symptoms attributable to her taking tamoxifen.  Since beginning tamoxifen a Ms ***** has continued to have  menstrual cycles which are now somewhat irregular and intermittent. Mr. ***** feels well and has recovered from her surgery. She has no severe  pain, her activities are full, her appetite is good and her weight is stable.         Review of Systems   Constitutional: Negative.  Negative for activity change, appetite change, fatigue and unexpected weight change.   HENT: Negative.    Eyes: Negative.    Respiratory: Negative.    Cardiovascular: Negative.  Negative for chest pain.   Gastrointestinal: Negative for diarrhea, nausea and vomiting.   Genitourinary: Negative.    Musculoskeletal: Negative.    Skin: Negative.    Allergic/Immunologic: Negative.    Neurological: Negative.    Hematological: Negative.    Psychiatric/Behavioral: \\n Negative.            Objective:      Physical Exam   Nursing note and vitals reviewed.  Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Eyes: Pupils are equal, round, and reactive to light. EOM are normal.   Neck: Normal range of motion.   Cardiovascular: Normal rate and regular rhythm.   Pulmonary/Chest: Effort normal and breath sounds normal.   Chest wall examination is significant for a right breast with a well-healed lumpectomy scar. There is no suspicious mass in the right breast. The right axilla right supraclavicular and right infraclavicular areas are clear. The left breast is without suspicious mass as is the left axilla left supraclavicular and left infraclavicular area   Abdominal: Soft.   Musculoskeletal: Normal range of motion.   Neurological: She is alert and oriented to person, place, and time.   Skin: Skin is warm.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Judgment and thought content normal.           Assessment:       Ms ***** is doing well in continuing on anastrozole without significant side effect. Her last mammogram performed on 04/15/2019 was a right diagnostic mammogram with ***** synthesis and showed no signs of malignancy. She is scheduled scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019      Plan:       return to clinic in 6 months for routine follow-up        \\n",
+  "assessment_and_plan": "Assessment:       Ms ***** is doing well in continuing on anastrozole without significant side effect. Her last mammogram performed on 04/15/2019 was a right diagnostic mammogram with ***** synthesis and showed no signs of malignancy. She is scheduled scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019      Plan:       return to clinic in 6 months for routine follow-up        \\n",
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "follow up",
+      "second opinion": "no",
+      "in-person": "in-person",
+      "summary": "Follow up for invasive lobular carcinoma, stage pT1cN0(sn), to continue adjuvant tamoxifen therapy"
+    },
+    "What_We_Found": {
+      "Type_of_Cancer": "invasive lobular carcinoma, ER not mentioned",
+      "Stage_of_Cancer": "pT1cN0(sn)",
+      "Distant Metastasis": "No",
+      "Metastasis": "No",
+      "lab_summary": "",
+      "findings": "No new findings, patient is doing well"
+    },
+    "Treatment_Summary": {
+      "current_meds": "tamoxifen",
+      "recent_changes": "tamoxifen",
+      "supportive_meds": ""
+    },
+    "Goals_of_care": {
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not mentioned in note."
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "continuing on anastrozole",
+        "Short term side_effects_discussed": "no side effects mentioned",
+        "Long term side_effects_discussed": "no side effects mentioned"
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "continuing on anastrozole"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "continuing on anastrozole"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "No procedures planned."
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned."
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned."
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "None",
+      "Specialty": "None",
+      "Others": "None",
+      "follow up": "None"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "return to clinic in 6 months for routine follow-up"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

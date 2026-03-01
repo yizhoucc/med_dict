@@ -81,13 +81,30 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - 每个 gate 记录：ok / 字段级 before→after / EMPTIED / FAILED / REJECTED
 
 ## 已知问题与待改进
-- `goals_of_treatment`：之前模型常写就诊目的（"follow-up"）而非治疗意图（"palliative"），已通过 prompt 改进 + Gate 6 修复
-- `response_assessment`：之前模型常混入未来计划（"will have radiation"）而非当前响应（"CT stable"），已通过 prompt 改进 + Gate 6 修复
-- `Type_of_Cancer`：部分行仍抄 CMS code（"Malignant neoplasm of..."），已通过 prompt 要求写具体亚型+受体状态
-- `Stage_of_Cancer`：已通过 prompt 要求处理"原始分期+转移复发"场景
-- `recent_changes`：模型有时将新变化放入 current_meds 而非 recent_changes
-- `Referral`：空值率高，但原文确实很少有明确转诊语句（数据特征非模型问题）
-- `Genetic_Testing_Plan`：14/15 空值，属数据特征
+
+### 2026-03-01 百行审查结论（100/100行有问题）
+审查报告：`results/default_20260301_084320/review.md`
+
+**~~Pipeline Bug（P0）~~ → 审查误报（2026-03-01 已排查）**：
+- Row 16 ~~数据串行~~ 误报：keypoints 与自身 note_text 一致，审查 agent 对齐错误。真实问题是 LLM 重复退化（Treatment_Summary 中 "docusate" 重复）
+- Row 89 ~~数据重复~~ 误报：coral_idx 分别为 227 和 228，不同患者。审查 agent 对齐错误
+- 潜在风险：KV Cache in-place 修改（DynamicCache），建议在 `run_model_with_cache_manual()` 前 deepcopy
+
+**已通过 prompt 改进的问题（2026-03-01 更新 `prompts/extraction.yaml`）**：
+- `Patient type`：~35行错误。新增详细判断规则（首次 med onc 会诊 = New patient）
+- `Type_of_Cancer`：~65行不完整。强制要求 ER/PR/HER2 三项全写；加 HER2 靶向药推断规则
+- `Stage_of_Cancer`：~45行遗漏。改为允许从肿瘤大小+LN推断分期，不轻易写"Not mentioned"
+- `current_meds`：~55行时态混乱。新增 CURRENT/PLANNED/PAST 三分法，禁止计划药物和已停药物
+- `supportive_meds`：~25行分类错误。明确禁止把过敏原当药物
+- `lab_summary`：~35行答非所问。明确排除影像/病理/基因组检测结果
+- `response_assessment`：~70行答非所问。新增更多 BAD 示例（手术恢复、Oncotype、风险评估、副作用变化）
+- `goals_of_treatment`：~30行不精确。新增决策树（早期+辅助→curative，新辅助→curative，Stage IV→palliative）
+
+**仍需进一步改进的问题**：
+- `findings`：~55行不完整/答非所问（写症状而非客观发现），可能需要在 prompt 中加更多指导
+- `Referral`：~15行遗漏原文明确的转诊。可在 plan_extraction prompt 中加关键词搜索指导
+- `Genetic_Testing_Plan`：~15行遗漏。可在 plan_extraction prompt 中加更多触发关键词（Oncotype, BRCA, germline, molecular profiling）
+- `Distant Metastasis`：~15行错误（axillary LN 被标为 distant）。已在 schema 描述中加注"axillary LN = REGIONAL, not distant"
 - 通俗化（8 年级英语水平）：暂未实现，当前输出仍有大量医学术语，后续在解释生成步骤处理
 
 ## 模型配置
