@@ -181,3 +181,130 @@ Processing row 21 (2/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Summary: 5.6s [semantic-fixed]
+      [EXTRACT] raw={
+  "current_meds": "anastrozole, denosumab, prednisone, sulfamethoxazole-trimethoprim",
+  "recent_changes": "abemaciclib held due to pneumonitis, dose of abemaciclib reduced",
+  "supportive_meds": "p
+      [G1-FORMAT] ok, keys=['current_meds', 'recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "anastrozole, denosumab, prednisone, sulfamethoxazole-trimethoprim" -> "anastrozole, anastrozole, denosumab, prednisone, sulfamethoxazole-trimethoprim"
+    Goals_of_care: 2.1s
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative",
+  "response_assessment": "Patient is tolerating therapy well, symptoms improved"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment', 'response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 33.7s
+    Medication_Plan_chatgpt: 26.7s
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "continue arimidex, letrozole changed to arimidex, faslodex with ***** if pet ct shows progression and ***** mutation",
+    "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 3.6s [temporal-cleaned]
+      [EXTRACT] raw={
+  "medication_plan": "continue arimidex, plan to use faslodex with ***** if pet ct shows progression and ***** mutation, steroids started in July 2021"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "continue arimidex, plan to use faslodex with ***** if pet ct shows progression a" -> "continue arimidex, plan to use faslodex with ***** if pet ct shows progression a"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.3s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "continue arimidex, plan to use faslodex with ***** if pet ct shows progression and ***** mutation, XRT to L4 and T10"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "continue arimidex, plan to use faslodex with ***** if pet ct shows progression a" -> "plan to use faslodex with ***** if pet ct shows progression and ***** mutation, "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "XRT to L4 and T10 in June 2020" -> "XRT to L4 and T10"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.7s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 1.8s
+      [EXTRACT] raw={
+  "imaging_plan": "PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 3.5s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.2s
+      [EXTRACT] raw={
+  "Next clinic visit": "None"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.5s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 49.1s
+  Row 21 total: 82.7s
+  Row 21 saved to progress
+
+Processing row 22 (3/10)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s

@@ -2,7 +2,8 @@
   "config_hash": "fb203d0fcb183f74",
   "seed": 42,
   "completed_indices": [
-    20
+    20,
+    21
   ],
   "results": {
     "20": {
@@ -80,6 +81,92 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "She will return for follow-up in 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted."
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "21": {
+      "coral_idx": 161,
+      "note_text": "Medical Oncology Consult Note    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  04/21/1949   Date of Visit:  09/30/2021  Provider:  ***** ***** *****  Primary Care Provider:  ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of right breast in female, estrogen receptor positive (CMS code)         History of Present Illness:     72 year old female with a history of left ER+ DCIS in 1994 s/p lumpectomy and radiation.  She was fine until 2000 when she was diagnosed with a right stage II IDC (1.5 cm, January 14 lymph nodes HR+) treated with lumpectomy with axillary dissection,  AC x 3 with cytoxan only cycle 4, radiation and 5 years of tamoxifen with one year of ***** finished in 2007.      She felt a right chest wall mass in May 2020 and a biopsy showed an IDC HR+, her 2 neu negative.  She was diagnosed with a right chest wall recurrence and a month later had a pet ct which showed metastatic lesions in the bones, chest wall, right infraclavicular and right IM nodes. She had radiation to T10 and L4 and started on ***** and letrozole June 2020.    Letrozole was switched to anastrozole in July 2020 due to skin rash. She has also been on xgeva.     She experienced side effects to ***** - skin rash, skin peeling, low BP, diarrhea, nausea and it was held then dose reduced and she has been on 150 mg bid since October 2020.  Her PET scan on 11/03/20 and 04/24/21 showed a good response.      She developed pneumonitis and it was thought to be due to ***** and it was held since 08/14/2021.  She has been on steroids since early August.  She is here or a second opinion.      Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, right (CMS code) 10/15/2021     1.  Left DCIS in 1994 s/p lumpectomy and radiation. ER positive, no endocrine therapy. \n   2.  Right stage II IDC in 2000 s/p lumpectomy, AC x 4, radiation and 6 years of hormone blockade.  ER and PR positive.   3.  Metastatic relapse May 2020:  Right chest wall recurrence, bone mets, contralateral infraclavicular and IM nodes on right. HR + and her 2 negative.   June 2020 XRT to L4 and T10 and started on abemaciclib and *****.  Letrozole changed to arimidex.  ***** dose reduced.   4.  Pneumonitis due to abemaciclib July 2021 started on steroids, abemaciclib discontinued.        \u0007 Breast neoplasm, Tis (DCIS), left 10/15/2021       Stage at *****:  Cancer Staging  Breast cancer, right (CMS code)  Staging form: Breast, AJCC 8th Edition  - Pathologic: pT2, *****, *****, G2, ER+, PR+, *****: Unknown - Signed by ***** ***** *****, MD on 10/15/2021      Medications:    Current Outpatient Medications:   \u0007  anastrozole (ARIMIDEX) 1 mg tablet, Take 1 mg by mouth daily, Disp: , Rfl:   \u0007  aspirin 81 mg EC tablet, Take 81 mg by mouth, Disp: , Rfl:   \u0007  atenoloL (TENORMIN) 50 mg tablet, Take 50 mg by mouth daily 0.5 tablet daily, Disp: , Rfl:   \u0007  b complex vitamins tablet, Take 1 tablet by mouth daily, Disp: , Rfl:   \u0007  CALCIUM ORAL, Take by mouth 600 mg bid, Disp: , Rfl:   \u0007  cholecalciferol, vitamin D3, 50 mcg (2,000 unit) capsule, Take 2,000 Units by mouth daily, Disp: , Rfl:   \u0007  denosumab (XGEVA) 120 mg/1.7 mL (70 mg/mL) injection, Inject 120 mg under the skin every 28 (twenty-eight) days, Disp: , Rfl:   \u0007  diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, Take 1 tablet by mouth 4 (four) times daily as needed, Disp: , Rfl:   \u0007  multivitamin (***** *****) tablet, Take 1 tablet by mouth, Disp: , Rfl:   \u0007  omega 3-dha-epa-fish oil 500-1,000 mg CAP, Take 500 mg by mouth daily, Disp: , Rfl:   \u0007  predniSONE (DELTASONE) 20 mg tablet, , Disp: , Rfl:   \u0007  sulfamethoxazole-trimethoprim (BACTRIM DS,SEPTRA DS) 800-160 mg tablet, Take 1 tablet by mouth, Disp: , Rfl:     Allergies:   Allergies/Contraindications \n   Allergen Reactions   \u0007 Penicillins Hives, Itching and Rash     2003  2003         Medical History:   Past Medical History:   Diagnosis Date   \u0007 Anemia 2020    after taking *****   \u0007 Breast cancer (CMS code) 1994    DCIS   \u0007 Breast cancer, right (CMS code) 10/15/2021   \u0007 Colon polyp 2015   \u0007 Endometriosis    \u0007 GERD (gastroesophageal reflux disease) July 2020    after radiation   \u0007 Heart murmur most of my life   \u0007 Hypertension 2006   \u0007 Lung disease July 2021    pneumonitis       Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  1995, 2000    ***** (left).  ***** (right) & 1 lymph node   \u0007 HYSTERECTOMY  1997    ovaries removed also   \u0007 TONSILLECTOMY  1958    age 9       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Never   \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None   Social History Narrative   \u0007 Not on file       *****:  ***** ***** ***** ***** *****.     ***** Status: married, *****.     Gynecologic History:  G 2 P 2 AB 0    Menarche 12  Menopause  48   OCP 0 years HRT 0 years   Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Prostate cancer Brother A.                Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    09/30/21 1501   *****: \n Generalized  Comment: No pain   *****:  0     Code status:  Full code.     Performance status:  0 - Asymptomatic    Physical exam:  BP 138/72  | Pulse 84  | Temp 37.4 C (99.4 F) (Temporal)  | Resp 16  | Ht 169.1 cm (5' 6.58\") Comment: 09/30/2021 @ ***** | Wt 67.7 kg (149 lb 4.8 oz)  | SpO2 99%  | BMI 23.68 kg/m   GEN: No acute distress, awake and alert, appears stated age  HEENT: No oral lesions  Neck supple no lymphadenopathy  Cardiac: Regular rate, rhythm no murmur  Lungs:  clear to ascultation    Abdomen: Soft, non tender, non distended,  no *****   Extremity: No edema  Lymph: no peripheral adenopathy  Neuro: *****-12 grossly intact, normal UE and LE strength.   Skin: No rash  Breast bilaterally no mass or skin changes.  Lumpectomy sites normal. No chest wall mass palpated.       Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Orders Only on 01/29/2021   Component Date Value Ref Range Status   \u0007 WBC Count 01/29/2021 3.16***** 3.40 - 10.80 10*****3/uL Final   \u0007 Lymphs 01/29/2021 17.1  17.0 - 48.0 % Final   \u0007 Lymphs, Blood 01/29/2021 0.54***** 0.70 - 3.10 10*****3/uL Final   \u0007 Monocytes % 01/29/2021 13.0***** 4.0 - 10.0 % Final   \u0007 Monocyte Abs Count 01/29/2021 0.41  0.10 - 0.90 10*****3/uL Final   \u0007 RBC Count 01/29/2021 2.96***** 3.77 - 5.28 10*****6/uL Final   \u0007 Hemoglobin 01/29/2021 10.7***** 11.1 - 15.9 g/dL Final   \u0007 Hematocrit 01/29/2021 32.6***** 34.0 - 46.0 % Final   \u0007 MCV 01/29/2021 ***** 79 - 97 fL Final   \u0007 MCH 01/29/2021 36.1***** 26.6 - 33.0 pg Final   \u0007 MCHC 01/29/2021 32.8  31.5 - 35.7 g/dL Final   \u0007 Platelet Count 01/29/2021 *****  150 - 450 10*****3/uL Final   \u0007 MPV 01/29/2021 8.6  0.0 - 11.0 fL Final   \u0007 Neutrophil Absolute Count 01/29/2021 2.07  1.40 - 7.00 10*****3/uL Final   \u0007 Neutrophils 01/29/2021 65.5  % Final   \u0007 Eosinophils Absolute 01/29/2021 0.07  0.00 - 0.40 10*****3/uL Final   \u0007 Eos 01/29/2021 2.2  % Final   \u0007 Basophil Abs Count 01/29/2021 0.07  0.00 - 0.20 10*****3/uL Final \n   \u0007 Basophils 01/29/2021 2.2  % Final   \u0007 Immature Granulocytes #, ***** 01/29/2021 0.00  0.00 - 0.10 10*****3/uL Final   \u0007 Immature Granulocytes %, ***** 01/29/2021 0.0  % Final   \u0007 RDW 01/29/2021 13.7  12.3 - 15.4 % Final   \u0007 Glucose, non-fasting 01/29/2021 ***** 65 - 99 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 01/29/2021 21  8 - 27 mg/dL Final   \u0007 Creatinine, Serum 01/29/2021 1.19***** 0.57 - 1.00 mg/dL Final   \u0007 eGFR - low estimate 01/29/2021 46***** >59 mL/min/1.73 Final   \u0007 eGFR - high estimate 01/29/2021 53***** >59 mL/min/1.73 Final   \u0007 BUN/Creatinine Ratio 01/29/2021 18  12 - 28 Final   \u0007 Sodium, Serum / Plasma 01/29/2021 *****  134 - 144 mmol/L Final   \u0007 Potassium, Serum / Plasma 01/29/2021 4.8  3.5 - 5.2 mmol/L Final   \u0007 Chloride, Serum / Plasma 01/29/2021 *****  96 - 106 mmol/L Final   \u0007 Carbon Dioxide, Total 01/29/2021 25  20 - 29 mmol/L Final   \u0007 Calcium, total, Serum / Plasma 01/29/2021 9.4  8.7 - 10.3 mg/dL Final   \u0007 Protein, Total, Serum / Plasma 01/29/2021 7.3  6.0 - 8.5 g/dL Final   \u0007 Albumin, Serum / Plasma 01/29/2021 4.6  3.7 - 4.7 g/dL Final   \u0007 Globulin, Total 01/29/2021 2.7  1.5 - 4.5 g/dL Final   \u0007 A/G RATIO 01/29/2021 1.7  1.2 - 2.2 Final   \u0007 Bilirubin, Total 01/29/2021 0.4  0.0 - 1.2 mg/dL Final   \u0007 Alkaline Phosphatase 01/29/2021 67  39 - 117 IU/L Final   \u0007 AST 01/29/2021 27  0 - 40 IU/L Final   \u0007 Alanine transaminase 01/29/2021 21  0 - 32 IU/L Final   \u0007 Lactate Dehydrogenase 01/29/2021 *****  119 - 226 IU/L Final   \u0007 Uric Acid, Serum / Plasma 01/29/2021 5.2  3.1 - 7.9 mg/dL Final        Psychologic/emotional well-being/support  She is well supported.     Assessment / Plan:      1.  Left DCIS in 1994 s/p lumpectomy and radiation. ER positive, no endocrine therapy.   2.  Right stage II IDC in 2000 s/p lumpectomy, AC x 4, radiation and 6 years of hormone blockade.  ER and PR positive.   3.  Metastatic relapse May 2020:  Right chest wall recurrence, bone mets, contralateral infraclavicular and IM nodes on \n right. HR + and her 2 negative.  In June 2020 XRT to L4 and T10 and started on abemaciclib and *****.  Letrozole changed to arimidex.  ***** dose reduced due to toxicity.   4.  Pneumonitis due to abemaciclib July 2021 started on steroids, abemaciclib discontinued.   5.  I recommend a pet ct now and if stable continue arimidex alone.   6.  If pet ct shows progression could use faslodex with ***** if she has a ***** mutation.   7.  Future options include hormone blockade with afinitor or xeloda or a clinical trial.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    \n",
+      "assessment_and_plan": "Assessment / Plan:      1.  Left DCIS in 1994 s/p lumpectomy and radiation. ER positive, no endocrine therapy.   2.  Right stage II IDC in 2000 s/p lumpectomy, AC x 4, radiation and 6 years of hormone blockade.  ER and PR positive.   3.  Metastatic relapse May 2020:  Right chest wall recurrence, bone mets, contralateral infraclavicular and IM nodes on \n right. HR + and her 2 negative.  In June 2020 XRT to L4 and T10 and started on abemaciclib and *****.  Letrozole changed to arimidex.  ***** dose reduced due to toxicity.   4.  Pneumonitis due to abemaciclib July 2021 started on steroids, abemaciclib discontinued.   5.  I recommend a pet ct now and if stable continue arimidex alone.   6.  If pet ct shows progression could use faslodex with ***** if she has a ***** mutation.   7.  Future options include hormone blockade with afinitor or xeloda or a clinical trial.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "follow up",
+          "second opinion": "yes",
+          "in-person": "in-person",
+          "summary": "Patient with metastatic ER+ breast cancer, stage not specified, here for a second opinion"
+        },
+        "What_We_Found": {
+          "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+          "Stage_of_Cancer": "Originally Stage II, now metastatic",
+          "Distant Metastasis": "Yes, to bones, chest wall, infraclavicular and IM nodes",
+          "Metastasis": "Yes",
+          "lab_summary": "WBC 3.16, Lymphs 17.1, Lymphs 0.54, Monocytes 13.0, RBC 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 85.4, MCH 36.1, MCHC 32.8, Platelet Count 0.0, MPV 8.6, Neutrophil Absolute Count 2.07, Eosinophils Absolute 0.07, Basophil Abs Count 0.07, Bilirubin 0.4, Alkaline Phosphatase 67, AST 27, Alanine transaminase 21, Lactate Dehydrogenase 0.0, Uric Acid 5.2",
+          "findings": "Patient with metastatic ER+ breast cancer, chest wall recurrence, bone mets, contralateral infraclavicular and IM nodes on right, pneumonitis due to abemaciclib"
+        },
+        "Treatment_Summary": {
+          "current_meds": "anastrozole, anastrozole, denosumab, prednisone, sulfamethoxazole-trimethoprim",
+          "recent_changes": "abemaciclib held due to pneumonitis, dose of abemaciclib reduced",
+          "supportive_meds": "prednisone"
+        },
+        "Goals_of_care": {
+          "goals_of_treatment": "palliative",
+          "response_assessment": "Patient is tolerating therapy well, symptoms improved"
+        },
+        "Medication_Plan_chatgpt": {
+          "hormonal therapy": {
+            "summary": "continue arimidex, letrozole changed to arimidex, faslodex with ***** if pet ct shows progression and ***** mutation",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "radiotherapy": {
+            "summary": "XRT to L4 and T10 in June 2020",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          },
+          "chemotherapy": {
+            "summary": "abemaciclib and ***** started in June 2020, dose reduced due to toxicity, discontinued in July 2021",
+            "Short term side_effects_discussed": "pneumonitis",
+            "Long term side_effects_discussed": ""
+          },
+          "other treatment": {
+            "summary": "steroids started in July 2021",
+            "Short term side_effects_discussed": "",
+            "Long term side_effects_discussed": ""
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "continue arimidex, plan to use faslodex with ***** if pet ct shows progression and ***** mutation"
+        },
+        "Therapy_plan": {
+          "therapy_plan": "plan to use faslodex with ***** if pet ct shows progression and ***** mutation, XRT to L4 and T10"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "XRT to L4 and T10"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "PET/CT"
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "None"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
