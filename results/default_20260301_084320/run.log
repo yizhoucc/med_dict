@@ -201,3 +201,111 @@ Processing row 1 (2/100)...
       [G3-FAITH] response_assessment: "Not mentioned in note." -> "The cancer is not responding well to treatment, with worseni"
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 42.1s
+    Medication_Plan_chatgpt: 44.5s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Irinotecan changed to every other week, dose increased to 150mg/m2 days 1 and 15 every 28 days",
+    "Short term side_effects_discussed": "transaminitis, diarrhea
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment', 'radiotherapy', 'hormonal therapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment', 'radiotherapy', 'hormonal therapy', 'bone therapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': '1 unit pRBC, 500ml NS IV, 40 mEq PO potassium', 'Short term side_ef" -> "{'summary': '500ml NS IV, 40 mEq PO potassium', 'Short term side_effects_discuss"
+      [G6-SEMANTIC] other treatment: "{'summary': '500ml NS IV, 40 mEq PO potassium', 'Short term side_effects_discuss" -> "{'summary': '1 unit pRBC, 500ml NS IV, 40 mEq PO potassium', 'Short term side_ef"
+    Medication_Plan: 10.9s
+      [EXTRACT] raw={
+  "medication_plan": "Irinotecan 150mg/m2 days 1 and 15 every 28 days, Doxycycline 100mg BID x 7d, Continue ***** 30mg TID, flexeril TID, oxycodone 5mg prn, Increase effexor-XR to 75 mg qd, 1 unit p
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 5.2s
+      [EXTRACT] raw={
+  "therapy_plan": "Irinotecan changed to every other week, dose increased to 150mg/m2 days 1 and 15 every 28 days, Needs to get in for XRT consult"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.9s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Needs to get in for XRT consult"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.1s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.4s
+      [EXTRACT] raw={
+  "imaging_plan": "Scans again in 3 months"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.8s
+      [EXTRACT] raw={
+  "lab_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 4.2s
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.6s
+      [EXTRACT] raw={
+  "Next clinic visit": "2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.8s
+      [EXTRACT] raw={
+  "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Plan extraction prompts: 77.7s
+  Row 1 total: 119.8s
+  Row 1 saved to progress
+
+Processing row 2 (3/100)...
+  Injected 4 term definitions: ['neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1571 chars)
+  A/P extraction: 0.0s
