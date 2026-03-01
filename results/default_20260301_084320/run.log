@@ -12157,3 +12157,51 @@ Processing row 81 (82/100)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 22.7s
+    Medication_Plan_chatgpt: 59.8s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Not recommended due to low risk",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "hormonal therapy": {
+    "su
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 25.5s
+      [EXTRACT] raw={
+  "medication_plan": "Plan to proceed with +/- bone medication after radiation is completed, Docusate sodium (COLACE) 100 mg capsule, Take 1 capsule (100 mg total) by mouth Twice a day, OxyCODONE (R
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 3.7s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "Plan to proceed with +/- bone medication after radiation is completed, hormonal therapy, Radiotherapy: Appointment with Dr. ***** tomorrow"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Plan to proceed with +/- bone medication after radiation is completed, hormonal " -> "Plan to proceed with +/- bone medication after radiation is completed, hormonal "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.8s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Appointment with Dr. ***** tomorrow"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.9s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
