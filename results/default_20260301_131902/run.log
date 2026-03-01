@@ -2336,3 +2336,47 @@ Processing row 35 (16/20)...
       [G5-SPECIFIC] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 37.0s
+    Medication_Plan_chatgpt: 49.7s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Started on 02/13/21, delayed due to grade 3 infusion reaction, changed to Abraxane after cycle 1.",
+    "Short term
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 6.9s
+      [EXTRACT] raw={
+  "medication_plan": "Continue Abraxane 100mg/m2 weekly, Continue Tamoxifen, Continue Valtrex 1g daily, Continue prilosec, Continue lexapro daily, Continue ativan prn, Continue ambien, antibiotics f
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 4.2s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "Continue Abraxane 100mg/m2 weekly, Continue zoladex, Radiation oncology referral, will see Dr. ***** next week"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Continue Abraxane 100mg/m2 weekly, Continue zoladex, Radiation oncology referral" -> "Continue Abraxane 100mg/m2 weekly, Continue zoladex, will see Dr. ***** next wee"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.6s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "Radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.9s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
