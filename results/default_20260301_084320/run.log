@@ -11252,3 +11252,74 @@ Processing row 75 (76/100)...
       [G3-FAITH] response_assessment: "PET/CT shows no evidence of recurrent or metastatic hypermet" -> "PET/CT shows no evidence of recurrent or metastatic hypermet"
       [G6-SEMANTIC] response_assessment: "PET/CT shows no evidence of recurrent or metastatic hypermetabolic disease, and " -> "PET/CT shows no evidence of recurrent or metastatic hypermetabolic disease, and "
   Extraction prompts: 30.8s
+    Medication_Plan_chatgpt: 43.1s
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Paclitaxel was last given on 01/26/2017, Trastuzumab and Pertuzumab every 3 weeks",
+    "Short term side_effects_discussed": "",
+    "Long term side_effects_discu
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] REJECTED (no key overlap)
+    Medication_Plan: 9.6s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days, Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day, Naprosyn 500 mg BID as need
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every " -> "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every "
+      [G4-TEMPORAL] medication_plan: "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 3 weeks, Lomotil 1-2" -> "Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 3 weeks, Lomotil 1-2 tabs as "
+      [G6-SEMANTIC] medication_plan: "Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 3 weeks, Lomotil 1-2 tabs as " -> "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 3 weeks, Lomotil 1-2"
+    Therapy_plan: 2.0s [temporal-cleaned]
+      [EXTRACT] raw={
+  "therapy_plan": "Continue Trastuzumab and Pertuzumab every 3 weeks, s/p radiation to right breast"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Continue Trastuzumab and Pertuzumab every 3 weeks, s/p radiation to right breast" -> "Continue Trastuzumab and Pertuzumab every 3 weeks"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.5s
+      [EXTRACT] raw={
+  "radiotherapy_plan": "s/p radiation to right breast"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 1.8s
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 2.2s
+      [EXTRACT] raw={
+  "imaging_plan": "PET/CT up to toes"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 3.1s
+      [EXTRACT] raw={
+  "lab_plan": "Check labs -12 weeks, due August 2018 or September 2018"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.2s
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
