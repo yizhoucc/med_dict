@@ -1591,3 +1591,43 @@ Processing row 28 (9/20)...
       [G3-FAITH] lab_summary: "No labs in note." -> ""
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 9.9s
+      [EXTRACT] raw={
+"findings": "Pathology: Tumor size: 1.6 cm and 0.6 cm, margins negative for invasive cancer but positive for DCIS, lymph node status: micrometastatic carcinoma in one lymph node (0.5 mm). Imaging: M
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 1.6s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": [
+"letrozole"
+]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "['letrozole']" -> "['acetaminophen', 'ibuprofen']"
+    Treatment_Changes: 4.0s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole 2.5mg PO daily",
+"supportive_meds": "Calcium supplementation with 1200mg/day combination of diet and supplement, Vitamin D supplement"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "Calcium supplementation with 1200mg/day combination of diet and supplement, Vita" -> "Acetaminophen 1000mg PO every 8 hours, Ibuprofen 600mg PO 3 times daily"
+      [G6-SEMANTIC] recent_changes: "Started letrozole 2.5mg PO daily" -> "No recent changes"
+    Treatment_Goals: 7.1s
+      [EXTRACT] raw=The patient has early-stage breast cancer (invasive ductal carcinoma) with a single micrometastatic cancer in a sentinel lymph node. The treatment plan includes surgery (partial mastectomy), hormonal 
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 26.1s
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, specifically chemotherapy, endocrine therapy, targeted therapy, or immunotherapy, as the note mentions that she will start letrozole 2.5mg PO dail
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] parse FAILED
+  Extraction prompts: 60.4s
