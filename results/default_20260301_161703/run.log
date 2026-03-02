@@ -3183,3 +3183,121 @@ Processing row 35 (16/20)...
       [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
       [G3-FAITH] EMPTIED: ['genetic_testing_plan']
       [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> "small frequent meals"
+      [G6-SEMANTIC] Specialty: "Radiation oncology" -> "Radiation oncology consult"
+      [G6-SEMANTIC] Others: "None" -> "Physical or occupational therapy"
+    follow_up_next_visit: 2.6s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: 2 weeks" -> "2 weeks"
+      [G6-SEMANTIC] Next clinic visit: "2 weeks" -> "RTC 2 weeks"
+      [POST-KEYS] stripped: {'Next clinic visit purpose'}
+    Advance_care_planning: 1.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 99.0s
+  Row 35 total: 151.5s
+  Row 35 saved to progress
+
+Processing row 36 (17/20)...
+  Injected 2 term definitions: ['adjuvant chemotherapy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (911 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 6.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "New patient evaluation for stage IIA left triple negative invasive ductal carcinoma of the breast
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] in-person: "Televisit" -> "Video Visit"
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 5.5s [semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage IIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Type_of_Cancer: "ER-/PR-/HER2- invasive ductal carcinoma" -> "Infiltrating ductal carcinoma of upper-outer quadrant of left breast in female ("
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 13.7s [faith-trimmed]
+      [EXTRACT] raw={
+  "findings": "Tumor size: 2.3 cm, node negative, margins not specified, grade 3. No imaging findings mentioned. No palpable masses, skin changes, or lymphadenopathy noted on physical exam."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Tumor size: 2.3 cm, node negative, margins not specified, gr" -> "2.3 cm, node negative, grade 3"
+      [G6-SEMANTIC] parse FAILED
+    Current_Medications: 2.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "dexlansoprazole (DEXILANT) 60 mg, Take 60 mg by mouth Daily."
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-MEDS] dexlansoprazole (DEXILANT) 60 mg, Take 60 mg by mouth Daily. -> 
+    Treatment_Changes: 3.6s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Adjuvant chemotherapy recommended (AC followed by Taxol)",
+"supportive_meds": "dexlansoprazole (DEXILANT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Adjuvant chemotherapy recommended (AC followed by Taxol)" -> "No recent changes"
+      [G6-SEMANTIC] supportive_meds: "dexlansoprazole (DEXILANT)" -> "dexlansoprazole (DEXILANT), prednisone"
+    Treatment_Goals: 3.0s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy to decrease the risk of systemic recur"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy to decrease the risk of systemic recurrence" -> "risk reduction"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 4.9s [stripped]
+      [EXTRACT] raw=The patient has undergone surgery (bilateral mastectomies and a left sentinel node procedure) but has not started any additional cancer treatment (chemo, endocrine therapy, targeted therapy, immunothe
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 41.4s
