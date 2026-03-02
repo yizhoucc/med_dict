@@ -1513,3 +1513,120 @@ Processing row 27 (8/20)...
       [G3-FAITH] EMPTIED: ['response_assessment']
       [G6-SEMANTIC] response_assessment: "" -> "The patient has a 0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH r"
   Extraction prompts: 74.2s
+    Medication_Plan_chatgpt: 33.4s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+    "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+    "Long
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] psychiatry medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] bowel regimen: "{'summary': 'calcium and vitamin D', 'Short term side_effect" -> "{'summary': 'calcium and vitamin D', 'Short term side_effect"
+      [G3-FAITH] other treatment: "{'summary': 'DEXA to assess bone health', 'Short term side_e" -> "{'summary': 'DEXA to assess bone health', 'Short term side_e"
+      [G3-FAITH] radiotherapy: "{'summary': 'will proceed with radiation', 'Short term side_" -> "{'summary': 'will proceed with radiation', 'Short term side_"
+      [G3-FAITH] bone therapy: "{'summary': 'calcium and vitamin D to improve bone health', " -> "{'summary': 'calcium and vitamin D to improve bone health', "
+      [G3-FAITH] pain medication: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'bone therapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 5.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "medication_plan": "The patient will take an aromatase inhibitor (*****), calcium, and vitamin D. The specific name of the aromatase inhibitor is not mentioned, but it is recommended to be taken f
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will take an aromatase inhibitor (*****), calciu" -> "an aromatase inhibitor, calcium, and vitamin D"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Therapy_plan: 7.8s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient is recommended to undergo 5 years of anti-estrogen therapy with an aromatase inhibitor, specifically an aromatase inhibitor (*****), which will be started after radi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient is recommended to undergo 5 years of anti-estrog" -> "5 years of anti-estrogen therapy with an aromatase inhibitor"
+      [G4-TEMPORAL] therapy_plan: "5 years of anti-estrogen therapy with an aromatase inhibitor, specifically an ar" -> "will take calcium and vitamin D, will aim to resume daily aerobic activities, wi"
+      [G6-SEMANTIC] therapy_plan: "will take calcium and vitamin D, will aim to resume daily aerobic activities, wi" -> "5 years of anti-estrogen therapy with an aromatase inhibitor, proceed with radia"
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "I expect that she will proceed with radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "I expect that she will proceed with radiation." -> "proceed with radiation"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 0.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "procedure_plan": "proceed with radiation"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "proceed with radiation" -> "radiation"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] procedure_plan: "radiation" -> "proceed with radiation oncology consultation; she will have radiation"
+    Imaging_Plan: 1.8s [semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] imaging_plan: "DEXA" -> "No imaging planned"
+    Lab_Plan: 1.7s
+      [EXTRACT] raw={
+  "lab_plan": "DEXA"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "DEXA, Physical activity (exercise)",
+  "follow up": "after radiation course is completed"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> "calcium and vitamin D"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 1.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after radiation course is completed"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: after radiation course is completed" -> "after radiation course is completed"
+      [G6-SEMANTIC] Next clinic visit: "after radiation course is completed" -> "RTC after radiation course is completed"
+    Advance_care_planning: 1.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 62.2s
+  Row 27 total: 136.3s
+  Row 27 saved to progress
+
+Processing row 28 (9/20)...
+  Injected 9 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'lumpectomy', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (4911 chars)
+  A/P extraction: 0.0s
