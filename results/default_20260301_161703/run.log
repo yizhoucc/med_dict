@@ -647,3 +647,41 @@ Processing row 23 (4/20)...
       [G3-FAITH] lab_summary: "No labs in note." -> ""
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 18.3s
+      [EXTRACT] raw={
+  "findings": "Right breast: 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications. New right axillary LN with irregular morphology. Ultrasound showed 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 18.6s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (Tums) 1250 mg (500 mg elemental) tablet, cetirizine (ZYRTEC) 10 mg tablet, cholecalciferol, vitamin D3, 1,000 unit CAP, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, Duloxetine (CYMBALTA) 60 mg DR, gabapentin (NEURONTIN) 400 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet, meloxicam (MOBIC) 15 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, nicotine (NICODERM CQ) 21 mg/24 hr patch, omeprazole (PRILOSEC) 20 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet, senna (SENOKOT) 8.6 mg tablet -> 
+    Treatment_Changes: 9.9s
+      [EXTRACT] raw={
+"recent_changes": "None",
+"supportive_meds": [
+"acetaminophen-codeine (TYLENOL #4)",
+"diclofenac (VOLTAREN) 1 % GEL",
+"oxyCODONE (ROXICODONE) 5 mg tablet"
+]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] parse FAILED
+    Treatment_Goals: 10.8s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
