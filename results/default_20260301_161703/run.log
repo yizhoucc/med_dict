@@ -245,3 +245,71 @@ Processing row 21 (2/20)...
       [G3-FAITH] findings: "No new clinical findings or disease status noted." -> ""
       [G3-FAITH] EMPTIED: ['findings']
       [G6-SEMANTIC] findings: "" -> "Right chest wall recurrence, bone mets, contralateral infraclavicular and IM nod"
+    Current_Medications: 2.8s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": [
+"anastrozole",
+"denosumab"
+]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "['anastrozole', 'denosumab']" -> "['anastrozole', 'denosumab', 'prednisone', 'sulfamethoxazole-trimethoprim']"
+      [POST-MEDS] ['anastrozole', 'denosumab', 'prednisone', 'sulfamethoxazole-trimethoprim'] -> ['anastrozole', 'denosumab']
+    Treatment_Changes: 3.2s
+      [EXTRACT] raw={
+"recent_changes": "Abemaciclib was held on 08/14/2021 due to pneumonitis, and the dose of ***** was reduced to 150 mg bid in October 2020.",
+"supportive_meds": [
+"Denosumab (XGEVA)",
+"Diphenoxylate-
+      [G1-FORMAT] repair FAILED, raw={
+"recent_changes": "Abemaciclib was held on 08/14/2021 due to pneumonitis, and the dose of ***** was reduced to 150 mg bid in October 2020.",
+"suppor
+    Treatment_Goals: 4.2s [stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 10.3s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw=The patient has started treatment, specifically endocrine therapy with anastrozole (arimidex) and denosumab (Xgeva). The note mentions that the patient had a PET scan on 11/03/20 and 04/24/21, which s
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "PET-CT shows stable to slightly decreased metabolic activity" -> "PET-CT shows a good response"
+      [G6-SEMANTIC] symptoms: "" -> "no"
+      [G6-SEMANTIC] response_assessment: "PET-CT shows a good response" -> "stable to slightly decreased metabolic activity of osseous metastases"
+      [POST-KEYS] stripped: {'symptoms', 'disease_recurrence', 'exam', 'asymptomatic', 'imaging', 'evidence_of_recurrence'}
+  Extraction prompts: 58.8s
+    Medication_Plan_chatgpt: 31.2s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "ER and PR positive, started on arimidex, previously on letrozole, previously on hormone blockade for 6 years",
+    "Short term side_effects_discussed": "None 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'chemotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] psychiatry medication: "{'summary': 'None mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] bowel regimen: "{'summary': 'None mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] other treatment: "{'summary': 'steroids for pneumonitis', 'Short term side_eff" -> "{'summary': 'steroids for pneumonitis', 'Short term side_eff"
+      [G3-FAITH] radiotherapy: "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term si" -> "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term si"
+      [G3-FAITH] chemotherapy: "{'summary': 'abemaciclib, previously AC x 4', 'Short term si" -> "{'summary': 'abemaciclib, previously AC x 4', 'Short term si"
+      [G3-FAITH] hormonal therapy: "{'summary': 'ER and PR positive, started on arimidex, previo" -> "{'summary': 'ER and PR positive, started on arimidex, previo"
+      [G3-FAITH] pain medication: "{'summary': 'None mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-TEMPORAL] other treatment: "{'summary': 'steroids for pneumonitis', 'Short term side_effects_discussed': ''," -> "{'summary': 'steroids', 'Short term side_effects_discussed': '', 'Long term side"
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'XRT to L4 and T10 in June 2020', 'Short term side_effects_discussed" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'abemaciclib, previously AC x 4', 'Short term side_effects_discussed" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'ER and PR positive, started on arimidex, previously on letrozole, p" -> "{'summary': 'continue arimidex', 'Short term side_effects_discussed': '', 'Long "
+      [G6-SEMANTIC] radiotherapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'XRT to L4 and T10', 'Short term side_effects_discussed': '', 'Long "
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'chemotherapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 7.6s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex, consider faslodex with ***** if pet ct shows progression and she has a ***** mutation, future options include hormone blockade with afinitor or xeloda or a
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Continue arimidex, consider faslodex with ***** if pet ct shows progression and " -> "Continue arimidex, consider faslodex with ***** if pet ct shows progression and "
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
