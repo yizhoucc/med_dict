@@ -1055,3 +1055,129 @@ Processing row 25 (6/20)...
       [G6-SEMANTIC] Metastasis: "node negative" -> "No"
       [G6-SEMANTIC] Distant_Metastasis: "" -> "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 9.7s [semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count, MPV 9.6, Neutrophil Absolute Count, Lymphs, Blood, Monocyte 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] lab_summary: "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 2" -> "No labs in note."
+    Clinical_Findings: 6.4s [faith-trimmed]
+      [EXTRACT] raw={
+  "findings": "Triple negative breast cancer with 75% tumor size, node negative, no imaging findings mentioned, no palpable masses, skin changes, or lymphadenopathy noted on physical exam."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Triple negative breast cancer with 75% tumor size, node nega" -> "Triple negative breast cancer with 75% tumor size, node nega"
+      [G6-SEMANTIC] parse FAILED
+    Current_Medications: 5.4s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "amoxicillin (AMOXIL) 500 mg capsule, cephalexin (KEFLEX) 500"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-MEDS] amoxicillin (AMOXIL) 500 mg capsule, cephalexin (KEFLEX) 500 mg capsule, cetirizine (ZYRTEC) 10 mg tablet, diphenhydrAMINE (BENADRYL) 25 mg capsule, levothyroxine 125 mcg tablet -> 
+    Treatment_Changes: 3.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": [
+]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "" -> "Patient presents with  New Patient Evaluation"
+      [G6-SEMANTIC] recent_changes: "Patient presents with  New Patient Evaluation" -> "No recent changes"
+      [G6-SEMANTIC] supportive_meds: "[]" -> "['amoxicillin', 'ascorbic acid', 'cephalexin', 'cetirizine', 'diphenhydrAMINE', "
+    Treatment_Goals: 3.3s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "risk reduction"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 5.7s [stripped]
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note mentions that she is planning to have surgery first for reductions bilaterally and a right lumpectomy with sentinel node, and that she
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 45.4s
+    Medication_Plan_chatgpt: 13.1s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "discussed the role to decrease the risk of systemic recurrence",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'discussed the role to decrease the risk of local recurrence', 'Shor" -> "{'summary': 'will decrease the risk of local recurrence'}"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'discussed the role to decrease the risk of systemic recurrence', 'S" -> "{'summary': 'will decrease the risk of systemic recurrence'}"
+      [G4-TEMPORAL] other treatment: "{'summary': 'port placement at surgery'}" -> "{'summary': 'will have port placement at surgery'}"
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'will decrease the risk of local recurrence'}" -> "{'summary': 'will decrease the risk of local recurrence', 'Short term side_effec"
+      [G6-SEMANTIC] chemotherapy: "{'summary': 'will decrease the risk of systemic recurrence'}" -> "{'summary': 'will decrease the risk of systemic recurrence', 'Short term side_ef"
+      [G6-SEMANTIC] other treatment: "{'summary': 'will have port placement at surgery'}" -> "{'summary': 'will have port placement at surgery', 'Short term side_effects_disc"
+      [POST-KEYS] stripped: {'radiotherapy', 'chemotherapy', 'other treatment'}
+    Medication_Plan: 1.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "medication_plan": "No medication plan mentioned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "No medication plan mentioned." -> ""
+      [G3-FAITH] EMPTIED: ['medication_plan']
+      [G4-TEMPORAL] parse FAILED
+      [G6-SEMANTIC] medication_plan: "" -> "We discussed the role of chemotherapy to decrease the risk of systemic recurrenc"
+    Therapy_plan: 7.3s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient is planning to undergo adjuvant chemotherapy to decrease the risk of systemic recurrence. The plan is to start chemotherapy after surgery. The role of radiation to d
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "The patient is planning to undergo adjuvant chemotherapy to decrease the risk of" -> "The patient will undergo adjuvant chemotherapy to decrease the risk of systemic "
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    radiotherapy_plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "We discussed the role of radiation to decrease the risk of l" -> "decrease the risk of local recurrence"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.7s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "procedure_plan": "surgery, port placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "surgery, port placement" -> "plan to go to surgery, plan to have port placement"
+      [G6-SEMANTIC] procedure_plan: "plan to go to surgery, plan to have port placement" -> "surgery first for reductions bilaterally and a right lumpectomy with sentinel no"
+    Imaging_Plan: 1.7s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G3-FAITH] EMPTIED: ['imaging_plan']
+      [G4-TEMPORAL] imaging_plan: "" -> "plan to"
+      [G6-SEMANTIC] imaging_plan: "plan to" -> "No imaging planned"
+    Lab_Plan: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned" -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] parse FAILED
+      [G6-SEMANTIC] lab_plan: "" -> "No labs planned"
