@@ -313,3 +313,142 @@ Processing row 21 (2/20)...
       [G4-TEMPORAL] medication_plan: "Continue arimidex, consider faslodex with ***** if pet ct shows progression and " -> "Continue arimidex, consider faslodex with ***** if pet ct shows progression and "
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Therapy_plan: 4.9s [stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue arimidex. If PET CT shows progression, consider faslodex with a specific mutation. Future options include hormone blockade with afinitor or xeloda or a clinical trial."
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    radiotherapy_plan: 3.6s [stripped]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Procedure_Plan: 2.8s [stripped]
+      [EXTRACT] raw={
+    "procedure_plan": "PET CT"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "PET CT now"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "PET CT now" -> "PET CT"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 5.3s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows "
+      [G6-SEMANTIC] lab_plan: "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows " -> "PET CT now, and if stable, continue arimidex alone. If PET CT shows progression,"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Genetic_Testing_Plan: 2.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "If pet ct shows progression could use faslodex with ***** if" -> "faslodex with ***** if she has a ***** mutation"
+      [G6-SEMANTIC] genetic_testing_plan: "faslodex with ***** if she has a ***** mutation" -> "If pet ct shows progression could use faslodex with ***** if she has a ***** mut"
+    Referral: 4.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation oncology",
+  "Others": "None",
+  "follow up": "PET CT"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Specialty: "Radiation oncology" -> "Medical Oncology/Hematology"
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 2.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "Next clinic visit": "pet ct now"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "pet ct now" -> "pet ct"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Advance_care_planning: 1.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 68.2s
+  Row 21 total: 127.0s
+  Row 21 saved to progress
+
+Processing row 22 (3/20)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'ER negative', 'PR negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 5.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "The patient is a 63-year-old female with high-grade DCIS (ER negative/weakly PR positive) and inv
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
+      [G6-SEMANTIC] summary: "The patient is a 63-year-old female with high-grade DCIS (ER negative/weakly PR " -> "The patient is a 63-year-old female with invasive carcinoma with ductal and lobu"
+    Cancer_Diagnosis: 11.7s [semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH 5-10% invasive carcinoma with ductal and lobular features, ER negative/weakly PR + (1%) high grade DCIS",
+  "Stage_of_Can
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally 1 cm grade 2 invasive carcinoma, 0.7 cm focus of grade 2 invasive car" -> "Not specified"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "Glucose, meter download: 105, 185, 236, 116 mg/dL"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Glucose, meter download: 105, 185, 236, 116 mg/dL" -> "Glucose, meter download: 70 - 199 mg/dL"
+      [G6-SEMANTIC] lab_summary: "Glucose, meter download: 70 - 199 mg/dL" -> "Glucose, meter download: 105 mg/dL, Glucose, meter download: 185 mg/dL, Glucose,"
+    Clinical_Findings: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology results: 1 cm invasive lobular carcinoma, 0.7 cm invasive carcinoma with ductal and lobular features, intermediate and high grade DCIS, negative margins. Physical exam: left b
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Pathology results: 1 cm invasive lobular carcinoma, 0.7 cm i" -> "Pathology results: 1 cm grade 2 invasive lobular carcinoma, "
+      [G6-SEMANTIC] ok (all values answer their fields)
