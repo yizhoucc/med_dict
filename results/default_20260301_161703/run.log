@@ -2465,3 +2465,65 @@ Processing row 32 (13/20)...
       [G3-FAITH] findings: "No new findings. Exam shows no evidence of recurrence." -> "no evidence of recurrence"
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Current_Medications: 5.0s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": [
+    "FEMARA",
+    "KLOR-CON 10",
+    "EXFORGE 5-160 mg",
+    "CHOLECALCIFEROL, VITAMIN D3"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "['FEMARA', 'KLOR-CON 10', 'EXFORGE 5-160 mg', 'CHOLECALCIFEROL, VITAMIN D3']" -> "FEMARA, KLOR-CON 10, EXFORGE 5-160 mg, CHOLECALCIFEROL, VITAMIN D3"
+      [POST-MEDS] FEMARA, KLOR-CON 10, EXFORGE 5-160 mg, CHOLECALCIFEROL, VITAMIN D3 -> FEMARA
+    Treatment_Changes: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "Switched from brand name letrozole to generic due to GI symptoms",
+"supportive_meds": ["ibuprofen (ADVIL,MOTRIN)"]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] recent_changes: "Switched from brand name letrozole to generic due to GI symp" -> "Taking brand name letrozole daily due to intolerance (GI sym"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.4s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 7.6s [stripped]
+      [EXTRACT] raw=The patient has started treatment, specifically adjuvant letrozole, which is an endocrine therapy. The note mentions that the patient is "tolerating ok" the treatment, but it does not provide any spec
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 36.4s
+    Medication_Plan_chatgpt: 37.1s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "adjuvant chemotherapy completed, currently on adjuvant letrozole",
+    "Short term side_effects_discussed": "not mentioned",
+    "Long term side_effects_discussed
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'bowel regimen', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] hormonal therapy: "{'summary': 'continue letrozole daily', 'Short term side_eff" -> "{'summary': 'continue letrozole daily', 'Short term side_eff"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'adjuvant chemotherapy completed, currently on adjuvant letrozole', " -> "{'summary': 'currently on adjuvant letrozole', 'Short term side_effects_discusse"
+      [G6-SEMANTIC] chemotherapy: "{'summary': 'currently on adjuvant letrozole', 'Short term side_effects_discusse" -> "{'summary': 'adjuvant letrozole', 'Short term side_effects_discussed': 'not ment"
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'bone therapy', 'chemotherapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 2.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Continue letrozole daily." -> "Continue letrozole daily"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
