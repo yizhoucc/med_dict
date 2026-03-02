@@ -1896,3 +1896,10 @@ Processing row 29 (10/20)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 30.3s
+      [EXTRACT] raw=The patient has not started any cancer treatment yet, as the note states "After an extensive discussion, the patient completely understands the rationale for neoadjuvant treatment and will spend the w
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] parse FAILED
+  Extraction prompts: 73.8s
