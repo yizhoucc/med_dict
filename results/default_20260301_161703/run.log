@@ -685,3 +685,55 @@ Processing row 23 (4/20)...
       [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
       [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
       [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 14.9s [semantic-fixed, stripped]
+      [EXTRACT] raw=The patient has undergone partial mastectomy and excision, but this is considered surgery alone, not a treatment for cancer response assessment. There is no evidence of chemotherapy, endocrine therapy
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not yet on treatment — no response to assess." -> "The cancer is currently not assessable due to lack of treatment."
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 87.8s
+    Medication_Plan_chatgpt: 30.4s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "will start",
+    "Short term side_effects_discussed": "hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome",
+    "Long term
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'chemotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'chemotherapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] psychiatry medication: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] bowel regimen: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] other treatment: "{'summary': 'surgical specimen for MP', 'Short term side_eff" -> "{'summary': 'surgical specimen for MP', 'Short term side_eff"
+      [G3-FAITH] radiotherapy: "{'summary': 'plan to start after', 'Short term side_effects_" -> "{'summary': 'plan to start after', 'Short term side_effects_"
+      [G3-FAITH] chemotherapy: "{'summary': 'will get a test to evaluate benefit, if any', '" -> "{'summary': 'will get a test to evaluate benefit, if any', '"
+      [G3-FAITH] bone therapy: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] pain medication: "{'summary': 'not mentioned', 'Short term side_effects_discus" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-TEMPORAL] psychiatry medication: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G4-TEMPORAL] bowel regimen: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G4-TEMPORAL] bone therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G4-TEMPORAL] pain medication: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'hormonal therapy', 'radiotherapy', 'chemotherapy', 'other treatment'}
+    Medication_Plan: 6.1s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "medication_plan": "adjuvant hormone therapy"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'surgical specimen', 'radiation', 'physical therapy', 'adjuvant chemotherapy'}
+    Therapy_plan: 23.0s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient is to discuss systemic therapy options. Given the extent of her cancer, a test will be ordered to evaluate her benefit of chemotherapy. If low risk, she will proceed
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medical_history_reviewed: "I reviewed the patient's medical information and medical history." -> "the patient's medical information and medical history."
+      [G4-TEMPORAL] treatment_options_reviewed: "Reviewed treatment options, treatment side effects in detail." -> "treatment options, treatment side effects in detail."
+      [G4-TEMPORAL] medications_and_allergies_reviewed: "I have reviewed the past medical, family, and social history sections including " -> "the past medical, family, and social history sections including the medications "
+      [G4-TEMPORAL] patient_concerns_discussed: "The patient concerns were discussed in detail. Patient verbalizes understanding " -> "The patient verbalizes understanding of these issues and agrees with the plan."
+      [G4-TEMPORAL] scribe_info: "***** ***** *****, am acting as a scribe for services provided by ***** ***** **" -> "acting as a scribe for services provided by  on  *****:***** PM"
+      [G4-TEMPORAL] therapy_plan: "The patient is to discuss systemic therapy options. Given the extent of her canc" -> "will be ordered to evaluate her benefit of chemotherapy. If low risk, she will p"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'total_face_to_face_time', 'total_counseling_time', 'medical_history_reviewed', 'scribe_annotation', 'treatment_options_reviewed', 'medications_and_allergies_reviewed', 'patient_concerns_discussed', 'scribe_info'}
