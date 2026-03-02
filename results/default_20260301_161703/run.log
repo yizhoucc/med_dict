@@ -2143,3 +2143,155 @@ Processing row 30 (11/20)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] procedure_plan: "Cycle 1 Doxil IV every 28 days on 07/01/2021, Brain MRI, MRI pelvis" -> "Cycle 1 Doxil IV every 28 days, Brain MRI, MRI pelvis"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 9.0s [stripped]
+      [EXTRACT] raw={
+    "imaging_plan": "PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'next_appointment', 'response_assessment', 'goals_of_treatment', 'current_meds'}
+    Lab_Plan: 3.8s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Cycle 1 Doxil IV every 28 days on 07/01/2021, Repeat Echo in 3 months while on D"
+      [G6-SEMANTIC] lab_plan: "Cycle 1 Doxil IV every 28 days on 07/01/2021, Repeat Echo in 3 months while on D" -> "No labs planned"
+    Genetic_Testing_Plan: 2.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "Need to do Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] genetic_testing_plan: "Need to do Brain MRI to assess region of increased focal uptake in the right fro" -> "Not yet planned — no genetic testing mentioned."
+    Referral: 5.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "GI, Oral Medicine",
+  "Others": "Physical therapy",
+  "follow up": "4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+    follow_up_next_visit: 2.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 65.7s
+  Row 30 total: 130.9s
+  Row 30 saved to progress
+
+Processing row 31 (12/20)...
+  Injected 2 term definitions: ['estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (946 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 4.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (HCC
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+      [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
+      [G6-SEMANTIC] summary: "Malignant neoplasm of overlapping sites of left breast in female, estrogen recep" -> "Patient with a history of breast cancer, stage IIA, estrogen receptor positive, "
+    Cancer_Diagnosis: 6.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to neck, chest, abdomen, and pel
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "Stage IIA"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Sedimentation Rate (MB) 27, C-Reactive Protein 3.1"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Sedimentation Rate (MB) 27, C-Reactive Protein 3.1" -> "{'Sedimentation Rate (MB)': '27', 'C-Reactive Protein': '3.1"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 5.6s
+      [EXTRACT] raw={
+"findings": "No abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown fat. No pulmonary consolidations o
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+  "current_meds": [
+    "exemestane",
+    "trastuzumab",
+    "pertuzumab"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 6.0s
+      [EXTRACT] raw={
+"recent_changes": "Dropped ***** due to diarrhea, which resolved.",
+"supportive_meds": [
+"omeprazole",
+"loratadine",
+"loperamide",
+"diphenhydrAMINE",
+"epinephrine",
+"melatonin",
+"omega-3 fatty acids
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.2s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "curative"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 5.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has started treatment with herceptin and an unspecified medication (*****), which was recently stopped due to diarrhea, but the diarrhea has resolved. The note mentions that a PET-CT done 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "No evidence of active metastatic disease on PET-CT, diarrhea" -> "No evidence of active metastatic disease on PET-CT, diarrhea"
+      [G6-SEMANTIC] response_assessment: "No evidence of active metastatic disease on PET-CT, diarrhea resolved after stop" -> "No abnormal areas of FDG uptake to suggest active metastatic disease, decreased "
+  Extraction prompts: 37.5s
