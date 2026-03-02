@@ -21,6 +21,31 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 LINE_WIDTH = 140
 
 
+def load_oncology_whitelist(path="data/oncology_drugs.txt"):
+    drugs = set()
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                drugs.add(line.lower())
+    return drugs
+
+
+def filter_current_meds(parsed, whitelist):
+    val = parsed.get("current_meds", "")
+    if isinstance(val, list):
+        filtered = [m for m in val if any(d in m.lower() for d in whitelist)]
+        parsed["current_meds"] = filtered if filtered else ""
+    elif isinstance(val, str):
+        if not val or val.lower().startswith("not yet") or val.lower() == "none":
+            parsed["current_meds"] = ""
+        else:
+            meds = [m.strip() for m in val.split(",")]
+            filtered = [m for m in meds if any(d in m.lower() for d in whitelist)]
+            parsed["current_meds"] = ", ".join(filtered) if filtered else ""
+    return parsed
+
+
 class ChatTemplate:
     """Abstraction for model-specific chat formatting.
 
@@ -826,7 +851,7 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None):
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None):
     """
     V2 extraction pipeline with 6 independent gates.
     Each gate fixes one specific issue (trim, don't redo).
@@ -1121,6 +1146,24 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     gate_log.append(f"      [G6-SEMANTIC] REJECTED (no key overlap)")
             else:
                 gate_log.append(f"      [G6-SEMANTIC] parse FAILED")
+
+        # --- POST-1: Strip extra keys ---
+        if parsed is not None and expected_keys:
+            extra = set(parsed.keys()) - expected_keys
+            if extra:
+                for k in extra:
+                    del parsed[k]
+                gate_log.append(f"      [POST-KEYS] stripped: {extra}")
+                flags.append("stripped")
+
+        # --- POST-2: Filter current_meds by whitelist ---
+        if parsed is not None and key == "Current_Medications" and oncology_whitelist:
+            before = parsed.get("current_meds", "")
+            parsed = filter_current_meds(parsed, oncology_whitelist)
+            after = parsed.get("current_meds", "")
+            if str(before) != str(after):
+                gate_log.append(f"      [POST-MEDS] {before} -> {after}")
+                flags.append("meds-filtered")
 
         # --- Store result ---
         if parsed is not None:

@@ -1,0 +1,107 @@
+# Oncology drug whitelist — one drug per line (lowercase)
+# Used by filter_current_meds() to strip non-oncology medications
+
+# CHEMOTHERAPY
+doxorubicin
+adriamycin
+cyclophosphamide
+cytoxan
+paclitaxel
+taxol
+abraxane
+nab-paclitaxel
+docetaxel
+taxotere
+carboplatin
+capecitabine
+xeloda
+gemcitabine
+gemzar
+eribulin
+halaven
+ixabepilone
+irinotecan
+epirubicin
+fluorouracil
+5-fu
+methotrexate
+vinorelbine
+navelbine
+cisplatin
+sacituzumab
+trodelvy
+doxil
+liposomal doxorubicin
+
+# HORMONAL THERAPY
+tamoxifen
+nolvadex
+letrozole
+femara
+anastrozole
+arimidex
+exemestane
+aromasin
+fulvestrant
+faslodex
+goserelin
+zoladex
+leuprolide
+lupron
+megestrol
+megace
+raloxifene
+
+# TARGETED THERAPY
+trastuzumab
+herceptin
+pertuzumab
+perjeta
+t-dm1
+kadcyla
+trastuzumab deruxtecan
+enhertu
+lapatinib
+tykerb
+neratinib
+nerlynx
+tucatinib
+tukysa
+palbociclib
+ibrance
+ribociclib
+kisqali
+abemaciclib
+verzenio
+everolimus
+afinitor
+alpelisib
+piqray
+olaparib
+lynparza
+talazoparib
+talzenna
+elacestrant
+orserdu
+capivasertib
+truqap
+bevacizumab
+avastin
+
+# IMMUNOTHERAPY
+pembrolizumab
+keytruda
+atezolizumab
+tecentriq
+nivolumab
+opdivo
+durvalumab
+imfinzi
+
+# BONE AGENTS
+denosumab
+xgeva
+prolia
+zoledronic acid
+zometa
+pamidronate
