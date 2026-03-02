@@ -1,4 +1,4 @@
-Source: default.yaml | Run started: 2026-03-01 15:07:44
+Source: default.yaml | Run started: 2026-03-01 16:17:03
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -386,7 +386,6 @@ RESULTS FOR ROW 21
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "DCIS, ER+/PR+",
     "Stage_of_Cancer": "T4a",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -396,54 +395,24 @@ RESULTS FOR ROW 21
     "findings": "Intermediate grade DCIS spanning ~5.0 cm, clear surgical margins, no invasive ductal cancer, ER+ (98%), PR+ (90%), no palpable masses, no skin changes, no lymphadenopathy"
   },
   "Current_Medications": {
-    "current_meds": "She is not on any prescription meds, including no drug treatments for her dyslipidemia or impaired glucose tolerance; and she has no known allergies."
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
     "supportive_meds": "Vitamin D, calcium"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "None"
+    "goals_of_treatment": "risk reduction"
   },
   "Response_Assessment": {
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "goals_of_treatment": "Not mentioned",
-    "current_meds": "Not mentioned",
-    "surgical_history": "partial mastectomy for biopsy proven DCIS",
-    "pathology": "intermediate grade DCIS, ER+ (98%) PR+ (90%)",
-    "family_history": "two sisters in their 50s, plus multiple aunts in their 50s and a niece in her 40s with breast cancer",
-    "genetic_testing": "negative for any pathogenic variant sequences",
-    "risk_factors": "osteopenia, dyslipidemia, impaired glucose tolerance"
+    "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast",
-      "Short term side_effects_discussed": "MSS and bone density complications",
-      "Long term side_effects_discussed": "MSS and bone density complications, which can be mitigated with bisphosphonate therapy"
-    },
-    "radiotherapy": {
-      "summary": "XRT +/- endocrine therapy to minimize her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "Bisphosphonate therapy to mitigate bone density complications of aromatase inhibitor therapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT, and will plan to take bisphosphonate therapy to mitigate the risk of bone density complications."
   },
   "Therapy_plan": {
-    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer.",
-    "adjuvant_treatment": "XRT and endocrine therapy, specifically an aromatase inhibitor like Arimidex",
-    "duration_of_endocrine_therapy": "5 years",
-    "bisphosphonate_therapy": "to mitigate the risk of bone density complications from aromatase inhibitor therapy",
-    "follow_up_visit": "in 3-4 months",
-    "evaluation": "in two weeks"
+    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "XRT"
@@ -499,12 +468,11 @@ RESULTS FOR ROW 22
     "Patient type": "Follow up",
     "second opinion": "yes",
     "in-person": "yes",
-    "summary": "Metastatic ER+ breast cancer, stage not specified, for a second opinion"
+    "summary": "Metastatic breast cancer, ER+, stage not specified, for a second opinion"
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
     "Stage_of_Cancer": "Metastatic",
-    "Distant_Metastasis": "Yes, bones, chest wall, right infraclavicular and right IM nodes",
     "Metastasis": "Yes"
   },
   "Lab_Results": {
@@ -516,85 +484,34 @@ RESULTS FOR ROW 22
   "Current_Medications": {
     "current_meds": [
       "anastrozole",
-      "denosumab",
-      "prednisone",
-      "sulfamethoxazole-trimethoprim"
+      "denosumab"
     ]
   },
   "Treatment_Changes": "{\n\"recent_changes\": \"Abemaciclib was held on 08/14/2021 due to pneumonitis, and the dose of ***** was reduced to 150 mg bid in October 2020.\",\n\"supportive_meds\": [\n\"Denosumab (XGEVA)\",\n\"Diphenoxylate-atropine (LOMOTIL)\",\n\"Prednisone (DELTASONE)\"\n]",
   "Treatment_Goals": {
-    "goals_of_treatment": "palliative",
-    "response_assessment": "good response",
-    "current_meds": "anastrozole, aspirin, atenolol, b complex vitamins, calcium, cholecalciferol, denosumab, diphenoxylate-atropine, multivitamin, omega 3-dha-epa-fish oil, prednisone, sulfamethoxazole-trimethoprim"
+    "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "stable to slightly decreased metabolic activity of osseous metastases",
-    "symptoms": "no",
-    "asymptomatic": "true",
-    "disease_recurrence": "no",
-    "evidence_of_recurrence": "no",
-    "imaging": "stable to slightly decreased metabolic activity of osseous metastases",
-    "exam": "no evidence of disease recurrence"
+    "response_assessment": "stable to slightly decreased metabolic activity of osseous metastases"
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "continue arimidex",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "XRT to L4 and T10",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "chemotherapy": {
-      "summary": "AC x 4",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "abemaciclib",
-      "Short term side_effects_discussed": "pneumonitis",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Continue arimidex, consider faslodex with ***** if pet ct shows progression and she has a ***** mutation, plan to use hormone blockade with afinitor or xeloda or a clinical trial",
-    "goals_of_treatment": "Not yet on treatment — no response to assess.",
-    "current_meds": "arimidex",
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "medication_plan": "Continue arimidex, consider faslodex with ***** if pet ct shows progression and she has a ***** mutation, plan to use hormone blockade with afinitor or xeloda or a clinical trial"
   },
   "Therapy_plan": {
-    "therapy_plan": "Continue arimidex, will consider faslodex with a specific mutation, plan to include hormone blockade with afinitor or xeloda or a clinical trial",
-    "goals_of_treatment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Arimidex",
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "therapy_plan": "Continue arimidex. If PET CT shows progression, consider faslodex with a specific mutation. Future options include hormone blockade with afinitor or xeloda or a clinical trial."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "XRT to L4 and T10 in June 2020",
-    "goals_of_treatment": "Not yet on treatment — no goals of treatment specified",
-    "response_assessment": "Not yet on treatment — no response to assess",
-    "current_meds": "Arimidex"
+    "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
   },
   "Procedure_Plan": {
-    "procedure_plan": "PET CT",
-    "goals_of_treatment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Arimidex",
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "procedure_plan": "PET CT"
   },
   "Imaging_Plan": {
     "imaging_plan": "PET CT"
   },
   "Lab_Plan": {
-    "lab_plan": "PET CT now, and if stable, continue arimidex alone. If PET CT shows progression, faslodex with unknown medication if she has a unknown mutation, or hormone blockade with afinitor or xeloda or a clinical trial.",
-    "goals_of_treatment": "Not yet specified",
-    "current_meds": "Arimidex",
-    "response_assessment": "Not yet assessed"
+    "lab_plan": "PET CT now, and if stable, continue arimidex alone. If PET CT shows progression, faslodex with unknown medication if she has unknown mutation, or hormone blockade with afinitor or xeloda or a clinical trial."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
@@ -607,10 +524,7 @@ RESULTS FOR ROW 22
     "follow up": "PET CT"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "pet ct",
-    "goals_of_treatment": "Not yet on treatment — no goals to assess.",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "arimidex"
+    "Next clinic visit": "pet ct"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -646,7 +560,6 @@ RESULTS FOR ROW 23
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH 5-10% invasive carcinoma with ductal and lobular features, ER negative/weakly PR + (1%) high grade DCIS",
     "Stage_of_Cancer": "Not specified",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -656,7 +569,7 @@ RESULTS FOR ROW 23
     "findings": "Pathology results: 1 cm grade 2 invasive lobular carcinoma, 0.7 cm invasive carcinoma with ductal and lobular features, intermediate and high grade DCIS, negative margins. Physical exam: left breast mastectomy scar healing well with tissue expander in place, no dominant masses in right breast, no suspicious skin changes overlying expander. No palpable cervical or supraclavicular adenopathy."
   },
   "Current_Medications": {
-    "current_meds": "acetaminophen (TYLENOL), atorvastatin (LIPITOR), cholecalciferol, docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), MULTIVIT-MINERALS/FERROUS FUM, oxyCODONE (ROXICODONE), sulfamethoxazole-trimethoprim (BACTRIM DS,SEPTRA DS)"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes mentioned.",
@@ -673,52 +586,17 @@ RESULTS FOR ROW 23
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "acetaminophen, atorvastatin, cholecalciferol, docusate sodium, ibuprofen, LORazepam, MULTIVIT-MINERALS/FERROUS FUM, oxyCODONE, sulfamethoxazole-trimethoprim"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
     "response_assessment": "The patient's cancer is currently being assessed as low risk, with no evidence of tumor in the sentinel lymph node (0/1) and negative margins."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "will receive at least 5 years of adjuvant hormonal therapy",
-      "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
-      "Long term side_effects_discussed": "possible acceleration of bone density loss"
-    },
-    "bone therapy": {
-      "summary": "will discuss bone targeted therapies",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "will maintain a calcium rich diet, will take in an adequate amount of Vitamin D (typically 600-800 IU per day), will engage in weight bearing exercise",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "chemotherapy": {
-      "summary": "does not recommend adjuvant chemotherapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "will receive letrozole, an aromatase inhibitor, for at least 5 years",
-    "goals_of_treatment": "risk reduction",
-    "current_meds": "Not yet on treatment — no response to assess.",
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "medication_plan": "will receive letrozole, an aromatase inhibitor, for at least 5 years"
   },
   "Therapy_plan": {
-    "therapy_plan": "an endocrine based therapy with letrozole, specifically an aromatase inhibitor",
-    "diet": "a calcium rich diet",
-    "vitamin_d": "1500-2000 IU per day",
-    "exercise": "weight bearing exercise for 150 minutes of moderate intensity per week",
-    "alternative_therapy": "another aromatase inhibitor or tamoxifen"
+    "therapy_plan": "an endocrine based therapy with letrozole, specifically an aromatase inhibitor"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -730,10 +608,7 @@ RESULTS FOR ROW 23
     "imaging_plan": "DEXA"
   },
   "Lab_Plan": {
-    "lab_plan": "DEXA",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not yet on treatment — no medications listed."
+    "lab_plan": "DEXA"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "Not yet on treatment — no genetic testing planned"
@@ -746,10 +621,7 @@ RESULTS FOR ROW 23
     "follow up": "3 months"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "3 months",
-    "goals_of_treatment": "low risk",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "letrozole"
+    "Next clinic visit": "3 months"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -785,7 +657,6 @@ RESULTS FOR ROW 24
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Grade II micropapillary mucinous carcinoma, ER+/PR+/HER2-",
     "Stage_of_Cancer": "Not specified",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -795,7 +666,7 @@ RESULTS FOR ROW 24
     "findings": "Right breast: 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications. New right axillary LN with irregular morphology. Ultrasound showed multiple solid hypoechoic irregular vascular masses, together measuring 50 x 21 x 55mm extending from 9:00 3cm from nipple to 9:00 7cm from nipple. Abnormal right axillary LN at 11:00, 15cm from nipple with focal cortical thickening up to 6mm. Liver: hypervascular mass in segment 8 measuring 1.9 cm with a hemangioma demonstrating discontinuous nodular enhancement with gradual fill in, several scattered subcentimeter hypervascular foci throughout the liver, could be due to flash filling. Additionally, there is a hypervascular mass in segment 6 measuring 3.5 cm which is mildly hypervascular demonstrating more homogeneous enhancement. This most likely represents a focal nodular hyperplasia. No definite sites of hypermetabolic metastatic disease."
   },
   "Current_Medications": {
-    "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (Tums) 1250 mg (500 mg elemental) tablet, cetirizine (ZYRTEC) 10 mg tablet, cholecalciferol, vitamin D3, 1,000 unit CAP, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, Duloxetine (CYMBALTA) 60 mg DR, gabapentin (NEURONTIN) 400 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet, meloxicam (MOBIC) 15 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, nicotine (NICODERM CQ) 21 mg/24 hr patch, omeprazole (PRILOSEC) 20 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet, senna (SENOKOT) 8.6 mg tablet"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "None",
@@ -806,100 +677,32 @@ RESULTS FOR ROW 24
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet, cetirizine (ZYRTEC) 10 mg tablet, cholecalciferol, vitamin D3, 1,000 unit CAP, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, DULoxetine (CYMBALTA) 60 mg DR *****, gabapentin (NEURONTIN) 400 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet, meloxicam (MOBIC) 15 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, nicotine (NICODERM CQ) 21 mg/24 hr patch, omeprazole (PRILOSEC) 20 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet, senna (SENOKOT) 8.6 mg tablet"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "The cancer is currently not assessable due to lack of treatment.",
-    "current_meds": [
-      "acetaminophen (TYLENOL) 500 mg tablet",
-      "acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet",
-      "calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet",
-      "cetirizine (ZYRTEC) 10 mg tablet",
-      "cholecalciferol, vitamin D3, 1,000 unit CAP",
-      "cyclobenzaprine (FLEXERIL) 5 mg tablet",
-      "diclofenac (VOLTAREN) 1 % GEL gel",
-      "docusate sodium (COLACE) 100 mg capsule",
-      "DULoxetine (CYMBALTA) 60 mg DR *****",
-      "gabapentin (NEURONTIN) 400 mg capsule",
-      "ibuprofen (ADVIL,MOTRIN) 600 mg tablet",
-      "losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet",
-      "meloxicam (MOBIC) 15 mg tablet",
-      "naloxone 4 mg/actuation SPRAYNAERO",
-      "nicotine (NICODERM CQ) 21 mg/24 hr patch",
-      "omeprazole (PRILOSEC) 20 mg capsule",
-      "oxyCODONE (ROXICODONE) 5 mg tablet",
-      "senna (SENOKOT) 8.6 mg tablet"
-    ]
+    "response_assessment": "The cancer is currently not assessable due to lack of treatment."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "will get a test to evaluate benefit, if any",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "hormonal therapy": {
-      "summary": "will start",
-      "Short term side_effects_discussed": "hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome",
-      "Long term side_effects_discussed": "bone loss and increased risk of fractures"
-    },
-    "radiotherapy": {
-      "summary": "plan to start after",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "surgical specimen for MP",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "adjuvant hormone therapy",
-    "adjuvant chemotherapy": "will get a test to evaluate her benefit, if any",
-    "surgical specimen": "will send her sugical specimen for MP",
-    "radiation": "will proceed with radiation",
-    "physical therapy": "recommended she see PT and placed a referral"
+    "medication_plan": "adjuvant hormone therapy"
   },
   "Therapy_plan": {
-    "therapy_plan": "will be ordered to evaluate her benefit of chemotherapy. If low risk, she will proceed with radiation and start adjuvant hormone therapy.",
-    "patient_concerns_discussed": "The patient verbalizes understanding of these issues and agrees with the plan.",
-    "treatment_options_reviewed": "treatment options, treatment side effects in detail.",
-    "medical_history_reviewed": "the patient's medical information and medical history.",
-    "medications_and_allergies_reviewed": "the past medical, family, and social history sections including the medications and allergies listed in the above medical record.",
-    "total_face_to_face_time": "60",
-    "total_counseling_time": "50",
-    "scribe_info": "acting as a scribe for services provided by  on  *****:***** PM",
-    "scribe_annotation": "The above scribed documentation as annotated by me accurately reflects the services I have provided."
+    "therapy_plan": "will be ordered to evaluate her benefit of chemotherapy. If low risk, she will proceed with radiation and start adjuvant hormone therapy."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "radiation"
   },
   "Procedure_Plan": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not specified",
     "procedure_plan": "will send her surgical specimen for MP, will order a test, will reassess when results return, will see Dr. ***** in radiation oncology"
   },
   "Imaging_Plan": {
-    "imaging_plan": "MP",
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not specified"
+    "imaging_plan": "MP"
   },
   "Lab_Plan": {
-    "lab_plan": "MP",
-    "goals_of_treatment": "adjuvant chemotherapy",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not specified"
+    "lab_plan": "MP"
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "I will order a FISH test today and reassess when her results return.",
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not specified"
+    "genetic_testing_plan": "I will order a FISH test today and reassess when her results return."
   },
   "Referral": {
     "Nutrition": "None",
@@ -945,7 +748,6 @@ RESULTS FOR ROW 25
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
     "Stage_of_Cancer": "metastatic (Stage IV)",
-    "Distant_Metastasis": "Yes, to multiple sites",
     "Metastasis": "Yes, to multiple sites"
   },
   "Lab_Results": {
@@ -962,65 +764,17 @@ RESULTS FOR ROW 25
   },
   "Treatment_Changes": {
     "recent_changes": "Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off, started ixabepilone 40mg/m2, started denosumab",
-    "supportive_meds": "ondansetron, oxyCODONE, LORazepam, polyethylene glycol"
+    "supportive_meds": "ondansetron, oxyCODONE, lorazepam, polyethylene glycol"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "palliative",
-    "response_assessment": "stable",
-    "current_meds": "capecitabine (XELODA) 500 mg tablet, docusate sodium (COLACE) 250 mg capsule, ferrous fumarate (IRON ORAL), levetiracetam (KEPPRA ORAL), metoprolol tartrate (LOPRESSOR ORAL), ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (ROXICODONE) 5 mg immediate release tablet, lorazepam (ATIVAN) 1 mg tablet, multivitamin, prochlorperazine (COMPAZINE) 10 mg tablet, sodium chloride ORAL, polyethylene glycol (MIRALAX) 17 gram packet, amlodipine besylate (NORVASC ORAL), calcium ORAL, cholecalciferol, vitamin D3, 1000 UNITS TAB"
+    "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "New chest wall/breast skin metastases on PET/CT",
-    "goals_of_treatment": "palliative",
-    "current_meds": "capecitabine (XELODA) 500 mg tablet, cholecalciferol, vitamin D3, docusate sodium, ferrous fumarate, levetiracetam, metoprolol tartrate, ondansetron, oxyCODONE, lorazepam, multivitamin, prochlorperazine, sodium chloride, polyethylene glycol"
+    "response_assessment": "New chest wall/breast skin metastases, indicating disease progression"
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "hormonal therapy": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "bone therapy": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "radiotherapy": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "bowel regimen": {
-      "summary": "Xeloda",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "pain medication": {
-      "summary": "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "psychiatry medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "other treatment": {
-      "summary": "will start cycle again",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off, will start cycle again",
-    "goals_of_treatment": "palliative",
-    "response_assessment": "Feels good",
-    "current_meds": "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off"
+    "medication_plan": "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off, will start cycle again"
   },
   "Therapy_plan": {
     "therapy_plan": "will start cycle again in 3 weeks"
@@ -1029,11 +783,7 @@ RESULTS FOR ROW 25
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned",
-    "goals_of_treatment": "palliative",
-    "current_meds": "xeloda, irinotecan, ixabepilone",
-    "response_assessment": "stable",
-    "next_steps": "Scan in 3 weeks"
+    "procedure_plan": "No procedures planned"
   },
   "Imaging_Plan": {
     "imaging_plan": "Scan in 3 weeks"
@@ -1047,15 +797,12 @@ RESULTS FOR ROW 25
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Oncology",
+    "Specialty": "None",
     "Others": "None",
     "follow up": "Scan in 3 weeks"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Scan in 3 weeks",
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "ixabepilone, xeloda"
+    "Next clinic visit": "Scan in 3 weeks"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1091,7 +838,6 @@ RESULTS FOR ROW 26
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Triple negative breast cancer",
     "Stage_of_Cancer": "Stage IB",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -1101,7 +847,7 @@ RESULTS FOR ROW 26
     "findings": "Triple negative breast cancer with 75% tumor size, node negative"
   },
   "Current_Medications": {
-    "current_meds": "amoxicillin (AMOXIL) 500 mg capsule, cephalexin (KEFLEX) 500 mg capsule, cetirizine (ZYRTEC) 10 mg tablet, diphenhydrAMINE (BENADRYL) 25 mg capsule, levothyroxine 125 mcg tablet"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
@@ -1115,40 +861,17 @@ RESULTS FOR ROW 26
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine"
+    "goals_of_treatment": "risk reduction"
   },
   "Response_Assessment": {
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "goals_of_treatment": "curative",
-    "current_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine"
+    "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "will decrease the risk of systemic recurrence",
-      "Short term side_effects_discussed": "Not yet discussed",
-      "Long term side_effects_discussed": "Not yet discussed"
-    },
-    "radiotherapy": {
-      "summary": "will decrease the risk of local recurrence",
-      "Short term side_effects_discussed": "Not yet discussed",
-      "Long term side_effects_discussed": "Not yet discussed"
-    },
-    "other treatment": {
-      "summary": "will have port placement at surgery",
-      "Short term side_effects_discussed": "Not yet discussed",
-      "Long term side_effects_discussed": "Not yet discussed"
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will undergo adjuvant chemotherapy to decrease the risk of systemic recurrence. The plan is to start chemotherapy after surgery. The role of radiation to decrease the risk of local recurrence was also discussed.",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not mentioned"
+    "therapy_plan": "The patient will undergo adjuvant chemotherapy to decrease the risk of systemic recurrence. The plan is to start chemotherapy after surgery. The role of radiation to decrease the risk of local recurrence was also discussed."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "decrease the risk of local recurrence"
@@ -1209,7 +932,6 @@ RESULTS FOR ROW 27
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER/PR + IDC",
     "Stage_of_Cancer": "Metastatic",
-    "Distant_Metastasis": "Yes, to bone",
     "Metastasis": "Yes, to bone"
   },
   "Lab_Results": {
@@ -1226,52 +948,23 @@ RESULTS FOR ROW 27
     "supportive_meds": "calcium-vitamin D, zolendronic acid"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "palliative",
-    "response_assessment": "stable",
-    "current_meds": "Femara, Zoladex, calcium-vitamin D, zolendronic acid"
+    "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "stable disease, with stable to slightly decreased metabolic activity of osseous metastases on PET-CT",
-    "goals_of_treatment": "palliative",
-    "current_meds": "Femara, Zoladex, calcium-vitamin D, zolendronic acid"
+    "response_assessment": "stable disease, with stable to slightly decreased metabolic activity of osseous metastases on PET-CT"
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Continue on Femara and Zoladex",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "chemotherapy": {
-      "summary": "Continue on *****",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "pain medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Continue on *****, zoladex and femara",
-    "goals_of_treatment": "palliative",
-    "response_assessment": "stable disease",
-    "current_meds": "Not yet on treatment — no response to assess."
+    "medication_plan": "Continue on *****, zoladex and femara"
   },
   "Therapy_plan": {
-    "therapy_plan": "Continue on *****, zoladex and femara",
-    "consider_mri": "spine",
-    "reassess_pain": "two weeks"
+    "therapy_plan": "Continue on *****, zoladex and femara"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned.",
-    "goals_of_treatment": "palliative",
-    "current_meds": "***** and zoladex and femara",
-    "response_assessment": "stable disease",
-    "next_steps": "Reassess lower back pain at two weeks, Obtain CBC with platelets, Obtain UA"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "MRI of the spine in 2 weeks"
@@ -1290,13 +983,7 @@ RESULTS FOR ROW 27
     "follow up": "two weeks"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Reassess lower back pain",
-    "Purpose of next clinic visit": "to reassess lower back pain and consider MRI of the spine",
-    "Current medications": "***** (chemotherapy), zoladex, femara",
-    "Goals of treatment": "palliative",
-    "Current cancer status": "stable disease",
-    "Response assessment": "stable disease",
-    "Current symptoms": "lower back pain, easy bruising, possible UTI, genital-urinary symptoms"
+    "Next clinic visit": "Reassess lower back pain"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1332,7 +1019,6 @@ RESULTS FOR ROW 28
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC",
     "Stage_of_Cancer": "Stage I",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -1342,7 +1028,7 @@ RESULTS FOR ROW 28
     "findings": "MRI-guided core biopsy: 0.8 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no lymphovascular invasion, no DCIS. Right lumpectomy: 0.9 cm grade 1 IDC, no lymphovascular invasion, margins negative, no DCIS, 0/3 LN+"
   },
   "Current_Medications": {
-    "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, amLODIPine (NORVASC) 5 mg tablet, artificial tears (TEARS RENEWED) ophthalmic solution, ascorbic acid, vitamin C, (VITAMIN C) 1,000 mg tablet, baclofen (LIORESAL) 10 mg tablet, BARIATRIC MULTIVITAMINS 45 mg iron- 800 mcg-120 mcg capsule, biotin 10,000 mcg CAP, busPIRone (BUSPAR) 30 mg tablet, calcium citrate-vitamin D 315 mg-5 mcg (200 unit) tablet, diclofenac (VOLTAREN) 1 % gel, docusate sodium (COLACE) 100 mg capsule, DULoxetine (CYMBALTA) 60 mg DR, ELDERBERRY, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, gabapentin (NEURONTIN) 300 mg capsule, lamoTRIgine (LAMICTAL) 200 mg tablet, lamoTRIgine (LAMICTAL) 25 mg tablet, LORazepam (ATIVAN) 0.5 mg tablet, losartan (COZAAR) 50 mg tablet, lurasidone (LATUDA) 80 mg tablet, omeprazole (PRILOSEC) 20 mg capsule, prazosin (MINIPRESS) 1 mg capsule, pregabalin (*****) 75 mg capsule, rosuvastatin (CRESTOR) 20 mg tablet, TURMERIC ORAL, UNABLE TO FIND 1,500 mg daily after dinner, zinc gluconate 50 mg tablet"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
@@ -1353,55 +1039,14 @@ RESULTS FOR ROW 28
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC MULTIVITAMINS, biotin, busPIRone, calcium citrate-vitamin D, diclofenac, docusate sodium, DULoxetine, ELDERBERRY, fluticasone propionate, gabapentin, lamoTRIgine, LORazepam, losartan, lurasidone, omeprazole, prazosin, pregabalin, rosuvastatin, TURMERIC, UNABLE TO FIND, zinc gluconate"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
     "response_assessment": "The patient has a 0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no HER4, no DCIS. The mass is stable on imaging."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
-      "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
-      "Long term side_effects_discussed": "bone density loss"
-    },
-    "radiotherapy": {
-      "summary": "will proceed with radiation",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "calcium and vitamin D to improve bone health",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "calcium and vitamin D",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "psychiatry medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "DEXA to assess bone health",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "an aromatase inhibitor, calcium, and vitamin D",
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not yet on treatment — no current medications listed"
+    "medication_plan": "an aromatase inhibitor, calcium, and vitamin D"
   },
   "Therapy_plan": {
     "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor, proceed with radiation oncology consultation, obtain DEXA, calcium/vitamin D, aim to resume daily aerobic activities"
@@ -1465,81 +1110,45 @@ RESULTS FOR ROW 29
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
     "Stage_of_Cancer": "pT1c(m)*****(sn)",
-    "Distant_Metastasis": "No",
     "Metastasis": "Yes"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology: Tumor size: 1.6 cm and 0.6 cm, margins: negative for invasive cancer, positive for DCIS, lymph node status: micrometastatic carcinoma in one lymph node (0.5 mm). Imaging: MRI shows suspicious mass in upper outer quadrant of right breast with satellite masses and surrounding non-mass enhancement. Physical exam: Periareolar incision clean and dry, erythematous dermatitis reaction in right axilla, small seroma in lower inner quadrant, no palpable masses or tenderness in left breast."
+    "findings": "Pathology: Tumor size: 1.6 cm and 0.6 cm, margins negative for invasive cancer but positive for DCIS, lymph node status: micrometastatic carcinoma in one lymph node (0.5 mm). Imaging: MRI shows suspicious mass in the upper outer quadrant of the right breast with satellite masses and surrounding non-mass enhancement. Physical exam: Periareolar incision clean and dry, erythematous dermatitis reaction in right axilla, small seroma in lower inner quadrant, no palpable masses or tenderness in left breast."
   },
   "Current_Medications": {
-    "current_meds": "acetaminophen, ibuprofen"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
     "supportive_meds": "Acetaminophen 1000mg PO every 8 hours, Ibuprofen 600mg PO 3 times daily"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet"
+    "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "The cancer is currently not assessable due to lack of treatment.",
-    "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet"
+    "response_assessment": "The patient's cancer is currently responding as follows: The MRI findings from 03/17/2019 show a suspicious (BI-RADS 4) right breast mass with satellite masses and surrounding non-mass enhancement, and the pathology report from 03/21/2019 shows invasive ductal carcinoma with mixed micropapillary and ductal features, ER+/PR+/HER2-, with a single micrometastatic carcinoma in a sentinel node."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Start letrozole 2.5mg PO daily now",
-      "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
-      "Long term side_effects_discussed": "possible acceleration of bone density loss"
-    },
-    "bone therapy": {
-      "summary": "Bone density scan can be completed when she returns from travel, may start bisphosphonate if osteopenia",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "In regards to radiation therapy plan, she is at risk for local recurrence in her right breast for which ***** is recommending additional radiation.",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "Calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Start letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending, consider bisphosphonate pending bone scan result"
+    "medication_plan": "Start letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending, consider bisphosphonate pending bone scan result, continue use of vaginal moisturizer"
   },
   "Therapy_plan": {
-    "therapy_plan": "1. Start letrozole 2.5mg PO daily now (prescription sent) 2. Calcium supplementation with  1200mg/day combination of diet and supplement.  Recommend vit D supplement pending 3. Bone density scan can be completed when she returns from  4. Mental eval and clearance if considering  bisphosphonate pending bone scan result 5. Surgical planning per Dr.  tentatively scheduled for September 2019  6. RT planning per, likely pursued locally in ",
-    "start_date": "",
-    "duration": "",
-    "medication": "letrozole 2.5mg PO daily",
-    "side_effects": "",
-    "follow_up": "Plan to undergo bone density scan in September. Plan to discuss starting vaginal estrogens at future visit. Plan to pursue radiation therapy in the future, specifically for local recurrence in the right breast, but not for regional lymph nodes.",
-    "surgery": "mastectomy",
-    "radiation": "Plan to pursue radiation therapy in the future, specifically for local recurrence in the right breast, but not for regional lymph nodes."
+    "therapy_plan": "Start letrozole 2.5mg PO daily. Continue use of vaginal moisturizer. Plan to start bisphosphonate if bone density scan shows osteopenia. Plan to discuss vaginal estrogens at future visit. Plan to pursue radiation therapy in the future, specifically for local recurrence in the right breast, but not for regional lymph nodes."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "additional radiation to the right breast, no adjuvant radiation to regional lymph nodes, RT planning per ***** likely pursued locally in *****"
+    "radiotherapy_plan": "Additional radiation to the right breast is recommended due to risk of local recurrence, but not to regional lymph nodes."
   },
   "Procedure_Plan": {
-    "procedure_plan": "Surgical planning per Dr. ***** tentatively scheduled for September 2019, RT planning per *****, likely pursued locally in *****"
+    "procedure_plan": "Surgical planning per Dr. *****, tentatively scheduled for September 2019"
   },
   "Imaging_Plan": {
     "imaging_plan": "Bone density scan in September 2019"
   },
   "Lab_Plan": {
-    "lab_plan": "Bone density scan can be completed when she returns from travel",
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "None"
+    "lab_plan": "Bone density scan can be completed when she returns from travel"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "Not yet on treatment — no response to assess."
@@ -1552,26 +1161,7 @@ RESULTS FOR ROW 29
     "follow up": "September"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "September",
-    "Purpose": "discuss options",
-    "Goals of treatment": "curative",
-    "Current meds": "letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement",
-    "Response assessment": "Not yet on treatment — no response to assess.",
-    "Sentinel lymph node status": "positive",
-    "Tumor grade": "2",
-    "Tumor type": "invasive ductal carcinoma",
-    "ER/PR status": "ER+/PR+",
-    "Hormone receptor status": "ER+/PR+",
-    "Estrogen receptor status": "positive",
-    "Progesterone receptor status": "positive",
-    "Adjuvant therapy": "no",
-    "Adjuvant chemotherapy": "no",
-    "Aromatase inhibitor": "yes",
-    "Radiation therapy": "recommended",
-    "Surgical plan": "mastectomy",
-    "Lumpectomy": "yes",
-    "DCIS": "yes",
-    "FISH": "not mentioned"
+    "Next clinic visit": "September"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1602,13 +1192,12 @@ RESULTS FOR ROW 30
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "yes",
-    "summary": "early stage breast cancer, specifically IDC, to discuss treatment options and establish care"
+    "summary": "64 y.o. postmenopausal patient with a clinical stage II-III ER-/PR- IDC of the right breast."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
     "Stage_of_Cancer": "Stage II-III",
-    "Distant_Metastasis": "No",
-    "Metastasis": "Yes (to axillary lymph nodes and subcutaneous fat of the right chest wall)"
+    "Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -1617,96 +1206,33 @@ RESULTS FOR ROW 30
     "findings": "Right breast mass (6 x 11 cm) in outer quadrants; multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue; PET/CT: large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8); right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8); enhancing subcutaneous lymph node (0.7 cm, SUV 2.9); no evidence of metastatic disease; diffuse fine-linear and fine pleomorphic calcifications throughout right breast with associated global asymmetry; periareolar skin thickening; right axillary LAD; ultrasound-guided core biopsy of right upper outer breast: 0.35 cm grade 2 IDC, ER- (0%), PR- (0%), *****+ (IHC 3; FISH ratio 8.9), ***** ~30%; intermediate to high nuclear grade DCIS; no *****"
   },
   "Current_Medications": {
-    "current_meds": "No medications"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "None",
     "supportive_meds": "None"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "None"
+    "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is not currently responding, as the patient has not yet started treatment."
+    "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every 3 week docetaxel, carboplatin, trastuzumab, and pertuzumab (TCHP)",
-      "Short term side_effects_discussed": "fatigue, nausea, myelosuppression, nail changes, alopecia, diarrhea, and constipation",
-      "Long term side_effects_discussed": "secondary leukemia and cardiomyopathy"
-    },
-    "hormonal therapy": {
-      "summary": "trastuzumab and pertuzumab",
-      "Short term side_effects_discussed": "diarrhea and rash",
-      "Long term side_effects_discussed": "reduced left ventricular ejection fraction, which can result in asymptomatic or symptomatic heart failure with dyspnea and chest pain"
-    },
-    "radiotherapy": {
-      "summary": "will be done after neoadjuvant treatment",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "psychiatry medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "TTE, Mediport placement, chemotherapy teaching session",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year",
-    "goals_of_treatment": "curative",
-    "current_meds": "Not yet on treatment — no current medications",
-    "response_assessment": "no evidence of metastases"
+    "medication_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year"
   },
   "Therapy_plan": {
-    "therapy_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year of biological therapy",
-    "goals_of_treatment": "curative",
-    "response_assessment": "no evidence of metastases",
-    "current_meds": "Not yet on treatment — no meds listed"
+    "therapy_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year of biological therapy"
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "surgery, and radiation"
+    "radiotherapy_plan": "radiation"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Chemotherapy, TTE, Mediport placement, and surgery, will start within 2 to 3 weeks",
-    "goals_of_treatment": "curative",
-    "response_assessment": "no evidence of metastases",
-    "current_meds": "Not yet on treatment — no meds listed"
+    "procedure_plan": "Chemotherapy, TTE, Mediport placement, and surgery, will start within 2 to 3 weeks"
   },
   "Imaging_Plan": {
-    "imaging_plan": "PET/CT",
-    "goals_of_treatment": "curative",
-    "current_meds": "Not yet on treatment — no meds to report",
-    "response_assessment": "No evidence of metastases",
-    "estrogen_receptor_status": "Not mentioned",
-    "progesterone_receptor_status": "Not mentioned",
-    "surgery_type": "lumpectomy",
-    "adjuvant_therapy": "adjuvant chemotherapy",
-    "cancer_type": "IDC",
-    "cancer_stage": "II-III",
-    "cancer_grade": "Not mentioned",
-    "cancer_type_other": "Not mentioned",
-    "cancer_stage_other": "Not mentioned",
-    "cancer_grade_other": "Not mentioned",
-    "cancer_type_other_other": "Not mentioned",
-    "cancer_stage_other_other": "Not mentioned",
-    "cancer_grade_other_other": "Not mentioned"
+    "imaging_plan": "PET/CT"
   },
   "Lab_Plan": {
     "lab_plan": "TTE, Mediport placement, chemotherapy teaching session"
@@ -1758,7 +1284,6 @@ RESULTS FOR ROW 31
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- metastatic breast cancer",
     "Stage_of_Cancer": "Metastatic",
-    "Distant_Metastasis": "Yes, to bones",
     "Metastasis": "Yes, to bones"
   },
   "Lab_Results": {
@@ -1768,65 +1293,24 @@ RESULTS FOR ROW 31
     "findings": "Numerous FDG avid hepatic metastases have increased in size and FDG uptake when compared to prior study performed on 01/17/2021. Numerous FDG avid skeletal metastases throughout the skeleton have increased in FDG uptake and number when compared to prior study performed on 01/17/2021. Focal region of apparent increased FDG uptake in the visualized portion of the right frontal lobe, incompletely characterized on this study, which could potentially be an intracranial metastasis. Prominent intraluminal uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. An underlying polyp would not be excluded."
   },
   "Current_Medications": {
-    "current_meds": "ascorbic acid, cholecalciferol, magnesium, medical cannabis"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "Patient not taking LORazepam, ondansetron, oxyCODONE, and prochlorperazine.",
     "supportive_meds": "ondansetron, LORazepam, prochlorperazine"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "palliative",
-    "response_assessment": "progression",
-    "current_meds": "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, LORazepam, magnesium, medical cannabis, ondansetron, oxyCODONE, prochlorperazine"
+    "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "Progression of metastatic disease on PET-CT scan, with numerous FDG avid hepatic and skeletal metastases increasing in size and FDG uptake compared to prior study.",
-    "goals_of_treatment": "palliative",
-    "current_meds": "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, LORazepam, magnesium, medical cannabis, ondansetron, oxyCODONE, prochlorperazine",
-    "allergies": "Extract Nausea And Vomiting",
-    "social_history": "Lives alone and works as a ***** ***** man (woman), divorced, no smoking, no alcohol use, drug use, no birth control/protection",
-    "family_history": "Breast cancer Mother, Lung cancer Father, Breast cancer Paternal Uncle, Breast cancer Maternal Aunt",
-    "review_of_systems": "No fevers, chills, night sweats, loss of appetite or weight loss, no headaches, vision changes, mouth sores, no abdominal pain, nausea, vomiting, diarrhea, or bleeding, no dysuria or hematuria, no rash or bruising, no difficulty with speech, balance, or gait, no joint pain, no depression, or anxiety or trouble sleeping",
-    "pain": "Generalized",
-    "code_status": "Full code",
-    "performance_status": "1 - Symptomatic but completely ambulatory",
-    "physical_exam": "General appearance - alert, well appearing, and in no distress, Mental status - alert, oriented to person, place, and time, Eyes - pupils equal and reactive, extraocular eye movements intact, Mouth - mucous membranes moist, pharynx normal without lesions, Poor dentition, Neck - supple, no significant adenopathy, Lymphatics - no palpable lymphadenopathy, Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry, Heart - normal rate, regular rhythm, normal S1, S2, no murmurs, rubs, clicks or gallops, Abdomen - soft, nontender, nondistended, Liver edge 1 *****, Breasts - breasts appear normal, no suspicious masses, no skin or nipple changes or axillary nodes, Back exam - full range of motion, no tenderness, palpable spasm or pain on motion, Neurological - alert, oriented, normal speech, no focal findings or movement disorder noted, Musculoskeletal - no joint tenderness, deformity or swelling, Right chest wall port, Extremities - peripheral pulses normal, no pedal edema, no clubbing or cyanosis, Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted"
+    "response_assessment": "Progression of metastatic disease on PET-CT scan, with numerous FDG avid hepatic and skeletal metastases increasing in size and FDG uptake compared to prior study."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "Cycle 1 Doxil IV every 28 days on 07/01/2021",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "bowel regimen": {
-      "summary": "GI referral placed by Dr. ***** on 06/20/21",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "pain medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "psychiatry medication": {
-      "summary": null,
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    },
-    "other treatment": {
-      "summary": "flu vaccine declined",
-      "Short term side_effects_discussed": null,
-      "Long term side_effects_discussed": null
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "Doxil IV every 28 days, starting on 07/01/2021"
   },
   "Therapy_plan": {
-    "therapy_plan": "Cycle 1 Doxil IV every 28 days, PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain, follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms",
-    "goals_of_treatment": "palliative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Doxil"
+    "therapy_plan": "Cycle 1 Doxil IV every 28 days, PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain, follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -1835,11 +1319,7 @@ RESULTS FOR ROW 31
     "procedure_plan": "Cycle 1 Doxil IV every 28 days, Brain MRI, MRI pelvis"
   },
   "Imaging_Plan": {
-    "imaging_plan": "PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain",
-    "goals_of_treatment": "palliative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Doxil",
-    "next_appointment": "Follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+    "imaging_plan": "PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned"
@@ -1891,7 +1371,6 @@ RESULTS FOR ROW 32
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
     "Stage_of_Cancer": "Stage IIA",
-    "Distant_Metastasis": "Yes, to neck, chest, abdomen, and pelvis",
     "Metastasis": "Yes"
   },
   "Lab_Results": {
@@ -1923,40 +1402,12 @@ RESULTS FOR ROW 32
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "stable",
-    "current_meds": "ascorbic acid, bismuth subsalicylate, cholecalciferol, coenzyme Q10, cyanocobalamin, diphenhydrAMINE, EPINEPHrine, exemestane, fluticasone propionate, latanoprost, levothyroxine, loperamide, loratadine, magnesium oxide, melatonin, omega-3 fatty acids, omeprazole, pertuzumab, thiamine HCl, trastuzumab"
+    "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
     "response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease, decreased prominence of uptake in the head and neck region consistent with brown fat, no pulmonary consolidations or metastases noted."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "TCH chemotherapy x 6",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "hormonal therapy": {
-      "summary": "adjuvant tamoxifen followed by ***** completed 05/16/15",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "",
-      "Short term side_effects_discussed": "diarrhea",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "herceptin",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "Herceptin"
   },
@@ -2020,82 +1471,37 @@ RESULTS FOR ROW 33
     "summary": "63 y.o. female with left ER+ breast cancer s/p bilateral mastectomies, adjuvant chemotherapy and currently treated with adjuvant letrozole."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+    "Type_of_Cancer": "ER+/PR+ invasive lobular carcinoma",
     "Stage_of_Cancer": "Stage IIB",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "No labs in note."
+    "lab_summary": ""
   },
   "Clinical_Findings": {
-    "findings": "Exam shows no evidence of recurrence.",
-    "goals_of_treatment": "curative",
-    "response_assessment": "stable",
-    "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON 10, Resveratrol, FEMARA, hydrochlorothiazide"
+    "findings": "no evidence of recurrence"
   },
   "Current_Medications": {
-    "current_meds": "FEMARA, KLOR-CON 10, EXFORGE 5-160 mg, CHOLECALCIFEROL, VITAMIN D3"
+    "current_meds": "FEMARA"
   },
   "Treatment_Changes": {
-    "recent_changes": "Switched from generic to brand name letrozole due to GI symptoms.",
+    "recent_changes": "Taking brand name letrozole daily due to intolerance (GI symptoms) with generic",
     "supportive_meds": [
-      "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, EXFORGE 5-160 mg"
+      "ibuprofen (ADVIL,MOTRIN)"
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "no evidence of recurrence",
-    "current_meds": "letrozole, CHOLECALCIFEROL, EXFORGE, ibuprofen, KLOR-CON, Resveratrol, FEMARA, hydrochlorothiazide"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "No evidence of disease recurrence on exam, stable symptoms",
-    "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON 10, Resveratrol, FEMARA, hydrochlorothiazide"
+    "response_assessment": "Not mentioned in note, but exam shows no evidence of recurrence."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Continue letrozole daily. Patient is risk adverse and would prefer to continue letrozole > 5 years",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "Continue exercise",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "NSAIDs with food as needed",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "Continue calcium and vitamin D daily",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "chemotherapy": {
-      "summary": "adjuvant chemotherapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Continue letrozole daily",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "stable",
-    "current_meds": "letrozole"
+    "medication_plan": "Continue letrozole daily"
   },
   "Therapy_plan": {
-    "therapy_plan": "Continue letrozole daily",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "stable",
-    "current_meds": "letrozole"
+    "therapy_plan": "Continue letrozole daily"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -2104,7 +1510,7 @@ RESULTS FOR ROW 33
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "No imaging planned."
+    "imaging_plan": "No imaging planned"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -2114,7 +1520,7 @@ RESULTS FOR ROW 33
   },
   "Referral": {
     "Nutrition": "Discussed risk reduction with exercise, weight management, and limiting alcohol",
-    "Genetics": "None",
+    "Genetics": "Not yet on treatment — no response to assess.",
     "Specialty": "None",
     "Others": "None",
     "follow up": "Return to clinic in 6 months"
@@ -2151,12 +1557,11 @@ RESULTS FOR ROW 34
     "Patient type": "Follow up",
     "second opinion": "No",
     "in-person": "in-person",
-    "summary": "Stage III left breast cancer, local recurrence, to discuss treatment plan"
+    "summary": "Stage III left breast cancer, local recurrence, to discuss treatment options"
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR- IDC",
     "Stage_of_Cancer": "Stage III",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2173,59 +1578,26 @@ RESULTS FOR ROW 34
     "supportive_meds": "Arimidex, Tamoxifen"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "arimidex"
+    "goals_of_treatment": "risk reduction"
   },
   "Response_Assessment": {
-    "response_assessment": "No evidence of response to current treatment, but disease may be sensitive to hormonal therapy",
-    "goals_of_treatment": "Not specified",
-    "current_meds": "arimidex (August 2012) and ***** *****"
+    "response_assessment": "No evidence of response to current treatment, but disease may be sensitive to hormonal therapy"
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Tamoxifen 20mg PO qD",
-      "Short term side_effects_discussed": "thromboembolic phenomenon including DVT and PE",
-      "Long term side_effects_discussed": "endometrial cancers"
-    },
-    "radiotherapy": {
-      "summary": "Chest wall RT",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "labs",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "chemotherapy": {
-      "summary": "Not recommended",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Tamoxifen 20mg PO qD",
-    "referral": "refer to  for consultation",
-    "return_to_clinic": "return to clinic in 6 months"
+    "medication_plan": "Tamoxifen 20mg PO qD"
   },
   "Therapy_plan": {
-    "therapy_plan": "Tamoxifen 20mg PO qD, referral to  for consultation, chest wall RT, return to clinic in 6 months",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "anastrozole"
+    "therapy_plan": "Tamoxifen 20mg PO qD, referral to  for consultation, chest wall RT, return to clinic in 6 months"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "Chest wall RT"
   },
   "Procedure_Plan": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "anastrozole",
     "procedure_plan": "chest wall RT"
   },
   "Imaging_Plan": {
-    "imaging_plan": "chest wall RT"
+    "imaging_plan": "No imaging planned"
   },
   "Lab_Plan": {
     "lab_plan": "check labs"
@@ -2277,7 +1649,6 @@ RESULTS FOR ROW 35
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "invasive lobular carcinoma",
     "Stage_of_Cancer": "pT1cN0(sn)",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2294,49 +1665,29 @@ RESULTS FOR ROW 35
     "supportive_meds": "tamoxifen"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "stable",
-    "current_meds": "tamoxifen"
+    "goals_of_treatment": "risk reduction"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "Risk reduction",
-    "response_assessment": "Not mentioned in note.",
-    "current_meds": "Tamoxifen",
-    "current_symptoms": "Occasional night hot flashes, slight weight gain of about 3 pounds, irregular and intermittent menstrual cycles"
+    "response_assessment": "Not mentioned in note."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "continuing on anastrozole",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "anastrozole"
   },
   "Therapy_plan": {
-    "therapy_plan": "continue on anastrozole",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "no significant side effect",
-    "current_meds": "anastrozole"
+    "therapy_plan": "continue on anastrozole"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "doing well",
-    "current_meds": "anastrozole"
+    "procedure_plan": "No procedures planned"
   },
   "Imaging_Plan": {
     "imaging_plan": "bilateral diagnostic mammogram with tomosynthesis in September 2019"
   },
   "Lab_Plan": {
-    "lab_plan": "continue on anastrozole",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "well",
-    "current_meds": "anastrozole"
+    "lab_plan": "continue on anastrozole"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "None planned"
@@ -2385,7 +1736,6 @@ RESULTS FOR ROW 36
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
     "Stage_of_Cancer": "pT3N0",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2395,7 +1745,7 @@ RESULTS FOR ROW 36
     "findings": "Grade III mixed ductal and mucinous carcinoma, intermediate grade DCIS, no evidence of distant metastasis, low-level hypermetabolism along the anterior right breast tissue expander, possibly due to postprocedural changes or superimposed infection."
   },
   "Current_Medications": {
-    "current_meds": "Tamoxifen, Zoladex, Abraxane, Lorazepam, Zofran, Compazine, Omeprazole, Lexapro, Ambien, Valtrex"
+    "current_meds": "Tamoxifen, Zoladex, Abraxane"
   },
   "Treatment_Changes": {
     "recent_changes": "Started Abraxane, switched from Taxol, delayed treatment to 02/20/21 due to grade 3 infusion reaction with cycle 1.",
@@ -2410,86 +1760,29 @@ RESULTS FOR ROW 36
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "stable",
-    "current_meds": "taxane, tamoxifen, zoladex, lorazepam, zofran, compazine, omeprazole, lexapro, ambien, valtrex"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
-    "response_assessment": "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abraxane well since switching from Taxol. She presents today for cycle 8.",
-    "goals_of_treatment": "curative",
-    "current_meds": "Lorazepam, Zofran, compazine, omeprazole, Lexapro, ambien, valtrex, tamoxifen, zoladex, Abraxane"
+    "response_assessment": "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abraxane well since switching from Taxol. She presents today for cycle 8."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles",
-      "Short term side_effects_discussed": "grade 3 infusion reaction",
-      "Long term side_effects_discussed": ""
-    },
-    "hormonal therapy": {
-      "summary": "Continue tamoxifen",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bone therapy": {
-      "summary": "Continue zoladex for preservation of ovarian reserve during chemotherapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "Radiation oncology referral, will see Dr. ***** next week",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "Continue prilosec",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "Continue ***** as premed, will discuss more use of antiemetics zofran, compazine, ativan",
-      "Short term side_effects_discussed": "nausea and vomiting due to chemo and anxiety",
-      "Long term side_effects_discussed": ""
-    },
-    "psychiatry medication": {
-      "summary": "Continue lexapro daily, will take ativan prn, will take ambien",
-      "Short term side_effects_discussed": "anxiety due to diagnosis",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "Continue valtrex 1g every day throughout chemo",
-      "Short term side_effects_discussed": "HSV, mouth sores/cold sores",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtrex 1g every day, Continue lexapro daily, Continue prilosec, Continue ativan prn, Continue ambien, Will get doppler to r/o DVT, Will contact PT for lymphedema management, Will see Dr. ***** next week, Consider starting anticoagulant if DVT is positive, Consider starting on antiemetics zofran, compazine"
   },
   "Therapy_plan": {
-    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, will see Dr. ***** next week, continue valtrex 1g every day throughout chemo, continue lexapro daily, ativan prn, ambien as prescribed",
-    "goals_of_treatment": "curative",
-    "response_assessment": "improved",
-    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ativan, ambien"
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, will see Dr. ***** next week, continue valtrex 1g every day throughout chemo, continue lexapro daily, ativan prn, ambien as prescribed"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Radiation oncology referral, will see Dr. ***** next week",
-    "goals_of_treatment": "curative",
-    "response_assessment": "improved",
-    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ativan, ambien"
+    "procedure_plan": "Radiation oncology referral, will see Dr. ***** next week"
   },
   "Imaging_Plan": {
-    "imaging_plan": "No imaging planned",
-    "goals_of_treatment": "curative",
-    "response_assessment": "imaging, labs, exam",
-    "current_meds": "tamoxifen, zoladex, Abraxane, valtrex, lexapro, prilosec, ativan"
+    "imaging_plan": "No imaging planned"
   },
   "Lab_Plan": {
-    "lab_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex for preservation of ovarian reserve during chemotherapy, Continue prilosec, Continue valtrex 1g every day throughout chemo, Continue lexapro daily, Continue small frequent meals, Continue as premed, Continue anticoag if positive for DVT, Continue to r/o DVT, Continue to contact PT for lymphedema managment, Continue to see Dr. ***** next week, Will get doppler to r/o DVT, Will contact PT for lymphedema managment if negative for DVT, Will see Dr. ***** next week, Rx for ambien provided today",
-    "goals_of_treatment": "curative",
-    "response_assessment": "improved",
-    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ambien"
+    "lab_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex for preservation of ovarian reserve during chemotherapy, Continue prilosec, Continue valtrex 1g every day throughout chemo, Continue lexapro daily, Continue small frequent meals, Continue as premed, Continue anticoag if positive for DVT, Continue to r/o DVT, Continue to contact PT for lymphedema managment, Continue to see Dr. ***** next week, Will get doppler to r/o DVT, Will contact PT for lymphedema managment if negative for DVT, Will see Dr. ***** next week, Rx for ambien provided today"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "Not yet on treatment — no response to assess."
@@ -2502,8 +1795,7 @@ RESULTS FOR ROW 36
     "follow up": "2 weeks"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "RTC 2 weeks",
-    "Next clinic visit purpose": "to discuss possibly starting on anticoag if positive for DVT, and to contact PT for lymphedema management if negative for DVT"
+    "Next clinic visit": "RTC 2 weeks"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -2539,7 +1831,6 @@ RESULTS FOR ROW 37
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Infiltrating ductal carcinoma of upper-outer quadrant of left breast in female (CMS code), ER-, PR-, HER2-",
     "Stage_of_Cancer": "Stage IIA",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2549,65 +1840,21 @@ RESULTS FOR ROW 37
     "findings": "2.3 cm, node negative, grade 3"
   },
   "Current_Medications": {
-    "current_meds": "dexlansoprazole (DEXILANT) 60 mg, Take 60 mg by mouth Daily."
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
     "supportive_meds": "dexlansoprazole (DEXILANT), prednisone"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "dexlansoprazole (DEXILANT) 60 mg"
+    "goals_of_treatment": "risk reduction"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "dexlansoprazole (DEXILANT) 60 mg, Take 60 mg by mouth Daily."
+    "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "adjuvant chemotherapy, dd AC followed by Taxol",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "hormonal therapy": {
-      "summary": "no indication",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "radiotherapy": {
-      "summary": "no indication",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "bowel regimen": {
-      "summary": "discussed",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "pain medication": {
-      "summary": "not mentioned",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "psychiatry medication": {
-      "summary": "not mentioned",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    },
-    "other treatment": {
-      "summary": "lifestyle modifications to decrease the risk of systemic recurrence (anti-inflammatory/mediterranean diet, exercise, stress reduction, sleep management)",
-      "Short term side_effects_discussed": "not mentioned",
-      "Long term side_effects_discussed": "not mentioned"
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "dd AC followed by Taxol",
-    "goals_of_treatment": "risk reduction",
-    "current_meds": "Not yet on treatment — no response to assess.",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "adjuvant_therapy": "adjuvant chemotherapy"
+    "medication_plan": "dd AC followed by Taxol"
   },
   "Therapy_plan": {
     "therapy_plan": "adjuvant chemotherapy with dd AC followed by Taxol"
@@ -2616,10 +1863,7 @@ RESULTS FOR ROW 37
     "radiotherapy_plan": "There is no indication for radiation therapy."
   },
   "Procedure_Plan": {
-    "procedure_plan": "adjuvant chemotherapy",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not yet on treatment — no medications listed."
+    "procedure_plan": "adjuvant chemotherapy"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned"
@@ -2638,10 +1882,7 @@ RESULTS FOR ROW 37
     "follow up": "She will proceed with chemotherapy at *****"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "She will proceed with chemotherapy at *****",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Not mentioned"
+    "Next clinic visit": "She will proceed with chemotherapy at *****"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -2669,25 +1910,24 @@ RESULTS FOR ROW 38
 --- Column: keypoints ---
 {
   "Reason_for_Visit": {
-    "Patient type": "New patient",
+    "Patient type": "Follow up",
     "second opinion": "No",
     "in-person": "in-person",
-    "summary": "Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative, stage IIB"
+    "summary": "Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER-, PR weak, her 2 negative, s/p 4 cycles and 5 weeks of taxol, stopped due to toxicity."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative (CMS code)",
     "Stage_of_Cancer": "Stage IIB (Clinical: Stage IIB (T2, N0, M0, G1, ER-, PR+, HER2-)",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Large 8 x 5 cm mobile breast mass in the left breast, palpable; no skin changes or lymphadenopathy bilaterally; thyroid stimulating hormone (TSH) 1.55 mIU/L; hemoglobin A1c 5.0%"
+    "findings": "Large 8 x 5 cm mobile breast mass in the left breast, no skin changes or lymphadenopathy bilaterally"
   },
   "Current_Medications": {
-    "current_meds": "ascorbic acid, vitamin C, gabapentin, LORazepam, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "She declined further IV or preoperative therapy.",
@@ -2700,78 +1940,29 @@ RESULTS FOR ROW 38
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "not responding",
-    "current_meds": "hydrocodone, ibuprofen, tramadol, lorazepam, ascorbic acid, gabapentin, naloxone, vitamin B complex"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "No evidence of response to treatment, tumor is enlarging",
-    "current_meds": "ascorbic acid, gabapentin, LORazepam, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL"
+    "response_assessment": "The cancer is not responding to treatment, as evidenced by the tumor being 'palpable again' and 'enlarging'."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "Xeloda planned",
-      "Short term side_effects_discussed": "toxicity",
-      "Long term side_effects_discussed": ""
-    },
-    "hormonal therapy": {
-      "summary": "Olaparib for a year as part of adjuvant therapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "Role of radiation to decrease the risk of local recurrence discussed",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "Anti-inflammatory and/or diabetes risk reducing diet",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "psychiatry medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "Lifestyle modifications, including limiting alcohol, exercise, stress reduction and sleep management",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Olaparib for a year as part of adjuvant therapy, Xeloda, and possibly additional medication to be considered",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "tumor is enlarging",
-    "current_meds": "Not yet on treatment — no response to assess."
+    "medication_plan": "Olaparib for a year as part of adjuvant therapy, Xeloda, will consider additional medication"
   },
   "Therapy_plan": {
-    "therapy_plan": "She will start olaparib for a year as part of adjuvant therapy. She will qualify for adjuvant xeloda. She will undergo bilateral mastectomy with left lumpectomy on January 31.",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "The tumor is enlarging.",
-    "current_meds": "Not yet on treatment — no meds listed"
+    "therapy_plan": "She will start olaparib for a year as part of adjuvant therapy. She will qualify for adjuvant xeloda. She will undergo a bilateral mastectomy with left lumpectomy on January 31. Consideration will be given to adding another therapy."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
   },
   "Procedure_Plan": {
-    "procedure_plan": "mastectomy with left mastectomy will be performed on January 31"
+    "procedure_plan": "mastectomy with left lumpectomy planned for January 31"
   },
   "Imaging_Plan": {
-    "imaging_plan": "No imaging planned"
+    "imaging_plan": "No imaging planned."
   },
   "Lab_Plan": {
-    "lab_plan": "No labs planned",
-    "goals_of_treatment": "risk reduction",
-    "response_assessment": "growing",
-    "current_meds": "Not yet on treatment — no response to assess."
+    "lab_plan": "No labs planned"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "BRCA 1 mutation"
@@ -2820,7 +2011,6 @@ RESULTS FOR ROW 39
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Triple negative invasive ductal carcinoma",
     "Stage_of_Cancer": "Stage II",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2830,65 +2020,24 @@ RESULTS FOR ROW 39
     "findings": "Core biopsy: grade 3 IDC, ER/PR/HER2 negative, 3.6 x 2.8 x 2.0 cm hypoechoic mass in the left breast at the 1:00 position, 4-5 cm from the nipple, 1 cm firm node in the left axilla, axilla US: indeterminate lymph node with prominent vessel measuring up to 5 mm, CT CAP negative, MRI brain: negative, bone scan: negative"
   },
   "Current_Medications": {
-    "current_meds": "cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FLONASE) 50 mcg/actuation nasal spray"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "No recent changes",
     "supportive_meds": "fluticasone (FLONASE) 50 mcg/actuation nasal spray, cholecalciferol, vitamin D3, 2,000 unit TAB"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "cholecalciferol, fluticasone"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
     "response_assessment": "There is no evidence of cancer response as the patient has not started treatment yet."
   },
-  "Medication_Plan_chatgpt": {
-    "chemotherapy": {
-      "summary": "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthracycline agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery",
-      "Short term side_effects_discussed": "alopecia, nausea, emesis, neuropathy, rash, allergic reactions, constipation, diarrhea, fatigue",
-      "Long term side_effects_discussed": "low blood counts with possible increased risk of infections"
-    },
-    "hormonal therapy": {
-      "summary": "Goserelin monthly during chemotherapy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "radiotherapy": {
-      "summary": "MRI scans are obtained throughout treatment as well as one additional biopsy",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "bowel regimen": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "pain medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "psychiatry medication": {
-      "summary": "",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    },
-    "other treatment": {
-      "summary": "Echocardiogram, Port placement, Laboratory studies for ISPY, MRI of the breasts with additional evaluations as necessary",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "Weekly paclitaxel x 12 weeks, followed by AC x 4 cycles, then surgery, with goserelin monthly during chemotherapy"
   },
   "Therapy_plan": {
-    "therapy_plan": "weekly paclitaxel x 12 weeks, either with a platinum agent or replaced by a taxane agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery",
-    "goserelin_use": "monthly",
-    "imaging_schedule": "MRI scans throughout treatment as well as one additional biopsy",
-    "trial_participation": "to one of the existing arms of the study"
+    "therapy_plan": "weekly paclitaxel x 12 weeks, either with a platinum agent or replaced by a taxane agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -2949,7 +2098,6 @@ RESULTS FOR ROW 40
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "low grade ER+/PR- HER2- IDC",
     "Stage_of_Cancer": "Stage 2",
-    "Distant_Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
@@ -2960,20 +2108,7 @@ RESULTS FOR ROW 40
   },
   "Current_Medications": {
     "current_meds": [
-      "letrozole",
-      "baclofen",
-      "cyclobenzaprine",
-      "ergocalciferol",
-      "estradiol",
-      "gabapentin",
-      "ibuprofen",
-      "levothyroxine",
-      "modafinil",
-      "nitrofurantoin",
-      "ondansetron",
-      "oxyCODONE-acetaminophen",
-      "SUMAtriptan",
-      "teriflunomide"
+      "letrozole"
     ]
   },
   "Treatment_Changes": {
@@ -2983,27 +2118,12 @@ RESULTS FOR ROW 40
     ]
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "ascorbic acid, baclofen, cyclobenzaprine, ergocalciferol, estradiol, gabapentin, ibuprofen, levothyroxine, modafinil, nitrofurantoin, ondansetron, oxyCODONE-acetaminophen, SUMAtriptan, teriflunomide, letrozole, levofloxacin, lidocaine, onabotulinumtoxinA"
+    "goals_of_treatment": "adjuvant"
   },
   "Response_Assessment": {
-    "goals_of_treatment": "curative",
-    "response_assessment": "The patient has 1 positive lymph node. The other + LN was direct extension. Thus I believe she will derive the greatest benefit from adjuvant endocrine therapy with letrozole.",
-    "current_meds": "ascorbic acid, baclofen, cyclobenzaprine, ergocalciferol, estradiol, gabapentin, ibuprofen, levothyroxine, modafinil, nitrofurantoin, ondansetron, oxyCODONE-acetaminophen, SUMAtriptan, teriflunomide, letrozole, levofloxacin, lidocaine, onabotulinumtoxinA"
+    "response_assessment": "The patient has 1 positive lymph node. The other + LN was direct extension. Thus I believe she will derive the greatest benefit from adjuvant endocrine therapy with letrozole."
   },
-  "Medication_Plan_chatgpt": {
-    "hormonal therapy": {
-      "summary": "Rx for letrozole given",
-      "Short term side_effects_discussed": "hot flashes, arthralgias, bone pain, hair thinning, dryness",
-      "Long term side_effects_discussed": "increased fracture risk"
-    },
-    "bone therapy": {
-      "summary": "Prolia",
-      "Short term side_effects_discussed": "",
-      "Long term side_effects_discussed": ""
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "letrozole"
   },
@@ -3033,10 +2153,7 @@ RESULTS FOR ROW 40
     "follow up": "RTC 3 months"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "RTC 3 months",
-    "goals_of_treatment": "adjuvant endocrine therapy",
-    "response_assessment": "Not yet on treatment — no response to assess.",
-    "current_meds": "Prolia, letrozole"
+    "Next clinic visit": "RTC 3 months"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
