@@ -3437,3 +3437,72 @@ Processing row 37 (18/20)...
       [G6-SEMANTIC] second opinion: "" -> "No"
       [G6-SEMANTIC] Patient type: "New patient" -> "Follow up"
       [G6-SEMANTIC] summary: "Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen re" -> "Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER"
+    Cancer_Diagnosis: 4.3s [semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage IIB",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] Type_of_Cancer: "ER- invasive ductal carcinoma" -> "Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen re"
+      [G6-SEMANTIC] Stage_of_Cancer: "Stage IIB" -> "Stage IIB (Clinical: Stage IIB (T2, N0, M0, G1, ER-, PR+, HER2-)"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 16.3s [semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "Hemoglobin 14.2, Albumin 3.8, Alkaline Phosphatase 80, Alanine transaminase 27, AST 22, Bilirubin 0.3, Urea Nitrogen 10, Calcium 10.1, Chloride, Creatinine 0.55, eGFR, Potassium 4.7,
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G6-SEMANTIC] lab_summary: "Hemoglobin 14.2, Albumin 3.8, Alkaline Phosphatase 80, Alanine transaminase 27, " -> "No labs in note."
+    Clinical_Findings: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+  "findings": "Large 8 x 5 cm mobile breast mass in the left breast, palpable; no skin changes or lymphadenopathy bilaterally; no other abnormalities on physical exam."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Large 8 x 5 cm mobile breast mass in the left breast, palpab" -> "Large 8 x 5 cm mobile breast mass in the left breast, no ski"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.9s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "olaparib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "olaparib" -> "ascorbic acid, vitamin C, gabapentin, LORazepam, naloxone, vitamin B complex, HY"
+      [POST-MEDS] ascorbic acid, vitamin C, gabapentin, LORazepam, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL -> 
+    Treatment_Changes: 4.7s
+      [EXTRACT] raw={
+"recent_changes": "She declined further IV or preoperative therapy.",
+"supportive_meds": [
+"hydrocodone",
+"ibuprofen",
+"lorazepam",
+"naloxone",
+"tramadol"
+]
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.1s [stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 5.8s [stripped]
+      [EXTRACT] raw=The patient has started treatment with neoadjuvant therapy (chemotherapy) and has stopped due to side effects. The note mentions that the tumor is "palpable again" and that the patient's breast cancer
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 47.6s
