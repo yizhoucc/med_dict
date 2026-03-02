@@ -858,3 +858,46 @@ Processing row 24 (5/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] REJECTED (no key overlap), kept original
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 10.3s
+      [EXTRACT] raw={
+  "findings": "Imaging findings: PET/CT on 03/12/2011 showed progression of disease including liver, bones, lymph nodes, and breast skin metastases. MRI of the brain on 12/11/2010 revealed a 4 cm le
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.8s
+      [EXTRACT] raw={
+"current_meds": [
+"capecitabine (Xeloda)",
+"ixabepilone"
+]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 7.3s
+      [EXTRACT] raw={
+"recent_changes": "Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off, started ixabepilone 40mg/m2, started denosumab",
+"supportive_meds": "ondansetron, oxyCODONE, lorazepam, p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 7.8s [stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 9.3s [faith-trimmed, stripped]
+      [EXTRACT] raw=The patient has started cancer treatment, specifically chemotherapy with Xeloda 1500mg/1000mg 14 days and 7 days off, and ixabepilone. The note mentions that the patient is on the off week of Xeloda, 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "New chest wall/breast skin metastases, indicating disease pr" -> "New chest wall/breast skin metastases, indicating disease pr"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'pain_management', 'goals_of_treatment'}
+  Extraction prompts: 71.2s
