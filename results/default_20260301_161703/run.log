@@ -3101,3 +3101,85 @@ Processing row 35 (16/20)...
       [G6-SEMANTIC] response_assessment: "Not mentioned in note" -> "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abra"
       [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
   Extraction prompts: 52.5s
+    Medication_Plan_chatgpt: 46.7s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Started on 02/13/21, delayed due to grade 3 infusion reaction, changed to Abraxane after cycle 1.",
+    "Short term
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] psychiatry medication: "{'summary': 'Continue lexapro daily, ativan prn, started ambien today', 'Short t" -> "{'summary': 'Continue lexapro daily, will take ativan prn, will take ambien', 'S"
+      [G4-TEMPORAL] other treatment: "{'summary': 'Valtrex 1g every day throughout chemo as ppx, antibiotics for left " -> "{'summary': 'Continue valtrex 1g every day throughout chemo', 'Short term side_e"
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'Radiation oncology referral, will see Dr. ***** next week', 'Short " -> "{'summary': 'Will see Dr. ***** next week', 'Short term side_effects_discussed':"
+      [G4-TEMPORAL] bone therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Started on 02/13/21," -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles', 'Short term side_ef"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Tamoxifen started on 01/29/21', 'Short term side_effects_discussed'" -> "{'summary': 'Continue tamoxifen', 'Short term side_effects_discussed': '', 'Long"
+      [G4-TEMPORAL] pain medication: "{'summary': 'Continue ***** as premed, discussed more use of antiemetics zofran," -> "{'summary': 'Continue ***** as premed, will discuss more use of antiemetics zofr"
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'Will see Dr. ***** next week', 'Short term side_effects_discussed':" -> "{'summary': 'Radiation oncology referral, will see Dr. ***** next week', 'Short "
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'bone therapy', 'chemotherapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 13.6s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtrex 1g every day, Continue lexapro daily, Continue prilosec, Continue ativan prn, Continue small
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G4-TEMPORAL] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre"
+      [G6-SEMANTIC] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtre"
+    Therapy_plan: 9.7s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, continue zoladex for preservation of ovarian reserve during chemotherapy, radiation oncology referral, will see Dr. ***** next wee
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles, continue zoladex for preservation" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, will see Dr. ***** next week, con"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    radiotherapy_plan: 1.9s [semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation oncology referral, will see Dr. ***** next week."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "Radiation oncology referral, will see Dr. ***** next week." -> "None"
+    Procedure_Plan: 4.1s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "procedure_plan": "Radiation oncology referral, will see Dr. ***** next week."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "Radiation oncology referral, will see Dr. ***** next week." -> "Radiation oncology referral"
+      [G4-TEMPORAL] procedure_plan: "Radiation oncology referral" -> "Radiation oncology referral, will see Dr. ***** next week"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Imaging_Plan: 3.9s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "No imaging planned." -> "will get doppler to r/o DVT"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] imaging_plan: "will get doppler to r/o DVT" -> "No imaging planned"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Lab_Plan: 10.6s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex for preservation"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Genetic_Testing_Plan: 0.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
