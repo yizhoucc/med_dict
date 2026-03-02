@@ -1903,3 +1903,67 @@ Processing row 29 (10/20)...
       [G3-FAITH] parse FAILED, kept original
       [G6-SEMANTIC] parse FAILED
   Extraction prompts: 73.8s
+    Medication_Plan_chatgpt: 44.3s [stripped]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'chemotherapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 13.8s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive chemotherapy with either 12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin 60mg/m2 and cycl
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "The patient will receive chemotherapy with either 12 cycles " -> "12 cycles of weekly paclitaxel plus trastuzumab and pertuzum"
+      [G4-TEMPORAL] medication_plan: "12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cy" -> "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, fol"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Therapy_plan: 12.1s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly paclitaxel 80mg/m2 plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin 60mg/m2 a
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient will start neoadjuvant chemotherapy with either " -> "12 cycles of weekly paclitaxel plus trastuzumab and pertuzum"
+      [G4-TEMPORAL] therapy_plan: "12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cy" -> "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, fol"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    radiotherapy_plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the multimodality approach to breast cancer treatment. The patient understands that her treatment recommendations will include chemotherapy, biological therapi
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "We discussed the multimodality approach to breast cancer tre" -> "radiation"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 4.3s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "procedure_plan": "Chemotherapy, TTE, Mediport placement, and surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] procedure_plan: "Chemotherapy, TTE, Mediport placement, and surgery" -> "Chemotherapy, TTE, Mediport placement, and surgery, will start within 2 to 3 wee"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Imaging_Plan: 21.8s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] parse FAILED
+    Lab_Plan: 1.9s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned" -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "TTE, Mediport placement, chemotherapy teaching session"
+      [G6-SEMANTIC] ok (all values answer their fields)
