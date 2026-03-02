@@ -93,3 +93,31 @@ Processing row 20 (1/20)...
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'genetic_testing', 'pathology', 'surgical_history', 'goals_of_treatment', 'family_history', 'risk_factors', 'current_meds'}
   Extraction prompts: 39.7s
+    Medication_Plan_chatgpt: 34.9s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy']
+      [G3-FAITH] bone therapy: "{'summary': 'Bisphosphonate therapy to mitigate bone density" -> "{'summary': 'Bisphosphonate therapy to mitigate bone density"
+      [G3-FAITH] radiotherapy: "{'summary': 'XRT +/- endocrine therapy to minimize her futur" -> "{'summary': 'XRT +/- endocrine therapy to minimize her futur"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce" -> "{'summary': 'Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'radiotherapy', 'bone therapy', 'hormonal therapy'}
+    Medication_Plan: 7.1s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT, and may also consider bisphosphonate therapy to mitigate the risk
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arim" -> "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arim"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 18.5s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. Sh
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Patient is inclined toward undertaking additional adjuvant treatment(s) to minim" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'evaluation', 'adjuvant_treatment', 'follow_up_visit', 'bisphosphonate_therapy', 'duration_of_endocrine_therapy'}
