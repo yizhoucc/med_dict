@@ -1967,3 +1967,122 @@ Processing row 29 (10/20)...
       [G3-FAITH] EMPTIED: ['lab_plan']
       [G4-TEMPORAL] lab_plan: "" -> "TTE, Mediport placement, chemotherapy teaching session"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 1.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Radiation, Medical Oncology",
+  "Others": "Chemotherapy teaching session, Mediport placement",
+  "follow up": "after the weekend"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Specialty: "Radiation, Medical Oncology" -> "Medical Oncology"
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+    follow_up_next_visit: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 to 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: 2 to 3 weeks" -> "2 to 3 weeks"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 110.5s
+  Row 29 total: 184.3s
+  Row 29 saved to progress
+
+Processing row 30 (11/20)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1619 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 6.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "Follow up",
+  "second opinion": "no",
+  "in-person": "in-person",
+  "summary": "Metastatic breast cancer, follow-up visit to review April 2021 PETCT scan results, discuss starting
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 4.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- metastatic breast cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bones",
+  "Metastasis": "Yes, t
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "Metastatic"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 14.2s
+      [EXTRACT] raw={
+  "findings": "Numerous FDG avid hepatic metastases have increased in size and FDG uptake when compared to prior study performed on 01/17/2021. Numerous FDG avid skeletal metastases throughout the s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 4.8s [faith-trimmed, semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": [
+    "ondansetron",
+    "lorazepam"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "['ondansetron', 'lorazepam']" -> "['ondansetron', 'lorazepam', 'ascorbic acid', 'cholecalcifer"
+      [G6-SEMANTIC] current_meds: "['ondansetron', 'lorazepam', 'ascorbic acid', 'cholecalciferol', 'LORazepam', 'm" -> "ascorbic acid, cholecalciferol, magnesium, medical cannabis"
+      [POST-MEDS] ascorbic acid, cholecalciferol, magnesium, medical cannabis -> 
+    Treatment_Changes: 4.9s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Patient not taking LORazepam, ondansetron, oxyCODONE, and prochlorperazine.",
+"supportive_meds": "ondansetron, LORazepam"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] supportive_meds: "ondansetron, LORazepam" -> "ondansetron, LORazepam, prochlorperazine"
+    Treatment_Goals: 3.6s [stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
