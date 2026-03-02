@@ -3049,3 +3049,55 @@ Processing row 35 (16/20)...
       [G6-SEMANTIC] Metastasis: "" -> "No"
       [G6-SEMANTIC] Distant_Metastasis: "" -> "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 15.6s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 8.8, RBC Count 3.91, Hemoglobin 11.8, Hematocrit 35.3, MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin 3.3, Alkaline Phosphatas
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] REJECTED (no key overlap), kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 5.9s [semantic-fixed]
+      [EXTRACT] raw={
+  "findings": "Right arm and hand swelling, no palpable masses, no skin changes, no lymphadenopathy. Imaging findings: low-level hypermetabolism along the anterior right breast tissue expander, poss
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] findings: "Right arm and hand swelling, no palpable masses, no skin changes, no lymphadenop" -> "Grade III mixed ductal and mucinous carcinoma, intermediate grade DCIS, no evide"
+    Current_Medications: 3.8s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": [
+    "Abraxane",
+    "Zoladex",
+    "Tamoxifen"
+  ]
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "['Abraxane', 'Zoladex', 'Tamoxifen']" -> "Tamoxifen, Zoladex, Abraxane, Lorazepam, Zofran, Compazine, Omeprazole, Lexapro,"
+      [POST-MEDS] Tamoxifen, Zoladex, Abraxane, Lorazepam, Zofran, Compazine, Omeprazole, Lexapro, Ambien, Valtrex -> Tamoxifen, Zoladex, Abraxane
+    Treatment_Changes: 7.2s
+      [EXTRACT] raw={
+"recent_changes": "Started Abraxane, switched from Taxol, delayed treatment to 02/20/21 due to grade 3 infusion reaction with cycle 1.",
+"supportive_meds": ["Lorazepam", "Zofran", "Compazine", "Omep
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.2s [semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] goals_of_treatment: "curative" -> "adjuvant"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 4.9s [semantic-fixed, stripped]
+      [EXTRACT] raw=The patient has started cancer treatment, specifically chemotherapy (Abraxane) and endocrine therapy (tamoxifen and zoladex). The note mentions that she had a grade 3 infusion reaction with cycle 1, b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] response_assessment: "Not mentioned in note" -> "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abra"
+      [POST-KEYS] stripped: {'current_meds', 'goals_of_treatment'}
+  Extraction prompts: 52.5s
