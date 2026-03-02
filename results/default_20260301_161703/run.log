@@ -901,3 +901,157 @@ Processing row 24 (5/20)...
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'current_meds', 'pain_management', 'goals_of_treatment'}
   Extraction prompts: 71.2s
+    Medication_Plan_chatgpt: 36.8s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+  "chemotherapy": {
+    "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone",
+    "Short term side_effects_discussed": null,
+    "Long term side_effects_discussed": null
+  },
+  "h
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': 'port placed on 9th prior to starting xeloda and just after irinotec" -> "{'summary': 'will start cycle again', 'Short term side_effects_discussed': None,"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'psychiatry medication', 'bowel regimen', 'other treatment', 'radiotherapy', 'bone therapy', 'chemotherapy', 'hormonal therapy', 'pain medication'}
+    Medication_Plan: 7.1s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "medication_plan": "Patient will continue taking Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off, and Oxycodone as needed for pain management."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Patient will continue taking Xeloda, Ixabepilone 1500/1000mg" -> "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off"
+      [G4-TEMPORAL] medication_plan: "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off" -> "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off, will start cycle again"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'next_steps', 'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Therapy_plan: 4.2s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient is currently on ixabepilone 1500/1000mg 14 days and 7 days off, and will start cycle again. Will start cycle again in 3 weeks. Also taking oxycodone for pain managem
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient is currently on ixabepilone 1500/1000mg 14 days " -> "ixabepilone 1500/1000mg 14 days and 7 days off, and will sta"
+      [G4-TEMPORAL] therapy_plan: "ixabepilone 1500/1000mg 14 days and 7 days off, and will start cycle again in 3 " -> "will start cycle again in 3 weeks"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 4.0s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap"
+      [G6-SEMANTIC] procedure_plan: "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap" -> "No procedures planned"
+      [POST-KEYS] stripped: {'next_steps', 'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Imaging_Plan: 2.1s
+      [EXTRACT] raw={
+  "imaging_plan": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.3s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+  "lab_plan": "No labs planned"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned" -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap"
+      [G6-SEMANTIC] lab_plan: "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap" -> "No labs planned"
+    Genetic_Testing_Plan: 1.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "Not yet on treatment — no response to assess."
+    Referral: 3.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "None",
+  "Others": "None",
+  "follow up": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 1.1s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "Next clinic visit": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "Scan in 3 weeks" -> "3 weeks"
+      [G6-SEMANTIC] Next clinic visit: "3 weeks" -> "Scan in 3 weeks"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment', 'goals_of_treatment'}
+    Advance_care_planning: 1.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 66.0s
+  Row 24 total: 137.2s
+  Row 24 saved to progress
+
+Processing row 25 (6/20)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (966 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 6.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "Patient type": "New patient",
+  "second opinion": "no",
+  "in-person": "Televisit",
+  "summary": "New patient evaluation for newly diagnosed malignant neoplasm of upper-outer quadrant of right br
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] in-person: "Televisit" -> "Telehealth"
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "No"
+    Cancer_Diagnosis: 4.5s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Triple negative breast cancer",
+  "Stage_of_Cancer": "Stage IB",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "No" -> "node negative"
+      [G3-FAITH] Distant_Metastasis: "No" -> ""
+      [G3-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G6-SEMANTIC] Metastasis: "node negative" -> "No"
+      [G6-SEMANTIC] Distant_Metastasis: "" -> "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
