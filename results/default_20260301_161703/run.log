@@ -452,3 +452,56 @@ Processing row 22 (3/20)...
       [G2-SCHEMA] ok
       [G3-FAITH] findings: "Pathology results: 1 cm invasive lobular carcinoma, 0.7 cm i" -> "Pathology results: 1 cm grade 2 invasive lobular carcinoma, "
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 14.5s [faith-trimmed, semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, Take 2 tablets (1,000"
+      [G6-SEMANTIC] current_meds: "acetaminophen (TYLENOL) 500 mg tablet, Take 2 tablets (1,000 mg total) by mouth " -> "acetaminophen (TYLENOL), atorvastatin (LIPITOR), cholecalciferol, docusate sodiu"
+      [POST-MEDS] acetaminophen (TYLENOL), atorvastatin (LIPITOR), cholecalciferol, docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), MULTIVIT-MINERALS/FERROUS FUM, oxyCODONE (ROXICODONE), sulfamethoxazole-trimethoprim (BACTRIM DS,SEPTRA DS) -> 
+    Treatment_Changes: 12.7s
+      [EXTRACT] raw={
+"recent_changes": "No recent changes mentioned.",
+"supportive_meds": [
+"acetaminophen (TYLENOL)",
+"atorvastatin (LIPITOR)",
+"cholecalciferol, vitamin D3",
+"docusate sodium (COLACE)",
+"ibuprofen (ADV
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] parse FAILED, kept original
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 4.3s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> "adjuvant chemotherapy"
+      [G6-SEMANTIC] goals_of_treatment: "adjuvant chemotherapy" -> "adjuvant"
+      [POST-KEYS] stripped: {'current_meds', 'response_assessment'}
+    Response_Assessment: 3.3s [format-repaired, faith-trimmed, semantic-fixed]
+      [EXTRACT] raw=The patient has undergone surgery (mastectomy and SLN Bx) but has not started any additional cancer treatment (chemo, endocrine therapy, targeted therapy, immunotherapy) yet. The note does not mention
+      [G1-FORMAT] repaired -> keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not applicable, as no treatment has been initiated." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "The patient's cancer is currently being assessed as low risk, with no evidence o"
+  Extraction prompts: 65.5s
+    Medication_Plan_chatgpt: 23.2s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+  "hormonal therapy": {
+    "summary": "Starting letrozole, will receive at least 5 years of adjuvant hormonal therapy",
+    "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] bone therapy: "{'summary': 'ordered baseline DEXA, will discuss bone targeted therapies in the " -> "{'summary': 'will discuss bone targeted therapies', 'Short term side_effects_dis"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Starting letrozole, will receive at least 5 years of adjuvant hormo" -> "{'summary': 'will receive at least 5 years of adjuvant hormonal therapy', 'Short"
+      [G4-TEMPORAL] other treatment: "{'summary': 'calcium rich diet, Vitamin D (typically 600-800 IU per day), weight" -> "{'summary': 'will maintain a calcium rich diet, will take in an adequate amount "
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'other treatment', 'radiotherapy', 'bone therapy', 'chemotherapy', 'hormonal therapy'}
