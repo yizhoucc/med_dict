@@ -1,0 +1,20 @@
+Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.11s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.02s/it]
+Model loaded.
+Data loaded: 5 rows (range [20, 25])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 95 drugs
+Supportive care whitelist loaded: 78 drugs
+
+Processing 5 rows...
+
+Processing row 20 (1/5)...
+  Injected 3 term definitions: ['aromatase inhibitor', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (2168 chars)
+  A/P extraction: 0.0s
