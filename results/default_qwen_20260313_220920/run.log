@@ -632,3 +632,39 @@ Processing row 23 (4/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 12.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), acetaminophen-codeine (TYLENOL #4),"
+      [G6-SEMANTIC] current_meds: "acetaminophen (TYLENOL), acetaminophen-codeine (TYLENOL #4), calcium carbonate (" -> ""
+    Treatment_Changes: 8.0s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen-codeine (TYLENOL #4), oxyCODONE (ROXICODONE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "Not yet on treatment — no response to assess."
+    Treatment_Goals: 3.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "adjuvant"
+    Response_Assessment: 4.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 93.9s
