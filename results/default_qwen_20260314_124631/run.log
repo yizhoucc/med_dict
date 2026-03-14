@@ -437,3 +437,31 @@ Processing row 22 (3/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 39.5s
+      [EXTRACT] raw={
+"findings": "Pathology results from left breast mastectomy and SLN Bx: 1 cm grade 2 invasive lobular carcinoma (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) with negative ma
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 17.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPI"
+      [G6-SEMANTIC] current_meds: ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPITOR) 20 mg tablet", " -> ""
+    Treatment_Changes: 14.8s [faith-trimmed, specificity-improved, semantic-fixed, supp-filtered]
+      [EXTRACT] raw={
+  "recent_changes": "Letrozole was discussed and recommended to be started as an endocrine-based therapy.",
+  "supportive_meds": "None currently being taken."
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "None currently being taken." -> ""
+      [G3-FAITH] EMPTIED: ['supportive_meds']
+      [G3-PROTECT] supportive_meds: restored safe negative "None currently being taken."
+      [G5-SPECIFIC] recent_changes: "Letrozole was discussed and recommended to be started as an endocrine-based ther" -> "Letrozole was discussed and recommended to be started as an endocrine-based ther"
+      [G6-SEMANTIC] recent_changes: "Letrozole was discussed and recommended to be started as an endocrine-based ther" -> "None."
+      [POST-SUPP] None currently being taken. -> 
