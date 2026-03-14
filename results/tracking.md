@@ -17,6 +17,8 @@
 | `default_qwen_20260314_094445` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, fixed template | 20-24 | 2026-03-14 | turn_end fix only |
 | `default_qwen_20260314_102232` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, gate protection | 20-24 | 2026-03-14 | + G3/G4/G6 gate protection |
 | `default_qwen_20260314_114835` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, gate + supp filter | 20-24 | 2026-03-14 | + supportive_meds whitelist filter (B21 fixed) |
+| `default_qwen_20260314_124631` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v4 prompts, gate + supp filter | 20-24 | 2026-03-14 | v4 prompts (B17 fixed at extraction, B14 extraction fixed but G3 emptied) |
+| `default_qwen_20260314_131143` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v4 prompts, gate + supp + G3-REVERT | 20-24 | 2026-03-14 | + G3-REVERT (B13 fixed, B14 unstable, goals restored) |
 
 ## Prompt 版本变更记录
 
