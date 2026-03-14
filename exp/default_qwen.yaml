@@ -3,7 +3,7 @@ experiment:
   seed: 42
 
 model:
-  name: "Qwen/Qwen2.5-32B-Instruct-GPTQ-Int4"
+  name: "Qwen/Qwen2.5-32B-Instruct-AWQ"
   chat_template: "qwen2"
   dtype: "bfloat16"
   device_map: "auto"
