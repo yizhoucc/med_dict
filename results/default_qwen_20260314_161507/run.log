@@ -303,3 +303,130 @@ Processing row 26 (2/10)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 98.1s
+    Medication_Plan_chatgpt: 35.6s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on ***** (likely aromatase inhibitor), zoladex (likely goserelin), and femara (likely letrozole).",
+        "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos" -> "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos"
+      [G6-SEMANTIC] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment'}
+    Medication_Plan: 5.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 7.7s [semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] therapy_plan: "Continue on *****, zoladex and femara." -> "Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 7.1s
+      [EXTRACT] raw={
+    "imaging_plan": "Reassess lower back pain at two weeks and consider MRI of the spine."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 5.3s
+      [EXTRACT] raw={
+    "lab_plan": "CBC with platelets to evaluate easy bruising."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 11.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Specialty', 'Genetics', 'Nutrition', 'Others']
+      [G3-PROTECT] Specialty: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 4.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: if pain worsens"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 86.1s
+  Row 26 total: 184.2s
+  Row 26 saved to progress
+
+Processing row 27 (3/10)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
