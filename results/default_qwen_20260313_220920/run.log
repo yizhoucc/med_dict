@@ -50,3 +50,45 @@ Processing row 20 (1/5)...
       [G3-FAITH] lab_summary: "No labs in note." -> ""
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G6-SEMANTIC] lab_summary: "" -> "No labs in note."
+    Clinical_Findings: 17.1s
+      [EXTRACT] raw={
+"findings": "Right breast partial mastectomy showed intermediate nuclear grade DCIS, mixed solid papillary, cribiform pattern with some comedo necrosis, no invasive ductal cancer but DCIS spanning ~
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.0s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 5.5s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "Bisphosphonate therapy"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "" -> "No recent changes in treatment noted."
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "risk reduction"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 4.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 60.3s
