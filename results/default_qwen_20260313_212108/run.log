@@ -1,0 +1,15 @@
+Loading model...
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 655, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 500, in main
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 372, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4015, in from_pretrained
+    hf_quantizer, config, device_map = get_hf_quantizer(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/auto.py", line 326, in get_hf_quantizer
+    hf_quantizer.validate_environment(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/quantizer_bnb_4bit.py", line 60, in validate_environment
+    raise ImportError(
+ImportError: Using `bitsandbytes` 4-bit quantization requires bitsandbytes: `pip install -U bitsandbytes>=0.46.1`
