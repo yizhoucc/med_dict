@@ -1888,3 +1888,76 @@ Processing row 34 (10/10)...
       [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 20.8s
+      [EXTRACT] raw={
+"findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpect
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 4.6s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "tamoxifen, anastrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "tamoxifen, anastrozole" -> "tamoxifen"
+    Treatment_Changes: 2.7s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 64.5s
+    Medication_Plan_chatgpt: 12.1s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "continue on anastrozole without significant side effect",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": "
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] REJECTED (no key overlap)
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "anastrozole" -> "{'summary': 'continuing on anastrozole without significant side effect', 'Short "
+    Medication_Plan: 6.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on anastrozole without specified dose or frequency."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
