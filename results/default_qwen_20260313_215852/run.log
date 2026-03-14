@@ -22,3 +22,26 @@ _____/\\\\\\\\\\\\__/\\\\\\\\\\\\\____/\\\\\\\\\\\\\\\______________________/\\\
 [32mINFO[0m  Kernel: selected -> `AwqExllamaV2QuantLinear`.                           
 Loading weights: 100%|██████████| 1667/1667 [00:02<00:00, 672.51it/s, Materializing param=model.norm.weight]
 Loading weights: 100%|██████████| 1667/1667 [00:02<00:00, 688.75it/s, Materializing param=model.norm.weight]
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/Qwen/Qwen2.5-32B-Instruct-AWQ/resolve/main/generation_config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen2.5-32B-Instruct-AWQ/5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c/generation_config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen2.5-32B-Instruct-AWQ/5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c/generation_config.json "HTTP/1.1 200 OK"
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 656, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 506, in main
+    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 372, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4135, in from_pretrained
+    hf_quantizer.postprocess_model(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/base.py", line 190, in postprocess_model
+    return self._process_model_after_weight_loading(model, **kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/quantizer_awq.py", line 84, in _process_model_after_weight_loading
+    hf_gptqmodel_post_init(model, use_act_order=self.quantization_config.desc_act)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/gptqmodel/utils/model.py", line 972, in hf_gptqmodel_post_init
+    return gptqmodel_post_init(model, use_act_order, quantize_config, max_input_length)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/gptqmodel/utils/model.py", line 1099, in gptqmodel_post_init
+    submodule.post_init(scratch_space=model.device_tensors[device])
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/gptqmodel/nn_modules/qlinear/exllamav2_awq.py", line 93, in post_init
+    raise ModuleNotFoundError("External ExLlama kernels are not properly installed." + msg)
+ModuleNotFoundError: External ExLlama kernels are not properly installed.No module named 'gptqmodel_exllamav2_awq_kernels'
