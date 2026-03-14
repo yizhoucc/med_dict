@@ -153,7 +153,13 @@ Referral: |
   Do not mistake the doctor's signature at the end of the note as a referral.
   Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
   A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
-  Do NOT include the current visit's own department as a referral (e.g., if this is a Medical Oncology note, do NOT list "Medical Oncology" as a referral).
+
+  CRITICAL — distinguish OUTGOING from INCOMING referrals:
+  - OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
+  - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred for consideration of adjunct therapy".
+  - Do NOT include the current visit's own department. These notes are written by Medical Oncology — do NOT list "Medical Oncology" or "Med Onc" as a referral.
+  - If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
+
   If no referral is mentioned for a category, set its value to "None".
   For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral.
   Respond *only* with a JSON object using this exact schema:

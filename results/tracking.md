@@ -12,9 +12,36 @@
 | `testfix_20260228_223813` | Llama 3.1 8B (bf16) | V2 testfix | 20-29 | 2026-02-28 | Intermediate fixes |
 | `default_20260301_084320` | Llama 3.1 8B (bf16) | V2 pipeline, 6-gate, old prompts | 0-99 | 2026-03-01 | **100-row full run** (reviewed in detail) |
 | `default_20260301_161703` | Llama 3.1 8B (bf16) | V2 pipeline, 6-gate, new prompts (split+CoT) | 20-39 | 2026-03-01 | Prompt refactoring + CoT + field splitting |
-| `default_qwen_20260313_220920` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, new prompts | 20-24 | 2026-03-13 | Model upgrade: 32B vs 8B comparison |
+| `default_qwen_20260313_220920` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v2 prompts | 20-24 | 2026-03-13 | Model upgrade: 32B vs 8B comparison |
+| `default_qwen_20260314_085717` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, broken template | 20-24 | 2026-03-14 | v3 prompt test (missing turn_end) |
+| `default_qwen_20260314_094445` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, fixed template | 20-24 | 2026-03-14 | turn_end fix only |
+| `default_qwen_20260314_102232` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, gate protection | 20-24 | 2026-03-14 | + G3/G4/G6 gate protection |
+| `default_qwen_20260314_114835` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, gate + supp filter | 20-24 | 2026-03-14 | + supportive_meds whitelist filter (B21 fixed) |
 
 ## Prompt 版本变更记录
+
+### v4 (2026-03-14): 提取精度 + gate 保护 + 药物过滤
+
+**变更原因：** v3 实验仍有 B14/B17/B20 未修复，根因分析显示需要更强的 prompt 指导 + 后处理
+
+**Prompt 变更：**
+1. `extraction.yaml` — Response_Assessment: step 3 扩展响应证据搜索范围，明确列出"breaking up"等体检发现也算响应证据；step 1 加活性药物列表线索 → 修 B14
+2. `extraction.yaml` — Treatment_Changes/supportive_meds: 强化 CRITICAL rules，明确列出 4 种"非当前"模式（hypothetical/discussion/future/contingency）；排除精神科/抗癫痫药 → 修 B17
+3. `plan_extraction.yaml` — Referral: 新增 OUTGOING vs INCOMING 转诊区分规则；明确"这些笔记是 Medical Oncology 写的" → 修 B20
+
+**代码变更：**
+4. `ult.py` — Gate 保护机制（gate_config 驱动）：
+   - G3-PROTECT: 恢复被 G3 错误清空的安全否定值（"No labs planned." 等）
+   - G4/G6 skip: 全空字段跳过时态过滤和语义检查
+   - G6-PROTECT: 阻止 G6 向空字段填充新内容
+5. `ult.py` — POST-SUPP: supportive_meds 白名单过滤（`data/supportive_care_drugs.txt`）→ 修 B21
+6. `ult.py` — turn_end 修复：build_base_cache 中加 `chat_tmpl.t['turn_end']` 分隔符
+
+**新增数据文件：**
+7. `data/supportive_care_drugs.txt` — 肿瘤支持治疗药物白名单（~65 药）
+8. `data/non_oncology_drugs.txt` — 非肿瘤药参考清单（~120 药）
+
+**之前版本 (v3):** `results/default_qwen_20260314_094445/config.yaml` 中有 v3 prompt 快照
 
 ### v3 (2026-03-14): 字段边界强化 + response CoT 改进
 
