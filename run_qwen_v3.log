@@ -341,3 +341,148 @@ Processing row 21 (2/5)...
       [G3-FAITH] EMPTIED: ['lab_plan']
       [G4-TEMPORAL] lab_plan: "" -> "None"
       [G6-SEMANTIC] lab_plan: "None" -> "No labs planned."
+    Genetic_Testing_Plan: 6.1s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 16.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with **
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 3.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after PET CT results to determine next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: after PET CT results to determine next steps" -> ""
+      [G3-FAITH] EMPTIED: ['Next clinic visit']
+      [G6-SEMANTIC] Next clinic visit: "" -> "Not specified in the note"
+    Advance_care_planning: 3.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 138.4s
+  Row 21 total: 325.8s
+  Row 21 saved to progress
+
+Processing row 22 (3/5)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'PR negative', 'ER negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 18.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 63-year-old female with newly diagnosed breast cancer, specifically invasive carcinoma w
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "false"
+    Cancer_Diagnosis: 14.1s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive carcinoma with ductal and lobular features",
+  "Stage_of_Cancer": "Approximately Stage I-II (1 cm and 0/1 SLN positive)",
+  "Distant Metastasis": "No",
+  
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Stage_of_Cancer: "Approximately Stage I-II (1 cm and 0/1 SLN positive)" -> ""
+      [G3-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 8.1s
+      [EXTRACT] raw={
+"lab_summary": "POCT glucose, Fingerstick: 105, 185, 236 (H), 116 mg/dL"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 35.5s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology results: Left breast mastectomy revealed 1 cm grade 2 invasive lobular carcinoma (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) and 0.7 cm grade 2 inva
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Pathology results: Left breast mastectomy revealed 1 cm grad" -> "Pathology results: Left breast mastectomy revealed 1 cm grad"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 17.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPI"
+      [G6-SEMANTIC] current_meds: ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPITOR) 20 mg tablet", " -> ""
+    Treatment_Changes: 21.9s [specificity-improved, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Letrozole was discussed and recommended to begin as an endocrine-based therapy.",
+"supportive_meds": "LORazepam (ATIVAN) 0.5 mg tablet as needed for anxiety (Muscle spasms)."
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G5-SPECIFIC] supportive_meds: "LORazepam (ATIVAN) 0.5 mg tablet as needed for anxiety (Muscle spasms)." -> "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg total) by mouth every 6 "
+      [G5-SPECIFIC] recent_changes: "Letrozole was discussed and recommended to begin as an endocrine-based therapy." -> "Letrozole was discussed and recommended to begin as an endocrine-based therapy f"
+      [G6-SEMANTIC] recent_changes: "Letrozole was discussed and recommended to begin as an endocrine-based therapy f" -> "Not yet on treatment — no recent changes to report."
+    Treatment_Goals: 3.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "adjuvant"
+    Response_Assessment: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 126.1s
+    Medication_Plan_chatgpt: 25.6s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will start letrozole as an aromatase inhibitor for adjuvant hormonal therapy. The plan is for at least five years of therapy, with an individual
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': "hormonal therapy, specifically letrozole, will be started and conti"
+    Medication_Plan: 22.1s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start letrozole for adjuvant hormonal therapy. The patient will receive at least five years of adjuvant hormonal therapy. The decision to continue the aromatase 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Patient will start letrozole for adjuvant hormonal therapy. " -> "Patient will start letrozole for adjuvant hormonal therapy. "
