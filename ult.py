@@ -1080,6 +1080,17 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                                 cleaned_parsed[k] = parsed[k]  # restore original
                                 gate_log.append(f"      [G3-PROTECT] {k}: restored safe negative \"{orig_val[:60]}\"")
 
+                    # If G3 emptied ALL fields and none were safe negatives,
+                    # G3 is likely being too aggressive — revert to original extraction
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        still_empty = [k for k in emptied_fields
+                                       if not cleaned_parsed.get(k) or cleaned_parsed.get(k) == ""]
+                        if still_empty and len(still_empty) == len(original_keys):
+                            # G3 emptied everything — revert
+                            for k in still_empty:
+                                cleaned_parsed[k] = parsed[k]
+                                gate_log.append(f"      [G3-REVERT] {k}: reverted (G3 emptied all fields)")
+
                     parsed = cleaned_parsed
                     answer = json.dumps(cleaned_parsed, ensure_ascii=False)
                 else:
