@@ -503,3 +503,110 @@ Processing row 22 (3/5)...
       [G3-FAITH] medication_plan: "Patient will begin letrozole for adjuvant hormonal therapy, " -> "Patient will begin letrozole for adjuvant hormonal therapy, "
       [G4-TEMPORAL] medication_plan: "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at l" -> "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at l"
       [G6-SEMANTIC] medication_plan: "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at l" -> "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at l"
+    Therapy_plan: 20.9s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond 5 years will be individualized bas
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
+      [G6-SEMANTIC] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
+    radiotherapy_plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 6.2s
+      [EXTRACT] raw={
+    "imaging_plan": "I have ordered a base line DEXA."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G3-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 8.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics', 'Specialty']
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Specialty: restored safe negative "None"
+      [G6-SEMANTIC] Nutrition: "None" -> "Maintain a calcium-rich diet, take an adequate amount of Vitamin D, and engage i"
+    follow_up_next_visit: 3.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 118.1s
+  Row 22 total: 227.3s
+  Row 22 saved to progress
+
+Processing row 23 (4/5)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
