@@ -230,3 +230,13 @@ Processing row 21 (2/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 20.0s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bones, chest wall, right infrac
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
