@@ -490,3 +490,103 @@ Processing row 22 (3/5)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 26.6s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond 5 years will be individualized based o
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 10.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "{'future': ['ordered a base line DEXA', 'consider switching to a different aroma"
+      [G6-SEMANTIC] procedure_plan: "{'future': ['ordered a base line DEXA', 'consider switching to a different aroma" -> "No procedures planned."
+    Imaging_Plan: 5.1s
+      [EXTRACT] raw={
+    "imaging_plan": "I have ordered a base line DEXA."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 4.5s
+      [EXTRACT] raw={
+    "lab_plan": "A baseline DEXA scan has been ordered."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 3.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "None are planned."
+    Referral: 9.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics', 'Specialty']
+      [G6-SEMANTIC] Others: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "Maintain a calcium rich diet, take in an adequate amount of Vitamin D (typically"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+    follow_up_next_visit: 3.4s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 3.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 114.1s
+  Row 22 total: 234.0s
+  Row 22 saved to progress
+
+Processing row 23 (4/5)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
