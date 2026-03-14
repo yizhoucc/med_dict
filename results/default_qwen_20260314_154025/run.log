@@ -696,3 +696,22 @@ Processing row 28 (4/10)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] recent_changes: "Start letrozole 2.5mg PO daily now" -> "Not yet on treatment — no recent changes to report."
       [POST-SUPP] Calcium supplementation with 1200mg/day combination of diet and supplement, vaginal moisturizer (ie *****) -> 
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 107.8s
