@@ -699,3 +699,21 @@ Processing row 23 (4/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 102.3s
+    Medication_Plan_chatgpt: 36.4s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "If low risk, she can proceed with radiation and we will start adjuvant hormone therapy.",
+        "Short term side_effects_discussed": "hot flashes, joi
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'adjuvant hormone therapy'}, {'type': '" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'adjuvant hormone therapy',"
+    Medication_Plan: 16.0s [semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "If low risk, she can proceed with adjuvant hormone therapy. The potential side effects of hormone therapy were reviewed, which include but are not limited to hot flashes, joi
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] medication_plan: "If low risk, she can proceed with adjuvant hormone therapy. The potential side e" -> "If low risk, she can proceed with adjuvant hormone therapy."
