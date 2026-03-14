@@ -99,3 +99,12 @@ Processing row 20 (1/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 65.7s
+    Medication_Plan_chatgpt: 53.2s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'adjuvant endocrine therapy (e.g. aromatase inhibitor like" -> "[{'hormonal therapy': {'summary': 'adjuvant endocrine therapy (e.g. aromatase in"
