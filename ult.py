@@ -1178,6 +1178,16 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                                     cleaned_parsed[k] = parsed[k]
                                     gate_log.append(f"      [G3-REVERT-INFER] {k}: restored classification/inference \"{orig_val[:60]}\"")
 
+                    # Protect Type_of_Cancer from G3 removing receptor status
+                    # If G3 emptied or trimmed Type_of_Cancer, and original had receptor info, restore
+                    if gate_config.get("preserve_negatives") and "Type_of_Cancer" in changed_fields:
+                        orig_toc = str(parsed.get("Type_of_Cancer", ""))
+                        new_toc = str(cleaned_parsed.get("Type_of_Cancer", ""))
+                        has_receptor = any(r in orig_toc.lower() for r in ["er+", "er-", "pr+", "pr-", "her2", "triple negative"])
+                        if has_receptor and (not new_toc or len(new_toc) < len(orig_toc) * 0.5):
+                            cleaned_parsed["Type_of_Cancer"] = parsed["Type_of_Cancer"]
+                            gate_log.append(f"      [G3-PROTECT-RECEPTOR] Type_of_Cancer: restored \"{orig_toc[:60]}\"")
+
                     parsed = cleaned_parsed
                     answer = json.dumps(cleaned_parsed, ensure_ascii=False)
                 else:
