@@ -272,3 +272,22 @@ Processing row 21 (2/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 9.4s
+      [EXTRACT] raw={
+"response_assessment": "PET scan on 11/03/20 and 04/24/21 showed a good response."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 202.9s
