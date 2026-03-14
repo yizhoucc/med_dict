@@ -628,6 +628,24 @@ def main():
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
 
+        # POST: Patch Advance_care with code status from full note (A/P may not contain it)
+        adv = keypoints.get("Advance_care_planning", {})
+        adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""
+        if adv_val.lower().startswith("not discussed"):
+            code_match = re.search(
+                r'(?:code\s+status[:\s]*|advance\s+care\s+planning[:\s]*)(full\s+code|dnr/?dni|dnr|dni|comfort\s+measures)',
+                note_text, re.IGNORECASE
+            )
+            living_will = re.search(r'living\s+will', note_text, re.IGNORECASE)
+            patches = []
+            if code_match:
+                patches.append(code_match.group(1).strip())
+            if living_will:
+                patches.append("Living will on file")
+            if patches:
+                keypoints["Advance_care_planning"] = {"Advance care": ". ".join(patches) + "."}
+                print(f"    [POST-ADV] patched from full note: {patches}")
+
         print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 
         # Build row result

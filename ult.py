@@ -908,6 +908,51 @@ INFERENCE_MARKERS = ["approximately", "likely", "possibly", "probably", "estimat
 # Fields where G6 should NOT change the value (categorical classifications, not free text)
 G6_NO_MODIFY_FIELDS = {"Patient type", "second opinion", "in-person", "goals_of_treatment"}
 
+# --- POST-PROC: Hard filter for Procedure_Plan contamination ---
+# If procedure_plan contains ONLY imaging or radiotherapy terms, empty it.
+IMAGING_TERMS = [
+    "mri", "ct scan", "ct ", "pet", "pet/ct", "petct", "pet-ct",
+    "dexa", "dxa", "bone density", "bone scan",
+    "mammogram", "mammography", "ultrasound", "sonogram",
+    "x-ray", "xray", "x ray", "echocardiogram", "tte", "echo",
+    "brain mri", "mri brain", "mri pelvis", "mri spine",
+    "diagnostic mammogram", "bilateral mammogram",
+]
+RADIOTHERAPY_TERMS = [
+    "radiation", "radiotherapy", "xrt", "rt ", " rt,", " rt.",
+    "chest wall rt", "whole brain radiation", "sbrt", "imrt",
+    "proton therapy", "brachytherapy",
+]
+
+def filter_procedure_plan(parsed, gate_log):
+    """Remove imaging and radiotherapy items from procedure_plan."""
+    val = parsed.get("procedure_plan", "")
+    if not val or not isinstance(val, str):
+        return parsed
+    val_lower = val.strip().lower()
+    if val_lower in ("no procedures planned.", "no procedures planned", "none", "none planned."):
+        return parsed
+    # Check if the value is ONLY imaging/radiotherapy content
+    # Split by comma/semicolon, check each item
+    items = [item.strip() for item in re.split(r'[,;]', val) if item.strip()]
+    kept = []
+    removed = []
+    for item in items:
+        item_lower = item.lower()
+        is_imaging = any(t in item_lower for t in IMAGING_TERMS)
+        is_rt = any(t in item_lower for t in RADIOTHERAPY_TERMS)
+        if is_imaging or is_rt:
+            removed.append(item)
+        else:
+            kept.append(item)
+    if removed:
+        if kept:
+            parsed["procedure_plan"] = ", ".join(kept)
+        else:
+            parsed["procedure_plan"] = "No procedures planned."
+        gate_log.append(f"      [POST-PROC-FILTER] removed from procedure_plan: {removed}")
+    return parsed
+
 def _is_safe_negative(text):
     """Check if text is a valid 'nothing here' response that G3 should preserve."""
     if not text or not isinstance(text, str):
@@ -1328,6 +1373,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             if str(before) != str(after):
                 gate_log.append(f"      [POST-SUPP] {before} -> {after}")
                 flags.append("supp-filtered")
+
+        # --- POST-4: Filter procedure_plan (remove imaging/radiotherapy) ---
+        if parsed is not None and key == "Procedure_Plan":
+            filter_procedure_plan(parsed, gate_log)
 
         # --- Store result ---
         if parsed is not None:

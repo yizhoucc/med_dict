@@ -65,11 +65,19 @@ Procedure_Plan: |
   If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
 
   Also DO NOT include:
-  - Imaging plans (CT, MRI, PET, DEXA — these go in Imaging_Plan)
+  - Imaging plans (CT, MRI, PET, PET/CT, DEXA, bone scan, ultrasound, mammogram, echocardiogram/TTE, X-ray — these ALL go in Imaging_Plan, NOT here)
+  - Radiation/radiotherapy plans (radiation, XRT, RT, chest wall RT, whole brain radiation — these go in radiotherapy_plan, NOT here)
   - Lab plans or blood tests
   - Medication/treatment plans (e.g., "continue arimidex", "could use faslodex" — these go in Medication_Plan)
   - Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
   - General treatment goals or contingency plans
+
+  Common mistakes to AVOID:
+  - "Brain MRI" → this is IMAGING, not a procedure
+  - "chest wall RT" → this is RADIOTHERAPY, not a procedure
+  - "will proceed with radiation" → this is RADIOTHERAPY, not a procedure
+  - "TTE" or "echocardiogram" → this is IMAGING, not a procedure
+  - "DEXA scan" → this is IMAGING, not a procedure
   If no future procedures are planned, say "No procedures planned."
   Respond *only* with a JSON object using this exact schema:
   {
@@ -180,10 +188,15 @@ follow_up_next_visit: |
   }
 
 Advance_care_planning: |
-  TASK: Extract the 'Advance care planning' from the given 'Assessment/Plan' section.
-  Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI).
-  If a code status is mentioned anywhere in the note, include it.
-  If no advance care planning is discussed, say "Not discussed during this visit."
+  TASK: Extract the 'Advance care planning' from the clinical note.
+  Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.
+  IMPORTANT: Code status is often found OUTSIDE the Assessment/Plan section — look in the FULL NOTE for:
+  - "Code status: Full code" or "Full code"
+  - "DNR" or "DNI" or "DNR/DNI"
+  - "Advance Care Planning" section
+  - "has a living will" or "health care proxy"
+  If a code status is mentioned ANYWHERE in the note, include it.
+  If no advance care planning is discussed and no code status is found, say "Not discussed during this visit."
   Respond *only* with a JSON object using this exact schema:
   {
       "Advance care": "A summary of any advance care planning including code status, or 'Not discussed during this visit.'"

@@ -135,6 +135,9 @@ Treatment_Changes: |
 
   For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
   Do NOT include changes from months or years ago.
+  IMPORTANT: If the patient IS currently on treatment but there are no recent changes, write an empty string "".
+  Do NOT write "Not yet on treatment" if the patient is already taking medication (e.g., tamoxifen, letrozole).
+  "Not yet on treatment" is ONLY correct if the patient has never started any cancer treatment.
 
   For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
 
@@ -145,8 +148,10 @@ Treatment_Changes: |
     * "we discussed starting..." = NOT current (discussion only)
     * "may consider..." = NOT current (future possibility)
     * "if side effects occur, could use..." = NOT current (contingency)
-  - Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds), medications marked "Patient not taking".
+  - Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds).
+  - Do NOT include medications marked "Patient not taking" or "(Patient not taking: ...)". If the medication list says "Patient not taking", that drug is NOT current — skip it entirely.
   - Do NOT include anxiety/sleep medications (lorazepam, zolpidem) or seizure medications (levetiracetam) unless explicitly prescribed FOR cancer treatment side effects.
+  - Do NOT include ONCOLOGIC drugs (tamoxifen, letrozole, anastrozole, trastuzumab, etc.) in supportive_meds. These go in current_meds.
   IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
 
   Respond *only* with a JSON object using this exact schema:
