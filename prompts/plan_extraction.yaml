@@ -65,10 +65,11 @@ Procedure_Plan: |
   If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
 
   Also DO NOT include:
-  - Imaging plans (CT, MRI, PET — these go in Imaging Plan)
-  - Lab plans
-  - Medication plans
+  - Imaging plans (CT, MRI, PET, DEXA — these go in Imaging_Plan)
+  - Lab plans or blood tests
+  - Medication/treatment plans (e.g., "continue arimidex", "could use faslodex" — these go in Medication_Plan)
   - Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
+  - General treatment goals or contingency plans
   If no future procedures are planned, say "No procedures planned."
   Respond *only* with a JSON object using this exact schema:
   {
@@ -94,10 +95,17 @@ Imaging_Plan: |
 
 Lab_Plan: |
   TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
-  Include ONLY future/planned labs: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
+  Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
   Specify frequency and rationale if mentioned.
+
+  CRITICAL — do NOT include these (they belong in OTHER fields):
+  - Imaging scans: PET CT, CT, MRI, DEXA, bone scan, ultrasound, mammogram → these go in Imaging_Plan
+  - Genomic/molecular tests: MammaPrint, Oncotype DX, BRCA panel, NGS, liquid biopsy → these go in Genetic_Testing_Plan
+  - Treatment plans: medication changes, chemotherapy plans → these go in Medication_Plan
+  Lab_Plan is ONLY for blood draws and lab work.
+
   DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
-  If no future labs are planned, say "No labs planned."
+  If no future blood tests or labs are planned, say "No labs planned."
   Respond *only* with a JSON object using this exact schema:
   {
       "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
@@ -126,11 +134,15 @@ Genetic_Testing_Plan: |
   - DO NOT include tests that are already completed, historic, or only mentioned in past oncology history.
   - DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine labs (CBC, CMP).
 
-  4. If there is NO new genetic or molecular test planned in the Assessment/Plan:
-  - Set the value to a clear negative statement, for example:
-    "No new genetic or molecular tests were planned during this visit."
+  4. CRITICAL — do NOT include content that belongs in OTHER fields:
+  - Treatment contingency plans (e.g., "if progression, could use faslodex") → these go in Medication_Plan/Therapy_plan
+  - Imaging plans (PET CT, MRI) → these go in Imaging_Plan
+  - Response assessment text (e.g., "Not yet on treatment — no response to assess") → this is NOT genetic testing
 
-  5. Output format:
+  5. If there is NO new genetic or molecular test planned in the Assessment/Plan:
+  - Set the value to: "None planned."
+
+  6. Output format:
   Respond *only* with a JSON object using this exact schema:
   {
       "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or a clear statement that none are planned."
@@ -139,9 +151,11 @@ Genetic_Testing_Plan: |
 Referral: |
   TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
   Do not mistake the doctor's signature at the end of the note as a referral.
-  Include ALL referrals mentioned, including integrative medicine, complementary medicine, or wellness referrals.
+  Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
   A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+  Do NOT include the current visit's own department as a referral (e.g., if this is a Medical Oncology note, do NOT list "Medical Oncology" as a referral).
   If no referral is mentioned for a category, set its value to "None".
+  For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral.
   Respond *only* with a JSON object using this exact schema:
   {
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",

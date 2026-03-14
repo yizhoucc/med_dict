@@ -136,8 +136,10 @@ Treatment_Changes: |
   For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
   Do NOT include changes from months or years ago.
 
-  For supportive_meds: List supportive care medications RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
-  Do NOT include: allergies (ALL: section), non-cancer comorbidity medications, medications marked "Patient not taking".
+  For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
+  - ONLY include medications the patient is actively taking right now.
+  - Do NOT include medications merely DISCUSSED or RECOMMENDED for the future (e.g., "we discussed bisphosphonate therapy" or "could be mitigated with bisphosphonate" = NOT current, do NOT include).
+  - Do NOT include: allergies (ALL: section), non-cancer comorbidity medications, medications marked "Patient not taking".
   IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
 
   Respond *only* with a JSON object using this exact schema:
@@ -177,8 +179,14 @@ Response_Assessment: |
 
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+     IMPORTANT — the patient IS on treatment if ANY of these clues appear:
+     - "currently on [drug]", "taking [drug]", "continue [drug]", "on [drug] since [date]"
+     - Mentions of chemotherapy cycles, off weeks, dose adjustments (e.g., "off week", "cycle 3", "due to start next cycle")
+     - "labs okay to proceed with chemotherapy" or similar pre-cycle clearance
+     - Current medications include any oncologic drug (chemo, hormonal, targeted, immunotherapy)
+     Do NOT be confused by "off week" — a patient on an off week between chemo cycles IS on treatment.
   2. If yes, what treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)
-  3. Is there any evidence of how the cancer is responding? Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
+  3. Is there any evidence of how the cancer is responding? Look for: imaging results (CT stable, PET response), tumor markers (CA 15-3 rising/falling), clinical exam findings (mass shrinking/growing, "appears to be breaking up"), symptom changes.
   4. If no treatment started yet, write "Not yet on treatment — no response to assess."
   5. If on treatment but no response data in the note, write "Not mentioned in note."
 
