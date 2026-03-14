@@ -247,3 +247,43 @@ Processing row 21 (2/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 32.6s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left DCIS in 1994 and right stage II IDC in 2000. Metastatic relapse in May 2020 with right chest wall recurrence, bone metastases, and right infraclavicular an
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 5.7s
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 29.9s
+      [EXTRACT] raw={
+  "recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; dose of ***** reduced in October 2020 due to side effects; letrozole switched to anastrozole in July 2020 due to skin rash.
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Response_Assessment: 9.1s
+      [EXTRACT] raw={
+"response_assessment": "PET scan on 11/03/20 and 04/24/21 showed a good response."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 214.6s
