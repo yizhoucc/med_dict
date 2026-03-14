@@ -801,3 +801,10 @@ Processing row 24 (5/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 49.9s
+      [EXTRACT] raw={
+"lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea Nitrogen, Serum / Plasma 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC 35.2
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
