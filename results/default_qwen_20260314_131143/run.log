@@ -263,3 +263,29 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] current_meds: "anastrozole, denosumab" -> "anastrozole, denosumab, prednisone"
       [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 30.5s
+      [EXTRACT] raw={
+  "recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; dose of ***** reduced in October 2020 due to side effects; letrozole switched to anastrozole in July 2020 due to skin rash.
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 9.8s
+      [EXTRACT] raw={
+"response_assessment": "PET scan on 11/03/20 and 04/24/21 showed a good response."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 201.0s
