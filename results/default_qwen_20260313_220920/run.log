@@ -240,3 +240,46 @@ Processing row 21 (2/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 25.6s
+      [EXTRACT] raw={
+"findings": "PET scan on 11/03/20 and 04/24/21 showed a good response. Physical exam: No acute distress, awake and alert, appears stated age. No oral lesions, neck supple no lymphadenopathy. Cardiac
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 5.0s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "anastrozole, denosumab" -> "anastrozole, denosumab, prednisone"
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 13.3s
+      [EXTRACT] raw={
+"recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; started on steroids.",
+"supportive_meds": "prednisone, diphenoxylate-atropine (LOMOTIL), denosumab (XGEVA)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "Not yet specified in the note"
+    Response_Assessment: 8.1s
+      [EXTRACT] raw={
+"response_assessment": "PET scan on 11/03/20 and 04/24/21 showed a good response."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 172.6s
