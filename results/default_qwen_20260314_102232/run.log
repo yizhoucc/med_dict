@@ -847,3 +847,37 @@ Processing row 24 (5/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 6.1s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "capecitabine, ixabepilone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "capecitabine, ixabepilone, denosumab" -> "capecitabine, ixabepilone"
+    Treatment_Changes: 16.6s
+      [EXTRACT] raw={
+"recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab",
+"supportive_meds": "ondansetron, docusate sodium, prochlorperazine, oxyCODONE, LEVETIRACETAM, SODIUM CHLORIDE OR
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Response_Assessment: 5.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Scan in 3 weeks. Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Scan in 3 weeks. Not mentioned in note." -> "Scan in 3 weeks"
+      [G6-SEMANTIC] response_assessment: "Scan in 3 weeks" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 138.4s
