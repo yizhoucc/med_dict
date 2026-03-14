@@ -68,6 +68,13 @@ class ChatTemplate:
             "assistant_start": "",
             "turn_end": " [/INST]",
         },
+        "qwen2": {
+            "bos": "",
+            "system_start": "<|im_start|>system\n",
+            "user_start": "<|im_start|>user\n",
+            "assistant_start": "<|im_start|>assistant\n",
+            "turn_end": "<|im_end|>\n",
+        },
     }
 
     def __init__(self, template_name="llama3"):
