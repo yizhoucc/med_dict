@@ -503,26 +503,6 @@ def main():
     }
     if quantization_config is not None:
         load_kwargs["quantization_config"] = quantization_config
-    # Disable ExLlama kernels for AWQ/GPTQ (not compiled for all GPU archs)
-    from transformers import AwqConfig, GPTQConfig
-    try:
-        from transformers import AutoConfig
-        model_config = AutoConfig.from_pretrained(model_cfg["name"])
-        if hasattr(model_config, "quantization_config"):
-            qc = model_config.quantization_config
-            quant_method = qc.get("quant_method", "") if isinstance(qc, dict) else getattr(qc, "quant_method", "")
-            if quant_method == "awq":
-                load_kwargs["quantization_config"] = AwqConfig(
-                    bits=qc.get("bits", 4) if isinstance(qc, dict) else getattr(qc, "bits", 4),
-                    use_exllama=False,
-                )
-            elif quant_method == "gptq":
-                load_kwargs["quantization_config"] = GPTQConfig(
-                    bits=qc.get("bits", 4) if isinstance(qc, dict) else getattr(qc, "bits", 4),
-                    use_exllama=False,
-                )
-    except Exception as e:
-        print(f"  Note: Could not auto-detect quantization config: {e}")
     model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
     print("Model loaded.")
 
