@@ -100,3 +100,20 @@ Processing row 20 (1/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 61.6s
+    Medication_Plan_chatgpt: 38.7s [schema-fixed, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'adjuvant endocrine therapy (e.g. arom" -> "[{'hormonal therapy': 'adjuvant endocrine therapy (e.g. arom"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Medication_Plan: 19.1s
+      [EXTRACT] raw={
+    "medication_plan": "Consideration of aromatase inhibitor therapy (e.g., Arimidex) for 5 years after breast XRT to reduce risk of recurrent DCIS or progression to invasive ductal cancer. Bisphosp
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
