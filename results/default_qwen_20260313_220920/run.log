@@ -429,3 +429,47 @@ Processing row 22 (3/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 34.8s
+      [EXTRACT] raw={
+"findings": "Pathology results from left breast mastectomy and SLN Bx: 1 cm grade 2 invasive lobular carcinoma (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) with negative ma
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 15.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPI"
+      [G6-SEMANTIC] current_meds: ""acetaminophen (TYLENOL) 500 mg tablet", "atorvastatin (LIPITOR) 20 mg tablet", " -> ""
+    Treatment_Changes: 22.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Beginning letrozole for adjuvant hormonal therapy.",
+"supportive_meds": "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg total) by mouth every 6 (six) hours as needed for 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] supportive_meds: "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg tota" -> "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg tota"
+      [G3-FAITH] recent_changes: "Beginning letrozole for adjuvant hormonal therapy." -> ""
+      [G3-FAITH] EMPTIED: ['recent_changes']
+      [G6-SEMANTIC] supportive_meds: "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg total) by mouth every 6 " -> ""
+    Treatment_Goals: 3.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] goals_of_treatment: "" -> "adjuvant"
+    Response_Assessment: 4.1s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 119.9s
