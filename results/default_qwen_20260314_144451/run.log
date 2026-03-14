@@ -2020,3 +2020,48 @@ Processing row 34 (10/10)...
       [G3-FAITH] EMPTIED: ['genetic_testing_plan']
       [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 8.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "return to clinic in 6 months for routine follow-up"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G3-PROTECT] Specialty: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 4.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 months for routine follow-up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 60.2s
+  Row 34 total: 129.5s
+  Row 34 saved to progress
+
+Total processing time: 1981.4s (33.0min)
+Done! Results copied to ./results.txt
+Full results in: results/default_qwen_20260314_144451/
