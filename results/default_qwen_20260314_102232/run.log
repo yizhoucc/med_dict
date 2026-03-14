@@ -242,3 +242,10 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 84.5s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 82.5, MCH 36.1, MCHC 32.8, Platelet 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
