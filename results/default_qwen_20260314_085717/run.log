@@ -320,3 +320,76 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 10.6s
+      [EXTRACT] raw={
+    "imaging_plan": "Pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 3.7s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "None"
+      [G6-SEMANTIC] lab_plan: "None" -> "No labs planned."
+    Genetic_Testing_Plan: 6.1s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 16.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with **
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+      [G6-SEMANTIC] Others: "" -> "None"
+    follow_up_next_visit: 3.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after PET CT results to determine next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: after PET CT results to determine next steps" -> ""
+      [G3-FAITH] EMPTIED: ['Next clinic visit']
+      [G6-SEMANTIC] Next clinic visit: "" -> "Not specified in the note"
+    Advance_care_planning: 3.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 138.4s
+  Row 21 total: 325.8s
+  Row 21 saved to progress
+
+Processing row 22 (3/5)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'PR negative', 'ER negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
