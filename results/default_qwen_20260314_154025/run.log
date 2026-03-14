@@ -440,3 +440,32 @@ Processing row 27 (3/10)...
       [G3-FAITH] EMPTIED: ['second opinion']
       [G3-REVERT-INFER] second opinion: restored classification/inference "no"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 13.3s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC of the right breast",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "No" -> ""
+      [G3-FAITH] EMPTIED: ['Metastasis']
+      [G3-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 27.4s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calciu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 19.7s [semantic-fixed]
+      [EXTRACT] raw={
+"findings": "0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 3-4%, no vascular invasion, no DCIS. Right lumpectomy/mastectomy: margins negative, 0/3 LN+. No cervical, 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] findings: "0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 3" -> "0.9 cm grade 1 IDC with ER+  99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 "
