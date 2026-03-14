@@ -292,3 +292,52 @@ Processing row 26 (2/10)...
       [G3-FAITH] EMPTIED: ['goals_of_treatment']
       [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 7.1s
+      [EXTRACT] raw={
+"response_assessment": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 98.3s
+    Medication_Plan_chatgpt: 35.2s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on ***** (likely aromatase inhibitor), zoladex (likely goserelin), and femara (likely letrozole).",
+        "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI vs. Genital-urinary symptom" -> "{'summary': 'Obtain UA (urinalysis) for possible UTI vs. Genital-urinary symptom"
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos" -> "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos"
+      [G6-SEMANTIC] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI vs. Genital-urinary symptom" -> "{'summary': 'Obtain UA (urinalysis) for possible UTI vs. Genital-urinary symptom"
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment'}
+    Medication_Plan: 6.0s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 7.7s [semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] therapy_plan: "Continue on *****, zoladex and femara." -> "Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
