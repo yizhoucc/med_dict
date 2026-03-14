@@ -825,3 +825,13 @@ Processing row 24 (5/5)...
       [G3-FAITH] EMPTIED: ['second opinion']
       [G6-PROTECT] second opinion: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 20.8s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastas
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
