@@ -241,3 +241,34 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 84.2s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 80.1, MCH 36.1, MCHC 32.8, Platelet 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 27.0s
+      [EXTRACT] raw={
+"findings": "PET scan on 11/03/20 and 04/24/21 showed a good response. Physical exam: No acute distress, awake and alert, appears stated age. No oral lesions, neck supple no lymphadenopathy. Cardiac
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 6.1s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab, prednisone"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 26.0s
+      [EXTRACT] raw={
+  "recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; dose of ***** reduced in October 2020 due to side effects.",
+  "supportive_meds": "prednisone (DELTASONE) 20 mg tablet, den
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
