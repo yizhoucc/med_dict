@@ -897,3 +897,40 @@ Processing row 24 (5/5)...
       [G4-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days" -> "{'summary': 'Patient will start cycle again on 04/12/2011.', 'Short_term_side_ef"
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'pain medication', 'other treatment', 'chemotherapy'}
+    Medication_Plan: 25.4s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Try ibuprofen or Tylenol in the morning and oxycodone in t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 29.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. Today is off week, and the patient will start the cycle again on 04/12/2011. A scan is scheduled in 3 w
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. Today " -> "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. A scan"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Procedure_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
