@@ -21,6 +21,9 @@ extraction:
   pipeline: "v2"
   max_retries: 3
   verify: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
 
 generation:
   keypoint:

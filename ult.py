@@ -848,6 +848,24 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 PLAN_KEYS = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
              'Medication_Plan', 'Medication_Plan_chatgpt'}
 
+# Patterns that G3 should NOT empty — these are valid "nothing here" answers
+SAFE_NEGATIVE_PATTERNS = [
+    r"^no\s+\w+\s+planned\.?$",         # "No labs planned.", "No imaging planned."
+    r"^no\s+\w+\s+in\s+note\.?$",       # "No labs in note."
+    r"^none[\s.]?",                       # "None", "None.", "None planned.", "None are planned."
+    r"^not\s+discussed",                  # "Not discussed during this visit."
+    r"^not\s+yet\s+on\s+treatment",      # "Not yet on treatment..."
+    r"^not\s+mentioned",                  # "Not mentioned in note"
+    r"^no\s+procedures\s+planned",       # "No procedures planned."
+]
+
+def _is_safe_negative(text):
+    """Check if text is a valid 'nothing here' response that G3 should preserve."""
+    if not text or not isinstance(text, str):
+        return False
+    text_clean = text.strip().lower()
+    return any(re.match(p, text_clean) for p in SAFE_NEGATIVE_PATTERNS)
+
 VAGUE_TERMS = ["staging workup", "new symptoms", "will start medications",
                "further workup", "appropriate treatment", "as above",
                "as discussed", "per discussion"]
@@ -859,7 +877,7 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None):
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None):
     """
     V2 extraction pipeline with 6 independent gates.
     Each gate fixes one specific issue (trim, don't redo).
@@ -880,12 +898,17 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         base_cache: pre-computed KV cache from build_base_cache()
         verify: whether to run faithfulness/temporal/specificity gates (default True)
         chat_tmpl: ChatTemplate instance (defaults to llama3)
+        gate_config: optional dict with gate behavior overrides:
+            preserve_negatives: bool - G3 won't empty safe negative phrases (default False)
+            skip_empty_fields: bool - G4/G6 won't add content to empty fields (default False)
 
     Returns:
         dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
     """
     if chat_tmpl is None:
         chat_tmpl = ChatTemplate("llama3")
+    if gate_config is None:
+        gate_config = {}
 
     keypoints = {}
 
@@ -1017,6 +1040,15 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                             gate_log.append(f"      [G3-FAITH] EMPTIED: {emptied_fields}")
                     else:
                         gate_log.append(f"      [G3-FAITH] no changes (all supported)")
+
+                    # Protect safe negatives from being emptied
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        for k in emptied_fields:
+                            orig_val = str(parsed.get(k, ""))  # pre-G3 value (full, not truncated)
+                            if _is_safe_negative(orig_val):
+                                cleaned_parsed[k] = parsed[k]  # restore original
+                                gate_log.append(f"      [G3-PROTECT] {k}: restored safe negative \"{orig_val[:60]}\"")
+
                     parsed = cleaned_parsed
                     answer = json.dumps(cleaned_parsed, ensure_ascii=False)
                 else:
@@ -1026,41 +1058,49 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
 
         # --- Gate 4: TEMPORAL (plan keys only) ---
         if verify and parsed is not None and key in PLAN_KEYS:
-            original_keys = set(parsed.keys())
-            before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
-            temporal_prompt = chat_tmpl.user_assistant(
-                f"Review this extraction for a PLAN section:\n"
-                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
-                f"Remove any PAST/COMPLETED items (past tense, past dates, "
-                f"\"underwent\", \"s/p\", \"completed\").\n"
-                f"Keep only CURRENT (\"continue\", \"currently on\") and FUTURE "
-                f"(\"will\", \"plan to\", \"pending\") items.\n"
-                f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
-                f"Return ONLY the JSON object."
+            # Skip G4 if all fields are empty (nothing to filter)
+            all_empty_g4 = all(
+                not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
+                for v in parsed.values()
             )
-            cleaned_raw, _ = run_model_with_cache_manual(
-                temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
-            )
-            torch.cuda.empty_cache()
-            gc.collect()
-
-            cleaned_parsed = try_parse_json(cleaned_raw)
-            if cleaned_parsed is not None:
-                cleaned_keys = set(cleaned_parsed.keys())
-                if original_keys & cleaned_keys:
-                    if cleaned_parsed != parsed:
-                        flags.append("temporal-cleaned")
-                        for k in original_keys:
-                            if parsed.get(k) != cleaned_parsed.get(k):
-                                gate_log.append(f"      [G4-TEMPORAL] {k}: \"{before_g4.get(k,'')}\" -> \"{str(cleaned_parsed.get(k,''))[:80]}\"")
-                    else:
-                        gate_log.append(f"      [G4-TEMPORAL] no changes")
-                    parsed = cleaned_parsed
-                    answer = cleaned_raw
-                else:
-                    gate_log.append(f"      [G4-TEMPORAL] REJECTED (no key overlap)")
+            if gate_config.get("skip_empty_fields") and all_empty_g4:
+                gate_log.append(f"      [G4-TEMPORAL] skipped (all fields empty/negative)")
             else:
-                gate_log.append(f"      [G4-TEMPORAL] parse FAILED")
+                original_keys = set(parsed.keys())
+                before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
+                temporal_prompt = chat_tmpl.user_assistant(
+                    f"Review this extraction for a PLAN section:\n"
+                    f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                    f"Remove any PAST/COMPLETED items (past tense, past dates, "
+                    f"\"underwent\", \"s/p\", \"completed\").\n"
+                    f"Keep only CURRENT (\"continue\", \"currently on\") and FUTURE "
+                    f"(\"will\", \"plan to\", \"pending\") items.\n"
+                    f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
+                    f"Return ONLY the JSON object."
+                )
+                cleaned_raw, _ = run_model_with_cache_manual(
+                    temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
+                )
+                torch.cuda.empty_cache()
+                gc.collect()
+
+                cleaned_parsed = try_parse_json(cleaned_raw)
+                if cleaned_parsed is not None:
+                    cleaned_keys = set(cleaned_parsed.keys())
+                    if original_keys & cleaned_keys:
+                        if cleaned_parsed != parsed:
+                            flags.append("temporal-cleaned")
+                            for k in original_keys:
+                                if parsed.get(k) != cleaned_parsed.get(k):
+                                    gate_log.append(f"      [G4-TEMPORAL] {k}: \"{before_g4.get(k,'')}\" -> \"{str(cleaned_parsed.get(k,''))[:80]}\"")
+                        else:
+                            gate_log.append(f"      [G4-TEMPORAL] no changes")
+                        parsed = cleaned_parsed
+                        answer = cleaned_raw
+                    else:
+                        gate_log.append(f"      [G4-TEMPORAL] REJECTED (no key overlap)")
+                else:
+                    gate_log.append(f"      [G4-TEMPORAL] parse FAILED")
 
         # --- Gate 5: SPECIFICITY (conditional) ---
         if verify and parsed is not None and _has_vague_terms(answer):
@@ -1103,57 +1143,76 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
 
         # --- Gate 6: SEMANTIC RELEVANCE ---
         if verify and parsed is not None:
-            # Extract the field descriptions from the prompt schema
-            schema_str = extract_schema_from_prompt(task)
-            original_keys_g6 = set(parsed.keys())
-            before_g6 = {k: str(v)[:80] for k, v in parsed.items()}
-            semantic_prompt = chat_tmpl.user_assistant(
-                f"Check if each value in this extraction actually answers the question asked by its field.\n\n"
-                f"The field definitions are:\n{schema_str}\n\n"
-                f"The extraction is:\n{answer}\n\n"
-                f"For each field, check: does the value answer what the field is asking for?\n"
-                f"Common errors to catch:\n"
-                f"- goals_of_treatment should be the INTENT of treatment (curative, palliative, risk reduction), "
-                f"NOT the purpose of this visit (follow-up, discuss options)\n"
-                f"- response_assessment should be how the cancer is CURRENTLY responding (imaging, labs, exam), "
-                f"NOT future plans (will start, plan to, she will have)\n"
-                f"- current_meds should be medications the patient is CURRENTLY taking, "
-                f"NOT medications being discussed or planned\n\n"
-                f"If a value does not answer its field's question, replace it with the correct answer "
-                f"from the original medical note. If no correct answer exists in the note, use an appropriate "
-                f"default (e.g., 'Not yet on treatment — no response to assess.' for response_assessment "
-                f"when no treatment has started).\n"
-                f"If all values correctly answer their fields, return the JSON unchanged.\n"
-                f"Return ONLY the JSON object with all keys preserved."
+            # Skip G6 if all fields are empty/safe-negative (nothing to validate)
+            all_empty_g6 = all(
+                not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
+                for v in parsed.values()
             )
-            semantic_raw, _ = run_model_with_cache_manual(
-                semantic_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
-            )
-            torch.cuda.empty_cache()
-            gc.collect()
-
-            semantic_parsed = try_parse_json(semantic_raw)
-            if semantic_parsed is not None:
-                semantic_keys = set(semantic_parsed.keys())
-                if original_keys_g6 & semantic_keys:
-                    # Restore any dropped keys
-                    for mk in original_keys_g6 - semantic_keys:
-                        semantic_parsed[mk] = parsed[mk]
-                    changed = False
-                    for k in original_keys_g6:
-                        if parsed.get(k) != semantic_parsed.get(k):
-                            changed = True
-                            gate_log.append(f"      [G6-SEMANTIC] {k}: \"{before_g6.get(k,'')}\" -> \"{str(semantic_parsed.get(k,''))[:80]}\"")
-                    if changed:
-                        flags.append("semantic-fixed")
-                    else:
-                        gate_log.append(f"      [G6-SEMANTIC] ok (all values answer their fields)")
-                    parsed = semantic_parsed
-                    answer = json.dumps(semantic_parsed, ensure_ascii=False)
-                else:
-                    gate_log.append(f"      [G6-SEMANTIC] REJECTED (no key overlap)")
+            if gate_config.get("skip_empty_fields") and all_empty_g6:
+                gate_log.append(f"      [G6-SEMANTIC] skipped (all fields empty/negative)")
             else:
-                gate_log.append(f"      [G6-SEMANTIC] parse FAILED")
+                # Extract the field descriptions from the prompt schema
+                schema_str = extract_schema_from_prompt(task)
+                original_keys_g6 = set(parsed.keys())
+                before_g6 = {k: str(v)[:80] for k, v in parsed.items()}
+                semantic_prompt = chat_tmpl.user_assistant(
+                    f"Check if each value in this extraction actually answers the question asked by its field.\n\n"
+                    f"The field definitions are:\n{schema_str}\n\n"
+                    f"The extraction is:\n{answer}\n\n"
+                    f"For each field, check: does the value answer what the field is asking for?\n"
+                    f"Common errors to catch:\n"
+                    f"- goals_of_treatment should be the INTENT of treatment (curative, palliative, risk reduction), "
+                    f"NOT the purpose of this visit (follow-up, discuss options)\n"
+                    f"- response_assessment should be how the cancer is CURRENTLY responding (imaging, labs, exam), "
+                    f"NOT future plans (will start, plan to, she will have)\n"
+                    f"- current_meds should be medications the patient is CURRENTLY taking, "
+                    f"NOT medications being discussed or planned\n\n"
+                    f"If a value does not answer its field's question, replace it with the correct answer "
+                    f"from the original medical note. If no correct answer exists in the note, use an appropriate "
+                    f"default (e.g., 'Not yet on treatment — no response to assess.' for response_assessment "
+                    f"when no treatment has started).\n"
+                    f"If all values correctly answer their fields, return the JSON unchanged.\n"
+                    f"Return ONLY the JSON object with all keys preserved."
+                )
+                semantic_raw, _ = run_model_with_cache_manual(
+                    semantic_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
+                )
+                torch.cuda.empty_cache()
+                gc.collect()
+
+                semantic_parsed = try_parse_json(semantic_raw)
+                if semantic_parsed is not None:
+                    semantic_keys = set(semantic_parsed.keys())
+                    if original_keys_g6 & semantic_keys:
+                        # Restore any dropped keys
+                        for mk in original_keys_g6 - semantic_keys:
+                            semantic_parsed[mk] = parsed[mk]
+
+                        # Protect empty/negative fields from being filled with new content
+                        if gate_config.get("skip_empty_fields"):
+                            for k in original_keys_g6:
+                                old_val = parsed.get(k)
+                                new_val = semantic_parsed.get(k)
+                                old_is_empty = not old_val or old_val == ""
+                                if old_is_empty and new_val and new_val != "":
+                                    semantic_parsed[k] = old_val  # keep empty
+                                    gate_log.append(f"      [G6-PROTECT] {k}: blocked fill into empty field")
+
+                        changed = False
+                        for k in original_keys_g6:
+                            if parsed.get(k) != semantic_parsed.get(k):
+                                changed = True
+                                gate_log.append(f"      [G6-SEMANTIC] {k}: \"{before_g6.get(k,'')}\" -> \"{str(semantic_parsed.get(k,''))[:80]}\"")
+                        if changed:
+                            flags.append("semantic-fixed")
+                        else:
+                            gate_log.append(f"      [G6-SEMANTIC] ok (all values answer their fields)")
+                        parsed = semantic_parsed
+                        answer = json.dumps(semantic_parsed, ensure_ascii=False)
+                    else:
+                        gate_log.append(f"      [G6-SEMANTIC] REJECTED (no key overlap)")
+                else:
+                    gate_log.append(f"      [G6-SEMANTIC] parse FAILED")
 
         # --- POST-1: Strip extra keys ---
         if parsed is not None and expected_keys:

@@ -531,7 +531,10 @@ def main():
     # Select pipeline version
     pipeline = config.get("extraction", {}).get("pipeline", "v1")
     extract_fn = extract_and_verify_v2 if pipeline == "v2" else extract_and_verify
+    gate_config = config.get("extraction", {}).get("gate_config", {})
     print(f"Using pipeline: {pipeline}")
+    if gate_config:
+        print(f"Gate config: {gate_config}")
 
     # Create chat template from config
     chat_template_name = config.get("model", {}).get("chat_template", "llama3")
@@ -597,7 +600,7 @@ def main():
         ext_start = time.time()
         base_cache = build_base_cache(note_text, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
         keypoints = extract_fn(
-            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist
+            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist, gate_config=gate_config
         )
         print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
 
@@ -614,6 +617,7 @@ def main():
                 verify=verify,
                 chat_tmpl=chat_tmpl,
                 oncology_whitelist=whitelist,
+                gate_config=gate_config,
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
