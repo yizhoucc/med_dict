@@ -7,7 +7,7 @@ model:
   chat_template: "llama3"
   dtype: "bfloat16"
   device_map: "auto"
-  cache_dir: "/mnt/c/Users/yc/.cache/huggingface"
+  cache_dir: "/home/yc/.cache/huggingface"
   # quantization:        # uncomment to enable 4-bit quantization
   #   type: "4bit"       # "4bit" or "8bit"
   #   quant_type: "nf4"  # "nf4" or "fp4"

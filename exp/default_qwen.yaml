@@ -3,15 +3,11 @@ experiment:
   seed: 42
 
 model:
-  name: "Qwen/Qwen2.5-32B-Instruct"
+  name: "Qwen/Qwen2.5-32B-Instruct-GPTQ-Int4"
   chat_template: "qwen2"
   dtype: "bfloat16"
   device_map: "auto"
-  cache_dir: "/mnt/c/Users/yc/.cache/huggingface"
-  quantization:
-    type: "4bit"
-    quant_type: "nf4"
-    double_quant: true
+  cache_dir: "/home/yc/.cache/huggingface"
 
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
