@@ -804,3 +804,58 @@ Processing row 28 (4/10)...
       [G3-PROTECT] Others: restored safe negative "None"
       [G6-PROTECT] Specialty: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 4.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: September 2019 for surgery"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 160.6s
+  Row 28 total: 261.7s
+  Row 28 saved to progress
+
+Processing row 29 (5/10)...
+  Injected 6 term definitions: ['progesterone receptor', 'adjuvant chemotherapy', 'estrogen receptor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (3607 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "64 y.o. postmenopausal patient with a recent diagnosis of early stage breast cancer, specifically clinica
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G3-REVERT-INFER] second opinion: restored classification/inference "no"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 12.8s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Clinical stage II-III",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "No" -> ""
+      [G3-FAITH] EMPTIED: ['Metastasis']
+      [G3-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
