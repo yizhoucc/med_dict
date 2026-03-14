@@ -52,3 +52,69 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 15.3s
+      [EXTRACT] raw={
+"findings": "Triple negative breast cancer with a Ki-67 of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed. Physical exam showed no acute distress, awake 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 8.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin"
+      [G6-SEMANTIC] current_meds: "amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin 500 mg capsule, cet" -> ""
+    Treatment_Changes: 2.9s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Treatment_Goals: 4.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 97.9s
+    Medication_Plan_chatgpt: 15.0s [semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Discussed the role of radiation to decrease the risk of local recurrence.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the risk of local recur" -> "{'summary': 'Discussed the role of radiation to decrease the risk of local recur"
+      [POST-KEYS] stripped: {'radiotherapy'}
+    Medication_Plan: 5.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G3-FAITH] EMPTIED: ['medication_plan']
+      [G3-REVERT] medication_plan: reverted (G3 emptied all fields)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
