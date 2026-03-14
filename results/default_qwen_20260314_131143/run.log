@@ -468,3 +468,34 @@ Processing row 22 (3/5)...
       [G5-SPECIFIC] recent_changes: "Letrozole was discussed and recommended to be started as an endocrine-based ther" -> "Letrozole was discussed and recommended to be started as an endocrine-based ther"
       [G6-SEMANTIC] recent_changes: "Letrozole was discussed and recommended to be started as an endocrine-based ther" -> "None."
       [POST-SUPP] None currently being taken. -> 
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 124.8s
+    Medication_Plan_chatgpt: 49.7s [stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will start letrozole for adjuvant hormonal therapy. The plan is for at least five years of therapy, with an individualized decision to continue 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'other treatment', 'hormonal therapy'}
