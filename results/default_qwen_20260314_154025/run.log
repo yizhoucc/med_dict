@@ -245,3 +245,50 @@ Processing row 26 (2/10)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "Originally Stage I  (early stage node neg IDC), now metastatic (Stage IV)"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 42.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged i
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Stable to slightly decreased metabolic activity of osseous m" -> "Stable to slightly decreased metabolic activity of osseous m"
+      [G6-SEMANTIC] findings: "Stable to slightly decreased metabolic activity of osseous metastases with no ne" -> "Stable to slightly decreased metabolic activity of osseous metastases with no ne"
+    Current_Medications: 5.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole, goserelin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "letrozole, goserelin" -> "letrozole, goserelin, calcium-vitamin D, zolendronic acid"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-MEDS] letrozole, goserelin, calcium-vitamin D, zolendronic acid -> letrozole, goserelin
+    Treatment_Changes: 6.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] calcium-vitamin D, zolendronic acid -> 
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
