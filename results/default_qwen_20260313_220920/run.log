@@ -473,3 +473,20 @@ Processing row 22 (3/5)...
       [G3-FAITH] EMPTIED: ['response_assessment']
       [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 119.9s
+    Medication_Plan_chatgpt: 21.9s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will start letrozole for at least five years of adjuvant hormonal therapy. Discussion of extending hormonal therapy beyond 5 years is individual
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': "The patient will begin letrozole, an aromatase inhibitor, for at le"
+    Medication_Plan: 23.5s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will begin letrozole for adjuvant hormonal therapy. The plan is for at least five years of treatment, with the possibility of extending beyond five years based on ind
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
