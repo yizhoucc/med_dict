@@ -1515,3 +1515,34 @@ Processing row 32 (8/10)...
       [G3-FAITH] no changes (all supported)
       [G6-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 63.9s
+    Medication_Plan_chatgpt: 41.5s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue letrozole daily. Patient is risk adverse and would prefer to continue letrozole > 5 years.",
+        "Short term side_effects_discussed": "",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'pain medication', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'pain medication', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'letrozole', 'status': 'Continue daily', '" -> "[{'type': 'hormonal therapy', 'name': 'letrozole', 'status': 'Continue daily', '"
+    Medication_Plan: 7.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole daily. Continue calcium and vitamin D daily. NSAIDs with food as needed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
