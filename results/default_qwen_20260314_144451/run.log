@@ -453,3 +453,36 @@ Processing row 27 (3/10)...
       [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.5s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calciu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 19.7s [semantic-fixed]
+      [EXTRACT] raw={
+"findings": "0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 3-4%, no vascular invasion, no DCIS. Right lumpectomy/mastectomy: margins negative, 0/3 LN+. No cervical, 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] findings: "0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 3" -> "0.9 cm grade 1 IDC with ER+  99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 "
+    Current_Medications: 12.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen, amLODIPine, artificial tears, ascorbic acid, "
+      [G6-SEMANTIC] current_meds: "acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC " -> ""
+    Treatment_Changes: 10.5s [supp-filtered]
+      [EXTRACT] raw={
+  "recent_changes": "",
+  "supportive_meds": "calcium citrate-vitamin D, DULoxetine (CYMBALTA), pregabalin (LYRICA)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] calcium citrate-vitamin D, DULoxetine (CYMBALTA), pregabalin (LYRICA) -> 
