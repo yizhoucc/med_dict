@@ -108,3 +108,48 @@ Processing row 20 (1/5)...
       [G3-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for" -> "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for"
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for 5 years after XRT t" -> "[{'hormonal therapy': {'summary': 'Arimidex (an aromatase inhibitor) for 5 years"
+    Medication_Plan: 19.7s
+      [EXTRACT] raw={
+    "medication_plan": "Consideration of aromatase inhibitor therapy (e.g., Arimidex) for 5 years after breast XRT to reduce risk of recurrent DCIS or progression to invasive ductal cancer. Bisphosp
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 30.0s
+      [EXTRACT] raw={
+    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She wi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 13.9s [semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. S
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "She is inclined toward undertaking additional adjuvant treatment(s) to minimize " -> "She will then plan to return for ***** follow-up visit in 3-4 months allowing ti"
+    Procedure_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G3-FAITH] EMPTIED: ['imaging_plan']
+      [G3-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
