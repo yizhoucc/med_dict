@@ -736,3 +736,66 @@ Processing row 23 (4/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 11.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology",
+"Others": "Physical Therapy",
+"follow up": "scheduled to see Dr. ***** in radiation oncology 12/07/18"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics']
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+    follow_up_next_visit: 6.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: scheduled to see Dr. ***** in radiation oncology on 12/07/18"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 3.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 116.2s
+  Row 23 total: 206.6s
+  Row 23 saved to progress
+
+Processing row 24 (5/5)...
+  Injected 5 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'lumpectomy', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1288 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Metastatic breast cancer patient on Xeloda and Irinotecan for ongoing management. This visit is to assess c
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G6-SEMANTIC] second opinion: "" -> "Not a second opinion"
+    Cancer_Diagnosis: 20.4s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastas
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
