@@ -883,3 +883,17 @@ Processing row 24 (5/5)...
       [G3-FAITH] EMPTIED: ['response_assessment']
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 178.2s
+    Medication_Plan_chatgpt: 59.7s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days off, with ixabepilone. Today is off week, and the patient will start cycle again on 04/1
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'other treatment']
+      [G3-FAITH] pain medication: "{'summary': 'Patient is advised to try ibuprofen or Tylenol " -> "{'summary': 'Patient is advised to try ibuprofen or Tylenol "
+      [G3-FAITH] other treatment: "{'summary': 'Calendars were given to track Xeloda when on an" -> "{'summary': 'Calendars were given to track Xeloda when on an"
+      [G3-FAITH] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 " -> "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 "
+      [G4-TEMPORAL] pain medication: "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o"
+      [G4-TEMPORAL] other treatment: "{'summary': 'Calendars were given to track Xeloda when on and off the drug. Prin" -> "{'summary': 'Calendars were given to track Xeloda when on and off the drug. Prin"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days" -> "{'summary': 'Patient will start cycle again on 04/12/2011.', 'Short_term_side_ef"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'pain medication', 'other treatment', 'chemotherapy'}
