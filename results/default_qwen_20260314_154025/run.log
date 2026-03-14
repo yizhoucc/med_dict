@@ -1488,3 +1488,48 @@ Processing row 32 (8/10)...
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 15.6s
+      [EXTRACT] raw={
+"findings": "No evidence of recurrence on physical exam. No palpable masses, no significant skin changes, and no new lymphadenopathy noted. Left neck high <1cm lymph node soft and mobile. No LE edem
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.9s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 11.1s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 ORAL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] supportive_meds: "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 " -> "None"
+    Treatment_Goals: 4.0s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 65.0s
