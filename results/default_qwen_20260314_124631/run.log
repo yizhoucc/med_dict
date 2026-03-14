@@ -624,3 +624,53 @@ Processing row 23 (4/5)...
       [G6-PROTECT] second opinion: blocked fill into empty field
       [G6-PROTECT] Patient type: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 17.7s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH Grade II micropapillary mucinous carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasi
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "Not sure" -> ""
+      [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G3-FAITH] EMPTIED: ['Metastasis', 'Stage_of_Cancer']
+      [G3-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G6-PROTECT] Metastasis: blocked fill into empty field
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 36.2s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology: 5.***** cm Grade II micropapillary mucinous carcinoma with ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, Ki-67 5%. 2 sentinel lymph nodes with micropapil
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Pathology: 5.***** cm Grade II micropapillary mucinous carci" -> "Pathology: 5.***** cm Grade II micropapillary mucinous carci"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 1.5s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Treatment_Changes: 13.1s
+      [EXTRACT] raw={
+  "recent_changes": "",
+  "supportive_meds": "acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
