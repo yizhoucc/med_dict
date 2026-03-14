@@ -75,3 +75,30 @@ Processing row 20 (1/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] recent_changes: "" -> "No recent changes in treatment noted."
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "risk reduction"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 4.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
+  Extraction prompts: 66.8s
+    Medication_Plan_chatgpt: 49.9s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'adjuvant endocrine therapy (e.g. aromatase inhibitor like" -> "[{'hormonal therapy': {'summary': 'adjuvant endocrine therapy (e.g. aromatase in"
