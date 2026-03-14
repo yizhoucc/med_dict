@@ -805,3 +805,18 @@ Processing row 24 (5/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] lab_summary: "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea" -> "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 58.5s
+      [EXTRACT] raw={
+"findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 12/11/2010 PET/CT scan revealed a new right frontal dural-based metastasis with surrounding vasogenic edema 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 7.2s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "capecitabine, ixabepilone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "capecitabine, ixabepilone, denosumab" -> "capecitabine, ixabepilone"
