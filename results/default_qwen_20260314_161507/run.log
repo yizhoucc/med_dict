@@ -1301,3 +1301,36 @@ Processing row 31 (7/10)...
       [G3-FAITH] EMPTIED: ['goals_of_treatment']
       [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 13.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "CT stable, PET-CT shows no abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "CT stable, PET-CT shows no abnormal areas of FDG uptake to s" -> "PET-CT done June 2019 shows no abnormal areas of FDG uptake "
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 96.0s
+    Medication_Plan_chatgpt: 43.8s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Previously received TCH chemotherapy x 6 and maintenance herceptin. Currently on herceptin. Recently dropped one medication due to diarrhea.",
+        "Shor
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-FAITH] chemotherapy: "{'summary': 'Previously received TCH chemotherapy x 6 and ma" -> "{'summary': 'Previously received TCH chemotherapy x 6 and ma"
+      [G3-FAITH] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followe" -> "{'summary': 'Previously completed adjuvant tamoxifen followe"
+      [G3-FAITH] other treatment: "{'summary': 'Dropped one medication due to diarrhea, which h" -> "{'summary': 'Dropped one medication due to diarrhea, which h"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Previously received TCH chemotherapy x 6 and maintenance herceptin." -> "{'summary': 'Currently on herceptin. Recently dropped one medication due to diar"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by another hormona" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects"
+      [G6-SEMANTIC] chemotherapy: "{'summary': 'Currently on herceptin. Recently dropped one medication due to diar" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Currently on he"
+      [G6-SEMANTIC] hormonal therapy: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': 'S/p adjuvant tamoxifen followed by ***** completed 05/16/15.', 'Sho"
+      [G6-SEMANTIC] other treatment: "{'summary': 'Dropped one medication due to diarrhea, which has since resolved.'," -> "{'summary': 'Dropped one medication due to diarrhea, which has since resolved.',"
+      [POST-KEYS] stripped: {'chemotherapy', 'hormonal therapy', 'other treatment'}
+    Medication_Plan: 6.2s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "Herceptin and ***** (recently dropped due to diarrhea, which has resolved)."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] medication_plan: "Herceptin and ***** (recently dropped due to diarrhea, which has resolved)." -> "Herceptin"
+      [G6-SEMANTIC] medication_plan: "Herceptin" -> "Herceptin, previously on ***** and *****"
