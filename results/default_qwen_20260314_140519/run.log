@@ -861,3 +861,33 @@ Processing row 24 (5/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] current_meds: "capecitabine, ixabepilone, denosumab" -> "capecitabine, ixabepilone"
+    Treatment_Changes: 15.4s [supp-filtered]
+      [EXTRACT] raw={
+  "recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab.",
+  "supportive_meds": "ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam, calcium, cholecal
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam, calcium, cholecalciferol, multivitamin, polyethylene glycol -> ondansetron, docusate sodium, prochlorperazine, oxyCODONE, polyethylene glycol
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 131.2s
