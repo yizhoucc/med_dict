@@ -556,3 +556,90 @@ Processing row 22 (3/5)...
       [G3-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G4-TEMPORAL] skipped (all fields empty/negative)
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 10.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "3 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics', 'Specialty', 'Others']
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Specialty: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G6-SEMANTIC] Nutrition: "None" -> "Maintain a calcium-rich diet, take an adequate amount of Vitamin D, and engage i"
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 131.7s
+  Row 22 total: 256.5s
+  Row 22 saved to progress
+
+Processing row 23 (4/5)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "56 y.o. female with right breast Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), HER2 e
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Patient type: "New patient" -> ""
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['Patient type', 'second opinion']
+      [G6-PROTECT] Patient type: blocked fill into empty field
+      [G6-PROTECT] second opinion: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 17.1s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH Grade II micropapillary mucinous carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasi
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "Not sure" -> ""
+      [G3-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G3-FAITH] EMPTIED: ['Metastasis', 'Stage_of_Cancer']
+      [G3-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G6-PROTECT] Metastasis: blocked fill into empty field
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
