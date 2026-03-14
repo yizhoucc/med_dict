@@ -890,3 +890,23 @@ Processing row 24 (5/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 150.6s
+    Medication_Plan_chatgpt: 59.8s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of ixabepilone for 14 days and then 7 days off. Today is off week and will start cycle again on 04/12/2011. Port was placed pr
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] pain medication: "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of ixabepilone for 14 days and then 7" -> "{'summary': 'Patient is taking 1500/1000mg of ixabepilone for 14 days and then 7"
+      [G4-TEMPORAL] other treatment: "{'summary': 'Calendars were given to track Xeloda when on and off the drug.', 'S" -> "{'summary': 'Calendars were given to track Xeloda when on and off the drug.', 'S"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'pain medication', 'chemotherapy', 'other treatment'}
+    Medication_Plan: 27.0s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Try ibuprofen or Tylenol in the morning and oxycodone in t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
