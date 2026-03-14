@@ -125,3 +125,86 @@ Processing row 20 (1/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] radiotherapy_plan: "She is inclined toward undertaking additional adjuvant treatment(s) to minimize " -> "She will then plan to return for ***** follow-up visit in 3-4 months allowing ti"
+    Procedure_Plan: 11.0s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "['undertaking additional adjuvant treatment(s) to minimize her risks over the ne"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 4.1s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G3-FAITH] EMPTIED: ['imaging_plan']
+      [G4-TEMPORAL] imaging_plan: "" -> "None"
+      [G6-SEMANTIC] imaging_plan: "None" -> "No imaging planned."
+    Lab_Plan: 3.9s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "None"
+      [G6-SEMANTIC] lab_plan: "None" -> "No labs planned."
+    Genetic_Testing_Plan: 3.6s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "None are planned."
+    Referral: 9.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc, Med Onc",
+"Others": "None",
+"follow up": "return for ***** follow-up visit in 3-4 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics']
+      [G6-SEMANTIC] Others: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+    follow_up_next_visit: 7.0s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 3.3s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 154.9s
+  Row 20 total: 221.7s
+  Row 20 saved to progress
+
+Processing row 21 (2/5)...
+  Injected 6 term definitions: ['estrogen receptor', 'ER positive', 'PR positive', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1415 chars)
+  A/P extraction: 0.0s
