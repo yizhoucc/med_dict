@@ -53,8 +53,14 @@ neulasta
 sargramostim
 leukine
 
-# BONE-PROTECTING AGENTS (already in oncology_drugs.txt, listed here for completeness)
-# denosumab, xgeva, prolia, zoledronic acid, zometa, pamidronate
+# BONE-PROTECTING AGENTS (also in oncology_drugs.txt, duplicated here for supportive_meds matching)
+bisphosphonate
+denosumab
+xgeva
+prolia
+zoledronic acid
+zometa
+pamidronate
 
 # PAIN MEDICATION (cancer pain)
 oxycodone
