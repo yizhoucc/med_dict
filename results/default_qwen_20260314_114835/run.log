@@ -866,3 +866,23 @@ Processing row 24 (5/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-SUPP] ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE), LEVETIRACETAM (KEPPRA ORAL), LORazepam (ATIVAN) -> ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE)
+    Treatment_Goals: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Response_Assessment: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 144.5s
