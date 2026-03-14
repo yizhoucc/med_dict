@@ -840,3 +840,46 @@ Processing row 24 (5/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] lab_summary: "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea" -> "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 53.7s
+      [EXTRACT] raw={
+"findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 12/11/2010 PET/CT scan revealed a new right frontal dural-based metastasis with surrounding vasogenic edema 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 6.6s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "capecitabine, ixabepilone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "capecitabine, ixabepilone, denosumab" -> "capecitabine, ixabepilone"
+    Treatment_Changes: 13.9s [supp-filtered]
+      [EXTRACT] raw={
+  "recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab",
+  "supportive_meds": "ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam -> ondansetron, docusate sodium, prochlorperazine, oxyCODONE
+    Treatment_Goals: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Response_Assessment: 6.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable. The patient is on Xeloda and ixabepilone. The exam notes that the supraclavicular area appears to be breaking up, and labs are okay to proceed
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "The cancer is currently stable. The patient is on Xeloda and" -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 178.2s
