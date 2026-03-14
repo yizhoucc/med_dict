@@ -283,3 +283,20 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 172.6s
+    Medication_Plan_chatgpt: 47.3s [schema-fixed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Currently on arimidex. If PET CT shows progression, could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade w
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': ['abemaciclib', 'letrozole', 'arimidex'" -> "[{'type': 'hormonal therapy', 'details': ['arimidex']}, {'type': 'other treatmen"
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': ['arimidex']}, {'type': 'other treatmen" -> "[{'type': 'hormonal therapy', 'details': [{'summary': 'continue arimidex alone i"
+    Medication_Plan: 11.2s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone. If PET CT shows progression, could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade with afinitor or xelo
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
