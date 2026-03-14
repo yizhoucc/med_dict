@@ -1271,3 +1271,38 @@ Processing row 31 (7/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 6.7s
+      [EXTRACT] raw={
+"current_meds": "exemestane, trastuzumab, pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 8.0s
+      [EXTRACT] raw={
+  "recent_changes": "Stopped ***** due to diarrhea.",
+  "supportive_meds": "loperamide (IMODIUM) 2 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 12.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "CT stable, PET-CT shows no abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "CT stable, PET-CT shows no abnormal areas of FDG uptake to s" -> "PET-CT done June 2019 shows no abnormal areas of FDG uptake "
+      [G6-SEMANTIC] ok (all values answer their fields)
+  Extraction prompts: 99.7s
