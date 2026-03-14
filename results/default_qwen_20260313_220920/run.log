@@ -875,3 +875,93 @@ Processing row 24 (5/5)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] therapy_plan: "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti" -> "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti"
       [G6-SEMANTIC] therapy_plan: "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti" -> "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti"
+    radiotherapy_plan: 2.4s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
+    Procedure_Plan: 3.1s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G4-TEMPORAL] procedure_plan: "" -> "None"
+      [G6-SEMANTIC] procedure_plan: "None" -> "No procedures planned."
+    Imaging_Plan: 3.9s
+      [EXTRACT] raw={
+    "imaging_plan": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 3.5s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G4-TEMPORAL] lab_plan: "" -> "Labs reviewed okay to proceed with chemotherapy"
+      [G6-SEMANTIC] lab_plan: "Labs reviewed okay to proceed with chemotherapy" -> "No labs planned."
+    Genetic_Testing_Plan: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "No new genetic or molecular tests were planned during this visit."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "No new genetic or molecular tests were planned during this v" -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G6-SEMANTIC] genetic_testing_plan: "" -> "None planned."
+    Referral: 6.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics', 'Specialty']
+      [G6-SEMANTIC] Others: "" -> "None"
+      [G6-SEMANTIC] Nutrition: "" -> "None"
+      [G6-SEMANTIC] Genetics: "" -> "None"
+      [G6-SEMANTIC] Specialty: "" -> "None"
+    follow_up_next_visit: 3.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: in 3 weeks for a scan"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.8s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 117.0s
+  Row 24 total: 248.7s
+  Row 24 saved to progress
+
+Total processing time: 1208.1s (20.1min)
+Done! Results copied to ./results.txt
+Full results in: results/default_qwen_20260313_220920/
