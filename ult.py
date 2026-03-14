@@ -68,6 +68,10 @@ def filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist):
         return parsed
     if val.lower() in ("none", "n/a", ""):
         return parsed
+    # Don't filter safe negative phrases (e.g., "None currently being taken.")
+    val_clean = val.strip().lower()
+    if val_clean.startswith("none") or val_clean.startswith("not ") or val_clean.startswith("no "):
+        return parsed
 
     combined = supportive_whitelist | oncology_whitelist
     # Split by comma, semicolon, or newline
@@ -890,12 +894,35 @@ SAFE_NEGATIVE_PATTERNS = [
     r"^no\s+procedures\s+planned",       # "No procedures planned."
 ]
 
+# Standard classification values that G3 should preserve (these are category labels, not free text)
+CLASSIFICATION_VALUES = {
+    "new patient", "follow up", "follow-up", "established patient",
+    "curative", "palliative", "adjuvant", "neoadjuvant", "risk reduction",
+    "yes", "no", "in-person", "telehealth",
+}
+
+# Words indicating the model made a reasonable inference (G3 should preserve these)
+INFERENCE_MARKERS = ["approximately", "likely", "possibly", "probably", "estimated",
+                     "not sure", "not certain", "uncertain", "equivocal", "originally"]
+
+# Fields where G6 should NOT change the value (categorical classifications, not free text)
+G6_NO_MODIFY_FIELDS = {"Patient type", "second opinion", "in-person", "goals_of_treatment"}
+
 def _is_safe_negative(text):
     """Check if text is a valid 'nothing here' response that G3 should preserve."""
     if not text or not isinstance(text, str):
         return False
     text_clean = text.strip().lower()
     return any(re.match(p, text_clean) for p in SAFE_NEGATIVE_PATTERNS)
+
+def _is_classification_or_inference(text):
+    """Check if text is a standard classification value or contains inference markers."""
+    if not text or not isinstance(text, str):
+        return False
+    text_clean = text.strip().lower()
+    if text_clean in CLASSIFICATION_VALUES:
+        return True
+    return any(marker in text_clean for marker in INFERENCE_MARKERS)
 
 VAGUE_TERMS = ["staging workup", "new symptoms", "will start medications",
                "further workup", "appropriate treatment", "as above",
@@ -1091,6 +1118,16 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                                 cleaned_parsed[k] = parsed[k]
                                 gate_log.append(f"      [G3-REVERT] {k}: reverted (G3 emptied all fields)")
 
+                    # Also revert individual fields that had classification/inference values
+                    # G3 should not empty "New patient", "Approximately Stage II", "Not sure", etc.
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        for k in emptied_fields:
+                            if cleaned_parsed.get(k) == "" or not cleaned_parsed.get(k):
+                                orig_val = str(parsed.get(k, ""))
+                                if _is_classification_or_inference(orig_val):
+                                    cleaned_parsed[k] = parsed[k]
+                                    gate_log.append(f"      [G3-REVERT-INFER] {k}: restored classification/inference \"{orig_val[:60]}\"")
+
                     parsed = cleaned_parsed
                     answer = json.dumps(cleaned_parsed, ensure_ascii=False)
                 else:
@@ -1208,7 +1245,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     f"- response_assessment should be how the cancer is CURRENTLY responding (imaging, labs, exam), "
                     f"NOT future plans (will start, plan to, she will have)\n"
                     f"- current_meds should be medications the patient is CURRENTLY taking, "
-                    f"NOT medications being discussed or planned\n\n"
+                    f"NOT medications being discussed or planned\n"
+                    f"- Nutrition referral means a REFERRAL TO a nutritionist/dietitian. "
+                    f"General diet advice from the oncologist (e.g., 'eat calcium-rich food', 'take Vitamin D') is NOT a nutrition referral — keep it as 'None'\n\n"
                     f"If a value does not answer its field's question, replace it with the correct answer "
                     f"from the original medical note. If no correct answer exists in the note, use an appropriate "
                     f"default (e.g., 'Not yet on treatment — no response to assess.' for response_assessment "
@@ -1239,6 +1278,13 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                                 if old_is_empty and new_val and new_val != "":
                                     semantic_parsed[k] = old_val  # keep empty
                                     gate_log.append(f"      [G6-PROTECT] {k}: blocked fill into empty field")
+
+                        # Protect classification fields from G6 modification
+                        if gate_config.get("preserve_negatives"):
+                            for k in original_keys_g6:
+                                if k in G6_NO_MODIFY_FIELDS and parsed.get(k) != semantic_parsed.get(k):
+                                    semantic_parsed[k] = parsed[k]  # keep original
+                                    gate_log.append(f"      [G6-PROTECT-CLASS] {k}: blocked modification of classification field")
 
                         changed = False
                         for k in original_keys_g6:

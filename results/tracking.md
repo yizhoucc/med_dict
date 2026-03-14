@@ -22,6 +22,24 @@
 
 ## Prompt 版本变更记录
 
+### v5 (2026-03-14): G3 过度清空 + G6 过度修正修复
+
+**变更原因：** v4 实验发现 G3 过度清空合理值 (B25/B26/B27) 和 G6 过度修正分类字段 (B24/B29)
+
+**代码变更：**
+1. `ult.py` — G3-REVERT-INFER: G3 清空字段后，检查原始值是否为分类值（"New patient"/"palliative" 等）或含推断标记（"approximately"/"not sure" 等），若是则恢复 → 修 B25/B26/B27
+2. `ult.py` — G6-PROTECT-CLASS: 分类字段（Patient type, second opinion, in-person, goals_of_treatment）禁止 G6 修改 → 修 B24
+3. `ult.py` — G6 prompt 增加 Nutrition referral 规则："diet advice ≠ nutrition referral" → 修 B29
+4. `ult.py` — POST-SUPP 安全否定保护: "None currently being taken." 等短语不再被当成药物列表过滤
+
+**新增常量：**
+- `CLASSIFICATION_VALUES`: 标准分类值集合（new patient, curative, palliative, yes, no 等）
+- `INFERENCE_MARKERS`: 推断标记词（approximately, not sure, likely 等）
+- `G6_NO_MODIFY_FIELDS`: G6 不得修改的分类字段集合
+- `_is_classification_or_inference()`: 检测值是否为分类/推断值
+
+**之前版本 (v4):** 同一天早些时候的变更
+
 ### v4 (2026-03-14): 提取精度 + gate 保护 + 药物过滤
 
 **变更原因：** v3 实验仍有 B14/B17/B20 未修复，根因分析显示需要更强的 prompt 指导 + 后处理
@@ -736,3 +754,280 @@ Qwen 32B (6-gate, split+CoT)          平均 ~1.2 错误/行
 - Row 24: Type_of_Cancer 捕捉到受体变化 + Stage 完整
 
 **Qwen 32B 新引入问题：** B15-B20 共 6 个新 Bug
+
+---
+
+## v4 + G3-REVERT 逐行审查: `default_qwen_20260314_131143`
+
+> 与原始笔记逐行对比。前序实验 Bug 状态更新 + 新引入问题追踪。
+
+### Bug 修复状态汇总
+
+| Bug | 描述 | 之前状态 | 当前状态 | 说明 |
+|-----|------|---------|---------|------|
+| B13 | goals_of_treatment 退化 | 未修复 | **✓ FIXED** | G3-REVERT 恢复 "palliative" (Row 21) |
+| B14 | response_assessment 写 "Not mentioned" | 不稳定 | **✗ NOT FIXED** | 提取不稳定：上一次跑对了，这次又写 "Not mentioned" |
+| B15 | A/P 文本串字段 | — | **✓ FIXED** | 不再整段复制 A/P 到多字段 |
+| B16 | Lab_Plan 归类错误 | FIXED | **✓ FIXED** | Lab_Plan 正确归类 |
+| B17 | supportive_meds 未来方案当现用 | FIXED | **✓ FIXED** | Row 20 不再写 "Bisphosphonate therapy" |
+| B18 | summary 药名矛盾 | NOT FIXING | NOT FIXING | 原文数据错误 (Irinotecan vs ixabepilone) |
+| B19 | recent_changes 模板串行 | IMPROVED | **✓ FIXED** | 不再出现 "no response to assess" |
+| B20 | Referral 包含 Med Onc | NOT FIXED | **✗ NOT FIXED** | Row 20 仍写 "Rad Onc, Med Onc" |
+| B21 | supportive_meds 非肿瘤药 | FIXED | **✓ FIXED** | POST-SUPP 白名单过滤正常 |
+| B22 | 安全否定值被清空 | FIXED | **✓ FIXED** | G3-PROTECT 正常工作 |
+
+### Row 20 (coral_idx=160) — DCIS 术后辅助治疗咨询
+
+**原文关键信息：**
+- 70岁女性，由乳腺外科医生转介首次 Med Onc 就诊
+- "referred to ***** (today's visit) and also Rad Onc"
+- 右乳 DCIS，ER+(98%)/PR+(90%)，~5.0cm，切缘阴性
+- 不在任何处方药上，骨质减少→维生素D+钙
+- 基因检测（Invitae）已完成（过去）
+
+| 字段 | 输出 | 正确? | 问题 |
+|------|------|-------|------|
+| Patient type | "follow up" | **错** | 模型提取 "New patient"（正确），但 **G6-SEMANTIC 改为 "follow up"**（过度修正） |
+| second opinion | "" | OK | G3 清空，G6 阻止回填 |
+| summary | "Right breast DCIS post-partial mastectomy..." | OK | 准确 |
+| Type_of_Cancer | "ER+/PR+ DCIS" | OK | |
+| Stage_of_Cancer | "Not mentioned in note" | 可接受 | DCIS 未明确写分期 |
+| Metastasis | "No" | OK | |
+| lab_summary | "No labs in note." | OK | |
+| findings | 详细病理+体检 | **优秀** | |
+| current_meds | "" | OK | 原文 "not on any prescription meds" |
+| supportive_meds | "" | OK | POST-SUPP 过滤掉 "vitamin D, calcium"（这是骨质减少的补充剂，非癌症支持药） |
+| goals_of_treatment | "risk reduction" | OK | |
+| response_assessment | "Not yet on treatment" | OK | |
+| Genetic_Testing_Plan | "None planned." | OK | 基因检测是过去（2016），不是计划 |
+| Referral Specialty | "Rad Onc, Med Onc" | **错** | **B20** Med Onc 是本次就诊 |
+| follow up | "in two weeks...3-4 months" | OK | |
+
+**Row 20 问题：2 个**
+1. Patient type: G6 过度修正（B24 新问题）
+2. Referral: B20 未修复
+
+---
+
+### Row 21 (coral_idx=161) — 转移性乳腺癌，第二意见
+
+**原文关键信息：**
+- 72岁女性，"New Patient Evaluation"，second opinion
+- ER+/PR+/HER2- IDC，原 Stage II，现转移(IV)
+- 骨、胸壁、锁骨下、内乳淋巴结转移
+- 当前用药：anastrozole, denosumab, prednisone(肺炎)
+- PET 示良好反应 (11/03/20 和 04/24/21)
+- 计划：PET CT → 根据结果调整
+
+| 字段 | 输出 | 正确? | 问题 |
+|------|------|-------|------|
+| Patient type | "New patient" | OK | ✓ |
+| second opinion | "yes" | OK | ✓ |
+| Type_of_Cancer | "ER+/PR+/HER2- IDC" | OK | |
+| Stage_of_Cancer | "Originally Stage II, now metastatic (Stage IV)" | **优秀** | |
+| Metastasis | "Yes (bones, chest wall, infraclavicular, IM nodes)" | **优秀** | |
+| lab_summary | 完整 CBC+CMP | **优秀** | |
+| findings | PET 反应+体检 | OK | |
+| current_meds | "anastrozole, denosumab" | OK | |
+| recent_changes | "abemaciclib held...letrozole→anastrozole..." | **优秀** | |
+| supportive_meds | "prednisone, denosumab, lomotil" | 部分 | denosumab 同时在 current_meds（重复） |
+| goals_of_treatment | "palliative" | OK | **B13 FIXED** via G3-REVERT |
+| response_assessment | "PET scan showed a good response" | OK | |
+| radiotherapy_plan | "XRT to L4 and T10 in June 2020" | **错** | **过去治疗**不是计划。G4 未捕获 |
+| Procedure_Plan | "I recommend a pet ct now..." | **错** | PET CT 是影像不是手术 |
+| Genetic_Testing_Plan | "If progression could use faslodex..." | **错** | 治疗方案，非基因检测 |
+| Referral follow up | 整段治疗计划 | **错** | 应只写时间 |
+
+**Row 21 问题：4 个**
+1. radiotherapy_plan: 过去治疗 (B30 新问题)
+2. Procedure_Plan: 影像内容放错字段 (B15 残留变体)
+3. Genetic_Testing_Plan: 治疗方案放错字段 (B15 残留变体)
+4. Referral follow up: 内容过多 (轻微)
+
+---
+
+### Row 22 (coral_idx=162) — 新患者，术后辅助治疗
+
+**原文关键信息：**
+- 63岁女性，首次 Med Onc 就诊讨论治疗方案
+- 左乳切除+SLN 活检：1cm ILC + 0.7cm IDC/ILC，ER+(>95%)/PR(60%)/HER2 IHC 2+ FISH-
+- 0/1 SLN 阳性
+- 计划：letrozole、基线 DEXA、钙+维D+运动、随访 3 月
+- 遗传测试（MYRIAD，BRCA2 VUS）已完成
+
+| 字段 | 输出 | 正确? | 问题 |
+|------|------|-------|------|
+| Patient type | "New patient" | OK | ✓（vs 之前 8B 写 "Follow up"） |
+| summary | "63 y.o. with newly diagnosed breast cancer..." | OK | |
+| Type_of_Cancer | "ER+/PR+/HER2- invasive carcinoma with ductal and lobular features" | OK | |
+| Stage_of_Cancer | "" | **空** | 模型提取 "Approximately Stage I-II (1cm+0/1 SLN)"，**G3 清空了**（过度严格） |
+| lab_summary | "POCT glucose: 105, 185, 236(H), 116" | OK | 术中血糖，是笔记唯一的 lab |
+| findings | 详细病理+体检 | **优秀** | |
+| current_meds | "" | OK | 术后未开始用药 |
+| recent_changes | "None." | OK | G6 正确判断：letrozole 只是讨论，尚未开始 |
+| goals_of_treatment | "adjuvant" | OK | G3-REVERT 恢复 |
+| response_assessment | "Not yet on treatment" | OK | |
+| Imaging_Plan | "baseline DEXA" | OK | DEXA 正确归类为影像 |
+| Lab_Plan | "No labs planned." | OK | DEXA 不再放 Lab（B16 已修） |
+| Genetic_Testing_Plan | "None planned." | OK | 遗传测试是过去 |
+| Referral Nutrition | "Maintain a calcium-rich diet..." | **错** | **G6-SEMANTIC 过度修正**：prompt 明确说 "diet advice ≠ nutrition referral" |
+| Medication_Plan_chatgpt | {} | 轻微 | G2 schema fix 失败 |
+
+**Row 22 问题：2 个**
+1. Stage_of_Cancer: G3 清空合理推断 (B26 新问题)
+2. Referral Nutrition: G6 填入饮食建议 (B29 新问题)
+
+---
+
+### Row 23 (coral_idx=163) — 术后讨论全身治疗
+
+**原文关键信息：**
+- 56岁女性，右乳 Grade II 微乳头状粘液癌
+- ER+(>95%)/PR+(80%)/HER2 IHC(2) FISH-，Ki-67 5%
+- 5.x cm 肿瘤，2/4 SLN 阳性(0.4mm)
+- PET CT 无明确转移；肝脏病灶考虑良性
+- 计划：送 MammaPrint、如低风险→放疗+辅助内分泌治疗
+- 转诊：放疗科(12/07/18)、PT
+
+| 字段 | 输出 | 正确? | 问题 |
+|------|------|-------|------|
+| Patient type | "" | **空** | 模型提取 "New patient"（正确），**G3 清空，G6-PROTECT 阻止回填** |
+| summary | "56 y.o. female with...mucinous carcinoma..." | OK | |
+| Type_of_Cancer | "ER+/PR+/HER2 equivocal neg FISH Grade II micropapillary mucinous carcinoma" | OK | 详细 |
+| Stage_of_Cancer | "Not mentioned in note" | 可接受 | G3-PROTECT 恢复 |
+| Metastasis | "" | **空** | G3 清空 "Not sure"，G6-PROTECT 阻止回填。PET 说 "no definite sites" 但肝灶未排除 |
+| findings | 病理+影像+体检 | **优秀** | 全面详细 |
+| current_meds | "" | OK | 术后未开始 |
+| supportive_meds | "Tylenol #4, oxycodone" | OK | 术后疼痛药，白名单匹配 |
+| goals_of_treatment | "adjuvant" | OK | G3-REVERT |
+| Genetic_Testing_Plan | "We will send her surgical specimen for MP." | **优秀** | MammaPrint 正确归类 |
+| Referral Specialty | "Radiation oncology consult" | OK | ✓ |
+| Referral Others | "Physical therapy" | OK | ✓ |
+
+**Row 23 问题：2 个**
+1. Patient type: G3 清空 "New patient" (B25 新问题，同 B24 模式)
+2. Metastasis: G3 清空 "Not sure" (B27 新问题)
+
+---
+
+### Row 24 (coral_idx=164) — 转移性乳腺癌，化疗随访
+
+**原文关键信息：**
+- 45岁女性，转移性乳腺癌 (脑、肝、骨、淋巴结、乳房皮肤)
+- 当前方案：Xeloda 1500/1000mg + ixabepilone + denosumab
+- 原始 ER+/PR+/HER2-，左乳 ER+/PR-/HER2-，脑转灶三阴
+- A/P 关键证据："supraclavicular area appears to be breaking up"、"labs okay to proceed"
+- 计划：3周后扫描，04/12 重启化疗周期
+
+| 字段 | 输出 | 正确? | 问题 |
+|------|------|-------|------|
+| Patient type | "Follow up" | OK | |
+| summary | "on Xeloda and Irinotecan regimen" | **错** | **B18** 原文 header 数据错误（应为 ixabepilone） |
+| Type_of_Cancer | "Originally ER+/PR+/HER2-, metastatic ER+/PR-/HER2-" | **优秀** | 捕获受体变化 |
+| Stage_of_Cancer | "Originally Stage IIA, now metastatic (Stage IV)" | **优秀** | |
+| Metastasis | "Yes (brain, liver, bones, lymph nodes)" | **优秀** | |
+| lab_summary | 完整 CBC+CMP | **优秀** | |
+| findings | 包含 "supraclavicular area appears to be breaking up" | **优秀** | |
+| current_meds | "capecitabine, ixabepilone" | OK | G6 移除 denosumab（轻微遗漏） |
+| supportive_meds | "ondansetron, docusate, prochlorperazine, oxycodone, miralax" | OK | POST-SUPP 正确过滤 |
+| goals_of_treatment | "palliative" | OK | G3-REVERT |
+| response_assessment | "Not mentioned in note." | **错** | **B14** 原文有响应证据但模型未提取（不稳定） |
+| Imaging_Plan | "Scan in 3 weeks" | OK | |
+| Genetic_Testing_Plan | "None planned." | OK | |
+
+**Row 24 问题：1 个（+1 已知）**
+1. response_assessment: B14 提取不稳定
+2. summary: B18 数据错误（不修复）
+
+---
+
+### 新发现问题
+
+**B24: G6-SEMANTIC 过度修正 Patient type (P1)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 20**
+- 错误表现: 模型正确提取 "New patient"，G6-SEMANTIC 改为 "follow up"
+- 根因: G6 模型认为 DCIS 术后讨论 = 随访，但实际是首次 Med Onc 就诊
+
+**B25: G3 过度清空 Patient type (P1)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 23**
+- 错误表现: 模型正确提取 "New patient"，G3-FAITH 清空，G6-PROTECT 阻止回填 → 最终为空
+- 根因: G3 在笔记中找不到 "New Patient Evaluation" 等显式标记，就清空了合理推断
+
+**B26: G3 过度清空推断的 Stage (P1)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 22**
+- 错误表现: 模型提取 "Approximately Stage I-II (1cm and 0/1 SLN positive)"，G3 清空
+- 根因: G3 要求原文明确写分期，但 prompt 鼓励从肿瘤大小+LN 推断
+
+**B27: G3 过度清空 Metastasis "Not sure" (P2)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 23**
+- 错误表现: 模型提取 "Not sure"（合理：PET 说 "no definite sites" 但肝灶未排除），G3 清空
+- 根因: G3 对模糊/不确定答案一律清空
+
+**B29: G6-SEMANTIC 填入饮食建议作为 Nutrition referral (P1)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 22**
+- 错误表现: G6 将 Nutrition 从 "None" 改为 "Maintain a calcium-rich diet, take Vitamin D, exercise..."
+- 根因: G6 忽略 prompt 规则 "General diet advice from the oncologist is NOT a nutrition referral"
+
+**B30: radiotherapy_plan 写过去治疗 (P2)**
+- 发现于: `default_qwen_20260314_131143`
+- 受影响 Rows: **Row 21**
+- 错误表现: radiotherapy_plan 写 "XRT to L4 and T10 in June 2020"（2020年已完成治疗）
+- 根因: G4-TEMPORAL 和 G6-SEMANTIC 均未纠正
+
+---
+
+### 问题模式分析
+
+**模式 1: G3 过度清空合理值 (3 实例: B25, B26, B27)**
+- G3-FAITH 对非逐字引用的值太严格
+- 影响：Patient type 推断、Stage 推断、不确定答案 ("Not sure") 都被清空
+- G3-REVERT 只在全部字段被清空时触发，单字段清空无法恢复
+- 需要: 要么放宽 G3 prompt ("keep if reasonably inferable"), 要么扩展 G3-REVERT 逻辑
+
+**模式 2: G6 过度修正 (2 实例: B24, B29)**
+- G6-SEMANTIC 有时会把正确值改错
+- B24: "New patient" → "follow up" (G6 误判就诊类型)
+- B29: "None" → 饮食建议 (G6 无视 prompt 规则)
+- 需要: 给 G6 更严格的约束（不改 Patient type、不违反 prompt 显式规则）
+
+**模式 3: Plan 字段残留串行 (Row 21, 3 实例: B30 + B15 变体)**
+- Row 21 的 A/P 段短而密集，多个计划字段仍提取到相同的治疗方案文本
+- 与 B15 不同的是不再是整段复制，而是模型对短文本的理解能力不足
+- 需要: 考虑给 Row 21 类型的密集 A/P 段做更细致的 prompt 指导
+
+**模式 4: B14 提取不稳定 (Row 24)**
+- v4 prompt 上一次跑出正确结果，这次又回到 "Not mentioned"
+- 即使 greedy decoding，浮点差异也导致不同输出
+- 可能需要: 更强的 prompt 锚定或多次生成取最佳
+
+---
+
+### 整体质量评估 (v4 + G3-REVERT)
+
+| Row | 严重问题 | 轻微问题 | 质量评估 |
+|-----|---------|---------|---------|
+| 20 | 1 (Patient type) | 1 (Referral B20) | 中等 |
+| 21 | 0 | 4 (plan 字段串行) | 良好（核心字段全部正确） |
+| 22 | 1 (Stage 空) | 1 (Nutrition G6) | 中等 |
+| 23 | 1 (Patient type 空) | 1 (Metastasis 空) | 中等 |
+| 24 | 1 (response B14) | 0 | 中等 |
+
+**vs 之前版本改进:**
+- B13 ✓ (goals "palliative" 恢复)
+- B17 ✓ (不再写 "Bisphosphonate therapy")
+- B19 ✓ (recent_changes 不再串模板)
+- B21 ✓ (非肿瘤药被过滤)
+- B22 ✓ (安全否定值保留)
+- 核心字段（Type_of_Cancer, Stage, Metastasis, lab_summary, findings）质量显著提升
+
+**待修复优先级:**
+1. **P0**: G3 过度清空 Patient type/Stage/Metastasis (B25, B26, B27) — 影响 3/5 行
+2. **P1**: G6 过度修正 (B24, B29) — 影响 2/5 行
+3. **P1**: B14 response_assessment 不稳定 — 影响 1/5 行
+4. **P2**: B20 Referral 包含 Med Onc — 影响 1/5 行
+5. **P2**: B30 radiotherapy_plan 过去治疗 — 影响 1/5 行
