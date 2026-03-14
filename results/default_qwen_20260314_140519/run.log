@@ -489,3 +489,21 @@ Processing row 22 (3/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 124.2s
+    Medication_Plan_chatgpt: 47.9s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will start letrozole for at least five years of adjuvant hormonal therapy. Discussion of extending hormonal therapy beyond 5 years is individual
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] hormonal therapy: "{'summary': "Patient will start letrozole for at least five years of adjuvant ho" -> "{'summary': "Patient will start letrozole for at least five years of adjuvant ho"
+      [G6-SEMANTIC] hormonal therapy: "{'summary': "Patient will start letrozole for at least five years of adjuvant ho" -> "{'summary': "Patient will start letrozole for at least five years of adjuvant ho"
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment'}
+    Medication_Plan: 22.9s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at least five years of treatment. If side effects such as joint pains are difficult to manage, the
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
