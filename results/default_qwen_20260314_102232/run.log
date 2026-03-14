@@ -97,3 +97,32 @@ Processing row 20 (1/5)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 64.7s
+    Medication_Plan_chatgpt: 74.6s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] other treatment: "{'summary': 'No other specific treatments were mentioned in " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-TEMPORAL] bone therapy: "{'summary': 'Plan to mitigate the risk of bone density complications with bispho" -> ""
+      [G4-TEMPORAL] other treatment: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'Plan to discuss the addition of adjuvant XRT to minimize her future" -> "{'summary': 'Plan to discuss the addition of adjuvant XRT to minimize her future"
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Plan to discuss the addition of an aromatase inhibitor like Arimide" -> ""
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'other_treatment', 'hormonal_therapy', 'bone_therapy', 'radiotherapy'}
+    Medication_Plan: 16.7s
+      [EXTRACT] raw={
+    "medication_plan": "Aromatase inhibitor (e.g., Arimidex) for 5 years after breast XRT to reduce risk of recurrent DCIS or progression to invasive ductal cancer. Bisphosphonate therapy to mitigat
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 29.5s
+      [EXTRACT] raw={
+    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She wi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
