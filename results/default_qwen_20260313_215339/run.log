@@ -1,0 +1,21 @@
+Loading model...
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 656, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 506, in main
+    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 372, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4015, in from_pretrained
+    hf_quantizer, config, device_map = get_hf_quantizer(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/auto.py", line 318, in get_hf_quantizer
+    hf_quantizer = AutoHfQuantizer.from_config(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/auto.py", line 184, in from_config
+    return target_cls(quantization_config, **kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/quantizer_gptq.py", line 51, in __init__
+    self.optimum_quantizer = GPTQQuantizer.from_dict(self.quantization_config.to_dict_optimum())
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/optimum/gptq/quantizer.py", line 251, in from_dict
+    return cls(**config_dict)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/optimum/gptq/quantizer.py", line 168, in __init__
+    self.quantizeConfig = QuantizeConfig(
+NameError: name 'QuantizeConfig' is not defined

@@ -497,12 +497,13 @@ def main():
             quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 
     tokenizer = AutoTokenizer.from_pretrained(model_cfg["name"])
-    model = AutoModelForCausalLM.from_pretrained(
-        model_cfg["name"],
-        device_map=model_cfg.get("device_map", "auto"),
-        dtype=torch_dtype,
-        quantization_config=quantization_config,
-    )
+    load_kwargs = {
+        "device_map": model_cfg.get("device_map", "auto"),
+        "torch_dtype": torch_dtype,
+    }
+    if quantization_config is not None:
+        load_kwargs["quantization_config"] = quantization_config
+    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
     print("Model loaded.")
 
     # 6. Load data
