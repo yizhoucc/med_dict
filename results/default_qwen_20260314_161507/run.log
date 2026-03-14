@@ -457,3 +457,55 @@ Processing row 27 (3/10)...
       [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.9s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calciu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 21.0s
+      [EXTRACT] raw={
+"findings": "Pathology results from right lumpectomy show 0.9 cm grade 1 IDC, no vascular invasion, negative margins, and 0/3 LN+. Imaging findings from breast MRI show a mass (0.9 x 0.7 cm) in the 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 12.0s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "" -> "acetaminophen, amLODIPine, artificial tears, ascorbic acid, "
+      [G6-SEMANTIC] current_meds: "acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC " -> ""
+    Treatment_Changes: 8.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium citrate-vitamin D, DULoxetine, pregabalin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] calcium citrate-vitamin D, DULoxetine, pregabalin -> 
+    Treatment_Goals: 4.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 112.1s
