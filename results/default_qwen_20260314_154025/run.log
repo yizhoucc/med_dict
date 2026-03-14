@@ -1702,3 +1702,72 @@ Processing row 33 (9/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "arimidex" -> ""
+      [G3-FAITH] EMPTIED: ['current_meds']
+      [G3-REVERT] current_meds: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] current_meds: "arimidex" -> ""
+    Treatment_Changes: 7.2s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "tamoxifen 20mg PO qD",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "tamoxifen 20mg PO qD" -> "anastrozole *****-***** self D/Ced against advice, declined CW XRT, tamoxifen 20"
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 75.8s
+    Medication_Plan_chatgpt: 19.5s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "tamoxifen 20mg PO qD will be started. Anastrozole was previously stopped against medical advice.",
+        "Short term side_effects_discussed": "thrombo
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'tamoxifen 20mg PO qD will be started. Anastrozole was previously st" -> "{'summary': 'tamoxifen 20mg PO qD will be started.', 'Short term side_effects_di"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'hormonal therapy'}
+    Medication_Plan: 5.8s
+      [EXTRACT] raw={
+    "medication_plan": "tamoxifen 20mg PO qD"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 9.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "tamoxifen 20mg PO qD, referral to radiation oncology for chest wall RT, check labs, return to clinic in 6 months"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "tamoxifen 20mg PO qD, referral to radiation oncology for chest wall RT, check la" -> "tamoxifen 20mg PO qD, referral to radiation oncology for chest wall RT, return t"
+      [G6-SEMANTIC] ok (all values answer their fields)
