@@ -858,3 +858,10 @@ Processing row 29 (5/10)...
       [G6-SEMANTIC] Distant_Metastasis: "Not sure" -> "No"
       [G6-SEMANTIC] Metastasis: "Not sure" -> "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 45.1s
+      [EXTRACT] raw={
+"lab_summary": "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/15), ***** 17.9, CA 27.29 78.3, CA 15-3 69 (01/26/16), ***** 20, CA 27.29 98.8, CA 15-3 74.5 (02/27/16), 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
