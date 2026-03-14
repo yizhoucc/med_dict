@@ -849,3 +849,29 @@ Processing row 24 (5/5)...
       [G3-FAITH] response_assessment: "Scan in 3 weeks. Not mentioned in note." -> "Scan in 3 weeks"
       [G6-SEMANTIC] response_assessment: "Scan in 3 weeks" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 131.8s
+    Medication_Plan_chatgpt: 37.9s [schema-fixed, faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days off. Ixabepilone is also part of the treatment regimen. The patient is currently in the 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Taking 1500/1000mg 14 days and 7 days off with ixabepilone" -> "['Taking 1500/1000mg 14 days and 7 days off with ixabepilone"
+      [G4-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Taking 1500/1000mg 14 days and 7 days off with ixabepilone', 'Port placed on 9" -> "['Taking 1500/1000mg 14 days and 7 days off with ixabepilone']"
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Taking 1500/1000mg 14 days and 7 days off with ixabepilone']" -> "{'summary': 'Taking 1500/1000mg 14 days and 7 days off with ixabepilone ***** To"
+      [POST-KEYS] stripped: {'Reviewed principles of pain management with family member and patient.', 'Reviewed treatment options, treatment side effects in detail.'}
+    Medication_Plan: 23.3s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Try ibuprofen or Tylenol in the morning and oxycodone in t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 25.2s [temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starting on 04/12/2011. Continue with chemotherapy as labs are okay to proceed. Pain management include
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti" -> "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti"
+      [G6-SEMANTIC] therapy_plan: "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti" -> "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starti"
