@@ -108,3 +108,19 @@ Processing row 20 (1/5)...
       [G3-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for" -> "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for"
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Arimidex (an aromatase inhibitor) for 5 years after XRT t" -> "[{'hormonal therapy': {'summary': 'Arimidex (an aromatase inhibitor) for 5 years"
+    Medication_Plan: 18.8s
+      [EXTRACT] raw={
+    "medication_plan": "Consideration of aromatase inhibitor therapy (e.g., Arimidex) for 5 years after breast XRT to reduce risk of recurrent DCIS or progression to invasive ductal cancer. Bisphosp
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 28.8s
+      [EXTRACT] raw={
+    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She wi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
