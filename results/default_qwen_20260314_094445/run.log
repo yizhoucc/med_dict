@@ -847,3 +847,44 @@ Processing row 24 (5/5)...
       [G3-FAITH] response_assessment: "Scan in 3 weeks. Not mentioned in note." -> "Scan in 3 weeks"
       [G6-SEMANTIC] response_assessment: "Scan in 3 weeks" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 160.4s
+    Medication_Plan_chatgpt: 63.9s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days off. Ixabepilone is also part of the treatment regimen. The patient is currently in the 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'other treatment']
+      [G3-FAITH] other treatment: "{'summary': 'Calendars were given to the patient to track Xe" -> "{'summary': 'Calendars were given to the patient to track Xe"
+      [G3-FAITH] pain medication: "{'summary': 'Patient is advised to try ibuprofen or Tylenol " -> "{'summary': 'Patient is advised to try ibuprofen or Tylenol "
+      [G3-FAITH] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 " -> "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 "
+      [G4-TEMPORAL] other treatment: "{'summary': 'Calendars were given to the patient to track Xeloda when on and off" -> "{'summary': 'Calendars were given to the patient to track Xeloda when on and off"
+      [G4-TEMPORAL] pain medication: "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o"
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days" -> "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days"
+      [G6-SEMANTIC] other treatment: "{'summary': 'Calendars were given to the patient to track Xeloda when on and off" -> "{'summary': 'Calendars were given to the patient to track Xeloda when on and off"
+      [G6-SEMANTIC] pain medication: "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or Tylenol in the morning and o"
+      [G6-SEMANTIC] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days" -> "{'summary': 'Patient is taking 1500/1000mg of Xeloda for 14 days and then 7 days"
+      [POST-KEYS] stripped: {'other treatment', 'pain medication', 'chemotherapy'}
+    Medication_Plan: 24.5s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Try ibuprofen or Tylenol in the morning and oxycodone in t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 30.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. Today is off week, and the patient will start the cycle again on 04/12/2011. The patient is to try ibup
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] therapy_plan: "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. Today " -> "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. The pa"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 2.7s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G6-SEMANTIC] radiotherapy_plan: "" -> "None"
