@@ -1,4 +1,4 @@
-Source: default_qwen.yaml | Run started: 2026-03-14 11:48:35
+Source: default_qwen.yaml | Run started: 2026-03-14 12:46:31
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -129,9 +129,16 @@ For recent_changes: Any holds, dose reductions, switches, or newly started medic
 Do NOT include changes from months or years ago.
 
 For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
-- ONLY include medications the patient is actively taking right now.
-- Do NOT include medications merely DISCUSSED or RECOMMENDED for the future (e.g., "we discussed bisphosphonate therapy" or "could be mitigated with bisphosphonate" = NOT current, do NOT include).
-- Do NOT include: allergies (ALL: section), non-cancer comorbidity medications, medications marked "Patient not taking".
+
+CRITICAL rules for supportive_meds — read carefully:
+- ONLY include medications the patient is actively taking RIGHT NOW. Look for: "taking", "currently on", "continue", listed in Active Medications.
+- Do NOT include medications that are only DISCUSSED, RECOMMENDED, or HYPOTHETICAL:
+  * "could be mitigated with bisphosphonate" = NOT current (hypothetical)
+  * "we discussed starting..." = NOT current (discussion only)
+  * "may consider..." = NOT current (future possibility)
+  * "if side effects occur, could use..." = NOT current (contingency)
+- Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds), medications marked "Patient not taking".
+- Do NOT include anxiety/sleep medications (lorazepam, zolpidem) or seizure medications (levetiracetam) unless explicitly prescribed FOR cancer treatment side effects.
 IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
 
 Respond *only* with a JSON object using this exact schema:
@@ -172,9 +179,16 @@ Think step by step before answering:
    - Mentions of chemotherapy cycles, off weeks, dose adjustments (e.g., "off week", "cycle 3", "due to start next cycle")
    - "labs okay to proceed with chemotherapy" or similar pre-cycle clearance
    - Current medications include any oncologic drug (chemo, hormonal, targeted, immunotherapy)
+   - Active medication list contains chemotherapy drugs (Xeloda, ixabepilone, paclitaxel, etc.)
    Do NOT be confused by "off week" — a patient on an off week between chemo cycles IS on treatment.
 2. If yes, what treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)
-3. Is there any evidence of how the cancer is responding? Look for: imaging results (CT stable, PET response), tumor markers (CA 15-3 rising/falling), clinical exam findings (mass shrinking/growing, "appears to be breaking up"), symptom changes.
+3. Is there any evidence of how the cancer is responding? Search the ENTIRE note for ANY of these:
+   - Imaging: CT stable, PET response, scan results
+   - Tumor markers: CA 15-3, CEA rising or falling
+   - Physical exam: mass shrinking, "breaking up", palpable changes, skin changes improving
+   - Clinical status: "labs okay to proceed" (implies stable enough to continue)
+   - Symptom changes: "able to do more", "pain improving", "up and about"
+   Even brief exam comments like "area appears to be breaking up" count as response evidence.
 4. If no treatment started yet, write "Not yet on treatment — no response to assess."
 5. If on treatment but no response data in the note, write "Not mentioned in note."
 
@@ -346,7 +360,13 @@ Respond *only* with a JSON object using this exact schema:
 Do not mistake the doctor's signature at the end of the note as a referral.
 Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
 A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
-Do NOT include the current visit's own department as a referral (e.g., if this is a Medical Oncology note, do NOT list "Medical Oncology" as a referral).
+
+CRITICAL — distinguish OUTGOING from INCOMING referrals:
+- OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
+- INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred for consideration of adjunct therapy".
+- Do NOT include the current visit's own department. These notes are written by Medical Oncology — do NOT list "Medical Oncology" or "Med Onc" as a referral.
+- If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
+
 If no referral is mentioned for a category, set its value to "None".
 For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral.
 Respond *only* with a JSON object using this exact schema:
@@ -403,7 +423,7 @@ RESULTS FOR ROW 21
     "Patient type": "follow up",
     "second opinion": "",
     "in-person": "in-person",
-    "summary": "Right breast ductal carcinoma in situ (DCIS) post-partial mastectomy. Visit purpose is to consider adjunct therapy to reduce risk of DCIS recurrence or progression to invasive cancer."
+    "summary": "Right breast ductal carcinoma in situ (DCIS) diagnosed post partial mastectomy. Visit purpose is to consider adjunct therapy to reduce risk of DCIS recurrence or progression to invasive cancer."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+ DCIS",
@@ -414,7 +434,7 @@ RESULTS FOR ROW 21
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Right breast partial mastectomy showed intermediate nuclear grade DCIS, mixed solid papillary, cribiform pattern with some comedo necrosis, no invasive ductal cancer but DCIS spanning ~5.0 cm (9 contiguous slices), clear surgical margins. No palpable masses, skin changes, or lymphadenopathy noted on physical exam. Right breast has a small, well-healing partial mastectomy wound with no evidence of exudate or erythema."
+    "findings": "Right breast partial mastectomy showed intermediate nuclear grade DCIS, mixed solid papillary, cribiform pattern with some comedo necrosis, spanning ~5.0 cm with clear surgical margins. No invasive ductal cancer identified. Physical exam revealed a small, well-healing partial mastectomy wound on the right breast with no evidence of exudate or erythema. No palpable masses, skin changes, or lymphadenopathy noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -440,14 +460,14 @@ RESULTS FOR ROW 21
       },
       {
         "radiotherapy": {
-          "summary": "Adjuvant XRT to minimize future risk of recurrent DCIS or progression to invasive ductal cancer, potentially reducing 10 year risk from 25-30% to 15% or less",
+          "summary": "Adjuvant XRT to minimize future risk of recurrent DCIS or progression to invasive ductal cancer",
           "Short term side_effects_discussed": "Not discussed in the note.",
           "Long term side_effects_discussed": "Not discussed in the note."
         }
       },
       {
         "bone therapy": {
-          "summary": "Bisphosphonate therapy to mitigate the risk of bone density complications associated with aromatase inhibitor therapy",
+          "summary": "Bisphosphonate therapy to mitigate the risk of bone density complications from aromatase inhibitor therapy",
           "Short term side_effects_discussed": "Not discussed in the note.",
           "Long term side_effects_discussed": "Not discussed in the note."
         }
@@ -521,7 +541,7 @@ RESULTS FOR ROW 22
     "Patient type": "New patient",
     "second opinion": "yes",
     "in-person": "in-person",
-    "summary": "Patient presents for a second opinion regarding metastatic ER+ breast cancer with chest wall recurrence, bone metastases, and right infraclavicular and internal mammary nodes involvement. The patient was previously treated with lumpectomy, AC chemotherapy, radiation, and tamoxifen, and is currently on anastrozole and Xgeva. The purpose of this visit is to review the current treatment plan and discuss further management options."
+    "summary": "Patient presents for a second opinion regarding metastatic ER+ breast cancer with chest wall recurrence, bone metastases, and right infraclavicular and IM nodes involvement. The patient was previously treated with abemaciclib and letrozole, with letrozole switched to anastrozole due to side effects. She has also been on denosumab and recently developed pneumonitis thought to be due to abemaciclib, leading to its discontinuation."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
@@ -529,17 +549,17 @@ RESULTS FOR ROW 22
     "Metastasis": "Yes (to bones, chest wall, right infraclavicular and right IM nodes)"
   },
   "Lab_Results": {
-    "lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 80.1, MCH 36.1, MCHC 32.8, Platelet Count 254, MPV 8.6, Neutrophil Absolute Count 2.07, Neutrophils 65.5, Eosinophils Absolute 0.07, Eos 2.2, Basophil Abs Count 0.07, Basophils 2.2, RDW 13.7, Glucose, non-fasting 101, Urea Nitrogen, Serum / Plasma 21, Creatinine, Serum 1.19, eGFR - low estimate 46, eGFR - high estimate  53, BUN/Creatinine Ratio 18, Sodium, Serum / Plasma 138, Potassium, Serum / Plasma 4.8, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 25, Calcium, total, Serum / Plasma 9.4, Protein, Total, Serum / Plasma 7.3, Albumin, Serum / Plasma 4.6, Globulin, Total 2.7, A/G RATIO 1.7, Bilirubin, Total 0.4, Alkaline Phosphatase 67, AST 27, Alanine transaminase 21, Lactate Dehydrogenase 248, Uric Acid, Serum / Plasma 5.2. (Lab results from 01/29/2021)"
+    "lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 83.1, MCH 36.1, MCHC 32.8, Platelet Count 247, MPV 8.6, Neutrophil Absolute Count 2.07, Neutrophils 65.5, Eosinophils Absolute 0.07, Eos 2.2, Basophil Abs Count 0.07, Basophils 2.2, RDW 13.7, Glucose, non-fasting 102, Urea Nitrogen, Serum / Plasma 21, Creatinine, Serum 1.19, eGFR - low estimate 46, eGFR - high estimate  53, BUN/Creatinine Ratio 18, Sodium, Serum / Plasma 139, Potassium, Serum / Plasma 4.8, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 25, Calcium, total, Serum / Plasma 9.4, Protein, Total, Serum / Plasma 7.3, Albumin, Serum / Plasma 4.6, Globulin, Total 2.7, A/G RATIO 1.7, Bilirubin, Total 0.4, Alkaline Phosphatase 67, AST 27, Alanine transaminase 21, Lactate Dehydrogenase 245, Uric Acid, Serum / Plasma 5.2. (Lab results from 01/29/2021)"
   },
   "Clinical_Findings": {
-    "findings": "PET scan on 11/03/20 and 04/24/21 showed a good response. Physical exam: No acute distress, awake and alert, appears stated age. No oral lesions, neck supple no lymphadenopathy. Cardiac: Regular rate, rhythm no murmur. Lungs: clear to auscultation. Abdomen: Soft, non tender, non distended. No edema. No peripheral adenopathy. Normal UE and LE strength. No rash. No mass or skin changes in the breast. Lumpectomy sites normal. No chest wall mass palpated."
+    "findings": "Patient has a history of left DCIS in 1994 and right stage II IDC in 2000. Metastatic relapse in May 2020 with right chest wall recurrence, bone metastases, and right infraclavicular and IM nodes involvement. HR+ and HER2 negative. PET scan on 11/03/20 and 04/24/21 showed a good response. Physical exam: no acute distress, no palpable masses, no skin changes, no lymphadenopathy, no edema, normal strength, no rash, no chest wall mass palpated. Pneumonitis due to abemaciclib, started on steroids, abemaciclib discontinued."
   },
   "Current_Medications": {
     "current_meds": "anastrozole, denosumab"
   },
   "Treatment_Changes": {
-    "recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; started on steroids.",
-    "supportive_meds": "prednisone, diphenoxylate-atropine (LOMOTIL), denosumab (XGEVA)"
+    "recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; dose of ***** reduced in October 2020 due to side effects; letrozole switched to anastrozole in July 2020 due to skin rash.",
+    "supportive_meds": "prednisone (DELTASONE) 20 mg tablet, denosumab (XGEVA) 120 mg/1.7 mL (70 mg/mL) injection, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet"
   },
   "Treatment_Goals": {
     "goals_of_treatment": ""
@@ -552,41 +572,9 @@ RESULTS FOR ROW 22
       {
         "type": "hormonal therapy",
         "details": {
-          "summary": "Letrozole changed to arimidex. In June 2020 started on abemaciclib and *****. Letrozole changed to arimidex. ***** dose reduced due to toxicity. In July 2021, abemaciclib discontinued.",
-          "Short term side_effects_discussed": "***** dose reduced due to toxicity.",
-          "Long term side_effects_discussed": "Not specified in the note."
-        }
-      },
-      {
-        "type": "other treatment",
-        "details": {
-          "summary": "Started on steroids for pneumonitis in July 2021.",
-          "Short term side_effects_discussed": "Not specified in the note.",
-          "Long term side_effects_discussed": "Not specified in the note."
-        }
-      },
-      {
-        "type": "hormonal therapy",
-        "details": {
-          "summary": "If PET CT shows progression, could use faslodex with ***** if she has a ***** mutation.",
-          "Short term side_effects_discussed": "Not specified in the note.",
-          "Long term side_effects_discussed": "Not specified in the note."
-        }
-      },
-      {
-        "type": "other treatment",
-        "details": {
-          "summary": "Future options include hormone blockade with afinitor or xeloda or a clinical trial.",
-          "Short term side_effects_discussed": "Not specified in the note.",
-          "Long term side_effects_discussed": "Not specified in the note."
-        }
-      },
-      {
-        "type": "radiotherapy",
-        "details": {
-          "summary": "In June 2020, XRT to L4 and T10.",
-          "Short term side_effects_discussed": "Not specified in the note.",
-          "Long term side_effects_discussed": "Not specified in the note."
+          "summary": "Letrozole changed to arimidex. If PET CT shows progression, could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade with afinitor or xeloda.",
+          "Short term side_effects_discussed": "Not discussed in the note.",
+          "Long term side_effects_discussed": "Not discussed in the note."
         }
       }
     ]
@@ -604,7 +592,7 @@ RESULTS FOR ROW 22
     "procedure_plan": "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
   },
   "Imaging_Plan": {
-    "imaging_plan": "I recommend a pet ct now"
+    "imaging_plan": "I recommend a pet ct now and if stable continue arimidex alone."
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -669,7 +657,7 @@ RESULTS FOR ROW 23
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "Not yet on treatment — no recent changes to report.",
+    "recent_changes": "None.",
     "supportive_meds": ""
   },
   "Treatment_Goals": {
@@ -680,10 +668,10 @@ RESULTS FOR ROW 23
   },
   "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Patient will begin letrozole for adjuvant hormonal therapy, with a plan for at least five years of treatment. If side effects such as joint pains are difficult to manage, the patient may switch to another aromatase inhibitor or consider tamoxifen. The patient is encouraged to take at least 1000-2000 IU of Vitamin D per day and maintain a calcium-rich diet."
+    "medication_plan": "Patient will start letrozole for adjuvant hormonal therapy. The patient will receive at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond  5 years will be individualized based on the patient's risk and tolerance of hormonal therapy. If the patient is unable to tolerate the joint pains associated with aromatase inhibitors, they may switch to another aromatase inhibitor or tamoxifen. The patient is encouraged to take at least 800-1000 IU of Vitamin D per day."
   },
   "Therapy_plan": {
-    "therapy_plan": "Patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond  5 years will be individualized based on the patient's risk and tolerance. A baseline DEXA has been ordered, and the role of bone-targeted therapies will be discussed further in the future. Patient is encouraged to maintain a calcium-rich diet, take an adequate amount of Vitamin D (typically at least 800-1000 IU per day), and engage in weight-bearing exercise."
+    "therapy_plan": "The patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond  5 years will be individualized based on the patient's risk and tolerance. A baseline DEXA has been ordered, and the role of bone-targeted therapies will be discussed further along in treatment. The patient is encouraged to maintain a calcium-rich diet, take an adequate amount of Vitamin D (typically at least 800-1000 IU per day), and engage in weight-bearing exercise."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -751,7 +739,7 @@ RESULTS FOR ROW 24
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology: Right breast excision showed Grade II micropapillary mucinous carcinoma with ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, and 5% Ki-67. No vascular or lymphovascular invasion, 2 sentinel lymph nodes with micropapillary mucinous carcinoma out of 4 examined. Imaging: PETCT showed slight hypermetabolism within right breast lesion, no definite metastatic disease. CT showed hypervascular masses in the liver, considered benign. Physical exam: Edema in right chest wall, no masses, no axillary adenopathy, right axillary pain."
+    "findings": "Pathology: 5.***** cm Grade II micropapillary mucinous carcinoma with ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, Ki-67 5%. 2 sentinel lymph nodes with micropapillary mucinous carcinoma (0.4mm) out of  4 nodes examined. Imaging: PETCT showed slight hypermetabolism within right breast lesion, corresponding to biopsy-proven malignancy. No definite sites of hypermetabolic metastatic disease. A/P CT quad phase showed hypervascular mass in the liver measuring 1.9 cm and another in segment 6 measuring 3.5 cm, both considered benign. Physical Exam: Right axillary pain, edema in right chest wall, no masses, no axillary adenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -787,7 +775,7 @@ RESULTS FOR ROW 24
     ]
   },
   "Medication_Plan": {
-    "medication_plan": "If low risk, she can proceed with adjuvant hormone therapy."
+    "medication_plan": "Not yet on treatment — no specific drug names or doses mentioned."
   },
   "Therapy_plan": {
     "therapy_plan": "Will send surgical specimen for MP. If low risk, will proceed with radiation and start adjuvant hormone therapy. Hormone therapy side effects include hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome, bone loss, and increased risk of fractures."
@@ -810,9 +798,9 @@ RESULTS FOR ROW 24
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Radiation oncology",
+    "Specialty": "Radiation oncology consult",
     "Others": "Physical therapy",
-    "follow up": "see Dr. ***** in radiation oncology 12/07/18"
+    "follow up": "scheduled to see Dr. ***** in radiation oncology 12/07/18"
   },
   "follow_up_next_visit": {
     "Next clinic visit": "in-person: scheduled to see Dr. ***** in radiation oncology on 12/07/18"
@@ -857,20 +845,20 @@ RESULTS FOR ROW 25
     "lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea Nitrogen, Serum / Plasma 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC  35.2, Platelet Count 364, Neutrophil Absolute Count 2.62, Lymphocyte Abs Cnt 1.63, Monocyte Abs Count 0.63, Eosinophil Abs Ct 0.12, Basophil Abs Count 0.02, Creatinine 0.73, eGFR if Caucasian >60, eGFR if African >60, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 4.0, Chloride, Serum / Plasma 103, Carbon Dioxide, Total 26, Anion Gap 8, Albumin, Serum / Plasma 3.1, Calcium, total, Serum / Plasma 9.0, Phosphorus, Serum / Plasma 3.8"
   },
   "Clinical_Findings": {
-    "findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 03/12/2011 PET/CT showed disease progression including liver, bones, lymph nodes, and breast. Exam revealed new chest wall/breast skin metastases. Supraclavicular area appears to be breaking up. Labs reviewed and deemed okay to proceed with chemotherapy. No significant changes in physical exam findings noted."
+    "findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 12/11/2010 PET/CT scan revealed a new right frontal dural-based metastasis with surrounding vasogenic edema and mass effect. Multiple hypermetabolic left cervical and supraclavicular lymph nodes consistent with metastatic disease were noted. There was hypermetabolism along the right parasternal chest wall, possibly invading the sternum, and bilateral subpectoral lymphadenopathy. An area of focal hypermetabolism in the hepatic segment suspicious for early hepatic metastasis was identified. Multifocal osseous metastatic disease was identified within the C2, L2 vertebral bodies, and sacrum. MRI of the brain on 12/11/2010 revealed a 4 cm left inferior frontal extra-axial mass. Pathology from the resection of the frontal brain metastasis on 12/30/2010 confirmed metastatic adenocarcinoma of breast primary, which was estrogen receptor negative, progesterone receptor negative, and HER-2/neu negative. Physical exam shows the supraclavicular area appears to be breaking up. Labs reviewed and deemed okay to proceed with chemotherapy."
   },
   "Current_Medications": {
     "current_meds": "capecitabine, ixabepilone"
   },
   "Treatment_Changes": {
     "recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab",
-    "supportive_meds": "ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE)"
+    "supportive_meds": "ondansetron, docusate sodium, prochlorperazine, oxyCODONE"
   },
   "Treatment_Goals": {
     "goals_of_treatment": ""
   },
   "Response_Assessment": {
-    "response_assessment": "Not mentioned in note."
+    "response_assessment": ""
   },
   "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
