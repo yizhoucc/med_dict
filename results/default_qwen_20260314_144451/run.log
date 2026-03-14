@@ -1439,3 +1439,79 @@ Processing row 32 (8/10)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1638 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 11.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "63 y.o. female with left ER+ LN+ breast cancer on letrozole since January 2011, here for follow up."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G3-REVERT-INFER] second opinion: restored classification/inference "no"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 12.1s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+  "Stage_of_Cancer": "Originally stage IIB, now stage IIIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Distant_Metastasis: "No" -> ""
+      [G3-FAITH] Metastasis: "No" -> ""
+      [G3-FAITH] Stage_of_Cancer: "Originally stage IIB, now stage IIIA" -> ""
+      [G3-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Stage_of_Cancer']
+      [G3-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G3-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G3-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally stage IIB, now stage IIIA"
+      [G6-SEMANTIC] Stage_of_Cancer: "Originally stage IIB, now stage IIIA" -> "Originally stage I  I B, now stage IIIA"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 16.1s
+      [EXTRACT] raw={
+"findings": "No evidence of recurrence on physical exam. No palpable masses, no significant skin changes, and no new lymphadenopathy noted. Left neck high <1cm lymph node soft and mobile. No LE edem
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.9s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 10.4s [semantic-fixed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "FEMARA 2.5 mg tablet, CHOLECALCIFEROL, VITAMIN D3, KLOR-CON 10"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] supportive_meds: "FEMARA 2.5 mg tablet, CHOLECALCIFEROL, VITAMIN D3, KLOR-CON 10" -> "CHOLECALCIFEROL, VITAMIN D3, KLOR-CON 10"
+      [POST-SUPP] CHOLECALCIFEROL, VITAMIN D3, KLOR-CON 10 -> 
+    Treatment_Goals: 3.8s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G6-SEMANTIC] ok (all values answer their fields)
