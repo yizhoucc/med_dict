@@ -1,4 +1,4 @@
-Source: default_qwen.yaml | Run started: 2026-03-14 14:44:51
+Source: default_qwen.yaml | Run started: 2026-03-14 15:40:25
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -127,6 +127,9 @@ Respond *only* with a JSON object using this exact schema:
 
 For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
 Do NOT include changes from months or years ago.
+IMPORTANT: If the patient IS currently on treatment but there are no recent changes, write an empty string "".
+Do NOT write "Not yet on treatment" if the patient is already taking medication (e.g., tamoxifen, letrozole).
+"Not yet on treatment" is ONLY correct if the patient has never started any cancer treatment.
 
 For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
 
@@ -137,8 +140,10 @@ CRITICAL rules for supportive_meds — read carefully:
   * "we discussed starting..." = NOT current (discussion only)
   * "may consider..." = NOT current (future possibility)
   * "if side effects occur, could use..." = NOT current (contingency)
-- Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds), medications marked "Patient not taking".
+- Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds).
+- Do NOT include medications marked "Patient not taking" or "(Patient not taking: ...)". If the medication list says "Patient not taking", that drug is NOT current — skip it entirely.
 - Do NOT include anxiety/sleep medications (lorazepam, zolpidem) or seizure medications (levetiracetam) unless explicitly prescribed FOR cancer treatment side effects.
+- Do NOT include ONCOLOGIC drugs (tamoxifen, letrozole, anastrozole, trastuzumab, etc.) in supportive_meds. These go in current_meds.
 IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
 
 Respond *only* with a JSON object using this exact schema:
@@ -280,11 +285,19 @@ CRITICAL — distinguish PAST from FUTURE:
 If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
 
 Also DO NOT include:
-- Imaging plans (CT, MRI, PET, DEXA — these go in Imaging_Plan)
+- Imaging plans (CT, MRI, PET, PET/CT, DEXA, bone scan, ultrasound, mammogram, echocardiogram/TTE, X-ray — these ALL go in Imaging_Plan, NOT here)
+- Radiation/radiotherapy plans (radiation, XRT, RT, chest wall RT, whole brain radiation — these go in radiotherapy_plan, NOT here)
 - Lab plans or blood tests
 - Medication/treatment plans (e.g., "continue arimidex", "could use faslodex" — these go in Medication_Plan)
 - Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
 - General treatment goals or contingency plans
+
+Common mistakes to AVOID:
+- "Brain MRI" → this is IMAGING, not a procedure
+- "chest wall RT" → this is RADIOTHERAPY, not a procedure
+- "will proceed with radiation" → this is RADIOTHERAPY, not a procedure
+- "TTE" or "echocardiogram" → this is IMAGING, not a procedure
+- "DEXA scan" → this is IMAGING, not a procedure
 If no future procedures are planned, say "No procedures planned."
 Respond *only* with a JSON object using this exact schema:
 {
@@ -383,10 +396,15 @@ Respond *only* with a JSON object using this exact schema:
 {
     "Next clinic visit": "(in-person or telehealth): timing and purpose"
 }
-', 'Advance_care_planning': 'TASK: Extract the 'Advance care planning' from the given 'Assessment/Plan' section.
-Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI).
-If a code status is mentioned anywhere in the note, include it.
-If no advance care planning is discussed, say "Not discussed during this visit."
+', 'Advance_care_planning': 'TASK: Extract the 'Advance care planning' from the clinical note.
+Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.
+IMPORTANT: Code status is often found OUTSIDE the Assessment/Plan section — look in the FULL NOTE for:
+- "Code status: Full code" or "Full code"
+- "DNR" or "DNI" or "DNR/DNI"
+- "Advance Care Planning" section
+- "has a living will" or "health care proxy"
+If a code status is mentioned ANYWHERE in the note, include it.
+If no advance care planning is discussed and no code status is found, say "Not discussed during this visit."
 Respond *only* with a JSON object using this exact schema:
 {
     "Advance care": "A summary of any advance care planning including code status, or 'Not discussed during this visit.'"
@@ -432,10 +450,10 @@ RESULTS FOR ROW 26
     "Distant Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count 217, MPV 9.6, Neutrophil Absolute Count 2140, Lymphs, Blood 1800, Monocyte Abs Count 380, Eosinophils Absolute 110, Basophil Abs Count 11, Neutrophils 39.7%, Lymphs 46.7%, Monocytes 9.1%, Eos 4.3%, BASOS 0.2%"
+    "lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count 217, MPV 9.6, Neutrophil Absolute Count 2140, Lymphs, Blood 1800, Monocyte Abs Count 400, Eosinophils Absolute 110, Basophil Abs Count 11, Neutrophils 39.7, Lymphs 46.7, Monocytes 9.1, Eos 4.3, BASOS 0.2 (All values from 09/20/2019)"
   },
   "Clinical_Findings": {
-    "findings": "Triple negative breast cancer with a proliferation index of 75%, node negative. MRI of the breasts was performed but results not specified in the note. Physical exam showed no acute distress, awake and alert, appears stated age. No palpable masses, skin changes, or lymphadenopathy noted. Patient reports right armpit pain with a pain score of 4."
+    "findings": "Triple negative breast cancer with a Ki-67 of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed. Physical exam showed no acute distress, awake and alert, appears stated age. Right armpit pain reported with a pain score of 4 at night during sleep."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -461,7 +479,7 @@ RESULTS FOR ROW 26
     "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence."
   },
   "Procedure_Plan": {
-    "procedure_plan": "surgery for reductions bilaterally and a right lumpectomy with sentinel node, port placement at surgery"
+    "procedure_plan": "surgery for reductions bilaterally and a right lumpectomy with sentinel node"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -480,10 +498,10 @@ RESULTS FOR ROW 26
     "follow up": "RTC at her post op visit to review final pathology report and make recommendations"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: at her post op visit to review final pathology report and make recommendations"
+    "Next clinic visit": "in-person: after post op visit to review final pathology report and make recommendations"
   },
   "Advance_care_planning": {
-    "Advance care": "Not discussed during this visit."
+    "Advance care": "Full code."
   }
 }
 
@@ -523,7 +541,7 @@ RESULTS FOR ROW 27
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size and metabolic activity. Left iliac wing sclerotic lesion is unchanged. Persistent FDG uptake within left L1 pedicle and anterior vertebral body is not significantly changed. Interval decrease in activity of previously described L2 vertebral body sclerotic focus with no residual hypermetabolic activity seen. No new osseous lesions identified. Physical exam shows a well-developed patient with no acute distress, no rash, no lesions, no diaphoresis, normal breath sounds, no respiratory distress, no wheezing, no chest tenderness, normal heart rate, normal rhythm, no murmurs, no rubs, no gallops, no LE edema, no point tenderness at cervical, thoracic or lumbar spine, muscular strength  5/5 throughout, no peripheral edra, alert & oriented x 3, CN intact, ambulates w/o difficulty, DTRs 2+ throughout. No significant changes in breast exam at lumpectomy site. No hypermetabolic lymphadenopathy noted."
+    "findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size and metabolic activity. Left iliac wing sclerotic lesion is unchanged. Persistent FDG uptake within left L1 pedicle and anterior vertebral body is not significantly changed. Interval decrease in activity of previously described L2 vertebral body sclerotic focus with no residual hypermetabolic activity seen. No new osseous lesions identified. Physical exam shows a well-developed patient with no acute distress, no rash, no lesions, no diaphoresis, normal breath sounds, no respiratory distress, no wheezing, no chest tenderness, normal heart rate, normal rhythm, no murmurs, no rubs, no gallops, no LE edema, no point tenderness at cervical, thoracic or lumbar spine, muscular strength  5/5 throughout, no peripheral edema, alert & oriented x 3, CN intact, ambulates w/o difficulty, DTRs 2+ throughout."
   },
   "Current_Medications": {
     "current_meds": "letrozole, goserelin"
@@ -626,38 +644,7 @@ RESULTS FOR ROW 28
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
-      {
-        "hormonal therapy": {
-          "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
-          "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
-          "Long term side_effects_discussed": "bone density loss"
-        }
-      },
-      {
-        "bone therapy": {
-          "summary": "DEXA to assess current bone health, taking calcium and vitamin D supplements",
-          "Short term side_effects_discussed": "None",
-          "Long term side_effects_discussed": "None"
-        }
-      },
-      {
-        "radiotherapy": {
-          "summary": "proceed with radiation oncology consultation; patient will have radiation",
-          "Short term side_effects_discussed": "None",
-          "Long term side_effects_discussed": "None"
-        }
-      },
-      {
-        "other treatment": {
-          "summary": "aim to resume daily aerobic activities (150 minutes a week)",
-          "Short term side_effects_discussed": "None",
-          "Long term side_effects_discussed": "None"
-        }
-      }
-    ]
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Calcium and vitamin D supplementation."
   },
@@ -668,10 +655,10 @@ RESULTS FOR ROW 28
     "radiotherapy_plan": "I expect that she will proceed with radiation. We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** start."
   },
   "Procedure_Plan": {
-    "procedure_plan": "will proceed with radiation"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "DEXA at this time to assess her current bone health."
+    "imaging_plan": "DEXA to assess current bone health"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -779,7 +766,7 @@ RESULTS FOR ROW 29
     "radiotherapy_plan": "She is at risk for local recurrence in her right breast for which additional radiation is recommended. Given her surgical pathology with only micrometastatic disease in her sentinel lymph node, they are not recommending adjuvant radiation to her regional lymph nodes. RT planning per *****, likely pursued locally in *****."
   },
   "Procedure_Plan": {
-    "procedure_plan": "surgery tentatively scheduled for September 2019"
+    "procedure_plan": "surgery pending, tentatively scheduled for September 2019"
   },
   "Imaging_Plan": {
     "imaging_plan": "Bone density scan can be completed when she returns from *****"
@@ -833,14 +820,15 @@ RESULTS FOR ROW 30
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
-    "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
-    "Metastasis": "No"
+    "Stage_of_Cancer": "Originally Stage II-III, now metastatic (Stage IV)",
+    "Metastasis": "No",
+    "Distant Metastasis": "Not sure"
   },
   "Lab_Results": {
     "lab_summary": "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/15), ***** 17.9, CA 27.29 78.3, CA 15-3 69 (01/26/16), ***** 20, CA 27.29 98.8, CA 15-3 74.5 (02/27/16), ***** 17.4, CA 27.29 106.2, CA 15-3 73.9 (05/12/16), ***** 16.6, CA 27.29 78, CA 15-3 68 (07/20/16)"
   },
   "Clinical_Findings": {
-    "findings": "Right breast mass (6 x 11 cm) in outer quadrants; no mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8). MRI shows marked NME with clustered ring internal enhancement extending throughout entire right breast with extension to right nipple. No pectoralis invasion. Enlarged right internal mammary chain node (0.6 cm). No palpable lymphadenopathy on exam. Right nipple is denuded."
+    "findings": "Right breast mass (6 x 11 cm) in outer quadrants; no palpable mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8). MRI shows marked NME with clustered ring internal enhancement extending throughout entire right breast with extension to right nipple. Right axillary ultrasound shows multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue. Right nipple is denuded and itchy. No cervical, supraclavicular, or axillary lymphadenopathy on physical exam. Surgical pathology report: Invasive ductal carcinoma (0.35 cm longest linear dimension in one core, tumor in two cores), intermediate to high grade DCIS, solid pattern, positive for HER2 overexpression (IHC 3; FISH ratio 8.9), negative for ER and PR, ~30% Ki-67 proliferation index."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -866,7 +854,7 @@ RESULTS FOR ROW 30
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "plan for Mediport placement"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -885,7 +873,7 @@ RESULTS FOR ROW 30
     "follow up": "The patient will contact me after the weekend and let me know whether she plans to proceed with treatment here at ***** or elsewhere, closer to home."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: after the weekend to decide whether she plans to proceed with treatment at ***** or elsewhere"
+    "Next clinic visit": "after the weekend to decide whether she plans to proceed with treatment at ***** or elsewhere"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -928,7 +916,7 @@ RESULTS FOR ROW 31
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake in the right frontal lobe, incompletely characterized, requires further evaluation with MRI of the brain. Prominent intraluminal FDG uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. No pericardial effusion noted on echocardiogram with normal left ventricular ejection fraction of  59%. Patient has poor dentition and occasional left-sided numbness, no new masses or lymphadenopathy noted on physical exam."
+    "findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake in the right frontal lobe, incompletely characterized, requires further evaluation with MRI of the brain. Prominent intraluminal FDG uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. No pericardial effusion noted on echocardiogram with normal left ventricular ejection fraction of  59%."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -943,24 +931,18 @@ RESULTS FOR ROW 31
   "Response_Assessment": {
     "response_assessment": "Not mentioned in note."
   },
-  "Medication_Plan_chatgpt": {
-    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
-      "summary": "Cycle 1 Doxil IV every 28 days on 07/01/2021",
-      "Short term side_effects_discussed": "Not specified in the note.",
-      "Long term side_effects_discussed": "Not specified in the note."
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
     "medication_plan": "Cycle 1 Doxil IV every 28 days starting on 07/01/2021."
   },
   "Therapy_plan": {
-    "therapy_plan": "Cycle 1 Doxil IV every 28 days on 07/01/2021. Need to do Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT. PETCT scan after 3 cycles of Doxil. Obtain MRI pelvis to evaluate hip pain. Follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms."
+    "therapy_plan": "Start Doxil IV every 28 days on 07/01/2021. Repeat Echo in 3 months, next due end of August 2021. Need to do Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT. PETCT scan after 3 cycles of Doxil. Obtain MRI pelvis to evaluate hip pain."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Need to do Brain MRI, Obtain MRI pelvis"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT. MRI pelvis to evaluate hip pain. PETCT scan after 3 cycles of Doxil."
@@ -982,7 +964,7 @@ RESULTS FOR ROW 31
     "Next clinic visit": "in-person: 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
   },
   "Advance_care_planning": {
-    "Advance care": "Not discussed during this visit."
+    "Advance care": "Full code."
   }
 }
 
@@ -1010,7 +992,7 @@ RESULTS FOR ROW 32
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "82 year old with metastatic breast cancer to the lymph nodes who has been followed at ***** Hospital and is being treated with herceptin and *****. She wants to change her care to our clinic due to being closer to home."
+    "summary": "82-year-old patient with metastatic breast cancer to the lymph nodes, originally treated in 2011 with a left lumpectomy, TCH chemotherapy, and maintenance herceptin. The patient is being treated with herceptin and pertuzumab and is changing care to this clinic due to proximity to home."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
@@ -1021,7 +1003,7 @@ RESULTS FOR ROW 32
     "lab_summary": "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L (Lab results from 05/18/2016)"
   },
   "Clinical_Findings": {
-    "findings": "PET/CT done in June 2019 shows complete response (CR) with no abnormal areas of FDG uptake to suggest active metastatic disease. No pulmonary consolidations or metastases noted. Physical exam reveals a small lymph node <1cm in the left axilla. Left lumpectomy site with scar tissue and no skin changes. No edema, no peripheral adenopathy, and normal upper and lower extremity strength."
+    "findings": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with brown fat. No pulmonary consolidations or metastases noted. Physical exam: Small lymph node felt in left axilla <1cm. No palpable masses, skin changes, or edema noted. No evidence of active metastatic disease."
   },
   "Current_Medications": {
     "current_meds": "exemestane, trastuzumab, pertuzumab"
@@ -1069,7 +1051,7 @@ RESULTS FOR ROW 32
     "Next clinic visit": "in-person: 3 and 6 weeks"
   },
   "Advance_care_planning": {
-    "Advance care": "Not discussed during this visit."
+    "Advance care": "Full code. Living will on file."
   }
 }
 
@@ -1115,7 +1097,7 @@ RESULTS FOR ROW 33
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": ""
+    "supportive_meds": "None"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant"
@@ -1204,10 +1186,10 @@ RESULTS FOR ROW 34
     "Patient type": "Follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "The patient has Stage III left breast cancer with a local recurrence. The purpose of this visit is to discuss the management plan for the recurrence, including the resumption of hormonal therapy and referral for chest wall radiation therapy."
+    "summary": "Stage III breast cancer, local recurrence, to discuss treatment options including resumption of hormonal therapy and referral for chest wall radiation."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+    "Type_of_Cancer": "",
     "Stage_of_Cancer": "Originally Stage III, now local recurrence",
     "Metastasis": "No"
   },
@@ -1215,7 +1197,7 @@ RESULTS FOR ROW 34
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast showed ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), HER2 negative (IHC 2+; FISH 2.4=1.6X). FNA of left axillary LN was negative. PET-CT showed hypermetabolic tumor at lateral margin of left breast implant, with focal uptake without CT lesion in left lateral 6th rib of unclear significance. Breast MRI showed 2 cm mass in left reconstructed breast with no suspicious lymph nodes. Physical exam revealed no palpable masses, no tenderness, no lymphadenopathy, and no skin changes."
+    "findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast showed ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), HER2 negative (IHC 2+; FISH 1.6). FNA of left axillary LN was negative. PET-CT showed hypermetabolic tumor at lateral margin of left breast implant. Breast MRI showed 2 cm mass in left reconstructed breast with no suspicious lymph nodes. Physical exam revealed no palpable masses, no tenderness, no lymphadenopathy, and no skin changes. Patient is s/p bilateral mastectomies with implants."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1232,7 +1214,7 @@ RESULTS FOR ROW 34
   },
   "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Tamoxifen 20mg PO qD"
+    "medication_plan": "tamoxifen 20mg PO qD"
   },
   "Therapy_plan": {
     "therapy_plan": "tamoxifen 20mg PO qD, referral to radiation oncology for chest wall RT, return to clinic in 6 months"
@@ -1241,7 +1223,7 @@ RESULTS FOR ROW 34
     "radiotherapy_plan": "She accepts a referral now for chest wall RT."
   },
   "Procedure_Plan": {
-    "procedure_plan": "chest wall RT"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -1309,8 +1291,8 @@ RESULTS FOR ROW 35
     "current_meds": "tamoxifen"
   },
   "Treatment_Changes": {
-    "recent_changes": "Not yet on treatment — no recent changes to report.",
-    "supportive_meds": "tamoxifen"
+    "recent_changes": "",
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant"
@@ -1329,7 +1311,7 @@ RESULTS FOR ROW 35
     "medication_plan": "Continue on anastrozole without significant side effects."
   },
   "Therapy_plan": {
-    "therapy_plan": "continue anastrozole, scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019, return to clinic in 6 months for routine follow-up"
+    "therapy_plan": "scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019, return to clinic in 6 months for routine follow-up"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
