@@ -92,3 +92,26 @@ Processing row 20 (1/5)...
       [G3-FAITH] EMPTIED: ['response_assessment']
       [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 60.3s
+    Medication_Plan_chatgpt: 66.1s [faith-trimmed, temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G3-FAITH] other treatment: "{'summary': 'No other specific treatments were mentioned in " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G3-FAITH] hormonal therapy: "{'summary': 'Plan to discuss the addition of an aromatase in" -> "{'summary': 'Plan to discuss the addition of an aromatase in"
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'Plan to discuss the addition of adjuvant XRT to minimize her future" -> "{'summary': 'Plan to discuss the addition of adjuvant XRT to minimize her future"
+      [G4-TEMPORAL] bone therapy: "{'summary': 'Plan to mitigate the risk of bone density complications with bispho" -> ""
+      [G4-TEMPORAL] other treatment: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> ""
+      [G4-TEMPORAL] hormonal therapy: "{'summary': 'Plan to discuss the addition of an aromatase inhibitor like Arimide" -> ""
+      [G6-SEMANTIC] hormonal_therapy: "{'summary': 'Plan to discuss the addition of an aromatase inhibitor like Arimide" -> "{'summary': 'Plan to discuss the addition of an aromatase inhibitor like Arimide"
+      [POST-KEYS] stripped: {'hormonal_therapy', 'bone_therapy', 'radiotherapy', 'other_treatment'}
+    Medication_Plan: 11.6s
+      [EXTRACT] raw={
+    "medication_plan": "Arimidex (an aromatase inhibitor) for 5 years after breast XRT; bisphosphonate therapy to mitigate bone density complications associated with aromatase inhibitor therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
