@@ -1,4 +1,4 @@
-Source: default_qwen.yaml | Run started: 2026-03-13 22:09:20
+Source: default_qwen.yaml | Run started: 2026-03-14 08:57:17
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -128,8 +128,10 @@ Respond *only* with a JSON object using this exact schema:
 For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
 Do NOT include changes from months or years ago.
 
-For supportive_meds: List supportive care medications RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
-Do NOT include: allergies (ALL: section), non-cancer comorbidity medications, medications marked "Patient not taking".
+For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
+- ONLY include medications the patient is actively taking right now.
+- Do NOT include medications merely DISCUSSED or RECOMMENDED for the future (e.g., "we discussed bisphosphonate therapy" or "could be mitigated with bisphosphonate" = NOT current, do NOT include).
+- Do NOT include: allergies (ALL: section), non-cancer comorbidity medications, medications marked "Patient not taking".
 IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
 
 Respond *only* with a JSON object using this exact schema:
@@ -165,8 +167,14 @@ Respond *only* with a JSON object using this exact schema (NO other keys):
 
 Think step by step before answering:
 1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+   IMPORTANT — the patient IS on treatment if ANY of these clues appear:
+   - "currently on [drug]", "taking [drug]", "continue [drug]", "on [drug] since [date]"
+   - Mentions of chemotherapy cycles, off weeks, dose adjustments (e.g., "off week", "cycle 3", "due to start next cycle")
+   - "labs okay to proceed with chemotherapy" or similar pre-cycle clearance
+   - Current medications include any oncologic drug (chemo, hormonal, targeted, immunotherapy)
+   Do NOT be confused by "off week" — a patient on an off week between chemo cycles IS on treatment.
 2. If yes, what treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)
-3. Is there any evidence of how the cancer is responding? Look for: imaging results, tumor markers, clinical exam findings, symptom changes.
+3. Is there any evidence of how the cancer is responding? Look for: imaging results (CT stable, PET response), tumor markers (CA 15-3 rising/falling), clinical exam findings (mass shrinking/growing, "appears to be breaking up"), symptom changes.
 4. If no treatment started yet, write "Not yet on treatment — no response to assess."
 5. If on treatment but no response data in the note, write "Not mentioned in note."
 
@@ -258,10 +266,11 @@ CRITICAL — distinguish PAST from FUTURE:
 If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
 
 Also DO NOT include:
-- Imaging plans (CT, MRI, PET — these go in Imaging Plan)
-- Lab plans
-- Medication plans
+- Imaging plans (CT, MRI, PET, DEXA — these go in Imaging_Plan)
+- Lab plans or blood tests
+- Medication/treatment plans (e.g., "continue arimidex", "could use faslodex" — these go in Medication_Plan)
 - Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
+- General treatment goals or contingency plans
 If no future procedures are planned, say "No procedures planned."
 Respond *only* with a JSON object using this exact schema:
 {
@@ -283,10 +292,17 @@ Respond *only* with a JSON object using this exact schema:
     "imaging_plan": "A summary of any planned imaging with specific test names, or 'No imaging planned.'"
 }
 ', 'Lab_Plan': 'TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
-Include ONLY future/planned labs: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
+Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
 Specify frequency and rationale if mentioned.
+
+CRITICAL — do NOT include these (they belong in OTHER fields):
+- Imaging scans: PET CT, CT, MRI, DEXA, bone scan, ultrasound, mammogram → these go in Imaging_Plan
+- Genomic/molecular tests: MammaPrint, Oncotype DX, BRCA panel, NGS, liquid biopsy → these go in Genetic_Testing_Plan
+- Treatment plans: medication changes, chemotherapy plans → these go in Medication_Plan
+Lab_Plan is ONLY for blood draws and lab work.
+
 DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
-If no future labs are planned, say "No labs planned."
+If no future blood tests or labs are planned, say "No labs planned."
 Respond *only* with a JSON object using this exact schema:
 {
     "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
@@ -313,20 +329,26 @@ Respond *only* with a JSON object using this exact schema:
 - DO NOT include tests that are already completed, historic, or only mentioned in past oncology history.
 - DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine labs (CBC, CMP).
 
-4. If there is NO new genetic or molecular test planned in the Assessment/Plan:
-- Set the value to a clear negative statement, for example:
-  "No new genetic or molecular tests were planned during this visit."
+4. CRITICAL — do NOT include content that belongs in OTHER fields:
+- Treatment contingency plans (e.g., "if progression, could use faslodex") → these go in Medication_Plan/Therapy_plan
+- Imaging plans (PET CT, MRI) → these go in Imaging_Plan
+- Response assessment text (e.g., "Not yet on treatment — no response to assess") → this is NOT genetic testing
 
-5. Output format:
+5. If there is NO new genetic or molecular test planned in the Assessment/Plan:
+- Set the value to: "None planned."
+
+6. Output format:
 Respond *only* with a JSON object using this exact schema:
 {
     "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or a clear statement that none are planned."
 }
 ', 'Referral': 'TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
 Do not mistake the doctor's signature at the end of the note as a referral.
-Include ALL referrals mentioned, including integrative medicine, complementary medicine, or wellness referrals.
+Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
 A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+Do NOT include the current visit's own department as a referral (e.g., if this is a Medical Oncology note, do NOT list "Medical Oncology" as a referral).
 If no referral is mentioned for a category, set its value to "None".
+For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral.
 Respond *only* with a JSON object using this exact schema:
 {
 "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
@@ -407,7 +429,34 @@ RESULTS FOR ROW 21
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {},
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "type": "hormonal therapy",
+        "details": {
+          "summary": "adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast.",
+          "Short term side_effects_discussed": "Not discussed in detail.",
+          "Long term side_effects_discussed": "side effects and MSS and bone density complications of aromatase inhibitor therapy given her present diagnosis of osteopenia"
+        }
+      },
+      {
+        "type": "radiotherapy",
+        "details": {
+          "summary": "adjuvant XRT to minimize her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade, reducing her risk to 15% or less.",
+          "Short term side_effects_discussed": "Not discussed in detail.",
+          "Long term side_effects_discussed": "Not discussed in detail."
+        }
+      },
+      {
+        "type": "bone therapy",
+        "details": {
+          "summary": "bisphosphonate therapy to mitigate the risk of bone density complications from aromatase inhibitor therapy.",
+          "Short term side_effects_discussed": "Not discussed in detail.",
+          "Long term side_effects_discussed": "Not discussed in detail."
+        }
+      }
+    ]
+  },
   "Medication_Plan": {
     "medication_plan": "Arimidex (an aromatase inhibitor) for 5 years after breast XRT; bisphosphonate therapy to mitigate bone density complications associated with aromatase inhibitor therapy."
   },
@@ -436,7 +485,7 @@ RESULTS FOR ROW 21
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Rad Onc and Med Onc",
+    "Specialty": "Rad Onc, Med Onc",
     "Others": "None",
     "follow up": "return for ***** follow-up visit in 3-4 months"
   },
@@ -475,12 +524,12 @@ RESULTS FOR ROW 22
     "summary": "Patient presents for a second opinion regarding metastatic ER+ breast cancer with chest wall recurrence, bone metastases, and right infraclavicular and IM nodes involvement. The patient was previously treated with lumpectomy, AC x 4, radiation, and 6 years of hormone blockade. Currently on anastrozole and denosumab, with a history of pneumonitis due to abemaciclib."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Type_of_Cancer": "Originally ER+/PR+/HER2- invasive ductal carcinoma, metastatic biopsy ER+/PR+/HER2-",
     "Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
     "Metastasis": "Yes (to bones, chest wall, right infraclavicular and right IM nodes)"
   },
   "Lab_Results": {
-    "lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 82.5, MCH 36.1, MCHC 32.8, Platelet Count 245, MPV 8.6, Neutrophil Absolute Count 2.07, Neutrophils 65.5, Eosinophils Absolute 0.07, Eos 2.2, Basophil Abs Count 0.07, Basophils 2.2, RDW 13.7, Glucose, non-fasting 101, Urea Nitrogen, Serum / Plasma 21, Creatinine, Serum 1.19, eGFR - low estimate 46, eGFR - high estimate 53, BUN/Creatinine Ratio 18, Sodium, Serum / Plasma 139, Potassium, Serum / Plasma 4.8, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 25, Calcium, total, Serum / Plasma 9.4, Protein, Total, Serum / Plasma 7.3, Albumin, Serum / Plasma 4.6, Globulin, Total 2.7, A/G RATIO 1.7, Bilirubin, Total 0.4, Alkaline Phosphatase 67, AST 27, Alanine transaminase 21, Lactate Dehydrogenase 245, Uric Acid, Serum / Plasma 5.2. (Lab results from 01/29/2021)"
+    "lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV 82.5, MCH 36.1, MCHC 32.8, Platelet Count 247, MPV 8.6, Neutrophil Absolute Count 2.07, Neutrophils 65.5, Eosinophils Absolute 0.07, Eos 2.2, Basophil Abs Count 0.07, Basophils 2.2, RDW 13.7, Glucose, non-fasting 102, Urea Nitrogen, Serum / Plasma 21, Creatinine, Serum 1.19, eGFR - low estimate 46, eGFR - high estimate 53, BUN/Creatinine Ratio 18, Sodium, Serum / Plasma 139, Potassium, Serum / Plasma 4.8, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 25, Calcium, total, Serum / Plasma 9.4, Protein, Total, Serum / Plasma 7.3, Albumin, Serum / Plasma 4.6, Globulin, Total 2.7, A/G RATIO 1.7, Bilirubin, Total 0.4, Alkaline Phosphatase 67, AST 27, Alanine transaminase 21, Lactate Dehydrogenase 245, Uric Acid, Serum / Plasma 5.2. (Lab results from 01/29/2021)"
   },
   "Clinical_Findings": {
     "findings": "PET scan on 11/03/20 and 04/24/21 showed a good response. Physical exam: No acute distress, awake and alert, appears stated age. No oral lesions, neck supple no lymphadenopathy. Cardiac: Regular rate, rhythm no murmur. Lungs: clear to auscultation. Abdomen: Soft, non tender, non distended. No edema. No peripheral adenopathy. Normal UE and LE strength. No rash. No mass or skin changes in the breast. Lumpectomy sites normal. No chest wall mass palpated."
@@ -505,8 +554,8 @@ RESULTS FOR ROW 22
         "details": [
           {
             "summary": "continue arimidex alone if PET CT shows stable disease",
-            "Short term side_effects_discussed": "Not discussed in the note.",
-            "Long term side_effects_discussed": "Not discussed in the note."
+            "Short term side_effects_discussed": "Not specified in the note.",
+            "Long term side_effects_discussed": "Not specified in the note."
           }
         ]
       },
@@ -515,8 +564,8 @@ RESULTS FOR ROW 22
         "details": [
           {
             "summary": "started on steroids for pneumonitis in July 2021",
-            "Short term side_effects_discussed": "Not discussed in the note.",
-            "Long term side_effects_discussed": "Not discussed in the note."
+            "Short term side_effects_discussed": "Not specified in the note.",
+            "Long term side_effects_discussed": "Not specified in the note."
           }
         ]
       },
@@ -525,8 +574,8 @@ RESULTS FOR ROW 22
         "details": [
           {
             "summary": "could use faslodex with ***** if she has a ***** mutation if PET CT shows progression",
-            "Short term side_effects_discussed": "Not discussed in the note.",
-            "Long term side_effects_discussed": "Not discussed in the note."
+            "Short term side_effects_discussed": "Not specified in the note.",
+            "Long term side_effects_discussed": "Not specified in the note."
           }
         ]
       },
@@ -535,8 +584,8 @@ RESULTS FOR ROW 22
         "details": [
           {
             "summary": "future options include hormone blockade with afinitor or xeloda or a clinical trial",
-            "Short term side_effects_discussed": "Not discussed in the note.",
-            "Long term side_effects_discussed": "Not discussed in the note."
+            "Short term side_effects_discussed": "Not specified in the note.",
+            "Long term side_effects_discussed": "Not specified in the note."
           }
         ]
       }
@@ -555,10 +604,10 @@ RESULTS FOR ROW 22
     "procedure_plan": "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
   },
   "Imaging_Plan": {
-    "imaging_plan": "I recommend a pet ct now"
+    "imaging_plan": "Pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
   },
   "Lab_Plan": {
-    "lab_plan": "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+    "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
@@ -568,7 +617,7 @@ RESULTS FOR ROW 22
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade with afinitor or xeloda or a clinical trial."
+    "follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade with afinitor or xeloda or a clinical trial."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "Not specified in the note"
@@ -602,7 +651,7 @@ RESULTS FOR ROW 23
     "Patient type": "New patient",
     "second opinion": "false",
     "in-person": "in-person",
-    "summary": "The patient is a 63-year-old female with newly diagnosed breast cancer, specifically invasive carcinoma with ductal and lobular features (ER+ (>95%)/PR (60%)/HER2 2+). The purpose of this visit is to discuss treatment options for her recently diagnosed cancer."
+    "summary": "The patient is a 63-year-old female with newly diagnosed breast cancer, specifically invasive carcinoma with ductal and lobular features (ER+ (>95%)/PR (60%)/HER2 2+). The purpose of this visit is to discuss treatment options for her recently diagnosed breast cancer."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive carcinoma with ductal and lobular features",
@@ -614,14 +663,14 @@ RESULTS FOR ROW 23
     "lab_summary": "POCT glucose, Fingerstick: 105, 185, 236 (H), 116 mg/dL"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results from left breast mastectomy and SLN Bx: 1 cm grade 2 invasive lobular carcinoma (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) with negative margins. Additional 0.7 cm focus of grade 2 invasive carcinoma with ductal and lobular features (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) with negative margins. Intermediate and high grade DCIS. 0/1 SLN were positive. Physical exam: Left breast mastectomy scar healing well with tissue expander in place. No dominant masses in right breast. No suspicious skin changes overlying expander. No palpable cervical or supraclavicular adenopathy."
+    "findings": "Pathology results: Left breast mastectomy revealed 1 cm grade 2 invasive lobular carcinoma (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67 5-10%) and 0.7 cm grade 2 invasive carcinoma with ductal and lobular features (ER+ (>95%)/PR (60%)/HER2 2+ by IHC and negative by FISH, Ki-67  5-10%). Intermediate and high grade DCIS present. 0/1 SLN were positive. Physical exam: Left breast mastectomy scar healing well with tissue expander in place. No dominant masses in right breast. No suspicious skin changes overlying expander. No palpable cervical or supraclavicular adenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "",
-    "supportive_meds": ""
+    "recent_changes": "Not yet on treatment — no recent changes to report.",
+    "supportive_meds": "LORazepam (ATIVAN) 0.5 mg tablet, Take 1 tablet (0.5 mg total) by mouth every 6 (six) hours as needed for Anxiety (Muscle spasms)."
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant"
@@ -631,16 +680,16 @@ RESULTS FOR ROW 23
   },
   "Medication_Plan_chatgpt": {
     "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
-      "summary": "The patient will begin letrozole, an aromatase inhibitor, for at least five years of adjuvant hormonal therapy. The decision to continue beyond 5 years will be individualized based on the patient's risk and tolerance.",
-      "Short term side_effects_discussed": "Arthralgias, urogenital atrophy, and possible acceleration of bone density loss.",
-      "Long term side_effects_discussed": "Not specified in the note."
+      "summary": "hormonal therapy, specifically letrozole, will be started and continued for at least five years. The decision to continue beyond 5 years will be individualized based on the patient's risk and tolerance.",
+      "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+      "Long term side_effects_discussed": "possible acceleration of bone density loss"
     }
   },
   "Medication_Plan": {
-    "medication_plan": "Patient will begin letrozole for adjuvant hormonal therapy. The plan is for at least five years of treatment, with the possibility of extending beyond five years based on individual risk and tolerance. Aromatase inhibitors like letrozole may cause side effects such as arthralgias, urogenital atrophy, and possible acceleration of bone density loss. If side effects are not manageable, the patient may switch to another aromatase inhibitor or tamoxifen."
+    "medication_plan": "Patient will start letrozole for adjuvant hormonal therapy. The patient will receive at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond  5 years will be individualized based on the patient's risk and tolerance of hormonal therapy. If the patient cannot tolerate the joint pains associated with aromatase inhibitors, they may switch to another aromatase inhibitor or tamoxifen."
   },
   "Therapy_plan": {
-    "therapy_plan": "Patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond 5 years will be individualized based on the patient's risk and tolerance. A baseline DEXA has been ordered, and the role of bone-targeted therapies will be discussed further in the future. Patient is encouraged to maintain a calcium-rich diet, take an adequate amount of Vitamin D (typically at least 800-1000 IU per day), and engage in weight-bearing exercise."
+    "therapy_plan": "Patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond  5 years will be individualized based on the patient's risk and tolerance. A baseline DEXA has been ordered, and the role of bone-targeted therapies will be discussed further in the future. Patient is encouraged to maintain a calcium-rich diet, take at least 1000-1200 IU of Vitamin D per day, and engage in weight-bearing exercise."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -652,7 +701,9 @@ RESULTS FOR ROW 23
     "imaging_plan": "I have ordered a base line DEXA."
   },
   "Lab_Plan": {
-    "lab_plan": "A baseline DEXA scan has been ordered."
+    "lab_plan": [
+      "ordered a base line DEXA"
+    ]
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "None are planned."
@@ -694,9 +745,9 @@ RESULTS FOR ROW 24
 {
   "Reason_for_Visit": {
     "Patient type": "follow up",
-    "second opinion": "Not specified in the note",
+    "second opinion": "",
     "in-person": "in-person",
-    "summary": "56 y.o. female with right breast Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, Ki-67 5%. She is post-partial mastectomy and is here to discuss systemic therapy options."
+    "summary": "56 y.o. female with right breast Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, Ki-67 5%. She is post-partial mastectomy and is here to discuss systemic therapy options."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH Grade II micropapillary mucinous carcinoma",
@@ -708,14 +759,14 @@ RESULTS FOR ROW 24
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology: 5.***** cm Grade II micropapillary mucinous carcinoma with ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, Ki-67 5%. 2 sentinel lymph nodes with micropapillary mucinous carcinoma (0.4mm) out of 4 nodes examined. Imaging: PETCT showed slight hypermetabolism within right breast lesion, corresponding to biopsy-proven malignancy. No definite sites of hypermetabolic metastatic disease. A/P CT quad phase showed hypervascular masses in the liver, considered benign. Physical Exam: Right axillary pain, edema in right chest wall, no masses, no axillary adenopathy."
+    "findings": "Pathology: Right breast Grade II micropapillary mucinous carcinoma with ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, Ki-67 5%. No vascular or lymphovascular invasion, 2 sentinel lymph nodes with micropapillary mucinous carcinoma (0.4mm) out of 4 nodes examined. Imaging: PETCT showed slight hypermetabolism within right breast lesion, no definite sites of hypermetabolic metastatic disease. A/P CT quad phase showed hypervascular masses in the liver, considered benign. Physical Exam: S/p right partial mastectomy with a well-healed incision, edema in the right chest wall, no masses, no axillary adenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "Not yet on treatment — no response to assess.",
-    "supportive_meds": "acetaminophen-codeine (TYLENOL #4), oxyCODONE (ROXICODONE)"
+    "supportive_meds": "acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant"
@@ -767,7 +818,7 @@ RESULTS FOR ROW 24
     "imaging_plan": "No imaging planned."
   },
   "Lab_Plan": {
-    "lab_plan": "A ***** test will be ordered to evaluate the benefit of chemotherapy."
+    "lab_plan": "A ***** test will be ordered to evaluate her benefit, if any, of chemotherapy."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "We will send her surgical specimen for MP."
@@ -775,8 +826,8 @@ RESULTS FOR ROW 24
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Radiation oncology consult",
-    "Others": "Physical therapy",
+    "Specialty": "Radiation oncology",
+    "Others": "Physical Therapy",
     "follow up": "scheduled to see Dr. ***** in radiation oncology 12/07/18"
   },
   "follow_up_next_visit": {
@@ -811,25 +862,25 @@ RESULTS FOR ROW 25
     "Patient type": "Follow up",
     "second opinion": "Not a second opinion",
     "in-person": "in-person",
-    "summary": "Metastatic breast cancer patient on Xeloda and Irinotecan. This visit is for an off week check-up and to plan for the next cycle starting on 04/12/2011."
+    "summary": "Patient with metastatic breast cancer on Xeloda and Irinotecan regimen. This visit is for ongoing management and to discuss the current treatment cycle."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2- invasive ductal carcinoma",
     "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
-    "Metastasis": "Yes (to brain, liver, bones, and lymph nodes)"
+    "Metastasis": "Yes (to the brain, liver, bones, and lymph nodes)"
   },
   "Lab_Results": {
-    "lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea Nitrogen, Serum / Plasma 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC 35.2, Platelet Count 364, Neutrophil Absolute Count 2.62, Lymphocyte Abs Cnt 1.63, Monocyte Abs Count 0.63, Eosinophil Abs Ct 0.12, Basophil Abs Count 0.02, Creatinine 0.73, eGFR if Caucasian >60, eGFR if African >60, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 4.0, Chloride, Serum / Plasma 103, Carbon Dioxide, Total 26, Anion Gap 8, Albumin, Serum / Plasma 3.1, Calcium, total, Serum / Plasma 9.0, Phosphorus, Serum / Plasma 3.8"
+    "lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea Nitrogen, Serum / Plasma 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC  35.2, Platelet Count 364, Neutrophil Absolute Count 2.62, Lymphocyte Abs Cnt 1.63, Monocyte Abs Count 0.63, Eosinophil Abs Ct 0.12, Basophil Abs Count 0.02, Creatinine 0.73, eGFR if Caucasian >60, eGFR if African >60, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 4.0, Chloride, Serum / Plasma 103, Carbon Dioxide, Total 26, Anion Gap 8, Albumin, Serum / Plasma 3.1, Calcium, total, Serum / Plasma 9.0, Phosphorus, Serum / Plasma 3.8"
   },
   "Clinical_Findings": {
-    "findings": "Patient is currently on an off week for Xeloda and will restart on 04/12/2011. Supraclavicular area appears to be breaking up. Labs reviewed and deemed okay to proceed with chemotherapy. Pain reported in both breasts. No significant new imaging findings noted in this visit. Physical exam shows no palpable masses, skin changes, or lymphadenopathy."
+    "findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 12/11/2010 PET/CT scan revealed a new right frontal dural-based metastasis with surrounding vasogenic edema and mass effect. Multiple hypermetabolic left cervical and supraclavicular lymph nodes consistent with metastatic disease were noted. There was hypermetabolism along the right parasternal chest wall, possibly invading the sternum, and bilateral subpectoral lymphadenopathy. An area of focal hypermetabolism in the hepatic segment suspicious for early hepatic metastasis was identified. Multifocal osseous metastatic disease was identified within the C2, L2 vertebral bodies, and sacrum. MRI of the brain on 12/11/2010 revealed a 4 cm left inferior frontal extra-axial mass. Pathology from the resection of the frontal brain metastasis on 12/30/2010 confirmed metastatic adenocarcinoma of breast primary, which was estrogen receptor negative, progesterone receptor negative, and HER-2/neu negative. Physical exam shows the supraclavicular area appears to be breaking up. Labs reviewed and deemed okay to proceed with chemotherapy."
   },
   "Current_Medications": {
     "current_meds": "capecitabine, ixabepilone"
   },
   "Treatment_Changes": {
-    "recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab",
-    "supportive_meds": "ondansetron, prochlorperazine, oxyCODONE, docusate sodium, LEVETIRACETAM, SODIUM CHLORIDE ORAL, polyethylene glycol (MIRALAX), docusate sodium (COLACE)"
+    "recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab.",
+    "supportive_meds": "ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE), LORazepam (ATIVAN)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative"
@@ -837,18 +888,12 @@ RESULTS FOR ROW 25
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {
-    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
-      "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone ***** Today is off week 04/12/2011 will start cycle again.",
-      "Short term side_effects_discussed": "Not specified in the note.",
-      "Long term side_effects_discussed": "Not specified in the note."
-    }
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Try ibuprofen or Tylenol in the morning and oxycodone in the evening or when able to have a nap. Patient is currently taking oxycodone but only a couple since the last visit."
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Continue with 1500/1000mg Xeloda for 14 days and 7 days off. Pain management includes ibuprofen or Tylenol in the morning and oxycodone in the evening or when able to have a nap. Patient is currently taking oxycodone but only a couple since the last visit."
   },
   "Therapy_plan": {
-    "therapy_plan": "Taking 1500/1000mg Xeloda for 14 days and 7 days off, with the next cycle starting on 04/12/2011. Continue with chemotherapy as labs are okay to proceed. Pain management includes ibuprofen or Tylenol in the morning and oxycodone in the evening or when able to have a nap. The patient is currently taking a couple of oxycodone since the last visit and reports pain in both breasts."
+    "therapy_plan": "Taking 1500/1000mg of Xeloda for 14 days and 7 days off with ixabepilone. The patient will start the cycle again on 04/12/2011. The patient is to try ibuprofen or Tylenol in the morning and oxycodone in the evening or when able to have a nap. The patient is currently taking oxycodone but reports only taking a couple since the last visit. The patient will continue the current pain management plan and has been given instructions for morning and evening medications."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -863,7 +908,7 @@ RESULTS FOR ROW 25
     "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "None planned."
+    "genetic_testing_plan": "None are planned."
   },
   "Referral": {
     "Nutrition": "None",

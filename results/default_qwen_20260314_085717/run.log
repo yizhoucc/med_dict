@@ -950,3 +950,19 @@ Processing row 24 (5/5)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G6-SEMANTIC] Advance care: "" -> "Not discussed during this visit."
+  Plan extraction prompts: 170.0s
+  Row 24 total: 362.1s
+  Row 24 saved to progress
+
+Total processing time: 1409.7s (23.5min)
+Done! Results copied to ./results.txt
+Full results in: results/default_qwen_20260314_085717/
