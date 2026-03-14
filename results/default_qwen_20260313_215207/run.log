@@ -1,0 +1,15 @@
+Loading model...
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 655, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 500, in main
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 372, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4015, in from_pretrained
+    hf_quantizer, config, device_map = get_hf_quantizer(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/auto.py", line 307, in get_hf_quantizer
+    if pre_quantized and not AutoHfQuantizer.supports_quant_method(config.quantization_config):
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/quantizers/auto.py", line 254, in supports_quant_method
+    quant_method = quantization_config_dict.get("quant_method", None)
+AttributeError: 'NoneType' object has no attribute 'get'
