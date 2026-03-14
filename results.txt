@@ -1,4 +1,4 @@
-Source: default_qwen.yaml | Run started: 2026-03-14 15:40:25
+Source: default_qwen.yaml | Run started: 2026-03-14 16:15:07
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -450,10 +450,10 @@ RESULTS FOR ROW 26
     "Distant Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count 217, MPV 9.6, Neutrophil Absolute Count 2140, Lymphs, Blood 1800, Monocyte Abs Count 400, Eosinophils Absolute 110, Basophil Abs Count 11, Neutrophils 39.7, Lymphs 46.7, Monocytes 9.1, Eos 4.3, BASOS 0.2 (All values from 09/20/2019)"
+    "lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count 217, MPV 9.6, Neutrophil Absolute Count 2140, Lymphs, Blood 1800, Monocyte Abs Count 400, Eosinophils Absolute 110, Basophil Abs Count 11, Neutrophils 39.7%, Lymphs 46.7%, Monocytes 9.1%, Eos 4.3%, BASOS 0.2%"
   },
   "Clinical_Findings": {
-    "findings": "Triple negative breast cancer with a Ki-67 of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed. Physical exam showed no acute distress, awake and alert, appears stated age. Right armpit pain reported with a pain score of 4 at night during sleep."
+    "findings": "Triple negative breast cancer with a proliferation index of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed. Physical exam showed no acute distress, awake and alert, appears stated age. Right armpit pain reported with a pain score of 4 at night during sleep."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -463,7 +463,7 @@ RESULTS FOR ROW 26
     "supportive_meds": ""
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "adjuvant"
+    "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
@@ -479,7 +479,7 @@ RESULTS FOR ROW 26
     "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence."
   },
   "Procedure_Plan": {
-    "procedure_plan": "surgery for reductions bilaterally and a right lumpectomy with sentinel node"
+    "procedure_plan": "surgery for reductions bilaterally and a right lumpectomy with sentinel node, port placement at surgery"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -529,7 +529,7 @@ RESULTS FOR ROW 27
     "Patient type": "Follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Metastatic hormone-positive breast cancer to bone. The patient presents for a follow-up visit to assess hormone therapy and discuss symptoms including lightheadedness, lower back pain, easy bruising, and frequent urination."
+    "summary": "Metastatic hormone-positive breast cancer to bone. The patient presents for a follow-up visit to monitor hormone therapy with Femara."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
@@ -541,7 +541,7 @@ RESULTS FOR ROW 27
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size and metabolic activity. Left iliac wing sclerotic lesion is unchanged. Persistent FDG uptake within left L1 pedicle and anterior vertebral body is not significantly changed. Interval decrease in activity of previously described L2 vertebral body sclerotic focus with no residual hypermetabolic activity seen. No new osseous lesions identified. Physical exam shows a well-developed patient with no acute distress, no rash, no lesions, no diaphoresis, normal breath sounds, no respiratory distress, no wheezing, no chest tenderness, normal heart rate, normal rhythm, no murmurs, no rubs, no gallops, no LE edema, no point tenderness at cervical, thoracic or lumbar spine, muscular strength  5/5 throughout, no peripheral edema, alert & oriented x 3, CN intact, ambulates w/o difficulty, DTRs 2+ throughout."
+    "findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size and metabolic activity. Left iliac wing sclerotic lesion is unchanged in size and metabolic activity with an SUV of 3.1. Persistent FDG uptake within left L1 pedicle (SUV 6) and anterior vertebral body (SUV 9) is not significantly changed. Interval decrease in activity of previously described L2 vertebral body sclerotic focus with no residual hypermetabolic activity seen. No new osseous lesions are identified. Physical exam shows a well-developed patient with no acute distress, no rash, no lesions, no diaphoresis, no respiratory distress, no wheezing, no chest tenderness, normal heart rate and rhythm, no murmurs, no rubs, no gallops, no LE edema, no point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema, alert and oriented x 3, CN intact, ambulates w/o difficulty, DTRs 2+ throughout."
   },
   "Current_Medications": {
     "current_meds": "letrozole, goserelin"
@@ -617,7 +617,7 @@ RESULTS FOR ROW 28
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "A 60-year-old postmenopausal patient with a recent diagnosis of early stage breast cancer, specifically a clinical stage I HR+/HER2- grade 1 IDC of the right breast, presenting to discuss treatment options and to establish care."
+    "summary": "A 60-year-old postmenopausal patient with a recent diagnosis of early stage breast cancer (clinical stage I HR+/HER2- grade 1 IDC of the right breast) presents to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC of the right breast",
@@ -629,7 +629,7 @@ RESULTS FOR ROW 28
     "lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calcium 10.0, AST 37, Alanine transaminase 49, Alkaline Phosphatase 67, Bilirubin 0.7, Albumin 3.9"
   },
   "Clinical_Findings": {
-    "findings": "0.9 cm grade 1 IDC with ER+  99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), Ki-67 3-4%, no vascular invasion, no DCIS. Right lumpectomy/mastectomy: margins negative, 0/3 LN+. No cervical, supraclavicular, or axillary lymphadenopathy on physical exam."
+    "findings": "Pathology results from right lumpectomy show 0.9 cm grade 1 IDC, no vascular invasion, negative margins, and 0/3 LN+. Imaging findings from breast MRI show a mass (0.9 x 0.7 cm) in the upper inner quadrant (UIQ) of the right breast, correlating with the mammogram. No masses are palpable bilaterally on physical exam, and no lymphadenopathy is noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -644,7 +644,38 @@ RESULTS FOR ROW 28
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
   },
-  "Medication_Plan_chatgpt": {},
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "hormonal therapy": {
+          "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+          "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+          "Long term side_effects_discussed": "bone density loss"
+        }
+      },
+      {
+        "bone therapy": {
+          "summary": "DEXA to assess current bone health, taking calcium and vitamin D supplements",
+          "Short term side_effects_discussed": "None",
+          "Long term side_effects_discussed": "None"
+        }
+      },
+      {
+        "radiotherapy": {
+          "summary": "proceed with radiation oncology consultation; patient will have radiation",
+          "Short term side_effects_discussed": "None",
+          "Long term side_effects_discussed": "None"
+        }
+      },
+      {
+        "other treatment": {
+          "summary": "aim to resume daily aerobic activities (150 minutes a week)",
+          "Short term side_effects_discussed": "None",
+          "Long term side_effects_discussed": "None"
+        }
+      }
+    ]
+  },
   "Medication_Plan": {
     "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Calcium and vitamin D supplementation."
   },
@@ -658,7 +689,7 @@ RESULTS FOR ROW 28
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "DEXA to assess current bone health"
+    "imaging_plan": "DEXA at this time to assess her current bone health."
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -716,7 +747,7 @@ RESULTS FOR ROW 29
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Right axillary sentinel lymph node with micrometastatic carcinoma, 0.5mm. Right breast 11:30 position with invasive carcinoma, grade 2, 1.6cm, negative margins, with intermediate grade DCIS and microcalcifications. Right breast areolar nodule at 12:30 with invasive carcinoma, grade 2, 0.6cm, intermediate DCIS, with microcalcifications. Imaging findings: MRI of right breast shows suspicious mass in upper outer quadrant with additional satellite masses and surrounding non-mass enhancement. Left breast is negative. Physical exam findings: Right breast periareolar incision clean, dry, and intact. Erythematous dermatitis reaction in shape of tape on right axilla. Small seroma in lower inner quadrant. Left breast normal external contour, no palpable masses or tenderness."
+    "findings": "Pathology results: Right axillary sentinel lymph node with micrometastatic carcinoma, 0.5mm. Right breast 11:30 position with invasive carcinoma, grade 2, 1.6cm, negative margins, with intermediate grade DCIS and microcalcifications. Right breast areolar nodule at 12:30 with invasive carcinoma, grade 2, 0.6cm, intermediate DCIS, with microcalcifications. Physical exam: Periareolar incision clean/dry/intact, erythematous dermatitis reaction in shape of tape on right axilla, small seroma in lower inner quadrant of right breast. No palpable masses or tenderness in left breast. No lymphadenopathy noted. Imaging: Right breast MRI shows suspicious mass in upper outer quadrant with spiculated margins and heterogeneous internal enhancement, additional satellite masses in upper inner quadrant, and surrounding non-mass enhancement."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -816,19 +847,19 @@ RESULTS FOR ROW 30
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "64 y.o. postmenopausal patient with a recent diagnosis of early stage breast cancer, specifically clinical stage II-III ER-/HER2+ IDC of the right breast, presenting in consultation to discuss treatment options and to establish care."
+    "summary": "64 y.o. postmenopausal patient with a recent diagnosis of early stage breast cancer, specifically clinical stage II-III ER-/HER2+ IDC of the right breast, presenting for initial consult to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
-    "Stage_of_Cancer": "Originally Stage II-III, now metastatic (Stage IV)",
+    "Stage_of_Cancer": "Clinical stage II-III",
     "Metastasis": "No",
-    "Distant Metastasis": "Not sure"
+    "Distant Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/15), ***** 17.9, CA 27.29 78.3, CA 15-3 69 (01/26/16), ***** 20, CA 27.29 98.8, CA 15-3 74.5 (02/27/16), ***** 17.4, CA 27.29 106.2, CA 15-3 73.9 (05/12/16), ***** 16.6, CA 27.29 78, CA 15-3 68 (07/20/16)"
   },
   "Clinical_Findings": {
-    "findings": "Right breast mass (6 x 11 cm) in outer quadrants; no palpable mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8). MRI shows marked NME with clustered ring internal enhancement extending throughout entire right breast with extension to right nipple. Right axillary ultrasound shows multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue. Right nipple is denuded and itchy. No cervical, supraclavicular, or axillary lymphadenopathy on physical exam. Surgical pathology report: Invasive ductal carcinoma (0.35 cm longest linear dimension in one core, tumor in two cores), intermediate to high grade DCIS, solid pattern, positive for HER2 overexpression (IHC 3; FISH ratio 8.9), negative for ER and PR, ~30% Ki-67 proliferation index."
+    "findings": "Right breast mass (6 x 11 cm) in outer quadrants; no palpable mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8). MRI shows marked NME with clustered ring internal enhancement extending throughout entire right breast with extension to right nipple. Right axillary ultrasound shows multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue. Core biopsy of right upper outer breast: 0.35 cm grade 2 IDC, ER- (0%), PR- (0%), HER2+ (IHC 3; FISH ratio 8.9), Ki-67 ~30%; intermediate to high nuclear grade DCIS; no invasion. FNA of right axillary LN: no metastatic adenocarcinoma or evidence of lymphoproliferative disorder; prominent intracytoplasmic pigment, suggestive of dermatopathic lymphadenitis. Physical exam: right breast with mass (6 x 11 cm) in outer quadrants; no mass in left breast; no lymphadenopathy noted on exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -848,13 +879,13 @@ RESULTS FOR ROW 30
     "medication_plan": "The patient will receive either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every 3 week docetaxel, carboplatin, trastuzumab, and pertuzumab (TCHP). This will be followed by every 3 week trastuzumab for a total of one year of biological therapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks, or 6 cycles of every 3 week docetaxel, carboplatin, trastuzumab, and pertuzumab (TCHP). Either regimen will be followed by every 3 week trastuzumab for a total of one year of biological therapy. The patient will also undergo surgery and radiation. The patient will start her treatment within 2 to 3 weeks, after a TTE and Mediport placement."
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every 3 week docetaxel, carboplatin, trastuzumab, and pertuzumab (TCHP). This will be followed by every 3 week trastuzumab for a total of one year of biological therapy. The patient will also undergo surgery and radiation. The patient will start her treatment within 2 to 3 weeks after a TTE and Mediport placement."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned."
+    "procedure_plan": "plan for Mediport placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -916,7 +947,7 @@ RESULTS FOR ROW 31
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake in the right frontal lobe, incompletely characterized, requires further evaluation with MRI of the brain. Prominent intraluminal FDG uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. No pericardial effusion noted on echocardiogram with normal left ventricular ejection fraction of  59%."
+    "findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake in the right frontal lobe, incompletely characterized, requires further evaluation with MRI of the brain. Prominent intraluminal FDG uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. No pericardial effusion noted on echocardiogram with normal left ventricular ejection fraction of  59%. No significant valvular disease or diastolic dysfunction."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -992,12 +1023,12 @@ RESULTS FOR ROW 32
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "82-year-old patient with metastatic breast cancer to the lymph nodes, originally treated in 2011 with a left lumpectomy, TCH chemotherapy, and maintenance herceptin. The patient is being treated with herceptin and pertuzumab and is changing care to this clinic due to proximity to home."
+    "summary": "82-year-old patient with metastatic breast cancer to the lymph nodes, initially diagnosed in 2010, presenting for a new patient evaluation to change her care to this clinic due to proximity to home."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
     "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
-    "Metastasis": "Yes (to the lymph nodes of the left neck, chest, abdomen and pelvis, and left adnexal lesion)"
+    "Metastasis": "Yes (to the lymph nodes of the left neck, chest, abdomen, and pelvis)"
   },
   "Lab_Results": {
     "lab_summary": "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L (Lab results from 05/18/2016)"
@@ -1023,7 +1054,7 @@ RESULTS FOR ROW 32
     "medication_plan": "Herceptin, previously on ***** and *****"
   },
   "Therapy_plan": {
-    "therapy_plan": "Currently on herceptin and recently dropped ***** due to diarrhea. The diarrhea has resolved. Plan to continue herceptin. Set up infusion at *****. RTC in 3 and 6 weeks."
+    "therapy_plan": "Currently on herceptin and recently dropped ***** due to diarrhea. The diarrhea has resolved. Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutrition consult for weight loss."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -1186,7 +1217,7 @@ RESULTS FOR ROW 34
     "Patient type": "Follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Stage III breast cancer, local recurrence, to discuss treatment options including resumption of hormonal therapy and referral for chest wall radiation."
+    "summary": "Stage III left breast cancer, ER positive PR negative, with a local recurrence. The purpose of this visit is to discuss the management plan for the local recurrence, including the resumption of hormonal therapy and referral for chest wall radiation."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "",
@@ -1197,7 +1228,7 @@ RESULTS FOR ROW 34
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast showed ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), HER2 negative (IHC 2+; FISH 1.6). FNA of left axillary LN was negative. PET-CT showed hypermetabolic tumor at lateral margin of left breast implant. Breast MRI showed 2 cm mass in left reconstructed breast with no suspicious lymph nodes. Physical exam revealed no palpable masses, no tenderness, no lymphadenopathy, and no skin changes. Patient is s/p bilateral mastectomies with implants."
+    "findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast showed ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), HER2 negative (IHC 2+; FISH 1.6). FNA of left axillary LN was negative. PET-CT showed hypermetabolic tumor at lateral margin of left breast implant, with focal uptake in left lateral 6th rib of unclear significance. Breast MRI showed a 2cm mass in left reconstructed breast with no suspicious lymph nodes. Physical exam revealed no palpable masses, no tenderness, no lymphadenopathy, and no skin changes. Patient is s/p bilateral mastectomies with implants."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1220,7 +1251,7 @@ RESULTS FOR ROW 34
     "therapy_plan": "tamoxifen 20mg PO qD, referral to radiation oncology for chest wall RT, return to clinic in 6 months"
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "She accepts a referral now for chest wall RT."
+    "radiotherapy_plan": "Chest wall RT is planned as she accepts a referral now."
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
@@ -1237,7 +1268,7 @@ RESULTS FOR ROW 34
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Radiation oncology consult",
+    "Specialty": "chest wall RT, referral to *****",
     "Others": "None",
     "follow up": "return to clinic in 6 months"
   },
@@ -1285,7 +1316,7 @@ RESULTS FOR ROW 35
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpectomy scar on right breast, no suspicious mass in either breast, clear axillary, supraclavicular, and infraclavicular areas. Last mammogram on 04/15/2019 showed no signs of malignancy."
+    "findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpectomy scar on right breast, no suspicious mass in either breast, clear axilla, supraclavicular, and infraclavicular areas. Last mammogram on 04/15/2019 showed no signs of malignancy."
   },
   "Current_Medications": {
     "current_meds": "tamoxifen"
@@ -1308,7 +1339,7 @@ RESULTS FOR ROW 35
     }
   },
   "Medication_Plan": {
-    "medication_plan": "Continue on anastrozole without significant side effects."
+    "medication_plan": "Continue on anastrozole without specified dose or frequency."
   },
   "Therapy_plan": {
     "therapy_plan": "scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019, return to clinic in 6 months for routine follow-up"
