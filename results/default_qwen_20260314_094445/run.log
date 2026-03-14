@@ -102,3 +102,26 @@ Processing row 20 (1/5)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'adjuvant endocrine therapy (e.g. aromatase inhibitor like" -> "[{'hormonal therapy': {'summary': 'adjuvant endocrine therapy (e.g. aromatase in"
+    Medication_Plan: 18.9s
+      [EXTRACT] raw={
+    "medication_plan": "Consideration of aromatase inhibitor therapy (e.g., Arimidex) for 5 years after breast XRT to reduce risk of recurrent DCIS or progression to invasive ductal cancer. Bisphosp
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 28.9s
+      [EXTRACT] raw={
+    "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. She wi
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 14.3s [semantic-fixed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer. S
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] radiotherapy_plan: "She is inclined toward undertaking additional adjuvant treatment(s) to minimize " -> "She will then plan to return for ***** follow-up visit in 3-4 months allowing ti"
