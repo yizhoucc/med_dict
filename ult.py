@@ -578,6 +578,7 @@ def build_base_cache(text, model, tokenizer, definitions_context="", chat_tmpl=N
     base_prompt = (
         chat_tmpl.system_user_assistant(system_msg, user_msg)
         + '{"status": "Understood. I have read the note and am ready."}'
+        + chat_tmpl.t['turn_end']
     )
 
     with torch.no_grad():
