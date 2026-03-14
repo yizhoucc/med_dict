@@ -1081,3 +1081,55 @@ Processing row 30 (6/10)...
       [G3-FAITH] EMPTIED: ['current_meds']
       [G3-REVERT] current_meds: reverted (G3 emptied all fields)
       [G6-SEMANTIC] current_meds: "doxil" -> ""
+    Treatment_Changes: 14.7s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Scheduled to start Doxil on 07/01/2021.",
+"supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Scheduled to start Doxil on 07/01/2021." -> "Not yet on treatment — no holds, dose reductions, or switches to report."
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.1s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 92.2s
+    Medication_Plan_chatgpt: 17.4s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting Doxil IV every 28 days on 07/01/2021.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+    
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "Doxil" -> "{'summary': 'Cycle 1 Doxil IV every 28 days on 07/01/2021', 'Short term side_eff"
+    Medication_Plan: 9.2s
+      [EXTRACT] raw={
+    "medication_plan": "Cycle 1 Doxil IV every 28 days starting on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
