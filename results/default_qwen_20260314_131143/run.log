@@ -174,3 +174,59 @@ Processing row 20 (1/5)...
       [G3-FAITH] EMPTIED: ['genetic_testing_plan']
       [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 12.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc, Med Onc",
+"Others": "None",
+"follow up": "in two weeks for UCSF Rad Onc consultation, return for follow-up visit in 3-4 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics', 'Others']
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 6.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3-4 months allowing time to complete right breast XRT if that option is recommended and accepted"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 151.3s
+  Row 20 total: 217.0s
+  Row 20 saved to progress
+
+Processing row 21 (2/5)...
+  Injected 6 term definitions: ['estrogen receptor', 'ER positive', 'PR positive', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1415 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 26.4s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient presents for a second opinion regarding metastatic ER+ breast cancer with chest wall recurrence,
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
