@@ -495,3 +495,19 @@ Processing row 22 (3/5)...
       [G4-TEMPORAL] hormonal therapy: "{'summary': "Patient will start letrozole for at least five years of adjuvant ho" -> "{'summary': "Patient will start letrozole for at least five years of adjuvant ho"
       [G6-SEMANTIC] hormonal therapy: "{'summary': "Patient will start letrozole for at least five years of adjuvant ho" -> "{'summary': "Patient will start letrozole for at least five years of adjuvant ho"
       [POST-KEYS] stripped: {'other treatment', 'hormonal therapy'}
+    Medication_Plan: 31.5s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start letrozole for adjuvant hormonal therapy. The patient will receive at least five years of adjuvant hormonal therapy. The decision to continue the aromatase 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] medication_plan: "Patient will start letrozole for adjuvant hormonal therapy. " -> "Patient will start letrozole for adjuvant hormonal therapy. "
+      [G4-TEMPORAL] medication_plan: "Patient will start letrozole for adjuvant hormonal therapy. The patient will rec" -> "Patient will start letrozole for adjuvant hormonal therapy. The patient will rec"
+      [G6-SEMANTIC] medication_plan: "Patient will start letrozole for adjuvant hormonal therapy. The patient will rec" -> "Patient will start letrozole for adjuvant hormonal therapy. The patient will rec"
+    Therapy_plan: 30.2s [faith-trimmed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond 5 years will be individualized bas
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] therapy_plan: "The patient will begin letrozole for at least five years of " -> "The patient will begin letrozole for at least five years of "
+      [G4-TEMPORAL] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
+      [G6-SEMANTIC] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
