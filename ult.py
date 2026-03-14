@@ -31,6 +31,17 @@ def load_oncology_whitelist(path="data/oncology_drugs.txt"):
     return drugs
 
 
+def load_supportive_whitelist(path="data/supportive_care_drugs.txt"):
+    """Load supportive care drug whitelist for filtering supportive_meds."""
+    drugs = set()
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                drugs.add(line.lower())
+    return drugs
+
+
 def filter_current_meds(parsed, whitelist):
     val = parsed.get("current_meds", "")
     if isinstance(val, list):
@@ -43,6 +54,26 @@ def filter_current_meds(parsed, whitelist):
             meds = [m.strip() for m in val.split(",")]
             filtered = [m for m in meds if any(d in m.lower() for d in whitelist)]
             parsed["current_meds"] = ", ".join(filtered) if filtered else ""
+    return parsed
+
+
+def filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist):
+    """Filter supportive_meds to only keep cancer-treatment-related supportive drugs.
+
+    Keeps a med if it matches either the supportive care whitelist OR the oncology
+    whitelist (bone agents like denosumab appear in both contexts).
+    """
+    val = parsed.get("supportive_meds", "")
+    if not val or not isinstance(val, str):
+        return parsed
+    if val.lower() in ("none", "n/a", ""):
+        return parsed
+
+    combined = supportive_whitelist | oncology_whitelist
+    # Split by comma, semicolon, or newline
+    meds = [m.strip() for m in re.split(r'[,;\n]', val) if m.strip()]
+    filtered = [m for m in meds if any(d in m.lower() for d in combined)]
+    parsed["supportive_meds"] = ", ".join(filtered) if filtered else ""
     return parsed
 
 
@@ -665,7 +696,7 @@ def extract_schema_keys(prompt_text):
     return set(keys) if keys else set()
 
 
-def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None):
+def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, **kwargs):
     """
     Extract keypoints with agentic self-correction:
     1. Extract answer from model
@@ -877,7 +908,7 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None):
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None, supportive_whitelist=None):
     """
     V2 extraction pipeline with 6 independent gates.
     Each gate fixes one specific issue (trim, don't redo).
@@ -1231,6 +1262,15 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             if str(before) != str(after):
                 gate_log.append(f"      [POST-MEDS] {before} -> {after}")
                 flags.append("meds-filtered")
+
+        # --- POST-3: Filter supportive_meds by whitelist ---
+        if parsed is not None and key == "Treatment_Changes" and supportive_whitelist and oncology_whitelist:
+            before = parsed.get("supportive_meds", "")
+            parsed = filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist)
+            after = parsed.get("supportive_meds", "")
+            if str(before) != str(after):
+                gate_log.append(f"      [POST-SUPP] {before} -> {after}")
+                flags.append("supp-filtered")
 
         # --- Store result ---
         if parsed is not None:

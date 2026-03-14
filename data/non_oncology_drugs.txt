@@ -1,0 +1,170 @@
+# Non-oncology drug list — these should NEVER appear in current_meds or supportive_meds
+# Common medications seen in oncology notes that are NOT cancer-related
+# One drug per line (lowercase)
+
+# BLOOD PRESSURE / CARDIOVASCULAR
+amlodipine
+norvasc
+atenolol
+tenormin
+losartan
+cozaar
+lisinopril
+hydrochlorothiazide
+metoprolol
+lopressor
+toprol
+pravastatin
+atorvastatin
+lipitor
+lovastatin
+rosuvastatin
+crestor
+simvastatin
+aspirin
+rivaroxaban
+xarelto
+warfarin
+coumadin
+
+# DIABETES
+metformin
+glucophage
+glyburide
+diabeta
+glipizide
+insulin
+
+# THYROID
+levothyroxine
+synthroid
+
+# PSYCHIATRIC / SLEEP
+lorazepam
+ativan
+alprazolam
+xanax
+diazepam
+valium
+clonazepam
+klonopin
+zolpidem
+ambien
+trazodone
+desyrel
+duloxetine
+cymbalta
+escitalopram
+lexapro
+sertraline
+zoloft
+fluoxetine
+prozac
+venlafaxine
+effexor
+buspirone
+buspar
+lurasidone
+latuda
+quetiapine
+seroquel
+melatonin
+
+# NEUROPATHY (not cancer-treatment-specific supportive care)
+gabapentin
+neurontin
+pregabalin
+lyrica
+
+# PAIN (non-cancer, OTC)
+ibuprofen
+advil
+motrin
+naproxen
+naprosyn
+meloxicam
+mobic
+diclofenac
+voltaren
+acetaminophen
+tylenol
+cyclobenzaprine
+flexeril
+baclofen
+lioresal
+
+# ALLERGY
+cetirizine
+zyrtec
+loratadine
+claritin
+fexofenadine
+allegra
+fluticasone
+flonase
+
+# GI / ACID REFLUX
+omeprazole
+prilosec
+pantoprazole
+protonix
+famotidine
+pepcid
+dexlansoprazole
+dexilant
+ranitidine
+
+# ANTIBIOTICS
+amoxicillin
+amoxil
+cephalexin
+keflex
+doxycycline
+levofloxacin
+levaquin
+nitrofurantoin
+macrodantin
+ciprofloxacin
+azithromycin
+fluconazole
+diflucan
+
+# SUPPLEMENTS / VITAMINS
+multivitamin
+calcium
+vitamin d
+vitamin b-12
+cyanocobalamin
+iron
+ferrous
+magnesium
+fish oil
+acidophilus
+probiotics
+
+# RESPIRATORY
+albuterol
+
+# SEIZURE (unless brain mets related)
+levetiracetam
+keppra
+lamotrigine
+lamictal
+
+# MIGRAINE
+sumatriptan
+imitrex
+
+# OTHER
+latanoprost
+xalatan
+nicotine
+nicoderm
+onabotulinumtoxina
+botox
+sodium chloride
+guaifenesin
+lidocaine
+estradiol
+estrace
+raloxifene

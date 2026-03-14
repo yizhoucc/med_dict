@@ -103,6 +103,7 @@ from ult import (
     extract_and_verify_v2,
     load_medical_dictionary,
     load_oncology_whitelist,
+    load_supportive_whitelist,
     find_relevant_definitions,
     format_definitions_context,
     run_model,
@@ -570,6 +571,10 @@ def main():
     whitelist = load_oncology_whitelist()
     print(f"Oncology whitelist loaded: {len(whitelist)} drugs")
 
+    # 11c. Load supportive care drug whitelist
+    supp_whitelist = load_supportive_whitelist()
+    print(f"Supportive care whitelist loaded: {len(supp_whitelist)} drugs")
+
     # 12. Main loop
     global_start = time.time()
     print(f"\nProcessing {len(df)} rows...")
@@ -600,7 +605,7 @@ def main():
         ext_start = time.time()
         base_cache = build_base_cache(note_text, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
         keypoints = extract_fn(
-            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist, gate_config=gate_config
+            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist, gate_config=gate_config, supportive_whitelist=supp_whitelist
         )
         print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
 
@@ -618,6 +623,7 @@ def main():
                 chat_tmpl=chat_tmpl,
                 oncology_whitelist=whitelist,
                 gate_config=gate_config,
+                supportive_whitelist=supp_whitelist,
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")

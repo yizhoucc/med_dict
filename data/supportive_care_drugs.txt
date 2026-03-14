@@ -1,0 +1,97 @@
+# Supportive care drug whitelist — for filtering supportive_meds field
+# Only drugs RELATED TO CANCER TREATMENT belong in supportive_meds
+# One drug per line (lowercase), with category comments
+# Generic name and brand name on separate lines
+
+# ANTI-NAUSEA / ANTI-EMETIC (chemo-induced nausea)
+ondansetron
+zofran
+granisetron
+kytril
+palonosetron
+aloxi
+prochlorperazine
+compazine
+olanzapine
+zyprexa
+aprepitant
+emend
+fosaprepitant
+dronabinol
+marinol
+scopolamine
+
+# STEROIDS (part of chemo regimen / anti-emetic)
+dexamethasone
+decadron
+prednisone
+deltasone
+methylprednisolone
+solu-medrol
+hydrocortisone
+
+# BOWEL REGIMEN (chemo-related diarrhea/constipation)
+loperamide
+imodium
+diphenoxylate-atropine
+lomotil
+docusate
+colace
+senna
+senokot
+senna-docusate
+bisacodyl
+dulcolax
+polyethylene glycol
+miralax
+
+# GROWTH FACTORS (neutropenia from chemo)
+filgrastim
+neupogen
+pegfilgrastim
+neulasta
+sargramostim
+leukine
+
+# BONE-PROTECTING AGENTS (already in oncology_drugs.txt, listed here for completeness)
+# denosumab, xgeva, prolia, zoledronic acid, zometa, pamidronate
+
+# PAIN MEDICATION (cancer pain)
+oxycodone
+roxicodone
+oxycontin
+hydrocodone
+norco
+vicodin
+hydromorphone
+dilaudid
+morphine
+ms contin
+fentanyl
+duragesic
+methadone
+tramadol
+ultram
+codeine
+tylenol with codeine
+acetaminophen-codeine
+
+# ANTIHISTAMINE (chemo pre-medication)
+diphenhydramine
+benadryl
+
+# EPO AGENTS (chemo-induced anemia)
+epoetin
+procrit
+epogen
+darbepoetin
+aranesp
+
+# MOUTH CARE (mucositis from chemo)
+nystatin
+magic mouthwash
+
+# BLOOD THINNER (cancer-related DVT/PE — borderline, include if prescribed for cancer)
+enoxaparin
+lovenox
+# rivaroxaban and warfarin are borderline — often pre-existing, exclude by default
