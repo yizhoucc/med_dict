@@ -919,10 +919,16 @@ IMAGING_TERMS = [
     "diagnostic mammogram", "bilateral mammogram",
 ]
 RADIOTHERAPY_TERMS = [
-    "radiation", "radiotherapy", "xrt", "rt ", " rt,", " rt.",
+    "radiation", "radiotherapy", "xrt",
     "chest wall rt", "whole brain radiation", "sbrt", "imrt",
     "proton therapy", "brachytherapy",
 ]
+# Short "RT" checked with word boundary to avoid matching "port", "report", etc.
+_RT_WORD_RE = re.compile(r'\brt\b', re.IGNORECASE)
+
+def _is_radiotherapy(text_lower):
+    """Check if text is about radiotherapy (not port placement, etc.)."""
+    return any(t in text_lower for t in RADIOTHERAPY_TERMS) or bool(_RT_WORD_RE.search(text_lower))
 
 def filter_procedure_plan(parsed, gate_log):
     """Remove imaging and radiotherapy items from procedure_plan."""
@@ -932,7 +938,6 @@ def filter_procedure_plan(parsed, gate_log):
     val_lower = val.strip().lower()
     if val_lower in ("no procedures planned.", "no procedures planned", "none", "none planned."):
         return parsed
-    # Check if the value is ONLY imaging/radiotherapy content
     # Split by comma/semicolon, check each item
     items = [item.strip() for item in re.split(r'[,;]', val) if item.strip()]
     kept = []
@@ -940,7 +945,7 @@ def filter_procedure_plan(parsed, gate_log):
     for item in items:
         item_lower = item.lower()
         is_imaging = any(t in item_lower for t in IMAGING_TERMS)
-        is_rt = any(t in item_lower for t in RADIOTHERAPY_TERMS)
+        is_rt = _is_radiotherapy(item_lower)
         if is_imaging or is_rt:
             removed.append(item)
         else:
