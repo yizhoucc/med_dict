@@ -30,3 +30,32 @@ Processing row 25 (1/10)...
       [G3-FAITH] EMPTIED: ['second opinion']
       [G3-REVERT-INFER] second opinion: restored classification/inference "no"
       [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 11.3s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Estrogen receptor negative triple negative breast cancer",
+  "Stage_of_Cancer": "Stage IB",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "No" -> ""
+      [G3-FAITH] EMPTIED: ['Metastasis']
+      [G3-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 37.6s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 27.1, MCHC 34.8, RDW 15.3, Platelet Count 217, MPV 9.6, Neutrophil Absolute Count 2140, Lymphs, Blood 1
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 14.4s
+      [EXTRACT] raw={
+"findings": "Triple negative breast cancer with a Ki-67 of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed. Physical exam showed no acute distress, awake 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
