@@ -92,3 +92,21 @@ Processing row 20 (1/5)...
       [G3-FAITH] EMPTIED: ['response_assessment']
       [G6-SEMANTIC] response_assessment: "" -> "Not yet on treatment — no response to assess."
   Extraction prompts: 64.2s
+    Medication_Plan_chatgpt: 57.8s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to discuss the addition of an aromatase inhibitor like Arimidex for 5 years after XRT to further reduce her risk to 5-8% and provide lifelong chemo
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'adjuvant endocrine therapy (e.g. aroma" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'adjuvant endocrine therapy"
+    Medication_Plan: 12.4s
+      [EXTRACT] raw={
+    "medication_plan": "Arimidex (an aromatase inhibitor) for 5 years after breast XRT; bisphosphonate therapy to mitigate bone density complications associated with aromatase inhibitor therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
