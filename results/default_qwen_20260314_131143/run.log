@@ -306,3 +306,85 @@ Processing row 21 (2/5)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] no changes
       [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 12.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on arimidex alone. If PET CT shows progression, could use faslodex with ***** if she has a ***** mutation. Future options include hormone blockade with afinitor or xel
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 5.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 in June 2020"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 11.3s
+      [EXTRACT] raw={
+    "procedure_plan": "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Imaging_Plan: 10.4s [semantic-fixed]
+      [EXTRACT] raw={
+    "imaging_plan": "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] imaging_plan: "I recommend a pet ct now and if stable continue arimidex alone. If pet ct shows " -> "I recommend a pet ct now"
+    Lab_Plan: 1.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G3-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 7.4s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Referral: 16.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with **
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Specialty: "None" -> ""
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Nutrition', 'Genetics', 'Specialty', 'Others']
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Specialty: restored safe negative "None"
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    follow_up_next_visit: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after PET CT results to determine next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Next clinic visit: "in-person: after PET CT results to determine next steps" -> ""
+      [G3-FAITH] EMPTIED: ['Next clinic visit']
+      [G3-REVERT] Next clinic visit: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
