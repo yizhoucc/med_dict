@@ -835,3 +835,34 @@ Processing row 24 (5/5)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 57.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea Nitrogen, Serum / Plasma 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC 35.2
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea" -> "Alkaline Phosphatase 308, AST 55, Bilirubin, Total 0.6, Urea"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 20.3s
+      [EXTRACT] raw={
+"findings": "Patient is currently on an off week for Xeloda and ixabepilone. Imaging from 03/12/2011 PET/CT showed disease progression including liver, bones, lymph nodes, and breast. Exam revealed 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 6.5s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "capecitabine, ixabepilone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "capecitabine, ixabepilone, denosumab" -> "capecitabine, ixabepilone"
+    Treatment_Changes: 20.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started ixabepilone 40mg/m2, Xeloda continued, started denosumab",
+"supportive_meds": "ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (CO
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-SUPP] ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE), LEVETIRACETAM (KEPPRA ORAL), LORazepam (ATIVAN) -> ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), docusate sodium (COLACE), prochlorperazine (COMPAZINE)
