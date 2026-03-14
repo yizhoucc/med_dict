@@ -1690,3 +1690,51 @@ Processing row 33 (9/10)...
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 32.9s
+      [EXTRACT] raw={
+"findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "arimidex" -> ""
+      [G3-FAITH] EMPTIED: ['current_meds']
+      [G3-REVERT] current_meds: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] current_meds: "arimidex" -> ""
+    Treatment_Changes: 7.2s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "tamoxifen 20mg PO qD",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "tamoxifen 20mg PO qD" -> "anastrozole *****-***** self D/Ced against advice, declined CW XRT, tamoxifen 20"
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 78.5s
