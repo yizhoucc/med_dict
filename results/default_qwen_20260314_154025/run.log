@@ -862,3 +862,25 @@ Processing row 29 (5/10)...
       [G3-REVERT-INFER] Distant Metastasis: restored classification/inference "Not sure"
       [G6-SEMANTIC] Metastasis: "Not sure" -> "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 45.4s
+      [EXTRACT] raw={
+"lab_summary": "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/15), ***** 17.9, CA 27.29 78.3, CA 15-3 69 (01/26/16), ***** 20, CA 27.29 98.8, CA 15-3 74.5 (02/27/16), 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Clinical_Findings: 45.0s
+      [EXTRACT] raw={
+"findings": "Right breast mass (6 x 11 cm) in outer quadrants; no palpable mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 2.4s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
