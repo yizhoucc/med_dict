@@ -299,3 +299,82 @@ Processing row 26 (2/10)...
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
   Extraction prompts: 105.9s
+    Medication_Plan_chatgpt: 36.4s [temporal-cleaned, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on ***** (likely aromatase inhibitor), zoladex (likely goserelin), and femara (likely letrozole).",
+        "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [G6-SEMANTIC] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [G6-SEMANTIC] hormonal therapy: "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos" -> "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos"
+      [POST-KEYS] stripped: {'other treatment', 'hormonal therapy'}
+    Medication_Plan: 6.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 7.8s [semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] therapy_plan: "Continue on *****, zoladex and femara." -> "Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 7.4s
+      [EXTRACT] raw={
+    "imaging_plan": "Reassess lower back pain at two weeks and consider MRI of the spine."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 5.5s
+      [EXTRACT] raw={
+    "lab_plan": "CBC with platelets to evaluate easy bruising."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Genetic_Testing_Plan: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
