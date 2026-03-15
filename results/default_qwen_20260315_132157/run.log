@@ -1938,3 +1938,57 @@ Processing row 44 (10/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 20.1s
+      [EXTRACT] raw={
+"findings": "Patient has a 3 cm IDC with 2 lymph nodes positive. Imaging findings include bilateral lung nodules and right hilar LN, as seen on a CT of the chest in December 2021 and confirmed by bi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 1.9s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.3s
+      [EXTRACT] raw={
+"recent_changes": "We discussed starting on [REDACTED], gemzar carboplatin asap.",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 60.7s
+  Cross-context injected (818 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.6s
+      [EXTRACT] raw={
+"response_assessment": "The patient has metastatic breast cancer to the lung and right hilar lymph node diagnosed January 2022. She has had no treatment since January 2022 when diagnosed with metast
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 15.1s
+  Total extraction: 75.8s
+    Medication_Plan_chatgpt: 24.9s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting on gemzar carboplatin asap. Second line could use [REDACTED] and there are clinical trials (such as a FGFR inhibitor) or other [REDACTED] (such as 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['gemzar carboplatin', 'xeloda', 'adjuvant radiation']" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in" -> "[{'summary': 'gemzar carboplatin asap', 'Short term side_effects_discussed': '',"
