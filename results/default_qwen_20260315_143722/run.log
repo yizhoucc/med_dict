@@ -6936,3 +6936,26 @@ Processing row 79 (34/36)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 78.0s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg/mL, Albumin, Serum / Plasm
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 17.6s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a local recurrence of invasive cancer 7 years following mastectomy for DCIS. The IDC is 0.8cm, grade 3, with a close margin, and ER/PR+. MRI breasts: benign findings of sali
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a local recurrence of invasive cancer 7 years fo" -> "Patient has a local recurrence of invasive cancer 7 years fo"
+    Current_Medications: 17.8s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 U"
+      [POST-MEDS] cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 Units by mouth daily after dinner., Disp: , Rfl: , dexAMETHasone (DECADRON) 4 mg tablet, Take 8 mg (2 tablets) by mouth the evening before infusion, repeat 1 hour before infusion, repeat the evening of infusion., Disp: 30 tablet, Rfl: 0 , LORazepam (ATIVAN) 1 mg tablet, Take 1 tablet (1 mg total) by mouth every 4 (four) hours as needed for Anxiety (Insomnia, Nausea, Vomiting)., Disp: 30 tablet, Rfl: 3 , ondansetron (ZOFRAN) 8 mg tablet, Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed for Nausea (Vomiting)., Disp: 30 tablet, Rfl: 3 , prochlorperazine (COMPAZINE) 10 mg tablet, Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting.)., Disp: 30 tablet, Rfl: 3 -> 
