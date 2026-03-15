@@ -1060,3 +1060,53 @@ Processing row 51 (6/36)...
   Regex matched: 'Assessment/Plan'
   Regex extraction succeeded (4707 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 15.2s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "35 y.o. female with left breast IDC, ER+, PR+, HER2-, Ki-67 10%, s/p left partial mastectomy and SLN with
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.7s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "POCT Preg Test, Ur Negative (12/04/2020)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "POCT Preg Test, Ur Negative (12/04/2020)" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 20.5s [improved]
+      [EXTRACT] raw={
+"findings": "Patient has a 1.7 cm grade II IDC with micrometastatic carcinoma in (March 28), 0.18 cm largest deposit, with minimal extranodal extension. Margins are negative. No [REDACTED]. Physical
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has a 1.7 cm grade II IDC with micrometastatic carcinoma in (March 28), " -> "Patient has a 1.7 cm grade II IDC with micrometastatic carcinoma in (March 28), "
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, i"
+      [POST-MEDS] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN, ondansetron (ZOFRAN) 8 mg, Oral, Every 8 Hours PRN -> 
