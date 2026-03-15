@@ -858,7 +858,7 @@ def main():
             if therapy_val and therapy_val.lower() not in ("none", ""):
                 # Build therapy whitelist: oncology drugs + therapy category keywords
                 THERAPY_CATEGORY_TERMS = {
-                    'chemotherapy', 'chemo', 'radiation', 'radiotherapy', 'xrt', 'rt ',
+                    'chemotherapy', 'chemo', 'radiation', 'radiotherapy', 'xrt', ' rt ',
                     'hormonal therapy', 'hormone blockade', 'endocrine therapy', 'anti-hormonal',
                     'aromatase inhibitor', 'ovarian suppression', 'immunotherapy',
                     'targeted therapy', 'bone therapy', 'adjuvant', 'neoadjuvant',
@@ -872,7 +872,7 @@ def main():
                 kept = []
                 removed = []
                 for sent in sentences:
-                    sl = sent.lower()
+                    sl = " " + sent.lower() + " "  # pad for word-boundary matching (' rt ')
                     if any(term in sl for term in therapy_terms):
                         kept.append(sent)
                     else:
@@ -882,8 +882,12 @@ def main():
                     therapy["therapy_plan"] = new_val
                     print(f"    [POST-THERAPY] removed non-therapy: {[s[:50] for s in removed]}")
                 elif removed and not kept:
-                    # All sentences removed — unusual, keep original to be safe
-                    pass
+                    # All sentences removed — check if original has ANY oncology drug names
+                    # If no drugs mentioned at all, this is probably a mis-extraction → clear it
+                    if not any(term in therapy_val.lower() for term in whitelist):
+                        therapy["therapy_plan"] = "None"
+                        print(f"    [POST-THERAPY] cleared (no oncology drugs found): {therapy_val[:80]}")
+                    # else: has drug names but mixed with non-therapy context → keep original
 
         # POST-IMAGING: Search full note for imaging plans mentioned outside A/P
         # Similar to POST-PROCEDURE: echocardiogram, DEXA, etc. may be in A/P as standalone items
@@ -909,11 +913,27 @@ def main():
                 'bone scan': 'Bone scan',
                 'ultrasound': 'Ultrasound',
             }
+            # Synonyms for dedup: if any synonym is in existing text, skip adding this label
+            IMAGING_SYNONYMS = {
+                'Echocardiogram': ['echocardiogram', 'echo ', 'echo.', 'echo,', 'tte'],
+                'DEXA scan': ['dexa', 'bone density'],
+                'Mammogram': ['mammogram'],
+                'PET/CT': ['pet/ct', 'pet ct', 'petct', 'pet-ct'],
+                'Bone scan': ['bone scan'],
+                'CT Chest': ['ct chest'],
+                'CT scan': ['ct scan', 'ct '],
+                'CT Abdomen': ['ct abdomen'],
+                'Brain MRI': ['brain mri'],
+                'MRI Breast': ['mri breast'],
+                'Ultrasound': ['ultrasound'],
+            }
             # Search A/P text for imaging ordered as standalone items or with future tense
             search_text = assessment_and_plan if assessment_and_plan else note_text
             for pattern, label in IMAGING_TYPES.items():
-                if label.lower() in img_lower:
-                    continue  # already captured
+                # Check if any synonym already exists in current imaging_plan
+                synonyms = IMAGING_SYNONYMS.get(label, [label.lower()])
+                if any(syn in img_lower for syn in synonyms):
+                    continue  # already captured (including synonyms)
                 # Look for imaging with future context in A/P
                 regex = (
                     r'(?:will\s+(?:order|schedule|get|have|obtain|need)|'
