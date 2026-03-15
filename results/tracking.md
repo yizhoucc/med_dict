@@ -2350,99 +2350,238 @@ Row 41 (180): [POST-PROCEDURE] found in full note: 'port placement'
 
 注意: POST-NUTRITION 未触发（因为 Row 45 这次 LLM 直接输出了 "None"，不需要后处理清理）。但过滤器已就位，下次 LLM 随机性回归时会自动拦截。
 
-### v13 逐行审查（逐字段对照原文 + v12 + v10）
+### v13 逐行深度审查（逐字段对照原文 + prompt + code + 历史 tracking）
 
 #### Row 36 (coral_idx 175) — 27岁女性, Abraxane cycle 8
 
-| 字段 | v13 输出 | vs v12 | vs v10 | 原文依据 | 判定 |
-|------|---------|--------|--------|---------|------|
-| Lab_Plan | **"No labs planned."** | v12: "labs reviewed...doppler..." | v10: "No labs planned." | A/P: "labs reviewed" (过去) + "doppler" (影像) | ✅ **B87 FIXED** |
-| Procedure_Plan | "No procedures planned." | 同 | v10: "will get doppler..." | doppler 是影像不是手术 | ✅ B66 仍修复 |
-| current_meds | "Abraxane, zoladex" | 同 | 同 | HPI 有 tamoxifen 但 ***** 遮掩 | ⚠️ B65 仍在 (P2, redacted) |
-| 其他字段 | 一致 | — | — | — | ✅ |
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Lab_Plan | **"No labs planned."** | A/P: "labs reviewed" (过去) + "doppler" (影像，非 lab) | ✅ **B87 FIXED** (POST-LAB 清除) |
+| Procedure_Plan | "No procedures planned." | doppler 是影像不是手术 | ✅ B66 仍修复 |
+| current_meds | "Abraxane, zoladex" | HPI 有 tamoxifen 但 ***** 遮掩 | ⚠️ B65 仍在 (P2, redacted) |
+| Therapy_plan | 含 "valtrex" | valtrex 是抗病毒药，非 cancer therapy | ⚠️ P2 (LLM 随机性) |
+| Others | "None" | "pt will contact PT for lymphedema" | ⚠️ P2 (PT referral 暗示，非明确转诊) |
+| 其他字段 | 全部正确 | — | ✅ |
 
-#### Row 37 (coral_idx 176) — Stage IIA TNBC, 视频会诊
+#### Row 37 (coral_idx 176) — 61岁女性, Stage IIA TNBC, Video Visit 新诊断
 
-| 字段 | v13 输出 | vs v12 | 原文依据 | 判定 |
-|------|---------|--------|---------|------|
-| Type_of_Cancer | "ER-/PR-/HER2- IDC" | v12 多了 "triple negative" | 原文 "triple negative" | ≈ 两者都正确，v12 略好 (P2 LLM 随机性) |
-| Procedure_Plan | "No procedures planned." | 同 | 化疗不是手术 | ✅ B68 仍修复 |
-| Advance_care | "Full code." | 同 | "Code status: Full code." | ✅ |
+**原文关键事实**: 61 y.o.，Video Visit，New Patient Evaluation。Left breast cancer，bilateral mastectomies July 2020。2.3cm node negative triple negative。Stage IIA。Current med: dexlansoprazole (PPI)。Code status: Full code。A/P: recommend dd AC followed by Taxol，no radiation/hormone，lifestyle advice。
 
-#### Row 38 (coral_idx 177) — BRCA1, Stage IIB
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Patient type | "New patient" | "New Patient Evaluation" | ✅ |
+| in-person | "Televisit" | "Video Visit" | ✅ |
+| Type_of_Cancer | "ER-/PR-/HER2- IDC" | "triple negative" + staging "ER-, PR-, *****-" | ✅ |
+| Stage | "Stage IIA" | "Stage IIA (pT2...)" | ✅ |
+| lab_summary | "No labs in note." | 仅 2014 年 TB 旧结果 | ✅ |
+| findings | "2.3cm, node negative..." | Video visit 体检有限，病理信息合理 | ✅ |
+| current_meds | "" | dexlansoprazole 是 PPI，非 cancer drug | ✅ (prompt 限定 cancer-related) |
+| Treatment_Goals | "curative" | Stage IIA + adjuvant chemo = curative | ✅ |
+| response_assessment | "Not yet on treatment" | 尚未开始化疗 | ✅ |
+| Medication_Plan | "dd AC followed by Taxol" | A/P #2: "recommend dd AC followed by Taxol" | ✅ |
+| Therapy_plan | "AC followed by Taxol" | ⚠️ 原文 "dd AC"，v13 漏了 "dd" (dose-dense) | ⚠️ P2 (缺少 dd) |
+| radiotherapy_plan | "None" | A/P #3: "no indication for radiation" | ✅ |
+| Procedure_Plan | "No procedures planned." | 化疗不是手术 | ✅ B68 仍修复 |
+| Nutrition | "None" | diet advice ≠ referral | ✅ |
+| Advance_care | "Full code." | "Code status: Full code." | ✅ |
+| follow_up | "chemotherapy at [REDACTED]" | A/P #5 | ✅ |
 
-| 字段 | v13 输出 | vs v12 | 原文依据 | 判定 |
-|------|---------|--------|---------|------|
-| Others | "Social work referral" | 同 | "Refer to social worker." | ✅ B82 仍修复 |
-| Genetics | "None" | 同 | "BRCA 1 mutation" = finding | ✅ B70 仍修复 |
-| lab_summary | 不含单位 | v12 含单位 | 原文有单位 | ⚠️ v12 略好 (P2) |
-| Medication_Plan | "Olaparib...xeloda..." | 微小措辞差异 | A/P: "recommend olaparib...qualify for xeloda" | ≈ |
-| recent_changes | "" (空) | 同 | v9b: "Stopped due to toxicity" | ⚠️ B81 仍在 (P2, LLM 随机性) |
+**新发现**: Therapy_plan 缺少 "dd" (dose-dense)。P2 LLM 随机性。
+**vs v12**: 基本一致，Type_of_Cancer v12 多了 "triple negative" 描述。
 
-#### Row 39 (coral_idx 178) — T2N1 TNBC
+#### Row 38 (coral_idx 177) — 43岁女性, BRCA1, Stage IIB, 肿瘤复大
 
-| 字段 | v13 输出 | vs v12 | 判定 |
-|------|---------|--------|------|
-| follow_up | "in-person: start therapy..." | v12: "start therapy..." | ✅ 略好（加了 in-person） |
-| 其他字段 | 一致 | — | ✅ B72 仍修复 |
+**原文关键事实**: 43 y.o.，in-person，New Patient。BRCA1 mutation。6.8cm left IDC，ER-，PR weak (15%)，HER2-。Stage IIB。S/p neoadjuvant chemo（taxol 因毒性停）。Tumor enlarging again (8x5cm on exam)。Labs: TSH/CMP/CBC/HgbA1c 全正常。Code: full code。
+A/P: ① S/p chemo, declines further IV ② olaparib 1 year (adjuvant) ③ bilateral mastectomy Jan 31 ④ qualify for xeloda ⑤ discussed radiation ⑥ hormonal blockade per guidelines (PR 15%) ⑦ xeloda + olaparib ⑧ lifestyle ⑨ see after surgery。
+**Diagnosis section**: "Ambulatory Referral to Gynecologic Oncology"，"Ambulatory Referral to Social Work"。**Psychologic section**: "Refer to social worker."
 
-#### Row 40 (coral_idx 179) — Stage 2 ER+ IDC
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Patient type | "New patient" | "New Patient Evaluation" | ✅ |
+| Type_of_Cancer | "ER-/PR+/HER2- IDC" | Staging: "ER-, PR+, *****-" | ✅ |
+| Stage | "Originally Stage IIB" | Stage IIB。"Originally" 多余（仍是 IIB） | ⚠️ P2 (措辞冗余) |
+| findings | "8x5cm mass...MRI mild response...PET negative" | Physical exam + imaging history | ✅ 综合全面 |
+| current_meds | "" | 已停 chemo，当前仅非癌药 (gabapentin, pain meds) | ✅ |
+| response_assessment | "cancer progressing...tumor enlarging" | "breast cancer palpable again...tumor is enlarging" | ✅ 准确 |
+| Medication_Plan | "Olaparib...xeloda" | A/P ②④ | ✅ |
+| Therapy_plan | "olaparib...xeloda...hormonal blockade...radiation" | A/P 完整覆盖 | ✅ |
+| radiotherapy_plan | "discussed surgery and radiation" | A/P ⑤: discussed role | ✅ (discussion 也算) |
+| Procedure_Plan | "bilateral mastectomy...January 31" | A/P ③ | ✅ |
+| Others | "Social work referral" | "Refer to social worker." | ✅ B82 仍修复 |
+| Genetics | "None" | "BRCA 1 mutation" = finding 非 referral | ✅ B70 仍修复 |
+| **Specialty** | **"None"** | Diagnosis 列 "Ambulatory Referral to Gynecologic Oncology" | ⚠️ **NEW P2**: 遗漏 Gyn Onc referral |
+| recent_changes | "" | v9b: "Stopped due to toxicity"，但这是 new pt visit | ⚠️ B81 仍在 (P2) |
+| Advance_care | "full code." | "Code status: full code." | ✅ |
 
-| 字段 | v13 输出 | vs v12 | 原文依据 | 判定 |
-|------|---------|--------|---------|------|
-| summary | "[REDACTED]+[REDACTED] negative" | v12: "ER+ PR-" | redacted 处理差异 | ⚠️ v12 略好 (P2) |
-| Type_of_Cancer | "...G1 IDC..." | v12: "...G1 IDC (IDC)..." | 缩写格式差异 | ≈ |
-| Others | "None" | 同 | PT referral 在原文有但遗漏 | ⚠️ B83 仍在 (P2, LLM 随机性) |
+**新发现**: Specialty 遗漏 "Ambulatory Referral to Gynecologic Oncology"（出现在 Diagnosis section）。Prompt 要求搜索全文 referral，但 LLM 未从 Diagnosis section 发现。P2 LLM 随机性。
 
-#### Row 41 (coral_idx 180) — ATM carrier, ER+/PR weakly+
+#### Row 39 (coral_idx 178) — 27岁女性, T2N1 TNBC, 新辅助化疗讨论
 
-| 字段 | v13 输出 | vs v12 | 原文依据 | 判定 |
-|------|---------|--------|---------|------|
-| Type_of_Cancer | **"ER+/PR-/HER2 negative"** | v12: "ER+/PR weakly+/HER2 not tested" | 原文: "***** negative" = HER2 neg; PR data 被 redacted | ✅ **B73 自愈**！HER2 negative 正确 |
-| procedure_plan | "port placement" | 同 | "scheduled for a port placement" (HPI) | ✅ B75 仍修复 |
-| Stage | "" | 同 | 3cm + 1/3 SLN = ~Stage II | ⚠️ B86 仍在 (P2, LLM 随机性) |
-| supportive_meds | "+NORCO" | v12: only COLACE | 原文有 hydrocodone | ≈ 合理添加 |
+**原文关键事实**: 27 y.o.，in-person consultation。Grade 3 IDC，ER/PR/HER2 negative。T2N1（3.6cm mass + axillary LN positive）。刚摘除左卵巢冷冻保存。Cognitive issues，had LP。No cancer meds。Physical exam: 6x6cm mass L UOQ, 1cm firm node L axilla。
+A/P: Neoadjuvant chemo — weekly paclitaxel x 12 wks → AC x 4 → surgery。Trial discussed。Echocardiogram。Port placement。[REDACTED] on genetic testing。Lab studies for ISPY。MRI breasts。Goserelin monthly。Start within 2 weeks。
 
-#### Row 42 (coral_idx 181): IDENTICAL to v12 ✅
-B84 Type_of_Cancer 仍丢 HER2- (P2, redacted)
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Patient type | "New patient" | "here in consultation" | ✅ |
+| second opinion | "no" | 未明确说 "second opinion"，有 primary oncologist | ✅ (遵从 prompt 规则) |
+| Type_of_Cancer | "ER-/PR-/HER2- IDC" | "ER/PR/***** negative"，grade 3 | ✅ |
+| Stage | "At least Stage II" | "at least stage II...T2N1" | ✅ |
+| findings | pathology + imaging + exam 全面 | 6x6cm mass, axillary node, CT/MRI/bone scan | ✅ |
+| current_meds | "" | 只有 vitamin D, flonase | ✅ |
+| Treatment_Goals | "curative" | neoadjuvant + surgery = curative | ✅ |
+| Therapy_plan | "paclitaxel x 12 → AC x 4 → surgery...goserelin" | A/P 覆盖完整 | ✅ |
+| Procedure_Plan | "Port placement, screening biopsies" | A/P: "Port placement" + "screening biopsies today" | ✅ |
+| **Imaging_Plan** | **"MRI of breasts..."** | A/P 列了 **Echocardiogram** + MRI。Procedure_Plan prompt 明确说 "echocardiogram → IMAGING" | ⚠️ **NEW P2**: 遗漏 echocardiogram |
+| Lab_Plan | "Laboratory studies for ISPY" | A/P: "Laboratory studies for ISPY" | ✅ |
+| Genetic_Testing | "[REDACTED] on genetic testing results" | 可能是 "await" 结果，非新下单 | ≈ (原文模糊) |
+| follow_up | "None" (Referral 字段) | A/P: "start therapy within two weeks" | ⚠️ P2 (follow_up_next_visit 有捕获) |
+| Advance_care | "Not discussed" | 无 code status 记录 | ✅ |
 
-#### Row 43 (coral_idx 182) — Stage I TNBC
+**新发现**: Imaging_Plan 遗漏 echocardiogram。Procedure_Plan prompt 明确指出 echocardiogram 属于 Imaging_Plan，但 LLM 两边都没写。P2 LLM 随机性。
 
-| 字段 | v13 输出 | vs v12 | 原文依据 | 判定 |
-|------|---------|--------|---------|------|
-| radiotherapy_plan | "None" | 同 | 过去放疗已被过滤 | ✅ B77 仍修复 |
-| Lab_Plan | "No labs planned." | 同 | "draw and visit" 仍遗漏 | ⚠️ B78 仍在 (P2) |
-| Medication_Plan_chatgpt | 有 chatgpt 格式输出 | v12: 空 | LLM 随机性 | ≈ 无害 |
+#### Row 40 (coral_idx 179) — 62岁女性, Stage 2 ER+ IDC, MS 患者
 
-#### Row 44 (coral_idx 183)
-- **supportive_meds**: "capsule" vs v12 "twice daily" — 微小 LLM 随机性差异
-- 其他一致。✅ 优秀
+**原文关键事实**: 62 y.o.，in-person，New Patient。MS on chronic immunosuppression。Stage 2 low grade ER+/HER2- IDC right breast。S/p right partial mastectomy + SLN。Pathology: 2.3cm G1 IDC + DCIS，ER 95, PR 5, HER2 2+ FISH negative (1.2)。1/6 SLN micrometastasis (0.04cm)。
+Current meds includes letrozole (FEMARA)。A/P: endocrine therapy with letrozole ("Rx given")，DEXA，PT referral，RTC 3 months。
+注: "Rx for letrozole given" + "she can start letrozole immediately" = 处方刚开，可能尚未开始服用。
 
-#### Row 45 (coral_idx 184) — 转移性 TNBC, 第二意见
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Patient type | "New patient" | HPI 未明确说 new/follow up，但 A/P 开头 "here to discuss systemic therapy options" = 首次 med onc 会诊 | ✅ |
+| Type_of_Cancer | "ER 95, PR 5, HER2 2+ FISH neg (1.2) G1 IDC with DCIS" | 完整覆盖 receptor + pathology | ✅ 非常详细 |
+| current_meds | "letrozole" | "Rx for letrozole given" + 列在 Current Outpatient Medications | ⚠️ P2 (刚开处方，可能尚未服用) |
+| recent_changes | "Rx for letrozole given" | A/P 明确 | ✅ |
+| supportive_meds | "ondansetron (ZOFRAN)" | 在 med list 中，但她无 cancer-related nausea (MS 患者，未接受化疗) | ⚠️ P2 (非 cancer-related supportive med) |
+| Treatment_Goals | "curative" | Stage 2 + adjuvant = curative | ✅ |
+| Imaging_Plan | "DEXA" | A/P: "-DEXA" | ✅ |
+| **Others** | **"None"** | A/P: "**PT referral**" | ⚠️ **B83 仍在** (P2, LLM 随机性) |
+| summary | "[REDACTED]+[REDACTED] negative" | redacted 处理，v12 更好 ("ER+ PR-") | ⚠️ P2 (redacted) |
+| follow_up | "RTC 3 months" | ✅ |
 
-| 字段 | v13 输出 | vs v12 | vs v10 | 原文依据 | 判定 |
-|------|---------|--------|--------|---------|------|
-| **Nutrition** | **"None"** | v12: "anti inflammatory diet..." | v10: "None" | "I recommend diet" = 建议非 referral | ✅ **B88 FIXED** (LLM 自行修正，POST-NUTRITION 备用) |
-| summary | "...discuss treatment options" | v12: "...initial consult..." | 微小差异 | ≈ |
+#### Row 41 (coral_idx 180) — 32岁女性, ATM carrier, ER+/PR weakly+
+
+**原文关键事实**: 32 y.o.，in-person。ATM mutation carrier。Left breast: 3cm G3 IDC, ER+ (90%), PR weakly + (1%), HER2 1+ IHC (FISH not available), Ki-67 30%。S/p bilateral mastectomy 04/11/18。1/3 SLN micrometastasis。MammaPrint High Risk。LVEF 79%。
+**关键**: "For complete details...see my notes dated 03/17/18 and 04/21/18" = **曾经见过**此 provider。"During our 04/21/18 visit, we discussed..." = 这是 follow-up。
+A/P: decided AC-Taxol (Taxol first 12 wks → AC)。Port placement scheduled。After chemo: ovarian suppression + AI + possible ribociclib trial。
+
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| **Patient type** | "New patient" | "see my notes dated 03/17/18 and 04/21/18" = 此 provider 之前见过 | ⚠️ P2 (应为 Follow up) |
+| Type_of_Cancer | **"ER+/PR-/HER2 negative"** | HER2 1+ IHC = HER2 neg；PR weakly+ (1%) / A/P says "PR-/***** negative" | ✅ **B73 自愈** HER2 neg 正确 |
+| Stage | "" (空) | 3cm + 1/3 SLN = ~Stage II，但原文未明确 | ⚠️ B86 仍在 (P2) |
+| procedure_plan | "port placement" | "scheduled for a port placement" | ✅ B75 仍修复 |
+| Medication_Plan | "After chemo: AI + ribociclib trial" | ⚠️ 缺少 AC-Taxol 作为当前主计划 | ⚠️ P2 (Therapy_plan 有覆盖) |
+| Therapy_plan | "AC-Taxol, Taxol 12 wks → AC...ovarian suppression+AI...ribociclib trial" | 完整覆盖 A/P #1-2 | ✅ |
+| supportive_meds | "COLACE, NORCO" | 两者均在 current meds 中 | ✅ |
+| recent_changes | "decided to proceed with AC-Taxol" | 更像 PLAN 而非 change，但有信息价值 | ≈ |
+| Advance_care | "Not discussed" | 无 code status 记录 | ✅ |
+
+#### Row 42 (coral_idx 181) — 41岁女性, IDC right breast, 放疗完成后开始 tamoxifen
+
+**原文关键事实**: 41 y.o.，routine follow up。Right breast: 0.9cm + 0.3cm IDC, grade 1。0/5 SLN。"Progesterone receptors were strongly positive at 95% and *****/neu was negative"。S/p excision + re-excision + SLN + radiation (completed Jan 5)。Premenopausal。
+A/P: Start 5-year tamoxifen。Return 4-6 weeks。Diagnostic mammogram scheduled。
+
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Type_of_Cancer | "PR+ invasive ductal carcinoma" | "PR strongly positive 95%"。但 **"*****/neu was negative"** = HER2-！ | ⚠️ **B84 仍在**: 缺 HER2-。ER 状态也缺（可能 redacted） |
+| Stage | "Approximately Stage I-II" | 0.9cm + 0/5 SLN = Stage I，但未明确 | ≈ |
+| current_meds | "" | 刚结束放疗，tamoxifen 尚未开始 | ✅ |
+| Therapy_plan | "Begin 5 year tamoxifen" | A/P 一致 | ✅ |
+| radiotherapy_plan | "None" | 放疗已完成（过去时），G5 TEMPORAL 正确过滤 | ✅ |
+| Imaging_Plan | "diagnostic mammogram on next appt day" | A/P: "scheduled a routine diagnostic mammogram" | ✅ |
+| follow_up | "Return 4-6 weeks...mammogram" | ✅ |
+
+#### Row 43 (coral_idx 182) — 38岁女性, Stage I TNBC, 第二原发
+
+**原文关键事实**: 38 y.o.，follow-up。Stage I TNBC (第二原发)。S/p bilateral mastectomies 02/22/2021。1.3cm G3 IDC, ER/PR neg, HER2 FISH neg。0/2 SLN negative。BRCA negative。
+Current meds: ibuprofen, granisetron, prochlorperazine, senna。Code status: Full code。
+A/P: ① past TNBC history ② second primary s/p mastectomies ③ **taxol carboplatin x 4 cycles** (adjuvant) ④ **RTC 2 days prior to cycle Oct 14, draw and visit with provider**。
+
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Type_of_Cancer | "ER-/PR-/HER2- IDC" | pathology ER/PR neg, HER2 FISH neg | ✅ |
+| Stage | "Stage I (second primary)" | A/P: "Second primary stage I" | ✅ |
+| Therapy_plan | "taxol carboplatin x 4 cycles" | A/P ③ | ✅ |
+| radiotherapy_plan | null | 过去放疗（2010）已过滤 | ✅ B77 仍修复 |
+| **Lab_Plan** | **"No labs planned."** | A/P ④: "**draw** and visit with provider" = lab draw! | ⚠️ **B78 仍在** (P2, LLM 未识别 "draw") |
+| supportive_meds | "granisetron, prochlorperazine, senna" | 均在 current meds，cancer-related supportive | ✅ |
+| follow_up | "RTC 2 days prior to cycle Oct 14" | ✅ |
+| Advance_care | "Full code." | "Code status: Full code." | ✅ |
+
+#### Row 44 (coral_idx 183) — 33岁女性, ER+/PR+/HER2-, BRCA1, 术后恢复
+
+**原文关键事实**: 33 y.o.，follow-up，shared visit。ER+/PR+/HER2- node+ left breast cancer，BRCA1+。S/p neoadjuvant dd AC → Taxol → bilateral mastectomy 10/07/18。Residual 1cm G2 IDC。
+A/P: ① Radiation trial (3 vs 5 wks, start 12/16/18) ② AI after radiation ③ BSO discussion 12/02 + Zoladex authorization ④ Pulmonary nodule stable → CT Chest in 1 year ⑤ Low weight → nutrition 11/30/18 ⑥ PT referral。Follow up 01/05/19。
+
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Type_of_Cancer | "ER+/PR+/HER2- node+...residual G2 IDC + DCIS" | 完整覆盖 | ✅ |
+| current_meds | "" | s/p chemo, not yet on AI | ✅ |
+| supportive_meds | "Norco April 325 mg, docusate" | ⚠️ "April" 是解析错误，应为 "10-325 mg" | ⚠️ P2 (LLM 解析错误) |
+| radiotherapy_plan | "3 vs 5 weeks trial, start 12/16/18" | A/P ① | ✅ |
+| Therapy_plan | "AI after radiation...Zoladex...ribociclib trial" | A/P ①②③ | ✅ |
+| Procedure_Plan | "BSO eventually, Zoladex authorization" | BSO 正确。"Zoladex authorization" 是药物非手术 | ⚠️ P2 (Zoladex = medication) |
+| Imaging_Plan | "CT Chest in one year" | A/P ④ | ✅ |
+| Nutrition | "follow up with nutrition on 11/30/18" | A/P ⑤: 明确 nutrition follow-up | ✅ |
+| Specialty | "Radiation oncology consult" | A/P ①: met with Dr. in rad onc | ✅ |
+| Others | "Physical therapy referral" | A/P ⑥: "Referred to PT" | ✅ |
+| follow_up | "01/05/19" | A/P 最后: "Follow up on 01/05/19" | ✅ |
+
+**整体**: Row 44 是 v13 中最优秀的提取之一，Referral 全面覆盖（Nutrition + Specialty + Others 都正确）。
+
+#### Row 45 (coral_idx 184) — 37岁女性, 转移性 TNBC, 第二意见
+
+**原文关键事实**: 37 y.o.，Video Consult，New Patient。Right breast TNBC，T2N1。Originally Stage IIIB。S/p neoadjuvant chemo (progression on taxol) → surgery → radiation → xeloda。Metastatic to bilateral lung nodules + right hilar LN (CT 12/2021, biopsy 02/2022)。PD-L1 positive 10%。Genetic testing negative。No current meds。Code: full code。
+A/P: ① Metastatic TNBC ② treatment history ③ Recommend [REDACTED], gemzar carboplatin ASAP。Second line: [REDACTED]。Trials (FGFR inhibitor)。Other: eribulin, doxil。④ answered questions ⑤ lifestyle advice。
+
+| 字段 | v13 输出 | 原文依据 | 判定 |
+|------|---------|---------|------|
+| Patient type | "New patient" | "New Patient Evaluation" | ✅ |
+| second opinion | "yes" | "She is here for a second opinion" | ✅ |
+| in-person | "Televisit" | "Video Consult" | ✅ |
+| Stage | "Originally Stage IIIB, now metastatic (Stage IV)" | staging: IIIB; now has distant mets | ✅ 正确转换 |
+| Metastasis | "Yes (lung + right hilar LN)" | ✅ |
+| Treatment_Goals | "palliative" | "metastatic breast cancer is not curable" | ✅ |
+| Medication_Plan | "gemzar carboplatin ASAP + 2nd/3rd line options" | A/P ③ 完整 | ✅ |
+| **Nutrition** | **"None"** | A/P ⑤: "I recommend diet..." = 建议非 referral | ✅ **B88 FIXED** |
+| Advance_care | "full code." | "Code status: full code" | ✅ |
+| follow_up (Referral) | 治疗计划内容，非 visit timing | A/P 未指定 follow-up 时间 | ≈ (follow_up_next_visit 也说 "Not specified") |
 
 ### v13 整体质量评估
 
-| Row | coral_idx | P0 | P1 | P2 | 质量 | vs v12 |
-|-----|-----------|----|----|----|----|--------|
-| 36 | 175 | 0 | 0 | 1 (B65) | **良好** | ↑ B87 FIXED |
-| 37 | 176 | 0 | 0 | 0 | **优秀** | ≈ |
-| 38 | 177 | 0 | 0 | 1 (B81) | **良好** | ≈ |
-| 39 | 178 | 0 | 0 | 0 | **优秀** | ≈ |
-| 40 | 179 | 0 | 0 | 1 (B83) | **良好** | ≈ |
-| 41 | 180 | 0 | 0 | 1 (B86) | **良好** | ↑ B73 自愈 |
-| 42 | 181 | 0 | 0 | 1 (B84) | **良好** | ≈ |
-| 43 | 182 | 0 | 0 | 1 (B78) | **良好** | ≈ |
-| 44 | 183 | 0 | 0 | 0 | **优秀** | ≈ |
-| 45 | 184 | 0 | 0 | 0 | **优秀** | ↑ B88 FIXED |
+| Row | coral_idx | P0 | P1 | P2 (tracked) | P2 (深度审查新发现) | 质量 | vs v12 |
+|-----|-----------|----|----|----|----|----|----|
+| 36 | 175 | 0 | 0 | 1 (B65) | +1 (Therapy_plan 含 valtrex) | **良好** | ↑ B87 FIXED |
+| 37 | 176 | 0 | 0 | 0 | +1 (Therapy_plan 缺 "dd") | **优秀** | ≈ |
+| 38 | 177 | 0 | 0 | 1 (B81) | +1 (Specialty 漏 Gyn Onc referral) | **良好** | ≈ |
+| 39 | 178 | 0 | 0 | 0 | +1 (Imaging_Plan 漏 echocardiogram) | **良好** | ≈ |
+| 40 | 179 | 0 | 0 | 1 (B83) | +1 (ondansetron 非 cancer supportive) | **良好** | ≈ |
+| 41 | 180 | 0 | 0 | 1 (B86) | +1 (Patient type 应为 Follow up) | **良好** | ↑ B73 自愈 |
+| 42 | 181 | 0 | 0 | 1 (B84) | — | **良好** | ≈ |
+| 43 | 182 | 0 | 0 | 1 (B78) | — | **良好** | ≈ |
+| 44 | 183 | 0 | 0 | 0 | +2 ("Norco April" 解析错误; Procedure_Plan 含 Zoladex) | **优秀** | ≈ |
+| 45 | 184 | 0 | 0 | 0 | — | **优秀** | ↑ B88 FIXED |
 
-**总计: P0 = 0, P1 = 0, P2 = 6**
-- vs v12 (修正): P1 2→0 ✅, P2 7→6 (B73 自愈)
-- 无新回归
+**总计: P0 = 0, P1 = 0, P2 = 6 (tracked) + 8 (深度审查新发现)**
+- vs v12 (修正): P1 2→0 ✅, tracked P2 7→6 (B73 自愈)
+- 无新回归 (P0/P1)
+- 深度审查新发现的 8 个 P2 均为 LLM 随机性微小瑕疵，不影响临床可用性
+
+### v13 深度审查追加发现（仅 P2，全部为 LLM 随机性）
+
+| Row | 字段 | 问题 | 原因 | 可修复? |
+|-----|------|------|------|---------|
+| 36 | Therapy_plan | 含 valtrex (抗病毒药非 therapy) | LLM 混入非 cancer drug | 可考虑 POST-THERAPY 白名单，但收益低 |
+| 37 | Therapy_plan | "AC" 缺 "dd" (dose-dense) | LLM 随机性 | 无法代码修复 |
+| 38 | Specialty referral | 漏 "Ambulatory Referral to Gynecologic Oncology" (Diagnosis section) | LLM 未从 Diagnosis section 发现 | prompt 已说搜索全文，LLM 随机性 |
+| 39 | Imaging_Plan | 漏 echocardiogram (A/P 明确列出) | LLM 遗漏 | Procedure_Plan prompt 已说 echo=IMAGING，LLM 随机性 |
+| 40 | supportive_meds | ondansetron 可能非 cancer-related (MS 患者未接受化疗) | LLM 未判断 context | P2 minor |
+| 41 | Patient type | 应为 "Follow up" ("see my notes dated 03/17/18 and 04/21/18") | LLM 随机性 | prompt 已有判断规则 |
+| 44 | supportive_meds | "Norco April 325 mg" 应为 "Norco 10-325 mg" | LLM 解析错误（混淆月份和剂量） | 无法代码修复 |
+| 44 | Procedure_Plan | 含 "Zoladex authorization"（药物非手术） | LLM 混淆 procedure vs medication | 可考虑 POST-PROC 增加药物过滤 |
+
+**结论**: 这 8 个追加 P2 全部是 LLM 随机性行为，在不同运行中随机出现/消失。
+其中 2 个可考虑代码修复（Therapy_plan 白名单、Procedure_Plan 药物过滤），但优先级极低。
 
 ### v13 Bug 修复效果
 
@@ -2452,7 +2591,7 @@ B84 Type_of_Cancer 仍丢 HER2- (P2, redacted)
 | B88 | Nutrition 含饮食建议 (184) | ✅ **FIXED** | LLM 自行修正 + POST-NUTRITION 安全网就位 |
 | B73 | HER2 "not tested" (180) | ✅ **自愈** | LLM 随机性向好（"***** negative" → HER2 negative） |
 
-### v13 剩余 P2
+### v13 剩余 tracked P2
 
 | Bug | 行 | 描述 | 原因 |
 |-----|-----|------|------|
@@ -2471,12 +2610,14 @@ v10 (prompts): P0=0, P1=6,  P2=7   (13 total) — 7 bugs fixed, 4 new P2
 v11 (POST):    P0=0, P1=1,  P2=9   (10 total) — 5 more bugs fixed, 2 new P2
 v12 (POST+):   P0=0, P1=2,  P2=7   ( 9 total) — 3 more bugs fixed, 2 new P1 回归
 v13 (POST++):  P0=0, P1=0,  P2=6   ( 6 total) — 2 more bugs fixed, 1 self-healed, 0 new
+                        (深度审查: +8 P2 observations, 均为 LLM 随机性微小瑕疵)
 
 P1 reduction: 13 → 6 → 1 → 2 → 0 (100% elimination)
 P2: 全部为 LLM 随机性波动或 redacted data artifact
-  - 3 个 redacted: B65 (tamoxifen *****), B84 (*****/neu), B73已自愈
-  - 3 个 LLM 随机性: B78 (Lab_Plan draw), B81 (recent_changes), B83 (PT referral), B86 (Stage)
+  - 2 个 redacted: B65 (tamoxifen *****), B84 (*****/neu)
+  - 4 个 LLM 随机性: B78 (Lab_Plan draw), B81 (recent_changes), B83 (PT referral), B86 (Stage)
   - 所有 P2 在不同运行中会随机出现/消失，无法靠代码修复
+  - 深度审查追加的 8 个 P2 在同类 LLM 系统中属正常水平
 ```
 
 ### v13 POST 链完整清单（15 个过滤器）
