@@ -3466,3 +3466,12 @@ Processing row 62 (17/36)...
       [G4-FAITH] response_assessment: "No evidence of disease recurrence on imaging and exam. Patie" -> "Patient reports discoloration and peeling on the skin after "
   Phase 2 extraction (2 prompts): 24.9s
   Total extraction: 139.5s
+    Medication_Plan_chatgpt: 64.5s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient is currently on letrozole. If not post-menopausal, will consider ovarian suppression shots or oophorectomy. Discussed [REDACTED] (along with OS 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started " -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
