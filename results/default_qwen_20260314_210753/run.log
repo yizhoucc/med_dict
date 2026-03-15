@@ -55,3 +55,65 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 2" -> "WBC Count 5.4, RBC Count 4.80, Hemoglobin 13.0, Hematocrit 37.4, MCV 77.9, MCH 2"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 21.7s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Triple negative breast cancer with a proliferation index of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed in the note. Physical exam showed
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Triple negative breast cancer with a proliferation index of " -> "Triple negative breast cancer with a proliferation index of "
+    Current_Medications: 11.3s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin"
+      [POST-MEDS] amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin 500 mg capsule, cetirizine 10 mg tablet, diphenhydramine 25 mg capsule, levothyroxine 125 mcg tablet -> 
+    Treatment_Changes: 4.4s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 135.4s
+  Cross-context injected (527 chars)
+    Treatment_Goals: 5.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 9.3s
+  Total extraction: 144.7s
+    Medication_Plan_chatgpt: 20.0s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Discussed the role of radiation to decrease the risk of local recurrence.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the risk of local recur" -> "{'summary': 'Discussed the role of radiation to decrease the risk of local recur"
+      [G4-FAITH] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the" -> "{'summary': 'Discussed the role of radiation to decrease the"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy'}
