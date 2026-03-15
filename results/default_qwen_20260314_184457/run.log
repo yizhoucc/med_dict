@@ -18,3 +18,15 @@ Processing row 25 (1/10)...
   Regex matched: 'Assessment / Plan:'
   Regex extraction succeeded (966 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 68.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "56 year old female with newly diagnosed stage IB triple negative breast cancer, presenting for initial co
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] second opinion: "no" -> ""
+      [G5-FAITH] EMPTIED: ['second opinion']
+      [G5-REVERT-INFER] second opinion: restored classification/inference "no"
