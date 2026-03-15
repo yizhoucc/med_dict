@@ -332,3 +332,33 @@ Processing row 26 (2/10)...
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
       [G6-TEMPORAL] no changes
+    Therapy_plan: 55.0s [semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] therapy_plan: "Continue on *****, zoladex and femara." -> "Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and"
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
+    radiotherapy_plan: 5.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] radiotherapy_plan: "None" -> ""
+      [G5-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G5-PROTECT] radiotherapy_plan: restored safe negative "None"
+    Procedure_Plan: 9.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G5-FAITH] EMPTIED: ['procedure_plan']
+      [G5-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G6-TEMPORAL] skipped (all fields empty/negative)
