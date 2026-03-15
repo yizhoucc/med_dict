@@ -1744,3 +1744,43 @@ Processing row 33 (9/10)...
       [G4-FAITH] no changes (all supported)
   Phase 1 extraction (6 prompts): 72.3s
   Cross-context injected (1044 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 25.0s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently not responding to treatment as evidenced by the local recurrence in the left breast. The FNA of the left breast showed ductal carcinoma, ER positive (
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.5s
+  Total extraction: 100.8s
+    Medication_Plan_chatgpt: 20.2s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "tamoxifen 20mg PO qD will be started. Anastrozole was previously stopped against medical advice.",
+        "Short term side_effects_discussed": "thrombo
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'tamoxifen 20mg PO qD will be started. Anastrozole was previously st" -> "{'summary': 'tamoxifen 20mg PO qD will be started.', 'Short term side_effects_di"
+      [POST-KEYS] stripped: {'hormonal therapy'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "tamoxifen 20mg PO qD"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
