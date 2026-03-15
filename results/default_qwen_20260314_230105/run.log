@@ -1501,3 +1501,50 @@ Processing row 32 (8/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 13.8s
+      [EXTRACT] raw={
+"findings": "No evidence of recurrence on physical exam. No palpable masses, no skin changes, and no significant lymphadenopathy noted. Left neck high <1cm lymph node is soft and mobile. No LE edema
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.9s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.0s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 ORAL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] supportive_meds: "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 " -> "ibuprofen (ADVIL,MOTRIN)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ibuprofen (ADVIL,MOTRIN) -> 
+  Phase 1 extraction (6 prompts): 52.5s
+  Cross-context injected (589 chars)
+    Treatment_Goals: 3.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 4.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam"
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "no evidence of disease recurrence on imaging and exam" -> "no evidence of disease recurrence on exam"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 7.8s
+  Total extraction: 60.3s
