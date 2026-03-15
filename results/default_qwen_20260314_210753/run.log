@@ -1707,3 +1707,37 @@ Processing row 33 (9/10)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 6.3s
+      [EXTRACT] raw={
+"lab_summary": "August 2018 - labs/markers - unremarkable"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 40.8s
+      [EXTRACT] raw={
+"findings": "Excisional biopsy of left breast recurrence revealed invasive ductal carcinoma, 1.7cm, grade 3, extensive necrosis, skeletal muscle invasion, with negative margins. FNA of left breast s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.2s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.0s [improved]
+      [EXTRACT] raw={
+"recent_changes": "tamoxifen 20mg PO qD",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "tamoxifen 20mg PO qD" -> "resumption of hormonal therapy with tamoxifen 20mg PO qD"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 99.2s
+  Cross-context injected (976 chars)
