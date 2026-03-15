@@ -1932,3 +1932,65 @@ Processing row 34 (10/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "anastrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "anastrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 3.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 72.1s
+  Cross-context injected (632 chars)
+    Treatment_Goals: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.2s
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Last mammogram on 04/15/2019 showed no signs of malignancy."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 15.8s
+  Total extraction: 87.9s
+    Medication_Plan_chatgpt: 23.3s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "continue on anastrozole without significant side effect",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": "
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "anastrozole" -> "{'summary': 'Ms ***** is continuing on anastrozole without significant side effe"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'Ms ***** is continuing on anastrozole without s" -> "{'summary': 'Ms ***** is continuing on anastrozole without s"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 5.9s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue on anastrozole without significant side effects."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue on anastrozole without significant side effects." -> "Continue on anastrozole"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
