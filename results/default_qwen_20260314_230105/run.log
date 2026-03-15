@@ -520,3 +520,24 @@ Processing row 27 (3/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.3s
   Total extraction: 108.8s
+    Medication_Plan_chatgpt: 47.8s [improved, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Recommendation for 5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term si
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Plan to proceed with radiation oncology consultation and radiation " -> "{'summary': 'Plan to proceed with radiation oncology consultation and radiation "
+      [G3-IMPROVE] bone therapy: "{'summary': 'Will take calcium and vitamin D to improve bone health.', 'Short te" -> "{'summary': 'Will take calcium and vitamin D to improve bone health.', 'Short te"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy', 'hormonal therapy', 'other treatment', 'bone therapy'}
+    Medication_Plan: 7.5s
+      [EXTRACT] raw={
+    "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Calcium and vitamin D supplementation."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
