@@ -19,8 +19,45 @@
 | `default_qwen_20260314_114835` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v3 prompts, gate + supp filter | 20-24 | 2026-03-14 | + supportive_meds whitelist filter (B21 fixed) |
 | `default_qwen_20260314_124631` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v4 prompts, gate + supp filter | 20-24 | 2026-03-14 | v4 prompts (B17 fixed at extraction, B14 extraction fixed but G3 emptied) |
 | `default_qwen_20260314_131143` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v4 prompts, gate + supp + G3-REVERT | 20-24 | 2026-03-14 | + G3-REVERT (B13 fixed, B14 unstable, goals restored) |
+| `default_qwen_20260314_140519` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, 6-gate, v5 code, G3-REVERT-INFER + G6-PROTECT-CLASS | 20-24 | 2026-03-14 | **v5**: B24/B25/B26/B27/B29 全部修复 |
+| `default_qwen_20260314_144451` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v5 code | 25-34 | 2026-03-14 | v5 扩展测试（10 rows）|
+| `default_qwen_20260314_154025` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6 code + POST-PROC-FILTER + POST-ADV | 25-34 | 2026-03-14 | v6: POST-PROC-FILTER false positive ("port" → "rt") |
+| `default_qwen_20260314_161507` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6.1 code (RT word boundary fix) | 25-34 | 2026-03-14 | v6.1: Type_of_Cancer G3 regression |
+| `default_qwen_20260314_165646` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6.2 code + G3-PROTECT-RECEPTOR | 25-34 | 2026-03-14 | **v6.2**: G3-PROTECT-RECEPTOR + POST-ADV + prompt fixes |
+| (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7a code (gate reorder) | 25-34 | 2026-03-14 | **v7a**: v7 bug fixes + gate 顺序优化 (G1→G2→G3spec→G4sem→G5faith→G6temp) |
+| (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7abc code (full optimization) | 25-34 | TBD | **v7abc**: v7a + G3/G4 合并 + 跨 prompt 信息传递 |
 
 ## Prompt 版本变更记录
+
+### v7a (2026-03-14): Gate 顺序优化 + v6.2 Bug Fixes
+
+**变更原因：** v6.2 审查发现 3 个 P0、9 个 P1、19 个 P2 问题。同时发现 gate 顺序存在结构性漏洞：G5/G6 在 G3 之后运行，可引入未经忠实度检查的幻觉。
+
+**Gate 顺序变更（核心优化）：**
+- 旧顺序：G1 FORMAT → G2 SCHEMA → G3 FAITHFUL → G4 TEMPORAL → G5 SPECIFIC → G6 SEMANTIC
+- 新顺序：G1 FORMAT → G2 SCHEMA → G3 SPECIFIC → G4 SEMANTIC → G5 FAITHFUL → G6 TEMPORAL
+- 思路：先"改进"（G3 具体化 + G4 语义修正），再"验证"（G5 忠实度终审），最后"过滤"（G6 时态）
+- G5 FAITHFUL 作为 LLM 内容的终审 gate，确保 G3/G4 引入的改动也经过忠实度检查
+
+**Bug Fix（9 个修复，基于 v6.2 审查）：**
+
+| # | 修复 | 文件 | Bug | 类型 | 说明 |
+|---|------|------|-----|------|------|
+| 1 | POST-STAGE | run.py | B49 (P0) | 后处理 | Stage="Stage IV" 但 Metastasis="No" → 删除矛盾的 Stage IV 部分 |
+| 2 | POST-GOALS | run.py + extraction.yaml | B45 (P1) | 后处理+prompt | "adjuvant" + 非转移 → "curative"；prompt 改为"adjuvant 描述治疗类型不是目标" |
+| 3 | POST-DISTMET | run.py | B48 (P2) | 后处理 | Distant Metastasis 字段缺失 → 从 Metastasis 复制 |
+| 4 | Lab redacted | extraction.yaml | B43 (P0) | prompt | 禁止猜测遮蔽值 (*****) → 写 "Values redacted" |
+| 5 | POST-RESPONSE | run.py + extraction.yaml | B53,B60 (P0/P1) | 后处理+prompt | response="Not mentioned" 但 findings 有 progression/no recurrence → 交叉补充 |
+| 6 | Therapy_plan | plan_extraction.yaml | B55,B63 (P2) | prompt | 排除影像/lab 计划，只写药物和放疗 |
+| 7 | G3→G5-PROTECT-RECEPTOR 0.75 | ult.py | B64 (P2) | 阈值 | 0.5→0.75，更积极保护受体状态 |
+| 8 | "not taking" filter | ult.py | B54 (P1) | 后处理 | supportive_meds 含 "not taking" → 清空 |
+| 9 | "recently dropped" | extraction.yaml | B56 (P1) | prompt | Current_Medications 排除 "recently dropped"/"self D/C" 的药物 |
+
+**不修复的 Bug：** B50 (Ki-67 读数错误)、B62 (数据矛盾)、B44/B57/B58/B59/B61（低优先级或需更复杂方案）
+
+**对比实验计划：**
+- v7a vs v7abc：验证 gate 顺序优化效果，以及合并 gate + 跨 prompt 传递的额外收益
+- 测试行：rows 25-34（coral_idx 165-174），与 v6.2 同组对比
 
 ### v5 (2026-03-14): G3 过度清空 + G6 过度修正修复
 
@@ -1026,8 +1063,343 @@ Qwen 32B (6-gate, split+CoT)          平均 ~1.2 错误/行
 - 核心字段（Type_of_Cancer, Stage, Metastasis, lab_summary, findings）质量显著提升
 
 **待修复优先级:**
-1. **P0**: G3 过度清空 Patient type/Stage/Metastasis (B25, B26, B27) — 影响 3/5 行
-2. **P1**: G6 过度修正 (B24, B29) — 影响 2/5 行
+1. **P0**: G3 过度清空 Patient type/Stage/Metastasis (B25, B26, B27) — 影响 3/5 行 → **v5 已修复**
+2. **P1**: G6 过度修正 (B24, B29) — 影响 2/5 行 → **v5 已修复**
 3. **P1**: B14 response_assessment 不稳定 — 影响 1/5 行
 4. **P2**: B20 Referral 包含 Med Onc — 影响 1/5 行
 5. **P2**: B30 radiotherapy_plan 过去治疗 — 影响 1/5 行
+
+---
+
+## Row-by-Row Review: v5 (`default_qwen_20260314_140519`)
+
+### v5 变更总结
+- G3-REVERT-INFER: 分类值/推断值被 G3 清空后自动恢复
+- G6-PROTECT-CLASS: 分类字段禁止 G6 修改
+- G6 prompt: diet advice ≠ nutrition referral
+- POST-SUPP: safe negative 短语不再被过滤
+
+### Bug 状态总表
+
+| Bug | 描述 | 状态 | 修复机制 |
+|-----|------|------|----------|
+| B13 | goals_of_treatment 被 G3 全部清空 | ✅ FIXED | G3-REVERT |
+| B14 | response_assessment 提取不稳定 | ❌ NOT FIXED | 提取随机性 |
+| B15 | plan 字段间内容复制 | ✅ FIXED | v3 prompt |
+| B16 | Lab_Plan 放影像 | ✅ FIXED | G3-PROTECT |
+| B17 | supportive_meds 放未开始药物 | ✅ FIXED | v4 prompt |
+| B18 | summary 药名错误 (data) | ⬜ NOT FIXING | 数据错误 |
+| B19 | recent_changes 模板串行 | ✅ FIXED | v3 prompt |
+| B20 | Referral 包含本次科室 Med Onc | ❌ NOT FIXED | 需 prompt 改进 |
+| B21 | supportive_meds 含非肿瘤药 | ✅ FIXED | POST-SUPP filter |
+| B22 | 安全否定值被 G3 清空 | ✅ FIXED | G3-PROTECT |
+| B24 | Patient type 被 G6 改成 "follow up" | ✅ FIXED | G6-PROTECT-CLASS |
+| B25 | Patient type 被 G3 清空 | ✅ FIXED | G3-REVERT-INFER |
+| B26 | Stage 被 G3 清空 | ✅ FIXED | G3-REVERT-INFER |
+| B27 | Metastasis "Not sure" 被 G3 清空 | ✅ FIXED | G3-REVERT-INFER |
+| B29 | Nutrition 被 G6 改成饮食建议 | ✅ FIXED | G6 prompt + G3-PROTECT |
+| B30 | radiotherapy_plan 含过去治疗 | ❌ NOT FIXED | G4 temporal 未覆盖 |
+
+### Row 20 (coral_idx=160)
+
+| Field | v4+G3-REVERT | v5 | 变化 |
+|-------|-------------|-----|------|
+| Patient type | "follow up" (B24 G6改) | **"New patient"** ✓ | G6-PROTECT-CLASS 阻止修改 |
+| Nutrition Referral | 饮食建议 (B29 G6改) | **"None"** ✓ | G6 prompt + G3-PROTECT |
+| Referral Specialty | "Rad Onc, Med Onc" | "Rad Onc, Med Onc" | B20 未修复 |
+| 其他字段 | — | — | 无变化，保持正确 |
+
+### Row 21 (coral_idx=161)
+
+| Field | v4+G3-REVERT | v5 | 变化 |
+|-------|-------------|-----|------|
+| goals_of_treatment | "palliative" | "palliative" ✓ | G3-REVERT 继续生效 |
+| radiotherapy_plan | "XRT to L4 and T10 in June 2020" | "XRT to L4 and T10 in June 2020" | B30 未修复 |
+| Procedure_Plan | 治疗 contingency 文本 | 治疗 contingency 文本 | 未修复 |
+| Genetic_Testing_Plan | 治疗 contingency 文本 | 治疗 contingency 文本 | 未修复 |
+| 核心字段 | — | — | 保持正确 |
+
+### Row 22 (coral_idx=162)
+
+| Field | v4+G3-REVERT | v5 | 变化 |
+|-------|-------------|-----|------|
+| Stage_of_Cancer | "" (B26 G3清空) | **"Approximately Stage I-II (1 cm and 0/1 SLN positive)"** ✓ | G3-REVERT-INFER 恢复 |
+| Nutrition Referral | 饮食建议 (B29 G6改) | **"None"** ✓ | G6 prompt 修正 |
+| supportive_meds | "" (POST-SUPP误删) | **"None currently being taken."** ✓ | POST-SUPP safe negative |
+| 其他字段 | — | — | 保持正确 |
+
+### Row 23 (coral_idx=163)
+
+| Field | v4+G3-REVERT | v5 | 变化 |
+|-------|-------------|-----|------|
+| Patient type | "" (B25 G3清空) | **"New patient"** ✓ | G3-REVERT-INFER 恢复 |
+| Metastasis | "" (B27 G3清空) | **"Not sure"** ✓ | G3-REVERT-INFER 恢复 |
+| 其他字段 | — | — | 保持正确 |
+
+### Row 24 (coral_idx=164)
+
+| Field | v4+G3-REVERT | v5 | 变化 |
+|-------|-------------|-----|------|
+| response_assessment | "Not mentioned in note." | "Not mentioned in note." | B14 未修复（提取不稳定） |
+| summary | 含 "Irinotecan" | 含 "Irinotecan" | B18 数据错误，不修 |
+| 其他字段 | — | — | 保持正确 |
+
+### v5 整体质量评估
+
+| Row | 严重问题 | 轻微问题 | 质量评估 | vs v4 |
+|-----|---------|---------|---------|-------|
+| 20 | 0 | 1 (B20 Referral) | **良好** | ↑ (B24 修复) |
+| 21 | 0 | 3 (B30 + plan leakage) | 良好 | → (无变化) |
+| 22 | 0 | 0 | **优秀** | ↑↑ (B26 + B29 修复) |
+| 23 | 0 | 0 | **优秀** | ↑↑ (B25 + B27 修复) |
+| 24 | 1 (B14) | 0 | 中等 | → (无变化) |
+
+**总计：严重问题 1 个 (vs v4 的 4 个)，轻微问题 4 个 (vs v4 的 7 个)**
+
+### 剩余待修复
+
+1. **B14** (P1): Row 24 response_assessment 提取不稳定 — LLM 随机性问题
+2. **B20** (P2): Row 20 Referral 包含 "Med Onc" — prompt 已指导但模型未遵循
+3. **B30** (P2): Row 21 radiotherapy_plan 含 2020 年过去治疗 — G4 temporal 应覆盖
+4. **Row 21 plan leakage** (P2): Procedure_Plan/Genetic_Testing_Plan 含治疗 contingency 文本
+
+
+## v6.2 变更总结 (`default_qwen_20260314_165646`)
+
+### 代码变更（v6 → v6.2）
+
+1. **POST-PROC-FILTER** (`ult.py`): `IMAGING_TERMS` + `RADIOTHERAPY_TERMS` 关键词表 + `filter_procedure_plan()` 从 procedure_plan 移除影像/放疗项
+2. **POST-ADV** (`run.py`): Regex 从全文提取 code status (Full code/DNR/living will)，补丁 Advance_care_planning
+3. **G3-PROTECT-RECEPTOR** (`ult.py`): G3 清空 Type_of_Cancer 且原值含受体状态 (ER/PR/HER2) 时自动恢复
+4. **RT word boundary** (`ult.py`): `_RT_WORD_RE = re.compile(r'\brt\b')` 防止 "port" 误匹配 "rt"
+5. **Prompt 改进**:
+   - `Procedure_Plan`: 明确排除影像/放疗/检验/药物/转诊/咨询，附常见错误示例
+   - `Advance_care`: 从"仅看 A/P"改为"搜索全文"找 code status
+   - `recent_changes`: 区分"无变更"vs"未开始治疗"
+   - `supportive_meds`: 强化 "Patient not taking" 排除 + 禁止肿瘤药物
+
+### 旧 Bug 在 v6.2 中的状态
+
+| Bug | v5 状态 | v6.2 状态 | 说明 |
+|-----|---------|-----------|------|
+| B31 | ❌ Stage 幻觉 (Row 30=170) | ✅ FIXED | 不再说 "Stage IIA"，改为 "Stage not mentioned, now metastatic (Stage IV)" |
+| B33 | ❌ supportive_meds "Patient not taking" | ❌ NOT FIXED | Row 30 (170) 仍列入 ondansetron/prochlorperazine |
+| B34 | ❌ response_assessment 遗漏 | ❌ NOT FIXED | Row 30 (170) 仍说 "Not mentioned" |
+| B35 | ❌ PR 状态错误 | ✅ PARTIAL | Row 33 (173) G3-PROTECT-RECEPTOR 恢复 ✓；Row 34 (174) 受体信息仍被 G3 trimmed |
+| B36 | ❌ radiotherapy_plan "None" | ⚠️ NEEDS VERIFY | Row 30 (170) radiotherapy_plan 仍为 "None"，但该行 note 是否讨论 RT 未确认 |
+| B37 | ❌ Procedure_Plan 混入影像/RT | ✅ FIXED | Prompt 改进足够，POST-PROC-FILTER 未触发 |
+| B38 | ❌ tamoxifen in supportive_meds | ✅ FIXED | Prompt 改进 |
+| B39 | ❌ recent_changes "Not yet on treatment" | ✅ PARTIAL | Row 34 (174) ✓；Row 30 (170) 仍有此问题 |
+| B42 | ❌ Advance care 遗漏 Full code | ✅ FIXED | POST-ADV 补丁 3 行 (Row 26=165, 31=170, 32=171) |
+
+## Row-by-Row Review: v6.2 (Rows 25-34, coral_idx 165-174)
+
+### Bug 状态总表 (v6.2)
+
+| Bug | Row(s) (coral_idx) | Field | 描述 | 严重程度 | 状态 |
+|-----|-------------------|-------|------|---------|------|
+| B13 | 20 (160) | goals_of_treatment | 被 G3 全部清空 | P0 | ✅ FIXED |
+| B14 | 24 (164) | response_assessment | 提取不稳定 | P1 | ❌ NOT FIXED |
+| B15 | — | plan 字段 | 内容复制 | P1 | ✅ FIXED |
+| B16 | — | Lab_Plan | 放影像 | P1 | ✅ FIXED |
+| B17 | — | supportive_meds | 放未开始药物 | P1 | ✅ FIXED |
+| B18 | 24 (164) | summary | 药名错误 (data) | P2 | ⬜ NOT FIXING |
+| B19 | — | recent_changes | 模板串行 | P1 | ✅ FIXED |
+| B20 | 20 (160) | Referral | 包含 Med Onc | P2 | ❌ NOT FIXED |
+| B21 | — | supportive_meds | 含非肿瘤药 | P1 | ✅ FIXED |
+| B22 | — | 安全否定值 | 被 G3 清空 | P1 | ✅ FIXED |
+| B24 | 20 (160) | Patient type | 被 G6 改 | P0 | ✅ FIXED |
+| B25 | 23 (163) | Patient type | 被 G3 清空 | P0 | ✅ FIXED |
+| B26 | 22 (162) | Stage | 被 G3 清空 | P0 | ✅ FIXED |
+| B27 | 23 (163) | Metastasis | 被 G3 清空 | P0 | ✅ FIXED |
+| B29 | 22 (162) | Nutrition | 被 G6 改 | P1 | ✅ FIXED |
+| B30 | 21 (161) | radiotherapy_plan | 含过去治疗 | P2 | ❌ NOT FIXED |
+| B31 | 30 (170) | Stage | 幻觉 "Stage IIA" | P0 | ✅ FIXED |
+| B32 | 34 (174) | current_meds | anastrozole/tamoxifen (data) | — | ⬜ NOT FIXING |
+| B33 | 30 (170) | supportive_meds | "Patient not taking" 药物 | P1 | ❌ NOT FIXED |
+| B34 | 30 (170) | response_assessment | 遗漏 PET progression | P0 | ❌ NOT FIXED |
+| B35 | 33,34 (173,174) | Type_of_Cancer | PR/受体状态 | P1 | ✅ PARTIAL |
+| B36 | 30 (170) | radiotherapy_plan | "None" 待验证 | P2 | ⚠️ NEEDS VERIFY |
+| B37 | — | Procedure_Plan | 混入影像/RT | P1 | ✅ FIXED |
+| B38 | — | supportive_meds | tamoxifen 混入 | P1 | ✅ FIXED |
+| B39 | 30 (170) | recent_changes | "Not yet on treatment" 误用 | P1 | ✅ PARTIAL |
+| B42 | — | Advance_care | 遗漏 code status | P1 | ✅ FIXED |
+| **B43** | **26 (165)** | **Lab_Results** | **为遮蔽值 (*****) 编造具体数字** | **P0 幻觉** | **❌ NEW** |
+| **B44** | **26 (165)** | **Referral/Others** | **遗漏 social work 转诊** | **P2 遗漏** | **❌ NEW** |
+| **B45** | **26,27,28,32,33,34 (165-168,172-174)** | **goals_of_treatment** | **早期+辅助→应为 curative，输出 adjuvant** | **P1 分类** | **❌ NEW** |
+| **B46** | **27 (166)** | **current_meds** | **遗漏 zolendronic acid (Zometa)** | **P2 遗漏** | **❌ NEW** |
+| **B47** | **27 (166)** | **Lab_Plan** | **遗漏 UA** | **P2 遗漏** | **❌ NEW** |
+| **B48** | **29,30,32,33,34 (168,169,171,172,173)** | **Cancer_Diagnosis** | **Distant Metastasis field 缺失** | **P2 schema** | **❌ NEW** |
+| **B49** | **30 (169)** | **Stage_of_Cancer** | **"Stage IV metastatic" 幻觉 (note: stage II-III, no mets, curative)** | **P0 幻觉** | **❌ NEW** |
+| **B50** | **30 (169)** | **Clinical_Findings** | **Ki-67 "~3.0%" 应为 "~30%" (差10倍)** | **P1 事实错误** | **❌ NEW** |
+| **B51** | **30 (169)** | **radiotherapy_plan** | **"None" 但 note 说 radiation 在治疗计划中** | **P1 遗漏** | **❌ NEW** |
+| **B52** | **30 (169)** | **Imaging_Plan** | **遗漏 TTE (echocardiogram)** | **P2 遗漏** | **❌ NEW** |
+| **B53** | **31 (170)** | **response_assessment** | **"Not mentioned" 但 PET 明确显示 progression** | **P0 遗漏** | **❌ NEW** |
+| **B54** | **31 (170)** | **supportive_meds** | **ondansetron/prochlorperazine "Patient not taking"** | **P1 时态** | **❌ NEW (=B33)** |
+| **B55** | **31,35 (170,174)** | **Therapy_plan** | **影像检查 (MRI/PET/Echo/mammogram) 混入 therapy_plan** | **P2 字段** | **❌ NEW** |
+| **B56** | **32 (171)** | **current_meds** | **pertuzumab 已停 ("recently dropped") 仍列入** | **P1 时态** | **❌ NEW** |
+| **B57** | **32 (171)** | **Referral/Others** | **遗漏 exercise counseling** | **P2 遗漏** | **❌ NEW** |
+| **B58** | **32 (171)** | **Referral/Genetics** | **"Genetic testing negative" 是结果非转诊** | **P2 分类** | **❌ NEW** |
+| **B59** | **32 (171)** | **Metastasis** | **遗漏 left adnexal lesion 转移灶** | **P2 遗漏** | **❌ NEW** |
+| **B60** | **33 (172)** | **response_assessment** | **"Not mentioned" 但 A/P 说 "no evidence of recurrence"** | **P1 遗漏** | **❌ NEW** |
+| **B61** | **34 (173)** | **recent_changes** | **过去停药/拒绝 + 未来计划混在一起** | **P2 时态** | **❌ NEW** |
+| **B62** | **35 (174)** | **Medication_Plan** | **"anastrozole" vs current_meds "tamoxifen" (数据矛盾)** | **—** | **⬜ NOT FIXING** |
+| **B63** | **35 (174)** | **Therapy_plan** | **mammogram 混入 therapy_plan** | **P2 字段** | **❌ NEW (=B55)** |
+| **B64** | **35 (174)** | **Type_of_Cancer** | **G3 trimmed 受体信息 (threshold 0.5 过宽)** | **P2 遗漏** | **❌ NEW** |
+
+### Row 26 (coral_idx=165) — Stage IB TNBC, 新患者
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Patient type | "New patient" | ✓ |
+| in-person | "Televisit" | 需验证 |
+| Type_of_Cancer | "Estrogen receptor negative triple negative breast cancer" | ⚠️ 应列 ER-/PR-/HER2- |
+| Stage | "Stage IB" | ✓ |
+| lab_summary | WBC 5.4, RBC 4.80, Hgb 13.0... | **❌ B43 幻觉：note 中 lab 值为 *****（遮蔽），模型编造了具体数字** |
+| findings | Ki-67 75%, node negative + 症状 | ⚠️ 含症状 (armpit pain) |
+| goals_of_treatment | "adjuvant" | **❌ B45：早期+辅助=curative** |
+| Referral/Others | "None" | **❌ B44：遗漏 social work 转诊** |
+| Advance_care | "Full code." | ✓ POST-ADV 补丁 |
+
+### Row 27 (coral_idx=166) — 转移性 ER+ 骨转移, 随访
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- invasive ductal carcinoma" | ✓ |
+| Stage | "Originally Stage I, now metastatic (Stage IV)" | ✓ |
+| current_meds | "letrozole, goserelin" | **❌ B46：遗漏 zolendronic acid (Zometa)** |
+| response_assessment | "Stable to slightly decreased metabolic activity of osseous metastases" | ✓ 优秀 |
+| goals_of_treatment | "palliative" | ✓ |
+| Lab_Plan | "CBC with platelets" | **❌ B47：遗漏 UA** |
+| follow_up | "if pain worsens" | ⚠️ 遗漏 "2 weeks" 时间线 |
+| Advance_care | "Not discussed during this visit." | ⚠️ 无 code status |
+
+### Row 28 (coral_idx=167) — 早期 ER+, 新患者
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- grade 1 IDC" | ✓ |
+| Stage | "Stage I" | ✓ |
+| goals_of_treatment | "adjuvant" | **❌ B45：早期+辅助=curative** |
+| radiotherapy_plan | 详细 radiation 计划 | ✓ |
+| Imaging_Plan | "DEXA" | ✓ |
+| Distant Metastasis | 存在 | ✓ (此行有该字段) |
+
+### Row 29 (coral_idx=168) — 早期 ER+ multifocal, 新患者
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- invasive ductal carcinoma" | ✓ |
+| Stage | "pT1c(m)N1(sn)M0" | ✓ |
+| goals_of_treatment | "adjuvant" | **❌ B45：早期+辅助=curative** |
+| Distant Metastasis | 缺失 | **❌ B48** |
+| recent_changes | "Not yet on treatment" | ✓ 此患者确实未开始 |
+| Procedure_Plan | "surgery pending, September 2019" | ✓ |
+
+### Row 30 (coral_idx=169) — ER-/HER2+ IDC Stage II-III, 新患者
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER-/PR-/HER2+ invasive ductal carcinoma" | ✓ |
+| Stage_of_Cancer | "Originally Stage IIA, now metastatic (Stage IV)" | **❌ B49 CRITICAL：note 明确说 "clinical stage II-III, no evidence of metastases, curative intent"** |
+| Metastasis | "No" | ✓ (但与 Stage 矛盾！) |
+| Distant Metastasis | 缺失 | **❌ B48** |
+| findings / Ki-67 | "~3.0%" | **❌ B50：应为 "~30%"，差 10 倍** |
+| radiotherapy_plan | "None" | **❌ B51：note 说 "treatment recommendations will include... radiation"** |
+| Imaging_Plan | "No imaging planned" | **❌ B52：TTE 遗漏** |
+| goals_of_treatment | "curative" | ✓ |
+| Therapy_plan | 含 THP/AC 或 TCHP 方案 | ✓ 详细 |
+| Medication_Plan | 详细化疗方案 | ✓ 优秀 |
+| Procedure_Plan | "Mediport placement" | ✓ |
+
+### Row 31 (coral_idx=170) — 转移性 ER+ Stage IV, 随访
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- metastatic breast cancer" | ✓ |
+| Stage | "Originally Stage not mentioned, now metastatic (Stage IV)" | ✓ (B31 FIXED) |
+| response_assessment | "Not mentioned in note." | **❌ B53：PET/CT 明确显示 "Progression of metastatic disease"** |
+| supportive_meds | "ondansetron, prochlorperazine" | **❌ B54：两药都标注 "Patient not taking"** |
+| recent_changes | "Not yet on treatment" | **❌ B39：患者有 prior 治疗史，正在换方案到 Doxil** |
+| Therapy_plan | 含 Brain MRI, PETCT, Echo, MRI pelvis | **❌ B55：影像项混入 therapy_plan** |
+| Advance_care | "Full code." | ✓ POST-ADV 补丁 |
+| goals_of_treatment | "palliative" | ✓ |
+
+### Row 32 (coral_idx=171) — 转移性 ER+/PR-/HER2+ 多发转移, 新患者
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR-/HER2+ pleomorphic lobular cancer" | ✓ |
+| current_meds | "exemestane, trastuzumab, pertuzumab" | **❌ B56：pertuzumab "recently dropped due to diarrhea"** |
+| Referral/Others | "None" | **❌ B57：遗漏 exercise counseling** |
+| Referral/Genetics | "Genetic testing negative" | **❌ B58：是结果非转诊** |
+| Metastasis | "Yes (to lymph nodes of left neck, chest, abdomen, pelvis)" | **❌ B59：遗漏 left adnexal lesion** |
+| Distant Metastasis | 缺失 | **❌ B48** |
+| Advance_care | "Full code. Living will on file." | ✓ POST-ADV 补丁 |
+
+### Row 33 (coral_idx=172) — ER+ ILC on letrozole, 随访
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- invasive lobular carcinoma" | ✓ (G3-PROTECT-RECEPTOR 恢复) |
+| Stage | "Originally stage IIB, now stage IIIA" | ✓ |
+| current_meds | "letrozole" | ✓ |
+| response_assessment | "Not mentioned in note." | **❌ B60：A/P 说 "Exam shows no evidence of recurrence"** |
+| goals_of_treatment | "adjuvant" | **❌ B45：可接受但 curative 更精确** |
+| Distant Metastasis | 缺失 | **❌ B48** |
+
+### Row 34 (coral_idx=173) — ER+ IDC 局部复发, 随访
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "ER+/PR+/HER2- invasive ductal carcinoma" | ✓ (原 PR- 变 PR+，此为 2020 复发活检结果) |
+| current_meds | "" | ⚠️ 患者 self D/C anastrozole，可能正确 |
+| recent_changes | "anastrozole D/Ced, declined CW XRT, tamoxifen 20mg" | **❌ B61：过去停药 + 过去拒绝 + 未来计划混在一起** |
+| Distant Metastasis | 缺失 | **❌ B48** |
+
+### Row 35 (coral_idx=174) — ILC pT1cN0, 随访
+
+| Field | 值 | 评估 |
+|-------|-----|------|
+| Type_of_Cancer | "invasive lobular carcinoma" | **❌ B64：G3 trimmed 受体信息，原提取含 ER+/PR+/HER2-** |
+| Stage | "pT1cN0(sn)" | ✓ |
+| current_meds | "tamoxifen" | ✓ |
+| Medication_Plan | "Continue on anastrozole" | **❌ B62：数据矛盾（A/P 写 anastrozole，HPI 写 tamoxifen）⬜ NOT FIXING** |
+| Therapy_plan | "mammogram... return in 6 months" | **❌ B63：mammogram 是影像不是治疗** |
+| goals_of_treatment | "adjuvant" | **❌ B45** |
+
+### v6.2 整体质量评估
+
+| Row | coral_idx | P0 问题 | P1 问题 | P2 问题 | 质量 |
+|-----|-----------|---------|---------|---------|------|
+| 26 | 165 | 1 (B43 lab 幻觉) | 1 (B45 goals) | 1 (B44 referral) | **差** |
+| 27 | 166 | 0 | 0 | 2 (B46, B47) | **良好** |
+| 28 | 167 | 0 | 1 (B45 goals) | 0 | **良好** |
+| 29 | 168 | 0 | 1 (B45 goals) | 1 (B48 schema) | **良好** |
+| 30 | 169 | 1 (B49 stage 幻觉) | 2 (B50 Ki67, B51 RT) | 2 (B48, B52 TTE) | **差** |
+| 31 | 170 | 1 (B53 response) | 2 (B54 supp, B39 recent) | 1 (B55 therapy) | **差** |
+| 32 | 171 | 0 | 1 (B56 meds) | 4 (B57-59, B48) | **中等** |
+| 33 | 172 | 0 | 1 (B60 response) | 2 (B45, B48) | **中等** |
+| 34 | 173 | 0 | 0 | 3 (B61, B48, minor) | **良好** |
+| 35 | 174 | 0 | 0 | 3 (B63, B64, B45) | **良好** |
+
+**总计：P0 = 3 个，P1 = 9 个，P2 = 19 个**
+
+### 新发现的系统性问题
+
+1. **B43 Lab 幻觉** (P0): 遮蔽值 (*****) 被模型编造为具体数字。需要在 prompt 中明确禁止猜测遮蔽值，或后处理检测。
+2. **B45 goals_of_treatment "adjuvant" vs "curative"** (P1): 6/10 行有此问题。Prompt 已有决策树但模型仍输出 "adjuvant"。可能需要更强的 CoT 引导或 G6 修正。
+3. **B48 Distant Metastasis 缺失** (P2): 5/10 行缺少此 field。Schema 验证 (G2) 应该捕获但未生效。
+4. **B49 Stage 幻觉** (P0): 最危险错误——note 明确说无转移+curative intent，模型输出 Stage IV/metastatic。需要交叉验证 Stage 与 Metastasis 的一致性。
+5. **B53 response_assessment 遗漏** (P0): PET 明确显示 progression 但输出 "Not mentioned"。可能因为 PET 结果在 note body 而非 A/P 段。
+6. **B54/B33 "Patient not taking" 问题** (P1): 尽管 prompt 已禁止，模型仍将标注为 "not taking" 的药物列入。需要后处理检测。
+7. **B55 Therapy_plan 混入影像** (P2): 影像检查混入 therapy_plan。可考虑类似 POST-PROC-FILTER 的后处理。
+
+### 优先修复建议
+
+1. **P0 — B49 Stage 幻觉**: 后处理校验 — 如果 Metastasis="No" 但 Stage 含 "Stage IV" 或 "metastatic"，自动修正
+2. **P0 — B43 Lab 幻觉**: Prompt 加 "If lab values are redacted (*****), write 'redacted' — do NOT guess numbers"
+3. **P0 — B53 response_assessment**: 传入全文而非仅 A/P 给 Response_Assessment 提取
+4. **P1 — B45 goals "adjuvant"→"curative"**: 后处理规则：if Stage I-III + no distant met + adjuvant therapy → "curative"
+5. **P1 — B54 "Patient not taking"**: POST-SUPP 后处理检测 "not taking" 标记
+6. **P2 — B48 Distant Metastasis**: G2 schema 验证强化，确保所有必需 key 存在

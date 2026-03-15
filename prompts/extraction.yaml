@@ -65,6 +65,7 @@ Lab_Results: |
   Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
   Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
   CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
+  CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar), write "Values redacted" for those entries — do NOT fabricate or guess specific numbers. Only include values that are clearly visible and readable in the note.
   If lab results are older than 6 months, note the date.
 
   Respond *only* with a JSON object using this exact schema:
@@ -97,6 +98,8 @@ Current_Medications: |
     Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]"
   - PAST/COMPLETED (do NOT include): medications already finished or stopped.
     Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
+  - STOPPED/DROPPED (do NOT include): medications recently discontinued.
+    Look for: "recently dropped", "stopped due to", "discontinued", "held", "self D/C", "D/Ced"
 
   ONLY include drugs from this oncology drug list (or close variants). If a drug is NOT on this list, do NOT include it:
   --- CHEMOTHERAPY ---
@@ -169,7 +172,7 @@ Treatment_Goals: |
   FIRST — check the note for EXPLICIT intent words:
   - If the note says "palliative" or "palliative intent" or "palliative care" → write "palliative". Done.
   - If the note says "curative" or "curative intent" → write "curative". Done.
-  - If the note says "adjuvant" → write "adjuvant" (unless metastatic, then "palliative").
+  - If the note says "adjuvant" → this describes the treatment TYPE, not the GOAL. For non-metastatic cancer, adjuvant treatment has curative intent → write "curative". Only write "palliative" if metastatic.
   - If the note explicitly states an intent, USE IT. Do NOT override the physician's own words.
 
   ONLY if no explicit intent word is found, use this decision tree:
@@ -191,6 +194,8 @@ Response_Assessment: |
 
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+     IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
+     IMPORTANT: For patients on adjuvant/maintenance therapy, "no evidence of recurrence" or "no evidence of disease" on exam or imaging IS a valid response assessment — it means the treatment is working.
      IMPORTANT — the patient IS on treatment if ANY of these clues appear:
      - "currently on [drug]", "taking [drug]", "continue [drug]", "on [drug] since [date]"
      - Mentions of chemotherapy cycles, off weeks, dose adjustments (e.g., "off week", "cycle 3", "due to start next cycle")

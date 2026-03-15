@@ -646,6 +646,63 @@ def main():
                 keypoints["Advance_care_planning"] = {"Advance care": ". ".join(patches) + "."}
                 print(f"    [POST-ADV] patched from full note: {patches}")
 
+        # POST-STAGE: Cross-validate Stage vs Metastasis [B49]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = cancer.get("Stage_of_Cancer", "")
+            met = cancer.get("Metastasis", "")
+            dist_met = cancer.get("Distant Metastasis", "")
+            met_says_no = met.lower().startswith("no") if met else False
+            dist_met_says_no = dist_met.lower().startswith("no") if dist_met else True
+            stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage, re.IGNORECASE))
+
+            if met_says_no and dist_met_says_no and stage_says_iv:
+                cleaned = re.sub(r',?\s*now\s+metastatic\s*\(Stage\s*IV\)', '', stage, flags=re.IGNORECASE)
+                cleaned = re.sub(r'metastatic\s*\(Stage\s*IV\)\s*,?\s*', '', cleaned, flags=re.IGNORECASE)
+                cleaned = cleaned.strip().rstrip(',').strip()
+                if cleaned and cleaned != stage:
+                    cancer["Stage_of_Cancer"] = cleaned
+                    print(f"    [POST-STAGE] contradiction fixed: '{stage}' → '{cleaned}'")
+
+        # POST-GOALS: adjuvant → curative for non-metastatic [B45]
+        goals = keypoints.get("Treatment_Goals", {})
+        if isinstance(goals, dict):
+            goal_val = goals.get("goals_of_treatment", "").lower().strip()
+            if goal_val == "adjuvant":
+                cancer = keypoints.get("Cancer_Diagnosis", {})
+                met = str(cancer.get("Metastasis", "")).lower() if isinstance(cancer, dict) else ""
+                stage = str(cancer.get("Stage_of_Cancer", "")).lower() if isinstance(cancer, dict) else ""
+                is_metastatic = "yes" in met or "stage iv" in stage or "metastatic" in stage
+                if not is_metastatic:
+                    goals["goals_of_treatment"] = "curative"
+                    print(f"    [POST-GOALS] adjuvant → curative (non-metastatic)")
+
+        # POST-DISTMET: Ensure Distant Metastasis field exists [B48]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict) and "Distant Metastasis" not in cancer:
+            met = cancer.get("Metastasis", "")
+            cancer["Distant Metastasis"] = met
+            print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
+
+        # POST-RESPONSE: cross-reference response_assessment with findings [B53, B60]
+        response = keypoints.get("Response_Assessment", {})
+        resp_val = response.get("response_assessment", "") if isinstance(response, dict) else ""
+        findings = keypoints.get("Clinical_Findings", {})
+        find_val = findings.get("findings", "") if isinstance(findings, dict) else ""
+
+        if resp_val and "not mentioned" in resp_val.lower() and find_val:
+            RESPONSE_KEYWORDS = ["progression", "progressed", "stable disease", "partial response",
+                                 "complete response", "no evidence of recurrence", "no evidence of disease",
+                                 "increased", "decreased metabolic", "new metast"]
+            for kw in RESPONSE_KEYWORDS:
+                if kw in find_val.lower():
+                    sentences = re.split(r'[.;]', find_val)
+                    relevant = [s.strip() for s in sentences if kw in s.lower()]
+                    if relevant:
+                        response["response_assessment"] = ". ".join(relevant[:2]) + "."
+                        print(f"    [POST-RESPONSE] patched from findings: '{relevant[0][:60]}...'")
+                    break
+
         print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 
         # Build row result

@@ -68,6 +68,10 @@ def filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist):
         return parsed
     if val.lower() in ("none", "n/a", ""):
         return parsed
+    # Check for "not taking" pattern before any other filtering [B54]
+    if "not taking" in val.lower() or "patient not taking" in val.lower():
+        parsed["supportive_meds"] = ""
+        return parsed
     # Don't filter safe negative phrases (e.g., "None currently being taken.")
     val_clean = val.strip().lower()
     if val_clean.startswith("none") or val_clean.startswith("not ") or val_clean.startswith("no "):
@@ -987,16 +991,16 @@ def _has_vague_terms(text):
 
 def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None, supportive_whitelist=None):
     """
-    V2 extraction pipeline with 6 independent gates.
+    V2 extraction pipeline with 6 gates (v7a order: improve-then-validate).
     Each gate fixes one specific issue (trim, don't redo).
 
-    Gates:
+    Gates (v7a reordered — improve first, validate last):
       1. FORMAT   - Parse JSON, LLM reformat if needed
       2. SCHEMA   - Validate keys match expected schema
-      3. FAITHFUL - Trim unsupported claims (not re-extract)
-      4. TEMPORAL - Remove past/completed items from plan keys
-      5. SPECIFIC - Replace vague language with specifics
-      6. SEMANTIC - Check each value answers its field's question
+      3. SPECIFIC - Replace vague language with specifics (improve)
+      4. SEMANTIC - Check each value answers its field's question (improve)
+      5. FAITHFUL - Trim unsupported claims, final quality gate (validate)
+      6. TEMPORAL - Remove past/completed items from plan keys (filter)
 
     Args:
         prompts: dict of {key: task_prompt_text}
@@ -1092,156 +1096,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             else:
                 gate_log.append(f"      [G2-SCHEMA] ok")
 
-        # --- Gate 3: FAITHFULNESS (trim mode) ---
-        if verify and parsed is not None:
-            original_keys = set(parsed.keys())
-            before_values = {k: str(v)[:80] for k, v in parsed.items()}
-            faith_prompt = chat_tmpl.user_assistant(
-                f"Review this extraction against the original medical note in your context:\n"
-                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
-                f"For each key-value pair, check: is the value explicitly stated or directly "
-                f"inferable from the note?\n"
-                f"Rules:\n"
-                f"- KEEP the value if it is supported by the note, even if the wording differs slightly.\n"
-                f"- KEEP the value if it is a reasonable clinical summary of what the note says.\n"
-                f"- ONLY replace a value with an empty string if it contains information that "
-                f"clearly CONTRADICTS the note or is completely fabricated (not mentioned at all).\n"
-                f"- Watch for GENERIC BOILERPLATE that is NOT in the note: phrases like "
-                f"\"tolerating therapy well\", \"symptoms improved\", \"patient is doing well\" "
-                f"must be EMPTY if the note does not explicitly say this.\n"
-                f"- When in doubt, KEEP the original value.\n"
-                f"- Do NOT remove any keys. Return ALL original keys.\n"
-                f"Return ONLY the JSON object with all original keys preserved."
-            )
-            cleaned_raw, _ = run_model_with_cache_manual(
-                faith_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
-            )
-            torch.cuda.empty_cache()
-            gc.collect()
-
-            cleaned_parsed = try_parse_json(cleaned_raw)
-            if cleaned_parsed is not None:
-                cleaned_keys = set(cleaned_parsed.keys())
-                if original_keys & cleaned_keys:
-                    # Restore any keys that were dropped by the LLM
-                    missing_keys = original_keys - cleaned_keys
-                    for mk in missing_keys:
-                        cleaned_parsed[mk] = parsed[mk]
-                    if missing_keys:
-                        flags.append(f"faith-restored-{len(missing_keys)}keys")
-                    # Log per-field changes
-                    changed_fields = []
-                    emptied_fields = []
-                    for k in original_keys:
-                        old_val = parsed.get(k)
-                        new_val = cleaned_parsed.get(k)
-                        if old_val != new_val:
-                            old_s = str(old_val)[:60]
-                            new_s = str(new_val)[:60]
-                            changed_fields.append(k)
-                            if not new_val or new_val == "":
-                                emptied_fields.append(k)
-                            gate_log.append(f"      [G3-FAITH] {k}: \"{old_s}\" -> \"{new_s}\"")
-                    if changed_fields:
-                        flags.append("faith-trimmed")
-                        if emptied_fields:
-                            gate_log.append(f"      [G3-FAITH] EMPTIED: {emptied_fields}")
-                    else:
-                        gate_log.append(f"      [G3-FAITH] no changes (all supported)")
-
-                    # Protect safe negatives from being emptied
-                    if gate_config.get("preserve_negatives") and emptied_fields:
-                        for k in emptied_fields:
-                            orig_val = str(parsed.get(k, ""))  # pre-G3 value (full, not truncated)
-                            if _is_safe_negative(orig_val):
-                                cleaned_parsed[k] = parsed[k]  # restore original
-                                gate_log.append(f"      [G3-PROTECT] {k}: restored safe negative \"{orig_val[:60]}\"")
-
-                    # If G3 emptied ALL fields and none were safe negatives,
-                    # G3 is likely being too aggressive — revert to original extraction
-                    if gate_config.get("preserve_negatives") and emptied_fields:
-                        still_empty = [k for k in emptied_fields
-                                       if not cleaned_parsed.get(k) or cleaned_parsed.get(k) == ""]
-                        if still_empty and len(still_empty) == len(original_keys):
-                            # G3 emptied everything — revert
-                            for k in still_empty:
-                                cleaned_parsed[k] = parsed[k]
-                                gate_log.append(f"      [G3-REVERT] {k}: reverted (G3 emptied all fields)")
-
-                    # Also revert individual fields that had classification/inference values
-                    # G3 should not empty "New patient", "Approximately Stage II", "Not sure", etc.
-                    if gate_config.get("preserve_negatives") and emptied_fields:
-                        for k in emptied_fields:
-                            if cleaned_parsed.get(k) == "" or not cleaned_parsed.get(k):
-                                orig_val = str(parsed.get(k, ""))
-                                if _is_classification_or_inference(orig_val):
-                                    cleaned_parsed[k] = parsed[k]
-                                    gate_log.append(f"      [G3-REVERT-INFER] {k}: restored classification/inference \"{orig_val[:60]}\"")
-
-                    # Protect Type_of_Cancer from G3 removing receptor status
-                    # If G3 emptied or trimmed Type_of_Cancer, and original had receptor info, restore
-                    if gate_config.get("preserve_negatives") and "Type_of_Cancer" in changed_fields:
-                        orig_toc = str(parsed.get("Type_of_Cancer", ""))
-                        new_toc = str(cleaned_parsed.get("Type_of_Cancer", ""))
-                        has_receptor = any(r in orig_toc.lower() for r in ["er+", "er-", "pr+", "pr-", "her2", "triple negative"])
-                        if has_receptor and (not new_toc or len(new_toc) < len(orig_toc) * 0.5):
-                            cleaned_parsed["Type_of_Cancer"] = parsed["Type_of_Cancer"]
-                            gate_log.append(f"      [G3-PROTECT-RECEPTOR] Type_of_Cancer: restored \"{orig_toc[:60]}\"")
-
-                    parsed = cleaned_parsed
-                    answer = json.dumps(cleaned_parsed, ensure_ascii=False)
-                else:
-                    gate_log.append(f"      [G3-FAITH] REJECTED (no key overlap), kept original")
-            else:
-                gate_log.append(f"      [G3-FAITH] parse FAILED, kept original")
-
-        # --- Gate 4: TEMPORAL (plan keys only) ---
-        if verify and parsed is not None and key in PLAN_KEYS:
-            # Skip G4 if all fields are empty (nothing to filter)
-            all_empty_g4 = all(
-                not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
-                for v in parsed.values()
-            )
-            if gate_config.get("skip_empty_fields") and all_empty_g4:
-                gate_log.append(f"      [G4-TEMPORAL] skipped (all fields empty/negative)")
-            else:
-                original_keys = set(parsed.keys())
-                before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
-                temporal_prompt = chat_tmpl.user_assistant(
-                    f"Review this extraction for a PLAN section:\n"
-                    f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
-                    f"Remove any PAST/COMPLETED items (past tense, past dates, "
-                    f"\"underwent\", \"s/p\", \"completed\").\n"
-                    f"Keep only CURRENT (\"continue\", \"currently on\") and FUTURE "
-                    f"(\"will\", \"plan to\", \"pending\") items.\n"
-                    f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
-                    f"Return ONLY the JSON object."
-                )
-                cleaned_raw, _ = run_model_with_cache_manual(
-                    temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
-                )
-                torch.cuda.empty_cache()
-                gc.collect()
-
-                cleaned_parsed = try_parse_json(cleaned_raw)
-                if cleaned_parsed is not None:
-                    cleaned_keys = set(cleaned_parsed.keys())
-                    if original_keys & cleaned_keys:
-                        if cleaned_parsed != parsed:
-                            flags.append("temporal-cleaned")
-                            for k in original_keys:
-                                if parsed.get(k) != cleaned_parsed.get(k):
-                                    gate_log.append(f"      [G4-TEMPORAL] {k}: \"{before_g4.get(k,'')}\" -> \"{str(cleaned_parsed.get(k,''))[:80]}\"")
-                        else:
-                            gate_log.append(f"      [G4-TEMPORAL] no changes")
-                        parsed = cleaned_parsed
-                        answer = cleaned_raw
-                    else:
-                        gate_log.append(f"      [G4-TEMPORAL] REJECTED (no key overlap)")
-                else:
-                    gate_log.append(f"      [G4-TEMPORAL] parse FAILED")
-
-        # --- Gate 5: SPECIFICITY (conditional) ---
+        # --- Gate 3: SPECIFICITY (conditional) --- [v7a: moved before faithfulness]
         if verify and parsed is not None and _has_vague_terms(answer):
             original_keys = set(parsed.keys())
             before_g5 = {k: str(v)[:80] for k, v in parsed.items()}
@@ -1270,25 +1125,25 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                         flags.append("specificity-improved")
                         for k in original_keys:
                             if parsed.get(k) != improved_parsed.get(k):
-                                gate_log.append(f"      [G5-SPECIFIC] {k}: \"{before_g5.get(k,'')}\" -> \"{str(improved_parsed.get(k,''))[:80]}\"")
+                                gate_log.append(f"      [G3-SPECIFIC] {k}: \"{before_g5.get(k,'')}\" -> \"{str(improved_parsed.get(k,''))[:80]}\"")
                     else:
-                        gate_log.append(f"      [G5-SPECIFIC] no changes")
+                        gate_log.append(f"      [G3-SPECIFIC] no changes")
                     parsed = improved_parsed
                     answer = improved_raw
                 else:
-                    gate_log.append(f"      [G5-SPECIFIC] REJECTED (no key overlap)")
+                    gate_log.append(f"      [G3-SPECIFIC] REJECTED (no key overlap)")
             else:
-                gate_log.append(f"      [G5-SPECIFIC] parse FAILED")
+                gate_log.append(f"      [G3-SPECIFIC] parse FAILED")
 
-        # --- Gate 6: SEMANTIC RELEVANCE ---
+        # --- Gate 4: SEMANTIC RELEVANCE --- [v7a: moved before faithfulness]
         if verify and parsed is not None:
-            # Skip G6 if all fields are empty/safe-negative (nothing to validate)
+            # Skip G4 if all fields are empty/safe-negative (nothing to validate)
             all_empty_g6 = all(
                 not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
                 for v in parsed.values()
             )
             if gate_config.get("skip_empty_fields") and all_empty_g6:
-                gate_log.append(f"      [G6-SEMANTIC] skipped (all fields empty/negative)")
+                gate_log.append(f"      [G4-SEMANTIC] skipped (all fields empty/negative)")
             else:
                 # Extract the field descriptions from the prompt schema
                 schema_str = extract_schema_from_prompt(task)
@@ -1337,30 +1192,179 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                                 old_is_empty = not old_val or old_val == ""
                                 if old_is_empty and new_val and new_val != "":
                                     semantic_parsed[k] = old_val  # keep empty
-                                    gate_log.append(f"      [G6-PROTECT] {k}: blocked fill into empty field")
+                                    gate_log.append(f"      [G4-PROTECT] {k}: blocked fill into empty field")
 
-                        # Protect classification fields from G6 modification
+                        # Protect classification fields from modification
                         if gate_config.get("preserve_negatives"):
                             for k in original_keys_g6:
                                 if k in G6_NO_MODIFY_FIELDS and parsed.get(k) != semantic_parsed.get(k):
                                     semantic_parsed[k] = parsed[k]  # keep original
-                                    gate_log.append(f"      [G6-PROTECT-CLASS] {k}: blocked modification of classification field")
+                                    gate_log.append(f"      [G4-PROTECT-CLASS] {k}: blocked modification of classification field")
 
                         changed = False
                         for k in original_keys_g6:
                             if parsed.get(k) != semantic_parsed.get(k):
                                 changed = True
-                                gate_log.append(f"      [G6-SEMANTIC] {k}: \"{before_g6.get(k,'')}\" -> \"{str(semantic_parsed.get(k,''))[:80]}\"")
+                                gate_log.append(f"      [G4-SEMANTIC] {k}: \"{before_g6.get(k,'')}\" -> \"{str(semantic_parsed.get(k,''))[:80]}\"")
                         if changed:
                             flags.append("semantic-fixed")
                         else:
-                            gate_log.append(f"      [G6-SEMANTIC] ok (all values answer their fields)")
+                            gate_log.append(f"      [G4-SEMANTIC] ok (all values answer their fields)")
                         parsed = semantic_parsed
                         answer = json.dumps(semantic_parsed, ensure_ascii=False)
                     else:
-                        gate_log.append(f"      [G6-SEMANTIC] REJECTED (no key overlap)")
+                        gate_log.append(f"      [G4-SEMANTIC] REJECTED (no key overlap)")
                 else:
-                    gate_log.append(f"      [G6-SEMANTIC] parse FAILED")
+                    gate_log.append(f"      [G4-SEMANTIC] parse FAILED")
+
+        # --- Gate 5: FAITHFULNESS (trim mode) --- [v7a: moved after improve gates, acts as final validator]
+        if verify and parsed is not None:
+            original_keys = set(parsed.keys())
+            before_values = {k: str(v)[:80] for k, v in parsed.items()}
+            faith_prompt = chat_tmpl.user_assistant(
+                f"Review this extraction against the original medical note in your context:\n"
+                f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                f"For each key-value pair, check: is the value explicitly stated or directly "
+                f"inferable from the note?\n"
+                f"Rules:\n"
+                f"- KEEP the value if it is supported by the note, even if the wording differs slightly.\n"
+                f"- KEEP the value if it is a reasonable clinical summary of what the note says.\n"
+                f"- ONLY replace a value with an empty string if it contains information that "
+                f"clearly CONTRADICTS the note or is completely fabricated (not mentioned at all).\n"
+                f"- Watch for GENERIC BOILERPLATE that is NOT in the note: phrases like "
+                f"\"tolerating therapy well\", \"symptoms improved\", \"patient is doing well\" "
+                f"must be EMPTY if the note does not explicitly say this.\n"
+                f"- When in doubt, KEEP the original value.\n"
+                f"- Do NOT remove any keys. Return ALL original keys.\n"
+                f"Return ONLY the JSON object with all original keys preserved."
+            )
+            cleaned_raw, _ = run_model_with_cache_manual(
+                faith_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
+            )
+            torch.cuda.empty_cache()
+            gc.collect()
+
+            cleaned_parsed = try_parse_json(cleaned_raw)
+            if cleaned_parsed is not None:
+                cleaned_keys = set(cleaned_parsed.keys())
+                if original_keys & cleaned_keys:
+                    # Restore any keys that were dropped by the LLM
+                    missing_keys = original_keys - cleaned_keys
+                    for mk in missing_keys:
+                        cleaned_parsed[mk] = parsed[mk]
+                    if missing_keys:
+                        flags.append(f"faith-restored-{len(missing_keys)}keys")
+                    # Log per-field changes
+                    changed_fields = []
+                    emptied_fields = []
+                    for k in original_keys:
+                        old_val = parsed.get(k)
+                        new_val = cleaned_parsed.get(k)
+                        if old_val != new_val:
+                            old_s = str(old_val)[:60]
+                            new_s = str(new_val)[:60]
+                            changed_fields.append(k)
+                            if not new_val or new_val == "":
+                                emptied_fields.append(k)
+                            gate_log.append(f"      [G5-FAITH] {k}: \"{old_s}\" -> \"{new_s}\"")
+                    if changed_fields:
+                        flags.append("faith-trimmed")
+                        if emptied_fields:
+                            gate_log.append(f"      [G5-FAITH] EMPTIED: {emptied_fields}")
+                    else:
+                        gate_log.append(f"      [G5-FAITH] no changes (all supported)")
+
+                    # Protect safe negatives from being emptied
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        for k in emptied_fields:
+                            orig_val = str(parsed.get(k, ""))  # pre-G5 value (full, not truncated)
+                            if _is_safe_negative(orig_val):
+                                cleaned_parsed[k] = parsed[k]  # restore original
+                                gate_log.append(f"      [G5-PROTECT] {k}: restored safe negative \"{orig_val[:60]}\"")
+
+                    # If G5 emptied ALL fields and none were safe negatives,
+                    # G5 is likely being too aggressive — revert to original extraction
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        still_empty = [k for k in emptied_fields
+                                       if not cleaned_parsed.get(k) or cleaned_parsed.get(k) == ""]
+                        if still_empty and len(still_empty) == len(original_keys):
+                            # G5 emptied everything — revert
+                            for k in still_empty:
+                                cleaned_parsed[k] = parsed[k]
+                                gate_log.append(f"      [G5-REVERT] {k}: reverted (G5 emptied all fields)")
+
+                    # Also revert individual fields that had classification/inference values
+                    # G5 should not empty "New patient", "Approximately Stage II", "Not sure", etc.
+                    if gate_config.get("preserve_negatives") and emptied_fields:
+                        for k in emptied_fields:
+                            if cleaned_parsed.get(k) == "" or not cleaned_parsed.get(k):
+                                orig_val = str(parsed.get(k, ""))
+                                if _is_classification_or_inference(orig_val):
+                                    cleaned_parsed[k] = parsed[k]
+                                    gate_log.append(f"      [G5-REVERT-INFER] {k}: restored classification/inference \"{orig_val[:60]}\"")
+
+                    # Protect Type_of_Cancer from G5 removing receptor status
+                    # If G5 emptied or trimmed Type_of_Cancer, and original had receptor info, restore
+                    if gate_config.get("preserve_negatives") and "Type_of_Cancer" in changed_fields:
+                        orig_toc = str(parsed.get("Type_of_Cancer", ""))
+                        new_toc = str(cleaned_parsed.get("Type_of_Cancer", ""))
+                        has_receptor = any(r in orig_toc.lower() for r in ["er+", "er-", "pr+", "pr-", "her2", "triple negative"])
+                        if has_receptor and (not new_toc or len(new_toc) < len(orig_toc) * 0.75):
+                            cleaned_parsed["Type_of_Cancer"] = parsed["Type_of_Cancer"]
+                            gate_log.append(f"      [G5-PROTECT-RECEPTOR] Type_of_Cancer: restored \"{orig_toc[:60]}\"")
+
+                    parsed = cleaned_parsed
+                    answer = json.dumps(cleaned_parsed, ensure_ascii=False)
+                else:
+                    gate_log.append(f"      [G5-FAITH] REJECTED (no key overlap), kept original")
+            else:
+                gate_log.append(f"      [G5-FAITH] parse FAILED, kept original")
+
+        # --- Gate 6: TEMPORAL (plan keys only) ---
+        if verify and parsed is not None and key in PLAN_KEYS:
+            # Skip G6 if all fields are empty (nothing to filter)
+            all_empty_g4 = all(
+                not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
+                for v in parsed.values()
+            )
+            if gate_config.get("skip_empty_fields") and all_empty_g4:
+                gate_log.append(f"      [G6-TEMPORAL] skipped (all fields empty/negative)")
+            else:
+                original_keys = set(parsed.keys())
+                before_g4 = {k: str(v)[:80] for k, v in parsed.items()}
+                temporal_prompt = chat_tmpl.user_assistant(
+                    f"Review this extraction for a PLAN section:\n"
+                    f"--- BEGIN ---\n{answer}\n--- END ---\n\n"
+                    f"Remove any PAST/COMPLETED items (past tense, past dates, "
+                    f"\"underwent\", \"s/p\", \"completed\").\n"
+                    f"Keep only CURRENT (\"continue\", \"currently on\") and FUTURE "
+                    f"(\"will\", \"plan to\", \"pending\") items.\n"
+                    f"Return the cleaned JSON. If nothing remains, use the appropriate \"None\" value.\n"
+                    f"Return ONLY the JSON object."
+                )
+                cleaned_raw, _ = run_model_with_cache_manual(
+                    temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
+                )
+                torch.cuda.empty_cache()
+                gc.collect()
+
+                cleaned_parsed = try_parse_json(cleaned_raw)
+                if cleaned_parsed is not None:
+                    cleaned_keys = set(cleaned_parsed.keys())
+                    if original_keys & cleaned_keys:
+                        if cleaned_parsed != parsed:
+                            flags.append("temporal-cleaned")
+                            for k in original_keys:
+                                if parsed.get(k) != cleaned_parsed.get(k):
+                                    gate_log.append(f"      [G6-TEMPORAL] {k}: \"{before_g4.get(k,'')}\" -> \"{str(cleaned_parsed.get(k,''))[:80]}\"")
+                        else:
+                            gate_log.append(f"      [G6-TEMPORAL] no changes")
+                        parsed = cleaned_parsed
+                        answer = cleaned_raw
+                    else:
+                        gate_log.append(f"      [G6-TEMPORAL] REJECTED (no key overlap)")
+                else:
+                    gate_log.append(f"      [G6-TEMPORAL] parse FAILED")
 
         # --- POST-1: Strip extra keys ---
         if parsed is not None and expected_keys:

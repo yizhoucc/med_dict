@@ -38,6 +38,10 @@ Therapy_plan: |
   - CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
   - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
 
+  DO NOT include imaging plans (CT, MRI, PET, DEXA, Echo, echocardiogram, mammogram, bone scan, X-ray) — those belong in Imaging_Plan.
+  DO NOT include lab plans — those belong in Lab_Plan.
+  Only include THERAPY: chemotherapy drugs, hormonal drugs, radiation therapy, bone-protecting agents, and their schedules.
+
   Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
   Respond *only* with a JSON object using this exact schema:
   {
