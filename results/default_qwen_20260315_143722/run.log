@@ -5768,3 +5768,20 @@ Processing row 73 (28/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.6s
   Total extraction: 98.4s
+    Medication_Plan_chatgpt: 40.1s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient should be treated with an aromatase inhibitor. The exact medication is not specified and will be determined based on further tumor testing."
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': 'aromatase inhibitor', 'chemotherapy': 'TC (if high-risk di" -> "{'hormonal therapy': {'summary': 'aromatase inhibitor to be used given her posit"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': {'summary': 'aromatase inhibitor to be " -> "{'hormonal therapy': {'summary': 'aromatase inhibitor to be "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': {'summary': 'aromatase inhibitor to be used given her posit" -> "{'hormonal therapy': {'summary': 'aromatase inhibitor to be used given her posit"
+    Medication_Plan: 12.7s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will consider the use of an aromatase inhibitor alone vs TC (docetaxel and carboplatin) then an aromatase inhibitor based on the results of further tumor testing.
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "The patient will consider the use of an aromatase inhibitor alone vs TC (docetax" -> "The patient will consider the use of an aromatase inhibitor alone vs TC (docetax"
