@@ -409,3 +409,31 @@ Processing row 26 (2/10)...
       [G5-PROTECT] Genetics: restored safe negative "None"
       [G5-PROTECT] Specialty: restored safe negative "None"
       [G5-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 14.9s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: if pain worsens"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+    Advance_care_planning: 8.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G5-FAITH] EMPTIED: ['Advance care']
+      [G5-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 401.3s
+  Row 26 total: 991.0s
+  Row 26 saved to progress
+
+Processing row 27 (3/10)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
