@@ -2781,3 +2781,77 @@ Processing row 59 (14/36)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 31.0s
+      [EXTRACT] raw={
+"findings": "Patient has undergone partial mastectomy for DCIS, with final pathology showing invasive ductal carcinoma (IDC) grade 2, 0.7 cm in size, with negative margins for invasive tumor. Ductal
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.1s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.8s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 68.4s
+  Cross-context injected (913 chars)
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 7.1s
+  Total extraction: 75.5s
+    Medication_Plan_chatgpt: 22.1s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Strongly recommend adjuvant endocrine therapy at the appropriate juncture, with [REDACTED] agent for 5-10 yrs",
+        "Short term side_effects_discuss
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "strongly recommend adjuvant endocrine therapy at the appropriate juncture, with " -> "{'summary': 'strongly recommend adjuvant endocrine therapy at the appropriate ju"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 7.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "Strongly recommend adjuvant endocrine therapy with [REDACTED] agent for 5-10 years."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "Strongly recommend adjuvant endocrine therapy with [REDACTED" -> "Strongly recommend adjuvant endocrine therapy with [REDACTED"
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Strongly recommend adjuvant endocrine therapy at the appropriate juncture, with [REDACTED] agent for 5-10 yrs. Pt is to see Rad Onc this week."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
