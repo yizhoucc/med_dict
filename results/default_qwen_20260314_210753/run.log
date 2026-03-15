@@ -1885,3 +1885,50 @@ Processing row 34 (10/10)...
   Regex matched: 'Assessment:'
   Regex extraction succeeded (412 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 18.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Ms. ***** is a 40-year-old female with invasive lobular carcinoma diagnosed in 2018. She is currently on ad
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 15.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "invasive lobular carcinoma, ER+/PR+/HER2-",
+  "Stage_of_Cancer": "pT1cN0(sn)",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "invasive lobular carcinoma, ER+/PR+/HER2-" -> "invasive lobular carcinoma"
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 26.2s
+      [EXTRACT] raw={
+"findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpect
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
