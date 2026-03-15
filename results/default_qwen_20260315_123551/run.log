@@ -1986,3 +1986,83 @@ Processing row 44 (10/10)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 15.3s
   Total extraction: 78.8s
+    Medication_Plan_chatgpt: 27.4s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting on gemzar carboplatin asap. Second line could use [REDACTED] and there are clinical trials (such as a FGFR inhibitor) or other [REDACTED] (such as 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['gemzar carboplatin', 'xeloda', 'adjuvant radiation']" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in" -> "[{'summary': 'gemzar carboplatin asap', 'Short term side_effects_discussed': '',"
+    Medication_Plan: 12.3s
+      [EXTRACT] raw={
+    "medication_plan": "Starting on gemzar carboplatin as soon as possible. Second line treatment could use [REDACTED], and for more advanced line treatment, options include FGFR inhibitor, eribulin
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.9s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start on gemzar carboplatin asap. Second line could use [REDACTED], and for more advanced line treatment, options include a FGFR inhibitor, eribulin, or doxil."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Start on gemzar carboplatin asap. Second line could use [RED" -> "Start on gemzar carboplatin asap. Second line she could use "
+      [G5-TEMPORAL] therapy_plan: "Start on gemzar carboplatin asap. Second line she could use [REDACTED] and there" -> "Start on gemzar carboplatin asap. Second line she could use [REDACTED] and there"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
