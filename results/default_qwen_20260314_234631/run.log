@@ -270,3 +270,43 @@ Processing row 26 (2/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.4s [improved, meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": "letrozole, goserelin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole, goserelin" -> "letrozole, goserelin, zolendronic acid"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] letrozole, goserelin, zolendronic acid -> letrozole, goserelin
+    Treatment_Changes: 8.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium-vitamin D, zolendronic acid" -> "calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX) -> goserelin (ZOLADEX)
+  Phase 1 extraction (6 prompts): 87.0s
+  Cross-context injected (1241 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 14.6s
+      [EXTRACT] raw={
+"response_assessment": "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified. Multiple osseous lesions involving the thoracolumbar and
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.8s
+  Total extraction: 105.8s
