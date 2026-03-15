@@ -5142,3 +5142,19 @@ Processing row 70 (25/36)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 51.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on neo-adjuvant AC/taxol chemotherapy, consisting of 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor support followed by taxol given either in 4 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 22.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Post-operative radiotherapy will be beneficial whether [REDACTED] undergoes breast-conserving surgery or mastectomy. The high risk nature of her disease, including extensiv
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
