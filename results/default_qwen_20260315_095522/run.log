@@ -1091,3 +1091,17 @@ Processing row 40 (6/10)...
       [G4-FAITH] Stage_of_Cancer: "Stage II" -> ""
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 27.5s
+      [EXTRACT] raw={
+"lab_summary": "Ferritin 27 ug/L, WBC Count 5.2 x10E9/L, RBC Count 3.82 (L) x10E12/L, Hemoglobin 11.8 (L) g/dL, Hematocrit 36.2 %, MCV 95 fL, MCH 30.9 pg, MCHC 32.6 g/dL, Platelet Count [REDACTED] x
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 32.4s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy on 04/11/2018. Pathology from the left breast revealed a 3 cm grade 3 IDC with negative margins. 1 of 3 left axillary SLN was involved with microm
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient underwent bilateral mastectomy on 04/11/2018. Pathol" -> "Patient underwent bilateral mastectomy on 04/11/2018. Pathol"
