@@ -1910,3 +1910,73 @@ Processing row 34 (10/10)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 21.9s
+      [EXTRACT] raw={
+"findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved, AJCC Anatomic Stage: pT1cN0(sn). P
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "anastrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "anastrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 2.4s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 54.7s
+  Cross-context injected (678 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 8.0s
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Last mammogram on 04/15/2019 showed no signs of malignancy."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 11.4s
+  Total extraction: 66.1s
+    Medication_Plan_chatgpt: 17.9s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "continue on anastrozole without significant side effect",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": "
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "anastrozole" -> "{'summary': 'Ms ***** is continuing on anastrozole without significant side effe"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'Ms ***** is continuing on anastrozole without s" -> "{'summary': 'Ms ***** is continuing on anastrozole without s"
+      [G5-TEMPORAL] no changes
