@@ -1280,3 +1280,47 @@ Processing row 31 (7/10)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 12.2s
+      [EXTRACT] raw={
+"lab_summary": "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L (from 05/18/2016)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 21.9s
+      [EXTRACT] raw={
+"findings": "PET/CT done in June 2019 shows complete response (CR) with no abnormal areas of FDG uptake to suggest active metastatic disease. No pulmonary consolidations or metastases noted. Physica
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.6s
+      [EXTRACT] raw={
+"current_meds": "exemestane, trastuzumab, pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.2s
+      [EXTRACT] raw={
+"recent_changes": "Stopped ***** due to diarrhea.",
+"supportive_meds": "loperamide (IMODIUM) 2 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 112.7s
+  Cross-context injected (801 chars)
+    Treatment_Goals: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
