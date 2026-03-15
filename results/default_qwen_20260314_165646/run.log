@@ -723,3 +723,26 @@ Processing row 28 (4/10)...
       [G3-FAITH] no changes (all supported)
       [G4-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C"
       [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': {'summary': 'Start letrozole 2.5mg PO daily now', 'Short t"
+    Medication_Plan: 17.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Vitamin D supplement pending further evaluation. Continue use 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 31.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Bone density scan can be completed when she returns from *****. D
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 14.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She is at risk for local recurrence in her right breast for which additional radiation is recommended. Given her surgical pathology with only micrometastatic disease in her
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
