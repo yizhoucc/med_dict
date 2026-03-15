@@ -940,3 +940,19 @@ Processing row 29 (5/10)...
       [G4-FAITH] chemotherapy: "{'summary': 'The patient will receive neoadjuvant chemothera" -> "{'summary': 'The patient will receive neoadjuvant chemothera"
       [G5-TEMPORAL] no changes
       [POST-KEYS] stripped: {'other treatment', 'chemotherapy'}
+    Medication_Plan: 35.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclopho
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly " -> "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 39.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plu
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycl" -> "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycl"
