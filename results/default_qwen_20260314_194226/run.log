@@ -524,3 +524,58 @@ Processing row 27 (3/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.4s
   Total extraction: 91.0s
+    Medication_Plan_chatgpt: 50.5s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Recommendation for 5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term si
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': '5 years of anti-estrogen therapy with an aromatase inhibi" -> "[{'hormonal therapy': {'summary': '5 years of anti-estrogen therapy with an arom"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 7.3s
+      [EXTRACT] raw={
+    "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Calcium and vitamin D supplementation."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.6s
+      [EXTRACT] raw={
+    "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DEXA to assess her current bone health and will take calcium and vitamin D. She will proceed with r
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.8s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "I expect that she will proceed with radiation. We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** start."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "I expect that she will proceed with radiation. We will plan on meeting again onc" -> "I expect that she will proceed with radiation. We will plan on meeting again onc"
+      [G4-FAITH] no changes (all supported)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.5s
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA at this time to assess her current bone health."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
