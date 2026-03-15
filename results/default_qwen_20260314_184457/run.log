@@ -389,3 +389,23 @@ Processing row 26 (2/10)...
       [G5-FAITH] genetic_testing_plan: "None planned." -> ""
       [G5-FAITH] EMPTIED: ['genetic_testing_plan']
       [G5-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 55.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] Others: "None" -> ""
+      [G5-FAITH] Genetics: "None" -> ""
+      [G5-FAITH] Specialty: "None" -> ""
+      [G5-FAITH] Nutrition: "None" -> ""
+      [G5-FAITH] EMPTIED: ['Others', 'Genetics', 'Specialty', 'Nutrition']
+      [G5-PROTECT] Others: restored safe negative "None"
+      [G5-PROTECT] Genetics: restored safe negative "None"
+      [G5-PROTECT] Specialty: restored safe negative "None"
+      [G5-PROTECT] Nutrition: restored safe negative "None"
