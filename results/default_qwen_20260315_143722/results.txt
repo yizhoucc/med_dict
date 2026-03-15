@@ -1334,3 +1334,91 @@ RESULTS FOR ROW 55
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 56
+============================================================
+
+--- Column: coral_idx ---
+195
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Consult     Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  10/27/1963   Date of Visit:  04/10/2020  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor negative (CMS code)         History of Present Illness:     56 year old with breast pain on the left and a mass under the ***** strap who was diagnosed with a stage I left triple negative breast cancer. The tumor was ***** with a ***** of 90%.  She lives in ***** ***** saw Dr. ***** for a video visit for surgical recommendations.  She desires bilateral mastectomies with no reconstruction.  She has not seen a medical oncologist.  We discussed her family history and I recommend a genetics consult and a MRI to evaluate the extent of disease and her right breast.  We discussed the option of surgery first vs neoadjuvant chemotherapy due to the ***** situation.  She could do either.  I am concerned with how aggressive her tumor is about any delay getting to surgery or chemotherapy.  I would recommend ***** followed by weekly taxol with assessment of response throughout treatment.  I looked up oncologists in ***** ***** ***** ***** and gave her the phone numbers to call.  She will need a port placed no matter which order she does chemotherapy.  She will need an echo.  I spoke to her primary care doctor who is facilitating her tests getting done.     Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer (CMS code) 04/07/2020       Stage at *****:  Cancer Staging  Breast cancer (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: Stage IB (*****, *****, *****, *****, ER-, PR-, *****-) - Signed by ***** ***** *****, MD on \n 04/10/2020      Medications:  No current outpatient medications on file.    Allergies: Allergies/Contraindications  No Known Allergies    Medical History:   Past Medical History:   Diagnosis Date   \u0007 Arthritis    \u0007 Goiter    \u0007 Migraines        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 APPENDECTOMY     \u0007 ROTATOR CUFF REPAIR Right     *****        Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Not Currently   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male       Occupation:  environmental protection specialist for department of ***** management.  ***** ***** ***** ***** *****.     Marital Status: married     Gynecologic History:  G 2 P 1 AB 1    Menarche 12  Menopause  54   OCP 0 years HRT 0 years   Fertility treatments yes, pills no IVF    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Mother     \u0007 Prostate cancer Maternal Grandfather     \u0007 Prostate cancer Maternal Uncle     \u0007 Breast cancer Half-Sister                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain ++ breast pain   PSYCH:  No depression, or anxiety or trouble sleeping.       Pain    Pain Score/Location    04/10/20 0645   *****:   5     I addressed any existing pain symptoms with management plan as below, today 04/10/20     She does not want medication.     Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  There \n were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.        Psychologic/emotional well-being/support  She has good support from her husband.     Assessment / Plan:    1.  Stage I triple negative breast cancer on the left side *****, ***** of 90%.   2.  I would recommend neoadjuvant chemotherapy with dose dense AC followed by weekly taxol.  She will need a port placed.  This allows her to get rapid systemic treatment and we can assess her sensitivity to chemotherapy.   3.  It also would be fine for her to have surgery first if by MRI she has truly a stage I cancer.  The rapidity with which this can happen is crucial.  She needs to start chemotherapy no later than one month from diagnosis.   4.  MRI of bilateral breasts.   5.  Genetics consult.  Her mother had breast cancer and her May 20 sister had breast cancer in her 30s.   6.  I encouraged her to find a local oncologist for her to work with asap.   7.  We discussed the role of radiation to decrease the risk of local recurrence.  Depending on her pathology she may not need radiation if she has a mastectomy.   8.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes time on ***** patient, reviewing chart, coordinating care, discussing with patient and/or family.    \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:    1.  Stage I triple negative breast cancer on the left side *****, ***** of 90%.   2.  I would recommend neoadjuvant chemotherapy with dose dense AC followed by weekly taxol.  She will need a port placed.  This allows her to get rapid systemic treatment and we can assess her sensitivity to chemotherapy.   3.  It also would be fine for her to have surgery first if by MRI she has truly a stage I cancer.  The rapidity with which this can happen is crucial.  She needs to start chemotherapy no later than one month from diagnosis.   4.  MRI of bilateral breasts.   5.  Genetics consult.  Her mother had breast cancer and her May 20 sister had breast cancer in her 30s.   6.  I encouraged her to find a local oncologist for her to work with asap.   7.  We discussed the role of radiation to decrease the risk of local recurrence.  Depending on her pathology she may not need radiation if she has a mastectomy.   8.  We discussed the role of chemotherapy to decrease the risk of systemic recurrence.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes time on ***** patient, reviewing chart, coordinating care, discussing with patient and/or family.    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "56-year-old patient with newly diagnosed stage I left triple negative breast cancer presenting for surgical recommendations and to discuss treatment options including neoadjuvant chemotherapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
+    "Stage_of_Cancer": "Stage IB",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Patient diagnosed with stage I left triple negative breast cancer. Tumor size and margins not specified. No imaging findings detailed in the note. Physical exam: No acute distress, awake and alert, appears stated age."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {},
+  "Medication_Plan": {
+    "medication_plan": "Neoadjuvant chemotherapy with dose dense AC followed by weekly taxol."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Recommend neoadjuvant chemotherapy with dose dense AC followed by weekly taxol. She will need a port placed. She needs to start chemotherapy no later than one month from diagnosis. Discussed the role of radiation to decrease the risk of local recurrence, which may not be needed if she has a mastectomy. Discussed the role of chemotherapy to decrease the risk of systemic recurrence."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. Depending on her pathology she may not need radiation if she has a mastectomy."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "plan for port placement, surgery pending"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI of bilateral breasts."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Genetics consult planned due to family history of breast cancer."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "Genetics consult",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Not specified in the given text"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Full code."
+  }
+}
