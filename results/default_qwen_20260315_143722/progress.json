@@ -29,7 +29,8 @@
     70,
     71,
     72,
-    73
+    73,
+    74
   ],
   "results": {
     "46": {
@@ -2367,6 +2368,79 @@
         },
         "follow_up_next_visit": {
           "Next clinic visit": "in-person: 3 weeks to discuss future treatment options"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
+    },
+    "74": {
+      "coral_idx": 214,
+      "note_text": "  I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.      Patient Name: ***** *****  ***** *****: 10/22/19    CC:  New patient visit    HPI : 33 y.o. y.o. pre-menopausal Female with a new diagnosis of high-grade ER-/PR-/*****+ IDC with spread to axillary lymph nodes, here for a second opinion.     Oncologic History:  - 10/04/2019 Mammogram (obtained for self-palpated breast lump): 2.1cm mass in the posterior R breast, along with 2 axillary LNs with cortical thickening suspicious for malignancy.  - 10/18/2019 PET/CT: Hypermetabolic R breast mass and hypermetabolic LNs throughout the right axilla extending to level III. No other evidence of metastatic disease.   - 10/18/2019: US-guided breast biopsy: Infiltrating Ductal Carcinoma, Grade 3; April 30 axillary LNs. Final pathology pending.   Molecular: ER-/PR-/*****+ (3+); *****-67 70-80%     She has established care with Dr. ***** ***** at *****, who has recommended neoadjuvant TCHP chemotherapy for at least 6 cycles. ***** then evaluate for surgical removal and adjuvant RT. She is scheduled for her first infusion tomorrow. She presents to UCSF for a second opinion.     Since the biopsy Ms. ***** reports an ache that extends from her biopsy site up to her neck and around to her back. Prior to the biopsy she was experiencing no symptoms.       RISK FACTORS:  Radiation Exposure: None  Age of menarche: Age 13  Menopause: NA  Uterus/Ovaries intact: Yes  Ob/Gyn: G1P0  Age of first birth: NA  Breast feeding: NA  Hormone:  BCP: OCP x1 year    HRT: None    FHx:  Family History   Problem Relation Name Age of Onset   \u0007 Diabetes Father     \u0007 High blood pressure Father     \u0007 Diabetes Mother     \u0007 Allergies Brother   \n   \u0007 Melanoma Neg Hx     \u0007 Basal cell carcinoma Neg Hx     \u0007 Squamous cell carcinoma Neg Hx         ROS:  GEN: No fevers, chills, unintentional weight loss, night sweats  HEENT: No vision problems, eye pain, icterus, hearing decreased, sore throat, voice changes, swallowing problems, sinus problems, +slight ***** since biopsy, No dizziness, weakness,   NECK: Cyst on the back of neck x2 years that has been previously drained  CV: No chest pain, palpitations, murmur, light headed, edema  RESP: No shortness of breath, dyspnea on exertion, cough  GI: No Abdominal pain, nausea, vomiting, diarrhea, constipation, rectal bleeding  RENAL: No pain or bleeding with urination  HEME: Bruises easily (chronic)  MUSC/SKEL: No joint or muscle pain, No back pain  NEURO: No numbness, tingling or weakness  SKIN: No worrisome lesions, moles, rashes  *****: No Depression or Anxiety    PMx:  Past Medical History:   Diagnosis Date   \u0007 Allergic state    \u0007 Anemia    \u0007 Asthma    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Nasal obstruction    \u0007 Pneumonia        PSHx:  Past Surgical History:   Procedure Laterality Date   \u0007 NASAL SINUS SURGERY     - ***** eye surgery    ALL:Patient has no known allergies.    MEDS:    Current Outpatient Medications:   \u0007  fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actuation inhaler, Inhale 2 puffs into the lungs Twice a day. (Patient not taking: Reported on 10/19/2019 ), Disp: 1 Inhaler, Rfl: 3  \u0007  fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actuation inhaler, Inhale 2 puffs into the lungs Twice a day, Disp: 1 Inhaler, Rfl: 11  \u0007  fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, 1 spray by Nasal route Daily. (Patient not taking: Reported on 10/19/2019 ), Disp: 1 Bottle, Rfl: 3  \u0007  follitropin alfa (GONAL-F RFF *****-JECT) 300/0.5 unit/mL *****, Inject 300 Int'l Units under the skin every evening, Disp: 6 mL, Rfl: 1  \u0007  ipratropium (ATROVENT HFA) 17 mcg/actuation inhaler, Inhale \n 2 puffs into the lungs 4 (four) times daily as needed for Wheezing, Disp: 1 Inhaler, Rfl: 1  \u0007  NORETHINDRONE-E.ESTRADIOL-IRON (***** ***** ***** ORAL), Take by mouth., Disp: , Rfl:   \u0007  omeprazole (PRILOSEC) 10 mg capsule, Take 20 mg by mouth Daily., Disp: , Rfl:   \u0007  ranitidine (ZANTAC) 75 mg tablet, Take 75 mg by mouth Daily., Disp: , Rfl:   \u0007  VENTOLIN HFA 90 mcg/actuation metered dose inhaler, ***** WELL AND INHALE 1 TO 2 PUFFS BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED, Disp: 18 g, Rfl: 0  - Only taking Atrovent and Advair    SHx:  1. Tob- Never  2. EtoH- Occasional  3. Drugs- Never  4. Married/Single- Married  5. Occupation- Not currently working, has a catering business  6. Lives with *****  7. Functional status: 0    FHx  Family Hx of cancer:  - MGF: prostate cancer  - Maternal *****: prostate cancer (x5)  - No history of Breast Cancer  Personal Hx of cancer: None other than current dx    PE: Vital Signs Reviewed LMP 10/09/2019 (Exact Date)   PHYSICAL EXAM via video observation:   Vitals  There were no vitals filed for this visit.  Constitutional: Patient appears well-developed and well-nourished. Pleasant and appropriately interactive.  Head: Normocephalic and atraumatic.   Eyes: No *****. Conjunctivae and EOM are normal.   Neck: Normal range of motion.   Pulmonary/Chest: Effort normal. No respiratory distress. No cough.  Abdomen: No abdominal distension.  Neurological: Alert and oriented to person, place, and time. Able to stand from sitting and walk.  Psychiatric: Normal mood and affect. Behavior is normal. Judgment and thought content normal.   Skin: No jaundice or visible rash.     LABS: @LAB@    - No recent labs    STUDIES:  As per Oncologic History above    ASSESSMENT/PLAN    # Breast CA R  # Axillary metastasis R  # FHx Cancer      33 y.o. F with a new diagnosis of high-grade ER-/PR-/*****+ IDC with spread to axillary lymph nodes, here for a second opinion.     We discussed staging with reference \n to the available mammogram report, PET/CT report, and the pathology report describing findings of carcinoma in April 30 biopsied LNs as well as associated tumor grade and receptor status as above. Overall, based on a primary tumor size of 2.1cm, high tumor grade, involvement of axillary lymph nodes, receptor status, and lack of evidence of metastatic spread, this cancer is a stage II-III (*****-3fM0), pending axillary LN analysis on resection.    We next discussed treatment.  In general it has been thought that neoadjuvant chemotherapy may offer the opportunity to downstage a tumor prior to resection and thus facilitate breast conservation, with no difference in ***** or OS vs ***** surgery. However, new evidence is emerging regarding the efficacy of adjuvant ***** targeted therapy in the setting of residual disease after neoadjuvant treatment (***** 2019;380:617-28), with improved DFS and a trend towards improved OS. Therefore, we recommend neoadjuvant treatment.    There are multiple reasonable regimens, although we suggest TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent ***** and pertuzumab) or ***** (weekly paclitaxel with carboplatin, administered every three weeks or weekly, with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an assessment of tumor response at resection, including the potential option ***** cycles of *****-***** emtansine if there is not a complete response to neoadjuvant therapy.    We briefly discussed treatment side effects including hair loss, nausea/vomiting, diarrhea, and risk of infection, but left a full discussion for formal chemotherapy teaching.    We also discussed the need for radiation therapy and surgical resection. We will refer Ms. ***** to the UCSF Breast Surgery clinic for consultation regarding surgical resection.  Following surgical resection we will plan to refer Ms. ***** to Radiation Oncology. \n     PLAN:  - Agree with neoadjuvant TCHP  - Agree with port and TTE prior to chemotherapy  - Agree with pending genetics counseling and fertility referrals  - We will order referral to UCSF Breast Surgery   - await germline testing results    Seen and discussed with Dr.  ***** *****    ***** *****, MD, PhD  Hematology/Oncology Fellow, PGY-4  UCSF    I spent a total of 60 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.            \n",
+      "assessment_and_plan": "ASSESSMENT/PLAN    # Breast CA R  # Axillary metastasis R  # FHx Cancer      33 y.o. F with a new diagnosis of high-grade ER-/PR-/*****+ IDC with spread to axillary lymph nodes, here for a second opinion.     We discussed staging with reference \n to the available mammogram report, PET/CT report, and the pathology report describing findings of carcinoma in April 30 biopsied LNs as well as associated tumor grade and receptor status as above. Overall, based on a primary tumor size of 2.1cm, high tumor grade, involvement of axillary lymph nodes, receptor status, and lack of evidence of metastatic spread, this cancer is a stage II-III (*****-3fM0), pending axillary LN analysis on resection.    We next discussed treatment.  In general it has been thought that neoadjuvant chemotherapy may offer the opportunity to downstage a tumor prior to resection and thus facilitate breast conservation, with no difference in ***** or OS vs ***** surgery. However, new evidence is emerging regarding the efficacy of adjuvant ***** targeted therapy in the setting of residual disease after neoadjuvant treatment (***** 2019;380:617-28), with improved DFS and a trend towards improved OS. Therefore, we recommend neoadjuvant treatment.    There are multiple reasonable regimens, although we suggest TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent ***** and pertuzumab) or ***** (weekly paclitaxel with carboplatin, administered every three weeks or weekly, with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an assessment of tumor response at resection, including the potential option ***** cycles of *****-***** emtansine if there is not a complete response to neoadjuvant therapy.    We briefly discussed treatment side effects including hair loss, nausea/vomiting, diarrhea, and risk of infection, but left a full discussion for formal chemotherapy teaching.    We also discussed the need for radiation therapy and surgical resection. We will refer Ms. ***** to the UCSF Breast Surgery clinic for consultation regarding surgical resection.  Following surgical resection we will plan to refer Ms. ***** to Radiation Oncology. \n     PLAN:  - Agree with neoadjuvant TCHP  - Agree with port and TTE prior to chemotherapy  - Agree with pending genetics counseling and fertility referrals  - We will order referral to UCSF Breast Surgery   - await germline testing results    Seen and discussed with Dr.  ***** *****    ***** *****, MD, PhD  Hematology/Oncology Fellow, PGY-4  UCSF    I spent a total of 60 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.            \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "yes",
+          "in-person": "Televisit",
+          "summary": "33 y.o. pre-menopausal Female with a new diagnosis of high-grade ER-/PR-/[REDACTED]+ IDC with spread to axillary lymph nodes, here for a second opinion."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "ER-/PR-/[REDACTED]+ invasive ductal carcinoma",
+          "Stage_of_Cancer": "Stage II-III",
+          "Metastasis": "No",
+          "Distant Metastasis": "No"
+        },
+        "Lab_Results": {
+          "lab_summary": "No labs in note."
+        },
+        "Clinical_Findings": {
+          "findings": "2.1cm mass in the posterior R breast with 2 axillary LNs with cortical thickening suspicious for malignancy. PET/CT shows hypermetabolic R breast mass and hypermetabolic LNs throughout the right axilla extending to level III. No other evidence of metastatic disease. Infiltrating Ductal Carcinoma, Grade 3; April 30 axillary LNs. ER-/PR-/[REDACTED]+ (3+); [REDACTED]-67 70-80%. No palpable masses, skin changes, or lymphadenopathy noted on physical exam."
+        },
+        "Current_Medications": {
+          "current_meds": ""
+        },
+        "Treatment_Changes": {
+          "recent_changes": "",
+          "supportive_meds": ""
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "curative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "Not yet on treatment — no response to assess."
+        },
+        "Medication_Plan_chatgpt": {},
+        "Medication_Plan": {
+          "medication_plan": "Neoadjuvant TCHP regimen (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). If there is not a complete response to neoadjuvant therapy, adjuvant treatment may include [REDACTED] cycles of [REDACTED]-[REDACTED] emtansine."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an assessment of tumor response at resection, including the potential option of [REDACTED] cycles of [REDACTED]-[REDACTED] emtansine if there is not a complete response to neoadjuvant therapy. [REDACTED] to Radiation Oncology following surgical resection."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation Oncology."
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "refer to UCSF Breast Surgery for consultation regarding surgical resection"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "await germline testing results"
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "pending genetics counseling",
+          "Specialty": "UCSF Breast Surgery, Radiation Oncology",
+          "Others": "None",
+          "follow up": "None"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "after surgical resection to plan referral to Radiation Oncology"
         },
         "Advance_care_planning": {
           "Advance care": "Not discussed during this visit."
