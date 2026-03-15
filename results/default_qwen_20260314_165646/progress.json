@@ -10,7 +10,8 @@
     30,
     31,
     32,
-    33
+    33,
+    34
   ],
   "results": {
     "25": {
@@ -721,7 +722,86 @@
           "Advance care": "Not discussed during this visit."
         }
       }
+    },
+    "34": {
+      "coral_idx": 174,
+      "note_text": "Subjective:       Patient ID: ***** ***** ***** ***** 40 y.o. female.    HPI  Ms. ***** is a 40-year-old woman who comes to our clinic today for follow up. She was diagnosed with an invasive lobular carcinoma early in 2018. Details of her workup are available in my note of 05/10/18 . The pathology from her primary surgery is as follows:    02/02/18:Right breast lumpectomy, *****, mastopexy/tissue rearrangement (Drs. ***** and *****)  Pathology showed:  -invasive lobular carcinoma  -mixed alveolar and  -1.2 cm.  -grade 2.  -lymphatic/vascular invasion not identified.  -Margins negative  -DCIS not present  -LCIS focally present, classic type  -0/4 LN involved, including 0/2 SLN  -AJCC Anatomic Stage: pT1cN0(sn)    after some discussions and outlining the possibilities for her adjuvant therapy with a discussion of both the risks and benefits of adjuvant therapy Ms. ***** decided to embark on a course of adjuvant tamoxifen therapy which she began April 2018 . Since beginning her tamoxifen she has noted occasional night hot flashes and a slight weight gain of about 3 pounds but no other symptoms attributable to her taking tamoxifen.  Since beginning tamoxifen a Ms ***** has continued to have  menstrual cycles which are now somewhat irregular and intermittent. Mr. ***** feels well and has recovered from her surgery. She has no severe  pain, her activities are full, her appetite is good and her weight is stable.         Review of Systems   Constitutional: Negative.  Negative for activity change, appetite change, fatigue and unexpected weight change.   HENT: Negative.    Eyes: Negative.    Respiratory: Negative.    Cardiovascular: Negative.  Negative for chest pain.   Gastrointestinal: Negative for diarrhea, nausea and vomiting.   Genitourinary: Negative.    Musculoskeletal: Negative.    Skin: Negative.    Allergic/Immunologic: Negative.    Neurological: Negative.    Hematological: Negative.    Psychiatric/Behavioral: \n Negative.            Objective:      Physical Exam   Nursing note and vitals reviewed.  Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Eyes: Pupils are equal, round, and reactive to light. EOM are normal.   Neck: Normal range of motion.   Cardiovascular: Normal rate and regular rhythm.   Pulmonary/Chest: Effort normal and breath sounds normal.   Chest wall examination is significant for a right breast with a well-healed lumpectomy scar. There is no suspicious mass in the right breast. The right axilla right supraclavicular and right infraclavicular areas are clear. The left breast is without suspicious mass as is the left axilla left supraclavicular and left infraclavicular area   Abdominal: Soft.   Musculoskeletal: Normal range of motion.   Neurological: She is alert and oriented to person, place, and time.   Skin: Skin is warm.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Judgment and thought content normal.           Assessment:       Ms ***** is doing well in continuing on anastrozole without significant side effect. Her last mammogram performed on 04/15/2019 was a right diagnostic mammogram with ***** synthesis and showed no signs of malignancy. She is scheduled scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019      Plan:       return to clinic in 6 months for routine follow-up        \n",
+      "assessment_and_plan": "Assessment:       Ms ***** is doing well in continuing on anastrozole without significant side effect. Her last mammogram performed on 04/15/2019 was a right diagnostic mammogram with ***** synthesis and showed no signs of malignancy. She is scheduled scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019      Plan:       return to clinic in 6 months for routine follow-up        \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "Follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "Ms. ***** is a 40-year-old female with invasive lobular carcinoma diagnosed in 2018. She is currently on adjuvant tamoxifen therapy and this visit is for routine follow-up."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "invasive lobular carcinoma",
+          "Stage_of_Cancer": "pT1cN0(sn)",
+          "Metastasis": "No",
+          "Distant Metastasis": "No"
+        },
+        "Lab_Results": {
+          "lab_summary": "No labs in note."
+        },
+        "Clinical_Findings": {
+          "findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpectomy scar on right breast, no suspicious mass in either breast, clear axillary, supraclavicular, and infraclavicular areas. Last mammogram on 04/15/2019 showed no signs of malignancy."
+        },
+        "Current_Medications": {
+          "current_meds": "tamoxifen"
+        },
+        "Treatment_Changes": {
+          "recent_changes": "",
+          "supportive_meds": ""
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "adjuvant"
+        },
+        "Response_Assessment": {
+          "response_assessment": "Not mentioned in note."
+        },
+        "Medication_Plan_chatgpt": {
+          "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+            "summary": "continuing on anastrozole without significant side effect",
+            "Short term side_effects_discussed": "None",
+            "Long term side_effects_discussed": "None"
+          }
+        },
+        "Medication_Plan": {
+          "medication_plan": "Continue on anastrozole without significant side effects."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "scheduled for a bilateral diagnostic mammogram with tomosynthesis in September 2019, return to clinic in 6 months for routine follow-up"
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "None"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "Bilateral diagnostic mammogram with tomosynthesis in September 2019"
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "None planned."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "return to clinic in 6 months for routine follow-up"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "in-person: 6 months for routine follow-up"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        }
+      }
     }
   },
-  "completed": false
+  "completed": true
 }
