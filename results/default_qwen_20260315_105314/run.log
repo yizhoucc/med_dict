@@ -1527,3 +1527,26 @@ Processing row 42 (8/10)...
       [G3-IMPROVE] Stage_of_Cancer: "Originally Stage I, now Stage I (second primary)" -> "Stage I (second primary)"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 51.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alkaline Phosphatase 60, Alanine transaminase 16, AST 16, Bilirubin, Total 0.9, Urea Nitrogen 13, Calcium, total 9.6, Potassium 3.7, Glucose
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alkaline Phosphata" -> "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alkaline Phosphata"
+    Clinical_Findings: 21.8s
+      [EXTRACT] raw={
+"findings": "Patient is healing well from bilateral mastectomies with left axillary sentinel lymph node biopsies performed on 02/22/2021. Pathology results show a 1.3 cm invasive ductal carcinoma in
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.7s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "granisetron HCL, prochlorperazine, senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "granisetron HCL, prochlorperazine, senna" -> ""
+      [G4-FAITH] current_meds: "" -> "ibuprofen (ADVIL,MOTRIN) 600 mg tablet, granisetron HCL (KYT"
+      [POST-MEDS] ibuprofen (ADVIL,MOTRIN) 600 mg tablet, granisetron HCL (KYTRIL) 1 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, senna (SENOKOT) 8.6 mg tablet -> 
