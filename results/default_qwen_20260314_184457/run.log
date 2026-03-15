@@ -481,3 +481,12 @@ Processing row 27 (3/10)...
       [G2-SCHEMA] ok
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
+    Current_Medications: 70.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] current_meds: "" -> "acetaminophen, amLODIPine, artificial tears, ascorbic acid, "
+      [POST-MEDS] acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC MULTIVITAMINS, biotin, busPIRone, calcium citrate-vitamin D, diclofenac, docusate sodium, DULoxetine, ELDERBERRY, fluticasone propionate, gabapentin, lamoTRIgine, LORazepam, losartan, lurasidone, omeprazole, prazosin, pregabalin, rosuvastatin, TURMERIC, UNABLE TO FIND, zinc gluconate -> 
