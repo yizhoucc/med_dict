@@ -1119,3 +1119,65 @@ Processing row 30 (6/10)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 29.8s
+      [EXTRACT] raw={
+"response_assessment": "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG avid hepatic metastases have increased in size and FDG uptake. Skeletal metastases have increa
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 33.7s
+  Total extraction: 150.9s
+    Medication_Plan_chatgpt: 14.3s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting Doxil IV every 28 days on 07/01/2021.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    }
+}
+      [G1-FORMAT] ok, keys=['chemotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short term side_e" -> "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short term side_e"
+      [G4-FAITH] chemotherapy: "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.'" -> "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.'"
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short_term_side_e" -> "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short_term_side_e"
+      [POST-KEYS] stripped: {'chemotherapy'}
+    Medication_Plan: 8.3s
+      [EXTRACT] raw={
+    "medication_plan": "Cycle 1 Doxil IV every 28 days starting on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.7s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Start Doxil IV every 28 days beginning on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start Doxil IV every 28 days beginning on 07/01/2021." -> "Start Doxil IV every 28 days beginning on 07/01/2021. Need to do Brain MRI to as"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
