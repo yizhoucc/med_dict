@@ -601,3 +601,25 @@ Processing row 27 (3/10)...
       [G5-PROTECT] genetic_testing_plan: restored safe negative "None planned."
 Loading model...
 Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:31<00:00,  6.63s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:31<00:00,  6.25s/it]
+Model loaded.
+Data loaded: 10 rows (range [25, 35])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Rebuilt results.txt from 2 completed rows
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 95 drugs
+Supportive care whitelist loaded: 78 drugs
+
+Processing 10 rows...
+Skipping row 25 (already completed)
+Skipping row 26 (already completed)
+
+Processing row 27 (3/10)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
