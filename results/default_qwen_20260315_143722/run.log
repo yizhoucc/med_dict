@@ -6385,3 +6385,24 @@ Processing row 76 (31/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.2s
   Total extraction: 79.9s
+    Medication_Plan_chatgpt: 69.7s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Prescribed exemestane after confirming post-menopausal status with estradiol test. Plan to check estradiol again in 3-6 months to ensure still in menopa
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'pain medication', 'psychiatry medication', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'pain medication', 'psychiatry medication', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] pain medication: "{'summary': 'Continue duloxetine and celebrex for joint pain" -> "{'summary': 'Continue duloxetine and celebrex for joint pain"
+      [G4-FAITH] psychiatry medication: "{'summary': 'Continue home duloxetine and celebrex.', 'Short" -> "{'summary': 'Continue home duloxetine and celebrex.', 'Short"
+      [G5-TEMPORAL] pain medication: "{'summary': 'Continue duloxetine and celebrex for joint pain. Recommended NSAIDs" -> "{'summary': 'Continue duloxetine and celebrex for joint pain. Recommended NSAIDs"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Recommended anti-fungal topical for suspected fungal infection in r" -> "{'summary': 'Recommended anti-fungal topical for suspected fungal infection in r"
+      [G5-TEMPORAL] psychiatry medication: "{'summary': 'Continue home duloxetine and celebrex.', 'Short term side_effects_d" -> "{'summary': 'Continue home duloxetine and celebrex.', 'Short term_side_effects_d"
+      [POST-KEYS] stripped: {'radiotherapy', 'hormonal therapy', 'pain medication', 'other treatment', 'psychiatry medication'}
+    Medication_Plan: 12.8s
+      [EXTRACT] raw={
+    "medication_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Continue home duloxetine and celebrex. Recommended anti-fungal topical for suspect
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
