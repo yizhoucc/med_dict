@@ -1067,3 +1067,50 @@ Processing row 30 (6/10)...
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 31.2s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] findings: "Progression of metastatic disease noted on April 2021 PET/CT" -> "Progression of metastatic disease noted on April 2021 PET/CT"
+      [G6-SEMANTIC] findings: "Progression of metastatic disease noted on April 2021 PET/CT scan with increased" -> "Progression of metastatic disease noted on April 2021 PET/CT scan with increased"
+    Current_Medications: 4.5s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "doxil"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "doxil" -> ""
+      [G3-FAITH] EMPTIED: ['current_meds']
+      [G3-REVERT] current_meds: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] current_meds: "doxil" -> ""
+    Treatment_Changes: 16.7s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "Cycle 1 Doxil IV every 28 days on 07/01/2021",
+"supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Cycle 1 Doxil IV every 28 days on 07/01/2021" -> "Not yet on treatment — no holds, dose reductions, or switches to report."
+    Treatment_Goals: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] goals_of_treatment: "palliative" -> ""
+      [G3-FAITH] EMPTIED: ['goals_of_treatment']
+      [G3-REVERT] goals_of_treatment: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 92.8s
