@@ -526,3 +526,80 @@ Processing row 37 (3/10)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 16.1s
   Total extraction: 168.4s
+    Medication_Plan_chatgpt: 38.4s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently.",
+        
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': ['taxol', 'xeloda'], 'hormonal therapy': ['olaparib'], 'other t" -> "{'chemotherapy': {'summary': 'Patient received 4 cycles of taxol, stopped due to"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': {'summary': 'Patient received 4 cycles of t" -> "{'chemotherapy': {'summary': 'Patient received 4 cycles of t"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': {'summary': 'Patient received 4 cycles of taxol, stopped due to" -> "{'chemotherapy': {'summary': 'Plans to receive xeloda post-surgery.', 'Short ter"
+    Medication_Plan: 8.4s
+      [EXTRACT] raw={
+    "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.4s
+      [EXTRACT] raw={
+    "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently. We discussed the role of horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 8.4s
+      [EXTRACT] raw={
+    "procedure_plan": "She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
