@@ -3475,3 +3475,67 @@ Processing row 62 (17/36)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
       [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started " -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started "
       [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+    Medication_Plan: 21.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test for estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "Continue letrozole. Test for estradiol and FSH once every 1-" -> "Continue letrozole. Test for estradiol and FSH once every 1-"
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 30.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on letrozole. Received XRT to the left breast and regional nodes on 11/26/19. Recommended testing for estradiol and FSH once every 1-2 months until September 2020 at l
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Currently on letrozole. Received XRT to the left breast and regional nodes on 11" -> "Currently on letrozole. Recommended testing for estradiol and FSH once every 1-2"
+    radiotherapy_plan: 6.4s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She received XRT to the left breast and regional nodes on 11/26/19."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "She received XRT to the left breast and regional nodes on 11/26/19." -> "None"
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 8.7s
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA scan to be done as a baseline to see if there is a need for a bisphosphonate."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 8.1s
+      [EXTRACT] raw={
+    "lab_plan": "Testing for estradiol and FSH once every 1-2 months until September 2020 at least."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
