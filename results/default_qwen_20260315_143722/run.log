@@ -652,3 +652,47 @@ Processing row 49 (4/36)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.9s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage IV (T2, N1, M1), now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to the lung, lymph nodes, l
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.1s
+      [EXTRACT] raw={
+"lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 11.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy. No new palpable masses, s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Imaging from December 2021 shows metastatic disease under go" -> "Imaging from December 2021 shows metastatic disease under go"
+    Current_Medications: 4.7s
+      [EXTRACT] raw={
+"current_meds": "ibrance, xgeva, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.1s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "DENOSUMAB (XGEVA SUBCUT)" -> "DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D ("
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D (OSCAL D) -> DENOSUMAB (XGEVA SUBCUT)
+  Phase 1 extraction (6 prompts): 83.8s
+  Cross-context injected (545 chars)
