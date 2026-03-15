@@ -1540,3 +1540,27 @@ Processing row 53 (8/36)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The patient is currently on leuprolide, letrozole, and zoledronic acid. No new imaging studies were performed at this visit, and there is no specific evidence provided in the
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient is currently on leuprolide, letrozole, and zoledronic acid. No new i" -> "No new imaging studies were performed at this visit, and there is no specific ev"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.8s
+  Total extraction: 89.5s
+    Medication_Plan_chatgpt: 57.5s [faith-restored-3keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "continue leuprolide every 4 weeks, continue letrozole, start palbociclib after radiation",
+        "Short term side_effects_discussed": "",
+        "Lon
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] radiotherapy: "{'summary': 'proceed with post-mastectomy radiation at this " -> "{'summary': 'proceed with post-mastectomy radiation at this "
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'continue leuprolide every 4 weeks, continue letrozole, start palboc" -> ""
+      [G5-TEMPORAL] other treatment: "{'summary': 'will start acupuncture', 'Short term side_effects_discussed': '', '" -> ""
+      [G5-TEMPORAL] bone_therapy: "{'summary': 'started on zoledronic acid in c/o T6 lesion, will get every 3 month" -> "{'summary': 'will get every 3 months, DEXA scan (re-ordered), calcium 1250 mg da"
+      [G5-TEMPORAL] bone therapy: "{'summary': 'started on zoledronic acid in c/o T6 lesion, will get every 3 month" -> ""
+      [POST-KEYS] stripped: {'other_treatment', 'radiotherapy', 'hormonal_therapy', 'bone_therapy'}
