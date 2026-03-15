@@ -1758,3 +1758,38 @@ Processing row 43 (9/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 26.4s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Will start an aromatase inhibitor after completing radiation. May be eligible for the [REDACTED] trial with ribociclib after completing radiation.",
+"supportive_meds": "Norco Apri
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "Norco April 325 mg as needed, Flexeril for muscle spasms, Lortab 10-325 mg table" -> "Norco April 325 mg as needed, Flexeril for muscle spasms, gabapentin 300 mg caps"
+      [G3-IMPROVE] recent_changes: "Will start an aromatase inhibitor after completing radiation. May be eligible fo" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Norco April 325 mg as needed, Flexeril for muscle spasms, gabapentin 300 mg capsule nightly, docusate sodium 100 mg capsule twice daily, doxycycline 100 mg capsule every 12 hours, clobetasol 0.05% ointment twice daily as needed, loratadine as needed, valacyclovir 500 mg tablet daily -> Norco April 325 mg as needed, docusate sodium 100 mg capsule twice daily
+  Phase 1 extraction (6 prompts): 87.1s
+  Cross-context injected (779 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 93.2s
