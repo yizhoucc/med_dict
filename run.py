@@ -761,6 +761,23 @@ def main():
                     referral["Genetics"] = "None"
                     print(f"    [POST-GENETICS] cleared finding from referral: '{gen_val}'")
 
+        # POST-OTHERS: Clean up Others field to only keep recognized referral types [B82]
+        # Model sometimes puts lifestyle advice ("I recommend anti inflammatory diet...") in Others
+        if isinstance(referral, dict):
+            others_val = referral.get("Others", "None") or "None"
+            if others_val != "None":
+                OTHERS_REFERRAL_PATTERNS = [
+                    "social work", "physical therapy", "occupational therapy",
+                    "exercise counseling", "financial counseling", "home health",
+                    "speech therapy", "lymphedema", "pt referral", "ot referral",
+                ]
+                items = [item.strip() for item in re.split(r'[,;.]', others_val) if item.strip()]
+                kept = [item for item in items if any(p in item.lower() for p in OTHERS_REFERRAL_PATTERNS)]
+                new_val = ", ".join(kept) if kept else "None"
+                if new_val != others_val:
+                    referral["Others"] = new_val
+                    print(f"    [POST-OTHERS] cleaned: '{others_val[:80]}...' → '{new_val}'")
+
         # POST-PROCEDURE: Search full note for procedure plans mentioned outside A/P [B75]
         # Like POST-REFERRAL, procedures (port placement, biopsy) may be in HPI, not A/P
         proc = keypoints.get("Procedure_Plan", {})
@@ -768,9 +785,11 @@ def main():
             proc_val = proc.get("procedure_plan", "")
             proc_lower = (proc_val or "").lower()
             # Search for future procedure patterns in full note
+            # Note: (?:an?\s+)? handles optional articles ("scheduled for a port placement")
             proc_patterns = re.findall(
                 r'(?:plan\s+for|scheduled\s+for|will\s+(?:have|undergo|schedule|get|need)|'
-                r'pending|to\s+be\s+scheduled|arrange)\s+'
+                r'pending|to\s+be\s+scheduled|arrange|is\s+scheduled\s+for)'
+                r'(?:\s+an?\s+|\s+)'
                 r'((?:port|mediport|chemo\s*port)\s+(?:placement|insertion|removal)'
                 r'|(?:core|needle|incisional|excisional|skin|punch)?\s*biopsy'
                 r'|lumbar\s+puncture|bone\s+marrow\s+(?:biopsy|aspirat)'

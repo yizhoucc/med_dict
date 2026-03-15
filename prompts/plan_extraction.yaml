@@ -119,6 +119,7 @@ Imaging_Plan: |
 Lab_Plan: |
   TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
   Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
+  Also include pre-chemo blood draws (e.g., "blood draw prior to cycle", "labs before chemo", "draw and visit").
   Specify frequency and rationale if mentioned.
 
   CRITICAL — do NOT include these (they belong in OTHER fields):
