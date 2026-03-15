@@ -1402,3 +1402,118 @@ Processing row 31 (7/10)...
       [G4-FAITH] EMPTIED: ['imaging_plan']
       [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "nutrition consult for weight loss",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC in 3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "None" -> "Genetic testing negative"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Others']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 4.2s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 3 and 6 weeks" -> "in-person: 3 and 6 weeks for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 84.2s
+    [POST-ADV] patched from full note: ['Full code', 'Living will on file']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the lymph nodes of the left neck, chest, abdomen, and pelvis)'
+  Row 31 total: 176.0s
+  Row 31 saved to progress
+
+Processing row 32 (8/10)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1638 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 10.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "63 y.o. female with left ER+ LN+ breast cancer on letrozole since January 2011, here for follow up."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+  "Stage_of_Cancer": "Originally stage IIB, now stage IIIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Originally stage IIB, now stage IIIA" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally stage IIB, now stage IIIA"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 14.7s
+      [EXTRACT] raw={
+"findings": "No evidence of recurrence on physical exam. No palpable masses, no significant skin changes, and no new lymphadenopathy noted. Left neck high <1cm lymph node soft and mobile. No LE edem
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
