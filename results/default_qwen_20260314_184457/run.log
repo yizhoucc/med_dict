@@ -125,3 +125,12 @@ Processing row 25 (1/10)...
       [G5-FAITH] EMPTIED: ['medication_plan']
       [G5-REVERT] medication_plan: reverted (G5 emptied all fields)
       [G6-TEMPORAL] no changes
+    Therapy_plan: 81.3s [semantic-fixed]
+      [EXTRACT] raw={
+    "therapy_plan": "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. Discussed the role of radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] therapy_plan: "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. " -> "Stage I triple negative breast cancer who is planning to go to surgery first for"
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
