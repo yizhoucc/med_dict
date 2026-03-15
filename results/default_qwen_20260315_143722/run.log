@@ -7436,3 +7436,100 @@ Processing row 81 (36/36)...
       [G3-IMPROVE] medication_plan: "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho" -> "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 23.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence. Due to her low risk, I do not recommend chemotherapy. We discussed the role of radiation to de
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "We discussed the role of chemotherapy to decrease the risk o" -> "We discussed the role of chemotherapy to decrease the risk o"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.9s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. She has an appointment with Dr. [REDACTED] tomorrow."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 7.7s
+      [EXTRACT] raw={
+    "procedure_plan": "Plan to proceed with [REDACTED] +/- bone medication after radiation is completed."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Plan to proceed with [REDACTED] +/- bone medication after radiation is completed.']
+    Imaging_Plan: 6.5s
+      [EXTRACT] raw={
+    "imaging_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.1s
+      [EXTRACT] raw={
+    "lab_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Exercise counseling referral",
+"follow up": "after radiation"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Specialty', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 3.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after radiation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.9s
+      [EXTRACT] raw={
+    "Advance care": "Full code."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Plan extraction prompts: 151.1s
+    [POST-LAB] cleaned: 'Dexa to assess bone health before the next visit with me.' → 'No labs planned.'
+    [POST-THERAPY] removed non-therapy: ['She has an appointment with Dr.', '[REDACTED] tomorrow.', 'We discussed the role of hormonal blockade to decr']
+  Row 81 total: 246.2s
+  Row 81 saved to progress
+
+Total processing time: 7822.3s (130.4min)
+Done! Results copied to ./results.txt
+Full results in: results/default_qwen_20260315_143722/
