@@ -1323,3 +1323,73 @@ Processing row 41 (7/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 21.3s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology results show a 0.9 cm and a 0.3 cm invasive ductal carcinoma, both grade 1. Margins were clear except for the deep margin, which was subsequently reexcised. Sentinel lymph nod
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Pathology results show a 0.9 cm and a 0.3 cm invasive ductal" -> "Pathology results show a 0.9 cm and a 0.3 cm invasive ductal"
+    Current_Medications: 1.9s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 4.5s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "Started tamoxifen therapy.",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] recent_changes: "Started tamoxifen therapy." -> ""
+      [G4-FAITH] EMPTIED: ['recent_changes']
+  Phase 1 extraction (6 prompts): 53.1s
+  Cross-context injected (735 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 5.4s
+  Total extraction: 58.4s
+    Medication_Plan_chatgpt: 17.1s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Starting a 5 year course of tamoxifen therapy. Prescription has been written.",
+        "Short term side_effects_discussed": "",
+        "Long term side
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "tamoxifen therapy" -> "{'summary': 'tamoxifen therapy. 5 year course started after finishing radiation "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'tamoxifen therapy. 5 year course started after " -> "{'summary': 'tamoxifen therapy. 5 year course started after "
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 6.3s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Begin a 5 year course of tamoxifen therapy. Return to clinic in 4-6 weeks to assess tolerance."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Begin a 5 year course of tamoxifen therapy. Return to clinic in 4-6 weeks to ass" -> "Begin a 5 year course of tamoxifen therapy."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
