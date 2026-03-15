@@ -398,6 +398,49 @@ def extract_assessment_plan(note_text, model, tokenizer, config, chat_tmpl=None)
     return None
 
 
+# Two-phase extraction: Phase 1 (base facts) feeds context into Phase 2 (dependent reasoning)
+PHASE1_KEYS = ["Reason_for_Visit", "Cancer_Diagnosis", "Lab_Results",
+               "Clinical_Findings", "Current_Medications", "Treatment_Changes"]
+PHASE2_KEYS = ["Treatment_Goals", "Response_Assessment"]
+
+
+def _build_cross_context(keypoints):
+    """Build context string from Phase 1 extraction results for Phase 2."""
+    parts = ["CONTEXT from other extractions of this same note (use as reference):"]
+
+    cancer = keypoints.get("Cancer_Diagnosis", {})
+    if isinstance(cancer, dict):
+        toc = cancer.get("Type_of_Cancer", "")
+        stage = cancer.get("Stage_of_Cancer", "")
+        met = cancer.get("Metastasis", "")
+        if toc:
+            parts.append(f"- Cancer type: {toc}")
+        if stage:
+            parts.append(f"- Stage: {stage}")
+        if met:
+            parts.append(f"- Metastasis: {met}")
+
+    meds = keypoints.get("Current_Medications", {})
+    if isinstance(meds, dict):
+        cm = meds.get("current_meds", "")
+        if cm:
+            parts.append(f"- Current oncologic medications: {cm}")
+        else:
+            parts.append("- Current oncologic medications: none")
+
+    findings = keypoints.get("Clinical_Findings", {})
+    if isinstance(findings, dict):
+        f = findings.get("findings", "")
+        if f:
+            parts.append(f"- Clinical findings: {f}")
+
+    if len(parts) <= 1:
+        return ""  # no useful context
+
+    parts.append("\nUse this context to inform your extraction below.")
+    return "\n".join(parts)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run medical extraction experiment")
     parser.add_argument("config", help="Path to experiment YAML config")
@@ -601,13 +644,44 @@ def main():
         )
         print(f"  A/P extraction: {time.time() - ap_start:.1f}s")
 
-        # Extract keypoints from full note
+        # Extract keypoints from full note (two-phase)
         ext_start = time.time()
         base_cache = build_base_cache(note_text, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+
+        # Phase 1: Base fact extraction (independent prompts)
+        phase1_prompts = {k: extraction_prompts[k] for k in PHASE1_KEYS if k in extraction_prompts}
+        phase2_prompt_keys = [k for k in PHASE2_KEYS if k in extraction_prompts]
+
         keypoints = extract_fn(
-            extraction_prompts, model, tokenizer, keypoint_config, base_cache, verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist, gate_config=gate_config, supportive_whitelist=supp_whitelist
+            phase1_prompts, model, tokenizer, keypoint_config, base_cache,
+            verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
+            gate_config=gate_config, supportive_whitelist=supp_whitelist
         )
-        print(f"  Extraction prompts: {time.time() - ext_start:.1f}s")
+        print(f"  Phase 1 extraction ({len(phase1_prompts)} prompts): {time.time() - ext_start:.1f}s")
+
+        # Phase 2: Dependent extraction with cross-prompt context
+        if phase2_prompt_keys:
+            phase2_start = time.time()
+            cross_context = _build_cross_context(keypoints)
+            if cross_context:
+                print(f"  Cross-context injected ({len(cross_context)} chars)")
+
+            phase2_prompts = {}
+            for k in phase2_prompt_keys:
+                if cross_context:
+                    phase2_prompts[k] = cross_context + "\n\n" + extraction_prompts[k]
+                else:
+                    phase2_prompts[k] = extraction_prompts[k]
+
+            phase2_keypoints = extract_fn(
+                phase2_prompts, model, tokenizer, keypoint_config, base_cache,
+                verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
+                gate_config=gate_config, supportive_whitelist=supp_whitelist
+            )
+            keypoints.update(phase2_keypoints)
+            print(f"  Phase 2 extraction ({len(phase2_prompts)} prompts): {time.time() - phase2_start:.1f}s")
+
+        print(f"  Total extraction: {time.time() - ext_start:.1f}s")
 
         # Extract plan keypoints from assessment/plan section
         if assessment_and_plan is not None:

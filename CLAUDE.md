@@ -10,8 +10,8 @@
 4. **通俗易懂** — 避免医学术语；如果必须使用，要附带通俗解释。
 
 这四个原则贯穿整个 pipeline 设计：
-- Gate 3 (FAITHFUL) 的"拿不准就保留"策略 = 平衡原则 1 和 2（防幻觉 vs 防遗漏）
-- Gate 5 (SPECIFIC) 的具体化 = 服务原则 2（不用模糊词敷衍）
+- Gate 4 (FAITHFUL) 的"拿不准就保留"策略 = 平衡原则 1 和 2（防幻觉 vs 防遗漏）
+- Gate 3 (IMPROVE) 的具体化+语义对齐 = 服务原则 2（不用模糊词敷衍 + 不答非所问）
 - 解释生成步骤 = 服务原则 3 和 4（通俗化）
 - 提取 prompt 中的具体示例和边界情况处理 = 服务原则 1（精确引导模型）
 
@@ -28,7 +28,7 @@
 - `ult.py` - 工具库：模型推理（含 KV Cache 分叉）、JSON 修复、两个 pipeline 实现
   - `build_base_cache()` - 构建 KV Cache
   - `extract_and_verify()` - V1 pipeline（3-gate: format, faithfulness 重来, temporal）
-  - `extract_and_verify_v2()` - V2 pipeline（6-gate: format, schema, faithfulness 修剪, temporal, specificity, semantic）
+  - `extract_and_verify_v2()` - V2 pipeline（5-gate: format, schema, improve 合并, faithfulness 修剪, temporal）
   - `extract_schema_keys()` - 从 prompt 的 JSON schema 解析期望 keys
   - `run_model_with_cache_manual()` - 手动 token-by-token 生成，支持 eos_token_id 列表
 - `notebooks/` - 早期工作：医学术语简化 + 可读性评估
@@ -36,34 +36,41 @@
 
 ## Pipeline 架构
 
-### 整体流程
+### 整体流程（v7abc 两阶段提取）
 1. **Assessment/Plan 提取** - regex 优先，LLM fallback（3 次重试 + LLM 验证）
-2. **关键点提取** (extraction_prompts) - 从全文提取：就诊原因、检查发现、治疗摘要、治疗目标
-3. **计划提取** (plan_extraction_prompts) - 从 A/P 段提取：用药/手术/影像/检验/基因检测/转诊/随访/预前计划
-4. **解释生成**（可选）- 从 keypoints 生成 8 年级英语水平的患者信
+2. **Phase 1 关键点提取** (6 prompts) - 从全文独立提取：就诊原因、癌症诊断、检验、检查发现、当前用药、治疗变化
+3. **Phase 2 依赖推理提取** (2 prompts) - 注入 Phase 1 结果作为上下文，提取：治疗目标、疗效评估
+4. **计划提取** (plan_extraction_prompts) - 从 A/P 段提取：用药/手术/影像/检验/基因检测/转诊/随访/预前计划
+5. **解释生成**（可选）- 从 keypoints 生成 8 年级英语水平的患者信
 
-### V2 Pipeline（默认，6 Gate）
+### V2 Pipeline（默认，5 Gate — v7abc 合并版）
 每个 gate 独立修一个问题，修剪而非重来：
 
 | Gate | 功能 | 触发条件 | 关键行为 |
 |------|------|----------|----------|
 | 1 FORMAT | JSON 解析修复 | json.loads 失败 | LLM 重格式化 |
 | 2 SCHEMA | Key 名验证 | 输出 keys 与 prompt schema 无交集 | LLM 修正 key 名 |
-| 3 FAITHFUL | 忠实度修剪 | verify=True | "拿不准就保留"策略，只清空明确矛盾/捏造的值。丢失的 key 自动从原始提取恢复 |
-| 4 TEMPORAL | 时态过滤 | verify=True 且 key ∈ PLAN_KEYS | 删除过去/已完成项 |
-| 5 SPECIFIC | 具体化 | verify=True 且含模糊词 | 替换 "staging workup" 等为具体内容 |
-| 6 SEMANTIC | 语义相关性 | verify=True | 检查每个值是否真的回答了字段定义的问题，修正"答非所问" |
+| 3 IMPROVE | 具体化+语义对齐（合并） | verify=True | 替换模糊词（条件触发）+ 检查每个值是否回答了字段定义的问题 |
+| 4 FAITHFUL | 忠实度修剪 | verify=True | "拿不准就保留"策略，只清空明确矛盾/捏造的值 |
+| 5 TEMPORAL | 时态过滤 | verify=True 且 key ∈ PLAN_KEYS | 删除过去/已完成项 |
 
-Gate 6 设计要点：
-- 解决的是 Gate 3 无法覆盖的问题：值在原文中有支持（忠实），但放错了字段（答非所问）
+Gate 3 IMPROVE 设计要点（合并自原 G3 SPECIFIC + G4 SEMANTIC）：
+- 合并为一次 LLM 调用，省 18 次 LLM 调用/笔记
+- 先修复模糊词（条件触发：仅当检测到 vague terms 时）
+- 再检查语义对齐：值是否真的回答了字段定义的问题
 - 例如：goals_of_treatment 写了"follow-up"（就诊目的）而非"palliative"（治疗意图）
 - 例如：response_assessment 写了"will have radiation"（未来计划）而非"CT stable"（当前响应）
-- 把 prompt schema 中的字段定义传给模型，让模型对照定义检查每个值
 
-Gate 3 设计要点：
+Gate 4 FAITHFUL 设计要点：
 - Prompt 指示 "KEEP if supported or reasonably inferable, ONLY empty if clearly CONTRADICTS or fabricated"
 - 之前用 "is it explicitly stated?" 太严格，导致 response_assessment 等合理推断被清空
 - 所有 gate 都验证 key overlap 防止 schema 泄漏（如 `{"faithful": true}`）
+
+### 跨 Prompt 信息传递（v7abc）
+- Phase 1 的 Cancer_Diagnosis（stage/metastasis）、Current_Medications、Clinical_Findings 结果注入 Phase 2
+- Treatment_Goals 可利用 stage 信息正确判断 curative vs palliative
+- Response_Assessment 可利用用药+发现信息判断是否在治疗、有无响应
+- 上下文 ~100-200 tokens，不影响生成质量
 
 ### V1 Pipeline（对比用，3 Gate）
 - faithfulness 失败后整个重来（可能引入新错误）
@@ -77,7 +84,7 @@ Gate 3 设计要点：
 ## Logging
 V2 在 `run.log` 中记录每个 gate 的详细行为：
 - `[EXTRACT]` 原始提取
-- `[G1-FORMAT]` `[G2-SCHEMA]` `[G3-FAITH]` `[G4-TEMPORAL]` `[G5-SPECIFIC]` `[G6-SEMANTIC]`
+- `[G1-FORMAT]` `[G2-SCHEMA]` `[G3-IMPROVE]` `[G4-FAITH]` `[G5-TEMPORAL]`
 - 每个 gate 记录：ok / 字段级 before→after / EMPTIED / FAILED / REJECTED
 
 ## 已知问题与待改进
