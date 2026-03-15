@@ -745,3 +745,15 @@ Processing row 38 (4/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.7s
   Total extraction: 57.7s
+    Medication_Plan_chatgpt: 71.6s [improved, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will start with weekly paclitaxel x 12 weeks, either with a [REDACTED] agent or replaced by a [REDACTED] agent, or with paclitaxel alone, followed b
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] other treatment: "{'summary': 'Echocardiogram, port placement, genetic testing, chemotherapy teach" -> "{'summary': 'Echocardiogram, port placement, genetic testing, chemotherapy teach"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Goserelin will be used monthly during chemotherapy as data from a r" -> "{'summary': 'Goserelin will be used monthly during chemotherapy as data from a r"
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Patient will start with weekly paclitaxel x 12 weeks, either with a" -> "{'summary': 'Patient will start with weekly paclitaxel x 12 weeks, either with a"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'other treatment', 'hormonal therapy', 'chemotherapy'}
