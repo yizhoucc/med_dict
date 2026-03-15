@@ -1502,3 +1502,53 @@ Processing row 32 (8/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Treatment_Changes: 8.6s [semantic-fixed]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT] recent_changes: blocked fill into empty field
+      [G6-SEMANTIC] supportive_meds: "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3" -> "None"
+    Treatment_Goals: 3.4s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 58.2s
+    Medication_Plan_chatgpt: 36.7s [schema-fixed, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue letrozole daily. Patient is risk adverse and would prefer to continue letrozole > 5 years.",
+        "Short term side_effects_discussed": "",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'pain medication', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'pain medication', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'letrozole', 'status': 'Continue daily', '" -> "[{'type': 'hormonal therapy', 'name': 'letrozole', 'status': 'Continue daily', '"
+    Medication_Plan: 7.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole daily. Continue calcium and vitamin D daily. NSAIDs with food as needed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
