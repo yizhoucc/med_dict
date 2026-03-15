@@ -1324,3 +1324,12 @@ Processing row 31 (7/10)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 15.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT done in June 2019 shows complete response (CR) with no abnormal areas of FDG uptake to suggest active metastatic disease. No pulmonary consolidations or metastases not
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "PET/CT done in June 2019 shows complete response (CR) with n" -> "PET/CT done in June 2019 shows complete response (CR) with n"
+  Phase 2 extraction (2 prompts): 20.2s
+  Total extraction: 132.9s
