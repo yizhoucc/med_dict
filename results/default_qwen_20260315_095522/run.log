@@ -532,3 +532,22 @@ Processing row 37 (3/10)...
       [G4-FAITH] response_assessment: "The cancer is not responding to treatment. The patient's tum" -> "The patient's tumor is enlarging again, as noted in the phys"
   Phase 2 extraction (2 prompts): 16.4s
   Total extraction: 151.2s
+    Medication_Plan_chatgpt: 50.0s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Olaparib for a year as part of her adjuvant therapy. Could consider [REDACTED] concurrently. She will qualify for xeloda.",
+        "Short term side_effects
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Could consider [REDACTED] concurrently. Sh"
+    Medication_Plan: 8.7s
+      [EXTRACT] raw={
+    "medication_plan": "Olaparib for a year as part of adjuvant therapy. Xeloda will be considered for adjuvant therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
