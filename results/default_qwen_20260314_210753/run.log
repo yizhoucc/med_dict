@@ -1741,3 +1741,34 @@ Processing row 33 (9/10)...
       [G4-FAITH] no changes (all supported)
   Phase 1 extraction (6 prompts): 99.2s
   Cross-context injected (976 chars)
+    Treatment_Goals: 4.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 27.6s
+      [EXTRACT] raw={
+"response_assessment": "Local recurrence in left breast, 1.7cm IDC on excisional biopsy. FNA of left breast showed ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), HER2 negative (IHC
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 32.2s
+  Total extraction: 131.4s
+    Medication_Plan_chatgpt: 24.7s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "tamoxifen 20mg PO qD will be started. Anastrozole was previously stopped against medical advice.",
+        "Short term side_effects_discussed": "thrombo
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'tamoxifen 20mg PO qD will be started. Anastrozole was previously st" -> "{'summary': 'tamoxifen 20mg PO qD will be started.', 'Short term side_effects_di"
+      [POST-KEYS] stripped: {'hormonal therapy'}
