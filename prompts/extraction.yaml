@@ -99,7 +99,7 @@ Clinical_Findings: |
   }
 
 Current_Medications: |
-  TASK: Extract current oncologic medications.
+  TASK: Extract current oncologic medications the patient is ACTIVELY taking now.
 
   CRITICAL — distinguish CURRENT from PLANNED from PAST:
   - CURRENT (include): medications the patient is ACTIVELY taking right now.
@@ -114,36 +114,13 @@ Current_Medications: |
   - STOPPED/DROPPED (do NOT include): medications recently discontinued.
     Look for: "recently dropped", "stopped due to", "discontinued", "held", "self D/C", "D/Ced"
 
-  ONLY include drugs from this oncology drug list (or close variants). If a drug is NOT on this list, do NOT include it:
-  --- CHEMOTHERAPY ---
-  doxorubicin, adriamycin, cyclophosphamide, cytoxan, paclitaxel, taxol, nab-paclitaxel, abraxane,
-  docetaxel, taxotere, carboplatin, capecitabine, xeloda, gemcitabine, gemzar, eribulin, halaven,
-  ixabepilone, irinotecan, epirubicin, fluorouracil, 5-FU, methotrexate, vinorelbine, navelbine,
-  cisplatin, sacituzumab, trodelvy, doxil, liposomal doxorubicin
-  --- HORMONAL THERAPY ---
-  tamoxifen, letrozole, femara, anastrozole, arimidex, exemestane, aromasin, fulvestrant, faslodex,
-  goserelin, zoladex, leuprolide, lupron, megestrol, megace, raloxifene
-  --- TARGETED THERAPY ---
-  trastuzumab, herceptin, pertuzumab, perjeta, T-DM1, ado-trastuzumab, kadcyla, trastuzumab deruxtecan,
-  enhertu, lapatinib, tykerb, neratinib, nerlynx, tucatinib, tukysa, palbociclib, ibrance, ribociclib,
-  kisqali, abemaciclib, verzenio, everolimus, afinitor, alpelisib, piqray, olaparib, lynparza,
-  talazoparib, talzenna, elacestrant, orserdu, capivasertib, truqap, bevacizumab, avastin
-  --- IMMUNOTHERAPY ---
-  pembrolizumab, keytruda, atezolizumab, tecentriq, nivolumab, opdivo, durvalumab, imfinzi
-  --- BONE AGENTS ---
-  denosumab, xgeva, prolia, zoledronic acid, zolendronic acid, zometa, pamidronate
-
-  Do NOT include: blood pressure meds, diabetes meds, psychiatric meds, allergy meds, antibiotics,
-  pain meds, laxatives, vitamins, supplements, thyroid meds, cholesterol meds, or any other
-  non-cancer medication. These are NOT oncologic: amlodipine, atorvastatin, metformin, levothyroxine,
-  losartan, omeprazole, gabapentin, duloxetine, lorazepam, oxycodone, acetaminophen, ibuprofen,
-  cetirizine, multivitamin, calcium, vitamin D, docusate, senna, iron.
-
-  If no oncologic medications from the list above are currently active, write empty string "".
+  Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
+  Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
+  If no cancer-related medications are currently active, write empty string "".
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "current_meds": "List of current oncologic medications the patient is ACTIVELY taking now, or empty string if none."
+  "current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
   }
 
 Treatment_Changes: |
