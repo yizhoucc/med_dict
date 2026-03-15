@@ -1531,3 +1531,73 @@ Processing row 42 (8/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alk Phos 60, ALT 16, AST 16, Bilirubin" -> "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alk Phos 60, ALT 16, AST 16, Bilirubin"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 24.3s
+      [EXTRACT] raw={
+"findings": "Patient is healing well from bilateral mastectomies with left axillary sentinel lymph node biopsies. Pathology results show invasive ductal carcinoma, modified grade 3, 1.3 cm, with neg
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.4s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "granisetron HCL, prochlorperazine, senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "granisetron HCL, prochlorperazine, senna" -> ""
+      [G4-FAITH] current_meds: "" -> "ibuprofen (ADVIL,MOTRIN) 600 mg tablet, granisetron HCL (KYT"
+      [POST-MEDS] ibuprofen (ADVIL,MOTRIN) 600 mg tablet, granisetron HCL (KYTRIL) 1 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, senna (SENOKOT) 8.6 mg tablet -> 
+    Treatment_Changes: 15.8s [improved]
+      [EXTRACT] raw={
+"recent_changes": "She will take adjuvant taxol and carboplatin.",
+"supportive_meds": "granisetron HCL (KYTRIL) 1 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, senna (SENOKOT) 8.6 mg tablet,
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "granisetron HCL (KYTRIL) 1 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet," -> "granisetron HCL (KYTRIL) 1 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet,"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 113.2s
+  Cross-context injected (795 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 119.8s
+    Medication_Plan_chatgpt: 12.6s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "She will proceed with taxol carboplatin x 4 cycles for adjuvant therapy.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_
+      [G1-FORMAT] ok, keys=['chemotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'She will proceed with taxol carboplatin x 4 cycles for adjuvant the" -> "{'summary': 'She will proceed with taxol carboplatin x 4 cycles for adjuvant the"
+      [POST-KEYS] stripped: {'chemotherapy'}
+    Medication_Plan: 6.9s
+      [EXTRACT] raw={
+    "medication_plan": "She will proceed with taxol carboplatin x 4 cycles for adjuvant therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
