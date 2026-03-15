@@ -1980,3 +1980,38 @@ Processing row 44 (10/10)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.5s
+      [EXTRACT] raw={
+"response_assessment": "The patient has metastatic breast cancer to the lung and right hilar lymph node, diagnosed January 2022. She has had no treatment since January 2022 when diagnosed with metas
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.9s
+  Total extraction: 73.6s
+    Medication_Plan_chatgpt: 23.7s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting on gemzar carboplatin asap. Second line could use [REDACTED] and there are clinical trials (such as a FGFR inhibitor) or other [REDACTED] (such as 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['gemzar carboplatin', 'xeloda', 'adjuvant radiation']" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a" -> "[{'summary': 'gemzar carboplatin asap, xeloda in the past, a"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'gemzar carboplatin asap, xeloda in the past, adjuvant radiation in" -> "[{'summary': 'gemzar carboplatin asap', 'Short term side_effects_discussed': '',"
+    Medication_Plan: 12.1s
+      [EXTRACT] raw={
+    "medication_plan": "Starting on gemzar carboplatin as soon as possible. Second line treatment could use [REDACTED], and for more advanced line treatment, options include FGFR inhibitor, eribulin
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.6s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start on gemzar carboplatin asap. Second line could use [REDACTED], and for more advanced line treatment, options include a FGFR inhibitor, eribulin, or doxil."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Start on gemzar carboplatin asap. Second line could use [RED" -> "Start on gemzar carboplatin asap. Second line she could use "
+      [G5-TEMPORAL] therapy_plan: "Start on gemzar carboplatin asap. Second line she could use [REDACTED] and there" -> "Start on gemzar carboplatin asap. Second line she could use [REDACTED] and there"
