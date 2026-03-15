@@ -502,3 +502,25 @@ Processing row 27 (3/10)...
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
       [POST-SUPP] calcium citrate-vitamin D, DULoxetine, pregabalin -> 
+    Treatment_Goals: 22.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G4-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] goals_of_treatment: "curative" -> ""
+      [G5-FAITH] EMPTIED: ['goals_of_treatment']
+      [G5-REVERT] goals_of_treatment: reverted (G5 emptied all fields)
+    Response_Assessment: 15.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G5-FAITH] EMPTIED: ['response_assessment']
+      [G5-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Extraction prompts: 718.4s
