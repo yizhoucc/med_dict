@@ -5996,3 +5996,60 @@ Processing row 74 (29/36)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 29.2s
+      [EXTRACT] raw={
+    "therapy_plan": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation Oncology."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation O" -> "Following surgical resection, Ms. [REDACTED] will be referred to Radiation Oncol"
+      [G4-FAITH] radiotherapy_plan: "Following surgical resection, Ms. [REDACTED] will be referre" -> "Following surgical resection we will plan to refer Ms. [REDA"
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 9.2s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "plan for port placement, surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "plan for port placement, surgery pending" -> "Agree with port and TTE prior to chemotherapy, refer to UCSF Breast Surgery for "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Agree with port and TTE prior to chemotherapy', 'plan to refer to Radiation Oncology following surgical resection']
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "blood draw prior to chemotherapy"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "blood draw prior to chemotherapy" -> "No labs planned."
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 3.8s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "await germline testing results"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
