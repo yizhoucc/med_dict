@@ -682,3 +682,54 @@ Processing row 28 (4/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 47.5s
+      [EXTRACT] raw={
+"findings": "Pathology results: Right axillary sentinel lymph node #1 shows micrometastatic carcinoma, 0.5 mm. Right breast partial mastectomy at 11:30 position: invasive carcinoma with mixed microp
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.7s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet -> 
+    Treatment_Changes: 10.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start letrozole 2.5mg PO daily now",
+"supportive_meds": "Calcium supplementation with 1200mg/day combination of diet and supplement"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Calcium supplementation with 1200mg/day combination of diet and supplement -> 
+  Phase 1 extraction (6 prompts): 99.3s
+  Cross-context injected (1332 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.8s
+  Total extraction: 106.1s
