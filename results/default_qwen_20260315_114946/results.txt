@@ -1010,3 +1010,97 @@ RESULTS FOR ROW 41
     "Advance care": "Not discussed during this visit."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 42
+============================================================
+
+--- Column: coral_idx ---
+181
+
+--- Column: note_text ---
+"Subjective:       Patient ID: ***** ***** ***** ***** ***** 41 y.o. female.    HPI  ***** ***** is a 41-year-old woman who comes to our clinic today for routine follow up. She was in her usual state ***** good health when a recent screening mammogram (07/06/1914) showed a BI-RADS 4 microcalcifications in the right breast. On August 18 she underwent a right breast wire localization and excisional biopsy. Results of this surgery showed a 0.9 cm invasive ductal carcinoma and a separate foci of 0.3 cm of invasive ductal carcinoma. Both tumors were grade 1 with a score of one out of three on the modified ***** ***** scale. Margins were clear with the exception of the deep margin which was subsequently ***** along with a sentinel lymph node procedure which was performed on September 08 and showed zero of 5 lymph nodes to be involved with cancer. The reexcision of the deep margin was clear. Progesterone receptors were strongly positive at 95% and *****/neu was negative. At this time Ms ***** is feeling well and has no complaint. Most recently she has finished a three-week course of radiation therapy to the right breast at ***** ***** Hospital on January 05 and she tolerated this therapy well. She's continuing to have regular menstrual periods with her last menstrual period being January 21.. Her appetite is good her weight is stable her activities are full and her bowel and bladder function are within normal limits.       Review of Systems   Constitutional: Negative.  Negative for fever, fatigue and unexpected weight change.   HENT: Negative for sinus pressure, sore throat and trouble swallowing.    Respiratory: Positive for chest tightness. Negative for shortness of breath and wheezing.    Cardiovascular: Negative for chest pain, palpitations and leg swelling.   Gastrointestinal: Negative.  Negative for nausea, vomiting, diarrhea and abdominal distention.   Endocrine: Negative.    Genitourinary: Negative.  Negative for flank \n pain and menstrual problem.   Allergic/Immunologic: Negative.    Neurological: Negative for dizziness, weakness and headaches.   Hematological: Negative.    Psychiatric/Behavioral: Negative.            Objective:      Physical Exam   Nursing note and vitals reviewed.  Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Eyes: EOM are normal. Pupils are equal, round, and reactive to light.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate and regular rhythm.    Pulmonary/Chest: Effort normal and breath sounds normal.   Abdominal: Soft. Bowel sounds are normal.   Musculoskeletal: Normal range of motion.   Neurological: She is alert and oriented to person, place, and time.   Skin: Skin is warm and dry.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Judgment and thought content normal.           Assessment:       At this time Ms. ***** is and well. She's recently finished her radiation therapy to right breast ***** and is ready to begin her anti-hormonal therapy as we discussed at our prior visit. As she is premenopausal we will begin a 5 year course of tamoxifen therapy I have written a prescription for tamoxifen and scheduled a return visit in 4-6 weeks assess how she is tolerating her tamoxifen therapy      Plan:    ***** tamoxifen therapy. Return to clinic in 4-6 weeks to assess tolerance. I have scheduled a routine diagnostic mammogram on the day of our next appointment as her last mammogram on the affected breast was more than 6 months ago.            \n"
+
+--- Column: assessment_and_plan ---
+"Assessment:       At this time Ms. ***** is and well. She's recently finished her radiation therapy to right breast ***** and is ready to begin her anti-hormonal therapy as we discussed at our prior visit. As she is premenopausal we will begin a 5 year course of tamoxifen therapy I have written a prescription for tamoxifen and scheduled a return visit in 4-6 weeks assess how she is tolerating her tamoxifen therapy      Plan:    ***** tamoxifen therapy. Return to clinic in 4-6 weeks to assess tolerance. I have scheduled a routine diagnostic mammogram on the day of our next appointment as her last mammogram on the affected breast was more than 6 months ago.            \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient has invasive ductal carcinoma of the right breast, stage not specified. This visit is for routine follow-up after completing radiation therapy and to begin anti-hormonal therapy with tamoxifen."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "PR+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Approximately Stage I-II",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results show a 0.9 cm and a 0.3 cm invasive ductal carcinoma, both grade 1. Margins were clear except for the deep margin, which was subsequently reexcised. Sentinel lymph node procedure showed zero of 5 lymph nodes involved with cancer. Progesterone receptors were strongly positive at  95%. No new imaging findings are mentioned in the note. Physical exam findings are within normal limits with no palpable masses, skin changes, or lymphadenopathy noted."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "No specific evidence of cancer response is provided in the current note. The patient has recently finished a three-week course of radiation therapy to the right breast and is tolerating this therapy well. No evidence of disease recurrence on imaging and exam is explicitly stated."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+      "summary": "tamoxifen therapy. 5 year course started after finishing radiation therapy to right breast.",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Begin a 5 year course of tamoxifen therapy."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Begin a 5 year course of tamoxifen therapy. Return to clinic in 4-6 weeks to assess tolerance."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Routine diagnostic mammogram on the day of the next appointment, as the last mammogram on the affected breast was more than 6 months ago."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Return to clinic in 4-6 weeks to assess tolerance. I have scheduled a routine diagnostic mammogram on the day of our next appointment."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 4-6 weeks to assess tolerance"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
