@@ -5276,3 +5276,64 @@ Processing row 71 (26/36)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 15.9s
+      [EXTRACT] raw={
+"findings": "Left breast, mastectomy: 1.2 cm grade 2 IDC with focal neuroendocrine differentiation, negative margins. No lymph node involvement (0/2 LNs involved). No evidence of distant metastasis.
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 10.8s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours; aspir"
+      [POST-MEDS] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours; aspirin 81 mg, Daily Scheduled; gabapentin (NEURONTIN) 300 mg, Oral, Daily At [REDACTED] [REDACTED]; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours; latanoprost (XALATAN) 0.005 % ophthalmic solution INSTILL 1 DROP [REDACTED] [REDACTED] [REDACTED] DAILY; zoledronic acid/mannitol-water (RECLAST IV) Intravenous -> Every 6 Hours; latanoprost (XALATAN) 0.005 % ophthalmic solution INSTILL 1 DROP [REDACTED] [REDACTED] [REDACTED] DAILY; zoledronic acid/mannitol-water (RECLAST IV) Intravenous
+    Treatment_Changes: 8.0s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "Instructed patient to begin letrozole, prescription ordered.",
+"supportive_meds": "zoledronic acid/mannitol-water (RECLAST IV)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] supportive_meds: "zoledronic acid/mannitol-water (RECLAST IV)" -> ""
+      [G4-FAITH] EMPTIED: ['supportive_meds']
+  Phase 1 extraction (6 prompts): 64.4s
+  Cross-context injected (817 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 71.0s
