@@ -362,3 +362,21 @@ Processing row 26 (2/10)...
       [G5-FAITH] EMPTIED: ['procedure_plan']
       [G5-PROTECT] procedure_plan: restored safe negative "No procedures planned."
       [G6-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 35.8s
+      [EXTRACT] raw={
+    "imaging_plan": "Reassess lower back pain at two weeks and consider MRI of the spine."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
+    Lab_Plan: 23.8s
+      [EXTRACT] raw={
+    "lab_plan": "CBC with platelets to evaluate easy bruising."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
