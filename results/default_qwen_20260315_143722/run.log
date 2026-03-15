@@ -2370,3 +2370,55 @@ Processing row 57 (12/36)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium carbonate/vitamin D3, cholecalciferol, vitamin D3"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] calcium carbonate/vitamin D3, cholecalciferol, vitamin D3 -> 
+  Phase 1 extraction (6 prompts): 68.7s
+  Cross-context injected (839 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Patient tolerating letrozole well with improved bone achiness and occasional stiffness in knee and fingers when sitting
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam. Patie" -> "Patient tolerating letrozole well with improved bone achines"
+  Phase 2 extraction (2 prompts): 12.5s
+  Total extraction: 81.2s
+    Medication_Plan_chatgpt: 37.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient is currently on letrozole for 1.5 years. Tolerating therapy well.",
+        "Short term side_effects_discussed": "Bone achiness has improved. Oc
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] hormonal therapy: "{'summary': 'Patient is currently on letrozole for 1.5 years" -> "{'summary': 'Patient is currently on letrozole for 1.5 years"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'bone therapy', 'hormonal therapy', 'other treatment'}
+    Medication_Plan: 5.8s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Submit authorization for zoledronate. Continue letrozole."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Submit authorization for zoledronate. Continue letrozole." -> "Continue letrozole. Submit authorization for zoledronate."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
