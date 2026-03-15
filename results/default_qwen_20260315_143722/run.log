@@ -1564,3 +1564,69 @@ Processing row 53 (8/36)...
       [G5-TEMPORAL] bone_therapy: "{'summary': 'started on zoledronic acid in c/o T6 lesion, will get every 3 month" -> "{'summary': 'will get every 3 months, DEXA scan (re-ordered), calcium 1250 mg da"
       [G5-TEMPORAL] bone therapy: "{'summary': 'started on zoledronic acid in c/o T6 lesion, will get every 3 month" -> ""
       [POST-KEYS] stripped: {'other_treatment', 'radiotherapy', 'hormonal_therapy', 'bone_therapy'}
+    Medication_Plan: 16.5s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after radiation, start acupuncture, continue zoledronic acid every 3 months, take calcium 1250 mg dai
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after r" -> "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after r"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.5s
+      [EXTRACT] raw={
+    "therapy_plan": "continue leuprolide every 4 weeks, continue letrozole, referred to radiation oncology for post-mastectomy radiation, start palbociclib after radiation, zoledronic acid every 3 m
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.2s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "proceed with post-mastectomy radiation at this time, referred to radiation oncology, start palbociclib after radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "proceed with post-mastectomy radiation at this time, referred to radiation oncol" -> "proceed with post-mastectomy radiation at this time, referred to radiation oncol"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.5s
+      [EXTRACT] raw={
+    "imaging_plan": "repeat PET/CT in ~3-4 months after radiation"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
