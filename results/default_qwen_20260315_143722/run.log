@@ -4085,3 +4085,33 @@ Processing row 65 (20/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.5s
   Total extraction: 116.5s
+    Medication_Plan_chatgpt: 52.6s [faith-restored-1keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'Plan for neoadjuvant chemotherapy then she is c" -> "{'summary': 'Plan for neoadjuvant chemotherapy then she is c"
+      [G4-FAITH] radiotherapy: "{'summary': 'Plan for neoadjuvant chemotherapy then she is c" -> "{'summary': 'Plan for neoadjuvant chemotherapy then she is c"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discussed the importance of exercise and physical activity. No new " -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'other_treatment', 'radiotherapy'}
+    Medication_Plan: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 24.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab for early stage TNBC. S
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
