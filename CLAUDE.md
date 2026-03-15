@@ -156,3 +156,5 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 
 ### 远程任务完成通知
 当 WSL 上的 pipeline 运行完成后，立即通过 Bark 通知用户，并主动开始下载结果+审查流程。
+- Bark URL: `https://api.day.app/mWBcxqxVNZRUzECXxiLxs5/{标题}/{内容}`
+- 在重要进展节点（运行完成、分析完成、发现关键问题）都发通知

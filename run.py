@@ -778,6 +778,56 @@ def main():
                     referral["Others"] = new_val
                     print(f"    [POST-OTHERS] cleaned: '{others_val[:80]}...' → '{new_val}'")
 
+        # POST-NUTRITION: Clean up Nutrition referral false positives [B88]
+        # Model sometimes puts general diet advice ("I recommend anti inflammatory diet...")
+        # in Nutrition field. True nutrition referrals contain "refer/consult/follow up with nutritionist".
+        if isinstance(referral, dict):
+            nutr_val = referral.get("Nutrition", "None") or "None"
+            if nutr_val != "None":
+                nutr_lower = nutr_val.lower()
+                has_referral_kw = any(w in nutr_lower for w in [
+                    "refer", "consult", "follow up with nutri", "follow-up with nutri",
+                    "nutritionist", "dietitian", "dietician", "nutrition referral",
+                    "nutrition appointment", "nutrition on ",
+                ])
+                if not has_referral_kw:
+                    referral["Nutrition"] = "None"
+                    print(f"    [POST-NUTRITION] cleared diet advice (not a referral): '{nutr_val[:80]}'")
+
+        # POST-LAB: Remove imaging terms from Lab_Plan [B87]
+        # Model sometimes confuses imaging (doppler, ultrasound) with lab tests.
+        # Also remove "labs reviewed" type statements which describe past/current status, not future plans.
+        lab = keypoints.get("Lab_Plan", {})
+        if isinstance(lab, dict):
+            lab_val = lab.get("lab_plan", "") or ""
+            if lab_val and lab_val.lower() not in ("no labs planned.", "no labs planned", "none", ""):
+                lab_lower = lab_val.lower()
+                LAB_IMAGING_TERMS = [
+                    "doppler", "ultrasound", "ct ", "ct,", "mri", "pet", "dexa",
+                    "bone scan", "x-ray", "xray", "mammogram", "echocardiogram",
+                    "echo ", "tte", "scan ",
+                ]
+                has_imaging = any(t in lab_lower for t in LAB_IMAGING_TERMS)
+                # "labs reviewed" / "labs adequate" = past/current status, not a future plan
+                is_past_status = any(t in lab_lower for t in [
+                    "labs reviewed", "labs adequate", "labs are adequate",
+                    "reviewed and adequate", "labs were",
+                ])
+                if has_imaging or is_past_status:
+                    # Try to salvage any real lab items by splitting on commas
+                    items = [item.strip() for item in re.split(r'[,;]', lab_val) if item.strip()]
+                    kept = []
+                    for item in items:
+                        il = item.lower()
+                        item_has_imaging = any(t in il for t in LAB_IMAGING_TERMS)
+                        item_is_past = any(t in il for t in ["reviewed", "adequate", "were"])
+                        if not item_has_imaging and not item_is_past:
+                            kept.append(item)
+                    new_val = ", ".join(kept) if kept else "No labs planned."
+                    if new_val != lab_val:
+                        lab["lab_plan"] = new_val
+                        print(f"    [POST-LAB] cleaned: '{lab_val[:80]}' → '{new_val}'")
+
         # POST-PROCEDURE: Search full note for procedure plans mentioned outside A/P [B75]
         # Like POST-REFERRAL, procedures (port placement, biopsy) may be in HPI, not A/P
         proc = keypoints.get("Procedure_Plan", {})
