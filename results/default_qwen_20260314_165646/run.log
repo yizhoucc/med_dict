@@ -1844,3 +1844,93 @@ Processing row 33 (9/10)...
       [G2-SCHEMA] ok
       [G3-FAITH] no changes (all supported)
       [G6-SEMANTIC] ok (all values answer their fields)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G3-FAITH] EMPTIED: ['Advance care']
+      [G3-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Plan extraction prompts: 73.4s
+  Row 33 total: 149.5s
+  Row 33 saved to progress
+
+Processing row 34 (10/10)...
+  Injected 3 term definitions: ['adjuvant therapy', 'lumpectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (412 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Ms. ***** is a 40-year-old female with invasive lobular carcinoma diagnosed in 2018. She is currently on ad
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] second opinion: "no" -> ""
+      [G3-FAITH] EMPTIED: ['second opinion']
+      [G3-REVERT-INFER] second opinion: restored classification/inference "no"
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Cancer_Diagnosis: 11.1s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "invasive lobular carcinoma, ER+/PR+/HER2-",
+  "Stage_of_Cancer": "pT1cN0(sn)",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Metastasis: "No" -> ""
+      [G3-FAITH] Type_of_Cancer: "invasive lobular carcinoma, ER+/PR+/HER2-" -> "invasive lobular carcinoma"
+      [G3-FAITH] EMPTIED: ['Metastasis']
+      [G3-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G6-PROTECT] Distant_Metastasis: blocked fill into empty field
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_summary: "No labs in note." -> ""
+      [G3-FAITH] EMPTIED: ['lab_summary']
+      [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 19.1s
+      [EXTRACT] raw={
+"findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no DCIS, LCIS focally present, 0/4 LN involved. Physical exam: well-healed lumpect
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 4.1s [semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "tamoxifen, anastrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] current_meds: "tamoxifen, anastrozole" -> "tamoxifen"
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Treatment_Goals: 3.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
