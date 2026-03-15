@@ -1075,3 +1075,29 @@ Processing row 30 (6/10)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 40.3s [improved]
+      [EXTRACT] raw={
+"findings": "Progression of metastatic disease noted on April 2021 PET/CT scan with increased size and FDG uptake of hepatic metastases and skeletal metastases. Focal region of increased FDG uptake 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Progression of metastatic disease noted on April 2021 PET/CT scan with increased" -> "Progression of metastatic disease noted on April 2021 PET/CT scan with increased"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.6s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "doxil"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "doxil" -> ""
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, medic"
+      [POST-MEDS] ascorbic acid, vitamin C, cholecalciferol, vitamin D3, medical cannabis, lorazepam, magnesium, ondansetron, oxyCODONE, prochlorperazine -> 
