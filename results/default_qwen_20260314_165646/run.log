@@ -668,3 +668,49 @@ Processing row 28 (4/10)...
       [G3-FAITH] EMPTIED: ['lab_summary']
       [G3-PROTECT] lab_summary: restored safe negative "No labs in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
+    Clinical_Findings: 39.0s
+      [EXTRACT] raw={
+"findings": "Pathology results: Right axillary sentinel lymph node with micrometastatic carcinoma, 0.5mm. Right breast 11:30 position with invasive carcinoma, grade 2, 1.6cm, negative margins, with 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Current_Medications: 3.9s [faith-trimmed, semantic-fixed]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] current_meds: "letrozole" -> ""
+      [G3-FAITH] EMPTIED: ['current_meds']
+      [G3-REVERT] current_meds: reverted (G3 emptied all fields)
+      [G6-SEMANTIC] current_meds: "letrozole" -> ""
+    Treatment_Changes: 10.2s [semantic-fixed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start letrozole 2.5mg PO daily now",
+"supportive_meds": "Calcium supplementation with 1200mg/day combination of diet and supplement"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] recent_changes: "Start letrozole 2.5mg PO daily now" -> "Not yet on treatment — no recent changes to report."
+      [POST-SUPP] Calcium supplementation with 1200mg/day combination of diet and supplement -> 
+    Treatment_Goals: 4.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Response_Assessment: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G3-FAITH] EMPTIED: ['response_assessment']
+      [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+  Extraction prompts: 99.9s
