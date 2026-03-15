@@ -299,3 +299,12 @@ Processing row 26 (2/10)...
       [G5-FAITH] goals_of_treatment: "palliative" -> ""
       [G5-FAITH] EMPTIED: ['goals_of_treatment']
       [G5-REVERT] goals_of_treatment: reverted (G5 emptied all fields)
+    Response_Assessment: 40.3s
+      [EXTRACT] raw={
+"response_assessment": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+  Extraction prompts: 589.7s
