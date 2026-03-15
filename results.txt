@@ -1,4 +1,4 @@
-Source: default_qwen.yaml | Run started: 2026-03-15 09:55:22
+Source: default_qwen.yaml | Run started: 2026-03-15 10:53:14
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -41,6 +41,8 @@ HER2 status rules — follow strictly:
 - DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly stated.
 - IMPORTANT: IHC 2+ with FISH NEGATIVE = HER2 negative. Do NOT write HER2+ for IHC 2+/FISH negative.
 - IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/Tykerb/lapatinib/TCHP/THP, the cancer is HER2+. Do NOT write HER2-.
+- IMPORTANT: If the note says "triple negative" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-. Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked. "Triple negative" is a definitive classification.
+- IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
 
 For Stage_of_Cancer:
 - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
@@ -91,7 +93,7 @@ Respond *only* with a JSON object using this exact schema:
 {
 "findings": "Summary of new findings or disease status including pathology results, imaging findings, and exam findings."
 }
-', 'Current_Medications': 'TASK: Extract current oncologic medications.
+', 'Current_Medications': 'TASK: Extract current oncologic medications the patient is ACTIVELY taking now.
 
 CRITICAL — distinguish CURRENT from PLANNED from PAST:
 - CURRENT (include): medications the patient is ACTIVELY taking right now.
@@ -106,36 +108,13 @@ CRITICAL — distinguish CURRENT from PLANNED from PAST:
 - STOPPED/DROPPED (do NOT include): medications recently discontinued.
   Look for: "recently dropped", "stopped due to", "discontinued", "held", "self D/C", "D/Ced"
 
-ONLY include drugs from this oncology drug list (or close variants). If a drug is NOT on this list, do NOT include it:
---- CHEMOTHERAPY ---
-doxorubicin, adriamycin, cyclophosphamide, cytoxan, paclitaxel, taxol, nab-paclitaxel, abraxane,
-docetaxel, taxotere, carboplatin, capecitabine, xeloda, gemcitabine, gemzar, eribulin, halaven,
-ixabepilone, irinotecan, epirubicin, fluorouracil, 5-FU, methotrexate, vinorelbine, navelbine,
-cisplatin, sacituzumab, trodelvy, doxil, liposomal doxorubicin
---- HORMONAL THERAPY ---
-tamoxifen, letrozole, femara, anastrozole, arimidex, exemestane, aromasin, fulvestrant, faslodex,
-goserelin, zoladex, leuprolide, lupron, megestrol, megace, raloxifene
---- TARGETED THERAPY ---
-trastuzumab, herceptin, pertuzumab, perjeta, T-DM1, ado-trastuzumab, kadcyla, trastuzumab deruxtecan,
-enhertu, lapatinib, tykerb, neratinib, nerlynx, tucatinib, tukysa, palbociclib, ibrance, ribociclib,
-kisqali, abemaciclib, verzenio, everolimus, afinitor, alpelisib, piqray, olaparib, lynparza,
-talazoparib, talzenna, elacestrant, orserdu, capivasertib, truqap, bevacizumab, avastin
---- IMMUNOTHERAPY ---
-pembrolizumab, keytruda, atezolizumab, tecentriq, nivolumab, opdivo, durvalumab, imfinzi
---- BONE AGENTS ---
-denosumab, xgeva, prolia, zoledronic acid, zolendronic acid, zometa, pamidronate
-
-Do NOT include: blood pressure meds, diabetes meds, psychiatric meds, allergy meds, antibiotics,
-pain meds, laxatives, vitamins, supplements, thyroid meds, cholesterol meds, or any other
-non-cancer medication. These are NOT oncologic: amlodipine, atorvastatin, metformin, levothyroxine,
-losartan, omeprazole, gabapentin, duloxetine, lorazepam, oxycodone, acetaminophen, ibuprofen,
-cetirizine, multivitamin, calcium, vitamin D, docusate, senna, iron.
-
-If no oncologic medications from the list above are currently active, write empty string "".
+Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
+Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
+If no cancer-related medications are currently active, write empty string "".
 
 Respond *only* with a JSON object using this exact schema:
 {
-"current_meds": "List of current oncologic medications the patient is ACTIVELY taking now, or empty string if none."
+"current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
 }
 ', 'Treatment_Changes': 'TASK: Extract recent treatment changes and supportive medications.
 
@@ -193,6 +172,7 @@ Respond *only* with a JSON object using this exact schema (NO other keys):
 
 Think step by step before answering:
 1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+   IMPORTANT: Completed radiation therapy COUNTS as treatment. If the patient recently finished radiation, they HAVE received treatment — do NOT write "Not yet on treatment". "Not yet on treatment" is ONLY correct if no cancer treatment (chemo, radiation, hormonal, targeted, immunotherapy) has been given at all.
    IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
    For LOCAL RECURRENCE: describe the recurrence factually (e.g., "local recurrence in left breast, 1.7cm IDC on excisional biopsy"). Do NOT write "cancer is not responding to treatment" — the patient may have discontinued treatment or completed it years ago. Focus on WHAT happened (recurrence), not WHY.
    IMPORTANT: For patients on adjuvant/maintenance therapy, "no evidence of recurrence" or "no evidence of disease" on exam or imaging IS a valid response assessment — it means the treatment is working.
@@ -293,6 +273,14 @@ For radiotherapy, include ANY statement that indicates
 it is being considered, recommended, or may be used, even if no explicit
 start/continue/plan keywords are present.
 Include referrals to radiation oncology (Rad Onc) as a radiotherapy-related plan.
+
+CRITICAL — distinguish PAST from CURRENT/FUTURE:
+- PAST (DO NOT include): "had radiation in 2018", "s/p radiation", "completed radiation", "treated with lumpectomy followed by radiation", "had adjuvant radiation", "status post radiation"
+- CURRENT (include): "currently receiving radiation", "on radiation therapy"
+- FUTURE (include): "will start radiation", "radiation planned", "discussed radiation", "Rad Onc consult", "considering radiation"
+If a radiotherapy statement uses past tense or describes completed/historical treatment, it is PAST — do NOT include it.
+If the only radiotherapy mentioned is past/completed, write "None".
+
 Respond *only* with a JSON object using this exact schema:
 {
     "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
@@ -413,11 +401,18 @@ CRITICAL — distinguish OUTGOING from INCOMING referrals:
 - If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
 
 If no referral is mentioned for a category, set its value to "None".
-For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral. Supplement recommendations (e.g., "take calcium and vitamin D", "continue vitamin D daily") are also NOT nutrition referrals — they are standard medical advice.
+For Nutrition: only include referrals to a nutritionist or dietitian (e.g., "nutrition consult", "refer to nutritionist", "follow up with nutrition on [date]").
+The following are NOT nutrition referrals — they are general lifestyle advice from the oncologist:
+- "I recommend an anti inflammatory/mediterranean diet" → NOT a referral
+- "I recommend a diabetes risk reducing diet" → NOT a referral
+- "eat calcium-rich food", "limit alcohol", "exercise" → NOT a referral
+- "take calcium and vitamin D", "continue vitamin D daily" → NOT a referral (supplement advice)
+- "discussed lifestyle modifications" → NOT a referral
+If the oncologist gives diet advice without referring to a nutritionist/dietitian, write "None".
 Respond *only* with a JSON object using this exact schema:
 {
 "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
-"Genetics": "eg, germline testing, family counseling, or 'None'",
+"Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g., 'refer to genetics', 'genetics consult recommended'). Do NOT list genetic test RESULTS or known mutations here (e.g., 'BRCA1 mutation', 'ATM mutation carrier', 'genetic testing negative' are FINDINGS, not referrals). Write 'None' if no genetics referral is planned.",
 "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
 "Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
 "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
@@ -485,20 +480,20 @@ RESULTS FOR ROW 36
     "lab_summary": "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin, Serum / Plasma 3.3 (L) (from 04/03/2021)"
   },
   "Clinical_Findings": {
-    "findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymphadenopathy. No focal motor or sensory deficits. No point tenderness over bones or joints. Labs show WBC count of 8.8, RBC count of 3.91 (L), hemoglobin of 11.8 (L), hematocrit of 35.3 (L), and MCV of 90. Albumin is 3.3 (L). No significant findings on the recent PET/CT scan, with hypermetabolism along the remaining left breast tissue and anterior right breast tissue expander, likely reflecting postprocedural changes. Low-level hypermetabolism in left greater than right axillary/subpectoral nodes, nonspecific in the setting of ongoing infection. Incidental right thyroid nodule measuring up to 2.1 cm with associated FDG uptake, recommended for further evaluation with dedicated thyroid ultrasound."
+    "findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymphadenopathy. No focal motor or sensory deficits. No point tenderness over bones or joints. Labs show WBC count of 8.8, RBC count of 3.91 (L), hemoglobin of 11.8 (L), hematocrit of 35.3 (L), and MCV of 90. Albumin is 3.3 (L). No significant changes in liver function tests. Creatinine is 0.57, eGFR is >120. No significant findings on the PET/CT scan that were not previously noted. Right thyroid nodule measuring up to 2.1 cm with associated FDG uptake, recommended for further evaluation with dedicated thyroid ultrasound."
   },
   "Current_Medications": {
-    "current_meds": "abraxane, zoladex"
+    "current_meds": "Abraxane, zoladex"
   },
   "Treatment_Changes": {
-    "recent_changes": "Switched to Abraxane on 02/20/21 due to grade 3 infusion reaction with cycle 1 of Taxol.",
+    "recent_changes": "Switched to Abraxane after a grade 3 infusion reaction with cycle 1 of Taxol.",
     "supportive_meds": "Zofran, Compazine"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "response_assessment": "no evidence of disease recurrence on imaging and exam"
+    "response_assessment": "Not mentioned in note."
   },
   "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
@@ -525,7 +520,7 @@ RESULTS FOR ROW 36
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Radiation oncology referral",
+    "Specialty": "Radiation oncology referral, will see Dr. [REDACTED] next week.",
     "Others": "None",
     "follow up": "RTC 2 weeks"
   },
@@ -611,7 +606,7 @@ RESULTS FOR ROW 37
     "genetic_testing_plan": "None planned."
   },
   "Referral": {
-    "Nutrition": "I recommend an anti inflammatory /mediterranean diet",
+    "Nutrition": "None",
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
@@ -653,50 +648,35 @@ RESULTS FOR ROW 38
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR+/HER2- invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage IIB",
+    "Stage_of_Cancer": "Originally Stage IIB",
     "Metastasis": "No",
     "Distant Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine transaminase 27, AST 22, Bilirubin, Total 0.3, Urea Nitrogen 10, Calcium, total 10.1, Creatinine 0.55, eGFR - low estimate >120, Potassium 4.7, Protein, Total 7.5, Glucose, non-fasting 95, WBC Count 5.5, RBC Count  4.58, Hemoglobin 14.2, Hematocrit 42.5, MCV 93, MCH 31.0, MCHC 33.4, Platelet Count [REDACTED], Neutrophil Absolute Count 3.44, Lymphocyte Abs Cnt 1.38, Monocyte Abs Count 0.48, Eosinophil Abs Ct 0.18, Basophil Abs Count  0.03, Hemoglobin A1c 5.0 (all values from 01/15/2021)"
+    "lab_summary": "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine transaminase 27, AST 22, Bilirubin, Total 0.3, Urea Nitrogen 10, Calcium, total 10.1, Creatinine 0.55, eGFR - low estimate >120, Potassium 4.7, Glucose, non-fasting 95, WBC Count 5.5, RBC Count  4.58, Hemoglobin 14.2, Hematocrit 42.5, MCV 93, MCH 31.0, MCHC 33.4, Platelet Count [REDACTED], Neutrophil Absolute Count 3.44, Lymphocyte Abs Cnt 1.38, Monocyte Abs Count 0.48, Eosinophil Abs Ct 0.18, Basophil Abs Count 0.03, Hemoglobin A1c 5.0 (all values from 01/15/2021)"
   },
   "Clinical_Findings": {
-    "findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease. The patient's tumor is enlarging again, as noted in the physical exam. No other significant imaging findings or pathology results are mentioned in the current visit."
+    "findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease. The patient's tumor is enlarging again, as noted in the physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "Stopped due to toxicity. She declines further IV or preoperative therapy.",
-    "supportive_meds": "HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, traMADoL (ULTRAM) 50 mg tablet"
+    "recent_changes": "",
+    "supportive_meds": "HYDROcodone-acetaminophen (NORCO), traMADoL (ULTRAM)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "response_assessment": "The patient's tumor is enlarging again, as noted in the physical exam. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease."
+    "response_assessment": "The cancer is currently progressing. The patient's tumor is enlarging again, as noted in the physical exam with a large 8 x 5 cm mobile breast mass in the left breast. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease."
   },
-  "Medication_Plan_chatgpt": {
-    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
-      {
-        "type": "chemotherapy",
-        "summary": "Could consider [REDACTED] concurrently. She will qualify for xeloda.",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      },
-      {
-        "type": "hormonal therapy",
-        "summary": "I will recommend olaparib for a year as part of her adjuvant therapy. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Her tumor is barely positive for PR 15% but will offer it per guidelines.",
-        "Short term side_effects_discussed": "",
-        "Long term_side_effects_discussed": ""
-      }
-    ]
-  },
+  "Medication_Plan_chatgpt": {},
   "Medication_Plan": {
-    "medication_plan": "Olaparib for a year as part of adjuvant therapy. Xeloda will be considered for adjuvant therapy."
+    "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
   },
   "Therapy_plan": {
-    "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence and will offer it per guidelines. We could consider [REDACTED]."
+    "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence. She will qualify for xeloda and olaparib. We could consider [REDACTED]."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
@@ -714,10 +694,10 @@ RESULTS FOR ROW 38
     "genetic_testing_plan": "None planned."
   },
   "Referral": {
-    "Nutrition": "I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.",
+    "Nutrition": "None",
     "Genetics": "BRCA 1 mutation",
     "Specialty": "None",
-    "Others": "None",
+    "Others": "We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction. I recommend an anti inflammatory and/or diabetes risk reducing diet, limiting alcohol, exercise, stress reduction and sleep management., Social work referral",
     "follow up": "I will see her after she recovers from surgery."
   },
   "follow_up_next_visit": {
@@ -755,8 +735,8 @@ RESULTS FOR ROW 39
     "summary": "27 year old woman with newly diagnosed at least stage II triple negative breast cancer, here in consultation to discuss treatment options."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER/PR/[REDACTED] negative, HER2: not tested grade 3 invasive ductal carcinoma",
-    "Stage_of_Cancer": "T2N1",
+    "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "At least Stage II",
     "Metastasis": "No",
     "Distant Metastasis": "No"
   },
@@ -784,7 +764,7 @@ RESULTS FOR ROW 39
     "medication_plan": "Weekly paclitaxel x 12 weeks, either with an unspecified agent or replaced by another unspecified agent, or with paclitaxel alone, followed by AC x 4 cycles. Goserelin monthly during chemotherapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "Neoadjuvant chemotherapy with weekly paclitaxel x 12 weeks, either with a [REDACTED] agent or replaced by a [REDACTED] agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery. Participation in a trial after [REDACTED] results are obtained to one of the existing arms of the study, with a second consent signed. Goserelin monthly during chemotherapy for fertility preservation."
+    "therapy_plan": "Neoadjuvant chemotherapy with weekly paclitaxel x 12 weeks, either with a [REDACTED] agent or replaced by a [REDACTED] agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery. Participation in a trial after [REDACTED] results are obtained to one of the existing arms of the study, with a second consent signed. Consider using goserelin monthly during chemotherapy for improved fertility preservation."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -806,7 +786,7 @@ RESULTS FOR ROW 39
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "start therapy within two weeks"
+    "follow up": "None"
   },
   "follow_up_next_visit": {
     "Next clinic visit": "start therapy within two weeks"
@@ -840,11 +820,11 @@ RESULTS FOR ROW 40
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient with newly diagnosed Stage 2 low grade [REDACTED]+ [REDACTED] negative IDC of the right breast s/p right partial mastectomy here to discuss systemic therapy options."
+    "summary": "Patient with newly diagnosed Stage 2 low grade ER+ PR- IDC of the right breast s/p right partial mastectomy here to discuss systemic therapy options."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER 95, PR 5, HER2 2+ FISH negative (1.2) G1 IDC with nuclear G1 DCIS",
-    "Stage_of_Cancer": "Stage II",
+    "Stage_of_Cancer": "Stage 2",
     "Metastasis": "No",
     "Distant Metastasis": "No"
   },
@@ -878,16 +858,6 @@ RESULTS FOR ROW 40
         "summary": "The patient is currently on Prolia.",
         "Short term side_effects_discussed": "",
         "Long term side_effects_discussed": ""
-      },
-      "chemotherapy": {
-        "summary": "The patient is not interested in chemotherapy and there is no indication to send molecular tests.",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
-      },
-      "radiotherapy": {
-        "summary": "",
-        "Short term side_effects_discussed": "",
-        "Long term side_effects_discussed": ""
       }
     }
   },
@@ -895,7 +865,7 @@ RESULTS FOR ROW 40
     "medication_plan": "Rx for letrozole given. She is on Prolia now."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will derive the greatest benefit from adjuvant endocrine therapy with letrozole. If no radiation is planned, she can start letrozole immediately."
+    "therapy_plan": "The patient will derive the greatest benefit from adjuvant endocrine therapy with letrozole. She can start letrozole immediately if no radiation is planned. She is currently on Prolia for her osteoporosis."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -916,7 +886,7 @@ RESULTS FOR ROW 40
     "Nutrition": "None",
     "Genetics": "None",
     "Specialty": "None",
-    "Others": "PT referral",
+    "Others": "None",
     "follow up": "RTC 3 months"
   },
   "follow_up_next_visit": {
@@ -954,8 +924,8 @@ RESULTS FOR ROW 41
     "summary": "A 32 y.o. female with a recently diagnosed left breast cancer, specifically a 3 cm grade 3 IDC with negative margins and involvement of one left axillary SLN. The purpose of this visit is to discuss and plan adjuvant chemotherapy following bilateral mastectomy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR weakly+/HER2: not tested invasive ductal carcinoma",
-    "Stage_of_Cancer": "",
+    "Type_of_Cancer": "ER+/PR weakly+/HER2 not tested invasive ductal carcinoma",
+    "Stage_of_Cancer": "Approximately Stage II (3 cm grade 3 IDC with 1 of 3 left axillary SLN involved with micrometastasis)",
     "Metastasis": "No",
     "Distant Metastasis": "No"
   },
@@ -963,7 +933,7 @@ RESULTS FOR ROW 41
     "lab_summary": "Ferritin 27 ug/L, WBC Count 5.2 x10E9/L, RBC Count 3.82 (L) x10E12/L, Hemoglobin 11.8 (L) g/dL, Hematocrit 36.2 %, MCV 95 fL, MCH 30.9 pg, MCHC 32.6 g/dL, Platelet Count [REDACTED] x10E9/L, HCG Pregnancy, Serum, >= 18 years <1 IU/L"
   },
   "Clinical_Findings": {
-    "findings": "Patient underwent bilateral mastectomy on 04/11/2018. Pathology from the left breast revealed a 3 cm grade 3 IDC with negative margins. 1 of 3 left axillary SLN was involved with micrometastasis (measuring 0.022 cm). Receptor status revealed ER+ (90%), PR weakly + (1%), HER2 1+ by IHC and FISH not available. Right breast specimen was benign. Left breast US on 04/25/2018 showed benign findings. [REDACTED]/[REDACTED] scan on 05/22/2018 showed an LVEF of  79%. Physical exam showed no palpable masses, skin changes, or lymphadenopathy."
+    "findings": "Patient underwent bilateral mastectomy on 04/11/18. Pathology from the left breast revealed a 3 cm grade 3 IDC with negative margins. 1 of 3 left axillary SLN was involved with micrometastasis (measuring 0.022 cm). Receptor status: ER+ (90%), PR weakly + (1%), [REDACTED] 1+ by IHC and FISH not available, [REDACTED] 30%. Right breast specimen was benign. [REDACTED]/[REDACTED] scan on 05/22/2018 showed an LVEF of  79%. Left breast ultrasound on 04/25/2018 showed no evidence of drainable fluid collection or mass, subcutaneous edema present, and trace fluid about the tissue expander and along the tract of the recently removed drain. Physical exam: No palpable masses, skin changes, or lymphadenopathy noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1002,10 +972,10 @@ RESULTS FOR ROW 41
   },
   "Referral": {
     "Nutrition": "None",
-    "Genetics": "ATM mutation carrier",
+    "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "None"
+    "follow up": "After completion of chemotherapy, follow up with ovarian suppression with an aromatase inhibitor and potential eligibility for the [REDACTED] trial (with ribociclib)."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "Not specified in the given note"
@@ -1042,8 +1012,8 @@ RESULTS FOR ROW 42
     "summary": "Patient has invasive ductal carcinoma of the right breast, stage not specified. This visit is for routine follow-up after completing radiation therapy and to begin anti-hormonal therapy with tamoxifen."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "PR+ (95%) and HER2- invasive ductal carcinoma",
-    "Stage_of_Cancer": "Approximately Stage I-II (0.9 cm and 0.3 cm invasive ductal carcinomas with 0/5 lymph nodes involved)",
+    "Type_of_Cancer": "PR+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Approximately Stage I-II",
     "Metastasis": "No",
     "Distant Metastasis": "No"
   },
@@ -1051,7 +1021,7 @@ RESULTS FOR ROW 42
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show a 0.9 cm and a 0.3 cm invasive ductal carcinoma, both grade 1. Margins were clear except for the deep margin, which was subsequently reexcised. Sentinel lymph node procedure showed zero of 5 lymph nodes involved with cancer. Progesterone receptors were strongly positive at  95%. No new imaging findings are mentioned in the note. Physical exam findings are within normal limits with no palpable masses, skin changes, or lymphadenopathy noted."
+    "findings": "Pathology results show a 0.9 cm and 0.3 cm invasive ductal carcinoma, both grade 1. Margins were clear except for the deep margin, which was subsequently reexcised. Sentinel lymph node procedure showed zero of 5 lymph nodes involved with cancer. Progesterone receptors were strongly positive at  95%. No new imaging findings are mentioned in this visit. Physical exam findings are unremarkable with no palpable masses, skin changes, or lymphadenopathy noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1064,7 +1034,7 @@ RESULTS FOR ROW 42
     "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "response_assessment": "Not mentioned in note."
   },
   "Medication_Plan_chatgpt": {
     "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
@@ -1133,7 +1103,7 @@ RESULTS FOR ROW 43
     "Patient type": "Follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient with a history of triple negative breast cancer, previously treated with lumpectomy, chemotherapy, and radiation, now presenting for follow-up after bilateral mastectomies and left axillary dissection. The purpose of this visit is to discuss adjuvant therapy with taxol and carboplatin."
+    "summary": "Patient with a history of triple negative breast cancer, previously treated with lumpectomy, chemotherapy, and radiation, and now presenting for follow-up after bilateral mastectomies and left axillary dissection. The purpose of this visit is to discuss adjuvant therapy with taxol and carboplatin."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
@@ -1142,10 +1112,10 @@ RESULTS FOR ROW 43
     "Distant Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alk Phos 60, ALT 16, AST 16, Bilirubin 0.9, BUN 13, Calcium 9.6, Creatinine 0.49, eGFR - low estimate >120, eGFR - high estimate >120, Glucose 86, Platelet Count [REDACTED], WBC Count 5.2, WBC Count 5.9, WBC Count 10.5 (from 02/22/2021)"
+    "lab_summary": "Hgb 5.4, Hgb 11.1, Hgb 13.7, Albumin 4.0, Alkaline Phosphatase 60, Alanine transaminase 16, AST 16, Bilirubin, Total 0.9, Urea Nitrogen 13, Calcium, total 9.6, Potassium 3.7, Glucose, non-fasting 86, WBC Count 5.2, RBC Count  4.35, Hematocrit 42.0, MCV 97, MCH 31.5, MCHC 32.6, Neutrophil Absolute Count 3.02, Lymphocyte Abs Cnt 1.55, Monocyte Abs Count 0.33, Eosinophil Abs Ct 0.25, Basophil Abs Count 0.05, HCG Pregnancy, Serum <1, T3, Total 1.6, Free T4 12, Thyroid Stimulating Hormone 1.41 (all from 02/17/2021)"
   },
   "Clinical_Findings": {
-    "findings": "Patient is healing well from bilateral mastectomies with left axillary sentinel lymph node biopsies performed on 02/22/2021. Pathology results show a 1.3 cm invasive ductal carcinoma, modified grade 3, with negative margins. No tumor was found in the two sentinel lymph nodes biopsied (0/1). ER and PR negative, HER2 FISH negative. Physical exam shows bilateral mastectomy lines healing well with no palpable masses, skin changes, or lymphadenopathy."
+    "findings": "Patient is healing well from bilateral mastectomies with left axillary sentinel lymph node biopsies performed on 02/22/2021. Pathology results show a 1.3 cm invasive ductal carcinoma in the left breast with negative margins and no tumor involvement in the two sentinel lymph nodes biopsied (0/1). The tumor is grade 3 and ER and PR negative. No other significant findings were noted in the physical exam. No imaging findings are mentioned in the current visit."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1168,7 +1138,7 @@ RESULTS FOR ROW 43
     "therapy_plan": "She will proceed with taxol carboplatin x 4 cycles for adjuvant therapy."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "followed by taxol and radiation."
+    "radiotherapy_plan": "followed by radiation."
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
@@ -1224,7 +1194,7 @@ RESULTS FOR ROW 44
     "summary": "33 y.o. female with ER+/PR+/HER2- node+ left breast cancer with BRCA1 mutation positive, post bilateral mastectomy with left breast SLN biopsy, and ongoing management for residual disease. The purpose of this visit is to discuss radiation recommendations, clinical trial enrollment, and to review the role of endocrine therapy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- node+ left breast cancer with residual DCIS",
+    "Type_of_Cancer": "ER+/PR+/HER2- node+ left breast cancer with residual grade 2 invasive ductal carcinoma and residual DCIS",
     "Stage_of_Cancer": "Not mentioned in note",
     "Metastasis": "No",
     "Distant Metastasis": "No"
@@ -1239,8 +1209,8 @@ RESULTS FOR ROW 44
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "",
-    "supportive_meds": "Norco April 325 mg as needed, docusate sodium 100 mg capsule twice daily"
+    "recent_changes": "None noted at this visit.",
+    "supportive_meds": "Norco April 325 mg as needed, docusate sodium 100 mg twice daily"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative"
@@ -1265,7 +1235,7 @@ RESULTS FOR ROW 44
     ]
   },
   "Medication_Plan": {
-    "medication_plan": "Start an aromatase inhibitor after completing radiation. Consider Zoladex if there is a delay in bilateral oophorectomy."
+    "medication_plan": "Patient will start an aromatase inhibitor after completing radiation. Zoladex will be submitted for authorization in the event of a delay in bilateral oophorectomy."
   },
   "Therapy_plan": {
     "therapy_plan": "She will start an aromatase inhibitor after she completes radiation. She may be eligible for the [REDACTED] trial with ribociclib that should open around the time she completes radiation. We will submit authorization for her to get Zoladex in the event that there is a delay in her oophorectomy."
@@ -1286,11 +1256,11 @@ RESULTS FOR ROW 44
     "genetic_testing_plan": "None planned."
   },
   "Referral": {
-    "Nutrition": "Follow up with nutrition on 11/30/18",
+    "Nutrition": "follow up with nutrition on 11/30/18",
     "Genetics": "None",
     "Specialty": "Radiation oncology consult",
     "Others": "Physical therapy referral",
-    "follow up": "Follow up on 01/05/19, consider a follow up CT Chest in one year"
+    "follow up": "on 01/05/19"
   },
   "follow_up_next_visit": {
     "Next clinic visit": "in-person: 01/05/19"
@@ -1324,10 +1294,10 @@ RESULTS FOR ROW 45
     "Patient type": "New patient",
     "second opinion": "yes",
     "in-person": "Televisit",
-    "summary": "37 year old female with metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022. She is here for a second opinion and initial consult for treatment options."
+    "summary": "37 year old female with metastatic triple negative breast cancer to the lung and right hilar lymph node diagnosed January 2022. She is here for a second opinion and to discuss treatment options."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
+    "Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
     "Stage_of_Cancer": "Originally Stage IIIB, now metastatic (Stage IV)",
     "Metastasis": "Yes (to the lung and right hilar lymph node)",
     "Distant Metastasis": "Yes (to the lung and right hilar lymph node)"
@@ -1349,7 +1319,7 @@ RESULTS FOR ROW 45
     "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "The patient has metastatic breast cancer to the lung and right hilar lymph node diagnosed January 2022. She has had no treatment since January 2022 when diagnosed with metastatic disease. Not yet on treatment — no response to assess."
+    "response_assessment": "The patient has metastatic breast cancer to the lung and right hilar lymph node, diagnosed January 2022. She has had no treatment since January 2022 when diagnosed with metastatic disease. Not yet on treatment — no response to assess."
   },
   "Medication_Plan_chatgpt": {
     "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
@@ -1367,7 +1337,7 @@ RESULTS FOR ROW 45
     "therapy_plan": "Start on gemzar carboplatin asap. Second line she could use [REDACTED] and there are clinical trials ( such as a FGFR inhibitor) or other [REDACTED] ( such as eribulin or doxil) for more advanced line treatment."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "She had adjuvant radiation"
+    "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
@@ -1385,8 +1355,8 @@ RESULTS FOR ROW 45
     "Nutrition": "None",
     "Genetics": "None",
     "Specialty": "None",
-    "Others": "Metastatic triple negative breast cancer to the lung and right hilar lymph node, Stage IIIB right breast triple negative breast cancer, treatment plan including gemzar carboplatin, second line treatment options, lifestyle modifications to decrease the risk of recurrence and primary cancer risk reduction.",
-    "follow up": "None"
+    "Others": "None",
+    "follow up": "start on [REDACTED], gemzar carboplatin asap. Second line she could use [REDACTED] and there are clinical trials ( such as a FGFR inhibitor) or other [REDACTED] ( such as eribulin or doxil) for more advanced line treatment."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "Not specified in the given note"
