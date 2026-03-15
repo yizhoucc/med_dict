@@ -6299,3 +6299,47 @@ Processing row 76 (31/36)...
   Regex matched: 'Assessment and Plan'
   Regex extraction succeeded (6283 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 18.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 ID
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect" -> "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect"
+      [G4-FAITH] summary: "52 y.o. female with a recent diagnosis of right breast cance" -> "52 y.o. female with a recent diagnosis of right breast cance"
+    Cancer_Diagnosis: 13.7s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with associated DCIS",
+  "Stage_of_Cancer": "pT2N1a(sn) - approximately Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 14.9s
+      [EXTRACT] raw={
+"findings": "Pathology results show 2.2cm grade 2 IDC ER+/PR+/HER2-, with associated DCIS and 1/1 positive nodes. Physical exam findings include a well-healing surgical incision and an area of eryth
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
