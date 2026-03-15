@@ -4678,3 +4678,55 @@ Processing row 68 (23/36)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
       [POST-MEDS] LORazepam (ATIVAN) 1 mg tablet -> 
+    Treatment_Changes: 6.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "LORazepam (ATIVAN) 1 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] LORazepam (ATIVAN) 1 mg tablet -> 
+  Phase 1 extraction (6 prompts): 99.2s
+  Cross-context injected (1186 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 105.5s
+    Medication_Plan_chatgpt: 31.1s [schema-fixed, improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy', 'other treatment']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': 'The patient will receive at minimum 5, but more likely 10 years of "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'The patient will receive at minimum 5, but more" -> "{'summary': 'The patient will receive at minimum 5, but more"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'other treatment'}
+    Medication_Plan: 14.9s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of ne
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
