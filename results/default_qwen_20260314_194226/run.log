@@ -1517,3 +1517,42 @@ Processing row 32 (8/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.6s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.4s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 ORAL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] supportive_meds: "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 " -> "ibuprofen (ADVIL,MOTRIN)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ibuprofen (ADVIL,MOTRIN) -> 
+  Phase 1 extraction (6 prompts): 51.5s
+  Cross-context injected (631 chars)
+    Treatment_Goals: 3.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 6.9s
+      [EXTRACT] raw={
+"response_assessment": "no evidence of recurrence on physical exam. No palpable masses, no significant skin changes, and no new lymphadenopathy noted."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 10.6s
+  Total extraction: 62.1s
