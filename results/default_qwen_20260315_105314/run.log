@@ -480,3 +480,52 @@ Processing row 37 (3/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine " -> "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine "
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 15.7s
+      [EXTRACT] raw={
+"findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mil
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B co"
+      [POST-MEDS] ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL -> 
+    Treatment_Changes: 15.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "gabapentin (NEURONTIN), LORazepam (ATIVAN), naloxone, HYDROcodone-acetaminophen (NORCO), ibuprofen (ADVIL,MOTRIN), traMADoL (ULTRAM)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN), LORazepam (ATIVAN), naloxone, HYDROcodone-acetaminophen (NORCO), ibuprofen (ADVIL,MOTRIN), traMADoL (ULTRAM) -> HYDROcodone-acetaminophen (NORCO), traMADoL (ULTRAM)
+  Phase 1 extraction (6 prompts): 108.8s
+  Cross-context injected (609 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. The patient's tumor is enlarging again, as noted in the physical exam with a large 8 x 5 cm mobile breast mass in the left breast. Recent
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently progressing. The patient's tumor is enlarging again, as " -> "The cancer is currently progressing. The patient's tumor is enlarging again, as "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 20.5s
+  Total extraction: 129.3s
