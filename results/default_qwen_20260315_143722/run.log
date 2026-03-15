@@ -7419,3 +7419,20 @@ Processing row 81 (36/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.2s
   Total extraction: 95.1s
+    Medication_Plan_chatgpt: 51.7s [schema-fixed, improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Plan to proceed with [REDACTED] +/- bone medication after radiation
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+    Medication_Plan: 27.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue current medications including acetaminophen 1000 mg by mouth every 8 hours, ibuprofen 600 mg by mouth every 8 hours as needed for pain or temperature >= 38.5 C, lisi
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho" -> "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
