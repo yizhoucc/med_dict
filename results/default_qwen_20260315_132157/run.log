@@ -456,3 +456,28 @@ Processing row 37 (3/10)...
       [G4-FAITH] second opinion: "no" -> ""
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Distant Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 43.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine transaminase 27, AST 22, Bilirubin, Total 0.3, Urea Nitrogen 10, Calcium, total 10.1, Creatinine 0.55,
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine " -> "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phosphatase 80, Alanine "
+      [G4-FAITH] lab_summary: "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phos" -> "Thyroid Stimulating Hormone 1.55, Albumin 3.8, Alkaline Phos"
