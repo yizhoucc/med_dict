@@ -5436,3 +5436,106 @@ Processing row 71 (26/36)...
       [G4-PROTECT] Specialty: restored safe negative "None"
       [G4-PROTECT] Others: restored safe negative "None"
       [G4-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 5.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: In 3 weeks to review [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 80.9s
+  Row 71 total: 151.9s
+  Row 71 saved to progress
+
+Processing row 72 (27/36)...
+  Injected 1 term definitions: ['PR positive']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (179 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.4s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Stage III left breast cancer, ER/PR positive, patient is being followed up for ongoing management and to ad
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 9.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER/PR positive invasive ductal carcinoma, HER2 negative",
+"Stage_of_Cancer": "Stage III",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Type_of_Cancer: "ER/PR positive invasive ductal carcinoma, HER2 negative" -> "ER/PR positive, HER2 negative"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER/PR positive invasive ductal carcinoma, HER2 negative"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 17.9s
+      [EXTRACT] raw={
+"findings": "Patient reports a new 2 cm smooth contoured oval lump at 1-2OClock in the left breast, previously 3cm. A new area of linear nodularity/thickness is noted around 7-9OClock in the left br
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.0s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 4.0s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 48.6s
+  Cross-context injected (679 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
