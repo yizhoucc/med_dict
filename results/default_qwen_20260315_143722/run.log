@@ -3039,3 +3039,22 @@ Processing row 60 (15/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.0s
   Total extraction: 79.4s
+    Medication_Plan_chatgpt: 47.7s [schema-fixed, improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppression + [REDACTED]) regardless due to her ER+PR+ status.",
+        "Short term 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'hormonal therapy', 'details': 'adjuvant endocrine therapy (" -> "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant endocrine therapy ("
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant endocrine therapy (" -> "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant endocrine therapy ("
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will need adjuvant endocrine therapy with either Tamoxifen or Ovarian Suppression + [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
