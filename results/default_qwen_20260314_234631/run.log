@@ -1320,3 +1320,67 @@ Processing row 31 (7/10)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 12.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "No abnormal areas of FDG uptake to suggest active metastatic" -> "No abnormal areas of FDG uptake to suggest active metastatic"
+  Phase 2 extraction (2 prompts): 16.1s
+  Total extraction: 92.8s
+    Medication_Plan_chatgpt: 36.7s [improved, faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Currently on herceptin. Recently dropped [REDACTED] due to diarrhea, which has resolved.",
+        "Short term side_effects_discussed": "Diarrhea",
+        
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp"
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Currently on herceptin. Recently dropped [REDACTED] due to diarrhea" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe"
+      [G4-FAITH] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> ""
+      [G5-TEMPORAL] hormonal_therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': '', 'Short_term_side_effects_discussed': '', 'Long_term_side_effects"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discussing addition of [REDACTED] in the future.', 'Short term side" -> ""
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe" -> "{'summary': 'Recently dropped [REDACTED] due to diarrhea, which has resolved.', "
+      [POST-KEYS] stripped: {'hormonal_therapy', 'chemotherapy', 'other_treatment'}
+    Medication_Plan: 7.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continuing herceptin. Recently dropped [REDACTED] due to diarrhea, which has resolved."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.0s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on herceptin and [REDACTED]. Recently dropped [REDACTED] due to diarrhea, which has resolved. Will continue herceptin."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Currently on herceptin and [REDACTED]. Recently dropped [REDACTED] due to diarrh" -> "Currently on herceptin. Recently dropped [REDACTED] due to diarrhea, which has r"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
