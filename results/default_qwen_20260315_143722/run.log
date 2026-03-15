@@ -696,3 +696,41 @@ Processing row 49 (4/36)...
       [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D (OSCAL D) -> DENOSUMAB (XGEVA SUBCUT)
   Phase 1 extraction (6 prompts): 83.8s
   Cross-context injected (545 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Imaging from December 2021 shows metastatic disease under good control. Biopsies" -> "Imaging from December 2021 shows metastatic disease under good control."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 10.1s
+  Total extraction: 93.9s
+    Medication_Plan_chatgpt: 29.7s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient has been on tamoxifen and lupron until progression in October 2014. Second line lupron and letrozole started October 2014. Ibrance added January
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['hormonal therapy', 'radiotherapy', 'other treatment']" -> "[{'summary': 'Patient has been on hormonal therapy including tamoxifen and lupro"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'Patient has been on hormonal therapy including" -> "[{'summary': 'Patient has been on hormonal therapy including"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'Patient has been on hormonal therapy including tamoxifen and lupro" -> "[{'summary': 'Patient is currently on hormonal therapy including letrozole and i"
+    Medication_Plan: 9.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medication plans, changes to current medications, supportive " -> "Current medications include tamoxifen, lupron, letrozole, and ibrance. No specif"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
