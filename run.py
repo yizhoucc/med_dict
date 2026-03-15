@@ -740,6 +740,27 @@ def main():
                     if nutr == "None":
                         referral["Nutrition"] = "Nutrition referral"
                         print(f"    [POST-REFERRAL] found in full note: Nutrition")
+                else:
+                    # POST-SPECIALTY: Check if it's a specialty referral
+                    SPECIALTY_KEYWORDS = [
+                        'radiation oncology', 'rad onc',
+                        'surgical oncology', 'surgery consult',
+                        'gynecologic oncology', 'gyn onc', 'gynecologic',
+                        'palliative', 'hospice',
+                        'integrative medicine', 'complementary medicine',
+                        'psychology', 'psychiatry', 'behavioral health',
+                        'dental', 'cardiology', 'pulmonology', 'neurology',
+                        'dermatology', 'urology', 'endocrinology',
+                        'pain management', 'orthopedic', 'orthopaedic',
+                        'plastic surgery', 'reconstructive',
+                        'fertility', 'reproductive',
+                    ]
+                    if any(sk in ml for sk in SPECIALTY_KEYWORDS):
+                        spec = referral.get("Specialty", "None") or "None"
+                        match_short = match[:60].strip()
+                        if match_short.lower() not in spec.lower():
+                            referral["Specialty"] = (spec + ", " + match_short).lstrip("None, ").strip(", ")
+                            print(f"    [POST-SPECIALTY] found in full note: {match_short}")
 
         # POST-GENETICS: Remove mutation findings from Genetics referral field [B70]
         # Prompt says "do NOT list genetic test RESULTS or known mutations" but model
@@ -827,6 +848,90 @@ def main():
                     if new_val != lab_val:
                         lab["lab_plan"] = new_val
                         print(f"    [POST-LAB] cleaned: '{lab_val[:80]}' → '{new_val}'")
+
+        # POST-THERAPY: Whitelist filter for Therapy_plan
+        # Only keep sentences mentioning actual cancer therapy (drugs, regimens, modalities).
+        # Removes contaminants like antiviral drugs (valtrex), antibiotics, etc.
+        therapy = keypoints.get("Therapy_plan", {})
+        if isinstance(therapy, dict):
+            therapy_val = therapy.get("therapy_plan", "") or ""
+            if therapy_val and therapy_val.lower() not in ("none", ""):
+                # Build therapy whitelist: oncology drugs + therapy category keywords
+                THERAPY_CATEGORY_TERMS = {
+                    'chemotherapy', 'chemo', 'radiation', 'radiotherapy', 'xrt', 'rt ',
+                    'hormonal therapy', 'hormone blockade', 'endocrine therapy', 'anti-hormonal',
+                    'aromatase inhibitor', 'ovarian suppression', 'immunotherapy',
+                    'targeted therapy', 'bone therapy', 'adjuvant', 'neoadjuvant',
+                    'clinical trial', 'dose dense', 'dose-dense', 'dd ac',
+                    'ac-t', 'ac-taxol', 'tchp', 'folfox', 'folfiri', 'folfox', 'fec',
+                    'cycle', 'regimen', 'infusion',
+                }
+                therapy_terms = whitelist | THERAPY_CATEGORY_TERMS
+                # Split by sentences and keep only therapy-related ones
+                sentences = [s.strip() for s in re.split(r'(?<=[.;])\s+', therapy_val) if s.strip()]
+                kept = []
+                removed = []
+                for sent in sentences:
+                    sl = sent.lower()
+                    if any(term in sl for term in therapy_terms):
+                        kept.append(sent)
+                    else:
+                        removed.append(sent)
+                if removed and kept:
+                    new_val = " ".join(kept)
+                    therapy["therapy_plan"] = new_val
+                    print(f"    [POST-THERAPY] removed non-therapy: {[s[:50] for s in removed]}")
+                elif removed and not kept:
+                    # All sentences removed — unusual, keep original to be safe
+                    pass
+
+        # POST-IMAGING: Search full note for imaging plans mentioned outside A/P
+        # Similar to POST-PROCEDURE: echocardiogram, DEXA, etc. may be in A/P as standalone items
+        img = keypoints.get("Imaging_Plan", {})
+        if isinstance(img, dict):
+            img_val = img.get("imaging_plan", "") or ""
+            img_lower = (img_val or "").lower()
+            # Search for future imaging patterns in full note
+            IMAGING_TYPES = {
+                'echocardiogram': 'Echocardiogram',
+                'echo ': 'Echocardiogram',
+                'tte': 'Echocardiogram',
+                'dexa': 'DEXA scan',
+                'bone density': 'DEXA scan',
+                'mammogram': 'Mammogram',
+                'ct chest': 'CT Chest',
+                'ct scan': 'CT scan',
+                'ct abdomen': 'CT Abdomen',
+                'brain mri': 'Brain MRI',
+                'mri breast': 'MRI Breast',
+                'pet/ct': 'PET/CT',
+                'pet ct': 'PET/CT',
+                'bone scan': 'Bone scan',
+                'ultrasound': 'Ultrasound',
+            }
+            # Search A/P text for imaging ordered as standalone items or with future tense
+            search_text = assessment_and_plan if assessment_and_plan else note_text
+            for pattern, label in IMAGING_TYPES.items():
+                if label.lower() in img_lower:
+                    continue  # already captured
+                # Look for imaging with future context in A/P
+                regex = (
+                    r'(?:will\s+(?:order|schedule|get|have|obtain|need)|'
+                    r'plan\s+(?:for|to)|scheduled?\s+(?:for|a)|'
+                    r'consider\s+(?:a\s+)?(?:follow\s*up\s+)?|'
+                    r'recommend\s+|due\s+(?:for|in)|pending\s+|'
+                    r'ordered?\s+(?:a\s+)?|need\s+(?:a\s+)?)'
+                    r'[^.;]{0,30}' + re.escape(pattern)
+                    + r'|' + re.escape(pattern) + r'\.?\s*(?:Port|$|\d)'
+                )
+                if re.search(regex, search_text, re.IGNORECASE):
+                    if img_lower in ("no imaging planned.", "no imaging planned", "none", "none planned.", ""):
+                        img["imaging_plan"] = label
+                    else:
+                        img["imaging_plan"] = img_val + ". " + label
+                    img_val = img["imaging_plan"]
+                    img_lower = img_val.lower()
+                    print(f"    [POST-IMAGING] found in note: {label}")
 
         # POST-PROCEDURE: Search full note for procedure plans mentioned outside A/P [B75]
         # Like POST-REFERRAL, procedures (port placement, biopsy) may be in HPI, not A/P
