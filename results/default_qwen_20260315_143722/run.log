@@ -6174,3 +6174,21 @@ Processing row 75 (30/36)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 25.9s
   Total extraction: 132.1s
+    Medication_Plan_chatgpt: 114.3s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days.",
+        "Short term side_effects_discussed": "Neuropathy, persistent but improved due
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy treatment', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy treatment', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'status': 'last given on 0" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on " -> "[{'type': 'chemotherapy', 'medication': 'Trastuzumab', 'summary': '6 mg/kg IV ev"
+    Medication_Plan: 26.8s
+      [EXTRACT] raw={
+    "medication_plan": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days. Try Voltaren gel as needed for pain. Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
