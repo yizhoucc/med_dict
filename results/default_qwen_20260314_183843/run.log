@@ -524,3 +524,13 @@ Processing row 27 (3/10)...
       [G5-FAITH] EMPTIED: ['response_assessment']
       [G5-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Extraction prompts: 718.4s
+    Medication_Plan_chatgpt: 300.9s [schema-fixed, semantic-fixed, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Recommendation for 5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term si
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G4-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': '5 years of anti-estrogen therapy with an aromatase inhibi" -> "[{'hormonal therapy': {'summary': '5 years of anti-estrogen therapy with an arom"
+      [G5-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': {'summary': '5 years of anti-estrogen " -> "[{'hormonal therapy': {'summary': '5 years of anti-estrogen "
+      [G6-TEMPORAL] no changes
