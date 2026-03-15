@@ -885,3 +885,49 @@ Processing row 29 (5/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/201" -> "Creatinine 0.74 (12/11/2016), ***** 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/16/201"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 36.3s
+      [EXTRACT] raw={
+"findings": "Right breast mass (6 x 11 cm) in outer quadrants; no mass in left breast. PET/CT shows large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8) and right axillary lymph nodes (0.6 cm a
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 4.0s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 148.8s
+  Cross-context injected (769 chars)
+    Treatment_Goals: 4.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 8.3s
+  Total extraction: 157.1s
