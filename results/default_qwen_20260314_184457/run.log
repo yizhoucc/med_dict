@@ -278,3 +278,24 @@ Processing row 26 (2/10)...
       [G4-SEMANTIC] current_meds: "letrozole, goserelin" -> "letrozole, goserelin, zolendronic acid, calcium-vitamin D"
       [G5-FAITH] no changes (all supported)
       [POST-MEDS] letrozole, goserelin, zolendronic acid, calcium-vitamin D -> letrozole, goserelin
+    Treatment_Changes: 35.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G4-PROTECT] recent_changes: blocked fill into empty field
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [POST-SUPP] calcium-vitamin D, zolendronic acid -> 
+    Treatment_Goals: 19.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] goals_of_treatment: "palliative" -> ""
+      [G5-FAITH] EMPTIED: ['goals_of_treatment']
+      [G5-REVERT] goals_of_treatment: reverted (G5 emptied all fields)
