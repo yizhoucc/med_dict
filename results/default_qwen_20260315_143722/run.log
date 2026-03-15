@@ -6122,3 +6122,36 @@ Processing row 75 (30/36)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 22.1s [improved]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count 238 (from 06/29/2018), NA 137, K 3.8, Cl 107, CO2 20 (L), BUN 16, GLU 161 (from 06/29/2018), AST 30, A
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count " -> "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count "
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 26.6s
+      [EXTRACT] raw={
+"findings": "Patient has new right upper arm and right posterior knee pain. Recent echo in May 2018 showed EF 60-65%. No evidence of recurrent or metastatic hypermetabolic disease on PET/CT from 04/
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.6s
+      [EXTRACT] raw={
+"current_meds": "Trastuzumab, Pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 21.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Restart Gabapentin 300 mg TID",
+"supportive_meds": "Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day, Gabapentin 300 mg capsule Take 1 capsule (300 m
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day, Gabapentin 300 mg capsule Take 1 capsule (300 mg total) by mouth 3 (three) times daily, Naproxen 500 mg tablet Take 1 tablet (500 mg total) by mouth 2 (two) times daily with meals -> Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day
+  Phase 1 extraction (6 prompts): 106.2s
+  Cross-context injected (905 chars)
