@@ -4806,3 +4806,52 @@ Processing row 68 (23/36)...
       [G4-PROTECT] Specialty: restored safe negative "None"
       [G4-PROTECT] Others: restored safe negative "None"
       [G4-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 4.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: F/U with Dr. [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 115.3s
+  Row 68 total: 220.8s
+  Row 68 saved to progress
+
+Processing row 69 (24/36)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'ER positive', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1575 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.7s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient presents with malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 18.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on the left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on the right side",
+  "Stage_of_Cancer": "Originally Stage IIA on th
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage IIA on the left side, Stage I on the right " -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA on the left side, Stage I on the right "
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
