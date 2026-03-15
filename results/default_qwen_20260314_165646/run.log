@@ -1114,3 +1114,65 @@ Processing row 30 (6/10)...
       [G3-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 92.8s
+    Medication_Plan_chatgpt: 41.0s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting Doxil IV every 28 days on 07/01/2021.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+    
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] other treatment: "{'summary': 'Discussed physical therapy referral for hip pain, declined local st" -> ""
+      [G4-TEMPORAL] chemotherapy: "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short term side_e" -> "{'summary': 'Starting Doxil IV every 28 days on 07/01/2021.', 'Short_term_side_e"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'other_treatment', 'chemotherapy'}
+    Medication_Plan: 8.3s
+      [EXTRACT] raw={
+    "medication_plan": "Cycle 1 Doxil IV every 28 days starting on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 22.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Start Doxil IV every 28 days on 07/01/2021. Repeat Echo in 3 months, next due end of August 2021. Need to do Brain MRI to assess region of increased focal uptake in the right fr
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "None" -> ""
+      [G3-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G3-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 12.9s
+      [EXTRACT] raw={
+    "imaging_plan": "Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT. MRI pelvis to evaluate hip pain. PETCT scan after 3 cycles of Doxil."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
