@@ -631,13 +631,17 @@ def main():
 
         note_text = row["note_text"]
 
+        # Pre-process: replace de-identification markers with explicit [REDACTED]
+        # to prevent model from fabricating values for masked data (e.g., lab values)
+        model_note = note_text.replace("*****", "[REDACTED]")
+
         # Find relevant medical term definitions for this note
         definitions = find_relevant_definitions(note_text, med_dict)
         defs_context = format_definitions_context(definitions)
         if definitions:
             print(f"  Injected {len(definitions)} term definitions: {[d[0] for d in definitions]}")
 
-        # Extract assessment/plan with retries
+        # Extract assessment/plan with retries (use original for regex, model gets processed)
         ap_start = time.time()
         assessment_and_plan = extract_assessment_plan(
             note_text, model, tokenizer, config, chat_tmpl=chat_tmpl
@@ -646,7 +650,8 @@ def main():
 
         # Extract keypoints from full note (two-phase)
         ext_start = time.time()
-        base_cache = build_base_cache(note_text, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+        model_ap = assessment_and_plan.replace("*****", "[REDACTED]") if assessment_and_plan else None
+        base_cache = build_base_cache(model_note, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
 
         # Phase 1: Base fact extraction (independent prompts)
         phase1_prompts = {k: extraction_prompts[k] for k in PHASE1_KEYS if k in extraction_prompts}
@@ -686,7 +691,7 @@ def main():
         # Extract plan keypoints from assessment/plan section
         if assessment_and_plan is not None:
             plan_start = time.time()
-            base_cache = build_base_cache(assessment_and_plan, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+            base_cache = build_base_cache(model_ap, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
             plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
@@ -701,6 +706,40 @@ def main():
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
+
+        # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
+        referral = keypoints.get("Referral", {})
+        if isinstance(referral, dict):
+            # Search for "Ambulatory Referral to X" and "refer to X" in full note
+            ref_patterns = re.findall(
+                r'(?:ambulatory\s+)?referral\s+to\s+([^,.\n\-–—]+)'
+                r'|(?:I\s+will\s+|will\s+)refer\s+(?:her|him|the\s+patient|patient\s+)?to\s+([^,.\n]+)',
+                note_text, re.IGNORECASE
+            )
+            for groups in ref_patterns:
+                match = (groups[0] or groups[1]).strip()
+                if not match:
+                    continue
+                ml = match.lower()
+                # Skip current department and non-referral items
+                if any(skip in ml for skip in ['medical oncology', 'med onc', 'this clinic']):
+                    continue
+                # Categorize and add if missing
+                if 'social work' in ml:
+                    others = referral.get("Others", "None") or "None"
+                    if 'social work' not in others.lower():
+                        referral["Others"] = (others + ", Social work referral").lstrip("None, ").strip(", ")
+                        print(f"    [POST-REFERRAL] found in full note: Social work")
+                elif 'exercise' in ml and 'counseling' in ml:
+                    others = referral.get("Others", "None") or "None"
+                    if 'exercise' not in others.lower():
+                        referral["Others"] = (others + ", Exercise counseling referral").lstrip("None, ").strip(", ")
+                        print(f"    [POST-REFERRAL] found in full note: Exercise counseling")
+                elif 'nutrition' in ml:
+                    nutr = referral.get("Nutrition", "None") or "None"
+                    if nutr == "None":
+                        referral["Nutrition"] = "Nutrition referral"
+                        print(f"    [POST-REFERRAL] found in full note: Nutrition")
 
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})

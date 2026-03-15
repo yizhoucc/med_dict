@@ -190,7 +190,7 @@ Referral: |
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
   "Genetics": "eg, germline testing, family counseling, or 'None'",
   "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
-  "Others": "Physical or occupational therapy, Exercise counseling, Social work, financial counseling, home health, or 'None'",
+  "Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
   "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
   }
 
