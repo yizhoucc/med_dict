@@ -104,3 +104,20 @@ Processing row 35 (1/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 5.9s
   Total extraction: 130.3s
+    Medication_Plan_chatgpt: 59.1s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.",
+        "Short term side_effects_discussed": "Nausea and vomiting due to chemo and anxiety
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.', '" -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.', '"
+      [G4-FAITH] supportive treatment: "{'summary': 'Continue prilosec. Continue valtrex 1g every da" -> "{'summary': 'Continue prilosec. Continue valtrex 1g every da"
+      [G4-FAITH] other treatment: "{'summary': 'Will get doppler to r/o DVT. Discussed possibly" -> "{'summary': 'Will get doppler to r/o DVT. Discussed possibly"
+      [G4-FAITH] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. " -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. "
+      [G4-FAITH] hormonal_therapy: "{'summary': 'Continue zoladex for preservation of ovarian re" -> "{'summary': 'Continue zoladex for preservation of ovarian re"
+      [G4-FAITH] hormonal therapy: "{'summary': 'Continue zoladex for preservation of ovarian re" -> "{'summary': 'Continue zoladex for preservation of ovarian re"
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Continue prilosec. Continue valtrex 1g every day throughout chemo a" -> "{'summary': 'Continue prilosec. Continue valtrex 1g every day throughout chemo a"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa" -> "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth" -> ""
+      [POST-KEYS] stripped: {'supportive treatment', 'chemotherapy', 'hormonal_therapy', 'other treatment'}
