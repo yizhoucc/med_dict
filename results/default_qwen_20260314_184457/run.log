@@ -542,3 +542,30 @@ Processing row 27 (3/10)...
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
       [G6-TEMPORAL] no changes
+    Therapy_plan: 77.6s
+      [EXTRACT] raw={
+    "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DEXA to assess her current bone health. She will take calcium and vitamin D. She will proceed with 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
+    radiotherapy_plan: 38.8s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "I expect that she will proceed with radiation. We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** start."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+    Procedure_Plan: 9.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G5-FAITH] EMPTIED: ['procedure_plan']
+      [G5-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G6-TEMPORAL] skipped (all fields empty/negative)
