@@ -1,0 +1,30 @@
+We suggest you to set `torch_dtype=torch.float16` for better efficiency with AWQ.
+Starting new run: results/default_qwen_20260314_184429
+Loading model...
+Downloading shards:   0%|          | 0/5 [00:00<?, ?it/s]Downloading shards:  80%|████████  | 4/5 [00:09<00:02,  2.49s/it]
+Traceback (most recent call last):
+  File "/home/yc/repo/med_dict/run.py", line 741, in <module>
+    main()
+  File "/home/yc/repo/med_dict/run.py", line 507, in main
+    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 3974, in from_pretrained
+    resolved_archive_file, sharded_metadata = get_checkpoint_shard_files(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/utils/hub.py", line 1098, in get_checkpoint_shard_files
+    cached_filename = cached_file(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/transformers/utils/hub.py", line 403, in cached_file
+    resolved_file = hf_hub_download(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1174, in _hf_hub_download_to_cache_dir
+    with WeakFileLock(lock_path):
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/huggingface_hub/utils/_fixes.py", line 109, in WeakFileLock
+    lock.acquire(timeout=min(log_interval, timeout - elapsed_time) if timeout else log_interval)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/site-packages/filelock/_api.py", line 344, in acquire
+    time.sleep(poll_interval)
+KeyboardInterrupt
