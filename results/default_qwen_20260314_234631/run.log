@@ -55,3 +55,85 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 16.8s
+      [EXTRACT] raw={
+"findings": "Patient has a triple negative breast cancer with a [REDACTED] of 75%, node negative. MRI of the breasts was performed but specific findings are not detailed in the note. Physical exam s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin"
+      [POST-MEDS] amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin 500 mg capsule, cetirizine 10 mg tablet, diphenhydramine 25 mg capsule, levothyroxine 125 mcg tablet -> 
+    Treatment_Changes: 3.2s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 94.0s
+  Cross-context injected (613 chars)
+    Treatment_Goals: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 7.0s
+  Total extraction: 101.0s
+    Medication_Plan_chatgpt: 14.5s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Discussed the role of radiation to decrease the risk of local recurrence.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the risk of local recur" -> "{'summary': 'Discussed the role of radiation to decrease the risk of local recur"
+      [G4-FAITH] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the" -> "{'summary': 'Discussed the role of radiation to decrease the"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy'}
+    Medication_Plan: 5.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.5s
+      [EXTRACT] raw={
+    "therapy_plan": "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. Discussed the role of radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
