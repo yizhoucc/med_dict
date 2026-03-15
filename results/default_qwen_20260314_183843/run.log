@@ -263,3 +263,19 @@ Processing row 26 (2/10)...
       [G5-FAITH] lab_summary: "No labs in note." -> ""
       [G5-FAITH] EMPTIED: ['lab_summary']
       [G5-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 256.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged i
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] findings: "Stable to slightly decreased metabolic activity of osseous m" -> "Stable to slightly decreased metabolic activity of osseous m"
+    Current_Medications: 38.0s [semantic-fixed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole, goserelin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] current_meds: "letrozole, goserelin" -> "letrozole, goserelin, zolendronic acid, calcium-vitamin D"
+      [G5-FAITH] no changes (all supported)
+      [POST-MEDS] letrozole, goserelin, zolendronic acid, calcium-vitamin D -> letrozole, goserelin
