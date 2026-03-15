@@ -475,3 +475,10 @@ Processing row 27 (3/10)...
       [G2-SCHEMA] ok
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
+    Clinical_Findings: 139.3s
+      [EXTRACT] raw={
+"findings": "Pathology results from right lumpectomy show 0.9 cm grade 1 IDC, negative margins, no DCIS, and 0/3 LN+. Imaging findings from breast MRI show a mass (0.9 x 0.7 cm) in the upper inner q
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
