@@ -4293,3 +4293,24 @@ Processing row 66 (21/36)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 19.3s
   Total extraction: 125.9s
+    Medication_Plan_chatgpt: 52.1s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will start Abraxane at a weekly dose for a total of 12 weeks. If her general health condition improves after 3 months, she will receive an additiona
+      [G1-FORMAT] ok, keys=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'Patient will start Abraxane at a weekly dose fo" -> "{'summary': 'Patient will start Abraxane at a weekly dose fo"
+      [G4-FAITH] supportive treatment: "{'summary': 'Patient will receive [REDACTED] injection to pr" -> "{'summary': 'Patient will receive [REDACTED] injection to pr"
+      [G4-FAITH] other treatment: "{'summary': 'Patient is recommended to contact her diabetes " -> "{'summary': 'Patient is recommended to contact her diabetes "
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Patient will receive [REDACTED] injection to prevent neutropenia or" -> "{'summary': 'Patient will receive [REDACTED] injection to prevent neutropenia or"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Patient is recommended to contact her diabetes physician to have he" -> "{'summary': 'Patient is recommended to contact her diabetes physician to have he"
+      [POST-KEYS] stripped: {'chemotherapy', 'supportive treatment', 'other treatment'}
+    Medication_Plan: 17.2s
+      [EXTRACT] raw={
+    "medication_plan": "Start Abraxane at 100 mg/m2 weekly for a total of 12 weeks. Supportive medications include [REDACTED] injection to prevent neutropenia or neutropenic fever and Levaquin post 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
