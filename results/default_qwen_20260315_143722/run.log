@@ -4862,3 +4862,53 @@ Processing row 69 (24/36)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.4s
+      [EXTRACT] raw={
+"findings": "Patient is recovering well from bilateral mastectomies performed in May 2020. Pathology results show the left breast had a 4.4 cm, grade 2 residual invasive lobular carcinoma with 1 pos
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.5s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.1s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "She will restart letrozole which she had previously tolerated.",
+"supportive_meds": "letrozole (FEMARA) 2.5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "letrozole (FEMARA) 2.5 mg tablet" -> "letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+  Phase 1 extraction (6 prompts): 139.1s
+  Cross-context injected (980 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.4s
+  Total extraction: 145.5s
