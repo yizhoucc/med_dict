@@ -91,3 +91,15 @@ Processing row 35 (1/10)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam"
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 7.6s
+  Total extraction: 145.1s
