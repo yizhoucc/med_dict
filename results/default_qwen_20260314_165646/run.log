@@ -519,3 +519,86 @@ Processing row 27 (3/10)...
       [G4-TEMPORAL] other treatment: "{'summary': 'Obtain DEXA to assess current bone health.', 'Short term side_effec" -> "{'summary': 'Obtain DEXA to assess current bone health.', 'Short term_side_effec"
       [G6-SEMANTIC] ok (all values answer their fields)
       [POST-KEYS] stripped: {'radiotherapy', 'bone therapy', 'other treatment', 'hormonal therapy'}
+    Medication_Plan: 9.1s
+      [EXTRACT] raw={
+    "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Calcium and vitamin D supplementation."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Therapy_plan: 13.9s
+      [EXTRACT] raw={
+    "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Proceed with radiation oncology consultation and radiation. Obtain DEXA. Take calcium and vitamin D. Aim to resume 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    radiotherapy_plan: 11.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She will need a DEXA at this time to assess her current bone health. We will plan on meeting again once her radiation course is complete to review DEXA and plan her ***** s
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] radiotherapy_plan: "She will need a DEXA at this time to assess her current bone" -> "I expect that she will proceed with radiation. We will plan "
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Procedure_Plan: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G3-FAITH] EMPTIED: ['procedure_plan']
+      [G3-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Imaging_Plan: 5.6s
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA to assess current bone health"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
+    Lab_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] lab_plan: "No labs planned." -> ""
+      [G3-FAITH] EMPTIED: ['lab_plan']
+      [G3-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G4-TEMPORAL] skipped (all fields empty/negative)
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G3-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G3-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+      [G6-SEMANTIC] skipped (all fields empty/negative)
+    Referral: 10.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "radiation oncology consultation",
+"Others": "None",
+"follow up": "RTC after radiation course is completed"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-FAITH] Others: "None" -> ""
+      [G3-FAITH] Genetics: "None" -> ""
+      [G3-FAITH] Nutrition: "None" -> ""
+      [G3-FAITH] EMPTIED: ['Others', 'Genetics', 'Nutrition']
+      [G3-PROTECT] Others: restored safe negative "None"
+      [G3-PROTECT] Genetics: restored safe negative "None"
+      [G3-PROTECT] Nutrition: restored safe negative "None"
+      [G6-SEMANTIC] ok (all values answer their fields)
