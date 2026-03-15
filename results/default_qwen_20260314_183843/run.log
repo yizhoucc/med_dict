@@ -104,3 +104,15 @@ Processing row 25 (1/10)...
       [G5-FAITH] EMPTIED: ['response_assessment']
       [G5-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Extraction prompts: 523.0s
+    Medication_Plan_chatgpt: 69.1s [semantic-fixed, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Discussed the role of radiation to decrease the risk of local recurrence.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G4-SEMANTIC] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the risk of local recur" -> "{'summary': 'Discussed the role of radiation to decrease the risk of local recur"
+      [G5-FAITH] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the" -> "{'summary': 'Discussed the role of radiation to decrease the"
+      [G6-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy'}
