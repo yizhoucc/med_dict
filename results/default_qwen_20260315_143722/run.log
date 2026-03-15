@@ -7206,3 +7206,131 @@ Processing row 80 (35/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.9s
   Total extraction: 63.5s
+    Medication_Plan_chatgpt: 35.8s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to start after radiation.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+    "radiotherap
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'radiotherapy', 'details': 'The patient has been referred to" -> "[{'treatment_type': 'radiotherapy', 'summary': 'The patient has been referred to"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 5.7s
+      [EXTRACT] raw={
+    "medication_plan": "An [REDACTED] will be recommended after radiation."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.5s
+      [EXTRACT] raw={
+    "therapy_plan": "Discussed the role of radiation to decrease the risk of local recurrence. She has been referred to a radiation oncologist. Recommended an [REDACTED] after radiation to decrease 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. She has been referred to a radiation oncologist."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 3.6s
+      [EXTRACT] raw={
+    "imaging_plan": "Baseline dexa."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncologist",
+"Others": "None",
+"follow up": "RTC post radiation to start hormone blockade"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 3.7s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: post radiation to start hormone blockade"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 87.3s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+  Row 80 total: 150.8s
+  Row 80 saved to progress
+
+Processing row 81 (36/36)...
+  Injected 4 term definitions: ['estrogen receptor', 'ER positive', 'PR positive', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment & Plan:'
+  Regex extraction succeeded (8675 chars)
+  A/P extraction: 0.0s
