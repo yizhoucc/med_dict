@@ -5125,3 +5125,20 @@ Processing row 70 (25/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 6.2s
   Total extraction: 78.4s
+    Medication_Plan_chatgpt: 167.1s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient has already started on neo-adjuvant AC/taxol chemotherapy. This consists of 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor su
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'neo-adjuvant AC/taxol chemotherapy consist" -> "[{'type': 'chemotherapy', 'summary': 'neo-adjuvant AC/taxol chemotherapy consist"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'neo-adjuvant AC/taxol " -> "[{'type': 'chemotherapy', 'summary': 'neo-adjuvant AC/taxol "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'neo-adjuvant AC/taxol chemotherapy consist" -> "[{'type': 'chemotherapy', 'summary': 'neo-adjuvant AC/taxol chemotherapy consist"
+    Medication_Plan: 37.9s
+      [EXTRACT] raw={
+    "medication_plan": "Neo-adjuvant AC/taxol chemotherapy consisting of 4 cycles of AC at 60/600 mg/m2 given every 2 weeks with growth factor support followed by taxol given either in 4 doses of 17
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
