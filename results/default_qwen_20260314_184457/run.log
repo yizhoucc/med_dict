@@ -490,3 +490,36 @@ Processing row 27 (3/10)...
       [G4-SEMANTIC] skipped (all fields empty/negative)
       [G5-FAITH] current_meds: "" -> "acetaminophen, amLODIPine, artificial tears, ascorbic acid, "
       [POST-MEDS] acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC MULTIVITAMINS, biotin, busPIRone, calcium citrate-vitamin D, diclofenac, docusate sodium, DULoxetine, ELDERBERRY, fluticasone propionate, gabapentin, lamoTRIgine, LORazepam, losartan, lurasidone, omeprazole, prazosin, pregabalin, rosuvastatin, TURMERIC, UNABLE TO FIND, zinc gluconate -> 
+    Treatment_Changes: 53.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium citrate-vitamin D, DULoxetine, pregabalin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G4-PROTECT] recent_changes: blocked fill into empty field
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [POST-SUPP] calcium citrate-vitamin D, DULoxetine, pregabalin -> 
+    Treatment_Goals: 25.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G4-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] goals_of_treatment: "curative" -> ""
+      [G5-FAITH] EMPTIED: ['goals_of_treatment']
+      [G5-REVERT] goals_of_treatment: reverted (G5 emptied all fields)
+    Response_Assessment: 21.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G5-FAITH] EMPTIED: ['response_assessment']
+      [G5-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Extraction prompts: 705.7s
