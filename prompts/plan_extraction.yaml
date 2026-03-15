@@ -90,6 +90,9 @@ Procedure_Plan: |
   - "will proceed with radiation" → this is RADIOTHERAPY, not a procedure
   - "TTE" or "echocardiogram" → this is IMAGING, not a procedure
   - "DEXA scan" → this is IMAGING, not a procedure
+  - "chemotherapy", "TCHP", "FOLFOX", "AC-T" → these are MEDICATIONS/SYSTEMIC THERAPY, not procedures
+  - "start letrozole", "continue tamoxifen" → these are MEDICATION plans, not procedures
+  - "immunotherapy", "targeted therapy" → these are MEDICATIONS, not procedures
   If no future procedures are planned, say "No procedures planned."
   Respond *only* with a JSON object using this exact schema:
   {

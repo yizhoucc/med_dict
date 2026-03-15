@@ -741,6 +741,54 @@ def main():
                         referral["Nutrition"] = "Nutrition referral"
                         print(f"    [POST-REFERRAL] found in full note: Nutrition")
 
+        # POST-GENETICS: Remove mutation findings from Genetics referral field [B70]
+        # Prompt says "do NOT list genetic test RESULTS or known mutations" but model
+        # sometimes still puts "BRCA1 mutation" etc. in the Genetics referral field.
+        if isinstance(referral, dict):
+            gen_val = referral.get("Genetics", "None") or "None"
+            if gen_val != "None":
+                gen_lower = gen_val.lower()
+                # If it mentions mutation/carrier/positive/negative but NOT refer/consult → it's a finding, not a referral
+                has_finding = any(w in gen_lower for w in [
+                    "mutation", "carrier", "positive", "negative", "variant",
+                    "pathogenic", "wild type", "wild-type", "detected", "identified",
+                ])
+                has_referral = any(w in gen_lower for w in [
+                    "refer", "consult", "counseling", "counsel", "evaluation",
+                    "recommend", "genetic testing", "send for",
+                ])
+                if has_finding and not has_referral:
+                    referral["Genetics"] = "None"
+                    print(f"    [POST-GENETICS] cleared finding from referral: '{gen_val}'")
+
+        # POST-PROCEDURE: Search full note for procedure plans mentioned outside A/P [B75]
+        # Like POST-REFERRAL, procedures (port placement, biopsy) may be in HPI, not A/P
+        proc = keypoints.get("Procedure_Plan", {})
+        if isinstance(proc, dict):
+            proc_val = proc.get("procedure_plan", "")
+            proc_lower = (proc_val or "").lower()
+            # Search for future procedure patterns in full note
+            proc_patterns = re.findall(
+                r'(?:plan\s+for|scheduled\s+for|will\s+(?:have|undergo|schedule|get|need)|'
+                r'pending|to\s+be\s+scheduled|arrange)\s+'
+                r'((?:port|mediport|chemo\s*port)\s+(?:placement|insertion|removal)'
+                r'|(?:core|needle|incisional|excisional|skin|punch)?\s*biopsy'
+                r'|lumbar\s+puncture|bone\s+marrow\s+(?:biopsy|aspirat)'
+                r'|surgery|mastectomy|lumpectomy|colectomy|resection'
+                r'|sentinel\s+(?:lymph\s+)?node\s+biopsy)',
+                note_text, re.IGNORECASE
+            )
+            for match in proc_patterns:
+                match_clean = match.strip()
+                if match_clean and match_clean.lower() not in proc_lower:
+                    if proc_lower in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
+                        proc["procedure_plan"] = match_clean
+                    else:
+                        proc["procedure_plan"] = proc_val + ", " + match_clean
+                    proc_val = proc["procedure_plan"]
+                    proc_lower = proc_val.lower()
+                    print(f"    [POST-PROCEDURE] found in full note: '{match_clean}'")
+
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})
         adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""

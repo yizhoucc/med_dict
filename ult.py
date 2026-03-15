@@ -927,6 +927,25 @@ RADIOTHERAPY_TERMS = [
     "chest wall rt", "whole brain radiation", "sbrt", "imrt",
     "proton therapy", "brachytherapy",
 ]
+# Chemotherapy / systemic therapy terms — these are medications, NOT procedures [B68]
+SYSTEMIC_THERAPY_TERMS = [
+    "chemotherapy", "chemo ", "chemo,", "immunotherapy", "hormonal therapy",
+    "hormone therapy", "targeted therapy", "endocrine therapy",
+    # Common chemo regimens
+    "folfox", "folfiri", "folfirinox", "tchp", "ac-t", "tc ",
+    "taxol", "adriamycin", "carboplatin", "cisplatin", "paclitaxel",
+    "docetaxel", "doxorubicin", "cyclophosphamide", "gemcitabine",
+    "irinotecan", "capecitabine", "xeloda", "eribulin",
+    # Targeted / hormonal
+    "herceptin", "trastuzumab", "pertuzumab", "perjeta",
+    "tamoxifen", "letrozole", "anastrozole", "exemestane",
+    "palbociclib", "ribociclib", "abemaciclib",
+    "pembrolizumab", "keytruda", "nivolumab", "opdivo",
+    "olaparib", "talazoparib",
+    # Generic patterns
+    "cycle ", "cycles of", "systemic therapy", "anti-her2",
+    "continue treatment", "start treatment", "begin treatment",
+]
 # Short "RT" checked with word boundary to avoid matching "port", "report", etc.
 _RT_WORD_RE = re.compile(r'\brt\b', re.IGNORECASE)
 
@@ -935,7 +954,7 @@ def _is_radiotherapy(text_lower):
     return any(t in text_lower for t in RADIOTHERAPY_TERMS) or bool(_RT_WORD_RE.search(text_lower))
 
 def filter_procedure_plan(parsed, gate_log):
-    """Remove imaging and radiotherapy items from procedure_plan."""
+    """Remove imaging, radiotherapy, and systemic therapy items from procedure_plan."""
     val = parsed.get("procedure_plan", "")
     if not val or not isinstance(val, str):
         return parsed
@@ -950,7 +969,8 @@ def filter_procedure_plan(parsed, gate_log):
         item_lower = item.lower()
         is_imaging = any(t in item_lower for t in IMAGING_TERMS)
         is_rt = _is_radiotherapy(item_lower)
-        if is_imaging or is_rt:
+        is_systemic = any(t in item_lower for t in SYSTEMIC_THERAPY_TERMS)
+        if is_imaging or is_rt or is_systemic:
             removed.append(item)
         else:
             kept.append(item)
