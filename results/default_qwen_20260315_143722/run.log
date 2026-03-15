@@ -99,3 +99,20 @@ Processing row 46 (1/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.2s
   Total extraction: 67.9s
+    Medication_Plan_chatgpt: 51.1s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Discussed the use of tamoxifen for slightly decreasing the risk of current ductal carcinoma in-situ and decreasing the risk of new primary invasive brea
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'radiotherapy', 'details': 'recommended to decrease the risk" -> "[{'treatment_type': 'radiotherapy', 'summary': 'recommended to decrease the risk"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'radiotherapy', 'summary': 'recommended " -> "[{'treatment_type': 'radiotherapy', 'summary': 'recommended "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'radiotherapy', 'summary': 'recommended to decrease the risk" -> "[{'treatment_type': 'radiotherapy', 'summary': 'recommended to decrease the risk"
+    Medication_Plan: 16.8s
+      [EXTRACT] raw={
+    "medication_plan": "A course of radiation therapy is recommended to decrease the risk of recurrence of ductal carcinoma in-situ. Tamoxifen prophylaxis is also worth considering to decrease the r
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
