@@ -902,3 +902,50 @@ Processing row 39 (5/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 28.0s
+      [EXTRACT] raw={
+"findings": "Patient has a 2.3 cm G1 IDC with adjacent nuclear G1 DCIS. Margins are widely negative. One sentinel lymph node (SLN) with 0.04 cm disease by direct extension of adjacent invasive cance
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.4s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.0s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Rx for letrozole given",
+"supportive_meds": "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule, letrozole (FEMARA) 2.5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule, le" -> "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule -> ondansetron (ZOFRAN) 4 mg tablet
+  Phase 1 extraction (6 prompts): 71.8s
+  Cross-context injected (843 chars)
+    Treatment_Goals: 3.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 77.8s
