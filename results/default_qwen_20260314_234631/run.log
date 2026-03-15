@@ -1920,3 +1920,102 @@ Processing row 34 (10/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 25.8s
+      [EXTRACT] raw={
+"findings": "Pathology from right breast lumpectomy: invasive lobular carcinoma, 1.2 cm, grade 2, negative margins, no lymphatic/vascular invasion, 0/4 LN involved, including 0/2 SLN, AJCC Anatomic 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "anastrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "anastrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 60.3s
+  Cross-context injected (751 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 7.8s
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Last mammogram on 04/15/2019 showed no signs of malignancy."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 11.5s
+  Total extraction: 71.7s
+    Medication_Plan_chatgpt: 16.4s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "continue on anastrozole without significant side effect",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": "
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "anastrozole" -> "{'summary': 'Ms [REDACTED] is continuing on anastrozole without significant side"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'Ms [REDACTED] is continuing on anastrozole with" -> "{'summary': 'Ms [REDACTED] is continuing on anastrozole with"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 5.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on anastrozole without specified dose or frequency."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.2s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "continue anastrozole"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "continue anastrozole" -> "continue anastrozole, scheduled for a bilateral diagnostic mammogram with tomosy"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
