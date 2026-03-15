@@ -181,3 +181,50 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
+    Referral: 44.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Genetics consult",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC at her post op visit to review final pathology report and make recommendations"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] Others: "None" -> ""
+      [G5-FAITH] Specialty: "None" -> ""
+      [G5-FAITH] Nutrition: "None" -> ""
+      [G5-FAITH] EMPTIED: ['Others', 'Specialty', 'Nutrition']
+      [G5-PROTECT] Others: restored safe negative "None"
+      [G5-PROTECT] Specialty: restored safe negative "None"
+      [G5-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 22.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after post op visit to review final pathology report and make recommendations"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+    Advance_care_planning: 8.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G5-FAITH] EMPTIED: ['Advance care']
+      [G5-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 344.8s
+    [POST-ADV] patched from full note: ['Full code']
+  Row 25 total: 882.5s
+  Row 25 saved to progress
+
+Processing row 26 (2/10)...
+  Injected 3 term definitions: ['progressive disease', 'stable disease', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (831 chars)
+  A/P extraction: 0.0s
