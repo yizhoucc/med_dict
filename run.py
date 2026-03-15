@@ -710,10 +710,10 @@ def main():
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
         if isinstance(referral, dict):
-            # Search for "Ambulatory Referral to X" and "refer to X" in full note
+            # Search for "Ambulatory Referral to X", "refer to X", "Refer to X" in full note
             ref_patterns = re.findall(
                 r'(?:ambulatory\s+)?referral\s+to\s+([^,.\n\-–—]+)'
-                r'|(?:I\s+will\s+|will\s+)refer\s+(?:her|him|the\s+patient|patient\s+)?to\s+([^,.\n]+)',
+                r'|(?:I\s+will\s+|will\s+)?[Rr]efer\s+(?:her|him|the\s+patient|patient\s+)?to\s+([^,.\n]+)',
                 note_text, re.IGNORECASE
             )
             for groups in ref_patterns:

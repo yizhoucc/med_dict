@@ -26,8 +26,38 @@
 | `default_qwen_20260314_165646` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7a code (gate reorder + v6.2 fixes) | 25-34 | 2026-03-14 | **v7a**: gate 顺序优化 + 9 bug fixes。33.2min |
 | `default_qwen_20260314_194226` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7abc code (5-gate + 2-phase) | 25-34 | 2026-03-14 | **v7abc**: G3/G4 合并→G3-IMPROVE + 跨 prompt 信息传递。31.3min (v7a 33.2min) |
 | (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v8 code (v7abc + prompt fixes) | 25-34 | 2026-03-14 | **v8**: 修 v7abc 审查发现的 6 个 P2 问题 |
+| `default_qwen_20260315_095522` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v9b code (*****→[REDACTED] + POST-REFERRAL) | 25-34 | 2026-03-15 | **v9b batch1**: 10 rows。P0=0, P1=?, P2=? |
+| `default_qwen_20260315_095522` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v9b code | 36-45 | 2026-03-15 | **v9b batch2**: P0=0, P1=13, P2=8。33.3min |
 
 ## Prompt 版本变更记录
+
+### v10 (2026-03-15): v9b batch2 审查修复（6 个 P1 修复）
+
+**变更原因：** v9b batch2 (rows 36-45) 审查发现 P0=0, P1=13, P2=8。13 个 P1 来自 9 个系统性问题，本次修复其中 6 个。
+
+**Prompt 变更：**
+
+| # | 修复 | 文件 | Bug | 说明 |
+|---|------|------|-----|------|
+| 1 | radiotherapy_plan 时态区分 | plan_extraction.yaml | B77/B79 | 加 PAST vs CURRENT/FUTURE 区分规则 + 过去放疗负例 |
+| 2 | HER2 从 "triple negative" 推断 | extraction.yaml | B72/B73 | "triple negative" ANYWHERE → HER2=negative；[REDACTED] negative → HER2 negative |
+| 3 | Nutrition 假阳性负例 | plan_extraction.yaml | B67/B69 | "I recommend anti inflammatory/mediterranean diet" 等明确列为非 referral |
+| 4 | Genetics referral ≠ 发现 | plan_extraction.yaml | B70/B74 | 明确 "BRCA1 mutation"/"ATM carrier" 是 FINDINGS 不是 referrals |
+| 5 | response_assessment 放疗后 | extraction.yaml | B76 | 完成放疗 = HAS received treatment，不写 "Not yet on treatment" |
+
+**代码变更：**
+
+| # | 修复 | 文件 | Bug | 说明 |
+|---|------|------|-----|------|
+| 6 | radiotherapy_plan 加入 PLAN_KEYS | ult.py | B77/B79 | G5 TEMPORAL 现在对 radiotherapy_plan 运行时态过滤 |
+| 7 | POST-REFERRAL regex 扩展 | run.py | B71 | 匹配 "Refer to X"（祈使句）格式，不仅限 "will refer" |
+
+**未修复的 Bug（需要更复杂方案）：**
+- B68 (Procedure 含化疗): prompt 已有规则但模型忽略，需考虑后处理
+- B75 (Port placement 遗漏): 在 HPI 段非 A/P 段，plan extraction 只看 A/P
+- B80 (Others referral 垃圾输出): G3 IMPROVE 应捕获但未生效，需调查
+
+**基线：** v9b (`default_qwen_20260315_095522`)
 
 ### v8 (2026-03-14): v7abc 审查修复（6 个 P2 prompt 改进）
 
@@ -1436,3 +1466,199 @@ Qwen 32B (6-gate, split+CoT)          平均 ~1.2 错误/行
 4. **P1 — B45 goals "adjuvant"→"curative"**: 后处理规则：if Stage I-III + no distant met + adjuvant therapy → "curative"
 5. **P1 — B54 "Patient not taking"**: POST-SUPP 后处理检测 "not taking" 标记
 6. **P2 — B48 Distant Metastasis**: G2 schema 验证强化，确保所有必需 key 存在
+
+---
+
+## Row-by-Row Review: v9b Batch 2 (`default_qwen_20260315_095522`)
+
+**模型**: Qwen2.5-32B-AWQ (4bit) | **Pipeline**: V2, 5-gate, v9b code | **Rows**: 36-45 (coral_idx 175-184) | **日期**: 2026-03-15 | **耗时**: 33.3 min
+
+> 这些是新行，无之前 tracking 历史。v9b 改动：`*****`→`[REDACTED]` 预处理 + POST-REFERRAL regex。
+
+### Row 36 (coral_idx=175) — 27岁女性, pT3N0 混合导管/黏液癌, Abraxane cycle 8
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER+/PR+/HER2- grade III mixed ductal and mucinous | ✅ | |
+| Stage | pT3N0 | ✅ | |
+| current_meds | abraxane, zoladex | ⚠️ P2 | 遗漏 tamoxifen（HPI 有 "she ***** tamoxifen" 但 A/P 不含 tamoxifen。A/P 优先策略的副作用） |
+| supportive_meds | Zofran, Compazine | ⚠️ P2 | valtrex（化疗期抗病毒ppx）未被支持药物白名单覆盖 |
+| response_assessment | "no evidence of disease recurrence on imaging and exam" | ⚠️ P2 | PET/CT 显示术后改变非正式评估。cycle 8/12 无明确 response 评估 |
+| Procedure_Plan | "will get doppler to r/o DVT" | ⚠️ P2 | Doppler 是影像不是手术（已在 Imaging_Plan 正确收录） |
+| Referral Specialty | Radiation oncology referral | ✅ | |
+| goals | curative | ✅ | |
+| Advance care | Not discussed | ✅ | |
+
+**Bug IDs**: B65 (current_meds tamoxifen 遗漏, P2), B66 (Procedure_Plan 含影像, P2)
+
+---
+
+### Row 37 (coral_idx=176) — 61岁女性, Stage IIA TNBC, 视频会诊, 讨论辅助化疗
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER-/PR-/HER2- IDC | ✅ | |
+| Stage | Stage IIA | ✅ | |
+| in-person | Televisit | ✅ | |
+| current_meds | "" | ✅ | |
+| **Nutrition** | "I recommend an anti inflammatory/mediterranean diet" | **❌ P1** | 假阳性：饮食建议 ≠ 营养转诊。Prompt 已有此规则但模型忽略 |
+| **Procedure_Plan** | "adjuvant chemotherapy with AC followed by Taxol" | **❌ P1** | 化疗 ≠ 手术操作 |
+| goals | curative | ✅ | |
+| Advance care | Full code | ✅ | |
+
+**Bug IDs**: B67 (Nutrition 假阳性—饮食建议, P1), B68 (Procedure 含化疗, P1)
+
+---
+
+### Row 38 (coral_idx=177) — 43岁女性, BRCA1, Stage IIB, ER-/PR weak+/HER2-
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER-/PR+/HER2- IDC | ✅ | |
+| Stage | Stage IIB | ✅ | |
+| **Nutrition** | "I recommend an anti inflammatory diet..." | **❌ P1** | 同 B67 |
+| **Genetics referral** | "BRCA 1 mutation" | **❌ P1** | 诊断结果 ≠ 外转 referral |
+| **Others referral** | "None" | **❌ P1** | 原文 Psychologic 部分有 "Refer to social worker." POST-REFERRAL regex 未匹配（需 "will refer" 格式） |
+| Procedure_Plan | bilateral mastectomy Jan 31 | ✅ | |
+| Advance care | full code | ✅ | |
+
+**Bug IDs**: B69 (Nutrition 假阳性, P1), B70 (Genetics=诊断结果非referral, P1), B71 (Social work referral 遗漏, P1)
+
+---
+
+### Row 39 (coral_idx=178) — 27岁女性, T2N1 TNBC, 新辅助化疗讨论
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| **Type_of_Cancer** | "ER/PR/[REDACTED] negative, HER2: not tested grade 3 IDC" | **❌ P1** | A/P 说 "triple negative"，应推断 HER2=negative |
+| Stage | T2N1 | ✅ | |
+| Procedure | Port placement, screening biopsies | ✅ | |
+| Genetic_Testing_Plan | "[REDACTED] on genetic testing results" | ⚠️ P2 | 被 [REDACTED] 遮掩，语义不完整 |
+| goals | curative | ✅ | |
+
+**Bug IDs**: B72 (HER2 "not tested" 应从 "triple negative" 推断 negative, P1)
+
+---
+
+### Row 40 (coral_idx=179) — 62岁女性, Stage 2 ER+/HER2- IDC, MS 患者
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER 95, PR 5, HER2 2+ FISH negative (1.2) G1 IDC | ✅ 优秀 | |
+| Stage | Stage II | ✅ | |
+| current_meds | letrozole | ✅ | |
+| Others referral | PT referral | ✅ | |
+| Imaging | DEXA | ✅ | |
+| goals | curative | ✅ | |
+
+**Bug IDs**: 无。✅ 优秀样本
+
+---
+
+### Row 41 (coral_idx=180) — 32岁女性, ATM 突变, ER+/PR weakly+, s/p bilateral mastectomy
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| **Type_of_Cancer** | "ER+/PR weakly+/HER2: not tested IDC" | **❌ P1** | A/P 写 "***** negative" = HER2 negative |
+| **Stage** | "" (空) | ⚠️ P2 | 3cm + 1/3 SLN micromet = 至少 Stage IIA |
+| **Genetics referral** | "ATM mutation carrier" | **❌ P1** | 同 B70：诊断结果非 referral |
+| **Procedure_Plan** | "No procedures planned." | **❌ P1** | 原文："She is scheduled for a port placement later this week" |
+| current_meds | "" | ✅ | |
+| goals | curative | ✅ | |
+
+**Bug IDs**: B73 (HER2 "not tested" 应为 negative, P1), B74 (Genetics=诊断结果, P1), B75 (Port placement 遗漏, P1)
+
+---
+
+### Row 42 (coral_idx=181) — 41岁女性, 多灶 IDC, PR 95%, 放疗后开始 tamoxifen
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | "PR+ (95%) and HER2- IDC" | ⚠️ P2 | ER 缺失（被 ***** 遮掩） |
+| Stage | "Approximately Stage I-II" | ✅ | |
+| **response_assessment** | "Not yet on treatment" | **❌ P1** | 刚完成放疗！不是 "not yet on treatment" |
+| Medication_Plan | tamoxifen 5 year course | ✅ | |
+| Imaging | Routine diagnostic mammogram | ✅ | |
+
+**Bug IDs**: B76 (response "not yet" 但刚完成放疗, P1)
+
+---
+
+### Row 43 (coral_idx=182) — 38岁女性, 第二原发 Stage I TNBC, 计划 taxol+carboplatin
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER-/PR-/HER2- IDC | ✅ | |
+| Stage | Stage I (second primary) | ✅ | |
+| **radiotherapy_plan** | "followed by taxol and radiation." | **❌ P1** | 过去治疗！"at age 27 treated with lumpectomy, ***** followed by taxol and radiation" |
+| **Lab_Plan** | "No labs planned." | ⚠️ P2 | A/P: "RTC 2 days prior to cycle...draw" = 实验室检查 |
+| Advance care | Full code | ✅ | |
+
+**Bug IDs**: B77 (radiotherapy_plan 含过去放疗, P1), B78 (Lab_Plan 遗漏, P2)
+
+---
+
+### Row 44 (coral_idx=183) — 33岁女性, ER+/PR+/HER2-, BRCA1, 术后残余, 计划放疗
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| Type_of_Cancer | ER+/PR+/HER2- node+ with residual DCIS | ✅ | |
+| Stage | "Not mentioned in note" | ⚠️ P2 | 确实无显式分期 |
+| Nutrition | Follow up with nutrition on 11/30/18 | ✅ | 真正的营养随诊 |
+| Specialty | Radiation oncology consult | ✅ | |
+| Others | Physical therapy referral | ✅ | |
+| Procedure | BSO eventually | ✅ | |
+| radiotherapy_plan | clinical trial 3 vs 5 weeks | ✅ | |
+| goals | curative | ✅ | |
+
+**Bug IDs**: 无实质问题。✅ 优秀样本
+
+---
+
+### Row 45 (coral_idx=184) — 37岁女性, 转移性 TNBC, 第二意见, 视频会诊
+
+| 字段 | v9b 输出 | 判定 | 说明 |
+|------|---------|------|------|
+| second opinion | yes | ✅ | |
+| Stage | Originally Stage IIIB, now metastatic (Stage IV) | ✅ | |
+| Metastasis | Yes (lung + right hilar LN) | ✅ | |
+| goals | palliative | ✅ | |
+| Advance care | full code | ✅ | |
+| **radiotherapy_plan** | "She had adjuvant radiation" | **❌ P1** | 过去放疗！同 B77 |
+| **Others referral** | (大段治疗摘要) | **❌ P1** | 模型把整个治疗计划塞进 Others 字段 |
+| Nutrition | None | ✅ | 同一医生模板，这次正确（与 Row 37/38 不一致） |
+
+**Bug IDs**: B79 (radiotherapy_plan 含过去放疗, P1), B80 (Others referral 垃圾输出, P1)
+
+---
+
+### v9b Batch 2 整体质量评估
+
+| Row | coral_idx | P0 | P1 | P2 | 质量 |
+|-----|-----------|----|----|----|----|
+| 36 | 175 | 0 | 0 | 3 (B65, B66, response) | **良好** |
+| 37 | 176 | 0 | 2 (B67, B68) | 0 | **中等** |
+| 38 | 177 | 0 | 3 (B69, B70, B71) | 0 | **差** |
+| 39 | 178 | 0 | 1 (B72) | 1 | **中等** |
+| 40 | 179 | 0 | 0 | 0 | **优秀** |
+| 41 | 180 | 0 | 3 (B73, B74, B75) | 1 | **差** |
+| 42 | 181 | 0 | 1 (B76) | 1 | **中等** |
+| 43 | 182 | 0 | 1 (B77) | 1 (B78) | **中等** |
+| 44 | 183 | 0 | 0 | 1 | **优秀** |
+| 45 | 184 | 0 | 2 (B79, B80) | 0 | **中等** |
+
+**总计：P0 = 0，P1 = 13，P2 = 8**
+
+### v9b Batch 2 系统性问题汇总
+
+| 编号 | 问题 | 严重度 | 出现行 | 修复方向 |
+|------|------|--------|--------|---------|
+| B67/B69 | Nutrition 假阳性（饮食建议 ≠ referral） | P1 | 37, 38 (45正确) | Referral prompt 加强负例 |
+| B70/B74 | Genetics referral 放诊断结果（BRCA1/ATM mutation） | P1 | 38, 41 | Referral prompt 明确"finding ≠ referral" |
+| B72/B73 | HER2 "not tested" 应从 "triple negative"/"***** negative" 推断 | P1 | 39, 41 | Cancer_Diagnosis prompt 加推断规则 |
+| B77/B79 | radiotherapy_plan 纳入过去放疗 | P1 | 43, 45 | radiotherapy prompt + G5 TEMPORAL 强化 |
+| B71 | Social work referral 遗漏（"Refer to social worker." 格式） | P1 | 38 | POST-REFERRAL regex 扩展 |
+| B76 | response "not yet on treatment" 但刚完成放疗 | P1 | 42 | Response prompt 加规则 |
+| B68 | Procedure_Plan 含化疗 | P1 | 37 | Procedure prompt 已有规则但模型忽略 |
+| B75 | Port placement 遗漏（在 HPI 段非 A/P 段） | P1 | 41 | Procedure prompt 搜索范围扩展 |
+| B80 | Others referral 垃圾输出 | P1 | 45 | G3 IMPROVE 应捕获语义偏差 |

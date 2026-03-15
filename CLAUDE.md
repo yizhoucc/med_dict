@@ -142,3 +142,17 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - results.txt 保持当前自定义格式，不改为 JSON
 - prompt 中的 JSON schema 必须是合法 JSON（注意逗号）
 - `exp/` 中的 yaml 是实验配置入口，通过 `extraction.pipeline` 切换 v1/v2
+
+## 工作流程规则
+
+### 生成结果后的质量审查（每次必做）
+每次 pipeline 在 WSL 上跑完并下载结果后，必须对每个 sample 逐行做以下审查：
+1. 对照**原文** (note_text) 和**生成结果** (keypoints)
+2. 结合对应的 **prompt 规则**（extraction.yaml / plan_extraction.yaml）检查是否遵守
+3. 参考 **tracking.md** 中该行的历史问题，检查之前的问题是否已修复
+4. 检查是否引入了**新问题**
+5. 将发现的问题按 P0/P1/P2 分类，汇总反复出现的模式
+6. 将审查结果更新到 tracking.md
+
+### 远程任务完成通知
+当 WSL 上的 pipeline 运行完成后，立即通过 Bark 通知用户，并主动开始下载结果+审查流程。

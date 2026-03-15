@@ -54,6 +54,14 @@ radiotherapy_plan: |
   it is being considered, recommended, or may be used, even if no explicit
   start/continue/plan keywords are present.
   Include referrals to radiation oncology (Rad Onc) as a radiotherapy-related plan.
+
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - PAST (DO NOT include): "had radiation in 2018", "s/p radiation", "completed radiation", "treated with lumpectomy followed by radiation", "had adjuvant radiation", "status post radiation"
+  - CURRENT (include): "currently receiving radiation", "on radiation therapy"
+  - FUTURE (include): "will start radiation", "radiation planned", "discussed radiation", "Rad Onc consult", "considering radiation"
+  If a radiotherapy statement uses past tense or describes completed/historical treatment, it is PAST — do NOT include it.
+  If the only radiotherapy mentioned is past/completed, write "None".
+
   Respond *only* with a JSON object using this exact schema:
   {
       "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
@@ -184,11 +192,18 @@ Referral: |
   - If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
 
   If no referral is mentioned for a category, set its value to "None".
-  For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral. Supplement recommendations (e.g., "take calcium and vitamin D", "continue vitamin D daily") are also NOT nutrition referrals — they are standard medical advice.
+  For Nutrition: only include referrals to a nutritionist or dietitian (e.g., "nutrition consult", "refer to nutritionist", "follow up with nutrition on [date]").
+  The following are NOT nutrition referrals — they are general lifestyle advice from the oncologist:
+  - "I recommend an anti inflammatory/mediterranean diet" → NOT a referral
+  - "I recommend a diabetes risk reducing diet" → NOT a referral
+  - "eat calcium-rich food", "limit alcohol", "exercise" → NOT a referral
+  - "take calcium and vitamin D", "continue vitamin D daily" → NOT a referral (supplement advice)
+  - "discussed lifestyle modifications" → NOT a referral
+  If the oncologist gives diet advice without referring to a nutritionist/dietitian, write "None".
   Respond *only* with a JSON object using this exact schema:
   {
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
-  "Genetics": "eg, germline testing, family counseling, or 'None'",
+  "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g., 'refer to genetics', 'genetics consult recommended'). Do NOT list genetic test RESULTS or known mutations here (e.g., 'BRCA1 mutation', 'ATM mutation carrier', 'genetic testing negative' are FINDINGS, not referrals). Write 'None' if no genetics referral is planned.",
   "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
   "Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
   "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."

@@ -885,7 +885,7 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 
 # --- V2 Pipeline constants ---
 PLAN_KEYS = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
-             'Medication_Plan', 'Medication_Plan_chatgpt'}
+             'Medication_Plan', 'Medication_Plan_chatgpt', 'radiotherapy_plan'}
 
 # Patterns that G3 should NOT empty — these are valid "nothing here" answers
 SAFE_NEGATIVE_PATTERNS = [

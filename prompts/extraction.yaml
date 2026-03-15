@@ -41,6 +41,8 @@ Cancer_Diagnosis: |
   - DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly stated.
   - IMPORTANT: IHC 2+ with FISH NEGATIVE = HER2 negative. Do NOT write HER2+ for IHC 2+/FISH negative.
   - IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/Tykerb/lapatinib/TCHP/THP, the cancer is HER2+. Do NOT write HER2-.
+  - IMPORTANT: If the note says "triple negative" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-. Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked. "Triple negative" is a definitive classification.
+  - IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
 
   For Stage_of_Cancer:
   - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
@@ -205,6 +207,7 @@ Response_Assessment: |
 
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+     IMPORTANT: Completed radiation therapy COUNTS as treatment. If the patient recently finished radiation, they HAVE received treatment — do NOT write "Not yet on treatment". "Not yet on treatment" is ONLY correct if no cancer treatment (chemo, radiation, hormonal, targeted, immunotherapy) has been given at all.
      IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
      For LOCAL RECURRENCE: describe the recurrence factually (e.g., "local recurrence in left breast, 1.7cm IDC on excisional biopsy"). Do NOT write "cancer is not responding to treatment" — the patient may have discontinued treatment or completed it years ago. Focus on WHAT happened (recurrence), not WHY.
      IMPORTANT: For patients on adjuvant/maintenance therapy, "no evidence of recurrence" or "no evidence of disease" on exam or imaging IS a valid response assessment — it means the treatment is working.
