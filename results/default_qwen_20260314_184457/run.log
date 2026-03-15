@@ -30,3 +30,21 @@ Processing row 25 (1/10)...
       [G5-FAITH] second opinion: "no" -> ""
       [G5-FAITH] EMPTIED: ['second opinion']
       [G5-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 66.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Estrogen receptor negative triple negative breast cancer",
+  "Stage_of_Cancer": "Stage IB",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] Metastasis: "No" -> ""
+      [G5-FAITH] Distant Metastasis: "No" -> ""
+      [G5-FAITH] Distant_Metastasis: "No" -> ""
+      [G5-FAITH] EMPTIED: ['Metastasis', 'Distant Metastasis', 'Distant_Metastasis']
+      [G5-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G5-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G5-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
