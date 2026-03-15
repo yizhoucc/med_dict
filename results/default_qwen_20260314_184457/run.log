@@ -102,3 +102,26 @@ Processing row 25 (1/10)...
       [G5-FAITH] EMPTIED: ['response_assessment']
       [G5-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Extraction prompts: 537.7s
+    Medication_Plan_chatgpt: 65.7s [semantic-fixed, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Discussed the role of radiation to decrease the risk of local recurrence.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G4-SEMANTIC] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the risk of local recur" -> "{'summary': 'Discussed the role of radiation to decrease the risk of local recur"
+      [G5-FAITH] radiotherapy: "{'summary': 'Discussed the role of radiation to decrease the" -> "{'summary': 'Discussed the role of radiation to decrease the"
+      [G6-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy'}
+    Medication_Plan: 26.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G5-FAITH] EMPTIED: ['medication_plan']
+      [G5-REVERT] medication_plan: reverted (G5 emptied all fields)
+      [G6-TEMPORAL] no changes
