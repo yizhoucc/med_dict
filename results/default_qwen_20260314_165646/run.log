@@ -714,3 +714,12 @@ Processing row 28 (4/10)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 99.9s
+    Medication_Plan_chatgpt: 66.2s [schema-fixed, temporal-cleaned, semantic-fixed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Start letrozole 2.5mg PO daily now (prescription sent). Plan to discuss switching to another aromatase inhibitor or tamoxifen if unable to tolerate letr
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C"
+      [G6-SEMANTIC] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': {'summary': 'Start letrozole 2.5mg PO daily now', 'Short t"
