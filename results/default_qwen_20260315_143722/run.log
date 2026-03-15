@@ -291,3 +291,34 @@ Processing row 47 (2/36)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.4s
+  Total extraction: 72.1s
+    Medication_Plan_chatgpt: 30.2s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "If DCIS only is found, patient is potentially a candidate for further adjuvant radiation therapy (XRT).",
+        "Short term side_effects_discussed": "",
+ 
+      [G1-FORMAT] ok, keys=['radiotherapy', 'hormonal therapy']
+      [G2-SCHEMA] fixed: ['radiotherapy', 'hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['XRT', 'adj endocrine Rx']" -> "[{'summary': 'XRT is potentially a candidate for further adjuvant radiotherapy i"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 14.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "If invasive cancer is found, patient will require consideration of adjuvant endocrine therapy (e.g., tamoxifen or an aromatase inhibitor). If DCIS only is found, patient may 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "If invasive cancer is found, patient will require considerat" -> "If invasive cancer is found, pt will require LN bx and consi"
+      [G5-TEMPORAL] no changes
