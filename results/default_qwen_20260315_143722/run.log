@@ -6608,3 +6608,48 @@ Processing row 77 (32/36)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 28.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.2s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 10.4s
+      [EXTRACT] raw={
+    "procedure_plan": "Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
+    Imaging_Plan: 9.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to contact us with increasing sob, cough, cp, lightheadedness, doe, fatigue, or other concerning sy
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to" -> "Echo 09/08/2019. If this echo is normal we can stop monitoring her."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
