@@ -517,3 +517,22 @@ Processing row 37 (3/10)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.5s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. The patient's tumor is enlarging again, as noted in the physical exam, with a large 8 x 5 cm mobile breast mass in the left breast. Recen
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently progressing. The patient's tumor is enlarging again, as " -> "The cancer is currently progressing. The patient's tumor is enlarging again, as "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 20.0s
+  Total extraction: 157.5s
+    Medication_Plan_chatgpt: 51.1s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Olaparib for a year as part of her adjuvant therapy. Could consider [REDACTED] concurrently. She will qualify for xeloda.",
+        "Short term side_effects
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Could consider [REDACTED] concurrently. Sh"
