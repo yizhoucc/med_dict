@@ -6732,3 +6732,37 @@ Processing row 78 (33/36)...
       [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "Breast cancer metastasized to multiple sites"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 25.7s
+      [EXTRACT] raw={
+"lab_summary": "CBC: WBC Count 7.4, RBC Count 4.24, Hemoglobin 12.9, Hematocrit 39.0, MCV 92, MCH 30.5, MCHC 33.2, Platelet Count 288 (from 11/19/09); Platelet Count 281 (from 11/19/09); PT 13.2, In
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 21.7s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with rising tumor markers. Imaging findings are not provided in this visit. Physical exam findings include decreased breath sounds bilaterally, righ
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.4s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "denosumab (XGEVA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "denosumab (XGEVA)" -> ""
+      [G4-FAITH] current_meds: "" -> "BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, le"
+      [POST-MEDS] BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, levothyroxine, LORazepam, methadone, SENNOSIDES, warfarin -> denosumab
+    Treatment_Changes: 14.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped all treatment last week due to increased bone pain and rising tumor markers.",
+"supportive_meds": "methadone 10 mg three times a day, docusate sodium 250 mg twice a day, d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days, warfarin 3 mg daily -> methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days
+  Phase 1 extraction (6 prompts): 94.8s
+  Cross-context injected (892 chars)
