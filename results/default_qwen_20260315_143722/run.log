@@ -4654,3 +4654,27 @@ Processing row 68 (23/36)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 12.7s
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.4, Hb 13.7, plts 211, Cr 0.8, Tbili 0.4, alk phos 52, AST/ALT wnl (from 09/13/2015)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 47.3s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Pathology results: Invasive lobular carcinoma, histologic grade low (3+1+1), ER strongly positive, PR positive, [REDACTED] equivocal by IHC (2+) but negative by FISH (ratio 1.1), [REDAC
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Pathology results: Invasive lobular carcinoma, histologic gr" -> "Pathology results: Invasive lobular carcinoma, histologic gr"
+    Current_Medications: 2.6s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
+      [POST-MEDS] LORazepam (ATIVAN) 1 mg tablet -> 
