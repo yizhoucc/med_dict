@@ -162,3 +162,22 @@ Processing row 25 (1/10)...
       [G5-FAITH] EMPTIED: ['imaging_plan']
       [G5-PROTECT] imaging_plan: restored safe negative "No imaging planned."
       [G6-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 9.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] lab_plan: "No labs planned." -> ""
+      [G5-FAITH] EMPTIED: ['lab_plan']
+      [G5-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G6-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 17.9s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Genetics consult."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
