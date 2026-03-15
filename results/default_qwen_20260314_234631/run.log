@@ -526,3 +526,51 @@ Processing row 27 (3/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 7.3s
   Total extraction: 143.9s
+    Medication_Plan_chatgpt: 55.8s [improved, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term side_effects_discusse
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Proceed with radiation oncology consultation; she will have radiati" -> "{'summary': 'Proceed with radiation oncology consultation; she will have radiati"
+      [G3-IMPROVE] bone therapy: "{'summary': 'Take calcium and vitamin D to improve bone health.', 'Short term si" -> "{'summary': 'Take calcium and vitamin D to improve bone health.', 'Short term si"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'radiotherapy', 'hormonal therapy', 'other treatment', 'bone therapy'}
+    Medication_Plan: 8.8s
+      [EXTRACT] raw={
+    "medication_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. Take calcium and vitamin D."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DEXA to assess her current bone health. She will take calcium and vitamin D. She will proceed with 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DE" -> "She will need a DEXA to assess her current bone health. She will take calcium an"
+    radiotherapy_plan: 7.8s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "I expect that she will proceed with radiation. We will plan on meeting again once her radiation course is complete to review DEXA and plan her [REDACTED] start."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "I expect that she will proceed with radiation. We will plan on meeting again onc" -> "I expect that she will proceed with radiation. We will plan on meeting again onc"
+      [G4-FAITH] no changes (all supported)
+    Procedure_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
