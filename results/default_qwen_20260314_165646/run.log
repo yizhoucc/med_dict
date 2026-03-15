@@ -506,3 +506,16 @@ Processing row 27 (3/10)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 115.6s
+    Medication_Plan_chatgpt: 59.1s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Recommendation for 5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term si
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] radiotherapy: "{'summary': 'Plan to proceed with radiation oncology consultation and radiation " -> "{'summary': 'Plan to proceed with radiation oncology consultation and radiation "
+      [G4-TEMPORAL] bone therapy: "{'summary': 'Will take calcium and vitamin D to improve bone health.', 'Short te" -> "{'summary': 'Will take calcium and vitamin D to improve bone health.', 'Short te"
+      [G4-TEMPORAL] other treatment: "{'summary': 'Obtain DEXA to assess current bone health.', 'Short term side_effec" -> "{'summary': 'Obtain DEXA to assess current bone health.', 'Short term_side_effec"
+      [G6-SEMANTIC] ok (all values answer their fields)
+      [POST-KEYS] stripped: {'radiotherapy', 'bone therapy', 'other treatment', 'hormonal therapy'}
