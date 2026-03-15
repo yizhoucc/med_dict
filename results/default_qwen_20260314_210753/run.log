@@ -264,3 +264,51 @@ Processing row 26 (2/10)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 54.2s [improved]
+      [EXTRACT] raw={
+"findings": "Stable to slightly decreased metabolic activity of osseous metastases with no new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged i
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Stable to slightly decreased metabolic activity of osseous metastases with no ne" -> "Stable to slightly decreased metabolic activity of osseous metastases with no ne"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole, goserelin, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole, goserelin, zolendronic acid" -> "letrozole, goserelin, zolendronic acid, calcium-vitamin D"
+      [POST-MEDS] letrozole, goserelin, zolendronic acid, calcium-vitamin D -> letrozole, goserelin
+    Treatment_Changes: 6.7s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium-vitamin D, zolendronic acid" -> "zolendronic acid"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] zolendronic acid -> 
+  Phase 1 extraction (6 prompts): 103.3s
+  Cross-context injected (1316 chars)
+    Treatment_Goals: 4.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.6s
+      [EXTRACT] raw={
+"response_assessment": "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.4s
+  Total extraction: 117.7s
