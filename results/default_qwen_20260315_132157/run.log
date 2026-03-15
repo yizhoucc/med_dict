@@ -530,3 +530,30 @@ Processing row 37 (3/10)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 19.7s
   Total extraction: 123.2s
+    Medication_Plan_chatgpt: 51.3s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Olaparib for a year as part of her adjuvant therapy. Could consider [REDACTED] concurrently. She will qualify for xeloda.",
+        "Short term side_effects
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Could consider [REDACTED] concurrently. Sh"
+    Medication_Plan: 8.7s
+      [EXTRACT] raw={
+    "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.6s
+      [EXTRACT] raw={
+    "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently. We discussed the role of horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
