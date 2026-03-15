@@ -529,3 +529,27 @@ Processing row 37 (3/10)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 20.5s
   Total extraction: 129.3s
+    Medication_Plan_chatgpt: 44.6s [improved, faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Olaparib for a year as part of her adjuvant therapy. Could consider [REDACTED] concurrently. She will qualify for xeloda.",
+        "Short term side_effects
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Olaparib for a year as part of her adjuvant therapy. Could consider" -> "{'summary': 'Previously received 4 cycles of [REDACTED] and 5 weeks of taxol, st"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Will offer per guidelines due to barely positive PR 15%.', 'Short t" -> "{'summary': 'Will offer per guidelines due to barely positive PR 15%.', 'Short t"
+      [G3-IMPROVE] other treatment: "{'summary': 'Discuss the role of lifestyle modifications to decrease the risk of" -> "{'summary': 'Discuss the role of lifestyle modifications to decrease the risk of"
+      [G4-FAITH] chemotherapy: "{'summary': 'Previously received 4 cycles of [REDACTED] and " -> "{'summary': 'Previously received 4 cycles of [REDACTED] and "
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discuss the role of lifestyle modifications to decrease the risk of" -> ""
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Previously received 4 cycles of [REDACTED] and 5 weeks of taxol, st" -> "{'summary': 'Could consider [REDACTED] concurrently. She will qualify for xeloda"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Will offer per guidelines due to barely positive PR 15%.', 'Short t" -> ""
+      [POST-KEYS] stripped: {'other_treatment', 'chemotherapy', 'hormonal_therapy'}
+    Medication_Plan: 8.7s
+      [EXTRACT] raw={
+    "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
