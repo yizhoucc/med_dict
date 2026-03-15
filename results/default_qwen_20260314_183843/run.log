@@ -309,3 +309,26 @@ Processing row 26 (2/10)...
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
   Extraction prompts: 598.3s
+    Medication_Plan_chatgpt: 157.2s [semantic-fixed, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on ***** (likely aromatase inhibitor), zoladex (likely goserelin), and femara (letrozole).",
+        "Short term side_effects_discussed": "",
+ 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G4-SEMANTIC] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [G4-SEMANTIC] hormonal therapy: "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos" -> "{'summary': 'Continue on ***** (likely aromatase inhibitor), zoladex (likely gos"
+      [G5-FAITH] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain" -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain"
+      [G5-FAITH] hormonal therapy: "{'summary': 'Continue on ***** (likely aromatase inhibitor)," -> "{'summary': 'Continue on ***** (likely aromatase inhibitor),"
+      [G6-TEMPORAL] other treatment: "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets " -> "{'summary': 'Obtain UA (urinalysis) for possible UTI. Obtain CBC with platelets "
+      [POST-KEYS] stripped: {'other treatment', 'hormonal therapy'}
+    Medication_Plan: 26.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on *****, zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [G6-TEMPORAL] no changes
