@@ -33,6 +33,7 @@ Cancer_Diagnosis: |
   - Example: "ER+/PR+/HER2- invasive ductal carcinoma" NOT just "breast cancer"
   - Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
   Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
+  IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
 
   HER2 status rules — follow strictly:
   - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.
@@ -67,7 +68,9 @@ Lab_Results: |
   Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
   Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
   CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
-  CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar), write "Values redacted" for those entries — do NOT fabricate or guess specific numbers. Only include values that are clearly visible and readable in the note.
+  CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar placeholders), write "Values redacted" — do NOT fabricate or guess specific numbers. Only report values you can clearly read.
+  Example: If the note says "Platelet *****" or "WBC *****", write "Lab values redacted" — do NOT write "Platelet 217" or any invented number.
+  Example: If labs section shows "CBC: ***** ***** *****", write "CBC values redacted" — do NOT fill in numbers.
   IMPORTANT: If lab results are older than 6 months from the visit date, you MUST note the date.
   Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old labs.
   If the note says "labs/markers unremarkable" without specific values, write that verbatim with the date.
@@ -84,6 +87,7 @@ Clinical_Findings: |
   - Key pathology results: tumor size, margins, node status, grade
   - Imaging findings: CT, MRI, PET, bone scan results
   - Physical exam findings: palpable masses, skin changes, lymphadenopathy
+  IMPORTANT: Include ALL imaging findings, even those of uncertain significance (e.g., "focal uptake in 6th rib of unclear significance"). Ambiguous findings may indicate early metastasis and must NOT be omitted. If the report says "unclear significance" or "indeterminate", include it with that qualifier.
   Do NOT write only symptoms (e.g., "patient reports fatigue") — write OBJECTIVE findings.
   Do NOT repeat the cancer type or stage (those are extracted separately).
 

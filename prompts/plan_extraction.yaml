@@ -168,9 +168,14 @@ Referral: |
 
   IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
   - HPI: "referred to genetics", "will refer to social work"
-  - Diagnosis section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
-  - A/P: "consult with Rad Onc", "nutrition consult"
-  Search for keywords: "refer", "referral", "consult", "counseling", "social work", "exercise counseling".
+  - Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
+  - Psychologic/Social section: "I will refer to social work"
+  - A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation"
+  Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "palliative".
+  Common referrals found OUTSIDE the A/P section:
+  - "Ambulatory Referral to Social Work" (in Diagnosis section) → Others: Social work referral
+  - "Referral to Exercise Counseling" (in Diagnosis section) → Others: Exercise counseling referral
+  - "I will refer to social work" (in Psychologic section) → Others: Social work referral
 
   CRITICAL — distinguish OUTGOING from INCOMING referrals:
   - OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
@@ -179,13 +184,13 @@ Referral: |
   - If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
 
   If no referral is mentioned for a category, set its value to "None".
-  For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral.
+  For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist (e.g., "eat calcium-rich food") is NOT a nutrition referral. Supplement recommendations (e.g., "take calcium and vitamin D", "continue vitamin D daily") are also NOT nutrition referrals — they are standard medical advice.
   Respond *only* with a JSON object using this exact schema:
   {
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
   "Genetics": "eg, germline testing, family counseling, or 'None'",
-  "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, or 'None'",
-  "Others": "Physical or occupational therapy, Social work, financial counseling, home health, or 'None'",
+  "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
+  "Others": "Physical or occupational therapy, Exercise counseling, Social work, financial counseling, home health, or 'None'",
   "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
   }
 
