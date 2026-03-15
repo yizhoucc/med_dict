@@ -55,3 +55,10 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
+    Clinical_Findings: 69.4s
+      [EXTRACT] raw={
+"findings": "Patient has a triple negative breast cancer with a Ki-67 of 75%, node negative. MRI of the breasts was ordered but results not yet available. No palpable masses, skin changes, or lympha
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)

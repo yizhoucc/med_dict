@@ -57,3 +57,19 @@ Processing row 25 (1/10)...
       [G2-SCHEMA] ok
       [G4-SEMANTIC] ok (all values answer their fields)
       [G5-FAITH] no changes (all supported)
+    Clinical_Findings: 64.6s [semantic-fixed]
+      [EXTRACT] raw={
+"findings": "Triple negative breast cancer with a proliferation index of 75%, node negative. MRI of the breasts was performed but results not specified in the note. Physical exam showed no acute dis
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] findings: "Triple negative breast cancer with a proliferation index of 75%, node negative. " -> "Triple negative breast cancer with a proliferation index of 75%, node negative. "
+      [G5-FAITH] no changes (all supported)
+    Current_Medications: 37.4s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] current_meds: "" -> "amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin"
+      [POST-MEDS] amoxicillin 500 mg capsule, ascorbic acid 500 mg, cephalexin 500 mg capsule, cetirizine 10 mg tablet, diphenhydramine 25 mg capsule, levothyroxine 125 mcg tablet -> 
