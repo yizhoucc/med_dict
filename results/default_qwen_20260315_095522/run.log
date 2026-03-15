@@ -53,3 +53,41 @@ Processing row 35 (1/10)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV" -> "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 39.8s
+      [EXTRACT] raw={
+"findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymp
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.9s
+      [EXTRACT] raw={
+"current_meds": "abraxane, zoladex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 12.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched to Abraxane on 02/20/21 due to grade 3 infusion reaction with cycle 1 of Taxol.",
+"supportive_meds": "Lorazepam, Zofran, Compazine, Omeprazole, Valtrex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Lorazepam, Zofran, Compazine, Omeprazole, Valtrex -> Zofran, Compazine
+  Phase 1 extraction (6 prompts): 137.5s
+  Cross-context injected (1187 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
