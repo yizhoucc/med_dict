@@ -940,3 +940,22 @@ Processing row 39 (5/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 6.0s
   Total extraction: 78.3s
+    Medication_Plan_chatgpt: 53.4s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Rx for letrozole given. If no radiation is planned, she can start letrozole immediately.",
+        "Short term side_effects_discussed": "hot flashes, ar
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': 'letrozole', 'bone therapy': 'Prolia', 'other treatment': '" -> "{'hormonal therapy': {'summary': 'The patient will start letrozole immediately i"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': {'summary': 'The patient will start let" -> "{'hormonal therapy': {'summary': 'The patient will start let"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 5.9s
+      [EXTRACT] raw={
+    "medication_plan": "Rx for letrozole given. She is on Prolia now."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
