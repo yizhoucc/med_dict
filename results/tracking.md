@@ -23,11 +23,44 @@
 | `default_qwen_20260314_144451` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v5 code | 25-34 | 2026-03-14 | v5 扩展测试（10 rows）|
 | `default_qwen_20260314_154025` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6 code + POST-PROC-FILTER + POST-ADV | 25-34 | 2026-03-14 | v6: POST-PROC-FILTER false positive ("port" → "rt") |
 | `default_qwen_20260314_161507` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6.1 code (RT word boundary fix) | 25-34 | 2026-03-14 | v6.1: Type_of_Cancer G3 regression |
-| `default_qwen_20260314_165646` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v6.2 code + G3-PROTECT-RECEPTOR | 25-34 | 2026-03-14 | **v6.2**: G3-PROTECT-RECEPTOR + POST-ADV + prompt fixes |
-| (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7a code (gate reorder) | 25-34 | 2026-03-14 | **v7a**: v7 bug fixes + gate 顺序优化 (G1→G2→G3spec→G4sem→G5faith→G6temp) |
-| (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7abc code (full optimization) | 25-34 | TBD | **v7abc**: v7a + G3/G4 合并 + 跨 prompt 信息传递 |
+| `default_qwen_20260314_165646` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7a code (gate reorder + v6.2 fixes) | 25-34 | 2026-03-14 | **v7a**: gate 顺序优化 + 9 bug fixes。33.2min |
+| `default_qwen_20260314_194226` | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v7abc code (5-gate + 2-phase) | 25-34 | 2026-03-14 | **v7abc**: G3/G4 合并→G3-IMPROVE + 跨 prompt 信息传递。31.3min (v7a 33.2min) |
+| (待运行) | Qwen2.5-32B-AWQ (4bit) | V2 pipeline, v8 code (v7abc + prompt fixes) | 25-34 | 2026-03-14 | **v8**: 修 v7abc 审查发现的 6 个 P2 问题 |
 
 ## Prompt 版本变更记录
+
+### v8 (2026-03-14): v7abc 审查修复（6 个 P2 prompt 改进）
+
+**变更原因：** v7abc 10 行逐行审查发现 6 个 P2 退步 + 4 个两版共同问题
+
+**Prompt 变更：**
+
+| # | 修复 | 文件 | 问题 | 说明 |
+|---|------|------|------|------|
+| 1 | HPI vs A/P 矛盾时优先 A/P | extraction.yaml Current_Medications | Row 34: tamoxifen+anastrozole 同时列出 | 加 "prefer Assessment/Plan — it reflects the most recent clinical decision" |
+| 2 | zolendronic 拼写变体 | extraction.yaml Current_Medications | Row 26: zolendronic acid 未被识别 | 在 BONE AGENTS 列表加 "zolendronic acid" |
+| 3 | node neg ≠ Stage II | extraction.yaml Cancer_Diagnosis | Row 26: "Stage I"→"Stage IIA" | 加 "Node-negative + ≤2cm = Stage I, NOT Stage II" |
+| 4 | 局部复发措辞 | extraction.yaml Response_Assessment | Row 33: "not responding to treatment" 不准确 | 加 "describe recurrence factually, do NOT write 'not responding' — patient may have discontinued treatment" |
+| 5 | Referral 搜索范围扩展 | plan_extraction.yaml Referral | Row 25: Social Work referral 遗漏 | 加 "Look throughout ENTIRE note, not just A/P" + 搜索关键词列表 |
+| 6 | 过时 lab 日期标注 | extraction.yaml Lab_Results | Row 31: 3 年前 lab 丢了日期 | 从 "note the date" 改为 "you MUST note the date" + 示例 |
+
+**代码变更：** 无（v8 仅 prompt 变更）
+
+**基线：** v7abc (`default_qwen_20260314_194226`)
+
+### v7abc (2026-03-14): Gate 合并 + 跨 Prompt 信息传递
+
+**变更原因：** v7a 的 G3 SPECIFIC 和 G4 SEMANTIC 可合并省 LLM 调用；Treatment_Goals 和 Response_Assessment 需要其他字段的信息才能准确判断
+
+**代码变更：**
+1. `ult.py` — 合并 G3 SPECIFIC + G4 SEMANTIC → **G3 IMPROVE**（省 18 次 LLM 调用/笔记）
+2. `run.py` — 两阶段提取：Phase 1 (6 prompts 独立提取) → Phase 2 (2 prompts 带上下文：Treatment_Goals, Response_Assessment)
+3. `run.py` — `_build_cross_context()` 函数，从 Phase 1 结果构建 Cancer_Diagnosis + Current_Medications + Clinical_Findings 的上下文
+
+**v7abc vs v7a 审查结论（10 行逐行对比）：**
+- **改善**：goals_of_treatment 7/10 行修正（adjuvant→curative），Response_Assessment 5/10 行从空变有，Row 29 Stage 幻觉修复 (P0)
+- **退步**：6 个 P2（Therapy_plan 内容减少、Stage IIA 误判、Lab 日期丢失、current_meds 过度、Medication_Plan_chatgpt 丢内容、response 措辞）
+- **速度**：31.3min vs 33.2min（快 5.7%）
 
 ### v7a (2026-03-14): Gate 顺序优化 + v6.2 Bug Fixes
 

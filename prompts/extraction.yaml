@@ -48,6 +48,8 @@ Cancer_Diagnosis: |
   - If distant metastases are documented, the current stage is Stage IV even if not explicitly stated.
   - If the Assessment/Plan states a stage (e.g., "Stage I", "early stage"), extract it — do NOT write "Not mentioned in note".
   - If tumor size and node status are available, infer the approximate stage (e.g., "2.3 cm, 0/3 LN negative — approximately Stage I-II").
+  - IMPORTANT: Node-negative ("node neg", "0/N LN+") with small tumor (≤2cm) = Stage I, NOT Stage II.
+    Stage II requires either positive lymph nodes OR tumor >2cm. "Early stage node negative" = Stage I.
   - Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
 
   Respond *only* with a JSON object using this exact schema:
@@ -66,7 +68,9 @@ Lab_Results: |
   Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
   CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
   CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar), write "Values redacted" for those entries — do NOT fabricate or guess specific numbers. Only include values that are clearly visible and readable in the note.
-  If lab results are older than 6 months, note the date.
+  IMPORTANT: If lab results are older than 6 months from the visit date, you MUST note the date.
+  Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old labs.
+  If the note says "labs/markers unremarkable" without specific values, write that verbatim with the date.
 
   Respond *only* with a JSON object using this exact schema:
   {
@@ -94,6 +98,9 @@ Current_Medications: |
   CRITICAL — distinguish CURRENT from PLANNED from PAST:
   - CURRENT (include): medications the patient is ACTIVELY taking right now.
     Look for: "continue", "currently on", "taking daily", "on [drug] since [date]"
+  - If the HPI mentions one drug (e.g., "started tamoxifen") but the Assessment/Plan says a DIFFERENT
+    drug as current (e.g., "continuing on anastrozole"), prefer the Assessment/Plan — it reflects the
+    most recent clinical decision. Do NOT list both unless the note clearly says both are concurrent.
   - PLANNED/RECOMMENDED (do NOT include): medications discussed, recommended, or scheduled to start.
     Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]"
   - PAST/COMPLETED (do NOT include): medications already finished or stopped.
@@ -118,7 +125,7 @@ Current_Medications: |
   --- IMMUNOTHERAPY ---
   pembrolizumab, keytruda, atezolizumab, tecentriq, nivolumab, opdivo, durvalumab, imfinzi
   --- BONE AGENTS ---
-  denosumab, xgeva, prolia, zoledronic acid, zometa, pamidronate
+  denosumab, xgeva, prolia, zoledronic acid, zolendronic acid, zometa, pamidronate
 
   Do NOT include: blood pressure meds, diabetes meds, psychiatric meds, allergy meds, antibiotics,
   pain meds, laxatives, vitamins, supplements, thyroid meds, cholesterol meds, or any other
@@ -195,6 +202,7 @@ Response_Assessment: |
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
      IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
+     For LOCAL RECURRENCE: describe the recurrence factually (e.g., "local recurrence in left breast, 1.7cm IDC on excisional biopsy"). Do NOT write "cancer is not responding to treatment" — the patient may have discontinued treatment or completed it years ago. Focus on WHAT happened (recurrence), not WHY.
      IMPORTANT: For patients on adjuvant/maintenance therapy, "no evidence of recurrence" or "no evidence of disease" on exam or imaging IS a valid response assessment — it means the treatment is working.
      IMPORTANT — the patient IS on treatment if ANY of these clues appear:
      - "currently on [drug]", "taking [drug]", "continue [drug]", "on [drug] since [date]"

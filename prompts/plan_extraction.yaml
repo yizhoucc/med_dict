@@ -166,6 +166,12 @@ Referral: |
   Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
   A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
 
+  IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
+  - HPI: "referred to genetics", "will refer to social work"
+  - Diagnosis section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
+  - A/P: "consult with Rad Onc", "nutrition consult"
+  Search for keywords: "refer", "referral", "consult", "counseling", "social work", "exercise counseling".
+
   CRITICAL — distinguish OUTGOING from INCOMING referrals:
   - OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
   - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred for consideration of adjunct therapy".
