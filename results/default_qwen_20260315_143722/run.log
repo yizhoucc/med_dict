@@ -3897,3 +3897,28 @@ Processing row 64 (19/36)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'neoadjuvant chemotherapy, AC/T regimen (Ta" -> "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemotherapy, AC/T regimen (Ta"
       [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemothera" -> "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemothera"
       [G5-TEMPORAL] no changes
+    Medication_Plan: 29.5s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with options including AC/T (doxorubicin and cyclophosphamide followed by paclitaxel) or enrollment in the ISPY clinical trial with various regimens 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 24.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Plan to start neoadjuvant chemotherapy with AC/T. Taxol first, followed by four cycles of TC. Option to enroll in ISPY clinical trial with various regimens including Taxol, pemb
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.0s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She will likely also need post-operative radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
