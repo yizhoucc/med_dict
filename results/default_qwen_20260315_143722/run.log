@@ -2616,3 +2616,20 @@ Processing row 58 (13/36)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 9.0s
   Total extraction: 96.6s
+    Medication_Plan_chatgpt: 90.1s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Currently on letrozole, recommended to discontinue letrozole and wait 2-3 weeks before starting exemestane. Intends to continue hormone therapy for 5 ye
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'psychiatry medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': [{'medication': 'tamoxifen', 'start_dat" -> "[{'type': 'hormonal therapy', 'details': [{'medication': 'tamoxifen', 'start_dat"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': [{'medication': 'ta" -> "[{'type': 'hormonal therapy', 'details': [{'medication': 'ta"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': [{'medication': 'tamoxifen', 'start_dat" -> "[{'type': 'hormonal therapy', 'details': [{'medication': 'letrozole', 'status': "
+    Medication_Plan: 15.3s
+      [EXTRACT] raw={
+    "medication_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue Pristiq 75 mg. Consider transitioning to Duloxetine for joint pain, but will refer to psychiatry
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
