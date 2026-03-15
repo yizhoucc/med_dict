@@ -536,3 +536,91 @@ RESULTS FOR ROW 26
     "Advance care": "Full code."
   }
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 27
+============================================================
+
+--- Column: coral_idx ---
+166
+
+--- Column: note_text ---
+"SUBJECTIVE  Subjective  ***** ***** is a 41 y.o. female who presents today for hormone therapy follow-up for her metastatic breast cancer. Femara since April 2011. She reports feeling unwell with lightheadedness since mid July, and has recently required corrective lenses for reading. She reports new lower back pain with activity, easy bruising, and frequent urination without pain or hematuria.         Patient Active Problem List   Diagnoses Date Noted   \u0007 Metastatic Breast Cancer to bone 09/22/2011     Priority: High     1999 early stage node neg IDC ER/PR + ***** neg treated with lumpectomy and XRT  April 2006 mets to L1  Tamoxifen May 05 - August 08  2007 progressive disease  ***** January 2007 -  Zoladex July 2009 -  Femara 05/12/2011 -       ROS  General: energy good, weight stable   Skin: no rashes or lesions  Eyes: require corrective lenses for reading  ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat  Breast: no breast pain or swelling  Respiratory: no cough but has incidental shortness of breath  Cardiovascular: no CP, edema  GI: no nausea, vomiting, diarrhea or constipation  GU: frequency, no dysuria, no hematuria, or vaginal bleeding  Musculoskeletal: occasional low back pain with activity  Neurological: gait steady, no headaches, dizziness, falls,   Psychological: mood stable  All other review of systems negative, except for those noted.    MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 calcium-vitamin D 500-125 mg-unit tablet Take 1 tablet by mouth 2 (two) times daily.         \u0007 goserelin (ZOLADEX) 3.6 mg injection Inject into the skin once.         \u0007 letrozole (FEMARA) 2.5 mg tablet Take 2.5 mg by mouth Daily.         \u0007 zolendronic acid (*****) 4 mg/5 mL injection Inject into the vein once.             ALLERGIES  Allergies no known allergies    PHYSICAL EXAM  Objective  Vital Signs:  BP 102/72 | Pulse 73 | Temp(Src) 36.6 C (97.8 F) \n (Oral) | Resp 16 | Ht 173 cm (5' 8.11\") | Wt 62.052 kg (136 lb 12.8 oz) | BMI 20.73 kg/m2 | SpO2 100% | LMP 07/31/2009  Constitutional:  Well-developed, no acute distress  Skin: no rash, no lesions, no diaphoresis.   Eyes: sclera anicteric, PERRL, EOMI  HENT: sinuses nontender, TMs intact, nasal mucosa intact, pharynx without erythema, no thrush  Lymph Nodes: soft movable left axillary node, no supraclavicular or axillary adenopathy  Respiratory:  Normal breath sounds, No respiratory distress, No wheezing, No chest tenderness.   Cardiovascular:  Normal heart rate, Normal rhythm, No murmurs, No rubs, No gallops. No LE edema  Breast: Right breast with firmness at lumpectomy site in upper outer quadrant  GI:  Bowel sounds normal, Soft, No tenderness or distention,No hepatomegaly or masses  Musculoskeletal: No point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema  Neurologic:  Alert & oriented x 3, CN intact, ambulates w/o difficulty, ***** (-), DTRs 2+throughout.    Psychiatric: mood stable. No HI, SI, hallucinations, paranoia, or delusions.    RESULTS  09/27/11 *****:  Brain: Unremarkable, symmetric, FDG uptake is seen throughout   the cortical gray matter, basal ganglia and the cerebellum. No   mass effect. While these images appear within normal limits, MRI   is recommended to rule out intracranial and/or skull base   metastases if clinically indicated.   Neck: No hypermetabolic neck masses or lymphadenopathy.   Chest: 3-mm right middle lobe noncalcified nodules not   significantly changed since prior study. Small anterior   mediastinal soft tissue is consistent with rebound thymus.   Calcified right hilar lymph node is consistent with sequela of   remote granulomatous disease. No hypermetabolic lymphadenopathy.   Abdomen/Pelvis: Multiple low-attenuation lesions throughout the   liver some of which represent cysts and some of which are too   small to \n characterize are again noted. Left renal cysts are   seen. The remainder of the abdomen and pelvis is unremarkable.   No hypermetabolic lymphadenopathy.   Musculoskeletal: Multiple osseous lesions involving the   thoracolumbar and sternum are not changed in size since prior   study and do not demonstrate hypermetabolic activity, consistent   with treated metastases. Left iliac wing sclerotic lesion is   unchanged in size and metabolic activity with an SUV of 3.1.   Persistent FDG uptake within left L1 pedicle (SUV 6) and anterior   vertebral body (SUV 9) is not significantly changed since prior.   Interval decrease in activity of previously described L2   vertebral body sclerotic focus with no residual hypermetabolic   activity seen. No new osseous lesions are identified.   IMPRESSION:   1. Stable to slightly decreased metabolic activity of osseous   metastases. No new metastases are identified.   This study was reviewed by attendings Dr. ***** ***** from   Abdominal Imaging and Dr. ***** ***** ***** of Nuclear   Medicine.  I have individually visualized and interpreted the above *****     ASSESSMENT & PLAN    Hormone positive MBC to bone with stable disease. Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens.    Possible UTI vs. Genital-urinary symptoms from estrogen depletion. Obtain UA    Easy bruising per patient, obtain CBC with platelets.    The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history.  I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** *****, *****/*****/***** *****:***** PM      \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN    Hormone positive MBC to bone with stable disease. Continue on *****, zoladex and femara. Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens.    Possible UTI vs. Genital-urinary symptoms from estrogen depletion. Obtain UA    Easy bruising per patient, obtain CBC with platelets.    The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history.  I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** *****, *****/*****/***** *****:***** PM      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Metastatic hormone-positive breast cancer to bone. This visit is for follow-up hormone therapy management."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+    "Metastasis": "Yes, to bone",
+    "Distant Metastasis": "Yes, to bone"
+  },
+  "Lab_Results": {
+    "lab_summary": "CBC with platelets. No specific values provided."
+  },
+  "Clinical_Findings": {
+    "findings": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size since prior study and do not demonstrate hypermetabolic activity, consistent with treated metastases. Left iliac wing sclerotic lesion is unchanged in size and metabolic activity with an SUV of 3.1. Persistent FDG uptake within left L1 pedicle (SUV 6) and anterior vertebral body (SUV 9) is not significantly changed since prior. Interval decrease in activity of previously described L2 vertebral body sclerotic focus with no residual hypermetabolic activity seen. No new osseous lesions are identified. Physical exam findings include a firmness at the lumpectomy site in the upper outer quadrant of the right breast, occasional low back pain with activity, and no point tenderness at cervical, thoracic, or lumbar spine."
+  },
+  "Current_Medications": {
+    "current_meds": "letrozole, goserelin"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "goserelin (ZOLADEX)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in size since prior study and do not demonstrate hypermetabolic activity, consistent with treated metastases."
+  },
+  "Medication_Plan_chatgpt": {},
+  "Medication_Plan": {
+    "medication_plan": "Continue on [REDACTED], zoladex, and femara."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue on [REDACTED], zoladex and femara. Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens. Obtain UA and CBC with platelets."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Consider MRI of the spine."
+  },
+  "Lab_Plan": {
+    "lab_plan": "CBC with platelets to evaluate easy bruising."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: if pain worsens"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
