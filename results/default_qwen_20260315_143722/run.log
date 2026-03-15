@@ -3888,3 +3888,12 @@ Processing row 64 (19/36)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.6s
   Total extraction: 98.0s
+    Medication_Plan_chatgpt: 57.9s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Plan to start neoadjuvant chemotherapy with AC/T. Taxol first, followed by four cycles of TC. Clinical trial enrollment with ISPY clinical trial discussed, 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'neoadjuvant chemotherapy, AC/T regimen (Ta" -> "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemotherapy, AC/T regimen (Ta"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemothera" -> "[{'type': 'chemotherapy', 'summary': 'neoadjuvant chemothera"
+      [G5-TEMPORAL] no changes
