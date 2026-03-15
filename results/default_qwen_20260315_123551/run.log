@@ -1155,3 +1155,24 @@ Processing row 40 (6/10)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.3s
   Total extraction: 122.7s
+    Medication_Plan_chatgpt: 69.0s [faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will proceed with AC-Taxol. The plan is to start with Taxol for 12 weeks followed by AC over dose dense AC-Taxol. The efficacy of the treatment does
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'Patient will proceed with AC-Taxol. The plan is" -> "{'summary': 'Patient will proceed with AC-Taxol. The plan is"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'After completion of chemotherapy, the patient will be recommended o" -> ""
+      [G5-TEMPORAL] other treatment: "{'summary': 'The patient has the option of using medical marijuana via vape pens" -> ""
+      [G5-TEMPORAL] other_treatment: "{'summary': 'The patient has the option of using medical marijuana via vape pens" -> "{'summary': 'The patient has the option of using medical marijuana via vape pens"
+      [G5-TEMPORAL] hormonal_therapy: "{'summary': 'After completion of chemotherapy, the patient will be recommended o" -> "{'summary': 'After completion of chemotherapy, the patient will be recommended o"
+      [POST-KEYS] stripped: {'chemotherapy', 'hormonal_therapy', 'other_treatment'}
+    Medication_Plan: 11.4s
+      [EXTRACT] raw={
+    "medication_plan": "After completion of chemotherapy, the patient will be recommended to use an aromatase inhibitor for ovarian suppression. She may also be eligible for a trial with ribociclib.
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
