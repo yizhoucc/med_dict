@@ -6766,3 +6766,61 @@ Processing row 78 (33/36)...
       [POST-SUPP] methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days, warfarin 3 mg daily -> methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days
   Phase 1 extraction (6 prompts): 94.8s
   Cross-context injected (892 chars)
+    Treatment_Goals: 3.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.7s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is not responding to treatment. Tumor marker is rising. Currently stopped all treatment last week because of these two issues."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is not responding to treatment. Tumor marker is rising. Currently sto" -> "The cancer is not responding to treatment. Tumor marker is rising."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 8.9s
+  Total extraction: 103.7s
+    Medication_Plan_chatgpt: 18.2s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "pain medication": {
+        "summary": "Continue methadone 10mg q8h. For breakthrough pain, take 5mg oxycodone. Plan to see pain management specialist.",
+        "Short term side_effects_discus
+      [G1-FORMAT] ok, keys=['pain medication', 'neuropathy', 'other treatment']
+      [G2-SCHEMA] fixed: ['pain medication', 'neuropathy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Consider cymbalta/lyrica for diabetic neuropathic pain', 'Needs to switch acce" -> "[]"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Medication_Plan: 11.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue methadone 10mg q8h, take 5mg oxycodone for breakthrough pain, consider cymbalta/lyrica for diabetic neuropathic pain."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Needs restaging previously used PET/CT continue. Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]. Dr [REDACTED] 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
