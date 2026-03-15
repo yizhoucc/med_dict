@@ -6538,3 +6538,42 @@ Processing row 77 (32/36)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 41.3s [improved]
+      [EXTRACT] raw={
+"findings": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in segment 7 of the l
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 12.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amLODIPine (NORVASC), blood glucose test strip, blood-glucos"
+      [POST-MEDS] amLODIPine (NORVASC), blood glucose test strip, blood-glucose (ONETOUCH [REDACTED] [REDACTED]) monitoring kit, carvedilol (COREG), cholecalciferol, vitamin D3, (VITAMIN D3), ferrous sulfate (IRON ORAL), glimepiride ([REDACTED]), JANUVIA, lanolin/mineral oil/petrolatum (ARTIFICIAL TEARS OPHTH), lisinopril (PRINIVIL,ZESTRIL), magnesium oxide (MAG-OX), metFORMIN (GLUCOPHAGE), ONETOUCH ULTRA BLUE TEST STRIP test strip, simvastatin (ZOCOR) -> 
+    Treatment_Changes: 11.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ferrous sulfate (IRON ORAL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ferrous sulfate (IRON ORAL) -> 
+  Phase 1 extraction (6 prompts): 159.1s
+  Cross-context injected (1018 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
