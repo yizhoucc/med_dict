@@ -913,3 +913,21 @@ Processing row 29 (5/10)...
       [G3-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
       [G6-SEMANTIC] skipped (all fields empty/negative)
   Extraction prompts: 144.0s
+    Medication_Plan_chatgpt: 79.9s [faith-trimmed, semantic-fixed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "The patient will receive neoadjuvant chemotherapy, which may include either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 c
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-FAITH] other treatment: "{'summary': 'The patient was discussed the potential side ef" -> "{'summary': '', 'Short term side_effects_discussed': 'Diarrh"
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] other treatment: "{'summary': '', 'Short term side_effects_discussed': 'Diarrhea and rash with per" -> "{'summary': 'The patient will receive biological therapies (trastuzumab and pert"
+      [POST-KEYS] stripped: {'other treatment', 'chemotherapy'}
+    Medication_Plan: 29.0s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-FAITH] no changes (all supported)
+      [G4-TEMPORAL] no changes
+      [G6-SEMANTIC] ok (all values answer their fields)
