@@ -744,3 +744,35 @@ Processing row 28 (4/10)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': {'summary': 'Start letrozole 2.5mg PO daily now', 'Short t"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Medication_Plan: 20.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Vitamin D supplement pending further evaluation. Continue use 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Continue use of vaginal moisturizer. Bone density scan can be completed when she returns from [REDACTED]. Plan to begin radiation therapy loc
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 17.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She is at risk for local recurrence in her right breast for which [REDACTED] is recommending additional radiation. Given her surgical pathology with only micrometastatic di
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Procedure_Plan: 7.2s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "surgery pending, tentatively scheduled for September 2019"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "surgery pending, tentatively scheduled for September 2019" -> "surgery tentatively scheduled for September 2019"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
