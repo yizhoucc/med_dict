@@ -242,3 +242,24 @@ Processing row 26 (2/10)...
       [G5-FAITH] second opinion: "no" -> ""
       [G5-FAITH] EMPTIED: ['second opinion']
       [G5-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 94.7s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to bone",
+  "Metastasis": "Yes (t
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] ok (all values answer their fields)
+      [G5-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 11.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G4-SEMANTIC] skipped (all fields empty/negative)
+      [G5-FAITH] lab_summary: "No labs in note." -> ""
+      [G5-FAITH] EMPTIED: ['lab_summary']
+      [G5-PROTECT] lab_summary: restored safe negative "No labs in note."
