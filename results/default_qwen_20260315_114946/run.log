@@ -1706,3 +1706,42 @@ Processing row 43 (9/10)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (3074 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 18.1s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "33 y.o. female with ER+/PR+/HER2- node+ left breast cancer with BRCA1 mutation positive, post bilateral mas
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- node+ left breast cancer with residual grade 2 invasive ductal carcinoma and residual DCIS",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 25.9s
+      [EXTRACT] raw={
+"findings": "Pathology from the left breast showed 1 cm of residual grade 2 invasive ductal carcinoma with residual DCIS and a 0.07 cm [REDACTED] positive lesion. Right breast pathology was benign. 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
