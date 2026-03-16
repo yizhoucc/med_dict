@@ -11191,3 +11191,38 @@ Processing row 53 (54/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 12.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "start palbociclib after radiation",
+"supportive_meds": "oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid -> oxyCODONE (ROXICODONE) 5 mg tablet, zoledronic acid
+  Phase 1 extraction (6 prompts): 71.3s
+  Cross-context injected (732 chars)
+    Treatment_Goals: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.7s
+  Total extraction: 78.0s
