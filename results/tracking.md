@@ -2642,3 +2642,73 @@ run.py 主循环:
   POST-DISTMET    — 确保 Distant Metastasis 字段存在
   POST-RESPONSE   — findings 交叉补充 response_assessment
 ```
+
+---
+
+## v14 实验 (rows 47-82, 36 samples)
+
+### v14 新增 POST 过滤器
+
+```
+run.py 主循环新增:
+  POST-SPECIALTY  — 全文搜索 specialty referral 并分类到 Specialty 字段
+  POST-THERAPY    — therapy_plan 白名单过滤（oncology_drugs.txt + THERAPY_CATEGORY_TERMS）
+  POST-IMAGING    — 全文搜索影像计划 regex 补充 imaging_plan（含 IMAGING_SYNONYMS 去重）
+```
+
+### v14 实验结果 (rows 47-82)
+
+| 指标 | 值 |
+|------|-----|
+| 总行数 | 36 |
+| 总时间 | 130.4 min |
+| P0 | 0 |
+| P1 | 2 (Row 49 A/P regex, Row 78 echo dedup, Row 79 therapy safety net) |
+| P2 | ~3 (LLM 随机性) |
+| POST-THERAPY 触发率 | 42% (15/36) |
+| POST-IMAGING 触发率 | 6% (2/36) |
+
+### v14a 修复 (commit 276514a)
+
+1. **POST-THERAPY safety net**: 当所有句子被移除且原文无 oncology drug → 清空为 "None"（Row 79 fix）
+2. **POST-IMAGING echo dedup**: 新增 IMAGING_SYNONYMS 字典，Echocardiogram 与 echo/tte 互为同义词（Row 78 fix）
+3. **POST-THERAPY RT false positive**: `'rt '` → `' rt '`，句子前后加空格填充 `sl = " " + sent.lower() + " "`
+
+### v14b 修复 (commit 2ca3fd8)
+
+1. **oncology_drugs.txt**: 新增 `zoledronate`（之前只有 zoledronic acid 和 zometa）
+2. **THERAPY_CATEGORY_TERMS**: 新增化疗方案缩写 `' tc ', ' ac ', ' ec ', ' cmf '` 和 `'ac-t', 'tchp', 'folfox', 'folfiri', 'fec'`
+
+### v14c 修复 (commit d36c14f)
+
+1. **A/P regex**: 新增 `Impression/Plan:` 模式（Row 49 fix）
+2. **A/P regex**: 新增 `(?<!of )` 负向回顾防止匹配签名行中的 "Assessment and Plan"
+
+### v14 POST 链完整清单（21 个过滤器）
+
+```
+ult.py extract_and_verify_v2() 内部 (4):
+  POST-KEYS    — 删除多余 key
+  POST-MEDS    — oncology_drugs.txt 白名单过滤 current_meds
+  POST-SUPP    — supportive_care_drugs.txt 白名单过滤 supportive_meds
+  POST-PROC    — 从 procedure_plan 移除 imaging/radiotherapy/systemic therapy
+
+run.py 主循环 (17):
+  POST-REFERRAL   — 全文搜索 referral 模式（social work, exercise, nutrition）
+  POST-GENETICS   — 清除 Genetics 中的 mutation finding（非 referral）
+  POST-OTHERS     — Others 字段白名单过滤（只保留已知 referral 类型）
+  POST-NUTRITION  — 清除 Nutrition 中的饮食建议（非 referral）
+  POST-LAB        — 从 Lab_Plan 移除影像术语 + 过去状态表述
+  POST-PROCEDURE  — 全文搜索 procedure 模式（port, biopsy, surgery）
+  POST-ADV        — 全文搜索 code status
+  POST-STAGE      — Stage vs Metastasis 交叉验证
+  POST-GOALS      — adjuvant + 非转移 → curative
+  POST-DISTMET    — 确保 Distant Metastasis 字段存在
+  POST-RESPONSE   — findings 交叉补充 response_assessment
+  POST-SPECIALTY  — 全文搜索 specialty referral 分类 [v14]
+  POST-THERAPY    — therapy_plan 白名单过滤 [v14]
+  POST-IMAGING    — 全文搜索影像计划 regex 补充 [v14]
+  POST-THERAPY safety net — 无 oncology drug 时清空 [v14a]
+  POST-IMAGING dedup — IMAGING_SYNONYMS 同义词去重 [v14a]
+  POST-THERAPY padded matching — 空格填充防 RT 误匹配 [v14a]
+```
