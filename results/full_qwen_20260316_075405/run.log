@@ -3275,3 +3275,79 @@ Processing row 15 (16/100)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 11.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Proceed with radiation oncology evaluation. Plan to treat with aromatase inhibitor for at least 5 years, to be started after radiation. Recommend taking calcium and vitamin D to
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "proceed with radiation oncology evaluation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 7.2s
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA to assess current bone health, consider surveillance breast MRI in the future due to extreme breast density."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 3.8s
+      [EXTRACT] raw={
+    "lab_plan": "check estradiol level"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 5.6s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "would refer for genetic testing given her father's history of colon cancer and her breast cancer history"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 22.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "given her father's history of colon cancer and her breast cancer history, would refer for genetic testing",
+"Specialty": "Radiation oncology consult",
+"Others": "No
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "given her father's history of colon cancer and her breast cancer history, would " -> "refer for genetic testing"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after radiation oncology evaluation and to start aromatase inhibitor treatment"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after radiation oncology evaluation and to start " -> "after radiation oncology evaluation and to start aromatase i"
