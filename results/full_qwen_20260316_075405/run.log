@@ -16500,3 +16500,67 @@ Processing row 78 (79/100)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Consider cymbalta/lyrica for diabetic neuropathic pain', 'Needs to switch acce" -> "[]"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Medication_Plan: 10.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue methadone 10mg q8h, take 5mg oxycodone for breakthrough pain, consider cymbalta/lyrica for diabetic neuropathic pain."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Needs restaging previously used PET/CT continue. Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]. Dr [REDACTED] 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 10.2s
+      [EXTRACT] raw={
+    "procedure_plan": "Needs to switch access to a power port, Get thoracentesis locally with markers, Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for E
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 7.6s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Needs restaging previously used PET/CT continue. Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Needs restaging previously used PET/CT continue. Get diagnostic markers from act" -> "Needs restaging with previously used PET/CT. Get thoracentesis for diagnostic ma"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 6.5s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
