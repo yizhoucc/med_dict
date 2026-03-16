@@ -4803,3 +4803,149 @@ Processing row 22 (23/100)...
 }
       [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 123.1s
+    [POST-THERAPY] removed non-therapy: ['A baseline DEXA has been ordered, and the role of ', 'The patient is encouraged to maintain a calcium-ri']
+  [ATTRIBUTION] 14/18 fields sourced (20.2s)
+  Row 22 total: 239.3s
+  Row 22 saved to progress
+
+Processing row 23 (24/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (2241 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has a right breast Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), HER2 equ
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Patient type: "New patient" -> ""
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['Patient type', 'second opinion']
+      [G4-REVERT-INFER] Patient type: restored classification/inference "New patient"
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 15.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+ (>95%)/PR+ (80%)/HER2 equiv by IHC (2) neg by FISH Grade II micropapillary mucinous carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+ 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 35.8s
+      [EXTRACT] raw={
+"findings": "Pathology results: Grade II micropapillary mucinous carcinoma ER+ (>95%), PR+ (80%), HER2 equivocal by IHC (2) negative by FISH, 5% Ki-67. No lymphovascular invasion, 2 sentinel lymph n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 11.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), acetaminophen-codeine (TYLENOL #4),"
+      [POST-MEDS] acetaminophen (TYLENOL), acetaminophen-codeine (TYLENOL #4), calcium carbonate ([REDACTED]-CAL-500), cetirizine (ZYRTEC), cholecalciferol, vitamin D3, cyclobenzaprine (FLEXERIL), diclofenac (VOLTAREN), docusate sodium (COLACE), DULoxetine (CYMBALTA), gabapentin (NEURONTIN), ibuprofen (ADVIL,MOTRIN), losartan-hydrochlorothiazide (HYZAAR), meloxicam (MOBIC), naloxone, nicotine (NICODERM CQ), omeprazole (PRILOSEC), oxyCODONE (ROXICODONE), senna (SENOKOT) -> 
+    Treatment_Changes: 9.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen-codeine (TYLENOL #4), ibuprofen (ADVIL,MOTRIN), oxyCODONE (ROXICODONE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen-codeine (TYLENOL #4), ibuprofen (ADVIL,MOTRIN), oxyCODONE (ROXICODONE) -> acetaminophen-codeine (TYLENOL #4), oxyCODONE (ROXICODONE)
+  Phase 1 extraction (6 prompts): 90.9s
+  Cross-context injected (1131 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 97.1s
+    Medication_Plan_chatgpt: 42.4s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "If low risk, she can proceed with radiation and we will start adjuvant [REDACTED] hormone therapy.",
+        "Short term side_effects_discussed": "hot f
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['hormonal therapy', 'radiotherapy']" -> "[{'summary': 'The patient can proceed with radiation and will start adjuvant hor"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'The patient can proceed with radiation and wil" -> "[{'summary': 'The patient can proceed with radiation and wil"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 11.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "If the [REDACTED] test results show low risk, the patient will start adjuvant [REDACTED] hormone therapy. The potential side effects of hormone therapy include hot flashes, j
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "If the [REDACTED] test results show low risk, the patient will start adjuvant [R" -> "If the [REDACTED] test results show low risk, the patient will start adjuvant [R"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.3s
