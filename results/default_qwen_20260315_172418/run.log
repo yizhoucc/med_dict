@@ -660,3 +660,37 @@ Processing row 83 (4/13)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.5s
+      [EXTRACT] raw={
+"findings": "MRI brain on 11/07/2020 showed diffuse irregular enhancement along the bilateral cerebral convexities and right petroclival region, with increased involvement of the right internal audi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.4s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "capecitabine, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] capecitabine, zolendronic acid -> capecitabine
+    Treatment_Changes: 25.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started on capecitabine one week one, one week off. Patient accidentally took only 500mg BID until mid-September. Increased to 1000mg BID in mid-September, then 1500mg BID in late
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] zolendronic acid, cyclobenzaprine (FLEXERIL) -> 
+  Phase 1 extraction (6 prompts): 128.5s
+  Cross-context injected (1046 chars)
+    Treatment_Goals: 4.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
