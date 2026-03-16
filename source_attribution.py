@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Source Attribution (LLM second-pass): ask the LLM to find source sentences
-in the original note for each extracted field value.
+Source Attribution (LLM second-pass with KV Cache):
+Load the note once into KV cache, then ask per-field questions.
 
 Standalone usage (requires GPU + model):
     python source_attribution.py exp/default_qwen.yaml results/.../progress.json --row 49
 
-Integration: called from run.py after extraction, reusing loaded model + KV cache.
+Integration: called from run.py after extraction, reusing loaded model + base_cache.
 """
 
 import argparse
@@ -36,12 +36,7 @@ _SKIP_CONTAINS = (
 
 
 def _is_skip_value(value_str):
-    """Check if a value is non-informative for source attribution.
-
-    Only skips truly empty values and LLM meta-responses.
-    Short values like 'yes', 'palliative', 'New patient' are kept
-    so the LLM can find inference sources.
-    """
+    """Check if a value is non-informative for source attribution."""
     val = value_str.strip()
     if len(val) == 0:
         return True
@@ -69,39 +64,8 @@ def _flatten_value(field_value):
     return str(field_value)
 
 
-# ── prompt construction ────────────────────────────────────────────
-
-_ATTRIBUTION_SYSTEM = (
-    "You are a source attribution expert. Your job is to find the exact "
-    "sentences in a clinical note that support each extracted field value. "
-    "You MUST respond with valid JSON only. No markdown, no explanations."
-)
-
-_ATTRIBUTION_PROMPT_TEMPLATE = """\
-Below is a clinical note and {n_fields} extracted fields. For each field, find 1 short exact quote (5-25 words) from the note that supports it.
-
-Rules:
-- Quote the note EXACTLY. Do not paraphrase.
-- MAXIMUM 25 words per quote. Be concise — just the key phrase.
-- For INFERRED values (e.g. "palliative", "yes"), quote the inference basis.
-- You MUST provide a quote for EVERY field listed. Do not skip any.
-- Use the EXACT field names as JSON keys (preserve spaces, capitalization).
-- Return ONLY a JSON object. No markdown, no explanation.
-
-Note:
-{note_text}
-
-Fields:
-{fields_text}
-
-JSON output (one key per field, value = exact quote):"""
-
-
 def get_attributable_fields(keypoints):
-    """Extract all fields worth attributing from keypoints.
-
-    Returns dict of field_name -> value_str.
-    """
+    """Extract all fields worth attributing from keypoints."""
     attributable = {}
     for prompt_name, fields in keypoints.items():
         if not isinstance(fields, dict):
@@ -113,94 +77,51 @@ def get_attributable_fields(keypoints):
     return attributable
 
 
-def build_batch_prompt(note_text, field_batch):
-    """Build attribution prompt for a batch of fields.
+# ── per-field attribution via KV cache ─────────────────────────────
 
-    Args:
-        note_text: Original clinical note
-        field_batch: dict of field_name -> value_str (max ~10 fields)
+_FIELD_QUESTION_TEMPLATE = (
+    'I extracted {field_name}: "{value}". '
+    'Quote the EXACT short phrase (5-20 words) from the note above that '
+    'supports this. If it was inferred, quote the inference basis. '
+    'Reply with ONLY the quote, nothing else.'
+)
 
-    Returns: prompt string
+
+def attribute_single_field(field_name, value_str, model, tokenizer,
+                           chat_tmpl, gen_config, base_cache):
+    """Ask the LLM where a single field value came from.
+
+    Uses KV cache (note already encoded). Returns the quote string or None.
     """
-    lines = []
-    for i, (fname, fval) in enumerate(field_batch.items(), 1):
-        display_val = fval[:150] + '...' if len(fval) > 150 else fval
-        lines.append(f"{i}. {fname}: \"{display_val}\"")
-    fields_text = '\n'.join(lines)
+    from ult import clone_cache, run_model
 
-    return _ATTRIBUTION_PROMPT_TEMPLATE.format(
-        n_fields=len(field_batch),
-        note_text=note_text,
-        fields_text=fields_text,
+    question = _FIELD_QUESTION_TEMPLATE.format(
+        field_name=field_name,
+        value=value_str[:150],
     )
+    prompt = chat_tmpl.user_assistant(question)
+    cache = clone_cache(base_cache)
 
+    output, _ = run_model(prompt, model, tokenizer, gen_config, cache)
 
-# ── JSON repair for truncated output ───────────────────────────────
+    # Clean up the output
+    quote = output.strip().strip('"').strip("'").strip()
+    # Remove common prefixes the model might add
+    for prefix in ['The quote is:', 'Quote:', 'Source:', 'From the note:',
+                   'The relevant text is:', 'The exact phrase is:']:
+        if quote.lower().startswith(prefix.lower()):
+            quote = quote[len(prefix):].strip().strip('"').strip("'").strip()
 
-def _repair_truncated_json(text):
-    """Try to repair truncated JSON by closing open structures."""
-    text = text.strip()
-    if text.startswith('```'):
-        text = re.sub(r'^```\w*\s*', '', text)
-        text = re.sub(r'\s*```\s*$', '', text)
-    text = text.strip()
-
-    try:
-        result = json.loads(text)
-        if isinstance(result, dict):
-            return result
-    except (json.JSONDecodeError, ValueError):
-        pass
-
-    # progressively trim from the end until we can close the JSON
-    for trim in range(len(text) - 1, max(0, len(text) - 500), -1):
-        candidate = text[:trim].rstrip().rstrip(',')
-        for suffix in ['"}', '"]', '}', '"}]', '"]}']:
-            attempt = candidate + suffix
-            try:
-                result = json.loads(attempt)
-                if isinstance(result, dict):
-                    return result
-            except (json.JSONDecodeError, ValueError):
-                continue
-    return None
-
-
-# ── LLM call ───────────────────────────────────────────────────────
-
-def run_attribution_llm(prompt, model, tokenizer, chat_tmpl, gen_config,
-                        base_cache=None):
-    """Run the attribution prompt through the LLM.
-
-    Returns: (parsed_dict, raw_output)
-    """
-    from ult import try_parse_json, clone_cache, run_model
-
-    if base_cache is not None:
-        full_prompt = chat_tmpl.user_assistant(prompt)
-        cache = clone_cache(base_cache)
-        output, _ = run_model(full_prompt, model, tokenizer, gen_config, cache)
-    else:
-        full_prompt = chat_tmpl.system_user_assistant(_ATTRIBUTION_SYSTEM, prompt)
-        output, _ = run_model(full_prompt, model, tokenizer, gen_config)
-
-    result = try_parse_json(output)
-    if result is None:
-        result = _repair_truncated_json(output)
-
-    return result, output
-
-
-# ── main attribution function ─────────────────────────────────────
-
-BATCH_SIZE = 8  # fields per LLM call
+    if len(quote) < 5:
+        return None
+    return quote
 
 
 def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
-                  gen_config, base_cache=None):
-    """Run LLM source attribution for all fields in a row.
+                  gen_config, base_cache):
+    """Run LLM source attribution for all fields in a row using KV cache.
 
-    Splits fields into batches of BATCH_SIZE to avoid output truncation.
+    The base_cache should already contain the encoded note text.
 
     Returns:
         Dict of field_name -> list of source quotes
@@ -209,51 +130,14 @@ def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
     if not attributable:
         return {}
 
-    # Split into batches
-    field_items = list(attributable.items())
-    batches = []
-    for i in range(0, len(field_items), BATCH_SIZE):
-        batches.append(dict(field_items[i:i + BATCH_SIZE]))
-
     attribution = {}
-    for batch_idx, batch in enumerate(batches):
-        prompt = build_batch_prompt(note_text, batch)
-        result, raw_output = run_attribution_llm(
-            prompt, model, tokenizer, chat_tmpl, gen_config, base_cache
+    for field_name, value_str in attributable.items():
+        quote = attribute_single_field(
+            field_name, value_str, model, tokenizer,
+            chat_tmpl, gen_config, base_cache
         )
-
-        if result is None:
-            print(f"  [ATTR batch {batch_idx+1}/{len(batches)}] Parse failed", file=sys.stderr)
-            print(f"  Raw ({len(raw_output)} chars): {raw_output[:500]}", file=sys.stderr)
-            continue
-
-        # Build normalized key lookup (spaces/underscores/case insensitive)
-        norm_map = {}
-        for bk in batch:
-            norm_map[bk.lower().replace(' ', '_').replace('-', '_')] = bk
-
-        # Map results: handle field names, normalized names, or numbered keys
-        for key, quote in result.items():
-            if key in batch:
-                field_name = key
-            else:
-                norm_key = key.lower().replace(' ', '_').replace('-', '_')
-                if norm_key in norm_map:
-                    field_name = norm_map[norm_key]
-                else:
-                    # try numbered key -> field name
-                    try:
-                        idx = int(key) - 1
-                        field_name = list(batch.keys())[idx]
-                    except (ValueError, IndexError):
-                        continue
-
-            if isinstance(quote, list):
-                valid = [q for q in quote if isinstance(q, str) and len(q) > 5]
-                if valid:
-                    attribution[field_name] = valid
-            elif isinstance(quote, str) and len(quote) > 5:
-                attribution[field_name] = [quote]
+        if quote:
+            attribution[field_name] = [quote]
 
     return attribution
 
@@ -277,11 +161,11 @@ def format_attribution(attribution, keypoints, max_quote=150):
     return '\n'.join(lines)
 
 
-# ── CLI ────────────────────────────────────────────────────────────
+# ── CLI (standalone testing) ───────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
-        description='LLM-based source attribution for extracted fields'
+        description='LLM-based source attribution (KV cache per-field)'
     )
     parser.add_argument('config', help='Path to experiment config YAML')
     parser.add_argument('progress_file', help='Path to progress.json')
@@ -292,7 +176,7 @@ def main():
     import torch
     import yaml
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-    from ult import ChatTemplate
+    from ult import ChatTemplate, build_base_cache
 
     # Load config
     with open(args.config) as f:
@@ -342,7 +226,7 @@ def main():
 
     gen_config = config["generation"]["keypoint"].copy()
     gen_config["eos_token_id"] = tokenizer.eos_token_id
-    gen_config["max_new_tokens"] = 2048
+    gen_config["max_new_tokens"] = 128  # each answer is just a short quote
 
     # Load progress
     with open(args.progress_file) as f:
@@ -367,12 +251,21 @@ def main():
         print(f'ROW {row_key} (coral_idx={coral_idx})')
         print(f'{"="*60}')
 
+        # Build KV cache for this note
         t0 = time.time()
+        base_cache = build_base_cache(note_text, model, tokenizer,
+                                       chat_tmpl=chat_tmpl)
+        cache_time = time.time() - t0
+
+        # Run attribution
+        t1 = time.time()
         attribution = attribute_row(
             note_text, keypoints, model, tokenizer,
-            chat_tmpl, gen_config
+            chat_tmpl, gen_config, base_cache
         )
-        elapsed = time.time() - t0
+        attr_time = time.time() - t1
+        total_time = time.time() - t0
+
         all_attributions[row_key] = attribution
 
         output = format_attribution(attribution, keypoints)
@@ -382,8 +275,8 @@ def main():
         attributable = get_attributable_fields(keypoints)
         total = len(attributable)
         found = len(attribution)
-        print(f'\n  --- {found}/{total} fields sourced ({elapsed:.1f}s, '
-              f'{len(range(0, total, BATCH_SIZE))} batches) ---')
+        print(f'\n  --- {found}/{total} fields sourced ---')
+        print(f'  --- cache: {cache_time:.1f}s + {total} queries: {attr_time:.1f}s = {total_time:.1f}s ---')
 
     if args.output:
         with open(args.output, 'w') as f:
