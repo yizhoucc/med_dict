@@ -11286,3 +11286,72 @@ Processing row 53 (54/100)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 13.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Social work referral, Exercise counseling referral",
+"follow up": "The patient will return to clinic in
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral, Exercise counseling referral" -> "Exercise counseling referral"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "Exercise counseling referral" -> "weight bearing exercise"
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> "referred to radiation oncology"
+      [G4-FAITH] Genetics: "None" -> "deleterious BRCA2 mutation"
+      [G4-FAITH] EMPTIED: ['Nutrition']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 4 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 128.6s
+    [POST-GENETICS] cleared finding from referral: 'deleterious BRCA2 mutation'
+    [POST-OTHERS] cleaned: 'weight bearing exercise...' → 'None'
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone)'
+  [ATTRIBUTION] 17/20 fields sourced (37.5s)
+  Row 53 total: 244.2s
+  Row 53 saved to progress
+
+Processing row 54 (55/100)...
+  Injected 7 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'ER positive', 'PR positive', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (1668 chars)
+  A/P extraction: 0.0s
