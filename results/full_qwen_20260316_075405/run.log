@@ -9431,3 +9431,55 @@ Processing row 44 (45/100)...
       [G4-FAITH] genetic_testing_plan: "None planned." -> ""
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 17.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "start on [REDACTED], gemzar carboplatin asap. Second line she could use [REDACTED] and there are clinica
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given note"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given note" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 83.2s
+    [POST-ADV] patched from full note: ['full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the lung and right hilar lymph node)'
+  [ATTRIBUTION] 16/17 fields sourced (29.8s)
+  Row 44 total: 185.3s
+  Row 44 saved to progress
+
+Processing row 45 (46/100)...
+  Injected 7 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
