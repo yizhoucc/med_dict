@@ -19365,3 +19365,51 @@ Processing row 92 (93/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 12.8s
+      [EXTRACT] raw={
+"findings": "Multiple foci of invasive ductal carcinoma, 0.21 cm in largest focus, modified grade 3, margins negative; Ductal carcinoma in situ, high nuclear grade, solid and cribriform patterns wit
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate so"
+      [POST-MEDS] acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate sodium (COLACE) 100 mg, Oral, 2 Times Daily PRN; FLUoxetine (PROZAC) 60 mg, Oral, Daily Scheduled; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 8 Hours PRN; oxyCODONE (ROXICODONE) 5 mg, Oral, Every 3 Hours PRN -> 
+    Treatment_Changes: 26.6s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "recommend Paclitaxel/Trastuzumab which can be started in 1-2 weeks",
+"supportive_meds": "acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate sodium (COLACE) 100 mg, Oral, 2 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate sodium (COLACE) 100 mg" -> "acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate sodium (COLACE) 100 mg"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen 1,000 mg, Oral, Every 8 Hours PRN; docusate sodium (COLACE) 100 mg, Oral, 2 Times Daily PRN; FLUoxetine (PROZAC) 60 mg, Oral, Daily Scheduled; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every  8 Hours PRN; oxyCODONE (ROXICODONE) 5 mg, Oral, Every 3 Hours PRN -> docusate sodium (COLACE) 100 mg, oxyCODONE (ROXICODONE) 5 mg
+  Phase 1 extraction (6 prompts): 80.1s
+  Cross-context injected (509 chars)
+    Treatment_Goals: 3.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 86.2s
