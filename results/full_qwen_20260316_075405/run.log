@@ -668,3 +668,49 @@ Processing row 3 (4/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 24.0s
+      [EXTRACT] raw={
+"findings": "The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. Her leg, upper back, and arm pain have improved after completing physical therapy. The
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+"current_meds": "Letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.3s [improved]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium carbonate, cholecalciferol, vitamin D3"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium carbonate, cholecalciferol, vitamin D3" -> "letrozole"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 66.1s
+  Cross-context injected (877 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 7.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. She is currently on Letrozole since 12/02/2016."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient is without any evidence of disease recurrence on imaging, exam, and " -> "The patient is without any evidence of disease recurrence on imaging, exam, and "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 10.7s
+  Total extraction: 76.8s
