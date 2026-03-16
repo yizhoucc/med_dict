@@ -16303,3 +16303,38 @@ Processing row 77 (78/100)...
       [G5-TEMPORAL] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta" -> "{'summary': 'At this time she is not interested in chemotherapy.', 'Short_term_s"
       [G5-TEMPORAL] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp" -> "{'summary': 'Continue 800 mg Mag-Ox supplement daily.', 'Short_term_side_effects"
       [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 9.7s
+      [EXTRACT] raw={
+    "procedure_plan": "Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
