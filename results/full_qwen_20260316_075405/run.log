@@ -19796,3 +19796,19 @@ Processing row 94 (95/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 56.3s
+      [EXTRACT] raw={
+"findings": "Left breast, [REDACTED]-localized partial mastectomy: Residual invasive ductal carcinoma with treatment effect, three foci, margins negative; Residual ductal carcinoma in situ with trea
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, potassium chloride (KLOR-CON [REDACTED]) 10 mEq ER tablet -> 
