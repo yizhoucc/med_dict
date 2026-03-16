@@ -18991,3 +18991,62 @@ Processing row 90 (91/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 19.8s
   Total extraction: 119.3s
+    Medication_Plan_chatgpt: 32.6s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Exemestane daily since April 2012. Continue.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+  
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['hormonal therapy: exemestane daily since April 2012', 'bone therapy: denosumab" -> "[{'summary': 'hormonal therapy: exemestane daily since April 2012', 'Short term "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy: exemestane daily since April" -> "[{'summary': 'hormonal therapy: exemestane daily since April"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy: exemestane daily since April 2012', 'Short term " -> "[{'summary': 'hormonal therapy: exemestane daily', 'Short term side_effects_disc"
+    Medication_Plan: 10.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical antifungal 2 times daily"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL" -> "Continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical anti"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.3s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg edema. Continue lasix 10mg daily with KCL 10Meq daily. Continue denosumab for hip pain."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg " -> "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.4s [faith-trimmed]
+      [EXTRACT] raw={"radiotherapy_plan": "None"}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 5.0s
+      [EXTRACT] raw={
+    "procedure_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['PET/CT next week to evaluate disease burden']
+    Imaging_Plan: 5.1s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
