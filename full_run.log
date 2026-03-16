@@ -18917,3 +18917,155 @@ Processing row 90 (91/100)...
   Trying regex extraction...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1283 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has stage 4 breast cancer with metastasis to lymph nodes and bone. The purpose of this visit is
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 14.4s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, pelvis, and right iliac lesion",
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Type_of_Cancer: "ER+/PR+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 32.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Alanine transaminase 27, Aspartate transaminase 60[REDACTED], Alkaline Phosphatase 67, Bilirubin, Direct 0.1 (from 09/05/2009), Bilirubin, Total 0.4, NA 140, [REDACTED] 4.4, [REDACTE
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60[REDACTED], Alkaline Phosphata" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline Phosphatase 67, Bil"
+      [G4-FAITH] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60, Alkaline" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline"
+    Clinical_Findings: 24.3s
+      [EXTRACT] raw={
+"findings": "MRI pelvis: Moderate interval increase in size and extent of right iliac lesion abutting the right acetabular articular surface and extending along the right pubic root. Multiple new su
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s
+      [EXTRACT] raw={
+"current_meds": "everolimus, exemestane, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.4s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started lasix 10mg once a day with KCL 10Meq once daily.",
+"supportive_meds": "denosumab, potassium chloride"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab, potassium chloride" -> "denosumab, potassium chloride, everolimus, exemestane"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, potassium chloride, everolimus, exemestane -> denosumab, everolimus, exemestane
+  Phase 1 extraction (6 prompts): 99.5s
+  Cross-context injected (948 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.3s
+      [EXTRACT] raw={
+"response_assessment": "PET/CT confirms increase in bone metastases and new soft tissue stranding in right perirenal area. MRI pelvis shows moderate interval increase in size and extent of right ili
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 19.8s
+  Total extraction: 119.3s
+    Medication_Plan_chatgpt: 32.6s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Exemestane daily since April 2012. Continue.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+  
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['hormonal therapy: exemestane daily since April 2012', 'bone therapy: denosumab" -> "[{'summary': 'hormonal therapy: exemestane daily since April 2012', 'Short term "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy: exemestane daily since April" -> "[{'summary': 'hormonal therapy: exemestane daily since April"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy: exemestane daily since April 2012', 'Short term " -> "[{'summary': 'hormonal therapy: exemestane daily', 'Short term side_effects_disc"
+    Medication_Plan: 10.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical antifungal 2 times daily"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL" -> "Continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical anti"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.3s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg edema. Continue lasix 10mg daily with KCL 10Meq daily. Continue denosumab for hip pain."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg " -> "Continue exemestane daily. Continue [REDACTED] [REDACTED] and elevation for leg "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.4s [faith-trimmed]
+      [EXTRACT] raw={"radiotherapy_plan": "None"}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 5.0s
+      [EXTRACT] raw={
+    "procedure_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['PET/CT next week to evaluate disease burden']
+    Imaging_Plan: 5.1s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 3.5s
+      [EXTRACT] raw={
+    "lab_plan": "Labs monthly"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok

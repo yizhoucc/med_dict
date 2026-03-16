@@ -14128,3 +14128,168 @@ RESULTS FOR ROW 90
     "RTC after XRT, approx 1-1.5 mos"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 91
+============================================================
+
+--- Column: coral_idx ---
+230
+
+--- Column: note_text ---
+"SUBJECTIVE    ***** ***** is a 53 y.o. female with hx MBC to LN, bone on exemestane and everolimus, denosumab monthly     HPI: reports RLE swelling improved. Using ***** ***** and elevation daily. Has stopped ice. Weight down 7# since starting lasix 10mg once a day with KCL 10Meq once daily.   Took ***** med medrol (oral steroid) x 1/2 tab this morning.   Reports fungus in umbilicus     Denies mouth sores, *****, fever, cough, SOB, CP, abd pain, *****, or rashes.     Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, stage 4 04/12/2011     Priority: High     Dx 2003 R breast cancer 1.3cm stage I 0/4LN ER+PR+ *****-  L lump with reconstruction, xrt, tamoxifen  2005 PD bone                                        XRT to L hip, R clavicle, L head femur, L hip 2010   *****-***** letrozole, zoladex  September 2005 BSO  *****/*****/*****-*****/***** ***** ***** and fulvestrant 250 mg  *****/*****-*****/***** phase ***** *****  *****/*****-*****/*****/***** exemestane, *****  ***** to denosumab in October 2010  11/08/11 MRI pelvis: Moderate interval increase in size and extent of right iliac lesion which abuts the right acetabular articular surface and   extends along the right pubic root. All of these findings are concerning for progression of metastatic disease. Multiple new suspicious T2 hyperintense/T1 hypointense lesions   within the sacrum, left ischial tuberosity and left femur. Left femoral head metastatic focus appears unchanged. Interval increase in bilateral hip effusions.  11/15/11 PET/CT: Confirms increase in bone metastases and new soft tissue stranding in right perirenal area  12/06/11 to 04/24/2012 start fulvestrant 500 mg  04/24/2012 to current Everolimus and *****, Xgeva monthly           \u0007 Leg edema, right 10/18/2012     New problem  Started 1 month ago after tripping while hiking down hill  Unchanged swelling has not gotten less or better since accident  Has not used compression devices. Edema better in the morning at times       \u0007 Hip pain, right \n 10/03/2011     Intermittent, dull achy improves with NSAIDs. Overall stable.   No pain on exam, able to bear full weight, full ROM   Hx of fracture  Hx of XRT to hip  On Xgeva for bone strengthening     \u0007 Right foot pain 08/08/2011       ROS  General: no Fatigue, no weight loss   Skin: no rashes or lesions, no diaphoresis   Eyes: no vision changes   ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat   Breast: no breast pain or swelling   Respiratory: no cough, SOB, wheezing  Cardiovascular: no CP, palpitations or edema   GI: no nausea, vomiting, diarrhea or constipation. No heartburn or abdominal pain.   GU: no dysuria or vaginal bleeding   Musculoskeletal: no pain   Endocrine: no heat or cold intolerance. No hot flashes.   Heme/Lymph: no easy bruising, no lymphedema  Neurological: no headaches, dizziness, numbness or *****, or falls   Psychological: mood stable.   All other systems were reviewed and ar negative.      MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 ascorbic acid (VITAMIN C) 1,000 mg tablet Take 1,000 mg by mouth Daily.         \u0007 calcium-vitamin D 500-125 mg-unit tablet Take 1 tablet by mouth 2 (two) times daily.         \u0007 CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D-3 ORAL) Take 5,000 Int'l Units by mouth Daily.         \u0007 DENOSUMAB SUBCUT Inject 120 mg into the skin.         \u0007 everolimus 10 mg TAB tablet Take 10 mg by mouth Daily.  30 tablet  11   \u0007 exemestane (*****) 25 mg tablet Take 25 mg by mouth Daily.       \u0007 furosemide (LASIX) 20 mg tablet Take 0.5 tablets (10 mg total) by mouth Daily.  15 tablet  2   \u0007 potassium chloride (KDUR; KLOR-CON) 10 mEq tablet Take 1 tablet (10 mEq total) by mouth Daily.  30 tablet  11   \u0007 predniSONE (DELTASONE) 10 mg tablet Take 5 tablets the night before and 2 hours before contrast scan.  30 tablet  0   \u0007 triamcinolone (KENALOG) 0.1 % cream Apply topically 3 (three) times daily. Use \n as instructed  80 g  1   \u0007 TURMERIC (CURCUMIN MISC) Take by mouth.             ALLERGIES  Allergies   Allergen Reactions   \u0007 Codeine      Note: Sensitivity   \u0007 Morphine      Note: Sensitivity   \u0007 Other      Allergy:   1) MRI (per ***** notes 02/08/2011)  03/20/12 - patient was pre-medicated but had breakthrough hives immediately after contrast, then 6 hr later had head congestion,slight difficulty breathing, itchy throat. Patient reluctant to ever have gadolinium again as she fears future reactions.   2) *****       PAST, FAMILY, and SOCIAL HISTORY  @PHM@  Family History   Problem Relation Age of Onset   \u0007 Breast cancer Mother    \u0007 Breast cancer Paternal Aunt    \u0007 Prostate cancer Paternal Grandfather      History   Substance Use Topics   \u0007 Smoking status: Never Smoker    \u0007 Smokeless tobacco: Not on file   \u0007 Alcohol Use: Yes      occ.       PHYSICAL EXAM  Objective  ECOG 0  Vital Signs:  BP 140/76 | Pulse 85 | Temp 36.6 C (97.8 F) (Oral) | Resp 18 | Ht 170.2 cm (5' 7.01\") | Wt 89.359 kg (197 lb) | BMI 30.85 kg/m2 | SpO2 97% | LMP 04/12/2006  Constitutional:  WDWN, NAD  Skin: warm, moist. No rashes or lesions +oozing   Eyes: sclera anicteric, PERRL, EOMI   HENT: sinuses nontender, TMs intact, nasal mucosa intact, pharynx without erythema, no thrush   Lymph Nodes: no cervical, supraclavicular, or axillary lymphadenopathy  +1cm right iliac LN  Respiratory: resonant to percussion throughout, CTA bilaterally, no wheezes, rhonchi, or crackles  Cardiovascular: Normal heart rate, Normal rhythm, No murmurs, No rubs, No gallops. No LE edema   Breast: no masses   GI: Bowel sounds normal, Soft, No tenderness or distention. No HSM   Musculoskeletal: No point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema   Neurologic: Alert & oriented x 3, CN intact, ambulates w/o difficulty, ***** (-), DTRs 2+throughout.   Psychiatric: Mood stable. No HI, SI, hallucinations, paranoia, or \n delusions.  Physical Exam   Constitutional:           RESULTS  I have individually reviewed and interpreted the following   Lab Results   Component Value Date    Alanine transaminase 27 10/16/2012    Aspartate transaminase 60***** 10/16/2012    Alkaline Phosphatase 67 10/16/2012    Bilirubin, Direct 0.1 09/05/2009    Bilirubin, Total 0.4 10/16/2012     Lab Results   Component Value Date    NA 140 10/16/2012    ***** 4.4 10/16/2012    ***** 108 10/16/2012    CO2 26 10/16/2012    BUN 20 10/16/2012    CREAT 0.59 10/16/2012    GLU 101 04/12/2011     Key elements of latest CBC/diff values... Please see Chart Review for additional result details  Lab Results   Component Value Date    WBC Count 4.1 10/16/2012    RBC Count 4.50 10/16/2012    Hemoglobin 12.4 10/16/2012    Hematocrit 37.5 10/16/2012    MCV 84 10/16/2012    Platelet Count 215 10/16/2012    Neutrophil Absolute Count 2.46 10/16/2012    Lymphocyte Abs Cnt 1.16 10/16/2012         ASSESSMENT & PLAN  Breast cancer, stage 4  ***** ***** *****, ***** ***** ***** and exemestane daily since April 2012. RLE edema improved, weight down 7#. Labs, scans reviewed. Exam +right iliac LN 1cm soft mobile, RLE non pitting, dependent edema.   Discussed with Dr. ***** in detail   Reviewed scans in detail, unclear significance for iliac LN small change   PET/CT next week to evaluate disease burden   Labs monthly   RTC in 1 month     Leg edema, right  Continue ***** ***** and elevation   Continue lasix 10mg daily with KCL 10Meq daily   Reviewed alarm sx and when to seek care       Hip pain, right  Continue denosumab   PET/CT next week       Fungal dermatitis  Topical antifungal 2 times daily           1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history \n sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 45  Total counseling time: 40      Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM        \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  Breast cancer, stage 4  ***** ***** *****, ***** ***** ***** and exemestane daily since April 2012. RLE edema improved, weight down 7#. Labs, scans reviewed. Exam +right iliac LN 1cm soft mobile, RLE non pitting, dependent edema.   Discussed with Dr. ***** in detail   Reviewed scans in detail, unclear significance for iliac LN small change   PET/CT next week to evaluate disease burden   Labs monthly   RTC in 1 month     Leg edema, right  Continue ***** ***** and elevation   Continue lasix 10mg daily with KCL 10Meq daily   Reviewed alarm sx and when to seek care       Hip pain, right  Continue denosumab   PET/CT next week       Fungal dermatitis  Topical antifungal 2 times daily           1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history \n sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 45  Total counseling time: 40      Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM        \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "The patient has stage 4 breast cancer with metastasis to lymph nodes and bone. The purpose of this visit is to review labs, scans, and manage symptoms including right leg edema and hip pain."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+    "Metastasis": "Yes (to bone, pelvis, and right iliac lesion)",
+    "Distant Metastasis": "Yes (to bone, pelvis, and right iliac lesion)"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alanine transaminase 27, Aspartate transaminase 60, Alkaline Phosphatase 67, Bilirubin, Direct 0.1, Bilirubin, Total 0.4, Sodium 140, Potassium  4.4, Chloride 108, CO2 26, BUN 20, Creatinine 0.59, Glucose 101, WBC Count 4.1, RBC Count  4.50, Hemoglobin 12.4, Hematocrit 37.5, MCV 84, Platelet Count 215, Neutrophil Absolute Count 2.46, Lymphocyte Absolute Count 1.16"
+  },
+  "Clinical_Findings": {
+    "findings": "MRI pelvis: Moderate interval increase in size and extent of right iliac lesion abutting the right acetabular articular surface and extending along the right pubic root. Multiple new suspicious T2 hyperintense/T1 hypointense lesions within the sacrum, left ischial tuberosity, and left femur. Left femoral head metastatic focus appears unchanged. Interval increase in bilateral hip effusions. PET/CT: Confirms increase in bone metastases and new soft tissue stranding in right perirenal area. Physical exam: +1cm right iliac LN, soft, mobile, RLE non-pitting, dependent edema."
+  },
+  "Current_Medications": {
+    "current_meds": "everolimus, exemestane, denosumab"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started lasix 10mg once a day with KCL 10Meq once daily.",
+    "supportive_meds": "denosumab, everolimus, exemestane"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "PET/CT confirms increase in bone metastases and new soft tissue stranding in right perirenal area. MRI pelvis shows moderate interval increase in size and extent of right iliac lesion and multiple new suspicious lesions within the sacrum, left ischial tuberosity, and left femur. These findings suggest disease progression despite current treatment with everolimus, exemestane, and denosumab."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "summary": "hormonal therapy: exemestane daily",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      {
+        "summary": "bone therapy: Continue denosumab",
+        "Short term side_effects_discussed": "",
+        "Long term_side_effects_discussed": ""
+      }
+    ]
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical antifungal 2 times daily"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue exemestane daily. Continue denosumab for hip pain."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT next week to evaluate disease burden"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Labs monthly"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "PET/CT next week to evaluate disease burden, Labs monthly, RTC in 1 month"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 1 month to evaluate disease burden and review labs"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "Reviewed with Dr. [REDACTED] in detail\" \"Reviewed scans in detail, unclear significance for iliac LN small change\" \"PET/CT next week to evaluate disease burden\" \"Labs monthly\" \"RTC in 1 month"
+  ],
+  "second opinion": [
+    "Discussed with Dr. [REDACTED] in detail"
+  ],
+  "in-person": [
+    "Reviewed alarm sx and when to seek care"
+  ],
+  "summary": [
+    "Breast cancer, stage 4  [REDACTED] [REDACTED] [REDACTED], [REDACTED] [REDACTED] [REDACTED] and exemestane daily since April 2012."
+  ],
+  "Stage_of_Cancer": [
+    "Breast cancer, stage 4"
+  ],
+  "Metastasis": [
+    "Exam +right iliac LN 1cm soft mobile"
+  ],
+  "Distant Metastasis": [
+    "Exam +right iliac LN 1cm soft mobile"
+  ],
+  "lab_summary": [
+    "Labs, scans reviewed."
+  ],
+  "current_meds": [
+    "everolimus, exemestane daily since April 2012.\" \"Continue denosumab"
+  ],
+  "recent_changes": [
+    "Continue lasix 10mg daily with KCL 10Meq daily"
+  ],
+  "supportive_meds": [
+    "Continue denosumab\" \"exemestane daily since April 2012\" \"Reviewed with Dr. [REDACTED] in detail"
+  ],
+  "goals_of_treatment": [
+    "Breast cancer, stage 4"
+  ],
+  "response_assessment": [
+    "PET/CT next week to evaluate disease burden"
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "RLE edema improved, weight down 7#. Labs, scans reviewed. Exam +right iliac LN 1cm soft mobile, RLE non pitting, dependent edema.   Discussed with Dr. [REDACTED] in detail   Reviewed scans in detail, unclear significance for iliac LN small change   PET/CT next week to evaluate disease burden   Labs monthly   RTC in 1 month     Leg edema, right  Continue [REDACTED] [REDACTED] and elevation   Continue lasix 10mg daily with KCL 10Meq daily   Reviewed"
+  ],
+  "medication_plan": [
+    "Continue lasix 10mg daily with KCL 10Meq daily   Continue denosumab   PET/CT next week       Fungal dermatitis  Topical antifungal 2 times daily"
+  ],
+  "therapy_plan": [
+    "Continue [REDACTED] [REDACTED] and elevation   Continue lasix 10mg daily with KCL 10Meq daily   Reviewed alarm sx and when to seek care       Hip pain, right  Continue denosumab"
+  ],
+  "imaging_plan": [
+    "PET/CT next week to evaluate disease burden"
+  ],
+  "lab_plan": [
+    "Labs monthly"
+  ],
+  "follow up": [
+    "PET/CT next week to evaluate disease burden   Labs monthly   RTC in 1 month"
+  ],
+  "Next clinic visit": [
+    "RTC in 1 month"
+  ]
+}
