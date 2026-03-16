@@ -5547,3 +5547,84 @@ Processing row 26 (27/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 9.9s
   Total extraction: 79.4s
+    Medication_Plan_chatgpt: 26.5s [improved, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on [REDACTED], zoladex and femara.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+   
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Continue on [REDACTED], zoladex and femara.', 'Short term side_effe" -> "{'summary': 'Continue on [REDACTED], zoladex and femara.', 'Short term side_effe"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment'}
+    Medication_Plan: 6.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on [REDACTED], zoladex, and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.3s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on [REDACTED], zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on [REDACTED], zoladex and femara." -> "Continue on [REDACTED], zoladex and femara. Reassess lower back pain at two week"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 6.4s
+      [EXTRACT] raw={
+    "procedure_plan": "Reassess lower back pain at two weeks and consider MRI of the spine."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Reassess lower back pain at two weeks and consider MRI of the spine.']
+    Imaging_Plan: 6.0s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Reassess lower back pain at two weeks and consider MRI of the spine."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Reassess lower back pain at two weeks and consider MRI of the spine." -> "Consider MRI of the spine if lower back pain persists after two weeks."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 4.8s
+      [EXTRACT] raw={
+    "lab_plan": "CBC with platelets to evaluate easy bruising."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
