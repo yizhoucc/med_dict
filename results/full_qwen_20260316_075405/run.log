@@ -16698,3 +16698,19 @@ Processing row 79 (80/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.2s
   Total extraction: 144.7s
+    Medication_Plan_chatgpt: 50.5s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Start TC x 4 on 04/11/19",
+        "Short term side_effects_discussed": "chemotherapy toxicity, management and medications discussed in detail",
+        "Lo
+      [G1-FORMAT] ok, keys=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Start TC x 4 on 04/11/19', 'Short term side_effects_discussed': 'ch" -> "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_effects_discussed': 'ch"
+      [G3-IMPROVE] supportive treatment: "{'summary': 'Discussed claritin for 5-6 days, Pain medications for cold cap disc" -> "{'summary': 'Discussed claritin for 5-6 days, Pain medications for cold cap disc"
+      [G4-FAITH] chemotherapy: "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_eff" -> "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_eff"
+      [G4-FAITH] other treatment: "{'summary': 'none mentioned', 'Short term side_effects_discu" -> "{'summary': '', 'Short_term_side_effects_discussed': '', 'Lo"
+      [G4-FAITH] radiotherapy: "{'summary': '6 weeks of radiation therapy, 5 weeks with a on" -> "{'summary': '6 weeks of radiation therapy, 5 weeks with a on"
+      [G4-FAITH] supportive treatment: "{'summary': 'Discussed claritin for 5-6 days, Pain medicatio" -> "{'summary': 'Discussed claritin for 5-6 days, Pain medicatio"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment', 'radiotherapy', 'supportive treatment'}
