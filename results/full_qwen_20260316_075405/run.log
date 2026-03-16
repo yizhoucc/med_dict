@@ -16281,3 +16281,25 @@ Processing row 77 (78/100)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 36.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in liver s
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal " -> "Worsening of metastatic disease noted on 08/07/19 abdominal "
+  Phase 2 extraction (2 prompts): 40.2s
+  Total extraction: 197.9s
+    Medication_Plan_chatgpt: 34.8s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient has been off systemic therapy since 03/15/19. Discussed standard chemotherapy options including doxil and [REDACTED], doxil likely being the best ne
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta" -> "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta"
+      [G3-IMPROVE] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp" -> "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp"
+      [G4-FAITH] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/" -> "{'summary': 'Patient has been off systemic therapy since 03/"
+      [G4-FAITH] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continu" -> "{'summary': 'Mag supplement initiated on 01/13/2019. Continu"
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta" -> "{'summary': 'At this time she is not interested in chemotherapy.', 'Short_term_s"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp" -> "{'summary': 'Continue 800 mg Mag-Ox supplement daily.', 'Short_term_side_effects"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
