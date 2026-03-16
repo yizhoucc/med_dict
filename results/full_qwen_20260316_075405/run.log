@@ -6180,3 +6180,13 @@ Processing row 29 (30/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.5s
   Total extraction: 142.6s
+    Medication_Plan_chatgpt: 82.7s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "The patient will receive neoadjuvant chemotherapy, either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubic
+      [G1-FORMAT] ok, keys=['chemotherapy', 'biological therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'biological therapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] other treatment: "{'summary': 'No specific other treatments were discussed in " -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G5-TEMPORAL] other treatment: "{'summary': '', 'Short term side_effects_discussed': '', 'Long term side_effects" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Long term_side_effects"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment', 'biological therapy'}
