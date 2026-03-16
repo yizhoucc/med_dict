@@ -104,5 +104,6 @@ xgeva
 prolia
 zoledronic acid
 zoledronate
+zolendronic acid
 zometa
 pamidronate
