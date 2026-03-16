@@ -5787,3 +5787,178 @@ Processing row 27 (28/100)...
       [G5-TEMPORAL] radiotherapy: "{'summary': 'Proceed with radiation oncology consultation; she will have radiati" -> "{'summary': 'Proceed with radiation oncology consultation; she will have radiati"
       [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'radiotherapy'}
     Medication_Plan: 7.9s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will take an aromatase inhibitor for at least 5 years. She will also take calcium and vitamin D."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DEXA to assess her current bone health. She will take calcium and vitamin D. She will proceed with 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "5 years of anti-estrogen therapy with an aromatase inhibitor. She will need a DE" -> "She will need a DEXA to assess her current bone health. She will take calcium an"
+    radiotherapy_plan: 12.1s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "I expect that she will proceed with radiation. We will plan on meeting again once her radiation course is complete to review DEXA and plan her [REDACTED] start. Recommendat
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "I expect that she will proceed with radiation. We will plan on meeting again onc" -> "I expect that she will proceed with radiation. We will plan on meeting again onc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "I expect that she will proceed with radiation. We will plan on meeting again onc" -> "We will plan on meeting again once her radiation course is complete. Recommendat"
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.3s
+      [EXTRACT] raw={
+    "imaging_plan": "DEXA at this time to assess her current bone health."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "RTC after radiation course is completed"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 5.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after radiation course is completed to review DEXA and plan her [REDACTED] start"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 112.0s
+    [POST-THERAPY] removed non-therapy: ['She will need a DEXA to assess her current bone he', 'She will take calcium and vitamin D.']
+  [ATTRIBUTION] 18/19 fields sourced (28.9s)
+  Row 27 total: 259.5s
+  Row 27 saved to progress
+
+Processing row 28 (29/100)...
+  Injected 9 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (4911 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "A 59-year-old female with a recently diagnosed multifocal grade 2 invasive ductal carcinoma (ER+/PR+/HER2
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT1c(m)HER2(sn)",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 47.8s
+      [EXTRACT] raw={
+"findings": "Pathology results: Right axillary sentinel lymph node #1 shows micrometastatic carcinoma, 0.5 mm. Right breast partial mastectomy at 11:30 position: invasive carcinoma with mixed microp
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.9s
+      [EXTRACT] raw={
+"current_meds": "letrozole 2.5mg PO daily"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start letrozole 2.5mg PO daily now",
+"supportive_meds": "Calcium supplementation with 1200mg/day combination of diet and supplement"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Calcium supplementation with 1200mg/day combination of diet and supplement -> 
+  Phase 1 extraction (6 prompts): 96.4s
+  Cross-context injected (1366 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
