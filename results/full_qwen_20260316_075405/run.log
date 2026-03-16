@@ -4600,3 +4600,26 @@ Processing row 21 (22/100)...
       [G4-FAITH] Next clinic visit: "in-person: after PET CT results to determine if stable or pr" -> ""
       [G4-FAITH] EMPTIED: ['Next clinic visit']
       [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 122.4s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bones, chest wall, right infraclavicular and right IM nodes)'
+  [ATTRIBUTION] 19/23 fields sourced (41.7s)
+  Row 21 total: 361.1s
+  Row 21 saved to progress
+
+Processing row 22 (23/100)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'PR negative', 'ER negative', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2648 chars)
+  A/P extraction: 0.0s
