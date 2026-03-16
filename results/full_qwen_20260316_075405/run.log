@@ -10258,3 +10258,59 @@ Processing row 48 (49/100)...
       [G4-FAITH] EMPTIED: ['lab_plan']
       [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 10.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "Social work referral",
+"follow up": "Follow up with Dr [REDACTED] same day that she comes for post-operative follo
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "Rad Onc consult" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: same day that she comes for post-operative follow-up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 9.7s [improved]
+      [EXTRACT] raw={
+    "Advance care": "This patient has named a surrogate decision maker. The surrogate decision maker is the patient's spouse, and the surrogate decision maker was documented orally. Surrogate decisi
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Advance care: "This patient has named a surrogate decision maker. The surrogate decision maker " -> "This patient has named a surrogate decision maker. The surrogate decision maker "
+      [G4-FAITH] no changes (all supported)
+  Plan extraction prompts: 104.0s
+    [POST-THERAPY] removed non-therapy: ['Patient to have L mastectomy with [REDACTED] on 01']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 19/20 fields sourced (24.4s)
+  Row 48 total: 218.6s
+  Row 48 saved to progress
+
+Processing row 49 (50/100)...
+  Injected 3 term definitions: ['mastectomy', 'lumpectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1473 chars)
+  A/P extraction: 0.0s
