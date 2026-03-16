@@ -20651,3 +20651,49 @@ Processing row 98 (99/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 32.6s
+      [EXTRACT] raw={
+"findings": "A PET/CT scan performed on August 20, 2013, revealed an interval decrease in mediastinal lymphadenopathy with an enlarged AP window node measuring 11 mm (previously 15 mm). A new AP win
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.5s
+      [EXTRACT] raw={
+"current_meds": "fulvestrant"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched from anastrozole to letrozole due to joint pains.",
+"supportive_meds": "fludrocortisone (FLORINEF), LORazepam (ATIVAN)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] fludrocortisone (FLORINEF), LORazepam (ATIVAN) -> 
+  Phase 1 extraction (6 prompts): 87.4s
+  Cross-context injected (1177 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 20.1s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. A PET/CT scan performed on August 20, 2013, revealed an interval decrease in mediastinal lymphadenopathy with an enlarged AP window node 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 23.4s
+  Total extraction: 110.9s
