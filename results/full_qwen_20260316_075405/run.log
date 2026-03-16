@@ -6542,3 +6542,49 @@ Processing row 31 (32/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] lab_summary: "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L" -> "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein  3.1 mg/"
+    Clinical_Findings: 14.4s
+      [EXTRACT] raw={
+"findings": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with brown fat. N
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.1s
+      [EXTRACT] raw={
+"current_meds": "exemestane, trastuzumab, pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped [REDACTED] due to diarrhea.",
+"supportive_meds": "loperamide (IMODIUM) 2 mg capsule, Take 2 mg by mouth 4 (four) times daily as needed for Diarrhea"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] loperamide (IMODIUM) 2 mg capsule, Take 2 mg by mouth 4 (four) times daily as needed for Diarrhea -> loperamide (IMODIUM) 2 mg capsule
+  Phase 1 extraction (6 prompts): 76.8s
+  Cross-context injected (758 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.7s
+      [EXTRACT] raw={
+"response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 15.1s
+  Total extraction: 91.9s
