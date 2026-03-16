@@ -14356,3 +14356,53 @@ Processing row 68 (69/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 45.7s
+      [EXTRACT] raw={
+"findings": "Pathology results: Invasive lobular carcinoma, histologic grade low (3+1+1), ER strongly positive (8 of 8), PR positive (5 of 8), [REDACTED] equivocal by IHC (2+) but negative by FISH (
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
+      [POST-MEDS] LORazepam (ATIVAN) 1 mg tablet -> 
+    Treatment_Changes: 5.3s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "LORazepam (ATIVAN) 1 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "LORazepam (ATIVAN) 1 mg tablet" -> ""
+      [G4-FAITH] supportive_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
+      [POST-SUPP] LORazepam (ATIVAN) 1 mg tablet -> 
+  Phase 1 extraction (6 prompts): 95.7s
+  Cross-context injected (1170 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 101.8s
