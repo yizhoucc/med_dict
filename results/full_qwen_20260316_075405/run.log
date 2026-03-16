@@ -10488,3 +10488,25 @@ Processing row 49 (50/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 101.4s
+    [POST-THERAPY] removed non-therapy: ['Her disease is under great control as of imaging D', 'She is considering a mastectomy for progression in']
+    [POST-ADV] patched from full note: ['full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the lung, lymph nodes, liver, and bone)'
+  [ATTRIBUTION] 19/23 fields sourced (28.1s)
+  Row 49 total: 219.8s
+  Row 49 saved to progress
+
+Processing row 50 (51/100)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
