@@ -20407,3 +20407,40 @@ Processing row 97 (98/100)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1085 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 17.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 78-year-old female with breast cancer, specifically invasive ductal carcinoma grade 1, ER-
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER-/PR-/HER2- IDC with apocrine features with HG DCIS spanning 2.7cm, triple negative",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrophil Abs Cnt 11.64, Lymphocyte Abs Cnt 0.51, Monocyte Abs Cnt 0.20, Eosinophil Abs Ct 0.15, Basophil Ab
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrop" -> "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrop"
+      [G4-FAITH] no changes (all supported)
