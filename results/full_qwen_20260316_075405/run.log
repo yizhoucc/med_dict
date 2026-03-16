@@ -9519,3 +9519,47 @@ Processing row 45 (46/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 45.9s
+      [EXTRACT] raw={
+"findings": "Patient has a 3.5 cm residual disease in the right breast with positive margins and 2/2 positive sentinel lymph nodes with extranodal extension. Imaging findings include: CT chest with 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.4s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg BID, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg BID, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 168.0s
+  Cross-context injected (1461 chars)
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 20.0s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual disease in the right breast with positive margins and 2/2 positive sentinel lymph nodes with 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual" -> "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 24.1s
+  Total extraction: 192.1s
