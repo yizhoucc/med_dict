@@ -17891,3 +17891,47 @@ Processing row 85 (86/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 24.3s [improved]
+      [EXTRACT] raw={
+"findings": "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious for metastatic disease. PET/CT revealed significant improvement in hypermetabolic osseous metastatic diseas
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious fo" -> "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious fo"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s
+      [EXTRACT] raw={
+"current_meds": "letrozole, ribociclib, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.0s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "Switched from letrozole + ribociclib to fulvestrant +/- everolimus.",
+"supportive_meds": "Oxycodone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] recent_changes: "Switched from letrozole + ribociclib to fulvestrant +/- ever" -> ""
+      [G4-FAITH] EMPTIED: ['recent_changes']
+  Phase 1 extraction (6 prompts): 67.4s
+  Cross-context injected (956 chars)
+    Treatment_Goals: 3.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 14.3s
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increase in metabolic activity of the known osseous metastatic disease (left mandible, cervical and thoracic spine, humerus, ribs, and pelvis) with no increased
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.0s
+  Total extraction: 85.4s
