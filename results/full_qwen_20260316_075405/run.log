@@ -11026,3 +11026,12 @@ Processing row 52 (53/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.9s
   Total extraction: 55.6s
+    Medication_Plan_chatgpt: 93.1s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Adjuvant AC/THP chemotherapy recommended, consisting of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year o
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'adjuvant AC/THP chemotherapy. This consist" -> "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemotherapy. This consist"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemot" -> "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemot"
+      [G5-TEMPORAL] no changes
