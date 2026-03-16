@@ -20548,3 +20548,166 @@ Processing row 97 (98/100)...
 }
       [G1-FORMAT] ok, keys=['imaging_plan']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 11.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Refer to Radiation Oncology at [REDACTED] for second opinion",
+"Others": "None",
+"follow up": "RTC in 1 month to discuss after discussion with 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.0s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 1 month to discuss after discussion with radiation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 80.7s
+    [POST-SPECIALTY] found in full note: Radiation Oncology at ***** for second opinion  Refer to hav
+    [POST-THERAPY] removed non-therapy: ['Refer to have Port removal.']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 16/20 fields sourced (17.1s)
+  Row 97 total: 202.0s
+  Row 97 saved to progress
+
+Processing row 98 (99/100)...
+  Injected 3 term definitions: ['progesterone receptor', 'estrogen receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3359 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 49-year-old female with a history of left-sided stage III breast cancer diagnosed in 200
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 18.1s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma, ER-/PR-/HER2 3+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III, now metastatic (Stage IV)",
+  "Distant_Metastasi
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 32.6s
+      [EXTRACT] raw={
+"findings": "A PET/CT scan performed on August 20, 2013, revealed an interval decrease in mediastinal lymphadenopathy with an enlarged AP window node measuring 11 mm (previously 15 mm). A new AP win
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.5s
+      [EXTRACT] raw={
+"current_meds": "fulvestrant"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched from anastrozole to letrozole due to joint pains.",
+"supportive_meds": "fludrocortisone (FLORINEF), LORazepam (ATIVAN)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] fludrocortisone (FLORINEF), LORazepam (ATIVAN) -> 
+  Phase 1 extraction (6 prompts): 87.4s
+  Cross-context injected (1177 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 20.1s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. A PET/CT scan performed on August 20, 2013, revealed an interval decrease in mediastinal lymphadenopathy with an enlarged AP window node 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 23.4s
+  Total extraction: 110.9s
+    Medication_Plan_chatgpt: 64.3s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Current treatment with fulvestrant. If cancer remains estrogen receptor positive, will consider ongoing hormonal therapy such as the combination of Exem
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant'}, {'type': 'hormonal therapy" -> "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summary': 'Started on trea"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summar" -> "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summar"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summary': 'Started on trea" -> "[{'type': 'hormonal therapy', 'name': 'Exemestane', 'summary': 'Considered for u"
+    Medication_Plan: 15.5s [temporal-cleaned]

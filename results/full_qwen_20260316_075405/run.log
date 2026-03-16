@@ -20697,3 +20697,48 @@ Processing row 98 (99/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 23.4s
   Total extraction: 110.9s
+    Medication_Plan_chatgpt: 64.3s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Current treatment with fulvestrant. If cancer remains estrogen receptor positive, will consider ongoing hormonal therapy such as the combination of Exem
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'chemotherapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant'}, {'type': 'hormonal therapy" -> "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summary': 'Started on trea"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summar" -> "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summar"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'name': 'fulvestrant', 'summary': 'Started on trea" -> "[{'type': 'hormonal therapy', 'name': 'Exemestane', 'summary': 'Considered for u"
+    Medication_Plan: 15.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "If her cancer remains estrogen receptor positive, it would be reasonable to consider ongoing hormonal therapy such as the combination of Exemestane and Afinitor. Alternativel
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "If her cancer remains estrogen receptor positive, it would be reasonable to cons" -> "If her cancer remains estrogen receptor positive, it would be reasonable to cons"
+    Therapy_plan: 26.4s
+      [EXTRACT] raw={
+    "therapy_plan": "If her cancer remains estrogen receptor positive, it would be reasonable to consider ongoing hormonal therapy, but most likely combined with a biological therapy such as the com
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 8.5s
+      [EXTRACT] raw={
+    "procedure_plan": "will schedule biopsy of either the pulmonary nodule, mediastinal adenopathy, or the area of subpleural thickening"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
