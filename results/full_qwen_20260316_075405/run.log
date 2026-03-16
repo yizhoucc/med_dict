@@ -19413,3 +19413,70 @@ Processing row 92 (93/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.1s
   Total extraction: 86.2s
+    Medication_Plan_chatgpt: 23.7s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will start Paclitaxel/Trastuzumab in 1-2 weeks. This is part of the adjuvant chemotherapy plan.",
+        "Short term side_effects_discussed": "Not 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "Paclitaxel/Trastuzumab" -> "{'summary': 'Paclitaxel/Trastuzumab can be started in 1-2 weeks. The patient agr"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'Paclitaxel/Trastuzumab can be started in 1-2 we" -> "{'summary': 'Paclitaxel/Trastuzumab can be started in 1-2 we"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 11.4s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start Paclitaxel/Trastuzumab in 1-2 weeks. Trastuzumab will continue every 3 weeks for an additional 9 months."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "she will need port placement; recommend Paclitaxel/Trastuzumab which can be started in 1-2 weeks; Paclitaxel x 12 weeks followed by Trastuzumab every 3 weeks for an additional 9
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "she will need port placement; recommend Paclitaxel/Trastuzumab which can be star" -> "she will need port placement; recommend Paclitaxel/Trastuzum. Paclitaxel x 12 we"
+      [G4-FAITH] therapy_plan: "she will need port placement; recommend Paclitaxel/Trastuzum" -> "she will need [REDACTED] mediport placement; recommend Pacli"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "patient has appointment to see radiation oncology Dr. [REDACTED] today at 3pm"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 7.0s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "she will need port placement, recommend Paclitaxel/Trastuzumab which can be started in 1-2 weeks"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "she will need port placement, recommend Paclitaxel/Trastuzumab which can be star" -> "she will need [REDACTED] mediport placement"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
