@@ -6514,3 +6514,31 @@ Processing row 31 (32/100)...
   Regex matched: 'Assessment / Plan:'
   Regex extraction succeeded (946 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 16.0s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "82-year-old patient with metastatic breast cancer to the lymph nodes, previously treated with a left lump
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 20.0s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+"Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to the lymph nodes of the left neck, c
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L (from 05/18/2016)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L" -> "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein  3.1 mg/"
