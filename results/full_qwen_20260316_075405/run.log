@@ -1462,3 +1462,51 @@ Processing row 6 (7/100)...
   Plan extraction prompts: 116.3s
     [POST-THERAPY] removed non-therapy: ['Rec [REDACTED] as next line of therapy.', 'Would recheck [REDACTED] prior to starting [REDACT']
     [POST-DISTMET] added Distant Metastasis: 'Yes (to left supraclavicular node and mediastinum)'
+  [ATTRIBUTION] 15/17 fields sourced (22.1s)
+  Row 6 total: 237.9s
+  Row 6 saved to progress
+
+Processing row 7 (8/100)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2476 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 17.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "29 y.o. premenopausal patient with a history of clinical stage III HER2+/ER- IDC of the left breast, who 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 17.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ (IHC 3+, FISH ratio 5.7) invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally clinical stage II-III, now Stage III (pT0N3M0)",
+  "Distant Metastasis": "No"
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
