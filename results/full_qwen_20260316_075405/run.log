@@ -18752,3 +18752,34 @@ Processing row 89 (90/100)...
       [G4-FAITH] EMPTIED: ['current_meds']
       [G4-REVERT] current_meds: reverted (G4 emptied all fields)
       [POST-MEDS] AC -> 
+    Treatment_Changes: 13.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V, switch to granisetron for anti-nausea.",
+"supportive_meds": "lidocaine patches, analg
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 1" -> "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 1"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] lidocaine patches, analgesics prn, gabapentin -> 
+  Phase 1 extraction (6 prompts): 172.7s
+  Cross-context injected (930 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 15.5s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. A
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 19.0s
+  Total extraction: 191.7s
