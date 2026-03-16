@@ -311,3 +311,165 @@ Processing row 1 (2/100)...
       [G4-FAITH] pain medication: "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. " -> "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. "
       [G4-FAITH] psychiatry medication: "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot" -> "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot"
       [G4-FAITH] other treatment: "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio" -> "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio"
+      [G5-TEMPORAL] psychiatry medication: "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot flashes.', 'Short_t" -> "{'summary': 'Increase effexor-XR to  75 mg qd for anxiety/hot flashes.', 'Short_"
+      [POST-KEYS] stripped: {'chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment'}
+    Medication_Plan: 21.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn, Effexor-XR 75 mg qd, [REDACTED] water instead of free water, 500ml NS IV, 40 mEq PO potassiu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 33.3s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Due to poor tolerance, irinotecan will be changed to every other week with an increased dose to 150mg/m2 on days 1 and 15 every 28 days. Continue [REDACTED] 30mg TID and flexeri
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Due to poor tolerance, irinotecan will be changed to every other week with an in" -> "Due to poor tolerance, irinotecan will be changed to every other week with an in"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Due to poor tolerance, irinotecan will be changed to every other week with an in" -> "Due to poor tolerance, irinotecan will be changed to every other week with an in"
+    radiotherapy_plan: 9.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [REDACTED] to see if he can bring her in again."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [R" -> "She urgently needs to get in with Rad Onc for a radiotherapy consultation."
+      [G4-FAITH] radiotherapy_plan: "She urgently needs to get in with Rad Onc for a radiotherapy" -> "She urgently needs to get in with Rad Onc and so I will send"
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 7.4s
+      [EXTRACT] raw={
+    "imaging_plan": "Scans again in 3 months, due September 2019. MRI brain if worse."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 8.9s
+      [EXTRACT] raw={
+    "lab_plan": "Monitor with ALT, hepatitis B surface antigen and HBV DNA every 4 months without starting prophylaxis, next due October 2019"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "Social work referral, Home health",
+"follow up": "2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral, Home health" -> "Social work, Home health"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 158.6s
+    [POST-THERAPY] removed non-therapy: ['Continue [REDACTED] 30mg TID and flexeril TID.', 'Continue oxycodone 5mg prn.', '[REDACTED] will take over her pain management at t', 'Increase effexor-XR to 75 mg qd.', 'Continue brace.', 'Consider re-referring to SMS/ABC if needed.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to liver, bone, and chest wall)'
+  [ATTRIBUTION] 23/24 fields sourced (39.0s)
+  Row 1 total: 400.5s
+  Row 1 saved to progress
+
+Processing row 2 (3/100)...
+  Injected 4 term definitions: ['neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1571 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.8s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "53 year old female with newly diagnosed Stage IIA right breast IDC, estrogen receptor positive, HER2 neg
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Stage IIA",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 13.7s
+      [EXTRACT] raw={
+"findings": "Right breast cancer with a 1.7 cm tumor in the upper-outer quadrant, positive for estrogen receptor, HER2 negative by FISH. A 1.5 cm lymph node in the axilla is also positive. No other 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 1.7s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
