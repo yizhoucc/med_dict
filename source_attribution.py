@@ -86,11 +86,11 @@ Below is a clinical note and a list of extracted fields with their values.
 For each field, find 1 exact quote from the note that best supports the extracted value.
 
 Rules:
-- Quote the note text EXACTLY as it appears. Do not paraphrase.
-- Each quote should be 10-80 words, just enough to show the source.
-- For INFERRED values (e.g. "palliative", "New patient", "yes"), quote the text that led to the inference.
-- Skip fields where no supporting text exists in the note.
-- Return ONLY a JSON object. No markdown fences, no explanation.
+- Quote the note EXACTLY. Do not paraphrase.
+- Keep quotes SHORT: 5-25 words, just the key phrase.
+- For INFERRED values (e.g. "palliative", "yes"), quote the inference basis.
+- Skip fields where no supporting text exists.
+- Return ONLY a JSON object. No markdown, no explanation.
 
 Clinical Note:
 --- BEGIN NOTE ---
@@ -328,7 +328,7 @@ def main():
 
     gen_config = config["generation"]["keypoint"].copy()
     gen_config["eos_token_id"] = tokenizer.eos_token_id
-    gen_config["max_new_tokens"] = 2048  # attribution output can be long
+    gen_config["max_new_tokens"] = 4096  # attribution output can be long
 
     # Load progress
     with open(args.progress_file) as f:
