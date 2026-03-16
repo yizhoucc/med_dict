@@ -3157,3 +3157,79 @@ Processing row 14 (15/100)...
   Plan extraction prompts: 65.5s
     [POST-THERAPY] removed non-therapy: ['Plan to consider [REDACTED] targeted Rx if [REDACT']
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 13/18 fields sourced (17.1s)
+  Row 14 total: 165.4s
+  Row 14 saved to progress
+
+Processing row 15 (16/100)...
+  Injected 5 term definitions: ['aromatase inhibitor', 'estrogen receptor', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (3186 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "54 y.o. postmenopausal patient with a recent diagnosis of a Stage I HR+/HER2- IDC of the right breast, pr
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Stage I",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 14.9s
+      [EXTRACT] raw={
+"findings": "0.3 cm grade 1 IDC; no DCIS, margins negative, no lymph node status mentioned. Imaging findings include an abnormal screening mammogram showing asymmetry in the posterior central right 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "CALCIUM CARBONATE (CALCIUM 500 ORAL), DIPHENHYDRAMINE HCL (["
+      [POST-MEDS] CALCIUM CARBONATE (CALCIUM 500 ORAL), DIPHENHYDRAMINE HCL ([REDACTED] SLEEP AID ORAL), DOCOSAHEXANOIC ACID/EPA (FISH OIL ORAL), licorice,[REDACTED] (LICORICE,[REDACTED], [REDACTED], MISC), multivitamin (MULTIVITAMIN), ibuprofen (ADVIL,MOTRIN) -> 
+    Treatment_Changes: 6.2s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium carbonate, fish oil"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium carbonate, fish oil" -> ""
+      [G4-FAITH] supportive_meds: "" -> "CALCIUM CARBONATE, DOCOSAHEXANOIC ACID/EPA (FISH OIL), licor"
+      [POST-SUPP] CALCIUM CARBONATE, DOCOSAHEXANOIC ACID/EPA (FISH OIL), licorice, MULTIVITAMIN -> 
+  Phase 1 extraction (6 prompts): 54.8s
+  Cross-context injected (612 chars)
