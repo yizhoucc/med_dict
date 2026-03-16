@@ -10299,3 +10299,148 @@ Processing row 48 (49/100)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
     Advance_care_planning: 9.7s [improved]
+      [EXTRACT] raw={
+    "Advance care": "This patient has named a surrogate decision maker. The surrogate decision maker is the patient's spouse, and the surrogate decision maker was documented orally. Surrogate decisi
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Advance care: "This patient has named a surrogate decision maker. The surrogate decision maker " -> "This patient has named a surrogate decision maker. The surrogate decision maker "
+      [G4-FAITH] no changes (all supported)
+  Plan extraction prompts: 104.0s
+    [POST-THERAPY] removed non-therapy: ['Patient to have L mastectomy with [REDACTED] on 01']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 19/20 fields sourced (24.4s)
+  Row 48 total: 218.6s
+  Row 48 saved to progress
+
+Processing row 49 (50/100)...
+  Injected 3 term definitions: ['mastectomy', 'lumpectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1473 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.3s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "Metastatic breast cancer (CMS code) patient with HR+ and HER2 negative status, presenting for a second o
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.0s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage IV (T2, N1, M1), now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to the lung, lymph nodes, l
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 26.8s
+      [EXTRACT] raw={
+"lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 11.3s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy. No new palpable masses, s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Imaging from December 2021 shows metastatic disease under go" -> "Imaging from December 2021 shows metastatic disease under go"
+    Current_Medications: 4.4s
+      [EXTRACT] raw={
+"current_meds": "ibrance, xgeva, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.8s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "DENOSUMAB (XGEVA SUBCUT)" -> "DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D ("
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D (OSCAL D) -> DENOSUMAB (XGEVA SUBCUT)
+  Phase 1 extraction (6 prompts): 80.7s
+  Cross-context injected (545 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Imaging from December 2021 shows metastatic disease under good control. Biopsies" -> "Imaging from December 2021 shows metastatic disease under good control."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.6s
+  Total extraction: 90.3s
+    Medication_Plan_chatgpt: 34.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient has been on tamoxifen and lupron until progression in October 2014. Second line lupron and letrozole started October 2014. Ibrance added January
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['tamoxifen', 'lupron', 'letrozole', 'ibrance', 'XRT', 'Radiation to right pelvi" -> "[{'summary': 'tamoxifen and lupron were used until progression in October 2014. "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'tamoxifen and lupron were used until progressi" -> "[{'summary': 'tamoxifen and lupron were used until progressi"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'tamoxifen and lupron were used until progression in October 2014. " -> "[{'summary': 'Second line lupron and letrozole are currently being used with ibr"
+    Medication_Plan: 12.1s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medication plans, changes to current medications, supportive " -> "Current medications include tamoxifen, lupron, letrozole, and ibrance. No specif"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Second line lupron, letrozole started October 2014 and ibrance added January 2015. Her disease is under great control as of imaging December 2021. She is considering a mastectom
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.3s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation to right pelvis and sternum in 2015. She is s/p lumpectomy and XRT mid 2019."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "Radiation to right pelvis and sternum in 2015. She is s/p lumpectomy and XRT mid" -> "None"
+    Procedure_Plan: 6.3s
+      [EXTRACT] raw={
+    "procedure_plan": "Considering mastectomy for progression in the left breast with DCIS and IDC."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
