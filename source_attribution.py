@@ -205,6 +205,8 @@ def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
 
     if result is None:
         print(f"  [ATTRIBUTION] Failed to parse LLM output", file=sys.stderr)
+        print(f"  [ATTRIBUTION] Raw output ({len(raw_output)} chars):", file=sys.stderr)
+        print(raw_output[:2000], file=sys.stderr)
         return {}
 
     # Validate: only keep fields that were in the request
