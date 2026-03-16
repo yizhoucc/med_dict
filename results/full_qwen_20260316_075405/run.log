@@ -8269,3 +8269,45 @@ Processing row 39 (40/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Rx for letrozole given",
+"supportive_meds": "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule, letrozole (FEMARA) 2.5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule, le" -> "ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 4 mg tablet, nitrofurantoin (MACRODANTIN) 50 mg capsule -> ondansetron (ZOFRAN) 4 mg tablet
+  Phase 1 extraction (6 prompts): 69.5s
+  Cross-context injected (843 chars)
+    Treatment_Goals: 3.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 75.6s
+    Medication_Plan_chatgpt: 51.7s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Rx for letrozole given. If no radiation is planned, she can start letrozole immediately.",
+        "Short term side_effects_discussed": "hot flashes, ar
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': 'letrozole', 'bone therapy': 'Prolia', 'other treatment': '" -> "{'hormonal therapy': {'summary': 'The patient will start letrozole immediately i"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'hormonal therapy': {'summary': 'The patient will start let" -> "{'hormonal therapy': {'summary': 'The patient will start let"
+      [G5-TEMPORAL] no changes
