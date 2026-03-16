@@ -16049,3 +16049,45 @@ Processing row 76 (77/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 14.2s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "exemestane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "exemestane" -> ""
+      [G4-FAITH] current_meds: "" -> "celecoxib (CELEBREX) 200 mg capsule Take 200 mg by mouth dai"
+      [POST-MEDS] celecoxib (CELEBREX) 200 mg capsule Take 200 mg by mouth daily, clonazePAM (KLONOPIN) 1 mg tablet TAKE 1 TABLET BY MOUTH DAILY IN THE MORNING AS NEEDED FOR PANIC. [REDACTED] 2 TABS IN 24 HOURS., DULoxetine 40 mg CAPDREC Take 40 mg by mouth nightly at bedtime, levothyroxine (SYNTHROID) 50 mcg tablet Take 50 mcg by mouth daily, QUEtiapine (SEROQUEL) 25 mg tablet TAKE 1 2 TABS BY MOUTH DAILY 1 HOUR BEFORE PROCEDURES AS NEEDED FOR PANIC. NTE 100MG/DAY., LORazepam (ATIVAN) 2 mg tablet PLEASE SEE ATTACHED FOR DETAILED DIRECTIONS -> 
+    Treatment_Changes: 8.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status",
+"supportive_meds": "celebrex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] celebrex -> 
+  Phase 1 extraction (6 prompts): 72.7s
+  Cross-context injected (631 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.6s
+  Total extraction: 78.3s
