@@ -109,6 +109,7 @@ from ult import (
     run_model,
     gc,
 )
+from source_attribution import attribute_row, get_attributable_fields
 
 
 def load_config(yaml_path):
@@ -1061,6 +1062,19 @@ def main():
                         print(f"    [POST-RESPONSE] patched from findings: '{relevant[0][:60]}...'")
                     break
 
+        # Source attribution — find evidence quotes for each extracted field
+        attribution = {}
+        if config.get("extraction", {}).get("attribution", False):
+            attr_gen_config = keypoint_config.copy()
+            attr_gen_config["max_new_tokens"] = 128
+            attr_start = time.time()
+            attribution = attribute_row(
+                note_text, keypoints, model, tokenizer,
+                chat_tmpl, attr_gen_config, base_cache
+            )
+            attributable = get_attributable_fields(keypoints)
+            print(f"  [ATTRIBUTION] {len(attribution)}/{len(attributable)} fields sourced ({time.time() - attr_start:.1f}s)")
+
         print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 
         # Build row result
@@ -1069,6 +1083,7 @@ def main():
             "note_text": note_text,
             "assessment_and_plan": assessment_and_plan,
             "keypoints": keypoints,
+            "attribution": attribution,
         }
 
         # Append to results.txt

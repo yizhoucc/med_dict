@@ -19,6 +19,7 @@ prompts:
 
 extraction:
   pipeline: "v2"
+  attribution: true
   max_retries: 3
   verify: true
   gate_config:

@@ -32,6 +32,12 @@ _SKIP_CONTAINS = (
     'cannot be determined',
     'unable to determine',
     'no data available',
+    'no labs planned',
+    'no procedures planned',
+    'no imaging planned',
+    'none planned',
+    'no new clinical findings',
+    'no labs in note',
 )
 
 
