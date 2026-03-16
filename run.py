@@ -829,7 +829,7 @@ def main():
                 LAB_IMAGING_TERMS = [
                     "doppler", "ultrasound", "ct ", "ct,", "mri", "pet", "dexa",
                     "bone scan", "x-ray", "xray", "mammogram", "echocardiogram",
-                    "echo ", "tte", "scan ",
+                    "echo ", "scan ",
                 ]
                 has_imaging = any(t in lab_lower for t in LAB_IMAGING_TERMS)
                 # "labs reviewed" / "labs adequate" = past/current status, not a future plan
@@ -903,7 +903,6 @@ def main():
             IMAGING_TYPES = {
                 'echocardiogram': 'Echocardiogram',
                 'echo ': 'Echocardiogram',
-                'tte': 'Echocardiogram',
                 'dexa': 'DEXA scan',
                 'bone density': 'DEXA scan',
                 'mammogram': 'Mammogram',
@@ -919,7 +918,7 @@ def main():
             }
             # Synonyms for dedup: if any synonym is in existing text, skip adding this label
             IMAGING_SYNONYMS = {
-                'Echocardiogram': ['echocardiogram', 'echo ', 'echo.', 'echo,', 'tte'],
+                'Echocardiogram': ['echocardiogram', 'echo ', 'echo.', 'echo,'],
                 'DEXA scan': ['dexa', 'bone density'],
                 'Mammogram': ['mammogram'],
                 'PET/CT': ['pet/ct', 'pet ct', 'petct', 'pet-ct'],
