@@ -15188,3 +15188,151 @@ RESULTS FOR ROW 97
     "RTC 3-4 wks after [REDACTED] Dx result is known"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 98
+============================================================
+
+--- Column: coral_idx ---
+237
+
+--- Column: note_text ---
+"SUBJECTIVE  Subjective  ***** ***** *****-***** is a 78 y.o. female who presents with breast cancer on Cycle # 4 of Taxotere/cytoxan ER- PR- *****-     HPI: Tolerating the third cycle without much issue. Had minimal nausea, no constipation or vomiting. Is having Shortness of breath with walking since hemoglobin lower. Did experience some weakness that resulted in a ***** without loss of consciousness.     Patient Active Problem List   Diagnoses Date Noted   \u0007 Constipation 06/21/2011     Priority: High   \u0007 Breast cancer 06/21/2011     Priority: High     DX:02/24/2011 on Ultrasound guide core bx done in *****- 0.6 cm Invasive Ductal Carcinoma grade 1 er- pr- *****- ***** 67=10%  04/24/2011 right needle localized partial mastectomy and ***** lymph node dissection  ***** *****  IDC with apocrine features with HG DCIS spanning 2.7cm  0/3-nodes triple negative  ***** *****  05/31/2011 to 08/02/2011 Taxotere and Cytoxan ***** X4 complicated with fevers after *****     \u0007 Fever with chills 06/21/2011     Priority: Medium     Last Tuesday had chills with Fever 100.5 has history of diverticulitis did have abdominal tenderness. Denies urinary frequency, has dry occasional cough and or any infections. Fever occurs in the evening nightly with tmax 100.5        ROS  General: energy good, weight stable, had low grade fever at last week  Skin: Rash continues to be present. Using cream that helps rash  Eyes: no vision changes  ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat  Breast: no breast pain or swelling  Respiratory: no cough. Has shortness of breath  Cardiovascular: no CP, edema  GI: low grade nausea, no vomiting, diarrhea or constipation. No bleeding with stool.  GU: no dysuria or vaginal bleeding  Musculoskeletal: no pain  Neurological: no headaches, dizziness, one ***** never lost consciousness  Psychological: mood stable  All other review of systems negative, \n except for those noted in assessment below.  MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 ALPRAZolam (XANAX) 0.5 mg tablet Take 0.5 mg by mouth as needed.        \u0007 *****-*****,A, W-C & E/MIN (***** ORAL) Take by mouth.         \u0007 CYCLOPHOSPHAMIDE (CYTOXAN IV) Inject 600 mg/m2 into the vein every 21 (twenty-one) days.         \u0007 dexamethasone (DECADRON) 4 mg tablet        \u0007 DOCETAXEL (TAXOTERE IV) Inject 175 mg/m2 into the vein every 21 (twenty-one) days.         \u0007 docusate sodium (COLACE) 250 mg capsule Take 250 mg by mouth Daily.         \u0007 FENOFIBRATE ***** (TRICOR ORAL) Take by mouth.         \u0007 LORazepam (ATIVAN) 1 mg tablet Take 1 mg by mouth every 6 (six) hours as needed.         \u0007 MAGNESIUM OXIDE (***** *****) Take by mouth.         \u0007 ondansetron (ZOFRAN) 8 mg tablet Take 8 mg by mouth as needed.        \u0007 prochlorperazine (COMPAZINE) 10 mg tablet Take 10 mg by mouth as needed.        \u0007 zolpidem (AMBIEN) 5 mg tablet Take 1 tablet (5 mg total) by mouth nightly as needed for Sleep.  30 tablet  2       ALLERGIES  Allergies   Allergen Reactions   \u0007 Demerol (Meperidine) Nausea And Vomiting and Other (See Comments)     Other reaction: psychosis    \u0007 Morphine Nausea And Vomiting       PHYSICAL EXAM  Objective  Vital Signs:  BP 140/52 | Pulse 86 | Temp(Src) 35.9 C (96.6 F) (Oral) | Resp 16 | Ht 165.1 cm (5' 5\") | Wt 68.629 kg (151 lb 4.8 oz) | BMI 25.18 kg/m2 | SpO2 96%  Body surface area is 1.77 meters squared.    ECOG:1  Constitutional:  Well-developed, no acute distress  Skin:scattered macular papular rash scattered all over skin, no diaphoresis.   Eyes: sclera anicteric, PERRL, EOMI  HENT: sinuses nontender, TMs intact, nasal mucosa intact, pharynx without erythema, no thrush  Lymph Nodes: no axillary, supraclavicular or axillary adenopathy  Respiratory:  Normal breath sounds, No respiratory distress, No wheezing, No chest tenderness.   Cardiovascular:  Normal \n heart rate, Normal rhythm, No murmurs, No rubs, No gallops. No LE edema  Breast: no masses palpated on exam   GI:  Bowel sounds normal, Soft, No tenderness or distention,No hepatomegaly or masses  Musculoskeletal: No point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema  Neurologic:  Alert & oriented x 3, CN intact, ambulates w/o difficulty, ***** (-), DTRs 2+throughout.    Psychiatric: mood stable. No HI, SI, hallucinations, paranoia, or delusions.    RESULTS  I have individually visualized and interpreted the laboratory results  Results for orders placed in visit on 06/21/11   BUN       Component Value Range    Urea Nitrogen, Serum / Plasma 27 (*****) 8 - 23 (mg/dL)   CBC AND DIFFERENTIAL       Component Value Range    WBC Count 12.5 (*****) 3.4 - 10 (x10E9/L)    RBC Count 3.16 (*****) 4.0 - 5.2 (x10E12/L)    Hemoglobin 9.7 (*****) 12.0 - 15.5 (g/dL)    Hematocrit 28.1 (*****) 36 - 46 (%)    MCV 89  80 - 100 (fL)    MCH 30.6  26 - 34 (pg)    MCHC 34.4  31 - 36 (g/dL)    Platelet Count 1052 (*****) 140 - 450 (x10E9/L)    Neutrophil Absolute Count 11.64 (*****) 1.8 - 6.8 (x10E9/L)    Lymphocyte Abs Cnt 0.51 (*****) 1.0 - 3.4 (x10E9/L)    Monocyte Abs Count 0.20  0.2 - 0.8 (x10E9/L)    Eosinophil Abs Ct 0.15  0.0 - 0.4 (x10E9/L)    Basophil Abs Count 0.01  0.0 - 0.1 (x10E9/L)    Morphology (WBC,MISC) SEE NOTES     CREATININE WITH EGFR       Component Value Range    Creatinine 0.87  0.42 - 1.06 (mg/dL)    eGFR if Caucasian >60      eGFR if African ***** >60     ELECTROLYTES       Component Value Range    Sodium, Serum / Plasma 139  134 - 143 (mmol/L)    Potassium, Serum / Plasma 4.7  3.4 - 4.9 (mmol/L)    Chloride, Serum / Plasma 105  98 - 107 (mmol/L)    Carbon Dioxide, Total 24  23 - 32 (mmol/L)    Anion Gap 10  3 - 14    BLOOD SMR INTERPRETATION (MD)       Component Value Range    CBC Interpretation        Value: Marked thrombocytosis most compatible with a reactive etiology.  Reactive \n (secondary) thrombocytosis may be seen associated with iron deficiency, postsurgical procedure, infections, inflammatory disorders, asplenia, neoplasms, rapid blood regeneration       following hemorrhage/acute anemia, and rebound following thrombocytopenia.  Clinical correlation is suggested.    CBC Interpreted By: ***** *****, M.D. (*****)          ASSESSMENT & PLAN  Breast cancer  Labs reviewed  Exam stable has scattered rash after taxotere and cytoxan. Using lanolin type cream with relief of itching  Okay to proceed with Taxotere/cytoxan  Refer to Radiation Oncology at ***** for second opinion  Refer to have Port removal   RTC in 1 month to discuss after discussion with radiation      Fever with chills  Continues to have low grade fevers with ***** on first week only.      Constipation  Stable with Docusate Sodium daily   No bleeding from *****      The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM    This is a shared visit involving myself and ***** ***** *****.    - ***** ***** *****    \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  Breast cancer  Labs reviewed  Exam stable has scattered rash after taxotere and cytoxan. Using lanolin type cream with relief of itching  Okay to proceed with Taxotere/cytoxan  Refer to Radiation Oncology at ***** for second opinion  Refer to have Port removal   RTC in 1 month to discuss after discussion with radiation      Fever with chills  Continues to have low grade fevers with ***** on first week only.      Constipation  Stable with Docusate Sodium daily   No bleeding from *****      The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM    This is a shared visit involving myself and ***** ***** *****.    - ***** ***** *****    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "The patient is a 78-year-old female with breast cancer, specifically invasive ductal carcinoma grade 1, ER-, PR-, and triple negative. This visit is for Cycle #4 of Taxotere/cytoxan chemotherapy. The patient is tolerating the treatment with minimal side effects and is being evaluated for continued management."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2- IDC with apocrine features with HG DCIS spanning 2.7cm, triple negative",
+    "Stage_of_Cancer": "Not mentioned in note",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrophil Abs Cnt 11.64, Lymphocyte Abs Cnt 0.51, Monocyte Abs Cnt 0.20, Eosinophil Abs Ct 0.15, Basophil Abs Count 0.01, Creatinine 0.87, Sodium 139, Potassium  4.7, Chloride 105, Carbon Dioxide 24, Anion Gap 10"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient has scattered macular papular rash scattered all over the skin. Hemoglobin is 9.7 g/dL, indicating anemia. WBC count is 12.5 x10E9/L, RBC count is 3.16 x10E12/L, and platelet count is 1052 x10E9/L. Morphology (WBC, MISC) is noted as 'SEE NOTES'. The patient has a history of invasive ductal carcinoma grade 1 with apocrine features and HG DCIS spanning 2.7 cm, and is triple negative. The patient is currently undergoing treatment with Taxotere and Cytoxan. No new imaging findings are mentioned in this visit."
+  },
+  "Current_Medications": {
+    "current_meds": "Docetaxel (TAXOTERE IV), Cyclophosphamide (CYTOXAN IV)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "ondansetron, prochlorperazine, dexamethasone"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "summary": "Taxotere/cytoxan chemotherapy is okay to proceed with. The patient has a scattered rash after the treatment and is using a lanolin type cream for relief of itching.",
+        "Short_term_side_effects_discussed": "Scattered rash, itching",
+        "Long_term_side_effects_discussed": ""
+      }
+    ]
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue Docusate Sodium daily for constipation."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Okay to proceed with Taxotere/cytoxan. Refer to Radiation Oncology at [REDACTED] for second opinion. RTC in 1 month to discuss after discussion with radiation."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Refer to Radiation Oncology at [REDACTED] for second opinion"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Refer to have Port removal"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Refer to Radiation Oncology at [REDACTED] for second opinion, Radiation Oncology at ***** for second opinion  Refer to hav",
+    "Others": "None",
+    "follow up": "RTC in 1 month to discuss after discussion with radiation"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 1 month to discuss after discussion with radiation"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "RTC in 1 month to discuss after discussion with radiation"
+  ],
+  "second opinion": [
+    "Refer to Radiation Oncology at [REDACTED] for second opinion"
+  ],
+  "in-person": [
+    "This is a shared visit involving myself and [REDACTED] [REDACTED] [REDACTED]."
+  ],
+  "summary": [
+    "Breast cancer  Labs reviewed  Exam stable has scattered rash after taxotere and cytoxan."
+  ],
+  "lab_summary": [
+    "Labs reviewed"
+  ],
+  "findings": [
+    "Exam stable has scattered rash after taxotere and cytoxan."
+  ],
+  "current_meds": [
+    "Okay to proceed with Taxotere/cytoxan"
+  ],
+  "goals_of_treatment": [
+    "{\"quote\": \"Okay to proceed with Taxotere/cytoxan\"}"
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "Okay to proceed with Taxotere/cytoxan"
+  ],
+  "medication_plan": [
+    "Stable with Docusate Sodium daily"
+  ],
+  "therapy_plan": [
+    "Okay to proceed with Taxotere/cytoxan  Refer to Radiation Oncology at [REDACTED] for second opinion  RTC in 1 month to discuss after discussion with radiation"
+  ],
+  "radiotherapy_plan": [
+    "Refer to Radiation Oncology at [REDACTED] for second opinion"
+  ],
+  "procedure_plan": [
+    "Refer to have Port removal"
+  ],
+  "Specialty": [
+    "Refer to Radiation Oncology at [REDACTED] for second opinion"
+  ],
+  "follow up": [
+    "RTC in 1 month to discuss after discussion with radiation"
+  ],
+  "Next clinic visit": [
+    "RTC in 1 month to discuss after discussion with radiation"
+  ]
+}

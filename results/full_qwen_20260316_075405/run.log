@@ -20609,3 +20609,45 @@ Processing row 97 (98/100)...
     [POST-SPECIALTY] found in full note: Radiation Oncology at ***** for second opinion  Refer to hav
     [POST-THERAPY] removed non-therapy: ['Refer to have Port removal.']
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 16/20 fields sourced (17.1s)
+  Row 97 total: 202.0s
+  Row 97 saved to progress
+
+Processing row 98 (99/100)...
+  Injected 3 term definitions: ['progesterone receptor', 'estrogen receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3359 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 49-year-old female with a history of left-sided stage III breast cancer diagnosed in 200
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 18.1s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma, ER-/PR-/HER2 3+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III, now metastatic (Stage IV)",
+  "Distant_Metastasi
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
