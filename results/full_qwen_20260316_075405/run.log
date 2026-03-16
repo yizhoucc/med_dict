@@ -7848,3 +7848,35 @@ Processing row 37 (38/100)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B co"
       [POST-MEDS] ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL -> 
+    Treatment_Changes: 37.6s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "She declines further IV or preoperative therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently.",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "gabapentin (NEURONTIN) 300 mg capsule, , Disp: , Rfl: , LORazepam (ATIVAN) 1 mg " -> "gabapentin (NEURONTIN) 300 mg capsule, LORazepam (ATIVAN) 1 mg tablet, naloxone "
+      [G3-IMPROVE] recent_changes: "She declines further IV or preoperative therapy. She will qualify for adjuvant x" -> "She declined further IV or preoperative therapy. She will qualify for adjuvant x"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule, LORazepam (ATIVAN) 1 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, 1 spray by Nasal route 2 (two) times daily as needed, HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, traMADoL (ULTRAM) 50 mg tablet -> HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, traMADoL (ULTRAM) 50 mg tablet
+  Phase 1 extraction (6 prompts): 161.0s
+  Cross-context injected (704 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 14.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is not responding to treatment. The patient's tumor is enlarging again, as noted in the physical exam. Recent imaging findings include a repeat MRI in November 202
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is not responding to treatment. The patient's tum" -> "The patient's tumor is enlarging again, as noted in the phys"
+  Phase 2 extraction (2 prompts): 17.3s
+  Total extraction: 178.4s
