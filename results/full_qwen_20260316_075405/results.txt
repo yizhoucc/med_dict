@@ -14600,3 +14600,143 @@ RESULTS FOR ROW 93
     "patient has appointment to see radiation oncology Dr. [REDACTED] today at 3pm"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 94
+============================================================
+
+--- Column: coral_idx ---
+233
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Consult    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  04/18/1946   Date of Visit:  05/11/2021  Provider:  ***** ***** *****  Primary Care Provider:  ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (CMS code)         I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     75 year old female with a left ***** of the breast in May 2019.  She had a lumpectomy June 2019 with a 1.6 cm tumor and August 03 lymph nodes positive, HR+ and her 2 neu negative. She had an ***** ***** RS of 21 and declined chemotherapy. She had radiation followed by *****.   She had genetic testing that was negative.  Her most recent mammogram was normal 12/05/2020. She gets her high risk screening at ***** ***** *****. *****.  She gets pain in the joints from her ***** and takes CBD.  She worries about relapse.    It has been recommended for her to get a MRI. She wants to know if she needs other imaging or tumor markers.  I discussed how that is not indicated unless she is symptomatic or has physical findings.    A colonoscopy has been recommended.  She is to have her MRI at ***** ***** *****. *****. She also has ***** ordered for May 31.    Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, left (CMS code) 05/11/2021       Stage at *****:  Cancer Staging  Breast cancer, left (CMS code)  Staging form: Breast, AJCC 8th Edition  - Pathologic: Stage ***** (pT1b, *****(sn), *****, G2, ER+, PR+, *****-, ***** ***** score: 21) - Signed by ***** ***** *****, MD on 05/11/2021      Medications:    Current Outpatient Medications:   \u0007  gabapentin (NEURONTIN) 300 mg \n capsule, Take 600 mg by mouth daily, Disp: , Rfl:   \u0007  letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily, Disp: , Rfl:     Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Succinylcholine Chloride Other (See Comments)      pseudocholinesterase esterase deficiency     \u0007 Arachidonic Acid (*****) Other (See Comments)   \u0007 Cholinesterase Inhibitor(Carbamate) Other (See Comments)       Medical History:   Past Medical History:   Diagnosis Date   \u0007 Arthritis 2015   \u0007 Breast cancer (CMS code) 06/23/2019   \u0007 Breast cancer, left (CMS code) 05/11/2021   \u0007 Cataract 2018   \u0007 Chronic bronchitis (CMS code) Lifetime problem no longer present   \u0007 Colon polyp 1 polyp- removed 2017 in colonoscopy   \u0007 Diverticulitis Found in colonoscopy 2017   \u0007 Hemorrhoids Minor       Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  07/15/2019   \u0007 CESAREAN SECTION  09/26/84 + 02/15/87   \u0007 TONSILLECTOMY  1949       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 1.00     Years: 10.00     ***** years: 10.00     Types: Cigarettes     Start date: 07/29/1964     Quit date: 03/02/1978     Years since quitting: 43.2   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 1.0 standard drinks     Types: 1 Glasses of wine per week     Comment: 1-2 glasses per week   \u0007 Drug use: Yes     Frequency: 7.0 times per week     Types: *****     *****: 1 cbd 10 mg ***** for pain and 1 ***** 10 mg ***** for sl   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None   Social History Narrative   \u0007 Not on file       *****:  ***** - ***** ***** ***** *****.     ***** Status: married     Gynecologic History:  G 3 P 2 AB 1    Menarche 12  Menopause  52   OCP 1 years HRT 0 years   Fertility treatments 0    Family History:   Family History   Problem Relation Name \n Age of Onset   \u0007 Prostate cancer Father ***** ***** 56               Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    05/10/21 1429   *****: Generalized   *****:  0     Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Orders Only on 07/03/2019   Component Date Value Ref Range Status   \u0007 WBC Count 07/03/2019 6.5  3.4 - 10.8 x10E3/uL Final   \u0007 RBC Count 07/03/2019 4.34  3.77 - 5.28 x10E6/uL Final   \u0007 Hemoglobin 07/03/2019 13.6  11.1 - 15.9 g/dL Final   \u0007 Hematocrit 07/03/2019 40.1  34.0 - 46.6 % Final   \u0007 MCV 07/03/2019 92  79 - 97 fL Final   \u0007 MCH 07/03/2019 31.3  26.6 - 33.0 pg Final   \u0007 MCHC 07/03/2019 33.9  31.5 - 35.7 g/dL Final   \u0007 RDW 07/03/2019 12.8  12.3 - 15.4 % Final   \u0007 Platelet Count 07/03/2019 *****  150 - 450 x10E3/uL Final   \u0007 Neutrophils 07/03/2019 52  Not *****. % Final   \u0007 Lymphs 07/03/2019 38  Not *****. % Final   \u0007 Monocytes % 07/03/2019 6  Not *****. % Final   \u0007 Eos 07/03/2019 3  Not *****. % Final   \u0007 BASOS 07/03/2019 1  Not *****. % Final   \u0007 Neutrophil Absolute Count 07/03/2019 3.4  1.4 - 7.0 x10E3/uL Final   \u0007 Lymphs, Blood 07/03/2019 2.5  0.7 - 3.1 x10E3/uL Final   \u0007 Monocyte Abs Count 07/03/2019 0.4  0.1 - 0.9 x10E3/uL Final   \u0007 Eosinophils Absolute 07/03/2019 0.2  0.0 - 0.4 \n *****/uL Final   \u0007 Basophil Abs Count 07/03/2019 0.1  0.0 - 0.2 x10E3/uL Final   \u0007 Immature Granulocytes 07/03/2019 0  Not *****. % Final   \u0007 Immature ***** (Abs) 07/03/2019 0.0  0.0 - 0.1 x10E3/uL Final   \u0007 Glucose, non-fasting 07/03/2019 ***** 65 - 99 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 07/03/2019 17  8 - 27 mg/dL Final   \u0007 Creatinine, Serum 07/03/2019 0.78  0.57 - 1.00 mg/dL Final   \u0007 eGFR - low estimate 07/03/2019 76  >59 mL/min/1.73 Final   \u0007 eGFR - high estimate 07/03/2019 87  >59 mL/min/1.73 Final   \u0007 BUN/Creatinine Ratio 07/03/2019 22  12 - 28 Final   \u0007 Sodium, Serum / Plasma 07/03/2019 *****  134 - 144 mmol/L Final   \u0007 Potassium, Serum / Plasma 07/03/2019 4.1  3.5 - 5.2 mmol/L Final   \u0007 Chloride, Serum / Plasma 07/03/2019 *****  96 - 106 mmol/L Final   \u0007 Carbon Dioxide, Total 07/03/2019 28  20 - 29 mmol/L Final   \u0007 Calcium, total, Serum / Plasma 07/03/2019 9.5  8.7 - 10.3 mg/dL Final   \u0007 Protein, Total, Serum / Plasma 07/03/2019 6.3  6.0 - 8.5 g/dL Final   \u0007 Albumin, Serum / Plasma 07/03/2019 4.0  3.5 - 4.8 g/dL Final   \u0007 Globulin, Total 07/03/2019 2.3  1.5 - 4.5 g/dL Final   \u0007 A/G RATIO 07/03/2019 1.7  1.2 - 2.2 Final   \u0007 Bilirubin, Total 07/03/2019 0.5  0.0 - 1.2 mg/dL Final   \u0007 Alkaline Phosphatase 07/03/2019 78  39 - 117 IU/L Final   \u0007 AST 07/03/2019 22  0 - 40 IU/L Final   \u0007 Alanine transaminase 07/03/2019 18  0 - 32 IU/L Final   \u0007 Int'l Normaliz Ratio 07/03/2019 1.0  0.8 - 1.2 Final   \u0007 PT 07/03/2019 10.6  9.1 - 12.0 sec Final     Lifestyle:    Exercise walks 300 minutes a week.   Diet:  Lacto ovo vegetarian. + omega 3 supplements. Limits alcohol.   Sleep:  7 - 8 hours a day take ***** 10 mg a day to sleep.   Stress:  Knows what to do. Walking mediation   Discussed Anti inflammation diet and fasting 12-13 hours a day -sent the dietary plan to her.     Psychologic/emotional well-being/support  She has good support.     Assessment / Plan:    1.  Stage ***** ***** of the breast *****,***** s/p lumpectomy \n June 2020 followed by chemotherapy, radiation and ***** started. ***** +, ***** negative, 1.6 cm tumor August 03 lymph nodes positive.  ***** ***** RS of 21. No chemotherapy given.   2.  Mammogram due in November 2021.   3.  High risk screening MRI as well, she wants it with Dr. *****    4.  ***** for ***** therapy and bone protection, next due May 2021.   5.  RTC in 6 months for follow up.  We discussed long term follow up and how if she were seen her it would be q 6 months while on hormone blockade alternating with NP and myself.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.             \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:    1.  Stage ***** ***** of the breast *****,***** s/p lumpectomy \n June 2020 followed by chemotherapy, radiation and ***** started. ***** +, ***** negative, 1.6 cm tumor August 03 lymph nodes positive.  ***** ***** RS of 21. No chemotherapy given.   2.  Mammogram due in November 2021.   3.  High risk screening MRI as well, she wants it with Dr. *****    4.  ***** for ***** therapy and bone protection, next due May 2021.   5.  RTC in 6 months for follow up.  We discussed long term follow up and how if she were seen her it would be q 6 months while on hormone blockade alternating with NP and myself.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.             \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Patient presents with malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive. This is a new patient evaluation for discussion regarding high-risk screening and potential imaging."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage IIA (pT1b, pN1(sn), G2, ER+, PR+, HER2-, Oncotype DX score: 21)",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 6.5, RBC Count 4.34, Hemoglobin 13.6, Hematocrit 40.1, MCV 92, MCH 31.3, MCHC 33.9, RDW 12.8, Platelet Count [REDACTED], Neutrophils 52, Lymphs 38, Monocytes % 6, Eos 3, BASOS 1, Neutrophil Absolute Count 3.4, Lymphs, Blood 2.5, Monocyte Abs Count 0.4, Eosinophils Absolute 0.2, Basophil Abs Count 0.1, Immature Granulocytes 0, Immature [REDACTED] (Abs) 0.0, Glucose, non-fasting [REDACTED], Urea Nitrogen, Serum / Plasma 17, Creatinine, Serum 0.78, eGFR - low estimate 76, eGFR - high estimate 87, BUN/Creatinine Ratio 22, Sodium, Serum / Plasma [REDACTED], Potassium, Serum / Plasma 4.1, Chloride, Serum / Plasma [REDACTED], Carbon Dioxide, Total 28, Calcium, total, Serum / Plasma 9.5, Protein, Total, Serum / Plasma 6.3, Albumin, Serum / Plasma 4.0, Globulin, Total 2.3, A/G RATIO 1.7, Bilirubin, Total 0.5, Alkaline Phosphatase 78, AST 22, Alanine transaminase 18, Int'l Normaliz Ratio 1.0, PT 10.6 (from 07/03/2019)"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient has a history of left breast cancer with a 1.6 cm tumor and 3 positive lymph nodes. The tumor is estrogen receptor positive (ER+), progesterone receptor positive (PR+), and HER2 negative. The patient declined chemotherapy after a recurrence score (RS) of 21. Recent mammogram from 12/05/2020 was normal. No new imaging findings or physical exam findings are noted in this visit. MRI is recommended but not yet performed."
+  },
+  "Current_Medications": {
+    "current_meds": "letrozole (FEMARA) 2.5 mg tablet"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "letrozole (FEMARA) 2.5 mg tablet"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "no evidence of disease recurrence on imaging and exam"
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+      "summary": "hormonal therapy started, next due May 2021 for bone protection",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "None"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Mammogram due in November 2021. High risk screening MRI as well, she wants it with Dr. [REDACTED]"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "RTC in 6 months for follow up"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 6 months for follow up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "full code."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "RTC in 6 months for follow up."
+  ],
+  "in-person": [
+    "I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location."
+  ],
+  "summary": [
+    "Stage [REDACTED] [REDACTED] of the breast [REDACTED],[REDACTED] s/p lumpectomy"
+  ],
+  "Type_of_Cancer": [
+    "[REDACTED] +, [REDACTED] negative, 1.6 cm tumor"
+  ],
+  "Stage_of_Cancer": [
+    "Stage [REDACTED] [REDACTED] of the breast [REDACTED],[REDACTED] s/p lumpectomy"
+  ],
+  "Metastasis": [
+    "1.6 cm tumor August 03 lymph nodes positive."
+  ],
+  "findings": [
+    "1.6 cm tumor August 03 lymph nodes positive.  [REDACTED] [REDACTED] RS of 21. No chemotherapy given."
+  ],
+  "current_meds": [
+    "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+  ],
+  "supportive_meds": [
+    "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+  ],
+  "medication_plan": [
+    "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+  ],
+  "imaging_plan": [
+    "Mammogram due in November 2021. High risk screening MRI as well, she wants it with Dr. [REDACTED]"
+  ],
+  "follow up": [
+    "RTC in 6 months for follow up."
+  ],
+  "Next clinic visit": [
+    "RTC in 6 months for follow up."
+  ]
+}
