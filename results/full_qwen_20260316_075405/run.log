@@ -11661,3 +11661,57 @@ Processing row 55 (56/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.6s
   Total extraction: 47.0s
+    Medication_Plan_chatgpt: 18.4s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Neoadjuvant chemotherapy with dose dense AC followed by weekly taxol is recommended. She will need a port placed to start chemotherapy no later than one mon
+      [G1-FORMAT] ok, keys=['chemotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Neoadjuvant chemotherapy with dose dense AC followed by weekly taxo" -> "{'summary': 'Neoadjuvant chemotherapy with dose dense AC followed by weekly taxo"
+      [G4-FAITH] chemotherapy: "{'summary': 'Neoadjuvant chemotherapy with dose dense AC fol" -> "{'summary': 'Neoadjuvant chemotherapy with dose dense AC fol"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'chemotherapy'}
+    Medication_Plan: 6.1s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with dose dense AC followed by weekly taxol."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Recommend neoadjuvant chemotherapy with dose dense AC followed by weekly taxol. She will need a port placed. It is also fine for her to have surgery first if MRI confirms stage 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. Depending on her pathology she may not need radiation if she has a mastectomy."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 4.6s
+      [EXTRACT] raw={
+    "procedure_plan": "plan for port placement, surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 4.3s
+      [EXTRACT] raw={
+    "imaging_plan": "MRI of bilateral breasts."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
