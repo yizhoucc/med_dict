@@ -17801,3 +17801,59 @@ Processing row 84 (85/100)...
       [G4-FAITH] EMPTIED: ['lab_plan']
       [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 8.6s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "She will be evaluated today by Dr. [REDACTED] for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 8.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc referral",
+"Others": "None",
+"follow up": "Follow up in 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 109.3s
+    [POST-THERAPY] removed non-therapy: ['Continue steroid taper per Dr.', '[REDACTED].', 'Continue pain medications as prescribed.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, muscle, liver, and brain)'
+  [ATTRIBUTION] 23/24 fields sourced (35.2s)
+  Row 84 total: 287.5s
+  Row 84 saved to progress
+
+Processing row 85 (86/100)...
+  Injected 1 term definitions: ['FISH']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
