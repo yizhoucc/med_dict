@@ -14191,3 +14191,27 @@ Processing row 67 (68/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 9.7s
   Total extraction: 78.9s
+    Medication_Plan_chatgpt: 49.1s [faith-restored-1keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "The patient has completed 6 cycles of TCHP, a regimen appropriate for her stage and extent of disease. No new chemotherapy is planned at this time.",
+      
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'The patient has completed 6 cycles of TCHP, a r" -> "{'summary': 'The patient has completed 6 cycles of TCHP, a r"
+      [G4-FAITH] radiotherapy: "{'summary': 'Post-mastectomy radiation would be considered i" -> "{'summary': 'Post-mastectomy radiation would be considered i"
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'The patient has completed 6 cycles of TCHP, a regimen appropriate f" -> "{'summary': '', 'Short_term_side_effects_discussed': 'Reviewed treatment side ef"
+      [G5-TEMPORAL] other treatment: "{'summary': 'The importance of diet and exercise with regard to breast cancer ou" -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'radiotherapy', 'other_treatment'}
+    Medication_Plan: 7.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific future medication plans, changes to current medi" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
