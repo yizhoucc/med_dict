@@ -13840,3 +13840,164 @@ Processing row 65 (66/100)...
       [G4-FAITH] imaging_plan: "No imaging planned." -> ""
       [G4-FAITH] EMPTIED: ['imaging_plan']
       [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 11.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Social work referral",
+"follow up": "We will refer the patient back to her referring physician, .[REDACTED] [REDACTED] [REDAC
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.7s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after chemotherapy to discuss next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 124.9s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 15/16 fields sourced (19.1s)
+  Row 65 total: 257.9s
+  Row 65 saved to progress
+
+Processing row 66 (67/100)...
+  Injected 2 term definitions: ['progesterone receptor', 'estrogen receptor']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT AND PLAN:'
+  Regex extraction succeeded (6741 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.0s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "54-year-old postmenopausal woman with newly diagnosed left-sided triple negative breast cancer. The pati
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 12.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Clinical stage II-III",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 13.3s
+      [EXTRACT] raw={
+"lab_summary": "WBC 3.7, hemoglobin 9.3, hematocrit 27.3, platelet count 173,000, sodium 141, potassium 4.0, bicarbonate 34 (05/07/2011)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.6s [improved]
+      [EXTRACT] raw={
+"findings": "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm in diameter with cancer present at the margin. No angiolymphatic invasion. Left breast skin - possible s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm" -> "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.2s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Abraxane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Abraxane" -> ""
+      [G4-FAITH] current_meds: "" -> "Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyr"
+      [POST-MEDS] Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyroxine, Hydrochlorothiazide, Humalog-R 500 units, 35 units before lunch and 30 units after lunch, Metformin 1000 mg b.i.d., Aspirin -> 
+    Treatment_Changes: 15.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched from dose-dense Adriamycin plus Cytoxan to Abraxane at a weekly dose for a total of 12 weeks. Recommended starting Levaquin post dose-dense AC cycle to prevent infection.
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Neupogen at 480 mcg for a total of three doses, Levaquin -> Neupogen at 480 mcg for a total of three doses
+  Phase 1 extraction (6 prompts): 101.7s
+  Cross-context injected (1145 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 14.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to treatment. After two cycles of dose-dense Adriamycin plus Cytoxan, the patient noticed a decrease in size of her left axillary lymph nod
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.3s
+  Total extraction: 119.9s
+    Medication_Plan_chatgpt: 50.2s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will start Abraxane at a weekly dose for a total of 12 weeks. If her general health condition improves after 3 months, she will receive an additiona
+      [G1-FORMAT] ok, keys=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'Patient will start Abraxane at a weekly dose fo" -> "{'summary': 'Patient will start Abraxane at a weekly dose fo"
+      [G4-FAITH] other treatment: "{'summary': 'Patient is recommended to contact her diabetes " -> "{'summary': 'Patient is recommended to contact her diabetes "
