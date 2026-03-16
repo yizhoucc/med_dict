@@ -17253,3 +17253,167 @@ Processing row 82 (83/100)...
   Success on attempt 1 (Verified by LLM, 1195 chars)
   A/P extraction: 19.7s
     Reason_for_Visit: 15.8s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "77-year-old female with right breast invasive lobular carcinoma with right axillary nodal metastatic invo
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.9s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+"Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to right axillary lymph nodes",
+"M
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to right axillary lymph nodes" -> "No"
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive lobular carcinoma" -> "Lobular Breast Cancer, right with metastasis to right axilla LN"
+      [G4-FAITH] Stage_of_Cancer: "Originally not specified, now metastatic (Stage IV)" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally not specified, now metastatic (Stage IV)"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 30.0s
+      [EXTRACT] raw={
+"findings": "Patient has a history of right breast invasive lobular carcinoma with right axillary nodal metastatic involvement. Recent imaging shows significant response to neoadjuvant endocrine the
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 5.6s [faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] supportive_meds: "" -> "buspirone, carvedilol, celecoxib, gabapentin, levothyroxine,"
+      [POST-SUPP] buspirone, carvedilol, celecoxib, gabapentin, levothyroxine, losartan, sertraline, zolpidem, erythromycin ophthalmic ointment, metronidazole cream -> 
+  Phase 1 extraction (6 prompts): 72.5s
+  Cross-context injected (1219 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 31.3s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to neoadjuvant endocrine therapy with letrozole. Recent imaging shows significant response, especially PET/SUV response in axillary nodes. 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 34.8s
+  Total extraction: 107.3s
+    Medication_Plan_chatgpt: 17.4s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Pt started neoadjuvant endocrine therapy with letrozole under Dr [REDACTED]. Tolerating well. Recommend continuing neoadjuvant endocrine therapy until b
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy']
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Pt started neoadjuvant endocrine therapy with letrozole under Dr [R" -> "{'summary': 'Pt started neoadjuvant endocrine therapy with letrozole under Dr [R"
+      [G4-FAITH] hormonal therapy: "{'summary': 'Pt started neoadjuvant endocrine therapy with l" -> "{'summary': 'Pt started neoadjuvant endocrine therapy with l"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Pt started neoadjuvant endocrine therapy with letrozole under Dr [R" -> "{'summary': 'Recommend continuing neoadjuvant endocrine therapy until breast sur"
+      [POST-KEYS] stripped: {'hormonal therapy'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continuing neoadjuvant endocrine therapy with letrozole."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "continue neoadjuvant endocrine therapy with letrozole until breast surgery. Reassessment of status and treatment plan after surgery and pathology are complete."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "continue neoadjuvant endocrine therapy with letrozole until " -> "continue neoadjuvant endocrine therapy until breast surgery."
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 4.0s
+      [EXTRACT] raw={
+    "procedure_plan": "upcoming breast surgery"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.5s [faith-trimmed]
