@@ -498,3 +498,37 @@ Processing row 79 (3/13)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 15.0s
   Total extraction: 178.6s
+    Medication_Plan_chatgpt: 53.2s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Start TC x 4 on 04/11/19",
+        "Short term side_effects_discussed": "Chemotherapy toxicity, management and medications reviewed in detail",
+        "Lon
+      [G1-FORMAT] ok, keys=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Start TC x 4 on 04/11/19', 'Short term side_effects_discussed': 'Ch" -> "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_effects_discussed': 'Ch"
+      [G4-FAITH] radiotherapy: "{'summary': '6 weeks of radiation therapy, 5 weeks with a on" -> "{'summary': '6 weeks of radiation therapy, 5 weeks with a on"
+      [G4-FAITH] other treatment: "{'summary': 'Whole genome sequencing was done, but no action" -> "{'summary': 'Whole genome sequencing was done, but no action"
+      [G4-FAITH] supportive treatment: "{'summary': 'Discussed claritin for 5-6 days, pain medicatio" -> "{'summary': 'Discussed claritin for 5-6 days, pain medicatio"
+      [G4-FAITH] chemotherapy: "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_eff" -> "{'summary': 'Start TC x 4 on 04/11/19', 'Short_term_side_eff"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Whole genome sequencing was done, but no actionable mutation found." -> ""
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Discussed claritin for 5-6 days, pain medications for cold cap disc" -> ""
+      [POST-KEYS] stripped: {'radiotherapy', 'supportive_treatment', 'other_treatment', 'chemotherapy'}
+    Medication_Plan: 14.8s
+      [EXTRACT] raw={
+    "medication_plan": "Start TC x 4 on 04/11/19, with Claritin for 5-6 days. Discussed pain medications for cold cap and cold gloves for neuropathy and fingernails."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Start TC x 4 on 04/11/19, with 6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
