@@ -10671,3 +10671,155 @@ RESULTS FOR ROW 68
     "Return to clinical as needed for further consultation and with her sons."
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 69
+============================================================
+
+--- Column: coral_idx ---
+208
+
+--- Column: note_text ---
+"***** ***** is a 52 y.o. female who presents to the UCSF Breast Care Center for new diagnosis of *****+ *****- invasive lobular carcinoma R breast with biopsy-proven axillary LN involvement.    HISTORY OF PRESENT ILLNESS:  -2013: last mammogram/ultrasound (prompted by L breast mass): normal per report (El ***** *****)  -March 2016: first noted palpable R UOQ mass, not painful.  -08/25/2015: diagnostic mammogram with ultrasound: ***** 5, palpable abnormality 10 o'clock located 5 cm from nipple, this was 1.7 x 1.1 cm with calcifications in the upper right breast anterior to the chest wall. Right axillary lymph node was also noted, 1.6 x 0.7 cm with prominent fatty hilum. Breasts are extremely dense.  -09/06/2015: u/s guided core bx of R breast with clip placement.  Path showed invasive lobular carcinoma, histologic grade low (3+1+1), ER strongly positive (***** 8 of 8), PR positive (***** 5 of 8), ***** equivocal by IHC (2+) but negative by FISH (ratio 1.1), ***** was 10%.  Also focal LCIS.  FNA of R axillary LN +ve for carcinoma.  A separate stereotactic core biopsy of R breast calcifications was cancelled as the clip was in the same location as the calcifications implying that these were sampled.  -09/13/2015: last labs: WBC 5.4, Hb 13.7, plts 211, Cr 0.8, Tbili 0.4, alk phos 52, AST/ALT wnl.  -10/07/2015: MRI b/l breasts: R breast with 2 x 3.5 x 4.5 cm lesion at 9 o'clock with clip, also 2 satellite lesions inferior to the index lesion each measuring 6 mm and located within 15 mm of inferior margin, total dimensions 3.5 x 3.5 x 4.5 cm. R axilla with enlarged and enhancing LN up to 14 mm, multiple look enlarged. Left breast with 10 x 10 x 16 mm ***** enhancing lesion, nl L axillar LN.  -10/20/2015: core bx of L breast: fibrocystic changes including ductal *****, benign - concordant with imaging per UCSF radiology    Pt has met primarily with her surgical oncologist Dr. *****, who felt that a initial surgical option \n would cause deformity given large mass in relatively small breast.  Recommended either modified radical mastectomy (w plastics support for reconstruction) or neoadjuvant chemo with possibility of BCT.    Otherwise the pt is doing reasonably well.  Less active with exercise so has gained weight.  Some new upper back paraspinal 4/10 pain (intermittent, no meds), also b/l ankle pain, R shoulder pain.  Some L chest discomfort when anxious, ***** with associated nausea but no dyspnea, daily lasting 30 min, nonexertional, improving, pt tries to address her anxiety.  Also some RUQ pain and L arm numbness which are new.    Last period was 2 yrs ago in 2014, no breakthrough or irregular bleeding.  Menarche 12.  No exogenous hormones (eg OCP or HRT), never pregnant.  Only occasional hot flashes now, not daily.  No FH BRCA, ovarian CA.    She is trying to transfer care to UCSF.  Pursuing MediCal exception to transition to straight Medi Cal.  She desires BCT if possible.    PAST MEDICAL HISTORY:  Past Medical History   Diagnosis Date   \u0007 Breast cancer metastasized to axillary lymph node      invasive lobular R breast with +FNA R axillary LN   \u0007 Ovarian cyst    \u0007 Uterine fibroid      x 5, initial dx in 2000s, last imaging approx 2011.  pelvic pain imp with onset of menopause     PAST SURGICAL HISTORY:  History reviewed. No pertinent past surgical history.    GYN HISTORY:  OB History     Gravida Para Term Preterm AB TAB SAB Ectopic Multiple Living    0 0 0 0 0 0 0 0 0 0        Obstetric Comments    Last period was 2 yrs ago in 2014, no breakthrough or irregular bleeding.  Menarche 12.  No exogenous hormones (eg OCP or HRT), never pregnant.  Only occasional hot flashes now, not daily.  No FH BRCA, ovarian CA.          MEDICATIONS:  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 LORazepam (ATIVAN) 1 mg tablet        No current facility-administered medications for this visit.        ALLERGIES:  No Known \n Allergies       FAMILY HISTORY:  Family History   Problem Relation Age of Onset   \u0007 Breast cancer Neg Hx    \u0007 Ovarian cancer Neg Hx        SOCIAL HISTORY:  Social History     Social History Narrative    Lives in ***** - not working currently, was accountant before.  Lives alone, not married, numerous family here (younger and older brother, mother, sister-in-law).  No t, EtOH 1 drink/mo, ***** *****           REVIEW OF SYSTEMS:  Review of Systems - 14 point review of systems negative except problems noted above.    PHYSICAL EXAM:  Visit Vitals   \u0007 BP 92/57   \u0007 Pulse 53   \u0007 Temp 36.3 C (97.4 F) (Oral)   \u0007 Resp 16   \u0007 Ht 161.5 cm (5' 3.58\")   \u0007 Wt 64.1 kg (141 lb 6.4 oz)   \u0007 SpO2 99%   \u0007 BMI 24.59 kg/m2       General appearance - alert, well appearing, and in no distress  HEENT: anicteric, OP clear  Mental status - alert, oriented to person, place, and time  Lymph nodes - no palpable cervical or supraclavicular lymphadenopathy   Axilla - R axilla with ***** ***** *****, *****.  L axillary fullness but no discrete LN  Breasts - R breast palpable mass UOQ 5 x 4 cm at 10 o'clock, 4.5 cm from nipple.  L breast no palpable masses.  otherwise no skin or nipple changes  Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm  Abdomen - soft,ND/NT, no HSM  Neurological - A&Ox3, grossly non-focal  Musculoskeletal - No point tenderness in spine or other ***** tenderness  Extremities - no edema  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted    LABS:  As per HPI    IMAGING/PATHOLOGY:  As noted above in *****.  We reviewed her 10/07/15 MRI b/l breasts with breast radiology, showing R breast mass (bx-proven) with October 14 abnormally enlarged level I R ***** *****.  Also benign appearing fibroglandular tissue in L axilla.    ASSESSMENT/PLAN:  52 F here for new diagnosis of minimum clinical stage IIB, T2 N1 Mx, *****+ *****- invasive lobular carcinoma R breast \n which is  with biopsy-proven axillary LN involvement.    We should begin by completing her staging with a PET/CT to be ordered today.  Assuming there are no distant mets, her cancer has a less aggressive biology (HR+ and *****, low *****) but with concern for high burden of nodal disease given +R axillary FNA and multiple concerning LN on imaging.  Regardless of next steps, she will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy.  As far as chemotherapy, with her strongly HR+ low grade, lobular biology, she may derive less benefit from chemotherapy than hormone therapy, but given her disease burden we cannot say she will derive no benefit from chemotherapy.  We think it is reasonable to send molecular profiling assay (ie. ***** *****) to help determine her benefit from chemotherapy, and how to proceed, acknowledging that these assays were developed for node negative or June 12+ nodes. This can be done as part of trial screening (*****, see below) or off trial.  This can help guide what kind of neoadjuvant treatment to pursue.     Given her preference for BCT if possible, we want to do everything possible to give her a ***** acceptable result.  Also we want to assess the degree of responsiveness of her tumor to systemic therapy.  *****, a neoadjuvant systemic approach is warranted to achieve these goals.  If her ***** ends up being low risk, we may consider 4-6 months of neoadjuvant hormone therapy with an aromatase inhibitor (given post-menopausal status) in hopes that she will have a response and can be a BCT *****.   An alternate option for low risk disease would be an available neoadjuvant trial we have combining hormone therapy with a ***** alpha subunit inhibitor, which we can discuss in a future visit. I told her even if we take an ***** approach, if we find that she has extensive ***** at surgery \n she would likely still need chemotherapy.   If her ***** ends up being high risk, I would recommend ***** including ***** on ***** trial.      The patient voiced understanding and is interested in learning about ***** . She met with the coordinator today and screening consent was provided.  She was advised to let us know how she'd like to proceed, the sooner the better since it takes ~2weeks for the genomic tests to return.  She understands that ***** screening requires repeat  MRI breast and repeat biopsy.    -PET/CT ordered  -await ***** as part of ***** screening, or ***** if she ***** not to screen for ISPY.  -will schedule repeat MRI breast and biopsy if she ***** to screen for ISPY  -F/U with Dr. *****       This pt was seen and discussed with attending ***** *****.    1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 90 Total counseling time: 75    10/27/15    ATTESTATION:    My date of service is 10/25/2015. I was present for and performed key portions of an examination of the patient.   I am personally involved in the management of the patient. I have annotated the trainee's note as documented below and agree with the findings and care plan as documented.      \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT/PLAN:  52 F here for new diagnosis of minimum clinical stage IIB, T2 N1 Mx, *****+ *****- invasive lobular carcinoma R breast \n which is  with biopsy-proven axillary LN involvement.    We should begin by completing her staging with a PET/CT to be ordered today.  Assuming there are no distant mets, her cancer has a less aggressive biology (HR+ and *****, low *****) but with concern for high burden of nodal disease given +R axillary FNA and multiple concerning LN on imaging.  Regardless of next steps, she will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy.  As far as chemotherapy, with her strongly HR+ low grade, lobular biology, she may derive less benefit from chemotherapy than hormone therapy, but given her disease burden we cannot say she will derive no benefit from chemotherapy.  We think it is reasonable to send molecular profiling assay (ie. ***** *****) to help determine her benefit from chemotherapy, and how to proceed, acknowledging that these assays were developed for node negative or June 12+ nodes. This can be done as part of trial screening (*****, see below) or off trial.  This can help guide what kind of neoadjuvant treatment to pursue.     Given her preference for BCT if possible, we want to do everything possible to give her a ***** acceptable result.  Also we want to assess the degree of responsiveness of her tumor to systemic therapy.  *****, a neoadjuvant systemic approach is warranted to achieve these goals.  If her ***** ends up being low risk, we may consider 4-6 months of neoadjuvant hormone therapy with an aromatase inhibitor (given post-menopausal status) in hopes that she will have a response and can be a BCT *****.   An alternate option for low risk disease would be an available neoadjuvant trial we have combining hormone therapy with a ***** alpha subunit inhibitor, which we can discuss in a future visit. I told her even if we take an ***** approach, if we find that she has extensive ***** at surgery \n she would likely still need chemotherapy.   If her ***** ends up being high risk, I would recommend ***** including ***** on ***** trial.      The patient voiced understanding and is interested in learning about ***** . She met with the coordinator today and screening consent was provided.  She was advised to let us know how she'd like to proceed, the sooner the better since it takes ~2weeks for the genomic tests to return.  She understands that ***** screening requires repeat  MRI breast and repeat biopsy.    -PET/CT ordered  -await ***** as part of ***** screening, or ***** if she ***** not to screen for ISPY.  -will schedule repeat MRI breast and biopsy if she ***** to screen for ISPY  -F/U with Dr. *****       This pt was seen and discussed with attending ***** *****.    1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 90 Total counseling time: 75    10/27/15    ATTESTATION:    My date of service is 10/25/2015. I was present for and performed key portions of an examination of the patient.   I am personally involved in the management of the patient. I have annotated the trainee's note as documented below and agree with the findings and care plan as documented.      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "52-year-old female with newly diagnosed minimum clinical stage IIB, T2 N1 Mx, [REDACTED]+ [REDACTED]- invasive lobular carcinoma of the right breast with biopsy-proven axillary lymph node involvement, presenting for initial consult at the UCSF Breast Care Center."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+    "Stage_of_Cancer": "Minimum clinical stage IIB, T2 N1 Mx",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC 5.4, Hb 13.7, plts 211, Cr 0.8, Tbili 0.4, alk phos 52, AST/ALT wnl (from 09/13/2015)"
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results: Invasive lobular carcinoma, histologic grade low (3+1+1), ER strongly positive (8 of 8), PR positive (5 of 8), [REDACTED] equivocal by IHC (2+) but negative by FISH (ratio 1.1), [REDACTED] was 10%, also focal LCIS. FNA of R axillary LN +ve for carcinoma. Imaging findings: MRI of bilateral breasts showed a 3.5 x 3.5 x 4.5 cm lesion in the right breast with 2 satellite lesions, and enlarged and enhancing lymph nodes in the right axilla up to 14 mm. Left breast with a 10 x 10 x 16 mm enhancing lesion, normal left axillary lymph nodes. Physical exam findings: Right breast with a palpable mass in the upper outer quadrant (UOQ) 5 x 4 cm at 10 o'clock, 4.5 cm from nipple. Left breast with no palpable masses, no skin or nipple changes. Right axilla with [REDACTED] [REDACTED] [REDACTED], [REDACTED]. Left axillary fullness but no discrete lymph nodes."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": {
+      "summary": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy. The use of chemotherapy is being considered based on molecular profiling results.",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of neoadjuvant hormone therapy with an aromatase inhibitor."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of neoadjuvant hormone therapy with an aromatase inhibitor. If her disease is high risk, she would likely need chemotherapy, including options on a trial."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT to be ordered today for staging. Await repeat MRI breast if she opts to screen for ISPY."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "We think it is reasonable to send molecular profiling assay (ie. [REDACTED] [REDACTED]) to help determine her benefit from chemotherapy, and how to proceed, acknowledging that these assays were developed for node negative or June 12+ nodes. This can be done as part of trial screening ([REDACTED], see below) or off trial."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "F/U with Dr. [REDACTED]"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: F/U with Dr. [REDACTED]"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "here for new diagnosis of minimum clinical stage IIB, T2 N1 Mx"
+  ],
+  "second opinion": [
+    "This pt was seen and discussed with attending [REDACTED] [REDACTED]."
+  ],
+  "in-person": [
+    "My date of service is 10/25/2015. I was present for and performed key portions of an examination of the patient."
+  ],
+  "summary": [
+    "52 F here for new diagnosis of minimum clinical stage IIB, T2 N1 Mx, [REDACTED]+ [REDACTED]- invasive lobular carcinoma R breast"
+  ],
+  "Type_of_Cancer": [
+    "minimum clinical stage IIB, T2 N1 Mx, [REDACTED]+ [REDACTED]- invasive lobular carcinoma"
+  ],
+  "Stage_of_Cancer": [
+    "minimum clinical stage IIB, T2 N1 Mx"
+  ],
+  "Metastasis": [
+    "Assuming there are no distant mets,"
+  ],
+  "Distant Metastasis": [
+    "Assuming there are no distant mets,"
+  ],
+  "findings": [
+    "which is  with biopsy-proven axillary LN involvement.    We should begin by completing her staging with a PET/CT to be ordered today."
+  ],
+  "goals_of_treatment": [
+    "Given her preference for BCT if possible, we want to do everything possible to give her a [REDACTED] acceptable result."
+  ],
+  "response_assessment": [
+    "Not yet on treatment — no response to assess."
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer therapy."
+  ],
+  "medication_plan": [
+    "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor."
+  ],
+  "therapy_plan": [
+    "she will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor"
+  ],
+  "imaging_plan": [
+    "PET/CT ordered  -await [REDACTED] as part of [REDACTED] screening, or [REDACTED] if she [REDACTED] not to screen for ISPY."
+  ],
+  "genetic_testing_plan": [
+    "We think it is reasonable to send molecular profiling assay (ie. [REDACTED] [REDACTED]) to help determine her benefit from chemotherapy, and how to proceed,"
+  ],
+  "follow up": [
+    "F/U with Dr. [REDACTED]"
+  ],
+  "Next clinic visit": [
+    "F/U with Dr. [REDACTED]"
+  ]
+}
