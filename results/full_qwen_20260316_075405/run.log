@@ -3779,3 +3779,27 @@ Processing row 17 (18/100)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 69.1s
+  [ATTRIBUTION] 18/19 fields sourced (27.4s)
+  Row 17 total: 245.9s
+  Row 17 saved to progress
+
+Processing row 18 (19/100)...
+  Injected 6 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1180 chars)
+  A/P extraction: 22.0s
+    Reason_for_Visit: 17.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Ms. [REDACTED] is a 70-year-old female with a newly diagnosed left breast invasive ductal carcinoma (IDC)
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
