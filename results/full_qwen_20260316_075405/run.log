@@ -15878,3 +15878,13 @@ Processing row 75 (76/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 18.9s
   Total extraction: 120.4s
+    Medication_Plan_chatgpt: 120.5s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days.",
+        "Short term side_effects_discussed": "Neuropathy, persistent but improved due
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'status': 'last given on 0" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on " -> "[{'type': 'chemotherapy', 'medication': 'Trastuzumab', 'summary': '6 mg/kg IV ev"
