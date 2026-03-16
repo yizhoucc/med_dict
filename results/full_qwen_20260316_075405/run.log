@@ -13935,3 +13935,27 @@ Processing row 66 (67/100)...
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 13.3s
+      [EXTRACT] raw={
+"lab_summary": "WBC 3.7, hemoglobin 9.3, hematocrit 27.3, platelet count 173,000, sodium 141, potassium 4.0, bicarbonate 34 (05/07/2011)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.6s [improved]
+      [EXTRACT] raw={
+"findings": "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm in diameter with cancer present at the margin. No angiolymphatic invasion. Left breast skin - possible s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm" -> "Left breast excisional biopsy shows high-grade invasive ductal carcinoma, 2.5 cm"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.2s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Abraxane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Abraxane" -> ""
+      [G4-FAITH] current_meds: "" -> "Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyr"
+      [POST-MEDS] Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyroxine, Hydrochlorothiazide, Humalog-R 500 units, 35 units before lunch and 30 units after lunch, Metformin 1000 mg b.i.d., Aspirin -> 
