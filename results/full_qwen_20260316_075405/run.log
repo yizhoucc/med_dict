@@ -2118,3 +2118,34 @@ Processing row 9 (10/100)...
     [POST-OTHERS] cleaned: 'To have radiation to the left chest wall and surrounding lymph nodes....' → 'None'
     [POST-ADV] patched from full note: ['full code']
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 19/20 fields sourced (24.1s)
+  Row 9 total: 152.4s
+  Row 9 saved to progress
+
+Processing row 10 (11/100)...
+  Injected 1 term definitions: ['mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1231 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.8s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient with metastatic breast cancer on Faslodex and [REDACTED] presents with jaw pain, numbness, and wors
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 12.8s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage III C, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone",
+  "Metastasis": "Yes,
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "infiltrating ductal Carcinoma"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
