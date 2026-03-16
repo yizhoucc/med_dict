@@ -4711,3 +4711,40 @@ Processing row 22 (23/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.4s
   Total extraction: 96.0s
+    Medication_Plan_chatgpt: 46.2s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient will start letrozole, an aromatase inhibitor, for at least five years of adjuvant hormonal therapy. The decision to continue beyond 5 years will
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'other treatment']
+      [G3-IMPROVE] hormonal therapy: "{'summary': "Patient will start letrozole, an aromatase inhibitor, for at least " -> "{'summary': "Patient will start letrozole, an aromatase inhibitor, for at least "
+      [G4-FAITH] hormonal therapy: "{'summary': "Patient will start letrozole, an aromatase inhi" -> "{'summary': "Patient will start letrozole, an aromatase inhi"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': "Patient will start letrozole, an aromatase inhibitor, for at least " -> "{'summary': "Patient will start letrozole, an aromatase inhibitor, for at least "
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment'}
+    Medication_Plan: 21.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will begin an endocrine-based therapy with letrozole. She will receive at least five years of adjuvant hormonal therapy. The decision to continue the aromatase in
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "The patient will begin an endocrine-based therapy with letrozole. She will recei" -> "The patient will begin an endocrine-based therapy with letrozole. She will recei"
+    Therapy_plan: 28.6s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will begin letrozole for at least five years of adjuvant hormonal therapy. The decision to continue the aromatase inhibitor beyond 5 years will be individualized bas
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "The patient will begin letrozole for at least five years of adjuvant hormonal th" -> "The patient will begin letrozole for at least five years of adjuvant hormonal th"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
