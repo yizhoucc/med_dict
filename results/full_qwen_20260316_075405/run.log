@@ -17935,3 +17935,20 @@ Processing row 85 (86/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 18.0s
   Total extraction: 85.4s
+    Medication_Plan_chatgpt: 54.2s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Currently on letrozole + ribociclib, now with increasing bone mets. Recommended change to fulvestrant +/- everolimus due to PD on current regimen. Discu
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': ['letrozole + ribociclib', 'fulvestrant +/- everolimus'], " -> "[{'hormonal therapy': [{'summary': 'Patient was on letrozole + ribociclib, now r"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': [{'summary': 'Patient was on letrozole" -> "[{'hormonal therapy': [{'summary': 'Patient was on letrozole"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': [{'summary': 'Patient was on letrozole + ribociclib, now r" -> "[{'hormonal therapy': [{'summary': 'Patient was on letrozole + ribociclib, now r"
+    Medication_Plan: 8.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab treatment. Discussed continuing ribociclib with fulvestrant but clinical benefit not demonstra
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab " -> "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
