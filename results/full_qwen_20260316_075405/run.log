@@ -20444,3 +20444,52 @@ Processing row 97 (98/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrop" -> "Hgb 9.7, WBC 12.5, RBC 3.16, MCV 89, MCH 30.6, MCHC 34.4, Platelet 1052, Neutrop"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.3s
+      [EXTRACT] raw={
+"findings": "Patient has scattered macular papular rash scattered all over the skin. Hemoglobin is 9.7 g/dL, indicating anemia. WBC count is 12.5 x10E9/L, RBC count is 3.16 x10E12/L, and platelet co
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.7s
+      [EXTRACT] raw={
+"current_meds": "Docetaxel (TAXOTERE IV), Cyclophosphamide (CYTOXAN IV)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.4s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron, prochlorperazine, dexamethasone"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 98.0s
+  Cross-context injected (896 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 104.2s
