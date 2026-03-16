@@ -13757,3 +13757,47 @@ Processing row 65 (66/100)...
       [G4-FAITH] no changes (all supported)
   Phase 1 extraction (6 prompts): 107.2s
   Cross-context injected (1031 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 113.8s
+    Medication_Plan_chatgpt: 50.4s [faith-restored-1keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] chemotherapy: "{'summary': 'Plan for neoadjuvant chemotherapy then she is c" -> "{'summary': 'Plan for neoadjuvant chemotherapy then she is c"
+      [G4-FAITH] radiotherapy: "{'summary': 'Plan for neoadjuvant chemotherapy then she is c" -> "{'summary': 'Plan for neoadjuvant chemotherapy then she is c"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discussed the importance of exercise and physical activity. No new " -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'radiotherapy', 'other_treatment'}
+    Medication_Plan: 4.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the plan."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
