@@ -9787,3 +9787,181 @@ Processing row 46 (47/100)...
       [EXTRACT] raw={
     "medication_plan": "A course of radiation therapy is recommended to decrease the risk of recurrence of ductal carcinoma in-situ. Tamoxifen prophylaxis is also worth considering to decrease the r
       [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.3s
+      [EXTRACT] raw={
+    "therapy_plan": "A course of radiation therapy to decrease the risk of recurrence of her ductal carcinoma in-situ and a course of tamoxifen prophylaxis is also worth consideration."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.9s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "discussed radiation therapy as a potent method to decrease recurrence of ductal carcinoma in-situ, reducing the risk to approximately 3-4%; recommended for Ms. [REDACTED]"
+
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] radiotherapy_plan: "discussed radiation therapy as a potent method to decrease r" -> "discussed radiation therapy as a potent method to decrease r"
+      [G5-TEMPORAL] radiotherapy_plan: "discussed radiation therapy as a potent method to decrease recurrence of ductal " -> "discussed radiation therapy as a potent method to decrease recurrence of ductal "
+    Procedure_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 5.5s [improved]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "It was recommended to undergo BRCA testing."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "It was recommended to undergo BRCA testing." -> "It was recommended to undergo BRCA testing, although the results are not availab"
+      [G4-FAITH] no changes (all supported)
+    Referral: 11.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "BRCA testing recommended",
+"Specialty": "Radiation therapy consult recommended",
+"Others": "None",
+"follow up": "Ms. [REDACTED] will return to her primary physician
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "BRCA testing recommended" -> "refer to genetics"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "refer to genetics" -> "BRCA testing recommended"
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 4.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: return to her primary physicians for further discussion and definitive treatment"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 115.8s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 17/19 fields sourced (31.6s)
+  Row 46 total: 210.2s
+  Row 46 saved to progress
+
+Processing row 47 (48/100)...
+  Injected 4 term definitions: ['progesterone receptor', 'estrogen receptor', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (731 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 10.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient has left breast DCIS and is here for initial consult to discuss definitive breast surgery and pot
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- ductal carcinoma in situ (DCIS)",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- ductal carcinoma in situ (DCIS)" -> "ER+/PR+ ductal carcinoma in situ (DCIS)"
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 31.2s
+      [EXTRACT] raw={
+"findings": "Left breast, ultrasound-guided core biopsy: At least ductal carcinoma in situ, intermediate nuclear grade; biopsy site changes and necrosis; microcalcifications with stroma and as detac
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "albuterol, desonide, diclofenac, hydrocortisone, lidocaine, "
+      [POST-MEDS] albuterol, desonide, diclofenac, hydrocortisone, lidocaine, omeprazole, triamcinolone, naproxen -> 
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 63.3s
+  Cross-context injected (1045 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
