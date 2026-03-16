@@ -7834,3 +7834,145 @@ Processing row 37 (38/100)...
 "lab_summary": "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 80 U/L, Alanine transaminase 27 U/L, AST 22 U/L, Bilirubin, Total 0.3 mg/dL, Urea Nitrogen 10 mg/dL, Ca
       [G1-FORMAT] ok, keys=['lab_summary']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 8" -> "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 8"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 18.3s
+      [EXTRACT] raw={
+"findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mil
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B co"
+      [POST-MEDS] ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL -> 
+    Treatment_Changes: 37.6s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "She declines further IV or preoperative therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently.",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "gabapentin (NEURONTIN) 300 mg capsule, , Disp: , Rfl: , LORazepam (ATIVAN) 1 mg " -> "gabapentin (NEURONTIN) 300 mg capsule, LORazepam (ATIVAN) 1 mg tablet, naloxone "
+      [G3-IMPROVE] recent_changes: "She declines further IV or preoperative therapy. She will qualify for adjuvant x" -> "She declined further IV or preoperative therapy. She will qualify for adjuvant x"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule, LORazepam (ATIVAN) 1 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, 1 spray by Nasal route 2 (two) times daily as needed, HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, traMADoL (ULTRAM) 50 mg tablet -> HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, traMADoL (ULTRAM) 50 mg tablet
+  Phase 1 extraction (6 prompts): 161.0s
+  Cross-context injected (704 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 14.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is not responding to treatment. The patient's tumor is enlarging again, as noted in the physical exam. Recent imaging findings include a repeat MRI in November 202
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is not responding to treatment. The patient's tum" -> "The patient's tumor is enlarging again, as noted in the phys"
+  Phase 2 extraction (2 prompts): 17.3s
+  Total extraction: 178.4s
+    Medication_Plan_chatgpt: 52.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Stopped due to toxicity. She declines further IV or preoperative therapy. She will qualify for xeloda. Could consider [REDACTED] concurrently.",
+        "Sh
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit" -> "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicit"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'Stopped due to toxicity. She declines furt" -> "[{'type': 'chemotherapy', 'summary': 'Could consider [REDACTED] concurrently. Sh"
+    Medication_Plan: 8.5s
+      [EXTRACT] raw={
+    "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.9s
+      [EXTRACT] raw={
+    "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently. We discussed the role of horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 7.8s
+      [EXTRACT] raw={
+    "procedure_plan": "She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 11.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "I will see her after she recovers from surgery."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> "We discussed lifestyle modifications to decrease the risk of"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "BRCA 1 mutation"
