@@ -5091,3 +5091,35 @@ Processing row 24 (25/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron, docusate sodium, prochlorperazine, oxyCODONE, lorazepam -> ondansetron, docusate sodium, prochlorperazine, oxyCODONE
+  Phase 1 extraction (6 prompts): 137.2s
+  Cross-context injected (1221 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 12.7s
+      [EXTRACT] raw={
+"response_assessment": "Imaging from 03/12/2011 PET/CT showed progression of disease including liver, bones, lymph nodes, and breast. Exam revealed new chest wall/breast skin metastases. The patient
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 16.4s
+  Total extraction: 153.7s
