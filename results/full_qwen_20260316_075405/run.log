@@ -6337,3 +6337,40 @@ Processing row 30 (31/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 60.7s [improved]
+      [EXTRACT] raw={
+"findings": "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG avid hepatic metastases have increased in size and FDG uptake. Skeletal metastases have increased in FDG 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG " -> "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG "
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, [REDA"
+      [POST-MEDS] ascorbic acid, vitamin C, cholecalciferol, vitamin D3, [REDACTED] [REDACTED] ORAL, LORazepam (ATIVAN), magnesium, medical cannabis, ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 11.0s
+      [EXTRACT] raw={
+"recent_changes": "Scheduled to start Doxil on 07/01/2021.",
+"supportive_meds": "ondansetron (Zofran), prochlorperazine (Compazine)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 110.9s
+  Cross-context injected (1767 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
