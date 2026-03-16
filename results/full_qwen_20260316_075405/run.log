@@ -1339,3 +1339,25 @@ Processing row 6 (7/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 16.5s
   Total extraction: 81.8s
+    Medication_Plan_chatgpt: 60.7s [schema-fixed, improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Discontinue current regimen ([REDACTED]/Herceptin/Taxotere) due to decreased LVEF and minor progression. Plan to start [REDACTED] as next line of therapy.",
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'other treatment'] -> ['chemotherapy', 'The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] chemotherapy: "Pt appears to be on a combination regimen including Herceptin (trastuzumab) and " -> "{'summary': 'Pt appears to be on a combination regimen including Herceptin (tras"
+      [G4-FAITH] bone therapy: "{'summary': 'Not discussed in the note.', 'Short term side_e" -> "{'summary': '', 'Short term side_effects_discussed': '', 'Lo"
+      [G4-FAITH] chemotherapy: "{'summary': 'Pt appears to be on a combination regimen inclu" -> "{'summary': 'Pt appears to be on a combination regimen inclu"
+      [G4-FAITH] hormonal therapy: "{'summary': 'The note does not recommend hormonal therapy at" -> "{'summary': 'The note does not recommend hormonal therapy at"
+      [G4-FAITH] radiotherapy: "{'summary': 'Not discussed in the note.', 'Short term side_e" -> "{'summary': '', 'Short term_side_effects_discussed': '', 'Lo"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'bone therapy', 'hormonal therapy', 'chemotherapy', 'radiotherapy'}
+    Medication_Plan: 9.5s
+      [EXTRACT] raw={
+    "medication_plan": "Discontinue current regimen including [REDACTED]/Herceptin/Taxotere. Recommend [REDACTED] as the next line of therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
