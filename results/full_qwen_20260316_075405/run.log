@@ -6134,3 +6134,49 @@ Processing row 29 (30/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Creatinine 0.74 (12/11/2016), [REDACTED] 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/1" -> "Creatinine 0.74 (12/11/2016), [REDACTED] 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/1"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 56.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Right breast with a 6 x 11 cm mass in the outer quadrants. No palpable masses in the left breast. No lymphadenopathy noted on physical exam. Imaging findings include a large enhancing r
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Right breast with a 6 x 11 cm mass in the outer quadrants. No palpable masses in" -> "Right breast with a 6 x 11 cm mass in the outer quadrants. No palpable masses in"
+      [G4-FAITH] findings: "Right breast with a 6 x 11 cm mass in the outer quadrants. N" -> "Right breast with a 6 x 11 cm mass in the outer quadrants. N"
+    Current_Medications: 1.8s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.7s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 136.0s
+  Cross-context injected (1387 chars)
+    Treatment_Goals: 3.7s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.5s
+  Total extraction: 142.6s
