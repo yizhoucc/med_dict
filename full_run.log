@@ -15689,3 +15689,152 @@ Processing row 74 (75/100)...
     "chemotherapy": {
         "summary": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent [REDACTED] and pertuzumab). Plan to assess tumor response 
       [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 week" -> "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 week"
+      [G4-FAITH] chemotherapy: "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carb" -> "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carb"
+      [G4-FAITH] other treatment: "{'summary': 'Discuss treatment side effects including hair l" -> "{'summary': 'Discuss treatment side effects including hair l"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discuss treatment side effects including hair loss, nausea/vomiting" -> "{'summary': 'Plan to discuss treatment side effects including hair loss, nausea/"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
+    Medication_Plan: 22.1s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant TCHP regimen (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). If there is not a complete response to neoadjuvant
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 29.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation Oncology."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation O" -> "Following surgical resection, Ms. [REDACTED] will be referred to Radiation Oncol"
+      [G4-FAITH] radiotherapy_plan: "Following surgical resection, Ms. [REDACTED] will be referre" -> "Following surgical resection we will plan to refer Ms. [REDA"
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 8.8s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "plan for port placement, surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "plan for port placement, surgery pending" -> "Agree with port and TTE prior to chemotherapy, refer to UCSF Breast Surgery for "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Agree with port and TTE prior to chemotherapy', 'plan to refer to Radiation Oncology following surgical resection']
+    Imaging_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "blood draw prior to chemotherapy"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "blood draw prior to chemotherapy" -> "No labs planned."
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 3.9s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "await germline testing results"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 8.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "pending genetics counseling",
+"Specialty": "UCSF Breast Surgery, Radiation Oncology",
+"Others": "None",
+"follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "pending genetics counseling" -> "refer to genetics"
+      [G4-FAITH] follow up: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "refer to genetics" -> "pending genetics counseling"
+      [G4-FAITH] EMPTIED: ['follow up', 'Nutrition', 'Others']
+      [G4-PROTECT] follow up: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after surgical resection to plan for radiation oncology"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after surgical resection to plan for radiation on" -> "after surgical resection to plan for radiation oncology"
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 142.3s
+    [POST-THERAPY] removed non-therapy: ['Plan to refer Ms.']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 19/19 fields sourced (25.4s)
+  Row 74 total: 254.2s
+  Row 74 saved to progress
+
+Processing row 75 (76/100)...
+  Injected 5 term definitions: ['estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (1987 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.8s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 55-year-old female with HR-negative, HER2+ metastatic breast cancer to the bone. She is he
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.3s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ metastatic breast cancer",
+  "Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to the bone and left iliac bon
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 21.8s [improved]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count 238 (from 06/29/2018), NA 137, K 3.8, Cl 107, CO2 20 (L), BUN 16, GLU 161 (from 06/29/2018), AST 30, A
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count " -> "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count "
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 25.0s
