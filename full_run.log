@@ -15518,3 +15518,174 @@ Processing row 73 (74/100)...
       [G3-IMPROVE] procedure_plan: "will consider the use of [REDACTED] alone vs TC then [REDACTED] based on the tes" -> "No procedures planned."
       [G4-FAITH] procedure_plan: "No procedures planned." -> ""
       [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 5.1s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "patient consented and order submitted for [REDACTED] testing"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 9.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "follow-up in 3 weeks to discuss future treatment options"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 weeks to discuss future treatment options"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 98.2s
+    [POST-THERAPY] removed non-therapy: ['The patient was consented for further tumor testin']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 17/17 fields sourced (28.1s)
+  Row 73 total: 222.6s
+  Row 73 saved to progress
+
+Processing row 74 (75/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'neoadjuvant therapy', 'complete response']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN'
+  Regex extraction succeeded (2820 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.2s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "33 y.o. pre-menopausal Female with a new diagnosis of high-grade ER-/PR-/[REDACTED]+ IDC with spread to 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/[REDACTED]+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II-III ([REDACTED]-3fM0), pending axillary LN analysis on resection",
+  "Distant_Metastasis": "No",
+ 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 27.4s
+      [EXTRACT] raw={
+"findings": "2.1cm mass in the posterior right breast with 2 axillary lymph nodes showing cortical thickening suspicious for malignancy. PET/CT shows hypermetabolic right breast mass and hypermetabo
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 18.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actua"
+      [POST-MEDS] fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actuation inhaler, Inhale 2 puffs into the lungs Twice a day, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, 1 spray by Nasal route Daily, follitropin alfa (GONAL-F RFF [REDACTED]-JECT) 300/0.5 unit/mL [REDACTED], Inject 300 Int'l Units under the skin every evening, ipratropium (ATROVENT HFA) 17 mcg/actuation inhaler, Inhale 2 puffs into the lungs 4 (four) times daily as needed for Wheezing, NORETHINDRONE-E.ESTRADIOL-IRON ([REDACTED] [REDACTED] [REDACTED] ORAL), Take by mouth., omeprazole (PRILOSEC) 10 mg capsule, Take 20 mg by mouth Daily., ranitidine (ZANTAC) 75 mg tablet, Take 75 mg by mouth Daily., VENTOLIN HFA 90 mcg/actuation metered dose inhaler, [REDACTED] WELL AND INHALE 1 TO 2 PUFFS BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED -> 
+    Treatment_Changes: 4.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "Atrovent, Advair"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Atrovent, Advair -> 
+  Phase 1 extraction (6 prompts): 80.4s
+  Cross-context injected (945 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 86.5s
+    Medication_Plan_chatgpt: 49.9s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent [REDACTED] and pertuzumab). Plan to assess tumor response 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']

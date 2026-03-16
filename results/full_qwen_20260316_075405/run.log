@@ -15668,3 +15668,26 @@ Processing row 74 (75/100)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 86.5s
+    Medication_Plan_chatgpt: 49.9s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent [REDACTED] and pertuzumab). Plan to assess tumor response 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 week" -> "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 week"
+      [G4-FAITH] chemotherapy: "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carb" -> "{'summary': 'Agree with neoadjuvant TCHP (docetaxel and carb"
+      [G4-FAITH] other treatment: "{'summary': 'Discuss treatment side effects including hair l" -> "{'summary': 'Discuss treatment side effects including hair l"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discuss treatment side effects including hair loss, nausea/vomiting" -> "{'summary': 'Plan to discuss treatment side effects including hair loss, nausea/"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
