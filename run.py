@@ -863,7 +863,8 @@ def main():
                     'aromatase inhibitor', 'ovarian suppression', 'immunotherapy',
                     'targeted therapy', 'bone therapy', 'adjuvant', 'neoadjuvant',
                     'clinical trial', 'dose dense', 'dose-dense', 'dd ac',
-                    'ac-t', 'ac-taxol', 'tchp', 'folfox', 'folfiri', 'folfox', 'fec',
+                    'ac-t', 'ac-taxol', 'tchp', 'folfox', 'folfiri', 'fec',
+                    ' tc ', ' ac ', ' ec ', ' cmf ',
                     'cycle', 'regimen', 'infusion',
                 }
                 therapy_terms = whitelist | THERAPY_CATEGORY_TERMS

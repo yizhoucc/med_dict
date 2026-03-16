@@ -103,5 +103,6 @@ denosumab
 xgeva
 prolia
 zoledronic acid
+zoledronate
 zometa
 pamidronate
