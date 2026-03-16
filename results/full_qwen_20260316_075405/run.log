@@ -14550,3 +14550,10 @@ Processing row 69 (70/100)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA on the left side, Stage I on the right "
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 60.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
+      [G4-FAITH] no changes (all supported)
