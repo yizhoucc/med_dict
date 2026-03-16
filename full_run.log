@@ -14322,3 +14322,174 @@ Processing row 68 (69/100)...
   Injected 4 term definitions: ['aromatase inhibitor', 'PR positive', 'mastectomy', 'FISH']
   Trying regex extraction...
   Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (3655 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.0s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "52-year-old female with newly diagnosed minimum clinical stage IIB, T2 N1 Mx, [REDACTED]+ [REDACTED]- inv
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 12.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+"Stage_of_Cancer": "Minimum clinical stage IIB, T2 N1 Mx",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 12.5s
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.4, Hb 13.7, plts 211, Cr 0.8, Tbili 0.4, alk phos 52, AST/ALT wnl (from 09/13/2015)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 45.7s
+      [EXTRACT] raw={
+"findings": "Pathology results: Invasive lobular carcinoma, histologic grade low (3+1+1), ER strongly positive (8 of 8), PR positive (5 of 8), [REDACTED] equivocal by IHC (2+) but negative by FISH (
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
+      [POST-MEDS] LORazepam (ATIVAN) 1 mg tablet -> 
+    Treatment_Changes: 5.3s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "LORazepam (ATIVAN) 1 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "LORazepam (ATIVAN) 1 mg tablet" -> ""
+      [G4-FAITH] supportive_meds: "" -> "LORazepam (ATIVAN) 1 mg tablet"
+      [POST-SUPP] LORazepam (ATIVAN) 1 mg tablet -> 
+  Phase 1 extraction (6 prompts): 95.7s
+  Cross-context injected (1170 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 101.8s
+    Medication_Plan_chatgpt: 29.2s [schema-fixed, improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy', 'other treatment']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': 'The patient will receive at minimum 5, but more likely 10 years of "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'The patient will receive at minimum 5, but more" -> "{'summary': 'The patient will receive at minimum 5, but more"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'other treatment'}
+    Medication_Plan: 14.2s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of ne
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.1s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of neoad
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 6.5s
+      [EXTRACT] raw={
+    "procedure_plan": "will schedule repeat MRI breast and biopsy if she decides to screen for ISPY"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['will schedule repeat MRI breast and biopsy if she decides to screen for ISPY']
+    Imaging_Plan: 7.1s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT to be ordered today for staging. Await repeat MRI breast if she opts to screen for ISPY."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 15.1s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "We think it is reasonable to send molecular profiling assay (ie. [REDACTED] [REDACTED]) to help determine her benefit from chemotherapy, and how to proceed, acknowledgin
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "F/U with Dr. [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
