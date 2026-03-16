@@ -9563,3 +9563,22 @@ Processing row 45 (46/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 24.1s
   Total extraction: 192.1s
+    Medication_Plan_chatgpt: 45.6s [schema-fixed, improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "will start letrozole now. Rx sent.",
+        "Short term side_effects_discussed": "joint aches, hot flashes, dryness, hair thinning, weight gain",
+     
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'pain medication', 'other treatment', 'chemotherapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'pain medication', 'other treatment', 'chemotherapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'We will have her start letrozole now. " -> "[{'type': 'hormonal therapy', 'summary': 'We will have her start letrozole now. "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'We will have her start letrozole now. " -> "[{'type': 'hormonal therapy', 'summary': 'We will have her start letrozole now. "
+    Medication_Plan: 16.8s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron. Conti
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di" -> "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
