@@ -13705,3 +13705,143 @@ RESULTS FOR ROW 87
     "Ms. [REDACTED] will return to [REDACTED] [REDACTED] medical oncologist Dr. [REDACTED] for further discussions and definitive treatment"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 88
+============================================================
+
+--- Column: coral_idx ---
+227
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Visit     Patient Name: ***** ***** *****   ***** MRN:  *****   Patient DOB:  12/18/1983   Date of Visit:  04/08/2020  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation     I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    Diagnosis:    1. Malignant neoplasm of left breast metastatic to brain (CMS code)         History of Present Illness:     36 year old with a Stage III left sided breast cancer diagnosed in March 2019. She is s/p neoadjuvant AC followed by Taxol then taxol carbo, stopped for progression of disease.  Foundation One in 2019 was negative for ERBB2.  She went to surgery August 2019 and had bilateral mastectomies with a left axillary dissection and a right sentinel node procedure.  She had two tumors,  4 and 2.6 cm with November 30 lymph nodes involved with *****.  It was ***** and receptors were not repeated.  The original receptors on the core biopsy were HR weak and her 2 negative.  She then had 4 cycles of gemzar with carboplatin in the adjuvant setting.  She had radiation in February 2020 to the left chest wall and draining lymph nodes and on the last day of radiation complained of a headache. She was diagnosed with 2 brain metastases and was sent home.  At home she had a seizure and was admitted to the ICU for a week for seizure control  She had resection of one and stereotactic XRT to both brain metastases.  The brain metastasis pathology was ER and PR negative but her 2 was not done.  I spoke to her primary ***** and asked her to send the receptors on residual disease and the brain metastasis to do her 2 testing.  She has had ***** on her tumor according to her oncologist and I asked for those results to be sent to me. The patient on imaging has \n lesions in her lungs and lymph nodes.  She was started on xeloda on March 05 and is taking it 14 days on 7 days off.  She was diagnosed with ***** 19 last Saturday and started feeling bad the Tuesday before.  He family is being tested this week.  She had genetic testing which was negative.        Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Secondary malignant neoplasm of brain (CMS code) 02/13/2020   \u0007 Malignant neoplasm of breast metastatic to brain (CMS code) 02/08/2020       1.  Stage III left sided breast cancer HR weak and her 2 negative diagnosed March 2020 s/p neoadjuvant AC followed by Taxol then taxol carbo, stopped for progression of disease.  She went to surgery August 2019 and had bilateral mastectomies with a left axillary dissection and a right sentinel node procedure.  She had two tumors in the let breast,  4 and 2.6 cm with November 30 lymph nodes involved with *****.  It was ***** and receptors were not repeated.   2.  She had 4 cycles of gemzar with carboplatin in the adjuvant setting.   3.  She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache.  Imaging was done that showed two brain metastases.  She had resection of one and stereotactic XRT to both.  Staging shows lung and lymph node metastases February 27.   She started on xeloda on 03/05/2020.     Original pathology Left core biopsy   Invasive ductal carcinoma *****    Estrogen Receptor Positive May 11+ 10 Favorable   Progesterone Receptor Positive 2+ 1 Favorable   HER-2/***** ***** Negative 0 0 Favorable     Brain metastasis resection February 2020.     CASE: *****-*****-*****  PATIENT: ***** *****  CLINICAL DATA: CEREBELLAR MASS    SPECIMEN: LEFT CEREBELLAR MASS    DIAGNOSIS:    CEREBELLAR TUMOR, LEFT SIDE, RESECTION: METASTATIC ADENOCARCINOMA,  POORLY DIFFERENTIATED, CONSISTENT WITH BREAST ORIGIN.    NOTE: The patient has a prior diagnosis of poorly \n differentiated breast  carcinoma (SGS-20-3979). This cerebellar tumor resection shows poorly  differentiated adenocarcinoma composed of nests and sheets of large  pleomorphic epithelioid cells, with zones of geographic necrosis.  Immunohistochemistry (block A1) with GATA3 antibody is positive,  supportive of breast origin. Immunohistochemistry (block A1) with ER and  PR is negative, although the primary tumor was reported as weakly  positive for both.       Bilateral mastectomy and right sentinel and left ALND August 2019    CASE: *****-*****-*****  PATIENT: ***** *****  CLINICAL DATA: MALIGNANT NEOPLASM OF LOWER-OUTER QUADRANT OF LEFT FEMALE  BREAST (CMS/HCC) [*****.511]    SPECIMEN: A. RIGHT BREAST B. RIGHT SENTINEL LYMPH NODE C. LEFT BREAST  WITH AXILLARY CONTENTS    DIAGNOSIS:    A.  RIGHT BREAST, MASTECTOMY:  1.  SKIN, ***** AND BREAST TISSUE WITH NO SPECIFIC ABNORMALITY.     2.  NEGATIVE FOR CARCINOMA.    B.  RIGHT SENTINEL LYMPH NODE, BIOPSY: ONE LYMPH NODE, NEGATIVE FOR  CARCINOMA (O/1).    C.  LEFT BREAST WITH AXILLARY CONTENTS, MASTECTOMY:  1.  MULTIFOCAL INVASIVE MAMMARY CARCINOMA OF NO SPECIFIC TYPE (DUCTAL,  NOT OTHERWISE SPECIFIED).  -  TWO FOCI IDENTIFIED, MEASURING 4.0 AND 2.6 CM IN *****  DIMENSION.  -  HISTOLOGIC GRADE: III/III (SCORE: 3+3+3=January 17) BY MODIFIED *****  CRITERIA.  -  LYMPHOVASCULAR INVASION IDENTIFIED.  -  PERINEURAL INVASION IDENTIFIED.  -  MARGINS NEGATIVE, 0.6 CM TO THE NEAREST INFERIOR/ANTERIOR MARGIN.  -  STATUS POST NEOADJUVANT CHEMOTHERAPY.     2.  DUCTAL CARCINOMA ***** ***** (DCIS).       -  DCIS COMPRISES LESS ***** 5% OF CARCINOMA ***** *****.       -  NUCLEAR GRADE EQUALS III/III.       -  ***** AND COMEDO PATTERNS.       -  MARGINS NEGATIVE.     3.  SKIN AND *****, NEGATIVE FOR CARCINOMA.  4.  METASTATIC CARCINOMA ***** ***** ***** TWENTY-THREE LYMPH NODES (November 30).     -  LARGEST METASTATIC FOCUS 1.7 CM IN ***** *****.     -  \n PRIOR BIOPSY SITE CHANGES.     -  EXTRANODAL EXTENSION IDENTIFIED.         \u0007 Malignant neoplasm of lower-outer quadrant of left breast of female, estrogen receptor positive (CMS code) 03/30/2019       Stage at *****:  Cancer Staging  Malignant neoplasm of breast metastatic to brain (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: Stage IIIB (*****, *****, *****, *****, ER+, PR-, *****-) - Signed by ***** ***** *****, MD on 04/21/2020    Malignant neoplasm of lower-outer quadrant of left breast of female, estrogen receptor positive (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: No stage assigned - Unsigned      Medications:    Current Outpatient Medications:   \u0007  capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week off., Disp: , Rfl:     Allergies: Allergies/Contraindications  Not on File    Medical History: No past medical history on file.    Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY      bilateral mastectomies with left ALND right *****   \u0007 TONSILLECTOMY         Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Not Currently   \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently       *****:  ***** ***** ***** *****.    ***** Status: married to *****.     Gynecologic History:  G 4 P 4 AB 0    Menarche 13  Premenopausal prior to chemotherapy    OCP 3 years    Fertility treatments yes, clomid pill.     Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Leukemia Maternal Uncle     \u0007 Brain cancer Paternal Uncle     \u0007 Cancer Maternal Grandfather                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, \n hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    04/21/20 1033   *****:  0     Patient did not have any pain symptoms, today 04/08/2020.    Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age      Labs:    No results found for any previous visit.     CASE: *****-*****-*****  PATIENT: ***** *****  CLINICAL DATA: CEREBELLAR MASS    SPECIMEN: LEFT CEREBELLAR MASS    DIAGNOSIS:    CEREBELLAR TUMOR, LEFT SIDE, RESECTION: METASTATIC ADENOCARCINOMA,  POORLY DIFFERENTIATED, CONSISTENT WITH BREAST ORIGIN.    NOTE: The patient has a prior diagnosis of poorly differentiated breast  carcinoma (SGS-20-3979). This cerebellar tumor resection shows poorly  differentiated adenocarcinoma composed of nests and sheets of large  pleomorphic epithelioid cells, with zones of geographic necrosis.  Immunohistochemistry (block A1) with GATA3 antibody is positive,  supportive of breast origin. Immunohistochemistry (block A1) with ER and  PR is negative, although the primary tumor was reported as weakly  positive for both.     CASE: *****-*****-*****  PATIENT: ***** *****  CLINICAL DATA: MALIGNANT NEOPLASM OF LOWER-OUTER QUADRANT OF LEFT FEMALE  BREAST (CMS/HCC) [*****.511]    SPECIMEN: A. RIGHT BREAST B. RIGHT SENTINEL LYMPH NODE C. LEFT BREAST  WITH AXILLARY CONTENTS    DIAGNOSIS:    A.  RIGHT BREAST, MASTECTOMY:  1.  SKIN, ***** AND BREAST TISSUE WITH NO SPECIFIC ABNORMALITY.     2.  NEGATIVE FOR CARCINOMA.    B.  RIGHT SENTINEL LYMPH NODE, BIOPSY: ONE LYMPH NODE, NEGATIVE FOR  CARCINOMA (O/1).    C.  LEFT \n BREAST WITH AXILLARY CONTENTS, MASTECTOMY:  1.  MULTIFOCAL INVASIVE MAMMARY CARCINOMA OF NO SPECIFIC TYPE (DUCTAL,  NOT OTHERWISE SPECIFIED).  -  TWO FOCI IDENTIFIED, MEASURING 4.0 AND 2.6 CM IN *****  DIMENSION.  -  HISTOLOGIC GRADE: III/III (SCORE: 3+3+3=January 17) BY MODIFIED *****  CRITERIA.  -  LYMPHOVASCULAR INVASION IDENTIFIED.  -  PERINEURAL INVASION IDENTIFIED.  -  MARGINS NEGATIVE, 0.6 CM TO THE NEAREST INFERIOR/ANTERIOR MARGIN.  -  STATUS POST NEOADJUVANT CHEMOTHERAPY.     2.  DUCTAL CARCINOMA ***** ***** (DCIS).       -  DCIS COMPRISES LESS ***** 5% OF CARCINOMA ***** *****.       -  NUCLEAR GRADE EQUALS III/III.       -  ***** AND COMEDO PATTERNS.       -  MARGINS NEGATIVE.     3.  SKIN AND *****, NEGATIVE FOR CARCINOMA.  4.  METASTATIC CARCINOMA ***** ***** ***** TWENTY-THREE LYMPH NODES (November 30).     -  LARGEST METASTATIC FOCUS 1.7 CM IN ***** *****.     -  PRIOR BIOPSY SITE CHANGES.     -  EXTRANODAL EXTENSION IDENTIFIED.    Psychologic/emotional well-being/support  She is well and has good family support.      Assessment / Plan:    1.  Stage III left sided breast cancer s/p neoadjuvant AC followed by Taxol then taxol carbo, stopped for progression of disease.  Foundation One in 2019 was negative for ERBB2.  She went to surgery August 2019 and had bilateral mastectomies with a left axillary dissection and a right sentinel node procedure.  She had two left sided tumors, 4 and 2.6 cm with November 30 lymph nodes involved with *****.  It was ***** and receptors were not repeated.   2.  She had 4 cycles of gemzar with carboplatin in the adjuvant setting.   3.  She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache.  Imaging was done that showed two brain metastases.  She had resection of one and stereotactic XRT to both.  Staging shows lung and lymph node metastases.   4.  I recommending doing her 2 on the \n brain metastasis and hormone studies and her 2 on the residual disease.    5.  She is on xeloda and I would recommend restaging after 3 months of therapy is she is stable clinically.    6. We discussed clinical trials using immunotherapy or using immunotherapy with chemotherapy off trial if she has progression on xeloda.   7.  I discussed her case and asked her primary oncologist to repeat receptors on her breast residual disease and also the her 2 on the metastatic foci.  If she has her 2 positive disease she will need anti her 2 therapy.   8.  She will follow up with me prn or at progression.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes of face to face time counseling the patients.     I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.          \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:    1.  Stage III left sided breast cancer s/p neoadjuvant AC followed by Taxol then taxol carbo, stopped for progression of disease.  Foundation One in 2019 was negative for ERBB2.  She went to surgery August 2019 and had bilateral mastectomies with a left axillary dissection and a right sentinel node procedure.  She had two left sided tumors, 4 and 2.6 cm with November 30 lymph nodes involved with *****.  It was ***** and receptors were not repeated.   2.  She had 4 cycles of gemzar with carboplatin in the adjuvant setting.   3.  She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache.  Imaging was done that showed two brain metastases.  She had resection of one and stereotactic XRT to both.  Staging shows lung and lymph node metastases.   4.  I recommending doing her 2 on the \n brain metastasis and hormone studies and her 2 on the residual disease.    5.  She is on xeloda and I would recommend restaging after 3 months of therapy is she is stable clinically.    6. We discussed clinical trials using immunotherapy or using immunotherapy with chemotherapy off trial if she has progression on xeloda.   7.  I discussed her case and asked her primary oncologist to repeat receptors on her breast residual disease and also the her 2 on the metastatic foci.  If she has her 2 positive disease she will need anti her 2 therapy.   8.  She will follow up with me prn or at progression.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: 60 minutes of face to face time counseling the patients.     I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.          \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "36 year old with a Stage III left sided breast cancer diagnosed in March 2019, presenting for initial consult for newly diagnosed metastatic breast cancer with brain metastases. The purpose of this visit is to evaluate the patient's current treatment plan and discuss further management options."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER-/PR-/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "Originally Stage IIIB, now metastatic (Stage IV)",
+    "Metastasis": "Yes (to brain, lungs, and lymph nodes)",
+    "Distant Metastasis": "Yes (to brain, lungs, and lymph nodes)"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Patient has a history of Stage III left-sided breast cancer with two tumors measuring 4.0 and 2.6 cm, with 23 lymph nodes involved. The primary tumor was reported as weakly positive for estrogen receptor and progesterone receptor negative. The patient had bilateral mastectomies with a left axillary dissection and a right sentinel node procedure. She has two brain metastases, one of which was resected, and the other was treated with stereotactic XRT. The resected brain metastasis was reported as ER and PR negative. Imaging shows lung and lymph node metastases. The patient is currently on Xeloda and has no palpable masses, skin changes, or lymphadenopathy on physical exam. No new imaging findings are reported in this visit."
+  },
+  "Current_Medications": {
+    "current_meds": "capecitabine (XELODA) 500 mg tablet"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan_chatgpt": {},
+  "Medication_Plan": {
+    "medication_plan": "She is on xeloda."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "She is on xeloda and will continue this therapy. If she has progression on xeloda, she will be considered for clinical trials using immunotherapy or using immunotherapy with chemotherapy off trial."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "She had radiation to left chest wall and draining lymph nodes. She also had stereotactic XRT to both brain metastases."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat receptors on her breast residual disease and also the her 2 on the metastatic foci."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat receptors on her breast residual disease and also the her 2 on the metastatic foci."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "She will follow up with me prn or at progression."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "prn or at progression: in-person or telehealth"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Full code."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease."
+  ],
+  "in-person": [
+    "I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location."
+  ],
+  "summary": [
+    "36 year old with a Stage III left sided breast cancer diagnosed in March 2019, presenting for initial consult for newly diagnosed metastatic breast ca"
+  ],
+  "Stage_of_Cancer": [
+    "Staging shows lung and lymph node metastases."
+  ],
+  "Metastasis": [
+    "Staging shows lung and lymph node metastases."
+  ],
+  "Distant Metastasis": [
+    "Staging shows lung and lymph node metastases."
+  ],
+  "findings": [
+    "Stage III left sided breast cancer s/p neoadjuvant AC followed by Taxol then taxol carbo, stopped for progression of disease. She had two left sided tumors, 4 and 2.6 cm with November 30 lymph nodes involved"
+  ],
+  "current_meds": [
+    "She is on xeloda and I would recommend restaging after 3 months of therapy is she is stable clinically."
+  ],
+  "goals_of_treatment": [
+    "She is on xeloda and I would recommend restaging after 3 months of therapy is she is stable clinically."
+  ],
+  "medication_plan": [
+    "She is on xeloda."
+  ],
+  "therapy_plan": [
+    "She is on xeloda and I would recommend restaging after 3 months of therapy is she is stable clinically.    6. We discussed clinical trials using immunotherapy or using immunotherapy with chemotherapy off trial if she has progression on xeloda."
+  ],
+  "radiotherapy_plan": [
+    "She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache.  Imaging was done that showed two brain metastases.  She had resection of one and stereotactic XRT to both."
+  ],
+  "procedure_plan": [
+    "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease."
+  ],
+  "genetic_testing_plan": [
+    "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease."
+  ],
+  "follow up": [
+    "She will follow up with me prn or at progression."
+  ],
+  "Next clinic visit": [
+    "She will follow up with me prn or at progression."
+  ]
+}
