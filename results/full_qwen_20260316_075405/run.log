@@ -5691,3 +5691,28 @@ Processing row 27 (28/100)...
       [G4-FAITH] second opinion: "no" -> ""
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC of the right breast",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 33.5s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217 (from 08/03/2021); Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
