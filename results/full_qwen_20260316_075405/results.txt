@@ -11969,3 +11969,174 @@ RESULTS FOR ROW 76
     "Follow-up in 9 weeks or sooner if she has new or worsening symptoms."
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 77
+============================================================
+
+--- Column: coral_idx ---
+216
+
+--- Column: note_text ---
+"Patient name  ***** *****     ***** of service  09/22/2020          Date of last visit:  09/04/2020     Subjective      ***** ***** is a 52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 IDC ER+/PR+/*****-, February 27 *****, ***** 5), here to discuss adjuvant therapy.     Please see oncologic history summarized in the problem list below:  Patient Active Problem List    Diagnosis Date Noted   \u0007 Morbid obesity with BMI of 45.0-49.9, adult (CMS code)      Overweight most of my life     \u0007 Fibromyalgia    \u0007 Breast cancer, right (CMS code) 07/24/2020     2013 FNA of a breast in the right breast mass, benign   09/21/18 Screening mammography: Negative     Right breast cancer:  06/24/20 Bilateral screening mammogram showed 13 mm asymmetry in the ***** region of the right breast.  07/01/20 Right diagnostic mammogram: Architectural distortion in the anterior region of the breast at 12:00, with ultrasound showing a 9 mm non-specific hypoechoic structure at 12:00, 0 *****.   07/03/20 U/S-guided core biopsy of the right breast mass (12:00, 0 *****) showed invasive ductal carcinoma, grade 2, ER+ (100%), PR+ (80%), *****- (IHC February 28+, FISH neg), *****-67 10-12%, -*****. ***** Score 5.   07/24/20: She met with Dr. *****, planned for lumpectomy   07/29/20 ***** genetics testing (23 genes): No clinically significant variants.   08/27/20 Right partial mastectomy and ***** and IORT 5 Gy at 1 cm using 50 kVp photons with ***** (Drs. ***** and *****). Pathology demonstrated IDC, 2.2 cm, grade 2, *****-, DCIS+ (intermediate grade, cribriform, no necrosis), negative margins, February 27 SLN (1.1 cm, *****-), ER+ (>95%), PR+ (80%), *****- (IHC 0, FISH 1.August 28.4=1.2), ***** 15%, pT2N1a(sn).  09/18/20 ***** with Dr. *****. Given the presence of regional nodal metastasis, recommend adjuvant right whole breast irradiation- 40.05 Gy in 15 fractions, daily Mon-Fri, over the course of ~3 weeks. Planning for sedation \n for scan given her baseline severe anxiety. Planning to start radiation in late September.      \u0007 Inflammatory bowel disease 2007     Diarrhea prone Irritable Bowel Syndrome         INTERVAL HISTORY AND RELEVANT SYMPTOMS   *****, ***** reports that she is feeling ok. She may have scratched her left armpit. She spoke with Dr. ***** about this who thought it may be a stitch coming out and recommended neosporin. However, she then developed a rash, for which she started lamisil on Sunday. The rash is stable - did not grow but also did not shrink. She also has decreased mobility in her right arm, but that is improving. Otherwise feeling well. She has baseline fibromyalgia which travels and causes her intermittent pain most of the time. She has been taking ***** (supplement) for hot flashes for the last two years.     She has osteoarthritis and disc degeneration in her back and neck so has chronic neck and back pain, for which she takes *****. Two years ago a dog knocked her over and she fell on her knees and has had bilateral knee pain since then.     Past Medical History:   Diagnosis Date   \u0007 Adverse effect of anesthesia     Periop awareness during endo/colonoscopy   \u0007 Anxiety 2014    Therapy & Duloxetine (Cymbalta)   \u0007 Breast cancer, right (CMS code) 07/24/2020   \u0007 Fibromyalgia    \u0007 Fissure, anal +5 years ago   \u0007 GERD (gastroesophageal reflux disease) 1980s    Prior ***** & *****, now Pepcid Complete as needed   \u0007 Glaucoma 5+ years ago    ***** angle glaucoma testing done yearly   \u0007 Hemorrhoids 1990    Easily triggered when constipated   \u0007 Hypertension 2019    Borderline HTN, not on meds yet   \u0007 Hypothyroidism 10+ years ago    Hypothyroidism   \u0007 IBS (irritable bowel syndrome) 2007    Diarrhea prone Irritable Bowel Syndrome   \u0007 Kidney stones 1990    Kidney stone/ *****   \u0007 Liver disease 2020    Fatty liver   \u0007 Morbid obesity with BMI of 45.0-49.9, adult (CMS code) 2000s    Overweight most of my life \n   \u0007 Osteoporosis 2010    Osteoarthritis (neck, lower back, foot)   \u0007 Psychiatric illness 2020    PTSD and anxiety from childhood trauma       Past Surgical History:   Procedure Laterality Date   \u0007 MASTECTOMY PARTIAL / LUMPECTOMY W/ AXILLARY LYMPHADENECTOMY Right August 2020       Current Outpatient Medications on File Prior to Visit   Medication Sig Dispense Refill   \u0007 celecoxib (CELEBREX) 200 mg capsule Take 200 mg by mouth daily     \u0007 clonazePAM (KLONOPIN) 1 mg tablet TAKE 1 TABLET BY MOUTH DAILY IN THE MORNING AS NEEDED FOR PANIC. ***** 2 TABS IN 24 HOURS.     \u0007 docusate sodium (COLACE) 250 mg capsule Take 1 capsule (250 mg total) by mouth Twice a day Hold for loose stools (Patient not taking: Reported on 09/17/2020  ) 60 capsule 0   \u0007 DULoxetine 40 mg CAPDREC Take 40 mg by mouth nightly at bedtime        \u0007 levothyroxine (SYNTHROID) 50 mcg tablet Take 50 mcg by mouth daily        \u0007 LORazepam (ATIVAN) 2 mg tablet PLEASE SEE ATTACHED FOR DETAILED DIRECTIONS     \u0007 QUEtiapine (SEROQUEL) 25 mg tablet TAKE 1 2 TABS BY MOUTH DAILY 1 HOUR BEFORE PROCEDURES AS NEEDED FOR PANIC. NTE 100MG/DAY.     \u0007 [DISCONTINUED] acetaminophen (TYLENOL) 500 mg tablet Take 2 tablets (1,000 mg total) by mouth every 8 (eight) hours as needed for Pain 1st line pain medication (Patient not taking: Reported on 09/17/2020  ) 100 tablet 1   \u0007 [DISCONTINUED] traMADoL (ULTRAM) 50 mg tablet Take 1 tablet (50 mg total) by mouth every 6 (six) hours as needed (Severe pain) (Patient not taking: Reported on 09/17/2020  ) 5 tablet 0     No current facility-administered medications on file prior to visit.       Allergies as of 09/22/2020  Review status set to Review Complete by ***** ***** at 4:08 PM      Severity Noted Reaction Type Reactions    Mushroom High 12/18/2004    Abdominal Pain, Diarrhea, Dizziness, Headache, Lightheadedness, Nausea And Vomiting, Shortness Of Breath    ***** Medium 07/24/2020    Cough, Headache, Nasal Congestion, Swelling    \n Thimerosal Not Specified 03/19/2019    Other (See Comments)    ***** Low 07/24/2020    Abdominal Pain, Diarrhea    Milk Low 07/24/2020    Abdominal Pain, Diarrhea    ***** ***** Low 07/24/2020    Itching, Nasal Congestion          Social History     Social History Narrative    Lives in ***** ***** with her husband and two dogs    Self-employed as an interior designer, also teaches at ***** *****    Never smoker    ***** 1-2 drinks per day, several days a week    No ***** ***** *****        G0P0    Menses age 13    Menopause around age 50?    ***** IUD x 2 (5 yrs ago) - didn't get her period; it was removed two years ago and no menses since then    FSH in 30s two years ago    No HRT    Has been taking ***** (supplement) for hot flashes for about two years       Objective      Vitals      Most Recent Value   BP  (!) 150/84   Heart Rate  92   *****Resp  18   Temp  36.3 C (97.3 F)   Temp Source  Temporal   SpO2  97 %   Weight  (!) 138.3 kg (305 lb)   Height  162.5 cm (5' 3.98\")   Pain Score  0   BMI (Calculated)  52.5            Wt Readings from Last 3 Encounters:   09/22/20 (!) 138.3 kg (305 lb)   09/18/20 (!) 140.5 kg (309 lb 11.2 oz)   08/27/20 (!) 136.1 kg (300 lb)         ECOG Performance Status: 1 - Symptomatic but completely ambulatory    Physical Exam       Constitutional: Alert and oriented x3, NAD   HEENT: NCAT, no oral lesions  CV: RRR, no mrg  Pulm: CTAB no increased WOB  GI: Soft, NT, ND  Breasts: S/p right breast lumpectomy and *****. Well-healing. Lateral aspect of ***** scar with one stitch causing irritation. Area of erythema under right armpit c/w fungal infection (see photo). No other breast masses.   Extremities: No edema  Neuro: No gross deficits  Psychiatric: Normal mood and affect          LABS  I personally reviewed and interpreted each of the patient's relevant lab tests as outlined here with the following findings:    RADIOLOGY  I personally reviewed and interpreted the \n patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as outlined in the extended problem list above.    PATHOLOGY AND GENOMICS:  See extended problem list above    Assessment and Plan      ***** ***** is a 52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 IDC ER+/PR+/*****-, February 27 *****, ***** 5), here to discuss adjuvant therapy.     First, we reviewed her pathology which showed 2.2cm grade 2 IDC ER+/PR+/*****-, February 27 *****. We explained that this is a highly curable cancer and we hope to reduce the risk of recurrence with adjuvant therapies.    For locoregional therapy, she already underwent right breast lumpectomy with IORT. Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. *****.     For systemic control and prevention of future breast cancer recurrence, we discussed the importance of endocrine therapy at length. ***** thinks that she is post-menopausal but we will get an estradiol now to check, and then repeat again on treatment in 3-6 months. Assuming her estradiol is negative, we will start an aromatase inhibitor and prescribed exemestane today. We prefer an aromatase inhibitor over tamoxifen in her case given that is stabilized on duloxetine which ***** with tamoxifen, she already has fatty liver disease with slightly elevated LFTs, and her clot risk may be higher due to her relative immobility. We reviewed the anticipated side effects and risks associated with aromatase inhibitors including but not limited to arthralgias, increased risk of bone thinning/osteoporosis, urogenital symptoms, hot flashes, fatigue, hair thinning, vaginal dryness, and mood lability. We discussed that she has baseline joint pain due to her fibromyalgia, so we will monitor this closely. She is already on duloxetine which has been shown to help, and is on celebrex as well. We recommend NSAIDs for joint pain \n if needed.     In terms of deciding whether she would benefit from adjuvant chemotherapy, we discussed the value of ***** score in making this decision.Given her low ***** score of 5, we do not recommend chemotherapy in her case.     Recommendations:  # Breast cancer  -- Baseline labs now including estradiol, hep serologies given elevated LFTs  -- Prescribed exemestane, which she can start after estradiol confirms post-menopausal status  -- Proceed with adjuvant radiation therapy  -- In the future: DEXA scan (will need to discuss plan for scan as described below)  -- Check estradiol again in 3-6 months to ensure still in menopause    # Anxiety/PTSD  ***** has severe anxiety/PTSD for which she is followed by Dr. ***** *****. Lying on her back and enclosed places/scans can cause severe anxiety. She does not need any scans now, but we will keep this is mind for the future  -- Communicated with her outpatient psychiatrist Dr. ***** ***** via email  -- Continue home duloxetine, celebrex    # Right axilla erythema c/w fungal infection   -- Recommended anti-fungal topical for suspected fungal infection in right armpit; instructed her to let us know if worsening      Spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    The patient was seen and discussed with attending physician Dr. ***** *****. *****, MD.     ***** *****, MD PGY-6  Hematology/Oncology Fellow    09/22/20    ATTESTATION:      My date of service is 09/22/2020. I was physically present for key portions of the visit and am personally involved \n in the management of the patient. I reviewed, verified, and revised the note as necessary.     52 yo woman with new right breast cancer and a number of co-morbidities here to discuss rx options.    06/01/2020 she had a screen detected right breast abnormality that was grade 2 IDC, ER/PR+ and *****- with ***** 10-12%.  An ***** before surgery was 5.  She could not tolerate an MRI due to PTSD/anxiety.    On 08/27/20 she had a lumpectomy and ***** with IORT for a 2.2 cm grade 2 IDC with associated DCIS and 1/1 positive nodes, with 1.1 cm of disease.  ER/PR+ and ***** now 15%.    Dr. ***** recommended radiation therapy for 3 weeks, with sedation for her simulation due to anxiety.    PMH includes morbid obesity, hepatic steatosis, IBS, fibromyalgia, arthritis, anxiety, borderline HTN.  Actively treated by psychiatry, on cymbalta and celebrex.  She is taking ***** for hot flashes.    Married, lives with her husband G0P0.  Amenorrheic since age 50.    On exam her surgical incision is well healed, she has a rash in the right axilla.    I reviewed and interpreted her pathology, imaging and labs as summarized above and here.  Her labs labs were July 23 and showed a mild elevation in ***** and alk phos    IMP  52 yo woman with unknown menopausal status and newly diagnosed T2N1, stage IIb, HR+ disease with low ***** score and multiple medical problems.  We discussed risk of recurrence from her node positive disease, and the use of endocrine therapy.  We are concerned about the drug interaction with tamoxifen and cymbalta and the joint pains with aromatase inhibitors.  In addition, she would not be able to have a bone density as she is not able to tolerate scans.    Discussed in detail    1. Proceed with radiation therapy - will start end of September 29. Laboratory studies including an estradiol, vitamin D, hepatitis serologies  3. If she is menopause, we could try an ***** - perhaps starting with exemestane.  Cymbalta has been shown \n to reduce joint pains with AIs as well.    Plan to check labs, then start aromatase inhibitor, with ***** about 8 weeks later.    I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    ***** *****. *****, MD  09/22/2020      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Plan      ***** ***** is a 52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 IDC ER+/PR+/*****-, February 27 *****, ***** 5), here to discuss adjuvant therapy.     First, we reviewed her pathology which showed 2.2cm grade 2 IDC ER+/PR+/*****-, February 27 *****. We explained that this is a highly curable cancer and we hope to reduce the risk of recurrence with adjuvant therapies.    For locoregional therapy, she already underwent right breast lumpectomy with IORT. Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. *****.     For systemic control and prevention of future breast cancer recurrence, we discussed the importance of endocrine therapy at length. ***** thinks that she is post-menopausal but we will get an estradiol now to check, and then repeat again on treatment in 3-6 months. Assuming her estradiol is negative, we will start an aromatase inhibitor and prescribed exemestane today. We prefer an aromatase inhibitor over tamoxifen in her case given that is stabilized on duloxetine which ***** with tamoxifen, she already has fatty liver disease with slightly elevated LFTs, and her clot risk may be higher due to her relative immobility. We reviewed the anticipated side effects and risks associated with aromatase inhibitors including but not limited to arthralgias, increased risk of bone thinning/osteoporosis, urogenital symptoms, hot flashes, fatigue, hair thinning, vaginal dryness, and mood lability. We discussed that she has baseline joint pain due to her fibromyalgia, so we will monitor this closely. She is already on duloxetine which has been shown to help, and is on celebrex as well. We recommend NSAIDs for joint pain \n if needed.     In terms of deciding whether she would benefit from adjuvant chemotherapy, we discussed the value of ***** score in making this decision.Given her low ***** score of 5, we do not recommend chemotherapy in her case.     Recommendations:  # Breast cancer  -- Baseline labs now including estradiol, hep serologies given elevated LFTs  -- Prescribed exemestane, which she can start after estradiol confirms post-menopausal status  -- Proceed with adjuvant radiation therapy  -- In the future: DEXA scan (will need to discuss plan for scan as described below)  -- Check estradiol again in 3-6 months to ensure still in menopause    # Anxiety/PTSD  ***** has severe anxiety/PTSD for which she is followed by Dr. ***** *****. Lying on her back and enclosed places/scans can cause severe anxiety. She does not need any scans now, but we will keep this is mind for the future  -- Communicated with her outpatient psychiatrist Dr. ***** ***** via email  -- Continue home duloxetine, celebrex    # Right axilla erythema c/w fungal infection   -- Recommended anti-fungal topical for suspected fungal infection in right armpit; instructed her to let us know if worsening      Spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    The patient was seen and discussed with attending physician Dr. ***** *****. *****, MD.     ***** *****, MD PGY-6  Hematology/Oncology Fellow    09/22/20    ATTESTATION:      My date of service is 09/22/2020. I was physically present for key portions of the visit and am personally involved \n in the management of the patient. I reviewed, verified, and revised the note as necessary.     52 yo woman with new right breast cancer and a number of co-morbidities here to discuss rx options.    06/01/2020 she had a screen detected right breast abnormality that was grade 2 IDC, ER/PR+ and *****- with ***** 10-12%.  An ***** before surgery was 5.  She could not tolerate an MRI due to PTSD/anxiety.    On 08/27/20 she had a lumpectomy and ***** with IORT for a 2.2 cm grade 2 IDC with associated DCIS and 1/1 positive nodes, with 1.1 cm of disease.  ER/PR+ and ***** now 15%.    Dr. ***** recommended radiation therapy for 3 weeks, with sedation for her simulation due to anxiety.    PMH includes morbid obesity, hepatic steatosis, IBS, fibromyalgia, arthritis, anxiety, borderline HTN.  Actively treated by psychiatry, on cymbalta and celebrex.  She is taking ***** for hot flashes.    Married, lives with her husband G0P0.  Amenorrheic since age 50.    On exam her surgical incision is well healed, she has a rash in the right axilla.    I reviewed and interpreted her pathology, imaging and labs as summarized above and here.  Her labs labs were July 23 and showed a mild elevation in ***** and alk phos    IMP  52 yo woman with unknown menopausal status and newly diagnosed T2N1, stage IIb, HR+ disease with low ***** score and multiple medical problems.  We discussed risk of recurrence from her node positive disease, and the use of endocrine therapy.  We are concerned about the drug interaction with tamoxifen and cymbalta and the joint pains with aromatase inhibitors.  In addition, she would not be able to have a bone density as she is not able to tolerate scans.    Discussed in detail    1. Proceed with radiation therapy - will start end of September 29. Laboratory studies including an estradiol, vitamin D, hepatitis serologies  3. If she is menopause, we could try an ***** - perhaps starting with exemestane.  Cymbalta has been shown \n to reduce joint pains with AIs as well.    Plan to check labs, then start aromatase inhibitor, with ***** about 8 weeks later.    I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    ***** *****. *****, MD  09/22/2020      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 IDC ER+/PR+/HER2-, February 27 [REDACTED], [REDACTED] 5), here to discuss adjuvant therapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with associated DCIS",
+    "Stage_of_Cancer": "pT2N1a(sn) - approximately Stage II",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Patient has a 2.2 cm grade 2 IDC ER+/PR+/HER2-, with associated DCIS and 1/1 positive nodes. The margins are negative. Physical exam shows a well-healing surgical incision and an area of erythema under the right armpit consistent with a fungal infection. No palpable masses, skin changes, or lymphadenopathy noted."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "type": "hormonal therapy",
+        "details": {
+          "summary": "Exemestane, to be started after confirming post-menopausal status with estradiol test.",
+          "Short_term_side_effects_discussed": "arthralgias, increased risk of bone thinning/osteoporosis, urogenital symptoms, hot flashes, fatigue, hair thinning, vaginal dryness, mood lability",
+          "Long_term_side_effects_discussed": "increased risk of bone thinning/osteoporosis"
+        }
+      },
+      {
+        "type": "radiotherapy",
+        "details": {
+          "summary": "Scheduled for adjuvant radiation therapy with Dr. [REDACTED].",
+          "Short_term_side_effects_discussed": "",
+          "Long_term_side_effects_discussed": ""
+        }
+      }
+    ]
+  },
+  "Medication_Plan": {
+    "medication_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Continue home duloxetine and celebrex. Recommended anti-fungal topical for suspected fungal infection in right armpit."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Proceed with adjuvant radiation therapy starting September 29. If menopausal status is confirmed, will start exemestane. No adjuvant chemotherapy recommended due to low [REDACTED] score."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. [REDACTED]. Dr. [REDACTED] recommended radiation therapy for 3 weeks, with sedation for her simulation due to anxiety."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Baseline labs now including estradiol, hep serologies given elevated LFTs; Check estradiol again in 3-6 months to ensure still in menopause"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation therapy",
+    "Others": "None",
+    "follow up": "check estradiol again in 3-6 months to ensure still in menopause"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 3-6 months to check estradiol again to ensure still in menopause"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "52 yo woman with new right breast cancer and a number of co-morbidities here to discuss rx options."
+  ],
+  "second opinion": [
+    "Given her low [REDACTED] score of 5, we do not recommend chemotherapy in her case."
+  ],
+  "in-person": [
+    "My date of service is 09/22/2020. I was physically present for key portions of the visit and am personally involved in the management of the patient."
+  ],
+  "summary": [
+    "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 IDC ER+/PR+/[REDACTED]-, February 27 [REDACTED], [REDACTED] 5)"
+  ],
+  "Type_of_Cancer": [
+    "2.2cm grade 2 IDC ER+/PR+/[REDACTED]-, February 27 [REDACTED], [REDACTED] 5"
+  ],
+  "Stage_of_Cancer": [
+    "52 yo woman with unknown menopausal status and newly diagnosed T2N1, stage IIb, HR+ disease with low [REDACTED] score and multiple medical problems."
+  ],
+  "Metastasis": [
+    "Given her low [REDACTED] score of 5, we do not recommend chemotherapy in her case."
+  ],
+  "Distant Metastasis": [
+    "1/1 positive nodes, with 1.1 cm of disease."
+  ],
+  "findings": [
+    "2.2 cm grade 2 IDC with associated DCIS and 1/1 positive nodes"
+  ],
+  "recent_changes": [
+    "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status"
+  ],
+  "goals_of_treatment": [
+    "this is a highly curable cancer and we hope to reduce the risk of recurrence with adjuvant therapies."
+  ],
+  "response_assessment": [
+    "Not yet on treatment — no response to assess."
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status"
+  ],
+  "medication_plan": [
+    "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status -- Continue home duloxetine, celebrex"
+  ],
+  "therapy_plan": [
+    "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status -- Proceed with adjuvant radiation therapy"
+  ],
+  "radiotherapy_plan": [
+    "Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. [REDACTED]."
+  ],
+  "lab_plan": [
+    "Baseline labs now including estradiol, hep serologies given elevated LFTs; Check estradiol again in 3-6 months to ensure still in menopause"
+  ],
+  "Specialty": [
+    "she is scheduled for adjuvant radiation therapy with Dr. [REDACTED]."
+  ],
+  "follow up": [
+    "Check estradiol again in 3-6 months to ensure still in menopause"
+  ],
+  "Next clinic visit": [
+    "Check estradiol again in 3-6 months to ensure still in menopause"
+  ]
+}
