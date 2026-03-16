@@ -714,3 +714,54 @@ Processing row 3 (4/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 10.7s
   Total extraction: 76.8s
+    Medication_Plan_chatgpt: 51.9s [improved, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient will continue to take Letrozole 2.5 mg daily.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed":
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-IMPROVE] bone therapy: "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat" -> "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat"
+      [G4-FAITH] REJECTED (no key overlap), kept original
+      [G5-TEMPORAL] other treatment: "{'summary': 'The patient can consider taking OTC Magnesium supplement for occasi" -> "{'summary': 'The patient can consider taking OTC Magnesium supplement for occasi"
+      [G5-TEMPORAL] bone therapy: "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat" -> "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat"
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment'}
+    Medication_Plan: 15.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Consider taking OTC Magnesium supplement for occasional muscle cramping. Continue weight bearing 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Con" -> "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Con"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.0s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will continue to take Letrozole 2.5 mg daily. If the patient's BMD falls below -2.5, she will need to see a dentist, then we could start her on Prolia 60 mg SQ every
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
