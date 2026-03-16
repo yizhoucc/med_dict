@@ -1293,3 +1293,49 @@ Processing row 6 (7/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 20.7s [improved]
+      [EXTRACT] raw={
+"findings": "Probable mild progression in the left breast and possibly the left anterior chest wall. Stable mediastinal adenopathy. No evidence of metastasis on brain MRI. Left ventricular ejection 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Probable mild progression in the left breast and possibly the left anterior ches" -> "Probable mild progression in the left breast and possibly the left anterior ches"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "Lisinopril. Paxil."
+      [POST-MEDS] Lisinopril. Paxil. -> 
+    Treatment_Changes: 6.4s
+      [EXTRACT] raw={
+"recent_changes": "d/c current rx ([REDACTED]/Herceptin/Taxotere)",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 65.3s
+  Cross-context injected (817 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 13.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Probable mild progression in the left breast and possibly the left anterior chest wall. CT shows increased size of left breast tail nodule with SUV 2.1 (previously 1.8). Pers
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Probable mild progression in the left breast and possibly the left anterior ches" -> "Probable mild progression in the left breast and possibly the left anterior ches"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 16.5s
+  Total extraction: 81.8s
