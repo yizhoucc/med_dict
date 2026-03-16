@@ -9679,3 +9679,13 @@ Processing row 45 (46/100)...
     [POST-STAGE] contradiction fixed: 'Originally Stage IIA, now metastatic (Stage IV)' → 'Originally Stage IIA'
     [POST-GOALS] adjuvant → curative (non-metastatic)
     [POST-DISTMET] added Distant Metastasis: 'Not sure'
+  [ATTRIBUTION] 22/23 fields sourced (50.0s)
+  Row 45 total: 367.4s
+  Row 45 saved to progress
+
+Processing row 46 (47/100)...
+  Injected 2 term definitions: ['progesterone receptor', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT:'
+  Regex extraction succeeded (4618 chars)
+  A/P extraction: 0.0s
