@@ -4507,3 +4507,11 @@ Processing row 21 (22/100)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Letrozole changed to arimidex'}, {'typ" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole changed to arimidex', 'Short"
       [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole changed " -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole changed "
       [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole changed to arimidex', 'Short" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole changed to arimidex', 'Short"
+    Medication_Plan: 15.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone if PET CT is stable. If PET CT shows progression, use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include hormone blocka
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
