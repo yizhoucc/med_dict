@@ -3459,3 +3459,31 @@ Processing row 16 (17/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.8s
   Total extraction: 59.7s
+    Medication_Plan_chatgpt: 60.2s [faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Will benefit from adjuvant hormonal therapy for a duration of at least 5 years. Tamoxifen and AIs are effective, with AIs showing superior efficacy in r
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] radiotherapy: "{'summary': 'Requires breast radiotherapy to complete her br" -> "{'summary': 'Requires breast radiotherapy to complete her br"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Will check hormone levels and make a recommendation for tamoxifen o" -> ""
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Will benefit from adjuvant hormonal therapy for a duration of at le" -> ""
+      [POST-KEYS] stripped: {'hormonal_therapy', 'radiotherapy', 'other_treatment'}
+    Medication_Plan: 10.9s
+      [EXTRACT] raw={
+    "medication_plan": "Adjuvant hormonal therapy for at least 5 years, with a recommendation for tamoxifen or Aromatase Inhibitors (AIs) based on menopausal status."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.6s
+      [EXTRACT] raw={
+    "therapy_plan": "Check hormone levels and make a recommendation for tamoxifen or an AI based on her menopausal status. Requires breast radiotherapy to complete her breast conservation management
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
