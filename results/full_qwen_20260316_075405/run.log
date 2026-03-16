@@ -15995,3 +15995,57 @@ Processing row 75 (76/100)...
   Plan extraction prompts: 220.9s
     [POST-THERAPY] removed non-therapy: ['Restart Gabapentin 300 mg TID.', 'Continue Naprosyn 500 mg BID as needed (take with ', 'Continue Metformin 1000 mg BID.', 'Check labs [REDACTED]-12 weeks, due August 2018 or', 'Scans due now.', '[REDACTED] obtain PETCT up to toes given new right', 'If PETCT remains stable, will spread it to every 5', 'Try Voltaren gel as needed for pain.', 'Lomotil 1-2 tabs as needed with each watery bowel ', 'Ensure adequate fluid intake per day to prevent de', 'Small, frequent meals.']
     [POST-DISTMET] added Distant Metastasis: 'Yes, to the bone and left iliac bone'
+  [ATTRIBUTION] 21/22 fields sourced (30.8s)
+  Row 75 total: 372.0s
+  Row 75 saved to progress
+
+Processing row 76 (77/100)...
+  Injected 7 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'ER positive', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (6283 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 17.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 ID
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect" -> "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect"
+      [G4-FAITH] summary: "52 y.o. female with a recent diagnosis of right breast cance" -> "52 y.o. female with a recent diagnosis of right breast cance"
+    Cancer_Diagnosis: 13.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with associated DCIS",
+  "Stage_of_Cancer": "pT2N1a(sn) - approximately Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 15.0s
+      [EXTRACT] raw={
+"findings": "Patient has a 2.2 cm grade 2 IDC ER+/PR+/HER2-, with associated DCIS and 1/1 positive nodes. The margins are negative. Physical exam shows a well-healing surgical incision and an area o
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
