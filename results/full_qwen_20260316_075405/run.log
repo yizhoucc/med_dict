@@ -13157,3 +13157,28 @@ Processing row 62 (63/100)...
       [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam. Post-" -> "Post-chemotherapy MRI on 09/02/19 shows dramatic response to"
   Phase 2 extraction (2 prompts): 42.7s
   Total extraction: 194.6s
+    Medication_Plan_chatgpt: 61.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient is currently on letrozole. If not post-menopausal, will consider ovarian suppression shots or oophorectomy. Discussed [REDACTED] (along with OS 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started " -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+    Medication_Plan: 20.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test for estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "Continue letrozole. Test for estradiol and FSH once every 1-" -> "Continue letrozole. Test for estradiol and FSH once every 1-"
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 29.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on letrozole. Received XRT to the left breast and regional nodes on 11/26/19. Recommended testing for estradiol and FSH once every 1-2 months until September 2020 at l
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Currently on letrozole. Received XRT to the left breast and regional nodes on 11" -> "Currently on letrozole. Recommended testing for estradiol and FSH once every 1-2"
