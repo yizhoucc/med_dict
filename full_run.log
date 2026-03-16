@@ -5124,3 +5124,166 @@ Processing row 24 (25/100)...
       [G1-FORMAT] ok, keys=['response_assessment']
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 16.4s
+  Total extraction: 153.7s
+    Medication_Plan_chatgpt: 48.2s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of xeloda for 14 days and then 7 days off. Will start cycle again on 04/12/2011. Port was placed prior to starting xeloda and 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of xeloda for 14 days and then 7 days" -> "{'summary': 'Will start cycle again on 04/12/2011. Labs reviewed and okay to pro"
+      [G5-TEMPORAL] pain medication: "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Calendars were given to track Xeloda when on and off the drug.', 'S" -> "{'summary': 'Calendars were given to track Xelody when on and off the drug.', 'S"
+      [POST-KEYS] stripped: {'chemotherapy', 'pain medication', 'other treatment'}
+    Medication_Plan: 18.3s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Patient is to take ibuprofen or tylenol in the morning and oxycodone in the evening or when able to have a nap. The pat
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Today is off week, will start cycle again on 04/12/2011. Port placed on 9th prior to starting xeloda and just after i
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Today is off week, w" -> "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Will start cycle aga"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 4.1s
+      [EXTRACT] raw={
+    "imaging_plan": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 7.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Scan in 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 weeks for a scan"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 119.2s
+    [POST-THERAPY] removed non-therapy: ['Rx filled last visit for oxycodone;', 'patient reports only taking a couple since last vi', 'Pain management plan includes ibuprofen or tylenol']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the brain, liver, bones, and lymph nodes)'
+  [ATTRIBUTION] 19/19 fields sourced (23.4s)
+  Row 24 total: 296.3s
+  Row 24 saved to progress
+
+Processing row 25 (26/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (966 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "56 year old female with a newly diagnosed stage I triple negative breast cancer found on screening mammog
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
+"Stage_of_Cancer": "Stage IB",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 36.3s
