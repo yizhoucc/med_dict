@@ -175,3 +175,139 @@ Processing row 0 (1/100)...
       [G3-IMPROVE] genetic_testing_plan: "Appointment with Dr. [REDACTED] on Thursday to biopsy mass in right axilla in th" -> "No specific genetic or molecular tests are planned. The plan is to biopsy the ma"
       [G4-FAITH] genetic_testing_plan: "No specific genetic or molecular tests are planned. The plan" -> ""
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-REVERT] genetic_testing_plan: reverted (G4 emptied all fields)
+    Referral: 11.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "[REDACTED] [REDACTED] Referral asap",
+"Others": "None",
+"follow up": "RTC with me after completed work up to formulate a plan"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.0s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after completed work up to formulate a plan"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 77.5s
+    [POST-SPECIALTY] found in full note: Integrative Medicine       History of Present Illness:   56
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to lungs, peritoneum, liver, and ovary)'
+  [ATTRIBUTION] 19/20 fields sourced (21.8s)
+  Row 0 total: 207.7s
+  Row 0 saved to progress
+
+Processing row 1 (2/100)...
+  Injected 2 term definitions: ['mastectomy', 'TNBC']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.3s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "44 y.o. female with metastatic breast cancer, presenting for cycle 3 day 1 of irinotecan treatment."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.0s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver, bone, a
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 30.9s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 2.1 (L), Alk Phos 183 (H), Calcium 8.2 (L), Chloride 87 (L), Creatinine 0.42 (L), eGFR if non-African American >120, eGFR if African [REDACTED] >120, Potassium 3.1 (L), Sodiu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 56.2s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient presents with chest wall more tender, erythematous, " -> "Patient presents with chest wall more tender, erythematous, "
+    Current_Medications: 6.3s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan, Pembrolizumab, Zofran, Compazine, Effexor-XR"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan, Pembrolizumab, Zofran, Compazine, Effexor-XR" -> "Irinotecan, Zofran, Compazine, Effexor-XR"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] Irinotecan, Zofran, Compazine, Effexor-XR -> Irinotecan
+    Treatment_Changes: 44.0s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Due to her poor tolerance, will change her irinotecan to every other week and increase her dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron (ZOFRAN)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, lop" -> "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, lop"
+      [G4-FAITH] supportive_meds: "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZIN" -> "ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZIN"
+      [POST-SUPP] ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, lorazepam (ATIVAN) 1 mg tablet, oxycodone (ROXICODONE)  5 mg tablet, cyclobenzaprine (FLEXERIL) 5 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, gabapentin (NEURONTIN) 100 mg capsule, pregabalin ([REDACTED]) 25 mg capsule -> ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, oxycodone (ROXICODONE)  5 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet
+  Phase 1 extraction (6 prompts): 168.4s
+  Cross-context injected (1531 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 30.8s
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer is progressing. Evidence includes: PET/CT 01/27/19 showing increased number and extent of hypermetabolic metastases including osseous, hepatic, nodal
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 34.5s
+  Total extraction: 202.9s
+    Medication_Plan_chatgpt: 59.8s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Change irinotecan to every other week, increase dose to 150mg/m2 days 1 and 15 every 28 days.",
+        "Short term side_effects_discussed": "Transaminitis,
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Change irinotecan to every other week, increase dose to 150mg/m2 da" -> "{'summary': 'Change irinotecan to every other week, increase dose to 150mg/m2 da"
+      [G4-FAITH] pain medication: "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. " -> "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. "
+      [G4-FAITH] psychiatry medication: "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot" -> "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot"
+      [G4-FAITH] other treatment: "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio" -> "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio"

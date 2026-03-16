@@ -297,3 +297,24 @@ Processing row 1 (2/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 34.5s
   Total extraction: 202.9s
+    Medication_Plan_chatgpt: 59.8s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Change irinotecan to every other week, increase dose to 150mg/m2 days 1 and 15 every 28 days.",
+        "Short term side_effects_discussed": "Transaminitis,
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Change irinotecan to every other week, increase dose to 150mg/m2 da" -> "{'summary': 'Change irinotecan to every other week, increase dose to 150mg/m2 da"
+      [G4-FAITH] pain medication: "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. " -> "{'summary': 'Continue [REDACTED] 30mg TID and flexeril TID. "
+      [G4-FAITH] psychiatry medication: "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot" -> "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot"
+      [G4-FAITH] other treatment: "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio" -> "{'summary': 'Rx Doxycycline 100mg BID x 7d sent for infectio"
+      [G5-TEMPORAL] psychiatry medication: "{'summary': 'Increase effexor-XR to 75 mg qd for anxiety/hot flashes.', 'Short_t" -> "{'summary': 'Increase effexor-XR to  75 mg qd for anxiety/hot flashes.', 'Short_"
+      [POST-KEYS] stripped: {'chemotherapy', 'pain medication', 'psychiatry medication', 'other treatment'}
+    Medication_Plan: 21.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn, Effexor-XR 75 mg qd, [REDACTED] water instead of free water, 500ml NS IV, 40 mEq PO potassiu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
