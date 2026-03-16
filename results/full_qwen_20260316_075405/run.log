@@ -14028,3 +14028,73 @@ Processing row 66 (67/100)...
       [G4-FAITH] EMPTIED: ['radiotherapy_plan']
       [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.5s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT scan to rule out any distant metastases, diagnostic mammogram and ultrasound to evaluate her left breast cancer for a baseline for further comparison."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 9.1s
+      [EXTRACT] raw={
+    "lab_plan": "Prior laboratory tests to evaluate her CBC, renal function, and liver function before starting chemotherapy on 06/05/2011."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 9.5s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "The patient developed triple negative breast cancer at the age of 53, and without family history we would like patient to meet with our genetic counselor to consider whe
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 17.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Genetic counseling. The patient developed triple negative breast cancer at the age of 53, and without family history we would like patient to meet with our genetic 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Genetic counseling. The patient developed triple negative breast cancer at the a" -> "None"
+      [G3-IMPROVE] Genetics: "Genetic counseling. The patient developed triple negative breast cancer at the a" -> "refer to genetics"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+    follow_up_next_visit: 7.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: start chemotherapy on 06/05/2011 with prior laboratory tests to evaluate her CBC, renal function, and liver function"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 148.3s
