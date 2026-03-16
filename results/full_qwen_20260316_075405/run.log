@@ -6714,3 +6714,70 @@ Processing row 31 (32/100)...
     [POST-THERAPY] removed non-therapy: ['Recently dropped [REDACTED] due to diarrhea, which']
     [POST-ADV] patched from full note: ['Full code', 'Living will on file']
     [POST-DISTMET] added Distant Metastasis: 'Yes (to the lymph nodes of the left neck, chest, abdomen and pelvis, and left adnexal lesion)'
+  [ATTRIBUTION] 18/22 fields sourced (29.8s)
+  Row 31 total: 199.4s
+  Row 31 saved to progress
+
+Processing row 32 (33/100)...
+  Injected 3 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1638 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 10.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "63 y.o. female with left ER+ LN+ breast cancer on letrozole since January 2011, here for follow up."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB, now Stage IIIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage IIB, now Stage IIIA" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIB, now Stage IIIA"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 8.9s
+      [EXTRACT] raw={
+"findings": "Physical exam shows no evidence of recurrence. No palpable masses, no skin changes. +left neck high <1cm LN soft and mobile, no supraclavicular or axillary lymphadenopathy."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.1s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
