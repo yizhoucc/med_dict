@@ -2182,3 +2182,37 @@ Processing row 10 (11/100)...
       [G4-FAITH] no changes (all supported)
   Phase 1 extraction (6 prompts): 99.3s
   Cross-context injected (773 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, pelvis, and right femur ordered due to worsening numbness in right leg. Ima
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "PET/CT showed increased metastatic activity and size of left mandibular mass. MR" -> "PET/CT showed increased metastatic activity and size of left mandibular mass. Im"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 13.6s
+  Total extraction: 112.9s
+    Medication_Plan_chatgpt: 40.5s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on Faslodex",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+    "bone therapy": {
+    
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'infection management', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'infection management', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] infection management: "{'summary': 'Having thrush, Mycelex [REDACTED] qid, [REDACTED]-Mycelex [REDACTED" -> "{'summary': 'Having thrush, Mycelex [REDACTED] qid, [REDACTED]-Mycelex [REDACTED"
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'infection management'}
