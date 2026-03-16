@@ -183,6 +183,7 @@ def main():
     parser.add_argument('--output', '-o', help='Output JSON file')
     args = parser.parse_args()
 
+    import os
     import torch
     import yaml
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -197,7 +198,7 @@ def main():
     print("Loading model...")
 
     hf_token_path = "hf.token"
-    if __import__('os').path.exists(hf_token_path):
+    if os.path.exists(hf_token_path):
         with open(hf_token_path) as f:
             hftoken = f.read().strip()
         from huggingface_hub import login
@@ -243,11 +244,27 @@ def main():
         progress = json.load(f)
 
     results = progress.get('results', {})
+
+    # Load existing results for resume support
     all_attributions = {}
+    if args.output and os.path.exists(args.output):
+        try:
+            with open(args.output) as f:
+                all_attributions = json.load(f)
+            print(f'Resuming: loaded {len(all_attributions)} existing rows from {args.output}')
+        except (json.JSONDecodeError, IOError):
+            pass
 
     row_keys = [str(args.row)] if args.row is not None else sorted(results.keys(), key=int)
+    global_t0 = time.time()
+    rows_done_this_run = 0
 
-    for row_key in row_keys:
+    for i, row_key in enumerate(row_keys):
+        # Skip already completed rows
+        if row_key in all_attributions:
+            print(f'[{i+1}/{len(row_keys)}] Row {row_key} — already done, skipping')
+            continue
+
         if row_key not in results:
             print(f'Row {row_key} not found', file=sys.stderr)
             continue
@@ -258,7 +275,7 @@ def main():
         coral_idx = row.get('coral_idx', '?')
 
         print(f'\n{"="*60}')
-        print(f'ROW {row_key} (coral_idx={coral_idx})')
+        print(f'[{i+1}/{len(row_keys)}] ROW {row_key} (coral_idx={coral_idx})')
         print(f'{"="*60}')
 
         # Build KV cache for this note
@@ -277,21 +294,33 @@ def main():
         total_time = time.time() - t0
 
         all_attributions[row_key] = attribution
+        rows_done_this_run += 1
 
         output = format_attribution(attribution, keypoints)
         print(output)
 
         # Stats
         attributable = get_attributable_fields(keypoints)
-        total = len(attributable)
+        total_fields = len(attributable)
         found = len(attribution)
-        print(f'\n  --- {found}/{total} fields sourced ---')
-        print(f'  --- cache: {cache_time:.1f}s + {total} queries: {attr_time:.1f}s = {total_time:.1f}s ---')
+        remaining = len(row_keys) - i - 1
+        elapsed = time.time() - global_t0
+        avg_per_row = elapsed / rows_done_this_run
+        eta = avg_per_row * remaining
+        print(f'\n  --- {found}/{total_fields} fields sourced ---')
+        print(f'  --- cache: {cache_time:.1f}s + {total_fields} queries: {attr_time:.1f}s = {total_time:.1f}s ---')
+        print(f'  --- progress: {len(all_attributions)}/{len(row_keys)} rows done, ETA: {eta/60:.0f}min ---')
 
+        # Incremental save after each row
+        if args.output:
+            with open(args.output, 'w') as f:
+                json.dump(all_attributions, f, indent=2, ensure_ascii=False)
+
+    total_elapsed = time.time() - global_t0
+    print(f'\n{"="*60}')
+    print(f'DONE: {len(all_attributions)} rows, {total_elapsed/60:.1f} min total')
     if args.output:
-        with open(args.output, 'w') as f:
-            json.dump(all_attributions, f, indent=2, ensure_ascii=False)
-        print(f'\nSaved to {args.output}')
+        print(f'Saved to {args.output}')
 
 
 if __name__ == '__main__':
