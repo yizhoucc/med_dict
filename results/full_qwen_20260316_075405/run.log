@@ -17735,3 +17735,69 @@ Processing row 84 (85/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 30.4s
   Total extraction: 143.0s
+    Medication_Plan_chatgpt: 37.7s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient progressed on first line fulvestrant/palbociclib and is being evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['hormonal therapy (fulvestrant/palbociclib)', 'radiotherapy (palliative radiati" -> "[{'summary': 'hormonal therapy (fulvestrant/palbociclib) - patient progressed on"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy (fulvestrant/palbociclib) - p" -> "[{'summary': 'hormonal therapy (fulvestrant/palbociclib) - p"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'summary': 'hormonal therapy (fulvestrant/palbociclib) - patient progressed on" -> "[{'summary': 'radiotherapy - rad onc referral for brain lesion', 'Short_term_sid"
+    Medication_Plan: 6.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. Continue steroid taper per Dr. [REDACTED]. Continue pain medications
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 14.3s [faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "imaging_plan": "Brain MRI to be reviewed by UCSF neuroradiology."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] imaging_plan: "Brain MRI to be reviewed by UCSF neuroradiology." -> "Brain MRI reviewed by UCSF neuroradiology and found to have "
+      [POST-KEYS] stripped: {'plan'}
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)

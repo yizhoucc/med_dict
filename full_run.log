@@ -17581,3 +17581,167 @@ Processing row 83 (84/100)...
       [EXTRACT] raw={
     "procedure_plan": "Repeat LP for CSF cytology"
 }
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Repeat LP for CSF cytology" -> "Repeat LP for CSF cytology, Repeat MRI spine to r/o LMD in the spine, Recommend "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Repeat MRI spine to r/o LMD in the spine', 'Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]']
+    Imaging_Plan: 7.4s
+      [EXTRACT] raw={
+    "imaging_plan": "Repeat CT CAP now, Repeat MRI spine to rule out leptomeningeal disease in the spine"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 4.3s
+      [EXTRACT] raw={
+    "lab_plan": "Repeat LP for CSF cytology"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 15.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to r/o LMD in the 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "CHEK2 mutation"
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 143.8s
+    [POST-SPECIALTY] found in full note: radiation oncology for consideration of radiation therapy (e
+    [POST-SPECIALTY] found in full note: radiation oncology to consider either focal CNS radiation or
+    [POST-GENETICS] cleared finding from referral: 'CHEK2 mutation'
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, soft tissue, liver, and possibly meninges)'
+  [ATTRIBUTION] 21/23 fields sourced (37.2s)
+  Row 83 total: 333.7s
+  Row 83 saved to progress
+
+Processing row 84 (85/100)...
+  Injected 4 term definitions: ['progressive disease', 'PR negative', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (1727 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 17.6s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 61-year-old female with metastatic ER+ invasive lobular carcinoma of the right breast who 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.4s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive lobular carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, muscle, liver, and bra
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 15.1s
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3: 45.3 (H), 259 (H), 326 (H), 360 (H); Carcinoembryonic Antigen: 3.8, 14.1 (H), 21.3 (H), 25.6 (H)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 43.3s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has progressive disease with new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows an enhancing soft tissue lesion involving t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has progressive disease with new liver metastases an" -> "Patient has progressive disease with new liver metastases an"
+    Current_Medications: 5.8s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "prednisone, fulvestrant, palbociclib, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] prednisone, fulvestrant, palbociclib, denosumab -> fulvestrant, palbociclib, denosumab
+    Treatment_Changes: 12.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d -> morphine 30 mg/d, ondansetron 8 mg tid, predniSONE 50 mg/d
+  Phase 1 extraction (6 prompts): 112.6s
+  Cross-context injected (1122 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 26.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing on treatment. Evidence includes new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows a
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 30.4s
+  Total extraction: 143.0s
+    Medication_Plan_chatgpt: 37.7s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient progressed on first line fulvestrant/palbociclib and is being evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
