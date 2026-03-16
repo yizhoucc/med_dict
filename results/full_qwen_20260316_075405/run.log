@@ -924,3 +924,60 @@ Processing row 4 (5/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 20.2s
   Total extraction: 92.8s
+    Medication_Plan_chatgpt: 39.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue current therapy with leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019).",
+        "S
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] radiotherapy: "{'summary': 'Radiation referral for symptomatic disease in h" -> "{'summary': 'Radiation referral for symptomatic disease in h"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'hormonal therapy', 'other treatment', 'radiotherapy'}
+    Medication_Plan: 10.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019)."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue leuprolide (OS started January 2019), anastrozole (started March 2019)," -> "Continue leuprolide, anastrozole, and palbociclib."
+    Therapy_plan: 20.8s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue current therapy with leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019). Radiation referral for symptomatic di
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide (OS started January 2019), anastrozole "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide, anastrozole, and palbociclib. Radiatio"
+    radiotherapy_plan: 7.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation oncology referral for symptomatic disease in her left neck and brachial plexus."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 6.4s
+      [EXTRACT] raw={
+    "imaging_plan": "CT and bone scan ordered and can be done once authorized prior to next visit."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
