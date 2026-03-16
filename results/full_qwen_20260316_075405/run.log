@@ -12943,3 +12943,28 @@ Processing row 61 (62/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.5s
   Total extraction: 85.9s
+    Medication_Plan_chatgpt: 48.6s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Strongly recommend adjuvant endocrine therapy. Options discussed include [REDACTED] +/- [REDACTED] or [REDACTED], [REDACTED] alone. Pt is at low risk, s
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'hormonal therapy', 'details': 'adjuvant endocrine therapy. " -> "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant endocrine therapy. "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant" -> "[{'treatment_type': 'hormonal therapy', 'summary': 'adjuvant"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 25.4s
+      [EXTRACT] raw={
+    "medication_plan": "Strongly recommend adjuvant endocrine therapy. Options include [REDACTED] +/- [REDACTED] or [REDACTED], [REDACTED] alone. Pt can modify or change to an alternate treatment as
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "No adjuvant chemotherapy recommended for this low risk tumor. Strongly recommend adjuvant endocrine therapy. Options discussed include [REDACTED] +/- [REDACTED] or [REDACTED], [
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "No adjuvant chemotherapy recommended for this low risk tumor. Strongly recommend" -> "Strongly recommend adjuvant endocrine therapy. Options discussed include [REDACT"
