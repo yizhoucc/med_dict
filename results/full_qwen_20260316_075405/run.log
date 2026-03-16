@@ -1640,3 +1640,62 @@ Processing row 7 (8/100)...
       [G4-FAITH] genetic_testing_plan: "None planned." -> ""
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "We will aim to speak again this coming week."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: this coming week to discuss the recommendation further"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 85.4s
+  [ATTRIBUTION] 18/19 fields sourced (28.1s)
+  Row 7 total: 219.8s
+  Row 7 saved to progress
+
+Processing row 8 (9/100)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'neoadjuvant therapy', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1311 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.9s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "Patient presents for follow-up of malignant neoplasm of upper-outer quadrant of right breast, estrogen rece
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
