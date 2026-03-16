@@ -8098,3 +8098,42 @@ Processing row 38 (39/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.8s
   Total extraction: 57.4s
+    Medication_Plan_chatgpt: 71.8s [improved, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient will start with weekly paclitaxel x 12 weeks, either with a [REDACTED] agent or replaced by a [REDACTED] agent, or with paclitaxel alone, followed b
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Patient will start with weekly paclitaxel x 12 weeks, either with a" -> "{'summary': 'Patient will start with weekly paclitaxel x 12 weeks, either with a"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Goserelin will be used monthly during chemotherapy as data from a r" -> "{'summary': 'Goserelin will be used monthly during chemotherapy as data from a r"
+      [G3-IMPROVE] other treatment: "{'summary': 'Echocardiogram, port placement, genetic testing, chemotherapy teach" -> "{'summary': 'Echocardiogram, port placement, genetic testing, chemotherapy teach"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'chemotherapy', 'hormonal therapy', 'other treatment'}
+    Medication_Plan: 12.9s
+      [EXTRACT] raw={
+    "medication_plan": "Weekly paclitaxel x 12 weeks, either with an unspecified agent or replaced by another unspecified agent, or with paclitaxel alone, followed by AC x 4 cycles. Goserelin monthl
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 24.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Neoadjuvant chemotherapy with weekly paclitaxel x 12 weeks, either with a [REDACTED] agent or replaced by a [REDACTED] agent, or with paclitaxel alone, followed by AC x 4 cycles
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
