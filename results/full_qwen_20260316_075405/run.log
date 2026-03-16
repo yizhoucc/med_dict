@@ -19167,3 +19167,32 @@ Processing row 91 (92/100)...
       [G3-IMPROVE] current_meds: "Epirubicin, Denosumab" -> "Epirubicin, Denosumab, Filgrastim"
       [G4-FAITH] no changes (all supported)
       [POST-MEDS] Epirubicin, Denosumab, Filgrastim -> Epirubicin, Denosumab
+    Treatment_Changes: 16.2s
+      [EXTRACT] raw={
+"recent_changes": "restart chemotherapy Epirubicin 25mg/m2 D1, 8, 15 with Neupogen X 2 days",
+"supportive_meds": "filgrastim (NEUPOGEN) 300 mcg/mL injection Inject 300 mcg into the skin Daily. X 2 d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 259.5s
+  Cross-context injected (1146 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 25.0s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Labs show WBC count of 3.4, RBC count of 3.39, hemoglobin of 11.8, hematocrit of 34.4, MCV of 102, MCH of 34.7, MCHC of 34.1, and platelet count of 180. AST is 72, bilirubin 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Labs show WBC count of 3.4, RBC count of 3.39, hemoglobin of 11.8, hematocrit of" -> "Exam shows liver size has decreased and tenderness has reduced. No shortness of "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.6s
+  Total extraction: 288.1s
