@@ -7466,3 +7466,86 @@ Processing row 35 (36/100)...
       [G5-TEMPORAL] other_treatment: "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa" -> "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa"
       [G5-TEMPORAL] hormonal therapy: "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth" -> ""
       [POST-KEYS] stripped: {'chemotherapy', 'supportive_treatment', 'hormonal_therapy', 'other_treatment'}
+    Medication_Plan: 23.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue [REDACTED] as premed. Continue use of antiem
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation"
+    Therapy_plan: 13.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughou
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.2s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation oncology referral, will see Dr. [REDACTED] next week."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.3s
+      [EXTRACT] raw={
+    "imaging_plan": "will get doppler to r/o DVT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 5.1s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "labs reviewed and adequate to receive treatment today"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "labs reviewed and adequate to receive treatment today" -> "will get doppler to r/o DVT"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Social work referral",
+"follow up": "RTC 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> "Radiation oncology referral, will see Dr. [REDACTED] next we"
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"

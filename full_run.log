@@ -7323,3 +7323,151 @@ Processing row 34 (35/100)...
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
     Referral: 8.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "return to clinic in 6 months for routine follow-up"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.0s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 months for routine follow-up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 60.2s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 13/18 fields sourced (17.8s)
+  Row 34 total: 147.1s
+  Row 34 saved to progress
+
+Processing row 35 (36/100)...
+  Injected 3 term definitions: ['mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (3086 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 18.2s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "27 y.o. female with pT3N0 right breast [REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 11.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
+"Stage_of_Cancer": "pT3N0",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 40.6s [improved]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV" -> "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 38.6s
+      [EXTRACT] raw={
+"findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymp
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.4s [improved]
+      [EXTRACT] raw={
+"current_meds": "Abraxane, zoladex, tamoxifen"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Abraxane, zoladex, tamoxifen" -> "Abraxane, zoladex"
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched to Abraxane after a grade 3 infusion reaction with cycle 1 of Taxol.",
+"supportive_meds": "Lorazepam, Zofran, Compazine, Omeprazole, Valtrex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Lorazepam, Zofran, Compazine, Omeprazole, Valtrex -> Zofran, Compazine
+  Phase 1 extraction (6 prompts): 125.9s
+  Cross-context injected (1187 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 132.0s
+    Medication_Plan_chatgpt: 58.4s [improved, faith-restored-3keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.",
+        "Short term side_effects_discussed": "Nausea and vomiting due to chemo and anxiety
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.', '" -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.', '"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth" -> "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth"
+      [G4-FAITH] chemotherapy: "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. " -> "{'summary': 'Continue weekly Abraxane 100mg/m2 x 12 cycles. "
+      [G5-TEMPORAL] hormonal_therapy: "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth" -> "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa" -> ""
+      [G5-TEMPORAL] supportive_treatment: "{'summary': 'Continue prilosec. Continue valtrex 1g every day throughout chemo a" -> "{'summary': 'Continue prilosec. Continue valtrex 1g every day throughout chemo a"
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Continue prilosec. Continue valtrex 1g every day throughout chemo a" -> ""
+      [G5-TEMPORAL] other_treatment: "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa" -> "{'summary': 'Will get doppler to r/o DVT. Discussed possibly starting on anticoa"
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Continue zoladex for preservation of ovarian reserve during chemoth" -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'supportive_treatment', 'hormonal_therapy', 'other_treatment'}
+    Medication_Plan: 23.0s [temporal-cleaned]
