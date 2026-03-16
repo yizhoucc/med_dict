@@ -5980,3 +5980,20 @@ Processing row 28 (29/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 6.6s
   Total extraction: 102.9s
+    Medication_Plan_chatgpt: 56.7s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Start letrozole 2.5mg PO daily now (prescription sent). Plan to discuss switching to another aromatase inhibitor or tamoxifen if not able to tolerate le
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'Start letrozole 2.5mg PO daily now'}, {'bone therapy': 'C" -> "[{'hormonal therapy': {'summary': 'Start letrozole 2.5mg PO daily now', 'Short t"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 17.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Vitamin D supplement pending further evaluation. Continue use 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
