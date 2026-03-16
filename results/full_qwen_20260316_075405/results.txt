@@ -11452,3 +11452,157 @@ RESULTS FOR ROW 73
     "Return to clinic in 4 months"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 74
+============================================================
+
+--- Column: coral_idx ---
+213
+
+--- Column: note_text ---
+"Chief Complaint:  New patient visit for new diagnosis of breast cancer    History of Present Illness:  Ms. ***** ***** is a 68 y.o. female with a h/o knee *****, gastric cancer metastatic to liver (dx July 2015, ***** positive) s/p *****/trastuzumab x 12 cycles and maintenance Herceptin (completed November 2016) in *****, February 2016 RUL PE s/p lovenox, and a March 2017 diagnosis of a T2N1M0 stage IIB R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, ***** 15%) s/p 07/12/17 bilateral simple mastectomies and right axillary *****, who presents to establish Oncology care.      For her GI Oncology history, she is followed by Dr. ***** ***** of UCSF.  She was initially diagnosed in July 2015 with metastatic *****-positive gastric cancer and had a good response to combination of *****/trastuzumab x 12 cycles, and maintenance trastuzumab alone (completed in November 2016).       She was initially diagnosed with breast cancer on a March 2017 screening mammogram, which identified a 1.3 cm irregular density of her outer center right breast.  On 05/10/2017 she underwent an ultrasound guided R breast vacuum assisted core biopsy with pathology revealing ER positive (>95%), PR positive (>90%), ***** negative (ICH 1+, FISH ratio 1.1), ***** ~15%.  She was evaluated in ***** ***** ***** clinic on April 2717 by Dr. ***** and was admitted to ***** on *****/*****/*****-*****/*****/***** for bilateral simple mastectomy and right axillary ***** with ***** closure.  She was last evaluated in breast oncology surgery clinic on 08/02/17 where she had her last drain removed.  Of note is that her original gastric pathology was re-reviewed by UCSF pathology in light of her new breast cancer diagnosis and it confirmed her original diagnosis of ***** positive gastric adenocarcinoma, a separate process from her current breast cancer.  Given this is her second primary malignancy she was evaluated by genetics, and results from 06/30/2017 showed the \"only finding on this \n test were 'variants of uncertain significance' (VUS) in the BRIP1 ***** called c.653G>A (p.*****), and in the ***** ***** called c.401G>A (p.*****).'\"  She now presents to establish medical oncology care.      After surgery she became more fatigued and tired; on average she only spends 3-5 hours outside of bed.  Is able to walk for two blocks before having to stop to rest.  Feels very fatigued.  Experiencing upper right anterior thigh numbness since surgery, no weakness or numbness in her lower leg.  Feels as though her surgical sites are starting to heal, but she is having fullness and mild discomfort lateral to her right surgical site.    Of note, her niece passed away from breast cancer in her 40s.  Nobody else in her family with cancer, including ovarian or pancreatic cancer.  Never smoked tobacco, but her ex-husband smoked for estimated 6-8 years.  Had a hysterectomy at age 46.  Is unsure if she has ever taken HRT.      Breast Oncology History:  04/15/17 screening mammo R breast density    04/16/17 ***** dx mammo 1.3 cm irregular density outer center breast  On the additional images, there is a persistent, 1.3 cm   slightly irregular nodular density in the outer, central to inferior   aspect of the right breast. This is located posteriorly,   approximately 14 cm from the nipple.   R breast U/S  Ultrasound defined a lobular, 1 cm hypoechoic shadowing   lesion in the 9:00 position of the right breast, near the chest wall.   This corresponds to mammographic abnormalities. This is suspicious   for malignancy. An ultrasound guided core needle biopsy is recommended.     05/10/17 ***** breast vacuum assisted core biopsy 9:00 18 cm from nipple of the right breast: Path grade 2 invasive carcinoma ER pos 95% PR pos 90% ***** neg (1+) ***** 20-30% E cad positive    05/10/2017 ***** breast mammo post biopsy: Postbiopsy changes are noted in the 9:00 position of the right breast. A biopsy marker clip is noted in the lower outer aspect \n of the right breast. The clip migrated 2.5 cm medially and 1.6 cm inferiorly from the biopsy site.     06/30/2017 Genetic Testing: The only finding on this test were \"variants of uncertain significance\" (VUS) in the BRIP1 ***** called c.653G>A (p.*****), and in the ***** ***** called c.401G>A (p.*****)    07/12/17: bilateral simple mastectomy and right axillary ***** with ***** closure by Dr. *****      ***** Performance Status: 3    Past Medical History:   Diagnosis Date   \u0007 Anemia    \u0007 Arthritis    \u0007 Blood transfusion without reported diagnosis 2016   \u0007 Clotting disorder       Surgical History     Procedure Laterality Date Comment Source    CATARACT REMOVAL  *****-*****  Provider    CESAREAN SECTION  04/09/1991  Provider    HYSTERECTOMY   Between *****-***** Provider    KNEE SURGERY   between *****-***** Provider          Gynecological History:   Menarche was at age 13. Patient is gravida 6 para 5 with first full term pregnancy at age 21. Patient used oral contraceptives for 8 years between ages 22 and 30.  Hysterectomy performed at age 46 last menstrual period was No LMP recorded. .  She possibly used hormone replacement therapy but she's not sure.      Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 500 mg by mouth every 6 (six) hours as needed for Pain.     \u0007 cholecalciferol, vitamin D3, 2,000 unit TAB Take 1,000 mg by mouth.     \u0007 garlic CAP Take by mouth.     \u0007 UNABLE TO FIND Med Name: ***** ***** *****     \u0007 lidocaine-prilocaine (EMLA) 2.5-2.5 % cream Apply cream one hour before port access as needed for pain. (Patient not taking: Reported on 08/16/2017) 30 g 2     No current facility-administered medications for this visit.         Social History:  She lives ***** with her daughter and two grandchildren.  Originally from *****, moved to the US in the 1980s.  Widowed from her first husband, second husband she was divorced.  \n Never smoked tobacco, used ***** ***** *****.       Family History   Problem Relation Age of Onset   \u0007 Breast cancer ***** 45   \u0007 Anesth problems Neg Hx    \u0007 Bleeding disorder Neg Hx         Review of Systems:   Review of Systems   Constitutional: Negative for malaise/fatigue.   HENT: Negative.    Eyes: Negative.    Respiratory: Negative.    Cardiovascular: Positive for leg swelling (mild).   Gastrointestinal:        Loss of appetite   Musculoskeletal: Positive for myalgias (pain and fullness along lateral R surgical site).   Skin: Negative.    Neurological: Positive for sensory change (near bilateral surgical sites and anterior lateral R thigh). Negative for dizziness, focal weakness and weakness.   Psychiatric/Behavioral: Positive for memory loss.       Physical Examination:   Vitals:    08/16/17 1335   BP: 135/69   Pulse: 71   Resp: 16   Temp: 36.2 C (97.2 F)   TempSrc: Oral   SpO2: 96%   Weight: 90.1 kg (198 lb 9.6 oz)   Height: 155 cm (5' 1.02\")     Physical Exam   Constitutional: She appears well-nourished. No distress.   ***** woman, non-toxic, accompanied by daughter   HENT:   Head: Normocephalic and atraumatic.   Mouth/Throat: Oropharynx is clear and moist.   Poor dentition   Eyes: EOM are normal. Right eye exhibits no discharge. Left eye exhibits no discharge. No scleral icterus.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate, regular rhythm, normal heart sounds and intact distal pulses.  Exam reveals no gallop and no friction rub.    No murmur heard.  Pulmonary/Chest: Effort normal and breath sounds normal. No respiratory distress. She has no wheezes. She has no rales.   Abdominal: Soft. Bowel sounds are normal. She exhibits no distension. There is no tenderness. There is no rebound and no guarding.   Musculoskeletal: Normal range of motion. She exhibits edema (trace bilateral LE edema).   Lymphadenopathy:     She has no cervical adenopathy.   Neurological: She is alert. No \n cranial nerve deficit.   Skin: Skin is warm and dry.   Well-healed bilateral mastectomy scars with slight fullness on lateral right side, not TTP   Psychiatric: She has a normal mood and affect. Her behavior is normal. Thought content normal.   Vitals reviewed.      Labs:  CBC  No results found in last 36 hours    Coags  No results found in last 36 hours    Chem7  No results found in last 36 hours      Pathology:  07/12/2017 FINAL PATHOLOGIC DIAGNOSIS    A. Right axillary non-sentinel lymph node, #1, biopsy: Metastatic  carcinoma in one lymph node (August 30), 0.5 cm.    B. Right breast, simple mastectomy:  1. Invasive ***** carcinoma, ***** grade 2, 2.5 cm, margins negative; see  comment.  2. Ductal carcinoma in situ, intermediate nuclear grade, cribriform,  micropapillary and solid patterns, margins negative.  3. Complex sclerosing lesion, usual ductal hyperplasia, *****,  cysts, and apocrine metaplasia.  4. Biopsy site changes.  5. Microcalcifications in association with invasive carcinoma, benign  ducts, and blood vessels.  6. Skin and nipple with no tumor.    C. Right axillary sentinel lymph node, #1, biopsy: No tumor in one  lymph node (0/1).    D. Left breast, simple mastectomy:  1. Focal atypical lobular hyperplasia, no carcinoma.  2. Radial scar, usual ductal hyperplasia, and apocrine metaplasia.  3. Microcalcifications in association with benign ducts.  4. Benign skin and nipple.    E. Right breast, new inferior lateral margin, re-excision: Benign  breast tissue.    F. Right axillary sentinel lymph node #2 and palpable level 1 nodes,  dissection: No tumor in five lymph nodes (0/5).    G. Right breast skin, resection: Benign skin.     H. Left breast skin, resection: Benign skin.      COMMENT:  Breast Tumor Synoptic Comment  - Laterality: Right.  - Tumor site: Lower outer.  - Invasive tumor type: Invasive ductal carcinoma.  - Invasive tumor size: 2.5 cm.  - Tumor size \n determined based on tumor present in two and a half  consecutive slices (slices 17-18 and part of ***** 19, ***** thickness 1  cm).  - Invasive tumor grade (modified *****-*****-*****): Grade 2    - Nuclear grade: Intermediate, 2 points.    - Mitotic count: 10 mitoses / 10 high power fields, 2 points.    - Glandular: 3 points.    - Total points: 7 points = grade 2.  - EIC (extensive intraductal component): Absent.  - Lymphatic/vascular invasion: Not identified.  - Skin/nipple: Not involved by tumor.  - Skeletal muscle: No skeletal muscle present.  - Margins for invasive tumor: Negative.    - Posterior margin: Negative (tumor is 0.8 cm away, on slide A19).    - All other margins: Negative, > 1 cm away.  - Ductal carcinoma in situ (DCIS): Present.  - DCIS nuclear grade: Intermediate.  - DCIS architectural patterns: Cribriform, micropapillary and solid  patterns.  - Necrosis in *****: Not present.  - Ductal carcinoma in situ size: DCIS is present in slices June 10, 17  and 19 with the largest contiguous span of ~3 cm.  - Microcalcifications: Present; in association with benign ducts,  invasive ductal carcinoma stroma, in vessel wall.  - Resection margins for DCIS: Negative; DCIS is > 1 cm from all  margins.  - Lobular carcinoma in situ: Not identified.  - Non-neoplastic breast: Complex sclerosing lesion, usual ductal  hyperplasia, *****, cysts and apocrine metaplasia.  - Lymph node status: Positive:      - Total number of nodes examined: 7.      - Total number of nodes with micrometastases: 0.      - Total number of nodes with macrometastases: 1.      - Size of largest metastasis in node: 0.5 cm.      - Extranodal extension: None.  - AJCC/UICC stage: pT2N1a.    07/12/2017 HER-2  LABORATORY PHYSICIAN INTERPRETATION:  Negative: Tumor cells showing no amplification of ***** (ERBB2).    RESULT:  Number of Observers: 2  Number of tumor cells \n assessed: 50  Mean ***** signals/nucleus: 1.4  Mean Centromere 17 signals/nucleus: 1.2  Avg. Ratio of *****: *****: 1.1    ISCN:  nuc ish 17p11.1q11.1(*****.2), 17q11.2q12(*****-2/*****.4)      05/27/2017 CONSULTATION PATHOLOGIC DIAGNOSIS  Review of *****-*****-***** from ***** *****, *****, *****:    Right breast, 1 cm mass at 9:00, 18 cm fn, core biopsy: Invasive ductal  carcinoma.    COMMENT:   We agree with the original pathologist's diagnosis.    Breast Needle Core Biopsy Tumor Synoptic Comment  - Invasive tumor type: Invasive ductal carcinoma.   - Invasive tumor size: 0.9 cm (largest dimension in core).  - Invasive tumor grade (modified *****-*****): Definitive grading  is deferred to an excision specimen.     - Nuclear grade: Intermediate, 2 points.    - Mitotic count: June 08 HPF, 2 points.    - Glandular/tubular differentiation: 3 points.    - Total points/grade: 7 points, grade 2.  - Lymphovascular invasion:  None.  - Ductal carcinoma in situ: None.  - Microcalcifications: None.  - Lobular carcinoma in situ: None.    - Tumor biomarker (ER/PR/*****/*****-67) status: Performed at the original  institution and submitted for review:    The test for estrogen receptors is positive. There is strong nuclear  staining in >95% of tumor cells. Internal positive control is present,  and external positive control is appropriate.    The test for progesterone receptors is positive. There is strong  nuclear staining in >90% of tumor cells. Internal positive control is  present, and external positive control is appropriate.    Result of ***** test: This carcinoma is negative for ***** oncoprotein  over-expression. The staining intensity of this carcinoma is 1+ on a  scale of 0-3.    *****-67 proliferation index: ~15%.      CONSULTATION PATHOLOGIC DIAGNOSIS  Review of *****-*****-***** from ***** *****, *****, *****:    C. Stomach, biopsy:   1. Invasive adenocarcinoma, moderately differentiated, \n consistent with  gastric primary; see comment.  2. Gastric mucosa with intestinal metaplasia.    COMMENT:   H&E sections show multiple fragments of gastric mucosa containing  tumor composed of irregular glands lined by atypical cells. Tumor  necrosis is present. The depth of tumor invasion cannot be assessed due  to the superficial nature of the tissue fragments. The background  demonstrates extensive ***** debris with fungal organisms and  intestinal metaplasia in gastric mucosa. ***** (HER-2 and mucicarmine)  performed by the original institution are available for review.  Mucicarmine highlights intestinal metaplasia and demonstrates minimal  luminal staining in tumor glands. HER-2 is positive (3+, scale 0-3) in  tumor cells. By report, the patient's previously resected breast  carcinoma (*****-*****) shows no ***** ***** amplification by FISH.    Overall, the morphologic and immunophenotypic findings support a  diagnosis of invasive, moderately differentiated adenocarcinoma, most  consistent with a gastric primary.       Radiology:  EXAMINATION: 04/16/2017   PROCEDURE:US BREAST RIGHT    HISTORY:RIGHT BREAST *****    COMPARISON:***** ***** Healthcare System, *****, ***** DIG   DIAGNOSTIC UNILAT/R(WITH ULTRASOUND IF INDICATED), 04/16/2017, 1:35   PM.    TECHNIQUE:Right breast ultrasound was performed, with evaluation   focusing only on specific areas of concern.The breast was not   scanned in its entirety.    FINDINGS:In the lateral, 9:00 position of the right breast, near the   chest wall, a lobular 1 cm hypoechoic mass is identified. This is   best seen with the patient in the left lateral decubitus position   with the breast falling forward. There is posterior acoustic   shadowing. This lesion corresponds to the mammographic abnormalities.    CONCLUSION:Ultrasound defined a lobular, 1 cm hypoechoic shadowing   lesion in the 9:00 position of the right breast, near the chest wall.   This \n corresponds to mammographic abnormalities. This is suspicious   for malignancy. An ultrasound guided core needle biopsy is   recommended.   The findings and recommendations were discussed with the patient.   A phone report was called to Dr. *****.    BI-RADS CATEGORY 4SUSPICIOUS ABNORMALITY  3343 ***** should be considered    05/10/2017  FINDINGS:  LESION SIZE:1.0 cm  LESION LOCATION:9:00 18 cm from nipple of the right breast  SPECIMEN #, LOCATION:8  BIOPSY NEEDLE:Vacuum - Assisted Core Needle Biopsy System.  MARKERS(S) PLACED:Yes  COMPLICATIONS:No  PATHOLOGY LAB:Yes.    Hemostasis was achieved at the puncture site with manual compression.  Post-procedure instructions were given both orally and in written   form.    CONCLUSION:Status post ultrasound-guided vacuum assisted core needle   biopsy of a solid mass in the 9:00 position of the right breast.A   tissue marker was left at the site of biopsy.      04/19/2017 TTE Conclusions:  Image quality was fair. The patient's blood pressure was 125 mmHg/60 mmHg during the study. The heart rate during the study was 71. Spectral Doppler was utilized for this exam. Color Flow Doppler was utilized for this exam.  1. The left ventricular volume is small. LV function is borderline to mildly decreased. LV ejection fraction is is estimated to be 50 to 55%. There is no left ventricular hypertrophy. No segmental wall motion abnormalities present.  2. The right ventricular volume is normal. Right ventricular function is normal.  3. Left atrial size is normal. Right atrial size is normal.  4. There is no hemodynamically significant valvular disease.  5. There is Doppler evidence of impaired LV relaxation. LV filling pressure is likely normal.  6. The pulmonary artery systolic pressure cannot be determined due to the lack of a complete ***** jet.  7. No pericardial effusion noted. The inferior vena cava is small with spontaneous collapse consistent with hypovolemia.  8. Aortic root \n dimension is normal.      Assessment / Plan:   Ms. ***** ***** is a 68 y.o. female with a h/o knee *****, metastatic HER-2 positive gastric cancer s/p *****/trastuzumab x 12 cycles and maintenance Herceptin (completed November 2016) now in *****, February 2016 RUL PE s/p lovenox, and a March 2017 diagnosis of a stage IIB T2N1M0 R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, ***** 15%) s/p 07/12/17 bilateral simple mastectomies and right axillary *****, who presents to establish Oncology care.    Ms. ***** has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node.  She has completed bilateral mastectomies and at this time does not require radiation therapy.  Given her positive hormone status, she should be treated with an aromatase inhibitor.  However, it is unclear at this time if she would also benefit from chemotherapy.  Given her node positive status, it would be helpful to obtain ***** or ***** testing on her tumor to determine if she is high or low risk, which would then help guide management decisions about the role of chemotherapy.  Due to her current marginal functional status, history of chemotherapy with *****/Herceptin ***** cycles and borderline reduced EF (50-55%) on her last TTE, we would not choose an anthracycline based regimen for systemic chemotherapy.  Instead, we would pursue treatment with TC in the setting of high-risk disease as determined by the previously mentioned testing.    We discussed the possibility of only using an ***** vs using TC then an ***** with the patient and her daughter today.  They are in agreement to pursue further tumor testing and she was consented for ***** today.      Plan:  - patient consented and order submitted for ***** testing  - will consider the use of ***** alone vs TC then ***** based on the testing results  - patient to follow-up in 3 weeks to discuss future treatment options    All of the patient's questions and \n concerns were discussed and answered to her satisfaction.     This patient was evaluated and discussed with attending, Dr. *****.      ***** *****, MD  Hematology/Oncology Fellow  08/16/17    \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:   Ms. ***** ***** is a 68 y.o. female with a h/o knee *****, metastatic HER-2 positive gastric cancer s/p *****/trastuzumab x 12 cycles and maintenance Herceptin (completed November 2016) now in *****, February 2016 RUL PE s/p lovenox, and a March 2017 diagnosis of a stage IIB T2N1M0 R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, ***** 15%) s/p 07/12/17 bilateral simple mastectomies and right axillary *****, who presents to establish Oncology care.    Ms. ***** has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node.  She has completed bilateral mastectomies and at this time does not require radiation therapy.  Given her positive hormone status, she should be treated with an aromatase inhibitor.  However, it is unclear at this time if she would also benefit from chemotherapy.  Given her node positive status, it would be helpful to obtain ***** or ***** testing on her tumor to determine if she is high or low risk, which would then help guide management decisions about the role of chemotherapy.  Due to her current marginal functional status, history of chemotherapy with *****/Herceptin ***** cycles and borderline reduced EF (50-55%) on her last TTE, we would not choose an anthracycline based regimen for systemic chemotherapy.  Instead, we would pursue treatment with TC in the setting of high-risk disease as determined by the previously mentioned testing.    We discussed the possibility of only using an ***** vs using TC then an ***** with the patient and her daughter today.  They are in agreement to pursue further tumor testing and she was consented for ***** today.      Plan:  - patient consented and order submitted for ***** testing  - will consider the use of ***** alone vs TC then ***** based on the testing results  - patient to follow-up in 3 weeks to discuss future treatment options    All of the patient's questions and \n concerns were discussed and answered to her satisfaction.     This patient was evaluated and discussed with attending, Dr. *****.      ***** *****, MD  Hematology/Oncology Fellow  08/16/17    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Ms. [REDACTED] [REDACTED] is a 68 y.o. female with a history of metastatic HER-2 positive gastric cancer and a recent diagnosis of a stage IIB T2N1M0 right breast invasive ductal carcinoma (IDC). She presents to establish Oncology care and discuss adjuvant systemic therapy options following bilateral simple mastectomies."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "pT2N1a",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results: Right breast invasive ductal carcinoma, grade 2, 2.5 cm, margins negative; Ductal carcinoma in situ, intermediate nuclear grade, cribriform, micropapillary and solid patterns, margins negative; Complex sclerosing lesion, usual ductal hyperplasia, cysts, and apocrine metaplasia; Right axillary non-sentinel lymph node, #1, biopsy: Metastatic carcinoma in one lymph node (August 30), 0.5 cm; Right axillary sentinel lymph node, #1, biopsy: No tumor in one lymph node (0/1); Right axillary sentinel lymph node #2 and palpable level 1 nodes, dissection: No tumor in five lymph nodes (0/5). Physical exam: Well-healed bilateral mastectomy scars with slight fullness on lateral right side, not tender to palpation; Trace bilateral lower extremity edema; Sensory changes near bilateral surgical sites and anterior lateral right thigh; No palpable masses or lymphadenopathy noted."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "type": "hormonal therapy",
+        "details": {
+          "summary": "an aromatase inhibitor",
+          "Short term side_effects_discussed": "",
+          "Long term side_effects_discussed": ""
+        }
+      }
+    ]
+  },
+  "Medication_Plan": {
+    "medication_plan": "The patient will consider the use of an aromatase inhibitor alone vs TC (docetaxel and carboplatin) then an aromatase inhibitor based on the results of further tumor testing."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Given her positive hormone status, she should be treated with an aromatase inhibitor. Due to her current marginal functional status, history of chemotherapy with [REDACTED]/Herceptin [REDACTED] cycles and borderline reduced EF (50-55%) on her last TTE, we would not choose an anthracycline based regimen for systemic chemotherapy. Instead, we would pursue treatment with TC in the setting of high-risk disease as determined by the previously mentioned testing. Plan includes considering the use of [REDACTED] alone vs TC then [REDACTED] based on the testing results."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "patient consented and order submitted for [REDACTED] testing"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "follow-up in 3 weeks to discuss future treatment options"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 3 weeks to discuss future treatment options"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "who presents to establish Oncology care."
+  ],
+  "second opinion": [
+    "Ms. [REDACTED] has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node."
+  ],
+  "in-person": [
+    "who presents to establish Oncology care."
+  ],
+  "summary": [
+    "Ms. [REDACTED] [REDACTED] is a 68 y.o. female with a h/o knee [REDACTED], metastatic HER-2 positive gastric cancer"
+  ],
+  "Type_of_Cancer": [
+    "stage IIB T2N1M0 R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, [REDACTED] 15%)"
+  ],
+  "Stage_of_Cancer": [
+    "stage IIB T2N1M0"
+  ],
+  "Metastasis": [
+    "Ms. [REDACTED] has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node."
+  ],
+  "Distant Metastasis": [
+    "M\"0, R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, [REDACTED] 15%) s/p 07/12/17 bilateral simple mastectomies and right axillary [REDACTED], who presents to establish Oncology care."
+  ],
+  "findings": [
+    "March 2017 diagnosis of a stage IIB T2N1M0 R breast IDC (2.5 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, [REDACTED] 15%)"
+  ],
+  "goals_of_treatment": [
+    "Ms. [REDACTED] has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node."
+  ],
+  "response_assessment": [
+    "Ms. [REDACTED] has stage IIB IDC, an early stage breast cancer, with involvement of 1 lymph node. She has completed bilateral mastectomies and at this time does not require radiation therapy."
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "Given her positive hormone status, she should be treated with an aromatase inhibitor."
+  ],
+  "medication_plan": [
+    "will consider the use of [REDACTED] alone vs TC then [REDACTED] based on the testing results"
+  ],
+  "therapy_plan": [
+    "Given her positive hormone status, she should be treated with an aromatase inhibitor."
+  ],
+  "genetic_testing_plan": [
+    "patient consented and order submitted for [REDACTED] testing"
+  ],
+  "follow up": [
+    "patient to follow-up in 3 weeks to discuss future treatment options"
+  ],
+  "Next clinic visit": [
+    "patient to follow-up in 3 weeks to discuss future treatment options"
+  ]
+}
