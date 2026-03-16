@@ -15691,3 +15691,28 @@ Processing row 74 (75/100)...
       [G4-FAITH] other treatment: "{'summary': 'Discuss treatment side effects including hair l" -> "{'summary': 'Discuss treatment side effects including hair l"
       [G5-TEMPORAL] other treatment: "{'summary': 'Discuss treatment side effects including hair loss, nausea/vomiting" -> "{'summary': 'Plan to discuss treatment side effects including hair loss, nausea/"
       [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
+    Medication_Plan: 22.1s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant TCHP regimen (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). If there is not a complete response to neoadjuvant
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 29.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Agree with neoadjuvant TCHP (docetaxel and carboplatin every 3 weeks for 6 cycles with concurrent trastuzumab and pertuzumab). Adjuvant treatment selection will be guided by an 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation Oncology."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Following surgical resection we will plan to refer Ms. [REDACTED] to Radiation O" -> "Following surgical resection, Ms. [REDACTED] will be referred to Radiation Oncol"
+      [G4-FAITH] radiotherapy_plan: "Following surgical resection, Ms. [REDACTED] will be referre" -> "Following surgical resection we will plan to refer Ms. [REDA"
+      [G5-TEMPORAL] no changes
