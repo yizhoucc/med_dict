@@ -19842,3 +19842,35 @@ Processing row 94 (95/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 36.3s
   Total extraction: 165.8s
+    Medication_Plan_chatgpt: 59.6s [improved, faith-restored-3keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Pt is interested in capecitabine for residual dz post NAC. Pt wishes to proceed with XRT next, then capecitabine.",
+        "Short term side_effects_discuss
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] supportive treatment: "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '" -> "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '"
+      [G4-FAITH] chemotherapy: "{'summary': 'Pt is interested in capecitabine for residual d" -> "{'summary': 'Pt is interested in capecitabine for residual d"
+      [G4-FAITH] radiotherapy: "{'summary': 'Pt is interested in breast and axilla XRT. Pt t" -> "{'summary': 'Pt is interested in breast and axilla XRT. Pt t"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Anemia, stable. Edema, upper and lower extremities, resolved. Likel" -> ""
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '" -> ""
+      [G5-TEMPORAL] other_treatment: "{'summary': 'Anemia, stable. Edema, upper and lower extremities, resolved. Likel" -> ""
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Strongly recommend adjuvant endocrine therapy after the above.', 'S" -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'supportive_treatment', 'radiotherapy', 'hormonal_therapy'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Pt to start AC. Pt is interested in breast and axilla XRT; referred to Rad Onc today. Pt wishes to proceed with XRT next, then capecitabine. Strongly recommend adjuvant endocrin
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes

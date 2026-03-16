@@ -19730,3 +19730,144 @@ Processing row 93 (94/100)...
       [G4-PROTECT] Specialty: restored safe negative "None"
       [G4-PROTECT] Genetics: restored safe negative "None"
     follow_up_next_visit: 3.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 months for follow up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 65.8s
+    [POST-THERAPY] cleared (no oncology drugs found): Current therapy plan includes [REDACTED] therapy and bone protection, next due M
+    [POST-ADV] patched from full note: ['full code']
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 14/20 fields sourced (21.4s)
+  Row 93 total: 229.5s
+  Row 93 saved to progress
+
+Processing row 94 (95/100)...
+  Injected 9 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'neoadjuvant therapy', 'sentinel lymph node', 'estrogen receptor', 'PR positive', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1634 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "A 49-year-old female with left ER+/PR+/HER2- breast cancer who started the [REDACTED] trial randomized to
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Patient type: "New patient" -> "in-person"
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.5s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma with DCIS",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Not sure",
+  "Metastasis": "
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "Not specified in the note"
+      [G3-IMPROVE] Distant_Metastasis: "Not sure" -> "No"
+      [G3-IMPROVE] Metastasis: "Not sure" -> "No"
+      [G4-FAITH] Stage_of_Cancer: "Not specified in the note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 56.3s
+      [EXTRACT] raw={
+"findings": "Left breast, [REDACTED]-localized partial mastectomy: Residual invasive ductal carcinoma with treatment effect, three foci, margins negative; Residual ductal carcinoma in situ with trea
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, potassium chloride (KLOR-CON [REDACTED]) 10 mEq ER tablet -> 
+    Treatment_Changes: 23.0s [faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start AC, discussed option of capecitabine for residual dz post NAC, discussed possibility of starting capecitabine prior to vs. After XRT, Pt wishes to proceed with XRT next, the
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] recent_changes: "Start AC, discussed option of capecitabine for residual dz p" -> "Start AC, discussed option of capecitabine for residual dz p"
+      [POST-SUPP] acetaminophen (TYLENOL) 500 mg tablet, prilosec 40mg qd -> 
+  Phase 1 extraction (6 prompts): 129.5s
+  Cross-context injected (1425 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 32.3s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is responding to treatment. MRI breast shows an interval decrease in an irregularly shaped mass with irregular margins and heterogeneous internal enhancement in th
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 36.3s
+  Total extraction: 165.8s
+    Medication_Plan_chatgpt: 59.6s [improved, faith-restored-3keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Pt is interested in capecitabine for residual dz post NAC. Pt wishes to proceed with XRT next, then capecitabine.",
+        "Short term side_effects_discuss
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'supportive treatment', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'radiotherapy', 'supportive treatment', 'other treatment']
+      [G3-IMPROVE] supportive treatment: "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '" -> "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '"
+      [G4-FAITH] chemotherapy: "{'summary': 'Pt is interested in capecitabine for residual d" -> "{'summary': 'Pt is interested in capecitabine for residual d"
+      [G4-FAITH] radiotherapy: "{'summary': 'Pt is interested in breast and axilla XRT. Pt t" -> "{'summary': 'Pt is interested in breast and axilla XRT. Pt t"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Anemia, stable. Edema, upper and lower extremities, resolved. Likel" -> ""
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Continue prilosec 40mg qd for GERD due to chemotherapy, stable.', '" -> ""
+      [G5-TEMPORAL] other_treatment: "{'summary': 'Anemia, stable. Edema, upper and lower extremities, resolved. Likel" -> ""
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Strongly recommend adjuvant endocrine therapy after the above.', 'S" -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'supportive_treatment', 'radiotherapy', 'hormonal_therapy'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.9s
