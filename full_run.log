@@ -14001,3 +14001,161 @@ Processing row 66 (67/100)...
       [G3-IMPROVE] no changes
       [G4-FAITH] chemotherapy: "{'summary': 'Patient will start Abraxane at a weekly dose fo" -> "{'summary': 'Patient will start Abraxane at a weekly dose fo"
       [G4-FAITH] other treatment: "{'summary': 'Patient is recommended to contact her diabetes " -> "{'summary': 'Patient is recommended to contact her diabetes "
+      [G4-FAITH] supportive treatment: "{'summary': 'Patient will receive [REDACTED] injection to pr" -> "{'summary': 'Patient will receive [REDACTED] injection to pr"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Patient is recommended to contact her diabetes physician to have he" -> "{'summary': 'Patient is recommended to contact her diabetes physician to have he"
+      [G5-TEMPORAL] supportive treatment: "{'summary': 'Patient will receive [REDACTED] injection to prevent neutropenia or" -> "{'summary': 'Patient will receive [REDACTED] injection to prevent neutropenia or"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment', 'supportive treatment'}
+    Medication_Plan: 17.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start Abraxane at 100 mg/m2 weekly for a total of 12 weeks. Supportive medications include [REDACTED] injection to prevent neutropenia or neutropenic fever and Levaquin post 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 21.5s
+      [EXTRACT] raw={
+    "therapy_plan": "Start Abraxane at 100 mg/m2 weekly for a total of 12 weeks. If her general health condition improves after 3 months, give her an additional two cycles of dose-dense Adriamycin p
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.5s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT scan to rule out any distant metastases, diagnostic mammogram and ultrasound to evaluate her left breast cancer for a baseline for further comparison."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 9.1s
+      [EXTRACT] raw={
+    "lab_plan": "Prior laboratory tests to evaluate her CBC, renal function, and liver function before starting chemotherapy on 06/05/2011."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 9.5s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "The patient developed triple negative breast cancer at the age of 53, and without family history we would like patient to meet with our genetic counselor to consider whe
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 17.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Genetic counseling. The patient developed triple negative breast cancer at the age of 53, and without family history we would like patient to meet with our genetic 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Genetic counseling. The patient developed triple negative breast cancer at the a" -> "None"
+      [G3-IMPROVE] Genetics: "Genetic counseling. The patient developed triple negative breast cancer at the a" -> "refer to genetics"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+    follow_up_next_visit: 7.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: start chemotherapy on 06/05/2011 with prior laboratory tests to evaluate her CBC, renal function, and liver function"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 148.3s
+  [ATTRIBUTION] 22/22 fields sourced (43.0s)
+  Row 66 total: 311.2s
+  Row 66 saved to progress
+
+Processing row 67 (68/100)...
+  Injected 2 term definitions: ['mastectomy', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2331 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "A 63-year-old female with multifocal ER+ breast cancer involving the right breast, presenting for a retur
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.6s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally early stage, now Stage IV",
+  "Distant_Metastasis": "Yes, to right axillary lymph nodes and right inte
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to right axillary lymph nodes and right internal mammary lymph node" -> "No"
+      [G4-FAITH] Stage_of_Cancer: "Originally early stage, now Stage IV" -> "Originally early stage"
+      [G4-FAITH] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> ""
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR+/HER2- invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 33.9s
+      [EXTRACT] raw={
+"findings": "MRI findings: Right Breast - 3.9 x 2.7 x 3.5 cm enhancing mass with washout kinetics containing a biopsy clip consistent with known malignancy, abutting the chest wall without definite 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 1.8s
+      [EXTRACT] raw={
+"current_meds": ""
+}
