@@ -16291,3 +16291,149 @@ Processing row 77 (78/100)...
       [G1-FORMAT] ok, keys=['response_assessment']
       [G2-SCHEMA] ok
       [G3-IMPROVE] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal " -> "Worsening of metastatic disease noted on 08/07/19 abdominal "
+  Phase 2 extraction (2 prompts): 40.2s
+  Total extraction: 197.9s
+    Medication_Plan_chatgpt: 34.8s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient has been off systemic therapy since 03/15/19. Discussed standard chemotherapy options including doxil and [REDACTED], doxil likely being the best ne
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta" -> "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta"
+      [G3-IMPROVE] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp" -> "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp"
+      [G4-FAITH] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/" -> "{'summary': 'Patient has been off systemic therapy since 03/"
+      [G4-FAITH] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continu" -> "{'summary': 'Mag supplement initiated on 01/13/2019. Continu"
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Patient has been off systemic therapy since 03/15/19. Discussed sta" -> "{'summary': 'At this time she is not interested in chemotherapy.', 'Short_term_s"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Mag supplement initiated on 01/13/2019. Continue 800 mg Mag-Ox supp" -> "{'summary': 'Continue 800 mg Mag-Ox supplement daily.', 'Short_term_side_effects"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 9.7s
+      [EXTRACT] raw={
+    "procedure_plan": "Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Consultation with radiation oncology to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
+    Imaging_Plan: 9.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to contact us with increasing sob, cough, cp, lightheadedness, doe, fatigue, or other concerning sy
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to" -> "Echo 09/08/2019. If this echo is normal we can stop monitoring her."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 8.1s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Patient is interested in screening for trial options including [REDACTED]+ tumors and phase 1 [REDACTED]+pembrolizumab trial."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 11.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "with me if she is unable to go on trial at [REDACTED], with PCP for cardiac follow
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 5.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: follow up if unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 0.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 127.7s
+    [POST-THERAPY] removed non-therapy: ['Patient wishes to explore targeted options for met', 'She is interested in screening for a trial at [RED', 'If she is unable to go on trial at [REDACTED], she']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the liver and periportal LNs)'
+  [ATTRIBUTION] 19/20 fields sourced (39.4s)
+  Row 77 total: 365.0s
+  Row 77 saved to progress
+
+Processing row 78 (79/100)...
+  Injected 1 term definitions: ['mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1828 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has metastatic breast cancer with rising tumor markers and increased bone pain. The purpose of 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.8s [improved, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to multiple sites",
+"Metastasis": "
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
