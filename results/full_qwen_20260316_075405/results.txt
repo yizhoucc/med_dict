@@ -10066,3 +10066,179 @@ RESULTS FOR ROW 64
     "additional treatment to sternum as a single site of metastatic disease."
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 65
+============================================================
+
+--- Column: coral_idx ---
+204
+
+--- Column: note_text ---
+"We performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, we obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.    Patient Name: ***** *****  ***** *****: 07/06/20    HPI: ***** ***** is a 48 y.o. female with a recent diagnosis of right breast IDC which is ER weak positive (2%), PR low positive (7%), ***** neg (IHC 2+, FISH 2.March 09.8=1.4) and ***** 36% with ***** and axillary LN involvement here in consultation with medical oncology to discuss neoadjuvant chemotherapy.      On 10/18/19, Ms. ***** had a screening mammogram locally in ***** ***** which showed a developing asymmetry within the central right breast. She was brought back for a diagnostic mammogram on 11/11/19, but this did not demonstrate a clear mass. US also failed to show any suspicious masses in the area of screening mammographic concern, so six month follow up mammogram was recommended.    Over the *****, she noticed a mass on the right side. On 05/29/20, right diagnostic mammogram demonstrated interval development of a suspicious group of pleomorphic calcifications within the 12:00 subareolar position with a newly apparent 2 cm mass. Right breast US confirmed the mass as 2.3 x 1.4 cm with the anterior inferior margin within  1 cm of the nipple. S also noted two other areas of concern including an irregular hypoechoic mass at the 1:00 o'clock position 5cm from the nipple measuring 1.0 x 0.9 cm and a 0.7 x 0.5 cm mass at the 2:30 position. There was also mild cortical thickening of an axillary LN that measured up to 3mm.    On 06/04/20, right breast ultrasound guided biopsy was performed at ***** ***** *****. The right breast palpable subareolar mass at 12 o'clock 1 cm from nipple returned consistent with invasive ductal carcinoma, \n grade 2 or 3. Focal ***** was present, as well as a high-grade DCIS component. The invasive cancer was ER 2% weak, low positive, PR 7% moderate, low positive, ***** 2+, FISH negative (2.March 09.8=1.4). ***** 36%. The two other areas of concern noted on the ultrasound were also biopsied and returned benign. Biopsy of a right axillary lymph node returned with a 0.2mm focus of micrometastatic carcinoma within the lymph node tissue with no evidence of extracapsular extension.    On 06/12/20, MRI breast demonstrated a 2.6 x 1.9 x 2.3 cm oval mass within the right upper central breast, anterior depth/***** location compatable with biopsy-proven malignancy. There was no skin or nipple invasion but multiple prominent right level 1 axillary lymph nodes and an enlarged level ***** ***** ***** ***** ***** *****. No concerning findings in the left breast.    On 06/25/20,  PET/CT showed a hypermetabolic right breast nodule but no hypermetabolic lymph nodes and no evidence of metastatic disease.     On 07/03/20, she was seen by Dr. ***** at *****. Given her right breast IDC with axillary LN metastasis, Dr. ***** referred her to medical oncology to discuss neoadjuvant treatment and possibility of ***** clinical trial. She also ordered a ***** from the outside core and requested OSH path slides for review, both of which are pending.    Today, Ms. ***** reports she is feeling ok. She has generalized aches and pains but no focal pain and nothing new for her. She has baseline ***** with fast walking. She works as the rapid response nurse and has mild SOB pushing a hospital bed across the hospital. A TTE two years ago was normal and she thinks the dyspnea is due to her obesity (BMI 29.7). She is interested in pursuing care at ***** to consolidate her medical oncology and surgical oncology care.    ONCOLOGIC HISTORY:  Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer (CMS code) 07/05/2020     10/18/19: Bilateral screening \n mammogram: There is developing asymmetry within the central right breast best. No suspicious masses, *****, or unexplained architectural distortion of the left breast. Incomplete- need additional imaging. ***** 0.  11/11/19: Diagnostic mammogram: Spot compression 3D/tomosynthesis views of the right breast demonstrate a less conspicuous focal asymmetry in the 12:00 o'clock position of the right breast, posterior depth. It does not appear to have discrete margins as one would expect for a mass. Appears most consistent with fibroglandular tissue.  11/11/19: Right breast ultrasound: Targeted US of the right breast fails to confirm any suspicious mass in the area of screening mammographic concern. No axillary lymphadenopathy.     Right breast IDC  05/29/20: Right diagnostic mammo: When compared to prior mammo in 11/11/19 there has been interval development of a suspicious group of pleomorphic calcifications within the 12:00 subareolar position. This is the site of the palpable lump. There is a newly apparent mass at this level that measures approx. 2cm. The anterior margin of the mass appears to be within 1cm of the nipple  05/29/20: Right breast ultrasound: A clinically palpable lump is noted at the 12:00 subareolar position. Targeted sonography reveals an irregular mass measuring 2.3 x 1.4 x 1cm from the nipple. It demonstrates multiple internal hyperechoic structures c/w calcifications on mammography. The anterior inferior margin is within 1cm of the nipple. There is also an irregular hypoechoic mass at the 1:00 o'clock position 5cm from the nipple. It measures 1.0 x 0.9cm. At the 2:30 o'clock positon in the subareolar region there is a hypoechoic mass that measures 0.7x0.5cm. There is mild cortical thickening of an axillary LN that measures up to 3mm.   06/04/20: Right breast ultrasound-guided biopsy:   \u0007 Right breast palpable subareolar mass at 12 o'clock 1 cm from nipple: IDC, grade 2 or 3. Focal ***** present. High-grade \n DCIS component. ER 2% weak, low positive, PR 7% moderate, low positive, ***** 2+, FISH negative - (2.March 09.8=1.4). ***** 36%.   \u0007 Right breast mass at 1:00: Benign, proliferative fibrocystic changes with mild focal usual ductal hyperplasia  \u0007 Right breast mass at 2:30 o'clock: Breast tissue with focal ductal ectasia and occasional minute detached fragment of thickened epithelium suggestive of possible ductal papilloma.   \u0007 Right axillary LN: 0.2mm focus of micrometastatic carcinoma within the lymph node tissue. No extracapsular extension identified.   06/12/20: MRI breast: 2.6 x 1.9 x 2.3cm oval mass within the right upper central breast, anterior depth/***** location compatable with biopsy-proven malignancy. No evidence of skin or nipple invasion. Multiple prominent right level 1 *****, one of which contains a biopsy clip compatible with known LN micrometastasis. Of note, there is an enlarged level ***** ***** ***** *****. ***** ***** *****. Normal left axillary *****.   06/25/20: PET/CT: Hypermetabolic right breast nodule with a peak SUV of 5.1. The nodule is difficult to measure on CT but the size of abnormal PET signal measures 2.4cm. No hypermetabolic lymph nodes. There is a right axillary 0.8cm lymph node containing what is likely a biopsy clip. No e/o metastatic disease.   07/03/20: Seen by Dr. *****. Given right breast IDC with axillary LN metastasis, referred to med onc to discuss neoadjuvant treatment and possibility of ***** clinical trial. Ordered *****. Requested OSH slides for UCSF review.        ROS:  GEN: No fevers, chills, unintentional weight loss, night sweats  HEENT: No vision problems, eye pain, icterus, hearing decreased, sore throat, voice changes, swallowing problems, sinus problems, headache  NECK: No neck mass or pain, swelling  CV: No chest pain, palpitations, murmur, light headed, edema  RESP: No shortness of breath, dyspnea on exertion, cough  GI: No Abdominal pain, nausea, vomiting, \n diarrhea, constipation, rectal bleeding  RENAL: No pain or bleeding with urination  HEME: No bleeding or bruising  MUSC/SKEL: No joint or muscle pain, No back pain  NEURO: No numbness, tingling or weakness  SKIN: No worrisome lesions, moles, rashes  PSYCH: No depression or anxiety    PMHx:  Past Medical History:   Diagnosis Date   \u0007 Breast cancer (CMS code)     Right breast with biopsy proven LN       PSHx:  Past Surgical History:   Procedure Laterality Date   \u0007 CESAREAN SECTION      2014,2003,2001   \u0007 INNER EAR SURGERY      ear ***** surgery       ALL: ***** *****    MEDS:    Current Outpatient Medications:   \u0007  fexofenadine (*****) 180 mg tablet, Take 180 mg by mouth daily PRN , Disp: , Rfl:   \u0007  montelukast (SINGULAIR) 10 mg tablet, Take 10 mg by mouth daily PRN , Disp: , Rfl:     SHx:  Social Documentation          Lives in ***** *****    ***** RN    3 children, one son (age 17) with depression and ADD         Family History   Problem Relation Name Age of Onset   \u0007 Diabetes Mother     \u0007 High blood pressure Mother     \u0007 No Known Problems Sister     \u0007 No Known Problems Brother     \u0007 Mental illness Son       PHYSICAL EXAM:  Vitals not performed as today's visit was conducted via video   ECOG Performance Status: 0 - Asymptomatic  Gen: Well-appearing, no acute distress  HEENT: NCAT, PEERL  Cardiovascular: Not assessed  Pulmonary: Breathing comfortably on room air  GI: Not assessed  Musculoskeletal: No visible edema  Skin: No visible rashes.   Neurologic: AOx3, no focal deficits  Psychiatric: Appropriate affect, mood normal, behavior normal, thought content normal, judgement normal  Breast: Not assessed     LABS:   No results found for: WBC, *****, *****, HGB, *****, HCT, *****, *****, *****, MCV, PLT, *****  No results found for: ALB, ALKP, ALT, AST, TBILI, *****, *****, CL, CO2, *****, CREAT, *****, *****, GLU, GTFC, K, NA, TP    RADIOLOGY:  See oncology timeline above. Reports from ***** ***** ***** are available in ***** \n Everywhere and scanned clinical documents.    PATHOLOGY:  See oncology timeline above. Reports from ***** ***** ***** are available in ***** ***** and scanned clinical documents.      ASSESSMENT/PLAN:  ***** ***** is a 48 y.o. female with a recent diagnosis of right breast IDC which is ER weak positive (2%), PR low positive (7%), ***** neg (IHC 2+, FISH 2.March 09.8=1.4) and ***** 36% with ***** and axillary LN involvement here in consultation with medical oncology to discuss neoadjuvant chemotherapy.      First, we reviewed her pathology and imaging results. She has weakly ER and PR positive, ***** negative disease. She has locally advanced disease with *****-proven LN involvement, but no evidence of distant metastatic disease on PET/CT.     For local control, she will need lumpectomy or mastectomy - we defer to our surgical colleagues about which is the best option for her. She will likely also need post-operative radiation.     We explained that for systemic treatment, we would recommend neoadjuvant chemotherapy prior to surgery given that she has ER and PR low positive disease with LN involvement. We discussed the advantages of offering chemotherapy in the neoadjuvant setting in order to assess response to treatment, and to increase the chances of breast conserving surgery. Outside the context of a clinical trial, we would recommend AC/T. We typically give the taxol first, followed by four cycles of TC. We then explained the option of clinical trial enrollment with the ISPY clinical trial. We explained that some of these arms involve getting taxol with an experimental therapy. We discussed the role of the ***** result as a screening for the ISPY 2 clinical trial. We explained that in the context of this clinical trial, patients receive paclitaxel and or an experimental regimen first, and then proceed with the Adriamycin and Cytoxan. At present, HER-2/neu negative patients are randomized to receive one of the \n following regimens:  1. Control arm: Taxol weekly for 12 weeks, followed  AC every three weeks for 4 cycles   2. Taxol weekly + pembrolizumab (an immunotherapy/checkpoint inhibitor) every 3 weeks for 12 weeks, followed  AC every three weeks for 4 cycles   3. ***** every 3 weeks for x 12 weeks (not with taxol), followed  AC every three weeks for 4 cycles   4. Taxol weekly with oral olaparib (a PARP inhibitor) and durvalumab (an immunotherapy/checkpoint inhibitor) for 12 weeks, followed  AC every three weeks for 4 cycles   5. Taxol weekly for *****-***** (a *****-9 agonist) with weekly Taxol and every 3 week Pembrolizumab for 12 weeks, followed  AC every three weeks for 4 cycles   6. Taxol weekly with ***** (an immunotherapy/checkpoint inhibitor) every 3 weeks for 12 weeks, followed  AC every three weeks for 4 cycles   7.Taxol weekly with ***** (an immunotherapy/checkpoint inhibitor) every 3 weeks and ***** 3767 (***** antibody) for 12 weeks, followed  AC every three weeks for 4 cycles   8. ***** 985 (trastuzumab *****) - ***** ***** targeting antibody-drug conjugate for ***** low, followed  AC every three weeks for 4 cycles    9. Oral paclitaxel plus ***** (an oral PGP inhibitor) plus ***** (an immunotherapy/checkpoint inhibitor) with or without carboplatin followed  AC every three weeks for 4 cycles.     In order to participate in the trial, patients must undergo a baseline core biopsy for research purposes and a baseline protocol specific MRI. During the trial, patients will undergo one additional core biopsy of the breast mass in order to assess the biological changes that have occurred in the cancer in response to the ***** therapy plus chemotherapy. Patients will also undergo additional MRIs during the course of neoadjuvant chemotherapy to assist in assessing response to treatment. We discussed the very ***** trial design and explained that if the patient is randomized to the non-paclitaxel \n containing arm (such as ***** or *****), they can switch back to paclitaxel if not responding or receive it post operatively. In any of the arms, if the patient appears to have progression of her tumor either by physical exam or breast imaging, there is the option of discontinuing the study treatment and either moving on to the AC or switching to paclitaxel.     We reviewed the anticipated side effects and toxicities of chemotherapy including increased risk of infection, hair loss, fatigue, and possibility of ovarian failure. We explained that anthracyclines are associated with a small chance of causing permanent damage to the heart (estimated to be about 1% with 4 cycles of adriamycin and cyclophosphamide) and that ***** are associated with development of neuropathy which is most often transient and rarely permanent.    We also mentioned that given she was ER/PR low positive, we would still recommend 5-10 years of endocrine therapy after surgery. We did not discuss the options in length today, but can do so at a later date.    She asked about whether she could continue to work as an ICU nurse during chemo. We advised her that many patients choose to work during weekly taxol, but it will largely depend on which arm she is randomized to, as some of the experimental arms are likely to be associated with more toxicity. Most patients choose to take off time during AC and then after recovering from chemotherapy.     Plan:  -- ***** order TTE  -- Port placement  -- Chemotherapy teaching session  -- She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending *****.   -- F/u results of genetic testing (done locally last Mon)  -- After surgery, she will be considered for post operative radiation and we will recommend 5-10yrs of adjuvant endocrine therapy     RTC in 1-2 weeks in person to start chemo    Patient seen and discussed with breast oncology attending \n Dr. ***** *****.     ***** *****, MD PGY-5  Hematology/Oncology Fellow    \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT/PLAN:  ***** ***** is a 48 y.o. female with a recent diagnosis of right breast IDC which is ER weak positive (2%), PR low positive (7%), ***** neg (IHC 2+, FISH 2.March 09.8=1.4) and ***** 36% with ***** and axillary LN involvement here in consultation with medical oncology to discuss neoadjuvant chemotherapy.      First, we reviewed her pathology and imaging results. She has weakly ER and PR positive, ***** negative disease. She has locally advanced disease with *****-proven LN involvement, but no evidence of distant metastatic disease on PET/CT.     For local control, she will need lumpectomy or mastectomy - we defer to our surgical colleagues about which is the best option for her. She will likely also need post-operative radiation.     We explained that for systemic treatment, we would recommend neoadjuvant chemotherapy prior to surgery given that she has ER and PR low positive disease with LN involvement. We discussed the advantages of offering chemotherapy in the neoadjuvant setting in order to assess response to treatment, and to increase the chances of breast conserving surgery. Outside the context of a clinical trial, we would recommend AC/T. We typically give the taxol first, followed by four cycles of TC. We then explained the option of clinical trial enrollment with the ISPY clinical trial. We explained that some of these arms involve getting taxol with an experimental therapy. We discussed the role of the ***** result as a screening for the ISPY 2 clinical trial. We explained that in the context of this clinical trial, patients receive paclitaxel and or an experimental regimen first, and then proceed with the Adriamycin and Cytoxan. At present, HER-2/neu negative patients are randomized to receive one of the \n following regimens:  1. Control arm: Taxol weekly for 12 weeks, followed  AC every three weeks for 4 cycles   2. Taxol weekly + pembrolizumab (an immunotherapy/checkpoint inhibitor) every 3 weeks for 12 weeks, followed  AC every three weeks for 4 cycles   3. ***** every 3 weeks for x 12 weeks (not with taxol), followed  AC every three weeks for 4 cycles   4. Taxol weekly with oral olaparib (a PARP inhibitor) and durvalumab (an immunotherapy/checkpoint inhibitor) for 12 weeks, followed  AC every three weeks for 4 cycles   5. Taxol weekly for *****-***** (a *****-9 agonist) with weekly Taxol and every 3 week Pembrolizumab for 12 weeks, followed  AC every three weeks for 4 cycles   6. Taxol weekly with ***** (an immunotherapy/checkpoint inhibitor) every 3 weeks for 12 weeks, followed  AC every three weeks for 4 cycles   7.Taxol weekly with ***** (an immunotherapy/checkpoint inhibitor) every 3 weeks and ***** 3767 (***** antibody) for 12 weeks, followed  AC every three weeks for 4 cycles   8. ***** 985 (trastuzumab *****) - ***** ***** targeting antibody-drug conjugate for ***** low, followed  AC every three weeks for 4 cycles    9. Oral paclitaxel plus ***** (an oral PGP inhibitor) plus ***** (an immunotherapy/checkpoint inhibitor) with or without carboplatin followed  AC every three weeks for 4 cycles.     In order to participate in the trial, patients must undergo a baseline core biopsy for research purposes and a baseline protocol specific MRI. During the trial, patients will undergo one additional core biopsy of the breast mass in order to assess the biological changes that have occurred in the cancer in response to the ***** therapy plus chemotherapy. Patients will also undergo additional MRIs during the course of neoadjuvant chemotherapy to assist in assessing response to treatment. We discussed the very ***** trial design and explained that if the patient is randomized to the non-paclitaxel \n containing arm (such as ***** or *****), they can switch back to paclitaxel if not responding or receive it post operatively. In any of the arms, if the patient appears to have progression of her tumor either by physical exam or breast imaging, there is the option of discontinuing the study treatment and either moving on to the AC or switching to paclitaxel.     We reviewed the anticipated side effects and toxicities of chemotherapy including increased risk of infection, hair loss, fatigue, and possibility of ovarian failure. We explained that anthracyclines are associated with a small chance of causing permanent damage to the heart (estimated to be about 1% with 4 cycles of adriamycin and cyclophosphamide) and that ***** are associated with development of neuropathy which is most often transient and rarely permanent.    We also mentioned that given she was ER/PR low positive, we would still recommend 5-10 years of endocrine therapy after surgery. We did not discuss the options in length today, but can do so at a later date.    She asked about whether she could continue to work as an ICU nurse during chemo. We advised her that many patients choose to work during weekly taxol, but it will largely depend on which arm she is randomized to, as some of the experimental arms are likely to be associated with more toxicity. Most patients choose to take off time during AC and then after recovering from chemotherapy.     Plan:  -- ***** order TTE  -- Port placement  -- Chemotherapy teaching session  -- She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending *****.   -- F/u results of genetic testing (done locally last Mon)  -- After surgery, she will be considered for post operative radiation and we will recommend 5-10yrs of adjuvant endocrine therapy     RTC in 1-2 weeks in person to start chemo    Patient seen and discussed with breast oncology attending \n Dr. ***** *****.     ***** *****, MD PGY-5  Hematology/Oncology Fellow    \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "A 48-year-old female with a recent diagnosis of right breast invasive ductal carcinoma (IDC) with axillary lymph node involvement, ER weak positive (2%), PR low positive (7%), HER2 negative (IHC 2+, FISH negative), and Ki-67 36%. The purpose of this visit is to discuss neoadjuvant chemotherapy and the possibility of enrolling in a clinical trial."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER weak positive (2%), PR low positive (7%), HER2 neg (IHC 2+, FISH 2.March 09.8=1.4) invasive ductal carcinoma with high-grade DCIS component",
+    "Stage_of_Cancer": "Locally advanced with axillary LN involvement, approximately Stage II-III",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm mass at 1:00 o'clock position, and a 0.7 x 0.5 cm mass at 2:30 position. Focal [REDACTED] and high-grade DCIS component present. ER 2% weak positive, PR 7% low positive, [REDACTED] 2+, FISH negative (2.March 09.8=1.4), [REDACTED]  36%. Right axillary LN with 0.2mm focus of micrometastatic carcinoma. MRI shows a 2.6 x 1.9 x 2.3 cm mass in the right upper central breast with multiple prominent right level 1 axillary lymph nodes. PET/CT shows a hypermetabolic right breast nodule with a peak SUV of  5.1 and no hypermetabolic lymph nodes. No evidence of distant metastatic disease. No palpable masses, skin changes, or lymphadenopathy noted on physical exam."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {
+    "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+      {
+        "type": "chemotherapy",
+        "summary": "neoadjuvant chemotherapy, AC/T regimen (Taxol first, followed by four cycles of TC). Option of clinical trial enrollment with the ISPY clinical trial.",
+        "Short_term_side_effects_discussed": "increased risk of infection, hair loss, fatigue",
+        "Long_term_side_effects_discussed": "possibility of ovarian failure, small chance of causing permanent damage to the heart, development of neuropathy"
+      },
+      {
+        "type": "hormonal therapy",
+        "summary": "5-10 years of endocrine therapy after surgery",
+        "Short_term_side_effects_discussed": "",
+        "Long_term_side_effects_discussed": ""
+      },
+      {
+        "type": "radiotherapy",
+        "summary": "post-operative radiation",
+        "Short_term_side_effects_discussed": "",
+        "Long_term_side_effects_discussed": ""
+      }
+    ]
+  },
+  "Medication_Plan": {
+    "medication_plan": "Neoadjuvant chemotherapy with options including AC/T (doxorubicin and cyclophosphamide followed by paclitaxel) or enrollment in the ISPY clinical trial with various regimens such as Taxol weekly for 12 weeks followed by AC every three weeks for 4 cycles, or Taxol with pembrolizumab, olaparib, durvalumab, or other experimental therapies. Post-operative adjuvant endocrine therapy for 5-10 years will be recommended after surgery."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Plan to start neoadjuvant chemotherapy with options including AC/T (Taxol first, followed by four cycles of TC) or enrollment in the ISPY clinical trial with various regimens including Taxol weekly with or without experimental therapies, followed by AC every three weeks for 4 cycles. After surgery, she will be considered for post-operative radiation and 5-10 years of adjuvant endocrine therapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "She will likely also need post-operative radiation."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "plan for port placement, research core biopsy, lumpectomy or mastectomy"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "will need research core biopsy, research breast MRI"
+  },
+  "Lab_Plan": {
+    "lab_plan": "She will need research core biopsy, labs. F/u pending genetic testing results."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "F/u results of genetic testing (done locally last Mon)"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "RTC in 1-2 weeks in person to start chemo"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 1-2 weeks to start chemo"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "48 y.o. female with a recent diagnosis of right breast IDC"
+  ],
+  "second opinion": [
+    "Plan:  -- [REDACTED] order TTE  -- Port placement  -- Chemotherapy teaching session  -- She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending [REDACTED]."
+  ],
+  "in-person": [
+    "RTC in 1-2 weeks in person to start chemo"
+  ],
+  "summary": [
+    "48 y.o. female with a recent diagnosis of right breast IDC which is ER weak positive (2%), PR low positive (7%)"
+  ],
+  "Type_of_Cancer": [
+    "right breast IDC which is ER weak positive (2%), PR low positive (7%), [REDACTED] neg (IHC 2+, FISH 2.March 09.8=1.4)"
+  ],
+  "Stage_of_Cancer": [
+    "she has locally advanced disease with [REDACTED]-proven LN involvement, but no evidence of distant metastatic disease on PET/CT."
+  ],
+  "Metastasis": [
+    "no evidence of distant metastatic disease on PET/CT."
+  ],
+  "Distant Metastasis": [
+    "but no evidence of distant metastatic disease on PET/CT."
+  ],
+  "findings": [
+    "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm mass at 1:00 o'clock position, and a 0.7 x 0.5 cm mass at 2:30 position."
+  ],
+  "goals_of_treatment": [
+    "we would recommend neoadjuvant chemotherapy prior to surgery given that she has ER and PR low positive disease with LN involvement."
+  ],
+  "response_assessment": [
+    "Not yet on treatment — no response to assess."
+  ],
+  "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+    "we would recommend neoadjuvant chemotherapy prior to surgery given that she has ER and PR low positive disease with LN involvement. We discussed the advantages of offering chemotherapy in the neoadjuvant setting in order to assess response to treatment, and to increase the chances of breast conserving surgery. Outside the context of a clinical trial, we would recommend AC/T. We typically give the taxol first, followed by four cycles of TC."
+  ],
+  "medication_plan": [
+    "We would recommend neoadjuvant chemotherapy prior to surgery given that she has ER and PR low positive disease with LN involvement."
+  ],
+  "therapy_plan": [
+    "Plan:  -- [REDACTED] order TTE  -- Port placement  -- Chemotherapy teaching session  -- She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending [REDACTED]."
+  ],
+  "radiotherapy_plan": [
+    "She will likely also need post-operative radiation."
+  ],
+  "procedure_plan": [
+    "-- Port placement  -- She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending [REDACTED].   -- F/u results of genetic testing (done locally last Mon)  -- After surgery, she will be considered for post operative radiation and we will recommend 5-10yrs of adjuvant endocrine therapy"
+  ],
+  "imaging_plan": [
+    "will need research core biopsy, research breast MRI"
+  ],
+  "lab_plan": [
+    "She is interested in screening for ISPY; then will need research core biopsy, research breast MRI, labs. F/u pending [REDACTED]."
+  ],
+  "genetic_testing_plan": [
+    "F/u results of genetic testing (done locally last Mon)"
+  ],
+  "follow up": [
+    "RTC in 1-2 weeks in person to start chemo"
+  ],
+  "Next clinic visit": [
+    "RTC in 1-2 weeks in person to start chemo"
+  ]
+}
