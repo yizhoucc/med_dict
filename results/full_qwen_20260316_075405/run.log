@@ -288,3 +288,12 @@ Processing row 1 (2/100)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 30.8s
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer is progressing. Evidence includes: PET/CT 01/27/19 showing increased number and extent of hypermetabolic metastases including osseous, hepatic, nodal
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 34.5s
+  Total extraction: 202.9s
