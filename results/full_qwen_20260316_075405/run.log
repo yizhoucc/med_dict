@@ -1250,3 +1250,46 @@ Processing row 5 (6/100)...
   Plan extraction prompts: 85.3s
     [POST-THERAPY] removed non-therapy: ['Gabapentin is prescribed as needed.']
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 19/19 fields sourced (25.5s)
+  Row 5 total: 251.1s
+  Row 5 saved to progress
+
+Processing row 6 (7/100)...
+  Injected 1 term definitions: ['lumpectomy']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1271 chars)
+  A/P extraction: 17.7s
+    Reason_for_Visit: 15.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient with metastatic breast cancer (MBC) initially diagnosed in 1998 with Stage II T2N1 left-sided in
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.7s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to left supraclavicular node and m
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
