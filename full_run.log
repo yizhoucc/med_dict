@@ -2154,3 +2154,175 @@ Processing row 10 (11/100)...
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
     Lab_Results: 40.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTED]), MCV 88, MCH 28.6, MCHC 32.5, Platelet 221, Neutrophil Abs Cnt 3.49, Lymphocyte Abs Cnt 1.47, Monocyte Abs Cnt 0.49, E
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE" -> "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE"
+    Clinical_Findings: 18.3s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with bone metastases. Imaging findings include PET/CT showing increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, p
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s
+      [EXTRACT] raw={
+"current_meds": "Faslodex, Denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.0s [improved]
+      [EXTRACT] raw={
+"recent_changes": "Faslodex + Denosumab",
+"supportive_meds": "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate, levothyroxine, lovastatin, metFORMIN, 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin" -> "hydrocodone-acetaminophen"
+      [G3-IMPROVE] recent_changes: "Faslodex + Denosumab" -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 99.3s
+  Cross-context injected (773 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, pelvis, and right femur ordered due to worsening numbness in right leg. Ima
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "PET/CT showed increased metastatic activity and size of left mandibular mass. MR" -> "PET/CT showed increased metastatic activity and size of left mandibular mass. Im"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 13.6s
+  Total extraction: 112.9s
+    Medication_Plan_chatgpt: 40.5s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue on Faslodex",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    },
+    "bone therapy": {
+    
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'infection management', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'infection management', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] infection management: "{'summary': 'Having thrush, Mycelex [REDACTED] qid, [REDACTED]-Mycelex [REDACTED" -> "{'summary': 'Having thrush, Mycelex [REDACTED] qid, [REDACTED]-Mycelex [REDACTED"
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'infection management'}
+    Medication_Plan: 13.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on Faslodex and Denosumab. [REDACTED]-Mycelex [REDACTED] 5 times a day for 14 days to help with thrush and salt and soda rinses."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.0s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on Faslodex and Denosumab."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on Faslodex and Denosumab." -> "Continue on Faslodex and Denosumab. Order PETCT to evaluate Femur and to toes. C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "S/p xrt to jaw improved pain with residual numbness"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "S/p xrt to jaw improved pain with residual numbness" -> "None"
+    Procedure_Plan: 4.4s
+      [EXTRACT] raw={
+    "procedure_plan": "will order PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['will order PETCT to toes']
+    Imaging_Plan: 7.2s
+      [EXTRACT] raw={
+    "imaging_plan": "will order PETCT to evaluate Femur and to toes due to worsening numbness in right leg."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 4.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] follow up: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['follow up', 'Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] follow up: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
