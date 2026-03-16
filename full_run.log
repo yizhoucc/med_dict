@@ -6450,3 +6450,159 @@ Processing row 30 (31/100)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 11.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "GI referral, Oral medicine referral",
+"Others": "Physical therapy referral, Social work referral",
+"follow up": "Follow-up in 4 weeks prior to 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Physical therapy referral, Social work referral" -> "Physical therapy referral"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 5.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 79.1s
+    [POST-THERAPY] removed non-therapy: ['Need to do Brain MRI to assess region of increased', 'Obtain MRI pelvis to evaluate hip pain.']
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bones, liver, and possibly brain)'
+  [ATTRIBUTION] 19/20 fields sourced (24.7s)
+  Row 30 total: 248.0s
+  Row 30 saved to progress
+
+Processing row 31 (32/100)...
+  Injected 2 term definitions: ['estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (946 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.0s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "82-year-old patient with metastatic breast cancer to the lymph nodes, previously treated with a left lump
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 20.0s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+"Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to the lymph nodes of the left neck, c
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L (from 05/18/2016)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein 3.1 mg/L" -> "Sedimentation Rate (MB) 27 mm/h, C-Reactive Protein  3.1 mg/"
+    Clinical_Findings: 14.4s
+      [EXTRACT] raw={
+"findings": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with brown fat. N
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.1s
+      [EXTRACT] raw={
+"current_meds": "exemestane, trastuzumab, pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped [REDACTED] due to diarrhea.",
+"supportive_meds": "loperamide (IMODIUM) 2 mg capsule, Take 2 mg by mouth 4 (four) times daily as needed for Diarrhea"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] loperamide (IMODIUM) 2 mg capsule, Take 2 mg by mouth 4 (four) times daily as needed for Diarrhea -> loperamide (IMODIUM) 2 mg capsule
+  Phase 1 extraction (6 prompts): 76.8s
+  Cross-context injected (758 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.7s
+      [EXTRACT] raw={
+"response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET/CT done in June 2019. Decreased prominence of uptake in the head and neck region consistent with b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 15.1s
+  Total extraction: 91.9s
+    Medication_Plan_chatgpt: 36.0s [improved, faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Currently on herceptin. Recently dropped [REDACTED] due to diarrhea, which has resolved.",
+        "Short term side_effects_discussed": "Diarrhea",
+        
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Currently on herceptin. Recently dropped [REDACTED] due to diarrhea" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp"
+      [G4-FAITH] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep"
+      [G5-TEMPORAL] hormonal_therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': '', 'Short_term_side_effects_discussed': '', 'Long_term_side_effects"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discussing addition of [REDACTED] in the future.', 'Short term side" -> ""
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe" -> "{'summary': 'Recently dropped [REDACTED] due to diarrhea, which has resolved.', "

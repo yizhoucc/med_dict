@@ -6588,3 +6588,129 @@ Processing row 31 (32/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 15.1s
   Total extraction: 91.9s
+    Medication_Plan_chatgpt: 36.0s [improved, faith-restored-2keys, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Currently on herceptin. Recently dropped [REDACTED] due to diarrhea, which has resolved.",
+        "Short term side_effects_discussed": "Diarrhea",
+        
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'hormonal therapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Currently on herceptin. Recently dropped [REDACTED] due to diarrhea" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe"
+      [G3-IMPROVE] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp"
+      [G4-FAITH] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep" -> "{'summary': 'S/p TCH chemotherapy x 6 and maintenance hercep"
+      [G5-TEMPORAL] hormonal_therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> "{'summary': '', 'Short_term_side_effects_discussed': '', 'Long_term_side_effects"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Discussing addition of [REDACTED] in the future.', 'Short term side" -> ""
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'S/p TCH chemotherapy x 6 and maintenance herceptin. Recently droppe" -> "{'summary': 'Recently dropped [REDACTED] due to diarrhea, which has resolved.', "
+      [G5-TEMPORAL] hormonal therapy: "{'summary': 'Previously completed adjuvant tamoxifen followed by [REDACTED] comp" -> ""
+      [POST-KEYS] stripped: {'chemotherapy', 'hormonal_therapy', 'other_treatment'}
+    Medication_Plan: 7.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continuing herceptin. Recently dropped [REDACTED] due to diarrhea, which has resolved."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.0s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on herceptin and [REDACTED]. Recently dropped [REDACTED] due to diarrhea, which has resolved. Will continue herceptin."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Currently on herceptin and [REDACTED]. Recently dropped [REDACTED] due to diarrh" -> "Currently on herceptin. Recently dropped [REDACTED] due to diarrhea, which has r"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Exercise counseling referral",
+"follow up": "RTC in 3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "nutrition consult for weight loss"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.8s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 and 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 3 and 6 weeks" -> "in-person: 3 and 6 weeks for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 77.7s
+    [POST-THERAPY] removed non-therapy: ['Recently dropped [REDACTED] due to diarrhea, which']
+    [POST-ADV] patched from full note: ['Full code', 'Living will on file']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to the lymph nodes of the left neck, chest, abdomen and pelvis, and left adnexal lesion)'
