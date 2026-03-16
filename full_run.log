@@ -644,3 +644,170 @@ Processing row 3 (4/100)...
 "in-person": "in-person",
 "summary": "The patient is a 75-year-old female with ER+/PR+/HER2- left breast invasive ductal carcinoma. She underwent
       [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 24.0s
+      [EXTRACT] raw={
+"findings": "The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. Her leg, upper back, and arm pain have improved after completing physical therapy. The
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+"current_meds": "Letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.3s [improved]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium carbonate, cholecalciferol, vitamin D3"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium carbonate, cholecalciferol, vitamin D3" -> "letrozole"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 66.1s
+  Cross-context injected (877 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 7.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The patient is without any evidence of disease recurrence on imaging, exam, and review of systems. She is currently on Letrozole since 12/02/2016."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient is without any evidence of disease recurrence on imaging, exam, and " -> "The patient is without any evidence of disease recurrence on imaging, exam, and "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 10.7s
+  Total extraction: 76.8s
+    Medication_Plan_chatgpt: 51.9s [improved, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient will continue to take Letrozole 2.5 mg daily.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed":
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G3-IMPROVE] bone therapy: "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat" -> "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat"
+      [G4-FAITH] REJECTED (no key overlap), kept original
+      [G5-TEMPORAL] other treatment: "{'summary': 'The patient can consider taking OTC Magnesium supplement for occasi" -> "{'summary': 'The patient can consider taking OTC Magnesium supplement for occasi"
+      [G5-TEMPORAL] bone therapy: "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat" -> "{'summary': "The patient is currently on [REDACTED] for osteoporosis. If the pat"
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment'}
+    Medication_Plan: 15.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Consider taking OTC Magnesium supplement for occasional muscle cramping. Continue weight bearing 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Con" -> "Continue Letrozole 2.5 mg daily. Continue calcium and Vitamin D supplements. Con"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.0s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will continue to take Letrozole 2.5 mg daily. If the patient's BMD falls below -2.5, she will need to see a dentist, then we could start her on Prolia 60 mg SQ every
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.8s
+      [EXTRACT] raw={
+    "imaging_plan": "annual right breast mammogram next due July 2019, DEXA in 1 year to assess change, due July 2019"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Social work referral",
+"follow up": "Follow up in 6 months or sooner if she has new or worsening symptoms."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
