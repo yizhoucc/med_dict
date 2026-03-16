@@ -17726,3 +17726,12 @@ Processing row 84 (85/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 26.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing on treatment. Evidence includes new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows a
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 30.4s
+  Total extraction: 143.0s
