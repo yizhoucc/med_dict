@@ -82,8 +82,10 @@ Below is a clinical note and {n_fields} extracted fields. For each field, find 1
 
 Rules:
 - Quote the note EXACTLY. Do not paraphrase.
+- MAXIMUM 25 words per quote. Be concise — just the key phrase.
 - For INFERRED values (e.g. "palliative", "yes"), quote the inference basis.
 - You MUST provide a quote for EVERY field listed. Do not skip any.
+- Use the EXACT field names as JSON keys (preserve spaces, capitalization).
 - Return ONLY a JSON object. No markdown, no explanation.
 
 Note:
@@ -225,18 +227,26 @@ def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
             print(f"  Raw ({len(raw_output)} chars): {raw_output[:500]}", file=sys.stderr)
             continue
 
-        # Map results: handle both field name keys and numbered keys
+        # Build normalized key lookup (spaces/underscores/case insensitive)
+        norm_map = {}
+        for bk in batch:
+            norm_map[bk.lower().replace(' ', '_').replace('-', '_')] = bk
+
+        # Map results: handle field names, normalized names, or numbered keys
         for key, quote in result.items():
-            # try field name directly
             if key in batch:
                 field_name = key
             else:
-                # try numbered key -> field name mapping
-                try:
-                    idx = int(key) - 1
-                    field_name = list(batch.keys())[idx]
-                except (ValueError, IndexError):
-                    continue
+                norm_key = key.lower().replace(' ', '_').replace('-', '_')
+                if norm_key in norm_map:
+                    field_name = norm_map[norm_key]
+                else:
+                    # try numbered key -> field name
+                    try:
+                        idx = int(key) - 1
+                        field_name = list(batch.keys())[idx]
+                    except (ValueError, IndexError):
+                        continue
 
             if isinstance(quote, list):
                 valid = [q for q in quote if isinstance(q, str) and len(q) > 5]
