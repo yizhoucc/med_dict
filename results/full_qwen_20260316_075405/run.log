@@ -18304,3 +18304,63 @@ Processing row 87 (88/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 28.8s
+      [EXTRACT] raw={
+"findings": "Patient has a history of Stage III left-sided breast cancer with two tumors measuring 4.0 and 2.6 cm, with 23 lymph nodes involved. The primary tumor was reported as weakly positive for
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.8s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "capecitabine (XELODA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "capecitabine (XELODA)" -> "capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week off -> capecitabine (XELODA) 500 mg tablet
+    Treatment_Changes: 2.7s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 75.6s
+  Cross-context injected (1151 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 81.6s
+    Medication_Plan_chatgpt: 34.0s [improved, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Currently on xeloda. If stable clinically after 3 months of therapy, will restage. If progression on xeloda, will consider clinical trials using immunothera
+      [G1-FORMAT] ok, keys=['chemotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'other treatment']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Currently on xeloda. If stable clinically after 3 months of therapy" -> "{'summary': 'Received 4 cycles of gemzar with carboplatin in the adjuvant settin"
+      [G3-IMPROVE] other treatment: "{'summary': 'Discussed clinical trials using immunotherapy or using immunotherap" -> "{'summary': 'Discussed clinical trials using immunotherapy or using immunotherap"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Received 4 cycles of gemzar with carboplatin in the adjuvant settin" -> "{'summary': 'Currently on xeloda. If stable clinically after 3 months of therapy"
+      [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
