@@ -16437,3 +16437,161 @@ Processing row 78 (79/100)...
 "Metastasis": "
       [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "Breast cancer metastasized to multiple sites"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 20.1s
+      [EXTRACT] raw={
+"lab_summary": "CBC: WBC Count 7.4, RBC Count 4.24, Hemoglobin 12.9, Hematocrit 39.0, MCV 92, MCH 30.5, MCHC 33.2, Platelet Count 288; Platelet Count 281; PT 13.2, Int'l Normaliz Ratio 1.0; Activate
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 14.9s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with rising tumor markers. No recent scans due to access issues. Pulmonary embolism diagnosed, stable INR 2.1. Pleural effusion present, no recent t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.5s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "denosumab (XGEVA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "denosumab (XGEVA)" -> ""
+      [G4-FAITH] current_meds: "" -> "BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, le"
+      [POST-MEDS] BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, levothyroxine, LORazepam, methadone, SENNOSIDES, warfarin -> denosumab
+    Treatment_Changes: 14.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped all treatment last week due to rising tumor markers and increased bone pain.",
+"supportive_meds": "methadone 10 mg three times a day, docusate sodium 250 mg twice a day, d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days, warfarin 3 mg daily -> methadone 10 mg three times a day, docusate sodium 250 mg twice a day, denosumab 120 mg every 28 days
+  Phase 1 extraction (6 prompts): 81.6s
+  Cross-context injected (710 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.2s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is not responding to treatment. Tumor marker is rising. Currently stopped all treatment last week because of these two issues."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is not responding to treatment. Tumor marker is rising. Currently sto" -> "The cancer is not responding to treatment. Tumor marker is rising."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 8.5s
+  Total extraction: 90.1s
+    Medication_Plan_chatgpt: 18.6s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "pain medication": {
+        "summary": "Continue methadone 10mg q8h. For breakthrough pain, take 5mg oxycodone. Plan to see pain management specialist.",
+        "Short term side_effects_discus
+      [G1-FORMAT] ok, keys=['pain medication', 'neuropathy', 'other treatment']
+      [G2-SCHEMA] fixed: ['pain medication', 'neuropathy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "['Consider cymbalta/lyrica for diabetic neuropathic pain', 'Needs to switch acce" -> "[]"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Medication_Plan: 10.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue methadone 10mg q8h, take 5mg oxycodone for breakthrough pain, consider cymbalta/lyrica for diabetic neuropathic pain."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Needs restaging previously used PET/CT continue. Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]. Dr [REDACTED] 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 10.2s
+      [EXTRACT] raw={
+    "procedure_plan": "Needs to switch access to a power port, Get thoracentesis locally with markers, Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for E
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 7.6s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Needs restaging previously used PET/CT continue. Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Needs restaging previously used PET/CT continue. Get diagnostic markers from act" -> "Needs restaging with previously used PET/CT. Get thoracentesis for diagnostic ma"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 6.5s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Get diagnostic markers from active cancer site preferably get thoracentesis and use fluid for ER, and [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Referral: 9.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Pain management",
+"Others": "None",
+"follow up": "RTC prn with scan and treatment records"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after scan and treatment records are available"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after scan and treatment records are available" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']

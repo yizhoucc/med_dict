@@ -16564,3 +16564,66 @@ Processing row 78 (79/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Referral: 9.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Pain management",
+"Others": "None",
+"follow up": "RTC prn with scan and treatment records"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after scan and treatment records are available"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after scan and treatment records are available" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 87.9s
+    [POST-THERAPY] cleared (no oncology drugs found): Needs restaging previously used PET/CT continue. Get diagnostic markers from act
+  [ATTRIBUTION] 20/22 fields sourced (26.3s)
+  Row 78 total: 204.2s
+  Row 78 saved to progress
+
+Processing row 79 (80/100)...
+  Injected 3 term definitions: ['mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1726 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 53-year-old female with a local recurrence of invasive ductal carcinoma (IDC) 7 years following mastect
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
