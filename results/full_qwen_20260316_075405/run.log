@@ -4446,3 +4446,10 @@ Processing row 21 (22/100)...
       [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 85.4s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV [REDACTED], MCH 36.1, MCHC 32.8, Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
