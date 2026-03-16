@@ -11877,3 +11877,81 @@ Processing row 56 (57/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 5.5s
   Total extraction: 56.3s
+    Medication_Plan_chatgpt: 12.2s [improved, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "radiotherapy": {
+        "summary": "Recommended to receive XRT, which the patient is scheduled to receive.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_di
+      [G1-FORMAT] ok, keys=['radiotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['radiotherapy']
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Recommended to receive XRT, which the patient is scheduled to recei" -> "{'summary': 'Recommended to receive XRT, which the patient is scheduled to recei"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy: "{'summary': 'Recommended to receive XRT, which the patient is scheduled to recei" -> "{'summary': 'Recommended to receive XRT, which the patient is scheduled to recei"
+      [POST-KEYS] stripped: {'radiotherapy'}
+    Medication_Plan: 11.5s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medications, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans are mentioned in the provided note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medications, changes to current medications, supportive medic" -> "The patient received TCH+P (docetaxel, carboplatin, and pertuzumab) as neoadjuva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "The patient received TCH+P (docetaxel, carboplatin, and pertuzumab) as neoadjuva" -> "None"
+    Therapy_plan: 16.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Rec XRT, which pt is scheduled to receive. Rec additional path review at [REDACTED] given critical aspect of [REDACTED] status question. If [REDACTED], although unlikely, pt sho
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rec XRT, which pt is scheduled to receive"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 5.5s
+      [EXTRACT] raw={
+    "procedure_plan": "Rec XRT, which pt is scheduled to receive"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Rec XRT']
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 3.8s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Rec genetic counseling and testing"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
