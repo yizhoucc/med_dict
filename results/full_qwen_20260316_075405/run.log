@@ -14406,3 +14406,40 @@ Processing row 68 (69/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.1s
   Total extraction: 101.8s
+    Medication_Plan_chatgpt: 29.2s [schema-fixed, improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor as a cornerstone of her systemic cancer 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy', 'other treatment']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': 'The patient will receive at minimum 5, but more likely 10 years of "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'The patient will receive at minimum 5, but more" -> "{'summary': 'The patient will receive at minimum 5, but more"
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'other treatment'}
+    Medication_Plan: 14.2s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of ne
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.1s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will receive at minimum 5, but more likely 10 years of hormonal therapy with an aromatase inhibitor. If her disease is low risk, she may consider 4-6 months of neoad
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
