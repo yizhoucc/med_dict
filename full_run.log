@@ -6279,3 +6279,174 @@ Processing row 29 (30/100)...
       [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
       [G4-PROTECT] Nutrition: restored safe negative "None"
       [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 6.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after the weekend to decide whether she plans to proceed with treatment at [REDACTED] or elsewhere"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 178.4s
+    [POST-THERAPY] removed non-therapy: ['The patient will start her treatment within 2 to 3']
+  [ATTRIBUTION] 17/18 fields sourced (36.9s)
+  Row 29 total: 357.9s
+  Row 29 saved to progress
+
+Processing row 30 (31/100)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1619 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 9.9s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient presents with metastatic breast cancer (CMS code) for a follow-up visit."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.5s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- metastatic breast cancer",
+"Stage_of_Cancer": "Originally Stage not mentioned in note, now metastatic (Stage IV)",
+"Distant_Metastasis": "Yes, to bones, liver, and p
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 60.7s [improved]
+      [EXTRACT] raw={
+"findings": "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG avid hepatic metastases have increased in size and FDG uptake. Skeletal metastases have increased in FDG 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG " -> "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG "
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, [REDA"
+      [POST-MEDS] ascorbic acid, vitamin C, cholecalciferol, vitamin D3, [REDACTED] [REDACTED] ORAL, LORazepam (ATIVAN), magnesium, medical cannabis, ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 11.0s
+      [EXTRACT] raw={
+"recent_changes": "Scheduled to start Doxil on 07/01/2021.",
+"supportive_meds": "ondansetron (Zofran), prochlorperazine (Compazine)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 110.9s
+  Cross-context injected (1767 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 29.3s
+      [EXTRACT] raw={
+"response_assessment": "Progression of metastatic disease noted on April 2021 PET/CT scan. Numerous FDG avid hepatic metastases have increased in size and FDG uptake. Skeletal metastases have increa
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 33.2s
+  Total extraction: 144.1s
+    Medication_Plan_chatgpt: 15.1s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Starting Doxil on 07/01/2021, IV every 28 days.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+    }
+}
+      [G1-FORMAT] ok, keys=['chemotherapy']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy']
+      [G3-IMPROVE] chemotherapy: "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days.', 'Short term side_" -> "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days.', 'Short_term_side_"
+      [G4-FAITH] chemotherapy: "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days." -> "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days."
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days.', 'Short_term_side_" -> "{'summary': 'Starting Doxil on 07/01/2021, IV every 28 days.', 'Short_term_side_"
+      [POST-KEYS] stripped: {'chemotherapy'}
+    Medication_Plan: 8.1s
+      [EXTRACT] raw={
+    "medication_plan": "Cycle 1 Doxil IV every 28 days starting on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.9s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Start Doxil IV every 28 days beginning on 07/01/2021."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start Doxil IV every 28 days beginning on 07/01/2021." -> "Start Doxil IV every 28 days beginning on 07/01/2021. Need to do Brain MRI to as"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 13.0s
+      [EXTRACT] raw={
+    "imaging_plan": "Brain MRI to assess region of increased focal uptake in the right frontal lobe seen on April 2021 PETCT. MRI pelvis to evaluate hip pain. PETCT scan after 3 cycles of Doxil."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
