@@ -14772,3 +14772,52 @@ Processing row 70 (71/100)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 31.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Invasive ductal carcinoma, grade 3, 1.1cm, ER positive (strong, 90-100%), PR positive (moderate, 1-10%), HER2 negative (IHC 1+). Left axillary LN core biopsy showed metastatic adenocarc
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Invasive ductal carcinoma, grade 3, 1.1cm, ER positive (strong, 90-100%), PR pos" -> "Invasive ductal carcinoma, grade 3, 1.1cm, ER positive (strong, 90-100%), PR pos"
+      [G4-FAITH] findings: "Invasive ductal carcinoma, grade 3, 1.1cm, ER positive (stro" -> "Invasive ductal carcinoma, grade 3, 1.1cm, ER positive (stro"
+    Current_Medications: 4.0s
+      [EXTRACT] raw={
+"current_meds": "neo-adjuvant AC/taxol"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "Zofran, GCSF"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Zofran, GCSF -> Zofran
+  Phase 1 extraction (6 prompts): 66.6s
+  Cross-context injected (943 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 5.8s
+  Total extraction: 72.4s
