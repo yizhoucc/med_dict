@@ -5648,3 +5648,142 @@ Processing row 26 (27/100)...
       [G4-FAITH] Specialty: "None" -> ""
       [G4-FAITH] Genetics: "None" -> ""
       [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: if pain worsens"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 81.8s
+    [POST-THERAPY] removed non-therapy: ['Reassess lower back pain at two weeks and consider', 'Patient to rtc if pain worsens.', 'Obtain UA and CBC with platelets.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to bone'
+  [ATTRIBUTION] 20/20 fields sourced (18.5s)
+  Row 26 total: 179.6s
+  Row 26 saved to progress
+
+Processing row 27 (28/100)...
+  Injected 4 term definitions: ['aromatase inhibitor', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "60 y.o. patient with a recent diagnosis of early stage breast cancer, specifically a clinical stage I HR+
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC of the right breast",
+  "Stage_of_Cancer": "Stage I",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 33.5s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 4.3, Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217 (from 08/03/2021); Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 34.1s
+      [EXTRACT] raw={
+"findings": "Pathology results from right lumpectomy: 0.9 cm grade 1 IDC, no lymphovascular invasion, margins negative, no DCIS, 0/3 LN+. Imaging findings: MRI in January 2022 showed a mass (0.9 x 0
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.3s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen, amLODIPine, artificial tears, ascorbic acid, "
+      [POST-MEDS] acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC MULTIVITAMINS, biotin, busPIRone, calcium citrate-vitamin D, diclofenac, docusate sodium, DULoxetine, ELDERBERRY, fluticasone propionate, gabapentin, lamoTRIgine, LORazepam, losartan, lurasidone, omeprazole, prazosin, pregabalin, rosuvastatin, TURMERIC, UNABLE TO FIND, zinc gluconate -> 
+    Treatment_Changes: 7.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium citrate-vitamin D, DULoxetine (CYMBALTA), pregabalin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] calcium citrate-vitamin D, DULoxetine (CYMBALTA), pregabalin -> 
+  Phase 1 extraction (6 prompts): 112.3s
+  Cross-context injected (889 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 118.6s
+    Medication_Plan_chatgpt: 49.0s [improved, faith-trimmed, temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor. Will start after radiation course is complete.",
+        "Short term side_effects_discusse
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] other treatment: "{'summary': 'DEXA to assess current bone health. Aim to resume daily aerobic act" -> "{'summary': 'DEXA to assess current bone health. Aim to resume daily aerobic act"
+      [G3-IMPROVE] bone therapy: "{'summary': 'Take calcium and vitamin D to improve bone health.', 'Short term si" -> "{'summary': 'Take calcium and vitamin D to improve bone health.', 'Short term si"
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Proceed with radiation oncology consultation; she will have radiati" -> "{'summary': 'Proceed with radiation oncology consultation; she will have radiati"
+      [G4-FAITH] bone therapy: "{'summary': 'Take calcium and vitamin D to improve bone heal" -> "{'summary': 'Take calcium and vitamin D to improve bone heal"
+      [G5-TEMPORAL] other treatment: "{'summary': 'DEXA to assess current bone health. Aim to resume daily aerobic act" -> "{'summary': 'DEXA to assess current bone health. Aim to resume daily aerobic act"
+      [G5-TEMPORAL] bone therapy: "{'summary': 'Take calcium and vitamin D to improve bone health.', 'Short term_si" -> "{'summary': 'Take calcium and vitamin D to improve bone health.'}"
+      [G5-TEMPORAL] radiotherapy: "{'summary': 'Proceed with radiation oncology consultation; she will have radiati" -> "{'summary': 'Proceed with radiation oncology consultation; she will have radiati"
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'radiotherapy'}
+    Medication_Plan: 7.9s
