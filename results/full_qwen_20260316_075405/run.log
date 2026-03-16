@@ -17138,3 +17138,56 @@ Processing row 81 (82/100)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+    Medication_Plan: 28.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue current medications including acetaminophen 1000 mg by mouth every 8 hours, ibuprofen 600 mg by mouth every 8 hours as needed for pain or fever, hydrochlorothiazide 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence. Due to her low risk, I do not recommend chemotherapy. We discussed the role of radiation to de
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "We discussed the role of chemotherapy to decrease the risk o" -> "We discussed the role of chemotherapy to decrease the risk o"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. She has an appointment with Dr. [REDACTED] tomorrow."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 7.2s
+      [EXTRACT] raw={
+    "procedure_plan": "Plan to proceed with [REDACTED] +/- bone medication after radiation is completed."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Plan to proceed with [REDACTED] +/- bone medication after radiation is completed.']
+    Imaging_Plan: 5.6s
+      [EXTRACT] raw={
+    "imaging_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.1s
+      [EXTRACT] raw={
+    "lab_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
