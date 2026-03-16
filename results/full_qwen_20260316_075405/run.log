@@ -18945,3 +18945,49 @@ Processing row 90 (91/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60[REDACTED], Alkaline Phosphata" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline Phosphatase 67, Bil"
       [G4-FAITH] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60, Alkaline" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline"
+    Clinical_Findings: 24.3s
+      [EXTRACT] raw={
+"findings": "MRI pelvis: Moderate interval increase in size and extent of right iliac lesion abutting the right acetabular articular surface and extending along the right pubic root. Multiple new su
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s
+      [EXTRACT] raw={
+"current_meds": "everolimus, exemestane, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.4s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started lasix 10mg once a day with KCL 10Meq once daily.",
+"supportive_meds": "denosumab, potassium chloride"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab, potassium chloride" -> "denosumab, potassium chloride, everolimus, exemestane"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, potassium chloride, everolimus, exemestane -> denosumab, everolimus, exemestane
+  Phase 1 extraction (6 prompts): 99.5s
+  Cross-context injected (948 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.3s
+      [EXTRACT] raw={
+"response_assessment": "PET/CT confirms increase in bone metastases and new soft tissue stranding in right perirenal area. MRI pelvis shows moderate interval increase in size and extent of right ili
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 19.8s
+  Total extraction: 119.3s
