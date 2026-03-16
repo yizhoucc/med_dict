@@ -18364,3 +18364,57 @@ Processing row 87 (88/100)...
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] chemotherapy: "{'summary': 'Received 4 cycles of gemzar with carboplatin in the adjuvant settin" -> "{'summary': 'Currently on xeloda. If stable clinically after 3 months of therapy"
       [POST-KEYS] stripped: {'chemotherapy', 'other treatment'}
+    Medication_Plan: 5.9s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "She is on xeloda. If she is stable clinically after 3 months of therapy, restaging will be done. If she has progression on xeloda, clinical trials using immunotherapy or usin
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "She is on xeloda. If she is stable clinically after 3 months of therapy, restagi" -> "She is on xeloda."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 20.7s
+      [EXTRACT] raw={
+    "therapy_plan": "She is on xeloda and will continue this therapy. If she is stable clinically after 3 months of therapy, restaging will be performed. If she has progression on xeloda, she will b
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.0s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache. Imaging was done that showed two brain metastases. 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She had radiation to left chest wall and draining lymph nodes and on the last da" -> "She had radiation to left chest wall and draining lymph nodes. She also had ster"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 14.1s
+      [EXTRACT] raw={
+    "procedure_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat recep
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
