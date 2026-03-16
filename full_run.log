@@ -17097,3 +17097,159 @@ Processing row 81 (82/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 200 mg tablet, hydroCHLOROthiazide (HYDRODIURIL) 12.5 mg tablet, lisinopriL (PRINIVIL,ZESTRIL) 40 mg tablet, metFORMIN (GLUCOPHAGE) 500 mg tablet, docusate sodium (COLACE) 100 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet, blood glucose (FREESTYLE [REDACTED] STRIPS) test strip, [REDACTED] 5000 PLUS 1.1 % CREAM, [REDACTED] 5000 SENSITIVE 1.October 26 % PASTE -> 
+    Treatment_Changes: 9.4s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN)" -> "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), docusate sodium (COLACE), oxy"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), docusate sodium (COLACE), oxyCODONE (ROXICODONE) -> docusate sodium (COLACE), oxyCODONE (ROXICODONE)
+  Phase 1 extraction (6 prompts): 81.8s
+  Cross-context injected (680 chars)
+    Treatment_Goals: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.5s
+  Total extraction: 87.3s
+    Medication_Plan_chatgpt: 51.9s [schema-fixed, improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Plan to proceed with [REDACTED] +/- bone medication after radiation
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+    Medication_Plan: 28.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue current medications including acetaminophen 1000 mg by mouth every 8 hours, ibuprofen 600 mg by mouth every 8 hours as needed for pain or fever, hydrochlorothiazide 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence. Due to her low risk, I do not recommend chemotherapy. We discussed the role of radiation to de
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "We discussed the role of chemotherapy to decrease the risk o" -> "We discussed the role of chemotherapy to decrease the risk o"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. She has an appointment with Dr. [REDACTED] tomorrow."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 7.2s
+      [EXTRACT] raw={
+    "procedure_plan": "Plan to proceed with [REDACTED] +/- bone medication after radiation is completed."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Plan to proceed with [REDACTED] +/- bone medication after radiation is completed.']
+    Imaging_Plan: 5.6s
+      [EXTRACT] raw={
+    "imaging_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.1s
+      [EXTRACT] raw={
+    "lab_plan": "Dexa to assess bone health before the next visit with me."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 8.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Exercise counseling referral",
+"follow up": "after radiation"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after radiation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.8s
+      [EXTRACT] raw={
+    "Advance care": "Full code."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Plan extraction prompts: 149.5s
+    [POST-LAB] cleaned: 'Dexa to assess bone health before the next visit with me.' → 'No labs planned.'
+    [POST-THERAPY] removed non-therapy: ['She has an appointment with Dr.', '[REDACTED] tomorrow.', 'We discussed the role of hormonal blockade to decr']
+  [ATTRIBUTION] 21/22 fields sourced (42.9s)
+  Row 81 total: 279.7s
+  Row 81 saved to progress
+
+Processing row 82 (83/100)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1195 chars)
+  A/P extraction: 19.7s
+    Reason_for_Visit: 15.8s
