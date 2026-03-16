@@ -7825,3 +7825,26 @@ Processing row 37 (38/100)...
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 75.4s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 80 U/L, Alanine transaminase 27 U/L, AST 22 U/L, Bilirubin, Total 0.3 mg/dL, Urea Nitrogen 10 mg/dL, Ca
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 8" -> "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 8"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 18.3s
+      [EXTRACT] raw={
+"findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mil
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B co"
+      [POST-MEDS] ascorbic acid, vitamin C, gabapentin, naloxone, vitamin B complex, HYDROcodone-acetaminophen, ibuprofen, traMADoL -> 
