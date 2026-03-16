@@ -10510,3 +10510,72 @@ Processing row 50 (51/100)...
   Trying regex extraction...
   Regex failed, falling back to LLM extraction...
   LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Attempt 1 failed LLM sanity check. Retrying...
+  LLM Extraction Attempt 2...
+  Running LLM Sanity Check...
+  Success on attempt 2 (Verified by LLM, 433 chars)
+  A/P extraction: 121.3s
+    Reason_for_Visit: 10.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "Patient with [REDACTED] [REDACTED], presents to zoom meeting, in stable condition, for Education visit with
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 9.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Not mentioned in note",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant Metastasis": "Not sure",
+"Metastasis": "Not sure"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "Not sure" -> ""
+      [G4-FAITH] Metastasis: "Not sure" -> ""
+      [G4-FAITH] Distant Metastasis: "Not sure" -> ""
+      [G4-FAITH] Type_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis', 'Type_of_Cancer', 'Stage_of_Cancer']
+      [G4-PROTECT] Type_of_Cancer: restored safe negative "Not mentioned in note"
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "Not sure"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "Not sure"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "Not sure"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "No new clinical findings or current disease status mentioned in the visit note."
+}
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "No new clinical findings or current disease status mentioned" -> ""
+      [G4-FAITH] EMPTIED: ['findings']
+      [G4-REVERT] findings: reverted (G4 emptied all fields)
+    Current_Medications: 3.4s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={"current_meds": "Gemzar, [REDACTED], Carboplatin"}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Gemzar, [REDACTED], Carboplatin" -> "[REDACTED]"
+      [G4-FAITH] current_meds: "[REDACTED]" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+      [POST-MEDS] [REDACTED] -> 
