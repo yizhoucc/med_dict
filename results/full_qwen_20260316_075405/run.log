@@ -13959,3 +13959,32 @@ Processing row 66 (67/100)...
       [G3-IMPROVE] current_meds: "Abraxane" -> ""
       [G4-FAITH] current_meds: "" -> "Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyr"
       [POST-MEDS] Epi-[REDACTED] Auto-Injection, Omeprazole, Lipitor, Levothyroxine, Hydrochlorothiazide, Humalog-R 500 units, 35 units before lunch and 30 units after lunch, Metformin 1000 mg b.i.d., Aspirin -> 
+    Treatment_Changes: 15.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched from dose-dense Adriamycin plus Cytoxan to Abraxane at a weekly dose for a total of 12 weeks. Recommended starting Levaquin post dose-dense AC cycle to prevent infection.
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Neupogen at 480 mcg for a total of three doses, Levaquin -> Neupogen at 480 mcg for a total of three doses
+  Phase 1 extraction (6 prompts): 101.7s
+  Cross-context injected (1145 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 14.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to treatment. After two cycles of dose-dense Adriamycin plus Cytoxan, the patient noticed a decrease in size of her left axillary lymph nod
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.3s
+  Total extraction: 119.9s
