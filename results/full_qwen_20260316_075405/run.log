@@ -2383,3 +2383,33 @@ Processing row 11 (12/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "morphine, oxycodone, pregabalin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine, oxycodone, pregabalin -> morphine, oxycodone
+  Phase 1 extraction (6 prompts): 116.0s
+  Cross-context injected (1422 chars)
+    Treatment_Goals: 4.0s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 36.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "CT stable, no evidence of disease recurrence on imaging and exam. Recent body CT shows stable disease (SD) and possible stable status. CT shows only multiple bone sites, ? Ac
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT stable, no evidence of disease recurrence on imaging and exam. Recent body CT" -> "Recent body CT shows stable disease (SD) and possible stable status. CT shows on"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 40.9s
+  Total extraction: 156.9s
