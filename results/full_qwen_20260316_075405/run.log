@@ -5123,3 +5123,42 @@ Processing row 24 (25/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 16.4s
   Total extraction: 153.7s
+    Medication_Plan_chatgpt: 48.2s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Patient is taking 1500/1000mg of xeloda for 14 days and then 7 days off. Will start cycle again on 04/12/2011. Port was placed prior to starting xeloda and 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['chemotherapy', 'pain medication', 'other treatment']
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] chemotherapy: "{'summary': 'Patient is taking 1500/1000mg of xeloda for 14 days and then 7 days" -> "{'summary': 'Will start cycle again on 04/12/2011. Labs reviewed and okay to pro"
+      [G5-TEMPORAL] pain medication: "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o" -> "{'summary': 'Patient is advised to try ibuprofen or tylenol in the morning and o"
+      [G5-TEMPORAL] other treatment: "{'summary': 'Calendars were given to track Xeloda when on and off the drug.', 'S" -> "{'summary': 'Calendars were given to track Xelody when on and off the drug.', 'S"
+      [POST-KEYS] stripped: {'chemotherapy', 'pain medication', 'other treatment'}
+    Medication_Plan: 18.3s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will start cycle of ixabepilone on 04/12/2011. Patient is to take ibuprofen or tylenol in the morning and oxycodone in the evening or when able to have a nap. The pat
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Today is off week, will start cycle again on 04/12/2011. Port placed on 9th prior to starting xeloda and just after i
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Today is off week, w" -> "Taking 1500/1000mg 14 days and 7 days off with ixabepilone. Will start cycle aga"
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
