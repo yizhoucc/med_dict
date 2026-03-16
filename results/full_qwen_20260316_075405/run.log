@@ -11445,3 +11445,12 @@ Processing row 54 (55/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 5.5s
   Total extraction: 60.2s
+    Medication_Plan_chatgpt: 50.3s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Arimidex 1 mg PO daily for a duration of 5 years was recommended. If intolerable arthralgias or myalgias occur, treatment can be changed to other aromat
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': {'name': 'Arimidex 1 mg PO daily', 'dur" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'Arimidex 1 mg PO daily for"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
