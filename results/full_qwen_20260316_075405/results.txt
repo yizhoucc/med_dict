@@ -2954,3 +2954,146 @@ RESULTS FOR ROW 16
     "plan to treat with aromatase inhibitor; would check estradiol level"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 17
+============================================================
+
+--- Column: coral_idx ---
+156
+
+--- Column: note_text ---
+"***** ***** is a 53 year old female with breast cancer who is here for a consultation regarding further management    SUBJECTIVE    HPI    ***** recently presented with a palpable mass in the right breast. The workup was negative for the right breast but picked up a left breast cancer. This is summarized below.    July 2021 - bilateral 3D mammography = left breast spiculated mass 8mm, no correlate to the palpable right breast mass  July 2021 - bilateral breast US = suspicious left breast mass, no correlate to the palpable right breast mass  August 2021 - *****-guided left breast biopsy = invasive ductal ca, grade 1-2; ER positive (strong, >95%), PR positive (strong, >95%), ***** negative (IHC 0; FISH 2.June 09.5=1.1X), *****=5%.  November 2021 - s.p left lumpectomy & *****  ***** = invasive ductal ca, 0.8cm, grade 2, ***** negative, margins negative, no DCIS, LNs negative (0/5).     Other recent data  August 2021 - Pelvic US = negative, s/p hysterectomy,. Normal ovaries with left corpus luteum  August 2021 - Chest CT = negative    ***** has recovered from her surgery and other than some minor post-operative numbness, she is essentially asymptomatic.     *****'s menopausal status is difficult to know. She is amenorrheic due to prior hysterectomy and reports rare hot flashes.     PMH  h/o depression & anxiety  h/o fibroids  s/p excision of large lipoma from back 2016  s/p lap hysterectomy and right salpingectomy 2019 for 14cm large fibroid      Meds  none    Allergies  Amoxicillin, erythromycin, Bactrim - the connection is difficult to know. It dates back to a single episode in her 20s when she was on ***** ***** ***** for UTI and the link remains unknown.    Social History  Lives in ***** *****. Single, no kids. She is a neuromuscular massage therapist but hasn't worked since surgery. She is planning on going back to office work. She quit smoking in 2006. Does not drink EtOH.    Family History  Sister with ovarian ca @40s  Maternal aunt with \n H&N ca @60  Maternal uncle with colon ca @56  Maternal grandfather with prostate ***** @90  Paternal aunt with breast ca @60s  Her father's family is estranged and she doesn't know much about them      OBJECTIVE    This is a video visit    IMPRESSION    ***** pathologic prognostic stage ***** (*****) left breast cancer, ER/PR positive, ***** negative    PLAN    Status of disease and management recommendations were discussed at length with *****. She has completed the surgical management of her left breast cancer. I estimate that without further systemic therapy she has an approximately 10-15% chance of recurrence. This risk can be reduced with adjuvant endocrine therapy. ***** will benefit from adjuvant hormonal therapy for a duration of at least 5 years. Both tamoxifen and AIs are effective with AIs showing superior efficacy in randomized trials (***** ***** *****)(***** ***** *****). Side effects of tamoxifen were discussed including potential for hot flashes, mood effects, increased incidence of thromboembolic events and endometrial cancer in postmenopausal women. AIs are restricted to the post-menopausal state and their side effects were discussed including *****, myalgias, and potential acceleration of bone loss. *****'s menopausal status is difficult to know. We will check hormone levels and make a recommendation for tamoxifen or ***** based on her menopausal status.     ***** requires breast radiotherapy to complete her breast conservation management. She is scheduled to see ***** tomorrow.     *****'s family history raises some suspicion of an inherited susceptibility syndrome. ***** refer to genetics for further evaluation and testing. I will try to ***** this, as a positive test may lead her to exercise the option of prophylactic mastectomy, and thus radiotherapy will have to be postponed until she has test results.    In summary the plan is:  - check labs including hormones  - baseline DXA scan  - \n ***** consult tomorrow  - referral to genetics  - referral to nutritionist at her request  - F/U visit after RT to start endocrine therapy based on serologic determination of menopausal status      \n"
+
+--- Column: assessment_and_plan ---
+"PLAN    Status of disease and management recommendations were discussed at length with *****. She has completed the surgical management of her left breast cancer. I estimate that without further systemic therapy she has an approximately 10-15% chance of recurrence. This risk can be reduced with adjuvant endocrine therapy. ***** will benefit from adjuvant hormonal therapy for a duration of at least 5 years. Both tamoxifen and AIs are effective with AIs showing superior efficacy in randomized trials (***** ***** *****)(***** ***** *****). Side effects of tamoxifen were discussed including potential for hot flashes, mood effects, increased incidence of thromboembolic events and endometrial cancer in postmenopausal women. AIs are restricted to the post-menopausal state and their side effects were discussed including *****, myalgias, and potential acceleration of bone loss. *****'s menopausal status is difficult to know. We will check hormone levels and make a recommendation for tamoxifen or ***** based on her menopausal status.     ***** requires breast radiotherapy to complete her breast conservation management. She is scheduled to see ***** tomorrow.     *****'s family history raises some suspicion of an inherited susceptibility syndrome. ***** refer to genetics for further evaluation and testing. I will try to ***** this, as a positive test may lead her to exercise the option of prophylactic mastectomy, and thus radiotherapy will have to be postponed until she has test results.    In summary the plan is:  - check labs including hormones  - baseline DXA scan  - \n ***** consult tomorrow  - referral to genetics  - referral to nutritionist at her request  - F/U visit after RT to start endocrine therapy based on serologic determination of menopausal status      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "53 year old female with left breast invasive ductal carcinoma, ER/PR positive, HER2 negative, post-lumpectomy, here for initial consult to discuss further management including adjuvant endocrine therapy and breast radiotherapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast invasive ductal carcinoma, 0.8cm, grade 2, ER positive (strong, >95%), PR positive (strong, >95%), HER2 negative (IHC 0; FISH 2.June 09.5=1.1X), Ki-67=5%, margins negative, no DCIS, LNs negative (0/5). Pelvic US negative, s/p hysterectomy, normal ovaries with left corpus luteum. Chest CT negative. No mention of new palpable masses, skin changes, or lymphadenopathy."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan_chatgpt": {},
+  "Medication_Plan": {
+    "medication_plan": "Adjuvant hormonal therapy for at least 5 years, with a recommendation for tamoxifen or Aromatase Inhibitors (AIs) based on menopausal status."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Check hormone levels and make a recommendation for tamoxifen or an AI based on her menopausal status. Requires breast radiotherapy to complete her breast conservation management. Plan to start endocrine therapy after radiotherapy based on serologic determination of menopausal status."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "She requires breast radiotherapy to complete her breast conservation management."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "baseline DXA scan"
+  },
+  "Lab_Plan": {
+    "lab_plan": "check labs including hormones"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Refer to genetics for further evaluation and testing."
+  },
+  "Referral": {
+    "Nutrition": "nutritionist at her request",
+    "Genetics": "refer to genetics for further evaluation and testing",
+    "Specialty": "breast radiotherapy consult",
+    "Others": "None",
+    "follow up": "F/U visit after RT to start endocrine therapy based on serologic determination of menopausal status"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: after RT to start endocrine therapy based on serologic determination of menopausal status"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED]."
+  ],
+  "summary": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED]. She has completed the surgical management of her left breast cancer."
+  ],
+  "Metastasis": [
+    "without further systemic therapy she has an approximately 10-15% chance of recurrence."
+  ],
+  "findings": [
+    "Left breast invasive ductal carcinoma, 0.8cm, grade 2, ER positive (strong, >95%), PR positive (strong, >95%), HER2 negative (IHC 0; FISH 2.June 09.5="
+  ],
+  "goals_of_treatment": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED]."
+  ],
+  "response_assessment": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED]."
+  ],
+  "medication_plan": [
+    "[REDACTED] will benefit from adjuvant hormonal therapy for a duration of at least 5 years."
+  ],
+  "therapy_plan": [
+    "check hormone levels and make a recommendation for tamoxifen or [REDACTED] based on her menopausal status.     [REDACTED] requires breast radiotherapy to complete her breast conservation management."
+  ],
+  "radiotherapy_plan": [
+    "She requires breast radiotherapy to complete her breast conservation management."
+  ],
+  "imaging_plan": [
+    "check labs including hormones - baseline DXA scan"
+  ],
+  "lab_plan": [
+    "check labs including hormones"
+  ],
+  "genetic_testing_plan": [
+    "[REDACTED] refer to genetics for further evaluation and testing."
+  ],
+  "Nutrition": [
+    "referral to nutritionist at her request"
+  ],
+  "Genetics": [
+    "[REDACTED]'s family history raises some suspicion of an inherited susceptibility syndrome. [REDACTED] refer to genetics for further evaluation and testing."
+  ],
+  "Specialty": [
+    "[REDACTED] requires breast radiotherapy to complete her breast conservation management. She is scheduled to see [REDACTED] tomorrow."
+  ],
+  "follow up": [
+    "F/U visit after RT to start endocrine therapy based on serologic determination of menopausal status"
+  ],
+  "Next clinic visit": [
+    "FU visit after RT to start endocrine therapy based on serologic determination of menopausal status"
+  ]
+}
