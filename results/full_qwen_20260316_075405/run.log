@@ -11035,3 +11035,27 @@ Processing row 52 (53/100)...
       [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'details': 'adjuvant AC/THP chemotherapy. This consist" -> "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemotherapy. This consist"
       [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemot" -> "[{'type': 'chemotherapy', 'summary': 'adjuvant AC/THP chemot"
       [G5-TEMPORAL] no changes
+    Medication_Plan: 31.6s
+      [EXTRACT] raw={
+    "medication_plan": "Adjuvant AC/THP chemotherapy: AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Alternative TC
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 33.1s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Adjuvant AC/THP chemotherapy consisting of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Alte
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Adjuvant AC/THP chemotherapy consisting of AC x 4 given q2weeks with growth fact" -> "Adjuvant AC/THP chemotherapy consisting of AC x 4 given q2weeks with growth fact"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 12.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "[REDACTED] requires adjuvant breast radiotherapy to complete her breast conservation management. Referral will be made to [REDACTED] at the completion of chemotherapy for a
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
