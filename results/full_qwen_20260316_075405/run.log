@@ -3233,3 +3233,45 @@ Processing row 15 (16/100)...
       [POST-SUPP] CALCIUM CARBONATE, DOCOSAHEXANOIC ACID/EPA (FISH OIL), licorice, MULTIVITAMIN -> 
   Phase 1 extraction (6 prompts): 54.8s
   Cross-context injected (612 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 60.6s
+    Medication_Plan_chatgpt: 42.1s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to treat with aromatase inhibitor after radiation; would check estradiol level before starting.",
+        "Short term side_effects_discussed": "hot
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': 'adjuvant aromatase inhibitor x 5 years', 'bone therapy': " -> "[{'hormonal therapy': {'summary': 'adjuvant aromatase inhibitor x 5 years', 'Sho"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'hormonal therapy': {'summary': 'adjuvant aromatase inhibi" -> "[{'hormonal therapy': {'summary': 'adjuvant aromatase inhibi"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 10.0s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will start an aromatase inhibitor (not specified) after radiation therapy for 5 years. She will also take calcium and vitamin D to improve bone health."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
