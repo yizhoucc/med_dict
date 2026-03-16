@@ -15607,3 +15607,64 @@ Processing row 74 (75/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/[REDACTED]+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II-III ([REDACTED]-3fM0), pending axillary LN analysis on resection",
+  "Distant_Metastasis": "No",
+ 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 27.4s
+      [EXTRACT] raw={
+"findings": "2.1cm mass in the posterior right breast with 2 axillary lymph nodes showing cortical thickening suspicious for malignancy. PET/CT shows hypermetabolic right breast mass and hypermetabo
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 18.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actua"
+      [POST-MEDS] fluticasone propion-salmeteroL (ADVAIR HFA) 115-21 mcg/actuation inhaler, Inhale 2 puffs into the lungs Twice a day, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, 1 spray by Nasal route Daily, follitropin alfa (GONAL-F RFF [REDACTED]-JECT) 300/0.5 unit/mL [REDACTED], Inject 300 Int'l Units under the skin every evening, ipratropium (ATROVENT HFA) 17 mcg/actuation inhaler, Inhale 2 puffs into the lungs 4 (four) times daily as needed for Wheezing, NORETHINDRONE-E.ESTRADIOL-IRON ([REDACTED] [REDACTED] [REDACTED] ORAL), Take by mouth., omeprazole (PRILOSEC) 10 mg capsule, Take 20 mg by mouth Daily., ranitidine (ZANTAC) 75 mg tablet, Take 75 mg by mouth Daily., VENTOLIN HFA 90 mcg/actuation metered dose inhaler, [REDACTED] WELL AND INHALE 1 TO 2 PUFFS BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED -> 
+    Treatment_Changes: 4.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "Atrovent, Advair"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Atrovent, Advair -> 
+  Phase 1 extraction (6 prompts): 80.4s
+  Cross-context injected (945 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
