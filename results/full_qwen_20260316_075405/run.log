@@ -17129,3 +17129,12 @@ Processing row 81 (82/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.5s
   Total extraction: 87.3s
+    Medication_Plan_chatgpt: 51.9s [schema-fixed, improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Plan to proceed with [REDACTED] +/- bone medication after radiation
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'bowel regimen', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc" -> "[{'type': 'hormonal therapy', 'summary': 'We discussed the role of hormonal bloc"
