@@ -16091,3 +16091,36 @@ Processing row 76 (77/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.6s
   Total extraction: 78.3s
+    Medication_Plan_chatgpt: 54.2s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Plan to check estradiol again in 3-6 months to ensure still 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'psychiatry medication', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'psychiatry medication', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Exemestane, to be started after confir" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'Exemestane, to be started "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 11.5s
+      [EXTRACT] raw={
+    "medication_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Continue home duloxetine and celebrex. Recommended anti-fungal topical for suspect
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Proceed with adjuvant radiation therapy starting September 29. If menopausal status i
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 13.0s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. [REDACTED]. Dr. [REDACTED] recommended radiation therapy for 3 weeks, with sedation for her 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes

@@ -15991,3 +15991,139 @@ Processing row 75 (76/100)...
     "Advance care": "Not discussed during this visit."
 }
       [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 220.9s
+    [POST-THERAPY] removed non-therapy: ['Restart Gabapentin 300 mg TID.', 'Continue Naprosyn 500 mg BID as needed (take with ', 'Continue Metformin 1000 mg BID.', 'Check labs [REDACTED]-12 weeks, due August 2018 or', 'Scans due now.', '[REDACTED] obtain PETCT up to toes given new right', 'If PETCT remains stable, will spread it to every 5', 'Try Voltaren gel as needed for pain.', 'Lomotil 1-2 tabs as needed with each watery bowel ', 'Ensure adequate fluid intake per day to prevent de', 'Small, frequent meals.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to the bone and left iliac bone'
+  [ATTRIBUTION] 21/22 fields sourced (30.8s)
+  Row 75 total: 372.0s
+  Row 75 saved to progress
+
+Processing row 76 (77/100)...
+  Injected 7 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'ER positive', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (6283 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 17.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpectomy with 2.2cm grade 2 ID
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect" -> "52 y.o. female with a recent diagnosis of right breast cancer (s/p right lumpect"
+      [G4-FAITH] summary: "52 y.o. female with a recent diagnosis of right breast cance" -> "52 y.o. female with a recent diagnosis of right breast cance"
+    Cancer_Diagnosis: 13.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with associated DCIS",
+  "Stage_of_Cancer": "pT2N1a(sn) - approximately Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 15.0s
+      [EXTRACT] raw={
+"findings": "Patient has a 2.2 cm grade 2 IDC ER+/PR+/HER2-, with associated DCIS and 1/1 positive nodes. The margins are negative. Physical exam shows a well-healing surgical incision and an area o
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 14.2s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "exemestane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "exemestane" -> ""
+      [G4-FAITH] current_meds: "" -> "celecoxib (CELEBREX) 200 mg capsule Take 200 mg by mouth dai"
+      [POST-MEDS] celecoxib (CELEBREX) 200 mg capsule Take 200 mg by mouth daily, clonazePAM (KLONOPIN) 1 mg tablet TAKE 1 TABLET BY MOUTH DAILY IN THE MORNING AS NEEDED FOR PANIC. [REDACTED] 2 TABS IN 24 HOURS., DULoxetine 40 mg CAPDREC Take 40 mg by mouth nightly at bedtime, levothyroxine (SYNTHROID) 50 mcg tablet Take 50 mcg by mouth daily, QUEtiapine (SEROQUEL) 25 mg tablet TAKE 1 2 TABS BY MOUTH DAILY 1 HOUR BEFORE PROCEDURES AS NEEDED FOR PANIC. NTE 100MG/DAY., LORazepam (ATIVAN) 2 mg tablet PLEASE SEE ATTACHED FOR DETAILED DIRECTIONS -> 
+    Treatment_Changes: 8.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Prescribed exemestane, which she can start after estradiol confirms post-menopausal status",
+"supportive_meds": "celebrex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] celebrex -> 
+  Phase 1 extraction (6 prompts): 72.7s
+  Cross-context injected (631 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.6s
+  Total extraction: 78.3s
+    Medication_Plan_chatgpt: 54.2s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Plan to check estradiol again in 3-6 months to ensure still 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'radiotherapy', 'psychiatry medication', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'radiotherapy', 'psychiatry medication', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Exemestane, to be started after confir" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'Exemestane, to be started "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 11.5s
+      [EXTRACT] raw={
+    "medication_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Continue home duloxetine and celebrex. Recommended anti-fungal topical for suspect
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Prescribed exemestane to start after confirming post-menopausal status with estradiol test. Proceed with adjuvant radiation therapy starting September 29. If menopausal status i
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 13.0s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Given her positive LN, she is scheduled for adjuvant radiation therapy with Dr. [REDACTED]. Dr. [REDACTED] recommended radiation therapy for 3 weeks, with sedation for her 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
