@@ -16641,3 +16641,60 @@ Processing row 79 (80/100)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA, now local recurrence"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 74.8s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg/mL, Albumin, Serum / Plasm
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 16.0s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a local recurrence of invasive cancer 7 years following mastectomy for DCIS. The IDC is 0.8cm, grade 3, with a close margin, and ER/PR+. MRI breasts: benign findings of sali
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a local recurrence of invasive cancer 7 years fo" -> "Patient has a local recurrence of invasive cancer 7 years fo"
+    Current_Medications: 4.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORaz"
+      [POST-MEDS] cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORazepam (ATIVAN), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 16.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet -> dexAMETHasone (DECADRON) 4 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet
+  Phase 1 extraction (6 prompts): 138.6s
+  Cross-context injected (628 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 144.7s
