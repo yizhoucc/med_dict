@@ -8000,3 +8000,78 @@ Processing row 37 (38/100)...
     [POST-OTHERS] cleaned: 'We discussed lifestyle modifications to decrease the risk of recurrence as well ...' → 'Social work referral'
     [POST-THERAPY] removed non-therapy: ['Could consider [REDACTED] concurrently.', 'We discussed the role of hormonal blockade to decr', 'We could consider [REDACTED].']
     [POST-ADV] patched from full note: ['full code']
+  [ATTRIBUTION] 18/24 fields sourced (27.2s)
+  Row 37 total: 324.9s
+  Row 37 saved to progress
+
+Processing row 38 (39/100)...
+  Injected 1 term definitions: ['adjuvant chemotherapy']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2302 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 9.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "27 year old woman with newly diagnosed at least stage II triple negative breast cancer, here in consultat
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "At least Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 19.8s
+      [EXTRACT] raw={
+"findings": "Pathology results: Grade 3 IDC, ER/PR/[REDACTED] negative. Core biopsy of axillary node positive for carcinoma. Imaging findings: Mammogram with dense breasts, axillary US shows indeter
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FL"
+      [POST-MEDS] cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FLONASE) 50 mcg/actuation nasal spray -> 
+    Treatment_Changes: 4.2s [improved]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "fluticasone (FLONASE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "fluticasone (FLONASE)" -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 51.7s
+  Cross-context injected (692 chars)

@@ -38,7 +38,8 @@
     33,
     34,
     35,
-    36
+    36,
+    37
   ],
   "results": {
     "0": {
@@ -5014,6 +5015,150 @@
         ],
         "follow up": [
           "She will proceed with chemotherapy at [REDACTED]."
+        ]
+      }
+    },
+    "37": {
+      "coral_idx": 177,
+      "note_text": "Medical Oncology Consult Note    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  12/18/1977   Date of Visit:  01/15/2021  Provider:  ***** ***** *****  Primary Care Provider:  ***** *****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Prediabetes  Hemoglobin A1c   2. Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative (CMS code)  Ambulatory Referral to Breast Medical Oncology (*****)    Ambulatory Referral to Social Work - Cancer Center    Complete Blood Count with Differential    Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)   3. BRCA1-associated protein-1 tumor predisposition syndrome  Ambulatory Referral to Gynecologic Oncology   4. Fatigue, unspecified type  Thyroid Stimulating Hormone (UCSF)       History of Present Illness:    43 year old female with a strong family history of breast cancer and a BRCA 1 mutation.   She felt a left breast mass in 2017.  Imaging was thought to be fibrocystic changes.      She was diagnosed in June 2020 with a large left breast cancer 6.8 cm and enlarged lymph nodes that were negative on pet and by biopsy.  The tumor was essentially a triple negative cancer: ER negative, ***** April 05+ in 15% and her 2 negative.  She saw Dr. ***** and received neoadjuvant ***** followed by 5 weeks of taxol which was stopped due to side effects. She had a repeat MRI November 2020 showed a mild response and pet in December 2020 was negative for distant disease. She is planning on bilateral skin sparing ***** with tissue expander placement with Dr. ***** and *****.  Recent right breast biopsy was negative.     She was responding to chemotherapy but now the breast cancer is palpable again.  We discussed using some other IV treatment for shrinking the tumor and she declines to do anything prior to surgery.      She reports with \n chemotherapy she had poor night vision , could not think, premature menopause.  She has severe pain in the breast.  she wants to change to me of ongoing treatment.  She reports feeling  poor exercise tolerance.      We discussed olaparib and xeloda.  We discussed the importance of exercise to help her recover from toxicity of chemotherapy.  She feels like things are now clear. We will consider the vaccine trial after the final pathology is back.  I think it has to be a pure triple negative cancer to be screened.     Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative (CMS code) 01/01/2021       Stage at *****:  Cancer Staging  Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: Stage IIB (*****, *****, *****, G1, ER-, PR+, *****-) - Signed by ***** ***** *****, DO on 01/01/2021      Medications:    Current Outpatient Medications:   \u0007  ascorbic acid, vitamin C, (VITAMIN C) 1,000 mg tablet, Take 1,000 mg by mouth daily, Disp: , Rfl:   \u0007  gabapentin (NEURONTIN) 300 mg capsule, , Disp: , Rfl:   \u0007  LORazepam (ATIVAN) 1 mg tablet, , Disp: , Rfl:   \u0007  naloxone 4 mg/actuation SPRAYNAERO, 1 spray by Nasal route 2 (two) times daily as needed, Disp: , Rfl:   \u0007  vitamin B complex capsule, Take 1 capsule by mouth daily, Disp: , Rfl:   \u0007  HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, Take 1 tablet by mouth every 6 (six) hours as needed for Pain for up to 15 doses, Disp: 15 tablet, Rfl: 0  \u0007  ibuprofen (ADVIL,MOTRIN) 600 mg tablet, Take 1 tablet (600 mg total) by mouth every 6 (six) hours as needed for Pain or Temp >= 38.5 C, Disp: 60 tablet, Rfl: 0  \u0007  traMADoL (ULTRAM) 50 mg tablet, 1-2 po q 8 prn pain take with food., Disp: 90 tablet, Rfl: 4    Allergies:   Allergies/Contraindications   Allergen \n Reactions   \u0007 Latex Rash   \u0007 Sulfa (Sulfonamide Antibiotics) Wheezing   \u0007 Contact ***** ***** Rash       Medical History:   Past Medical History:   Diagnosis Date   \u0007 Allergy ***** and Sulfa    ignites asthma   \u0007 Anxiety 10/02/2020    Can't sleep due to chemotherapy   \u0007 Asthma 1978    Childhood Asthma. Now it's only a cat allergy   \u0007 BRCA1-associated protein-1 tumor predisposition syndrome    \u0007 Breast cancer (CMS code) 06/16/2020    Invasive Ductal Carcinoma- Only in ducts   \u0007 Depression 2021    Due to dealing with cancer and not working   \u0007 Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor negative (CMS code) 01/01/2021       Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY  June 2020    Biopsy       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Not Currently     Alcohol/week: 0.0 standard drinks   \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None     Comment: the last time I had sex was a week before I started Chemo   Social History Narrative   \u0007 Not on file       *****:  ***** ***** ***** *****     ***** Status: single, 18 year old son     Gynecologic History:  G 4 P 1 AB 3    Menarche 12  Premenopausal, no menses since chemotherapy.    OCP 10 years    Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Paternal Aunt ***** ***** *****         Died 1989   \u0007 Breast cancer Paternal Aunt ***** ***** *****         Had complete mastectomy 1999   \u0007 Breast cancer Paternal Aunt ***** ***** *****         Had lumpectomy then one year later a new breast tumor ***** 1999   \u0007 Prostate cancer Father ***** *****         My father died of other causes. He had a baseball lump on his \n testicles               Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    01/15/21 1101   *****: Leg  Comment: Bilateral legs   *****:   7     hydrocodone    Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  BP 105/71  | Pulse 66  | Temp 36.4 C (97.6 F) (Temporal)  | Resp 16  | Ht 170.5 cm (5' 7.13\") Comment: 01/15/2021 @ ***** | Wt 84.4 kg (186 lb 1.6 oz)  | SpO2 100%  | BMI 29.04 kg/m   GEN: No acute distress, awake and alert, appears stated age  HEENT: No oral lesions  Neck supple no lymphadenopathy  Cardiac: Regular rate, rhythm no murmur  Lungs:  clear to ascultation    Abdomen: Soft, non tender, non distended,  no *****   Extremity: No edema  Lymph: no peripheral adenopathy  Neuro: *****-12 grossly intact, normal UE and LE strength.   Skin: No rash  Breast  Right breast no mass or skin changes, left breast no skin changes but a large 8 x 5 cm mobile breast mass. No ***** bilaterally       Labs:    Appointment on 01/15/2021   Component Date Value Ref Range Status   \u0007 Thyroid Stimulating Hormone 01/15/2021 1.55  0.45 - 4.12 mIU/L Final   \u0007 Albumin, Serum / Plasma 01/15/2021 3.8  3.5 - 5.0 g/dL Final   \u0007 Alkaline Phosphatase 01/15/2021 80  38 - 108 U/L Final   \u0007 Alanine transaminase 01/15/2021 27  10 - 61 U/L Final   \u0007 AST 01/15/2021 22  5 - 44 U/L Final   \u0007 Bilirubin, Total 01/15/2021 0.3  0.2 - 1.2 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 01/15/2021 10  7 - 25 mg/dL Final   \u0007 Calcium, total, \n Serum / Plasma 01/15/2021 10.1  8.4 - 10.5 mg/dL Final   \u0007 Chloride, Serum / Plasma 01/15/2021 *****  101 - 110 mmol/L Final   \u0007 Creatinine 01/15/2021 0.55  0.55 - 1.02 mg/dL Final   \u0007 eGFR - low estimate 01/15/2021 *****  >59 mL/min Final   \u0007 eGFR - high estimate 01/15/2021 >120  >59 mL/min Final   \u0007 Potassium, Serum / Plasma 01/15/2021 4.7  3.5 - 5.0 mmol/L Final   \u0007 Sodium, Serum / Plasma 01/15/2021 *****  135 - 145 mmol/L Final   \u0007 Protein, Total, Serum / Plasma 01/15/2021 7.5  6.3 - 8.6 g/dL Final   \u0007 Carbon Dioxide, Total 01/15/2021 27  22 - 29 mmol/L Final   \u0007 Anion Gap 01/15/2021 9  4 - 14 Final   \u0007 Glucose, non-fasting 01/15/2021 95  70 - 199 mg/dL Final   \u0007 WBC Count 01/15/2021 5.5  3.4 - 10.0 x10E9/L Final   \u0007 RBC Count 01/15/2021 4.58  4.00 - 5.20 x10E12/L Final   \u0007 Hemoglobin 01/15/2021 14.2  12.0 - 15.5 g/dL Final   \u0007 Hematocrit 01/15/2021 42.5  36.0 - 46.0 % Final   \u0007 MCV 01/15/2021 93  80 - 100 fL Final   \u0007 MCH 01/15/2021 31.0  26.0 - 34.0 pg Final   \u0007 MCHC 01/15/2021 33.4  31.0 - 36.0 g/dL Final   \u0007 Platelet Count 01/15/2021 *****  140 - 450 x10E9/L Final   \u0007 Neutrophil Absolute Count 01/15/2021 3.44  1.80 - 6.80 x10E9/L Final   \u0007 Lymphocyte Abs Cnt 01/15/2021 1.38  1.00 - 3.40 x10E9/L Final   \u0007 Monocyte Abs Count 01/15/2021 0.48  0.20 - 0.80 x10E9/L Final   \u0007 Eosinophil Abs Ct 01/15/2021 0.18  0.00 - 0.40 x10E9/L Final   \u0007 Basophil Abs Count 01/15/2021 0.03  0.00 - 0.10 x10E9/L Final   \u0007 Imm Gran, Left Shift 01/15/2021 0.00  <0.10 x10E9/L Final   \u0007 Hemoglobin A1c 01/15/2021 5.0  4.3 - 5.6 PERCENT Final     Lifestyle:     Exercise:  Not doing it now.   Sleep:  Is poor unless takes meds August 08 using ***** and gabapentin.   Diet:  Sent the anti inflammation diet + coffee   Stress is high.      Psychologic/emotional well-being/support  Mom is staying with her for support.   Refer to social worker.     Assessment / Plan:      1.  Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER \n -. PR weak, her 2 negative.  S/p ***** x 4 and 5 weeks of taxol.  Stopped due to toxicity.  She declines further IV or preoperative therapy.   2.  BRCA 1 mutation. - I will recommend olaparib for a year as part of her adjuvant therapy.    3.  She needs to go to surgery soon.  She plans a bilateral mastectomy with left ***** surgery is planned for January 31.  Her tumor is enlarging.   4. She will qualify for adjuvant xeloda.  Could consider ***** concurrently.   5.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  6.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Her tumor is barely positive for PR 15% but will offer it per guidelines.   7.   We discussed the role of chemotherapy to decrease the risk of systemic recurrence. Unfortunately she did not complete primary treatment and now has had a hiatus between chemotherapy and surgery and her tumor is growing again.  I discussed further chemotherapy and she refuses.  She will qualify for xeloda and olaparib.  We could consider *****.    8.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.     9.  I will see her after she recovers from surgery.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    \n",
+      "assessment_and_plan": "Assessment / Plan:      1.  Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER \n -. PR weak, her 2 negative.  S/p ***** x 4 and 5 weeks of taxol.  Stopped due to toxicity.  She declines further IV or preoperative therapy.   2.  BRCA 1 mutation. - I will recommend olaparib for a year as part of her adjuvant therapy.    3.  She needs to go to surgery soon.  She plans a bilateral mastectomy with left ***** surgery is planned for January 31.  Her tumor is enlarging.   4. She will qualify for adjuvant xeloda.  Could consider ***** concurrently.   5.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  6.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Her tumor is barely positive for PR 15% but will offer it per guidelines.   7.   We discussed the role of chemotherapy to decrease the risk of systemic recurrence. Unfortunately she did not complete primary treatment and now has had a hiatus between chemotherapy and surgery and her tumor is growing again.  I discussed further chemotherapy and she refuses.  She will qualify for xeloda and olaparib.  We could consider *****.    8.  We discussed lifestyle modifications to decrease the risk of recurrence as well as primary cancer risk reduction.  I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting alcohol, exercise, stress reduction and sleep management.     9.  I will see her after she recovers from surgery.     ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.    \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "43-year-old female with newly diagnosed stage IIB left breast cancer, estrogen receptor negative, presenting for initial consult to discuss adjuvant therapy and surgical options."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "ER-/PR+/HER2- invasive ductal carcinoma",
+          "Stage_of_Cancer": "Originally Stage IIB",
+          "Metastasis": "No",
+          "Distant Metastasis": "No"
+        },
+        "Lab_Results": {
+          "lab_summary": "Thyroid Stimulating Hormone 1.55 mIU/L, Albumin 3.8 g/dL, Alkaline Phosphatase 80 U/L, Alanine transaminase 27 U/L, AST 22 U/L, Bilirubin, Total 0.3 mg/dL, Urea Nitrogen 10 mg/dL, Calcium, total 10.1 mg/dL, Chloride [REDACTED] mmol/L, Creatinine 0.55 mg/dL, eGFR - low estimate [REDACTED] mL/min, eGFR - high estimate >120 mL/min, Potassium 4.7 mmol/L, Sodium [REDACTED] mmol/L, Protein, Total 7.5 g/dL, Carbon Dioxide, Total 27 mmol/L, Anion Gap 9, Glucose, non-fasting 95 mg/dL, WBC Count 5.5 x10E9/L, RBC Count 4.58 x10E12/L, Hemoglobin 14.2 g/dL, Hematocrit 42.5 %, MCV 93 fL, MCH 31.0 pg, MCHC 33.4 g/dL, Platelet Count [REDACTED] x10E9/L, Neutrophil Absolute Count 3.44 x10E9/L, Lymphocyte Abs Cnt 1.38 x10E9/L, Monocyte Abs Count 0.48 x10E9/L, Eosinophil Abs Ct 0.18 x10E9/L, Basophil Abs Count 0.03 x10E9/L, Imm Gran, Left Shift 0.00 x10E9/L, Hemoglobin A1c 5.0 PERCENT"
+        },
+        "Clinical_Findings": {
+          "findings": "Patient has a large 8 x 5 cm mobile breast mass in the left breast. No skin changes or lymphadenopathy noted. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease. The patient's tumor is enlarging again, as noted in the physical exam. No other significant imaging findings or pathology results are mentioned in the current visit."
+        },
+        "Current_Medications": {
+          "current_meds": ""
+        },
+        "Treatment_Changes": {
+          "recent_changes": "She declined further IV or preoperative therapy. She will qualify for adjuvant xeloda. Could consider [REDACTED] concurrently.",
+          "supportive_meds": "HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, traMADoL (ULTRAM) 50 mg tablet"
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "curative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "The patient's tumor is enlarging again, as noted in the physical exam. Recent imaging findings include a repeat MRI in November 2020 showing a mild response and a PET scan in December 2020 negative for distant disease. The patient's tumor is now growing again despite previous treatment."
+        },
+        "Medication_Plan_chatgpt": {
+          "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+            {
+              "type": "chemotherapy",
+              "summary": "Could consider [REDACTED] concurrently. She will qualify for xeloda.",
+              "Short term side_effects_discussed": "",
+              "Long term side_effects_discussed": ""
+            },
+            {
+              "type": "hormonal therapy",
+              "summary": "I will recommend olaparib for a year as part of her adjuvant therapy. We discussed the role of hormonal blockade to decrease the risk of systemic recurrence. Her tumor is barely positive for PR 15% but will offer it per guidelines.",
+              "Short term side_effects_discussed": "",
+              "Long term_side_effects_discussed": ""
+            }
+          ]
+        },
+        "Medication_Plan": {
+          "medication_plan": "Olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda. She will qualify for xeloda and olaparib."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "None planned."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Gynecologic Oncology   4",
+          "Others": "Social work referral",
+          "follow up": "I will see her after she recovers from surgery."
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "in-person: after she recovers from surgery"
+        },
+        "Advance_care_planning": {
+          "Advance care": "full code."
+        }
+      },
+      "attribution": {
+        "second opinion": [
+          "I will recommend olaparib for a year as part of her adjuvant therapy."
+        ],
+        "in-person": [
+          "I spent a total of 75 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures."
+        ],
+        "summary": [
+          "Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER -"
+        ],
+        "Type_of_Cancer": [
+          "Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative, ER -. PR weak, her 2 negative."
+        ],
+        "Stage_of_Cancer": [
+          "Stage IIB left IDC of the breast 6.8 cm tumor at presentation, node negative,"
+        ],
+        "Metastasis": [
+          "node negative"
+        ],
+        "Distant Metastasis": [
+          "node negative"
+        ],
+        "findings": [
+          "6.8 cm tumor at presentation, node negative"
+        ],
+        "recent_changes": [
+          "She declines further IV or preoperative therapy.   4. She will qualify for adjuvant xeloda.  Could consider [REDACTED] concurrently."
+        ],
+        "goals_of_treatment": [
+          "She needs to go to surgery soon.  She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31."
+        ],
+        "response_assessment": [
+          "Her tumor is enlarging."
+        ],
+        "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy": [
+          "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for xeloda."
+        ],
+        "medication_plan": [
+          "I will recommend olaparib for a year as part of her adjuvant therapy.    3.  She needs to go to surgery soon.  She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31.  Her tumor is enlarging.   4. She will qualify for adjuvant xeloda."
+        ],
+        "therapy_plan": [
+          "I will recommend olaparib for a year as part of her adjuvant therapy. She will qualify for adjuvant xeloda."
+        ],
+        "radiotherapy_plan": [
+          "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
+        ],
+        "procedure_plan": [
+          "She plans a bilateral mastectomy with left [REDACTED] surgery is planned for January 31."
+        ],
+        "follow up": [
+          "I will see her after she recovers from surgery."
+        ],
+        "Next clinic visit": [
+          "I will see her after she recovers from surgery."
         ]
       }
     }
