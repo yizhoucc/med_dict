@@ -4623,3 +4623,39 @@ Processing row 22 (23/100)...
   Regex matched: 'Assessment and Plan:'
   Regex extraction succeeded (2648 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 16.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "A 63-year-old female with newly diagnosed breast cancer, specifically invasive carcinoma with ductal and 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive carcinoma with ductal and lobular features",
+  "Stage_of_Cancer": "Approximately Stage I-II (1 cm grade 2 invasive lobular carcinoma, 0/1 SLN negative)",
+
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Stage_of_Cancer: "Approximately Stage I-II (1 cm grade 2 invasive lobular carc" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis', 'Stage_of_Cancer']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Approximately Stage I-II (1 cm grade 2 invasive lobular carc"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 8.1s
+      [EXTRACT] raw={
+"lab_summary": "POCT glucose, Fingerstick: 105, 185, 236 (H), 116 mg/dL"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
