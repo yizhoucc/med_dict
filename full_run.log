@@ -9161,3 +9161,153 @@ Processing row 43 (44/100)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
       [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 86.5s
+    Medication_Plan_chatgpt: 52.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Will start an aromatase inhibitor after she completes radiation. Plan to submit authorization for Zoladex in the event of a delay in bilateral oophorect
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'psychiatry medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'She start an aromatase inhibitor after" -> "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'She will start an " -> "[{'type': 'hormonal therapy', 'summary': 'She will start an "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor " -> "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor "
+    Medication_Plan: 10.6s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Start an aromatase inhibitor after completing radiation. Consider Zoladex if there is a delay in bilateral oophorectomy. Continue Lexapro, though the patient has not taken it
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
+    Therapy_plan: 16.3s
+      [EXTRACT] raw={
+    "therapy_plan": "She will start an aromatase inhibitor after she completes radiation. She may be eligible for the trial with ribociclib that should open around the time she completes radiation. 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 12.7s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "continues to recover from surgery. She met with Dr. [REDACTED] in radiation oncology today and elected to enrolled on a clinic trial, which will randomized her to 3 vs 5 we
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "continues to recover from surgery. She met with Dr. [REDACTED] in radiation onco" -> "She elected to enroll in a clinical trial, which will randomize her to 3 vs 5 we"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 10.4s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "will undergo a BSO eventually, plan for Zoladex authorization in the event of a delay in oophorectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "will undergo a BSO eventually, plan for Zoladex authorization in the event of a " -> "will undergo a bilateral salpingo-oophorectomy (BSO) eventually, plan for Zolade"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 5.2s
+      [EXTRACT] raw={
+    "imaging_plan": "Consider a follow up CT Chest in one year."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 12.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "follow up with nutrition on 11/30/18",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Physical therapy referral",
+"follow up": "on 01/05/19"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 01/05/19"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 130.9s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 21/23 fields sourced (37.6s)
+  Row 43 total: 255.0s
+  Row 43 saved to progress
+
+Processing row 44 (45/100)...
+  Injected 2 term definitions: ['estrogen receptor', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1830 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "37 year old female with metastatic triple negative breast cancer to the lung and right hilar lymph node 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.4s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
+  "Stage_of_Cancer": "Originally Stage IIIB, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to the lung and right hilar 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to the lung and right hilar lymph node" -> "Yes, to the lung"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 19.4s
