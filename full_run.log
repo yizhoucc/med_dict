@@ -15364,3 +15364,157 @@ Processing row 72 (73/100)...
       [EXTRACT] raw={
     "Advance care": "Not discussed during this visit."
 }
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 52.8s
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 18/19 fields sourced (13.5s)
+  Row 72 total: 123.8s
+  Row 72 saved to progress
+
+Processing row 73 (74/100)...
+  Injected 9 term definitions: ['progesterone receptor', 'aromatase inhibitor', 'sentinel lymph node', 'estrogen receptor', 'ER positive', 'PR positive', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (2114 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Ms. [REDACTED] [REDACTED] is a 68 y.o. female with a history of metastatic HER-2 positive gastric cancer 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "pT2N1a",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 40.3s
+      [EXTRACT] raw={
+"findings": "Pathology results: Right breast invasive ductal carcinoma, grade 2, 2.5 cm, margins negative; Ductal carcinoma in situ, intermediate nuclear grade, cribriform, micropapillary and solid 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.6s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, cholecalciferol, vita"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, cholecalciferol, vitamin D3, 2,000 unit TAB, garlic CAP, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream -> 
+    Treatment_Changes: 5.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL) -> 
+  Phase 1 extraction (6 prompts): 89.7s
+  Cross-context injected (1159 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 96.3s
+    Medication_Plan_chatgpt: 22.3s [schema-fixed, improved]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient should be treated with an aromatase inhibitor. The exact medication is not specified at this time.",
+        "Short term side_effects_discussed"
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'an aromatase inhibitor'}, {'type': 'ot" -> "[{'type': 'hormonal therapy', 'details': {'summary': 'an aromatase inhibitor', '"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 12.7s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "The patient will consider the use of an aromatase inhibitor alone vs TC (docetaxel and carboplatin) then an aromatase inhibitor based on the results of further tumor testing.
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "The patient will consider the use of an aromatase inhibitor alone vs TC (docetax" -> "The patient will consider the use of an aromatase inhibitor alone vs TC (docetax"
+    Therapy_plan: 33.2s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Given her positive hormone status, she should be treated with an aromatase inhibitor. Due to her current marginal functional status, history of chemotherapy with [REDACTED]/Herc
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Given her positive hormone status, she should be treated wit" -> "Given her positive hormone status, she should be treated wit"
+      [G5-TEMPORAL] therapy_plan: "Given her positive hormone status, she should be treated with an aromatase inhib" -> "Given her positive hormone status, she should be treated with an aromatase inhib"
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 3.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "will consider the use of [REDACTED] alone vs TC then [REDACTED] based on the testing results"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "will consider the use of [REDACTED] alone vs TC then [REDACTED] based on the tes" -> "No procedures planned."
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
