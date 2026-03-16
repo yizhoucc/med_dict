@@ -15926,3 +15926,72 @@ Processing row 75 (76/100)...
       [G4-FAITH] EMPTIED: ['procedure_plan']
       [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.0s
+      [EXTRACT] raw={
+    "imaging_plan": "PETCT up to toes due now given new right leg pain. If PETCT remains stable, will spread it to every 5 months."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.6s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "Check labs [REDACTED]-12 weeks, due August 2018 or September 2018"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "Check labs [REDACTED]-12 weeks, due August 2018 or September 2018" -> "Check labs due August 2018 or September 2018"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Follow-up in 9 weeks or sooner if she has new or worsening symptoms."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 9 weeks or sooner if she has new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 220.9s
+    [POST-THERAPY] removed non-therapy: ['Restart Gabapentin 300 mg TID.', 'Continue Naprosyn 500 mg BID as needed (take with ', 'Continue Metformin 1000 mg BID.', 'Check labs [REDACTED]-12 weeks, due August 2018 or', 'Scans due now.', '[REDACTED] obtain PETCT up to toes given new right', 'If PETCT remains stable, will spread it to every 5', 'Try Voltaren gel as needed for pain.', 'Lomotil 1-2 tabs as needed with each watery bowel ', 'Ensure adequate fluid intake per day to prevent de', 'Small, frequent meals.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to the bone and left iliac bone'

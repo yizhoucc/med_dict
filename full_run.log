@@ -15838,3 +15838,156 @@ Processing row 75 (76/100)...
       [G3-IMPROVE] lab_summary: "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count " -> "WBC Count 6.7, Hemoglobin 10.9 (L), Hematocrit 34.1 (L), MCV 84, Platelet Count "
       [G4-FAITH] no changes (all supported)
     Clinical_Findings: 25.0s
+      [EXTRACT] raw={
+"findings": "Patient has new right upper arm and right posterior knee pain. Recent echo in May 2018 showed EF 60-65%. No evidence of recurrent or metastatic hypermetabolic disease on PET/CT from 04/
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.3s
+      [EXTRACT] raw={
+"current_meds": "Trastuzumab, Pertuzumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 20.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Restart Gabapentin 300 mg TID",
+"supportive_meds": "Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day, Gabapentin 300 mg capsule Take 1 capsule (300 m
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day, Gabapentin 300 mg capsule Take 1 capsule (300 mg total) by mouth 3 (three) times daily, Naproxen 500 mg tablet Take 1 tablet (500 mg total) by mouth 2 (two) times daily with meals -> Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 times a day
+  Phase 1 extraction (6 prompts): 101.5s
+  Cross-context injected (900 chars)
+    Treatment_Goals: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.0s
+      [EXTRACT] raw={
+"response_assessment": "No evidence of recurrent or metastatic hypermetabolic disease on PET/CT from 04/15/18. Unchanged left carotid body mass, presumed to be a paraganglioma. No palpable cervical 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.9s
+  Total extraction: 120.4s
+    Medication_Plan_chatgpt: 120.5s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days.",
+        "Short term side_effects_discussed": "Neuropathy, persistent but improved due
+      [G1-FORMAT] ok, keys=['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'bowel regimen', 'pain medication', 'neuropathy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'status': 'last given on 0" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa" -> "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summa"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'chemotherapy', 'medication': 'Paclitaxel', 'summary': 'last given on " -> "[{'type': 'chemotherapy', 'medication': 'Trastuzumab', 'summary': '6 mg/kg IV ev"
+    Medication_Plan: 25.7s
+      [EXTRACT] raw={
+    "medication_plan": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days. Try Voltaren gel as needed for pain. Lomotil 1-2 tabs as needed with each watery bowel movement up to 4 t
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 36.7s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days. Restart Gabapentin 300 mg TID. Continue Naprosyn 500 mg BID as needed (take with food). Continue Metformin 1
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days. Restart Gab" -> "Continue Trastuzumab 6 mg/kg and Pertuzumab 420 mg IV every 21 days. Restart Gab"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.0s
+      [EXTRACT] raw={
+    "imaging_plan": "PETCT up to toes due now given new right leg pain. If PETCT remains stable, will spread it to every 5 months."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.6s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "Check labs [REDACTED]-12 weeks, due August 2018 or September 2018"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "Check labs [REDACTED]-12 weeks, due August 2018 or September 2018" -> "Check labs due August 2018 or September 2018"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 9.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Follow-up in 9 weeks or sooner if she has new or worsening symptoms."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 4.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 9 weeks or sooner if she has new or worsening symptoms"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
