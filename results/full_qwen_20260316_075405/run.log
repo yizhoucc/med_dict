@@ -2582,3 +2582,44 @@ Processing row 12 (13/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ibuprofen (ADVIL,MOTRIN) 200 mg tablet, multivitamin (MULTIP"
+      [POST-MEDS] ibuprofen (ADVIL,MOTRIN) 200 mg tablet, multivitamin (MULTIPLE VITAMINS) tablet, TURMERIC [REDACTED] EXTRACT ORAL -> 
+    Treatment_Changes: 4.2s [improved]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ibuprofen (ADVIL,MOTRIN)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "ibuprofen (ADVIL,MOTRIN)" -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 46.1s
+  Cross-context injected (617 chars)
+    Treatment_Goals: 3.3s
+      [EXTRACT] raw={
+"goals_of_treatment": "risk reduction"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.7s
+  Total extraction: 51.8s
