@@ -17417,3 +17417,167 @@ Processing row 82 (83/100)...
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
     Referral: 8.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "upcoming breast surg follow up appointment"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: upcoming breast surgery follow up appointment"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 57.9s
+    [POST-THERAPY] removed non-therapy: ['Reassessment of status and treatment plan after su']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to right axillary lymph nodes'
+  [ATTRIBUTION] 17/17 fields sourced (25.0s)
+  Row 82 total: 210.0s
+  Row 82 saved to progress
+
+Processing row 83 (84/100)...
+  Injected 5 term definitions: ['progesterone receptor', 'estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (4232 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 60-year-old female with metastatic breast cancer, estrogen receptor positive, and [REDACTED] negative, 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 18.5s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, soft tissue, liver, and 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 15.7s
+      [EXTRACT] raw={
+"lab_summary": "WBC 7.0, Hg 8.4, Plt 80, Cr 0.53, Tbili 1.2, ALT 23 (11/07/20); CA 15-3 43 (11/21/19)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 39.4s
+      [EXTRACT] raw={
+"findings": "MRI brain on 11/07/2020 showed diffuse irregular enhancement along the bilateral cerebral convexities and right petroclival region, with increased involvement of the right internal audi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.1s
+      [EXTRACT] raw={
+"current_meds": "capecitabine, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 15.7s
+      [EXTRACT] raw={
+"recent_changes": "Started on capecitabine one week one, one week off. Patient accidentally took only 500mg BID until mid-September. Increased to 1000mg BID in mid-September, then 1500mg BID in late
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 112.7s
+  Cross-context injected (1162 chars)
+    Treatment_Goals: 4.0s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 35.9s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed multiple hypoattenuating lesions in the right and left hepatic lobes, increased in size and number compared to 03/10/2020. MRI brain on 11/07/2020
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 39.9s
+  Total extraction: 152.7s
+    Medication_Plan_chatgpt: 57.3s [improved, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue xeloda 1500mg BID for now. At time of progression of disease, could consider fulvestrant + [REDACTED] given the [REDACTED] mutation on STRATA t
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] other treatment: "{'summary': 'Could consider starting low dose steroids to see if reduction of sw" -> "{'summary': 'Could consider starting low dose steroids to see if reduction of sw"
+      [G3-IMPROVE] bone therapy: "{'summary': 'Continue zolendronic acid.', 'Short term side_effects_discussed': '" -> "{'summary': 'Continue zolendronic acid.', 'Short term side_effects_discussed': '"
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Recommend referral to radiation oncology to consider either focal C" -> "{'summary': 'Recommend referral to radiation oncology to consider either focal C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'radiotherapy'}
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue Xeloda 1500mg BID for now. Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. Could consider starting low dose
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Continue Xeloda 1500mg BID for now. Recommend referral to ra" -> "Continue xeloda 1500mg BID for now -- Recommend referral to "
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. The patient is interested in a UCSF Rad Onc opinion as well."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 9.5s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Repeat LP for CSF cytology"
+}

@@ -17535,3 +17535,60 @@ Processing row 83 (84/100)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 39.9s
   Total extraction: 152.7s
+    Medication_Plan_chatgpt: 57.3s [improved, stripped]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Continue xeloda 1500mg BID for now. At time of progression of disease, could consider fulvestrant + [REDACTED] given the [REDACTED] mutation on STRATA t
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G2-SCHEMA] fix FAILED, expected=['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy'], got=['hormonal therapy', 'bone therapy', 'radiotherapy', 'other treatment']
+      [G3-IMPROVE] other treatment: "{'summary': 'Could consider starting low dose steroids to see if reduction of sw" -> "{'summary': 'Could consider starting low dose steroids to see if reduction of sw"
+      [G3-IMPROVE] bone therapy: "{'summary': 'Continue zolendronic acid.', 'Short term side_effects_discussed': '" -> "{'summary': 'Continue zolendronic acid.', 'Short term side_effects_discussed': '"
+      [G3-IMPROVE] radiotherapy: "{'summary': 'Recommend referral to radiation oncology to consider either focal C" -> "{'summary': 'Recommend referral to radiation oncology to consider either focal C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-KEYS] stripped: {'hormonal therapy', 'bone therapy', 'other treatment', 'radiotherapy'}
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue Xeloda 1500mg BID for now. Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. Could consider starting low dose
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Continue Xeloda 1500mg BID for now. Recommend referral to ra" -> "Continue xeloda 1500mg BID for now -- Recommend referral to "
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. The patient is interested in a UCSF Rad Onc opinion as well."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 9.5s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Repeat LP for CSF cytology"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Repeat LP for CSF cytology" -> "Repeat LP for CSF cytology, Repeat MRI spine to r/o LMD in the spine, Recommend "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Repeat MRI spine to r/o LMD in the spine', 'Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]']
+    Imaging_Plan: 7.4s
+      [EXTRACT] raw={
+    "imaging_plan": "Repeat CT CAP now, Repeat MRI spine to rule out leptomeningeal disease in the spine"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
