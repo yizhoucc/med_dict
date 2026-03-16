@@ -13045,3 +13045,151 @@ Processing row 61 (62/100)...
       [G4-FAITH] EMPTIED: ['follow up', 'Nutrition', 'Others', 'Specialty']
       [G4-PROTECT] follow up: restored safe negative "None"
       [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+    follow_up_next_visit: 3.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given note"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given note" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 122.1s
+    [POST-GENETICS] cleared finding from referral: 'Negative germline panel testing'
+    [POST-THERAPY] removed non-therapy: ['Options discussed include [REDACTED] +/- [REDACTED', 'Pt can modify or change to an alternate treatment ', 'One option is to start with [REDACTED], with close']
+  [ATTRIBUTION] 13/14 fields sourced (29.9s)
+  Row 61 total: 238.0s
+  Row 61 saved to progress
+
+Processing row 62 (63/100)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3414 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.9s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "49 y.o. female with locally advanced ER+/PR-/[REDACTED] negative left breast cancer. The purpose of this
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/[REDACTED] negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage IIIA (S/P neoadjuvant chemotherapy)",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 94.2s
+      [EXTRACT] raw={
+"findings": "Patient has locally advanced ER+/PR- HER2-negative left breast cancer. Pathology from left partial mastectomy and sentinel lymph node biopsy shows 3.8 x 3.5 cm grade 2 IDC with positive
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.8s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.1s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN-ODT) 8 mg rapid dissolve tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 151.9s
+  Cross-context injected (1429 chars)
+    Treatment_Goals: 4.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 38.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Post-chemotherapy MRI on 09/02/19 shows dramatic response to therapy with near total complete resolution of the mass an
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam. Post-" -> "Post-chemotherapy MRI on 09/02/19 shows dramatic response to"
+  Phase 2 extraction (2 prompts): 42.7s
+  Total extraction: 194.6s
+    Medication_Plan_chatgpt: 61.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Patient is currently on letrozole. If not post-menopausal, will consider ovarian suppression shots or oophorectomy. Discussed [REDACTED] (along with OS 
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'bone therapy', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'bone therapy', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started " -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing" -> "[{'type': 'hormonal therapy', 'summary': 'Letrozole started on 10/04/19. Testing"
+    Medication_Plan: 20.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test for estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "Continue letrozole. Test for estradiol and FSH once every 1-" -> "Continue letrozole. Test for estradiol and FSH once every 1-"
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 29.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on letrozole. Received XRT to the left breast and regional nodes on 11/26/19. Recommended testing for estradiol and FSH once every 1-2 months until September 2020 at l
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Currently on letrozole. Received XRT to the left breast and regional nodes on 11" -> "Currently on letrozole. Recommended testing for estradiol and FSH once every 1-2"
+    radiotherapy_plan: 6.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "received XRT to the left breast and regional nodes on 11/26/19."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
