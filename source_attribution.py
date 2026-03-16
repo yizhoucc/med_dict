@@ -81,8 +81,13 @@ def get_attributable_fields(keypoints):
 
 _FIELD_QUESTION_TEMPLATE = (
     'I extracted {field_name}: "{value}". '
-    'Quote the EXACT short phrase (5-20 words) from the note above that '
-    'supports this. If it was inferred, quote the inference basis. '
+    'Quote the EXACT short phrase (5-20 words) from the note that is the '
+    'most direct evidence. Rules: '
+    '1) Prefer the Assessment/Plan section if the answer appears there. '
+    '2) If it was INFERRED, quote the logical premise '
+    '(e.g. "palliative" comes from "Stage IV" or "metastatic", not unrelated text). '
+    '3) If the value says "No X planned" or "None", quote any mention of X, '
+    'or reply NOT_IN_NOTE if X is simply absent from the note. '
     'Reply with ONLY the quote, nothing else.'
 )
 
@@ -114,7 +119,10 @@ def attribute_single_field(field_name, value_str, model, tokenizer,
         if quote.lower().startswith(prefix.lower()):
             quote = quote[len(prefix):].strip().strip('"').strip("'").strip()
 
-    if len(quote) < 5:
+    # Handle "not in note" responses
+    not_in_note_phrases = ['not_in_note', 'not in note', 'not mentioned',
+                           'not found', 'n/a', 'none']
+    if quote.lower().replace(' ', '_') in not_in_note_phrases or len(quote) < 5:
         return None
     return quote
 
