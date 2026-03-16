@@ -13148,3 +13148,12 @@ Processing row 62 (63/100)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 38.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. Post-chemotherapy MRI on 09/02/19 shows dramatic response to therapy with near total complete resolution of the mass an
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam. Post-" -> "Post-chemotherapy MRI on 09/02/19 shows dramatic response to"
+  Phase 2 extraction (2 prompts): 42.7s
+  Total extraction: 194.6s
