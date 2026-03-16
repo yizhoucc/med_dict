@@ -9160,3 +9160,20 @@ Processing row 43 (44/100)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.1s
   Total extraction: 86.5s
+    Medication_Plan_chatgpt: 52.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Will start an aromatase inhibitor after she completes radiation. Plan to submit authorization for Zoladex in the event of a delay in bilateral oophorect
+      [G1-FORMAT] ok, keys=['hormonal therapy', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['hormonal therapy', 'psychiatry medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'details': 'She start an aromatase inhibitor after" -> "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'She will start an " -> "[{'type': 'hormonal therapy', 'summary': 'She will start an "
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor " -> "[{'type': 'hormonal therapy', 'summary': 'She will start an aromatase inhibitor "
+    Medication_Plan: 10.6s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Start an aromatase inhibitor after completing radiation. Consider Zoladex if there is a delay in bilateral oophorectomy. Continue Lexapro, though the patient has not taken it
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
