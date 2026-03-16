@@ -245,3 +245,50 @@ Processing row 78 (2/13)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 19.5s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with rising tumor markers. No recent scans due to access issues. Pulmonary embolism diagnosed, stable INR 2.1. Pleural effusion present, no recent t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.2s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "denosumab (XGEVA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "denosumab (XGEVA)" -> ""
+      [G4-FAITH] current_meds: "" -> "BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, le"
+      [POST-MEDS] BENAZEPRIL HCL, CALCIUM ORAL, denosumab, docusate sodium, levothyroxine, LORazepam, methadone, SENNOSIDES, warfarin -> denosumab
+    Treatment_Changes: 27.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped all treatment last week due to increased bone pain and rising tumor markers.",
+"supportive_meds": "methadone (DOLOPHINE) 10 mg tablet Take 10 mg by mouth 3 (three) times d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] methadone (DOLOPHINE) 10 mg tablet Take 10 mg by mouth 3 (three) times daily., docusate sodium (COLACE) 250 mg capsule Take 1 capsule (250 mg total) by mouth Twice a day., denosumab (XGEVA) 120 mg/1.7 mL (70 mg/mL) SOLN injection Inject 120 mg into the skin every 28 days., warfarin (COUMADIN) 5 mg tablet Take 3 mg by mouth Daily. Use as instructed -> methadone (DOLOPHINE) 10 mg tablet Take 10 mg by mouth 3 (three) times daily., docusate sodium (COLACE) 250 mg capsule Take 1 capsule (250 mg total) by mouth Twice a day., denosumab (XGEVA) 120 mg/1.7 mL (70 mg/mL) SOLN injection Inject 120 mg into the skin every 28 days.
+  Phase 1 extraction (6 prompts): 112.3s
+  Cross-context injected (710 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.0s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is not responding to treatment. Tumor marker is rising. Currently stopped all treatment last week because of these two issues."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is not responding to treatment. Tumor marker is rising. Currently sto" -> "The cancer is not responding to treatment. Tumor marker is rising."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.4s
+  Total extraction: 121.7s
