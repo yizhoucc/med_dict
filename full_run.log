@@ -14493,3 +14493,160 @@ Processing row 68 (69/100)...
 "follow up": "F/U with Dr. [REDACTED]"
 }
       [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.9s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: F/U with Dr. [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 109.9s
+  [ATTRIBUTION] 18/19 fields sourced (26.7s)
+  Row 68 total: 238.4s
+  Row 68 saved to progress
+
+Processing row 69 (70/100)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'ER positive', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1575 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.7s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient presents with malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.9s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on the left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on the right side",
+  "Stage_of_Cancer": "Originally Stage IIA on th
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage IIA on the left side, Stage I on the right " -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA on the left side, Stage I on the right "
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 60.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 26.0s
+      [EXTRACT] raw={
+"findings": "Patient is recovering well from bilateral mastectomies performed in May 2020. Pathology results show the left breast had a 4.4 cm, grade 2 residual invasive lobular carcinoma with 1 pos
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.5s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.6s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "She will restart letrozole which she had previously tolerated.",
+"supportive_meds": "letrozole (FEMARA) 2.5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "letrozole (FEMARA) 2.5 mg tablet" -> "letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+  Phase 1 extraction (6 prompts): 136.3s
+  Cross-context injected (980 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 142.9s
+    Medication_Plan_chatgpt: 16.5s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Restart letrozole which she had previously tolerated.",
+        "Short term side_effects_discussed": "Hot flashes",
+        "Long term side_effects_disc
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': 'hormonal therapy to restart letrozole which she had previously tole"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'hormonal therapy to restart letrozole which she" -> "{'summary': 'hormonal therapy to restart letrozole which she"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 5.8s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Restart letrozole which she had previously tolerated. She will be given information about [REDACTED] to help with hot flashes."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Restart letrozole which she had previously tolerated. She will be given informat" -> "Restart letrozole which she had previously tolerated."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 7.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Restart letrozole which she had previously tolerated. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation consult. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "Radiation consult. She is going to have expanders placed prior to radiation." -> "She is going to have expanders placed prior to radiation."
+    Procedure_Plan: 5.7s
