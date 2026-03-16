@@ -17,27 +17,21 @@ import time
 
 
 # ── skip detection ─────────────────────────────────────────────────
+# Only skip values that are truly empty or LLM meta-responses.
+# Short values like "yes", "palliative", "Follow up" should be
+# attributed — the LLM can find where the inference came from.
 
 _SKIP_EXACT = {
-    '', 'none', 'no', 'yes', 'n/a', 'not mentioned', 'not specified',
-    'not applicable', 'unknown', '[]', '{}',
+    '', 'none', 'n/a', '[]', '{}',
 }
 
-_SKIP_PREFIXES = (
-    'no ',
-    'not ',
-    'none ',
-)
-
 _SKIP_CONTAINS = (
-    'no response to assess',
     'the note does not',
     'not provided in the note',
     'not specified in',
     'not mentioned in',
     'not discussed during',
     'not documented',
-    'no evidence of response',
     'cannot be determined',
     'unable to determine',
     'no data available',
@@ -45,15 +39,19 @@ _SKIP_CONTAINS = (
 
 
 def _is_skip_value(value_str):
-    """Check if a value is non-informative for source attribution."""
+    """Check if a value is non-informative for source attribution.
+
+    Only skips truly empty values and LLM meta-responses.
+    Short values like 'yes', 'palliative', 'New patient' are kept
+    so the LLM can find inference sources.
+    """
     val = value_str.strip()
-    if len(val) < 3:
+    if len(val) == 0:
         return True
     val_lower = val.lower().rstrip('.').rstrip()
     if val_lower in _SKIP_EXACT:
         return True
-    if len(val_lower) < 50 and val_lower.startswith(_SKIP_PREFIXES):
-        return True
+    # LLM meta-responses
     for phrase in _SKIP_CONTAINS:
         if phrase in val_lower:
             return True
@@ -79,40 +77,34 @@ def _flatten_value(field_value):
 
 _ATTRIBUTION_SYSTEM = (
     "You are a source attribution expert. Your job is to find the exact "
-    "sentences in a clinical note that support each extracted field value."
+    "sentences in a clinical note that support each extracted field value. "
+    "You MUST respond with valid JSON only. No markdown, no explanations."
 )
 
 _ATTRIBUTION_PROMPT_TEMPLATE = """\
 Below is a clinical note and a list of extracted fields with their values.
-For each field, find 1-3 exact quotes from the note that support the extracted value.
+For each field, find 1 exact quote from the note that best supports the extracted value.
 
-## Rules
-- Quote the note text EXACTLY as it appears — do not paraphrase or modify
-- Each quote should be a meaningful phrase or sentence (15-150 words)
-- If the value was INFERRED (not directly stated), quote the text the inference is based on
-- Only include fields where you can find supporting text
-- Skip fields you cannot find support for
+Rules:
+- Quote the note text EXACTLY as it appears. Do not paraphrase.
+- Each quote should be 10-80 words, just enough to show the source.
+- For INFERRED values (e.g. "palliative", "New patient", "yes"), quote the text that led to the inference.
+- Skip fields where no supporting text exists in the note.
+- Return ONLY a JSON object. No markdown fences, no explanation.
 
-## Clinical Note
+Clinical Note:
 --- BEGIN NOTE ---
 {note_text}
 --- END NOTE ---
 
-## Extracted Fields
+Extracted Fields:
 {fields_text}
 
-## Output
-Return a JSON object. Keys = field names exactly as listed above, values = list of exact quote strings from the note.
-```json
-"""
+Return a JSON object where keys = field names, values = the exact quote string from the note."""
 
 
 def build_attribution_prompt(note_text, keypoints):
     """Build the attribution prompt for a single row.
-
-    Args:
-        note_text: Original clinical note
-        keypoints: Dict of prompt_name -> {field: value}
 
     Returns:
         (prompt_text, attributable_fields) where attributable_fields is
@@ -133,7 +125,6 @@ def build_attribution_prompt(note_text, keypoints):
     # Build fields text
     lines = []
     for i, (fname, fval) in enumerate(attributable.items(), 1):
-        # Truncate very long values
         display_val = fval[:200] + '...' if len(fval) > 200 else fval
         lines.append(f"{i}. {fname}: \"{display_val}\"")
     fields_text = '\n'.join(lines)
@@ -143,6 +134,45 @@ def build_attribution_prompt(note_text, keypoints):
         fields_text=fields_text,
     )
     return prompt, attributable
+
+
+# ── JSON repair for truncated output ───────────────────────────────
+
+def _repair_truncated_json(text):
+    """Try to repair truncated JSON by closing open structures.
+
+    When max_new_tokens cuts output mid-JSON, we try to salvage
+    the fields that were already complete.
+    """
+    # Strip markdown fences
+    text = text.strip()
+    if text.startswith('```'):
+        text = re.sub(r'^```\w*\s*', '', text)
+        text = re.sub(r'\s*```\s*$', '', text)
+    text = text.strip()
+
+    # If it already parses, great
+    try:
+        result = json.loads(text)
+        if isinstance(result, dict):
+            return result
+    except (json.JSONDecodeError, ValueError):
+        pass
+
+    # Find the last complete key-value pair
+    # Strategy: progressively trim from the end until we can close the JSON
+    for trim in range(len(text) - 1, 0, -1):
+        candidate = text[:trim].rstrip().rstrip(',')
+        # Try closing with various bracket combinations
+        for suffix in ['"}', '"]', '}', '"}]', '"]}']:
+            attempt = candidate + suffix
+            try:
+                result = json.loads(attempt)
+                if isinstance(result, dict):
+                    return result
+            except (json.JSONDecodeError, ValueError):
+                continue
+    return None
 
 
 # ── LLM call ───────────────────────────────────────────────────────
@@ -155,27 +185,25 @@ def run_attribution_llm(prompt, model, tokenizer, chat_tmpl, gen_config,
     1. With base_cache: append as user turn (efficient, reuses note encoding)
     2. Without base_cache: full prompt (standalone mode)
 
-    Returns: parsed dict or None
+    Returns: (parsed_dict, raw_output)
     """
     from ult import try_parse_json, clone_cache, run_model
 
     if base_cache is not None:
-        # Append to existing cache (note already encoded)
         full_prompt = chat_tmpl.user_assistant(prompt)
         cache = clone_cache(base_cache)
         output, _ = run_model(full_prompt, model, tokenizer, gen_config, cache)
     else:
-        # Full prompt (standalone)
         full_prompt = chat_tmpl.system_user_assistant(_ATTRIBUTION_SYSTEM, prompt)
         output, _ = run_model(full_prompt, model, tokenizer, gen_config)
 
-    # Parse the JSON output
+    # Try parsing with try_parse_json first
     result = try_parse_json(output)
+
+    # If that fails, try our truncated JSON repair
     if result is None:
-        # Try extracting JSON from markdown code block
-        match = re.search(r'```json\s*(.*?)\s*```', output, re.DOTALL)
-        if match:
-            result = try_parse_json(match.group(1))
+        result = _repair_truncated_json(output)
+
     return result, output
 
 
@@ -184,13 +212,6 @@ def run_attribution_llm(prompt, model, tokenizer, chat_tmpl, gen_config,
 def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
                   gen_config, base_cache=None):
     """Run LLM source attribution for all fields in a row.
-
-    Args:
-        note_text: Original clinical note
-        keypoints: Dict of prompt_name -> {field: value}
-        model, tokenizer, chat_tmpl: Model infrastructure
-        gen_config: Generation config dict
-        base_cache: Optional KV cache with note already encoded
 
     Returns:
         Dict of field_name -> list of source quotes
@@ -214,11 +235,10 @@ def attribute_row(note_text, keypoints, model, tokenizer, chat_tmpl,
     for field_name, quotes in result.items():
         if field_name in attributable:
             if isinstance(quotes, list):
-                # Filter out empty/very short quotes
-                valid = [q for q in quotes if isinstance(q, str) and len(q) > 10]
+                valid = [q for q in quotes if isinstance(q, str) and len(q) > 5]
                 if valid:
                     attribution[field_name] = valid
-            elif isinstance(quotes, str) and len(quotes) > 10:
+            elif isinstance(quotes, str) and len(quotes) > 5:
                 attribution[field_name] = [quotes]
 
     return attribution
@@ -239,7 +259,7 @@ def format_attribution(attribution, keypoints, max_quote=150):
             lines.append(f'\n  {field_name}: "{val_str}"')
             for quote in attribution[field_name]:
                 q = quote[:max_quote]
-                lines.append(f'    → "...{q}..."')
+                lines.append(f'    -> "...{q}..."')
     return '\n'.join(lines)
 
 
@@ -308,7 +328,7 @@ def main():
 
     gen_config = config["generation"]["keypoint"].copy()
     gen_config["eos_token_id"] = tokenizer.eos_token_id
-    gen_config["max_new_tokens"] = 1024  # attribution needs more space
+    gen_config["max_new_tokens"] = 2048  # attribution output can be long
 
     # Load progress
     with open(args.progress_file) as f:
