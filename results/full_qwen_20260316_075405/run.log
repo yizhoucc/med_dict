@@ -19574,3 +19574,73 @@ Processing row 93 (94/100)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 19.0s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer with a 1.6 cm tumor and 3 positive lymph nodes. The tumor is estrogen receptor positive (ER+), progesterone receptor positive (PR+), and HER2
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.0s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole" -> "letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 10.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily" -> "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FE"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+  Phase 1 extraction (6 prompts): 134.5s
+  Cross-context injected (780 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam"
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "no evidence of disease recurrence on imaging and exam" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 7.8s
+  Total extraction: 142.3s
+    Medication_Plan_chatgpt: 17.8s [schema-fixed, improved, faith-trimmed]
+      [EXTRACT] raw={
+    "hormonal therapy": {
+        "summary": "Plan to continue for [REDACTED] therapy and bone protection, next due May 2021.",
+        "Short term side_effects_discussed": "",
+        "Long term si
+      [G1-FORMAT] ok, keys=['hormonal therapy']
+      [G2-SCHEMA] fixed: ['hormonal therapy'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "hormonal therapy" -> "{'summary': 'hormonal therapy started, next due May 2021 for bone protection', '"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'summary': 'hormonal therapy started, next due May 2021 for" -> "{'summary': 'hormonal therapy started, next due May 2021 for"
+      [G5-TEMPORAL] no changes
+    Medication_Plan: 7.9s
+      [EXTRACT] raw={
+    "medication_plan": "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
