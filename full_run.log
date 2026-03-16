@@ -2834,3 +2834,147 @@ Processing row 13 (14/100)...
       [EXTRACT] raw={
     "chemotherapy": {
         "summary": "Currently doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Also receiving doxorubicin as 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'bone therapy', 'radiotherapy', 'pain medication', 'psychiatry medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'medication': 'faslodex', 'start_date': '07/14/18'" -> "[{'type': 'hormonal therapy', 'medication': 'faslodex', 'summary': 'Started on 0"
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'medication': 'faslodex', 'sum" -> "[{'type': 'hormonal therapy', 'medication': 'faslodex', 'sum"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "[{'type': 'hormonal therapy', 'medication': 'faslodex', 'summary': 'Started on 0" -> "[{'type': 'chemotherapy', 'medication': 'Gemcitabine', 'summary': '200mg, once w"
+    Medication_Plan: 23.6s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 2
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 21.4s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on faslodex and palbociclib, which have been stopped. She is now doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once week
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Currently on faslodex and palbociclib, which have been stopped. She is now doing" -> "Currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, "
+      [G4-FAITH] therapy_plan: "Currently on low dose chemo combination of [REDACTED] 10 mg," -> "Currently on low dose chemo combination of [REDACTED]  10 mg"
+      [G5-TEMPORAL] therapy_plan: "Currently on low dose chemo combination of [REDACTED]  10 mg, Gemcitabine 200mg," -> "Currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, "
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 8.3s
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP and Total Spine MRI scheduled for May 2019. Repeat total spine MRI in 6 weeks."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 4.6s
+      [EXTRACT] raw={
+    "lab_plan": "Labs to be drawn every two weeks."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    Referral: 12.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "PT start 03/12/19",
+"follow up": "RTC after scans, will return in 2 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Advised her to eat small, frequent meals that's high in calories and protein."
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+    follow_up_next_visit: 3.7s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 2 months" -> "in-person: 2 months for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 203.8s
+    [POST-OTHERS] cleaned: 'PT start 03/12/19...' → 'None'
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Advised her to eat small, frequent meals that's high in calories and protein.'
+    [POST-THERAPY] removed non-therapy: ['Plans to continue this therapy and will return in ']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, liver, and nodes)'
+  [ATTRIBUTION] 22/22 fields sourced (37.6s)
+  Row 13 total: 422.3s
+  Row 13 saved to progress
+
+Processing row 14 (15/100)...
+  Injected 3 term definitions: ['progesterone receptor', 'estrogen receptor', 'FISH']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1460 chars)
+  A/P extraction: 20.6s
+    Reason_for_Visit: 11.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient with newly diagnosed left breast cancer, mixed infiltrating ductal and lobular carcinoma, seekin
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.2s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- mixed infiltrating ductal and lobular carcinoma",
+  "Stage_of_Cancer": "Clin st I/II, based on imaging and exam",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- mixed infiltrating ductal and lobular carcinoma" -> "ER+/PR+/HER2+ mixed infiltrating ductal and lobular carcinoma"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
