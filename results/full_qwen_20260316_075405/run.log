@@ -20819,3 +20819,25 @@ Processing row 99 (100/100)...
   Regex matched: 'ASSESSMENT & PLAN'
   Regex extraction succeeded (1211 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 14.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has metastatic breast cancer and is on Gemzar Cycle #2 Day 8, which was cancelled by the patien
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 16.0s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver and multiple
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
