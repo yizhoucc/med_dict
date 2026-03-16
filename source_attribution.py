@@ -93,7 +93,7 @@ def attribute_single_field(field_name, value_str, model, tokenizer,
 
     Uses KV cache (note already encoded). Returns the quote string or None.
     """
-    from ult import clone_cache, run_model
+    from ult import clone_cache, run_model_with_cache_manual
 
     question = _FIELD_QUESTION_TEMPLATE.format(
         field_name=field_name,
@@ -102,7 +102,9 @@ def attribute_single_field(field_name, value_str, model, tokenizer,
     prompt = chat_tmpl.user_assistant(question)
     cache = clone_cache(base_cache)
 
-    output, _ = run_model(prompt, model, tokenizer, gen_config, cache)
+    output, _ = run_model_with_cache_manual(
+        prompt, model, tokenizer, gen_config, cache
+    )
 
     # Clean up the output
     quote = output.strip().strip('"').strip("'").strip()
