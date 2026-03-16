@@ -272,7 +272,10 @@ def regex_extract_assessment_plan(note_text):
     patterns = [
         # Combined A/P: "Assessment / Plan:", "Assessment and Plan:",
         # "ASSESSMENT & PLAN", "Assessment \Plan :", "ASSESSMENT/PLAN:"
-        r'(?:Assessment|ASSESSMENT)\s*(?:/|and|&|\\)\s*(?:Plan|PLAN|Recommendations|RECOMMENDATIONS)\s*:?',
+        # Negative lookbehind prevents matching "of assessment and plan" in signatures
+        r'(?<!of )(?:Assessment|ASSESSMENT)\s*(?:/|and|&|\\)\s*(?:Plan|PLAN|Recommendations|RECOMMENDATIONS)\s*:?',
+        # Impression/Plan style: "Impression/Plan:", "Impression / Plan:"
+        r'Impression\s*/\s*Plan\s*:',
         # PDAC style: "Impression and Recommendations:"
         r'Impression\s+and\s+Recommendations\s*:',
         # Separate sections: "Assessment:" (Plan: follows later in text)
