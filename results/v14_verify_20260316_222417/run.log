@@ -1236,3 +1236,82 @@ Processing row 7 (7/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 48.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residual carcinoma; no DCIS, no extranodal extension; 3 of 28 lymph nodes positive for HER2+/ER- adenocarcinoma,
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residua" -> "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residua"
+      [G4-FAITH] findings: "Left breast lumpectomy and ALND: tumor bed with chronic infl" -> "Left breast lumpectomy and ALND: tumor bed with chronic infl"
+    Current_Medications: 5.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 10.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), oxyCODONE (ROXICODONE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), oxyCODONE (ROXICODONE) -> oxyCODONE (ROXICODONE)
+  Phase 1 extraction (6 prompts): 100.5s
+  Cross-context injected (1223 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.4s
+  Total extraction: 107.0s
+    Medication_Plan: 7.6s
+      [EXTRACT] raw={
+    "medication_plan": "adjuvant AC x 4 cycles, to be followed by T-DM1"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 7.4s
+      [EXTRACT] raw={
+    "therapy_plan": "adjuvant AC x 4 cycles, to be followed by T-DM1 and radiation"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.3s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation after completing AC"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
