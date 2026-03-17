@@ -11658,3 +11658,53 @@ Processing row 94 (59/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, potassium chloride (KLOR-CON [REDACTED]) 10 mEq ER tablet -> 
+    Treatment_Changes: 7.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Pt wishes to proceed with XRT next, then capecitabine",
+"supportive_meds": "prilosec 40mg qd"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "Pt wishes to proceed with XRT next, then capecitabine" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] prilosec 40mg qd -> 
+  Phase 1 extraction (6 prompts): 108.3s
+  Cross-context injected (1461 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 26.8s
+      [EXTRACT] raw={
+"response_assessment": "MRI breast shows interval decrease in irregularly shaped mass with irregular margins and heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, wi
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 30.9s
+  Total extraction: 139.2s
+    Medication_Plan: 5.2s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
