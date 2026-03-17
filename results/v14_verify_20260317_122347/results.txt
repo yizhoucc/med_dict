@@ -6714,3 +6714,139 @@ RESULTS FOR ROW 72
     "RTC: In 3 weeks to review [REDACTED]"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 73
+============================================================
+
+--- Column: coral_idx ---
+212
+
+--- Column: note_text ---
+"Subjective:      ***** ***** is a 63 y.o. year old female with Stage III left breast cancer, ER/PR positive, ***** negative, s/p bilateral mastectomies & left ***** + *****/abraxane + CW XRT + arimidex (August 2017)    HPI   ***** is doing well without specific new complaints. She reports feeling a new nodule over the left breast last week.    Also; two days ago she had an insect bit on her finger. Over the course of the day the finger tip became swollen and she developed an itchy red rash over the left forearm and elbow. Yesterday she saw her MD who gave her clobetasol cream which she has been applying. Over the past 24hrs with this treatment the rash has resolved over the forearm but there is still rash remaining over the elbow and the finger is much better.     Her implant exchanges in May 2018 resulted in some ***** in both breasts.  US and mammogram were both consistent with fat necrosis. Due to the location of these nodules overlying the implants, it was deemed too risky for biopsy confirmation.      Patient's allergies, medications, past medical, surgical, family and social histories were reviewed and updated as appropriate.     Review of Systems   Constitutional: Negative.         Performance status: ECOG 0   Respiratory: Negative.    Cardiovascular: Negative.    Gastrointestinal: Negative.    Genitourinary:        Post-menopausal; LMP = 2009   Musculoskeletal: Negative.    Skin: Negative.    Psychiatric/Behavioral: Negative.          Objective:   Blood pressure *****/*****, pulse 69, temperature 36.4 C (97.5 F), temperature source Oral, resp. rate 20, height 158 cm (5' 2.21\"), weight 61.7 kg (136 lb 1.6 oz), SpO2 98 %, not currently breastfeeding.     Physical Exam   Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Right Ear: External ear normal.   Mouth/Throat: Oropharynx is clear and moist.   Eyes: EOM \n are normal. No scleral icterus.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate, regular rhythm and normal heart sounds. Exam reveals no gallop and no friction rub.   No murmur heard.  Pulmonary/Chest: Effort normal and breath sounds normal. No respiratory distress. She has no wheezes. She has no rales. She exhibits no tenderness.   S/p bilateral mastectomies with implant reconstruction.  Right breast - 1cm hard nodule 7OClock  Left breast - 2 cm (previously 3cm) smooth contoured oval lump at 1-2OClock. New area she points to is a linear area of nodularity/thickness around 7-9OClock   Abdominal: Soft. Bowel sounds are normal. She exhibits no distension and no mass. There is no tenderness. There is no rebound and no guarding.   Musculoskeletal: She exhibits no edema.   Lymphadenopathy:     She has no cervical adenopathy.     She has no axillary adenopathy.        Right: No supraclavicular adenopathy present.        Left: No supraclavicular adenopathy present.   Neurological: She is alert and oriented to person, place, and time. She exhibits normal muscle tone. Coordination normal.   Skin: No rash noted. No erythema.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Thought content normal.       DATA  August 2018 - labs/markers = negative  November 2016 - CT (A/P) = atrophy of right rectus muscle, 7mm cystic lesion pancreatic head  November 2017 - PET-CT = negative, no change in pancreatic cystic lesion  January 2017 - ***** Genetics 67-***** panel = negative, except VUS in *****  February 2017 - cardiac echo = normal, EF=64%  May 2017 - ***** LE doppler = negative for DVT or fluid collection in foot  August 2018 - left breast US = 1OClock mass is c/w fat necrosis  August 2018 - left mammogram - 1OClock mass is c/w fat necrosis  October 2018 - right breast US = 7Oclock mass is c/w fat necrosis  October 2018 - right mammogram = 7Oclock mass is c/w fat necrosis  Today - bilateral breast US & mammogram = all three areas \n marked are diagnostic of fat necrosis      Assessment:       Stage III left breast cancer - *****      Plan:       Continue arimidex  Continue ***** ***** (next August 2019)  check labs  Return to clinic in 4 months      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment:       Stage III left breast cancer - *****      Plan:       Continue arimidex  Continue ***** ***** (next August 2019)  check labs  Return to clinic in 4 months      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Stage III left breast cancer, ER/PR positive, patient is being followed up for ongoing management and to address a new nodule over the left breast."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER/PR positive invasive ductal carcinoma, HER2 negative",
+    "Stage_of_Cancer": "Stage III",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Patient reports a new 2 cm smooth contoured oval lump at 1-2OClock in the left breast, which was previously 3cm. There is also a new area of linear nodularity/thickness around 7-9OClock in the left breast. Bilateral breast US & mammogram show all three areas marked are diagnostic of fat necrosis. No new lymphadenopathy noted. No new skin changes or edema. No new palpable masses other than those previously described."
+  },
+  "Current_Medications": {
+    "current_meds": "arimidex"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "no evidence of disease recurrence on imaging and exam, specifically PET-CT in November 2017 was negative, and recent bilateral breast US & mammogram show fat necrosis in all marked areas"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue arimidex"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue arimidex, check labs, Return to clinic in 4 months"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "check labs"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 4 months for follow-up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Return to clinic in 4 months"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "Return to clinic in 4 months"
+  ],
+  "second opinion": [
+    "Continue arimidex"
+  ],
+  "in-person": [
+    "Return to clinic in 4 months"
+  ],
+  "summary": [
+    "Stage III left breast cancer"
+  ],
+  "Type_of_Cancer": [
+    "Stage III left breast cancer"
+  ],
+  "Stage_of_Cancer": [
+    "Stage III left breast cancer"
+  ],
+  "Metastasis": [
+    "Stage III left breast cancer"
+  ],
+  "findings": [
+    "Patient reports a new 2 cm smooth contoured oval lump at 1-2OClock in the left breast, which was previously 3cm."
+  ],
+  "current_meds": [
+    "Continue arimidex"
+  ],
+  "response_assessment": [
+    "Stage III left breast cancer"
+  ],
+  "medication_plan": [
+    "Continue arimidex"
+  ],
+  "therapy_plan": [
+    "Continue arimidex  Continue [REDACTED] [REDACTED] (next August 2019)  check labs  Return to clinic in 4 months"
+  ],
+  "lab_plan": [
+    "check labs"
+  ],
+  "Next clinic visit": [
+    "Return to clinic in 4 months"
+  ],
+  "follow up": [
+    "Return to clinic in 4 months"
+  ]
+}
