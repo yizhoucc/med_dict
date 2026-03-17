@@ -11970,3 +11970,10 @@ Processing row 99 (61/61)...
       [G3-IMPROVE] Type_of_Cancer: "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma" -> "ER+(80%)PR+(50%) invasive ductal carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 150.1s [format-repaired, improved]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkaline Phosphatase 172 (31-95 U/L), Alanine transaminase 37 (11-50 U/L), Aspartate transaminase 57 ([REDACT
+      [G1-FORMAT] repaired -> keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
+      [G4-FAITH] no changes (all supported)
