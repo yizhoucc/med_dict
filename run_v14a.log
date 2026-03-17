@@ -1,1 +1,2 @@
-bash: line 1: conda: command not found
+usage: run.py [-h] [--resume RESUME] config
+run.py: error: unrecognized arguments: --config
