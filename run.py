@@ -1103,9 +1103,17 @@ def main():
                 # Search full note for genetic test keywords with future context
                 FUTURE_CONTEXT = [
                     "will order", "will send", "send for", "plan to",
-                    "interested in", "we will await", "ordered", "pending",
+                    "interested in", "we will await", "pending",
                     "recommend", "discussed", "consider", "plan for",
                     "will check", "will obtain", "refer for", "schedule",
+                ]
+                PAST_CONTEXT = [
+                    "result:", "results:", "result negative", "result positive",
+                    "resulted", "completed", "showed", "revealed",
+                    "demonstrated", "returned", "negative for", "positive for",
+                    "was performed", "were performed", "has been done",
+                    "was done", "were done", "already done", "already completed",
+                    "prior", "previous",
                 ]
                 found_tests = []
                 note_lower = note_text.lower()
@@ -1115,7 +1123,11 @@ def main():
                         # Look for future keywords within 100 chars before the term
                         for match in re.finditer(re.escape(term), note_lower):
                             start = max(0, match.start() - 100)
-                            context_window = note_lower[start:match.end() + 50]
+                            end = min(len(note_lower), match.end() + 100)
+                            context_window = note_lower[start:end]
+                            # Skip if past-tense/completed context found
+                            if any(pc in context_window for pc in PAST_CONTEXT):
+                                continue
                             if any(fc in context_window for fc in FUTURE_CONTEXT):
                                 found_tests.append(term)
                                 break

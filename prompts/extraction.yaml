@@ -128,7 +128,8 @@ Current_Medications: |
   Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
   If no cancer-related medications are currently active, write empty string "".
 
-  CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference. Only include cancer-related drugs that appear in that medication list AND are currently active (not marked as discontinued or PRN-only). If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
+  CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
+  IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron, infusions) are often NOT listed in the outpatient medication list. If the Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g., "on irinotecan", "continues leuprolide", "started [drug] on [date]" with no discontinuation), include it even if it does not appear in the outpatient medication list.
 
   Respond *only* with a JSON object using this exact schema:
   {
