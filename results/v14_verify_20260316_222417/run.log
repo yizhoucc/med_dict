@@ -7733,3 +7733,109 @@ Processing row 63 (39/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.5s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence. If biopsy of bone is positive would add xgeva."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "We discussed the role of surgery and radiation to decrease the risk of local rec" -> "We discussed the role of surgery and radiation to decrease the risk of local rec"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "We discussed the role of surgery and radiation to decrease the risk of local rec" -> "Additional treatment to sternum as a single site of metastatic disease is planne"
+    Procedure_Plan: 9.7s
+      [EXTRACT] raw={
+    "procedure_plan": "Biopsy is planned for sternal lesion. Surgery and radiation with additional treatment to sternum as a single site of metastatic disease."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Biopsy is planned for sternal lesion. Surgery and radiation with additional treatment to sternum as a single site of metastatic disease.']
+    Imaging_Plan: 3.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "Biopsy is planned for sternal lesion."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Biopsy is planned for sternal lesion." -> "No imaging planned."
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 4.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Biopsy is planned for sternal lesion."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "Biopsy is planned for sternal lesion." -> "No specific genetic or molecular tests are planned."
+      [G4-FAITH] genetic_testing_plan: "No specific genetic or molecular tests are planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-REVERT] genetic_testing_plan: reverted (G4 emptied all fields)
+    follow_up_next_visit: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 59.1s
+    Referral: 10.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "If biopsy of bone is positive would add xgeva."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others', 'Specialty']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 10.7s
+    [POST-THERAPY] removed non-therapy: ['Biopsy is planned for sternal lesion.']
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to the sternum'
+  [ATTRIBUTION] 15/19 fields sourced (22.1s)
+  Row 63 total: 246.0s
+  Row 63 saved to progress
+
+Processing row 64 (40/61)...
+  Injected 6 term definitions: ['adjuvant chemotherapy', 'PR positive', 'lumpectomy', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (5711 chars)
+  A/P extraction: 0.0s
