@@ -5521,3 +5521,55 @@ Processing row 43 (28/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 23.0s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Will start an aromatase inhibitor after completing radiation. May be eligible for the [REDACTED] trial with ribociclib after completing radiation.",
+"supportive_meds": "Norco Apri
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "Will start an aromatase inhibitor after completing radiation. May be eligible fo" -> "None noted at this visit."
+      [G4-FAITH] recent_changes: "None noted at this visit." -> ""
+      [G4-FAITH] EMPTIED: ['recent_changes']
+      [G4-PROTECT] recent_changes: restored safe negative "None noted at this visit."
+      [POST-SUPP] Norco April 325 mg as needed, Flexeril 5 mg tablet take 2 tablets by mouth every 12 hours, LORazepam 0.5 mg tablet Take 0.5 tablets (0.25 mg total) by mouth every 8 (eight) hours as needed (muscle spasm), gabapentin (NEURONTIN) 300 mg capsule Take 1 capsule (300 mg total) by mouth nightly at bedtime. -> Norco April 325 mg as needed
+  Phase 1 extraction (6 prompts): 80.7s
+  Cross-context injected (818 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 86.6s
+    Medication_Plan: 11.4s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Start an aromatase inhibitor after completing radiation. Consider Zoladex if there is a delay in bilateral oophorectomy. Continue Lexapro, though the patient has not taken it
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the" -> "Start an aromatase inhibitor after completing radiation. Consider Zoladex if the"
+    Therapy_plan: 16.2s
+      [EXTRACT] raw={
+    "therapy_plan": "She will start an aromatase inhibitor after she completes radiation. She may be eligible for the trial with ribociclib that should open around the time she completes radiation. 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
