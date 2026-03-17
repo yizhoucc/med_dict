@@ -3477,3 +3477,157 @@ RESULTS FOR ROW 34
     "return to clinic in 6 months"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 36
+============================================================
+
+--- Column: coral_idx ---
+175
+
+--- Column: note_text ---
+"This is an independent service.       Patient name  ***** ***** *****     Date of service  04/10/2021          Subjective      ***** ***** ***** is a 27 y.o. female ***** pT3N0 right breast *****+*****-  grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right ***** and expander placement on 12/06/20. Post-op course c/b post-of infection so she ***** tamoxifen on 01/29/21 and zoladex on 02/06/21. She started weekly taxane on 02/13/21. She presents today for cycle 8 of abraxane.    INTERVAL HISTORY   She started having right arm swelling and numbness about 4-5days ago, improved with elevation. Denies pain in right arm.    Continues to have nausea, in the morning she reports throwing up \"little bit.\" Her husband believes it is likely due to her not eating before taking her medication. She is taking Lorazepam, Zofran, compazine which help with nausea/vomiting. Occasionally has heart burn and takes omeprazole.     Denies diarrhea, mouth sores, neuropathy.     She started taking Lexapro 5mg and ambien 10mg which has helped her with her sleep and anxiety.       Specialty Problems        Malignant Neoplasms    1. Malignant neoplasm of right female breast (CMS code)     Overview      ***** ***** Self palpated a right breast mass  08/15/20 Bilateral u/s Right breast: suspicious nodule at 4:00. Inspissated   material within ductal system at 5:00. Irregular density with stranding   and posterior shadowing at 6:00. Normal appearing bilateral axillary *****.   09/04/2020: right breast u/s guided core bx:   \u0007 June 29:00 grade II IDC ER (May 30+, 95%), PR (2+,15%), ***** 1+ on IHC and not   amplified on FISH, *****:15% and intermediate grade DCIS  \u0007 October 02:00 grade II IDC ER (May 30+, 95%), PR (2+,15%), ***** 1+ on IHC and dual   ***** not amplified, *****:*****=0.9 ***** count 1.65, ***** 15%  10/01/2020: Initial UCSF consultation with Dr. ***** *****    10/25/20 Invitae genetic testing pf 133 genes: VUS in ***** \n (heterozygous   c.271G>T), ***** (heterozygous C.*****>C), and PDGFRA (heterozygous   c.*****>T)  10/25/2020: MRI breast ***** innumerable small masses with intervening NME in   the lower half of the right breast, involving the lower inner and outer   quadrants heavily. The overall dimensions span about 8 x 9 x 4.5cm. The   largest individual mass in the most posteromedial mass, which measures up   to 1.3 cm. right axillary nodes are only minimally more prominent than on   the left.  11/01/2020: US guided FNA of right axillary LN: Benign lymph node with   central fatty replacement  12/06/2020: bilateral total skin-sparing mastectomy, ***** *****, and breast   reconstruction with placement of bilateral tissue expanders : Path = 8.4cm   of grade III mixed ductal and mucinous carcinoma, negative margins. No   *****. Intermediate grade DCIS in association with invasive carcinoma   spanning ~9.6cm. 0/4 LN with carcinoma. *****(sn). ER (2+, >90%), *****(April 28+,   ~20%), ***** 0 and FISH 1.December 27.8= 1.1. *****-67% ~15%. Margins negative. LEFT   breast negative   *****/*****/*****-*****/*****/***** admitted for post-op left breast cellulitis and infected   tissue expander   started on broad spectrum IV antibiotics. The same day, she had a breast   US and IR drain placed for a fluid collection. Because of the eschar and   cultures from the drain with GNRs, she was taken to the OR on 12/28/20 for   washout, tissue expander exchange, and debridement of the eschar. The   final ID recommendation on the day of discharge was for 4 weeks of   Bactrim, which treated all species found in her initial culture.one JP   drain on d/c. Currently draining 20 ml/day serosanguinous fluid. She has 2   weeks of antibiotic left. No fever. Takes  tylenol 2 tabs ***** for pain     01/26/21 PET/CT; Post bilateral mastectomies with associated   hypermetabolism along the remaining left breast tissue with drain in place   favored to reflect postprocedural changes and known ongoing infection. \n   Additional low-level hypermetabolism along the anterior right breast   tissue expander is also favored to reflect postprocedural changes;   correlate clinically for superimposed infection. Associated low-level   hypermetabolism in left greater than right *****   axillary/subpectoral nodes is nonspecific in the setting of ongoing   infection. Incidental right thyroid nodule measuring up to 2.1 cm with   associated FDG uptake. Recommend further evaluation with dedicated thyroid   ultrasound. Diffuse low-level marrow hypermetabolism is nonspecific;   correlate with lab values for anemia.  *****/*****/***** - *****/*****/***** tamoxifen  02/06/21 start zoladex   02/13/21 Start adjuvant taxol weekly, 12 cycles planned followed by AC x 4   cycles planned                              Objective      Vitals      Most Recent Value   BP 117/74  [TRANSFERRED VITALS]   Heart Rate 77  [TRANSFERRED VITALS]   *****Resp 16  [TRANSFERRED VITALS]   Temp 36.2 C (97.1 F)  [TRANSFERRED VITALS]   Temp Source Temporal   SpO2 94 %  [TRANSFERRED VITALS]   Weight 117.9 kg (259 lb 14.4 oz)  [TRANSFERRED VITALS]   Height 165.5 cm (5' 5.16\")  [November 2020 *****]   Pain Score 0   BMI (Calculated) 43.1          Wt Readings from Last 3 Encounters:   04/10/21 (!) 117.9 kg (259 lb 14.4 oz)   04/10/21 (!) 117.7 kg (259 lb 8 oz)   04/03/21 (!) 117.3 kg (258 lb 9.6 oz)       ECOG performance status: 1 - Symptomatic but completely ambulatory            Constitutional:  WD, WN, NAD  Skin: warm, moist, no rashes or lesions  Eyes: sclera anicteric, PERRL, EOMI.   HENT: sinuses nontender, nasal mucosa intact, pharynx without erythema, no thrush.   Lymph Nodes: no cervical, supraclavicular, or axillary lymphadenopathy.    Respiratory: BL lungs CTA, resonant to percussion, no wheezes, rhonchi, or crackles  Cardiovascular: normal heart rate, normal rhythm, no murmurs, no edema  Breast: s/p ***** mastectomies with expanders in place, incision well healed. No s/sx of \n infection.  GI: bowel sounds normal, soft, nontender, no distention, no organomegaly   Musculoskeletal: no point tenderness over bones or joints. Right arm and hand swelling   Neurologic: alert & oriented x 3, no focal motor or sensory deficits  Psychiatric: mood stable          Review of Prior Testing  LABS  I personally reviewed and interpreted each of the patient's relevant lab tests as outlined in my Assessment/Plan    Lab Results   Component Value Date    WBC Count 8.8 04/10/2021    RBC Count 3.91 (L) 04/10/2021    Hemoglobin 11.8 (L) 04/10/2021    Hematocrit 35.3 (L) 04/10/2021    MCV 90 04/10/2021    Platelet Count 279 04/10/2021    Neutrophil Absolute Count 5.85 04/10/2021    Lymphocyte Abs Cnt 2.12 04/10/2021     Lab Results   Component Value Date    Albumin, Serum / Plasma 3.3 (L) 04/03/2021    Alkaline Phosphatase 73 04/03/2021    Alanine transaminase 27 04/03/2021    AST 21 04/03/2021    Bilirubin, Total 0.1 (L) 04/03/2021    Urea Nitrogen, Serum / Plasma 9 04/03/2021    Calcium, total, Serum / Plasma 9.3 04/03/2021    Chloride, Serum / Plasma 107 04/03/2021    Carbon Dioxide, Total 23 04/03/2021    Anion Gap 9 04/03/2021    Creatinine 0.57 04/03/2021    eGFR - low estimate >120 04/03/2021    eGFR - high estimate >120 04/03/2021    Glucose, non-fasting 110 04/03/2021    Potassium, Serum / Plasma 3.9 04/03/2021    Sodium, Serum / Plasma 139 04/03/2021    Protein, Total, Serum / Plasma 6.9 04/03/2021                   Assessment and Plan       ***** ***** ***** is a 27 y.o. pre-menopausal female with pT3N0 right breast *****+*****-  grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right ***** and expander placement on 12/06/20. Post-op course c/b post-of infection so she ***** tamoxifen on 01/29/21 and zoladex on 02/06/21. She started weekly Taxol on 02/13/21. She had a grade 3 infusion reaction with cycle 1. She delayed treatment to 02/20/21 and changed to Abraxane; \n tolerated this well. She presents today for cycle 8.    Breast cancer  -right arm and hand swelling, will get doppler to r/o DVT. Discussed possibly starting on anticoag if positive for DVT. If negative for DVT pt will contact PT for lymphedema managment.   -labs reviewed and adequate to receive treatment today  -Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.  -Continue zoladex for preservation of ovarian reserve during chemotherapy  -radiation oncology referral, will see Dr. ***** next week.      Nausea and vomiting due to chemo and anxiety, - improved   -continue ***** as premed  -Discussed more ***** use of antiemetics zofran, compazine, ativan.   -Continues small frequent meals.    -Continue prilosec.    Left breast cellulitis, resolved  -s/p ABX    Birth control  -ok to wait on ***** placement until after chemotherapy    HSV, mouth sores/cold sores  -Continue valtrex 1g every day throughout chemo as ppx    Anxiety due to diagnosis, controlled   -continue lexapro daily  - ativan prn  -Rx for ambien provided today.     RTC 2 weeks          I spent a total of 47 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.            \n"
+
+--- Column: assessment_and_plan ---
+"Assessment/Plan    Lab Results   Component Value Date    WBC Count 8.8 04/10/2021    RBC Count 3.91 (L) 04/10/2021    Hemoglobin 11.8 (L) 04/10/2021    Hematocrit 35.3 (L) 04/10/2021    MCV 90 04/10/2021    Platelet Count 279 04/10/2021    Neutrophil Absolute Count 5.85 04/10/2021    Lymphocyte Abs Cnt 2.12 04/10/2021     Lab Results   Component Value Date    Albumin, Serum / Plasma 3.3 (L) 04/03/2021    Alkaline Phosphatase 73 04/03/2021    Alanine transaminase 27 04/03/2021    AST 21 04/03/2021    Bilirubin, Total 0.1 (L) 04/03/2021    Urea Nitrogen, Serum / Plasma 9 04/03/2021    Calcium, total, Serum / Plasma 9.3 04/03/2021    Chloride, Serum / Plasma 107 04/03/2021    Carbon Dioxide, Total 23 04/03/2021    Anion Gap 9 04/03/2021    Creatinine 0.57 04/03/2021    eGFR - low estimate >120 04/03/2021    eGFR - high estimate >120 04/03/2021    Glucose, non-fasting 110 04/03/2021    Potassium, Serum / Plasma 3.9 04/03/2021    Sodium, Serum / Plasma 139 04/03/2021    Protein, Total, Serum / Plasma 6.9 04/03/2021                   Assessment and Plan       ***** ***** ***** is a 27 y.o. pre-menopausal female with pT3N0 right breast *****+*****-  grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right ***** and expander placement on 12/06/20. Post-op course c/b post-of infection so she ***** tamoxifen on 01/29/21 and zoladex on 02/06/21. She started weekly Taxol on 02/13/21. She had a grade 3 infusion reaction with cycle 1. She delayed treatment to 02/20/21 and changed to Abraxane; \n tolerated this well. She presents today for cycle 8.    Breast cancer  -right arm and hand swelling, will get doppler to r/o DVT. Discussed possibly starting on anticoag if positive for DVT. If negative for DVT pt will contact PT for lymphedema managment.   -labs reviewed and adequate to receive treatment today  -Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.  -Continue zoladex for preservation of ovarian reserve during chemotherapy  -radiation oncology referral, will see Dr. ***** next week.      Nausea and vomiting due to chemo and anxiety, - improved   -continue ***** as premed  -Discussed more ***** use of antiemetics zofran, compazine, ativan.   -Continues small frequent meals.    -Continue prilosec.    Left breast cellulitis, resolved  -s/p ABX    Birth control  -ok to wait on ***** placement until after chemotherapy    HSV, mouth sores/cold sores  -Continue valtrex 1g every day throughout chemo as ppx    Anxiety due to diagnosis, controlled   -continue lexapro daily  - ativan prn  -Rx for ambien provided today.     RTC 2 weeks          I spent a total of 47 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes time spent with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.            \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "27 y.o. female with pT3N0 right breast [REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right [REDACTED] and expander placement. She presents today for cycle 8 of abraxane."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
+    "Stage_of_Cancer": "pT3N0",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin, Serum / Plasma 3.3 (L) (from 04/03/2021)"
+  },
+  "Clinical_Findings": {
+    "findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymphadenopathy. No focal motor or sensory deficits. No point tenderness over bones or joints. Labs show WBC count of 8.8, RBC count of 3.91 (L), hemoglobin of 11.8 (L), hematocrit of 35.3 (L), and MCV of 90. Albumin is 3.3 (L). No significant findings on the recent PET/CT scan, with hypermetabolism along the remaining left breast tissue and anterior right breast tissue expander, likely reflecting postprocedural changes. Low-level hypermetabolism in left greater than right axillary/subpectoral nodes, nonspecific in the setting of ongoing infection. Incidental right thyroid nodule measuring up to 2.1 cm with associated FDG uptake, recommended for further evaluation with dedicated thyroid ultrasound."
+  },
+  "Current_Medications": {
+    "current_meds": "Abraxane, zoladex"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Switched to Abraxane after a grade 3 infusion reaction with cycle 1 of Taxol.",
+    "supportive_meds": "Zofran, Compazine"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue use of antiemetics zofran, compazine, ativan. Continue prilosec. Continue valtrex 1g every day throughout chemo as ppx. Continue lexapro daily. ativan prn. Rx for ambien provided today."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughout chemo as ppx."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "radiation oncology referral, will see Dr. [REDACTED] next week."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "will get doppler to r/o DVT"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 2 weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology referral, will see Dr. [REDACTED] next week.",
+    "Others": "None",
+    "follow up": "RTC 2 weeks"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "presents today for cycle 8."
+  ],
+  "second opinion": [
+    "RTC 2 weeks"
+  ],
+  "in-person": [
+    "spent a total of 47 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures."
+  ],
+  "summary": [
+    "27 y.o. pre-menopausal female with pT3N0 right breast [REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right [REDACTED] and expander placement"
+  ],
+  "Type_of_Cancer": [
+    "[REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma"
+  ],
+  "Stage_of_Cancer": [
+    "[REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma who is s/p bilateral mastectomies and right [REDACTED] and expander placement on 12/06/20."
+  ],
+  "Metastasis": [
+    "pT3N0 right breast"
+  ],
+  "Distant Metastasis": [
+    "pT3N0 right breast"
+  ],
+  "lab_summary": [
+    "WBC Count 8.8 04/10/2021    RBC Count 3.91 (L) 04/10/2021    Hemoglobin 11.8 (L) 04/10/2021    Hematocrit 35.3 (L) 04/10/2021    MCV 90 04/10/2021    Platelet Count 279 04/10/2021    Neutrophil"
+  ],
+  "findings": [
+    "right arm and hand swelling, will get doppler to r/o DVT."
+  ],
+  "current_meds": [
+    "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8.  -Continue zoladex for preservation of ovarian reserve during chemotherapy"
+  ],
+  "recent_changes": [
+    "She delayed treatment to 02/20/21 and changed to Abraxane;"
+  ],
+  "supportive_meds": [
+    "Discussed more [REDACTED] use of antiemetics zofran, compazine, ativan."
+  ],
+  "goals_of_treatment": [
+    "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8."
+  ],
+  "medication_plan": [
+    "Continue weekly Abraxane 100mg/m2 x 12 cycles. -Continue zoladex for preservation of ovarian reserve during chemotherapy -Discussed more [REDACTED] use of antiemetics zofran, compazine, ativan."
+  ],
+  "therapy_plan": [
+    "Continue weekly Abraxane 100mg/m2 x 12 cycles. -Continue zoladex for preservation of ovarian reserve during chemotherapy -Continue valtrex 1g every day throughout chemo as ppx"
+  ],
+  "radiotherapy_plan": [
+    "radiation oncology referral, will see Dr. [REDACTED] next week."
+  ],
+  "imaging_plan": [
+    "will get doppler to r/o DVT"
+  ],
+  "Next clinic visit": [
+    "RTC 2 weeks"
+  ],
+  "Specialty": [
+    "radiation oncology referral, will see Dr. [REDACTED] next week."
+  ],
+  "follow up": [
+    "RTC 2 weeks"
+  ]
+}
