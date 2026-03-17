@@ -12076,3 +12076,73 @@ Processing row 99 (61/61)...
       [G3-IMPROVE] current_meds: "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna" -> ""
       [G4-FAITH] current_meds: "" -> "BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyrox"
       [POST-MEDS] BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyroxine, LORazepam, pregabalin, pyridoxine, docusate sodium, oxyCODONE, senna, cholecalciferol, cyanocobalamin -> 
+    Treatment_Changes: 31.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Gemzar Cycle #2 Day 8 cancelled by patient due to fatigue and concerns about tumor markers and scan results.",
+"supportive_meds": "docusate sodium 240 mg CAP Take 250 mg by mouth 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] docusate sodium 240 mg CAP Take 250 mg by mouth 2 (two) times daily. Take one tablet twice a day if no Bowel Movement. Stop if having loose stool or diarrhea.., senna 8.6 mg tablet Take 1 tablet (8.6 mg total) by mouth Daily. Take 1-2 tablets daily if no bowel movement., pregabalin 50 mg capsule Take 50 mg by mouth 3 (three) times daily., IBUPROFEN 600 mg 3 (three) times daily as needed. Frequency: Every 6 hours daytime -> docusate sodium 240 mg CAP Take 250 mg by mouth 2 (two) times daily. Take one tablet twice a day if no Bowel Movement. Stop if having loose stool or diarrhea.., senna 8.6 mg tablet Take 1 tablet (8.6 mg total) by mouth Daily. Take 1-2 tablets daily if no bowel movement.
+  Phase 1 extraction (6 prompts): 259.3s
+  Cross-context injected (911 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 18.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen 27.29: 178 U/mL, Carcinoembryonic Antigen: 312.2 ug/L) are elevated. The patient is experiencing lots of fatigue 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen 27.29: 178 U/mL, Ca" -> "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen 27.29: 178 U/mL, Ca"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 21.8s
+  Total extraction: 281.1s
+    Medication_Plan: 4.9s
+      [EXTRACT] raw={
+    "medication_plan": "Focalin prn to help with fatigue."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 8.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue with treatment to see if interventions helped with fatigue. Plans to discuss taking a break with Dr [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
