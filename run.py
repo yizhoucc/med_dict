@@ -1062,6 +1062,32 @@ def main():
                         print(f"    [POST-RESPONSE] patched from findings: '{relevant[0][:60]}...'")
                     break
 
+        # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
+        note_lower = note_text.lower()
+        for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
+            drug_dict = keypoints.get(drug_field_key, {})
+            if not isinstance(drug_dict, dict):
+                continue
+            for field_name in ["current_meds", "recent_changes"]:
+                val = drug_dict.get(field_name, "")
+                if not val or not isinstance(val, str):
+                    continue
+                meds = [m.strip() for m in val.split(",")]
+                verified = []
+                for med in meds:
+                    if not med:
+                        continue
+                    # Extract core drug name (first word or known pattern)
+                    # e.g. "Doxorubicin 50mg" -> check "doxorubicin"
+                    words = re.findall(r'[a-zA-Z]{4,}', med)
+                    found = any(w.lower() in note_lower for w in words) if words else True
+                    if found:
+                        verified.append(med)
+                    else:
+                        print(f"    [POST-DRUG-VERIFY] REMOVED hallucinated drug: '{med}' (not found in note)")
+                if len(verified) < len(meds):
+                    drug_dict[field_name] = ", ".join(verified) if verified else ""
+
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
         if config.get("extraction", {}).get("attribution", False):
