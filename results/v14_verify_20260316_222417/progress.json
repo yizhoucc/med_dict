@@ -35,7 +35,8 @@
     49,
     51,
     52,
-    53
+    53,
+    56
   ],
   "results": {
     "0": {
@@ -4330,6 +4331,125 @@
         ],
         "follow up": [
           "The patient will return to clinic in 4 weeks."
+        ]
+      }
+    },
+    "56": {
+      "coral_idx": 196,
+      "note_text": "*****  59 yo with recently dx'd left breast CA    CC  2nd opinion for locally advanced breast ca, ?Type, ?Further Rx    HPI  Pt was in her usual state of health with some chronic illnesses when she noted a left breast mass. She states she noted this for some time, but evaluation had been non diagnostic previously. However, in 2013 her left breast mass became more noticeable. On exam, described as 6 x 6 cm. W/u at ***** included ***** and u/s June 2013. These showed dominant lobular mass in ***** breast central location approx 3 cm deep to the nipple; irreg margins; 3.3 x 2.7 cm. . U/s guided bx on 06/15/13 showed Gr III adenoCA, ***** ***** (3+).     Pt rec'd neoadjuvant chemotherapy with TCH+P X 6 regimen. Rx complicated by n/v, diarrhea, dehydration. Dose reduction 25% was instituted after C1. Pt noted to have tumor volume reduction on exam. Pt underwent left Lx and axillary ***** at ***** Hospital on 12/25/2013. Path showed residual tumor of 3.7 cm. 0/6 nodes were positive. Pathology showed ***** ***** neg  Result (TNBC). Review of the original bx was performed at *****, and reportedly showed ***** negative staining and amplification upon review.     Post op, pt received AC x 4 cycles. There was apparently some discussion about additional rx with paclitaxel, but this was not administered. Pt has seen Dr. ***** ***** and is scheduled to begin XRT in the near future.    She is here to obtain 2nd opinion regarding her locally advanced breast cancer, ***** status, and rx options.      PMH  Illness: HTN. Crohns Dz.  Surg: As above  OB: Menarche 13 yo. LMP 47 yo. Hx oCP. No hx HRT. Hx vaginal estrogen. G0.    Meds: Carvedilol. Lisinopril. Asacol.  ALL: Erythro, benadryl, codeine, demerol, motrin, pcn.     SH  Lives with husband and step father in *****. Works in window/landscaping business.  EtOH: none. Tobacco: none.    FH  Mother with lung ca, sister with breast ca at 60 yo. No genetic counseling.    ROS  Review of \n Systems -   General ROS: + fatigue. + alopecia.  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: + tinnitus, chronic but worse post chemo  Breast ROS: + healing ok, without problem.  Respiratory ROS: negative  Cardiovascular ROS: negative  Gastrointestinal ROS: + crohns dz, stable.  *****-Urinary ROS: negative  Musculoskeletal ROS: + LE swelling  Neurological ROS: + neuropathy due to chemo.  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    PE  BP 120/79 | Pulse 93 | Temp(Src) 37.6 C (99.7 F) (Oral) | Resp 16 | Ht 144.8 cm (4' 9\") | Wt 44.407 kg (97 lb 14.4 oz) | BMI 21.18 kg/m2 | SpO2 99%    General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic   Eyes:    PERRL, conjunctiva/corneas clear, EOM's intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity. Right port in place, site clear.    Heart:    Regular rate and rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality on R. S/p Lx; site healing, mild tenderness, no drainage.   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, \n texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical, supraclavicular, and axillary nodes normal   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     throughout     IMP  1. Breast CA, Left sided, locally advanced. Initially classified as ***** at ***** hospital, and treated with TCH+P based on ***** neoadjuvant trial and recent pertuzumab approval. Found to have significant residual dz, and was ***** in surgical specimen. Review of initial path conducted at ***** reportedly shows ***** status as well. Therefore, appears to be TNBC. Rec'd post op chemo with AC X 4 to supplement initial TCH+P.     2. FHx. Positive for sister at 59-60 yo. Has not had genetic counseling.      REC  - Discussed clinical presentation, initial and subsequent pathology, controversy over ***** status    - Discussed treatment selection and course, which was entirely appropriate given diagnostic info available at the time. E.g., TCH+P is a new standard of care regimen for ***** locally advanced cancer. Although she is likely TNBC based on ***** pathology results and review, TCH+P regimen would be expected to be beneficial given docetaxel component as well as platinum, the latter having been shown to benefit TNBC pts in the neoadjuvant setting from recent ***** and ***** trials. The addition of AC X 4 post op was eminently reasonable to complete anthracycline-taxane therapy for TNBC, with the additional potential contribution of platinum.     - Pt asked if change in ***** ***** to \"loss of time\" or other compromise, and we discussed that 1) she received all of the ***** ***** / drug classes available for TNBC and 2) timing of pre vs. Post op Rx and sequencing variations are not likely to compromise outcome in ***** *****.    - Rec additional path review at ***** given critical aspect of ***** status question. If *****, although unlikely, pt should of course resume trastuzumab.    - Rec \n genetic counseling and testing    - Rec XRT, which pt is scheduled to receive  \n",
+      "assessment_and_plan": "IMP  1. Breast CA, Left sided, locally advanced. Initially classified as ***** at ***** hospital, and treated with TCH+P based on ***** neoadjuvant trial and recent pertuzumab approval. Found to have significant residual dz, and was ***** in surgical specimen. Review of initial path conducted at ***** reportedly shows ***** status as well. Therefore, appears to be TNBC. Rec'd post op chemo with AC X 4 to supplement initial TCH+P.     2. FHx. Positive for sister at 59-60 yo. Has not had genetic counseling.      REC  - Discussed clinical presentation, initial and subsequent pathology, controversy over ***** status    - Discussed treatment selection and course, which was entirely appropriate given diagnostic info available at the time. E.g., TCH+P is a new standard of care regimen for ***** locally advanced cancer. Although she is likely TNBC based on ***** pathology results and review, TCH+P regimen would be expected to be beneficial given docetaxel component as well as platinum, the latter having been shown to benefit TNBC pts in the neoadjuvant setting from recent ***** and ***** trials. The addition of AC X 4 post op was eminently reasonable to complete anthracycline-taxane therapy for TNBC, with the additional potential contribution of platinum.     - Pt asked if change in ***** ***** to \"loss of time\" or other compromise, and we discussed that 1) she received all of the ***** ***** / drug classes available for TNBC and 2) timing of pre vs. Post op Rx and sequencing variations are not likely to compromise outcome in ***** *****.    - Rec additional path review at ***** given critical aspect of ***** status question. If *****, although unlikely, pt should of course resume trastuzumab.    - Rec genetic counseling and testing    - Rec XRT, which pt is scheduled to receive",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "yes",
+          "in-person": "in-person",
+          "summary": "59-year-old patient with locally advanced left breast cancer, initially classified as [REDACTED] but found to be TNBC. The purpose of this visit is to obtain a second opinion regarding the cancer type and further treatment options."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "ER-/PR-/HER2+ triple negative breast cancer",
+          "Stage_of_Cancer": "Locally advanced",
+          "Metastasis": "No",
+          "Distant Metastasis": "No"
+        },
+        "Lab_Results": {
+          "lab_summary": "No labs in note."
+        },
+        "Clinical_Findings": {
+          "findings": "Pathology results show residual tumor of 3.7 cm with 0/6 nodes positive. The tumor is classified as TNBC. Physical exam findings include healing left mastectomy site with mild tenderness, no drainage, LE swelling, and chemotherapy-induced neuropathy. No palpable masses, skin changes, or lymphadenopathy noted."
+        },
+        "Current_Medications": {
+          "current_meds": ""
+        },
+        "Treatment_Changes": {
+          "recent_changes": "Dose reduction 25% was instituted after C1.",
+          "supportive_meds": []
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "curative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "Not mentioned in note."
+        },
+        "Medication_Plan": {
+          "medication_plan": null
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Rec XRT, which pt is scheduled to receive. If [REDACTED], although unlikely, pt should of course resume trastuzumab."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "Rec XRT, which pt is scheduled to receive"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "Rec genetic counseling and testing, which pt is scheduled to receive"
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "Rec genetic counseling and testing"
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "Not specified in the provided note"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "Rec genetic counseling and testing",
+          "Specialty": "Rec XRT, which pt is scheduled to receive",
+          "Others": "None",
+          "follow up": "scheduled to receive XRT in the near future"
+        }
+      },
+      "attribution": {
+        "second opinion": [
+          "Rec additional path review at [REDACTED] given critical aspect of [REDACTED] status question."
+        ],
+        "in-person": [
+          "Rec XRT, which pt is scheduled to receive"
+        ],
+        "summary": [
+          "Rec additional path review at [REDACTED] given critical aspect of [REDACTED] status question."
+        ],
+        "Type_of_Cancer": [
+          "Therefore, appears to be TNBC."
+        ],
+        "Stage_of_Cancer": [
+          "Breast CA, Left sided, locally advanced."
+        ],
+        "Metastasis": [
+          "Rec'd post op chemo with AC X 4 to supplement initial TCH+P."
+        ],
+        "findings": [
+          "The tumor is classified as TNBC."
+        ],
+        "goals_of_treatment": [
+          "Rec XRT, which pt is scheduled to receive"
+        ],
+        "therapy_plan": [
+          "Rec XRT, which pt is scheduled to receive."
+        ],
+        "radiotherapy_plan": [
+          "Rec XRT, which pt is scheduled to receive"
+        ],
+        "procedure_plan": [
+          "Rec genetic counseling and testing"
+        ],
+        "genetic_testing_plan": [
+          "Rec genetic counseling and testing"
+        ],
+        "Genetics": [
+          "Rec genetic counseling and testing"
+        ],
+        "Specialty": [
+          "Rec XRT, which pt is scheduled to receive"
+        ],
+        "follow up": [
+          "Rec XRT, which pt is scheduled to receive"
         ]
       }
     }
