@@ -817,3 +817,25 @@ Processing row 5 (5/61)...
       [G4-FAITH] Stage_of_Cancer: "Not specified in the note" -> ""
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 79.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Serum / Plasma 4.6 g/dL, Alkaline Phosphatase 60 U/L, Alanine transaminase 48 U/L, Aspartate transaminas
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Se" -> "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Se"
+      [G4-FAITH] lab_summary: "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 2" -> "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 2"
+    Clinical_Findings: 19.0s
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy with expanders on 06/21/2019. Left breast benign, right breast with 1.5 cm node-negative, grade 1, ER/PR+ IDC. Physical exam shows bilateral nippl
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.2s
+      [EXTRACT] raw={
+"current_meds": "zoladex, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
