@@ -2364,3 +2364,45 @@ Processing row 13 (12/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 71.4s
+    Referral: 11.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "RTC after scans"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Advised her to eat small, frequent meals that's high in calories and protein."
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 11.7s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Advised her to eat small, frequent meals that's high in calories and protein.'
+    [POST-THERAPY] removed non-therapy: ['Continue metabolic therapy 2x/week and immunologic', 'Plan to have labs drawn every two weeks and return', 'Patient will schedule scans for May.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, liver, and nodes)'
+  [ATTRIBUTION] 22/22 fields sourced (34.2s)
+  Row 13 total: 291.1s
+  Row 13 saved to progress
+
+Processing row 16 (13/61)...
+  Injected 6 term definitions: ['ER positive', 'PR positive', 'lumpectomy', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'PLAN'
+  Regex extraction succeeded (1787 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "53 year old female with left breast invasive ductal carcinoma, ER/PR positive, HER2 negative, post-lumpec
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
