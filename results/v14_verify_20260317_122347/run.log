@@ -9814,3 +9814,29 @@ Processing row 83 (50/61)...
       [POST-SUPP] zolendronic acid, cyclobenzaprine (FLEXERIL) -> 
   Phase 1 extraction (6 prompts): 107.5s
   Cross-context injected (1019 chars)
+    Treatment_Goals: 3.9s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 26.0s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed multiple hypoattenuating lesions scattered throughout the right and left hepatic lobes, increased in size and number compared to 03/10/2020. MRI b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 29.9s
+  Total extraction: 137.4s
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
