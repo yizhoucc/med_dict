@@ -5788,3 +5788,63 @@ Processing row 48 (30/61)...
   Regex matched: 'Impression/Plan:'
   Regex extraction succeeded (1682 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 13.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "50 y.o. female with a recent diagnosis of left breast ductal carcinoma and biopsy-positive lymph nodes in
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.9s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Approximately Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Approximately Stage II" -> "likely stage 2"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 7.8s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 13.0, plt 287 (from December 2015)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock position and a tender mass in the 5 o'clock position. Left axillary lymph node palpable. MRI findings include an
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock positio" -> "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock positio"
+      [G4-FAITH] findings: "Left breast ductal carcinoma with a palpable firm mass in th" -> "Left breast ductal carcinoma with a palpable firm mass in th"
+    Current_Medications: 4.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROth"
+      [POST-MEDS] ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROthiazide (HYDRODIURIL) -> 
+    Treatment_Changes: 8.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ALPRAZOLAM ORAL 0.5 mg by mouth daily as needed (before MRI, biopsy, health appointments)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ALPRAZOLAM ORAL 0.5 mg by mouth daily as needed (before MRI, biopsy, health appointments) -> 
+  Phase 1 extraction (6 prompts): 73.4s
+  Cross-context injected (867 chars)
