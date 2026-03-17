@@ -5668,3 +5668,20 @@ Processing row 45 (29/61)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 43.0s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to treatment. Imaging findings include a CT chest with two solid 0.2 cm pulmonary nodules in the right middle and lower lobes, mildly enlar
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 46.7s
+  Total extraction: 219.9s
+    Medication_Plan: 16.9s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron. Conti
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di" -> "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
