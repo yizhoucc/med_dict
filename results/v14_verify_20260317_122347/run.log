@@ -243,3 +243,39 @@ Processing row 1 (2/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 57.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient presents with chest wall more tender, erythematous, " -> "Patient presents with chest wall more tender, erythematous, "
+    Current_Medications: 3.3s [improved]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan" -> ""
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 40.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Due to her poor tolerance, will change her irinotecan to every other week and increase her dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron (ZOFRAN)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 5 mg tablet, gabapentin (NEURONTIN) 100 mg capsule, cyclobenzaprine (FLEXERIL) 5 mg tablet, LORazepam (ATIVAN) 1 mg tablet -> ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 5 mg tablet
+  Phase 1 extraction (6 prompts): 163.1s
+  Cross-context injected (1525 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
