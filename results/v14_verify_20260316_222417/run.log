@@ -3090,3 +3090,74 @@ Processing row 21 (16/61)...
       [G4-FAITH] EMPTIED: ['procedure_plan']
       [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with [REDACTED] if she has a [REDACTED] mutation."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "pet ct now and if stable continue arimidex alone. If pet ct shows progression co" -> "pet ct now"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 7.3s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "If pet ct shows progression could use faslodex with [REDACTED] if she has a [REDACTED] mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after PET CT results to determine if stable or progression"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after PET CT results to determine if stable or pr" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 60.0s
+    Referral: 17.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with [R
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 17.7s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bones, chest wall, right infraclavicular and right IM nodes)'
