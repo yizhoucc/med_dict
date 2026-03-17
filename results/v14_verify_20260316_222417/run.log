@@ -5654,3 +5654,23 @@ Processing row 43 (28/61)...
       [G4-FAITH] EMPTIED: ['Genetics']
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 12.5s
+  [ATTRIBUTION] 19/22 fields sourced (39.8s)
+  Row 43 total: 205.2s
+  Row 43 saved to progress
+
+Processing row 45 (29/61)...
+  Injected 7 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'lumpectomy', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 29.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 48-year-old post-menopausal female with estrogen receptor positive (ER+) invasive ductal c
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] summary: "The patient is a 48-year-old post-menopausal female with est" -> "The patient is a 48-year-old post-menopausal female with est"
