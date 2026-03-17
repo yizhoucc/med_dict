@@ -587,3 +587,47 @@ Processing row 67 (3/3)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] genetic_testing_plan: "Her sons should be tested for the risk of [REDACTED] anemia in children (if the " -> "Her sons should be tested for the risk of [REDACTED] anemia in children (if the "
       [G4-FAITH] no changes (all supported)
+    Referral: 9.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Return to clinical as needed for further consultation and with her sons."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "None" -> "refer to genetics"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Nutrition', 'Others']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+    follow_up_next_visit: 3.8s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: as needed for further consultation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 108.3s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  Row 67 total: 182.9s
+  Row 67 saved to progress
+
+Total processing time: 771.0s (12.8min)
+Done! Results copied to ./results.txt
+Full results in: results/test_p0_20260316_173901/
