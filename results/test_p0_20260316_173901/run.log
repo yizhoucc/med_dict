@@ -1,1 +1,44 @@
 Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.60s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.62s/it]
+Model loaded.
+Data loaded: 3 rows (indices [13, 52, 67])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+
+Processing 3 rows...
+
+Processing row 13 (1/3)...
+  Injected 1 term definitions: ['FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (5675 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.4s
+      [EXTRACT] raw={
+"Patient type": "follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "58 y.o. female with metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbo
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, liver, and nodes",
+  "Me
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+ invasive ductal carcinoma"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> "metastatic (Stage IV)"
+      [G4-FAITH] Type_of_Cancer: "ER+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
