@@ -9038,3 +9038,46 @@ Processing row 77 (46/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 39.8s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in segment
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 43.7s
+  Total extraction: 206.2s
+    Medication_Plan: 5.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 25.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Patient wishes to explore targeted options for metastatic breast cancer. She is " -> "Patient wishes to explore targeted options for metastatic breast cancer. She is "
+    radiotherapy_plan: 11.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 11.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "The patient has a consultation with radiation oncology tomorrow to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy 
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] procedure_plan: "The patient has a consultation with radiation oncology tomor" -> "The patient has a consultation with radiation oncology tomor"
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['The patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
