@@ -10165,3 +10165,54 @@ Processing row 85 (52/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 22.8s [improved]
+      [EXTRACT] raw={
+"findings": "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious for metastatic disease. PET/CT revealed significant improvement in hypermetabolic osseous metastatic diseas
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious fo" -> "MRI brain showed a 4 x 6 mm and 5 x 6 mm foci of dural enhancement suspicious fo"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s
+      [EXTRACT] raw={
+"current_meds": "letrozole, ribociclib, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.3s
+      [EXTRACT] raw={
+"recent_changes": "Switch from letrozole + ribociclib to fulvestrant +/- everolimus",
+"supportive_meds": "Oxycodone, denosumab"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 66.9s
+  Cross-context injected (931 chars)
+    Treatment_Goals: 3.4s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 15.0s
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increase in metabolic activity of the known osseous metastatic disease (left mandible, cervical and thoracic spine, humerus, ribs, and pelvis) with no increased
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 18.3s
+  Total extraction: 85.2s
+    Medication_Plan: 8.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab treatment. Discussed continuing ribociclib with fulvestrant but clinical benefit not demonstra
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab " -> "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
