@@ -5868,3 +5868,139 @@ RESULTS FOR ROW 63
     "I encouraged the patient to sign up for and utilize Mychart"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 64
+============================================================
+
+--- Column: coral_idx ---
+203
+
+--- Column: note_text ---
+"Medical Oncology Consult Note  Video Consult    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  01/19/1993   Date of Visit:  03/08/2021  Provider:  ***** ***** *****  Primary Care Provider:  Name Unknown Provider  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Malignant neoplasm of overlapping sites of left breast in female, estrogen receptor positive (CMS code)         I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     28 year old female who felt a left breast mass.  She sought medical attention and was diagnosed January 2021 with a large left IDC, HR positive and her 2 neu negative.  On MRI the tumor is 10.3 x 4.5 x 3.5 cm.  The axillary biopsy was positive.  She had staging studies which show a suspicious lesion in the sternum.  She is to have a biopsy of this area.  She was started on dd AC and is tolerating okay.  She is here for a second opinion.  She is asking to transfer her care to me but I stressed that it is very important for her to stay on schedule with her chemotherapy with her current oncologist.      We discussed the difference between widely metastatic disease and oligo metastatic disease.  I would treat her aggressively because she has a good long term chance of control with a single bone site involved which can be radiated and the HR+ her 2 negative phenotype.      I would add xgeva if biopsy is positive.  The biopsy of the bone is planned.    Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, left (CMS code) 03/14/2021       Stage at *****:  Cancer Staging  Breast cancer, left (CMS code)  Staging form: Breast, AJCC 8th Edition  - Clinical: *****, *****, *****, ER+, PR+, *****- - Signed by ***** ***** *****, MD on \n 03/14/2021      Medications:    Current Outpatient Medications:   \u0007  acetaminophen (TYLENOL) 325 mg tablet, Take 650 mg by mouth every 6 (six) hours as needed, Disp: , Rfl:   \u0007  cholecalciferol, vitamin D3, 1000 UNITS tablet, Take 4,000 Units by mouth daily, Disp: , Rfl:   \u0007  dexAMETHasone (DECADRON) 4 mg tablet, Take 1 tablet by mouth twice a day on days 2 - 4., Disp: , Rfl:   \u0007  docusate sodium (COLACE) 250 mg capsule, Take 250 mg by mouth 2 (two) times daily, Disp: , Rfl:   \u0007  OLANZapine (ZYPREXA) 10 mg tablet, GENERIC FOR ZYPREXA. TAKE 1 TABLET BY MOUTH EVERY DAY ON DAYS 2 TO 4, Disp: , Rfl:   \u0007  ondansetron (ZOFRAN) 8 mg tablet, TAKE 1 TABLET BY MOUTH EVERY 12 HOURS AS NEEDED FOR NAUSEA OR VOMITING, Disp: , Rfl:   \u0007  prochlorperazine (COMPAZINE) 10 mg tablet, TAKE 1 TABLET BY MOUTH EVERY 6 HOURS AS NEEDED FOR NAUSEA OR VOMITING, Disp: , Rfl:   \u0007  ***** 8.6 mg tablet, TAKE 1 TABLET BY MOUTH TWICE DAILY, Disp: , Rfl:     Allergies: Allergies/Contraindications  No Known Allergies    Medical History:   Past Medical History:   Diagnosis Date   \u0007 Anemia    \u0007 Cancer of overlapping sites of left breast (CMS code)    \u0007 Pyelonephritis        Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 CESAREAN SECTION  10/16/2015       Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Never   \u0007 Drug use: Never   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None       *****:  ***** *****     ***** Status: single, lives in *****     Gynecologic History:  G 2 P 2 AB 0    Menarche 14  Premenopausal    OCP 5 years    Fertility treatments 0    Family History:   Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Maternal Aunt                 Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or \n weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain,vomiting, diarrhea, or bleeding + nausea,   GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression or trouble sleeping. + situational anxiety       Pain    Pain Score/Location    03/08/21 1313   *****: Generalized  Comment: PT HAS NO PAIN   *****:  0     Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Orders Only on 01/13/2019   Component Date Value Ref Range Status   \u0007 *****-*****, ***** 01/13/2019 HAZY  CLEAR,HAZY Final   \u0007 COLOR, URINE 01/13/2019 YELLOW   Final   \u0007 Glucose, ***** 01/13/2019 NEG  NEG mg/dL Final   \u0007 *****-*****, ***** 01/13/2019 NEG  NEG Final   \u0007 *****-*****, ***** 01/13/2019 NEG  NEG mg/dL Final   \u0007 Specific *****-*****, ***** 01/13/2019 1.013  1.003 - 1.030 Final   \u0007 Hemoglobin (UA), Auto 01/13/2019 LARGE***** NEG Final   \u0007 pH-UA, Urine 01/13/2019 6  5 - 8 pH units Final   \u0007 *****-*****, ***** 01/13/2019 30***** NEG mg/dL Final   \u0007 *****-*****, *****-Random 01/13/2019 NEG  NEG,0.2,1,<2.0 mg/dL Final   \u0007 *****-*****, ***** 01/13/2019 NEG  NEG Final   \u0007 Leukocyte *****-*****, ***** 01/13/2019 TRACE***** NEG Final   \u0007 RBC's, Urine, Auto 01/13/2019 >180***** 0 - 2 /HPF Final   \u0007 WBC's, Urine 01/13/2019 47***** 0 - 5 /HPF Final   \u0007 Bacteria, Urine Screen 01/13/2019 ABSENT  ABSENT Final   \u0007 Squamous Epithelial Cells, Urine 01/13/2019 October 26* 0-2,February 04 /HPF Final   \u0007 Mucus, Urine 01/13/2019 PRESENT***** ABSENT Final   \u0007 Urine Culture, Routine 01/13/2019 10,000 - 50,000 Cfu/ml Mixed skin and \n urogenital flora   Final   \u0007 Urine Culture, Routine 01/13/2019 Sensitivities not performed on mixed flora. Suggest recollection if clinically indicated.   Final   \u0007 Human Chorionic Gonadotropin for P***** 01/13/2019 Negative   Final   \u0007 WBC Count 01/13/2019 7.70  3.50 - 9.90 x(10)3/uL Final   \u0007 RBC Count 01/13/2019 3.94  3.70 - 5.00 x(10)6/uL Final   \u0007 Hemoglobin 01/13/2019 11.9***** 12.0 - 15.0 g/dL Final   \u0007 Hematocrit, Blood 01/13/2019 34.6***** 36.0 - 45.0 % Final   \u0007 MCV 01/13/2019 87.8  78.0 - 100.0 fL Final   \u0007 MCH 01/13/2019 30.2  27.0 - 33.0 pg Final   \u0007 MCHC 01/13/2019 34.4  32.0 - 36.0 g/dL Final   \u0007 RDW 01/13/2019 11.9  11.5 - 14.5 % Final   \u0007 Platelet Count 01/13/2019 *****  150 - 400 x(10)3/uL Final   \u0007 MPV 01/13/2019 10.0  8.8 - 12.0 fL Final   \u0007 % Neutrophils 01/13/2019 54.4  37.0 - 74.0 % Final   \u0007 % Lymphs (External) 01/13/2019 35.8  15.0 - 44.0 % Final   \u0007 Monocytes 01/13/2019 7.0  2.0 - 12.0 % Final   \u0007 Eosinophils (External Lab) 01/13/2019 2.2  0.0 - 6.0 % Final   \u0007 Basophils 01/13/2019 0.3  0.0 - 2.0 % Final   \u0007 Immature Granulocytes %, ***** 01/13/2019 0.3  0.0 - 0.5 % Final   \u0007 % NRBC 01/13/2019 0.0  0.0 - 0.0 % Final   \u0007 Neutrophil Absolute Count 01/13/2019 4.19  1.70 - 6.40 x(10)3/uL Final   \u0007 Lymphocyte Abs Cnt 01/13/2019 2.76  1.01 - 3.15 x(10)3/uL Final   \u0007 Monocyte ABS Count, Auto 01/13/2019 0.54  0.10 - 0.90 x(10)3/uL Final   \u0007 Eosinophils Absolute 01/13/2019 0.17  0.00 - 0.70 x(10)3/uL Final   \u0007 Basophil Abs Count 01/13/2019 0.02  0.00 - 0.10 x(10)3/uL Final   \u0007 Immature Granulocytes #, ***** 01/13/2019 0.02  0.00 - 0.05 x(10)3/uL Final   \u0007 Absolute Nucleated RBC 01/13/2019 0.00  0.00 - 0.00 x(10)3/uL Final   \u0007 Glucose, non-fasting 01/13/2019 ***** 70 - 99 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 01/13/2019 8  5 - 26 mg/dL Final   \u0007 Creatinine, Serum 01/13/2019 0.56  0.55 - 1.02 mg/dL Final   \u0007 eGFR - low estimate 01/13/2019 >120  60 - 300 mL/min/1.73m2 Final   \u0007 eGFR - high estimate \n 01/13/2019 >120  60 - 300 mL/min/1.73m2 Final   \u0007 Sodium, Serum / Plasma 01/13/2019 *****  135 - 145 mmol/L Final   \u0007 Potassium, Serum / Plasma 01/13/2019 3.2***** 3.5 - 5.1 mmol/L Final   \u0007 Chloride, Serum / Plasma 01/13/2019 *****  95 - 110 mmol/L Final   \u0007 Carbon Dioxide, Total 01/13/2019 25  21 - 32 mmol/L Final   \u0007 Anion Gap 01/13/2019 6***** 7 - 16 mmol/L Final   \u0007 Calcium, total, Serum / Plasma 01/13/2019 8.0***** 8.5 - 10.5 mg/dL Final   \u0007 Protein, Total, Serum / Plasma 01/13/2019 6.5  6.4 - 8.2 g/dL Final   \u0007 GLOBULIN 01/13/2019 3.3  2.1 - 4.3 g/dL Final   \u0007 Albumin, Serum / Plasma 01/13/2019 3.2***** 3.4 - 5.0 g/dL Final   \u0007 Aspartate transaminase 01/13/2019 13  10 - 37 U/L Final   \u0007 Alanine transaminase 01/13/2019 17  13 - 56 U/L Final   \u0007 Alkaline Phosphatase 01/13/2019 68  45 - 130 U/L Final   \u0007 Bilirubin, Total 01/13/2019 0.2  0.2 - 1.0 mg/dL Final         Bone Scan:  02/17/2021   There is an abnormal substantially increased focus of radiotracer uptake involving the manubrium. This is concerning for a solitary ***** avid bone metastasis. Correlation with anatomic imaging is advised.      Psychologic/emotional well-being/support  She is anxious but well supported by her family.  Her cousin is with her today on the video visit.     Assessment / Plan:    1. Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum.   2.  She is currently on ***** and taxol planned.    3.   Biopsy is planned for sternal lesion.    4.   We discussed the treatment in patients with oligo metastatic disease.  I recommend ***** followed by taxol then surgery and radiation with additional treatment to sternum as a single site of metastatic disease.    5.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  6.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.   7.  We discussed the role of chemotherapy to decrease the risk of systemic \n recurrence.   8.  She is going to check with her insurance to see if she can change to our clinic.  I encouraged her to keep her chemotherapy on time with her current oncologist.   9.  If biopsy of bone is positive would add xgeva.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.                \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:    1. Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum.   2.  She is currently on ***** and taxol planned.    3.   Biopsy is planned for sternal lesion.    4.   We discussed the treatment in patients with oligo metastatic disease.  I recommend ***** followed by taxol then surgery and radiation with additional treatment to sternum as a single site of metastatic disease.    5.  We discussed the role of surgery and radiation to decrease the risk of local recurrence.  6.  We discussed the role of hormonal blockade to decrease the risk of systemic recurrence.   7.  We discussed the role of chemotherapy to decrease the risk of systemic \n recurrence.   8.  She is going to check with her insurance to see if she can change to our clinic.  I encouraged her to keep her chemotherapy on time with her current oncologist.   9.  If biopsy of bone is positive would add xgeva.         ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 70 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.                \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "yes",
+    "in-person": "Televisit",
+    "summary": "28 year old female with newly diagnosed left breast cancer, estrogen receptor positive, HER2 negative, with a large tumor and suspicious lesion in the sternum. The purpose of this visit is a new patient evaluation and second opinion."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "Originally Stage III-IV, now metastatic (Stage IV)",
+    "Metastasis": "Yes, to the sternum",
+    "Distant Metastasis": "Yes, to the sternum"
+  },
+  "Lab_Results": {
+    "lab_summary": "Hgb 11.9, WBC 7.70, RBC 3.94, Hematocrit 34.6, MCV 87.8, MCH 30.2, MCHC 34.4, RDW 11.9, Platelet Count [REDACTED], Neutrophil Absolute Count 4.19, Lymphocyte Abs Cnt 2.76, Monocyte ABS Count 0.54, Eosinophils Absolute 0.17, Basophil Abs Count 0.02, Immature Granulocytes # 0.02, Absolute Nucleated RBC 0.00, Glucose [REDACTED], Urea Nitrogen 8, Creatinine 0.56, eGFR - low estimate >120, eGFR - high estimate >120, Sodium [REDACTED], Potassium 3.2, Chloride [REDACTED], Carbon Dioxide 25, Anion Gap 6, Calcium 8.0, Protein Total 6.5, GLOBULIN 3.3, Albumin 3.2, Aspartate transaminase 13, Alanine transaminase 17, Alkaline Phosphatase 68, Bilirubin Total 0.2 (from 01/13/2019)"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient has a large left IDC, HR positive and HER2 negative. MRI shows the tumor is 10.3 x 4.5 x 3.5 cm. Axillary biopsy was positive. Staging studies show a suspicious lesion in the sternum, and a biopsy is planned. Bone scan shows an abnormal substantially increased focus of radiotracer uptake involving the manubrium, concerning for a solitary avid bone metastasis. Correlation with anatomic imaging is advised."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "[REDACTED] and taxol planned."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Currently on [REDACTED] and taxol planned. Recommended [REDACTED] followed by taxol then surgery and radiation with additional treatment to sternum as a single site of metastatic disease. If biopsy of bone is positive, would add xgeva."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Additional treatment to sternum as a single site of metastatic disease is planned."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "No specific genetic or molecular tests are planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Not specified in the given text"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Full code."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "If biopsy of bone is positive would add xgeva."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "She is going to check with her insurance to see if she can change to our clinic."
+  ],
+  "second opinion": [
+    "She is going to check with her insurance to see if she can change to our clinic."
+  ],
+  "in-person": [
+    "I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location."
+  ],
+  "summary": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "Type_of_Cancer": [
+    "Stage III- IV left breast cancer HR+/her 2 negative"
+  ],
+  "Stage_of_Cancer": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "Metastasis": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "Distant Metastasis": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "findings": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "goals_of_treatment": [
+    "Stage III- IV left breast cancer HR+/her 2 negative with probably metastatic disease to the sternum."
+  ],
+  "response_assessment": [
+    "She is currently on [REDACTED] and taxol planned."
+  ],
+  "medication_plan": [
+    "[REDACTED] and taxol planned."
+  ],
+  "therapy_plan": [
+    "Currently on [REDACTED] and taxol planned. I recommend [REDACTED] followed by taxol then surgery and radiation with additional treatment to sternum as"
+  ],
+  "radiotherapy_plan": [
+    "additional treatment to sternum as a single site of metastatic disease."
+  ],
+  "follow up": [
+    "If biopsy of bone is positive would add xgeva."
+  ]
+}
