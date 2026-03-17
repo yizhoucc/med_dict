@@ -2868,3 +2868,172 @@ Processing row 19 (15/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 97.9s
+    Medication_Plan: 12.2s
+      [EXTRACT] raw={
+    "medication_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab after dental clearance."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.8s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab. Needs dental evaluation first."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl" -> "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.1s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Rad Onc referral" -> "Rad Onc referral for consult"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 6.5s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "MRI of total spine, CAP CT, obtain outside PET/CT for comparison, Repeat imaging after 3 months on treatment"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "MRI of total spine, CAP CT, obtain outside PET/CT for comparison, Repeat imaging" -> "MRI of total spine, CAP CT, obtain outside PET/CT for comparison"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 7.1s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "Repeat imaging after 3 months on treatment -labs including tumor markers. She will need monthly blood work on Palbociclib."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "Repeat imaging after 3 months on treatment -labs including tumor markers. She wi" -> "Labs including tumor markers. She will need monthly blood work on Palbociclib."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 7.5s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Obtain outside path and send for foundation one, if this is not possible, would send for [REDACTED] 360"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: ~ 1 month"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 58.1s
+    Referral: 9.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc referral",
+"Others": "None",
+"follow up": "RTC in ~ 1 month"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 9.1s
+    [POST-THERAPY] removed non-therapy: ['OK to start.']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage I': 'Originally Stage I-II, now metastatic (Stage IV)' → '-II, now metastatic (Stage IV)'
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, lymph nodes, and lung)'
+  [ATTRIBUTION] 22/23 fields sourced (35.6s)
+  Row 19 total: 200.7s
+  Row 19 saved to progress
+
+Processing row 21 (16/61)...
+  Injected 6 term definitions: ['estrogen receptor', 'PR positive', 'ER positive', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1415 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 18.6s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient presents with a history of left ER+ DCIS in 1994 and right stage II IDC in 2000. She has a metas
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 19.5s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "Originally ER+/PR+/HER2- invasive ductal carcinoma, metastatic recurrence ER+/PR+/HER2-",
+  "Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
+  "Distant_Metas
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "Originally ER+/PR+/HER2- invasive ductal carcinoma, metastatic recurrence ER+/PR" -> "ER+/PR+/HER2- invasive ductal carcinoma, metastatic recurrence ER+/PR+/HER2-"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 79.2s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV [REDACTED], MCH 36.1, MCHC 32.8, Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.7s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left DCIS in 1994 and right stage II IDC in 2000. Metastatic relapse in May 2020 with right chest wall recurrence, bone metastases, and contralateral infraclavi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.2s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab, prednisone"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 20.3s
+      [EXTRACT] raw={
+"recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; letrozole switched to anastrozole in July 2021 due to skin rash; [REDACTED] dose reduced and patient has been on 150 mg bid s
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
