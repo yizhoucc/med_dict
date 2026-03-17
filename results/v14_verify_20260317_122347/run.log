@@ -1845,3 +1845,76 @@ Processing row 10 (10/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] lab_summary: "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE" -> "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE"
+    Clinical_Findings: 18.3s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with bone metastases. Imaging findings include PET/CT showing increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, p
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.3s
+      [EXTRACT] raw={
+"current_meds": "Faslodex, Denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.6s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Faslodex + Denosumab",
+"supportive_meds": "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate, levothyroxine, lovastatin, metFORMIN, 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin" -> "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin"
+      [G3-IMPROVE] recent_changes: "Faslodex + Denosumab" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate -> docusate sodium, hydrocodone-acetaminophen, senna-docusate
+  Phase 1 extraction (6 prompts): 101.8s
+  Cross-context injected (773 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.2s [improved]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, pelvis, and right femur ordered due to worsening numbness in right leg. Ima
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "PET/CT showed increased metastatic activity and size of left mandibular mass. MR" -> "PET/CT showed increased metastatic activity and size of left mandibular mass. Im"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 13.6s
+  Total extraction: 115.4s
+    Medication_Plan: 12.0s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on Faslodex and Denosumab. Mycelex [REDACTED] 5 times a day for 14 days to help with thrush. Salt and soda rinses."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.6s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on Faslodex and Denosumab."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on Faslodex and Denosumab." -> "Continue on Faslodex and Denosumab. Order PETCT to evaluate Femur and to toes. C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.7s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "S/p xrt to jaw improved pain with residual numbness"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "S/p xrt to jaw improved pain with residual numbness" -> "None"
