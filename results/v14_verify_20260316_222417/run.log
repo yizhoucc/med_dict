@@ -5746,3 +5746,56 @@ Processing row 45 (29/61)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 37.2s
   Total extraction: 211.3s
+    Medication_Plan: 17.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron. Conti
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di" -> "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.7s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will start letrozole now. Discussed addition of abemaciclib after completion of xrt. Continue naproxen 500mg bid, APAP ok if taken sparingly. Continue allegra daily.
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Encouraged her to fup with Dr. [REDACTED] in rad onc after her re-excision date is set."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 15.0s
+      [EXTRACT] raw={
+    "procedure_plan": "will fup with Dr. [REDACTED] for re-excision of margins. send email to Dr. [REDACTED] and Dr. [REDACTED] regarding if an axillary dissection is recommended since she's going b
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 8.5s
+      [EXTRACT] raw={
+    "imaging_plan": "MRA of the abdomen in 1 year, due in January 2022. Baseline dexa ordered."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
