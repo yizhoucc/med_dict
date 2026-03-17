@@ -6610,3 +6610,51 @@ Processing row 53 (34/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 13.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "start palbociclib after radiation",
+"supportive_meds": "oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid -> oxyCODONE (ROXICODONE) 5 mg tablet, zoledronic acid
+  Phase 1 extraction (6 prompts): 73.6s
+  Cross-context injected (732 chars)
+    Treatment_Goals: 4.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.8s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The patient is currently on leuprolide, letrozole, and zoledronic acid. No new imaging studies were performed at this visit, and there is no specific evidence provided in the
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient is currently on leuprolide, letrozole, and zoledronic acid. No new i" -> "No new imaging studies were performed at this visit, and there is no specific ev"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.2s
+  Total extraction: 87.8s
+    Medication_Plan: 16.0s
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after radiation, continue zoledronic acid every 3 months, take calcium 1250 mg daily, take vitamin D 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.6s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "continue leuprolide every 4 weeks, continue letrozole, referred to radiation oncology, start palbociclib after radiation, zoledronic acid every 3 months, calcium 1250 mg daily, 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "continue leuprolide every 4 weeks, continue letrozole, referred to radiation onc" -> "continue leuprolide every 4 weeks, continue letrozole, referred to radiation onc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
