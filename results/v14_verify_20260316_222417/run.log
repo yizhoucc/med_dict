@@ -11237,3 +11237,78 @@ Processing row 91 (57/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 22.4s
+      [EXTRACT] raw={
+"findings": "Liver smaller and feels less tenderness or bloating. Red rash around mouth that occurs 7-10 days after last treatment, no lesions just red and dry. No rashes now, hair thin. No breast p
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.6s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "EPIRUBICIN HCL, NEUPOGEN, DENOSUMAB"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] EPIRUBICIN HCL, NEUPOGEN, DENOSUMAB -> EPIRUBICIN HCL, DENOSUMAB
+    Treatment_Changes: 15.7s
+      [EXTRACT] raw={
+"recent_changes": "restart chemotherapy Epirubicin 25mg/m2 D1, 8, 15 with Neupogen X 2 days",
+"supportive_meds": "filgrastim (NEUPOGEN) 300 mcg/mL injection Inject 300 mcg into the skin Daily. X 2 d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 232.5s
+  Cross-context injected (861 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.0s [improved]
+      [EXTRACT] raw={
+"response_assessment": "No evidence of disease recurrence on imaging and exam. Liver smaller and feels less tenderness or bloating. Tumor marker pending."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "No evidence of disease recurrence on imaging and exam. Liver smaller and feels l" -> "Liver smaller and feels less tenderness or bloating. Tumor marker pending."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.3s
+  Total extraction: 241.8s
+    Medication_Plan: 9.9s
+      [EXTRACT] raw={
+    "medication_plan": "Cycle #2: D1 Epirubicin 25 mg/m2, D1,8,15 with 2 days of Neupogen"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.6s
+      [EXTRACT] raw={
+    "therapy_plan": "Plan cycle#2 D1 Epirubicin 25 mg/m2 D1,8,15 to with 2 days of Neupogen"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
