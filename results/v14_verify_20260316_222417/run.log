@@ -7924,3 +7924,11 @@ Processing row 64 (40/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.8s
   Total extraction: 113.3s
+    Medication_Plan: 45.5s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with options including AC/T (Adriamycin and Cytoxan followed by Taxol) or enrollment in the ISPY clinical trial with various regimens such as Taxol w
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Neoadjuvant chemotherapy with options including AC/T (Adriamycin and Cytoxan fol" -> "Neoadjuvant chemotherapy with options including AC/T (Adriamycin and Cytoxan fol"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
