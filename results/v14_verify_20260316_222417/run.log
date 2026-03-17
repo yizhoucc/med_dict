@@ -7068,3 +7068,51 @@ Processing row 58 (36/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone 32.5 IU/L, Estradio" -> "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone  32.5 IU/L, Estradi"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 21.3s
+      [EXTRACT] raw={
+"findings": "Patient is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. Lumpectomy scar is well healed with no dominant
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 14.8s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "exemestane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "exemestane" -> ""
+      [G4-FAITH] current_meds: "" -> "ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desv"
+      [POST-MEDS] ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet, ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL), exemestane ([REDACTED]), gabapentin (NEURONTIN) 300 mg capsule, letrozole (FEMARA) 2.5 mg tablet, levothyroxine 25 mcg tablet, montelukast (SINGULAIR) 10 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL), IBUPROFEN ORAL, triamcinolone (KENALOG) 0.1 % cream -> exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 9.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped letrozole and advised to start exemestane",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule -> 
+  Phase 1 extraction (6 prompts): 92.3s
+  Cross-context injected (888 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.8s [improved]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam"
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "no evidence of disease recurrence on imaging and exam" -> "no evidence of disease recurrence either locally or systemically based on physic"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.3s
+  Total extraction: 101.6s
