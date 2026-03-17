@@ -104,6 +104,8 @@ from ult import (
     load_medical_dictionary,
     load_oncology_whitelist,
     load_supportive_whitelist,
+    load_lab_whitelist,
+    load_genetic_tests,
     find_relevant_definitions,
     format_definitions_context,
     run_model,
@@ -622,6 +624,14 @@ def main():
     supp_whitelist = load_supportive_whitelist()
     print(f"Supportive care whitelist loaded: {len(supp_whitelist)} drugs")
 
+    # 11d. Load lab test whitelist
+    lab_whitelist = load_lab_whitelist()
+    print(f"Lab test whitelist loaded: {len(lab_whitelist)} terms")
+
+    # 11e. Load genetic test keywords
+    genetic_tests = load_genetic_tests()
+    print(f"Genetic test keywords loaded: {len(genetic_tests)} terms")
+
     # 12. Main loop
     global_start = time.time()
     print(f"\nProcessing {len(df)} rows...")
@@ -656,6 +666,7 @@ def main():
         ext_start = time.time()
         model_ap = assessment_and_plan.replace("*****", "[REDACTED]") if assessment_and_plan else None
         base_cache = build_base_cache(model_note, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+        fullnote_cache = base_cache  # save reference for Referral extraction later
 
         # Phase 1: Base fact extraction (independent prompts)
         phase1_prompts = {k: extraction_prompts[k] for k in PHASE1_KEYS if k in extraction_prompts}
@@ -693,6 +704,9 @@ def main():
         print(f"  Total extraction: {time.time() - ext_start:.1f}s")
 
         # Extract plan keypoints from assessment/plan section
+        # Pop Referral — it needs full note context, not just A/P [v14]
+        referral_prompt = plan_extraction_prompts.pop("Referral", None)
+
         if assessment_and_plan is not None:
             plan_start = time.time()
             base_cache = build_base_cache(model_ap, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
@@ -710,6 +724,20 @@ def main():
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
+
+        # Extract Referral from full note (not just A/P) [v14]
+        if referral_prompt:
+            ref_start = time.time()
+            ref_keypoints = extract_fn(
+                {"Referral": referral_prompt},
+                model, tokenizer, keypoint_config, fullnote_cache,
+                verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
+                gate_config=gate_config, supportive_whitelist=supp_whitelist,
+            )
+            keypoints.update(ref_keypoints)
+            print(f"  Referral extraction (full note): {time.time() - ref_start:.1f}s")
+            # Restore the prompt for next iteration
+            plan_extraction_prompts["Referral"] = referral_prompt
 
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
@@ -853,6 +881,36 @@ def main():
                         lab["lab_plan"] = new_val
                         print(f"    [POST-LAB] cleaned: '{lab_val[:80]}' → '{new_val}'")
 
+        # POST-LAB-WHITELIST: Validate Lab_Plan items against lab test whitelist [v14]
+        # Remove items that don't match any known lab test (e.g., "lumbar puncture" → procedure, not lab)
+        lab = keypoints.get("Lab_Plan", {})
+        if isinstance(lab, dict):
+            lab_val = lab.get("lab_plan", "") or ""
+            if lab_val and lab_val.lower() not in ("no labs planned.", "no labs planned", "none", "none planned.", ""):
+                items = [item.strip() for item in re.split(r'[,;]', lab_val) if item.strip()]
+                kept = []
+                removed = []
+                # Non-lab items to explicitly exclude
+                NON_LAB_TERMS = ["lumbar puncture", " lp ", "biopsy", "imaging",
+                                 "mammogram", "mri", "ct scan", "pet", "ultrasound",
+                                 "oncotype", "mammaprint", "brca", "genomic", "molecular"]
+                for item in items:
+                    il = item.lower()
+                    is_non_lab = any(t in il for t in NON_LAB_TERMS)
+                    matches_whitelist = any(t in il for t in lab_whitelist)
+                    if is_non_lab:
+                        removed.append(item)
+                    elif matches_whitelist:
+                        kept.append(item)
+                    else:
+                        # Item doesn't match whitelist but also isn't explicitly non-lab
+                        # Keep it to avoid over-filtering (conservative approach)
+                        kept.append(item)
+                if removed:
+                    new_val = ", ".join(kept) if kept else "No labs planned."
+                    lab["lab_plan"] = new_val
+                    print(f"    [POST-LAB-WHITELIST] removed non-lab items: {[r[:50] for r in removed]}")
+
         # POST-THERAPY: Whitelist filter for Therapy_plan
         # Only keep sentences mentioning actual cancer therapy (drugs, regimens, modalities).
         # Removes contaminants like antiviral drugs (valtrex), antibiotics, etc.
@@ -987,6 +1045,86 @@ def main():
                     proc_lower = proc_val.lower()
                     print(f"    [POST-PROCEDURE] found in full note: '{match_clean}'")
 
+        # POST-PROCEDURE-FILTER: Remove non-procedure items from Procedure_Plan [v14]
+        # Items like IHC, FISH, Oncotype, BRCA belong in genetic_testing_plan, not procedure
+        proc = keypoints.get("Procedure_Plan", {})
+        if isinstance(proc, dict):
+            proc_val = proc.get("procedure_plan", "") or ""
+            if proc_val and proc_val.lower() not in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
+                PROC_BLACKLIST = [
+                    "ihc", "fish", "receptor testing", "staining",
+                    "oncotype", "mammaprint", "brca", "genomic", "molecular",
+                    "genetic testing", "gene panel", "ngs", "next generation",
+                    "foundation one", "foundationone", "guardant",
+                ]
+                items = [item.strip() for item in re.split(r'[,;]', proc_val) if item.strip()]
+                kept = []
+                removed = []
+                for item in items:
+                    il = item.lower()
+                    if any(t in il for t in PROC_BLACKLIST):
+                        removed.append(item)
+                    else:
+                        kept.append(item)
+                if removed:
+                    new_val = ", ".join(kept) if kept else "No procedures planned."
+                    proc["procedure_plan"] = new_val
+                    print(f"    [POST-PROCEDURE-FILTER] removed non-procedure items: {[r[:50] for r in removed]}")
+
+        # POST-IMAGING-FILTER: Remove non-imaging items from Imaging_Plan [v14]
+        # Items like biopsy, thoracentesis, lumbar puncture belong in procedure, not imaging
+        img = keypoints.get("Imaging_Plan", {})
+        if isinstance(img, dict):
+            img_val = img.get("imaging_plan", "") or ""
+            if img_val and img_val.lower() not in ("no imaging planned.", "no imaging planned", "none", "none planned.", ""):
+                IMG_BLACKLIST = ["biopsy", "thoracentesis", "lumbar puncture", "paracentesis",
+                                 "port placement", "surgery", "mastectomy", "lumpectomy"]
+                items = [item.strip() for item in re.split(r'[,;.]', img_val) if item.strip()]
+                kept = []
+                removed = []
+                for item in items:
+                    il = item.lower()
+                    if any(t in il for t in IMG_BLACKLIST):
+                        removed.append(item)
+                    else:
+                        kept.append(item)
+                if removed:
+                    new_val = ". ".join(kept) if kept else "No imaging planned."
+                    img["imaging_plan"] = new_val
+                    print(f"    [POST-IMAGING-FILTER] removed non-imaging items: {[r[:50] for r in removed]}")
+
+        # POST-GENETICS-SEARCH: Search full note for genetic testing plans [v14]
+        # Model often misses Oncotype, MammaPrint, BRCA etc. when they're outside A/P
+        gen = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gen, dict):
+            gen_val = gen.get("genetic_testing_plan", "") or ""
+            gen_lower = gen_val.lower()
+            if gen_lower in ("none planned.", "none planned", "none", "none.", ""):
+                # Search full note for genetic test keywords with future context
+                FUTURE_CONTEXT = [
+                    "will order", "will send", "send for", "plan to",
+                    "interested in", "we will await", "ordered", "pending",
+                    "recommend", "discussed", "consider", "plan for",
+                    "will check", "will obtain", "refer for", "schedule",
+                ]
+                found_tests = []
+                note_lower = note_text.lower()
+                for term in genetic_tests:
+                    if term in note_lower:
+                        # Check if there's future context near this term
+                        # Look for future keywords within 100 chars before the term
+                        for match in re.finditer(re.escape(term), note_lower):
+                            start = max(0, match.start() - 100)
+                            context_window = note_lower[start:match.end() + 50]
+                            if any(fc in context_window for fc in FUTURE_CONTEXT):
+                                found_tests.append(term)
+                                break
+                if found_tests:
+                    # Deduplicate and format
+                    unique_tests = list(dict.fromkeys(found_tests))  # preserve order
+                    gen["genetic_testing_plan"] = ", ".join(unique_tests[:3])  # cap at 3
+                    print(f"    [POST-GENETICS-SEARCH] found in full note: {unique_tests}")
+
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})
         adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""
@@ -1022,6 +1160,36 @@ def main():
                 if cleaned and cleaned != stage:
                     cancer["Stage_of_Cancer"] = cleaned
                     print(f"    [POST-STAGE] contradiction fixed: '{stage}' → '{cleaned}'")
+
+        # POST-STAGE-VERIFY: Check for hallucinated "Originally Stage X" [v14]
+        # Model sometimes fabricates original stage (e.g., "Originally Stage IIA") when note
+        # only mentions metastatic recurrence without specifying the original stage.
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = cancer.get("Stage_of_Cancer", "")
+            if stage and isinstance(stage, str):
+                orig_match = re.search(r'Originally\s+Stage\s+([A-Za-z0-9]+)', stage, re.IGNORECASE)
+                if orig_match:
+                    claimed_stage = orig_match.group(1)  # e.g., "IIA"
+                    # Check if the original note actually mentions this stage
+                    # Search for patterns like "Stage IIA", "stage IIA", "T2N0" etc.
+                    stage_pattern = re.compile(
+                        rf'(?:stage\s+{re.escape(claimed_stage)}|'
+                        rf'diagnosed\s+(?:at|as|with)\s+stage\s+{re.escape(claimed_stage)})',
+                        re.IGNORECASE
+                    )
+                    if not stage_pattern.search(note_text):
+                        # Original stage not found in note — remove the "Originally Stage X" part
+                        cleaned = re.sub(
+                            r'Originally\s+Stage\s+[A-Za-z0-9]+,?\s*',
+                            '', stage, flags=re.IGNORECASE
+                        ).strip().lstrip(',').strip()
+                        if cleaned:
+                            cancer["Stage_of_Cancer"] = cleaned
+                            print(f"    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage {claimed_stage}': '{stage}' → '{cleaned}'")
+                        else:
+                            cancer["Stage_of_Cancer"] = "Metastatic (Stage IV)"
+                            print(f"    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage {claimed_stage}': '{stage}' → 'Metastatic (Stage IV)'")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})

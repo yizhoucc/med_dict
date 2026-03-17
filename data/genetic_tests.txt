@@ -1,0 +1,57 @@
+# Genetic/molecular test keywords — for POST-GENETICS-SEARCH
+# Used to find genetic testing plans mentioned in full note
+# One term per line (lowercase), with category comments
+
+# PROGNOSTIC GENE EXPRESSION TESTS
+oncotype
+oncotype dx
+mammaprint
+
+# HEREDITARY CANCER PANELS
+brca
+brca1
+brca2
+germline
+germline panel
+germline testing
+hereditary cancer
+
+# SEQUENCING / NGS
+ngs
+next generation sequencing
+foundation one
+foundationone
+guardant
+guardant360
+tempus
+
+# LIQUID BIOPSY
+liquid biopsy
+ctdna
+circulating tumor dna
+
+# BIOMARKER TESTS
+msi
+microsatellite instability
+pd-l1
+pdl1
+her2 fish
+her2 testing
+
+# MOLECULAR PROFILING
+molecular profiling
+molecular testing
+genomic testing
+gene panel
+
+# COMMERCIAL LABS
+invitae
+myriad
+ambry
+color genomics
+
+# OTHER
+tumor mutational burden
+tmb
+somatic testing
+biomarker testing

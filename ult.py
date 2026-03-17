@@ -42,6 +42,28 @@ def load_supportive_whitelist(path="data/supportive_care_drugs.txt"):
     return drugs
 
 
+def load_lab_whitelist(path="data/lab_tests.txt"):
+    """Load lab test whitelist for filtering Lab_Plan field."""
+    terms = set()
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                terms.add(line.lower())
+    return terms
+
+
+def load_genetic_tests(path="data/genetic_tests.txt"):
+    """Load genetic test keywords for POST-GENETICS-SEARCH."""
+    terms = set()
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                terms.add(line.lower())
+    return terms
+
+
 def filter_current_meds(parsed, whitelist):
     val = parsed.get("current_meds", "")
     if isinstance(val, list):
@@ -77,10 +99,11 @@ def filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist):
     if val_clean.startswith("none") or val_clean.startswith("not ") or val_clean.startswith("no "):
         return parsed
 
-    combined = supportive_whitelist | oncology_whitelist
-    # Split by comma, semicolon, or newline
+    # Only use supportive whitelist — oncology drugs (letrozole, tamoxifen etc.)
+    # should NOT pass through supportive_meds filter
+    # Bone agents (denosumab, xgeva, zometa) are already in supportive_care_drugs.txt
     meds = [m.strip() for m in re.split(r'[,;\n]', val) if m.strip()]
-    filtered = [m for m in meds if any(d in m.lower() for d in combined)]
+    filtered = [m for m in meds if any(d in m.lower() for d in supportive_whitelist)]
     parsed["supportive_meds"] = ", ".join(filtered) if filtered else ""
     return parsed
 
@@ -885,7 +908,7 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
 
 # --- V2 Pipeline constants ---
 PLAN_KEYS = {'Therapy_plan', 'Procedure_Plan', 'Imaging_Plan', 'Lab_Plan',
-             'Medication_Plan', 'Medication_Plan_chatgpt', 'radiotherapy_plan'}
+             'Medication_Plan', 'radiotherapy_plan'}
 
 # Patterns that G3 should NOT empty — these are valid "nothing here" answers
 SAFE_NEGATIVE_PATTERNS = [

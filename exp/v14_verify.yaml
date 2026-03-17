@@ -1,21 +1,17 @@
 experiment:
-  name: "default"
+  name: "v14_verify"
   seed: 42
 
 model:
-  name: "meta-llama/Llama-3.1-8B-Instruct"
-  chat_template: "llama3"
+  name: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+  chat_template: "qwen2"
   dtype: "bfloat16"
   device_map: "auto"
   cache_dir: "/home/yc/.cache/huggingface"
-  # quantization:        # uncomment to enable 4-bit quantization
-  #   type: "4bit"       # "4bit" or "8bit"
-  #   quant_type: "nf4"  # "nf4" or "fp4"
-  #   double_quant: true
 
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
-  row_range: [20,40]
+  row_indices: [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99]
 
 prompts:
   extraction: "prompts/extraction.yaml"
@@ -23,9 +19,12 @@ prompts:
 
 extraction:
   pipeline: "v2"
+  attribution: true
   max_retries: 3
   verify: true
-  attribution: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
 
 generation:
   keypoint:

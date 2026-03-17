@@ -56,7 +56,8 @@ Cancer_Diagnosis: |
   For Stage_of_Cancer:
   - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
   - If the patient was originally diagnosed at one stage but now has metastatic recurrence, write BOTH:
-    e.g., "Originally Stage IIA, now metastatic (Stage IV)"
+    e.g., "Originally Stage [X], now metastatic (Stage IV)"
+    IMPORTANT: Only write "Originally Stage [X]" if the note EXPLICITLY states the original stage number (e.g., "Stage IIA at diagnosis"). If the note only says "metastatic recurrence" without specifying the original stage, write just "Metastatic (Stage IV)" — do NOT guess or invent the original stage.
   - If distant metastases are documented, the current stage is Stage IV even if not explicitly stated.
   - If the Assessment/Plan states a stage (e.g., "Stage I", "early stage"), extract it — do NOT write "Not mentioned in note".
   - If tumor size and node status are available, infer the approximate stage (e.g., "2.3 cm, 0/3 LN negative — approximately Stage I-II").
@@ -67,7 +68,7 @@ Cancer_Diagnosis: |
   Respond *only* with a JSON object using this exact schema:
   {
   "Type_of_Cancer": "Specific cancer type with histologic subtype and receptor statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
-  "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage IIA, now metastatic (Stage IV)'",
+  "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only include original stage if explicitly stated in the note",
   "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant.",
   "Metastasis": "if there is met, Yes (to where), No, or Not sure"
   }
@@ -126,6 +127,8 @@ Current_Medications: |
   Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
   Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
   If no cancer-related medications are currently active, write empty string "".
+
+  CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference. Only include cancer-related drugs that appear in that medication list AND are currently active (not marked as discontinued or PRN-only). If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
 
   Respond *only* with a JSON object using this exact schema:
   {

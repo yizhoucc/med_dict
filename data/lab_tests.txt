@@ -1,0 +1,92 @@
+# Lab test whitelist — for filtering Lab_Plan field
+# Only blood tests and lab work belong in Lab_Plan
+# One term per line (lowercase), with category comments
+
+# COMPLETE BLOOD COUNT
+cbc
+complete blood count
+wbc
+white blood cell
+rbc
+red blood cell
+hemoglobin
+hematocrit
+platelet
+differential
+
+# COMPREHENSIVE/BASIC METABOLIC PANEL
+cmp
+bmp
+comprehensive metabolic
+basic metabolic
+electrolytes
+sodium
+potassium
+chloride
+bicarbonate
+calcium
+magnesium
+phosphorus
+glucose
+
+# LIVER FUNCTION
+lfts
+liver function
+alt
+ast
+alkaline phosphatase
+alk phos
+bilirubin
+albumin
+total protein
+
+# KIDNEY FUNCTION
+creatinine
+bun
+gfr
+blood urea nitrogen
+
+# TUMOR MARKERS
+ca 15-3
+ca 27.29
+cea
+ca-125
+ca125
+psa
+afp
+hcg
+beta-hcg
+
+# COAGULATION
+coagulation
+pt
+inr
+aptt
+ptt
+d-dimer
+
+# THYROID
+thyroid
+tsh
+t3
+t4
+free t4
+
+# HEPATITIS
+hepatitis
+hep b
+hep c
+hbsag
+hbsab
+
+# GENERAL LAB TERMS
+blood draw
+labs before chemo
+pre-chemo labs
+draw and visit
+tumor markers
+lab work
+blood work
+routine labs
+labs
+bloodwork

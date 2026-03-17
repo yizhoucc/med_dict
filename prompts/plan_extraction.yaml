@@ -1,24 +1,3 @@
-Medication_Plan_chatgpt: |
-  TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
-  Include all current and future medication plans for both cancer therapy and supportive treatment. Cancer treatment could be one or many in chemotherapy, hormonal therapy, bone therapy, radiotherapy (eg. rad onc, xrt). Supportive treatment could be one or many in bowel regimen, pain medication, psychiatry medication, neuropathy or any blood transfusion plan.
-
-  IMPORTANT classification rules:
-  - "bowel regimen" means laxatives, stool softeners, anti-diarrheals (e.g., docusate, miralax, lomotil, imodium). Antibiotics like doxycycline are NOT bowel regimen — classify them under "other treatment" or "infection management".
-  - "pain medication" means analgesics (opioids, NSAIDs, muscle relaxants for pain).
-  - "psychiatry medication" means antidepressants, anxiolytics, antipsychotics.
-
-  Include whether a medication is being started now (e.g,"will start", "Rx sent", "starting today" ), plan or discuss in the future after certain condition (e.g., "plan to start after radiation", "discussed addition of…"), continue or maintained("continue"), stop or change.
-
-  Include an alterative, second-line or clinical trials options if dicussed.
-  Include an 'other treatment' section for any other medications that only briefly mentioned in the plan section.
-  Respond *only* with a JSON object using this exact schema:
-  {
-      "The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy":
-  {"summary":"the summary of this type of medication, including start/stop/cotinue if applicable",
-  "Short term side_effects_discussed": "short term Side effects of this particular medications.",
-  "Long term side_effects_discussed": "long term Side effects of this particular medications.."}
-  }
-
 Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
@@ -37,6 +16,7 @@ Therapy_plan: |
   - PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018"
   - CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
   - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
+  IMPORTANT: "continue [drug]" IS a valid therapy plan. If the patient is continuing on current therapy, list the therapy being continued. Do NOT write "None" when the patient is actively on treatment.
 
   DO NOT include imaging plans (CT, MRI, PET, DEXA, Echo, echocardiogram, mammogram, bone scan, X-ray) — those belong in Imaging_Plan.
   DO NOT include lab plans — those belong in Lab_Plan.
