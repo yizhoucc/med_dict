@@ -5888,3 +5888,71 @@ Processing row 48 (30/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 28.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock position and a tender mass in the 5 o'clock position. Left axillary lymph node palpable. MRI findings include an
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock positio" -> "Left breast ductal carcinoma with a palpable firm mass in the 12 o'clock positio"
+      [G4-FAITH] findings: "Left breast ductal carcinoma with a palpable firm mass in th" -> "Left breast ductal carcinoma with a palpable firm mass in th"
+    Current_Medications: 4.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROth"
+      [POST-MEDS] ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROthiazide (HYDRODIURIL) -> 
+    Treatment_Changes: 8.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ALPRAZOLAM ORAL 0.5 mg by mouth daily as needed (before MRI, biopsy, health appointments)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ALPRAZOLAM ORAL 0.5 mg by mouth daily as needed (before MRI, biopsy, health appointments) -> 
+  Phase 1 extraction (6 prompts): 72.1s
+  Cross-context injected (869 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 77.9s
+    Medication_Plan: 10.3s
+      [EXTRACT] raw={
+    "medication_plan": "Patient to be put on tamoxifen, with a request to obtain more records to assess the patient's personal risk of thrombophilia. No specific doses or frequencies mentioned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient to have L mastectomy with [REDACTED] on 01/06/17. Discussed with patient that the current plan for adjuvant endocrine therapy is subject to change based on the results o
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
