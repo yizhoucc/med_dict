@@ -4013,3 +4013,106 @@ Processing row 33 (21/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 33.4s
+      [EXTRACT] raw={
+"findings": "FNA left breast: ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), [REDACTED] negative (IHC 2+; FISH 2.April 16.9=1.6X). FNA of L axillary LN: negative. Excision: invasiv
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.4s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.3s [improved]
+      [EXTRACT] raw={
+"recent_changes": "tamoxifen 20mg PO qD",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "tamoxifen 20mg PO qD" -> "resumption of hormonal therapy with tamoxifen 20mg PO qD"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 72.1s
+  Cross-context injected (985 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.1s
+      [EXTRACT] raw={
+"response_assessment": "Local recurrence in left breast, 1.7cm IDC on excisional biopsy. FNA left breast: ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%). PET-CT: hypermetabolic tumo
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 19.6s
+  Total extraction: 91.7s
+    Medication_Plan: 5.1s
+      [EXTRACT] raw={
+    "medication_plan": "tamoxifen 20mg PO qD"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.4s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "tamoxifen 20mg PO qD, referral to [REDACTED] for chest wall RT"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "tamoxifen 20mg PO qD, referral to [REDACTED] for chest wall RT" -> "tamoxifen 20mg PO qD, referral to [REDACTED] for chest wall RT, check labs, retu"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "tamoxifen 20mg PO qD, referral to [REDACTED] for chest wall RT, check labs, retu" -> "tamoxifen 20mg PO qD, referral to [REDACTED] for chest wall RT, return to clinic"
+    radiotherapy_plan: 7.7s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She has had two local recurrences and will benefit from chest wall RT. She declined this previously which is unfortunate, but she accepts a referral now. [REDACTED] refer t
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She has had two local recurrences and will benefit from chest wall RT. She decli" -> "She will benefit from chest wall RT and has accepted a referral for consultation"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 3.3s
+      [EXTRACT] raw={
+    "lab_plan": "check labs"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
