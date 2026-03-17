@@ -94,3 +94,20 @@ Processing row 13 (1/3)...
       [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
   Phase 2 extraction (2 prompts): 14.2s
   Total extraction: 178.1s
+    Medication_Plan_chatgpt: 71.8s [schema-fixed, improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "chemotherapy": {
+        "summary": "Currently doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Also receiving doxorubicin as 
+      [G1-FORMAT] ok, keys=['chemotherapy', 'hormonal therapy', 'bone therapy', 'pain medication', 'other treatment']
+      [G2-SCHEMA] fixed: ['chemotherapy', 'hormonal therapy', 'bone therapy', 'pain medication', 'other treatment'] -> ['The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy']
+      [G3-IMPROVE] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': ['Gemcitabine 200mg, Docetaxel 20 mg once weekly on Sunday', 'd" -> "{'chemotherapy': {'summary': 'Gemcitabine 200mg, Docetaxel 20 mg once weekly on "
+      [G4-FAITH] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': {'summary': 'Gemcitabine 200mg, Docetaxel 2" -> "{'chemotherapy': {'summary': 'Gemcitabine 200mg, Docetaxel 2"
+      [G5-TEMPORAL] The medication/treatment, one of chemotherapy, hormonal therapy, bone therapy, radiotherapy: "{'chemotherapy': {'summary': 'Gemcitabine 200mg, Docetaxel 20 mg once weekly on " -> "{'chemotherapy': {'summary': 'Gemcitabine 200mg, Docetaxel 20 mg once weekly on "
+    Medication_Plan: 22.6s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 2
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
