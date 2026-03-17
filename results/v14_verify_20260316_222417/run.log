@@ -9401,3 +9401,32 @@ Processing row 79 (47/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 55.6s
+    Referral: 12.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "RTC cycle 2 to see me, call with any issues"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> "Genetic testing with [REDACTED]: no mutation in [REDACTED] a"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 12.3s
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 18/20 fields sourced (35.5s)
+  Row 79 total: 270.3s
+  Row 79 saved to progress
+
+Processing row 81 (48/61)...
+  Injected 4 term definitions: ['estrogen receptor', 'ER positive', 'PR positive', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment & Plan:'
+  Regex extraction succeeded (8675 chars)
+  A/P extraction: 0.0s
