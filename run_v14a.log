@@ -9066,3 +9066,153 @@ Processing row 77 (46/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Patient wishes to explore targeted options for metastatic breast cancer. She is " -> "Patient wishes to explore targeted options for metastatic breast cancer. She is "
+    radiotherapy_plan: 11.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 11.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "The patient has a consultation with radiation oncology tomorrow to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy 
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] procedure_plan: "The patient has a consultation with radiation oncology tomor" -> "The patient has a consultation with radiation oncology tomor"
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['The patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
+    Imaging_Plan: 10.1s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to contact us with increasing sob, cough, cp, lightheadedness, doe, fatigue, or other concerning sy
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to" -> "Echo 09/08/2019. If this echo is normal we can stop monitoring her."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 8.8s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Patient is interested in screening for trial options including [REDACTED]+ tumors and phase 1 [REDACTED]+pembrolizumab trial."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 5.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: follow up if unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 82.6s
+    Referral: 12.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "with me if she is unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 12.5s
+    [POST-THERAPY] removed non-therapy: ['Patient wishes to explore targeted options for met', 'She is interested in screening for a trial at [RED', 'If she is unable to go on trial at [REDACTED], she']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
+  [ATTRIBUTION] 19/20 fields sourced (34.5s)
+  Row 77 total: 335.8s
+  Row 77 saved to progress
+
+Processing row 79 (47/61)...
+  Injected 3 term definitions: ['mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1726 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 53-year-old female with a local recurrence of invasive ductal carcinoma (IDC) 7 years following a maste
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 74.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg/mL, Albumin, Serum / Plasm
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 16.6s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a local recurrence of invasive cancer 7 years following mastectomy for DCIS. The IDC is 0.8cm, grade 3, with a close margin, and ER/PR+. MRI breasts: benign findings of sali
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a local recurrence of invasive cancer 7 years fo" -> "Patient has a local recurrence of invasive cancer 7 years fo"
+    Current_Medications: 4.6s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORaz"
+      [POST-MEDS] cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORazepam (ATIVAN), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 16.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
