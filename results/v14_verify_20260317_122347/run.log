@@ -10780,3 +10780,72 @@ Processing row 89 (55/61)...
       [G4-FAITH] EMPTIED: ['current_meds']
       [G4-REVERT] current_meds: reverted (G4 emptied all fields)
       [POST-MEDS] AC -> 
+    Treatment_Changes: 13.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "GCSF dose to be reduced to 50%, pt is willing to try granisetron, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V.",
+"supportive_meds": "gabapentin, lidocaine p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin, lidocaine patches, analgesics prn -> 
+  Phase 1 extraction (6 prompts): 180.9s
+  Cross-context injected (1159 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. A
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "Pathology from initial imaging showed a 3 cm tumor. After treatment, residual ID"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.6s
+  Total extraction: 195.5s
+    Medication_Plan: 14.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue cycle 4 of AC in 1 week, reduce GCSF dose to 50%. Add PO dex at home prn N/V, add olanzapine 10 mg prn N/V. Try granisetron for N/V."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's. Reduce GCSF dose to 50%. Add PO dex at home prn N/V. Add olanzapine 10 mg prn N/V."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "RTC after XRT, approx 1-1.5 mos"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
