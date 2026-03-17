@@ -4343,3 +4343,34 @@ Processing row 35 (22/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 69.5s
+    Referral: 13.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "RTC 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> "Invitae genetic testing pf 133 genes: VUS in [REDACTED] (het"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> "Radiation oncology referral, will see Dr. [REDACTED] next we"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 13.5s
+    [POST-LAB] cleaned: 'will get doppler to r/o DVT' → 'No labs planned.'
+    [POST-THERAPY] removed non-therapy: ['Today is week 8.', 'Continue lexapro daily.', 'Ativan prn.', 'Rx for ambien provided today.']
+  [ATTRIBUTION] 21/22 fields sourced (37.4s)
+  Row 35 total: 251.6s
+  Row 35 saved to progress
+
+Processing row 36 (23/61)...
+  Injected 2 term definitions: ['adjuvant chemotherapy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (911 chars)
+  A/P extraction: 0.0s
