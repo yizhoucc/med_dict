@@ -5706,3 +5706,43 @@ Processing row 45 (29/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.6s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today.",
+"supportive_meds": "naproxen 500mg BID, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg BID, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 174.1s
+  Cross-context injected (1502 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 33.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual disease in the right breast with positive margins and 2/2 positive sentinel lymph nodes with 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual" -> "The cancer is currently responding to treatment. Imaging shows a 3.5 cm residual"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 37.2s
+  Total extraction: 211.3s
