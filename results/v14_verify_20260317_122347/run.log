@@ -3539,3 +3539,32 @@ Processing row 28 (18/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 83.2s
+    Referral: 20.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "RT planning per [REDACTED], likely pursued locally in [REDACTED]",
+"Others": "Dental eval and clearance if considering bisphosphonate pending b
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 20.9s
+    [POST-OTHERS] cleaned: 'Dental eval and clearance if considering bisphosphonate pending bone scan result...' → 'None'
+    [POST-THERAPY] removed non-therapy: ['Continue use of vaginal moisturizer.', 'Bone density scan can be completed when she return', 'Consider starting a bisphosphonate (favoring PO) i', 'Continue calcium supplementation with 1200mg/day c', 'Discuss vaginal estrogens at future visit.']
+    [POST-IMAGING] found in note: Bone scan
+    [POST-GENETICS-SEARCH] found in full note: ['ngs']
+  [ATTRIBUTION] 20/22 fields sourced (33.7s)
+  Row 28 total: 241.3s
+  Row 28 saved to progress
+
+Processing row 29 (19/61)...
+  Injected 6 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'estrogen receptor', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (3607 chars)
+  A/P extraction: 0.0s
