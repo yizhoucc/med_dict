@@ -6522,3 +6522,11 @@ Processing row 52 (33/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 5.7s
   Total extraction: 55.5s
+    Medication_Plan: 32.5s
+      [EXTRACT] raw={
+    "medication_plan": "Adjuvant AC/THP chemotherapy: AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Alternative TC
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
