@@ -8603,3 +8603,44 @@ Processing row 69 (43/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 45.8s
+    Referral: 11.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation consult",
+"Others": "None",
+"follow up": "RTC with me in September"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> "BRCA1 mutation positive"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 11.1s
+    [POST-GENETICS] cleared finding from referral: 'BRCA1 mutation positive'
+    [POST-ADV] patched from full note: ['Full code']
+  [ATTRIBUTION] 19/21 fields sourced (29.1s)
+  Row 69 total: 240.0s
+  Row 69 saved to progress
+
+Processing row 71 (44/61)...
+  Injected 7 term definitions: ['progesterone receptor', 'sentinel lymph node', 'aromatase inhibitor', 'estrogen receptor', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (9557 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.7s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "Patient has recently diagnosed ER+/PR-/[REDACTED] negative left breast cancer. The purpose of this visit 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
