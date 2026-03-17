@@ -4202,3 +4202,26 @@ Processing row 35 (22/61)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 42.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV" -> "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 40.1s
+      [EXTRACT] raw={
+"findings": "Right arm and hand swelling, improved with elevation. No signs of infection at the site of bilateral mastectomies with expanders in place. No cervical, supraclavicular, or axillary lymp
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.1s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Abraxane, zoladex, valtrex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] Abraxane, zoladex, valtrex -> Abraxane, zoladex
