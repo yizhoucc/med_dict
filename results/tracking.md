@@ -39,12 +39,15 @@
 
 **变更原因：** v15 全量审查发现 3 个 P0 错误 — Row 13 药物幻觉、Row 52/67 HER2 状态判断错误。
 
+**测试结论：** 3 个 P0 中 2 个为审查误判（Row 13 doxorubicin 在原文 HPI 段有提及，Row 52 手术病理 FISH 4.9X 确认 HER2+）。仅 Row 67 为真实 P0（TCHP 方案应推断 HER2+ 但模型写 HER2-），已通过 POST-HER2-VERIFY 修复。
+
 **变更内容：**
 
 | # | 修复 | 文件 | P0 Case | 说明 |
 |---|------|------|---------|------|
-| 1 | POST-DRUG-VERIFY | run.py | Row 13 | 新增后处理：提取的药物名如果在原文中找不到（≥4字母的单词均不匹配），判定为幻觉并移除 |
-| 2 | HER2 IHC 评分表 | extraction.yaml | Row 52, 67 | 在 Cancer_Diagnosis prompt 中添加完整 IHC 评分表（0=neg, 1+=neg, 2+=查FISH, 3+=pos）和 FISH ratio 解读规则 |
+| 1 | POST-DRUG-VERIFY | run.py | Row 13 | 新增后处理：提取的药物名如果在原文中找不到（≥4字母的单词均不匹配），判定为幻觉并移除。**测试确认 Row 13 非幻觉** |
+| 2 | HER2 IHC 评分表 | extraction.yaml | Row 52 | 在 Cancer_Diagnosis prompt 中添加完整 IHC 评分表（0=neg, 1+=neg, 2+=查FISH, 3+=pos）和 FISH ratio 解读规则。**测试确认 Row 52 非 P0（手术病理 HER2+）** |
+| 3 | POST-HER2-VERIFY | run.py | Row 67 | 新增后处理：如果原文提及 HER2+ 靶向药/方案（trastuzumab/pertuzumab/TCHP 等）但提取结果为 HER2-，自动修正为 HER2+。**修复 Row 67 唯一真实 P0** |
 
 **基线：** v13 (`default_qwen_20260315_132157`)
 

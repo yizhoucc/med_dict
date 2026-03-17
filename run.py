@@ -1088,6 +1088,31 @@ def main():
                 if len(verified) < len(meds):
                     drug_dict[field_name] = ", ".join(verified) if verified else ""
 
+        # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override
+        HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1", "t-dxd",
+                          "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
+        HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", ""):
+                # Check if note mentions HER2+ treatment
+                her2_evidence = []
+                for drug in HER2_POS_DRUGS:
+                    if drug in note_lower:
+                        her2_evidence.append(drug)
+                for regimen in HER2_POS_REGIMENS:
+                    if re.search(rf'\b{regimen}\b', note_lower):
+                        her2_evidence.append(regimen)
+                if her2_evidence:
+                    old_val = type_val
+                    # Replace HER2- with HER2+ (case-insensitive)
+                    type_val = re.sub(r'(?i)HER2[\s-]*(?:neg(?:ative)?|-)', 'HER2+', type_val)
+                    cancer["Type_of_Cancer"] = type_val
+                    print(f"    [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: {her2_evidence})")
+                    print(f"      before: '{old_val}'")
+                    print(f"      after:  '{type_val}'")
+
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
         if config.get("extraction", {}).get("attribution", False):
