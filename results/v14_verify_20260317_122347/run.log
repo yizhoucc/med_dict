@@ -10007,3 +10007,70 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 24.8s
+      [EXTRACT] raw={
+"response_assessment": "Progressive disease with new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows an enhancing soft tissue lesion involving th
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.6s
+  Total extraction: 140.7s
+    Medication_Plan: 6.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.5s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. She will continue her steroid taper per Dr. [REDACTED] and conti
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.3s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 12.5s
+      [EXTRACT] raw={
+    "procedure_plan": "will be evaluated today by Dr. [REDACTED] for a phase 1 trial of [REDACTED]+olaparib. Rad Onc referral placed for an enhancing lesion involving left trigeminal nerve."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['will be evaluated today by Dr. [REDACTED] for a phase 1 trial of [REDACTED]+olaparib. Rad Onc referral placed for an enhancing lesion involving left trigeminal nerve.']
+    Imaging_Plan: 3.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "Brain MRI to be reviewed by UCSF neuroradiology."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Brain MRI to be reviewed by UCSF neuroradiology." -> "No imaging planned."
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
