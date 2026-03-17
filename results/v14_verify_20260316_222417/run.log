@@ -4891,3 +4891,31 @@ Processing row 40 (25/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 40.1s
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy on 04/11/18. Pathology from the left breast revealed a 3 cm grade 3 IDC with negative margins. 1 of 3 left axillary SLN was involved with micromet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 11.2s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0."
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0.25 mg tablet, docusate sodium (COLACE) 100 mg capsule, HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, LORazepam (ATIVAN) 0.5 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 12.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), ALPRAZolam (XANAX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), ALPRAZolam (XANAX) -> docusate sodium (COLACE)
+  Phase 1 extraction (6 prompts): 118.0s
+  Cross-context injected (975 chars)
