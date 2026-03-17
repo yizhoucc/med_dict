@@ -3755,3 +3755,54 @@ Processing row 29 (19/61)...
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 13.6s
     [POST-GENETICS-SEARCH] found in full note: ['ngs']
+  [ATTRIBUTION] 17/19 fields sourced (35.8s)
+  Row 29 total: 265.4s
+  Row 29 saved to progress
+
+Processing row 32 (20/61)...
+  Injected 3 term definitions: ['progesterone receptor', 'adjuvant chemotherapy', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1638 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "63 y.o. female with left ER+ LN+ breast cancer on letrozole since January 2011, here for follow up."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.9s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+  "Stage_of_Cancer": "Originally stage IIB, now stage IIIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Stage_of_Cancer: "Originally stage IIB, now stage IIIA" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Stage_of_Cancer']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally stage IIB, now stage IIIA"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
