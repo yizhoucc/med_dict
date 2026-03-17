@@ -2154,3 +2154,156 @@ Processing row 11 (11/61)...
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
     follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 61.0s
+    Referral: 12.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "F/u Dr. [REDACTED] in [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 12.3s
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to brain, lung, bone)'
+  [ATTRIBUTION] 20/20 fields sourced (27.2s)
+  Row 11 total: 249.2s
+  Row 11 saved to progress
+
+Processing row 13 (12/61)...
+  Injected 1 term definitions: ['FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (5675 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "58 y.o. female with metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbo
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 15.1s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, liver, and nodes",
+  "Me
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+ invasive ductal carcinoma"
+      [G3-IMPROVE] Metastasis: "Yes (to bone, liver, and nodes)" -> "Yes (to bone, liver)"
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to bone, liver, and nodes" -> "Yes, to bone, liver"
+      [G4-FAITH] Type_of_Cancer: "ER+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] Metastasis: "Yes (to bone, liver)" -> "Yes (to bone, liver, and nodes)"
+      [G4-FAITH] Distant_Metastasis: "Yes, to bone, liver" -> "Yes, to bone, liver, and nodes"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage [X], now metastatic (Stage IV)" -> "metastatic (Stage IV)"
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 62.0s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin, Total 0.7, Urea Nitrogen 6, Calcium 8.7 (L), Chloride 109 (H), Creatinine 0.47, e
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 36.7s
+      [EXTRACT] raw={
+"findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological va
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.9s
+      [EXTRACT] raw={
+"current_meds": "pamidronate, gemcitabine, docetaxel, doxorubicin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 22.4s
+      [EXTRACT] raw={
+"recent_changes": "Stopped palbociclib and fulvestrant end of January. Last dose of Fulvestrant was 01/04/19. Doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 160.4s
+  Cross-context injected (1053 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently responding with no new significant findings on the latest lab results from February 24. On exam, she is alert and oriented x3, with a slow steady gait
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently responding with no new significant findings on the lates" -> "The cancer is currently responding with no new significant findings on the lates"
+      [G4-FAITH] response_assessment: "The cancer is currently responding with no new significant f" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 15.3s
+  Total extraction: 175.7s
+    Medication_Plan: 23.0s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 2
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+      [G4-FAITH] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta," -> "Continue topical cannabis and sulfur. Rx given for Cymbalta,"
+      [G5-TEMPORAL] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+    Therapy_plan: 24.2s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metaboli
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of " -> "Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and "
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
