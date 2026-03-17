@@ -3649,3 +3649,39 @@ Processing row 29 (19/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.3s
   Total extraction: 120.2s
+    Medication_Plan: 26.7s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 30.3s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plu
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 4.3s
+      [EXTRACT] raw={
+    "procedure_plan": "plan for Mediport placement"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
