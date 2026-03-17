@@ -2077,3 +2077,28 @@ Processing row 11 (11/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 28.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "CT stable, no evidence of disease recurrence on imaging and exam. Recent body CT shows stable disease (SD) and possible stable status. CT shows only multiple bone sites, ? Ac
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT stable, no evidence of disease recurrence on imaging and exam. Recent body CT" -> "Recent body CT shows stable disease (SD) and possible stable status. CT shows on"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 32.5s
+  Total extraction: 148.7s
+    Medication_Plan: 14.2s
+      [EXTRACT] raw={
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] now q12 wks given stable bone status, continue off chemotherapy for now due to intoleranc
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.7s
+      [EXTRACT] raw={
+    "therapy_plan": "continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now, await GK / Rad Onc inpu
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
