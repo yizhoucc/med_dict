@@ -7595,3 +7595,45 @@ Processing row 62 (38/61)...
       [G4-FAITH] Next clinic visit: "in-person: to be determined based on new information communi" -> ""
       [G4-FAITH] EMPTIED: ['Next clinic visit']
       [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 86.5s
+    Referral: 27.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "sign up for and utilize Mychart"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 27.0s
+    [POST-THERAPY] removed non-therapy: ['Recommended testing for estradiol and FSH once eve', 'Recommend a baseline DEXA scan to determine if a b']
+    [POST-GENETICS-SEARCH] found in full note: ['ngs']
+  [ATTRIBUTION] 14/21 fields sourced (26.4s)
+  Row 62 total: 380.4s
+  Row 62 saved to progress
+
+Processing row 63 (39/61)...
+  Injected 1 term definitions: ['estrogen receptor']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1823 chars)
+  A/P extraction: 0.0s
