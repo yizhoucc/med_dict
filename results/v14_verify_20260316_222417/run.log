@@ -10049,3 +10049,31 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 47.4s
+      [EXTRACT] raw={
+"findings": "Patient has progressive disease with new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows an enhancing soft tissue lesion involving t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.3s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "predniSONE, fulvestrant, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE -> 
+    Treatment_Changes: 13.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d -> morphine 30 mg/d, ondansetron 8 mg tid, predniSONE 50 mg/d
+  Phase 1 extraction (6 prompts): 119.7s
+  Cross-context injected (1172 chars)
