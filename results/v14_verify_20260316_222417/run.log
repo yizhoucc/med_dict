@@ -10077,3 +10077,37 @@ Processing row 84 (51/61)...
       [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d -> morphine 30 mg/d, ondansetron 8 mg tid, predniSONE 50 mg/d
   Phase 1 extraction (6 prompts): 119.7s
   Cross-context injected (1172 chars)
+    Treatment_Goals: 3.8s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 31.9s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. PET CT on 04/11/2018 showed 3 new 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 35.7s
+  Total extraction: 155.3s
+    Medication_Plan: 6.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.5s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. She will continue her steroid taper per Dr. [REDACTED] and conti
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
