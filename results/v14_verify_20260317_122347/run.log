@@ -6797,3 +6797,79 @@ Processing row 56 (35/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 13.7s
+      [EXTRACT] raw={
+"findings": "Pathology results show residual tumor of 3.7 cm with 0/6 nodes positive. The tumor is classified as TNBC. Physical exam findings include healing left mastectomy site with mild tendernes
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "Carvedilol. Lisinopril. Asacol."
+      [POST-MEDS] Carvedilol. Lisinopril. Asacol. -> 
+    Treatment_Changes: 6.3s [improved]
+      [EXTRACT] raw={
+"recent_changes": "Dose reduction 25% was instituted after C1.",
+"supportive_meds": "Carvedilol, Lisinopril, Asacol"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "Carvedilol, Lisinopril, Asacol" -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 49.3s
+  Cross-context injected (591 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 5.4s
+  Total extraction: 54.7s
+    Medication_Plan: 11.7s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medications, changes to current medications, supportive medications, bowel regimen, or blood transfusion plan are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medications, changes to current medications, supportive medic" -> "The patient received TCH+P (docetaxel, carboplatin, and pertuzumab) as neoadjuva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "The patient received TCH+P (docetaxel, carboplatin, and pertuzumab) as neoadjuva" -> "None"
+    Therapy_plan: 16.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Rec XRT, which pt is scheduled to receive. Rec additional path review at [REDACTED] given critical aspect of [REDACTED] status question. If [REDACTED], although unlikely, pt sho
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.0s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rec XRT, which pt is scheduled to receive"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
