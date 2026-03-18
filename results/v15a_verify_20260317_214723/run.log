@@ -3060,3 +3060,48 @@ Processing row 21 (16/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 29.1s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left DCIS in 1994 and right stage II IDC in 2000. Metastatic relapse in May 2020 with right chest wall recurrence, bone metastases, and contralateral infraclavi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.1s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab, prednisone"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 20.4s
+      [EXTRACT] raw={
+"recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; letrozole switched to anastrozole in July 2021 due to skin rash; [REDACTED] dose reduced and patient has been on 150 mg bid s
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 175.7s
+  Cross-context injected (941 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT scans on 11/03/20 and 04/24/21 showed a good response. Recent PET/CT is recommended to assess current status."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "PET/CT scans on 11/03/20 and 04/24/21 showed a good response. Recent PET/CT is r" -> "PET/CT scans on 11/03/20 and 04/24/21 showed a good response."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 12.6s
+  Total extraction: 188.3s
