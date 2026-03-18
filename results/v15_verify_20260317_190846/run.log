@@ -8010,3 +8010,36 @@ Processing row 65 (41/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 29.0s
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.6, HGB 14.8, HCT 44.6, MCV 96, PLT 198, NEUTA 2.6, NA 140, [REDACTED] 4.2, [REDACTED] 103, [REDACTED] 8.9, CO2 22, GLU 93, ALB 4.0, ALT 8, AST 13, ALKP 75, TBILI 0.5, CREAT 0.8
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 38.3s
+      [EXTRACT] raw={
+"findings": "Right breast metaplastic high-grade carcinoma with squamous differentiation, ER 5-10%, PR negative, Her-2 negative. Two biopsy-proven malignant masses: 3.8 cm mass at 7:00, 4 cm from th
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.2s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.3s [improved]
+      [EXTRACT] raw={
+"recent_changes": "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, with adjuvant radiation.",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, " -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 106.5s
+  Cross-context injected (1061 chars)
