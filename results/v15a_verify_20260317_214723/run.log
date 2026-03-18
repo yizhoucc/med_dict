@@ -1344,3 +1344,72 @@ Processing row 7 (7/61)...
       [G4-FAITH] EMPTIED: ['imaging_plan']
       [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 5.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: this coming week to discuss the recommendation and risk of metastatic breast cancer"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 39.8s
+    Referral: 9.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "I will refer to social work"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "None" -> "Social work"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 9.4s
+  [ATTRIBUTION] 16/19 fields sourced (27.5s)
+  Row 7 total: 179.3s
+  Row 7 saved to progress
+
+Processing row 8 (8/61)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'neoadjuvant therapy', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1311 chars)
+  A/P extraction: 0.0s
