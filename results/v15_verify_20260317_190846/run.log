@@ -7839,3 +7839,53 @@ Processing row 64 (40/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "fexofenadine ([REDACTED]) 180 mg tablet, Take 180 mg by mout"
       [POST-MEDS] fexofenadine ([REDACTED]) 180 mg tablet, Take 180 mg by mouth daily PRN , Disp: , Rfl: , montelukast (SINGULAIR) 10 mg tablet, Take 10 mg by mouth daily PRN , Disp: , Rfl: -> 
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 92.3s
+  Cross-context injected (1127 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.6s
+  Total extraction: 98.9s
+    Medication_Plan: 26.3s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with options including AC/T (doxorubicin and cyclophosphamide followed by paclitaxel) or enrollment in the ISPY clinical trial with various regimens 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 21.5s
+      [EXTRACT] raw={
+    "therapy_plan": "Port placement, chemotherapy teaching session, will start chemotherapy with options including neoadjuvant chemotherapy (AC/T) or enrollment in the ISPY clinical trial with vario
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
