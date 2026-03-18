@@ -6152,3 +6152,169 @@ Processing row 72 (45/61)...
       [EXTRACT] raw={
     "imaging_plan": "No imaging planned."
 }
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 4.7s [temporal-cleaned, stripped]
+      [EXTRACT] raw={
+    "lab_plan": "check labs"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'follow_up', 'medication_plan'}
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.7s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 4 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 4 months" -> "in-person: 4 months for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 30.5s
+    Referral: 8.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Return to clinic in 4 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 8.6s
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+  [ATTRIBUTION] 14/17 fields sourced (12.3s)
+  Row 72 total: 108.4s
+  Row 72 saved to progress
+
+Processing row 77 (46/61)...
+  Injected 5 term definitions: ['ER negative', 'lumpectomy', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (4704 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 19.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 79-year-old female with metastatic triple negative breast cancer to the liver and periport
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 17.9s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to the liver and periportal L
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 54.1s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hematocrit 34.6 (L), MCV 89, Platelet Count 140, Neutrophil Absolute Count 4.60, Lymphocyte Abs Cnt 1.62, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 42.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in segment 7 of the l
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] findings: "Worsening of metastatic disease noted on 08/07/19 abdominal " -> "Worsening of metastatic disease noted on 08/07/19 abdominal "
+    Current_Medications: 15.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, "
+      [POST-MEDS] amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, blood-glucose (ONETOUCH [REDACTED] [REDACTED]) monitoring kit, carvedilol (COREG) 3.125 mg tablet, cholecalciferol, vitamin D3, (VITAMIN D3) 1,000 unit CAP, ferrous sulfate (IRON ORAL), glimepiride ([REDACTED]) 2 mg tablet, JANUVIA 100 mg tablet, lanolin/mineral oil/petrolatum (ARTIFICIAL TEARS OPHTH) [REDACTED] gel, lisinopril (PRINIVIL,ZESTRIL) 40 mg tablet, magnesium oxide (MAG-OX) 400 mg tablet, metFORMIN (GLUCOPHAGE) 1,000 mg tablet, ONETOUCH ULTRA BLUE TEST STRIP test strip, simvastatin (ZOCOR) 20 mg tablet -> 
+    Treatment_Changes: 10.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ferrous sulfate (IRON ORAL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ferrous sulfate (IRON ORAL) -> 
+  Phase 1 extraction (6 prompts): 163.3s
+  Cross-context injected (1103 chars)
+    Treatment_Goals: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 40.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in segment
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 44.4s
+  Total extraction: 207.7s
+    Medication_Plan: 5.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.7s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.1s
