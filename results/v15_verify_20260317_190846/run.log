@@ -6022,3 +6022,66 @@ Processing row 49 (31/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.0s
+      [EXTRACT] raw={
+"lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 12.1s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy. No new palpable masses, s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Imaging from December 2021 shows metastatic disease under go" -> "Imaging from December 2021 shows metastatic disease under go"
+    Current_Medications: 4.5s
+      [EXTRACT] raw={
+"current_meds": "ibrance, xgeva, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "DENOSUMAB (XGEVA SUBCUT)" -> "DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D ("
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D (OSCAL D) -> DENOSUMAB (XGEVA SUBCUT)
+  Phase 1 extraction (6 prompts): 83.9s
+  Cross-context injected (534 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.5s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Imaging from December 2021 shows metastatic disease under good control. Biopsies" -> "Imaging from December 2021 shows metastatic disease under good control."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.8s
+  Total extraction: 93.7s
+    Medication_Plan: 9.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medication plans, changes to current medications, supportive " -> "Current medications include lupron and letrozole, with ibrance added in January "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
