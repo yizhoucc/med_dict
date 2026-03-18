@@ -248,3 +248,18 @@ Processing row 1 (2/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 57.7s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient presents with chest wall more tender, erythematous, " -> "Patient presents with chest wall more tender, erythematous, "
+    Current_Medications: 3.3s [improved]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan" -> ""
+      [G4-FAITH] no changes (all supported)
