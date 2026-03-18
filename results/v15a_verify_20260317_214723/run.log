@@ -4227,3 +4227,38 @@ Processing row 35 (22/61)...
   Regex matched: 'Assessment/Plan'
   Regex extraction succeeded (3086 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 17.5s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "27 y.o. female with pT3N0 right breast [REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 11.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
+  "Stage_of_Cancer": "pT3N0",
+  "Distant Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 40.8s [improved]
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV" -> "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV"
+      [G4-FAITH] no changes (all supported)
