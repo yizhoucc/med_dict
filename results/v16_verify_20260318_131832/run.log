@@ -8395,3 +8395,16 @@ Processing row 69 (43/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.2s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on right side",
+"Stage_of_Cancer": "Originally Stage II, now metastatic (S
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Originally Stage II, now metastatic (Stage IV)" -> "Not explicitly stated in the note"
+      [G3-IMPROVE] Metastasis: "Not sure" -> "No"
+      [G4-FAITH] Distant Metastasis: "Not sure" -> ""
+      [G4-FAITH] Stage_of_Cancer: "Not explicitly stated in the note" -> ""
+      [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Stage_of_Cancer']
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "Not sure"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
