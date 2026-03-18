@@ -11179,3 +11179,17 @@ Processing row 91 (57/61)...
       [G4-FAITH] EMPTIED: ['Type_of_Cancer']
       [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR-/HER2- invasive ductal carcinoma"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 166.9s [format-repaired]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 27.29 3332 ([REDACTED]) < 39 (U/mL), Carcinoembryonic Antigen 380.8 ([REDACTED]) <3.8 (ug/L), Albumin, Serum / Plasma 2.8 ([REDACTED]) 3.5 - 4.8 (g/dL), Aspartate tran
+      [G1-FORMAT] repaired -> keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 39.6s
+      [EXTRACT] raw={
+"findings": "Patient presents with metastatic breast cancer on Epirubicin Cycle#2 D1. Liver size has decreased and tenderness has reduced. No shortness of breath, nausea, or vomiting. A red, dry ras
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
