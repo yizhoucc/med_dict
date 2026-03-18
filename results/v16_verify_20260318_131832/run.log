@@ -5448,3 +5448,54 @@ Processing row 43 (28/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 26.5s
+      [EXTRACT] raw={
+"findings": "Pathology from the left breast showed 1 cm of residual grade 2 invasive ductal carcinoma (tumor cellularity 15%) with residual DCIS and a 0.07 cm [REDACTED] removed. Right breast pathol
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen, clobetasol, clonazepam, cyclobenzaprine, docu"
+      [POST-MEDS] acetaminophen, clobetasol, clonazepam, cyclobenzaprine, docusate sodium, doxycycline, escitalopram, gabapentin, guaifenesin-codeine, hydrocodone-acetaminophen, ibuprofen, lidocaine-prilocaine, loratadine, lorazepam, naloxone, omeprazole, ondansetron, oxycodone, prochlorperazine, tramadol, valacyclovir -> 
+    Treatment_Changes: 11.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "docusate sodium (COLACE), gabapentin (NEURONTIN), HYDROcodone-acetaminophen (NORCO), clonazePAM (KLONOPIN), cyclobenzaprine (FLEXERIL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "docusate sodium (COLACE), gabapentin (NEURONTIN), HYDROcodone-acetaminophen (NOR" -> "docusate sodium (COLACE), gabapentin (NEURONTIN), clonazePAM (KLONOPIN), cyclobe"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] docusate sodium (COLACE), gabapentin (NEURONTIN), clonazePAM (KLONOPIN), cyclobenzaprine (FLEXERIL) -> docusate sodium (COLACE)
+  Phase 1 extraction (6 prompts): 75.5s
+  Cross-context injected (920 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 81.5s
