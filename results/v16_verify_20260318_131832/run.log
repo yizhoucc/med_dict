@@ -9357,3 +9357,47 @@ Processing row 79 (47/61)...
       [G4-PROTECT] Others: restored safe negative "None"
   Referral extraction (full note): 11.1s
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 18/21 fields sourced (29.5s)
+  Row 79 total: 241.6s
+  Row 79 saved to progress
+
+Processing row 81 (48/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment & Plan:'
+  Regex extraction succeeded (8675 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.7s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "52 year old with newly diagnosed stage IB right breast cancer with mixed lobular and ductal features, 4.3
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.6s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- mixed ductal and lobular carcinoma",
+"Stage_of_Cancer": "Stage IB (pT2, [REDACTED](sn), [REDACTED], G2, ER+, PR+, [REDACTED]-)",
+"Distant Metastasis": "No",
+"Metasta
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 9.9s
+      [EXTRACT] raw={
+"lab_summary": "Glucose, meter download 94 (from 11/16/2020), Glucose, meter download 94 (from 11/17/2020)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
