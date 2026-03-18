@@ -126,6 +126,11 @@ Current_Medications: |
 
   Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
   Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
+  IMPORTANT: Only include medications DIRECTLY related to cancer care. This includes:
+  - Oncology drugs (chemo, hormonal, targeted, immunotherapy)
+  - Supportive care for cancer treatment (anti-nausea, growth factors, bone agents)
+  - Pain medications for cancer-related pain
+  Do NOT include: eye drops, blood pressure meds, diabetes meds, vitamins, allergy meds, or other non-cancer medications — even if they appear in the medication list.
   If no cancer-related medications are currently active, write empty string "".
 
   CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
@@ -224,6 +229,8 @@ Response_Assessment: |
   - Do NOT include treatment discussions or recommendations.
   - Do NOT use generic boilerplate phrases. Every claim must be traceable to a specific sentence in the note.
   - Do NOT write "tolerating therapy well" or "symptoms improved" unless the note EXPLICITLY uses those exact words.
+  - Do NOT use the word "responding" or "response" unless you can cite SPECIFIC imaging or tumor marker evidence. "Labs okay" or "stable on exam" alone does NOT mean the cancer is "responding" — it means the cancer status is unknown or stable.
+  - IMPORTANT: "responding" implies MEASURABLE IMPROVEMENT. Use "stable disease" for unchanged findings, "no evidence of disease" for no measurable disease, and "responding" ONLY when there is documented tumor shrinkage or marker decrease.
   - Do NOT describe pathology results (tumor size, grade, margins) as a "response" — pathology is a diagnosis, not a treatment response.
   - Do NOT describe surgical recovery ("healing well", "recovering from surgery") as a response assessment.
   - Do NOT describe risk estimates or Oncotype scores as a response — those are prognostic tools, not treatment responses.

@@ -119,6 +119,18 @@ def attribute_single_field(field_name, value_str, model, tokenizer,
 
     # Clean up the output
     quote = output.strip().strip('"').strip("'").strip()
+    # Try to unwrap JSON wrapper (e.g. {"quote": "actual text"})
+    if quote.startswith('{') and quote.endswith('}'):
+        try:
+            parsed = json.loads(quote)
+            if isinstance(parsed, dict):
+                # Take the first string value
+                for v in parsed.values():
+                    if isinstance(v, str):
+                        quote = v.strip()
+                        break
+        except json.JSONDecodeError:
+            pass
     # Remove common prefixes the model might add
     for prefix in ['The quote is:', 'Quote:', 'Source:', 'From the note:',
                    'The relevant text is:', 'The exact phrase is:']:

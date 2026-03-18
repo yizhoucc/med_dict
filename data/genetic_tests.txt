@@ -17,7 +17,6 @@ germline testing
 hereditary cancer
 
 # SEQUENCING / NGS
-ngs
 next generation sequencing
 foundation one
 foundationone

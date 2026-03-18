@@ -744,8 +744,8 @@ def main():
         if isinstance(referral, dict):
             # Search for "Ambulatory Referral to X", "refer to X", "Refer to X" in full note
             ref_patterns = re.findall(
-                r'(?:ambulatory\s+)?referral\s+to\s+([^,.\n\-–—]+)'
-                r'|(?:I\s+will\s+|will\s+)?[Rr]efer\s+(?:her|him|the\s+patient|patient\s+)?to\s+([^,.\n]+)',
+                r'(?:ambulatory\s+)?referral\s+to\s+([^,.\n:;()\-–—]+)'
+                r'|(?:I\s+will\s+|will\s+)?[Rr]efer\s+(?:her|him|the\s+patient|patient\s+)?to\s+([^,.\n:;()\-–—]+)',
                 note_text, re.IGNORECASE
             )
             for groups in ref_patterns:
@@ -788,8 +788,15 @@ def main():
                         'fertility', 'reproductive',
                     ]
                     if any(sk in ml for sk in SPECIALTY_KEYWORDS):
+                        # Skip if match contains non-specialty text (note body leakage)
+                        NON_SPECIALTY_PHRASES = [
+                            'history of present', 'assessment', 'plan:',
+                            'chief complaint', 'review of systems', 'physical exam',
+                        ]
+                        if any(ns in ml for ns in NON_SPECIALTY_PHRASES):
+                            continue
                         spec = referral.get("Specialty", "None") or "None"
-                        match_short = match[:60].strip()
+                        match_short = match[:40].strip()
                         if match_short.lower() not in spec.lower():
                             referral["Specialty"] = (spec + ", " + match_short).lstrip("None, ").strip(", ")
                             print(f"    [POST-SPECIALTY] found in full note: {match_short}")
@@ -1118,19 +1125,27 @@ def main():
                 found_tests = []
                 note_lower = note_text.lower()
                 for term in genetic_tests:
-                    if term in note_lower:
-                        # Check if there's future context near this term
-                        # Look for future keywords within 100 chars before the term
-                        for match in re.finditer(re.escape(term), note_lower):
-                            start = max(0, match.start() - 100)
-                            end = min(len(note_lower), match.end() + 100)
-                            context_window = note_lower[start:end]
-                            # Skip if past-tense/completed context found
-                            if any(pc in context_window for pc in PAST_CONTEXT):
-                                continue
-                            if any(fc in context_window for fc in FUTURE_CONTEXT):
-                                found_tests.append(term)
-                                break
+                    # Use word boundary for short terms to avoid false positives
+                    # (e.g. "ngs" matching "stainings", "tmb" matching "thumbs")
+                    if len(term) <= 4:
+                        term_pattern = r'\b' + re.escape(term) + r'\b'
+                        if not re.search(term_pattern, note_lower):
+                            continue
+                    elif term not in note_lower:
+                        continue
+                    # Check if there's future context near this term
+                    # Look for future keywords within 100 chars before the term
+                    pattern = r'\b' + re.escape(term) + r'\b' if len(term) <= 4 else re.escape(term)
+                    for match in re.finditer(pattern, note_lower):
+                        start = max(0, match.start() - 100)
+                        end = min(len(note_lower), match.end() + 100)
+                        context_window = note_lower[start:end]
+                        # Skip if past-tense/completed context found
+                        if any(pc in context_window for pc in PAST_CONTEXT):
+                            continue
+                        if any(fc in context_window for fc in FUTURE_CONTEXT):
+                            found_tests.append(term)
+                            break
                 if found_tests:
                     # Deduplicate and format
                     unique_tests = list(dict.fromkeys(found_tests))  # preserve order
@@ -1268,10 +1283,54 @@ def main():
                 if len(verified) < len(meds):
                     drug_dict[field_name] = ", ".join(verified) if verified else ""
 
-        # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override
+        # POST-HER2-CHECK: If Type_of_Cancer has ER/PR but no HER2, search note and append [v15]
         HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1", "t-dxd",
                           "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
         HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
+        HER2_SEARCH_KEYWORDS = [
+            "her2", "her-2", "her2neu", "ihc", "fish ratio",
+        ] + HER2_POS_DRUGS + HER2_POS_REGIMENS
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str) and re.search(r'(?i)\bER[+-]', type_val) and not re.search(r'(?i)HER2|HER-2', type_val):
+                # Has ER status but missing HER2 — search the note
+                her2_found = None
+                for kw in HER2_SEARCH_KEYWORDS:
+                    pattern = r'\b' + re.escape(kw) + r'\b' if len(kw) <= 4 else re.escape(kw)
+                    m = re.search(pattern, note_lower)
+                    if m:
+                        # Try to determine HER2 status from context
+                        ctx_start = max(0, m.start() - 80)
+                        ctx_end = min(len(note_lower), m.end() + 80)
+                        ctx = note_lower[ctx_start:ctx_end]
+                        if kw in [d for d in HER2_POS_DRUGS] or kw in HER2_POS_REGIMENS:
+                            her2_found = "HER2+"
+                            break
+                        elif "positive" in ctx or "3+" in ctx or "amplified" in ctx:
+                            her2_found = "HER2+"
+                            break
+                        elif "negative" in ctx or "0" in ctx or "1+" in ctx or "not amplified" in ctx:
+                            her2_found = "HER2-"
+                            break
+                        elif "equivocal" in ctx or "2+" in ctx:
+                            her2_found = "HER2 equivocal"
+                            break
+                        elif "triple negative" in ctx or "tnbc" in ctx:
+                            her2_found = "HER2-"
+                            break
+                        else:
+                            her2_found = "HER2: status unclear"
+                if her2_found is None:
+                    her2_found = "HER2: not tested"
+                old_val = type_val
+                type_val = type_val.rstrip() + ", " + her2_found
+                cancer["Type_of_Cancer"] = type_val
+                print(f"    [POST-HER2-CHECK] Appended missing HER2 status: {her2_found}")
+                print(f"      before: '{old_val}'")
+                print(f"      after:  '{type_val}'")
+
+        # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
@@ -1290,6 +1349,21 @@ def main():
                     type_val = re.sub(r'(?i)HER2[\s-]*(?:neg(?:ative)?|-)', 'HER2+', type_val)
                     cancer["Type_of_Cancer"] = type_val
                     print(f"    [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: {her2_evidence})")
+                    print(f"      before: '{old_val}'")
+                    print(f"      after:  '{type_val}'")
+
+        # POST-TYPE-VERIFY: Fix HER2+/triple-negative contradiction [v15]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str):
+                type_lower = type_val.lower()
+                if "her2+" in type_lower.replace(" ", "").replace("-", "") and "triple negative" in type_lower:
+                    # HER2+ and triple negative are mutually exclusive — HER2+ is more specific
+                    old_val = type_val
+                    type_val = re.sub(r'(?i),?\s*triple[\s-]*negative', '', type_val).strip().rstrip(',').strip()
+                    cancer["Type_of_Cancer"] = type_val
+                    print(f"    [POST-TYPE-VERIFY] Removed contradictory 'triple negative' (HER2+ present)")
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
