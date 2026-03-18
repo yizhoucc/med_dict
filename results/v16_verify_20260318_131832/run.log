@@ -2565,3 +2565,27 @@ Processing row 16 (13/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 65.3s
+    Referral: 13.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "referral to nutritionist at her request",
+"Genetics": "refer to genetics for further evaluation and testing",
+"Specialty": "XRT consult",
+"Others": "None",
+"follow up": "F/U visit afte
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Specialty: "XRT consult" -> "breast radiotherapy consult"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others']
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 13.7s
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 16/21 fields sourced (20.2s)
+  Row 16 total: 150.1s
+  Row 16 saved to progress
+
+Processing row 17 (14/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
