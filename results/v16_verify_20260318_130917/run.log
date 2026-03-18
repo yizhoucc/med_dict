@@ -303,3 +303,97 @@ Processing row 1 (2/61)...
       [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 28.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Due to poor tolerance, irinotecan will be changed to every other week with an increased dose to 150mg/m2 on days 1 and 15 every 28 days. Continue [REDACTED] 30mg TID and flexeri
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.2s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [REDACTED] to see if he can bring her in again."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 7.3s
+      [EXTRACT] raw={
+    "imaging_plan": "Scans again in 3 months, due September 2019. MRI brain if worse."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 9.0s
+      [EXTRACT] raw={
+    "lab_plan": "Monitor with ALT, hepatitis B surface antigen and HBV DNA every 4 months without starting prophylaxis, next due October 2019"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 85.7s
+    Referral: 11.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "Social work referral, Home health referral",
+"follow up": "2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "Positive for: [REDACTED] c.[REDACTED]>C (p.[REDACTED])"
+      [G4-FAITH] EMPTIED: ['Nutrition']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 11.7s
+    [POST-GENETICS] cleared finding from referral: 'Positive for: [REDACTED] c.[REDACTED]>C (p.[REDACTED])'
+    [POST-THERAPY] removed non-therapy: ['Continue [REDACTED] 30mg TID and flexeril TID.', 'Continue oxycodone 5mg prn.', '[REDACTED] will take over her pain management.', 'Consider re-referring for SMS/ABC if needed.', 'Continue brace.', 'Increase effexor-XR to 75 mg qd.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to liver, bone, and chest wall)'
