@@ -11594,3 +11594,10 @@ Processing row 94 (59/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 58.2s
+      [EXTRACT] raw={
+"findings": "Pathology results: Residual invasive ductal carcinoma with treatment effect, three foci, margins negative; Residual ductal carcinoma in situ with treatment effect, margins negative; Res
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
