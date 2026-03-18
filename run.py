@@ -1189,6 +1189,11 @@ def main():
                     item_lower = item.lower().strip()
                     if not item_lower:
                         continue
+                    # Skip long sentences — only check short items (likely test names)
+                    # Long LLM-generated sentences are not test names and would cause false matches
+                    if len(item_lower.split()) > 6:
+                        valid_items.append(item)
+                        continue
                     # Pure mutation name without action words → likely a result
                     is_pure_mutation = item_lower in MUTATION_NAMES
                     has_action = any(w in item_lower for w in ["test", "order", "send", "check", "plan", "profiling", "sequencing"])
@@ -1198,7 +1203,11 @@ def main():
                     # Check if original note says this test was declined near the term
                     DECLINE_PHRASES = ["will not pursue", "declined", "not interested",
                                        "deferred", "refuses", "does not wish", "opted not", "elected not"]
-                    term_for_search = item_lower.split()[0] if item_lower.split() else item_lower
+                    # Use the full short item as search term (not just first word)
+                    term_for_search = item_lower.strip()
+                    # For multi-word items, use first meaningful word (skip articles)
+                    words = [w for w in term_for_search.split() if len(w) > 3]
+                    term_for_search = words[0] if words else term_for_search
                     declined = False
                     for m in re.finditer(re.escape(term_for_search), note_lower_gc):
                         ctx_start = max(0, m.start() - 120)
