@@ -6007,3 +6007,45 @@ Processing row 48 (30/61)...
       [G3-IMPROVE] Advance care: "This patient has named a surrogate decision maker. The surrogate decision maker " -> "This patient has named a surrogate decision maker. The surrogate decision maker "
       [G4-FAITH] no changes (all supported)
   Plan extraction prompts: 61.9s
+    Referral: 11.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "Follow up with Dr [REDACTED] same day that she comes for post-operative follow-up"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Rad Onc consult" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 11.2s
+    [POST-THERAPY] removed non-therapy: ['Patient to have L mastectomy with [REDACTED] on 01']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 18/19 fields sourced (25.1s)
+  Row 48 total: 188.7s
+  Row 48 saved to progress
+
+Processing row 49 (31/61)...
+  Injected 3 term definitions: ['lumpectomy', 'mastectomy', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1473 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "Metastatic breast cancer (CMS code) with HR+ and HER2 negative status. The patient is considering a mast
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
