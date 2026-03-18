@@ -672,3 +672,58 @@ Processing row 4 (4/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.9s
+      [EXTRACT] raw={
+"response_assessment": "CT and bone scan show decreased size of left cervical chain LNs, stable borderline enlargement of mediastinal LN, and increased size of left axillary LN. Bone scan shows ques
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 20.4s
+  Total extraction: 96.5s
+    Medication_Plan: 11.3s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019)."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue leuprolide (OS started January 2019), anastrozole (started March 2019)," -> "Continue leuprolide, anastrozole, and palbociclib."
+    Therapy_plan: 21.2s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue current therapy with leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019). Radiation referral for symptomatic di
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide (OS started January 2019), anastrozole "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide, anastrozole, and palbociclib. Radiatio"
+    radiotherapy_plan: 7.3s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation oncology referral for symptomatic disease in her left neck and brachial plexus."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 6.6s
+      [EXTRACT] raw={
+    "imaging_plan": "CT and bone scan ordered and can be done once authorized prior to next visit."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
