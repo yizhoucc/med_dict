@@ -4836,3 +4836,42 @@ Processing row 40 (25/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 35.0s
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy on 04/11/18. Pathology from the left breast revealed a 3 cm grade 3 IDC with negative margins. 1 of 3 left axillary SLN was involved with micromet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0."
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0.25 mg tablet, docusate sodium (COLACE) 100 mg capsule, HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, LORazepam (ATIVAN) 0.5 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 12.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), docusate sodium (COLACE), HYDROcodone-acetaminophen (NORCO), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), docusate sodium (COLACE), HYDROcodone-acetaminophen (NORCO), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN) -> docusate sodium (COLACE), HYDROcodone-acetaminophen (NORCO)
+  Phase 1 extraction (6 prompts): 111.7s
+  Cross-context injected (937 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
