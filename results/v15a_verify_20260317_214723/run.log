@@ -5682,3 +5682,41 @@ Processing row 45 (29/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 46.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a 3.5 cm residual disease in the right breast with positive margins and 2/2 positive sentinel lymph nodes with extranodal extension. Imaging findings include: CT chest with 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has a 3.5 cm residual disease in the right breast with positive margins " -> "Patient has a 3.5 cm residual disease in the right breast with positive margins "
+      [G4-FAITH] findings: "Patient has a 3.5 cm residual disease in the right breast wi" -> "Patient has a 3.5 cm residual disease in the right breast wi"
+    Current_Medications: 3.6s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 12.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg BID, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg BID, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 175.3s
+  Cross-context injected (1441 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
