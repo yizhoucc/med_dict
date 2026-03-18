@@ -2805,3 +2805,60 @@ Processing row 19 (15/61)...
   Regex extraction succeeded (3461 chars)
   A/P extraction: 0.0s
 Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.55s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.56s/it]
+Model loaded.
+Data loaded: 61 rows (indices [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Rebuilt results.txt from 14 completed rows
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+Lab test whitelist loaded: 71 terms
+Genetic test keywords loaded: 37 terms
+
+Processing 61 rows...
+Skipping row 0 (already completed)
+Skipping row 1 (already completed)
+Skipping row 2 (already completed)
+Skipping row 4 (already completed)
+Skipping row 5 (already completed)
+Skipping row 6 (already completed)
+Skipping row 7 (already completed)
+Skipping row 8 (already completed)
+Skipping row 9 (already completed)
+Skipping row 10 (already completed)
+Skipping row 11 (already completed)
+Skipping row 13 (already completed)
+Skipping row 16 (already completed)
+Skipping row 17 (already completed)
+
+Processing row 19 (15/61)...
+  Injected 5 term definitions: ['aromatase inhibitor', 'sentinel lymph node', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (3461 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 19.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 75-year-old female with a history of ER+/HER2- breast cancer diagnosed in 2009, who unde
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.1s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with DCIS",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, lymph nodes, a
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
