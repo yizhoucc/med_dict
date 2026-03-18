@@ -6049,3 +6049,58 @@ Processing row 49 (31/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.0s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "HR+ and HER2- invasive ductal carcinoma with DCIS",
+"Stage_of_Cancer": "Originally Stage IV (T2, N1, M1)",
+"Distant Metastasis": "Yes, to the lung, lymph nodes, liver, and bone",
+
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 26.7s
+      [EXTRACT] raw={
+"lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 11.6s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy. No new palpable masses, s
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Imaging from December 2021 shows metastatic disease under go" -> "Imaging from December 2021 shows metastatic disease under go"
+    Current_Medications: 4.6s [improved]
+      [EXTRACT] raw={
+"current_meds": "ibrance, xgeva, letrozole, lupron"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "ibrance, xgeva, letrozole, lupron" -> "ibrance, xgeva, letrozole"
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.7s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "DENOSUMAB (XGEVA SUBCUT)" -> "DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D ("
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), acetaminophen (TYLENOL), calcium carbonate-vitamin D (OSCAL D) -> DENOSUMAB (XGEVA SUBCUT)
+  Phase 1 extraction (6 prompts): 80.3s
+  Cross-context injected (528 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
