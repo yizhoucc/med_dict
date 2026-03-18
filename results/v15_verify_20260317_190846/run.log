@@ -5601,3 +5601,13 @@ Processing row 43 (28/61)...
       [G4-FAITH] EMPTIED: ['Genetics']
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 12.9s
+  [ATTRIBUTION] 20/22 fields sourced (38.3s)
+  Row 43 total: 196.7s
+  Row 43 saved to progress
+
+Processing row 45 (29/61)...
+  Injected 7 term definitions: ['progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
