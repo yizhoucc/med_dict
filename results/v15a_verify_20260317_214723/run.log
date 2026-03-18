@@ -12175,3 +12175,36 @@ Processing row 99 (61/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 28.4s
+    Referral: 9.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "discuss break with Dr [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 9.5s
+    [POST-THERAPY] cleared (no oncology drugs found): Continue with treatment to see if interventions helped with fatigue. Plans to di
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to liver and multiple sites)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'ER+(80%)PR+(50%) invasive ductal carcinoma'
+      after:  'ER+(80%)PR+(50%) invasive ductal carcinoma, HER2: not tested'
+  [ATTRIBUTION] 15/17 fields sourced (12.6s)
+  Row 99 total: 306.8s
+  Row 99 saved to progress
+
+Total processing time: 10079.1s (168.0min)
+Done! Results copied to ./results.txt
+Full results in: results/v15a_verify_20260317_214723/
