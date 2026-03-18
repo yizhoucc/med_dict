@@ -9110,3 +9110,50 @@ Processing row 77 (46/61)...
       [G4-FAITH] EMPTIED: ['lab_plan']
       [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 12.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "She is interested in screening for this trial. We discussed trial options at [REDACTED] including phase 1 [REDACTED]+pembrolizumab as well as phase 3 trial of [REDACTED]
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "She is interested in screening for this trial. We discussed trial options at [RE" -> "None planned. Patient is interested in screening for trial options including pha"
+      [G4-FAITH] genetic_testing_plan: "None planned. Patient is interested in screening for trial o" -> "Patient is interested in screening for trial options includi"
+    follow_up_next_visit: 6.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: follow up with the provider if she is unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 84.0s
+    Referral: 12.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "with me if she is unable to go on trial at [REDACTED], with dentist"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 12.4s
+    [POST-THERAPY] removed non-therapy: ['Patient wishes to explore targeted options for met']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
