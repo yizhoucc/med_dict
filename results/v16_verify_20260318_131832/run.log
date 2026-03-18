@@ -2073,3 +2073,40 @@ Processing row 11 (11/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] current_meds: "herceptin, letrozole" -> "herceptin, letrozole, [REDACTED]"
       [POST-MEDS] herceptin, letrozole, [REDACTED] -> herceptin, letrozole
+    Treatment_Changes: 11.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet" -> "guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG-OX) 400 mg tablet -> guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid
+  Phase 1 extraction (6 prompts): 114.5s
+  Cross-context injected (1267 chars)
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 29.6s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 09/05/18 was stable. Recent body CT shows SD (stable disease) and possible [REDACTED] status. CT shows only multiple bone sites, ? Active, no sx's and no evidence o
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 33.8s
+  Total extraction: 148.2s
+    Medication_Plan: 14.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now due to intolerance to
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
