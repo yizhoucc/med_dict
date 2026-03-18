@@ -3606,3 +3606,11 @@ Processing row 29 (19/61)...
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 20.5s
+      [EXTRACT] raw={
+"lab_summary": "Creatinine 0.74 (12/11/2016), [REDACTED] ranging from 16.6 to 20, CA 27.29 ranging from 67.7 to 106.2, most recently 78 (12/11/2016), CA 15-3 ranging from 60.9 to 74.5 (12/11/2016)"
+
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
