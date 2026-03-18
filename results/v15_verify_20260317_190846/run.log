@@ -9165,3 +9165,20 @@ Processing row 77 (46/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.8s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative breast cancer",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to the liver and periportal L
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 53.6s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hematocrit 34.6 (L), MCV 89, Platelet Count 140, Neutrophil Absolute Count 4.60, Lymphocyte Abs Cnt 1.62, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
