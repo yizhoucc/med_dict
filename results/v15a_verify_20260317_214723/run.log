@@ -5720,3 +5720,37 @@ Processing row 45 (29/61)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 25.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The patient has completed chemotherapy and is currently on letrozole. Imaging shows a 38 mm right upper inner quadrant breast mass corresponding to proven malignancy with no 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient has completed chemotherapy and is currently on letrozole. Imaging sh" -> "Imaging shows a 38 mm right upper inner quadrant breast mass corresponding to pr"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 29.8s
+  Total extraction: 205.0s
+    Medication_Plan: 17.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron. Conti
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di" -> "Start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Di"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.3s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will start letrozole now. Discussed addition of abemaciclib after completion of xrt. Continue naproxen 500mg bid, APAP ok if taken sparingly. Continue allegra daily.
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.2s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Encouraged her to fup with Dr. [REDACTED] in rad onc after her re-excision date is set."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
