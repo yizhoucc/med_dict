@@ -10007,3 +10007,49 @@ Processing row 84 (51/61)...
       [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
       [G4-FAITH] no changes (all supported)
       [POST-MEDS] predniSONE -> 
+    Treatment_Changes: 11.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn, predniSONE" -> "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn -> morphine 30 mg/d, ondansetron 8 mg tid prn
+  Phase 1 extraction (6 prompts): 90.6s
+  Cross-context injected (987 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 20.2s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the le
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra" -> "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 23.8s
+  Total extraction: 114.4s
+    Medication_Plan: 6.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.2s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. She will continue her steroid taper per Dr. [REDACTED] and conti
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
