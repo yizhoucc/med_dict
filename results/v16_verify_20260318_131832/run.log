@@ -6604,3 +6604,62 @@ Processing row 53 (34/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA, now metastatic (Stage IV)"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 18.4s
+      [EXTRACT] raw={
+"findings": "Patient reports incision maceration and breast pain improving. Physical exam shows no masses bilaterally, no cervical, supraclavicular, or axillary lymphadenopathy, no tenderness over b
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.2s
+      [EXTRACT] raw={
+"current_meds": "leuprolide, letrozole, zoledronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "start palbociclib after radiation",
+"supportive_meds": "oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "start palbociclib after radiation" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] oxyCODONE (ROXICODONE) 5 mg tablet, melatonin 5 mg CHEWTAB, traZODone (DESYREL) 50 mg tablet, zoledronic acid -> oxyCODONE (ROXICODONE) 5 mg tablet, zoledronic acid
+  Phase 1 extraction (6 prompts): 72.1s
+  Cross-context injected (778 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is stable on exam and imaging. No new imaging studies were performed at this visit. Physical exam shows no masses bilaterally, no cervical, supraclavicular, or axi
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is stable on exam and imaging. No new imaging stu" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 14.0s
+  Total extraction: 86.1s
