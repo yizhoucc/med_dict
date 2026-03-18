@@ -8058,3 +8058,89 @@ Processing row 65 (41/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.1s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.0s [improved]
+      [EXTRACT] raw={
+"recent_changes": "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, with adjuvant radiation. We discussed the recent FDA approval of pembrolizumab for early stage TNBC
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "Plan for neoadjuvant chemotherapy then she is considering bilateral mastectomy, " -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 108.2s
+  Cross-context injected (1061 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 114.4s
+    Medication_Plan: 5.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the plan."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 17.6s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Plan for neoadjuvant [REDACTED], then bilateral mastectomy with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab for early stage TNBC. Will review the risk
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Plan for neoadjuvant [REDACTED], then bilateral mastectomy with adjuvant radiati" -> "Plan for neoadjuvant [REDACTED], then bilateral mastectomy with adjuvant radiati"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.6s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "adjuvant radiation is planned after neoadjuvant treatment, and the patient is considering bilateral mastectomy. The patient may need radiation therapy depending on the find
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "adjuvant radiation is planned after neoadjuvant treatment, and the patient is co" -> "adjuvant radiation is planned after neoadjuvant treatment. The patient may need "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 10.6s
+      [EXTRACT] raw={
+    "procedure_plan": "Plan for neoadjuvant chemotherapy then bilateral mastectomy, with adjuvant radiation. Discussing options during adjuvant therapy. Delaying breast reconstruction until after ra
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Plan for neoadjuvant chemotherapy then bilateral mastectomy', 'with adjuvant radiation. Discussing options during adjuvant therapy. Delaying breast reconstruction until after radiation therapy.']
+    Imaging_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
