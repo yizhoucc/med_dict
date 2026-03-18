@@ -1002,3 +1002,44 @@ Processing row 6 (6/61)...
   Trying regex extraction...
   Regex failed, falling back to LLM extraction...
   LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1271 chars)
+  A/P extraction: 17.6s
+    Reason_for_Visit: 15.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient with metastatic breast cancer (MBC) initially diagnosed in 1998 with Stage II T2N1 left-sided in
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 17.8s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER-/PR-/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
+"Distant Metastasis": "Y
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 20.2s [improved]
+      [EXTRACT] raw={
+"findings": "Probable mild progression in the left breast and possibly the left anterior chest wall. Stable mediastinal adenopathy. No evidence of metastasis on brain MRI. Left ventricular ejection 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Probable mild progression in the left breast and possibly the left anterior ches" -> "Probable mild progression in the left breast and possibly the left anterior ches"
+      [G4-FAITH] no changes (all supported)
