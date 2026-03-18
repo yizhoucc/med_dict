@@ -4,3 +4,198 @@ Auto-resuming...
 Loading model...
 Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:03,  1.03it/s]Loading checkpoint shards:  40%|████      | 2/5 [00:01<00:02,  1.10it/s]Loading checkpoint shards:  60%|██████    | 3/5 [00:02<00:01,  1.13it/s]Loading checkpoint shards:  80%|████████  | 4/5 [00:03<00:00,  1.14it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.05it/s]
 We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+Model loaded.
+Data loaded: 61 rows (indices [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Rebuilt results.txt from 44 completed rows
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+Lab test whitelist loaded: 71 terms
+Genetic test keywords loaded: 37 terms
+
+Processing 61 rows...
+Skipping row 0 (already completed)
+Skipping row 1 (already completed)
+Skipping row 2 (already completed)
+Skipping row 4 (already completed)
+Skipping row 5 (already completed)
+Skipping row 6 (already completed)
+Skipping row 7 (already completed)
+Skipping row 8 (already completed)
+Skipping row 9 (already completed)
+Skipping row 10 (already completed)
+Skipping row 11 (already completed)
+Skipping row 13 (already completed)
+Skipping row 16 (already completed)
+Skipping row 17 (already completed)
+Skipping row 19 (already completed)
+Skipping row 21 (already completed)
+Skipping row 26 (already completed)
+Skipping row 28 (already completed)
+Skipping row 29 (already completed)
+Skipping row 32 (already completed)
+Skipping row 33 (already completed)
+Skipping row 35 (already completed)
+Skipping row 36 (already completed)
+Skipping row 39 (already completed)
+Skipping row 40 (already completed)
+Skipping row 41 (already completed)
+Skipping row 42 (already completed)
+Skipping row 43 (already completed)
+Skipping row 45 (already completed)
+Skipping row 48 (already completed)
+Skipping row 49 (already completed)
+Skipping row 51 (already completed)
+Skipping row 52 (already completed)
+Skipping row 53 (already completed)
+Skipping row 56 (already completed)
+Skipping row 58 (already completed)
+Skipping row 60 (already completed)
+Skipping row 62 (already completed)
+Skipping row 63 (already completed)
+Skipping row 64 (already completed)
+Skipping row 65 (already completed)
+Skipping row 67 (already completed)
+Skipping row 69 (already completed)
+Skipping row 71 (already completed)
+
+Processing row 72 (45/61)...
+  Injected 1 term definitions: ['PR positive']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (179 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 10.8s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Stage III left breast cancer, ER/PR positive, patient is being followed up for ongoing management and to ad
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 9.7s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER/PR positive invasive ductal carcinoma, HER2 negative",
+"Stage_of_Cancer": "Stage III",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Type_of_Cancer: "ER/PR positive invasive ductal carcinoma, HER2 negative" -> "ER/PR positive, HER2 negative"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER/PR positive invasive ductal carcinoma, HER2 negative"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 17.8s
+      [EXTRACT] raw={
+"findings": "Patient reports a new 2 cm smooth contoured oval lump at 1-2OClock in the left breast, previously 3cm. A new area of linear nodularity/thickness is noted around 7-9OClock in the left br
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 4.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] arimidex -> 
+  Phase 1 extraction (6 prompts): 49.2s
+  Cross-context injected (679 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "No evidence of disease recurrence on imaging and exam. Bilateral breast US & mammogram show all three areas are diagnostic of fat necrosis."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "No evidence of disease recurrence on imaging and exam. Bilat" -> "Bilateral breast US & mammogram show all three areas are dia"
+  Phase 2 extraction (2 prompts): 9.8s
+  Total extraction: 59.0s
+    Medication_Plan: 3.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 8.2s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue arimidex"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue arimidex" -> "Continue arimidex, Continue [REDACTED] [REDACTED] (next August 2019), check labs"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continue arimidex, Continue [REDACTED] [REDACTED] (next August 2019), check labs" -> "Continue arimidex, check labs, Return to clinic in 4 months"
+    radiotherapy_plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
