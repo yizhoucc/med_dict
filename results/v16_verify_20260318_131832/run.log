@@ -9523,3 +9523,40 @@ Processing row 81 (48/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] Next clinic visit: "in-person: after radiation" -> "in-person: after radiation to proceed with [REDACTED] +/- bone medication"
       [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.9s
+      [EXTRACT] raw={
+    "Advance care": "Full code."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Plan extraction prompts: 88.2s
+    Referral: 9.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Exercise counseling referral",
+"follow up": "RTC after radiation"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Radiation oncology consult" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 9.2s
+    [POST-LAB] cleaned: 'Dexa to assess bone health before the next visit with me.' → 'No labs planned.'
+    [POST-THERAPY] removed non-therapy: ['She has an appointment with Dr.', '[REDACTED] tomorrow.', 'We discussed the role of hormonal blockade to decr']
+  [ATTRIBUTION] 19/20 fields sourced (37.6s)
+  Row 81 total: 220.4s
+  Row 81 saved to progress
+
+Processing row 82 (49/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
