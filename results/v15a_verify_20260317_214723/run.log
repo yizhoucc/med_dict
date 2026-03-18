@@ -7457,3 +7457,51 @@ Processing row 62 (38/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 193.8s
+      [EXTRACT] raw={
+"findings": "Patient has locally advanced ER+/PR-/[REDACTED] negative left breast cancer. Pathology from left partial mastectomy and sentinel lymph node biopsy shows 3.8 x 3.5 cm grade 2 IDC with po
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.5s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN-ODT) 8 mg rapid dissolve tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 254.1s
+  Cross-context injected (1269 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 13.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable with no evidence of disease recurrence on imaging and exam. The patient has completed radiation therapy to the left breast and regional nodes o
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable with no evidence of disease recurrence on imaging" -> "The cancer is currently stable with no evidence of disease recurrence on imaging"
+      [G4-FAITH] response_assessment: "The cancer is currently stable with no evidence of disease r" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 17.3s
+  Total extraction: 271.4s
