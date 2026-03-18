@@ -9835,3 +9835,21 @@ Processing row 83 (50/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 40.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadenopathy, stable in size compared to 03/10/2020. Multiple hypoattenuating lesions in the right an
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadeno" -> "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadeno"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 44.9s
+  Total extraction: 155.7s
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
