@@ -9047,3 +9047,17 @@ Processing row 77 (46/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 54.1s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hematocrit 34.6 (L), MCV 89, Platelet Count 140, Neutrophil Absolute Count 4.60, Lymphocyte Abs Cnt 1.62, Albumin, Serum / Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 42.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in segment 7 of the l
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval" -> "Worsening of metastatic disease noted on 08/07/19 abdominal CT, showing interval"
+      [G4-FAITH] findings: "Worsening of metastatic disease noted on 08/07/19 abdominal " -> "Worsening of metastatic disease noted on 08/07/19 abdominal "
