@@ -1288,12 +1288,13 @@ def main():
                           "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
         HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
         HER2_SEARCH_KEYWORDS = [
-            "her2", "her-2", "her2neu", "ihc", "fish ratio",
+            "her2", "her-2", "her2neu", "her 2", "her 2 neu",
+            "ihc", "fish ratio",
         ] + HER2_POS_DRUGS + HER2_POS_REGIMENS
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
-            if isinstance(type_val, str) and re.search(r'(?i)\bER[+-]', type_val) and not re.search(r'(?i)HER2|HER-2', type_val):
+            if isinstance(type_val, str) and re.search(r'(?i)\b(?:ER|HR|PR)[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)', type_val) and not re.search(r'(?i)HER2|HER-2|HER 2|triple.neg|TNBC', type_val):
                 # Has ER status but missing HER2 — search the note
                 her2_found = None
                 for kw in HER2_SEARCH_KEYWORDS:
@@ -1307,17 +1308,21 @@ def main():
                         if kw in [d for d in HER2_POS_DRUGS] or kw in HER2_POS_REGIMENS:
                             her2_found = "HER2+"
                             break
-                        elif "positive" in ctx or "3+" in ctx or "amplified" in ctx:
-                            her2_found = "HER2+"
+                        # Check negative BEFORE positive (avoid "non-amplified" matching "amplified")
+                        elif "triple negative" in ctx or "tnbc" in ctx:
+                            her2_found = "HER2-"
                             break
-                        elif "negative" in ctx or "0" in ctx or "1+" in ctx or "not amplified" in ctx:
+                        elif "non-amplified" in ctx or "non amplified" in ctx or "not amplified" in ctx:
+                            her2_found = "HER2-"
+                            break
+                        elif "negative" in ctx or "1+" in ctx:
                             her2_found = "HER2-"
                             break
                         elif "equivocal" in ctx or "2+" in ctx:
                             her2_found = "HER2 equivocal"
                             break
-                        elif "triple negative" in ctx or "tnbc" in ctx:
-                            her2_found = "HER2-"
+                        elif "positive" in ctx or "3+" in ctx or "amplified" in ctx:
+                            her2_found = "HER2+"
                             break
                         else:
                             her2_found = "HER2: status unclear"
