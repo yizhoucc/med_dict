@@ -3230,3 +3230,119 @@ Processing row 26 (17/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.2s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium-vitamin D, zolendronic acid" -> "calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX) -> 
+  Phase 1 extraction (6 prompts): 88.4s
+  Cross-context injected (1462 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.5s
+      [EXTRACT] raw={
+"response_assessment": "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.8s
+  Total extraction: 98.2s
+    Medication_Plan: 6.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on [REDACTED], zoladex, and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.4s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on [REDACTED], zoladex and femara."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on [REDACTED], zoladex and femara." -> "Continue on [REDACTED], zoladex and femara. Reassess lower back pain at two week"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.5s [faith-trimmed]
+      [EXTRACT] raw={"radiotherapy_plan": "None"}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 8.2s
+      [EXTRACT] raw={
+    "procedure_plan": "Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Reassess lower back pain at two weeks and consider MRI of the spine. Patient to rtc if pain worsens.']
+    Imaging_Plan: 4.1s
+      [EXTRACT] raw={
+    "imaging_plan": "consider MRI of the spine"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 4.9s
+      [EXTRACT] raw={
+    "lab_plan": "CBC with platelets to assess easy bruising."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: if pain worsens"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 44.4s
