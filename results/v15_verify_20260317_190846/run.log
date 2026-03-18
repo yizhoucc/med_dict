@@ -3217,3 +3217,59 @@ Processing row 26 (17/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 33.2s
+      [EXTRACT] raw={
+"findings": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases identified. Multiple osseous lesions involving the thoracolumbar and sternum are unchanged in si
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.4s
+      [EXTRACT] raw={
+"current_meds": "letrozole (FEMARA), zolendronic acid, goserelin (ZOLADEX)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "calcium-vitamin D, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "calcium-vitamin D, zolendronic acid" -> "calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] calcium-vitamin D, zolendronic acid, goserelin (ZOLADEX) -> 
+  Phase 1 extraction (6 prompts): 73.5s
+  Cross-context injected (1279 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.6s
+      [EXTRACT] raw={
+"response_assessment": "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.9s
+  Total extraction: 83.4s
+    Medication_Plan: 6.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on [REDACTED], zoladex, and femara."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
