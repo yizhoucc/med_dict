@@ -2862,3 +2862,27 @@ Processing row 19 (15/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 7.3s
+      [EXTRACT] raw={
+"lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 104 mg/dL (03/01/13)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 39.7s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer diagnosed in 2009 with 0.9cm grade II IDC, 0/2 SLN with carcinoma, ER+PR+[REDACTED]-, and 1.8 cm of DCIS. Bilateral mastectomy was performed 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a history of left breast cancer diagnosed in 200" -> "Patient has a history of left breast cancer diagnosed in 200"
+    Current_Medications: 10.5s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole, palbociclib" -> ""
+      [G4-FAITH] current_meds: "" -> "aspirin 81 mg, ATELVIA 35 mg, CALCIUM CARBONATE (CALTRATE 60"
+      [POST-MEDS] aspirin 81 mg, ATELVIA 35 mg, CALCIUM CARBONATE (CALTRATE 600 ORAL) 600 mg, cholecalciferol, vitamin D3, 1000 UNITS tablet, estradioL (ESTRACE) 2 g, metFORMIN ([REDACTED]) 500 mg, multivitamin capsule, rosuvastatin (CRESTOR) 2.5 mg, telmisartan ([REDACTED]) 80 mg -> 
