@@ -5499,3 +5499,36 @@ Processing row 43 (28/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.0s
   Total extraction: 81.5s
+    Medication_Plan: 11.9s
+      [EXTRACT] raw={
+    "medication_plan": "Start an aromatase inhibitor after completing radiation. Continue Lexapro, though she has not taken it. Submit authorization for Zoladex if there is a delay in her oophorecto
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 33.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continues to recover from surgery. She will be randomized to 3 vs 5 weeks of radiation with a tentative start date of 12/16/18. She will start an aromatase inhibitor after compl
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continues to recover from surgery. She will be randomized to 3 vs 5 weeks of rad" -> "She will be randomized to 3 vs 5 weeks of radiation with a tentative start date "
+    radiotherapy_plan: 12.0s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "continues to recover from surgery. She met with Dr. [REDACTED] in radiation oncology today and elected to enrolled on a clinic trial, which will randomized her to 3 vs 5 we
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "continues to recover from surgery. She met with Dr. [REDACTED] in radiation onco" -> "She elected to enroll in a clinical trial, which will randomize her to 3 vs 5 we"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 5.3s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "will undergo a BSO eventually, surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "will undergo a BSO eventually, surgery pending" -> "She will undergo a bilateral oophorectomy eventually."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
