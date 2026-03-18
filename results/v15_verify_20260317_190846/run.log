@@ -2831,3 +2831,62 @@ Processing row 19 (15/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 36.6s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer diagnosed in 2009 with 0.9cm grade II IDC, 0/2 SLN with carcinoma, ER+PR+[REDACTED]-, and 1.8 cm of DCIS. Bilateral mastectomy was performed.
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a history of left breast cancer diagnosed in 200" -> "Patient has a history of left breast cancer diagnosed in 200"
+    Current_Medications: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "letrozole, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole, palbociclib" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 7.7s
+      [EXTRACT] raw={
+"recent_changes": "Start Letrozole, Rx given; Rx for Palbociclib. OK to start.",
+"supportive_meds": "denosumab"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 92.3s
+  Cross-context injected (1160 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.0s
+  Total extraction: 98.4s
+    Medication_Plan: 12.3s
+      [EXTRACT] raw={
+    "medication_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab after dental clearance."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
