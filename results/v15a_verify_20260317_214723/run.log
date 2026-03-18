@@ -7413,3 +7413,24 @@ Processing row 60 (37/61)...
       [G4-PROTECT] Others: restored safe negative "None"
   Referral extraction (full note): 8.6s
     [POST-THERAPY] removed non-therapy: ['pt to undergo lumpectomy with Dr.', '[REDACTED] with IORT and reconstruction 04/12/21.']
+  [ATTRIBUTION] 15/16 fields sourced (21.7s)
+  Row 60 total: 165.8s
+  Row 60 saved to progress
+
+Processing row 62 (38/61)...
+  Injected 8 term definitions: ['adjuvant chemotherapy', 'progesterone receptor', 'sentinel lymph node', 'estrogen receptor', 'lumpectomy', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3414 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.2s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "49 y.o. female with locally advanced ER+/PR- left breast cancer, seeking a second opinion on treatment o
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
