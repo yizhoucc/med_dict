@@ -7893,3 +7893,171 @@ Processing row 87 (54/61)...
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
     Procedure_Plan: 14.6s
+      [EXTRACT] raw={
+    "procedure_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat recep
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 11.3s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 4.0s
+      [EXTRACT] raw={
+    "Next clinic visit": "prn or at progression: in-person or telehealth"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 69.6s
+    Referral: 9.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "She will follow up with me prn or at progression."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 9.6s
+    [POST-THERAPY] removed non-therapy: ['I would recommend restaging after 3 months of ther', 'If she has HER2 positive disease, she will need an']
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to brain, lungs, and lymph nodes)'
+  [ATTRIBUTION] 16/19 fields sourced (23.9s)
+  Row 87 total: 177.2s
+  Row 87 saved to progress
+
+Processing row 89 (55/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 1454 chars)
+  A/P extraction: 21.6s
+    Reason_for_Visit: 13.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "51 y.o. female with adenocarcinoma of right breast (HCC) presenting for cycle 12 treatment of breast canc
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.1s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Adenocarcinoma of right breast (HCC) - ER/PR/HER2 status not explicitly stated in the note",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant Metastasis": "No",
+"Metastasis": 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer', 'Metastasis', 'Distant Metastasis']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 105.9s
+      [EXTRACT] raw={
+"lab_summary": "Thyroid Stimulating Hormone 6.01 (H) 0.45 - 4.12 mIU/L, Free T4 12 10 - 18 pmol/L, Albumin, Serum / Plasma 3.9 3.5 - 5.0 g/dL, Alkaline Phosphatase 125 (H) 38 - 108 U/L, Alanine tran
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 31.4s [improved]
+      [EXTRACT] raw={
+"findings": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. After treatm
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.1s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "AC, GCSF"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "AC, GCSF" -> "AC"
+      [G4-FAITH] current_meds: "AC" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+      [POST-MEDS] AC -> 
+    Treatment_Changes: 14.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "GCSF dose to be reduced to 50%, pt is willing to try granisetron, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V.",
+"supportive_meds": "gabapentin, lidocaine p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin, lidocaine patches, analgesics prn -> 
+  Phase 1 extraction (6 prompts): 181.5s
+  Cross-context injected (1161 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.2s [improved]

@@ -10822,3 +10822,60 @@ Processing row 89 (55/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 31.4s [improved]
+      [EXTRACT] raw={
+"findings": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. After treatm
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.1s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "AC, GCSF"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "AC, GCSF" -> "AC"
+      [G4-FAITH] current_meds: "AC" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+      [POST-MEDS] AC -> 
+    Treatment_Changes: 14.0s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "GCSF dose to be reduced to 50%, pt is willing to try granisetron, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V.",
+"supportive_meds": "gabapentin, lidocaine p
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin, lidocaine patches, analgesics prn -> 
+  Phase 1 extraction (6 prompts): 181.5s
+  Cross-context injected (1161 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.2s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. A
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 19.5s
+  Total extraction: 201.0s
+    Medication_Plan: 16.0s
+      [EXTRACT] raw={
+    "medication_plan": "Continue cycle 4 of AC in 1 week with a dose delay of 1 week. Reduce GCSF dose to 50%. Add PO dex at home prn N/V. Add olanzapine 10 mg prn N/V. Continue gabapentin for neuro
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
