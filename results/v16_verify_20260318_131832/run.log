@@ -3567,3 +3567,42 @@ Processing row 28 (18/61)...
   Referral extraction (full note): 17.2s
     [POST-THERAPY] removed non-therapy: ['Calcium supplementation with 1200mg/day combinatio', 'Bone density scan can be completed when she return', 'Dental eval and clearance if considering bisphosph', 'Continue use of vaginal moisturizer.', 'Can also try coconut oil and/or [REDACTED], and wi', 'Surgical planning per Dr.', '[REDACTED], tentatively scheduled for September 20']
     [POST-IMAGING] found in note: Bone scan
+  [ATTRIBUTION] 20/20 fields sourced (32.7s)
+  Row 28 total: 232.3s
+  Row 28 saved to progress
+
+Processing row 29 (19/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (3607 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "64 y.o. postmenopausal patient with a recent diagnosis of early stage breast cancer, who presents in cons
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
+"Stage_of_Cancer": "Clinical stage II-III",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
