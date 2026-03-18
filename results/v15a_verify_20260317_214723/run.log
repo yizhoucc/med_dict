@@ -9497,3 +9497,38 @@ Processing row 81 (48/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.0s
   Total extraction: 91.0s
+    Medication_Plan: 26.3s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue current medications including acetaminophen 1000 mg by mouth every 8 hours, ibuprofen 600 mg by mouth every 8 hours as needed for pain or temperature >= 38.5 C, lisi
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho" -> "Continue current medications including acetaminophen 1000 mg by mouth every 8 ho"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 21.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. Due to her low risk, I do not recommend chemotherapy. Discussed the role of radiation to decrease
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. " -> "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. "
+    radiotherapy_plan: 9.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of radiation to decrease the risk of local recurrence. She has an appointment with Dr. [REDACTED] tomorrow."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 6.9s
+      [EXTRACT] raw={
+    "procedure_plan": "Plan to proceed with [REDACTED] +/- bone medication after radiation is completed."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Plan to proceed with [REDACTED] +/- bone medication after radiation is completed.']
