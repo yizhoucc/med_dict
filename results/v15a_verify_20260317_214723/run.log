@@ -10980,3 +10980,40 @@ Processing row 89 (55/61)...
   Referral extraction (full note): 13.2s
     [POST-GENETICS] cleared finding from referral: 'Positive for a single mutation in the BLM [REDACTED]: This means that Ms. [REDACTED] does not have [REDACTED] Syndrome but is a carrier for the condition. Being a carrier for [REDACTED] Syndrome is preliminarily linked to a moderate increase in cancer risk.'
     [POST-THERAPY] removed non-therapy: ['Reduce GCSF dose to 50%.', 'Add PO dex at home prn N/V.', 'Add olanzapine 10 mg prn N/V.']
+  [ATTRIBUTION] 15/17 fields sourced (29.2s)
+  Row 89 total: 317.2s
+  Row 89 saved to progress
+
+Processing row 90 (56/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1283 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has stage 4 breast cancer with metastasis to lymph nodes and bone. The purpose of this visit is
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.1s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to bone, liver",
+  "Metastasis": "Y
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
+      [G4-FAITH] Type_of_Cancer: "ER+/PR+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] Distant_Metastasis: "Yes, to bone, liver" -> "Yes, to bone"
+      [G4-FAITH] Metastasis: "Yes (to bone, liver)" -> "Yes (to bone)"
+      [G4-FAITH] Distant Metastasis: "Yes, to bone, liver" -> "Yes, to bone"
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
