@@ -4272,3 +4272,57 @@ Processing row 35 (22/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 5.9s
   Total extraction: 133.9s
+    Medication_Plan: 24.0s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue [REDACTED] as premed. Continue use of antiem
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation"
+    Therapy_plan: 18.9s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughou
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex" -> "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation oncology referral, will see Dr. [REDACTED] next week."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.5s
+      [EXTRACT] raw={
+    "imaging_plan": "will get doppler to r/o DVT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 5.2s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "labs reviewed and adequate to receive treatment today"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "labs reviewed and adequate to receive treatment today" -> "will get doppler to r/o DVT"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
