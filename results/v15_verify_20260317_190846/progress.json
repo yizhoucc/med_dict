@@ -31,7 +31,8 @@
     42,
     43,
     45,
-    48
+    48,
+    49
   ],
   "results": {
     "0": {
@@ -3799,6 +3800,134 @@
         ],
         "follow up": [
           "Follow up with Dr [REDACTED] same day that she comes for post-operative follow-up"
+        ]
+      }
+    },
+    "49": {
+      "coral_idx": 189,
+      "note_text": "Medical Oncology Consult Note  Video Consult    Patient Name: ***** *****   ***** *****:  *****   Patient DOB:  01/02/1964   Date of Visit:  01/24/2022  Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****'*****, MD  Referring MD:        Reason for visit:   Chief Complaint   Patient presents with   \u0007 New Patient Evaluation       Diagnosis:    1. Metastatic breast cancer (CMS code)  Ambulatory Referral to Cancer Risk Genetics and Hereditary Cancer Clinics (External)       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    History of Present Illness:     58 year old female who felt a left breast mass in 2012 and in June 2013 was diagnosed with de ***** metastatic IDC to the lung, lymph nodes, liver and bone, HR+ and her 2 neu negative.  She had AC  X 4 cycles with a PR and ***** then went on tamoxifen and lupron.  In October 2014 she was changed to ***** and lupron due to progression and ibrance was added January 2015.  She had radiation in 2015 to various sites of ***** metastatic disease.   She had a lumpectomy in mid 2019 lumpectomy followed by XRT.  Genetic testing with pathogenic ***** mutation. She did not have genetic counseling or follow up.  She has never had a colonoscopy. I will refer her to high risk clinic.       Radiation therapy history as outlined below:   Right iliac region and sacrum, November 2014, 30 ***** in 10 fractions   ***** bone mets, November 2014, 20 ***** in 5 fractions   Left breast resection cavity, March 2019, *****, 30 ***** in 5 fractions    She had restaging in December 2021 that shows her metastatic disease is under good control and she remains on ibrance, xgeva, letrozole and lupron.      She had breast imaging and biopsies that show IDC and also DCIS. She is considering a mastectomy and here for a second opinion.     Oncologic history    Stage at *****:  Cancer Staging  Metastatic breast cancer (CMS \n code)  Staging form: Breast, AJCC 7th Edition  - Clinical: Stage IV (T2, N1, M1) - Signed by ***** ***** *****, MD on 01/24/2022      Medications:    Current Outpatient Medications:   \u0007  acetaminophen (TYLENOL) 325 mg tablet, Take 325 mg by mouth every 6 (six) hours., Disp: , Rfl:   \u0007  calcium carbonate-vitamin D (OSCAL D) 1,250 mg (500 mg elemental)-200 unit tablet, Take 1 tablet by mouth daily, Disp: , Rfl:   \u0007  DENOSUMAB (XGEVA SUBCUT), Inject into the skin., Disp: , Rfl:   \u0007  LEUPROLIDE ACETATE (LUPRON ***** *****), Inject into the muscle. (Patient not taking: Reported on 01/11/2022 ), Disp: , Rfl:     Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 ***** Chloride        Medical History:   Past Medical History:   Diagnosis Date   \u0007 Breast cancer (CMS code) 07/15/13       Surgical History:   Past Surgical History:   Procedure Laterality Date   \u0007 Cesarian Section      x2   \u0007 TUBAL LIGATION         Social History:   Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes   \u0007 Drug use: No   \u0007 Sexual activity: Not Currently     Partners: Male     Birth control/protection: None   Social History Narrative    The patient underwent menarche at 15 years of age.  She never took OCP.  She is *****.  Her first pregnancy was at 42 years of age.  Breast fed for 2 months.  Premenopausal; she has no history of HRT.      She lives in *****.  She is originally from the Phillippines and has been in the US since 2007.  She ***** ***** ***** ***** ***** ***** ***** Bay ***** *****.  She is married.  1 son and 1 daughter.       *****:  ***** ***** ***** ***** *****     ***** Status: married     Gynecologic History:  G 2 P 2 AB 0    Menarche 15 Menopause  48   OCP 0 years HRT 0 years   Fertility treatments 0    Family History:    Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Sister  49   \u0007 \n Esophageal cancer Father  63        died at 80   \u0007 Colon cancer Father     \u0007 Breast cancer Paternal Aunt  49               Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No *****, orthopnea  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    01/24/22 1526   *****:  0     Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   Orders Only on 11/25/2020   Component Date Value Ref Range Status   \u0007 Sodium, Serum / Plasma 11/25/2020 *****  136 - 145 mmol/L Final   \u0007 Potassium, Serum / Plasma 11/25/2020 4.1  3.5 - 5.1 mmol/L Final   \u0007 Calcium, total, Serum / Plasma 11/25/2020 9.6  8.5 - 10.5 mg/dL Final   \u0007 Chloride, Serum / Plasma 11/25/2020 *****  98 - 107 mEq/L Final   \u0007 Carbon Dioxide, Total 11/25/2020 23.6  22.0 - 29.0 mmol/L Final   \u0007 Glucose, non-fasting 11/25/2020 98  65 - 99 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 11/25/2020 13.6  6.0 - 20.0 mg/dL Final   \u0007 Creatinine, Serum 11/25/2020 1.0  0.7 - 1.2 mg/dL Final   \u0007 Protein, Total, Serum / Plasma 11/25/2020 6.5***** 6.6 - 8.7 g/dl Final   \u0007 Albumin, SPEP 11/25/2020 4.8  3.4 - 4.8 g/dl Final   \u0007 Bilirubin, Total 11/25/2020 0.30  0.00 - 1.20 mg/dL Final   \u0007 Alkaline Phosphatase 11/25/2020 78  40 - 129 U/L Final   \u0007 AST 11/25/2020 17  10 - 38 U/L Final   \u0007 Alanine transaminase 11/25/2020 15  0 - 38 U/L Final   \u0007 eGFR - low estimate \n 11/25/2020 57  mL/min/1.73 Final   \u0007 eGFR - high estimate 11/25/2020 70  mL/min/1.73 Final        Psychologic/emotional well-being/support  She is well supported by her husband.     Assessment / Plan:    1.  De ***** metastatic breast cancer found in July 2013, HR+ and her 2 neu negative.  S/p ***** x 4 then tamoxifen lupron until progression in October 2014.   2.  Second line lupron, letrozole started October 2014 and ibrance added January 2015.  Her disease is under great control as of imaging December 2021.   3. She is s/p lumpectomy and XRT mid 2019.   4.  Radiation to right pelvis and sternum in 2015.   5.  Progression in the left breast on imaging with a biopsy with DCIS and IDC.  We discussed observation and mastectomy. She is considering her options.   6. Referral to genetics for pathogenic PMS 2 mutation.   7.  She will see me prn.           ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.            \n",
+      "assessment_and_plan": "Assessment / Plan:    1.  De ***** metastatic breast cancer found in July 2013, HR+ and her 2 neu negative.  S/p ***** x 4 then tamoxifen lupron until progression in October 2014.   2.  Second line lupron, letrozole started October 2014 and ibrance added January 2015.  Her disease is under great control as of imaging December 2021.   3. She is s/p lumpectomy and XRT mid 2019.   4.  Radiation to right pelvis and sternum in 2015.   5.  Progression in the left breast on imaging with a biopsy with DCIS and IDC.  We discussed observation and mastectomy. She is considering her options.   6. Referral to genetics for pathogenic PMS 2 mutation.   7.  She will see me prn.           ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT: I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools.            \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "yes",
+          "in-person": "Televisit",
+          "summary": "Metastatic breast cancer (CMS code) patient with HR+ and HER2 negative status, presenting for a second opinion regarding a lumpectomy and considering a mastectomy."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "HR+ and HER2- invasive ductal carcinoma (IDC) with DCIS",
+          "Stage_of_Cancer": "Originally Stage IV (T2, N1, M1)",
+          "Metastasis": "Yes (to the lung, lymph nodes, liver, and bone)",
+          "Distant Metastasis": "Yes (to the lung, lymph nodes, liver, and bone)"
+        },
+        "Lab_Results": {
+          "lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, Alkaline Phosphatase 78, AST 17, Alanine transaminase 15, eGFR - low estimate 57, eGFR - high estimate  70 (from 11/25/2020)"
+        },
+        "Clinical_Findings": {
+          "findings": "Imaging from December 2021 shows metastatic disease under good control. Biopsies show IDC and DCIS in the left breast. The patient is considering a mastectomy."
+        },
+        "Current_Medications": {
+          "current_meds": "ibrance, xgeva, letrozole"
+        },
+        "Treatment_Changes": {
+          "recent_changes": "",
+          "supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "palliative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "Imaging from December 2021 shows metastatic disease under good control."
+        },
+        "Medication_Plan": {
+          "medication_plan": "Current medications include lupron and letrozole, with ibrance added in January 2015. No specific future changes to this plan are mentioned."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Second line lupron, letrozole started October 2014 and ibrance added January 2015."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "None"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "Considering mastectomy for progression in the left breast with DCIS and IDC."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "Referral to genetics for pathogenic PMS 2 mutation."
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "prn: as needed"
+        },
+        "Advance_care_planning": {
+          "Advance care": "full code."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "Referral to genetics for pathogenic PMS 2 mutation",
+          "Specialty": "None",
+          "Others": "None",
+          "follow up": "She will see me prn."
+        }
+      },
+      "attribution": {
+        "second opinion": [
+          "She will see me prn."
+        ],
+        "in-person": [
+          "I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location."
+        ],
+        "summary": [
+          "De [REDACTED] metastatic breast cancer found in July 2013, HR+ and her 2 neu negative."
+        ],
+        "Type_of_Cancer": [
+          "Progression in the left breast on imaging with a biopsy with DCIS and IDC."
+        ],
+        "Stage_of_Cancer": [
+          "De [REDACTED] metastatic breast cancer found in July 2013"
+        ],
+        "Metastasis": [
+          "De [REDACTED] metastatic breast cancer found in July 2013"
+        ],
+        "Distant Metastasis": [
+          "De [REDACTED] metastatic breast cancer found in July 2013"
+        ],
+        "findings": [
+          "Progression in the left breast on imaging with a biopsy with DCIS and IDC. We discussed observation and mastectomy. She is considering her options."
+        ],
+        "current_meds": [
+          "Second line lupron, letrozole started October 2014 and ibrance added January 2015."
+        ],
+        "goals_of_treatment": [
+          "De [REDACTED] metastatic breast cancer found in July 2013"
+        ],
+        "response_assessment": [
+          "Her disease is under great control as of imaging December 2021."
+        ],
+        "medication_plan": [
+          "Second line lupron, letrozole started October 2014 and ibrance added January 2015."
+        ],
+        "therapy_plan": [
+          "Second line lupron, letrozole started October 2014 and ibrance added January 2015."
+        ],
+        "procedure_plan": [
+          "She is considering her options."
+        ],
+        "genetic_testing_plan": [
+          "Referral to genetics for pathogenic PMS 2 mutation."
+        ],
+        "Next clinic visit": [
+          "She will see me prn."
+        ],
+        "Genetics": [
+          "Referral to genetics for pathogenic PMS 2 mutation."
+        ],
+        "follow up": [
+          "She will see me prn."
         ]
       }
     }
