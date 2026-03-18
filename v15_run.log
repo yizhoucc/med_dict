@@ -8192,3 +8192,185 @@ Processing row 67 (42/61)...
 "second opinion": "no",
 "in-person": "in-person",
 "summary": "A 63-year-old female with multifocal ER+ breast cancer involving the right breast, presenting for a retur
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- multifocal breast cancer",
+  "Stage_of_Cancer": "early stage",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 35.0s
+      [EXTRACT] raw={
+"findings": "MRI findings: Right Breast - 3.9 x 2.7 x 3.5 cm enhancing mass with washout kinetics containing a biopsy clip consistent with known malignancy, abutting the chest wall without definite 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 1.9s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.5s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 66.6s
+  Cross-context injected (1164 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is responding to treatment. Follow-up MRI does not show any lesions after chemotherapy."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 9.2s
+  Total extraction: 75.9s
+    Medication_Plan: 7.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans were mentioned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific future medication plans, changes to current medi" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.4s
+      [EXTRACT] raw={
+    "therapy_plan": "If she chooses to have a lumpectomy, she should have radiation. Post-mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved. If she chose to have a lumpectomy, she should have radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 6.6s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "bilateral mastectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "bilateral mastectomy" -> "bilateral mastectomy with consideration of post-mastectomy radiation if extensiv"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['bilateral mastectomy with consideration of post-mastectomy radiation if extensive disease is left and lymph nodes are involved']
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 10.1s [improved]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Her sons should be tested for the risk of [REDACTED] anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer, which is probably not
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "Her sons should be tested for the risk of [REDACTED] anemia in children (if the " -> "Her sons should be tested for the risk of [REDACTED] anemia in children (if the "
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: as needed for further consultation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 53.8s
+    Referral: 10.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "Return to clinical as needed for further consultation and with her sons."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "None" -> "refer to genetics"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Rad Onc consult" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.2s
+    [POST-DISTMET] added Distant Metastasis: 'No'
