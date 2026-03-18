@@ -10064,3 +10064,38 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 28.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. MRI on 06/05/2018 shows an enhanci
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently progressing. On 04/11/2018, she progressed on first line" -> "The cancer is currently progressing. On 04/11/2018, she progressed on first line"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 31.8s
+  Total extraction: 144.7s
+    Medication_Plan: 6.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.8s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. She will continue her steroid taper per Dr. [REDACTED] and conti
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 11.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
