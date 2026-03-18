@@ -8141,3 +8141,45 @@ Processing row 65 (41/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 57.0s
+    Referral: 28.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "We will refer the patient back to her referring physician, .[REDACTED] [REDACTED] [REDACTED], MD  [REDAC
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "She is also awaiting the results of an [REDACTED] 30 [REDACT"
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 28.6s
+    [POST-THERAPY] removed non-therapy: ['Reviewed the risks and benefits of lumpectomy/[RED', 'Mastectomy.']
+    [POST-GENETICS-SEARCH] found in full note: ['invitae', 'germline testing', 'germline']
+  [ATTRIBUTION] 15/18 fields sourced (19.8s)
+  Row 65 total: 218.2s
+  Row 65 saved to progress
+
+Processing row 67 (42/61)...
+  Injected 2 term definitions: ['mastectomy', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2331 chars)
+  A/P extraction: 0.0s
