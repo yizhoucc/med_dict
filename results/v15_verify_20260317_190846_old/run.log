@@ -9325,3 +9325,29 @@ Processing row 77 (46/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 36.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. Imaging from 08/07/19 abdominal CT shows interval enlargement of hepatic and nodal metastases. Specifically, a 2 cm hypodense lesion in l
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently progressing. Imaging from 08/07/19 abdominal CT shows in" -> "The cancer is currently progressing. Imaging from 08/07/19 abdominal CT shows in"
+      [G4-FAITH] response_assessment: "The cancer is currently progressing. Imaging from 08/07/19 a" -> "The cancer is currently progressing. Imaging from 08/07/19 a"
+  Phase 2 extraction (2 prompts): 40.2s
+  Total extraction: 203.0s
+    Medication_Plan: 5.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 25.4s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] for [REDACTED]+ tumors. She has a consultation 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Patient wishes to explore targeted options for metastatic breast cancer. She is " -> "Patient wishes to explore targeted options for metastatic breast cancer. She is "
