@@ -5776,3 +5776,21 @@ Processing row 45 (29/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 68.2s
+    Referral: 11.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+  "Nutrition": "None",
+  "Genetics": "None",
+  "Specialty": "Rad Onc consult",
+  "Others": "Social work referral, Exercise counseling referral",
+  "follow up": "2-3 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral, Exercise counseling referral" -> "Exercise counseling referral"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 11.5s
+    [POST-THERAPY] removed non-therapy: ['Continue naproxen 500mg bid, APAP ok if taken spar', 'Continue allegra daily.', 'Continue exercise.', 'Continue PO iron.', 'Repeat in 3-4 months.']
