@@ -9858,3 +9858,39 @@ Processing row 83 (50/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 16.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started on capecitabine one week one, one week off. Patient accidentally took only 500mg BID until mid-September. Increased to 1000mg BID in mid-September, then 1500mg BID in late
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] zolendronic acid -> 
+  Phase 1 extraction (6 prompts): 113.5s
+  Cross-context injected (1162 chars)
+    Treatment_Goals: 4.0s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 25.9s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed multiple hypoattenuating lesions in the right and left hepatic lobes, increased in size and number compared to 03/10/2020. MRI brain on 11/07/2020
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 29.9s
+  Total extraction: 143.4s
+    Medication_Plan: 8.8s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
