@@ -9949,3 +9949,44 @@ Processing row 83 (50/61)...
       [G4-FAITH] genetic_testing_plan: "None planned." -> ""
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 77.7s
+    Referral: 23.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Social work referral",
+"follow up": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "Social work referral" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 23.5s
+    [POST-SPECIALTY] found in full note: radiation oncology for consideration of
+    [POST-SPECIALTY] found in full note: radiation oncology to consider either fo
+    [POST-LAB-WHITELIST] removed non-lab items: ['Repeat LP for CSF cytology']
