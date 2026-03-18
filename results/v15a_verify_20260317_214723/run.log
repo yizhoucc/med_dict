@@ -2221,3 +2221,21 @@ Processing row 13 (12/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.8s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to bone, liver, and nodes",
+  "Me
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+ invasive ductal carcinoma"
+      [G3-IMPROVE] Metastasis: "Yes (to bone, liver, and nodes)" -> "Yes (to bone, liver)"
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to bone, liver, and nodes" -> "Yes, to bone, liver"
+      [G4-FAITH] Type_of_Cancer: "ER+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] Metastasis: "Yes (to bone, liver)" -> "Yes (to bone, liver, and nodes)"
+      [G4-FAITH] Distant_Metastasis: "Yes, to bone, liver" -> "Yes, to bone, liver, and nodes"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage [X], now metastatic (Stage IV)" -> "metastatic (Stage IV)"
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
