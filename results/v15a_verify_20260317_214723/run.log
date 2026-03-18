@@ -3190,3 +3190,35 @@ Processing row 21 (16/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 60.5s
+    Referral: 17.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "pet ct now and if stable continue arimidex alone. If pet ct shows progression could use faslodex with [R
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Specialty', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 17.8s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bones, chest wall, right infraclavicular and right IM nodes)'
+  [ATTRIBUTION] 18/22 fields sourced (37.5s)
+  Row 21 total: 304.1s
+  Row 21 saved to progress
+
+Processing row 26 (17/61)...
+  Injected 3 term definitions: ['progressive disease', 'stable disease', 'lumpectomy']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (831 chars)
+  A/P extraction: 0.0s
