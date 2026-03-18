@@ -2261,3 +2261,41 @@ Processing row 13 (12/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] current_meds: "Gemcitabine, Docetaxel, Pamidronate" -> "Gemcitabine, Docetaxel, Pamidronate, Doxorubicin"
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 21.8s
+      [EXTRACT] raw={
+"recent_changes": "Stopped palbociclib and fulvestrant end of January. Last dose of Fulvestrant was 01/04/19. Doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 159.1s
+  Cross-context injected (1111 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable. The patient reports doing okay with her current treatment. She continues to have stiffness in her back, but her mobility is better as she is a
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable. The patient reports doing okay with her current " -> "The cancer is currently stable. On exam, no new masses, skin changes, or lymphad"
+      [G4-FAITH] response_assessment: "The cancer is currently stable. On exam, no new masses, skin" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 13.0s
+  Total extraction: 172.1s
+    Medication_Plan: 24.3s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 2
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+      [G4-FAITH] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta," -> "Continue topical cannabis and sulfur. Rx given for Cymbalta,"
+      [G5-TEMPORAL] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
