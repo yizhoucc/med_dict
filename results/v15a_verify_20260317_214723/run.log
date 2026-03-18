@@ -1873,3 +1873,90 @@ Processing row 10 (10/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.0s [improved]
+      [EXTRACT] raw={
+"recent_changes": "Faslodex + Denosumab",
+"supportive_meds": "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate, levothyroxine, lovastatin, metFORMIN, 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin" -> "hydrocodone-acetaminophen"
+      [G3-IMPROVE] recent_changes: "Faslodex + Denosumab" -> ""
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 100.4s
+  Cross-context injected (774 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 8.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, pelvis, and right femur ordered due to worsening numbness in right leg. Ima
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "PET/CT showed increased metastatic activity and size of left mandibular mass. MR" -> "PET/CT showed increased metastatic activity and size of left mandibular mass. Im"
+      [G4-FAITH] response_assessment: "PET/CT showed increased metastatic activity and size of left" -> "PET/CT showed increased met activity and size of left mandib"
+  Phase 2 extraction (2 prompts): 12.0s
+  Total extraction: 112.4s
+    Medication_Plan: 13.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on Faslodex and Denosumab. [REDACTED]-Mycelex [REDACTED] 5 times a day for 14 days to help with thrush and salt and soda rinses."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.6s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on Faslodex and Denosumab."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on Faslodex and Denosumab." -> "Continue on Faslodex and Denosumab. Order PETCT to evaluate Femur and to toes. C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.1s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "S/p xrt to jaw improved pain with residual numbness"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "S/p xrt to jaw improved pain with residual numbness" -> "None"
+    Procedure_Plan: 4.4s
+      [EXTRACT] raw={
+    "procedure_plan": "will order PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['will order PETCT to toes']
+    Imaging_Plan: 7.2s
+      [EXTRACT] raw={
+    "imaging_plan": "will order PETCT to evaluate Femur and to toes due to worsening numbness in right leg."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
