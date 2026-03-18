@@ -3615,3 +3615,57 @@ Processing row 29 (19/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Creatinine 0.74 (12/11/2016), [REDACTED] 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/1" -> "Creatinine 0.74 (12/11/2016), [REDACTED] 17.8, CA 27.29 67.7, CA 15-3 60.9 (11/1"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 49.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Right breast mass (6 x 11 cm) in outer quadrants; no mass in left breast. Right breast with marked NME and clustered ring internal enhancement on MRI. PET/CT shows large enhancing right
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Right breast mass (6 x 11 cm) in outer quadrants; no mass in left breast. Right " -> "Right breast mass (6 x 11 cm) in outer quadrants; no mass in left breast. Right "
+      [G4-FAITH] findings: "Right breast mass (6 x 11 cm) in outer quadrants; no mass in" -> "Right breast mass (6 x 11 cm) in outer quadrants; no mass in"
+    Current_Medications: 2.0s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.5s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 128.6s
+  Cross-context injected (1166 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.5s
+  Total extraction: 135.1s
+    Medication_Plan: 26.5s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will receive either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
