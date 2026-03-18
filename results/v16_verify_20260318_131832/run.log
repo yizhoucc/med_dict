@@ -1435,3 +1435,41 @@ Processing row 8 (8/61)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 29.5s
+      [EXTRACT] raw={
+"findings": "Patient has undergone a right mastectomy with residual invasive ductal carcinoma measuring 3.84 cm, with negative margins. One lymph node with macrometastases (0.21 cm) and extranodal e
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 10.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin "
+      [POST-MEDS] acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin (NEURONTIN), ginger, Zingiber officinalis, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]) mouthwash, LORazepam (ATIVAN), naloxone, OLANZapine (ZYPREXA), omeprazole (PRILOSEC), ondansetron (ZOFRAN), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), traMADoL (ULTRAM), UNABLE TO FIND, Med Name: [REDACTED] [REDACTED] [REDACTED] -> 
+    Treatment_Changes: 13.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX) -> ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), OLANZapine (ZYPREXA), polyethylene glycol (MIRALAX)
+  Phase 1 extraction (6 prompts): 82.1s
+  Cross-context injected (917 chars)
