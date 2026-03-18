@@ -12031,3 +12031,26 @@ Processing row 99 (61/61)...
       [G3-IMPROVE] Type_of_Cancer: "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma" -> "ER+(80%)PR+(50%) invasive ductal carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 144.7s [format-repaired, improved]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkaline Phosphatase 172 (31-95 U/L), Alanine transaminase 37 (11-50 U/L), Aspartate transaminase 57 (17-42 U
+      [G1-FORMAT] repaired -> keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 35.2s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen 27.29: 178 U/mL, Carcinoembryonic Antigen: 312.2 ug/L) are elevated. Alkaline Phosphatase is elevated (172 U/L). Aspartate t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen" -> "Tumor markers (Cancer Antigen 15-3: 118 U/mL, Cancer Antigen"
+    Current_Medications: 6.4s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Lorazepam, pregabalin, docusate sodium, oxyCODONE, senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] Lorazepam, pregabalin, docusate sodium, oxyCODONE, senna -> 
