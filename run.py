@@ -792,14 +792,27 @@ def main():
                         NON_SPECIALTY_PHRASES = [
                             'history of present', 'assessment', 'plan:',
                             'chief complaint', 'review of systems', 'physical exam',
+                            'for consideration of', 'at the completion',
+                            'will be made', 'to consider either',
                         ]
                         if any(ns in ml for ns in NON_SPECIALTY_PHRASES):
                             continue
+                        # Skip if match contains imaging/order text leaking in
+                        if re.search(r'\b(?:CT|MRI|PET|scan|order|lab)\b', match, re.IGNORECASE):
+                            continue
                         spec = referral.get("Specialty", "None") or "None"
-                        match_short = match[:40].strip()
-                        if match_short.lower() not in spec.lower():
-                            referral["Specialty"] = (spec + ", " + match_short).lstrip("None, ").strip(", ")
-                            print(f"    [POST-SPECIALTY] found in full note: {match_short}")
+                        # Extract just the specialty name (first matching keyword phrase)
+                        matched_specialty = None
+                        for sk in SPECIALTY_KEYWORDS:
+                            if sk in ml:
+                                matched_specialty = sk.title()
+                                break
+                        match_short = matched_specialty if matched_specialty else match[:25].strip()
+                        # Dedup: skip if this specialty is already present
+                        if match_short.lower() in spec.lower():
+                            continue
+                        referral["Specialty"] = (spec + ", " + match_short).lstrip("None, ").strip(", ")
+                        print(f"    [POST-SPECIALTY] found in full note: {match_short}")
 
         # POST-GENETICS: Remove mutation findings from Genetics referral field [B70]
         # Prompt says "do NOT list genetic test RESULTS or known mutations" but model
@@ -1121,6 +1134,10 @@ def main():
                     "was performed", "were performed", "has been done",
                     "was done", "were done", "already done", "already completed",
                     "prior", "previous",
+                    # Declined / refused
+                    "will not pursue", "declined", "not interested",
+                    "deferred", "refuses", "does not wish", "does not want",
+                    "patient does not want", "opted not", "elected not",
                 ]
                 found_tests = []
                 note_lower = note_text.lower()
@@ -1151,6 +1168,54 @@ def main():
                     unique_tests = list(dict.fromkeys(found_tests))  # preserve order
                     gen["genetic_testing_plan"] = ", ".join(unique_tests[:3])  # cap at 3
                     print(f"    [POST-GENETICS-SEARCH] found in full note: {unique_tests}")
+
+        # POST-GENETICS-RESULT-CHECK: Validate LLM-extracted genetic testing plan [v16]
+        # Remove entries that are actually known results or explicitly declined
+        gen = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gen, dict):
+            gen_val = gen.get("genetic_testing_plan", "") or ""
+            gen_lower = gen_val.lower()
+            if gen_lower not in ("none planned.", "none planned", "none", "none.", ""):
+                note_lower_gc = note_text.lower()
+                # Check 1: Is this a known mutation result (not a plan)?
+                MUTATION_NAMES = ["brca1", "brca2", "palb2", "chek2", "atm", "tp53", "pms2",
+                                  "mlh1", "msh2", "msh6", "pten", "cdh1", "stk11", "nbn"]
+                RESULT_PHRASES = ["was done", "results reviewed", "results show", "completed",
+                                  "result:", "results:", "known mutation", "known carrier",
+                                  "history of", "problem list"]
+                items = [g.strip() for g in gen_val.split(",")]
+                valid_items = []
+                for item in items:
+                    item_lower = item.lower().strip()
+                    if not item_lower:
+                        continue
+                    # Pure mutation name without action words → likely a result
+                    is_pure_mutation = item_lower in MUTATION_NAMES
+                    has_action = any(w in item_lower for w in ["test", "order", "send", "check", "plan", "profiling", "sequencing"])
+                    if is_pure_mutation and not has_action:
+                        print(f"    [POST-GENETICS-RESULT-CHECK] Removed known mutation result: '{item}'")
+                        continue
+                    # Check if original note says this test was declined near the term
+                    DECLINE_PHRASES = ["will not pursue", "declined", "not interested",
+                                       "deferred", "refuses", "does not wish", "opted not", "elected not"]
+                    term_for_search = item_lower.split()[0] if item_lower.split() else item_lower
+                    declined = False
+                    for m in re.finditer(re.escape(term_for_search), note_lower_gc):
+                        ctx_start = max(0, m.start() - 120)
+                        ctx_end = min(len(note_lower_gc), m.end() + 120)
+                        ctx = note_lower_gc[ctx_start:ctx_end]
+                        if any(dp in ctx for dp in DECLINE_PHRASES):
+                            print(f"    [POST-GENETICS-RESULT-CHECK] Removed declined test: '{item}'")
+                            declined = True
+                            break
+                        if any(rp in ctx for rp in RESULT_PHRASES):
+                            print(f"    [POST-GENETICS-RESULT-CHECK] Removed completed/result: '{item}'")
+                            declined = True
+                            break
+                    if not declined:
+                        valid_items.append(item)
+                if len(valid_items) < len(items):
+                    gen["genetic_testing_plan"] = ", ".join(valid_items) if valid_items else "None planned."
 
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})
@@ -1187,6 +1252,32 @@ def main():
                 if cleaned and cleaned != stage:
                     cancer["Stage_of_Cancer"] = cleaned
                     print(f"    [POST-STAGE] contradiction fixed: '{stage}' → '{cleaned}'")
+
+            # POST-STAGE-REGIONAL: Stage IV with only regional LN metastasis [v16]
+            # Axillary, sentinel, supraclavicular, infraclavicular, internal mammary LN
+            # are regional (Stage III) not distant (Stage IV)
+            if stage_says_iv and met and not met_says_no:
+                met_lower = met.lower()
+                REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",
+                                  "infraclavicular", "internal mammary", "chest wall",
+                                  "ipsilateral"]
+                DISTANT_SITES = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                 "ovary", "skin", "contralateral", "cervical", "distant",
+                                 "hepatic", "pulmonary", "osseous", "cerebral"]
+                has_regional = any(rs in met_lower for rs in REGIONAL_SITES)
+                has_distant = any(ds in met_lower for ds in DISTANT_SITES)
+                # Also check if note explicitly says "no distant metastasis"
+                note_lower_stage = note_text.lower()
+                note_no_distant = bool(re.search(
+                    r'negative for distant|no distant metast|no evidence of distant|w/u negative',
+                    note_lower_stage))
+                if has_regional and not has_distant and note_no_distant:
+                    cleaned = re.sub(r'(?i)\s*,?\s*(?:now\s+)?metastatic\s*\(?\s*Stage\s*IV\s*\)?', '', stage)
+                    cleaned = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III (regional)', cleaned)
+                    cleaned = cleaned.strip().rstrip(',').strip()
+                    if cleaned and cleaned != stage:
+                        cancer["Stage_of_Cancer"] = cleaned
+                        print(f"    [POST-STAGE-REGIONAL] Regional LN only + no distant mets: '{stage}' → '{cleaned}'")
 
         # POST-STAGE-VERIFY: Check for hallucinated "Originally Stage X" [v14]
         # Model sometimes fabricates original stage (e.g., "Originally Stage IIA") when note
@@ -1282,6 +1373,107 @@ def main():
                         print(f"    [POST-DRUG-VERIFY] REMOVED hallucinated drug: '{med}' (not found in note)")
                 if len(verified) < len(meds):
                     drug_dict[field_name] = ", ".join(verified) if verified else ""
+
+        # POST-MEDS-FILTER: Remove non-cancer medications from current_meds [v16]
+        NON_CANCER_MEDS = [
+            # Ophthalmology
+            "latanoprost", "xalatan", "timolol", "brimonidine", "dorzolamide",
+            "travoprost", "bimatoprost", "ophthalmic",
+            # Blood pressure
+            "lisinopril", "amlodipine", "losartan", "valsartan", "atenolol",
+            "metoprolol", "hydrochlorothiazide", "hctz", "nifedipine",
+            # Diabetes
+            "metformin", "glipizide", "glyburide", "sitagliptin", "pioglitazone",
+            "empagliflozin", "liraglutide", "semaglutide",
+            # Vitamins / supplements (non-cancer)
+            "fish oil", "omega-3", "multivitamin", "coq10",
+            # Allergy
+            "allegra", "zyrtec", "cetirizine", "fexofenadine", "loratadine",
+            "claritin", "montelukast", "singulair",
+            # Psychiatric (standalone, not cancer-related)
+            "buspirone", "citalopram", "escitalopram", "sertraline",
+            "fluoxetine", "paroxetine", "venlafaxine", "duloxetine",
+            # Thyroid
+            "levothyroxine", "synthroid",
+            # Cholesterol
+            "atorvastatin", "rosuvastatin", "simvastatin", "pravastatin",
+            # GI (non-supportive)
+            "sucralfate",
+            # Other
+            "albuterol", "fluticasone", "montelukast",
+        ]
+        # Oncology whitelist — never remove these even if they appear in blacklist
+        ONCO_WHITELIST = [
+            "tamoxifen", "letrozole", "anastrozole", "exemestane", "fulvestrant",
+            "trastuzumab", "pertuzumab", "herceptin", "perjeta", "doxorubicin",
+            "cyclophosphamide", "paclitaxel", "docetaxel", "carboplatin",
+            "capecitabine", "xeloda", "gemcitabine", "eribulin", "vinorelbine",
+            "palbociclib", "ribociclib", "abemaciclib", "everolimus",
+            "olaparib", "talazoparib", "sacituzumab", "tucatinib",
+            "zoledronic", "zometa", "denosumab", "xgeva", "reclast",
+            "ondansetron", "zofran", "granisetron", "prochlorperazine",
+            "dexamethasone", "filgrastim", "pegfilgrastim", "neulasta",
+            "epoetin", "darbepoetin",
+        ]
+        drug_dict_meds = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_meds, dict):
+            meds_val = drug_dict_meds.get("current_meds", "")
+            if meds_val and isinstance(meds_val, str):
+                meds_list = [m.strip() for m in meds_val.split(",")]
+                filtered = []
+                for med in meds_list:
+                    if not med:
+                        continue
+                    med_lower = med.lower()
+                    # Clean dosing frequency prefixes (e.g. "Every 6 Hours; latanoprost")
+                    med_cleaned = re.sub(r'^(?:every\s+\d+\s+hours?;?\s*|daily;?\s*|twice\s+daily;?\s*|bid;?\s*|tid;?\s*)', '', med_lower, flags=re.IGNORECASE).strip()
+                    # Check whitelist first
+                    is_onco = any(ow in med_cleaned for ow in ONCO_WHITELIST)
+                    if is_onco:
+                        filtered.append(med)
+                        continue
+                    # Check blacklist
+                    is_noncancer = any(nc in med_cleaned for nc in NON_CANCER_MEDS)
+                    if is_noncancer:
+                        print(f"    [POST-MEDS-FILTER] Removed non-cancer med: '{med}'")
+                        continue
+                    filtered.append(med)
+                if len(filtered) < len(meds_list):
+                    drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
+
+        # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16]
+        ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
+                        "femara", "aromasin", "fulvestrant", "faslodex",
+                        "goserelin", "zoladex", "leuprolide", "lupron"]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str) and not re.search(r'(?i)\b(?:ER|HR|PR)[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)|estrogen|progesterone|hormone\s+receptor|triple', type_val):
+                # Type_of_Cancer has no receptor status at all — try to infer from meds
+                meds_val = ""
+                med_dict = keypoints.get("Current_Medications", {})
+                if isinstance(med_dict, dict):
+                    meds_val = (med_dict.get("current_meds", "") or "").lower()
+                # Also check note text
+                note_lower_er = note_text.lower()
+                er_inferred = False
+                # Check meds
+                for drug in ER_POS_DRUGS:
+                    if drug in meds_val or drug in note_lower_er:
+                        type_val = type_val.rstrip() + ", ER+ (inferred from " + drug + ")"
+                        cancer["Type_of_Cancer"] = type_val
+                        er_inferred = True
+                        print(f"    [POST-ER-CHECK] Inferred ER+ from drug: {drug}")
+                        break
+                # Check note for explicit ER mention if not found from drugs
+                if not er_inferred:
+                    er_match = re.search(r'(?i)\b(ER|estrogen\s+receptor)\s*[\s:]*\s*(positive|\+|negative|-)', note_lower_er)
+                    if er_match:
+                        status = "+" if er_match.group(2) in ("positive", "+") else "-"
+                        type_val = type_val.rstrip() + f", ER{status}"
+                        cancer["Type_of_Cancer"] = type_val
+                        er_inferred = True
+                        print(f"    [POST-ER-CHECK] Found ER status in note: ER{status}")
 
         # POST-HER2-CHECK: If Type_of_Cancer has ER/PR but no HER2, search note and append [v15]
         HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1", "t-dxd",
