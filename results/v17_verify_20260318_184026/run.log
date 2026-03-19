@@ -9861,3 +9861,20 @@ Processing row 83 (50/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 43.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to rule out LMD in the spine, Recommend referral to radiation oncology to consider either focal CNS radiation or 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 15.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. The patient is interested in a UCSF Rad Onc opinion as well."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
