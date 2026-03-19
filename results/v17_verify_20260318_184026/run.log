@@ -2898,3 +2898,77 @@ Processing row 19 (15/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 18.2s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab. Needs dental evaluation first."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl" -> "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.4s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Rad Onc referral" -> "Referral to radiation oncology for consult"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 9.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "MRI of total spine, CAP CT, obtain outside PET/CT for comparison, Repeat imaging after 3 months on treatment"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "MRI of total spine, CAP CT, obtain outside PET/CT for comparison, Repeat imaging" -> "MRI of total spine, CAP CT, obtain outside PET/CT for comparison"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 10.4s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "Repeat imaging after 3 months on treatment -labs including tumor markers. She will need monthly blood work on Palbociclib."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "Repeat imaging after 3 months on treatment -labs including tumor markers. She wi" -> "Labs including tumor markers. She will need monthly blood work on Palbociclib."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 10.8s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Obtain outside path and send for foundation one, if this is not possible, would send for [REDACTED] 360"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 5.4s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: ~ 1 month"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: ~ 1 month" -> "in-person: ~ 1 month for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 85.1s
