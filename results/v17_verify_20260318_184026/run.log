@@ -3622,3 +3622,49 @@ Processing row 29 (19/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 97.7s
+      [EXTRACT] raw={
+"findings": "Right breast with a 6 x 11 cm mass in the outer quadrants; no palpable mass in the left breast. Right axillary lymphadenopathy noted. Right breast mass with SUV 7.8 on PET/CT, measuring
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.7s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 3.7s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 173.8s
+  Cross-context injected (1555 chars)
+    Treatment_Goals: 4.9s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 9.0s
+  Total extraction: 182.7s
