@@ -7449,3 +7449,50 @@ Processing row 62 (38/61)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 22.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable with no evidence of disease recurrence on imaging and exam. The patient has completed radiation therapy to the left breast and regional nodes o
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable with no evidence of disease recurrence on imaging" -> "The cancer is currently stable with no evidence of disease recurrence on imaging"
+      [G4-FAITH] response_assessment: "The cancer is currently stable with no evidence of disease r" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 26.8s
+  Total extraction: 142.2s
+    Medication_Plan: 20.7s
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline DEX
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 24.7s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue letrozole. Recommended testing for estradiol and FSH once every 1-2 months until September 2020 to confirm post-menopausal status. If not post-menopausal, administer ov
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She received XRT to the left breast and regional nodes on 11/26/19."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "She received XRT to the left breast and regional nodes on 11/26/19." -> "None"
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
