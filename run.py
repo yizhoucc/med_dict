@@ -743,17 +743,28 @@ def main():
         note_lower = note_text.lower()
 
         # POST-VISIT-TYPE: validate in-person field against note text [v17]
+        # NOTE: many billing templates include "face-to-face" even for telehealth visits,
+        # so video_visit evidence takes priority over face_to_face billing language.
         rfv = keypoints.get("Reason_for_Visit", {})
         if isinstance(rfv, dict):
             in_person = rfv.get("in-person", "") or ""
-            face_to_face = bool(re.search(r'face.to.face|in.person visit|in person with|saw .* in clinic', note_lower))
-            video_visit = bool(re.search(r'video visit|telehealth|televisit|zoom|telephone visit|phone visit', note_lower))
-            if face_to_face and 'televisit' in in_person.lower():
+            # Strong in-person evidence (exclude billing templates like "X minutes face-to-face")
+            face_to_face = bool(re.search(
+                r'face.to.face encounter|in.person visit|in person with|saw .* in clinic'
+                r'|seen in .* clinic|presented to .* clinic',
+                note_lower))
+            video_visit = bool(re.search(
+                r'video visit|telehealth|televisit|zoom|telephone visit|phone visit'
+                r'|virtual visit|video connection',
+                note_lower))
+            # Video visit evidence takes priority (billing templates often have "face-to-face")
+            if video_visit:
+                if in_person.lower() not in ("televisit", "video visit", "telehealth"):
+                    rfv["in-person"] = "Televisit"
+                    print(f"    [POST-VISIT-TYPE] Corrected: → Televisit (video/telehealth in note)")
+            elif face_to_face and 'televisit' in in_person.lower():
                 rfv["in-person"] = "in-person"
                 print(f"    [POST-VISIT-TYPE] Corrected: Televisit → in-person (face-to-face in note)")
-            elif video_visit and in_person.lower() in ("", "in-person", "yes"):
-                rfv["in-person"] = "Televisit"
-                print(f"    [POST-VISIT-TYPE] Corrected: → Televisit (video visit in note)")
 
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
