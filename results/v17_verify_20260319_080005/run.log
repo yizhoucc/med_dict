@@ -8989,3 +8989,42 @@ Processing row 77 (46/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] lab_summary: "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hema" -> "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hema"
+    Clinical_Findings: 41.2s
+      [EXTRACT] raw={
+"findings": "Worsening of metastatic disease with interval enlargement of hepatic and nodal metastases. CT abdomen/pelvis on 08/07/19 shows a 2 cm hypodense lesion in segment 7 of the liver, which h
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 15.3s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, "
+      [POST-MEDS] amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, blood-glucose (ONETOUCH [REDACTED] [REDACTED]) monitoring kit, carvedilol (COREG) 3.125 mg tablet, cholecalciferol, vitamin D3, (VITAMIN D3) 1,000 unit CAP, ferrous sulfate (IRON ORAL), glimepiride ([REDACTED]) 2 mg tablet, JANUVIA 100 mg tablet, lanolin/mineral oil/petrolatum (ARTIFICIAL TEARS OPHTH) [REDACTED] gel, lisinopril (PRINIVIL,ZESTRIL) 40 mg tablet, magnesium oxide (MAG-OX) 400 mg tablet, metFORMIN (GLUCOPHAGE) 1,000 mg tablet, ONETOUCH ULTRA BLUE TEST STRIP test strip, simvastatin (ZOCOR) 20 mg tablet -> 
+    Treatment_Changes: 12.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ferrous sulfate (IRON ORAL), magnesium oxide (MAG-OX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ferrous sulfate (IRON ORAL), magnesium oxide (MAG-OX) -> 
+  Phase 1 extraction (6 prompts): 152.0s
+  Cross-context injected (1039 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
