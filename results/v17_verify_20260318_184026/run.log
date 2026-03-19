@@ -9198,3 +9198,10 @@ Processing row 79 (47/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 115.9s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU\/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg\/mL, Albumin, Serum \/ Pl
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
