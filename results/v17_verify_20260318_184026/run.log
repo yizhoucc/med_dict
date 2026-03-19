@@ -8827,3 +8827,67 @@ Processing row 72 (45/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 27.5s
+      [EXTRACT] raw={
+"findings": "Patient reports a new 2 cm smooth contoured oval lump at 1-2OClock in the left breast, reduced from previously 3cm. A new area of linear nodularity/thickness is noted around 7-9OClock i
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.3s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] arimidex -> 
+  Phase 1 extraction (6 prompts): 71.2s
+  Cross-context injected (665 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 24.7s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable on exam. The 2 cm smooth contoured oval lump in the left breast has reduced from previously 3cm. A new area of linear nodularity/thickness is n
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.8s
+  Total extraction: 100.0s
+    Medication_Plan: 5.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.3s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue arimidex"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue arimidex" -> "Continue arimidex, Continue [REDACTED] [REDACTED] (next August 2019), check labs"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continue arimidex, Continue [REDACTED] [REDACTED] (next August 2019), check labs" -> "Continue arimidex, check labs, Return to clinic in 4 months"
