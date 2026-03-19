@@ -10747,3 +10747,20 @@ Processing row 89 (55/61)...
       [G4-FAITH] second opinion: "no" -> ""
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 11.9s [faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Adenocarcinoma of right breast (HCC) - ER/PR/HER2 status not mentioned in the note",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant Metastasis": "Not sure",
+"Metastasis": "N
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "Not sure" -> ""
+      [G4-FAITH] Metastasis: "Not sure" -> ""
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "Not sure"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "Not sure"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
