@@ -1984,3 +1984,174 @@ Processing row 10 (10/61)...
       [G1-FORMAT] ok, keys=['Next clinic visit']
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 73.3s
+    Referral: 6.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] follow up: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'follow up', 'Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] follow up: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 6.9s
+    [POST-THERAPY] removed non-therapy: ['Order PETCT to evaluate Femur and to toes.', 'Continue Mycelex [REDACTED] for thrush and salt an']
+    [POST-ER-CHECK] Inferred ER+ from drug: letrozole
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'infiltrating ductal Carcinoma, ER+ (inferred from letrozole)'
+      after:  'infiltrating ductal Carcinoma, ER+ (inferred from letrozole), HER2: not tested'
+  [ATTRIBUTION] 16/18 fields sourced (30.5s)
+  Row 10 total: 275.4s
+  Row 10 saved to progress
+
+Processing row 11 (11/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1955 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 28.4s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Metastatic ER+/PR+/HER2+ breast cancer to liver, lung, nodes, brain, and bone. The purpose of this visit is
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 40.5s [improved, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to brain, lung, nodes, bone",
+"Metastas
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2+ invasive ductal carcinoma" -> "ER+/PR+/HER2+ breast cancer"
+      [G3-IMPROVE] Metastasis: "Yes (to brain, lung, nodes, bone)" -> "Yes (to brain, lung, bone)"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 110.3s
+      [EXTRACT] raw={
+"findings": "MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no media
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 13.7s
+      [EXTRACT] raw={
+"current_meds": "herceptin, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 16.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet" -> "guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG-OX) 400 mg tablet -> guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid
+  Phase 1 extraction (6 prompts): 216.3s
+  Cross-context injected (1145 chars)
+    Treatment_Goals: 5.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 61.7s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 09/05/18 was stable. Recent body CT shows stable disease (SD) and possible [REDACTED] status. CT shows only multiple bone sites, ? Active, no sx's and no evidence o
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 67.2s
+  Total extraction: 283.5s
+    Medication_Plan: 21.7s
+      [EXTRACT] raw={
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now due to intolerance to
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 23.7s
+      [EXTRACT] raw={
+    "therapy_plan": "continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now, await GK / Rad Onc inpu
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.2s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "await GK / Rad Onc input, and potential plan for repeat GK; message conveyed to GK team via"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "await GK / Rad Onc input, and potential plan for repeat GK; message conveyed to " -> "await GK / Rad Onc input, and potential plan for repeat GK"
+    Procedure_Plan: 8.6s
+      [EXTRACT] raw={
+    "procedure_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 14.1s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain every 4 months, Echo q6 months, repeat again in April 2019 after next visit."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain eve" -> "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain eve"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 2.4s [faith-trimmed]
