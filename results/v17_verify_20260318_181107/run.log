@@ -32,3 +32,49 @@ Processing row 0 (1/61)...
       [G4-FAITH] second opinion: "no" -> ""
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 22.0s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to lungs, peritoneum, liver, and 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 6.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Human Chorionic Gonadotropin for P[REDACTED] <2 IU/L (from 12/11/2001)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Human Chorionic Gonadotropin for P[REDACTED] <2 IU/L (from 12/11/2001)" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 43.6s
+      [EXTRACT] raw={
+"findings": "Widespread metastases consistent with metastatic breast carcinoma. Right axillary adenopathy with a 1.8 cm spiculated mass along the superolateral margin of the right breast implant, su
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.5s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 3.3s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 101.9s
+  Cross-context injected (1170 chars)
