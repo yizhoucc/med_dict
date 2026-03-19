@@ -7871,3 +7871,19 @@ Processing row 64 (40/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 8.6s
   Total extraction: 138.0s
+    Medication_Plan: 35.4s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with AC/T regimen, typically starting with Taxol followed by four cycles of TC. The patient is also being screened for the ISPY clinical trial, which
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 35.5s
+      [EXTRACT] raw={
+    "therapy_plan": "Plan to start neoadjuvant chemotherapy with AC/T. Taxol first, followed by four cycles of TC. Option to enroll in ISPY clinical trial with various regimens including Taxol, pemb
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
