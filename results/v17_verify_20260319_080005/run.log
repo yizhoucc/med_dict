@@ -262,3 +262,41 @@ Processing row 1 (2/61)...
       [G3-IMPROVE] current_meds: "Irinotecan" -> ""
       [G4-FAITH] current_meds: "" -> "albuterol 90 mcg/actuation metered dose inhaler, AMBIEN CR 1"
       [POST-MEDS] albuterol 90 mcg/actuation metered dose inhaler, AMBIEN CR 12.5 mg ER tablet, cyclobenzaprine (FLEXERIL) 5 mg tablet, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, docusate sodium (COLACE) 250 mg capsule, gabapentin (NEURONTIN) 100 mg capsule, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, loperamide (IMODIUM) 2 mg capsule, LORazepam (ATIVAN) 1 mg tablet, lurasidone (LATUDA) 20 mg TAB tablet, magnesium oxide (MAG-OX) 400 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, omeprazole (PRILOSEC) 40 mg capsule, ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet, polyethylene glycol (MIRALAX) 17 gram packet, pregabalin ([REDACTED]) 25 mg capsule, prochlorperazine (COMPAZINE) 10 mg tablet, rivaroxaban (XARELTO) 20 mg tablet, simethicone (MYLICON) 80 mg chewable tablet, [DISCONTINUED] venlafaxine (EFFEXOR-XR) 37.5 mg 24 hr capsule, naloxone 4 mg/actuation SPRAYNAERO, heparin flush 100 unit/mL injection syringe -> 
+    Treatment_Changes: 17.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Changed irinotecan to every other week and increased dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron, prochlorperazine, loperamide, morphine, oxyco
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron, prochlorperazine, loperamide, morphine, oxycodone, cyclobenzaprine, gabapentin, pregabalin, rivaroxaban -> ondansetron, prochlorperazine, loperamide, morphine, oxycodone
+  Phase 1 extraction (6 prompts): 137.4s
+  Cross-context injected (1105 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.7s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer - Due to her poor tolerance, will change her irinotecan to every other week and increase her dose to 150mg/m2 days 1 and 15 every 28 days. Scans agai
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Metastatic breast cancer - Due to her poor tolerance, will change her irinotecan" -> "Metastatic breast cancer - No specific imaging or lab results mentioned in the n"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.5s
+  Total extraction: 151.9s
+    Medication_Plan: 21.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn, Effexor-XR 75 mg qd, [REDACTED] water instead of free water, 500ml NS IV, 40 mEq PO potassiu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
