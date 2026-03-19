@@ -9768,3 +9768,176 @@ Processing row 82 (49/61)...
   Referral extraction (full note): 14.3s
     [POST-VISIT-TYPE] Corrected: Televisit → in-person (face-to-face in note)
     [POST-REFERRAL-VALIDATE] Removed 'Rad Onc consult': not found in note
+    [POST-STAGE-REGIONAL] Regional LN only + no distant mets: 'Originally Stage [X], now metastatic (Stage IV)' → 'Originally Stage [X]'
+    [POST-ER-CHECK] Inferred ER+ from drug: letrozole
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'Lobular Breast Cancer, right with metastasis to right axilla LN, ER+ (inferred from letrozole)'
+      after:  'Lobular Breast Cancer, right with metastasis to right axilla LN, ER+ (inferred from letrozole), HER2: not tested'
+  [ATTRIBUTION] 16/16 fields sourced (39.3s)
+  Row 82 total: 286.1s
+  Row 82 saved to progress
+
+Processing row 83 (50/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (4232 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 23.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 60-year-old female with metastatic breast cancer, ER+, PR-, and a CHEK2 mutation, seeking recommendatio
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 30.6s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to bone, soft tissue, liver, and possib
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 22.3s
+      [EXTRACT] raw={
+"lab_summary": "WBC 7.0, Hg 8.4, Plt 80, Cr 0.53, Tbili 1.2, ALT 23 (11/07/20); CA 15-3 43 (11/21/19)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 59.5s
+      [EXTRACT] raw={
+"findings": "MRI brain with contrast on 11/07/2020 showed diffuse irregular enhancement along the bilateral cerebral convexities and right petroclival region, with increased involvement of the right
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 10.6s
+      [EXTRACT] raw={
+"current_meds": "capecitabine, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 19.8s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Increased capecitabine to 1500mg BID since late September.",
+"supportive_meds": "zolendronic acid, cyclobenzaprine"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "zolendronic acid, cyclobenzaprine" -> "zolendronic acid, cyclobenzaprine, atorvastatin, citalopram, dalfampridine, inte"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] zolendronic acid, cyclobenzaprine, atorvastatin, citalopram, dalfampridine, interferon beta-1a, lamotrigine -> 
+  Phase 1 extraction (6 prompts): 169.2s
+  Cross-context injected (1196 chars)
+    Treatment_Goals: 5.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 65.9s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed multiple hypoattenuating lesions in the right and left hepatic lobes, increased in size and number compared to the prior imaging on 03/10/2020. MR
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 71.1s
+  Total extraction: 240.4s
+    Medication_Plan: 13.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 43.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to rule out LMD in the spine, Recommend referral to radiation oncology to consider either focal CNS radiation or 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 15.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. The patient is interested in a UCSF Rad Onc opinion as well."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 14.6s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Repeat LP for CSF cytology"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Repeat LP for CSF cytology" -> "Repeat LP for CSF cytology, Repeat MRI spine to r/o LMD in the spine, Recommend "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Repeat MRI spine to r/o LMD in the spine', 'Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]']
+    Imaging_Plan: 10.1s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "Repeat CT CAP now, Repeat MRI spine to rule out leptomeningeal disease in the spine"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Repeat CT CAP now, Repeat MRI spine to rule out leptomeningeal disease in the sp" -> "Repeat CT CAP now, Repeat MRI spine to r/o LMD in the spine"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 6.5s
+      [EXTRACT] raw={
+    "lab_plan": "Repeat LP for CSF cytology"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 113.7s
+    Referral: 14.7s [improved, faith-trimmed]
