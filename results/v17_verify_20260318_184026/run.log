@@ -9205,3 +9205,53 @@ Processing row 79 (47/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 34.9s
+      [EXTRACT] raw={
+"findings": "Tumor size: 0.8cm grade 3 IDC in dermis and subcutis; <0.1cm from inferior and anterior margin; ER 95%, PR 70%, [REDACTED] 15-20%, [REDACTED] 1+, FISH not amplified. MRI breasts: benign
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.8s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORaz"
+      [POST-MEDS] cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORazepam (ATIVAN), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 24.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet -> dexAMETHasone (DECADRON) 4 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet
+  Phase 1 extraction (6 prompts): 218.4s
+  Cross-context injected (728 chars)
+    Treatment_Goals: 4.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 8.3s
+  Total extraction: 226.6s
