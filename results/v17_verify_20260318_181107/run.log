@@ -969,3 +969,35 @@ Processing row 5 (5/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 46.1s
+    Referral: 15.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Dr. [REDACTED] at [REDACTED]. genetics referral",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC 3 months or sooner as needed."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Nutrition', 'Others']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 15.7s
+    [POST-THERAPY] removed non-therapy: ['Start per her request.', 'Estradiol monthly.', 'Gabapentin prescribed as needed per her request.']
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2-
+      before: 'ER+/PR+ invasive ductal carcinoma'
+      after:  'ER+/PR+ invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 16/18 fields sourced (34.4s)
+  Row 5 total: 238.0s
+  Row 5 saved to progress
+
+Processing row 6 (6/61)...
+  Injected 1 term definitions: ['lumpectomy']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
