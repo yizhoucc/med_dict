@@ -8389,3 +8389,48 @@ Processing row 69 (43/61)...
       [G4-FAITH] Stage_of_Cancer: "Not explicitly stated in the note" -> ""
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 57.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
+      [G4-FAITH] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa"
+    Clinical_Findings: 26.9s
+      [EXTRACT] raw={
+"findings": "Patient is recovering well from surgery. Two lymph nodes were positive on the left side. Imaging findings include a follow-up CT due in June for lung nodules. MRI shows faint residual n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.6s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.8s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "She will restart letrozole which she had previously tolerated.",
+"supportive_meds": "prolia"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] supportive_meds: "prolia" -> ""
+      [G4-FAITH] EMPTIED: ['supportive_meds']
+  Phase 1 extraction (6 prompts): 132.0s
+  Cross-context injected (997 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
