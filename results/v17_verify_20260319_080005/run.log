@@ -2081,3 +2081,28 @@ Processing row 11 (11/61)...
       [POST-SUPP] guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG-OX) 400 mg tablet -> guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid
   Phase 1 extraction (6 prompts): 124.0s
   Cross-context injected (1493 chars)
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 29.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no mediastinal lymphadenopathy, and stable diffuse osseous meta
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/" -> "Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, "
+      [G4-FAITH] response_assessment: "Recent MRI shows new lesions. MRI brain on 09/05/18 showed n" -> "MRI brain on 09/05/18 showed no pleural effusion, no mediast"
+  Phase 2 extraction (2 prompts): 34.0s
+  Total extraction: 158.0s
+    Medication_Plan: 13.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now due to intolerance to
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDAC" -> "continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDAC"
