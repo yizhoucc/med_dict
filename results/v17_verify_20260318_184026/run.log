@@ -5639,3 +5639,10 @@ Processing row 45 (29/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B" -> "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 58.4s
+      [EXTRACT] raw={
+"findings": "Patient is s/p bilateral mastectomies with residual 3.5 cm disease and positive margins. Pathology shows 2/2 positive nodes with extranodal extension. Imaging findings include: hypermet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
