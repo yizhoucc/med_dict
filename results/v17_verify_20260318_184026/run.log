@@ -5822,3 +5822,11 @@ Processing row 48 (30/61)...
       [G4-FAITH] EMPTIED: ['Distant_Metastasis']
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 8.7s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 13.0, plt 287 (from December 2015)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
