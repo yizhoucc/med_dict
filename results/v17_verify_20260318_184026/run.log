@@ -8064,3 +8064,30 @@ Processing row 65 (41/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 9.0s
   Total extraction: 181.4s
+    Medication_Plan: 6.2s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies are mentioned" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] medication_plan: "No specific medications, doses, or frequencies are mentioned in the note." -> "None"
+    Therapy_plan: 31.2s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Plan for neoadjuvant [REDACTED] then bilateral mastectomy with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab for early stage TNBC. Will review the risks
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "Plan for neoadjuvant [REDACTED] then bilateral mastectomy wi" -> "Plan for neoadjuvant [REDACTED] then she is considering bila"
+      [G5-TEMPORAL] therapy_plan: "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi" -> "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi"
+    radiotherapy_plan: 18.0s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "adjuvant radiation is being considered as part of the treatment plan. The patient may need radiation therapy depending on the findings post chemotherapy, and it was discuss
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "adjuvant radiation is being considered as part of the treatment plan. The patien" -> "Adjuvant radiation is being considered as part of the treatment plan. The patien"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
