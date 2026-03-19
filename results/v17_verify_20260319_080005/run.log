@@ -10989,3 +10989,101 @@ Processing row 90 (56/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started lasix 10mg once a day with KCL 10Meq once daily.",
+"supportive_meds": "denosumab, potassium chloride"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab, potassium chloride" -> "denosumab, potassium chloride, everolimus, exemestane"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, potassium chloride, everolimus, exemestane -> denosumab
+  Phase 1 extraction (6 prompts): 95.7s
+  Cross-context injected (916 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is showing progression. MRI pelvis and PET/CT scans show an increase in bone metastases and new lesions, indicating that the cancer is not responding to the curren
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is showing progression. MRI pelvis and PET/CT sca" -> "MRI pelvis and PET/CT scans show an increase in bone metasta"
+  Phase 2 extraction (2 prompts): 14.8s
+  Total extraction: 110.5s
+    Medication_Plan: 10.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical antifungal 2 times daily"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL" -> "Continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical anti"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.0s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue exemestane daily, continue [REDACTED] [REDACTED], continue lasix 10mg daily with KCL 10Meq daily, continue denosumab."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue exemestane daily, continue [REDACTED] [REDACTED], continue lasix 10mg d" -> "Continue exemestane daily, continue [REDACTED] [REDACTED] and elevation, continu"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 4.8s
+      [EXTRACT] raw={
+    "procedure_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['PET/CT next week to evaluate disease burden']
+    Imaging_Plan: 4.7s
+      [EXTRACT] raw={
+    "imaging_plan": "PET/CT next week to evaluate disease burden"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 3.3s
+      [EXTRACT] raw={
+    "lab_plan": "Labs monthly"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
