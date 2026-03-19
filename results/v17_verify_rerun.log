@@ -11921,3 +11921,237 @@ Processing row 96 (60/61)...
       [G1-FORMAT] ok, keys=['Advance care']
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 32.2s
+    Referral: 11.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc eval",
+"Others": "Social work referral",
+"follow up": "RTC 3-4 wks after [REDACTED] Dx result is known"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Genetics', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 11.3s
+    [POST-GENETICS-SEARCH] found in full note: ['molecular profiling']
+  [ATTRIBUTION] 10/17 fields sourced (14.6s)
+  Row 96 total: 152.3s
+  Row 96 saved to progress
+
+Processing row 99 (61/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1211 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has metastatic breast cancer and is on Gemzar chemotherapy. The purpose of this visit is to dis
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 14.2s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver and multiple sit
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma" -> "ER+(80%)PR+(50%) invasive ductal carcinoma"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage [X], now metastatic (Stage IV)" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage [X], now metastatic (Stage IV)"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 114.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (< 39 U/mL), Alkaline Phosphatase 172 (31 - 95 U/L), Alanine transaminase 37 (11 - 50 U/L), Aspartate transaminase 57 ([R
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (< 39 U/mL), Alkali" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
+      [G4-FAITH] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178"
+    Clinical_Findings: 25.0s
+      [EXTRACT] raw={
+"findings": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Bilirubin, total, is within normal limits. Alkaline phosphatase is elevated. Aspartate transaminase is eleva
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.7s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna" -> ""
+      [G4-FAITH] current_meds: "" -> "BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyrox"
+      [POST-MEDS] BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyroxine, LORazepam, pregabalin, pyridoxine, docusate sodium, oxyCODONE, senna, cyanocobalamin, cholecalciferol -> 
+    Treatment_Changes: 14.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Gemzar Cycle #2 Day 8 cancelled by patient due to fatigue and concern about tumor markers and scan results.",
+"supportive_meds": "docusate sodium 240 mg CAP, pregabalin 50 mg caps
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] docusate sodium 240 mg CAP, pregabalin 50 mg capsule, oxyCODONE 5 mg immediate release tablet, senna 8.6 mg tablet -> docusate sodium 240 mg CAP, oxyCODONE 5 mg immediate release tablet, senna 8.6 mg tablet
+  Phase 1 extraction (6 prompts): 194.4s
+  Cross-context injected (832 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.5s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Scan done too early to tell if Gemzar is working. No evidence of disease recurrence on imaging an
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Sca" -> "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Sca"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.0s
+  Total extraction: 208.5s
+    Medication_Plan: 4.8s
+      [EXTRACT] raw={
+    "medication_plan": "Focalin prn to help with fatigue."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 8.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue with treatment to see if interventions helped with fatigue. Plans to discuss taking a break with Dr [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.1s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: to discuss break with Dr [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: to discuss break with Dr [REDACTED]" -> "to discuss break with Dr [REDACTED]"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 28.9s
+    Referral: 9.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "Plans to discuss break with Dr [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Genetics', 'Nutrition', 'Specialty']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 9.7s
+    [POST-THERAPY] cleared (no oncology drugs found): Continue with treatment to see if interventions helped with fatigue. Plans to di
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to liver and multiple sites)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'ER+(80%)PR+(50%) invasive ductal carcinoma'
+      after:  'ER+(80%)PR+(50%) invasive ductal carcinoma, HER2: not tested'
+  [ATTRIBUTION] 16/17 fields sourced (14.3s)
+  Row 99 total: 261.4s
+  Row 99 saved to progress
+
+Total processing time: 12209.5s (203.5min)
+Done! Results copied to ./results.txt
+Full results in: results/v17_verify_20260319_080005/
