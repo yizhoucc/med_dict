@@ -8424,3 +8424,43 @@ Processing row 69 (43/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.9s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.6s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "She will restart letrozole which she had previously tolerated.",
+"supportive_meds": "prolia"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] supportive_meds: "prolia" -> ""
+      [G4-FAITH] EMPTIED: ['supportive_meds']
+  Phase 1 extraction (6 prompts): 209.0s
+  Cross-context injected (993 chars)
+    Treatment_Goals: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 33.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is on letrozole. No evidence of disease recurrence on imaging and exam. MRI shows faint residual non-mass enhancement in both breasts, with left axillary nodes having
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is on letrozole. No evidence of disease recurrence on imaging and exam. " -> "No evidence of disease recurrence on imaging and exam. MRI shows faint residual "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 38.3s
+  Total extraction: 247.3s
