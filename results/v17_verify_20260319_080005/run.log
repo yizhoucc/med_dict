@@ -9377,3 +9377,62 @@ Processing row 81 (48/61)...
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 9.3s
+      [EXTRACT] raw={
+"lab_summary": "Glucose, meter download 94 (from 11/16/2020), Glucose, meter download 94 (from 11/17/2020)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 10.3s
+      [EXTRACT] raw={
+"findings": "4.3 cm tumor with November 24 lymph nodes involved, negative margins, ER +, PR +, HER2 negative. Physical exam: Right breast without mass or skin changes, healing left lumpectomy site, 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 12.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 200 mg tablet, hydroCHLOROthiazide (HYDRODIURIL) 12.5 mg tablet, lisinopriL (PRINIVIL,ZESTRIL) 40 mg tablet, metFORMIN (GLUCOPHAGE) 500 mg tablet, blood glucose (FREESTYLE [REDACTED] STRIPS) test strip, [REDACTED] 5000 PLUS 1.1 % CREAM, [REDACTED] 5000 SENSITIVE 1.October 26 % PASTE, docusate sodium (COLACE) 100 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 7.8s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), docusate sodium (COLACE), oxyCODONE (ROXICODONE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN), docusate sodium (COLACE), oxy" -> "acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), ibuprofen (ADVIL,MOTRIN) -> 
+  Phase 1 extraction (6 prompts): 73.2s
+  Cross-context injected (551 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 79.4s
