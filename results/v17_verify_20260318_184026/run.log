@@ -1450,3 +1450,19 @@ Processing row 8 (8/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 49.2s
+      [EXTRACT] raw={
+"findings": "Patient has undergone bilateral mastectomies with right breast mastectomy revealing a 3.84 cm invasive ductal carcinoma after neoadjuvant chemotherapy with negative margins. One lymph n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 17.9s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Letrozole" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin "
+      [POST-MEDS] acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin (NEURONTIN), ginger, Zingiber officinalis, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]), LORazepam (ATIVAN), naloxone, OLANZapine (ZYPREXA), omeprazole (PRILOSEC), ondansetron (ZOFRAN), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), traMADoL (ULTRAM), UNABLE TO FIND, Med Name: [REDACTED] [REDACTED] [REDACTED]. -> 
