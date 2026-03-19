@@ -5595,3 +5595,22 @@ Processing row 43 (28/61)...
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 18.8s
     [POST-THERAPY] removed non-therapy: ['She has decided to proceed with a bilateral oophor', 'Dr.']
+  [ATTRIBUTION] 19/20 fields sourced (41.3s)
+  Row 43 total: 294.5s
+  Row 43 saved to progress
+
+Processing row 45 (29/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 25.9s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Right breast cancer, s/p right partial mastectomy with 3.5 cm residual disease with positive margins, 2/2 p
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
