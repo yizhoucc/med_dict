@@ -9999,3 +9999,19 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 55.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [REDACTED] with probable involvement of the cisternal segment of the left trigeminal nerve, concerning for me
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED" -> "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED"
+      [G4-FAITH] findings: "Patient has an enhancing soft tissue lesion involving the le" -> "Patient has an enhancing soft tissue lesion involving the le"
+    Current_Medications: 5.9s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "predniSONE, fulvestrant, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE -> 
