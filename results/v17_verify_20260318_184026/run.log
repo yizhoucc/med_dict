@@ -3481,3 +3481,37 @@ Processing row 28 (18/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 49.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Bone density scan can be completed when she returns from [REDACTE
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb" -> "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb"
+    radiotherapy_plan: 21.5s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Given her surgical pathology with only micrometastatic disease in her sentinel lymph node, they are not recommending adjuvant radiation to her regional lymph nodes. She is 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Given her surgical pathology with only micrometastatic disease in her sentinel l" -> "She is at risk for local recurrence in her right breast for which [REDACTED] is "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 8.4s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "surgery pending, tentatively scheduled for September 2019"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "surgery pending, tentatively scheduled for September 2019" -> "surgery tentatively scheduled for September 2019"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 9.7s
+      [EXTRACT] raw={
+    "imaging_plan": "Bone density scan can be completed when she returns from [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
