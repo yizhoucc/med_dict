@@ -8275,3 +8275,170 @@ Processing row 67 (42/61)...
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] therapy_plan: "The patient has been recommended a bilateral mastectomy. If she chooses to have " -> "The patient has been recommended a bilateral mastectomy. If she chooses to have "
     radiotherapy_plan: 9.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "If she chose to have a lumpectomy, she should have radiation. Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 5.8s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "bilateral mastectomy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "bilateral mastectomy" -> "bilateral mastectomy is recommended, but lumpectomy with radiation is an alterna"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['but lumpectomy with radiation is an alternative option.']
+    Imaging_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 8.2s [improved]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Her sons should be tested for the risk of [REDACTED] anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "Her sons should be tested for the risk of [REDACTED] anemia in children (if the " -> "Her sons should be tested for the risk of [REDACTED] anemia in children (if the "
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: as needed for further consultation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 52.3s
+    Referral: 9.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "Return to clinical as needed for further consultation and with her sons."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Genetics: "None" -> "refer to genetics"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "Rad Onc consult" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 9.8s
+    [POST-THERAPY] removed non-therapy: ['The patient has been recommended a bilateral maste']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2+
+      before: 'multifocal ER+/PR+ BREAST CANCER'
+      after:  'multifocal ER+/PR+ BREAST CANCER, HER2+'
+  [ATTRIBUTION] 16/19 fields sourced (23.1s)
+  Row 67 total: 158.1s
+  Row 67 saved to progress
+
+Processing row 69 (43/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1575 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 18.6s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient presents with malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on right side",
+"Stage_of_Cancer": "Originally Stage II, now bilateral bre
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Originally Stage II, now bilateral breast cancer with lymph node involvement on " -> "Not explicitly stated in the note"
+      [G4-FAITH] Stage_of_Cancer: "Not explicitly stated in the note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 57.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
+      [G4-FAITH] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa"
+    Clinical_Findings: 26.9s
+      [EXTRACT] raw={
+"findings": "Patient is recovering well from surgery. Two lymph nodes were positive on the left side. Imaging findings include a follow-up CT due in June for lung nodules. MRI shows faint residual n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.6s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 6.8s [faith-trimmed]
+      [EXTRACT] raw={
+"recent_changes": "She will restart letrozole which she had previously tolerated.",
+"supportive_meds": "prolia"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] supportive_meds: "prolia" -> ""
+      [G4-FAITH] EMPTIED: ['supportive_meds']
+  Phase 1 extraction (6 prompts): 132.0s
+  Cross-context injected (997 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 23.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is on letrozole. No evidence of disease recurrence on imaging and exam. MRI shows faint residual non-mass enhancement in both breasts, with left axillary nodes having
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
