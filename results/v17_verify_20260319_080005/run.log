@@ -11975,3 +11975,10 @@ Processing row 99 (61/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage [X], now metastatic (Stage IV)"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 114.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (< 39 U/mL), Alkaline Phosphatase 172 (31 - 95 U/L), Alanine transaminase 37 (11 - 50 U/L), Aspartate transaminase 57 ([R
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (< 39 U/mL), Alkali" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
+      [G4-FAITH] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178"
