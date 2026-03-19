@@ -1195,3 +1195,25 @@ Processing row 6 (6/61)...
     [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: ['pertuzumab', 'herceptin', 'tykerb'])
       before: 'Originally ER+/PR+/HER2-, metastatic biopsy ER-/PR-/HER2- invasive ductal carcinoma'
       after:  'Originally ER+/PR+/HER2+, metastatic biopsy ER-/PR-/HER2+ invasive ductal carcinoma'
+  [ATTRIBUTION] 15/17 fields sourced (32.8s)
+  Row 6 total: 273.2s
+  Row 6 saved to progress
+
+Processing row 7 (7/61)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'lumpectomy', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2476 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 26.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "29 y.o. premenopausal patient with a history of clinical stage III ER-/PR-/HER2+ IDC of the left breast, 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
