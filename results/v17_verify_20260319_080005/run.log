@@ -6729,3 +6729,32 @@ Processing row 53 (34/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 59.5s
+    Referral: 10.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "referred to radiation oncology",
+"Others": "will start acupuncture",
+"follow up": "The patient will return to clinic in 4 weeks."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.9s
+    [POST-OTHERS] cleaned: 'will start acupuncture...' → 'None'
+    [POST-GENETICS-SEARCH] found in full note: ['brca2']
+    [POST-GENETICS-RESULT-CHECK] Removed known mutation result: 'brca2'
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
+  [ATTRIBUTION] 17/20 fields sourced (36.3s)
+  Row 53 total: 193.8s
+  Row 53 saved to progress
+
+Processing row 56 (35/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
