@@ -1865,3 +1865,54 @@ Processing row 10 (10/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.0s
+      [EXTRACT] raw={
+"current_meds": "Faslodex, Denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 17.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started Mycelex [REDACTED] qid for thrush.",
+"supportive_meds": "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate -> docusate sodium, hydrocodone-acetaminophen, senna-docusate
+  Phase 1 extraction (6 prompts): 150.0s
+  Cross-context injected (769 chars)
+    Treatment_Goals: 4.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.2s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "PET/CT showed increased metastatic activity and size of left mandibular mass, indicating the cancer is not responding to treatment with Faslodex and Denosumab."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "PET/CT showed increased metastatic activity and size of left" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 14.7s
+  Total extraction: 164.7s
+    Medication_Plan: 22.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on Faslodex and Denosumab. Mycelex [REDACTED] qid for thrush. [REDACTED]-Mycelex [REDACTED] 5 times a day for 14 days to help with thrush."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
