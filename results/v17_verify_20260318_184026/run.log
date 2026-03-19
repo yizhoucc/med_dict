@@ -6657,3 +6657,39 @@ Processing row 53 (34/61)...
       [G4-FAITH] no changes (all supported)
   Phase 2 extraction (2 prompts): 24.2s
   Total extraction: 133.2s
+    Medication_Plan: 22.6s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after radiation, start acupuncture, zoledronic acid every 3 months, calcium 1250 mg daily, vitamin D 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after r" -> "Continue leuprolide every 4 weeks, continue letrozole, start palbociclib after r"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 28.4s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "continue leuprolide every 4 weeks, continue letrozole, referred to radiation oncology, start palbociclib after radiation, zoledronic acid every 3 months, calcium 1250 mg daily, 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "continue leuprolide every 4 weeks, continue letrozole, referred to radiation onc" -> "continue leuprolide every 4 weeks, continue letrozole, referred to radiation onc"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.5s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "proceed with post-mastectomy radiation at this time, referred to radiation oncology, start palbociclib after radiation"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "proceed with post-mastectomy radiation at this time, referred to radiation oncol" -> "proceed with post-mastectomy radiation at this time, referred to radiation oncol"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
