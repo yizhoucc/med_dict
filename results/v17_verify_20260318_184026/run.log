@@ -4974,3 +4974,34 @@ Processing row 40 (25/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 67.7s
+    Referral: 15.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "with Dr. [REDACTED] in [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "Monoallelic mutation of ATM [REDACTED]"
+      [G4-FAITH] EMPTIED: ['Specialty', 'Others', 'Nutrition']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 15.9s
+    [POST-GENETICS] cleared finding from referral: 'Monoallelic mutation of ATM [REDACTED]'
+    [POST-PROCEDURE] found in full note: 'port placement'
+  [ATTRIBUTION] 12/17 fields sourced (28.6s)
+  Row 40 total: 302.9s
+  Row 40 saved to progress
+
+Processing row 41 (26/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (676 chars)
+  A/P extraction: 0.0s
