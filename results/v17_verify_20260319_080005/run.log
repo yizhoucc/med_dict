@@ -9028,3 +9028,29 @@ Processing row 77 (46/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 38.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Worsening of metastatic disease with interval enlargement of hepatic and nodal metastases. CT abdomen/pelvis on 08/07/19 shows a 2 cm hypodense lesion in segment 7 of the liv
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Worsening of metastatic disease with interval enlargement of hepatic and nodal m" -> "Worsening of metastatic disease with interval enlargement of hepatic and nodal m"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 42.6s
+  Total extraction: 194.7s
+    Medication_Plan: 8.0s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue 800 mg Mag-Ox supplement daily." -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva" -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, norvasc"
+    Therapy_plan: 23.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] including phase 1 [REDACTED]+pembrolizumab and 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
