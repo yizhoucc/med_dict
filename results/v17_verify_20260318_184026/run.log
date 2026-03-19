@@ -302,3 +302,31 @@ Processing row 1 (2/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, flexeril TID, oxycodone 5mg prn" -> "[REDACTED] 30mg TID, flexeril TID, oxycodone 5mg prn, increase effexor-XR to 75 "
+    Therapy_plan: 40.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Due to poor tolerance, irinotecan will be changed to every other week with an increased dose to 150mg/m2 on days 1 and 15 every 28 days. Continue [REDACTED] 30mg TID and flexeri
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 15.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [REDACTED] to see if he can bring her in again."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
