@@ -9970,3 +9970,39 @@ Processing row 84 (51/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 15.1s
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3: 45.3 (H), 259 (H), 326 (H), 360 (H); Carcinoembryonic Antigen: 3.8, 14.1 (H), 21.3 (H), 25.6 (H)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 35.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [REDACTED] with probable involvement of the cisternal segment of the left trigeminal nerve, concerning for me
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED" -> "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED"
+      [G4-FAITH] findings: "Patient has an enhancing soft tissue lesion involving the le" -> "Patient has an enhancing soft tissue lesion involving the le"
+    Current_Medications: 4.0s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "predniSONE, fulvestrant, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE -> 
+    Treatment_Changes: 13.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg q8h prn, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg q8h prn, predniSONE 50 mg/d -> morphine 30 mg/d, ondansetron 8 mg q8h prn, predniSONE 50 mg/d
+  Phase 1 extraction (6 prompts): 100.0s
+  Cross-context injected (1140 chars)
