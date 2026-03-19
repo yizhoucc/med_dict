@@ -1445,3 +1445,92 @@ Processing row 8 (8/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 25.1s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient had a right breast mastectomy with a 3.84 cm invasive ductal carcinoma, negative margins, and 1 lymph node with macrometastases (0.21 cm) and extranodal extension. One lymph nod
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient had a right breast mastectomy with a 3.84 cm invasiv" -> "Patient had a right breast mastectomy with a 3.84 cm invasiv"
+    Current_Medications: 9.6s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin "
+      [POST-MEDS] acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin (NEURONTIN), ginger, Zingiber officinalis, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]) mouthwash, LORazepam (ATIVAN), naloxone, OLANZapine (ZYPREXA), omeprazole (PRILOSEC), ondansetron (ZOFRAN), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), traMADoL (ULTRAM) -> 
+    Treatment_Changes: 13.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX) -> ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), OLANZapine (ZYPREXA), polyethylene glycol (MIRALAX)
+  Phase 1 extraction (6 prompts): 75.9s
+  Cross-context injected (785 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 82.2s
+    Medication_Plan: 5.8s
+      [EXTRACT] raw={
+    "medication_plan": "Letrozole after radiation. Fosamax for bone protection."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 9.8s
+      [EXTRACT] raw={
+    "therapy_plan": "She is to have drains out on Thursday. Radiation referral. Letrozole after radiation. She favors using fosamax over injectable meds for bone protection."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.0s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation referral."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
