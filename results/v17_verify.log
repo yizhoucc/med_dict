@@ -187,3 +187,176 @@ Processing row 0 (1/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
       [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 56.6s
+    Referral: 14.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Integrative Medicine",
+"Others": "Social work referral",
+"follow up": "RTC with me after completed work up to formulate a plan."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Nutrition', 'Others']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 14.0s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to lungs, peritoneum, liver, and ovaries)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2-
+      before: 'ER+/PR+ invasive ductal carcinoma'
+      after:  'ER+/PR+ invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 17/19 fields sourced (24.9s)
+  Row 0 total: 205.1s
+  Row 0 saved to progress
+
+Processing row 1 (2/61)...
+  Injected 2 term definitions: ['mastectomy', 'TNBC']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.3s
+      [EXTRACT] raw={
+"Patient type": "follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "44 y.o. female with metastatic breast cancer, presenting for cycle 3 day 1 of irinotecan treatment."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 23.6s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver, bone, a
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 44.8s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 2.1 (L), Alk Phos 183 (H), Calcium 8.2 (L), Chloride 87 (L), Creatinine 0.42 (L), eGFR if non-African American >120, eGFR if African [REDACTED] >120, Potassium 3.1 (L), Sodiu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 80.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient presents with chest wall more tender, erythematous, " -> "Patient presents with chest wall more tender, erythematous, "
+    Current_Medications: 4.0s [improved]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan" -> ""
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 17.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Changed irinotecan to every other week and increased dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron, prochlorperazine, loperamide, morphine, oxyco
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron, prochlorperazine, loperamide, morphine, oxycodone, cyclobenzaprine, gabapentin, pregabalin, rivaroxaban -> ondansetron, prochlorperazine, loperamide, morphine, oxycodone
+  Phase 1 extraction (6 prompts): 189.8s
+  Cross-context injected (1525 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 25.4s
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer is progressing. PET/CT 05/31/19 showed significantly increased number and extent of hypermetabolic metastases including osseous, hepatic, nodal, and 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 29.3s
+  Total extraction: 219.1s
+    Medication_Plan: 21.2s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn, Effexor-XR 75 mg qd, [REDACTED] water instead of free water, 500ml NS IV, 40 mEq PO potassiu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Due to poor tolerance, irinotecan will be changed to every other week with an increased dose to 150mg/m2 on days 1 and 15 every 28 days. Continue [REDACTED] 30mg TID and flexeri
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [REDACTED] to see if he can bring her in again."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 7.3s
+      [EXTRACT] raw={
+    "imaging_plan": "Scans again in 3 months, due September 2019. MRI brain if worse."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 9.5s
+      [EXTRACT] raw={
+    "lab_plan": "Monitor with ALT, hepatitis B surface antigen and HBV DNA every 4 months without starting prophylaxis, next due October 2019"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
