@@ -9959,3 +9959,12 @@ Processing row 83 (50/61)...
   Referral extraction (full note): 14.7s
     [POST-GENETICS] cleared finding from referral: 'Biallelic mutation of CHEK2'
     [POST-LAB-WHITELIST] removed non-lab items: ['Repeat LP for CSF cytology']
+  [ATTRIBUTION] 18/20 fields sourced (48.1s)
+  Row 83 total: 417.0s
+  Row 83 saved to progress
+
+Processing row 84 (51/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (1727 chars)
+  A/P extraction: 0.0s
