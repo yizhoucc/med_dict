@@ -3201,3 +3201,25 @@ Processing row 26 (17/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] summary: "The patient has metastatic breast cancer to bone and is on hormone therapy. This" -> "The patient has metastatic breast cancer to bone and is on hormone therapy with "
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 19.0s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to bone",
+"Metastasis": "Yes (to bone)"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 5.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "CBC with platelets. Obtain UA (from 09/22/2021)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "CBC with platelets. Obtain UA (from 09/22/2021)" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
