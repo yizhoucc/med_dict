@@ -7037,3 +7037,42 @@ Processing row 58 (36/61)...
       [G3-IMPROVE] current_meds: "exemestane" -> ""
       [G4-FAITH] current_meds: "" -> "ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desv"
       [POST-MEDS] ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet, ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL), exemestane ([REDACTED]), gabapentin (NEURONTIN) 300 mg capsule, letrozole (FEMARA) 2.5 mg tablet, levothyroxine 25 mcg tablet, montelukast (SINGULAIR) 10 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL), IBUPROFEN ORAL, triamcinolone (KENALOG) 0.1 % cream -> exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 12.9s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped letrozole and advised to start exemestane",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule -> 
+  Phase 1 extraction (6 prompts): 116.2s
+  Cross-context injected (576 chars)
+    Treatment_Goals: 4.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 17.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. She has been seen in the Survivorship clinic and was advised to stop Tamoxifen and switch to letrozole. However, there 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "no evidence of disease recurrence on imaging and exam. She has been seen in the " -> "no evidence of disease recurrence on imaging and exam. She has been seen in the "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 22.1s
+  Total extraction: 138.3s
+    Medication_Plan: 19.3s
+      [EXTRACT] raw={
+    "medication_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue Pristiq 75 mg. Consider transitioning from current antidepressant to Duloxetine for joint pain, 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
