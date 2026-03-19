@@ -6037,3 +6037,62 @@ Processing row 49 (31/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.9s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "DENOSUMAB (XGEVA SUBCUT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "DENOSUMAB (XGEVA SUBCUT)" -> "DENOSUMAB (XGEVA SUBCUT), LEUPROLIDE ACETATE (LUPRON)"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] DENOSUMAB (XGEVA SUBCUT), LEUPROLIDE ACETATE (LUPRON) -> DENOSUMAB (XGEVA SUBCUT)
+  Phase 1 extraction (6 prompts): 118.7s
+  Cross-context injected (661 chars)
+    Treatment_Goals: 4.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Imaging from December 2021 shows metastatic disease under good control. The patient has a biopsy with findings of DCIS and IDC in the left breast. There is progression in the
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Imaging from December 2021 shows metastatic disease under good control. The pati" -> "Imaging from December 2021 shows metastatic disease under good control."
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.9s
+  Total extraction: 133.6s
+    Medication_Plan: 13.8s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans mentioned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "No specific future medication plans, changes to current medications, supportive " -> "Second line lupron, letrozole started October 2014 and ibrance added January 201"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Second line lupron, letrozole started October 2014 and ibrance added January 201" -> "Second line lupron, letrozole started October 2014 and ibrance added January 201"
+    Therapy_plan: 23.6s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Second line lupron, letrozole started October 2014 and ibrance added January 2015. Her disease is under great control as of imaging December 2021. Progression in the left breast
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Second line lupron, letrozole started October 2014 and ibrance added January 201" -> "Second line lupron, letrozole started October 2014 and ibrance added January 201"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Second line lupron, letrozole started October 2014 and ibrance added January 201" -> "She is considering her options including observation and mastectomy for progress"
+    radiotherapy_plan: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
