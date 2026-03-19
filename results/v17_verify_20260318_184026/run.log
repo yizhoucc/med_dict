@@ -9011,3 +9011,19 @@ Processing row 77 (46/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hematocrit 34.6 (L), MCV" -> "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hematocrit  34.6 (L), MC"
       [G4-FAITH] lab_summary: "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hema" -> "WBC Count 6.9, RBC Count 3.87 (L), Hemoglobin 10.9 (L), Hema"
+    Clinical_Findings: 86.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Worsening of metastatic disease with interval enlargement of hepatic and nodal metastases. CT abdomen/pelvis on 08/07/19 shows a 2 cm hypodense lesion in segment 7 of the liver, which h
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Worsening of metastatic disease with interval enlargement of hepatic and nodal m" -> "Worsening of metastatic disease with interval enlargement of hepatic and nodal m"
+      [G4-FAITH] findings: "Worsening of metastatic disease with interval enlargement of" -> "Worsening of metastatic disease with interval enlargement of"
+    Current_Medications: 24.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, "
+      [POST-MEDS] amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, blood-glucose (ONETOUCH [REDACTED] [REDACTED]) monitoring kit, carvedilol (COREG) 3.125 mg tablet, cholecalciferol, vitamin D3, (VITAMIN D3) 1,000 unit CAP, ferrous sulfate (IRON ORAL), glimepiride ([REDACTED]) 2 mg tablet, JANUVIA 100 mg tablet, lanolin/mineral oil/petrolatum (ARTIFICIAL TEARS OPHTH) [REDACTED] gel, lisinopril (PRINIVIL,ZESTRIL) 40 mg tablet, magnesium oxide (MAG-OX) 400 mg tablet, metFORMIN (GLUCOPHAGE) 1,000 mg tablet, ONETOUCH ULTRA BLUE TEST STRIP test strip, simvastatin (ZOCOR) 20 mg tablet -> 
