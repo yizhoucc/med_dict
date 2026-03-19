@@ -2079,3 +2079,23 @@ Processing row 11 (11/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 16.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "aspirin 81 mg EC tablet, magnesium oxide (MAG-OX) 400 mg tablet" -> "guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid, magnesium oxide (MAG-OX) 400 mg tablet -> guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid
+  Phase 1 extraction (6 prompts): 216.3s
+  Cross-context injected (1145 chars)
+    Treatment_Goals: 5.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
