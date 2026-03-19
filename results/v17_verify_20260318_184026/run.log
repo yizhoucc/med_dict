@@ -2210,3 +2210,12 @@ Processing row 11 (11/61)...
       [G4-PROTECT] Nutrition: restored safe negative "None"
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 18.8s
+  [ATTRIBUTION] 20/21 fields sourced (48.9s)
+  Row 11 total: 442.5s
+  Row 11 saved to progress
+
+Processing row 13 (12/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (5675 chars)
+  A/P extraction: 0.0s
