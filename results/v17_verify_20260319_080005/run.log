@@ -5994,3 +5994,37 @@ Processing row 49 (31/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.9s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "HR+ and HER2 negative invasive ductal carcinoma with DCIS",
+"Stage_of_Cancer": "Originally Stage IV (T2, N1, M1)",
+"Distant Metastasis": "Yes, to the lung, lymph nodes, liver, and
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 25.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6, Glucose 98, Urea Nitrogen 13.6, Creatinine 1.0, Protein 6.5[REDACTED], Albumin 4.8, Bilirubin 0.30, 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6" -> "Sodium 136, Potassium 4.1, Calcium 9.6, Chloride [REDACTED], Carbon Dioxide 23.6"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 11.8s
+      [EXTRACT] raw={
+"findings": "Imaging from December 2021 shows metastatic disease under good control. The patient has a biopsy with findings of DCIS and IDC in the left breast. There is progression in the left breas
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "ibrance, xgeva, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "ibrance, xgeva, letrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
