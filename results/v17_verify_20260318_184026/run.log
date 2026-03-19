@@ -8410,3 +8410,17 @@ Processing row 69 (43/61)...
       [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Stage_of_Cancer']
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "Not sure"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 90.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR 
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, B"
+      [G4-FAITH] lab_summary: "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa" -> "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transa"
+    Clinical_Findings: 41.6s
+      [EXTRACT] raw={
+"findings": "Patient is recovering well from surgery. Two lymph nodes were positive on the left side. Imaging findings include a follow-up CT due in June for lung nodules. MRI shows faint residual n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
