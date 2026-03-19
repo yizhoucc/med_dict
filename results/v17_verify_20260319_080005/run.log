@@ -4216,3 +4216,62 @@ Processing row 35 (22/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV" -> "WBC Count 8.8, RBC Count 3.91 (L), Hemoglobin 11.8 (L), Hematocrit 35.3 (L), MCV"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.5s [improved]
+      [EXTRACT] raw={
+"findings": "Right arm and hand swelling, no s/sx of infection. No cervical, supraclavicular, or axillary lymphadenopathy. BL lungs CTA, resonant to percussion, no wheezes, rhonchi, or crackles. Nor
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Right arm and hand swelling, no s/sx of infection. No cervical, supraclavicular," -> "Right arm and hand swelling, no signs of infection. No cervical, supraclavicular"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Abraxane, zoladex, valtrex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] Abraxane, zoladex, valtrex -> Abraxane, zoladex
+    Treatment_Changes: 10.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Switched to Abraxane after a grade 3 infusion reaction with cycle 1 of Taxol.",
+"supportive_meds": "Lorazepam, Zofran, Compazine, Omeprazole, Valtrex"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] Lorazepam, Zofran, Compazine, Omeprazole, Valtrex -> Zofran, Compazine
+  Phase 1 extraction (6 prompts): 111.7s
+  Cross-context injected (996 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 5.8s
+  Total extraction: 117.5s
+    Medication_Plan: 16.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughout chemo as ppx
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
