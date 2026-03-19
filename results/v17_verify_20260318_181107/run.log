@@ -1072,3 +1072,51 @@ Processing row 6 (6/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 20.5s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Probable mild progression in the left breast and possibly the left anterior chest wall. CT shows increased size of left breast tail nodule with SUV 2.1 (previously 1.8). Pers
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Probable mild progression in the left breast and possibly the left anterior ches" -> "Probable mild progression in the left breast and possibly the left anterior ches"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 24.9s
+  Total extraction: 123.8s
+    Medication_Plan: 15.0s
+      [EXTRACT] raw={
+    "medication_plan": "Discontinue current regimen including [REDACTED]/Herceptin/Taxotere. Recommend [REDACTED] as the next line of therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 30.1s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Discontinue current regimen including [REDACTED]/Herceptin/Taxotere. Rec [REDACTED] as next line of therapy. Recheck [REDACTED] prior to starting [REDACTED]. Do not consider hor
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Discontinue current regimen including [REDACTED]/Herceptin/Taxotere. Rec [REDACT" -> "Rec [REDACTED] as next line of therapy. Recheck [REDACTED] prior to starting [RE"
+    radiotherapy_plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
