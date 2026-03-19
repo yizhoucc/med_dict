@@ -6914,3 +6914,161 @@ Processing row 56 (35/61)...
       [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
     Genetic_Testing_Plan: 3.4s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Rec genetic counseling and testing"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the provided note"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the provided note" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 44.7s
+    Referral: 10.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Rec genetic counseling and testing",
+"Specialty": "Rec XRT, which pt is scheduled to receive",
+"Others": "None",
+"follow up": "scheduled to receive XRT in the near 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.8s
+    [POST-THERAPY] removed non-therapy: ['Rec additional path review at [REDACTED] given cri', 'Rec genetic counseling and testing.']
+    [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: ['trastuzumab', 'pertuzumab'])
+      before: 'ER-/PR-/HER2- triple negative breast cancer'
+      after:  'ER-/PR-/HER2+ triple negative breast cancer'
+    [POST-TYPE-VERIFY] Removed contradictory 'triple negative' (HER2+ present)
+      before: 'ER-/PR-/HER2+ triple negative breast cancer'
+      after:  'ER-/PR-/HER2+ breast cancer'
+    [POST-TYPE-VERIFY-TNBC] A/P says TNBC, overrode HER2+
+      before: 'ER-/PR-/HER2+ breast cancer'
+      after:  'ER-/PR-/HER2- breast cancer, triple negative'
+  [ATTRIBUTION] 15/19 fields sourced (14.2s)
+  Row 56 total: 144.1s
+  Row 56 saved to progress
+
+Processing row 58 (36/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2367 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.0s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 52-year-old female with stage 1 right-sided ER+/PR+/HER2- breast cancer diagnosed in Septe
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.1s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage I",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 13.3s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone 32.5 IU/L, Estradiol, Ultrasensitive 5 pg/mL, Free T4 13 pmol/L, Thyroid Stimulating Hormone 0.68 mIU/L"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone 32.5 IU/L, Estradio" -> "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone  32.5 IU/L, Estradi"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 12.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "No new imaging findings noted. Physical exam findings: Lumpectomy scar well healed, no dominant mass in either breast, no palpable lymphadenopathy, no hepatosplenomegaly, no rashes, no 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "No new imaging findings noted. Physical exam findings: Lumpe" -> "Physical exam findings: Lumpectomy scar well healed, no domi"
+    Current_Medications: 13.5s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "exemestane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "exemestane" -> ""
+      [G4-FAITH] current_meds: "" -> "ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desv"
+      [POST-MEDS] ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet, ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL), exemestane ([REDACTED]), gabapentin (NEURONTIN) 300 mg capsule, letrozole (FEMARA) 2.5 mg tablet, levothyroxine 25 mcg tablet, montelukast (SINGULAIR) 10 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL), IBUPROFEN ORAL, triamcinolone (KENALOG) 0.1 % cream -> exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 8.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Stopped letrozole and advised to start exemestane",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule -> 
+  Phase 1 extraction (6 prompts): 75.1s
+  Cross-context injected (576 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.7s [improved]
+      [EXTRACT] raw={
+"response_assessment": "no evidence of disease recurrence on imaging and exam. She has been seen in the Survivorship clinic and was advised to stop Tamoxifen and switch to letrozole. However, there 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "no evidence of disease recurrence on imaging and exam. She has been seen in the " -> "no evidence of disease recurrence on imaging and exam. She has been seen in the "
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.9s
+  Total extraction: 90.0s
+    Medication_Plan: 12.5s
+      [EXTRACT] raw={
+    "medication_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue Pristiq 75 mg. Consider transitioning from current antidepressant to Duloxetine for joint pain, 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.9s
+      [EXTRACT] raw={
+    "therapy_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue at least 5 years of hormonal therapy. Currently on Pristiq 75 mg, considering transition to Duloxet
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
