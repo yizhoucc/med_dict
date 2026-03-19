@@ -11595,3 +11595,164 @@ Processing row 94 (59/61)...
 }
       [G1-FORMAT] ok, keys=['current_meds']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, potassium chloride (KLOR-CON [REDACTED]) 10 mEq ER tablet -> 
+    Treatment_Changes: 10.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "discussed option of capecitabine for residual dz post NAC based on CREATE-X trial. Pt is interested in this option. Discussed possibility of starting capecitabine prior to vs. Aft
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "discussed option of capecitabine for residual dz post NAC based on CREATE-X tria" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] prilosec 40mg qd -> 
+  Phase 1 extraction (6 prompts): 121.5s
+  Cross-context injected (1592 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 24.2s
+      [EXTRACT] raw={
+"response_assessment": "MRI breast shows interval decrease in irregularly shaped mass with heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satelli
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.4s
+  Total extraction: 149.8s
+    Medication_Plan: 7.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd. Patient will start capecitabine after XRT."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 22.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is interested in breast and axilla XRT. Refer to Rad Onc. Discuss option of capecitabine for residual dise
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is intere" -> "Discuss completion ALND vs. Axilla XRT; patient is interested in breast and axil"
+    radiotherapy_plan: 7.7s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "discussed completion ALND vs. Axilla XRT; pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "discussed completion ALND vs. Axilla XRT; pt is interested in breast and axilla " -> "Pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 13.6s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "discussed completion ALND vs. Axilla XRT; pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today. Discussed option of capecitabine for residual dz post N
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "discussed completion ALND vs. Axilla XRT; pt is interested in breast and axilla " -> "Pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today. Pt"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Pt is interested in breast and axilla XRT. Pt to see Rad Onc', 'referred today. Pt wishes to proceed with XRT next', 'then capecitabine']
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after XRT evaluation"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 62.9s
+    Referral: 10.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc",
+"Others": "None",
+"follow up": "RTC after XRT evaluation"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Genetics', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.3s
+    [POST-THERAPY] removed non-therapy: ['Discuss completion ALND vs.', 'Refer to Rad Onc.', 'Continue prilosec 40mg qd for GERD.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to left axillary lymph node)'
+    [POST-DISTMET-REGIONAL] Corrected Distant Metastasis: regional only → No (was: 'Yes (to left axillary lymph node)')
+  [ATTRIBUTION] 16/17 fields sourced (23.5s)
+  Row 94 total: 246.4s
+  Row 94 saved to progress
+
+Processing row 96 (60/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
+  Running LLM Sanity Check...
+  Success on attempt 1 (Verified by LLM, 812 chars)
+  A/P extraction: 13.8s
+    Reason_for_Visit: 19.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "53-year-old female with newly diagnosed left breast grade 1 ER/PR positive HER2 negative invasive ductal 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
