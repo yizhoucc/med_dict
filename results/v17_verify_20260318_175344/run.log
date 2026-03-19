@@ -249,3 +249,49 @@ Processing row 1 (2/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 31.9s
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 14.9s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan" -> ""
+      [G4-FAITH] current_meds: "" -> "albuterol, AMBIEN CR, cyclobenzaprine (FLEXERIL), diphenoxyl"
+      [POST-MEDS] albuterol, AMBIEN CR, cyclobenzaprine (FLEXERIL), diphenoxylate-atropine (LOMOTIL), docusate sodium (COLACE), gabapentin (NEURONTIN), lidocaine-prilocaine (EMLA), loperamide (IMODIUM), LORazepam (ATIVAN), lurasidone (LATUDA), magnesium oxide (MAG-OX), morphine, omeprazole (PRILOSEC), ondansetron (ZOFRAN), oxyCODONE (ROXICODONE), polyethylene glycol (MIRALAX), pregabalin, prochlorperazine (COMPAZINE), rivaroxafen (XARELTO), simethicone (MYLICON), venlafaxine (EFFEXOR-XR), naloxone -> 
+    Treatment_Changes: 17.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Changed irinotecan to every other week and increased dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron, prochlorperazine, loperamide, morphine, oxyco
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron, prochlorperazine, loperamide, morphine, oxycodone, cyclobenzaprine, gabapentin, pregabalin, rivaroxaban -> ondansetron, prochlorperazine, loperamide, morphine, oxycodone
+  Phase 1 extraction (6 prompts): 126.9s
+  Cross-context injected (1091 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.7s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer - Due to her poor tolerance, will change her irinotecan to every other week and increase her dose to 150mg/m2 days 1 and 15 every 28 days. Scans agai
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Metastatic breast cancer - Due to her poor tolerance, will change her irinotecan" -> "Metastatic breast cancer - No specific imaging or lab results provided in the no"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.4s
+  Total extraction: 141.3s
