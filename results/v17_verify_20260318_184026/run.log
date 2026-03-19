@@ -3023,3 +3023,26 @@ Processing row 21 (16/61)...
       [G3-IMPROVE] Type_of_Cancer: "Originally ER+/PR+/HER2- invasive ductal carcinoma, metastatic recurrence ER+/PR" -> "ER+/PR+/HER2- invasive ductal carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 124.4s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 3.16, Lymphs 17.1, Lymphs, Blood 0.54, Monocytes % 13.0, Monocyte Abs Count 0.41, RBC Count 2.96, Hemoglobin 10.7, Hematocrit 32.6, MCV [REDACTED], MCH 36.1, MCHC 32.8, Pla
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 43.5s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left DCIS in 1994 and right stage II IDC in 2000. Metastatic relapse in May 2020 with right chest wall recurrence, bone metastases, and contralateral infraclavi
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.6s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab, prednisone"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
