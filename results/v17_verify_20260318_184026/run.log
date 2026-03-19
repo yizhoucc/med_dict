@@ -652,3 +652,25 @@ Processing row 4 (4/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 12.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet, gabapentin (NEURONTIN) 300 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 8 mg tablet, gabapentin (NEURONTIN) 300 mg capsule -> ondansetron (ZOFRAN) 8 mg tablet
+  Phase 1 extraction (6 prompts): 124.9s
+  Cross-context injected (1121 chars)
+    Treatment_Goals: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
