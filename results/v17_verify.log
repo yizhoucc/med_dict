@@ -886,4 +886,4 @@ Processing row 5 (5/61)...
     Medication_Plan: 11.3s
       [EXTRACT] raw={
     "medication_plan": "Start letrozole today. Continue [REDACTED] for at least 3 years and can sequence with tamoxifen. Gabapentin prescribed as needed. Estradiol monthly."
-}
+}From v4.47 onwards, when a model cache is to be returned, `generate` will return a `Cache` instance instead by default (as opposed to the legacy tuple of tuples format). If you want to keep returning the legacy format, please set `return_legacy_cache=True`.
