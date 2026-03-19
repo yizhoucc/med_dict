@@ -5604,3 +5604,142 @@ RESULTS FOR ROW 59
     "[REDACTED] with me in 6 months."
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 61
+============================================================
+
+--- Column: coral_idx ---
+200
+
+--- Column: note_text ---
+"Patient name  ***** *****     Date of service  03/26/2021          Subjective      ***** ***** is an 43 y.o. female referred by ***** *****, MD for breast cancer.      History of Present Illness  43 y.o. female with newly diagnosed left breast IDC found on routine screening mammogram.    She was getting routine check up and never felt a lump or mass. She was surprised about the finding but is remaining positive. Her surgery is scheduled for 04/12/21 for left lumpectomy with IORT with reconstruction. She is here to establish care.      ONCOLOGIC HISTORY  01/01/21 underwent routine mammogram: showing irregular mass in the inferior part of left breast  01/12/21 mammogram: showed irregular mass in deep inferior left breast  01/12/21 ultrasound: shows ***** irregular hypoechoic nodule in 0630 position.  01/24/21 ***** guided biopsy of left breast: IDC at least 11mm, ER+ (100) PR+ (100) *****- (1+)  02/21/21 Invitae genetic testing: negative  02/22/21 MRI breast: 1.5x1.2x1.6cm enhancement at 0630 position and clumped enhancement at 0900 3cm from nipple measuring 0.6x0.8x0.3cm with recommendations for second look US and if not visible, MRI guided biopsy. R breast normal  03/12/21 ***** left breast: no sonographic abnormality to correlate with 6mm focus of nodular enhancement in left breast 0900 subareolar region  03/14/21 CT chest w/o: slight nodular thickening of fissure in left upper lobe, no mediastinal adenopathy  03/14/21 CT Abd w/: ***** liver cyst      Specialty Problems        Malignant Neoplasms    1. Breast cancer, left (CMS code)     Overview      Added automatically from request for surgery *****              Past medical history: seasonal allergies  Past surgical history: tonsillectomy, wisdom teeth removal  Social history: denies t/d, consumes December 16 alcoholic drinks per week, lives in ***** ***** husband and 2 kids (5,8 - healthy)  Family history: maternal grandmother had breast cancer (dx age 65, never had chemo or \n RT, only surgical resection, died age 85 from other causes)  Gyn history: age of menarche 13, took BCP for 20 years, *****, premenopausal      Past Medical History:   Diagnosis Date   \u0007 Allergy     Seasonal (dust and *****)   \u0007 Asthma 1990    Exercise induced asthma   \u0007 Breast cancer (CMS code) 01/26/2021        ***** History    No obstetric history on file.                 Past Surgical History:   Procedure Laterality Date   \u0007 TONSILLECTOMY  1983       Social History     Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 2.0 standard drinks     Types: 2 Standard drinks or equivalent per week   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male     Birth control/protection: None       Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Maternal Grandmother ***** 65        mastectomy, died of other causes   \u0007 Cancer Paternal *****  35        d. 42. Uncertain what kind of cancer - possibly ovary or colon       Allergies/Contraindications   Allergen Reactions   \u0007 ***** *****      Other reaction(s): Rhinitis       Current Outpatient Medications   Medication Instructions   \u0007 albuterol 90 mcg/actuation metered dose inhaler 2 puffs, Inhalation, Every 4 Hours PRN   \u0007 fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray SPRAY 1 SPRAY INTO EACH NOSTRIL EVERY DAY   \u0007 loratadine (CLARITIN) 10 mg tablet 1 tablet, Oral              Objective          Wt Readings from Last 3 Encounters:   03/19/21 75.5 kg (166 lb 6.4 oz)   03/06/21 73.5 kg (162 lb)       ECOG performance status: 0 - Asymptomatic    Physical Exam    Partial physical exam due *****      Constitutional:  WD, WN, NAD  HEENT: NCAT, EOMI          Review of Prior Testing  LABS  I personally reviewed and interpreted each of the patient's relevant lab tests as outlined in my HPI/Oncologic History    No results found for this or any \n previous visit.     RADIOLOGY  I personally reviewed and interpreted the patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as outlined in my HPI/Oncologic History    01/01/21 underwent routine mammogram: showing irregular mass in the inferior part of left breast  01/12/21 mammogram: showed irregular mass in deep inferior left breast  01/12/21 ultrasound: shows ***** irregular hypoechoic nodule in 0630 position.  02/22/21 MRI breast: 1.5x1.2x1.6cm enhancement at 0630 position and clumped enhancement at 0900 3cm from nipple measuring 0.6x0.8x0.3cm with recommendations for second look US and if not visible, MRI guided biopsy. R breast normal  03/12/21 ***** left breast: no sonographic abnormality to correlate with 6mm focus of nodular enhancement in left breast 0900 subareolar region  03/14/21 CT chest w/o: slight nodular thickening of fissure in left upper lobe, no mediastinal adenopathy  03/14/21 CT Abd w/: ***** liver cyst          PATHOLOGY and GENOMICS/BIOMARKERS    01/24/21 ***** guided biopsy of left breast: IDC at least 11mm, ER+ (100) PR+ (100) *****- (1+), grade 2             Assessment and Plan     # Breast CA L    ***** ***** is a 43 y.o. pre-menopausal female newly diagnosed left breast IDC ER+PR+*****- found on routine screening. MRI shows possible second site on left breast at 0900 position that is concerning and underwent repeat biopsy 03/20/21 was negative for malignancy.    Plan  - pt to undergo lumpectomy with Dr. ***** with IORT and reconstruction 04/12/21  - will likely need ***** Dx after surgery to determine if she needs adjuvant chemotherapy  - she will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppression + *****)    We discussed her diagnosis of early stage breast cancer. She will get intra-operative RT so will not need post op RT. She has an appointment with Dr. ***** on 04/06/21. We discussed that we need more information that will be \n provided after surgery in order to discuss treatment recommendations. She will need adjuvant endocrine therapy irregardless due to her ER+PR+ status.    All of the above was discussed with ***** *****. She was given ample time to ask questions and all questions were answered to her satisfaction.     RTC after surgery and pathology are complete    Discussed with attending *****. *****  ***** ***** MD  Hematology/Oncology Fellow           Below for billing only          I reviewed external records from 1 providers outside my specialty or healthcare organization as summarized in the note. I personally reviewed and interpreted a test as summarized in the note. I discussed management of the patient and/or test interpretation with another provider as summarized in the note.      I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.          \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Plan     # Breast CA L    ***** ***** is a 43 y.o. pre-menopausal female newly diagnosed left breast IDC ER+PR+*****- found on routine screening. MRI shows possible second site on left breast at 0900 position that is concerning and underwent repeat biopsy 03/20/21 was negative for malignancy.    Plan  - pt to undergo lumpectomy with Dr. ***** with IORT and reconstruction 04/12/21  - will likely need ***** Dx after surgery to determine if she needs adjuvant chemotherapy  - she will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppression + *****)    We discussed her diagnosis of early stage breast cancer. She will get intra-operative RT so will not need post op RT. She has an appointment with Dr. ***** on 04/06/21. We discussed that we need more information that will be \n provided after surgery in order to discuss treatment recommendations. She will need adjuvant endocrine therapy irregardless due to her ER+PR+ status.    All of the above was discussed with ***** *****. She was given ample time to ask questions and all questions were answered to her satisfaction.     RTC after surgery and pathology are complete    Discussed with attending *****. *****  ***** ***** MD  Hematology/Oncology Fellow           Below for billing only          I reviewed external records from 1 providers outside my specialty or healthcare organization as summarized in the note. I personally reviewed and interpreted a test as summarized in the note. I discussed management of the patient and/or test interpretation with another provider as summarized in the note.      I spent a total of 60 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, I obtained informed verbal consent to perform this evaluation using telehealth tools and answered all the questions about the telehealth interaction.          \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "43 y.o. female with newly diagnosed left breast IDC ER+PR+HER2- found on routine screening mammogram. Visit purpose is to establish care and discuss treatment plan including upcoming lumpectomy with IORT and reconstruction."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- (1+) invasive ductal carcinoma",
+    "Stage_of_Cancer": "Not mentioned in note",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results: IDC at least 11mm, ER+ (100), PR+ (100), HER2- (1+), grade 2. Imaging findings: MRI shows 1.5x1.2x1.6cm enhancement at 0630 position and clumped enhancement at 0900 3cm from nipple measuring 0.6x0.8x0.3cm. Repeat biopsy at 0900 position on 03/20/21 was negative for malignancy. CT chest shows slight nodular thickening of fissure in left upper lobe with no mediastinal adenopathy. CT abdomen shows liver cyst. Physical exam: Partial physical exam due to [REDACTED], no specific masses or lymphadenopathy noted."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Patient will need adjuvant endocrine therapy with either Tamoxifen or Ovarian Suppression + [REDACTED]."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "will likely need [REDACTED] Dx after surgery to determine if she needs adjuvant chemotherapy. she will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppression + [REDACTED])."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Patient to undergo lumpectomy with IORT and will not need post-operative radiotherapy."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: after surgery and pathology are complete"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "Invitae genetic testing: negative",
+    "Specialty": "",
+    "Others": "None",
+    "follow up": "RTC after surgery and pathology are complete"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "newly diagnosed left breast IDC ER+PR+"
+  ],
+  "second opinion": [
+    "RTC after surgery and pathology are complete"
+  ],
+  "in-person": [
+    "I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location."
+  ],
+  "summary": [
+    "43 y.o. pre-menopausal female newly diagnosed left breast IDC ER+PR+[REDACTED]- found on routine screening."
+  ],
+  "Type_of_Cancer": [
+    "left breast IDC ER+PR+[REDACTED]- found on routine screening."
+  ],
+  "Metastasis": [
+    "newly diagnosed left breast IDC ER+PR+"
+  ],
+  "Distant Metastasis": [
+    "newly diagnosed left breast IDC ER+PR+[REDACTED]- found on routine screening."
+  ],
+  "findings": [
+    "MRI shows possible second site on left breast at 0900 position that is concerning"
+  ],
+  "goals_of_treatment": [
+    "she will need adjuvant endocrine therapy irregardless due to her ER+PR+ status."
+  ],
+  "response_assessment": [
+    "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21"
+  ],
+  "medication_plan": [
+    "she will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppression + [REDACTED])"
+  ],
+  "therapy_plan": [
+    "will likely need [REDACTED] Dx after surgery to determine if she needs adjuvant chemotherapy  - she will need adjuvant endocrine therapy (Tamoxifen vs O"
+  ],
+  "radiotherapy_plan": [
+    "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21\" \"She will not need post op RT."
+  ],
+  "procedure_plan": [
+    "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21"
+  ],
+  "Next clinic visit": [
+    "RTC after surgery and pathology are complete"
+  ],
+  "follow up": [
+    "RTC after surgery and pathology are complete"
+  ]
+}
