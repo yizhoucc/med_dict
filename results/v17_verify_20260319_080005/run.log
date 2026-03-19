@@ -10628,3 +10628,75 @@ Processing row 87 (54/61)...
       [G3-IMPROVE] medication_plan: "She is on xeloda. She will need anti her 2 therapy if she has her 2 positive dis" -> "She is on xeloda. If she has HER2 positive disease, she will need anti-HER2 ther"
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 19.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "She is on xeloda and will continue this therapy. If stable clinically after 3 months of therapy, restaging will be done. If she has progression on xeloda, she will be considered
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "She is on xeloda and will continue this therapy. If stable c" -> "She is on xeloda and I would recommend restaging after 3 mon"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.0s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache. Imaging was done that showed two brain metastases. 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She had radiation to left chest wall and draining lymph nodes and on the last da" -> "She had radiation to left chest wall and draining lymph nodes. She had resection"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "She had radiation to left chest wall and draining lymph nodes. She had resection" -> "She had resection of one brain metastasis and stereotactic XRT to both brain met"
+    Procedure_Plan: 12.4s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat recep
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "I recommending doing her 2 on the brain metastasis and hormone studies and her 2" -> "Planned procedures include hormone studies and HER2 testing on the residual dise"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 10.9s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.9s
+      [EXTRACT] raw={
+    "Next clinic visit": "prn or at progression: in-person or telehealth"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 78.9s
