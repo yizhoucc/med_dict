@@ -6296,3 +6296,142 @@ RESULTS FOR ROW 66
     "We will refer the patient back to her referring physician, .[REDACTED] [REDACTED] [REDACTED], MD"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 68
+============================================================
+
+--- Column: coral_idx ---
+207
+
+--- Column: note_text ---
+"New Visit: Breast Care Cancer       ***** ***** *****  10/19/2019        Patient Name: ***** *****  *****: 08/31/1956   Medical Record: *****  New Patient Evaluation          SUBJECTIVE  Subjective   ***** ***** is a 63 y.o. female who presents for a return visit to the breast cancer center for her  *****+ *****+  early stage breast cancer with the following medical concerns.      HISTORY OF PRESENT ILLNESS:    She presented with several months of masses in the right breast during ***** of 2019, the last mammogram had been almost 20 months prior  Her mother had died of breast cancer at age 41 and she is known to have a ***** mutation      Her MRI showed the following at the beginning     Right Breast: In the April 09 o'clock breast approximately 8.4 cm from  nipple, there is a 3.9 x 2.7 x 3.5 cm enhancing mass with washout  kinetics containing a biopsy clip consistent with known  malignancy. This mass abuts the chest wall without definite  invasion.    In the 7:00 ***** breast, anterior depth, there is a 1.5 x  2.0 x 1.9 cm enhancing mass with washout kinetics containing a  biopsy clip consistent with known malignancy.    In the 7:00 breast approximately 8.9 cm from nipple, there is a  2.2 x 1.6 x 2.0 cm enhancing mass with washout kinetics  consistent with malignancy.    There are multiple abnormal right axillary lymph nodes with  associated biopsy clip consistent with metastatic  lymphadenopathy.    There is a 0.7 x 0.5 cm abnormally enlarged right internal  mammary lymph node.    The skin and nipple are uninvolved.    Left Breast: There are no suspicious masses measuring 5 mm or  greater. There is no abnormal clumped segmental or linear  enhancement. The skin, nipple, and chest wall are unremarkable.  No suspicious, enlarged lymph nodes are identified.         Her follow up MRI does not show any lesions after chemo    Relevant medical history: she has now completed 6 cycles of TCHP    Patient Active Problem \n List    Diagnosis Date Noted   \u0007 Breast cancer (HCC) 10/19/2019       FAMILY HISTORY:   Family History   Problem Relation Name Age of Onset   \u0007 Brain cancer Mother       SOCIAL HISTORY:    Social History     Socioeconomic History   \u0007 Marital status: Unknown/Declined     Spouse name: *****   \u0007 Number of children: None   \u0007 Years of education: None   \u0007 Highest education level: None   Occupational History   \u0007 None   Social Needs   \u0007 Financial resource strain: None   \u0007 Food insecurity:     Worry: None     Inability: None   \u0007 Transportation needs:     Medical: None     Non-medical: None   Tobacco Use   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Not Currently   \u0007 Drug use: Never   \u0007 Sexual activity: None   Lifestyle   \u0007 Physical activity:     Days per week: None     Minutes per session: None   \u0007 Stress: None   Relationships   \u0007 Social connections:     Talks on phone: None     Gets together: None     Attends religious service: None     Active member of club or organization: None     Attends meetings of clubs or organizations: None     Relationship status: None   \u0007 Intimate partner violence:     ***** of current or ex partner: None     Emotionally abused: None     Physically abused: None     Forced sexual activity: None   Other Topics Concern   \u0007 None   Social History Narrative   \u0007 None     unchanged and non contributory to this visit      MEDICAL  HISTORY  Past Medical History:   Diagnosis Date   \u0007 Hypertension      Medical problems were reviewed, those pertinent today's visit were addressed individually        ROS  Review of Systems   Constitutional: Negative for malaise/fatigue and weight loss. Negative for chills and fever.   Eyes: Negative for blurred vision and double vision.   Respiratory: Negative for cough. Good effort  Cardiovascular: Negative for chest pain and palpitations.   Gastrointestinal: Negative for constipation, diarrhea,  and nausea. \n   Genitourinary: Negative for dysuria.   Musculoskeletal: Negative for myalgias or weakness.   Skin: Negative for rash.   Neurological: Negative for dizziness and headaches.   Endo/Heme/Allergies: Negative for environmental allergies. Does not bruise/bleed easily.   Psychiatric/Behavioral: Negative for depression and suicidal ideas.  '        PHYSICAL EXAM  *****    Vital Signs:  BP (P) *****/*****  | Pulse 82  | Resp 16  | Ht 160 cm (5' 3\") Comment: October 2019 ***** | Wt 78.5 kg (173 lb)  | SpO2 99%  | BMI 30.65 kg/m   Wt Readings from Last 3 Encounters:   10/19/19 78.5 kg (173 lb)   09/28/19 77.4 kg (170 lb 10.2 oz)   09/28/19 77.4 kg (170 lb 9.6 oz)     Constitutional:  Well developed, well nourished, NAD  HENT:  Normocephalic, Atraumatic,  Eyes: Conjunctiva normal,   Skin:   No rashes  Lymphatics:  No cervical, supraclavicular, axillary, inguinal *****  Cardiovascular:  Normal heart rate,  .   Respiratory:  Normal breath sounds,   GI:   No masses, No organomegaly.   Musculoskeletal:  No edema, No tenderness,   Neurologic:  Alert & oriented x 3, No focal deficits noted.   Psych:  Linear goal-directed thought    Pertinent findings: no palpable lesions seen and felt on exam today, facial rash associated with *****        RESULTS    Labs: reviewed today    Labs today:   @labs[1d@        Imaging reviewed today    @*****@      I have individually visualized and interpreted the following studies above:   Based on my review of recent scans, I have concluded the following:  no  evidence of metastatic presence of breast cancer              ASSESSMENT & PLAN  ***** ***** is a 63 y.o. postmenopausal female who presents  to clinic for consultation of her breast cancer and the following specific problems.    Breast cancer:     ***** *****  has been diagnosed with a multifocal *****+ ***** BREAST CANCER involving the right breast with a good ***** and clinical response after 6 cycles of TCHP, a most appropriate \n regimen for her stage and extent of disease.       We discussed the benefits and ***** a bilateral mastectomy with is both very recommendable from disease extent as well as a mutation status of her ***** mutation .    If she chose to have a lumpectomy  she should have radiation,   Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved.     There is no clear indication on ***** with a ***** mutation.  However her sons should be tested for the risk of ***** anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer, which is probably not elevated until about age 50.     Return to clinical as needed for further consultation and with her sons.              IMPRESSION/PLAN:    Pain and distress: we discussed the level of distress and pain that the diagnosis brings to the patient.no new intervention is necessary.     Diet and exercise: the importance of diet and exercise with regard to breast cancer outcome was re-*****   Follow up: No follow-ups on file.    Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    The patient and accompanying family members had ample opportunity to ask questions about the recommendations and follow up and is agreeable to the proposed care plan. The patient may contact our office for further questions or the need for visits sooner than those outlined.     PATIENT COUNSELED REGARDING: risk of recurrence, treatment side effects, length of therapy, imaging schedule  TIME SPENT FACE TO FACE WITH PATIENT: >45 min  Greater than 50% of the total face-to-face time was spent counseling the patient per above    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** \n PM                \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  ***** ***** is a 63 y.o. postmenopausal female who presents  to clinic for consultation of her breast cancer and the following specific problems.    Breast cancer:     ***** *****  has been diagnosed with a multifocal *****+ ***** BREAST CANCER involving the right breast with a good ***** and clinical response after 6 cycles of TCHP, a most appropriate \n regimen for her stage and extent of disease.       We discussed the benefits and ***** a bilateral mastectomy with is both very recommendable from disease extent as well as a mutation status of her ***** mutation .    If she chose to have a lumpectomy  she should have radiation,   Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved.     There is no clear indication on ***** with a ***** mutation.  However her sons should be tested for the risk of ***** anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer, which is probably not elevated until about age 50.     Return to clinical as needed for further consultation and with her sons.              IMPRESSION/PLAN:    Pain and distress: we discussed the level of distress and pain that the diagnosis brings to the patient.no new intervention is necessary.     Diet and exercise: the importance of diet and exercise with regard to breast cancer outcome was re-*****   Follow up: No follow-ups on file.    Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    The patient and accompanying family members had ample opportunity to ask questions about the recommendations and follow up and is agreeable to the proposed care plan. The patient may contact our office for further questions or the need for visits sooner than those outlined.     PATIENT COUNSELED REGARDING: risk of recurrence, treatment side effects, length of therapy, imaging schedule  TIME SPENT FACE TO FACE WITH PATIENT: >45 min  Greater than 50% of the total face-to-face time was spent counseling the patient per above    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** \n PM                \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "A 63-year-old female with multifocal ER+ breast cancer involving the right breast, presenting for a return visit to the breast cancer center for consultation and evaluation after completing 6 cycles of TCHP chemotherapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "multifocal ER+/PR+ BREAST CANCER, HER2+",
+    "Stage_of_Cancer": "Early stage",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Right Breast MRI findings: 3.9 x 2.7 x 3.5 cm enhancing mass with washout kinetics, 1.5 x 2.0 x 1.9 cm enhancing mass with washout kinetics, 2.2 x 1.6 x 2.0 cm enhancing mass with washout kinetics, multiple abnormal right axillary lymph nodes with associated biopsy clip consistent with metastatic lymphadenopathy, 0.7 x 0.5 cm abnormally enlarged right internal mammary lymph node. Left Breast MRI findings: No suspicious masses measuring 5 mm or greater, no abnormal clumped segmental or linear enhancement, no suspicious, enlarged lymph nodes. Follow-up MRI shows no lesions after chemotherapy. Physical exam: No palpable lesions seen and felt on exam today, facial rash associated with [REDACTED]."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "The cancer is responding to treatment. The follow-up MRI shows no lesions after chemotherapy, indicating a good clinical response after 6 cycles of TCHP."
+  },
+  "Medication_Plan": {
+    "medication_plan": "No specific future medication plans, changes to current medications, supportive medications, bowel regimen, or blood transfusion plans were mentioned."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "If she chooses to have a lumpectomy, she should have radiation. Post-mastectomy radiation would be considered if there is extensive disease left and lymph nodes are involved."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "If she chose to have a lumpectomy, she should have radiation. Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "bilateral mastectomy is recommended"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Her sons should be tested for the risk of [REDACTED] anemia in children (if the spouse also carries a mutation) and the risk for pancreatic cancer."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: as needed for further consultation"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "refer to genetics",
+    "Specialty": "",
+    "Others": "None",
+    "follow up": "Return to clinical as needed for further consultation and with her sons."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "Return to clinical as needed for further consultation and with her sons."
+  ],
+  "in-person": [
+    "Return to clinical as needed for further consultation and with her sons."
+  ],
+  "summary": [
+    "63 y.o. postmenopausal female who presents  to clinic for consultation of her breast cancer"
+  ],
+  "Type_of_Cancer": [
+    "multifocal [REDACTED]+ [REDACTED] BREAST CANCER involving the right breast"
+  ],
+  "Stage_of_Cancer": [
+    "after 6 cycles of TCHP, a most appropriate regimen for her stage and extent of disease."
+  ],
+  "Metastasis": [
+    "has been diagnosed with a multifocal [REDACTED]+ [REDACTED] BREAST CANCER involving the right breast"
+  ],
+  "goals_of_treatment": [
+    "appropriate regimen for her stage and extent of disease."
+  ],
+  "response_assessment": [
+    "has a good [REDACTED] and clinical response after 6 cycles of TCHP"
+  ],
+  "medication_plan": [
+    "Follow up: No follow-ups on file."
+  ],
+  "therapy_plan": [
+    "If she chose to have a lumpectomy  she should have radiation,   Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved."
+  ],
+  "radiotherapy_plan": [
+    "If she chose to have a lumpectomy, she should have radiation,   Post mastectomy radiation would be considered if extensive disease is left and lymph nodes are involved."
+  ],
+  "procedure_plan": [
+    "We discussed the benefits and [REDACTED] a bilateral mastectomy with is both very recommendable from disease extent as well as a mutation status of her [REDACTED] mutation."
+  ],
+  "genetic_testing_plan": [
+    "However her sons should be tested for the risk of [REDACTED] anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer,"
+  ],
+  "Next clinic visit": [
+    "Return to clinical as needed for further consultation and with her sons."
+  ],
+  "Genetics": [
+    "However her sons should be tested for the risk of [REDACTED] anemia in children (if the spouse also carriers a mutation and the risk for pancreatic cancer,"
+  ],
+  "follow up": [
+    "Return to clinical as needed for further consultation and with her sons."
+  ]
+}
