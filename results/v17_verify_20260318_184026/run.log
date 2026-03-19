@@ -4379,3 +4379,22 @@ Processing row 35 (22/61)...
   Referral extraction (full note): 20.1s
     [POST-LAB] cleaned: 'will get doppler to r/o DVT. Discussed possibly starting on anticoag if positive' → 'No labs planned.'
     [POST-THERAPY] removed non-therapy: ['Today is week 8.', 'Continue lexapro daily, ativan prn.', 'Rx for ambien provided today.']
+  [ATTRIBUTION] 22/23 fields sourced (52.1s)
+  Row 35 total: 359.5s
+  Row 35 saved to progress
+
+Processing row 36 (23/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (911 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 26.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "61 year old female with newly diagnosed stage IIA left triple negative invasive ductal carcinoma of the b
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
