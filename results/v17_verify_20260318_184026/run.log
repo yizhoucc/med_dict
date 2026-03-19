@@ -4159,3 +4159,45 @@ Processing row 33 (21/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 50.9s
+    Referral: 14.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "refer to [REDACTED] for consultation",
+"Others": "None",
+"follow up": "return to clinic in 6 months"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 14.9s
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2-
+      before: 'ER+/PR- invasive ductal carcinoma'
+      after:  'ER+/PR- invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 17/20 fields sourced (21.3s)
+  Row 33 total: 193.6s
+  Row 33 saved to progress
+
+Processing row 35 (22/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (3086 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 25.9s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "27 y.o. female with pT3N0 right breast [REDACTED]+[REDACTED]- grade III mixed ductal and mucinous carcinoma
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
