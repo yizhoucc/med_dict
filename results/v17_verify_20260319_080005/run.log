@@ -2292,3 +2292,102 @@ Processing row 13 (12/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 23.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metaboli
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of " -> "Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and "
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 8.7s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP and Total Spine MRI scheduled for May 2019. Repeat total spine MRI in 6 weeks."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] imaging_plan: "CT CAP and Total Spine MRI scheduled for May 2019. Repeat to" -> "CT CAP and Total Spine MRI scheduled for May  2019. Repeat t"
+      [G5-TEMPORAL] imaging_plan: "CT CAP and Total Spine MRI scheduled for May  2019. Repeat total spine MRI in 6 " -> "CT CAP and Total Spine MRI scheduled for May 2019. Repeat total spine MRI in 6 w"
+    Lab_Plan: 4.6s
+      [EXTRACT] raw={
+    "lab_plan": "Labs to be drawn every two weeks."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.7s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 2 months" -> "in-person: 2 months for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 70.7s
+    Referral: 11.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "RTC after scans"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Advised her to eat small, frequent meals that's high in calories and protein."
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Specialty']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 11.4s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Advised her to eat small, frequent meals that's high in calories and protein.'
+    [POST-THERAPY] removed non-therapy: ['Continue metabolic therapy 2x/week and immunologic', 'Plan to have labs drawn every two weeks and return', 'Patient will schedule scans for May.']
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: status unclear
+      before: 'ER+ breast cancer'
+      after:  'ER+ breast cancer, HER2: status unclear'
