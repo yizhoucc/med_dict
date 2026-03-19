@@ -6143,3 +6143,56 @@ Processing row 49 (31/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 44.9s
+    Referral: 11.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Referral to genetics for pathogenic PMS 2 mutation",
+"Specialty": "None",
+"Others": "Referral to high risk clinic",
+"follow up": "She will see me prn."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 11.1s
+    [POST-OTHERS] cleaned: 'Referral to high risk clinic...' → 'None'
+    [POST-THERAPY] cleared (no oncology drugs found): She is considering her options for progression in the left breast with a biopsy 
+    [POST-ADV] patched from full note: ['full code']
+  [ATTRIBUTION] 17/21 fields sourced (23.2s)
+  Row 49 total: 169.6s
+  Row 49 saved to progress
+
+Processing row 51 (32/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (4707 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.9s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "35 y.o. female with left breast IDC, ER+, PR+, HER2-, Ki-67 10%, s/p left partial mastectomy and SLN with
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.4s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
