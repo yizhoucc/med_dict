@@ -9815,3 +9815,31 @@ Processing row 83 (50/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 10.6s
+      [EXTRACT] raw={
+"current_meds": "capecitabine, zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 19.8s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Increased capecitabine to 1500mg BID since late September.",
+"supportive_meds": "zolendronic acid, cyclobenzaprine"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "zolendronic acid, cyclobenzaprine" -> "zolendronic acid, cyclobenzaprine, atorvastatin, citalopram, dalfampridine, inte"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] zolendronic acid, cyclobenzaprine, atorvastatin, citalopram, dalfampridine, interferon beta-1a, lamotrigine -> 
+  Phase 1 extraction (6 prompts): 169.2s
+  Cross-context injected (1196 chars)
+    Treatment_Goals: 5.2s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
