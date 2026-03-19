@@ -5032,3 +5032,142 @@ RESULTS FOR ROW 52
     "RTC 3 weeks"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 53
+============================================================
+
+--- Column: coral_idx ---
+192
+
+--- Column: note_text ---
+"Subjective:       Patient ID: ***** ***** ***** ***** 59 y.o. female with recently diagnosed breast cancer who is here for a consultation regarding further management.    HPI   ***** felt a lump in left breast this ***** and sought medical attention. This began in ***** where she resides, and subsequently came to UCSF for surgery. The management is summarized below.    October 2016 -3D mammogram = left breast 15mm mass with Ca+ at 2O'*****;  right breast negative' heterogeneously dense breasts  October 2016 - left breast US = irregular mass 2.2x1.7cm at *****  December 2016 - Left breast core biopsy = invasive ductal carcinoma, grade 2-3, ER positive (95%), PR weak (5%), ***** negative (IHC 1+)     03/01/2017 - s/p left lumpectomy & SLN Bx  ***** = invasive ductal ca with neuroendocrine differentiation, 4.5cm, grade 3, ***** extensively positive, margins negative in the additional slices. ER positive (>95%), PR positive (30%), ***** positive (IHC heterogeneous with IHC 2+/3+ in 90:10% regions; FISH 4.9X). *****=25%.  Also DCIS int/high grade spanning 4.5cm. Also ***** positive in a heterogenous 2+/3+ pattern. SLN positive (May 02) for 6mm met.    She has recovered well from surgery, and other than some minor post-operative symptoms, she is essentially asymptomatic and has an excellent performance status.    PMH - benign    Meds - none    Allergies - NKDA    Social History  ***** lives in *****. She is divorced with one child. She works in elementary school and also a waitress. She has never smoked and only rarely uses EtOH.    Family History  Maternal aunt with breast ca @60s  Mother with uterine ca @35  Father with esophageal ca @67  Paternal cousin with breast ca @40s    Patient's allergies, medications, past medical, surgical, family and social histories were reviewed and updated as appropriate.    Review of Systems   Constitutional: Negative.         Performance status: ECOG 0   Respiratory: Negative.    Cardiovascular: Negative.  \n   Gastrointestinal: Negative.    Musculoskeletal: Negative.    Skin: Negative.    Psychiatric/Behavioral: Negative.          Objective:   Blood pressure *****/*****, pulse 69, temperature 36.1 C (97 F), temperature source Oral, resp. rate 16, height 161.5 cm (5' 3.58\"), weight 56.4 kg (124 lb 4.8 oz), SpO2 99 %.     Physical Exam   Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Mouth/Throat: Oropharynx is clear and moist.   Eyes: EOM are normal. No scleral icterus.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate, regular rhythm and normal heart sounds.  Exam reveals no gallop and no friction rub.    No murmur heard.  Pulmonary/Chest: Effort normal and breath sounds normal. No respiratory distress. She has no wheezes. She has no rales. She exhibits no tenderness. Right breast exhibits no inverted nipple, no mass and no tenderness. Left breast exhibits no inverted nipple, no mass and no tenderness.   Left breast incision healing well with large area of hardening c/w seroma. Right breast cystic in *****   Abdominal: Soft. Bowel sounds are normal. She exhibits no distension and no mass. There is no tenderness. There is no rebound and no guarding.   Musculoskeletal: She exhibits no edema.   Lymphadenopathy:     She has no cervical adenopathy.     She has no axillary adenopathy.        Right: No supraclavicular adenopathy present.        Left: No supraclavicular adenopathy present.   Neurological: She is alert and oriented to person, place, and time. She exhibits normal muscle tone. Coordination normal.   Skin: No rash noted. No erythema.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Thought content normal.           Assessment:       Stage II/III left breast cancer, ER/PR positive, ***** positive, s/p left lumpectomy/*****      Plan:       Status of disease and \n management recommendations were discussed at length with ***** and her two sisters who were present. ***** has undergone the surgical resection of her left breast tumor with SLN assessment as well. It is likely that she has additional LNs with metastatic disease. This is estimated to be about 64% by the MSKCC normogram and 44% by the ***** normogram. The role of axillary dissection and its pros/cons have been discussed with her by Dr. *****. ***** remains with a considerable risk of systemic relapse and mortality from this cancer. Although the most accurate risk assessment is not possible without quantitative LN data from an axillary dissection, her risk is clearly high. I estimate her risk to be on the order of 60% or higher. This can be reduced with the use of adjuvant chemotherapy, *****-targeting therapy. hormonal therapy, radiotherapy, and bisphosphonate therapy. These modalities were discussed.    ***** will benefit from adjuvant systemic chemotherapy. Recommendation was made for adjuvant AC/THP chemotherapy. This consists of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Side effects were discussed including potential for nausea/vomiting, alopecia, bone marrow suppression and infections, cardiomyopathy, neuropathy, and a small risk of secondary leukemias. As an alternative, we also discussed the TCHP regimen. This consists of 6 cycles of TCHP with one year of trastuzumab/pertuzumab. Side effects are similar with sparing of the cardiomyopathy and leukemogenic risks.     We also discussed the use of extended adjuvant neratinib in year 2 including the potential for diarrhea and the need for prophylactic anti-*****.     ***** will also benefit from adjuvant hormone therapy. A recommendation was made for Arimidex 1 mg PO daily for a duration of 10 years. This would begin at the completion of chemotherapy. Side effects were discussed \n including the potential for ***** and myalgias, as well as acceleration of bone loss and associated complications including bone fractures. In the case of intolerable arthralgias or myalgias, treatment can be changed to other aromatase inhibitors or possibly to tamoxifen. Bone loss can be monitored by densitometry scanning and can be reduced or reversed with a number of bone strengthening agents available for this purpose. We also discussed the use of ***** infusions to maintain bone density as well as reduce the recurrence risk associated with breast cancer.    ***** requires adjuvant breast radiotherapy to complete her breast conservation management. Referral will be made to ***** at the completion of chemotherapy for a consultation and further management.    We discussed her family history and the low likelihood of an inherited susceptibility. I offered a referral to genetic counseling for further evaluation.     ***** has significant concerns about the toxicities associated with these therapies. She will be thinking about these options over the next few weeks. She also plans to return to *****, and if she is to undergo adjuvant chemotherapy, she would want to get it on the island of ***** where she lives. She also has concerns about co-pays that may be associated with treatment and her ability to work, disability options, and other practical considerations. She will be thinking about and investigating these issues over the next couple of weeks and will get back to us. We will send records to ***** when she has identified a local oncologist.         \n"
+
+--- Column: assessment_and_plan ---
+"Assessment:       Stage II/III left breast cancer, ER/PR positive, ***** positive, s/p left lumpectomy/*****      Plan:       Status of disease and \n management recommendations were discussed at length with ***** and her two sisters who were present. ***** has undergone the surgical resection of her left breast tumor with SLN assessment as well. It is likely that she has additional LNs with metastatic disease. This is estimated to be about 64% by the MSKCC normogram and 44% by the ***** normogram. The role of axillary dissection and its pros/cons have been discussed with her by Dr. *****. ***** remains with a considerable risk of systemic relapse and mortality from this cancer. Although the most accurate risk assessment is not possible without quantitative LN data from an axillary dissection, her risk is clearly high. I estimate her risk to be on the order of 60% or higher. This can be reduced with the use of adjuvant chemotherapy, *****-targeting therapy. hormonal therapy, radiotherapy, and bisphosphonate therapy. These modalities were discussed.    ***** will benefit from adjuvant systemic chemotherapy. Recommendation was made for adjuvant AC/THP chemotherapy. This consists of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Side effects were discussed including potential for nausea/vomiting, alopecia, bone marrow suppression and infections, cardiomyopathy, neuropathy, and a small risk of secondary leukemias. As an alternative, we also discussed the TCHP regimen. This consists of 6 cycles of TCHP with one year of trastuzumab/pertuzumab. Side effects are similar with sparing of the cardiomyopathy and leukemogenic risks.     We also discussed the use of extended adjuvant neratinib in year 2 including the potential for diarrhea and the need for prophylactic anti-*****.     ***** will also benefit from adjuvant hormone therapy. A recommendation was made for Arimidex 1 mg PO daily for a duration of 10 years. This would begin at the completion of chemotherapy. Side effects were discussed \n including the potential for ***** and myalgias, as well as acceleration of bone loss and associated complications including bone fractures. In the case of intolerable arthralgias or myalgias, treatment can be changed to other aromatase inhibitors or possibly to tamoxifen. Bone loss can be monitored by densitometry scanning and can be reduced or reversed with a number of bone strengthening agents available for this purpose. We also discussed the use of ***** infusions to maintain bone density as well as reduce the recurrence risk associated with breast cancer.    ***** requires adjuvant breast radiotherapy to complete her breast conservation management. Referral will be made to ***** at the completion of chemotherapy for a consultation and further management.    We discussed her family history and the low likelihood of an inherited susceptibility. I offered a referral to genetic counseling for further evaluation.     ***** has significant concerns about the toxicities associated with these therapies. She will be thinking about these options over the next few weeks. She also plans to return to *****, and if she is to undergo adjuvant chemotherapy, she would want to get it on the island of ***** where she lives. She also has concerns about co-pays that may be associated with treatment and her ability to work, disability options, and other practical considerations. She will be thinking about and investigating these issues over the next couple of weeks and will get back to us. We will send records to ***** when she has identified a local oncologist.         \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient with recently diagnosed stage II/III left breast cancer, ER/PR positive, HER2 positive, post-left lumpectomy and SLN biopsy, here for consultation regarding further management."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma with neuroendocrine differentiation",
+    "Stage_of_Cancer": "Stage II/III",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast incision healing well with large area of hardening consistent with seroma. Right breast cystic in [REDACTED]. No palpable masses, inverted nipples, or tenderness in either breast. No cervical, axillary, or supraclavicular lymphadenopathy. Left breast core biopsy revealed invasive ductal carcinoma, grade 2-3, ER positive (95%), PR weak (5%), [REDACTED] negative (IHC 1+). Post-lumpectomy pathology: invasive ductal ca with neuroendocrine differentiation,  4.5cm, grade 3, [REDACTED] extensively positive, margins negative in additional slices, ER positive (>95%), PR positive (30%), [REDACTED] positive (IHC heterogeneous with IHC 2+/3+ in 90:10% regions; FISH 4.9X), [REDACTED]=25%, DCIS int/high grade spanning 4.5cm, [REDACTED] positive in a heterogenous 2+/3+ pattern, SLN positive (May 02) for 6mm metastasis."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Adjuvant AC/THP chemotherapy: AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Alternative TCHP regimen: 6 cycles of TCHP with one year of trastuzumab/pertuzumab. Adjuvant hormone therapy: Arimidex 1 mg PO daily for 10 years. Extended adjuvant neratinib in year 2 with prophylactic anti-diarrheal. Bone strengthening agents and [REDACTED] infusions to maintain bone density."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Adjuvant AC/THP chemotherapy: AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab. Alternative TCHP regimen: 6 cycles of TCHP with one year of trastuzumab/pertuzumab. Extended adjuvant neratinib in year 2 with potential for diarrhea and need for prophylactic anti-diarrheal. Adjuvant hormone therapy: Arimidex 1 mg PO daily for 10 years. Bone-protecting agents: [REDACTED] infusions to maintain bone density and reduce recurrence risk."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "[REDACTED] requires adjuvant breast radiotherapy to complete her breast conservation management. Referral will be made to [REDACTED] at the completion of chemotherapy for a consultation and further management."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "I offered a referral to genetic counseling for further evaluation."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "after thinking about the treatment options and investigating practical considerations over the next couple of weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "Referral to genetic counseling for further evaluation",
+    "Specialty": "Referral will be made to [REDACTED] at the completion of chemotherapy for a consultation and further management",
+    "Others": "None",
+    "follow up": "She will be thinking about and investigating these issues over the next couple of weeks and will get back to us."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED] and her two sisters who were present."
+  ],
+  "in-person": [
+    "Status of disease and management recommendations were discussed at length with [REDACTED] and her two sisters who were present."
+  ],
+  "summary": [
+    "Stage II/III left breast cancer, ER/PR positive, [REDACTED] positive, s/p left lumpectomy/[REDACTED]"
+  ],
+  "Type_of_Cancer": [
+    "Stage II/III left breast cancer, ER/PR positive, [REDACTED] positive"
+  ],
+  "Stage_of_Cancer": [
+    "Stage II/III left breast cancer"
+  ],
+  "Metastasis": [
+    "Although the most accurate risk assessment is not possible without quantitative LN data from an axillary dissection, her risk is clearly high."
+  ],
+  "goals_of_treatment": [
+    "Status of disease and management recommendations were discussed at length"
+  ],
+  "response_assessment": [
+    "Not yet"
+  ],
+  "medication_plan": [
+    "adjuvant AC/THP chemotherapy. This consists of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab."
+  ],
+  "therapy_plan": [
+    "adjuvant AC/THP chemotherapy. This consists of AC x 4 given q2weeks with growth factor support, followed by 12 weeks of taxol along with one year of trastuzumab and pertuzumab."
+  ],
+  "radiotherapy_plan": [
+    "[REDACTED] requires adjuvant breast radiotherapy to complete her breast conservation management."
+  ],
+  "genetic_testing_plan": [
+    "I offered a referral to genetic counseling for further evaluation."
+  ],
+  "Next clinic visit": [
+    "She will be thinking about these options over the next couple of weeks and will get back to us."
+  ],
+  "Genetics": [
+    "I offered a referral to genetic counseling for further evaluation."
+  ],
+  "Specialty": [
+    "Referral will be made to [REDACTED] at the completion of chemotherapy for a consultation and further management."
+  ],
+  "follow up": [
+    "She will be thinking about and investigating these issues over the next couple of weeks and will get back to us."
+  ]
+}
