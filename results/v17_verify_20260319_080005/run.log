@@ -6196,3 +6196,71 @@ Processing row 51 (32/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "POCT Preg Test, Ur Negative (12/04/20)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "POCT Preg Test, Ur Negative (12/04/20)" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 19.6s [improved]
+      [EXTRACT] raw={
+"findings": "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0.18 cm largest deposit, with minimal extranodal extension. Margins are negative. No [REDACTED]. Physical 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0" -> "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.0s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, i"
+      [POST-MEDS] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN, ondansetron (ZOFRAN) 8 mg, Oral, Every 8 Hours PRN -> 
+    Treatment_Changes: 16.0s [faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN; ondansetron (ZOFRAN) 8 mg, Oral, Every 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] supportive_meds: "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; i" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; i"
+      [POST-SUPP] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN; ondansetron (ZOFRAN)  8 mg, Oral, Every 8 Hours PRN -> ondansetron (ZOFRAN)  8 mg
+  Phase 1 extraction (6 prompts): 71.6s
+  Cross-context injected (723 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.7s
+  Total extraction: 77.3s
+    Medication_Plan: 9.8s
+      [EXTRACT] raw={
+    "medication_plan": "[REDACTED] + [REDACTED]. [REDACTED] send Zoladex prior auth. Start after egg harvesting complete"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
