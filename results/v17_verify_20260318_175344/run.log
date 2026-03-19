@@ -675,3 +675,29 @@ Processing row 4 (4/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 50.6s
+      [EXTRACT] raw={
+"response_assessment": "CT neck and CAP: decreased size of left cervical chain LNs (largest - 1.8 cm -> 1.2 cm) as well as additional bilateral subcentimeter lymph nodes that did not meet criteria f
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 55.2s
+  Total extraction: 159.5s
+    Medication_Plan: 14.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019)."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue leuprolide (OS started January 2019), anastrozole (started March 2019)," -> "Continue leuprolide, anastrozole, and palbociclib."
+    Therapy_plan: 28.3s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue current therapy with leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019). Radiation referral for symptomatic di
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide (OS started January 2019), anastrozole "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continue current therapy with leuprolide (OS started January 2019), anastrozole " -> "Continue current therapy with leuprolide, anastrozole, and palbociclib. Radiatio"
