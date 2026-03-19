@@ -629,3 +629,26 @@ Processing row 4 (4/61)...
       [G3-IMPROVE] Type_of_Cancer: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR+/HER2- invasive ductal carcin" -> "ER+/PR+/HER2- invasive ductal carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 9.2s
+      [EXTRACT] raw={
+"lab_summary": "Creatinine 0.6 mg/dL (from 08/23/2019)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 40.1s [improved]
+      [EXTRACT] raw={
+"findings": "Patient has recurrent breast cancer with left cervical lymphadenopathy and left brachial plexus involvement. MRI of the cervical spine shows interval enlargement of a left level 5B pres
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has recurrent breast cancer with left cervical lymphadenopathy and left " -> "Patient has recurrent breast cancer with left cervical lymphadenopathy and left "
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.9s
+      [EXTRACT] raw={
+"current_meds": "anastrozole, palbociclib, leuprolide"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
