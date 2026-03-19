@@ -4789,3 +4789,12 @@ Processing row 39 (24/61)...
   Referral extraction (full note): 12.1s
     [POST-GOALS] adjuvant → curative (non-metastatic)
     [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment
+  [ATTRIBUTION] 17/20 fields sourced (39.0s)
+  Row 39 total: 204.4s
+  Row 39 saved to progress
+
+Processing row 40 (25/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (2500 chars)
+  A/P extraction: 0.0s
