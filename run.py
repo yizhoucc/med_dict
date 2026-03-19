@@ -1395,7 +1395,9 @@ def main():
                                     "ovary", "skin", "adrenal", "contralateral",
                                     "cervical", "distant", "hepatic", "pulmonary",
                                     "osseous", "cerebral", "sternum", "sternal",
-                                    "spine", "spinal", "rib", "hip", "femur", "pelvi"]
+                                    "spine", "spinal", "rib", "hip", "femur", "pelvi",
+                                    "mediastin", "retroperitoneal", "paraaortic", "para-aortic",
+                                    "mesenteric", "inguinal", "scalene"]
                 has_regional = any(rs in dist_lower for rs in REGIONAL_SITES_DM)
                 has_distant = any(ds in dist_lower for ds in DISTANT_SITES_DM)
                 if has_regional and not has_distant:
