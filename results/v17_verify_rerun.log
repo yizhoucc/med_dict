@@ -7949,3 +7949,163 @@ Processing row 64 (40/61)...
 }
       [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Genetics', 'Nutrition', 'Specialty']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 9.5s
+    [POST-LAB] cleaned: 'She will need research core biopsy, research breast MRI, and labs. Follow-up pen' → 'She will need research core biopsy, and labs. Follow-up pending.'
+    [POST-LAB-WHITELIST] removed non-lab items: ['She will need research core biopsy']
+    [POST-PROCEDURE] found in full note: 'lumpectomy'
+    [POST-IMAGING-FILTER] removed non-imaging items: ['will need research core biopsy']
+  [ATTRIBUTION] 19/20 fields sourced (32.1s)
+  Row 64 total: 218.8s
+  Row 64 saved to progress
+
+Processing row 65 (41/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan'
+  Regex extraction succeeded (3561 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "53 y.o. female with recently diagnosed right breast metaplastic carcinoma, ER 5-10%, PR/Her-2 negative, 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER 5-10%, PR 0%, HER2 0% metaplastic carcinoma with squamous differentiation",
+"Stage_of_Cancer": "Not mentioned in note",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 28.1s
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.6, HGB 14.8, HCT 44.6, MCV 96, PLT 198, NEUTA 2.6, NA 140, [REDACTED] 4.2, [REDACTED] 103, [REDACTED] 8.9, CO2 22, GLU 93, ALB 4.0, ALT 8, AST 13, ALKP 75, TBILI 0.5, CREAT 0.8
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 38.1s
+      [EXTRACT] raw={
+"findings": "Right breast metaplastic high-grade carcinoma with squamous differentiation, ER 5-10%, PR negative, Her-2 negative. Two biopsy-proven malignant masses: 3.8 cm mass at 7:00, 4 cm from th
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.1s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 101.2s
+  Cross-context injected (1062 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.4s
+  Total extraction: 107.6s
+    Medication_Plan: 4.1s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies are mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies are mentioned" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] medication_plan: "No specific medications, doses, or frequencies are mentioned in the note." -> "None"
+    Therapy_plan: 19.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab for early stage TNBC. Will review the risk
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiati" -> "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiati"
+      [G4-FAITH] therapy_plan: "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, w" -> "Plan for neoadjuvant [REDACTED] then she is considering bila"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 13.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "adjuvant radiation is being considered. The patient may need radiation therapy depending on the findings post chemotherapy. It was also discussed that she may not be an ide
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "adjuvant radiation is being considered. The patient may need radiation therapy d" -> "adjuvant radiation is being considered. The patient may need radiation therapy d"
+    Procedure_Plan: 9.3s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, with adjuvant radiation. We would be happy to see her again after her chemotherapy to discuss nex
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi" -> "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['with adjuvant radiation.']
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
