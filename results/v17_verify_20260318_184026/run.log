@@ -7608,3 +7608,17 @@ Processing row 63 (39/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 87.2s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 11.9, WBC 7.70, RBC 3.94, Hematocrit 34.6, MCV 87.8, MCH 30.2, MCHC 34.4, RDW 11.9, Platelet Count [REDACTED], Neutrophil Absolute Count 4.19, Lymphocyte Abs Cnt 2.76, Monocyte A
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 28.8s
+      [EXTRACT] raw={
+"findings": "Patient has a large left IDC, HR positive and HER2 negative. MRI shows the tumor is 10.3 x 4.5 x 3.5 cm. Axillary biopsy was positive. Staging studies show a suspicious lesion in the st
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
