@@ -1392,7 +1392,10 @@ def main():
                 REGIONAL_SITES_DM = ["axillary", "axilla", "sentinel", "supraclavicular",
                                      "infraclavicular", "internal mammary", "chest wall", "ipsilateral"]
                 DISTANT_SITES_DM = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
-                                    "ovary", "skin", "adrenal", "contralateral"]
+                                    "ovary", "skin", "adrenal", "contralateral",
+                                    "cervical", "distant", "hepatic", "pulmonary",
+                                    "osseous", "cerebral", "sternum", "sternal",
+                                    "spine", "spinal", "rib", "hip", "femur", "pelvi"]
                 has_regional = any(rs in dist_lower for rs in REGIONAL_SITES_DM)
                 has_distant = any(ds in dist_lower for ds in DISTANT_SITES_DM)
                 if has_regional and not has_distant:
