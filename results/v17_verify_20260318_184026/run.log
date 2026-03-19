@@ -7359,3 +7359,33 @@ Processing row 60 (37/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 83.0s
+    Referral: 13.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "RTC after surgery and pathology are complete"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "Invitae genetic testing: negative"
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 13.6s
+    [POST-VISIT-TYPE] Corrected: Televisit → in-person (face-to-face in note)
+    [POST-REFERRAL-VALIDATE] Removed 'Rad Onc consult': not found in note
+    [POST-THERAPY] removed non-therapy: ['pt to undergo lumpectomy with Dr.', '[REDACTED] with IORT and reconstruction 04/12/21.']
+  [ATTRIBUTION] 16/17 fields sourced (31.7s)
+  Row 60 total: 247.5s
+  Row 60 saved to progress
+
+Processing row 62 (38/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3414 chars)
+  A/P extraction: 0.0s
