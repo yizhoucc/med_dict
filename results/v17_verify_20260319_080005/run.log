@@ -4825,3 +4825,61 @@ Processing row 40 (25/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 41.1s [improved]
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy with left axillary LN dissection on 04/11/18. Pathology revealed a 3 cm grade 3 IDC with negative margins. March 09 SLN were involved by micrometa
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient underwent bilateral mastectomy with left axillary LN dissection on 04/11" -> "Patient underwent bilateral mastectomy with left axillary LN dissection on 04/11"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0."
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ALPRAZolam (XANAX) 0.25 mg tablet, docusate sodium (COLACE) 100 mg capsule, HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, LORazepam (ATIVAN) 0.5 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 14.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "She has decided to proceed with AC-Taxol rather than TC.",
+"supportive_meds": "acetaminophen (TYLENOL), docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), ALP
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), docusate sodium (COLACE), ibuprofen (ADVIL,MOTRIN), LORazepam (ATIVAN), ALPRAZolam (XANAX) -> docusate sodium (COLACE)
+  Phase 1 extraction (6 prompts): 119.5s
+  Cross-context injected (1075 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 125.8s
+    Medication_Plan: 14.5s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will proceed with AC-Taxol chemotherapy, starting with Taxol for 12 weeks followed by AC. After completion of chemotherapy, ovarian suppression with an aromatase inhi
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
