@@ -7225,3 +7225,64 @@ Processing row 60 (37/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "albuterol 90 mcg/actuation metered dose inhaler 2 puffs, Inh"
       [POST-MEDS] albuterol 90 mcg/actuation metered dose inhaler 2 puffs, Inhalation, Every 4 Hours PRN, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray SPRAY 1 SPRAY INTO EACH NOSTRIL EVERY DAY, loratadine (CLARITIN) 10 mg tablet 1 tablet, Oral -> 
+    Treatment_Changes: 9.0s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "albuterol, fluticasone propionate, loratadine"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "albuterol, fluticasone propionate, loratadine" -> ""
+      [G4-FAITH] supportive_meds: "" -> "albuterol 90 mcg/actuation metered dose inhaler 2 puffs, Inh"
+      [POST-SUPP] albuterol 90 mcg/actuation metered dose inhaler 2 puffs, Inhalation, Every 4 Hours PRN, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray SPRAY 1 SPRAY INTO EACH NOSTRIL EVERY DAY, loratadine (CLARITIN) 10 mg tablet 1 tablet, Oral -> 
+  Phase 1 extraction (6 prompts): 71.8s
+  Cross-context injected (816 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 77.7s
+    Medication_Plan: 8.3s
+      [EXTRACT] raw={
+    "medication_plan": "Patient will need adjuvant endocrine therapy with either Tamoxifen or Ovarian Suppression + [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.5s
+      [EXTRACT] raw={
+    "therapy_plan": "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21. will likely need [REDACTED] Dx after surgery to determine if she needs adjuvant chemotherapy.
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.8s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/21. she will not need post op RT."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "pt to undergo lumpectomy with Dr. [REDACTED] with IORT and reconstruction 04/12/" -> "Patient to undergo lumpectomy with IORT and will not need post-operative radioth"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
