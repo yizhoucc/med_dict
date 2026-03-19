@@ -8353,3 +8353,37 @@ Processing row 67 (42/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 80.3s
+    Referral: 18.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "Return to clinical as needed for further consultation and with her sons."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Specialty: "Rad Onc consult" -> ""
+      [G4-FAITH] Others: "None" -> "Reviewed treatment options, treatment side effects in detail"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "BRCA mutation"
+      [G4-FAITH] EMPTIED: ['Specialty', 'Nutrition']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 18.2s
+    [POST-GENETICS] cleared finding from referral: 'BRCA mutation'
+    [POST-OTHERS] cleaned: 'Reviewed treatment options, treatment side effects in detail. Discussed the leve...' → 'None'
+    [POST-THERAPY] removed non-therapy: ['The patient has been recommended a bilateral maste']
+    [POST-DISTMET] added Distant Metastasis: 'No'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2+
+      before: 'multifocal ER+/PR+ BREAST CANCER'
+      after:  'multifocal ER+/PR+ BREAST CANCER, HER2+'
+  [ATTRIBUTION] 15/18 fields sourced (33.9s)
+  Row 67 total: 237.0s
+  Row 67 saved to progress
+
+Processing row 69 (43/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment \Plan :'
+  Regex extraction succeeded (1575 chars)
+  A/P extraction: 0.0s
