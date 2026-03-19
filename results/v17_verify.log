@@ -1423,3 +1423,176 @@ Processing row 8 (8/61)...
 "second opinion": "no",
 "in-person": "Televisit",
 "summary": "Patient presents for follow-up of malignant neoplasm of upper-outer quadrant of right breast, estrogen rece
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 4.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 49.2s
+      [EXTRACT] raw={
+"findings": "Patient has undergone bilateral mastectomies with right breast mastectomy revealing a 3.84 cm invasive ductal carcinoma after neoadjuvant chemotherapy with negative margins. One lymph n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 17.9s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Letrozole" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin "
+      [POST-MEDS] acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin (NEURONTIN), ginger, Zingiber officinalis, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]), LORazepam (ATIVAN), naloxone, OLANZapine (ZYPREXA), omeprazole (PRILOSEC), ondansetron (ZOFRAN), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), traMADoL (ULTRAM), UNABLE TO FIND, Med Name: [REDACTED] [REDACTED] [REDACTED]. -> 
+    Treatment_Changes: 20.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX) -> ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), OLANZapine (ZYPREXA), polyethylene glycol (MIRALAX)
+  Phase 1 extraction (6 prompts): 128.3s
+  Cross-context injected (998 chars)
+    Treatment_Goals: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 8.8s
+  Total extraction: 137.1s
+    Medication_Plan: 8.4s
+      [EXTRACT] raw={
+    "medication_plan": "Letrozole after radiation. Fosamax for bone protection."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 13.6s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "She is to have drains out on Thursday. Radiation referral. Letrozole after radiation. She favors using fosamax over injectable meds."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "She is to have drains out on Thursday. Radiation referral. Letrozole after radia" -> "She is to have drains out on Thursday. Radiation referral. Letrozole after radia"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation referral."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given note"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given note" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 45.5s
+    Referral: 14.1s [faith-trimmed]
