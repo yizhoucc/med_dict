@@ -7425,3 +7425,18 @@ Processing row 62 (38/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 83.3s
+      [EXTRACT] raw={
+"findings": "Patient has locally advanced ER+/PR- HER2-negative left breast cancer. Tumor size was 3.8 x 3.5 cm with positive margins after partial mastectomy. Lymph node status showed metastatic di
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 13.3s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
