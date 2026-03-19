@@ -739,6 +739,22 @@ def main():
             # Restore the prompt for next iteration
             plan_extraction_prompts["Referral"] = referral_prompt
 
+        # Precompute note_lower for all POST checks [v17]
+        note_lower = note_text.lower()
+
+        # POST-VISIT-TYPE: validate in-person field against note text [v17]
+        rfv = keypoints.get("Reason_for_Visit", {})
+        if isinstance(rfv, dict):
+            in_person = rfv.get("in-person", "") or ""
+            face_to_face = bool(re.search(r'face.to.face|in.person visit|in person with|saw .* in clinic', note_lower))
+            video_visit = bool(re.search(r'video visit|telehealth|televisit|zoom|telephone visit|phone visit', note_lower))
+            if face_to_face and 'televisit' in in_person.lower():
+                rfv["in-person"] = "in-person"
+                print(f"    [POST-VISIT-TYPE] Corrected: Televisit → in-person (face-to-face in note)")
+            elif video_visit and in_person.lower() in ("", "in-person", "yes"):
+                rfv["in-person"] = "Televisit"
+                print(f"    [POST-VISIT-TYPE] Corrected: → Televisit (video visit in note)")
+
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
         if isinstance(referral, dict):
@@ -814,7 +830,7 @@ def main():
                         referral["Specialty"] = (spec + ", " + match_short).lstrip("None, ").strip(", ")
                         print(f"    [POST-SPECIALTY] found in full note: {match_short}")
 
-        # POST-GENETICS: Remove mutation findings from Genetics referral field [B70]
+        # POST-GENETICS: Remove mutation findings from Genetics referral field [B70, v17]
         # Prompt says "do NOT list genetic test RESULTS or known mutations" but model
         # sometimes still puts "BRCA1 mutation" etc. in the Genetics referral field.
         if isinstance(referral, dict):
@@ -822,15 +838,23 @@ def main():
             if gen_val != "None":
                 gen_lower = gen_val.lower()
                 # If it mentions mutation/carrier/positive/negative but NOT refer/consult → it's a finding, not a referral
-                has_finding = any(w in gen_lower for w in [
-                    "mutation", "carrier", "positive", "negative", "variant",
-                    "pathogenic", "wild type", "wild-type", "detected", "identified",
-                ])
-                has_referral = any(w in gen_lower for w in [
+                RESULT_WORDS = [
+                    "mutation", "carrier", "positive", "pathogenic", "deleterious",
+                    "negative", "no mutation", "no deleterious", "vus", "variant of uncertain",
+                    "benign", "likely benign", "non-informative", "normal",
+                    "variant", "wild type", "wild-type", "detected", "identified",
+                ]
+                REFERRAL_WORDS = [
                     "refer", "consult", "counseling", "counsel", "evaluation",
                     "recommend", "genetic testing", "send for",
-                ])
-                if has_finding and not has_referral:
+                ]
+                GENE_NAMES = ["brca1", "brca2", "palb2", "chek2", "atm", "tp53", "pten",
+                              "cdh1", "stk11", "pms2", "mlh1", "msh2", "msh6", "ctnna1"]
+                has_finding = any(w in gen_lower for w in RESULT_WORDS)
+                has_referral = any(w in gen_lower for w in REFERRAL_WORDS)
+                # v17: pure gene name without referral verb → it's a result, not a referral
+                is_pure_gene = any(gn in gen_lower for gn in GENE_NAMES) and not has_referral
+                if (has_finding or is_pure_gene) and not has_referral:
                     referral["Genetics"] = "None"
                     print(f"    [POST-GENETICS] cleared finding from referral: '{gen_val}'")
 
@@ -866,6 +890,27 @@ def main():
                 if not has_referral_kw:
                     referral["Nutrition"] = "None"
                     print(f"    [POST-NUTRITION] cleared diet advice (not a referral): '{nutr_val[:80]}'")
+
+        # POST-REFERRAL-VALIDATE: verify LLM-extracted Specialty exists in note [v17]
+        if isinstance(referral, dict):
+            spec_val = referral.get("Specialty", "") or ""
+            if spec_val and spec_val.lower() not in ("none", "none.", ""):
+                VALIDATE_KEYWORDS = {
+                    "radiation": ["radiation", "rad onc", "xrt", "radiotherapy"],
+                    "surgical": ["surgical oncology", "surgeon", "surgery consult"],
+                    "palliative": ["palliative", "hospice"],
+                    "cardiology": ["cardiology", "cardiac", "cardio-onc"],
+                    "genetics": ["genetic counseling", "genetics referral", "genetic testing referral"],
+                }
+                spec_lower = spec_val.lower()
+                for category, keywords in VALIDATE_KEYWORDS.items():
+                    if any(kw in spec_lower for kw in keywords):
+                        # This specialty was extracted — verify it exists in note
+                        found_in_note = any(kw in note_lower for kw in keywords)
+                        if not found_in_note:
+                            referral["Specialty"] = ""
+                            print(f"    [POST-REFERRAL-VALIDATE] Removed '{spec_val}': not found in note")
+                        break
 
         # POST-LAB: Remove imaging terms from Lab_Plan [B87]
         # Model sometimes confuses imaging (doppler, ultrasound) with lab tests.
@@ -1338,6 +1383,22 @@ def main():
             cancer["Distant Metastasis"] = met
             print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
 
+        # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = cancer.get("Distant Metastasis", "") or ""
+            if dist_met and dist_met.lower() not in ("no", "no.", "none", ""):
+                dist_lower = dist_met.lower()
+                REGIONAL_SITES_DM = ["axillary", "axilla", "sentinel", "supraclavicular",
+                                     "infraclavicular", "internal mammary", "chest wall", "ipsilateral"]
+                DISTANT_SITES_DM = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                    "ovary", "skin", "adrenal", "contralateral"]
+                has_regional = any(rs in dist_lower for rs in REGIONAL_SITES_DM)
+                has_distant = any(ds in dist_lower for ds in DISTANT_SITES_DM)
+                if has_regional and not has_distant:
+                    cancer["Distant Metastasis"] = "No"
+                    print(f"    [POST-DISTMET-REGIONAL] Corrected Distant Metastasis: regional only → No (was: '{dist_met}')")
+
         # POST-RESPONSE: cross-reference response_assessment with findings [B53, B60]
         response = keypoints.get("Response_Assessment", {})
         resp_val = response.get("response_assessment", "") if isinstance(response, dict) else ""
@@ -1357,8 +1418,22 @@ def main():
                         print(f"    [POST-RESPONSE] patched from findings: '{relevant[0][:60]}...'")
                     break
 
+        # POST-RESPONSE-TREATMENT: validate "Not yet on treatment" [v17]
+        resp = keypoints.get("Response_Assessment", {})
+        if isinstance(resp, dict):
+            resp_val = resp.get("response_assessment", "") or ""
+            if "not yet on treatment" in resp_val.lower() or "not on treatment" in resp_val.lower():
+                ap_lower_rt = (row.get('assessment_and_plan', '') or '').lower()
+                # Check if patient IS on treatment
+                on_treatment = bool(re.search(
+                    r'(?:currently on|continue|continuing|cycle \d|on \w+(?:oxifen|zole|mab|lib|nib))',
+                    ap_lower_rt))
+                has_meds = bool((keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip())
+                if on_treatment or has_meds:
+                    resp["response_assessment"] = "On treatment; response assessment not available from current visit."
+                    print(f"    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment")
+
         # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
-        note_lower = note_text.lower()
         for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
             drug_dict = keypoints.get(drug_field_key, {})
             if not isinstance(drug_dict, dict):
@@ -1450,6 +1525,47 @@ def main():
                 if len(filtered) < len(meds_list):
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
+        # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v17]
+        drug_dict_meds = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_meds, dict):
+            meds_val = (drug_dict_meds.get("current_meds", "") or "").strip()
+            if not meds_val:
+                ap_lower_iv = (row.get('assessment_and_plan', '') or '').lower()
+                if ap_lower_iv:
+                    IV_CHEMO_PATTERNS = [
+                        r'(?:continue|continuing|on|receiving|started on|currently on)\s+(\w+(?:\s*/\s*\w+)?)',
+                        r'cycle\s+\d+\s+(?:of|day\s+\d+\s+of)\s+(\w+)',
+                        r'(\w+)\s+(?:day|d)\s*\d+',
+                    ]
+                    KNOWN_CHEMO_IV = [
+                        "ac", "tc", "fec", "caf", "tac", "tchp", "thp", "folfox", "folfiri",
+                        "doxorubicin", "cyclophosphamide", "paclitaxel", "docetaxel", "taxol",
+                        "taxotere", "carboplatin", "cisplatin", "gemcitabine", "gemzar",
+                        "capecitabine", "xeloda", "irinotecan", "eribulin", "vinorelbine",
+                        "pertuzumab", "perjeta", "trastuzumab", "herceptin",
+                        "pembrolizumab", "keytruda", "atezolizumab", "tecentriq",
+                        "olaparib", "lynparza", "palbociclib", "ibrance",
+                        "ribociclib", "kisqali", "abemaciclib", "verzenio",
+                        "fulvestrant", "faslodex", "lupron", "leuprolide", "goserelin", "zoladex",
+                    ]
+                    PAST_CHEMO = ["previously on", "prior", "completed", "finished", "was on",
+                                  "had received", "history of", "s/p"]
+                    found_chemo = []
+                    for pattern in IV_CHEMO_PATTERNS:
+                        for m in re.finditer(pattern, ap_lower_iv):
+                            drug = m.group(1).strip().lower()
+                            if drug in KNOWN_CHEMO_IV:
+                                # Exclude past-tense mentions
+                                start = max(0, m.start() - 30)
+                                before = ap_lower_iv[start:m.start()]
+                                if any(pc in before for pc in PAST_CHEMO):
+                                    continue
+                                found_chemo.append(drug)
+                    if found_chemo:
+                        found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
+                        drug_dict_meds["current_meds"] = ", ".join(found_chemo)
+                        print(f"    [POST-MEDS-IV-CHECK] Added from A/P: {', '.join(found_chemo)}")
+
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
                         "femara", "aromasin", "fulvestrant", "faslodex",
@@ -1457,7 +1573,8 @@ def main():
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
-            if isinstance(type_val, str) and not re.search(r'(?i)\b(?:ER|HR|PR)[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)|estrogen|progesterone|hormone\s+receptor|triple', type_val):
+            # v17: expanded ER/PR detection — also match numeric patterns like "ER 95", "ER >90%"
+            if isinstance(type_val, str) and not re.search(r'(?i)\b(?:ER|HR|PR)\s*[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)|\b(?:ER|HR|estrogen|progesterone)\s*\d|estrogen|progesterone|hormone\s+receptor|triple', type_val):
                 # Type_of_Cancer has no receptor status at all — try to infer from meds
                 meds_val = ""
                 med_dict = keypoints.get("Current_Medications", {})
@@ -1469,7 +1586,12 @@ def main():
                 # Check meds
                 for drug in ER_POS_DRUGS:
                     if drug in meds_val or drug in note_lower_er:
-                        type_val = type_val.rstrip() + ", ER+ (inferred from " + drug + ")"
+                        er_info = "ER+ (inferred from " + drug + ")"
+                        # v17: avoid leading comma when type_val is empty
+                        if type_val.strip():
+                            type_val = type_val.rstrip() + ", " + er_info
+                        else:
+                            type_val = er_info
                         cancer["Type_of_Cancer"] = type_val
                         er_inferred = True
                         print(f"    [POST-ER-CHECK] Inferred ER+ from drug: {drug}")
@@ -1479,7 +1601,11 @@ def main():
                     er_match = re.search(r'(?i)\b(ER|estrogen\s+receptor)\s*[\s:]*\s*(positive|\+|negative|-)', note_lower_er)
                     if er_match:
                         status = "+" if er_match.group(2) in ("positive", "+") else "-"
-                        type_val = type_val.rstrip() + f", ER{status}"
+                        er_info = f"ER{status}"
+                        if type_val.strip():
+                            type_val = type_val.rstrip() + ", " + er_info
+                        else:
+                            type_val = er_info
                         cancer["Type_of_Cancer"] = type_val
                         er_inferred = True
                         print(f"    [POST-ER-CHECK] Found ER status in note: ER{status}")
@@ -1570,6 +1696,28 @@ def main():
                     type_val = re.sub(r'(?i),?\s*triple[\s-]*negative', '', type_val).strip().rstrip(',').strip()
                     cancer["Type_of_Cancer"] = type_val
                     print(f"    [POST-TYPE-VERIFY] Removed contradictory 'triple negative' (HER2+ present)")
+                    print(f"      before: '{old_val}'")
+                    print(f"      after:  '{type_val}'")
+
+        # POST-TYPE-VERIFY-TNBC: If A/P says TNBC, override HER2+ → HER2- [v17]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str) and re.search(r'(?i)HER2\s*\+|HER2\s*pos', type_val):
+                ap_text_tnbc = (row.get('assessment_and_plan', '') or '').lower()
+                tnbc_in_ap = bool(re.search(r'\btnbc\b|triple.negative', ap_text_tnbc))
+                if not tnbc_in_ap:
+                    # Also check if note has conclusive TNBC language
+                    tnbc_in_ap = bool(re.search(
+                        r'(?:appears to be|confirmed|is)\s+(?:tnbc|triple.negative)', note_lower))
+                if tnbc_in_ap:
+                    old_val = type_val
+                    type_val = re.sub(r'(?i)HER2\s*\+', 'HER2-', type_val)
+                    type_val = re.sub(r'(?i)HER2\s*pos\w*', 'HER2-', type_val)
+                    if 'triple negative' not in type_val.lower() and 'tnbc' not in type_val.lower():
+                        type_val += ', triple negative'
+                    cancer["Type_of_Cancer"] = type_val
+                    print(f"    [POST-TYPE-VERIFY-TNBC] A/P says TNBC, overrode HER2+")
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
