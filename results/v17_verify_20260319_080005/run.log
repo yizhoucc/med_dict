@@ -9822,3 +9822,29 @@ Processing row 83 (50/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 28.1s
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed multiple hypoattenuating lesions in the right and left hepatic lobes, increased in size and number compared to the prior imaging on 03/10/2020. MR
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 32.2s
+  Total extraction: 131.3s
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to rule out LMD in the spine, Recommend referral to radiation oncology to consider either focal CNS radiation or 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
