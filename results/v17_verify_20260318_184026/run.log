@@ -2972,3 +2972,25 @@ Processing row 19 (15/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 85.1s
+    Referral: 12.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc referral",
+"Others": "None",
+"follow up": "RTC in ~ 1 month"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 12.9s
+    [POST-THERAPY] removed non-therapy: ['OK to start.']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone and lymph nodes)'
