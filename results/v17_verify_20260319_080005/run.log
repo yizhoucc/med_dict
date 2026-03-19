@@ -3032,3 +3032,68 @@ Processing row 21 (16/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 18.2s
+      [EXTRACT] raw={
+"recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; letrozole switched to anastrozole in July 2020 due to skin rash; [REDACTED] dose reduced and patient has been on 150 mg bid s
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 163.0s
+  Cross-context injected (900 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 9.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "PET scans on 11/03/20 and 04/24/21 showed a good response. No evidence of disease recurrence on imaging and exam."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "PET scans on 11/03/20 and 04/24/21 showed a good response. N" -> "PET scans on 11/03/20 and 04/24/21 showed a good response."
+  Phase 2 extraction (2 prompts): 12.4s
+  Total extraction: 175.3s
+    Medication_Plan: 14.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone if PET CT is stable. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include hormone 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 15.6s
+      [EXTRACT] raw={
+    "therapy_plan": "If PET CT shows stability, continue arimidex alone. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.9s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 in June 2020. Pneumonitis due to abemaciclib July 2021 started on steroids, abemaciclib discontinued."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "XRT to L4 and T10 in June 2020. Pneumonitis due to abemaciclib July 2021 started" -> "XRT to L4 and T10 in June 2020"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "XRT to L4 and T10 in June 2020" -> "None"
+    Procedure_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
