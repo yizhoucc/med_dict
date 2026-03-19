@@ -2283,3 +2283,14 @@ Processing row 13 (12/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 48.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets i
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemc" -> "No specific imaging or tumor marker data is provided in the note to assess the c"
+      [G4-FAITH] response_assessment: "No specific imaging or tumor marker data is provided in the " -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 53.6s
+  Total extraction: 351.1s
