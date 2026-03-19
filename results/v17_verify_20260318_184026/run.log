@@ -1260,3 +1260,66 @@ Processing row 7 (7/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
       [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet -> 
+    Treatment_Changes: 23.2s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] supportive_meds: "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, o" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, o"
+      [G4-FAITH] supportive_meds: "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-SUPP] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet -> oxyCODONE (ROXICODONE) 5 mg tablet
+  Phase 1 extraction (6 prompts): 160.7s
+  Cross-context injected (1237 chars)
+    Treatment_Goals: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 8.9s
+  Total extraction: 169.6s
+    Medication_Plan: 9.5s
+      [EXTRACT] raw={
+    "medication_plan": "adjuvant AC x 4 cycles, to be followed by T-DM1"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 10.2s
+      [EXTRACT] raw={
+    "therapy_plan": "adjuvant AC x 4 cycles, to be followed by T-DM1 and radiation"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.8s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation after completing AC"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
