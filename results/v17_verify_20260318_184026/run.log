@@ -4277,3 +4277,47 @@ Processing row 35 (22/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 7.8s
   Total extraction: 184.3s
+    Medication_Plan: 24.7s
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughout chemo as ppx
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 26.6s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughou
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.4s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation oncology referral, will see Dr. [REDACTED] next week."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 8.7s
+      [EXTRACT] raw={
+    "procedure_plan": "will get doppler to r/o DVT, radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['radiation oncology referral']
+    Imaging_Plan: 7.1s
+      [EXTRACT] raw={
+    "imaging_plan": "will get doppler to r/o DVT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
