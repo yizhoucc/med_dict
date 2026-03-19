@@ -52,7 +52,8 @@
     81,
     82,
     83,
-    84
+    84,
+    85
   ],
   "results": {
     "0": {
@@ -6464,6 +6465,134 @@
         ],
         "follow up": [
           "Follow up in 2 weeks"
+        ]
+      }
+    },
+    "85": {
+      "coral_idx": 225,
+      "note_text": "*****  53 yo F    CC  Breast CA, metastatic    HPI  Pt noted R breast mass in 2014. W/u in ***** showed 3.3 cm mass with suspicious R ax nodes. U/S guided core bx showed mixed IDC/*****, Gr III, ***** ***** ***** 2+, FISH ratio 4.37; node pos by bx also. MRI showed 6.9 cm tumor.     Pt rec'd ***** TCHP x 6 at *****, starting in May 14. Then bilat MRM. Path showed 3 masses, 2.6, 1.4, 1.4 cm respectively. ALND pos April 15 nodes. Rec'd adj XRT. Then received adjuvant *****, with some discussion of changing to ***** later.     Well til December 2018, when noted mid BP.    W/u included PET April 02 showing widespread bone mets, mult Liver lesions c/ mets,  ? Ovarian lesion, hydronephrosis. CT guided bx of L pelvis showed metastatic CA c/w MBC, ***** 95% ***** 2% ***** 1+. Rx letrozole initially    INTERVAL  05/03/19: MRI brain showed a 4 x 6 mm, and 5 x 6 mm foci of dural enhancement suspicious for metastatic disease.    May 2019: Started on ribociclib along with letrozole    08/26/19: PET/CT revealed significant improvement in hypermetabolic osseous metastatic disease and hepatic metastases.    04/09/20: PET/CT showed increase in metabolic activity of the know osseous metastatic disease (left mandible, cervical and thoracic spine, humerus, ribs, and pelvis) with no increased activity of the liver.    04/12/20: Seen by Dr. ***** (Medical Oncology) with discussion of switching systemic therapy to Faslodex and Afinitor, however she wanted to consider clinical trials and integrative oncology at that time.     04/29/20: seen by Dr ***** ***** ***** via video. Discussed plan for  palliative radiation therapy to the cervical spine and left mandible    Currently she is feeling well     She continues to work, and has significant clinical duties as NP    She is here for med onc consultation.    PMH  Illnesses:  ADD  Anemia  Bilat hydronephrosis  Hypothyroidism    MEDS:  Oxycodone, levothyroxine, letrozole, Vit D, adderall XR  ALL:  NKA    FH  Pos breast CA: mother \n at 34 yo. Pos ovarian CA: GM(M)  Had genetic testing at *****, ***** in CHEK2    SH  Family and psychiatric NP.   Lives in ***** ***** family    ROS  Review of Systems -   General ROS: + fatigue  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + s/p Mx bilat  Respiratory ROS: + *****  Cardiovascular ROS: negative  Gastrointestinal ROS: negative  *****-Urinary ROS: negative  Musculoskeletal ROS: + bone pain  Neurological ROS: negative  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    ECOG 1    PE  PHYSICAL EXAM via video observation:   Vitals  There were no vitals filed for this visit.  Constitutional: Patient appears well-developed and well-nourished. Pleasant and appropriately interactive.  Head: Normocephalic and atraumatic.   Eyes: No *****. Conjunctivae and EOM are normal.   Neck: Normal range of motion.   Pulmonary/Chest: Effort normal. No respiratory distress. No cough.  Abdomen: No abdominal distension.  Neurological: Alert and oriented to person, place, and time. Able to stand from sitting and walk.  Psychiatric: Normal mood and affect. Behavior is normal. Judgment and thought content normal.   Skin: No jaundice or visible rash.     A/P  #Breast CA, recurrent and metastatic.  Presented with very high risk R breast mass in 2014. W/u in ***** showed 3.3 cm mass with suspicious R ax nodes. U/S guided core bx showed mixed IDC/*****, Gr III, ***** ***** ***** 2+, FISH ratio 4.37; node pos by bx also. MRI showed 6.9 cm tumor. s/p ***** TCHP x 6 at *****, starting in May 14.; bilat MRM showed 3 masses, 2.6, 1.4, 1.4 cm respectively. ALND pos April 15 nodes. Rec'd adj XRT. Then received adjuvant ***** only. Had with metastatic recurrence in 2019, confirmed by ***** ***** ***** of L pelvis, ***** 95% ***** 2% ***** 1+. ***** FISH negative also. S/p XRT to multiple bone lesions. Recently on letrozole + ribociclib, \n now with increasing bone mets.    # Bone metastasis    # Liver metastasis    RECS  - due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus.    - we discussed that her bone predominant pattern remains amenable to ***** treatment rather than chemotherapy, and that fulvestrant is a highly active endocrine agent / *****. Pt has ***** mutation, which theoretically could have contributed to ***** resistance; however, fulvestrant may overcome this mutation.  - Everolimus can be considered in combination with endocrine therapy. We discussed the pros / cons of this combination, which increases potential toxicity including mucositis and pneumonitis.  - pt asks about continuing ribociclib with fulvestrant. We discussed in detail that continuation of a CDK inhibitor after initial disease progression, as well as change to alternate CDKi after progression on a different CDKi, are strategies for which clinical benefit has not yet been demonstrated. Multiple clinical trials are attempting to address this question, but no results are yet available.   - we discussed that this treatment can be administered locally by Dr *****; alternatively, if pt relocates to the ***** ***** for an extended period, we can provide oncology care to her  - continue denosumab treatment  - pt is planning to pursue palliative XRT with Dr *****    ***** 6 wks    I spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.                \n",
+      "assessment_and_plan": "#Breast CA, recurrent and metastatic.  Presented with very high risk R breast mass in 2014. W/u in ***** showed 3.3 cm mass with suspicious R ax nodes. U/S guided core bx showed mixed IDC/*****, Gr III, ***** ***** ***** 2+, FISH ratio 4.37; node pos by bx also. MRI showed 6.9 cm tumor. s/p ***** TCHP x 6 at *****, starting in May 14.; bilat MRM showed 3 masses, 2.6, 1.4, 1.4 cm respectively. ALND pos April 15 nodes. Rec'd adj XRT. Then received adjuvant ***** only. Had with metastatic recurrence in 2019, confirmed by ***** ***** ***** of L pelvis, ***** 95% ***** 2% ***** 1+. ***** FISH negative also. S/p XRT to multiple bone lesions. Recently on letrozole + ribociclib, \n now with increasing bone mets.    \n\n# Bone metastasis    \n\n# Liver metastasis    \n\nRECS  - due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus.    \n\n- we discussed that her bone predominant pattern remains amenable to ***** treatment rather than chemotherapy, and that fulvestrant is a highly active endocrine agent / *****. Pt has ***** mutation, which theoretically could have contributed to ***** resistance; however, fulvestrant may overcome this mutation.  - Everolimus can be considered in combination with endocrine therapy. We discussed the pros / cons of this combination, which increases potential toxicity including mucositis and pneumonitis.  - pt asks about continuing ribociclib with fulvestrant. We discussed in detail that continuation of a CDK inhibitor after initial disease progression, as well as change to alternate CDKi after progression on a different CDKi, are strategies for which clinical benefit has not yet been demonstrated. Multiple clinical trials are attempting to address this question, but no results are yet available.   \n\n- we discussed that this treatment can be administered locally by Dr *****; alternatively, if pt relocates to the ***** ***** for an extended period, we can provide oncology care to her  \n\n- continue denosumab treatment  \n\n- pt is planning to pursue palliative XRT with Dr *****    \n\n***** 6 wks    \n\nI spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "New patient",
+          "second opinion": "no",
+          "in-person": "",
+          "summary": "Metastatic breast cancer with bone and liver metastases. The patient is here for a med onc consultation to discuss treatment options after disease progression on letrozole and ribociclib."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "ER+/PR+/HER2+ mixed IDC/[REDACTED], Gr III",
+          "Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+          "Metastasis": "Yes (to bone, liver, and brain)",
+          "Distant Metastasis": "Yes, to bone, liver, and brain"
+        },
+        "Lab_Results": {
+          "lab_summary": "No labs in note."
+        },
+        "Clinical_Findings": {
+          "findings": "MRI brain showed a 4 x 6 mm, and 5 x 6 mm foci of dural enhancement suspicious for metastatic disease. PET/CT revealed significant improvement in hypermetabolic osseous metastatic disease and hepatic metastases. PET/CT showed increase in metabolic activity of the known osseous metastatic disease (left mandible, cervical and thoracic spine, humerus, ribs, and pelvis) with no increased activity of the liver. Physical exam: Patient appears well-developed and well-nourished, no jaundice or visible rash, no respiratory distress, no abdominal distension."
+        },
+        "Current_Medications": {
+          "current_meds": "letrozole, ribociclib, denosumab"
+        },
+        "Treatment_Changes": {
+          "recent_changes": "switch of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus.",
+          "supportive_meds": "oxycodone, denosumab"
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "palliative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "PET/CT showed increase in metabolic activity of the known osseous metastatic disease (left mandible, cervical and thoracic spine, humerus, ribs, and pelvis) with no increased activity of the liver."
+        },
+        "Medication_Plan": {
+          "medication_plan": "Recommend change of treatment to fulvestrant +/- everolimus. Continue denosumab treatment."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "Due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus. Continue denosumab treatment."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "pt is planning to pursue palliative XRT with Dr [REDACTED]"
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "None planned."
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "telehealth: 6 wks"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Medical Oncology",
+          "Others": "None",
+          "follow up": "[REDACTED] 6 wks"
+        }
+      },
+      "attribution": {
+        "Patient type": [
+          "rec'd adj XRT."
+        ],
+        "second opinion": [
+          "we discussed that this treatment can be administered locally by Dr [REDACTED]"
+        ],
+        "summary": [
+          "due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus."
+        ],
+        "Type_of_Cancer": [
+          "mixed IDC/[REDACTED], Gr III, [REDACTED] [REDACTED] [REDACTED] 2+, FISH ratio 4.37"
+        ],
+        "Stage_of_Cancer": [
+          "Rec'd adj XRT. Then received adjuvant [REDACTED] only. Had with metastatic recurrence in 2019,"
+        ],
+        "Metastasis": [
+          "Recently on letrozole + ribociclib, now with increasing bone mets.\" \"Had with metastatic recurrence in 2019, confirmed by [REDACTED] [REDACTED] [REDACTED] of L pelvis\" \"# Liver metastasis"
+        ],
+        "Distant Metastasis": [
+          "Recently on letrozole + ribociclib, now with increasing bone mets.\" \"Had with metastatic recurrence in 2019, confirmed by [REDACTED] [REDACTED] [REDACTED] of L pelvis"
+        ],
+        "current_meds": [
+          "recently on letrozole + ribociclib, now with increasing bone mets.\" \"continue denosumab treatment"
+        ],
+        "recent_changes": [
+          "due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus."
+        ],
+        "supportive_meds": [
+          "continue denosumab treatment"
+        ],
+        "goals_of_treatment": [
+          "pt is planning to pursue palliative XRT with Dr [REDACTED]"
+        ],
+        "response_assessment": [
+          "now with increasing bone mets."
+        ],
+        "medication_plan": [
+          "RECS  - due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus."
+        ],
+        "therapy_plan": [
+          "due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus."
+        ],
+        "radiotherapy_plan": [
+          "pt is planning to pursue palliative XRT with Dr [REDACTED]"
+        ],
+        "Next clinic visit": [
+          "[REDACTED] 6 wks"
+        ],
+        "Specialty": [
+          "due to PD on letrozole / ribociclib, recommend change of treatment to an alternative endocrine-based regimen such as fulvestrant +/- everolimus."
+        ],
+        "follow up": [
+          "[REDACTED] 6 wks"
         ]
       }
     }
