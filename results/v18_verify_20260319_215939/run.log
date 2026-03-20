@@ -11664,3 +11664,63 @@ Processing row 93 (58/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 19.2s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer with a 1.6 cm tumor and 3 positive lymph nodes. The tumor is estrogen receptor positive, progesterone receptor positive, and HER2 negative. T
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a history of left breast cancer with a 1.6 cm tu" -> "Patient has a history of left breast cancer with a 1.6 cm tu"
+    Current_Medications: 5.7s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole" -> "letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 10.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily" -> "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FE"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> 
+  Phase 1 extraction (6 prompts): 139.2s
+  Cross-context injected (821 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "No evidence of disease recurrence on imaging and exam. The patient is currently asymptomatic with a performance status of  0."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "No evidence of disease recurrence on imaging and exam. The patient is currently " -> "No evidence of disease recurrence on imaging and exam. The patient is currently "
+      [G4-FAITH] response_assessment: "No evidence of disease recurrence on imaging and exam. The p" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 9.0s
+  Total extraction: 148.2s
+    Medication_Plan: 8.6s
+      [EXTRACT] raw={
+    "medication_plan": "[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
