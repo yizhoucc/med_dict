@@ -6449,3 +6449,151 @@ RESULTS FOR ROW 68
     "Return to clinical as needed for further consultation and with her sons."
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 70
+============================================================
+
+--- Column: coral_idx ---
+209
+
+--- Column: note_text ---
+"***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  09/25/1958   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, MD      Reason for visit:   Chief Complaint   Patient presents with   \u0007 Malignant neoplasm of lower-inner quadrant of right breast o   \u0007 Follow-up       Diagnosis:    1. Malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor positive (CMS code)     2. BRCA1 ***** mutation positive         Interim History:   She is recovering well from surgery.  She had two lymph nodes positive on the left side. She will see radiation oncology and implant expanders are planned to be placed.  She felt well on letrozole in the past and will resume it now.  She has osteoporosis and will start on prolia after dental clearance.  She can not take oral bisphosphonates due to reflux.  We will get the auth and call to schedule with labs prior prolia  She is taking a calcium and magnesium supplement and vitamin D3.  She had lung nodules and a follow up CT is due in June.      Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer (CMS code) 05/25/2020     Added automatically from request for surgery *****     \u0007 Malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor positive (CMS code) 04/27/2020   \u0007 BRCA1 positive 03/31/2020     Added automatically from request for surgery *****     \u0007 Maintenance chemotherapy 02/08/2020   \u0007 Bilateral breast cancer (CMS code) 01/12/2020     -Strong family history of ovarian and breast cancer. One of her sisters tested positive for BRCA 1 mutation so ***** decided to undergo testing in ***** 2020 and was also found to have a BRCA 1 mutation.  -May 2019- ***** a lump in the left upper outer breast  -06/09/19: Mammogram and US: Negative (***** 1)   -11/23/19: Saw Dr. ***** to establish care  -11/23/19: US-guided core needle biopsy left breast mass, \n 2:00, N+8: Invasive mammary carcinoma, 1.4 cm, grade 2, *****-67 15 to 20%, ER>95%, PR ~2 to 5%, ***** 1+ IHC, FISH ratio 1.4  -12/03/19: Breast MRI: Right breast: There is a 27 x 14 x 9 mm area of linear non-mass enhancement in the right breast, slightly lower central quadrant, middle third. Left breast: Corresponding with the known malignancy is a 16 x 34 x 24 mm irregularly shaped mass, versus confluent NME, with spiculated margins and heterogeneous internal enhancement in the left breast, upper outer quadrant, posterior depth. There is lateral extension from the mass to the skin surface, likely biopsy tract changes. Mildly prominent left axillary level II lymph node.   -12/10/19: MRI guided breast biopsy Right breast, lower central, core biopsy: Invasive ductal carcinoma, 0.6 cm, grade 2, ki-67 20%, ER 95%, PR 5%, ***** 1+ IHC, FISH ratio 1.4. Ductal carcinoma in-situ (DCIS) present, high nuclear grade.   -12/16/19: Left axillary LN US-guided FNA: metastatic lobular carcinoma   -12/27/19: ***** high-risk -0.075 on the left breast  -12/29/19: ***** with Dr. ***** *****  -01/04/20: Port placement   -01/12/20: DEXA scan with osteoporosis at lumbar spine, femur neck, osteopenia at total femur.   -01/14/20: MRI Brain: No evidence of intracranial metastatic disease. ***** enhancing lesion with associated susceptibility in the right anterior cingulate gyrus, likely represents a capillary telangiectasia.   -01/17/20: C1D1 TC  -01/19/20: CT CAP: No evidence of metastatic disease in the abdomen and pelvis. Age indeterminant compression fracture of T12 superior endplate, although chronic in appearance. Multiple scattered sub-4 mm tiny pulmonary nodules. These nodules are too small for tissue confirmation.   -01/19/20: Bone Scan: No definite scintigraphic evidence of osseous metastases.  -02/07/20: C2 TC  -02/28/20: C3 Abraxane and Cyclophosphamide (Taxotere dc'd due to eye toxicity)   -03/14/20: Breast MRI: RIGHT \n Breast: Corresponding to site of proven malignancy, there is a biopsy clip in the upper central right breast, middle depth, with faint residual non-mass enhancement with slow persistent kinetics, spanning 14 x 16 x 8 mm (previously 27 x 14 x 9 mm).  The enhancement is much less avid and confluent in comparison to the previous MRI. LEFT Breast: Corresponding to site of proven malignancy, there is faint residual non-mass enhancement with slow persistent kinetics spanning 30 x 13 x 23 mm in ***** x trans x CC extent (previously  34 x 16 x 24 mm) surrounding the biopsy clip in the upper outer quadrant of the left breast. The enhancement is much less avid and confluent in comparison to the previous MRI. Left axillary node have decreased in size and now have normal size/morphology.  -03/20/20: C4 ***** and Cyclophosphamide   -03/29/20: Pelvic US: Normal appearance of the uterus and right ovary without associated mass. Left ovary is not seen; no left adnexal mass.       \u0007 Breast cancer of lower-inner quadrant of right female breast (CMS code) 12/29/2019   \u0007 Malignant neoplasm of upper-outer quadrant of left breast in female, estrogen receptor positive (CMS code) 11/23/2019   \u0007 BRCA1 ***** mutation positive 11/10/2019   \u0007 Anxiety and depression 03/16/2019   \u0007 History of *****'s disease 11/17/2014       HEME-ONC TREATMENT :    Medications:    Current Outpatient Medications:   \u0007  acetaminophen 500 mg CAP, Take 1,000 mg by mouth every 8 (eight) hours as needed (pain), Disp: 30 capsule, Rfl: 1  \u0007  albuterol 90 mcg/actuation metered dose inhaler, INHALE 2 PUFFS EVERY 4 (FOUR) HOURS AS NEEDED FOR WHEEZING OR SHORTNESS OF BREATH., Disp: , Rfl:   \u0007  ALPRAZolam (XANAX) 0.5 mg tablet, Take 0.5 mg by mouth nightly as needed for Sleep  , Disp: , Rfl:   \u0007  calcium carbonate (TUMS) 500 mg (200 mg elemental) chewable tablet, ***** 500 mg by mouth daily as needed  , Disp: , Rfl:   \u0007  fluticasone propionate (FLONASE) 50 mcg/actuation nasal \n spray, 50 mcg by Nasal route daily, Disp: , Rfl:   \u0007  ibuprofen (ADVIL,MOTRIN) 200 mg tablet, Take 200 mg by mouth every 6 (six) hours as needed  , Disp: , Rfl:   \u0007  loratadine (CLARITIN) 10 mg tablet, Take 10 mg by mouth daily, Disp: , Rfl:   \u0007  sertraline (ZOLOFT) 100 mg tablet, Take 100 mg by mouth daily, Disp: , Rfl:   \u0007  UNABLE TO FIND, Med Name: \"Blood builder\" supplement (Vit C, Iron, Vit B12, folate) 1 tab po daily, Disp: , Rfl:   \u0007  letrozole (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily, Disp: 90 tablet, Rfl: 4    Allergies:   Allergies/Contraindications   Allergen Reactions   \u0007 Iodinated Contrast Media      Pt states that allergy was to media used for PET/CT scan, but has had CT scans without rx   \u0007 Montelukast Rash   \u0007 Peanut Other (See Comments)     \"itchy throat\"       Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No chest pain, orthopnea or palpitations  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    06/23/20 0840   *****: Generalized  Comment: No pain   *****:  0       Code status:   Advance Care Planning   Full code.       Performance status:  0 - Asymptomatic    Physical exam:  BP 106/63  | Pulse 91  | Temp 36.7 C (98.1 F) (Temporal)  | Resp 16  | Ht 152.8 cm (5' 0.16\") Comment: 06/23/2020 @ ***** | Wt 56.8 kg (125 lb 4.8 oz)  | SpO2 100%  | BMI 24.34 kg/m   GEN: No acute distress, awake and alert, appears stated age  HEENT: No oral lesions  Neck: supple no lymphadenopathy  Spine: non tender to palpation and percussion    Cardiac: Regular rate, rhythm no murmur  Lungs:  clear \n to ascultation    Abdomen: Soft, non tender, non distended,  no *****   Extremity: No edema  Lymph: no peripheral adenopathy  Neuro: *****-12 grossly intact, normal UE and LE strength.   Skin: No rash  Breast  Bilateral mastectomy lines without mass or skin changes, healing well.       Labs:    Admission on 06/09/2020, Discharged on 06/10/2020   Component Date Value Ref Range Status   \u0007 ABO/RH(D) 06/09/2020 ***** POS   Final   \u0007 ABO/Rh Confirmation Req'd 06/09/2020 *****   Final   Appointment on 06/07/2020   Component Date Value Ref Range Status   \u0007 *****-19 RNA, RT-PCR/Nucleic Acid ***** 06/07/2020 Not detected  Not detected Final   \u0007 Comments 06/07/2020 See Comment   Final   Appointment on 06/05/2020   Component Date Value Ref Range Status   \u0007 Albumin, Serum / Plasma 06/05/2020 4.1  3.4 - 4.8 g/dL Final   \u0007 Alkaline Phosphatase 06/05/2020 ***** 38 - 108 U/L Final   \u0007 Alanine transaminase 06/05/2020 14  10 - 61 U/L Final   \u0007 AST 06/05/2020 15  5 - 44 U/L Final   \u0007 Bilirubin, Total 06/05/2020 0.4  0.2 - 1.2 mg/dL Final   \u0007 Urea Nitrogen, Serum / Plasma 06/05/2020 12  7 - 25 mg/dL Final   \u0007 Calcium, total, Serum / Plasma 06/05/2020 9.6  8.4 - 10.5 mg/dL Final   \u0007 Chloride, Serum / Plasma 06/05/2020 *****  101 - 110 mmol/L Final   \u0007 Creatinine 06/05/2020 0.62  0.55 - 1.02 mg/dL Final   \u0007 eGFR - low estimate 06/05/2020 97  >59 mL/min Final   \u0007 eGFR - high estimate 06/05/2020 *****  >59 mL/min Final   \u0007 Potassium, Serum / Plasma 06/05/2020 3.7  3.5 - 5.0 mmol/L Final   \u0007 Sodium, Serum / Plasma 06/05/2020 *****  135 - 145 mmol/L Final   \u0007 Protein, Total, Serum / Plasma 06/05/2020 7.6  6.3 - 8.6 g/dL Final   \u0007 Carbon Dioxide, Total 06/05/2020 26  22 - 29 mmol/L Final   \u0007 Anion Gap 06/05/2020 11  4 - 14 Final   \u0007 Glucose, non-fasting 06/05/2020 83  70 - 199 mg/dL Final   \u0007 WBC Count 06/05/2020 4.2  3.4 - 10.0 x10E9/L Final   \u0007 RBC Count 06/05/2020 4.19  4.00 - 5.20 x10E12/L Final   \u0007 Hemoglobin 06/05/2020 12.2  12.0 - 15.5 g/dL \n Final   \u0007 Hematocrit 06/05/2020 36.8  36.0 - 46.0 % Final   \u0007 MCV 06/05/2020 88  80 - 100 fL Final   \u0007 MCH 06/05/2020 29.1  26.0 - 34.0 pg Final   \u0007 MCHC 06/05/2020 33.2  31.0 - 36.0 g/dL Final   \u0007 Platelet Count 06/05/2020 *****  140 - 450 x10E9/L Final   \u0007 Neutrophil Absolute Count 06/05/2020 2.53  1.80 - 6.80 x10E9/L Final   \u0007 Lymphocyte Abs Cnt 06/05/2020 0.73***** 1.00 - 3.40 x10E9/L Final   \u0007 Monocyte Abs Count 06/05/2020 0.44  0.20 - 0.80 x10E9/L Final   \u0007 Eosinophil Abs Ct 06/05/2020 0.42***** 0.00 - 0.40 x10E9/L Final   \u0007 Basophil Abs Count 06/05/2020 0.07  0.00 - 0.10 x10E9/L Final   \u0007 Imm Gran, Left Shift 06/05/2020 0.02  <0.10 x10E9/L Final     Pathology from May 2020         Left Breast Tumor Synoptic Comment (Part C)  - Laterality:  Left.  - Procedure:  Total mastectomy.  - Tumor site:  Lower outer quadrant.  - Invasive tumor type:  Invasive lobular carcinoma.  - Invasive tumor size after neoadjuvant therapy:    - Single focus of residual invasive carcinoma:  4.4 cm.  - Tumor size determined based on tumor present in 4 consecutive slices  (slices July 06, ***** thickness 1.1 cm).  - Residual invasive tumor cellularity:  ~5-10%.  - Invasive tumor grade (modified *****-*****-*****):  Not  applicable after neoadjuvant therapy. This treated tumor shows features  as follows:       - Nuclear grade:  2 points.       - Mitotic count: < 1 mitotic figure/ 10 *****, 1 point.       - Glandular/tubular differentiation:  3 points.       - Total points:  6 points = grade 2.  - EIC (extensive intraductal component):  Not applicable after  neoadjuvant therapy.  - Lymphatic/vascular invasion:  Not identified.  - Skin/nipple:  No significant pathologic abnormality.  - Skeletal muscle:  Not identified.  - Margins for invasive tumor:    - Left breast mastectomy specimen (Part B):       - Posterior margin:  Negative (tumor is 0.2 cm away, on slide C15).       - Medial margin:  Negative (tumor is > 5 cm away, based on \n gross  measurement).       - Lateral margin:  Negative (tumor is > 5 cm away, based on gross  measurement).       - Anterior/superior margin:  Negative (tumor is 1.4 cm away, on  slide C14).       - Anterior/inferior margin:  Negative (tumor is > 1 cm away, based  on gross measurement).  - Separate margin specimen:  Not applicable.  - Ductal carcinoma in situ (DCIS):  Not identified.  - DCIS nuclear grade:  Not applicable.  - DCIS architectural patterns:  Not applicable.  - Necrosis in *****:  Not applicable.  - DCIS size: Not applicable.   - Resection margins for DCIS: Not applicable.  - Microcalcifications:  Present, in association with benign ducts.  - Lobular carcinoma in situ (LCIS):  Present, classical type.  - Resection margins for pleomorphic LCIS/LCIS variant:  Not applicable.  - Non-neoplastic breast:  Fibrocystic, apocrine metaplasia.  - Lymph node status:  Positive.  - Total number of lymph nodes examined:  5.  - Number of sentinel nodes examined:  5.  - Total number of nodes with macrometastases:  1.  - Total number of nodes with micrometastases:  1.  - Total number of nodes with isolated tumor cells:  0.  - Size of largest tumor focus in node:  0.5 cm.  - Extranodal extension:  Not identified  - Treatment effect:        - Treatment effect in the breast:  Present.       - Treatment effect in the lymph nodes:  Present.  - AJCC Anatomic Stage:  *****(sn)    - Tumor biomarker (ER/PR/*****/*****) status:  Immunohistochemical tests  for estrogen and progesterone receptors, ***** and *****-67 were performed  by manual morphometry on block C10.    The test for estrogen receptors is positive.  There is strong nuclear  staining in >95%of tumor cells.  Internal positive control is present,  and external positive control is appropriate.    The test for progesterone receptors is positive.  There is strong  nuclear staining in 90% of tumor cells.  Internal positive control is  present, and external positive control is \n appropriate.    Result of ***** test:  This carcinoma is negative for ***** oncoprotein  over-expression.  The staining intensity of this carcinoma is 0 on a  scale of 0-3.    *****-67 proliferation index: ~<5%    Fluorescence in situ hybridization (FISH) for ***** will also be  performed and the result will be issued separately by the Molecular  Pathology Laboratory.    For Part C (left mastectomy) the specimen was inked, and the margins  were microscopically evaluated.    For Part C (left mastectomy), the specimen was *****. The  radiograph was reviewed by the pathologist and demonstrates a biopsy  clip in ***** 6, lower outer quadrant.  Tissue from this area was  specifically sampled for histologic evaluation in order to help  establish the diagnosis.    Right Breast Tumor Synoptic Comment (Part F)  - Laterality:  Right.  - Procedure:  Total mastectomy.  - Tumor site:  Upper inner quadrant.  - Invasive tumor type:  Invasive ductal carcinoma.  - Invasive tumor size after neoadjuvant therapy:   Single focus of residual invasive carcinoma:  1 cm. - Tumor size  determined based on: Tumor present on one ***** (***** 15) with *****  thickness of 1.0 cm.  - Residual invasive tumor cellularity:  ~10%.  - Invasive tumor grade (modified *****-*****-*****):  Not  applicable after neoadjuvant therapy. This treated tumor shows features  as follows:       - Nuclear grade:  2 points.       - Mitotic count: 1 point.       - Glandular/tubular differentiation:  3 points.       - Total points:  7 points = grade 2.  - EIC (extensive intraductal component):  Not applicable after  neoadjuvant therapy.  - Lymphatic/vascular invasion:  Not identified.  - Skin/nipple:  No significant pathologic abnormality.  - Skeletal muscle:  Not identified.  - Margins for invasive tumor:  Negative  - Right breast, mastectomy (Part F):       - Posterior margin:  Negative (tumor is >1 cm away).       - Medial margin:  Negative (tumor is >1 \n cm away).       - Lateral margin:  Negative (tumor is >1 cm away).       - Anterior/superior margin:  Negative (tumor is >1 cm away).       - Anterior/inferior margin:  Negative (tumor is >1 cm away).  - Ductal carcinoma in situ (DCIS):  Present.  - DCIS nuclear grade:  High nuclear grade.  - DCIS architectural patterns:  *****.  - Necrosis in *****:  Not identified.  - DCIS size:  DCIS is present in one ***** (***** 15), spanning 1.0 cm.  - Resection margins for DCIS: Negative  Right breast, mastectomy (Part F):       - Posterior margin:  Negative (DCIS is >1 cm away).       - Medial margin:  Negative (DCIS is >1 cm away).       - Lateral margin:  Negative (DCIS is >1 cm away).       - Anterior/superior margin:  Negative (DCIS is >1 cm away).       - Anterior/inferior margin:  Negative (DCIS is >1 cm away).  - Microcalcifications:  Present, in association with carcinoma and  stroma.  - Lobular carcinoma in situ (LCIS):  Not identified.  - Resection margins for pleomorphic LCIS/LCIS variant:  Not applicable.  - Non-neoplastic breast:  Apocrine metaplasia, columnar cell change.  - Lymph node status:  Negative.  - Total number of lymph nodes examined:  2.  - Number of sentinel nodes examined:  2.  - Total number of nodes with macrometastases:  0.  - Total number of nodes with micrometastases:  0.  - Total number of nodes with isolated tumor cells:  0.  - Size of largest tumor focus in node:  Not applicable.  - Extranodal extension:  Not applicable.  - Treatment effect:        - Treatment effect in the breast:  Present.       - Treatment effect in the lymph nodes:  Not present.  - AJCC Anatomic Stage:  *****(sn)    - Tumor biomarker (ER/PR/*****/*****) status:  Immunohistochemical tests  for estrogen and progesterone receptors, ***** and *****-67 were performed  by manual morphometry on block F15.    The test for estrogen receptors is positive.  There is strong nuclear  staining in 95% of tumor cells.  Internal positive \n control is present,  and external positive control is appropriate.    The test for progesterone receptors is negative.  There is moderate  nuclear staining in <1 %of tumor cells.  Internal positive control is  present, and external positive control is appropriate.    Result of ***** test:  This carcinoma is equivocal for ***** oncoprotein  over-expression.  The staining intensity of this carcinoma is 2 on a  scale of 0-3.    *****-67 proliferation index: ~5%    Fluorescence in situ hybridization (FISH) for ***** will also be  performed and the result will be issued separately by the Molecular  Pathology Laboratory.    For Part F (right mastectomy) the specimen was inked, and the margins  were microscopically evaluated.    Assessment \\Plan :    1.   Bilateral ER positive and her 2 negative breast cancer s/p neoadjuvant TC x 6 cycles due to high risk ***** on the left side,  node positive invasive lobular.  2.  S/p bilateral mastectomies without reconstruction May 2020.    - left side with 4.4 cm, G2 residual *****, March 03 lymph nodes + treatment effect, negative margins.  ***** *****+ and her ***** *****, *****-***** <5%   -right side 1 cm IDC, G2  with DCIS and ALH, node negative, negative margins.  ER+PR- and her ***** ***** *****, *****-***** 5%  3.  BRCA  1 mutation s/p preventive BSO with Dr. Lee May ***** May 2020. Pathology without malignancy.   4.  We discussed hormone blockade to decrease the risk of systemic recurrence.  She will restart letrozole which she had previously tolerated.  I gave her information about ***** to help with hot flashes.   5.  Radiation consult.   6.  She is going to have expanders placed prior to radiation.    7.   Follow up lung nodules, CT due in June 2020.   8.  RTC with me in September.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 35 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. \n This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.        \n"
+
+--- Column: assessment_and_plan ---
+"Assessment \\Plan :    1.   Bilateral ER positive and her 2 negative breast cancer s/p neoadjuvant TC x 6 cycles due to high risk ***** on the left side,  node positive invasive lobular.  2.  S/p bilateral mastectomies without reconstruction May 2020.    - left side with 4.4 cm, G2 residual *****, March 03 lymph nodes + treatment effect, negative margins.  ***** *****+ and her ***** *****, *****-***** <5%   -right side 1 cm IDC, G2  with DCIS and ALH, node negative, negative margins.  ER+PR- and her ***** ***** *****, *****-***** 5%  3.  BRCA  1 mutation s/p preventive BSO with Dr. Lee May ***** May 2020. Pathology without malignancy.   4.  We discussed hormone blockade to decrease the risk of systemic recurrence.  She will restart letrozole which she had previously tolerated.  I gave her information about ***** to help with hot flashes.   5.  Radiation consult.   6.  She is going to have expanders placed prior to radiation.    7.   Follow up lung nodules, CT due in June 2020.   8.  RTC with me in September.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 35 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. \n This time includes face-to-face time with the patient as well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.        \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient presents with malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor positive, and BRCA1 mutation positive. The purpose of this visit is for follow-up and to discuss ongoing treatment and management, including resuming letrozole, starting prolia after dental clearance, and planning for radiation and implant expanders."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on right side",
+    "Stage_of_Cancer": "",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [REDACTED], Creatinine 0.62, eGFR - low estimate 97, eGFR - high estimate [REDACTED], Potassium 3.7, Sodium [REDACTED], Protein, Total 7.6, Carbon Dioxide, Total 26, Anion Gap 11, Glucose, non-fasting 83, WBC Count 4.2, RBC Count  4.19, Hemoglobin 12.2, Hematocrit 36.8, MCV 88, MCH 29.1, MCHC 33.2, Platelet Count [REDACTED], Neutrophil Absolute Count 2.53, Lymphocyte Abs Cnt 0.73[REDACTED], Monocyte Abs Count 0.44, Eosinophil Abs Ct 0.42[REDACTED], Basophil Abs Count 0.07, Imm Gran, Left Shift 0.02 (from 06/05/2020)"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient is recovering well from surgery. Two lymph nodes were positive on the left side. Imaging findings include a follow-up CT due in June for lung nodules. MRI shows faint residual non-mass enhancement in both breasts, with left axillary nodes having decreased in size and now have normal size/morphology. Physical exam shows bilateral mastectomy lines without mass or skin changes, healing well. No palpable masses, skin changes, or lymphadenopathy noted. Patient is asymptomatic with a performance status of  0."
+  },
+  "Current_Medications": {
+    "current_meds": "letrozole"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "She will restart letrozole which she had previously tolerated.",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "MRI shows faint residual non-mass enhancement in both breasts, with left axillary nodes having decreased in size and now have normal size/morphology. No evidence of disease recurrence on imaging and exam."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Restart letrozole which she had previously tolerated. Information about [REDACTED] to help with hot flashes."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "She is going to have expanders placed prior to radiation. She will also undergo radiation therapy and has a follow-up CT scan for lung nodules due in June 2020."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "She is going to have expanders placed prior to radiation."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT due in June 2020 to follow up lung nodules."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: September"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Full code."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation consult",
+    "Others": "None",
+    "follow up": "RTC with me in September, Follow up lung nodules, CT due in June 2020"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "RTC with me in September."
+  ],
+  "second opinion": [
+    "S/p bilateral mastectomies without reconstruction May 2020."
+  ],
+  "in-person": [
+    "I spent a total of 35 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures."
+  ],
+  "summary": [
+    "Bilateral ER positive and her 2 negative breast cancer s/p neoadjuvant TC x 6 cycles due to high risk [REDACTED] on the left side,  node positive invasive lobular."
+  ],
+  "Type_of_Cancer": [
+    "Bilateral ER positive and her 2 negative breast cancer s/p neoadjuvant TC x 6 cycles due to high risk [REDACTED] on the left side,  node positive invasive lobular.  -right side 1 cm IDC, G2  with DCIS and ALH, node negative, negative margins.  ER+PR- and her [REDACTED] [REDACTED] [REDACTED], [REDACTED]-[REDACTED] 5%"
+  ],
+  "Metastasis": [
+    "node positive invasive lobular"
+  ],
+  "Distant Metastasis": [
+    "Follow up lung nodules, CT due in June 2020."
+  ],
+  "lab_summary": [
+    "Albumin 4.1, Alkaline Phosphatase [REDACTED], Alanine transaminase 14, AST 15, Bilirubin, Total 0.4, Urea Nitrogen 12, Calcium, total 9.6, Chloride [R"
+  ],
+  "findings": [
+    "left side with 4.4 cm, G2 residual [REDACTED], March 03 lymph nodes + treatment effect, negative margins.\" \n\n\"Follow up lung nodules, CT due in June 2020."
+  ],
+  "current_meds": [
+    "She will restart letrozole which she had previously tolerated."
+  ],
+  "recent_changes": [
+    "She will restart letrozole which she had previously tolerated."
+  ],
+  "goals_of_treatment": [
+    "We discussed hormone blockade to decrease the risk of systemic recurrence."
+  ],
+  "medication_plan": [
+    "She will restart letrozole which she had previously tolerated.  I gave her information about [REDACTED] to help with hot flashes."
+  ],
+  "therapy_plan": [
+    "She is going to have expanders placed prior to radiation."
+  ],
+  "radiotherapy_plan": [
+    "She is going to have expanders placed prior to radiation."
+  ],
+  "imaging_plan": [
+    "Follow up lung nodules, CT due in June 2020."
+  ],
+  "Next clinic visit": [
+    "RTC with me in September."
+  ],
+  "Specialty": [
+    "5.  Radiation consult."
+  ],
+  "follow up": [
+    "Follow up lung nodules, CT due in June 2020.   7.   Follow up lung nodules, CT due in June 2020.   8.  RTC with me in September."
+  ]
+}
