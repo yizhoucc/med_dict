@@ -7926,3 +7926,109 @@ Processing row 63 (39/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 16.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Currently on [REDACTED] and taxol planned. Biopsy is planned for sternal lesion. Recommended [REDACTED] followed by taxol then surgery and radiation with additional treatment to
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.4s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence. If biopsy of bone is positive would add xgeva."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "We discussed the role of surgery and radiation to decrease the risk of local rec" -> "We discussed the role of surgery and radiation to decrease the risk of local rec"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "We discussed the role of surgery and radiation to decrease the risk of local rec" -> "Additional treatment to sternum as a single site of metastatic disease is planne"
+    Procedure_Plan: 8.6s
+      [EXTRACT] raw={
+    "procedure_plan": "Biopsy is planned for sternal lesion. Surgery and radiation with additional treatment to sternum as a single site of metastatic disease."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Biopsy is planned for sternal lesion. Surgery and radiation with additional treatment to sternum as a single site of metastatic disease.']
+    Imaging_Plan: 2.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "Biopsy is planned for sternal lesion."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "Biopsy is planned for sternal lesion." -> "No imaging planned."
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 3.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Biopsy is planned for sternal lesion."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "Biopsy is planned for sternal lesion." -> "No specific genetic or molecular tests are planned."
+      [G4-FAITH] genetic_testing_plan: "No specific genetic or molecular tests are planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-REVERT] genetic_testing_plan: reverted (G4 emptied all fields)
+    follow_up_next_visit: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 51.4s
+    Referral: 9.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "If biopsy of bone is positive would add xgeva."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Specialty', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 9.4s
+    [POST-THERAPY] removed non-therapy: ['Biopsy is planned for sternal lesion.']
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes, to the sternum'
+    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment
+    [POST-MEDS-IV-CHECK] Added from A/P: taxol
