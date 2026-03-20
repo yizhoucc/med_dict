@@ -1,0 +1,22 @@
+Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.59s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.60s/it]
+Model loaded.
+Data loaded: 61 rows (indices [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+Lab test whitelist loaded: 71 terms
+Genetic test keywords loaded: 37 terms
+
+Processing 61 rows...
+
+Processing row 0 (1/61)...
+  Injected 4 term definitions: ['estrogen receptor', 'adjuvant therapy', 'PR positive', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (894 chars)
+  A/P extraction: 0.0s
