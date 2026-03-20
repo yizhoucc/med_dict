@@ -11906,3 +11906,29 @@ Processing row 94 (59/61)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 23.8s
+      [EXTRACT] raw={
+"response_assessment": "MRI breast shows interval decrease in irregularly shaped mass with heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satelli
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 27.8s
+  Total extraction: 145.9s
+    Medication_Plan: 7.7s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd. Patient will start capecitabine after XRT."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 25.4s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is interested in breast and axilla XRT. Refer to Rad Onc. Discuss option of capecitabine for residual dise
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is intere" -> "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is intere"
+      [G4-FAITH] therapy_plan: "Start AC chemotherapy. Discuss completion ALND vs. Axilla XR" -> "Start AC chemotherapy. Discuss completion ALND vs. Axilla XR"
+      [G5-TEMPORAL] therapy_plan: "Start AC chemotherapy. Discuss completion ALND vs. Axilla XRT; patient is intere" -> "Discuss completion ALND vs. Axilla XRT; patient is interested in breast and axil"
