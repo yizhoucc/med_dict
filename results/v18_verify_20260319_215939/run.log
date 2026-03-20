@@ -12274,3 +12274,78 @@ Processing row 99 (61/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 24.6s
+      [EXTRACT] raw={
+"findings": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Bilirubin, total, is within normal limits. Alkaline phosphatase is elevated. Aspartate transaminase is eleva
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.1s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna -> 
+    Treatment_Changes: 14.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Gemzar Cycle #2 Day 8 cancelled by patient due to fatigue and concern about tumor markers and scan results.",
+"supportive_meds": "docusate sodium 240 mg CAP, pregabalin 50 mg caps
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] docusate sodium 240 mg CAP, pregabalin 50 mg capsule, oxyCODONE 5 mg immediate release tablet, senna 8.6 mg tablet -> docusate sodium 240 mg CAP, oxyCODONE 5 mg immediate release tablet, senna 8.6 mg tablet
+  Phase 1 extraction (6 prompts): 234.6s
+  Cross-context injected (832 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Scan done too early to tell if Gemzar is working. No new imaging findings mentioned in the note. 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29)" -> "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29)"
+  Phase 2 extraction (2 prompts): 15.3s
+  Total extraction: 249.9s
+    Medication_Plan: 4.9s
+      [EXTRACT] raw={
+    "medication_plan": "Focalin prn to help with fatigue."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 8.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue with treatment to see if interventions helped with fatigue. Plans to discuss taking a break with Dr [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
