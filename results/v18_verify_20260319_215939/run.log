@@ -8656,3 +8656,13 @@ Processing row 69 (43/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on left side, ER+/PR-/HER2- invasive ductal carcinoma with DCIS on right side",
+"Stage_of_Cancer": "Originally Stage II, now bilateral bre
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Originally Stage II, now bilateral breast cancer with lymph node involvement on " -> "Not explicitly stated in the note"
+      [G4-FAITH] Stage_of_Cancer: "Not explicitly stated in the note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
