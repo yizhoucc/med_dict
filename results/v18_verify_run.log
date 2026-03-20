@@ -3878,3 +3878,177 @@ Processing row 64 (40/61)...
       [EXTRACT] raw={
   "Type_of_Cancer": "ER weak positive (2%), PR low positive (7%), HER2 neg (IHC 2+, FISH 2.March 09.8=1.4) invasive ductal carcinoma with high-grade DCIS component",
   "Stage_of_Cancer": "Locally ad
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 37.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm and 0.7 x 0.5 cm masses, and a 0.2mm focus of micrometastatic carcinoma in the right axillary lymph node. Pathology shows ER 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm and 0.7 x 0.5 cm mas" -> "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm and 0.7 x 0.5 cm mas"
+      [G4-FAITH] findings: "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm " -> "Right breast IDC with a 2.3 x 1.4 x 1 cm mass, 1.0 x 0.9 cm "
+    Current_Medications: 5.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "fexofenadine ([REDACTED]) 180 mg tablet, Take 180 mg by mout"
+      [POST-MEDS] fexofenadine ([REDACTED]) 180 mg tablet, Take 180 mg by mouth daily PRN , Disp: , Rfl: , montelukast (SINGULAIR) 10 mg tablet, Take 10 mg by mouth daily PRN , Disp: , Rfl: -> 
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 90.2s
+  Cross-context injected (1099 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.5s
+  Total extraction: 96.7s
+    Medication_Plan: 25.7s
+      [EXTRACT] raw={
+    "medication_plan": "Neoadjuvant chemotherapy with options including AC/T (doxorubicin and cyclophosphamide followed by paclitaxel) or enrollment in the ISPY clinical trial with various regimens 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 21.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Port placement, chemotherapy teaching session, will start chemotherapy with options including neoadjuvant chemotherapy (AC/T) or enrollment in the ISPY clinical trial with vario
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.9s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She will likely also need post-operative radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 6.1s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "plan for port placement, research core biopsy"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "plan for port placement, research core biopsy" -> "plan for port placement, research core biopsy, lumpectomy or mastectomy"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 5.3s
+      [EXTRACT] raw={
+    "imaging_plan": "will need research core biopsy, research breast MRI"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 7.4s
+      [EXTRACT] raw={
+    "lab_plan": "She will need research core biopsy, research breast MRI, labs. F/u pending genetic testing results."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 4.7s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "F/u results of genetic testing (done locally last Mon)"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 4.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 1-2 weeks to start chemo"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 82.4s
+    Referral: 10.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC in 1-2 weeks in person to start chemo"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Specialty', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.5s
+    [POST-LAB] cleaned: 'She will need research core biopsy, research breast MRI, labs. F/u pending genet' → 'She will need research core biopsy, labs. F/u pending genetic testing results.'
+    [POST-LAB-WHITELIST] removed non-lab items: ['She will need research core biopsy']
+    [POST-IMAGING-FILTER] removed non-imaging items: ['will need research core biopsy']
