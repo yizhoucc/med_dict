@@ -2136,3 +2136,165 @@ Processing row 11 (11/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "await GK / Rad Onc input, and potential plan for repeat GK; message conveyed to " -> "await GK / Rad Onc input, and potential plan for repeat GK"
+    Procedure_Plan: 6.0s
+      [EXTRACT] raw={
+    "procedure_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 9.7s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain every 4 months, Echo q6 months, repeat again in April 2019 after next visit."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain eve" -> "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain eve"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.6s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 6 weeks" -> "in-person: 6 weeks for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 64.8s
+    Referral: 12.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "F/u Dr. [REDACTED] in [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 12.4s
+    [POST-STAGE-PLACEHOLDER] Replaced placeholder: 'Originally Stage [X], now metastatic (Stage IV)' → 'Not available (redacted)'
+  [ATTRIBUTION] 20/21 fields sourced (32.2s)
+  Row 11 total: 263.7s
+  Row 11 saved to progress
+
+Processing row 13 (12/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (5675 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 24.0s
+      [EXTRACT] raw={
+"Patient type": "follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient is a 58 y.o. female with de [REDACTED] metastatic ER+ breast cancer to bone, liver, and nodes. 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.6s [improved, faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to bone, liver, and nodes",
+"Metastasis
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+ breast cancer"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage [X], now metastatic (Stage IV)" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage [X], now metastatic (Stage IV)"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 64.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin, Total 0.7, Urea Nitrogen 6, Calcium 8.7 (L), Chloride 109 (H), Creatinine 0.47, e
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 2" -> "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 2"
+    Clinical_Findings: 42.0s [improved]
+      [EXTRACT] raw={
+"findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. She is also receiving pamidronate once weekly. She 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitab" -> "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitab"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.9s
+      [EXTRACT] raw={
+"current_meds": "Pamidronate, Gemcitabine, Docetaxel, Doxorubicin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 21.2s
+      [EXTRACT] raw={
+"recent_changes": "Stopped palbociclib and fulvestrant end of January. Last dose of Fulvestrant was 01/04/19. Now doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 175.8s
+  Cross-context injected (1102 chars)
+    Treatment_Goals: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 22.6s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable. Imaging shows no new or worsening osseous or epidural metastatic disease on MRI Total Spine and no significant change in segment February 17 h
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable. Imaging shows no new or worsening osseous or epi" -> "The cancer is currently stable. Imaging shows no new or worsening osseous or epi"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 26.4s
+  Total extraction: 202.2s
+    Medication_Plan: 21.5s
