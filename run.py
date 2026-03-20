@@ -755,7 +755,7 @@ def main():
                 note_lower))
             video_visit = bool(re.search(
                 r'video visit|telehealth|televisit|zoom|telephone visit|phone visit'
-                r'|virtual visit|video connection',
+                r'|virtual visit|video connection|via video|by video',
                 note_lower))
             # Video visit evidence takes priority (billing templates often have "face-to-face")
             if video_visit:
@@ -765,6 +765,19 @@ def main():
             elif face_to_face and 'televisit' in in_person.lower():
                 rfv["in-person"] = "in-person"
                 print(f"    [POST-VISIT-TYPE] Corrected: Televisit → in-person (face-to-face in note)")
+
+        # POST-PATIENT-TYPE: validate Patient type values [v18]
+        rfv = keypoints.get("Reason_for_Visit", {})
+        if isinstance(rfv, dict):
+            pt = rfv.get("Patient type", "") or ""
+            pt_lower = pt.lower().strip()
+            VALID_PATIENT_TYPES = ["new patient", "follow up", "follow-up", "followup"]
+            if pt_lower and pt_lower not in VALID_PATIENT_TYPES:
+                if "new" in pt_lower:
+                    rfv["Patient type"] = "New patient"
+                else:
+                    rfv["Patient type"] = "Follow up"
+                print(f"    [POST-PATIENT-TYPE] Corrected invalid '{pt}' → '{rfv['Patient type']}'")
 
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
@@ -865,9 +878,13 @@ def main():
                 has_referral = any(w in gen_lower for w in REFERRAL_WORDS)
                 # v17: pure gene name without referral verb → it's a result, not a referral
                 is_pure_gene = any(gn in gen_lower for gn in GENE_NAMES) and not has_referral
-                if (has_finding or is_pure_gene) and not has_referral:
+                # v18: result words take priority — if test results exist, it's completed, not a pending referral
+                if has_finding:
                     referral["Genetics"] = "None"
-                    print(f"    [POST-GENETICS] cleared finding from referral: '{gen_val}'")
+                    print(f"    [POST-GENETICS] cleared completed test result: '{gen_val}'")
+                elif is_pure_gene:
+                    referral["Genetics"] = "None"
+                    print(f"    [POST-GENETICS] cleared gene name (no referral verb): '{gen_val}'")
 
         # POST-OTHERS: Clean up Others field to only keep recognized referral types [B82]
         # Model sometimes puts lifestyle advice ("I recommend anti inflammatory diet...") in Others
@@ -1374,6 +1391,15 @@ def main():
                             cancer["Stage_of_Cancer"] = "Metastatic (Stage IV)"
                             print(f"    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage {claimed_stage}': '{stage}' → 'Metastatic (Stage IV)'")
 
+        # POST-STAGE-PLACEHOLDER: clean up [X] placeholders from redacted data [v18]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = cancer.get("Stage_of_Cancer", "")
+            if isinstance(stage, str) and re.search(r'\[X\]|\[REDACTED\]|\[\*+\]', stage):
+                old_stage = stage
+                cancer["Stage_of_Cancer"] = "Not available (redacted)"
+                print(f"    [POST-STAGE-PLACEHOLDER] Replaced placeholder: '{old_stage}' → 'Not available (redacted)'")
+
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
         if isinstance(goals, dict):
@@ -1439,7 +1465,7 @@ def main():
         if isinstance(resp, dict):
             resp_val = resp.get("response_assessment", "") or ""
             if "not yet on treatment" in resp_val.lower() or "not on treatment" in resp_val.lower():
-                ap_lower_rt = (row.get('assessment_and_plan', '') or '').lower()
+                ap_lower_rt = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
                 # Check if patient IS on treatment
                 on_treatment = bool(re.search(
                     r'(?:currently on|continue|continuing|cycle \d|on \w+(?:oxifen|zole|mab|lib|nib))',
@@ -1546,7 +1572,7 @@ def main():
         if isinstance(drug_dict_meds, dict):
             meds_val = (drug_dict_meds.get("current_meds", "") or "").strip()
             if not meds_val:
-                ap_lower_iv = (row.get('assessment_and_plan', '') or '').lower()
+                ap_lower_iv = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
                 if ap_lower_iv:
                     IV_CHEMO_PATTERNS = [
                         r'(?:continue|continuing|on|receiving|started on|currently on)\s+(\w+(?:\s*/\s*\w+)?)',
@@ -1577,6 +1603,16 @@ def main():
                                 if any(pc in before for pc in PAST_CHEMO):
                                     continue
                                 found_chemo.append(drug)
+                    # v18: direct drug name scan as fallback (patterns may miss "irinotecan", "AC", etc.)
+                    if not found_chemo:
+                        for drug in KNOWN_CHEMO_IV:
+                            for m in re.finditer(r'\b' + re.escape(drug) + r'\b', ap_lower_iv):
+                                start = max(0, m.start() - 40)
+                                before = ap_lower_iv[start:m.start()]
+                                if any(pc in before for pc in PAST_CHEMO):
+                                    continue
+                                found_chemo.append(drug)
+                                break  # one match per drug is enough
                     if found_chemo:
                         found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
@@ -1720,7 +1756,7 @@ def main():
         if isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             if isinstance(type_val, str) and re.search(r'(?i)HER2\s*\+|HER2\s*pos', type_val):
-                ap_text_tnbc = (row.get('assessment_and_plan', '') or '').lower()
+                ap_text_tnbc = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
                 tnbc_in_ap = bool(re.search(r'\btnbc\b|triple.negative', ap_text_tnbc))
                 if not tnbc_in_ap:
                     # Also check if note has conclusive TNBC language
