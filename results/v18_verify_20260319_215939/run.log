@@ -7250,3 +7250,43 @@ Processing row 58 (36/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 11.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with high grade DCIS",
+  "Stage_of_Cancer": "Stage I",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 13.1s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone 32.5 IU/L, Estradiol, Ultrasensitive 5 pg/mL, Free T4 13 pmol/L, Thyroid Stimulating Hormone 0.68 mIU/L"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone 32.5 IU/L, Estradio" -> "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone  32.5 IU/L, Estradi"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 19.7s
+      [EXTRACT] raw={
+"findings": "Patient is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. Lumpectomy scar is well healed with no dominant
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 14.0s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "exemestane"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "exemestane" -> ""
+      [G4-FAITH] current_meds: "" -> "ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desv"
+      [POST-MEDS] ALBUTEROL INH, desvenlafaxine succinate (PRISTIQ ORAL), desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet, ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL), exemestane ([REDACTED]), gabapentin (NEURONTIN) 300 mg capsule, letrozole (FEMARA) 2.5 mg tablet, levothyroxine 25 mcg tablet, montelukast (SINGULAIR) 10 mg tablet, acetaminophen (TYLENOL) 500 mg tablet, CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL), IBUPROFEN ORAL, triamcinolone (KENALOG) 0.1 % cream -> exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet
