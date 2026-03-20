@@ -9398,3 +9398,61 @@ Processing row 77 (46/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 80.7s
+    Referral: 12.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "with me if she is unable to go on trial at [REDACTED], with dentist"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 12.5s
+    [POST-THERAPY] removed non-therapy: ['Patient wishes to explore targeted options for met']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
+    [POST-MEDS-IV-CHECK] Added from A/P: gemcitabine, eribulin, pembrolizumab
+  [ATTRIBUTION] 18/20 fields sourced (33.6s)
+  Row 77 total: 349.4s
+  Row 77 saved to progress
+
+Processing row 79 (47/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1726 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "53 y.o. female for initial consult for high grade ER/PR+ breast cancer in dermis post mastectomy for DCIS
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "53 y.o. female for initial consult for high grade ER/PR+ breast cancer in dermis" -> "53 y.o. female for follow-up consult for high grade ER/PR+ breast cancer in derm"
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
