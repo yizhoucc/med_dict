@@ -12254,3 +12254,16 @@ Processing row 99 (61/61)...
       [G4-FAITH] second opinion: "no" -> ""
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 14.9s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to liver and multiple sites",
+"
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+(80%)PR+(50%)HER2- invasive ductal carcinoma" -> "ER+(80%)PR+(50%) invasive ductal carcinoma"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage [X], now metastatic (Stage IV)" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage [X], now metastatic (Stage IV)"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
