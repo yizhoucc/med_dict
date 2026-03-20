@@ -10265,3 +10265,39 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 38.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [REDACTED] with probable involvement of the cisternal segment of the left trigeminal nerve, concerning for me
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED" -> "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED"
+      [G4-FAITH] findings: "Patient has an enhancing soft tissue lesion involving the le" -> "Patient has an enhancing soft tissue lesion involving the le"
+    Current_Medications: 4.1s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "predniSONE, fulvestrant, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE -> 
+    Treatment_Changes: 11.7s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn, predniSONE" -> "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid prn -> morphine 30 mg/d, ondansetron 8 mg tid prn
+  Phase 1 extraction (6 prompts): 102.5s
+  Cross-context injected (1283 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
