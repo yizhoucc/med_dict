@@ -8321,3 +8321,90 @@ Processing row 65 (41/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.6s
   Total extraction: 119.8s
+    Medication_Plan: 4.4s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific medications, doses, or frequencies were mentioned in the note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific medications, doses, or frequencies were mentione" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] medication_plan: "No specific medications, doses, or frequencies were mentioned in the note." -> "None"
+    Therapy_plan: 20.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiation. Discussed the recent FDA approval of pembrolizumab for early stage TNBC. Will review the risk
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiati" -> "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, with adjuvant radiati"
+      [G4-FAITH] therapy_plan: "Plan for neoadjuvant [REDACTED] then bilateral mastectomy, w" -> "Plan for neoadjuvant [REDACTED] then she is considering bila"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 14.3s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "adjuvant radiation is being considered. The patient may need radiation therapy depending on the findings post chemotherapy. It was also discussed that she may not be an ide
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "adjuvant radiation is being considered. The patient may need radiation therapy d" -> "adjuvant radiation is being considered. The patient may need radiation therapy d"
+    Procedure_Plan: 9.2s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, with adjuvant radiation. We would be happy to see her again after her chemotherapy to discuss nex
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi" -> "Plan for neoadjuvant [REDACTED] then she is considering bilateral mastectomy, wi"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['with adjuvant radiation.']
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.6s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after chemotherapy to discuss next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 60.6s
