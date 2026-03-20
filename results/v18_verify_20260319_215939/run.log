@@ -3471,3 +3471,19 @@ Processing row 28 (18/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 6.4s
   Total extraction: 101.2s
+    Medication_Plan: 17.8s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily now, Calcium supplementation with 1200mg/day combination of diet and supplement, Continue use of vaginal moisturizer (ie [REDACTED]), Can also 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 32.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Bone density scan can be completed when she returns from [REDACTE
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb" -> "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb"
