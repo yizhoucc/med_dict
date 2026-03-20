@@ -8032,3 +8032,48 @@ Processing row 63 (39/61)...
     [POST-DISTMET] added Distant Metastasis: 'Yes, to the sternum'
     [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment
     [POST-MEDS-IV-CHECK] Added from A/P: taxol
+  [ATTRIBUTION] 16/20 fields sourced (20.1s)
+  Row 63 total: 213.7s
+  Row 63 saved to progress
+
+Processing row 64 (40/61)...
+  Injected 6 term definitions: ['adjuvant chemotherapy', 'PR positive', 'mastectomy', 'lumpectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (5711 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 21.2s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 48-year-old female with a recent diagnosis of right breast invasive ductal carcinoma (IDC) with axillar
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 19.2s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER weak positive (2%), PR low positive (7%), HER2 neg (IHC 2+, FISH 2.March 09.8=1.4) invasive ductal carcinoma with high-grade DCIS component",
+  "Stage_of_Cancer": "Locally ad
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
