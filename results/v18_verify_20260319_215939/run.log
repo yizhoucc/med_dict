@@ -7677,3 +7677,57 @@ Processing row 62 (38/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 118.2s
+      [EXTRACT] raw={
+"findings": "Patient has locally advanced ER+/PR- HER2-negative left breast cancer. Pathology from left partial mastectomy and sentinel lymph node biopsy shows 3.8 x 3.5 cm grade 2 IDC with positive
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.5s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 8.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN-ODT) 8 mg rapid dissolve tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 177.1s
+  Cross-context injected (1301 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 16.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The patient has completed radiation therapy to the left breast and regional nodes. There is no evidence of disease recurrence on imaging and exam. The patient reports discolo
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The patient has completed radiation therapy to the left breast and regional node" -> "There is no evidence of disease recurrence on imaging and exam. The patient repo"
+      [G4-FAITH] response_assessment: "There is no evidence of disease recurrence on imaging and ex" -> "The patient reports discoloration and peeling on the skin af"
+  Phase 2 extraction (2 prompts): 20.5s
+  Total extraction: 197.6s
+    Medication_Plan: 21.6s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test for estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue letrozole. Test for estradiol and FSH once every 1-2 months until Septe" -> "Continue letrozole. Test for estradiol and FSH once every 1-2 months until Septe"
