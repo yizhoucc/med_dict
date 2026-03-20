@@ -790,3 +790,38 @@ Processing row 4 (4/61)...
     [POST-THERAPY] removed non-therapy: ['Get restaging studies prior to next visit.', 'CT and bone scan ordered and can be done once auth']
     [POST-ADV] patched from full note: ['full code']
     [POST-DISTMET] added Distant Metastasis: 'Yes (to left cervical lymph nodes, left internal mammary lymph nodes, and sternum)'
+  [ATTRIBUTION] 21/23 fields sourced (30.1s)
+  Row 4 total: 214.7s
+  Row 4 saved to progress
+
+Processing row 5 (5/61)...
+  Injected 4 term definitions: ['lumpectomy', 'mastectomy', 'FISH', 'DCIS']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1599 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.6s [improved]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "34-year-old female with ER+/PR+ IDC of the right breast, post-bilateral mastectomy with expanders, and in
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "34-year-old female with ER+/PR+ IDC of the right breast, post-bilateral mastecto" -> "34-year-old female with ER+/PR+ IDC of the right breast, post-bilateral mastecto"
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 11.3s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "2.3 cm, 0/3 LN negative — approximately Stage I-II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
+      [G3-IMPROVE] Stage_of_Cancer: "2.3 cm, 0/3 LN negative — approximately Stage I-II" -> "Not specified in the note"
+      [G4-FAITH] Stage_of_Cancer: "Not specified in the note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
