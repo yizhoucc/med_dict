@@ -6976,3 +6976,165 @@ Processing row 89 (55/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after XRT, approx 1-1.5 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 50.9s
+    Referral: 13.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC after XRT, approx 1-1.5 mos"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> "Positive for a single mutation in the BLM [REDACTED]: This m"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Specialty', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 13.0s
+    [POST-GENETICS] cleared completed test result: 'Positive for a single mutation in the BLM [REDACTED]: This means that Ms. [REDACTED] does not have [REDACTED] Syndrome but is a carrier for the condition. Being a carrier for [REDACTED] Syndrome is preliminarily linked to a moderate increase in cancer risk.'
+    [POST-THERAPY] removed non-therapy: ['Reduce GCSF dose to 50%.', 'Add PO dex at home prn N/V.', 'Add olanzapine 10 mg prn N/V.']
+    [POST-MEDS-IV-CHECK] Added from A/P: ac
+  [ATTRIBUTION] 16/18 fields sourced (30.8s)
+  Row 89 total: 316.3s
+  Row 89 saved to progress
+
+Processing row 90 (56/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1283 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "The patient has stage 4 breast cancer with metastasis to lymph nodes and bone. The purpose of this visit is
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.0s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage I, now metastatic (Stage IV)",
+  "Distant Metastasis": "Yes, to bone, liver",
+  "Metastasis": "Y
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
+      [G4-FAITH] Distant_Metastasis: "Yes, to bone, liver" -> "Yes, to bone"
+      [G4-FAITH] Metastasis: "Yes (to bone, liver)" -> "Yes (to bone)"
+      [G4-FAITH] Type_of_Cancer: "ER+/PR+ invasive ductal carcinoma" -> ""
+      [G4-FAITH] Distant Metastasis: "Yes, to bone, liver" -> "Yes, to bone"
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR+ invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 32.3s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Alanine transaminase 27, Aspartate transaminase 60[REDACTED], Alkaline Phosphatase 67, Bilirubin, Direct 0.1 (from 09/05/2009), Bilirubin, Total 0.4, NA 140, [REDACTED] 4.4, [REDACTE
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60[REDACTED], Alkaline Phosphata" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline Phosphatase 67, Bil"
+      [G4-FAITH] lab_summary: "Alanine transaminase 27, Aspartate transaminase 60, Alkaline" -> "Alanine transaminase 27, Aspartate transaminase 60, Alkaline"
+    Clinical_Findings: 24.2s
+      [EXTRACT] raw={
+"findings": "MRI pelvis: Moderate interval increase in size and extent of right iliac lesion abutting the right acetabular articular surface and extending along the right pubic root. Multiple new su
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.6s
+      [EXTRACT] raw={
+"current_meds": "everolimus, exemestane, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.3s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started lasix 10mg once a day with KCL 10Meq once daily.",
+"supportive_meds": "denosumab, potassium chloride"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab, potassium chloride" -> "denosumab, potassium chloride, everolimus, exemestane"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, potassium chloride, everolimus, exemestane -> denosumab
+  Phase 1 extraction (6 prompts): 97.3s
+  Cross-context injected (916 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is showing progression. MRI pelvis and PET/CT scans show an increase in bone metastases and new lesions, indicating that the cancer is not responding to the curren
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is showing progression. MRI pelvis and PET/CT sca" -> "MRI pelvis and PET/CT scans show an increase in bone metasta"
+  Phase 2 extraction (2 prompts): 14.2s
+  Total extraction: 111.5s
+    Medication_Plan: 10.4s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Continue [REDACTED] [REDACTED] and elevation, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab, topical antifungal 2 times daily"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
