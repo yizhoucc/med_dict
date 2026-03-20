@@ -9479,3 +9479,107 @@ Processing row 79 (47/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 U"
       [POST-MEDS] cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 Units by mouth daily after dinner., Disp: , Rfl: , dexAMETHasone (DECADRON) 4 mg tablet, Take 8 mg (2 tablets) by mouth the evening before infusion, repeat 1 hour before infusion, repeat the evening of infusion., Disp: 30 tablet, Rfl: 0 , LORazepam (ATIVAN) 1 mg tablet, Take 1 tablet (1 mg total) by mouth every 4 (four) hours as needed for Anxiety (Insomnia, Nausea, Vomiting)., Disp: 30 tablet, Rfl: 3 , ondansetron (ZOFRAN) 8 mg tablet, Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed for Nausea (Vomiting)., Disp: 30 tablet, Rfl: 3 , prochlorperazine (COMPAZINE) 10 mg tablet, Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting.)., Disp: 30 tablet, Rfl: 3 -> 
+    Treatment_Changes: 15.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet -> dexAMETHasone (DECADRON) 4 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet
+  Phase 1 extraction (6 prompts): 154.4s
+  Cross-context injected (729 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.8s
+  Total extraction: 160.3s
+    Medication_Plan: 12.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start TC x 4 on 04/11/19, with Claritin for 5-6 days. Discussed pain medications for cold cap and cold gloves for neuropathy and fingernails."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Start TC x 4 on 04/11/19, with 6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."

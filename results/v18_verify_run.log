@@ -5237,3 +5237,151 @@ Processing row 77 (46/61)...
       [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Nutrition']
       [G4-PROTECT] Genetics: restored safe negative "None"
       [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 12.5s
+    [POST-THERAPY] removed non-therapy: ['Patient wishes to explore targeted options for met']
+    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
+    [POST-MEDS-IV-CHECK] Added from A/P: gemcitabine, eribulin, pembrolizumab
+  [ATTRIBUTION] 18/20 fields sourced (33.6s)
+  Row 77 total: 349.4s
+  Row 77 saved to progress
+
+Processing row 79 (47/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (1726 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 13.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "53 y.o. female for initial consult for high grade ER/PR+ breast cancer in dermis post mastectomy for DCIS
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] summary: "53 y.o. female for initial consult for high grade ER/PR+ breast cancer in dermis" -> "53 y.o. female for follow-up consult for high grade ER/PR+ breast cancer in derm"
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 10.3s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 74.9s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU\/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg\/mL, Albumin, Serum \/ Pl
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 22.2s
+      [EXTRACT] raw={
+"findings": "Tumor size: 0.8cm grade 3 IDC in dermis and subcutis; <0.1cm from inferior and anterior margin; ER 95%, PR 70%, [REDACTED] 15-20%, [REDACTED] 1+, FISH not amplified. MRI findings: benig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 16.8s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 U"
+      [POST-MEDS] cholecalciferol, vitamin D3, (VITAMIN D3 ORAL), Take 1,000 Units by mouth daily after dinner., Disp: , Rfl: , dexAMETHasone (DECADRON) 4 mg tablet, Take 8 mg (2 tablets) by mouth the evening before infusion, repeat 1 hour before infusion, repeat the evening of infusion., Disp: 30 tablet, Rfl: 0 , LORazepam (ATIVAN) 1 mg tablet, Take 1 tablet (1 mg total) by mouth every 4 (four) hours as needed for Anxiety (Insomnia, Nausea, Vomiting)., Disp: 30 tablet, Rfl: 3 , ondansetron (ZOFRAN) 8 mg tablet, Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed for Nausea (Vomiting)., Disp: 30 tablet, Rfl: 3 , prochlorperazine (COMPAZINE) 10 mg tablet, Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting.)., Disp: 30 tablet, Rfl: 3 -> 
+    Treatment_Changes: 15.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet -> dexAMETHasone (DECADRON) 4 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet
+  Phase 1 extraction (6 prompts): 154.4s
+  Cross-context injected (729 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.8s
+  Total extraction: 160.3s
+    Medication_Plan: 12.0s
+      [EXTRACT] raw={
+    "medication_plan": "Start TC x 4 on 04/11/19, with Claritin for 5-6 days. Discussed pain medications for cold cap and cold gloves for neuropathy and fingernails."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Start TC x 4 on 04/11/19, with 6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.9s [faith-trimmed]
