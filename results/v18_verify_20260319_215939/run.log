@@ -3666,3 +3666,27 @@ Processing row 29 (19/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
   Phase 2 extraction (2 prompts): 6.4s
   Total extraction: 88.3s
+    Medication_Plan: 30.4s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclopho
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 34.0s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, including either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plu
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.6s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the multimodality approach to breast cancer treatment. The patient understands that her treatment recommendations will include chemotherapy, biological therapi
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "We discussed the multimodality approach to breast cancer treatment. The patient " -> "The patient understands that her treatment recommendations will include radiatio"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
