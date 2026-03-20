@@ -2990,3 +2990,22 @@ Processing row 19 (15/61)...
     [POST-THERAPY] removed non-therapy: ['OK to start.']
     [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
     [POST-DISTMET] added Distant Metastasis: 'Yes (to bone and lymph nodes)'
+  [ATTRIBUTION] 22/23 fields sourced (41.7s)
+  Row 19 total: 199.0s
+  Row 19 saved to progress
+
+Processing row 21 (16/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1415 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.5s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "in-person",
+"summary": "Patient presents with a history of right breast IDC, now diagnosed with metastatic HR+ breast cancer rec
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
