@@ -8875,3 +8875,63 @@ Processing row 71 (44/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 25.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound-guided core biopsy: Invasive ductal carcinoma, 0.95 cm, modified [REDACTED]-[REDACTED]-[REDACTED] grade 1, ER+ (99%), PR- (<
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound-guided core biopsy:" -> "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound-guided core biopsy:"
+      [G4-FAITH] findings: "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound" -> "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound"
+    Current_Medications: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 16.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Instructed patient to begin letrozole, prescription ordered.",
+"supportive_meds": "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Ev
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours, zoledronic acid/mannitol-water (RECLAST IV) Intravenous -> zoledronic acid/mannitol-water (RECLAST IV) Intravenous
+  Phase 1 extraction (6 prompts): 77.3s
+  Cross-context injected (722 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 83.6s
+    Medication_Plan: 5.6s
+      [EXTRACT] raw={
+    "medication_plan": "Instructed patient to begin letrozole, prescription ordered."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
