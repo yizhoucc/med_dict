@@ -10377,3 +10377,51 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 57.3s
+    Referral: 9.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc referral",
+"Others": "None",
+"follow up": "Follow up in 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 9.5s
+    [POST-THERAPY] removed non-therapy: ['She will continue her steroid taper per Dr.', '[REDACTED] and continue pain medications as prescr']
+    [POST-MEDS-IV-CHECK] Added from A/P: olaparib, palbociclib, fulvestrant
+  [ATTRIBUTION] 20/22 fields sourced (40.3s)
+  Row 84 total: 232.5s
+  Row 84 saved to progress
+
+Processing row 85 (52/61)...
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
