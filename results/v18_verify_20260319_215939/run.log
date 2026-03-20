@@ -9297,3 +9297,31 @@ Processing row 77 (46/61)...
       [POST-SUPP] ferrous sulfate (IRON ORAL), magnesium oxide (MAG-OX) -> 
   Phase 1 extraction (6 prompts): 189.3s
   Cross-context injected (1777 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 29.2s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient has been off systemic therapy since 03/15/19. Imaging shows worsening of metastatic disease with interval enlargement of hepatic and nodal metastases. CT abdomen/pelv
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient has been off systemic therapy since 03/15/19. Imaging shows worsening of" -> "Patient has been off systemic therapy since 03/15/19. Imaging shows worsening of"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 33.2s
+  Total extraction: 222.5s
+    Medication_Plan: 8.2s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue 800 mg Mag-Ox supplement daily." -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva" -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, norvasc"
