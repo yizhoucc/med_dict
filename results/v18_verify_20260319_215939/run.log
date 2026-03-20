@@ -6034,3 +6034,13 @@ Processing row 45 (29/61)...
       [G4-PROTECT] Nutrition: restored safe negative "None"
   Referral extraction (full note): 11.2s
     [POST-THERAPY] removed non-therapy: ['Continue naproxen 500mg bid, APAP ok if taken spar', 'Continue allegra daily.', 'Continue exercise.', 'Continue PO iron.']
+  [ATTRIBUTION] 23/23 fields sourced (54.5s)
+  Row 45 total: 331.9s
+  Row 45 saved to progress
+
+Processing row 48 (30/61)...
+  Injected 3 term definitions: ['PR positive', 'mastectomy', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Impression/Plan:'
+  Regex extraction succeeded (1682 chars)
+  A/P extraction: 0.0s
