@@ -11060,3 +11060,43 @@ Processing row 89 (55/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 31.7s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. After treatm
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient is currently on cycle 2 of AC treatment for breast c" -> "Patient is currently on cycle 2 of AC treatment for breast c"
+    Current_Medications: 3.3s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "AC, GCSF"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "AC, GCSF" -> "AC"
+      [G4-FAITH] current_meds: "AC" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+      [POST-MEDS] AC -> 
+    Treatment_Changes: 13.7s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V, switch to granisetron for anti-nausea.",
+"supportive_meds": "gabapentin, lidocaine pa
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 1" -> "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 1"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin, lidocaine patches, analgesics prn -> 
+  Phase 1 extraction (6 prompts): 181.0s
+  Cross-context injected (1200 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
