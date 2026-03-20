@@ -2839,3 +2839,4 @@ Processing row 53 (34/61)...
     [POST-STAGE-VERIFY] removed unsupported 'Originally Stage IIA': 'Originally Stage IIA, now metastatic (Stage IV)' → 'now metastatic (Stage IV)'
   [ATTRIBUTION] 17/20 fields sourced (31.7s)
   Row 53 total: 180.4s
+From v4.47 onwards, when a model cache is to be returned, `generate` will return a `Cache` instance instead by default (as opposed to the legacy tuple of tuples format). If you want to keep returning the legacy format, please set `return_legacy_cache=True`.
