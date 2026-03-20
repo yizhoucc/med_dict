@@ -5477,3 +5477,10 @@ Processing row 42 (27/61)...
       [G3-IMPROVE] Stage_of_Cancer: "Originally Stage I, now Stage I (second primary)" -> "Stage I (second primary)"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 61.2s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 5.4, Hgb 11.1, Hgb 13.7, WBC 5.9, WBC 10.5, WBC 5.2, Platelet Count [REDACTED], Platelet Count [REDACTED], Platelet Count [REDACTED], Albumin 4.0, Alkaline Phosphatase 60, Alanin
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
