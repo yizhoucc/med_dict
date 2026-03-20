@@ -10108,3 +10108,38 @@ Processing row 83 (50/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 41.3s [improved]
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadenopathy, stable in size compared to 03/10/2020. Multiple hypoattenuating lesions in the right an
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadeno" -> "CT CAP on 07/01/2020 showed pathologic right axillary and mediastinal lymphadeno"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 45.1s
+  Total extraction: 152.0s
+    Medication_Plan: 9.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue xeloda 1500mg BID for now, could consider starting low dose steroids, continue zolendronic acid"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 27.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Repeat CT CAP now, Repeat LP for CSF cytology, Repeat MRI spine to rule out LMD in the spine, Recommend referral to radiation oncology to consider either focal CNS radiation or 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.5s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]. The patient is interested in a UCSF Rad Onc opinion as well."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
