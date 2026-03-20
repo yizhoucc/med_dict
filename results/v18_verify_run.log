@@ -2,4 +2,5 @@ We suggest you to set `torch_dtype=torch.float16` for better efficiency with AWQ
 Found incomplete run with matching config: results/v18_verify_20260319_215939
 Auto-resuming...
 Loading model...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:13,  3.35s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:10,  3.42s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:10<00:07,  3.61s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:14<00:03,  3.71s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.54s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.55s/it]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
