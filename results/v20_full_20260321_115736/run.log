@@ -2846,3 +2846,75 @@ Processing row 19 (15/61)...
       [G4-FAITH] current_meds: "letrozole, palbociclib" -> ""
       [G4-FAITH] EMPTIED: ['current_meds']
       [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 15.1s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start Letrozole, Rx given; Rx for Palbociclib. OK to start.",
+"supportive_meds": "denosumab"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab" -> "denosumab, cholecalciferol, vitamin D3, cyanocobalamin, vitamin B-12, estradiol,"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, cholecalciferol, vitamin D3, cyanocobalamin, vitamin B-12, estradiol, metformin, multivitamin, rosuvastatin, telmisartan -> denosumab
+  Phase 1 extraction (6 prompts): 104.1s
+  Cross-context injected (1010 chars)
+    Treatment_Goals: 4.1s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.9s
+  Total extraction: 111.0s
+    Medication_Plan: 12.9s
+      [EXTRACT] raw={
+    "medication_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab after dental clearance."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.5s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthly blood work on Palbociclib. Initiation of denosumab. Needs dental evaluation first."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl" -> "Start Letrozole, Rx given. Rx for Palbociclib. OK to start. She will need monthl"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 4.6s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Rad Onc referral" -> "Referral to radiation oncology for consult"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
