@@ -417,3 +417,47 @@ Processing row 7 (2/7)...
       [G4-PROTECT] Specialty: restored safe negative "None"
       [G4-PROTECT] Nutrition: restored safe negative "None"
   Referral extraction (full note): 8.9s
+  [ATTRIBUTION] 15/19 fields sourced (24.0s)
+  Row 7 total: 165.0s
+  Row 7 saved to progress
+
+Processing row 11 (3/7)...
+  Injected 1 term definitions: ['FISH']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1955 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Metastatic ER+/PR+/HER2+ breast cancer to brain, lung, nodes, and bone. The purpose of this visit is to rev
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 16.3s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to brain, lung, nodes, bone",
+  "
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Metastasis: "Yes (to brain, lung, nodes, bone)" -> "Yes (to brain, lung, bone)"
+      [G3-IMPROVE] Distant_Metastasis: "Yes, to brain, lung, nodes, bone" -> "Yes, to brain, lung, bone"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
