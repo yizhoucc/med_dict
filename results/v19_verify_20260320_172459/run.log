@@ -5633,3 +5633,37 @@ Processing row 45 (29/61)...
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 68.6s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, Bilirubin 0.3, Urea Nitrogen 15, Calcium 10.0, Chloride [REDACTED], Creatinine 0.62, eGFR - low estimat
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B" -> "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.1s
+      [EXTRACT] raw={
+"findings": "Patient is s/p bilateral mastectomies with residual 3.5 cm disease and positive margins. Pathology shows 2/2 positive nodes with extranodal extension. Imaging findings include: hypermet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.7s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg BID, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg BID, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 154.3s
+  Cross-context injected (1204 chars)
