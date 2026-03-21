@@ -10837,3 +10837,29 @@ Processing row 89 (55/61)...
       [G4-FAITH] goals_of_treatment: "curative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 35.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. A
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent c" -> "No specific imaging or tumor marker evidence is provided to assess the current r"
+      [G4-FAITH] response_assessment: "No specific imaging or tumor marker evidence is provided to " -> "No specific imaging or tumor marker evidence is provided to "
+  Phase 2 extraction (2 prompts): 39.1s
+  Total extraction: 244.3s
+    Medication_Plan: 15.5s
+      [EXTRACT] raw={
+    "medication_plan": "Continue cycle 4 of AC in 1 week, reduce GCSF dose to 50%. Add PO dex at home prn N/V, add olanzapine 10 mg prn N/V. Try granisetron for N/V."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.7s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from symptoms. Reduce GCSF dose to 50%. Add PO dex at home prn N/V. Add olanzapine 10 mg prn N/V
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
