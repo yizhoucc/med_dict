@@ -1567,6 +1567,45 @@ def main():
                 if len(filtered) < len(meds_list):
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
+        # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
+        tc_dict = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_dict, dict):
+            supp_val = (tc_dict.get("supportive_meds", "") or "").strip()
+            if supp_val:
+                # Extract allergy drug names from note text
+                # Patterns: "ALL: drug1, drug2, ..." or "Allergies: ..." or "Allergies/Contraindications ..."
+                allergy_drugs = set()
+                # Pattern 1: "ALL:" abbreviation (common in clinical notes)
+                all_match = re.search(r'\bALL:\s*(.+?)(?:\.\s|\n|$)', note_text)
+                if all_match:
+                    for drug in re.split(r'[,;]', all_match.group(1)):
+                        d = drug.strip().lower()
+                        if d and d not in ('nkda', 'none', 'no known'):
+                            allergy_drugs.add(d)
+                # Pattern 2: "Allergies:" or "Allergy:" section
+                alg_match = re.search(r'(?i)\bAllerg(?:ies|y)(?:/Contraindications)?[\s:]+(.+?)(?:\n\n|\n\s*\n|Review of)', note_text)
+                if alg_match:
+                    for drug in re.split(r'[,;]', alg_match.group(1)):
+                        d = drug.strip().lower()
+                        # Skip common non-drug entries
+                        if d and len(d) > 1 and d not in ('nkda', 'none', 'no known', 'no known drug allergies'):
+                            allergy_drugs.add(d)
+                if allergy_drugs:
+                    supp_list = [s.strip() for s in supp_val.split(",")]
+                    filtered_supp = []
+                    for med in supp_list:
+                        if not med:
+                            continue
+                        med_lower = med.lower().strip()
+                        # Check if the core drug name matches any allergy
+                        is_allergy = any(alg in med_lower or med_lower in alg for alg in allergy_drugs)
+                        if is_allergy:
+                            print(f"    [POST-SUPP-ALLERGY] Removed allergy item from supportive_meds: '{med}'")
+                            continue
+                        filtered_supp.append(med)
+                    if len(filtered_supp) < len(supp_list):
+                        tc_dict["supportive_meds"] = ", ".join(filtered_supp) if filtered_supp else ""
+
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
         drug_dict_meds = keypoints.get("Current_Medications", {})
@@ -1587,8 +1626,8 @@ def main():
                         r'started\s+(\w+)\s+on\s+\d',
                         # "on DRUG cycle" / "on DRUG day" (e.g. "on Gemzar Cycle #2")
                         r'\bon\s+(\w+)\s+(?:cycle|day)',
-                        # "receiving/given DRUG"
-                        r'(?:receiving|given)\s+(\w+)',
+                        # "receiving DRUG" / "was/been given DRUG" (exclude prepositional "given" = "considering")
+                        r'(?:receiving|(?:was|been|being|be)\s+given)\s+(\w+)',
                         # "DRUG day N" (e.g. "AC day 1")
                         r'(\w+)\s+(?:day|d)\s*\d+',
                     ]
