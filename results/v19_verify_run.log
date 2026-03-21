@@ -10564,3 +10564,158 @@ Processing row 86 (53/61)...
       [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 14.5s
+    [POST-THERAPY] removed non-therapy: ['Ms.']
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+  [ATTRIBUTION] 14/15 fields sourced (26.3s)
+  Row 86 total: 144.5s
+  Row 86 saved to progress
+
+Processing row 87 (54/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1953 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 14.6s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "36 year old with a Stage III left sided breast cancer diagnosed in March 2019, now with metastatic diseas
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 18.1s [improved, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER-/PR-/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage IIIB, now metastatic (Stage IV)",
+"Distant Metastasis": 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "Originally ER+/PR+/HER2-, metastatic biopsy ER-/PR-/HER2- invasive ductal carcin" -> "ER+/PR+/HER2- invasive ductal carcinoma, metastatic biopsy ER-/PR-/HER2-"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 23.8s
+      [EXTRACT] raw={
+"findings": "Patient has a history of Stage III left-sided breast cancer with two tumors measuring 4.0 and 2.6 cm, with 23 lymph nodes involved. The primary tumor was poorly differentiated with hist
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.9s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "capecitabine (XELODA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "capecitabine (XELODA)" -> "capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week off. -> capecitabine (XELODA) 500 mg tablet
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 69.7s
+  Cross-context injected (972 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 75.9s
+    Medication_Plan: 18.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "She is on xeloda. She will need anti her 2 therapy if her 2 positive disease is confirmed. Restaging after 3 months of therapy if she is stable clinically. If she has progres
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "She is on xeloda. She will need anti her 2 therapy if her 2 positive disease is " -> "She is on xeloda. If her 2 positive disease is confirmed, she will need anti her"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 20.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "She is on xeloda and will continue this therapy. If stable clinically after 3 months of therapy, restaging will be done. If she has progression on xeloda, she will be considered
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "She is on xeloda and will continue this therapy. If stable c" -> "She is on xeloda and I would recommend restaging after 3 mon"
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.4s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She had radiation to left chest wall and draining lymph nodes and on the last day of radiation complained of a headache. Imaging was done that showed two brain metastases. 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She had radiation to left chest wall and draining lymph nodes and on the last da" -> "She had radiation to left chest wall and draining lymph nodes. She had resection"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "She had radiation to left chest wall and draining lymph nodes. She had resection" -> "She had resection of one brain metastasis and stereotactic XRT to both brain met"
+    Procedure_Plan: 12.2s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "I recommending doing her 2 on the brain metastasis and hormone studies and her 2 on the residual disease. I discussed her case and asked her primary oncologist to repeat recep
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "I recommending doing her 2 on the brain metastasis and hormone studies and her 2" -> "Planned procedures include hormone studies and HER2 testing on the residual dise"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 11.9s
