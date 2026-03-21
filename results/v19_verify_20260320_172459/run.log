@@ -9061,3 +9061,21 @@ Processing row 77 (46/61)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 36.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently showing progression. Imaging from CT abdomen/pelvis on 08/07/19 shows a 2 cm hypodense lesion in segment 7 of the liver, which has progressively enlar
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently showing progression. Imaging from CT abdomen/pelvis on 0" -> "The cancer is currently showing progression. Imaging from CT abdomen/pelvis on 0"
+      [G4-FAITH] response_assessment: "The cancer is currently showing progression. Imaging from CT" -> "The cancer is currently showing progression. Imaging from CT"
+  Phase 2 extraction (2 prompts): 40.3s
+  Total extraction: 191.5s
+    Medication_Plan: 8.1s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue 800 mg Mag-Ox supplement daily." -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva" -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, norvasc"
