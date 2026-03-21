@@ -241,3 +241,63 @@ Processing row 1 (2/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 31.4s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 2.1 (L), Alk Phos 183 (H), Calcium 8.2 (L), Chloride 87 (L), Creatinine 0.42 (L), eGFR if non-African American >120, eGFR if African [REDACTED] >120, Potassium 3.1 (L), Sodiu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 56.9s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. Anemia due to malig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient presents with chest wall more tender, erythematous, " -> "Patient presents with chest wall more tender, erythematous, "
+    Current_Medications: 4.5s
+      [EXTRACT] raw={
+  "current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 17.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Changed irinotecan to every other week and increased dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron, prochlorperazine, loperamide, morphine, oxyco
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron, prochlorperazine, loperamide, morphine, oxycodone, cyclobenzaprine, gabapentin, pregabalin, rivaroxaban -> ondansetron, prochlorperazine, loperamide, morphine, oxycodone
+  Phase 1 extraction (6 prompts): 140.6s
+  Cross-context injected (1547 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 25.0s
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer - chest wall more tender, erythematous, and edematous which is worrisome for infection. Back pain is worse which could be due to disease progression.
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 28.9s
+  Total extraction: 169.5s
+    Medication_Plan: 21.6s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn, Effexor-XR 75 mg qd, [REDACTED] water instead of free water, 500ml NS IV, 40 mEq PO potassiu
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, Flexeril TID, oxycodone 5mg prn"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
