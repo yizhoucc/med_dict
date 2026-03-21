@@ -1,0 +1,4 @@
+We suggest you to set `torch_dtype=torch.float16` for better efficiency with AWQ.
+Starting new run: results/v19_verify_20260320_172459
+Loading model...
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:13,  3.46s/it]
