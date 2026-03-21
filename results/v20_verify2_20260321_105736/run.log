@@ -1072,3 +1072,41 @@ Processing row 84 (6/7)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-MEDS] predniSONE, fulvestrant, palbociclib, denosumab -> fulvestrant, palbociclib, denosumab
+    Treatment_Changes: 13.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE dose decreased to 50 mg/d",
+"supportive_meds": "morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine 30 mg/d, metoclopramide 10 mg qid, ondansetron 8 mg tid, predniSONE 50 mg/d -> morphine 30 mg/d, ondansetron 8 mg tid, predniSONE 50 mg/d
+  Phase 1 extraction (6 prompts): 114.6s
+  Cross-context injected (1122 chars)
+    Treatment_Goals: 3.8s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 26.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. MRI on 06/05/2018 shows an enhanci
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently progressing. On 04/11/2018, she progressed on first line" -> "The cancer is currently progressing. On 04/11/2018, she progressed on first line"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 30.7s
+  Total extraction: 145.3s
+    Medication_Plan: 6.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
