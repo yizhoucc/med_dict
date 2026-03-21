@@ -3347,3 +3347,145 @@ RESULTS FOR ROW 33
     "Return to clinic in 6 months"
   ]
 }
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 34
+============================================================
+
+--- Column: coral_idx ---
+173
+
+--- Column: note_text ---
+"Subjective:      ***** ***** ***** is a 71 y.o. year old female with Stage III left breast cancer, about 4cm, 11+LNS, ER positive PR negative, ***** negative, s/p bilateral mastectomies, partial AC/T chemotherapy, and currently on arimidex (August 2012) and ***** *****    HPI     ***** is here again with a local recurrence. Her full history is updated and summarized below for the record:    2011 - initial presentation  - s/p left lumpectomy for a 1.4cm IDC, ER positive, PR low, ***** negative  - refused SLN Bx, reexcision, chemotherapy    2012 - rapid local recurrence L breast  - s/p bilateral mastectomies with implants for recurrent IDC 3.3cm with 11 positive LNs, ER positive, PR negative, ***** negative.  Systemic therapy was as follows:  - *****/***** (shortened by *****) in 2013  - anastrozole *****-***** self D/Ced against advice  - ***** ***** *****-*****  - declined CW XRT    2020 - local recurrence L breast  - FNA left breast= ductal carcinoma, ER positive (3+; 100%), PR positive (3+; 50%), ***** negative (IHC 2+; FISH 2.April 16.9=1.6X).   - FNA of L axillary LN = negative  - excision = invasive ductal ca 1.7cm, grade 3, extensive *****, skeletal muscle invasion, margins negative    Other relevant recent data:  January 2020 - PET-CT = hypermetabolic tumor at lateral margin of left breast implant, focal uptake without CT lesion in left lateral 6th rib of unclear significance  January 2020 - Brain MRI = negative  January 2020 - Breast MRI = 2 cm mass in left reconstructed breast. No suspicious LNs    ***** has been complaining of SOB at minimal exertion. Recent evaluation by cardiology was negative and her cardiac echo is normal. She has had COPD in the past, although apparently with considerable improvement.    Patient's allergies, medications, past medical, surgical, family and social histories were reviewed and updated as appropriate.    Review of Systems   Constitutional: Negative.         Performance status: ECOG 0   Respiratory: Negative.  \n   Cardiovascular: Negative.    Gastrointestinal: Negative.    Musculoskeletal: Negative.    Skin: Negative.    Psychiatric/Behavioral: Negative.          Objective:   Blood pressure (!) *****/*****, pulse 85, temperature 36.1 C (97 F), temperature source Temporal, resp. rate 16, height 163.5 cm (5' 4.37\"), weight 92.1 kg (203 lb), SpO2 100 %.     Physical Exam   Constitutional: She is oriented to person, place, and time. She appears well-developed and well-nourished.   HENT:   Head: Normocephalic and atraumatic.   Mouth/Throat: Oropharynx is clear and moist.   Eyes: EOM are normal. No scleral icterus.   Neck: Normal range of motion. Neck supple.   Cardiovascular: Normal rate, regular rhythm and normal heart sounds. Exam reveals no gallop and no friction rub.   No murmur heard.  Pulmonary/Chest: Effort normal and breath sounds normal. No respiratory distress. She has no wheezes. She has no rales. She exhibits no tenderness. Right breast exhibits no inverted nipple, no mass and no tenderness. Left breast exhibits no inverted nipple, no mass and no tenderness.   S/p bilateral mastectomies with implants.    Abdominal: Soft. Bowel sounds are normal. She exhibits no distension and no mass. There is no abdominal tenderness. There is no rebound and no guarding.   Musculoskeletal:         General: No edema.   Lymphadenopathy:     She has no cervical adenopathy.     She has no axillary adenopathy.        Right: No supraclavicular adenopathy present.        Left: No supraclavicular adenopathy present.   Neurological: She is alert and oriented to person, place, and time. She exhibits normal muscle tone. Coordination normal.   Skin: No rash noted. No erythema.   Psychiatric: She has a normal mood and affect. Her behavior is normal. Thought content normal.       DATA   August 2018 - labs/markers - unremarkable   February 2018 - DXA = -2.0 / -1.0 / -1.8 (decreased c/w 2015)      Assessment:       Stage III breast cancer - *****       Plan:     \n   ***** has had an unfortunate local relapse. This is actually her second local relapse following a rapid early local relapse in 2012. She did enjoy an 8 year disease-free interval but the current local relapse ***** a high risk of future relapse and mortality from this disease.    The benefit of chemotherapy in reducing her recurrence risk and mortality was reviewed. This was the subject of the CALOR study which showed that adjuvant chemotherapy following resection of local recurrences benefits ***** with ER negative disease, but does not benefit patients with ER positive disease (***** ***** *****). I don't think ***** will benefit from chemotherapy at this point.    ***** will benefit from the resumption of hormonal therapy. Her recurrence did occur a year after stopping anastrozole against medical advice, so potentially this disease remains ***** sensitive. On the other hand, the disease is naive to tamoxifen and this may be a more effective option in this case, specially considering the possibility of *****-resistant clonal ***** mutations that may have arisen during the years of ***** therapy. Side effects of tamoxifen were discussed including the potential for thromboembolic phenomenon including DVT and PE and endometrial cancers.     ***** has had two local recurrences and will benefit from chest wall RT. She declined this previously which is unfortunate, but she accepts a referral now. ***** refer to ***** for consultation.    In summary the plan is:  - check labs  - tamoxifen 20mg PO qD  - referral to *****  - return to clinic in 6 months      \n"
+
+--- Column: assessment_and_plan ---
+"Assessment:       Stage III breast cancer - *****       Plan:     \n   ***** has had an unfortunate local relapse. This is actually her second local relapse following a rapid early local relapse in 2012. She did enjoy an 8 year disease-free interval but the current local relapse ***** a high risk of future relapse and mortality from this disease.    The benefit of chemotherapy in reducing her recurrence risk and mortality was reviewed. This was the subject of the CALOR study which showed that adjuvant chemotherapy following resection of local recurrences benefits ***** with ER negative disease, but does not benefit patients with ER positive disease (***** ***** *****). I don't think ***** will benefit from chemotherapy at this point.    ***** will benefit from the resumption of hormonal therapy. Her recurrence did occur a year after stopping anastrozole against medical advice, so potentially this disease remains ***** sensitive. On the other hand, the disease is naive to tamoxifen and this may be a more effective option in this case, specially considering the possibility of *****-resistant clonal ***** mutations that may have arisen during the years of ***** therapy. Side effects of tamoxifen were discussed including the potential for thromboembolic phenomenon including DVT and PE and endometrial cancers.     ***** has had two local recurrences and will benefit from chest wall RT. She declined this previously which is unfortunate, but she accepts a referral now. ***** refer to ***** for consultation.    In summary the plan is:  - check labs  - tamoxifen 20mg PO qD  - referral to *****  - return to clinic in 6 months      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Stage III left breast cancer with a local recurrence, patient is here for resumption of hormonal therapy and referral for chest wall RT."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER positive PR negative [REDACTED] negative invasive ductal carcinoma, HER2-",
+    "Stage_of_Cancer": "Originally Stage III, now local recurrence",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "August 2018 - labs/markers - unremarkable"
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology: Local recurrence in left breast with a 1.7cm invasive ductal carcinoma, grade 3, extensive necrosis, skeletal muscle invasion, negative margins. Imaging: PET-CT shows hypermetabolic tumor at lateral margin of left breast implant, focal uptake without CT lesion in left lateral 6th rib of unclear significance. Breast MRI shows a 2 cm mass in left reconstructed breast with no suspicious lymph nodes. Physical Exam: No palpable masses, no tenderness, no lymphadenopathy, no skin changes."
+  },
+  "Current_Medications": {
+    "current_meds": "arimidex"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "resumption of hormonal therapy with tamoxifen 20mg PO qD",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Local recurrence in left breast, 1.7cm IDC on excisional biopsy. PET-CT shows hypermetabolic tumor at lateral margin of left breast implant, focal uptake without CT lesion in left lateral 6th rib of unclear significance. Breast MRI shows a 2 cm mass in left reconstructed breast with no suspicious lymph nodes."
+  },
+  "Medication_Plan": {
+    "medication_plan": "tamoxifen 20mg PO qD"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "resume hormonal therapy with tamoxifen 20mg PO qD, referral for chest wall RT"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "She will benefit from chest wall RT and has accepted a referral for consultation."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: return to clinic in 6 months"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "refer to [REDACTED] for consultation",
+    "Others": "None",
+    "follow up": "return to clinic in 6 months"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "return to clinic in 6 months"
+  ],
+  "second opinion": [
+    "I don't think [REDACTED] will benefit from chemotherapy at this point."
+  ],
+  "in-person": [
+    "return to clinic in 6 months"
+  ],
+  "summary": [
+    "Stage III breast cancer - [REDACTED] has had an unfortunate local relapse."
+  ],
+  "Stage_of_Cancer": [
+    "Stage III breast cancer - [REDACTED] has had an unfortunate local relapse."
+  ],
+  "Metastasis": [
+    "enjoyed an 8 year disease-free interval"
+  ],
+  "Distant Metastasis": [
+    "current local relapse"
+  ],
+  "lab_summary": [
+    "check labs"
+  ],
+  "recent_changes": [
+    "tamoxifen 20mg PO qD"
+  ],
+  "goals_of_treatment": [
+    "check labs  - tamoxifen 20mg PO qD  - referral to [REDACTED]  - return to clinic in 6 months"
+  ],
+  "response_assessment": [
+    "local relapse"
+  ],
+  "medication_plan": [
+    "tamoxifen 20mg PO qD"
+  ],
+  "therapy_plan": [
+    "tamoxifen 20mg PO qD  - referral to [REDACTED]"
+  ],
+  "radiotherapy_plan": [
+    "She has had two local recurrences and will benefit from chest wall RT. She declined this previously which is unfortunate, but she accepts a referral now."
+  ],
+  "Next clinic visit": [
+    "return to clinic in 6 months"
+  ],
+  "Specialty": [
+    "[REDACTED] refer to [REDACTED] for consultation."
+  ],
+  "follow up": [
+    "return to clinic in 6 months"
+  ]
+}
