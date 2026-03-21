@@ -9024,3 +9024,142 @@ Processing row 77 (46/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 20.5s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, "
+      [POST-MEDS] amLODIPine (NORVASC) 5 mg tablet, blood glucose test strip, blood-glucose (ONETOUCH [REDACTED] [REDACTED]) monitoring kit, carvedilol (COREG) 3.125 mg tablet, cholecalciferol, vitamin D3, (VITAMIN D3) 1,000 unit CAP, ferrous sulfate (IRON ORAL), glimepiride ([REDACTED]) 2 mg tablet, JANUVIA 100 mg tablet, lanolin/mineral oil/petrolatum (ARTIFICIAL TEARS OPHTH) [REDACTED] gel, lisinopril (PRINIVIL,ZESTRIL) 40 mg tablet, magnesium oxide (MAG-OX) 400 mg tablet, metFORMIN (GLUCOPHAGE) 1,000 mg tablet, ONETOUCH ULTRA BLUE TEST STRIP test strip, simvastatin (ZOCOR) 20 mg tablet -> 
+    Treatment_Changes: 15.7s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ferrous sulfate (IRON ORAL), magnesium oxide (MAG-OX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ferrous sulfate (IRON ORAL), magnesium oxide (MAG-OX) -> 
+  Phase 1 extraction (6 prompts): 199.4s
+  Cross-context injected (1158 chars)
+    Treatment_Goals: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 48.0s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently showing disease progression. Imaging from CT abdomen/pelvis on 08/07/19 shows a 2 cm hypodense lesion in segment 7 of the liver, which has progressive
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "The cancer is currently showing disease progression. Imaging" -> "The cancer is currently showing disease progression. Imaging"
+  Phase 2 extraction (2 prompts): 52.7s
+  Total extraction: 252.2s
+    Medication_Plan: 11.4s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue 800 mg Mag-Ox supplement daily."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue 800 mg Mag-Ox supplement daily." -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, [REDACTED], norva" -> "Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, norvasc"
+    Therapy_plan: 34.4s
+      [EXTRACT] raw={
+    "therapy_plan": "Patient wishes to explore targeted options for metastatic breast cancer. She is interested in screening for a trial at [REDACTED] including phase 1 [REDACTED]+pembrolizumab and 
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 15.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Patient has a consultation with radiation oncology tomorrow to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy a
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 16.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "The patient has a consultation with radiation oncology tomorrow to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy 
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] procedure_plan: "The patient has a consultation with radiation oncology tomor" -> "The patient has a consultation with radiation oncology tomor"
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['The patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
+    Imaging_Plan: 18.5s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "imaging_plan": "CT in 3 months if changing, MRCP if changing, Echo 09/08/2019."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "CT in 3 months if changing, MRCP if changing, Echo 09/08/2019." -> "Echo 09/08/2019, CT in 3 months if changing, MRCP if changing."
+      [G4-FAITH] imaging_plan: "Echo 09/08/2019, CT in 3 months if changing, MRCP if changin" -> "Echo 09/08/2019. If this echo is normal we can stop monitori"
+      [G5-TEMPORAL] imaging_plan: "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to" -> "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to"
+    Lab_Plan: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 13.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "She is interested in screening for this trial. We discussed trial options at [REDACTED] including phase 1 [REDACTED]+pembrolizumab as well as phase 3 trial of [REDACTED]
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "She is interested in screening for this trial. We discussed trial options at [RE" -> "None planned. Patient is interested in screening for trial options including pha"
+      [G4-FAITH] genetic_testing_plan: "None planned. Patient is interested in screening for trial o" -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned. Patient is interested in screening for trial o"
+    follow_up_next_visit: 8.7s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: follow up with the provider if she is unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 125.4s
+    Referral: 16.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "None",
+"follow up": "with me if she is unable to go on trial at [REDACTED], with dentist"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
