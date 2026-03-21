@@ -5596,3 +5596,40 @@ Processing row 43 (28/61)...
       [G4-PROTECT] Genetics: restored safe negative "None"
   Referral extraction (full note): 12.7s
     [POST-THERAPY] removed non-therapy: ['She has decided to proceed with a bilateral oophor', 'Dr.']
+  [ATTRIBUTION] 19/20 fields sourced (30.1s)
+  Row 43 total: 201.8s
+  Row 43 saved to progress
+
+Processing row 45 (29/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.8s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Right breast cancer, s/p right partial mastectomy with 3.5 cm residual disease with positive margins, 2/2 p
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.6s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "pT2N2 with extranodal extension",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR-/HER2- invasive ductal carcinoma"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
