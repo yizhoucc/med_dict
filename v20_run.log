@@ -157,3 +157,4 @@ Processing row 13 (1/2)...
       [G1-FORMAT] ok, keys=['lab_plan']
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
+From v4.47 onwards, when a model cache is to be returned, `generate` will return a `Cache` instance instead by default (as opposed to the legacy tuple of tuples format). If you want to keep returning the legacy format, please set `return_legacy_cache=True`.
