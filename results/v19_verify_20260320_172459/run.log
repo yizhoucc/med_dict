@@ -1854,3 +1854,47 @@ Processing row 10 (10/61)...
       [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- infiltrating ductal Carcinoma" -> "infiltrating ductal Carcinoma"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 40.5s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTED]), MCV 88, MCH 28.6, MCHC 32.5, Platelet 221, Neutrophil Abs Cnt 3.49, Lymphocyte Abs Cnt 1.47, Monocyte Abs Cnt 0.49, E
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] lab_summary: "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE" -> "WBC 5.6, RBC 5.25 ([REDACTED]), Hgb 15.0, Hct 46.3 ([REDACTE"
+    Clinical_Findings: 19.5s
+      [EXTRACT] raw={
+"findings": "Patient has metastatic breast cancer with bone metastases. Imaging findings include PET/CT showing increased metastatic activity and size of left mandibular mass. MRI of lumbar spine, p
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.2s
+      [EXTRACT] raw={
+"current_meds": "Faslodex, Denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 9.7s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Faslodex + Denosumab",
+"supportive_meds": "acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "Faslodex + Denosumab" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate -> docusate sodium, hydrocodone-acetaminophen, senna-docusate
+  Phase 1 extraction (6 prompts): 103.8s
+  Cross-context injected (774 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
