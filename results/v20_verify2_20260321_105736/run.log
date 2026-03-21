@@ -476,3 +476,41 @@ Processing row 11 (3/7)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "morphine, oxycodone, pregabalin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine, oxycodone, pregabalin -> morphine, oxycodone
+  Phase 1 extraction (6 prompts): 173.5s
+  Cross-context injected (1791 chars)
+    Treatment_Goals: 4.1s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 37.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no mediastinal lymphadenopathy, and stable appearance of diffus
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/" -> "Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, "
+      [G4-FAITH] response_assessment: "Recent MRI shows new lesions. MRI brain on 09/05/18 showed n" -> "Recent MRI shows new lesions. MRI brain on 09/05/18 showed n"
+  Phase 2 extraction (2 prompts): 41.7s
+  Total extraction: 215.2s
+    Medication_Plan: 14.0s
+      [EXTRACT] raw={
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] now q12 wks given stable bone status, continue off chemotherapy for now due to intoleranc
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
