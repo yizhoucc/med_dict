@@ -11829,3 +11829,71 @@ Processing row 96 (60/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 15.0s
+      [EXTRACT] raw={
+"findings": "Pathology results: 0.8 cm grade 1 invasive ductal carcinoma with negative margins; 0/3 left axillary sentinel lymph nodes. Post-biopsy MRI showed a small amount of enhancement around th
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 21.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "atorvastatin (LIPITOR) 80 mg tablet Take 10 mg by mouth Dail"
+      [POST-MEDS] atorvastatin (LIPITOR) 80 mg tablet Take 10 mg by mouth Daily., buPROPion (WELLBUTRIN XL) 300 mg 24 hr tablet TAKE 1 TABLET BY MOUTH EVERY DAY, clonazePAM (KLONOPIN) 1 mg tablet 1mg TID prn, escitalopram oxalate (LEXAPRO) 20 mg tablet Take 1 tablet (20 mg total) by mouth Daily., fingolimod (GILENYA) 0.5 mg CAP capsule TAKE 1 CAPSULE DAILY, gabapentin (NEURONTIN) 300 mg capsule TAKE 2 CAPSULES BY MOUTH IN THE MORNING, 1CAPSULE IN THE AFTERNOON AND [REDACTED] [REDACTED] [REDACTED], ibuprofen (ADVIL,MOTRIN) 800 mg tablet Twice a day., lamoTRIgine (LAMICTAL) 100 mg tablet Take 2 tablets (200 mg total) by mouth Daily., melatonin 1 mg TAB tablet 3-6mg nightly, nicotine (NICODERM CQ) 14 mg/24 hr patch Place 1 patch onto the skin Once a day. Use as instructed, POTASSIUM CHLORIDE (KLOR-CON ORAL) Take by mouth., traZODone (DESYREL) 50 mg tablet TAKE 4 TABLETS (200 MG TOTAL) BY MOUTH NIGHTLY [REDACTED] [REDACTED] -> 
+    Treatment_Changes: 2.7s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 70.6s
+  Cross-context injected (611 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 76.8s
+    Medication_Plan: 7.9s
+      [EXTRACT] raw={
+    "medication_plan": "Continue with ongoing GILENYA regimen. No changes to MS medication regimen anticipated in relation to future endocrine therapy."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 8.8s
+      [EXTRACT] raw={
+    "therapy_plan": "do not anticipate any need for chemotherapy; no problem with MS regimen / gilenya and future endocrine therapy with [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
