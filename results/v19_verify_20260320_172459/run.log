@@ -505,3 +505,101 @@ Processing row 2 (3/61)...
       [G4-FAITH] EMPTIED: ['medication_plan']
       [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
       [G5-TEMPORAL] medication_plan: "No specific medications, doses, or frequencies were mentioned in the note." -> "None"
+    Therapy_plan: 13.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Discussed the role of chemotherapy to decrease the risk of systemic recurrence. Discussed the role of surgery and radiation to decrease the risk of local recurrence. Discussed t
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 6.2s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "We discussed the role of surgery and radiation to decrease the risk of local recurrence."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "We discussed the role of surgery and radiation to decrease the risk of local rec" -> "We discussed the role of radiation to decrease the risk of local recurrence."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.1s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 5.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "PET and [REDACTED] follow up after pet and [REDACTED] are back."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "PET and [REDACTED] follow up after pet and [REDACTED] are back." -> "PET imaging follow up after results are back."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 4.3s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Genetic testing sent and is pending."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "telehealth: after PET and [REDACTED] are back"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "telehealth: after PET and [REDACTED] are back" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 45.1s
+    Referral: 14.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Genetic testing sent and is pending.",
+"Specialty": "None",
+"Others": "None",
+"follow up": "[REDACTED] follow up after pet and [REDACTED] are back."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting "
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Specialty']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 14.9s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'I recommend an anti inflammatory and /or diabetes risk reducing diet , limiting '
+    [POST-THERAPY] removed non-therapy: ['Discussed the role of hormonal blockade to decreas']
+    [POST-ADV] patched from full note: ['full code']
+    [POST-DISTMET] added Distant Metastasis: 'No'
