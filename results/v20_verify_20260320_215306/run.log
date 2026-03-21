@@ -62,3 +62,42 @@ Processing row 13 (1/2)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.8s [meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": "pamidronate, [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] pamidronate, [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg -> pamidronate, Gemcitabine 200mg, Docetaxel 20 mg
+    Treatment_Changes: 18.7s
+      [EXTRACT] raw={
+"recent_changes": "Stopped palbociclib and fulvestrant end of January. Doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once weekly on Sunday. Also receiving immun
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 184.8s
+  Cross-context injected (1685 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+  "goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.8s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable. The patient has a palpable R axillary node 1 cm, soft and mobile. No new masses or lesions noted on physical exam. No significant changes in b
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable. The patient has a palpable R axillary node 1 cm," -> "The cancer is currently stable. No significant changes in breast density or lymp"
+      [G4-FAITH] response_assessment: "The cancer is currently stable. No significant changes in br" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 15.0s
+  Total extraction: 199.8s
