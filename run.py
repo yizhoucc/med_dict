@@ -1567,16 +1567,29 @@ def main():
                 if len(filtered) < len(meds_list):
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
-        # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v17]
+        # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
+        # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
         drug_dict_meds = keypoints.get("Current_Medications", {})
         if isinstance(drug_dict_meds, dict):
             meds_val = (drug_dict_meds.get("current_meds", "") or "").strip()
             if not meds_val:
-                ap_lower_iv = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
+                ap_lower_iv = (assessment_and_plan or '').lower()
                 if ap_lower_iv:
+                    # v19: patterns that indicate ACTIVE/CURRENT chemo only
                     IV_CHEMO_PATTERNS = [
-                        r'(?:continue|continuing|on|receiving|started on|currently on)\s+(\w+(?:\s*/\s*\w+)?)',
-                        r'cycle\s+\d+\s+(?:of|day\s+\d+\s+of)\s+(\w+)',
+                        # "continue/continuing [with] [cycle N [of]] DRUG"
+                        r'(?:continue|continuing)\s+(?:with\s+)?(?:cycle\s+\d+\s+(?:of\s+)?)?(\w+(?:\s*/\s*\w+)?)',
+                        # "currently on DRUG" / "still on DRUG"
+                        r'(?:currently\s+on|still\s+on)\s+(\w+(?:\s*/\s*\w+)?)',
+                        # "cycle N [day N] of DRUG"
+                        r'cycle\s+\d+\s+(?:day\s+\d+\s+)?(?:of\s+)?(\w+)',
+                        # "started DRUG on DATE" (recent start)
+                        r'started\s+(\w+)\s+on\s+\d',
+                        # "on DRUG cycle" / "on DRUG day" (e.g. "on Gemzar Cycle #2")
+                        r'\bon\s+(\w+)\s+(?:cycle|day)',
+                        # "receiving/given DRUG"
+                        r'(?:receiving|given)\s+(\w+)',
+                        # "DRUG day N" (e.g. "AC day 1")
                         r'(\w+)\s+(?:day|d)\s*\d+',
                     ]
                     KNOWN_CHEMO_IV = [
@@ -1603,16 +1616,6 @@ def main():
                                 if any(pc in before for pc in PAST_CHEMO):
                                     continue
                                 found_chemo.append(drug)
-                    # v18: direct drug name scan as fallback (patterns may miss "irinotecan", "AC", etc.)
-                    if not found_chemo:
-                        for drug in KNOWN_CHEMO_IV:
-                            for m in re.finditer(r'\b' + re.escape(drug) + r'\b', ap_lower_iv):
-                                start = max(0, m.start() - 40)
-                                before = ap_lower_iv[start:m.start()]
-                                if any(pc in before for pc in PAST_CHEMO):
-                                    continue
-                                found_chemo.append(drug)
-                                break  # one match per drug is enough
                     if found_chemo:
                         found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
