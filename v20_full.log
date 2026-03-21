@@ -5393,3 +5393,156 @@ Processing row 42 (27/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] Others: "None" -> ""
       [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 13.3s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+  [ATTRIBUTION] 15/18 fields sourced (28.3s)
+  Row 42 total: 218.8s
+  Row 42 saved to progress
+
+Processing row 43 (28/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (3074 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.0s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "33 y.o. female with ER+/PR+/HER2- node+ left breast cancer with BRCA1 mutation positive, post bilateral mas
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 13.2s [improved, faith-restored-1keys, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- node+ left breast cancer with residual invasive ductal carcinoma and residual DCIS",
+  "Stage_of_Cancer": "Not mentioned in note",
+  "Distant Metastasis": "No",
+  
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- node+ left breast cancer with residual invasive ductal carcinoma a" -> "ER+/PR+/HER2- invasive ductal carcinoma with residual invasive ductal carcinoma "
+      [G4-FAITH] Stage_of_Cancer: "Not mentioned in note" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
+      [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 28.7s
+      [EXTRACT] raw={
+"findings": "Pathology from the left breast showed 1 cm of residual grade 2 invasive ductal carcinoma (tumor cellularity 15%) with residual DCIS and a 0.07 cm [REDACTED] removed. Right breast pathol
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen, clobetasol, clonazepam, cyclobenzaprine, docu"
+      [POST-MEDS] acetaminophen, clobetasol, clonazepam, cyclobenzaprine, docusate sodium, doxycycline, escitalopram, gabapentin, guaifenesin-codeine, hydrocodone-acetaminophen, ibuprofen, lidocaine-prilocaine, loratadine, lorazepam, naloxone, omeprazole, ondansetron, oxycodone, prochlorperazine, tramadol, valacyclovir -> 
+    Treatment_Changes: 12.0s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "docusate sodium (COLACE), gabapentin (NEURONTIN), HYDROcodone-acetaminophen (NORCO), clonazePAM (KLONOPIN), cyclobenzaprine (FLEXERIL)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "docusate sodium (COLACE), gabapentin (NEURONTIN), HYDROcodone-acetaminophen (NOR" -> "docusate sodium (COLACE), gabapentin (NEURONTIN), clonazePAM (KLONOPIN), cyclobe"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] docusate sodium (COLACE), gabapentin (NEURONTIN), clonazePAM (KLONOPIN), cyclobenzaprine (FLEXERIL) -> docusate sodium (COLACE)
+  Phase 1 extraction (6 prompts): 81.4s
+  Cross-context injected (920 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 87.7s
+    Medication_Plan: 11.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Will start an aromatase inhibitor after completing radiation. May start Zoladex if there is a delay in bilateral oophorectomy. Currently prescribed Lexapro, but not taking it
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Will start an aromatase inhibitor after completing radiation. May start Zoladex " -> "Will start an aromatase inhibitor after completing radiation. May start Zoladex "
+    Therapy_plan: 34.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Continues to recover from surgery. She will be randomized to 3 vs 5 weeks of radiation with a tentative start date of 12/16/18. She will start an aromatase inhibitor after compl
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Continues to recover from surgery. She will be randomized to 3 vs 5 weeks of rad" -> "She will be randomized to 3 vs 5 weeks of radiation with a tentative start date "
+    radiotherapy_plan: 13.7s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "continues to recover from surgery. She met with Dr. [REDACTED] in radiation oncology today and elected to enrolled on a clinic trial, which will randomized her to 3 vs 5 we
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "continues to recover from surgery. She met with Dr. [REDACTED] in radiation onco" -> "She elected to enroll in a clinical trial, which will randomize her to 3 vs 5 we"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 5.8s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "will undergo a BSO eventually, surgery pending"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "will undergo a BSO eventually, surgery pending" -> "She will undergo a bilateral oophorectomy eventually."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 5.1s
+      [EXTRACT] raw={
+    "imaging_plan": "Consider a follow up CT Chest in one year."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
