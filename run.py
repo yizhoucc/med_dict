@@ -1597,8 +1597,8 @@ def main():
                         if not med:
                             continue
                         med_lower = med.lower().strip()
-                        # Check if the core drug name matches any allergy
-                        is_allergy = any(alg in med_lower or med_lower in alg for alg in allergy_drugs)
+                        # Check if any allergy name appears in the medication name
+                        is_allergy = any(alg in med_lower for alg in allergy_drugs)
                         if is_allergy:
                             print(f"    [POST-SUPP-ALLERGY] Removed allergy item from supportive_meds: '{med}'")
                             continue
@@ -1626,8 +1626,8 @@ def main():
                         r'started\s+(\w+)\s+on\s+\d',
                         # "on DRUG cycle" / "on DRUG day" (e.g. "on Gemzar Cycle #2")
                         r'\bon\s+(\w+)\s+(?:cycle|day)',
-                        # "receiving DRUG" / "was/been given DRUG" (exclude prepositional "given" = "considering")
-                        r'(?:receiving|(?:was|been|being|be)\s+given)\s+(\w+)',
+                        # "receiving DRUG" / "was/been/being given DRUG" (exclude prepositional "given" and future "be given")
+                        r'(?:receiving|(?:was|been|being)\s+given)\s+(\w+)',
                         # "DRUG day N" (e.g. "AC day 1")
                         r'(\w+)\s+(?:day|d)\s*\d+',
                     ]
