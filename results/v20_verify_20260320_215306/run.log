@@ -421,3 +421,10 @@ Processing row 56 (2/2)...
     [POST-TYPE-VERIFY-TNBC] A/P says TNBC, overrode HER2+
       before: 'ER-/PR-/HER2+ breast cancer'
       after:  'ER-/PR-/HER2- breast cancer, triple negative'
+  [ATTRIBUTION] 15/18 fields sourced (14.3s)
+  Row 56 total: 152.5s
+  Row 56 saved to progress
+
+Total processing time: 472.3s (7.9min)
+Done! Results copied to ./results.txt
+Full results in: results/v20_verify_20260320_215306/
