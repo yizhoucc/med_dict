@@ -1966,3 +1966,61 @@ Processing row 10 (10/61)...
       [G4-FAITH] genetic_testing_plan: "None planned." -> ""
       [G4-FAITH] EMPTIED: ['genetic_testing_plan']
       [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the given text"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the given text" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 51.1s
+    Referral: 5.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "None"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] follow up: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'follow up', 'Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] follow up: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 5.4s
+    [POST-THERAPY] removed non-therapy: ['Order PETCT to evaluate Femur and to toes.', 'Continue Mycelex [REDACTED] for thrush and salt an']
+    [POST-ER-CHECK] Inferred ER+ from drug: letrozole
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'infiltrating ductal Carcinoma, ER+ (inferred from letrozole)'
+      after:  'infiltrating ductal Carcinoma, ER+ (inferred from letrozole), HER2: not tested'
+  [ATTRIBUTION] 16/18 fields sourced (31.7s)
+  Row 10 total: 206.1s
+  Row 10 saved to progress
+
+Processing row 11 (11/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1955 chars)
+  A/P extraction: 0.0s
