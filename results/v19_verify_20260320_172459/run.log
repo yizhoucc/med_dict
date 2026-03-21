@@ -7448,3 +7448,35 @@ Processing row 62 (38/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.4s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN-ODT) 8 mg rapid dissolve tablet"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-PROTECT] recent_changes: blocked fill into empty field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 135.3s
+  Cross-context injected (1122 chars)
+    Treatment_Goals: 4.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 44.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "No evidence of disease recurrence on imaging and exam. The patient has completed radiation therapy to the left breast and regional nodes on 11/26/19. MRI showed a dramatic re
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "No evidence of disease recurrence on imaging and exam. The patient has completed" -> "No evidence of disease recurrence on imaging and exam. MRI showed a dramatic res"
+      [G4-FAITH] response_assessment: "No evidence of disease recurrence on imaging and exam. MRI s" -> "MRI showed a dramatic response to therapy with near total re"
+  Phase 2 extraction (2 prompts): 48.2s
+  Total extraction: 183.5s
