@@ -11197,3 +11197,39 @@ Processing row 91 (57/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 28.7s
+      [EXTRACT] raw={
+"findings": "Patient presents with metastatic breast cancer on Epirubicin Cycle#2 D1. Liver size has decreased and tenderness has reduced. No shortness of breath, nausea, or vomiting. A red, dry ras
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.6s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Epirubicin, Denosumab, Neupogen"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] Epirubicin, Denosumab, Neupogen -> Epirubicin, Denosumab
+    Treatment_Changes: 16.2s
+      [EXTRACT] raw={
+"recent_changes": "restart chemotherapy Epirubicin 25mg/m2 D1, 8, 15 with Neupogen X 2 days",
+"supportive_meds": "filgrastim (NEUPOGEN) 300 mcg/mL injection Inject 300 mcg into the skin Daily. X 2 d
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 260.1s
+  Cross-context injected (907 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
