@@ -11173,3 +11173,37 @@ Processing row 90 (56/61)...
     [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
       before: 'ER+/PR+ invasive ductal carcinoma'
       after:  'ER+/PR+ invasive ductal carcinoma, HER2: not tested'
+  [ATTRIBUTION] 19/21 fields sourced (21.0s)
+  Row 90 total: 195.6s
+  Row 90 saved to progress
+
+Processing row 91 (57/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (840 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Metastatic breast cancer on Epirubicin Cycle#2 D1 for ongoing chemotherapy treatment."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.2s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage [X], now metastatic (Stage IV)",
+"Distant Metastasis": "
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2- invasive ductal carcin" -> "ER+/PR-/HER2- invasive ductal carcinoma"
+      [G4-FAITH] Type_of_Cancer: "ER+/PR-/HER2- invasive ductal carcinoma" -> ""
+      [G4-FAITH] EMPTIED: ['Type_of_Cancer']
+      [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+/PR-/HER2- invasive ductal carcinoma"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
