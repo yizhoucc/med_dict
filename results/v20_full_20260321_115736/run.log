@@ -10041,3 +10041,49 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Response_Assessment: 21.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the le
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra" -> "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 25.1s
+  Total extraction: 126.6s
+    Medication_Plan: 7.8s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 19.0s
+      [EXTRACT] raw={
+    "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. She will continue her steroid taper per Dr. [REDACTED] and conti
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 12.7s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
