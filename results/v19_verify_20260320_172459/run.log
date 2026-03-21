@@ -2248,3 +2248,18 @@ Processing row 13 (12/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transam" -> "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transam"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 43.3s
+      [EXTRACT] raw={
+"findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological va
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 7.0s
+      [EXTRACT] raw={
+"current_meds": "Pamidronate, Gemcitabine, Docetaxel, Doxorubicin"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
