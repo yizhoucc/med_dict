@@ -5843,3 +5843,47 @@ Processing row 48 (30/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROth"
       [POST-MEDS] ACETAMINOPHEN (TYLENOL ORAL), ALPRAZOLAM ORAL, hydroCHLOROthiazide (HYDRODIURIL) -> 
+    Treatment_Changes: 8.1s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ALPRAZOLAM ORAL"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "ALPRAZOLAM ORAL" -> ""
+      [G4-FAITH] supportive_meds: "" -> "alprazolam, acetaminophen, hydrochlorothiazide"
+      [POST-SUPP] alprazolam, acetaminophen, hydrochlorothiazide -> 
+  Phase 1 extraction (6 prompts): 101.7s
+  Cross-context injected (1224 chars)
+    Treatment_Goals: 4.8s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 8.5s
+  Total extraction: 110.2s
+    Medication_Plan: 15.1s
+      [EXTRACT] raw={
+    "medication_plan": "Patient to be put on tamoxifen, with a need to assess personal risk of thrombophilia. No specific doses or frequencies mentioned."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
