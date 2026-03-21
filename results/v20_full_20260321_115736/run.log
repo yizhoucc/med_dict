@@ -1880,3 +1880,89 @@ Processing row 10 (10/61)...
       [POST-SUPP] acetaminophen, aspirin, docusate sodium, hydrocodone-acetaminophen, multivitamin, senna-docusate -> docusate sodium, hydrocodone-acetaminophen, senna-docusate
   Phase 1 extraction (6 prompts): 104.3s
   Cross-context injected (832 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 10.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is showing signs of progression. PET CT showed increased metastatic activity and size of left mandibular mass. Additionally, worsening numbness in the right leg su
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is showing signs of progression. PET CT showed increased metastatic a" -> "The cancer is showing signs of progression. PET CT showed increased metastatic a"
+      [G4-FAITH] response_assessment: "The cancer is showing signs of progression. PET CT showed in" -> "PET CT showed increased met activity and size of left mandib"
+  Phase 2 extraction (2 prompts): 13.6s
+  Total extraction: 117.9s
+    Medication_Plan: 13.3s
+      [EXTRACT] raw={
+    "medication_plan": "Continue on Faslodex and Denosumab. [REDACTED]-Mycelex [REDACTED] 5 times a day for 14 days to help with thrush and salt and soda rinses."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 11.0s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Continue on Faslodex and Denosumab."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Continue on Faslodex and Denosumab." -> "Continue on Faslodex and Denosumab. Order PETCT to evaluate Femur and to toes. C"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.1s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "S/p xrt to jaw improved pain with residual numbness"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "S/p xrt to jaw improved pain with residual numbness" -> "None"
+    Procedure_Plan: 4.6s
+      [EXTRACT] raw={
+    "procedure_plan": "will order PETCT to toes"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['will order PETCT to toes']
+    Imaging_Plan: 7.8s
+      [EXTRACT] raw={
+    "imaging_plan": "will order PETCT to evaluate Femur and to toes due to worsening numbness in right leg."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
