@@ -10619,3 +10619,61 @@ Processing row 87 (54/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.9s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "capecitabine (XELODA)"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "capecitabine (XELODA)" -> "capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] capecitabine (XELODA) 500 mg tablet, Take by mouth Twice a day 2 weeks on 1 week off. -> capecitabine (XELODA) 500 mg tablet
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 69.7s
+  Cross-context injected (972 chars)
+    Treatment_Goals: 3.6s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 75.9s
+    Medication_Plan: 18.0s [improved]
+      [EXTRACT] raw={
+    "medication_plan": "She is on xeloda. She will need anti her 2 therapy if her 2 positive disease is confirmed. Restaging after 3 months of therapy if she is stable clinically. If she has progres
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "She is on xeloda. She will need anti her 2 therapy if her 2 positive disease is " -> "She is on xeloda. If her 2 positive disease is confirmed, she will need anti her"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 20.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "therapy_plan": "She is on xeloda and will continue this therapy. If stable clinically after 3 months of therapy, restaging will be done. If she has progression on xeloda, she will be considered
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] therapy_plan: "She is on xeloda and will continue this therapy. If stable c" -> "She is on xeloda and I would recommend restaging after 3 mon"
+      [G5-TEMPORAL] no changes
