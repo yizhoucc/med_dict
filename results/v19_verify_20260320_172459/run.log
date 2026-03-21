@@ -9759,3 +9759,51 @@ Processing row 82 (49/61)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 28.6s
+    Referral: 9.8s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Rad Onc consult",
+"Others": "None",
+"follow up": "upcoming breast surg follow up appointment"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 9.8s
+    [POST-REFERRAL-VALIDATE] Removed 'Rad Onc consult': not found in note
+    [POST-STAGE-REGIONAL] Regional LN only + no distant mets: 'Originally Stage [X], now metastatic (Stage IV)' → 'Originally Stage [X]'
+    [POST-STAGE-PLACEHOLDER] Replaced placeholder: 'Originally Stage [X]' → 'Not available (redacted)'
+    [POST-ER-CHECK] Inferred ER+ from drug: letrozole
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: not tested
+      before: 'Lobular Breast Cancer, right with metastasis to right axilla LN, ER+ (inferred from letrozole)'
+      after:  'Lobular Breast Cancer, right with metastasis to right axilla LN, ER+ (inferred from letrozole), HER2: not tested'
+  [ATTRIBUTION] 16/16 fields sourced (23.4s)
+  Row 82 total: 189.0s
+  Row 82 saved to progress
+
+Processing row 83 (50/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT/PLAN:'
+  Regex extraction succeeded (4232 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "A 60-year-old female with metastatic breast cancer, ER+, PR-, and a CHEK2 mutation, seeking recommendatio
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
