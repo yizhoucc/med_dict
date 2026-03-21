@@ -9222,3 +9222,46 @@ Processing row 79 (47/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORaz"
       [POST-MEDS] cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORazepam (ATIVAN), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> 
+    Treatment_Changes: 24.1s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start TC x 4 on 04/11/19",
+"supportive_meds": "dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] dexAMETHasone (DECADRON) 4 mg tablet, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet -> dexAMETHasone (DECADRON) 4 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet
+  Phase 1 extraction (6 prompts): 210.5s
+  Cross-context injected (729 chars)
+    Treatment_Goals: 4.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 7.8s
+  Total extraction: 218.3s
+    Medication_Plan: 17.5s
+      [EXTRACT] raw={
+    "medication_plan": "Start TC x 4 on 04/11/19, with Claritin for 5-6 days. Discussed pain medications for cold cap and cold gloves for neuropathy and fingernails."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
