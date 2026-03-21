@@ -9265,3 +9265,82 @@ Processing row 79 (47/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [G5-TEMPORAL] no changes
+    Therapy_plan: 16.8s
+      [EXTRACT] raw={
+    "therapy_plan": "Start TC x 4 on 04/11/19, with 6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 12.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "6 weeks of radiation therapy, 5 weeks with a one week boost, including left axilla and SC fields."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 14.8s [improved]
+      [EXTRACT] raw={
+    "procedure_plan": "Start TC x 4 on 04/11/19"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] procedure_plan: "Start TC x 4 on 04/11/19" -> "Start TC x 4 on 04/11/19, with 6 weeks of radiation therapy, 5 weeks with a one "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Start TC x 4 on 04/11/19', 'with 6 weeks of radiation therapy']
+    Imaging_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 6.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: cycle 2 to see me, call with any issues"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 78.8s
