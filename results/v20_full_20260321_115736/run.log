@@ -9096,3 +9096,51 @@ Processing row 77 (46/61)...
       [G4-FAITH] procedure_plan: "The patient has a consultation with radiation oncology tomor" -> "The patient has a consultation with radiation oncology tomor"
       [G5-TEMPORAL] no changes
       [POST-PROC-FILTER] removed from procedure_plan: ['The patient has a consultation with radiation oncology tomorrow which is to discuss the role of xrt to her liver/periportal nodal disease if she decides not to pursue systemic therapy at this time.']
+    Imaging_Plan: 18.5s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "imaging_plan": "CT in 3 months if changing, MRCP if changing, Echo 09/08/2019."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "CT in 3 months if changing, MRCP if changing, Echo 09/08/2019." -> "Echo 09/08/2019, CT in 3 months if changing, MRCP if changing."
+      [G4-FAITH] imaging_plan: "Echo 09/08/2019, CT in 3 months if changing, MRCP if changin" -> "Echo 09/08/2019. If this echo is normal we can stop monitori"
+      [G5-TEMPORAL] imaging_plan: "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to" -> "Echo 09/08/2019. If this echo is normal we can stop monitoring her. She knows to"
+    Lab_Plan: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 13.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "She is interested in screening for this trial. We discussed trial options at [REDACTED] including phase 1 [REDACTED]+pembrolizumab as well as phase 3 trial of [REDACTED]
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "She is interested in screening for this trial. We discussed trial options at [RE" -> "None planned. Patient is interested in screening for trial options including pha"
+      [G4-FAITH] genetic_testing_plan: "None planned. Patient is interested in screening for trial o" -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned. Patient is interested in screening for trial o"
+    follow_up_next_visit: 8.7s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: follow up with the provider if she is unable to go on trial at [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 125.4s
