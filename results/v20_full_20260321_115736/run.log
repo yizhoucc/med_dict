@@ -6861,3 +6861,120 @@ Processing row 56 (35/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 5.4s
   Total extraction: 59.3s
+    Medication_Plan: 5.8s [faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "No specific future medications, changes to current medications, supportive medications, bowel regimen, or blood transfusion plan were mentioned in the provided note."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] medication_plan: "No specific future medications, changes to current medicatio" -> ""
+      [G4-FAITH] EMPTIED: ['medication_plan']
+      [G4-REVERT] medication_plan: reverted (G4 emptied all fields)
+      [G5-TEMPORAL] medication_plan: "No specific future medications, changes to current medications, supportive medic" -> "None"
+    Therapy_plan: 17.6s
+      [EXTRACT] raw={
+    "therapy_plan": "Rec XRT, which pt is scheduled to receive. Rec additional path review at [REDACTED] given critical aspect of [REDACTED] status question. If [REDACTED], although unlikely, pt sho
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 5.6s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Rec XRT, which pt is scheduled to receive"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 6.1s
+      [EXTRACT] raw={
+    "procedure_plan": "Rec XRT, which pt is scheduled to receive"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['Rec XRT']
+    Imaging_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 3.7s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Rec genetic counseling and testing"
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 2.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "Not specified in the provided note"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "Not specified in the provided note" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 48.5s
+    Referral: 11.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Rec genetic counseling and testing",
+"Specialty": "Rec XRT, which pt is scheduled to receive",
+"Others": "None",
+"follow up": "scheduled to receive XRT in the near 
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 11.3s
+    [POST-THERAPY] removed non-therapy: ['Rec additional path review at [REDACTED] given cri', 'Rec genetic counseling and testing.']
+    [POST-SUPP-ALLERGY] Removed allergy item from supportive_meds: 'benadryl'
+    [POST-SUPP-ALLERGY] Removed allergy item from supportive_meds: 'codeine'
+    [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: ['trastuzumab', 'pertuzumab'])
+      before: 'ER-/PR-/HER2- triple negative breast cancer'
+      after:  'ER-/PR-/HER2+ triple negative breast cancer'
+    [POST-TYPE-VERIFY] Removed contradictory 'triple negative' (HER2+ present)
+      before: 'ER-/PR-/HER2+ triple negative breast cancer'
+      after:  'ER-/PR-/HER2+ breast cancer'
+    [POST-TYPE-VERIFY-TNBC] A/P says TNBC, overrode HER2+
+      before: 'ER-/PR-/HER2+ breast cancer'
+      after:  'ER-/PR-/HER2- breast cancer, triple negative'
