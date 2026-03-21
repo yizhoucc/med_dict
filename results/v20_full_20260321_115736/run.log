@@ -6331,3 +6331,65 @@ Processing row 51 (32/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 55.3s
+    Referral: 11.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Social work referral",
+"follow up": "RTC 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "VUS in [REDACTED] c.[REDACTED]>G, [REDACTED] c.[REDACTED]>G,"
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Specialty']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 11.4s
+    [POST-GENETICS] cleared completed test result: 'VUS in [REDACTED] c.[REDACTED]>G, [REDACTED] c.[REDACTED]>G, CTNNA1 c.1143+4A>G'
+    [POST-THERAPY] removed non-therapy: ['Referral for fertility preservation asap, [REDACTE', 'Start after egg harvesting complete, CT CAP and bo']
+  [ATTRIBUTION] 17/18 fields sourced (30.0s)
+  Row 51 total: 179.0s
+  Row 51 saved to progress
+
+Processing row 52 (33/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (3682 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.1s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient with recently diagnosed stage II/III left breast cancer, ER/PR positive, HER2 positive, post-left
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
