@@ -11411,3 +11411,49 @@ Processing row 93 (58/61)...
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 70.0s
+      [EXTRACT] raw={
+"lab_summary": "WBC Count 6.5, RBC Count 4.34, Hemoglobin 13.6, Hematocrit 40.1, MCV 92, MCH 31.3, MCHC 33.9, RDW 12.8, Platelet Count [REDACTED], Neutrophils 52, Lymphs 38, Monocytes % 6, Eos 3, BA
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 18.8s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer with a 1.6 cm tumor and 3 positive lymph nodes. The tumor is estrogen receptor positive, progesterone receptor positive, and HER2 negative. T
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a history of left breast cancer with a 1.6 cm tu" -> "Patient has a history of left breast cancer with a 1.6 cm tu"
+    Current_Medications: 5.8s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "letrozole" -> "letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> letrozole (FEMARA) 2.5 mg tablet
+    Treatment_Changes: 10.5s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily" -> "gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FE"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin (NEURONTIN) 300 mg capsule, Take 600 mg by mouth daily, letrozole (FEMARA) 2.5 mg tablet, Take 2.5 mg by mouth daily -> 
+  Phase 1 extraction (6 prompts): 138.3s
+  Cross-context injected (821 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
