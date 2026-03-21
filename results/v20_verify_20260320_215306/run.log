@@ -186,3 +186,35 @@ Processing row 13 (1/2)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 72.2s
+    Referral: 11.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "RTC after scans"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Advised her to eat small, frequent meals that's high in calories and protein."
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Specialty', 'Genetics']
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 11.2s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Advised her to eat small, frequent meals that's high in calories and protein.'
+    [POST-THERAPY] removed non-therapy: ['Continue metabolic therapy 2x/week and immunologic', 'Plan to have labs drawn every two weeks and return', 'Patient will schedule scans for May.']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to bone, liver, and nodes)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: status unclear
+      before: 'ER+ invasive ductal carcinoma'
+      after:  'ER+ invasive ductal carcinoma, HER2: status unclear'
+  [ATTRIBUTION] 21/22 fields sourced (36.5s)
+  Row 13 total: 319.7s
+  Row 13 saved to progress
+
+Processing row 56 (2/2)...
+  Injected 2 term definitions: ['adjuvant chemotherapy', 'TNBC']
+  Trying regex extraction...
+  Regex failed, falling back to LLM extraction...
+  LLM Extraction Attempt 1...
