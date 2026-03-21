@@ -3621,3 +3621,57 @@ Processing row 29 (19/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.9s [improved]
+      [EXTRACT] raw={
+"findings": "Right breast with a 6 x 11 cm mass in the outer quadrants; no palpable mass in the left breast. Right axillary lymphadenopathy with multiple enlarged lymph nodes in the axillary tail re
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Right breast with a 6 x 11 cm mass in the outer quadrants; no palpable mass in t" -> "Right breast with a 6 x 11 cm mass in the outer quadrants; no palpable mass in t"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.1s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 88.0s
+  Cross-context injected (1139 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.4s
+  Total extraction: 94.4s
+    Medication_Plan: 29.3s
+      [EXTRACT] raw={
+    "medication_plan": "The patient will start neoadjuvant chemotherapy with either 12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclopho
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
