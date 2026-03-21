@@ -8448,3 +8448,80 @@ Processing row 69 (43/61)...
       [G4-FAITH] EMPTIED: ['supportive_meds']
   Phase 1 extraction (6 prompts): 141.8s
   Cross-context injected (911 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.9s [improved]
+      [EXTRACT] raw={
+"response_assessment": "Patient is on letrozole. MRI shows faint residual non-mass enhancement in both breasts, with left axillary nodes having decreased in size and now have normal size/morphology.
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is on letrozole. MRI shows faint residual non-mass enhancement in both b" -> "MRI shows faint residual non-mass enhancement in both breasts, with left axillar"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 15.8s
+  Total extraction: 157.6s
+    Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Restart letrozole which she had previously tolerated. Information about [REDACTED] to help with hot flashes."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.2s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Restart letrozole which she had previously tolerated. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Restart letrozole which she had previously tolerated. She is going to have expan" -> "Restart letrozole which she had previously tolerated. She is going to have expan"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Restart letrozole which she had previously tolerated. She is going to have expan" -> "She is going to have expanders placed prior to radiation. She will also undergo "
+    radiotherapy_plan: 6.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation consult. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "Radiation consult. She is going to have expanders placed prior to radiation." -> "She is going to have expanders placed prior to radiation."
+    Procedure_Plan: 5.9s
+      [EXTRACT] raw={
+    "procedure_plan": "She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['She is going to have expanders placed prior to radiation.']
+    Imaging_Plan: 6.7s
+      [EXTRACT] raw={
+    "imaging_plan": "CT due in June 2020 to follow up lung nodules."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
