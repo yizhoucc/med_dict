@@ -3,3 +3,187 @@ Starting new run: results/v19_verify_20260320_172459
 Loading model...
 Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:13,  3.46s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:07<00:10,  3.58s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:11<00:07,  3.77s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:15<00:03,  3.90s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.64s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:18<00:00,  3.68s/it]
 We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+Model loaded.
+Data loaded: 61 rows (indices [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+Lab test whitelist loaded: 71 terms
+Genetic test keywords loaded: 37 terms
+
+Processing 61 rows...
+
+Processing row 0 (1/61)...
+  Injected 4 term definitions: ['estrogen receptor', 'adjuvant therapy', 'PR positive', 'mastectomy']
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (894 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "56-year-old female with newly diagnosed metastatic ER+ breast cancer, previously treated with mastectomy 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 15.6s [improved, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to lungs, peritoneum, liver, and 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR+ invasive ductal carcinoma"
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 4.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Human Chorionic Gonadotropin for P[REDACTED] <2 IU/L (from 12/11/2001)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Human Chorionic Gonadotropin for P[REDACTED] <2 IU/L (from 12/11/2001)" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 30.0s
+      [EXTRACT] raw={
+"findings": "Widespread metastases consistent with metastatic breast carcinoma. Right axillary adenopathy with a 1.8 cm spiculated mass along the superolateral margin of the right breast implant, su
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 2.2s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.6s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 69.5s
+  Cross-context injected (1170 chars)
+    Treatment_Goals: 3.6s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 75.7s
+    Medication_Plan: 7.4s
+      [EXTRACT] raw={
+    "medication_plan": "If HR+/HER2 negative on biopsy, will recommend ibrance and [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 7.8s
+      [EXTRACT] raw={
+    "therapy_plan": "If the patient is HR+/HER2 negative on biopsy, will recommend ibrance and [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 8.1s
+      [EXTRACT] raw={
+    "procedure_plan": "Appointment with Dr. [REDACTED] on Thursday to biopsy mass in right axilla in the office."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "imaging_plan": "No imaging planned."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] imaging_plan: "No imaging planned." -> ""
+      [G4-FAITH] EMPTIED: ['imaging_plan']
+      [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 6.7s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Appointment with Dr. [REDACTED] on Thursday to biopsy mass in right axilla in the office. If she is HR+/her 2 negative on biopsy will recommend ibrance and [REDACTED]."
+
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] genetic_testing_plan: "Appointment with Dr. [REDACTED] on Thursday to biopsy mass in right axilla in th" -> "No specific genetic or molecular tests are planned. The plan is to biopsy the ma"
+      [G4-FAITH] genetic_testing_plan: "No specific genetic or molecular tests are planned. The plan" -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-REVERT] genetic_testing_plan: reverted (G4 emptied all fields)
+    follow_up_next_visit: 4.2s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after completed work up to formulate a plan"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
