@@ -9209,3 +9209,26 @@ Processing row 79 (47/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-PROTECT] Stage_of_Cancer: restored safe negative "Not mentioned in note"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 75.5s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative 33 mIU\/mL, Hepatitis B Surface Antigen NEG, Estradiol, Ultrasensitive 4 pg\/mL, Albumin, Serum \/ Pl
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Hepatitis B Core Antibody, Total NEG, Hepatitis B Surface Antibody, Quantitative" -> "Albumin, Serum / Plasma 3.9 g/dL, Alkaline Phosphatase 67 U/L, Alanine transamin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 21.9s
+      [EXTRACT] raw={
+"findings": "Tumor size: 0.8cm grade 3 IDC in dermis and subcutis; <0.1cm from inferior and anterior margin; ER 95%, PR 70%, [REDACTED] 15-20%, [REDACTED] 1+, FISH not amplified. MRI findings: benig
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.7s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORaz"
+      [POST-MEDS] cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), LORazepam (ATIVAN), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> 
