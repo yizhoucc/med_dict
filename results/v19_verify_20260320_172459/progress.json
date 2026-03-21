@@ -51,7 +51,8 @@
     79,
     81,
     82,
-    83
+    83,
+    84
   ],
   "results": {
     "0": {
@@ -6323,6 +6324,137 @@
         ],
         "Specialty": [
           "Recommend referral to radiation oncology to consider either focal CNS radiation or possible even [REDACTED]."
+        ]
+      }
+    },
+    "84": {
+      "coral_idx": 224,
+      "note_text": "  ***** ***** is a 61 y.o. female with a h/o clinical stage *****, ***** stage IIIA ER+ invasive lobular carcinoma of the right breast s/p *****, s/p bilateral mastectomies, s/p adjuvant AC/T chemotherapy, s/p xrt who was diagnosed with metastatic disease within 1 year of chemotherapy involving bone and muscle while taking ***** therapy as well as brain s/p GK. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the left clavicle and left glenoid region. She is here to discuss systemic therapy options.       HPI:  Patient continues to report headache behind left eye associated with nausea. No impact on vision. This past week she developed numbness in the left cheek which is ***** her ability to chew food.   She had brain MRI/MRA, and orbit MRI in ***** ***** and by report were negative for findings to explain her symptoms.  She had a temporal artery biopsy to rule out temporal arteritis which was negative. Dr. ***** started her on prednisone 60 mg/d which was decreased to 50 mg/d. Her symptoms have improved but still present. She is taking morphine 30 mg/d with prn.         Patient Active Problem List    Diagnosis Date Noted   \u0007 Metastatic breast cancer (HCC) 05/31/2018     July 2016:  R breast mass discovered by husband. Last prior screening mammogram was negative in July 2015.  08/03/16 B/L Dx mammogram and U/S: 1) irregular mass with indistinct margins in R breast UOQ that correlates with palpable mass, 26 x 13 x 24 mm; 2) circumscribed hypoechoic mass in R axilla, 2 mm 3) multiple oval masses in L breast UIQ, anechoic on U/S, consistent with simple cysts.  08/03/16 ***** breast ***** (11:00, 5 cm from nipple): Invasive lobular carcinoma; ER+ 70-80%, PR negative, ***** 1+ by IHC and negative by FISH.  08/11/16 ***** breast: RIGHT breast - extensive clumped, ***** enhancement throughout much of R breast, sparing only the LIQ, \n significantly larger dimensions than those by U/S. Overall dimensions approximately 4.4 cm x 8.5 cm x 8.8 cm. Suspicious R axillary LAD (not enlarged by size criteria, but significantly larger than nodes in L axilla, with increased cortical thickness). LEFT breast - negative.  08/25/16 ***** breast ***** (8:00, 5 cm from nipple): invasive ***** carcinoma, E-cadherin(+) ductal differentiation but invasive lobular growth pattern, ER+ 80%, PR negative, ***** negative (0-1+) by IHC, ***** 25%.  09/13/16 Initial Medical Oncology visit (Dr. ***** *****): discontinue HRT immediately, started neo-adjuvant *****, ordered ***** which resulted RS = 26 (not clear which specimen from notes).  11/22/16 ***** breast: RIGHT breast - interval increase in overall size and degree of NME and masses in R breast. New R breast skin thickening and increased R axillary adenopathy measuring 14 mm. LEFT breast - low suspicion; 16 mm NME in ***** ***** breast, mildly suspicious.  11/30/16 Med Onc visit: MRI concerning for progressive disease, however there was a 1 month interval between baseline MRI and starting *****, during which time she was on HRT; possible that disease progressed during that month and is responding to *****. Also possible that her disease is refractory to endocrine therapy. After discussion of options, discussion to add palbociclib to ***** and re-assess after 1 month, proceed with surgery or chemo if no response.  12/02/16 PET/CT: asymmetric heterogeneous hypermetabolism throughout R breast ; at least 3 mildly hypermetabolic R axillary LNs suspicious for metastatic LAD; no abnormal focal hypermetabolism to suggest distant metastatic disease.  12/14/16 U/S-guided ***** ***** axilla: metastatic carcinoma, ER+ 95%, *****- *****- (score 0). *****-67 low, <10%.  01/06/17 palbociclib stopped  01/10/17 B/L mastectomy with immediate implant reconstruction, R ALND, abdominoplasty. PATH: R breast - invasive lobular carcinoma with pleomorphic features, \n multifocal, largest focus 82 mm with multiple additional ***** foci; overall grade 3; margins positive, extensive *****, minimal to no Tx effect. 6 of 6 LNs involved by metastatic adenocarcinoma, largest 11 mm, +*****. Receptors not repeated.  AJCC stage *****. L breast - negative.  February 2017- June 2017 - adjuvant DD AC x 4 -->paclitaxel x 12 weeks  July 2017 started exemestane  October 2017 s/p radiation to right breast and regional LNs.   November 2017 developed back pain  12/05/17 L/S and pelvis MRI - lytic and blastic lesions in L/S spine, left iliac lytic lesion  *****/*****-*****/***** radiation to L/S spine and paraspinal intramuscular metastasis (***** *****); Course c/b 6 weeks of severe ***** pain, anorexia, diarrhea, lost 18 lbs  12/19/17 Brain MRI - 6x4 mm left medial occipital lobe lesion  12/28/17 PET CT - abnormal uptake in T11,L2, L3, L4, S1, lytic and blastic, no retropulsion  12/29/17 left iliac core biopsy - adenocarcinoma ER+ 20%, PR negative, ***** IHC 0-1+. Not sufficient tissue for Foundation testing  ***** sent  02/13/18 Brain MRI - the single occipital lesion now 9mm , GK planned for February 20  January 2018 start fulvestrant and palbociclib, ***** denosumab   03/07/18 ***** 360 testing - EGFR amplification, FGFR *****. VUS in BRCA2 (6%), ***** (0.1%)  04/06/18 Brain MRI - stable/improved 6 mm left occipital lesion, no new CNS lesions, new cervical spine disease  04/11/18 PET CT (non-con) - 3 new liver lesions, increased bony disease  04/23/18 MRI Cervical -  There is bone marrow replacement by tumor. No destruction, compression deformity, or an epidural tumor mass. Degenerative changes at the C5-6 and C6-7 levels as described causing significant central canal stenosis and foraminal compromise with some cord compression particularly at the C5-6 level. Some signal heterogeneity in the cord at the compressed level, likely some gliosis or edema. No unusual cord enhancement and specifically do not see evidence of intradural \n or intramedullary tumor.  04/27/18 Liver bx: adenocarcinoma ER (50%)+/PR-/***** negative  FISH ratio 1.1.  Foundation One sent on liver biopsy:   ***** *****  TMB 14 mutations  FGFR1 amp  ***** *****  FGFR 19, 3, 4, amp  ***** amp  ***** amp  CCND1 amp  ***** amp  EMSY amp    *****/*****/***** - *****/*****/*****: radiation to left clavicle and left glenoid region. 40 Gy in 5 fractions    05/17/18: Brain MRI - Stable examination with a solitary enhancing left medial occipital lobe metastatic lesion, no new CNS lesions. The calvarial metastatic disease is less conspicuous.         PAST MEDICAL HISTORY:  Past Medical History:   Diagnosis Date   \u0007 Breast cancer (HCC)    \u0007 Hyperlipidemia        PAST SURGICAL HISTORY:  Past Surgical History:   Procedure Laterality Date   \u0007 BREAST SURGERY     \u0007 CESAREAN SECTION      x2   \u0007 ***** SURGERY Right         GYN HISTORY:  OB History     Gravida   4    Para   2    Term   2    Preterm   0    AB   2    Living   2       SAB   0    TAB   0    Ectopic   0    *****   0    Multiple   0    ***** Births   0              Menarche: age 12  *****  OCPs x 25 - 30 yrs  Menopause age 49  HRT beginning age 53    MEDICATIONS:  Current Outpatient Medications   Medication Sig Dispense Refill   \u0007 ALPRAZolam (XANAX) 0.25 mg tablet Take 0.25 mg by mouth.     \u0007 b complex vitamins (B COMPLEX VITAMINS) tablet Take by mouth.     \u0007 biotin 10 mg TAB tablet Take 10 mg by mouth.     \u0007 cyanocobalamin 50 mcg tablet Take 50 mcg by mouth.     \u0007 DULoxetine (CYMBALTA) 30 mg DR ***** Take 30 mg by mouth.     \u0007 gabapentin (NEURONTIN) 300 mg capsule Take 300 mg by mouth.     \u0007 HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet TAKE 1-2 TABLETS BY MOUTH EVERY 4 HOURS AS NEEDED  0   \u0007 ibuprofen (ADVIL,MOTRIN) 600 mg tablet TAKE 1 TABLET BY MOUTH EVERY 8 HRS AS NEEDED FOR PAIN  0   \u0007 LORazepam (ATIVAN) 0.5 mg tablet TAKE 1 TO 2 TABS BY MOUTH EVERY 6 HRS AS NEEDED FOR PAIN  1   \u0007 MAGNESIUM ORAL Take by mouth.     \u0007 metoclopramide HCl (REGLAN) \n 10 mg tablet TAKE 1 TABLET (10 MG TOTAL) BY MOUTH 4 (FOUR) TIMES A DAY FOR 10 DAYS.  11   \u0007 morphine sulfate (MORPHINE ORAL) Take by mouth.     \u0007 omeprazole (PRILOSEC) 20 mg capsule TAKE ONE CAPSULE BY MOUTH EVERY DAY  3   \u0007 ondansetron (ZOFRAN) 8 mg tablet TAKE ONE TABLET EVERY 8 HOURS AS NEEDED  1   \u0007 predniSONE (DELTASONE) 50 mg TAB tablet Take 50 mg by mouth Daily.     \u0007 STOOL SOFTENER 250 mg capsule TAKE 1 TABLET BY MOUTH TWICE DAILY ***** ***** PAIN MEDICATION  1   \u0007 UNABLE TO FIND by Other route.     \u0007 water LIQ 150 mL with magnesium hydroxide 400 mg/5 mL SUSP 400 mg, diphenhydrAMINE 12.5 mg/5 mL ***** 60 mg, nystatin 100,000 unit/mL SUSP 500,000 Units SWISH AND SPIT 10 MLS TWICE A DAY AS NEEDED     \u0007 zolpidem (AMBIEN) 10 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY ***** *****  0     No current facility-administered medications for this visit.        ALLERGIES:  Allergies/Contraindications  No Known Allergies    FAMILY HISTORY:  Family History   Adopted: Yes     Per 09/13/16 note from *****. *****: genetic test at ***** with BRCA+ and ***** panels were negative.    SOCIAL HISTORY:  Social History     Social History Narrative    Originally from *****, now lives in ***** ***** her husband. She is the founder of a ***** ***** company. She has a son in ***** and a daughter in D.C.       REVIEW OF SYSTEMS:  Review of Systems - 14 point review of systems negative except problems noted above.      PHYSICAL EXAM:  General appearance - alert, well appearing, and in no distress  Mental status - alert, oriented to person, place, and time  Neurological - A&Ox3, grossly non-focal      LABS:  Results for orders placed or performed during the hospital encounter of 06/12/18   Prepare RBC   Result Value Ref Range    Blood ***** Comment See Type and Screen order for results     RBCs - Units ***** 2      Results for *****, ***** (***** *****) as of *****/*****/***** *****:*****   Ref. Range *****/*****/***** *****:***** *****/*****/***** *****:***** *****/*****/***** \n *****:***** *****/*****/***** *****:*****   Cancer Antigen 15-3 Latest Ref Range: <32 U/mL 45.3 (H) 259 (H) 326 (H) 360 (H)   Carcinoembryonic Antigen Latest Ref Range: See Note: ng/mL 3.8 14.1 (H) 21.3 (H) 25.6 (H)       IMAGING/PATHOLOGY:   06/05/18 Brain MRI  T1 hypointense, T2 isointense, enhancing lesion involving the left *****'s ***** with probable abnormal enhancement on along the cisternal segment of the left trigeminal nerve    Abnormal sulcal enhancement is noted in the left temporooccipital region (series 10, image 3), corresponding to leptomeningeal disease seen on the MRI on 05/17/2018. Unchanged 6 mm enhancing lesion in the left occipital lobe (series 10, image 6).    Heterogenous appearance of the bones with ill-defined enhancement, including the clivus and cervical vertebrae, as well as mandibular condyles.    The aerodigestive tract is unremarkable. The parotid, submandibular, and thyroid glands are unremarkable. No enlarged lymph nodes are seen. The carotid arteries and jugular veins are patent.     The orbits are unremarkable. Mild mucosal thickening involving the floor of the left maxillary sinus, otherwise the paranasal sinuses and mastoid air cells are clear. The visualized portion of the brain is normal.       IMPRESSION:     1. Enhancing soft tissue lesion involving the left *****'s ***** with probable involvement of the cisternal segment the trigeminal nerve, concerning for metastatic disease with a leptomeningeal component, not significantly changed compared to the MRI brain on 05/17/2018.  2. Grossly unchanged left occipital lobe metastases and leptomeningeal disease involving the left temporooccipital region, suboptimally assessed on the current study.    ASSESSMENT/PLAN:  ***** ***** is a 61 y.o. female with a h/o clinical stage *****, ***** stage IIIA ER+ invasive lobular carcinoma of the right breast s/p *****, s/p bilateral mastectomies, s/p adjuvant AC/T chemotherapy, s/p xrt who was diagnosed \n with metastatic disease within 1 year of chemotherapy involving bone and muscle while taking ***** therapy as well as brain s/p GK. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the left clavicle and left glenoid region. She is here to discuss systemic therapy options.       Metastatic breast cancer  -case discussed at molecular tumor board and there is a phase 1 trial of *****+olaparib for patients with ***** mutations. She will be evaluated today by Dr. *****.  -Brain MRI reviewed by UCSF neuroradiology and found to have an enhancing lesion in *****'s ***** involving left trigeminal nerve. Rad Onc referral placed. She will see Dr. ***** who will present to ***** *****. 2-week radiation washout for trial.    Left side headache/facial numbness- May 19 disease  -rad onc referral  -continue steroid taper per Dr. *****   -Continue pain meds as prescribed    Follow up in 2 weeks      1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 45 min Total counseling time: 40 min        \n",
+      "assessment_and_plan": "ASSESSMENT/PLAN:  ***** ***** is a 61 y.o. female with a h/o clinical stage *****, ***** stage IIIA ER+ invasive lobular carcinoma of the right breast s/p *****, s/p bilateral mastectomies, s/p adjuvant AC/T chemotherapy, s/p xrt who was diagnosed \n with metastatic disease within 1 year of chemotherapy involving bone and muscle while taking ***** therapy as well as brain s/p GK. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the left clavicle and left glenoid region. She is here to discuss systemic therapy options.       Metastatic breast cancer  -case discussed at molecular tumor board and there is a phase 1 trial of *****+olaparib for patients with ***** mutations. She will be evaluated today by Dr. *****.  -Brain MRI reviewed by UCSF neuroradiology and found to have an enhancing lesion in *****'s ***** involving left trigeminal nerve. Rad Onc referral placed. She will see Dr. ***** who will present to ***** *****. 2-week radiation washout for trial.    Left side headache/facial numbness- May 19 disease  -rad onc referral  -continue steroid taper per Dr. *****   -Continue pain meds as prescribed    Follow up in 2 weeks      1. The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the plan.   2. Reviewed treatment options, treatment side effects in detail.   3. I reviewed the patient's medical information and medical history.   4. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.   5. Total face to face time: 45 min Total counseling time: 40 min        \n",
+      "keypoints": {
+        "Reason_for_Visit": {
+          "Patient type": "Follow up",
+          "second opinion": "no",
+          "in-person": "in-person",
+          "summary": "The patient is a 61-year-old female with metastatic ER+ invasive lobular carcinoma of the right breast. She is here to discuss systemic therapy options after progressing on first-line fulvestrant/palbociclib with new liver metastases."
+        },
+        "Cancer_Diagnosis": {
+          "Type_of_Cancer": "ER+/PR-/HER2- invasive lobular carcinoma",
+          "Stage_of_Cancer": "Originally Stage IIIA, now metastatic (Stage IV)",
+          "Metastasis": "Yes (to bone, muscle, liver, and brain)",
+          "Distant Metastasis": "Yes, to bone, muscle, liver, and brain"
+        },
+        "Lab_Results": {
+          "lab_summary": "Cancer Antigen 15-3: 45.3 (H), 259 (H), 326 (H), 360 (H); Carcinoembryonic Antigen: 3.8, 14.1 (H), 21.3 (H), 25.6 (H)"
+        },
+        "Clinical_Findings": {
+          "findings": "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [REDACTED] with probable involvement of the cisternal segment of the left trigeminal nerve, concerning for metastatic disease with a leptomeningeal component. Unchanged 6 mm enhancing lesion in the left occipital lobe and leptomeningeal disease involving the left temporooccipital region. Heterogenous appearance of the bones with ill-defined enhancement, including the clivus and cervical vertebrae, as well as mandibular condyles. No enlarged lymph nodes are seen. The patient is on a steroid taper for left side headache and facial numbness."
+        },
+        "Current_Medications": {
+          "current_meds": ""
+        },
+        "Treatment_Changes": {
+          "recent_changes": "predniSONE (DELTASONE) dose decreased to 50 mg/d",
+          "supportive_meds": "morphine sulfate (MORPHINE ORAL), ondansetron (ZOFRAN), predniSONE (DELTASONE)"
+        },
+        "Treatment_Goals": {
+          "goals_of_treatment": "palliative"
+        },
+        "Response_Assessment": {
+          "response_assessment": "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. Brain MRI reviewed by UCSF neuroradiology and found to have an enhancing lesion in [REDACTED]'s [REDACTED] involving left trigeminal nerve, concerning for metastatic disease with a leptomeningeal component."
+        },
+        "Medication_Plan": {
+          "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+        },
+        "Therapy_plan": {
+          "therapy_plan": "The patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations. There is a 2-week radiation washout for the trial."
+        },
+        "radiotherapy_plan": {
+          "radiotherapy_plan": "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+        },
+        "Procedure_Plan": {
+          "procedure_plan": "No procedures planned."
+        },
+        "Imaging_Plan": {
+          "imaging_plan": "No imaging planned."
+        },
+        "Lab_Plan": {
+          "lab_plan": "No labs planned."
+        },
+        "Genetic_Testing_Plan": {
+          "genetic_testing_plan": "She will be evaluated today by Dr. [REDACTED] for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations."
+        },
+        "follow_up_next_visit": {
+          "Next clinic visit": "in-person: 2 weeks"
+        },
+        "Advance_care_planning": {
+          "Advance care": "Not discussed during this visit."
+        },
+        "Referral": {
+          "Nutrition": "None",
+          "Genetics": "None",
+          "Specialty": "Rad Onc referral",
+          "Others": "None",
+          "follow up": "Follow up in 2 weeks"
+        }
+      },
+      "attribution": {
+        "Patient type": [
+          "Follow up in 2 weeks"
+        ],
+        "second opinion": [
+          "Metastatic breast cancer  -case discussed at molecular tumor board and there is a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations."
+        ],
+        "in-person": [
+          "Total face to face time: 45 min Total counseling time: 40 min"
+        ],
+        "summary": [
+          "61 y.o. female with a h/o clinical stage [REDACTED], [REDACTED] stage IIIA ER+ invasive lobular carcinoma of the right breast"
+        ],
+        "Type_of_Cancer": [
+          "ER+ invasive lobular carcinoma"
+        ],
+        "Stage_of_Cancer": [
+          "clinical stage [REDACTED], [REDACTED] stage IIIA ER+ invasive lobular carcinoma of the right breast ... with metastatic disease within 1 year of chemotherapy involving bone and muscle"
+        ],
+        "Metastasis": [
+          "metastatic disease within 1 year of chemotherapy involving bone and muscle while taking [REDACTED] therapy as well as brain s/p GK."
+        ],
+        "Distant Metastasis": [
+          "metastatic disease within 1 year of chemotherapy involving bone and muscle while taking [REDACTED] therapy as well as brain s/p GK."
+        ],
+        "findings": [
+          "Brain MRI reviewed by UCSF neuroradiology and found to have an enhancing lesion in [REDACTED]'s [REDACTED] involving left trigeminal nerve."
+        ],
+        "supportive_meds": [
+          "Continue pain meds as prescribed"
+        ],
+        "goals_of_treatment": [
+          "palliative radiation to the left clavicle and left glenoid region."
+        ],
+        "response_assessment": [
+          "On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases."
+        ],
+        "medication_plan": [
+          "Continue steroid taper per Dr. [REDACTED]. -continue pain meds as prescribed"
+        ],
+        "therapy_plan": [
+          "The patient will be evaluated today by Dr. [REDACTED].  -Brain MRI reviewed by UCSF neuroradiology and found to have an enhancing lesion in [REDACTED]'s [REDACTED] involving left trigeminal nerve. Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+        ],
+        "radiotherapy_plan": [
+          "Rad Onc referral placed. She will see Dr. [REDACTED] who will present to [REDACTED] [REDACTED]. 2-week radiation washout for trial."
+        ],
+        "genetic_testing_plan": [
+          "She will be evaluated today by Dr. [REDACTED] for a phase 1 trial of [REDACTED]+olaparib for patients with [REDACTED] mutations."
+        ],
+        "Next clinic visit": [
+          "Follow up in 2 weeks"
+        ],
+        "Specialty": [
+          "Rad Onc referral placed."
+        ],
+        "follow up": [
+          "Follow up in 2 weeks"
         ]
       }
     }
