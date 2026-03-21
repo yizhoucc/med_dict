@@ -11639,3 +11639,42 @@ Processing row 94 (59/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN"
       [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, potassium chloride (KLOR-CON [REDACTED]) 10 mEq ER tablet -> 
+    Treatment_Changes: 10.1s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "discussed option of capecitabine for residual dz post NAC based on CREATE-X trial. Pt is interested in this option. Discussed possibility of starting capecitabine prior to vs. Aft
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "discussed option of capecitabine for residual dz post NAC based on CREATE-X tria" -> ""
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] prilosec 40mg qd -> 
+  Phase 1 extraction (6 prompts): 114.3s
+  Cross-context injected (1496 chars)
+    Treatment_Goals: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 21.4s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is responding to treatment. MRI breast shows interval decrease in irregularly shaped mass with heterogeneous internal enhancement in the left breast, now measuring
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 25.4s
+  Total extraction: 139.6s
+    Medication_Plan: 7.8s
+      [EXTRACT] raw={
+    "medication_plan": "Continue prilosec 40mg qd. Patient will start capecitabine after XRT."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
