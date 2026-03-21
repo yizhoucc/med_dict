@@ -7380,3 +7380,23 @@ Processing row 60 (37/61)...
     [POST-GENETICS] cleared completed test result: 'Invitae genetic testing: negative'
     [POST-REFERRAL-VALIDATE] Removed 'Rad Onc consult': not found in note
     [POST-THERAPY] removed non-therapy: ['pt to undergo lumpectomy with Dr.', '[REDACTED] with IORT and reconstruction 04/12/21.']
+  [ATTRIBUTION] 16/16 fields sourced (29.1s)
+  Row 60 total: 231.1s
+  Row 60 saved to progress
+
+Processing row 62 (38/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment and Plan:'
+  Regex extraction succeeded (3414 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.9s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "49 y.o. female with locally advanced ER+/PR- left breast cancer, seeking a second opinion on treatment o
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
