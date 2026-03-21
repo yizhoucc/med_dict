@@ -2827,3 +2827,62 @@ Processing row 19 (15/61)...
       [G3-IMPROVE] Distant_Metastasis: "Yes, to bone and lymph nodes" -> "Yes, to bone"
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 7.2s
+      [EXTRACT] raw={
+"lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 104 mg/dL (03/01/13)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 33.4s
+      [EXTRACT] raw={
+"findings": "Patient has a history of left breast cancer with a 0.9cm grade II IDC, 0/2 SLN with carcinoma, ER+PR+[REDACTED]-, and 1.8 cm of DCIS. Metastatic disease includes multiple hypermetabolic
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "letrozole, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole, palbociclib" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 8.8s [improved, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Start Letrozole, Rx given; Rx for Palbociclib. OK to start.",
+"supportive_meds": "denosumab"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "denosumab" -> "denosumab, palbociclib"
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] denosumab, palbociclib -> denosumab
+  Phase 1 extraction (6 prompts): 79.5s
+  Cross-context injected (1010 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not mentioned in note."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 6.2s
+  Total extraction: 85.6s
