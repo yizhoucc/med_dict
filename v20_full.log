@@ -7473,3 +7473,166 @@ Processing row 62 (38/61)...
 "response_assessment": "No evidence of disease recurrence on imaging and exam. MRI showed a dramatic response to therapy with near total resolution of the lesion and enhancement in the left breast. 
       [G1-FORMAT] ok, keys=['response_assessment']
       [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "No evidence of disease recurrence on imaging and exam. MRI showed a dramatic res" -> "MRI showed a dramatic response to therapy with near total resolution of the lesi"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 29.7s
+  Total extraction: 159.6s
+    Medication_Plan: 31.2s
+      [EXTRACT] raw={
+    "medication_plan": "Continue letrozole. Test estradiol and FSH once every 1-2 months until September 2020. Consider ovarian suppression shots or oophorectomy if not post-menopausal. Baseline DEX
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 31.0s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue letrozole. Recommended testing for estradiol and FSH once every 1-2 months until September 2020 to confirm post-menopausal status. If not post-menopausal, administer ov
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She received XRT to the left breast and regional nodes on 11/26/19."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "She received XRT to the left breast and regional nodes on 11/26/19." -> "None"
+    Procedure_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 7.1s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "recommend a baseline DEXA scan to see if there is a need for a bisphosphonate"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "recommend a baseline DEXA scan to see if there is a need for a bisphosphonate" -> "recommend a baseline DEXA scan"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 13.5s
+      [EXTRACT] raw={
+    "lab_plan": "Testing for estradiol and FSH once every 1-2 months until September 2020 at least to confirm post-menopausal status while on letrozole."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: as needed based on new information communicated through Mychart"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: as needed based on new information communicated t" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 104.5s
+    Referral: 13.2s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "sign up for and utilize Mychart"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "Germline genetic testing with Invitae panel of 47 genes was "
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 13.2s
+    [POST-GENETICS] cleared completed test result: 'Germline genetic testing with Invitae panel of 47 genes was negative'
+    [POST-THERAPY] removed non-therapy: ['Recommended testing for estradiol and FSH once eve', 'Recommend a baseline DEXA scan to determine if a b']
+  [ATTRIBUTION] 14/20 fields sourced (32.6s)
+  Row 62 total: 309.9s
+  Row 62 saved to progress
+
+Processing row 63 (39/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (1823 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.9s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "yes",
+"in-person": "Televisit",
+"summary": "28 year old female with newly diagnosed left breast IDC, HR positive, HER2 negative, with a suspicious l
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 18.2s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage III-IV, now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to the sternum",
+"Metastasis": "Yes 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 74.9s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 11.9, WBC 7.70, RBC 3.94, Hematocrit 34.6, MCV 87.8, MCH 30.2, MCHC 34.4, RDW 11.9, Platelet Count [REDACTED], Neutrophil Absolute Count 4.19, Lymphocyte Abs Cnt 2.76, Monocyte A
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 27.3s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a large left IDC, HR positive and HER2 negative. MRI shows the tumor is 10.3 x 4.5 x 3.5 cm. Axillary biopsy was positive. Staging studies show a suspicious lesion in the st
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a large left IDC, HR positive and HER2 negative." -> "Patient has a large left IDC, HR positive and HER2 negative."
+    Current_Medications: 9.3s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "dd AC"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "dd AC" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), cholecalciferol, vitamin D3, dexAME"
+      [POST-MEDS] acetaminophen (TYLENOL), cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), [REDACTED] -> 
+    Treatment_Changes: 18.8s [supp-filtered]
