@@ -4026,3 +4026,75 @@ Processing row 33 (21/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 22.6s
+      [EXTRACT] raw={
+"findings": "Pathology: Local recurrence in left breast with a 1.7cm invasive ductal carcinoma, grade 3, extensive necrosis, skeletal muscle invasion, negative margins. Imaging: PET-CT shows hyperme
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.2s
+      [EXTRACT] raw={
+"current_meds": "arimidex"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.7s [improved]
+      [EXTRACT] raw={
+"recent_changes": "tamoxifen 20mg PO qD",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] recent_changes: "tamoxifen 20mg PO qD" -> "resumption of hormonal therapy with tamoxifen 20mg PO qD"
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 58.3s
+  Cross-context injected (914 chars)
+    Treatment_Goals: 3.2s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "adjuvant"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "adjuvant" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 11.1s
+      [EXTRACT] raw={
+"response_assessment": "Local recurrence in left breast, 1.7cm IDC on excisional biopsy. PET-CT shows hypermetabolic tumor at lateral margin of left breast implant. Breast MRI shows a 2 cm mass in l
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 14.3s
+  Total extraction: 72.6s
+    Medication_Plan: 4.9s
+      [EXTRACT] raw={
+    "medication_plan": "tamoxifen 20mg PO qD"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 7.1s
+      [EXTRACT] raw={
+    "therapy_plan": "resume hormonal therapy with tamoxifen 20mg PO qD, referral for chest wall RT"
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.4s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She has had two local recurrences and will benefit from chest wall RT. She declined this previously which is unfortunate, but she accepts a referral now. [REDACTED] refer t
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She has had two local recurrences and will benefit from chest wall RT. She decli" -> "She will benefit from chest wall RT. She declined this previously but now accept"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
