@@ -187,3 +187,137 @@ Processing row 0 (1/61)...
       [G3-IMPROVE] skipped (all fields empty/negative)
       [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
       [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 42.3s
+    Referral: 9.6s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Integrative Medicine",
+"Others": "Social work referral",
+"follow up": "RTC with me after completed work up to formulate a plan."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Genetics']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 9.6s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to lungs, peritoneum, liver, and ovaries)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2-
+      before: 'ER+/PR+ invasive ductal carcinoma'
+      after:  'ER+/PR+ invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 17/19 fields sourced (18.8s)
+  Row 0 total: 146.4s
+  Row 0 saved to progress
+
+Processing row 1 (2/61)...
+  Injected 2 term definitions: ['mastectomy', 'TNBC']
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (2678 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.5s
+      [EXTRACT] raw={
+"Patient type": "follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "44 y.o. female with metastatic breast cancer, presenting for cycle 3 day 1 of irinotecan treatment."
+}
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.5s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver, bone, a
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 31.4s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 2.1 (L), Alk Phos 183 (H), Calcium 8.2 (L), Chloride 87 (L), Creatinine 0.42 (L), eGFR if non-African American >120, eGFR if African [REDACTED] >120, Potassium 3.1 (L), Sodiu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 33.2s
+      [EXTRACT] raw={
+"findings": "Patient presents with chest wall more tender, erythematous, and edematous, which is worrisome for infection. Back pain is worse, possibly due to disease progression. MRI lumbar spine sh
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 25.1s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Irinotecan"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Irinotecan" -> ""
+      [G4-FAITH] current_meds: "" -> "albuterol 90 mcg/actuation metered dose inhaler, AMBIEN CR 1"
+      [POST-MEDS] albuterol 90 mcg/actuation metered dose inhaler, AMBIEN CR 12.5 mg ER tablet, cyclobenzaprine (FLEXERIL) 5 mg tablet, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, docusate sodium (COLACE) 250 mg capsule, gabapentin (NEURONTIN) 100 mg capsule, lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, loperamide (IMODIUM) 2 mg capsule, LORazepam (ATIVAN) 1 mg tablet, lurasidone (LATUDA) 20 mg TAB tablet, magnesium oxide (MAG-OX) 400 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, omeprazole (PRILOSEC) 40 mg capsule, ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet, polyethylene glycol (MIRALAX) 17 gram packet, pregabalin ([REDACTED]) 25 mg capsule, prochlorperazine (COMPAZINE) 10 mg tablet, rivaroxaban (XARELTO) 20 mg tablet, simethicone (MYLICON) 80 mg chewable tablet, [DISCONTINUED] venlafaxine (EFFEXOR-XR) 37.5 mg 24 hr capsule, naloxone 4 mg/actuation SPRAYNAERO Spray -> 
+    Treatment_Changes: 38.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Due to her poor tolerance, will change her irinotecan to every other week and increase her dose to 150mg/m2 days 1 and 15 every 28 days.",
+"supportive_meds": "ondansetron (ZOFRAN)
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 5 mg tablet, gabapentin (NEURONTIN) 100 mg capsule, cyclobenzaprine (FLEXERIL) 5 mg tablet, LORazepam (ATIVAN) 1 mg tablet -> ondansetron (ZOFRAN) 8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, loperamide (IMODIUM) 2 mg capsule, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, morphine ([REDACTED] [REDACTED]) 30 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 5 mg tablet
+  Phase 1 extraction (6 prompts): 159.1s
+  Cross-context injected (1161 chars)
+    Treatment_Goals: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 20.1s
+      [EXTRACT] raw={
+"response_assessment": "Metastatic breast cancer is progressing. PET/CT 05/31/19 showed significantly increased number and extent of hypermetabolic metastases including osseous, hepatic, nodal, and 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 23.8s
+  Total extraction: 182.9s
+    Medication_Plan: 18.4s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, flexeril TID, oxycodone 5mg prn, increase effexor-XR to 75 mg qd, 40 mEq PO potassium today, 1 unit pRBC today"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, flexeril TID, oxycodone 5mg prn" -> "Doxycycline 100mg BID x 7d, [REDACTED] 30mg TID, flexeril TID, oxycodone 5mg prn"
+    Therapy_plan: 28.2s
+      [EXTRACT] raw={
+    "therapy_plan": "Due to poor tolerance, irinotecan will be changed to every other week with an increased dose to 150mg/m2 on days 1 and 15 every 28 days. Continue [REDACTED] 30mg TID and flexeri
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 10.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [REDACTED] to see if he can bring her in again."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "She urgently needs to get in with Rad Onc and so I will send a message to Dr. [R" -> "She urgently needs to get in with Rad Onc for a radiotherapy consultation."
