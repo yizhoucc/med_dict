@@ -8472,3 +8472,182 @@ Processing row 69 (43/61)...
   Phase 2 extraction (2 prompts): 15.8s
   Total extraction: 157.6s
     Medication_Plan: 8.9s
+      [EXTRACT] raw={
+    "medication_plan": "Restart letrozole which she had previously tolerated. Information about [REDACTED] to help with hot flashes."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.2s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Restart letrozole which she had previously tolerated. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Restart letrozole which she had previously tolerated. She is going to have expan" -> "Restart letrozole which she had previously tolerated. She is going to have expan"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Restart letrozole which she had previously tolerated. She is going to have expan" -> "She is going to have expanders placed prior to radiation. She will also undergo "
+    radiotherapy_plan: 6.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Radiation consult. She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "Radiation consult. She is going to have expanders placed prior to radiation." -> "She is going to have expanders placed prior to radiation."
+    Procedure_Plan: 5.9s
+      [EXTRACT] raw={
+    "procedure_plan": "She is going to have expanders placed prior to radiation."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['She is going to have expanders placed prior to radiation.']
+    Imaging_Plan: 6.7s
+      [EXTRACT] raw={
+    "imaging_plan": "CT due in June 2020 to follow up lung nodules."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.2s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.3s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: September"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 50.4s
+    Referral: 14.0s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Radiation consult",
+"Others": "None",
+"follow up": "RTC with me in September, Follow up lung nodules, CT due in June 2020"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "BRCA1 mutation positive"
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 14.0s
+    [POST-GENETICS] cleared completed test result: 'BRCA1 mutation positive'
+    [POST-ADV] patched from full note: ['Full code']
+  [ATTRIBUTION] 20/22 fields sourced (37.5s)
+  Row 69 total: 259.7s
+  Row 69 saved to progress
+
+Processing row 71 (44/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (9557 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "Patient is a 72 y.o. female with recently diagnosed ER+/PR-/HER2- negative left breast cancer. The purpos
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 13.9s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma with focal neuroendocrine differentiation",
+"Stage_of_Cancer": "pT1cN0(sn)",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 28.6s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound-guided core biopsy: Invasive ductal carcinoma, 0.95 cm, modified [REDACTED]-[REDACTED]-[REDACTED] grade 1, ER+ (99%), PR- (<
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound" -> "Left breast, mass at 2 o'clock, 9 cm from nipple, ultrasound"
+    Current_Medications: 3.8s [faith-trimmed]
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] current_meds: "letrozole" -> ""
+      [G4-FAITH] EMPTIED: ['current_meds']
+      [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 19.8s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Instructed patient to begin letrozole, prescription ordered.",
+"supportive_meds": "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Ev
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
