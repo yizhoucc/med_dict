@@ -10024,3 +10024,49 @@ Processing row 84 (51/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] findings: "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED" -> "Patient has an enhancing soft tissue lesion involving the left [REDACTED]'s [RED"
       [G4-FAITH] findings: "Patient has an enhancing soft tissue lesion involving the le" -> "Patient has an enhancing soft tissue lesion involving the le"
+    Current_Medications: 4.0s [improved, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "predniSONE, fulvestrant, palbociclib"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "predniSONE, fulvestrant, palbociclib" -> "predniSONE"
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE -> 
+    Treatment_Changes: 14.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "predniSONE (DELTASONE) dose decreased to 50 mg/d",
+"supportive_meds": "morphine sulfate (MORPHINE ORAL), metoclopramide HCl (REGLAN), ondansetron (ZOFRAN), predniSONE (DELTASONE)"
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] morphine sulfate (MORPHINE ORAL), metoclopramide HCl (REGLAN), ondansetron (ZOFRAN), predniSONE (DELTASONE) -> morphine sulfate (MORPHINE ORAL), ondansetron (ZOFRAN), predniSONE (DELTASONE)
+  Phase 1 extraction (6 prompts): 94.9s
+  Cross-context injected (967 chars)
+    Treatment_Goals: 3.5s
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Response_Assessment: 19.4s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestrant/palbociclib in bone with new liver metastases. She underwent palliative radiation to the le
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra" -> "The cancer is progressing. On 04/11/2018, she progressed on first line fulvestra"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 22.9s
+  Total extraction: 117.8s
+    Medication_Plan: 6.8s
+      [EXTRACT] raw={
+    "medication_plan": "Continue steroid taper per Dr. [REDACTED]. Continue pain meds as prescribed."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
