@@ -3072,3 +3072,88 @@ Processing row 21 (16/61)...
       [G4-FAITH] response_assessment: "PET scans on 11/03/20 and 04/24/21 showed a good response. N" -> "PET scans on 11/03/20 and 04/24/21 showed a good response."
   Phase 2 extraction (2 prompts): 13.3s
   Total extraction: 181.9s
+    Medication_Plan: 15.2s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone if PET CT shows stability. If PET CT shows progression, use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include hormone 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.3s
+      [EXTRACT] raw={
+    "therapy_plan": "If PET CT shows stability, continue arimidex alone. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.1s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 started in June 2020. Rad Onc consult not explicitly mentioned, but XRT was part of the treatment plan."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "XRT to L4 and T10 started in June 2020. Rad Onc consult not explicitly mentioned" -> "XRT to L4 and T10 started in June 2020."
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "XRT to L4 and T10 started in June 2020." -> "None"
+    Procedure_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "procedure_plan": "No procedures planned."
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] procedure_plan: "No procedures planned." -> ""
+      [G4-FAITH] EMPTIED: ['procedure_plan']
+      [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 4.9s [improved]
+      [EXTRACT] raw={
+    "imaging_plan": "I recommend a pet ct now and if stable continue arimidex alone."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] imaging_plan: "I recommend a pet ct now and if stable continue arimidex alone." -> "I recommend a pet ct now"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 7.7s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "If pet ct shows progression could use faslodex with [REDACTED] if she has a [REDACTED] mutation."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: after PET CT results to determine next steps"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "in-person: after PET CT results to determine next steps" -> ""
+      [G4-FAITH] EMPTIED: ['Next clinic visit']
+      [G4-REVERT] Next clinic visit: reverted (G4 emptied all fields)
+    Advance_care_planning: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 61.4s
