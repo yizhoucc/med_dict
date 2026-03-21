@@ -1447,3 +1447,54 @@ Processing row 8 (8/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 32.3s
+      [EXTRACT] raw={
+"findings": "Patient has undergone bilateral mastectomies with right breast mastectomy revealing a 3.84 cm invasive ductal carcinoma after neoadjuvant chemotherapy with negative margins. One lymph n
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 15.9s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "Letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "Letrozole" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, fluconazole (DIFLUCAN"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, fluconazole (DIFLUCAN) 200 mg tablet, gabapentin (NEURONTIN) 300 mg capsule, ginger, Zingiber officinalis, 250 mg capsule, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]) mouthwash, LORazepam (ATIVAN) 0.5 mg tablet, LORazepam (ATIVAN) 1 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, OLANZapine (ZYPREXA) 5 mg tablet, omeprazole (PRILOSEC) 40 mg capsule, ondansetron (ZOFRAN) 8 mg tablet, polyethylene glycol (MIRALAX) 17 gram packet, prochlorperazine (COMPAZINE) 10 mg tablet, traMADoL (ULTRAM) 50 mg tablet -> 
+    Treatment_Changes: 13.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), LORazepam (ATIVAN), OLANZapine (ZYPREXA), omeprazole (PRILOSEC), polyethylene glycol (MIRALAX) -> ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), OLANZapine (ZYPREXA), polyethylene glycol (MIRALAX)
+  Phase 1 extraction (6 prompts): 90.8s
+  Cross-context injected (1005 chars)
+    Treatment_Goals: 3.5s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.3s
+  Total extraction: 97.1s
