@@ -1048,3 +1048,27 @@ Processing row 84 (6/7)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 15.1s
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3: 45.3 (H), 259 (H), 326 (H), 360 (H); Carcinoembryonic Antigen: 3.8, 14.1 (H), 21.3 (H), 25.6 (H)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 42.0s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has progressive disease with new liver metastases and increased bony disease as seen on PET CT on 04/11/2018. MRI on 06/05/2018 shows an enhancing soft tissue lesion involving t
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has progressive disease with new liver metastases an" -> "Patient has progressive disease with new liver metastases an"
+    Current_Medications: 6.4s [meds-filtered]
+      [EXTRACT] raw={
+  "current_meds": "predniSONE, fulvestrant, palbociclib, denosumab"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] predniSONE, fulvestrant, palbociclib, denosumab -> fulvestrant, palbociclib, denosumab
