@@ -1,4 +1,4 @@
-Source: v20_verify.yaml | Run started: 2026-03-20 21:53:05
+Source: v20_verify.yaml | Run started: 2026-03-21 10:35:51
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -475,7 +475,7 @@ RESULTS FOR ROW 14
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "58 y.o. female with metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbociclib. Visit purpose is follow-up."
+    "summary": "58 y.o. female with de [REDACTED] metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbociclib, here for follow-up after extensive spine surgery and postoperative radiotherapy."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+ invasive ductal carcinoma, HER2: status unclear",
@@ -487,23 +487,23 @@ RESULTS FOR ROW 14
     "lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin, Total 0.7, Urea Nitrogen 6, Calcium 8.7 (L), Chloride 109 (H), Creatinine 0.47, eGFR if non-African American 109, eGFR if African American >120, Potassium 4.3, Sodium [REDACTED], Protein, Total 7.4, Carbon Dioxide, Total 22, Anion Gap 9, Glucose, non-fasting 117, WBC Count 4.0, RBC Count 3.69 (L), Hemoglobin 12.9, Hematocrit 39.3, MCV 107 (H), MCH 35.0 (H), MCHC 32.8, Platelet Count [REDACTED], Neutrophil Absolute Count 1.90, Lymphocyte Abs Cnt 0.61 (L), Monocyte Abs Count 0.76, Eosinophil Abs Ct 0.42 (H), Basophil Abs Count 0.05, Imm Gran, Left Shift 0.21 (H), Cancer Antigen 27.29 48 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological vaccines once a week. Receives pamidronate once weekly. She reports doing okay with her current treatment. She developed chills after her bone drug, her dose was reduced but she still felt sick afterwards. She continues to have stiffness in her back, but her mobility is better as she is able to walk more now. She cancelled her CT CAP on February 27 after being told she cannot do imaging within 3 months of treatment. She will be getting scans in May 2019. On exam, no significant new findings noted. She has a palpable R axillary node 1 cm, soft and mobile. No new masses or lesions noted on physical exam. No significant changes in breast density or lymphadenopathy. No new focal uptake or lesions noted on imaging since last visit. She has a history of metastatic breast cancer to bone, liver, and nodes, with recent imaging showing stable disease. She has a history of extensive spine surgery and postoperative radiotherapy to the spine, with no new metastatic disease noted on imaging. She has a history of bone metastases in the spine, with no new lesions noted on imaging. She has a history of weight loss, with no significant changes noted on exam."
+    "findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological vaccines once a week. Receives pamidronate once weekly. She has stiffness in her back but improved mobility. She cancelled her CT CAP on February 27 due to imaging restrictions. She will be getting scans in May 2019. On exam, she is alert and oriented x3, with a slow steady gait. No new masses or lesions noted. Lymph nodes: Palpable R axillary node 1 cm, soft and mobile. No new or worsening osseous or epidural metastatic disease on MRI Total Spine. No new lesions on CT CAP. Cancer Antigen 27.29 is elevated at 48 U/mL."
   },
   "Current_Medications": {
-    "current_meds": "pamidronate, Gemcitabine 200mg, Docetaxel 20 mg"
+    "current_meds": "pamidronate, gemcitabine, docetaxel, doxorubicin"
   },
   "Treatment_Changes": {
-    "recent_changes": "Stopped palbociclib and fulvestrant end of January. Doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once weekly on Sunday. Also receiving immunological vaccines once a week. Receive pamidronate once weekly.",
+    "recent_changes": "Stopped palbociclib and fulvestrant end of January. Last dose of Fulvestrant was 01/04/19. Now doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once weekly on Sunday. Receiving immunological vaccines once a week. Receive pamidronate once weekly.",
     "supportive_meds": "pamidronate once weekly"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is currently stable. No significant changes in breast density or lymphadenopathy noted on physical exam. No new focal uptake or lesions noted on imaging since last visit. Recent imaging shows stable disease."
+    "response_assessment": "The cancer is currently stable. No new or worsening osseous or epidural metastatic disease on MRI Total Spine. No new lesions on CT CAP. Cancer Antigen 27.29 is elevated at 48 U/mL."
   },
   "Medication_Plan": {
-    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metabolic therapy 2x/week and immunological vaccines once a week. Continue pamidronate once weekly. Continue insulin as well as other medications."
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metabolic therapy 2x/week and gets immunological vaccines once a week. Continue pamidronate once weekly. Continue insulin as well as other medications."
   },
   "Therapy_plan": {
     "therapy_plan": "Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue pamidronate once weekly."
@@ -515,7 +515,7 @@ RESULTS FOR ROW 14
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "CT CAP and Total Spine MRI scheduled for May 2019. Repeat total spine MRI in 6 weeks."
+    "imaging_plan": "CT CAP and Total Spine MRI scheduled for May. Repeat total spine MRI in 6 weeks."
   },
   "Lab_Plan": {
     "lab_plan": "Labs to be drawn every two weeks."
@@ -568,7 +568,7 @@ RESULTS FOR ROW 14
     "currently doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday."
   ],
   "current_meds": [
-    "She is currently doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday."
+    "The treatment includes pamidronate, gemcitabine, docetaxel, and doxorubicin."
   ],
   "recent_changes": [
     "She has stopped palbociclib and fulvestrant. Her last dose of [REDACTED] was 01/04/19."
@@ -578,9 +578,6 @@ RESULTS FOR ROW 14
   ],
   "goals_of_treatment": [
     "metastatic ER+ breast cancer to bone, liver and nodes"
-  ],
-  "response_assessment": [
-    "Her last dose of [REDACTED] was 01/04/19."
   ],
   "medication_plan": [
     "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabin"
@@ -592,7 +589,7 @@ RESULTS FOR ROW 14
     "Cancelled scans that were scheduled on February 27. She wants to schedule CT CAP and Total Spine MRI for May"
   ],
   "lab_plan": [
-    "Labs from February 24 look okay    [REDACTED] discontinue our medications and she can have a scan when she would like to get the scan.    Apparently they gave her the chemotherapy medications as well as so-called metabolic therapy to administer on her own at home!    She has been instructed to have her labs drawn every two weeks and will return in two months."
+    "Labs from February 24 look okay    [REDACTED] discontinue our medications and she can have a scan when she would like to get the scan.    Apparently they gave her the chemotherapy medications as well as so-called metabolic therapy to administer on her own at home!  She has been instructed to have her labs drawn every two weeks and will return in two months."
   ],
   "Next clinic visit": [
     "She will returning there in 2 months."
@@ -701,7 +698,7 @@ RESULTS FOR ROW 57
     "Rec XRT, which pt is scheduled to receive"
   ],
   "summary": [
-    "Rec'd post op chemo with AC X 4 to supplement initial TCH+P."
+    "Discussed clinical presentation, initial and subsequent pathology, controversy over [REDACTED] status"
   ],
   "Type_of_Cancer": [
     "Therefore, appears to be TNBC."
