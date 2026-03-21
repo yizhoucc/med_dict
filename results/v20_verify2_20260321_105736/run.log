@@ -187,3 +187,64 @@ Processing row 0 (1/7)...
       [G4-FAITH] EMPTIED: ['Advance care']
       [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
   Plan extraction prompts: 51.0s
+    Referral: 10.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "Integrative Medicine",
+"Others": "Social work referral",
+"follow up": "RTC with me after completed work up to formulate a plan."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Others', 'Nutrition']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+  Referral extraction (full note): 10.0s
+    [POST-ADV] patched from full note: ['Full code']
+    [POST-DISTMET] added Distant Metastasis: 'Yes (to lungs, peritoneum, liver, and ovaries)'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2-
+      before: 'ER+/PR+ invasive ductal carcinoma'
+      after:  'ER+/PR+ invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 17/19 fields sourced (19.0s)
+  Row 0 total: 166.0s
+  Row 0 saved to progress
+
+Processing row 7 (2/7)...
+  Injected 8 term definitions: ['progesterone receptor', 'neoadjuvant therapy', 'estrogen receptor', 'adjuvant therapy', 'lumpectomy', 'mastectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment and Recommendations:'
+  Regex extraction succeeded (2476 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 17.1s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "29 y.o. premenopausal patient with a history of clinical stage III ER-/PR-/HER2+ IDC of the left breast, 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 14.5s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2+ (IHC 3+, FISH ratio 5.7) invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage II-III, now Stage III",
+  "Distant Metastasis": "No",
+  "Metastasis": "
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
