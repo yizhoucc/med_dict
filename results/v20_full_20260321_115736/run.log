@@ -3466,3 +3466,27 @@ Processing row 28 (18/61)...
       [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
   Phase 2 extraction (2 prompts): 7.3s
   Total extraction: 133.7s
+    Medication_Plan: 21.7s
+      [EXTRACT] raw={
+    "medication_plan": "Start letrozole 2.5mg PO daily now, Calcium supplementation with 1200mg/day combination of diet and supplement, Continue use of vaginal moisturizer (ie [REDACTED]), Can also 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 33.9s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day combination of diet and supplement. Bone density scan can be completed when she returns from [REDACTE
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb" -> "Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200mg/day comb"
+    radiotherapy_plan: 14.4s [improved]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Given her surgical pathology with only micrometastatic disease in her sentinel lymph node, they are not recommending adjuvant radiation to her regional lymph nodes. She is 
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "Given her surgical pathology with only micrometastatic disease in her sentinel l" -> "She is at risk for local recurrence in her right breast for which [REDACTED] is "
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
