@@ -10792,3 +10792,10 @@ Processing row 89 (55/61)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "Not sure"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "Not sure"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 118.6s
+      [EXTRACT] raw={
+"lab_summary": "Thyroid Stimulating Hormone 6.01 (H) 0.45 - 4.12 mIU/L, Free T4 12 10 - 18 pmol/L, Albumin, Serum / Plasma 3.9 3.5 - 5.0 g/dL, Alkaline Phosphatase 125 (H) 38 - 108 U/L, Alanine tran
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
