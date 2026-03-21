@@ -89,3 +89,39 @@ Processing row 13 (1/2)...
       [G4-FAITH] goals_of_treatment: "palliative" -> ""
       [G4-FAITH] EMPTIED: ['goals_of_treatment']
       [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 13.1s [improved]
+      [EXTRACT] raw={
+"response_assessment": "The cancer is currently stable. The patient has stiffness in her back but improved mobility. No new or worsening osseous or epidural metastatic disease on MRI Total Spine. No
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "The cancer is currently stable. The patient has stiffness in her back but improv" -> "The cancer is currently stable. No new or worsening osseous or epidural metastat"
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 17.0s
+  Total extraction: 181.8s
+    Medication_Plan: 23.3s [improved, faith-trimmed, temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 2
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+      [G4-FAITH] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta," -> "Continue topical cannabis and sulfur. Rx given for Cymbalta,"
+      [G5-TEMPORAL] medication_plan: "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i" -> "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried i"
+    Therapy_plan: 24.8s [temporal-cleaned]
+      [EXTRACT] raw={
+    "therapy_plan": "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metaboli
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] therapy_plan: "Discontinue palbociclib and fulvestrant. Continue low dose chemo combination of " -> "Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and "
+    radiotherapy_plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
