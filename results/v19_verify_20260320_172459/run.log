@@ -7615,3 +7615,61 @@ Processing row 63 (39/61)...
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 55.8s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 11.9, WBC 7.70, RBC 3.94, Hematocrit 34.6, MCV 87.8, MCH 30.2, MCHC 34.4, RDW 11.9, Platelet Count [REDACTED], Neutrophil Absolute Count 4.19, Lymphocyte Abs Cnt 2.76, Monocyte A
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 20.7s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Patient has a large left IDC, HR positive and HER2 negative. MRI shows the tumor is 10.3 x 4.5 x 3.5 cm. Axillary biopsy was positive. Staging studies show a suspicious lesion in the st
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Patient has a large left IDC, HR positive and HER2 negative." -> "Patient has a large left IDC, HR positive and HER2 negative."
+    Current_Medications: 7.1s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "dd AC"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "dd AC" -> ""
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), cholecalciferol, vitamin D3, dexAME"
+      [POST-MEDS] acetaminophen (TYLENOL), cholecalciferol, vitamin D3, dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), [REDACTED] -> 
+    Treatment_Changes: 13.2s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL), dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] acetaminophen (TYLENOL), dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE) -> dexAMETHasone (DECADRON), docusate sodium (COLACE), OLANZapine (ZYPREXA), ondansetron (ZOFRAN), prochlorperazine (COMPAZINE)
+  Phase 1 extraction (6 prompts): 126.2s
+  Cross-context injected (744 chars)
+    Treatment_Goals: 3.4s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 6.1s
+  Total extraction: 132.3s
