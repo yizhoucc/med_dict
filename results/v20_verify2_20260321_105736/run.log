@@ -461,3 +461,18 @@ Processing row 11 (3/7)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 125.6s [format-repaired]
+      [EXTRACT] raw={
+"findings": "MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no media
+      [G1-FORMAT] repaired -> keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.8s
+      [EXTRACT] raw={
+  "current_meds": "herceptin, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
