@@ -8725,3 +8725,70 @@ Processing row 71 (44/61)...
       [G4-FAITH] EMPTIED: ['imaging_plan']
       [G4-PROTECT] imaging_plan: restored safe negative "No imaging planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Lab_Plan: 7.1s
+      [EXTRACT] raw={
+    "lab_plan": "Ordered [REDACTED] to evaluate potential benefit of chemotherapy."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 6.3s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Ordered [REDACTED] to evaluate potential benefit of chemotherapy."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 5.9s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: In 3 weeks to review [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 46.3s
+    Referral: 11.7s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "In 3 weeks to review [REDACTED]"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Nutrition', 'Specialty', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 11.7s
+    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment
+  [ATTRIBUTION] 17/20 fields sourced (27.8s)
+  Row 71 total: 178.9s
+  Row 71 saved to progress
+
+Processing row 72 (45/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (179 chars)
+  A/P extraction: 0.0s
