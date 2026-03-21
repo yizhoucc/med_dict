@@ -3028,3 +3028,49 @@ Processing row 21 (16/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Current_Medications: 6.5s [meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "anastrozole, denosumab, prednisone"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-MEDS] anastrozole, denosumab, prednisone -> anastrozole, denosumab
+    Treatment_Changes: 19.5s
+      [EXTRACT] raw={
+"recent_changes": "abemaciclib held since 08/14/2021 due to pneumonitis; letrozole switched to anastrozole in July 2020 due to skin rash; [REDACTED] dose reduced and patient has been on 150 mg bid s
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 194.3s
+  Cross-context injected (900 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 8.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "PET scans on 11/03/20 and 04/24/21 showed a good response. No evidence of disease recurrence on imaging and exam."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] response_assessment: "PET scans on 11/03/20 and 04/24/21 showed a good response. N" -> "PET scans on 11/03/20 and 04/24/21 showed a good response."
+  Phase 2 extraction (2 prompts): 12.7s
+  Total extraction: 207.0s
+    Medication_Plan: 19.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone if PET CT is stable. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include hormone 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
