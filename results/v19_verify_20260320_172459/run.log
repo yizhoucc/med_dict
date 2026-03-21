@@ -232,3 +232,20 @@ Processing row 1 (2/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 16.5s [stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIB, now metastatic (Stage IV)",
+  "Distant_Metastasis": "Yes, to liver, bone, a
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 31.4s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 2.1 (L), Alk Phos 183 (H), Calcium 8.2 (L), Chloride 87 (L), Creatinine 0.42 (L), eGFR if non-African American >120, eGFR if African [REDACTED] >120, Potassium 3.1 (L), Sodiu
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
