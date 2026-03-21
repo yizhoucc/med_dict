@@ -11493,3 +11493,84 @@ Processing row 93 (58/61)...
       [G4-FAITH] EMPTIED: ['procedure_plan']
       [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 10.3s
+      [EXTRACT] raw={
+    "imaging_plan": "Mammogram due in November 2021. High risk screening MRI with Dr. [REDACTED]."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 2.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 4.4s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 6 months for follow up"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 6 months for follow up" -> "6 months for follow up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 47.9s
+    Referral: 13.9s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "None",
+"follow up": "RTC in 6 months for follow up."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Discussed Anti inflammation diet and fasting 12-13 hours a day -sent the dietary"
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Others', 'Specialty', 'Genetics']
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 13.9s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Discussed Anti inflammation diet and fasting 12-13 hours a day -sent the dietary'
+    [POST-THERAPY] cleared (no oncology drugs found): [REDACTED] for [REDACTED] therapy and bone protection, next due May 2021.
+    [POST-ADV] patched from full note: ['full code']
+    [POST-GOALS] adjuvant → curative (non-metastatic)
+  [ATTRIBUTION] 14/18 fields sourced (26.1s)
+  Row 93 total: 264.2s
+  Row 93 saved to progress
+
+Processing row 94 (59/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (1634 chars)
+  A/P extraction: 0.0s
