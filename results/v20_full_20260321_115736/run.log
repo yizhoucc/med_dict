@@ -12004,3 +12004,26 @@ Processing row 99 (61/61)...
       [G4-FAITH] EMPTIED: ['Stage_of_Cancer']
       [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage [X], now metastatic (Stage IV)"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 199.8s [format-repaired, improved]
+      [EXTRACT] raw={
+"lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (< 39 U/mL), Alkaline Phosphatase 172 (31 - 95 U/L), Alanine transaminase 37 (11 - 50 U/L), Aspartate transaminase 57 ([R
+      [G1-FORMAT] repaired -> keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin" -> "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkalin"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 32.4s
+      [EXTRACT] raw={
+"findings": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Bilirubin, total, is within normal limits. Alkaline phosphatase is elevated. Aspartate transaminase is eleva
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 10.7s [improved, faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] current_meds: "LORazepam (ATIVAN), pregabalin, docusate sodium, oxyCODONE (ROXICODONE), senna" -> ""
+      [G4-FAITH] current_meds: "" -> "BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyrox"
+      [POST-MEDS] BLUE-[REDACTED] [REDACTED], SPIRULINA, IBUPROFEN, levothyroxine, LORazepam, pregabalin, pyridoxine, docusate sodium, oxyCODONE, senna, cyanocobalamin, cholecalciferol -> 
