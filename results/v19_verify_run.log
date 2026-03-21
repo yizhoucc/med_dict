@@ -6223,3 +6223,174 @@ Processing row 51 (32/61)...
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
     Clinical_Findings: 20.1s [improved]
+      [EXTRACT] raw={
+"findings": "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0.18 cm largest deposit, with minimal extranodal extension. Margins are negative. No [REDACTED]. Physical 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0" -> "Patient has a 1.7cm grade II IDC with micrometastatic carcinoma in (March 28), 0"
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 5.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, i"
+      [POST-MEDS] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN, ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN, ondansetron (ZOFRAN) 8 mg, Oral, Every 8 Hours PRN -> 
+    Treatment_Changes: 15.5s [improved, faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every 6 Hours PRN; ondansetron (ZOFRAN) 8 mg, Oral, Every 
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTR" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTR"
+      [G4-FAITH] supportive_meds: "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; i" -> "acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; i"
+      [POST-SUPP] acetaminophen (TYLENOL) 1,000 mg, Oral, Every 6 Hours PRN; ibuprofen (ADVIL,MOTRIN) 600 mg, Oral, Every  6 Hours PRN; ondansetron (ZOFRAN) 8 mg, Oral, Every  8 Hours PRN -> ondansetron (ZOFRAN) 8 mg
+  Phase 1 extraction (6 prompts): 70.9s
+  Cross-context injected (723 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 2.6s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 76.9s
+    Medication_Plan: 10.3s
+      [EXTRACT] raw={
+    "medication_plan": "[REDACTED] + [REDACTED]. [REDACTED] send Zoladex prior auth. Start after egg harvesting complete"
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 16.1s
+      [EXTRACT] raw={
+    "therapy_plan": "Referral for fertility preservation asap, [REDACTED] + [REDACTED]. [REDACTED] send Zoladex prior auth. Start after egg harvesting complete, CT CAP and bone scan for staging, [RE
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "None"
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] radiotherapy_plan: "None" -> ""
+      [G4-FAITH] EMPTIED: ['radiotherapy_plan']
+      [G4-PROTECT] radiotherapy_plan: restored safe negative "None"
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Procedure_Plan: 6.6s
+      [EXTRACT] raw={
+    "procedure_plan": "Referral for fertility preservation asap, CT CAP and bone scan for staging"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['CT CAP and bone scan for staging']
+    Imaging_Plan: 4.8s
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP and bone scan for staging"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+    "lab_plan": "No labs planned."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_plan: "No labs planned." -> ""
+      [G4-FAITH] EMPTIED: ['lab_plan']
+      [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
+      [G5-TEMPORAL] skipped (all fields empty/negative)
+    Genetic_Testing_Plan: 6.3s
+      [EXTRACT] raw={
+    "genetic_testing_plan": "Order [REDACTED] to provide more information on her tumor biology and likelihood of benefit from chemotherapy."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 3.4s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 53.8s
+    Referral: 10.4s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Social work referral",
+"follow up": "RTC 3 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Others: "Social work referral" -> "None"
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] Genetics: "None" -> "VUS in [REDACTED] c.[REDACTED]>G, [REDACTED] c.[REDACTED]>G,"
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 10.4s
+    [POST-GENETICS] cleared completed test result: 'VUS in [REDACTED] c.[REDACTED]>G, [REDACTED] c.[REDACTED]>G, CTNNA1 c.1143+4A>G'
+    [POST-THERAPY] removed non-therapy: ['Referral for fertility preservation asap, [REDACTE', 'Start after egg harvesting complete, CT CAP and bo']
+  [ATTRIBUTION] 17/18 fields sourced (26.6s)
+  Row 51 total: 167.6s
+  Row 51 saved to progress
+
+Processing row 52 (33/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (3682 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.9s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient with recently diagnosed stage II/III left breast cancer, ER/PR positive, HER2 positive, post-left
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
