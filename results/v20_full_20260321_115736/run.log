@@ -9627,3 +9627,44 @@ Processing row 82 (49/61)...
       [G4-FAITH] current_meds: "letrozole" -> ""
       [G4-FAITH] EMPTIED: ['current_meds']
       [G4-REVERT] current_meds: reverted (G4 emptied all fields)
+    Treatment_Changes: 7.4s [faith-trimmed, supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] supportive_meds: "" -> "buspirone, carvedilol, celecoxib, gabapentin, levothyroxine,"
+      [POST-SUPP] buspirone, carvedilol, celecoxib, gabapentin, levothyroxine, losartan, sertraline, zolpidem, erythromycin ophthalmic ointment, metronidazole cream -> 
+  Phase 1 extraction (6 prompts): 105.4s
+  Cross-context injected (1409 chars)
+    Treatment_Goals: 5.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 42.6s
+      [EXTRACT] raw={
+"response_assessment": "The cancer is responding to neoadjuvant endocrine therapy. Recent imaging shows significant response, especially PET/SUV response in axillary nodes. The numerous hypermetabol
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 47.6s
+  Total extraction: 153.0s
+    Medication_Plan: 8.4s
+      [EXTRACT] raw={
+    "medication_plan": "Continuing neoadjuvant endocrine therapy with letrozole."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
