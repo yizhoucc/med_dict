@@ -6133,3 +6133,52 @@ Processing row 49 (31/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    follow_up_next_visit: 4.4s [faith-trimmed]
+      [EXTRACT] raw={
+    "Next clinic visit": "telehealth: prn"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Next clinic visit: "telehealth: prn" -> "prn"
+    Advance_care_planning: 2.7s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 75.9s
+    Referral: 16.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "Referral to genetics for pathogenic PMS 2 mutation",
+"Specialty": "None",
+"Others": "Referral to high risk clinic",
+"follow up": "She will see me prn."
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Specialty']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 16.5s
+    [POST-GENETICS] cleared completed test result: 'Referral to genetics for pathogenic PMS 2 mutation'
+    [POST-OTHERS] cleaned: 'Referral to high risk clinic...' → 'None'
+    [POST-THERAPY] removed non-therapy: ['Her disease is under great control as of imaging D', 'She is considering her options for observation or ']
+    [POST-ADV] patched from full note: ['full code']
+  [ATTRIBUTION] 17/21 fields sourced (25.6s)
+  Row 49 total: 252.3s
+  Row 49 saved to progress
+
+Processing row 51 (32/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (4707 chars)
+  A/P extraction: 0.0s
