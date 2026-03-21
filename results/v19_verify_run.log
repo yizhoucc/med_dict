@@ -4276,3 +4276,181 @@ Processing row 35 (22/61)...
       [G1-FORMAT] ok, keys=['response_assessment']
       [G2-SCHEMA] ok
       [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not mentioned in note." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not mentioned in note."
+  Phase 2 extraction (2 prompts): 5.9s
+  Total extraction: 117.9s
+    Medication_Plan: 16.6s
+      [EXTRACT] raw={
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughout chemo as ppx
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.3s
+      [EXTRACT] raw={
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles. Today is week 8. Continue zoladex for preservation of ovarian reserve during chemotherapy. Continue valtrex 1g every day throughou
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 7.1s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "radiation oncology referral, will see Dr. [REDACTED] next week."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 6.2s
+      [EXTRACT] raw={
+    "procedure_plan": "will get doppler to r/o DVT, radiation oncology referral"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+      [POST-PROC-FILTER] removed from procedure_plan: ['radiation oncology referral']
+    Imaging_Plan: 5.0s
+      [EXTRACT] raw={
+    "imaging_plan": "will get doppler to r/o DVT"
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 9.7s [improved]
+      [EXTRACT] raw={
+    "lab_plan": "labs reviewed and adequate to receive treatment today"
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_plan: "labs reviewed and adequate to receive treatment today" -> "will get doppler to r/o DVT. Discussed possibly starting on anticoag if positive"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 2.3s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.5s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 67.1s
+    Referral: 13.3s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "radiation oncology consult",
+"Others": "None",
+"follow up": "RTC 2 weeks"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Nutrition: "None" -> ""
+      [G4-FAITH] Others: "None" -> ""
+      [G4-FAITH] Specialty: "radiation oncology consult" -> "radiation oncology referral, will see Dr. [REDACTED] next we"
+      [G4-FAITH] Genetics: "None" -> "Invitae genetic testing pf 133 genes: VUS in [REDACTED] (het"
+      [G4-FAITH] EMPTIED: ['Nutrition', 'Others']
+      [G4-PROTECT] Nutrition: restored safe negative "None"
+      [G4-PROTECT] Others: restored safe negative "None"
+  Referral extraction (full note): 13.3s
+    [POST-GENETICS] cleared completed test result: 'Invitae genetic testing pf 133 genes: VUS in [REDACTED] (heterozygous c.271G>T), [REDACTED] (heterozygous C.[REDACTED]>C), and PDGFRA (heterozygous c.[REDACTED]>T)'
+    [POST-LAB] cleaned: 'will get doppler to r/o DVT. Discussed possibly starting on anticoag if positive' → 'No labs planned.'
+    [POST-THERAPY] removed non-therapy: ['Today is week 8.']
+  [ATTRIBUTION] 22/22 fields sourced (33.0s)
+  Row 35 total: 231.3s
+  Row 35 saved to progress
+
+Processing row 36 (23/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment / Plan:'
+  Regex extraction succeeded (911 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 16.6s
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "Televisit",
+"summary": "61 year old female with newly diagnosed stage IIA left triple negative invasive ductal carcinoma of the b
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 10.4s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage IIA",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 2.0s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 9.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "2.3 cm, node negative, [REDACTED], triple negative breast cancer. No new imaging findings noted. Physical exam: No acute distress, awake and alert, appears stated age. No palpable masse
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "2.3 cm, node negative, [REDACTED], triple negative breast cancer. No new imaging" -> "2.3 cm, node negative, triple negative breast cancer. No new imaging findings no"
+      [G4-FAITH] findings: "2.3 cm, node negative, triple negative breast cancer. No new" -> "2.3 cm, node negative, triple negative breast cancer. No new"
+    Current_Medications: 3.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "dexlansoprazole (DEXILANT) 60 mg [REDACTED], Take 60 mg by m"
+      [POST-MEDS] dexlansoprazole (DEXILANT) 60 mg [REDACTED], Take 60 mg by mouth Daily. -> 
+    Treatment_Changes: 4.2s [improved]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "dexlansoprazole (DEXILANT)"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] supportive_meds: "dexlansoprazole (DEXILANT)" -> ""
