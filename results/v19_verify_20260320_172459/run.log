@@ -1247,3 +1247,19 @@ Processing row 7 (7/61)...
       [G4-FAITH] lab_summary: "No labs in note." -> ""
       [G4-FAITH] EMPTIED: ['lab_summary']
       [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 46.2s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residual carcinoma; no DCIS, no extranodal extension; 3 of 28 lymph nodes positive for HER2+/ER- adenocarcinoma,
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residua" -> "Left breast lumpectomy and ALND: tumor bed with chronic inflammation, no residua"
+      [G4-FAITH] findings: "Left breast lumpectomy and ALND: tumor bed with chronic infl" -> "Left breast lumpectomy and ALND: tumor bed with chronic infl"
+    Current_Medications: 5.1s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTR"
+      [POST-MEDS] acetaminophen (TYLENOL) 500 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet -> 
