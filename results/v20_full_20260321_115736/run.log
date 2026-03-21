@@ -8389,3 +8389,28 @@ Processing row 69 (43/61)...
   Regex matched: 'Assessment \Plan :'
   Regex extraction succeeded (1575 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 20.6s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient presents with malignant neoplasm of overlapping sites of both breasts in female, estrogen receptor 
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 20.9s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma on left side, ER+/PR-/HER2-equivocal invasive ductal carcinoma with DCIS on right side",
+"Stage_of_Cancer": "Left side: pT4bN1M0, Right si
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis', 'Distant Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
