@@ -5636,3 +5636,70 @@ Processing row 45 (29/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] lab_summary: "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B" -> "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B"
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 38.6s
+      [EXTRACT] raw={
+"findings": "Patient is s/p bilateral mastectomies with residual 3.5 cm disease and positive margins. Pathology shows 2/2 positive nodes with extranodal extension. Imaging findings include: hypermet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 4.0s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 11.5s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg BID, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg BID, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 155.5s
+  Cross-context injected (1204 chars)
+    Treatment_Goals: 3.9s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 7.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on letrozole. No specific imaging or lab results are mentioned in the note to assess the current response of the cancer to treatment."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on letrozole. No specific imaging or lab results are mentio" -> "No specific imaging or lab results are mentioned in the note to assess the curre"
+      [G4-FAITH] response_assessment: "No specific imaging or lab results are mentioned in the note" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 10.8s
+  Total extraction: 166.4s
+    Medication_Plan: 13.7s
+      [EXTRACT] raw={
+    "medication_plan": "Will start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron."
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 14.4s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient will start letrozole now. Discussed addition of abemaciclib after completion of xrt."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Patient will start letrozole now. Discussed addition of abemaciclib after comple" -> "Patient will start letrozole now. Discussed addition of abemaciclib after comple"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
