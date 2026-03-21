@@ -7598,3 +7598,14 @@ Processing row 63 (39/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 18.2s [stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Originally Stage III-IV, now metastatic (Stage IV)",
+"Distant Metastasis": "Yes, to the sternum",
+"Metastasis": "Yes 
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
