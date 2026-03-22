@@ -635,3 +635,58 @@ Processing row 4 (4/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 23.0s [improved]
+      [EXTRACT] raw={
+"findings": "Patient has recurrent breast cancer with left cervical lymphadenopathy and left brachial plexus involvement. MRI of the cervical spine shows interval enlargement of a left level 5B pres
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] findings: "Patient has recurrent breast cancer with left cervical lymphadenopathy and left " -> "Patient has recurrent breast cancer with left cervical lymphadenopathy and left "
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 8.4s
+      [EXTRACT] raw={
+  "current_meds": "anastrozole, palbociclib, leuprolide"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 7.6s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet, gabapentin (NEURONTIN) 300 mg capsule"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] ondansetron (ZOFRAN) 8 mg tablet, gabapentin (NEURONTIN) 300 mg capsule -> ondansetron (ZOFRAN) 8 mg tablet
+  Phase 1 extraction (6 prompts): 72.4s
+  Cross-context injected (1080 chars)
+    Treatment_Goals: 3.0s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "palliative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "palliative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 13.9s
+      [EXTRACT] raw={
+"response_assessment": "CT and bone scan show decreased size of left cervical chain LNs, stable borderline enlargement of mediastinal LN, and increased size of left axillary LN. MRI of the cervical 
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+  Phase 2 extraction (2 prompts): 17.0s
+  Total extraction: 89.4s
+    Medication_Plan: 13.5s [temporal-cleaned]
+      [EXTRACT] raw={
+    "medication_plan": "Continue leuprolide (OS started January 2019), anastrozole (started March 2019), and palbociclib (started April 2019)."
+}
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] medication_plan: "Continue leuprolide (OS started January 2019), anastrozole (started March 2019)," -> "Continue leuprolide, anastrozole, and palbociclib."
