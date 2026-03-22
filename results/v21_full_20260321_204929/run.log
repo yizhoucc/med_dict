@@ -2806,3 +2806,16 @@ Processing row 19 (15/61)...
   Regex matched: 'Assessment and Plan'
   Regex extraction succeeded (3461 chars)
   A/P extraction: 0.0s
+    Reason_for_Visit: 36.5s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Metastatic ER+/HER2- breast cancer. Consultation regarding a metastatic recurrence of her breast cancer."
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] Patient type: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
