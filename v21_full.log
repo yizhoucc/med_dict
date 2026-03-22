@@ -5567,3 +5567,178 @@ Processing row 43 (28/61)...
       [G4-PROTECT] lab_plan: restored safe negative "No labs planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
     Genetic_Testing_Plan: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 7.1s
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 01/05/19"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.5s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 79.1s
+    Referral: 11.6s [faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "follow up with nutrition on 11/30/18",
+"Genetics": "None",
+"Specialty": "Radiation oncology consult",
+"Others": "Physical therapy referral",
+"follow up": "on 01/05/19"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+  Referral extraction (full note): 11.6s
+    [POST-THERAPY] removed non-therapy: ['She has decided to proceed with a bilateral oophor', 'Dr.']
+    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment
+  [ATTRIBUTION] 20/21 fields sourced (31.0s)
+  Row 43 total: 204.2s
+  Row 43 saved to progress
+
+Processing row 45 (29/61)...
+  Trying regex extraction...
+  Regex matched: 'Assessment/Plan'
+  Regex extraction succeeded (6689 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 15.1s
+      [EXTRACT] raw={
+"Patient type": "Follow up",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Right breast cancer, s/p right partial mastectomy with 3.5 cm residual disease with positive margins, 2/2 p
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 15.1s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "pT2N2b with extranodal extension",
+"Distant Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+/PR-/HER2- invasive ductal carcinoma"
+      [G4-FAITH] Distant Metastasis: "No" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant Metastasis', 'Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 67.7s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, Bilirubin 0.3, Urea Nitrogen 15, Calcium 10.0, Chloride [REDACTED], Creatinine 0.62, eGFR - low estimat
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B" -> "Albumin 3.9, Alkaline Phosphatase [REDACTED], Alanine transaminase 22, AST 19, B"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 37.0s
+      [EXTRACT] raw={
+"findings": "Patient is s/p bilateral mastectomies with residual 3.5 cm disease and positive margins. Pathology shows 2/2 positive nodes with extranodal extension. Imaging findings include: hypermet
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.3s
+      [EXTRACT] raw={
+"current_meds": "letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg bid, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg bid, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 151.3s
+  Cross-context injected (1205 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on letrozole. No specific imaging or lab results are mentioned in the note to assess the current response of the cancer to treatment."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on letrozole. No specific imaging or lab results are mentio" -> "No specific imaging or lab results are mentioned in the note to assess the curre"
+      [G4-FAITH] response_assessment: "No specific imaging or lab results are mentioned in the note" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 9.3s
+  Total extraction: 160.6s
+    Medication_Plan: 15.1s
+      [EXTRACT] raw={
+    "medication_plan": "Will start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron."
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.2s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient will start letrozole now. Discussed addition of abemaciclib after completion of xrt."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Patient will start letrozole now. Discussed addition of abemaciclib after comple" -> "Patient will start letrozole now. Discussed addition of abemaciclib after comple"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.3s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Encouraged her to fup with Dr. [REDACTED] in rad onc after her re-excision date is set."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 4.6s
+      [EXTRACT] raw={
+    "procedure_plan": "re-excision of margins, axillary dissection"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Imaging_Plan: 11.2s
