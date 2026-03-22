@@ -1568,6 +1568,7 @@ def main():
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
         # POST-SELF-MANAGED: Clear current_meds if physician disapproves of patient's self-managed drugs [v21]
+        self_managed_cleared = False
         drug_dict_sm = keypoints.get("Current_Medications", {})
         if isinstance(drug_dict_sm, dict):
             meds_val_sm = (drug_dict_sm.get("current_meds", "") or "").strip()
@@ -1599,6 +1600,7 @@ def main():
                         print(f"    [POST-SELF-MANAGED] Cleared current_meds (physician disapproval: {signal_count} signals, no outpatient cancer meds)")
                         print(f"      before: '{meds_val_sm}'")
                         drug_dict_sm["current_meds"] = ""
+                        self_managed_cleared = True
 
         # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
         tc_dict = keypoints.get("Treatment_Changes", {})
@@ -1641,10 +1643,11 @@ def main():
 
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
+        # Skip if POST-SELF-MANAGED already cleared (physician disapproves — don't re-inject)
         drug_dict_meds = keypoints.get("Current_Medications", {})
         if isinstance(drug_dict_meds, dict):
             meds_val = (drug_dict_meds.get("current_meds", "") or "").strip()
-            if not meds_val:
+            if not meds_val and not self_managed_cleared:
                 ap_lower_iv = (assessment_and_plan or '').lower()
                 if ap_lower_iv:
                     # v19: patterns that indicate ACTIVE/CURRENT chemo only
