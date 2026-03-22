@@ -410,3 +410,10 @@ Processing row 94 (2/2)...
     [POST-PATIENT-TYPE] Corrected invalid 'in-person' → 'Follow up'
     [POST-THERAPY] removed non-therapy: ['Discuss completion ALND vs.', 'Refer to Rad Onc.', 'Continue prilosec 40mg qd for GERD.']
     [POST-DISTMET] added Distant Metastasis: 'No'
+  [ATTRIBUTION] 16/17 fields sourced (23.3s)
+  Row 94 total: 238.6s
+  Row 94 saved to progress
+
+Total processing time: 568.4s (9.5min)
+Done! Results copied to ./results.txt
+Full results in: results/v21_verify_20260321_203043/

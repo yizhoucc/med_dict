@@ -1,4 +1,4 @@
-Source: v21_verify.yaml | Run started: 2026-03-21 20:17:58
+Source: v21_verify.yaml | Run started: 2026-03-21 20:30:43
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -476,7 +476,7 @@ RESULTS FOR ROW 14
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "58 y.o. female with de [REDACTED] metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbociclib, here for follow-up after extensive spine surgery and postoperative radiotherapy."
+    "summary": "58 y.o. female with metastatic ER+ breast cancer to bone, liver, and nodes, currently on faslodex and palbociclib, here for follow-up."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+ invasive ductal carcinoma, HER2: status unclear",
@@ -488,10 +488,10 @@ RESULTS FOR ROW 14
     "lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin, Total 0.7, Urea Nitrogen 6, Calcium 8.7 (L), Chloride 109 (H), Creatinine 0.47, eGFR if non-African American 109, eGFR if African American >120, Potassium 4.3, Sodium [REDACTED], Protein, Total 7.4, Carbon Dioxide, Total 22, Anion Gap 9, Glucose, non-fasting 117, WBC Count 4.0, RBC Count 3.69 (L), Hemoglobin 12.9, Hematocrit 39.3, MCV 107 (H), MCH 35.0 (H), MCHC 32.8, Platelet Count [REDACTED], Neutrophil Absolute Count 1.90, Lymphocyte Abs Cnt 0.61 (L), Monocyte Abs Count 0.76, Eosinophil Abs Ct 0.42 (H), Basophil Abs Count 0.05, Imm Gran, Left Shift 0.21 (H), Cancer Antigen 27.29 48 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological vaccines once a week. Receives pamidronate once weekly. She has stiffness in her back but her mobility is better as she is able to walk more now. She started physical therapy on 03/12/19. She cancelled her CT CAP on February 27 after being told she cannot do imaging within 3 months of treatment. She will be getting scans in May 2019. On exam, she is alert and oriented x3, with a slow steady gait. No new masses or lesions were noted on physical exam. No new significant findings on the latest lab results from February 24."
+    "findings": "Patient is currently on low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Metabolic therapy 2x/week and gets immunological vaccines once a week. Receives pamidronate once weekly. She has stiffness in her back but improved mobility. She cancelled her CT CAP on February 27 after being told she cannot do imaging within 3 months of treatment. She will be getting scans in May 2019. On exam, no new masses, rashes, or lesions noted. Palpable R axillary node 1 cm, soft and mobile. Bilat lungs CTA, resonant to percussion. Normal RRR, no murmurs, no edema. BS x4, soft, nontender, no distention, no organomegaly. NL ROM. Slow steady gait. Symm strength, no focal motor or sensory deficits 5/5 strength all throughout. Stable mood and affect. Labs from February 24 look okay."
   },
   "Current_Medications": {
-    "current_meds": "faslodex"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "Stopped palbociclib and fulvestrant end of January. Last dose of Fulvestrant was 01/04/19. Doing low dose chemo at home - [REDACTED] 10 mg, Gemcitabine 200mg, Docetaxel 20 mg once weekly on Sunday. Also receiving immunological vaccines once a week. Receive pamidronate once weekly.",
@@ -501,7 +501,7 @@ RESULTS FOR ROW 14
     "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "No new masses or lesions were noted on physical exam. No new significant findings on the latest lab results from February 24. The patient reports that she is doing okay with her current treatment."
+    "response_assessment": "Palpable R axillary node 1 cm, soft and mobile. Bilat lungs CTA, resonant to percussion. Normal RRR, no murmurs, no edema. BS x4, soft, nontender, no distention, no organomegaly. NL ROM. Slow steady gait. Symm strength, no focal motor or sensory deficits 5/5 strength all throughout. Stable mood and affect. Labs from February 24 look okay."
   },
   "Medication_Plan": {
     "medication_plan": "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday. Continue metabolic therapy 2x/week and gets immunological vaccines once a week. Continue pamidronate once weekly. Continue insulin as well as other medications."
@@ -568,9 +568,6 @@ RESULTS FOR ROW 14
   "findings": [
     "currently doing low dose chemo combination of [REDACTED] 10 mg, Gemcitabine 200mg, and Docetaxel 20 mg once weekly on Sunday."
   ],
-  "current_meds": [
-    "She is currently on faslodex on 07/14/18"
-  ],
   "recent_changes": [
     "She has stopped palbociclib and fulvestrant. Her last dose of [REDACTED] was 01/04/19."
   ],
@@ -579,9 +576,6 @@ RESULTS FOR ROW 14
   ],
   "goals_of_treatment": [
     "metastatic ER+ breast cancer to bone, liver and nodes"
-  ],
-  "response_assessment": [
-    "Not new significant findings on the latest lab results from February 24."
   ],
   "medication_plan": [
     "Continue topical cannabis and sulfur. Rx given for Cymbalta, but has not tried it. Continue low dose chemo combination of [REDACTED] 10 mg, Gemcitabin"
@@ -642,20 +636,20 @@ RESULTS FOR ROW 95
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Residual invasive ductal carcinoma with treatment effect, three foci, margins negative; Residual ductal carcinoma in situ with treatment effect, margins negative. One lymph node with residual metastatic carcinoma with treatment effect, 0.9 cm. Imaging findings: MRI breast shows interval decrease in irregularly shaped mass with irregular margins and heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satellite decreased in size to 4 x 5 x 6mm. Non-mass enhancement seen throughout the lower outer/lower central breast and extending superiorly to at least the central outer breast is now indecipherable from [REDACTED]. Improved, though not resolved, lower outer and lower central breast skin thickening and enhancement. Improved though persistent diffuse left axillary adenopathy, with sampled dominant node (level I) containing susceptibility from biopsy clip. Stable enlarged left internal mammary node. Physical exam findings: No cervical, supraclavicular, or axillary lymphadenopathy. Left breast skin intact, + prev mass remains indistinct with overlying hyperpigmentation. + tr edema today LE bilat. No focal motor or sensory deficits."
+    "findings": "Left breast, residual invasive ductal carcinoma with treatment effect, three foci, margins negative; residual ductal carcinoma in situ with treatment effect, margins negative. Left axillary sentinel lymph node #1 shows residual metastatic carcinoma with treatment effect in one lymph node (March 24), 0.9 cm. No tumor in five lymph nodes (0/5) in left axillary sentinel lymph node #2. MRI breast shows interval decrease in irregularly shaped mass with irregular margins and heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satellite decreased in size to 4 x 5 x 6mm. Improved, though not resolved, lower outer and lower central breast skin thickening and enhancement. Improved though persistent diffuse (levels I, II and II encroaching on III) left axillary adenopathy, with sampled dominant node (level I) containing susceptibility from biopsy clip. Stable enlarged left internal mammary node. No cervical, supraclavicular, or axillary lymphadenopathy on physical exam. Left breast skin intact, + prev mass remains indistinct with overlying hyperpigmentation. + tr edema today LE bilat."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "Start AC, discussed option of capecitabine for residual dz post NAC, discussed possibility of starting capecitabine prior to vs. After XRT, Pt wishes to proceed with XRT next, then capecitabine, strongly recommend adjuvant endocrine therapy after the above",
+    "recent_changes": "Start AC, discussed option of capecitabine for residual dz post NAC, discussed possibility of starting capecitabine prior to vs. After XRT, Pt wishes to proceed with XRT next, then capecitabine, strongly recommend adjuvant endocrine therapy after the above.",
     "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative"
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is responding to treatment. MRI breast shows interval decrease in irregularly shaped mass with irregular margins and heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satellite decreased in size to 4 x 5 x 6mm. Non-mass enhancement seen throughout the lower outer/lower central breast and extending superiorly to at least the central outer breast is now indecipherable from [REDACTED]. Improved, though not resolved, lower outer and lower central breast skin thickening and enhancement."
+    "response_assessment": "The cancer is responding to treatment. MRI breast shows interval decrease in irregularly shaped mass with irregular margins and heterogeneous internal enhancement in the left breast, now measuring 10 x 8 x 8mm, with a posterior satellite decreased in size to 4 x 5 x 6mm. Improved, though not resolved, lower outer and lower central breast skin thickening and enhancement."
   },
   "Medication_Plan": {
     "medication_plan": "Continue prilosec 40mg qd"
@@ -664,7 +658,7 @@ RESULTS FOR ROW 95
     "therapy_plan": "Start AC chemotherapy. Axilla XRT; patient is interested in breast and axilla XRT. Discuss option of capecitabine for residual disease post NAC based on CREATE-X trial. Patient wishes to proceed with XRT next, then capecitabine. Strongly recommend adjuvant endocrine therapy after the above."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "Pt is interested in breast and axilla XRT. Pt wishes to proceed with XRT next, then capecitabine."
+    "radiotherapy_plan": "Pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today. Pt wishes to proceed with XRT next, then capecitabine."
   },
   "Procedure_Plan": {
     "procedure_plan": "No procedures planned."
@@ -699,7 +693,7 @@ RESULTS FOR ROW 95
     "RTC after XRT evaluation"
   ],
   "second opinion": [
-    "Pt to see Rad Onc; referred today"
+    "Pt wishes to proceed with XRT next, then capecitabine"
   ],
   "in-person": [
     "I spent a total of 45 minutes face-to-face with the patient and 40 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options."
@@ -708,10 +702,10 @@ RESULTS FOR ROW 95
     "49 y.o. female with  left ER+/PR+/[REDACTED]- breast cancer who started the [REDACTED] trial randomized to the Pembrolizumab and [REDACTED] arm on 09/30/18."
   ],
   "Type_of_Cancer": [
-    "left ER+/PR+/[REDACTED]- breast cancer"
+    "left ER+/PR+/[REDACTED]- breast cancer who started the [REDACTED] trial randomized to the Pembrolizumab and [REDACTED] arm on 09/30/18."
   ],
   "Metastasis": [
-    "Pt achieved good response to NAC with 3 smallish lesions with low cellularity and March 29 [REDACTED]."
+    "Pt achieved good response to NAC with 3 smallish lesions with low cellularity"
   ],
   "findings": [
     "Pt achieved good response to NAC with 3 smallish lesions with low cellularity and March 29 [REDACTED]."
@@ -732,7 +726,7 @@ RESULTS FOR ROW 95
     "Pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today"
   ],
   "radiotherapy_plan": [
-    "Pt is interested in breast and axilla XRT. Pt wishes to proceed with XRT next, then capecitabine."
+    "Pt is interested in breast and axilla XRT. Pt to see Rad Onc; referred today. Pt wishes to proceed with XRT next, then capecitabine."
   ],
   "Next clinic visit": [
     "RTC after XRT evaluation"
