@@ -3074,3 +3074,28 @@ Processing row 21 (16/61)...
       [G4-FAITH] response_assessment: "PET scans on 11/03/20 and 04/24/21 showed a good response. N" -> "PET scans on 11/03/20 and 04/24/21 showed a good response."
   Phase 2 extraction (2 prompts): 15.3s
   Total extraction: 228.2s
+    Medication_Plan: 25.1s
+      [EXTRACT] raw={
+    "medication_plan": "Continue arimidex alone if PET CT is stable. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include hormone 
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 24.8s
+      [EXTRACT] raw={
+    "therapy_plan": "If PET CT shows stability, continue arimidex alone. If PET CT shows progression, could use faslodex with [REDACTED] if she has a [REDACTED] mutation. Future options include horm
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 9.9s [improved, temporal-cleaned]
+      [EXTRACT] raw={
+    "radiotherapy_plan": "XRT to L4 and T10 started in June 2020. Pneumonitis due to abemaciclib July 2021 started on steroids."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] radiotherapy_plan: "XRT to L4 and T10 started in June 2020. Pneumonitis due to abemaciclib July 2021" -> "XRT to L4 and T10 started in June 2020"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] radiotherapy_plan: "XRT to L4 and T10 started in June 2020" -> "None"
