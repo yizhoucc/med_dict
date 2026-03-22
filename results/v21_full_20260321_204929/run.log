@@ -1423,3 +1423,45 @@ Processing row 8 (8/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Cancer_Diagnosis: 11.0s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Stage II",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis', 'Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 3.5s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "Values redacted"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Values redacted" -> "No labs in note."
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 34.8s
+      [EXTRACT] raw={
+"findings": "Patient has undergone bilateral mastectomies with right breast showing 3.84 cm of residual invasive ductal carcinoma after neoadjuvant chemotherapy, with negative margins. One lymph nod
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 9.9s [faith-trimmed, meds-filtered]
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] current_meds: "" -> "acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin "
+      [POST-MEDS] acetaminophen (TYLENOL), fluconazole (DIFLUCAN), gabapentin (NEURONTIN), ginger, Zingiber officinalis, lidocaine-diphenhydrAMINE-maalox ([REDACTED] [REDACTED]) mouthwash, LORazepam (ATIVAN), naloxone, OLANZapine (ZYPREXA), omeprazole (PRILOSEC), ondansetron (ZOFRAN), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), traMADoL (ULTRAM), UNABLE TO FIND, Med Name: [REDACTED] [REDACTED] [REDACTED]. -> 
