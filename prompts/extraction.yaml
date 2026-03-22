@@ -34,6 +34,7 @@ Cancer_Diagnosis: |
   - Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
   Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
   IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
+  IMPORTANT: If the note contains a surgical pathology ADDENDUM with updated immunohistochemistry (IHC) results for ER/PR/HER2, the Addendum results SUPERSEDE the A/P description. Receptor status can change after neoadjuvant treatment. Always use the MOST RECENT pathology results.
 
   HER2 status rules — follow strictly:
   - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.

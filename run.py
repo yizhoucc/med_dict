@@ -1567,6 +1567,39 @@ def main():
                 if len(filtered) < len(meds_list):
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
+        # POST-SELF-MANAGED: Clear current_meds if physician disapproves of patient's self-managed drugs [v21]
+        drug_dict_sm = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_sm, dict):
+            meds_val_sm = (drug_dict_sm.get("current_meds", "") or "").strip()
+            if meds_val_sm:
+                ap_text_sm = (assessment_and_plan or '').lower()
+                # Skeptical language signals (physician disapproval)
+                SKEPTICAL_SIGNALS = [
+                    'apparently', 'so-called', 'so called', 'claims to be',
+                    'for some reason', 'believes is different', 'believes is better',
+                    'discontinue our medications', 'on her own at home',
+                    'on his own at home', 'self-administered', 'self-administer',
+                    'administer on her own', 'administer on his own',
+                    'in mexico', 'another country', 'outside the',
+                ]
+                signal_count = sum(1 for sig in SKEPTICAL_SIGNALS if sig in ap_text_sm)
+                if signal_count >= 2:
+                    # Cross-verify: check if Current Outpatient Medications has cancer drugs
+                    med_section_match = re.search(
+                        r'(?i)(?:Current Outpatient Medications|MEDICATIONS).*?(?:No current|Allergi|ALLERGI|PAST|Family|Social|Review of|Physical|Objective)',
+                        note_text, re.DOTALL)
+                    has_outpatient_cancer_med = False
+                    if med_section_match:
+                        med_section = med_section_match.group(0).lower()
+                        for onco_drug in ONCO_WHITELIST:
+                            if onco_drug in med_section and 'not taking' not in med_section[max(0, med_section.index(onco_drug)-50):med_section.index(onco_drug)+50]:
+                                has_outpatient_cancer_med = True
+                                break
+                    if not has_outpatient_cancer_med:
+                        print(f"    [POST-SELF-MANAGED] Cleared current_meds (physician disapproval: {signal_count} signals, no outpatient cancer meds)")
+                        print(f"      before: '{meds_val_sm}'")
+                        drug_dict_sm["current_meds"] = ""
+
         # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
         tc_dict = keypoints.get("Treatment_Changes", {})
         if isinstance(tc_dict, dict):
