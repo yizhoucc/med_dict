@@ -1441,6 +1441,16 @@ def main():
                     cancer["Distant Metastasis"] = "No"
                     print(f"    [POST-DISTMET-REGIONAL] Corrected Distant Metastasis: regional only → No (was: '{dist_met}')")
 
+        # POST-DISTMET-DEFAULT: fill empty Distant Metastasis with "No" when goals=curative [v22]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met_val = (cancer.get("Distant Metastasis", "") or "").strip()
+            goals_val = keypoints.get("Treatment_Goals", {}).get("goals_of_treatment", "") if isinstance(keypoints.get("Treatment_Goals"), dict) else ""
+            stage_val = (cancer.get("Stage_of_Cancer", "") or "").lower()
+            if not dist_met_val and goals_val == "curative" and "iv" not in stage_val and "metastatic" not in stage_val:
+                cancer["Distant Metastasis"] = "No"
+                print(f"    [POST-DISTMET-DEFAULT] Filled empty Distant Metastasis → 'No' (curative, non-metastatic)")
+
         # POST-RESPONSE: cross-reference response_assessment with findings [B53, B60]
         response = keypoints.get("Response_Assessment", {})
         resp_val = response.get("response_assessment", "") if isinstance(response, dict) else ""
@@ -1601,6 +1611,31 @@ def main():
                         print(f"      before: '{meds_val_sm}'")
                         drug_dict_sm["current_meds"] = ""
                         self_managed_cleared = True
+
+        # POST-SELF-MANAGED-PLAN: Clean plan fields if self-managed drugs were cleared [v22]
+        if self_managed_cleared:
+            for plan_key in ["Medication_Plan", "Therapy_plan"]:
+                plan_dict = keypoints.get(plan_key, {})
+                if isinstance(plan_dict, dict):
+                    for field_name in plan_dict:
+                        plan_val = plan_dict[field_name]
+                        if not plan_val or not isinstance(plan_val, str):
+                            continue
+                        # Split into sentences, remove ones containing self-managed drug names
+                        sentences = re.split(r'(?<=[.!])\s+', plan_val)
+                        cleaned = []
+                        removed = []
+                        for sent in sentences:
+                            sent_lower = sent.lower()
+                            has_sm_drug = any(d in sent_lower for d in ['gemcitabine', 'docetaxel', 'doxorubicin', 'pamidronate', 'metabolic therapy', 'immunological vaccine', 'insulin'])
+                            has_continue = 'continue' in sent_lower
+                            if has_sm_drug and has_continue:
+                                removed.append(sent[:50])
+                            else:
+                                cleaned.append(sent)
+                        if removed:
+                            plan_dict[field_name] = " ".join(cleaned).strip() if cleaned else ""
+                            print(f"    [POST-SELF-MANAGED-PLAN] Cleaned {field_name}.{plan_key}: removed {len(removed)} self-managed sentences")
 
         # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
         tc_dict = keypoints.get("Treatment_Changes", {})
@@ -1814,6 +1849,40 @@ def main():
                     print(f"    [POST-HER2-VERIFY] Overrode HER2- → HER2+ (evidence: {her2_evidence})")
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
+
+        # POST-RECEPTOR-UPDATE: Update receptor status from Addendum if different from A/P [v22]
+        cancer_ru = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_ru, dict):
+            type_val_ru = cancer_ru.get("Type_of_Cancer", "")
+            if type_val_ru and isinstance(type_val_ru, str):
+                # Search for Addendum section in note
+                addendum_match = re.search(r'(?i)Addendum.*?(?:progesterone|estrogen|HER|Ki-?67).*?(?:positive|negative|equivocal)', note_text, re.DOTALL)
+                if addendum_match:
+                    addendum_text = addendum_match.group(0).lower()
+                    # Check PR status in Addendum
+                    if 'progesterone receptors is negative' in addendum_text or 'progesterone receptors is negative' in note_text.lower():
+                        if 'pr+' in type_val_ru.lower() or 'pr positive' in type_val_ru.lower() or '/PR+/' in type_val_ru:
+                            old_type = type_val_ru
+                            type_val_ru = re.sub(r'PR\+|PR positive', 'PR-', type_val_ru)
+                            cancer_ru["Type_of_Cancer"] = type_val_ru
+                            print(f"    [POST-RECEPTOR-UPDATE] PR+ → PR- (Addendum: progesterone negative)")
+                            print(f"      before: '{old_type}'")
+                            print(f"      after:  '{type_val_ru}'")
+
+        # POST-HER2-FISH: Resolve "HER2: status unclear/not tested" when FISH result exists [v22]
+        cancer_hf = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_hf, dict):
+            type_val_hf = cancer_hf.get("Type_of_Cancer", "")
+            if type_val_hf and isinstance(type_val_hf, str) and ('unclear' in type_val_hf.lower() or 'not tested' in type_val_hf.lower()):
+                # Search note for FISH negative/non-amplified
+                fish_neg = re.search(r'(?i)FISH\s+(?:negative|non[- ]?amplified|ratio\s+(?:0\.\d+|1\.\d+))', note_text)
+                if fish_neg:
+                    old_type = type_val_hf
+                    type_val_hf = re.sub(r'HER2:\s*(?:status unclear|not tested)', 'HER2-', type_val_hf)
+                    cancer_hf["Type_of_Cancer"] = type_val_hf
+                    print(f"    [POST-HER2-FISH] Resolved HER2 status → HER2- (FISH negative found)")
+                    print(f"      before: '{old_type}'")
+                    print(f"      after:  '{type_val_hf}'")
 
         # POST-TYPE-VERIFY: Fix HER2+/triple-negative contradiction [v15]
         cancer = keypoints.get("Cancer_Diagnosis", {})
