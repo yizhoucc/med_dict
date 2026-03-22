@@ -1637,6 +1637,25 @@ def main():
                             plan_dict[field_name] = " ".join(cleaned).strip() if cleaned else ""
                             print(f"    [POST-SELF-MANAGED-PLAN] Cleaned {field_name}.{plan_key}: removed {len(removed)} self-managed sentences")
 
+        # POST-SELF-MANAGED-SUMMARY: Fix "currently on" stopped drugs in summary [v22]
+        if self_managed_cleared:
+            rfv = keypoints.get("Reason_for_Visit", {})
+            if isinstance(rfv, dict):
+                summary_val = rfv.get("summary", "")
+                if summary_val and isinstance(summary_val, str) and "currently on" in summary_val.lower():
+                    # Check if note says these drugs were stopped
+                    stopped_drugs = re.findall(r'(?i)(?:stopped|discontinued|last dose of)\s+(?:taking\s+)?(\w+)', note_text)
+                    stopped_lower = [d.lower() for d in stopped_drugs]
+                    # Also check A/P for "stopped" + drug names
+                    ap_stopped = re.findall(r'(?i)(?:stopped|recently stopped)\s+(\w+)', assessment_and_plan or '')
+                    stopped_lower.extend([d.lower() for d in ap_stopped])
+                    if stopped_lower:
+                        old_summary = summary_val
+                        summary_val = re.sub(r'(?i)currently on\b', 'previously on', summary_val)
+                        if summary_val != old_summary:
+                            rfv["summary"] = summary_val
+                            print(f"    [POST-SELF-MANAGED-SUMMARY] Fixed 'currently on' → 'previously on' (drugs stopped)")
+
         # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
         tc_dict = keypoints.get("Treatment_Changes", {})
         if isinstance(tc_dict, dict):
