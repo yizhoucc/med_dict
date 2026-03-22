@@ -3183,3 +3183,12 @@ Processing row 21 (16/61)...
     [POST-HER2-CHECK] Appended missing HER2 status: HER2-
       before: 'ER+/PR+ invasive ductal carcinoma'
       after:  'ER+/PR+ invasive ductal carcinoma, HER2-'
+  [ATTRIBUTION] 19/22 fields sourced (47.7s)
+  Row 21 total: 398.3s
+  Row 21 saved to progress
+
+Processing row 26 (17/61)...
+  Trying regex extraction...
+  Regex matched: 'ASSESSMENT & PLAN'
+  Regex extraction succeeded (831 chars)
+  A/P extraction: 0.0s
