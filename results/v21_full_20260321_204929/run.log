@@ -5668,3 +5668,73 @@ Processing row 45 (29/61)...
       [G2-SCHEMA] ok
       [G3-IMPROVE] no changes
       [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 10.4s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today. Discussed addition of abemaciclib after completion of xrt.",
+"supportive_meds": "naproxen 500mg bid, APAP prn, allegra daily"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] naproxen 500mg bid, APAP prn, allegra daily -> 
+  Phase 1 extraction (6 prompts): 151.3s
+  Cross-context injected (1205 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 6.1s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Patient is currently on letrozole. No specific imaging or lab results are mentioned in the note to assess the current response of the cancer to treatment."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] response_assessment: "Patient is currently on letrozole. No specific imaging or lab results are mentio" -> "No specific imaging or lab results are mentioned in the note to assess the curre"
+      [G4-FAITH] response_assessment: "No specific imaging or lab results are mentioned in the note" -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-REVERT] response_assessment: reverted (G4 emptied all fields)
+  Phase 2 extraction (2 prompts): 9.3s
+  Total extraction: 160.6s
+    Medication_Plan: 15.1s
+      [EXTRACT] raw={
+    "medication_plan": "Will start letrozole now. Continue naproxen 500mg bid, APAP ok if taken sparingly. Discussed tramadol if pain worsens/uncontrolled. Continue allegra daily. Continue PO iron."
+      [G1-FORMAT] ok, keys=['medication_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Therapy_plan: 12.2s [improved]
+      [EXTRACT] raw={
+    "therapy_plan": "Patient will start letrozole now. Discussed addition of abemaciclib after completion of xrt."
+}
+      [G1-FORMAT] ok, keys=['therapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] therapy_plan: "Patient will start letrozole now. Discussed addition of abemaciclib after comple" -> "Patient will start letrozole now. Discussed addition of abemaciclib after comple"
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    radiotherapy_plan: 8.3s
+      [EXTRACT] raw={
+    "radiotherapy_plan": "Encouraged her to fup with Dr. [REDACTED] in rad onc after her re-excision date is set."
+}
+      [G1-FORMAT] ok, keys=['radiotherapy_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Procedure_Plan: 4.6s
+      [EXTRACT] raw={
+    "procedure_plan": "re-excision of margins, axillary dissection"
+}
+      [G1-FORMAT] ok, keys=['procedure_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
