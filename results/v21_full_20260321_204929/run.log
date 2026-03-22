@@ -2327,3 +2327,84 @@ Processing row 13 (12/61)...
       [G4-FAITH] EMPTIED: ['procedure_plan']
       [G4-PROTECT] procedure_plan: restored safe negative "No procedures planned."
       [G5-TEMPORAL] skipped (all fields empty/negative)
+    Imaging_Plan: 6.8s
+      [EXTRACT] raw={
+    "imaging_plan": "CT CAP and Total Spine MRI scheduled for May. Repeat total spine MRI in 6 weeks."
+}
+      [G1-FORMAT] ok, keys=['imaging_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Lab_Plan: 4.3s
+      [EXTRACT] raw={
+    "lab_plan": "Labs to be drawn every two weeks."
+}
+      [G1-FORMAT] ok, keys=['lab_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [G5-TEMPORAL] no changes
+    Genetic_Testing_Plan: 1.9s [faith-trimmed]
+      [EXTRACT] raw={
+    "genetic_testing_plan": "None planned."
+}
+      [G1-FORMAT] ok, keys=['genetic_testing_plan']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] genetic_testing_plan: "None planned." -> ""
+      [G4-FAITH] EMPTIED: ['genetic_testing_plan']
+      [G4-PROTECT] genetic_testing_plan: restored safe negative "None planned."
+    follow_up_next_visit: 3.4s [improved]
+      [EXTRACT] raw={
+    "Next clinic visit": "in-person: 2 months"
+}
+      [G1-FORMAT] ok, keys=['Next clinic visit']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Next clinic visit: "in-person: 2 months" -> "in-person: 2 months for follow-up"
+      [G4-FAITH] no changes (all supported)
+    Advance_care_planning: 1.6s [faith-trimmed]
+      [EXTRACT] raw={
+    "Advance care": "Not discussed during this visit."
+}
+      [G1-FORMAT] ok, keys=['Advance care']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] Advance care: "Not discussed during this visit." -> ""
+      [G4-FAITH] EMPTIED: ['Advance care']
+      [G4-PROTECT] Advance care: restored safe negative "Not discussed during this visit."
+  Plan extraction prompts: 71.2s
+    Referral: 10.0s [improved, faith-trimmed]
+      [EXTRACT] raw={
+"Nutrition": "None",
+"Genetics": "None",
+"Specialty": "None",
+"Others": "Physical therapy referral",
+"follow up": "RTC after scans"
+}
+      [G1-FORMAT] ok, keys=['Nutrition', 'Genetics', 'Specialty', 'Others', 'follow up']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Nutrition: "None" -> "Advised her to eat small, frequent meals that's high in calories and protein."
+      [G4-FAITH] Genetics: "None" -> ""
+      [G4-FAITH] Specialty: "None" -> ""
+      [G4-FAITH] EMPTIED: ['Genetics', 'Specialty']
+      [G4-PROTECT] Genetics: restored safe negative "None"
+      [G4-PROTECT] Specialty: restored safe negative "None"
+  Referral extraction (full note): 10.0s
+    [POST-NUTRITION] cleared diet advice (not a referral): 'Advised her to eat small, frequent meals that's high in calories and protein.'
+    [POST-THERAPY] removed non-therapy: ['Continue metabolic therapy 2x/week and immunologic', 'Plan to have labs drawn every two weeks and return', 'Patient will schedule scans for May.']
+    [POST-STAGE-PLACEHOLDER] Replaced placeholder: 'Originally Stage [X], now metastatic (Stage IV)' → 'Not available (redacted)'
+    [POST-SELF-MANAGED] Cleared current_meds (physician disapproval: 8 signals, no outpatient cancer meds)
+      before: 'Pamidronate, Gemcitabine 200mg, Docetaxel 20 mg'
+    [POST-HER2-CHECK] Appended missing HER2 status: HER2: status unclear
+      before: 'ER+ breast cancer'
+      after:  'ER+ breast cancer, HER2: status unclear'
+  [ATTRIBUTION] 20/21 fields sourced (30.8s)
+  Row 13 total: 305.1s
+  Row 13 saved to progress
+
+Processing row 16 (13/61)...
+  Trying regex extraction...
+  Regex matched: 'PLAN'
+  Regex extraction succeeded (1787 chars)
+  A/P extraction: 0.0s
