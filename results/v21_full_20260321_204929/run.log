@@ -5803,3 +5803,46 @@ Processing row 45 (29/61)...
       [G4-PROTECT] Nutrition: restored safe negative "None"
   Referral extraction (full note): 9.1s
     [POST-THERAPY] removed non-therapy: ['Re-excision of margins and potential axillary diss', 'Patient will follow up with Dr.']
+  [ATTRIBUTION] 23/24 fields sourced (39.5s)
+  Row 45 total: 272.9s
+  Row 45 saved to progress
+
+Processing row 48 (30/61)...
+  Trying regex extraction...
+  Regex matched: 'Impression/Plan:'
+  Regex extraction succeeded (1682 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 11.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "50 y.o. female with a recent diagnosis of left breast ductal carcinoma and biopsy-positive lymph nodes in
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 8.8s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+"Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+"Stage_of_Cancer": "Approximately Stage II",
+"Distant_Metastasis": "No",
+"Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Stage_of_Cancer: "Approximately Stage II" -> "Stage II"
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 5.2s
+      [EXTRACT] raw={
+"lab_summary": "Hgb 13.0, plt 287 (from December 2015)"
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
