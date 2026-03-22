@@ -4820,3 +4820,29 @@ Processing row 40 (25/61)...
       [G4-FAITH] Patient type: "New patient" -> "in-person"
       [G4-FAITH] EMPTIED: ['second opinion']
       [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 12.6s [improved, faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+  "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
+  "Distant Metastasis": "Not sure",
+  "Metastasis": "Not sure"
+
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] Metastasis: "Not sure" -> "Yes (to left axillary lymph nodes)"
+      [G3-IMPROVE] Type_of_Cancer: "ER+/PR+/HER2- invasive ductal carcinoma" -> "ER+ (90%)/PR weakly+ (1%)/HER2 1+ by IHC invasive ductal carcinoma"
+      [G4-FAITH] Stage_of_Cancer: "Originally Stage IIA, now metastatic (Stage IV)" -> ""
+      [G4-FAITH] Distant Metastasis: "Not sure" -> ""
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Stage_of_Cancer', 'Distant Metastasis', 'Distant_Metastasis']
+      [G4-REVERT-INFER] Stage_of_Cancer: restored classification/inference "Originally Stage IIA, now metastatic (Stage IV)"
+      [G4-REVERT-INFER] Distant Metastasis: restored classification/inference "Not sure"
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 25.2s
+      [EXTRACT] raw={
+"lab_summary": "Ferritin 27 ug/L, WBC Count 5.2 x10E9/L, RBC Count 3.82 (L) x10E12/L, Hemoglobin 11.8 (L) g/dL, Hematocrit 36.2 %, MCV 95 fL, MCH 30.9 pg, MCHC 32.6 g/dL, Platelet Count [REDACTED] x
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
