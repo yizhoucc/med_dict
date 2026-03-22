@@ -824,3 +824,37 @@ Processing row 5 (5/61)...
       [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
       [G4-REVERT-INFER] Metastasis: restored classification/inference "No"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 87.7s [improved]
+      [EXTRACT] raw={
+"lab_summary": "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Serum / Plasma 4.6 g/dL, Alkaline Phosphatase 60 U/L, Alanine transaminase 48 U/L, Aspartate transaminas
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] lab_summary: "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Se" -> "Estradiol, Ultrasensitive 172 pg/mL, Vitamin D, 25-Hydroxy 24 ng/mL, Albumin, Se"
+      [G4-FAITH] no changes (all supported)
+    Clinical_Findings: 15.9s
+      [EXTRACT] raw={
+"findings": "Patient underwent bilateral mastectomy with expanders on 06/21/2019. Left breast benign, right breast with 1.5 cm node-negative, grade 1, ER/PR+ IDC. Physical exam shows bilateral nippl
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Current_Medications: 3.9s
+      [EXTRACT] raw={
+  "current_meds": "zoladex, letrozole"
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 5.3s [supp-filtered]
+      [EXTRACT] raw={
+"recent_changes": "Started letrozole today.",
+"supportive_meds": "gabapentin"
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
+      [POST-SUPP] gabapentin -> 
+  Phase 1 extraction (6 prompts): 137.9s
+  Cross-context injected (692 chars)
