@@ -1605,7 +1605,8 @@ def main():
         # POST-SUPP-ALLERGY: Remove supportive_meds that are actually from the Allergies list [v20]
         tc_dict = keypoints.get("Treatment_Changes", {})
         if isinstance(tc_dict, dict):
-            supp_val = (tc_dict.get("supportive_meds", "") or "").strip()
+            supp_raw = tc_dict.get("supportive_meds", "") or ""
+            supp_val = (", ".join(supp_raw) if isinstance(supp_raw, list) else str(supp_raw)).strip()
             if supp_val:
                 # Extract allergy drug names from note text
                 # Patterns: "ALL: drug1, drug2, ..." or "Allergies: ..." or "Allergies/Contraindications ..."
