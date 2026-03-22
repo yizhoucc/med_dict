@@ -111,22 +111,19 @@ prompts_content:
       \ appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just\
       \ the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT\
       \ omit HER2 status just because it appears only in the Past Medical History.\n\
-      IMPORTANT: If the note contains a surgical pathology ADDENDUM with updated immunohistochemistry\
-      \ (IHC) results for ER/PR/HER2, the Addendum results SUPERSEDE the A/P description.\
-      \ Receptor status can change after neoadjuvant treatment. Always use the MOST\
-      \ RECENT pathology results.\n\nHER2 status rules — follow strictly:\n- If the\
-      \ note explicitly states HER2 result (positive, negative, equivocal, IHC score,\
-      \ FISH result), write it.\n- If HER2 was NOT tested or NOT mentioned in the\
-      \ note, write \"HER2: not tested\" — do NOT guess or assume HER2- or HER2+.\n\
-      - DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume\
-      \ HER2- for DCIS unless explicitly stated.\n- HER2 IHC scoring — use this table\
-      \ to determine HER2 status:\n  IHC 0     = HER2 NEGATIVE\n  IHC 1+    = HER2\
-      \ NEGATIVE\n  IHC 2+    = EQUIVOCAL — must check FISH/ISH result:\n    IHC 2+\
-      \ with FISH ratio ≥ 2.0 (or gene copies ≥ 6) = HER2 POSITIVE\n    IHC 2+ with\
-      \ FISH ratio < 2.0 (or \"FISH negative\")  = HER2 NEGATIVE\n  IHC 3+    = HER2\
-      \ POSITIVE\n- FISH interpretation (when reported without IHC):\n  FISH ratio\
-      \ ≥ 2.0 = amplified = HER2 POSITIVE\n  FISH ratio < 2.0 = not amplified = HER2\
-      \ NEGATIVE\n- IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab,\
+      \nHER2 status rules — follow strictly:\n- If the note explicitly states HER2\
+      \ result (positive, negative, equivocal, IHC score, FISH result), write it.\n\
+      - If HER2 was NOT tested or NOT mentioned in the note, write \"HER2: not tested\"\
+      \ — do NOT guess or assume HER2- or HER2+.\n- DCIS (ductal carcinoma in situ)\
+      \ often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly\
+      \ stated.\n- HER2 IHC scoring — use this table to determine HER2 status:\n \
+      \ IHC 0     = HER2 NEGATIVE\n  IHC 1+    = HER2 NEGATIVE\n  IHC 2+    = EQUIVOCAL\
+      \ — must check FISH/ISH result:\n    IHC 2+ with FISH ratio ≥ 2.0 (or gene copies\
+      \ ≥ 6) = HER2 POSITIVE\n    IHC 2+ with FISH ratio < 2.0 (or \"FISH negative\"\
+      )  = HER2 NEGATIVE\n  IHC 3+    = HER2 POSITIVE\n- FISH interpretation (when\
+      \ reported without IHC):\n  FISH ratio ≥ 2.0 = amplified = HER2 POSITIVE\n \
+      \ FISH ratio < 2.0 = not amplified = HER2 NEGATIVE\n- IMPORTANT: If treatment\
+      \ includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab,\
       \ the cancer is HER2+. Do NOT write HER2-.\n- IMPORTANT: If the note says \"\
       triple negative\" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-.\
       \ Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked.\
