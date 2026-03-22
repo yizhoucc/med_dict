@@ -1,4 +1,4 @@
-Source: v21_full.yaml | Run started: 2026-03-21 20:49:29
+Source: v21_full.yaml | Run started: 2026-03-21 22:44:53
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -34,7 +34,6 @@ For Type_of_Cancer, be SPECIFIC — include as much of the following as the note
 - Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
 Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
 IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
-IMPORTANT: If the note contains a surgical pathology ADDENDUM with updated immunohistochemistry (IHC) results for ER/PR/HER2, the Addendum results SUPERSEDE the A/P description. Receptor status can change after neoadjuvant treatment. Always use the MOST RECENT pathology results.
 
 HER2 status rules — follow strictly:
 - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.

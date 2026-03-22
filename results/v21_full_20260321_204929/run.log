@@ -6589,3 +6589,142 @@ Processing row 52 (33/61)...
       [G4-PROTECT] Nutrition: restored safe negative "None"
   Referral extraction (full note): 14.5s
 Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:15<00:00,  2.89s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:15<00:00,  3.01s/it]
+Model loaded.
+Data loaded: 61 rows (indices [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 21, 26, 28, 29, 32, 33, 35, 36, 39, 40, 41, 42, 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72, 77, 79, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 93, 94, 96, 99])
+Using pipeline: v2
+Gate config: {'preserve_negatives': True, 'skip_empty_fields': True}
+Chat template: qwen2
+Rebuilt results.txt from 32 completed rows
+Medical dictionary loaded: 9331 terms
+Oncology whitelist loaded: 97 drugs
+Supportive care whitelist loaded: 78 drugs
+Lab test whitelist loaded: 71 terms
+Genetic test keywords loaded: 37 terms
+
+Processing 61 rows...
+Skipping row 0 (already completed)
+Skipping row 1 (already completed)
+Skipping row 2 (already completed)
+Skipping row 4 (already completed)
+Skipping row 5 (already completed)
+Skipping row 6 (already completed)
+Skipping row 7 (already completed)
+Skipping row 8 (already completed)
+Skipping row 9 (already completed)
+Skipping row 10 (already completed)
+Skipping row 11 (already completed)
+Skipping row 13 (already completed)
+Skipping row 16 (already completed)
+Skipping row 17 (already completed)
+Skipping row 19 (already completed)
+Skipping row 21 (already completed)
+Skipping row 26 (already completed)
+Skipping row 28 (already completed)
+Skipping row 29 (already completed)
+Skipping row 32 (already completed)
+Skipping row 33 (already completed)
+Skipping row 35 (already completed)
+Skipping row 36 (already completed)
+Skipping row 39 (already completed)
+Skipping row 40 (already completed)
+Skipping row 41 (already completed)
+Skipping row 42 (already completed)
+Skipping row 43 (already completed)
+Skipping row 45 (already completed)
+Skipping row 48 (already completed)
+Skipping row 49 (already completed)
+Skipping row 51 (already completed)
+
+Processing row 52 (33/61)...
+  Injected 7 term definitions: ['adjuvant chemotherapy', 'aromatase inhibitor', 'PR positive', 'ER positive', 'lumpectomy', 'DCIS', 'FISH']
+  Trying regex extraction...
+  Regex matched: 'Assessment:'
+  Regex extraction succeeded (3682 chars)
+  A/P extraction: 0.0s
+    Reason_for_Visit: 12.4s [faith-trimmed]
+      [EXTRACT] raw={
+"Patient type": "New patient",
+"second opinion": "no",
+"in-person": "in-person",
+"summary": "Patient with recently diagnosed stage II/III left breast cancer, ER/PR positive, HER2 positive, post-lump
+      [G1-FORMAT] ok, keys=['Patient type', 'second opinion', 'in-person', 'summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] second opinion: "no" -> ""
+      [G4-FAITH] EMPTIED: ['second opinion']
+      [G4-REVERT-INFER] second opinion: restored classification/inference "no"
+    Cancer_Diagnosis: 14.8s [faith-trimmed, stripped]
+      [EXTRACT] raw={
+  "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma with neuroendocrine differentiation, DCIS",
+  "Stage_of_Cancer": "Stage II/III",
+  "Distant_Metastasis": "No",
+  "Metastasis": "No"
+}
+      [G1-FORMAT] ok, keys=['Type_of_Cancer', 'Stage_of_Cancer', 'Distant_Metastasis', 'Metastasis']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] Distant_Metastasis: "No" -> ""
+      [G4-FAITH] EMPTIED: ['Distant_Metastasis']
+      [G4-REVERT-INFER] Distant_Metastasis: restored classification/inference "No"
+      [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 1.8s [faith-trimmed]
+      [EXTRACT] raw={
+"lab_summary": "No labs in note."
+}
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] lab_summary: "No labs in note." -> ""
+      [G4-FAITH] EMPTIED: ['lab_summary']
+      [G4-PROTECT] lab_summary: restored safe negative "No labs in note."
+    Clinical_Findings: 12.0s [faith-trimmed]
+      [EXTRACT] raw={
+"findings": "Left breast incision healing well with large area of hardening consistent with seroma. Right breast cystic in [REDACTED]. No palpable masses, skin changes, or lymphadenopathy noted. No 
+      [G1-FORMAT] ok, keys=['findings']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] findings: "Left breast incision healing well with large area of hardeni" -> "Left breast incision healing well with large area of hardeni"
+    Current_Medications: 2.0s
+      [EXTRACT] raw={
+"current_meds": ""
+}
+      [G1-FORMAT] ok, keys=['current_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+    Treatment_Changes: 2.4s
+      [EXTRACT] raw={
+"recent_changes": "",
+"supportive_meds": ""
+}
+      [G1-FORMAT] ok, keys=['recent_changes', 'supportive_meds']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] no changes (all supported)
+  Phase 1 extraction (6 prompts): 47.0s
+  Cross-context injected (546 chars)
+    Treatment_Goals: 3.3s [faith-trimmed]
+      [EXTRACT] raw={
+"goals_of_treatment": "curative"
+}
+      [G1-FORMAT] ok, keys=['goals_of_treatment']
+      [G2-SCHEMA] ok
+      [G3-PROTECT-CLASS] goals_of_treatment: blocked modification of classification field
+      [G3-IMPROVE] no changes
+      [G4-FAITH] goals_of_treatment: "curative" -> ""
+      [G4-FAITH] EMPTIED: ['goals_of_treatment']
+      [G4-REVERT] goals_of_treatment: reverted (G4 emptied all fields)
+    Response_Assessment: 5.8s [faith-trimmed]
+      [EXTRACT] raw={
+"response_assessment": "Not yet on treatment — no response to assess."
+}
+      [G1-FORMAT] ok, keys=['response_assessment']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] skipped (all fields empty/negative)
+      [G4-FAITH] response_assessment: "Not yet on treatment — no response to assess." -> ""
+      [G4-FAITH] EMPTIED: ['response_assessment']
+      [G4-PROTECT] response_assessment: restored safe negative "Not yet on treatment — no response to assess."
+  Phase 2 extraction (2 prompts): 9.1s
+  Total extraction: 56.2s
