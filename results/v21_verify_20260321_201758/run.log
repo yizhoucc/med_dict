@@ -47,3 +47,10 @@ Processing row 13 (1/2)...
       [G4-FAITH] EMPTIED: ['Type_of_Cancer']
       [G4-PROTECT-RECEPTOR] Type_of_Cancer: restored "ER+ invasive ductal carcinoma"
       [POST-KEYS] stripped: {'Distant_Metastasis'}
+    Lab_Results: 68.9s
+      [EXTRACT] raw={
+"lab_summary": "Albumin 3.9, Alkaline Phosphatase 75, Alanine transaminase 23, Aspartate transaminase 23, Bilirubin, Total 0.7, Urea Nitrogen 6, Calcium 8.7 (L), Chloride 109 (H), Creatinine 0.47, e
+      [G1-FORMAT] ok, keys=['lab_summary']
+      [G2-SCHEMA] ok
+      [G3-IMPROVE] no changes
+      [G4-FAITH] no changes (all supported)
