@@ -138,6 +138,14 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - WSL (Ubuntu 22.04)，通过 `ssh wsl` 从 Mac 访问
 - Conda 环境：medllm
 
+## 术语规范
+- **sample**：一条临床笔记及其对应的提取结果。不要叫"行"或"row"（容易和 CSV 行号、results.txt 行号混淆）。
+- **row_index**：CSV 数据集中的行索引（从 0 开始），对应 `row_indices` 配置中的值。
+- **ROW N**：results.txt 中的 "RESULTS FOR ROW N"，N = row_index + 1。
+- **coral_idx**：CORAL 数据集的原始编号。
+- **当前版本**：v22e（第 22 个大版本，小迭代 a→e）。使用 Qwen2.5-32B-Instruct-AWQ。
+- **数据集**：61 个 sample（CORAL breastca_unannotated.csv 的子集）。
+
 ## 代码规范
 - results.txt 保持当前自定义格式，不改为 JSON
 - prompt 中的 JSON schema 必须是合法 JSON（注意逗号）
@@ -163,7 +171,13 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **必须亲自审查，禁止用 Agent**：所有审查必须由主 Claude 亲自完成，不得委托给 Agent。Agent 不理解 prompt 字段定义，会产生误判（如把正确的 current_meds 标为 P0）。每次审查一个 sample row，完整读完原文和所有字段后再进入下一行。
 - **触发规则**：只要用户提到"审查"、"review"、"检查结果"，就自动按上述全套流程执行：下载结果 → 逐行逐字段读原文 → 对照 prompt/code → 查归因 → 找问题 → 写 review doc。不需要用户重复说明规则。
 
-### 远程任务完成通知
-当 WSL 上的 pipeline 运行完成后，立即通过 Bark 通知用户，并主动开始下载结果+审查流程。
+### 远程任务监控与通知
+当 WSL 上的 pipeline 运行时：
+- **每 3 分钟检查一次进度**（不论任务大小）
+- **Bark 通知策略**：
+  - 小任务（≤5 个 sample）：每 3 分钟 Bark 一次进度
+  - 大任务（>5 个 sample）：每 3 分钟检查，自行判断是否 Bark（有重要进展、发现问题、完成时才发）
+  - 完成时必须立即 Bark
+  - 发现错误/crash 时立即 Bark
+- 完成后立即下载结果+开始审查
 - Bark URL: `https://api.day.app/mWBcxqxVNZRUzECXxiLxs5/{标题}/{内容}`
-- 在重要进展节点（运行完成、分析完成、发现关键问题）都发通知
