@@ -1967,6 +1967,13 @@ def main():
         # Append to results.txt
         append_row_result(results_path, index, row_result)
 
+        # Normalize: convert any list values in keypoints to comma-separated strings [v22]
+        for section_key, section_val in keypoints.items():
+            if isinstance(section_val, dict):
+                for field_key, field_val in section_val.items():
+                    if isinstance(field_val, list):
+                        section_val[field_key] = ", ".join(str(v) for v in field_val)
+
         # Update progress
         completed_indices.add(index)
         current_progress["completed_indices"] = sorted(completed_indices)
