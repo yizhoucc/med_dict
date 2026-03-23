@@ -1084,6 +1084,7 @@ def main():
                 'brain mri': 'Brain MRI',
                 'mr brain': 'Brain MRI',
                 'mri brain': 'Brain MRI',
+                'mri of brain': 'Brain MRI',
                 'mri breast': 'MRI Breast',
                 'pet/ct': 'PET/CT',
                 'pet ct': 'PET/CT',
@@ -1100,7 +1101,7 @@ def main():
                 'CT Chest': ['ct chest'],
                 'CT scan': ['ct scan', 'ct '],
                 'CT Abdomen': ['ct abdomen'],
-                'Brain MRI': ['brain mri'],
+                'Brain MRI': ['brain mri', 'mr brain', 'mri brain', 'mri of brain'],
                 'MRI Breast': ['mri breast'],
                 'Ultrasound': ['ultrasound'],
             }
