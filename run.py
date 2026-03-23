@@ -709,7 +709,8 @@ def main():
 
         if assessment_and_plan is not None:
             plan_start = time.time()
-            base_cache = build_base_cache(model_ap, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+            # v22d experiment: use full note for plan extraction (instead of A/P only)
+            base_cache = build_base_cache(model_note, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
             plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
