@@ -1082,6 +1082,8 @@ def main():
                 'ct scan': 'CT scan',
                 'ct abdomen': 'CT Abdomen',
                 'brain mri': 'Brain MRI',
+                'mr brain': 'Brain MRI',
+                'mri brain': 'Brain MRI',
                 'mri breast': 'MRI Breast',
                 'pet/ct': 'PET/CT',
                 'pet ct': 'PET/CT',
