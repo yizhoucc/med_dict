@@ -709,8 +709,7 @@ def main():
 
         if assessment_and_plan is not None:
             plan_start = time.time()
-            # v22d experiment: use full note for plan extraction (instead of A/P only)
-            base_cache = build_base_cache(model_note, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+            base_cache = build_base_cache(model_ap, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
             plan_keypoints = extract_fn(
                 plan_extraction_prompts,
                 model,
@@ -1005,6 +1004,26 @@ def main():
                     lab["lab_plan"] = new_val
                     print(f"    [POST-LAB-WHITELIST] removed non-lab items: {[r[:50] for r in removed]}")
 
+        # POST-LAB-SEARCH: If lab_plan is empty, search full note for ordered labs [v22e]
+        lab_search = keypoints.get("Lab_Plan", {})
+        if isinstance(lab_search, dict):
+            lab_val_s = (lab_search.get("lab_plan", "") or "").strip().lower()
+            if lab_val_s in ("no labs planned.", "no labs planned", "none", "none planned.", ""):
+                # Search HPI and Orders section for "ordered labs" or specific lab names
+                LAB_PATTERNS = [
+                    r'(?:ordered?|will\s+order|plan.*for)\s+[^.]*?(?:labs|blood work|CBC|CMP|tumor marker|CA\s*(?:15-3|27\.29)|CEA)',
+                    r'(?:labs\s+to\s+complete|complete.*work\s*up.*labs)',
+                    r'(?:Complete Blood Count|Comprehensive Metabolic Panel|Cancer Antigen)',
+                ]
+                found_labs = []
+                for pat in LAB_PATTERNS:
+                    m = re.search(pat, note_text, re.IGNORECASE)
+                    if m:
+                        found_labs.append(m.group(0).strip()[:80])
+                if found_labs:
+                    lab_search["lab_plan"] = ". ".join(found_labs)
+                    print(f"    [POST-LAB-SEARCH] Found labs in full note: {found_labs[0][:60]}")
+
         # POST-THERAPY: Whitelist filter for Therapy_plan
         # Only keep sentences mentioning actual cancer therapy (drugs, regimens, modalities).
         # Removes contaminants like antiviral drugs (valtrex), antibiotics, etc.
@@ -1083,8 +1102,9 @@ def main():
                 'MRI Breast': ['mri breast'],
                 'Ultrasound': ['ultrasound'],
             }
-            # Search A/P text for imaging ordered as standalone items or with future tense
+            # Search A/P first; if imaging_plan is empty, also search full note (HPI, Orders) [v22e]
             search_text = assessment_and_plan if assessment_and_plan else note_text
+            search_fullnote = img_lower in ("no imaging planned.", "no imaging planned", "none", "none planned.", "")
             for pattern, label in IMAGING_TYPES.items():
                 # Check if any synonym already exists in current imaging_plan
                 synonyms = IMAGING_SYNONYMS.get(label, [label.lower()])
@@ -1100,13 +1120,18 @@ def main():
                     r'[^.;]{0,30}' + re.escape(pattern)
                     + r'|' + re.escape(pattern) + r'\.?\s*(?:Port|$|\d)'
                 )
-                if re.search(regex, search_text, re.IGNORECASE):
+                # Search A/P first, then full note if plan is empty
+                found = re.search(regex, search_text, re.IGNORECASE)
+                if not found and search_fullnote:
+                    found = re.search(regex, note_text, re.IGNORECASE)
+                if found:
                     if img_lower in ("no imaging planned.", "no imaging planned", "none", "none planned.", ""):
                         img["imaging_plan"] = label
                     else:
                         img["imaging_plan"] = img_val + ". " + label
                     img_val = img["imaging_plan"]
                     img_lower = img_val.lower()
+                    search_fullnote = False  # found something, stop searching full note
                     print(f"    [POST-IMAGING] found in note: {label}")
 
         # POST-PROCEDURE: Search full note for procedure plans mentioned outside A/P [B75]
