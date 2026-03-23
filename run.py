@@ -1013,7 +1013,6 @@ def main():
                 LAB_PATTERNS = [
                     r'(?:ordered?|will\s+order|plan.*for)\s+[^.]*?(?:labs|blood work|CBC|CMP|tumor marker|CA\s*(?:15-3|27\.29)|CEA)',
                     r'(?:labs\s+to\s+complete|complete.*work\s*up.*labs)',
-                    r'(?:Complete Blood Count|Comprehensive Metabolic Panel|Cancer Antigen)',
                 ]
                 found_labs = []
                 for pat in LAB_PATTERNS:
