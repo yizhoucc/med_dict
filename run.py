@@ -779,6 +779,28 @@ def main():
                     rfv["Patient type"] = "Follow up"
                 print(f"    [POST-PATIENT-TYPE] Corrected invalid '{pt}' → '{rfv['Patient type']}'")
 
+        # POST-PATIENT-TYPE-CC: Cross-validate Patient type against Chief Complaint [v23]
+        rfv = keypoints.get("Reason_for_Visit", {})
+        if isinstance(rfv, dict):
+            pt = rfv.get("Patient type", "") or ""
+            pt_lower = pt.lower().strip()
+            # Extract CC section from note
+            cc_match = re.search(
+                r'(?:chief\s+complaint|reason\s+for\s+visit|cc)\s*[:\s]*(.*?)(?:diagnosis|history|hpi|interim|subjective|\n\n)',
+                note_text[:2000].lower(), re.DOTALL
+            )
+            if cc_match:
+                cc_text = cc_match.group(1).strip()
+                # Check for explicit follow-up in CC
+                cc_has_followup = bool(re.search(r'\bfollow[\s-]?up\b|\bfup\b|\bf/u\b', cc_text))
+                cc_has_new = bool(re.search(r'\bnew\s+patient\b|\bnew\s+consult\b|\bnew\s+patient\s+evaluation\b|\bconsultation\b|\b2nd\s+opinion\b|\bsecond\s+opinion\b', cc_text))
+                if cc_has_followup and not cc_has_new and pt_lower == "new patient":
+                    rfv["Patient type"] = "Follow up"
+                    print(f"    [POST-PATIENT-TYPE-CC] CC says follow-up but model said 'New patient' → 'Follow up'")
+                elif cc_has_new and not cc_has_followup and pt_lower in ("follow up", "follow-up", "followup"):
+                    rfv["Patient type"] = "New patient"
+                    print(f"    [POST-PATIENT-TYPE-CC] CC says new patient/consultation but model said '{pt}' → 'New patient'")
+
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
         if isinstance(referral, dict):
