@@ -1428,6 +1428,29 @@ def main():
                 cancer["Stage_of_Cancer"] = "Not available (redacted)"
                 print(f"    [POST-STAGE-PLACEHOLDER] Replaced placeholder: '{old_stage}' → 'Not available (redacted)'")
 
+        # POST-STAGE-ABBREV: Detect Stage abbreviations in A/P when Stage is empty/not mentioned [v23]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = cancer.get("Stage_of_Cancer", "") or ""
+            stage_lower = stage.lower().strip()
+            stage_empty = not stage_lower or stage_lower in ("not mentioned", "not mentioned in note", "not available", "not available (redacted)", "")
+            if stage_empty:
+                ap_text_stage = (assessment_and_plan or '').lower()
+                # Match: "St IV", "st II", "stage IV", "Clinical st II/III", "stage 2", etc.
+                stage_abbrev = re.search(
+                    r'(?:clinical\s+)?(?:stage|st\.?)\s+(i{1,3}v?|iv|[1-4])(?:\s*/\s*(i{1,3}v?|iv|[1-4]))?(?:\b|[^a-z])',
+                    ap_text_stage
+                )
+                if stage_abbrev:
+                    raw_stage = stage_abbrev.group(0).strip().rstrip('.,;:')
+                    # Normalize: "st iv" → "Stage IV", "st ii/iii" → "Stage II/III"
+                    parts = re.findall(r'(i{1,3}v?|iv|[1-4])', raw_stage)
+                    roman_map = {'1': 'I', '2': 'II', '3': 'III', '4': 'IV'}
+                    normalized = '/'.join(p.upper() if p.isalpha() else roman_map.get(p, p) for p in parts)
+                    new_stage = f"Stage {normalized}"
+                    cancer["Stage_of_Cancer"] = new_stage
+                    print(f"    [POST-STAGE-ABBREV] Found stage abbreviation in A/P: '{raw_stage}' → '{new_stage}'")
+
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
         if isinstance(goals, dict):
@@ -1967,6 +1990,50 @@ def main():
                     print(f"    [POST-TYPE-VERIFY-TNBC] A/P says TNBC, overrode HER2+")
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
+
+        # POST-TYPE-UNCLEAR: If note says biomarkers/receptors "unclear"/"unknown", correct fabricated receptor status [v23]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val_uc = cancer.get("Type_of_Cancer", "") or ""
+            note_lower_uc = note_text.lower()
+            # Check if note explicitly says biomarker results are unclear/unknown
+            unclear_match = re.search(r'biomarker\s+results?\s+(?:unclear|unknown|not\s+(?:available|known|reported))', note_lower_uc)
+            if unclear_match and type_val_uc:
+                # Check if Type contains specific receptor claims (ER+/PR+/HER2+) preceded by "Originally"
+                orig_receptor = re.search(r'(?i)originally\s+(ER[+-]|PR[+-]|HER2[+-])', type_val_uc)
+                if orig_receptor:
+                    old_type = type_val_uc
+                    # Replace "Originally ER+/PR+/HER2+" with "Originally unclear receptor status"
+                    type_val_uc = re.sub(
+                        r'(?i)originally\s+(?:ER[+-]/PR[+-]/HER2[+-]|ER[+-]/PR[+-]|ER[+-])',
+                        'Originally unclear receptor status',
+                        type_val_uc
+                    )
+                    cancer["Type_of_Cancer"] = type_val_uc
+                    print(f"    [POST-TYPE-UNCLEAR] Note says '{unclear_match.group()}', corrected fabricated receptors")
+                    print(f"      before: '{old_type}'")
+                    print(f"      after:  '{type_val_uc}'")
+
+        # POST-TYPE-HR-EXPAND: Expand "HR+" to "ER+" when note has specific "estrogen receptor positive" [v23]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val_hr = cancer.get("Type_of_Cancer", "") or ""
+            if re.search(r'\bHR\+', type_val_hr) and 'ER' not in type_val_hr:
+                note_lower_hr = note_text.lower()
+                has_er_positive = bool(re.search(r'estrogen\s+receptor\s+(?:positive|is\s+positive)', note_lower_hr))
+                has_pr_info = bool(re.search(r'progesterone\s+receptor', note_lower_hr))
+                if has_er_positive:
+                    old_type = type_val_hr
+                    if has_pr_info:
+                        pr_positive = bool(re.search(r'progesterone\s+receptor\s+(?:positive|is\s+positive)', note_lower_hr))
+                        pr_str = "PR+" if pr_positive else "PR-"
+                        type_val_hr = type_val_hr.replace("HR+", f"ER+/{pr_str}")
+                    else:
+                        type_val_hr = type_val_hr.replace("HR+", "ER+")
+                    cancer["Type_of_Cancer"] = type_val_hr
+                    print(f"    [POST-TYPE-HR-EXPAND] Expanded HR+ using note receptor details")
+                    print(f"      before: '{old_type}'")
+                    print(f"      after:  '{type_val_hr}'")
 
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
