@@ -1443,10 +1443,16 @@ def main():
                 )
                 if stage_abbrev:
                     raw_stage = stage_abbrev.group(0).strip().rstrip('.,;:')
-                    # Normalize: "st iv" → "Stage IV", "st ii/iii" → "Stage II/III"
-                    parts = re.findall(r'(i{1,3}v?|iv|[1-4])', raw_stage)
+                    # Normalize using captured groups: group(1) = main stage, group(2) = optional second stage
                     roman_map = {'1': 'I', '2': 'II', '3': 'III', '4': 'IV'}
-                    normalized = '/'.join(p.upper() if p.isalpha() else roman_map.get(p, p) for p in parts)
+                    part1 = stage_abbrev.group(1)
+                    part1_norm = part1.upper() if part1.isalpha() else roman_map.get(part1, part1)
+                    part2 = stage_abbrev.group(2)
+                    if part2:
+                        part2_norm = part2.upper() if part2.isalpha() else roman_map.get(part2, part2)
+                        normalized = f"{part1_norm}/{part2_norm}"
+                    else:
+                        normalized = part1_norm
                     new_stage = f"Stage {normalized}"
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-ABBREV] Found stage abbreviation in A/P: '{raw_stage}' → '{new_stage}'")
