@@ -1780,6 +1780,10 @@ def main():
                         r'(\w+)\s+(?:day|d)\s*\d+',
                         # "DRUG Cycle N" / "DRUG cycle #N" (e.g. "Gemzar Cycle #2") [v23]
                         r'(\w+)\s+cycle\s*#?\d+',
+                        # "switch/switched/changed to DRUG" (e.g. "switch to Gemzar") [v23]
+                        r'(?:switch(?:ed)?|changed?)\s+to\s+(\w+)',
+                        # "if DRUG is working" (implies currently on it) [v23]
+                        r'if\s+(\w+)\s+is\s+working',
                     ]
                     KNOWN_CHEMO_IV = [
                         "ac", "tc", "fec", "caf", "tac", "tchp", "thp", "folfox", "folfiri",
