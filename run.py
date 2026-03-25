@@ -1778,6 +1778,8 @@ def main():
                         r'(?:receiving|(?:was|been|being)\s+given)\s+(\w+)',
                         # "DRUG day N" (e.g. "AC day 1")
                         r'(\w+)\s+(?:day|d)\s*\d+',
+                        # "DRUG Cycle N" / "DRUG cycle #N" (e.g. "Gemzar Cycle #2") [v23]
+                        r'(\w+)\s+cycle\s*#?\d+',
                     ]
                     KNOWN_CHEMO_IV = [
                         "ac", "tc", "fec", "caf", "tac", "tchp", "thp", "folfox", "folfiri",
@@ -1807,6 +1809,34 @@ def main():
                         found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
                         print(f"    [POST-MEDS-IV-CHECK] Added from A/P: {', '.join(found_chemo)}")
+
+        # POST-MEDS-STOPPED: Remove stopped/discontinued drugs from current_meds [v23]
+        # If recent_changes mentions "stopped/discontinued X", remove X from current_meds
+        drug_dict_meds = keypoints.get("Current_Medications", {})
+        changes_dict = keypoints.get("Treatment_Changes", {})
+        if isinstance(drug_dict_meds, dict) and isinstance(changes_dict, dict):
+            meds_val_ms = (drug_dict_meds.get("current_meds", "") or "").strip()
+            changes_val = (changes_dict.get("recent_changes", "") or "").lower()
+            if meds_val_ms and changes_val:
+                # Find drugs mentioned as stopped/discontinued in recent_changes
+                STOP_PATTERNS = [
+                    r'(?:stopped|discontinued|d/c|d/ced|held|off)\s+(\w+)',
+                    r'(\w+)\s+(?:stopped|discontinued|was\s+stopped|was\s+discontinued|held)',
+                ]
+                stopped_drugs = set()
+                for pattern in STOP_PATTERNS:
+                    for m in re.finditer(pattern, changes_val):
+                        stopped_drugs.add(m.group(1).strip().lower())
+                if stopped_drugs:
+                    # Remove stopped drugs from current_meds
+                    meds_list = [m.strip() for m in meds_val_ms.split(',')]
+                    original_count = len(meds_list)
+                    meds_list = [m for m in meds_list if m.lower().split('(')[0].split()[0].strip() not in stopped_drugs]
+                    if len(meds_list) < original_count:
+                        removed = original_count - len(meds_list)
+                        drug_dict_meds["current_meds"] = ", ".join(meds_list) if meds_list else ""
+                        print(f"    [POST-MEDS-STOPPED] Removed {removed} stopped drug(s) from current_meds: {stopped_drugs}")
+                        print(f"      current_meds now: '{drug_dict_meds['current_meds']}'")
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
