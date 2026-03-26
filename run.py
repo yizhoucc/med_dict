@@ -2057,9 +2057,8 @@ def main():
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             type_val_uc = cancer.get("Type_of_Cancer", "") or ""
-            note_lower_uc = note_text.lower()
             # Check if note explicitly says biomarker results are unclear/unknown
-            unclear_match = re.search(r'biomarker\s+results?\s+(?:unclear|unknown|not\s+(?:available|known|reported))', note_lower_uc)
+            unclear_match = re.search(r'biomarker\s+results?\s+(?:unclear|unknown|not\s+(?:available|known|reported))', note_lower)
             if unclear_match and type_val_uc:
                 # Check if Type contains specific receptor claims (ER+/PR+/HER2+) preceded by "Originally"
                 orig_receptor = re.search(r'(?i)originally\s+(ER[+-]|PR[+-]|HER2[+-])', type_val_uc)
@@ -2081,13 +2080,12 @@ def main():
         if isinstance(cancer, dict):
             type_val_hr = cancer.get("Type_of_Cancer", "") or ""
             if re.search(r'\bHR\+', type_val_hr) and 'ER' not in type_val_hr:
-                note_lower_hr = note_text.lower()
-                has_er_positive = bool(re.search(r'estrogen\s+receptor\s+(?:positive|is\s+positive)', note_lower_hr))
-                has_pr_info = bool(re.search(r'progesterone\s+receptor', note_lower_hr))
+                has_er_positive = bool(re.search(r'estrogen\s+receptor\s+(?:positive|is\s+positive)', note_lower))
+                has_pr_info = bool(re.search(r'progesterone\s+receptor', note_lower))
                 if has_er_positive:
                     old_type = type_val_hr
                     if has_pr_info:
-                        pr_positive = bool(re.search(r'progesterone\s+receptor\s+(?:positive|is\s+positive)', note_lower_hr))
+                        pr_positive = bool(re.search(r'progesterone\s+receptor\s+(?:positive|is\s+positive)', note_lower))
                         pr_str = "PR+" if pr_positive else "PR-"
                         type_val_hr = type_val_hr.replace("HR+", f"ER+/{pr_str}")
                     else:
