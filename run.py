@@ -1460,7 +1460,7 @@ def main():
                 ap_text_stage = (assessment_and_plan or '').lower()
                 # Match: "St IV", "st II", "stage IV", "Clinical st II/III", "stage 2", etc.
                 stage_abbrev = re.search(
-                    r'(?:clinical\s+)?(?:stage|st\.?)\s+(i{1,3}v?|iv|[1-4])(?:\s*/\s*(i{1,3}v?|iv|[1-4]))?(?=\s|[,;:.\)]|$)(?!\d)',
+                    r'(?:clinical\s+)?(?<![a-z])(?:stage|st\.?)\s+(i{1,3}v?|iv|[1-4])(?:\s*/\s*(i{1,3}v?|iv|[1-4]))?(?=\s|[,;:.\)]|$)(?!\d)',
                     ap_text_stage
                 )
                 if stage_abbrev:
