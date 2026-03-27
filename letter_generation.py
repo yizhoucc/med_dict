@@ -65,6 +65,22 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
     return output.strip()
 
 
+def _unwrap_json_shell(text):
+    """Strip JSON wrapper if LLM wrapped the letter in {"letter": "..."}."""
+    stripped = text.strip()
+    if stripped.startswith('{') and stripped.endswith('}'):
+        try:
+            parsed = json.loads(stripped)
+            if isinstance(parsed, dict):
+                # Take the first string value (likely "letter" key)
+                for v in parsed.values():
+                    if isinstance(v, str) and len(v) > 50:
+                        return v
+        except json.JSONDecodeError:
+            pass
+    return text
+
+
 def parse_tagged_letter(tagged_text, keypoints, attribution):
     """Parse a tagged letter into clean text + traceability JSON.
 
@@ -78,6 +94,9 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
             - letter_text: clean letter (tags stripped)
             - sentences: list of sentence dicts with traceability info
     """
+    # LLM sometimes wraps output in {"letter": "..."} — unwrap it
+    tagged_text = _unwrap_json_shell(tagged_text)
+
     flat_kp = flatten_keypoints(keypoints)
 
     # Split on [source:...] tags, capturing the tag content

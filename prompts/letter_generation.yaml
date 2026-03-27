@@ -44,7 +44,17 @@ patient_letter: |
   - Nutrition, Genetics, Specialty, Others, follow up
   - Advance care
 
+  OUTPUT FORMAT:
+  - Write PLAIN TEXT only. Do NOT wrap the output in JSON, quotes, or any other format.
+  - Every sentence MUST end with [source:field_name] before the next sentence begins.
+
+  EXAMPLE OUTPUT (follow this format exactly):
+  Dear Patient, [source:none]
+  You visited us for a follow-up about your breast cancer. [source:summary]
+  Your cancer is ER+/PR+/HER2- invasive ductal carcinoma. [source:Type_of_Cancer]
+  Sincerely, Your Care Team [source:none]
+
   INPUT JSON:
   {keypoints_json}
 
-  Write the letter now. Remember: [source:field_name] after EVERY sentence.
+  Write the letter now. Plain text with [source:field_name] after EVERY sentence. No JSON wrapper.
