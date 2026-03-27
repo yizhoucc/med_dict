@@ -209,6 +209,122 @@ Each field also has **source attribution** — the exact quote from the note tha
 
 ---
 
+## 4b. Patient Letter Generation
+
+After extraction and attribution, the pipeline can generate a **plain-language patient letter** summarizing the visit. Each sentence in the letter is traced back to its source field and the original note.
+
+### How It Works
+
+```
+Structured Keypoints (JSON)
+        |
+        v
++---------------------------+
+| Pre-LLM Cleanup           |
+| - Dedup overlapping fields |
+| - TNM → plain stage       |
+| - [REDACTED] → generic    |
+| - Dr. [REDACTED] → "your  |
+|   doctor"                  |
++---------------------------+
+        |
+        v
++---------------------------+
+| LLM Letter Generation     |
+| (Qwen2.5-32B-AWQ)         |
+|                            |
+| Prompt rules:              |
+| - 8th-grade reading level  |
+| - Explain medical terms    |
+| - [source:field] per sent. |
+| - No TNM, no raw data     |
+| - ER+ = "grows in response|
+|   to hormones"             |
++---------------------------+
+        |
+        v
++---------------------------+
+| POST Checks               |
+| - Strip residual [REDACTED]|
+| - Detect TNM patterns     |
+| - Detect repeated sentences|
++---------------------------+
+        |
+        v
++---------------------------+
+| Parse & Trace              |
+| - Extract [source:field]   |
+| - Link to keypoint values  |
+| - Link to note quotes      |
++---------------------------+
+        |
+        v
+  Patient Letter + Traceability JSON
+```
+
+### Traceability Chain
+
+Every sentence in the letter can be traced through two levels back to the original note:
+
+```
+Letter sentence
+  └── [source:field_name] ──> keypoints[field] (extracted value)
+                                    └── [attribution] ──> original note quote
+```
+
+**Example**:
+
+| Letter sentence | Source field | Extraction value | Note quote |
+|----------------|-------------|-----------------|------------|
+| "Your cancer grows in response to hormones (estrogen)." | Type_of_Cancer | "ER+/PR+ invasive ductal carcinoma, HER2-" | "ER and PR positive and her 2 negative." |
+| "The cancer has spread to your bones." | Distant Metastasis | "Yes (to bone)" | "metastatic breast cancer with bone mets" |
+
+### Quality (v4, latest — 61 samples)
+
+| Severity | Count | Definition |
+|----------|-------|------------|
+| P0 (hallucination) | **0** | Letter says something not in keypoints or note |
+| P1 (significant) | **2** in 1 sample (1.6%) | Receptor explanation contradicts itself within same letter (Row 33) |
+| P2 (minor) | **8** in 7 samples | Receptor status not explained; minor terminology |
+| Perfect | **52 / 61 (85%)** | Zero issues |
+
+### Improvement Over Iterations
+
+| Version | P0 | P1 | Perfect | Key Fix |
+|---------|----|----|---------|---------|
+| v1 | 0 | 11 | 15% | Initial implementation |
+| v2 | 0 | 8 | 54% | Dedup, TNM cleanup, prompt rules |
+| v3 | 0 | 2 | 79% | Dr. [REDACTED] fix |
+| **v4** | **0** | **2** | **85%** | Word-overlap dedup, response_assessment dedup |
+
+### Example Letter Output
+
+> Dear Patient,
+>
+> You visited us for your first appointment to discuss your breast cancer. Your cancer is ER+ and PR+ invasive ductal carcinoma, which means it grows in response to hormones (estrogen). It does not have extra HER2 protein.
+>
+> The cancer was originally at an early stage (Stage IIA) but has now spread to other parts of your body, including your lungs, liver, and ovaries. This is now considered advanced stage (Stage IV).
+>
+> You are not currently taking any medications for your cancer. The goal of treatment is to make you feel better and improve your quality of life.
+>
+> We will need to take a small sample (biopsy) of the mass in your right armpit to confirm the type of cancer and plan the best treatment. We will also do more tests, including a brain MRI and a bone scan.
+>
+> You are currently set to be treated as a full code, which means you want all possible life-saving measures if needed. We will see you again after we complete all the tests to decide on the best treatment plan.
+>
+> Sincerely, Your Care Team
+
+### Usage
+
+```bash
+# Generate letters from existing extraction results (no re-extraction)
+python run.py exp/full_qwen.yaml --letter-only results/run1/progress.json results/run2/progress.json
+
+# Or enable letter generation in the full pipeline
+# In exp config: extraction.letter: true
+```
+
+---
+
 ## 5. POST Hook Reference
 
 POST hooks are rule-based corrections that run after LLM extraction. They fix known patterns the LLM gets wrong.
@@ -244,12 +360,14 @@ POST hooks are rule-based corrections that run after LLM extraction. They fix kn
 
 | File | What It Is |
 |------|-----------|
-| `run.py` | Main pipeline code (2154 lines) |
+| `run.py` | Main pipeline code — extraction, letter generation, `--letter-only` mode |
 | `ult.py` | Utility library: model inference, KV cache, JSON repair, gate logic |
+| `letter_generation.py` | Patient letter generation: tagged output, traceability, POST checks |
+| `source_attribution.py` | Per-field source attribution (LLM second-pass with KV cache) |
 | `prompts/extraction.yaml` | LLM prompts for Phase 1+2 extraction |
 | `prompts/plan_extraction.yaml` | LLM prompts for plan extraction from A/P |
-| `exp/v23_remaining.yaml` | Experiment config (dataset, model, parameters) |
-| `results/v23_audit_report.md` | Full quality audit: 61 samples, every P1/P2 documented |
-| `results/v23_remaining_results.txt` | Raw output for 55 samples |
-| `results/v23_test4_results.txt` | Raw output for 6 test samples |
+| `prompts/letter_generation.yaml` | LLM prompt for patient letter (8th-grade, [source:field] tags) |
+| `exp/full_qwen.yaml` | Experiment config (dataset, model, parameters) |
+| `results/v23_audit_report.md` | Extraction quality audit: 61 samples, every P1/P2 documented |
+| `results/letter_full_qwen_20260327_134953/review.md` | Letter generation quality audit: 61 samples reviewed |
 | `CLAUDE.md` | Development rules and project conventions |
