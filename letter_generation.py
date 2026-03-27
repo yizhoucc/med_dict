@@ -33,6 +33,47 @@ def flatten_keypoints(keypoints):
     return flat
 
 
+def _clean_keypoints_for_letter(flat):
+    """Clean flattened keypoints before sending to LLM for letter generation.
+
+    1. Dedup: if recent_changes ≈ therapy_plan or medication_plan, clear the duplicate.
+    2. TNM → plain stage: translate pT2N1M0 etc. to Stage I/II/III/IV.
+    3. Strip [REDACTED] from values to prevent leaking into letter.
+    """
+    # 1. Dedup overlapping fields
+    rc = flat.get("recent_changes", "").strip()
+    tp = flat.get("therapy_plan", "").strip()
+    mp = flat.get("medication_plan", "").strip()
+    if rc and tp and (rc in tp or tp in rc):
+        flat["therapy_plan"] = ""
+    if mp and tp and tp and (mp in tp or tp in mp):
+        flat["therapy_plan"] = ""
+
+    # 2. TNM → plain stage
+    stage = flat.get("Stage_of_Cancer", "")
+    if re.search(r'pT\d|pN[0-9X]|^T\d.*N\d.*M\d', stage):
+        stage_lower = stage.lower()
+        if "m1" in stage_lower or "metastatic" in stage_lower:
+            flat["Stage_of_Cancer"] = "Stage IV (metastatic)"
+        elif re.search(r'N[23]', stage):
+            flat["Stage_of_Cancer"] = "Stage III"
+        elif re.search(r'T[34]', stage):
+            flat["Stage_of_Cancer"] = "Stage II-III"
+        else:
+            flat["Stage_of_Cancer"] = "Early stage (Stage I-II)"
+
+    # 3. Replace [REDACTED] with generic text in all values
+    for k, v in flat.items():
+        if isinstance(v, str) and "[REDACTED]" in v:
+            flat[k] = re.sub(
+                r'\[REDACTED\](\s*\[REDACTED\])*',
+                'a specific treatment',
+                v,
+            )
+
+    return flat
+
+
 def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
                            gen_config, base_cache, letter_prompt_template):
     """Generate a tagged patient letter using the LLM.
@@ -49,6 +90,7 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
         tagged_text: raw LLM output with [source:X] tags
     """
     flat = flatten_keypoints(keypoints)
+    flat = _clean_keypoints_for_letter(flat)
     keypoints_json = json.dumps(flat, indent=2, ensure_ascii=False)
     prompt_text = letter_prompt_template.format(keypoints_json=keypoints_json)
 
@@ -173,3 +215,33 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
         "letter_text": letter_text,
         "sentences": sentences,
     }
+
+
+def post_check_letter(letter_text):
+    """Post-generation checks on letter text. Returns (cleaned_text, warnings)."""
+    warnings = []
+
+    # 1. Strip [REDACTED] leaks
+    if "[REDACTED]" in letter_text:
+        letter_text = re.sub(
+            r'\[REDACTED\](\s*\[REDACTED\])*',
+            'a specific treatment',
+            letter_text,
+        )
+        warnings.append("[POST-LETTER] stripped [REDACTED] from letter")
+
+    # 2. Detect TNM staging patterns
+    tnm_match = re.search(r'pT\d|pN[0-9X]|stage\s+pT', letter_text, re.IGNORECASE)
+    if tnm_match:
+        warnings.append(f"[POST-LETTER] WARNING: TNM staging in letter: '{tnm_match.group()}'")
+
+    # 3. Detect repeated sentences
+    lines = [ln.strip() for ln in letter_text.split('\n') if ln.strip()]
+    seen = set()
+    for ln in lines:
+        normalized = ln.lower().rstrip('.').strip()
+        if normalized in seen and len(normalized) >= 20:
+            warnings.append(f"[POST-LETTER] WARNING: repeated sentence: '{ln[:60]}...'")
+        seen.add(normalized)
+
+    return letter_text, warnings

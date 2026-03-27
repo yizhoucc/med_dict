@@ -112,7 +112,7 @@ from ult import (
     gc,
 )
 from source_attribution import attribute_row, get_attributable_fields
-from letter_generation import generate_tagged_letter, parse_tagged_letter
+from letter_generation import generate_tagged_letter, parse_tagged_letter, post_check_letter
 
 
 def load_config(yaml_path):
@@ -538,6 +538,10 @@ def _run_letter_only(config_path, progress_paths):
         )
         traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
         letter = traceability.get("letter_text", "")
+        letter, post_warnings = post_check_letter(letter)
+        traceability["letter_text"] = letter
+        for w in post_warnings:
+            print(f"  {w}")
 
         n_sentences = len(traceability.get("sentences", []))
         n_attributed = sum(
@@ -2253,6 +2257,10 @@ def main():
             )
             traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
             letter = traceability.get("letter_text", "")
+            letter, post_warnings = post_check_letter(letter)
+            traceability["letter_text"] = letter
+            for w in post_warnings:
+                print(f"  {w}")
             n_sentences = len(traceability.get("sentences", []))
             n_attributed = sum(
                 1 for s in traceability.get("sentences", [])

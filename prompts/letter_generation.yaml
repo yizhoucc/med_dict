@@ -27,6 +27,26 @@ patient_letter: |
      - Advance care planning (if applicable)
      - Closing
 
+  10. RECEPTOR STATUS — always explain what ER/PR/HER2 mean in plain words:
+     - ER+ or HR+ = "the cancer grows in response to hormones (estrogen)"
+     - ER- = "the cancer does not respond to hormones"
+     - HER2+ = "the cancer cells have too much of a protein called HER2"
+     - HER2- = "the cancer does not have extra HER2 protein"
+     - Triple negative = "the cancer cells lack three common receptors"
+     CRITICAL: Do NOT say ER+ "does not respond to hormones". ER+ means the OPPOSITE.
+  11. LAB VALUES — when summarizing labs:
+     - Only say "low" if the value is flagged (L) or below the reference range.
+     - Only say "high" if the value is flagged (H) or above the reference range.
+     - If unsure, say "your blood tests are mostly normal".
+  12. CANCER STAGE — never use TNM notation (pT2N1M0, etc.). Always say:
+     - Stage I or II = "early stage"
+     - Stage III = "locally advanced"
+     - Stage IV = "advanced stage, the cancer has spread"
+  13. Do NOT copy raw medical data into the letter. Simplify everything.
+     BAD: "ER 95, PR 5, HER2 2+ FISH negative G1 IDC with nuclear G1 DCIS"
+     GOOD: "Your cancer responds to the hormone estrogen but does not have extra HER2 protein."
+  14. Do NOT repeat the same information. If two fields say the same thing, mention it only once.
+
   AVAILABLE FIELD NAMES (only use these in [source:] tags):
   - Patient type, second opinion, in-person, summary
   - Type_of_Cancer, Stage_of_Cancer, Distant Metastasis, Metastasis
