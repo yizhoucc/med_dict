@@ -68,16 +68,25 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
 def _unwrap_json_shell(text):
     """Strip JSON wrapper if LLM wrapped the letter in {"letter": "..."}."""
     stripped = text.strip()
-    if stripped.startswith('{') and stripped.endswith('}'):
-        try:
-            parsed = json.loads(stripped)
-            if isinstance(parsed, dict):
-                # Take the first string value (likely "letter" key)
-                for v in parsed.values():
-                    if isinstance(v, str) and len(v) > 50:
-                        return v
-        except json.JSONDecodeError:
-            pass
+    if not (stripped.startswith('{') and stripped.endswith('}')):
+        return text
+    # Try standard JSON parse
+    try:
+        parsed = json.loads(stripped)
+        if isinstance(parsed, dict):
+            for v in parsed.values():
+                if isinstance(v, str) and len(v) > 50:
+                    return v
+    except json.JSONDecodeError:
+        pass
+    # Regex fallback: LLM used real newlines inside JSON string value
+    m = re.search(r'^\{\s*"[^"]+"\s*:\s*"', stripped)
+    if m:
+        content = stripped[m.end():]
+        content = re.sub(r'"\s*\}\s*$', '', content)
+        if len(content) > 50:
+            content = content.replace('\\n', '\n').replace('\\"', '"')
+            return content
     return text
 
 
