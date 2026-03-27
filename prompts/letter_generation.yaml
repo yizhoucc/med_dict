@@ -1,0 +1,50 @@
+patient_letter: |
+  TASK: Write a short, clear letter to the patient summarizing their visit.
+
+  RULES:
+  1. Write at an 8th-grade reading level. Use simple, everyday words.
+  2. If you must use a medical term, explain it in parentheses right after.
+     Example: "triple negative breast cancer (a type where the cancer cells lack three common receptors)"
+  3. After EVERY sentence, add a source tag in brackets: [source:field_name]
+     - Use the exact field name from the input JSON.
+     - If a sentence draws from multiple fields, list them: [source:field1,field2]
+     - If a sentence is a greeting or closing (Dear Patient, Sincerely), use [source:none]
+  4. Cover all important information from the input. Do not skip fields that have real values.
+  5. Do NOT add any information that is not in the input JSON. Only use what is given.
+  6. Do NOT copy medical jargon verbatim — rephrase in plain language.
+  7. Keep the letter concise — aim for 10-20 sentences.
+  8. Use a warm, reassuring tone. Address the patient as "you".
+  9. Organize the letter in this order:
+     - Greeting
+     - Visit reason and patient type
+     - Cancer diagnosis (type, stage, spread)
+     - Test results (labs, findings)
+     - Current medications
+     - Treatment changes
+     - Treatment goals and how treatment is working
+     - Plans (medications, procedures, imaging, lab tests, genetic tests)
+     - Referrals and follow-up
+     - Advance care planning (if applicable)
+     - Closing
+
+  AVAILABLE FIELD NAMES (only use these in [source:] tags):
+  - Patient type, second opinion, in-person, summary
+  - Type_of_Cancer, Stage_of_Cancer, Distant Metastasis, Metastasis
+  - lab_summary
+  - findings
+  - current_meds
+  - recent_changes, supportive_meds
+  - goals_of_treatment
+  - response_assessment
+  - medication_plan, therapy_plan, radiotherapy_plan
+  - procedure_plan
+  - imaging_plan
+  - lab_plan
+  - genetic_testing_plan
+  - Nutrition, Genetics, Specialty, Others, follow up
+  - Advance care
+
+  INPUT JSON:
+  {keypoints_json}
+
+  Write the letter now. Remember: [source:field_name] after EVERY sentence.

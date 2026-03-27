@@ -112,6 +112,7 @@ from ult import (
     gc,
 )
 from source_attribution import attribute_row, get_attributable_fields
+from letter_generation import generate_tagged_letter, parse_tagged_letter
 
 
 def load_config(yaml_path):
@@ -2108,6 +2109,27 @@ def main():
             attributable = get_attributable_fields(keypoints)
             print(f"  [ATTRIBUTION] {len(attribution)}/{len(attributable)} fields sourced ({time.time() - attr_start:.1f}s)")
 
+        # Patient letter generation — tagged with [source:field_name]
+        letter = ""
+        traceability = {}
+        if config.get("extraction", {}).get("letter", False) and "letter_generation" in config.get("_prompts", {}):
+            letter_prompt_template = config["_prompts"]["letter_generation"]["patient_letter"]
+            letter_gen_config = keypoint_config.copy()
+            letter_gen_config["max_new_tokens"] = 512
+            letter_start = time.time()
+            tagged_text = generate_tagged_letter(
+                keypoints, model, tokenizer, chat_tmpl,
+                letter_gen_config, fullnote_cache, letter_prompt_template
+            )
+            traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
+            letter = traceability.get("letter_text", "")
+            n_sentences = len(traceability.get("sentences", []))
+            n_attributed = sum(
+                1 for s in traceability.get("sentences", [])
+                if s["source_fields"] != ["unattributed"] and s["source_fields"] != ["none"]
+            )
+            print(f"  [LETTER] {n_sentences} sentences, {n_attributed} attributed ({time.time() - letter_start:.1f}s)")
+
         print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 
         # Build row result
@@ -2117,6 +2139,8 @@ def main():
             "assessment_and_plan": assessment_and_plan,
             "keypoints": keypoints,
             "attribution": attribution,
+            "letter": letter,
+            "traceability": traceability,
         }
 
         # Append to results.txt

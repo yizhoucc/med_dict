@@ -16,10 +16,12 @@ data:
 prompts:
   extraction: "prompts/extraction.yaml"
   plan_extraction: "prompts/plan_extraction.yaml"
+  letter_generation: "prompts/letter_generation.yaml"
 
 extraction:
   pipeline: "v2"
   attribution: true
+  letter: true
   max_retries: 3
   verify: true
   gate_config:
