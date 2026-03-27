@@ -40,14 +40,30 @@ def _clean_keypoints_for_letter(flat):
     2. TNM → plain stage: translate pT2N1M0 etc. to Stage I/II/III/IV.
     3. Strip [REDACTED] from values to prevent leaking into letter.
     """
-    # 1. Dedup overlapping fields
+    # 1. Dedup overlapping fields (substring OR word-overlap > 60%)
+    def _similar(a, b):
+        if not a or not b:
+            return False
+        if a in b or b in a:
+            return True
+        wa = set(a.lower().split())
+        wb = set(b.lower().split())
+        if len(wa) < 3 or len(wb) < 3:
+            return False
+        return len(wa & wb) / min(len(wa), len(wb)) > 0.6
+
     rc = flat.get("recent_changes", "").strip()
     tp = flat.get("therapy_plan", "").strip()
     mp = flat.get("medication_plan", "").strip()
-    if rc and tp and (rc in tp or tp in rc):
+    if _similar(rc, tp):
         flat["therapy_plan"] = ""
-    if mp and tp and tp and (mp in tp or tp in mp):
+    if _similar(mp, tp):
         flat["therapy_plan"] = ""
+    # Dedup response_assessment ≈ findings
+    ra = flat.get("response_assessment", "").strip()
+    fi = flat.get("findings", "").strip()
+    if ra and fi and _similar(ra, fi):
+        flat["response_assessment"] = ""
 
     # 2. TNM → plain stage
     stage = flat.get("Stage_of_Cancer", "")
