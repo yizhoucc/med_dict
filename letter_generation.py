@@ -65,11 +65,11 @@ def _clean_keypoints_for_letter(flat):
     # 3. Replace [REDACTED] with generic text in all values
     for k, v in flat.items():
         if isinstance(v, str) and "[REDACTED]" in v:
-            flat[k] = re.sub(
-                r'\[REDACTED\](\s*\[REDACTED\])*',
-                'a specific treatment',
-                v,
-            )
+            # Doctor names first: "Dr. [REDACTED]" → "your doctor"
+            v = re.sub(r'Dr\.?\s*\[REDACTED\](\s*\[REDACTED\])*', 'your doctor', v)
+            # Then general: remaining [REDACTED] → "a specific treatment"
+            v = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a specific treatment', v)
+            flat[k] = v
 
     return flat
 
@@ -221,14 +221,14 @@ def post_check_letter(letter_text):
     """Post-generation checks on letter text. Returns (cleaned_text, warnings)."""
     warnings = []
 
-    # 1. Strip [REDACTED] leaks
+    # 1. Strip [REDACTED] leaks and fix "Dr. a specific treatment"
     if "[REDACTED]" in letter_text:
-        letter_text = re.sub(
-            r'\[REDACTED\](\s*\[REDACTED\])*',
-            'a specific treatment',
-            letter_text,
-        )
+        letter_text = re.sub(r'Dr\.?\s*\[REDACTED\](\s*\[REDACTED\])*', 'your doctor', letter_text)
+        letter_text = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a specific treatment', letter_text)
         warnings.append("[POST-LETTER] stripped [REDACTED] from letter")
+    if "Dr. a specific treatment" in letter_text:
+        letter_text = letter_text.replace("Dr. a specific treatment", "your doctor")
+        warnings.append("[POST-LETTER] fixed 'Dr. a specific treatment' → 'your doctor'")
 
     # 2. Detect TNM staging patterns
     tnm_match = re.search(r'pT\d|pN[0-9X]|stage\s+pT', letter_text, re.IGNORECASE)
