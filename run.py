@@ -494,19 +494,16 @@ def _run_letter_only(config_path, progress_paths):
 
     dtype_map = {"bfloat16": torch.bfloat16, "float16": torch.float16, "float32": torch.float32}
     dtype = dtype_map.get(model_cfg.get("dtype", "bfloat16"), torch.bfloat16)
-    quant_config = None
-    if "awq" in model_cfg["name"].lower() or "gptq" in model_cfg["name"].lower():
-        quant_config = None  # auto-detected
-    elif model_cfg.get("quantization") == "4bit":
-        quant_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=dtype)
-
-    model = AutoModelForCausalLM.from_pretrained(
-        model_cfg["name"],
-        torch_dtype=dtype,
-        device_map=model_cfg.get("device_map", "auto"),
-        cache_dir=model_cfg.get("cache_dir", None),
-        quantization_config=quant_config,
-    )
+    load_kwargs = {
+        "torch_dtype": dtype,
+        "device_map": model_cfg.get("device_map", "auto"),
+        "cache_dir": model_cfg.get("cache_dir", None),
+    }
+    if model_cfg.get("quantization") == "4bit":
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True, bnb_4bit_compute_dtype=dtype
+        )
+    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
     tokenizer = AutoTokenizer.from_pretrained(
         model_cfg["name"], cache_dir=model_cfg.get("cache_dir", None)
     )
