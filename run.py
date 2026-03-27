@@ -448,6 +448,127 @@ def _build_cross_context(keypoints):
     return "\n".join(parts)
 
 
+def _run_letter_only(config_path, progress_paths):
+    """Generate patient letters from existing extraction results.
+
+    Loads one or more progress.json files, merges them, builds KV cache
+    per note, and generates letters without re-running extraction.
+
+    Usage:
+        python run.py exp/full_qwen.yaml --letter-only results/run1/progress.json results/run2/progress.json
+    """
+    config = load_config(config_path)
+    letter_prompt_template = config["_prompts"]["letter_generation"]["patient_letter"]
+
+    # Merge progress files
+    merged = {}
+    for path in progress_paths:
+        with open(path, "r") as f:
+            p = json.load(f)
+        for idx, row_result in p.get("results", {}).items():
+            merged[idx] = row_result
+    print(f"Loaded {len(merged)} rows from {len(progress_paths)} progress file(s)")
+
+    # Create output directory
+    exp_name = config["experiment"]["name"]
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_dir = os.path.join("results", f"letter_{exp_name}_{ts}")
+    os.makedirs(run_dir, exist_ok=True)
+    setup_logging(run_dir)
+    results_path = os.path.join(run_dir, "results.txt")
+
+    # Write header
+    with open(results_path, "w") as f:
+        f.write(f"Source: {config_path} --letter-only | Run started: {datetime.now()}\n")
+
+    # Load model
+    print("Loading model...")
+    model_cfg = config["model"]
+    hf_token_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hf.token")
+    if os.path.exists(hf_token_path):
+        with open(hf_token_path, "r") as f:
+            hftoken = f.read().strip()
+        os.environ["HF_HOME"] = model_cfg.get("cache_dir", os.environ.get("HF_HOME", ""))
+        from huggingface_hub import login
+        login(token=hftoken)
+
+    dtype_map = {"bfloat16": torch.bfloat16, "float16": torch.float16, "float32": torch.float32}
+    dtype = dtype_map.get(model_cfg.get("dtype", "bfloat16"), torch.bfloat16)
+    quant_config = None
+    if "awq" in model_cfg["name"].lower() or "gptq" in model_cfg["name"].lower():
+        quant_config = None  # auto-detected
+    elif model_cfg.get("quantization") == "4bit":
+        quant_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=dtype)
+
+    model = AutoModelForCausalLM.from_pretrained(
+        model_cfg["name"],
+        torch_dtype=dtype,
+        device_map=model_cfg.get("device_map", "auto"),
+        cache_dir=model_cfg.get("cache_dir", None),
+        quantization_config=quant_config,
+    )
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_cfg["name"], cache_dir=model_cfg.get("cache_dir", None)
+    )
+    model.eval()
+    chat_tmpl = ChatTemplate(model_cfg.get("chat_template", "llama3"))
+
+    keypoint_config = config["generation"]["keypoint"].copy()
+    keypoint_config["eos_token_id"] = tokenizer.eos_token_id
+
+    # Process each row
+    global_start = time.time()
+    output_results = {}
+    print(f"\nGenerating letters for {len(merged)} rows...")
+
+    for i, (idx, row_result) in enumerate(sorted(merged.items(), key=lambda x: int(x[0]))):
+        row_start = time.time()
+        note_text = row_result["note_text"]
+        keypoints = row_result["keypoints"]
+        attribution = row_result.get("attribution", {})
+        print(f"\nRow {idx} ({i+1}/{len(merged)})...")
+
+        # Build KV cache for this note
+        model_note = note_text.replace("*****", "[REDACTED]")
+        base_cache = build_base_cache(model_note, model, tokenizer, "", chat_tmpl=chat_tmpl)
+
+        # Generate letter
+        letter_gen_config = keypoint_config.copy()
+        letter_gen_config["max_new_tokens"] = 512
+        tagged_text = generate_tagged_letter(
+            keypoints, model, tokenizer, chat_tmpl,
+            letter_gen_config, base_cache, letter_prompt_template
+        )
+        traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
+        letter = traceability.get("letter_text", "")
+
+        n_sentences = len(traceability.get("sentences", []))
+        n_attributed = sum(
+            1 for s in traceability.get("sentences", [])
+            if s["source_fields"] != ["unattributed"] and s["source_fields"] != ["none"]
+        )
+        print(f"  [LETTER] {n_sentences} sentences, {n_attributed} attributed ({time.time() - row_start:.1f}s)")
+
+        # Update row result
+        row_result["letter"] = letter
+        row_result["traceability"] = traceability
+        output_results[idx] = row_result
+
+        # Append to results.txt
+        append_row_result(results_path, int(idx), row_result)
+
+    # Save progress
+    save_progress(run_dir, {
+        "completed": True,
+        "completed_indices": sorted(int(k) for k in output_results),
+        "results": output_results,
+    })
+
+    total = time.time() - global_start
+    print(f"\nLetter generation complete: {len(output_results)} rows in {total:.1f}s ({total/60:.1f}min)")
+    print(f"Results in: {run_dir}/")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run medical extraction experiment")
     parser.add_argument("config", help="Path to experiment YAML config")
@@ -456,7 +577,19 @@ def main():
         default=None,
         help="Path to a previous run directory to resume from",
     )
+    parser.add_argument(
+        "--letter-only",
+        nargs="+",
+        metavar="PROGRESS_JSON",
+        default=None,
+        help="Generate letters from existing progress.json files (skip extraction)",
+    )
     args = parser.parse_args()
+
+    # 0. Letter-only mode: generate letters from existing progress files
+    if args.letter_only:
+        _run_letter_only(args.config, args.letter_only)
+        return
 
     # 1. Load config
     config = load_config(args.config)
