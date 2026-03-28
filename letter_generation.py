@@ -463,6 +463,10 @@ def post_check_letter(letter_text):
     new_text = dosing_pattern.sub(' ', letter_text)
     if new_text != letter_text:
         letter_text = re.sub(r' {2,}', ' ', new_text)
+        # Clean up artifacts: "to ." → ".", "to ," → ","
+        letter_text = re.sub(r'\bto\s+([.,])', r'\1', letter_text)
+        # Clean up "dose of X to ." → "dose of X."
+        letter_text = re.sub(r'(\bto\b)\s*\.', '.', letter_text)
         warnings.append("[POST-LETTER] stripped dosing details from letter")
 
     # 7. Remove semantically repeated sentences (word overlap > 70%)
