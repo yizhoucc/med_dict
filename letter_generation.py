@@ -369,6 +369,10 @@ def post_check_letter(letter_text):
     if "Dr. a specific treatment" in letter_text:
         letter_text = letter_text.replace("Dr. a specific treatment", "your doctor")
         warnings.append("[POST-LETTER] fixed 'Dr. a specific treatment' → 'your doctor'")
+    # 2. Strip pre-translation marker leaked into letter
+    if "— in plain language:" in letter_text:
+        letter_text = re.sub(r'\s*—\s*in plain language:\s*', ', which means it ', letter_text)
+        warnings.append("[POST-LETTER] stripped '— in plain language:' marker")
 
     # 2. Detect TNM staging patterns
     tnm_match = re.search(r'pT\d|pN[0-9X]|stage\s+pT', letter_text, re.IGNORECASE)
