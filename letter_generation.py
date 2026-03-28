@@ -251,13 +251,38 @@ def post_check_letter(letter_text):
     if tnm_match:
         warnings.append(f"[POST-LETTER] WARNING: TNM staging in letter: '{tnm_match.group()}'")
 
-    # 3. Detect repeated sentences
+    # 3. Fix receptor contradiction: if letter says both "ER positive" and
+    #    "does not respond to hormones" (without receptor-change context), fix it
+    has_er_pos = bool(re.search(r'ER\s*positive|ER\+', letter_text, re.IGNORECASE))
+    has_wrong = 'does not respond to hormones' in letter_text
+    if has_er_pos and has_wrong:
+        # Only fix if NOT in receptor-change context ("used to"/"now"/"but now")
+        idx = letter_text.find('does not respond to hormones')
+        context = letter_text[max(0, idx - 120):idx]
+        if 'used to' not in context.lower() and 'now' not in context.lower():
+            letter_text = letter_text.replace(
+                'does not respond to hormones',
+                'responds to hormones (estrogen)',
+            )
+            warnings.append("[POST-LETTER] fixed receptor contradiction: ER+ but said 'does not respond'")
+
+    # 4. Remove semantically repeated sentences (word overlap > 70%)
     lines = [ln.strip() for ln in letter_text.split('\n') if ln.strip()]
-    seen = set()
+    kept = []
     for ln in lines:
-        normalized = ln.lower().rstrip('.').strip()
-        if normalized in seen and len(normalized) >= 20:
-            warnings.append(f"[POST-LETTER] WARNING: repeated sentence: '{ln[:60]}...'")
-        seen.add(normalized)
+        words = set(ln.lower().split())
+        is_dup = False
+        if len(words) > 6:
+            for prev in kept:
+                prev_words = set(prev.lower().split())
+                if len(prev_words) > 6:
+                    overlap = len(words & prev_words) / min(len(words), len(prev_words))
+                    if overlap > 0.7:
+                        is_dup = True
+                        warnings.append(f"[POST-LETTER] removed duplicate: '{ln[:50]}...'")
+                        break
+        if not is_dup:
+            kept.append(ln)
+    letter_text = '\n'.join(kept)
 
     return letter_text, warnings
