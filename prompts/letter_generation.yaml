@@ -81,6 +81,11 @@ patient_letter: |
      GOOD: (omit entirely if labs are normal/old — or say "Your blood tests are mostly normal.")
   20. ADVANCE CARE — If Advance care says "Not discussed during this visit", do NOT include it in the letter.
      Only mention advance care if there is a meaningful status (e.g., "Full code", "DNR/DNI", named a surrogate).
+  21. PATHOLOGIC COMPLETE RESPONSE — If findings or response_assessment says "no residual carcinoma",
+     "pathologic complete response", or "pCR", this is GREAT NEWS. Tell the patient clearly:
+     "After your treatment and surgery, no cancer was found in the removed tissue. This is a very good sign."
+     Do NOT mix this up with the ORIGINAL diagnosis. If lymph nodes were positive BEFORE treatment
+     but the surgery showed NO residual cancer, do NOT say "cancer was found in lymph nodes".
 
   AVAILABLE FIELD NAMES (only use these in [source:] tags):
   - Patient type, second opinion, in-person, summary

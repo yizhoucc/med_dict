@@ -89,7 +89,7 @@ Lab_Results: |
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "lab_summary": "Summary of key lab results with specific values. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests. If none found, write 'No labs in note.'"
+  "lab_summary": "Summary of key lab results with specific values from THIS VISIT ONLY. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests. Do NOT include old results from prior years or prior visits. If none found, write 'No labs in note.'"
   }
 
 Clinical_Findings: |

@@ -119,6 +119,39 @@ def _clean_keypoints_for_letter(flat):
         if explanations:
             flat["Type_of_Cancer"] = toc + " — in plain language: " + "; ".join(explanations)
 
+    # 2b. Medical term pre-translation in all text fields
+    _TERM_MAP = {
+        'adenocarcinoma': 'adenocarcinoma (cancer that started in gland cells)',
+        'mucinous carcinoma': 'mucinous carcinoma (a type of cancer that makes mucus)',
+        'mucinous differentiation': 'mucinous differentiation (a type that makes mucus)',
+        'lobular carcinoma': 'lobular carcinoma (cancer that started in the milk-producing glands)',
+        'salpingo-oophorectomy': 'surgery to remove the ovaries and fallopian tubes',
+        'bilateral salpingo-oophorectomy': 'surgery to remove both ovaries and fallopian tubes',
+        'BSO': 'surgery to remove both ovaries and fallopian tubes (BSO)',
+    }
+    for k, v in flat.items():
+        if isinstance(v, str) and v:
+            for term, replacement in _TERM_MAP.items():
+                if term.lower() in v.lower() and replacement.lower() not in v.lower():
+                    v = re.sub(re.escape(term), replacement, v, flags=re.IGNORECASE)
+                    flat[k] = v
+
+    # 2c. Drug dedup: remove drugs from current_meds if already in recent_changes/medication_plan
+    cm = flat.get("current_meds", "").strip()
+    rc = flat.get("recent_changes", "").strip()
+    mp = flat.get("medication_plan", "").strip()
+    if cm and (rc or mp):
+        plan_text = (rc + " " + mp).lower()
+        drugs = [d.strip() for d in cm.split(',') if d.strip()]
+        kept = []
+        for d in drugs:
+            # Check if any word of this drug name appears in the plan text
+            d_words = d.strip().lower().split()
+            if not any(w in plan_text for w in d_words if len(w) > 3):
+                kept.append(d)
+        if len(kept) < len(drugs):
+            flat["current_meds"] = ", ".join(kept) if kept else ""
+
     # 3. TNM → plain stage
     stage = flat.get("Stage_of_Cancer", "")
     if re.search(r'pT\d|pN[0-9X]|^T\d.*N\d.*M\d', stage):
@@ -420,7 +453,19 @@ def post_check_letter(letter_text):
             )
             warnings.append(f"[POST-LETTER] fixed implausible LN count ({ln_count}) for early stage")
 
-    # 6. Remove semantically repeated sentences (word overlap > 70%)
+    # 6. Strip inline dosing details (e.g., "1500mg", "10mg daily", "25 mg/m2")
+    dosing_pattern = re.compile(
+        r'\s*\d+\.?\d*\s*(?:mg(?:/m[²2])?|mcg|units?|mEq)\s*'
+        r'(?:(?:once|twice|three times|per|every|q|BID|TID|QID|daily|weekly|PO|IV)\s*)*'
+        r'(?:a\s+day|per\s+day|once\s+daily|twice\s+daily)?',
+        re.IGNORECASE
+    )
+    new_text = dosing_pattern.sub(' ', letter_text)
+    if new_text != letter_text:
+        letter_text = re.sub(r' {2,}', ' ', new_text)
+        warnings.append("[POST-LETTER] stripped dosing details from letter")
+
+    # 7. Remove semantically repeated sentences (word overlap > 70%)
     lines = [ln.strip() for ln in letter_text.split('\n') if ln.strip()]
     kept = []
     for ln in lines:
