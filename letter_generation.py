@@ -59,13 +59,36 @@ def _clean_keypoints_for_letter(flat):
         flat["therapy_plan"] = ""
     if _similar(mp, tp):
         flat["therapy_plan"] = ""
-    # Dedup response_assessment ≈ findings
+    # Dedup response_assessment ≈ findings (keep response-specific words)
     ra = flat.get("response_assessment", "").strip()
     fi = flat.get("findings", "").strip()
     if ra and fi and _similar(ra, fi):
-        flat["response_assessment"] = ""
+        _resp_words = {'decrease', 'decreased', 'increase', 'increased', 'improve', 'improved',
+                       'stable', 'respond', 'responding', 'progression', 'better', 'worse',
+                       'growing', 'shrink', 'smaller', 'larger', 'resolved', 'worsening'}
+        ra_sents = [s.strip() for s in re.split(r'[.;]', ra) if s.strip()]
+        unique = [s for s in ra_sents if any(w in s.lower().split() for w in _resp_words)]
+        flat["response_assessment"] = ". ".join(unique) + "." if unique else ""
 
-    # 2. TNM → plain stage
+    # 2. Receptor pre-translation — append plain-language explanation
+    toc = flat.get("Type_of_Cancer", "")
+    if toc:
+        explanations = []
+        if 'triple negative' in toc.lower() or 'TNBC' in toc.upper():
+            explanations = ["the cancer cells lack three common receptors (ER, PR, HER2)"]
+        else:
+            if re.search(r'ER\s*\+|ER\s*positive|HR\s*\+', toc, re.IGNORECASE):
+                explanations.append("grows in response to hormones (estrogen)")
+            elif re.search(r'ER\s*-|ER\s*negative', toc, re.IGNORECASE):
+                explanations.append("does not respond to hormones")
+            if re.search(r'HER2\s*\+|HER2\s*positive', toc, re.IGNORECASE):
+                explanations.append("has extra HER2 protein")
+            elif re.search(r'HER2\s*-|HER2\s*negative|HER2:\s*not tested', toc, re.IGNORECASE):
+                explanations.append("does not have extra HER2 protein")
+        if explanations:
+            flat["Type_of_Cancer"] = toc + " — in plain language: " + "; ".join(explanations)
+
+    # 3. TNM → plain stage
     stage = flat.get("Stage_of_Cancer", "")
     if re.search(r'pT\d|pN[0-9X]|^T\d.*N\d.*M\d', stage):
         stage_lower = stage.lower()
@@ -90,8 +113,16 @@ def _clean_keypoints_for_letter(flat):
     return flat
 
 
+_EMOTION_KEYWORDS = [
+    "distressed", "anxious", "anxiety", "scared", "fearful", "crying", "tearful",
+    "depressed", "depression", "worried", "overwhelmed", "upset", "emotional",
+    "frightened", "nervous", "stressed",
+]
+
+
 def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
-                           gen_config, base_cache, letter_prompt_template):
+                           gen_config, base_cache, letter_prompt_template,
+                           note_text=""):
     """Generate a tagged patient letter using the LLM.
 
     Args:
@@ -101,12 +132,21 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
         gen_config: generation config dict (will override max_new_tokens)
         base_cache: KV cache with the note already encoded
         letter_prompt_template: prompt string with {keypoints_json} placeholder
+        note_text: original note text for emotion detection
 
     Returns:
         tagged_text: raw LLM output with [source:X] tags
     """
     flat = flatten_keypoints(keypoints)
     flat = _clean_keypoints_for_letter(flat)
+
+    # Detect patient emotions from note text
+    if note_text:
+        note_lower = note_text.lower()
+        emotions = [kw for kw in _EMOTION_KEYWORDS if kw in note_lower]
+        if emotions:
+            flat["emotional_context"] = f"Patient appears {', '.join(emotions[:3])}."
+
     keypoints_json = json.dumps(flat, indent=2, ensure_ascii=False)
     prompt_text = letter_prompt_template.format(keypoints_json=keypoints_json)
 

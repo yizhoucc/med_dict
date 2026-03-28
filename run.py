@@ -534,7 +534,8 @@ def _run_letter_only(config_path, progress_paths):
         letter_gen_config["max_new_tokens"] = 512
         tagged_text = generate_tagged_letter(
             keypoints, model, tokenizer, chat_tmpl,
-            letter_gen_config, base_cache, letter_prompt_template
+            letter_gen_config, base_cache, letter_prompt_template,
+            note_text=note_text,
         )
         traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
         letter = traceability.get("letter_text", "")
@@ -2253,7 +2254,8 @@ def main():
             letter_start = time.time()
             tagged_text = generate_tagged_letter(
                 keypoints, model, tokenizer, chat_tmpl,
-                letter_gen_config, fullnote_cache, letter_prompt_template
+                letter_gen_config, fullnote_cache, letter_prompt_template,
+                note_text=note_text,
             )
             traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
             letter = traceability.get("letter_text", "")

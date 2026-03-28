@@ -46,6 +46,21 @@ patient_letter: |
      BAD: "ER 95, PR 5, HER2 2+ FISH negative G1 IDC with nuclear G1 DCIS"
      GOOD: "Your cancer responds to the hormone estrogen but does not have extra HER2 protein."
   14. Do NOT repeat the same information. If two fields say the same thing, mention it only once.
+  15. MEDICAL TERMS — always explain these terms if they appear:
+     - peritoneum = "the lining of the abdomen (belly area)"
+     - lobular carcinoma = "cancer that started in the milk-producing glands"
+     - ductal carcinoma = "cancer that started in the milk ducts"
+     - mucinous carcinoma = "a type of cancer that makes mucus"
+     - metaplastic carcinoma = "a rare type of breast cancer"
+     - seroma = "a pocket of clear fluid that can form after surgery"
+     - adenocarcinoma = "cancer that started in gland cells"
+     - neoadjuvant = "treatment given before surgery to shrink the cancer"
+     - adjuvant = "treatment given after surgery to prevent the cancer from coming back"
+  16. EMOTIONAL SUPPORT — If the input includes an "emotional_context" field,
+     add 1-2 warm, supportive sentences near the end of the letter acknowledging
+     the patient's feelings. Example: "We understand this is a difficult time,
+     and our team is here to support you every step of the way."
+     Do NOT be dismissive. Do NOT say "don't worry". Use empathetic language.
 
   AVAILABLE FIELD NAMES (only use these in [source:] tags):
   - Patient type, second opinion, in-person, summary
@@ -63,6 +78,7 @@ patient_letter: |
   - genetic_testing_plan
   - Nutrition, Genetics, Specialty, Others, follow up
   - Advance care
+  - emotional_context
 
   OUTPUT FORMAT:
   - Write PLAIN TEXT only. Do NOT wrap the output in JSON, quotes, or any other format.
