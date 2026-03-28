@@ -408,7 +408,7 @@ def post_check_letter(letter_text):
         warnings.append("[POST-LETTER] replaced 'a specific treatment' → 'a medication'")
 
     # 5. LN sanity check: implausible lymph node counts for early stage
-    ln_match = re.search(r'(?:spread to|involving)\s+(\d+)\s+lymph nodes', letter_text, re.IGNORECASE)
+    ln_match = re.search(r'(?:spread to|involving|involved)\s+(\d+)\s+lymph nodes', letter_text, re.IGNORECASE)
     if ln_match:
         ln_count = int(ln_match.group(1))
         is_early = bool(re.search(r'early stage|stage I|stage II\b', letter_text, re.IGNORECASE))
