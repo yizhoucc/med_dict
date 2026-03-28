@@ -41,11 +41,17 @@ patient_letter: |
   12. CANCER STAGE — never use TNM notation (pT2N1M0, etc.). Always say:
      - Stage I or II = "early stage"
      - Stage III = "locally advanced"
-     - Stage IV = "advanced stage, the cancer has spread"
+     - Stage IV = "advanced stage" (and explain that the cancer has spread to other parts of the body)
+     Write it as a natural sentence, e.g., "The cancer is at an advanced stage and has spread to your bones."
+     BAD: "making it advanced stage, the cancer has spread" (broken grammar)
+     GOOD: "The cancer is now at an advanced stage, meaning it has spread to other parts of your body."
   13. Do NOT copy raw medical data into the letter. Simplify everything.
      BAD: "ER 95, PR 5, HER2 2+ FISH negative G1 IDC with nuclear G1 DCIS"
      GOOD: "Your cancer responds to the hormone estrogen but does not have extra HER2 protein."
   14. Do NOT repeat the same information. If two fields say the same thing, mention it only once.
+     BAD: "You are taking letrozole." ... "We started you on letrozole."
+     GOOD: "We started you on letrozole, a medication that helps prevent the cancer from coming back."
+     If current_meds and recent_changes mention the same drug, combine them into one sentence.
   15. MEDICAL TERMS — always explain these terms if they appear:
      - peritoneum = "the lining of the abdomen (belly area)"
      - lobular carcinoma = "cancer that started in the milk-producing glands"
@@ -61,6 +67,20 @@ patient_letter: |
      the patient's feelings. Example: "We understand this is a difficult time,
      and our team is here to support you every step of the way."
      Do NOT be dismissive. Do NOT say "don't worry". Use empathetic language.
+  17. RESPONSE ASSESSMENT — If response_assessment has MIXED results (some areas stable, some progressing),
+     you MUST mention BOTH the good and bad news. Do NOT only report stable areas while omitting progression.
+     BAD: "Recent imaging shows that the cancer is stable." (when brain MRI shows new lesions)
+     GOOD: "Scans of your body show the cancer is stable, but a brain scan showed two small new spots."
+  18. DOSING — Do NOT include exact dosing details (mg/m2, mg/kg, Day 1/8/15 schedules).
+     Patients do not need dosing schedules in a summary letter. Just name the treatment.
+     BAD: "Epirubicin 25 mg/m2 on Day 1, Day 8, and Day 15"
+     GOOD: "You will continue your Epirubicin treatment."
+  19. LAB RELEVANCE — Only mention lab results that are ABNORMAL or clinically significant for the patient.
+     Do NOT mention normal values, old results from prior visits, or single irrelevant values.
+     BAD: "Your blood tests from 2013 show a normal glucose level."
+     GOOD: (omit entirely if labs are normal/old — or say "Your blood tests are mostly normal.")
+  20. ADVANCE CARE — If Advance care says "Not discussed during this visit", do NOT include it in the letter.
+     Only mention advance care if there is a meaningful status (e.g., "Full code", "DNR/DNI", named a surrogate).
 
   AVAILABLE FIELD NAMES (only use these in [source:] tags):
   - Patient type, second opinion, in-person, summary

@@ -132,14 +132,22 @@ def _clean_keypoints_for_letter(flat):
         else:
             flat["Stage_of_Cancer"] = "Early stage (Stage I-II)"
 
-    # 3. Replace [REDACTED] with generic text in all values
+    # 3. Replace [REDACTED] with generic text — or skip field if mostly redacted
     for k, v in flat.items():
         if isinstance(v, str) and "[REDACTED]" in v:
             # Doctor names first: "Dr. [REDACTED]" → "your doctor"
             v = re.sub(r'Dr\.?\s*\[REDACTED\](\s*\[REDACTED\])*', 'your doctor', v)
-            # Then general: remaining [REDACTED] → "a specific treatment"
-            v = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a specific treatment', v)
-            flat[k] = v
+            # Check if remaining value is mostly [REDACTED] (>50% of words)
+            cleaned_test = re.sub(r'\[REDACTED\]', '', v)
+            orig_words = len(v.split())
+            clean_words = len(cleaned_test.split())
+            if orig_words > 0 and clean_words / orig_words < 0.4:
+                # Mostly redacted — clear the field so LLM skips it
+                flat[k] = ""
+            else:
+                # Replace remaining [REDACTED] with "a medication"
+                v = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a medication', v)
+                flat[k] = v
 
     return flat
 
@@ -361,14 +369,14 @@ def post_check_letter(letter_text):
     """Post-generation checks on letter text. Returns (cleaned_text, warnings)."""
     warnings = []
 
-    # 1. Strip [REDACTED] leaks and fix "Dr. a specific treatment"
+    # 1. Strip [REDACTED] leaks and fix "Dr. a medication"
     if "[REDACTED]" in letter_text:
         letter_text = re.sub(r'Dr\.?\s*\[REDACTED\](\s*\[REDACTED\])*', 'your doctor', letter_text)
-        letter_text = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a specific treatment', letter_text)
+        letter_text = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a medication', letter_text)
         warnings.append("[POST-LETTER] stripped [REDACTED] from letter")
-    if "Dr. a specific treatment" in letter_text:
-        letter_text = letter_text.replace("Dr. a specific treatment", "your doctor")
-        warnings.append("[POST-LETTER] fixed 'Dr. a specific treatment' → 'your doctor'")
+    if "Dr. a medication" in letter_text:
+        letter_text = letter_text.replace("Dr. a medication", "your doctor")
+        warnings.append("[POST-LETTER] fixed 'Dr. a medication' → 'your doctor'")
     # 2. Strip pre-translation marker leaked into letter
     if "— in plain language:" in letter_text:
         letter_text = re.sub(r'\s*—\s*in plain language:\s*', ', which means it ', letter_text)
@@ -394,7 +402,25 @@ def post_check_letter(letter_text):
             )
             warnings.append("[POST-LETTER] fixed receptor contradiction: ER+ but said 'does not respond'")
 
-    # 4. Remove semantically repeated sentences (word overlap > 70%)
+    # 4. Fix "a specific treatment" placeholder — replace with "a medication"
+    if "a specific treatment" in letter_text:
+        letter_text = letter_text.replace("a specific treatment", "a medication")
+        warnings.append("[POST-LETTER] replaced 'a specific treatment' → 'a medication'")
+
+    # 5. LN sanity check: implausible lymph node counts for early stage
+    ln_match = re.search(r'(?:spread to|involving)\s+(\d+)\s+lymph nodes', letter_text, re.IGNORECASE)
+    if ln_match:
+        ln_count = int(ln_match.group(1))
+        is_early = bool(re.search(r'early stage|stage I|stage II\b', letter_text, re.IGNORECASE))
+        if is_early and ln_count > 10:
+            # Replace specific count with generic wording
+            letter_text = letter_text.replace(
+                ln_match.group(0),
+                "spread to some lymph nodes"
+            )
+            warnings.append(f"[POST-LETTER] fixed implausible LN count ({ln_count}) for early stage")
+
+    # 6. Remove semantically repeated sentences (word overlap > 70%)
     lines = [ln.strip() for ln in letter_text.split('\n') if ln.strip()]
     kept = []
     for ln in lines:
