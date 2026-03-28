@@ -303,19 +303,28 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
     letter_grade = flesch_kincaid_grade(letter_text)
 
     # 2. Field coverage: which keypoint fields are referenced in letter
+    #    Exclude visit-logistics fields (not meant for patient letter)
+    #    and fields cleared by dedup
+    _SKIP_COVERAGE = {
+        'Patient type', 'second opinion', 'in-person',  # visit metadata
+        'Next clinic visit',  # internal scheduling
+        'therapy_plan',  # often deduped with medication_plan/recent_changes
+    }
+    _SKIP_VALUES = {
+        'none', 'n/a', '', 'no labs in note.', 'no procedures planned.',
+        'no imaging planned.', 'no labs planned.', 'none planned.',
+        'not discussed during this visit.', 'not mentioned in note.',
+        'not yet on treatment — no response to assess.',
+    }
     all_sources = set()
     for s in sentences:
         for f in s["source_fields"]:
             if f not in ("none", "unattributed"):
                 all_sources.add(f)
     non_empty_fields = {k for k, v in flat_kp.items()
-                        if isinstance(v, str) and v.strip()
-                        and v.strip().lower() not in ('none', 'n/a', '', 'no labs in note.',
-                                                       'no procedures planned.', 'no imaging planned.',
-                                                       'no labs planned.', 'none planned.',
-                                                       'not discussed during this visit.',
-                                                       'not mentioned in note.',
-                                                       'not yet on treatment — no response to assess.')}
+                        if k not in _SKIP_COVERAGE
+                        and isinstance(v, str) and v.strip()
+                        and v.strip().lower() not in _SKIP_VALUES}
     covered = all_sources & non_empty_fields
     coverage_pct = round(len(covered) / len(non_empty_fields) * 100) if non_empty_fields else 100
 
