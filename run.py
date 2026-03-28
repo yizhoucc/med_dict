@@ -112,7 +112,7 @@ from ult import (
     gc,
 )
 from source_attribution import attribute_row, get_attributable_fields
-from letter_generation import generate_tagged_letter, parse_tagged_letter, post_check_letter
+from letter_generation import generate_tagged_letter, parse_tagged_letter, post_check_letter, flesch_kincaid_grade
 
 
 def load_config(yaml_path):
@@ -549,7 +549,17 @@ def _run_letter_only(config_path, progress_paths):
             1 for s in traceability.get("sentences", [])
             if s["source_fields"] != ["unattributed"] and s["source_fields"] != ["none"]
         )
-        print(f"  [LETTER] {n_sentences} sentences, {n_attributed} attributed ({time.time() - row_start:.1f}s)")
+        # Add note readability for comparison
+        from letter_generation import flesch_kincaid_grade
+        note_grade = flesch_kincaid_grade(note_text)
+        if "metrics" in traceability:
+            traceability["metrics"]["note_readability_grade"] = note_grade
+        metrics = traceability.get("metrics", {})
+        print(f"  [LETTER] {n_sentences} sentences, {n_attributed} attributed, "
+              f"grade={metrics.get('readability_grade', '?')}/{note_grade} "
+              f"coverage={metrics.get('field_coverage_pct', '?')}% "
+              f"attr={metrics.get('attribution_complete_pct', '?')}% "
+              f"({time.time() - row_start:.1f}s)")
 
         # Update row result
         row_result["letter"] = letter
@@ -2268,7 +2278,15 @@ def main():
                 1 for s in traceability.get("sentences", [])
                 if s["source_fields"] != ["unattributed"] and s["source_fields"] != ["none"]
             )
-            print(f"  [LETTER] {n_sentences} sentences, {n_attributed} attributed ({time.time() - letter_start:.1f}s)")
+            note_grade = flesch_kincaid_grade(note_text)
+            if "metrics" in traceability:
+                traceability["metrics"]["note_readability_grade"] = note_grade
+            metrics = traceability.get("metrics", {})
+            print(f"  [LETTER] {n_sentences} sent, {n_attributed} attr, "
+                  f"grade={metrics.get('readability_grade', '?')}/{note_grade} "
+                  f"cov={metrics.get('field_coverage_pct', '?')}% "
+                  f"chain={metrics.get('attribution_complete_pct', '?')}% "
+                  f"({time.time() - letter_start:.1f}s)")
 
         print(f"  Row {index} total: {time.time() - row_start:.1f}s")
 

@@ -14,6 +14,37 @@ import time
 from ult import clone_cache, run_model_with_cache_manual
 
 
+def _count_syllables(word):
+    """Estimate syllable count for English word."""
+    word = word.lower().strip(".,!?;:'\"")
+    if not word:
+        return 0
+    count = 0
+    vowels = "aeiouy"
+    prev_vowel = False
+    for ch in word:
+        is_vowel = ch in vowels
+        if is_vowel and not prev_vowel:
+            count += 1
+        prev_vowel = is_vowel
+    if word.endswith("e") and count > 1:
+        count -= 1
+    return max(count, 1)
+
+
+def flesch_kincaid_grade(text):
+    """Compute Flesch-Kincaid Grade Level for text."""
+    sentences = [s.strip() for s in re.split(r'[.!?]+', text) if len(s.strip()) > 3]
+    words = [w for w in re.findall(r"[a-zA-Z']+", text) if len(w) > 0]
+    if not sentences or not words:
+        return 0.0
+    total_syllables = sum(_count_syllables(w) for w in words)
+    avg_words_per_sent = len(words) / len(sentences)
+    avg_syllables_per_word = total_syllables / len(words)
+    grade = 0.39 * avg_words_per_sent + 11.8 * avg_syllables_per_word - 15.59
+    return round(max(grade, 0.0), 1)
+
+
 def flatten_keypoints(keypoints):
     """Flatten nested keypoints dict into {field_name: value_string}."""
     flat = {}
@@ -267,9 +298,47 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
     letter_text = re.sub(r' +', ' ', letter_text)
     letter_text = re.sub(r'\n{3,}', '\n\n', letter_text)
 
+    # Compute metrics
+    # 1. Readability
+    letter_grade = flesch_kincaid_grade(letter_text)
+
+    # 2. Field coverage: which keypoint fields are referenced in letter
+    all_sources = set()
+    for s in sentences:
+        for f in s["source_fields"]:
+            if f not in ("none", "unattributed"):
+                all_sources.add(f)
+    non_empty_fields = {k for k, v in flat_kp.items()
+                        if isinstance(v, str) and v.strip()
+                        and v.strip().lower() not in ('none', 'n/a', '', 'no labs in note.',
+                                                       'no procedures planned.', 'no imaging planned.',
+                                                       'no labs planned.', 'none planned.',
+                                                       'not discussed during this visit.',
+                                                       'not mentioned in note.',
+                                                       'not yet on treatment — no response to assess.')}
+    covered = all_sources & non_empty_fields
+    coverage_pct = round(len(covered) / len(non_empty_fields) * 100) if non_empty_fields else 100
+
+    # 3. Attribution completeness: sentences with both extraction_values AND note_quotes
+    n_content = sum(1 for s in sentences if s["source_fields"] not in [["none"], ["unattributed"]])
+    n_full_chain = sum(1 for s in sentences
+                       if s["source_fields"] not in [["none"], ["unattributed"]]
+                       and s.get("extraction_values") and s.get("note_quotes"))
+    attr_pct = round(n_full_chain / n_content * 100) if n_content else 100
+
     return {
         "letter_text": letter_text,
         "sentences": sentences,
+        "metrics": {
+            "readability_grade": letter_grade,
+            "field_coverage_pct": coverage_pct,
+            "fields_covered": sorted(covered),
+            "fields_missed": sorted(non_empty_fields - all_sources),
+            "attribution_complete_pct": attr_pct,
+            "sentences_total": len(sentences),
+            "sentences_attributed": n_content,
+            "sentences_full_chain": n_full_chain,
+        },
     }
 
 
