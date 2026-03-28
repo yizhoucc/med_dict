@@ -266,10 +266,16 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
                 for field in source_fields:
                     if field == "none":
                         continue
-                    if field in flat_kp:
-                        extraction_values[field] = flat_kp[field]
-                    if field in attribution:
-                        note_quotes[field] = attribution[field]
+                    # Normalize: try original, then underscore↔space variants
+                    field_variants = [field, field.replace('_', ' '), field.replace(' ', '_')]
+                    for fv in field_variants:
+                        if fv in flat_kp:
+                            extraction_values[field] = flat_kp[fv]
+                            break
+                    for fv in field_variants:
+                        if fv in attribution:
+                            note_quotes[field] = attribution[fv]
+                            break
 
                 sentences.append({
                     "index": idx,

@@ -76,7 +76,7 @@ patient_letter: |
   - imaging_plan
   - lab_plan
   - genetic_testing_plan
-  - Nutrition, Genetics, Specialty, Others, follow up
+  - Nutrition, Genetics, Specialty (radiation oncology, etc.), Others (social work, home health, PT), follow up
   - Advance care
   - emotional_context
 
