@@ -131,9 +131,21 @@ if ra and fi and _similar(ra, fi):
 row_indices: [0, 1, 4, 5, 6, 8, 10, 13, 26, 28, 29, 33, 35, 40, 42, 49, 51, 53, 64, 94]
 ```
 
-## 验证标准
-- P2 "receptor not explained" → 0
-- Row 4 response_assessment 好消息保留
-- 情绪相关 row 有 1-2 句支持性语言
-- 少见术语解释出现
-- 之前 P1 不回归
+## 验证结果 (20 samples, 2026-03-28)
+
+Results in: `results/letter_full_qwen_20260328_070120/`
+
+| Check | Result |
+|-------|--------|
+| Receptor not explained | **0/20** ✅ (was 7/61) |
+| Emotional support | **13/20** have warm sentences ✅ |
+| Dr. a specific treatment | **0** ✅ |
+| [REDACTED] leak | **0** ✅ |
+| Row 0 peritoneum | explained as "lining of your abdomen (belly area)" ✅ |
+| Row 33 receptor | "grows in response to hormones" — no longer backwards ✅ |
+| Row 4 response info | NOT preserved (dedup still too aggressive for this case) — P2 |
+| Row 35 mucinous | NOT explained — P2 (LLM ignored prompt rule) |
+| Row 64 neoadjuvant | NOT explained — P2 (LLM ignored prompt rule) |
+| POST dedup triggered | 4 times — correctly removed redundant sentences |
+
+**Overall: P0=0, P1=0. Major P2 reduction. Ready for full run.**
