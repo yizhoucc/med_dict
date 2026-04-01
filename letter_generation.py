@@ -101,25 +101,7 @@ def _clean_keypoints_for_letter(flat):
         unique = [s for s in ra_sents if any(w in s.lower().split() for w in _resp_words)]
         flat["response_assessment"] = ". ".join(unique) + "." if unique else ""
 
-    # 2. Receptor pre-translation — append plain-language explanation
-    toc = flat.get("Type_of_Cancer", "")
-    if toc:
-        explanations = []
-        if 'triple negative' in toc.lower() or 'TNBC' in toc.upper():
-            explanations = ["the cancer cells lack three common receptors (ER, PR, HER2)"]
-        else:
-            if re.search(r'ER\s*\+|ER\s*positive|HR\s*\+', toc, re.IGNORECASE):
-                explanations.append("grows in response to hormones (estrogen)")
-            elif re.search(r'ER\s*-|ER\s*negative', toc, re.IGNORECASE):
-                explanations.append("does not respond to hormones")
-            if re.search(r'HER2\s*\+|HER2\s*positive', toc, re.IGNORECASE):
-                explanations.append("has extra HER2 protein")
-            elif re.search(r'HER2\s*-|HER2\s*negative|HER2:\s*not tested', toc, re.IGNORECASE):
-                explanations.append("does not have extra HER2 protein")
-        if explanations:
-            flat["Type_of_Cancer"] = toc + " — in plain language: " + "; ".join(explanations)
-
-    # 2b. Medical term pre-translation in all text fields
+    # 2. Medical term pre-translation in all text fields
     _TERM_MAP = {
         'adenocarcinoma': 'adenocarcinoma (cancer that started in gland cells)',
         'mucinous carcinoma': 'mucinous carcinoma (a type of cancer that makes mucus)',
@@ -410,11 +392,6 @@ def post_check_letter(letter_text):
     if "Dr. a medication" in letter_text:
         letter_text = letter_text.replace("Dr. a medication", "your doctor")
         warnings.append("[POST-LETTER] fixed 'Dr. a medication' → 'your doctor'")
-    # 2. Strip pre-translation marker leaked into letter
-    if "— in plain language:" in letter_text:
-        letter_text = re.sub(r'\s*—\s*in plain language:\s*', ', which means it ', letter_text)
-        warnings.append("[POST-LETTER] stripped '— in plain language:' marker")
-
     # 2. Detect TNM staging patterns
     tnm_match = re.search(r'pT\d|pN[0-9X]|stage\s+pT', letter_text, re.IGNORECASE)
     if tnm_match:
