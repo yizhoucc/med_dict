@@ -152,6 +152,7 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - results.txt 保持当前自定义格式，不改为 JSON
 - prompt 中的 JSON schema 必须是合法 JSON（注意逗号）
 - `exp/` 中的 yaml 是实验配置入口，通过 `extraction.pipeline` 切换 v1/v2
+- **做改动就 commit**：每次对代码/配置文件做了改动，立即 commit + push，方便 git 复原
 
 ## 工作流程规则
 
