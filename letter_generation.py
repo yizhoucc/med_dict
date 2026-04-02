@@ -209,7 +209,7 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
     cache = clone_cache(base_cache)
 
     letter_config = gen_config.copy()
-    letter_config["max_new_tokens"] = letter_config.get("max_new_tokens", 512)
+    letter_config["max_new_tokens"] = letter_config.get("max_new_tokens", 768)
 
     output, _ = run_model_with_cache_manual(
         chat_prompt, model, tokenizer, letter_config, cache
