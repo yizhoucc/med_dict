@@ -17,8 +17,10 @@ patient_letter: |
   10. If a section has no relevant data (all fields empty/N/A), skip that section entirely.
   11. LAB VALUES — only mention abnormal results. If labs are normal, say "Your blood tests are mostly normal."
   12. ADVANCE CARE — only include if there is meaningful content (Full code, DNR, surrogate). Skip if "Not discussed".
-  13. pCR — If findings mention "no residual carcinoma" or "pathologic complete response", tell the patient clearly:
-      "After treatment and surgery, no cancer was found in the removed tissue. This is a very good sign."
+  13. pCR — If findings mention "no residual carcinoma" or "pathologic complete response":
+      - If BOTH breast AND lymph nodes are clear: "After treatment and surgery, no cancer was found in any of the removed tissue. This is a very good sign."
+      - If breast is clear BUT lymph nodes still have cancer: "After treatment and surgery, no cancer was found in the breast tissue itself, which is a good sign. However, cancer was still found in some of the lymph nodes."
+      - NEVER say "no cancer was found in the removed tissue" if lymph nodes were positive.
   14. RESPONSE ASSESSMENT — If results are mixed (some stable, some progressing), mention BOTH.
   15. MEDICAL TERMS — explain these if they appear:
       - lobular carcinoma = "cancer that started in the milk-producing glands"
@@ -47,6 +49,7 @@ patient_letter: |
   **What was discussed?**
   [Fill from: Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis, goals_of_treatment, response_assessment, findings]
   [Include cancer type, stage (use "early stage"/"locally advanced"/"advanced stage", never TNM), treatment goals, and how treatment is going if applicable.]
+  [METASTASIS: If cancer has spread to 3+ sites, say "has spread to other parts of your body" without listing every organ. Only name specific sites if there are 1-2 sites (e.g. "has spread to your bones").]
   [CRITICAL: If response_assessment mentions BOTH stable AND new/progressing areas, you MUST mention both. Do NOT only say "stable" when there are also new lesions.]
 
   **What tests were done or ordered?**
