@@ -194,10 +194,20 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
     flat = flatten_keypoints(keypoints)
     flat = _clean_keypoints_for_letter(flat)
 
-    # Detect patient emotions from note text
+    # Detect patient emotions from note text (with negation filtering)
     if note_text:
         note_lower = note_text.lower()
-        emotions = [kw for kw in _EMOTION_KEYWORDS if kw in note_lower]
+        _NEG_WORDS = {'no ', 'not ', 'denies ', 'denied ', 'negative ', 'without ', 'absent ', 'none '}
+        emotions = []
+        for kw in _EMOTION_KEYWORDS:
+            idx = note_lower.find(kw)
+            if idx == -1:
+                continue
+            # Check preceding 40 chars for negation
+            context = note_lower[max(0, idx - 40):idx]
+            if any(neg in context for neg in _NEG_WORDS):
+                continue
+            emotions.append(kw)
         if emotions:
             flat["emotional_context"] = f"Patient appears {', '.join(emotions[:3])}."
 
