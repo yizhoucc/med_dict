@@ -147,7 +147,17 @@ def _clean_keypoints_for_letter(flat):
         else:
             flat["Stage_of_Cancer"] = "Early stage (Stage I-II)"
 
-    # 3. Replace [REDACTED] with generic text — or skip field if mostly redacted
+    # 3b. Simplify metastasis sites: if 3+ sites listed, use general term
+    for met_field in ("Metastasis", "Distant Metastasis"):
+        met = flat.get(met_field, "")
+        if met and met.lower().startswith("yes"):
+            # Count distinct site words (split by comma, "and", slash)
+            sites_part = re.sub(r'^yes\s*[\(\:]?\s*(?:to\s+)?', '', met, flags=re.IGNORECASE)
+            sites = [s.strip() for s in re.split(r'[,/]|\band\b', sites_part) if s.strip()]
+            if len(sites) >= 3:
+                flat[met_field] = "Yes (to multiple sites throughout the body)"
+
+    # 4. Replace [REDACTED] with generic text — or skip field if mostly redacted
     for k, v in flat.items():
         if isinstance(v, str) and "[REDACTED]" in v:
             # Doctor names first: "Dr. [REDACTED]" → "your doctor"
@@ -197,7 +207,8 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
     # Detect patient emotions from note text (with negation filtering)
     if note_text:
         note_lower = note_text.lower()
-        _NEG_WORDS = {'no ', 'not ', 'denies ', 'denied ', 'negative ', 'without ', 'absent ', 'none '}
+        _NEG_WORDS = {'no ', 'not ', 'denies ', 'denied ', 'negative ', 'without ', 'absent ', 'none ',
+                      'h/o ', 'history of ', 'past medical', 'pmh ', 'hx of ', 'hx '}
         emotions = []
         for kw in _EMOTION_KEYWORDS:
             idx = note_lower.find(kw)
@@ -219,7 +230,7 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
     cache = clone_cache(base_cache)
 
     letter_config = gen_config.copy()
-    letter_config["max_new_tokens"] = letter_config.get("max_new_tokens", 768)
+    letter_config["max_new_tokens"] = letter_config.get("max_new_tokens", 1024)
 
     output, _ = run_model_with_cache_manual(
         chat_prompt, model, tokenizer, letter_config, cache
@@ -406,6 +417,19 @@ def post_check_letter(letter_text):
     tnm_match = re.search(r'pT\d|pN[0-9X]|stage\s+pT', letter_text, re.IGNORECASE)
     if tnm_match:
         warnings.append(f"[POST-LETTER] WARNING: TNM staging in letter: '{tnm_match.group()}'")
+
+    # 2b. Replace chemo regimen abbreviations with plain language
+    _CHEMO_ABBREVS = {
+        'TCHP': 'a combination of chemotherapy and targeted therapy drugs',
+        'THP': 'targeted therapy with chemotherapy',
+        'AC-T': 'a chemotherapy regimen',
+        'AC/T': 'a chemotherapy regimen',
+        'FOLFOX': 'a chemotherapy regimen',
+    }
+    for abbr, plain in _CHEMO_ABBREVS.items():
+        if abbr in letter_text:
+            letter_text = letter_text.replace(abbr, plain)
+            warnings.append(f"[POST-LETTER] replaced '{abbr}' → '{plain}'")
 
     # 3. Fix receptor contradiction: if letter says both "ER positive" and
     #    "does not respond to hormones" (without receptor-change context), fix it
