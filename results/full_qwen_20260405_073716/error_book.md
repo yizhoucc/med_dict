@@ -16,6 +16,11 @@
 **验证 sample**: ROW 3 (coral_idx 142), ROW 4 (coral_idx 143), ROW 5 (coral_idx 144)
 **需要 letter**: ✅
 
+### 验证结果 (2026-04-05)
+- ROW 3 "emotional": ✅ **已修复** (prompt + POST-LETTER-EMOTIONAL hook)
+- ROW 4 "blood tests": ✅ **已修复** (prompt 规则 11)
+- ROW 5 "blood tests": ✅ **已修复** (prompt 规则 11)
+
 ---
 
 ## response_assessment 误判 (3 P1)
@@ -29,6 +34,11 @@
 **验证 sample**: ROW 9 (coral_idx 148), ROW 10 (coral_idx 149), ROW 11 (coral_idx 150)
 **需要 letter**: ✅ (ROW 11 letter 也有 P1 — "not responding well")
 
+### 验证结果 (2026-04-05)
+- ROW 9: ✅ **已修复** — 正确描述 post-neoadjuvant 病理响应
+- ROW 10: ✅ **已修复** — 正确描述新辅助后手术结果
+- ROW 11: ✅ **已修复** — 不再说 "not responding"，时间线正确
+
 ---
 
 ## genetic_testing_plan 误分类 (3 P1)
@@ -41,6 +51,11 @@
 
 **验证 sample**: ROW 3 (coral_idx 142), ROW 7 (coral_idx 146), ROW 24 (coral_idx 163)
 **需要 letter**: ✅
+
+### 验证结果 (2026-04-05)
+- ROW 3: ✅ **已修复** — "Genetic testing sent and is pending" (不再包含 IHC/biopsy)
+- ROW 7: ✅ **已修复** — "None planned." (POST-GENETICS-RECHECK hook 清除了 "Would recheck")
+- ROW 24: ✅ **已修复** — "We will send her surgical specimen for MP" (正确捕获分子检测)
 
 ---
 
