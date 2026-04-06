@@ -14,22 +14,23 @@
 | 严重度 | 数量 | 比率 | 说明 |
 |--------|------|------|------|
 | **P0 (幻觉/编造)** | **0** | **0%** | 无纯幻觉/编造 |
-| **P1 (重大错误)** | **20** | **0.20/sample (20%)** | 主要集中在 ROW 1-25 |
-| **P2 (小问题)** | **70** | **0.70/sample (70%)** | 分布均匀 |
+| **P1 (重大错误)** | **21** | **0.21/sample** | 主要集中在 ROW 1-25 |
+| **P2 (小问题)** | **88** | **0.88/sample** | 分布见下 |
 | A2 (归因不精确) | ~20 | ~0.20/sample | 前 25 行集中 |
 
-### P1 分布
+### P1 分布（完整逐字审查）
 - ROW 1-25: 20 个 P1（0.80/sample）
-- ROW 26-100: 0 个 P1（0.00/sample）
-- **结论**: P1 问题高度集中在前 25 个 sample，后 75 个 sample 显著更干净
+- ROW 26-34: 1 个 P1（ROW 33 letter 分期误导 NED 患者）
+- ROW 35-100: 0 个 P1
+- **结论**: 21 个 P1 中 20 个集中在前 25 个 sample，后 66 个 sample 仅 1 个
 
-### P2 分布
+### P2 分布（完整逐字审查）
 - ROW 1-25: 54 个 P2（2.16/sample）
-- ROW 26-35: 4 个（0.40/sample）
-- ROW 36-50: 2 个（0.13/sample）
-- ROW 51-75: 3 个（0.12/sample）
-- ROW 76-100: 7 个（0.28/sample）
-- **结论**: P2 也集中在前 25 个 sample（更复杂/更长的 note）
+- ROW 26-37: 14 个（1.17/sample）
+- ROW 38-50: 0 个（0.00/sample）— 最干净区间
+- ROW 51-75: 4 个（0.16/sample）
+- ROW 76-100: 8 个（0.32/sample）— 全部是 Stage "Not available" (POST hook 修复)
+- **总计 88 P2**。前 25 个 sample 占 61%
 
 ---
 
@@ -255,6 +256,64 @@
 | 2 | P2 | Metastasis | "Not sure" 但 PET/CT 无远处转移 |
 | 3 | P2 | procedure_plan | 分子检测错归为 procedure |
 
+### ROW 25 (coral_idx 164) — 1 P1, 2 P2
+| 1 | **P1** | medication_plan | Xeloda 剂量 (1500/1000mg) 错归给 ixabepilone |
+| 2 | P2 | Stage_of_Cancer | "Not available" 应为 Stage IV |
+| 3 | P2 | Type_of_Cancer | 缺脑转移活检 triple negative |
+
+### ROW 26 (coral_idx 165) — 0 P1, 3 P2
+- P2: lab_summary 3 月前 labs minor 异常
+- P2: Next clinic visit assumes in-person (telehealth 患者)
+- P2: letter MRI "was done" 但原文 "scheduled"
+
+### ROW 27 (coral_idx 166) — 0 P1, 2 P2
+- P2: lab_plan 遗漏 UA
+- P2: follow_up 没提 "two weeks" reassessment
+
+### ROW 28 (coral_idx 167) — 0 P1, 1 P2
+- P2: lab_summary 8 月前 labs (Hct 48.8H minor)
+- Note: letter "anxious and depressed" 有原文支持 ✅
+
+### ROW 29 (coral_idx 168) — 0 P1, 1 P2
+- P2: imaging_plan 末尾 "Bone scan" 残片
+
+### ROW 30 (coral_idx 169) — 0 P1, 1 P2
+- P2: lab_summary 遗漏 HPI 中 tumor markers (CA 27.29/15-3 升高)
+
+### ROW 31 (coral_idx 170) — 0 P1, 2 P2
+- P2: Stage "Not available" 应为 Stage IV
+- P2: Referral Others "Social work" 无 A/P 明确支持
+
+### ROW 32 (coral_idx 171) — 0 P1, 1 P2
+- P2: current_meds 包含已停的 pertuzumab (note 矛盾)
+- 亮点: 100% field coverage, Advance care "Full code. Living will on file." 完美捕获
+
+### ROW 33 (coral_idx 172) — 1 P1, 1 P2
+| 1 | **P1** | letter | "now considered more advanced stage (IIIA)" 误导 NED 患者（实际是 clinical→pathologic 分期更新） |
+| 2 | P2 | Stage | "Originally IIB, now IIIA" 措辞暗示进展但是分期更新 |
+
+### ROW 34 (coral_idx 173) — 0 P1, 1 P2
+- P2: Type_of_Cancer 用了原始 PR-，但 2020 复发活检 PR+(50%)
+
+### ROW 35 (coral_idx 174) — 0 P1, 1 P2
+- P2: "inferred from tamoxifen" 但实际用 anastrozole (note 内部矛盾)
+
+### ROW 36 (coral_idx 175) — 0 P1, 2 P2
+- P2: lab_summary 只列 CBC 遗漏 CMP (Albumin 3.3L)
+- P2: procedure_plan 混入 Abraxane + doppler
+
+### ROW 37-50 — 0 P1, 0 P2
+- 全部 ✅ Clean (逐个审查 + 自动筛选 + 3 个手工抽检确认)
+
+### ROW 51-75 — 0 P1, 4 P2
+- ROW 52: P2 procedure_plan 混入 fertility referral
+- ROW 54: P2 Stage "Not available" with Met=Yes (bone)
+- ROW 57: P2 procedure_plan 混入 genetic counseling
+- ROW 75: P2 procedure_plan 混入 genetics + fertility referral
+
+### ROW 76-100 — 0 P1, 8 P2
+- ROW 76, 79, 83, 84, 86, 92, 95, 100: P2 Stage "Not available" with Met=Yes (POST-STAGE-METASTATIC hook 会修复)
+
 ---
 
 ## 系统性模式总结（更新至 ROW 24）
@@ -274,6 +333,7 @@
 | 11 | therapy_plan/medication_plan 重复 | P2 | ~50% | 低优先级，不影响准确性 |
 | 12 | Stage "Not available (redacted)" for metastatic | P2 | 7/100 (7%) | 中：应写 "Stage IV (metastatic)" |
 | 13 | procedure_plan 混入 referral/genetic content | P2 | 5/100 (5%) | 中：prompt 字段定义需更严格 |
+| 14 | Stage "IIB→IIIA" in letter 误导 NED 患者 | P1 | 1/34 (3%) | 中：letter prompt 需区分分期更新 vs 进展 |
 
 ---
 
