@@ -2253,6 +2253,23 @@ def main():
                     print(f"      before: '{old_type}'")
                     print(f"      after:  '{type_val_hr}'")
 
+        # POST-GENETICS-RECHECK: Clear genetic_testing_plan if it only contains recheck/LVEF/marker language [v24]
+        gen_test = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gen_test, dict):
+            gen_val = gen_test.get("genetic_testing_plan", "")
+            if gen_val and isinstance(gen_val, str) and gen_val.lower() not in ("none planned.", "none", ""):
+                gen_lower = gen_val.lower()
+                # Check if it's a non-genetic recheck
+                is_recheck = any(x in gen_lower for x in ["recheck", "would recheck", "repeat echo", "repeat lvef"])
+                has_genetic_keyword = any(x in gen_lower for x in [
+                    "oncotype", "mammaprint", "foundation", "guardant", "brca", "germline",
+                    "genetic testing", "genetic counseling", "molecular", "ngs", "panel",
+                    "ctdna", "liquid biopsy", "msi", "pd-l1", "tumor profiling"
+                ])
+                if is_recheck and not has_genetic_keyword:
+                    gen_test["genetic_testing_plan"] = "None planned."
+                    print(f"    [POST-GENETICS-RECHECK] Cleared non-genetic recheck: '{gen_val[:60]}'")
+
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
         if config.get("extraction", {}).get("attribution", False):
@@ -2282,6 +2299,24 @@ def main():
             traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
             letter = traceability.get("letter_text", "")
             letter, post_warnings = post_check_letter(letter)
+            # POST-LETTER-EMOTIONAL: Remove fabricated emotional sentences when no emotional_context [v24]
+            emotional_phrases = [
+                "you appear to be emotional",
+                "we understand you are feeling emotional",
+                "we understand that you are feeling anxious and depressed",
+                "we understand that you are feeling anxious",
+                "you seem to be feeling emotional",
+            ]
+            has_emotional_context = bool(keypoints.get("emotional_context"))
+            if not has_emotional_context:
+                letter_lines = letter.split("\n")
+                cleaned_lines = []
+                for line in letter_lines:
+                    if any(ep in line.lower() for ep in emotional_phrases):
+                        print(f"  [POST-LETTER-EMOTIONAL] Removed fabricated emotional line: '{line[:80]}'")
+                    else:
+                        cleaned_lines.append(line)
+                letter = "\n".join(cleaned_lines)
             traceability["letter_text"] = letter
             for w in post_warnings:
                 print(f"  {w}")
