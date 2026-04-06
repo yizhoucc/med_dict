@@ -1676,6 +1676,18 @@ def main():
                 cancer["Distant Metastasis"] = "No"
                 print(f"    [POST-DISTMET-DEFAULT] Filled empty Distant Metastasis → 'No' (curative, non-metastatic)")
 
+        # POST-STAGE-METASTATIC: If metastasis=Yes but Stage says "Not available"/"Not mentioned", set Stage IV [v24]
+        cancer_diag = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_diag, dict):
+            stage_val = cancer_diag.get("Stage_of_Cancer", "")
+            met_val = cancer_diag.get("Metastasis", "")
+            dist_met_val = cancer_diag.get("Distant Metastasis", "")
+            if stage_val and any(x in stage_val.lower() for x in ["not available", "not mentioned"]):
+                if (isinstance(met_val, str) and "yes" in met_val.lower()) or \
+                   (isinstance(dist_met_val, str) and "yes" in dist_met_val.lower()):
+                    cancer_diag["Stage_of_Cancer"] = "Stage IV (metastatic)"
+                    print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (Metastasis=Yes)")
+
         # POST-RESPONSE: cross-reference response_assessment with findings [B53, B60]
         response = keypoints.get("Response_Assessment", {})
         resp_val = response.get("response_assessment", "") if isinstance(response, dict) else ""

@@ -15,7 +15,10 @@ patient_letter: |
   8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
   9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
   10. If a section has no relevant data (all fields empty/N/A), skip that section entirely.
-  11. LAB VALUES — only mention abnormal results. If labs are normal, say "Your blood tests are mostly normal."
+  11. LAB VALUES:
+      - If lab_summary says "No labs in note" → do NOT mention blood tests at all, or say "No new tests were done during this visit." NEVER say "Your blood tests are mostly normal" when there are no labs.
+      - If labs are present and mostly normal, say "Your blood tests are mostly normal."
+      - Only mention specific abnormal results if clinically significant.
   12. ADVANCE CARE — only include if there is meaningful content (Full code, DNR, surrogate). Skip if "Not discussed".
   13. pCR — If findings mention "no residual carcinoma" or "pathologic complete response":
       - If BOTH breast AND lymph nodes are clear: "After treatment and surgery, no cancer was found in any of the removed tissue. This is a very good sign."
@@ -35,7 +38,11 @@ patient_letter: |
       - mastectomy = "surgery to remove the breast"
       - ALND = "surgery to remove and check the lymph nodes under the arm"
       - oophorectomy/BSO = "surgery to remove the ovaries"
-  16. EMOTIONAL SUPPORT — If emotional_context is present, add 1-2 warm sentences near the end.
+  16. EMOTIONAL SUPPORT:
+      - ONLY add emotional support sentences if the note EXPLICITLY states the patient is tearful, distressed, anxious, or emotional.
+      - "She has good support" means social support, NOT that the patient is emotional — do NOT write "You appear to be emotional."
+      - If ROS says "No depression, no anxiety", do NOT fabricate emotional state.
+      - If emotional_context is present AND supported by note, add 1-2 warm sentences near the end.
 
   TEMPLATE (fill in each section with 1-3 sentences based on the mapped fields):
 

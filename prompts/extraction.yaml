@@ -203,6 +203,11 @@ Response_Assessment: |
 
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+     CRITICAL EXCEPTION — POST-NEOADJUVANT SURGERY: If the patient received neoadjuvant therapy (chemo, targeted therapy, etc.) BEFORE surgery, the surgical pathology IS the response assessment. Describe the pathologic response:
+     - Residual tumor size and cellularity (e.g., "3.84 cm residual tumor, 5% cellularity")
+     - Lymph node status post-treatment (e.g., "3/28 LN positive with treatment effect")
+     - Whether pathologic complete response (pCR) was achieved or not
+     Do NOT write "Not yet on treatment" for a patient who completed neoadjuvant therapy and had surgery.
      IMPORTANT: Completed radiation therapy COUNTS as treatment. If the patient recently finished radiation, they HAVE received treatment — do NOT write "Not yet on treatment". "Not yet on treatment" is ONLY correct if no cancer treatment (chemo, radiation, hormonal, targeted, immunotherapy) has been given at all.
      IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
      For LOCAL RECURRENCE: describe the recurrence factually (e.g., "local recurrence in left breast, 1.7cm IDC on excisional biopsy"). Do NOT write "cancer is not responding to treatment" — the patient may have discontinued treatment or completed it years ago. Focus on WHAT happened (recurrence), not WHY.
