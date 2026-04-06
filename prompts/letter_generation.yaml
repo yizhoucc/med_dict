@@ -39,10 +39,10 @@ patient_letter: |
       - ALND = "surgery to remove and check the lymph nodes under the arm"
       - oophorectomy/BSO = "surgery to remove the ovaries"
   16. EMOTIONAL SUPPORT:
-      - ONLY add emotional support sentences if the note EXPLICITLY states the patient is tearful, distressed, anxious, or emotional.
-      - "She has good support" means social support, NOT that the patient is emotional — do NOT write "You appear to be emotional."
-      - If ROS says "No depression, no anxiety", do NOT fabricate emotional state.
-      - If emotional_context is present AND supported by note, add 1-2 warm sentences near the end.
+      - ONLY add emotional support sentences if the input JSON contains an "emotional_context" field with a NON-EMPTY value that describes a specific emotional state (e.g., "tearful", "distressed", "anxious").
+      - If there is NO "emotional_context" field or it is empty, do NOT add ANY emotional support sentences. Do NOT infer emotions.
+      - NEVER write "You appear to be emotional", "We understand you are feeling anxious", or similar unless the input JSON explicitly contains this information.
+      - "She has good support" is NOT an emotional state — it means social support. Do NOT convert this into emotional language.
 
   TEMPLATE (fill in each section with 1-3 sentences based on the mapped fields):
 

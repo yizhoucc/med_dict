@@ -151,7 +151,8 @@ Genetic_Testing_Plan: |
   - DO NOT include tests that are already completed, historic, or only mentioned in past oncology history.
   - DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine labs (CBC, CMP).
   - DO NOT include IHC staining (ER/PR/HER2 status confirmation), FISH testing, or biopsy for receptor status — these are standard pathology, NOT genetic testing.
-  - DO NOT include LVEF/echocardiogram, tumor markers (CA 15-3, CEA), or other clinical lab rechecks.
+  - DO NOT include LVEF/echocardiogram, tumor markers (CA 15-3, CEA, CA 27.29), or other clinical lab rechecks.
+  - DO NOT include vague "recheck" or "would recheck" statements that refer to lab values, imaging, or cardiac function — these are NOT genetic testing.
   - Oncotype DX, MammaPrint, Foundation One, Guardant360, BRCA panels, germline testing — these ARE genetic/molecular testing.
 
   4. CRITICAL — do NOT include content that belongs in OTHER fields:
