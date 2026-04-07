@@ -1032,7 +1032,7 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None, supportive_whitelist=None):
+def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None, supportive_whitelist=None, tool_context=None):
     """
     V2 extraction pipeline with 5 gates (v7abc: merged improve gates).
     Each gate fixes one specific issue (trim, don't redo).
@@ -1055,6 +1055,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         gate_config: optional dict with gate behavior overrides:
             preserve_negatives: bool - G4 won't empty safe negative phrases (default False)
             skip_empty_fields: bool - G3/G5 won't add content to empty fields (default False)
+        tool_context: optional dict with tool calling support (v26):
+            full_note: str - complete note text for SEARCH_NOTE tool
+            med_dict: dict - medical dictionary for DEFINE tool
 
     Returns:
         dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
@@ -1071,15 +1074,23 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         flags = []
         gate_log = []  # per-gate detailed log
 
-        # --- Step 1: Extract ---
-        task_prompt = chat_tmpl.user_assistant(task)
-        cache_for_extract = clone_cache(base_cache)
-        answer, returned_cache = run_model_with_cache_manual(
-            task_prompt, model, tokenizer, gen_config, kv_cache=cache_for_extract
-        )
-        del returned_cache, cache_for_extract
-        torch.cuda.empty_cache()
-        gc.collect()
+        # --- Step 1: Extract (with optional tool calling) ---
+        if tool_context:
+            answer = extract_with_tools(
+                task, key, model, tokenizer, gen_config, base_cache,
+                full_note=tool_context.get("full_note", ""),
+                med_dict=tool_context.get("med_dict"),
+                chat_tmpl=chat_tmpl,
+            )
+        else:
+            task_prompt = chat_tmpl.user_assistant(task)
+            cache_for_extract = clone_cache(base_cache)
+            answer, returned_cache = run_model_with_cache_manual(
+                task_prompt, model, tokenizer, gen_config, kv_cache=cache_for_extract
+            )
+            del returned_cache, cache_for_extract
+            torch.cuda.empty_cache()
+            gc.collect()
 
         gate_log.append(f"      [EXTRACT] raw={answer[:200]}")
 
@@ -1418,3 +1429,119 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             print(line)
 
     return keypoints
+
+
+# --- V26: Tool Calling Support ---
+
+TOOL_CALL_RE = re.compile(r'(SEARCH_NOTE|DEFINE)\("([^"]+)"\)')
+
+
+def parse_tool_calls(output):
+    """Parse SEARCH_NOTE("...") and DEFINE("...") patterns from LLM output."""
+    return TOOL_CALL_RE.findall(output)
+
+
+def execute_tool_calls(calls, full_note, med_dict):
+    """Execute tool calls and return formatted results.
+
+    Args:
+        calls: list of (tool_name, argument) tuples
+        full_note: the complete clinical note text
+        med_dict: dictionary from load_medical_dictionary()
+
+    Returns:
+        string with all tool results formatted for context injection
+    """
+    results = []
+    for tool_name, arg in calls:
+        if tool_name == "SEARCH_NOTE":
+            arg_lower = arg.lower()
+            idx = full_note.lower().find(arg_lower)
+            if idx >= 0:
+                start = max(0, idx - 300)
+                end = min(len(full_note), idx + 300)
+                passage = full_note[start:end].strip()
+                results.append(f"[SEARCH_NOTE '{arg}']:\n{passage}")
+            else:
+                # Fuzzy: search for each word
+                found = False
+                for w in arg_lower.split():
+                    if len(w) >= 4:
+                        idx = full_note.lower().find(w)
+                        if idx >= 0:
+                            start = max(0, idx - 300)
+                            end = min(len(full_note), idx + 300)
+                            passage = full_note[start:end].strip()
+                            results.append(f"[SEARCH_NOTE '{arg}' (matched '{w}')]:\n{passage}")
+                            found = True
+                            break
+                if not found:
+                    results.append(f"[SEARCH_NOTE '{arg}']: Not found in note.")
+
+        elif tool_name == "DEFINE":
+            term_lower = arg.lower().strip()
+            if med_dict and term_lower in med_dict:
+                term_orig, definition = med_dict[term_lower]
+                results.append(f"[DEFINE '{arg}']: {definition}")
+            else:
+                results.append(f"[DEFINE '{arg}']: Definition not available.")
+
+    return "\n\n".join(results)
+
+
+def extract_with_tools(prompt, key, model, tokenizer, gen_config, cache,
+                       full_note, med_dict, chat_tmpl, max_tool_rounds=1):
+    """Single-field extraction with optional tool calling.
+
+    Pass 1: normal extraction. If output contains SEARCH_NOTE/DEFINE calls,
+    execute them and re-extract with results injected. Otherwise return
+    the first-pass result directly (zero overhead).
+
+    Args:
+        prompt: the extraction task prompt text
+        key: the field key name (for logging)
+        model, tokenizer, gen_config, cache: standard extraction args
+        full_note: complete note text for SEARCH_NOTE
+        med_dict: medical dictionary for DEFINE
+        chat_tmpl: ChatTemplate instance
+        max_tool_rounds: max tool call iterations (default 1)
+
+    Returns:
+        raw answer string (may need JSON parsing)
+    """
+    # Pass 1
+    task_prompt = chat_tmpl.user_assistant(prompt)
+    answer, returned_cache = run_model_with_cache_manual(
+        task_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(cache)
+    )
+    del returned_cache
+    torch.cuda.empty_cache()
+    gc.collect()
+
+    # Check for tool calls
+    tool_calls = parse_tool_calls(answer)
+    if not tool_calls or max_tool_rounds <= 0:
+        return answer  # No tools needed
+
+    # Execute tools
+    print(f"      [TOOL] {key}: {len(tool_calls)} call(s): {[(t,a[:30]) for t,a in tool_calls]}")
+    tool_results = execute_tool_calls(tool_calls, full_note, med_dict)
+
+    # Pass 2: re-extract with tool results
+    enhanced_prompt = (
+        f"{prompt}\n\n"
+        f"Additional information retrieved from the full medical note:\n"
+        f"--- BEGIN TOOL RESULTS ---\n{tool_results}\n--- END TOOL RESULTS ---\n\n"
+        f"Using BOTH the Assessment/Plan AND the tool results above, "
+        f"provide your answer. Do NOT use any more tools. Output ONLY the JSON."
+    )
+    enhanced_task = chat_tmpl.user_assistant(enhanced_prompt)
+    answer2, returned_cache2 = run_model_with_cache_manual(
+        enhanced_task, model, tokenizer, gen_config, kv_cache=clone_cache(cache)
+    )
+    del returned_cache2
+    torch.cuda.empty_cache()
+    gc.collect()
+
+    print(f"      [TOOL] {key}: re-extracted with tool results")
+    return answer2

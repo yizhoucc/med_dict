@@ -109,6 +109,9 @@ from ult import (
     find_relevant_definitions,
     format_definitions_context,
     run_model,
+    extract_with_tools,
+    parse_tool_calls,
+    execute_tool_calls,
     gc,
 )
 from source_attribution import attribute_row, get_attributable_fields
@@ -856,8 +859,24 @@ def main():
         if assessment_and_plan is not None:
             plan_start = time.time()
             base_cache = build_base_cache(model_ap, model, tokenizer, defs_context, chat_tmpl=chat_tmpl)
+            # V26: tool calling — append tool instructions to plan prompts
+            plan_tool_ctx = None
+            if config.get("extraction", {}).get("tool_calling", False):
+                plan_tool_ctx = {"full_note": note_text, "med_dict": med_dict}
+                tool_instructions = (
+                    "\n\nTOOLS (optional — use ONLY if the A/P section lacks information you need):\n"
+                    "- To find information elsewhere in the full note, write: SEARCH_NOTE(\"keyword\")\n"
+                    "  Example: SEARCH_NOTE(\"current medications\") or SEARCH_NOTE(\"bone scan\")\n"
+                    "- To look up a medical term, write: DEFINE(\"term\")\n"
+                    "  Example: DEFINE(\"TCHP\") or DEFINE(\"peritoneal carcinomatosis\")\n"
+                    "If you have enough information from the A/P, do NOT use tools — output the JSON directly.\n"
+                    "Write any tool calls BEFORE your JSON output, each on its own line."
+                )
+                # Use a copy so original prompts aren't modified for next sample
+                plan_extraction_prompts_with_tools = {k: v + tool_instructions for k, v in plan_extraction_prompts.items()}
+            plan_prompts_to_use = plan_extraction_prompts_with_tools if plan_tool_ctx else plan_extraction_prompts
             plan_keypoints = extract_fn(
-                plan_extraction_prompts,
+                plan_prompts_to_use,
                 model,
                 tokenizer,
                 keypoint_config,
@@ -867,6 +886,7 @@ def main():
                 oncology_whitelist=whitelist,
                 gate_config=gate_config,
                 supportive_whitelist=supp_whitelist,
+                tool_context=plan_tool_ctx,
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
