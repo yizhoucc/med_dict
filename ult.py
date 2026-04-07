@@ -1075,13 +1075,16 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         gate_log = []  # per-gate detailed log
 
         # --- Step 1: Extract (with optional tool calling) ---
+        used_tools = False
         if tool_context:
-            answer = extract_with_tools(
+            answer, used_tools = extract_with_tools(
                 task, key, model, tokenizer, gen_config, base_cache,
                 full_note=tool_context.get("full_note", ""),
                 med_dict=tool_context.get("med_dict"),
                 chat_tmpl=chat_tmpl,
             )
+            if used_tools:
+                flags.append("tool-enriched")
         else:
             task_prompt = chat_tmpl.user_assistant(task)
             cache_for_extract = clone_cache(base_cache)
@@ -1236,7 +1239,11 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     gate_log.append(f"      [G3-IMPROVE] parse FAILED")
 
         # --- Gate 4: FAITHFULNESS (trim mode) ---
-        if verify and parsed is not None:
+        # Skip G4 for tool-enriched fields: the info comes from full note via tool calling,
+        # not from the A/P cache context. G4 would incorrectly flag it as "unsupported". [v26]
+        if used_tools:
+            gate_log.append(f"      [G4-FAITH] skipped (tool-enriched — info from full note)")
+        elif verify and parsed is not None:
             original_keys = set(parsed.keys())
             before_values = {k: str(v)[:80] for k, v in parsed.items()}
             faith_prompt = chat_tmpl.user_assistant(
@@ -1507,7 +1514,7 @@ def extract_with_tools(prompt, key, model, tokenizer, gen_config, cache,
         max_tool_rounds: max tool call iterations (default 1)
 
     Returns:
-        raw answer string (may need JSON parsing)
+        tuple of (raw answer string, bool whether tools were used)
     """
     # Pass 1
     task_prompt = chat_tmpl.user_assistant(prompt)
@@ -1521,7 +1528,7 @@ def extract_with_tools(prompt, key, model, tokenizer, gen_config, cache,
     # Check for tool calls
     tool_calls = parse_tool_calls(answer)
     if not tool_calls or max_tool_rounds <= 0:
-        return answer  # No tools needed
+        return answer, False  # No tools needed
 
     # Execute tools
     print(f"      [TOOL] {key}: {len(tool_calls)} call(s): {[(t,a[:30]) for t,a in tool_calls]}")
@@ -1544,4 +1551,4 @@ def extract_with_tools(prompt, key, model, tokenizer, gen_config, cache,
     gc.collect()
 
     print(f"      [TOOL] {key}: re-extracted with tool results")
-    return answer2
+    return answer2, True
