@@ -56,6 +56,7 @@ patient_letter: |
   **What was discussed?**
   [Fill from: Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis, goals_of_treatment, response_assessment, findings]
   [Include cancer type, stage (use "early stage"/"locally advanced"/"advanced stage", never TNM), treatment goals, and how treatment is going if applicable.]
+  [STAGING: If Stage_of_Cancer says "Originally X, now Y" BUT Metastasis is "No" and response_assessment shows no recurrence, this is a STAGING UPDATE from the original diagnosis (clinical→pathologic), NOT disease progression. Do NOT write "the cancer is now more advanced" or "has progressed to a higher stage." Instead simply state the current stage without implying worsening. For example: "Your cancer is at an early stage" — not "was stage IIB but is now stage IIIA."]
   [METASTASIS: If cancer has spread to 3+ sites, say "has spread to other parts of your body" without listing every organ. Only name specific sites if there are 1-2 sites (e.g. "has spread to your bones").]
   [CRITICAL: If response_assessment mentions BOTH stable AND new/progressing areas, you MUST mention both. Do NOT only say "stable" when there are also new lesions.]
 

@@ -122,6 +122,10 @@ Lab_Plan: |
   Lab_Plan is ONLY for blood draws and lab work.
 
   DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
+  IMPORTANT: If the A/P mentions labs and imaging in the SAME sentence (e.g., "ordered MRI and bone scan as well as labs"),
+  you must SEPARATE them — only include the lab part (e.g., "labs to complete staging workup"), NOT the imaging part.
+  Never copy "MRI", "bone scan", "CT", "PET" into lab_plan even if they appear in the same sentence as labs.
+  If the note lists specific lab orders (CBC, CMP, tumor markers, etc.) elsewhere, name those tests.
   If no future blood tests or labs are planned, say "No labs planned."
   Respond *only* with a JSON object using this exact schema:
   {
