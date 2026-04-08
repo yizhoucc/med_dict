@@ -1153,7 +1153,11 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 gate_log.append(f"      [G2-SCHEMA] ok")
 
         # --- Gate 3: IMPROVE (specificity + semantic, merged) ---
-        if verify and parsed is not None:
+        # Skip G3 for tool-enriched fields: the info was retrieved from full note,
+        # G3's semantic check against A/P context would incorrectly "improve" it away. [v26]
+        if used_tools:
+            gate_log.append(f"      [G3-IMPROVE] skipped (tool-enriched — info from full note)")
+        elif verify and parsed is not None:
             # Skip G3 if all fields are empty/safe-negative (nothing to improve)
             all_empty_g3 = all(
                 not v or v == "" or (isinstance(v, str) and _is_safe_negative(v))
