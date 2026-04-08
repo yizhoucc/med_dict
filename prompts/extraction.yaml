@@ -247,6 +247,8 @@ Response_Assessment: |
   - GOOD: "no evidence of disease recurrence on imaging and exam"
   - GOOD: "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases"
   - GOOD: "Axillary LN decreased from 8cm to 2-3cm after 2 cycles AC"
+  - GOOD: "Disease progressed on neoadjuvant AC/T, proceeded to bilateral mastectomies. Surgical pathology showed residual 2.5cm tumor with 5/12 positive lymph nodes."
+  - GOOD: "Stopped neoadjuvant therapy due to progression. S/p mastectomy with residual disease."
   - BAD: "tolerating therapy well, symptoms improved" (generic boilerplate)
   - BAD: "She will continue on letrozole and have radiation" (this is a plan, not a response)
   - BAD: "0.9 cm grade 1 IDC, margins negative" (this is pathology, not treatment response)
