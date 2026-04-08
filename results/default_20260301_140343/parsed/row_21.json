@@ -1,0 +1,121 @@
+{
+  "coral_idx": 161,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "yes",
+      "in-person": "yes",
+      "summary": "Metastatic ER+ breast cancer, stage not specified, for a second opinion"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+      "Stage_of_Cancer": "Metastatic",
+      "Distant_Metastasis": "Yes, bones, chest wall, right infraclavicular and right IM nodes",
+      "Metastasis": "Yes"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Right chest wall recurrence, bone mets, contralateral infraclavicular and IM nodes on right. HR + and her 2 negative."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "anastrozole",
+        "denosumab",
+        "prednisone",
+        "sulfamethoxazole-trimethoprim"
+      ]
+    },
+    "Treatment_Changes": "{\n\"recent_changes\": \"Abemaciclib was held on 08/14/2021 due to pneumonitis, and the dose of ***** was reduced to 150 mg bid in October 2020.\",\n\"supportive_meds\": [\n\"Denosumab (XGEVA)\",\n\"Diphenoxylate-atropine (LOMOTIL)\",\n\"Prednisone (DELTASONE)\"\n]",
+    "Treatment_Goals": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "stable",
+      "current_meds": "anastrozole, aspirin, atenolol, b complex vitamins, calcium, cholecalciferol, denosumab, diphenoxylate-atropine, multivitamin, omega 3-dha-epa-fish oil, prednisone, sulfamethoxazole-trimethoprim"
+    },
+    "Response_Assessment": {
+      "response_assessment": "PET scan on 11/03/20 and 04/24/21 showed a good response",
+      "goals_of_treatment": "palliative",
+      "current_meds": "anastrozole, aspirin, atenolol, b complex vitamins, calcium, cholecalciferol, denosumab, diphenoxylate-atropine, multivitamin, omega 3-dha-epa-fish oil, prednisone, sulfamethoxazole-trimethoprim"
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "continue arimidex",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "radiotherapy": {
+        "summary": "XRT to L4 and T10",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "chemotherapy": {
+        "summary": "AC x 4",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bone therapy": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "abemaciclib",
+        "Short term side_effects_discussed": "pneumonitis",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Continue arimidex, consider faslodex with ***** if pet ct shows progression and she has a ***** mutation, plan to use hormone blockade with afinitor or xeloda or a clinical trial",
+      "goals_of_treatment": "Not yet on treatment — no response to assess.",
+      "current_meds": "arimidex",
+      "response_assessment": "Not yet on treatment — no response to assess."
+    },
+    "Therapy_plan": {
+      "therapy_plan": "Continue arimidex, will consider faslodex with a specific mutation, plan to include hormone blockade with afinitor or xeloda or a clinical trial",
+      "goals_of_treatment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Arimidex",
+      "response_assessment": "Not yet on treatment — no response to assess."
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "XRT to L4 and T10 in June 2020",
+      "goals_of_treatment": "Not yet on treatment — no goals of treatment specified",
+      "response_assessment": "Not yet on treatment — no response to assess",
+      "current_meds": "Arimidex"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "PET CT",
+      "goals_of_treatment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Arimidex",
+      "response_assessment": "Not yet on treatment — no response to assess."
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "PET CT"
+    },
+    "Lab_Plan": {
+      "lab_plan": "PET CT now, and if stable, continue arimidex alone. If PET CT shows progression, faslodex with unknown medication if she has a unknown mutation, or hormone blockade with afinitor or xeloda or a clinical trial.",
+      "goals_of_treatment": "Not yet specified",
+      "current_meds": "Arimidex",
+      "response_assessment": "Not yet assessed"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation."
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "None",
+      "Specialty": "Medical Oncology/Hematology",
+      "Others": "None",
+      "follow up": "PET CT"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "pet ct",
+      "goals_of_treatment": "Not yet on treatment — no goals to assess.",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "arimidex"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

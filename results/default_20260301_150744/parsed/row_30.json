@@ -1,0 +1,131 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "yes",
+    "summary": "early stage breast cancer, specifically IDC, to discuss treatment options and establish care"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage II-III",
+    "Distant_Metastasis": "No",
+    "Metastasis": "Yes (to axillary lymph nodes and subcutaneous fat of the right chest wall)"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast mass (6 x 11 cm) in outer quadrants; multiple enlarged lymph nodes in axillary tail region with effacement of fatty tissue; PET/CT: large enhancing right breast mass (9.0 x 3.8 cm, SUV 7.8); right axillary lymph nodes (0.6 cm and 0.7 cm with SUV max 1.8); enhancing subcutaneous lymph node (0.7 cm, SUV 2.9); no evidence of metastatic disease; diffuse fine-linear and fine pleomorphic calcifications throughout right breast with associated global asymmetry; periareolar skin thickening; right axillary LAD; ultrasound-guided core biopsy of right upper outer breast: 0.35 cm grade 2 IDC, ER- (0%), PR- (0%), *****+ (IHC 3; FISH ratio 8.9), ***** ~30%; intermediate to high nuclear grade DCIS; no *****"
+  },
+  "Current_Medications": {
+    "current_meds": "No medications"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "None",
+    "supportive_meds": "None"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "None"
+  },
+  "Response_Assessment": {
+    "response_assessment": "The cancer is not currently responding, as the patient has not yet started treatment."
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab (THP) followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks or 6 cycles of every 3 week docetaxel, carboplatin, trastuzumab, and pertuzumab (TCHP)",
+      "Short term side_effects_discussed": "fatigue, nausea, myelosuppression, nail changes, alopecia, diarrhea, and constipation",
+      "Long term side_effects_discussed": "secondary leukemia and cardiomyopathy"
+    },
+    "hormonal therapy": {
+      "summary": "trastuzumab and pertuzumab",
+      "Short term side_effects_discussed": "diarrhea and rash",
+      "Long term side_effects_discussed": "reduced left ventricular ejection fraction, which can result in asymptomatic or symptomatic heart failure with dyspnea and chest pain"
+    },
+    "radiotherapy": {
+      "summary": "will be done after neoadjuvant treatment",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bowel regimen": {
+      "summary": "",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "pain medication": {
+      "summary": "",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "psychiatry medication": {
+      "summary": "",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "other treatment": {
+      "summary": "TTE, Mediport placement, chemotherapy teaching session",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year",
+    "goals_of_treatment": "curative",
+    "current_meds": "Not yet on treatment \u2014 no current medications",
+    "response_assessment": "no evidence of metastases"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "will receive 12 cycles of weekly paclitaxel plus trastuzumab and pertuzumab, followed by 4 cycles of doxorubicin plus cyclophosphamide every 2 weeks or 6 cycles of docetaxel, carboplatin, trastuzumab, and pertuzumab every 3 weeks, followed by every 3 week trastuzumab for a total of one year of biological therapy",
+    "goals_of_treatment": "curative",
+    "response_assessment": "no evidence of metastases",
+    "current_meds": "Not yet on treatment \u2014 no meds listed"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "surgery, and radiation"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Chemotherapy, TTE, Mediport placement, and surgery, will start within 2 to 3 weeks",
+    "goals_of_treatment": "curative",
+    "response_assessment": "no evidence of metastases",
+    "current_meds": "Not yet on treatment \u2014 no meds listed"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT",
+    "goals_of_treatment": "curative",
+    "current_meds": "Not yet on treatment \u2014 no meds to report",
+    "response_assessment": "No evidence of metastases",
+    "estrogen_receptor_status": "Not mentioned",
+    "progesterone_receptor_status": "Not mentioned",
+    "surgery_type": "lumpectomy",
+    "adjuvant_therapy": "adjuvant chemotherapy",
+    "cancer_type": "IDC",
+    "cancer_stage": "II-III",
+    "cancer_grade": "Not mentioned",
+    "cancer_type_other": "Not mentioned",
+    "cancer_stage_other": "Not mentioned",
+    "cancer_grade_other": "Not mentioned",
+    "cancer_type_other_other": "Not mentioned",
+    "cancer_stage_other_other": "Not mentioned",
+    "cancer_grade_other_other": "Not mentioned"
+  },
+  "Lab_Plan": {
+    "lab_plan": "TTE, Mediport placement, chemotherapy teaching session"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Medical Oncology",
+    "Others": "Chemotherapy teaching session, Mediport placement",
+    "follow up": "after the weekend"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "2 to 3 weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

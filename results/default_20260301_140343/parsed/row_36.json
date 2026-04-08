@@ -1,0 +1,123 @@
+{
+  "coral_idx": 176,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "New patient",
+      "second opinion": "No",
+      "in-person": "Video Visit",
+      "summary": "New patient evaluation for stage IIA left triple negative invasive ductal carcinoma of the breast, 2.3 cm tumor, node negative, with the purpose of discussing adjuvant chemotherapy"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "Infiltrating ductal carcinoma of upper-outer quadrant of left breast in female (CMS code), ER-, PR-, HER2-",
+      "Stage_of_Cancer": "Stage IIA",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "2.3 cm, node negative, grade 3"
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "dexlansoprazole (DEXILANT) 60 mg"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes",
+      "supportive_meds": "dexlansoprazole (DEXILANT), prednisone"
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "dexlansoprazole (DEXILANT) 60 mg"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "dexlansoprazole (DEXILANT) 60 mg, Take 60 mg by mouth Daily."
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "adjuvant chemotherapy, dd AC followed by Taxol",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "hormonal therapy": {
+        "summary": "no indication",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "radiotherapy": {
+        "summary": "no indication",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "bowel regimen": {
+        "summary": "discussed",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "pain medication": {
+        "summary": "not mentioned",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "psychiatry medication": {
+        "summary": "not mentioned",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "other treatment": {
+        "summary": "lifestyle modifications to decrease the risk of systemic recurrence (anti-inflammatory/mediterranean diet, exercise, stress reduction, sleep management)",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "dd AC followed by Taxol",
+      "goals_of_treatment": "risk reduction",
+      "current_meds": "Not yet on treatment — no response to assess.",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "adjuvant_therapy": "adjuvant chemotherapy"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "adjuvant chemotherapy with dd AC followed by Taxol"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "There is no indication for radiation therapy."
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "adjuvant chemotherapy",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not yet on treatment — no medications listed."
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet on treatment — no response to assess."
+    },
+    "Referral": {
+      "Nutrition": "anti inflammatory /mediterranean diet",
+      "Genetics": "None",
+      "Specialty": "Medical Oncology/Hematology",
+      "Others": "None",
+      "follow up": "She will proceed with chemotherapy at *****"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "She will proceed with chemotherapy at *****",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not mentioned"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

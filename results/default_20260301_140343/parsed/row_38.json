@@ -1,0 +1,113 @@
+{
+  "coral_idx": 178,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "New patient",
+      "second opinion": "yes",
+      "in-person": "in-person",
+      "summary": "Newly diagnosed breast cancer, left breast, stage II, triple negative, to discuss treatment options"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "Triple negative invasive ductal carcinoma",
+      "Stage_of_Cancer": "Stage II",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Core biopsy: grade 3 IDC, ER/PR/HER2 negative, 3.6 x 2.8 x 2.0 cm hypoechoic mass in the left breast at the 1:00 position, 4-5 cm from the nipple, 1 cm firm node in the left axilla, axilla US: indeterminate lymph node with prominent vessel measuring up to 5 mm, CT CAP negative, MRI brain: negative, bone scan: negative"
+    },
+    "Current_Medications": {
+      "current_meds": "cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FLONASE) 50 mcg/actuation nasal spray"
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes",
+      "supportive_meds": "fluticasone (FLONASE) 50 mcg/actuation nasal spray, cholecalciferol, vitamin D3, 2,000 unit TAB"
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "cancer_stage": "II",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "cholecalciferol, vitamin D3, 2,000 unit TAB, fluticasone (FLONASE) 50 mcg/actuation nasal spray"
+    },
+    "Response_Assessment": {
+      "response_assessment": "The cancer is T2N1 by imaging and exam as well as by confirmatory biopsy."
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "Weekly paclitaxel x 12 weeks, either with a taxane agent or replaced by a anthracycline agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery",
+        "Short term side_effects_discussed": "alopecia, nausea, emesis, neuropathy, rash, allergic reactions, constipation, diarrhea, fatigue",
+        "Long term side_effects_discussed": "low blood counts with possible increased risk of infections"
+      },
+      "hormonal therapy": {
+        "summary": "Goserelin monthly during chemotherapy",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "radiotherapy": {
+        "summary": "MRI scans are obtained throughout treatment as well as one additional biopsy",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bowel regimen": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "pain medication": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "psychiatry medication": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "Echocardiogram, Port placement, Laboratory studies for ISPY, MRI of the breasts with additional evaluations as necessary",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Weekly paclitaxel x 12 weeks, followed by AC x 4 cycles, then surgery, with goserelin monthly during chemotherapy"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "weekly paclitaxel x 12 weeks, either with a platinum agent or replaced by a taxane agent, or with paclitaxel alone, followed by AC x 4 cycles, then surgery",
+      "goserelin_use": "monthly",
+      "imaging_schedule": "MRI scans throughout treatment as well as one additional biopsy",
+      "trial_participation": "to one of the existing arms of the study"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "Port placement, surgery"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "MRI of the breasts with additional evaluations as necessary"
+    },
+    "Lab_Plan": {
+      "lab_plan": "Laboratory studies for ISPY"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "on genetic testing results"
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "genetic testing results",
+      "Specialty": "None",
+      "Others": "Physical or occupational therapy, Social work, financial counseling, home health",
+      "follow up": "MRI of the breasts with additional evaluations as necessary, Echocardiogram, Port placement, Laboratory studies for ISPY"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "within two weeks"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

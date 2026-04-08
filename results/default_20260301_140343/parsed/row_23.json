@@ -1,0 +1,162 @@
+{
+  "coral_idx": 163,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "The patient is a 56 y.o. female with history ADH, now with right breast Grade II micropapillary mucinous carcinoma, ER+ (>95%), PR+ (80%), HER2 equiv by IHC (2) neg by FISH, 5%. She is s/p partial mastectomy with excision and axillary dissection and is here to discuss systemic therapy options."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "Grade II micropapillary mucinous carcinoma, ER+/PR+/HER2-",
+      "Stage_of_Cancer": "Not specified",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Right breast: 6.4cm irregularly shaped masses with obscured margins and associated fine pleomorphic calcifications. New right axillary LN with irregular morphology. Ultrasound showed multiple solid hypoechoic irregular vascular masses, together measuring 50 x 21 x 55mm extending from 9:00 3cm from nipple to 9:00 7cm from nipple. Abnormal right axillary LN at 11:00, 15cm from nipple with focal cortical thickening up to 6mm. Liver: hypervascular mass in segment 8 measuring 1.9 cm with a hemangioma demonstrating discontinuous nodular enhancement with gradual fill in, several scattered subcentimeter hypervascular foci throughout the liver, could be due to flash filling. Additionally, there is a hypervascular mass in segment 6 measuring 3.5 cm which is mildly hypervascular demonstrating more homogeneous enhancement. This most likely represents a focal nodular hyperplasia. No definite sites of hypermetabolic metastatic disease."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "acetaminophen (TYLENOL) 500 mg tablet",
+        "acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet",
+        "calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet",
+        "cetirizine (ZYRTEC) 10 mg tablet",
+        "cholecalciferol, vitamin D3, 1,000 unit CAP",
+        "cyclobenzaprine (FLEXERIL) 5 mg tablet",
+        "diclofenac (VOLTAREN) 1 % GEL gel",
+        "docusate sodium (COLACE) 100 mg capsule",
+        "DULoxetine (CYMBALTA) 60 mg DR *****",
+        "gabapentin (NEURONTIN) 400 mg capsule",
+        "ibuprofen (ADVIL,MOTRIN) 600 mg tablet",
+        "losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet",
+        "meloxicam (MOBIC) 15 mg tablet",
+        "naloxone 4 mg/actuation SPRAYNAERO",
+        "nicotine (NICODERM CQ) 21 mg/24 hr patch",
+        "omeprazole (PRILOSEC) 20 mg capsule",
+        "oxyCODONE (ROXICODONE) 5 mg tablet",
+        "senna (SENOKOT) 8.6 mg tablet"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "None",
+      "supportive_meds": [
+        "acetaminophen-codeine (TYLENOL #4)",
+        "diclofenac (VOLTAREN) 1 % GEL",
+        "oxyCODONE (ROXICODONE) 5 mg tablet"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "acetaminophen (TYLENOL) 500 mg tablet, acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet, calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet, cetirizine (ZYRTEC) 10 mg tablet, cholecalciferol, vitamin D3, 1,000 unit CAP, cyclobenzaprine (FLEXERIL) 5 mg tablet, diclofenac (VOLTAREN) 1 % GEL gel, docusate sodium (COLACE) 100 mg capsule, DULoxetine (CYMBALTA) 60 mg DR *****, gabapentin (NEURONTIN) 400 mg capsule, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet, meloxicam (MOBIC) 15 mg tablet, naloxone 4 mg/actuation SPRAYNAERO, nicotine (NICODERM CQ) 21 mg/24 hr patch, omeprazole (PRILOSEC) 20 mg capsule, oxyCODONE (ROXICODONE) 5 mg tablet, senna (SENOKOT) 8.6 mg tablet"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "The cancer is currently not assessable due to lack of treatment.",
+      "current_meds": [
+        "acetaminophen (TYLENOL) 500 mg tablet",
+        "acetaminophen-codeine (TYLENOL #4) 300-60 mg tablet",
+        "calcium carbonate (*****-CAL-500) 1250 mg (500 mg elemental) tablet",
+        "cetirizine (ZYRTEC) 10 mg tablet",
+        "cholecalciferol, vitamin D3, 1,000 unit CAP",
+        "cyclobenzaprine (FLEXERIL) 5 mg tablet",
+        "diclofenac (VOLTAREN) 1 % GEL gel",
+        "docusate sodium (COLACE) 100 mg capsule",
+        "DULoxetine (CYMBALTA) 60 mg DR *****",
+        "gabapentin (NEURONTIN) 400 mg capsule",
+        "ibuprofen (ADVIL,MOTRIN) 600 mg tablet",
+        "losartan-hydrochlorothiazide (HYZAAR) 50-12.5 mg tablet",
+        "meloxicam (MOBIC) 15 mg tablet",
+        "naloxone 4 mg/actuation SPRAYNAERO",
+        "nicotine (NICODERM CQ) 21 mg/24 hr patch",
+        "omeprazole (PRILOSEC) 20 mg capsule",
+        "oxyCODONE (ROXICODONE) 5 mg tablet",
+        "senna (SENOKOT) 8.6 mg tablet"
+      ]
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "will get a test to evaluate benefit, if any",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "hormonal therapy": {
+        "summary": "will start",
+        "Short term side_effects_discussed": "hot flashes, joint aches, muscle aches, hair thinning, dryness, carpal tunnel syndrome",
+        "Long term side_effects_discussed": "bone loss and increased risk of fractures"
+      },
+      "radiotherapy": {
+        "summary": "plan to start after",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "surgical specimen for MP",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "adjuvant hormone therapy",
+      "adjuvant chemotherapy": "will get a test to evaluate her benefit, if any",
+      "surgical specimen": "will send her sugical specimen for MP",
+      "radiation": "will proceed with radiation",
+      "physical therapy": "recommended she see PT and placed a referral"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "will be ordered to evaluate her benefit of chemotherapy. If low risk, she will proceed with radiation and start adjuvant hormone therapy.",
+      "patient_concerns_discussed": "The patient verbalizes understanding of these issues and agrees with the plan.",
+      "treatment_options_reviewed": "treatment options, treatment side effects in detail.",
+      "medical_history_reviewed": "the patient's medical information and medical history.",
+      "medications_and_allergies_reviewed": "the past medical, family, and social history sections including the medications and allergies listed in the above medical record.",
+      "total_face_to_face_time": "60",
+      "total_counseling_time": "50",
+      "scribe_info": "acting as a scribe for services provided by  on  *****:***** PM",
+      "scribe_annotation": "The above scribed documentation as annotated by me accurately reflects the services I have provided."
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "radiation"
+    },
+    "Procedure_Plan": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not specified",
+      "procedure_plan": "will send her surgical specimen for MP, will order a test, will reassess when results return, will see Dr. ***** in radiation oncology"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "MP",
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not specified"
+    },
+    "Lab_Plan": {
+      "lab_plan": "MP",
+      "goals_of_treatment": "adjuvant chemotherapy",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not specified"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "I will order a FISH test today and reassess when her results return.",
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not specified"
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "None",
+      "Specialty": "Radiation oncology",
+      "Others": "Physical therapy",
+      "follow up": "12/07/18"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "12/07/18, to see Dr. ***** in radiation oncology"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

@@ -1,0 +1,62 @@
+V19 Pipeline Batch 2 (ROW 14-37) 审查执行摘要
+==============================================
+日期: 2026-03-20
+审查范围: ROW 14, 17, 18, 20, 22, 27, 29, 30, 33, 34, 36, 37 (Batch 2)
+详细报告: results/v19_batch2_review.md
+
+## 关键发现
+
+### ✅ 成功修复 (相比 v18)
+1. **ROW 37 (coral 176)** - POST-MEDS-IV-CHECK 误报已修复
+   - v18: current_meds 误提取 "ac, taxol" (实为计划用药)
+   - v19: current_meds="" (正确,患者尚未开始治疗)
+   - 修复方法: POST-MEDS-IV-CHECK hook 正确识别未来时态
+
+### ❌ P0 问题 (Critical - 需要立即修复)
+1. **ROW 14 (coral 153)** - current_meds 包含非临床管理药物
+   - 提取值: "Pamidronate, Gemcitabine, Docetaxel, Doxorubicin"
+   - 问题: 这些是患者在墨西哥自我管理的药物,医生明确说"discontinue our medications"
+   - 根本原因: LLM 未能区分临床处方监测用药 vs 自我管理用药
+   - 建议: 在 Current_Medications prompt 中加入"仅包含临床处方并监测的用药,不包括患者自行购买/海外治疗的药物"
+
+### ⚠️ P1 问题 (Important)
+1. **ROW 14 (coral 153)** - findings 字段答非所问
+   - 写成治疗描述 "Patient is currently on low dose chemo..." 而非体格检查发现
+   - 应该写 "Palpable R axillary node 1 cm, R breast density at 12:30"
+
+2. **ROW 14 (coral 153)** - HER2 状态不准确
+   - 提取值: "HER2: status unclear"
+   - 原文明确: "FISH negative"
+   - 应为: "HER2-"
+
+3. **ROW 18 (coral 157)** - genetic_testing_plan 遗漏转诊
+   - 提取值: "None planned."
+   - 原文: "discussed with UCSF Cancer Risk. They will reach out to pt today"
+   - 应为: "refer to genetics (UCSF Cancer Risk)"
+
+### ✅ POST Hook 正确触发
+- ROW 14, 17: POST-STAGE-PLACEHOLDER 正确将 [X] 替换为 "Not available (redacted)"
+- ROW 37: POST-MEDS-IV-CHECK 正确避免提取未来时态的化疗药物
+
+## 质量评估
+- **详细审查的 5 行** (ROW 14, 17, 18, 36, 37):
+  - 好: 4 行 (80%)
+  - 一般: 1 行 (20%, ROW 14 有多个问题)
+- **未详细审查的 7 行** (token 限制): ROW 20, 22, 27, 29, 30, 33, 34
+
+## 下一步行动
+1. **立即**: 修复 ROW 14 的 current_meds 问题 (P0)
+   - 在 prompts/extraction.yaml > Current_Medications 中加入明确指导
+   - "仅包含临床处方并监测的用药,排除海外治疗/自我管理的药物"
+
+2. **短期**: 优化 findings 和 genetic_testing_plan 提取质量 (P1)
+   - findings: 强调"体格检查发现,非治疗描述"
+   - genetic_testing_plan: 加强对"discussed with"/"refer to"的识别
+
+3. **验证**: 对未详细审查的 7 行做抽查,确保无系统性问题
+
+## 与 v18 对比
+- ✅ 修复了 POST-MEDS-IV-CHECK FP (ROW 37)
+- ✅ POST-STAGE-PLACEHOLDER 稳定工作
+- ❌ 新增 current_meds 边界情况问题 (ROW 14)
+- 整体质量: 与 v18 相当,特定场景有改进

@@ -1,0 +1,23 @@
+Loading model...
+Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.41s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.44s/it]
+
+Generating letters for 5 rows...
+
+Row 1 (1/5)...
+  [LETTER] 16 sentences, 14 attributed (24.5s)
+
+Row 10 (2/5)...
+  [LETTER] 13 sentences, 11 attributed (18.0s)
+
+Row 28 (3/5)...
+  [LETTER] 13 sentences, 11 attributed (22.5s)
+
+Row 39 (4/5)...
+  [LETTER] 12 sentences, 10 attributed (16.0s)
+
+Row 53 (5/5)...
+  [LETTER] 16 sentences, 14 attributed (21.9s)
+
+Letter generation complete: 5 rows in 103.0s (1.7min)
+Results in: results/letter_full_qwen_20260327_102856/

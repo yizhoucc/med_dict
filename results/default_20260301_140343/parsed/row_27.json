@@ -1,0 +1,136 @@
+{
+  "coral_idx": 167,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "New patient",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "Initial visit for newly diagnosed early stage breast cancer, specifically a clinical stage I HR+/HER2- grade 1 IDC of the right breast, to discuss treatment options and establish care."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+/HER2- grade 1 IDC",
+      "Stage_of_Cancer": "Stage I",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "Hemoglobin 15.3, Hematocrit 48.8, Platelet Count 217, Sodium 145, Potassium 4.0, Chloride 109, Carbon Dioxide 26, Urea Nitrogen 15, Creatinine 1.02, Glucose 72, Calcium 10.0, AST 37, Alanine transaminase 49, Alkaline Phosphatase 67, Bilirubin 0.7, Albumin 3.9"
+    },
+    "Clinical_Findings": {
+      "findings": "MRI-guided core biopsy: 0.8 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no lymphovascular invasion, no DCIS. Right lumpectomy: 0.9 cm grade 1 IDC, no lymphovascular invasion, margins negative, no DCIS, 0/3 LN+"
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "pregabalin",
+        "lurasidone",
+        "rosuvastatin",
+        "calcium citrate-vitamin D",
+        "diclofenac",
+        "docusate sodium",
+        "DULoxetine",
+        "ELDERBERRY",
+        "fluticasone propionate",
+        "gabapentin",
+        "lamoTRIgine",
+        "LORazepam",
+        "losartan",
+        "omeprazole",
+        "prazosin",
+        "pregabalin",
+        "rosuvastatin",
+        "TURMERIC",
+        "zinc gluconate"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes",
+      "supportive_meds": [
+        "pregabalin",
+        "calcium",
+        "vitamin D"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "acetaminophen, amLODIPine, artificial tears, ascorbic acid, baclofen, BARIATRIC MULTIVITAMINS, biotin, busPIRone, calcium citrate-vitamin D, diclofenac, docusate sodium, DULoxetine, ELDERBERRY, fluticasone propionate, gabapentin, lamoTRIgine, LORazepam, losartan, lurasidone, omeprazole, prazosin, pregabalin, rosuvastatin, TURMERIC, UNABLE TO FIND, zinc gluconate"
+    },
+    "Response_Assessment": {
+      "response_assessment": "The patient has a 0.9 cm grade 1 IDC with ER+ 99%, PR+ 95%, HER2- (IHC 0; FISH ratio 1.1), HER3- 3-4%, no HER4, no DCIS. The patient has undergone a lumpectomy with negative margins, and no lymph nodes are involved. The patient's current cancer status is stable based on the pathology report and imaging studies."
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "5 years of anti-estrogen therapy with an aromatase inhibitor",
+        "Short term side_effects_discussed": "hot flashes, arthralgias, vaginal dryness",
+        "Long term side_effects_discussed": "bone density loss"
+      },
+      "radiotherapy": {
+        "summary": "will proceed with radiation",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bone therapy": {
+        "summary": "calcium and vitamin D to improve bone health",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bowel regimen": {
+        "summary": "calcium and vitamin D",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "pain medication": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "psychiatry medication": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "DEXA to assess bone health",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "an aromatase inhibitor, calcium, and vitamin D",
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not yet on treatment — no current medications listed"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "5 years of anti-estrogen therapy with an aromatase inhibitor, proceed with radiation oncology consultation, obtain DEXA, calcium/vitamin D, aim to resume daily aerobic activities"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "proceed with radiation"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "proceed with radiation oncology consultation; she will have radiation"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "DEXA"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet on treatment — no response to assess."
+    },
+    "Referral": {
+      "Nutrition": "calcium and vitamin D",
+      "Genetics": "None",
+      "Specialty": "Radiation oncology",
+      "Others": "DEXA, Physical activity (exercise)",
+      "follow up": "after radiation course is completed"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "RTC after radiation course is completed"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

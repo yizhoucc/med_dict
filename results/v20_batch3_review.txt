@@ -1,0 +1,189 @@
+V20 BATCH 3 REVIEW REPORT
+Rows: 43, 45, 48, 49, 51, 52, 53, 56, 58, 60, 62, 63, 64, 65, 67, 69, 71, 72
+(ROW 44-73 in results file)
+
+=============================================================================
+
+ROW 44 (row_idx 43, coral_183): Stage I TNBC, post-mastectomy, adjuvant planning
+- current_meds: "" — OK (no active treatment yet)
+- Type: ER-/PR-/HER2- — OK (TNBC)
+- Stage: "Not mentioned in note" — P2 (could infer Stage I from A/P)
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: granisetron, prochlorperazine, senna — OK
+
+ROW 46 (row_idx 45, coral_185): ER+/PR-/HER2- IDC, post-neoadj, on letrozole
+- current_meds: letrozole — OK
+- Type: ER+/PR-/HER2- — OK
+- Stage: pT2N2 with extranodal extension — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 49 (row_idx 48, coral_188): ER+/PR+/HER2- IDC Stage II
+- current_meds: "" — OK (post-chemo, pre-radiation)
+- Type: ER+/PR+/HER2- — OK
+- Stage: Stage II — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 50 (row_idx 49, coral_189): HR+/HER2- Stage IV with distant mets
+- current_meds: ibrance, xgeva, letrozole — OK
+- Type: HR+ and HER2 negative IDC — OK
+- Stage: Originally Stage IV (T2, N1, M1) — OK
+- Distant Met: Yes (lung, lymph nodes, liver, bone) — OK
+- goals: palliative — OK
+- supportive_meds: DENOSUMAB (XGEVA SUBCUT) — OK
+
+ROW 52 (row_idx 51, coral_191): ER+/PR+/HER2- IDC, post-chemo
+- current_meds: "" — OK
+- Type: ER+/PR+/HER2- — OK
+- Stage: "Not mentioned in note" — P2 (could infer from context)
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: ondansetron — OK
+
+ROW 53 (row_idx 52, coral_192): ER+/PR+/HER2+ IDC Stage II/III
+- current_meds: "" — OK (post-neoadj chemo, planning radiation)
+- Type: ER+/PR+/HER2+ IDC with neuroendocrine differentiation — OK
+- Stage: Stage II/III — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 54 (row_idx 53, coral_193): ER+/PR-/HER2- with bone mets
+- current_meds: leuprolide, letrozole, zoledronic acid — OK
+- Type: ER+/PR-/HER2- IDC — OK
+- Stage: "Not available (redacted)" — OK (info redacted in note)
+- Distant Met: Yes (bone: left posterior 7th rib, left pedicle of T6) — OK
+- goals: palliative — OK
+- supportive_meds: oxyCODONE, zoledronic acid — OK
+
+ROW 57 (row_idx 56, coral_196): TNBC locally advanced, 2nd opinion
+- current_meds: "" — ✅ OK (completed TCH+P and AC, no active chemo)
+- Type: ER-/PR-/HER2- triple negative — ✅ OK
+- Stage: Locally advanced — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — ✅ OK (allergy filter worked, no docetaxel FP)
+**STATUS: All 3 known issues FIXED**
+
+ROW 59 (row_idx 58, coral_198): ER+/PR+/HER2- Stage I, switching AIs
+- current_meds: "exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet" — ❌ P1
+  ISSUE: Has BOTH drugs. A/P says "stop Tamoxifen and switch to letrozole... 
+  advised to switch to Exemestane... I again recommended discontinuing Letrozole 
+  and waiting 2-3 weeks before starting Exemestane"
+  → At this visit, patient is told to STOP letrozole, hasn't started exemestane yet
+  → Should be: ""
+- Type: ER+/PR+/HER2- — OK
+- Stage: Stage I — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+**STATUS: P1 NOT FIXED (known issue persists)**
+
+ROW 61 (row_idx 60, coral_200): ER+/PR+/HER2-(1+) IDC
+- current_meds: "" — OK (post-surgery, pre-treatment planning)
+- Type: ER+/PR+/HER2-(1+) IDC — OK
+- Stage: "Not mentioned in note" — P2
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 63 (row_idx 62, coral_202): ER+/PR+/HER2- Stage IIIA post-neoadj
+- current_meds: letrozole — OK
+- Type: ER+/PR+/HER2- intermediate grade IDC — OK
+- Stage: Stage IIIA (S/P neoadjuvant chemotherapy) — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: ondansetron — OK
+
+ROW 64 (row_idx 63, coral_203): ER+/PR+/HER2- metastatic to sternum
+- current_meds: "" — OK (on treatment visit, AC chemo administered)
+- Type: ER+/PR+/HER2- IDC — OK
+- Stage: Originally Stage III-IV, now metastatic (Stage IV) — OK
+- Distant Met: Yes (sternum) — OK
+- goals: palliative — OK
+- supportive_meds: dexAMETHasone, docusate, OLANZapine, ondansetron, prochlorperazine — OK
+
+ROW 65 (row_idx 64, coral_204): ER 2%/PR 7%/HER2- locally advanced
+- current_meds: "" — OK (pre-treatment consult)
+- Type: ER weak positive (2%), PR low positive (7%), HER2 neg — OK
+- Stage: "Locally advanced with axillary LN involvement, no evidence of distant metastatic disease" — OK
+- Distant Met: No — OK (PET/CT: no metastatic disease)
+- goals: curative — OK (locally advanced, not distant mets)
+- supportive_meds: "" — OK
+
+ROW 66 (row_idx 65, coral_205): ER 5-10%/PR 0%/HER2 0% metaplastic carcinoma
+- current_meds: "" — OK
+- Type: ER 5-10%, PR 0%, HER2 0% metaplastic carcinoma with squamous differentiation — OK
+- Stage: "Not mentioned in note" — P2
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 68 (row_idx 67, coral_207): ER+/PR+ HER2+ early stage
+- current_meds: "" — OK
+- Type: multifocal ER+/PR+ BREAST CANCER, HER2+ — OK
+- Stage: Early stage — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 70 (row_idx 69, coral_209): Bilateral breast cancer
+- current_meds: letrozole — OK
+- Type: ER+/PR+/HER2- ILC (left), ER+/PR-/HER2-equivocal IDC with DCIS (right) — OK
+- Stage: Left pT4bN1M0, Right pT1cN0M0 — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+ROW 72 (row_idx 71, coral_211): ER+/PR-/HER2- IDC post-mastectomy
+- current_meds: "letrozole" — ✅ OK (eye drops filtered out)
+  Note mentions: latanoprost (XALATAN) 0.005% ophthalmic solution
+  → Correctly NOT included in current_meds
+- Type: ER+/PR-/HER2- IDC with focal neuroendocrine differentiation — OK
+- Stage: pT1cN0(sn) — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: zoledronic acid/mannitol-water (RECLAST IV) — OK
+**STATUS: Eye drop filter working correctly**
+
+ROW 73 (row_idx 72, coral_212): ER+/PR+ IDC Stage III
+- current_meds: arimidex — OK
+- Type: ER+/PR+ invasive ductal carcinoma, HER2: not tested — P2 (missing HER2)
+- Stage: Stage III — OK
+- Distant Met: No — OK
+- goals: curative — OK
+- supportive_meds: "" — OK
+
+=============================================================================
+SUMMARY
+=============================================================================
+
+Total rows reviewed: 18
+
+✅ FIXED ISSUES (verified):
+- Row 57 (56): docetaxel FP fixed, TNBC type correct, allergy filter working
+
+❌ P1 ISSUES FOUND:
+1. Row 59 (58): current_meds has BOTH exemestane AND letrozole
+   - Timeline: March 2018 stopped tamoxifen → started letrozole
+   - June 2018 stopped letrozole → advised to start exemestane (not started yet)
+   - Current visit (June 2018): MD says "discontinue Letrozole and wait 2-3 weeks 
+     before starting Exemestane"
+   - Expected: current_meds = "" (neither drug active at this visit)
+   - Actual: current_meds = "exemestane ([REDACTED]), letrozole (FEMARA) 2.5 mg tablet"
+
+⚠️ P2 ISSUES (minor):
+- Row 44, 52, 61, 66: Stage "Not mentioned in note" (could be inferred from context)
+- Row 73: Type missing HER2 status (note says "HER2: not tested")
+
+🟢 VERIFIED WORKING:
+- Row 72: POST-MEDS-FILTER correctly excluded latanoprost (eye drops)
+- Row 50, 54, 64: Metastatic cases have correct palliative goals
+- Row 44-73: Type_of_Cancer mostly complete with ER/PR/HER2 status
+- Row 44-73: goals_of_treatment matches stage appropriately
+
+=============================================================================

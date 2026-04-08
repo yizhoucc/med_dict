@@ -1,0 +1,101 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "Stage III left breast cancer, local recurrence, to discuss treatment plan"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR- IDC",
+    "Stage_of_Cancer": "Stage III",
+    "Distant_Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "August 2018 - labs/markers - unremarkable, February 2018 - DXA = -2.0 / -1.0 / -1.8 (decreased c/w 2015)"
+  },
+  "Clinical_Findings": {
+    "findings": "Invasive ductal carcinoma 1.7cm, grade 3, extensive necrosis, margins negative; hypermetabolic tumor at lateral margin of left breast implant on PET-CT; 2 cm mass in left reconstructed breast on breast MRI; no palpable masses, no skin changes, no lymphadenopathy"
+  },
+  "Current_Medications": {
+    "current_meds": "arimidex"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "None",
+    "supportive_meds": "Arimidex, Tamoxifen"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "arimidex"
+  },
+  "Response_Assessment": {
+    "response_assessment": "No evidence of response to current treatment, but disease may be sensitive to hormonal therapy",
+    "goals_of_treatment": "Not specified",
+    "current_meds": "arimidex (August 2012) and ***** *****"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Tamoxifen 20mg PO qD",
+      "Short term side_effects_discussed": "thromboembolic phenomenon including DVT and PE",
+      "Long term side_effects_discussed": "endometrial cancers"
+    },
+    "radiotherapy": {
+      "summary": "Chest wall RT",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "other treatment": {
+      "summary": "labs",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "chemotherapy": {
+      "summary": "Not recommended",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Tamoxifen 20mg PO qD",
+    "referral": "refer to  for consultation",
+    "return_to_clinic": "return to clinic in 6 months"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Tamoxifen 20mg PO qD, referral to  for consultation, chest wall RT, return to clinic in 6 months",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "anastrozole"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Chest wall RT"
+  },
+  "Procedure_Plan": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "anastrozole",
+    "procedure_plan": "chest wall RT"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "chest wall RT"
+  },
+  "Lab_Plan": {
+    "lab_plan": "check labs"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology",
+    "Others": "Physical or occupational therapy, Social work, financial counseling, home health",
+    "follow up": "6 months"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "return to clinic in 6 months"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

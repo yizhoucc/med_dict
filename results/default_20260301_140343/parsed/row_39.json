@@ -1,0 +1,100 @@
+{
+  "coral_idx": 179,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "no",
+      "in-person": "yes",
+      "summary": "Newly diagnosed Stage 2 low grade IDC of the right breast, s/p right partial mastectomy, to discuss systemic therapy options"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "low grade ER+/PR- HER2- IDC",
+      "Stage_of_Cancer": "Stage 2",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Tumor size: 1.9 x 1.3 x 1.6 cm, 1.7 x 1.5 cm, 2.3 cm; Margins: widely negative; Node status: 1 positive lymph node, 0.04 cm; Grade: G1 IDC, G2 IDC, nuclear G1 DCIS"
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "gabapentin",
+        "ondansetron",
+        "oxyCODONE-acetaminophen",
+        "SUMAtriptan",
+        "teriflunomide",
+        "levofloxacin",
+        "lidocaine",
+        "onabotulinumtoxinA"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "Patient started letrozole, switched from no radiation to starting letrozole immediately",
+      "supportive_meds": [
+        "ondansetron (ZOFRAN), oxyCODONE-acetaminophen (PERCOCET), SUMAtriptan (IMITREX), lidocaine (PF) (XYLOCAINE), lidocaine (XYLOCAINE URO-*****)"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "response_assessment": "The patient has 1 positive lymph node. The other + LN was direct extension. Thus I believe she will derive the greatest benefit from adjuvant endocrine therapy with letrozole.",
+      "current_meds": "ascorbic acid, vitamin C, baclofen, cyclobenzaprine, ergocalciferol, vitamin D2, estradiol, gabapentin, ibuprofen, levothyroxine, modafinil, nitrofurantoin, ondansetron, oxyCODONE-acetaminophen, SUMAtriptan, teriflunomide, levofloxacin, lidocaine, onabotulinumtoxinA"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "The patient has 1 positive lymph node. The other + LN was direct extension. Thus I believe she will derive the greatest benefit from adjuvant endocrine therapy with letrozole.",
+      "current_meds": "ascorbic acid, baclofen, cyclobenzaprine, ergocalciferol, estradiol, gabapentin, ibuprofen, levothyroxine, modafinil, nitrofurantoin, ondansetron, oxyCODONE-acetaminophen, SUMAtriptan, teriflunomide, letrozole, levofloxacin, lidocaine, onabotulinumtoxinA"
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "Rx for letrozole given",
+        "Short term side_effects_discussed": "hot flashes, arthralgias, bone pain, hair thinning, dryness",
+        "Long term side_effects_discussed": "increased fracture risk"
+      },
+      "bone therapy": {
+        "summary": "Prolia",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "letrozole"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "adjuvant endocrine therapy with letrozole"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "PT referral, start letrozole immediately if no radiation is planned"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "We could send an FISH or Oncotype DX"
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "None",
+      "Specialty": "PT",
+      "Others": "None",
+      "follow up": "RTC 3 months"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "RTC 3 months",
+      "goals_of_treatment": "adjuvant endocrine therapy",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Prolia, letrozole"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

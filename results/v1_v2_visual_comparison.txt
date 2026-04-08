@@ -1,0 +1,140 @@
+================================================================================
+                V1 vs V2 PIPELINE PERFORMANCE COMPARISON
+                          (Rows 0-14, N=15)
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         ACCURACY COMPARISON (%)                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Type_of_Cancer Completeness:
+  V1: ███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 27% (4/15 complete)
+  V2: ████████████████████████████████████████████░░░░ 93% (14/15 complete)
+      +244% improvement ↑
+
+Stage_of_Cancer Accuracy:
+  V1: ██████████████████████████████████░░░░░░░░░ 73% (11/15 correct)
+  V2: ████████████████████████████████████████████████ 100% (15/15 correct)
+      +37% improvement ↑
+
+goals_of_treatment Standardization:
+  V1: ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0% (0/15 standard)
+  V2: ████████████████████████████████████████████████ 100% (15/15 standard)
+      +∞ improvement ↑
+
+response_assessment Semantic Correctness:
+  V1: ███████████████████████████████████████░░░░░ 93% (14/15 correct)
+  V2: ████████████████████████████████████████████████ 100% (15/15 correct)
+      +7% improvement ↑
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         ERROR COUNT COMPARISON                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Type_of_Cancer Incomplete (missing ER/PR/HER2):
+  V1: ███████████ 11 rows
+  V2: █ 1 row
+      -91% errors ↓
+
+Stage_of_Cancer Missing:
+  V1: ███ 3 rows
+  V2:  0 rows
+      -100% errors ↓
+
+goals_of_treatment Verbose/Non-standard:
+  V1: ███████████████ 15 rows
+  V2:  0 rows
+      -100% errors ↓
+
+response_assessment Wrong Field:
+  V1: █ 1 row
+  V2:  0 rows
+      -100% errors ↓
+
+TOTAL ERRORS:
+  V1: 30 field-level errors
+  V2: 1 field-level error
+  ─────────────────────────────
+  Net reduction: -97% ↓
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      V2 REGRESSIONS (TRADE-OFFS)                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Row 0:  Referral field - V1 ✓ (extracted "Rad Onc") | V2 ✗ (missed)
+Row 1:  Procedure_Plan - V1 ✓ (extracted conditional) | V2 ✗ (filtered)
+Row 1:  Lab_Plan - V1 ✓ (extracted conditional) | V2 ✗ (filtered)
+
+Total regressions: 3/60 fields (5%)
+Total improvements: 29/60 fields (48%)
+Net improvement rate: 93%
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        ARCHITECTURE COMPARISON                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+                          V1 Pipeline          V2 Pipeline
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Prompts                   4 multi-field        8 focused
+Max fields per prompt     5                    4
+Chain-of-Thought          None                 3 hard fields
+Gate count                3                    6
+FAITHFUL strategy         Re-extract           Trim
+Schema validation         ✗                    ✓ (G2)
+Semantic validation       ✗                    ✓ (G6)
+Specificity check         ✗                    ✓ (G5)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Gates breakdown:
+  V1: FORMAT → FAITHFUL (re-extract) → TEMPORAL
+  V2: FORMAT → SCHEMA → FAITHFUL (trim) → TEMPORAL → SPECIFIC → SEMANTIC
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                             KEY INSIGHTS                                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+✓ Field splitting (4→8 prompts) reduces cognitive load on 8B model
+✓ Chain-of-Thought improves complex reasoning (time/goals/response)
+✓ FAITHFUL trimming > re-extracting (preserves good content, fixes bad)
+✓ Gate specialization (SCHEMA/SEMANTIC/SPECIFIC) catches distinct errors
+✓ V2's 3 regressions are acceptable trade-offs for 29 improvements
+
+Recommended action: Adopt V2 pipeline for production
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         ROW-BY-ROW SUMMARY                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Row  Coral  V1 Issues                    V2 Fixes            V2 Regressions
+────────────────────────────────────────────────────────────────────────────
+ 0   140    Type/Stage/goals (3)         Type/Stage/goals    Referral
+ 1   141    Stage/goals/response (3)     All 3 + Type        Proc/Lab plans
+ 2   142    Type (2)                     Type                -
+ 3   143    goals (1)                    goals + Type        -
+ 4   144    Type/goals (2)               Both                -
+ 5   145    Type/goals (2)               Both                -
+ 6   146    goals (1)                    goals               -
+ 7   147    goals (1)                    goals + Type        -
+ 8   148    Type/goals (2)               Both                -
+ 9   149    Type/goals (2)               Both                -
+10   150    Stage/goals (2)              Both                -
+11   151    goals (1)                    goals               -
+12   152    Type/goals (2)               Both                -
+13   153    Type/goals (2)               Both                -
+14   154    goals (1)                    goals               -
+────────────────────────────────────────────────────────────────────────────
+Total       30 errors                    29 fixed            3 new issues
+
+Success rate: 29/30 fixes (97%) with 3/60 regressions (5%) = 92% net gain
+
+
+================================================================================
+Generated: 2026-03-13
+Reviewed by: Automated analysis + manual verification
+Files: See v1_pipeline_review_rows_0_14.md for detailed analysis
+================================================================================

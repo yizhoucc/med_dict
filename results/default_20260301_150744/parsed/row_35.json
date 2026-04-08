@@ -1,0 +1,88 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "Invasive lobular carcinoma, stage pT1cN0(sn), currently on adjuvant tamoxifen therapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "invasive lobular carcinoma",
+    "Stage_of_Cancer": "pT1cN0(sn)",
+    "Distant_Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results: margins negative, lymph nodes 0/4 involved, including 0/2 SLN. Imaging findings: no signs of malignancy on last mammogram (04/15/2019). Physical exam findings: well-healed lumpectomy scar, no suspicious mass in the right breast, no lymphadenopathy in the right axilla, supraclavicular, or infraclavicular areas."
+  },
+  "Current_Medications": {
+    "current_meds": "tamoxifen"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "No recent changes noted.",
+    "supportive_meds": "tamoxifen"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "stable",
+    "current_meds": "tamoxifen"
+  },
+  "Response_Assessment": {
+    "goals_of_treatment": "Risk reduction",
+    "response_assessment": "Not mentioned in note.",
+    "current_meds": "Tamoxifen",
+    "current_symptoms": "Occasional night hot flashes, slight weight gain of about 3 pounds, irregular and intermittent menstrual cycles"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "continuing on anastrozole",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "anastrozole"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "continue on anastrozole",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "no significant side effect",
+    "current_meds": "anastrozole"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "doing well",
+    "current_meds": "anastrozole"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "bilateral diagnostic mammogram with tomosynthesis in September 2019"
+  },
+  "Lab_Plan": {
+    "lab_plan": "continue on anastrozole",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "well",
+    "current_meds": "anastrozole"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "return to clinic in 6 months"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "return to clinic in 6 months for routine follow-up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

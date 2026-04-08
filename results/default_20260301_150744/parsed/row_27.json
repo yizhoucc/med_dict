@@ -1,0 +1,103 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "Metastatic breast cancer, stage not specified, hormone therapy follow-up"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER/PR + IDC",
+    "Stage_of_Cancer": "Metastatic",
+    "Distant_Metastasis": "Yes, to bone",
+    "Metastasis": "Yes, to bone"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Stable to slightly decreased metabolic activity of osseous metastases. No new metastases are identified. No palpable masses, skin changes, or lymphadenopathy noted on physical exam. Imaging findings: multiple osseous lesions involving the thoracolumbar and sternum are not changed in size since prior study and do not demonstrate hypermetabolic activity, consistent with treated metastases. Left iliac wing sclerotic lesion is unchanged in size and metabolic activity with an SUV of 3.1. Persistent FDG uptake within left L1 pedicle (SUV 6) and anterior vertebral body (SUV 9) is not significantly changed since prior."
+  },
+  "Current_Medications": {
+    "current_meds": "letrozole (FEMARA)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Hormone positive MBC to bone with stable disease.",
+    "supportive_meds": "calcium-vitamin D, zolendronic acid"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "response_assessment": "stable",
+    "current_meds": "Femara, Zoladex, calcium-vitamin D, zolendronic acid"
+  },
+  "Response_Assessment": {
+    "response_assessment": "stable disease, with stable to slightly decreased metabolic activity of osseous metastases on PET-CT",
+    "goals_of_treatment": "palliative",
+    "current_meds": "Femara, Zoladex, calcium-vitamin D, zolendronic acid"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Continue on Femara and Zoladex",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "chemotherapy": {
+      "summary": "Continue on *****",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "pain medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue on *****, zoladex and femara",
+    "goals_of_treatment": "palliative",
+    "response_assessment": "stable disease",
+    "current_meds": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue on *****, zoladex and femara",
+    "consider_mri": "spine",
+    "reassess_pain": "two weeks"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned.",
+    "goals_of_treatment": "palliative",
+    "current_meds": "***** and zoladex and femara",
+    "response_assessment": "stable disease",
+    "next_steps": "Reassess lower back pain at two weeks, Obtain CBC with platelets, Obtain UA"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI of the spine in 2 weeks"
+  },
+  "Lab_Plan": {
+    "lab_plan": "CBC with platelets"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "two weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Reassess lower back pain",
+    "Purpose of next clinic visit": "to reassess lower back pain and consider MRI of the spine",
+    "Current medications": "***** (chemotherapy), zoladex, femara",
+    "Goals of treatment": "palliative",
+    "Current cancer status": "stable disease",
+    "Response assessment": "stable disease",
+    "Current symptoms": "lower back pain, easy bruising, possible UTI, genital-urinary symptoms"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

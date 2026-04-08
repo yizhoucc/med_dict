@@ -1,0 +1,132 @@
+{
+  "coral_idx": 162,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "The patient is a 63-year-old female with invasive lobular carcinoma, invasive carcinoma with ductal and lobular features, and ductal carcinoma in situ, for a discussion of treatment options for recently diagnosed breast cancer."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+ (>95%)/HER2 1+ by IHC and negative by FISH 5% invasive ductal carcinoma with ductal and lobular features, ER negative/weakly PR + (1%) high grade DCIS",
+      "Stage_of_Cancer": "Originally 1 cm grade 2 invasive carcinoma, 0.7 cm focus of grade 2 invasive carcinoma, intermediate and high grade DCIS, approximately Stage I-II",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "Glucose, meter download: 105 mg/dL, Glucose, meter download: 185 mg/dL, Glucose, meter download: 236 mg/dL, Glucose, meter download: 116 mg/dL"
+    },
+    "Clinical_Findings": {
+      "findings": "Pathology results: 1 cm grade 2 invasive lobular carcinoma, 0.7 cm invasive carcinoma with ductal and lobular features, intermediate and high grade DCIS, negative margins. Physical exam: left breast mastectomy scar healing well with tissue expander in place, no dominant masses in right breast, no suspicious skin changes overlying expander. No palpable cervical or supraclavicular adenopathy."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "acetaminophen (TYLENOL) 500 mg tablet",
+        "atorvastatin (LIPITOR) 20 mg tablet",
+        "cholecalciferol, vitamin D3, 1000 UNITS TAB tablet",
+        "docusate sodium (COLACE) 100 mg capsule",
+        "ibuprofen (ADVIL,MOTRIN) 600 mg tablet",
+        "LORazepam (ATIVAN) 0.5 mg tablet",
+        "MULTIVIT-MINERALS/FERROUS FUM (MULTI VITAMIN ORAL)",
+        "oxyCODONE (ROXICODONE) 5 mg tablet",
+        "sulfamethoxazole-trimethoprim (BACTRIM DS,SEPTRA DS) 800-160 mg tablet"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes mentioned.",
+      "supportive_meds": [
+        "acetaminophen (TYLENOL)",
+        "atorvastatin (LIPITOR)",
+        "cholecalciferol, vitamin D3",
+        "docusate sodium (COLACE)",
+        "ibuprofen (ADVIL,MOTRIN)",
+        "lorazepam (ATIVAN)",
+        "multivitamin/mineral/ferrous fumarate (MULTI VITAMIN ORAL)",
+        "oxyCODONE (ROXICODONE)",
+        "sulfamethoxazole-trimethoprim (BACTRIM DS,SEPTRA DS)"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "intent_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "acetaminophen, atorvastatin, cholecalciferol, docusate sodium, ibuprofen, LORazepam, MULTIVIT-MINERALS/FERROUS FUM, oxyCODONE, sulfamethoxazole-trimethoprim"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "The cancer is currently not assessable due to lack of treatment.",
+      "current_meds": "acetaminophen, atorvastatin, cholecalciferol, docusate sodium, ibuprofen, LORazepam, MULTIVIT-MINERALS/FERROUS FUM, oxyCODONE, sulfamethoxazole-trimethoprim"
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "will receive at least 5 years of adjuvant hormonal therapy",
+        "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+        "Long term side_effects_discussed": "possible acceleration of bone density loss"
+      },
+      "bone therapy": {
+        "summary": "will discuss bone targeted therapies",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "will maintain a calcium rich diet, will take in an adequate amount of Vitamin D (typically 600-800 IU per day), will engage in weight bearing exercise",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "chemotherapy": {
+        "summary": "does not recommend adjuvant chemotherapy",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "radiotherapy": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "will receive letrozole, an aromatase inhibitor, for at least 5 years"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "an endocrine based therapy with letrozole, specifically an aromatase inhibitor",
+      "diet": "a calcium rich diet",
+      "vitamin_d": "1500-2000 IU per day",
+      "exercise": "weight bearing exercise for 150 minutes of moderate intensity per week",
+      "alternative_therapy": "another aromatase inhibitor or tamoxifen"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "No procedures planned."
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "DEXA"
+    },
+    "Lab_Plan": {
+      "lab_plan": "DEXA",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not yet on treatment — no medications listed."
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet on treatment — no genetic testing planned."
+    },
+    "Referral": {
+      "Nutrition": "Maintain a calcium rich diet, take in an adequate amount of Vitamin D (typically at least 600-800 IU per day in a post-menopausal patient without much sun exposure)",
+      "Genetics": "None",
+      "Specialty": "None",
+      "Others": "Physical or occupational therapy, Social work, financial counseling, home health, or 'None'",
+      "follow up": "3 months"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "3 months",
+      "goals_of_treatment": "low risk",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "letrozole"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

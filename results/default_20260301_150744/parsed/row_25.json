@@ -1,0 +1,126 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "Not mentioned",
+    "in-person": "in-person",
+    "summary": "Metastatic breast cancer, metastasized to multiple sites, on Xeloda 1500mg/1000mg 14 days and 7 days off with ixabepilone"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "metastatic (Stage IV)",
+    "Distant_Metastasis": "Yes, to multiple sites",
+    "Metastasis": "Yes, to multiple sites"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alkaline Phosphatase 308, AST 55, Bilirubin 0.6, BUN 11, WBC Count 5.0, RBC Count 3.46, Hemoglobin 11.2, Hematocrit 31.9, MCV 92, MCH 32.5, MCHC 35.2, Platelet Count 364, Neutrophil Absolute Count 2.62, Lymphocyte Abs Cnt 1.63, Monocyte Abs Count 0.63, Eosinophil Abs Ct 0.12, Basophil Abs Count 0.02, Creatinine 0.73, eGFR >60, Sodium 137, Potassium 4.0, Chloride 103, Carbon Dioxide 26, Anion Gap 8, Albumin 3.1, Calcium 9.0, Phosphorus 3.8"
+  },
+  "Clinical_Findings": {
+    "findings": "Imaging findings: PET/CT on 03/12/2011 showed progression of disease including liver, bones, lymph nodes, and breast skin metastases. MRI of the brain on 12/11/2010 revealed a 4 cm left inferior frontal extra-axial mass. Bone scan on 09/04/2009 showed no uptake to suggest osseous metastasis, but multifocal osseous metastatic disease was identified in the C2, L2 vertebral bodies, and sacrum on 12/11/2010 PET CT."
+  },
+  "Current_Medications": {
+    "current_meds": [
+      "capecitabine (Xeloda)",
+      "ixabepilone"
+    ]
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started Xeloda 4000mg (actually took 2000mg) daily 14 days on 7 days off, started ixabepilone 40mg/m2, started denosumab",
+    "supportive_meds": "ondansetron, oxyCODONE, LORazepam, polyethylene glycol"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "response_assessment": "stable",
+    "current_meds": "capecitabine (XELODA) 500 mg tablet, docusate sodium (COLACE) 250 mg capsule, ferrous fumarate (IRON ORAL), levetiracetam (KEPPRA ORAL), metoprolol tartrate (LOPRESSOR ORAL), ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (ROXICODONE) 5 mg immediate release tablet, lorazepam (ATIVAN) 1 mg tablet, multivitamin, prochlorperazine (COMPAZINE) 10 mg tablet, sodium chloride ORAL, polyethylene glycol (MIRALAX) 17 gram packet, amlodipine besylate (NORVASC ORAL), calcium ORAL, cholecalciferol, vitamin D3, 1000 UNITS TAB"
+  },
+  "Response_Assessment": {
+    "response_assessment": "New chest wall/breast skin metastases on PET/CT",
+    "goals_of_treatment": "palliative",
+    "current_meds": "capecitabine (XELODA) 500 mg tablet, cholecalciferol, vitamin D3, docusate sodium, ferrous fumarate, levetiracetam, metoprolol tartrate, ondansetron, oxyCODONE, lorazepam, multivitamin, prochlorperazine, sodium chloride, polyethylene glycol"
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "Taking 1500/1000mg 14 days and 7 days off with ixabepilone",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "hormonal therapy": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "bone therapy": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "radiotherapy": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "bowel regimen": {
+      "summary": "Xeloda",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "pain medication": {
+      "summary": "Try ibuprofen or tylenol in am and oxycodone in pm or when able to have a nap",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "psychiatry medication": {
+      "summary": null,
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    },
+    "other treatment": {
+      "summary": "will start cycle again",
+      "Short term side_effects_discussed": null,
+      "Long term side_effects_discussed": null
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off, will start cycle again",
+    "goals_of_treatment": "palliative",
+    "response_assessment": "Feels good",
+    "current_meds": "Xeloda, Ixabepilone 1500/1000mg 14 days and 7 days off"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "will start cycle again in 3 weeks"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned",
+    "goals_of_treatment": "palliative",
+    "current_meds": "xeloda, irinotecan, ixabepilone",
+    "response_assessment": "stable",
+    "next_steps": "Scan in 3 weeks"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Scan in 3 weeks"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Oncology",
+    "Others": "None",
+    "follow up": "Scan in 3 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Scan in 3 weeks",
+    "goals_of_treatment": "curative",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "ixabepilone, xeloda"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

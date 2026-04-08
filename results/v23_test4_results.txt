@@ -1,0 +1,1304 @@
+Source: v23_test4.yaml | Run started: 2026-03-24 20:47:33
+============================================================
+extraction_prompts
+{'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
+Be SPECIFIC — include the patient's diagnosis, cancer type, and the purpose of this visit.
+Do NOT give vague answers like "new symptoms" or "follow up visit". Instead, state what cancer,
+what stage (if known), and what specifically brought them in (e.g., "initial consult for newly
+diagnosed metastatic ER+ breast cancer" or "cycle 3 day 1 of irinotecan for metastatic TNBC").
+
+For Patient type — determining "New patient" vs "Follow up":
+- "New patient" if ANY of these apply:
+  * Note says "New Patient Evaluation", "Consult Note", "consultation", "establish care", "referred by", or "second opinion"
+  * This is the patient's FIRST visit to this oncologist/clinic (even if they had surgery or treatment elsewhere)
+  * Post-surgery first visit to medical oncology to discuss adjuvant/systemic therapy
+- "Follow up" ONLY if the patient has been seen by THIS provider/clinic before for ongoing management
+- When in doubt, "New patient" is safer than "Follow up"
+
+For second opinion — write "yes" ONLY if the note explicitly mentions "second opinion", "another opinion", or the patient was clearly referred for an independent review of their case. Do NOT guess.
+
+Respond *only* with a JSON object using this exact schema:
+{
+"Patient type": "either New patient or follow up",
+"second opinion": "whether the visit is consultation/second opinion or not",
+"in-person": "either Televisit or in-person. (note, video consult, televisit, telehealth are the same thing)",
+"summary": "A specific summary including cancer type, stage if known, and purpose of this visit."
+}
+', 'Cancer_Diagnosis': 'TASK: Extract cancer diagnosis details.
+
+For Type_of_Cancer, be SPECIFIC — include as much of the following as the note provides:
+1. Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
+2. Receptor status — ER, PR, and HER2. e.g., "ER+/PR+/HER2-"
+3. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH.
+- Example: "ER+/PR+/HER2- invasive ductal carcinoma" NOT just "breast cancer"
+- Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
+Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
+IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
+
+HER2 status rules — follow strictly:
+- If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.
+- If HER2 was NOT tested or NOT mentioned in the note, write "HER2: not tested" — do NOT guess or assume HER2- or HER2+.
+- DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly stated.
+- HER2 IHC scoring — use this table to determine HER2 status:
+  IHC 0     = HER2 NEGATIVE
+  IHC 1+    = HER2 NEGATIVE
+  IHC 2+    = EQUIVOCAL — must check FISH/ISH result:
+    IHC 2+ with FISH ratio ≥ 2.0 (or gene copies ≥ 6) = HER2 POSITIVE
+    IHC 2+ with FISH ratio < 2.0 (or "FISH negative")  = HER2 NEGATIVE
+  IHC 3+    = HER2 POSITIVE
+- FISH interpretation (when reported without IHC):
+  FISH ratio ≥ 2.0 = amplified = HER2 POSITIVE
+  FISH ratio < 2.0 = not amplified = HER2 NEGATIVE
+- IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab, the cancer is HER2+. Do NOT write HER2-.
+- IMPORTANT: If the note says "triple negative" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-. Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked. "Triple negative" is a definitive classification.
+- IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
+
+For Stage_of_Cancer:
+- Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
+- If the patient was originally diagnosed at one stage but now has metastatic recurrence, write BOTH:
+  e.g., "Originally Stage [X], now metastatic (Stage IV)"
+  IMPORTANT: Only write "Originally Stage [X]" if the note EXPLICITLY states the original stage number (e.g., "Stage IIA at diagnosis"). If the note only says "metastatic recurrence" without specifying the original stage, write just "Metastatic (Stage IV)" — do NOT guess or invent the original stage.
+- If distant metastases are documented, the current stage is Stage IV even if not explicitly stated.
+- If the Assessment/Plan states a stage (e.g., "Stage I", "early stage"), extract it — do NOT write "Not mentioned in note".
+- If tumor size and node status are available, infer the approximate stage (e.g., "2.3 cm, 0/3 LN negative — approximately Stage I-II").
+- IMPORTANT: Node-negative ("node neg", "0/N LN+") with small tumor (≤2cm) = Stage I, NOT Stage II.
+  Stage II requires either positive lymph nodes OR tumor >2cm. "Early stage node negative" = Stage I.
+- Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
+
+Respond *only* with a JSON object using this exact schema:
+{
+"Type_of_Cancer": "Specific cancer type with histologic subtype and receptor statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
+"Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only include original stage if explicitly stated in the note",
+"Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant.",
+"Metastasis": "if there is met, Yes (to where), No, or Not sure"
+}
+', 'Lab_Results': 'TASK: Extract lab results from this medical note.
+
+List SPECIFIC lab values with numbers (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos 183, CA 27.29 = 48").
+Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
+Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
+CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
+CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar placeholders), write "Values redacted" — do NOT fabricate or guess specific numbers. Only report values you can clearly read.
+Example: If the note says "Platelet *****" or "WBC *****", write "Lab values redacted" — do NOT write "Platelet 217" or any invented number.
+Example: If labs section shows "CBC: ***** ***** *****", write "CBC values redacted" — do NOT fill in numbers.
+IMPORTANT: If lab results are older than 6 months from the visit date, you MUST note the date.
+Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old labs.
+If the note says "labs/markers unremarkable" without specific values, write that verbatim with the date.
+
+Respond *only* with a JSON object using this exact schema:
+{
+"lab_summary": "Summary of key lab results with specific values. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests. If none found, write 'No labs in note.'"
+}
+', 'Clinical_Findings': 'TASK: Extract clinical findings and current disease status from this visit.
+
+Summarize NEW clinical findings or current disease status. Include:
+- Key pathology results: tumor size, margins, node status, grade
+- Imaging findings: CT, MRI, PET, bone scan results
+- Physical exam findings: palpable masses, skin changes, lymphadenopathy
+IMPORTANT: Include ALL imaging findings, even those of uncertain significance (e.g., "focal uptake in 6th rib of unclear significance"). Ambiguous findings may indicate early metastasis and must NOT be omitted. If the report says "unclear significance" or "indeterminate", include it with that qualifier.
+Do NOT write only symptoms (e.g., "patient reports fatigue") — write OBJECTIVE findings.
+Do NOT repeat the cancer type or stage (those are extracted separately).
+
+Respond *only* with a JSON object using this exact schema:
+{
+"findings": "Summary of new findings or disease status including pathology results, imaging findings, and exam findings."
+}
+', 'Current_Medications': 'TASK: Extract current oncologic medications the patient is ACTIVELY taking now.
+
+CRITICAL — distinguish CURRENT from PLANNED from PAST:
+- CURRENT (include): medications the patient is ACTIVELY taking right now.
+  Look for: "continue", "currently on", "taking daily", "on [drug] since [date]"
+- If the HPI mentions one drug (e.g., "started tamoxifen") but the Assessment/Plan says a DIFFERENT
+  drug as current (e.g., "continuing on anastrozole"), prefer the Assessment/Plan — it reflects the
+  most recent clinical decision. Do NOT list both unless the note clearly says both are concurrent.
+- PLANNED/RECOMMENDED (do NOT include): medications discussed, recommended, or scheduled to start.
+  Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]"
+- PAST/COMPLETED (do NOT include): medications already finished or stopped.
+  Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
+- STOPPED/DROPPED (do NOT include): medications recently discontinued.
+  Look for: "recently dropped", "stopped due to", "discontinued", "held", "self D/C", "D/Ced"
+
+Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
+Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
+IMPORTANT: Only include medications DIRECTLY related to cancer care. This includes:
+- Oncology drugs (chemo, hormonal, targeted, immunotherapy)
+- Supportive care for cancer treatment (anti-nausea, growth factors, bone agents)
+- Pain medications for cancer-related pain
+Do NOT include: eye drops, blood pressure meds, diabetes meds, vitamins, allergy meds, or other non-cancer medications — even if they appear in the medication list.
+If no cancer-related medications are currently active, write empty string "".
+
+CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
+- SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications outside the clinical system (e.g., from another country, alternative medicine clinic, self-administered at home without physician supervision), and the treating physician does NOT endorse or manage these drugs (look for skeptical language like "apparently", "so-called", "claims to be taking", or "discontinue our medications"), do NOT list them in current_meds. Instead, these should go in recent_changes with appropriate context.
+IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron, infusions) are often NOT listed in the outpatient medication list. If the Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g., "on irinotecan", "continues leuprolide", "started [drug] on [date]" with no discontinuation), include it even if it does not appear in the outpatient medication list.
+
+Respond *only* with a JSON object using this exact schema:
+{
+"current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
+}
+', 'Treatment_Changes': 'TASK: Extract recent treatment changes and supportive medications.
+
+For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
+Do NOT include changes from months or years ago.
+IMPORTANT: If the patient IS currently on treatment but there are no recent changes, write an empty string "".
+Do NOT write "Not yet on treatment" if the patient is already taking medication (e.g., tamoxifen, letrozole).
+"Not yet on treatment" is ONLY correct if the patient has never started any cancer treatment.
+
+For supportive_meds: List supportive care medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors like Neulasta/GCSF).
+
+CRITICAL rules for supportive_meds — read carefully:
+- ONLY include medications the patient is actively taking RIGHT NOW. Look for: "taking", "currently on", "continue", listed in Active Medications.
+- Do NOT include medications that are only DISCUSSED, RECOMMENDED, or HYPOTHETICAL:
+  * "could be mitigated with bisphosphonate" = NOT current (hypothetical)
+  * "we discussed starting..." = NOT current (discussion only)
+  * "may consider..." = NOT current (future possibility)
+  * "if side effects occur, could use..." = NOT current (contingency)
+- Do NOT include: allergies, non-cancer medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds).
+- Do NOT include medications marked "Patient not taking" or "(Patient not taking: ...)". If the medication list says "Patient not taking", that drug is NOT current — skip it entirely.
+- Do NOT include anxiety/sleep medications (lorazepam, zolpidem) or seizure medications (levetiracetam) unless explicitly prescribed FOR cancer treatment side effects.
+- Do NOT include ONCOLOGIC drugs (tamoxifen, letrozole, anastrozole, trastuzumab, etc.) in supportive_meds. These go in current_meds.
+IMPORTANT: The ALLERGIES section lists what the patient is ALLERGIC TO — these are NOT medications they take.
+
+Respond *only* with a JSON object using this exact schema:
+{
+"recent_changes": "Any holds, dose reductions, or switches at or near this visit.",
+"supportive_meds": "List of cancer-treatment-related supportive medications."
+}
+', 'Treatment_Goals': 'TASK: Extract the goal/intent of cancer treatment.
+
+Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
+Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
+
+FIRST — check the note for EXPLICIT intent words:
+- If the note says "palliative" or "palliative intent" or "palliative care" → write "palliative". Done.
+- If the note says "curative" or "curative intent" → write "curative". Done.
+- If the note says "adjuvant" → this describes the treatment TYPE, not the GOAL. For non-metastatic cancer, adjuvant treatment has curative intent → write "curative". Only write "palliative" if metastatic.
+- If the note explicitly states an intent, USE IT. Do NOT override the physician's own words.
+
+ONLY if no explicit intent word is found, use this decision tree:
+- Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy → "curative" or "adjuvant"
+- Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT "neoadjuvant")
+- Metastatic/Stage IV cancer → "palliative"
+- DCIS only, no invasive cancer → "risk reduction"
+- Completed curative treatment, now on surveillance endocrine therapy → "adjuvant" or "risk reduction"
+- Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant chemo — that is "curative" or "adjuvant".
+- Do NOT write "neoadjuvant" as a goal — write "curative" instead.
+
+Respond *only* with a JSON object using this exact schema (NO other keys):
+{
+"goals_of_treatment": "curative, palliative, adjuvant, risk reduction, or symptom management"
+}
+', 'Response_Assessment': 'TASK: Extract how the cancer is CURRENTLY responding to treatment.
+
+Think step by step before answering:
+1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
+   IMPORTANT: Completed radiation therapy COUNTS as treatment. If the patient recently finished radiation, they HAVE received treatment — do NOT write "Not yet on treatment". "Not yet on treatment" is ONLY correct if no cancer treatment (chemo, radiation, hormonal, targeted, immunotherapy) has been given at all.
+   IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment (the response is "progression"). Even if they are switching to a new regimen or between treatments, document the current disease status from imaging/labs.
+   For LOCAL RECURRENCE: describe the recurrence factually (e.g., "local recurrence in left breast, 1.7cm IDC on excisional biopsy"). Do NOT write "cancer is not responding to treatment" — the patient may have discontinued treatment or completed it years ago. Focus on WHAT happened (recurrence), not WHY.
+   IMPORTANT: For patients on adjuvant/maintenance therapy, "no evidence of recurrence" or "no evidence of disease" on exam or imaging IS a valid response assessment — it means the treatment is working.
+   IMPORTANT — the patient IS on treatment if ANY of these clues appear:
+   - "currently on [drug]", "taking [drug]", "continue [drug]", "on [drug] since [date]"
+   - Mentions of chemotherapy cycles, off weeks, dose adjustments (e.g., "off week", "cycle 3", "due to start next cycle")
+   - "labs okay to proceed with chemotherapy" or similar pre-cycle clearance
+   - Current medications include any oncologic drug (chemo, hormonal, targeted, immunotherapy)
+   - Active medication list contains chemotherapy drugs (Xeloda, ixabepilone, paclitaxel, etc.)
+   Do NOT be confused by "off week" — a patient on an off week between chemo cycles IS on treatment.
+2. If yes, what treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)
+3. Is there any evidence of how the cancer is responding? Search the ENTIRE note for ANY of these:
+   - Imaging: CT stable, PET response, scan results
+   - Tumor markers: CA 15-3, CEA rising or falling
+   - Physical exam: mass shrinking, "breaking up", palpable changes, skin changes improving
+   - Clinical status: "labs okay to proceed" (implies stable enough to continue)
+   - Symptom changes: "able to do more", "pain improving", "up and about"
+   Even brief exam comments like "area appears to be breaking up" count as response evidence.
+4. If no treatment started yet, write "Not yet on treatment — no response to assess."
+5. If on treatment but no response data in the note, write "Not mentioned in note."
+
+STRICT RULES — do NOT violate:
+- Do NOT include future plans ("will start", "plan to", "she will have radiation").
+- Do NOT include treatment discussions or recommendations.
+- Do NOT use generic boilerplate phrases. Every claim must be traceable to a specific sentence in the note.
+- Do NOT write "tolerating therapy well" or "symptoms improved" unless the note EXPLICITLY uses those exact words.
+- Do NOT use the word "responding" or "response" unless you can cite SPECIFIC imaging or tumor marker evidence. "Labs okay" or "stable on exam" alone does NOT mean the cancer is "responding" — it means the cancer status is unknown or stable.
+- IMPORTANT: "responding" implies MEASURABLE IMPROVEMENT. Use "stable disease" for unchanged findings, "no evidence of disease" for no measurable disease, and "responding" ONLY when there is documented tumor shrinkage or marker decrease.
+- Do NOT describe pathology results (tumor size, grade, margins) as a "response" — pathology is a diagnosis, not a treatment response.
+- Do NOT describe surgical recovery ("healing well", "recovering from surgery") as a response assessment.
+- Do NOT describe risk estimates or Oncotype scores as a response — those are prognostic tools, not treatment responses.
+- Do NOT write "Not applicable" or "Not specified".
+Examples:
+- GOOD: "CT stable, CA 15-3 decreased from 28 to 14"
+- GOOD: "no evidence of disease recurrence on imaging and exam"
+- GOOD: "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases"
+- GOOD: "Axillary LN decreased from 8cm to 2-3cm after 2 cycles AC"
+- BAD: "tolerating therapy well, symptoms improved" (generic boilerplate)
+- BAD: "She will continue on letrozole and have radiation" (this is a plan, not a response)
+- BAD: "0.9 cm grade 1 IDC, margins negative" (this is pathology, not treatment response)
+- BAD: "Healing well from surgery" (surgical recovery, not cancer treatment response)
+- BAD: "Low Risk Oncotype score" (prognostic tool, not a response to treatment)
+
+Write your reasoning first, then output the JSON on a new line starting with {
+IMPORTANT: Your JSON must contain ONLY the key "response_assessment". Do NOT add any other keys.
+
+Respond with a JSON object using this exact schema (NO other keys):
+{
+"response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence: imaging, labs, exam. Do NOT include future plans, surgical recovery, or prognostic scores."
+}
+'}
+============================================================
+plan_extraction_prompts
+{'Medication_Plan': 'TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
+Respond *only* with a JSON object using this exact schema:
+{
+    "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
+}
+', 'Therapy_plan': 'TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
+Include ONLY current or future therapy: chemotherapy, radiotherapy, hormonal therapy, and bone-therapy.
+Include future plans, changes to current therapy (start, stop, continue).
+
+CRITICAL — distinguish PAST from CURRENT/FUTURE:
+- PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018"
+- CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
+- FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
+IMPORTANT: "continue [drug]" IS a valid therapy plan. If the patient is continuing on current therapy, list the therapy being continued. Do NOT write "None" when the patient is actively on treatment.
+
+DO NOT include imaging plans (CT, MRI, PET, DEXA, Echo, echocardiogram, mammogram, bone scan, X-ray) — those belong in Imaging_Plan.
+DO NOT include lab plans — those belong in Lab_Plan.
+Only include THERAPY: chemotherapy drugs, hormonal drugs, radiation therapy, bone-protecting agents, and their schedules.
+
+Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
+Respond *only* with a JSON object using this exact schema:
+{
+    "therapy_plan": "A summary of the current and future therapy plan with specific details."
+}
+', 'radiotherapy_plan': 'TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
+For radiotherapy, include ANY statement that indicates
+it is being considered, recommended, or may be used, even if no explicit
+start/continue/plan keywords are present.
+Include referrals to radiation oncology (Rad Onc) as a radiotherapy-related plan.
+
+CRITICAL — distinguish PAST from CURRENT/FUTURE:
+- PAST (DO NOT include): "had radiation in 2018", "s/p radiation", "completed radiation", "treated with lumpectomy followed by radiation", "had adjuvant radiation", "status post radiation"
+- CURRENT (include): "currently receiving radiation", "on radiation therapy"
+- FUTURE (include): "will start radiation", "radiation planned", "discussed radiation", "Rad Onc consult", "considering radiation"
+If a radiotherapy statement uses past tense or describes completed/historical treatment, it is PAST — do NOT include it.
+If the only radiotherapy mentioned is past/completed, write "None".
+
+Respond *only* with a JSON object using this exact schema:
+{
+    "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
+}
+', 'Procedure_Plan': 'TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
+Include ONLY future/planned procedures: surgery, biopsy, lumbar puncture, Chemo Port Insertion, or other interventional procedures.
+
+CRITICAL — distinguish PAST from FUTURE:
+- PAST (DO NOT include): "underwent mastectomy on 10/29/16", "s/p colectomy in June 2018", "had biopsy on 05/25", "completed radiation"
+- FUTURE (include): "will schedule biopsy", "plan for port placement", "surgery pending", "scheduled for colectomy next week"
+If a procedure has a past date or uses past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.
+
+Also DO NOT include:
+- Imaging plans (CT, MRI, PET, PET/CT, DEXA, bone scan, ultrasound, mammogram, echocardiogram/TTE, X-ray — these ALL go in Imaging_Plan, NOT here)
+- Radiation/radiotherapy plans (radiation, XRT, RT, chest wall RT, whole brain radiation — these go in radiotherapy_plan, NOT here)
+- Lab plans or blood tests
+- Medication/treatment plans (e.g., "continue arimidex", "could use faslodex" — these go in Medication_Plan)
+- Referrals or consultations (e.g., "XRT consult" is a referral, not a procedure)
+- General treatment goals or contingency plans
+
+Common mistakes to AVOID:
+- "Brain MRI" → this is IMAGING, not a procedure
+- "chest wall RT" → this is RADIOTHERAPY, not a procedure
+- "will proceed with radiation" → this is RADIOTHERAPY, not a procedure
+- "TTE" or "echocardiogram" → this is IMAGING, not a procedure
+- "DEXA scan" → this is IMAGING, not a procedure
+- "chemotherapy", "TCHP", "FOLFOX", "AC-T" → these are MEDICATIONS/SYSTEMIC THERAPY, not procedures
+- "start letrozole", "continue tamoxifen" → these are MEDICATION plans, not procedures
+- "immunotherapy", "targeted therapy" → these are MEDICATIONS, not procedures
+If no future procedures are planned, say "No procedures planned."
+Respond *only* with a JSON object using this exact schema:
+{
+    "procedure_plan": "A summary of any planned procedures, or 'No procedures planned.'"
+}
+', 'Imaging_Plan': 'TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
+Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray.
+Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
+
+CRITICAL — distinguish PAST from FUTURE:
+- PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed..."
+- FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening"
+
+DO NOT include any procedure plan, lab plan, or medication plan.
+List SPECIFIC imaging types. Do NOT use vague terms like "staging workup".
+If no future imaging is planned, say "No imaging planned."
+Respond *only* with a JSON object using this exact schema:
+{
+    "imaging_plan": "A summary of any planned imaging with specific test names, or 'No imaging planned.'"
+}
+', 'Lab_Plan': 'TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
+Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
+Also include pre-chemo blood draws (e.g., "blood draw prior to cycle", "labs before chemo", "draw and visit").
+Specify frequency and rationale if mentioned.
+
+CRITICAL — do NOT include these (they belong in OTHER fields):
+- Imaging scans: PET CT, CT, MRI, DEXA, bone scan, ultrasound, mammogram → these go in Imaging_Plan
+- Genomic/molecular tests: MammaPrint, Oncotype DX, BRCA panel, NGS, liquid biopsy → these go in Genetic_Testing_Plan
+- Treatment plans: medication changes, chemotherapy plans → these go in Medication_Plan
+Lab_Plan is ONLY for blood draws and lab work.
+
+DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
+If no future blood tests or labs are planned, say "No labs planned."
+Respond *only* with a JSON object using this exact schema:
+{
+    "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
+}
+', 'Genetic_Testing_Plan': 'TASK: Extract the 'Genetic Testing Plan' from the given 'Assessment/Plan' section.
+
+1. Scope of section:
+- First, find the 'Assessment/Plan' section of the note (usually the final section).
+- Only look for plans that are clearly about FUTURE genetic or molecular TESTING.
+
+2. What COUNTS as 'genetic or molecular testing':
+- Diagnostic, prognostic, or predictive laboratory assays, such as:
+  - Tumor genomic sequencing / NGS / panel testing
+  - Germline genetic panels (e.g., hereditary cancer panel, BRCA testing)
+  - Liquid biopsy / circulating tumor DNA (ctDNA) tests
+  - Specific biomarker tests (e.g., PD-L1 testing, MSI testing, EGFR mutation testing)
+  - Any plan to "send", "order", "check", or "obtain" a genetic, genomic, or molecular TEST
+
+3. What MUST be EXCLUDED:
+- DO NOT include any medications, systemic therapies, or treatment plans:
+  - Chemotherapy, immunotherapy, targeted therapies (e.g., FGFR inhibitor, PARP inhibitor, CDK4/6 inhibitor, TKIs)
+  - Hormonal therapy, radiation therapy, surgery
+  - Clinical trial options, even if the trial involves targeted drugs or inhibitors
+- DO NOT include tests that are already completed, historic, or only mentioned in past oncology history.
+- DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine labs (CBC, CMP).
+
+4. CRITICAL — do NOT include content that belongs in OTHER fields:
+- Treatment contingency plans (e.g., "if progression, could use faslodex") → these go in Medication_Plan/Therapy_plan
+- Imaging plans (PET CT, MRI) → these go in Imaging_Plan
+- Response assessment text (e.g., "Not yet on treatment — no response to assess") → this is NOT genetic testing
+
+5. If there is NO new genetic or molecular test planned in the Assessment/Plan:
+- Set the value to: "None planned."
+
+6. Output format:
+Respond *only* with a JSON object using this exact schema:
+{
+    "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or a clear statement that none are planned."
+}
+', 'Referral': 'TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
+Do not mistake the doctor's signature at the end of the note as a referral.
+Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
+A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+
+IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
+- HPI: "referred to genetics", "will refer to social work"
+- Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
+- Psychologic/Social section: "I will refer to social work"
+- A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation"
+Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "palliative".
+Common referrals found OUTSIDE the A/P section:
+- "Ambulatory Referral to Social Work" (in Diagnosis section) → Others: Social work referral
+- "Referral to Exercise Counseling" (in Diagnosis section) → Others: Exercise counseling referral
+- "I will refer to social work" (in Psychologic section) → Others: Social work referral
+
+CRITICAL — distinguish OUTGOING from INCOMING referrals:
+- OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
+- INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred for consideration of adjunct therapy".
+- Do NOT include the current visit's own department. These notes are written by Medical Oncology — do NOT list "Medical Oncology" or "Med Onc" as a referral.
+- If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
+
+If no referral is mentioned for a category, set its value to "None".
+For Nutrition: only include referrals to a nutritionist or dietitian (e.g., "nutrition consult", "refer to nutritionist", "follow up with nutrition on [date]").
+The following are NOT nutrition referrals — they are general lifestyle advice from the oncologist:
+- "I recommend an anti inflammatory/mediterranean diet" → NOT a referral
+- "I recommend a diabetes risk reducing diet" → NOT a referral
+- "eat calcium-rich food", "limit alcohol", "exercise" → NOT a referral
+- "take calcium and vitamin D", "continue vitamin D daily" → NOT a referral (supplement advice)
+- "discussed lifestyle modifications" → NOT a referral
+If the oncologist gives diet advice without referring to a nutritionist/dietitian, write "None".
+Respond *only* with a JSON object using this exact schema:
+{
+"Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
+"Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g., 'refer to genetics', 'genetics consult recommended'). Do NOT list genetic test RESULTS or known mutations here (e.g., 'BRCA1 mutation', 'ATM mutation carrier', 'genetic testing negative' are FINDINGS, not referrals). Write 'None' if no genetics referral is planned.",
+"Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
+"Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
+"follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
+}
+', 'follow_up_next_visit': 'TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
+Be SPECIFIC about timing (e.g., "2 weeks", "after biopsy results", "3 months").
+Respond *only* with a JSON object using this exact schema:
+{
+    "Next clinic visit": "(in-person or telehealth): timing and purpose"
+}
+', 'Advance_care_planning': 'TASK: Extract the 'Advance care planning' from the clinical note.
+Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.
+IMPORTANT: Code status is often found OUTSIDE the Assessment/Plan section — look in the FULL NOTE for:
+- "Code status: Full code" or "Full code"
+- "DNR" or "DNI" or "DNR/DNI"
+- "Advance Care Planning" section
+- "has a living will" or "health care proxy"
+If a code status is mentioned ANYWHERE in the note, include it.
+If no advance care planning is discussed and no code status is found, say "Not discussed during this visit."
+Respond *only* with a JSON object using this exact schema:
+{
+    "Advance care": "A summary of any advance care planning including code status, or 'Not discussed during this visit.'"
+}
+'}
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 7
+============================================================
+
+--- Column: coral_idx ---
+146
+
+--- Column: note_text ---
+"*****  ***** with MBC ***** 2008    CC  2nd opinion    HPI  First dx'd 1998 with Stage II T2N1 left sided IDC, presented with BSE. W/u included positive mammogram. On October 97 S/p left lumpectomy, ALND showed August 07 nodes positive. Biomarker results unclear. Rec'd adjuvant AC+T chemotherapy. Rec'd adjuvant XRT. Did not receive adjuvant hormonal Rx.    Suffered recurrence in 2008 with left supraclav node, January 25 bx positive for metastatic poorly diff CA, c/w breast primary. ER/PR neg. ***** by IHC. Also found to have mediastinal dz.  Rx Taxotere/xeloda +  Herceptin. Described as \"transient\" response, then progression. Rec'd XRT to both regions in 2009.Rx Tykerb+herceptin, responded initially and then progressed. Rx capecitabine/Herceptin. Noted to have rising *****. Rx changed in September 29 to pertuzumab/herceptin/taxotere. May also have had tykerb or herceptin monotherapy at some point (?), pt unsure.    Today comes to clinic with husband. Has been off of rx since last wk. Notes some improvement of *****. C/o left sided CW discomfort, mild.       PMH  HTN  Hx thyroid dz  Depression  PSH: left meniscus 2001.  Meds: Lisinopril. Paxil.  ALL: Clindamycin: itching. CT contrast: anaphylaxis.  OB: ***** P2. Menses 11 yo. LMP 2009 with chemo.    FH  Son with neuroblastoma. Mother with breast CA at 72 yo. BRCA testing negative in *****.    SH  RN / case manager in *****. Married, lives in ***** ***** husband.    ROS  Review of Systems -   General ROS: + mild alopecia. + nausea with chemo  Psychological ROS: negative  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + L CW pain, mild.  Respiratory ROS: negative  Cardiovascular ROS: negative  Gastrointestinal ROS: negative  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: + numbness, tingling in fingers.  Dermatological ROS: + pruritus, scattered sites.  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    PE  BP 104/71 | \n Pulse 122 | Temp(Src) 36.4 C (97.6 F) (Oral) | Resp 22 | Ht 163 cm (5' 4.17\") | Wt 93.486 kg (206 lb 1.6 oz) | BMI 35.19 kg/m2 | SpO2 96%    General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic. Mod alopecia.   Eyes:    PERRL, conjunctiva/corneas clear, EOM's intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity    Heart:    Regular rate and rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality on R. L is s/p Lx with significant volume loss; no masses, lesions otherwise.   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical and axillary nodes normal L supraclav with healed excision site; no masses, lesions.   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     throughout     STUDIES  *****  06/23/13: 14.*****    ***** ***** 06/30/13:  Probable mild progression in the left breast and possibly the left ant CW.  Stable mediastinal adenopathy    Brain MRI with/without contrast 02/14/13:  No evidence of mets.    ***** 06/15/13:   lvef somewhat decreased, 52%.    IMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. Recent PET-CT ***** as probable PD. However, evidence is equivocal for progression. CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8). ***** persistently elevated at 14.8 but not increased since previous. Pt does note some L CW discomfort, however.     2. ***** metastasis.    3. Mediastinal metastasis.    4. Decreased LVEF, likely due to current combination rx incl herceptin (with *****/taxotere)    REC  - Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx (*****/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec ***** as next line of Rx  - Would recheck ***** prior to above  - Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight  - Discussed current clinical trial possibilities, here at ***** and nationally. Discussed multiple alternative ***** directed therapies under development. However, would proceed with ***** at this point based on substantial demonstrated clinical benefit e.g. ***** trial    \n"
+
+--- Column: assessment_and_plan ---
+"IMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. Recent PET-CT ***** as probable PD. However, evidence is equivocal for progression. CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8). ***** persistently elevated at 14.8 but not increased since previous. Pt does note some L CW discomfort, however.     2. ***** metastasis.    3. Mediastinal metastasis.    4. Decreased LVEF, likely due to current combination rx incl herceptin (with *****/taxotere)    REC  - Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx (*****/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec ***** as next line of Rx  - Would recheck ***** prior to above  - Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight  - Discussed current clinical trial possibilities, here at ***** and nationally. Discussed multiple alternative ***** directed therapies under development. However, would proceed with ***** at this point based on substantial demonstrated clinical benefit e.g. ***** trial"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "yes",
+    "in-person": "in-person",
+    "summary": "Patient with metastatic breast cancer (MBC) initially diagnosed in 1998 with Stage II T2N1 left-sided invasive ductal carcinoma (IDC). The purpose of this visit is to seek a second opinion regarding the management of recurrent and metastatic breast cancer."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Originally unclear receptor status, metastatic biopsy ER-/PR-/HER2+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Originally Stage II, now metastatic (Stage IV)",
+    "Metastasis": "Yes (to left supraclavicular node, mediastinum)",
+    "Distant Metastasis": "Yes, to left supraclavicular node, mediastinum"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Probable mild progression in the left breast and possibly the left anterior chest wall. Stable mediastinal adenopathy. No evidence of metastasis on brain MRI. Left ventricular ejection fraction (LVEF) somewhat decreased to  52%. CT shows increased size of left breast tail nodule with SUV 2.1 (previously 1.8). Persistently elevated [REDACTED] at 14.8 but not increased since previous. No palpable masses, skin changes, or lymphadenopathy noted on physical exam."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "d/c current rx ([REDACTED]/Herceptin/Taxotere)",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Probable mild progression in the left breast and possibly the left anterior chest wall. CT shows increased size of left breast tail nodule with SUV 2.1 (previously 1.8). Persistently elevated [REDACTED] at 14.8 but not increased since previous."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Discontinue current regimen including [REDACTED]/Herceptin/Taxotere. Recommend [REDACTED] as the next line of treatment."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Do not consider hormonal therapy at this time. Discussed current clinical trial possibilities and alternative targeted therapies under development, but will proceed with [REDACTED] based on substantial demonstrated clinical benefit."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Would recheck [REDACTED] prior to above"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Would recheck [REDACTED] prior to above"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Not specified in the given text"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Would recheck [REDACTED] prior to above"
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "Discussed current clinical trial possibilities, here at [REDACTED] and nationally."
+  ],
+  "in-person": [
+    "Pt appears to have minor degree of progression based on probable PET/CT interpretation."
+  ],
+  "summary": [
+    "Pt appears to have minor degree of progression based on probable PET/CT interpretation."
+  ],
+  "Stage_of_Cancer": [
+    "MBC, recurrent and metastatic"
+  ],
+  "Metastasis": [
+    "2. [REDACTED] metastasis.    3. Mediastinal metastasis."
+  ],
+  "Distant Metastasis": [
+    "2. [REDACTED] metastasis.    3. Mediastinal metastasis."
+  ],
+  "findings": [
+    "Pt appears to have minor degree of progression based on probable PET/CT interpretation."
+  ],
+  "recent_changes": [
+    "Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx ([REDACTED]/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case."
+  ],
+  "goals_of_treatment": [
+    "MBC, recurrent and metastatic"
+  ],
+  "response_assessment": [
+    "CT shows increased size of left breast tail nodule, with SUV 2.1 (was 1.8)."
+  ],
+  "medication_plan": [
+    "Pt appears to have minor degree of progression based on probable PET/CT interpretation. Although progression is somewhat equivocal and at most minor, would d/c current rx ([REDACTED]/Herceptin/Taxotere) since she also has decreased LVEF on current regimen and would benefit from holding Rx in any case.   - Rec [REDACTED] as next line of Rx"
+  ],
+  "therapy_plan": [
+    "Would not consider hormonal therapy at this time; evidence for hormone responsiveness is slight"
+  ],
+  "lab_plan": [
+    "Would recheck [REDACTED] prior to above"
+  ],
+  "genetic_testing_plan": [
+    "Would recheck [REDACTED] prior to above"
+  ],
+  "follow up": [
+    "Would recheck [REDACTED] prior to above"
+  ]
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 10
+============================================================
+
+--- Column: coral_idx ---
+149
+
+--- Column: note_text ---
+"***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)       I have collected verbal consent for care and acknowledgement of patient financial responsibility at the outset of this video encounter.    Interim History:     She feels well and has recovered well from surgery.  Her ***** was low risk and she does not need chemotherapy.  She will have the simulation for radiation next week.  She will continue on her *****.  She will see us for medical oncology follow up twice a year.       Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole   ***** ***** Note  Patient Name: ***** *****    Patient MRN:  *****   Patient DOB:  01/12/1955   Provider:  ***** ***** *****  Primary Care Provider:  ***** ***** *****, DO      Reason for visit:   Chief Complaint   Patient presents with   \u0007 VIDEO VISIT FUP       Diagnosis:    1. Cancer of central portion of left breast (CMS code)         Interim History:      She stopped smoking and will proceed to ***** Dr. ***** on July 24.  She will stay on letrozole. ***** plan on a ***** to risk stratify for chemotherapy benefit.   Discussed how some patients need radiation after a mastectomy depending on the pathology.           Oncologic history    Patient Active Problem List    Diagnosis Date Noted   \u0007 Cancer of central portion of left breast (CMS code) 05/01/2021       HEME-ONC TREATMENT :  Letrozole.     Medications:    Current Outpatient Medications:   \u0007  cephALEXin (KEFLEX) 500 mg capsule, Take 500 mg by mouth 3 (three) times daily, Disp: , Rfl:   \u0007  letrozole \n (FEMARA) 2.5 mg tablet, Take 1 tablet (2.5 mg total) by mouth daily, Disp: 90 tablet, Rfl: 4  \u0007  traZODone (DESYREL) 50 mg tablet, Take 50 mg by mouth daily as needed for Sleep, Disp: , Rfl:     Allergies: Allergies/Contraindications  No Known Allergies    Review of systems:  CONSTITUTIONAL: No fevers, chills, night sweats, loss of appetite or weight loss  H/E/N/T:  No headaches, vision changes, mouth sores  CV: No chest pain, orthopnea or palpitations  PULM: No cough, hemoptysis or sob.   ABD:  No abdominal pain, nausea, vomiting, diarrhea, or bleeding  GU:  No dysuria or hematuria  SKIN:  No rash or bruising  NEURO:  No difficulty with speech, balance, or gait, no headache  MUSC:  No joint pain  PSYCH:  No depression, or anxiety or trouble sleeping.     Pain    Pain Score/Location    08/28/21 1209   *****: Breast  Comment: LEFT   *****:   1       Code status: full code.     Performance status:  0 - Asymptomatic    Physical exam:  There were no vitals taken for this visit.  GEN: No acute distress, awake and alert, appears stated age    Labs:    No visits with results within 1 Month(s) from this visit.   Latest known visit with results is:   No results found for any previous visit.       Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk *****.   2.  S/p left mastectomy with ***** 07/24/2021 with a 8.8.cm ***** with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021.    4.  She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes.   6.  DEXA.   7.  RTC in the *****.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 20 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as \n well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.    Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only. I spent a total of 20 minutes in ***** communication with this patient.  \n"
+
+--- Column: assessment_and_plan ---
+"Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021. Low risk *****.   2.  S/p left mastectomy with ***** 07/24/2021 with a 8.8.cm ***** with July 20 lymph nodes involved.  S/p bilateral reductions with re excision for margins 08/07/2021.    4.  She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes.   6.  DEXA.   7.  RTC in the *****.       ***** ***** *****, MD  Medical Oncology/Hematology    TIME SPENT:     I spent a total of 20 minutes on this patient's care on the day of their visit excluding time spent related to any billed procedures. This time includes face-to-face time with the patient as \n well as time spent documenting in the medical record, reviewing patient's records and tests, obtaining history, placing orders, communicating with other healthcare professionals, counseling the patient, family, or caregiver, and/or care coordination for the diagnoses above.      I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location. Prior to initiating, the patient consented to perform this evaluation using telehealth tools. My location is in a UCSF clinical facility.    Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only. I spent a total of 20 minutes in ***** communication with this patient.  \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Patient presents for follow-up of cancer of central portion of left breast. She has recovered well from surgery and is scheduled for radiation next week. The purpose of this visit is to discuss ongoing treatment and follow-up plan."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "HR+ invasive ductal carcinoma, HER2-",
+    "Stage_of_Cancer": "Stage II",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "S/p left mastectomy with a 8.8.cm [REDACTED] with July 20 lymph nodes involved. S/p bilateral reductions with re excision for margins 08/07/2021. Physical exam: No acute distress, awake and alert, appears stated age"
+  },
+  "Current_Medications": {
+    "current_meds": "letrozole"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan": {
+    "medication_plan": "She will continue on letrozole started April 2021."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "continue on letrozole started April 2021, to have radiation to the left chest wall and surrounding lymph nodes."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "To have radiation to the left chest wall and surrounding lymph nodes."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "DEXA."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC in the [REDACTED]"
+  },
+  "Advance_care_planning": {
+    "Advance care": "full code."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "",
+    "Others": "None",
+    "follow up": "RTC in the [REDACTED]"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "To have radiation to the left chest wall and surrounding lymph nodes."
+  ],
+  "second opinion": [
+    "Failed Video Connection:  Due to failed video connection, I obtained consent from the patient to conduct this visit by telephone only."
+  ],
+  "in-person": [
+    "I performed this evaluation using real-time telehealth tools, including a live video Zoom connection between my location and the patient's location."
+  ],
+  "summary": [
+    "S/p left mastectomy with [REDACTED] 07/24/2021 with a 8.8.cm [REDACTED] with July 20 lymph nodes involved."
+  ],
+  "Type_of_Cancer": [
+    "Stage II left [REDACTED] of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021."
+  ],
+  "Stage_of_Cancer": [
+    "Stage II left [REDACTED] of the breast"
+  ],
+  "Metastasis": [
+    "Stage II left [REDACTED] of the breast HR + and her 2 negative s/p neoadjuvant letrozole April 2021."
+  ],
+  "Distant Metastasis": [
+    "Stage II left [REDACTED] of the breast"
+  ],
+  "findings": [
+    "S/p left mastectomy with a 8.8.cm [REDACTED] with July 20 lymph nodes involved. S/p bilateral reductions with re excision for margins 08/07/2021."
+  ],
+  "current_meds": [
+    "She will continue on letrozole started April 2021."
+  ],
+  "goals_of_treatment": [
+    "To have radiation to the left chest wall and surrounding lymph nodes."
+  ],
+  "medication_plan": [
+    "She will continue on letrozole started April 2021."
+  ],
+  "therapy_plan": [
+    "She will continue on letrozole started April 2021.   5.  To have radiation to the left chest wall and surrounding lymph nodes."
+  ],
+  "radiotherapy_plan": [
+    "To have radiation to the left chest wall and surrounding lymph nodes."
+  ],
+  "imaging_plan": [
+    "DEXA."
+  ],
+  "Next clinic visit": [
+    "RTC in the [REDACTED]."
+  ],
+  "follow up": [
+    "RTC in the [REDACTED]."
+  ]
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 12
+============================================================
+
+--- Column: coral_idx ---
+151
+
+--- Column: note_text ---
+"SUBJECTIVE  ***** ***** is a 51 y.o. female with de ***** *****+/PR+/*****+ breast cancer to *****, lung, nodes, brain and bone on herceptin and ***** alone along with letrozole since 08/18/17. MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. She underwent GK on 09/07/18. Recent MRI shows new lesions (shown below)    Pt reports doing \"very well\"    Now no longer using walker!!! Pt is very pleased about this. She is increasing her activity, has good *****.      ROS  All systems reviewed and negative except for as outlined above in the HPI.      Patient Active Problem List    Diagnosis Date Noted   \u0007 Advanced care planning/counseling discussion 05/19/2018     - continue cancer treatment with herceptin/*****  - goal to spend time with family and maintain independence as possible  - would not want life support treatments such as resuscitation, intubation/mechanical ventilation, or artificial nutrition  - would want trial of medical interventions for potentially reversible conditions such as IVF, IV antibiotics, etc... with goal of returning home to *****  - completed POLST prior visits, to be scanned into APEX  - DNR/DNI     \u0007 Pleural effusion 12/29/2017   \u0007 Urinary tract infection 10/23/2017   \u0007 Fever 10/20/2017   \u0007 Neoplasm related pain 05/14/2017   \u0007 Constipation 05/14/2017   \u0007 Risk and functional assessment 05/14/2017   \u0007 Breast cancer metastasized to multiple sites (HCC) 04/20/2017     02/09/17 Flying back to *****, ***** from *****, via ***** and admitted to ***** ***** due to right-sided chest pain, 3 week h/o right breast mass with nipple inversion, 3 week h/o mid back pain with bilateral thigh tingling and left leg radiculopathy, SOB x 3 weeks with cough productive of yellow green sputum.  02/09/17 CT Angio Chest: no PE.  Multiple bilateral pulmonary parenchymal nodules are present. Left lower lobe nodule measures up to 8 mm and multiple additional nodules are identified, many \n nodules or pleural-based. There are areas of subsegmental atelectasis in both lungs. There are no pleural effusions. Mediastinal and hilar lymphadenopathy identified. Mediastinal lymph nodes measure up to 15 mm. Largest hilar lymph nodes are present with a left hilar lymph node measuring up to 15 mm. There are multiple enlarged cardiophrenic angle lymph nodes. There are enlarged internal mammary lymph nodes on the right. There is extensive right axillary lymphadenopathy. Nodes measure up to 21 x 18 mm. Multiple nodules are present in the upper inner right breast, one of which is inseparable from the underlying pectoral muscles. There is skin thickening over the central breast and there is an irregularly marginated mass within the breast centrally located above the nipple measuring over 6 cm. There are multiple small lymph nodes in the upper abdomen. Portacaval lymph node measures up to 30 x 15 mm. Small  para-aortic lymph nodes are also present less than 1 cm. There is widespread osseous metastatic disease. Pathologic destruction of multiple ribs and extensive distraction of the sternum involving body of the sternum as well as the manubrium. There is involvement of the thoracic spine most severe at T10 where there is involvement of the vertebral body the pedicle and there is intraspinal extension along the right and lateral aspects of the canal. There is involvement of the right pedicle L1 as well.  02/10/18 MRI Lumbar spine w/ and w/o contrast: Abnormal marrow signal with replacement of normal marrow throughout the lumbosacral spine consistent with metastatic infiltration. Sacral tissues are also infiltrated. There is mild fracture of the inferior endplate of L1 on the right side. T12 inferior endplate demonstrates fracture mild loss of height as well. Epidural contrast enhancement ventrally and dorsally consistent with metastases. This is ***** at L5 level. Abnormal replacement of the marrow signal with tumor \n enhancement along the sacral foramina and sacral canal. T12-L1: Areas mild epidural tumor at T12 compressing the thecal sac ventrally. L1-L2: Mild facet hypertrophy and mild central stenosis. L2-L3: Mild dural thickening and facet hypertrophy. L3-L4: Is asymmetrical epidural fat compressing the thecal sac with moderate stenosis. It is mild dural enhancement. There is mild tumor enhancement posterior to the psoas muscle on the right side at L4. Measures approximately 12 mm. L4-L5: Disc bulge and right sided small disc herniation resulting in right lateral recess and neural foraminal stenosis. Mild dural contrast enhancement. L5-S1: There is no central skull tumor. There is epidural thickening. This is extending from S1 segment.  02/10/17 MRI Thoracic spine w/ and w/o contrast: Thoracic metastases throughout the spine. Minimal compression of T6. There is spinal CORD compression due to epidural tumor and thickening from approximately T5-T9. There is separate mild epidural tumor and thecal sac and cord deformity at T12. The epidural enhancement is contiguous throughout the thoracic spine.  02/10/17 MRI Cervical spine w/ and w/o contrast: Heterogeneous marrow signal throughout the cervical spine consistent with metastatic replacement. No epidural tumor. No intraspinal meningeal contrast enhancement. C5-C6: Mild bulge with mild central stenosis.  02/10/17 Bone scan: Multiple focal areas of increased activity are visualized in the skull, cervical, thoracic and lumbar spine, multiple ribs bilaterally sternum, pelvis, proximal humeri, hips and femurs. Findings correlates with lesions seen on MRI and are consistent with widespread metastatic involvement.Of incidental note, there is no evidence of mass abnormality of the kidneys or obstructive uropathy.   02/10/17 MRI Brain: Small dural based metastases are present along the posterior interhemispheric falx and right parietal convexity. These measure approximately 1 cm or less. \n There is no edema in the adjacent brain parenchyma. Ureteral based metastases are present along the posterior interhemispheric falx and parasagittal convexity bilaterally. There is no edema in the adjacent brain parenchyma. Additionally, small punctate foci of contrast enhancement are noted in the right cerebellar hemisphere inferiorly and posteriorly. It is not clear whether these are small parenchymal metastases or meningeal tumor. There is an approximately 15 mm  metastases in the upper clivus (skull).   02/10/17: BRCA1/2 negative.  02/11/17 CT A/P w/ contrast: Right breast skin thickening is partially imaged. Minimal bibasilar atelectasis. Right lower lobe posterior medial soft tissue thickening along the pleural surface. Few small right cardiophrenic angle lymph nodes are more numerous than normally seen. Small retroperitoneal lymph nodes are predominantly under 1 cm. Extensive bony lytic destructive appearance to the left inferior pubic ramus with subacute/healing fractures suggested. Old right inferior pubic ramus fracture is also seen as well as lytic appearance of the left greater than right acetabulum. Small nondisplaced fracture of the left sacral ala likely pathologic with diffuse osseous metastatic involvement of the sacrum and iliac bones as well as throughout the lumbar vertebral bodies and in multiple ribs. Several healing left and right rib fractures are seen also likely pathologic. Mild degenerative disc disease L4-5.Several endplate compression fracture deformities, for example, inferior endplate compression of T12. Large lytic lesion destroys and replaces much of T10.  02/11/17 bilateral diagnostic mammogram and limited right breast US: The breast tissue is fatty with scattered fibroglandular elements. In the right breast at 12 o'clock middle third, there is a large spiculated mass containing numerous suspicious calcifications.There is diffuse overlying skin thickening as well. No suspicious findings \n are seen in the left breast on mammography. High-resolution ultrasound of the right breast: At 12 o'clock, 2 cm from the nipple, there is a hypoechoic heterogeneous irregularly shaped mass measuring at least 10 x 5 x 7 cm corresponding to mammographic findings and palpable mass. In the right axilla, there is a 25 mm lymph node with thickened cortex that is suspicious for additional metastases.  02/14/17 CT-guided biopsy of the posterior superior left iliac bone: +metastatic adenocarcinoma of breast origin, ER+(76%)/PR+(33%)/*****+ (IHC 3+, no FISH done)  02/14/17 *****-guided biopsy of R breast mass: +IDC, moderately differentiated, ER+(97%)/PR+(79%)/*****+ (IHC 3+/FISH 15.April 10=5.4)  02/18/17: EF 76%  02/18/17 CT A/P due to hypotension and lower extremity weakness: stable compared to 02/11/17 but new left gluteus medius intermuscular hematoma.  02/18/17: new anemia of unclear etiology other than new hematoma (site of bone biopsy)  *****/*****/*****- *****/*****/***** complete 10 fractions (30 Gy) to T spine  02/23/17: start herceptin and ***** (no chemo given due to anemia), start letrozole  03/14/17: second dose herceptin and *****  03/18/17: discharged to ***** *****, *****, ***** for rehab  04/20/17: Consult Dr. ***** (UCSF), only on letrozole at this point, no h/p since *****  05/04/17: start taxotere 75mg/m2 and resume herceptin and *****  *****/*****/***** - *****/*****/*****: admitted locally with severe sepsis, neutropenic fever, n/v  *****/*****: second dose taxotere 75mg/m2, herceptin and *****  *****/*****/***** - *****/*****/*****: admitted locally anemia, mucositis, neutropenic fever, n/v  06/15/17: start taxol 80mg/m2 and continue herceptin and *****  *****/*****/***** - *****/*****/*****: admitted locally with severe sepsis, neutropenic fever, n/v  07/02/17 CT Chest w/ contrast (nothing available for comparison): Previously seen mediastinal and hilar lymphadenopathy not mentioned. Previously seen lung nodules and pleural thickening not seen. Bilateral pleural effusions are seen, moderate on the \n right and small to moderate on the left. The skeleton has a diffusely heterogeneously sclerotic appearance, consistent with widespread bony metastatic disease. Multiple rib fractures are seen bilaterally, mostly with callus formation and likely subacute or older. Ascites is seen around the liver and spleen.  07/03/17: EF 65-70%  07/06/17 CT CAP w/contrast: Stable in chest compared to 07/02/17. No new bone lesions or abd/pel lesions *****.  08/18/17: continue herceptin and ***** alone, restart letrozole  10/31/17 CT CAP (not compared to prior): Sequela of metastatic breast cancer, including superficial skin thickening in the right breast, and diffuse sclerotic osseous metastases with multiple pathologic fractures in various stages of healing, including compression deformities of multiple thoracic vertebral bodies with no extension into the spinal canal. Limited pulmonary exam secondary to suboptimal contrast bolus timing and respiratory motion. Moderate right and small left pleural effusions. Small pericardial effusion.  11/01/17 MRI brain (compared to ***** brain 10/20/2017): An enhancing lesion measuring 6 mm is identified within the left caudate head. There are additional smaller lesions with intrinsic T1 hyperintensity and possible enhancement within the bilateral caudate heads. There is a punctate focus of magnetic susceptibility signal with associated linear enhancement within the left cingulate gyrus. There is a questionable punctate focus of enhancement within the left hippocampus.  There are several additional non enhancing lesions, such as within the right inferior parietal lobule.      11/20/17 MRI brain (not compared to prior - ***** *****): There are 2 enhancing lesions noted in the left basal ganglia just below the caudate. The more medial lesion measures 5 mm with a second lesion above and lateral to this measuring 4 mm. There is also a subtle lesion in the right globus pallidus measuring 3 mm. There is also \n an additional punctate lesion in the high left frontal lobe measuring 2 mm. Additional 2 mm right frontal subcortical lesion noted on coronal images. Small right occipital lesion also seen on coronal images measuring 3 mm  12/01/17 CT CAP: Stable diffuse osseous metastatic disease and right breast skin thickening. Resolved left and improved right pleural effusions.  12/13/17: GK to 23 lesions   12/24/17 ***** due to shortness of breath and right sided back pain, CXR showed stable small right pleural effusion and she was discharged home.   *****/*****/***** - *****/*****/*****: admitted for worsening shortness of breath and continued right sided back pain. CXR showed increased size of moderate right pleural effusion. CT chest revealed a large predominantly dependent loculated right pleural effusion with complete right lower lobe collapse and extensive debris within the right main bronchus and throughout the segmental and subsegmental airways of the right lower lobe suggests possibility of aspiration.   12/29/17: diagnostic and therapeutic thoracentesis with removal of 350ml of fluid. Started on vancomycin and ertapenem. Her symptoms improved.   01/01/18: discharged home. Pleural fluid culture and cytology not finalized. Sent home to ***** ***** 7 day course of PNA directed antibiotics with 3 more days of levofloxacin. For her lower extremity pain, pregabalin was added to morphine and oxycodone.   01/03/18 pleural cultures and cytology negative.   03/29/18 MRI brain: In comparison to prior MRI dated 12/13/2017, there has been interval decrease in size and number of multiple supra and infratentorial metastatic lesions, some of which are no longer well visualized, compatible with history of gamma knife treatment. There are at least two lesions which appear more conspicuous when compared to prior MRI dated 12/13/2017, located within the right postcentral gyrus and along the right inferior temporal sulcus.  04/11/18 ***** to 19 lesions  08/15/18 MRI brain: \n Multiple (at least 8) tiny supratentorial metastases, new from 04/11/2018, as detailed. Previously treated enhancing metastases are no longer visualized, consistent with treatment response.   09/05/18 CT CAP: Interval resolution of right pleural effusion. Stable appearance of metastatic disease, including enlarged right cardiophrenic lymph nodes, 9 mm celiac axis node, and diffuse osseous lesions  09/07/18 *****              MEDICATIONS  Current Outpatient Medications   Medication Sig Dispense Refill   \u0007 aspirin 81 mg EC tablet Take 81 mg by mouth Daily.     \u0007 letrozole (FEMARA) 2.5 mg tablet TAKE ONE TABLET BY MOUTH ONE TIME DAILY  90 tablet 11   \u0007 cholecalciferol, vitamin D3, 1000 UNITS TAB tablet Take 1 tablet (1,000 Units total) by mouth Daily. (Patient not taking: Reported on 02/21/2019) 90 tablet 11   \u0007 guaifenesin-codeine (GUAIFENESIN AC) 100-10 mg/5 mL liquid Take 5 mLs by mouth 3 (three) times daily as needed for Cough. (Patient not taking: Reported on 02/21/2019) 120 mL 0   \u0007 magnesium oxide (MAG-OX) 400 mg tablet Take 1 tablet (400 mg total) by mouth nightly at bedtime. (Patient not taking: Reported on 02/21/2019) 90 tablet 11     No current facility-administered medications for this visit.      Facility-Administered Medications Ordered in ***** *****   Medication Dose Route Frequency Provider Last Rate Last Dose   \u0007 0.9 % sodium chloride infusion  10-30 mL/hr Intravenous Continuous ***** ***** *****, NP   Stopped at 02/21/19 1030   \u0007 albuterol (PROVENTIL HFA;VENTOLIN HFA) 90 mcg/actuation inhaler 2 puff  2 puff Inhalation Once PRN ***** ***** *****, NP       \u0007 dextrose 5% infusion  10-30 mL/hr Intravenous Continuous ***** ***** *****, NP       \u0007 diphenhydrAMINE (BENADRYL) injection 50 mg  50 mg Intravenous Once PRN ***** ***** *****, NP       \u0007 EPINEPHrine (EPIPEN) injection 0.3 mg  0.3 mg Intramuscular Once PRN ***** ***** *****, NP       \u0007 heparin flush 100 unit/mL injection syringe 300 Units  300 Units Intravenous \n PRN ***** ***** *****, NP       \u0007 heparin flush 100 unit/mL injection syringe 500 Units  500 Units Intravenous PRN ***** ***** *****, NP   500 Units at 02/21/19 1032   \u0007 hydrocortisone sodium succinate (SOLU-CORTEF) 100 mg/2 mL injection 100 mg  100 mg Intravenous Once PRN ***** ***** *****, NP           ALLERGIES  Allergies/Contraindications  No Known Allergies    PAST, FAMILY, and SOCIAL HISTORY  Past Medical History:   Diagnosis Date   \u0007 Breast cancer (HCC)    \u0007 CHF (congestive heart failure) (HCC)     HFpEF   \u0007 Diabetes (HCC)    \u0007 Hepatitis B    \u0007 Hypertension    \u0007 Malnutrition (HCC)    \u0007 Peripheral neuropathy        Social History     Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 1.00     Years: 32.00     ***** years: 32.00     Types: Cigarettes     Last attempt to quit: 01/06/2017     Years since quitting: 2.1   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: No   \u0007 Drug use: No   Social History Narrative    Originally from *****. Moved to *****, ***** in 2008, then back to ***** in 2016. When traveling to the ***** ***** in February 2017, she developed back pain and dyspnea, requiring urgent hospitalization during a layover in *****, found to have metastatic breast cancer c/b multiple pathology fractures. Now living in the ***** Bay. Worked as CNA prior to illness. Married with two adult children. Needs assistance with ADLs. Walks with a walker around the house, uses wheel chair for trips outside. She attends Methodist *****. Enjoys going out and visiting with friends.  No tobacco, etoh, former smoker.        PHYSICAL EXAM  ECOG 1  BP 112/68  | Pulse 66  | Temp 36.6 C (97.8 F) (Oral)  | Resp 18  | Ht 167.3 cm (5' 5.87\")  | Wt 67.8 kg (149 lb 9 oz)  | SpO2 98%  | BMI 24.24 kg/m     General Appearance:    Alert, cooperative, no distress, appears stated age   Head:    Normocephalic, without obvious abnormality, atraumatic   Eyes:    PERRL, conjunctiva/corneas clear, EOM's \n intact, fundi     benign, both eyes   Ears:    Normal TM's and external ear canals, both ears   Nose:   Nares normal, septum midline, mucosa normal, no drainage     or sinus tenderness   Throat:   Lips, mucosa, and tongue normal; teeth and gums normal   Neck:   Supple, symmetrical, trachea midline, no adenopathy;     thyroid:  no enlargement/tenderness/nodules; no carotid    bruit or JVD   Back:     Symmetric, no curvature, ROM normal, no CVA tenderness   Lungs:     Clear to auscultation bilaterally, respirations unlabored   Chest Wall:    No tenderness or deformity    Heart:    Regular rate and rhythm, S1 and S2 normal, no murmur, rub    or gallop   Breast Exam:    No tenderness, masses, or nipple abnormality bilat.   Abdomen:     Soft, non-tender, bowel sounds active all four quadrants,     no masses, no organomegaly   Extremities:   Extremities normal, atraumatic, no cyanosis or edema   Pulses:   2+ and symmetric all extremities   Skin:   Skin color, texture, turgor normal, no rashes or lesions   Lymph nodes:   Cervical, supraclavicular, and axillary nodes normal   Neurologic:   CNII-XII intact, normal strength, sensation and reflexes     Throughout + walker. + mild weakness ***** *****     STUDIES  MR BRAIN WITH AND WITHOUT CONTRAST : *****/*****/***** *****:***** PM    CLINICAL HISTORY: Metastatic breast cancer restaging. Underwent gamma knife radiosurgery on 12/13/2017 (23 lesions), 04/11/2018 (19 lesions), and 09/07/2018 (17 lesions).    COMPARISON: Brain MRI 09/07/2018.    TECHNIQUE: Multiple sequences through the brain were acquired at 1.5 *****.    CONTRAST MEDIA: Intravenous gadolinium chelate was administered for post-contrast imaging.    FINDINGS:    No reduced diffusion, acute hemorrhage, or herniation.    Compared with 09/07/2018, new enhancing lesions on axial T1 ***** post-contrast images (series 900) are seen, as follows:  - 3 mm lesion, left superior frontal gyrus, image 168  - 1 mm lesion, right precentral gyrus, \n image 162    The previously described, now treated metastases seen on 09/07/2018, are no longer visible. No infratentorial or leptomeningeal metastases.    No significant associated edema or mass effect.    Unchanged punctate focus of metallic susceptibility artifact within the left superior frontal gyrus compared with 08/15/2018.    Parenchyma:  No acute hemorrhage. No herniation. The brain is normal in signal intensity and morphology for the patient's age. There are no suspicious areas of parenchymal T2 hyperintensity. No reduced diffusion.             Ventricles are within normal limits of size for the patient's age.      Extra-axial spaces are normal.    Normal flow voids.      Scattered enhancing lesions in the calvarium are again demonstrated.    Orbits and paranasal sinuses are unremarkable.    IMPRESSION:     1. Since 09/07/2018, interval development of two small enhancing lesions within the left superior frontal gyrus and right precentral gyrus as described, concerning for new metastases.    2. The previously described metastases seen on 09/07/2018 are no longer visible, compatible with treatment response.     Report dictated by: ***** *****, MD, signed by: ***** *****, MD PhD  Department of Radiology and Biomedical Imaging    CT CHEST WITH CONTRAST    CLINICAL HISTORY:  metastatic breast cancer restaging    COMPARISON: CT chest 09/05/2018    TECHNIQUE: Serial 1.25 mm axial images through the chest were obtained after the administration of intravenous contrast.    RADIATION DOSE INDICATORS:  1 exposure event(s), CTDIvol:  23.0 mGy. DLP: 1511 mGy-cm.    The following accession numbers are related to this dose report [*****]:  *****    FINDINGS:    LUNGS:  Similar appearance of bandlike atelectasis in the right middle and lower lobes. Lungs are otherwise clear.    PLEURA:  No pleural effusion.    MEDIASTINUM:   No mediastinal lymphadenopathy. Smaller appearance of a right \n cardiophrenic node measuring 5 mm short axis (series 6, image 149).    HEART/***** *****:  Normal cardiac size. No pericardial effusion. Left chest port catheter tip terminates in the right atrium. Normal caliber of the great vessels.    BONES/SOFT TISSUES:  Extensive sclerotic and lytic lesions throughout the spine, sternum, and ribs, unchanged in appearance.    VISIBLE ABDOMEN:  Please see dedicated Abdomen and Pelvis CT report.    IMPRESSION:   Stable appearance of diffuse osseous metastatic lesions. No suspicious pulmonary nodules.    Report dictated by: ***** *****, MD, PhD, signed by: ***** ***** *****, MD  Department of Radiology and Biomedical Imaging    CT ABDOMEN/PELVIS WITH CONTRAST  *****/*****/***** *****:***** PM    CLINICAL HISTORY: metastatic breast cancer restaging    COMPARISON:  09/05/2018    TECHNIQUE: Following the administration of 150 cc of Omnipaque 350, contiguous 1.25-mm collimation axial images were obtained through the abdomen and pelvis. Coronal and sagittal reformats were also obtained.    FINDINGS:    Visualized lung bases:  For chest findings, please see the separately dictated report from the CT of the chest of the same date.    Liver:  Unremarkable    Gallbladder: Unremarkable    Spleen:  Unremarkable    Pancreas:  Unremarkable     Adrenal Glands:  Unremarkable    Kidneys:  Unremarkable    GI Tract:  Unremarkable    Vasculature:  Unremarkable    Lymphadenopathy: Slight interval decrease in size of 7 mm celiac axis node (series 4 image 40), previously 9 mm.    Peritoneum: No ascites    Bladder: Unremarkable    Reproductive organs: Unremarkable    Bones:  Unchanged diffuse osseous metastasis throughout the visualized bones.    Extraperitoneal soft tissues: Unremarkable    Lines/drains/medical devices: None    RADIATION DOSE INDICATORS:  1 exposure event(s), CTDIvol:  23.0 mGy. DLP: 1511 mGy-cm.    The following accession numbers are related to this dose report \n [*****]:  *****    IMPRESSION:     1. Unchanged diffuse osseous metastatic disease.    2. Slight interval decrease in size of 7 mm celiac axis lymph node.      Report dictated by: ***** *****, MD, signed by: ***** ***** *****, MD  Department of Radiology and Biomedical Imaging    ASSESSMENT & PLAN  #. Metastatic breast cancer, St IV de *****.  ***** ***** is a 50 y.o. female with de ***** *****+/PR+/*****+ breast cancer to *****, lung, nodes, brain and bone on herceptin and ***** alone along with letrozole since 08/18/17. MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. She underwent GK on 09/07/18. However has another episode of brain mets (see below). Nevertheless recent body CT shows SD and possible ***** status. CT shows only multiple bone sites, ? Active, no sx's and no evidence of PD. Otherwise has no other clear sites of metastatic dz, including in lung.  - cont herceptin/***** *****  - cont letrozole qd  - cont *****; now q12 wks given stable bone status  - cont off chemotherapy for now, due to intolerance to multiple agents  - CT CAP every 4 months  - will add bone scan with next eval in 4 mos  - MRI brain every 4 months  - Echo q6 months, recent reviewed and stable/normal, repeat again in April 2019 after next visit.    # Brain mets. s/p GK to 23 lesions on 12/13/17 and another 19 lesions on 04/11/18. GK again on 09/07/18. New MRI January 31 shows 2 new foci.  - await GK / Rad Onc input, and potential plan for repeat GK  - message conveyed to GK team via     # Lung mets. Now *****.    #. Neuropathy due to spinal metastases vs limited taxane Rx, improved, stable and \"able to tolerate\" without analgesics. Was receiving constant massage from family members, but now not needed  - F/u Dr. ***** in *****.     # Weakness. Stable. Now off of walker  - cont home exercises    F/u in 6 weeks    I have reviewed and updated the patient's past medical history, medications, allergies, \n family and social histories. I spent a total of 45 minutes face-to-face with the patient and 40 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.             \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  #. Metastatic breast cancer, St IV de *****.  ***** ***** is a 50 y.o. female with de ***** *****+/PR+/*****+ breast cancer to *****, lung, nodes, brain and bone on herceptin and ***** alone along with letrozole since 08/18/17. MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. She underwent GK on 09/07/18. However has another episode of brain mets (see below). Nevertheless recent body CT shows SD and possible ***** status. CT shows only multiple bone sites, ? Active, no sx's and no evidence of PD. Otherwise has no other clear sites of metastatic dz, including in lung.  - cont herceptin/***** *****  - cont letrozole qd  - cont *****; now q12 wks given stable bone status  - cont off chemotherapy for now, due to intolerance to multiple agents  - CT CAP every 4 months  - will add bone scan with next eval in 4 mos  - MRI brain every 4 months  - Echo q6 months, recent reviewed and stable/normal, repeat again in April 2019 after next visit.    # Brain mets. s/p GK to 23 lesions on 12/13/17 and another 19 lesions on 04/11/18. GK again on 09/07/18. New MRI January 31 shows 2 new foci.  - await GK / Rad Onc input, and potential plan for repeat GK  - message conveyed to GK team via     # Lung mets. Now *****.    #. Neuropathy due to spinal metastases vs limited taxane Rx, improved, stable and \"able to tolerate\" without analgesics. Was receiving constant massage from family members, but now not needed  - F/u Dr. ***** in *****.     # Weakness. Stable. Now off of walker  - cont home exercises    F/u in 6 weeks    I have reviewed and updated the patient's past medical history, medications, allergies, \n family and social histories. I spent a total of 45 minutes face-to-face with the patient and 40 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.             \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Metastatic ER+/PR+/HER2+ breast cancer to brain, lung, nodes, and bone. The purpose of this visit is to review recent imaging, discuss treatment plan, and manage symptoms."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage IV",
+    "Metastasis": "Yes (to brain, lung, bone)",
+    "Distant Metastasis": "Yes (to brain, lung, bone)"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "MRI brain on 08/15/18 showed multiple very small new CNS lesions. CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no mediastinal lymphadenopathy, and stable appearance of diffuse osseous metastatic lesions. CT A/P on 09/05/18 showed interval resolution of right pleural effusion and stable appearance of metastatic disease, including enlarged right cardiophrenic lymph nodes, 9 mm celiac axis node, and diffuse osseous lesions. Physical exam: ECOG 1, BP 112/68, Pulse 66, Temp 36.6 C, Resp 18, Ht 167.3 cm, Wt 67.8 kg, SpO2 98%, BMI 24.24 kg/m. General appearance: Alert, cooperative, no distress, appears stated age. No tenderness, masses, or nipple abnormality bilat. No significant associated edema or mass effect. No suspicious areas of parenchymal T2 hyperintensity. No reduced diffusion. No acute hemorrhage. No herniation. No infratentorial or leptomeningeal metastases. No pleural effusion. No mediastinal lymphadenopathy. No suspicious pulmonary nodules. No ascites. No pericardial effusion."
+  },
+  "Current_Medications": {
+    "current_meds": "herceptin, letrozole"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "morphine, oxycodone"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "CT CAP on 09/05/18 was stable. Recent MRI shows new lesions. MRI brain on 09/05/18 showed no pleural effusion, no mediastinal lymphadenopathy, and stable appearance of diffuse osseous metastatic lesions. CT A/P on 09/05/18 showed interval resolution of right pleural effusion and stable appearance of metastatic disease, including enlarged right cardiophrenic lymph nodes, 9 mm celiac axis node, and diffuse osseous lesions. No significant associated edema or mass effect. No suspicious areas of parenchymal T2 hyperintensity. No reduced diffusion. No acute hemorrhage. No herniation. No infratentorial or leptomeningeal metastases. No pleural effusion. No mediastinal lymphadenopathy. No suspicious pulmonary nodules. No ascites. No pericardial effusion."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] now q12 wks given stable bone status, continue off chemotherapy for now due to intolerance to multiple agents."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "continue herceptin/[REDACTED] [REDACTED], continue letrozole qd, continue [REDACTED] q12 wks given stable bone status, continue off chemotherapy for now due to intolerance to multiple agents, await GK / Rad Onc input, and potential plan for repeat GK"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "await GK / Rad Onc input, and potential plan for repeat GK"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT CAP every 4 months, will add bone scan with next eval in 4 mos, MRI brain every 4 months"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 6 weeks"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Rad Onc consult",
+    "Others": "None",
+    "follow up": "F/u Dr. [REDACTED] in [REDACTED]."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "F/u in 6 weeks"
+  ],
+  "second opinion": [
+    "cont off chemotherapy for now, due to intolerance to multiple agents"
+  ],
+  "in-person": [
+    "I have reviewed and updated the patient's past medical history, medications, allergies,"
+  ],
+  "summary": [
+    "50 y.o. female with de [REDACTED] [REDACTED]+/PR+/[REDACTED]+ breast cancer to [REDACTED], lung, nodes, brain and bone"
+  ],
+  "Type_of_Cancer": [
+    "de [REDACTED] [REDACTED]+/PR+/[REDACTED]+ breast cancer"
+  ],
+  "Stage_of_Cancer": [
+    "Metastatic breast cancer, St IV"
+  ],
+  "Metastasis": [
+    "breast cancer to [REDACTED], lung, nodes, brain and bone"
+  ],
+  "Distant Metastasis": [
+    "breast cancer to [REDACTED], lung, nodes, brain and bone"
+  ],
+  "findings": [
+    "MRI brain on 08/15/18 showed multiple very small new CNS lesions."
+  ],
+  "current_meds": [
+    "- cont herceptin/[REDACTED] [REDACTED]  - cont letrozole qd"
+  ],
+  "goals_of_treatment": [
+    "off chemotherapy for now, due to intolerance to multiple agents"
+  ],
+  "response_assessment": [
+    "CT CAP on 09/05/18 was stable."
+  ],
+  "medication_plan": [
+    "- cont herceptin/[REDACTED] [REDACTED]  - cont letrozole qd  - cont [REDACTED]; now q12 wks given stable bone status  - cont off chemotherapy for now, due to intolerance to multiple agents"
+  ],
+  "therapy_plan": [
+    "- cont herceptin/[REDACTED] [REDACTED]  - cont letrozole qd  - cont [REDACTED]; now q12 wks given stable bone status  - cont off chemotherapy for now, due to intolerance to multiple agents"
+  ],
+  "radiotherapy_plan": [
+    "await GK / Rad Onc input, and potential plan for repeat GK"
+  ],
+  "procedure_plan": [
+    "await GK / Rad Onc input, and potential plan for repeat GK"
+  ],
+  "imaging_plan": [
+    "CT CAP every 4 months  - will add bone scan with next eval in 4 mos  - MRI brain every 4 months"
+  ],
+  "Next clinic visit": [
+    "F/u in 6 weeks"
+  ],
+  "Specialty": [
+    "await GK / Rad Onc input, and potential plan for repeat GK"
+  ],
+  "follow up": [
+    "F/u Dr. [REDACTED] in [REDACTED]."
+  ]
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 59
+============================================================
+
+--- Column: coral_idx ---
+198
+
+--- Column: note_text ---
+"***** ***** is a 52 y.o. female with a *****  *****+/PR+/*****- right  breast cancer diagnosed in September 2016. Her cancer was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17. For complete details of her medical and treatment history, please refer to the problem list.     Interim History:  She was seen by ***** ***** in December 2017 in ***** and complained of weight gain, body aches, and arthralgia. ***** suggested a 2-3 week break off Tamoxifen to see if her symptoms improved. Despite being off Tamoxifen, her symptoms did not improve. She also tried Ibuprofen which provided no relief for her arthralgias. In a follow up in March 2018, she admitted that she had not restarted Tamoxifen. At this time, ***** suggested starting letrozole. ***** notes that the symptoms worsened on Letrozole. Her weight stabilized since November/December 2017.     She then saw Dr. ***** on 06/07/18 regarding the ongoing pain and aches. In early June 2018, she was advised to switch to Exemestane and a prescription was sent in but she has not tried it yet.      Patient Active Problem List    Diagnosis Date Noted   \u0007 Asthma 11/16/2016   \u0007 Hypothyroid 11/16/2016   \u0007 Allergic rhinitis 11/16/2016   \u0007 Malignant neoplasm of central portion of right breast in female, estrogen receptor positive (HCC) 11/08/2016     Late August 2016: Patient palpated a mass in her right breast.  09/07/2016: Bilateral mammogram and right breast US revealed a 1.4 cm mass in the right breast at 12:00 (***** with palpable mass). Left breast was negative.   09/09/16: US guided core biopsy of the right breast mass revealed grade 2 IDC (ER+ (100%)/PR + 40%)/*****/neu equivocal by IHC and *****,  *****-67 25%-60%).   11/18/16 Right partial mastectomy with *****: 1.5 cm grade 3 IDC, high grade DCIS, negative nodes (0/5); Margins negative; ER pos >95% PR pos 50% \n ***** equivocal on IHC and negative by FISH , *****-67 25%. ***** High Risk (-0.294)  01/10/17: Started TC, had allergic reaction and switched to Abraxane/Cytoxan for the last dose  05/19/17: completed XRT  05/27/17: started tamoxifen  March 2018 Stopped Tamoxifen and advised to start letrozole after a 2 week break  June 2018 Stopped letrozole and advised to start exemestane       MEDICATIONS  Current Outpatient Medications   Medication Sig Dispense Refill   \u0007 ALBUTEROL INH Inhale into the lungs.     \u0007 desvenlafaxine succinate (PRISTIQ ORAL) Take by mouth.     \u0007 desvenlafaxine succinate (PRISTIQ) 25 mg 24 hr tablet Take 1 tablet (25 mg total) by mouth Daily. Take with 50 mg dose for a total of 75 mg 60 tablet 6   \u0007 ERGOCALCIFEROL, VITAMIN D2, (VITAMIN D ORAL) Take 1,000 Units by mouth Daily.     \u0007 exemestane (*****) 25 mg tablet Take 1 tablet (25 mg total) by mouth Daily. 30 tablet 11   \u0007 gabapentin (NEURONTIN) 300 mg capsule Take 300 mg in the morning and afternoon and two tablets at night., 120 capsule 3   \u0007 letrozole (FEMARA) 2.5 mg tablet Take 1 tablet (2.5 mg total) by mouth Daily. 60 tablet 3   \u0007 levothyroxine 25 mcg tablet Take 1.12 mcg by mouth Daily.      \u0007 montelukast (SINGULAIR) 10 mg tablet Take by mouth.     \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 1 tablet (500 mg total) by mouth every 6 (six) hours as needed (Headache). (Patient not taking: Reported on 01/28/2017)     \u0007 CYCLOBENZAPRINE HCL (CYCLOBENZAPRINE ORAL) Take 5 mg by mouth As needed after meals.     \u0007 IBUPROFEN ORAL Take 800 mg by mouth.     \u0007 triamcinolone (KENALOG) 0.1 % cream Apply topically Twice a day. (Patient not taking: Reported on 03/31/2018) 15 g 1     No current facility-administered medications for this visit.      OB History   Obstetric Comments   Her last menses was 3 years ago (in 2015). She denies H/A's.      ALLERGIES  Allergies/Contraindications   Allergen Reactions   \u0007 Docetaxel      5 minutes into the infusion, patient c/o \n facial flushing and tightness of throat.  Benadryl and hydrocortisone IV given, symptoms resolved. , Infusion restarted at February 10 rate then February 08 rate then April 11 rate the full rate, patient tolerated remainder of infusion well    \u0007 Morphine Itching and Swelling     Face gets itchy and swollen   \u0007 Paclitaxel-Protein ***** Other (See Comments)     After Abraxane infusion was completed, c/o coughing, itchy throat, itchy chest, SOB, anxious.  No rescue meds were given, symptoms resolved after 20min   \u0007 Sulfa (Sulfonamide Antibiotics) Other (See Comments)     Small Hives and Itching        PAST, FAMILY, and SOCIAL HISTORY  Past Medical History:   Diagnosis Date   \u0007 Breast cancer, right (HCC)        Social History     Tobacco Use   \u0007 Smoking status: Former Smoker   \u0007 Smokeless tobacco: Never Used   Substance Use Topics   \u0007 Alcohol use: No   \u0007 Drug use: No     Social Documentation          Lives in ***** ***** her mother. Works as a *****        Review of Systems -  Positive for body aches, arthralgias. Patient denies sleep disturbance, sore throat, nasal congestion, vision changes, cough, chest pain, dyspnea, nausea, vomiting, abdominal pain, headaches, fevers, and change in bladder or bowel function. Remaining systems reviewed and are negative except that outlined above    Objective   PHYSICAL EXAM  Vital Signs:  BP 106/70  | Pulse 90  | Temp 37.2 ***** (98.9 F) (Oral)  | Resp 16  | Ht 153 cm (5' 0.24\") Comment: 11/09/2017 @***** | Wt 89.8 kg (197 lb 14.4 oz)  | SpO2 96%  | BMI 38.35 kg/m    13 lb wt gain since starting Tamoxifen May 2017, stable since November/December 2017.   ECOG: 1  Mental status - alert, oriented to person, place, and time  Eyes - PERRL, EOMI  Mouth - mucous membranes moist, pharynx normal without lesions  Neck - supple, no significant adenopathy  Lymphatics - no palpable lymphadenopathy, no hepatosplenomegaly  Chest - clear to auscultation, no wheezes, symmetric air entry  Heart - normal heart rate and regular \n rhythm  Abdomen - soft, nontender, nondistended, no masses or organomegaly  Breasts - Lumpectomy scar well healed. No dominant mass in either breast  Back exam - full range of motion, no tenderness, palpable spasm or pain on motion  Neurological - cranial nerves II through XII intact, motor and sensory grossly normal bilaterally  Musculoskeletal - no muscular tenderness noted  Skin - no rashes, no suspicious skin lesions noted  Psychiatric - Normal mood and affect.     RESULTS    Results for orders placed or performed in visit on 03/31/18   Vitamin D, 25-Hydroxy   Result Value Ref Range    Vitamin D, 25-Hydroxy 32 20 - 50 ng/mL   Follicle stimulating hormone   Result Value Ref Range    Follicle stimulating hormone 32.5 IU/L   Estradiol, Ultrasensitive   Result Value Ref Range    Estradiol, Ultrasensitive 5 pg/mL   Free T4   Result Value Ref Range    Free T4 13 10 - 18 pmol/L   Thyroid Stimulating Hormone   Result Value Ref Range    Thyroid Stimulating Hormone 0.68 0.45 - 4.12 mIU/L     ASSESSMENT & PLAN  ***** ***** is a 52 y.o. female  with stage 1 right sided ER+/PR+/*****- breast cancer in September 2016 which was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17.    1. Right Breast cancer: ***** is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. She has been seen in the Survivorship clinic  and was advised to stop Tamoxifen and switch to letrozole. However, there was no symptom improvement on letrozole so she was recently advised to switch to Exemestane. She was not aware of this recommendation. I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better. She understands that we still recommend at least 5 years of hormonal therapy and \n despite her side effects, she does have intentions of continuing hormone therapy for 5 years.    She is due for her right mammogram in July. Continue mammograms alternating with MRI  and every 6 month clinical breast exam.    2. Depression: She is currently on Pristiq 75 mg. I discussed with her the value of Duloxetine for ***** induced joint pain but I am concerned about the drug interaction of these two medications. I will refer her to psychiatry to determine how to best proceed with a transition from ***** to duloxetine. I discussed with her the most common side effects of Duloxetine including fatigue, nausea, headache, and dry mouth.     3. Weight: Her weight has been stable since November/December 2017.     ***** with me in 6 months.     I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 40 minutes face-to-face with the patient and 25 minutes of that time was spent counseling regarding the treatment plan, medication risks, lifestyle modification, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.    *****, ***** ***** am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM     The above scribed documentation accurately reflects the services I have provided.    ***** ***** *****, MD   *****/*****/***** *****:***** PM        \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  ***** ***** is a 52 y.o. female  with stage 1 right sided ER+/PR+/*****- breast cancer in September 2016 which was ***** occult. She underwent a lumpectomy and ***** and completed 3 cycles of TC followed by one cycle of Abraxane and Cytoxan. She completed XRT and started tamoxifen on 05/27/17.    1. Right Breast cancer: ***** is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. She has been seen in the Survivorship clinic  and was advised to stop Tamoxifen and switch to letrozole. However, there was no symptom improvement on letrozole so she was recently advised to switch to Exemestane. She was not aware of this recommendation. I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better. She understands that we still recommend at least 5 years of hormonal therapy and \n despite her side effects, she does have intentions of continuing hormone therapy for 5 years.    She is due for her right mammogram in July. Continue mammograms alternating with MRI  and every 6 month clinical breast exam.    2. Depression: She is currently on Pristiq 75 mg. I discussed with her the value of Duloxetine for ***** induced joint pain but I am concerned about the drug interaction of these two medications. I will refer her to psychiatry to determine how to best proceed with a transition from ***** to duloxetine. I discussed with her the most common side effects of Duloxetine including fatigue, nausea, headache, and dry mouth.     3. Weight: Her weight has been stable since November/December 2017.     ***** with me in 6 months.     I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 40 minutes face-to-face with the patient and 25 minutes of that time was spent counseling regarding the treatment plan, medication risks, lifestyle modification, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.    *****, ***** ***** am acting as a scribe for services provided by ***** ***** *****, MD on *****/*****/***** *****:***** PM     The above scribed documentation accurately reflects the services I have provided.    ***** ***** *****, MD   *****/*****/***** *****:***** PM        \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "52 y.o. female with stage 1 right-sided ER+/PR+/HER2- breast cancer diagnosed in September 2016. The purpose of this visit is to discuss ongoing management of hormone therapy, address side effects, and review the plan to switch from letrozole to exemestane."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma with high grade DCIS",
+    "Stage_of_Cancer": "Stage I",
+    "Metastasis": "No",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Vitamin D, 25-Hydroxy 32 ng/mL, Follicle stimulating hormone  32.5 IU/L, Estradiol, Ultrasensitive 5 pg/mL, Free T4 13 pmol/L, Thyroid Stimulating Hormone 0.68 mIU/L"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms. Lumpectomy scar is well healed with no dominant mass in either breast. No palpable lymphadenopathy, no hepatosplenomegaly, no wheezes, symmetric air entry, normal heart rate and regular rhythm, soft abdomen, no masses or organomegaly, no muscular tenderness, no rashes, no suspicious skin lesions noted. Weight has been stable since November/December 2017."
+  },
+  "Current_Medications": {
+    "current_meds": "exemestane ([REDACTED])"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped letrozole and advised to start exemestane",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "no evidence of disease recurrence either locally or systemically based on physical exam findings or review of symptoms"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue Pristiq 75 mg. Consider transitioning to Duloxetine for joint pain, but will refer to psychiatry to determine the best course of action due to potential drug interactions."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. Continue at least 5 years of hormonal therapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Right mammogram due in July, continue mammograms alternating with MRI, and every 6 month clinical breast exam."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: 6 months for follow-up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "psychiatry",
+    "Others": "None",
+    "follow up": "[REDACTED] with me in 6 months."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "[REDACTED] with me in 6 months."
+  ],
+  "in-person": [
+    "I spent a total of 40 minutes face-to-face with the patient and 25 minutes of that time was spent counseling regarding the treatment plan, medication risks, lifestyle modification, symptoms and therapeutic options."
+  ],
+  "summary": [
+    "52 y.o. female  with stage 1 right sided ER+/PR+/[REDACTED]- breast cancer in September 2016"
+  ],
+  "Type_of_Cancer": [
+    "52 y.o. female  with stage 1 right sided ER+/PR+/[REDACTED]- breast cancer"
+  ],
+  "Stage_of_Cancer": [
+    "stage 1 right sided ER+/PR+/[REDACTED]- breast cancer"
+  ],
+  "Metastasis": [
+    "[REDACTED] is currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  ],
+  "Distant Metastasis": [
+    "currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  ],
+  "findings": [
+    "currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  ],
+  "current_meds": [
+    "she was recently advised to switch to Exemestane."
+  ],
+  "recent_changes": [
+    "I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better."
+  ],
+  "goals_of_treatment": [
+    "she does have intentions of continuing hormone therapy for 5 years."
+  ],
+  "response_assessment": [
+    "currently without evidence of recurrence either locally or systemically based on physical exam findings or review of symptoms."
+  ],
+  "medication_plan": [
+    "Discontinue Letrozole and waiting 2-3 weeks before starting Exemestane"
+  ],
+  "therapy_plan": [
+    "discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane to see if she tolerates it better. She understands that we still recommend at least 5 years of hormonal therapy"
+  ],
+  "imaging_plan": [
+    "She is due for her right mammogram in July. Continue mammograms alternating with MRI  and every 6 month clinical breast exam."
+  ],
+  "Next clinic visit": [
+    "[REDACTED] with me in 6 months."
+  ],
+  "Specialty": [
+    "I will refer her to psychiatry to determine how to best proceed with a transition from [REDACTED] to duloxetine."
+  ],
+  "follow up": [
+    "[REDACTED] with me in 6 months."
+  ]
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 90
+============================================================
+
+--- Column: coral_idx ---
+229
+
+--- Column: note_text ---
+"  I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.      ID  51 y.o.    CC  Breast CA R    HPI    ***** ***** is a 51 y.o. female is currently enrolled in ***** and randomized to *****/***** today Cycle 12 treatment. S/p ***** with *****/*****. Currently on cycle 2 of AC.    INTERVAL     She completed cycle 1 of AC on 06/10/20. Most recent is cycle 3, 2 wks ago.     Pt notes increasing sx's with each cycle.    Cycle 3 was \"like a freight train\". *****, *****, achiness, worsening of GERD.    ***** was worst on D5. Did not take zofran due to induction of *****    Neuropathy in the hands and feet has largely resolved,    PMH  Illnesses:   Diagnosis Date   \u0007 Adenocarcinoma of right breast (HCC) 01/15/2020   \u0007 Allergy 1976   \u0007 Arthritis 2015   \u0007 GERD (gastroesophageal reflux disease)         GYN  Personal history of cancer: no  History of previous breast biopsy: no  Age at first Menarche: 12  Obstetrics: G0  Uterus/Ovaries intact: yes  LMP December 19. Irregular  History of hormone use: no, ~7 yrs (BCP only in 20's)  Radiation Exposure:none   ***** Jewish or ***** European ethnicity: no     Family History   Family History   Adopted: Yes   Family history unknown: Yes      Positive for a single mutation in the BLM *****:   This means that Ms. ***** does not have ***** Syndrome but is a carrier for the condition.    Being a carrier for ***** Syndrome is preliminarily linked to a moderate increase in cancer risk.     Social History           Socioeconomic History   \u0007 Marital status: Unknown/Declined     Spouse name: *****   \u0007 Number of children: None   \u0007 Years of education: None   \u0007 Highest education level: None   Occupational History   \u0007 \n None   Social Needs   \u0007 Financial resource strain: None   \u0007 Food insecurity:     Worry: None     Inability: None   \u0007 Transportation needs:     Medical: None     Non-medical: None   Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 0.25     Years: 5.00     ***** years: 1.25     Start date: 11/20/1999     Last attempt to quit: 11/20/2009     Years since quitting: 10.1   \u0007 Smokeless tobacco: Never Used   \u0007 Tobacco comment: social and sporadic - not a daily thing   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 4.0 standard drinks     Types: 4 Glasses of wine per week   \u0007 Drug use: Never   \u0007 Sexual activity: Yes     Partners: Male     Birth control/protection: Condom Male   Lifestyle   \u0007 Physical activity:     Days per week: None     Minutes per session: None   \u0007 Stress: None   Relationships   \u0007 Social connections:     Talks on phone: None     Gets together: None     Attends religious service: None     Active member of club or organization: None     Attends meetings of clubs or organizations: None     Relationship status: None   \u0007 Intimate partner violence:     ***** of current or ex partner: None     Emotionally abused: None     Physically abused: None     Forced sexual activity: None   Other Topics Concern   \u0007 None   Social History Narrative    ***** up in ***** *****, *****. ***** with non blood related brother. Mother died recently (2019) and father is elderly, 84. She finished fashion degree. Lives in the *****. Single, many supportive friends. Has *****/raised money for breast cancer causes for the past 20 years.         ROS  Review of Systems -   General ROS: + fatigue  Psychological ROS: + anxiety  Eyes ROS: negative  ENT ROS: negative  Breast ROS: + breast sug site well healed + slight tissue swelling in the axilla, no erythema, drainage.  Respiratory ROS: negative  Cardiovascular ROS: +palpitations, + port site tenderness \n (port reinserted at same site on *****, pain stable)  Gastrointestinal ROS: +constipation, mild nausea. No vomiting  *****-Urinary ROS: negative  Musculoskeletal ROS: negative  Neurological ROS: +headaches  Dermatological ROS: negative  Allergy and Immunology ROS: negative  Hematological and Lymphatic ROS: negative  Endocrine ROS: negative    ECOG 0    Physical Exam  There were no vitals taken for this visit.  PHYSICAL EXAM via video observation:   Vitals  There were no vitals filed for this visit.  Constitutional: Patient appears well-developed and well-nourished. Pleasant and appropriately interactive.  Head: Normocephalic and atraumatic.   Eyes: No *****. Conjunctivae and EOM are normal.   Neck: Normal range of motion.   Pulmonary/Chest: Effort normal. No respiratory distress. No cough.  Abdomen: No abdominal distension.  Neurological: Alert and oriented to person, place, and time. Able to stand from sitting and walk.  Psychiatric: Normal mood and affect. Behavior is normal. Judgment and thought content normal.   Skin: No jaundice or visible rash.       STUDIES    Results for orders placed or performed during the hospital encounter of 07/08/20   Thyroid Stimulating Hormone   Result Value Ref Range    Thyroid Stimulating Hormone 6.01 (H) 0.45 - 4.12 mIU/L   Free T4   Result Value Ref Range    Free T4 12 10 - 18 pmol/L   Comprehensive Metabolic Panel (BMP, AST, ALT, T.BILI, ALKP, TP, ALB)   Result Value Ref Range    Albumin, Serum / Plasma 3.9 3.5 - 5.0 g/dL    Alkaline Phosphatase 125 (H) 38 - 108 U/L    Alanine transaminase 19 10 - 61 U/L    Aspartate transaminase 17 5 - 44 U/L    Bilirubin, Total 0.2 0.2 - 1.2 mg/dL    Urea Nitrogen, Serum / Plasma 12 7 - 25 mg/dL    Calcium, total, Serum / Plasma 9.2 8.4 - 10.5 mg/dL    Chloride, Serum / Plasma ***** ***** - 110 mmol/L    Creatinine 0.80 0.55 - 1.02 mg/dL    eGFR if non-African American 85 >60 mL/min    eGFR if African ***** 99 >60 mL/min    Potassium, Serum / \n Plasma 4.3 3.5 - 5.0 mmol/L    Sodium, Serum / Plasma ***** ***** - 145 mmol/L    Protein, Total, Serum / Plasma 7.2 6.3 - 8.6 g/dL    Carbon Dioxide, Total 26 22 - 29 mmol/L    Anion Gap 8 4 - 14    Glucose, non-fasting 82 70 - 199 mg/dL   Complete Blood Count with Differential   Result Value Ref Range    WBC Count 11.8 (H) 3.4 - 10 x10E9/L    RBC Count 3.84 (L) 4.0 - 5.2 x10E12/L    Hemoglobin 11.3 (L) 12.0 - 15.5 g/dL    Hematocrit 34.9 (L) 36 - 46 %    MCV 91 80 - 100 fL    MCH 29.4 26 - 34 pg    MCHC 32.4 31 - 36 g/dL    Platelet Count ***** ***** - 450 x10E9/L    Neutrophil Absolute Count 8.57 (H) 1.8 - 6.8 x10E9/L    Lymphocyte Abs Cnt 1.32 1.0 - 3.4 x10E9/L    Monocyte Abs Count 0.73 0.2 - 0.8 x10E9/L    Eosinophil Abs Ct 0.01 0.0 - 0.4 x10E9/L    Basophil Abs Count 0.09 0.0 - 0.1 x10E9/L    Imm Gran, Left Shift 1.12 (H) <0.1 x10E9/L    Toxic Granulation Present    HCG Pregnancy, Serum, >= 18 years   Result Value Ref Range    HCG Pregnancy, Serum, >= 18 years 1 <5 IU/L       A/P  # Breast CA, R  Presented with palpable lesion. Clinical st II/III. Approx 3 cm tumor on initial imaging. ***** *****.  ***** High Risk. s/p Taxol, with randomization on ***** to *****/*****  - s/p R Lx, with path showing 2.2 cm residual IDC, approx 60% cellularity. *****.  - ***** will continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's   - we will reduce GCSF dose to ***** 50%    # *****  Has had difficulty with zofran inducing *****; does not want to take. Had significant N/V on D5, then *****  - pt is willing to try granisetron.   - will add PO dex at home prn N/V  - will add olanzapine 10 mg prn N/V.     # ***** flashes with *****, *****  Likely due to ovarian function disruption with chemo. Also possible contribution from thyroid *****  -She tried utilizing effexor which caused significant headaches.     # Low TSH c/w autoimmune thyroiditis, followed by hypothyroidism  - followed by \n Endo    # L neck/chest discomfort around port site    likely due to Extravasation   -Port was reinserted into left chest wall  -Continue lidocaine patches,analgesics prn    # Neuropathy, resolved  Mild, involving hands and arms  - continue gabapentin. .    RTC after XRT, approx 1-1.5 mos    I spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer.  The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed.          \n"
+
+--- Column: assessment_and_plan ---
+"# Breast CA, R Presented with palpable lesion. Clinical st II/III. Approx 3 cm tumor on initial imaging. ***** *****. ***** High Risk. s/p Taxol, with randomization on ***** to *****/***** - s/p R Lx, with path showing 2.2 cm residual IDC, approx 60% cellularity. *****. - ***** will continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's - we will reduce GCSF dose to ***** 50% # ***** Has had difficulty with zofran inducing *****; does not want to take. Had significant N/V on D5, then ***** - pt is willing to try granisetron. - will add PO dex at home prn N/V - will add olanzapine 10 mg prn N/V. # ***** flashes with *****, ***** Likely due to ovarian function disruption with chemo. Also possible contribution from thyroid ***** -She tried utilizing effexor which caused significant headaches. # Low TSH c/w autoimmune thyroiditis, followed by hypothyroidism - followed by Endo # L neck/chest discomfort around port site likely due to Extravasation -Port was reinserted into left chest wall -Continue lidocaine patches,analgesics prn # Neuropathy, resolved Mild, involving hands and arms - continue gabapentin. . RTC after XRT, approx 1-1.5 mos I spent a total of 40 minutes face-to-face with the patient and greater than 50% of that time was spent counseling regarding the diagnosis & treatment of breast cancer. The diagnosis, the treatment plan, the prognosis, symptoms and therapeutic options were reviewed."
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "51 y.o. female with adenocarcinoma of right breast (HCC) presenting for cycle 12 treatment of breast cancer. This is a consultation using Telehealth tools to discuss ongoing treatment and management of side effects."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of right breast (HCC) - ER/PR/HER2 status not mentioned in the note",
+    "Stage_of_Cancer": "Stage II/III",
+    "Metastasis": "Not sure",
+    "Distant Metastasis": "Not sure"
+  },
+  "Lab_Results": {
+    "lab_summary": "Thyroid Stimulating Hormone 6.01 (H) 0.45 - 4.12 mIU/L, Free T4 12 10 - 18 pmol/L, Albumin, Serum / Plasma 3.9 3.5 - 5.0 g/dL, Alkaline Phosphatase 125 (H) 38 - 108 U/L, Alanine transaminase 19 10 - 61 U/L, Aspartate transaminase 17 5 - 44 U/L, Bilirubin, Total 0.2 0.2 - 1.2 mg/dL, Urea Nitrogen, Serum / Plasma 12 7 - 25 mg/dL, Calcium, total, Serum / Plasma 9.2 8.4 - 10.5 mg/dL, Creatinine 0.80 0.55 - 1.02 mg/dL, eGFR if non-African American 85 >60 mL/min, eGFR if African [REDACTED] 99 >60 mL/min, Potassium, Serum / Plasma 4.3 3.5 - 5.0 mmol/L, Glucose, non-fasting 82 70 - 199 mg/dL, WBC Count 11.8 (H) 3.4 - 10 x10E9/L, RBC Count 3.84 (L) 4.0 - 5.2 x10E12/L, Hemoglobin 11.3 (L) 12.0 - 15.5 g/dL, Hematocrit 34.9 (L) 36 - 46 %, MCV 91 80 - 100 fL, MCH 29.4 26 - 34 pg, MCHC 32.4 31 - 36 g/dL, Neutrophil Absolute Count 8.57 (H) 1.8 - 6.8 x10E9/L, Lymphocyte Abs Cnt 1.32 1.0 - 3.4 x10E9/L, Monocyte Abs Count 0.73 0.2 - 0.8 x10E9/L, Eosinophil Abs Ct 0.01 0.0 - 0.4 x10E9/L, Basophil Abs Count 0.09 0.0 - 0.1 x10E9/L, Imm Gran, Left Shift 1.12 (H) <0.1 x10E9/L, Toxic Granulation Present, HCG Pregnancy, Serum, >= 18 years 1 <5 IU/L"
+  },
+  "Clinical_Findings": {
+    "findings": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a 3 cm tumor. After treatment, residual IDC of 2.2 cm with approximately  60% cellularity was noted. Physical exam via video observation shows slight tissue swelling in the axilla, no erythema or drainage, palpitations, and port site tenderness. Gastrointestinal symptoms include constipation and mild nausea. Thyroid function tests show elevated TSH and normal Free T4. Comprehensive metabolic panel shows elevated alkaline phosphatase and low albumin. Complete blood count shows elevated WBC count and low RBC count, hemoglobin, and hematocrit. Patient has low TSH consistent with autoimmune thyroiditis leading to hypothyroidism. Lymphadenopathy or other significant physical exam findings were not noted."
+  },
+  "Current_Medications": {
+    "current_meds": "ac"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "GCSF dose reduced to 50%, will add PO dex at home prn N/V, will add olanzapine 10 mg prn N/V, switch to granisetron for anti-nausea",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Patient is currently on cycle 2 of AC treatment for breast cancer. Most recent cycle was cycle 3, completed 2 weeks ago. Pathology from initial imaging showed a  3 cm tumor. After treatment, residual IDC of 2.2 cm with approximately 60% cellularity was noted. No specific imaging or tumor marker evidence is provided to assess the current response to treatment."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue cycle 4 of AC in 1 week with a dose delay of 1 week. Reduce GCSF dose to 50%. Add granisetron for N/V. Add PO dex at home prn N/V. Add olanzapine 10 mg prn N/V. Continue lidocaine patches and analgesics prn for port site discomfort. Continue gabapentin for neuropathy."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "RTC after XRT, approx 1-1.5 mos"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: after XRT, approx 1-1.5 months"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "RTC after XRT, approx 1-1.5 mos"
+  }
+}
+
+--- Column: attribution ---
+{
+  "in-person": [
+    "RTC after XRT, approx 1-1.5 mos"
+  ],
+  "summary": [
+    "51 y.o. female with adenocarcinoma of right breast (HCC) presenting for cycle 12 treatment of breast cancer."
+  ],
+  "Stage_of_Cancer": [
+    "Clinical st II/III."
+  ],
+  "lab_summary": [
+    "Low TSH c/w autoimmune thyroiditis, followed by hypothyroidism - followed by Endo"
+  ],
+  "findings": [
+    "pt is willing to try granisetron. - will add PO dex at home prn N/V - will add olanzapine 10 mg prn N/V."
+  ],
+  "current_meds": [
+    "we will reduce GCSF dose to [REDACTED] 50% # [REDACTED] Has had difficulty with zofran inducing [REDACTED]"
+  ],
+  "recent_changes": [
+    "- we will reduce GCSF dose to [REDACTED] 50% # [REDACTED] Has had difficulty with zofran inducing [REDACTED]; does not want to take. Had significant N/V on D5, then [REDACTED] - pt is willing to try granisetron. - will add PO dex at home prn N/V - will add olanzapine 10 mg prn N/V."
+  ],
+  "goals_of_treatment": [
+    "RTC after XRT, approx 1-1.5 mos"
+  ],
+  "response_assessment": [
+    "- we will reduce GCSF dose to [REDACTED] 50% # [REDACTED] Has had difficulty with zofran inducing [REDACTED]; does not want to take. Had significant N/V on D5, then [REDACTED] - pt is willing to try granisetron."
+  ],
+  "medication_plan": [
+    "- [REDACTED] will continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's - we will reduce GCSF dose to [REDACTED] 50%"
+  ],
+  "therapy_plan": [
+    "Continue with cycle 4 of AC in 1 week (dose delay x 1 wk) to facilitate recovery from sx's."
+  ],
+  "radiotherapy_plan": [
+    "RTC after XRT, approx 1-1.5 mos"
+  ],
+  "Next clinic visit": [
+    "RTC after XRT, approx 1-1.5 mos"
+  ],
+  "follow up": [
+    "RTC after XRT, approx 1-1.5 mos"
+  ]
+}
+
+
+
+
+
+
+============================================================
+RESULTS FOR ROW 100
+============================================================
+
+--- Column: coral_idx ---
+239
+
+--- Column: note_text ---
+"SUBJECTIVE  Subjective  ***** ***** is a 68 y.o. female who presents with metastatic breast cancer on Gemzar Cycle #2 Day 8 cancelled by patient   HPI: Reports a lot of fatigue. Very confused and concerned about tumor marker and scan. Has only received 3 doses at this time and is having trouble with fatigue. Walks for 30 minutes at a time and sometimes has no energy until the next day. Struggles with constipation and diarrhea. Has constipation takes a lot of stool softeners with diarrhea as a result. Occasionally has headaches without visual changes that goes away with Ibuprofen.  Patient Active Problem List   Diagnoses Date Noted   \u0007 Maintenance chemotherapy following disease 07/04/2011     Started xeloda 1500mg BID 14 days on, 7 days off on 06/09/11.   Stopped after 9.5 days d/t nausea, fatigue, decreased appetite, constipation/diarrhea  Symptoms started on day 7   07/05/11 changed to 7 d on 7 d off 1500/1000  Cycle 3 ended 07/26/11, no toxicity  Cycle 4 August 02 - August 08  Cycle 5 *****/*****-*****/*****  Cycle 6 *****/*****-*****/***** increased to 1500 BID  09/05/11 stop xeloda  09/13/11: cycle 1 day 1 gemcitabine 1000mg/m2 day 1 day 8  09/21/11 Cycle 1 Day 8 gemcitabine 1000mg/m2  10/05/11 Cycle 2 Day 1 gemcitabine 1000mg/m2  10/12/11 cycle 2 ***** ***** ***** ***** PT CANCELLED d/t tumor markers     \u0007 Breast cancer metastasized to multiple sites 05/11/2011     ***** CS ***** ***** 2002 ER+(80%)PR+(50%)*****-  12.27.01-2.28.2:  ***** ***** x 4   August 25: lumpectomy: 3.0cm grade 2 IDC, October 10 *****   *****/*****-*****/*****/***** taxol weekly x 12   02/01/02 XRT   January 25 - 2009 arimidex   ***** *****:  Listeria meningitis/*****  June 03:  Red lesions on left breast, bx + PD CA ER/PR/***** negative  PET/CT:  Extensive liver mets, adenopathy  *****/*****/***** - *****/*****/***** Abraxane and bevacizumab ***** ***** *****  03/14/11: PD, stop bevacizumab  03/12/11: compression fracture from *****, L2  03/16/11: start faslodex *****   06/09/11: xeloda 1500mg bid 14 on, ***** *****    ***** ***** ***** ***** due to toxicity  07/05/11 changed to \n 1500 am 1000 pm 7 d on 7 d off    08/22/2011 to 09/05/2011 ***** bid, 7 days on and 7 days off   09/13/2011 Gemzar 1000 mg/m2                 ROS  General: energy low, weight stable  Skin: no rashes or lesions  Eyes: no vision changes  ENMT: no change in hearing, No nasal discharge or sinus tenderness. no mouth sores or sore throat  Breast: no breast pain or swelling  Respiratory: no cough or shortness of breath  Cardiovascular: no CP, edema  GI: no nausea, vomiting, +diarrhea or constipation  GU: no dysuria or vaginal bleeding  Musculoskeletal: no pain  Neurological:+headaches, dizziness, falls  Psychological: mood stable  All other review of systems negative, except for those noted in assessment below.  MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 BLUE-***** *****, SPIRULINA, ORAL Take by mouth. Frequency: Every Day Except Chemo        \u0007 cholecalciferol, vitamin D3, (VITAMIN D) 1,000 unit CAP Take 2,000 Units by mouth. Frequency: X Chemo       \u0007 cyanocobalamin 1,000 mcg tablet Take 1,000 mcg by mouth Daily.         \u0007 IBUPROFEN, *****, MISC 600 mg 3 (three) times daily as needed. Frequency: Every 6 hours daytime  Route not documented       \u0007 levothyroxine (SYNTHROID, LEVOTHROID) 125 mcg tablet Take 112 mcg by mouth Daily.        \u0007 LORazepam (ATIVAN) 1 mg tablet Take 1 tablet (1 mg total) by mouth nightly at bedtime.  30 tablet  2   \u0007 pregabalin (*****) 50 mg capsule Take 50 mg by mouth 3 (three) times daily.         \u0007 pyridoxine (VITAMIN B-6) 200 mg tablet Take 200 mg by mouth Daily.         \u0007 docusate sodium 240 mg CAP Take 250 mg by mouth 2 (two) times daily. Take one tablet twice a day if no Bowel Movement. Stop if having loose stool or diarrhea..  60 capsule  12   \u0007 oxyCODONE (ROXICODONE) 5 mg immediate release tablet Take 1 tablet (5 mg total) by mouth every 4 (four) hours as needed.  30 tablet  0   \u0007 senna (*****) 8.6 mg tablet Take 1 tablet (8.6 mg total) by mouth Daily. \n Take 1-2 tablets daily if no bowel movement.  60 tablet  12     No current facility-administered medications for this visit.     Facility-Administered Medications Ordered in ***** *****   Medication Dose Route Frequency Provider Last Rate Last Dose   \u0007 prochlorperazine (COMPAZINE) tablet 10 mg  10 mg Oral Once ***** *****. *****, MD       ALLERGIES  No Known Allergies    PHYSICAL EXAM  Objective  Vital Signs:  BP 105/51 | Pulse 99 | Temp(Src) 36.8 C (98.2 F) (Oral) | Resp 16 | Wt 58.741 kg (129 lb 8 oz) | SpO2 96% | LMP 06/25/1991  There is no height on file ***** calculate BSA.    ECOG:1  Constitutional:  Well-developed, no acute distress  Skin: no rash, no lesions, no diaphoresis.   Eyes: sclera anicteric, PERRL, EOMI  HENT: sinuses nontender, TMs intact, nasal mucosa intact, pharynx without erythema, no thrush  Lymph Nodes: no axillary, supraclavicular or axillary adenopathy  Respiratory:  Normal breath sounds, No respiratory distress, No wheezing, No chest tenderness.   Cardiovascular:  Normal heart rate, Normal rhythm, No murmurs, No rubs, No gallops. No LE edema  Breast: mild discolouration over left breast  GI:  Bowel sounds normal, Soft, No tenderness or distention,No hepatomegaly or masses  Musculoskeletal: No point tenderness at cervical, thoracic or lumbar spine, muscular strength 5/5 throughout, no peripheral edema  Neurologic:  Alert & oriented x 3, CN intact, ambulates w/o difficulty, ***** (-), DTRs 2+throughout.    Psychiatric: mood stable. No HI, SI, hallucinations, paranoia, or delusions.    RESULTS  I have individually visualized and interpreted the laboratory results  Results for orders placed during the hospital encounter of 10/05/11   CANCER ANTIGEN 15-3       Component Value Range    Cancer Antigen 15-3 118 (*****) <33 (U/mL)   CANCER ANTIGEN 27.29       Component Value Range    Cancer Antigen 27.29 178 (*****) < 39 (U/mL)   ALKALINE PHOSPHATASE       Component Value Range    Alkaline Phosphatase 172 (*****) \n 31 - 95 (U/L)   ALT       Component Value Range    Alanine transaminase 37  11 - 50 (U/L)   AST       Component Value Range    Aspartate transaminase 57 (*****) 17 - 42 (U/L)   BILIRUBIN, TOTAL       Component Value Range    Bilirubin, Total 0.7  0.2 - 1.3 (mg/dL)   BUN       Component Value Range    Urea Nitrogen, Serum / Plasma 23 (*****) 6 - 22 (mg/dL)   CALCIUM       Component Value Range    Calcium, total, Serum / Plasma 8.9  8.8 - 10.3 (mg/dL)   CBC AND DIFFERENTIAL       Component Value Range    WBC Count 4.2  3.4 - 10 (x10E9/L)    RBC Count 2.80 (*****) 4.0 - 5.2 (x10E12/L)    Hemoglobin 9.9 (*****) 12.0 - 15.5 (g/dL)    Hematocrit 29.1 (*****) 36 - 46 (%)    MCV 104 (*****) 80 - 100 (fL)    MCH 35.4 (*****) 26 - 34 (pg)    MCHC 34.1  31 - 36 (g/dL)    Platelet Count 235  140 - 450 (x10E9/L)    Neutrophil Absolute Count 2.85  1.8 - 6.8 (x10E9/L)    Lymphocyte Abs Cnt 0.66 (*****) 1.0 - 3.4 (x10E9/L)    Monocyte Abs Count 0.58  0.2 - 0.8 (x10E9/L)    Eosinophil Abs Ct 0.04  0.0 - 0.4 (x10E9/L)    Basophil Abs Count 0.01  0.0 - 0.1 (x10E9/L)   CREATININE WITH EGFR       Component Value Range    Creatinine 0.67  0.52 - 1.06 (mg/dL)    eGFR if Caucasian >60  >60 (mL/min)    eGFR if African ***** >60  >60 (mL/min)   ELECTROLYTES       Component Value Range    Sodium, Serum / Plasma 138  135 - 145 (mmol/L)    Potassium, Serum / Plasma 4.0  3.8 - 5.1 (mmol/L)    Chloride, Serum / Plasma 105  97 - 108 (mmol/L)    Carbon Dioxide, Total 25  22 - 32 (mmol/L)    Anion Gap 8  4 - 14    *****       Component Value Range    Carcinoembryonic Antigen 312.2 (*****) <3.8 (ug/L)   ALKALINE PHOSPHATASE       Component Value Range    Alkaline Phosphatase 196 (*****) 31 - 95 (U/L)   ALT       Component Value Range    Alanine transaminase 38  11 - 50 (U/L)   AST       Component Value Range    Aspartate transaminase 63 (*****) 17 - 42 (U/L)   BILIRUBIN, TOTAL       Component Value Range    Bilirubin, Total 0.6  0.2 - 1.3 (mg/dL)   BUN       Component Value Range    Urea \n Nitrogen, Serum / Plasma 21  6 - 22 (mg/dL)   CANCER ANTIGEN 15-3       Component Value Range    Cancer Antigen 15-3 119 (*****) <33 (U/mL)   CANCER ANTIGEN 27.29       Component Value Range    Cancer Antigen 27.29 181 (*****) < 39 (U/mL)   CBC AND DIFFERENTIAL       Component Value Range    WBC Count 3.1 (*****) 3.4 - 10 (x10E9/L)    RBC Count 2.74 (*****) 4.0 - 5.2 (x10E12/L)    Hemoglobin 9.6 (*****) 12.0 - 15.5 (g/dL)    Hematocrit 28.4 (*****) 36 - 46 (%)    MCV 104 (*****) 80 - 100 (fL)    MCH 35.2 (*****) 26 - 34 (pg)    MCHC 33.9  31 - 36 (g/dL)    Platelet Count 216  140 - 450 (x10E9/L)    Neutrophil Absolute Count 1.57 (*****) 1.8 - 6.8 (x10E9/L)    Lymphocyte Abs Cnt 1.00  1.0 - 3.4 (x10E9/L)    Monocyte Abs Count 0.53  0.2 - 0.8 (x10E9/L)    Eosinophil Abs Ct 0.01  0.0 - 0.4 (x10E9/L)    Basophil Abs Count 0.01  0.0 - 0.1 (x10E9/L)   *****       Component Value Range    Carcinoembryonic Antigen 319.9 (*****) <3.8 (ug/L)   CREATININE WITH EGFR       Component Value Range    Creatinine 0.63  0.52 - 1.06 (mg/dL)    eGFR if Caucasian >60  >60 (mL/min)    eGFR if African ***** >60  >60 (mL/min)   ELECTROLYTES       Component Value Range    Sodium, Serum / Plasma 138  135 - 145 (mmol/L)    Potassium, Serum / Plasma 4.1  3.8 - 5.1 (mmol/L)    Chloride, Serum / Plasma 103  97 - 108 (mmol/L)    Carbon Dioxide, Total 27  22 - 32 (mmol/L)    Anion Gap 8  4 - 14    ALKALINE PHOSPHATASE       Component Value Range    Alkaline Phosphatase 179 (*****) 31 - 95 (U/L)   ALT       Component Value Range    Alanine transaminase 32  11 - 50 (U/L)   AST       Component Value Range    Aspartate transaminase 49 (*****) 17 - 42 (U/L)   BILIRUBIN, TOTAL       Component Value Range    Bilirubin, Total 0.6  0.2 - 1.3 (mg/dL)   BUN       Component Value Range    Urea Nitrogen, Serum / Plasma 21  6 - 22 (mg/dL)   CALCIUM       Component Value Range    Calcium, total, Serum / Plasma 9.1  8.8 - 10.3 (mg/dL)   CBC AND DIFFERENTIAL       Component Value Range    WBC Count 4.5  3.4 - 10 \n (x10E9/L)    RBC Count 2.79 (*****) 4.0 - 5.2 (x10E12/L)    Hemoglobin 9.9 (*****) 12.0 - 15.5 (g/dL)    Hematocrit 28.9 (*****) 36 - 46 (%)    MCV 104 (*****) 80 - 100 (fL)    MCH 35.7 (*****) 26 - 34 (pg)    MCHC 34.4  31 - 36 (g/dL)    Platelet Count 192  140 - 450 (x10E9/L)    Neutrophil Absolute Count 3.10  1.8 - 6.8 (x10E9/L)    Lymphocyte Abs Cnt 0.74 (*****) 1.0 - 3.4 (x10E9/L)    Monocyte Abs Count 0.65  0.2 - 0.8 (x10E9/L)    Eosinophil Abs Ct 0.03  0.0 - 0.4 (x10E9/L)    Basophil Abs Count 0.03  0.0 - 0.1 (x10E9/L)   CHLORIDE       Component Value Range    Chloride, Serum / Plasma 105  97 - 108 (mmol/L)   CARBON DIOXIDE, TOTAL (INCLUDES ANION GAP)       Component Value Range    Carbon Dioxide, Total 26  22 - 32 (mmol/L)    Anion Gap 6  4 - 14    CREATININE WITH EGFR       Component Value Range    Creatinine 0.69  0.52 - 1.06 (mg/dL)    eGFR if Caucasian >60  >60 (mL/min)    eGFR if African ***** >60  >60 (mL/min)   POTASSIUM       Component Value Range    Potassium, Serum / Plasma 4.0  3.8 - 5.1 (mmol/L)   SODIUM       Component Value Range    Sodium, Serum / Plasma 137  135 - 145 (mmol/L)      ASSESSMENT & PLAN  Breast cancer metastasized to multiple sites  Tumor markers rose initally with switch to Gemzar up double from beginning of year  Scan done to early to tell if Gemzar is working   Exam stable  Labs reviewed  Unclear picture currently if progressing or tumor flare  Experiencing lots of fatigue Pt would like to take a break to \"get stronger\" I stressed concern that fatigue may be related to treatment or disease. Progression. Rec exercise 10 min 3 x a day, Focalin prn and continue with treatment to see if interventions helped with fatigue. Plans to discuss break with Dr *****.    Maintenance chemotherapy following disease  Did not receive treatment today   Here to discuss options with Dr *****      The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the \n plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM      \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  Breast cancer metastasized to multiple sites  Tumor markers rose initally with switch to Gemzar up double from beginning of year  Scan done to early to tell if Gemzar is working   Exam stable  Labs reviewed  Unclear picture currently if progressing or tumor flare  Experiencing lots of fatigue Pt would like to take a break to \"get stronger\" I stressed concern that fatigue may be related to treatment or disease. Progression. Rec exercise 10 min 3 x a day, Focalin prn and continue with treatment to see if interventions helped with fatigue. Plans to discuss break with Dr *****.    Maintenance chemotherapy following disease  Did not receive treatment today   Here to discuss options with Dr *****      The patient concerns were discussed in detail. Patient verbalizes understanding of these issues and agrees with the \n plan.  Reviewed treatment options, treatment side effects in detail.  I reviewed the patient's medical information and medical history. I have reviewed the past medical, family, and social history sections including the medications and allergies listed in the above medical record.    Electronically signed by: ***** ***** *****, *****/*****/***** *****:***** PM      \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "The patient has metastatic breast cancer and is on Gemzar chemotherapy. The purpose of this visit is to discuss the patient's fatigue and concerns about tumor markers and scan results, as well as to consider taking a break from treatment to 'get stronger'."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+(80%)PR+(50%) invasive ductal carcinoma, HER2: not tested",
+    "Stage_of_Cancer": "Not available (redacted)",
+    "Metastasis": "Yes (to liver and multiple sites)",
+    "Distant Metastasis": "Yes, to liver and multiple sites"
+  },
+  "Lab_Results": {
+    "lab_summary": "Cancer Antigen 15-3 118 (<33 U/mL), Cancer Antigen 27.29 178 (<39 U/mL), Alkaline Phosphatase 172 (31 - 95 U/L), Alanine transaminase 37 (11 - 50 U/L), Aspartate transaminase 57 (17 - 42 U/L), Bilirubin, Total 0.7 (0.2 - 1.3 mg/dL), Urea Nitrogen, Serum / Plasma 23 (6 - 22 mg/dL), Calcium, total, Serum / Plasma 8.9 (8.8 - 10.3 mg/dL), WBC Count 4.2 (3.4 - 10 x10E9/L), RBC Count 2.80 (4.0 - 5.2 x10E12/L), Hemoglobin 9.9 (12.0 - 15.5 g/dL), Hematocrit 29.1 (36 - 46 %), MCV 104 (80 - 100 fL), MCH 35.4 (26 - 34 pg), MCHC 34.1 (31 - 36 g/dL), Platelet Count 235 (140 - 450 x10E9/L), Neutrophil Absolute Count 2.85 (1.8 - 6.8 x10E9/L), Lymphocyte Abs Cnt 0.66 (1.0 - 3.4 x10E9/L), Monocyte Abs Count 0.58 (0.2 - 0.8 x10E9/L), Eosinophil Abs Ct 0.04 (0.0 - 0.4 x10E9/L), Basophil Abs Count 0.01 (0.0 - 0.1 x10E9/L), Creatinine 0.67 (0.52 - 1.06 mg/dL), eGFR if Caucasian >60 (>60 mL/min), eGFR if African [REDACTED] >60 (>60 mL/min), Sodium, Serum / Plasma 138 (135 - 145 mmol/L), Potassium, Serum / Plasma  4.0 (3.8 - 5.1 mmol/L), Chloride, Serum / Plasma 105 (97 - 108 mmol/L), Carbon Dioxide, Total 25 (22 - 32 mmol/L), Anion Gap 8 (4 - 14), Carcinoembryonic Antigen 312.2 (<3.8 ug/L)"
+  },
+  "Clinical_Findings": {
+    "findings": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Bilirubin, total, is within normal limits. Alkaline phosphatase is elevated. Aspartate transaminase is elevated. Hemoglobin and hematocrit are low. RBC count is low. MCV is elevated. MCH is elevated. WBC count is low. Lymphocyte absolute count is low. Neutrophil absolute count is low. No new palpable masses, skin changes, or lymphadenopathy noted on physical exam. No new imaging findings mentioned in the note."
+  },
+  "Current_Medications": {
+    "current_meds": "gemzar"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Gemzar Cycle #2 Day 8 cancelled by patient due to fatigue and concern about tumor markers and scan results.",
+    "supportive_meds": "docusate sodium, oxyCODONE, senna"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Tumor markers (Cancer Antigen 15-3 and Cancer Antigen 27.29) have increased. Scan done too early to tell if Gemzar is working."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Focalin prn to address fatigue."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "None"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "to discuss break with Dr [REDACTED]"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Plans to discuss break with Dr [REDACTED]"
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "Here to discuss options with Dr [REDACTED]"
+  ],
+  "second opinion": [
+    "Here to discuss options with Dr [REDACTED]"
+  ],
+  "in-person": [
+    "Here to discuss options with Dr [REDACTED]"
+  ],
+  "summary": [
+    "Breast cancer metastasized to multiple sites  Tumor markers rose initally with switch to Gemzar up double from beginning of year  Scan done to early to tell if Gemzar is working"
+  ],
+  "Type_of_Cancer": [
+    "Breast cancer metastasized to multiple sites"
+  ],
+  "Stage_of_Cancer": [
+    "Breast cancer metastasized to multiple sites"
+  ],
+  "Metastasis": [
+    "Breast cancer metastasized to multiple sites"
+  ],
+  "Distant Metastasis": [
+    "Breast cancer metastasized to multiple sites"
+  ],
+  "lab_summary": [
+    "Labs reviewed"
+  ],
+  "findings": [
+    "Tumor markers rose initally with switch to Gemzar up double from beginning of year"
+  ],
+  "current_meds": [
+    "Scan done to early to tell if Gemzar is working"
+  ],
+  "recent_changes": [
+    "Did not receive treatment today"
+  ],
+  "supportive_meds": [
+    "Focalin prn and continue with treatment to see if interventions helped with fatigue."
+  ],
+  "goals_of_treatment": [
+    "Breast cancer metastasized to multiple sites"
+  ],
+  "response_assessment": [
+    "Tumor markers rose initally with switch to Gemzar up double from beginning of year"
+  ],
+  "medication_plan": [
+    "Focalin prn and continue with treatment to see if interventions helped with fatigue."
+  ],
+  "Next clinic visit": [
+    "Plans to discuss break with Dr [REDACTED]."
+  ],
+  "follow up": [
+    "Plans to discuss break with Dr [REDACTED]."
+  ]
+}

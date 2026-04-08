@@ -1,0 +1,120 @@
+{
+  "coral_idx": 168,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "New patient",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "59 y.o. female with ER-Positive PR-Positive HER2-Negative right breast cancer, status post right lumpectomy of two sites and sentinel lymph node biopsy, for medical oncology consultation"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+      "Stage_of_Cancer": "pT1c(m)*****(sn)",
+      "Distant_Metastasis": "No",
+      "Metastasis": "Yes"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Pathology: Tumor size: 1.6 cm and 0.6 cm, margins negative for invasive cancer but positive for DCIS, lymph node status: micrometastatic carcinoma in one lymph node (0.5 mm). Imaging: MRI shows suspicious mass in the upper outer quadrant of the right breast with satellite masses and surrounding non-mass enhancement. Physical exam: Periareolar incision clean and dry, erythematous dermatitis reaction in right axilla, small seroma in lower inner quadrant, no palpable masses or tenderness in left breast."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "acetaminophen",
+        "ibuprofen"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes",
+      "supportive_meds": "Acetaminophen 1000mg PO every 8 hours, Ibuprofen 600mg PO 3 times daily"
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "letrozole 2.5mg PO daily, acetaminophen 1000mg every 8 hours, ibuprofen 600mg 3 times daily"
+    },
+    "Response_Assessment": {
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "treatment_status": "Not yet started",
+      "chemotherapy_status": "",
+      "endocrine_therapy_status": "Scheduled to start",
+      "targeted_therapy_status": "",
+      "immunotherapy_status": "",
+      "response_to_treatment": "Not yet on treatment — no response to assess."
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "Start letrozole 2.5mg PO daily now",
+        "Short term side_effects_discussed": "arthralgias, urogenital atrophy",
+        "Long term side_effects_discussed": "possible acceleration of bone density loss"
+      },
+      "bone therapy": {
+        "summary": "Bone density scan can be completed when she returns from travel, may start bisphosphonate if osteopenia",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "radiotherapy": {
+        "summary": "In regards to her radiation therapy plan, she is at risk for local recurrence in her right breast for which ***** is recommending additional radiation.",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "Calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Start letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement pending, consider bisphosphonate pending bone scan result"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "Start letrozole 2.5mg PO daily. Continue use of vaginal moisturizer. Plan to start bisphosphonate if bone density scan shows osteopenia. Plan to discuss vaginal estrogens at future visit. Plan to pursue radiation therapy in the future, specifically for local recurrence in the right breast, but not for regional lymph nodes.",
+      "medication": "letrozole 2.5mg PO daily",
+      "dosage": "2.5mg",
+      "frequency": "daily",
+      "vaginal_moisturizer": "*****",
+      "vaginal_moisturizer_alternatives": "coconut oil and/or *****",
+      "bone_density_scan": "September",
+      "bisphosphonate": "pending bone scan result",
+      "bisphosphonate_start": "if bone density scan shows osteopenia",
+      "radiation_therapy": "in the future, specifically for local recurrence in the right breast, but not for regional lymph nodes"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "Additional radiation to the right breast is recommended due to risk of local recurrence, but not to regional lymph nodes."
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "Surgical planning per Dr. ***** tentatively scheduled for September 2019, RT planning per ***** likely pursued locally in *****"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "Bone density scan in September 2019"
+    },
+    "Lab_Plan": {
+      "lab_plan": "Bone density scan can be completed when she returns from travel",
+      "goals_of_treatment": "curative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "None"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet on treatment — no response to assess."
+    },
+    "Referral": {
+      "Nutrition": "Calcium supplementation with 1200mg/day combination of diet and supplement",
+      "Genetics": "None",
+      "Specialty": "None",
+      "Others": "None",
+      "follow up": "September"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "September",
+      "Purpose": "discuss options",
+      "Goals of treatment": "curative",
+      "Current meds": "letrozole 2.5mg PO daily, calcium supplementation with 1200mg/day combination of diet and supplement, vitamin D supplement",
+      "Response assessment": "Not yet on treatment — no response to assess.",
+      "Sentinel lymph node status": "positive for micrometastatic disease"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

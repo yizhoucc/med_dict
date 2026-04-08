@@ -1,0 +1,114 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "63 y.o. female with left ER+ breast cancer s/p bilateral mastectomies, adjuvant chemotherapy and currently treated with adjuvant letrozole."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- invasive lobular carcinoma",
+    "Stage_of_Cancer": "Stage IIB",
+    "Distant_Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Exam shows no evidence of recurrence.",
+    "goals_of_treatment": "curative",
+    "response_assessment": "stable",
+    "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON 10, Resveratrol, FEMARA, hydrochlorothiazide"
+  },
+  "Current_Medications": {
+    "current_meds": "FEMARA, KLOR-CON 10, EXFORGE 5-160 mg, CHOLECALCIFEROL, VITAMIN D3"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Switched from generic to brand name letrozole due to GI symptoms.",
+    "supportive_meds": [
+      "ibuprofen (ADVIL,MOTRIN), KLOR-CON 10, CHOLECALCIFEROL, VITAMIN D3, EXFORGE 5-160 mg"
+    ]
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "adjuvant",
+    "response_assessment": "no evidence of recurrence",
+    "current_meds": "letrozole, CHOLECALCIFEROL, EXFORGE, ibuprofen, KLOR-CON, Resveratrol, FEMARA, hydrochlorothiazide"
+  },
+  "Response_Assessment": {
+    "goals_of_treatment": "curative",
+    "response_assessment": "No evidence of disease recurrence on exam, stable symptoms",
+    "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON 10, Resveratrol, FEMARA, hydrochlorothiazide"
+  },
+  "Medication_Plan_chatgpt": {
+    "hormonal therapy": {
+      "summary": "Continue letrozole daily. Patient is risk adverse and would prefer to continue letrozole > 5 years",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bowel regimen": {
+      "summary": "Continue exercise",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "pain medication": {
+      "summary": "NSAIDs with food as needed",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bone therapy": {
+      "summary": "Continue calcium and vitamin D daily",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "chemotherapy": {
+      "summary": "adjuvant chemotherapy",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "radiotherapy": {
+      "summary": "",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue letrozole daily",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "stable",
+    "current_meds": "letrozole"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue letrozole daily",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "stable",
+    "current_meds": "letrozole"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "Discussed risk reduction with exercise, weight management, and limiting alcohol",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Return to clinic in 6 months"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Return to clinic in 6 months"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

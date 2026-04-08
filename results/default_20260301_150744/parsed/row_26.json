@@ -1,0 +1,98 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "No",
+    "in-person": "Telehealth",
+    "summary": "New patient evaluation for newly diagnosed malignant neoplasm of upper-outer quadrant of right breast, stage IB triple negative breast cancer, for initial consult and discussion of adjuvant chemotherapy and port placement"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Triple negative breast cancer",
+    "Stage_of_Cancer": "Stage IB",
+    "Distant_Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Triple negative breast cancer with 75% tumor size, node negative"
+  },
+  "Current_Medications": {
+    "current_meds": "amoxicillin (AMOXIL) 500 mg capsule, cephalexin (KEFLEX) 500 mg capsule, cetirizine (ZYRTEC) 10 mg tablet, diphenhydrAMINE (BENADRYL) 25 mg capsule, levothyroxine 125 mcg tablet"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "No recent changes",
+    "supportive_meds": [
+      "amoxicillin",
+      "ascorbic acid",
+      "cephalexin",
+      "cetirizine",
+      "diphenhydrAMINE",
+      "levothyroxine"
+    ]
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "goals_of_treatment": "curative",
+    "current_meds": "amoxicillin, ascorbic acid, cephalexin, cetirizine, diphenhydrAMINE, levothyroxine"
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "will decrease the risk of systemic recurrence",
+      "Short term side_effects_discussed": "Not yet discussed",
+      "Long term side_effects_discussed": "Not yet discussed"
+    },
+    "radiotherapy": {
+      "summary": "will decrease the risk of local recurrence",
+      "Short term side_effects_discussed": "Not yet discussed",
+      "Long term side_effects_discussed": "Not yet discussed"
+    },
+    "other treatment": {
+      "summary": "will have port placement at surgery",
+      "Short term side_effects_discussed": "Not yet discussed",
+      "Long term side_effects_discussed": "Not yet discussed"
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "We discussed the role of chemotherapy to decrease the risk of systemic recurrence."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "The patient will undergo adjuvant chemotherapy to decrease the risk of systemic recurrence. The plan is to start chemotherapy after surgery. The role of radiation to decrease the risk of local recurrence was also discussed.",
+    "goals_of_treatment": "risk reduction",
+    "response_assessment": "Not yet on treatment \u2014 no response to assess.",
+    "current_meds": "Not mentioned"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "decrease the risk of local recurrence"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "surgery first for reductions bilaterally and a right lumpectomy with sentinel node, port placement"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Genetics consult."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "Genetics consult",
+    "Specialty": "Medical Oncology/Hematology",
+    "Others": "None",
+    "follow up": "post op visit"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC at her post op visit to review final pathology report and make recommendations"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

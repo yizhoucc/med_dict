@@ -1,0 +1,137 @@
+{
+  "coral_idx": 172,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "63 y.o. female with left ER+ breast cancer s/p bilateral mastectomies, adjuvant chemotherapy and currently treated with adjuvant letrozole."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+ invasive lobular carcinoma",
+      "Stage_of_Cancer": "Stage IIB",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": ""
+    },
+    "Clinical_Findings": {
+      "findings": "no evidence of recurrence",
+      "goals_of_treatment": "curative",
+      "response_assessment": "stable",
+      "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON 10, Resveratrol, FEMARA, hydrochlorothiazide"
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "FEMARA 2.5 mg tablet Take 1 tablet (2.5 mg total) by mouth Daily.",
+        "CHOLECALCIFEROL, VITAMIN D3, (VITAMIN D3 ORAL) Take by mouth every evening.",
+        "EXFORGE 5-160 mg per tablet every morning.",
+        "KLOR-CON 10 10 mEq CR tablet every morning.",
+        "ibuprofen (ADVIL,MOTRIN) 600 mg tablet Take 600 mg by mouth every 6 (six) hours as needed.",
+        "hydrochlorothiazide (HYDRODIURIL) 50 mg tablet every morning."
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "Taking brand name letrozole daily due to intolerance (GI symptoms) with generic",
+      "supportive_meds": [
+        "ibuprofen (ADVIL,MOTRIN)"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "adjuvant",
+      "response_assessment": "no evidence of recurrence",
+      "current_meds": "letrozole, CHOLECALCIFEROL, VITAMIN D3, EXFORGE, ibuprofen, KLOR-CON, Resveratrol, FEMARA, hydrochlorothiazide"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "No evidence of disease recurrence on exam",
+      "current_meds": "letrozole, ibuprofen, KLOR-CON 10, CHOLECALCIFEROL, EXFORGE, hydrochlorothiazide, Resveratrol, FEMARA"
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "adjuvant letrozole",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "mentioned"
+      },
+      "hormonal therapy": {
+        "summary": "continue letrozole daily",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "mentioned"
+      },
+      "bone therapy": {
+        "summary": "continue calcium and vitamin D daily",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "radiotherapy": {
+        "summary": "not mentioned",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "pain medication": {
+        "summary": "NSAIDs with food as needed",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "bowel regimen": {
+        "summary": "continue",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "psychiatry medication": {
+        "summary": "not mentioned",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      },
+      "other treatment": {
+        "summary": "discussed risk reduction with exercise, weight management, and limiting alcohol",
+        "Short term side_effects_discussed": "not mentioned",
+        "Long term side_effects_discussed": "not mentioned"
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Continue letrozole daily",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "stable",
+      "current_meds": "letrozole"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "Continue letrozole daily",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "stable",
+      "current_meds": "letrozole"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "No procedures planned.",
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "stable",
+      "current_meds": "letrozole, calcium, vitamin D"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned."
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet on treatment — no response to assess."
+    },
+    "Referral": {
+      "Nutrition": "Discussed risk reduction with exercise, weight management, and limiting alcohol",
+      "Genetics": "Not yet on treatment — no response to assess.",
+      "Specialty": "None",
+      "Others": "None",
+      "follow up": "Return to clinic in 6 months"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "Return to clinic in 6 months"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

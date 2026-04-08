@@ -1,0 +1,134 @@
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "second opinion": "No",
+    "in-person": "in-person",
+    "summary": "grade III mixed ductal and mucinous carcinoma of the right breast, stage pT3N0"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma",
+    "Stage_of_Cancer": "pT3N0",
+    "Distant_Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 8.8, RBC Count 3.91, Hemoglobin 11.8, Hematocrit 35.3, MCV 90, Platelet Count 279, Neutrophil Absolute Count 5.85, Lymphocyte Abs Cnt 2.12, Albumin 3.3, Alkaline Phosphatase 73, Alanine transaminase 27, AST 21, Bilirubin 0.1, Urea Nitrogen 9, Calcium 9.3, Chloride 107, Carbon Dioxide 23, Anion Gap 9, Creatinine 0.57, eGFR >120, Glucose 110, Potassium 3.9, Sodium 139, Protein 6.9"
+  },
+  "Clinical_Findings": {
+    "findings": "Grade III mixed ductal and mucinous carcinoma, intermediate grade DCIS, no evidence of distant metastasis, low-level hypermetabolism along the anterior right breast tissue expander, possibly due to postprocedural changes or superimposed infection."
+  },
+  "Current_Medications": {
+    "current_meds": "Tamoxifen, Zoladex, Abraxane, Lorazepam, Zofran, Compazine, Omeprazole, Lexapro, Ambien, Valtrex"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started Abraxane, switched from Taxol, delayed treatment to 02/20/21 due to grade 3 infusion reaction with cycle 1.",
+    "supportive_meds": [
+      "Lorazepam",
+      "Zofran",
+      "Compazine",
+      "Omeprazole",
+      "Lexapro",
+      "Ambien",
+      "Valtrex"
+    ]
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "adjuvant",
+    "response_assessment": "stable",
+    "current_meds": "taxane, tamoxifen, zoladex, lorazepam, zofran, compazine, omeprazole, lexapro, ambien, valtrex"
+  },
+  "Response_Assessment": {
+    "response_assessment": "The patient has had a grade 3 infusion reaction with cycle 1, but tolerated Abraxane well since switching from Taxol. She presents today for cycle 8.",
+    "goals_of_treatment": "curative",
+    "current_meds": "Lorazepam, Zofran, compazine, omeprazole, Lexapro, ambien, valtrex, tamoxifen, zoladex, Abraxane"
+  },
+  "Medication_Plan_chatgpt": {
+    "chemotherapy": {
+      "summary": "Continue weekly Abraxane 100mg/m2 x 12 cycles",
+      "Short term side_effects_discussed": "grade 3 infusion reaction",
+      "Long term side_effects_discussed": ""
+    },
+    "hormonal therapy": {
+      "summary": "Continue tamoxifen",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bone therapy": {
+      "summary": "Continue zoladex for preservation of ovarian reserve during chemotherapy",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "radiotherapy": {
+      "summary": "Radiation oncology referral, will see Dr. ***** next week",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "bowel regimen": {
+      "summary": "Continue prilosec",
+      "Short term side_effects_discussed": "",
+      "Long term side_effects_discussed": ""
+    },
+    "pain medication": {
+      "summary": "Continue ***** as premed, will discuss more use of antiemetics zofran, compazine, ativan",
+      "Short term side_effects_discussed": "nausea and vomiting due to chemo and anxiety",
+      "Long term side_effects_discussed": ""
+    },
+    "psychiatry medication": {
+      "summary": "Continue lexapro daily, will take ativan prn, will take ambien",
+      "Short term side_effects_discussed": "anxiety due to diagnosis",
+      "Long term side_effects_discussed": ""
+    },
+    "other treatment": {
+      "summary": "Continue valtrex 1g every day throughout chemo",
+      "Short term side_effects_discussed": "HSV, mouth sores/cold sores",
+      "Long term side_effects_discussed": ""
+    }
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex, Continue valtrex 1g every day, Continue lexapro daily, Continue prilosec, Continue ativan prn, Continue ambien, Will get doppler to r/o DVT, Will contact PT for lymphedema management, Will see Dr. ***** next week, Consider starting anticoagulant if DVT is positive, Consider starting on antiemetics zofran, compazine"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, will see Dr. ***** next week, continue valtrex 1g every day throughout chemo, continue lexapro daily, ativan prn, ambien as prescribed",
+    "goals_of_treatment": "curative",
+    "response_assessment": "improved",
+    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ativan, ambien"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Radiation oncology referral, will see Dr. ***** next week",
+    "goals_of_treatment": "curative",
+    "response_assessment": "improved",
+    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ativan, ambien"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned",
+    "goals_of_treatment": "curative",
+    "response_assessment": "imaging, labs, exam",
+    "current_meds": "tamoxifen, zoladex, Abraxane, valtrex, lexapro, prilosec, ativan"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Continue weekly Abraxane 100mg/m2 x 12 cycles, Continue zoladex for preservation of ovarian reserve during chemotherapy, Continue prilosec, Continue valtrex 1g every day throughout chemo, Continue lexapro daily, Continue small frequent meals, Continue as premed, Continue anticoag if positive for DVT, Continue to r/o DVT, Continue to contact PT for lymphedema managment, Continue to see Dr. ***** next week, Will get doppler to r/o DVT, Will contact PT for lymphedema managment if negative for DVT, Will see Dr. ***** next week, Rx for ambien provided today",
+    "goals_of_treatment": "curative",
+    "response_assessment": "improved",
+    "current_meds": "tamoxifen, zoladex, valtrex, lexapro, prilosec, ambien"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not yet on treatment \u2014 no response to assess."
+  },
+  "Referral": {
+    "Nutrition": "small frequent meals",
+    "Genetics": "None",
+    "Specialty": "Radiation oncology consult",
+    "Others": "Physical or occupational therapy",
+    "follow up": "2 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC 2 weeks",
+    "Next clinic visit purpose": "to discuss possibly starting on anticoag if positive for DVT, and to contact PT for lymphedema management if negative for DVT"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}

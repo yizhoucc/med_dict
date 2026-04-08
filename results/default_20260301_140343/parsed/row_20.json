@@ -1,0 +1,101 @@
+{
+  "coral_idx": 160,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow-up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "Patient is a 70 y.o. female with a recent diagnosis of right breast ductal carcinoma in situ (DCIS), referred for consideration of adjunct therapy following partial mastectomy."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "DCIS, ER+/PR+",
+      "Stage_of_Cancer": "T4a",
+      "Distant_Metastasis": "No",
+      "Metastasis": "No"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Intermediate grade DCIS spanning ~5.0 cm, clear surgical margins, no invasive ductal cancer, ER+ (98%), PR+ (90%), no palpable masses, no skin changes, no lymphadenopathy"
+    },
+    "Current_Medications": {
+      "current_meds": "Not yet on treatment — no response to assess."
+    },
+    "Treatment_Changes": {
+      "recent_changes": "No recent changes",
+      "supportive_meds": "Vitamin D, calcium"
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "risk reduction",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Not yet on treatment — no medications to report."
+    },
+    "Response_Assessment": {
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "goals_of_treatment": "Not mentioned",
+      "current_meds": "Not mentioned",
+      "surgical_history": "partial mastectomy for biopsy proven DCIS",
+      "pathology": "intermediate grade DCIS, ER+ (98%) PR+ (90%)",
+      "family_history": "two sisters in their 50s, plus multiple aunts in their 50s and a niece in her 40s with breast cancer",
+      "genetic_testing": "negative for any pathogenic variant sequences",
+      "risk_factors": "osteopenia, dyslipidemia, impaired glucose tolerance"
+    },
+    "Medication_Plan_chatgpt": {
+      "hormonal therapy": {
+        "summary": "Aromatase inhibitor (e.g. Arimidex) for 5 years after XRT to reduce risk to 5-8% and provide lifelong chemoprotectant benefit for her uninvolved (left) breast",
+        "Short term side_effects_discussed": "MSS and bone density complications",
+        "Long term side_effects_discussed": "MSS and bone density complications, which can be mitigated with bisphosphonate therapy"
+      },
+      "radiotherapy": {
+        "summary": "XRT +/- endocrine therapy to minimize her future risk of recurrent DCIS or progression to invasive ductal cancer over next decade",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bone therapy": {
+        "summary": "Bisphosphonate therapy to mitigate bone density complications of aromatase inhibitor therapy",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "She will consider adjuvant endocrine therapy (e.g. aromatase inhibitor like Arimidex) for 5 years after XRT, and will plan to take bisphosphonate therapy to mitigate the risk of bone density complications."
+    },
+    "Therapy_plan": {
+      "therapy_plan": "She is inclined toward undertaking additional adjuvant treatment(s) to minimize her risks over the next decade of recurrent DCIS or progression to invasive breast cancer.",
+      "adjuvant_treatment": "XRT and endocrine therapy, specifically an aromatase inhibitor like Arimidex",
+      "duration_of_endocrine_therapy": "5 years",
+      "bisphosphonate_therapy": "to mitigate the risk of bone density complications from aromatase inhibitor therapy",
+      "follow_up_visit": "in 3-4 months",
+      "evaluation": "in two weeks"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "XRT"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "Rad Onc and Med Onc evaluation, right breast XRT, and endocrine therapy"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned."
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "negative genetic screen"
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "negative",
+      "Specialty": "Rad Onc and Med Onc",
+      "Others": "None",
+      "follow up": "2 weeks, 3-4 months"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "3-4 months"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

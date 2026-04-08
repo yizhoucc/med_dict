@@ -1,0 +1,117 @@
+{
+  "coral_idx": 170,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "Metastatic breast cancer, follow-up visit to review April 2021 PETCT scan results, discuss starting Doxil on 07/01/2021, and evaluate hip pain."
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR+/HER2- metastatic breast cancer",
+      "Stage_of_Cancer": "Metastatic",
+      "Distant_Metastasis": "Yes, to bones",
+      "Metastasis": "Yes, to bones"
+    },
+    "Lab_Results": {
+      "lab_summary": "No labs in note."
+    },
+    "Clinical_Findings": {
+      "findings": "Numerous FDG avid hepatic metastases have increased in size and FDG uptake when compared to prior study performed on 01/17/2021. Numerous FDG avid skeletal metastases throughout the skeleton have increased in FDG uptake and number when compared to prior study performed on 01/17/2021. Focal region of apparent increased FDG uptake in the visualized portion of the right frontal lobe, incompletely characterized on this study, which could potentially be an intracranial metastasis. Prominent intraluminal uptake in the anorectal region, nonspecific, potentially physiologic or inflammatory in etiology. An underlying polyp would not be excluded."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "ascorbic acid",
+        "cholecalciferol",
+        "ondansetron",
+        "lorazepam",
+        "magnesium",
+        "medical cannabis",
+        "prochlorperazine"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "Patient not taking LORazepam, ondansetron, oxyCODONE, and prochlorperazine.",
+      "supportive_meds": "ondansetron, LORazepam, prochlorperazine"
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "Not yet on treatment — no intent to assess.",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, LORazepam, magnesium, medical cannabis, ondansetron, oxyCODONE, prochlorperazine"
+    },
+    "Response_Assessment": {
+      "goals_of_treatment": "Palliative",
+      "response_assessment": "Progression of metastatic disease when compared to prior study performed on 01/17/2021. Numerous FDG avid hepatic metastases have increased in size and FDG uptake when compared to prior study performed on 01/17/2021. Numerous FDG avid skeletal metastases throughout the skeleton have increased in FDG uptake and number when compared to prior study performed on 01/17/2021.",
+      "current_meds": "ascorbic acid, vitamin C, cholecalciferol, vitamin D3, LORazepam, magnesium, medical cannabis, ondansetron, oxyCODONE, prochlorperazine",
+      "allergies": "Extract Nausea And Vomiting"
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "Cycle 1 Doxil IV every 28 days on 07/01/2021",
+        "Short term side_effects_discussed": null,
+        "Long term side_effects_discussed": null
+      },
+      "bowel regimen": {
+        "summary": "GI referral placed by Dr. ***** on 06/20/21",
+        "Short term side_effects_discussed": null,
+        "Long term side_effects_discussed": null
+      },
+      "pain medication": {
+        "summary": null,
+        "Short term side_effects_discussed": null,
+        "Long term side_effects_discussed": null
+      },
+      "psychiatry medication": {
+        "summary": null,
+        "Short term side_effects_discussed": null,
+        "Long term side_effects_discussed": null
+      },
+      "other treatment": {
+        "summary": "flu vaccine declined",
+        "Short term side_effects_discussed": null,
+        "Long term side_effects_discussed": null
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Doxil IV every 28 days, starting on 07/01/2021"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "Cycle 1 Doxil IV every 28 days, PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain, follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms",
+      "goals_of_treatment": "palliative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Doxil"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "Cycle 1 Doxil IV every 28 days, Brain MRI, MRI pelvis"
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "PETCT scan after 3 cycles of Doxil, Brain MRI to assess region of increased focal uptake in the right frontal lobe, MRI pelvis to evaluate hip pain",
+      "goals_of_treatment": "palliative",
+      "response_assessment": "Not yet on treatment — no response to assess.",
+      "current_meds": "Doxil",
+      "next_appointment": "Follow-up in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+    },
+    "Lab_Plan": {
+      "lab_plan": "No labs planned"
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "Not yet planned — no genetic testing mentioned."
+    },
+    "Referral": {
+      "Nutrition": "None",
+      "Genetics": "None",
+      "Specialty": "GI, Oral Medicine",
+      "Others": "Physical therapy",
+      "follow up": "4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "in 4 weeks prior to cycle 2 or sooner for new or worsening symptoms"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}

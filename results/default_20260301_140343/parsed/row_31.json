@@ -1,0 +1,114 @@
+{
+  "coral_idx": 171,
+  "keypoints": {
+    "Reason_for_Visit": {
+      "Patient type": "Follow up",
+      "second opinion": "No",
+      "in-person": "in-person",
+      "summary": "Patient with a history of breast cancer, stage IIA, estrogen receptor positive, metastatic disease, seeking care at our clinic due to convenience"
+    },
+    "Cancer_Diagnosis": {
+      "Type_of_Cancer": "ER+/PR-/HER2+ pleomorphic lobular cancer",
+      "Stage_of_Cancer": "Stage IIA",
+      "Distant_Metastasis": "Yes, to neck, chest, abdomen, and pelvis",
+      "Metastasis": "Yes"
+    },
+    "Lab_Results": {
+      "lab_summary": {
+        "Sedimentation Rate (MB)": "27",
+        "C-Reactive Protein": "3.1"
+      }
+    },
+    "Clinical_Findings": {
+      "findings": "No abnormal areas of FDG uptake to suggest active metastatic disease. Decreased prominence of uptake in the head and neck region consistent with brown fat. No pulmonary consolidations or metastases noted. Small lymph node felt in left axilla <1cm."
+    },
+    "Current_Medications": {
+      "current_meds": [
+        "trastuzumab (HERCEPTIN IV), exemestane (Aromasin), levothyroxine (SYNTHROID), loperamide (IMODIUM), loratadine (CLARITIN), magnesium oxide (MAG-OX), melatonin 5 mg tablet, omega-3 fatty acids 1,000 mg capsule, omeprazole (PRILOSEC), pertuzumab (Perjeta), thiamine HCl, vitamin B1, (VITAMIN B-1), ascorbic acid, vitamin C, (VITAMIN C) 500 mg tablet, bismuth subsalicylate (PEPTO BISMOL) suspension, cholecalciferol, vitamin D3, 1,000 unit CAP, coenzyme Q10 100 mg capsule, cyanocobalamin (VITAMIN B-12) 500 mcg tablet, diphenhydrAMINE (BENADRYL) 25 mg tablet, EPINEPHrine (EPIPEN) 0.3 mg/0.3 mL injection, fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray, latanoprost (XALATAN) 0.005 % ophthalmic solution"
+      ]
+    },
+    "Treatment_Changes": {
+      "recent_changes": "Dropped ***** due to diarrhea, which resolved.",
+      "supportive_meds": [
+        "omeprazole",
+        "loratadine",
+        "loperamide",
+        "diphenhydrAMINE",
+        "epinephrine",
+        "melatonin",
+        "omega-3 fatty acids"
+      ]
+    },
+    "Treatment_Goals": {
+      "goals_of_treatment": "curative",
+      "response_assessment": "stable",
+      "current_meds": "herceptin, exemestane, levothyroxine, loperamide, melatonin, omega-3 fatty acids, omeprazole, thiamine HCl, trastuzumab"
+    },
+    "Response_Assessment": {
+      "response_assessment": "No abnormal areas of FDG uptake to suggest active metastatic disease on PET-CT in June 2019",
+      "goals_of_treatment": "Not specified",
+      "current_meds": "ascorbic acid, bismuth subsalicylate, cholecalciferol, coenzyme Q10, cyanocobalamin, diphenhydrAMINE, EPINEPHrine, exemestane, fluticasone propionate, latanoprost, levothyroxine, loperamide, loratadine, magnesium oxide, melatonin, omega-3 fatty acids, omeprazole, pertuzumab, thiamine HCl, trastuzumab"
+    },
+    "Medication_Plan_chatgpt": {
+      "chemotherapy": {
+        "summary": "TCH chemotherapy x 6",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "hormonal therapy": {
+        "summary": "adjuvant tamoxifen followed by ***** completed 05/16/15",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "bowel regimen": {
+        "summary": "",
+        "Short term side_effects_discussed": "diarrhea",
+        "Long term side_effects_discussed": ""
+      },
+      "radiotherapy": {
+        "summary": "",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      },
+      "other treatment": {
+        "summary": "herceptin",
+        "Short term side_effects_discussed": "",
+        "Long term side_effects_discussed": ""
+      }
+    },
+    "Medication_Plan": {
+      "medication_plan": "Herceptin"
+    },
+    "Therapy_plan": {
+      "therapy_plan": "Continue herceptin, plan to start ***** and *****"
+    },
+    "radiotherapy_plan": {
+      "radiotherapy_plan": "None"
+    },
+    "Procedure_Plan": {
+      "procedure_plan": "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutrition consult for weight loss."
+    },
+    "Imaging_Plan": {
+      "imaging_plan": "No imaging planned"
+    },
+    "Lab_Plan": {
+      "lab_plan": "Set up infusion at *****. RTC in 3 and 6 weeks. Exercise counseling and nutrition consult for weight loss."
+    },
+    "Genetic_Testing_Plan": {
+      "genetic_testing_plan": "negative"
+    },
+    "Referral": {
+      "Nutrition": "Exercise counseling and nutrition consult for weight loss",
+      "Genetics": "negative",
+      "Specialty": "Medical Oncology/Hematology",
+      "Others": "None",
+      "follow up": "3 and 6 weeks"
+    },
+    "follow_up_next_visit": {
+      "Next clinic visit": "RTC in 3 and 6 weeks"
+    },
+    "Advance_care_planning": {
+      "Advance care": "Not discussed during this visit."
+    }
+  }
+}
