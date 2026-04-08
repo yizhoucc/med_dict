@@ -821,10 +821,25 @@ def main():
         phase1_prompts = {k: extraction_prompts[k] for k in PHASE1_KEYS if k in extraction_prompts}
         phase2_prompt_keys = [k for k in PHASE2_KEYS if k in extraction_prompts]
 
+        # V26: enable tool calling for all phases if configured
+        global_tool_ctx = {"full_note": note_text, "med_dict": med_dict} if config.get("extraction", {}).get("tool_calling", False) else None
+        tool_instructions = ""
+
+        # If tool calling enabled, append tool instructions to Phase 1/2 prompts too
+        if global_tool_ctx:
+            tool_instructions = (
+                "\n\nTOOLS (optional — use ONLY if you need to find specific information in the note):\n"
+                "- To search the note for specific content: SEARCH_NOTE(\"keyword\")\n"
+                "- To look up a medical term definition: DEFINE(\"term\")\n"
+                "If you have enough information, do NOT use tools — output the JSON directly."
+            )
+            phase1_prompts = {k: v + tool_instructions for k, v in phase1_prompts.items()}
+
         keypoints = extract_fn(
             phase1_prompts, model, tokenizer, keypoint_config, base_cache,
             verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
-            gate_config=gate_config, supportive_whitelist=supp_whitelist
+            gate_config=gate_config, supportive_whitelist=supp_whitelist,
+            tool_context=global_tool_ctx,
         )
         print(f"  Phase 1 extraction ({len(phase1_prompts)} prompts): {time.time() - ext_start:.1f}s")
 
@@ -837,15 +852,19 @@ def main():
 
             phase2_prompts = {}
             for k in phase2_prompt_keys:
+                base_prompt = extraction_prompts[k]
+                if global_tool_ctx:
+                    base_prompt = base_prompt + tool_instructions
                 if cross_context:
-                    phase2_prompts[k] = cross_context + "\n\n" + extraction_prompts[k]
+                    phase2_prompts[k] = cross_context + "\n\n" + base_prompt
                 else:
-                    phase2_prompts[k] = extraction_prompts[k]
+                    phase2_prompts[k] = base_prompt
 
             phase2_keypoints = extract_fn(
                 phase2_prompts, model, tokenizer, keypoint_config, base_cache,
                 verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
-                gate_config=gate_config, supportive_whitelist=supp_whitelist
+                gate_config=gate_config, supportive_whitelist=supp_whitelist,
+                tool_context=global_tool_ctx,
             )
             keypoints.update(phase2_keypoints)
             print(f"  Phase 2 extraction ({len(phase2_prompts)} prompts): {time.time() - phase2_start:.1f}s")
@@ -894,11 +913,13 @@ def main():
         # Extract Referral from full note (not just A/P) [v14]
         if referral_prompt:
             ref_start = time.time()
+            ref_prompt_to_use = referral_prompt + tool_instructions if global_tool_ctx else referral_prompt
             ref_keypoints = extract_fn(
-                {"Referral": referral_prompt},
+                {"Referral": ref_prompt_to_use},
                 model, tokenizer, keypoint_config, fullnote_cache,
                 verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
                 gate_config=gate_config, supportive_whitelist=supp_whitelist,
+                tool_context=global_tool_ctx,
             )
             keypoints.update(ref_keypoints)
             print(f"  Referral extraction (full note): {time.time() - ref_start:.1f}s")
