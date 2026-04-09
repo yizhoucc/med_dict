@@ -1350,6 +1350,8 @@ def main():
         proc = keypoints.get("Procedure_Plan", {})
         if isinstance(proc, dict):
             proc_val = proc.get("procedure_plan", "")
+            if isinstance(proc_val, list):
+                proc_val = ", ".join(str(v) for v in proc_val)
             proc_lower = (proc_val or "").lower()
             # Search for future procedure patterns in full note
             # Note: (?:an?\s+)? handles optional articles ("scheduled for a port placement")
