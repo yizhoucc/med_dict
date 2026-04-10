@@ -1,103 +1,191 @@
-# 错题本: v24 Full Run P1 Issues
+# 错题本: v26 notool 审查 — 28 个有问题的 Sample
 
-> 来源: full_qwen_20260405_073716/review.md
-> 用途: 跟踪每个 P1 问题的修复状态，验证修复效果
-
----
-
-## Letter 幻觉/编造 (3 P1)
-
-| ROW | coral_idx | 问题 | 修复方式 | 验证状态 |
-|-----|-----------|------|----------|----------|
-| 3 | 142 | Letter "You appear to be emotional" 但 ROS 说 no anxiety/depression | letter_generation.yaml 规则 16 修改 | 🔲 待验证 |
-| 4 | 143 | Letter "blood tests mostly normal" 但 lab_summary="No labs in note" | letter_generation.yaml 规则 11 修改 | 🔲 待验证 |
-| 5 | 144 | Letter "blood tests mostly normal" 但 lab_summary="No labs in note" | 同上 | 🔲 待验证 |
-
-**验证 sample**: ROW 3 (coral_idx 142), ROW 4 (coral_idx 143), ROW 5 (coral_idx 144)
-**需要 letter**: ✅
-
-### 验证结果 (2026-04-05)
-- ROW 3 "emotional": ✅ **已修复** (prompt + POST-LETTER-EMOTIONAL hook)
-- ROW 4 "blood tests": ✅ **已修复** (prompt 规则 11)
-- ROW 5 "blood tests": ✅ **已修复** (prompt 规则 11)
+> 来源: v26_full_notool_20260408_080004/review.md
+> 用途: v27 验证用。v27 只改了 letter prompt，extraction 不变
+> 总计: 6 P1 + 44 P2（100 samples 中 28 个有问题）
 
 ---
 
-## response_assessment 误判 (3 P1)
+## P1 问题汇总（6 个）
 
-| ROW | coral_idx | 问题 | 修复方式 | 验证状态 |
-|-----|-----------|------|----------|----------|
-| 9 | 148 | "Not yet on treatment" 但完成新辅助化疗+手术（部分病理响应） | extraction.yaml Response_Assessment prompt 修改 | 🔲 待验证 |
-| 10 | 149 | "Not mentioned" 但 8.8cm 残余+20LN+ = 新辅助疗效差 | 同上 | 🔲 待验证 |
-| 11 | 150 | 把 letrozole 上的 PET 进展归因于 Faslodex（A/P 说 stable） | 同上（时间线指导） | 🔲 待验证 |
+| ROW | coral_idx | 字段 | 问题 | 类型 | v27 能修吗 |
+|-----|-----------|------|------|------|-----------|
+| 1 | 140 | lab_plan | 混入 MRI/bone scan，没列具体 labs | extraction | ❌ 需 tool calling |
+| 8 | 147 | response_assessment | "Not yet on treatment" 但完成了不完整 neoadjuvant + surgery | extraction | ❌ 需 prompt 改进 |
+| 10 | 149 | response_assessment | "does not provide evidence" 但有 8.8cm 残余+20LN+ | extraction | ❌ 需 prompt 改进 |
+| 11 | 150 | response_assessment | 引用换药前 PET 进展，A/P 说 "Exam stable" | extraction | ❌ 需 prompt 改进 |
+| 12 | 151 | Advance care | "Not discussed" 但 DNR/DNI in problem list | extraction | ❌ 需 tool calling |
+| 88 | 227 | response_assessment | "Not mentioned" for post-neoadjuvant progression→surgery | extraction | ❌ 模型顽固 |
 
-**验证 sample**: ROW 9 (coral_idx 148), ROW 10 (coral_idx 149), ROW 11 (coral_idx 150)
-**需要 letter**: ✅ (ROW 11 letter 也有 P1 — "not responding well")
-
-### 验证结果 (2026-04-05)
-- ROW 9: ✅ **已修复** — 正确描述 post-neoadjuvant 病理响应
-- ROW 10: ✅ **已修复** — 正确描述新辅助后手术结果
-- ROW 11: ✅ **已修复** — 不再说 "not responding"，时间线正确
+**v27 letter 改动不影响任何 P1（全是 extraction 问题）。**
 
 ---
 
-## genetic_testing_plan 误分类 (3 P1)
+## P2 问题逐 Sample 清单
 
-| ROW | coral_idx | 问题 | 修复方式 | 验证状态 |
-|-----|-----------|------|----------|----------|
-| 3 | 142 | biopsy/IHC for HR/HER2 错归为 genetic testing | plan_extraction.yaml 排除 IHC/FISH | 🔲 待验证 |
-| 7 | 146 | "recheck [LVEF/tumor marker]" 错归为 genetic testing | plan_extraction.yaml 排除 LVEF/markers | 🔲 待验证 |
-| 24 | 163 | Oncotype/MammaPrint 明确计划中但写 "None planned" | plan_extraction.yaml 明确包含 Oncotype | 🔲 待验证 |
+### ROW 1 (coral_idx 140) — 3 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | imaging_plan | 遗漏 Bone Scan |
+| 2 | Type_of_Cancer | IDC 原文未明确 |
+| 3 | therapy_plan | 重复 medication_plan |
 
-**验证 sample**: ROW 3 (coral_idx 142), ROW 7 (coral_idx 146), ROW 24 (coral_idx 163)
-**需要 letter**: ✅
+### ROW 2 (coral_idx 141) — 3 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Metastasis | 不完整 + chest wall 是区域性 |
+| 2 | imaging_plan | 遗漏 rescheduled MRI |
+| 3 | Referral Others | "Home health?" 是疑问非确定 |
 
-### 验证结果 (2026-04-05)
-- ROW 3: ✅ **已修复** — "Genetic testing sent and is pending" (不再包含 IHC/biopsy)
-- ROW 7: ✅ **已修复** — "None planned." (POST-GENETICS-RECHECK hook 清除了 "Would recheck")
-- ROW 24: ✅ **已修复** — "We will send her surgical specimen for MP" (正确捕获分子检测)
+### ROW 3 (coral_idx 142) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Referral-Genetics | 检测 ordering ≠ referral |
+
+### ROW 4 (coral_idx 143) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | therapy_plan | 重复 medication_plan |
+
+### ROW 5 (coral_idx 144) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | follow_up | 循环表述 |
+
+### ROW 6 (coral_idx 145) — 3 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Patient type | 与 summary 不一致 |
+| 2 | **letter** | **"You appear to be feeling anxious" — v27 应修复** |
+| 3 | Referral-Genetics | 历史转诊（Myriad 已完成） |
+
+### ROW 7 (coral_idx 146) — 3 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 LVEF recheck（应为 imaging） |
+| 2 | lab_plan | 混入 LVEF recheck（应为 imaging） |
+| 3 | **letter** | **"medication level" 实际是 LVEF recheck — v27 可能改善** |
+
+### ROW 8 (coral_idx 147) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | medication 内容，遗漏 port placement |
+
+### ROW 10 (coral_idx 149) — 0 P2（仅 P1）
+
+### ROW 11 (coral_idx 150) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | imaging_plan | 遗漏 Echo q6mo |
+
+### ROW 12 (coral_idx 151) — 2 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | imaging_plan | 遗漏 Echo q6mo |
+| 2 | Metastasis | lung 已 resolved 但仍列出 |
+
+### ROW 13 (coral_idx 152) — 2 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | response | "On treatment" 但未开始（手术完成，tamoxifen 未决定） |
+| 2 | findings | 左右乳混淆 |
+
+### ROW 14 (coral_idx 153) — 2 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | current_meds | 空值（患者在替代治疗中） |
+| 2 | response_assessment | 漏了 CA 27.29 从 193→48 |
+
+### ROW 15 (coral_idx 154) — 2 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | genetic_testing | 已做回顾非新计划 |
+| 2 | procedure_plan | 混入 Rx recommendations |
+
+### ROW 20 (coral_idx 159) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 imaging/referral/medication |
+
+### ROW 22 (coral_idx 161) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | genetic_testing | 有 medication plan 内容 |
+
+### ROW 24 (coral_idx 163) — 2 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 genetic testing |
+| 2 | Metastasis | "Not sure" 应为 "No" |
+
+### ROW 25 (coral_idx 164) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | response | 引用 pre-treatment PET |
+
+### ROW 33 (coral_idx 172) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | **letter** | **stage "now considered IIIA" for NED patient — v27 follow-up 逻辑可能改善** |
+
+### ROW 38 — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | response | "not responding" but not yet on treatment |
+
+### ROW 39 (coral_idx 178) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Type_of_Cancer | 错误推断 ER+（goserelin 用于 fertility，非 ER+） |
+
+### ROW 52 — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 fertility referral |
+
+### ROW 57 — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 genetic counseling |
+
+### ROW 74 (coral_idx 213) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Type_of_Cancer | HER2+ 混淆了 gastric cancer 的 HER2 状态 |
+
+### ROW 75 — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | procedure_plan | 混入 genetics+fertility |
+
+### ROW 83 (coral_idx 222) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Stage | "Stage IV" 但 Distant Met=No，axillary LN 是 regional |
+
+### ROW 88 (coral_idx 227) — 0 P2（仅 P1）
+
+### ROW 95 (coral_idx 234) — 1 P2
+| # | 字段 | 问题 |
+|---|------|------|
+| 1 | Stage | "Stage IV" 但 Distant Met=No, ISPY trial (Stage I-III only) |
 
 ---
 
-## 其他 P1 (11 个)
+## v27 Letter 改动可能修复的 P2
 
-| ROW | coral_idx | 字段 | 问题 | 修复方式 | 验证状态 |
-|-----|-----------|------|------|----------|----------|
-| 1 | 140 | lab_plan | 混入 MRI/bone scan + 没列具体化验 | prompt 改进 | 🔲 待验证 |
-| 6 | 145 | Patient type | CC 说 Follow-up 提取为 New patient | POST hook 已覆盖? | 🔲 待验证 |
-| 11 | 150 | letter | "not responding well" 但 A/P 说 stable | response_assessment 修复应连带解决 | 🔲 待验证 |
-| 12 | 151 | Advance care | "Not discussed" 但 problem list 明确 DNR/DNI | 需考虑搜索 problem list | 🔲 待验证 |
-| 14 | 153 | current_meds | 空值，患者正在服用 gem/doc/dox/pamidronate | prompt 需更积极提取 | 🔲 待验证 |
-| 14 | 153 | response_assessment | 漏了 CA 27.29 下降趋势 + CT 缩小 | prompt 已加指导 | 🔲 待验证 |
-| 20 | 159 | procedure_plan | 混入 CT/referral/genetic testing | procedure prompt 已修复 | 🔲 待验证 |
-| 22 | 161 | lab_summary | "No labs" 但有临床显著 labs (贫血/肾功能不全) | 需定义 old labs 策略 | 🔲 待验证 |
-| 25 | 164 | medication_plan | Xeloda 剂量错归给 ixabepilone | 需更精确的剂量归因 | 🔲 待验证 |
+| ROW | 原问题 | v27 改动 | 预期效果 |
+|-----|--------|---------|---------|
+| 6 | letter "You appear to be feeling anxious" | 情感支持改为标准句 | ✅ 应修复 |
+| 7 | letter "medication level" 误述 | letter 结构重组 | 可能改善 |
+| 33 | letter stage "now considered IIIA" | follow-up 不重复诊断 | 可能改善 |
 
 ---
 
-## 验证计划
+## v27 验证用 row_indices（0-based）
 
-### 需要重跑的 sample (去重后)
+```
+[0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 19, 21, 23, 24, 32, 37, 38, 51, 56, 73, 74, 82, 87, 94]
+```
 
-Letter P1 验证: coral_idx 142, 143, 144
-Response assessment P1 验证: coral_idx 148, 149, 150
-Genetic testing P1 验证: coral_idx 142, 146, 163
-其他 P1 验证: coral_idx 140, 145, 150, 151, 153, 159, 161, 164
-
-**去重合并**: coral_idx = 140, 142, 143, 144, 145, 146, 148, 149, 150, 151, 153, 159, 161, 163, 164
-
-**共 15 个 sample** 需要重跑验证。
-
-### row_indices 配置 (0-based)
-对应 CSV row_indices (coral_idx → row_index 需要查映射):
-需要查 breastca_unannotated.csv 中这些 coral_idx 对应的行号。
-
-### 验证步骤
-1. 创建 exp/v24_verify.yaml，row_indices = [上述 15 个 sample 的 row_index]
-2. SSH 到 WSL 跑 pipeline
-3. 下载结果，逐个对比：
-   - Letter: 是否消除了 "blood tests normal" / "emotional" 幻觉？
-   - response_assessment: post-neoadjuvant 是否描述病理响应？
-   - genetic_testing_plan: IHC/LVEF 是否排除？Oncotype 是否捕获？
-   - POST-STAGE-METASTATIC: Stage "Not available" 是否自动变为 Stage IV？
-4. 记录结果到此错题本
+28 个 sample，对应 ROW 1-8, 10-15, 20, 22, 24-25, 33, 38-39, 52, 57, 74-75, 83, 88, 95
