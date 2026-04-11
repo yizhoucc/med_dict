@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-5 完成（5/28），ROW 6 开始**
+> Status: **审查中 — ROW 1-12 完成（12/28），ROW 13 开始**
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -48,8 +48,8 @@
 | 严重度 | 数量 | 比率 | 说明 |
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
-| **P1** | 0 | — | |
-| **P2** | 2 | — | ROW 1×2 |
+| **P1** | 1 | — | ROW 10: response = Oncotype |
+| **P2** | 11 | — | ROW 1×2, 6×2, 7×3, 8×1, 11×2, 12×1 |
 
 ### 初步 P1 快速评估（完整审查前的预览）
 基于 keypoints 快速对比 v27 的 5 个 P1：
@@ -98,4 +98,41 @@
 - ✅ Response: 出色 — 准确传达 mixed response（cervical LN↓, axillary LN↑, sternal lesion, brachial plexus LN↑, brain normal）
 - ✅ Radiotherapy_plan: Rad Onc referral for symptomatic brachial plexus 正确
 - ✅ Letter: mixed response 通俗化 + Rad Onc + CT/bone scan + labs monthly。无编造
+
+### ROW 6 (coral_idx 145) — 0 P1, 2 P2
+- P2: Patient type "New patient" — 应为 "Follow up"（zoladex 06/08 已由该提供者开始）。同 v27
+- P2: Referral-Genetics 历史转诊（04/24/2019，Myriad negative）混入当前 referrals。同 v27
+- ✅ Type: ER+/PR+/HER2- 正确。current_meds: zoladex + letrozole 正确。Goals curative 正确
+- ✅ Lab: Estradiol 172 + Vitamin D 24 + CMP+CBC 完整
+- ✅ Medication_plan: letrozole ≥3yr → tamoxifen + gabapentin + estradiol monthly 完整
+- ✅ Letter: 无编造情绪词（v26 "anxious" 保持修复）。通俗准确
+
+### ROW 7 (coral_idx 146) — 0 P1, 3 P2
+- **P2 NEW**: Stage "Originally Stage II, now Stage III" — 应为 Stage IV。患者有 supraclavicular + mediastinal metastases（Distant Met 字段正确写 "Yes"）。POST-STAGE-DISTMET hook 错误触发（extraction 最初写 Distant Met=No → hook 降级 → 后续 gate 修正为 Yes，但 Stage 未回升）。**v28 regression**
+- P2: procedure_plan "Would recheck [REDACTED]" — LVEF/echo 是 imaging 不是 procedure。同 v27
+- P2: lab_plan "Would recheck [REDACTED]" — 同上。同 v27
+- ✅ Response: 出色 — "probable mild progression...SUV 2.1 (was 1.8)...[REDACTED] 14.8 persistently elevated"
+- ✅ Medication_plan: d/c current regimen + recommend [REDACTED] next line
+- ✅ Letter: "ejection fraction of 52%" 正确（v26 编造修复保持）。无编造
+
+### ROW 8 (coral_idx 147) — 0 P1, 1 P2 ← **v27 P1 修复！**
+- **v27 P1 FIXED**: response_assessment 现在正确描述 post-neoadjuvant pathologic response — breast pCR（no residual carcinoma）+ 3/28 LN positive（2.4cm, extranodal extension）+ PET negative
+- P2: procedure_plan "adjuvant AC x 4 cycles, to be followed by T-DM1" — chemo 混入 procedure。同 v27
+- ✅ Type: ER-/PR-/HER2+ (IHC 3+, FISH 5.7) 正确
+- ✅ Goals curative, Imaging echo before AC, Radiotherapy after AC 正确
+
+### ROW 10 (coral_idx 149) — 1 P1, 0 P2 ← v27 P1 未修复
+- **P1**: response_assessment "Low risk [REDACTED]." — 仍是 Oncotype 基因检测结果，不是 pathologic response。患者 neoadjuvant letrozole → 手术后 8.8cm 残留 + LN 受累，response 应描述这些病理发现。**同 v27，未修复**
+- ✅ 其余全部正确：Type HR+/HER2- ✅, Stage II ✅, Radiotherapy ✅, DEXA ✅
+
+### ROW 11 (coral_idx 150) — 0 P1, 2 P2 ← v27 P1→P2 改善
+- **v27 P1 改善→P2**: response 去掉了 "indicating disease progression on current treatment with Faslodex"（错误归因消除）。但仍引用旧 PET（10/10/12, before Faslodex 10/16/12 开始），遗漏 A/P "Exam stable"，加入 "MRI ordered"（plan 不是 response）
+- P2: imaging_plan 只有 PETCT，遗漏 MRI of lumbar/pelvis/femur。同 v27
+- ✅ Type IDC ✅, Stage IIIC→IV ✅, current_meds Faslodex+Denosumab ✅, Lab 完整 ✅
+
+### ROW 12 (coral_idx 151) — 0 P1, 1 P2 ← **v27 P1 修复！**
+- **v27 P1 FIXED**: Advance care "POLST on file. Patient has documented wishes against life support." — POST-ADV hook 成功捕获 ✅
+- **v27 P2 改善**: response 现在包含 "Recent MRI shows new lesions"（brain PD）+ body SD。比 v27 完整 ✅
+- P2: imaging_plan 仍遗漏 Echo q6 months（A/P 写 "Echo q6 months"）。同 v27
+- ✅ Medication_plan, Radiotherapy_plan, Imaging (CT+bone scan+MRI brain) 正确
 
