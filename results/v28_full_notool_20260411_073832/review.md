@@ -8,8 +8,8 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **75, 83, 88, 95**（4 个）
-> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52, 57, 74
+> 待重做的 ROW（之前用 batch 偷懒了）: **95**（1 个）
+> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52, 57, 74, 75, 83, 88
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -286,21 +286,31 @@
 - ✅ Genetic_testing_plan: [REDACTED] testing ordered + consented 正确
 - ✅ Letter: "early stage IDC + AI + testing + 3 weeks"。Letter 没说 HER2+（比 keypoints 更准确）。无编造
 
-### ROW 75 (coral_idx 214) — 0 P1, 0 P2 ✅ ← **v27 P2 部分修复！**
-- **v27 P2 改善**: POST-PROCEDURE-FILTER 移除了 "genetics counseling and fertility" referrals（从 run log 确认）。procedure_plan 现在只有 "Order referral to UCSF Breast Surgery"（仍是 referral 不是 procedure，但只剩一个 minor item）
-- ✅ Type: ER-/PR-/HER2+ IDC 正确。Stage II-III ✅
-- ✅ Medication_plan: TCHP + adjuvant T-DM1 if residual 出色
+### ROW 75 (coral_idx 214) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**（完整逐字审查）
+- **v27 P2 FIXED**: POST-PROCEDURE-FILTER 成功移除了 "Agree with pending genetics counseling and fertility referrals"（run log 确认）。残留 "Order referral to UCSF Breast Surgery" 是 minor misclassification（已在 Referral-Specialty 正确捕获）
+- ✅ 33yo premenopausal, R breast high-grade ER-/PR-/HER2+(3+) IDC, Ki-67 70-80%, axillary LN+ to level III, PET neg for distant mets
+- ✅ Type: ER-/PR-/HER2+ IDC 正确。Stage "Not available (redacted)" 可接受
+- ✅ Medication_plan: 出色 — TCHP（docetaxel+carboplatin q3wk x 6 + trastuzumab+pertuzumab）+ T-DM1 if not pCR
+- ✅ Imaging: TTE prior to chemo 正确。Referral: UCSF Breast Surgery + Rad Onc + Genetics 正确
+- ✅ Letter: "neoadjuvant therapy...chemo before surgery to shrink cancer" + TCHP all 4 drugs + TTE + genetics/fertility + Breast Surgery + Rad Onc。无编造
 
-### ROW 83 (coral_idx 222) — 0 P1, 1 P2 ← Stage IV 未修复
-- P2: Stage "Stage IV (metastatic)" but Distant Met = "No"。axillary LN = regional。POST-STAGE-DISTMET hook 应该触发但未能生效（可能被后续 POST-STAGE-METASTATIC hook 覆盖）。**v27 P2 未修复**
-- ✅ Response: 出色 — "responding to neoadjuvant endocrine therapy...axillary SUV 15.1→1.9" 含具体数值
-- ✅ Goals curative ✅。Medication_plan: continue letrozole 正确
+### ROW 83 (coral_idx 222) — 0 P1, 1 P2 ← Stage IV 未修复（完整逐字审查）
+- P2: Stage "Stage IV (metastatic)" but Distant Met = "No"。A/P 明确 "W/u negative for distant metastasis, incl *****, *****, bone scan"。axillary LN = regional（Stage II-III at most）。POST-STAGE-DISTMET hook 应触发但未生效。**v27 P2 未修复**
+- ✅ 77yo, R breast invasive lobular carcinoma, R axillary nodal involvement。On neoadjuvant letrozole since Dec 2019
+- ✅ Type: Lobular correctly identified, ER+ inferred from letrozole reasonable
+- ✅ Response: 出色 — "responding to neoadjuvant endocrine therapy...axillary SUV 15.1→1.9...SUV 9.6→1.8...demonstrate little (if any) appreciable metabolic activity" 含具体 SUV 数值变化
+- ✅ Goals curative ✅。Medication_plan: continue letrozole 正确。Procedure_plan: breast surgery ✅
+- ✅ Letter: "cancer in milk-producing glands (lobular)" + "responding well...lymph nodes decreased" + letrozole + surgery。无编造
 
-### ROW 88 (coral_idx 227) — 0 P1, 1 P2 ← **v27 P1→P2 改善！**
-- **v27 P1 改善→P2**: response 不再说 "Not mentioned in note"。现在写 "currently on Xeloda...no palpable masses...stable clinically...no evidence of disease progression"。但仍遗漏了 progression 历史（neoadjuvant stopped for PD、brain mets resection、lung+LN mets）。改善但不完整
-- ✅ Type: "ER weak+/PR 2-/HER2-, metastatic biopsy ER-/PR-/HER2-" — 出色！正确区分原发 vs 转移受体状态
-- ✅ Advance care: "Full code." ✅
-- ✅ Genetic_testing_plan: HER2 retesting on brain met + residual disease 正确
+### ROW 88 (coral_idx 227) — 0 P1, 1 P2 ← **v27 P1→P2 改善！**（完整逐字审查）
+- **v27 P1 改善→P2**: response 不再说 "Not mentioned in note"（v27 P1）。v28 写 "currently on Xeloda...stable clinically...no evidence of disease progression"。对当前 visit 准确（exam negative, no new imaging），但仍遗漏 progression 历史（neoadjuvant stopped for PD、brain mets 2→resection+SRS、lung+LN mets）。改善但不完整
+- ✅ 36yo, Stage III→IV left breast IDC（HR weak/HER2-）。S/p incomplete neoadjuvant（stopped PD）→ bilateral mastectomies（4+2.6cm, **23/30 LN+**, grade III/III, LVI+, PNI+）→ gemzar/carbo x 4 → XRT → **brain mets** → resection+SRS → **lung+LN mets** → Xeloda
+- ✅ Type: "ER weak+/PR 2-/HER2-, metastatic biopsy ER-/PR-/HER2-" — 出色！正确区分原发 vs 转移受体
+- ✅ Stage: Originally Stage III, now Stage IV（brain+lung+LN）正确
+- ✅ Medication_plan: Xeloda + anti-HER2 if confirmed + immunotherapy trials if progression — 全面
+- ✅ Genetic_testing_plan: HER2 on brain met + residual disease 正确
+- ✅ Advance care: "Full code." 正确
+- ✅ Letter: comprehensive — 23 LN + brain/lung/LN mets + Xeloda + HER2 testing + trials + follow-up。无编造
 
 ### ROW 95 (coral_idx 234) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
 - **v27 P2 FIXED**: Stage 不再说 "Stage IV (metastatic)"。现在是 "Not available (redacted)"，虽然不完整但不再错误（ISPY trial = Stage I-III only，no distant mets）
