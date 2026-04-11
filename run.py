@@ -1388,6 +1388,19 @@ def main():
                     "oncotype", "mammaprint", "brca", "genomic", "molecular",
                     "genetic testing", "gene panel", "ngs", "next generation",
                     "foundation one", "foundationone", "guardant",
+                    # Referral items that don't belong in procedure_plan
+                    "fertility preservation", "fertility referral", "egg harvesting",
+                    "genetic counseling", "genetics counseling",
+                    "rad onc referral", "radiation oncology referral",
+                    "social work", "nutrition referral",
+                    # Medication items that don't belong in procedure_plan
+                    "zoladex", "goserelin", "prior auth",
+                    "xeloda", "letrozole", "arimidex", "faslodex", "tamoxifen",
+                    "continue on", "start on", "could use", "could consider",
+                    # Imaging items that don't belong in procedure_plan
+                    "ct cap", "ct chest", "ct abdomen", "ct pelvis", "mri", "pet",
+                    "dexa", "bone scan", "mammogram", "ultrasound", "echocardiogram",
+                    "tte", "echo",
                 ]
                 items = [item.strip() for item in re.split(r'[,;]', proc_val) if item.strip()]
                 kept = []
@@ -1542,14 +1555,35 @@ def main():
         adv = keypoints.get("Advance_care_planning", {})
         adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""
         if adv_val.lower().startswith("not discussed"):
+            # Pattern 1: "Code status: Full code" or "Advance care planning: DNR/DNI"
             code_match = re.search(
                 r'(?:code\s+status[:\s]*|advance\s+care\s+planning[:\s]*)(full\s+code|dnr/?dni|dnr|dni|comfort\s+measures)',
+                note_text, re.IGNORECASE
+            )
+            # Pattern 2: Standalone "DNR/DNI" or "DNR" on its own line or in a list
+            standalone_dnr = None
+            if not code_match:
+                standalone_dnr = re.search(
+                    r'(?:^|\n|\u0007|\-\s*)\s*(DNR\s*/?\s*DNI|DNR|DNI|full\s+code)\s*(?:\.|$|\n)',
+                    note_text, re.IGNORECASE | re.MULTILINE
+                )
+            # Pattern 3: POLST mentioned
+            polst_match = re.search(r'(?:completed\s+)?POLST', note_text, re.IGNORECASE)
+            # Pattern 4: Explicit wishes (would not want life support, etc.)
+            wishes_match = re.search(
+                r'would\s+not\s+want\s+life\s+support|would\s+not\s+want\s+(?:resuscitation|intubation|mechanical\s+ventilation)',
                 note_text, re.IGNORECASE
             )
             living_will = re.search(r'living\s+will', note_text, re.IGNORECASE)
             patches = []
             if code_match:
                 patches.append(code_match.group(1).strip())
+            elif standalone_dnr:
+                patches.append(standalone_dnr.group(1).strip())
+            if polst_match:
+                patches.append("POLST on file")
+            if wishes_match:
+                patches.append("Patient has documented wishes against life support")
             if living_will:
                 patches.append("Living will on file")
             if patches:
@@ -1574,9 +1608,34 @@ def main():
                     cancer["Stage_of_Cancer"] = cleaned
                     print(f"    [POST-STAGE] contradiction fixed: '{stage}' → '{cleaned}'")
 
+            # POST-STAGE-DISTMET: Stage IV but Distant Metastasis explicitly says "No" [v28]
+            # If extraction says Stage IV but also says Distant Met = No, this is a contradiction.
+            # Downgrade Stage IV to remove "metastatic" designation.
+            if stage_says_iv and dist_met_says_no:
+                # Check if Metastasis field only has regional sites
+                met_lower = met.lower() if met else ""
+                REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",
+                                  "infraclavicular", "internal mammary", "chest wall",
+                                  "ipsilateral"]
+                DISTANT_SITES = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                 "ovary", "skin", "contralateral", "cervical", "distant",
+                                 "hepatic", "pulmonary", "osseous", "cerebral"]
+                has_distant = any(ds in met_lower for ds in DISTANT_SITES) if met_lower else False
+                if not has_distant:
+                    # Downgrade: replace Stage IV with Stage III or remove metastatic
+                    cleaned = re.sub(r'(?i)\bStage\s*IV\s*\(?\s*metastatic\s*\)?', 'Stage III', stage)
+                    cleaned = re.sub(r'(?i)\bmetastatic\s*\(?\s*Stage\s*IV\s*\)?', 'Stage III', cleaned)
+                    cleaned = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III', cleaned)
+                    cleaned = cleaned.strip().rstrip(',').strip()
+                    if cleaned and cleaned != stage:
+                        cancer["Stage_of_Cancer"] = cleaned
+                        print(f"    [POST-STAGE-DISTMET] Stage IV but Distant Met=No: '{stage}' → '{cleaned}'")
+
             # POST-STAGE-REGIONAL: Stage IV with only regional LN metastasis [v16]
             # Axillary, sentinel, supraclavicular, infraclavicular, internal mammary LN
             # are regional (Stage III) not distant (Stage IV)
+            stage = cancer.get("Stage_of_Cancer", "")  # re-read in case POST-STAGE-DISTMET changed it
+            stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage, re.IGNORECASE))
             if stage_says_iv and met and not met_says_no:
                 met_lower = met.lower()
                 REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",

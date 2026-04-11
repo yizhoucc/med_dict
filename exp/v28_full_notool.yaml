@@ -1,0 +1,43 @@
+experiment:
+  name: "v28_full_notool"
+  seed: 42
+
+model:
+  name: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+  chat_template: "qwen2"
+  dtype: "bfloat16"
+  device_map: "auto"
+  cache_dir: "/home/yc/.cache/huggingface"
+
+data:
+  dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
+  row_indices: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 19, 21, 23, 24, 32, 37, 38, 51, 56, 73, 74, 82, 87, 94]
+
+prompts:
+  extraction: "prompts/extraction.yaml"
+  plan_extraction: "prompts/plan_extraction.yaml"
+  letter_generation: "prompts/letter_generation.yaml"
+
+extraction:
+  pipeline: "v2"
+  attribution: true
+  letter: true
+  tool_calling: false
+  max_retries: 3
+  verify: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
+
+generation:
+  keypoint:
+    max_new_tokens: 768
+    do_sample: false
+  assessment_plan:
+    max_new_tokens: 2048
+    do_sample: false
+  retry:
+    max_new_tokens: 2048
+    do_sample: true
+    temperature: 0.6
+    top_p: 0.9

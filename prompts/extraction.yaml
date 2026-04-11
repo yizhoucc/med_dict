@@ -52,6 +52,8 @@ Cancer_Diagnosis: |
   - IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab, the cancer is HER2+. Do NOT write HER2-.
   - IMPORTANT: If the note says "triple negative" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-. Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked. "Triple negative" is a definitive classification.
   - IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
+  - IMPORTANT: goserelin (Zoladex) / leuprolide (Lupron) used DURING CHEMOTHERAPY for fertility preservation does NOT indicate ER+. These drugs suppress ovaries to protect eggs during chemo. Only infer ER+ from goserelin/Lupron when it is used as ENDOCRINE THERAPY (adjuvant or palliative, continuous long-term use for hormone suppression). If the note says "goserelin for fertility preservation" or "goserelin during chemotherapy", do NOT add "ER+ (inferred from goserelin)".
+  - IMPORTANT: If the patient has MULTIPLE primary cancers (e.g., gastric cancer AND breast cancer), report receptor status ONLY for the BREAST cancer. Do NOT mix receptor status from other cancers. For example, if gastric cancer is HER2+ but breast cancer is HER2-, write HER2- for the breast cancer.
 
   For Stage_of_Cancer:
   - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
@@ -230,6 +232,17 @@ Response_Assessment: |
      Even brief exam comments like "area appears to be breaking up" count as response evidence.
   4. If no treatment started yet, write "Not yet on treatment — no response to assess."
   5. If on treatment but no response data in the note, write "Not mentioned in note."
+     BEFORE writing "Not mentioned", verify there is truly NO evidence anywhere in the note. These ALL count as response evidence:
+     - "stopped [drug] for progression" or "disease progressed on [drug]" → response is PROGRESSION
+     - New metastatic sites (brain, lung, liver, bone mets) → response is PROGRESSION
+     - "exam stable" or "no new findings" → response is STABLE DISEASE
+     - Tumor marker trends (rising or falling)
+     - Post-surgical pathology after neoadjuvant therapy
+     If ANY of the above is present, do NOT write "Not mentioned" — describe the evidence.
+  6. TEMPORAL ATTRIBUTION — critical rule:
+     When citing imaging (PET, CT, MRI, bone scan), verify the scan was done AFTER the current treatment regimen started.
+     If the patient switched treatments (e.g., from letrozole to Faslodex), a scan done BEFORE the switch reflects the PRIOR treatment's response, not the current one.
+     Example: PET on 10/10 showed progression → patient switched to Faslodex on 10/16 → current visit exam says "stable" → the response on CURRENT treatment is "exam stable", NOT "PET showed progression on Faslodex."
 
   STRICT RULES — do NOT violate:
   - Do NOT include future plans ("will start", "plan to", "she will have radiation").
@@ -254,6 +267,9 @@ Response_Assessment: |
   - BAD: "0.9 cm grade 1 IDC, margins negative" (this is pathology, not treatment response)
   - BAD: "Healing well from surgery" (surgical recovery, not cancer treatment response)
   - BAD: "Low Risk Oncotype score" (prognostic tool, not a response to treatment)
+  - BAD: "Not mentioned in note" when the note says "stopped chemo for progression" or describes new brain/lung/bone metastases — these ARE response evidence (progression)
+  - BAD: "Not yet on treatment" for a patient who completed neoadjuvant chemo + surgery — the surgical pathology IS the response
+  - BAD: "PET showed progression on Faslodex" when the PET was done BEFORE Faslodex was started — wrong temporal attribution
 
   Write your reasoning first, then output the JSON on a new line starting with {
   IMPORTANT: Your JSON must contain ONLY the key "response_assessment". Do NOT add any other keys.
