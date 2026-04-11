@@ -8,8 +8,7 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **95**（1 个）
-> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52, 57, 74, 75, 83, 88
+> **全部 28 个 ROW 完整逐字审查完毕（每个都读了 note_text + keypoints + letter + traceability）**
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -312,9 +311,14 @@
 - ✅ Advance care: "Full code." 正确
 - ✅ Letter: comprehensive — 23 LN + brain/lung/LN mets + Xeloda + HER2 testing + trials + follow-up。无编造
 
-### ROW 95 (coral_idx 234) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
-- **v27 P2 FIXED**: Stage 不再说 "Stage IV (metastatic)"。现在是 "Not available (redacted)"，虽然不完整但不再错误（ISPY trial = Stage I-III only，no distant mets）
-- ✅ Response: 出色 — "responding to neoadjuvant therapy with good results. MRI shows interval decrease...residual IDC with treatment effect...three foci...low cellularity"
-- ✅ Goals curative ✅。Medication_plan: prilosec + capecitabine after XRT + endocrine therapy 正确
-- ✅ Radiotherapy: breast + axilla XRT, Rad Onc referred 正确
+### ROW 95 (coral_idx 234) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**（完整逐字审查）
+- **v27 P2 FIXED**: Stage 不再说 "Stage IV (metastatic)"。v28 POST-STAGE-PLACEHOLDER 正确处理 → "Not available (redacted)"。ISPY trial = Stage I-III only，curative intent，no distant mets。不再错误标为 Stage IV ✅
+- ✅ 49yo, left ER+/PR+/[REDACTED]- breast cancer, ISPY trial Pembrolizumab arm, s/p neoadjuvant → left lumpectomy
+- ✅ **Surgical pathology**: residual IDC with treatment effect, 3 foci（0.9cm ~20%, 0.15cm ~5%, 0.25cm ~5%），1/6 LN+（0.9cm）。Margins negative。Addendum: ER+(>95%)/PR-(0%)/HER2 equivocal(IHC 2)
+- ✅ Type: ER+/PR-/HER2- IDC with treatment effect — 使用 post-NAC Addendum 受体（PR changed from + to -）。可接受
+- ✅ **Response**: 出色 — 同时含 imaging response（MRI mass 16→10mm）+ pathologic response（3 foci + cellularity + 1/6 LN+）。极其详细
+- ✅ Goals curative ✅。Medication_plan: prilosec + capecitabine after XRT 正确
+- ✅ Therapy_plan: 完整序列 — AC → XRT → capecitabine (CREATE-X) → endocrine therapy
+- ✅ Radiotherapy: breast + axilla XRT, Rad Onc referred today 正确
+- ✅ Letter: "cancer responding well...tumor decreased" + AC + Prilosec + radiation breast+axilla + capecitabine + endocrine therapy。无编造
 
