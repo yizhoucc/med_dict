@@ -8,7 +8,8 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **25, 33, 38, 39, 52, 57, 74, 75, 83, 88, 95**（11 个）
+> 待重做的 ROW（之前用 batch 偷懒了）: **38, 39, 52, 57, 74, 75, 83, 88, 95**（9 个）
+> 已补做完整逐字审查: 22, 24, 25, 33
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -221,15 +222,22 @@
 - ✅ Radiotherapy_plan: radiation if low risk + Rad Onc 12/07/18 正确
 - ✅ Letter: "cancer that makes mucus" + specimen tested for chemo + radiation/hormone therapy + Rad Onc + PT。无编造
 
-### ROW 25 (coral_idx 164) — 0 P1, 1 P2
-- P2: medication_plan "1500/1000mg ixabepilone" — 1500/1000mg 是 Xeloda 剂量，不是 ixabepilone。同 v27
-- ✅ Response: 包含 PET PD + "supraclavicular area appears to be breaking up"（同 v27 改善保持）
+### ROW 25 (coral_idx 164) — 0 P1, 1 P2（完整逐字审查）
+- P2: medication_plan "Patient will start cycle of 1500/1000mg ixabepilone" — 1500/1000mg 是 Xeloda 剂量（3 tabs AM=1500mg + 2 tabs PM=1000mg），不是 ixabepilone（40mg/m2 IV）。药物-剂量配对错误。同 v27
+- ✅ 45yo, 极复杂历史 — R breast IDC 2007 + L breast IDC 2008 → bilateral mastectomies → metastatic 12/2010（brain+liver+bone+LN+chest wall）→ brain resection + WBRT → Xeloda PD → added ixabepilone
+- ✅ Type: 正确区分原发 vs 转移受体状态（ER+/PR+/HER2- vs ER+/PR-/HER2-）
+- ✅ Lab: 完整所有值 — Alk Phos 308(H), AST 55(H), Hgb 11.2(L), Albumin 3.1(L)
+- ✅ Response: 出色 — PET PD（Xeloda alone）+ "supraclavicular area appears to be breaking up"（current regimen positive exam）
 - ✅ current_meds: capecitabine + ixabepilone 正确
+- ✅ Letter: PD + supraclavicular improvement + Xeloda + ixabepilone（不含剂量，避免了配对错误）+ scan 3wk。无编造
 
-### ROW 33 (coral_idx 172) — 0 P1, 0 P2 ✅
-- ✅ Type: ILC 正确。Response: NED 正确。Goals curative ✅
+### ROW 33 (coral_idx 172) — 0 P1, 0 P2 ✅（完整逐字审查）
+- ✅ 63yo, left ER+/PR+/HER2- ILC, Stage IIB/IIIA, s/p bilateral mastectomies + TC x6 + XRT, on letrozole since 02/2011
+- ✅ Type: "ER+/PR+/HER2- invasive lobular carcinoma" 正确识别 ILC
+- ✅ Response: "No evidence of disease recurrence on exam. Tolerating letrozole well." 正确
 - ✅ Medication_plan: letrozole + calcium/vitamin D + NSAIDs 完整
-- ✅ Letter: 通俗准确。无编造
+- ✅ Imaging: "Consider MRI brain if [REDACTED] continues" 正确
+- ✅ Letter: NED + letrozole + calcium/vitamin D + NSAIDs + MRI + 6 months。无编造
 
 ### ROW 38 (coral_idx 177) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
 - **v27 P2 FIXED**: response "The cancer is currently progressing. Recent imaging and exam findings indicate a palpable left breast mass of 8 x 5 cm" — 不再说 "not responding to treatment"（暗示在治疗中），而是客观描述 "progressing"（tumor enlarging）。v27 说 "not responding" when not on treatment → v28 correctly says "progressing"
