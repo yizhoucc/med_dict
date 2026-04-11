@@ -8,8 +8,8 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **39, 52, 57, 74, 75, 83, 88, 95**（8 个）
-> 已补做完整逐字审查: 22, 24, 25, 33, 38
+> 待重做的 ROW（之前用 batch 偷懒了）: **57, 74, 75, 83, 88, 95**（6 个）
+> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -249,16 +249,25 @@
 - ✅ Referral: Gyn Onc (BRCA1) + Social work 正确
 - ✅ Letter: 全面准确 — "cancer is currently growing" + mastectomy + olaparib/xeloda + radiation + Gyn Onc + social work。无编造情绪词
 
-### ROW 39 (coral_idx 178) — 0 P1, 1 P2 ← goserelin→ER+ 未修复
-- P2: Type "ER/PR/[REDACTED] negative...grade 3 IDC, **ER+ (inferred from goserelin)**" — 仍有 goserelin→ER+ 错误推断。癌症是 TNBC（A/P "triple negative"）。goserelin 是 fertility preservation。**v27 P2 未修复**（prompt 规则未被模型遵循）
-- ✅ Stage T2N1 正确。Goals curative ✅。Medication_plan paclitaxel→AC + goserelin ✅
-- ✅ Procedure_plan: port placement 正确。Letter 准确
+### ROW 39 (coral_idx 178) — 0 P1, 1 P2 ← goserelin→ER+ 未修复（完整逐字审查）
+- P2: Type "ER/PR/[REDACTED] negative, HER2: not tested, grade 3 IDC, **ER+ (inferred from goserelin)**" — 仍有 goserelin→ER+ 错误推断。癌症有三重确认为 TNBC：(1) biopsy "ER/PR/[REDACTED] negative" (2) A/P "triple negative breast cancer" (3) goserelin 明确 "for improved fertility preservation"。v28 prompt 加了 fertility exception 但模型未遵循。**v27 P2 未修复**
+- ✅ 27yo, newly diagnosed left breast grade 3 IDC, T2N1, triple negative（despite Type error）
+- ✅ Left ovary removed for cryopreservation。ISPY trial consent signed
+- ✅ Stage T2N1 approximately Stage II 正确。Goals curative ✅
+- ✅ Medication_plan: paclitaxel x 12wk → AC x 4 + goserelin for fertility 正确
+- ✅ Procedure_plan: port placement 正确（干净，无混入）
+- ✅ Imaging: echo + MRI breasts ✅。Lab: ISPY labs ✅
+- ✅ Letter: IDC + LN spread + paclitaxel→AC + port/MRI/echo/ISPY/genetic testing。Letter 没说 ER+（比 keypoints 更准确）。无编造
 
-### ROW 52 (coral_idx 191) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
-- **v27 P2 FIXED**: POST-PROCEDURE-FILTER 成功移除了 "Referral for fertility preservation" + "[REDACTED] + Zoladex"（从 run log 确认）
+### ROW 52 (coral_idx 191) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**（完整逐字审查）
+- **v27 P2 FIXED**: POST-PROCEDURE-FILTER 成功移除了 "Referral for fertility preservation" + "Zoladex"（run log 确认）。残留 "[REDACTED] send [REDACTED]" 是 genomic test，borderline
+- ✅ 35yo premenopausal, left IDC 1.7cm grade II, ER+(>95%)/PR+(>95%)/HER2-, Ki-67 <10-15%, SLN micromet (0.18cm)
+- ✅ MammaPrint low risk (+0.298)。Invitae VUS only
 - ✅ Type: ER+/PR+/HER2- IDC 正确。Goals curative ✅
+- ✅ Medication_plan: [REDACTED]+Zoladex after egg harvesting 正确
 - ✅ Imaging: CT CAP + bone scan for staging 正确
-- ✅ Genetic_testing_plan: order [REDACTED] for chemo benefit 正确
+- ✅ Genetic_testing_plan: order [REDACTED] (Oncotype) for chemo benefit 正确
+- ✅ Letter: IDC + Zoladex 解释 + fertility referral + CT/bone scan + Oncotype 通俗化 + 3wk。无编造
 
 ### ROW 57 (coral_idx 196) — 0 P1, 0 P2 ✅
 - ✅ Type: "ER-/PR-/HER2- triple negative" 正确
