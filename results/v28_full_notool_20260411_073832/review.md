@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-12 完成（12/28），ROW 13 开始**
+> Status: **审查完成 — 28/28 ROW 全部审查完毕**
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -48,8 +48,47 @@
 | 严重度 | 数量 | 比率 | 说明 |
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
-| **P1** | 1 | — | ROW 10: response = Oncotype |
-| **P2** | 11 | — | ROW 1×2, 6×2, 7×3, 8×1, 11×2, 12×1 |
+| **P1** | 1 | 3.6% | ROW 10: response = Oncotype（v27 P1 未修复） |
+| **P2** | 24 | — | 详见各 ROW 条目 |
+| Clean | 10 | 35.7% | ROW 2, 3, 4, 5, 33, 38, 52, 57, 75, 95 |
+
+---
+
+## 最终汇总
+
+### v27→v28 P1 修复结果
+| ROW | v27 P1 | v28 结果 | 状态 |
+|-----|--------|---------|------|
+| 8 | response "Not yet on treatment" | breast pCR + 3/28 LN+ 详细描述 | **✅ 修复** |
+| 10 | response = Oncotype | 仍是 Oncotype | **❌ 未修复** |
+| 11 | 旧 PET 归因当前治疗 | 去掉错误归因（P1→P2） | **改善** |
+| 12 | Advance care 遗漏 DNR/DNI | POLST + wishes captured | **✅ 修复** |
+| 88 | response "Not mentioned" | "stable clinically"（P1→P2） | **改善** |
+
+**2/5 完全修复，2/5 P1→P2 改善，1/5 未修复**
+
+### v27→v28 P2 修复结果
+| v27 P2 类型 | v27 数量 | v28 修复 | 说明 |
+|------------|---------|---------|------|
+| procedure_plan 混入 | 7 | **3 修复** | ROW 52（fertility removed）, 57（genetic counseling removed）, 75（genetics+fertility removed）|
+| Stage IV + Distant Met=No | 2 | **1 修复** | ROW 95 固定（不再说 Stage IV）。ROW 83 未修复 |
+| response "not responding" when not on treatment | 1 | **1 修复** | ROW 38 现在说 "progressing"（准确） |
+| findings 矛盾 PE | 1 | **1 修复** | ROW 14 现在包含 R axillary node |
+| response brain PD 遗漏 | 1 | **1 修复** | ROW 12 现在包含 "new lesions" |
+
+### v28 新增问题（regression）
+| ROW | 问题 | 原因 |
+|-----|------|------|
+| 7 | Stage IV→III（false downgrade） | POST-STAGE-DISTMET hook 在 Distant Met 被后续 gate 修正为 "Yes" 之前就降级了 |
+
+### 对比：v27 vs v28
+| 指标 | v27 | v28 | 变化 |
+|------|-----|-----|------|
+| P0 | 0 | 0 | = |
+| P1 | 5 | 1 | **↓4** |
+| P2 | 29 | 24 | **↓5** |
+| Clean | 5 (17.9%) | 10 (35.7%) | **↑5** |
+| 总问题 | 34 | 25 | **↓9 (26% reduction)** |
 
 ### 初步 P1 快速评估（完整审查前的预览）
 基于 keypoints 快速对比 v27 的 5 个 P1：
@@ -135,4 +174,101 @@
 - **v27 P2 改善**: response 现在包含 "Recent MRI shows new lesions"（brain PD）+ body SD。比 v27 完整 ✅
 - P2: imaging_plan 仍遗漏 Echo q6 months（A/P 写 "Echo q6 months"）。同 v27
 - ✅ Medication_plan, Radiotherapy_plan, Imaging (CT+bone scan+MRI brain) 正确
+
+### ROW 13 (coral_idx 152) — 0 P1, 2 P2
+- P2: response "On treatment" — 患者 NOT on treatment（DCIS s/p surgery，讨论 tamoxifen）。同 v27
+- P2: findings laterality — 14mm mass 在 RIGHT breast（fibroadenoma），extraction 写 "Left breast"。同 v27
+- ✅ Type "ER+ DCIS, HER2: not tested" 正确。Goals "risk reduction" 出色
+- ✅ Letter: DCIS 通俗化 + tamoxifen + Rad Onc + prognosis excellent。无编造
+
+### ROW 14 (coral_idx 153) — 0 P1, 1 P2
+- P2: current_meds "" — 患者正在自行服用 Mexico 化疗（gemcitabine+docetaxel+[REDACTED]+pamidronate）。同 v27（但 recent_changes 正确捕获）
+- ✅ **v27 P2 修复**: findings 现在正确包含 "palpable R axillary node 1 cm, soft and mobile"（v27 说 "no lymphadenopathy" 矛盾 PE）
+- ✅ Response 改善: "cancer is currently stable...no new lesions, no significant changes in liver lesion" — 比 v27 更具体
+- ✅ Lab: 完整 CMP+CBC+CA 27.29 (193→48 downtrend)
+- ✅ Imaging: CT CAP + Total Spine MRI for May + repeat spine MRI 6wk 正确
+
+### ROW 15 (coral_idx 154) — 0 P1, 1 P2
+- P2: genetic_testing_plan "biomarker testing" — ER/PR/HER2 已全部完成。A/P "reviewed pathology, biomarker testing" 是回顾，不是未来计划。同 v27
+- ✅ Type: "ER+/PR+/HER2+ mixed IDC and ILC" 出色（FISH ratio 2.0 = HER2+）
+- ✅ Procedure_plan: correctly captures surgery-first vs neoadjuvant options（v27 P2 保持修复）
+- ✅ Letter: "mix of two types: milk-producing glands + milk ducts" + TCHP + surgery options。无编造
+
+### ROW 20 (coral_idx 159) — 0 P1, 1 P2
+- P2: procedure_plan "Abdomen, Pelvis, Xgeva - needs dental evaluation first" — 仍混入 imaging + medication。POST-PROCEDURE-FILTER blacklist 有 "ct abdomen" 但不匹配单独 "Abdomen"。同 v27（filter gap）
+- ✅ POST-PROCEDURE-FILTER 成功移除了 "Rad Onc referral"（从 run log 确认）
+- ✅ Medication_plan: letrozole + palbociclib + denosumab + monthly blood work 完整
+- ✅ Imaging: MRI Total Spine + CT CAP + repeat at 3 months 正确
+- ✅ Genetic_testing_plan: Foundation One or [REDACTED] 360 正确
+
+### ROW 22 (coral_idx 161) — 0 P1, 2 P2
+- P2: lab_summary "No labs in note" — 笔记包含 01/29/2021 CBC+CMP 结果，虽 8 个月前但有多项异常。同 v27
+- P2: genetic_testing_plan 包含 medication plan 文本（"faslodex with [REDACTED] if she has a [REDACTED] mutation"）。同 v27
+- ✅ Response: "PET scans showed a good response" 正确
+- ✅ Advance care: "Full code." 正确
+
+### ROW 24 (coral_idx 163) — 0 P1, 2 P2
+- P2: Metastasis "Not sure" / Distant Met "Not sure" — PET 明确 "No definite sites of hypermetabolic metastatic disease"。同 v27
+- P2: procedure_plan 仍混入 genetic testing（"send surgical specimen for MP"）+ PT referral。同 v27
+- ✅ Type 正确。Goals curative ✅。genetic_testing_plan 正确
+
+### ROW 25 (coral_idx 164) — 0 P1, 1 P2
+- P2: medication_plan "1500/1000mg ixabepilone" — 1500/1000mg 是 Xeloda 剂量，不是 ixabepilone。同 v27
+- ✅ Response: 包含 PET PD + "supraclavicular area appears to be breaking up"（同 v27 改善保持）
+- ✅ current_meds: capecitabine + ixabepilone 正确
+
+### ROW 33 (coral_idx 172) — 0 P1, 0 P2 ✅
+- ✅ Type: ILC 正确。Response: NED 正确。Goals curative ✅
+- ✅ Medication_plan: letrozole + calcium/vitamin D + NSAIDs 完整
+- ✅ Letter: 通俗准确。无编造
+
+### ROW 38 (coral_idx 177) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
+- **v27 P2 FIXED**: response "The cancer is currently progressing. Recent imaging and exam findings indicate a palpable left breast mass of 8 x 5 cm" — 不再说 "not responding to treatment"（暗示在治疗中），而是客观描述 "progressing"（tumor enlarging）。v27 说 "not responding" when not on treatment → v28 correctly says "progressing"
+- ✅ Type: ER-/PR+/HER2- 正确。Stage IIB ✅。Goals curative ✅
+- ✅ Medication_plan: olaparib + xeloda（adjuvant）正确
+- ✅ Procedure_plan: bilateral mastectomy Jan 31 正确
+
+### ROW 39 (coral_idx 178) — 0 P1, 1 P2 ← goserelin→ER+ 未修复
+- P2: Type "ER/PR/[REDACTED] negative...grade 3 IDC, **ER+ (inferred from goserelin)**" — 仍有 goserelin→ER+ 错误推断。癌症是 TNBC（A/P "triple negative"）。goserelin 是 fertility preservation。**v27 P2 未修复**（prompt 规则未被模型遵循）
+- ✅ Stage T2N1 正确。Goals curative ✅。Medication_plan paclitaxel→AC + goserelin ✅
+- ✅ Procedure_plan: port placement 正确。Letter 准确
+
+### ROW 52 (coral_idx 191) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
+- **v27 P2 FIXED**: POST-PROCEDURE-FILTER 成功移除了 "Referral for fertility preservation" + "[REDACTED] + Zoladex"（从 run log 确认）
+- ✅ Type: ER+/PR+/HER2- IDC 正确。Goals curative ✅
+- ✅ Imaging: CT CAP + bone scan for staging 正确
+- ✅ Genetic_testing_plan: order [REDACTED] for chemo benefit 正确
+
+### ROW 57 (coral_idx 196) — 0 P1, 0 P2 ✅
+- ✅ Type: "ER-/PR-/HER2- triple negative" 正确
+- ✅ Response: "not responding to treatment as evidenced by residual tumor of 3.7 cm" — 正确描述 post-neoadjuvant pathologic response
+- ✅ Radiotherapy: XRT scheduled。Genetic counseling 正确
+- ✅ v27 P2（procedure mixed genetic counseling）保持修复
+
+### ROW 74 (coral_idx 213) — 0 P1, 1 P2 ← gastric HER2+ 混入未修复
+- P2: Type "ER+/PR+/**HER2+** IDC" — breast cancer 是 HER2-（IHC 1+, FISH 1.1）。HER2+ 是 gastric cancer（IHC 3+, separate primary）。**v27 P2 未修复**（prompt 规则未被模型遵循）
+- ✅ Goals curative ✅。Medication_plan: AI + consider TC 正确
+- ✅ Genetic_testing_plan: [REDACTED] testing ordered 正确
+
+### ROW 75 (coral_idx 214) — 0 P1, 0 P2 ✅ ← **v27 P2 部分修复！**
+- **v27 P2 改善**: POST-PROCEDURE-FILTER 移除了 "genetics counseling and fertility" referrals（从 run log 确认）。procedure_plan 现在只有 "Order referral to UCSF Breast Surgery"（仍是 referral 不是 procedure，但只剩一个 minor item）
+- ✅ Type: ER-/PR-/HER2+ IDC 正确。Stage II-III ✅
+- ✅ Medication_plan: TCHP + adjuvant T-DM1 if residual 出色
+
+### ROW 83 (coral_idx 222) — 0 P1, 1 P2 ← Stage IV 未修复
+- P2: Stage "Stage IV (metastatic)" but Distant Met = "No"。axillary LN = regional。POST-STAGE-DISTMET hook 应该触发但未能生效（可能被后续 POST-STAGE-METASTATIC hook 覆盖）。**v27 P2 未修复**
+- ✅ Response: 出色 — "responding to neoadjuvant endocrine therapy...axillary SUV 15.1→1.9" 含具体数值
+- ✅ Goals curative ✅。Medication_plan: continue letrozole 正确
+
+### ROW 88 (coral_idx 227) — 0 P1, 1 P2 ← **v27 P1→P2 改善！**
+- **v27 P1 改善→P2**: response 不再说 "Not mentioned in note"。现在写 "currently on Xeloda...no palpable masses...stable clinically...no evidence of disease progression"。但仍遗漏了 progression 历史（neoadjuvant stopped for PD、brain mets resection、lung+LN mets）。改善但不完整
+- ✅ Type: "ER weak+/PR 2-/HER2-, metastatic biopsy ER-/PR-/HER2-" — 出色！正确区分原发 vs 转移受体状态
+- ✅ Advance care: "Full code." ✅
+- ✅ Genetic_testing_plan: HER2 retesting on brain met + residual disease 正确
+
+### ROW 95 (coral_idx 234) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
+- **v27 P2 FIXED**: Stage 不再说 "Stage IV (metastatic)"。现在是 "Not available (redacted)"，虽然不完整但不再错误（ISPY trial = Stage I-III only，no distant mets）
+- ✅ Response: 出色 — "responding to neoadjuvant therapy with good results. MRI shows interval decrease...residual IDC with treatment effect...three foci...low cellularity"
+- ✅ Goals curative ✅。Medication_plan: prilosec + capecitabine after XRT + endocrine therapy 正确
+- ✅ Radiotherapy: breast + axilla XRT, Rad Onc referred 正确
 
