@@ -8,8 +8,8 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **38, 39, 52, 57, 74, 75, 83, 88, 95**（9 个）
-> 已补做完整逐字审查: 22, 24, 25, 33
+> 待重做的 ROW（之前用 batch 偷懒了）: **39, 52, 57, 74, 75, 83, 88, 95**（8 个）
+> 已补做完整逐字审查: 22, 24, 25, 33, 38
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -239,11 +239,15 @@
 - ✅ Imaging: "Consider MRI brain if [REDACTED] continues" 正确
 - ✅ Letter: NED + letrozole + calcium/vitamin D + NSAIDs + MRI + 6 months。无编造
 
-### ROW 38 (coral_idx 177) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**
-- **v27 P2 FIXED**: response "The cancer is currently progressing. Recent imaging and exam findings indicate a palpable left breast mass of 8 x 5 cm" — 不再说 "not responding to treatment"（暗示在治疗中），而是客观描述 "progressing"（tumor enlarging）。v27 说 "not responding" when not on treatment → v28 correctly says "progressing"
-- ✅ Type: ER-/PR+/HER2- 正确。Stage IIB ✅。Goals curative ✅
-- ✅ Medication_plan: olaparib + xeloda（adjuvant）正确
-- ✅ Procedure_plan: bilateral mastectomy Jan 31 正确
+### ROW 38 (coral_idx 177) — 0 P1, 0 P2 ✅ ← **v27 P2 修复！**（完整逐字审查）
+- **v27 P2 FIXED**: response "The cancer is currently progressing...palpable left breast mass of 8 x 5 cm" — 不再说 "not responding to treatment"（暗示在治疗中）。v28 说 "progressing"（客观事实：肿瘤从 6.8cm→8x5cm）。A/P "Her tumor is enlarging" 准确反映
+- ✅ 43yo, BRCA1, Stage IIB left breast IDC 6.8cm→8x5cm, ER-/PR+(weak 15%)/HER2-, node negative
+- ✅ S/p incomplete neoadjuvant（stopped toxicity）→ tumor regrowing → bilateral mastectomy Jan 31
+- ✅ current_meds "" 正确（不在治疗中）。Goals curative ✅
+- ✅ Medication_plan: olaparib (BRCA1) + xeloda (adjuvant) 正确
+- ✅ Lab: 完整 TSH+CMP+CBC+HbA1c，all normal
+- ✅ Referral: Gyn Onc (BRCA1) + Social work 正确
+- ✅ Letter: 全面准确 — "cancer is currently growing" + mastectomy + olaparib/xeloda + radiation + Gyn Onc + social work。无编造情绪词
 
 ### ROW 39 (coral_idx 178) — 0 P1, 1 P2 ← goserelin→ER+ 未修复
 - P2: Type "ER/PR/[REDACTED] negative...grade 3 IDC, **ER+ (inferred from goserelin)**" — 仍有 goserelin→ER+ 错误推断。癌症是 TNBC（A/P "triple negative"）。goserelin 是 fertility preservation。**v27 P2 未修复**（prompt 规则未被模型遵循）
