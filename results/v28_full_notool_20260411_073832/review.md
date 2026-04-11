@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-3 完成（3/28），ROW 4 开始**
+> Status: **审查中 — ROW 1-5 完成（5/28），ROW 6 开始**
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -84,4 +84,18 @@
 - ✅ 53yo postmenopausal, Stage IIA R breast IDC 1.7cm LN+, ER+/PR+/HER2-(IHC 2+ FISH neg), Ki-67 30-35%
 - ✅ All fields correct. Genetic_testing_plan "sent and pending" 正确（v26 P2 保持修复）
 - ✅ Letter: "cancer started in the milk ducts" + chemo/surgery/radiation discussed + genetic testing + PET。无编造
+
+### ROW 4 (coral_idx 143) — 0 P1, 0 P2 ✅
+- ✅ 75yo postmenopausal, ER+/PR+/HER2- IDC 2.8cm grade 2, s/p L mastectomy, on letrozole since 12/2016
+- ✅ Response: "without any evidence of disease recurrence on imaging, exam, and review of systems" 正确
+- ✅ Medication_plan: letrozole + calcium/vitamin D + magnesium + conditional Prolia 完整
+- ✅ Imaging_plan: mammogram + DEXA + conditional brain MRI 全部捕获
+- ✅ Letter: NED + osteopenia解释 + all meds + all imaging plans。通俗准确无编造
+
+### ROW 5 (coral_idx 144) — 0 P1, 0 P2 ✅
+- ✅ 31yo premenopausal, Stage III→IV ER+/PR+/HER2- IDC, metastatic recurrence to cervical LN + brachial plexus + possible sternal bone met
+- ✅ On leuprolide + anastrozole + palbociclib。current_meds 三个药全部捕获
+- ✅ Response: 出色 — 准确传达 mixed response（cervical LN↓, axillary LN↑, sternal lesion, brachial plexus LN↑, brain normal）
+- ✅ Radiotherapy_plan: Rad Onc referral for symptomatic brachial plexus 正确
+- ✅ Letter: mixed response 通俗化 + Rad Onc + CT/bone scan + labs monthly。无编造
 
