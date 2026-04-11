@@ -8,8 +8,8 @@
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
 > Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
 > 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
-> 待重做的 ROW（之前用 batch 偷懒了）: **57, 74, 75, 83, 88, 95**（6 个）
-> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52
+> 待重做的 ROW（之前用 batch 偷懒了）: **75, 83, 88, 95**（4 个）
+> 已补做完整逐字审查: 22, 24, 25, 33, 38, 39, 52, 57, 74
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -269,16 +269,22 @@
 - ✅ Genetic_testing_plan: order [REDACTED] (Oncotype) for chemo benefit 正确
 - ✅ Letter: IDC + Zoladex 解释 + fertility referral + CT/bone scan + Oncotype 通俗化 + 3wk。无编造
 
-### ROW 57 (coral_idx 196) — 0 P1, 0 P2 ✅
-- ✅ Type: "ER-/PR-/HER2- triple negative" 正确
-- ✅ Response: "not responding to treatment as evidenced by residual tumor of 3.7 cm" — 正确描述 post-neoadjuvant pathologic response
-- ✅ Radiotherapy: XRT scheduled。Genetic counseling 正确
-- ✅ v27 P2（procedure mixed genetic counseling）保持修复
+### ROW 57 (coral_idx 196) — 0 P1, 0 P2 ✅（完整逐字审查）
+- ✅ 59yo, left breast, locally advanced TNBC。Initially classified as HER2+ → neoadjuvant TCH+P x 6 → surgical specimen TNBC → post-op AC x 4。2nd opinion
+- ✅ Type: "ER-/PR-/HER2- triple negative" 正确基于 surgical pathology + path review
+- ✅ Response: "residual tumor of 3.7 cm, did not achieve pCR" — 核心事实正确。"not responding" 略过度（note 说有 tumor reduction），但 3.7cm residual + no pCR 准确
+- ✅ Radiotherapy: XRT scheduled 正确。POST-PROCEDURE-FILTER 成功移除 genetic counseling（run log 确认）。**v26 P2 保持修复！**
+- ✅ Genetic_testing_plan: "Rec genetic counseling and testing" 正确。Referral-Genetics 也正确
+- ✅ Letter: "locally advanced" 解释 + TNBC 解释 + residual disease + dose reduction + XRT + genetic counseling。出色的患者通俗化。无编造
 
-### ROW 74 (coral_idx 213) — 0 P1, 1 P2 ← gastric HER2+ 混入未修复
-- P2: Type "ER+/PR+/**HER2+** IDC" — breast cancer 是 HER2-（IHC 1+, FISH 1.1）。HER2+ 是 gastric cancer（IHC 3+, separate primary）。**v27 P2 未修复**（prompt 规则未被模型遵循）
-- ✅ Goals curative ✅。Medication_plan: AI + consider TC 正确
-- ✅ Genetic_testing_plan: [REDACTED] testing ordered 正确
+### ROW 74 (coral_idx 213) — 0 P1, 1 P2 ← gastric HER2+ 混入未修复（完整逐字审查）
+- P2: Type "ER+/PR+/**HER2+** IDC" — breast cancer 是 **HER2-**（IHC 1+, FISH ratio 1.1）。A/P 明确写 "ER+/PR+/HER- with FISH ratio 1.1"。HER2+ 是 gastric cancer（IHC 3+）。UCSF 确认两个是 separate primaries（"breast carcinoma shows no [REDACTED] amplification by FISH"）。v28 prompt 加了 multiple cancer 规则但模型仍混淆。**v27 P2 未修复**
+- ✅ 68yo, 两个原发癌：HER2+ gastric cancer（已缓解）+ Stage IIB R breast IDC（ER+/PR+/HER2-）
+- ✅ S/p bilateral mastectomies + R axillary dissection, 1/7 LN+ (0.5cm)。ECOG 3, EF 50-55%
+- ✅ Stage pT2N1a 正确。Goals curative ✅
+- ✅ Medication_plan: AI + consider TC（not anthracycline due to marginal EF）正确
+- ✅ Genetic_testing_plan: [REDACTED] testing ordered + consented 正确
+- ✅ Letter: "early stage IDC + AI + testing + 3 weeks"。Letter 没说 HER2+（比 keypoints 更准确）。无编造
 
 ### ROW 75 (coral_idx 214) — 0 P1, 0 P2 ✅ ← **v27 P2 部分修复！**
 - **v27 P2 改善**: POST-PROCEDURE-FILTER 移除了 "genetics counseling and fertility" referrals（从 run log 确认）。procedure_plan 现在只有 "Order referral to UCSF Breast Surgery"（仍是 referral 不是 procedure，但只剩一个 minor item）
