@@ -6,7 +6,9 @@
 > Pipeline: V2 (5-gate) + POST hooks + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查完成 — 28/28 ROW 全部审查完毕**
+> Status: **审查中 — ROW 1-15, 20, 22, 24 完整逐字审查完成（18/28）。ROW 25 开始重做**
+> 已完整审查: 1-15, 20, 22, 24（每个都完整读了 note+keypoints+letter+traceability）
+> 待重做的 ROW（之前用 batch 偷懒了）: **25, 33, 38, 39, 52, 57, 74, 75, 83, 88, 95**（11 个）
 > 参照: `results/v27_full_notool_20260410_112141/review.md`（v27 审查）
 > Results 文件: `results/v28_full_notool_20260411_073832/results.txt`
 
@@ -201,16 +203,23 @@
 - ✅ Imaging: MRI Total Spine + CT CAP + repeat at 3 months 正确
 - ✅ Genetic_testing_plan: Foundation One or [REDACTED] 360 正确
 
-### ROW 22 (coral_idx 161) — 0 P1, 2 P2
-- P2: lab_summary "No labs in note" — 笔记包含 01/29/2021 CBC+CMP 结果，虽 8 个月前但有多项异常。同 v27
-- P2: genetic_testing_plan 包含 medication plan 文本（"faslodex with [REDACTED] if she has a [REDACTED] mutation"）。同 v27
-- ✅ Response: "PET scans showed a good response" 正确
-- ✅ Advance care: "Full code." 正确
+### ROW 22 (coral_idx 161) — 0 P1, 2 P2（完整逐字审查）
+- P2: lab_summary "No labs in note" — 笔记中明确打印了 01/29/2021 CBC+CMP 完整结果（30+ 行数值），含 WBC 3.16(L)、Hgb 10.7(L)、Creatinine 1.19(H)、eGFR 46(L) 等多项严重异常。虽是 8 个月前但数据确实在 note 文本中。同 v27
+- P2: genetic_testing_plan "If pet ct shows progression could use faslodex with [REDACTED] if she has a [REDACTED] mutation" — medication plan 文本，不是 testing plan。同 v27
+- ✅ 72yo, L DCIS 1994 + R Stage II IDC 2000 → metastatic May 2020 (bone+chest wall+nodes), HR+/HER2-
+- ✅ On anastrozole + denosumab（abemaciclib d/c 08/14/21 pneumonitis）。PET showed good response
+- ✅ Type: ER+/PR+ IDC, HER2- 正确。Stage: Originally II → Stage IV 正确
+- ✅ Medication_plan: 出色的 contingent plan — arimidex if stable, faslodex if progression, future options
+- ✅ Advance care: Full code 正确
+- ✅ Letter: 通俗准确 — DCIS/IDC history + treatment changes + PET plan + future options。无编造
 
-### ROW 24 (coral_idx 163) — 0 P1, 2 P2
-- P2: Metastasis "Not sure" / Distant Met "Not sure" — PET 明确 "No definite sites of hypermetabolic metastatic disease"。同 v27
-- P2: procedure_plan 仍混入 genetic testing（"send surgical specimen for MP"）+ PT referral。同 v27
-- ✅ Type 正确。Goals curative ✅。genetic_testing_plan 正确
+### ROW 24 (coral_idx 163) — 0 P1, 2 P2（完整逐字审查）
+- P2: Metastasis "Not sure" / Distant Met "Not sure" — PET 明确 "No definite sites of hypermetabolic metastatic disease"，axillary FNA negative，liver benign。SLN micromet (0.4mm) = pN1mi (regional)。"Not sure" 不合适。同 v27
+- P2: procedure_plan "send surgical specimen for MP, recommended PT and referral, order [REDACTED] test" — 混入 genetic testing（MP + [REDACTED] test, 已在 genetic_testing_plan）+ PT referral（已在 Referral-Others）。同 v27
+- ✅ Type: 非常详细 "ER+(>95%)/PR+(80%)/HER2 equiv IHC 2 neg FISH micropapillary mucinous carcinoma"
+- ✅ Goals curative ✅。genetic_testing_plan: "send specimen for MP" 正确
+- ✅ Radiotherapy_plan: radiation if low risk + Rad Onc 12/07/18 正确
+- ✅ Letter: "cancer that makes mucus" + specimen tested for chemo + radiation/hormone therapy + Rad Onc + PT。无编造
 
 ### ROW 25 (coral_idx 164) — 0 P1, 1 P2
 - P2: medication_plan "1500/1000mg ixabepilone" — 1500/1000mg 是 Xeloda 剂量，不是 ixabepilone。同 v27
