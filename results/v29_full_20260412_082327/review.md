@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-7 完成（6/61），ROW 8 开始**
+> Status: **审查中 — ROW 1-10 完成（8/61），ROW 11 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 6 | — | ROW 1×2, 6×2, 7×2 |
+| **P2** | 7 | — | ROW 1×2, 6×2, 7×2, 8×1 |
 
 ---
 
@@ -82,4 +82,22 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Type: ER-/PR-/HER2+ IDC 正确。Goals palliative ✅
 - ✅ Response: "probable mild progression...SUV 2.1 (was 1.8)...[REDACTED] 14.8" 出色
 - ✅ Medication_plan: d/c regimen + recommend [REDACTED] next line 正确
+
+### ROW 8 (coral_idx 147) — 0 P1, 1 P2
+- **v27 P1 修复确认**: response 正确描述 post-neoadjuvant pathology — breast pCR + 3/28 LN+（2.4cm, extranodal）
+- P2: procedure_plan "adjuvant AC x 4 cycles, to be followed by T-DM1" — chemo 混入 procedure。持久问题
+- ✅ Type ER-/PR-/HER2+ (IHC 3+, FISH 5.7) ✅。Goals curative ✅。Imaging echo ✅
+
+### ROW 9 (coral_idx 148) — 0 P1, 0 P2 ✅ ← **新 sample**
+- ✅ 63yo, kidney transplant recipient, Stage II R breast IDC ER+(85%)/PR-(<1%)/HER2-(IHC 0, FISH neg)
+- ✅ S/p neoadjuvant [REDACTED] x 4 + taxol x 12 → bilateral mastectomies: 3.84cm residual (~5% cellularity), 1 macro + 1 micro + 1 ITC in 4 SLN
+- ✅ Response: 出色 — "3.84 cm residual tumor with 5% cellularity...1 LN macrometastases 0.21cm + extranodal extension"
+- ✅ Medication_plan: Letrozole after radiation + Fosamax for bone protection 正确
+- ✅ Procedure_plan: "drains out on Thursday" 正确（真正的 procedure）
+- ✅ Advance care: full code ✅。Referral: Radiation ✅
+
+### ROW 10 (coral_idx 149) — 0 P1, 0 P2 ✅ ← **v27 P1 完全修复！所有 5 个 v27 P1 现在全修！**
+- **v27 P1 FIXED by POST-RESPONSE-GENOMIC**: response 不再是 "Low risk [REDACTED]"（Oncotype）。现在是 "S/p left mastectomy with a 8. cm [REDACTED] with July 20 lymph nodes involved." — 实际 surgical pathology！
+- ✅ 66yo, Stage II left breast HR+/HER2-, s/p neoadjuvant letrozole → 8.8cm residual + LN involvement
+- ✅ Type HR+/HER2- ✅, Stage II ✅, Radiotherapy ✅, DEXA ✅, Advance care full code ✅
 
