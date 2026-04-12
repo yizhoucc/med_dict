@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-70 完成（44/61），ROW 72 待审查**
+> Status: **审查中 — ROW 1-73 完成（46/61），ROW 78 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 65 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1, 66×2, 68×1, 70×1 (ROW 72+ 待审查) |
+| **P2** | 69 | — | ...64×3, 65×1, 66×2, 68×1, 70×1, 72×2, 73×2 (ROW 78+ 待审查) |
 
 ---
 
@@ -390,5 +390,21 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Distant Met: "Not sure" ✅（sub-4mm 肺结节无法确认）。Advance care: Full code ✅
 - ✅ imaging_plan: CT June for lung nodules ✅。Referral: Radiation consult ✅
 - ✅ lab_summary: 全面（CMP + CBC from 06/05）✅
+
+### ROW 72 (coral_idx 211) — 0 P1, 2 P2 ← **新 sample**
+- 72yo postmenopausal, ER+(99%)/PR-(<1%)/HER2- IDC with focal neuroendocrine differentiation。1.2cm grade 2, pT1cN0(sn)。S/p left mastectomy。Televisit post-op consult。Letrozole 刚开处方。Oncotype ordered。骨质疏松 on Reclast。
+- P2: response_assessment 写 "On treatment" — 术后首次会诊，尚未开始任何治疗（letrozole 刚开处方）
+- P2: current_meds 写 "letrozole" 但本次就诊刚开的处方（"Instructed patient to begin letrozole, prescription ordered"）
+- ✅ Type: ER+/PR-/HER2- IDC with neuroendocrine differentiation ✅。Stage: pT1cN0(sn) ✅
+- ✅ genetic_testing_plan: Oncotype ordered ✅。therapy_plan: letrozole + Oncotype ✅
+- ✅ findings: 详细（core bx + surgical path + exam）✅
+
+### ROW 73 (coral_idx 212) — 0 P1, 2 P2 ← v28 已审查
+- 63yo, Stage III left ER/PR+/HER2- breast cancer。S/p bilateral mastectomies + ALND + chemo + CW XRT + arimidex (since Aug 2017)。Follow-up 新结节→US+mammogram 确认全部为脂肪坏死。
+- P2: Type 写 "HER2: not tested" 但笔记明确写 "[redacted] negative"（HER2 已检测为阴性）
+- P2: response_assessment 写 "fat necrosis, indicating stable disease" — 脂肪坏死是良性术后改变，不是"稳定疾病"。应为 NED（无疾病证据）
+- ✅ Stage: III ✅。current_meds: arimidex ✅。Goals: curative ✅
+- ✅ findings: 详细描述三处结节位置和大小 + 影像确认 fat necrosis ✅
+- ✅ lab_plan: "check labs" ✅。follow_up: 4 months ✅
 
 
