@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-66 完成（42/61），ROW 68 待审查**
+> Status: **审查中 — ROW 1-70 完成（44/61），ROW 72 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 63 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1, 66×2 (ROW 68+ 待审查) |
+| **P2** | 65 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1, 66×2, 68×1, 70×1 (ROW 72+ 待审查) |
 
 ---
 
@@ -375,5 +375,20 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ therapy_plan: neoadjuvant + bilateral mastectomy + adjuvant radiation + pembrolizumab discussed ✅
 - ✅ response_assessment: "Not yet on treatment" ✅。Goals: curative ✅
 - ✅ genetic_testing_plan: germline testing pending ✅。Referral: Genetics (awaiting results) ✅
+
+### ROW 68 (coral_idx 207) — 0 P1, 1 P2 ← v28 已审查
+- 63yo postmenopausal, multifocal ER+/[redacted] right breast cancer + [redacted] mutation。多发病灶（3.9cm+1.5cm+2.2cm）+ 腋窝+内乳 LN 受累。TCHP x6 后 MRI 完全缓解。讨论 bilateral mastectomy vs lumpectomy。
+- P2: Letter 写 sons should be tested "for a specific health risk related to a medication" — 实际是基因遗传风险（Fanconi anemia, pancreatic cancer），不是药物风险
+- ✅ response_assessment: "good clinical response after TCHP, MRI no lesions" ✅ — 准确
+- ✅ Type: multifocal ER+ ✅。genetic_testing_plan: sons testing ✅。Goals: curative ✅
+- ✅ procedure_plan: bilateral mastectomy ✅。radiotherapy_plan: 条件性 RT ✅
+
+### ROW 70 (coral_idx 209) — 0 P1, 1 P2 ← v28 已审查
+- 61yo, BRCA1+, bilateral breast cancer。Left: ILC ER+/PR+/HER2-, 4.4cm residual (5-10% cellularity), 2/5 LN+。Right: IDC ER+/PR-/HER2-, 1cm residual, 0/2 LN。S/p bilateral mastectomies + BSO。Resuming letrozole。Prolia after dental clearance。肺结节随访 CT。
+- P2: procedure_plan 写 "No procedures planned" 但 A/P 明确写 "She is going to have expanders placed prior to radiation"
+- ✅ Type: 出色 — 正确识别双侧不同组织学和受体状态（left ILC ER+/PR+, right IDC ER+/PR-）
+- ✅ Distant Met: "Not sure" ✅（sub-4mm 肺结节无法确认）。Advance care: Full code ✅
+- ✅ imaging_plan: CT June for lung nodules ✅。Referral: Radiation consult ✅
+- ✅ lab_summary: 全面（CMP + CBC from 06/05）✅
 
 
