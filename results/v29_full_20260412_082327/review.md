@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-10 完成（8/61），ROW 11 开始**
+> Status: **审查中 — ROW 1-17 完成（13/61），ROW 18 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 7 | — | ROW 1×2, 6×2, 7×2, 8×1 |
+| **P2** | 15 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2 |
 
 ---
 
@@ -100,4 +100,34 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - **v27 P1 FIXED by POST-RESPONSE-GENOMIC**: response 不再是 "Low risk [REDACTED]"（Oncotype）。现在是 "S/p left mastectomy with a 8. cm [REDACTED] with July 20 lymph nodes involved." — 实际 surgical pathology！
 - ✅ 66yo, Stage II left breast HR+/HER2-, s/p neoadjuvant letrozole → 8.8cm residual + LN involvement
 - ✅ Type HR+/HER2- ✅, Stage II ✅, Radiotherapy ✅, DEXA ✅, Advance care full code ✅
+
+### ROW 11 (coral_idx 150) — 0 P1, 2 P2
+- P2: response 仍引用旧 PET（before Faslodex），遗漏 A/P "Exam stable"。同 v28
+- P2: imaging_plan 只有 PETCT，遗漏 MRI of lumbar/pelvis/femur。同 v28
+- ✅ Type IDC, Stage IIIC→IV, current_meds Faslodex+Denosumab, Lab 完整
+
+### ROW 12 (coral_idx 151) — 0 P1, 1 P2
+- **v27 P1 修复保持**: Advance care "POLST on file. Patient has documented wishes against life support" ✅
+- P2: imaging_plan 仍遗漏 Echo q6 months。同 v28
+- ✅ Type ER+/PR+/HER2+, Stage IV, Response 含 body SD
+
+### ROW 14 (coral_idx 153) — 0 P1, 1 P2
+- P2: current_meds "" — 患者正在自行服用 Mexico 化疗。同 v28（recent_changes 正确捕获）
+- ✅ findings 现在包含 R axillary node（v28 P2 修复保持）
+
+### ROW 20 (coral_idx 159) — 0 P1, 1 P2
+- P2: procedure_plan "Abdomen, Pelvis, Xgeva" — 仍混入 imaging + medication。同 v28
+- ✅ Medication_plan: letrozole + palbociclib + denosumab + monthly blood work 完整
+
+### ROW 22 (coral_idx 161) — 0 P1, 2 P2
+- P2: lab_summary "No labs in note" — 笔记有 01/29/2021 labs。同 v28
+- P2: genetic_testing_plan 包含 medication plan 文本。同 v28
+- ✅ Response: "PET scans showed a good response" 正确。Advance care "Full code" ✅
+
+### ROW 17 (coral_idx 156) — 0 P1, 1 P2 ← **新 sample**
+- P2: procedure_plan "check labs including hormones" — labs 不是 procedure（已在 lab_plan 中正确捕获）
+- ✅ 53yo, left IDC 0.8cm grade 2, ER+(>95%)/PR+(>95%)/HER2-(IHC 0), 0/5 LN, margins neg
+- ✅ Medication_plan: adjuvant hormonal ≥5yr, tamoxifen or AI based on menopausal status 正确
+- ✅ Radiotherapy: breast RT scheduled tomorrow ✅。DXA scan ✅。Genetics + Nutritionist referral ✅
+- ✅ Letter: adjuvant hormonal + RT + hormone labs + DXA + genetics + nutritionist。准确
 
