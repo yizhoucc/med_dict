@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-5 完成（4/61），ROW 6 开始**
+> Status: **审查中 — ROW 1-7 完成（6/61），ROW 8 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 2 | — | ROW 1×2 |
+| **P2** | 6 | — | ROW 1×2, 6×2, 7×2 |
 
 ---
 
@@ -66,4 +66,20 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Response: "stable disease...continue current therapy" — interpretive 但 A/P 支持。Findings 有详细 imaging
 - ✅ Radiotherapy: Rad Onc referral for brachial plexus ✅。Imaging: CT + bone scan ✅
 - ✅ Letter: stable + continue meds + Rad Onc + CT/bone scan + labs monthly + full code。无编造
+
+### ROW 6 (coral_idx 145) — 0 P1, 2 P2
+- P2: Patient type "New patient" — 应为 "Follow up"（zoladex 06/08 已由该提供者开始）。同 v28
+- P2: Referral-Genetics 历史转诊（04/24/2019，Myriad negative）混入当前 referrals。同 v28
+- ✅ 34yo, ER+/PR+/HER2- IDC 1.5cm grade 1, 0/1 node, s/p bilateral mastectomy, on zoladex + letrozole
+- ✅ Lab: Estradiol 172 + Vitamin D 24 + CMP+CBC 完整
+- ✅ Medication_plan: letrozole ≥3yr → tamoxifen + gabapentin + estradiol monthly 完整
+- ✅ Letter: bilateral mastectomy + letrozole + gabapentin + estradiol + genetics + 3 months。无编造情绪词
+
+### ROW 7 (coral_idx 146) — 0 P1, 2 P2 ← **v28 Stage regression 修复！**
+- **v28 regression FIXED**: Stage "Originally Stage II, now **Stage IV**" ✅ — POST-STAGE-FINAL 成功修复（DISTMET 先降级 → FINAL 检测 Distant Met=Yes → 回升 Stage IV）
+- P2: procedure_plan "Would recheck [REDACTED]" — LVEF/echo 是 imaging 不是 procedure。持久问题
+- P2: lab_plan "Would recheck [REDACTED]" — 同上
+- ✅ Type: ER-/PR-/HER2+ IDC 正确。Goals palliative ✅
+- ✅ Response: "probable mild progression...SUV 2.1 (was 1.8)...[REDACTED] 14.8" 出色
+- ✅ Medication_plan: d/c regimen + recommend [REDACTED] next line 正确
 
