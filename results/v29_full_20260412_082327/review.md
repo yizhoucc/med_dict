@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-83 完成（50/61），ROW 84 待审查**
+> Status: **审查中 — ROW 1-84 完成（51/61），ROW 85 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 72 | — | ...72×2, 73×2, 78×0, 80×1, 82×2, 83×0 (ROW 84+ 待审查) |
+| **P2** | 73 | — | ...73×2, 78×0, 80×1, 82×2, 83×0, 84×1 (ROW 85+ 待审查) |
 
 ---
 
@@ -431,5 +431,13 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ response_assessment: "cancer responding, significant response in axillary nodes, substantial improvement with therapy" ✅ — 出色
 - ✅ current_meds: letrozole ✅。Goals: curative ✅。medication_plan: continue letrozole ✅
 - ✅ procedure_plan: breast surgery ✅。therapy_plan: continue neoadjuvant until surgery ✅
+
+### ROW 84 (coral_idx 223) — 0 P1, 1 P2 ← **新 sample**
+- 60yo, CHEK2 mutation + MS + metastatic ER+/PR-/HER2- breast cancer。Bone + liver + meninges 转移。S/p letrozole/palbociclib（PD）→ capecitabine 1500mg BID。脑 MRI 示 dural/IAC 增强（可能 pachymeningeal/leptomeningeal）。
+- P2: response_assessment 写 "stable disease" 但肝脏转移灶 increased in size and number + 脑 IAC 累及增加。应为 mixed/progressive
+- ✅ Type: ER+/PR-/HER2- ✅。Stage: IV ✅。Goals: palliative ✅
+- ✅ Metastasis: Yes (bone, soft tissue, liver, possibly meninges) ✅ — 全面
+- ✅ therapy_plan: 极其详细 — CT CAP + LP + MRI spine + rad onc + steroids + xeloda + fulvestrant+[PI3Ki] at PD
+- ✅ current_meds: capecitabine + zoledronic acid ✅。lab_summary: 简明（WBC, Hg, Plt, Cr, Tbili, ALT）✅
 
 
