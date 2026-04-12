@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-64 完成（40/61），ROW 65 待审查**
+> Status: **审查中 — ROW 1-65 完成（41/61），ROW 66 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 60 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3 (ROW 65+ 待审查) |
+| **P2** | 61 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1 (ROW 66+ 待审查) |
 
 ---
 
@@ -356,5 +356,15 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ second opinion: yes ✅。supportive_meds: 化疗支持药物全面（dex + colace + olanzapine + zofran + compazine）
 - ✅ therapy_plan: 全面 — chemo → surgery → radiation → sternum treatment → hormonal blockade
 - ✅ procedure_plan: sternal biopsy ✅。Advance care: Full code ✅
+
+### ROW 65 (coral_idx 204) — 0 P1, 1 P2 ← **新 sample**
+- 48yo, right breast IDC ER weak+(2%)/PR low+(7%)/HER2-(IHC 2+, FISH neg), Ki-67 36%。DCIS high-grade, LVI+。腋窝 LN 0.2mm micromet。MRI 2.6cm mass。PET 无远处转移。Pre-neoadjuvant consultation (televisit)。计划 AC/T，正在筛选 ISPY-2 trial。
+- P2: response_assessment 写 "On treatment" 但患者尚未开始化疗（Plan 写 "RTC in 1-2 weeks in person to start chemo"）。应为 "Not yet on treatment"
+- ✅ Type: ER weak+(2%)/PR low+(7%)/HER2- IDC ✅ — 精确数值
+- ✅ medication_plan: 非常详细 — AC/T + ISPY trial arms（pembrolizumab, olaparib, durvalumab 等）+ 5-10yr endocrine therapy
+- ✅ therapy_plan: 全面 — neoadjuvant AC/T + ISPY + post-op RT + endocrine ✅
+- ✅ procedure_plan: port placement + research core biopsy + lumpectomy ✅
+- ✅ imaging_plan: TTE ✅。genetic_testing_plan: F/u genetic results ✅
+- ✅ Letter: neoadjuvant 解释通俗 + clinical trial + port 解释 + post-op RT + 5-10yr endocrine。准确
 
 
