@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-73 完成（46/61），ROW 78 待审查**
+> Status: **审查中 — ROW 1-80 完成（48/61），ROW 82 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 69 | — | ...64×3, 65×1, 66×2, 68×1, 70×1, 72×2, 73×2 (ROW 78+ 待审查) |
+| **P2** | 70 | — | ...66×2, 68×1, 70×1, 72×2, 73×2, 78×0, 80×1 (ROW 82+ 待审查) |
 
 ---
 
@@ -406,5 +406,17 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Stage: III ✅。current_meds: arimidex ✅。Goals: curative ✅
 - ✅ findings: 详细描述三处结节位置和大小 + 影像确认 fat necrosis ✅
 - ✅ lab_plan: "check labs" ✅。follow_up: 4 months ✅
+
+### ROW 78 (coral_idx 217) — 0 P1, 0 P2 ✅ ← v28 已审查
+- 79yo, de novo metastatic TNBC (PD-L1 neg) to liver + periportal LNs。S/p capecitabine → OPERA trial → gemcitabine（停因心包积液）。Off systemic therapy since 03/15/19。Now progressing（肝 + 淋巴结 + 新肺结节）。探索 clinical trials。Rad onc consult for liver/nodal XRT。
+- ✅ 全部字段正确。response_assessment: "cancer is currently progressing" + 详细影像证据 ✅
+- ✅ Type: TNBC ✅。Stage: IV ✅。Goals: palliative ✅。current_meds: empty ✅（off therapy）
+- ✅ therapy_plan: trial options + rad onc ✅。lab_summary: 全面（CBC + CMP）✅
+
+### ROW 80 (coral_idx 219) — 0 P1, 1 P2 ← v28 已审查
+- 53yo, local recurrence IDC 0.8cm grade 3 in dermis post mastectomy for DCIS (2013)。ER 95%/PR 70%/HER2-, Oncotype 24。Pre-chemo visit (televisit)。Plan: TC x4 + RT 6 weeks (incl axilla/SC)。
+- P2: response_assessment 写 "On treatment" 但本次是化疗前就诊（"Start TC x 4 on 04/11/19"，尚未开始）
+- ✅ therapy_plan: TC x4 + RT 6w with boost + axilla/SC fields ✅。supportive_meds: dex + zofran + compazine ✅
+- ✅ lab_summary: 全面（CMP + CBC + Hep B + Estradiol）✅。Goals: curative ✅
 
 
