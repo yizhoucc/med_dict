@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-50 完成（31/61），ROW 52 待审查**
+> Status: **审查中 — ROW 1-57 完成（36/61），ROW 59 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 48 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2 (ROW 52+ 待审查) |
+| **P2** | 54 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 57×2 (ROW 59+ 待审查) |
 
 ---
 
@@ -286,5 +286,40 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ response_assessment: "disease under good control" ✅ — 准确简洁
 - ✅ current_meds: ibrance + xgeva + letrozole ✅（lupron 在 med list 标记 not taking）
 - ✅ goals: palliative ✅。genetic_testing_plan: PMS2 mutation referral ✅
+
+### ROW 52 (coral_idx 191) — 0 P1, 3 P2 ← **新 sample**
+- 35yo 绝经前, ER+(>95%)/PR+(>95%)/HER2-(IHC 1+/2+, FISH 1.1/1.4), Ki-67 <10%/~15%。1.7cm grade II IDC, 1 SLN micromet (0.18cm), minimal extranodal extension。Oncotype low risk (11), MammaPrint low risk。S/p left lumpectomy + SLN + bilateral mastopexy。
+- P2: supportive_meds 写 "ondansetron (ZOFRAN)" 但患者尚未开始癌症治疗，Zofran 可能是其他原因的 PRN 处方
+- P2: Referral 全部写 "None" 但 A/P 明确写 "Referral for fertility preservation asap" 和 "referred to reproductive health"
+- P2: Letter 写 "a test called a medication" — 由于 Oncotype 测试名被 [REDACTED]，letter 生成出乱码
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Goals: curative ✅。response: "Not yet on treatment" ✅
+- ✅ imaging_plan: CT CAP + bone scan for staging ✅。genetic_testing_plan: Oncotype ✅
+- ✅ medication_plan: Zoladex + [redacted] after fertility preservation ✅
+
+### ROW 54 (coral_idx 193) — 0 P1, 0 P2 ✅ ← **新 sample**
+- 39yo BRCA2+, oligometastatic ER+/PR+/HER2- IDC left breast + T6 骨转移。S/p neoadjuvant AC/T → RT T6 → bilateral mastectomies + left ALND。Residual 8.2cm (cellularity 10%), ER+50%/HER2-, Ki-67 1%。1/24 SLN micromet。On leuprolide + letrozole + zoledronic acid。
+- ✅ Stage: Stage IV (metastatic) ✅。Distant Met: Yes, to bone (T6 + 7th rib) ✅
+- ✅ Goals: palliative ✅（A/P 明确写 "metastatic breast cancer is not curable, but treatable"）
+- ✅ current_meds: leuprolide + letrozole + zoledronic acid ✅
+- ✅ medication_plan: 非常全面 — continue leuprolide/letrozole + palbociclib after RT + zoledronic acid q3mo + calcium + vitamin D
+- ✅ radiotherapy_plan: post-mastectomy radiation ✅。imaging_plan: PET/CT 3-4 months + DEXA ✅
+- ✅ Letter: 准确 — incision healing + continue meds + palbociclib after RT + acupuncture + PET/CT + DEXA + 4 weeks follow-up
+
+### ROW 53 (coral_idx 192) — 0 P1, 1 P2 ← **新 sample**
+- 59yo, Stage II/III left breast IDC with neuroendocrine differentiation。4.5cm grade 3, ER+(>95%)/PR+(30%)/HER2+(IHC heterogeneous 2+/3+, FISH 4.9X), Ki-67 25%。LVI extensively+。DCIS 4.5cm。SLN 2/? positive (6mm met)。60%+ recurrence risk。S/p left lumpectomy + SLN。
+- P2: Letter 写 "targeted therapy drugs chemotherapy" — 应为 "TCHP chemotherapy"。生成 artifact
+- ✅ Type: ER+/PR+/HER2+ IDC with neuroendocrine differentiation ✅ — 非常出色
+- ✅ medication_plan: 极其全面 — AC/THP (AC x4 q2w → Taxol x12 + HP x1yr) + alternative TCHP + Arimidex 1mg x10yr + neratinib yr2 + bone strengthening
+- ✅ radiotherapy_plan: adjuvant XRT after chemo ✅。Referral: Genetics ✅ + Specialty (rad onc) ✅
+- ✅ Letter: neuroendocrine differentiation 解释通俗（"features of cells that normally release hormones"）✅
+- ✅ Letter: 尊重患者决策时间（"thinking about options over next couple weeks"）✅
+
+### ROW 57 (coral_idx 196) — 0 P1, 2 P2 ← v28 已审查
+- 59yo, locally advanced left breast CA。初始外院诊断 HER2+ → TCH+P 新辅助。术后标本 HER2-/TNBC。外院病理复查也 HER2-。S/p left lumpectomy, residual 3.7cm, 0/6 nodes。Post-op AC x4。计划 XRT。Second opinion 关于 HER2 争议。
+- P2: response_assessment 写 "not responding to treatment" — 但笔记明确写 "Pt noted to have tumor volume reduction on exam"（治疗期间肿瘤体积缩小）。应为 partial response with significant residual disease
+- P2: recent_changes 写 "Dose reduction 25% after C1" — 这是已完成的新辅助化疗的历史事件，不是当前就诊的近期变化
+- ✅ second opinion: yes ✅。Type: ER-/PR-/HER2- TNBC ✅。Stage: Locally advanced ✅
+- ✅ therapy_plan: XRT + 如果 HER2+ 则恢复 trastuzumab ✅。genetic_testing_plan: 遗传咨询 ✅
+- ✅ Referral: Genetics ✅ + Specialty (XRT) ✅
 
 
