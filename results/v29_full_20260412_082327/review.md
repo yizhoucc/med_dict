@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-29 完成（18/61），ROW 30 开始**
+> Status: **审查中 — ROW 1-30 完成（19/61），ROW 33 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -158,4 +158,10 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Stage: pT1c(m)N1(sn)M0 精确。Type ER+/PR+/HER2- ✅。Goals curative ✅
 - ✅ current_meds: letrozole 2.5mg 刚开始。Procedure: surgery September。RT planned locally
 - ✅ Imaging: bone density scan。Letter: IDC + letrozole + surgery + radiation + bone scan + calcium。准确
+
+### ROW 30 (coral_idx 169) — 0 P1, 0 P2 ✅ ← **新 sample**
+- ✅ 64yo, clinical stage II-III ER-(0%)/PR-(0%)/HER2+(IHC 3, FISH 8.9) IDC right breast 9cm. Untreated DCIS since 2007
+- ✅ Type: 非常详细（含 IHC score 和 FISH ratio）。PET: no metastases ✅
+- ✅ Medication_plan: 出色 — THP/AC or TCHP + trastuzumab 1yr complete regimen description
+- ✅ Procedure: Mediport placement ✅。Imaging: TTE ✅。Lab: Creatinine + tumor markers ✅
 
