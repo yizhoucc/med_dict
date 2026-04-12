@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-82 完成（49/61），ROW 83 待审查**
+> Status: **审查中 — ROW 1-83 完成（50/61），ROW 84 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 72 | — | ...70×1, 72×2, 73×2, 78×0, 80×1, 82×2 (ROW 83+ 待审查) |
+| **P2** | 72 | — | ...72×2, 73×2, 78×0, 80×1, 82×2, 83×0 (ROW 84+ 待审查) |
 
 ---
 
@@ -425,5 +425,11 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - P2: medication_plan 列了非癌症药物（APAP, ibuprofen, HCTZ, lisinopril, metformin）而非计划中的 AI + bone medication
 - ✅ Type: ER+/PR+/HER2- mixed ductal and lobular ✅。Goals: curative ✅
 - ✅ therapy_plan: no chemo + RT + AI + bone med ✅。imaging_plan: DEXA ✅。Advance care: Full code ✅
+
+### ROW 83 (coral_idx 222) — 0 P1, 0 P2 ✅ ← **新 sample**
+- 77yo, right breast ILC with extensive R axillary LN involvement。ER+/PR+。On neoadjuvant letrozole since Dec 2019。PET/CT shows significant SUV response in axillary nodes（SUV 15.1→1.9）。Discussing breast conservation。Continue letrozole until surgery。Televisit。
+- ✅ response_assessment: "cancer responding, significant response in axillary nodes, substantial improvement with therapy" ✅ — 出色
+- ✅ current_meds: letrozole ✅。Goals: curative ✅。medication_plan: continue letrozole ✅
+- ✅ procedure_plan: breast surgery ✅。therapy_plan: continue neoadjuvant until surgery ✅
 
 
