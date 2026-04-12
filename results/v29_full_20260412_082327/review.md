@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-18 完成（14/61），ROW 20 开始**
+> Status: **审查中 — ROW 1-27 完成（17/61），ROW 29 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 15 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2 |
+| **P2** | 18 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 更多见下方 |
 
 ---
 
@@ -138,4 +138,17 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Medication_plan: adjuvant endocrine 5-10yr ✅。Radiotherapy: Rad Onc eval ✅。Imaging: DEXA ✅
 - ✅ Genetic_testing_plan: captures incomplete genetics referral status correctly
 - ✅ Letter: IDC + papillary + 8mm + margins + ITC + endocrine + Rad Onc + DEXA + genetics。准确
+
+### ROW 20 (coral_idx 159) — 0 P1, 1 P2 ← v28 已审查
+- P2: procedure_plan "Abdomen, Pelvis, Xgeva" — 仍混入 imaging + medication。同 v28
+
+### ROW 22 (coral_idx 161) — 0 P1, 2 P2 ← v28 已审查
+- P2: lab_summary "No labs" + genetic_testing_plan has medication plan text。同 v28
+
+### ROW 27 (coral_idx 166) — 0 P1, 0 P2 ✅ ← **新 sample**
+- ✅ 41yo, ER+/PR+/HER2- IDC, metastatic to bone since 2006. On Femara + Zoladex + zoledronic acid
+- ✅ Response: "PET-CT shows stable to slightly decreased metabolic activity of osseous metastases. No new metastases." 出色！
+- ✅ current_meds: letrozole + goserelin + zolendronic acid 全部正确
+- ✅ Imaging: consider MRI spine for back pain。Lab: CBC with platelets for easy bruising。
+- ✅ Letter: "cancer spread to bones, stable, not growing" + continue meds + MRI spine + blood tests。准确
 
