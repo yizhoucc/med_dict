@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-17 完成（13/61），ROW 18 开始**
+> Status: **审查中 — ROW 1-18 完成（14/61），ROW 20 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -130,4 +130,12 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Medication_plan: adjuvant hormonal ≥5yr, tamoxifen or AI based on menopausal status 正确
 - ✅ Radiotherapy: breast RT scheduled tomorrow ✅。DXA scan ✅。Genetics + Nutritionist referral ✅
 - ✅ Letter: adjuvant hormonal + RT + hormone labs + DXA + genetics + nutritionist。准确
+
+### ROW 18 (coral_idx 157) — 0 P1, 0 P2 ✅ ← **新 sample**
+- ✅ 65yo, left IDC 8mm grade 1, ER+(~100%)/PR+(95%)/HER2-(IHC 1+), Ki-67 5%, arising in encapsulated papillary carcinoma. pT1b pNX, ITC in 1/3 SLN
+- ✅ Type: "ER+/PR+/HER2- IDC, arising in association with encapsulated papillary carcinoma" — 出色！
+- ✅ Stage pT1b pNX ✅。Goals curative ✅。Response "Not yet on treatment" ✅
+- ✅ Medication_plan: adjuvant endocrine 5-10yr ✅。Radiotherapy: Rad Onc eval ✅。Imaging: DEXA ✅
+- ✅ Genetic_testing_plan: captures incomplete genetics referral status correctly
+- ✅ Letter: IDC + papillary + 8mm + margins + ITC + endocrine + Rad Onc + DEXA + genetics。准确
 
