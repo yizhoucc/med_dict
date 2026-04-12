@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-57 完成（36/61），ROW 59 待审查**
+> Status: **审查中 — ROW 1-61 完成（38/61），ROW 63 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 54 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 57×2 (ROW 59+ 待审查) |
+| **P2** | 56 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1 (ROW 63+ 待审查) |
 
 ---
 
@@ -321,5 +321,23 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ second opinion: yes ✅。Type: ER-/PR-/HER2- TNBC ✅。Stage: Locally advanced ✅
 - ✅ therapy_plan: XRT + 如果 HER2+ 则恢复 trastuzumab ✅。genetic_testing_plan: 遗传咨询 ✅
 - ✅ Referral: Genetics ✅ + Specialty (XRT) ✅
+
+### ROW 59 (coral_idx 198) — 0 P1, 1 P2 ← v28 已审查
+- 52yo, Stage I right ER+/PR+/HER2- IDC。S/p lumpectomy + SLN (0/5), 1.5cm grade 3。TC→Abraxane/Cytoxan（docetaxel 过敏）→ XRT → tamoxifen（停，症状）→ letrozole（症状更差）→ 建议 exemestane。NED。MammaPrint High Risk。Post-menopausal (FSH 32.5, E2 5)。
+- P2: current_meds 写 "exemestane" 但她尚未开始服用（A/P 说 "I again recommended discontinuing Letrozole and waiting 2-3 weeks before starting Exemestane"，且她之前被建议过但 "has not tried it yet"）
+- ✅ response_assessment: "No evidence of recurrence" ✅ — 直接来自 A/P
+- ✅ medication_plan: 全面 — stop letrozole + wait + exemestane + Pristiq + consider duloxetine via psychiatry
+- ✅ imaging_plan: mammogram July + alternating MRI every 6mo ✅
+- ✅ Referral: Specialty psychiatry ✅（duloxetine 转换需精神科评估药物相互作用）
+- ✅ Letter 非常出色：NED + exemestane switch + Pristiq→duloxetine + mammogram/MRI schedule + psychiatry。全部通俗准确
+
+### ROW 61 (coral_idx 200) — 0 P1, 1 P2 ← **新 sample**
+- 43yo 绝经前, 新诊断左乳 IDC ER+(100%)/PR+(100%)/HER2-(1+), grade 2。筛查发现。Biopsy: IDC ≥11mm。MRI 0900 位置可疑→复检活检阴性。CT 无转移。Invitae 阴性。Televisit 建立诊疗关系。手术 04/12/21: lumpectomy + IORT + reconstruction。
+- P2: genetic_testing_plan 写 "None planned" 但 A/P 明确写 "will likely need Oncotype Dx after surgery"（基因组学检测被归入 therapy_plan 而非 genetic_testing_plan）
+- ✅ Type: ER+/PR+/HER2-(1+) IDC ✅。in-person: Televisit ✅
+- ✅ radiotherapy_plan: IORT + no post-op RT ✅ — 准确区分术中 RT 和术后 RT
+- ✅ procedure_plan: lumpectomy + IORT + reconstruction 04/12/21 ✅
+- ✅ medication_plan: Tamoxifen vs OFS + AI ✅。Goals: curative ✅
+- ✅ Letter 非常出色：ER/PR/HER2 解释通俗（"uses hormones to grow" / "protein that makes cancer grow faster"）+ MRI 可疑区域阴性 + IORT 解释 + Oncotype 后续检查 + 随访安排
 
 
