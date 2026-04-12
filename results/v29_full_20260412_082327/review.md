@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-44 完成（28/61），ROW 46 待审查**
+> Status: **审查中 — ROW 1-50 完成（31/61），ROW 52 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 39 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2 (ROW 46+ 待审查) |
+| **P2** | 48 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2 (ROW 52+ 待审查) |
 
 ---
 
@@ -255,5 +255,36 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ imaging_plan: CT Chest in 1 year（肺结节随访）✅
 - ✅ Referral: Nutrition (11/30) + rad onc + PT。全部捕获
 - ✅ Letter 整体出色：残余病灶解释通俗 + 肺结节 + AI + BSO/Zoladex 解释 + RT trial + 所有随访全列出
+
+### ROW 46 (coral_idx 185) — 0 P1, 4 P2 ← **新 sample**
+- 48yo post-menopausal, R breast IDC ER+(98%)/PR+(25%→0%)/HER2-。新辅助 taxol→[redacted]。S/p right lumpectomy + bil mastopexy + SLN。残余 3.5cm (cellularity 10-20%), ypT2, 2/2 SLN macrometastases + extranodal extension >2mm。切缘阳性需 re-excision。Sarcoidosis (纵隔 LAD 证实为肉芽肿)。肾动脉瘤。
+- P2: response_assessment 结论写 "No evidence of response to treatment is mentioned" — 但医生明确写 "she had a good response to chemotherapy based on where she started"，病理也写 "probable or definite response to presurgical therapy"。结论与原文相反
+- P2: lab_plan 写 "No labs planned" 但 A/P 贫血部分写 "Repeat in 3-4 months"（铁 panel 复查）
+- P2: Letter 写 "surgery to remove your breasts" 暗示全切，但实际是右乳保乳手术 + 双侧 mastopexy（提升，不是切除）
+- P2: Letter 写 "vitamin D level is a bit low" 但 Vitamin D 36 ng/mL 在正常范围内（20-50）
+- ✅ Type: ER+/PR-/HER2- ✅ — 正确用了术后病理（PR 从25%→0%，和 ROW 44 同样是新辅助后受体转换，这次用对了）
+- ✅ Stage: pT2/pN1 with extranodal extension ≈ Stage II ✅。Distant Met: No ✅（内乳淋巴结是 regional N3，纵隔是 sarcoidosis）
+- ✅ recent_changes: letrozole started + abemaciclib discussed ✅。therapy_plan + radiotherapy_plan 准确
+- ✅ procedure_plan: re-excision + MRA ✅。imaging_plan: DEXA + MRA ✅。lab_summary 非常详细
+- ✅ Letter: letrozole + abemaciclib + re-excision + RT + DEXA + MRA + PT 全列出。内容全面
+
+### ROW 49 (coral_idx 188) — 0 P1, 3 P2 ← **新 sample**
+- 50yo, 新诊断左乳 IDC ER+(100%)/PR+(100%)/HER2-, 腋窝淋巴结活检阳性。Stage II。Oncotype low risk (score 11)。计划 L mastectomy 01/06/17。Tamoxifen 待评估血栓风险。多个医生会诊（新辅助 vs 先手术 → 选择先手术）。代理决策人已命名。
+- P2: response_assessment 写 "On treatment" — 但患者尚未开始任何癌症治疗（新诊断，pre-treatment 会诊）
+- P2: supportive_meds 列了 tylenol/alprazolam/HCTZ — 这些是普通药物（止痛/焦虑/高血压），不是癌症治疗支持用药
+- P2: Letter 写 "not to a medication called HER2" — HER2 是蛋白质/受体，不是药物。事实性错误
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Stage: II ✅。findings: 全面（病理+影像+体检）
+- ✅ procedure_plan: L mastectomy 01/06/17 ✅。medication_plan: tamoxifen + 血栓风险评估 ✅
+- ✅ Advance care: surrogate decision maker (spouse) ✅
+- ✅ Letter: 整体通俗 — Stage II 解释 + mastectomy + tamoxifen + 血栓风险 + XRT 可能性。除 HER2 误称外准确
+
+### ROW 50 (coral_idx 189) — 0 P1, 2 P2 ← v28 已审查
+- 58yo, de novo Stage IV (T2N1M1) metastatic IDC HR+/HER2-, 转移至肺/淋巴结/肝/骨（2013年）。AC x4 → tamoxifen+lupron → letrozole+lupron+ibrance（2015年起）。Dec 2021 restaging 良好控制。新增乳房进展（DCIS+IDC），考虑 mastectomy。PMS2 mutation。Video consult/second opinion。Full code。
+- P2: medication_plan 写 "Second line lupron, letrozole started October 2014 and ibrance added January 2015" — 描述的是治疗历史，不是当前或未来计划。当前计划应是继续 ibrance+letrozole+lupron + 考虑 mastectomy
+- P2: Referral Genetics 写 "None" 但 A/P 明确写 "Referral to genetics for pathogenic PMS 2 mutation"
+- ✅ second opinion: yes ✅。Type: HR+/HER2- IDC with DCIS ✅。Stage: Stage IV ✅
+- ✅ response_assessment: "disease under good control" ✅ — 准确简洁
+- ✅ current_meds: ibrance + xgeva + letrozole ✅（lupron 在 med list 标记 not taking）
+- ✅ goals: palliative ✅。genetic_testing_plan: PMS2 mutation referral ✅
 
 
