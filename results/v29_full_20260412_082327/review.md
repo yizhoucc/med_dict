@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-65 完成（41/61），ROW 66 待审查**
+> Status: **审查中 — ROW 1-66 完成（42/61），ROW 68 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 61 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1 (ROW 66+ 待审查) |
+| **P2** | 63 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3, 65×1, 66×2 (ROW 68+ 待审查) |
 
 ---
 
@@ -366,5 +366,14 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ procedure_plan: port placement + research core biopsy + lumpectomy ✅
 - ✅ imaging_plan: TTE ✅。genetic_testing_plan: F/u genetic results ✅
 - ✅ Letter: neoadjuvant 解释通俗 + clinical trial + port 解释 + post-op RT + 5-10yr endocrine。准确
+
+### ROW 66 (coral_idx 205) — 0 P1, 2 P2 ← **新 sample**
+- 53yo, right breast metaplastic high-grade carcinoma with squamous differentiation。ER 5-10%/PR 0%/HER2 0%。BRCA negative。6cm+1.4cm masses，皮肤累及。Axillary LN bx negative。CT 无远处转移。Nonspecific 肺结节 ≤4mm。Second opinion (Investigational Therapeutics)。Affirms neoadjuvant plan + pembrolizumab for TNBC。Considering bilateral mastectomy。
+- P2: imaging_plan 写 "Mammogram" 但 A/P 没有计划任何新的 mammogram。可能是 fabrication
+- P2: Letter 写 "a type that makes mucus and has some cells that look like skin cells" — 癌症是 SQUAMOUS differentiation（皮肤样），不是 mucinous（产生粘液）。"Makes mucus" 是事实性错误
+- ✅ second opinion: yes ✅。Type: ER 5-10%/PR 0%/HER2 0% metaplastic carcinoma with squamous differentiation ✅
+- ✅ therapy_plan: neoadjuvant + bilateral mastectomy + adjuvant radiation + pembrolizumab discussed ✅
+- ✅ response_assessment: "Not yet on treatment" ✅。Goals: curative ✅
+- ✅ genetic_testing_plan: germline testing pending ✅。Referral: Genetics (awaiting results) ✅
 
 
