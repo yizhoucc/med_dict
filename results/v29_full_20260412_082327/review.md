@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-2 完成（2/61），ROW 3 开始**
+> Status: **审查中 — ROW 1-5 完成（4/61），ROW 6 开始**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -54,4 +54,16 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Medication_plan: doxycycline + morphine + flexeril + effexor + NS + K + pRBC 完整
 - ✅ Response: "No specific imaging or lab results to assess current response" — 技术上正确（irinotecan 后无新影像）
 - ✅ Letter: 极其全面 — 所有重要临床问题覆盖 + Rad Onc + scans + Hep B monitoring + social work + home health。无编造
+
+### ROW 3 (coral_idx 142) — 0 P1, 0 P2 ✅
+- ✅ 53yo postmenopausal, Stage IIA R breast IDC 1.7cm LN+, ER+/PR+/HER2-(IHC 2+ FISH neg), Ki-67 30-35%
+- ✅ All fields correct. genetic_testing_plan "sent and pending" ✅。Advance care "full code" ✅
+- ✅ Letter: IDC 通俗化 + chemo/surgery/radiation discussed + PET + genetic testing。无编造
+
+### ROW 5 (coral_idx 144) — 0 P1, 0 P2 ✅
+- ✅ 31yo premenopausal, Stage III→IV ER+/PR+/HER2- IDC, metastatic recurrence to cervical LN + brachial plexus + possible sternal bone met
+- ✅ current_meds: anastrozole + palbociclib + leuprolide（三个药全部）。Goals palliative ✅
+- ✅ Response: "stable disease...continue current therapy" — interpretive 但 A/P 支持。Findings 有详细 imaging
+- ✅ Radiotherapy: Rad Onc referral for brachial plexus ✅。Imaging: CT + bone scan ✅
+- ✅ Letter: stable + continue meds + Rad Onc + CT/bone scan + labs monthly + full code。无编造
 
