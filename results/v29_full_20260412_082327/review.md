@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-30 完成（19/61），ROW 33 开始重做（之前 ROW 33-100 偷懒了，全部删除重做）**
+> Status: **审查中 — ROW 1-44 完成（28/61），ROW 46 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 18 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2 (ROW 33+ 待审查) |
+| **P2** | 39 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2 (ROW 46+ 待审查) |
 
 ---
 
@@ -164,5 +164,96 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Type: 非常详细（含 IHC score 和 FISH ratio）。PET: no metastases ✅
 - ✅ Medication_plan: 出色 — THP/AC or TCHP + trastuzumab 1yr complete regimen description
 - ✅ Procedure: Mediport placement ✅。Imaging: TTE ✅。Lab: Creatinine + tumor markers ✅
+
+### ROW 33 (coral_idx 172) — 0 P1, 3 P2 ← **新 sample**
+- 63yo, left ER+/PR+/HER2- ILC, originally stage IIB → IIIA. S/p bilateral mastectomies + TC x6 + XRT. On adjuvant letrozole since 2011. NED on exam.
+- P2: findings 写 "No evidence of lymphedema" 但体检 Musculoskeletal 记录 "+***** lymphedema"（ROS 写 no lymphedema vs 体检 positive，笔记本身矛盾，但 findings 应反映体检而非 ROS）
+- P2: response_assessment 写 "on imaging and exam" 但笔记中唯一的影像是 "Bone density April 2013"（骨密度是骨质疏松筛查，不是癌症监测影像），NED 仅基于体检
+- P2: Letter 写 "If a medication continues to be an issue, an MRI of the brain may be considered" — 原文是 "If [headaches] continues, consider MRI brain"，[REDACTED] 导致 letter 误解为药物问题而非头痛
+- ✅ Type: ER+/PR+/HER2- ILC ✅。Stage: IIB→IIIA ✅（笔记 PMH 明确写 "stage IIB...stage IIIA"）
+- ✅ current_meds: letrozole ✅。Goals: curative ✅。Follow-up: 6 months ✅
+- ✅ Medication_plan: continue letrozole + calcium/vitamin D + NSAIDs PRN ✅（完全匹配 A/P）
+- ✅ Imaging: Consider MRI brain ✅。No labs/procedures/referrals planned ✅
+- ✅ Letter 其余内容准确：follow-up visit + NED + no spread + continue letrozole + calcium/D + NSAIDs + 6mo follow-up
+
+### ROW 34 (coral_idx 173) — 0 P1, 4 P2 ← **新 sample**
+- 71yo, Stage III left breast cancer, 多次复发。2011 IDC ER+/PR low/HER2-（拒绝手术扩大+化疗）。2012 快速复发→双乳切除+不完整 AC/T+自行停 anastrozole。2020 第二次局部复发→1.7cm IDC grade 3, 肌肉侵犯, 切缘阴性。PET-CT 左乳+左第6肋不确定意义的摄取。
+- P2: Type_of_Cancer 写 "ER+/PR-/HER2-" 用的是 2012 病理，但 2020 复发 FNA 显示 PR+(50%)。应用最新受体状态
+- P2: current_meds 写 "arimidex" 但患者已自行停药。A/P 明确写 "stopping anastrozole against medical advice" 且计划是 "resumption of hormonal therapy"（恢复内分泌治疗）。笔记本身矛盾（HPI 写 "currently on arimidex" 但 A/P 说已停）
+- P2: response_assessment 写 "cancer is not responding to the current treatment regimen" — 但 A/P 明确说复发是因为患者自行停药一年后发生的，不是治疗失败。误导性结论
+- P2: lab_plan 写 "No labs planned" 但 A/P 计划第一项就是 "check labs"
+- ✅ Stage: Stage III ✅。Distant Metastasis: "Not sure" ✅（PET 6th rib 不确定意义，诚实回答）
+- ✅ recent_changes: tamoxifen 20mg PO qD ✅。Goals: curative ✅（无确认远处转移，仍可治愈意图）
+- ✅ radiotherapy_plan: chest wall RT + 转诊 ✅。Referral: Specialty 有 RT 转诊 ✅
+- ✅ Letter: 局部复发解释通俗 + tamoxifen 新药 + RT 转诊 + 6mo follow-up。未提及 current_meds（避免了 arimidex 错误）
+
+### ROW 36 (coral_idx 175) — 0 P1, 3 P2 ← **新 sample**
+- 27yo, pT3N0 right breast ER+/PR+/HER2- grade III mixed ductal+mucinous ca. S/p bilateral mastectomies (8.4cm, 0/4 LN). Taxol→Abraxane（grade 3 反应）。当前 cycle 8/12。Zoladex 保卵。右臂肿胀待排 DVT。
+- P2: lab_summary 只抓了 CBC（04/10），漏掉完整 CMP panel（04/03：Albumin 3.3L, ALP, ALT, AST, BUN, Cr, 电解质等全部缺失）
+- P2: procedure_plan "If negative for DVT, will see Dr. [REDACTED] next week" — 把 DVT 阴性后的随访（A/P 说 PT for lymphedema）和 rad onc 转诊混在一起了
+- P2: Letter 同样错误 — "If the test is negative, you will see your doctor next week" 应该是 "PT for lymphedema management"
+- ✅ Type: ER+/PR+/HER2- grade III mixed ductal+mucinous ✅。Stage: pT3N0 ✅。Metastasis: No ✅
+- ✅ current_meds: Abraxane + zoladex ✅。supportive_meds: Zofran, Compazine ✅
+- ✅ recent_changes: Switched to Abraxane from Taxol due to infusion reaction ✅
+- ✅ medication_plan 非常全面: Abraxane + zoladex + valtrex + lexapro + ativan + ambien ✅
+- ✅ radiotherapy_plan: rad onc referral ✅。imaging_plan: Doppler ✅。Referral: rad onc ✅
+- ✅ Letter 整体出色：Abraxane 解释通俗 + zoladex 保卵解释 + Doppler 解释 + 抗焦虑药全列出
+
+### ROW 37 (coral_idx 176) — 0 P1, 1 P2 ← **新 sample**
+- 61yo, Stage IIA left TNBC (ER-/PR-/HER2-) IDC, 2.3cm, node negative, grade 3. S/p bilateral mastectomies July 2020. Medical Oncology Consult Note (Video Visit). 推荐 dd AC → Taxol。无激素治疗和放疗指征。
+- P2: second opinion 写 "no" 但这是会诊 — 患者已有肿瘤科医生（"Her oncologist at ***** has recommended adjuvant chemotherapy"），本医生 "I agree with that recommendation"，患者 "will proceed with chemotherapy at *****"（回原机构治疗）。功能上是 second opinion。
+- ✅ Type: ER-/PR-/HER2- IDC ✅。Stage: IIA ✅。Metastasis: No ✅
+- ✅ current_meds: empty ✅（尚未开始治疗）。response_assessment: "Not yet on treatment" ✅
+- ✅ therapy_plan: dd AC → Taxol + 无激素/放疗 ✅。Advance care: Full code ✅
+- ✅ Letter: IDC 解释通俗（"started in milk ducts"）+ adjuvant chemo 解释（"after surgery to prevent coming back"）+ full code 解释。准确
+
+### ROW 40 (coral_idx 179) — 0 P1, 3 P2 ← **新 sample**
+- 62yo, MS（25年）on immunosuppression, newly diagnosed Stage 2 ER+(95)/PR+(5)/HER2-(FISH 1.2) G1 IDC right breast. 2.3cm, 1 SLN micromet. S/p partial mastectomy. 骨质疏松 on Prolia。
+- P2: supportive_meds 写 "ondansetron" 但这是患者的慢性 GI 症状用药（2011年起腹痛/恶心），不是癌症治疗的支持用药（她还没开始化疗）
+- P2: response_assessment 写 "On treatment; response assessment not available" 但她还没开始任何癌症治疗！刚给了 letrozole 处方且有条件限制（"if no radiation is planned"）
+- P2: Letter 写 "You are also taking a medication called ondansetron to help with nausea" — ondansetron 错误传播到 letter，给患者造成误解
+- ✅ Type: ER 95/PR 5/HER2 2+ FISH neg G1 IDC ✅（用了手术病理的精确数值）
+- ✅ genetic_testing_plan: 出色 — 解释了为什么不做分子检测（患者拒绝化疗）
+- ✅ therapy_plan: letrozole adjuvant endocrine + no chemo + Prolia for bones。全面
+- ✅ Imaging: DEXA ✅。Referral: PT ✅。Follow-up: 3 months ✅
+- ✅ Letter: "bone density test (DEXA)" + "physical therapy" + letrozole 解释通俗。除 ondansetron 外准确
+
+### ROW 41 (coral_idx 180) — 0 P1, 2 P2 ← **新 sample**
+- 32yo, ATM mutation carrier。左乳 3cm grade 3 IDC, ER+(90%)/PR weakly+(1%)/HER2-(IHC 1+, FISH neg)。Ki-67 30%, LVI+, 1/3 SLN 微转移。MammaPrint High Risk。S/p bilateral mastectomies。Pre-chemo planning → AC-Taxol（Taxol first x12 → AC）。之后 OFS+AI + 可能 ribociclib trial。
+- P2: Stage_of_Cancer 写 "Not mentioned in note" — 虽然笔记没有明确写 "Stage X"，但可从 3cm + 1 SLN micromet 推断 pT2N1mi ≈ Stage IIA
+- P2: Letter 文本乱码 "a chemotherapy regimenaxol" — 应为 "AC-Taxol" 或 "a chemotherapy regimen called AC-Taxol"。生成 artifact
+- ✅ Type: ER+(90%)/PR weakly+(1%)/HER2 1+ IHC ✅。Metastasis: No ✅
+- ✅ current_meds: empty ✅（尚未开始治疗）。response_assessment: "Not yet on treatment" ✅
+- ✅ medication_plan: 非常全面 — Taxol x12 → AC + OFS+AI + ribociclib trial ✅
+- ✅ procedure_plan: port placement ✅。lab_summary: 全面（Ferritin + CBC + HCG）✅
+- ✅ Letter: 手术解释通俗 + port 解释 + OFS 解释（"stops your ovaries from making estrogen"）出色
+
+### ROW 42 (coral_idx 181) — 0 P1, 2 P2 ← **新 sample**
+- 41yo, 右乳 0.9cm + 0.3cm IDC 均 grade 1，0/5 SLN，ER+/PR+(95%)/HER2-。绝经前。已完成 3 周 RT。开始 tamoxifen 5 年疗程。
+- P2: Stage_of_Cancer 写 "Not mentioned in note" 但笔记有 staging form 写了 "Stage IIA (pT2...)"（虽然 staging form 数据与病理矛盾——pT2 对应 0.9cm 肿瘤不合理，受体状态也写反了）
+- P2: current_meds 写 "tamoxifen" 但本次就诊刚开的处方（"I have written a prescription"，"ready to begin"）。尚未开始服用
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Metastasis: No ✅
+- ✅ medication_plan: Start 5 year tamoxifen ✅。imaging_plan: diagnostic mammogram at next visit ✅
+- ✅ follow_up: 4-6 weeks to assess tolerance ✅
+- ✅ Letter: tamoxifen 解释通俗（"prevent cancer from coming back"）+ mammogram + follow-up。简洁准确
+
+### ROW 43 (coral_idx 182) — 0 P1, 1 P2 ← **新 sample**
+- 38yo, BRCA neg。第二原发 Stage I left TNBC。1.3cm grade 3 IDC, 0/2 SLN, ER-/PR-/HER2-, Ki-67>80%。S/p bilateral mastectomies。将行 taxol+carboplatin x4 adjuvant。Full code。
+- P2: Letter 写 "The cancer was a type that started in the milk ducts and was not responding to hormones" — 对 TNBC 的描述有歧义，可理解为"用激素治疗但不响应"而非"癌细胞没有激素受体"。更准确的表述应该是 "does not grow in response to hormones"
+- ✅ Type: ER-/PR-/HER2- IDC ✅。Stage: Stage I (second primary) ✅ — 好，标注了第二原发
+- ✅ lab_summary: 全面（CMP + CBC + 甲状腺 + HCG，来自 02/17 术前检查）
+- ✅ supportive_meds: granisetron + prochlorperazine + senna ✅（化疗前准备）
+- ✅ medication_plan: taxol + carboplatin x4 ✅。Advance care: Full code ✅
+- ✅ Letter: 手术解释通俗 + taxol/carboplatin 解释 + 止吐/通便药 + 随访/抽血。整体准确
+
+### ROW 44 (coral_idx 183) — 0 P1, 2 P2 ← **新 sample**
+- 33yo, BRCA1+, ER+/PR+/HER2- node+ left breast IDC。新辅助 dd AC x4 → Taxol x4 → bilateral mastectomies + left SLN。Residual 1cm grade 2 IDC (cellularity 15%), 1/18 nodes micromet。PR 从+转−。4mm 肺结节稳定。RT clinical trial (3v5周) + AI after RT + BSO planned。
+- P2: Type 写 "ER+/PR+/HER2-"（初始诊断）但 A/P 明确写残余肿瘤 "ER+/PR-/HER2-" — PR 在新辅助化疗后从阳性转为阴性。应用当前受体状态
+- P2: Letter 使用医学术语 "pathologic complete response (pCR)" 和 "neoadjuvant therapy" — 前面已用通俗语言解释了（"treatments you had before your surgery"），后面再用专业术语是多余的
+- ✅ response_assessment: 非常出色！准确识别为 "did not achieve pCR to neoadjuvant therapy"。这是正确的临床解读
+- ✅ therapy_plan: 非常全面 — RT trial + AI after RT + BSO + Zoladex backup + ribociclib trial 可能性
+- ✅ imaging_plan: CT Chest in 1 year（肺结节随访）✅
+- ✅ Referral: Nutrition (11/30) + rad onc + PT。全部捕获
+- ✅ Letter 整体出色：残余病灶解释通俗 + 肺结节 + AI + BSO/Zoladex 解释 + RT trial + 所有随访全列出
 
 
