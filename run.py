@@ -1824,6 +1824,41 @@ def main():
                     resp["response_assessment"] = "On treatment; response assessment not available from current visit."
                     print(f"    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment")
 
+        # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29]
+        # Oncotype/MammaPrint are prognostic tools, not treatment response assessments
+        resp = keypoints.get("Response_Assessment", {})
+        if isinstance(resp, dict):
+            resp_val = resp.get("response_assessment", "") or ""
+            if resp_val and len(resp_val) < 50:
+                # Short response that looks like a genomic test result
+                is_genomic = bool(re.search(
+                    r'(?i)(?:low|high|intermediate)\s+risk\s+\[?REDACTED\]?|'
+                    r'(?:oncotype|mammaprint|genomic)\s+(?:score|result|test)',
+                    resp_val))
+                if is_genomic:
+                    # Check if note has post-neoadjuvant surgical pathology
+                    note_lower_rg = note_text.lower()
+                    has_neoadj_path = bool(re.search(
+                        r'(?:s/p|status post|post)\s*(?:neoadjuvant|NAC)|'
+                        r'(?:residual\s+(?:tumor|disease|carcinoma))|'
+                        r'(?:mastectomy|lumpectomy).*(?:neoadjuvant|preoperative)',
+                        note_lower_rg))
+                    if has_neoadj_path:
+                        # Try to extract pathology response from findings
+                        find_dict = keypoints.get("Clinical_Findings", {})
+                        find_val_rg = find_dict.get("findings", "") if isinstance(find_dict, dict) else ""
+                        if find_val_rg:
+                            # Look for residual tumor / pathologic response info in findings
+                            path_sentences = [s.strip() for s in re.split(r'[.;]', find_val_rg)
+                                              if re.search(r'(?i)residual|patholog|mastectomy|lumpectomy|'
+                                                           r'lymph node|pCR|tumor bed|treatment effect', s)]
+                            if path_sentences:
+                                resp["response_assessment"] = ". ".join(path_sentences[:3]) + "."
+                                print(f"    [POST-RESPONSE-GENOMIC] Replaced genomic test with surgical pathology: '{resp_val}' → '{resp['response_assessment'][:80]}...'")
+                            else:
+                                resp["response_assessment"] = "Post-neoadjuvant pathologic assessment — see findings for surgical pathology details."
+                                print(f"    [POST-RESPONSE-GENOMIC] Replaced genomic test with pathology reference: '{resp_val}'")
+
         # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
         for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
             drug_dict = keypoints.get(drug_field_key, {})
@@ -2144,6 +2179,17 @@ def main():
                 # Check meds
                 for drug in ER_POS_DRUGS:
                     if drug in meds_val or drug in note_lower_er:
+                        # v29: Skip goserelin/zoladex/leuprolide/lupron if used for fertility preservation
+                        if drug in ("goserelin", "zoladex", "leuprolide", "lupron"):
+                            fertility_ctx = bool(re.search(
+                                r'fertility\s+preserv|egg\s+harvest|cryopreserv|'
+                                r'goserelin.*fertility|fertility.*goserelin|'
+                                r'during\s+chemotherapy.*fertility|fertility.*during\s+chemo',
+                                note_lower_er))
+                            tnbc_ctx = bool(re.search(r'\btnbc\b|triple.negative', note_lower_er))
+                            if fertility_ctx or tnbc_ctx:
+                                print(f"    [POST-ER-CHECK] Skipped {drug} — fertility preservation / TNBC context")
+                                continue
                         er_info = "ER+ (inferred from " + drug + ")"
                         # v17: avoid leading comma when type_val is empty
                         if type_val.strip():
@@ -2313,6 +2359,50 @@ def main():
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
+        # POST-TYPE-TNBC-ER: If note says TNBC but Type has "ER+ (inferred from goserelin)", remove the wrong inference [v29]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val_te = cancer.get("Type_of_Cancer", "") or ""
+            if isinstance(type_val_te, str) and "ER+" in type_val_te and "inferred from goserelin" in type_val_te.lower():
+                ap_text_te = (assessment_and_plan or '').lower()
+                note_lower_te = note_text.lower()
+                tnbc_found = bool(re.search(r'\btnbc\b|triple.negative', ap_text_te)) or \
+                             bool(re.search(r'\btnbc\b|triple.negative', note_lower_te))
+                er_neg_found = bool(re.search(r'ER[\s/]*(?:negative|neg\b|-)|ER/PR/.*negative', note_lower_te))
+                if tnbc_found or er_neg_found:
+                    old_val_te = type_val_te
+                    # Remove the "ER+ (inferred from goserelin)" part
+                    type_val_te = re.sub(r',?\s*ER\+\s*\(inferred from goserelin\)', '', type_val_te).strip().rstrip(',').strip()
+                    cancer["Type_of_Cancer"] = type_val_te
+                    print(f"    [POST-TYPE-TNBC-ER] Removed 'ER+ (inferred from goserelin)' — note says TNBC/ER-")
+                    print(f"      before: '{old_val_te}'")
+                    print(f"      after:  '{type_val_te}'")
+
+        # POST-TYPE-HER2-BREAST-OVERRIDE: If breast biopsy says HER2- but Type says HER2+ (confusion with other cancer) [v29]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val_ho = cancer.get("Type_of_Cancer", "") or ""
+            if isinstance(type_val_ho, str) and re.search(r'(?i)HER2\s*\+|HER2\s*pos', type_val_ho):
+                # Check if breast cancer biopsy/pathology in A/P explicitly says HER- / FISH negative / ratio < 2.0
+                ap_lower_ho = (assessment_and_plan or '').lower()
+                breast_her_neg = bool(re.search(
+                    r'(?:breast|IDC|ductal).*?(?:HER-|her\s*2\s*neg|FISH\s*(?:ratio\s*)?(?:1\.\d|0\.\d)|'
+                    r'HER-?\s*(?:with|,)\s*FISH\s*(?:ratio\s*)?(?:1\.\d))',
+                    ap_lower_ho, re.IGNORECASE))
+                # Also check for explicit "ER+/PR+/HER-" pattern in A/P
+                if not breast_her_neg:
+                    breast_her_neg = bool(re.search(
+                        r'ER\+/PR\+/HER-|ER\+.*PR\+.*(?:her|HER)\s*(?:-|neg)',
+                        assessment_and_plan or '', re.IGNORECASE))
+                if breast_her_neg:
+                    old_val_ho = type_val_ho
+                    type_val_ho = re.sub(r'(?i)HER2\s*\+', 'HER2-', type_val_ho)
+                    type_val_ho = re.sub(r'(?i)HER2\s*pos\w*', 'HER2-', type_val_ho)
+                    cancer["Type_of_Cancer"] = type_val_ho
+                    print(f"    [POST-TYPE-HER2-BREAST-OVERRIDE] Breast biopsy says HER2-, overrode Type HER2+")
+                    print(f"      before: '{old_val_ho}'")
+                    print(f"      after:  '{type_val_ho}'")
+
         # POST-TYPE-UNCLEAR: If note says biomarkers/receptors "unclear"/"unknown", correct fabricated receptor status [v23]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
@@ -2371,6 +2461,43 @@ def main():
                 if is_recheck and not has_genetic_keyword:
                     gen_test["genetic_testing_plan"] = "None planned."
                     print(f"    [POST-GENETICS-RECHECK] Cleared non-genetic recheck: '{gen_val[:60]}'")
+
+        # POST-STAGE-FINAL: Final consistency check — Stage IV must agree with Distant Metastasis [v29]
+        # This runs AFTER all other POST hooks to catch cases where earlier hooks
+        # created inconsistencies (e.g., POST-STAGE-DISTMET downgraded but POST-STAGE-METASTATIC re-upgraded,
+        # or Distant Metastasis was corrected by gates after Stage was already downgraded)
+        cancer_final = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_final, dict):
+            stage_final = cancer_final.get("Stage_of_Cancer", "") or ""
+            met_final = cancer_final.get("Metastasis", "") or ""
+            dist_final = cancer_final.get("Distant Metastasis", "") or ""
+            stage_iv_final = bool(re.search(r'stage\s*iv|metastatic', stage_final, re.IGNORECASE))
+            dist_no_final = dist_final.lower().startswith("no") if dist_final else True
+
+            # Case 1: Stage says IV but Distant Met says No — downgrade
+            if stage_iv_final and dist_no_final:
+                met_lower_f = met_final.lower() if met_final else ""
+                DISTANT_SITES_F = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                   "ovary", "skin", "distant", "hepatic", "pulmonary", "osseous", "cerebral"]
+                has_distant_f = any(ds in met_lower_f for ds in DISTANT_SITES_F)
+                if not has_distant_f:
+                    cleaned_f = re.sub(r'(?i)\bStage\s*IV\s*\(?\s*metastatic\s*\)?', 'Stage III', stage_final)
+                    cleaned_f = re.sub(r'(?i)\bmetastatic\s*\(?\s*Stage\s*IV\s*\)?', 'Stage III', cleaned_f)
+                    cleaned_f = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III', cleaned_f)
+                    cleaned_f = cleaned_f.strip().rstrip(',').strip()
+                    if cleaned_f and cleaned_f != stage_final:
+                        cancer_final["Stage_of_Cancer"] = cleaned_f
+                        print(f"    [POST-STAGE-FINAL] Stage IV but Distant Met=No (final check): '{stage_final}' → '{cleaned_f}'")
+
+            # Case 2: Stage was downgraded to III but Distant Met says Yes — re-upgrade
+            if not stage_iv_final and "stage iii" in stage_final.lower():
+                dist_yes = dist_final.lower().startswith("yes") if dist_final else False
+                if dist_yes:
+                    # Distant Met says Yes but Stage says III — this is inconsistent, upgrade back
+                    cleaned_f = re.sub(r'(?i)\bStage\s*III\b', 'Stage IV', stage_final)
+                    if cleaned_f != stage_final:
+                        cancer_final["Stage_of_Cancer"] = cleaned_f
+                        print(f"    [POST-STAGE-FINAL] Stage III but Distant Met=Yes: '{stage_final}' → '{cleaned_f}'")
 
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
