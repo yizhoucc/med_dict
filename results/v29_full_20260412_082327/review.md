@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-61 完成（38/61），ROW 63 待审查**
+> Status: **审查中 — ROW 1-64 完成（40/61），ROW 65 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 56 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1 (ROW 63+ 待审查) |
+| **P2** | 60 | — | ROW 1×2, 6×2, 7×2, 8×1, 11×2, 12×1, 14×1, 17×1, 20×1, 22×2, 33×3, 34×4, 36×3, 37×1, 40×3, 41×2, 42×2, 43×1, 44×2, 46×4, 49×3, 50×2, 52×3, 53×1, 54×0, 57×2, 59×1, 61×1, 63×1, 64×3 (ROW 65+ 待审查) |
 
 ---
 
@@ -339,5 +339,22 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ procedure_plan: lumpectomy + IORT + reconstruction 04/12/21 ✅
 - ✅ medication_plan: Tamoxifen vs OFS + AI ✅。Goals: curative ✅
 - ✅ Letter 非常出色：ER/PR/HER2 解释通俗（"uses hormones to grow" / "protein that makes cancer grow faster"）+ MRI 可疑区域阴性 + IORT 解释 + Oncotype 后续检查 + 随访安排
+
+### ROW 63 (coral_idx 202) — 0 P1, 1 P2 ← v28 已审查
+- 49yo, locally advanced ER+/PR-/HER2- left IDC。新辅助 dd AC x4 → paclitaxel（停）→ Abraxane。MRI 显示 dramatic response 但术后残余 3.8cm（path 失望）。3/4 SLN+（15mm, 1-2mm, ITC）。切缘+→ re-excision。On letrozole + XRT。Second opinion (televisit)。
+- P2: response_assessment 写 "currently responding to treatment" 但 A/P 明确写 "Her overall response to chemo was disappointing since it appeared that she had responded much better on imaging"。影像和病理矛盾，extraction 选了影像结论而非 A/P 的临床评估
+- ✅ Stage: IIIA (S/P neoadjuvant) ✅。second opinion: yes ✅。Type: ER+/PR-/HER2- ✅
+- ✅ medication_plan: letrozole + E2/FSH monitoring + OS/oophorectomy + DEXA + abemaciclib。非常全面
+- ✅ lab_plan: E2/FSH q1-2 months ✅。imaging_plan: DEXA ✅
+- ✅ Letter: abemaciclib + OS/oophorectomy + DEXA + Mychart。通俗
+
+### ROW 64 (coral_idx 203) — 0 P1, 3 P2 ← v28 已审查
+- 28yo, 新诊断左乳 IDC 10.3cm, HR+/HER2-, 腋窝+。骨扫描胸骨（manubrium）可疑转移灶→活检计划中。Oligometastatic disease 讨论。On dd AC。Second opinion (televisit)。Full code。
+- P2: Stage 写 "Originally Stage IV-IV, now Stage IV" — 乱码。笔记写 "Stage III-IV"（不确定，待胸骨活检）。POST hook artifact
+- P2: Metastasis 写 "Yes (to the sternum)" 作为确定结论，但胸骨病灶是 "probably metastatic"，活检尚未完成。应为 "Probable" 或 "Pending biopsy"
+- P2: current_meds 为空，但患者正在接受 dd AC 化疗（"She was started on dd AC and is tolerating okay"）
+- ✅ second opinion: yes ✅。supportive_meds: 化疗支持药物全面（dex + colace + olanzapine + zofran + compazine）
+- ✅ therapy_plan: 全面 — chemo → surgery → radiation → sternum treatment → hormonal blockade
+- ✅ procedure_plan: sternal biopsy ✅。Advance care: Full code ✅
 
 
