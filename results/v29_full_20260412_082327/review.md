@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-84 完成（51/61），ROW 85 待审查**
+> Status: **审查中 — ROW 1-85 完成（52/61），ROW 86 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 73 | — | ...73×2, 78×0, 80×1, 82×2, 83×0, 84×1 (ROW 85+ 待审查) |
+| **P2** | 74 | — | ...78×0, 80×1, 82×2, 83×0, 84×1, 85×1 (ROW 86+ 待审查) |
 
 ---
 
@@ -439,5 +439,12 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Metastasis: Yes (bone, soft tissue, liver, possibly meninges) ✅ — 全面
 - ✅ therapy_plan: 极其详细 — CT CAP + LP + MRI spine + rad onc + steroids + xeloda + fulvestrant+[PI3Ki] at PD
 - ✅ current_meds: capecitabine + zoledronic acid ✅。lab_summary: 简明（WBC, Hg, Plt, Cr, Tbili, ALT）✅
+
+### ROW 85 (coral_idx 224) — 0 P1, 1 P2 ← v28 已审查
+- 61yo, metastatic ER+/PR-/HER2- ILC。Bone+muscle+brain+liver。S/p neoadjuvant AI+palbociclib → bilateral mastectomies → adjuvant AC/T → XRT → met disease on exemestane → fulvestrant/palbociclib (PD)。Brain mets s/p GK。Foundation One: FGFR1 amp。Evaluating phase 1 trial olaparib+[drug]。Steroids for facial numbness/headache。
+- P2: lab_summary 写 "No labs in note" 但笔记有 CA 15-3（360→259→45.3 trending down）和 CEA（25.6→14.1→3.8 trending down）— 临床重要的肿瘤标志物遗漏
+- ✅ Type: ER+/PR-/HER2- ILC ✅。Stage: IIIA→IV ✅。Goals: palliative ✅
+- ✅ response_assessment: "progressed on fulvestrant/palbociclib with new liver mets" ✅ — 准确
+- ✅ therapy_plan: phase 1 trial + rad onc + radiation washout ✅。Referral: Rad Onc ✅
 
 
