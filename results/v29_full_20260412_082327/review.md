@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-80 完成（48/61），ROW 82 待审查**
+> Status: **审查中 — ROW 1-82 完成（49/61），ROW 83 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 70 | — | ...66×2, 68×1, 70×1, 72×2, 73×2, 78×0, 80×1 (ROW 82+ 待审查) |
+| **P2** | 72 | — | ...70×1, 72×2, 73×2, 78×0, 80×1, 82×2 (ROW 83+ 待审查) |
 
 ---
 
@@ -418,5 +418,12 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - P2: response_assessment 写 "On treatment" 但本次是化疗前就诊（"Start TC x 4 on 04/11/19"，尚未开始）
 - ✅ therapy_plan: TC x4 + RT 6w with boost + axilla/SC fields ✅。supportive_meds: dex + zofran + compazine ✅
 - ✅ lab_summary: 全面（CMP + CBC + Hep B + Estradiol）✅。Goals: curative ✅
+
+### ROW 82 (coral_idx 221) — 0 P1, 2 P2 ← v28 已审查
+- 52yo, Stage II (IB per staging form) right breast mixed ductal+lobular ca。4.3cm, LN+ (micro), ER+/PR+/HER2-。S/p right lumpectomy + SLN。Low risk Oncotype → no chemo。Plan: RT → AI + bone protection。DEXA ordered。
+- P2: response_assessment 写 "On treatment" — 术后新患者会诊，尚未开始癌症治疗
+- P2: medication_plan 列了非癌症药物（APAP, ibuprofen, HCTZ, lisinopril, metformin）而非计划中的 AI + bone medication
+- ✅ Type: ER+/PR+/HER2- mixed ductal and lobular ✅。Goals: curative ✅
+- ✅ therapy_plan: no chemo + RT + AI + bone med ✅。imaging_plan: DEXA ✅。Advance care: Full code ✅
 
 
