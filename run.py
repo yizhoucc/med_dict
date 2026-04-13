@@ -1382,6 +1382,9 @@ def main():
         proc = keypoints.get("Procedure_Plan", {})
         if isinstance(proc, dict):
             proc_val = proc.get("procedure_plan", "") or ""
+            if isinstance(proc_val, list):
+                proc_val = ", ".join(str(x) for x in proc_val)
+            proc_val = str(proc_val)
             if proc_val and proc_val.lower() not in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
                 PROC_BLACKLIST = [
                     "ihc", "fish", "receptor testing", "staining",
