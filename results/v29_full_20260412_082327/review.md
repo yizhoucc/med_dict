@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-85 完成（52/61），ROW 86 待审查**
+> Status: **审查中 — ROW 1-91 完成（57/61），ROW 92 待审查**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 74 | — | ...78×0, 80×1, 82×2, 83×0, 84×1, 85×1 (ROW 86+ 待审查) |
+| **P2** | 79 | — | ...85×1, 86×1, 87×0, 88×1, 90×1, 91×2 (ROW 92+ 待审查) |
 
 ---
 
@@ -446,5 +446,30 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Type: ER+/PR-/HER2- ILC ✅。Stage: IIIA→IV ✅。Goals: palliative ✅
 - ✅ response_assessment: "progressed on fulvestrant/palbociclib with new liver mets" ✅ — 准确
 - ✅ therapy_plan: phase 1 trial + rad onc + radiation washout ✅。Referral: Rad Onc ✅
+
+### ROW 86 (coral_idx 225) — 0 P1, 1 P2 ← v28 已审查
+- 53yo, metastatic breast cancer。Originally HER2+(FISH 4.37), metastatic biopsy HER2-(IHC 1+, FISH neg)。ER 95%/PR 2%。CHEK2 mutation。Bone+liver+brain mets。On letrozole+ribociclib → PD bone。Recommend fulvestrant +/- everolimus。Palliative XRT。
+- P2: Type 写 "HER2+" 用原始肿瘤受体状态，但转移灶活检（current disease）HER2-(IHC 1+, FISH neg)。应用当前受体状态
+- ✅ response_assessment: bone PD + liver stable ✅。medication_plan: fulvestrant+/-everolimus ✅。Goals: palliative ✅
+
+### ROW 87 (coral_idx 226) — 0 P1, 0 P2 ✅ ← v28 已审查
+- 79yo, R breast IDC grade 2, 2.2cm multifocal, 4/19 LN+ with ECE。ER+/PR+/HER2-。Parkinson's。Second opinion → hormonal therapy alone（no chemo due to age+Parkinson's）。
+- ✅ second opinion: yes ✅。Type: ER+/PR+/HER2- IDC ✅。response: "Not yet on treatment" ✅
+
+### ROW 88 (coral_idx 227) — 0 P1, 1 P2 ← v28 已审查
+- 36yo, Stage III→IV left IDC。ER weak+/PR+/HER2-。23/30 LN+。S/p neoadjuvant AC→Taxol (PD) → bilateral mastectomies → adjuvant gemzar/carbo → XRT → brain mets (resection+SRS)。Lung+LN mets。On Xeloda。Receptor retesting recommended。
+- P2: radiotherapy_plan 描述了过去的治疗（SRS to brain）而非未来计划（A/P 无新 RT 计划）
+- ✅ Type: 准确识别 receptor discordance（primary vs brain met）✅。Goals: palliative ✅
+
+### ROW 90 (coral_idx 229) — 0 P1, 1 P2 ← v28 已审查
+- 51yo, right breast adenocarcinoma Stage II/III。S/p neoadjuvant Taxol (ISPY trial) → R lumpectomy → residual 2.2cm IDC 60% cellularity。On AC cycle 3。BLM gene carrier。Symptom management（N/V, hot flashes, neuropathy, hypothyroidism）。
+- P2: Patient type 写 "New patient" 但患者正在 mid-treatment（cycle 3 AC + cycle 12 trial）。明显是 Follow up
+- ✅ medication_plan: AC cycle 4 + GCSF reduction + granisetron + dex + olanzapine ✅。lab_summary 全面 ✅
+
+### ROW 91 (coral_idx 230) — 0 P1, 2 P2 ← v28 已审查
+- 53yo, Stage IV breast cancer（originally Stage I, 2003）。ER+/PR+/HER2-。Bone mets since 2005。长治疗史（tamoxifen→letrozole/zoladex→BSO→fulvestrant→trials→everolimus/exemestane since 2012）。On everolimus+exemestane+denosumab。RLE edema improving。
+- P2: Type 写 "HER2: not tested" 但笔记明确写 "[redacted]-"（HER2 已检测为阴性）
+- P2: response_assessment 用了 2011 年的旧影像数据（MRI 和 PET）并结论 "not responding"，但 A/P 说 "unclear significance for iliac LN small change" + 正在安排新 PET/CT。当前状态不确定而非明确 PD
+- ✅ current_meds: everolimus + exemestane + denosumab ✅。imaging_plan: PET/CT next week ✅。lab_plan: monthly ✅
 
 
