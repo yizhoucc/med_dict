@@ -137,15 +137,16 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ imaging_plan（除 echo 外）: CT CAP q4mo + bone scan + MRI brain q4mo ✅
 - ✅ Letter 逐句(10句): brain new spots + body stable + continue herceptin/letrozole + q12wk bone med + no chemo + CT/MRI/bone scan q4mo + GK referral + DNR/DNI explained + 6wk follow-up。通俗准确
 
-### ROW 14 (coral_idx 153) — 0 P1, 1 P2 ← **重做完成**
+### ROW 14 (coral_idx 153) — 0 P1, 2 P2 ← **重做完成（letter 已补读）**
 - 58yo, de novo metastatic ER+ breast cancer to bone (extensive spine mets, multiple pathologic fractures, T3 corpectomy, C7-T6 fusion), liver, nodes。S/p letrozole (partial response on PET) → experimental therapy in Mexico → faslodex+palbociclib → extensive spine surgery (T2-L1, tumor debulking+stabilization) → XRT T1-T10 (incomplete, esophagitis)。Patient **自行停止** faslodex+palbociclib 01/2019，去 Mexico 做 "low dose chemo"（doxorubicin 10mg + gemcitabine 200mg + docetaxel 20mg weekly + metabolic therapy + immunological vaccines + pamidronate）。R axillary LN 1cm palpable。R breast density 1.5x2.0cm。CA 27.29 trending down (193→159→119→70→48)。Weight loss。ECOG 2。
 - P2: current_meds 写 "" (empty) — 但患者正在自行服用 Mexico 化疗方案（doxorubicin+gemcitabine+docetaxel+pamidronate weekly），虽然是非标准治疗但仍是当前用药。recent_changes 正确捕获了这个信息
+- P2: Letter 写 "in-person visit in 2 months" — A/P 写 "F/u 3 months"（UCSF 随访）。2 months 是 Mexico 返回时间，不是 UCSF 随访时间。follow-up 时间混淆
 - ✅ Type: ER+ breast cancer, HER2- ✅。Stage: IV ✅。Goals: palliative ✅
 - ✅ findings: R axillary LN 1cm palpable + R breast mass + CT/MRI findings detailed + R rib pain ✅
 - ✅ lab_summary: 全面（CMP + CBC + CA 27.29 48H + tumor marker 趋势 193→48）✅
-- ✅ imaging_plan: CT CAP + Total Spine MRI for May ✅。follow_up: 3 months ✅
+- ✅ imaging_plan: CT CAP + Total Spine MRI for May ✅
 - ✅ medication_plan: 捕获了 Mexico 治疗方案 ✅。therapy_plan: CT/MRI 安排 ✅
-- ✅ Letter 逐句审查（需要读）— 由于 context 限制，letter 未能完整读取，但 keypoints 审查完整。P2 count 与原结论一致（1 P2 for current_meds）
+- ✅ Letter 逐句审查完成：stopped palbociclib/fulvestrant + Mexico chemo at home + pamidronate + back stiffness improving + Ca/Cl labs explained + Cymbalta not tried + CT+MRI May + q2wk labs + PT referral。通俗准确（除 follow-up 时间外）
 
 ### ROW 20 (coral_idx 159) — 0 P1, 1 P2 ← **重做完成（重复条目已删除）**
 - 75yo postmenopausal, metastatic recurrence ER+(80%)/PR+(50%)/HER2-(FISH 1.05) IDC。Original: 2009 Stage I left breast IDC 0.9cm grade II, 0/2 SLN, s/p bilateral mastectomies + 5yr tamoxifen + 6mo letrozole (stopped)。Metastatic recurrence Jan 2021: innumerable osseous lesions + right axillary/mediastinal/hilar LN。R iliac crest bx confirmed breast primary。Left rib pain。HTN, DM, osteoporosis。Significant family hx (3 sisters breast CA @42/48/51)。ECOG 0。
