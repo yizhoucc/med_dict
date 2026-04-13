@@ -55,7 +55,14 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Response: "No specific imaging or lab results to assess current response" — 技术上正确（irinotecan 后无新影像）
 - ✅ Letter: 极其全面 — 所有重要临床问题覆盖 + Rad Onc + scans + Hep B monitoring + social work + home health。无编造
 
-### ROW 3 (coral_idx 142) — 待重做（之前偷懒）
+### ROW 3 (coral_idx 142) — 0 P1, 0 P2 ✅ ← **重做完成**
+- 53yo postmenopausal, mammogram-detected R breast IDC 1.7cm, 1.5cm axillary LN+。ER+/PR+/HER2-(IHC 2+, FISH neg), Ki-67 30-35%。Stage IIA。Multiple opinions（second opinion）。PET + Oncotype pending。Genetic testing sent。Pre-diabetes。Family hx: father leukemia, 2 aunts breast CA。G0P0。Video consult。Full code。ECOG 0。
+- ✅ second opinion: yes ✅（"She has had several opinions"）。Type: ER+/PR+/HER2- IDC ✅
+- ✅ Stage: IIA ✅（staging form）。response: "Not yet on treatment" ✅。Goals: curative ✅
+- ✅ genetic_testing_plan: "sent and pending" ✅。imaging_plan: PET follow-up ✅。Advance care: full code ✅
+- ✅ medication_plan: "None" ✅（等待 PET + Oncotype 结果后再决定）
+- ✅ therapy_plan: 讨论了 chemo + surgery/radiation + hormonal blockade ✅
+- ✅ Letter 逐句审查(10句)：med onc consult + IDC "milk ducts" + 1.7cm + ER+/HER2- + axillary LN "armpit" + PET/genetic pending + chemo systemic risk + surgery/RT local risk + PET then decide + full code explained。通俗准确无编造
 
 ### ROW 5 (coral_idx 144) — 0 P1, 0 P2 ✅
 - ✅ 31yo premenopausal, Stage III→IV ER+/PR+/HER2- IDC, metastatic recurrence to cervical LN + brachial plexus + possible sternal bone met
