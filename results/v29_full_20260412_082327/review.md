@@ -87,7 +87,16 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Response: "probable mild progression...SUV 2.1 (was 1.8)...[REDACTED] 14.8" 出色
 - ✅ Medication_plan: d/c regimen + recommend [REDACTED] next line 正确
 
-### ROW 8 (coral_idx 147) — 待重做（之前偷懒）
+### ROW 8 (coral_idx 147) — 0 P1, 1 P2 ← **重做完成**
+- 29yo premenopausal, Stage III ER-/PR-/HER2+(IHC 3+, FISH 5.7) IDC left breast。Incomplete neoadjuvant TCHP（3 partial cycles, non-adherent, multiple care transfers）。S/p lumpectomy + ALND: **breast pCR** but 3/28 LN+（largest 2.4cm, ECE, Ki-67 75%）。Necrotizing lymphadenitis（Kikuchi's disease）。PET/CTs x3 no distant mets。Family discouraged chemo。3 young sons。Video consult。ECOG 0。
+- **v27 P1 修复确认**: response 正确描述 post-neoadjuvant pathology — breast pCR + 3/28 LN+（2.4cm, extranodal）✅
+- P2: procedure_plan 写 "adjuvant AC x 4 cycles, to be followed by T-DM1" — 化疗不是 procedure，应为 port placement。medication_plan 已正确捕获化疗方案
+- ✅ Type: ER-/PR-/HER2+(IHC 3+, FISH 5.7) IDC ✅ — 含 IHC 和 FISH 精确数值
+- ✅ response_assessment: 非常详细 — incomplete TCHP + breast pCR + 3/28 LN+ + 无远处转移 + 当前无治疗 ✅
+- ✅ medication_plan: adjuvant AC x4 → T-DM1 ✅。radiotherapy_plan: radiation after AC ✅
+- ✅ imaging_plan: echocardiogram prior to AC ✅（anthracycline 心脏毒性监测）。Goals: curative ✅
+- ✅ findings: 全面 — 含手术病理 pCR + LN pathology + Kikuchi's disease + PET/CTs + 超声 ✅
+- ✅ Letter 逐句(12句)：consultation + IDC/HER2+ explained + Stage II-III + surgery pCR + LN+ + no active treatment + oxycodone + AC → T-DM1 explained + radiation + echo + social work + follow-up。通俗准确
 
 ### ROW 9 (coral_idx 148) — 0 P1, 0 P2 ✅ ← **新 sample**
 - ✅ 63yo, kidney transplant recipient, Stage II R breast IDC ER+(85%)/PR-(<1%)/HER2-(IHC 0, FISH neg)
