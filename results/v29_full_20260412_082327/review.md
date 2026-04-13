@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-92 完成（58/61），ROW 94 待审查（剩余 94, 95, 97, 100）**
+> Status: **审查中 — ROW 1-94 完成（59/61），ROW 95 待审查（剩余 95, 97, 100）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 82 | — | ...87×0, 88×3, 90×1, 91×3, 92×1 (ROW 94+ 待审查) |
+| **P2** | 83 | — | ...88×3, 90×1, 91×3, 92×1, 94×1 (ROW 95+ 待审查) |
 
 ---
 
@@ -509,6 +509,16 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ medication_plan: Epirubicin 25mg/m2 D1,8,15 + Neupogen x2 days ✅
 - ✅ lab_plan: liver functions + tumor marker ✅
 - ✅ Letter 逐句准确（除 echo 外）：metastatic follow-up + liver improved + rash side effect + low WBC/Hgb + restarted epirubicin + Neupogen for WBC + liver function/markers check。通俗
+
+### ROW 94 (coral_idx 233) — 0 P1, 1 P2 ← v28 已审查
+- 75yo, left breast IDC 1.6cm, 3 LN+, ER+/PR+/HER2-。Oncotype RS 21 → declined chemo。S/p lumpectomy June 2019 + radiation + letrozole。Genetic testing negative。NED（mammogram normal 12/2020）。Joint pain from AI（takes CBD + gabapentin）。Active lifestyle（walks 300min/week, lacto-ovo vegetarian）。Video consult。Full code。ECOG 0。
+- P2: Letter 写 "You will continue to take this medication and have another dose in May 2021" — 把骨保护药物注射的时间（"[REDACTED] for [REDACTED] therapy and bone protection, next due May 2021"）与 letrozole 日服药混在一起了。Letrozole 是每日口服，不是定期 "dose"
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Stage: IIA (pT1b, N1(sn), G2, Oncotype 21) ✅ — 详细
+- ✅ response_assessment: "No evidence of disease recurrence on imaging and exam" ✅
+- ✅ current_meds: letrozole 2.5mg ✅。Goals: curative ✅。Advance care: full code ✅
+- ✅ imaging_plan: Mammogram November 2021 + High risk screening MRI ✅
+- ✅ follow_up: 6 months ✅
+- ✅ Letter（除骨保护混淆外）：IDC explained + early stage + ER/PR/HER2 explained + Oncotype declined chemo + NED + letrozole + mammogram + MRI + 6mo follow-up + full code。通俗准确
 
 
 
