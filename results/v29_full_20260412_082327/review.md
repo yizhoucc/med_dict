@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-90 完成（56/61），ROW 91 待审查（ROW 86-100 重做中，剩余 91, 92, 94, 95, 97, 100）**
+> Status: **审查中 — ROW 1-91 完成（57/61），ROW 92 待审查（ROW 86-100 重做中，剩余 92, 94, 95, 97, 100）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 78 | — | ...85×1, 86×1, 87×0, 88×3, 90×1 (ROW 91+ 待审查) |
+| **P2** | 81 | — | ...86×1, 87×0, 88×3, 90×1, 91×3 (ROW 92+ 待审查) |
 
 ---
 
@@ -487,6 +487,17 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ lab_summary: 全面（TSH 6.01H + Free T4 12 + CMP 含 ALP 125H + CBC 含 WBC 11.8H + toxic granulation + HCG）
 - ✅ findings: residual 2.2cm IDC 60% cellularity + axilla swelling + port tenderness + hypothyroidism
 - ✅ Letter 逐句审查：adenocarcinoma explained + stage II/III + hypothyroidism/TSH + AC treatment + GCSF/granisetron/dex/olanzapine + gabapentin + cycle 4 with delay + follow-up after XRT。通俗准确，无截断
+
+### ROW 91 (coral_idx 230) — 0 P1, 3 P2 ← v28 已审查
+- 53yo, Stage IV breast cancer（originally Stage I 2003, PD to bone 2005）。ER+/PR+/HER2-。Very long treatment history（tamoxifen → letrozole/zoladex → BSO → fulvestrant 250 → phase trial → fulvestrant 500 → everolimus/exemestane since April 2012）。On everolimus+exemestane+denosumab monthly。RLE edema improving on lasix。+1cm R iliac LN（unclear significance）。PET/CT next week。Labs monthly。ECOG 0。Family hx: mother+paternal aunt breast CA。
+- P2: Type 写 "HER2: not tested" 但 problem list 明确写 "ER+PR+ *****-"（HER2 已检测为阴性）。和 ROW 73, 100 同样的 redacted HER2 误读问题
+- P2: response_assessment 用了 2011 年 11 月的影像数据（MRI pelvis 11/08/11 + PET/CT 11/15/11），这是在当前治疗方案（everolimus+exemestane 04/2012 开始）之前的影像。不应用旧影像来评估当前治疗反应。A/P 写 "unclear significance for iliac LN small change" + 正在安排新 PET/CT
+- P2: Letter 写 "the current treatment is not working as well as we hoped" — 和 response_assessment 一样的时间归因错误。用了旧影像结论误导患者对当前治疗的认知
+- ✅ current_meds: everolimus + exemestane + denosumab ✅
+- ✅ imaging_plan: PET/CT next week ✅。lab_plan: Labs monthly ✅。follow_up: 1 month ✅
+- ✅ Goals: palliative ✅。Stage: I → IV ✅
+- ✅ medication_plan: lasix + KCL + denosumab + topical antifungal ✅
+- ✅ Lab_summary: 全面（LFTs + electrolytes + CBC from 10/16/2012）✅
 
 
 
