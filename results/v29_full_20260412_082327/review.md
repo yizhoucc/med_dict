@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-95 完成（60/61），ROW 97 待审查（剩余 97, 100）**
+> Status: **✅ 审查完成 — 全部 61/61 完成（ROW 86-100 已重新逐个完整审查）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 84 | — | ...90×1, 91×3, 92×1, 94×1, 95×1 (ROW 97+ 待审查) |
+| **P2** | 88 | — | ...91×3, 92×1, 94×1, 95×1, 97×1, 100×2 — **全部完成** |
 
 ---
 
@@ -529,6 +529,26 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ radiotherapy_plan: breast + axilla XRT, referred to Rad Onc ✅
 - ✅ medication_plan: prilosec + capecitabine after XRT ✅。Goals: curative ✅
 - ✅ Letter 逐句审查：MRI response + AC chemo + radiation ("armpit" explained) + capecitabine + adjuvant endocrine + prilosec。准确通俗
+
+### ROW 97 (coral_idx 236) — 0 P1, 1 P2 ← v28 已审查
+- 53yo with MS (relapsing-remitting, on Gilenya/fingolimod), left breast 0.8cm grade 1 IDC ER+(>95%)/PR+(~60%)/HER2-(IHC 1+)。pT1bN0(sn), 0/3 SLN。S/p left partial mastectomy + SLN。Drain still in place（patient concerned about removal）。Oncotype Dx ordered。Plan: anticipate no chemo, adjuvant endocrine therapy (compatible with Gilenya), Rad Onc referral。完整读了手术病理（含 synoptic comment + margin measurements + IHC addendum ER/PR/HER2/Ki-67）。
+- P2: Letter 写 "results of a medication test" — Oncotype Dx 是基因组学/分子检测，不是 "medication test"。[REDACTED] Dx 导致 letter 生成 garbled text。**此 P2 在之前偷懒审查中漏掉了（因为没读 letter）**
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Stage: pT1bN0(sn) ✅
+- ✅ response_assessment: "Not yet on treatment" ✅。Goals: curative ✅。current_meds: empty ✅
+- ✅ medication_plan: MS 协调（Gilenya compatible with future endocrine therapy）✅
+- ✅ genetic_testing_plan: molecular profiling (Oncotype Dx) ✅
+- ✅ Referral: Rad Onc eval ✅。follow_up: 3-4 weeks after Oncotype ✅
+- ✅ Letter（除"medication test"外）：IDC explained + drain concern + MS coordination + molecular profiling + Rad Onc referral。通俗
+
+### ROW 100 (coral_idx 239) — 0 P1, 2 P2 ← v28 已审查
+- 68yo, metastatic breast cancer to liver + multiple sites（dx 1991, 20+年治疗史）。ER+(80%)/PR+(50%)/HER2-。Liver mets (2003: ER60%/PR-/HER2-)。多线治疗后 on gemzar cycle 2（D8 cancelled by patient due to fatigue）。Rising tumor markers (CA 15-3=118, CA 27.29=178, CEA=312)。"Unclear if progressing or tumor flare"。Exam stable。ECOG 1。
+- P2: Type 写 "HER2: not tested" 但 problem list 明确 "ER+/PR+ *****-"（HER2 已检测为阴性）。和 ROW 73, 91 同样的 redacted HER2 误读问题
+- P2: therapy_plan 写 "None" 但 A/P 明确写 "Rec exercise 10 min 3 x a day, Focalin prn and continue with treatment to see if interventions helped with fatigue"（计划是继续 gemzar + 生活方式干预）
+- ✅ response_assessment: 出色 — "Tumor markers increased. Scan too early. Exam stable. Unclear if progressing or tumor flare" — 准确反映临床不确定性，是整个 dataset 中最好的 response_assessment 之一
+- ✅ current_meds: gemzar ✅。Goals: palliative ✅。Stage: IV ✅
+- ✅ lab_summary: 非常全面 — 含 CA 15-3 (118) + CA 27.29 (178) + CEA (312.2) + ALP 172H + AST 57H + CBC (Hgb 9.9L, MCV 104H, ANC 2.85) + CMP
+- ✅ supportive_meds: docusate + oxycodone + senna ✅
+- ✅ Letter 逐句审查：tumor markers explained ("proteins in blood") + scan too early + clinical uncertainty + Gemzar cancelled + Focalin for fatigue + supportive meds + "get stronger" 用了患者自己的话。非常通俗且有共情力
 
 
 
