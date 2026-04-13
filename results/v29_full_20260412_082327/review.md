@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-94 完成（59/61），ROW 95 待审查（剩余 95, 97, 100）**
+> Status: **审查中 — ROW 1-95 完成（60/61），ROW 97 待审查（剩余 97, 100）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 83 | — | ...88×3, 90×1, 91×3, 92×1, 94×1 (ROW 95+ 待审查) |
+| **P2** | 84 | — | ...90×1, 91×3, 92×1, 94×1, 95×1 (ROW 97+ 待审查) |
 
 ---
 
@@ -519,6 +519,16 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ imaging_plan: Mammogram November 2021 + High risk screening MRI ✅
 - ✅ follow_up: 6 months ✅
 - ✅ Letter（除骨保护混淆外）：IDC explained + early stage + ER/PR/HER2 explained + Oncotype declined chemo + NED + letrozole + mammogram + MRI + 6mo follow-up + full code。通俗准确
+
+### ROW 95 (coral_idx 234) — 0 P1, 1 P2 ← v28 已审查
+- 49yo, left ER+/PR+/HER2- IDC。ISPY trial（Pembrolizumab arm）。S/p neoadjuvant T-AC → left lumpectomy + bilateral mastopexy。Residual: 3 foci IDC (largest 0.9cm/20% cellularity), 1/6 SLN+ (0.9cm met)。Post-treatment receptors: ER >95%/PR negative/HER2 equivocal (IHC 2+)。Ki-67 ~5%。Plan: axillary XRT → capecitabine (CREATE-X) → adjuvant endocrine therapy。完整读了 14 部分手术病理（含 gross description + IHC addendum + FISH pending）。
+- P2: imaging_plan 写 "Pt wishes to proceed with breast and axilla XRT next" — XRT 是治疗性放疗，不是诊断性影像。应在 radiotherapy_plan（已正确捕获）而非 imaging_plan
+- ✅ Type: ER+/PR-/HER2- IDC with treatment effect ✅ — 正确用了术后受体状态（PR 从+→neg）
+- ✅ response_assessment: "cancer responding, MRI shows decreased mass" ✅
+- ✅ therapy_plan: 全面 — AC + XRT (breast+axilla) + capecitabine (CREATE-X) + adjuvant endocrine ✅
+- ✅ radiotherapy_plan: breast + axilla XRT, referred to Rad Onc ✅
+- ✅ medication_plan: prilosec + capecitabine after XRT ✅。Goals: curative ✅
+- ✅ Letter 逐句审查：MRI response + AC chemo + radiation ("armpit" explained) + capecitabine + adjuvant endocrine + prilosec。准确通俗
 
 
 
