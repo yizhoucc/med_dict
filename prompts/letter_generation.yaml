@@ -26,7 +26,17 @@ patient_letter: |
       - If breast is clear BUT lymph nodes still have cancer: "After treatment and surgery, no cancer was found in the breast tissue itself, which is a good sign. However, cancer was still found in some of the lymph nodes."
       - NEVER say "no cancer was found in the removed tissue" if lymph nodes were positive.
   14. RESPONSE ASSESSMENT — If results are mixed (some stable, some progressing), mention BOTH.
-  15. MEDICAL TERMS — explain these if they appear:
+  15. HANDLING [REDACTED] CONTENT:
+      - If a field value is mostly [REDACTED] and you cannot determine what the original content means, SKIP that information rather than generating garbled or nonsensical text.
+      - Example: If genetic_testing_plan says "Order an [REDACTED] to provide more information", write "You will have a test to learn more about your cancer" — do NOT try to name the test.
+      - Example: If medication_plan says "[REDACTED] + [REDACTED]", write "You will start new medications as discussed with your doctor" — do NOT generate nonsensical drug names.
+      - NEVER concatenate partial words from [REDACTED] boundaries. If a word is partially redacted, skip it entirely.
+  16. FACTUAL ACCURACY:
+      - HER2 is a PROTEIN (receptor on cancer cells), NOT a medication. Write "a protein called HER2" or "does not have a protein called HER2", NOT "a medication called HER2".
+      - "Squamous differentiation" = cancer cells look like skin cells. It is NOT the same as "mucinous" (mucus-producing). Do NOT confuse these.
+      - "Metaplastic carcinoma with squamous differentiation" = "a rare type of breast cancer where the cells look like skin cells"
+      - When describing imaging results, check if the finding is CURRENT or HISTORICAL. Do NOT present old imaging as new information if the condition has since been treated (e.g., do NOT say "the cancer in your jaw has grown" if the jaw was subsequently treated with radiation and improved).
+  17. MEDICAL TERMS — explain these if they appear:
       - lobular carcinoma = "cancer that started in the milk-producing glands"
       - ductal carcinoma = "cancer that started in the milk ducts"
       - mucinous carcinoma = "a type of cancer that makes mucus"
@@ -39,7 +49,7 @@ patient_letter: |
       - mastectomy = "surgery to remove the breast"
       - ALND = "surgery to remove and check the lymph nodes under the arm"
       - oophorectomy/BSO = "surgery to remove the ovaries"
-  16. EMOTIONAL SUPPORT:
+  18. EMOTIONAL SUPPORT:
       - If the input JSON contains an "emotional_context" field with a NON-EMPTY value, add this EXACT sentence near the closing:
         "We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process."
       - Do NOT name specific emotions. Do NOT say "anxious", "depressed", "scared", or similar.

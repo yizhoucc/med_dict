@@ -54,6 +54,15 @@ Cancer_Diagnosis: |
   - IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
   - IMPORTANT: goserelin (Zoladex) / leuprolide (Lupron) used DURING CHEMOTHERAPY for fertility preservation does NOT indicate ER+. These drugs suppress ovaries to protect eggs during chemo. Only infer ER+ from goserelin/Lupron when it is used as ENDOCRINE THERAPY (adjuvant or palliative, continuous long-term use for hormone suppression). If the note says "goserelin for fertility preservation" or "goserelin during chemotherapy", do NOT add "ER+ (inferred from goserelin)".
   - IMPORTANT: If the patient has MULTIPLE primary cancers (e.g., gastric cancer AND breast cancer), report receptor status ONLY for the BREAST cancer. Do NOT mix receptor status from other cancers. For example, if gastric cancer is HER2+ but breast cancer is HER2-, write HER2- for the breast cancer.
+  - RECEPTOR STATUS PRIORITY — when multiple biopsies exist:
+    If the patient has had MULTIPLE pathology results (core biopsy, surgical specimen, metastatic biopsy), the MOST RECENT pathology takes priority for current receptor status.
+    Always report the CURRENT receptor status first, then note the original if different.
+    Example: If core biopsy was ER+/PR+/HER2- but surgical specimen after neoadjuvant shows ER+/PR-/HER2-, write: "ER+/PR-/HER2- (post-neoadjuvant; originally PR+)"
+    If metastatic biopsy shows different receptors from the primary, the metastatic biopsy is the CURRENT status.
+  - REDACTED HER2 — inference rules:
+    If the note says "[REDACTED] negative" or "*****-" in the A/P receptor status line, AND the treatment is endocrine-only (no anti-HER2 drugs), HER2 is NEGATIVE — do NOT write "not tested".
+    If the Problem List says "ER+PR+ *****-", the "*****" is HER2 and the "-" means NEGATIVE.
+    Only write "HER2: not tested" when there is genuinely NO mention of HER2 testing or results anywhere in the note AND no treatment context to infer from.
 
   For Stage_of_Cancer:
   - Write the AJCC/TNM stage if stated (e.g., "Stage IIA", "pT2N0M0", "Stage IV")
@@ -243,6 +252,13 @@ Response_Assessment: |
      When citing imaging (PET, CT, MRI, bone scan), verify the scan was done AFTER the current treatment regimen started.
      If the patient switched treatments (e.g., from letrozole to Faslodex), a scan done BEFORE the switch reflects the PRIOR treatment's response, not the current one.
      Example: PET on 10/10 showed progression → patient switched to Faslodex on 10/16 → current visit exam says "stable" → the response on CURRENT treatment is "exam stable", NOT "PET showed progression on Faslodex."
+  7. "JUST PRESCRIBED" ≠ "ON TREATMENT":
+     If a medication was PRESCRIBED or ORDERED at THIS visit (e.g., "Rx for letrozole given", "prescription ordered", "will start", "instructed to begin"), the patient has NOT yet started treatment. Write "Not yet on treatment — no response to assess."
+     "On treatment" requires the patient to have ACTUALLY BEEN TAKING the medication for some time.
+     Clues that treatment has NOT started: "will begin", "Rx given today", "instructed to start", "prescription ordered", "ok to start", "she can start immediately"
+  8. A/P ASSESSMENT TAKES PRIORITY:
+     If the A/P section contains an explicit current assessment like "Exam stable", "doing well", "NED", "no evidence of recurrence", or "no evidence of disease", prioritize THIS over historical imaging data from earlier in the note.
+     The A/P represents the physician's CURRENT assessment at this visit. Historical imaging in the HPI/Problem List may be from BEFORE the current treatment regimen.
 
   STRICT RULES — do NOT violate:
   - Do NOT include future plans ("will start", "plan to", "she will have radiation").

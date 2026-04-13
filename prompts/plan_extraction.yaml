@@ -81,6 +81,14 @@ Procedure_Plan: |
   - "chemotherapy", "TCHP", "FOLFOX", "AC-T" → these are MEDICATIONS/SYSTEMIC THERAPY, not procedures
   - "start letrozole", "continue tamoxifen" → these are MEDICATION plans, not procedures
   - "immunotherapy", "targeted therapy" → these are MEDICATIONS, not procedures
+  FINAL CHECK — before outputting, verify EACH item in your procedure_plan:
+  1. Is it a physical/surgical intervention? (surgery, biopsy, port placement, drain removal, LP) → YES, include
+  2. Is it a systemic therapy? (chemo, hormonal, targeted, immunotherapy, AC, TCHP, taxol, letrozole, tamoxifen) → NO, goes in Medication_Plan
+  3. Is it imaging? (CT, MRI, PET, echo, DEXA, bone scan, ultrasound, mammogram) → NO, goes in Imaging_Plan
+  4. Is it radiation? (XRT, RT, GK, SRS) → NO, goes in radiotherapy_plan
+  5. Is it dental clearance? → NO, this is a prerequisite, not a procedure
+  If your procedure_plan contains ANY systemic therapy drug names, you have made an error — remove them.
+
   If no future procedures are planned, say "No procedures planned."
   Respond *only* with a JSON object using this exact schema:
   {
@@ -100,6 +108,15 @@ Imaging_Plan: |
   CRITICAL — distinguish PAST from FUTURE:
   - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed...", "Echo was normal" (past result)
   - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening", "needs TTE before starting chemo"
+
+  CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation:
+  - XRT, RT, radiation therapy, Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here
+  - Only include: CT, MRI, PET/CT, DEXA, bone scan, mammogram, ultrasound, echocardiogram/TTE, X-ray
+
+  CRITICAL — only include imaging ORDERED or PLANNED in the A/P:
+  - Do NOT add standard-of-care monitoring that is NOT explicitly mentioned in the A/P.
+  - Example: Do NOT add "echocardiogram" just because the patient is on an anthracycline, unless the A/P explicitly orders or mentions it.
+  - Example: Do NOT add "mammogram" unless the A/P specifically schedules one.
 
   DO NOT include any procedure plan, lab plan, or medication plan.
   List SPECIFIC imaging types. Do NOT use vague terms like "staging workup".
