@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — 53/61 完成，ROW 3, 8, 10, 11, 12, 14, 20, 22 偷懒删除待重做**
+> Status: **审查中 — 57/61 完成（ROW 3,8,10,11 重做完成），ROW 12, 14, 20, 22 待重做**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -106,9 +106,24 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Procedure_plan: "drains out on Thursday" 正确（真正的 procedure）
 - ✅ Advance care: full code ✅。Referral: Radiation ✅
 
-### ROW 10 (coral_idx 149) — 待重做（之前偷懒）
+### ROW 10 (coral_idx 149) — 0 P1, 0 P2 ✅ ← **重做完成**
+- 66yo, Stage II left breast HR+/HER2-。S/p neoadjuvant letrozole April 2021 → left mastectomy 07/24/2021（8.8cm residual, LN involved）→ bilateral reductions + re-excision for margins 08/07/2021。Low risk Oncotype → no chemo。Continue letrozole。Radiation to left chest wall + surrounding LN planned（simulation next week）。DEXA ordered。Video/phone consult（failed video connection）。Full code。ECOG 0。
+- **v27 P1 FIXED by POST-RESPONSE-GENOMIC 确认**: response 不再是 Oncotype "Low risk [REDACTED]"，现在是 "S/p left mastectomy with a 8. cm [REDACTED] with July 20 lymph nodes involved" — 实际手术病理！✅
+- ✅ Type: HR+ IDC, HER2- ✅。Stage: II ✅。Goals: curative ✅。current_meds: letrozole ✅
+- ✅ medication_plan: continue letrozole ✅。radiotherapy_plan: left chest wall + LN ✅。imaging_plan: DEXA ✅
+- ✅ Advance care: full code ✅
+- ✅ Letter 逐句(13句)：follow-up + surgery + recovering + letrozole "prevent cancer from coming back" + radiation "left side chest + nearby LN" + DEXA "check bone health" + future visit + full code explained。通俗准确无编造
 
-### ROW 11 (coral_idx 150) — 待重做（之前偷懒）
+### ROW 11 (coral_idx 150) — 0 P1, 3 P2 ← **重做完成**
+- 68yo, Stage IIIC→IV left IDC。S/p mastectomy + ALND + TC x4 + XRT（2010-2011）。Bone mets 2011（compression fx T6 → fixation + XRT to T spine + R femur）。Letrozole → PD（mandibular mass increased Oct 2012 PET）→ Faslodex + Denosumab since Oct 2012。Current visit: jaw post-radiation improving（numbness residual, taste returned），但 worsening R leg pain/numbness。Thrush。DM2, hypothyroid, hyperlipidemia。ECOG 1。
+- P2: response_assessment 用了旧 PET（10/10/12，在 Faslodex 开始 10/16/12 之前），且遗漏 A/P 的 "Exam stable"。应反映当前治疗状态
+- P2: imaging_plan 只有 PET/CT but A/P 还安排了 "MRI of lumbar, pelvis and right femur"。两个影像检查都被安排但只捕获了一个
+- P2: Letter 写 "cancer in your jaw has grown larger" — 来自旧 PET (Oct 2012)，但 jaw 已经放疗且正在改善（A/P: "S/p xrt to jaw improved pain with residual numbness"）。误导性时间归因
+- ✅ Type: IDC ER+ (inferred from letrozole) ✅。Stage: IIIC→IV ✅。Goals: palliative ✅
+- ✅ current_meds: Faslodex + Denosumab ✅。medication_plan: continue + Mycelex for thrush ✅
+- ✅ lab_summary: 全面（CBC + CMP from 12/11/12）✅
+- ✅ findings: 全面 — bone mets + mandibular mass + R leg pain + thrush + jaw numbness ✅
+- ✅ Letter（除 jaw 误导外）：Faslodex/Denosumab continue + Mycelex thrush explained + PET/CT + salt/soda rinses。通俗
 
 ### ROW 12 (coral_idx 151) — 待重做（之前偷懒）
 
