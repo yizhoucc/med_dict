@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-85 完成（52/61），ROW 86 开始重做（之前 ROW 86-100 偷懒了，全部删除重做）**
+> Status: **审查中 — ROW 1-87 完成（54/61），ROW 88 待审查（ROW 86-100 重做中）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 73 | — | ...78×0, 80×1, 82×2, 83×0, 84×1, 85×1 (ROW 86+ 偷懒删除重做) |
+| **P2** | 74 | — | ...82×2, 83×0, 84×1, 85×1, 86×1, 87×0 (ROW 88+ 待审查) |
 
 ---
 
@@ -446,6 +446,28 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Type: ER+/PR-/HER2- ILC ✅。Stage: IIIA→IV ✅。Goals: palliative ✅
 - ✅ response_assessment: "progressed on fulvestrant/palbociclib with new liver mets" ✅ — 准确
 - ✅ therapy_plan: phase 1 trial + rad onc + radiation washout ✅。Referral: Rad Onc ✅
+
+### ROW 86 (coral_idx 225) — 0 P1, 1 P2 ← v28 已审查
+- 53yo, metastatic breast cancer。Originally R breast mixed IDC/[redacted] Grade III, HER2+(FISH 4.37)。S/p neoadjuvant TCHP x6 → bilateral MRM (3 masses, 15 LN+) → adjuvant XRT → adjuvant [trastuzumab]。2018年转移复发→骨（广泛）+肝+脑（dural）。转移灶活检 ER 95%/PR 2%/HER2 1+ FISH negative — **HER2 从+转为-**。CHEK2 mutation。On letrozole+ribociclib → PD bone (04/2020)。Recommend fulvestrant +/- everolimus。Palliative XRT planned。ECOG 1。
+- P2: Type 写 "ER+/PR+/HER2+ mixed IDC" 用的是原始肿瘤受体状态（FISH 4.37），但转移灶活检（current disease）明确 HER2-(IHC 1+, FISH negative)。A/P 也写 "FISH negative also"。应用当前转移灶受体状态
+- ✅ response_assessment: "PET/CT showed increase in metabolic activity of osseous metastatic disease... bone progression while liver stable" ✅ — 准确反映 mixed response
+- ✅ current_meds: letrozole + ribociclib + denosumab ✅（PD 后即将更换但本次仍在用）
+- ✅ medication_plan: fulvestrant +/- everolimus + continue denosumab ✅
+- ✅ radiotherapy_plan: palliative XRT ✅。Goals: palliative ✅。follow_up: telehealth 6wks ✅
+- ✅ Letter: bone PD + liver stable 通俗准确 + fulvestrant 解释 + denosumab bone health + palliative XRT for pain + 6wks telehealth。Letter 未提 everolimus 因为是 optional（+/-），合理简化
+
+### ROW 87 (coral_idx 226) — 0 P1, 0 P2 ✅ ← v28 已审查
+- 79yo, R breast IDC grade 2, 2.2cm multifocal + separate 0.6cm well-diff adenocarcinoma。4/19 LN+ with ECE (0.5cm)。ER+/PR+/HER2-。Parkinson's disease（R sided, moderate）。Significant family hx（daughter breast+colorectal CA @40, maternal grandmother ovarian CA）。S/p excisional biopsy + ALND。Second opinion。
+- ✅ second opinion: yes ✅（笔记明确写 "second opinion concerning treatment"）
+- ✅ Type: ER+/PR+/HER2- IDC ✅（A/P 明确 "ER and PR positive, HER-2/neu was negative"）
+- ✅ response_assessment: "Not yet on treatment" ✅（pre-treatment 会诊）
+- ✅ Goals: curative ✅。current_meds: empty ✅（未开始治疗）
+- ✅ medication_plan: hormonal therapy alone ✅（笔记未指定具体药物，extraction 准确反映）
+- ✅ therapy_plan: 准确捕获 "hormonal therapy alone"，不推荐 chemo（age+Parkinson's, 仅 3-4% 额外获益）
+- ✅ radiotherapy_plan: radiation discussed for local control ✅
+- ✅ findings: 全面 — 2.2cm multifocal + 4/19 LN+ + ECE + grade 2 + Parkinson's tremor ✅
+- ✅ Letter 逐句准确：second opinion + IDC 解释 + 2.2cm + 4/19 LN + hormone sensitive + Parkinson's + hormonal therapy + return to oncologist + radiation discussed。通俗易懂
+
 
 
 
