@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-91 完成（57/61），ROW 92 待审查（ROW 86-100 重做中，剩余 92, 94, 95, 97, 100）**
+> Status: **审查中 — ROW 1-92 完成（58/61），ROW 94 待审查（剩余 94, 95, 97, 100）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 81 | — | ...86×1, 87×0, 88×3, 90×1, 91×3 (ROW 92+ 待审查) |
+| **P2** | 82 | — | ...87×0, 88×3, 90×1, 91×3, 92×1 (ROW 94+ 待审查) |
 
 ---
 
@@ -498,6 +498,17 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Goals: palliative ✅。Stage: I → IV ✅
 - ✅ medication_plan: lasix + KCL + denosumab + topical antifungal ✅
 - ✅ Lab_summary: 全面（LFTs + electrolytes + CBC from 10/16/2012）✅
+
+### ROW 92 (coral_idx 231) — 0 P1, 1 P2 ← v28 已审查
+- 67yo, metastatic breast cancer to liver + multiple sites（dx 1991，20+年治疗史：CAF/CMF→tamoxifen→raloxifene→2003 recurrence→taxotere/xeloda→taxol/xeloda→AI→2011 liver mets→abraxane→xeloda→gemcitabine→faslodex→epirubicin）。ER 60%/PR-/HER2-（liver met biopsy）。On epirubicin cycle 2 D1 + denosumab + neupogen。Liver improving on exam。ECOG 1。CA 27.29=3332, CEA=380.8（极高肿瘤标志物）。
+- P2: imaging_plan 写 "Echocardiogram" 但 A/P 没有安排 echo（仅 "Exam improved of liver, Labs liver functions, Tumor marker pending, Okay to proceed"）。笔记有历史 ECHO (07/20/2011)。Letter 传播了此错误（"echocardiogram to check your heart function"）
+- ✅ Type: ER+/PR-/HER2- ✅。Stage: IV ✅。Goals: palliative ✅
+- ✅ response_assessment: "stable on exam, liver size decreased, tenderness reduced, tumor marker pending" ✅ — 准确
+- ✅ current_meds: Epirubicin + Denosumab ✅。supportive_meds: Neupogen ✅
+- ✅ lab_summary: 非常全面 — 含 CA 27.29 (3332) + CEA (380.8) + Albumin 2.8L + AST 72H + CBC (ANC 1.70L) + electrolytes + Cr/BUN
+- ✅ medication_plan: Epirubicin 25mg/m2 D1,8,15 + Neupogen x2 days ✅
+- ✅ lab_plan: liver functions + tumor marker ✅
+- ✅ Letter 逐句准确（除 echo 外）：metastatic follow-up + liver improved + rash side effect + low WBC/Hgb + restarted epirubicin + Neupogen for WBC + liver function/markers check。通俗
 
 
 
