@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-87 完成（54/61），ROW 88 待审查（ROW 86-100 重做中）**
+> Status: **审查中 — ROW 1-88 完成（55/61），ROW 90 待审查（ROW 86-100 重做中）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 74 | — | ...82×2, 83×0, 84×1, 85×1, 86×1, 87×0 (ROW 88+ 待审查) |
+| **P2** | 77 | — | ...84×1, 85×1, 86×1, 87×0, 88×3 (ROW 90+ 待审查) |
 
 ---
 
@@ -467,6 +467,17 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ radiotherapy_plan: radiation discussed for local control ✅
 - ✅ findings: 全面 — 2.2cm multifocal + 4/19 LN+ + ECE + grade 2 + Parkinson's tremor ✅
 - ✅ Letter 逐句准确：second opinion + IDC 解释 + 2.2cm + 4/19 LN + hormone sensitive + Parkinson's + hormonal therapy + return to oncologist + radiation discussed。通俗易懂
+
+### ROW 88 (coral_idx 227) — 0 P1, 3 P2 ← v28 已审查
+- 36yo, Stage III→IV left IDC。Multifocal (4.0+2.6cm), Grade III (3+3+3), 23/30 LN+ with ECE, LVI+, PNI+。Original: ER weak+(1+/10)/PR+(2+/1 Favorable)/HER2-(0)。PD on neoadjuvant AC→Taxol→Taxol+carbo。S/p bilateral mastectomies + ALND → adjuvant gemzar/carbo x4 → XRT → 2 brain mets (resection of 1 + SRS to both)。Brain met: ER-/PR-/GATA3+, **HER2 NOT TESTED**。Lung+LN mets。On Xeloda。COVID-19。Genetic testing negative。Full code。Televisit。
+- P2: Type 写 "PR 2-" 但原始活检明确 "Progesterone Receptor Positive 2+ 1 Favorable"（PR 阳性）。且 metastatic biopsy HER2 写 "-" 但 HER2 在脑转移灶上**未检测**（HPI: "her 2 was not done", A/P 专门要求补做 HER2 检测）
+- P2: radiotherapy_plan 描述过去治疗（"SRS to both brain metastases"）而非未来计划。A/P 无新 RT 计划
+- P2: Letter 被截断 — 最后一句 "We want to" 断在半句中间，letter 生成不完整
+- ✅ Stage: Stage III → IV ✅。Metastasis: brain + lungs + LN ✅。Goals: palliative ✅
+- ✅ current_meds: capecitabine ✅。genetic_testing_plan: HER2 retesting on brain met + residual disease ✅
+- ✅ medication_plan: 全面 — Xeloda + HER2 决定后续治疗 + restaging 3mo + immunotherapy trials if PD
+- ✅ findings: 详细（4.0+2.6cm, 23 LN+, grade III, brain mets, lung/LN mets）✅
+- ✅ Letter（除截断外）: Stage III→IV 解释通俗 + HER2 蛋白检测解释 + Xeloda + clinical trials + full code 解释。attribution 完整
 
 
 
