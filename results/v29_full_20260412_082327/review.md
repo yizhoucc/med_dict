@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v29) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-88 完成（55/61），ROW 90 待审查（ROW 86-100 重做中）**
+> Status: **审查中 — ROW 1-90 完成（56/61），ROW 91 待审查（ROW 86-100 重做中，剩余 91, 92, 94, 95, 97, 100）**
 > Results 文件: `results/v29_full_20260412_082327/results.txt`
 
 ### v29 POST hooks（相对 v28）
@@ -33,7 +33,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 77 | — | ...84×1, 85×1, 86×1, 87×0, 88×3 (ROW 90+ 待审查) |
+| **P2** | 78 | — | ...85×1, 86×1, 87×0, 88×3, 90×1 (ROW 91+ 待审查) |
 
 ---
 
@@ -478,6 +478,15 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ medication_plan: 全面 — Xeloda + HER2 决定后续治疗 + restaging 3mo + immunotherapy trials if PD
 - ✅ findings: 详细（4.0+2.6cm, 23 LN+, grade III, brain mets, lung/LN mets）✅
 - ✅ Letter（除截断外）: Stage III→IV 解释通俗 + HER2 蛋白检测解释 + Xeloda + clinical trials + full code 解释。attribution 完整
+
+### ROW 90 (coral_idx 229) — 0 P1, 1 P2 ← v28 已审查
+- 51yo, R breast adenocarcinoma Stage II/III。ISPY trial（randomized to [redacted] arm）。S/p neoadjuvant Taxol → R lumpectomy（residual 2.2cm IDC, 60% cellularity）。On adjuvant AC cycle 3。Side effects: fatigue, N/V (D5), GERD, hypothyroidism (TSH 6.01), port reinserted, neuropathy (resolving)。BLM gene carrier（adopted, family hx unknown）。ECOG 0。Televisit。
+- P2: Patient type 写 "New patient" 但患者正在 mid-treatment（cycle 3 AC + ISPY trial cycle 12）。Letter 正确写了 "follow-up visit"，keypoints 与 letter 矛盾
+- ✅ current_meds: AC ✅。Goals: curative ✅。Stage: II/III ✅
+- ✅ medication_plan: 全面 — AC cycle 4 + 1wk dose delay + GCSF reduction 50% + granisetron + PO dex PRN + olanzapine 10mg PRN + gabapentin
+- ✅ lab_summary: 全面（TSH 6.01H + Free T4 12 + CMP 含 ALP 125H + CBC 含 WBC 11.8H + toxic granulation + HCG）
+- ✅ findings: residual 2.2cm IDC 60% cellularity + axilla swelling + port tenderness + hypothyroidism
+- ✅ Letter 逐句审查：adenocarcinoma explained + stage II/III + hypothyroidism/TSH + AC treatment + GCSF/granisetron/dex/olanzapine + gabapentin + cycle 4 with delay + follow-up after XRT。通俗准确，无截断
 
 
 
