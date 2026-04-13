@@ -1,0 +1,956 @@
+_yaml_path: exp/v30_full.yaml
+config_hash: 74ea9e16394af881
+data:
+  dataset_path: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv
+  row_indices:
+  - 0
+  - 1
+  - 2
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 13
+  - 16
+  - 17
+  - 19
+  - 21
+  - 26
+  - 28
+  - 29
+  - 32
+  - 33
+  - 35
+  - 36
+  - 39
+  - 40
+  - 41
+  - 42
+  - 43
+  - 45
+  - 48
+  - 49
+  - 51
+  - 52
+  - 53
+  - 56
+  - 58
+  - 60
+  - 62
+  - 63
+  - 64
+  - 65
+  - 67
+  - 69
+  - 71
+  - 72
+  - 77
+  - 79
+  - 81
+  - 82
+  - 83
+  - 84
+  - 85
+  - 86
+  - 87
+  - 89
+  - 90
+  - 91
+  - 93
+  - 94
+  - 96
+  - 99
+experiment:
+  name: v30_full
+  seed: 42
+extraction:
+  attribution: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
+  letter: true
+  max_retries: 3
+  pipeline: v2
+  tool_calling: false
+  verify: true
+generation:
+  assessment_plan:
+    do_sample: false
+    max_new_tokens: 2048
+  keypoint:
+    do_sample: false
+    max_new_tokens: 768
+  retry:
+    do_sample: true
+    max_new_tokens: 2048
+    temperature: 0.6
+    top_p: 0.9
+model:
+  cache_dir: /home/yc/.cache/huggingface
+  chat_template: qwen2
+  device_map: auto
+  dtype: bfloat16
+  name: Qwen/Qwen2.5-32B-Instruct-AWQ
+prompts:
+  extraction: prompts/extraction.yaml
+  letter_generation: prompts/letter_generation.yaml
+  plan_extraction: prompts/plan_extraction.yaml
+prompts_content:
+  extraction:
+    Cancer_Diagnosis: "TASK: Extract cancer diagnosis details.\n\nFor Type_of_Cancer,\
+      \ be SPECIFIC — include as much of the following as the note provides:\n1. Histologic\
+      \ subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma),\
+      \ DCIS, mixed, etc.\n2. Receptor status — ER, PR, and HER2. e.g., \"ER+/PR+/HER2-\"\
+      \n3. If receptor status changed between original diagnosis and metastatic/recurrent\
+      \ biopsy, note BOTH.\n- Example: \"ER+/PR+/HER2- invasive ductal carcinoma\"\
+      \ NOT just \"breast cancer\"\n- Example with change: \"Originally ER+/PR+/HER2-,\
+      \ metastatic biopsy ER+/PR-/HER2-\"\nDo NOT write just \"breast cancer\" or\
+      \ \"MBC\" — always include the subtype and receptor status when available in\
+      \ the note.\nIMPORTANT: Search the ENTIRE note for receptor status — it may\
+      \ appear in PMH, Problem List, Pathology, HPI, or Diagnosis section, not just\
+      \ the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT\
+      \ omit HER2 status just because it appears only in the Past Medical History.\n\
+      \nHER2 status rules — follow strictly:\n- If the note explicitly states HER2\
+      \ result (positive, negative, equivocal, IHC score, FISH result), write it.\n\
+      - If HER2 was NOT tested or NOT mentioned in the note, write \"HER2: not tested\"\
+      \ — do NOT guess or assume HER2- or HER2+.\n- DCIS (ductal carcinoma in situ)\
+      \ often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly\
+      \ stated.\n- HER2 IHC scoring — use this table to determine HER2 status:\n \
+      \ IHC 0     = HER2 NEGATIVE\n  IHC 1+    = HER2 NEGATIVE\n  IHC 2+    = EQUIVOCAL\
+      \ — must check FISH/ISH result:\n    IHC 2+ with FISH ratio ≥ 2.0 (or gene copies\
+      \ ≥ 6) = HER2 POSITIVE\n    IHC 2+ with FISH ratio < 2.0 (or \"FISH negative\"\
+      )  = HER2 NEGATIVE\n  IHC 3+    = HER2 POSITIVE\n- FISH interpretation (when\
+      \ reported without IHC):\n  FISH ratio ≥ 2.0 = amplified = HER2 POSITIVE\n \
+      \ FISH ratio < 2.0 = not amplified = HER2 NEGATIVE\n- IMPORTANT: If treatment\
+      \ includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab,\
+      \ the cancer is HER2+. Do NOT write HER2-.\n- IMPORTANT: If the note says \"\
+      triple negative\" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-.\
+      \ Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked.\
+      \ \"Triple negative\" is a definitive classification.\n- IMPORTANT: If HER2\
+      \ IHC/FISH data is [REDACTED] but the Assessment/Plan writes \"[REDACTED] negative\"\
+      \ in the receptor status line, infer HER2 = negative.\n- IMPORTANT: goserelin\
+      \ (Zoladex) / leuprolide (Lupron) used DURING CHEMOTHERAPY for fertility preservation\
+      \ does NOT indicate ER+. These drugs suppress ovaries to protect eggs during\
+      \ chemo. Only infer ER+ from goserelin/Lupron when it is used as ENDOCRINE THERAPY\
+      \ (adjuvant or palliative, continuous long-term use for hormone suppression).\
+      \ If the note says \"goserelin for fertility preservation\" or \"goserelin during\
+      \ chemotherapy\", do NOT add \"ER+ (inferred from goserelin)\".\n- IMPORTANT:\
+      \ If the patient has MULTIPLE primary cancers (e.g., gastric cancer AND breast\
+      \ cancer), report receptor status ONLY for the BREAST cancer. Do NOT mix receptor\
+      \ status from other cancers. For example, if gastric cancer is HER2+ but breast\
+      \ cancer is HER2-, write HER2- for the breast cancer.\n- RECEPTOR STATUS PRIORITY\
+      \ — when multiple biopsies exist:\n  If the patient has had MULTIPLE pathology\
+      \ results (core biopsy, surgical specimen, metastatic biopsy), the MOST RECENT\
+      \ pathology takes priority for current receptor status.\n  Always report the\
+      \ CURRENT receptor status first, then note the original if different.\n  Example:\
+      \ If core biopsy was ER+/PR+/HER2- but surgical specimen after neoadjuvant shows\
+      \ ER+/PR-/HER2-, write: \"ER+/PR-/HER2- (post-neoadjuvant; originally PR+)\"\
+      \n  If metastatic biopsy shows different receptors from the primary, the metastatic\
+      \ biopsy is the CURRENT status.\n- REDACTED HER2 — inference rules:\n  If the\
+      \ note says \"[REDACTED] negative\" or \"*****-\" in the A/P receptor status\
+      \ line, AND the treatment is endocrine-only (no anti-HER2 drugs), HER2 is NEGATIVE\
+      \ — do NOT write \"not tested\".\n  If the Problem List says \"ER+PR+ *****-\"\
+      , the \"*****\" is HER2 and the \"-\" means NEGATIVE.\n  Only write \"HER2:\
+      \ not tested\" when there is genuinely NO mention of HER2 testing or results\
+      \ anywhere in the note AND no treatment context to infer from.\n\nFor Stage_of_Cancer:\n\
+      - Write the AJCC/TNM stage if stated (e.g., \"Stage IIA\", \"pT2N0M0\", \"Stage\
+      \ IV\")\n- If the patient was originally diagnosed at one stage but now has\
+      \ metastatic recurrence, write BOTH:\n  e.g., \"Originally Stage [X], now metastatic\
+      \ (Stage IV)\"\n  IMPORTANT: Only write \"Originally Stage [X]\" if the note\
+      \ EXPLICITLY states the original stage number (e.g., \"Stage IIA at diagnosis\"\
+      ). If the note only says \"metastatic recurrence\" without specifying the original\
+      \ stage, write just \"Metastatic (Stage IV)\" — do NOT guess or invent the original\
+      \ stage.\n- If distant metastases are documented, the current stage is Stage\
+      \ IV even if not explicitly stated.\n- If the Assessment/Plan states a stage\
+      \ (e.g., \"Stage I\", \"early stage\"), extract it — do NOT write \"Not mentioned\
+      \ in note\".\n- If tumor size and node status are available, infer the approximate\
+      \ stage (e.g., \"2.3 cm, 0/3 LN negative — approximately Stage I-II\").\n- IMPORTANT:\
+      \ Node-negative (\"node neg\", \"0/N LN+\") with small tumor (≤2cm) = Stage\
+      \ I, NOT Stage II.\n  Stage II requires either positive lymph nodes OR tumor\
+      \ >2cm. \"Early stage node negative\" = Stage I.\n- Only write \"Not mentioned\
+      \ in note\" if there is truly NO staging, tumor size, or node information anywhere\
+      \ in the note.\n\nRespond *only* with a JSON object using this exact schema:\n\
+      {\n\"Type_of_Cancer\": \"Specific cancer type with histologic subtype and receptor\
+      \ statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'\"\
+      ,\n\"Stage_of_Cancer\": \"AJCC stage, or original + current if recurred/progressed.\
+      \ e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only\
+      \ include original stage if explicitly stated in the note\",\n\"Distant Metastasis\"\
+      : \"if there is distant metastasis (met). Yes, to where; No; or Not sure. Note:\
+      \ axillary lymph nodes are REGIONAL, not distant.\",\n\"Metastasis\": \"if there\
+      \ is met, Yes (to where), No, or Not sure\"\n}\n"
+    Clinical_Findings: 'TASK: Extract clinical findings and current disease status
+      from this visit.
+
+
+      Summarize NEW clinical findings or current disease status. Include:
+
+      - Key pathology results: tumor size, margins, node status, grade
+
+      - Imaging findings: CT, MRI, PET, bone scan results
+
+      - Physical exam findings: palpable masses, skin changes, lymphadenopathy
+
+      IMPORTANT: Include ALL imaging findings, even those of uncertain significance
+      (e.g., "focal uptake in 6th rib of unclear significance"). Ambiguous findings
+      may indicate early metastasis and must NOT be omitted. If the report says "unclear
+      significance" or "indeterminate", include it with that qualifier.
+
+      Do NOT write only symptoms (e.g., "patient reports fatigue") — write OBJECTIVE
+      findings.
+
+      Do NOT repeat the cancer type or stage (those are extracted separately).
+
+
+      Respond *only* with a JSON object using this exact schema:
+
+      {
+
+      "findings": "Summary of new findings or disease status including pathology results,
+      imaging findings, and exam findings."
+
+      }
+
+      '
+    Current_Medications: "TASK: Extract current oncologic medications the patient\
+      \ is ACTIVELY taking now.\n\nCRITICAL — distinguish CURRENT from PLANNED from\
+      \ PAST:\n- CURRENT (include): medications the patient is ACTIVELY taking right\
+      \ now.\n  Look for: \"continue\", \"currently on\", \"taking daily\", \"on [drug]\
+      \ since [date]\"\n- If the HPI mentions one drug (e.g., \"started tamoxifen\"\
+      ) but the Assessment/Plan says a DIFFERENT\n  drug as current (e.g., \"continuing\
+      \ on anastrozole\"), prefer the Assessment/Plan — it reflects the\n  most recent\
+      \ clinical decision. Do NOT list both unless the note clearly says both are\
+      \ concurrent.\n- PLANNED/RECOMMENDED (do NOT include): medications discussed,\
+      \ recommended, or scheduled to start.\n  Look for: \"will start\", \"plan to\
+      \ begin\", \"recommend\", \"discussed\", \"Rx sent\", \"after [condition]\"\n\
+      - PAST/COMPLETED (do NOT include): medications already finished or stopped.\n\
+      \  Look for: \"completed\", \"s/p\", \"stopped\", \"discontinued\", \"held\"\
+      , \"finished [N] cycles\"\n- STOPPED/DROPPED (do NOT include): medications recently\
+      \ discontinued.\n  Look for: \"recently dropped\", \"stopped due to\", \"discontinued\"\
+      , \"held\", \"self D/C\", \"D/Ced\"\n\nFocus on CANCER-RELATED medications:\
+      \ chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting\
+      \ agents.\nDo NOT include general medications like blood pressure, diabetes,\
+      \ psychiatric, allergy, antibiotic, vitamin, or supplement medications.\nIMPORTANT:\
+      \ Only include medications DIRECTLY related to cancer care. This includes:\n\
+      - Oncology drugs (chemo, hormonal, targeted, immunotherapy)\n- Supportive care\
+      \ for cancer treatment (anti-nausea, growth factors, bone agents)\n- Pain medications\
+      \ for cancer-related pain\nDo NOT include: eye drops, blood pressure meds, diabetes\
+      \ meds, vitamins, allergy meds, or other non-cancer medications — even if they\
+      \ appear in the medication list.\nIf no cancer-related medications are currently\
+      \ active, write empty string \"\".\n\nCROSS-REFERENCE: If a \"Current Outpatient\
+      \ Medications\" or \"Current Medications\" section exists in the note, use it\
+      \ as your primary reference for verifying which drugs are current. If a drug\
+      \ is in the medication list but described elsewhere as stopped/held, do NOT\
+      \ include it.\n- SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications\
+      \ outside the clinical system (e.g., from another country, alternative medicine\
+      \ clinic, self-administered at home without physician supervision), and the\
+      \ treating physician does NOT endorse or manage these drugs (look for skeptical\
+      \ language like \"apparently\", \"so-called\", \"claims to be taking\", or \"\
+      discontinue our medications\"), do NOT list them in current_meds. Instead, these\
+      \ should go in recent_changes with appropriate context.\nIMPORTANT EXCEPTION:\
+      \ Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron,\
+      \ infusions) are often NOT listed in the outpatient medication list. If the\
+      \ Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g.,\
+      \ \"on irinotecan\", \"continues leuprolide\", \"started [drug] on [date]\"\
+      \ with no discontinuation), include it even if it does not appear in the outpatient\
+      \ medication list.\n\nRespond *only* with a JSON object using this exact schema:\n\
+      {\n\"current_meds\": \"List of current cancer-related medications the patient\
+      \ is ACTIVELY taking now, or empty string if none.\"\n}\n"
+    Lab_Results: 'TASK: Extract lab results from this medical note.
+
+
+      List SPECIFIC lab values with numbers (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos
+      183, CA 27.29 = 48").
+
+      Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
+
+      Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF),
+      pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype,
+      MammaPrint).
+
+      CRITICAL: Only include lab values that are EXPLICITLY written in the note with
+      specific numbers. Do NOT invent or guess lab values. If no lab results appear
+      anywhere in the note, write "No labs in note."
+
+      CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED],
+      or similar placeholders), write "Values redacted" — do NOT fabricate or guess
+      specific numbers. Only report values you can clearly read.
+
+      Example: If the note says "Platelet *****" or "WBC *****", write "Lab values
+      redacted" — do NOT write "Platelet 217" or any invented number.
+
+      Example: If labs section shows "CBC: ***** ***** *****", write "CBC values redacted"
+      — do NOT fill in numbers.
+
+      IMPORTANT: If lab results are older than 6 months from the visit date, you MUST
+      note the date.
+
+      Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old
+      labs.
+
+      If the note says "labs/markers unremarkable" without specific values, write
+      that verbatim with the date.
+
+
+      Respond *only* with a JSON object using this exact schema:
+
+      {
+
+      "lab_summary": "Summary of key lab results with specific values from THIS VISIT
+      ONLY. Only include blood work and tumor markers, NOT imaging/pathology/genomic
+      tests. Do NOT include old results from prior years or prior visits. If none
+      found, write ''No labs in note.''"
+
+      }
+
+      '
+    Reason_for_Visit: "TASK: Extract 'Reason for Visit'.\nBe SPECIFIC — include the\
+      \ patient's diagnosis, cancer type, and the purpose of this visit.\nDo NOT give\
+      \ vague answers like \"new symptoms\" or \"follow up visit\". Instead, state\
+      \ what cancer,\nwhat stage (if known), and what specifically brought them in\
+      \ (e.g., \"initial consult for newly\ndiagnosed metastatic ER+ breast cancer\"\
+      \ or \"cycle 3 day 1 of irinotecan for metastatic TNBC\").\n\nFor Patient type\
+      \ — determining \"New patient\" vs \"Follow up\":\n- \"New patient\" if ANY\
+      \ of these apply:\n  * Note says \"New Patient Evaluation\", \"Consult Note\"\
+      , \"consultation\", \"establish care\", \"referred by\", or \"second opinion\"\
+      \n  * This is the patient's FIRST visit to this oncologist/clinic (even if they\
+      \ had surgery or treatment elsewhere)\n  * Post-surgery first visit to medical\
+      \ oncology to discuss adjuvant/systemic therapy\n- \"Follow up\" ONLY if the\
+      \ patient has been seen by THIS provider/clinic before for ongoing management\n\
+      - When in doubt, \"New patient\" is safer than \"Follow up\"\n\nFor second opinion\
+      \ — write \"yes\" ONLY if the note explicitly mentions \"second opinion\", \"\
+      another opinion\", or the patient was clearly referred for an independent review\
+      \ of their case. Do NOT guess.\n\nRespond *only* with a JSON object using this\
+      \ exact schema:\n{\n\"Patient type\": \"either New patient or follow up\",\n\
+      \"second opinion\": \"whether the visit is consultation/second opinion or not\"\
+      ,\n\"in-person\": \"either Televisit or in-person. (note, video consult, televisit,\
+      \ telehealth are the same thing)\",\n\"summary\": \"A specific summary including\
+      \ cancer type, stage if known, and purpose of this visit.\"\n}\n"
+    Response_Assessment: "TASK: Extract how the cancer is CURRENTLY responding to\
+      \ treatment.\n\nThink step by step before answering:\n1. Has this patient started\
+      \ any cancer treatment yet? (surgery alone does not count as \"treatment\" for\
+      \ response assessment purposes)\n   CRITICAL EXCEPTION — POST-NEOADJUVANT SURGERY:\
+      \ If the patient received neoadjuvant therapy (chemo, targeted therapy, etc.)\
+      \ BEFORE surgery, the surgical pathology IS the response assessment. Describe\
+      \ the pathologic response:\n   - Residual tumor size and cellularity (e.g.,\
+      \ \"3.84 cm residual tumor, 5% cellularity\")\n   - Lymph node status post-treatment\
+      \ (e.g., \"3/28 LN positive with treatment effect\")\n   - Whether pathologic\
+      \ complete response (pCR) was achieved or not\n   Do NOT write \"Not yet on\
+      \ treatment\" for a patient who completed neoadjuvant therapy and had surgery.\n\
+      \   This includes patients who had PROGRESSION on neoadjuvant therapy and then\
+      \ went to surgery — the progression itself IS the response (e.g., \"disease\
+      \ progressed on neoadjuvant AC/T, proceeded to bilateral mastectomies\"). Describe\
+      \ BOTH the treatment response AND the surgical pathology.\n   IMPORTANT: Completed\
+      \ radiation therapy COUNTS as treatment. If the patient recently finished radiation,\
+      \ they HAVE received treatment — do NOT write \"Not yet on treatment\". \"Not\
+      \ yet on treatment\" is ONLY correct if no cancer treatment (chemo, radiation,\
+      \ hormonal, targeted, immunotherapy) has been given at all.\n   IMPORTANT: A\
+      \ patient who was on PREVIOUS treatment and now shows disease PROGRESSION or\
+      \ RECURRENCE — that IS a response assessment (the response is \"progression\"\
+      ). Even if they are switching to a new regimen or between treatments, document\
+      \ the current disease status from imaging/labs.\n   For LOCAL RECURRENCE: describe\
+      \ the recurrence factually (e.g., \"local recurrence in left breast, 1.7cm IDC\
+      \ on excisional biopsy\"). Do NOT write \"cancer is not responding to treatment\"\
+      \ — the patient may have discontinued treatment or completed it years ago. Focus\
+      \ on WHAT happened (recurrence), not WHY.\n   IMPORTANT: For patients on adjuvant/maintenance\
+      \ therapy, \"no evidence of recurrence\" or \"no evidence of disease\" on exam\
+      \ or imaging IS a valid response assessment — it means the treatment is working.\n\
+      \   IMPORTANT — the patient IS on treatment if ANY of these clues appear:\n\
+      \   - \"currently on [drug]\", \"taking [drug]\", \"continue [drug]\", \"on\
+      \ [drug] since [date]\"\n   - Mentions of chemotherapy cycles, off weeks, dose\
+      \ adjustments (e.g., \"off week\", \"cycle 3\", \"due to start next cycle\"\
+      )\n   - \"labs okay to proceed with chemotherapy\" or similar pre-cycle clearance\n\
+      \   - Current medications include any oncologic drug (chemo, hormonal, targeted,\
+      \ immunotherapy)\n   - Active medication list contains chemotherapy drugs (Xeloda,\
+      \ ixabepilone, paclitaxel, etc.)\n   Do NOT be confused by \"off week\" — a\
+      \ patient on an off week between chemo cycles IS on treatment.\n2. If yes, what\
+      \ treatment are they on? (chemo, endocrine therapy, targeted therapy, immunotherapy)\n\
+      3. Is there any evidence of how the cancer is responding? Search the ENTIRE\
+      \ note for ANY of these:\n   - Imaging: CT stable, PET response, scan results\n\
+      \   - Tumor markers: CA 15-3, CEA rising or falling\n   - Physical exam: mass\
+      \ shrinking, \"breaking up\", palpable changes, skin changes improving\n   -\
+      \ Clinical status: \"labs okay to proceed\" (implies stable enough to continue)\n\
+      \   - Symptom changes: \"able to do more\", \"pain improving\", \"up and about\"\
+      \n   Even brief exam comments like \"area appears to be breaking up\" count\
+      \ as response evidence.\n4. If no treatment started yet, write \"Not yet on\
+      \ treatment — no response to assess.\"\n5. If on treatment but no response data\
+      \ in the note, write \"Not mentioned in note.\"\n   BEFORE writing \"Not mentioned\"\
+      , verify there is truly NO evidence anywhere in the note. These ALL count as\
+      \ response evidence:\n   - \"stopped [drug] for progression\" or \"disease progressed\
+      \ on [drug]\" → response is PROGRESSION\n   - New metastatic sites (brain, lung,\
+      \ liver, bone mets) → response is PROGRESSION\n   - \"exam stable\" or \"no\
+      \ new findings\" → response is STABLE DISEASE\n   - Tumor marker trends (rising\
+      \ or falling)\n   - Post-surgical pathology after neoadjuvant therapy\n   If\
+      \ ANY of the above is present, do NOT write \"Not mentioned\" — describe the\
+      \ evidence.\n6. TEMPORAL ATTRIBUTION — critical rule:\n   When citing imaging\
+      \ (PET, CT, MRI, bone scan), verify the scan was done AFTER the current treatment\
+      \ regimen started.\n   If the patient switched treatments (e.g., from letrozole\
+      \ to Faslodex), a scan done BEFORE the switch reflects the PRIOR treatment's\
+      \ response, not the current one.\n   Example: PET on 10/10 showed progression\
+      \ → patient switched to Faslodex on 10/16 → current visit exam says \"stable\"\
+      \ → the response on CURRENT treatment is \"exam stable\", NOT \"PET showed progression\
+      \ on Faslodex.\"\n7. \"JUST PRESCRIBED\" ≠ \"ON TREATMENT\":\n   If a medication\
+      \ was PRESCRIBED or ORDERED at THIS visit (e.g., \"Rx for letrozole given\"\
+      , \"prescription ordered\", \"will start\", \"instructed to begin\"), the patient\
+      \ has NOT yet started treatment. Write \"Not yet on treatment — no response\
+      \ to assess.\"\n   \"On treatment\" requires the patient to have ACTUALLY BEEN\
+      \ TAKING the medication for some time.\n   Clues that treatment has NOT started:\
+      \ \"will begin\", \"Rx given today\", \"instructed to start\", \"prescription\
+      \ ordered\", \"ok to start\", \"she can start immediately\"\n8. A/P ASSESSMENT\
+      \ TAKES PRIORITY:\n   If the A/P section contains an explicit current assessment\
+      \ like \"Exam stable\", \"doing well\", \"NED\", \"no evidence of recurrence\"\
+      , or \"no evidence of disease\", prioritize THIS over historical imaging data\
+      \ from earlier in the note.\n   The A/P represents the physician's CURRENT assessment\
+      \ at this visit. Historical imaging in the HPI/Problem List may be from BEFORE\
+      \ the current treatment regimen.\n\nSTRICT RULES — do NOT violate:\n- Do NOT\
+      \ include future plans (\"will start\", \"plan to\", \"she will have radiation\"\
+      ).\n- Do NOT include treatment discussions or recommendations.\n- Do NOT use\
+      \ generic boilerplate phrases. Every claim must be traceable to a specific sentence\
+      \ in the note.\n- Do NOT write \"tolerating therapy well\" or \"symptoms improved\"\
+      \ unless the note EXPLICITLY uses those exact words.\n- Do NOT use the word\
+      \ \"responding\" or \"response\" unless you can cite SPECIFIC imaging or tumor\
+      \ marker evidence. \"Labs okay\" or \"stable on exam\" alone does NOT mean the\
+      \ cancer is \"responding\" — it means the cancer status is unknown or stable.\n\
+      - IMPORTANT: \"responding\" implies MEASURABLE IMPROVEMENT. Use \"stable disease\"\
+      \ for unchanged findings, \"no evidence of disease\" for no measurable disease,\
+      \ and \"responding\" ONLY when there is documented tumor shrinkage or marker\
+      \ decrease.\n- Do NOT describe pathology results (tumor size, grade, margins)\
+      \ as a \"response\" — pathology is a diagnosis, not a treatment response.\n\
+      - Do NOT describe surgical recovery (\"healing well\", \"recovering from surgery\"\
+      ) as a response assessment.\n- Do NOT describe risk estimates or Oncotype scores\
+      \ as a response — those are prognostic tools, not treatment responses.\n- Do\
+      \ NOT write \"Not applicable\" or \"Not specified\".\nExamples:\n- GOOD: \"\
+      CT stable, CA 15-3 decreased from 28 to 14\"\n- GOOD: \"no evidence of disease\
+      \ recurrence on imaging and exam\"\n- GOOD: \"PET-CT shows stable to slightly\
+      \ decreased metabolic activity of osseous metastases\"\n- GOOD: \"Axillary LN\
+      \ decreased from 8cm to 2-3cm after 2 cycles AC\"\n- GOOD: \"Disease progressed\
+      \ on neoadjuvant AC/T, proceeded to bilateral mastectomies. Surgical pathology\
+      \ showed residual 2.5cm tumor with 5/12 positive lymph nodes.\"\n- GOOD: \"\
+      Stopped neoadjuvant therapy due to progression. S/p mastectomy with residual\
+      \ disease.\"\n- BAD: \"tolerating therapy well, symptoms improved\" (generic\
+      \ boilerplate)\n- BAD: \"She will continue on letrozole and have radiation\"\
+      \ (this is a plan, not a response)\n- BAD: \"0.9 cm grade 1 IDC, margins negative\"\
+      \ (this is pathology, not treatment response)\n- BAD: \"Healing well from surgery\"\
+      \ (surgical recovery, not cancer treatment response)\n- BAD: \"Low Risk Oncotype\
+      \ score\" (prognostic tool, not a response to treatment)\n- BAD: \"Not mentioned\
+      \ in note\" when the note says \"stopped chemo for progression\" or describes\
+      \ new brain/lung/bone metastases — these ARE response evidence (progression)\n\
+      - BAD: \"Not yet on treatment\" for a patient who completed neoadjuvant chemo\
+      \ + surgery — the surgical pathology IS the response\n- BAD: \"PET showed progression\
+      \ on Faslodex\" when the PET was done BEFORE Faslodex was started — wrong temporal\
+      \ attribution\n\nWrite your reasoning first, then output the JSON on a new line\
+      \ starting with {\nIMPORTANT: Your JSON must contain ONLY the key \"response_assessment\"\
+      . Do NOT add any other keys.\n\nRespond with a JSON object using this exact\
+      \ schema (NO other keys):\n{\n\"response_assessment\": \"How is the cancer CURRENTLY\
+      \ responding? Cite specific evidence: imaging, labs, exam. Do NOT include future\
+      \ plans, surgical recovery, or prognostic scores.\"\n}\n"
+    Treatment_Changes: "TASK: Extract recent treatment changes and supportive medications.\n\
+      \nFor recent_changes: Any holds, dose reductions, switches, or newly started\
+      \ medications RELATED TO THIS VISIT.\nDo NOT include changes from months or\
+      \ years ago.\nIMPORTANT: If the patient IS currently on treatment but there\
+      \ are no recent changes, write an empty string \"\".\nDo NOT write \"Not yet\
+      \ on treatment\" if the patient is already taking medication (e.g., tamoxifen,\
+      \ letrozole).\n\"Not yet on treatment\" is ONLY correct if the patient has never\
+      \ started any cancer treatment.\n\nFor supportive_meds: List supportive care\
+      \ medications the patient is CURRENTLY TAKING that are RELATED to cancer treatment\
+      \ (anti-nausea, pain meds for cancer pain, bone-protecting agents, growth factors\
+      \ like Neulasta/GCSF).\n\nCRITICAL rules for supportive_meds — read carefully:\n\
+      - ONLY include medications the patient is actively taking RIGHT NOW. Look for:\
+      \ \"taking\", \"currently on\", \"continue\", listed in Active Medications.\n\
+      - Do NOT include medications that are only DISCUSSED, RECOMMENDED, or HYPOTHETICAL:\n\
+      \  * \"could be mitigated with bisphosphonate\" = NOT current (hypothetical)\n\
+      \  * \"we discussed starting...\" = NOT current (discussion only)\n  * \"may\
+      \ consider...\" = NOT current (future possibility)\n  * \"if side effects occur,\
+      \ could use...\" = NOT current (contingency)\n- Do NOT include: allergies, non-cancer\
+      \ medications (blood pressure, diabetes, cholesterol, thyroid, psychiatric meds).\n\
+      - Do NOT include medications marked \"Patient not taking\" or \"(Patient not\
+      \ taking: ...)\". If the medication list says \"Patient not taking\", that drug\
+      \ is NOT current — skip it entirely.\n- Do NOT include anxiety/sleep medications\
+      \ (lorazepam, zolpidem) or seizure medications (levetiracetam) unless explicitly\
+      \ prescribed FOR cancer treatment side effects.\n- Do NOT include ONCOLOGIC\
+      \ drugs (tamoxifen, letrozole, anastrozole, trastuzumab, etc.) in supportive_meds.\
+      \ These go in current_meds.\nIMPORTANT: The ALLERGIES section lists what the\
+      \ patient is ALLERGIC TO — these are NOT medications they take.\n\nRespond *only*\
+      \ with a JSON object using this exact schema:\n{\n\"recent_changes\": \"Any\
+      \ holds, dose reductions, or switches at or near this visit.\",\n\"supportive_meds\"\
+      : \"List of cancer-treatment-related supportive medications.\"\n}\n"
+    Treatment_Goals: 'TASK: Extract the goal/intent of cancer treatment.
+
+
+      Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk
+      reduction", "adjuvant", or "symptom management".
+
+      Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment
+      options", "review treatment plan").
+
+
+      FIRST — check the note for EXPLICIT intent words:
+
+      - If the note says "palliative" or "palliative intent" or "palliative care"
+      → write "palliative". Done.
+
+      - If the note says "curative" or "curative intent" → write "curative". Done.
+
+      - If the note says "adjuvant" → this describes the treatment TYPE, not the GOAL.
+      For non-metastatic cancer, adjuvant treatment has curative intent → write "curative".
+      Only write "palliative" if metastatic.
+
+      - If the note explicitly states an intent, USE IT. Do NOT override the physician''s
+      own words.
+
+
+      ONLY if no explicit intent word is found, use this decision tree:
+
+      - Early-stage cancer + surgery + adjuvant chemo/radiation/endocrine therapy
+      → "curative" or "adjuvant"
+
+      - Neoadjuvant chemotherapy before surgery for curable cancer → "curative" (NOT
+      "neoadjuvant")
+
+      - Metastatic/Stage IV cancer → "palliative"
+
+      - DCIS only, no invasive cancer → "risk reduction"
+
+      - Completed curative treatment, now on surveillance endocrine therapy → "adjuvant"
+      or "risk reduction"
+
+      - Do NOT write "risk reduction" for early-stage invasive cancer receiving adjuvant
+      chemo — that is "curative" or "adjuvant".
+
+      - Do NOT write "neoadjuvant" as a goal — write "curative" instead.
+
+
+      Respond *only* with a JSON object using this exact schema (NO other keys):
+
+      {
+
+      "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, or symptom
+      management"
+
+      }
+
+      '
+  letter_generation:
+    patient_letter: "TASK: Fill in the template below to create a patient letter summarizing\
+      \ their visit.\n\nRULES:\n1. Write at an 8th-grade reading level. Use simple,\
+      \ everyday words.\n2. If you must use a medical term, explain it briefly in\
+      \ parentheses.\n3. After EVERY sentence, add a source tag: [source:field_name]\n\
+      \   - Use the exact field name from the input JSON.\n   - Multiple fields: [source:field1,field2]\n\
+      \   - Greetings/closings: [source:none]\n4. Cover all important information\
+      \ from the input. Do not skip fields that have real values.\n5. Do NOT add any\
+      \ information not in the input JSON.\n6. Do NOT copy medical jargon verbatim\
+      \ — rephrase in plain language.\n7. Do NOT include exact dosing details (mg,\
+      \ mg/m2, schedules). Just name the treatment.\n8. Do NOT repeat the same information\
+      \ across sections. If two fields say the same thing, mention it once.\n9. Use\
+      \ passive/neutral voice: \"You are referred to\" NOT \"We will refer you to\"\
+      .\n10. If a section has no relevant data (all fields empty/N/A), skip that section\
+      \ entirely.\n11. LAB VALUES:\n    - If lab_summary says \"No labs in note\"\
+      \ → do NOT mention blood tests at all.\n    - Only mention ABNORMAL lab results\
+      \ that are clinically significant.\n    - Do NOT list routine recurring tests\
+      \ unless results changed management.\n    - Do NOT say \"Your blood tests are\
+      \ mostly normal\" — if nothing abnormal, skip labs entirely.\n12. ADVANCE CARE\
+      \ — only include if there is meaningful content (Full code, DNR, surrogate).\
+      \ Skip if \"Not discussed\".\n13. pCR — If findings mention \"no residual carcinoma\"\
+      \ or \"pathologic complete response\":\n    - If BOTH breast AND lymph nodes\
+      \ are clear: \"After treatment and surgery, no cancer was found in any of the\
+      \ removed tissue. This is a very good sign.\"\n    - If breast is clear BUT\
+      \ lymph nodes still have cancer: \"After treatment and surgery, no cancer was\
+      \ found in the breast tissue itself, which is a good sign. However, cancer was\
+      \ still found in some of the lymph nodes.\"\n    - NEVER say \"no cancer was\
+      \ found in the removed tissue\" if lymph nodes were positive.\n14. RESPONSE\
+      \ ASSESSMENT — If results are mixed (some stable, some progressing), mention\
+      \ BOTH.\n15. HANDLING [REDACTED] CONTENT:\n    - If a field value is mostly\
+      \ [REDACTED] and you cannot determine what the original content means, SKIP\
+      \ that information rather than generating garbled or nonsensical text.\n   \
+      \ - Example: If genetic_testing_plan says \"Order an [REDACTED] to provide more\
+      \ information\", write \"You will have a test to learn more about your cancer\"\
+      \ — do NOT try to name the test.\n    - Example: If medication_plan says \"\
+      [REDACTED] + [REDACTED]\", write \"You will start new medications as discussed\
+      \ with your doctor\" — do NOT generate nonsensical drug names.\n    - NEVER\
+      \ concatenate partial words from [REDACTED] boundaries. If a word is partially\
+      \ redacted, skip it entirely.\n16. FACTUAL ACCURACY:\n    - HER2 is a PROTEIN\
+      \ (receptor on cancer cells), NOT a medication. Write \"a protein called HER2\"\
+      \ or \"does not have a protein called HER2\", NOT \"a medication called HER2\"\
+      .\n    - \"Squamous differentiation\" = cancer cells look like skin cells. It\
+      \ is NOT the same as \"mucinous\" (mucus-producing). Do NOT confuse these.\n\
+      \    - \"Metaplastic carcinoma with squamous differentiation\" = \"a rare type\
+      \ of breast cancer where the cells look like skin cells\"\n    - When describing\
+      \ imaging results, check if the finding is CURRENT or HISTORICAL. Do NOT present\
+      \ old imaging as new information if the condition has since been treated (e.g.,\
+      \ do NOT say \"the cancer in your jaw has grown\" if the jaw was subsequently\
+      \ treated with radiation and improved).\n17. MEDICAL TERMS — explain these if\
+      \ they appear:\n    - lobular carcinoma = \"cancer that started in the milk-producing\
+      \ glands\"\n    - ductal carcinoma = \"cancer that started in the milk ducts\"\
+      \n    - mucinous carcinoma = \"a type of cancer that makes mucus\"\n    - neoadjuvant\
+      \ = \"treatment given before surgery to shrink the cancer\"\n    - adjuvant\
+      \ = \"treatment given after surgery to prevent the cancer from coming back\"\
+      \n    - seroma = \"a pocket of clear fluid that can form after surgery\"\n \
+      \   - peritoneum = \"the lining of the abdomen (belly area)\"\n    - axilla/axillary\
+      \ = \"armpit area\"\n    - lumpectomy = \"surgery to remove the tumor\"\n  \
+      \  - mastectomy = \"surgery to remove the breast\"\n    - ALND = \"surgery to\
+      \ remove and check the lymph nodes under the arm\"\n    - oophorectomy/BSO =\
+      \ \"surgery to remove the ovaries\"\n18. EMOTIONAL SUPPORT:\n    - If the input\
+      \ JSON contains an \"emotional_context\" field with a NON-EMPTY value, add this\
+      \ EXACT sentence near the closing:\n      \"We understand that this is a challenging\
+      \ time and that managing these health changes can be stressful. We want to reinforce\
+      \ that you are not alone in this process.\"\n    - Do NOT name specific emotions.\
+      \ Do NOT say \"anxious\", \"depressed\", \"scared\", or similar.\n    - If there\
+      \ is NO \"emotional_context\" field or it is empty, do NOT add ANY emotional\
+      \ support sentences.\n\nTEMPLATE (fill in each section based on the mapped fields):\n\
+      \nDear Patient, [source:none]\nWe hope you are doing well. We are writing this\
+      \ letter to help you understand what happened during your recent visit. [source:none]\n\
+      \n**Why did you come to the clinic?**\n[Fill from: summary, Patient type — e.g.\
+      \ \"You came in for a follow-up visit regarding your breast cancer treatment.\"\
+      ]\n[IMPORTANT: Do NOT use medical jargon in this section. Replace abbreviations\
+      \ like TCHP, AC, ALND with plain words.]\n\n**What's new or changed since your\
+      \ last visit?**\n[Fill from: findings, response_assessment, lab_summary (only\
+      \ if ABNORMAL), goals_of_treatment]\n[CRITICAL — FOLLOW-UP vs NEW PATIENT:\n\
+      \ - If Patient type is \"Follow up\": assume the patient ALREADY understands\
+      \ their primary diagnosis (cancer type, stage, metastasis). Do NOT repeat the\
+      \ diagnosis. Only include:\n   * New test results — only if abnormal or if results\
+      \ changed management\n   * Disease progression or regression (from response_assessment)\n\
+      \   * A topic the patient explicitly raised (from findings)\n   * Do NOT list\
+      \ routine recurring tests with normal results\n - If Patient type is \"New patient\"\
+      : include primary diagnosis information (Type_of_Cancer, Stage_of_Cancer, Metastasis,\
+      \ Distant Metastasis, goals_of_treatment) since this is the first time the patient\
+      \ is learning about their diagnosis.]\n[STAGING: If Stage_of_Cancer says \"\
+      Originally X, now Y\" BUT Metastasis is \"No\" and response_assessment shows\
+      \ no recurrence, this is a STAGING UPDATE, NOT disease progression. Do NOT imply\
+      \ worsening.]\n[METASTASIS: If cancer has spread to 3+ sites, say \"has spread\
+      \ to other parts of your body\" without listing every organ. Only name specific\
+      \ sites if there are 1-2 sites (e.g. \"has spread to your bones\").]\n[CRITICAL:\
+      \ If response_assessment mentions BOTH stable AND new/progressing areas, you\
+      \ MUST mention both.]\n\n**What treatment or medication changes were made?**\n\
+      [Fill from: recent_changes, medication_plan, current_meds, supportive_meds,\
+      \ therapy_plan, radiotherapy_plan]\n[IMPORTANT: Include ALL medication changes\
+      \ from medication_plan — list EVERY medication mentioned there, regardless of\
+      \ whether it relates to the primary cancer diagnosis. Include non-oncology medications\
+      \ if they were changed.]\n[Include the REASON for each treatment change when\
+      \ available (e.g., \"due to side effects\", \"because the cancer has progressed\"\
+      , \"to help with nausea\").]\n[Include medications that are relevant to today's\
+      \ visit. Exclude medications with no changes that are unrelated to today's visit\
+      \ topics.]\n[Combine overlapping drug info into one mention. No dosing details.]\n\
+      \n**What is the plan going forward?**\n[Fill from: radiotherapy_plan, procedure_plan,\
+      \ imaging_plan, lab_plan, genetic_testing_plan, follow up, Specialty, Others,\
+      \ Nutrition, Genetics, Advance care]\n[Include ALL planned future actions:\n\
+      \ - Radiation treatment plans\n - Procedure/surgery plans\n - Imaging studies\
+      \ (CT, MRI, PET, bone scan, mammogram, echocardiogram, etc.)\n - Lab tests planned\n\
+      \ - Genetic testing plans\n - Referrals: \"You are referred to...\" not \"We\
+      \ will refer you to...\"\n - Follow-up visit timing\n - Advance care status\
+      \ if meaningful (Full code, DNR/DNI, surrogate)]\n\n[If emotional_context is\
+      \ present, add EXACTLY: \"We understand that this is a challenging time and\
+      \ that managing these health changes can be stressful. We want to reinforce\
+      \ that you are not alone in this process.\" [source:emotional_context]]\nThank\
+      \ you for trusting us with your care. [source:none]\nPlease feel free to contact\
+      \ us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]\n\
+      \nAVAILABLE FIELD NAMES (only use these in [source:] tags):\n- Patient type,\
+      \ second opinion, in-person, summary\n- Type_of_Cancer, Stage_of_Cancer, Distant\
+      \ Metastasis, Metastasis\n- lab_summary\n- findings\n- current_meds\n- recent_changes,\
+      \ supportive_meds\n- goals_of_treatment\n- response_assessment\n- medication_plan,\
+      \ therapy_plan, radiotherapy_plan\n- procedure_plan\n- imaging_plan\n- lab_plan\n\
+      - genetic_testing_plan\n- Nutrition, Genetics, Specialty (radiation oncology,\
+      \ etc.), Others (social work, home health, PT), follow up\n- Advance care\n\
+      - emotional_context\n\nOUTPUT FORMAT:\n- Write PLAIN TEXT only. Do NOT wrap\
+      \ the output in JSON, quotes, or any other format.\n- Every sentence MUST end\
+      \ with [source:field_name] before the next sentence begins.\n- Keep the section\
+      \ headers (**Why did you come to the clinic?** etc.) exactly as shown.\n\nINPUT\
+      \ JSON:\n{keypoints_json}\n\nWrite the letter now. Plain text with [source:field_name]\
+      \ after EVERY sentence. No JSON wrapper.\n"
+  plan_extraction:
+    Advance_care_planning: "TASK: Extract the 'Advance care planning' from the clinical\
+      \ note.\nInclude Advance directives, health-care proxy, code status (e.g., Full\
+      \ code, DNR/DNI), living will.\nIMPORTANT: Code status is often found OUTSIDE\
+      \ the Assessment/Plan section — look in the FULL NOTE for:\n- \"Code status:\
+      \ Full code\" or \"Full code\"\n- \"DNR\" or \"DNI\" or \"DNR/DNI\"\n- \"Advance\
+      \ Care Planning\" section\n- \"has a living will\" or \"health care proxy\"\n\
+      If a code status is mentioned ANYWHERE in the note, include it.\nIf no advance\
+      \ care planning is discussed and no code status is found, say \"Not discussed\
+      \ during this visit.\"\nRespond *only* with a JSON object using this exact schema:\n\
+      {\n    \"Advance care\": \"A summary of any advance care planning including\
+      \ code status, or 'Not discussed during this visit.'\"\n}\n"
+    Genetic_Testing_Plan: "TASK: Extract the 'Genetic Testing Plan' from the given\
+      \ 'Assessment/Plan' section.\n\n1. Scope of section:\n- First, find the 'Assessment/Plan'\
+      \ section of the note (usually the final section).\n- Only look for plans that\
+      \ are clearly about FUTURE genetic or molecular TESTING.\n\n2. What COUNTS as\
+      \ 'genetic or molecular testing':\n- Diagnostic, prognostic, or predictive laboratory\
+      \ assays, such as:\n  - Tumor genomic sequencing / NGS / panel testing\n  -\
+      \ Germline genetic panels (e.g., hereditary cancer panel, BRCA testing)\n  -\
+      \ Liquid biopsy / circulating tumor DNA (ctDNA) tests\n  - Specific biomarker\
+      \ tests (e.g., PD-L1 testing, MSI testing, EGFR mutation testing)\n  - Any plan\
+      \ to \"send\", \"order\", \"check\", or \"obtain\" a genetic, genomic, or molecular\
+      \ TEST\n\n3. What MUST be EXCLUDED:\n- DO NOT include any medications, systemic\
+      \ therapies, or treatment plans:\n  - Chemotherapy, immunotherapy, targeted\
+      \ therapies (e.g., FGFR inhibitor, PARP inhibitor, CDK4/6 inhibitor, TKIs)\n\
+      \  - Hormonal therapy, radiation therapy, surgery\n  - Clinical trial options,\
+      \ even if the trial involves targeted drugs or inhibitors\n- DO NOT include\
+      \ tests that are already completed, historic, or only mentioned in past oncology\
+      \ history.\n- DO NOT include imaging (CT, PET, MRI, X-ray, ultrasound) or routine\
+      \ labs (CBC, CMP).\n- DO NOT include IHC staining (ER/PR/HER2 status confirmation),\
+      \ FISH testing, or biopsy for receptor status — these are standard pathology,\
+      \ NOT genetic testing.\n- DO NOT include LVEF/echocardiogram, tumor markers\
+      \ (CA 15-3, CEA, CA 27.29), or other clinical lab rechecks.\n- DO NOT include\
+      \ vague \"recheck\" or \"would recheck\" statements that refer to lab values,\
+      \ imaging, or cardiac function — these are NOT genetic testing.\n- Oncotype\
+      \ DX, MammaPrint, Foundation One, Guardant360, BRCA panels, germline testing\
+      \ — these ARE genetic/molecular testing.\n\n4. CRITICAL — do NOT include content\
+      \ that belongs in OTHER fields:\n- Treatment contingency plans (e.g., \"if progression,\
+      \ could use faslodex\") → these go in Medication_Plan/Therapy_plan\n- Imaging\
+      \ plans (PET CT, MRI) → these go in Imaging_Plan\n- Response assessment text\
+      \ (e.g., \"Not yet on treatment — no response to assess\") → this is NOT genetic\
+      \ testing\n\n5. If there is NO new genetic or molecular test planned in the\
+      \ Assessment/Plan:\n- Set the value to: \"None planned.\"\n\n6. Output format:\n\
+      Respond *only* with a JSON object using this exact schema:\n{\n    \"genetic_testing_plan\"\
+      : \"A summary of any future planned genetic or molecular tests, or a clear statement\
+      \ that none are planned.\"\n}\n"
+    Imaging_Plan: "TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan'\
+      \ section.\nInclude ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound,\
+      \ DEXA scans, bone scan, X-ray, echocardiogram (TTE/Echo), mammogram.\nInclude\
+      \ timing and rationale if mentioned (e.g., \"CT in 3 months for restaging\"\
+      ).\n\nIMPORTANT — look for PRE-TREATMENT IMAGING. When chemotherapy (especially\
+      \ anthracyclines like AC, doxorubicin) is planned, an echocardiogram (TTE/Echo)\
+      \ is often required as a baseline cardiac assessment. Look for phrases like:\n\
+      - \"prior to starting\", \"before initiating\", \"in order to start\", \"steps\
+      \ required\", \"baseline\"\n- \"will need TTE\", \"order echocardiogram\", \"\
+      Echo q6 months\"\nEchocardiogram/TTE IS an imaging study and MUST be included\
+      \ here.\n\nCRITICAL — distinguish PAST from FUTURE:\n- PAST (DO NOT include):\
+      \ \"MRI showed lesions\", \"CT on 12/24/2019 showed...\", \"bone density scan\
+      \ last July showed...\", \"Echo was normal\" (past result)\n- FUTURE (include):\
+      \ \"will order MRI\", \"DEXA in 1 year, due July 2019\", \"scans again in 3\
+      \ months\", \"annual mammogram next due July 2019\", \"consider brain MRI if\
+      \ worsening\", \"needs TTE before starting chemo\"\n\nCRITICAL — only include\
+      \ DIAGNOSTIC imaging, not therapeutic radiation:\n- XRT, RT, radiation therapy,\
+      \ Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here\n\
+      - Only include: CT, MRI, PET/CT, DEXA, bone scan, mammogram, ultrasound, echocardiogram/TTE,\
+      \ X-ray\n\nCRITICAL — only include imaging ORDERED or PLANNED in the A/P:\n\
+      - Do NOT add standard-of-care monitoring that is NOT explicitly mentioned in\
+      \ the A/P.\n- Example: Do NOT add \"echocardiogram\" just because the patient\
+      \ is on an anthracycline, unless the A/P explicitly orders or mentions it.\n\
+      - Example: Do NOT add \"mammogram\" unless the A/P specifically schedules one.\n\
+      \nDO NOT include any procedure plan, lab plan, or medication plan.\nList SPECIFIC\
+      \ imaging types. Do NOT use vague terms like \"staging workup\".\nIf no future\
+      \ imaging is planned, say \"No imaging planned.\"\nRespond *only* with a JSON\
+      \ object using this exact schema:\n{\n    \"imaging_plan\": \"A summary of any\
+      \ planned imaging with specific test names, or 'No imaging planned.'\"\n}\n"
+    Lab_Plan: "TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.\n\
+      Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA,\
+      \ CA-125, PSA), coagulation profile, hepatitis markers, etc.\nAlso include pre-chemo\
+      \ blood draws (e.g., \"blood draw prior to cycle\", \"labs before chemo\", \"\
+      draw and visit\").\nSpecify frequency and rationale if mentioned.\n\nCRITICAL\
+      \ — do NOT include these (they belong in OTHER fields):\n- Imaging scans: PET\
+      \ CT, CT, MRI, DEXA, bone scan, ultrasound, mammogram → these go in Imaging_Plan\n\
+      - Genomic/molecular tests: MammaPrint, Oncotype DX, BRCA panel, NGS, liquid\
+      \ biopsy → these go in Genetic_Testing_Plan\n- Treatment plans: medication changes,\
+      \ chemotherapy plans → these go in Medication_Plan\nLab_Plan is ONLY for blood\
+      \ draws and lab work.\n\nDO NOT include past lab results. DO NOT use vague terms\
+      \ like \"staging workup\" — list the specific tests ordered.\nIMPORTANT: If\
+      \ the A/P mentions labs and imaging in the SAME sentence (e.g., \"ordered MRI\
+      \ and bone scan as well as labs\"),\nyou must SEPARATE them — only include the\
+      \ lab part (e.g., \"labs to complete staging workup\"), NOT the imaging part.\n\
+      Never copy \"MRI\", \"bone scan\", \"CT\", \"PET\" into lab_plan even if they\
+      \ appear in the same sentence as labs.\nIf the note lists specific lab orders\
+      \ (CBC, CMP, tumor markers, etc.) elsewhere, name those tests.\nIf no future\
+      \ blood tests or labs are planned, say \"No labs planned.\"\nRespond *only*\
+      \ with a JSON object using this exact schema:\n{\n    \"lab_plan\": \"A summary\
+      \ of the future lab plan with specific test names, or 'No labs planned.'\"\n\
+      }\n"
+    Medication_Plan: "TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan'\
+      \ section.\nInclude future medication plans, changes to current meds (start,\
+      \ stop, continue), supportive meds, bowel regimen, and any blood transfusion\
+      \ plan. Do not include past medications.\nBe SPECIFIC: list actual drug names,\
+      \ doses, and frequencies when mentioned. Do NOT use vague terms like \"will\
+      \ start medications\".\nRespond *only* with a JSON object using this exact schema:\n\
+      {\n    \"medication_plan\": \"A summary of the complete medication plan with\
+      \ specific drug names and doses.\"\n}\n"
+    Procedure_Plan: "TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan'\
+      \ section.\nInclude ONLY future/planned procedures: surgery, biopsy, lumbar\
+      \ puncture, Chemo Port Insertion, or other interventional procedures.\n\nIMPORTANT\
+      \ — look for PRE-TREATMENT PREREQUISITES. When chemotherapy is planned, there\
+      \ are often preparatory steps mentioned with phrases like:\n- \"prior to starting\"\
+      , \"before initiating\", \"in order to start\", \"steps required\"\n- \"needs\
+      \ to undergo\", \"baseline\", \"will need\"\nCommon pre-chemo procedures: port\
+      \ placement (Mediport), chemotherapy teaching session, dental clearance.\nThese\
+      \ ARE procedures and MUST be included.\n\nCRITICAL — distinguish PAST from FUTURE:\n\
+      - PAST (DO NOT include): \"underwent mastectomy on 10/29/16\", \"s/p colectomy\
+      \ in June 2018\", \"had biopsy on 05/25\", \"completed radiation\"\n- FUTURE\
+      \ (include): \"will schedule biopsy\", \"plan for port placement\", \"surgery\
+      \ pending\", \"scheduled for colectomy next week\", \"needs port placement\"\
+      , \"steps including port placement\"\nIf a procedure has a past date or uses\
+      \ past tense (underwent, had, completed, s/p), it is PAST — do NOT include it.\n\
+      \nAlso DO NOT include:\n- Imaging plans (CT, MRI, PET, PET/CT, DEXA, bone scan,\
+      \ ultrasound, mammogram, echocardiogram/TTE, X-ray — these ALL go in Imaging_Plan,\
+      \ NOT here)\n- Radiation/radiotherapy plans (radiation, XRT, RT, chest wall\
+      \ RT, whole brain radiation — these go in radiotherapy_plan, NOT here)\n- Lab\
+      \ plans or blood tests\n- Medication/treatment plans (e.g., \"continue arimidex\"\
+      , \"could use faslodex\" — these go in Medication_Plan)\n- Referrals or consultations\
+      \ (e.g., \"XRT consult\" is a referral, not a procedure)\n- General treatment\
+      \ goals or contingency plans\n- Genetic/molecular testing (Foundation One, Oncotype,\
+      \ BRCA panels — these go in Genetic_Testing_Plan)\n- Fertility preservation\
+      \ referrals (these go in Referral → Others)\n\nCommon mistakes to AVOID:\n-\
+      \ \"Brain MRI\" → this is IMAGING, not a procedure\n- \"chest wall RT\" → this\
+      \ is RADIOTHERAPY, not a procedure\n- \"will proceed with radiation\" → this\
+      \ is RADIOTHERAPY, not a procedure\n- \"TTE\" or \"echocardiogram\" → this is\
+      \ IMAGING, not a procedure\n- \"DEXA scan\" → this is IMAGING, not a procedure\n\
+      - \"chemotherapy\", \"TCHP\", \"FOLFOX\", \"AC-T\" → these are MEDICATIONS/SYSTEMIC\
+      \ THERAPY, not procedures\n- \"start letrozole\", \"continue tamoxifen\" → these\
+      \ are MEDICATION plans, not procedures\n- \"immunotherapy\", \"targeted therapy\"\
+      \ → these are MEDICATIONS, not procedures\nFINAL CHECK — before outputting,\
+      \ verify EACH item in your procedure_plan:\n1. Is it a physical/surgical intervention?\
+      \ (surgery, biopsy, port placement, drain removal, LP) → YES, include\n2. Is\
+      \ it a systemic therapy? (chemo, hormonal, targeted, immunotherapy, AC, TCHP,\
+      \ taxol, letrozole, tamoxifen) → NO, goes in Medication_Plan\n3. Is it imaging?\
+      \ (CT, MRI, PET, echo, DEXA, bone scan, ultrasound, mammogram) → NO, goes in\
+      \ Imaging_Plan\n4. Is it radiation? (XRT, RT, GK, SRS) → NO, goes in radiotherapy_plan\n\
+      5. Is it dental clearance? → NO, this is a prerequisite, not a procedure\nIf\
+      \ your procedure_plan contains ANY systemic therapy drug names, you have made\
+      \ an error — remove them.\n\nIf no future procedures are planned, say \"No procedures\
+      \ planned.\"\nRespond *only* with a JSON object using this exact schema:\n{\n\
+      \    \"procedure_plan\": \"A summary of any planned procedures, or 'No procedures\
+      \ planned.'\"\n}\n"
+    Referral: 'TASK: Extract ''Referral'' from the given ''Assessment/Plan'' section.
+
+      Do not mistake the doctor''s signature at the end of the note as a referral.
+
+      Include ALL referrals TO OTHER providers/departments, including integrative
+      medicine, complementary medicine, or wellness referrals.
+
+      A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+
+
+      IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section.
+      Referrals may appear in:
+
+      - HPI: "referred to genetics", "will refer to social work"
+
+      - Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral
+      to Exercise Counseling"
+
+      - Psychologic/Social section: "I will refer to social work"
+
+      - A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation"
+
+      Search for ALL of these keywords: "refer", "referral", "consult", "counseling",
+      "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry",
+      "psychology", "palliative".
+
+      Common referrals found OUTSIDE the A/P section:
+
+      - "Ambulatory Referral to Social Work" (in Diagnosis section) → Others: Social
+      work referral
+
+      - "Referral to Exercise Counseling" (in Diagnosis section) → Others: Exercise
+      counseling referral
+
+      - "I will refer to social work" (in Psychologic section) → Others: Social work
+      referral
+
+
+      CRITICAL — distinguish OUTGOING from INCOMING referrals:
+
+      - OUTGOING (include): This note''s doctor is SENDING the patient elsewhere.
+      E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will
+      schedule Rad Onc consult".
+
+      - INCOMING (do NOT include): The patient was SENT TO this doctor by someone
+      else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred
+      for consideration of adjunct therapy".
+
+      - Do NOT include the current visit''s own department. These notes are written
+      by Medical Oncology — do NOT list "Medical Oncology" or "Med Onc" as a referral.
+
+      - If the note says "referred to Med Onc (today''s visit) and also Rad Onc",
+      only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing
+      referral.
+
+
+      If no referral is mentioned for a category, set its value to "None".
+
+      For Nutrition: only include referrals to a nutritionist or dietitian (e.g.,
+      "nutrition consult", "refer to nutritionist", "follow up with nutrition on [date]").
+
+      The following are NOT nutrition referrals — they are general lifestyle advice
+      from the oncologist:
+
+      - "I recommend an anti inflammatory/mediterranean diet" → NOT a referral
+
+      - "I recommend a diabetes risk reducing diet" → NOT a referral
+
+      - "eat calcium-rich food", "limit alcohol", "exercise" → NOT a referral
+
+      - "take calcium and vitamin D", "continue vitamin D daily" → NOT a referral
+      (supplement advice)
+
+      - "discussed lifestyle modifications" → NOT a referral
+
+      If the oncologist gives diet advice without referring to a nutritionist/dietitian,
+      write "None".
+
+      Respond *only* with a JSON object using this exact schema:
+
+      {
+
+      "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight
+      maintenance, or ''None''",
+
+      "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g.,
+      ''refer to genetics'', ''genetics consult recommended''). Do NOT list genetic
+      test RESULTS or known mutations here (e.g., ''BRCA1 mutation'', ''ATM mutation
+      carrier'', ''genetic testing negative'' are FINDINGS, not referrals). Write
+      ''None'' if no genetics referral is planned.",
+
+      "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology,
+      Integrative Medicine, Psychology/psychiatry, Dental evaluation, or ''None''",
+
+      "Others": "Physical or occupational therapy, Exercise counseling referral, Social
+      work, financial counseling, home health, or ''None''. IMPORTANT: General advice
+      about exercise (''continue exercise'', ''weight bearing exercise'', ''discussed
+      exercise'') is NOT an exercise referral. Only include if there is an explicit
+      referral to an exercise counseling program (e.g., ''Referral to Exercise Counseling'').",
+
+      "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all
+      mean follow up."
+
+      }
+
+      '
+    Therapy_plan: "TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan'\
+      \ section.\nInclude ONLY current or future therapy: chemotherapy, radiotherapy,\
+      \ hormonal therapy, and bone-therapy.\nInclude future plans, changes to current\
+      \ therapy (start, stop, continue).\n\nCRITICAL — distinguish PAST from CURRENT/FUTURE:\n\
+      - PAST (DO NOT include): \"underwent mastectomy in 2016\", \"s/p colectomy\"\
+      , \"completed 6 cycles of TCHP\", \"had radiation in 2018\"\n- CURRENT (include):\
+      \ \"continue letrozole\", \"currently on irinotecan\", \"taking tamoxifen daily\"\
+      \n- FUTURE (include): \"will start\", \"plan to begin\", \"discussed starting\"\
+      , \"switch to\"\nIMPORTANT: \"continue [drug]\" IS a valid therapy plan. If\
+      \ the patient is continuing on current therapy, list the therapy being continued.\
+      \ Do NOT write \"None\" when the patient is actively on treatment.\n\nDO NOT\
+      \ include imaging plans (CT, MRI, PET, DEXA, Echo, echocardiogram, mammogram,\
+      \ bone scan, X-ray) — those belong in Imaging_Plan.\nDO NOT include lab plans\
+      \ — those belong in Lab_Plan.\nOnly include THERAPY: chemotherapy drugs, hormonal\
+      \ drugs, radiation therapy, bone-protecting agents, and their schedules.\n\n\
+      Be SPECIFIC: include drug names, doses, schedule changes, and cycle information\
+      \ when mentioned.\nRespond *only* with a JSON object using this exact schema:\n\
+      {\n    \"therapy_plan\": \"A summary of the current and future therapy plan\
+      \ with specific details.\"\n}\n"
+    follow_up_next_visit: "TASK: Extract the 'follow up/next visit' from the given\
+      \ 'Assessment/Plan' section.\nBe SPECIFIC about timing (e.g., \"2 weeks\", \"\
+      after biopsy results\", \"3 months\").\nRespond *only* with a JSON object using\
+      \ this exact schema:\n{\n    \"Next clinic visit\": \"(in-person or telehealth):\
+      \ timing and purpose\"\n}\n"
+    radiotherapy_plan: "TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan'\
+      \ section.\nFor radiotherapy, include ANY statement that indicates\nit is being\
+      \ considered, recommended, or may be used, even if no explicit\nstart/continue/plan\
+      \ keywords are present.\nInclude referrals to radiation oncology (Rad Onc) as\
+      \ a radiotherapy-related plan.\n\nCRITICAL — distinguish PAST from CURRENT/FUTURE:\n\
+      - PAST (DO NOT include): \"had radiation in 2018\", \"s/p radiation\", \"completed\
+      \ radiation\", \"treated with lumpectomy followed by radiation\", \"had adjuvant\
+      \ radiation\", \"status post radiation\"\n- CURRENT (include): \"currently receiving\
+      \ radiation\", \"on radiation therapy\"\n- FUTURE (include): \"will start radiation\"\
+      , \"radiation planned\", \"discussed radiation\", \"Rad Onc consult\", \"considering\
+      \ radiation\"\nIf a radiotherapy statement uses past tense or describes completed/historical\
+      \ treatment, it is PAST — do NOT include it.\nIf the only radiotherapy mentioned\
+      \ is past/completed, write \"None\".\n\nRespond *only* with a JSON object using\
+      \ this exact schema:\n{\n    \"radiotherapy_plan\": \"A summary of any planned\
+      \ or discussed radiotherapy, or 'None' if not mentioned.\"\n}\n"
