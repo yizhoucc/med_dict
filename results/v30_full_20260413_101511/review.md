@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v30) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-3 完成 (3/61)，ROW 5 待审查**
+> Status: **审查中 — ROW 1-6 完成 (5/61)，ROW 7 待审查**
 > Results 文件: `results/v30_full_20260413_101511/results.txt`
 
 ### v30 改进（相对 v29）
@@ -31,7 +31,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 4 | — | ROW 1×2, 2×1, 3×1 (ROW 5+ 待审查) |
+| **P2** | 6 | — | ROW 1×2, 2×1, 3×1, 5×0, 6×2 (ROW 7+ 待审查) |
 
 ---
 
@@ -74,5 +74,24 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ genetic_testing_plan: "sent and pending" ✅。imaging_plan: PET follow-up ✅
 - ✅ procedure_plan: "No procedures planned" ✅（无混入）
 - ✅ Letter（除"medication"外）: IDC "milk ducts" + HER2 "protein" + neoadjuvant "treatments before surgery to shrink cancer" + PET + genetic testing + chemo discussed + full code + emotional support。通俗
+
+### ROW 5 (coral_idx 144) — 0 P1, 0 P2 ✅
+- 31yo premenopausal, Stage III→IV ER+/PR+/HER2- IDC left breast。Metastatic recurrence to cervical LN + brachial plexus + possible sternal bone met。On anastrozole + palbociclib + leuprolide。Televisit follow-up。Full code。ECOG 1。
+- ✅ Type: "ER+/PR+/HER2- IDC (originally ER+/PR+/HER2-, metastatic biopsy ER+/PR+/HER2-)" ✅ — **v30 受体优先级改进确认！** 两次活检状态都列出
+- ✅ current_meds: anastrozole + palbociclib + leuprolide ✅（三个药全部）
+- ✅ response_assessment: CT cervical LN decreased + axillary LN increased + MRI brachial plexus + bone scan sternal lesion ✅ — 详细且准确反映 mixed response
+- ✅ procedure_plan: "No procedures planned" ✅（v30 字段改进确认 — 无 chemo 混入）
+- ✅ imaging_plan: CT + bone scan ✅。lab_plan: monthly ✅。radiotherapy_plan: Rad Onc referral ✅
+- ✅ Letter 逐句(9句): follow-up + spread to neck/arm + mixed response "some smaller, others grown" + continue meds + ondansetron + Rad Onc + CT+bone scan + monthly labs on lupron day + closing complete。通俗准确
+
+### ROW 6 (coral_idx 145) — 0 P1, 2 P2
+- 34yo, ER+/PR+/HER2- IDC 1.5cm grade 1, 0/1 node。S/p bilateral mastectomy + expanders。On zoladex (1 month) + letrozole (started today)。Oncotype low risk。Bipolar 2 disorder。Myriad negative。ECOG 0。
+- P2: Patient type "New patient" — 应为 "Follow up"（zoladex 06/08 已由该提供者开始）— 同 v29
+- P2: Referral-Genetics 历史转诊（04/24/2019，Myriad already negative）混入当前 referrals — 同 v29
+- ✅ Type: ER+/PR+/HER2- IDC ✅。Goals: curative ✅。current_meds: zoladex + letrozole ✅
+- ✅ medication_plan: letrozole ≥3yr → tamoxifen + gabapentin + estradiol monthly ✅
+- ✅ lab_summary: 全面（Estradiol 172 + Vitamin D 24 + CMP + CBC）✅
+- ✅ procedure_plan: "No procedures planned" ✅（v30 字段改进确认）
+- ✅ Letter 逐句(10句): bilateral mastectomy + left benign/right IDC + "grows slowly, responds to hormones" + letrozole + gabapentin + estradiol monthly + genetic counseling + 3 months + emotional support + closing complete。通俗准确
 
 
