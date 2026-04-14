@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v30) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-9 完成 (8/61)，ROW 10 待审查**
+> Status: **审查中 — ROW 1-10 完成 (9/61)，ROW 11 待审查**
 > Results 文件: `results/v30_full_20260413_101511/results.txt`
 
 ### v30 改进（相对 v29）
@@ -31,7 +31,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 10 | — | ROW 1×2, 2×1, 3×1, 5×0, 6×2, 7×2, 8×2, 9×0 (ROW 10+ 待审查) |
+| **P2** | 12 | — | ROW 1×2, 2×1, 3×1, 5×0, 6×2, 7×2, 8×2, 9×0, 10×2 (ROW 11+ 待审查) |
 
 ---
 
@@ -120,5 +120,15 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ procedure_plan: "Drains to be removed on Thursday" ✅（真正的 procedure！）
 - ✅ medication_plan: Letrozole after radiation + Fosamax ✅
 - ✅ Letter: bilateral mastectomy + residual cancer "mostly gone" + LN + ER "responds to estrogen" + Letrozole + radiation + drains Thursday + full code + emotional support。通俗准确
+
+### ROW 10 (coral_idx 149) — 0 P1, 2 P2
+- 66yo, Stage II left breast HR+/HER2-。S/p neoadjuvant letrozole → left mastectomy（8.8cm residual, LN involved）→ bilateral reductions + re-excision。Low risk Oncotype → no chemo。Continue letrozole。Radiation planned。DEXA。Phone consult（failed video）。Full code。
+- P2: response_assessment "No specific evidence to assess current response" — 但有 post-neoadjuvant 手术病理（8.8cm, LN involved）。v29 的 POST-RESPONSE-GENOMIC hook 正确捕获了手术病理，v30 丢失了
+- P2: Letter "You are referred to for a follow-up visit" — "referred to for" 缺失 [REDACTED] 医生名，语法 garbled
+- ✅ Type: HR+/HER2- IDC ✅。Stage: II ✅。Goals: curative ✅。current_meds: letrozole ✅
+- ✅ radiotherapy_plan: left chest wall + surrounding LN ✅。imaging_plan: DEXA ✅
+- ✅ procedure_plan: "No procedures planned" ✅（v30 字段改进确认）
+- ✅ Advance care: full code ✅
+- ✅ Letter（除 garbled 外）: recovered from surgery + continue letrozole + radiation next week + DEXA + full code。通俗
 
 
