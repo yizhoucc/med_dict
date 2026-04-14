@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v30) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-2 完成 (2/61)，ROW 3 待审查**
+> Status: **审查中 — ROW 1-3 完成 (3/61)，ROW 5 待审查**
 > Results 文件: `results/v30_full_20260413_101511/results.txt`
 
 ### v30 改进（相对 v29）
@@ -31,7 +31,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 3 | — | ROW 1×2, 2×1 (ROW 3+ 待审查) |
+| **P2** | 4 | — | ROW 1×2, 2×1, 3×1 (ROW 5+ 待审查) |
 
 ---
 
@@ -64,5 +64,15 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ Referral: Rad Onc + Social work + Home health ✅
 - ✅ procedure_plan: "No procedures planned" ✅（无 chemo 混入 — v30 字段改进确认）
 - ✅ Letter（除截断外）: 极其全面 — chest wall infection + back pain PD + labs explained + anemia "tired" + Hep B + neuropathy improved + irinotecan change + doxycycline + effexor + potassium + Rad Onc + scans + MRI brain + HBV monitoring。通俗准确
+
+### ROW 3 (coral_idx 142) — 0 P1, 1 P2
+- 53yo postmenopausal, Stage IIA R breast IDC 1.7cm, LN+, ER+/PR+/HER2-(IHC 2+, FISH neg), Ki-67 30-35%。Multiple opinions (second opinion)。PET + Oncotype pending。Genetic testing sent。Pre-diabetes。Video consult。Full code。ECOG 0。
+- P2: Letter 写 "after the results of the PET scan and a medication are back" — [REDACTED] Oncotype Dx 被误解为 "a medication"。Oncotype 是检测不是药物。v30 [REDACTED] handling 未完全生效
+- ✅ second opinion: yes ✅。Type: ER+/PR+/HER2- IDC ✅。Stage: IIA ✅
+- ✅ response_assessment: "Not yet on treatment — no response to assess." ✅ — **v30 改进确认！** 正确识别 pre-treatment
+- ✅ Goals: curative ✅。current_meds: empty ✅。Advance care: full code ✅
+- ✅ genetic_testing_plan: "sent and pending" ✅。imaging_plan: PET follow-up ✅
+- ✅ procedure_plan: "No procedures planned" ✅（无混入）
+- ✅ Letter（除"medication"外）: IDC "milk ducts" + HER2 "protein" + neoadjuvant "treatments before surgery to shrink cancer" + PET + genetic testing + chemo discussed + full code + emotional support。通俗
 
 
