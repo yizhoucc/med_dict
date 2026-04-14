@@ -71,7 +71,16 @@ Cancer_Diagnosis: |
     IMPORTANT: Only write "Originally Stage [X]" if the note EXPLICITLY states the original stage number (e.g., "Stage IIA at diagnosis"). If the note only says "metastatic recurrence" without specifying the original stage, write just "Metastatic (Stage IV)" — do NOT guess or invent the original stage.
   - If distant metastases are documented, the current stage is Stage IV even if not explicitly stated.
   - If the Assessment/Plan states a stage (e.g., "Stage I", "early stage"), extract it — do NOT write "Not mentioned in note".
-  - If tumor size and node status are available, infer the approximate stage (e.g., "2.3 cm, 0/3 LN negative — approximately Stage I-II").
+  - If tumor size and node status are available, ALWAYS infer the approximate stage — do NOT write "Not mentioned" when you have these data:
+    - ≤2cm (T1) + N0 = Stage I (or Stage IA)
+    - ≤2cm + N1mi (micromet only) = Stage IB or Stage IIA
+    - >2cm ≤5cm (T2) + N0 = Stage IIA
+    - >2cm ≤5cm + N1 (1-3 LN+) = Stage IIB
+    - >5cm (T3) + any N = at least Stage IIIA
+    - 4+ LN+ (N2) = at least Stage IIIA
+    - Distant metastasis (M1) = Stage IV
+    Example: "0.8 cm IDC, 0/5 LN" → write "Stage IA (inferred from pT1b N0)"
+    Example: "2.2 cm, 4/19 LN+" → write "Stage IIIA (inferred from pT2 N2a)"
   - IMPORTANT: Node-negative ("node neg", "0/N LN+") with small tumor (≤2cm) = Stage I, NOT Stage II.
     Stage II requires either positive lymph nodes OR tumor >2cm. "Early stage node negative" = Stage I.
   - Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
@@ -80,8 +89,8 @@ Cancer_Diagnosis: |
   {
   "Type_of_Cancer": "Specific cancer type with histologic subtype and receptor statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
   "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only include original stage if explicitly stated in the note",
-  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant.",
-  "Metastasis": "if there is met, Yes (to where), No, or Not sure"
+  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant. CRITICAL: If enlarged lymph nodes were BIOPSIED and showed NON-MALIGNANT findings (granulomatous inflammation, sarcoidosis, reactive changes), they are NOT cancer metastases — even if hypermetabolic on PET/CT.",
+  "Metastasis": "if there is met, Yes (to where), No, or Not sure. IMPORTANT: Verify biopsy results — sarcoidosis and granulomatous disease in lymph nodes are NOT cancer metastases."
   }
 
 Lab_Results: |

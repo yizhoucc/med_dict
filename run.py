@@ -1396,14 +1396,31 @@ def main():
                     "genetic counseling", "genetics counseling",
                     "rad onc referral", "radiation oncology referral",
                     "social work", "nutrition referral",
-                    # Medication items that don't belong in procedure_plan
+                    # Medication items that don't belong in procedure_plan [v31 expanded]
                     "zoladex", "goserelin", "prior auth",
                     "xeloda", "letrozole", "arimidex", "faslodex", "tamoxifen",
+                    "exemestane", "anastrozole", "palbociclib", "ribociclib", "abemaciclib",
+                    "herceptin", "pertuzumab", "trastuzumab", "t-dm1", "neratinib",
+                    "epirubicin", "neupogen", "carboplatin", "docetaxel", "paclitaxel",
+                    "abraxane", "capecitabine", "gemcitabine", "doxorubicin", "eribulin",
+                    "taxol", "taxotere", "cyclophosphamide", "adriamycin",
+                    "olaparib", "pembrolizumab", "durvalumab", "atezolizumab",
                     "continue on", "start on", "could use", "could consider",
-                    # Imaging items that don't belong in procedure_plan
+                    "chemotherapy", "systemic therapy", "hormonal therapy", "immunotherapy",
+                    "adjuvant", "neoadjuvant", "chemo", "endocrine therapy",
+                    # Imaging items that don't belong in procedure_plan [v31 expanded]
                     "ct cap", "ct chest", "ct abdomen", "ct pelvis", "mri", "pet",
                     "dexa", "bone scan", "mammogram", "ultrasound", "echocardiogram",
-                    "tte", "echo",
+                    "tte", "echo", "doppler", "x-ray", "xray", "petct", "pet/ct",
+                    "restaging", "repeat imaging",
+                    # Radiation items [v31 new]
+                    "radiation", "xrt", " rt ", "gamma knife", "gk ", "srs ",
+                    "radiosurgery", "whole brain", "breast radiotherapy",
+                    # Non-procedure misc [v31 new]
+                    "acupuncture", "pathology review", "path review",
+                    "check labs", "lab draw", "blood work", "blood test",
+                    "hormone studies", "estradiol", "fsh ", "tumor marker",
+                    "referral", "consult", "dental clearance", "dental eval",
                 ]
                 items = [item.strip() for item in re.split(r'[,;]', proc_val) if item.strip()]
                 kept = []
@@ -1826,6 +1843,27 @@ def main():
                 if on_treatment or has_meds:
                     resp["response_assessment"] = "On treatment; response assessment not available from current visit."
                     print(f"    [POST-RESPONSE-TREATMENT] Corrected 'Not yet on treatment' → on treatment")
+
+        # POST-RESPONSE-PRETREATMENT: Correct "On treatment" for pre-treatment consultations [v31]
+        # If response_assessment says "On treatment" but current_meds is empty and it's a new patient consultation,
+        # the patient hasn't started treatment yet
+        resp = keypoints.get("Response_Assessment", {})
+        if isinstance(resp, dict):
+            resp_val = resp.get("response_assessment", "") or ""
+            if "on treatment" in resp_val.lower() and "not" not in resp_val.lower()[:30]:
+                cur_meds = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+                pt_type = (keypoints.get("Reason_for_Visit", {}).get("Patient type", "") or "").strip().lower()
+                summary = (keypoints.get("Reason_for_Visit", {}).get("summary", "") or "").lower()
+                recent = (keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or "").lower()
+                # Clues that treatment hasn't started
+                is_consultation = ("consultation" in summary or "new patient" in pt_type or
+                                   "initial" in summary or "establish care" in summary)
+                just_prescribed = bool(re.search(
+                    r'(?:rx given|prescription (?:sent|ordered)|will start|instructed to begin|ok to start)',
+                    recent + " " + summary))
+                if not cur_meds and (is_consultation or just_prescribed):
+                    resp["response_assessment"] = "Not yet on treatment — no response to assess."
+                    print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just prescribed, no current meds)")
 
         # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29]
         # Oncotype/MammaPrint are prognostic tools, not treatment response assessments

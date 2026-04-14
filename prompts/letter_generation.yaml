@@ -31,6 +31,9 @@ patient_letter: |
       - Example: If genetic_testing_plan says "Order an [REDACTED] to provide more information", write "You will have a test to learn more about your cancer" — do NOT try to name the test.
       - Example: If medication_plan says "[REDACTED] + [REDACTED]", write "You will start new medications as discussed with your doctor" — do NOT generate nonsensical drug names.
       - NEVER concatenate partial words from [REDACTED] boundaries. If a word is partially redacted, skip it entirely.
+      - If [REDACTED] appears where a FACILITY or LOCATION name should be (e.g., "proceed with treatment at [REDACTED]", "treated at [REDACTED]", "[REDACTED] Hospital"), write "your clinic" or "your treatment center" — do NOT write "a medication".
+      - If [REDACTED] appears where an ANEMIA TYPE should be (e.g., "[REDACTED] anemia"), write "a type of anemia" — do NOT write "medication-related anemia" unless the note explicitly says so.
+      - Common [REDACTED] context clues: "at [REDACTED]" = facility, "in [REDACTED]" = location, "[REDACTED] anemia" = disease name, "[REDACTED] mutation" = gene name.
   16. FACTUAL ACCURACY:
       - HER2 is a PROTEIN (receptor on cancer cells), NOT a medication. Write "a protein called HER2" or "does not have a protein called HER2", NOT "a medication called HER2".
       - "Squamous differentiation" = cancer cells look like skin cells. It is NOT the same as "mucinous" (mucus-producing). Do NOT confuse these.
