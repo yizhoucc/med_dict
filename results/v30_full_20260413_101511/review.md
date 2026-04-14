@@ -6,7 +6,7 @@
 > Pipeline: V2 (5-gate) + POST hooks (v30) + letter generation
 > tool_calling: **false**
 > Reviewer: Claude (逐字逐句手工审查，每个 sample 完整读 note + keypoints + letter)
-> Status: **审查中 — ROW 1-6 完成 (5/61)，ROW 7 待审查**
+> Status: **审查中 — ROW 1-9 完成 (8/61)，ROW 10 待审查**
 > Results 文件: `results/v30_full_20260413_101511/results.txt`
 
 ### v30 改进（相对 v29）
@@ -31,7 +31,7 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 |--------|------|------|------|
 | **P0** | 0 | 0% | |
 | **P1** | 0 | — | |
-| **P2** | 6 | — | ROW 1×2, 2×1, 3×1, 5×0, 6×2 (ROW 7+ 待审查) |
+| **P2** | 10 | — | ROW 1×2, 2×1, 3×1, 5×0, 6×2, 7×2, 8×2, 9×0 (ROW 10+ 待审查) |
 
 ---
 
@@ -93,5 +93,32 @@ ROW: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 14, 17, 18, 20, 22, 27, 29, 30, 33, 34,
 - ✅ lab_summary: 全面（Estradiol 172 + Vitamin D 24 + CMP + CBC）✅
 - ✅ procedure_plan: "No procedures planned" ✅（v30 字段改进确认）
 - ✅ Letter 逐句(10句): bilateral mastectomy + left benign/right IDC + "grows slowly, responds to hormones" + letrozole + gabapentin + estradiol monthly + genetic counseling + 3 months + emotional support + closing complete。通俗准确
+
+### ROW 7 (coral_idx 146) — 0 P1, 2 P2 ← **v28 Stage regression 修复确认**
+- Stage II→IV ER-/PR-/HER2+ IDC left breast。Metastatic since 2008 to supraclavicular LN + mediastinum。Multiple lines (Taxotere/xeloda+Herceptin → Tykerb+Herceptin → capecitabine/Herceptin → pertuzumab/Herceptin/Taxotere)。Probable mild PD (SUV 2.1 vs 1.8), LVEF decreased 52%。D/c current regimen, recommend [T-DM1]。Second opinion。
+- **v28 regression FIXED**: Stage "Originally Stage II, now Stage IV" ✅
+- P2: procedure_plan "Would recheck [REDACTED]" — LVEF/echo 是 imaging 不是 procedure。同 v29
+- P2: Letter 写 "check your levels of a specific medication" — [REDACTED] LVEF 被误解为 "levels of a medication"。v30 [REDACTED] handling 部分生效（没生成 garbled drug name）但仍不完美
+- ✅ Type: ER-/PR-/HER2+ IDC ✅。Goals: palliative ✅。second opinion: yes ✅
+- ✅ response_assessment: "probable mild progression...SUV 2.1 (was 1.8)...[REDACTED] 14.8 persistently elevated" ✅ — 详细
+- ✅ medication_plan: d/c current regimen + recommend [REDACTED] next line ✅
+- ✅ Letter: progression described + LVEF 52% + d/c Herceptin/Taxotere + new medication + closing complete
+
+### ROW 8 (coral_idx 147) — 0 P1, 2 P2
+- 29yo premenopausal, Stage III ER-/PR-/HER2+(IHC 3+, FISH 5.7) IDC left breast。Incomplete neoadjuvant TCHP（3 partial cycles, non-adherent）。S/p lumpectomy + ALND: **breast pCR** but 3/28 LN+（largest 2.4cm, ECE, Ki-67 75%）。Kikuchi's disease。Plan: adjuvant AC x4 → T-DM1 + radiation。
+- P2: procedure_plan "adjuvant AC x 4 cycles, to be followed by T-DM1, needs port placement" — 化疗混入 procedure（虽然 port placement 被正确捕获）。v30 字段改进部分生效但仍有 chemo 混入
+- P2: response_assessment "Not yet on treatment — no response to assess" — **v30 REGRESSION!** 患者完成了不完整的新辅助化疗+手术，病理显示 breast pCR + 3/28 LN+。v29 正确捕获了 post-neoadjuvant pathology。v30 的"刚开处方"规则过度应用了
+- ✅ Type: ER-/PR-/HER2+(IHC 3+, FISH 5.7) ✅。Goals: curative ✅
+- ✅ medication_plan: AC x4 → T-DM1 ✅。radiotherapy_plan: radiation after AC ✅
+- ✅ imaging_plan: echocardiogram ✅。Referral: social work ✅
+- ✅ Letter(12句): AC + T-DM1 + radiation + echo + port + social work + closing complete。通俗准确
+
+### ROW 9 (coral_idx 148) — 0 P1, 0 P2 ✅
+- 63yo, kidney transplant recipient, Stage II R breast IDC ER+(85%)/PR-(<1%)/HER2-(IHC 0, FISH neg)。S/p neoadjuvant [AC] x4 + taxol x12 → bilateral mastectomies: 3.84cm residual (~5% cellularity), 1 macro + 1 micro + 1 ITC in 4 SLN with extranodal extension。Plan: letrozole after radiation + Fosamax。Drains still in。Full code。
+- ✅ Type: ER+/PR-/HER2- IDC ✅。Stage: II ✅。Goals: curative ✅
+- ✅ response_assessment: "responded to neoadjuvant therapy" + 详细病理（3.84cm/5% cellularity/LN details）✅ — 出色！
+- ✅ procedure_plan: "Drains to be removed on Thursday" ✅（真正的 procedure！）
+- ✅ medication_plan: Letrozole after radiation + Fosamax ✅
+- ✅ Letter: bilateral mastectomy + residual cancer "mostly gone" + LN + ER "responds to estrogen" + Letrozole + radiation + drains Thursday + full code + emotional support。通俗准确
 
 
