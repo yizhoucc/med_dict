@@ -1155,6 +1155,8 @@ def main():
         lab = keypoints.get("Lab_Plan", {})
         if isinstance(lab, dict):
             lab_val = lab.get("lab_plan", "") or ""
+            if isinstance(lab_val, list):
+                lab_val = "; ".join(str(v) for v in lab_val)
             if lab_val and lab_val.lower() not in ("no labs planned.", "no labs planned", "none", ""):
                 lab_lower = lab_val.lower()
                 LAB_IMAGING_TERMS = [
@@ -1188,6 +1190,8 @@ def main():
         lab = keypoints.get("Lab_Plan", {})
         if isinstance(lab, dict):
             lab_val = lab.get("lab_plan", "") or ""
+            if isinstance(lab_val, list):
+                lab_val = "; ".join(str(v) for v in lab_val)
             if lab_val and lab_val.lower() not in ("no labs planned.", "no labs planned", "none", "none planned.", ""):
                 items = [item.strip() for item in re.split(r'[,;]', lab_val) if item.strip()]
                 kept = []
