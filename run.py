@@ -926,6 +926,13 @@ def main():
             # Restore the prompt for next iteration
             plan_extraction_prompts["Referral"] = referral_prompt
 
+        # Sanitize keypoints: convert any list values to strings [v32 compat fix]
+        for section_key, section_val in keypoints.items():
+            if isinstance(section_val, dict):
+                for field_key, field_val in section_val.items():
+                    if isinstance(field_val, list):
+                        section_val[field_key] = "; ".join(str(v) for v in field_val)
+
         # Precompute note_lower for all POST checks [v17]
         note_lower = note_text.lower()
 
