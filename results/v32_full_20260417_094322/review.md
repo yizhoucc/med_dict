@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 43/61 逐字审查完成，18 待审查**
+> Status: **审查中 — 44/61 逐字审查完成，17 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 13 | — |
+| **P2** | 15 | — |
 
 ## 审查记录
 
@@ -59,7 +59,7 @@
 | 64 | 203 | 0 | ✅✅ dd AC, taxol planned, oligometastatic sternum, xgeva conditional, Full code (逐字审查) |
 | 65 | 204 | 0 | ✅✅ ISPY2 9-arm trial, ER 2%/PR 7%/HER2-, Ki-67 36%, micromet LN, TTE+port+research biopsy (逐字审查) |
 | 66 | 205 | 1 | Stage "N1 LN involvement" but axillary biopsy was NEGATIVE → should be N0 (逐字审查) |
-| 68 | 207 | 0 | ✅ NED after TCHP |
+| 68 | 207 | 2 | Type_of_Cancer "HER2-" but TCHP is HER2+ regimen + Stage "IV" but axillary/IMN nodes are regional, note says "early stage" (逐字审查) |
 | 70 | 209 | 0 | ✅ bilateral, post-neoadjuvant |
 | 72 | 211 | 0 | ✅ Stage IA |
 | 73 | 212 | 0 | ✅ fat necrosis |
