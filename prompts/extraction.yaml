@@ -60,6 +60,10 @@ Cancer_Diagnosis: |
     Always report the CURRENT receptor status first, then note the original if different.
     Example: If core biopsy was ER+/PR+/HER2- but surgical specimen after neoadjuvant shows ER+/PR-/HER2-, write: "ER+/PR-/HER2- (post-neoadjuvant; originally PR+)"
     If metastatic biopsy shows different receptors from the primary, the metastatic biopsy is the CURRENT status.
+  - HISTOLOGIC SUBTYPE — do NOT confuse imaging with pathology:
+    "lobular mass" or "lobulated mass" on imaging describes the SHAPE of the mass, NOT the histologic subtype.
+    Only write "invasive lobular carcinoma" (ILC) if pathology explicitly says "lobular carcinoma" or "ILC".
+    If pathology says "adenocarcinoma" or "adenoCA" without specifying ductal or lobular, write the exact pathology term (e.g., "Grade III adenocarcinoma"), NOT "invasive lobular carcinoma".
   - REDACTED HER2 — inference rules:
     If the note says "[REDACTED] negative" or "*****-" in the A/P receptor status line, AND the treatment is endocrine-only (no anti-HER2 drugs), HER2 is NEGATIVE — do NOT write "not tested".
     If the Problem List says "ER+PR+ *****-", the "*****" is HER2 and the "-" means NEGATIVE.
