@@ -222,14 +222,17 @@ def main():
             keypoints[key] = result
             print(f"  {key}: {time.time()-t0:.1f}s")
 
-        # 5. Plan extraction from A/P
+        # 5. Plan extraction from A/P (Advance_care_planning uses full note)
         if assessment_and_plan:
             ap_base = build_base_prompt(assessment_and_plan, chat_tmpl=chat_tmpl)
+            # Fields that need full note context (code status is outside A/P)
+            full_note_keys = {"Advance_care_planning"}
             for key, prompt in plan_extraction_prompts.items():
                 if not prompt:
                     continue
                 t0 = time.time()
-                result = extract_keypoint(prompt, client, keypoint_config, ap_base, chat_tmpl)
+                ctx = base_prompt if key in full_note_keys else ap_base
+                result = extract_keypoint(prompt, client, keypoint_config, ctx, chat_tmpl)
                 keypoints[key] = result
                 print(f"  {key}: {time.time()-t0:.1f}s")
 

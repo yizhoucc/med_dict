@@ -5,8 +5,12 @@ Wraps vLLM's OpenAI-compatible API for text generation.
 Handles prompt construction, generation config mapping, and health checks.
 """
 
+import re
 import openai
 from typing import Dict, Optional
+
+# Regex to strip Qwen3.5 thinking tags (e.g., <think>\n\n</think>)
+_THINK_RE = re.compile(r"<think>.*?</think>\s*", re.DOTALL)
 
 
 class VLLMClient:
@@ -39,7 +43,10 @@ class VLLMClient:
             top_p=gen_config.get("top_p", 1.0),
             stop=["<|im_end|>"],
         )
-        return response.choices[0].text.strip()
+        text = response.choices[0].text.strip()
+        # Strip Qwen3.5 thinking tags
+        text = _THINK_RE.sub("", text).strip()
+        return text
 
     def health_check(self) -> bool:
         """Check if vLLM server is running."""
