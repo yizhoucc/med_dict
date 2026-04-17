@@ -429,7 +429,7 @@ def main():
             met_biopsy_her2_neg = re.search(r'metastatic\s+biopsy\s+HER2[\s-]*neg', type_val, re.IGNORECASE)
             # Also check note for metastatic biopsy with HER2 neg/1+ AND current non-HER2 therapy
             note_met_bx_her2neg = re.search(
-                r'(?:metastatic|recurrence|liver|bone)\s+(?:biopsy|bx|fna)[^.]{0,80}(?:\*{3,}[\s-]*1\+|\*{3,}[\s-]*neg|her2[\s-]*neg|her[\s-]*2[\s-]*neg)',
+                r'(?:metastatic|recurrence|liver|bone|pelvis)\s+(?:biopsy|bx|fna|ca\s+c/w)[^.]{0,100}(?:\*{3,}[\s-]*1\+|\*{3,}[\s-]*0|\*{3,}[\s-]*neg|her2[\s-]*neg|her[\s-]*2[\s-]*neg)',
                 note_lower
             )
             # If current therapy is endocrine-only (letrozole, fulvestrant, etc.), HER2+ drugs are likely from prior treatment
