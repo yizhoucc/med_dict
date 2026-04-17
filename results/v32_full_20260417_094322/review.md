@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 39/61 逐字审查完成，22 待审查**
+> Status: **审查中 — 42/61 逐字审查完成，19 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 10 | — |
+| **P2** | 12 | — |
 
 ## 审查记录
 
@@ -55,9 +55,9 @@
 | 57 | 196 | 2 | Type_of_Cancer "invasive lobular carcinoma" (note says "Gr III adenoCA", "lobular mass"=imaging shape) + genetic_testing_plan "None planned" (A/P says "Rec genetic counseling and testing") (逐字审查) |
 | 59 | 198 | 1 | current_meds "exemestane" but note says "has not tried it yet" → letter says "currently taking Exemestane" then "will wait 2-3 weeks before starting" (contradiction) (逐字审查) |
 | 61 | 200 | 1 | genetic_testing_plan "None planned" but A/P says "will likely need ***** Dx after surgery" (planned genomic test for chemo decision) (逐字审查) |
-| 63 | 202 | 0 | ✅ disappointing chemo response |
-| 64 | 203 | 0 | ✅ dd AC, taxol planned (POST hook), Full code |
-| 65 | 204 | 0 | ✅ ISPY trial |
+| 63 | 202 | 2 | lab_plan "No labs" (A/P: estradiol+FSH q1-2mo) + imaging_plan "No imaging" (A/P: baseline DEXA) (逐字审查) |
+| 64 | 203 | 0 | ✅✅ dd AC, taxol planned, oligometastatic sternum, xgeva conditional, Full code (逐字审查) |
+| 65 | 204 | 0 | ✅✅ ISPY2 9-arm trial, ER 2%/PR 7%/HER2-, Ki-67 36%, micromet LN, TTE+port+research biopsy (逐字审查) |
 | 66 | 205 | 0 | ✅ metaplastic CA |
 | 68 | 207 | 0 | ✅ NED after TCHP |
 | 70 | 209 | 0 | ✅ bilateral, post-neoadjuvant |
