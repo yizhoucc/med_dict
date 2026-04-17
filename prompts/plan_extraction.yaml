@@ -109,8 +109,9 @@ Imaging_Plan: |
   - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed...", "Echo was normal" (past result)
   - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening", "needs TTE before starting chemo"
 
-  CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation:
+  CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
   - XRT, RT, radiation therapy, Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here
+  - Biopsy, surgery, port placement → these go in Procedure_Plan, NOT here
   - Only include: CT, MRI, PET/CT, DEXA, bone scan, mammogram, ultrasound, echocardiogram/TTE, X-ray
 
   CRITICAL — only include imaging ORDERED or PLANNED in the A/P:
@@ -139,6 +140,7 @@ Lab_Plan: |
   Lab_Plan is ONLY for blood draws and lab work.
 
   DO NOT include past lab results. DO NOT use vague terms like "staging workup" — list the specific tests ordered.
+  IMPORTANT: If the Assessment/Plan mentions MULTIPLE lab plans (e.g., both "sarcoid blood tests" and "iron panel repeat"), include ALL of them. Do not omit any.
   IMPORTANT: If the A/P mentions labs and imaging in the SAME sentence (e.g., "ordered MRI and bone scan as well as labs"),
   you must SEPARATE them — only include the lab part (e.g., "labs to complete staging workup"), NOT the imaging part.
   Never copy "MRI", "bone scan", "CT", "PET" into lab_plan even if they appear in the same sentence as labs.
