@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 31/61 逐字审查完成，30 待审查**
+> Status: **审查中 — 33/61 逐字审查完成，28 待审查**
 
 ## 汇总统计
 
@@ -47,8 +47,8 @@
 | 43 | 182 | 1 | lab_summary "Values redacted" but labs have real values (逐字审查) |
 | 44 | 183 | 0 | ✅✅ BRCA1+, post-neoadjuvant, RT clinical trial, ribociclib eligible (逐字审查) |
 | 46 | 185 | 0 | ✅✅ SARCOIDOSIS TEST PASSED: Distant Mets "No", Goals "curative" |
-| 49 | 188 | 0 | ✅ surrogate decision maker |
-| 50 | 189 | 0 | ✅ ibrance+letrozole+xgeva |
+| 49 | 188 | 0 | ✅✅ surrogate decision maker, Oncotype 11, thrombophilia assessment (逐字审查) |
+| 50 | 189 | 0 | ✅✅ Stage IV, PMS2 mutation, ibrance+letrozole+xgeva, lupron correctly excluded (逐字审查) |
 | 52 | 191 | 0 | ✅ staging scans |
 | 53 | 192 | 0 | ✅ |
 | 54 | 193 | 0 | ✅ |
