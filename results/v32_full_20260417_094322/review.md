@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 55/61 逐字审查完成，6 待补审（ROW 14,17,18,20,22,29）**
+> Status: **审查完成 — 61/61 逐字审查完成**
 
 ## 汇总统计
 
@@ -29,13 +29,13 @@
 | 10 | 149 | 2 | Response_Assessment error (key="error" not "status") + findings/Stage inconsistency (0/20 vs 7/20) (逐字审查) |
 | 11 | 150 | 0 | ✅✅ Stage IIIC→IV bone mets, Faslodex+Denosumab, jaw XRT residual numbness, leg pain→MRI+PET/CT, thrush Mycelex (逐字审查) |
 | 12 | 151 | 0 | ✅✅ de novo Stage IV ER+/PR+/HER2+, brain mets s/p GK x3, DNR/DNI+POLST, 4 imaging plans q4-6mo (逐字审查) |
-| 14 | 153 | 0 | ✅ medication_plan no contradictions (POST hook), Response_Assessment retry |
-| 17 | 156 | 0 | ✅ Stage IA, DXA+labs, genetics+nutrition referral |
-| 18 | 157 | 0 | ✅ papillary CA + ITC |
-| 20 | 159 | 0 | ✅ letrozole+palbociclib, Foundation One |
-| 22 | 161 | 0 | ✅ pneumonitis, conditional PET plan |
+| 14 | 153 | 0 | ✅✅ de novo mBC bone/liver/nodes, faslodex+palbociclib, s/p spine surgery+XRT, CT/MRI planned (逐字审查) |
+| 17 | 156 | 0 | ✅✅ Stage IA, genetics referral captured, DXA+labs+nutrition, adjuvant endocrine (逐字审查) |
+| 18 | 157 | 0 | ✅✅ pT1b N0(i+) papillary IDC G1, ITC 1 SLN, DEXA ordered, ER/PR+ HER2- Ki67 5% (逐字审查) |
+| 20 | 159 | 0 | ✅✅ Stage I→IV bone+lung, letrozole+palbociclib, Foundation One captured, monthly labs, MRI spine+CT CAP (逐字审查) |
+| 22 | 161 | 0 | ✅✅ Stage II→IV bone/chest wall/nodes, abemaciclib pneumonitis, PET CT planned, arimidex (逐字审查) |
 | 27 | 166 | 1 | Distant Mets: liver lesions are "cysts/indeterminate", A/P says "MBC to bone" only (逐字审查) |
-| 29 | 168 | 0 | ✅ multifocal + Oncotype Low Risk |
+| 29 | 168 | 0 | ✅✅ pT1c N1mi multifocal G2 IDC, Oncotype Low Risk, re-excision needed, DEXA planned (逐字审查) |
 | 30 | 169 | 0 | ✅✅ neoadjuvant planned, TTE, 2 chemo options (detailed逐字审查) |
 | 33 | 172 | 0 | ✅✅ NED on letrozole, ILC, lymphedema, MRI brain conditional (逐字审查) |
 | 34 | 173 | 0 | ✅✅ 2nd local recurrence, receptor change, tamoxifen, CALOR trial (逐字审查) |
