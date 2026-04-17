@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 47/61 逐字审查完成，14 待审查**
+> Status: **审查中 — 48/61 逐字审查完成，13 待审查**
 
 ## 汇总统计
 
@@ -63,7 +63,7 @@
 | 70 | 209 | 0 | ✅✅ bilateral ILC+IDC, BRCA1, neoadjuvant TC→Abraxane, prolia/dental, lung nodule F/u, expanders (逐字审查) |
 | 72 | 211 | 0 | ✅✅ pT1cN0 G2 neuroendocrine diff, ER99%/PR-/HER2-, letrozole+Oncotype ordered, Reclast (逐字审查) |
 | 73 | 212 | 0 | ✅✅ fat necrosis confirmed on bilateral US+mammo, NED on arimidex, insect bite resolved (逐字审查) |
-| 78 | 217 | 0 | ✅ disease progression |
+| 78 | 217 | 0 | ✅✅ mTNBC liver/LN/lung progression, off therapy, phase 3 ADC trial interest, rad onc consult (逐字审查) |
 | 80 | 219 | 0 | ✅ Stage IA |
 | 82 | 221 | 0 | ✅ Stage IB (prognostic) |
 | 83 | 222 | 0 | ✅ significant response on PET |
