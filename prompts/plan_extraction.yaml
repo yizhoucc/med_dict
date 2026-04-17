@@ -231,7 +231,7 @@ Referral: |
   {
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
   "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g., 'refer to genetics', 'genetics consult recommended'). Do NOT list genetic test RESULTS or known mutations here (e.g., 'BRCA1 mutation', 'ATM mutation carrier', 'genetic testing negative' are FINDINGS, not referrals). Write 'None' if no genetics referral is planned.",
-  "Specialty": "eg, Palliative care, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'",
+  "Specialty": "eg, Palliative care referral, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'. IMPORTANT: 'treatment is palliative' or 'palliative intent' describes the GOAL of treatment, NOT a referral to palliative care services. Only include 'Palliative care' if the note explicitly says 'refer to palliative care', 'palliative care consult', or similar.",
   "Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
   "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
   }
