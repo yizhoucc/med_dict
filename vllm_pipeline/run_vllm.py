@@ -427,7 +427,14 @@ def main():
             note_confirms_tnbc = re.search(r'(?:appears to be|confirmed|is)\s+tnbc|triple[\s-]*negative\s+breast\s+cancer', note_lower)
             # Also skip if metastatic biopsy explicitly shows HER2-negative (HER2+ drugs from original cancer)
             met_biopsy_her2_neg = re.search(r'metastatic\s+biopsy\s+HER2[\s-]*neg', type_val, re.IGNORECASE)
-            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", "") and not is_tnbc and not note_confirms_tnbc and not met_biopsy_her2_neg:
+            # Also check note for metastatic biopsy with HER2 neg/1+ AND current non-HER2 therapy
+            note_met_bx_her2neg = re.search(
+                r'(?:metastatic|recurrence|liver|bone)\s+(?:biopsy|bx|fna)[^.]{0,80}(?:\*{3,}[\s-]*1\+|\*{3,}[\s-]*neg|her2[\s-]*neg|her[\s-]*2[\s-]*neg)',
+                note_lower
+            )
+            # If current therapy is endocrine-only (letrozole, fulvestrant, etc.), HER2+ drugs are likely from prior treatment
+            on_endocrine_only = re.search(r'(?:currently\s+on|on\s+)(?:letrozole|anastrozole|exemestane|fulvestrant|faslodex|tamoxifen)', note_lower)
+            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", "") and not is_tnbc and not note_confirms_tnbc and not met_biopsy_her2_neg and not (note_met_bx_her2neg and on_endocrine_only):
                 HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1",
                                   "t-dxd", "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
                 HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
