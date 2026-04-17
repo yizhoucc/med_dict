@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 1 | — |
+| **P2** | 3 | — |
 
 ## 审查记录
 
@@ -23,19 +23,19 @@
 | 3 | 142 | 0 | ✅✅ Stage IIA IDC 1.7cm node+, HR+/HER2-(FISH neg), Ki-67 30-35%, 2nd opinion, PET+genetics pending, full code (逐字审查) |
 | 5 | 144 | 0 | ✅✅ Stage III→IV, DM correctly "bone (sternum)" only, regional LNs in Metastasis not DM, mixed response, anastrozole+palbo+leuprolide (逐字审查) |
 | 6 | 145 | 0 | ✅✅ G1 IDC 1.5cm MammaPrint Low, zoladex+letrozole, bipolar 2, Myriad neg, estradiol monthly, comprehensive labs (逐字审查) |
-| 7 | 146 | | |
-| 8 | 147 | | |
-| 9 | 148 | | |
-| 10 | 149 | | |
-| 11 | 150 | | |
-| 12 | 151 | | |
-| 14 | 153 | | |
-| 17 | 156 | | |
-| 18 | 157 | | |
-| 20 | 159 | | |
-| 22 | 161 | | |
-| 27 | 166 | | |
-| 29 | 168 | | |
+| 7 | 146 | 0 | ✅✅ ER-/PR-/HER2+ MBC, d/c pertuzumab/herceptin/taxotere (LVEF↓+PD), unspecified next line, recheck markers (逐字审查) |
+| 8 | 147 | 0 | ✅✅ pT0N1 pCR breast, 3/28 LN+(ECE), ER-/HER2+, AC x4→T-DM1 (from note text), port+echo, ?Kikuchi (逐字审查) |
+| 9 | 148 | 0 | ✅✅ V32 P2 FIXED: taxol now "completed", Fosamax+Letrozole after XRT, pT2 N1 5% cellularity (逐字审查) |
+| 10 | 149 | 1 | findings "0/20 LN" vs Stage "7/20 LN" 内部不一致 (note "July 20" 歧义, V32 P2 持续) (逐字审查) |
+| 11 | 150 | 1 | Response_Assessment extraction error (model produced invalid JSON, retry failed) (逐字审查) |
+| 12 | 151 | 0 | ✅✅ Stage IV de novo ER+/PR+/HER2+, brain/lung/bone/nodes, herceptin+letrozole, DNR/DNI, 4 imaging plans (逐字审查) |
+| 14 | 153 | 0 | ✅✅ Stage IV mBC ER+ bone/nodes, faslodex+palbociclib, CT+MRI spine, labs q2w (逐字审查) |
+| 17 | 156 | 0 | ✅✅ Stage IA, DXA+labs+genetics referral, adjuvant endocrine planned (逐字审查) |
+| 18 | 157 | 0 | ✅✅ Stage IA pT1b N0, DEXA ordered, endocrine 5-10yr, papillary+ITC (逐字审查) |
+| 20 | 159 | 0 | ✅✅ Stage I→IV bone+lung, Foundation One ordered, letrozole+palbociclib, monthly labs (逐字审查) |
+| 22 | 161 | 1 | Response_Assessment extraction error (逐字审查) |
+| 27 | 166 | 0 | ✅✅ V32 P2 FIXED: Distant Met "bone" only (liver cysts removed by POST hook), stable osseous mets (逐字审查) |
+| 29 | 168 | 0 | ✅✅ pT1c N1mi, Oncotype redacted detected by POST-GENETICS, DEXA planned, letrozole (逐字审查) |
 | 30 | 169 | | |
 | 33 | 172 | | |
 | 34 | 173 | | |
