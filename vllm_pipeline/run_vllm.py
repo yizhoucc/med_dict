@@ -289,12 +289,12 @@ def main():
         med_plan = keypoints.get("Medication_Plan", {})
         mp_text = med_plan.get("medication_plan", "").lower()
         if "prbc" not in mp_text and "transfus" not in mp_text and "packed red" not in mp_text:
-            ap_lower = assessment_and_plan.lower() if assessment_and_plan else ""
-            if "prbc" in ap_lower or "packed red" in ap_lower or ("unit" in ap_lower and ("rbc" in ap_lower or "blood" in ap_lower)):
-                # Extract the transfusion order
-                for line in (assessment_and_plan or "").split("\n"):
+            ap_text = assessment_and_plan if assessment_and_plan else ""
+            ap_lower = ap_text.lower()
+            if "prbc" in ap_lower or "packed red" in ap_lower:
+                for line in ap_text.split("\n"):
                     ll = line.lower().strip()
-                    if "prbc" in ll or ("unit" in ll and "rbc" in ll):
+                    if "prbc" in ll or "packed red" in ll:
                         med_plan["medication_plan"] = med_plan.get("medication_plan", "") + f" {line.strip()}"
                         print(f"  [POST] medication_plan: added pRBC from A/P")
                         break
@@ -302,22 +302,26 @@ def main():
         # POST hook: Response_Assessment error → retry with simpler prompt
         resp = keypoints.get("Response_Assessment", {})
         if resp.get("status") == "error" or "error" in str(resp.get("message", "")):
-            try:
-                simple_prompt = chat_tmpl.user_assistant(
-                    'Based on the clinical note, how is the cancer currently responding to treatment? '
-                    'Write ONLY a JSON object: {"response_assessment": "your answer"}'
-                )
-                retry_cfg = keypoint_config.copy()
-                retry_cfg["max_new_tokens"] = 512
-                retry_result, _ = vllm_generate(simple_prompt, client, retry_cfg, base_prompt)
-                retry_parsed = try_parse_json(retry_result)
-                if retry_parsed and "response_assessment" in retry_parsed:
-                    keypoints["Response_Assessment"] = retry_parsed
-                    print(f"  [POST] Response_Assessment: retry succeeded")
-                else:
-                    print(f"  [POST] Response_Assessment: retry failed, keeping error")
-            except Exception as e:
-                print(f"  [POST] Response_Assessment: retry exception: {e}")
+            # Only retry if base_prompt is not too long (avoid exceeding max_model_len)
+            if len(base_prompt) < 40000:  # ~10k tokens
+                try:
+                    simple_prompt = chat_tmpl.user_assistant(
+                        'Based on the clinical note, how is the cancer currently responding to treatment? '
+                        'Write ONLY a JSON object: {"response_assessment": "your answer"}'
+                    )
+                    retry_cfg = keypoint_config.copy()
+                    retry_cfg["max_new_tokens"] = 512
+                    retry_result, _ = vllm_generate(simple_prompt, client, retry_cfg, base_prompt)
+                    retry_parsed = try_parse_json(retry_result)
+                    if retry_parsed and "response_assessment" in retry_parsed:
+                        keypoints["Response_Assessment"] = retry_parsed
+                        print(f"  [POST] Response_Assessment: retry succeeded")
+                    else:
+                        print(f"  [POST] Response_Assessment: retry failed, keeping error")
+                except Exception as e:
+                    print(f"  [POST] Response_Assessment: retry exception: {e}")
+            else:
+                print(f"  [POST] Response_Assessment: note too long for retry, skipping")
 
         # 7. Letter generation
         letter = ""
