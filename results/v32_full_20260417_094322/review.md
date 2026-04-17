@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 48/61 逐字审查完成，13 待审查**
+> Status: **审查中 — 50/61 逐字审查完成，11 待审查**
 
 ## 汇总统计
 
@@ -64,8 +64,8 @@
 | 72 | 211 | 0 | ✅✅ pT1cN0 G2 neuroendocrine diff, ER99%/PR-/HER2-, letrozole+Oncotype ordered, Reclast (逐字审查) |
 | 73 | 212 | 0 | ✅✅ fat necrosis confirmed on bilateral US+mammo, NED on arimidex, insect bite resolved (逐字审查) |
 | 78 | 217 | 0 | ✅✅ mTNBC liver/LN/lung progression, off therapy, phase 3 ADC trial interest, rad onc consult (逐字审查) |
-| 80 | 219 | 0 | ✅ Stage IA |
-| 82 | 221 | 0 | ✅ Stage IB (prognostic) |
+| 80 | 219 | 0 | ✅✅ local recurrence IDC in dermis post-DCIS mastectomy, Oncotype 24, TC x4, 6wk XRT+boost, Tempus no actionable (逐字审查) |
+| 82 | 221 | 0 | ✅✅ mixed ductal/lobular 4.3cm, low-risk genomic→no chemo, XRT+AI+DEXA, exercise counseling, full code (逐字审查) |
 | 83 | 222 | 0 | ✅ significant response on PET |
 | 84 | 223 | 0 | ✅ capecitabine, CT+MRI |
 | 85 | 224 | 0 | ✅ Response_Assessment retry succeeded |
