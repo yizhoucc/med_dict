@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (POST hooks: imaging header, old labs)
 > Results: results/v32_full_20260416_224708_results.txt
-> Status: **审查中 — 17/61 完成**
+> Status: **审查中 — 18/61 完成**
 > POST hooks fired: 1x imaging_plan (ROW 1), 2x lab_summary old labs (ROW 64 + 1 other)
 
 ## 汇总统计
@@ -36,6 +36,7 @@
 | 11 | 150 | 0 | ✅ Faslodex+Denosumab, bone mets |
 | 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
 | 14 | 153 | 2 | Response_Assessment error + medication_plan contradictions |
+| 18 | 157 | 0 | ✅ papillary CA + ITC, endocrine therapy |
 
 ## 待审查
 
