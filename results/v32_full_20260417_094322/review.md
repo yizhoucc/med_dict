@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 42/61 逐字审查完成，19 待审查**
+> Status: **审查中 — 43/61 逐字审查完成，18 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 12 | — |
+| **P2** | 13 | — |
 
 ## 审查记录
 
@@ -58,7 +58,7 @@
 | 63 | 202 | 2 | lab_plan "No labs" (A/P: estradiol+FSH q1-2mo) + imaging_plan "No imaging" (A/P: baseline DEXA) (逐字审查) |
 | 64 | 203 | 0 | ✅✅ dd AC, taxol planned, oligometastatic sternum, xgeva conditional, Full code (逐字审查) |
 | 65 | 204 | 0 | ✅✅ ISPY2 9-arm trial, ER 2%/PR 7%/HER2-, Ki-67 36%, micromet LN, TTE+port+research biopsy (逐字审查) |
-| 66 | 205 | 0 | ✅ metaplastic CA |
+| 66 | 205 | 1 | Stage "N1 LN involvement" but axillary biopsy was NEGATIVE → should be N0 (逐字审查) |
 | 68 | 207 | 0 | ✅ NED after TCHP |
 | 70 | 209 | 0 | ✅ bilateral, post-neoadjuvant |
 | 72 | 211 | 0 | ✅ Stage IA |
