@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (POST hooks: imaging header, old labs)
 > Results: results/v32_full_20260416_224708_results.txt
-> Status: **审查中 — 14/61 完成**
+> Status: **审查中 — 17/61 完成**
 > POST hooks fired: 1x imaging_plan (ROW 1), 2x lab_summary old labs (ROW 64 + 1 other)
 
 ## 汇总统计
@@ -13,7 +13,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 5 | — |
+| **P2** | 7 | — |
 
 ## 已审查 (from test set review + partial)
 
@@ -33,10 +33,13 @@
 | 7 | 146 | 1 | medication_plan: "restart Pertuzumab" wrong (it's being STOPPED) |
 | 9 | 148 | 1 | therapy_plan: "currently on taxol" wrong (s/p, completed) |
 | 10 | 149 | 1 | Type: didn't capture "HR+/HER2-" from A/P |
+| 11 | 150 | 0 | ✅ Faslodex+Denosumab, bone mets |
+| 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
+| 14 | 153 | 2 | Response_Assessment error + medication_plan contradictions |
 
 ## 待审查
 
-ROW 7, 9, 10, 11, 12, 14, 18, 20, 22, 27, 30, 33, 34, 36, 37, 40, 41, 42, 43, 44, 49, 50, 52, 53, 54, 57, 59, 61, 63, 65, 66, 68, 70, 72, 73, 78, 80, 82, 83, 84, 85, 86, 87, 88, 90, 91, 92, 94, 95, 97
+ROW 18, 20, 22, 27, 30, 33, 34, 36, 37, 40, 41, 42, 43, 44, 49, 50, 52, 53, 54, 57, 59, 61, 63, 65, 66, 68, 70, 72, 73, 78, 80, 82, 83, 84, 85, 86, 87, 88, 90, 91, 92, 94, 95, 97
 
 ---
 
