@@ -323,6 +323,32 @@ def main():
             else:
                 print(f"  [POST] Response_Assessment: note too long for retry, skipping")
 
+        # POST hook: remove "Palliative care" from Specialty if note only discusses palliative INTENT
+        referral = keypoints.get("Referral", {})
+        spec = referral.get("Specialty", "")
+        if "Palliative care" in spec or "palliative care" in spec:
+            # Check if note has explicit palliative care REFERRAL (not just intent)
+            ap_text = assessment_and_plan or ""
+            has_referral = any(p in ap_text.lower() for p in [
+                "refer to palliative", "palliative care consult", "palliative consult",
+                "referral to palliative", "palliative care referral"
+            ])
+            if not has_referral:
+                parts = [p.strip() for p in spec.split(",")]
+                parts = [p for p in parts if "palliative" not in p.lower()]
+                referral["Specialty"] = ", ".join(parts) if parts else "None"
+                print(f"  [POST] Referral: removed 'Palliative care' (intent, not referral)")
+
+        # POST hook: fix therapy_plan "currently on taxol" when A/P says "taxol planned"
+        therapy = keypoints.get("Therapy_plan", {})
+        tp_text = therapy.get("therapy_plan", "")
+        if "currently on taxol" in tp_text.lower():
+            ap_text = assessment_and_plan or ""
+            if "taxol planned" in ap_text.lower():
+                therapy["therapy_plan"] = tp_text.replace("currently on taxol", "taxol is planned")
+                therapy["therapy_plan"] = therapy["therapy_plan"].replace("Currently on taxol", "Taxol is planned")
+                print(f"  [POST] therapy_plan: 'currently on taxol' → 'taxol is planned'")
+
         # 7. Letter generation
         letter = ""
         if letter_prompt_template and config.get("extraction", {}).get("letter", False):
