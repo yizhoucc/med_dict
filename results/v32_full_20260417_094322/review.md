@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 48/61 逐字审查完成，13 待补审（ROW 6,8,9,10,11,12,14,17,18,20,22,27,29）**
+> Status: **审查中 — 53/61 逐字审查完成，8 待补审（ROW 11,12,14,17,18,20,22,29）**
 
 ## 汇总统计
 
@@ -24,9 +24,9 @@
 | 5 | 144 | 0 | ✅✅ Stage III→IV micropapillary, mixed response, brachial plexus→rad onc, leuprolide+anastrozole+palbociclib, 5 lab types monthly (逐字审查) |
 | 6 | 145 | 0 | ✅✅ G1 IDC 1.5cm MammaPrint Low, zoladex+letrozole, bipolar 2/lamotrigine, Myriad neg, estradiol monthly (逐字审查) |
 | 7 | 146 | 0 | ✅✅ therapy_plan now uses "unspecified agent" (FIXED!) |
-| 8 | 147 | 0 | ✅ pT0N1 correct, T-DM1 is from original text |
-| 9 | 148 | 1 | medication_plan/letter: completed taxol as future plan |
-| 10 | 149 | 2 | Response_Assessment error (key="error" not "status") + findings/Stage inconsistency (0/20 vs 7/20) |
+| 8 | 147 | 0 | ✅✅ pT0N1, pCR breast but 3/28 LN+(ECE), ER-/HER2+, incomplete TCHP, AC x4→T-DM1, port+echo, ?Kikuchi (逐字审查) |
+| 9 | 148 | 1 | medication_plan/letter: completed taxol as future plan (逐字审查) |
+| 10 | 149 | 2 | Response_Assessment error (key="error" not "status") + findings/Stage inconsistency (0/20 vs 7/20) (逐字审查) |
 | 11 | 150 | 0 | ✅ supportive_meds clean (POST hook) |
 | 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
 | 14 | 153 | 0 | ✅ medication_plan no contradictions (POST hook), Response_Assessment retry |
@@ -34,7 +34,7 @@
 | 18 | 157 | 0 | ✅ papillary CA + ITC |
 | 20 | 159 | 0 | ✅ letrozole+palbociclib, Foundation One |
 | 22 | 161 | 0 | ✅ pneumonitis, conditional PET plan |
-| 27 | 166 | 1 | Distant Mets: liver lesions are "cysts/indeterminate", A/P says "MBC to bone" only |
+| 27 | 166 | 1 | Distant Mets: liver lesions are "cysts/indeterminate", A/P says "MBC to bone" only (逐字审查) |
 | 29 | 168 | 0 | ✅ multifocal + Oncotype Low Risk |
 | 30 | 169 | 0 | ✅✅ neoadjuvant planned, TTE, 2 chemo options (detailed逐字审查) |
 | 33 | 172 | 0 | ✅✅ NED on letrozole, ILC, lymphedema, MRI brain conditional (逐字审查) |
