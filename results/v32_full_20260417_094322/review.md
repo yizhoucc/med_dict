@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 20/61 逐字审查完成，41 待审查**
+> Status: **审查中 — 22/61 逐字审查完成，39 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 3 | — |
+| **P2** | 4 | — |
 
 ## 审查记录
 
@@ -34,9 +34,9 @@
 | 18 | 157 | 0 | ✅ papillary CA + ITC |
 | 20 | 159 | 0 | ✅ letrozole+palbociclib, Foundation One |
 | 22 | 161 | 0 | ✅ pneumonitis, conditional PET plan |
-| 27 | 166 | 0 | ✅ stable disease |
+| 27 | 166 | 1 | Distant Mets: liver lesions are "cysts/indeterminate", A/P says "MBC to bone" only |
 | 29 | 168 | 0 | ✅ multifocal + Oncotype Low Risk |
-| 30 | 169 | 0 | ✅ neoadjuvant planned, TTE |
+| 30 | 169 | 0 | ✅✅ neoadjuvant planned, TTE, 2 chemo options (detailed逐字审查) |
 | 33 | 172 | 0 | ✅ NED on letrozole |
 | 34 | 173 | 0 | ✅ local recurrence |
 | 36 | 175 | 0 | ✅ |
