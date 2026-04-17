@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (POST hooks: imaging header, old labs)
 > Results: results/v32_full_20260416_224708_results.txt
-> Status: **审查中 — 12/61 完成**
+> Status: **审查中 — 14/61 完成**
 > POST hooks fired: 1x imaging_plan (ROW 1), 2x lab_summary old labs (ROW 64 + 1 other)
 
 ## 汇总统计
@@ -13,7 +13,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 3 | — |
+| **P2** | 5 | — |
 
 ## 已审查 (from test set review + partial)
 
@@ -31,6 +31,8 @@
 | 100 | 239 | 0 | ✅ Gemzar + labs |
 | 6 | 145 | 1 | Referral Genetics: past genetics referral (already done) |
 | 7 | 146 | 1 | medication_plan: "restart Pertuzumab" wrong (it's being STOPPED) |
+| 9 | 148 | 1 | therapy_plan: "currently on taxol" wrong (s/p, completed) |
+| 10 | 149 | 1 | Type: didn't capture "HR+/HER2-" from A/P |
 
 ## 待审查
 
