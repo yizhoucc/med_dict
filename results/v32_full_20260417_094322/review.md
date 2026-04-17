@@ -22,7 +22,7 @@
 | 2 | 141 | 0 | ✅✅ mTNBC+Lynch, irinotecan C3D1 dose change, pRBC+NS+KCl, Na124/K3.1/Hgb7.7, doxycycline cellulitis, HBV q4mo (逐字审查) |
 | 3 | 142 | 0 | ✅✅ Stage IIA IDC 1.7cm node+, HR+/HER2-(FISH neg), Ki-67 30-35%, 2nd opinion, PET+genetics pending, full code (逐字审查) |
 | 5 | 144 | 0 | ✅✅ Stage III→IV micropapillary, mixed response, brachial plexus→rad onc, leuprolide+anastrozole+palbociclib, 5 lab types monthly (逐字审查) |
-| 6 | 145 | 0 | ✅ Genetics "None" (fixed), letrozole+zoladex |
+| 6 | 145 | 0 | ✅✅ G1 IDC 1.5cm MammaPrint Low, zoladex+letrozole, bipolar 2/lamotrigine, Myriad neg, estradiol monthly (逐字审查) |
 | 7 | 146 | 0 | ✅✅ therapy_plan now uses "unspecified agent" (FIXED!) |
 | 8 | 147 | 0 | ✅ pT0N1 correct, T-DM1 is from original text |
 | 9 | 148 | 1 | medication_plan/letter: completed taxol as future plan |
