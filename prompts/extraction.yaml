@@ -107,6 +107,9 @@ Lab_Results: |
   Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
   Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
   CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
+  IMPORTANT: Search the ENTIRE note for lab values — they may appear in a RESULTS section, not just near the Assessment/Plan. Look for sections labeled "RESULTS", "Labs", "Component Value", or tables with lab names and numeric values.
+  IMPORTANT: When multiple lab panels from different dates exist in the note, report the MOST RECENT set.
+  IMPORTANT: You MUST return the "lab_summary" key in your JSON. Do NOT return an empty object {}.
   CRITICAL: If lab values are redacted or masked (the ACTUAL NUMBERS are replaced with *****, [REDACTED], or similar placeholders), write "Values redacted" — do NOT fabricate or guess specific numbers. Only report values you can clearly read.
   Example: If the note says "Platelet *****" or "WBC *****", write "Lab values redacted" — do NOT write "Platelet 217" or any invented number.
   Example: If labs section shows "CBC: ***** ***** *****", write "CBC values redacted" — do NOT fill in numbers.
@@ -167,6 +170,7 @@ Current_Medications: |
   - SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications outside the clinical system (e.g., from another country, alternative medicine clinic, self-administered at home without physician supervision), and the treating physician does NOT endorse or manage these drugs (look for skeptical language like "apparently", "so-called", "claims to be taking", or "discontinue our medications"), do NOT list them in current_meds. Instead, these should go in recent_changes with appropriate context.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron, infusions) are often NOT listed in the outpatient medication list. If the Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g., "on irinotecan", "continues leuprolide", "started [drug] on [date]" with no discontinuation), include it even if it does not appear in the outpatient medication list.
   IMPORTANT: If the patient SKIPPED, CANCELLED, or MISSED a single dose/cycle of chemotherapy (e.g., "Day 8 cancelled", "missed day 8"), they are still ON that chemotherapy. Missing one infusion does NOT mean the drug is stopped. Only consider a drug STOPPED if the note says "discontinued", "stopped", "changed to [other drug]", or "completed [N] cycles".
+  IMPORTANT: Look for the chemo drug name in the HPI OPENING LINE. Phrases like "on Gemzar", "on irinotecan", "on Taxol", "on AC", "started [drug] on [date]" in the HPI mean the patient IS currently on that drug — include it even if the drug is not in the outpatient medication list and even if today's dose was cancelled/skipped.
 
   Respond *only* with a JSON object using this exact schema:
   {
