@@ -36,46 +36,46 @@
 | 22 | 161 | 1 | Response_Assessment extraction error (逐字审查) |
 | 27 | 166 | 0 | ✅✅ V32 P2 FIXED: Distant Met "bone" only (liver cysts removed by POST hook), stable osseous mets (逐字审查) |
 | 29 | 168 | 0 | ✅✅ pT1c N1mi, Oncotype redacted detected by POST-GENETICS, DEXA planned, letrozole (逐字审查) |
-| 30 | 169 | | |
-| 33 | 172 | | |
-| 34 | 173 | | |
-| 36 | 175 | | |
-| 37 | 176 | | |
-| 40 | 179 | | |
-| 41 | 180 | | |
-| 42 | 181 | | |
-| 43 | 182 | | |
-| 44 | 183 | | |
-| 46 | 185 | | |
-| 49 | 188 | | |
-| 50 | 189 | | |
-| 52 | 191 | | |
-| 53 | 192 | | |
-| 54 | 193 | | |
-| 57 | 196 | | |
-| 59 | 198 | | |
-| 61 | 200 | | |
-| 63 | 202 | | |
-| 64 | 203 | | |
-| 65 | 204 | | |
-| 66 | 205 | | |
-| 68 | 207 | | |
-| 70 | 209 | | |
-| 72 | 211 | | |
-| 73 | 212 | | |
-| 78 | 217 | | |
-| 80 | 219 | | |
-| 82 | 221 | | |
-| 83 | 222 | | |
-| 84 | 223 | | |
-| 85 | 224 | | |
-| 86 | 225 | | |
-| 87 | 226 | | |
-| 88 | 227 | | |
-| 90 | 229 | | |
-| 91 | 230 | | |
-| 92 | 231 | | |
-| 94 | 233 | | |
-| 95 | 234 | | |
-| 97 | 236 | | |
-| 100 | 239 | | |
+| 30 | 169 | 0 | ✅✅ ER-/PR-/HER2+ IDC, Stage IIIA, neoadjuvant planned (逐字审查) |
+| 33 | 172 | 0 | ✅✅ ILC, NED on letrozole, Stage IIB (逐字审查) |
+| 34 | 173 | 0 | ✅✅ 2nd local recurrence, receptor change, Stage III (逐字审查) |
+| 36 | 175 | 0 | ✅✅ mixed ductal/mucinous G3, Stage IIIA (逐字审查) |
+| 37 | 176 | 0 | ✅✅ TNBC, dd AC/Taxol, Stage IIA (逐字审查) |
+| 40 | 179 | 0 | ✅✅ V32 P2 FIXED: imaging_plan now has DEXA (POST-IMAGING) (逐字审查) |
+| 41 | 180 | 0 | ✅✅ ATM carrier, AC-Taxol, MUGA (逐字审查) |
+| 42 | 181 | 0 | ✅✅ multifocal IDC G1, tamoxifen (逐字审查) |
+| 43 | 182 | 0 | ✅✅ V32 P2 FIXED: lab_summary no longer "Values redacted" (POST-LAB-REDACTED) (逐字审查) |
+| 44 | 183 | 0 | ✅✅ BRCA1+, post-neoadjuvant, RT trial (逐字审查) |
+| 46 | 185 | 0 | ✅✅ sarcoidosis test passed, DM=No (逐字审查) |
+| 49 | 188 | 0 | ✅✅ surrogate decision maker, Oncotype 11 (逐字审查) |
+| 50 | 189 | 0 | ✅✅ Stage IV, PMS2, ibrance+letrozole+xgeva (逐字审查) |
+| 52 | 191 | 0 | ✅✅ fertility preservation, Zoladex (逐字审查) |
+| 53 | 192 | 0 | ✅✅ HER2+ heterogeneous, AC/THP (逐字审查) |
+| 54 | 193 | 0 | ✅✅ BRCA2+, oligometastatic T6 (逐字审查) |
+| 57 | 196 | 0 | ✅✅ V32 P2 FIXED: "Grade III adenoCA" (not lobular), genetic counseling captured (逐字审查) |
+| 59 | 198 | 0 | ✅✅ V32 P2 FIXED: exemestane removed from current_meds (POST-MEDS-NOT-STARTED) (逐字审查) |
+| 61 | 200 | 0 | ✅✅ V32 P2 FIXED: genomic test (redacted) detected (POST-GENETICS-SEARCH) (逐字审查) |
+| 63 | 202 | 0 | ✅✅ V32 P2 FIXED: lab_plan Estradiol+FSH, imaging_plan DEXA (POST hooks) (逐字审查) |
+| 64 | 203 | 0 | ✅✅ Stage IV sternum, dd AC, taxol planned, xgeva conditional (逐字审查) |
+| 65 | 204 | 0 | ✅✅ ISPY2, ER 2%/PR 7%, micromet LN (逐字审查) |
+| 66 | 205 | 0 | ✅✅ V32 P2 FIXED: Stage IIIA (not IV), N1 regional, metaplastic CA (逐字审查) |
+| 68 | 207 | 0 | ✅✅ V32 P2 FIXED: HER2+ (POST-HER2-VERIFY), Stage IIIA (not IV) (逐字审查) |
+| 70 | 209 | 0 | ✅✅ bilateral ILC+IDC, BRCA1, prolia/dental (逐字审查) |
+| 72 | 211 | 0 | ✅✅ pT1cN0 neuroendocrine diff, Oncotype ordered (逐字审查) |
+| 73 | 212 | 0 | ✅✅ fat necrosis, NED on arimidex (逐字审查) |
+| 78 | 217 | 0 | ✅✅ mTNBC progression, phase 3 ADC trial (逐字审查) |
+| 80 | 219 | 0 | ✅✅ local recurrence dermis, Oncotype 24, TC x4 (逐字审查) |
+| 82 | 221 | 0 | ✅✅ mixed ductal/lobular, low-risk genomic, no chemo (逐字审查) |
+| 83 | 222 | 0 | ✅✅ V32 P2 FIXED: Stage III (not IV), POST-STAGE-DISTMET (逐字审查) |
+| 84 | 223 | 0 | ✅✅ mBC bone/liver/CNS, CHEK2+MS, capecitabine (逐字审查) |
+| 85 | 224 | 0 | ✅✅ mBC ILC, Foundation One, phase 1 trial+olaparib (逐字审查) |
+| 86 | 225 | 0 | ✅✅ V32 P2 FIXED: HER2- preserved (met biopsy), no override (逐字审查) |
+| 87 | 226 | 0 | ✅✅ 2nd opinion, 4/19 LN+ECE, Parkinson, hormonal alone (逐字审查) |
+| 88 | 227 | 0 | ✅✅ Stage IV brain/lung, HR weak, capecitabine, HER2 retest (逐字审查) |
+| 90 | 229 | 0 | ✅✅ trial enrolled, AC dose delay, antiemetic switch (逐字审查) |
+| 91 | 230 | 0 | ✅✅ Stage IV MBC, everolimus+exemestane+denosumab (逐字审查) |
+| 92 | 231 | 0 | ✅✅ MBC liver improving on epirubicin (逐字审查) |
+| 94 | 233 | 0 | ✅✅ pT1b Oncotype 21, NED on letrozole (逐字审查) |
+| 95 | 234 | 0 | ✅✅ ISPY pembrolizumab, good NAC response (逐字审查) |
+| 97 | 236 | 0 | ✅✅ V32 P2 FIXED: Oncotype Dx captured (POST-GENETICS-SEARCH) (逐字审查) |
+| 100 | 239 | 0 | ✅✅ MBC Gemzar, tumor markers rising, unclear PD vs flare (逐字审查) |
