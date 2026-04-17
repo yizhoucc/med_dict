@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (POST hooks: imaging header, old labs)
 > Results: results/v32_full_20260416_224708_results.txt
-> Status: **审查中 — 18/61 完成**
+> Status: **审查完成 — 61/61**
 > POST hooks fired: 1x imaging_plan (ROW 1), 2x lab_summary old labs (ROW 64 + 1 other)
 
 ## 汇总统计
@@ -13,7 +13,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 7 | — |
+| **P2** | 10 | 0.16/sample |
 
 ## 已审查 (from test set review + partial)
 
@@ -37,10 +37,78 @@
 | 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
 | 14 | 153 | 2 | Response_Assessment error + medication_plan contradictions |
 | 18 | 157 | 0 | ✅ papillary CA + ITC, endocrine therapy |
+| 20 | 159 | 0 | ✅ letrozole+palbociclib, Foundation One, dental |
+| 22 | 161 | 0 | ✅ pneumonitis, conditional PET plan |
+| 27 | 166 | 0 | ✅ stable disease, goserelin+letrozole |
+| 30 | 169 | 0 | ✅ neoadjuvant planned, TTE pre-chemo |
+| 33 | 172 | 0 | ✅ NED on letrozole |
+| 34 | 173 | 0 | ✅ local recurrence |
+| 36 | 175 | 0 | ✅ Abraxane+zoladex+tamoxifen |
+| 37 | 176 | 0 | ✅ Stage IIA, full code |
+| 40 | 179 | 1 | letrozole in supportive_meds (oncologic drug) |
+| 41 | 180 | 0 | ✅ |
+| 42 | 181 | 0 | ✅ mammogram planned |
+| 43 | 182 | 0 | ✅ Stage I, full code |
+| 44 | 183 | 0 | ✅ post-neoadjuvant, CT for lung nodule |
+| 49 | 188 | 0 | ✅ surrogate decision maker |
+| 50 | 189 | 0 | ✅ ibrance+letrozole+xgeva, good control |
+| 52 | 191 | 0 | ✅ staging scans ordered |
+| 53 | 192 | 0 | ✅ |
+| 54 | 193 | 0 | ✅ leuprolide+letrozole+zoledronic acid |
+| 57 | 196 | 0 | ✅ post-neoadjuvant TCH+P |
+| 59 | 198 | 0 | ✅ NED, mammogram+MRI alternating |
+| 61 | 200 | 0 | ✅ Stage I |
+| 63 | 202 | 0 | ✅ disappointing chemo response |
+| 65 | 204 | 0 | ✅ ISPY trial, TTE |
+| 66 | 205 | 0 | ✅ metaplastic CA, TNBC, second opinion |
+| 68 | 207 | 0 | ✅ NED after TCHP |
+| 70 | 209 | 0 | ✅ bilateral, post-neoadjuvant |
+| 72 | 211 | 0 | ✅ Stage IA |
+| 73 | 212 | 0 | ✅ fat necrosis, arimidex |
+| 78 | 217 | 0 | ✅ disease progression, liver mets |
+| 80 | 219 | 0 | ✅ Stage IA |
+| 82 | 221 | 0 | ✅ Stage IB (prognostic), DEXA |
+| 83 | 222 | 0 | ✅ significant response on PET |
+| 84 | 223 | 0 | ✅ capecitabine, CT+MRI ordered |
+| 85 | 224 | 1 | Response_Assessment JSON error |
+| 86 | 225 | 0 | ✅ PD on letrozole+ribociclib |
+| 87 | 226 | 0 | ✅ Stage IIIA (pT2 N2a) |
+| 88 | 227 | 0 | ✅ capecitabine, full code |
+| 90 | 229 | 0 | ✅ post-neoadjuvant 60% cellularity |
+| 91 | 230 | 0 | ✅ everolimus+exemestane, PET planned |
+| 92 | 231 | 0 | ✅ epirubicin, liver improvement |
+| 94 | 233 | 0 | ✅ mammogram+MRI planned |
+| 95 | 234 | 0 | ✅ good neoadjuvant response |
+| 97 | 236 | 0 | ✅ Stage IA |
 
 ## 待审查
 
-ROW 18, 20, 22, 27, 30, 33, 34, 36, 37, 40, 41, 42, 43, 44, 49, 50, 52, 53, 54, 57, 59, 61, 63, 65, 66, 68, 70, 72, 73, 78, 80, 82, 83, 84, 85, 86, 87, 88, 90, 91, 92, 94, 95, 97
+None — all 61 samples reviewed
+
+## P2 Summary
+
+| ROW | 问题 |
+|-----|------|
+| 2 | medication_plan 漏 "1 unit pRBC" |
+| 6 | Referral Genetics: past referral extracted as current |
+| 7 | medication_plan: wrong next-line drug (pertuzumab vs redacted) |
+| 9 | therapy_plan: "currently on taxol" (s/p completed) |
+| 10 | Type: missed "HR+/HER2-" from A/P |
+| 11 | supportive_meds: fulvestrant (oncologic drug) |
+| 14 | Response_Assessment error + medication_plan contradictions (×2) |
+| 40 | supportive_meds: letrozole (oncologic drug) |
+| 85 | Response_Assessment JSON error |
+
+## V31 vs V32 Final Comparison
+
+| 指标 | V31 (Qwen2.5-32B-AWQ) | V32 (Qwen3.5-35B-A3B-GPTQ) |
+|------|------------------------|----------------------------------|
+| Samples | 61 | 61 |
+| P0 | 0 (0%) | 0 (0%) |
+| P1 | 0 (0%) | 0 (0%) |
+| P2 | 112 (1.84/sample) | 10 (0.16/sample) |
+| 速度 | ~2 hours | 14.8 min (8x faster) |
+| P2 reduction | — | **91% fewer P2s** |
 
 ---
 
