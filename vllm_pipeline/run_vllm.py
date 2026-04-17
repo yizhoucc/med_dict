@@ -218,15 +218,19 @@ def main():
             if context_str:
                 prompt = f"Context from earlier extraction:\n{context_str}\n\n{prompt}"
             t0 = time.time()
-            result = extract_keypoint(prompt, client, keypoint_config, base_prompt, chat_tmpl)
+            # Response_Assessment uses CoT → needs more tokens
+            cfg = keypoint_config.copy()
+            if key == "Response_Assessment":
+                cfg["max_new_tokens"] = 1536
+            result = extract_keypoint(prompt, client, cfg, base_prompt, chat_tmpl)
             keypoints[key] = result
             print(f"  {key}: {time.time()-t0:.1f}s")
 
         # 5. Plan extraction from A/P (Advance_care_planning uses full note)
         if assessment_and_plan:
             ap_base = build_base_prompt(assessment_and_plan, chat_tmpl=chat_tmpl)
-            # Fields that need full note context (code status is outside A/P)
-            full_note_keys = {"Advance_care_planning"}
+            # Fields that need full note context (orders/code status are outside A/P)
+            full_note_keys = {"Advance_care_planning", "Imaging_Plan", "Lab_Plan", "Referral"}
             for key, prompt in plan_extraction_prompts.items():
                 if not prompt:
                     continue

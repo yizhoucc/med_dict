@@ -81,6 +81,13 @@ Cancer_Diagnosis: |
     - Distant metastasis (M1) = Stage IV
     Example: "0.8 cm IDC, 0/5 LN" → write "Stage IA (inferred from pT1b N0)"
     Example: "2.2 cm, 4/19 LN+" → write "Stage IIIA (inferred from pT2 N2a)"
+  - CRITICAL — N classification is based on the NUMBER OF POSITIVE nodes, NOT total nodes examined:
+    N1 = 1-3 positive nodes (N1a if macrometastases, N1mi if only micrometastases)
+    N2 = 4-9 positive nodes
+    N3 = 10+ positive nodes
+    Example: "3/28 LN positive" = 3 positive out of 28 examined = N1a (NOT N2)
+    Example: "5/12 LN positive" = 5 positive = N2a
+    Do NOT confuse total nodes examined with number positive.
   - IMPORTANT: Node-negative ("node neg", "0/N LN+") with small tumor (≤2cm) = Stage I, NOT Stage II.
     Stage II requires either positive lymph nodes OR tumor >2cm. "Early stage node negative" = Stage I.
   - Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
@@ -100,9 +107,12 @@ Lab_Results: |
   Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
   Do NOT include: imaging results (CT, MRI, PET, bone scan, echocardiogram/LVEF), pathology receptor status (ER%, PR%, HER2 IHC/FISH), genomic test results (Oncotype, MammaPrint).
   CRITICAL: Only include lab values that are EXPLICITLY written in the note with specific numbers. Do NOT invent or guess lab values. If no lab results appear anywhere in the note, write "No labs in note."
-  CRITICAL: If lab values are redacted or masked (shown as *****, [REDACTED], or similar placeholders), write "Values redacted" — do NOT fabricate or guess specific numbers. Only report values you can clearly read.
+  CRITICAL: If lab values are redacted or masked (the ACTUAL NUMBERS are replaced with *****, [REDACTED], or similar placeholders), write "Values redacted" — do NOT fabricate or guess specific numbers. Only report values you can clearly read.
   Example: If the note says "Platelet *****" or "WBC *****", write "Lab values redacted" — do NOT write "Platelet 217" or any invented number.
   Example: If labs section shows "CBC: ***** ***** *****", write "CBC values redacted" — do NOT fill in numbers.
+  IMPORTANT: "Values redacted" means the NUMBERS THEMSELVES are replaced by *****. If you can READ specific numeric values (e.g., "118", "9.9", "172"), those are NOT redacted — extract them normally.
+  Some notes have ***** in reference ranges, flags, or column formatting (e.g., "118 (*****)" or "9.9 (*****)") — the value itself is still readable, so report it.
+  Only write "Values redacted" when the actual numeric results are completely masked and unreadable.
   IMPORTANT: If lab results are older than 6 months from the visit date, you MUST note the date.
   Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old labs.
   If the note says "labs/markers unremarkable" without specific values, write that verbatim with the date.
@@ -156,6 +166,7 @@ Current_Medications: |
   CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
   - SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications outside the clinical system (e.g., from another country, alternative medicine clinic, self-administered at home without physician supervision), and the treating physician does NOT endorse or manage these drugs (look for skeptical language like "apparently", "so-called", "claims to be taking", or "discontinue our medications"), do NOT list them in current_meds. Instead, these should go in recent_changes with appropriate context.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron, infusions) are often NOT listed in the outpatient medication list. If the Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g., "on irinotecan", "continues leuprolide", "started [drug] on [date]" with no discontinuation), include it even if it does not appear in the outpatient medication list.
+  IMPORTANT: If the patient SKIPPED, CANCELLED, or MISSED a single dose/cycle of chemotherapy (e.g., "Day 8 cancelled", "missed day 8"), they are still ON that chemotherapy. Missing one infusion does NOT mean the drug is stopped. Only consider a drug STOPPED if the note says "discontinued", "stopped", "changed to [other drug]", or "completed [N] cycles".
 
   Respond *only* with a JSON object using this exact schema:
   {
