@@ -116,7 +116,8 @@ Lab_Results: |
   IMPORTANT: "Values redacted" means the NUMBERS THEMSELVES are replaced by *****. If you can READ specific numeric values (e.g., "118", "9.9", "172"), those are NOT redacted — extract them normally.
   Some notes have ***** in reference ranges, flags, or column formatting (e.g., "118 (*****)" or "9.9 (*****)") — the value itself is still readable, so report it.
   Only write "Values redacted" when the actual numeric results are completely masked and unreadable.
-  IMPORTANT: If lab results are older than 6 months from the visit date, you MUST note the date.
+  IMPORTANT: If the ONLY lab values in the note are from more than 6 months before the visit date, write "No labs in note" — old labs are not relevant to the current visit. Do NOT write "Values redacted" for labs from years ago.
+  IMPORTANT: If lab results are older than 6 months from the visit date but there are also recent labs, note the date for old results.
   Example: "Hgb 10.7, WBC 3.16 (from 01/29/2021)" — do NOT omit the date for old labs.
   If the note says "labs/markers unremarkable" without specific values, write that verbatim with the date.
 

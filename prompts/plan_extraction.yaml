@@ -122,6 +122,7 @@ Imaging_Plan: |
 
   DO NOT include any procedure plan, lab plan, or medication plan.
   List SPECIFIC imaging types. Do NOT use vague terms like "staging workup".
+  IMPORTANT: Search the ENTIRE Assessment/Plan for imaging keywords: CT, MRI, MRA, PET, DEXA, DXA, bone scan, mammogram, ultrasound, echocardiogram, TTE, Echo, X-ray. If ANY of these appear as future plans, include them.
   If no future imaging is planned, say "No imaging planned."
   Respond *only* with a JSON object using this exact schema:
   {
