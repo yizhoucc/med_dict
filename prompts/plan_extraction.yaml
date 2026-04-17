@@ -1,6 +1,9 @@
 Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan (e.g., "1 unit pRBC", "2 units packed red blood cells", "transfusion today"). Do not include past medications.
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - "s/p weekly taxol x 12" means taxol is COMPLETED. "S/p" or "status post" ALWAYS means COMPLETED/PAST — do NOT list these as current or future.
+  - Only include drugs explicitly current (continue, currently on) or future (will start, plan to begin).
   Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
   IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name. Do NOT write "Pertuzumab", "T-DM1", or any specific drug name that is not explicitly written in the note.
   Respond *only* with a JSON object using this exact schema:
@@ -171,6 +174,9 @@ Genetic_Testing_Plan: |
     - Liquid biopsy / circulating tumor DNA (ctDNA) tests
     - Specific biomarker tests (e.g., PD-L1 testing, MSI testing, EGFR mutation testing)
     - Any plan to "send", "order", "check", or "obtain" a genetic, genomic, or molecular TEST
+    - Referrals for genetic COUNSELING AND TESTING (e.g., "Rec genetic counseling and testing") — the counseling accompanies testing
+    - Plans for Oncotype Dx even if phrased as "will likely need Oncotype after surgery" or "Oncotype to be sent"
+    - Statements about molecular profiling (e.g., "patient wishes to proceed with molecular profiling")
 
   3. What MUST be EXCLUDED:
   - DO NOT include any medications, systemic therapies, or treatment plans:

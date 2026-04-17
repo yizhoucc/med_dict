@@ -96,8 +96,8 @@ Cancer_Diagnosis: |
   Respond *only* with a JSON object using this exact schema:
   {
   "Type_of_Cancer": "Specific cancer type with histologic subtype and receptor statuses when available. e.g., 'ER+/PR+/HER2- invasive ductal carcinoma'",
-  "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only include original stage if explicitly stated in the note",
-  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Note: axillary lymph nodes are REGIONAL, not distant. CRITICAL: If enlarged lymph nodes were BIOPSIED and showed NON-MALIGNANT findings (granulomatous inflammation, sarcoidosis, reactive changes), they are NOT cancer metastases — even if hypermetabolic on PET/CT.",
+  "Stage_of_Cancer": "AJCC stage, or original + current if recurred/progressed. e.g., 'Stage IIA' or 'Originally Stage [X], now metastatic (Stage IV)' — only include original stage if explicitly stated in the note. CRITICAL: Axillary, sentinel, supraclavicular, infraclavicular, and internal mammary lymph nodes are REGIONAL for breast cancer — involvement of these nodes alone is Stage III, NOT Stage IV. Only truly DISTANT sites (liver, lung, bone, brain, pleural, peritoneal, contralateral nodes) qualify as M1/Stage IV.",
+  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. CRITICAL: For breast cancer, these are REGIONAL nodes (NOT distant): axillary, sentinel, supraclavicular, infraclavicular, internal mammary, chest wall, ipsilateral. Only list truly distant sites (liver, lung, bone, brain, etc.). If imaging describes lesions as 'cysts', 'indeterminate', 'probably benign', do NOT classify as confirmed distant metastasis. CRITICAL: If BIOPSIED lymph nodes showed NON-MALIGNANT findings (granulomatous, sarcoidosis, reactive), they are NOT cancer metastases.",
   "Metastasis": "if there is met, Yes (to where), No, or Not sure. IMPORTANT: Verify biopsy results — sarcoidosis and granulomatous disease in lymph nodes are NOT cancer metastases."
   }
 

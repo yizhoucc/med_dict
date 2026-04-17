@@ -230,7 +230,7 @@ def main():
         if assessment_and_plan:
             ap_base = build_base_prompt(assessment_and_plan, chat_tmpl=chat_tmpl)
             # Fields that need full note context (orders/code status are outside A/P)
-            full_note_keys = {"Advance_care_planning", "Imaging_Plan", "Lab_Plan", "Referral"}
+            full_note_keys = {"Advance_care_planning", "Imaging_Plan", "Lab_Plan", "Referral", "Genetic_Testing_Plan"}
             for key, prompt in plan_extraction_prompts.items():
                 if not prompt:
                     continue
@@ -368,6 +368,251 @@ def main():
                 therapy["therapy_plan"] = tp_text.replace("currently on taxol", "taxol is planned")
                 therapy["therapy_plan"] = therapy["therapy_plan"].replace("Currently on taxol", "Taxol is planned")
                 print(f"  [POST] therapy_plan: 'currently on taxol' → 'taxol is planned'")
+
+        # --- V33 POST hooks (ported from run.py) ---
+        note_lower = note_text.lower()
+
+        # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional LN sites
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = cancer.get("Distant Metastasis", "") or ""
+            if dist_met and dist_met.lower() not in ("no", "no.", "none", ""):
+                dist_lower = dist_met.lower()
+                REGIONAL_SITES_DM = ["axillary", "axilla", "sentinel", "supraclavicular",
+                                     "infraclavicular", "internal mammary", "chest wall", "ipsilateral"]
+                DISTANT_SITES_DM = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                    "ovary", "skin", "adrenal", "contralateral",
+                                    "cervical", "distant", "hepatic", "pulmonary",
+                                    "osseous", "cerebral", "sternum", "sternal",
+                                    "spine", "spinal", "rib", "hip", "femur", "pelvi",
+                                    "mediastin", "retroperitoneal", "paraaortic", "para-aortic",
+                                    "mesenteric", "inguinal", "scalene"]
+                has_regional = any(rs in dist_lower for rs in REGIONAL_SITES_DM)
+                has_distant = any(ds in dist_lower for ds in DISTANT_SITES_DM)
+                if has_regional and not has_distant:
+                    old_dm = cancer["Distant Metastasis"]
+                    cancer["Distant Metastasis"] = "No"
+                    print(f"  [POST-DISTMET-REGIONAL] '{old_dm}' → 'No' (only regional sites)")
+
+        # POST-STAGE-DISTMET: Stage IV + Distant Met=No → downgrade
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = cancer.get("Stage_of_Cancer", "") or ""
+            dist_met = cancer.get("Distant Metastasis", "") or ""
+            met = cancer.get("Metastasis", "") or ""
+            stage_lower = stage.lower()
+            stage_says_iv = "stage iv" in stage_lower or ("metastatic" in stage_lower and "originally" not in stage_lower)
+            dist_met_says_no = dist_met.lower().startswith("no")
+            if stage_says_iv and dist_met_says_no:
+                met_lower = met.lower() if met else ""
+                DISTANT_SITES = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
+                                 "ovary", "skin", "contralateral", "distant",
+                                 "hepatic", "pulmonary", "osseous", "cerebral",
+                                 "sternum", "spine", "rib", "hip", "femur"]
+                has_distant = any(ds in met_lower for ds in DISTANT_SITES) if met_lower else False
+                if not has_distant:
+                    old_stage = stage
+                    cleaned = re.sub(r'(?i)\bStage\s*IV\s*\(?\s*metastatic\s*\)?', 'Stage III', stage)
+                    cleaned = re.sub(r'(?i)\bmetastatic\s*\(?\s*Stage\s*IV\s*\)?', 'Stage III', cleaned)
+                    cleaned = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III', cleaned)
+                    cancer["Stage_of_Cancer"] = cleaned
+                    print(f"  [POST-STAGE-DISTMET] '{old_stage}' → '{cleaned}' (Distant Met=No)")
+
+        # POST-HER2-VERIFY: HER2- but HER2+ drugs present → correct
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            type_val = cancer.get("Type_of_Cancer", "")
+            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", ""):
+                HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1",
+                                  "t-dxd", "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
+                HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
+                her2_evidence = []
+                for drug in HER2_POS_DRUGS:
+                    if drug in note_lower:
+                        her2_evidence.append(drug)
+                for regimen in HER2_POS_REGIMENS:
+                    if re.search(rf'\b{regimen}\b', note_lower):
+                        her2_evidence.append(regimen)
+                if her2_evidence:
+                    old_val = type_val
+                    type_val = re.sub(r'(?i)HER2[\s-]*(?:neg(?:ative)?|-)', 'HER2+', type_val)
+                    cancer["Type_of_Cancer"] = type_val
+                    print(f"  [POST-HER2-VERIFY] '{old_val}' → '{type_val}' (found: {her2_evidence})")
+
+        # POST-GENETICS-SEARCH: Search note for genetic testing when plan says "None"
+        gen = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gen, dict):
+            gen_val = gen.get("genetic_testing_plan", "") or ""
+            gen_lower = gen_val.lower().strip()
+            if gen_lower in ("none planned.", "none planned", "none", "none.", ""):
+                FUTURE_CTX = ["will order", "will send", "send for", "plan to",
+                              "interested in", "we will await", "pending",
+                              "recommend", "discussed", "consider", "plan for",
+                              "will check", "will obtain", "refer for", "schedule",
+                              "wishes to", "will likely", "after surgery",
+                              "counseling and testing", "counselling and testing"]
+                PAST_CTX = ["result:", "results:", "negative for", "positive for",
+                            "was done", "already completed", "completed",
+                            "will not pursue", "declined", "not interested"]
+                GENETIC_TERMS = ["oncotype", "mammaprint", "brca", "genetic counseling",
+                                 "genetic counselling", "genetic testing", "molecular profiling",
+                                 "germline", "genomic", "foundation one", "foundationone",
+                                 "guardant", "tempus", "strata", "invitae", "myriad",
+                                 "gene panel", "multigene"]
+                found_tests = []
+                for term in GENETIC_TERMS:
+                    if term not in note_lower:
+                        continue
+                    for m in re.finditer(re.escape(term), note_lower):
+                        start_ctx = max(0, m.start() - 100)
+                        end_ctx = min(len(note_lower), m.end() + 100)
+                        context = note_lower[start_ctx:end_ctx]
+                        if any(pc in context for pc in PAST_CTX):
+                            continue
+                        if any(fc in context for fc in FUTURE_CTX):
+                            found_tests.append(term)
+                            break
+                if found_tests:
+                    unique = list(dict.fromkeys(found_tests))[:3]
+                    gen["genetic_testing_plan"] = ", ".join(unique)
+                    print(f"  [POST-GENETICS-SEARCH] Found planned tests: {unique}")
+
+        # POST-IMAGING: Search A/P for imaging keywords (DEXA, echo, etc.)
+        img = keypoints.get("Imaging_Plan", {})
+        if isinstance(img, dict):
+            img_val = img.get("imaging_plan", "") or ""
+            img_lower = (img_val or "").lower()
+            if img_lower in ("no imaging planned.", "no imaging planned", ""):
+                IMAGING_KEYWORDS = {
+                    "dexa": "DEXA scan", "bone density": "DEXA scan",
+                    "echocardiogram": "Echocardiogram", "echo ": "Echocardiogram",
+                    "tte": "Echocardiogram (TTE)",
+                    "mammogram": "Mammogram", "ct chest": "CT Chest",
+                    "ct abdomen": "CT Abdomen/Pelvis", "ct cap": "CT CAP",
+                    "pet/ct": "PET/CT", "pet ct": "PET/CT",
+                    "bone scan": "Bone scan", "mri brain": "MRI Brain",
+                    "mr brain": "MRI Brain", "mri spine": "MRI Spine",
+                }
+                FUTURE_IMG = (r'(?:will\s+(?:order|schedule|get|have|obtain|need)|'
+                              r'plan\s+(?:for|to)|scheduled?\s+(?:for|a)|'
+                              r'consider|recommend|due\s+(?:for|in)|pending|'
+                              r'ordered?\s+(?:a\s+)?|need\s+(?:a\s+)?|baseline)')
+                ap_lower = (assessment_and_plan or "").lower()
+                search_text = ap_lower if ap_lower else note_lower
+                found_imgs = []
+                for kw, label in IMAGING_KEYWORDS.items():
+                    if label.lower() in img_lower:
+                        continue
+                    pattern = FUTURE_IMG + r'[^.;]{0,40}' + re.escape(kw)
+                    alt_pattern = re.escape(kw) + r'\s+(?:due|planned|ordered|scheduled)'
+                    if re.search(pattern, search_text, re.IGNORECASE) or \
+                       re.search(alt_pattern, search_text, re.IGNORECASE):
+                        found_imgs.append(label)
+                    elif re.search(r'-\s*' + re.escape(kw), ap_lower):
+                        found_imgs.append(label)
+                if found_imgs:
+                    unique_imgs = list(dict.fromkeys(found_imgs))
+                    img["imaging_plan"] = "; ".join(unique_imgs)
+                    print(f"  [POST-IMAGING] Found imaging plans: {unique_imgs}")
+
+        # POST-LAB-SEARCH: Search A/P for lab plans when lab_plan says "No labs"
+        lab = keypoints.get("Lab_Plan", {})
+        if isinstance(lab, dict):
+            lab_val = lab.get("lab_plan", "") or ""
+            lab_lower = lab_val.lower().strip()
+            if lab_lower in ("no labs planned.", "no labs planned", ""):
+                LAB_KEYWORDS = {
+                    "estradiol": "Estradiol", "fsh": "FSH", "lh": "LH",
+                    "check labs": "Labs", "labs monthly": "Monthly labs",
+                    "cbc": "CBC", "cmp": "CMP", "tumor marker": "Tumor markers",
+                    "ca 15-3": "CA 15-3", "ca 27": "CA 27.29", "cea": "CEA",
+                    "hbv dna": "HBV DNA", "hep b": "Hepatitis B monitoring",
+                }
+                ap_lower = (assessment_and_plan or "").lower()
+                found_labs = []
+                for kw, label in LAB_KEYWORDS.items():
+                    if re.search(rf'(?:check|order|monitor|draw|{kw}\s+(?:monthly|q\d))', ap_lower):
+                        if kw in ap_lower:
+                            found_labs.append(label)
+                    elif re.search(r'-\s*' + re.escape(kw), ap_lower):
+                        found_labs.append(label)
+                if found_labs:
+                    unique_labs = list(dict.fromkeys(found_labs))
+                    lab["lab_plan"] = "; ".join(unique_labs)
+                    print(f"  [POST-LAB-SEARCH] Found lab plans: {unique_labs}")
+
+        # POST-MEDS-SP: Remove completed (s/p) treatments from medication_plan
+        med = keypoints.get("Medication_Plan", {})
+        if isinstance(med, dict):
+            mp = med.get("medication_plan", "") or ""
+            if mp and re.search(r'\bs/p\b|status post', mp, re.IGNORECASE):
+                sentences = re.split(r'[.;]', mp)
+                kept = [s.strip() for s in sentences if s.strip() and
+                        not re.search(r'\bs/p\b|status post|completed\s+\d', s, re.IGNORECASE)]
+                if kept:
+                    med["medication_plan"] = ". ".join(kept) + "."
+                else:
+                    med["medication_plan"] = "No new medication plans."
+                print(f"  [POST-MEDS-SP] Removed s/p (completed) items from medication_plan")
+
+        # POST-MEDS-NOT-STARTED: Remove drugs patient hasn't started from current_meds
+        cur_meds = keypoints.get("Current_Medications", {})
+        if isinstance(cur_meds, dict):
+            meds_val = (cur_meds.get("current_meds", "") or "").strip()
+            if meds_val and re.search(r'has not (?:tried|started|begun)', note_lower):
+                meds_list = [m.strip() for m in re.split(r'[,;]', meds_val) if m.strip()]
+                removed = []
+                for med_name in meds_list[:]:
+                    med_lower = med_name.lower().split()[0] if med_name else ""
+                    if med_lower and re.search(
+                        rf'{re.escape(med_lower)}[^.]*?has not (?:tried|started)|'
+                        rf'has not (?:tried|started)[^.]*?{re.escape(med_lower)}',
+                        note_lower
+                    ):
+                        meds_list.remove(med_name)
+                        removed.append(med_name)
+                if removed:
+                    cur_meds["current_meds"] = ", ".join(meds_list) if meds_list else ""
+                    print(f"  [POST-MEDS-NOT-STARTED] Removed not-yet-started: {removed}")
+
+        # POST-INDETERMINATE-MET: Downgrade distant met if site described as indeterminate
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = cancer.get("Distant Metastasis", "") or ""
+            if "yes" in dist_met.lower():
+                INDET_TERMS = ["cyst", "indeterminate", "probably benign", "likely benign",
+                               "cannot confirm", "uncertain", "nonspecific"]
+                SITES_CHECK = {"liver": ["liver", "hepatic"], "lung": ["lung", "pulmonary"]}
+                for site, synonyms in SITES_CHECK.items():
+                    if any(s in dist_met.lower() for s in synonyms):
+                        for syn in synonyms:
+                            for m in re.finditer(re.escape(syn), note_lower):
+                                ctx = note_lower[max(0, m.start()-80):m.end()+80]
+                                if any(t in ctx for t in INDET_TERMS):
+                                    old_dm = dist_met
+                                    dist_met = re.sub(
+                                        rf'(?i),?\s*(?:and\s+)?(?:to\s+)?{site}[^,;.]*',
+                                        '', dist_met
+                                    ).strip().rstrip(',')
+                                    if not dist_met or dist_met.lower() in ("yes", "yes,", "yes, to"):
+                                        dist_met = "No"
+                                    cancer["Distant Metastasis"] = dist_met
+                                    print(f"  [POST-INDETERMINATE-MET] {site}: indeterminate in note → removed from distant mets")
+                                    break
+
+        # POST-LAB-SUMMARY-REDACTED: Fix "Values redacted" when labs are readable
+        lab_results = keypoints.get("Lab_Results", {})
+        if isinstance(lab_results, dict):
+            ls = lab_results.get("lab_summary", "") or ""
+            if ls.lower().startswith("values redacted"):
+                readable = re.findall(
+                    r'(?:Albumin|ALT|AST|Alkaline|WBC|RBC|Hemoglobin|Hematocrit|Platelet|Sodium|Potassium|Creatinine|Glucose|Calcium|Bilirubin)'
+                    r'[^*\n]{0,40}\d+\.?\d*',
+                    note_text, re.IGNORECASE
+                )
+                if len(readable) >= 3:
+                    lab_results["lab_summary"] = "Labs present in note (see full note for values)."
+                    print(f"  [POST-LAB-REDACTED] Overrode 'Values redacted' (found {len(readable)} readable values)")
 
         # 7. Letter generation
         letter = ""
