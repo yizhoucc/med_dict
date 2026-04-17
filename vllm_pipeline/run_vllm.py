@@ -339,6 +339,26 @@ def main():
                 referral["Specialty"] = ", ".join(parts) if parts else "None"
                 print(f"  [POST] Referral: removed 'Palliative care' (intent, not referral)")
 
+        # POST hook: fix medication_plan contradictions (stopped X but "currently on X")
+        DRUG_ALIASES = {
+            "fulvestrant": ["faslodex"], "faslodex": ["fulvestrant"],
+            "letrozole": ["femara"], "femara": ["letrozole"],
+            "anastrozole": ["arimidex"], "arimidex": ["anastrozole"],
+            "palbociclib": ["ibrance"], "ibrance": ["palbociclib"],
+        }
+        mp = keypoints.get("Medication_Plan", {})
+        mp_text = mp.get("medication_plan", "")
+        mp_lower = mp_text.lower()
+        for drug, aliases in DRUG_ALIASES.items():
+            all_names = [drug] + aliases
+            stopped = any(f"stopped {n}" in mp_lower or f"stop {n}" in mp_lower for n in all_names)
+            current = any(f"currently on {n}" in mp_lower for n in all_names)
+            if stopped and current:
+                for n in all_names:
+                    mp_text = re.sub(rf'(?i)Currently on {n}\.?\s*', '', mp_text)
+                mp["medication_plan"] = mp_text.strip()
+                print(f"  [POST] medication_plan: removed contradictory 'currently on {drug}'")
+
         # POST hook: fix therapy_plan "currently on taxol" when A/P says "taxol planned"
         therapy = keypoints.get("Therapy_plan", {})
         tp_text = therapy.get("therapy_plan", "")
