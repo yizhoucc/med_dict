@@ -1,6 +1,6 @@
 Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
-  Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+  Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan (e.g., "1 unit pRBC", "2 units packed red blood cells", "transfusion today"). Do not include past medications.
   Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
   Respond *only* with a JSON object using this exact schema:
   {
