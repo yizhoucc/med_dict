@@ -267,6 +267,53 @@ def main():
                 img_plan["imaging_plan"] = "; ".join(found) + " (ordered in note header)."
                 print(f"  [POST] imaging_plan: found header orders → {found}")
 
+        # POST hook: filter oncologic drugs from supportive_meds
+        ONCOLOGIC_DRUGS = [
+            "letrozole", "tamoxifen", "anastrozole", "exemestane", "fulvestrant",
+            "faslodex", "femara", "arimidex", "aromasin",
+            "palbociclib", "ibrance", "ribociclib", "kisqali", "abemaciclib", "verzenio",
+            "trastuzumab", "herceptin", "pertuzumab", "perjeta", "t-dm1", "kadcyla",
+            "everolimus", "afinitor", "capecitabine", "xeloda",
+            "goserelin", "zoladex", "leuprolide", "lupron",
+        ]
+        tx_changes = keypoints.get("Treatment_Changes", {})
+        sup_meds = tx_changes.get("supportive_meds", "")
+        if sup_meds:
+            parts = [p.strip() for p in re.split(r'[;,]', sup_meds)]
+            filtered = [p for p in parts if not any(d in p.lower() for d in ONCOLOGIC_DRUGS)]
+            if len(filtered) != len(parts):
+                tx_changes["supportive_meds"] = "; ".join(filtered) if filtered else ""
+                print(f"  [POST] supportive_meds: filtered oncologic drugs")
+
+        # POST hook: medication_plan missing pRBC — check A/P for transfusion
+        med_plan = keypoints.get("Medication_Plan", {})
+        mp_text = med_plan.get("medication_plan", "").lower()
+        if "prbc" not in mp_text and "transfus" not in mp_text and "packed red" not in mp_text:
+            ap_lower = assessment_and_plan.lower() if assessment_and_plan else ""
+            if "prbc" in ap_lower or "packed red" in ap_lower or ("unit" in ap_lower and ("rbc" in ap_lower or "blood" in ap_lower)):
+                # Extract the transfusion order
+                for line in (assessment_and_plan or "").split("\n"):
+                    ll = line.lower().strip()
+                    if "prbc" in ll or ("unit" in ll and "rbc" in ll):
+                        med_plan["medication_plan"] = med_plan.get("medication_plan", "") + f" {line.strip()}"
+                        print(f"  [POST] medication_plan: added pRBC from A/P")
+                        break
+
+        # POST hook: Response_Assessment error → retry with simpler prompt
+        resp = keypoints.get("Response_Assessment", {})
+        if resp.get("status") == "error" or "error" in str(resp.get("message", "")):
+            simple_prompt = chat_tmpl.user_assistant(
+                'Based on the clinical note, how is the cancer currently responding to treatment? '
+                'Write ONLY a JSON object: {"response_assessment": "your answer"}'
+            )
+            retry_cfg = keypoint_config.copy()
+            retry_cfg["max_new_tokens"] = 512
+            retry_result, _ = vllm_generate(simple_prompt, client, retry_cfg, base_prompt)
+            retry_parsed = try_parse_json(retry_result)
+            if retry_parsed and "response_assessment" in retry_parsed:
+                keypoints["Response_Assessment"] = retry_parsed
+                print(f"  [POST] Response_Assessment: retry succeeded")
+
         # 7. Letter generation
         letter = ""
         if letter_prompt_template and config.get("extraction", {}).get("letter", False):

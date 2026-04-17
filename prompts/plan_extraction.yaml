@@ -2,6 +2,7 @@ Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan (e.g., "1 unit pRBC", "2 units packed red blood cells", "transfusion today"). Do not include past medications.
   Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
+  IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name. Do NOT write "Pertuzumab", "T-DM1", or any specific drug name that is not explicitly written in the note.
   Respond *only* with a JSON object using this exact schema:
   {
       "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
@@ -13,7 +14,8 @@ Therapy_plan: |
   Include future plans, changes to current therapy (start, stop, continue).
 
   CRITICAL — distinguish PAST from CURRENT/FUTURE:
-  - PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018"
+  - PAST (DO NOT include): "underwent mastectomy in 2016", "s/p colectomy", "completed 6 cycles of TCHP", "had radiation in 2018", "s/p 4 cycles of AC and weekly taxol x 12" (s/p = status post = COMPLETED)
+  - IMPORTANT: "s/p" or "status post" ALWAYS means COMPLETED/PAST. "S/p weekly taxol x 12" means taxol is DONE, not current.
   - CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
   - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
   IMPORTANT: "continue [drug]" IS a valid therapy plan. If the patient is continuing on current therapy, list the therapy being continued. Do NOT write "None" when the patient is actively on treatment.
@@ -200,6 +202,9 @@ Referral: |
   Do not mistake the doctor's signature at the end of the note as a referral.
   Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
   A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
+  CRITICAL — do NOT include PAST/COMPLETED referrals:
+  - If genetic testing was already DONE and results are back (e.g., "Myriad: Negative", "BRCA negative"), do NOT include genetics as a new referral.
+  - If a referral was made at a PRIOR visit (months/years ago) and the service was already completed, do NOT include it.
 
   IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
   - HPI: "referred to genetics", "will refer to social work"
