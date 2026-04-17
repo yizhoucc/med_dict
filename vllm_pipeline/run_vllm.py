@@ -425,7 +425,9 @@ def main():
             # Skip if note/extraction explicitly says TNBC/triple-negative (HER2+ drugs may be from prior/mistaken treatment)
             is_tnbc = "triple negative" in type_val.lower() or "tnbc" in type_val.lower()
             note_confirms_tnbc = re.search(r'(?:appears to be|confirmed|is)\s+tnbc|triple[\s-]*negative\s+breast\s+cancer', note_lower)
-            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", "") and not is_tnbc and not note_confirms_tnbc:
+            # Also skip if metastatic biopsy explicitly shows HER2-negative (HER2+ drugs from original cancer)
+            met_biopsy_her2_neg = re.search(r'metastatic\s+biopsy\s+HER2[\s-]*neg', type_val, re.IGNORECASE)
+            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", "") and not is_tnbc and not note_confirms_tnbc and not met_biopsy_her2_neg:
                 HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1",
                                   "t-dxd", "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
                 HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
@@ -620,6 +622,26 @@ def main():
                                     cancer["Distant Metastasis"] = dist_met
                                     print(f"  [POST-INDETERMINATE-MET] {site}: indeterminate in note → removed from distant mets")
                                     break
+
+        # POST-BRAIN-STAGING: Remove "brain" from Distant Met if only ordered (not found)
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = cancer.get("Distant Metastasis", "") or ""
+            if "brain" in dist_met.lower() and "suspected" in dist_met.lower():
+                # Check if note has actual brain findings (not just "ordered MRI brain")
+                brain_findings = re.search(
+                    r'(?:brain\s+met|brain\s+lesion|intracranial\s+met|cns\s+(?:met|lesion)|'
+                    r'dural\s+enhancement|leptomeningeal|brain.*(?:mass|tumor|nodule))',
+                    note_lower
+                )
+                brain_ordered = re.search(r'(?:order|mri)\s+(?:of\s+)?brain|brain\s+mri', note_lower)
+                if brain_ordered and not brain_findings:
+                    old_dm = dist_met
+                    dist_met = re.sub(r',?\s*(?:and\s+)?(?:to\s+)?brain\s*\(suspected\)', '', dist_met, flags=re.IGNORECASE).strip().rstrip(',')
+                    if not dist_met or dist_met.lower() in ("yes", "yes,", "yes, to"):
+                        dist_met = "No"
+                    cancer["Distant Metastasis"] = dist_met
+                    print(f"  [POST-BRAIN-STAGING] Removed 'brain (suspected)' — MRI brain ordered for staging, no findings")
 
         # POST-LAB-SUMMARY-REDACTED: Fix "Values redacted" when labs are readable
         lab_results = keypoints.get("Lab_Results", {})
