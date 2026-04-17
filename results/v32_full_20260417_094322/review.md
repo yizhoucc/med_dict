@@ -51,7 +51,7 @@
 | 50 | 189 | 0 | ✅✅ Stage IV, PMS2 mutation, ibrance+letrozole+xgeva, lupron correctly excluded (逐字审查) |
 | 52 | 191 | 0 | ✅✅ fertility preservation, Zoladex, Oncotype, CT/bone scan (逐字审查) |
 | 53 | 192 | 0 | ✅✅ HER2+ heterogeneous, neuroendocrine diff, AC/THP, Arimidex 10yr (逐字审查) |
-| 54 | 193 | 0 | ✅ |
+| 54 | 193 | 0 | ✅✅ BRCA2+, oligometastatic T6, palbociclib planned, PET/CT+DEXA (逐字审查) |
 | 57 | 196 | 0 | ✅ post-neoadjuvant TCH+P |
 | 59 | 198 | 0 | ✅ NED, mammogram+MRI |
 | 61 | 200 | 0 | ✅ Stage I |
