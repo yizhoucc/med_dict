@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 45/61 逐字审查完成，16 待审查**
+> Status: **审查中 — 46/61 逐字审查完成，15 待审查**
 
 ## 汇总统计
 
@@ -61,7 +61,7 @@
 | 66 | 205 | 1 | Stage "N1 LN involvement" but axillary biopsy was NEGATIVE → should be N0 (逐字审查) |
 | 68 | 207 | 2 | Type_of_Cancer "HER2-" but TCHP is HER2+ regimen + Stage "IV" but axillary/IMN nodes are regional, note says "early stage" (逐字审查) |
 | 70 | 209 | 0 | ✅✅ bilateral ILC+IDC, BRCA1, neoadjuvant TC→Abraxane, prolia/dental, lung nodule F/u, expanders (逐字审查) |
-| 72 | 211 | 0 | ✅ Stage IA |
+| 72 | 211 | 0 | ✅✅ pT1cN0 G2 neuroendocrine diff, ER99%/PR-/HER2-, letrozole+Oncotype ordered, Reclast (逐字审查) |
 | 73 | 212 | 0 | ✅ fat necrosis |
 | 78 | 217 | 0 | ✅ disease progression |
 | 80 | 219 | 0 | ✅ Stage IA |
