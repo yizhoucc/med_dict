@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 29/61 逐字审查完成，32 待审查**
+> Status: **审查中 — 31/61 逐字审查完成，30 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 5 | — |
+| **P2** | 6 | — |
 
 ## 审查记录
 
@@ -44,8 +44,8 @@
 | 40 | 179 | 1 | imaging_plan 漏 DEXA (A/P clearly lists "-DEXA") (逐字审查) |
 | 41 | 180 | 0 | ✅✅ ATM carrier, 3cm G3 IDC, AC-Taxol, MUGA, ribociclib trial (逐字审查) |
 | 42 | 181 | 0 | ✅✅ multifocal IDC G1, tamoxifen 5yr, mammogram planned (逐字审查) |
-| 43 | 182 | 0 | ✅ Stage I, full code |
-| 44 | 183 | 0 | ✅ post-neoadjuvant |
+| 43 | 182 | 1 | lab_summary "Values redacted" but labs have real values (逐字审查) |
+| 44 | 183 | 0 | ✅✅ BRCA1+, post-neoadjuvant, RT clinical trial, ribociclib eligible (逐字审查) |
 | 46 | 185 | 0 | ✅✅ SARCOIDOSIS TEST PASSED: Distant Mets "No", Goals "curative" |
 | 49 | 188 | 0 | ✅ surrogate decision maker |
 | 50 | 189 | 0 | ✅ ibrance+letrozole+xgeva |
