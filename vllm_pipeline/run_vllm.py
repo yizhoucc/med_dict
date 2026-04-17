@@ -422,7 +422,10 @@ def main():
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
-            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", ""):
+            # Skip if note/extraction explicitly says TNBC/triple-negative (HER2+ drugs may be from prior/mistaken treatment)
+            is_tnbc = "triple negative" in type_val.lower() or "tnbc" in type_val.lower()
+            note_confirms_tnbc = re.search(r'(?:appears to be|confirmed|is)\s+tnbc|triple[\s-]*negative\s+breast\s+cancer', note_lower)
+            if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", "") and not is_tnbc and not note_confirms_tnbc:
                 HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1",
                                   "t-dxd", "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
                 HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
@@ -471,6 +474,17 @@ def main():
                             continue
                         if any(fc in context for fc in FUTURE_CTX):
                             found_tests.append(term)
+                            break
+                # Also check for redacted genomic test pattern: "***** Dx" or "need ***** to determine chemotherapy"
+                if not found_tests:
+                    genomic_patterns = [
+                        r'(?:will\s+(?:likely\s+)?need|plan\s+to\s+(?:get|order|send))\s+\*{3,}.*?(?:chemother|adjuvant)',
+                        r'\*{3,}\s*(?:dx|score|result).*?(?:chemother|adjuvant|benefit)',
+                        r'(?:await|pending)\s+\*{3,}.*?(?:result|score)',
+                    ]
+                    for gp in genomic_patterns:
+                        if re.search(gp, note_lower):
+                            found_tests.append("Genomic test planned (name redacted)")
                             break
                 if found_tests:
                     unique = list(dict.fromkeys(found_tests))[:3]
@@ -530,12 +544,19 @@ def main():
                 }
                 ap_lower = (assessment_and_plan or "").lower()
                 found_labs = []
+                LAB_FUTURE = r'(?:test(?:ing)?|check|order|monitor|draw|recommend|will\s+(?:order|check|get)|once\s+every|q\s*\d|monthly|every\s+\d)'
                 for kw, label in LAB_KEYWORDS.items():
-                    if re.search(rf'(?:check|order|monitor|draw|{kw}\s+(?:monthly|q\d))', ap_lower):
-                        if kw in ap_lower:
+                    if kw in ap_lower:
+                        # Check for future context within 60 chars
+                        for m in re.finditer(re.escape(kw), ap_lower):
+                            ctx = ap_lower[max(0, m.start()-60):m.end()+60]
+                            if re.search(LAB_FUTURE, ctx):
+                                found_labs.append(label)
+                                break
+                        # Also match "-DEXA" style bullet points
+                    if re.search(r'-\s*' + re.escape(kw), ap_lower):
+                        if label not in found_labs:
                             found_labs.append(label)
-                    elif re.search(r'-\s*' + re.escape(kw), ap_lower):
-                        found_labs.append(label)
                 if found_labs:
                     unique_labs = list(dict.fromkeys(found_labs))
                     lab["lab_plan"] = "; ".join(unique_labs)
