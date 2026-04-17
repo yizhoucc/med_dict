@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 22/61 逐字审查完成，39 待审查**
+> Status: **审查中 — 23/61 逐字审查完成，38 待审查**
 
 ## 汇总统计
 
@@ -37,7 +37,7 @@
 | 27 | 166 | 1 | Distant Mets: liver lesions are "cysts/indeterminate", A/P says "MBC to bone" only |
 | 29 | 168 | 0 | ✅ multifocal + Oncotype Low Risk |
 | 30 | 169 | 0 | ✅✅ neoadjuvant planned, TTE, 2 chemo options (detailed逐字审查) |
-| 33 | 172 | 0 | ✅ NED on letrozole |
+| 33 | 172 | 0 | ✅✅ NED on letrozole, ILC, lymphedema, MRI brain conditional (逐字审查) |
 | 34 | 173 | 0 | ✅ local recurrence |
 | 36 | 175 | 0 | ✅ |
 | 37 | 176 | 0 | ✅ Stage IIA, full code |
