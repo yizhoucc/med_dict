@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (20 POST hooks)
 > Automated P2 scan: 0 P2 (17/17 V32 P2s verified fixed, 0 regressions)
-> Status: **审查中 — 1/61 逐字审查完成**
+> Status: **审查中 — 2/61 逐字审查完成**
 
 ## 汇总统计
 
@@ -18,8 +18,8 @@
 
 | ROW | coral_idx | P2 | 备注 |
 |-----|-----------|-----|------|
-| 1 | 140 | 1 | Distant Mets 加了 "brain (suspected)" 无依据，brain MRI 是 routine staging (逐字审查) |
-| 2 | 141 | 0 | ✅✅ mTNBC+Lynch, irinotecan C3D1 dose change, pRBC+NS+KCl, Na124/K3.1/Hgb7.7, doxycycline, HBV q4mo (逐字审查) |
+| 1 | 140 | 0 | ✅✅ mBC lungs/liver/peritoneum/ovary (no brain!), ibrance+unspecified conditional, bone scan+MRI brain+6 labs, Integrative Med, full code (逐字审查) |
+| 2 | 141 | 0 | ✅✅ mTNBC+Lynch, irinotecan dose change 150mg/m2 q2w, pRBC+NS+KCl, Na124/K3.1/Hgb7.7, doxycycline, HBV q4mo, 30+labs (逐字审查) |
 | 3 | 142 | | |
 | 5 | 144 | | |
 | 6 | 145 | | |
