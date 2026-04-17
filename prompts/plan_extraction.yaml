@@ -111,8 +111,9 @@ Imaging_Plan: |
 
   CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
   - XRT, RT, radiation therapy, Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here
-  - Biopsy, surgery, port placement → these go in Procedure_Plan, NOT here
+  - Biopsy, surgery, port placement, drain removal → these go in Procedure_Plan, NOT here. A biopsy is NEVER imaging even if the note says "correlation with imaging advised".
   - Only include: CT, MRI, PET/CT, DEXA, bone scan, mammogram, ultrasound, echocardiogram/TTE, X-ray
+  FINAL CHECK: Before outputting, verify each item is one of the imaging types above. If it contains the word "biopsy", it is NOT imaging — remove it.
 
   CRITICAL — only include imaging ORDERED or PLANNED in the A/P:
   - Do NOT add standard-of-care monitoring that is NOT explicitly mentioned in the A/P.
@@ -128,7 +129,8 @@ Imaging_Plan: |
   }
 
 Lab_Plan: |
-  TASK: Extract the 'lab Plan' from the given 'Assessment/Plan' section.
+  TASK: Extract the 'lab Plan' from the clinical note.
+  Look for lab orders in the Assessment/Plan section AND in any order sets listed elsewhere in the note (e.g., "Complete Blood Count with Differential" listed as an order near the top of the note).
   Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
   Also include pre-chemo blood draws (e.g., "blood draw prior to cycle", "labs before chemo", "draw and visit").
   Specify frequency and rationale if mentioned.

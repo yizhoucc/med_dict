@@ -151,7 +151,9 @@ Current_Medications: |
     drug as current (e.g., "continuing on anastrozole"), prefer the Assessment/Plan — it reflects the
     most recent clinical decision. Do NOT list both unless the note clearly says both are concurrent.
   - PLANNED/RECOMMENDED (do NOT include): medications discussed, recommended, or scheduled to start.
-    Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]", "[drug] planned", "planned [drug]"
+    Look for: "will start", "plan to begin", "recommend", "discussed", "Rx sent", "after [condition]", "[drug] planned", "planned [drug]", "followed by [drug]"
+    Example: "currently on AC and taxol planned" → AC is CURRENT, taxol is PLANNED → only include AC
+    Example: "AC followed by taxol" → AC is CURRENT, taxol is FUTURE → only include AC
   - PAST/COMPLETED (do NOT include): medications already finished or stopped.
     Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
   - STOPPED/DROPPED (do NOT include): medications recently discontinued.
