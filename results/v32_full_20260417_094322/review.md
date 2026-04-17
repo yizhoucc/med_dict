@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查完成 — 61/61**
+> Status: **审查中 — 20/61 逐字审查完成，41 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 0 | 0/sample |
+| **P2** | 3 | — |
 
 ## 审查记录
 
@@ -25,8 +25,8 @@
 | 6 | 145 | 0 | ✅ Genetics "None" (fixed), letrozole+zoladex |
 | 7 | 146 | 0 | ✅✅ therapy_plan now uses "unspecified agent" (FIXED!) |
 | 8 | 147 | 0 | ✅ pT0N1 correct, T-DM1 is from original text |
-| 9 | 148 | 0 | ✅ "status post...completed" (fixed) |
-| 10 | 149 | 0 | ✅ HR+ implied HER2- |
+| 9 | 148 | 1 | medication_plan/letter: completed taxol as future plan |
+| 10 | 149 | 2 | Response_Assessment error (key="error" not "status") + findings/Stage inconsistency (0/20 vs 7/20) |
 | 11 | 150 | 0 | ✅ supportive_meds clean (POST hook) |
 | 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
 | 14 | 153 | 0 | ✅ medication_plan no contradictions (POST hook), Response_Assessment retry |
