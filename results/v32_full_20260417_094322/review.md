@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 26/61 逐字审查完成，35 待审查**
+> Status: **审查中 — 29/61 逐字审查完成，32 待审查**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 4 | — |
+| **P2** | 5 | — |
 
 ## 审查记录
 
@@ -41,9 +41,9 @@
 | 34 | 173 | 0 | ✅✅ 2nd local recurrence, receptor change, tamoxifen, CALOR trial (逐字审查) |
 | 36 | 175 | 0 | ✅✅ mixed ductal/mucinous, Abraxane C8, G3 infusion reaction (逐字审查) |
 | 37 | 176 | 0 | ✅✅ TNBC, dd AC/Taxol, no hormonal/RT, full code (逐字审查) |
-| 40 | 179 | 0 | ✅ supportive_meds clean (POST hook) |
-| 41 | 180 | 0 | ✅ |
-| 42 | 181 | 0 | ✅ mammogram planned |
+| 40 | 179 | 1 | imaging_plan 漏 DEXA (A/P clearly lists "-DEXA") (逐字审查) |
+| 41 | 180 | 0 | ✅✅ ATM carrier, 3cm G3 IDC, AC-Taxol, MUGA, ribociclib trial (逐字审查) |
+| 42 | 181 | 0 | ✅✅ multifocal IDC G1, tamoxifen 5yr, mammogram planned (逐字审查) |
 | 43 | 182 | 0 | ✅ Stage I, full code |
 | 44 | 183 | 0 | ✅ post-neoadjuvant |
 | 46 | 185 | 0 | ✅✅ SARCOIDOSIS TEST PASSED: Distant Mets "No", Goals "curative" |
