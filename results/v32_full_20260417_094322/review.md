@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 57/61 逐字审查完成，4 待审查**
+> Status: **审查完成 — 61/61 逐字审查完成**
 
 ## 汇总统计
 
@@ -12,7 +12,7 @@
 |--------|------|------|
 | **P0** | 0 | 0% |
 | **P1** | 0 | 0% |
-| **P2** | 16 | — |
+| **P2** | 17 | — |
 
 ## 审查记录
 
@@ -73,12 +73,12 @@
 | 87 | 226 | 0 | ✅✅ 2nd opinion, 4/19 LN+ECE, Parkinson's→chemo risk-benefit unfavorable, hormonal alone, 40-45% recurrence (逐字审查) |
 | 88 | 227 | 0 | ✅✅ Stage IV brain/lung/LN, HR weak/HER2-, 23/30 nodes+, capecitabine, HER2 retest planned, COVID+, full code (逐字审查) |
 | 90 | 229 | 0 | ✅✅ trial enrolled, AC cycle 4 dose delay, GCSF 50%, antiemetic switch, TSH 6.01, BLM carrier (逐字审查) |
-| 91 | 230 | 0 | ✅ everolimus+exemestane |
-| 92 | 231 | 0 | ✅ epirubicin, liver improvement |
-| 94 | 233 | 0 | ✅ mammogram+MRI planned |
-| 95 | 234 | 0 | ✅ good neoadjuvant response |
-| 97 | 236 | 0 | ✅ Stage IA |
-| 100 | 239 | 0 | ✅ Gemzar + labs comprehensive |
+| 91 | 230 | 0 | ✅✅ Stage IV MBC on everolimus+exemestane+denosumab, PET/CT planned, labs monthly, iliac LN unclear (逐字审查) |
+| 92 | 231 | 0 | ✅✅ MBC liver improving on epirubicin C2, CA 27.29 3332/CEA 380, Neupogen, perioral rash (逐字审查) |
+| 94 | 233 | 0 | ✅✅ pT1b Oncotype 21, NED on letrozole, mammogram+MRI planned, bone protection, full code (逐字审查) |
+| 95 | 234 | 0 | ✅✅ ISPY pembrolizumab, good NAC response 3 foci, 1/6 SLN+, XRT→capecitabine→endocrine planned (逐字审查) |
+| 97 | 236 | 1 | genetic_testing_plan "None" but A/P orders Oncotype Dx ("Pt is interested and wishes to proceed") (逐字审查) |
+| 100 | 239 | 0 | ✅✅ MBC Gemzar C2 cancelled/fatigue, tumor markers rising (unclear PD vs flare), anemia/macrocytic (逐字审查) |
 
 ## POST hooks verified (10 total, all fired correctly)
 
