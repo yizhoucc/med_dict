@@ -60,3 +60,7 @@
 |------|------|-----|
 | 2026-04-17 | V32 审查完成 | 17 |
 | 2026-04-17 | V33 开始 | - |
+| 2026-04-17 | V33 iter 1: 10 POST hooks + prompts | 17→1 (ROW 1 brain) |
+| 2026-04-17 | V33 iter 2: TNBC排除 + lab/genetics搜索 | 1→0 (test) |
+| 2026-04-17 | V33 iter 3: 全量审查发现 ROW 1 + ROW 86 回归 | 0→2 |
+| 2026-04-17 | V33 iter 4-5: brain staging + HER2 met biopsy | 2→0 (待全量验证) |
