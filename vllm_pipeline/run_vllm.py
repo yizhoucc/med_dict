@@ -240,12 +240,32 @@ def main():
                 keypoints[key] = result
                 print(f"  {key}: {time.time()-t0:.1f}s")
 
-        # 6. Sanitize: convert list values to strings
+        # 6. Sanitize + POST hooks
         for section_key, section_val in keypoints.items():
             if isinstance(section_val, dict):
                 for field_key, field_val in section_val.items():
                     if isinstance(field_val, list):
                         section_val[field_key] = "; ".join(str(v) for v in field_val)
+
+        # POST hook: lab_summary "Values redacted" for old labs → "No labs in note"
+        lab_results = keypoints.get("Lab_Results", {})
+        if lab_results.get("lab_summary", "").lower().startswith("values redacted"):
+            # Check if note has recent labs (within 6 months)
+            # Simple heuristic: if "No visits with results within" appears, labs are old
+            if "No visits with results within" in note_text:
+                lab_results["lab_summary"] = "No labs in note."
+                print("  [POST] lab_summary: old labs → 'No labs in note'")
+
+        # POST hook: imaging_plan empty but note has imaging orders in header
+        img_plan = keypoints.get("Imaging_Plan", {})
+        if img_plan.get("imaging_plan", "").lower() in ("no imaging planned.", "no imaging planned"):
+            # Check for imaging order keywords in note header (before HPI)
+            header = note_text.split("History of Present Illness")[0] if "History of Present Illness" in note_text else ""
+            img_keywords = ["Bone Scan", "MR Brain", "MRI", "CT ", "PET", "Mammogram", "DEXA", "DXA", "Echocardiogram", "Ultrasound"]
+            found = [kw for kw in img_keywords if kw in header]
+            if found:
+                img_plan["imaging_plan"] = "; ".join(found) + " (ordered in note header)."
+                print(f"  [POST] imaging_plan: found header orders → {found}")
 
         # 7. Letter generation
         letter = ""
