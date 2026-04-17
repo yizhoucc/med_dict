@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 53/61 逐字审查完成，8 待审查**
+> Status: **审查中 — 54/61 逐字审查完成，7 待审查**
 
 ## 汇总统计
 
@@ -69,7 +69,7 @@
 | 83 | 222 | 1 | Stage "IV" but A/P says "W/u negative for distant metastasis" → axillary nodes are regional (逐字审查) |
 | 84 | 223 | 0 | ✅✅ mBC bone/liver/CNS, CHEK2+MS, capecitabine, repeat LP/CT/MRI, rad onc for CNS, future fulvestrant+PI3Ki (逐字审查) |
 | 85 | 224 | 0 | ✅✅ mBC ILC bone/liver/brain/LMD, PD fulvestrant/palbo, phase 1 trial+olaparib, trigeminal nerve met, Foundation One (逐字审查) |
-| 86 | 225 | 0 | ✅ PD on letrozole+ribociclib, Palliative care removed (POST hook) |
+| 86 | 225 | 0 | ✅✅ mBC HER2 status change (HER2+→HER2-), PD letrozole/ribociclib, fulvestrant+/-everolimus, CHEK2, palliative XRT (逐字审查) |
 | 87 | 226 | 0 | ✅ Stage IIIA (pT2 N2a) |
 | 88 | 227 | 0 | ✅ capecitabine, full code |
 | 90 | 229 | 0 | ✅ post-neoadjuvant |
