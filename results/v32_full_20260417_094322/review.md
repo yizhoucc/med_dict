@@ -4,7 +4,7 @@
 > Model: Qwen3.5-35B-A3B-GPTQ-Int4 via vLLM 0.19.0
 > Pipeline: vllm_pipeline/run_vllm.py (10 POST hooks)
 > Automated P2 scan: 0 P2 (all known patterns checked, T-DM1 in ROW 8 is from original text)
-> Status: **审查中 — 53/61 逐字审查完成，8 待补审（ROW 11,12,14,17,18,20,22,29）**
+> Status: **审查中 — 55/61 逐字审查完成，6 待补审（ROW 14,17,18,20,22,29）**
 
 ## 汇总统计
 
@@ -27,8 +27,8 @@
 | 8 | 147 | 0 | ✅✅ pT0N1, pCR breast but 3/28 LN+(ECE), ER-/HER2+, incomplete TCHP, AC x4→T-DM1, port+echo, ?Kikuchi (逐字审查) |
 | 9 | 148 | 1 | medication_plan/letter: completed taxol as future plan (逐字审查) |
 | 10 | 149 | 2 | Response_Assessment error (key="error" not "status") + findings/Stage inconsistency (0/20 vs 7/20) (逐字审查) |
-| 11 | 150 | 0 | ✅ supportive_meds clean (POST hook) |
-| 12 | 151 | 0 | ✅ DNR/DNI, brain mets GK, 4 imaging plans |
+| 11 | 150 | 0 | ✅✅ Stage IIIC→IV bone mets, Faslodex+Denosumab, jaw XRT residual numbness, leg pain→MRI+PET/CT, thrush Mycelex (逐字审查) |
+| 12 | 151 | 0 | ✅✅ de novo Stage IV ER+/PR+/HER2+, brain mets s/p GK x3, DNR/DNI+POLST, 4 imaging plans q4-6mo (逐字审查) |
 | 14 | 153 | 0 | ✅ medication_plan no contradictions (POST hook), Response_Assessment retry |
 | 17 | 156 | 0 | ✅ Stage IA, DXA+labs, genetics+nutrition referral |
 | 18 | 157 | 0 | ✅ papillary CA + ITC |
