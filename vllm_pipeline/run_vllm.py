@@ -302,17 +302,22 @@ def main():
         # POST hook: Response_Assessment error → retry with simpler prompt
         resp = keypoints.get("Response_Assessment", {})
         if resp.get("status") == "error" or "error" in str(resp.get("message", "")):
-            simple_prompt = chat_tmpl.user_assistant(
-                'Based on the clinical note, how is the cancer currently responding to treatment? '
-                'Write ONLY a JSON object: {"response_assessment": "your answer"}'
-            )
-            retry_cfg = keypoint_config.copy()
-            retry_cfg["max_new_tokens"] = 512
-            retry_result, _ = vllm_generate(simple_prompt, client, retry_cfg, base_prompt)
-            retry_parsed = try_parse_json(retry_result)
-            if retry_parsed and "response_assessment" in retry_parsed:
-                keypoints["Response_Assessment"] = retry_parsed
-                print(f"  [POST] Response_Assessment: retry succeeded")
+            try:
+                simple_prompt = chat_tmpl.user_assistant(
+                    'Based on the clinical note, how is the cancer currently responding to treatment? '
+                    'Write ONLY a JSON object: {"response_assessment": "your answer"}'
+                )
+                retry_cfg = keypoint_config.copy()
+                retry_cfg["max_new_tokens"] = 512
+                retry_result, _ = vllm_generate(simple_prompt, client, retry_cfg, base_prompt)
+                retry_parsed = try_parse_json(retry_result)
+                if retry_parsed and "response_assessment" in retry_parsed:
+                    keypoints["Response_Assessment"] = retry_parsed
+                    print(f"  [POST] Response_Assessment: retry succeeded")
+                else:
+                    print(f"  [POST] Response_Assessment: retry failed, keeping error")
+            except Exception as e:
+                print(f"  [POST] Response_Assessment: retry exception: {e}")
 
         # 7. Letter generation
         letter = ""

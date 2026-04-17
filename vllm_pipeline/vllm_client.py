@@ -17,7 +17,7 @@ class VLLMClient:
     """Lightweight wrapper around vLLM's OpenAI-compatible API."""
 
     def __init__(self, base_url: str = "http://localhost:8000/v1", model_name: Optional[str] = None):
-        self.client = openai.OpenAI(base_url=base_url, api_key="not-needed")
+        self.client = openai.OpenAI(base_url=base_url, api_key="not-needed", timeout=120.0)
         self.model_name = model_name or "default"
 
     def generate(self, full_prompt: str, gen_config: Dict) -> str:
