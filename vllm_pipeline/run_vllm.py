@@ -351,7 +351,7 @@ def main():
         mp_lower = mp_text.lower()
         for drug, aliases in DRUG_ALIASES.items():
             all_names = [drug] + aliases
-            stopped = any(f"stopped {n}" in mp_lower or f"stop {n}" in mp_lower for n in all_names)
+            stopped = any(re.search(rf'stop\w*\s+.*?\b{n}\b', mp_lower) for n in all_names)
             current = any(f"currently on {n}" in mp_lower for n in all_names)
             if stopped and current:
                 for n in all_names:
