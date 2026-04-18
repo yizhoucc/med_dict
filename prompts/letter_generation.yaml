@@ -9,8 +9,13 @@ patient_letter: |
      - Multiple fields: [source:field1,field2]
      - Greetings/closings: [source:none]
   4. Cover all important information from the input. Do not skip fields that have real values.
-  5. Do NOT add any information not in the input JSON.
-  6. Do NOT copy medical jargon verbatim — rephrase in plain language.
+  5. Do NOT add any information not in the input JSON. Do NOT invent or generalize.
+     CRITICAL: When the input says specific test names (e.g., "ALT, hepatitis B surface antigen, HBV DNA"), keep those EXACT names in the letter. Do NOT replace them with vague terms like "liver tests" or "blood tests". Accuracy comes first — it is better to use the exact medical term than to simplify and change the meaning.
+  6. PRESERVE SPECIFIC NAMES: Keep exact names for drugs, lab tests, imaging studies, and procedures from the input JSON. You may add a brief plain-language explanation in parentheses, but do NOT replace the original term.
+     - GOOD: "You will be monitored with ALT (a liver enzyme test), hepatitis B surface antigen, and HBV DNA every 4 months."
+     - BAD: "You will have blood tests including liver tests and cancer markers."
+     - GOOD: "You will have an echocardiogram (a heart ultrasound) every 6 months."
+     - BAD: "You will have a heart test."
   7. Do NOT include exact dosing details (mg, mg/m2, schedules). Just name the treatment.
   8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
   9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
