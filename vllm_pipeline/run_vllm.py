@@ -301,7 +301,11 @@ def main():
 
         # POST hook: Response_Assessment error → retry with simpler prompt
         resp = keypoints.get("Response_Assessment", {})
-        if resp.get("status") == "error" or "error" in str(resp.get("message", "")):
+        has_error = (resp.get("status") == "error" or
+                     "error" in resp or
+                     "error" in str(resp.get("message", "")) or
+                     (isinstance(resp, dict) and "response_assessment" not in resp and len(resp) <= 2))
+        if has_error:
             # Only retry if base_prompt is not too long (avoid exceeding max_model_len)
             if len(base_prompt) < 40000:  # ~10k tokens
                 try:
@@ -317,9 +321,11 @@ def main():
                         keypoints["Response_Assessment"] = retry_parsed
                         print(f"  [POST] Response_Assessment: retry succeeded")
                     else:
-                        print(f"  [POST] Response_Assessment: retry failed, keeping error")
+                        keypoints["Response_Assessment"] = {"response_assessment": "Not mentioned in note."}
+                        print(f"  [POST] Response_Assessment: retry failed, using fallback")
                 except Exception as e:
-                    print(f"  [POST] Response_Assessment: retry exception: {e}")
+                    keypoints["Response_Assessment"] = {"response_assessment": "Not mentioned in note."}
+                    print(f"  [POST] Response_Assessment: retry exception: {e}, using fallback")
             else:
                 print(f"  [POST] Response_Assessment: note too long for retry, skipping")
 
@@ -649,6 +655,34 @@ def main():
                         dist_met = "No"
                     cancer["Distant Metastasis"] = dist_met
                     print(f"  [POST-BRAIN-STAGING] Removed 'brain (suspected)' — MRI brain ordered for staging, no findings")
+
+        # POST-LN-CONSISTENCY: Fix conflicting LN counts between findings and Stage
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        findings_dict = keypoints.get("Clinical_Findings", {})
+        if isinstance(cancer, dict) and isinstance(findings_dict, dict):
+            stage_val = cancer.get("Stage_of_Cancer", "") or ""
+            findings_val = findings_dict.get("findings", "") or ""
+            # Extract LN fractions (X/Y format) from both
+            stage_ln = re.findall(r'(\d+)/(\d+)\s*(?:positive\s+)?(?:lymph|LN|node)', stage_val, re.IGNORECASE)
+            findings_ln = re.findall(r'(\d+)/(\d+)\s*(?:lymph|LN|node)', findings_val, re.IGNORECASE)
+            if stage_ln and findings_ln:
+                s_pos, s_total = int(stage_ln[0][0]), int(stage_ln[0][1])
+                f_pos, f_total = int(findings_ln[0][0]), int(findings_ln[0][1])
+                if s_total == f_total and s_pos != f_pos:
+                    # Conflict! Check A/P for the correct value
+                    ap_lower = (assessment_and_plan or "").lower()
+                    ap_ln = re.findall(r'(\d+)/(\d+)\s*(?:positive\s+)?(?:lymph|ln|node)', ap_lower)
+                    if ap_ln:
+                        correct_pos = int(ap_ln[0][0])
+                        if correct_pos != f_pos:
+                            old_findings = findings_val
+                            findings_val = re.sub(
+                                rf'{f_pos}/{f_total}\s*(?:lymph|LN|node)',
+                                f'{correct_pos}/{f_total} lymph node',
+                                findings_val
+                            )
+                            findings_dict["findings"] = findings_val
+                            print(f"  [POST-LN-CONSISTENCY] findings LN: {f_pos}/{f_total} → {correct_pos}/{f_total} (from A/P)")
 
         # POST-LAB-SUMMARY-REDACTED: Fix "Values redacted" when labs are readable
         lab_results = keypoints.get("Lab_Results", {})

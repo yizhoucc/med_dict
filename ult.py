@@ -668,6 +668,8 @@ def try_parse_json(text):
         return None
 
     cleaned = text.strip()
+    # Strip Qwen3.5 thinking tags
+    cleaned = re.sub(r'<think>.*?</think>', '', cleaned, flags=re.DOTALL).strip()
     # Strip markdown code fences
     cleaned = cleaned.strip("```json").strip("```").strip()
 
