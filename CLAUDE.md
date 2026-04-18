@@ -144,7 +144,7 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **ROW N**：results.txt 中的 "RESULTS FOR ROW N"，N = row_index + 1。
 - **coral_idx**：CORAL 数据集的原始编号。
 - **当前版本**：v23（第 23 个大版本）。使用 Qwen2.5-32B-Instruct-AWQ。22 个 POST hooks。
-- **数据集**：61 个 sample（CORAL breastca_unannotated.csv 的子集）。
+- **数据集**：100 个 sample（CORAL breastca_unannotated.csv 全部行）。注意：v23-v32 错误地只跑了 61 个子集，v33 起改为全部 100 个。
 - **质量**：P0=0, P1=2 (3.3%), POST hooks 零误触发。详见 `results/v23_audit_report.md`。
 - **架构文档**：`PIPELINE_OVERVIEW.md`（给非技术人员看的完整架构说明）。
 
