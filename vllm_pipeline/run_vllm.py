@@ -711,6 +711,20 @@ def main():
             letter, _ = vllm_generate(letter_task, client, letter_config, letter_base)
             print(f"  Letter: generated ({len(letter)} chars)")
 
+            # POST-LETTER hooks
+            # POST-LETTER-METASTASIS: simplify when 3+ organs listed
+            MET_ORGANS = ['lung', 'liver', 'bone', 'brain', 'peritoneum', 'ovary', 'ovaries',
+                          'pleural', 'adrenal', 'skin', 'spine', 'sternum', 'rib', 'femur',
+                          'pelvi', 'hip', 'skull', 'mandible', 'chest wall']
+            for m in re.finditer(r'(?:spread|metastasized)\s+to\s+([^.]+)\.', letter, re.IGNORECASE):
+                organ_text = m.group(1).lower()
+                count = sum(1 for org in MET_ORGANS if org in organ_text)
+                if count >= 3:
+                    old_sentence = m.group(0)
+                    new_sentence = "spread to other parts of your body."
+                    letter = letter.replace(old_sentence, new_sentence)
+                    print(f"  [POST-LETTER-MET] Simplified {count} organs → 'other parts of your body'")
+
         # 8. Write results
         row_time = time.time() - row_start
         with open(results_path, 'a') as f:
