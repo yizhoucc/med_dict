@@ -32,6 +32,16 @@ from ult import (
     try_parse_json,
     extract_schema_keys,
 )
+from letter_generation import flatten_keypoints, _clean_keypoints_for_letter
+
+# Emotion keywords for letter emotional context (from letter_generation.py)
+_EMOTION_KEYWORDS = [
+    "distressed", "anxious", "anxiety", "scared", "fearful", "crying", "tearful",
+    "depressed", "depression", "worried", "overwhelmed", "upset", "emotional",
+    "frightened", "nervous", "stressed",
+]
+_NEG_WORDS = {'no ', 'not ', 'denies ', 'denied ', 'negative ', 'without ', 'absent ', 'none ',
+              'h/o ', 'history of ', 'past medical', 'pmh ', 'hx of ', 'hx '}
 
 
 def load_config(config_path: str) -> dict:
@@ -700,11 +710,29 @@ def main():
 
         # 7. Letter generation
         letter = ""
+        letter_metrics = {}
         if letter_prompt_template and config.get("extraction", {}).get("letter", False):
-            keypoints_json = json.dumps(keypoints, indent=2)
+            # 7a. Flatten and clean keypoints (ported from letter_generation.py)
+            flat = flatten_keypoints(keypoints)
+            flat = _clean_keypoints_for_letter(flat)
+
+            # 7b. Detect patient emotions from note text
+            emotions = []
+            for kw in _EMOTION_KEYWORDS:
+                idx = note_lower.find(kw)
+                if idx == -1:
+                    continue
+                context = note_lower[max(0, idx - 40):idx]
+                if any(neg in context for neg in _NEG_WORDS):
+                    continue
+                emotions.append(kw)
+            if emotions:
+                flat["emotional_context"] = f"Patient appears {', '.join(emotions[:3])}."
+
+            # 7c. Build letter prompt with flattened keypoints
+            keypoints_json = json.dumps(flat, indent=2, ensure_ascii=False)
             letter_prompt_filled = letter_prompt_template.replace("{keypoints_json}", keypoints_json)
             letter_task = chat_tmpl.user_assistant(letter_prompt_filled)
-            # Use full note as context for letter
             letter_base = build_base_prompt(note_text, chat_tmpl=chat_tmpl)
             letter_config = keypoint_config.copy()
             letter_config["max_new_tokens"] = 2048
@@ -725,6 +753,52 @@ def main():
                     letter = letter.replace(old_sentence, new_sentence)
                     print(f"  [POST-LETTER-MET] Simplified {count} organs → 'other parts of your body'")
 
+            # 7d. Compute readability metrics
+            try:
+                import textstat
+                letter_clean = re.sub(r'\[source:[^\]]*\]', '', letter)
+                letter_clean = letter_clean.replace('\\n', ' ').replace('\n', ' ')
+                letter_clean = re.sub(r'\*\*[^*]+\*\*', '', letter_clean)
+                letter_clean = re.sub(r'\s+', ' ', letter_clean).strip()
+
+                if len(letter_clean) > 50:
+                    # Raw metrics
+                    raw_metrics = {
+                        'flesch_kincaid_grade': round(textstat.flesch_kincaid_grade(letter_clean), 1),
+                        'flesch_reading_ease': round(textstat.flesch_reading_ease(letter_clean), 1),
+                        'gunning_fog': round(textstat.gunning_fog(letter_clean), 1),
+                        'smog_index': round(textstat.smog_index(letter_clean), 1),
+                        'dale_chall': round(textstat.dale_chall_readability_score(letter_clean), 1),
+                        'coleman_liau': round(textstat.coleman_liau_index(letter_clean), 1),
+                        'ari': round(textstat.automated_readability_index(letter_clean), 1),
+                        'linsear_write': round(textstat.linsear_write_formula(letter_clean), 1),
+                        'text_standard': textstat.text_standard(letter_clean),
+                        'word_count': textstat.lexicon_count(letter_clean),
+                        'sentence_count': textstat.sentence_count(letter_clean),
+                        'difficult_words': textstat.difficult_words(letter_clean),
+                    }
+
+                    # Adjusted metrics (replace explained terms with explanations)
+                    letter_adj = re.sub(
+                        r'(\b[A-Z][A-Za-z/\-]+(?:\s+[A-Za-z/\-]+){0,2})\s+\((?:a |an |the )?([^)]{5,60})\)',
+                        lambda m: m.group(2) if any(c.isalpha() for c in m.group(2)) and not any(d in m.group(2) for d in ['mg', 'U/L', 'g/dL', 'mmol', 'IHC', 'FISH', 'redacted']) else m.group(0),
+                        letter_clean
+                    )
+                    adj_metrics = {
+                        'flesch_kincaid_grade': round(textstat.flesch_kincaid_grade(letter_adj), 1),
+                        'flesch_reading_ease': round(textstat.flesch_reading_ease(letter_adj), 1),
+                        'dale_chall': round(textstat.dale_chall_readability_score(letter_adj), 1),
+                        'difficult_words': textstat.difficult_words(letter_adj),
+                    }
+
+                    letter_metrics = {'raw': raw_metrics, 'adjusted': adj_metrics}
+                    fk = raw_metrics['flesch_kincaid_grade']
+                    fk_adj = adj_metrics['flesch_kincaid_grade']
+                    fre = raw_metrics['flesch_reading_ease']
+                    print(f"  Readability: FK={fk} (adj={fk_adj}), FRE={fre}, words={raw_metrics['word_count']}, {raw_metrics['text_standard']}")
+            except ImportError:
+                pass  # textstat not installed, skip metrics
+
         # 8. Write results
         row_time = time.time() - row_start
         with open(results_path, 'a') as f:
@@ -735,6 +809,8 @@ def main():
             f.write(f"--- Column: assessment_and_plan ---\n{json.dumps(assessment_and_plan)}\n\n")
             f.write(f"--- Column: keypoints ---\n{json.dumps(keypoints, indent=2)}\n\n")
             f.write(f"--- Column: letter ---\n{json.dumps(letter)}\n\n")
+            if letter_metrics:
+                f.write(f"--- Column: readability_metrics ---\n{json.dumps(letter_metrics, indent=2)}\n\n")
             f.write("\n\n\n\n\n")
 
         print(f"  Row {row_num} total: {row_time:.1f}s")
