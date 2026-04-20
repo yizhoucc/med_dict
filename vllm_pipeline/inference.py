@@ -84,4 +84,7 @@ def vllm_generate(
         full_prompt = prompt_text
 
     result = client.generate(full_prompt, generation_config)
+    # Strip Qwen3.5 thinking tags from output
+    import re
+    result = re.sub(r'<think>.*?</think>', '', result, flags=re.DOTALL).strip()
     return result, base_prompt
