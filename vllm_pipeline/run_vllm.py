@@ -818,8 +818,7 @@ def main():
             f.write(f"--- Column: letter_detailed ---\n{json.dumps(letter_detailed)}\n\n")
 
             # Version 3: letter — LLM-simplified (patient-facing, ~150 words)
-            simplify_prompt = chat_tmpl.user_assistant(
-                "/no_think\n"
+            simplify_msg = (
                 "Simplify this patient letter to ~150 words. Keep ONLY:\n"
                 "- What cancer they have (one sentence)\n"
                 "- What treatment is planned next (chemo/surgery/radiation)\n"
@@ -834,8 +833,8 @@ def main():
                 f"LETTER TO SIMPLIFY:\n{letter_detailed}"
             )
             simplify_config = keypoint_config.copy()
-            simplify_config["max_new_tokens"] = 2048
-            letter_simple, _ = vllm_generate(simplify_prompt, client, simplify_config, "")
+            simplify_config["max_new_tokens"] = 1024
+            letter_simple = client.chat_generate(simplify_msg, simplify_config)
             # Strip thinking tags and source tags
             letter_simple = re.sub(r'<think>.*?</think>', '', letter_simple, flags=re.DOTALL).strip()
             letter_simple = re.sub(r'\s*\[source:[^\]]*\]', '', letter_simple)

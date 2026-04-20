@@ -48,6 +48,21 @@ class VLLMClient:
         text = _THINK_RE.sub("", text).strip()
         return text
 
+    def chat_generate(self, user_message: str, gen_config: Dict) -> str:
+        """Chat completion (no thinking mode). Used for simplification tasks."""
+        temperature = 0.0
+        if gen_config.get("do_sample", False):
+            temperature = gen_config.get("temperature", 0.6)
+
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            messages=[{"role": "user", "content": user_message}],
+            max_tokens=gen_config.get("max_new_tokens", 768),
+            temperature=temperature,
+            extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+        )
+        return response.choices[0].message.content.strip()
+
     def health_check(self) -> bool:
         """Check if vLLM server is running."""
         try:
