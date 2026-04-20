@@ -84,10 +84,18 @@ def vllm_generate(
         full_prompt = prompt_text
 
     result = client.generate(full_prompt, generation_config)
-    # Strip Qwen3.5 thinking tags from output (including unclosed tags)
+    # Strip Qwen3.5 thinking tags — extract content AFTER </think> if present
     import re
-    result = re.sub(r'<think>.*?</think>', '', result, flags=re.DOTALL).strip()
-    # Handle unclosed <think> (model hit max_tokens before closing)
     if '<think>' in result:
-        result = result.split('</think>')[-1] if '</think>' in result else re.sub(r'<think>.*', '', result, flags=re.DOTALL).strip()
+        if '</think>' in result:
+            # Closed thinking: take everything after </think>
+            result = result.split('</think>')[-1].strip()
+        else:
+            # Unclosed: look for "Dear Patient" or letter-like content inside
+            dear_idx = result.find('Dear Patient')
+            if dear_idx > -1:
+                result = result[dear_idx:].strip()
+            else:
+                # Last resort: strip the <think> tag and keep content
+                result = re.sub(r'<think>\s*', '', result).strip()
     return result, base_prompt
