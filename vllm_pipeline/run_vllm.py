@@ -835,7 +835,8 @@ def main():
             simplify_config = keypoint_config.copy()
             simplify_config["max_new_tokens"] = 1024
             letter_simple, _ = vllm_generate(simplify_prompt, client, simplify_config, "")
-            # Strip any source tags the LLM might copy
+            # Strip thinking tags and source tags
+            letter_simple = re.sub(r'<think>.*?</think>', '', letter_simple, flags=re.DOTALL).strip()
             letter_simple = re.sub(r'\s*\[source:[^\]]*\]', '', letter_simple)
             f.write(f"--- Column: letter ---\n{json.dumps(letter_simple.strip())}\n\n")
             simple_wc = len(letter_simple.split())
