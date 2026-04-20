@@ -833,7 +833,7 @@ def main():
                 f"LETTER TO SIMPLIFY:\n{letter_detailed}"
             )
             simplify_config = keypoint_config.copy()
-            simplify_config["max_new_tokens"] = 1024
+            simplify_config["max_new_tokens"] = 2048
             letter_simple, _ = vllm_generate(simplify_prompt, client, simplify_config, "")
             # Strip thinking tags and source tags
             letter_simple = re.sub(r'<think>.*?</think>', '', letter_simple, flags=re.DOTALL).strip()
