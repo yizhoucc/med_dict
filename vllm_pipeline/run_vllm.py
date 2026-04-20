@@ -819,6 +819,7 @@ def main():
 
             # Version 3: letter — LLM-simplified (patient-facing, ~150 words)
             simplify_prompt = chat_tmpl.user_assistant(
+                "/no_think\n"
                 "Simplify this patient letter to ~150 words. Keep ONLY:\n"
                 "- What cancer they have (one sentence)\n"
                 "- What treatment is planned next (chemo/surgery/radiation)\n"
