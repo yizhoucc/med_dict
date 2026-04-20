@@ -149,6 +149,7 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **架构文档**：`PIPELINE_OVERVIEW.md`（给非技术人员看的完整架构说明）。
 
 ## 代码规范
+- **无实时性要求**：这个项目没有任何延迟/实时性限制，可以自由调用多次 LLM。如果多调用一次能提升质量，就调用。
 - results.txt 保持当前自定义格式，不改为 JSON
 - prompt 中的 JSON schema 必须是合法 JSON（注意逗号）
 - `exp/` 中的 yaml 是实验配置入口，通过 `extraction.pipeline` 切换 v1/v2

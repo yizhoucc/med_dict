@@ -808,7 +808,7 @@ def main():
             f.write(f"--- Column: note_text ---\n{json.dumps(note_text)}\n\n")
             f.write(f"--- Column: assessment_and_plan ---\n{json.dumps(assessment_and_plan)}\n\n")
             f.write(f"--- Column: keypoints ---\n{json.dumps(keypoints, indent=2)}\n\n")
-            # === Generate multiple letter versions from one LLM output ===
+            # === Generate multiple letter versions ===
 
             # Version 1: letter_tagged — full detail with source tags (audit/traceability)
             f.write(f"--- Column: letter_tagged ---\n{json.dumps(letter)}\n\n")
@@ -817,45 +817,29 @@ def main():
             letter_detailed = re.sub(r'\s*\[source:[^\]]*\]', '', letter)
             f.write(f"--- Column: letter_detailed ---\n{json.dumps(letter_detailed)}\n\n")
 
-            # Version 3: letter — simplified, clean (patient-facing)
-            # Keep sentences from HIGH priority sources, remove LOW priority
-            HIGH_PRIORITY = {'summary', 'medication_plan', 'therapy_plan', 'radiotherapy_plan',
-                             'procedure_plan', 'imaging_plan', 'lab_plan', 'genetic_testing_plan',
-                             'follow up', 'Specialty', 'Genetics', 'Others', 'Nutrition',
-                             'goals_of_treatment', 'response_assessment', 'recent_changes',
-                             'Advance care', 'emotional_context', 'none',
-                             'Type_of_Cancer', 'Stage_of_Cancer', 'Metastasis', 'Distant Metastasis',
-                             'Patient type', 'current_meds'}
-            LOW_PRIORITY = {'findings', 'lab_summary', 'supportive_meds'}
-
-            # Parse sentences with source tags
-            letter_lines = letter.replace('\\n', '\n').split('\n')
-            kept_lines = []
-            findings_count = 0
-            for line in letter_lines:
-                source_match = re.search(r'\[source:([^\]]+)\]', line)
-                if not source_match:
-                    kept_lines.append(line)
-                    continue
-                sources = {s.strip() for s in source_match.group(1).split(',')}
-                if sources & HIGH_PRIORITY:
-                    kept_lines.append(line)
-                elif sources & LOW_PRIORITY:
-                    # Keep max 2 findings sentences, skip rest
-                    if 'findings' in sources:
-                        findings_count += 1
-                        if findings_count <= 2:
-                            kept_lines.append(line)
-                    # Skip lab_summary and supportive_meds entirely
-                else:
-                    kept_lines.append(line)
-
-            letter_simple = '\n'.join(kept_lines)
+            # Version 3: letter — LLM-simplified (patient-facing, ~150 words)
+            simplify_prompt = chat_tmpl.user_assistant(
+                "Simplify this patient letter to ~150 words. Keep ONLY:\n"
+                "- What cancer they have (one sentence)\n"
+                "- What treatment is planned next (chemo/surgery/radiation)\n"
+                "- What tests/appointments are scheduled\n"
+                "- Follow-up timing\n"
+                "Remove: pathology details, receptor percentages, tumor sizes, "
+                "benign findings, physical exam results, historical treatments, "
+                "clinical trial arm details (just say 'a clinical trial was discussed').\n"
+                "Keep the same Dear Patient / section headers / closing format.\n"
+                "Keep specific drug names but no doses. Keep specific test names.\n"
+                "Write at a 6th grade reading level.\n\n"
+                f"LETTER TO SIMPLIFY:\n{letter_detailed}"
+            )
+            simplify_config = keypoint_config.copy()
+            simplify_config["max_new_tokens"] = 1024
+            letter_simple, _ = vllm_generate(simplify_prompt, client, simplify_config, "")
+            # Strip any source tags the LLM might copy
             letter_simple = re.sub(r'\s*\[source:[^\]]*\]', '', letter_simple)
-            # Clean up empty sections
-            letter_simple = re.sub(r'\*\*[^*]+\*\*\s*\n\s*\n', '', letter_simple)
-            letter_simple = re.sub(r'\n{3,}', '\n\n', letter_simple)
             f.write(f"--- Column: letter ---\n{json.dumps(letter_simple.strip())}\n\n")
+            simple_wc = len(letter_simple.split())
+            print(f"  Letter simplified: {len(letter_detailed.split())} → {simple_wc} words")
 
             # Version 4: action_items — checklist of next steps
             action_lines = []
@@ -863,6 +847,7 @@ def main():
                               'procedure_plan', 'imaging_plan', 'lab_plan',
                               'genetic_testing_plan', 'follow up', 'Specialty',
                               'Genetics', 'Others', 'Nutrition'}
+            letter_lines = letter.replace('\\n', '\n').split('\n')
             for line in letter_lines:
                 source_match = re.search(r'\[source:([^\]]+)\]', line)
                 if source_match:
