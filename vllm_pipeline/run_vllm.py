@@ -808,10 +808,73 @@ def main():
             f.write(f"--- Column: note_text ---\n{json.dumps(note_text)}\n\n")
             f.write(f"--- Column: assessment_and_plan ---\n{json.dumps(assessment_and_plan)}\n\n")
             f.write(f"--- Column: keypoints ---\n{json.dumps(keypoints, indent=2)}\n\n")
+            # === Generate multiple letter versions from one LLM output ===
+
+            # Version 1: letter_tagged — full detail with source tags (audit/traceability)
             f.write(f"--- Column: letter_tagged ---\n{json.dumps(letter)}\n\n")
-            # Patient-facing version: strip source tags
-            letter_clean = re.sub(r'\s*\[source:[^\]]*\]', '', letter)
-            f.write(f"--- Column: letter ---\n{json.dumps(letter_clean)}\n\n")
+
+            # Version 2: letter_detailed — full detail, clean (doctor backup)
+            letter_detailed = re.sub(r'\s*\[source:[^\]]*\]', '', letter)
+            f.write(f"--- Column: letter_detailed ---\n{json.dumps(letter_detailed)}\n\n")
+
+            # Version 3: letter — simplified, clean (patient-facing)
+            # Keep sentences from HIGH priority sources, remove LOW priority
+            HIGH_PRIORITY = {'summary', 'medication_plan', 'therapy_plan', 'radiotherapy_plan',
+                             'procedure_plan', 'imaging_plan', 'lab_plan', 'genetic_testing_plan',
+                             'follow up', 'Specialty', 'Genetics', 'Others', 'Nutrition',
+                             'goals_of_treatment', 'response_assessment', 'recent_changes',
+                             'Advance care', 'emotional_context', 'none',
+                             'Type_of_Cancer', 'Stage_of_Cancer', 'Metastasis', 'Distant Metastasis',
+                             'Patient type', 'current_meds'}
+            LOW_PRIORITY = {'findings', 'lab_summary', 'supportive_meds'}
+
+            # Parse sentences with source tags
+            letter_lines = letter.replace('\\n', '\n').split('\n')
+            kept_lines = []
+            findings_count = 0
+            for line in letter_lines:
+                source_match = re.search(r'\[source:([^\]]+)\]', line)
+                if not source_match:
+                    kept_lines.append(line)
+                    continue
+                sources = {s.strip() for s in source_match.group(1).split(',')}
+                if sources & HIGH_PRIORITY:
+                    kept_lines.append(line)
+                elif sources & LOW_PRIORITY:
+                    # Keep max 2 findings sentences, skip rest
+                    if 'findings' in sources:
+                        findings_count += 1
+                        if findings_count <= 2:
+                            kept_lines.append(line)
+                    # Skip lab_summary and supportive_meds entirely
+                else:
+                    kept_lines.append(line)
+
+            letter_simple = '\n'.join(kept_lines)
+            letter_simple = re.sub(r'\s*\[source:[^\]]*\]', '', letter_simple)
+            # Clean up empty sections
+            letter_simple = re.sub(r'\*\*[^*]+\*\*\s*\n\s*\n', '', letter_simple)
+            letter_simple = re.sub(r'\n{3,}', '\n\n', letter_simple)
+            f.write(f"--- Column: letter ---\n{json.dumps(letter_simple.strip())}\n\n")
+
+            # Version 4: action_items — checklist of next steps
+            action_lines = []
+            ACTION_SOURCES = {'medication_plan', 'therapy_plan', 'radiotherapy_plan',
+                              'procedure_plan', 'imaging_plan', 'lab_plan',
+                              'genetic_testing_plan', 'follow up', 'Specialty',
+                              'Genetics', 'Others', 'Nutrition'}
+            for line in letter_lines:
+                source_match = re.search(r'\[source:([^\]]+)\]', line)
+                if source_match:
+                    sources = {s.strip() for s in source_match.group(1).split(',')}
+                    if sources & ACTION_SOURCES:
+                        clean_line = re.sub(r'\s*\[source:[^\]]*\]', '', line).strip()
+                        if clean_line and len(clean_line) > 10:
+                            action_lines.append(f"□ {clean_line}")
+            if action_lines:
+                action_items = "ACTION ITEMS:\n" + "\n".join(action_lines)
+                f.write(f"--- Column: action_items ---\n{json.dumps(action_items)}\n\n")
+
             if letter_metrics:
                 f.write(f"--- Column: readability_metrics ---\n{json.dumps(letter_metrics, indent=2)}\n\n")
             f.write("\n\n\n\n\n")
