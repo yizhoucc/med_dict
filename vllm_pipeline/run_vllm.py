@@ -808,7 +808,10 @@ def main():
             f.write(f"--- Column: note_text ---\n{json.dumps(note_text)}\n\n")
             f.write(f"--- Column: assessment_and_plan ---\n{json.dumps(assessment_and_plan)}\n\n")
             f.write(f"--- Column: keypoints ---\n{json.dumps(keypoints, indent=2)}\n\n")
-            f.write(f"--- Column: letter ---\n{json.dumps(letter)}\n\n")
+            f.write(f"--- Column: letter_tagged ---\n{json.dumps(letter)}\n\n")
+            # Patient-facing version: strip source tags
+            letter_clean = re.sub(r'\s*\[source:[^\]]*\]', '', letter)
+            f.write(f"--- Column: letter ---\n{json.dumps(letter_clean)}\n\n")
             if letter_metrics:
                 f.write(f"--- Column: readability_metrics ---\n{json.dumps(letter_metrics, indent=2)}\n\n")
             f.write("\n\n\n\n\n")

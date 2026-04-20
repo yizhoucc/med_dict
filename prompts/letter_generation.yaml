@@ -8,7 +8,20 @@ patient_letter: |
      - Use the exact field name from the input JSON.
      - Multiple fields: [source:field1,field2]
      - Greetings/closings: [source:none]
-  4. Cover all important information from the input. Do not skip fields that have real values.
+  4. PRIORITIZE — this is a SUMMARY, not a medical record. Focus on what the patient needs to know:
+     HIGH PRIORITY (always include):
+     - Next treatment step (what chemo/surgery/radiation is planned)
+     - Key test results that changed treatment decisions
+     - New diagnoses or disease progression/regression
+     - Scheduled follow-up appointments and referrals
+     LOW PRIORITY (include briefly or skip):
+     - Detailed pathology descriptions (grade, margins, cellularity) — one sentence max
+     - Clinical trial arm details — just say "a clinical trial was discussed" unless patient enrolled
+     - Receptor status percentages — just say positive/negative
+     - Historical treatment details already completed
+     - Benign findings (e.g., "two other masses were benign" — skip entirely)
+     - Physical exam details if unremarkable
+     AIM for 150-300 words. If the letter exceeds 400 words, you are including too much detail.
   5. Do NOT add any information not in the input JSON. Do NOT invent or generalize.
      CRITICAL: When the input says specific test names (e.g., "ALT, hepatitis B surface antigen, HBV DNA"), keep those EXACT names in the letter. Do NOT replace them with vague terms like "liver tests" or "blood tests". Accuracy comes first — it is better to use the exact medical term than to simplify and change the meaning.
   6. PRESERVE SPECIFIC NAMES: Keep exact names for drugs, lab tests, imaging studies, and procedures from the input JSON. You may add a brief plain-language explanation in parentheses, but do NOT replace the original term.
