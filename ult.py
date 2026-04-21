@@ -673,10 +673,38 @@ def build_base_cache(text, model, tokenizer, definitions_context="", chat_tmpl=N
         )
         base_cache = outputs.past_key_values
         del inputs, outputs
-        torch.cuda.empty_cache()
+        try:
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
         gc.collect()
 
     return base_cache
+
+
+def _normalize_json_keys(d):
+    """Normalize JSON keys: underscores to spaces for schema field names."""
+    if not isinstance(d, dict):
+        return d
+    # Known fields that use spaces in schema
+    SPACE_KEYS = {
+        'distant_metastasis': 'Distant Metastasis',
+        'type_of_cancer': 'Type_of_Cancer',  # keep underscore for these
+        'stage_of_cancer': 'Stage_of_Cancer',
+        'patient_type': 'Patient type',
+        'second_opinion': 'second opinion',
+        'advance_care': 'Advance care',
+        'next_clinic_visit': 'Next clinic visit',
+        'follow_up': 'follow up',
+    }
+    normalized = {}
+    for k, v in d.items():
+        k_lower = k.lower().strip()
+        if k_lower in SPACE_KEYS:
+            normalized[SPACE_KEYS[k_lower]] = v
+        else:
+            normalized[k] = v
+    return normalized
 
 
 def try_parse_json(text):
@@ -697,7 +725,7 @@ def try_parse_json(text):
     # Try direct parse first
     try:
         result = json.loads(cleaned)
-        return result if isinstance(result, dict) else None
+        return _normalize_json_keys(result) if isinstance(result, dict) else None
     except (json.JSONDecodeError, ValueError):
         pass
 
@@ -707,7 +735,7 @@ def try_parse_json(text):
         fixed = re.sub(r',\s*}', '}', fixed)
         fixed = re.sub(r',\s*]', ']', fixed)
         result = json.loads(fixed)
-        return result if isinstance(result, dict) else None
+        return _normalize_json_keys(result) if isinstance(result, dict) else None
     except (json.JSONDecodeError, ValueError):
         pass
 
@@ -716,7 +744,7 @@ def try_parse_json(text):
     if match:
         try:
             result = json.loads(match.group())
-            return result if isinstance(result, dict) else None
+            return _normalize_json_keys(result) if isinstance(result, dict) else None
         except (json.JSONDecodeError, ValueError):
             pass
 
@@ -786,7 +814,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
             task_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
         )
         del returned_cache
-        torch.cuda.empty_cache()
+        try:
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
         gc.collect()
 
         # --- Step 2: Format repair ---
@@ -802,7 +833,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
             repaired_answer, _ = run_model_with_cache_manual(
                 repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
             parsed = try_parse_json(repaired_answer)
@@ -826,7 +860,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                 {"max_new_tokens": 200, "do_sample": False, "eos_token_id": gen_config.get("eos_token_id", tokenizer.eos_token_id)},
                 kv_cache=clone_cache(base_cache)
             )
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
             check_parsed = try_parse_json(check_raw)
@@ -850,7 +887,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                 answer, _ = run_model_with_cache_manual(
                     re_extract_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
-                torch.cuda.empty_cache()
+                try:
+                    torch.cuda.empty_cache()
+                except Exception:
+                    pass
                 gc.collect()
                 re_extracted = True
 
@@ -866,7 +906,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
                     repaired_answer, _ = run_model_with_cache_manual(
                         repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                     )
-                    torch.cuda.empty_cache()
+                    try:
+                        torch.cuda.empty_cache()
+                    except Exception:
+                        pass
                     gc.collect()
                     new_parsed = try_parse_json(repaired_answer)
                     if new_parsed is not None:
@@ -894,7 +937,10 @@ def extract_and_verify(prompts, model, tokenizer, gen_config, base_cache, verify
             cleaned_raw, _ = run_model_with_cache_manual(
                 temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
             cleaned_parsed = try_parse_json(cleaned_raw)
@@ -1115,7 +1161,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 task_prompt, model, tokenizer, gen_config, kv_cache=cache_for_extract
             )
             del returned_cache, cache_for_extract
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
         gate_log.append(f"      [EXTRACT] raw={answer[:200]}")
@@ -1133,7 +1182,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             repaired_answer, _ = run_model_with_cache_manual(
                 repair_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
             parsed = try_parse_json(repaired_answer)
@@ -1161,7 +1213,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 fixed_raw, _ = run_model_with_cache_manual(
                     schema_fix_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
-                torch.cuda.empty_cache()
+                try:
+                    torch.cuda.empty_cache()
+                except Exception:
+                    pass
                 gc.collect()
 
                 fixed_parsed = try_parse_json(fixed_raw)
@@ -1221,7 +1276,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 improved_raw, _ = run_model_with_cache_manual(
                     improve_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
-                torch.cuda.empty_cache()
+                try:
+                    torch.cuda.empty_cache()
+                except Exception:
+                    pass
                 gc.collect()
 
                 improved_parsed = try_parse_json(improved_raw)
@@ -1293,7 +1351,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
             cleaned_raw, _ = run_model_with_cache_manual(
                 faith_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
             )
-            torch.cuda.empty_cache()
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
             gc.collect()
 
             cleaned_parsed = try_parse_json(cleaned_raw)
@@ -1397,7 +1458,10 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 cleaned_raw, _ = run_model_with_cache_manual(
                     temporal_prompt, model, tokenizer, gen_config, kv_cache=clone_cache(base_cache)
                 )
-                torch.cuda.empty_cache()
+                try:
+                    torch.cuda.empty_cache()
+                except Exception:
+                    pass
                 gc.collect()
 
                 cleaned_parsed = try_parse_json(cleaned_raw)
