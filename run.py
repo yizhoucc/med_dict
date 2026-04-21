@@ -1245,7 +1245,7 @@ def main():
         # POST-LAB-SEARCH: If lab_plan is empty, search full note for ordered labs [v22e]
         lab_search = keypoints.get("Lab_Plan", {})
         if isinstance(lab_search, dict):
-            lab_val_s = (lab_search.get("lab_plan", "") or "").strip().lower()
+            lab_val_s = str(lab_search.get("lab_plan", "") or "").strip().lower()
             if lab_val_s in ("no labs planned.", "no labs planned", "none", "none planned.", ""):
                 # Search HPI and Orders section for "ordered labs" or specific lab names
                 LAB_PATTERNS = [
@@ -1379,9 +1379,12 @@ def main():
         proc = keypoints.get("Procedure_Plan", {})
         if isinstance(proc, dict):
             proc_val = proc.get("procedure_plan", "")
+            if isinstance(proc_val, dict):
+                proc_val = "; ".join(f"{k}: {v}" for k, v in proc_val.items() if v)
             if isinstance(proc_val, list):
                 proc_val = ", ".join(str(v) for v in proc_val)
-            proc_lower = (proc_val or "").lower()
+            proc_val = str(proc_val) if proc_val else ""
+            proc_lower = proc_val.lower()
             # Search for future procedure patterns in full note
             # Note: (?:an?\s+)? handles optional articles ("scheduled for a port placement")
             proc_patterns = re.findall(
@@ -1779,7 +1782,7 @@ def main():
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
         if isinstance(goals, dict):
-            goal_val = goals.get("goals_of_treatment", "").lower().strip()
+            goal_val = str(goals.get("goals_of_treatment", "") or "").lower().strip()
             if goal_val == "adjuvant":
                 cancer = keypoints.get("Cancer_Diagnosis", {})
                 met = str(cancer.get("Metastasis", "")).lower() if isinstance(cancer, dict) else ""
