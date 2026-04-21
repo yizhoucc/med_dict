@@ -819,18 +819,27 @@ def main():
 
             # Version 3: letter — LLM-simplified (patient-facing, ~150 words)
             simplify_msg = (
-                "Simplify this patient letter to ~150 words. Keep ONLY:\n"
-                "- What cancer they have (one sentence)\n"
-                "- What treatment is planned next (chemo/surgery/radiation)\n"
-                "- What tests/appointments are scheduled\n"
+                "Edit this patient letter. Remove ONLY the following types of content:\n"
+                "- Exact tumor sizes (e.g., '2.3 cm') and positions (e.g., '12:00 position, 5cm from nipple')\n"
+                "- Pathology grade details (e.g., 'grade 2 or 3', 'high-grade DCIS component')\n"
+                "- Receptor percentages (e.g., 'weakly positive for estrogen receptors'). Just say positive or negative.\n"
+                "- Benign findings (e.g., 'two other masses were found to be benign')\n"
+                "- Physical exam details if unremarkable (e.g., 'you are well-appearing with no distress')\n"
+                "- Clinical trial arm specifics. Keep 'a clinical trial was discussed' but remove individual arm details.\n"
+                "- Lymph node biopsy technical details. Keep 'cancer was found in a lymph node' but remove counts and sizes.\n"
+                "\n"
+                "Keep EVERYTHING else, especially:\n"
+                "- Cancer type and stage\n"
+                "- All treatment plans (drug names, surgery, radiation)\n"
+                "- All scheduled tests and appointments\n"
+                "- All referrals\n"
                 "- Follow-up timing\n"
-                "Remove: pathology details, receptor percentages, tumor sizes, "
-                "benign findings, physical exam results, historical treatments, "
-                "clinical trial arm details (just say 'a clinical trial was discussed').\n"
-                "Keep the same Dear Patient / section headers / closing format.\n"
-                "Keep specific drug names but no doses. Keep specific test names.\n"
-                "Write at a 6th grade reading level.\n\n"
-                f"LETTER TO SIMPLIFY:\n{letter_detailed}"
+                "- Emotional support sentences\n"
+                "\n"
+                "Keep the same format (Dear Patient, section headers, closing).\n"
+                "Keep specific drug names and test names. Write at a 6th grade reading level.\n"
+                "Output ONLY the edited letter, nothing else.\n\n"
+                f"LETTER TO EDIT:\n{letter_detailed}"
             )
             simplify_config = keypoint_config.copy()
             simplify_config["max_new_tokens"] = 1024
