@@ -179,6 +179,10 @@ Genetic_Testing_Plan: |
     - Statements about molecular profiling (e.g., "patient wishes to proceed with molecular profiling")
 
   3. What MUST be EXCLUDED:
+  CRITICAL: This field is ONLY for genetic/molecular TESTS. Do NOT put medication plans here.
+  - "recommend ibrance and [drug]" is a MEDICATION PLAN, not genetic testing
+  - "start letrozole" is a MEDICATION, not genetic testing
+  - If the A/P only discusses treatment drugs and no tests, write "None planned."
   - DO NOT include any medications, systemic therapies, or treatment plans:
     - Chemotherapy, immunotherapy, targeted therapies (e.g., FGFR inhibitor, PARP inhibitor, CDK4/6 inhibitor, TKIs)
     - Hormonal therapy, radiation therapy, surgery

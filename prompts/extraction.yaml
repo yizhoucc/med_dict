@@ -26,13 +26,17 @@ Reason_for_Visit: |
 Cancer_Diagnosis: |
   TASK: Extract cancer diagnosis details.
 
-  For Type_of_Cancer, be SPECIFIC — include as much of the following as the note provides:
+  For Type_of_Cancer, be MAXIMALLY SPECIFIC — include ALL of the following that the note provides:
   1. Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
   2. Receptor status — ER, PR, and HER2. e.g., "ER+/PR+/HER2-"
-  3. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH.
-  - Example: "ER+/PR+/HER2- invasive ductal carcinoma" NOT just "breast cancer"
-  - Example with change: "Originally ER+/PR+/HER2-, metastatic biopsy ER+/PR-/HER2-"
-  Do NOT write just "breast cancer" or "MBC" — always include the subtype and receptor status when available in the note.
+  3. Grade (e.g., "grade 2", "G3", "high grade") — ALWAYS include if mentioned anywhere in the note
+  4. Special features: micropapillary, mucinous, neuroendocrine differentiation, squamous differentiation, etc.
+  5. Associated DCIS if present (e.g., "with extensive DCIS", "with high-grade DCIS component")
+  6. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH.
+  7. If this is a recurrence or metastatic disease, mention that (e.g., "with metastatic recurrence to [site]")
+  - Example: "ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS" NOT just "ER+/PR+/HER2- IDC"
+  - Example with recurrence: "ER+/PR+/HER2- IDC (micropapillary features) with metastatic recurrence (left cervical LN)"
+  Do NOT write just "breast cancer" or "MBC" — always include the subtype, receptor status, grade, and special features when available in the note.
   IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, Assessment/Plan, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
   IMPORTANT: If the Assessment/Plan says "HR+" or "hormone receptor positive", this means ER+ (and usually PR+). If it says "her 2 negative" or "HER2-" or "*****-", this means HER2 NEGATIVE. Do NOT write "not specified" when the A/P explicitly states receptor status.
 
@@ -177,6 +181,7 @@ Current_Medications: |
   CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
   - SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications outside the clinical system (e.g., from another country, alternative medicine clinic, self-administered at home without physician supervision), and the treating physician does NOT endorse or manage these drugs (look for skeptical language like "apparently", "so-called", "claims to be taking", or "discontinue our medications"), do NOT list them in current_meds. Instead, these should go in recent_changes with appropriate context.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections like leuprolide/zoladex/lupron, infusions) are often NOT listed in the outpatient medication list. If the Assessment/Plan explicitly states the patient is CURRENTLY ON a drug (e.g., "on irinotecan", "continues leuprolide", "started [drug] on [date]" with no discontinuation), include it even if it does not appear in the outpatient medication list.
+  IMPORTANT: Search the ENTIRE A/P for drug names. Common patterns: "on leuprolide (OS started [date])", "continues [drug]", "currently on [drug]". List ALL cancer-related drugs, including ovarian suppression (leuprolide, zoladex/goserelin) when used as endocrine therapy.
   IMPORTANT: If the patient SKIPPED, CANCELLED, or MISSED a single dose/cycle of chemotherapy (e.g., "Day 8 cancelled", "missed day 8"), they are still ON that chemotherapy. Missing one infusion does NOT mean the drug is stopped. Only consider a drug STOPPED if the note says "discontinued", "stopped", "changed to [other drug]", or "completed [N] cycles".
   IMPORTANT: Look for the chemo drug name in the HPI OPENING LINE. Phrases like "on Gemzar", "on irinotecan", "on Taxol", "on AC", "started [drug] on [date]" in the HPI mean the patient IS currently on that drug — include it even if the drug is not in the outpatient medication list and even if today's dose was cancelled/skipped.
 
@@ -324,5 +329,5 @@ Response_Assessment: |
 
   Respond with a JSON object using this exact schema (NO other keys):
   {
-  "response_assessment": "How is the cancer CURRENTLY responding? Cite specific evidence: imaging, labs, exam. Do NOT include future plans, surgical recovery, or prognostic scores."
+  "response_assessment": "How is the cancer CURRENTLY responding? Be DETAILED — cite specific evidence including: organ names, measurement changes (e.g., '1.8cm→1.2cm'), SUV values, specific imaging modality and date. Do NOT give vague summaries. Do NOT include future plans, surgical recovery, or prognostic scores."
   }
