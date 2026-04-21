@@ -180,7 +180,11 @@ def clone_cache(cache):
     DynamicCache (transformers >= 4.36) can be modified in-place during
     generation, polluting the shared base_cache. Tuple-of-tuples format
     is safe because generate creates new tensors.
+
+    vLLM mode: cache is a prompt string, no clone needed.
     """
+    if isinstance(cache, str):
+        return cache  # vLLM mode: prompt string, no clone needed
     if hasattr(cache, 'get_seq_length'):  # DynamicCache
         return copy.deepcopy(cache)
     return cache  # tuple format is safe
@@ -275,29 +279,24 @@ def robust_json_parser(model, tokenizer, text_to_parse: str):
 
 
 def run_model(
-    prompt_text: str, 
-    model, 
-    tokenizer, 
-    generation_config: Dict, 
+    prompt_text: str,
+    model,
+    tokenizer,
+    generation_config: Dict,
     kv_cache: Optional[Tuple[torch.Tensor]] = None
 ) -> Tuple[str, Tuple[torch.Tensor]]:
     """
     Runs the model with an optional KV cache for efficient, chained generation.
-    
-    Args:
-        prompt_text: The new text to be processed. If a kv_cache is provided,
-                     this should *only* be the new text to append.
-        model: The loaded Hugging Face CausalLM model.
-        tokenizer: The loaded Hugging Face tokenizer.
-        generation_config: A dictionary of generation parameters.
-        kv_cache: (Optional) The past_key_values from a previous model run.
-
-    Returns:
-        A tuple containing:
-        - raw_output (str): The newly generated text.
-        - new_kv_cache (Tuple[torch.Tensor]): The updated KV cache.
+    Supports vLLM mode.
     """
-    
+    # vLLM mode: delegate to run_model_with_cache_manual
+    try:
+        from vllm_pipeline.vllm_client import VLLMClient
+        if isinstance(model, VLLMClient):
+            return run_model_with_cache_manual(prompt_text, model, tokenizer, generation_config, kv_cache)
+    except ImportError:
+        pass
+
     # 1. Tokenize the new input text
     # If kv_cache is provided, prompt_text is *only* the new text.
     # If kv_cache is None, prompt_text is the *full* text.
@@ -399,16 +398,30 @@ def clean_model_output(text: str, fix_incomplete=True) -> str:
 
 
 def run_model_with_cache_manual(
-    prompt_text: str, 
-    model, 
-    tokenizer, 
-    generation_config: Dict, 
+    prompt_text: str,
+    model,
+    tokenizer,
+    generation_config: Dict,
     kv_cache: Optional[Tuple[torch.Tensor]] = None
 ) -> Tuple[str, Tuple[torch.Tensor]]:
     """
     Memory-efficient manual generation with proper cleanup.
+    Supports vLLM mode: if model is VLLMClient, routes to HTTP API.
     """
-    
+    # vLLM mode
+    try:
+        from vllm_pipeline.vllm_client import VLLMClient
+        if isinstance(model, VLLMClient):
+            if kv_cache is not None and isinstance(kv_cache, str):
+                full_prompt = kv_cache + prompt_text
+            else:
+                full_prompt = prompt_text
+            result = model.generate(full_prompt, generation_config)
+            return result, kv_cache  # cache unchanged (vLLM manages internally)
+    except ImportError:
+        pass
+
+    # HuggingFace mode
     # 1. Tokenize the new input text
     inputs = tokenizer(prompt_text, return_tensors="pt").to(model.device)
     input_ids = inputs["input_ids"]
@@ -642,6 +655,14 @@ def build_base_cache(text, model, tokenizer, definitions_context="", chat_tmpl=N
         + '{"status": "Understood. I have read the note and am ready."}'
         + chat_tmpl.t['turn_end']
     )
+
+    # vLLM mode: return prompt string (vLLM handles prefix caching internally)
+    try:
+        from vllm_pipeline.vllm_client import VLLMClient
+        if isinstance(model, VLLMClient):
+            return base_prompt
+    except ImportError:
+        pass
 
     with torch.no_grad():
         inputs = tokenizer(base_prompt, return_tensors="pt").to(model.device)

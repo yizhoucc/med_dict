@@ -695,15 +695,27 @@ def main():
         elif quant_type == "8bit":
             quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 
-    tokenizer = AutoTokenizer.from_pretrained(model_cfg["name"])
-    load_kwargs = {
-        "device_map": model_cfg.get("device_map", "auto"),
-        "torch_dtype": torch_dtype,
-    }
-    if quantization_config is not None:
-        load_kwargs["quantization_config"] = quantization_config
-    model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
-    print("Model loaded.")
+    # Check for vLLM mode
+    vllm_cfg = model_cfg.get("vllm")
+    if vllm_cfg:
+        from vllm_pipeline.vllm_client import VLLMClient
+        base_url = vllm_cfg.get("base_url", "http://localhost:8000/v1")
+        model = VLLMClient(base_url=base_url, model_name=model_cfg["name"])
+        if not model.health_check():
+            print("ERROR: vLLM server not reachable. Start it first.")
+            sys.exit(1)
+        tokenizer = AutoTokenizer.from_pretrained(model_cfg["name"])
+        print(f"vLLM mode: connected to {base_url}")
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(model_cfg["name"])
+        load_kwargs = {
+            "device_map": model_cfg.get("device_map", "auto"),
+            "torch_dtype": torch_dtype,
+        }
+        if quantization_config is not None:
+            load_kwargs["quantization_config"] = quantization_config
+        model = AutoModelForCausalLM.from_pretrained(model_cfg["name"], **load_kwargs)
+        print("Model loaded.")
 
     # 6. Load data
     data_cfg = config["data"]
