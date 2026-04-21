@@ -22,7 +22,14 @@ Therapy_plan: |
   - CURRENT (include): "continue letrozole", "currently on irinotecan", "taking tamoxifen daily"
   - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
   IMPORTANT: "continue [drug]" IS a valid therapy plan. If the patient is continuing on current therapy, list the therapy being continued. Do NOT write "None" when the patient is actively on treatment.
-  IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name. Do NOT write "T-DM1", "trastuzumab emtansine", or any specific drug name that is not explicitly written in the note.
+  IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name.
+  IMPORTANT: Include ALL of the following when mentioned in the A/P:
+  - Dose changes (e.g., "change irinotecan to every other week, increase dose to 150mg/m2")
+  - Radiation referrals or plans (e.g., "referral to Rad Onc for chest wall RT")
+  - New drugs being started (e.g., "start letrozole", "begin tamoxifen")
+  - Drugs being continued (e.g., "continue arimidex")
+  - Follow-up/return instructions related to therapy (e.g., "RTC after XRT", "check labs")
+  Do NOT write "None" unless the A/P truly has NO treatment discussion at all. If the A/P discusses ANY drug, therapy, or treatment plan, extract it.
 
   DO NOT include imaging plans (CT, MRI, PET, DEXA, Echo, echocardiogram, mammogram, bone scan, X-ray) — those belong in Imaging_Plan.
   DO NOT include lab plans — those belong in Lab_Plan.
