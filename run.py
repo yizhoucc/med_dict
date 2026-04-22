@@ -1311,42 +1311,54 @@ def main():
             tp_empty = tp_lower in ("none", "", "null", "none.")
             # Search A/P for therapy keywords
             ap_lower = (assessment_and_plan or "").lower()
+            # Drug synonym groups — if any synonym is in therapy_plan, skip the drug
+            THERAPY_SYNONYMS = {
+                'letrozole': ['letrozole', 'femara'],
+                'tamoxifen': ['tamoxifen', 'nolvadex'],
+                'anastrozole': ['anastrozole', 'arimidex'],
+                'exemestane': ['exemestane', 'aromasin'],
+                'leuprolide': ['leuprolide', 'lupron'],
+                'goserelin': ['goserelin', 'zoladex'],
+                'fulvestrant': ['fulvestrant', 'faslodex'],
+                'palbociclib': ['palbociclib', 'ibrance'],
+                'ribociclib': ['ribociclib', 'kisqali'],
+                'abemaciclib': ['abemaciclib', 'verzenio'],
+                'trastuzumab': ['trastuzumab', 'herceptin'],
+                'pertuzumab': ['pertuzumab', 'perjeta'],
+                'denosumab': ['denosumab', 'prolia', 'xgeva'],
+                'capecitabine': ['capecitabine', 'xeloda'],
+                'everolimus': ['everolimus', 'afinitor'],
+                'eribulin': ['eribulin', 'halaven'],
+                'gemcitabine': ['gemcitabine', 'gemzar'],
+            }
             THERAPY_DRUG_LIST = [
                 'letrozole','tamoxifen','anastrozole','exemestane','irinotecan','capecitabine',
-                'taxol','abraxane','carboplatin','herceptin','pertuzumab','ibrance','palbociclib',
-                'ribociclib','arimidex','faslodex','fulvestrant','xeloda','gemcitabine','gemzar',
+                'taxol','abraxane','carboplatin','palbociclib',
+                'ribociclib','fulvestrant','gemcitabine',
                 'doxorubicin','cyclophosphamide','olaparib','pembrolizumab','abemaciclib',
-                'zoladex','leuprolide','lupron','denosumab','prolia','epirubicin',
-                't-dm1','ado-trastuzumab','trastuzumab','lapatinib','neratinib','tucatinib',
-                'everolimus','afinitor','eribulin','halaven']
+                'goserelin','leuprolide','denosumab','epirubicin',
+                'trastuzumab','lapatinib','neratinib','tucatinib',
+                'everolimus','eribulin']
             found_therapies = []
             for drug in THERAPY_DRUG_LIST:
-                if drug in ap_lower and drug not in tp_lower:
-                    # Check future context — only add if clearly current/future
-                    for m in re.finditer(re.escape(drug), ap_lower):
-                        ctx = ap_lower[max(0,m.start()-60):m.end()+60]
-                        if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume',
-                                                     'switch', 'recommend', 'plan', 'will',
-                                                     'currently on', 'on ', 'rx for', 'rx given',
-                                                     'prescription', 'instructed']):
-                            # Exclude past context
-                            if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
-                                                             'discontinued', 'stopped', 'was on',
-                                                             'previously on', 'had ']):
-                                found_therapies.append(drug)
-                                break
-            # Check radiation
-            if 'radiation' not in tp_lower and 'xrt' not in tp_lower and 'rt ' not in tp_lower:
-                rad_future = re.search(r'(?:refer|will|plan|recommend|start|consider|enroll).*?(?:radiation|xrt|rt\b|radiotherapy)',
-                                       ap_lower)
-                if not rad_future:
-                    rad_future = re.search(r'(?:radiation|xrt|radiotherapy).*?(?:plan|refer|start|week|boost|field)',
-                                          ap_lower)
-                if rad_future:
-                    # Exclude past radiation
-                    rad_ctx = rad_future.group(0)
-                    if not any(pc in rad_ctx for pc in ['s/p', 'completed', 'had ', 'status post']):
-                        found_therapies.append('radiation therapy')
+                if drug not in ap_lower:
+                    continue
+                # Check if any synonym already in therapy_plan
+                synonyms = THERAPY_SYNONYMS.get(drug, [drug])
+                if any(syn in tp_lower for syn in synonyms):
+                    continue  # already covered
+                # Check STRICT future context — only "start/begin/recommend/rx"
+                for m in re.finditer(re.escape(drug), ap_lower):
+                    ctx = ap_lower[max(0,m.start()-60):m.end()+60]
+                    if any(fc in ctx for fc in ['start', 'begin', 'resume',
+                                                 'recommend', 'rx for', 'rx given',
+                                                 'prescription', 'instructed to']):
+                        # Exclude past context
+                        if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
+                                                         'discontinued', 'stopped', 'was on',
+                                                         'previously on', 'had ', 'tolerated']):
+                            found_therapies.append(drug)
+                            break
 
             if found_therapies:
                 unique = list(dict.fromkeys(found_therapies))
