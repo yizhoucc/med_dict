@@ -2017,24 +2017,47 @@ def main():
                     tumor_match = re.search(r'(?:tumor|mass|IDC|ILC|carcinoma|invasive)[^.]{0,30}(\d+\.?\d*)\s*(?:cm|mm)',
                                            note_lower_v, re.IGNORECASE)
 
+                # Also try to extract pTN from the stage text itself (e.g., "Stage IIIA (inferred from pT2 N1mi)")
+                ptn_in_stage = re.search(r'p?T(\d)\s*N(\d)([a-c]?(?:mi)?)', stage, re.IGNORECASE)
+
+                n_pos = None
+                n_is_micro = False
                 if node_match:
                     n_pos = int(node_match.group(1))
-                    if n_pos <= 3:  # N1 (1-3 nodes) → not Stage III
-                        size = None
-                        if tumor_match:
-                            size = float(tumor_match.group(1))
-                            if 'mm' in tumor_match.group(0).lower():
-                                size = size / 10
+                elif ptn_in_stage:
+                    n_val = int(ptn_in_stage.group(2))
+                    n_suffix = (ptn_in_stage.group(3) or "").lower()
+                    n_is_micro = n_suffix == 'mi'
+                    n_pos = 0 if n_is_micro else n_val  # micromet = treat as N1mi
 
+                if n_pos is not None and n_pos <= 3:  # N1 (1-3 nodes) or N1mi → not Stage III
+                    size = None
+                    if tumor_match:
+                        size = float(tumor_match.group(1))
+                        if 'mm' in tumor_match.group(0).lower():
+                            size = size / 10
+                    elif ptn_in_stage:
+                        t_val = int(ptn_in_stage.group(1))
+                        if t_val <= 1:
+                            size = 1.5  # approximate T1
+                        elif t_val == 2:
+                            size = 3.0  # approximate T2
+
+                    if n_is_micro:
+                        # N1mi (micromet only): T1→IB, T2→IIA
                         if size and size <= 2.0:
-                            corrected = f"Stage IIA (corrected: pT1 N1, {n_pos}/{node_match.group(2)} nodes positive)"
-                        elif size and size <= 5.0:
-                            corrected = f"Stage IIB (corrected: pT2 N1, {n_pos}/{node_match.group(2)} nodes positive)"
+                            corrected = f"Stage IB (corrected: pT1 N1mi — micrometastasis only)"
                         else:
-                            corrected = f"Stage IIB (corrected: N1 with {n_pos} positive node{'s' if n_pos > 1 else ''})"
+                            corrected = f"Stage IIA (corrected: pT2 N1mi — micrometastasis only)"
+                    elif size and size <= 2.0:
+                        corrected = f"Stage IIA (corrected: pT1 N1, {n_pos} positive node{'s' if n_pos > 1 else ''})"
+                    elif size and size <= 5.0:
+                        corrected = f"Stage IIB (corrected: pT2 N1, {n_pos} positive node{'s' if n_pos > 1 else ''})"
+                    else:
+                        corrected = f"Stage IIB (corrected: N1 with {n_pos} positive node{'s' if n_pos > 1 else ''})"
 
-                        cancer["Stage_of_Cancer"] = corrected
-                        print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
+                    cancer["Stage_of_Cancer"] = corrected
+                    print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
