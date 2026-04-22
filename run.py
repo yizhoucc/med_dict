@@ -1816,35 +1816,13 @@ def main():
                         cancer["Stage_of_Cancer"] = cleaned
                         print(f"    [POST-STAGE-REGIONAL] Regional LN only + no distant mets: '{stage}' → '{cleaned}'")
 
-        # POST-STAGE-VERIFY: Check for hallucinated "Originally Stage X" [v14]
-        # Model sometimes fabricates original stage (e.g., "Originally Stage IIA") when note
-        # only mentions metastatic recurrence without specifying the original stage.
-        cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
-            stage = cancer.get("Stage_of_Cancer", "")
-            if stage and isinstance(stage, str):
-                orig_match = re.search(r'Originally\s+Stage\s+([A-Za-z0-9]+)', stage, re.IGNORECASE)
-                if orig_match:
-                    claimed_stage = orig_match.group(1)  # e.g., "IIA"
-                    # Check if the original note actually mentions this stage
-                    # Search for patterns like "Stage IIA", "stage IIA", "T2N0" etc.
-                    stage_pattern = re.compile(
-                        rf'(?:stage\s+{re.escape(claimed_stage)}|'
-                        rf'diagnosed\s+(?:at|as|with)\s+stage\s+{re.escape(claimed_stage)})',
-                        re.IGNORECASE
-                    )
-                    if not stage_pattern.search(note_text):
-                        # Original stage not found in note — remove the "Originally Stage X" part
-                        cleaned = re.sub(
-                            r'Originally\s+Stage\s+[A-Za-z0-9]+,?\s*',
-                            '', stage, flags=re.IGNORECASE
-                        ).strip().lstrip(',').strip()
-                        if cleaned:
-                            cancer["Stage_of_Cancer"] = cleaned
-                            print(f"    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage {claimed_stage}': '{stage}' → '{cleaned}'")
-                        else:
-                            cancer["Stage_of_Cancer"] = "Metastatic (Stage IV)"
-                            print(f"    [POST-STAGE-VERIFY] removed unsupported 'Originally Stage {claimed_stage}': '{stage}' → 'Metastatic (Stage IV)'")
+        # POST-STAGE-VERIFY-ORIG: Check for hallucinated "Originally Stage X" [v14]
+        # DISABLED in iter6: This hook was too aggressive — it removed legitimate
+        # stage inferences when the note has redacted stage data (*****) or uses
+        # pTN format instead of "Stage X". The model's stage inference is usually
+        # reasonable and removing it causes more harm than keeping it.
+        # cancer = keypoints.get("Cancer_Diagnosis", {})
+        # ... (disabled)
 
         # POST-STAGE-PLACEHOLDER: clean up [X] placeholders from redacted data [v18]
         cancer = keypoints.get("Cancer_Diagnosis", {})
@@ -2009,7 +1987,7 @@ def main():
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-PTN-TRANSLATE] {stage} → {new_stage}")
 
-        # POST-STAGE-VERIFY: Correct wrong Stage based on tumor size + node count in note
+        # POST-STAGE-CORRECT: Correct wrong Stage based on tumor size + node count in note
         # LLM sometimes writes "Stage III" when pT2N1 (1-3 nodes) → should be Stage IIB
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
@@ -2044,7 +2022,7 @@ def main():
                             corrected = f"Stage IIB (corrected: N1 with {n_pos} positive node{'s' if n_pos > 1 else ''})"
 
                         cancer["Stage_of_Cancer"] = corrected
-                        print(f"    [POST-STAGE-VERIFY] {stage} → {corrected}")
+                        print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
