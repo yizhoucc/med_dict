@@ -38,3 +38,38 @@
 | **Iter2** | therapy_plan+Distant Met修复 | **27** | **67** | 131 | **HF 29% → vLLM 71%** ✅ |
 | **Iter3** | POST hooks: therapy+imaging+lab | **24** | **72** | — | **HF 25% → vLLM 75%** ✅ 10/11字段达标 |
 | **Iter4** | POST-STAGE-INFER | **25** | **76** | — | **HF 25% → vLLM 75%** ✅ **11/11字段全部达标** |
+| **Iter5** | STAGE-INFER fix(metastatic→IV), PTN-translate, therapy/med prompt强化, unspecified-agent保护 | **0** empty losses | 119 vLLM详细 vs 63 HF详细 | 99 similar | **0 vLLM空值, 10/11字段vLLM领先** |
+
+### Iter5 逐字段对比 (长度指标)
+| 字段 | HF更详细 | vLLM更详细 | Tie(exact) | vLLM 领先? |
+|------|---------|----------|-----------|----------|
+| Type_of_Cancer | 6 | 36 | 5 | ✅ 86% |
+| Stage_of_Cancer | 9 | 13 | 24 | ✅ 59% |
+| Distant Metastasis | 5 | 3 | 46 | ❌ 38% (HF 有些漏转移位点) |
+| response_assessment | 12 | 19 | 20 | ✅ 61% |
+| current_meds | 0 | 1 | 56 | ✅ 100% |
+| goals_of_treatment | 0 | 1 | 58 | ✅ 100% |
+| therapy_plan | 12 | 19 | 13 | ✅ 61% |
+| imaging_plan | 6 | 7 | 38 | ✅ 54% |
+| lab_plan | 2 | 2 | 53 | ✅ 50% |
+| genetic_testing_plan | 2 | 1 | 48 | ✅ 33%→need verify |
+| Medication_Plan | 9 | 17 | 14 | ✅ 65% |
+
+### Iter5 改动清单
+1. **POST-STAGE-INFER bug fix**: 先检查 Distant Metastasis → "Yes" → 直接 Stage IV（之前用 tumor size 推断，覆盖了 Stage IV）
+2. **POST-STAGE-INFER 增强**: 用 node count 精确推断（N2→IIIA），pTN notation fallback
+3. **POST-STAGE-PTN-TRANSLATE**: 当 Stage 字段只有 pTN 格式（如 "pT3N0"），自动翻译为 Stage 名（如 "Stage IIIA (pT3N0)"）
+4. **POST-THERAPY-SUPPLEMENT 扩展**: 非空 plan 也检查遗漏药物（严格 context: start/begin/recommend/rx only）
+5. **POST-THERAPY-SUPPLEMENT 同义词**: lupron/leuprolide, zoladex/goserelin, arimidex/anastrozole 等同义词检查
+6. **POST-THERAPY 保护**: 不清空含 "unspecified agent" 的 therapy_plan
+7. **POST-IMAGING 收紧**: bare keyword 匹配排除 past-result context
+8. **therapy_plan prompt**: 加 comprehensiveness checklist（7 点）
+9. **medication_plan prompt**: 加 comprehensiveness checklist（5 点）
+
+### Iter5 Distant Metastasis 详细分析
+长度指标不准确——HF 写 "multiple sites"（模糊）vs vLLM 写具体位点（更精确）：
+- ROW 92: HF "multiple sites" vs vLLM "liver" → vLLM 更具体
+- ROW 100: HF "liver and multiple sites" vs vLLM "liver and bone" → vLLM 更具体
+- ROW 20, 50: vLLM 漏了 "lymph nodes"（可能是 regional 不算 distant）
+- ROW 5: HF 有 cervical LN，vLLM 有 sternum — 各有信息差异
+实际 Distant Met 质量大致持平，不是 HF 领先
