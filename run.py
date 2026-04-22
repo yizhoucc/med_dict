@@ -1875,9 +1875,17 @@ def main():
                 # STEP 1: Check if metastatic disease → Stage IV (highest priority)
                 dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
                 met_field = str(cancer.get("Metastasis", "") or "").lower()
-                is_metastatic = ("yes" in dist_met or "yes" in met_field or
-                                 re.search(r'metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
-                                           note_lower_s) is not None)
+                # Check Distant Met field first (most reliable)
+                has_distant_met = "yes" in dist_met or "yes" in met_field
+                # Check note for metastatic keywords — but EXCLUDE micrometastatic, metastatic biopsy
+                note_met_match = re.search(r'(?<!micro)metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
+                                           note_lower_s)
+                if note_met_match:
+                    # Verify it's not "micrometastatic" or "metastatic biopsy" context
+                    met_ctx = note_lower_s[max(0, note_met_match.start()-20):note_met_match.end()+20]
+                    if any(excl in met_ctx for excl in ['micrometa', 'biopsy', 'originally']):
+                        note_met_match = None
+                is_metastatic = has_distant_met or (note_met_match is not None)
 
                 if is_metastatic:
                     cancer["Stage_of_Cancer"] = "Stage IV (metastatic)"

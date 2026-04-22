@@ -999,7 +999,8 @@ CLASSIFICATION_VALUES = {
 
 # Words indicating the model made a reasonable inference (G3 should preserve these)
 INFERENCE_MARKERS = ["approximately", "likely", "possibly", "probably", "estimated",
-                     "not sure", "not certain", "uncertain", "equivocal", "originally"]
+                     "not sure", "not certain", "uncertain", "equivocal", "originally",
+                     "inferred", "inferred from", "corrected:"]
 
 # Fields where G6 should NOT change the value (categorical classifications, not free text)
 G6_NO_MODIFY_FIELDS = {"Patient type", "second opinion", "in-person", "goals_of_treatment"}
