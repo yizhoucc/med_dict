@@ -1347,12 +1347,14 @@ def main():
                 synonyms = THERAPY_SYNONYMS.get(drug, [drug])
                 if any(syn in tp_lower for syn in synonyms):
                     continue  # already covered
-                # Check STRICT future context — only "start/begin/recommend/rx"
+                # Check future context — strict for non-empty plans, broader for empty plans
+                future_words = ['start', 'begin', 'resume', 'recommend', 'rx for', 'rx given',
+                                'prescription', 'instructed to']
+                if tp_empty:
+                    future_words.extend(['continue', 'currently on', 'on ', 'will', 'plan'])
                 for m in re.finditer(re.escape(drug), ap_lower):
                     ctx = ap_lower[max(0,m.start()-60):m.end()+60]
-                    if any(fc in ctx for fc in ['start', 'begin', 'resume',
-                                                 'recommend', 'rx for', 'rx given',
-                                                 'prescription', 'instructed to']):
+                    if any(fc in ctx for fc in future_words):
                         # Exclude past context
                         if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
                                                          'discontinued', 'stopped', 'was on',
