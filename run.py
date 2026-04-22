@@ -1297,7 +1297,11 @@ def main():
                 elif removed and not kept:
                     # All sentences removed — check if original has ANY oncology drug names
                     # If no drugs mentioned at all, this is probably a mis-extraction → clear it
-                    if not any(term in therapy_val.lower() for term in whitelist):
+                    tv_lower = therapy_val.lower()
+                    has_drugs = any(term in tv_lower for term in whitelist)
+                    has_unspecified = 'unspecified agent' in tv_lower or 'unspecified' in tv_lower
+                    has_continue = 'continue' in tv_lower and ('agent' in tv_lower or 'therapy' in tv_lower)
+                    if not has_drugs and not has_unspecified and not has_continue:
                         therapy["therapy_plan"] = "None"
                         print(f"    [POST-THERAPY] cleared (no oncology drugs found): {therapy_val[:80]}")
                     # else: has drug names but mixed with non-therapy context → keep original
