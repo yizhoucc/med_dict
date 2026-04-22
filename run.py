@@ -1303,42 +1303,60 @@ def main():
                     # else: has drug names but mixed with non-therapy context → keep original
 
         # POST-THERAPY-SUPPLEMENT: If therapy_plan is empty but A/P mentions therapy drugs, supplement
+        # Also: if therapy_plan has content but misses drugs found in A/P, append them
         therapy = keypoints.get("Therapy_plan", {})
         if isinstance(therapy, dict):
             tp_val = str(therapy.get("therapy_plan", "") or "")
             tp_lower = tp_val.lower().strip()
-            if tp_lower in ("none", "", "null", "none."):
-                # Search A/P for therapy keywords
-                ap_lower = (assessment_and_plan or "").lower()
-                THERAPY_PATTERNS = [
-                    (r'(?:continue|start|begin|resume|switch to|change to|recommend)\s+(?:on\s+)?(\w+(?:\s+\w+)?)',
-                     ['letrozole','tamoxifen','anastrozole','exemestane','irinotecan','capecitabine',
-                      'taxol','abraxane','carboplatin','herceptin','pertuzumab','ibrance','palbociclib',
-                      'ribociclib','arimidex','faslodex','fulvestrant','xeloda','gemcitabine',
-                      'doxorubicin','cyclophosphamide','olaparib','pembrolizumab','abemaciclib',
-                      'zoladex','leuprolide','lupron','denosumab','prolia']),
-                    (r'(?:radiation|xrt|rt\b|radiotherapy)', []),
-                ]
-                found_therapies = []
-                for pat, drug_list in THERAPY_PATTERNS:
-                    if drug_list:
-                        for drug in drug_list:
-                            if drug in ap_lower:
-                                # Check future context
-                                for m in re.finditer(re.escape(drug), ap_lower):
-                                    ctx = ap_lower[max(0,m.start()-60):m.end()+60]
-                                    if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume',
-                                                                 'switch', 'recommend', 'plan', 'will',
-                                                                 'currently on', 'on ']):
-                                        found_therapies.append(drug)
-                                        break
-                    else:
-                        if re.search(pat, ap_lower):
-                            found_therapies.append('radiation therapy')
-                if found_therapies:
-                    unique = list(dict.fromkeys(found_therapies))
+            tp_empty = tp_lower in ("none", "", "null", "none.")
+            # Search A/P for therapy keywords
+            ap_lower = (assessment_and_plan or "").lower()
+            THERAPY_DRUG_LIST = [
+                'letrozole','tamoxifen','anastrozole','exemestane','irinotecan','capecitabine',
+                'taxol','abraxane','carboplatin','herceptin','pertuzumab','ibrance','palbociclib',
+                'ribociclib','arimidex','faslodex','fulvestrant','xeloda','gemcitabine','gemzar',
+                'doxorubicin','cyclophosphamide','olaparib','pembrolizumab','abemaciclib',
+                'zoladex','leuprolide','lupron','denosumab','prolia','epirubicin',
+                't-dm1','ado-trastuzumab','trastuzumab','lapatinib','neratinib','tucatinib',
+                'everolimus','afinitor','eribulin','halaven']
+            found_therapies = []
+            for drug in THERAPY_DRUG_LIST:
+                if drug in ap_lower and drug not in tp_lower:
+                    # Check future context — only add if clearly current/future
+                    for m in re.finditer(re.escape(drug), ap_lower):
+                        ctx = ap_lower[max(0,m.start()-60):m.end()+60]
+                        if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume',
+                                                     'switch', 'recommend', 'plan', 'will',
+                                                     'currently on', 'on ', 'rx for', 'rx given',
+                                                     'prescription', 'instructed']):
+                            # Exclude past context
+                            if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
+                                                             'discontinued', 'stopped', 'was on',
+                                                             'previously on', 'had ']):
+                                found_therapies.append(drug)
+                                break
+            # Check radiation
+            if 'radiation' not in tp_lower and 'xrt' not in tp_lower and 'rt ' not in tp_lower:
+                rad_future = re.search(r'(?:refer|will|plan|recommend|start|consider|enroll).*?(?:radiation|xrt|rt\b|radiotherapy)',
+                                       ap_lower)
+                if not rad_future:
+                    rad_future = re.search(r'(?:radiation|xrt|radiotherapy).*?(?:plan|refer|start|week|boost|field)',
+                                          ap_lower)
+                if rad_future:
+                    # Exclude past radiation
+                    rad_ctx = rad_future.group(0)
+                    if not any(pc in rad_ctx for pc in ['s/p', 'completed', 'had ', 'status post']):
+                        found_therapies.append('radiation therapy')
+
+            if found_therapies:
+                unique = list(dict.fromkeys(found_therapies))
+                if tp_empty:
                     therapy["therapy_plan"] = "Continue/start: " + ", ".join(unique)
                     print(f"    [POST-THERAPY-SUPPLEMENT] Found therapy in A/P: {unique}")
+                else:
+                    # Append missing drugs to existing plan
+                    therapy["therapy_plan"] = tp_val + "; also: " + ", ".join(unique)
+                    print(f"    [POST-THERAPY-SUPPLEMENT] Appended missing drugs: {unique}")
 
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
         lab = keypoints.get("Lab_Plan", {})
@@ -1924,6 +1942,46 @@ def main():
                         n_val = ptn_match.group(2)
                         cancer["Stage_of_Cancer"] = f"(inferred from pT{t_val} N{n_val})"
                         print(f"    [POST-STAGE-INFER] Inferred from pTN: pT{t_val} N{n_val}")
+
+        # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = str(cancer.get("Stage_of_Cancer", "") or "")
+            # Match pure pTN like "pT3N0", "pT2N1(sn)", "pT1c(m)N1(sn)" without a "Stage" word
+            if stage and 'stage' not in stage.lower() and re.match(r'^p?T\d', stage, re.IGNORECASE):
+                ptn = re.match(r'p?T(\d)([a-d]?)(?:\([^)]*\))?\s*,?\s*p?N(\d)([a-c]?(?:mi)?)?', stage, re.IGNORECASE)
+                if ptn:
+                    t_num = int(ptn.group(1))
+                    n_num = int(ptn.group(3))
+                    n_suffix = (ptn.group(4) or "").lower()
+                    # Translate to AJCC stage
+                    if n_suffix == 'mi':
+                        n_positive = 0  # micromet only
+                        is_micromet = True
+                    else:
+                        n_positive = n_num
+                        is_micromet = False
+
+                    if t_num <= 1 and n_positive == 0:
+                        stage_name = "Stage IA" if not is_micromet else "Stage IB"
+                    elif t_num <= 1 and n_positive >= 1 and n_positive <= 3:
+                        stage_name = "Stage IIA"
+                    elif t_num == 2 and n_positive == 0:
+                        stage_name = "Stage IIA"
+                    elif t_num == 2 and n_positive >= 1 and n_positive <= 3:
+                        stage_name = "Stage IIB"
+                    elif t_num >= 3 and n_positive == 0:
+                        stage_name = "Stage IIIA"
+                    elif t_num >= 3 and n_positive >= 1:
+                        stage_name = "Stage IIIA"
+                    elif n_positive >= 4:
+                        stage_name = "Stage IIIA"
+                    else:
+                        stage_name = "Stage II"
+
+                    new_stage = f"{stage_name} ({stage})"
+                    cancer["Stage_of_Cancer"] = new_stage
+                    print(f"    [POST-STAGE-PTN-TRANSLATE] {stage} → {new_stage}")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
