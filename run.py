@@ -1302,6 +1302,57 @@ def main():
                         print(f"    [POST-THERAPY] cleared (no oncology drugs found): {therapy_val[:80]}")
                     # else: has drug names but mixed with non-therapy context → keep original
 
+        # POST-THERAPY-SUPPLEMENT: If therapy_plan is empty but A/P mentions therapy drugs, supplement
+        therapy = keypoints.get("Therapy_plan", {})
+        if isinstance(therapy, dict):
+            tp_val = str(therapy.get("therapy_plan", "") or "")
+            tp_lower = tp_val.lower().strip()
+            if tp_lower in ("none", "", "null", "none."):
+                # Search A/P for therapy keywords
+                ap_lower = (assessment_and_plan or "").lower()
+                THERAPY_PATTERNS = [
+                    (r'(?:continue|start|begin|resume|switch to|change to|recommend)\s+(?:on\s+)?(\w+(?:\s+\w+)?)',
+                     ['letrozole','tamoxifen','anastrozole','exemestane','irinotecan','capecitabine',
+                      'taxol','abraxane','carboplatin','herceptin','pertuzumab','ibrance','palbociclib',
+                      'ribociclib','arimidex','faslodex','fulvestrant','xeloda','gemcitabine',
+                      'doxorubicin','cyclophosphamide','olaparib','pembrolizumab','abemaciclib',
+                      'zoladex','leuprolide','lupron','denosumab','prolia']),
+                    (r'(?:radiation|xrt|rt\b|radiotherapy)', []),
+                ]
+                found_therapies = []
+                for pat, drug_list in THERAPY_PATTERNS:
+                    if drug_list:
+                        for drug in drug_list:
+                            if drug in ap_lower:
+                                # Check future context
+                                for m in re.finditer(re.escape(drug), ap_lower):
+                                    ctx = ap_lower[max(0,m.start()-60):m.end()+60]
+                                    if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume',
+                                                                 'switch', 'recommend', 'plan', 'will',
+                                                                 'currently on', 'on ']):
+                                        found_therapies.append(drug)
+                                        break
+                    else:
+                        if re.search(pat, ap_lower):
+                            found_therapies.append('radiation therapy')
+                if found_therapies:
+                    unique = list(dict.fromkeys(found_therapies))
+                    therapy["therapy_plan"] = "Continue/start: " + ", ".join(unique)
+                    print(f"    [POST-THERAPY-SUPPLEMENT] Found therapy in A/P: {unique}")
+
+        # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
+        lab = keypoints.get("Lab_Plan", {})
+        if isinstance(lab, dict):
+            lp_val = str(lab.get("lab_plan", "") or "")
+            ap_lower = (assessment_and_plan or "").lower()
+            if ('palbociclib' in ap_lower or 'ibrance' in ap_lower) and 'monthly' in ap_lower:
+                if 'palbociclib' not in lp_val.lower() and 'ibrance' not in lp_val.lower() and 'monthly' not in lp_val.lower():
+                    if lp_val.strip() and lp_val.lower() not in ('no labs planned.', 'no labs planned', ''):
+                        lab["lab_plan"] = lp_val + ". Monthly blood work for Palbociclib monitoring."
+                    else:
+                        lab["lab_plan"] = "Monthly blood work for Palbociclib monitoring."
+                    print(f"    [POST-LAB-SUPPLEMENT] Added Palbociclib monthly monitoring")
+
         # POST-IMAGING: Search full note for imaging plans mentioned outside A/P
         # Similar to POST-PROCEDURE: echocardiogram, DEXA, etc. may be in A/P as standalone items
         img = keypoints.get("Imaging_Plan", {})
@@ -1362,6 +1413,10 @@ def main():
                 )
                 # Search A/P first, then full note if plan is empty
                 found = re.search(regex, search_text, re.IGNORECASE)
+                if not found:
+                    # Fallback: bare keyword in A/P (e.g., "***** get DEXA" where future context is redacted)
+                    if re.search(r'(?:^|[\s\-\.])' + re.escape(pattern), search_text, re.IGNORECASE):
+                        found = True
                 if not found and search_fullnote:
                     found = re.search(regex, note_text, re.IGNORECASE)
                 if found:
