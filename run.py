@@ -1877,15 +1877,19 @@ def main():
                 met_field = str(cancer.get("Metastasis", "") or "").lower()
                 # Check Distant Met field first (most reliable)
                 has_distant_met = "yes" in dist_met or "yes" in met_field
-                # Check note for metastatic keywords — but EXCLUDE micrometastatic, metastatic biopsy
-                note_met_match = re.search(r'(?<!micro)metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
-                                           note_lower_s)
-                if note_met_match:
-                    # Verify it's not "micrometastatic" or "metastatic biopsy" context
-                    met_ctx = note_lower_s[max(0, note_met_match.start()-20):note_met_match.end()+20]
-                    if any(excl in met_ctx for excl in ['micrometa', 'biopsy', 'originally']):
-                        note_met_match = None
-                is_metastatic = has_distant_met or (note_met_match is not None)
+                # If Distant Met explicitly says No/None, do NOT use note text to override
+                dist_met_is_no = any(neg in dist_met for neg in ["no", "none", "negative"])
+                is_metastatic = has_distant_met
+                if not has_distant_met and not dist_met_is_no:
+                    # Only check note if Distant Met is empty/unspecified
+                    note_met_match = re.search(r'(?<!micro)metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
+                                               note_lower_s)
+                    if note_met_match:
+                        met_ctx = note_lower_s[max(0, note_met_match.start()-20):note_met_match.end()+20]
+                        if any(excl in met_ctx for excl in ['micrometa', 'biopsy', 'originally', 'no evidence',
+                                                             'negative for', 'without', 'no ']):
+                            note_met_match = None
+                    is_metastatic = note_met_match is not None
 
                 if is_metastatic:
                     cancer["Stage_of_Cancer"] = "Stage IV (metastatic)"
@@ -2001,8 +2005,8 @@ def main():
         if isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             stage_lower = stage.lower().strip()
-            # Only verify generic "stage iii" or "stage 3" (not IIIA/IIIB/IIIC which are more specific)
-            if re.match(r'^stage\s*(iii|3)$', stage_lower):
+            # Verify "stage iii", "stage 3", or "stage iiia" when node data suggests lower stage
+            if re.match(r'^stage\s*(iii[a-c]?|3)$', stage_lower):
                 note_lower_v = note_text.lower() if note_text else ""
                 # Look for node count in note
                 node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel|lymph)', note_lower_v)
