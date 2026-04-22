@@ -36,3 +36,4 @@
 | Baseline | - | 41 | 24 | 175 | - |
 | **Iter1** | prompts改进 | **33** | **66** | 123 | **HF 33% → vLLM 67%** ✅ |
 | **Iter2** | therapy_plan+Distant Met修复 | **27** | **67** | 131 | **HF 29% → vLLM 71%** ✅ |
+| **Iter3** | POST hooks: therapy+imaging+lab | **24** | **72** | — | **HF 25% → vLLM 75%** ✅ 10/11字段达标 |
