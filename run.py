@@ -1372,9 +1372,10 @@ def main():
                     therapy["therapy_plan"] = "Continue/start: " + ", ".join(unique)
                     print(f"    [POST-THERAPY-SUPPLEMENT] Found therapy in A/P: {unique}")
                 else:
-                    # Append missing drugs to existing plan
-                    therapy["therapy_plan"] = tp_val + "; also: " + ", ".join(unique)
-                    print(f"    [POST-THERAPY-SUPPLEMENT] Appended missing drugs: {unique}")
+                    # Prepend missing drugs naturally
+                    drug_str = ", ".join(unique)
+                    therapy["therapy_plan"] = f"Continue {drug_str}. {tp_val}"
+                    print(f"    [POST-THERAPY-SUPPLEMENT] Prepended missing drugs: {unique}")
 
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
         lab = keypoints.get("Lab_Plan", {})
@@ -1449,15 +1450,22 @@ def main():
                 )
                 # Search A/P first, then full note if plan is empty
                 found = re.search(regex, search_text, re.IGNORECASE)
-                if not found:
-                    # Fallback: bare keyword in A/P (e.g., "***** get DEXA" where future context is redacted)
-                    # But exclude past-result context (e.g., "PET CT showed stable disease")
+                if not found and search_fullnote:
+                    # Fallback: bare keyword ONLY when imaging_plan is empty
+                    # Exclude past-result context (e.g., "PET CT showed stable disease", "incl bone scan")
                     bare_match = re.search(r'(?:^|[\s\-\.])' + re.escape(pattern), search_text, re.IGNORECASE)
                     if bare_match:
+                        # Check context AFTER keyword
                         after = search_text[bare_match.end():bare_match.end()+50].lower()
-                        past_result = re.search(r'^\s*(?:showed?|demonstrated?|revealed?|found|was\s|had\s|done|'
-                                                r'completed|results?[\s:]|on\s+\d|from\s+\d|dated?\s)', after)
-                        if not past_result:
+                        past_after = re.search(r'^\s*(?:showed?|demonstrated?|revealed?|found|was\s|had\s|done|'
+                                               r'completed|results?[\s:]|on\s+\d|from\s+\d|dated?\s|'
+                                               r'as\s|negative|positive|normal|stable|obtained|reviewed)', after)
+                        # Check context BEFORE keyword
+                        before_start = max(0, bare_match.start() - 40)
+                        before = search_text[before_start:bare_match.start()].lower()
+                        past_before = re.search(r'(?:recent|prior|previous|last|incl|including|s/p|negative\s+for|'
+                                                r'w/u|workup|work[\s-]*up)', before)
+                        if not past_after and not past_before:
                             found = True
                 if not found and search_fullnote:
                     found = re.search(regex, note_text, re.IGNORECASE)
@@ -2000,6 +2008,43 @@ def main():
                     new_stage = f"{stage_name} ({stage})"
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-PTN-TRANSLATE] {stage} → {new_stage}")
+
+        # POST-STAGE-VERIFY: Correct wrong Stage based on tumor size + node count in note
+        # LLM sometimes writes "Stage III" when pT2N1 (1-3 nodes) → should be Stage IIB
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = str(cancer.get("Stage_of_Cancer", "") or "")
+            stage_lower = stage.lower().strip()
+            # Only verify generic "stage iii" or "stage 3" (not IIIA/IIIB/IIIC which are more specific)
+            if re.match(r'^stage\s*(iii|3)$', stage_lower):
+                note_lower_v = note_text.lower() if note_text else ""
+                # Look for node count in note
+                node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel|lymph)', note_lower_v)
+                # Look for tumor size
+                tumor_match = re.search(r'(\d+\.?\d*)\s*(?:cm|mm)\s*(?:tumor|mass|IDC|ILC|carcinoma|invasive)',
+                                       note_lower_v, re.IGNORECASE)
+                if not tumor_match:
+                    tumor_match = re.search(r'(?:tumor|mass|IDC|ILC|carcinoma|invasive)[^.]{0,30}(\d+\.?\d*)\s*(?:cm|mm)',
+                                           note_lower_v, re.IGNORECASE)
+
+                if node_match:
+                    n_pos = int(node_match.group(1))
+                    if n_pos <= 3:  # N1 (1-3 nodes) → not Stage III
+                        size = None
+                        if tumor_match:
+                            size = float(tumor_match.group(1))
+                            if 'mm' in tumor_match.group(0).lower():
+                                size = size / 10
+
+                        if size and size <= 2.0:
+                            corrected = f"Stage IIA (corrected: pT1 N1, {n_pos}/{node_match.group(2)} nodes positive)"
+                        elif size and size <= 5.0:
+                            corrected = f"Stage IIB (corrected: pT2 N1, {n_pos}/{node_match.group(2)} nodes positive)"
+                        else:
+                            corrected = f"Stage IIB (corrected: N1 with {n_pos} positive node{'s' if n_pos > 1 else ''})"
+
+                        cancer["Stage_of_Cancer"] = corrected
+                        print(f"    [POST-STAGE-VERIFY] {stage} → {corrected}")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
