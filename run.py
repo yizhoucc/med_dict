@@ -2005,8 +2005,8 @@ def main():
         if isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             stage_lower = stage.lower().strip()
-            # Verify "stage iii", "stage 3", or "stage iiia" when node data suggests lower stage
-            if re.match(r'^stage\s*(iii[a-c]?|3)$', stage_lower):
+            # Verify "stage iii", "stage 3", or "stage iiia" (possibly with extra text) when node data suggests lower
+            if re.match(r'^stage\s*(iii[a-c]?|3)\b', stage_lower):
                 note_lower_v = note_text.lower() if note_text else ""
                 # Look for node count in note
                 node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel|lymph)', note_lower_v)
