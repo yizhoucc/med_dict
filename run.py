@@ -1415,8 +1415,14 @@ def main():
                 found = re.search(regex, search_text, re.IGNORECASE)
                 if not found:
                     # Fallback: bare keyword in A/P (e.g., "***** get DEXA" where future context is redacted)
-                    if re.search(r'(?:^|[\s\-\.])' + re.escape(pattern), search_text, re.IGNORECASE):
-                        found = True
+                    # But exclude past-result context (e.g., "PET CT showed stable disease")
+                    bare_match = re.search(r'(?:^|[\s\-\.])' + re.escape(pattern), search_text, re.IGNORECASE)
+                    if bare_match:
+                        after = search_text[bare_match.end():bare_match.end()+50].lower()
+                        past_result = re.search(r'^\s*(?:showed?|demonstrated?|revealed?|found|was\s|had\s|done|'
+                                                r'completed|results?[\s:]|on\s+\d|from\s+\d|dated?\s)', after)
+                        if not past_result:
+                            found = True
                 if not found and search_fullnote:
                     found = re.search(regex, note_text, re.IGNORECASE)
                 if found:
@@ -1834,7 +1840,7 @@ def main():
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-ABBREV] Found stage abbreviation in A/P: '{raw_stage}' → '{new_stage}'")
 
-        # POST-STAGE-INFER: If Stage is empty/unknown, infer from tumor size + node status in note
+        # POST-STAGE-INFER: If Stage is empty/unknown, infer from metastasis + tumor size + node status
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
@@ -1843,40 +1849,81 @@ def main():
                                                               "not available", "not available (redacted)", "")
             if stage_empty:
                 note_lower_s = note_text.lower() if note_text else ""
-                # Search for tumor size (T stage)
-                tumor_match = re.search(r'(\d+\.?\d*)\s*(?:cm|mm)\s*(?:tumor|mass|IDC|ILC|carcinoma|invasive)',
-                                       note_lower_s, re.IGNORECASE)
-                if not tumor_match:
-                    tumor_match = re.search(r'(?:tumor|mass|IDC|ILC|carcinoma|invasive)[^.]{0,30}(\d+\.?\d*)\s*(?:cm|mm)',
+
+                # STEP 1: Check if metastatic disease → Stage IV (highest priority)
+                dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
+                met_field = str(cancer.get("Metastasis", "") or "").lower()
+                is_metastatic = ("yes" in dist_met or "yes" in met_field or
+                                 re.search(r'metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
+                                           note_lower_s) is not None)
+
+                if is_metastatic:
+                    cancer["Stage_of_Cancer"] = "Stage IV (metastatic)"
+                    print(f"    [POST-STAGE-INFER] Metastatic disease detected → Stage IV")
+                else:
+                    # STEP 2: Search for tumor size (T stage)
+                    tumor_match = re.search(r'(\d+\.?\d*)\s*(?:cm|mm)\s*(?:tumor|mass|IDC|ILC|carcinoma|invasive)',
                                            note_lower_s, re.IGNORECASE)
-                # Search for node status
-                node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel)', note_lower_s)
-                node_neg = re.search(r'node[\s-]*neg|0/\d+\s*(?:nodes?|LN|sentinel)|no\s+(?:positive\s+)?nodes?',
-                                    note_lower_s)
+                    if not tumor_match:
+                        tumor_match = re.search(r'(?:tumor|mass|IDC|ILC|carcinoma|invasive)[^.]{0,30}(\d+\.?\d*)\s*(?:cm|mm)',
+                                               note_lower_s, re.IGNORECASE)
+                    # Search for node status — expanded patterns
+                    node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel)', note_lower_s)
+                    node_neg = re.search(r'node[\s-]*neg|sentinel\s*node\s*neg|0/\d+\s*(?:nodes?|LN|sentinel)|'
+                                         r'no\s+(?:positive\s+)?nodes?|negative\s*sentinel|'
+                                         r'(?:sentinel|lymph)\s*nodes?\s*(?:were?\s*)?(?:negative|neg|benign)|'
+                                         r'sn\s*neg|n0',
+                                        note_lower_s)
+                    # Also check pT/pN notation in the note
+                    ptn_match = re.search(r'p?T(\d[a-d]?)\s*,?\s*p?N(\d[a-c]?(?:mi)?)', note_lower_s, re.IGNORECASE)
 
-                if tumor_match:
-                    size = float(tumor_match.group(1))
-                    if 'mm' in tumor_match.group(0).lower():
-                        size = size / 10  # convert mm to cm
+                    if tumor_match:
+                        size = float(tumor_match.group(1))
+                        if 'mm' in tumor_match.group(0).lower():
+                            size = size / 10  # convert mm to cm
 
-                    has_positive_nodes = node_match and int(node_match.group(1)) > 0 if node_match else False
-                    is_node_neg = bool(node_neg) and not has_positive_nodes
+                        # Determine node status
+                        n_positive = 0
+                        if node_match:
+                            n_positive = int(node_match.group(1))
+                        has_positive_nodes = n_positive > 0
+                        is_node_neg = bool(node_neg) and not has_positive_nodes
 
-                    if size <= 2.0 and is_node_neg:
-                        inferred = "Stage I (inferred from tumor ≤2cm, node negative)"
-                    elif size <= 2.0 and has_positive_nodes:
-                        inferred = "Stage IIA (inferred from tumor ≤2cm with positive nodes)"
-                    elif size <= 5.0 and is_node_neg:
-                        inferred = "Stage IIA (inferred from tumor 2-5cm, node negative)"
-                    elif size <= 5.0 and has_positive_nodes:
-                        inferred = "Stage IIB (inferred from tumor 2-5cm with positive nodes)"
-                    elif size > 5.0:
-                        inferred = "Stage III (inferred from tumor >5cm)"
-                    else:
-                        inferred = f"Stage II (inferred from {size:.1f}cm tumor)"
+                        if size <= 2.0 and is_node_neg:
+                            inferred = "Stage I (inferred from tumor ≤2cm, node negative)"
+                        elif size <= 2.0 and has_positive_nodes:
+                            if n_positive >= 4:
+                                inferred = f"Stage IIIA (inferred from tumor ≤2cm with {n_positive} positive nodes)"
+                            else:
+                                inferred = f"Stage IIA (inferred from tumor ≤2cm with {n_positive} positive node{'s' if n_positive > 1 else ''})"
+                        elif size <= 5.0 and is_node_neg:
+                            inferred = "Stage IIA (inferred from tumor 2-5cm, node negative)"
+                        elif size <= 5.0 and has_positive_nodes:
+                            if n_positive >= 4:
+                                inferred = f"Stage IIIA (inferred from tumor 2-5cm with {n_positive} positive nodes)"
+                            else:
+                                inferred = f"Stage IIB (inferred from tumor 2-5cm with {n_positive} positive node{'s' if n_positive > 1 else ''})"
+                        elif size > 5.0:
+                            if has_positive_nodes:
+                                inferred = f"Stage IIIA (inferred from tumor >5cm with positive nodes)"
+                            elif is_node_neg:
+                                inferred = f"Stage IIIA (inferred from tumor >5cm, node negative)"
+                            else:
+                                inferred = f"Stage III (inferred from tumor >5cm)"
+                        elif size <= 2.0:
+                            # No node info, small tumor
+                            inferred = "Stage I (inferred from tumor ≤2cm)"
+                        else:
+                            inferred = f"Stage II (inferred from {size:.1f}cm tumor)"
 
-                    cancer["Stage_of_Cancer"] = inferred
-                    print(f"    [POST-STAGE-INFER] Inferred from note: {inferred}")
+                        cancer["Stage_of_Cancer"] = inferred
+                        print(f"    [POST-STAGE-INFER] Inferred from note: {inferred}")
+                    elif ptn_match:
+                        # pTN notation found but no tumor size regex match
+                        t_val = ptn_match.group(1)
+                        n_val = ptn_match.group(2)
+                        cancer["Stage_of_Cancer"] = f"(inferred from pT{t_val} N{n_val})"
+                        print(f"    [POST-STAGE-INFER] Inferred from pTN: pT{t_val} N{n_val}")
 
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})

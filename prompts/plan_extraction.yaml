@@ -6,6 +6,13 @@ Medication_Plan: |
   - Only include drugs explicitly current (continue, currently on) or future (will start, plan to begin).
   Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
   IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name. Do NOT write "Pertuzumab", "T-DM1", or any specific drug name that is not explicitly written in the note.
+  COMPREHENSIVENESS CHECK — before outputting, re-read the entire A/P and verify you captured ALL of the following:
+  1. Every drug being STARTED or prescribed (e.g., "Rx for letrozole given", "start palbociclib")
+  2. Every drug being CONTINUED (e.g., "continue Prolia", "stay on tamoxifen")
+  3. Every supportive medication (e.g., "Claritin for 5-6 days", "prilosec 40mg qd", "antiemetics")
+  4. Dose/frequency changes (e.g., "reduce GCSF to 50%", "change to every other week")
+  5. Contingency plans (e.g., "if HER2+, will need anti-HER2 therapy", "if progression, consider xeloda")
+  If you captured fewer items than the total drug/therapy mentions in the A/P, you are likely missing something.
   Respond *only* with a JSON object using this exact schema:
   {
       "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
@@ -36,6 +43,15 @@ Therapy_plan: |
   Only include THERAPY: chemotherapy drugs, hormonal drugs, radiation therapy, bone-protecting agents, and their schedules.
 
   Be SPECIFIC: include drug names, doses, schedule changes, and cycle information when mentioned.
+  COMPREHENSIVENESS CHECK — before outputting, re-read the entire A/P and verify you captured ALL of the following:
+  1. Every drug being STARTED (e.g., "start letrozole", "Rx given for palbociclib")
+  2. Every drug being CONTINUED (e.g., "continue arimidex", "she is on Prolia")
+  3. Every dose or schedule change (e.g., "reduce GCSF to 50%", "change to every other week")
+  4. Radiation plans or referrals (e.g., "refer to Rad Onc for XRT", "6 weeks of radiation")
+  5. Clinical trial discussions (e.g., "interested in ISPY trial", "eligible for ribociclib trial")
+  6. Return/follow-up instructions tied to therapy (e.g., "RTC after XRT", "return in 6 months")
+  7. Treatment contingencies (e.g., "if progression, could use faslodex", "if HER2+, will need anti-HER2")
+  If you captured fewer than the total number of treatment-related items in the A/P, you are likely missing something.
   Respond *only* with a JSON object using this exact schema:
   {
       "therapy_plan": "A summary of the current and future therapy plan with specific details."
