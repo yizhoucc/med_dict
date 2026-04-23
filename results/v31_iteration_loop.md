@@ -38,6 +38,8 @@
 | iter7 | 100 | 0 | 8 | 42 | 21/61(34%) | 详细100×11审查完成 |
 | iter8 | 56 | 0 | — | — | — | 3 P1 fix + doctor feedback (8a/8b/8c) |
 | iter8c | 56 | 0 | 0 vLLM空值 | 12 REAL-MISS | 12/50(24%) | DISTMET-NOMET搜A/P only + exercise + 5个P1修复 |
+| iter9 | 56 | 0 | **5 vLLM空值** | — | 10/50(20%) | ❌ bfloat16造成回归！换回float16 |
+| iter9b | 56 | ? | ? | ? | ? | float16 + 1024 tokens + thorough prompts |
 
 ## 迭代瓶颈分析
 
