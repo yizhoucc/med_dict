@@ -2129,24 +2129,25 @@ def main():
             cancer["Distant Metastasis"] = met
             print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
 
-        # POST-DISTMET-NOMET: If note explicitly says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
+        # POST-DISTMET-NOMET: If A/P explicitly says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
+        # IMPORTANT: only search A/P (not full note) to avoid historical negative results
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
             if "yes" in dist_met:
-                note_lower_dm = note_text.lower() if note_text else ""
+                ap_lower_dm = (assessment_and_plan or "").lower()
                 no_met_evidence = re.search(
                     r'no\s+(?:definite\s+)?(?:sites?\s+of\s+)?(?:hypermetabolic\s+)?metastatic\s+disease|'
                     r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
                     r'no\s+distant\s+metastases|'
                     r'negative\s+for\s+(?:distant\s+)?metastatic\s+disease',
-                    note_lower_dm)
+                    ap_lower_dm)
                 if no_met_evidence:
                     old_dm = cancer.get("Distant Metastasis", "")
                     cancer["Distant Metastasis"] = "No"
                     if cancer.get("Metastasis"):
                         cancer["Metastasis"] = "No"
-                    print(f"    [POST-DISTMET-NOMET] Note says '{no_met_evidence.group(0)}' — corrected: '{old_dm}' → 'No'")
+                    print(f"    [POST-DISTMET-NOMET] A/P says '{no_met_evidence.group(0)}' — corrected: '{old_dm}' → 'No'")
 
         # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17]
         cancer = keypoints.get("Cancer_Diagnosis", {})
