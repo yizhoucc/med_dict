@@ -1,5 +1,6 @@
 Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+  CRITICAL: Do NOT add, assume, or generalize details not in the original note. If a drug name is redacted (*****), write "[REDACTED]" or "unspecified agent". Do NOT guess what test or drug it might be. Only extract what is explicitly written.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan (e.g., "1 unit pRBC", "2 units packed red blood cells", "transfusion today"). Do not include past medications.
   CRITICAL — distinguish PAST from CURRENT/FUTURE:
   - "s/p weekly taxol x 12" means taxol is COMPLETED. "S/p" or "status post" ALWAYS means COMPLETED/PAST — do NOT list these as current or future.
@@ -245,7 +246,7 @@ Referral: |
   - Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
   - Psychologic/Social section: "I will refer to social work"
   - A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation"
-  Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "palliative".
+  Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "palliative", "symptom management".
   Common referrals found OUTSIDE the A/P section:
   - "Ambulatory Referral to Social Work" (in Diagnosis section) → Others: Social work referral
   - "Referral to Exercise Counseling" (in Diagnosis section) → Others: Exercise counseling referral

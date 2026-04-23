@@ -4,6 +4,10 @@ Reason_for_Visit: |
   Do NOT give vague answers like "new symptoms" or "follow up visit". Instead, state what cancer,
   what stage (if known), and what specifically brought them in (e.g., "initial consult for newly
   diagnosed metastatic ER+ breast cancer" or "cycle 3 day 1 of irinotecan for metastatic TNBC").
+  CRITICAL RULE: Do NOT add, assume, or generalize any details not in the original note.
+  If something is redacted (*****), write "[REDACTED]" — do NOT guess or fill in.
+  If biopsy has not been done, do NOT call a mass "cancer" — call it a "mass" or "lesion".
+  If a specific test name is not mentioned, do NOT assume which test (e.g., do not assume "Oncotype Dx").
 
   For Patient type — determining "New patient" vs "Follow up":
   - "New patient" if ANY of these apply:

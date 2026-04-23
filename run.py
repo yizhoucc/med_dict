@@ -1278,6 +1278,7 @@ def main():
                     'ac-t', 'ac-taxol', 'tchp', 'folfox', 'folfiri', 'fec',
                     ' tc ', ' ac ', ' ec ', ' cmf ',
                     'cycle', 'regimen', 'infusion',
+                    'exercise', 'rec exercise',  # doctor feedback: exercise Rx is therapy
                 }
                 therapy_terms = whitelist | THERAPY_CATEGORY_TERMS
                 # Split by sentences and keep only therapy-related ones
