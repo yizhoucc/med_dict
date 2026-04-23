@@ -198,5 +198,5 @@ def compare(hf_file, vllm_file):
 
 if __name__ == "__main__":
     hf_file = "results/v31_full_20260413_221315/results.txt"
-    vllm_file = "results/v31_vllm_iter6f_results.txt"
+    vllm_file = "results/v31_vllm_iter7_results.txt"
     compare(hf_file, vllm_file)
