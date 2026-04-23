@@ -66,6 +66,34 @@
 8. **therapy_plan prompt**: 加 comprehensiveness checklist（7 点）
 9. **medication_plan prompt**: 加 comprehensiveness checklist（5 点）
 
+### Iter6 (final) 改善
+
+| 改动 | 效果 |
+|------|------|
+| 禁用旧 POST-STAGE-VERIFY-ORIG（过于激进） | 保留了合理的 "Originally Stage" 推断 |
+| POST-STAGE-INFER: Distant Met="No" 时不用 note 文本推断 metastatic | 修复 Stage III 错误串 (ROW 87, 95 等) |
+| POST-STAGE-CORRECT: 修正 Stage III → IIB/IIA（基于 pTN） | 修正 ROW 65 (N1mi→IB) |
+| POST-STAGE-CORRECT: 从 stage 文本本身提取 pTN | 不依赖 note 中 "X/Y nodes" 格式 |
+| INFERENCE_MARKERS += "inferred" | G4-FAITH 不清空含 "inferred" 的值 |
+| POST-IMAGING: 收紧 bare keyword（只在 plan 为空时+排除 past context） | 减少 6 个 false positive imaging 添加 |
+| POST-THERAPY-SUPPLEMENT: 同义词检查 + 严格 context + "Continue" 前缀 | 自然格式，不过度补充 |
+| POST-THERAPY: 保护含 "unspecified agent" 的 plan | 防止清空 redacted 药物的 therapy plan |
+
+### Iter6 逐字段对比 (长度指标)
+| 字段 | HF更详细 | vLLM更详细 | Tie | vLLM/HF比 |
+|------|---------|----------|-----|----------|
+| Type_of_Cancer | 6 | 36 | 5 | **6.0x** ✅ |
+| Stage_of_Cancer | 7 | 19 | 21 | **2.7x** ✅ |
+| Distant Metastasis | 5 | 3 | 46 | 0.6x (HF 用模糊词) |
+| response_assessment | 10 | 19 | 20 | **1.9x** ✅ |
+| current_meds | 0 | 1 | 56 | **∞** ✅ |
+| goals_of_treatment | 0 | 1 | 59 | **∞** ✅ |
+| therapy_plan | 13 | 19 | 13 | **1.5x** ✅ |
+| imaging_plan | 6 | 4 | 44 | 0.7x (HF 有 false "No planned") |
+| lab_plan | 2 | 2 | 53 | **1.0x** ✅ |
+| genetic_testing_plan | 2 | 1 | 49 | 0.5x |
+| Medication_Plan | 9 | 17 | 14 | **1.9x** ✅ |
+
 ### Iter5 Distant Metastasis 详细分析
 长度指标不准确——HF 写 "multiple sites"（模糊）vs vLLM 写具体位点（更精确）：
 - ROW 92: HF "multiple sites" vs vLLM "liver" → vLLM 更具体
