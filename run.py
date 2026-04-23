@@ -1390,6 +1390,25 @@ def main():
                     therapy["therapy_plan"] = f"Continue {drug_str}. {tp_val}"
                     print(f"    [POST-THERAPY-SUPPLEMENT] Prepended missing drugs: {unique}")
 
+        # POST-THERAPY-EXERCISE: If A/P has exercise recommendation but therapy_plan doesn't [iter8 doctor feedback]
+        therapy = keypoints.get("Therapy_plan", {})
+        if isinstance(therapy, dict):
+            tp_val = str(therapy.get("therapy_plan", "") or "")
+            if 'exercise' not in tp_val.lower():
+                ap_lower_ex = (assessment_and_plan or "").lower()
+                ex_match = re.search(r'(?:rec(?:ommend)?\s+exercise|exercise\s+\d+\s*min)', ap_lower_ex)
+                if ex_match:
+                    ex_text = assessment_and_plan[ex_match.start():ex_match.end()+40] if assessment_and_plan else ""
+                    # Extract the full exercise recommendation sentence
+                    ex_sent = re.search(r'[^.;]*exercise[^.;]*', (assessment_and_plan or ""), re.IGNORECASE)
+                    if ex_sent:
+                        ex_rec = ex_sent.group(0).strip()[:80]
+                        if tp_val.lower() in ("none", "", "null"):
+                            therapy["therapy_plan"] = ex_rec
+                        else:
+                            therapy["therapy_plan"] = tp_val + ". " + ex_rec
+                        print(f"    [POST-THERAPY-EXERCISE] Added exercise: {ex_rec[:60]}")
+
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
         lab = keypoints.get("Lab_Plan", {})
         if isinstance(lab, dict):
@@ -2109,6 +2128,25 @@ def main():
             met = cancer.get("Metastasis", "")
             cancer["Distant Metastasis"] = met
             print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
+
+        # POST-DISTMET-NOMET: If note explicitly says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
+            if "yes" in dist_met:
+                note_lower_dm = note_text.lower() if note_text else ""
+                no_met_evidence = re.search(
+                    r'no\s+(?:definite\s+)?(?:sites?\s+of\s+)?(?:hypermetabolic\s+)?metastatic\s+disease|'
+                    r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
+                    r'no\s+distant\s+metastases|'
+                    r'negative\s+for\s+(?:distant\s+)?metastatic\s+disease',
+                    note_lower_dm)
+                if no_met_evidence:
+                    old_dm = cancer.get("Distant Metastasis", "")
+                    cancer["Distant Metastasis"] = "No"
+                    if cancer.get("Metastasis"):
+                        cancer["Metastasis"] = "No"
+                    print(f"    [POST-DISTMET-NOMET] Note says '{no_met_evidence.group(0)}' — corrected: '{old_dm}' → 'No'")
 
         # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17]
         cancer = keypoints.get("Cancer_Diagnosis", {})
