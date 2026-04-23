@@ -6,9 +6,11 @@
 > 审查标准: 逐字对照原文，检查每个 field 的准确性
 
 ## 状态
-- 待审查: ROW 15-100
-- 已完成: 14/100
-- P0: 0, P1: 3, P2: 19
+- 待审查: ROW 21-100
+- 已完成: 20/100
+- P0: 0, P1: 4, P2: 25
+- 新增P1: ROW19 POST-STAGE-CORRECT误纠(locally advanced → Stage IIA)
+- 新增P2: ROW15 genetic(biomarker已完成非future), ROW16 genetic(reason非plan), ROW18 Stage(ITC不算N1), ROW20 Stage(IA非IIA), ROW20 Distant Met(漏lymph nodes)
 - P1: response_assessment(1:ROW2误报no evidence), Stage(1:ROW4误读"5cm from nipple"为tumor size)
 - P2汇总:
   - response_assessment(1): ROW6手术恢复非cancer response
@@ -275,4 +277,92 @@
 | Medication_Plan | ✅ | "topical cannabis, sulfur, Cymbalta rx" ✓ |
 
 **P0: 0 | P1: 0 | P2: 1**
+
+## ROW 15 (coral_idx 154)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2+ mixed IDC/ILC" ✓ |
+| Stage_of_Cancer | ✅ | "Clin st I/II" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "TCHP if neoadjuvant" ✓ |
+| imaging_plan | ✅ | "Ultrasound" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | P2 | "biomarker testing" — 已完成不是future plan |
+| Medication_Plan | ✅ | "TCHP regimen" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
+
+## ROW 16 (coral_idx 155)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 1 IDC" ✓ |
+| Stage_of_Cancer | ✅ | "Stage I" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "radiation + AI 5 years" ✓ |
+| imaging_plan | ✅ | "DEXA, consider breast MRI" ✓ |
+| lab_plan | ✅ | "check estradiol" ✓ |
+| genetic_testing_plan | P2 | 只写了reason不是plan, 应写"refer for genetic testing" |
+| Medication_Plan | ✅ | "AI 5 years, calcium, vitamin D" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
+
+## ROW 17 (coral_idx 156) ✅
+所有11字段准确: ER+/PR+/HER2- grade 1-2 IDC, Stage IA(pT1b N0), radiotherapy+endocrine therapy, DXA, genetics referral, labs hormones. **P0:0 P1:0 P2:0**
+
+## ROW 18 (coral_idx 157)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 1 IDC, arising from encapsulated papillary CA" ✓ |
+| Stage_of_Cancer | P2 | "Stage IIA" — ITC(isolated tumor cells)不算N1, pT1b+N0(i+)=Stage IA |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "endocrine 5-10yrs, no chemo, Rad Onc eval" ✓ |
+| imaging_plan | ✅ | "DEXA ordered" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "UCSF Cancer Risk will reach out" ✓ |
+| Medication_Plan | ✅ | "adjuvant endocrine 5-10 years" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
+
+## ROW 19 (coral_idx 158)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2+ grade 3 IDC, Ki-67 20-90%" ✓ |
+| Stage_of_Cancer | P1 | POST-STAGE-CORRECT误纠为"Stage IIA"。肿瘤4-5cm, locally advanced, 应是II-III |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "TCHP, avoid anthracycline, port, echo, trial" ✓ |
+| imaging_plan | ✅ | "Echocardiogram" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "TCHP with GCSF" ✓ |
+
+**P0: 0 | P1: 1 | P2: 0**
+
+## ROW 20 (coral_idx 159)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade II IDC with 1.8cm DCIS" ✓ |
+| Stage_of_Cancer | P2 | "Originally Stage IIA" — 原文0.9cm+0/2 LN=pT1b N0=Stage IA, 不是IIA |
+| Distant Metastasis | P2 | "Yes, to bone" — 漏了lymph nodes（A/P说"bone and lymph nodes"） |
+| response_assessment | ✅ | 尚未开始治疗, 描述monitoring plan合理 ✓ |
+| current_meds | ✅ | "letrozole, palbociclib" — 此次visit开始 ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | "letrozole + palbociclib + denosumab" ✓ |
+| imaging_plan | ✅ | "MRI spine, CT CAP, repeat in 3 months" ✓ |
+| lab_plan | ✅ | "labs + tumor markers, monthly palbociclib labs" ✓ |
+| genetic_testing_plan | ✅ | "Foundation One or [REDACTED] 360" ✓ |
+| Medication_Plan | ✅ | "Start letrozole, Rx palbociclib, denosumab" ✓ |
+
+**P0: 0 | P1: 0 | P2: 2**
 
