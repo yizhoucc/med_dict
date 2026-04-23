@@ -37,4 +37,17 @@
 | iter6 | 100 | 0 | — | — | — | STAGE-CORRECT, imaging tighten |
 | iter7 | 100 | 0 | 8 | 42 | 21/61(34%) | 详细100×11审查完成 |
 | iter8 | 56 | 0 | — | — | — | 3 P1 fix + doctor feedback (8a/8b/8c) |
-| iter8c | 56 | 0 | 0 vLLM空值 | — | — | DISTMET-NOMET搜A/P only + exercise + 5个P1修复 |
+| iter8c | 56 | 0 | 0 vLLM空值 | 12 REAL-MISS | 12/50(24%) | DISTMET-NOMET搜A/P only + exercise + 5个P1修复 |
+
+## 迭代瓶颈分析
+
+iter8c 审查后发现，剩余 38 个"HF更好"的 ROW 中：
+- 25 个是**措辞差异** (TIE) — 不需修
+- 12 个是**真正的信息缺失** (REAL-MISS) — 全部是模型行为差异
+- 5 个是 HF 错误/vLLM 实际更好
+
+**12 个 REAL-MISS 全是模型行为差异**：vLLM PagedAttention 生成系统性更短。
+无法通过 prompt 或 POST hook 修复。可能的方案：
+1. 增加 max_new_tokens（当前 768）
+2. 在 prompt 中强调"详细列出所有项目"
+3. 换模型或 attention 方式
