@@ -6,12 +6,13 @@
 > 审查标准: 逐字对照原文，检查每个 field 的准确性
 
 ## 状态
-- 待审查: ROW 6-100
-- 已完成: 5/100
-- P0: 0, P1: 2, P2: 10
+- 待审查: ROW 7-100
+- 已完成: 6/100
+- P0: 0, P1: 2, P2: 11
 - P1: response_assessment(1:ROW2误报no evidence), Stage(1:ROW4误读"5cm from nipple"为tumor size)
 - P2汇总:
-  - imaging_plan(2): ROW1漏bone scan, ROW4 conditional brain MRI作为definite
+  - response_assessment(1): ROW6描述手术恢复而非cancer response
+  - imaging_plan(2): ROW1漏bone scan, ROW4 conditional brain MRI
   - lab_plan(2): ROW1+2混入imaging内容
   - genetic_testing_plan(1): ROW1含biopsy内容
   - Medication_Plan(1): ROW2漏多个supportive meds
@@ -119,4 +120,21 @@
 | Medication_Plan | ✅ | "Continue leuprolide, anastrozole, palbociclib" ✓ |
 
 **P0: 0 | P1: 0 | P2: 2**
+
+## ROW 6 (coral_idx 145)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 1 IDC with extensive DCIS" — 手术病理一致 ✓ |
+| Stage_of_Cancer | ✅ | "Stage IA (pT1 N0)" — 1.5cm, 0/1 nodes ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | P2 | 描述了手术恢复("recovering nicely, mild edema")而非癌症治疗反应 |
+| current_meds | ✅ | "zoladex, letrozole" ✓ |
+| goals_of_treatment | ✅ | "curative" — Stage IA, adjuvant ✓ |
+| therapy_plan | ✅ | "Start letrozole, continue zoladex 3 years, can sequence with tamoxifen" ✓ |
+| imaging_plan | ✅ | "No imaging planned" ✓ |
+| lab_plan | ✅ | "Estradiol monthly" ✓ |
+| genetic_testing_plan | ✅ | "None planned" — Myriad已完成(negative) ✓ |
+| Medication_Plan | ✅ | 完整列出letrozole, zoladex, gabapentin, estradiol ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
 
