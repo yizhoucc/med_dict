@@ -1902,7 +1902,8 @@ def main():
                     if note_met_match:
                         met_ctx = note_lower_s[max(0, note_met_match.start()-20):note_met_match.end()+20]
                         if any(excl in met_ctx for excl in ['micrometa', 'biopsy', 'originally', 'no evidence',
-                                                             'negative for', 'without', 'no ']):
+                                                             'negative for', 'without', 'no ', 'no definite',
+                                                             'rule out', 'r/o', 'unlikely', 'not consistent']):
                             note_met_match = None
                     is_metastatic = note_met_match is not None
 
@@ -1925,6 +1926,13 @@ def main():
                                         note_lower_s)
                     # Also check pT/pN notation in the note
                     ptn_match = re.search(r'p?T(\d[a-d]?)\s*,?\s*p?N(\d[a-c]?(?:mi)?)', note_lower_s, re.IGNORECASE)
+
+                    # Exclude "X cm from the nipple" (position description, not tumor size)
+                    if tumor_match:
+                        tm_end_pos = tumor_match.end()
+                        after_tm_text = note_lower_s[tm_end_pos:tm_end_pos+30]
+                        if re.search(r'from\s+(?:the\s+)?nipple', after_tm_text):
+                            tumor_match = None
 
                     if tumor_match:
                         size = float(tumor_match.group(1))
@@ -2040,10 +2048,17 @@ def main():
                 if node_match:
                     n_pos = int(node_match.group(1))
                 elif ptn_in_stage:
-                    n_val = int(ptn_in_stage.group(2))
+                    n_class = int(ptn_in_stage.group(2))  # N classification (0,1,2,3)
                     n_suffix = (ptn_in_stage.group(3) or "").lower()
                     n_is_micro = n_suffix == 'mi'
-                    n_pos = 0 if n_is_micro else n_val  # micromet = treat as N1mi
+                    # N classification → approximate node count
+                    # N0=0, N1/N1mi=1-3, N2=4-9, N3=10+
+                    if n_class >= 2:
+                        n_pos = 4  # N2+ means 4+ nodes → IIIA is correct, don't correct
+                    elif n_is_micro:
+                        n_pos = 0  # N1mi = micromet only
+                    else:
+                        n_pos = n_class  # N0=0, N1=1
 
                 if n_pos is not None and n_pos <= 3:  # N1 (1-3 nodes) or N1mi → not Stage III
                     size = None
