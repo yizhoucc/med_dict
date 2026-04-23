@@ -351,7 +351,21 @@
 **P0: 0 | P1: 0 | P2: 1**
 
 ## ROW 17 (coral_idx 156) ✅
-所有11字段准确: ER+/PR+/HER2- grade 1-2 IDC, Stage IA(pT1b N0), radiotherapy+endocrine therapy, DXA, genetics referral, labs hormones. **P0:0 P1:0 P2:0**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 1-2 IDC" ✓ (HF无grade, vLLM更详细) |
+| Stage_of_Cancer | ✅ | "Stage IA (pT1b N0)" — 0.8cm+0/5 nodes ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "radiotherapy + endocrine therapy based on menopausal status" ✓ |
+| imaging_plan | ✅ | "Baseline DXA scan" ✓ |
+| lab_plan | ✅ | "check labs including hormones" ✓ |
+| genetic_testing_plan | ✅ | "Referral to genetics" ✓ |
+| Medication_Plan | ✅ | "tamoxifen or AI based on menopausal status" ✓ |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 18 (coral_idx 157)
 | Field | 判定 | 备注 |
@@ -405,7 +419,21 @@
 **P0: 0 | P1: 0 | P2: 2**
 
 ## ROW 21 (coral_idx 160) ✅
-DCIS case. Type="ER+/PR+ intermediate grade DCIS, HER2 unclear" ✓. Stage=Not mentioned (DCIS) ✓. Goals=risk reduction ✓. 所有字段合理. **P0:0 P1:0 P2:0**
+| Field | 判定 | 备注 | vs HF |
+|-------|------|------|-------|
+| Type_of_Cancer | ✅ | "ER+/PR+ intermediate grade DCIS, HER2 unclear" ✓ | =HF |
+| Stage_of_Cancer | ✅ | "Not mentioned" — DCIS不分期 ✓ | =HF |
+| Distant Metastasis | ✅ | "No" ✓ | =HF |
+| response_assessment | ✅ | "Not yet on treatment" ✓ | =HF |
+| current_meds | ✅ | 空 ✓ | =HF |
+| goals_of_treatment | ✅ | "risk reduction" — DCIS ✓ | =HF |
+| therapy_plan | ✅ | "additional adjuvant treatment to minimize risk" ✓ | =HF |
+| imaging_plan | ✅ | "No imaging planned" ✓ | =HF |
+| lab_plan | ✅ | "No labs planned" ✓ | =HF |
+| genetic_testing_plan | ✅ | "None planned" ✓ | =HF |
+| Medication_Plan | ✅ | "consider AI" ✓ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 22 (coral_idx 161)
 | Field | 判定 | 备注 |
@@ -425,7 +453,21 @@ DCIS case. Type="ER+/PR+ intermediate grade DCIS, HER2 unclear" ✓. Stage=Not m
 **P0: 0 | P1: 0 | P2: 2**
 
 ## ROW 23 (coral_idx 162) ✅
-ER+/PR+/HER2- grade 2 IDC+ILC features. Stage IIA(pT2 N0). Letrozole adjuvant. DEXA. 所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | 备注 | vs HF |
+|-------|------|------|-------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 2 IDC with lobular features, high-grade DCIS" ✓ | =HF |
+| Stage_of_Cancer | ✅ | "Stage IIA (pT2 N0)" ✓ | =HF |
+| Distant Metastasis | ✅ | "No" ✓ | =HF |
+| response_assessment | ✅ | "Not yet on treatment" ✓ | =HF |
+| current_meds | ✅ | 空 ✓ | =HF |
+| goals_of_treatment | ✅ | "curative" ✓ | =HF |
+| therapy_plan | ✅ | "letrozole adjuvant, at least 5 years" ✓ | =HF |
+| imaging_plan | ✅ | "Baseline DEXA ordered" ✓ | =HF |
+| lab_plan | ✅ | "No labs planned" ✓ | =HF |
+| genetic_testing_plan | ✅ | "None planned" ✓ | =HF |
+| Medication_Plan | ✅ | "Start letrozole, continue metformin" ✓ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 24 (coral_idx 163)
 | Field | 判定 | 备注 |
@@ -462,13 +504,55 @@ ER+/PR+/HER2- grade 2 IDC+ILC features. Stage IIA(pT2 N0). Letrozole adjuvant. D
 **P0: 0 | P1: 0 | P2: 1**
 
 ## ROW 26 (coral_idx 165) ✅
-TNBC, Clinical Stage IB. Surgery first + port placement. Genetics consult planned. 所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2- TNBC | =HF |
+| Stage_of_Cancer | ✅ Clinical Stage IB | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ chemo for risk reduction, surgery planned | =HF |
+| imaging_plan | ✅ No imaging planned | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ Genetics consult | =HF |
+| Medication_Plan | ✅ None | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 27 (coral_idx 166) ✅
-HR+ MBC to bone. Stable disease on zoladex/femara. 所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+ IDC with met recurrence to bone, HER2 not tested | vLLM更详细(met recurrence) |
+| Stage_of_Cancer | ✅ Originally Stage IIA, now Stage IV | vLLM有orig stage, HF没有 |
+| Distant Metastasis | ✅ Yes, to bone | =HF |
+| response_assessment | ✅ PET-CT stable/slightly decreased osseous mets | =HF(措辞不同) |
+| current_meds | ✅ letrozole, goserelin, zolendronic acid | =HF |
+| goals_of_treatment | ✅ palliative | =HF |
+| therapy_plan | ✅ Continue [REDACTED], zoladex, femara | =HF |
+| imaging_plan | ✅ Consider MRI spine at 2 weeks | =HF(措辞不同) |
+| lab_plan | ✅ CBC with platelets | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ Continue [REDACTED], zoladex, femara | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 28 (coral_idx 167) ✅
-Stage I ER+/PR+/HER2- grade 1 IDC. AI 5 years. DEXA. 所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 1 IDC | =HF |
+| Stage_of_Cancer | ✅ Stage I | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ AI 5 years, DEXA | =HF |
+| imaging_plan | ✅ DEXA | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ AI 5 years, calcium, vitamin D | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 29 (coral_idx 168)
 | Field | 判定 | 备注 |
@@ -488,97 +572,532 @@ Stage I ER+/PR+/HER2- grade 1 IDC. AI 5 years. DEXA. 所有字段准确. **P0:0 
 **P0: 0 | P1: 0 | P2: 1**
 
 ## ROW 30 (coral_idx 169) ✅
-ER-/PR-/HER2+ grade 2 IDC. Clinical stage II-III. Neoadjuvant TCHP. TTE. 所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2+ grade 2 IDC with DCIS | vLLM加了grade+DCIS |
+| Stage_of_Cancer | ✅ Clinical stage II-III | =HF(措辞不同) |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Neoadjuvant THP or TCHP | =HF |
+| imaging_plan | ✅ TTE prior to chemo | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ Neoadjuvant chemo | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 31 (coral_idx 170) ✅
-ER+/PR+/HER2- met to liver+bones. Start Doxil. Brain MRI. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- metastatic breast cancer | =HF(无HF数据) |
+| Stage_of_Cancer | ✅ Metastatic (Stage IV) | =HF |
+| Distant Metastasis | ✅ Yes, to liver and bones | =HF |
+| response_assessment | ✅ On treatment, not available | =HF |
+| current_meds | ✅ 空(starting Doxil) | =HF |
+| goals_of_treatment | ✅ palliative | =HF |
+| therapy_plan | ✅ Start Doxil IV q28d | =HF |
+| imaging_plan | ✅ Brain MRI | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ Start Doxil | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 32 (coral_idx 171)
-MedPlan P2: 漏了exemestane和pertuzumab continuation. 其余10字段✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR-/HER2+ pleomorphic lobular" ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage IIA, now Stage IV" ✓ |
+| Distant Metastasis | ✅ | "Yes, to LN left neck/chest/abdomen" ✓ |
+| response_assessment | ✅ | "No active metastatic disease on PET" ✓ |
+| current_meds | ✅ | "exemestane, trastuzumab, pertuzumab" ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | "Continue herceptin/agent" ✓ |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | P2 | "Continue herceptin" — 漏了exemestane和pertuzumab的continuation |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 33 (coral_idx 172)
-Distant Met P2: "Not sure"应为"No"(无recurrence evidence). 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 2 ILC" ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage IIB, now Stage III" ✓ |
+| Distant Metastasis | P2 | "Not sure" — 无recurrence evidence, 应为"No" |
+| response_assessment | ✅ | "No evidence of recurrence" ✓ |
+| current_meds | ✅ | "letrozole" ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "Continue letrozole" ✓ |
+| imaging_plan | ✅ | "Consider MRI brain" ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | "letrozole, calcium, vitamin D, NSAIDs" ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 34 (coral_idx 173)
-therapy P2: 漏了radiation referral和return to clinic. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR-/HER2- IDC with extensive DCIS" ✓ |
+| Stage_of_Cancer | ✅ | "Stage III" ✓ |
+| Distant Metastasis | ✅ | "Not sure" — local recurrence, PET-CT neg for distant ✓ |
+| response_assessment | ✅ | "Local recurrence 1.7cm IDC" ✓ |
+| current_meds | ✅ | "arimidex" ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | P2 | "Resume tamoxifen 20mg" — 漏了radiation referral和return to clinic |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | "check labs" ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | "tamoxifen 20mg PO qD" ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 35 (coral_idx 174)
-Type P2: "ER/PR not specified"但患者在anastrozole上应推断ER+. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | P2 | "ILC grade 2, ER/PR not specified" — 患者在anastrozole上, 应推断ER+ |
+| Stage_of_Cancer | ✅ | "Stage IA (pT1cN0(sn))" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Last mammogram normal" ✓ |
+| current_meds | ✅ | "anastrozole" ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "continue anastrozole, diagnostic mammogram" ✓ |
+| imaging_plan | ✅ | "Bilateral diagnostic mammogram with tomosynthesis" ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | "Continue anastrozole" ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 36 (coral_idx 175) ✅
-所有字段准确. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade III mixed ductal/mucinous | =HF |
+| Stage_of_Cancer | ✅ Stage IIIA (pT3N0) | =HF(措辞不同) |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ No evidence of recurrence, PET/CT post-mastectomy | vLLM更详细 |
+| current_meds | ✅ Abraxane, zoladex | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Continue tamoxifen, Abraxane x12, zoladex | =HF(措辞不同) |
+| imaging_plan | ✅ doppler to r/o DVT | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ Abraxane, zoladex, tamoxifen | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 37 (coral_idx 176) ✅
-TNBC Stage IIA. dd AC + Taxol. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2- grade 3 IDC with high grade DCIS | vLLM加了grade+DCIS |
+| Stage_of_Cancer | ✅ Stage IIA (tumor 2-5cm, node neg) | =HF(措辞不同) |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ dd AC followed by Taxol | =HF(措辞不同) |
+| imaging_plan | ✅ No imaging planned | =HF |
+| lab_plan | ✅ No labs planned | =HF |
+| genetic_testing_plan | ✅ None planned | =HF |
+| Medication_Plan | ✅ dd AC + Taxol, no hormone/radiation | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 38 (coral_idx 177) ✅
-ER-/PR weak/HER2-. Stage IIB. Olaparib. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR+/HER2- IDC | =HF |
+| Stage_of_Cancer | ✅ Stage IIB | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Progressing, declined further preop treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Olaparib adjuvant 1 year | =HF |
+| imaging_plan | ✅ No imaging | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ Olaparib 1 year | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 39 (coral_idx 178) ✅
-TNBC grade 3. Stage II. Neoadjuvant, ISPY. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ grade 3 IDC, ER/PR/HER2 negative | =HF |
+| Stage_of_Cancer | ✅ Stage II (T2N1) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Neoadjuvant paclitaxel x12, ISPY trial | =HF |
+| imaging_plan | ✅ Echo, MRI breasts | =HF |
+| lab_plan | ✅ Lab studies for ISPY | =HF |
+| genetic_testing_plan | ✅ [REDACTED] genetic testing | =HF |
+| Medication_Plan | ✅ Weekly paclitaxel x12 | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 40 (coral_idx 179)
-Type P2: PR 5%=PR weak+, 不是PR-. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | P2 | "ER+/PR-/HER2-" — 原文PR 5%(>1%), technically PR weak+不是PR- |
+| Stage_of_Cancer | ✅ | "Stage II (pT2 N1mi)" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "On treatment; not available" ✓ |
+| current_meds | ✅ | "letrozole" ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "Letrozole, Prolia, no chemo" ✓ |
+| imaging_plan | ✅ | "DEXA" ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | "Rx letrozole, Prolia" ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 41 (coral_idx 180) ✅
-ER+/PR weakly+/HER2 1+ grade 3 IDC. AC-Taxol planned. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR weakly+/HER2 1+ grade 3 IDC | vLLM更详细(PR weak, HER2 1+ IHC) |
+| Stage_of_Cancer | ✅ Stage IIA (corrected: pT1 N1) | vLLM有staging, HF空 |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ AC-Taxol, ovarian suppression + AI after | =HF(更详细) |
+| imaging_plan | ✅ No imaging | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ Taxol 12wks → AC, then OS+AI | vLLM更详细 |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 42 (coral_idx 181) ✅
-ER+/PR+/HER2- grade 1 IDC. Stage IA. Tamoxifen 5 years. Mammogram. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 1 IDC | vLLM有ER+/HER2-/grade, HF只有PR+ |
+| Stage_of_Cancer | ✅ Stage IA (pT1 N0) | vLLM有staging, HF空 |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ No specific imaging data | =HF(措辞不同) |
+| current_meds | ✅ tamoxifen | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Continue tamoxifen, return 4-6 weeks | =HF(措辞不同) |
+| imaging_plan | ✅ Diagnostic mammogram | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ 5 year tamoxifen | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 43 (coral_idx 182) ✅
-TNBC grade 3. Stage I. Taxol carboplatin x4 adjuvant. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2- grade 3 IDC | vLLM加了grade |
+| Stage_of_Cancer | ✅ Stage I (pT1 N0) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Taxol carboplatin x4 adjuvant | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ RTC 2 days prior to cycle for labs | =HF(vLLM更具体) |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ taxol carboplatin x4 | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 44 (coral_idx 183)
-Imaging P2: "PET/CT"可能是POST-IMAGING false positive（A/P未明确plan PET/CT）. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2- grade 2 IDC with residual DCIS" ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage II (1cm residual IDC)" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Surgical pathology after bilateral mastectomies" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "Clinical trial 3 vs 5 weeks radiation, AI after" ✓ |
+| imaging_plan | P2 | "Consider CT Chest in 1 year. PET/CT" — PET/CT可能是false positive |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | "AI after radiation, Zoladex if delay in oophorectomy" ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 45 (coral_idx 184) ✅
-TNBC metastatic to lung. Gemzar/carboplatin. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2- TNBC | =HF |
+| Stage_of_Cancer | ✅ Originally Stage IIIB, now Stage IV | =HF |
+| Distant Metastasis | ✅ Yes, to lung | =HF |
+| response_assessment | ✅ Metastatic to lung and hilar LN | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ palliative | =HF |
+| therapy_plan | ✅ [REDACTED], gemzar, carboplatin | =HF |
+| imaging_plan | ✅ No imaging | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 46 (coral_idx 185) ✅
-ER+/PR-/HER2- grade 1 IDC. Stage IIB. Letrozole + abemaciclib discussed. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR-/HER2- grade 1 IDC with extensive DCIS | vLLM加了grade+DCIS |
+| Stage_of_Cancer | ✅ Stage IIB (pT2N1(sn)) | HF说IIIA(pT2 N2a), vLLM说IIB — 需验证 |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Residual 3.5cm, positive margins, 2/2 nodes | =HF(措辞不同) |
+| current_meds | ✅ letrozole | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Start letrozole, abemaciclib after XRT | =HF(措辞不同) |
+| imaging_plan | ✅ MRA abdomen in 1 year, DEXA | =HF(措辞不同) |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ letrozole, naproxen, allegra, PO iron | =HF(vLLM略短) |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 47 (coral_idx 186) ✅
-DCIS. ER+/PR+. Radiation + tamoxifen. BRCA testing. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+ intermediate grade DCIS | =HF |
+| Stage_of_Cancer | ✅ Not mentioned (DCIS) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ risk reduction | =HF |
+| therapy_plan | ✅ Radiation + tamoxifen | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ BRCA testing | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 48 (coral_idx 187)
-Stage P2: "Stage II (3.0cm)" — DCIS应该是Stage 0不是Stage II. POST-STAGE-INFER误staging. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+ at least DCIS, intermediate grade" ✓ |
+| Stage_of_Cancer | P2 | "Stage II (3.0cm)" — DCIS应该是Stage 0, POST-STAGE-INFER误staging |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "If DCIS only, adjuvant therapy candidate" ✓ |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 49 (coral_idx 188) ✅
-ER+/PR+/HER2- IDC. Likely stage 2. Tamoxifen planned. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- IDC | =HF |
+| Stage_of_Cancer | ✅ Likely stage 2 | =HF(vLLM加了inference) |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Tamoxifen, subject to surgery results | =HF(措辞不同) |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ Tamoxifen, assess thrombophilia risk | =HF(vLLM略短) |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 50 (coral_idx 189)
-CurMeds P2: "ibrance, xgeva, letrozole" — 漏了lupron（原文有"lupron, letrozole, ibrance"）. 其余✅. **P0:0 P1:0 P2:1**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "HR+/HER2- metastatic breast cancer with IDC and DCIS" ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage IV (T2, N1, M1)" ✓ |
+| Distant Metastasis | ✅ | "Yes, to lung, liver, bone" ✓ |
+| response_assessment | ✅ | "Disease under good control" ✓ |
+| current_meds | P2 | "ibrance, xgeva, letrozole" — 漏了lupron |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | "lupron, letrozole, ibrance" ✓ |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | "PMS2 mutation referral" ✓ |
+| Medication_Plan | ✅ | ✓ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 51 (coral_idx 190)
-Type P1: 空值 — 原文有cancer信息但LLM未提取Type_of_Cancer. 其余字段✅. **P0:0 P1:1 P2:0**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | P1 | 空值 — LLM未提取cancer type, 原文有cancer信息 |
+| Stage_of_Cancer | ✅ | ✓ |
+| Distant Metastasis | ✅ | ✓ |
+| response_assessment | ✅ | ✓ |
+| current_meds | ✅ | "Gemzar" ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | ✓ |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | ✓ |
+
+**P0:0 P1:1 P2:0**
 
 ## ROW 52 (coral_idx 191) ✅
-ER+/PR+/HER2- grade II. Stage IIA (pT2 N1mi). **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade II IDC | vLLM加了grade |
+| Stage_of_Cancer | ✅ Stage IIA (pT2 N1mi) | HF说II/III, vLLM更精确 |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ [REDACTED] send Zoladex prior auth | =HF |
+| imaging_plan | ✅ CT CAP and bone scan for staging, DEXA | vLLM加了DEXA |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ [REDACTED] | =HF |
+| Medication_Plan | ✅ [REDACTED]+[REDACTED], Zoladex | =HF(措辞不同) |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 53 (coral_idx 192) ✅
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2+ IDC with neuroendocrine diff, grade 3, HG DCIS | vLLM加了grade+DCIS |
+| Stage_of_Cancer | ✅ Stage II/III | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ Adjuvant AC/THP | =HF(措辞不同) |
+| imaging_plan | ✅ DEXA scan | vLLM加了DEXA |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ genetic counseling referral | =HF(措辞不同) |
+| Medication_Plan | ✅ AC/THP chemo | =HF(措辞不同) |
+
+**P0:0 P1:0 P2:0**
 ER+/PR+/HER2+ IDC with neuroendocrine differentiation. Stage II/III. **P0:0 P1:0 P2:0**
 
 ## ROW 54 (coral_idx 193) ✅
-ER+/PR+/HER2- grade 1. Stage IV met to bone. Leuprolide/letrozole/zoledronic acid. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 1 IDC with extensive DCIS | vLLM加了grade+DCIS |
+| Stage_of_Cancer | ✅ Stage IV (metastatic) | =HF(措辞不同) |
+| Distant Metastasis | ✅ Yes, to left 7th rib and T6 vertebral body | =HF(措辞不同) |
+| response_assessment | ✅ Stable disease, PET/CT | =HF(措辞不同) |
+| current_meds | ✅ leuprolide, letrozole, zoledronic acid | =HF(vLLM更完整) |
+| goals_of_treatment | ✅ palliative | =HF |
+| therapy_plan | ✅ Continue leuprolide, letrozole, radiation, palbociclib after | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ leuprolide, letrozole, palbociclib after rad, zoledronic acid | =HF(措辞不同) |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 55 (coral_idx 194) ✅
-ER+/PR+/HER2- grade 2. Stage I. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 2 IDC with DCIS and LCIS | =HF |
+| Stage_of_Cancer | ✅ Stage I (T1N0M0) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 56 (coral_idx 195) ✅
-TNBC. Clinical Stage IB. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER-/PR-/HER2- TNBC | =HF |
+| Stage_of_Cancer | ✅ Clinical Stage IB | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 57 (coral_idx 196)
-Type P1: "TNBC, originally classified as... ER+/PR+/HER2-" — 矛盾！TNBC=ER-/PR-/HER2-, 但写了ER+/PR+. A/P说"appears to be TNBC". **P0:0 P1:1 P2:0**
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | P1 | "TNBC, originally Grade III adenocarcinoma, ER+/PR+/HER2-" — 矛盾！TNBC=ER-/PR-/HER2- 但写了ER+/PR+ |
+| Stage_of_Cancer | ✅ | "Locally advanced" ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | 手术后residual tumor ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | ✓ |
+| imaging_plan | ✅ | ✓ |
+| lab_plan | ✅ | ✓ |
+| genetic_testing_plan | ✅ | ✓ |
+| Medication_Plan | ✅ | ✓ |
+
+**P0:0 P1:1 P2:0**
 
 ## ROW 58 (coral_idx 197) ✅
-ER+/PR+/HER2- grade 2. Stage IIB. Letrozole. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 2 IDC | =HF |
+| Stage_of_Cancer | ✅ Stage IIb (T2N1M0) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ | =HF |
+| current_meds | ✅ letrozole | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 59 (coral_idx 198) ✅
-ER+/PR+/HER2- grade 3. Stage IIA. CurMeds有exemestane和letrozole（可能在切换）. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 3 IDC with HG DCIS | vLLM加了grade |
+| Stage_of_Cancer | ✅ Stage IIA (pT2 N0) | HF说Stage I, vLLM的IIA对于pT2 N0更准确 |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ No evidence of recurrence | =HF(措辞不同) |
+| current_meds | ✅ exemestane, letrozole (transitioning) | vLLM更详细 |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ | =HF |
+| imaging_plan | ✅ mammogram, breast MRI | =HF(措辞不同) |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ Discontinue Letrozole, start Exemestane | =HF(vLLM略短) |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 60 (coral_idx 199) ✅
-ER+/PR+/HER2- grade 2. Stage I. **P0:0 P1:0 P2:0**
+| Field | 判定 | vs HF |
+|-------|------|-------|
+| Type_of_Cancer | ✅ ER+/PR+/HER2- grade 2 IDC with DCIS | =HF |
+| Stage_of_Cancer | ✅ Stage I (pT1b NX) | =HF |
+| Distant Metastasis | ✅ No | =HF |
+| response_assessment | ✅ Not yet on treatment | =HF |
+| current_meds | ✅ 空 | =HF |
+| goals_of_treatment | ✅ curative | =HF |
+| therapy_plan | ✅ | =HF |
+| imaging_plan | ✅ | =HF |
+| lab_plan | ✅ | =HF |
+| genetic_testing_plan | ✅ | =HF |
+| Medication_Plan | ✅ | =HF |
+
+**P0:0 P1:0 P2:0**
 
 ## ROW 61 (coral_idx 200)
 | Field | 判定 | 备注 |
