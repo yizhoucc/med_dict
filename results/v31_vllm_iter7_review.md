@@ -6,9 +6,9 @@
 > 审查标准: 逐字对照原文，检查每个 field 的准确性
 
 ## 状态
-- 待审查: ROW 11-100
-- 已完成: 10/100
-- P0: 0, P1: 2, P2: 13
+- 待审查: ROW 15-100
+- 已完成: 14/100
+- P0: 0, P1: 3, P2: 19
 - P1: response_assessment(1:ROW2误报no evidence), Stage(1:ROW4误读"5cm from nipple"为tumor size)
 - P2汇总:
   - response_assessment(1): ROW6手术恢复非cancer response
@@ -207,4 +207,72 @@
 | Medication_Plan | ✅ | "Continue letrozole" ✓ |
 
 **P0: 0 | P1: 0 | P2: 0** ✅ 完美
+
+## ROW 11 (coral_idx 150)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "IDC with metastatic recurrence to bone, ER+ (inferred from letrozole)" ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage IIIC, now metastatic (Stage IV)" ✓ |
+| Distant Metastasis | ✅ | "Yes, to bone" ✓ |
+| response_assessment | P1 | 给了future plan(MRI ordered)而非actual response。PET CT showed increased met activity=progression未提 |
+| current_meds | ✅ | "Fulvestrant, Denosumab" ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | "Continue Faslodex and Denosumab" ✓ |
+| imaging_plan | ✅ | "PETCT to evaluate Femur and to toes" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | P2 | 漏了"salt and soda rinses" |
+
+**P0: 0 | P1: 1 | P2: 1**
+
+## ROW 12 (coral_idx 151)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR+/HER2+ (IHC 3+/FISH 5.4) IDC" ✓ |
+| Stage_of_Cancer | ✅ | "Stage IV" ✓ |
+| Distant Metastasis | P2 | "brain, lung, bone" — 漏了nodes和可能的liver（原文"to *****, lung, nodes, brain and bone"） |
+| response_assessment | ✅ | 详细imaging review: CT stable, MRI new brain lesions, celiac node decreased ✓ |
+| current_meds | P2 | "herceptin, letrozole" — 漏了pertuzumab/*****(原文"herceptin and *****") |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | continue herceptin/agent + letrozole + await GK ✓ |
+| imaging_plan | P2 | 有CT CAP/bone scan/MRI brain但漏了echo q6 months |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | herceptin/agent + letrozole + bone agent q12wks ✓ |
+
+**P0: 0 | P1: 0 | P2: 3**
+
+## ROW 13 (coral_idx 152) ✅
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+ nuclear grade 2 DCIS, HER2: not tested" ✓ |
+| Stage_of_Cancer | ✅ | "Not mentioned" — DCIS未显式分期 ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | "Not yet on treatment" ✓ |
+| current_meds | ✅ | 空 ✓ |
+| goals_of_treatment | ✅ | "risk reduction" ✓ |
+| therapy_plan | ✅ | tamoxifen + radiation referral ✓ |
+| imaging_plan | ✅ | "No imaging planned" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "consider tamoxifen 5 years" ✓ |
+
+**P0: 0 | P1: 0 | P2: 0** ✅ 完美
+
+## ROW 14 (coral_idx 153)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | P2 | "ER+ metastatic breast cancer, HER2-" — 漏了PR+(原文PR 25%)和IDC |
+| Stage_of_Cancer | ✅ | "Metastatic (Stage IV)" ✓ |
+| Distant Metastasis | ✅ | "bone, liver, nodes" ✓ |
+| response_assessment | ✅ | imaging measurements showing slight increase ✓ |
+| current_meds | ✅ | 空 — provider无active cancer meds ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | ✅ | 空 — monitor角色 ✓ |
+| imaging_plan | ✅ | "CT CAP + spine MRI for May" ✓ |
+| lab_plan | ✅ | "labs every two weeks" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "topical cannabis, sulfur, Cymbalta rx" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
 
