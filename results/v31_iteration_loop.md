@@ -36,4 +36,5 @@
 | iter5 | 100 | 0 | — | — | — | STAGE-INFER fix, therapy/med prompt |
 | iter6 | 100 | 0 | — | — | — | STAGE-CORRECT, imaging tighten |
 | iter7 | 100 | 0 | 8 | 42 | 21/61(34%) | 详细100×11审查完成 |
-| iter8 | 56 | ? | ? | ? | ? | 3 P1 fix + doctor feedback |
+| iter8 | 56 | 0 | — | — | — | 3 P1 fix + doctor feedback (8a/8b/8c) |
+| iter8c | 56 | 0 | 0 vLLM空值 | — | — | DISTMET-NOMET搜A/P only + exercise + 5个P1修复 |
