@@ -1401,7 +1401,8 @@ def main():
                 'echocardiogram': 'Echocardiogram',
                 'echo ': 'Echocardiogram',
                 'dexa': 'DEXA scan',
-                'bone density': 'DEXA scan',
+                'bone density scan': 'DEXA scan',
+                'bone density test': 'DEXA scan',
                 'mammogram': 'Mammogram',
                 'ct chest': 'CT Chest',
                 'ct scan': 'CT scan',
@@ -1419,7 +1420,7 @@ def main():
             # Synonyms for dedup: if any synonym is in existing text, skip adding this label
             IMAGING_SYNONYMS = {
                 'Echocardiogram': ['echocardiogram', 'echo ', 'echo.', 'echo,'],
-                'DEXA scan': ['dexa', 'bone density'],
+                'DEXA scan': ['dexa', 'bone density scan', 'bone density test'],
                 'Mammogram': ['mammogram'],
                 'PET/CT': ['pet/ct', 'pet ct', 'petct', 'pet-ct'],
                 'Bone scan': ['bone scan'],
@@ -1444,8 +1445,9 @@ def main():
                     r'plan\s+(?:for|to)|scheduled?\s+(?:for|a)|'
                     r'consider\s+(?:a\s+)?(?:follow\s*up\s+)?|'
                     r'recommend\s+|due\s+(?:for|in)|pending\s+|'
-                    r'ordered?\s+(?:a\s+)?|need\s+(?:a\s+)?)'
+                    r'ordered?\s+(?:a\s+)?|need\s+(?:a\s+)?|baseline\s+)'
                     r'[^.;]{0,30}' + re.escape(pattern)
+                    + r'|' + re.escape(pattern) + r'[^.;]{0,20}(?:ordered|planned|scheduled|due)'
                     + r'|' + re.escape(pattern) + r'\.?\s*(?:Port|$|\d)'
                 )
                 # Search A/P first, then full note if plan is empty
@@ -1459,12 +1461,13 @@ def main():
                         after = search_text[bare_match.end():bare_match.end()+50].lower()
                         past_after = re.search(r'^\s*(?:showed?|demonstrated?|revealed?|found|was\s|had\s|done|'
                                                r'completed|results?[\s:]|on\s+\d|from\s+\d|dated?\s|'
-                                               r'as\s|negative|positive|normal|stable|obtained|reviewed)', after)
+                                               r'as\s|negative|positive|normal|stable|obtained|reviewed|'
+                                               r'interpretation|finding|scan\s|report)', after)
                         # Check context BEFORE keyword
                         before_start = max(0, bare_match.start() - 40)
                         before = search_text[before_start:bare_match.start()].lower()
                         past_before = re.search(r'(?:recent|prior|previous|last|incl|including|s/p|negative\s+for|'
-                                                r'w/u|workup|work[\s-]*up)', before)
+                                                r'w/u|workup|work[\s-]*up|probable|based\s+on)', before)
                         if not past_after and not past_before:
                             found = True
                 if not found and search_fullnote:
