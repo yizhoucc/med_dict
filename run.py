@@ -1366,6 +1366,18 @@ def main():
                             found_therapies.append(drug)
                             break
 
+            # Check radiation — only add if therapy_plan doesn't mention it and A/P has clear future radiation
+            if 'radiation' not in tp_lower and 'xrt' not in tp_lower and 'rt ' not in tp_lower and 'radiotherapy' not in tp_lower:
+                # Strict future radiation patterns — require explicit referral or plan
+                rad_future = re.search(r'(?:referral?\s+(?:to|for).*?(?:radiation|rt\b|xrt)|'
+                                        r'(?:will|plan|recommend|benefit\s+from)\s+[^.]{0,40}(?:chest\s+wall\s+rt|radiation|xrt|radiotherapy)|'
+                                        r'(?:radiation|xrt)\s+(?:planned|recommended|scheduled|consult))',
+                                       ap_lower)
+                if rad_future:
+                    rad_ctx = rad_future.group(0)
+                    if not any(pc in rad_ctx for pc in ['s/p', 'completed', 'had ', 'status post', 'declined']):
+                        found_therapies.append('radiation therapy referral')
+
             if found_therapies:
                 unique = list(dict.fromkeys(found_therapies))
                 if tp_empty:
