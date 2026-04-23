@@ -31,7 +31,7 @@ extraction:
 
 generation:
   keypoint:
-    max_new_tokens: 768
+    max_new_tokens: 1024
     do_sample: false
   assessment_plan:
     max_new_tokens: 2048

@@ -14,9 +14,10 @@ Medication_Plan: |
   4. Dose/frequency changes (e.g., "reduce GCSF to 50%", "change to every other week")
   5. Contingency plans (e.g., "if HER2+, will need anti-HER2 therapy", "if progression, consider xeloda")
   If you captured fewer items than the total drug/therapy mentions in the A/P, you are likely missing something.
+  Be THOROUGH — list every single medication. Do NOT truncate or summarize. Include ALL drugs mentioned as continue/start/change, including supportive medications, supplements, and symptom management drugs.
   Respond *only* with a JSON object using this exact schema:
   {
-      "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
+      "medication_plan": "A complete list of ALL medications with specific drug names, doses, and frequencies. Do not truncate."
   }
 
 Therapy_plan: |
@@ -53,9 +54,10 @@ Therapy_plan: |
   6. Return/follow-up instructions tied to therapy (e.g., "RTC after XRT", "return in 6 months")
   7. Treatment contingencies (e.g., "if progression, could use faslodex", "if HER2+, will need anti-HER2")
   If you captured fewer than the total number of treatment-related items in the A/P, you are likely missing something.
+  Be THOROUGH — list every single therapy item. Do NOT truncate or summarize. Include ALL items mentioned in the A/P, even supportive care like exercise, bone protection, elevation, fluid management if discussed alongside oncology therapy.
   Respond *only* with a JSON object using this exact schema:
   {
-      "therapy_plan": "A summary of the current and future therapy plan with specific details."
+      "therapy_plan": "A complete list of ALL current and future therapy items with specific details. Do not truncate."
   }
 
 radiotherapy_plan: |
