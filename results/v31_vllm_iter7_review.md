@@ -6,12 +6,14 @@
 > 审查标准: 逐字对照原文，检查每个 field 的准确性
 
 ## 状态
-- 待审查: ROW 7-100
-- 已完成: 6/100
-- P0: 0, P1: 2, P2: 11
+- 待审查: ROW 11-100
+- 已完成: 10/100
+- P0: 0, P1: 2, P2: 13
 - P1: response_assessment(1:ROW2误报no evidence), Stage(1:ROW4误读"5cm from nipple"为tumor size)
 - P2汇总:
-  - response_assessment(1): ROW6描述手术恢复而非cancer response
+  - response_assessment(1): ROW6手术恢复非cancer response
+  - Stage_of_Cancer(1): ROW9 pT3应为pT2(3.84cm<5cm)
+  - therapy_plan(1): ROW7漏next-line treatment
   - imaging_plan(2): ROW1漏bone scan, ROW4 conditional brain MRI
   - lab_plan(2): ROW1+2混入imaging内容
   - genetic_testing_plan(1): ROW1含biopsy内容
@@ -137,4 +139,72 @@
 | Medication_Plan | ✅ | 完整列出letrozole, zoladex, gabapentin, estradiol ✓ |
 
 **P0: 0 | P1: 0 | P2: 1**
+
+## ROW 7 (coral_idx 146)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER-/PR- IDC with metastatic recurrence, HER2+" — 治疗含Herceptin推断HER2+ ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage II, now metastatic (Stage IV)" ✓ |
+| Distant Metastasis | ✅ | "left supraclavicular node and mediastinum" ✓ |
+| response_assessment | ✅ | PET-CT probable PD, SUV 2.1(was 1.8), tumor marker elevated ✓ |
+| current_meds | ✅ | 空 — "has been off rx since last wk" ✓ |
+| goals_of_treatment | ✅ | "palliative" ✓ |
+| therapy_plan | P2 | 有"no hormonal therapy"和trial讨论, 但漏了next-line treatment推荐(在MedPlan里) |
+| imaging_plan | ✅ | "No imaging planned" ✓ |
+| lab_plan | ✅ | "recheck [REDACTED]" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "Recommend unspecified agent as next line" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
+
+## ROW 8 (coral_idx 147) ✅
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER-/PR-/HER2+ (IHC 3+, FISH 5.7) grade 3 IDC" — 手术病理一致 ✓ |
+| Stage_of_Cancer | ✅ | "Originally Stage III, now post-NAC 3/28 LN+" — reasonable ✓ |
+| Distant Metastasis | ✅ | "No" — PET/CT neg ✓ |
+| response_assessment | ✅ | 手术病理: no residual breast carcinoma, 3/28 LN+, PET neg ✓ |
+| current_meds | ✅ | 空 — 未在治疗中 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "adjuvant AC x 4, T-DM1, radiation" — A/P一致 ✓ |
+| imaging_plan | ✅ | "echocardiogram prior to starting AC" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "adjuvant AC x 4 cycles, to be followed by T-DM1" ✓ |
+
+**P0: 0 | P1: 0 | P2: 0** ✅ 完美
+
+## ROW 9 (coral_idx 148)
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "ER+/PR-/HER2- grade 2 IDC" — 手术病理一致 ✓ |
+| Stage_of_Cancer | P2 | "Stage II (inferred from pT3 N1)" — pT3错误，3.84cm=pT2（但Stage II结论正确） |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | 手术病理: 3.84cm residual IDC, 5% cellularity, 1 node macro — NAC后response ✓ |
+| current_meds | ✅ | 空 — 手术后未开始新治疗 ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "Refer for radiation. Start letrozole after radiation" ✓ |
+| imaging_plan | ✅ | "No imaging planned" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "Letrozole after radiation. Fosamax for bone protection" ✓ |
+
+**P0: 0 | P1: 0 | P2: 1**
+
+## ROW 10 (coral_idx 149) ✅
+| Field | 判定 | 备注 |
+|-------|------|------|
+| Type_of_Cancer | ✅ | "HR+ (ER+/PR+) HER2- grade 2 IDC" ✓ |
+| Stage_of_Cancer | ✅ | "Stage II" — A/P一致 ✓ |
+| Distant Metastasis | ✅ | "No" ✓ |
+| response_assessment | ✅ | 正确指出无具体imaging response evidence ✓ |
+| current_meds | ✅ | "letrozole" ✓ |
+| goals_of_treatment | ✅ | "curative" ✓ |
+| therapy_plan | ✅ | "Continue letrozole. Radiation to left chest wall" ✓ |
+| imaging_plan | ✅ | "DEXA" ✓ |
+| lab_plan | ✅ | "No labs planned" ✓ |
+| genetic_testing_plan | ✅ | "None planned" ✓ |
+| Medication_Plan | ✅ | "Continue letrozole" ✓ |
+
+**P0: 0 | P1: 0 | P2: 0** ✅ 完美
 
