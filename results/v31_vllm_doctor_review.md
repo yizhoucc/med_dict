@@ -173,4 +173,4 @@ RESULTS FOR ROW N
 
 ---
 
-感谢您的审查，您的反馈对我们改进系统非常重要。
+结果文件在 `results/v31_vllm_iter7_results.txt`，有问题随时说。
