@@ -2,7 +2,7 @@
 
 ## 概述
 
-这是最新版本的自动提取系统（V31 vLLM iter8c）。我们对 100 个乳腺癌临床笔记进行了结构化信息提取，并与之前的版本（V31 HF）做了全面对比。
+最新版本（V31 vLLM iter8c），跑了 100 个乳腺癌临床笔记，和之前的版本（V31 HF）做了对比。
 
 **提取结果文件：**
 - 完整 100 样本：`results/v31_vllm_iter7_results.txt`
@@ -66,15 +66,13 @@
 - ROW 99 当前结果：`Specialty: "Symptom management service referral"`
 
 ### 4. "患者还没做 biopsy，不应该叫 cancer，应该叫 mass/lesion"（ROW 99）
-- **已在提取规则中加入**：如果 biopsy 尚未完成，不将 mass 称为 cancer。
-- 提取指令明确要求："If biopsy has not been done, do NOT call a mass 'cancer' — call it a 'mass' or 'lesion'."
+- **已修复**：没做 biopsy 的不叫 cancer，叫 mass 或 lesion。
 
 ### 5. "不要添加、假设或泛化原文没有的信息"（ROW 96，Oncotype Dx）
-- **已在提取规则中加入**：明确要求 "Do NOT add, assume, or generalize any details not in the original note."
-- 如果原文是 *****（被遮盖），系统会写 "[REDACTED]" 或 "unspecified agent"，不会猜测具体药物或检查名称。
+- **已修复**：不添加原文没有的信息。遮盖的内容（*****）写 "[REDACTED]" 或 "unspecified agent"，不猜。
 
 ### 6. "不要假设 next visit 时间"（ROW 96）
-- **已在提取规则中加入**：只提取原文明确写出的随访时间，不假设 "3-4 weeks" 等。
+- **已修复**：只提取原文写了的随访时间，不假设。
 
 ## 已知的不足（诚实报告）
 
@@ -90,15 +88,14 @@
 - **medication_plan 偶尔漏 supportive meds**：约 8% 的样本漏了个别支持性用药（如 gabapentin、salt and soda rinses）。
 - **Stage 推断的精度**：大部分分期正确，少数情况下 Stage IIA 和 Stage I 之间有偏差（如 ITC isolated tumor cells 的分期归类）。
 
-## 请您重点审查的内容
+## 重点看的地方
 
-1. **提取的准确性**：每个样本的 11 个字段是否忠实于原文？
-2. **信息完整性**：是否有重要的临床信息被遗漏？
-3. **表述方式**：提取结果的措辞是否适合患者理解？
-4. **特别关注**：
-   - ROW 2, 11 的 response_assessment
-   - ROW 51, 57 的 Type_of_Cancer
-   - ROW 91 的 therapy_plan（是否需要列出所有 supportive care 项目）
+1. 每个样本的 11 个字段是否忠实于原文
+2. 有没有重要的临床信息被漏掉
+3. 特别看一下：
+   - ROW 2, 11 的 response_assessment（我们知道这两个有问题）
+   - ROW 51, 57 的 Type_of_Cancer（同上）
+   - ROW 91 的 therapy_plan — supportive care 项目需不需要全部列出来？
 
 ## 如何查看结果
 
