@@ -39,7 +39,16 @@
 | iter8 | 56 | 0 | — | — | — | 3 P1 fix + doctor feedback (8a/8b/8c) |
 | iter8c | 56 | 0 | 0 vLLM空值 | 12 REAL-MISS | 12/50(24%) | DISTMET-NOMET搜A/P only + exercise + 5个P1修复 |
 | iter9 | 56 | 0 | **5 vLLM空值** | — | 10/50(20%) | ❌ bfloat16造成回归！换回float16 |
-| iter9b | 56 | ? | ? | ? | ? | float16 + 1024 tokens + thorough prompts |
+| iter9 | 56 | 0 | **5 miss** | — | 10/50(20%) | ❌ bfloat16 |
+| iter9b | 56 | 0 | **4 miss** | — | 9/50(18%) | ❌ thorough prompt |
+| iter9c | 56 | 0 | **0 miss** | — | 12/50(24%) | = iter8c (max_tokens无影响) |
+
+## 最终结论
+**iter8c = 最优版本。** 后续尝试（bfloat16、thorough prompt、max_tokens 1024）都无法改善或造成回归。
+- float16 是 AWQ 模型的正确精度
+- prompt 改动风险大（可能导致新的空值）
+- max_tokens 768 足够（greedy decoding 下不影响输出）
+- 剩余 38/50 的 HF-longer 中，12 个是 REAL-MISS（模型行为差异），无法通过代码修复
 
 ## 迭代瓶颈分析
 
