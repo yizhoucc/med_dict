@@ -1448,15 +1448,24 @@ def main():
             mp_lower = mp_val.lower()
             ap_lower_mp = (assessment_and_plan or "").lower()
             MEDICATION_DRUG_LIST = [
+                # oncology drugs
                 'tamoxifen','letrozole','anastrozole','exemestane','palbociclib','ibrance',
                 'ribociclib','fulvestrant','faslodex','capecitabine','xeloda','denosumab',
                 'prolia','xgeva','zoladex','goserelin','leuprolide','lupron',
                 'trastuzumab','herceptin','pertuzumab','olaparib','abemaciclib',
+                # supportive/symptom meds
                 'gabapentin','pregabalin','duloxetine','cymbalta','venlafaxine','effexor',
                 'ondansetron','zofran','prochlorperazine','compazine',
                 'dexamethasone','prilosec','omeprazole','famotidine',
                 'lasix','furosemide','hydrochlorothiazide','lisinopril',
                 'alendronate','fosamax','zoledronic','risedronate',
+                # common meds often in A/P (iter10 review additions)
+                'doxycycline','acetaminophen','tylenol','ibuprofen','advil','motrin',
+                'naproxen','tramadol','morphine','oxycodone','hydrocodone',
+                'lorazepam','ativan','claritin','loratadine','allegra',
+                'potassium','calcium','vitamin d','magnesium',
+                'docusate','colace','miralax','senna',
+                'metformin','atorvastatin','rosuvastatin','levothyroxine',
             ]
             MED_SYNONYMS = {
                 'tamoxifen': ['tamoxifen','nolvadex'],
@@ -1471,6 +1480,14 @@ def main():
                 'trastuzumab': ['trastuzumab','herceptin'],
                 'gabapentin': ['gabapentin','neurontin'],
                 'omeprazole': ['omeprazole','prilosec'],
+                'acetaminophen': ['acetaminophen','tylenol'],
+                'ibuprofen': ['ibuprofen','advil','motrin'],
+                'naproxen': ['naproxen','naprosyn','aleve'],
+                'oxycodone': ['oxycodone','roxicodone','percocet'],
+                'lorazepam': ['lorazepam','ativan'],
+                'docusate': ['docusate','colace'],
+                'morphine': ['morphine','ms contin'],
+                'tramadol': ['tramadol','ultram'],
             }
             found_meds = []
             for drug in MEDICATION_DRUG_LIST:
@@ -2198,6 +2215,19 @@ def main():
                     cancer["Stage_of_Cancer"] = corrected
                     print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
+        # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't include it [iter10]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            stage = str(cancer.get("Stage_of_Cancer", "") or "")
+            if stage and 'recurrence' not in stage.lower() and 'relapse' not in stage.lower():
+                ap_lower_sr = (assessment_and_plan or "").lower()
+                recurrence = re.search(r'local\s+(?:recurrence|relapse)|recurrent\s+(?:breast\s+)?cancer|'
+                                       r'second\s+local\s+relapse', ap_lower_sr)
+                if recurrence:
+                    old = stage
+                    cancer["Stage_of_Cancer"] = stage + ", now with local recurrence"
+                    print(f"    [POST-STAGE-RECURRENCE] {old} → {cancer['Stage_of_Cancer']}")
+
         # POST-GOALS: adjuvant → curative for non-metastatic [B45]
         goals = keypoints.get("Treatment_Goals", {})
         if isinstance(goals, dict):
@@ -2258,6 +2288,24 @@ def main():
                 if has_regional and not has_distant:
                     cancer["Distant Metastasis"] = "No"
                     print(f"    [POST-DISTMET-REGIONAL] Corrected Distant Metastasis: regional only → No (was: '{dist_met}')")
+
+        # POST-DISTMET-SUPPLEMENT: If Distant Met says "Yes" but misses lymph nodes from A/P [iter10]
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            dist_met = str(cancer.get("Distant Metastasis", "") or "")
+            if "yes" in dist_met.lower() and "lymph" not in dist_met.lower() and "node" not in dist_met.lower():
+                ap_lower_dm = (assessment_and_plan or "").lower()
+                note_lower_dm = note_text.lower() if note_text else ""
+                # Check if A/P or note mentions lymph node metastasis
+                ln_met = re.search(r'(?:metastatic?\s+(?:to\s+)?(?:.*?)?lymph\s*nodes?|'
+                                   r'lymph\s*node\s+metastas|'
+                                   r'disease\s+in\s+(?:the\s+)?(?:bone\s+and\s+)?lymph\s*nodes?|'
+                                   r'metastatic\s+(?:recurrence|disease)\s+(?:.*?)?(?:lymph|nodes))',
+                                   ap_lower_dm)
+                if ln_met:
+                    old_dm = dist_met
+                    cancer["Distant Metastasis"] = dist_met.rstrip('.') + " and lymph nodes"
+                    print(f"    [POST-DISTMET-SUPPLEMENT] Added lymph nodes: '{old_dm}' → '{cancer['Distant Metastasis']}'")
 
         # POST-DISTMET-DEFAULT: fill empty Distant Metastasis with "No" when goals=curative [v22]
         cancer = keypoints.get("Cancer_Diagnosis", {})
