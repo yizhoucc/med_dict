@@ -1409,6 +1409,95 @@ def main():
                             therapy["therapy_plan"] = tp_val + ". " + ex_rec
                         print(f"    [POST-THERAPY-EXERCISE] Added exercise: {ex_rec[:60]}")
 
+        # POST-THERAPY-SUPPORTIVE: Search A/P for supportive care items missing from therapy_plan [iter10]
+        therapy = keypoints.get("Therapy_plan", {})
+        if isinstance(therapy, dict):
+            tp_val = str(therapy.get("therapy_plan", "") or "")
+            tp_lower = tp_val.lower()
+            if tp_lower not in ("none", "", "null"):
+                ap_lower_sc = (assessment_and_plan or "").lower()
+                SUPPORTIVE_ITEMS = {
+                    'lasix': 'lasix', 'furosemide': 'lasix',
+                    'kcl': 'KCL', 'potassium': 'potassium',
+                    'elevation': 'elevation for edema',
+                    'compression': 'compression stockings',
+                    'brace': 'brace',
+                    'home health': 'home health',
+                    'physical therapy': 'physical therapy', ' pt ': 'physical therapy',
+                }
+                added = []
+                for keyword, label in SUPPORTIVE_ITEMS.items():
+                    if keyword in ap_lower_sc and keyword not in tp_lower:
+                        # Check it's a current/future plan, not past
+                        for m in re.finditer(re.escape(keyword), ap_lower_sc):
+                            ctx = ap_lower_sc[max(0,m.start()-40):m.end()+40]
+                            if any(fc in ctx for fc in ['continue', 'start', 'daily', 'mg', 'meq',
+                                                         'recommend', 'for ', 'with ']):
+                                if not any(pc in ctx for pc in ['s/p', 'completed', 'stopped', 'was on']):
+                                    added.append(label)
+                                    break
+                if added:
+                    unique = list(dict.fromkeys(added))
+                    therapy["therapy_plan"] = tp_val + "; " + ", ".join(unique)
+                    print(f"    [POST-THERAPY-SUPPORTIVE] Added supportive items: {unique}")
+
+        # POST-MEDICATION-SUPPLEMENT: Search A/P for drugs missing from medication_plan [iter10]
+        med = keypoints.get("Medication_Plan", {})
+        if isinstance(med, dict):
+            mp_val = str(med.get("medication_plan", "") or "")
+            mp_lower = mp_val.lower()
+            ap_lower_mp = (assessment_and_plan or "").lower()
+            MEDICATION_DRUG_LIST = [
+                'tamoxifen','letrozole','anastrozole','exemestane','palbociclib','ibrance',
+                'ribociclib','fulvestrant','faslodex','capecitabine','xeloda','denosumab',
+                'prolia','xgeva','zoladex','goserelin','leuprolide','lupron',
+                'trastuzumab','herceptin','pertuzumab','olaparib','abemaciclib',
+                'gabapentin','pregabalin','duloxetine','cymbalta','venlafaxine','effexor',
+                'ondansetron','zofran','prochlorperazine','compazine',
+                'dexamethasone','prilosec','omeprazole','famotidine',
+                'lasix','furosemide','hydrochlorothiazide','lisinopril',
+                'alendronate','fosamax','zoledronic','risedronate',
+            ]
+            MED_SYNONYMS = {
+                'tamoxifen': ['tamoxifen','nolvadex'],
+                'letrozole': ['letrozole','femara'],
+                'anastrozole': ['anastrozole','arimidex'],
+                'exemestane': ['exemestane','aromasin'],
+                'palbociclib': ['palbociclib','ibrance'],
+                'fulvestrant': ['fulvestrant','faslodex'],
+                'denosumab': ['denosumab','prolia','xgeva'],
+                'goserelin': ['goserelin','zoladex'],
+                'leuprolide': ['leuprolide','lupron'],
+                'trastuzumab': ['trastuzumab','herceptin'],
+                'gabapentin': ['gabapentin','neurontin'],
+                'omeprazole': ['omeprazole','prilosec'],
+            }
+            found_meds = []
+            for drug in MEDICATION_DRUG_LIST:
+                if drug not in ap_lower_mp:
+                    continue
+                # Check if any synonym already in medication_plan
+                synonyms = MED_SYNONYMS.get(drug, [drug])
+                if any(syn in mp_lower for syn in synonyms):
+                    continue
+                # Check future/current context
+                for m in re.finditer(re.escape(drug), ap_lower_mp):
+                    ctx = ap_lower_mp[max(0,m.start()-40):m.end()+40]
+                    if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume', 'rx',
+                                                 'recommend', 'prescri', 'mg', 'daily', 'bid',
+                                                 'tid', 'qd', 'tablet', 'capsule']):
+                        if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
+                                                         'discontinued', 'stopped', 'was on']):
+                            found_meds.append(drug)
+                            break
+            if found_meds:
+                unique = list(dict.fromkeys(found_meds))
+                if mp_lower in ("none", "", "null", "none."):
+                    med["medication_plan"] = "Continue/start: " + ", ".join(unique)
+                else:
+                    med["medication_plan"] = mp_val + "; also: " + ", ".join(unique)
+                print(f"    [POST-MEDICATION-SUPPLEMENT] Added missing meds: {unique}")
+
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
         lab = keypoints.get("Lab_Plan", {})
         if isinstance(lab, dict):
