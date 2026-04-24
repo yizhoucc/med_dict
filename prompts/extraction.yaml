@@ -333,5 +333,5 @@ Response_Assessment: |
 
   Respond with a JSON object using this exact schema (NO other keys):
   {
-  "response_assessment": "How is the cancer CURRENTLY responding? Be THOROUGH and DETAILED — cite ALL available evidence including: organ names, measurement changes (e.g., '1.8cm→1.2cm'), SUV values, specific imaging modality and date, tumor marker values and trends, physical exam findings. Do NOT truncate. Do NOT give vague summaries. Do NOT include future plans, surgical recovery, or prognostic scores."
+  "response_assessment": "How is the cancer CURRENTLY responding? Be DETAILED — cite specific evidence including: organ names, measurement changes (e.g., '1.8cm→1.2cm'), SUV values, specific imaging modality and date. Do NOT give vague summaries. Do NOT include future plans, surgical recovery, or prognostic scores."
   }
