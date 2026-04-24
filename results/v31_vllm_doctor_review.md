@@ -119,4 +119,58 @@ RESULTS FOR ROW N
 }
 ```
 
+## 可读性指标
+
+提取结果的可读性（100 个样本的所有文本字段汇总）：
+
+| 指标 | 分数 | 说明 |
+|------|------|------|
+| Flesch-Kincaid Grade Level | 10.5 | 约 10 年级阅读水平 |
+| Flesch Reading Ease | 42.0 | 偏难（医学文本正常范围） |
+| Gunning Fog Index | 14.4 | 大学水平 |
+| SMOG Index | 13.0 | 大学水平 |
+| Coleman-Liau Index | 13.0 | 大学水平 |
+| Dale-Chall Score | 13.7 | 大学水平 |
+| ARI | 11.4 | 约 11 年级 |
+
+注：提取结果是结构化临床信息，包含医学术语（ER+/PR+/HER2-、IDC、pT2N1 等），可读性分数偏高是正常的。Patient letter 的可读性会更好（8 年级水平）。
+
+---
+
+## 医生历次反馈完整记录
+
+以下是医生在各个版本审查中给出的所有反馈，按时间排序。即使某些反馈针对的是早期版本，这些意见仍然反映了医生的偏好和标准。
+
+### V31 HF 版本反馈
+（无具体反馈记录，医生表示偏好 V31 的 letter 风格）
+
+### V33 版本反馈（letter 相关）
+1. **"过度简化改变了原意"**：A/P 写了 "monitor with ALT, hepatitis B surface antigen and HBV DNA every 4 months"，但 letter 写成了 "you will have blood tests including a complete blood count, liver tests, and cancer markers" — 把具体的 HBV 监测变成了模糊的 "liver tests"。
+2. **"废话太多"**：letter 加了原文没有的内容。
+3. **"准确性优先于简化"**：Without accuracy, no point to simplify.
+4. **"V31 的风格更好"**：更贴近原文，不过度改写。
+
+### V31 vLLM iter3 版本反馈（extraction 相关）
+5. **"之前的版本说 you come in for a new patient visit 就很好，现在太啰嗦"**：visit summary 应该简洁 patient friendly。
+6. **ROW 100："漏了 exercise therapy"**：原文有 "Rec exercise 10 min 3 x a day" 但提取没包含。→ **已修复**
+7. **ROW 99："漏了 referral to symptom management service"**：原文明确有这个 referral。→ **已修复**
+8. **ROW 99："患者还没做 biopsy，不应该叫 cancer"**：应该叫 mass 或 lesion。→ **已加入规则**
+9. **ROW 96："Oncotype Dx 不应该假设"**：原文没明确提到 Oncotype Dx，不能假设。**不要添加、假设或泛化原文没有的信息。** → **已加入规则**
+10. **ROW 96："不要假设 next visit 时间"**：如果原文没写 3-4 weeks，不能假设。→ **已加入规则**
+
+### 通用偏好（从历次反馈总结）
+11. **准确性 > 简化**：永远不能为了简化而改变原意
+12. **不逐一列出转移器官**：keep it simple
+13. **优先级排序**：化疗下一步 > 慢性病管理
+14. **已有检查结果 ≠ 未来计划**：不要混淆
+15. **Routine recurring tests 不要列出**：除非结果改变了方案
+16. **Follow-up 患者不要重复诊断**：除非首次知道
+17. **包含所有药物变化**：不管是否与主要诊断相关
+18. **不要说 "anxious and depressed"**：用固定句表达关怀
+19. **pCR 准确描述**：breast clear + nodes positive ≠ pCR
+20. **Echo/echocardiogram 不要遗漏**
+21. **Port placement 属于 procedure plan**
+
+---
+
 感谢您的审查，您的反馈对我们改进系统非常重要。
