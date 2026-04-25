@@ -2270,12 +2270,13 @@ def main():
             cancer["Distant Metastasis"] = met
             print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
 
-        # POST-DISTMET-NOMET: If note says "no metastatic disease" in imaging impression, correct [iter8]
-        # Search A/P first, then imaging IMPRESSION sections in full note
+        # POST-DISTMET-NOMET: If imaging says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
+        # ONLY trigger when goals=curative/adjuvant (palliative = likely truly metastatic)
         cancer = keypoints.get("Cancer_Diagnosis", {})
+        goals_for_dm = str(keypoints.get("Treatment_Goals", {}).get("goals_of_treatment", "") if isinstance(keypoints.get("Treatment_Goals"), dict) else "").lower()
         if isinstance(cancer, dict):
             dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
-            if "yes" in dist_met:
+            if "yes" in dist_met and goals_for_dm in ("curative", "adjuvant", "risk reduction"):
                 no_met_pattern = (r'no\s+(?:definite\s+)?(?:sites?\s+of\s+)?(?:hypermetabolic\s+)?metastatic\s+disease|'
                                   r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
                                   r'no\s+distant\s+metastases|'
