@@ -5,8 +5,10 @@
 
 ## 状态
 - **✅ 全部完成: 56/56（逐句详细审查）**
-- P0: 0, P1: 1 (ROW 30), P2: 13
-- **P1 详情**: ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
+- P0: 0, P1: 2, P2: 12
+- **P1 详情**:
+  - ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
+  - ROW 72 — letter 说 "no cancer was found in the removed tissue" 但 pathology 明确有 1.2cm grade 2 IDC
 - **P2 分布**:
   - ROW 1: 漏 peritoneum
   - ROW 6: Stage I-II vs extraction Stage IA
@@ -18,7 +20,7 @@
   - ROW 33: MRI brain 原因误解（头痛→药物问题）
   - ROW 50: lupron+letrozole 开始时间不准确
   - ROW 68: sons 遗传筛查描述错误（遗传性贫血→medication-related）
-  - ROW 72: "no cancer in removed tissue" 误导 + "medication"替"test"（x2）
+  - ROW 72: "medication"替"test"
   - ROW 80: cold gloves 用途错误（neuropathy→hand-foot syndrome）
   - ROW 96: "medication testing" 误称基因组检测
 - **零幻觉、零编造**
@@ -737,13 +739,13 @@
 | "invasive ductal carcinoma...started in the milk ducts" | pathology IDC ✓ | ✅ |
 | "focal neuroendocrine differentiation...cancer cells look like cells that make hormones" | pathology ✓，通俗解释 ✓ | ✅ |
 | "early stage...not spread" | ✓ | ✅ |
-| "**no cancer was found in the removed tissue**" | 可能指 margins negative 或 re-excision clear，但**措辞极度误导**——患者会以为没有癌症 | P2 |
+| "**no cancer was found in the removed tissue**" | pathology 明确有 1.2cm grade 2 IDC。此句**完全错误**——手术切除组织中有癌症。可能试图表达"margins negative"或"0/2 LN negative"但措辞严重误导，患者会以为没有癌症 | **P1** |
 | "letrozole" | ✓ | ✅ |
 | "test to see if you might need chemotherapy" | Oncotype Dx ✓ | ✅ |
 | "**referred to have a medication to evaluate the potential benefit of chemotherapy**" | **"medication"应为"test"**，语句不通顺 | P2 |
 | "follow-up visit in 3 weeks" | ✓ | ✅ |
 
-**P0:0 P1:0 P2:2**（"no cancer in removed tissue"误导 + "medication"替代"test"）
+**P0:0 P1:1 P2:1**（P1: "no cancer in removed tissue"与 pathology 矛盾——实际有1.2cm IDC; P2: "medication"替代"test"）
 
 ## ROW 78
 
