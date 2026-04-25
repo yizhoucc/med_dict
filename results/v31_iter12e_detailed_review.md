@@ -13,7 +13,6 @@
 ---
 
 ## ROW 1 (coral_idx 140)
-
 **原文关键事实**：56yo，2013年5月诊断multifocal Stage IIA右乳cancer。2013年6月mastectomy+sentinel node+implant。2.3和2.4cm tumors，sentinel node negative。G2，ER+PR+，HER2 neu negative。拒绝了tamoxifen，无chemo/radiation。现在CT显示widely metastatic——lungs, peritoneum, liver, ovary，右腋窝local recurrence。无current meds。A/P：palliative，biopsy planned，如果HR+/HER2-推荐ibrance+*****。Orders：MRI brain+bone scan+labs。Integrative Medicine referral。Full code。
 
 **逐字段审查**：
@@ -35,7 +34,6 @@
 **P0:0 P1:0 P2:3** — imaging漏bone scan，lab混入imaging，genetic含biopsy info
 
 ## ROW 2 (coral_idx 141)
-
 **原文关键事实**：44yo，Lynch Syndrome+endometrial+colon cancer+metastatic TNBC。原发July 2013 Stage IIB TNBC grade 3。2018年local recurrence R chest wall。Metastatic: liver(biopsy confirmed), bone(S1 fracture), chest wall, possibly intracranial/skull base。On irinotecan C3D1。A/P：chest wall更tender/erythematous（infection?）→ Rx Doxycycline。Back pain worse（可能PD）。Change irinotecan to q2weeks 150mg/m2。Scans in 3 months。1 unit pRBC。Monitor HBV q4m。Continue morphine/flexeril/oxycodone。Increase Effexor。500ml NS IV + 40mEq potassium today。MRI brain if worse。XRT consult。F/u 2 weeks。
 
 **逐字段审查**：
@@ -57,7 +55,6 @@
 **P0:0 P1:0 P2:4** — Type漏grade 3，response漏progression证据，lab混入scans，medication漏NS/potassium/pRBC
 
 ## ROW 3 (coral_idx 142)
-
 **原文关键事实**：53yo，新诊断Stage IIA右乳IDC 1.7cm，node positive，HR+/HER2 neg by FISH。Ki-67 30-35%。Scheduled for PET CT和genetic testing。Video consult。多方second opinion。A/P：讨论了chemo/surgery/radiation/hormonal blockade的role。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -77,7 +74,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 4 (coral_idx 143)
-
 **原文关键事实**：75yo，ER+/PR+/HER2- IDC。2016年mastectomy。2.8cm grade 2 IDC，HER2 2+ IHC但FISH negative。On letrozole since 2016。No evidence of recurrence。Osteopenia，on calcium/VitD。A/P：continue letrozole，mammogram July 2019，DEXA July 2019，"if worsening consider brain MRI"，Prolia if BMD<-2.5。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -97,7 +93,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 5 (coral_idx 144)
-
 **原文关键事实**：31yo premenopausal，Stage III ER+/PR+/HER2- IDC micropapillary。Met recurrence：left cervical LN(FNA confirmed)，left IM LN，sternum(new)。On leuprolide(A/P写"on leuprolide")/anastrozole/palbociclib。A/P：continue therapy，Rad Onc referral for left neck/brachial plexus，labs monthly on lupron day，CT+bone scan ordered。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -117,7 +112,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 6 (coral_idx 145)
-
 **原文关键事实**：34yo，ER+/PR+/HER2- grade 1 IDC，extensive DCIS。S/p bilateral mastectomy 06/21/19。1.5cm, 0/1 nodes。Started zoladex 06/08，letrozole 07/05。A/P：start letrozole today，continue zoladex 3 years，can sequence with tamoxifen，gabapentin prn，estradiol monthly。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -137,19 +131,42 @@
 **P0:0 P1:0 P2:1**
 
 ## ROW 7 (coral_idx 146) ✅
+A/P: "IMP  1. MBC, recurrent and metastatic \n since 2008. ***** by IHC, *****/***** or possibly *****. R
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER-/PR- IDC (invasive ductal carcinoma) with metastatic recurrence (le | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage II, now metastatic (Stage IV) | ✅ |
+| 3 | Distant Metastasis | Yes, to left supraclavicular node and mediastinum | ✅ |
+| 4 | response_assessment | Probable mild progression in the left breast and possibly the left ant | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Do not consider hormonal therapy at this time. Discussed current clini | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | Would recheck [REDACTED] prior to above | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Recommend [REDACTED] as next line of treatment. Recheck [REDACTED] pri | ✅ |
 
-**原文关键事实**：MBC since 2008。ER-/PR-/HER2+(from Herceptin treatment)。Originally Stage II T2N1。Left supraclavicular+mediastinal disease。Probable PD on PET-CT。D/c current rx，rec ***** as next line。
-
-全部11字段忠实于原文。response有详细imaging(SUV 2.1)，therapy有trial discussion。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 8 (coral_idx 147) ✅
+A/P: "Assessment and Recommendations:  29 y.o. premenopausal patient with a history of clinical stage III
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER-/PR-/HER2+ (IHC 3+, FISH ratio 5.7) grade 3 invasive ductal carcino | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage III, now post-neoadjuvant with 3 of 28 LN positive fo | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | The patient received neoadjuvant TCHP followed by left lumpectomy and  | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | adjuvant AC x 4 cycles, to be followed by T-DM1; radiation | ✅ |
+| 8 | imaging_plan | echocardiogram prior to starting AC | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | adjuvant AC x 4 cycles, to be followed by T-DM1 | ✅ |
 
-**原文关键事实**：29yo，clinical stage III ER-/PR-/HER2+(IHC 3+, FISH 5.7) IDC。Incomplete TCHP。S/p lumpectomy/ALND：no residual breast，3/28 LN+ HER2+/ER-，extranodal extension。Plan：adjuvant AC x4→T-DM1→radiation。
-
-全部11字段准确。Type有IHC/FISH详细值，Stage有post-NAC pathology。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 9 (coral_idx 148)
-
 **原文关键事实**：Stage II HR+/HER2- IDC。S/p 4 cycles AC + weekly taxol x 12。S/p bilateral mastectomies。Path：3.84cm residual IDC grade 2，1 LN with macro(0.21cm)+extranodal extension。Plan：radiation→letrozole。Fosamax for osteopenia。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -161,13 +178,24 @@
 **P0:0 P1:0 P2:1**
 
 ## ROW 10 (coral_idx 149) ✅
+A/P: "Assessment \\Plan :    1. Stage II left ***** of the breast HR + and her 2 negative s/p neoadjuvant
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | HR+ (ER+/PR+) HER2- grade 2 invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage II (inferred from 8.8 cm tumor with 20 lymph nodes involved) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | No specific evidence regarding the current response of the cancer is p | ✅ |
+| 5 | current_meds | letrozole | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue letrozole. To have radiation to the left chest wall and surro | ✅ |
+| 8 | imaging_plan | To have DEXA. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | She will continue on letrozole started April 2021. | ✅ |
 
-**原文关键事实**：Stage II left breast HR+/HER2-。S/p neoadjuvant letrozole。S/p mastectomy with 8.8cm tumor。Low risk *****。Continue letrozole，radiation planned，DEXA。
-
-全部11字段准确。Stage描述包含了A/P的所有信息。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 11 (coral_idx 150)
-
 **原文关键事实**：68yo，Stage IIIC IDC met to bone。On Faslodex+Denosumab。PET/CT(10/10/12)showed increased met activity+mandibular mass。A/P：**Exam stable**。Mouth healing thrush→mycelex+salt/soda rinses。Right leg pain worse→PETCT to toes。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -187,7 +215,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 12 (coral_idx 151)
-
 **原文关键事实**：51yo，Stage IV de novo ER+/PR+/HER2+(IHC 3+/FISH 5.4) MBC to ****(liver?)/lung/nodes/brain/bone。On herceptin+*****+letrozole since 08/18/17。MRI brain 08/15/18: new CNS lesions。CT CAP stable。New brain mets on recent MRI。A/P：continue herceptin/*****/letrozole，***** q12wks，off chemo，CT CAP q4m，bone scan q4m，MRI brain q4m，**Echo q6m**，await GK/Rad Onc。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -207,7 +234,6 @@
 **P0:0 P1:0 P2:3**
 
 ## ROW 14 (coral_idx 153)
-
 **原文关键事实**：58yo，de novo metastatic ER+ MBC to bone/liver/nodes。Was on faslodex+palbociclib but stopped。Went to Mexico for alternative treatment(low dose chemo at home)。Provider role = monitor。A/P：cancelled scans，schedule CT CAP+spine MRI for May，labs q2weeks，topical cannabis/sulfur，Cymbalta rx given。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -227,7 +253,6 @@
 **P0:0 P1:0 P2:1**
 
 ## ROW 19 (coral_idx 158)
-
 **原文关键事实**：70yo，left IDC grade 3，ER 90%/PR ~15%(variable)/HER2 3+(heterogeneous, FISH+)。Axillary FNA+。PET: breast mass+subpectoral+axillary nodes, no distant mets。A/P：neoadjuvant TCHP(avoid anthracycline due to CAD)，port/echo/chemo teaching/GCSF authorization。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -247,7 +272,6 @@
 **P0:0 P1:0 P2:1**
 
 ## ROW 20 (coral_idx 159)
-
 **原文关键事实**：75yo，原Stage I(0.9cm 0/2LN pT1b N0)→metastatic recurrence to bone+lymph nodes。Iliac crest biopsy: ER+80% PR+50% HER2 2+ FISH neg。Plan: letrozole+palbociclib，denosumab after dental，MRI spine，CT CAP，Foundation One，Rad Onc referral。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -267,7 +291,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 22 (coral_idx 161)
-
 **原文关键事实**：MBC ER+/PR+/HER2-。Originally Stage II。Mets to bone/chest wall/infraclavicular/IM nodes。On arimidex(=anastrozole)+denosumab。PET showed good response。Developed pneumonitis from abemaciclib(held)。A/P：pet ct now, if stable continue arimidex, if PD could use faslodex+[agent].
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -287,7 +310,6 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 24 (coral_idx 163)
-
 **原文关键事实**：56yo，s/p partial mastectomy+SLN。Grade II micropapillary mucinous carcinoma。ER+(>95%) PR+(80%) HER2 equivocal IHC2/FISH neg。PET: **"No definite sites of hypermetabolic metastatic disease"**，但有enhancing liver lesion。A/P：if low risk → radiation + adjuvant hormone therapy。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -307,19 +329,42 @@
 **P0:0 P1:0 P2:2**
 
 ## ROW 29 (coral_idx 168) ✅
+A/P: "Assessment and Plan:  ***** *****-***** is a 59 y.o. female with a recently diagnosed multifocal gr
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with mixed micropapill | ✅ |
+| 2 | Stage_of_Cancer | Stage IIA (pT1c(m)N1(sn)) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | On treatment; response assessment not available from current visit. | ✅ |
+| 5 | current_meds | letrozole 2.5mg PO daily | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue letrozole. RT planning per [REDACTED], likely pursued locally | ✅ |
+| 8 | imaging_plan | Bone density scan can be completed when she returns from [REDACTED]. B | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Start letrozole 2.5mg PO daily now. Calcium supplementation with 1200m | ✅ |
 
-**原文关键事实**：59yo，multifocal grade 2 IDC ER+/PR+/HER2-，pT1c(m)N1(sn)。Start letrozole 2.5mg daily。RT planned。Calcium/VitD/vaginal moisturizer。Bone density scan。
-
-全部11字段忠实于原文。Stage不再有"local recurrence"误触发。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 30 (coral_idx 169) ✅
+A/P: "Assessment and Recommendations:  64 y.o. postmenopausal patient with a clinical stage II-III *****-
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER-/PR-/HER2+ grade 2 invasive ductal carcinoma with intermediate to h | ✅ |
+| 2 | Stage_of_Cancer | Clinical stage II-III (inferred from large enhancing right breast mass | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | The patient will proceed with neoadjuvant chemotherapy, including eith | ✅ |
+| 8 | imaging_plan | The patient will need a TTE prior to starting chemotherapy. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | The patient will start neoadjuvant chemotherapy with either 12 cycles  | ✅ |
 
-**原文关键事实**：64yo，clinical stage II-III ER-/PR-/HER2+ IDC。Neoadjuvant THP or TCHP。TTE needed。Port placement+chemo teaching。
-
-全部11字段准确。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 33 (coral_idx 172)
-
 **原文关键事实**：ILC ER+/PR+/HER2-。Originally Stage IIB。No evidence of recurrence。On letrozole。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -330,7 +375,6 @@
 **P0:0 P1:0 P2:1**
 
 ## ROW 34 (coral_idx 173)
-
 **原文关键事实**：Stage III breast cancer。**Second** local relapse(first was 2012, now second)。Local: 1.7cm IDC grade 3, ER+/PR- (originally ER+/PR low)。PET/CT negative for distant mets。Plan: tamoxifen 20mg + radiation referral + return 6 months。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -344,61 +388,338 @@
 **P0:0 P1:0 P2:3**
 
 ## ROW 36 (coral_idx 175) ✅
-ER+/PR+/HER2- grade III mixed ductal/mucinous。pT3N0=Stage IIIA。Abraxane+zoladex+tamoxifen。PET post-op。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment/Plan    Lab Results   Component Value Date    WBC Count 8.8 04/10/2021    RBC Count 3.91
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade III mixed ductal and mucinous carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage IIIA (pT3N0) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | No evidence of disease recurrence on imaging and exam. PET/CT on 01/26 | ✅ |
+| 5 | current_meds | Abraxane, zoladex | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue tamoxifen. Continue weekly Abraxane 100mg/m2 x 12 cycles. Con | ✅ |
+| 8 | imaging_plan | will get doppler to r/o DVT | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Continue weekly Abraxane 100mg/m2 x 12 cycles. Continue zoladex for pr | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 40 (coral_idx 179)
-Type P2: "PR-"但原文PR 5%=PR weak+。其余✅。**P0:0 P1:0 P2:1**
+Type P2: "PR-"但原文PR 5%=PR weak+。其余✅。
+
+A/P: "ASSESSMENT/PLAN:  ***** ***** ***** is a 62 y.o. female with MS on chronic immunosuppression with n
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR-/HER2- grade 1 invasive ductal carcinoma with nuclear grade 1 D | ✅ |
+| 2 | Stage_of_Cancer | Stage II (inferred from pT2 N1mi) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | On treatment; response assessment not available from current visit. | ✅ |
+| 5 | current_meds | letrozole | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Adjuvant endocrine therapy with letrozole. Continue Prolia for bone pr | ✅ |
+| 8 | imaging_plan | DEXA | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Rx for letrozole given. Continue Prolia. | ✅ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 41 (coral_idx 180) ✅
-32yo ATM carrier。ER+/PR weakly+/HER2 1+ grade 3 IDC。AC-Taxol。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment and Plan:  ***** ***** is a 32 y.o. female ATM mutation carrier with a clinical ***** **
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR weakly+/HER2 1+ by IHC (FISH not available) grade 3 invasive du | ✅ |
+| 2 | Stage_of_Cancer | Stage IIIA (inferred from pT2 N2a) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Patient will proceed with AC-Taxol chemotherapy, starting with Taxol f | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Patient will start with [REDACTED] Taxol for 12 weeks followed by AC.  | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 42 (coral_idx 181) ✅
-Post-radiation，tamoxifen 5 years。ER+/PR+/HER2- grade 1。Stage IA。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment:       At this time Ms. ***** is and well. She's recently finished her radiation therapy
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 1 invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage IA (inferred from pT1 N0) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | There is no specific imaging or tumor marker data provided in the note | ✅ |
+| 5 | current_meds | tamoxifen | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue tamoxifen and return to clinic in 4-6 weeks to assess toleran | ✅ |
+| 8 | imaging_plan | Routine diagnostic mammogram on the day of the next appointment as her | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Begin a 5 year course of tamoxifen therapy. Rx for tamoxifen given. | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 44 (coral_idx 183)
-imaging P2: PET/CT可能是POST-IMAGING false positive。其余✅。**P0:0 P1:0 P2:1**
+imaging P2: PET/CT可能是POST-IMAGING false positive。其余✅。
+
+A/P: "ASSESSMENT & PLAN    ***** ***** is a 33 y.o. female with ER+/PR+/*****- node+ left breast cancer w
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with residual DCIS | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage II (inferred from 1 cm residual invasive ductal carci | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Surgical pathology after bilateral mastectomies with left breast SLN b | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Enrolled on a clinical trial for randomized 3 vs 5 weeks of radiation  | ✅ |
+| 8 | imaging_plan | Consider a follow up CT Chest in one year.. PET/CT | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | She will start an aromatase inhibitor after completing radiation. She  | ✅ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 46 (coral_idx 185) ✅
-ER+/PR-/HER2- grade 1 IDC。Stage IIB。Letrozole+abemaciclib discussed。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment/Plan     PATHOLOGY:   A. Right breast axillary sentinel lymph nodes:   - 2 lymph nodes i
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR-/HER2- grade 1 invasive ductal carcinoma with extensive DCIS | ✅ |
+| 2 | Stage_of_Cancer | Stage IIB (pT2N1(sn) (inferred from 3.5 cm residual disease, 2/2 posit | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Patient has residual 3.5 cm disease with positive margins after bilate | ✅ |
+| 5 | current_meds | letrozole | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Patient will start letrozole now. Addition of abemaciclib discussed af | ✅ |
+| 8 | imaging_plan | MRA of the abdomen in 1 year, due in January 2022.. DEXA scan | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Will start letrozole now. Rx sent. Continue naproxen 500mg bid, APAP o | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 49 (coral_idx 188) ✅
-ER+/PR+/HER2- IDC。Likely stage 2。Tamoxifen planned。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Impression/Plan: 50 y.o. female with new diagnosis of L breast cancer with biopsy-proven nodal \n d
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Likely stage 2 (inferred from primary tumor size and nodal involvement | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Discussed with patient that the current plan for adjuvant endocrine th | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | The current plan for adjuvant endocrine therapy is subject to change b | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 50 (coral_idx 189)
-DistMet P2: 漏LN。current_meds P2: 漏lupron。medication P2: 严重缩短。**P0:0 P1:0 P2:3**
+DistMet P2: 漏LN。current_meds P2: 漏lupron。medication P2: 严重缩短。
+
+A/P: "Assessment / Plan:    1.  De ***** metastatic breast cancer found in July 2013, HR+ and her 2 neu n
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | HR+ and HER2- metastatic breast cancer with IDC and DCIS components | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage IV (T2, N1, M1) | ✅ |
+| 3 | Distant Metastasis | Yes, to lung, liver, and bone | ✅ |
+| 4 | response_assessment | Imaging from December 2021 shows metastatic disease under good control | ✅ |
+| 5 | current_meds | ibrance, xgeva, letrozole | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Second line lupron, letrozole started October 2014 and ibrance added J | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Referral to genetics for pathogenic PMS 2 mutation. | ✅ |
+| 11 | medication_plan | Lupron, letrozole, and ibrance added January 2015. | ✅ |
+
+**P0:0 P1:0 P2:3**
 
 ## ROW 51 (coral_idx 190)
-Type **P1**: 空值（note结构异常，LLM没提取到）。其余合理。**P0:0 P1:1 P2:0**
+A/P: "Patient /Family Response to Teaching:  Patient/family receptive and verbalized understanding of inf
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | (空) | ✅ |
+| 2 | Stage_of_Cancer | (空) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not mentioned in note. | ✅ |
+| 5 | current_meds | Gemzar | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Before starting [REDACTED], Gemzar, and [REDACTED] treatment, make sur | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Before starting [REDACTED], Gemzar, and [REDACTED] treatment, make sur | ✅ |
+
+All 11 fields verified. **P0:0 P1:1 P2:0**
 
 ## ROW 52 (coral_idx 191) ✅
-ER+/PR+/HER2- grade II。Stage IIA(pT2 N1mi)。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment/Plan and in my HPI/Oncologic History    Results for orders placed or performed during th
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade II invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage IIA (inferred from pT2 N1mi) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue radiation therapy referral. [REDACTED] send Zoladex prior aut | ✅ |
+| 8 | imaging_plan | CT CAP and bone scan for staging | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Order [REDACTED] to provide more information on her tumor biology and  | ✅ |
+| 11 | medication_plan | [REDACTED] + [REDACTED]. [REDACTED] send Zoladex prior auth. Start aft | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 53 (coral_idx 192) ✅
-ER+/PR+/HER2+ IDC with neuroendocrine diff。Stage II/III。AC/THP。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment:       Stage II/III left breast cancer, ER/PR positive, ***** positive, s/p left lumpect
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2+ invasive ductal carcinoma with neuroendocrine differenti | ✅ |
+| 2 | Stage_of_Cancer | Stage II/III | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Adjuvant systemic chemotherapy with AC x 4 given q2weeks with growth f | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Referral to genetic counseling for further evaluation. | ✅ |
+| 11 | medication_plan | Adjuvant AC/THP chemotherapy consisting of AC x 4 given q2weeks with g | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 54 (coral_idx 193) ✅
-BRCA2。ER+/PR+/HER2- grade 1。Stage IV met to bone。Stable disease。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment and Recommendations:  39 y.o. premenopausal patient with a recent diagnosis of a deleter
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 1 invasive ductal carcinoma with extensive DCIS co | ✅ |
+| 2 | Stage_of_Cancer | Stage IV (metastatic) | ✅ |
+| 3 | Distant Metastasis | Yes, to left posterior 7th rib and T6 vertebral body | ✅ |
+| 4 | response_assessment | The cancer is currently responding with stable disease. Evidence inclu | ✅ |
+| 5 | current_meds | leuprolide, letrozole, zoledronic acid | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | continue leuprolide every 4 weeks, continue letrozole, referred to rad | ✅ |
+| 8 | imaging_plan | repeat PET/CT in ~3-4 months after radiation, DEXA scan (re-ordered) | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | continue leuprolide every 4 weeks, continue letrozole, start palbocicl | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 57 (coral_idx 196)
-Type **P1**: "TNBC, ER+/PR+/HER2-"矛盾（LLM搞混了初始HER2+和后来确认的TNBC）。**P0:0 P1:1 P2:0**
+A/P: "IMP  1. Breast CA, Left sided, locally advanced. Initially classified as ***** at ***** hospital, a
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | Breast Cancer (TNBC), originally classified as Grade III adenocarcinom | ✅ |
+| 2 | Stage_of_Cancer | Locally advanced (inferred from treatment with neoadjuvant chemotherap | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | The patient received neoadjuvant chemotherapy with TCH+P followed by s | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Rec XRT, which pt is scheduled to receive. If [REDACTED], although unl | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Rec genetic counseling and testing | ✅ |
+| 11 | medication_plan | Recommendation to resume trastuzumab if [REDACTED] status is confirmed | ✅ |
+
+All 11 fields verified. **P0:0 P1:1 P2:0**
 
 ## ROW 59 (coral_idx 198) ✅
-ER+/PR+/HER2- grade 3。Stage IIA(pT2 N0)。Switching letrozole→exemestane。全部准确。**P0:0 P1:0 P2:0**
+A/P: "ASSESSMENT & PLAN  ***** ***** is a 52 y.o. female  with stage 1 right sided ER+/PR+/*****- breast 
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 3 invasive ductal carcinoma with high-grade DCIS c | ✅ |
+| 2 | Stage_of_Cancer | Stage IIA (inferred from pT2 N0) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | No evidence of recurrence either locally or systemically based on phys | ✅ |
+| 5 | current_meds | "exemestane ([REDACTED]) 25 mg tablet", "letrozole (FEMARA) 2.5 mg tab | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. C | ✅ |
+| 8 | imaging_plan | Right mammogram due in July. Continue mammograms alternating with MRI  | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Discontinue Letrozole and wait 2-3 weeks before starting Exemestane. C | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 61 (coral_idx 200) ✅
-ER+/PR+/HER2-(1+) grade 2。Stage I。Adjuvant endocrine planned。全部准确。**P0:0 P1:0 P2:0**
+A/P: "Assessment and Plan     # Breast CA L    ***** ***** is a 43 y.o. pre-menopausal female newly diagn
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- (1+) grade 2 invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage I (inferred from tumor ≤2cm) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Will likely need [unspecified agent] Dx after surgery to determine if  | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | will likely need [REDACTED] Dx after surgery to determine if she needs | ✅ |
+| 11 | medication_plan | she will need adjuvant endocrine therapy (Tamoxifen vs Ovarian Suppres | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 64 (coral_idx 203)
-Type P2: "HR+"应写"ER+/PR+"。其余✅。**P0:0 P1:0 P2:1**
+Type P2: "HR+"应写"ER+/PR+"。其余✅。
+
+A/P: "Assessment / Plan:    1. Stage III- IV left breast cancer HR+/her 2 negative with probably metastat
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | HR+/HER2- invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage IV (metastatic) | ✅ |
+| 3 | Distant Metastasis | Yes, to the sternum | ✅ |
+| 4 | response_assessment | No specific imaging or tumor marker evidence provided in the note to a | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Recommend [REDACTED] followed by taxol then surgery and radiation with | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | No specific genetic or molecular tests are planned. | ✅ |
+| 11 | medication_plan | Currently on unspecified agent and taxol planned. If biopsy of bone is | ✅ |
+
+**P0:0 P1:0 P2:1**
 
 ## ROW 65 (coral_idx 204) ✅
-ER weak+(2%), PR low+(7%)。Stage IB(pT1 N1mi)。Neoadjuvant AC/T。全部准确。**P0:0 P1:0 P2:0**
+A/P: "ASSESSMENT/PLAN:  ***** ***** is a 48 y.o. female with a recent diagnosis of right breast IDC which
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER weak positive (2%), PR low positive (7%), HER2 neg (IHC 2+, FISH 2. | ✅ |
+| 2 | Stage_of_Cancer | Stage IB (corrected: pT1 N1mi — micrometastasis only) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Continue taxol. Port placement, chemotherapy teaching session, interes | ✅ |
+| 8 | imaging_plan | research breast MRI | ✅ |
+| 9 | lab_plan | labs | ✅ |
+| 10 | genetic_testing_plan | F/u results of genetic testing (done locally last Mon) | ✅ |
+| 11 | medication_plan | Plan to start neoadjuvant chemotherapy with AC/T. Typically, taxol fir | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 68 (coral_idx 207) ✅
-ER+/PR+/HER2+ multifocal IDC。Post-TCHP good response。全部准确。**P0:0 P1:0 P2:0**
+A/P: "ASSESSMENT & PLAN  ***** ***** is a 63 y.o. postmenopausal female who presents  to clinic for consu
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2+ multifocal invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage I (inferred from tumor ≤2cm) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | The cancer has shown a good clinical response after 6 cycles of TCHP c | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | If a lumpectomy is chosen, radiation is required. Post-mastectomy radi | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Her sons should be tested for the risk of [REDACTED] anemia in childre | ✅ |
+| 11 | medication_plan | No specific current or future medication plans were detailed in the no | ✅ |
+
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 70 (coral_idx 209)
-
 **原文关键事实**：Bilateral ER+/HER2- breast cancer。Left: pT4N1 grade 2 ILC，Right: pT1N0 IDC with DCIS。S/p neoadjuvant TC x6。MRI shows faint residual NME, axillary nodes decreased。Bone scan negative。On letrozole(previously tolerated)。Expanders before radiation。CT June 2020 for lung nodules。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -414,7 +735,6 @@ ER+/PR+/HER2+ multifocal IDC。Post-TCHP good response。全部准确。**P0:0 P
 **P0:0 P1:0 P2:2**
 
 ## ROW 72 (coral_idx 211)
-
 **原文关键事实**：ER+/PR-/HER2- grade 2 IDC with focal neuroendocrine diff。pT1cN0(sn)=Stage IA。Start letrozole。[REDACTED] for chemo benefit evaluation。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -427,13 +747,24 @@ ER+/PR+/HER2+ multifocal IDC。Post-TCHP good response。全部准确。**P0:0 P
 **P0:0 P1:0 P2:3**
 
 ## ROW 78 (coral_idx 217) ✅
+A/P: "ASSESSMENT/PLAN:  ***** ***** is a 79 \n y.o. female  with MMM including DM, HTN hyperlipidemia, h/
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER-/PR-/HER2- grade 3 invasive ductal carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Metastatic (Stage IV) | ✅ |
+| 3 | Distant Metastasis | Yes, to liver and periportal lymph nodes | ✅ |
+| 4 | response_assessment | Worsening of metastatic disease noted on 08/07/19 Abdominal CT showing | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | She is interested in screening for a trial at [REDACTED] involving [RE | ✅ |
+| 8 | imaging_plan | Echo 09/08/2019. If this echo is normal we can stop monitoring her. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Patient is interested in screening for the [REDACTED] trial at [REDACT | ✅ |
+| 11 | medication_plan | Continue 800 mg Mag-Ox supplement daily. She is on lisinopril, norvasc | ✅ |
 
-**原文关键事实**：79yo TNBC metastatic to liver+periportal LNs。Worsening hepatic/nodal mets。Echo for cardiac monitoring。Trial interest(eribulin/pembrolizumab)。Continue Mag-Ox, lisinopril, norvasc。
-
-全部11字段准确。response有详细imaging measurements。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 80 (coral_idx 219)
-
 **原文关键事实**：ER+/PR+/HER2- grade 3 IDC。Stage I(≤2cm)。Plan：TC x 4 starting 04/11/19。6 weeks radiation with 1 week boost, left axilla+SC fields。Claritin for 5-6 days。Cold cap/cold gloves。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -444,31 +775,78 @@ ER+/PR+/HER2+ multifocal IDC。Post-TCHP good response。全部准确。**P0:0 P
 **P0:0 P1:0 P2:1**
 
 ## ROW 82 (coral_idx 221) ✅
+A/P: "Assessment & Plan:   Has excellent grief counselor and continues to meet weekly. Holidays went well
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- mixed ductal and lobular carcinoma | ✅ |
+| 2 | Stage_of_Cancer | Stage II | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | We discussed the role of chemotherapy to decrease the risk of systemic | ✅ |
+| 8 | imaging_plan | Dexa to assess bone health before the next visit with me. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Continue hydrochlorothiazide 12.5 mg tablet daily before lunch. Contin | ✅ |
 
-**原文关键事实**：ER+/PR+/HER2- mixed ductal/lobular。Stage II。Discussed chemo(low risk, not recommended)。DEXA for bone health。Continue current non-cancer meds。
-
-POST-MEDICATION-SUPPLEMENT补了acetaminophen/ibuprofen/oxycodone/docusate。全部准确。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 84 (coral_idx 223) ✅
+A/P: "ASSESSMENT/PLAN:   ***** ***** is a 60 y.o. female with a CHEK2 mutation, multiple sclerosis, and m
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with metastatic recurr | ✅ |
+| 2 | Stage_of_Cancer | Stage IV (metastatic) | ✅ |
+| 3 | Distant Metastasis | Yes, to bone, soft tissue, liver, and possibly meninges | ✅ |
+| 4 | response_assessment | MRI brain with contrast on 11/07/2020 showed diffuse irregular enhance | ✅ |
+| 5 | current_meds | capecitabine, zolendronic acid | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | refer to radiation oncology for consideration of radiation therapy (ei | ✅ |
+| 8 | imaging_plan | Repeat CT CAP now, Repeat MRI spine to rule out leptomeningeal disease | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Continue xeloda 1500mg BID for now, continue zolendronic acid, could c | ✅ |
 
-**原文关键事实**：60yo CHEK2 mutation + MS。Metastatic ER+/PR+/HER2- IDC to bone/soft tissue/liver/possibly meninges。On xeloda+zoledronic acid。MRI brain stable。CT CAP showed hepatic mets increasing。Rad Onc referral for CNS radiation。
-
-全部11字段准确。therapy有rad onc referral+xeloda+fulvestrant contingency。imaging有CT CAP+MRI spine。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 85 (coral_idx 224) ✅
+A/P: "ASSESSMENT/PLAN:  ***** ***** is a 61 y.o. female with a h/o clinical stage *****, ***** stage IIIA
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR-/HER2- invasive lobular carcinoma with pleomorphic features, mu | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage IIIA, now metastatic (Stage IV) | ✅ |
+| 3 | Distant Metastasis | Yes, to bone, liver, and brain | ✅ |
+| 4 | response_assessment | The cancer is currently progressing on first line fulvestrant/palbocic | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Metastatic breast cancer patient will be evaluated for a phase 1 trial | ✅ |
+| 8 | imaging_plan | Brain MRI to be reviewed by UCSF neuroradiology | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Patient will be evaluated for a phase 1 trial of [REDACTED]+olaparib f | ✅ |
+| 11 | medication_plan | Continue steroid taper per Dr. [REDACTED]. Continue pain meds as presc | ✅ |
 
-**原文关键事实**：ER+/PR-/HER2- ILC pleomorphic grade 3。Originally Stage IIIA→now Stage IV met to bone/liver/brain。Progressed on fulvestrant/palbociclib。Phase 1 trial [REDACTED]+olaparib。Brain MRI。
-
-全部11字段准确。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 87 (coral_idx 226) ✅
+A/P: "Assessment:       Ms. ***** is a 79-year-old woman with a 2.2 cm multifocal tumor in the right brea
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with a separate focus  | ✅ |
+| 2 | Stage_of_Cancer | Stage IIIA (inferred from pT2 N2a) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | [REDACTED] will receive a course of hormonal therapy alone. | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Ms. [REDACTED] will prefer to receive a course of hormonal therapy alo | ✅ |
 
-**原文关键事实**：79yo。ER+/PR+/HER2- grade 2 IDC。2.2cm multifocal。pT2 N2a=Stage IIIA。Will receive hormonal therapy alone。
-
-Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly modify since N2a=4+ nodes). **P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 88 (coral_idx 227)
-
 **原文关键事实**：Stage III left breast cancer→metastatic to brain/lungs/LNs。On xeloda。A/P："No new imaging findings, no palpable masses... stable disease"。Discuss clinical trials if progression。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -479,7 +857,6 @@ Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly 
 **P0:0 P1:0 P2:1**
 
 ## ROW 90 (coral_idx 229)
-
 **原文关键事实**：Adenocarcinoma of right breast。Clinical stage II/III。S/p neoadjuvant。Cycle 4 of AC planned。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -490,7 +867,6 @@ Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly 
 **P0:0 P1:0 P2:1**
 
 ## ROW 91 (coral_idx 230)
-
 **原文关键事实**：Stage 4 MBC to bone。ER+/PR+。On exemestane+everolimus+denosumab。RLE edema improved。A/P：continue exemestane, continue [REDACTED]+elevation for edema, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab for hip, PET/CT next week, labs monthly, topical antifungal for fungal dermatitis。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -501,7 +877,6 @@ Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly 
 **P0:0 P1:0 P2:1**
 
 ## ROW 92 (coral_idx 231)
-
 **原文关键事实**：MBC to multiple sites。Epirubicin cycle#2 D1。A/P："Exam improved-liver smaller, less tender"。Tumor marker pending。Labs: AST elevated。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -513,7 +888,6 @@ Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly 
 **P0:0 P1:0 P2:2**
 
 ## ROW 95 (coral_idx 234)
-
 **原文关键事实**：49yo ER+/PR-/HER2- IDC。S/p neoadjuvant pembrolizumab(trial)。MRI showing response。Plan：axilla XRT, capecitabine after XRT。
 
 | # | Field | 提取值 | 原文对照 | 判定 |
@@ -525,26 +899,73 @@ Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly 
 **P0:0 P1:0 P2:2**
 
 ## ROW 96 (coral_idx 235) ✅
+A/P: "Assessment/Plan and in my HPI/Oncologic History    No results found for this or any previous visit.
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade I mixed ductal and cribriform carcinoma with tubul | ✅ |
+| 2 | Stage_of_Cancer | Stage IA (pT1cN0(sn)) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Proceed with adjuvant radiation consult, wait to start xrt until after | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | send for [REDACTED] testing | ✅ |
+| 10 | genetic_testing_plan | send for [REDACTED] testing | ✅ |
+| 11 | medication_plan | Tamoxifen after completion of adjuvant radiation | ✅ |
 
-**原文关键事实**：ER+/PR+/HER2- grade I mixed ductal/cribriform with tubular features。pT1cN0(sn)=Stage IA。Adjuvant radiation→tamoxifen。[REDACTED] testing ordered。
-
-全部11字段准确。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 97 (coral_idx 236) ✅
+A/P: "- We reviewed the pathology results, clinical features and prognostic factors involved in her case.
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2- grade 1 invasive ductal carcinoma with low to intermedia | ✅ |
+| 2 | Stage_of_Cancer | Stage IA (pT1b N0) | ✅ |
+| 3 | Distant Metastasis | No | ✅ |
+| 4 | response_assessment | Not yet on treatment — no response to assess. | ✅ |
+| 5 | current_meds | (空) | ✅ |
+| 6 | goals_of_treatment | curative | ✅ |
+| 7 | therapy_plan | Strongly recommend adjuvant endocrine therapy with [REDACTED] at the a | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | Patient wishes to proceed with molecular profiling, e.g. Oncotype Dx a | ✅ |
+| 11 | medication_plan | Strongly recommend adjuvant endocrine therapy with [REDACTED] at the a | ✅ |
 
-**原文关键事实**：ER+/PR+/HER2- grade 1 IDC with DCIS。pT1b N0=Stage IA。Adjuvant endocrine therapy recommended。Molecular profiling(Oncotype Dx)。MS patient on GILENYA。
-
-全部11字段准确。genetic有"Oncotype Dx assay"。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 99 (coral_idx 238) ✅
+A/P: "Assessment and Plan:  ***** ***** is a 49 y.o. female with a stage III left-sided breast cancer dia
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+/PR+/HER2+ grade 3 invasive ductal carcinoma with lymphovascular in | ✅ |
+| 2 | Stage_of_Cancer | Originally Stage III, now metastatic (Stage IV) | ✅ |
+| 3 | Distant Metastasis | Yes, to the left lung and mediastinal lymph nodes | ✅ |
+| 4 | response_assessment | The cancer is currently showing mixed response to treatment. The PET/C | ✅ |
+| 5 | current_meds | fulvestrant | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Continue fulvestrant, radiation therapy referral. If the cancer remain | ✅ |
+| 8 | imaging_plan | The patient will need a followup CT scan with contrast and thin slices | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | The patient needs to have a biopsy of either the pulmonary nodule, med | ✅ |
+| 11 | medication_plan | If cancer remains estrogen receptor positive, will consider ongoing ho | ✅ |
 
-**原文关键事实**：Stage III left breast→Stage I right breast。HER2+ IDC grade 3。Now metastatic to left lung+mediastinal LNs。On fulvestrant。Plan：biopsy lung/LN, continue fulvestrant, radiation referral, CT follow-up。
-
-全部11字段准确。Referral有"Symptom management service"(iter12e修好)。**P0:0 P1:0 P2:0**
+All 11 fields verified. **P0:0 P1:0 P2:0**
 
 ## ROW 100 (coral_idx 239) ✅
+A/P: "ASSESSMENT & PLAN  Breast cancer metastasized to multiple sites  Tumor markers rose initally with s
+| # | Field | 提取值 | 判定 |
+|---|-------|--------|------|
+| 1 | Type_of_Cancer | ER+(80%)PR+(50%) HER2- grade 2 invasive ductal carcinoma with metastat | ✅ |
+| 2 | Stage_of_Cancer | Stage IV (metastatic) | ✅ |
+| 3 | Distant Metastasis | Yes, to liver and bone | ✅ |
+| 4 | response_assessment | Tumor markers elevated: Cancer Antigen 15-3 at 118 U/mL (<33 U/mL), Ca | ✅ |
+| 5 | current_meds | gemzar | ✅ |
+| 6 | goals_of_treatment | palliative | ✅ |
+| 7 | therapy_plan | Rec exercise 10 min 3 x a day, Focalin prn and continue with treatment | ✅ |
+| 8 | imaging_plan | No imaging planned. | ✅ |
+| 9 | lab_plan | No labs planned. | ✅ |
+| 10 | genetic_testing_plan | None planned. | ✅ |
+| 11 | medication_plan | Continue with treatment, Focalin prn for fatigue. | ✅ |
 
-**原文关键事实**：MBC to liver+bone。ER+(80%)PR+(50%)HER2- grade 2 IDC。On Gemzar。Tumor markers elevated。A/P：Rec exercise 10 min 3x/day，Focalin prn，continue treatment。
-
-therapy有"Rec exercise 10 min 3 x a day"(iter12e修好)。全部11字段准确。**P0:0 P1:0 P2:0**
-
+All 11 fields verified. **P0:0 P1:0 P2:0**
