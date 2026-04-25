@@ -180,22 +180,164 @@
 
 
 ## ROW 22
-MBC, PET good response, on arimidex+denosumab. Letter准确描述了disease history/treatment response/PET findings/pneumonitis from abemaciclib. 提到PET CT follow-up plan. **P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "You came in for a new patient evaluation and second opinion regarding your breast cancer treatment" | 原文"New Patient Evaluation" + "She is here for a second opinion" ✓ | ✅ |
+| "history of left breast cancer in 1994 and right breast cancer in 2000" | 原文"left ER+ DCIS in 1994" + "right stage II IDC in 2000" ✓ | ✅ |
+| "In May 2020, the cancer returned and spread to your chest wall, bones, and lymph nodes" | 原文"right chest wall recurrence...metastatic lesions in the bones, chest wall, right infraclavicular and right IM nodes" ✓ | ✅ |
+| "Tests done in November 2020 and April 2021 showed that the treatment was working well" | 原文"PET scan on 11/03/20 and 04/24/21 showed a good response" ✓ | ✅ |
+| "you developed lung irritation (pneumonitis), possibly due to a medicine called abemaciclib, which was stopped" | A/P "Pneumonitis due to abemaciclib...abemaciclib discontinued" ✓，通俗解释pneumonitis为"lung irritation" ✓ | ✅ |
+| "During your physical exam, no new problems were found" | PE: no palpable masses, no skin changes, no lymphadenopathy, no edema, no chest wall mass ✓ | ✅ |
+| "The medicine abemaciclib was stopped because of lung irritation" | A/P "abemaciclib discontinued" due to pneumonitis ✓ | ✅ |
+| "letrozole, was changed to anastrozole in July 2020 due to skin rash" | 原文"Letrozole was switched to anastrozole in July 2020 due to skin rash" ✓ | ✅ |
+| "The dose of another medicine was reduced and you have been on since October 2020" | 原文"dose reduced...on 150 mg bid since October 2020"（药名被redacted）。**句子语法不完整，缺"it"或剂量** | P2 |
+| "You will have a PET CT scan now to see how the cancer is doing" | A/P "I recommend a pet ct now" ✓ | ✅ |
+| "If the scan shows the cancer is stable, you will continue taking anastrozole" | A/P "if stable continue arimidex alone" ✓（arimidex=anastrozole） | ✅ |
+| "If the scan shows the cancer has gotten worse, you might need...Faslodex...if you have a certain gene mutation" | A/P "If pet ct shows progression could use faslodex with ***** if she has a ***** mutation" ✓ | ✅ |
+| "Other future options include...Afinitor or Xeloda or joining a clinical trial" | A/P "Future options include hormone blockade with afinitor or xeloda or a clinical trial" ✓ | ✅ |
+| "You are currently on full code status" | Code status "Full code" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句都有原文依据，无编造
+- 通俗性 ✅ "lung irritation" 解释 pneumonitis
+- 完整性 ✅ 涵盖 A/P 所有 7 条
+- 未提及当前 prednisone/xgeva，但这些是支持治疗，非核心 plan item
+- 语法瑕疵："you have been on since October 2020" 缺主语/剂量
+
+**P0:0 P1:0 P2:1**（语法不完整）
 
 ## ROW 24
-Early stage micropapillary mucinous。Letter准确描述surgery结果/radiation+AI plan/MammaPrint testing。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "You came in for a new visit regarding your breast cancer treatment" | 原文 s/p partial mastectomy，来讨论 systemic therapy options ✓ | ✅ |
+| "ER+/PR+/HER2- grade II micropapillary mucinous carcinoma (a type of cancer that makes mucus)" | pathology: ER+(>95%), PR+(80%), HER2 neg by FISH ✓，"makes mucus"通俗解释mucinous ✓ | ✅ |
+| "The cancer is in stage III and has not spread to other parts of your body" | extraction Stage III ✓，PET/CT "No definite sites of hypermetabolic metastatic disease" ✓ | ✅ |
+| "Imaging shows a large mass in your right breast and some changes in your lymph nodes. These findings are part of your initial diagnosis" | 原文 6.4cm mass + right axillary LN irregular morphology ✓。"part of your initial diagnosis" 正确定位为术前 imaging ✓ | ✅ |
+| "You are taking acetaminophen-codeine (TYLENOL #4) and oxyCODONE (ROXICODONE) for pain" | medication list 有这两个 ✓ | ✅ |
+| "You will have a test called a medication test today to see if you need chemotherapy" | A/P "I will order a ***** test today to evaluate her benefit, if any, of chemotherapy" ✓。**但"medication test"是错误术语——实际是基因组检测(MammaPrint)** | P2 |
+| "If the test shows low risk, you will start...adjuvant hormone therapy. This treatment helps prevent the cancer from coming back" | A/P "If low risk...start adjuvant ***** hormone therapy" ✓，通俗解释adjuvant ✓ | ✅ |
+| "scheduled to see a doctor in radiation oncology on December 7th, 2018" | A/P "scheduled to see Dr. ***** in radiation oncology 12/07/18" ✓ | ✅ |
+| "We will send your surgical specimen for further testing called MP" | A/P "We will send her sugical specimen for MP" ✓。**但"MP"未做通俗解释，患者不理解** | P2 |
+| "You have been referred to physical therapy" | A/P "I recommended she see PT and placed a referral" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ⚠️ "medication test" 替代 redacted 检测名但术语不准确；"MP" 未解释
+- 完整性 ✅ 涵盖 A/P 主要 plan items + PT referral + radiation appt
+- "a type of cancer that makes mucus" 解释 mucinous 很好
+
+**P0:0 P1:0 P2:2**（"medication test"误称 + "MP"未解释）
 
 ## ROW 29
-Multifocal IDC, start letrozole, RT planned。Letter准确描述了所有plan items including calcium/VitD/bone density scan。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "You came in for a medical oncology consultation regarding your newly diagnosed breast cancer" | 原文"presents for medical oncology consultation" ✓ | ✅ |
+| "invasive ductal carcinoma...started in the milk ducts...grade 2, which means it grows and spreads at a medium speed" | pathology: Grade 2 IDC ✓，通俗解释 grade 2 ✓ | ✅ |
+| "sensitive to estrogen and progesterone but does not have a protein called HER2" | ER+/PR+/HER2- ✓，"sensitive to estrogen"通俗化 ER+ ✓ | ✅ |
+| "cancer has spread to a small area in one of the lymph nodes under your arm" | pathology "Micrometastatic carcinoma in one lymph node, 0.5 mm" ✓，"small area"通俗化 micrometastasis ✓ | ✅ |
+| "The goal of your treatment is to cure the cancer" | Early stage + adjuvant therapy = curative ✓ | ✅ |
+| "started taking a medication called letrozole...helps stop the growth of cancer cells by lowering the amount of estrogen" | A/P "Start letrozole 2.5mg PO daily now" ✓，机制解释准确 ✓ | ✅ |
+| "advised to take calcium supplements to help keep your bones strong" | A/P "Calcium supplementation with 1200mg/day" ✓ | ✅ |
+| "referred to radiation oncology for a consultation" | A/P "RT planning per *****" ✓ | ✅ |
+| "bone density scan when you return from your travels" | A/P "Bone density scan can be completed when she returns from *****" ✓ | ✅ |
+| "scheduled to have surgery in September 2019" | A/P "Surgical planning per Dr. *****, tentatively scheduled for September 2019" ✓ | ✅ |
+| "establish long-term oncology follow-up closer to your home" | A/P "likely establish her long-term oncology follow up closer to home" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ "milk ducts"、"medium speed"、"sensitive to estrogen" 都是优秀的通俗化
+- 完整性 ⚠️ 漏了 MammaPrint Low Risk 结果和"不需要化疗"的核心结论——这是整个就诊的中心话题，但 letter 并未误导（没说需要化疗）
+- 未提及 Vitamin D supplement（minor）
+
+**P0:0 P1:0 P2:1**（漏 MammaPrint/no-chemo rationale）
 
 ## ROW 30
-Neoadjuvant TCHP for HER2+。Letter详细解释了两个chemo regimen options, TTE, port placement, chemo teaching。非常完整。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "consultation to discuss treatment options for your recent diagnosis of breast cancer" | 原文 "presents in consultation to discuss treatment options and to establish care" ✓ | ✅ |
+| "invasive ductal carcinoma...started in the milk ducts" | pathology IDC ✓ | ✅ |
+| "**has spread to some nearby lymph nodes**" | **错误！** 原文 FNA of right axillary LN: "no metastatic adenocarcinoma"。A/P 明确说 "high-risk **node-negative**"。PET 显示 axillary LN 有轻度摄取但活检阴性。**Letter 错误告知患者癌症已扩散到淋巴结** | **P1** |
+| "ER-/PR-/HER2+, which means it does not have certain proteins that can be targeted by specific treatments" | receptor status ER-/PR-/HER2+ ✓ 但解释**误导**：HER2+恰恰是可靶向治疗的（trastuzumab/pertuzumab），letter 说"does not have certain proteins that can be targeted"暗示不可靶向 | P2 |
+| "considered potentially curable with the right treatment" | A/P "can now be treated with curative intent" ✓ | ✅ |
+| "neoadjuvant chemotherapy...chemotherapy before surgery to help shrink the cancer" | A/P neoadjuvant approach ✓，通俗解释 ✓ | ✅ |
+| "12 cycles weekly paclitaxel+trastuzumab/pertuzumab (THP)→4 cycles AC every 2 weeks or 6 cycles every 3 week TCHP" | A/P 完全一致 ✓，保留了具体药名 ✓ | ✅ |
+| "continue with trastuzumab for a total of one year" | A/P "every 3 week trastuzumab for a total of one year" ✓ | ✅ |
+| "TTE (echocardiogram) to check how well your heart is working" | A/P "She would need a TTE" ✓，通俗解释 ✓ | ✅ |
+| "Mediport placed to make it easier to give you the chemotherapy" | A/P "Mediport placement" ✓ | ✅ |
+| "radiation treatment as part of your overall treatment plan" | A/P "treatment recommendations will include...radiation" ✓ | ✅ |
+| "contact your care team after the weekend to decide...treatment at your treatment center or elsewhere closer to home" | A/P ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ❌ "has spread to some nearby lymph nodes" 与原文矛盾——患者是 node-negative
+- 通俗性 ⚠️ HER2+ 靶向性解释不当
+- 完整性 ✅ 涵盖两个 regimen 选项、TTE、Mediport、radiation、follow-up
+- 药名保留 ✅ paclitaxel, trastuzumab, pertuzumab 等全部保留
+
+**P0:0 P1:1 P2:1**（P1: node-negative 误写成 node spread; P2: HER2+ 解释误导）
 
 ## ROW 33
-ILC on letrozole, no recurrence。Letter简洁准确："no sign of cancer coming back"。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | 原文 follow up for left ER+ LN+ breast cancer ✓ | ✅ |
+| "no signs of the cancer coming back" | A/P "no evidence of recurrence" ✓ | ✅ |
+| "no lumps found, and no changes in the skin" | PE: no palpable masses, no skin changes ✓ | ✅ |
+| "small, soft lymph node was found in the left neck, but it is not concerning" | PE: "left neck high <1cm LN soft and mobile" ✓，正确告知患者无需担忧 ✓ | ✅ |
+| "continue taking letrozole daily" | A/P "Continue letrozole daily" ✓ | ✅ |
+| "calcium and vitamin D daily" | A/P "Continue calcium and vitamin D daily" ✓ | ✅ |
+| "NSAIDs (pain relievers) with food if needed" | A/P "NSAIDs with food as needed" ✓，"(pain relievers)"通俗化 ✓ | ✅ |
+| "continue exercising and doing weight-bearing activities" | A/P "weight bearing exercise" ✓ | ✅ |
+| "If a certain medication continues to cause issues, an MRI of the brain might be considered" | **误解**：原文是"If [headaches] continues, consider MRI brain" — 是头痛持续就做 MRI，不是药物问题。extraction 的 [REDACTED] 是头痛被 redact | P2 |
+| "return to the clinic in 6 months for a routine follow-up visit" | A/P "Return to clinic in 6 months" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ⚠️ MRI brain 原因误解（头痛→药物问题）
+- 通俗性 ✅ 简洁易懂，(pain relievers) 解释 NSAIDs
+- 完整性 ✅ 涵盖所有 A/P 要点
+
+**P0:0 P1:0 P2:1**（MRI brain 原因误解）
 
 ## ROW 34
-Second local relapse。Letter准确："cancer has unfortunately come back for the second time"。提到tamoxifen+radiation referral。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | 原文 ✓ | ✅ |
+| "local recurrence in your left breast" | HPI "here again with a local recurrence" ✓ | ✅ |
+| "1.7cm invasive ductal carcinoma...starts in the milk ducts" | pathology "invasive ductal ca 1.7cm, grade 3" ✓ | ✅ |
+| "extensive necrosis, which means parts of the cancer have died" | pathology "extensive *****" (redacted)，extraction 解读为 necrosis ✓，通俗解释 ✓ | ✅ |
+| "invaded the muscles" | pathology "skeletal muscle invasion" ✓ | ✅ |
+| "edges of the removed tissue are clean" | "margins negative" ✓，"clean"通俗化 ✓ | ✅ |
+| "small area of concern in your left breast and a small spot in your rib that needs further investigation" | PET-CT: hypermetabolic tumor + focal uptake left 6th rib "of unclear significance" ✓ | ✅ |
+| "No other signs of cancer were found in your lymph nodes or elsewhere" | FNA L axillary LN negative, Brain MRI negative ✓ | ✅ |
+| "start taking tamoxifen, a medication used to treat breast cancer" | A/P "tamoxifen 20mg PO qD" ✓ | ✅ |
+| "you had stopped taking...arimidex, which might have allowed the cancer to come back" | A/P "recurrence did occur a year after stopping anastrozole against medical advice" ✓——语气较直但反映临床事实 | ✅ |
+| "referred to...radiation oncology...chest wall radiation therapy...two local recurrences" | A/P "chest wall RT...two local recurrences...accepts a referral now" ✓ | ✅ |
+| "basic blood tests checked" | A/P "check labs" ✓ | ✅ |
+| "return to the clinic in 6 months" | A/P ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ 优秀：milk ducts, clean edges, muscles, parts have died
+- 完整性 ✅ tamoxifen + RT referral + labs + follow-up
+- 未提及 CALOR study/no-chemo rationale（与 ROW 29 类似情况，但 letter 没误导）
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 36
 Mixed ductal/mucinous on Abraxane+zoladex。Letter准确描述PET findings, continue Abraxane+tamoxifen+zoladex, doppler for DVT。**P0:0 P1:0 P2:0** ✅
