@@ -340,58 +340,359 @@
 **P0:0 P1:0 P2:0** ✅
 
 ## ROW 36
-Mixed ductal/mucinous on Abraxane+zoladex。Letter准确描述PET findings, continue Abraxane+tamoxifen+zoladex, doppler for DVT。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | cycle 8 of abraxane ✓ | ✅ |
+| "swelling in your right arm and hand" | HPI "right arm swelling and numbness about 4-5 days ago" ✓ | ✅ |
+| "Doppler will be done to check if there is a blood clot" | A/P "will get doppler to r/o DVT" ✓，"blood clot"通俗化 DVT ✓ | ✅ |
+| "No new cancer growth or spread was found" | PET/CT: post-surgical changes only, no metastatic disease ✓ | ✅ |
+| "switched to Abraxane after having a bad reaction to Taxol" | A/P "grade 3 infusion reaction with cycle 1...changed to Abraxane" ✓ | ✅ |
+| "continue taking medications to manage nausea and anxiety" | A/P: continue zofran/compazine/ativan + lexapro ✓ | ✅ |
+| "continue receiving weekly treatments with Abraxane" | A/P "Continue weekly Abraxane 100mg/m2 x 12 cycles" ✓ | ✅ |
+| "referred to a radiation oncologist for further treatment" | A/P "radiation oncology referral, will see Dr. ***** next week" ✓ | ✅ |
+| "Doppler test to check for blood clots" | A/P ✓ | ✅ |
+| "next clinic visit is in 2 weeks" | A/P "RTC 2 weeks" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ "blood clot"、"bad reaction"
+- 完整性 ✅ 涵盖主要 A/P items
+- 未提及 zoladex（ovarian reserve preservation对27岁患者重要）和 valtrex/lexapro/ambien 等，但 letter 不需要列全所有药
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 40
-MS patient on letrozole。Letter"cancer treatment needs to be carefully managed alongside MS" ✓。Letrozole+Prolia+DEXA。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "visit to talk about treatment options for your breast cancer" | 原文 "here to discuss systemic therapy options" ✓ | ✅ |
+| "early-stage breast cancer...started in the milk ducts...low-grade type" | Stage 2, G1 IDC ✓ | ✅ |
+| "does not have a protein called HER2" | HER2 2+ FISH negative ✓ | ✅ |
+| "cancer has not spread to other parts of your body" | No distant metastasis ✓ | ✅ |
+| "edges of the removed tissue are clean, which is a good sign" | "Margins widely negative" ✓，通俗化 ✓ | ✅ |
+| "letrozole...helps prevent the cancer from coming back" | A/P "Rx for letrozole given" ✓ | ✅ |
+| "continue to take Prolia to protect your bones" | A/P "on Prolia now" + osteoporosis history ✓ | ✅ |
+| "DEXA to check the health of your bones" | A/P "DEXA" ✓ | ✅ |
+| "referred to physical therapy to help with your recovery" | A/P "PT referral" ✓ | ✅ |
+| "return for another visit in 3 months" | A/P "RTC 3 months" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ milk ducts, clean edges, protect your bones
+- 完整性 ✅ 涵盖 letrozole + Prolia + DEXA + PT + follow-up
+- 未提及 MS（但 letter 聚焦癌症治疗，患者已知自己有 MS）
+- 未提及"不需要化疗"的决定（与 ROW 29 类似模式）
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 41
-ATM carrier, AC-Taxol planned。Letter详细解释chemo plan(Taxol→AC)+ovarian suppression+AI+ribociclib trial eligibility。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | 讨论 adjuvant chemo ✓ | ✅ |
+| "3 cm grade 3 invasive ductal carcinoma in your left breast" | pathology ✓ | ✅ |
+| "cancer has spread to one of the lymph nodes under your arm" | "1 of 3 left axillary SLN was involved with micrometastasis" ✓ | ✅ |
+| "sensitive to estrogen (ER+) and does not strongly react to progesterone (PR weakly+)" | ER+ 90%, PR weakly+ 1% ✓，通俗化 ✓ | ✅ |
+| "does not have a protein called HER2" | HER2 1+ IHC (=negative) ✓ | ✅ |
+| "heart is working well, with a left ventricular ejection fraction of 79%" | MUGA scan LVEF 79% ✓ | ✅ |
+| "ultrasound...no signs of cancer...swelling and fluid around the tissue expander" | L breast US: benign, subcutaneous edema, trace fluid ✓ | ✅ |
+| "Taxol for 12 weeks, followed by another treatment called AC" | A/P "Taxol for 12 weeks FOLLOWED by AC" ✓ | ✅ |
+| "take a medication to stop your ovaries from making estrogen" | A/P "ovarian suppression with an aromatase inhibitor" ✓，通俗解释 ✓ | ✅ |
+| "join a study with a medication called ribociclib" | A/P "eligible for the ***** trial (with ribociclib)" ✓ | ✅ |
+| "port placed soon to make it easier to give you chemotherapy" | HPI "port placement later this week" ✓ | ✅ |
+| "appointment early next week with your doctor at your treatment center" | HPI ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ "stop ovaries from making estrogen"、"does not strongly react"
+- 完整性 ✅ chemo plan + ovarian suppression + trial + port + follow-up
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 42
-Post-radiation, tamoxifen 5 years。Letter准确：finished radiation, ready for anti-hormonal, mammogram scheduled。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | routine follow up ✓ | ✅ |
+| "two small areas of cancer in your right breast, both of which were successfully removed" | pathology: 0.9cm + 0.3cm IDC, clear margins ✓ | ✅ |
+| "cancer did not spread to the lymph nodes" | "zero of 5 lymph nodes involved" ✓ | ✅ |
+| "finished radiation therapy on January 5 and tolerated it well" | 原文 "finished...radiation therapy...January 05...tolerated this therapy well" ✓ | ✅ |
+| "physical exam, everything looked normal, with no signs of cancer" | PE normal ✓ | ✅ |
+| "tamoxifen for five years...helps prevent the cancer from coming back" | A/P "5 year course of tamoxifen therapy" ✓ | ✅ |
+| "return to the clinic in 4-6 weeks to see how you are doing with the tamoxifen" | A/P "Return to clinic in 4-6 weeks to assess tolerance" ✓ | ✅ |
+| "routine mammogram to check your breast" at next appt | A/P "routine diagnostic mammogram on the day of our next appointment" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 简洁准确，无编造
+- 通俗性 ✅ "successfully removed"、"prevent the cancer from coming back"
+- 完整性 ✅ tamoxifen + mammogram + follow-up
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 44
-BRCA1, post-NAC, clinical trial for radiation。Letter详细描述了surgical pathology+trial+AI after radiation+Zoladex contingency。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit regarding your breast cancer treatment" | ✓ | ✅ |
+| "pathology...small amount of remaining cancer" | 1cm residual IDC ✓ | ✅ |
+| "tiny spot that might be cancerous" | 0.x cm suspicious finding ✓ | ✅ |
+| "right breast is healthy" | right breast benign ✓ | ✅ |
+| "small spot in your lung, but it hasn't changed" | 4mm pulmonary nodule, stable on CT ✓ | ✅ |
+| "surgery scars are healing well...no new lumps" | recovering from surgery ✓ | ✅ |
+| "stiffness in your shoulders and arms, with limited movement" | A/P "limited ROM in bilateral arms" ✓ | ✅ |
+| "HYDROcodone-acetaminophen (NORCO) to help with pain" | current medications ✓ | ✅ |
+| "aromatase inhibitor after finishing radiation" | A/P "start an AI after she completes radiation" ✓ | ✅ |
+| "might not need another medicine to stop your ovaries from working if you decide to have your ovaries removed" | A/P "may not require ovarian suppression" if BSO ✓，通俗化 ✓ | ✅ |
+| "radiation...3 or 5 weeks" | clinical trial randomization ✓ | ✅ |
+| "CT scan of your chest...in one year" | A/P "follow up CT Chest in one year" ✓ | ✅ |
+| "referred to physical therapy for shoulder and arm stiffness" | A/P "Referred to PT" ✓ | ✅ |
+| "December 2nd to talk about removing your ovaries" | A/P "see Dr. ***** on 12/02/18 to discuss bilateral oophorectomy" ✓ | ✅ |
+| "follow-up visit with us on January 5th" | A/P "Follow up on 01/05/19" ✓ | ✅ |
+
+**Letter 整体评价**：
+- 准确性 ✅ 每句有原文依据，无编造
+- 通俗性 ✅ "stop your ovaries from working"、"removing your ovaries"
+- 完整性 ✅ 非常全面：radiation trial + AI + BSO + CT chest + PT + nutrition omitted but acceptable
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 46
-Post-bilateral mastectomy, letrozole+abemaciclib discussed。Letter详细描述了pathology(3.5cm residual, 2/2 nodes+)+letrozole+abemaciclib+MRA+DEXA+pain meds。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "surgery to remove part of your right breast, but there is still some cancer left" | pathology: margin-positive at multiple foci ✓ | ✅ |
+| "cancer has spread to two lymph nodes under your arm" | "2 lymph nodes involved by metastatic carcinoma" ✓ | ✅ |
+| "sarcoidosis affecting the lymph nodes in your chest" | 原文 sarcoidosis concern ✓ | ✅ |
+| "nails have darkened, but no signs of infection" | PE findings ✓ | ✅ |
+| "letrozole today...prevents the cancer from coming back" | A/P ✓ | ✅ |
+| "abemaciclib after you finish radiation treatment" | A/P ✓ | ✅ |
+| "continue naproxen for pain and acetaminophen if needed" | meds ✓ | ✅ |
+| "Allegra daily and iron supplements" | meds ✓ | ✅ |
+| "surgery to remove the remaining cancer" | positive margins → re-excision ✓ | ✅ |
+| "MRA of your abdomen in one year" | A/P ✓ | ✅ |
+| "DEXA scan to check your bone density" | A/P ✓ | ✅ |
+| "follow up with radiation oncologist after surgery date is set" | A/P ✓ | ✅ |
+| "appointment in 2-3 months" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — 非常全面，涵盖所有 A/P items
 
 ## ROW 49
-New diagnosis, tamoxifen planned。Letter准确描述了new diagnosis/surgery first/endocrine therapy/thrombophilia assessment。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "first visit regarding your recent diagnosis of left breast cancer" | new diagnosis ✓ | ✅ |
+| "invasive ductal carcinoma...milk ducts...ER+...PR+...HER2-" | pathology ✓ | ✅ |
+| "spread to nearby lymph nodes, but not to other parts of your body" | biopsy-proven nodal disease, Stage 2 ✓ | ✅ |
+| "surgery to remove your left breast, called a mastectomy" | A/P "L mastectomy" ✓ | ✅ |
+| "plan for medication depends on the results of the surgery and how many lymph nodes have cancer" | A/P "subject to change based on the results of the surgery and lymph node evaluation" ✓ | ✅ |
+| "tamoxifen, but depends on checking if you have a higher risk of blood clots" | A/P: father's PE history, thrombophilia assessment ✓ | ✅ |
+| "radiation treatment...based on how much cancer is found in the lymph nodes" | A/P "role of XRT in management of lymph-node positive disease" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — 准确涵盖手术+tamoxifen+thrombophilia+XRT
 
 ## ROW 50
-De novo metastatic, on ibrance/letrozole/lupron。Letter准确描述metastatic disease under control + current meds + genetics referral PMS2。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit...considering a mastectomy and second opinion" | A/P ✓ | ✅ |
+| "HR+ HER2- metastatic breast cancer with IDC and DCIS" | A/P ✓ | ✅ |
+| "cancer has spread to multiple sites throughout your body" | de novo metastatic (July 2013) ✓ | ✅ |
+| "December 2021 shows...metastatic disease is under good control" | A/P "disease is under great control as of imaging December 2021" ✓ | ✅ |
+| "biopsy of the left breast revealed IDC and DCIS" | A/P "Progression in the left breast...biopsy with DCIS and IDC" ✓ | ✅ |
+| "palliative care" | metastatic = palliative ✓ | ✅ |
+| "**Lupron, letrozole, and ibrance were added to your treatment plan in January 2015**" | A/P: lupron+letrozole started **October 2014**, ibrance added **January 2015**。Letter 把三药都归到 January 2015 | P2 |
+| "referred to genetics for pathogenic PMS 2 mutation" | A/P ✓ | ✅ |
+| "full code status" | code status ✓ | ✅ |
+
+**P0:0 P1:0 P2:1**（lupron+letrozole 开始时间不准确：实际 Oct 2014，letter 说 Jan 2015）
 
 ## ROW 51
-教育性note, on Gemzar。Letter"education and teaching session" ✓。描述了Gemzar treatment and potential side effects。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "education visit regarding your medication treatment" | teaching/education visit ✓ | ✅ |
+| "no new clinical findings or changes" | teaching visit, no new findings ✓ | ✅ |
+| "relieve symptoms and improve quality of life" | palliative ✓ | ✅ |
+| "Zofran and Compazine" for side effects | supportive meds ✓ | ✅ |
+| "Gemzar, and another medication" | A/P ✓ | ✅ |
+| "no vaccines or immunizations while taking these medications" | education content ✓ | ✅ |
+| "birth control...condoms...4 months after treatment" | education content ✓ | ✅ |
+| "social work and exercise counseling" | referrals ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 52
-Pre-menopausal, Zoladex+chemo planned。Letter准确描述staging workup/Zoladex/tumor biology testing/egg harvesting。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "first-time visit regarding your breast cancer treatment" | initial consultation ✓ | ✅ |
+| "early-stage breast cancer (Stage I-II)...IDC...ER+/PR+/HER2-" | pathology ✓ | ✅ |
+| "curative" | curative intent ✓ | ✅ |
+| "medication to stop your ovaries from making hormones and another to block the effects of estrogen" | Zoladex + AI ✓，通俗化 ✓ | ✅ |
+| "ondansetron to help with nausea" | supportive ✓ | ✅ |
+| "referred to reproductive health for preserving your ability to have children" | fertility preservation referral ✓ | ✅ |
+| "CT scan and a bone scan" | staging workup ✓ | ✅ |
+| "test to learn more about your cancer and how likely it is to respond to chemotherapy" | Oncotype/MammaPrint ✓ | ✅ |
+| "return in 3 weeks" | follow-up ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 53
-HER2+ IDC neuroendocrine diff, AC/THP planned。Letter详细解释了两个chemo regimen options + genetic counseling referral。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "consultation regarding your recently diagnosed left breast cancer" | ✓ | ✅ |
+| "ER/PR positive and HER2 positive...started in the milk ducts" | pathology ✓ | ✅ |
+| "stage II/III...not spread to distant parts" | A/P ✓ | ✅ |
+| "chemotherapy to shrink the cancer and prevent it from coming back" | adjuvant AC/THP ✓ | ✅ |
+| "Arimidex to block hormones" | hormonal therapy ✓ | ✅ |
+| "radiation treatment to the breast" | A/P ✓ | ✅ |
+| "referred to genetic counseling" | A/P ✓ | ✅ |
+| "find a local oncologist to continue your care" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 54
-BRCA2, oligometastatic to bone。Letter"cancer has spread to a small number of spots in your bones" ✓通俗。Radiation+palbociclib after+DEXA。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer is currently responding with stable disease" | good clinical response ✓ | ✅ |
+| "continue leuprolide every 4 weeks and letrozole" | A/P ✓ | ✅ |
+| "start palbociclib after completing radiation" | A/P ✓ | ✅ |
+| "continue zoledronic acid every 3 months" | A/P ✓ | ✅ |
+| "calcium and vitamin D supplements daily" | A/P ✓ | ✅ |
+| "referred to radiation oncology...post-mastectomy radiation" | A/P ✓ | ✅ |
+| "PET/CT...3-4 months after finishing radiation" | A/P ✓ | ✅ |
+| "DEXA scan" | A/P ✓ | ✅ |
+| "return in 4 weeks" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — 非常全面，oligometastatic management plan 完整覆盖
 
 ## ROW 57
-Initially HER2+→confirmed TNBC。Letter"initially thought to be a different type but later confirmed triple-negative" ✓ 准确描述receptor change。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "second opinion regarding your locally advanced breast cancer" | A/P ✓ | ✅ |
+| "triple-negative breast cancer (TNBC)...does not have receptors for estrogen, progesterone, or HER2" | A/P "appears to be TNBC" ✓，解释 TNBC ✓ | ✅ |
+| "initially treated with chemotherapy before surgery, then had surgery" | neoadjuvant TCH+P → surgery ✓ | ✅ |
+| "healing well, but...swelling in legs and tingling due to chemotherapy" | PE findings ✓ | ✅ |
+| "dose of chemotherapy reduced by 25% after first cycle" | recent changes ✓ | ✅ |
+| "radiation therapy (XRT) soon" | A/P ✓ | ✅ |
+| "genetic counseling and testing" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 59
-Switching letrozole→exemestane for joint pain。Letter"switch to exemestane (Aromasin) because of joint pain" ✓ 保留了specific drug name。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "No new signs of cancer growth" | without evidence of recurrence ✓ | ✅ |
+| "stopped taking letrozole...start exemestane after a short break" | A/P "stop Letrozole...2-3 weeks before starting Exemestane" ✓ | ✅ |
+| "continue Pristiq for depression" | A/P ✓ | ✅ |
+| "refer to a psychiatrist to consider...Duloxetine" | A/P ✓ | ✅ |
+| "right mammogram in July" | A/P ✓ | ✅ |
+| "mammograms and MRIs every six months" | A/P "alternating mammo/MRI" ✓ | ✅ |
+| "see your doctor again in six months" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 61
-Pre-menopausal, newly diagnosed, surgery→endocrine。Letter准确描述pre-surgical consultation + Oncotype Dx + Tamoxifen vs OS+AI options。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "newly diagnosed left breast cancer...ductal carcinoma...ER+ and PR+...no HER2" | ✓ | ✅ |
+| "early stage (Stage I)...not spread" | ✓ | ✅ |
+| "area of concern...biopsy did not find any cancer" | MRI second site biopsy negative ✓ | ✅ |
+| "Tamoxifen or another hormone therapy" | A/P "Tamoxifen vs Ovarian Suppression + *****" ✓ | ✅ |
+| "lumpectomy on April 12, 2021...IORT" | A/P "lumpectomy with IORT...04/12/21" ✓ | ✅ |
+| "will not need additional radiation therapy after the surgery" | A/P "intra-operative RT so will not need post op RT" ✓ | ✅ |
+| "decide if you need chemotherapy based on the results" | A/P "Oncotype Dx after surgery" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 64
-Stage III-IV, probably met to sternum。Letter"cancer may have spread to a bone in your chest called the sternum" ✓ 通俗。Chemo→surgery→radiation+xgeva plan。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "new patient evaluation...second opinion" | ✓ | ✅ |
+| "large left breast cancer...milk ducts...HR positive...no HER2" | A/P ✓ | ✅ |
+| "cancer has spread to your sternum...middle part of your chest bone" | A/P "probably metastatic disease to the sternum" ✓，通俗解释 sternum ✓ | ✅ |
+| "dexamethasone, olanzapine, ondansetron, prochlorperazine" | supportive meds ✓ | ✅ |
+| "biopsy of the bone is positive, you will add xgeva" | A/P ✓ | ✅ |
+| "Additional treatment to the sternum as a single site" | A/P oligometastatic treatment ✓ | ✅ |
+| "keep your chemotherapy on schedule with your current oncologist" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 65
-Neoadjuvant AC/T or ISPY trial。Letter详细描述chemo options/ISPY trial/port placement/genetic testing/research MRI。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...milk ducts" | ✓ | ✅ |
+| "spread to some lymph nodes under your arm" | biopsy-proven LN involvement ✓ | ✅ |
+| "early stage (Stage I-II)...not spread to other parts" | A/P "no evidence of distant metastatic disease" ✓ | ✅ |
+| "neoadjuvant chemotherapy before surgery to shrink the cancer" | A/P ✓ | ✅ |
+| "taxol, followed by four cycles of another combination" | AC/T ✓ | ✅ |
+| "ISPY trial" | A/P ✓ | ✅ |
+| "5-10 years to prevent the cancer from coming back" | endocrine therapy ✓ | ✅ |
+| "port placed" | A/P ✓ | ✅ |
+| "special type of biopsy and MRI...research study" | research biopsy/MRI ✓ | ✅ |
+| "follow-up in 1-2 weeks to start chemotherapy" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 68
-Post-TCHP good response。Letter"MRI shows no visible lesions after 6 cycles" ✓。Surgery discussion+genetic counseling for sons。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "ER+/PR+/HER2+ multifocal invasive ductal carcinoma" | ✓ | ✅ |
+| "good response...6 cycles...combination of chemotherapy and targeted therapy" | 6 cycles TCHP with good response ✓ | ✅ |
+| "cancer has shrunk or disappeared...as seen on your MRI" | MRI shows no visible lesions ✓ | ✅ |
+| "no new lumps" | PE ✓ | ✅ |
+| "bilateral mastectomy...surgery to remove both breasts" | A/P recommended bilateral mastectomy ✓ | ✅ |
+| "lumpectomy instead...need radiation afterward" | A/P ✓ | ✅ |
+| "Radiation...after mastectomy if...widespread or affects lymph nodes" | A/P ✓ | ✅ |
+| "healthy diet and regular exercise" | A/P ✓ | ✅ |
+| "**sons should be tested for...anemia related to a medication and the risk for pancreatic cancer**" | A/P "sons should be tested for risk of ***** anemia in children (if spouse also carries mutation) and pancreatic cancer" — 原文是**遗传性贫血**（可能是 Fanconi anemia），不是"medication-related anemia" | P2 |
+
+**P0:0 P1:0 P2:1**（sons 的遗传筛查描述不准确：应为遗传性贫血风险，letter 误写为"medication-related"）
 
 ## ROW 70
 Bilateral cancer, post-NAC, expanders+radiation planned。Letter准确描述treatment response+restart letrozole+expanders+CT for lung nodules。**P0:0 P1:0 P2:0** ✅
