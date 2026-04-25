@@ -4,9 +4,9 @@
 > 每个 field 写出：提取了什么 + 原文说了什么 + 对不对
 
 ## 状态
-- 审查中: ROW 13+
-- 已完成: 12/56
-- P0: 0, P1: 0, P2: 24
+- 审查中: ROW 36+
+- 已完成: 22/56
+- P0: 0, P1: 0, P2: 36
 
 ---
 
@@ -201,6 +201,143 @@
 | 9 | lab | "No labs planned" | ✓ | ✅ |
 | 10 | genetic | "None planned" | ✓ | ✅ |
 | 11 | medication | "Continue herceptin/agent, letrozole, agent q12wks, off chemo" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:3**
+
+## ROW 14 (coral_idx 153)
+
+**原文关键事实**：58yo，de novo metastatic ER+ MBC to bone/liver/nodes。Was on faslodex+palbociclib but stopped。Went to Mexico for alternative treatment(low dose chemo at home)。Provider role = monitor。A/P：cancelled scans，schedule CT CAP+spine MRI for May，labs q2weeks，topical cannabis/sulfur，Cymbalta rx given。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+ metastatic breast cancer, HER2-" | 原文"ER 99%, PR 25% HER2 1+ FISH negative"——漏了**PR+**和IDC | P2 |
+| 2 | Stage | "Metastatic (Stage IV)" | ✓ | ✅ |
+| 3 | DistMet | "Yes, to bone, liver, nodes" | ✓ | ✅ |
+| 4 | response | "Right breast nodules slightly increased..." | 引用了CT findings ✓ | ✅ |
+| 5 | current_meds | (空) | 从此provider角度无active meds(停了palbociclib/fulvestrant) ✓ | ✅ |
+| 6 | goals | "palliative" | ✓ | ✅ |
+| 7 | therapy | (空) | provider角色是monitor ✓ | ✅ |
+| 8 | imaging | "CT CAP+spine MRI May, repeat spine MRI 6wks" | ✓ | ✅ |
+| 9 | lab | "labs q2weeks" | ✓ | ✅ |
+| 10 | genetic | "None planned" | ✓ | ✅ |
+| 11 | medication | "topical cannabis, sulfur, Cymbalta rx" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 19 (coral_idx 158)
+
+**原文关键事实**：70yo，left IDC grade 3，ER 90%/PR ~15%(variable)/HER2 3+(heterogeneous, FISH+)。Axillary FNA+。PET: breast mass+subpectoral+axillary nodes, no distant mets。A/P：neoadjuvant TCHP(avoid anthracycline due to CAD)，port/echo/chemo teaching/GCSF authorization。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR+/HER2+(FISH+) grade 3 IDC, Ki-67 20-90%" | ✓ 详细 | ✅ |
+| 2 | Stage | "Stage IIIA (pT2 N2a)" | 临床tumor 4-5cm, locally advanced。pT2 N2a is from POST hook | P2 |
+| 3 | DistMet | "No" | PET: no distant mets ✓ | ✅ |
+| 4 | response | "Not yet on treatment" | ✓ | ✅ |
+| 5 | current_meds | (空) | ✓ | ✅ |
+| 6 | goals | "curative" | ✓ | ✅ |
+| 7 | therapy | "TCHP, avoid anthracycline, port/echo/chemo teaching, trial" | ✓ 详细 | ✅ |
+| 8 | imaging | "Echocardiogram" | ✓ | ✅ |
+| 9 | lab | "No labs planned" | ✓ | ✅ |
+| 10 | genetic | "None planned" | ✓ | ✅ |
+| 11 | medication | "TCHP with GCSF" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 20 (coral_idx 159)
+
+**原文关键事实**：75yo，原Stage I(0.9cm 0/2LN pT1b N0)→metastatic recurrence to bone+lymph nodes。Iliac crest biopsy: ER+80% PR+50% HER2 2+ FISH neg。Plan: letrozole+palbociclib，denosumab after dental，MRI spine，CT CAP，Foundation One，Rad Onc referral。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR+/HER2- grade II IDC with 1.8cm DCIS" | ✓(grade II from original, DCIS ✓) | ✅ |
+| 2 | Stage | "Originally **Stage IIA**, now Stage IV" | 原发0.9cm+0/2LN = pT1b N0 = **Stage IA**不是IIA | P2 |
+| 3 | DistMet | "Yes, to bone and lymph nodes" | ✓(POST-DISTMET-SUPPLEMENT补了LN) | ✅ |
+| 4 | response | "plan includes repeat imaging after 3 months" | 给了**plan**不是response。尚未开始治疗 | P2 |
+| 5 | current_meds | "letrozole, palbociclib" | 此次visit开始的——debatable | ✅ |
+| 6 | goals | "palliative" | ✓ | ✅ |
+| 7 | therapy | "Start letrozole, Rx palbociclib, denosumab after dental" | ✓ | ✅ |
+| 8 | imaging | "MRI spine, CT CAP, repeat in 3 months" | ✓ | ✅ |
+| 9 | lab | "tumor markers, monthly palbociclib labs" | ✓ | ✅ |
+| 10 | genetic | "Foundation One or [REDACTED] 360" | ✓ | ✅ |
+| 11 | medication | "Start Letrozole, Rx Palbociclib, denosumab" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 22 (coral_idx 161)
+
+**原文关键事实**：MBC ER+/PR+/HER2-。Originally Stage II。Mets to bone/chest wall/infraclavicular/IM nodes。On arimidex(=anastrozole)+denosumab。PET showed good response。Developed pneumonitis from abemaciclib(held)。A/P：pet ct now, if stable continue arimidex, if PD could use faslodex+[agent].
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR+/HER2- IDC with met recurrence(bone, chest wall...)" | ✓ | ✅ |
+| 2 | Stage | "Originally Stage II, now Stage IV" | ✓ | ✅ |
+| 3 | DistMet | "Yes, bone, chest wall, infraclavicular, IM nodes" | ✓ 详细 | ✅ |
+| 4 | response | "PET 11/03/20 and 04/24/21 good response, pneumonitis" | ✓ | ✅ |
+| 5 | current_meds | "anastrozole, denosumab" | ✓(arimidex=anastrozole) | ✅ |
+| 6 | goals | "palliative" | ✓ | ✅ |
+| 7 | therapy | "Continue letrozole, abemaciclib..." | **abemaciclib已因pneumonitis停用** | P2 |
+| 8 | imaging | "Pet ct now" | ✓ | ✅ |
+| 9 | lab | "No labs planned" | ✓ | ✅ |
+| 10 | genetic | "If PD could use faslodex with [REDACTED]..." | 这是**treatment contingency**不是genetic testing | P2 |
+| 11 | medication | "Continue arimidex, faslodex+agent if PD" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 24 (coral_idx 163)
+
+**原文关键事实**：56yo，s/p partial mastectomy+SLN。Grade II micropapillary mucinous carcinoma。ER+(>95%) PR+(80%) HER2 equivocal IHC2/FISH neg。PET: **"No definite sites of hypermetabolic metastatic disease"**，但有enhancing liver lesion。A/P：if low risk → radiation + adjuvant hormone therapy。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR+/HER2- grade II micropapillary mucinous carcinoma" | ✓ 详细 | ✅ |
+| 2 | Stage | "Stage III" | A/P没说Stage III。This is early stage s/p surgery。POST hook修了Stage IV→III但不完全对 | P2 |
+| 3 | DistMet | "No" | PET说"No definite metastatic disease" ✓(**iter12e修好了**) | ✅ |
+| 4 | response | "Not yet on treatment" | ✓ | ✅ |
+| 5 | current_meds | (空) | ✓ | ✅ |
+| 6 | goals | "adjuvant" | 应该是"curative" | P2 |
+| 7 | therapy | "If low risk → radiation + adjuvant hormone therapy" | ✓ | ✅ |
+| 8 | imaging | "No imaging planned" | ✓ | ✅ |
+| 9 | lab | "[REDACTED] test ordered" | ✓ | ✅ |
+| 10 | genetic | "surgical specimen for MP" | MammaPrint ✓ | ✅ |
+| 11 | medication | "adjuvant hormone therapy if [REDACTED] low risk" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 29 (coral_idx 168) ✅
+
+**原文关键事实**：59yo，multifocal grade 2 IDC ER+/PR+/HER2-，pT1c(m)N1(sn)。Start letrozole 2.5mg daily。RT planned。Calcium/VitD/vaginal moisturizer。Bone density scan。
+
+全部11字段忠实于原文。Stage不再有"local recurrence"误触发。**P0:0 P1:0 P2:0**
+
+## ROW 30 (coral_idx 169) ✅
+
+**原文关键事实**：64yo，clinical stage II-III ER-/PR-/HER2+ IDC。Neoadjuvant THP or TCHP。TTE needed。Port placement+chemo teaching。
+
+全部11字段准确。**P0:0 P1:0 P2:0**
+
+## ROW 33 (coral_idx 172)
+
+**原文关键事实**：ILC ER+/PR+/HER2-。Originally Stage IIB。No evidence of recurrence。On letrozole。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 3 | DistMet | "Not sure" | 无recurrence，应为"No" | P2 |
+| 其余 | 全部正确 | | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 34 (coral_idx 173)
+
+**原文关键事实**：Stage III breast cancer。**Second** local relapse(first was 2012, now second)。Local: 1.7cm IDC grade 3, ER+/PR- (originally ER+/PR low)。PET/CT negative for distant mets。Plan: tamoxifen 20mg + radiation referral + return 6 months。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR-/HER2- IDC with extensive DCIS" | 原文有receptor change history(2011 vs 2020)——漏了 | P2 |
+| 2 | Stage | "Stage III, now with local recurrence" | ✓(A/P确认是local relapse) | ✅ |
+| 3 | DistMet | "Not sure" | PET-CT negative for distant mets。应该是"No" | P2 |
+| 7 | therapy | "Continue radiation referral. Resume tamoxifen 20mg" | A/P还有"**return to clinic in 6 months**"——漏了 | P2 |
+| 其余 | 全部正确 | | ✅ |
 
 **P0:0 P1:0 P2:3**
 
