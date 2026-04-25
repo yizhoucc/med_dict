@@ -1478,7 +1478,15 @@ def main():
                 'denosumab': ['denosumab','prolia','xgeva'],
                 'goserelin': ['goserelin','zoladex'],
                 'leuprolide': ['leuprolide','lupron'],
+                'lupron': ['leuprolide','lupron'],
                 'trastuzumab': ['trastuzumab','herceptin'],
+                'herceptin': ['trastuzumab','herceptin'],
+                'ibrance': ['palbociclib','ibrance'],
+                'faslodex': ['fulvestrant','faslodex'],
+                'prolia': ['denosumab','prolia','xgeva'],
+                'xgeva': ['denosumab','prolia','xgeva'],
+                'zoladex': ['goserelin','zoladex'],
+                'prilosec': ['omeprazole','prilosec'],
                 'gabapentin': ['gabapentin','neurontin'],
                 'omeprazole': ['omeprazole','prilosec'],
                 'acetaminophen': ['acetaminophen','tylenol'],
@@ -1509,7 +1517,9 @@ def main():
                                                  'monthly', 'twice', 'three times']):
                         if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
                                                          'discontinued', 'stopped', 'was on',
-                                                         'allergic to', 'allergy']):
+                                                         'allergic to', 'allergy',
+                                                         'declined', 'refused', 'not taking',
+                                                         'not tolerat', 'intoleran']):
                             found_meds.append(drug)
                             break
             if found_meds:
@@ -2229,7 +2239,12 @@ def main():
             is_metastatic = 'iv' in stage_lower or 'metastatic' in stage_lower
             if stage and not is_metastatic and 'recurrence' not in stage_lower and 'relapse' not in stage_lower:
                 ap_lower_sr = (assessment_and_plan or "").lower()
-                recurrence = re.search(r'local\s+(?:recurrence|relapse)|second\s+local\s+relapse', ap_lower_sr)
+                recurrence = re.search(r'(?:local\s+(?:recurrence|relapse)|second\s+local\s+relapse)(?!\s+risk)', ap_lower_sr)
+                # Exclude "risk of recurrence", "recurrence risk", "reduce recurrence"
+                if recurrence:
+                    ctx = ap_lower_sr[max(0,recurrence.start()-30):recurrence.end()+30]
+                    if any(x in ctx for x in ['risk of', 'risk for', 'reduce', 'decrease', 'minimize']):
+                        recurrence = None
                 if recurrence:
                     old = stage
                     cancer["Stage_of_Cancer"] = stage + ", now with local recurrence"
