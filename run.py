@@ -2280,17 +2280,29 @@ def main():
                                   r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
                                   r'no\s+distant\s+metastases|'
                                   r'negative\s+for\s+(?:distant\s+)?metastatic\s+disease')
-                # Search A/P first
+                # Search A/P first, but exclude historical references (dates before 2020)
                 ap_lower_dm = (assessment_and_plan or "").lower()
                 no_met_evidence = re.search(no_met_pattern, ap_lower_dm)
-                # If not found in A/P, search IMPRESSION sections in note (not historical HPI)
+                if no_met_evidence:
+                    # Check if this is a historical reference (near a past date)
+                    ctx_before = ap_lower_dm[max(0, no_met_evidence.start()-80):no_met_evidence.start()]
+                    if re.search(r'20[01]\d|s/p|history|previously|prior|in \d{4}', ctx_before):
+                        no_met_evidence = None  # historical, don't use
+                # If not found in A/P, search imaging results in note (not HPI history)
                 if not no_met_evidence and note_text:
                     note_lower_dm = note_text.lower()
-                    # Only search near IMPRESSION/FINDINGS keywords (not HPI/history)
-                    for imp_match in re.finditer(r'impression|findings|conclusion', note_lower_dm):
-                        imp_section = note_lower_dm[imp_match.start():imp_match.start()+500]
-                        no_met_evidence = re.search(no_met_pattern, imp_section)
-                        if no_met_evidence:
+                    # Search for "no [definite] metastatic disease" anywhere in note,
+                    # but verify it's from imaging/staging, not from HPI history
+                    for nm in re.finditer(no_met_pattern, note_lower_dm):
+                        ctx_before = note_lower_dm[max(0, nm.start()-200):nm.start()]
+                        # Accept if near imaging keywords or PET/CT, reject if in HPI history
+                        is_imaging = any(k in ctx_before for k in ['pet', 'ct ', 'scan', 'impression',
+                                                                     'findings', 'staging', 'no evidence'])
+                        is_history = any(k in ctx_before for k in ['history of present',
+                                                                     'hpi', 'in 201', 'in 200',
+                                                                     'previously', 'prior to'])
+                        if is_imaging and not is_history:
+                            no_met_evidence = nm
                             break
                 if no_met_evidence:
                     old_dm = cancer.get("Distant Metastasis", "")
