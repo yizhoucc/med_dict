@@ -4,9 +4,11 @@
 > 每个 field 写出：提取了什么 + 原文说了什么 + 对不对
 
 ## 状态
-- 审查中: ROW 36+
-- 已完成: 22/56
-- P0: 0, P1: 0, P2: 36
+- **审查完成: 56/56** ✅
+- P0: 0, P1: 2, P2: 52
+- 完美(0 issues): 24/56 (43%)
+- P1: ROW 51(Type空值,LLM行为), ROW 57(Type矛盾TNBC+ER+,LLM行为)
+- P2分布: Type(5), Stage(5), DistMet(4), response(5), current_meds(2), therapy(5), imaging(5), lab(4), genetic(3), medication(8), other(6)
 
 ---
 
@@ -340,4 +342,209 @@
 | 其余 | 全部正确 | | ✅ |
 
 **P0:0 P1:0 P2:3**
+
+## ROW 36 (coral_idx 175) ✅
+ER+/PR+/HER2- grade III mixed ductal/mucinous。pT3N0=Stage IIIA。Abraxane+zoladex+tamoxifen。PET post-op。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 40 (coral_idx 179)
+Type P2: "PR-"但原文PR 5%=PR weak+。其余✅。**P0:0 P1:0 P2:1**
+
+## ROW 41 (coral_idx 180) ✅
+32yo ATM carrier。ER+/PR weakly+/HER2 1+ grade 3 IDC。AC-Taxol。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 42 (coral_idx 181) ✅
+Post-radiation，tamoxifen 5 years。ER+/PR+/HER2- grade 1。Stage IA。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 44 (coral_idx 183)
+imaging P2: PET/CT可能是POST-IMAGING false positive。其余✅。**P0:0 P1:0 P2:1**
+
+## ROW 46 (coral_idx 185) ✅
+ER+/PR-/HER2- grade 1 IDC。Stage IIB。Letrozole+abemaciclib discussed。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 49 (coral_idx 188) ✅
+ER+/PR+/HER2- IDC。Likely stage 2。Tamoxifen planned。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 50 (coral_idx 189)
+DistMet P2: 漏LN。current_meds P2: 漏lupron。medication P2: 严重缩短。**P0:0 P1:0 P2:3**
+
+## ROW 51 (coral_idx 190)
+Type **P1**: 空值（note结构异常，LLM没提取到）。其余合理。**P0:0 P1:1 P2:0**
+
+## ROW 52 (coral_idx 191) ✅
+ER+/PR+/HER2- grade II。Stage IIA(pT2 N1mi)。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 53 (coral_idx 192) ✅
+ER+/PR+/HER2+ IDC with neuroendocrine diff。Stage II/III。AC/THP。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 54 (coral_idx 193) ✅
+BRCA2。ER+/PR+/HER2- grade 1。Stage IV met to bone。Stable disease。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 57 (coral_idx 196)
+Type **P1**: "TNBC, ER+/PR+/HER2-"矛盾（LLM搞混了初始HER2+和后来确认的TNBC）。**P0:0 P1:1 P2:0**
+
+## ROW 59 (coral_idx 198) ✅
+ER+/PR+/HER2- grade 3。Stage IIA(pT2 N0)。Switching letrozole→exemestane。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 61 (coral_idx 200) ✅
+ER+/PR+/HER2-(1+) grade 2。Stage I。Adjuvant endocrine planned。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 64 (coral_idx 203)
+Type P2: "HR+"应写"ER+/PR+"。其余✅。**P0:0 P1:0 P2:1**
+
+## ROW 65 (coral_idx 204) ✅
+ER weak+(2%), PR low+(7%)。Stage IB(pT1 N1mi)。Neoadjuvant AC/T。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 68 (coral_idx 207) ✅
+ER+/PR+/HER2+ multifocal IDC。Post-TCHP good response。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 70 (coral_idx 209)
+
+**原文关键事实**：Bilateral ER+/HER2- breast cancer。Left: pT4N1 grade 2 ILC，Right: pT1N0 IDC with DCIS。S/p neoadjuvant TC x6。MRI shows faint residual NME, axillary nodes decreased。Bone scan negative。On letrozole(previously tolerated)。Expanders before radiation。CT June 2020 for lung nodules。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR+/HER2- grade 2 ILC with 1 LN+(left); IDC with DCIS(right)" | ✓ 详细 | ✅ |
+| 2 | Stage | "Originally Stage II(pT4N1 left, pT1N0 right), post-NAC" | ✓ | ✅ |
+| 3 | DistMet | "No" | bone scan negative ✓ | ✅ |
+| 4 | response | "MRI faint residual NME, axillary nodes decreased, bone scan neg" | ✓ | ✅ |
+| 7 | therapy | "Restart letrozole. Expanders before radiation" | 漏了"**CT scan for lung nodules June 2020**" | P2 |
+| 11 | medication | "Restart letrozole" | 漏了"**[REDACTED] for hot flashes**" | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 72 (coral_idx 211)
+
+**原文关键事实**：ER+/PR-/HER2- grade 2 IDC with focal neuroendocrine diff。pT1cN0(sn)=Stage IA。Start letrozole。[REDACTED] for chemo benefit evaluation。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 8 | imaging | "Ultrasound" | 可能是POST-IMAGING false positive | P2 |
+| 9 | lab | "[REDACTED] to evaluate chemo benefit" | Oncotype属genetic不是lab | P2 |
+| 10 | genetic | "[REDACTED] to evaluate chemo benefit" | 和lab重复了 | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:3**
+
+## ROW 78 (coral_idx 217) ✅
+
+**原文关键事实**：79yo TNBC metastatic to liver+periportal LNs。Worsening hepatic/nodal mets。Echo for cardiac monitoring。Trial interest(eribulin/pembrolizumab)。Continue Mag-Ox, lisinopril, norvasc。
+
+全部11字段准确。response有详细imaging measurements。**P0:0 P1:0 P2:0**
+
+## ROW 80 (coral_idx 219)
+
+**原文关键事实**：ER+/PR+/HER2- grade 3 IDC。Stage I(≤2cm)。Plan：TC x 4 starting 04/11/19。6 weeks radiation with 1 week boost, left axilla+SC fields。Claritin for 5-6 days。Cold cap/cold gloves。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 7 | therapy | "TC x 4 on 04/11/19, with [REDACTED]. RTC cycle 2" | 漏了**radiation details**(6 weeks, boost, axilla+SC fields) | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 82 (coral_idx 221) ✅
+
+**原文关键事实**：ER+/PR+/HER2- mixed ductal/lobular。Stage II。Discussed chemo(low risk, not recommended)。DEXA for bone health。Continue current non-cancer meds。
+
+POST-MEDICATION-SUPPLEMENT补了acetaminophen/ibuprofen/oxycodone/docusate。全部准确。**P0:0 P1:0 P2:0**
+
+## ROW 84 (coral_idx 223) ✅
+
+**原文关键事实**：60yo CHEK2 mutation + MS。Metastatic ER+/PR+/HER2- IDC to bone/soft tissue/liver/possibly meninges。On xeloda+zoledronic acid。MRI brain stable。CT CAP showed hepatic mets increasing。Rad Onc referral for CNS radiation。
+
+全部11字段准确。therapy有rad onc referral+xeloda+fulvestrant contingency。imaging有CT CAP+MRI spine。**P0:0 P1:0 P2:0**
+
+## ROW 85 (coral_idx 224) ✅
+
+**原文关键事实**：ER+/PR-/HER2- ILC pleomorphic grade 3。Originally Stage IIIA→now Stage IV met to bone/liver/brain。Progressed on fulvestrant/palbociclib。Phase 1 trial [REDACTED]+olaparib。Brain MRI。
+
+全部11字段准确。**P0:0 P1:0 P2:0**
+
+## ROW 87 (coral_idx 226) ✅
+
+**原文关键事实**：79yo。ER+/PR+/HER2- grade 2 IDC。2.2cm multifocal。pT2 N2a=Stage IIIA。Will receive hormonal therapy alone。
+
+Stage correctly shows "Stage IIIA (pT2 N2a)" (POST-STAGE-CORRECT didn't wrongly modify since N2a=4+ nodes). **P0:0 P1:0 P2:0**
+
+## ROW 88 (coral_idx 227)
+
+**原文关键事实**：Stage III left breast cancer→metastatic to brain/lungs/LNs。On xeloda。A/P："No new imaging findings, no palpable masses... stable disease"。Discuss clinical trials if progression。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 4 | response | "She is on xeloda and I would recommend restaging after 3 months..." | 给了**plan**("restaging")而非**response**("stable disease, no masses") | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 90 (coral_idx 229)
+
+**原文关键事实**：Adenocarcinoma of right breast。Clinical stage II/III。S/p neoadjuvant。Cycle 4 of AC planned。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "Adenocarcinoma of right breast (HCC)" | 原文有ER/PR/HER2 data但note高度redacted——**漏了receptor status** | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 91 (coral_idx 230)
+
+**原文关键事实**：Stage 4 MBC to bone。ER+/PR+。On exemestane+everolimus+denosumab。RLE edema improved。A/P：continue exemestane, continue [REDACTED]+elevation for edema, continue lasix 10mg daily with KCL 10Meq daily, continue denosumab for hip, PET/CT next week, labs monthly, topical antifungal for fungal dermatitis。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 7 | therapy | "Continue exemestane, denosumab; lasix, KCL, elevation for edema" | POST hook补了supportive items ✓。但还漏了**PET/CT next week, labs monthly, topical antifungal** | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:1**
+
+## ROW 92 (coral_idx 231)
+
+**原文关键事实**：MBC to multiple sites。Epirubicin cycle#2 D1。A/P："Exam improved-liver smaller, less tender"。Tumor marker pending。Labs: AST elevated。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 3 | DistMet | "Yes, to liver" | A/P说"**multiple sites**"但只提取了liver | P2 |
+| 4 | response | "Liver smaller, less tender. Tumor marker pending" | 漏了"**stable on treatment**"和AST/hemoglobin values | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 95 (coral_idx 234)
+
+**原文关键事实**：49yo ER+/PR-/HER2- IDC。S/p neoadjuvant pembrolizumab(trial)。MRI showing response。Plan：axilla XRT, capecitabine after XRT。
+
+| # | Field | 提取值 | 原文对照 | 判定 |
+|---|-------|--------|---------|------|
+| 1 | Type | "ER+/PR-/HER2- IDC with residual DCIS" | 原文有"treatment effect, three foci, margins negative"——漏了 | P2 |
+| 8 | imaging | "breast and axilla XRT" | XRT是**radiotherapy**不是imaging | P2 |
+| 其余 | ✓ | | ✅ |
+
+**P0:0 P1:0 P2:2**
+
+## ROW 96 (coral_idx 235) ✅
+
+**原文关键事实**：ER+/PR+/HER2- grade I mixed ductal/cribriform with tubular features。pT1cN0(sn)=Stage IA。Adjuvant radiation→tamoxifen。[REDACTED] testing ordered。
+
+全部11字段准确。**P0:0 P1:0 P2:0**
+
+## ROW 97 (coral_idx 236) ✅
+
+**原文关键事实**：ER+/PR+/HER2- grade 1 IDC with DCIS。pT1b N0=Stage IA。Adjuvant endocrine therapy recommended。Molecular profiling(Oncotype Dx)。MS patient on GILENYA。
+
+全部11字段准确。genetic有"Oncotype Dx assay"。**P0:0 P1:0 P2:0**
+
+## ROW 99 (coral_idx 238) ✅
+
+**原文关键事实**：Stage III left breast→Stage I right breast。HER2+ IDC grade 3。Now metastatic to left lung+mediastinal LNs。On fulvestrant。Plan：biopsy lung/LN, continue fulvestrant, radiation referral, CT follow-up。
+
+全部11字段准确。Referral有"Symptom management service"(iter12e修好)。**P0:0 P1:0 P2:0**
+
+## ROW 100 (coral_idx 239) ✅
+
+**原文关键事实**：MBC to liver+bone。ER+(80%)PR+(50%)HER2- grade 2 IDC。On Gemzar。Tumor markers elevated。A/P：Rec exercise 10 min 3x/day，Focalin prn，continue treatment。
+
+therapy有"Rec exercise 10 min 3 x a day"(iter12e修好)。全部11字段准确。**P0:0 P1:0 P2:0**
 
