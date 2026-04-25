@@ -1460,11 +1460,12 @@ def main():
                 'lasix','furosemide','hydrochlorothiazide','lisinopril',
                 'alendronate','fosamax','zoledronic','risedronate',
                 # common meds often in A/P (iter10 review additions)
-                'doxycycline','acetaminophen','tylenol','ibuprofen','advil','motrin',
+                # NOTE: only list GENERIC names here; brand names handled by MED_SYNONYMS
+                'doxycycline','acetaminophen','ibuprofen',
                 'naproxen','tramadol','morphine','oxycodone','hydrocodone',
-                'lorazepam','ativan','claritin','loratadine','allegra',
-                'potassium','calcium','vitamin d','magnesium',
-                'docusate','colace','miralax','senna',
+                'lorazepam','loratadine','fexofenadine',
+                'potassium','calcium','magnesium',
+                'docusate','miralax','senna',
                 'metformin','atorvastatin','rosuvastatin','levothyroxine',
             ]
             MED_SYNONYMS = {
@@ -2215,14 +2216,16 @@ def main():
                     cancer["Stage_of_Cancer"] = corrected
                     print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
-        # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't include it [iter10]
+        # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't [iter10]
+        # Only for non-metastatic (don't append to Stage IV)
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
-            if stage and 'recurrence' not in stage.lower() and 'relapse' not in stage.lower():
+            stage_lower = stage.lower()
+            is_metastatic = 'iv' in stage_lower or 'metastatic' in stage_lower
+            if stage and not is_metastatic and 'recurrence' not in stage_lower and 'relapse' not in stage_lower:
                 ap_lower_sr = (assessment_and_plan or "").lower()
-                recurrence = re.search(r'local\s+(?:recurrence|relapse)|recurrent\s+(?:breast\s+)?cancer|'
-                                       r'second\s+local\s+relapse', ap_lower_sr)
+                recurrence = re.search(r'local\s+(?:recurrence|relapse)|second\s+local\s+relapse', ap_lower_sr)
                 if recurrence:
                     old = stage
                     cancer["Stage_of_Cancer"] = stage + ", now with local recurrence"
