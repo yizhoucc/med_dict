@@ -1498,14 +1498,18 @@ def main():
                 synonyms = MED_SYNONYMS.get(drug, [drug])
                 if any(syn in mp_lower for syn in synonyms):
                     continue
-                # Check future/current context
+                # Check future/current context (wider window, more context words)
                 for m in re.finditer(re.escape(drug), ap_lower_mp):
-                    ctx = ap_lower_mp[max(0,m.start()-40):m.end()+40]
-                    if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume', 'rx',
+                    ctx = ap_lower_mp[max(0,m.start()-60):m.end()+60]
+                    if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume', 'rx ',
                                                  'recommend', 'prescri', 'mg', 'daily', 'bid',
-                                                 'tid', 'qd', 'tablet', 'capsule']):
+                                                 'tid', 'qd', 'tablet', 'capsule', 'sent',
+                                                 'take ', 'given', 'ordered', 'increase',
+                                                 'current', 'on ', 'prn', 'every', 'weekly',
+                                                 'monthly', 'twice', 'three times']):
                         if not any(pc in ctx for pc in ['s/p', 'status post', 'completed',
-                                                         'discontinued', 'stopped', 'was on']):
+                                                         'discontinued', 'stopped', 'was on',
+                                                         'allergic to', 'allergy']):
                             found_meds.append(drug)
                             break
             if found_meds:
@@ -2303,7 +2307,9 @@ def main():
                 ln_met = re.search(r'(?:metastatic?\s+(?:to\s+)?(?:.*?)?lymph\s*nodes?|'
                                    r'lymph\s*node\s+metastas|'
                                    r'disease\s+in\s+(?:the\s+)?(?:bone\s+and\s+)?lymph\s*nodes?|'
-                                   r'metastatic\s+(?:recurrence|disease)\s+(?:.*?)?(?:lymph|nodes))',
+                                   r'metastatic\s+(?:recurrence|disease)\s+(?:.*?)?(?:lymph|nodes)|'
+                                   r'(?:bone|liver)\s+and\s+lymph\s*nodes?|'
+                                   r'lymph\s*nodes?\s+(?:and|,)\s+(?:bone|liver|lung))',
                                    ap_lower_dm)
                 if ln_met:
                     old_dm = dist_met
