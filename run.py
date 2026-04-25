@@ -2270,19 +2270,28 @@ def main():
             cancer["Distant Metastasis"] = met
             print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
 
-        # POST-DISTMET-NOMET: If A/P explicitly says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
-        # IMPORTANT: only search A/P (not full note) to avoid historical negative results
+        # POST-DISTMET-NOMET: If note says "no metastatic disease" in imaging impression, correct [iter8]
+        # Search A/P first, then imaging IMPRESSION sections in full note
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
             dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
             if "yes" in dist_met:
+                no_met_pattern = (r'no\s+(?:definite\s+)?(?:sites?\s+of\s+)?(?:hypermetabolic\s+)?metastatic\s+disease|'
+                                  r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
+                                  r'no\s+distant\s+metastases|'
+                                  r'negative\s+for\s+(?:distant\s+)?metastatic\s+disease')
+                # Search A/P first
                 ap_lower_dm = (assessment_and_plan or "").lower()
-                no_met_evidence = re.search(
-                    r'no\s+(?:definite\s+)?(?:sites?\s+of\s+)?(?:hypermetabolic\s+)?metastatic\s+disease|'
-                    r'no\s+evidence\s+of\s+(?:distant\s+)?metastases|'
-                    r'no\s+distant\s+metastases|'
-                    r'negative\s+for\s+(?:distant\s+)?metastatic\s+disease',
-                    ap_lower_dm)
+                no_met_evidence = re.search(no_met_pattern, ap_lower_dm)
+                # If not found in A/P, search IMPRESSION sections in note (not historical HPI)
+                if not no_met_evidence and note_text:
+                    note_lower_dm = note_text.lower()
+                    # Only search near IMPRESSION/FINDINGS keywords (not HPI/history)
+                    for imp_match in re.finditer(r'impression|findings|conclusion', note_lower_dm):
+                        imp_section = note_lower_dm[imp_match.start():imp_match.start()+500]
+                        no_met_evidence = re.search(no_met_pattern, imp_section)
+                        if no_met_evidence:
+                            break
                 if no_met_evidence:
                     old_dm = cancer.get("Distant Metastasis", "")
                     cancer["Distant Metastasis"] = "No"
