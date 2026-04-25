@@ -4,9 +4,24 @@
 > 审查标准：准确性、通俗性、完整性、不编造
 
 ## 状态
-- **✅ 全部完成: 56/56**
-- P0: 0, P1: 0, P2: 1 (ROW 1 漏 peritoneum)
-- 55/56 letters 完美，所有 letters 无幻觉、无编造
+- **✅ 全部完成: 56/56（逐句详细审查）**
+- P0: 0, P1: 1 (ROW 30), P2: 13
+- **P1 详情**: ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
+- **P2 分布**:
+  - ROW 1: 漏 peritoneum
+  - ROW 6: Stage I-II vs extraction Stage IA
+  - ROW 11: 混淆 past PET progression 和 current exam stable
+  - ROW 22: 语法不完整（缺"it"）
+  - ROW 24: "medication test" 误称基因组检测 + "MP" 未解释（x2）
+  - ROW 29: 漏 MammaPrint/no-chemo rationale
+  - ROW 30: HER2+ 解释误导
+  - ROW 33: MRI brain 原因误解（头痛→药物问题）
+  - ROW 50: lupron+letrozole 开始时间不准确
+  - ROW 68: sons 遗传筛查描述错误（遗传性贫血→medication-related）
+  - ROW 72: "no cancer in removed tissue" 误导 + "medication"替"test"（x2）
+  - ROW 80: cold gloves 用途错误（neuropathy→hand-foot syndrome）
+  - ROW 96: "medication testing" 误称基因组检测
+- **零幻觉、零编造**
 - 医生 feedback 关键项已验证：ROW 99 symptom management service ✓, ROW 100 exercise 10min×3/day ✓
 
 ---
@@ -695,52 +710,290 @@
 **P0:0 P1:0 P2:1**（sons 的遗传筛查描述不准确：应为遗传性贫血风险，letter 误写为"medication-related"）
 
 ## ROW 70
-Bilateral cancer, post-NAC, expanders+radiation planned。Letter准确描述treatment response+restart letrozole+expanders+CT for lung nodules。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "recovering well from surgery" | post bilateral mastectomies ✓ | ✅ |
+| "Two lymph nodes were positive on the left side" | A/P "March 03 lymph nodes +" (likely 3/3 redacted) — **count 可能不准**，但 redaction 难以确认 | P2? |
+| "faint residual non-mass enhancement in both breasts" | imaging ✓ | ✅ |
+| "CT is due in June for lung nodules" | A/P "Follow up lung nodules, CT due in June 2020" ✓ | ✅ |
+| "No definite scintigraphic evidence of osseous metastases" | bone scan ✓ | ✅ |
+| "restart letrozole which you had previously tolerated" | A/P ✓ | ✅ |
+| "referred to radiation consult" | A/P ✓ | ✅ |
+| "expanders placed prior to radiation" | A/P ✓ | ✅ |
+| "follow-up visit in September" | A/P "RTC...September" ✓ | ✅ |
+| "full code" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅（lymph node count 因 redaction 无法确认）
 
 ## ROW 72
-Start letrozole, Oncotype for chemo benefit。Letter准确。Letrozole+[REDACTED] testing。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...started in the milk ducts" | pathology IDC ✓ | ✅ |
+| "focal neuroendocrine differentiation...cancer cells look like cells that make hormones" | pathology ✓，通俗解释 ✓ | ✅ |
+| "early stage...not spread" | ✓ | ✅ |
+| "**no cancer was found in the removed tissue**" | 可能指 margins negative 或 re-excision clear，但**措辞极度误导**——患者会以为没有癌症 | P2 |
+| "letrozole" | ✓ | ✅ |
+| "test to see if you might need chemotherapy" | Oncotype Dx ✓ | ✅ |
+| "**referred to have a medication to evaluate the potential benefit of chemotherapy**" | **"medication"应为"test"**，语句不通顺 | P2 |
+| "follow-up visit in 3 weeks" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:2**（"no cancer in removed tissue"误导 + "medication"替代"test"）
 
 ## ROW 78
-TNBC metastatic, worsening。Letter准确描述worsening disease with specific measurements + trial interest(eribulin/pembrolizumab) + echo。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer has gotten worse...liver and lymph nodes has grown bigger" | progression on imaging ✓ | ✅ |
+| "small spot in your lung...has gotten larger" | ✓ | ✅ |
+| "interested in joining a clinical trial" | A/P trial discussions ✓ | ✅ |
+| "not interested in chemotherapy at this time" | A/P ✓ | ✅ |
+| "meeting with...radiation to treat the cancer" | radiation consult ✓ | ✅ |
+| "ultrasound of your heart on September 8th" | echo ✓ | ✅ |
+| "referred to radiation oncology" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 80
-TC x 4 + radiation。Letter详细描述TC chemo + radiation(6 weeks with boost) + cold cap/cold gloves for neuropathy + Claritin。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...grade 3...ER+...PR+...no HER2" | ✓ | ✅ |
+| "curative" | ✓ | ✅ |
+| "TC on April 11, 2019...four times" | A/P "TC x 4 on 04/11/19" ✓ | ✅ |
+| "dexamethasone (Decadron), ondansetron (Zofran), prochlorperazine (Compazine)" | supportive meds ✓ | ✅ |
+| "**cold gloves...prevent hand-foot syndrome**" | **错误**：A/P 说 "cold gloves, neuropathy and fingernails"——cold gloves 防的是**周围神经病变和指甲损伤**，不是 hand-foot syndrome（那是 capecitabine 的副作用） | P2 |
+| "six weeks of radiation...five weeks with a one-week boost...left armpit and area under your collarbone" | A/P ✓ | ✅ |
+| "radiation oncology referral" | ✓ | ✅ |
+| "next clinic visit is for second cycle" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:1**（cold gloves 用途描述错误）
 
 ## ROW 82
-Low risk, no chemo。Letter"cancer is low risk, we do not recommend chemotherapy" ✓。DEXA+current meds。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "4.3 cm tumor with some lymph nodes involved" | pathology ✓ | ✅ |
+| "ER positive, PR positive...no HER2" | ✓ | ✅ |
+| "no cancer spread to other parts of your body" | ✓ | ✅ |
+| "decided not to start chemotherapy because your risk is low" | A/P ✓ | ✅ |
+| "appointment tomorrow...radiation treatment" | A/P ✓ | ✅ |
+| "DEXA scan to check bone health" | A/P ✓ | ✅ |
+| "referred for exercise counseling" | A/P ✓ | ✅ |
+| "see us again after finishing radiation" | ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 84
-CHEK2, metastatic, on xeloda。Letter详细描述brain MRI/CT findings + radiation referral for CNS + xeloda continuation + future options(fulvestrant+CDK4/6i)。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "ER+/PR+/HER2-...spread to bones, soft tissues, liver, and possibly lining around your brain" | A/P ✓ | ✅ |
+| "cancer in your brain and liver has grown" | imaging ✓ | ✅ |
+| "platelet count is low" | labs ✓ | ✅ |
+| "increased the dose of Xeloda" | A/P ✓ | ✅ |
+| "if cancer gets worse...fulvestrant...CHEK2 mutation on STRATA" | A/P ✓ | ✅ |
+| "radiation oncology...focused on a specific part of brain or larger area" | A/P ✓ | ✅ |
+| "lumbar puncture (LP) to check fluid around brain and spine" | A/P ✓ | ✅ |
+| "CT scan of chest, abdomen, and pelvis" | A/P ✓ | ✅ |
+| "MRI of your spine" | A/P ✓ | ✅ |
+| "continue zolendronic acid" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — 非常全面
 
 ## ROW 85
-ILC pleomorphic, progressing, phase 1 trial。Letter准确描述progression + new liver mets + brain lesion + phase 1 trial + steroid taper。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "progressed on first line fulvestrant/palbociclib with new liver metastases" | A/P ✓ | ✅ |
+| "new liver metastases and increased bony disease on PET CT" | A/P ✓ | ✅ |
+| "enhancing lesion in the left occipital lobe and leptomeningeal disease" | A/P ✓ | ✅ |
+| "Prednisone dose decreased" | A/P "steroid taper" ✓ | ✅ |
+| "evaluated for a phase 1 trial of medication+olaparib" | A/P ✓（药名 redacted） | ✅ |
+| "2-week radiation washout for the trial" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 87
-79yo, hormonal therapy alone。Letter准确描述surgical results + "hormonal therapy alone" recommendation。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "second opinion...right primary breast cancer" | A/P ✓ | ✅ |
+| "grade 2, 2.2 cm, 4 out of 19 lymph nodes" | pathology ✓ | ✅ |
+| "clear margins...small area of cancer spreading beyond the capsule" | extracapsular extension ✓ | ✅ |
+| "ER and progesterone receptors, no HER-2/neu" | ✓ | ✅ |
+| "pill-rolling tremor of Parkinson's disease" | PE ✓ | ✅ |
+| "curative" | ✓ | ✅ |
+| "hormonal therapy alone" | A/P patient preference ✓ | ✅ |
+| "radiation to prevent local recurrence" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 88
-MBC to brain, on xeloda。Letter准确描述metastatic disease + xeloda + clinical trials if progression + HER2 testing on brain met。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "IDC...weakly positive for ER...negative for PR...no HER2" | ✓ | ✅ |
+| "cancer has spread to your brain and other parts of your body" | brain mets + lung/LN mets ✓ | ✅ |
+| "capecitabine (also known as Xeloda)" | A/P ✓ | ✅ |
+| "clinical trials using immunotherapy" | A/P ✓ | ✅ |
+| "If...tests positive for HER2, you will need a different type of treatment" | A/P "doing her 2 on the brain metastasis" ✓ | ✅ |
+| "surgery to remove one brain tumor and received radiation to both" | A/P "resection of one and stereotactic XRT to both" ✓ | ✅ |
+| "check how you are responding after three months" | A/P "restaging after 3 months" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 90
-AC cycle 4, dose delay。Letter准确描述chemo cycle management + dose delay + GCSF reduction + anti-nausea meds。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "adenocarcinoma...right breast...Stage II/III" | ✓ | ✅ |
+| "thyroid stimulating hormone level is higher...hypothyroidism" | labs/hx ✓ | ✅ |
+| "anemia" | low Hgb/Hct ✓ | ✅ |
+| "swelling in armpit...palpitations, port site tenderness, constipation, nausea, headaches" | symptoms ✓ | ✅ |
+| "GCSF dose reduced to 50%" | A/P ✓ | ✅ |
+| "granisetron and olanzapine" | A/P ✓ | ✅ |
+| "continue AC...cycle 4 in about a week" | A/P ✓ | ✅ |
+| "visit after radiation therapy, approximately 1-1.5 months" | A/P "RTC after XRT, approx 1-1.5 mos" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 91
-Stage 4 MBC to bone。Letter描述bone mets+current treatment+PET/CT next week+lasix for edema+monthly labs。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "MRI...cancer in your right hip has grown and spread" | imaging ✓ | ✅ |
+| "PET/CT...new cancer in soft tissues around your kidneys" | imaging ✓ | ✅ |
+| "cancer has grown despite the current treatment" | progression ✓ | ✅ |
+| "lasix to help with swelling and potassium to balance" | A/P "lasix 10mg daily with KCL 10Meq" ✓ | ✅ |
+| "continue exemestane and denosumab" | A/P ✓ | ✅ |
+| "topical antifungal cream" | A/P ✓ | ✅ |
+| "PET/CT scan next week" | A/P ✓ | ✅ |
+| "blood tests every month" | A/P "Labs monthly" ✓ | ✅ |
+| "next visit is in one month" | A/P "RTC in 1 month" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 92
-MBC, Epirubicin cycle 2。Letter"liver has gotten smaller and feels less tender" ✓。Epirubicin+labs。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "liver feels smaller and less tender" | A/P "Exam improved of liver" + "liver smaller" ✓ | ✅ |
+| "red rash around your mouth...7-10 days after last treatment" | HPI ✓ | ✅ |
+| "AST is slightly high at 72 U/L" | labs ✓ | ✅ |
+| "restarted chemotherapy with Epirubicin" | A/P cycle #2 ✓ | ✅ |
+| "Neupogen for 2 days...boost white blood cell count" | A/P ✓ | ✅ |
+| "echocardiogram to monitor heart function" | cardiac monitoring ✓ | ✅ |
+| "liver function and tumor markers" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 95
-Post-NAC trial, radiation planned。Letter描述MRI response+radiation plan+capecitabine after XRT。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "MRI...cancer has decreased...10x8x8mm compared to 16x16x15mm" | MRI response ✓ | ✅ |
+| "cancer in lymph nodes...gotten smaller but hasn't completely gone away" | ✓ | ✅ |
+| "started a new chemotherapy called AC" | A/P ✓ | ✅ |
+| "continue Prilosec for acid reflux" | A/P ✓ | ✅ |
+| "capecitabine after finishing radiation therapy" | A/P CREATE-X trial ✓ | ✅ |
+| "referred to a radiation oncologist" | A/P ✓ | ✅ |
+| "wish to proceed with radiation first, then capecitabine" | A/P patient preference ✓ | ✅ |
+| "strongly recommended to take hormone therapy" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 96
-Mixed ductal/cribriform, tamoxifen after radiation。Letter准确描述surgical pathology+adjuvant radiation+tamoxifen+[REDACTED] testing。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "ER+/PR+/HER2- grade I mixed ductal and cribriform carcinoma with tubular features" | pathology ✓ | ✅ |
+| "early stage (Stage I-II)...not spread" | ✓ | ✅ |
+| "curative" | ✓ | ✅ |
+| "**a test called a medication testing to learn more about your cancer**" | 应为 Oncotype Dx/MammaPrint genomic test。**"medication testing"是错误术语** | P2 |
+| "radiation oncology for a consult" | A/P ✓ | ✅ |
+| "start tamoxifen after completing radiation" | A/P ✓ | ✅ |
+| "next visit...to discuss hormone therapy" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:1**（"medication testing"误称基因组检测）
 
 ## ROW 97
-Stage IA, adjuvant endocrine + Oncotype。Letter准确描述pathology+Oncotype Dx+endocrine therapy+MS medication compatibility。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...early stage...not spread" | ✓ | ✅ |
+| "cancer was removed...no cancer found in the lymph nodes" | negative SLN ✓ | ✅ |
+| "drain in place...concerned about its status and removal" | A/P drain issue ✓ | ✅ |
+| "starting a medication to help prevent the cancer from coming back" | endocrine therapy ✓ | ✅ |
+| "continuing your current medication for multiple sclerosis" | Gilenya/fingolimod ✓ | ✅ |
+| "test called Oncotype Dx to learn more about your cancer" | A/P ✓ | ✅ |
+| "referred to a radiation oncologist" | A/P ✓ | ✅ |
+| "next clinic visit 3-4 weeks after the results" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅
 
 ## ROW 99
-HER2+ MBC, mixed response, fulvestrant。Letter详细描述mixed response+biopsy needed+radiation referral+**symptom management service** ✓ (医生feedback修的)。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer that has spread to...left lung and lymph nodes in the middle of your chest" | mediastinal LAD + lung mass ✓ | ✅ |
+| "cancer in your chest area has gotten smaller, but the cancer in your lung has grown" | A/P "increase in size of lung lesion but modest decrease in mediastinal lymphadenopathy" ✓ | ✅ |
+| "palliative" | metastatic ✓ | ✅ |
+| "switched from anastrozole to letrozole because of joint pains" | recent changes ✓ | ✅ |
+| "biopsy of the cancer in your lung or chest area" | A/P needs biopsy ✓ | ✅ |
+| "new CT scan with contrast" | A/P ✓ | ✅ |
+| "**referred to a symptom management service**" | A/P ✓ ——**医生 feedback 要求的** | ✅ |
+| "return to the clinic in about 2 weeks" | A/P ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — symptom management service 正确包含（医生 feedback）
 
 ## ROW 100
-MBC, Gemzar, exercise recommendation。Letter提到"tumor markers have risen"+**"exercise 10 minutes, 3 times a day"** ✓ (医生feedback修的)+Focalin for fatigue。**P0:0 P1:0 P2:0** ✅
+
+**Letter 逐句审查**：
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "tumor markers have gone up...Cancer Antigen 15-3 and Cancer Antigen 27.29" | A/P "Tumor markers rose" ✓ | ✅ |
+| "hemoglobin and hematocrit levels are low...anemic" | labs ✓ | ✅ |
+| "no new signs of cancer spreading" | A/P "Exam stable" ✓ | ✅ |
+| "palliative" | ✓ | ✅ |
+| "Gemzar treatment was stopped by you" | A/P "Did not receive treatment today" + patient wants break ✓ | ✅ |
+| "continue medications for constipation and pain" | ✓ | ✅ |
+| "Focalin as needed to help with fatigue" | A/P "Focalin prn" ✓ | ✅ |
+| "**exercise for 10 minutes three times a day**" | A/P "Rec exercise 10 min 3 x a day" ✓ ——**医生 feedback 要求的** | ✅ |
+| "discuss taking a break from your treatment with your doctor" | A/P "Plans to discuss break with Dr *****" ✓ | ✅ |
+
+**P0:0 P1:0 P2:0** ✅ — exercise recommendation 正确包含（医生 feedback）
