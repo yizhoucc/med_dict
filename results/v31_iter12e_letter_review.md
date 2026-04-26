@@ -5,7 +5,7 @@
 
 ## 状态
 - **✅ 全部完成: 56/56（逐句详细审查）**
-- P0: 0, P1: 2, P2: 15
+- P0: 0, P1: 2, P2: 17
 - **P1 详情**:
   - ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
   - ROW 72 — letter 说 "no cancer was found in the removed tissue" 但 pathology 明确有 1.2cm grade 2 IDC
@@ -23,6 +23,7 @@
   - ROW 72: "medication"替"test"
   - ROW 80: cold gloves 用途错误（neuropathy→hand-foot syndrome）
   - ROW 84: PR+ 误写（metastatic biopsy 明确 PR negative <1%，混淆了原始肿瘤 PR+95%）
+  - ROW 85: prednisone 剂量缺失（"to /d" 应为 "to 50 mg/d"）+ letter 被截断/garbled by heavy redaction
   - ROW 91: imaging 时间错位（2011 scans 误归因于 2012 治疗失败）+ 遗漏 everolimus
   - ROW 96: "medication testing" 误称基因组检测
 - **零幻觉、零编造**
@@ -831,7 +832,7 @@
 | "evaluated for a phase 1 trial of medication+olaparib" | A/P ✓（药名 redacted） | ✅ |
 | "2-week radiation washout for the trial" | A/P ✓ | ✅ |
 
-**P0:0 P1:0 P2:0** ✅
+**P0:0 P1:0 P2:2**（prednisone 剂量缺失"decreased to /d"应为50mg + letter 被截断/garbled by heavy redaction）
 
 ## ROW 87
 
