@@ -5,7 +5,7 @@
 
 ## 状态
 - **✅ 全部完成: 56/56（逐句详细审查）**
-- P0: 0, P1: 2, P2: 12
+- P0: 0, P1: 2, P2: 14
 - **P1 详情**:
   - ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
   - ROW 72 — letter 说 "no cancer was found in the removed tissue" 但 pathology 明确有 1.2cm grade 2 IDC
@@ -22,6 +22,7 @@
   - ROW 68: sons 遗传筛查描述错误（遗传性贫血→medication-related）
   - ROW 72: "medication"替"test"
   - ROW 80: cold gloves 用途错误（neuropathy→hand-foot syndrome）
+  - ROW 91: imaging 时间错位（2011 scans 误归因于 2012 治疗失败）+ 遗漏 everolimus
   - ROW 96: "medication testing" 误称基因组检测
 - **零幻觉、零编造**
 - 医生 feedback 关键项已验证：ROW 99 symptom management service ✓, ROW 100 exercise 10min×3/day ✓
@@ -887,17 +888,22 @@
 
 | Letter 句子 | 原文依据 | 判定 |
 |------------|---------|------|
-| "MRI...cancer in your right hip has grown and spread" | imaging ✓ | ✅ |
-| "PET/CT...new cancer in soft tissues around your kidneys" | imaging ✓ | ✅ |
-| "cancer has grown despite the current treatment" | progression ✓ | ✅ |
-| "lasix to help with swelling and potassium to balance" | A/P "lasix 10mg daily with KCL 10Meq" ✓ | ✅ |
-| "continue exemestane and denosumab" | A/P ✓ | ✅ |
-| "topical antifungal cream" | A/P ✓ | ✅ |
+| "MRI of your pelvis showed that the cancer in your right hip has grown and spread to...sacrum and left leg" | MRI pelvis 11/08/2011 ✓——但这是**一年前**的imaging | ✅ |
+| "PET/CT scan confirmed this and also found new cancer in the soft tissues around your kidneys" | PET/CT 11/15/2011 "new soft tissue stranding in right perirenal area" ✓——同样是一年前 | ✅ |
+| "**These findings show that the cancer has grown despite the current treatment**" | **不准确**：2011 imaging predates 当前治疗（everolimus+exemestane 2012年4月才开始）。A/P 也只说"unclear significance for iliac LN small change"，远没有定论 | P2 |
+| "started taking lasix to help with swelling and potassium to balance" | A/P "Continue lasix 10mg daily with KCL 10Meq daily" ✓ | ✅ |
+| "**continue taking exemestane and denosumab**" | A/P "everolimus and exemestane daily since April 2012" + denosumab ✓。**但漏了 everolimus！** extraction current_meds 有 "everolimus, exemestane, denosumab"，letter 丢了 everolimus | P2 |
+| "topical antifungal cream to treat a fungal infection" | A/P "Fungal dermatitis, topical antifungal 2 times daily" ✓ | ✅ |
 | "PET/CT scan next week" | A/P ✓ | ✅ |
 | "blood tests every month" | A/P "Labs monthly" ✓ | ✅ |
 | "next visit is in one month" | A/P "RTC in 1 month" ✓ | ✅ |
 
-**P0:0 P1:0 P2:0** ✅
+**Letter 整体评价**：
+- 准确性 ⚠️ 两个问题：imaging 时间错位（2011→2012 误归因），遗漏 everolimus
+- 通俗性 ✅ "swelling", "balance the effects", "soft tissues around your kidneys"
+- 完整性 ⚠️ 漏了 everolimus（主要治疗药物）
+
+**P0:0 P1:0 P2:2**（imaging 时间错位 + 遗漏 everolimus）
 
 ## ROW 92
 
