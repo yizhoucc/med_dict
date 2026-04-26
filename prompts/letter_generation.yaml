@@ -30,12 +30,17 @@ patient_letter: |
       - If BOTH breast AND lymph nodes are clear: "After treatment and surgery, no cancer was found in any of the removed tissue. This is a very good sign."
       - If breast is clear BUT lymph nodes still have cancer: "After treatment and surgery, no cancer was found in the breast tissue itself, which is a good sign. However, cancer was still found in some of the lymph nodes."
       - NEVER say "no cancer was found in the removed tissue" if lymph nodes were positive.
+      CRITICAL — "Negative margins" vs "No cancer found":
+      - "Negative margins" means the EDGES of the removed tissue are free of cancer. The cancer itself WAS found and removed.
+      - If pathology shows ANY size of cancer (e.g., "1.2 cm IDC", "3.5 cm residual disease"), the cancer WAS present. Write "the cancer was removed, and the edges of the tissue are clean" — do NOT say "no cancer was found."
+      - ONLY say "no cancer was found" if the pathology explicitly says "no residual carcinoma", "pathologic complete response", or "benign" with NO mention of any cancer size.
   14. RESPONSE ASSESSMENT — If results are mixed (some stable, some progressing), mention BOTH.
   15. HANDLING [REDACTED] CONTENT:
       - If a field value is mostly [REDACTED] and you cannot determine what the original content means, SKIP that information rather than generating garbled or nonsensical text.
       - Example: If genetic_testing_plan says "Order an [REDACTED] to provide more information", write "You will have a test to learn more about your cancer" — do NOT try to name the test.
       - Example: If medication_plan says "[REDACTED] + [REDACTED]", write "You will start new medications as discussed with your doctor" — do NOT generate nonsensical drug names.
       - NEVER concatenate partial words from [REDACTED] boundaries. If a word is partially redacted, skip it entirely.
+      - NEVER call a test a "medication test" or "medication testing". If the test name is [REDACTED], say "a test" or "a genomic test" — NOT "a medication test". Tests are NOT medications.
       - If [REDACTED] appears where a FACILITY or LOCATION name should be (e.g., "proceed with treatment at [REDACTED]", "treated at [REDACTED]", "[REDACTED] Hospital"), write "your clinic" or "your treatment center" — do NOT write "a medication".
       - If [REDACTED] appears where an ANEMIA TYPE should be (e.g., "[REDACTED] anemia"), write "a type of anemia" — do NOT write "medication-related anemia" unless the note explicitly says so.
       - Common [REDACTED] context clues: "at [REDACTED]" = facility, "in [REDACTED]" = location, "[REDACTED] anemia" = disease name, "[REDACTED] mutation" = gene name.
@@ -83,6 +88,7 @@ patient_letter: |
    - If Patient type is "New patient": include primary diagnosis information (Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis, goals_of_treatment) since this is the first time the patient is learning about their diagnosis.]
   [STAGING: If Stage_of_Cancer says "Originally X, now Y" BUT Metastasis is "No" and response_assessment shows no recurrence, this is a STAGING UPDATE, NOT disease progression. Do NOT imply worsening.]
   [METASTASIS: If cancer has spread to 3+ sites, say "has spread to other parts of your body" without listing every organ. Only name specific sites if there are 1-2 sites (e.g. "has spread to your bones").]
+  [LYMPH NODE ACCURACY: If Metastasis is "No" and Distant Metastasis is "No", do NOT say "cancer has spread to lymph nodes" UNLESS the pathology section of findings explicitly says lymph nodes are positive (e.g., "2/5 LN positive", "metastatic carcinoma in lymph node"). Enlarged lymph nodes on IMAGING alone (e.g., "axillary lymphadenopathy on CT/PET") do NOT mean the cancer has spread there — they may be reactive or benign. Check pathology, not just imaging.]
   [CRITICAL: If response_assessment mentions BOTH stable AND new/progressing areas, you MUST mention both.]
 
   **What treatment or medication changes were made?**
