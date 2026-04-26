@@ -5,7 +5,7 @@
 
 ## 状态
 - **✅ 全部完成: 56/56（逐句详细审查）**
-- P0: 0, P1: 2, P2: 14
+- P0: 0, P1: 2, P2: 15
 - **P1 详情**:
   - ROW 30 — letter 说 "cancer has spread to some nearby lymph nodes" 但原文明确 node-negative（FNA阴性，A/P "high-risk node-negative"）
   - ROW 72 — letter 说 "no cancer was found in the removed tissue" 但 pathology 明确有 1.2cm grade 2 IDC
@@ -22,6 +22,7 @@
   - ROW 68: sons 遗传筛查描述错误（遗传性贫血→medication-related）
   - ROW 72: "medication"替"test"
   - ROW 80: cold gloves 用途错误（neuropathy→hand-foot syndrome）
+  - ROW 84: PR+ 误写（metastatic biopsy 明确 PR negative <1%，混淆了原始肿瘤 PR+95%）
   - ROW 91: imaging 时间错位（2011 scans 误归因于 2012 治疗失败）+ 遗漏 everolimus
   - ROW 96: "medication testing" 误称基因组检测
 - **零幻觉、零编造**
@@ -804,7 +805,7 @@
 
 | Letter 句子 | 原文依据 | 判定 |
 |------------|---------|------|
-| "ER+/PR+/HER2-...spread to bones, soft tissues, liver, and possibly lining around your brain" | A/P ✓ | ✅ |
+| "**ER+/PR+**/HER2-...spread to bones, soft tissues, liver, and possibly lining around your brain" | A/P 说 ER+/HER2-。但 metastatic biopsy pathology 明确写 "Progesterone Receptor: **NEGATIVE** (<1%)"——**PR 应为阴性**，letter 误写 PR+（可能混淆了2006年原始肿瘤PR+95%） | P2 |
 | "cancer in your brain and liver has grown" | imaging ✓ | ✅ |
 | "platelet count is low" | labs ✓ | ✅ |
 | "increased the dose of Xeloda" | A/P ✓ | ✅ |
@@ -815,7 +816,7 @@
 | "MRI of your spine" | A/P ✓ | ✅ |
 | "continue zolendronic acid" | A/P ✓ | ✅ |
 
-**P0:0 P1:0 P2:0** ✅ — 非常全面
+**P0:0 P1:0 P2:1**（PR+ 误写——metastatic biopsy pathology 明确 PR negative <1%，extraction 错误提取了原始肿瘤的 PR 状态）
 
 ## ROW 85
 
