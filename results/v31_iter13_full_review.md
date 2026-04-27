@@ -1416,3 +1416,306 @@
 | "discuss taking a break from your treatment with your doctor" | A/P ✓ | ✅ |
 
 ### ROW 100 总评: Ext P2:0, Letter P2:0 — **exercise recommendation 正确包含**
+
+---
+
+# 补充详细审查（之前只有一行摘要的 ROW）
+
+以下 ROW 在之前的审查中只有一行总结，现在补充逐字段 extraction 和逐句 letter 表格。
+
+## ROW 34 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | ✅ |
+| Type_of_Cancer | ER+/PR-/HER2- IDC with extensive DCIS | pathology ✓ (2020 recurrence: ER+ 100%, PR+ 50%, HER2-) | ✅ |
+| Stage_of_Cancer | Stage III, now with local recurrence | A/P ✓ | ✅ |
+| current_meds | arimidex | ✓（self-D/C'd but was on it） | ✅ |
+| medication_plan | tamoxifen 20mg PO qD | A/P ✓ | ✅ |
+| radiotherapy_plan | chest wall RT recommended | A/P ✓ | ✅ |
+| lab_plan | check labs | A/P ✓ | ✅ |
+| follow_up | 6 months | A/P ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "cancer has returned in your left breast" | second local relapse ✓ | ✅ |
+| "small area of cancer that was removed...also saw a small spot on imaging" | pathology + PET 6th rib ✓ | ✅ |
+| "start taking...tamoxifen" | A/P ✓ | ✅ |
+| "referred to radiation oncology for chest wall radiation" | A/P ✓ | ✅ |
+| "basic blood tests" | A/P "check labs" ✓ | ✅ |
+| "return to the clinic in 6 months" | A/P ✓ | ✅ |
+
+**ROW 34 总评**: Ext P2:0, Letter P2:0
+
+## ROW 36 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | cycle 8 abraxane ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade III mixed ductal and mucinous | pathology ✓ | ✅ |
+| Stage_of_Cancer | Stage IIIA (pT3N0) | ✓ | ✅ |
+| findings | arm swelling, doppler for DVT, no new disease | ✓ | ✅ |
+| current_meds | Abraxane, zoladex | ✓ | ✅ |
+| recent_changes | Switched to Abraxane after grade 3 reaction to Taxol | ✓ | ✅ |
+| medication_plan | Continue Abraxane + zoladex + antiemetics; also: tamoxifen | tamoxifen correctly on current meds ✓ | ✅ |
+| imaging_plan | doppler to r/o DVT | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation referral | A/P ✓ | ✅ |
+| follow_up | 2 weeks | A/P ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "swelling in your right arm and hand...doppler test...blood clot" | A/P ✓ 通俗化 DVT ✓ | ✅ |
+| "No new cancer growth" | ✓ | ✅ |
+| "switched to Abraxane after having a bad reaction to Taxol" | ✓ | ✅ |
+| "continue weekly Abraxane" | ✓ | ✅ |
+| "radiation oncology" | ✓ | ✅ |
+| "2 weeks" | ✓ | ✅ |
+
+**ROW 36 总评**: Ext P2:0, Letter P2:0
+
+## ROW 40 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR-/HER2- grade 1 IDC | pathology: ER 95%, PR 5%, HER2 neg ✓ | ✅ |
+| Stage_of_Cancer | Stage II (pT2 N1mi) | reasonable ✓ | ✅ |
+| current_meds | letrozole | ✓ | ✅ |
+| medication_plan | letrozole + Prolia | A/P ✓ | ✅ |
+| imaging_plan | DEXA | A/P ✓ | ✅ |
+| Referral: Others | PT referral | A/P ✓ | ✅ |
+| follow_up | 3 months | A/P ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "early stage...not spread...cure" | ✓ | ✅ |
+| "letrozole...Prolia to protect bones...DEXA...physical therapy...3 months" | A/P 全覆盖 ✓ | ✅ |
+
+**ROW 40 总评**: Ext P2:0, Letter P2:0
+
+## ROW 42 — 补充表格
+
+### Extraction: 全部准确（post-radiation, start tamoxifen 5yr, mammogram next visit, RTC 4-6 wk）
+### Letter: "finished radiation...tamoxifen for five years...return 4-6 weeks...mammogram" 简洁准确
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "finished radiation therapy on January 5 and it went well" | ✓ | ✅ |
+| "tamoxifen for five years" | A/P ✓ | ✅ |
+| "return to the clinic in 4-6 weeks" | ✓ | ✅ |
+| "routine mammogram to check your breast" at next appt | ✓ | ✅ |
+
+**ROW 42 总评**: Ext P2:0, Letter P2:0
+
+## ROW 44 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 IDC with residual DCIS | pathology ✓ | ✅ |
+| Stage | Originally Stage II, post-NAC | ✓ | ✅ |
+| medication_plan | AI after radiation, possible BSO | A/P ✓ | ✅ |
+| radiotherapy_plan | clinical trial 3 vs 5 weeks | A/P ✓ | ✅ |
+| imaging_plan | CT chest in 1 year for lung nodule | A/P ✓ | ✅ |
+| Referral | radiation, nutrition, PT | A/P ✓ | ✅ |
+| follow_up | 01/05/19 | ✓ | ✅ |
+
+### Letter: 全面覆盖 residual cancer, radiation trial, AI, BSO discussion, CT, nutrition, PT
+
+**ROW 44 总评**: Ext P2:0, Letter P2:0
+
+## ROW 46 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR-/HER2- grade 1 IDC | ER+ 95%, PR- (0%), HER2- IHC 1+ ✓ | ✅ |
+| Stage | Stage IIB (pT2N1) | 3.5cm residual + 2/2 SLN+ ✓ | ✅ |
+| current_meds | letrozole | started today ✓ | ✅ |
+| medication_plan | letrozole + abemaciclib after XRT + naproxen + allegra + iron | A/P ✓ | ✅ |
+| imaging_plan | MRA abdomen 1yr + DEXA | A/P ✓ | ✅ |
+| procedure_plan | re-excision of margins | positive margins ✓ | ✅ |
+| follow_up | 2-3 months | ✓ | ✅ |
+
+### Letter: 准确覆盖 residual cancer, 2 LN+, sarcoidosis, renal artery, letrozole, abemaciclib, re-excision, MRA, DEXA
+
+**ROW 46 总评**: Ext P2:0, Letter P2:0
+
+## ROW 49 — 补充表格
+
+### Extraction: 全部准确（new diagnosis IDC ER+/PR+/HER2-, Stage 2, mastectomy 01/06/17, tamoxifen+thrombophilia, XRT discussed）
+### Letter: "mastectomy...plan depends on surgery results...tamoxifen...blood clots...radiation" 准确
+
+**ROW 49 总评**: Ext P2:0, Letter P2:0
+
+## ROW 50 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:1（medication timing: lupron+letrozole Oct 2014 vs letter says all three Jan 2015）
+
+**ROW 50 总评**: Ext P2:0, Letter P2:1
+
+## ROW 51 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0（教育性 note，Type_of_Cancer 空是正确的——note 不含诊断信息）
+### Letter: P0:0 P1:0 P2:0（Gemzar teaching, Zofran/Compazine, vaccines, pregnancy, social work, exercise）
+
+**ROW 51 总评**: Ext P2:0, Letter P2:0
+
+## ROW 52 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:0（"edges of removed tissue are clean" ✓ margins rule, "a test" ✓ not "medication test", Zoladex+AI, fertility preservation）
+
+**ROW 52 总评**: Ext P2:0, Letter P2:0
+
+## ROW 53 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:0（HER2+ IDC, AC/THP or TCHP options detailed, Arimidex 10yr, radiation, genetic counseling）
+
+**ROW 53 总评**: Ext P2:0, Letter P2:0
+
+## ROW 54 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:0（BRCA2 oligometastatic: stable disease, leuprolide+letrozole, palbociclib after radiation, zoledronic acid, DEXA, PET/CT）
+
+**ROW 54 总评**: Ext P2:0, Letter P2:0
+
+## ROW 80 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR+/HER2- grade 3 IDC | pathology ✓ | ✅ |
+| Stage | Stage I | skin recurrence post mastectomy ✓ | ✅ |
+| medication_plan | TC x4, cold gloves, claritin | A/P ✓ | ✅ |
+| radiotherapy_plan | 6 weeks (5+1 boost), left axilla and SC fields | A/P ✓ | ✅ |
+| follow_up | cycle 2 | ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "TC on April 11, 2019...four times" | ✓ | ✅ |
+| "dexamethasone, ondansetron, prochlorperazine" | ✓ | ✅ |
+| "**cold gloves...prevent hand swelling**" | A/P says cold gloves for "**neuropathy and fingernails**"——"hand swelling"改善了iter12e的"hand-foot syndrome"但仍不精确 | P2 |
+| "six weeks of radiation...five weeks with a one-week boost" | ✓ | ✅ |
+
+**ROW 80 总评**: Ext P2:0, Letter P2:1（cold gloves 用途描述不精确）
+
+## ROW 84 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| **Type_of_Cancer** | **ER+/PR+/HER2-** | metastatic biopsy pathology: "Progesterone Receptor: **NEGATIVE** (<1%)"——**PR 应为阴性** | **P2** |
+| Stage | Stage IV (metastatic) | ✓ | ✅ |
+| Distant Metastasis | Yes, to bone, soft tissue, liver, meninges | ✓ | ✅ |
+| medication_plan | continue Xeloda, consider fulvestrant+inhibitor if progression | A/P ✓ | ✅ |
+| imaging_plan | CT CAP + LP + MRI spine | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation referral for CNS | A/P ✓ | ✅ |
+
+### Letter: 准确覆盖 brain/liver progression, Xeloda, LP, CT, MRI spine, radiation consult
+
+**ROW 84 总评**: Ext **P2:1**（PR+ 错——metastatic biopsy PR-）, Letter P2:0
+
+## ROW 85 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR-/HER2- ILC with pleomorphic features | pathology ✓ | ✅ |
+| Stage | Originally Stage IIIA, now metastatic | ✓ | ✅ |
+| recent_changes | prednisone dose decreased | A/P ✓ | ✅ |
+| **medication_plan** | "Continue steroid taper...pain meds; **also: palbociclib**" | **palbociclib 已因 progression 停用！** POST hook 错误添加 | **P2** |
+| therapy_plan | phase 1 trial +olaparib | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation washout for trial | A/P ✓ | ✅ |
+
+### Letter: P2x2（prednisone 剂量缺失 "to /d" + letter 截断 + garbled from redaction）
+
+**ROW 85 总评**: Ext **P2:1**（POST hook adds stopped palbociclib）, Letter P2:2
+
+## ROW 88 — 补充表格
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "IDC...weakly positive for ER...negative for PR...no HER2" | ✓ | ✅ |
+| "cancer has spread to your brain and other parts" | brain + lung + LN mets ✓ | ✅ |
+| "capecitabine (Xeloda)" | ✓ | ✅ |
+| "clinical trials using immunotherapy" | ✓ | ✅ |
+| "If cancer tests positive for HER2...different treatment" | A/P HER2 testing recommended ✓ | ✅ |
+| "restaging after three months" | ✓ | ✅ |
+
+**注意**: Letter 截断（以 "stressful" 结尾无 closing）— P2
+
+**ROW 88 总评**: Ext P2:0, Letter P2:1（truncation）
+
+## ROW 91 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR+ IDC with metastatic recurrence to bone | ✓ | ✅ |
+| Stage | Originally Stage I, now metastatic | ✓ | ✅ |
+| current_meds | everolimus, exemestane, denosumab | ✓ 包含 everolimus | ✅ |
+| recent_changes | Started lasix + KCL | ✓ | ✅ |
+| medication_plan | continue lasix+KCL+denosumab+antifungal; also: exemestane | exemestane correct ✓ | ✅ |
+| imaging_plan | PET/CT next week | ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "cancer in your right hip has grown" | imaging ✓ | ✅ |
+| "lasix to help with swelling and potassium" | ✓ | ✅ |
+| "continue taking exemestane and denosumab" | ✓ 但**漏了 everolimus**（extraction 有它） | P2 |
+| "PET/CT scan next week" | ✓ | ✅ |
+| "blood tests every month...next visit in one month" | ✓ | ✅ |
+
+**ROW 91 总评**: Ext P2:0, Letter P2:1（漏 everolimus）
+
+## ROW 96 — 补充表格
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Type_of_Cancer | ER+/PR+/HER2- grade I mixed ductal and cribriform with tubular | pathology ✓ | ✅ |
+| Stage | Stage IA (pT1cN0) | ✓ | ✅ |
+| medication_plan | start tamoxifen after radiation | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation consult | A/P ✓ | ✅ |
+| genetic_testing_plan | Oncotype/MammaPrint (redacted) | A/P ✓ | ✅ |
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "ER+/PR+/HER2- grade I mixed ductal and cribriform" | ✓ | ✅ |
+| "early-stage cancer...not spread" | ✓ | ✅ |
+| "**a test** to learn more about your cancer" | ✓——**iter12e "medication testing" P2 已修复！** | ✅ |
+| "radiation oncology for a consult" | ✓ | ✅ |
+| "start tamoxifen after completing radiation" | ✓ | ✅ |
+
+**ROW 96 总评**: Ext P2:0, Letter P2:0——**"medication testing" → "a test" 修复确认**
