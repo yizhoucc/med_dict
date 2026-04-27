@@ -461,3 +461,42 @@
 - **Extraction**: P0:0 P1:0 P2:0
 - **Letter**: P0:0 P1:0 P2:0
 - kidney transplant 患者的复杂背景没有影响提取/letter 质量
+
+## ROW 10 (coral_idx 149)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | Follow up | post-surgery follow-up ✓ | ✅ |
+| Type_of_Cancer | HR+ HER2- grade 2 IDC | A/P "HR+ and her 2 negative" ✓ | ✅ |
+| **Stage_of_Cancer** | **Stage II (8.8 cm tumor with 20 lymph nodes involved)** | A/P "with **July 20** lymph nodes involved"——"July 20"是 redacted 的数字（可能是 X/20），**不是 20 个全部受累** | P2 |
+| Distant Metastasis | No | ✓ | ✅ |
+| **findings** | **8.8 cm tumor and 20 lymph nodes involved** | 同上：**"20 involved" 是 redacted 数字误读** | P2 |
+| current_meds | letrozole | ✓ | ✅ |
+| goals_of_treatment | curative | adjuvant ✓ | ✅ |
+| medication_plan | continue letrozole | A/P #4 ✓ | ✅ |
+| radiotherapy_plan | radiation to left chest wall and surrounding lymph nodes | A/P #5 ✓ | ✅ |
+| imaging_plan | DEXA | A/P #6 ✓ | ✅ |
+| Advance care | full code | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:2（LN count "20 involved" 是 redacted 数字误读，同时出现在 Stage 和 findings）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "surgery to remove a large tumor from your left breast, along with **some** lymph nodes" | A/P ✓——letter 聪明地用了 "some" 而非 extraction 的 "20"，更准确 | ✅ |
+| "cancer...starts in the milk ducts...does not have...HER2" | ✓ | ✅ |
+| "recovered well...do not need chemotherapy because the risk is low" | "Low risk *****" + HPI "does not need chemotherapy" ✓ | ✅ |
+| "continue taking letrozole...April 2021" | A/P #4 ✓ | ✅ |
+| "radiation treatment to the left side of your chest and the nearby lymph nodes" | A/P #5 ✓ | ✅ |
+| "DEXA scan, which checks the strength of your bones" | A/P #6 ✓ 通俗解释 ✓ | ✅ |
+| "full code" | ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——letter 比 extraction 更准确（用 "some lymph nodes" 而非 "20"）
+
+### ROW 10 总评
+- **Extraction**: P0:0 P1:0 P2:2
+- **Letter**: P0:0 P1:0 P2:0
+- letter 自动纠正了 extraction 的 LN count 误读——用 "some" 替代了不确定的 "20"
