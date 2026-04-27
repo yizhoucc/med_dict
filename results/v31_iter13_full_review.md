@@ -1093,3 +1093,326 @@
 ## ROW 99 (coral_idx 238): Ext P2:0, Letter P2:0 — **symptom management service** ✓ (医生feedback), biopsy + CT + 2 weeks
 
 ## ROW 100 (coral_idx 239): Ext P2:0, Letter P2:0 — **exercise 10 min 3x/day** ✓ (医生feedback), Focalin for fatigue, Gemzar stopped
+
+## ROW 59 (coral_idx 198) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | Follow up | on hormonal therapy ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 3 IDC with high-grade DCIS | surgical pathology grade 3 ✓ | ✅ |
+| **Stage_of_Cancer** | **Stage IIA (pT2 N0)** | tumor 1.5cm = **pT1c** (not pT2), 0/5 LN = N0, A/P says "**stage 1**"。**应为 Stage IA** | P2 |
+| findings | no recurrence, weight stable, PE normal | ✓ | ✅ |
+| current_meds | exemestane, letrozole | 都在 med list 但实际在 switching ✓ | ✅ |
+| recent_changes | Stopped letrozole, advised to start exemestane | A/P ✓ | ✅ |
+| medication_plan | discontinue letrozole → wait 2-3wk → exemestane + Pristiq + psychiatry for duloxetine | A/P comprehensive ✓ | ✅ |
+| imaging_plan | mammogram July + alternating mammo/MRI + 6mo breast exam | A/P ✓ | ✅ |
+| follow_up | 6 months | ✓ | ✅ |
+| Referral: Specialty | Psychiatry referral | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（Stage IIA→应为 IA）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "No new signs of cancer growth" | "without evidence of recurrence" ✓ | ✅ |
+| "weight has stayed the same since November/December 2017" | A/P ✓ | ✅ |
+| "scar from your surgery looks good" | PE ✓ | ✅ |
+| "stopped taking letrozole...start exemestane after a short break" | A/P ✓ | ✅ |
+| "also taking Pristiq for depression" | ✓ | ✅ |
+| "psychiatrist about changing your antidepressant to...Duloxetine" | A/P #2 ✓ | ✅ |
+| "mammogram in July...mammograms and MRIs every six months" | A/P ✓ | ✅ |
+| "see us again in six months" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+### ROW 59 总评: Ext P2:1, Letter P2:0
+
+---
+
+## ROW 61 (coral_idx 200) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | newly diagnosed, here to establish care ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 IDC | biopsy: IDC ≥11mm, ER 100%, PR 100%, HER2- (1+) ✓ | ✅ |
+| Stage_of_Cancer | Stage I | 1.5cm, no imaging evidence of mets ✓ | ✅ |
+| Distant Metastasis | No | CT chest/abd benign ✓ | ✅ |
+| findings | IDC diagnosis + MRI findings + second site biopsy negative + CT findings | ✓ | ✅ |
+| goals_of_treatment | curative | ✓ | ✅ |
+| medication_plan | Tamoxifen vs Ovarian Suppression + AI | A/P ✓ | ✅ |
+| procedure_plan | lumpectomy with IORT and reconstruction 04/12/21 | A/P ✓ | ✅ |
+| genetic_testing_plan | Oncotype Dx after surgery | A/P ✓ | ✅ |
+| follow_up | after surgery and pathology are complete | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "first visit regarding your newly diagnosed left breast cancer" | ✓ | ✅ |
+| "ductal carcinoma...sensitive to hormones (ER+ and PR+)...no HER2" | ✓ | ✅ |
+| "early stage (Stage I)...not spread" | ✓ | ✅ |
+| "imaging tests show a small area of concern...biopsy...did not find any cancer" | MRI 0900 site → biopsy negative ✓ | ✅ |
+| "small cyst in your liver, but it is not related to the cancer" | CT abd: liver cyst ✓ | ✅ |
+| "Tamoxifen or another hormone therapy" | A/P ✓ | ✅ |
+| "lumpectomy on April 12, 2021...IORT...will not need additional radiation" | A/P "IORT so will not need post op RT" ✓ | ✅ |
+| "decide if you need chemotherapy based on the results" | Oncotype Dx after surgery ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+### ROW 61 总评: Ext P2:0, Letter P2:0
+
+## ROW 64 (coral_idx 203) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | new consult + second opinion ✓ | ✅ |
+| second opinion | yes | ✓ | ✅ |
+| Type_of_Cancer | HR+/HER2- IDC with probable sternum met | A/P "Stage III-IV...HR+/her 2 negative with probably metastatic disease to the sternum" ✓ | ✅ |
+| Stage_of_Cancer | Stage III-IV | A/P ✓ | ✅ |
+| goals_of_treatment | curative | oligometastatic treatment intent ✓ | ✅ |
+| medication_plan | chemo + taxol + xgeva if bone bx positive | A/P ✓ | ✅ |
+| imaging_plan | biopsy of sternal lesion | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter: P0:0 P1:0 P2:0 — "cancer may have spread to your sternum (the middle part of your chest bone)" ✓, biopsy planned ✓, TCHP ✓, xgeva if positive ✓, keep chemo on schedule ✓
+
+---
+
+## ROW 65 (coral_idx 204) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | consultation for neoadjuvant chemo ✓ | ✅ |
+| Type_of_Cancer | ER weak+ (2%)/PR low+ (7%)/HER2- IDC | A/P "weakly ER and PR positive, ***** negative" ✓ | ✅ |
+| Stage_of_Cancer | locally advanced with LN involvement | A/P ✓ | ✅ |
+| Distant Metastasis | No | PET/CT no distant mets ✓ | ✅ |
+| medication_plan | neoadjuvant AC/T or ISPY trial | A/P ✓ | ✅ |
+| procedure_plan | port placement | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter: P0:0 P1:0 P2:0 — neoadjuvant AC/T ✓, ISPY trial option ✓, port ✓, research biopsy/MRI ✓, 5-10 yr endocrine ✓
+
+---
+
+## ROW 68 (coral_idx 207) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Type_of_Cancer | ER+/PR+/HER2+ multifocal IDC | pathology ✓ | ✅ |
+| Stage_of_Cancer | Stage I | extraction inference ✓ | ✅ |
+| response_assessment | good response after 6 cycles TCHP, MRI no visible lesions | ✓ | ✅ |
+| procedure_plan | bilateral mastectomy | A/P ✓ | ✅ |
+| genetic_testing_plan | sons should be tested | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "ER+/PR+/HER2+ multifocal invasive ductal carcinoma" | ✓ | ✅ |
+| "good response to the treatment...6 cycles of TCHP" | ✓ | ✅ |
+| "MRI shows the cancer has responded well to treatment" | follow-up MRI no visible lesions ✓ | ✅ |
+| "bilateral mastectomy...surgery to remove both breasts" | A/P ✓ | ✅ |
+| "if you choose to have a lumpectomy...need radiation" | A/P ✓ | ✅ |
+| "sons should be tested for a type of anemia and the risk for pancreatic cancer" | A/P ✓——但 "a type of anemia" 比 iter12e 的 "medication-related anemia" 更准确 | ✅ |
+| "healthy diet and regular exercise" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——**iter12e P2 (sons 遗传筛查 "medication-related anemia") 已改善为 "a type of anemia"**
+
+---
+
+## ROW 70 (coral_idx 209) — 详细审查
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Type_of_Cancer | ER+/PR+/HER2- ILC (left) + ER+/PR-/HER2- IDC (right) | A/P: left PR+, right PR- ✓——**bilateral cancer 正确区分两侧 receptor** | ✅ |
+| Stage_of_Cancer | Stage II-III | locally advanced ✓ | ✅ |
+| Distant Metastasis | No | ✓ | ✅ |
+| current_meds | letrozole | restart ✓ | ✅ |
+| medication_plan | restart letrozole | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation consult | A/P ✓ | ✅ |
+| imaging_plan | CT due June for lung nodules | A/P ✓ | ✅ |
+| follow_up | September | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——bilateral cancer 处理准确
+
+### Letter: P0:0 P1:0 P2:0 — "recovering well...Two lymph nodes positive...restart letrozole...radiation consult...expanders...CT for lung nodules...follow-up September" 全部准确
+
+## ROW 78 (coral_idx 218) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer has gotten worse...liver and lymph nodes has grown" | imaging progression ✓ | ✅ |
+| "small spot in your lung...gotten larger" | ✓ | ✅ |
+| "interested in joining a clinical trial" | A/P ✓ | ✅ |
+| "not interested in chemotherapy at this time" | A/P ✓ | ✅ |
+| "radiation to treat the cancer" | radiation consult ✓ | ✅ |
+| "echocardiogram on September 8th" | echo ✓ | ✅ |
+
+### ROW 78 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 82 (coral_idx 221) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "4.3 cm tumor with some lymph nodes involved" | pathology ✓ | ✅ |
+| "ER positive, PR positive...no HER2" | ✓ | ✅ |
+| "We decided not to start chemotherapy because your risk is low" | A/P "low risk" ✓ | ✅ |
+| "appointment...tomorrow to discuss radiation" | A/P ✓ | ✅ |
+| "DEXA scan to check your bone health" | A/P ✓ | ✅ |
+| "exercise counseling" | A/P ✓ | ✅ |
+
+### ROW 82 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 87 (coral_idx 226) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "second opinion...grade 2, 2.2 cm, 4/19 lymph nodes" | A/P ✓ | ✅ |
+| "clear margins...small area of cancer spreading beyond the capsule" | extracapsular extension ✓ | ✅ |
+| "ER+, PR+, no HER-2/neu" | ✓ | ✅ |
+| "pill-rolling tremor of Parkinson's disease" | PE ✓ | ✅ |
+| "hormonal therapy alone" | patient choice due to age+Parkinson's ✓ | ✅ |
+| "radiation to prevent local recurrence" | A/P discussed ✓ | ✅ |
+
+### ROW 87 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 90 (coral_idx 229) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "adenocarcinoma...Stage II/III" | A/P ✓ | ✅ |
+| "thyroid stimulating hormone level is higher than normal" | TSH 6.01 (H) ✓ | ✅ |
+| "low red blood cell count...anemia" | Hgb 11.3 (L) ✓ | ✅ |
+| "GCSF dose has been reduced to 50%" | A/P ✓ | ✅ |
+| "granisetron and olanzapine" | A/P ✓ | ✅ |
+| "continue AC...cycle 4 in about a week" | A/P ✓ | ✅ |
+| "visit after radiation therapy, 1-1.5 months" | A/P "RTC after XRT" ✓ | ✅ |
+
+### ROW 90 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 92 (coral_idx 231) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "liver feels smaller and less tender" | A/P "Exam improved of liver" ✓ | ✅ |
+| "Epirubicin...Neupogen for 2 days" | A/P ✓ | ✅ |
+| "echocardiogram to monitor heart function" | cardiac monitoring for anthracycline ✓ | ✅ |
+| "liver function and tumor markers" | A/P ✓ | ✅ |
+
+### ROW 92 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 95 (coral_idx 234) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "MRI...cancer has decreased...10x8x8mm compared to 16x16x15mm" | MRI response ✓ | ✅ |
+| "lymph nodes...gotten smaller but not completely gone" | ✓ | ✅ |
+| "started AC" | A/P ✓ | ✅ |
+| "capecitabine after finishing radiation" | CREATE-X trial ✓ | ✅ |
+| "referred to radiation oncologist" | A/P ✓ | ✅ |
+| "strongly recommended to take hormone therapy" | A/P ✓ | ✅ |
+
+### ROW 95 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 97 (coral_idx 236) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...early stage...not spread" | ✓ | ✅ |
+| "no cancer found in the lymph nodes" | negative SLN ✓ | ✅ |
+| "drain in place...concerned about its status" | A/P drain issue ✓ | ✅ |
+| "starting a medication to help prevent cancer from coming back" | endocrine therapy ✓ | ✅ |
+| "continuing your current medication for multiple sclerosis" | Gilenya ✓ | ✅ |
+| "**test called Oncotype Dx**" | A/P ✓——**正确命名** Oncotype Dx | ✅ |
+| "referred to a radiation oncologist" | A/P ✓ | ✅ |
+
+### ROW 97 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 99 (coral_idx 238) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer that has spread to...left lung and lymph nodes in the middle of your chest" | mediastinal LAD + lung mass ✓ | ✅ |
+| "cancer in your chest area has gotten smaller, but...lung has grown" | A/P mixed response ✓ | ✅ |
+| "switched from anastrozole to letrozole because of joint pains" | ✓ | ✅ |
+| "Exemestane and Afinitor, or...Xeloda...chemotherapy" | A/P future options ✓ | ✅ |
+| "biopsy of the cancer in your lung or chest area" | A/P needs biopsy ✓ | ✅ |
+| "new CT scan with contrast" | A/P ✓ | ✅ |
+| "**referred to a symptom management service**" | A/P ✓——**医生 feedback 要求的！** | ✅ |
+| "return to the clinic in about 2 weeks" | A/P ✓ | ✅ |
+
+### ROW 99 总评: Ext P2:0, Letter P2:0 — **symptom management service 正确包含**
+
+---
+
+## ROW 100 (coral_idx 239) — 详细审查
+
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "tumor markers have gone up...Cancer Antigen 15-3 and Cancer Antigen 27.29" | A/P "Tumor markers rose" ✓ | ✅ |
+| "hemoglobin and hematocrit levels are low...anemic" | labs ✓ | ✅ |
+| "no new signs of cancer spreading" | A/P "Exam stable" ✓ | ✅ |
+| "Gemzar treatment was stopped by you" | patient wants break ✓ | ✅ |
+| "Focalin as needed to help with fatigue" | A/P ✓ | ✅ |
+| "**exercise for 10 minutes three times a day**" | A/P "Rec exercise 10 min 3 x a day" ✓——**医生 feedback 要求的！** | ✅ |
+| "discuss taking a break from your treatment with your doctor" | A/P ✓ | ✅ |
+
+### ROW 100 总评: Ext P2:0, Letter P2:0 — **exercise recommendation 正确包含**
