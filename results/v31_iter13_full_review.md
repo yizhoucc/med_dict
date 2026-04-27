@@ -127,3 +127,52 @@
 ### ROW 2 总评
 - **Extraction**: P0:0 P1:0 P2:1
 - **Letter**: P0:0 P1:0 P2:0
+
+## ROW 3 (coral_idx 142)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | "New Patient Evaluation" ✓ | ✅ |
+| second opinion | yes | "several opinions and is here for a medical oncology consult" ✓ | ✅ |
+| in-person | Televisit | "Video Consult" ✓ | ✅ |
+| summary | 53 y.o....neoadjuvant therapy recommendations | HPI ✓ | ✅ |
+| Type_of_Cancer | HR+, HER2- grade 2 IDC | "HR+, her 2 2+, fish negative" = HER2- ✓ | ✅ |
+| Stage_of_Cancer | Stage IIA | "Clinical: Stage IIA" ✓ | ✅ |
+| Distant Metastasis | No | PET pending, no known mets ✓ | ✅ |
+| lab_summary | No labs in note | "No results found for any previous visit" ✓ | ✅ |
+| findings | 1.7cm tumor, 1.5cm LN+, pending PET/genetics | HPI ✓ | ✅ |
+| current_meds | "" | "No current outpatient medications on file" ✓ | ✅ |
+| goals_of_treatment | curative | Stage IIA ✓ | ✅ |
+| response_assessment | Not yet on treatment | No treatment started ✓ | ✅ |
+| therapy_plan | Discussed chemo + surgery + radiation roles | A/P #2-4 ✓ | ✅ |
+| imaging_plan | PET scan follow up | PET CT scheduled ✓ | ✅ |
+| genetic_testing_plan | Genetic testing sent and is pending | A/P #6 ✓ | ✅ |
+| Next clinic visit | after PET and [REDACTED] are back | A/P #7 ✓ | ✅ |
+| Advance care | full code | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "medical oncology consult regarding your newly diagnosed breast cancer" | ✓ | ✅ |
+| "small cancer...1.7 cm...positive for estrogen receptors...no HER2" | HPI ✓ | ✅ |
+| "small lymph node in your armpit that has cancer" | biopsy-proven LN+ ✓ | ✅ |
+| "waiting for the results of a PET scan and genetic testing" | ✓ | ✅ |
+| "cure the cancer" | curative ✓ | ✅ |
+| "chemotherapy to reduce the chance of the cancer spreading" | A/P #2 ✓ | ✅ |
+| "surgery and possibly radiation" | A/P #3 ✓ | ✅ |
+| "PET scan to get more information...Genetic testing ordered and pending" | A/P ✓ | ✅ |
+| "referred to for a follow-up visit after the results of the PET scan and **a medication** are back" | A/P: "follow up after pet and ***** are back"（*****=MammaPrint results）。**"a medication"是 garbled**，应为"a test" | P2 |
+| "full code" | ✓ | ✅ |
+| Emotional support | "She has good support" ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（"a medication are back" garbled from redaction）
+
+### ROW 3 总评
+- **Extraction**: P0:0 P1:0 P2:0
+- **Letter**: P0:0 P1:0 P2:1
+- A/P 中的 lifestyle modifications（diet, exercise, stress, sleep）未在 extraction 中单独记录，但不属于标准提取字段
