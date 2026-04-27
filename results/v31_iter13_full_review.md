@@ -320,3 +320,50 @@
 - **Extraction**: P0:0 P1:0 P2:2
 - **Letter**: P0:0 P1:0 P2:1
 - 这是 extraction→letter 错误传播的典型案例：extraction 错误捕获历史 genetics referral → letter 不知情地推荐已完成的检测
+
+## ROW 7 (coral_idx 146)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | "2nd opinion" ✓ | ✅ |
+| second opinion | yes | "CC: 2nd opinion" ✓ | ✅ |
+| Type_of_Cancer | ER-/PR- IDC, HER2+ | "ER/PR neg. ***** by IHC" ✓ | ✅ |
+| Stage_of_Cancer | Originally Stage II, now metastatic (Stage IV) | Stage II 1998, metastatic 2008 ✓ | ✅ |
+| Distant Metastasis | Yes, to left supraclavicular node and mediastinum | ✓ | ✅ |
+| findings | probable mild progression + stable mediastinal + brain MRI normal + LVEF 52% | A/P + imaging ✓ | ✅ |
+| current_meds | "" | "Has been off of rx since last wk" ✓ | ✅ |
+| recent_changes | d/c current rx (Herceptin/Taxotere) | A/P ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| response_assessment | probable mild progression, equivocal | A/P ✓ | ✅ |
+| medication_plan | Recommend new agent + recheck test + no hormonal therapy | A/P ✓ | ✅ |
+| **therapy_plan** | "...physical therapy" | **原文 A/P 没有提到 physical therapy——这是 extraction 幻觉** | P2 |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（therapy_plan 幻觉了 physical therapy）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "second opinion on how to manage your metastatic breast cancer" | ✓ | ✅ |
+| "cancer seems to have slightly grown in the left breast and possibly in the left chest area" | A/P "probable mild progression" ✓ | ✅ |
+| "cancer in your chest area has stayed the same" | "Stable mediastinal adenopathy" ✓ | ✅ |
+| "no sign of cancer in your brain" | Brain MRI normal ✓ | ✅ |
+| "heart function has slightly decreased" | "LVEF somewhat decreased, 52%" ✓ | ✅ |
+| "CT scan shows that a small spot in your left breast has gotten bigger" | CT: SUV 2.1 (was 1.8) ✓ | ✅ |
+| "**Another test called a medication is still high**" | [REDACTED] tumor marker persistently elevated——**"a medication"是 garbled** | P2 |
+| "current treatment with a medication, Herceptin, and Taxotere has been stopped" | A/P "d/c current rx" ✓ | ✅ |
+| "start a new medication as the next step" | A/P "Rec ***** as next line" ✓ | ✅ |
+| "**you will need to have a medication test done again**" | A/P "recheck [REDACTED]"——**"medication test"是 garbled** | P2 |
+| "not be given any hormones" | A/P "Would not consider hormonal therapy" ✓ | ✅ |
+| "clinical trials that might be available" | A/P ✓ | ✅ |
+| "**You will have a physical therapy session**" | **原文没有 PT——跟了 extraction 的幻觉** | P2 |
+
+**Letter 小结**: P0:0 P1:0 P2:3（garbled x2 + PT 幻觉传播）
+
+### ROW 7 总评
+- **Extraction**: P0:0 P1:0 P2:1
+- **Letter**: P0:0 P1:0 P2:3
+- extraction 幻觉了 "physical therapy"→ letter 传播了这个错误
+- 大量 redaction 导致 letter 多处 garbled
