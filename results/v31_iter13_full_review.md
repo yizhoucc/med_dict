@@ -733,3 +733,52 @@
 - **Extraction**: P0:0 P1:0 P2:4
 - **Letter**: P0:0 P1:0 P2:1
 - Extraction 有多个小问题但无 P1。Letter 涵盖了大部分 plan items 但漏了骨保护药
+
+## ROW 22 (coral_idx 161)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | ✓ | ✅ |
+| second opinion | yes | "here for a second opinion" ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- IDC with metastatic recurrence | ✓ | ✅ |
+| Stage_of_Cancer | Originally Stage II, now metastatic (Stage IV) | ✓ | ✅ |
+| Distant Metastasis | Yes, to bone, chest wall, right infraclavicular and right IM nodes | ✓ | ✅ |
+| lab_summary | No labs in note | labs are 8 months old (01/29/2021 vs 09/30/2021 visit), reasonable ✓ | ✅ |
+| findings | history + PET good response + pneumonitis + PE normal | ✓ | ✅ |
+| current_meds | anastrozole, denosumab | 正确——letrozole 已换，abemaciclib 已停 ✓ | ✅ |
+| recent_changes | abemaciclib held + letrozole→anastrozole + dose reduced | comprehensive ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| response_assessment | PET good response + pneumonitis + PE normal | ✓ | ✅ |
+| **medication_plan** | "Continue arimidex alone...;**also: letrozole, abemaciclib**" | **letrozole 已换成 anastrozole, abemaciclib 已停——POST hook 错误添加了已停用药物** | P2 |
+| **therapy_plan** | "**Continue letrozole, abemaciclib**. Continue arimidex alone." | **错误！letrozole 早已换成 anastrozole, abemaciclib 已因 pneumonitis 停用** | P2 |
+| imaging_plan | Pet ct now | A/P #5 ✓ | ✅ |
+| Advance care | Full code | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:2（medication_plan + therapy_plan 包含已停用药物——POST hook 错误）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "new patient evaluation and second opinion" | ✓ | ✅ |
+| "left breast cancer in 1994 and right breast cancer in 2000" | ✓ | ✅ |
+| "May 2020, your cancer returned and spread to your chest wall, bones, and lymph nodes" | ✓ | ✅ |
+| "Recent scans show that your treatment has been working well" | PET good response ✓ | ✅ |
+| "lung irritation, possibly due to...abemaciclib, which was stopped in August 2021" | pneumonitis ✓ 通俗化 ✓ | ✅ |
+| "no new problems were found" on PE | ✓ | ✅ |
+| "abemaciclib was stopped because it caused lung irritation" | ✓ | ✅ |
+| "letrozole was changed to anastrozole in July 2020 due to a skin rash" | ✓ | ✅ |
+| "PET scan now to see how your cancer is doing" | A/P #5 ✓ | ✅ |
+| "if stable, continue taking anastrozole" | A/P #5 ✓——**正确说了 anastrozole 而非 extraction 的 letrozole** | ✅ |
+| "if cancer has grown...Faslodex...if you have a certain mutation" | A/P #6 ✓ | ✅ |
+| "Afinitor or Xeloda or joining a clinical trial" | A/P #7 ✓ | ✅ |
+| "full code" | ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——letter 正确忽略了 extraction 的 "Continue letrozole, abemaciclib" 错误
+
+### ROW 22 总评
+- **Extraction**: P0:0 P1:0 P2:2（POST hook 错误添加已停用药物）
+- **Letter**: P0:0 P1:0 P2:0——**letter 比 extraction 更准确**
+- iter12e 的 P2（语法不完整"you have been on since October 2020"）在 iter13 中已消失
