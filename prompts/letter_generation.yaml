@@ -44,7 +44,11 @@ patient_letter: |
       - If [REDACTED] appears where a FACILITY or LOCATION name should be (e.g., "proceed with treatment at [REDACTED]", "treated at [REDACTED]", "[REDACTED] Hospital"), write "your clinic" or "your treatment center" — do NOT write "a medication".
       - If [REDACTED] appears where an ANEMIA TYPE should be (e.g., "[REDACTED] anemia"), write "a type of anemia" — do NOT write "medication-related anemia" unless the note explicitly says so.
       - Common [REDACTED] context clues: "at [REDACTED]" = facility, "in [REDACTED]" = location, "[REDACTED] anemia" = disease name, "[REDACTED] mutation" = gene name.
-  16. FACTUAL ACCURACY:
+  16. PHYSICAL EXAM FINDINGS:
+      - Only include PE findings that are RELEVANT to the cancer or changed since last visit.
+      - Do NOT include chronic, pre-existing conditions unrelated to cancer (e.g., Parkinson's tremor, chronic arthritis findings, pre-existing heart murmur) unless they affect the cancer treatment plan.
+      - Focus on: new masses, lymphadenopathy, skin changes, surgical site healing, edema — things the patient needs to know about their cancer status.
+  17. FACTUAL ACCURACY:
       - HER2 is a PROTEIN (receptor on cancer cells), NOT a medication. Write "a protein called HER2" or "does not have a protein called HER2", NOT "a medication called HER2".
       - "Squamous differentiation" = cancer cells look like skin cells. It is NOT the same as "mucinous" (mucus-producing). Do NOT confuse these.
       - "Metaplastic carcinoma with squamous differentiation" = "a rare type of breast cancer where the cells look like skin cells"
@@ -76,6 +80,7 @@ patient_letter: |
   **Why did you come to the clinic?**
   [Fill from: summary, Patient type — e.g. "You came in for a follow-up visit regarding your breast cancer treatment."]
   [IMPORTANT: Do NOT use medical jargon in this section. Replace abbreviations like TCHP, AC, ALND with plain words.]
+  [KEEP THIS SECTION SHORT: 1-2 sentences ONLY. State the visit type (follow-up, new consult, second opinion) and the general reason (breast cancer treatment). Do NOT include tumor details (size, grade, lymph nodes, receptors) here — save those for "What's new or changed" section. Avoid repeating information across sections.]
 
   **What's new or changed since your last visit?**
   [Fill from: findings, response_assessment, lab_summary (only if ABNORMAL), goals_of_treatment]
@@ -85,7 +90,8 @@ patient_letter: |
      * Disease progression or regression (from response_assessment)
      * A topic the patient explicitly raised (from findings)
      * Do NOT list routine recurring tests with normal results
-   - If Patient type is "New patient": include primary diagnosis information (Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis, goals_of_treatment) since this is the first time the patient is learning about their diagnosis.]
+   - If Patient type is "New patient": include primary diagnosis information (Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis) since this is the first time the patient is learning about their diagnosis.
+     * GOALS_OF_TREATMENT: Only include if the original note EXPLICITLY states the treatment goal (e.g., "treatment would be palliative", "curative intent"). Do NOT include inferred goals — if the extraction says "curative" but the note never uses that word, SKIP the goal statement.]
   [STAGING: If Stage_of_Cancer says "Originally X, now Y" BUT Metastasis is "No" and response_assessment shows no recurrence, this is a STAGING UPDATE, NOT disease progression. Do NOT imply worsening.]
   [METASTASIS: If cancer has spread to 3+ sites, say "has spread to other parts of your body" without listing every organ. Only name specific sites if there are 1-2 sites (e.g. "has spread to your bones").]
   [LYMPH NODE ACCURACY: If Metastasis is "No" and Distant Metastasis is "No", do NOT say "cancer has spread to lymph nodes" UNLESS the pathology section of findings explicitly says lymph nodes are positive (e.g., "2/5 LN positive", "metastatic carcinoma in lymph node"). Enlarged lymph nodes on IMAGING alone (e.g., "axillary lymphadenopathy on CT/PET") do NOT mean the cancer has spread there — they may be reactive or benign. Check pathology, not just imaging.]
@@ -109,6 +115,12 @@ patient_letter: |
    - Referrals: "You are referred to..." not "We will refer you to..."
    - Follow-up visit timing
    - Advance care status if meaningful (Full code, DNR/DNI, surrogate)]
+  [DECIDED vs DISCUSSED: Only include plans that were DECIDED or ORDERED. If a treatment was discussed but NOT decided upon (e.g., "we discussed the role of radiation" without a specific plan to proceed), do NOT present it as a definite plan. Instead, if the patient made a specific treatment CHOICE (e.g., "patient prefers hormonal therapy alone"), highlight that choice.]
+  [KEY TIMING: Always include specific timing information for next steps:
+   - When is the next treatment cycle? (e.g., "cycle 4 in 1 week")
+   - When is restaging planned? (e.g., "scans again in 3 months")
+   - When is the next visit?
+   These timing details help the patient plan ahead and should never be omitted.]
 
   [If emotional_context is present, add EXACTLY: "We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process." [source:emotional_context]]
   Thank you for trusting us with your care. [source:none]
