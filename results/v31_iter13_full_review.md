@@ -176,3 +176,49 @@
 - **Extraction**: P0:0 P1:0 P2:0
 - **Letter**: P0:0 P1:0 P2:1
 - A/P 中的 lifestyle modifications（diet, exercise, stress, sleep）未在 extraction 中单独记录，但不属于标准提取字段
+
+## ROW 4 (coral_idx 143)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | Follow up | on letrozole since 2016 ✓ | ✅ |
+| summary | 75 y.o....follow-up care | HPI ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 IDC | pathology: 2.8cm grade 2 IDC, HER2 2+ IHC FISH neg ✓ | ✅ |
+| Stage_of_Cancer | Not mentioned in note | staging entry redacted, honest answer ✓ | ✅ |
+| Distant Metastasis | No | no recurrence ✓ | ✅ |
+| lab_summary | No labs in note | external scanned docs only ✓ | ✅ |
+| findings | No recurrence + DEXA results (T-score -2.4 improved) | A/P ✓ | ✅ |
+| current_meds | letrozole | cancer treatment med ✓ | ✅ |
+| goals_of_treatment | curative | adjuvant ✓ | ✅ |
+| response_assessment | No evidence of disease recurrence | A/P #1 ✓ | ✅ |
+| medication_plan | letrozole + magnesium + calcium/VitD + Prolia conditional + probiotics | A/P #1-7 ✓ 全面 | ✅ |
+| imaging_plan | mammogram July 2019 + DEXA July 2019 + **Brain MRI** | A/P: Brain MRI 是**conditional** "if worsening"，不是 planned | P2 |
+| follow_up | 6 months or sooner | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（Brain MRI 是 conditional 不是 planned）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "no sign of the cancer coming back" | A/P "without any evidence of disease recurrence" ✓ | ✅ |
+| "bone density has slightly improved in the femur area, but still in the osteopenia range" | A/P #5 T-score -2.4 ✓ | ✅ |
+| "right breast looks normal with no lumps or masses" | PE ✓ | ✅ |
+| "continue to take Letrozole" | A/P #1 ✓ | ✅ |
+| "magnesium supplements for occasional muscle cramps" | A/P #2 ✓ | ✅ |
+| "continue taking calcium and vitamin D supplements" | A/P #5 ✓ | ✅ |
+| "If your bone density score falls below -2.5, you might start on Prolia **6 months**" | A/P "Prolia 60 mg SQ **every** 6 months"——漏了"every" | P2 |
+| "daily probiotics for loose stools" | A/P #7 ✓ | ✅ |
+| "annual mammogram...July 2019" | A/P #1 ✓ | ✅ |
+| "bone density scan in 1 year...July 2019" | A/P #5 ✓ | ✅ |
+| "follow up in 6 months or sooner" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（"Prolia 6 months" 漏 "every"）
+- Letter 正确地**没有**提到 Brain MRI（因为它是 conditional，extraction 错误地列为 planned）
+
+### ROW 4 总评
+- **Extraction**: P0:0 P1:0 P2:1
+- **Letter**: P0:0 P1:0 P2:1
+- 非常全面的 letter：涵盖 recurrence status、bone density、all 7 A/P items 的 medication/lifestyle recommendations
