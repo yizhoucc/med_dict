@@ -7,7 +7,7 @@
 
 ## 状态
 - **✅ 全部完成: 56/56**
-- Extraction: P0:0 P1:0 P2:24
+- Extraction: P0:0 **P1:1** P2:26
   - ROW1 x2: imaging 漏 bone scan + lab field 混乱
   - ROW2: lab_summary 漏 Na/K
   - ROW4: Brain MRI conditional
@@ -991,7 +991,44 @@
 ## ROW 54 (coral_idx 193)
 ### Ext P2:0, Letter P2:0 — BRCA2 oligometastatic: stable disease, leuprolide+letrozole, palbociclib after radiation, zoledronic acid, DEXA, PET/CT 3-4mo, return 4 weeks
 
-## ROW 57 (coral_idx 196): Ext P2:0, Letter P2:0 — TNBC, XRT planned, genetic counseling
+## ROW 57 (coral_idx 196) — **发现新 P1！**
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | 2nd opinion ✓ | ✅ |
+| second opinion | yes | ✓ | ✅ |
+| **Type_of_Cancer** | **"Breast Cancer (TNBC), originally classified as Grade III adenocarcinoma, ER+/PR+/HER2-"** | 原文: "Pathology showed ***** ***** neg Result (**TNBC**)" = ER-/PR-/HER2-。**Extraction 自相矛盾——TNBC 意味着 ER-/PR-/HER2-，但写了 ER+/PR+** | **P1** |
+| Stage | Locally advanced | ✓ | ✅ |
+| Distant Metastasis | No | ✓ | ✅ |
+| findings | residual tumor 3.7cm, 0/6 nodes, TNBC, PE | ✓ | ✅ |
+| goals_of_treatment | curative | ✓ | ✅ |
+| response_assessment | residual tumor, not pCR | ✓ | ✅ |
+| **medication_plan** | "resume trastuzumab if confirmed; **also: pertuzumab**" | pertuzumab 是原 HER2+ 治疗的药，现在已确认 TNBC，**POST hook 错误添加** | P2 |
+| radiotherapy_plan | XRT scheduled | ✓ | ✅ |
+| **procedure_plan** | **"which pt is scheduled to receive"** | **garbled fragment** | P2 |
+| genetic_testing_plan | genetic counseling and testing | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 **P1:1** P2:2（P1: TNBC 但写 ER+/PR+; P2: POST hook pertuzumab + garbled procedure）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "second opinion regarding your locally advanced breast cancer" | ✓ | ✅ |
+| "**triple-negative breast cancer (TNBC), which means the cancer does not have receptors for estrogen, progesterone, or HER2**" | 原文 TNBC ✓——**letter 正确忽略了 extraction 的 ER+/PR+ 错误！** | ✅ |
+| "still some cancer left, measuring 3.7 cm...None of the lymph nodes...had cancer" | pathology ✓ | ✅ |
+| "dose of your chemotherapy was reduced by 25% after the first cycle" | ✓ | ✅ |
+| "scheduled to receive radiation therapy (XRT)" | A/P ✓ | ✅ |
+| "genetic counseling and testing" | A/P ✓ | ✅ |
+| "If further testing confirms...trastuzumab" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——**letter 比 extraction 更准确**（正确说了 TNBC = no ER/PR/HER2）
+
+### ROW 57 总评
+- **Extraction**: P0:0 **P1:1** P2:2——**首个 iter13 extraction P1**
+- **Letter**: P0:0 P1:0 P2:0——letter 自动纠正了 extraction 的 receptor status 错误
 ## ROW 59 (coral_idx 198): Ext P2:0, Letter P2:0 — letrozole→exemestane, Pristiq, mammogram/MRI alternating
 ## ROW 61 (coral_idx 200): Ext P2:0, Letter P2:0 — lumpectomy with IORT 04/12/21, Oncotype Dx, Tamoxifen vs OS+AI
 ## ROW 64 (coral_idx 203): Ext P2:0, Letter P2:0 — Stage III-IV, probable sternum met, biopsy planned, TCHP+xgeva
