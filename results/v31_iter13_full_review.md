@@ -367,3 +367,50 @@
 - **Letter**: P0:0 P1:0 P2:3
 - extraction 幻觉了 "physical therapy"→ letter 传播了这个错误
 - 大量 redaction 导致 letter 多处 garbled
+
+## ROW 8 (coral_idx 147)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | new consult to establish care ✓ | ✅ |
+| in-person | Televisit | ZOOM ✓ | ✅ |
+| summary | ...incomplete course of neoadjuvant TCHP...discuss treatment options | HPI ✓ | ✅ |
+| Type_of_Cancer | ER-/PR-/HER2+ (IHC 3+, FISH 5.7) grade 3 IDC | LN pathology: ER-, HER2 IHC 3, FISH 5.7, Ki-67 75% ✓ | ✅ |
+| Stage_of_Cancer | Originally Stage III, now post-neoadjuvant with 3/28 LN+ | A/P ✓ | ✅ |
+| Distant Metastasis | No | PET/CT 02 and 06/2019 no mets ✓ | ✅ |
+| findings | breast pCR + 3/28 LN positive + extranodal extension + necrotizing lymphadenitis | pathology ✓ 详细 | ✅ |
+| current_meds | "" | not on cancer treatment ✓ | ✅ |
+| goals_of_treatment | curative | adjuvant intent ✓ | ✅ |
+| response_assessment | breast pCR but 3/28 LN+ with HER2+ | pathology + PET ✓ | ✅ |
+| medication_plan | adjuvant AC x4 → T-DM1 | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation | A/P "importance of radiation after completing AC" ✓ | ✅ |
+| imaging_plan | echocardiogram prior to AC | A/P mentions echo ✓ | ✅ |
+| **procedure_plan** | **No procedures planned** | A/P: "port placement and echocardiogram"——**漏了 port placement** | P2 |
+| follow_up | this coming week | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（漏 port placement）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "consultation to discuss treatment options and to establish care after...surgery and...incomplete course of treatment" | HPI ✓ | ✅ |
+| "invasive ductal carcinoma...started in the milk ducts" | IDC ✓ | ✅ |
+| "originally at a more advanced stage, but after treatment...less advanced stage...has not spread" | Stage III → post-NAC, no distant mets ✓ | ✅ |
+| "**no remaining cancer in the breast tissue, which is a good sign. However, cancer was still found in some of the lymph nodes**" | pathology: breast pCR, 3/28 LN+。**完美使用了 pCR prompt 规则！** ✓ | ✅ |
+| "Recent imaging tests show...cancer has not spread" | PET/CT no mets ✓ | ✅ |
+| "currently taking oxyCODONE for pain relief" | medication list ✓ | ✅ |
+| "AC for four cycles, followed by...T-DM1" | A/P ✓ | ✅ |
+| "radiation treatment" | A/P ✓ | ✅ |
+| "echocardiogram...heart ultrasound...heart is healthy enough" | A/P ✓ | ✅ |
+| "follow-up visit in person this coming week" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+- **亮点**：pCR 描述完美——"no remaining cancer in the breast tissue...However, cancer was still found in some of the lymph nodes"——这正是 iter13 prompt 修复要实现的效果
+
+### ROW 8 总评
+- **Extraction**: P0:0 P1:0 P2:1（漏 port placement）
+- **Letter**: P0:0 P1:0 P2:0
+- pCR + LN positive 的情况处理得很好
