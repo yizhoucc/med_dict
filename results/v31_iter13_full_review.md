@@ -635,3 +635,46 @@
 **Letter 小结**: P0:0 P1:0 P2:0——准确覆盖了所有 A/P items
 
 ### ROW 14 总评: Ext P2:0, Letter P2:0
+
+## ROW 19 (coral_idx 158)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | new consult ✓ | ✅ |
+| summary | newly diagnosed...palpable mass + bloody nipple discharge...neoadjuvant therapy | HPI ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2+ (FISH+) grade 3 IDC with Ki-67 20-90% | pathology: ER 90%, PR 90% (variable), HER2 3+ FISH 9.5 (heterogeneous) ✓ | ✅ |
+| Stage_of_Cancer | Stage IIIA (pT2 N2a) | locally advanced by imaging ✓（staging inference 略不精确但合理） | ✅ |
+| Distant Metastasis | No | PET/CT: no distant mets ✓ | ✅ |
+| findings | core biopsy + PET/CT + PE (4cm mass + nipple inversion) + pulmonary nodules + sinus | 全面准确 ✓ | ✅ |
+| goals_of_treatment | curative | neoadjuvant intent ✓ | ✅ |
+| medication_plan | TCHP + GCSF | A/P ✓ | ✅ |
+| therapy_plan | TCHP, avoid anthracycline due to CAD, port, echo, chemo teaching, clinical trial | A/P 完整捕获 ✓ | ✅ |
+| procedure_plan | Port Placement | A/P ✓ | ✅ |
+| imaging_plan | Echocardiogram | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——全部准确，"avoid anthracycline due to CAD" 正确捕获
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "first visit...lump in left breast and bloody discharge from nipple" | HPI ✓ | ✅ |
+| "invasive ductal carcinoma...grade 3...grows quickly" | pathology ✓ | ✅ |
+| "positive for ER, PR, and HER2" | ✓ | ✅ |
+| "Ki-67 score of 20-90%" | ✓ | ✅ |
+| "stage III...spread to nearby lymph nodes but not to other parts" | ✓ | ✅ |
+| "biopsy confirmed...imaging showed mass...enlarged lymph nodes" | ✓ | ✅ |
+| "No cancer found in other parts" | PET/CT ✓ | ✅ |
+| "**a treatment called a combination of chemotherapy and targeted therapy drugs, which is a combination of chemotherapy drugs**" | A/P "TCHP"——**TCHP 名称被替换后 garbled/redundant** | P2 |
+| "port placed...device that helps deliver chemotherapy" | ✓ | ✅ |
+| "echocardiogram...check how well your heart is working" | ✓ | ✅ |
+| "chemo teaching and authorization for...treatment with GCSF, which helps prevent infections" | ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（TCHP description garbled/redundant from name replacement）
+
+### ROW 19 总评
+- **Extraction**: P0:0 P1:0 P2:0
+- **Letter**: P0:0 P1:0 P2:1
+- 复杂的 HER2 heterogeneous case 处理得很好。extraction 正确捕获了 "avoid anthracycline due to CAD"
