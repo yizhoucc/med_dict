@@ -553,3 +553,85 @@
 ### ROW 11 总评
 - **Extraction**: P0:0 P1:0 P2:1
 - **Letter**: P0:0 P1:0 P2:1
+
+## ROW 12 (coral_idx 151)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Type_of_Cancer | ER+/PR+/HER2+ (IHC 3+/FISH 5.4) IDC | pathology ✓ | ✅ |
+| Stage_of_Cancer | Stage IV | de novo metastatic ✓ | ✅ |
+| Distant Metastasis | Yes, to brain, lung, bone | ✓ | ✅ |
+| current_meds | herceptin, letrozole | ✓ (pertuzumab redacted) | ✅ |
+| response_assessment | brain new lesions + body stable + celiac node decreased | detailed imaging ✓ | ✅ |
+| medication_plan | continue herceptin+[REDACTED], letrozole, off chemo | A/P ✓ | ✅ |
+| **imaging_plan** | **CT CAP q4mo + bone scan + MRI brain q4mo** | A/P also says "**Echo q6 months**, repeat April 2019"——**漏了 echo** | P2 |
+| radiotherapy_plan | await GK / Rad Onc input | A/P ✓ | ✅ |
+| Advance care | POLST on file, against life support | "DNR/DNI" ✓ | ✅ |
+| follow_up | 6 weeks | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（漏 echo q6 months）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "MRI brain...new brain lesions" | MRI 08/15/18 ✓ | ✅ |
+| "CT scans...cancer in your bones is stable and has not grown" | CT 09/05/18 ✓ | ✅ |
+| "slight decrease in the size of a lymph node in your abdomen" | celiac axis node 9→7mm ✓ | ✅ |
+| "continue taking herceptin and another medication" | herceptin + pertuzumab ✓ | ✅ |
+| "continue taking letrozole every day" | ✓ | ✅ |
+| "stay off chemotherapy for now...trouble with side effects" | A/P ✓ | ✅ |
+| "**continue taking morphine and oxycodone for pain**" | A/P: neuropathy "improved...able to tolerate **without analgesics**"——**患者已停止用止痛药** | P2 |
+| "CT scan every 4 months + MRI brain every 4 months + bone scan" | A/P ✓ | ✅ |
+| "6 weeks for follow-up" | ✓ | ✅ |
+| "radiation oncology for further consultation" | GK/Rad Onc ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（说 continue morphine/oxycodone 但患者已不用）
+
+### ROW 12 总评: Ext P2:1, Letter P2:1
+
+---
+
+## ROW 14 (coral_idx 153)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | follow up | ✓ | ✅ |
+| Type_of_Cancer | ER+ metastatic breast cancer, HER2- | FNA: ER 99%, PR 25%, HER2 1+ FISH neg ✓ | ✅ |
+| Stage_of_Cancer | Metastatic (Stage IV) | de novo metastatic ✓ | ✅ |
+| Distant Metastasis | Yes, to bone, liver, and nodes | ✓ | ✅ |
+| current_meds | "" | 停了 palbociclib/fulvestrant，现在做 Mexico alternative therapy ✓ | ✅ |
+| recent_changes | stopped palbociclib/fulvestrant, started low-dose chemo in Mexico | HPI ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| response_assessment | breast nodules increased, liver lesion increased, new sclerotic foci | CT 11/30/18 ✓ | ✅ |
+| medication_plan | topical cannabis/sulfur, Cymbalta Rx given | A/P #2 ✓ | ✅ |
+| imaging_plan | CT CAP + Spine MRI May, Spine MRI in 6 weeks | A/P ✓ | ✅ |
+| lab_plan | labs drawn every two weeks | doctor's note ✓ | ✅ |
+| follow_up | 2 months (from Mexico return) or 3 months | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——全部准确
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "cancer in your right breast has slightly grown in size" | CT 11/30/18: nodule 10→14mm ✓ | ✅ |
+| "no new signs of cancer spreading" | MRI spine: no new disease ✓ | ✅ |
+| "stopped palbociclib and fulvestrant" | HPI ✓ | ✅ |
+| "started low-dose chemotherapy at home" | Mexico protocol ✓ | ✅ |
+| "pamidronate once a week" | ✓ | ✅ |
+| "topical cannabis and sulfur" | A/P #2 ✓ | ✅ |
+| "Cymbalta, but you haven't tried it yet" | A/P #2 ✓ | ✅ |
+| "referred to physical therapy" | PT 03/12/19 ✓ | ✅ |
+| "CT scan and total spine MRI in May" | A/P ✓ | ✅ |
+| "MRI of your spine in 6 weeks" | A/P #3 ✓ | ✅ |
+| "labs checked every two weeks" | doctor's note ✓ | ✅ |
+| "in-person visit in 2 months" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——准确覆盖了所有 A/P items
+
+### ROW 14 总评: Ext P2:0, Letter P2:0
