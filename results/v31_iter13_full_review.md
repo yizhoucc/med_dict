@@ -906,3 +906,47 @@
 **Letter 小结**: P0:0 P1:0 P2:1（MRI brain 原因误解——头痛被当成药物问题）
 
 ### ROW 33 总评: Ext P2:1, Letter P2:1
+
+## ROW 34 (coral_idx 173)
+### Extraction: P0:0 P1:0 P2:0 — 准确（second local relapse, tamoxifen, chest wall RT referral, labs）
+### Letter: P0:0 P1:0 P2:0 — "cancer has returned...start taking tamoxifen...referred to radiation oncology...basic blood tests...6 months" 每句有依据
+### ROW 34 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 36 (coral_idx 175)
+### Extraction: P0:0 P1:0 P2:0 — 准确（Abraxane cycle 8, arm swelling/DVT r/o, radiation referral, RTC 2 weeks）
+### Letter: P0:0 P1:0 P2:0 — "swelling...doppler test...no new cancer growth...switched to Abraxane...continue weekly...radiation oncology...2 weeks" 每句有依据
+### ROW 36 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 40 (coral_idx 179)
+### Extraction: P0:0 P1:0 P2:0 — 准确（MS patient, letrozole, DEXA, PT referral, no chemo benefit small, patient不interested in chemo）
+### Letter: P0:0 P1:0 P2:0 — "invasive ductal carcinoma...early stage...not spread...cure...letrozole...Prolia to protect bones...DEXA...physical therapy...3 months" 每句有依据
+### ROW 40 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 41 (coral_idx 180)
+### Extraction: P0:0 P1:0 P2:0 — 准确（ATM carrier, 3cm grade 3 IDC, SLN micrometastasis, AC→Taxol, ovarian suppression+AI, ribociclib trial）
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "**cancer was removed, and the edges of the tissue are clean**" | margins negative ✓——**正确使用 margins rule** | ✅ |
+| "**One of the lymph nodes under your arm had tiny bits of cancer**" | SLN micrometastasis ✓——**正确描述 micrometastasis** | ✅ |
+| "Taxol for 12 weeks, followed by another treatment called AC" | A/P ✓ 保留药名 | ✅ |
+| "take a medication to stop your ovaries from making estrogen" | ovarian suppression ✓ 通俗化 ✓ | ✅ |
+| "join a study with a medication called ribociclib" | monarchE trial ✓ | ✅ |
+| "port placed" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——**优秀：margins rule + micrometastasis 描述都完美**
+### ROW 41 总评: Ext P2:0, Letter P2:0
+
+---
+
+## ROW 42 (coral_idx 181)
+### Extraction: P0:0 P1:0 P2:0 — 准确（post-radiation, start tamoxifen 5 years, mammogram next visit）
+### Letter: P0:0 P1:0 P2:0 — "finished radiation therapy on January 5...tamoxifen for five years...return to the clinic in 4-6 weeks...mammogram on the day of your next appointment" 简洁准确
+### ROW 42 总评: Ext P2:0, Letter P2:0
