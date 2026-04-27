@@ -500,3 +500,42 @@
 - **Extraction**: P0:0 P1:0 P2:2
 - **Letter**: P0:0 P1:0 P2:0
 - letter 自动纠正了 extraction 的 LN count 误读——用 "some" 替代了不确定的 "20"
+
+## ROW 11 (coral_idx 150)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | follow up | on Faslodex/Denosumab ✓ | ✅ |
+| Type_of_Cancer | IDC, ER+ (inferred from letrozole), HER2: not tested | ✓ | ✅ |
+| Stage_of_Cancer | Originally Stage IIIC, now metastatic (Stage IV) | ✓ | ✅ |
+| Distant Metastasis | Yes, to bone | bone mets + mandibular mass ✓ | ✅ |
+| findings | bone mets, PET increased activity, mandibular mass, worsening RLE | comprehensive ✓ | ✅ |
+| current_meds | Fulvestrant, Denosumab | ✓ | ✅ |
+| recent_changes | Mycelex for thrush | A/P ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| response_assessment | PET increased activity, worsening RLE numbness | ✓ | ✅ |
+| medication_plan | Continue Faslodex + Denosumab + Mycelex + salt/soda | A/P ✓ | ✅ |
+| **imaging_plan** | **PETCT to femur/toes** | A/P: PETCT **+ MRI of lumbar, pelvis and right femur**——**漏了 MRI** | P2 |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（imaging_plan 漏 MRI lumbar/pelvis/femur）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit" | ✓ | ✅ |
+| "breast cancer has spread to your bones" | bone mets ✓ | ✅ |
+| "**cancer has grown in some areas, especially in your jaw and right leg**" | Jaw: A/P "s/p xrt to jaw **improved** pain"——jaw 是改善中的，不是在恶化。Right leg: 确实在恶化。**Letter 把改善中的 jaw 和恶化中的 leg 混在一起说"grown"** | P2 |
+| "more numbness in your jaw and right leg" | jaw numbness 是 XRT 后残余（stable），right leg numbness 在恶化——混淆了两者的趋势 | ✅ |
+| "Mycelex five times a day for 14 days for thrush" | A/P ✓ | ✅ |
+| "salt and soda rinses" | A/P ✓ | ✅ |
+| "continue taking Faslodex and Denosumab" | A/P ✓ | ✅ |
+| "PETCT scan to check your femur and toes" | A/P ✓（但漏了 MRI order） | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（jaw 的 "cancer has grown" 误导——jaw 已做 XRT 且在改善）
+
+### ROW 11 总评
+- **Extraction**: P0:0 P1:0 P2:1
+- **Letter**: P0:0 P1:0 P2:1
