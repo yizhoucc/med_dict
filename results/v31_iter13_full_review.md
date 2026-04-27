@@ -274,3 +274,49 @@
 - **Extraction**: P0:0 P1:0 P2:0
 - **Letter**: P0:0 P1:0 P2:0
 - 无任何问题。特别好的通俗化："affecting the nerves in your left arm"
+
+## ROW 6 (coral_idx 145)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| **Patient type** | **new patient** | Chief Complaint 明确写 "Follow-up"。**应为 follow up** | P2 |
+| summary | 34-year-old...post-bilateral mastectomy...adjuvant systemic therapy | ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 1 IDC with extensive DCIS | pathology ✓ | ✅ |
+| Stage_of_Cancer | Stage IA (pT1 N0) | 1.5cm, 0/1 LN ✓ | ✅ |
+| Distant Metastasis | No | ✓ | ✅ |
+| lab_summary | comprehensive (all labs from 06/08/19) | ✓ | ✅ |
+| findings | surgery results + PE (nerve irritation, edema) | ✓ | ✅ |
+| current_meds | zoladex, letrozole | ✓ | ✅ |
+| goals_of_treatment | curative | ✓ | ✅ |
+| medication_plan | letrozole + zoladex 3yr + tamoxifen sequence + estradiol + gabapentin | A/P ✓ | ✅ |
+| lab_plan | Estradiol monthly | ✓ | ✅ |
+| follow_up | 3 months or sooner | ✓ | ✅ |
+| **Referral: Genetics** | **genetics referral** | Myriad 基因检测已于 04/25/2019 完成且 **Negative**。这是**历史记录**，不是新 plan | P2 |
+
+**Extraction 小结**: P0:0 P1:0 P2:2（Patient type 错 + genetics referral 是历史记录）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit" | ✓（正确，虽然 extraction 写了 "new patient"） | ✅ |
+| "surgery to remove both breasts (bilateral mastectomy) with expanders on 06/21/2019" | ✓ | ✅ |
+| "right breast showed a small cancer (1.5 cm)...removed completely...no cancer in lymph nodes" | pathology: 1.5cm, 0/1 LN, margins clear ✓ | ✅ |
+| "left breast was healthy" | "Left breast: benign" ✓ | ✅ |
+| "recovering well...nerve irritation and mild swelling" | A/P + PE ✓ | ✅ |
+| "start taking letrozole today" | A/P ✓ | ✅ |
+| "continue another medication for at least 3 years...switch to tamoxifen later" | zoladex + tamoxifen sequence ✓ | ✅ |
+| "monthly estradiol tests" | A/P ✓ | ✅ |
+| "Gabapentin is prescribed as needed" | A/P ✓ | ✅ |
+| "already on zoladex" | ✓ | ✅ |
+| "**referred...for further genetic testing**" | **基因检测已完成且 Negative**——跟了 extraction 的错误 genetics referral | P2 |
+| "next visit is in 3 months or sooner if needed" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（genetic testing referral 已完成，不应推荐）
+
+### ROW 6 总评
+- **Extraction**: P0:0 P1:0 P2:2
+- **Letter**: P0:0 P1:0 P2:1
+- 这是 extraction→letter 错误传播的典型案例：extraction 错误捕获历史 genetics referral → letter 不知情地推荐已完成的检测
