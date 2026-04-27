@@ -950,3 +950,29 @@
 ### Extraction: P0:0 P1:0 P2:0 — 准确（post-radiation, start tamoxifen 5 years, mammogram next visit）
 ### Letter: P0:0 P1:0 P2:0 — "finished radiation therapy on January 5...tamoxifen for five years...return to the clinic in 4-6 weeks...mammogram on the day of your next appointment" 简洁准确
 ### ROW 42 总评: Ext P2:0, Letter P2:0
+
+## ROW 44 (coral_idx 183)
+### Ext P2:0, Letter P2:0 — 全面覆盖：residual cancer, radiation trial, AI, BSO, CT chest 1yr, nutrition, PT
+
+## ROW 46 (coral_idx 185)
+### Ext P2:0, Letter P2:0 — 全面覆盖：residual cancer + 2 LN+, sarcoidosis, kidney artery, letrozole+abemaciclib, re-excision, MRA, DEXA
+
+## ROW 49 (coral_idx 188)
+### Ext P2:0, Letter P2:0 — new diagnosis IDC ER+/PR+/HER2-, mastectomy planned, tamoxifen + thrombophilia assessment, advance care planning
+
+## ROW 50 (coral_idx 189)
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:1
+- "Lupron, letrozole, and ibrance in January 2015" — A/P: lupron+letrozole started **October 2014**, only ibrance added **January 2015**。**Same P2 as iter12e**
+
+## ROW 51 (coral_idx 190)
+### Ext P2:0, Letter P2:0 — education visit: Gemzar teaching, Zofran/Compazine, vaccines, pregnancy, social work, exercise counseling
+
+## ROW 52 (coral_idx 191)
+### Ext P2:0, Letter P2:0 — "**edges of the removed tissue are clean**" ✓ margins rule, "**a test** to learn more" ✓ (not "medication test"), Zoladex+AI, CT/bone scan, fertility preservation
+
+## ROW 53 (coral_idx 192)
+### Ext P2:0, Letter P2:0 — HER2+ IDC with neuroendocrine differentiation, AC/THP or TCHP options detailed, Arimidex 10yr, radiation, genetic counseling. Drug names preserved.
+
+## ROW 54 (coral_idx 193)
+### Ext P2:0, Letter P2:0 — BRCA2 oligometastatic: stable disease, leuprolide+letrozole, palbociclib after radiation, zoledronic acid, DEXA, PET/CT 3-4mo, return 4 weeks
