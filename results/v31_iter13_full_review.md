@@ -6,10 +6,10 @@
 > P0=幻觉/编造 | P1=重大错误 | P2=小问题
 
 ## 状态
-- 审查中: ROW 7 待审
-- 已完成: 6/56 (ROW 1-6)
-- Extraction: P0:0 P1:0 P2:6 (ROW1 imaging x2, ROW2 lab Na/K, ROW4 MRI conditional, ROW6 patient type + genetics)
-- Letter: P0:0 P1:0 P2:4 (ROW1 peritoneum, ROW3 "a medication" garbled, ROW4 Prolia "every", ROW6 genetics已完成)
+- 审查中: ROW 9 待审
+- 已完成: 8/56 (ROW 1-8)
+- Extraction: P0:0 P1:0 P2:8 (ROW1 x2, ROW2, ROW4, ROW6 x2, ROW7 PT幻觉, ROW8 port)
+- Letter: P0:0 P1:0 P2:7 (ROW1, ROW3, ROW4, ROW6, ROW7 x3)
 
 ---
 
