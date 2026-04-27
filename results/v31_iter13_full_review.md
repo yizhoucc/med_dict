@@ -222,3 +222,55 @@
 - **Extraction**: P0:0 P1:0 P2:1
 - **Letter**: P0:0 P1:0 P2:1
 - 非常全面的 letter：涵盖 recurrence status、bone density、all 7 A/P items 的 medication/lifestyle recommendations
+
+## ROW 5 (coral_idx 144)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | follow up | on leuprolide/anastrozole/palbociclib ✓ | ✅ |
+| in-person | Televisit | "video encounter" ✓ | ✅ |
+| summary | Recurrent breast cancer...follow-up | ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 IDC (micropapillary) with metastatic recurrence | pathology + cervical LN FNA ✓ | ✅ |
+| Stage_of_Cancer | Originally Stage III, now metastatic (Stage IV) | A/P "Stage III" + metastatic ✓ | ✅ |
+| Distant Metastasis | Yes, to left IM LN and sternum | PET/CT ✓ | ✅ |
+| Metastasis | Yes, to cervical LN, IM LN, sternum | ✓ | ✅ |
+| lab_summary | No labs in note | only old Cr from 08/23/19 ✓ | ✅ |
+| findings | cervical LAD + brachial plexus + MRI brain normal + CT mixed response + sternal lesion | 原文 imaging ✓ | ✅ |
+| current_meds | anastrozole, palbociclib, goserelin | cancer treatment meds ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| response_assessment | Mixed: cervical LN decreased, breast nodule decreased, axillary LN increased, new sternal lesion | CT 08/23/19 ✓ 完整 | ✅ |
+| medication_plan | Continue leuprolide, anastrozole, palbociclib | A/P #1-2 ✓ | ✅ |
+| radiotherapy_plan | Radiation referral for symptomatic neck/brachial plexus | A/P #3, #6 ✓ | ✅ |
+| imaging_plan | CT and bone scan ordered | A/P #5 ✓ | ✅ |
+| lab_plan | Labs monthly on lupron injection day | A/P #4 ✓ | ✅ |
+| Advance care | full code | ✓ | ✅ |
+| Referral: Specialty | Radiation oncology consult | A/P #3, #6 ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——全部准确
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit" | ✓ | ✅ |
+| "recurrent breast cancer...spreading to your left neck and affecting the nerves in your left arm" | cervical LN + brachial plexus involvement ✓ | ✅ |
+| "MRI...lymph node in your neck has gotten bigger, which might be causing your arm symptoms" | MRI "interval enlargement of left level 5B...brachial plexus involvement...may account for...left arm symptoms" ✓ | ✅ |
+| "MRI of your brain did not show any cancer" | "Normal MRI of the brain...no evidence for intracranial metastatic disease" ✓ | ✅ |
+| "some lymph nodes in your neck have gotten smaller" | CT "decreased size of left cervical chain LNs" ✓ | ✅ |
+| "lymph node in your chest has stayed about the same size" | "stable borderline enlargement of mediastinal LN" ✓ | ✅ |
+| "new spot in your sternum that looks like it might be cancer" | "new focal uptake within sternum, suspicious for osseous metastases" ✓ | ✅ |
+| "continue taking leuprolide, anastrozole, and palbociclib" | A/P ✓ | ✅ |
+| "ondansetron to help with nausea" | supportive med ✓ | ✅ |
+| "referred to radiation oncology for...left neck and arm" | A/P #3, #6 ✓ | ✅ |
+| "CT scan and a bone scan done before your next visit" | A/P #5 ✓ | ✅ |
+| "blood tests every month...on the day of your lupron injection" | A/P #4 ✓ 保留具体细节 | ✅ |
+| "full code" | ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0——优秀的 letter。Mixed response 正确描述，brachial plexus 通俗化优秀
+
+### ROW 5 总评
+- **Extraction**: P0:0 P1:0 P2:0
+- **Letter**: P0:0 P1:0 P2:0
+- 无任何问题。特别好的通俗化："affecting the nerves in your left arm"
