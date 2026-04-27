@@ -782,3 +782,46 @@
 - **Extraction**: P0:0 P1:0 P2:2（POST hook 错误添加已停用药物）
 - **Letter**: P0:0 P1:0 P2:0——**letter 比 extraction 更准确**
 - iter12e 的 P2（语法不完整"you have been on since October 2020"）在 iter13 中已消失
+
+## ROW 24 (coral_idx 163)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | discuss systemic therapy ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade II micropapillary mucinous carcinoma | pathology ✓ | ✅ |
+| Stage_of_Cancer | Stage III | ~5cm + N1mi, plausible ✓ | ✅ |
+| Distant Metastasis | No | PET: no metastatic disease ✓ | ✅ |
+| findings | pathology + imaging + PE, 全面 | ✓ | ✅ |
+| supportive_meds | TYLENOL #4, oxyCODONE | ✓ | ✅ |
+| goals_of_treatment | adjuvant | ✓ | ✅ |
+| medication_plan | adjuvant hormone therapy if low risk | A/P ✓ | ✅ |
+| therapy_plan | radiation + hormone therapy + PT | A/P ✓ | ✅ |
+| radiotherapy_plan | radiation if low risk, appt 12/07/18 | A/P ✓ | ✅ |
+| lab_plan | [REDACTED] test to evaluate chemo benefit | MammaPrint ✓ | ✅ |
+| genetic_testing_plan | send surgical specimen for MP | A/P ✓ | ✅ |
+| Referral: Others | Physical therapy referral | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——全部准确
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "ER+/PR+/HER2- grade II micropapillary mucinous carcinoma (a type of cancer that makes mucus)" | pathology ✓ 通俗解释 ✓ | ✅ |
+| "stage III and has not spread to other parts of your body" | ✓ | ✅ |
+| "Imaging shows a large mass...some changes in your lymph nodes, but these are considered benign" | FNA axillary LN was negative ✓。**但手术 SLN 有 micrometastasis (2/4, 0.4mm) 未提及** | P2 |
+| "goal...prevent the cancer from coming back after surgery" | adjuvant ✓ | ✅ |
+| "acetaminophen-codeine (TYLENOL #4) and oxyCODONE (ROXICODONE)" | 保留药名 ✓ | ✅ |
+| "hormone therapy if a test shows that you are at low risk" | A/P ✓ | ✅ |
+| "**a test to see if you need chemotherapy**" | A/P MammaPrint ✓——**iter12e 的 "medication test" P2 已修复！** | ✅ |
+| "radiation oncology...December 7, 2018" | A/P ✓ | ✅ |
+| "referred to physical therapy" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（SLN micrometastasis 未提及）
+- **改进**: iter12e 的 "medication test" P2 和 "MP" 未解释 P2 都已修复
+
+### ROW 24 总评
+- **Extraction**: P0:0 P1:0 P2:0
+- **Letter**: P0:0 P1:0 P2:1
