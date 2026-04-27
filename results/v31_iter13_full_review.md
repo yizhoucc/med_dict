@@ -6,27 +6,41 @@
 > P0=幻觉/编造 | P1=重大错误 | P2=小问题
 
 ## 状态
-- 审查中: ROW 20 待审
-- 已完成: 14/56 (ROW 1-14, 19)
-- Extraction: P0:0 P1:0 P2:13
-  - ROW1: imaging 漏 bone scan + lab field 混乱 (x2)
+- **✅ 全部完成: 56/56**
+- Extraction: P0:0 P1:0 P2:24
+  - ROW1 x2: imaging 漏 bone scan + lab field 混乱
   - ROW2: lab_summary 漏 Na/K
   - ROW4: Brain MRI conditional
-  - ROW6: Patient type 错 + genetics 历史 (x2)
+  - ROW6 x2: Patient type 错 + genetics 历史
   - ROW7: therapy_plan PT 幻觉
   - ROW8: procedure 漏 port
-  - ROW10: LN "20" redacted 误读 (x2)
+  - ROW10 x2: LN "20" redacted 误读
   - ROW11: imaging 漏 MRI
   - ROW12: imaging 漏 echo
-- Letter: P0:0 P1:0 P2:11
+  - ROW20 x4: Stage IA/IIA + Metastasis 不一致 + old lab + procedure garbled
+  - ROW22 x2: POST hook adds stopped meds (letrozole, abemaciclib)
+  - ROW33: Stage "now III" for no-recurrence
+  - ROW84: PR+ 错 (metastatic biopsy PR-)
+  - ROW85 x2: prednisone 剂量缺失 + truncation/garbled
+- Letter: P0:0 P1:0 P2:22
   - ROW1: 漏 peritoneum
   - ROW3: "a medication" garbled
   - ROW4: Prolia 漏 "every"
   - ROW6: genetics 已完成
-  - ROW7: garbled x2 + PT 幻觉 (x3)
+  - ROW7 x3: garbled x2 + PT 幻觉
   - ROW11: jaw "cancer has grown" 误导
   - ROW12: morphine/oxycodone 但患者已不用
   - ROW19: TCHP description garbled
+  - ROW20: 漏 denosumab/dental
+  - ROW24: SLN micrometastasis 未提及
+  - ROW29: MammaPrint/no-chemo 未提及
+  - ROW33: MRI brain 原因误解 (headaches→medication)
+  - ROW50: medication timing (Oct 2014 vs Jan 2015)
+  - ROW72: "a medication" for Oncotype garbled
+  - ROW80: cold gloves "hand swelling" (应为 neuropathy)
+  - ROW85 x2: truncation + garbled
+  - ROW88: truncation
+  - ROW91: 漏 everolimus
   - ROW11: jaw "cancer has grown" 误导
 
 ---
@@ -976,3 +990,69 @@
 
 ## ROW 54 (coral_idx 193)
 ### Ext P2:0, Letter P2:0 — BRCA2 oligometastatic: stable disease, leuprolide+letrozole, palbociclib after radiation, zoledronic acid, DEXA, PET/CT 3-4mo, return 4 weeks
+
+## ROW 57 (coral_idx 196): Ext P2:0, Letter P2:0 — TNBC, XRT planned, genetic counseling
+## ROW 59 (coral_idx 198): Ext P2:0, Letter P2:0 — letrozole→exemestane, Pristiq, mammogram/MRI alternating
+## ROW 61 (coral_idx 200): Ext P2:0, Letter P2:0 — lumpectomy with IORT 04/12/21, Oncotype Dx, Tamoxifen vs OS+AI
+## ROW 64 (coral_idx 203): Ext P2:0, Letter P2:0 — Stage III-IV, probable sternum met, biopsy planned, TCHP+xgeva
+## ROW 65 (coral_idx 204): Ext P2:0, Letter P2:0 — neoadjuvant AC/T or ISPY trial, port, research biopsy/MRI
+## ROW 68 (coral_idx 207): Ext P2:0, Letter P2:0 — post-TCHP good response, bilateral mastectomy recommended, sons genetic testing
+
+## ROW 70 (coral_idx 209): Ext P2:0, Letter P2:0 — bilateral cancer, letrozole restart, radiation, expanders, CT for lung nodules
+
+## ROW 72 (coral_idx 211) — **iter12e P1 修复验证**
+### Extraction: P0:0 P1:0 P2:0
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...started in the milk ducts...focal neuroendocrine differentiation" | pathology ✓ | ✅ |
+| "**the cancer was removed with surgery, and the edges of the removed tissue are clean**" | margins negative ✓——**iter12e P1 CONFIRMED FIXED** | ✅ |
+| "No cancer was found in the lymph nodes" | 0/2 SLN ✓ | ✅ |
+| "start taking a medication called letrozole" | ✓ | ✅ |
+| "**a medication** to evaluate the potential benefit of chemotherapy" | Oncotype Dx——**"a medication"仍然 garbled** | P2 |
+| "results of the **medication**" | 同上 garbled | (同上) |
+
+**Letter 小结**: P0:0 P1:0 P2:1（"a medication" for Oncotype Dx garbled, 但 iter12e P1 "no cancer found" 已修复）
+### ROW 72 总评: Ext P2:0, Letter P2:1 — **P1→P0 修复成功**
+
+---
+
+## ROW 78 (coral_idx 218): Ext P2:0, Letter P2:0 — TNBC metastatic, progression, trial interest, echo, radiation consult
+## ROW 80 (coral_idx 219)
+### Ext P2:0, Letter P2:1
+- cold gloves: iter12e "hand-foot syndrome"(错) → iter13 "**hand swelling**"(改善但仍不精确——A/P说for "neuropathy and fingernails")
+
+## ROW 82 (coral_idx 221): Ext P2:0, Letter P2:0 — low risk no chemo, radiation, DEXA, exercise counseling
+
+## ROW 84 (coral_idx 223)
+### Ext P2:1, Letter P2:0
+- **PR+ 仍然错**——metastatic biopsy pathology: "Progesterone Receptor: NEGATIVE (<1%)"，extraction 仍说 PR+
+
+## ROW 85 (coral_idx 224)
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:2 — prednisone 剂量可能缺失 + letter 被截断（以 "such" 结尾无 closing）+ 多处 garbled from redaction
+
+## ROW 87 (coral_idx 226): Ext P2:0, Letter P2:0 — 79yo second opinion, 2.2cm 4/19 LN+, hormonal therapy alone
+
+## ROW 88 (coral_idx 227)
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:1 — letter 截断（以 "stressful" 结尾无 closing）
+
+## ROW 90 (coral_idx 229): Ext P2:0, Letter P2:0 — AC cycle 4, dose delay, GCSF 50%, granisetron+olanzapine
+
+## ROW 91 (coral_idx 230)
+### Ext P2:0, Letter P2:1
+- extraction 有 everolimus 但 **letter 仍然漏了 everolimus**——只提 exemestane+denosumab（同 iter12e P2）
+## ROW 92 (coral_idx 231): Ext P2:0, Letter P2:0 — Epirubicin cycle 2, liver improving, Neupogen
+## ROW 95 (coral_idx 234): Ext P2:0, Letter P2:0 — post-NAC good response, AC, capecitabine after XRT
+
+## ROW 96 (coral_idx 235)
+### Extraction: P0:0 P1:0 P2:0
+### Letter: P0:0 P1:0 P2:0 — **iter12e "medication testing" P2 FIXED: now says "a test to learn more"**
+
+## ROW 97 (coral_idx 236): Ext P2:0, Letter P2:0 — Oncotype Dx (correctly named), MS/Gilenya, drain concerns
+
+## ROW 99 (coral_idx 238): Ext P2:0, Letter P2:0 — **symptom management service** ✓ (医生feedback), biopsy + CT + 2 weeks
+
+## ROW 100 (coral_idx 239): Ext P2:0, Letter P2:0 — **exercise 10 min 3x/day** ✓ (医生feedback), Focalin for fatigue, Gemzar stopped
