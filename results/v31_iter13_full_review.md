@@ -6,10 +6,24 @@
 > P0=幻觉/编造 | P1=重大错误 | P2=小问题
 
 ## 状态
-- 审查中: ROW 9 待审
-- 已完成: 8/56 (ROW 1-8)
-- Extraction: P0:0 P1:0 P2:8 (ROW1 x2, ROW2, ROW4, ROW6 x2, ROW7 PT幻觉, ROW8 port)
-- Letter: P0:0 P1:0 P2:7 (ROW1, ROW3, ROW4, ROW6, ROW7 x3)
+- 审查中: ROW 12 待审
+- 已完成: 11/56 (ROW 1-11)
+- Extraction: P0:0 P1:0 P2:11
+  - ROW1: imaging_plan 漏 bone scan + lab_plan field 混乱 (x2)
+  - ROW2: lab_summary 漏 Na 124/K 3.1
+  - ROW4: imaging_plan Brain MRI 是 conditional
+  - ROW6: Patient type 错 + genetics referral 历史记录 (x2)
+  - ROW7: therapy_plan 幻觉 PT
+  - ROW8: procedure_plan 漏 port
+  - ROW10: LN count "20 involved" redacted 误读 (x2)
+  - ROW11: imaging_plan 漏 MRI
+- Letter: P0:0 P1:0 P2:8
+  - ROW1: 漏 peritoneum
+  - ROW3: "a medication" garbled
+  - ROW4: Prolia 漏 "every"
+  - ROW6: genetics 已完成
+  - ROW7: garbled x2 + PT 幻觉 (x3)
+  - ROW11: jaw "cancer has grown" 误导
 
 ---
 
