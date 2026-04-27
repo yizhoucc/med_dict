@@ -1719,3 +1719,65 @@
 | "start tamoxifen after completing radiation" | ✓ | ✅ |
 
 **ROW 96 总评**: Ext P2:0, Letter P2:0——**"medication testing" → "a test" 修复确认**
+
+---
+
+# 医生审查意见 (Doctor Review Comments)
+
+以下是医生对 iter13 letter 的逐条反馈，需要在下一次迭代中修复。
+
+## ROW 90 (line 13200)
+**医生意见**: Letter missing "will continue with cycle 4 of AC in 1 week (dose delay x 1 wk)"
+**问题**: Letter 的 plan 部分没有提到 AC cycle 4 将在 1 周后继续（因 dose delay）。这是当前 visit 最重要的 plan item 之一。
+**严重程度**: P1 — 遗漏了关键治疗计划信息
+
+## ROW 88 (line 12974)
+**医生意见**: Plan going forward is missing "restaging after 3 months of xeloda therapy"
+**问题**: Letter 没有提到 3 个月后 restaging 的计划。A/P 明确说 "I would recommend restaging after 3 months of therapy"。
+**严重程度**: P1 — 遗漏了关键的 restaging 计划
+
+## ROW 87 (line 12740) — 多条意见
+
+### 意见 1: 重复表述
+**医生意见**: "Why did you come to the clinic?" 和 "What's new or changed?" 两个部分都提到了 "grade 2, measuring 2.2 cm, with 4 of 19 lymph nodes involved"。不需要在 "Why did you come" 部分重复这些。
+**问题**: Letter 在 visit reason 部分过度详细地描述了病理，应该留到 "What's new" 部分。
+**严重程度**: P2 — 结构问题，信息重复
+
+### 意见 2: 不相关的体检发现
+**医生意见**: 不需要在 letter 中提到 "You exhibit a pill-rolling tremor of Parkinson's disease isolated to your right side"，因为这是慢性问题，与癌症无关。
+**问题**: Letter 包含了与癌症无关的慢性病体检发现。
+**严重程度**: P2 — 不相关内容
+
+### 意见 3: 治疗目标不应编造
+**医生意见**: goals_of_treatment 在原文中没有明确提到。如果原文没有提到，不应该在 letter 中包含。
+**问题**: Letter 说 "The goal of your treatment is to cure the cancer" 但原文 A/P 没有明确说 "curative"。Extraction 推断了 goals_of_treatment="curative" 但这不是原文直接说的。
+**严重程度**: P2 — 推断的治疗目标不应在 letter 中呈现为事实
+
+### 意见 4: 遗漏关键决策 + 错误包含未决定的 radiation
+**医生意见**: 
+1. "What is the plan going forward" 部分最重要的信息是**患者选择只接受 hormonal therapy 而不做 chemotherapy**。这个关键决策没有被突出。
+2. 原文讨论了 radiation 但**最终没有决定做 radiation**，所以不应该在 letter 中包含 radiation plan。
+**问题**: Letter 遗漏了 "patient prefers hormonal therapy alone" 这个最重要的决策，反而包含了未决定的 radiation。
+**严重程度**: P1 — 遗漏了核心治疗决策 + 包含了未决定的 plan
+
+---
+
+## 医生反馈汇总
+
+| ROW | 问题类型 | 严重程度 | 需要修复 |
+|-----|---------|---------|---------|
+| 90 | 遗漏 AC cycle 4 dose delay plan | P1 | 是 |
+| 88 | 遗漏 restaging after 3 months | P1 | 是 |
+| 87 | 信息重复 + 不相关 Parkinson's 描述 | P2 | 是 |
+| 87 | 推断 curative goal 但原文未明确 | P2 | 是 |
+| 87 | 遗漏 "hormonal therapy alone" 决策 + 包含未决定的 radiation | P1 | 是 |
+
+**更新后统计**:
+- Letter: P0:0 **P1:3** (医生反馈) P2:24 (原有22 + 医生反馈2)
+
+### 需要修改的 prompt/code 方向
+1. **Letter prompt**: 如果 A/P 讨论了某个治疗但最终未决定做，letter 不应该包含它
+2. **Letter prompt**: "Why did you come to the clinic?" 部分应该简洁，不要重复 "What's new" 的内容
+3. **Letter prompt**: 不要包含与癌症无关的慢性病体检发现（如 Parkinson's tremor）
+4. **Extraction prompt**: goals_of_treatment 不应该推断，应该只在原文明确提到时提取
+5. **Letter prompt**: 确保所有 A/P 中的关键 plan items 都被包含（特别是 chemo cycle timing 和 restaging timing）
