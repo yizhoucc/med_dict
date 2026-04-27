@@ -135,9 +135,14 @@ Imaging_Plan: |
   - "will need TTE", "order echocardiogram", "Echo q6 months"
   Echocardiogram/TTE IS an imaging study and MUST be included here.
 
+  CRITICAL — RESTAGING: Always look for restaging plans. Common patterns:
+  - "restaging after X months", "restaging in X months", "scans again in X months"
+  - "repeat imaging after X months on treatment", "reassess with scans"
+  If restaging is mentioned, ALWAYS include it with timing (e.g., "restaging after 3 months of therapy").
+
   CRITICAL — distinguish PAST from FUTURE:
   - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed...", "Echo was normal" (past result)
-  - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening", "needs TTE before starting chemo"
+  - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening", "needs TTE before starting chemo", "restaging after 3 months"
 
   CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
   - XRT, RT, radiation therapy, Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here
