@@ -414,3 +414,50 @@
 - **Extraction**: P0:0 P1:0 P2:1（漏 port placement）
 - **Letter**: P0:0 P1:0 P2:0
 - pCR + LN positive 的情况处理得很好
+
+## ROW 9 (coral_idx 148)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | Follow up | post-surgery follow-up ✓ | ✅ |
+| Type_of_Cancer | ER+/PR-/HER2- grade 2 IDC | pathology: ER+ 85%, PR- <1%, HER2- IHC 0, Ki-67 1-2% ✓ | ✅ |
+| Stage_of_Cancer | Stage II (pT3 N1) | A/P "Stage II" ✓ | ✅ |
+| Distant Metastasis | No | ✓ | ✅ |
+| findings | 3.84cm IDC, ~5% cellularity, margins neg, 1 macro + 1 micro + 1 ITC in 4 LN | pathology 详细准确 ✓ | ✅ |
+| current_meds | "" | post-surgery, not on cancer treatment ✓ | ✅ |
+| goals_of_treatment | curative | adjuvant ✓ | ✅ |
+| response_assessment | 3.84cm residual with 5% cellularity, LN status | pathology ✓ | ✅ |
+| medication_plan | letrozole after radiation + Fosamax | A/P #5-7 ✓ | ✅ |
+| radiotherapy_plan | Radiation referral | A/P #6 ✓ | ✅ |
+| procedure_plan | Drains removed Thursday | A/P ✓ | ✅ |
+| Advance care | full code | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0——全部准确
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "surgery to remove both breasts" | bilateral mastectomies ✓ | ✅ |
+| "**edges of the removed tissue are clean, which is a good sign**" | margins negative ✓——**正确使用了 iter13 新 prompt 规则！** | ✅ |
+| "**However, cancer was still found in some of the lymph nodes**" | 3 LN involved ✓ | ✅ |
+| "invasive ductal carcinoma...milk ducts...estrogen receptor positive" | ✓ | ✅ |
+| "No imaging tests were done during this visit" | ✓ | ✅ |
+| "recovering well...drains still in place" | HPI ✓ | ✅ |
+| "ondansetron and prochlorperazine" for nausea | supportive meds ✓ | ✅ |
+| "referred to radiation therapy" | A/P #6 ✓ | ✅ |
+| "letrozole" after radiation | A/P #7 ✓ | ✅ |
+| "fosamax to protect your bones" | A/P #5 osteopenia ✓ | ✅ |
+| "drains will be removed on Thursday" | A/P ✓ | ✅ |
+| "full code" | ✓ | ✅ |
+| Emotional support sentence | "She is tearful today" ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+- **亮点**：正确说 "edges are clean...However, cancer was still found in some lymph nodes"——完美处理了 residual cancer + negative margins + LN positive 的情况
+
+### ROW 9 总评
+- **Extraction**: P0:0 P1:0 P2:0
+- **Letter**: P0:0 P1:0 P2:0
+- kidney transplant 患者的复杂背景没有影响提取/letter 质量
