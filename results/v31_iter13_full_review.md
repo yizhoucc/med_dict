@@ -682,3 +682,54 @@
 - **Extraction**: P0:0 P1:0 P2:0
 - **Letter**: P0:0 P1:0 P2:1
 - 复杂的 HER2 heterogeneous case 处理得很好。extraction 正确捕获了 "avoid anthracycline due to CAD"
+
+## ROW 20 (coral_idx 159)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | consultation for metastatic recurrence ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade II IDC with 1.8cm DCIS | pathology ✓ | ✅ |
+| **Stage_of_Cancer** | **Stage IIA** | tumor 0.9cm + 0/2 SLN = **Stage IA**，not IIA | P2 |
+| Distant Metastasis | Yes, to bone and lymph nodes | PET/CT ✓ | ✅ |
+| **Metastasis** | **Yes, to bone** | 应为 "bone and lymph nodes"——与 Distant Metastasis 不一致 | P2 |
+| **lab_summary** | **POCT glucose 104** | 这是 **03/01/2013** 的数据（8 年前），无临床意义 | P2 |
+| findings | pathology + PET/CT + iliac biopsy + PE | 全面 ✓ | ✅ |
+| current_meds | letrozole, palbociclib | just started ✓ | ✅ |
+| goals_of_treatment | palliative | metastatic ✓ | ✅ |
+| medication_plan | letrozole + palbociclib + denosumab pending dental | A/P ✓ | ✅ |
+| radiotherapy_plan | consultation, migratory pain, unclear focal site | A/P nuance captured ✓ | ✅ |
+| **procedure_plan** | **"Abdomen, Pelvis, if not possible, would send for [REDACTED] 360"** | **garbled**——混淆了 CT CAP 和 Foundation One testing | P2 |
+| imaging_plan | MRI Total Spine + CT CAP + Repeat 3 months | A/P ✓ | ✅ |
+| lab_plan | tumor markers + monthly palbociclib labs | A/P ✓ | ✅ |
+| genetic_testing_plan | Foundation One, if not possible [REDACTED] 360 | A/P ✓ | ✅ |
+| follow_up | ~1 month | ✓ | ✅ |
+| Referral: Specialty | Rad Onc referral | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:4（Stage IA/IIA + Metastasis 不一致 + old lab + procedure garbled）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "consultation regarding a metastatic recurrence" | ✓ | ✅ |
+| "0.9cm grade II IDC...1.8cm DCIS (ductal carcinoma in situ)" | pathology ✓ | ✅ |
+| "cancer has now spread to your bones and lymph nodes" | PET/CT + biopsy ✓ | ✅ |
+| "Stage IV...spread to other parts of your body" | ✓ | ✅ |
+| "left-sided pain in the rib and mid-axillary region" | HPI ✓ | ✅ |
+| "start taking Letrozole and Palbociclib" | A/P ✓ | ✅ |
+| "monthly blood work to monitor...Palbociclib" | ✓ | ✅ |
+| "referred to radiation oncology...rib and back pain" | A/P ✓ | ✅ |
+| "MRI of your total spine and a CT scan of your chest, abdomen, and pelvis" | A/P ✓ | ✅ |
+| "labs including tumor markers" | ✓ | ✅ |
+| "follow-up visit in about 1 month" | ✓ | ✅ |
+| "genetic test to learn more about your cancer" | Foundation One ✓ | ✅ |
+| **（漏）** | A/P: "initiation of denosumab...dental clearance prior"——**letter 未提及 denosumab 和 dental clearance** | P2 |
+
+**Letter 小结**: P0:0 P1:0 P2:1（漏 denosumab/dental clearance）
+
+### ROW 20 总评
+- **Extraction**: P0:0 P1:0 P2:4
+- **Letter**: P0:0 P1:0 P2:1
+- Extraction 有多个小问题但无 P1。Letter 涵盖了大部分 plan items 但漏了骨保护药
