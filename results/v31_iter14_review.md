@@ -269,3 +269,97 @@ iter14 相比 iter13 有显著改善。医生反馈的 3 个 P1 全部修复。�
 - ✅ ROW 90: "cycle 4 in 1 week, delay" (doctor feedback)
 - ✅ ROW 99: symptom management service (doctor feedback)
 - ✅ ROW 100: exercise 10min 3x/day (doctor feedback)
+
+---
+
+# 逐 Sample 详细审查补充（ROW 3 起）
+
+## ROW 3 (coral_idx 142)
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | New patient | "New Patient Evaluation" ✓ | ✅ |
+| second opinion | yes | "several opinions" ✓ | ✅ |
+| in-person | Televisit | "Video Consult" ✓ | ✅ |
+| summary | 53 y.o....medical oncology consult for neoadjuvant | HPI ✓ | ✅ |
+| Type_of_Cancer | HR+, HER2- grade 2 IDC | "HR+, her 2 2+, fish negative" = HER2- ✓ | ✅ |
+| Stage_of_Cancer | Stage IIA | "Clinical: Stage IIA" ✓ | ✅ |
+| Distant Metastasis | No | PET pending, no known mets ✓ | ✅ |
+| lab_summary | No labs in note | "No results found" ✓ | ✅ |
+| findings | 1.7cm tumor, 1.5cm axillary LN+, pending PET/genetics | HPI ✓ | ✅ |
+| current_meds | "" | "No current outpatient medications" ✓ | ✅ |
+| goals_of_treatment | curative | Stage IIA neoadjuvant intent — reasonable inference ✓ | ✅ |
+| medication_plan | None | no meds started yet ✓ | ✅ |
+| therapy_plan | discussed chemo + surgery + radiation roles | A/P #2-4 ✓ | ✅ |
+| imaging_plan | PET scan follow up | A/P #7 ✓ | ✅ |
+| genetic_testing_plan | Genetic testing sent and pending | A/P #6 ✓ | ✅ |
+| follow_up | after PET and [REDACTED] are back | A/P #7 ✓ | ✅ |
+| Advance care | full code | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "medical oncology consult regarding your newly diagnosed breast cancer" | HPI ✓ 简洁 ✓ | ✅ |
+| "invasive ductal carcinoma...positive for estrogen receptors...negative for...HER2" | pathology ✓ | ✅ |
+| "upper-outer part of your right breast...about 1.7 cm" | HPI ✓ | ✅ |
+| "small lymph node in your armpit that has cancer" | biopsy-proven axillary LN+ ✓ | ✅ |
+| "waiting for the results of a PET scan and genetic testing" | A/P #6-7 ✓ | ✅ |
+| "No new medications were started" | ✓ | ✅ |
+| "chemotherapy to reduce the chance of the cancer spreading" | A/P #2 ✓ | ✅ |
+| "surgery and possibly radiation" | A/P #3 ✓ | ✅ |
+| "PET scan to get more information" | ✓ | ✅ |
+| "Genetic testing...ordered and is pending" | A/P #6 ✓ | ✅ |
+| "telehealth visit after the results...are back" | A/P #7 ✓ | ✅ |
+| Emotional support | "She has good support" ✓ | ✅ |
+| "Sincerely, Your Care Team" | ✓ 未截断 | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+
+### ROW 3 总评: Ext P2:0, Letter P2:0 ✅
+
+## ROW 4 (coral_idx 143)
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | Follow up | on letrozole since 2016 ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 IDC | pathology: 2.8cm grade 2 IDC, HER2 2+ IHC FISH neg ✓ | ✅ |
+| Stage_of_Cancer | Not mentioned in note | staging redacted, honest ✓ | ✅ |
+| Distant Metastasis | No | no recurrence ✓ | ✅ |
+| findings | no recurrence + DEXA improved (T-score -2.4) + PE normal | A/P ✓ | ✅ |
+| current_meds | letrozole | ✓ | ✅ |
+| goals_of_treatment | curative | adjuvant ✓ | ✅ |
+| response_assessment | no evidence of recurrence | A/P #1 ✓ | ✅ |
+| medication_plan | letrozole + magnesium + calcium/VitD + Prolia conditional + probiotics | A/P #1-7 ✓ 全面 | ✅ |
+| **imaging_plan** | mammogram + DEXA + **Brain MRI** | A/P #6: "If worsening, **consider** brain MRI" — **conditional, not planned** | P2 |
+| follow_up | 6 months or sooner | A/P ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（Brain MRI conditional 同 iter13）
+
+### Letter 逐句
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "follow-up visit" | ✓ | ✅ |
+| "no evidence of the cancer coming back" | A/P #1 ✓ | ✅ |
+| "bone density has slightly improved, but you still have osteopenia" | A/P #5 T-score -2.4 ✓ | ✅ |
+| "continue Letrozole daily" | A/P #1 ✓ | ✅ |
+| "magnesium supplements for muscle cramps" | A/P #2 ✓ | ✅ |
+| "calcium and vitamin D supplements" | A/P #5 ✓ | ✅ |
+| "Prolia" if bone density worsens | A/P #5 conditional ✓ | ✅ |
+| "probiotics for loose stools" | A/P #7 ✓ | ✅ |
+| "mammogram...July 2019" | A/P #1 ✓ | ✅ |
+| "bone density scan in 1 year" | A/P #5 ✓ | ✅ |
+| "**brain MRI if your headaches get worse**" | A/P #6 ✓——**letter 正确说了 conditional**（比 extraction 更准确） | ✅ |
+| "6 months or sooner" | ✓ | ✅ |
+| "Sincerely, Your Care Team" | ✓ 未截断 | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0 — letter 自动纠正了 extraction 的 conditional Brain MRI
+
+### ROW 4 总评: Ext P2:1, Letter P2:0 ✅
