@@ -825,3 +825,84 @@
 ### ROW 24 总评
 - **Extraction**: P0:0 P1:0 P2:0
 - **Letter**: P0:0 P1:0 P2:1
+
+## ROW 29 (coral_idx 168)
+
+### Extraction: P0:0 P1:0 P2:0 — 全部准确
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...grade 2...ER+/PR+...no HER2" | pathology ✓ | ✅ |
+| "cancer has spread to a nearby lymph node, but not to other parts" | SLN micrometastasis ✓ + no distant mets ✓ | ✅ |
+| "start taking letrozole" | A/P ✓ | ✅ |
+| "bone density scan when you return from your travels" | A/P ✓ | ✅ |
+| "surgery in September 2019" | A/P ✓ | ✅ |
+| "long-term oncology follow-up closer to your home" | A/P ✓ | ✅ |
+| （漏）MammaPrint Low Risk + no-chemo rationale | A/P 详细讨论了 MINDACT trial + MammaPrint Low Risk → no chemo。**Letter 没提** | P2 |
+
+**Letter 小结**: P0:0 P1:0 P2:1（MammaPrint/no-chemo rationale 未提及）
+### ROW 29 总评: Ext P2:0, Letter P2:1
+
+---
+
+## ROW 30 (coral_idx 169) — **iter12e P1 修复验证**
+
+### Extraction: P0:0 P1:0 P2:0 — 全部准确
+- Type_of_Cancer: ER-/PR-/HER2+ grade 2 IDC ✓
+- Stage: Clinical stage II-III ✓
+- Distant Metastasis: No ✓, Metastasis: No ✓
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "invasive ductal carcinoma...HER2 positive...protein called HER2" | ✓ | ✅ |
+| "**cancer is in the right breast and has not spread to other parts of your body**" | A/P "PET/CT no evidence of metastases" + "**high-risk node-negative**" ✓ | ✅ |
+| "cure the cancer" | curative intent ✓ | ✅ |
+| "neoadjuvant chemotherapy...before surgery to try to shrink the cancer" | ✓ | ✅ |
+| "12 cycles of weekly paclitaxel plus trastuzumab/pertuzumab...or 6 cycles of TCHP" | A/P: two regimen options ✓ 保留药名 ✓ | ✅ |
+| "continue with trastuzumab for a total of one year" | ✓ | ✅ |
+| "TTE (echocardiogram)...check how well your heart is working" | ✓ | ✅ |
+| "Mediport placed" | ✓ | ✅ |
+| "decide after the weekend whether you want to start treatment at your clinic or elsewhere" | ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:0
+- **✅ iter12e P1 CONFIRMED FIXED** — 不再说 "spread to some nearby lymph nodes"
+
+### ROW 30 总评: Ext P2:0, Letter P2:0 — **P1→P0 修复成功**
+
+---
+
+## ROW 33 (coral_idx 172)
+
+### Extraction 逐字段审查
+
+| 字段 | 提取值 | 原文依据 | 判定 |
+|------|--------|---------|------|
+| Patient type | follow up | on letrozole since 2011 ✓ | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 ILC | note says ILC ✓ | ✅ |
+| **Stage_of_Cancer** | **Originally Stage IIB, now Stage III** | 患者**无复发**，"now Stage III"对无复发患者毫无意义 | P2 |
+| findings | no evidence of recurrence + PE normal | A/P ✓ | ✅ |
+| medication_plan | letrozole + calcium/VitD + NSAIDs | A/P #1-2 ✓ | ✅ |
+| imaging_plan | Consider MRI brain if [REDACTED] continues | A/P #4 ✓ | ✅ |
+| follow_up | 6 months | ✓ | ✅ |
+
+**Extraction 小结**: P0:0 P1:0 P2:1（Stage "now Stage III" for no-recurrence patient）
+
+### Letter 逐句审查
+
+| Letter 句子 | 原文依据 | 判定 |
+|------------|---------|------|
+| "no signs of the cancer coming back" | A/P "no evidence of recurrence" ✓ | ✅ |
+| "small, soft lymph node in your left neck, but it is not concerning" | PE ✓ | ✅ |
+| "continue taking letrozole daily" | A/P ✓ | ✅ |
+| "calcium and vitamin D daily" | A/P ✓ | ✅ |
+| "NSAIDs (pain relievers) with food" | A/P ✓ | ✅ |
+| "continue exercising and doing weight-bearing activities" | A/P ✓ | ✅ |
+| "**If a certain medication continues to cause issues, an MRI of the brain might be considered**" | A/P 说的是**头痛**持续就考虑 MRI brain。**[REDACTED] 是头痛症状，不是药物** | P2 |
+| "return to the clinic in 6 months" | A/P ✓ | ✅ |
+
+**Letter 小结**: P0:0 P1:0 P2:1（MRI brain 原因误解——头痛被当成药物问题）
+
+### ROW 33 总评: Ext P2:1, Letter P2:1
