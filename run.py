@@ -1523,12 +1523,23 @@ def main():
                             found_meds.append(drug)
                             break
             if found_meds:
-                unique = list(dict.fromkeys(found_meds))
-                if mp_lower in ("none", "", "null", "none."):
-                    med["medication_plan"] = "Continue/start: " + ", ".join(unique)
-                else:
-                    med["medication_plan"] = mp_val + "; also: " + ", ".join(unique)
-                print(f"    [POST-MEDICATION-SUPPLEMENT] Added missing meds: {unique}")
+                # Filter out drugs that are mentioned as stopped/held/switched in recent_changes
+                rc_val = str(keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or "").lower()
+                stopped_patterns = ['stopped', 'held', 'discontinued', 'switched', 'changed to', 'replaced', 'no longer']
+                filtered_meds = []
+                for drug in found_meds:
+                    drug_in_stopped = any(p in rc_val for p in stopped_patterns) and drug.lower() in rc_val
+                    if drug_in_stopped:
+                        print(f"    [POST-MEDICATION-SUPPLEMENT] Skipping '{drug}' — found in recent_changes as stopped/switched")
+                    else:
+                        filtered_meds.append(drug)
+                unique = list(dict.fromkeys(filtered_meds))
+                if unique:
+                    if mp_lower in ("none", "", "null", "none."):
+                        med["medication_plan"] = "Continue/start: " + ", ".join(unique)
+                    else:
+                        med["medication_plan"] = mp_val + "; also: " + ", ".join(unique)
+                    print(f"    [POST-MEDICATION-SUPPLEMENT] Added missing meds: {unique}")
 
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
         lab = keypoints.get("Lab_Plan", {})
@@ -3152,6 +3163,12 @@ def main():
                     else:
                         cleaned_lines.append(line)
                 letter = "\n".join(cleaned_lines)
+            # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
+            import re as _re
+            if _re.search(r'medication\s+test(ing)?', letter, _re.IGNORECASE):
+                letter = _re.sub(r'a\s+medication\s+test(ing)?', 'a test', letter, flags=_re.IGNORECASE)
+                letter = _re.sub(r'medication\s+test(ing)?', 'a test', letter, flags=_re.IGNORECASE)
+                print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
             traceability["letter_text"] = letter
             for w in post_warnings:
                 print(f"  {w}")
