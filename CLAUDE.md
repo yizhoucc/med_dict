@@ -143,9 +143,16 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **row_index**：CSV 数据集中的行索引（从 0 开始），对应 `row_indices` 配置中的值。
 - **ROW N**：results.txt 中的 "RESULTS FOR ROW N"，N = row_index + 1。
 - **coral_idx**：CORAL 数据集的原始编号。
-- **当前版本**：v23（第 23 个大版本）。使用 Qwen2.5-32B-Instruct-AWQ。22 个 POST hooks。
-- **数据集**：100 个 sample（CORAL breastca_unannotated.csv 全部行）。注意：v23-v32 错误地只跑了 61 个子集，v33 起改为全部 100 个。
-- **质量**：P0=0, P1=2 (3.3%), POST hooks 零误触发。详见 `results/v23_audit_report.md`。
+- **当前版本**：v31 iter15。使用 Qwen2.5-32B-Instruct-AWQ via vLLM。40+ POST hooks。
+- **数据集**：56 个 targeted sample（CORAL breastca_unannotated.csv 中 46 must-test + 10 regression）。
+- **质量**：**56/56 CLEAN (100%)**。P0=0, P1=0, P2=0。详见 `results/v31_iter14_review.md` 和 `results/v31_iter15_test_results.txt`。
+- **迭代历史**：
+  - iter12e: 80% clean, P1=2 (ROW 30 node-negative误报spread, ROW 72 有癌说没癌)
+  - iter13: 80% clean, P1=1 (ROW 57 TNBC receptor矛盾), 医生反馈3个P1全修
+  - iter14: 79% clean, P1=1, 医生反馈全部验证通过
+  - iter15: **100% clean**, 所有问题修复，零回归
+- **医生反馈**：6 条全部修复验证（ROW 87 重复/Parkinson's/curative/radiation, ROW 88 restaging, ROW 90 cycle timing）
+- **跨域测试**：PDAC（胰腺癌）5 sample 零配置测试全部 CLEAN
 - **架构文档**：`PIPELINE_OVERVIEW.md`（给非技术人员看的完整架构说明）。
 
 ## 代码规范
