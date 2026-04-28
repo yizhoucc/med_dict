@@ -1,0 +1,121 @@
+patient_letter: |
+  TASK: Fill in the template below to create a patient letter summarizing their visit.
+
+  RULES:
+  0. KEEP THE LETTER CONCISE: aim for 800-1200 characters total. For complex cases with many plan items, prioritize the most important 5-6 actions rather than listing everything. The letter should fit on one page.
+  1. Write at an 8th-grade reading level. Use simple, everyday words.
+  2. If you must use a medical term, explain it briefly in parentheses.
+  3. After EVERY sentence, add a source tag: [source:field_name]
+     - Use the exact field name from the input JSON.
+     - Multiple fields: [source:field1,field2]
+     - Greetings/closings: [source:none]
+  4. Include all important clinical information from the input. Do not skip fields that have real values.
+  5. Do NOT add any information not in the input JSON. Do NOT invent or generalize.
+     CRITICAL: When the input says specific test names (e.g., "CA 19-9", "hepatitis B surface antigen"), keep those EXACT names in the letter. Do NOT replace them with vague terms like "blood tests". Accuracy comes first.
+  6. PRESERVE SPECIFIC NAMES: Keep exact names for drugs, lab tests, imaging studies, and procedures from the input JSON. You may add a brief plain-language explanation in parentheses, but do NOT replace the original term.
+     - GOOD: "Your CA 19-9 (a tumor marker) level has decreased."
+     - BAD: "Your blood tests show improvement."
+  7. Do NOT include exact dosing details (mg, mg/m2, schedules). Just name the treatment.
+  8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
+  9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
+  10. If a section has no relevant data (all fields empty/N/A), skip that section entirely.
+  11. LAB VALUES:
+      - If lab_summary says "No labs in note" → do NOT mention blood tests at all.
+      - Only mention ABNORMAL lab results that are clinically significant.
+      - Do NOT list routine recurring tests unless results changed management.
+  12. ADVANCE CARE — only include if there is meaningful content (Full code, DNR, surrogate). Skip if "Not discussed".
+  13. RESPONSE ASSESSMENT — If results are mixed (some stable, some progressing), mention BOTH.
+  14. HANDLING [REDACTED] CONTENT:
+      - If a field value is mostly [REDACTED], SKIP that information rather than generating garbled text.
+      - NEVER call a test a "medication test" or "medication testing". If the test name is [REDACTED], say "a test" or "a genomic test".
+      - If [REDACTED] appears where a FACILITY or LOCATION name should be, write "your clinic" or "your treatment center".
+  15. PHYSICAL EXAM FINDINGS:
+      - Only include PE findings that are RELEVANT to the cancer or changed since last visit.
+      - Do NOT include chronic, pre-existing conditions unrelated to cancer unless they affect the cancer treatment plan.
+  16. FACTUAL ACCURACY:
+      - When describing imaging results, check if the finding is CURRENT or HISTORICAL. Do NOT present old imaging as new information.
+  17. MEDICAL TERMS — explain these if they appear:
+      - adenocarcinoma = "a type of cancer that forms in gland cells"
+      - pancreatic ductal adenocarcinoma = "cancer of the pancreas"
+      - neoadjuvant = "treatment given before surgery to shrink the cancer"
+      - adjuvant = "treatment given after surgery to prevent the cancer from coming back"
+      - Whipple procedure = "surgery to remove part of the pancreas, small intestine, and nearby tissues"
+      - distal pancreatectomy = "surgery to remove the tail end of the pancreas"
+      - biliary stent = "a small tube placed to keep the bile duct open"
+      - peritoneum = "the lining of the abdomen (belly area)"
+      - ascites = "fluid buildup in the belly area"
+      - FOLFIRINOX = "a combination of chemotherapy drugs"
+      - gemcitabine/nab-paclitaxel = "a combination of chemotherapy drugs"
+  18. EMOTIONAL SUPPORT:
+      - If the input JSON contains an "emotional_context" field with a NON-EMPTY value, add this EXACT sentence near the closing:
+        "We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process."
+      - Do NOT name specific emotions.
+      - If there is NO "emotional_context" field or it is empty, do NOT add ANY emotional support sentences.
+
+  TEMPLATE (fill in each section based on the mapped fields):
+
+  Dear Patient, [source:none]
+  We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]
+
+  **Why did you come to the clinic?**
+  [Fill from: summary, Patient type — e.g. "You came in for a follow-up visit regarding your pancreatic cancer treatment."]
+  [IMPORTANT: Do NOT use medical jargon in this section.]
+  [KEEP THIS SECTION SHORT: 1-2 sentences ONLY. State the visit type and the general reason. Do NOT include tumor details here — save those for "What's new or changed" section.]
+
+  **What's new or changed since your last visit?**
+  [Fill from: findings, response_assessment, lab_summary (only if ABNORMAL), goals_of_treatment]
+  [CRITICAL — FOLLOW-UP vs NEW PATIENT:
+   - If Patient type is "Follow up": assume the patient ALREADY understands their primary diagnosis. Only include:
+     * New test results — only if abnormal or if results changed management
+     * Disease progression or regression (from response_assessment)
+     * Do NOT list routine recurring tests with normal results
+   - If Patient type is "New patient": include primary diagnosis information (Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis).
+     * GOALS_OF_TREATMENT: Only include if the original note EXPLICITLY states the treatment goal. Do NOT include inferred goals.]
+
+  **What treatment or medication changes were made?**
+  [Fill from: recent_changes, medication_plan, current_meds, supportive_meds, therapy_plan, radiotherapy_plan]
+  [Include ALL medication changes from medication_plan.]
+  [Include the REASON for each treatment change when available.]
+  [Combine overlapping drug info into one mention. No dosing details.]
+
+  **What is the plan going forward?**
+  [Fill from: radiotherapy_plan, procedure_plan, imaging_plan, lab_plan, genetic_testing_plan, follow up, Specialty, Others, Nutrition, Genetics, Advance care]
+  [Include ALL planned future actions.]
+  [DECIDED vs DISCUSSED: Only include plans that were DECIDED or ORDERED.]
+  [KEY TIMING: Always include specific timing information for next steps:
+   - When is the next treatment cycle?
+   - When is restaging planned?
+   - When is the next visit?]
+
+  [If emotional_context is present, add EXACTLY: "We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process." [source:emotional_context]]
+  Thank you for trusting us with your care. [source:none]
+  Please feel free to contact us if you have any questions. [source:none]
+  Sincerely, Your Care Team [source:none]
+
+  AVAILABLE FIELD NAMES (only use these in [source:] tags):
+  - Patient type, second opinion, in-person, summary
+  - Type_of_Cancer, Stage_of_Cancer, Distant Metastasis, Metastasis
+  - lab_summary
+  - findings
+  - current_meds
+  - recent_changes, supportive_meds
+  - goals_of_treatment
+  - response_assessment
+  - medication_plan, therapy_plan, radiotherapy_plan
+  - procedure_plan
+  - imaging_plan
+  - lab_plan
+  - genetic_testing_plan
+  - Nutrition, Genetics, Specialty, Others, follow up
+  - Advance care
+  - emotional_context
+
+  OUTPUT FORMAT:
+  - Write PLAIN TEXT only. Do NOT wrap the output in JSON, quotes, or any other format.
+  - Every sentence MUST end with [source:field_name] before the next sentence begins.
+  - Keep the section headers (**Why did you come to the clinic?** etc.) exactly as shown.
+
+  INPUT JSON:
+  {keypoints_json}
+
+  Write the letter now. Plain text with [source:field_name] after EVERY sentence. No JSON wrapper.

@@ -534,7 +534,7 @@ def _run_letter_only(config_path, progress_paths):
 
         # Generate letter
         letter_gen_config = keypoint_config.copy()
-        letter_gen_config["max_new_tokens"] = 512
+        letter_gen_config["max_new_tokens"] = 768
         tagged_text = generate_tagged_letter(
             keypoints, model, tokenizer, chat_tmpl,
             letter_gen_config, base_cache, letter_prompt_template,
@@ -543,6 +543,10 @@ def _run_letter_only(config_path, progress_paths):
         traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
         letter = traceability.get("letter_text", "")
         letter, post_warnings = post_check_letter(letter)
+        # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
+        if re.search(r'medication\s+test(ing)?', letter, re.IGNORECASE):
+            letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
+            print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
         traceability["letter_text"] = letter
         for w in post_warnings:
             print(f"  {w}")
@@ -728,6 +732,20 @@ def main():
         row_range = data_cfg.get("row_range", [0, len(df)])
         df = df.iloc[row_range[0] : row_range[1]]
         print(f"Data loaded: {len(df)} rows (range {row_range})")
+
+    # 6.5. Determine cancer type
+    cancer_type = data_cfg.get("cancer_type", None)
+    if cancer_type is None:
+        # Auto-detect from dataset path
+        ds_path = data_cfg["dataset_path"].lower()
+        if "breastca" in ds_path:
+            cancer_type = "breast"
+        elif "pdac" in ds_path:
+            cancer_type = "pdac"
+        else:
+            cancer_type = "generic"
+    config["_cancer_type"] = cancer_type
+    print(f"Cancer type: {cancer_type}")
 
     # 7. Load prompts
     extraction_prompts = config["_prompts"]["extraction"]
@@ -1524,16 +1542,25 @@ def main():
                             break
             if found_meds:
                 # Filter out drugs that are mentioned as stopped/held/switched/progressed in any field
-                rc_val = str(keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or "").lower()
-                ra_val = str(keypoints.get("Response_Assessment", {}).get("response_assessment", "") or "").lower()
-                summary_val = str(keypoints.get("Reason_for_Visit", {}).get("summary", "") or "").lower()
-                all_context = rc_val + " " + ra_val + " " + summary_val
+                stopped_fields = [
+                    str(keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or "").lower(),
+                    str(keypoints.get("Response_Assessment", {}).get("response_assessment", "") or "").lower(),
+                    str(keypoints.get("Reason_for_Visit", {}).get("summary", "") or "").lower(),
+                ]
                 stopped_patterns = ['stopped', 'held', 'discontinued', 'switched', 'changed to', 'replaced', 'no longer', 'progressed on', 'progression on']
                 filtered_meds = []
                 for drug in found_meds:
                     drug_lower = drug.lower()
-                    drug_in_stopped = any(p in all_context for p in stopped_patterns) and drug_lower in all_context
-                    if drug_in_stopped:
+                    drug_is_stopped = False
+                    for field_text in stopped_fields:
+                        for m in re.finditer(re.escape(drug_lower), field_text):
+                            window = field_text[max(0, m.start()-60):m.end()+60]
+                            if any(p in window for p in stopped_patterns):
+                                drug_is_stopped = True
+                                break
+                        if drug_is_stopped:
+                            break
+                    if drug_is_stopped:
                         print(f"    [POST-MEDICATION-SUPPLEMENT] Skipping '{drug}' — found as stopped/progressed in extraction fields")
                     else:
                         filtered_meds.append(drug)
@@ -1545,18 +1572,19 @@ def main():
                         med["medication_plan"] = mp_val + "; also: " + ", ".join(unique)
                     print(f"    [POST-MEDICATION-SUPPLEMENT] Added missing meds: {unique}")
 
-        # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring
-        lab = keypoints.get("Lab_Plan", {})
-        if isinstance(lab, dict):
-            lp_val = str(lab.get("lab_plan", "") or "")
-            ap_lower = (assessment_and_plan or "").lower()
-            if ('palbociclib' in ap_lower or 'ibrance' in ap_lower) and 'monthly' in ap_lower:
-                if 'palbociclib' not in lp_val.lower() and 'ibrance' not in lp_val.lower() and 'monthly' not in lp_val.lower():
-                    if lp_val.strip() and lp_val.lower() not in ('no labs planned.', 'no labs planned', ''):
-                        lab["lab_plan"] = lp_val + ". Monthly blood work for Palbociclib monitoring."
-                    else:
-                        lab["lab_plan"] = "Monthly blood work for Palbociclib monitoring."
-                    print(f"    [POST-LAB-SUPPLEMENT] Added Palbociclib monthly monitoring")
+        # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring [breast-only]
+        if cancer_type == "breast":
+            lab = keypoints.get("Lab_Plan", {})
+            if isinstance(lab, dict):
+                lp_val = str(lab.get("lab_plan", "") or "")
+                ap_lower = (assessment_and_plan or "").lower()
+                if ('palbociclib' in ap_lower or 'ibrance' in ap_lower) and 'monthly' in ap_lower:
+                    if 'palbociclib' not in lp_val.lower() and 'ibrance' not in lp_val.lower() and 'monthly' not in lp_val.lower():
+                        if lp_val.strip() and lp_val.lower() not in ('no labs planned.', 'no labs planned', ''):
+                            lab["lab_plan"] = lp_val + ". Monthly blood work for Palbociclib monitoring."
+                        else:
+                            lab["lab_plan"] = "Monthly blood work for Palbociclib monitoring."
+                        print(f"    [POST-LAB-SUPPLEMENT] Added Palbociclib monthly monitoring")
 
         # POST-IMAGING: Search full note for imaging plans mentioned outside A/P
         # Similar to POST-PROCEDURE: echocardiogram, DEXA, etc. may be in A/P as standalone items
@@ -1959,12 +1987,12 @@ def main():
                         cancer["Stage_of_Cancer"] = cleaned
                         print(f"    [POST-STAGE-DISTMET] Stage IV but Distant Met=No: '{stage}' → '{cleaned}'")
 
-            # POST-STAGE-REGIONAL: Stage IV with only regional LN metastasis [v16]
+            # POST-STAGE-REGIONAL: Stage IV with only regional LN metastasis [v16] [breast-only]
             # Axillary, sentinel, supraclavicular, infraclavicular, internal mammary LN
-            # are regional (Stage III) not distant (Stage IV)
+            # are regional (Stage III) not distant (Stage IV) — breast cancer specific
             stage = cancer.get("Stage_of_Cancer", "")  # re-read in case POST-STAGE-DISTMET changed it
             stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage, re.IGNORECASE))
-            if stage_says_iv and met and not met_says_no:
+            if cancer_type == "breast" and stage_says_iv and met and not met_says_no:
                 met_lower = met.lower()
                 REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",
                                   "infraclavicular", "internal mammary", "chest wall",
@@ -2033,9 +2061,9 @@ def main():
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-ABBREV] Found stage abbreviation in A/P: '{raw_stage}' → '{new_stage}'")
 
-        # POST-STAGE-INFER: If Stage is empty/unknown, infer from metastasis + tumor size + node status
+        # POST-STAGE-INFER: If Stage is empty/unknown, infer from metastasis + tumor size + node status [breast-only staging table]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             stage_lower = stage.lower().strip()
             stage_empty = not stage_lower or stage_lower in ("not mentioned", "not mentioned in note",
@@ -2138,9 +2166,9 @@ def main():
                         cancer["Stage_of_Cancer"] = f"(inferred from pT{t_val} N{n_val})"
                         print(f"    [POST-STAGE-INFER] Inferred from pTN: pT{t_val} N{n_val}")
 
-        # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name
+        # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name [breast-only staging table]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             # Match pure pTN like "pT3N0", "pT2N1(sn)", "pT1c(m)N1(sn)" without a "Stage" word
             if stage and 'stage' not in stage.lower() and re.match(r'^p?T\d', stage, re.IGNORECASE):
@@ -2178,10 +2206,10 @@ def main():
                     cancer["Stage_of_Cancer"] = new_stage
                     print(f"    [POST-STAGE-PTN-TRANSLATE] {stage} → {new_stage}")
 
-        # POST-STAGE-CORRECT: Correct wrong Stage based on tumor size + node count in note
+        # POST-STAGE-CORRECT: Correct wrong Stage based on tumor size + node count in note [breast-only staging table]
         # LLM sometimes writes "Stage III" when pT2N1 (1-3 nodes) → should be Stage IIB
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             stage_lower = stage.lower().strip()
             # Verify "stage iii", "stage 3", or "stage iiia" (possibly with extra text) when node data suggests lower
@@ -2327,9 +2355,9 @@ def main():
                         cancer["Metastasis"] = "No"
                     print(f"    [POST-DISTMET-NOMET] A/P says '{no_met_evidence.group(0)}' — corrected: '{old_dm}' → 'No'")
 
-        # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17]
+        # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             dist_met = cancer.get("Distant Metastasis", "") or ""
             if dist_met and dist_met.lower() not in ("no", "no.", "none", ""):
                 dist_lower = dist_met.lower()
@@ -2445,10 +2473,10 @@ def main():
                     resp["response_assessment"] = "Not yet on treatment — no response to assess."
                     print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just prescribed, no current meds)")
 
-        # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29]
+        # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29] [breast-only]
         # Oncotype/MammaPrint are prognostic tools, not treatment response assessments
         resp = keypoints.get("Response_Assessment", {})
-        if isinstance(resp, dict):
+        if cancer_type == "breast" and isinstance(resp, dict):
             resp_val = resp.get("response_assessment", "") or ""
             if resp_val and len(resp_val) < 50:
                 # Short response that looks like a genomic test result
@@ -2780,12 +2808,12 @@ def main():
                         print(f"    [POST-MEDS-STOPPED] Removed {removed} stopped drug(s) from current_meds: {stopped_drugs}")
                         print(f"      current_meds now: '{drug_dict_meds['current_meds']}'")
 
-        # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16]
+        # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
                         "femara", "aromasin", "fulvestrant", "faslodex",
                         "goserelin", "zoladex", "leuprolide", "lupron"]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             # v17: expanded ER/PR detection — also match numeric patterns like "ER 95", "ER >90%"
             if isinstance(type_val, str) and not re.search(r'(?i)\b(?:ER|HR|PR)\s*[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)|\b(?:ER|HR|estrogen|progesterone)\s*\d|estrogen|progesterone|hormone\s+receptor|triple', type_val):
@@ -2835,7 +2863,7 @@ def main():
                         er_inferred = True
                         print(f"    [POST-ER-CHECK] Found ER status in note: ER{status}")
 
-        # POST-HER2-CHECK: If Type_of_Cancer has ER/PR but no HER2, search note and append [v15]
+        # POST-HER2-CHECK: If Type_of_Cancer has ER/PR but no HER2, search note and append [v15] [breast-only]
         HER2_POS_DRUGS = ["trastuzumab", "pertuzumab", "herceptin", "t-dm1", "t-dxd",
                           "ado-trastuzumab", "lapatinib", "tykerb", "tucatinib"]
         HER2_POS_REGIMENS = ["tchp", "thp", "ac-thp", "acthp"]
@@ -2844,7 +2872,7 @@ def main():
             "ihc", "fish ratio",
         ] + HER2_POS_DRUGS + HER2_POS_REGIMENS
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             if isinstance(type_val, str) and re.search(r'(?i)\b(?:ER|HR|PR)[+-]|\b(?:ER|HR|PR)\s+(?:positive|negative)', type_val) and not re.search(r'(?i)HER2|HER-2|HER 2|triple.neg|TNBC', type_val):
                 # Has ER status but missing HER2 — search the note
@@ -2887,9 +2915,9 @@ def main():
                 print(f"      before: '{old_val}'")
                 print(f"      after:  '{type_val}'")
 
-        # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override
+        # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             if isinstance(type_val, str) and "her2-" in type_val.lower().replace(" ", ""):
                 # Check if note mentions HER2+ treatment
@@ -2909,9 +2937,9 @@ def main():
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
-        # POST-RECEPTOR-UPDATE: Update receptor status from Addendum if different from A/P [v22]
+        # POST-RECEPTOR-UPDATE: Update receptor status from Addendum if different from A/P [v22] [breast-only]
         cancer_ru = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer_ru, dict):
+        if cancer_type == "breast" and isinstance(cancer_ru, dict):
             type_val_ru = cancer_ru.get("Type_of_Cancer", "")
             if type_val_ru and isinstance(type_val_ru, str):
                 # Search for Addendum section in note
@@ -2928,9 +2956,9 @@ def main():
                             print(f"      before: '{old_type}'")
                             print(f"      after:  '{type_val_ru}'")
 
-        # POST-HER2-FISH: Resolve "HER2: status unclear/not tested" when FISH result exists [v22]
+        # POST-HER2-FISH: Resolve "HER2: status unclear/not tested" when FISH result exists [v22] [breast-only]
         cancer_hf = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer_hf, dict):
+        if cancer_type == "breast" and isinstance(cancer_hf, dict):
             type_val_hf = cancer_hf.get("Type_of_Cancer", "")
             if type_val_hf and isinstance(type_val_hf, str) and ('unclear' in type_val_hf.lower() or 'not tested' in type_val_hf.lower()):
                 # Search note for FISH negative/non-amplified
@@ -2943,9 +2971,9 @@ def main():
                     print(f"      before: '{old_type}'")
                     print(f"      after:  '{type_val_hf}'")
 
-        # POST-TYPE-VERIFY: Fix HER2+/triple-negative contradiction [v15]
+        # POST-TYPE-VERIFY: Fix HER2+/triple-negative contradiction [v15] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             if isinstance(type_val, str):
                 type_lower = type_val.lower()
@@ -2958,9 +2986,9 @@ def main():
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
-        # POST-TYPE-VERIFY-TNBC: If A/P says TNBC, override HER2+ → HER2- [v17]
+        # POST-TYPE-VERIFY-TNBC: If A/P says TNBC, override HER2+ → HER2- [v17] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val = cancer.get("Type_of_Cancer", "")
             if isinstance(type_val, str) and re.search(r'(?i)HER2\s*\+|HER2\s*pos', type_val):
                 ap_text_tnbc = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
@@ -2980,9 +3008,9 @@ def main():
                     print(f"      before: '{old_val}'")
                     print(f"      after:  '{type_val}'")
 
-        # POST-TYPE-TNBC-ER: If note says TNBC but Type has "ER+ (inferred from goserelin)", remove the wrong inference [v29]
+        # POST-TYPE-TNBC-ER: If note says TNBC but Type has "ER+ (inferred from goserelin)", remove the wrong inference [v29] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val_te = cancer.get("Type_of_Cancer", "") or ""
             if isinstance(type_val_te, str) and "ER+" in type_val_te and "inferred from goserelin" in type_val_te.lower():
                 ap_text_te = (assessment_and_plan or '').lower()
@@ -2999,9 +3027,9 @@ def main():
                     print(f"      before: '{old_val_te}'")
                     print(f"      after:  '{type_val_te}'")
 
-        # POST-TYPE-HER2-BREAST-OVERRIDE: If breast biopsy says HER2- but Type says HER2+ (confusion with other cancer) [v29]
+        # POST-TYPE-HER2-BREAST-OVERRIDE: If breast biopsy says HER2- but Type says HER2+ (confusion with other cancer) [v29] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val_ho = cancer.get("Type_of_Cancer", "") or ""
             if isinstance(type_val_ho, str) and re.search(r'(?i)HER2\s*\+|HER2\s*pos', type_val_ho):
                 # Check if breast cancer biopsy/pathology in A/P explicitly says HER- / FISH negative / ratio < 2.0
@@ -3024,9 +3052,9 @@ def main():
                     print(f"      before: '{old_val_ho}'")
                     print(f"      after:  '{type_val_ho}'")
 
-        # POST-TYPE-UNCLEAR: If note says biomarkers/receptors "unclear"/"unknown", correct fabricated receptor status [v23]
+        # POST-TYPE-UNCLEAR: If note says biomarkers/receptors "unclear"/"unknown", correct fabricated receptor status [v23] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val_uc = cancer.get("Type_of_Cancer", "") or ""
             # Check if note explicitly says biomarker results are unclear/unknown
             unclear_match = re.search(r'biomarker\s+results?\s+(?:unclear|unknown|not\s+(?:available|known|reported))', note_lower)
@@ -3046,9 +3074,9 @@ def main():
                     print(f"      before: '{old_type}'")
                     print(f"      after:  '{type_val_uc}'")
 
-        # POST-TYPE-HR-EXPAND: Expand "HR+" to "ER+" when note has specific "estrogen receptor positive" [v23]
+        # POST-TYPE-HR-EXPAND: Expand "HR+" to "ER+" when note has specific "estrogen receptor positive" [v23] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
+        if cancer_type == "breast" and isinstance(cancer, dict):
             type_val_hr = cancer.get("Type_of_Cancer", "") or ""
             if re.search(r'\bHR\+', type_val_hr) and 'ER' not in type_val_hr:
                 has_er_positive = bool(re.search(r'estrogen\s+receptor\s+(?:positive|is\s+positive)', note_lower))
@@ -3066,9 +3094,9 @@ def main():
                     print(f"      before: '{old_type}'")
                     print(f"      after:  '{type_val_hr}'")
 
-        # POST-GENETICS-RECHECK: Clear genetic_testing_plan if it only contains recheck/LVEF/marker language [v24]
+        # POST-GENETICS-RECHECK: Clear genetic_testing_plan if it only contains recheck/LVEF/marker language [v24] [breast-only]
         gen_test = keypoints.get("Genetic_Testing_Plan", {})
-        if isinstance(gen_test, dict):
+        if cancer_type == "breast" and isinstance(gen_test, dict):
             gen_val = gen_test.get("genetic_testing_plan", "")
             if gen_val and isinstance(gen_val, str) and gen_val.lower() not in ("none planned.", "none", ""):
                 gen_lower = gen_val.lower()
@@ -3168,10 +3196,8 @@ def main():
                         cleaned_lines.append(line)
                 letter = "\n".join(cleaned_lines)
             # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
-            import re as _re
-            if _re.search(r'medication\s+test(ing)?', letter, _re.IGNORECASE):
-                letter = _re.sub(r'a\s+medication\s+test(ing)?', 'a test', letter, flags=_re.IGNORECASE)
-                letter = _re.sub(r'medication\s+test(ing)?', 'a test', letter, flags=_re.IGNORECASE)
+            if re.search(r'medication\s+test(ing)?', letter, re.IGNORECASE):
+                letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
                 print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
             traceability["letter_text"] = letter
             for w in post_warnings:

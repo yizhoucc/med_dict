@@ -1,0 +1,204 @@
+Medication_Plan: |
+  TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+  CRITICAL: Do NOT add, assume, or generalize details not in the original note. If a drug name is redacted (*****), write "[REDACTED]" or "unspecified agent". Do NOT guess what test or drug it might be. Only extract what is explicitly written.
+  Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - "s/p 6 cycles FOLFIRINOX" means FOLFIRINOX is COMPLETED. "S/p" or "status post" ALWAYS means COMPLETED/PAST — do NOT list these as current or future.
+  - Only include drugs explicitly current (continue, currently on) or future (will start, plan to begin).
+  Be SPECIFIC: list actual drug names, doses, and frequencies when mentioned. Do NOT use vague terms like "will start medications".
+  IMPORTANT: If a drug name is redacted/masked (shown as *****), write "unspecified agent" — do NOT guess the drug name.
+  COMPREHENSIVENESS CHECK — before outputting, re-read the entire A/P and verify you captured ALL of the following:
+  1. Every drug being STARTED or prescribed
+  2. Every drug being CONTINUED
+  3. Every supportive medication (e.g., Creon for pancreatic enzyme replacement, antiemetics, pain medications)
+  4. Dose/frequency changes
+  5. Contingency plans (e.g., "if progression, consider nab-paclitaxel")
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
+  }
+
+Therapy_plan: |
+  TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
+  Include ONLY current or future therapy: chemotherapy, radiotherapy, targeted therapy, immunotherapy.
+  Include future plans, changes to current therapy (start, stop, continue).
+
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - PAST (DO NOT include): "underwent Whipple procedure in 2016", "s/p distal pancreatectomy", "completed 6 cycles of FOLFIRINOX", "s/p 12 cycles gemcitabine/nab-paclitaxel" (s/p = status post = COMPLETED)
+  - IMPORTANT: "s/p" or "status post" ALWAYS means COMPLETED/PAST.
+  - CURRENT (include): "continue gemcitabine", "currently on FOLFIRINOX"
+  - FUTURE (include): "will start", "plan to begin", "discussed starting", "switch to"
+  IMPORTANT: "continue [drug]" IS a valid therapy plan. Do NOT write "None" when the patient is actively on treatment.
+  IMPORTANT: Include ALL of the following when mentioned in the A/P:
+  - Dose changes
+  - Radiation referrals or plans (e.g., "referral to Rad Onc for SBRT")
+  - New drugs being started
+  - Drugs being continued
+  - Clinical trial discussions
+  Do NOT write "None" unless the A/P truly has NO treatment discussion at all.
+
+  DO NOT include imaging plans (CT, MRI, PET, etc.) — those belong in Imaging_Plan.
+  DO NOT include lab plans — those belong in Lab_Plan.
+  Only include THERAPY: chemotherapy drugs, radiation therapy, targeted therapy, immunotherapy, and their schedules.
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "therapy_plan": "A summary of the current and future therapy plan with specific details."
+  }
+
+radiotherapy_plan: |
+  TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
+  For radiotherapy, include ANY statement that indicates
+  it is being considered, recommended, or may be used, even if no explicit
+  start/continue/plan keywords are present.
+  Include referrals to radiation oncology (Rad Onc) as a radiotherapy-related plan.
+
+  CRITICAL — distinguish PAST from CURRENT/FUTURE:
+  - PAST (DO NOT include): "had radiation in 2018", "s/p radiation", "completed radiation", "status post SBRT"
+  - CURRENT (include): "currently receiving radiation", "on radiation therapy"
+  - FUTURE (include): "will start radiation", "radiation planned", "discussed SBRT", "Rad Onc consult"
+  If the only radiotherapy mentioned is past/completed, write "None".
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
+  }
+
+Procedure_Plan: |
+  TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
+  Include ONLY future/planned procedures: surgery (Whipple, distal pancreatectomy, etc.), biopsy, stent placement, biliary drain, port placement, or other interventional procedures.
+
+  IMPORTANT — look for PRE-TREATMENT PREREQUISITES:
+  - "prior to starting", "before initiating", "in order to start", "steps required"
+  - Port placement, biliary stenting, dental clearance
+  These ARE procedures and MUST be included.
+
+  CRITICAL — distinguish PAST from FUTURE:
+  - PAST (DO NOT include): "underwent Whipple on 10/29/16", "s/p distal pancreatectomy", "had biopsy on 05/25"
+  - FUTURE (include): "will schedule biopsy", "plan for port placement", "surgery pending", "needs stent replacement"
+
+  Also DO NOT include:
+  - Imaging plans (CT, MRI, PET, etc. → Imaging_Plan)
+  - Radiation/radiotherapy plans → radiotherapy_plan
+  - Lab plans or blood tests
+  - Medication/treatment plans → Medication_Plan
+  - Genetic/molecular testing → Genetic_Testing_Plan
+
+  If no future procedures are planned, say "No procedures planned."
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "procedure_plan": "A summary of any planned procedures, or 'No procedures planned.'"
+  }
+
+Imaging_Plan: |
+  TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
+  Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, EUS (endoscopic ultrasound), bone scan, X-ray, echocardiogram (TTE/Echo).
+  Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
+
+  CRITICAL — RESTAGING: Always look for restaging plans. Common patterns:
+  - "restaging after X months", "restaging in X months", "scans again in X months"
+  - "repeat imaging after X months on treatment", "reassess with scans"
+  If restaging is mentioned, ALWAYS include it with timing (e.g., "restaging after 3 months of therapy").
+
+  CRITICAL — distinguish PAST from FUTURE:
+  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "EUS showed mass"
+  - FUTURE (include): "will order MRI", "CT in 3 months", "restaging after 3 months"
+
+  CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
+  - XRT, RT, SBRT, radiation therapy → these go in radiotherapy_plan, NOT here
+  - Biopsy, surgery → these go in Procedure_Plan, NOT here
+
+  CRITICAL — only include imaging ORDERED or PLANNED in the A/P:
+  - Do NOT add standard-of-care monitoring that is NOT explicitly mentioned in the A/P.
+
+  If no future imaging is planned, say "No imaging planned."
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "imaging_plan": "A summary of any planned imaging with specific test names, or 'No imaging planned.'"
+  }
+
+Lab_Plan: |
+  TASK: Extract the 'lab Plan' from the clinical note.
+  Look for lab orders in the Assessment/Plan section AND in any order sets listed elsewhere in the note.
+  Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 19-9, CEA), coagulation profile, hepatitis markers, etc.
+  Also include pre-chemo blood draws.
+  Specify frequency and rationale if mentioned.
+
+  CRITICAL — do NOT include these (they belong in OTHER fields):
+  - Imaging scans → Imaging_Plan
+  - Genomic/molecular tests → Genetic_Testing_Plan
+  - Treatment plans → Medication_Plan
+  Lab_Plan is ONLY for blood draws and lab work.
+
+  If no future blood tests or labs are planned, say "No labs planned."
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
+  }
+
+Genetic_Testing_Plan: |
+  TASK: Extract the 'Genetic Testing Plan' from the given 'Assessment/Plan' section.
+
+  1. Scope of section:
+  - Only look for plans that are clearly about FUTURE genetic or molecular TESTING.
+
+  2. What COUNTS as 'genetic or molecular testing':
+  - Tumor genomic sequencing / NGS / panel testing (Foundation One, Tempus, etc.)
+  - Germline genetic panels (e.g., hereditary cancer panel, BRCA testing)
+  - Liquid biopsy / circulating tumor DNA (ctDNA) tests (Guardant360, etc.)
+  - Specific biomarker tests (MSI testing, KRAS testing, NTRK fusion testing, PD-L1)
+  - Any plan to "send", "order", "check", or "obtain" a genetic, genomic, or molecular TEST
+
+  3. What MUST be EXCLUDED:
+  CRITICAL: This field is ONLY for genetic/molecular TESTS. Do NOT put medication plans here.
+  - DO NOT include any medications, systemic therapies, or treatment plans
+  - DO NOT include tests that are already completed or only mentioned in past history
+  - DO NOT include imaging (CT, PET, MRI) or routine labs (CBC, CMP)
+
+  4. If there is NO new genetic or molecular test planned:
+  - Set the value to: "None planned."
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or 'None planned.'"
+  }
+
+Referral: |
+  TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
+  Do not mistake the doctor's signature at the end of the note as a referral.
+  Include ALL referrals TO OTHER providers/departments.
+
+  CRITICAL — do NOT include PAST/COMPLETED referrals.
+  IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section.
+
+  CRITICAL — distinguish OUTGOING from INCOMING referrals:
+  - OUTGOING (include): This note's doctor is SENDING the patient elsewhere.
+  - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else.
+
+  If no referral is mentioned for a category, set its value to "None".
+  Respond *only* with a JSON object using this exact schema:
+  {
+  "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
+  "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor. Write 'None' if no genetics referral is planned.",
+  "Specialty": "eg, Palliative care referral, Radiation oncology consult, surgical oncology, GI consultation, Pain management, or 'None'. IMPORTANT: 'treatment is palliative' describes the GOAL, NOT a referral to palliative care services.",
+  "Others": "Physical or occupational therapy, Social work, financial counseling, home health, or 'None'.",
+  "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
+  }
+
+follow_up_next_visit: |
+  TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
+  Be SPECIFIC about timing (e.g., "2 weeks", "after biopsy results", "3 months").
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "Next clinic visit": "(in-person or telehealth): timing and purpose"
+  }
+
+Advance_care_planning: |
+  TASK: Extract the 'Advance care planning' from the clinical note.
+  Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.
+  IMPORTANT: Code status is often found OUTSIDE the Assessment/Plan section — look in the FULL NOTE.
+  If no advance care planning is discussed and no code status is found, say "Not discussed during this visit."
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "Advance care": "A summary of any advance care planning including code status, or 'Not discussed during this visit.'"
+  }
