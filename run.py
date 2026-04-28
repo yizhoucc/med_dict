@@ -1523,14 +1523,18 @@ def main():
                             found_meds.append(drug)
                             break
             if found_meds:
-                # Filter out drugs that are mentioned as stopped/held/switched in recent_changes
+                # Filter out drugs that are mentioned as stopped/held/switched/progressed in any field
                 rc_val = str(keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or "").lower()
-                stopped_patterns = ['stopped', 'held', 'discontinued', 'switched', 'changed to', 'replaced', 'no longer']
+                ra_val = str(keypoints.get("Response_Assessment", {}).get("response_assessment", "") or "").lower()
+                summary_val = str(keypoints.get("Reason_for_Visit", {}).get("summary", "") or "").lower()
+                all_context = rc_val + " " + ra_val + " " + summary_val
+                stopped_patterns = ['stopped', 'held', 'discontinued', 'switched', 'changed to', 'replaced', 'no longer', 'progressed on', 'progression on']
                 filtered_meds = []
                 for drug in found_meds:
-                    drug_in_stopped = any(p in rc_val for p in stopped_patterns) and drug.lower() in rc_val
+                    drug_lower = drug.lower()
+                    drug_in_stopped = any(p in all_context for p in stopped_patterns) and drug_lower in all_context
                     if drug_in_stopped:
-                        print(f"    [POST-MEDICATION-SUPPLEMENT] Skipping '{drug}' — found in recent_changes as stopped/switched")
+                        print(f"    [POST-MEDICATION-SUPPLEMENT] Skipping '{drug}' — found as stopped/progressed in extraction fields")
                     else:
                         filtered_meds.append(drug)
                 unique = list(dict.fromkeys(filtered_meds))
