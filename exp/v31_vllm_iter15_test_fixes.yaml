@@ -1,0 +1,43 @@
+experiment:
+  name: "v31_vllm_iter15_test_fixes"
+  seed: 42
+
+model:
+  name: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+  chat_template: "qwen2"
+  vllm:
+    base_url: "http://localhost:8000/v1"
+
+data:
+  dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/breastca_unannotated.csv"
+  # Test fixes: ROW 57 (TNBC P1), ROW 24/72/96 (medication test), ROW 22/85 (POST hook stopped), ROW 2/84/99 (truncation)
+  row_indices: [1, 21, 23, 56, 71, 83, 84, 95, 98]
+
+prompts:
+  extraction: "prompts/extraction.yaml"
+  plan_extraction: "prompts/plan_extraction.yaml"
+  letter_generation: "prompts/letter_generation.yaml"
+
+extraction:
+  pipeline: "v2"
+  attribution: false
+  letter: true
+  tool_calling: false
+  max_retries: 3
+  verify: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
+
+generation:
+  keypoint:
+    max_new_tokens: 1024
+    do_sample: false
+  assessment_plan:
+    max_new_tokens: 2048
+    do_sample: false
+  retry:
+    max_new_tokens: 2048
+    do_sample: true
+    temperature: 0.6
+    top_p: 0.9
