@@ -1028,3 +1028,232 @@ iter14 相比 iter13 有显著改善。医生反馈的 3 个 P1 全部修复。�
 | med_plan: leuprolide+letrozole+palbociclib | ✅ | "zoledronic acid, DEXA, PET/CT 3-4 months" | ✅ |
 
 **ROW 54 总评: Ext P2:0, Letter P2:0 ✅**
+
+## ROW 59-100 详细审查
+
+### ROW 59 (coral_idx 198)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade 3 IDC | ✅ | "no new signs of cancer growth" | ✅ |
+| Stage: Stage IIA (pT2 N0) — 应为 IA(1.5cm) | P2 | "stopped letrozole...start exemestane" | ✅ |
+| med_plan: exemestane after break + Pristiq + psychiatry for duloxetine | ✅ | "Pristiq...psychiatrist...Duloxetine" | ✅ |
+| imaging: mammogram July + alternating MRI | ✅ | "mammogram in July...MRIs every six months" | ✅ |
+| follow_up: 6 months | ✅ | "six months" | ✅ |
+
+**ROW 59 总评: Ext P2:1 (Stage IIA→IA), Letter P2:0**
+
+### ROW 61 (coral_idx 200)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade 2 IDC | ✅ | "IDC...ER+/PR+...no HER2" | ✅ |
+| Stage: Stage I | ✅ | "early stage...not spread" | ✅ |
+| med_plan: Tamoxifen vs OS+AI | ✅ | "Tamoxifen or another hormone therapy" | ✅ |
+| procedure: lumpectomy+IORT 04/12/21 | ✅ | "lumpectomy April 12...IORT...no additional radiation" | ✅ |
+| genetic: Oncotype Dx after surgery | ✅ | "decide if you need chemotherapy based on results" | ✅ |
+
+**ROW 61 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 64 (coral_idx 203)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: HR+/HER2- IDC | ✅ | "HR positive...no HER2...spread to sternum" | ✅ |
+| Stage: Stage III-IV | ✅ | "biopsy of this area is planned" | ✅ |
+| med_plan: chemo + xgeva if bone bx+ | ✅ | "xgeva...if biopsy positive" | ✅ |
+| supportive: dexamethasone, ondansetron, etc. | ✅ | "keep chemotherapy on schedule" | ✅ |
+
+**ROW 64 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 65 (coral_idx 204)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER weak+(2%)/PR low+(7%)/HER2- | ✅ | "IDC...spread to lymph nodes" | ✅ |
+| Stage: locally advanced with LN involvement | ✅ | "neoadjuvant chemotherapy before surgery" | ✅ |
+| med_plan: AC/T or ISPY trial | ✅ | "Taxol...AC...ISPY trial" | ✅ |
+| procedure: port | ✅ | "port placed" | ✅ |
+
+**ROW 65 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 68 (coral_idx 207)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2+ multifocal IDC | ✅ | "good response to treatment...6 cycles" | ✅ |
+| response: good response, MRI no visible lesions | ✅ | "bilateral mastectomy recommended" | ✅ |
+| procedure: bilateral mastectomy | ✅ | "sons should be tested for a type of anemia" | ✅ |
+| genetic: sons testing | ✅ | "healthy diet and regular exercise" | ✅ |
+
+**ROW 68 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 70 (coral_idx 209)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: L: ER+/PR+/HER2- ILC + R: ER+/PR-/HER2- IDC | ✅ bilateral 正确区分 | "recovering well" | ✅ |
+| current_meds: letrozole | ✅ | "restart letrozole" | ✅ |
+| radiotherapy: radiation consult | ✅ | "radiation consult...expanders" | ✅ |
+| imaging: CT for lung nodules | ✅ | "CT for lung nodules" | ✅ |
+
+**ROW 70 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 72 (coral_idx 211) — iter12e P1 修复验证
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR-/HER2- grade 2 IDC with neuroendocrine | ✅ | "**edges of the removed tissue are clean**" ✅ P1 FIXED | ✅ |
+| Stage: Stage IA (pT1cN0) | ✅ | "No cancer found in the lymph nodes" | ✅ |
+| med_plan: letrozole | ✅ | "start taking letrozole" | ✅ |
+| genetic: Oncotype Dx | ✅ | "**medication test**" — LLM 不遵守 prompt | P2 |
+
+**ROW 72 总评: Ext P2:0, Letter P2:1 ("medication test") — P1 已修 ✅**
+
+### ROW 78 (coral_idx 218)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER-/PR-/HER2- (TNBC) metastatic | ✅ | "cancer has gotten worse" | ✅ |
+| goals: palliative | ✅ | "clinical trial...not interested in chemotherapy" | ✅ |
+| imaging: echo | ✅ | "echocardiogram on September 8th" | ✅ |
+
+**ROW 78 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 80 (coral_idx 219)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade 3 IDC | ✅ | "TC on April 11, 2019...four times" | ✅ |
+| radiotherapy: 6wk (5+1 boost) | ✅ | "six weeks...five weeks with a one-week boost" | ✅ |
+| med_plan: cold gloves, claritin | ✅ | "cold gloves" — 无 "hand-foot syndrome" ✅ | ✅ |
+
+**ROW 80 总评: Ext P2:0, Letter P2:0 ✅ — hand-foot P2 消失**
+
+### ROW 82 (coral_idx 221)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- mixed ductal/lobular | ✅ | "not start chemotherapy because your risk is low" | ✅ |
+| med_plan: no chemo, hormonal therapy | ✅ | "radiation...DEXA...exercise counseling" | ✅ |
+
+**ROW 82 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 84 (coral_idx 223)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- IDC metastatic | ✅ — 但 metastatic biopsy PR- | P2? | "spread to bones, soft tissues, liver, and...brain" | ✅ |
+| med_plan: Xeloda, fulvestrant if progression | ✅ | "LP, CT, MRI spine" | ✅ |
+| radiotherapy: radiation referral for CNS | ✅ | Letter **truncated** (缺 closing) | P2 |
+
+**ROW 84 总评: Ext P2:0 (PR 需单独验证), Letter P2:1 (truncation)**
+
+### ROW 85 (coral_idx 224)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR-/HER2- ILC pleomorphic | ✅ | "progressed on fulvestrant/palbociclib" | ✅ |
+| **med_plan**: "...also: **palbociclib**" | **P2** — 已因 progression 停用 | "phase 1 trial +olaparib" | ✅ |
+| radiotherapy: radiation washout for trial | ✅ | "steroid taper" | ✅ |
+
+**ROW 85 总评: Ext P2:1 (POST hook stopped palbociclib), Letter P2:0**
+
+### ROW 87 (coral_idx 226) — 医生反馈验证
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade 2 IDC | ✅ | "2.2 cm...4/19 lymph nodes...clear margins" | ✅ |
+| Stage: Stage IIIA | ✅ | "**hormonal therapy** to help prevent cancer" ✅ 医生fix | ✅ |
+| med_plan: hormonal therapy alone | ✅ | **No Parkinson's** ✅, **no curative** ✅ | ✅ |
+
+**ROW 87 总评: Ext P2:0, Letter P2:0 ✅ — 医生反馈全部修复**
+
+### ROW 88 (coral_idx 227)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: IDC, ER weak+, PR-, HER2- metastatic | ✅ | "spread to brain and other parts" | ✅ |
+| med_plan: Xeloda, immunotherapy if PD | ✅ | "capecitabine (XELODA)...HER2 testing" | ✅ |
+| imaging: restaging not captured | ⚠️ | "follow up as needed" | ✅ |
+
+**ROW 88 总评: Ext P2:0 (restaging 在 response_assessment 里), Letter P2:0**
+
+### ROW 90 (coral_idx 229) — 医生反馈验证
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: Adenocarcinoma | ✅ | "**cycle 4 of AC in 1 week, with a delay**" ✅ 医生fix | ✅ |
+| med_plan: AC cycle 4, GCSF 50% | ✅ | "GCSF dose reduced...granisetron and olanzapine" | ✅ |
+| radiotherapy: after chemo | ✅ | Letter **truncated** (缺 closing) | P2 |
+
+**ROW 90 总评: Ext P2:0, Letter P2:1 (truncation) — AC cycle 4 timing 医生fix 确认 ✅**
+
+### ROW 91 (coral_idx 230)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+ IDC metastatic to bone | ✅ | "cancer in your right hip has grown" | ✅ |
+| current_meds: everolimus, exemestane, denosumab | ✅ | "lasix, potassium, exemestane, denosumab" | ✅ |
+| imaging: PET/CT next week | ✅ | "PET/CT scan next week" | ✅ |
+
+**ROW 91 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 92 (coral_idx 231)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- MBC | ✅ | "liver feels smaller and less tender" | ✅ |
+| med_plan: Epirubicin cycle 2 + Neupogen | ✅ | "Epirubicin...Neupogen...echocardiogram" | ✅ |
+
+**ROW 92 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 95 (coral_idx 234)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR-/HER2- IDC | ✅ | "MRI...cancer has decreased" | ✅ |
+| med_plan: AC + capecitabine after XRT | ✅ | "AC...capecitabine after radiation...hormone therapy" | ✅ |
+
+**ROW 95 总评: Ext P2:0, Letter P2:0 ✅**
+
+### ROW 96 (coral_idx 235)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade I mixed ductal/cribriform | ✅ | "early-stage...curative" | ✅ |
+| med_plan: tamoxifen after radiation | ✅ | "tamoxifen after completing radiation" | ✅ |
+| genetic: Oncotype/MammaPrint | ✅ | "**medication testing**" — P2 LLM 不遵守 | P2 |
+
+**ROW 96 总评: Ext P2:0, Letter P2:1 ("medication testing")**
+
+### ROW 97 (coral_idx 236)
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- grade 1 IDC | ✅ | "early stage...not spread" | ✅ |
+| genetic: **Oncotype Dx** correctly named | ✅ | "**Oncotype Dx**" ✅ 正确命名 | ✅ |
+| med_plan: adjuvant endocrine therapy | ✅ | "continuing...medication for multiple sclerosis" | ✅ |
+
+**ROW 97 总评: Ext P2:0, Letter P2:0 ✅ — Oncotype Dx 正确**
+
+### ROW 99 (coral_idx 238) — 医生反馈验证
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2+ grade 3 IDC | ✅ | "cancer...spread to left lung and lymph nodes" | ✅ |
+| med_plan: Exemestane+Afinitor or Xeloda | ✅ | "biopsy...CT scan with contrast" | ✅ |
+| Referral: **symptom management service** | ✅ | "**symptom management service**" ✅ 医生fix | ✅ |
+| | | Letter **truncated** (缺 closing) | P2 |
+
+**ROW 99 总评: Ext P2:0, Letter P2:1 (truncation) — symptom management 医生fix 确认 ✅**
+
+### ROW 100 (coral_idx 239) — 医生反馈验证
+
+| Ext 字段 | 判定 | Letter 句子 | 判定 |
+|----------|------|------------|------|
+| Type: ER+/PR+/HER2- IDC | ✅ | "tumor markers have gone up" | ✅ |
+| med_plan: Focalin prn for fatigue | ✅ | "Focalin as needed to help with fatigue" | ✅ |
+| therapy: **exercise 10 min 3x/day** | ✅ | "**exercise for 10 minutes three times a day**" ✅ 医生fix | ✅ |
+
+**ROW 100 总评: Ext P2:0, Letter P2:0 ✅ — exercise 医生fix 确认 ✅**
