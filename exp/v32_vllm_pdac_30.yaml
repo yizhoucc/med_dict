@@ -1,0 +1,44 @@
+experiment:
+  name: "v32_vllm_pdac_30"
+  seed: 42
+
+model:
+  name: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+  chat_template: "qwen2"
+  vllm:
+    base_url: "http://localhost:8000/v1"
+
+data:
+  dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/pdac_unannotated.csv"
+  cancer_type: "pdac"
+  # 30 PDAC samples: 8 previously tested + 22 new random
+  row_indices: [0, 3, 5, 6, 13, 14, 16, 17, 20, 28, 30, 31, 32, 34, 35, 39, 40, 42, 58, 61, 71, 76, 78, 81, 83, 86, 89, 90, 91, 97]
+
+prompts:
+  extraction: "prompts/pdac/extraction.yaml"
+  plan_extraction: "prompts/pdac/plan_extraction.yaml"
+  letter_generation: "prompts/pdac/letter_generation.yaml"
+
+extraction:
+  pipeline: "v2"
+  attribution: false
+  letter: true
+  tool_calling: false
+  max_retries: 3
+  verify: true
+  gate_config:
+    preserve_negatives: true
+    skip_empty_fields: true
+
+generation:
+  keypoint:
+    max_new_tokens: 1024
+    do_sample: false
+  assessment_plan:
+    max_new_tokens: 2048
+    do_sample: false
+  retry:
+    max_new_tokens: 2048
+    do_sample: true
+    temperature: 0.6
+    top_p: 0.9
