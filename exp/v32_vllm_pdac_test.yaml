@@ -11,8 +11,8 @@ model:
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/pdac_unannotated.csv"
   cancer_type: "pdac"
-  # 5 PDAC samples for initial testing
-  row_indices: [0, 10, 25, 50, 99]
+  # 8 diverse PDAC samples: new/follow-up, adeno/neuroendocrine, met/non-met, short/long, post-surgical
+  row_indices: [0, 3, 14, 35, 39, 42, 58, 81]
 
 prompts:
   extraction: "prompts/pdac/extraction.yaml"
