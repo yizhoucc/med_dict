@@ -419,14 +419,18 @@ def post_check_letter(letter_text):
         warnings.append(f"[POST-LETTER] WARNING: TNM staging in letter: '{tnm_match.group()}'")
 
     # 2b. Replace chemo regimen abbreviations with plain language
-    _CHEMO_ABBREVS = {
-        'TCHP': 'a combination of chemotherapy and targeted therapy drugs',
-        'THP': 'targeted therapy with chemotherapy',
-        'AC-T': 'a chemotherapy regimen',
-        'AC/T': 'a chemotherapy regimen',
-        'FOLFOX': 'a chemotherapy regimen',
-    }
-    for abbr, plain in _CHEMO_ABBREVS.items():
+    # Order matters: longer names first to avoid partial matches (e.g., FOLFOXIRI before FOLFOX)
+    _CHEMO_ABBREVS = [
+        ('FOLFOXIRI', 'a chemotherapy regimen'),
+        ('FOLFIRINOX', 'a chemotherapy combination'),
+        ('FOLFOX', 'a chemotherapy regimen'),
+        ('FOLFIRI', 'a chemotherapy regimen'),
+        ('TCHP', 'a combination of chemotherapy and targeted therapy drugs'),
+        ('THP', 'targeted therapy with chemotherapy'),
+        ('AC-T', 'a chemotherapy regimen'),
+        ('AC/T', 'a chemotherapy regimen'),
+    ]
+    for abbr, plain in _CHEMO_ABBREVS:
         if abbr in letter_text:
             letter_text = letter_text.replace(abbr, plain)
             warnings.append(f"[POST-LETTER] replaced '{abbr}' → '{plain}'")

@@ -27,6 +27,56 @@ import pandas as pd
 from transformers import BitsAndBytesConfig
 
 
+def post_fix_letter(letter):
+    """Apply POST letter fixes: voice, dose gaps, medication test. Returns (fixed_letter, changed)."""
+    changed = False
+    # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
+    if re.search(r'medication\s+test(ing)?', letter, re.IGNORECASE):
+        letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
+        print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
+        changed = True
+    # POST-LETTER-VOICE: Fix third-person voice ("He/She/The patient" → "You")
+    voice_fixes = [
+        (r'\bHe responded\b', 'You responded'),
+        (r'\bShe responded\b', 'You responded'),
+        (r'\bHe tolerated\b', 'You tolerated'),
+        (r'\bShe tolerated\b', 'You tolerated'),
+        (r'\bHe is currently\b', 'You are currently'),
+        (r'\bShe is currently\b', 'You are currently'),
+        (r'\bHe was started\b', 'You were started'),
+        (r'\bShe was started\b', 'You were started'),
+        (r'\bHe will\b', 'You will'),
+        (r'\bShe will\b', 'You will'),
+        (r'\bHe has\b', 'You have'),
+        (r'\bShe has\b', 'You have'),
+        (r'\bHe had\b', 'You had'),
+        (r'\bShe had\b', 'You had'),
+        (r'\bI am concerned about exposing him\b', 'we are careful about exposing you'),
+        (r'\bI am concerned about exposing her\b', 'we are careful about exposing you'),
+        (r'\bThe patient\b', 'You'),
+        (r'\bthe patient\b', 'you'),
+    ]
+    for pattern, replacement in voice_fixes:
+        if re.search(pattern, letter):
+            letter = re.sub(pattern, replacement, letter)
+            changed = True
+    if changed:
+        print(f"  [POST-LETTER-VOICE] Fixed third-person voice → second-person")
+    # POST-LETTER-DOSE-GAP: Fix incomplete dose sentences
+    dose_gap_patterns = [
+        (r'reduced\s+to\s*\.', 'reduced.'),
+        (r'reduced\s+to\s+\.\s', 'reduced. '),
+        (r'increased?\s+to\s+and\b', 'increased, and'),
+    ]
+    for pattern, replacement in dose_gap_patterns:
+        old_letter = letter
+        letter = re.sub(pattern, replacement, letter)
+        if letter != old_letter:
+            print(f"  [POST-LETTER-DOSE-GAP] Fixed incomplete dose sentence")
+            changed = True
+    return letter, changed
+
+
 class LogTee(io.TextIOBase):
     """Tee stdout/stderr to both terminal and a log file.
 
@@ -543,10 +593,7 @@ def _run_letter_only(config_path, progress_paths):
         traceability = parse_tagged_letter(tagged_text, keypoints, attribution)
         letter = traceability.get("letter_text", "")
         letter, post_warnings = post_check_letter(letter)
-        # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
-        if re.search(r'medication\s+test(ing)?', letter, re.IGNORECASE):
-            letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
-            print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
+        letter, _ = post_fix_letter(letter)
         traceability["letter_text"] = letter
         for w in post_warnings:
             print(f"  {w}")
@@ -3195,10 +3242,7 @@ def main():
                     else:
                         cleaned_lines.append(line)
                 letter = "\n".join(cleaned_lines)
-            # POST-LETTER-FIX: replace "medication test(ing)" with "a test"
-            if re.search(r'medication\s+test(ing)?', letter, re.IGNORECASE):
-                letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
-                print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
+            letter, _ = post_fix_letter(letter)
             traceability["letter_text"] = letter
             for w in post_warnings:
                 print(f"  {w}")
