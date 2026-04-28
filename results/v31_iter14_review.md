@@ -1257,3 +1257,818 @@ iter14 相比 iter13 有显著改善。医生反馈的 3 个 P1 全部修复。�
 | therapy: **exercise 10 min 3x/day** | ✅ | "**exercise for 10 minutes three times a day**" ✅ 医生fix | ✅ |
 
 **ROW 100 总评: Ext P2:0, Letter P2:0 ✅ — exercise 医生fix 确认 ✅**
+
+
+---
+
+# 补充详细逐字段+逐句审查（ROW 42-54）
+
+
+## ROW 42 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 1 invasive ductal carcinoma | ✅ |
+| Stage | Stage IA (inferred from pT1 N0) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | tamoxifen | ✅ |
+| goals | curative | ✅ |
+| medication_plan | Begin a 5 year course of tamoxifen therapy. Rx for tamoxifen | ✅ |
+| imaging_plan | Routine diagnostic mammogram on the day of the next appointm | ✅ |
+| follow_up | in-person: 4-6 weeks to assess tamoxifen | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The recent mammogram showed some small calcium deposits in your right breast tha..." | ✅ |
+| "You will start taking a medicine called tamoxifen for 5 years to help prevent th..." | ✅ |
+| "You are referred to return to the clinic in 4-6 weeks to see how you are doing w..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 42 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 44 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with residua | ✅ |
+| Stage | Originally Stage II (inferred from 1 cm  | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| medication_plan | She will start an aromatase inhibitor after completing radia | ✅ |
+| imaging_plan | Consider a follow up CT Chest in one year.. PET/CT | ✅ |
+| follow_up | in-person: 01/05/19 | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The cancer in your left breast has some remaining, but it is smaller than before..." | ✅ |
+| "You are using a pain medicine called HYDROcodone-acetaminophen (NORCO) to help w..." | ✅ |
+| "You will start a medicine called an aromatase inhibitor after finishing radiatio..." | ✅ |
+| "We understand that this is a challenging time and that managing these health cha..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 44 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 46 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | ✅ |
+| Type_of_Cancer | ER+/PR-/HER2- grade 1 invasive ductal carcinoma with extensi | ✅ |
+| Stage | Stage IIB (pT2N1(sn) (inferred from 3.5  | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | letrozole | ✅ |
+| goals | curative | ✅ |
+| medication_plan | Will start letrozole now. Rx sent. Continue naproxen 500mg b | ✅ |
+| imaging_plan | MRA of the abdomen in 1 year, due in January 2022.. DEXA sca | ✅ |
+| follow_up | in-person: 2-3 months for follow up | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "You had surgery to remove part of your right breast, but there is still some can..." | ✅ |
+| "You started a new medication called letrozole today. Letrozole helps stop the ca..." | ✅ |
+| "You will have another surgery to remove the remaining cancer in your breast. Aft..." | ✅ |
+| "We understand that this is a challenging time and that managing these health cha..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 46 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 49 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | New patient | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- invasive ductal carcinoma | ✅ |
+| Stage | Likely stage 2 (inferred from primary tu | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| medication_plan | The current plan for adjuvant endocrine therapy is subject t | ✅ |
+| imaging_plan | No imaging planned. | ✅ |
+| follow_up | in-person: same day that she comes for p | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a new consultation regarding your diagnosis of left breast cance..." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma, which means t..." | ✅ |
+| "There are no immediate changes to your medications. The plan is to consider star..." | ✅ |
+| "You are scheduled to have surgery to remove your left breast, which is called a ..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 49 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 50 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | New patient | ✅ |
+| Type_of_Cancer | HR+ and HER2- metastatic breast cancer with IDC and DCIS com | ✅ |
+| Stage | Originally Stage IV (T2, N1, M1) | ✅ |
+| Distant Met | Yes, to lung, liver, and bone | ✅ |
+| current_meds | ibrance, xgeva, letrozole | ✅ |
+| goals | palliative | ✅ |
+| medication_plan | Lupron, letrozole, and ibrance added January 2015. | ✅ |
+| imaging_plan | No imaging planned. | ✅ |
+| follow_up | prn | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a second opinion regarding your breast cancer treatment...." | ✅ |
+| "You have a type of breast cancer that has spread to other parts of your body. Th..." | ✅ |
+| "You are currently taking xgeva (a medication to protect your bones). Lupron, let..." | ✅ |
+| "You are considering your options between observation and having a mastectomy (su..." | ✅ |
+| "We understand that this is a challenging time and that managing these health cha..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 50 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 51 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | Follow up | ✅ |
+| Type_of_Cancer |  | ✅ |
+| Stage |  | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | Gemzar | ✅ |
+| goals | palliative | ✅ |
+| medication_plan | Before starting [REDACTED], Gemzar, and [REDACTED] treatment | ✅ |
+| imaging_plan | No imaging planned. | ✅ |
+| follow_up | Not specified in the given text | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for an education visit regarding your medication treatment...." | ✅ |
+| "There were no new clinical findings or changes in your current disease status me..." | ✅ |
+| "You were given supportive medications such as Zofran and Compazine to help manag..." | ✅ |
+| "Before starting a medication, Gemzar, and another medication treatment, it is im..." | ✅ |
+| "Do not receive any kind of immunization or vaccination without your doctor's app..." | ✅ |
+| "For both men and women, it is recommended to use methods of contraception, such ..." | ✅ |
+| "Discuss with your doctor when you may safely become pregnant or conceive a child..." | ✅ |
+| "No procedures or imaging studies are planned at this time...." | ✅ |
+| "You are referred to social work and exercise counseling for additional support...." | ✅ |
+| "You were encouraged to ask any follow-up questions or concerns via MyChart or by..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 51 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 52 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | New patient | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade II invasive ductal carcinoma | ✅ |
+| Stage | Stage IIA (inferred from pT2 N1mi) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| medication_plan | [REDACTED] + [REDACTED]. [REDACTED] send Zoladex prior auth. | ✅ |
+| imaging_plan | CT CAP and bone scan for staging | ✅ |
+| follow_up | in-person: 3 weeks | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a first-time visit regarding your breast cancer treatment...." | ✅ |
+| "You have early-stage breast cancer (Stage I-II) that has not spread to other par..." | ✅ |
+| "You will start new medications as discussed with your doctor. These include a me..." | ✅ |
+| "You are referred to reproductive health for discussions about preserving your fe..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 52 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 53 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | New patient | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2+ invasive ductal carcinoma with neuroendocrine  | ✅ |
+| Stage | Stage II/III | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| medication_plan | Adjuvant AC/THP chemotherapy consisting of AC x 4 given q2we | ✅ |
+| imaging_plan | Referral will be made to [REDACTED] at the completion of che | ✅ |
+| follow_up | in-person: after considering treatment o | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a consultation regarding your newly diagnosed left breast cancer..." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma with neuroendo..." | ✅ |
+| "You will start a treatment plan that includes chemotherapy to shrink the cancer ..." | ✅ |
+| "You will receive chemotherapy in cycles, and after completing the chemotherapy, ..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 53 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+## ROW 54 — 逐字段+逐句
+
+### Extraction 逐字段
+
+| 字段 | 提取值 | 判定 |
+|------|--------|------|
+| Patient type | follow up | ✅ |
+| Type_of_Cancer | ER+/PR+/HER2- grade 1 invasive ductal carcinoma with extensi | ✅ |
+| Stage | Stage IV (metastatic) | ✅ |
+| Distant Met | Yes, to left posterior 7th rib and T6 vertebral body | ✅ |
+| current_meds | leuprolide, letrozole, zoledronic acid | ✅ |
+| goals | palliative | ✅ |
+| medication_plan | continue leuprolide every 4 weeks, continue letrozole, start | ✅ |
+| imaging_plan | repeat PET/CT in ~3-4 months after radiation. DEXA scan | ✅ |
+| follow_up | in-person: 4 weeks | ✅ |
+
+**Extraction**: P0:0 P1:0 P2:0
+
+### Letter 逐句
+
+| Letter 句子 | 判定 |
+|------------|------|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The cancer is currently responding well with stable disease. This means the canc..." | ✅ |
+| "You will continue taking leuprolide every 4 weeks and letrozole. You will start ..." | ✅ |
+| "You are referred to radiation oncology for post-mastectomy radiation. You will h..." | ✅ |
+| "We understand that this is a challenging time and that managing these health cha..." | ✅ |
+
+**Letter**: P0:0 P1:0 P2:0 (无问题)
+
+### ROW 54 总评: Ext P0:0 P1:0 P2:0, Letter P0:0 P1:0 P2:0
+
+# 补充详细审查（ROW 59-99）
+
+
+## ROW 59
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER+/PR+/HER2- grade 3 invasive ductal carcinoma with hi | ✅ |
+| Stage | Stage IIA (inferred from pT2 N0) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | "exemestane ([REDACTED]) 25 mg tabl | ✅ |
+| goals | curative | ✅ |
+| med_plan | Discontinue Letrozole and wait 2-3 weeks before startin | ✅ |
+| imaging | Continue mammograms alternating with MRI and every 6 mo | ✅ |
+| follow_up | in-person: 6 months for follow-up | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "No new signs of cancer were found during this visit. Your weight has stayed..." | ✅ |
+| "You stopped taking letrozole and were advised to start exemestane in a few ..." | ✅ |
+| "You will start exemestane after a short break from letrozole. You will cont..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 61
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- (1+) grade 2 invasive ductal carcinoma | ✅ |
+| Stage | Stage I (inferred from tumor ≤2cm) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | she will need adjuvant endocrine therapy (Tamoxifen vs  | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: after surgery and pathol | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new visit regarding your breast cancer treatment...." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma, which me..." | ✅ |
+| "You will start a medication plan after your surgery to help prevent the can..." | ✅ |
+| "You are scheduled to have surgery on April 12th, 2021. During the surgery, ..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 64
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | HR+/HER2- invasive ductal carcinoma | ✅ |
+| Stage | Stage IV (metastatic) | ✅ |
+| Distant Met | Yes, to the sternum | ✅ |
+| current_meds |  | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Currently on unspecified agent and taxol planned. If bi | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | Not specified in the given text | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new patient evaluation regarding your breast cancer treat..." | ✅ |
+| "You have a large left breast cancer that started in the milk ducts (ductal ..." | ✅ |
+| "You are currently taking medications to help with side effects such as dexa..." | ✅ |
+| "A biopsy is planned for the suspicious lesion in your sternum. If the biops..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 65
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER weak positive (2%), PR low positive (7%), HER2 neg ( | ✅ |
+| Stage | Stage IB (corrected: pT1 N1mi — mic | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Plan to start neoadjuvant chemotherapy with AC/T. Typic | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: 1-2 weeks to start chemo | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new consult regarding your breast cancer treatment...." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma, which st..." | ✅ |
+| "You will start a treatment plan called neoadjuvant chemotherapy, which is g..." | ✅ |
+| "You will have a port placed to make it easier to receive chemotherapy. You ..." | ✅ |
+| "You are referred to a breast oncology specialist for further consultation...." | ✅ |
+| "Your next visit is in 1-2 weeks to start chemotherapy...." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 68
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2+ multifocal invasive ductal carcinoma | ✅ |
+| Stage | Stage I (inferred from tumor ≤2cm) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | No specific current or future medication plans were det | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | In-person: as needed for further co | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a return visit regarding your breast cancer treatment...." | ✅ |
+| "You have been diagnosed with ER+/PR+/HER2+ multifocal invasive ductal carci..." | ✅ |
+| "There were no specific changes to your medications during this visit...." | ✅ |
+| "You are being recommended to have a bilateral mastectomy, which is surgery ..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 70
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER+/PR+/HER2- grade 2 invasive lobular carcinoma with 1 | ✅ |
+| Stage | Originally Stage II (inferred from  | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | letrozole | ✅ |
+| goals | curative | ✅ |
+| med_plan | She will restart letrozole which she had previously tol | ✅ |
+| imaging | CT due in June 2020 for follow up of lung nodules. | ✅ |
+| follow_up | in-person: September | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "You are recovering well from surgery. Two lymph nodes were positive on the ..." | ✅ |
+| "You will restart letrozole which you had previously tolerated...." | ✅ |
+| "You are referred to radiation consult. You are going to have expanders plac..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 72
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR-/HER2- grade 2 invasive ductal carcinoma with fo | ✅ |
+| Stage | Stage IA (pT1cN0(sn)) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | letrozole | ✅ |
+| goals | curative | ✅ |
+| med_plan | Instructed patient to begin letrozole, prescription ord | ✅ |
+| imaging | Ultrasound | ✅ |
+| follow_up | in-person: In 3 weeks to review [RE | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a first visit to talk about your newly diagnosed breast can..." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma, which me..." | ✅ |
+| "You were instructed to start taking a medication called letrozole. Letrozol..." | ✅ |
+| "You will continue taking letrozole. A test will be done to see if you might..." | P2 |
+
+**总评**: Ext P1:0 P2:0, Letter P2:1
+
+## ROW 78
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER-/PR-/HER2- grade 3 invasive ductal carcinoma | ✅ |
+| Stage | Metastatic (Stage IV) | ✅ |
+| Distant Met | Yes, to liver and periportal lymph nodes | ✅ |
+| current_meds |  | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Continue 800 mg Mag-Ox supplement daily. She is on lisi | ✅ |
+| imaging | Echo 09/08/2019. If this echo is normal we can stop mon | ✅ |
+| follow_up | in-person: follow up if unable to g | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The cancer has gotten worse. On the latest CT scan, the cancer in your live..." | ✅ |
+| "You will continue taking magnesium oxide supplements daily. You are also on..." | ✅ |
+| "You are interested in joining a clinical trial at a medication for a medica..." | ✅ |
+| "An echocardiogram is scheduled for September 8, 2019. If this echo is norma..." | ✅ |
+| "You will follow up with me if you are unable to go on trial at a medication..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 80
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- grade 3 invasive ductal carcinoma | ✅ |
+| Stage | Stage I (inferred from tumor ≤2cm) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Start TC x 4 on 04/11/19, with [REDACTED]. Claritin for | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: cycle 2 to see me, call  | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "You have a type of breast cancer called invasive ductal carcinoma (IDC). Th..." | ✅ |
+| "The cancer is 0.8 cm in size and located in the skin and fatty tissue. It i..." | ✅ |
+| "Your blood tests show that your liver and kidney functions are normal...." | ✅ |
+| "You will start a treatment called TC (docetaxel and cyclophosphamide) for f..." | ✅ |
+| "You will use cold gloves during treatment to help prevent hand swelling...." | ✅ |
+| "You will have six weeks of radiation therapy, including the armpit and ches..." | ✅ |
+| "You are referred to radiation oncology for further treatment planning...." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 82
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- mixed ductal and lobular carcinoma | ✅ |
+| Stage | Stage II | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Continue hydrochlorothiazide 12.5 mg tablet daily befor | ✅ |
+| imaging | Dexa to assess bone health before the next visit with m | ✅ |
+| follow_up | RTC after radiation. Plan to procee | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new patient evaluation regarding your breast cancer treat..." | ✅ |
+| "You have a type of cancer called ER+/PR+/HER2- mixed ductal and lobular car..." | ✅ |
+| "We discussed that due to your low risk, you will not need chemotherapy. You..." | ✅ |
+| "You have an appointment with your doctor tomorrow to discuss radiation to d..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 84
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with me | ✅ |
+| Stage | Stage IV (metastatic) | ✅ |
+| Distant Met | Yes, to bone, soft tissue, liver, and possibly meninges | ✅ |
+| current_meds | capecitabine, zolendronic acid | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Continue xeloda 1500mg BID for now, continue zolendroni | ✅ |
+| imaging | Repeat CT CAP now, Repeat MRI spine to rule out leptome | ✅ |
+| follow_up | Not specified in the given text | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new consult regarding your breast cancer treatment...." | ✅ |
+| "You have a type of breast cancer called ER+/PR+/HER2- grade 2 invasive duct..." | ✅ |
+| "Recent scans show that the cancer in your brain and liver has grown compare..." | ✅ |
+| "The goal of your treatment is to manage your symptoms and improve your qual..." | ✅ |
+| "Your dose of capecitabine (Xeloda) was increased ...." | ✅ |
+| "You will continue taking Xeloda and zolendronic acid...." | ✅ |
+| "Your doctor might consider adding low-dose steroids to reduce swelling and ..." | ✅ |
+| "If the cancer continues to grow, your doctor might suggest adding fulvestra..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:1
+
+## ROW 85
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER+/PR-/HER2- invasive lobular carcinoma with pleomorph | ✅ |
+| Stage | Originally Stage IIIA, now metastat | ✅ |
+| Distant Met | Yes, to bone, liver, and brain | ✅ |
+| current_meds |  | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Continue steroid taper per Dr. [REDACTED]. Continue pai | P2 |
+| imaging | Brain MRI to be reviewed by UCSF neuroradiology; 2-week | ✅ |
+| follow_up | in-person: 2 weeks | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The cancer is currently spreading. New liver tumors have appeared, and the ..." | ✅ |
+| "Your steroid dose was lowered to day. You will continue to take pain medici..." | ✅ |
+| "You will be evaluated for a phase 1 trial of a medication called olaparib f..." | ✅ |
+
+**总评**: Ext P1:0 P2:1, Letter P2:0
+
+## ROW 87
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- grade 2 invasive ductal carcinoma with a  | ✅ |
+| Stage | Stage IIIA (inferred from pT2 N2a) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Ms. [REDACTED] will prefer to receive a course of hormo | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: for further discussions  | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a second opinion regarding your recently diagnosed right pr..." | ✅ |
+| "You have a 2.2 cm multifocal tumor in the right breast that was removed wit..." | ✅ |
+| "You will prefer to receive a course of hormonal therapy alone. Specific det..." | ✅ |
+| "The use of radiation to remove the tumor from the chest wall and prevent it..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 88
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | Invasive ductal carcinoma, ER weak+, PR-, HER2- with me | ✅ |
+| Stage | Originally Stage III, now metastati | ✅ |
+| Distant Met | Yes, to brain, lungs, and lymph nodes | ✅ |
+| current_meds | capecitabine (XELODA) 500 mg tablet | ✅ |
+| goals | palliative | ✅ |
+| med_plan | She is on xeloda. If progression on xeloda occurs, clin | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | prn or at progression | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new consult regarding your breast cancer that has spread ..." | ✅ |
+| "You have a history of a type of breast cancer called invasive ductal carcin..." | ✅ |
+| "You are currently taking a medication called capecitabine (XELODA). No chan..." | ✅ |
+| "You will continue taking capecitabine. If the cancer gets worse while on th..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 90
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | Adenocarcinoma of right breast (HCC) | ✅ |
+| Stage | Stage II/III | ✅ |
+| Distant Met | No | ✅ |
+| current_meds | ac | ✅ |
+| goals | curative | ✅ |
+| med_plan | Continue with cycle 4 of AC in 1 week (dose delay x 1 w | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: after XRT, approx 1-1.5  | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "You have adenocarcinoma (cancer that started in gland cells) of your right ..." | ✅ |
+| "Recent tests show that your thyroid stimulating hormone is slightly high, w..." | ✅ |
+| "Your white blood cell count is higher than normal, and you have a low red b..." | ✅ |
+| "You are experiencing some side effects such as swelling in your armpit, pal..." | ✅ |
+| "Your treatment plan includes continuing with cycle 4 of AC chemotherapy in ..." | ✅ |
+| "The dose of GCSF has been reduced to 50%...." | ✅ |
+| "You have been prescribed granisetron, olanzapine, and oral dexamethasone to..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:1
+
+## ROW 91
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | follow up | ✅ |
+| Type | ER+/PR+ invasive ductal carcinoma with metastatic recur | ✅ |
+| Stage | Originally Stage I, now metastatic  | ✅ |
+| Distant Met | Yes, to bone | ✅ |
+| current_meds | everolimus, exemestane, denosumab | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Continue lasix 10mg daily with KCL 10Meq daily, continu | ✅ |
+| imaging | PET/CT next week to evaluate disease burden | ✅ |
+| follow_up | in-person: 1 month to evaluate dise | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "MRI of your pelvis showed that the cancer in your right hip has grown and s..." | ✅ |
+| "You started taking lasix to help with swelling and potassium to balance the..." | ✅ |
+| "You will have a PET/CT scan next week to get a better picture of how much t..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 92
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER+/PR+/HER2- breast cancer metastasized to multiple si | ✅ |
+| Stage | Stage IV (metastatic) | ✅ |
+| Distant Met | Yes, to liver | ✅ |
+| current_meds | Epirubicin, Denosumab | ✅ |
+| goals | palliative | ✅ |
+| med_plan | Plan cycle#2 D1 Epirubicin 25 mg/m2 D1,8,15 to with 2 d | ✅ |
+| imaging | Echocardiogram | ✅ |
+| follow_up | Not specified in the given text | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "Your liver feels smaller and less tender or bloated. You also have a red ra..." | ✅ |
+| "Tumor marker results are pending. Laboratory results show elevated Aspartat..." | ✅ |
+| "You restarted chemotherapy with Epirubicin and will receive Neupogen for 2 ..." | ✅ |
+| "You are currently taking Denosumab...." | ✅ |
+| "Filgrastim (NEUPOGEN) is being used to support your treatment...." | ✅ |
+| "You will continue with cycle 2 of Epirubicin on days 1, 8, and 15, along wi..." | ✅ |
+| "An echocardiogram (a heart ultrasound) will be performed...." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 95
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | Follow up | ✅ |
+| Type | ER+/PR-/HER2- invasive ductal carcinoma with residual d | ✅ |
+| Stage | Stage II (inferred from 2.1cm tumor | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Continue prilosec 40mg qd, plan to start capecitabine a | ✅ |
+| imaging | breast and axilla XRT | ✅ |
+| follow_up | in-person: after XRT evaluation | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "The cancer in your left breast has gotten smaller after treatment. The MRI ..." | ✅ |
+| "You started a new chemotherapy called AC. You will continue taking Prilosec..." | ✅ |
+| "You will have radiation treatment for your breast and armpit. You are refer..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 96
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- grade I mixed ductal and cribriform carci | ✅ |
+| Stage | Stage IA (pT1cN0(sn)) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Tamoxifen after completion of adjuvant radiation | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | in-person: after radiation to discu | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new consult regarding your breast cancer treatment...." | ✅ |
+| "You were diagnosed with a type of breast cancer called ER+/PR+/HER2- grade ..." | ✅ |
+| "The cancer was removed through surgery, and the edges of the removed tissue..." | ✅ |
+| "There were no new imaging findings reported during this visit...." | ✅ |
+| "During the physical exam, mild swelling was noted in your left arm, but no ..." | ✅ |
+| "No changes were made to your current medications...." | ✅ |
+| "You will have a test called a medication testing to learn more about your c..." | P2 |
+| "You are referred to radiation oncology for a consult on adjuvant radiation...." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:1
+
+## ROW 97
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2- grade 1 invasive ductal carcinoma with lo | ✅ |
+| Stage | Stage IA (pT1b N0) | ✅ |
+| Distant Met | No | ✅ |
+| current_meds |  | ✅ |
+| goals | curative | ✅ |
+| med_plan | Strongly recommend adjuvant endocrine therapy with [RED | ✅ |
+| imaging | No imaging planned. | ✅ |
+| follow_up | 3-4 wks after [REDACTED] Dx result  | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a follow-up visit regarding your breast cancer treatment...." | ✅ |
+| "You were diagnosed with a type of breast cancer called invasive ductal carc..." | ✅ |
+| "We discussed starting a medication to help prevent the cancer from coming b..." | ✅ |
+| "You will have a test called Oncotype Dx to learn more about your cancer. Yo..." | ✅ |
+| "We understand that this is a challenging time and that managing these healt..." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:0
+
+## ROW 99
+
+| 字段 | 值 | 判定 |
+|---|---|---|
+| Patient type | New patient | ✅ |
+| Type | ER+/PR+/HER2+ grade 3 invasive ductal carcinoma with ly | ✅ |
+| Stage | Originally Stage III, now metastati | ✅ |
+| Distant Met | Yes, to the left lung and mediastinal lymph nodes | ✅ |
+| current_meds | fulvestrant | ✅ |
+| goals | palliative | ✅ |
+| med_plan | If cancer remains estrogen receptor positive, will cons | ✅ |
+| imaging | The patient will need a followup CT scan with contrast  | ✅ |
+| follow_up | in-person: 2 weeks, to review chest | ✅ |
+
+| Letter 句子 | 判定 |
+|---|---|
+| "You came in for a new consultation regarding your breast cancer treatment...." | ✅ |
+| "You were diagnosed with a type of breast cancer called invasive ductal carc..." | ✅ |
+| "A recent PET/CT scan showed that the cancer in your chest lymph nodes has g..." | ✅ |
+| "You recently switched from a medication called anastrozole to letrozole bec..." | ✅ |
+| "Your treatment goal is to manage the symptoms and slow down the growth of t..." | ✅ |
+| "You will need to have a biopsy of either the cancer in your lung or the swo..." | ✅ |
+| "You will also need a followup CT scan with contrast and thin slices to get ..." | ✅ |
+| "Depending on the results of the biopsy, you may start a new treatment plan...." | ✅ |
+
+**总评**: Ext P1:0 P2:0, Letter P2:1
