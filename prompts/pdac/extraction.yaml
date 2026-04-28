@@ -52,6 +52,8 @@ Cancer_Diagnosis: |
     - "Locally advanced" typically means Stage III (unresectable but no distant mets)
     - Vascular involvement (SMA, SMV, celiac axis, portal vein) determines resectability
     - If tumor involves major vessels and is described as "unresectable" or "locally advanced", note this
+  - RESECTED METASTASIS + NED: If a patient had prior metastasis that was surgically resected and current imaging shows NO evidence of disease (NED), do NOT write "now metastatic (Stage IV)". Instead write the CURRENT status: e.g., "Originally Stage IIB, had pulmonary metastasis (resected 2017), currently no evidence of disease". The staging should reflect the CURRENT clinical reality.
+  - Do NOT invent a stage number. If the note never states "Stage IIB" or "Stage III", do NOT write those specific numbers. Write what the note says (e.g., "metastatic disease at diagnosis") or infer from available data.
   - Only write "Not mentioned in note" if there is truly NO staging or tumor information anywhere in the note.
 
   Respond *only* with a JSON object using this exact schema:
@@ -116,6 +118,8 @@ Current_Medications: |
   CROSS-REFERENCE: If a "Current Outpatient Medications" section exists, use it as primary reference.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections, infusions) may NOT be in the outpatient medication list. If the A/P states the patient is CURRENTLY ON a drug, include it.
   IMPORTANT: If the patient SKIPPED or MISSED a single dose/cycle, they are still ON that drug.
+  IMPORTANT: If the A/P section mentions specific chemotherapy drug names being given, continued, or dose-adjusted (e.g., "Oxaliplatin 49 mg/m2", "continue gemcitabine", "irinotecan reduced"), those drugs ARE current cancer medications — include them even if the drug names are not in the outpatient medication list.
+  IMPORTANT: If drug names are [REDACTED] or masked (*****), write "[REDACTED]" — do NOT leave current_meds empty when the patient is clearly on active chemotherapy.
 
   Respond *only* with a JSON object using this exact schema:
   {
@@ -149,7 +153,7 @@ Treatment_Changes: |
 Treatment_Goals: |
   TASK: Extract the goal/intent of cancer treatment.
 
-  Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
+  Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", "surveillance", or "symptom management".
   Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options").
 
   FIRST — check the note for EXPLICIT intent words:
@@ -162,11 +166,13 @@ Treatment_Goals: |
   - Neoadjuvant chemotherapy before surgery for resectable/borderline resectable → "curative"
   - Locally advanced unresectable → often "palliative" but may be "curative" if downstaging is the goal
   - Metastatic/Stage IV cancer → "palliative"
+  - Patient COMPLETED all treatment and is now on surveillance/monitoring with NO active therapy → "surveillance"
   - Do NOT write "neoadjuvant" as a goal — write "curative" instead.
+  - Do NOT write "adjuvant" if adjuvant therapy was completed years ago and the patient is now on surveillance.
 
   Respond *only* with a JSON object using this exact schema (NO other keys):
   {
-  "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, or symptom management"
+  "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, surveillance, or symptom management"
   }
 
 Response_Assessment: |

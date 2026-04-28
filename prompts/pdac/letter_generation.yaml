@@ -16,8 +16,10 @@ patient_letter: |
      - GOOD: "Your CA 19-9 (a tumor marker) level has decreased."
      - BAD: "Your blood tests show improvement."
   7. Do NOT include exact dosing details (mg, mg/m2, schedules). Just name the treatment.
+     EXCEPTION: If the input says a dose was "reduced to X" or "increased to X", you MUST include the target value. "Your dose was reduced to 7.5 mg" is correct. "Your dose was reduced to" with no number is WRONG — it creates an incomplete sentence.
   8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
   9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
+     CRITICAL VOICE RULE: Always write in second person ("you", "your"). NEVER use third person ("he", "she", "the patient"). If the extraction data uses "he/she/patient", convert it to "you/your" in the letter.
   10. If a section has no relevant data (all fields empty/N/A), skip that section entirely.
   11. LAB VALUES:
       - If lab_summary says "No labs in note" → do NOT mention blood tests at all.
@@ -61,6 +63,7 @@ patient_letter: |
   [Fill from: summary, Patient type — e.g. "You came in for a follow-up visit regarding your pancreatic cancer treatment."]
   [IMPORTANT: Do NOT use medical jargon in this section.]
   [KEEP THIS SECTION SHORT: 1-2 sentences ONLY. State the visit type and the general reason. Do NOT include tumor details here — save those for "What's new or changed" section.]
+  [CANCER SUBTYPE: If Type_of_Cancer is a neuroendocrine tumor (NET/PNET), say "neuroendocrine tumor of the pancreas" NOT "pancreatic cancer". These are different diseases and patients know the difference.]
 
   **What's new or changed since your last visit?**
   [Fill from: findings, response_assessment, lab_summary (only if ABNORMAL), goals_of_treatment]

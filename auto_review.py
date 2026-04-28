@@ -33,16 +33,24 @@ ORIGINAL CLINICAL NOTE:
 EXTRACTED DATA (keypoints):
 {keypoints_json}
 
+IMPORTANT EXTRACTION RULES (you must understand these before reviewing):
+- current_meds: ONLY cancer-related medications (chemo, targeted therapy, immunotherapy, hormonal therapy, bone agents). General medications (blood pressure, diabetes, vitamins, pain meds, anxiety meds) are CORRECTLY EXCLUDED. Do NOT flag missing non-cancer drugs.
+- supportive_meds: ONLY cancer-treatment-related supportive care (anti-nausea, growth factors, cancer pain meds). General prescriptions are correctly excluded.
+- If drug names are [REDACTED] in the note, empty current_meds is acceptable — do NOT flag as P1.
+- goals_of_treatment: Valid values are curative, palliative, adjuvant, risk reduction, surveillance, symptom management. For patients on surveillance with no active treatment, "surveillance" is correct. "Adjuvant" is wrong for patients who completed adjuvant therapy years ago.
+- Stage_of_Cancer: Only flag if the extraction INVENTS a stage not in the note. Reasonable inference from tumor data is acceptable (P2 at most).
+- For patients with RESECTED prior metastasis and current NED (no evidence of disease), saying "now metastatic Stage IV" is misleading — the current status should reflect NED.
+
 REVIEW EACH FIELD against the original note. For each field, check:
 1. FAITHFUL: Is the value supported by the note? Any fabrication/hallucination?
-2. COMPLETE: Did the extraction miss important information from the note?
+2. COMPLETE: Did the extraction miss important CANCER-RELATED information?
 3. CORRECT TEMPORAL: Are current/past/future correctly distinguished?
 4. CORRECT CLASSIFICATION: For categorical fields (Patient type, goals, etc.), is the category right?
 
-Severity levels:
-- P0: Hallucination — value contains information NOT in the note (fabricated)
-- P1: Major error — wrong direction (e.g., curative when clearly palliative), critical omission that changes clinical meaning
-- P2: Minor issue — incomplete but not wrong, slightly imprecise wording, could be better
+Severity calibration — be strict about these definitions:
+- P0: Hallucination — value contains information NOT in the note (fabricated facts, invented numbers)
+- P1: Major error — ONLY for: wrong clinical direction (curative↔palliative), factual contradiction with the note, critical cancer-related omission that changes clinical meaning. Missing non-cancer medications is NOT P1.
+- P2: Minor issue — incomplete but not wrong, slightly imprecise wording, could be better, missing minor details
 
 Output a JSON object with this structure:
 {{
@@ -72,17 +80,26 @@ EXTRACTED DATA used to generate the letter:
 GENERATED LETTER:
 {letter_text}
 
-Review the letter for:
-1. ACCURACY: Every statement in the letter must be supported by the keypoints AND the original note. Flag any hallucinated or fabricated information.
-2. COMPLETENESS: Important clinical information from keypoints should not be omitted (but minor details can be skipped).
-3. READABILITY: Language should be simple (8th-grade level). Flag unexplained medical jargon.
-4. APPROPRIATE CONTENT: Letter should include things patients need to know. Should NOT include overly technical details.
-5. NO HARM: Nothing misleading that could cause patient anxiety or wrong actions.
+IMPORTANT CONTEXT for letter review:
+- The letter is written FOR PATIENTS at an 8th-grade reading level. Simplification is INTENTIONAL.
+- Using "pancreatic cancer" instead of "pancreatic ductal adenocarcinoma" is acceptable simplification for follow-up patients. Only flag if it's a NEW patient who needs to understand their specific diagnosis.
+- Using "neuroendocrine tumor" instead of "nonfunctioning pancreatic neuroendocrine tumor" is fine.
+- The letter should use "you/your" voice, NOT "he/she/the patient" voice.
+- Dosing details (mg, mg/m2) should NOT be in the letter — but if the letter says "reduced to" or "increased to" without the number, that IS a problem (incomplete sentence).
+- Missing [source:] tags are NOT a problem — they are stripped in post-processing.
 
-Severity levels:
+Review the letter for:
+1. ACCURACY: Every statement must be supported by the keypoints AND note. Flag fabrication.
+2. COMPLETENESS: Important clinical info should not be omitted (minor details can be skipped).
+3. READABILITY: Simple language (8th-grade level). Flag unexplained CRITICAL medical jargon only — common terms like "CT scan", "chemotherapy", "tumor" do not need explanation.
+4. VOICE: Must use "you/your", never "he/she/the patient".
+5. GARBLED TEXT: Flag any obvious text corruption, missing words, or incomplete sentences.
+6. NO HARM: Nothing misleading that could cause wrong patient actions.
+
+Severity calibration:
 - P0: Letter says something factually wrong or fabricated
-- P1: Major omission or misleading statement that could affect patient understanding
-- P2: Minor readability issue, slight imprecision, or style problem
+- P1: ONLY for: garbled/unreadable text, wrong voice ("he" instead of "you"), factually misleading statement, incomplete sentence with missing critical info (e.g., "dose reduced to" with no number)
+- P2: Minor readability issue, unexplained jargon, style problem, slightly imprecise wording
 
 Output a JSON object:
 {{
