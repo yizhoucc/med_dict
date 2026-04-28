@@ -11,7 +11,7 @@ model:
 data:
   dataset_path: "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/unannotated/data/pdac_unannotated.csv"
   # 5 random PDAC samples for out-of-domain testing
-  row_indices: [0, 10, 25, 50, 100]
+  row_indices: [0, 10, 25, 50, 99]
 
 prompts:
   extraction: "prompts/extraction.yaml"
