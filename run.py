@@ -53,6 +53,16 @@ def post_fix_letter(letter):
         (r'\bShe had\b', 'You had'),
         (r'\bI am concerned about exposing him\b', 'we are careful about exposing you'),
         (r'\bI am concerned about exposing her\b', 'we are careful about exposing you'),
+        (r'\bhis residual\b', 'your residual'),
+        (r'\bher residual\b', 'your residual'),
+        (r'\bhis neuropathy\b', 'your neuropathy'),
+        (r'\bher neuropathy\b', 'your neuropathy'),
+        (r'\bhis treatment\b', 'your treatment'),
+        (r'\bher treatment\b', 'your treatment'),
+        (r'\bhis disease\b', 'your disease'),
+        (r'\bher disease\b', 'your disease'),
+        (r'\bhis condition\b', 'your condition'),
+        (r'\bher condition\b', 'your condition'),
         (r'\bThe patient\b', 'You'),
         (r'\bthe patient\b', 'you'),
     ]
@@ -64,8 +74,11 @@ def post_fix_letter(letter):
         print(f"  [POST-LETTER-VOICE] Fixed third-person voice → second-person")
     # POST-LETTER-DOSE-GAP: Fix incomplete dose sentences
     dose_gap_patterns = [
-        (r'reduced\s+to\s*\.', 'reduced.'),
-        (r'reduced\s+to\s+\.\s', 'reduced. '),
+        (r'was reduced\s*\.', 'was reduced.'),  # "was reduced ." → "was reduced."
+        (r'was reduced\s+\.\s', 'was reduced. '),
+        (r'reduced to\s*\.', 'reduced.'),  # "reduced to ." → "reduced."
+        (r'reduced to\s+\.\s', 'reduced. '),
+        (r'(?:increased?|patch)\s+to\s+and\b', 'and'),  # "patch to and" → "and"
         (r'increased?\s+to\s+and\b', 'increased, and'),
     ]
     for pattern, replacement in dose_gap_patterns:
