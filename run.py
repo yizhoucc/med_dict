@@ -3139,7 +3139,7 @@ def main():
         if config.get("extraction", {}).get("letter", False) and "letter_generation" in config.get("_prompts", {}):
             letter_prompt_template = config["_prompts"]["letter_generation"]["patient_letter"]
             letter_gen_config = keypoint_config.copy()
-            letter_gen_config["max_new_tokens"] = 512
+            letter_gen_config["max_new_tokens"] = 768
             letter_start = time.time()
             tagged_text = generate_tagged_letter(
                 keypoints, model, tokenizer, chat_tmpl,
