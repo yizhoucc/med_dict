@@ -14,9 +14,9 @@
 
 ## 1. Abstract
 
-**Background:** Cancer patients frequently struggle to understand clinical documentation written in medical jargon. Proprietary large language models (LLMs) such as GPT-4o can simplify medical text but require transmitting sensitive data to external servers, incur ongoing API costs, and cannot be customized to institutional needs. There is limited evidence on whether locally-deployable open-source models, enhanced through retrieval-augmented generation (RAG), structured prompt design, and expert-in-the-loop iterative refinement, can produce patient-friendly oncology summaries that approach proprietary model performance. Additionally, no study has systematically audited sociodemographic bias in oncology-specific LLM outputs.
+**Background:** Cancer patients frequently struggle to understand clinical documentation written in medical jargon. Proprietary large language models (LLMs) such as GPT-4o can simplify medical text but require transmitting sensitive data to external servers, incur ongoing API costs, and cannot be customized to institutional needs. There is limited evidence on whether locally-deployable open-source models, enhanced through a structured inference harness comprising retrieval-augmented generation (RAG), multi-gate verification, rule-based safety hooks, and expert-in-the-loop iterative refinement, can produce patient-friendly oncology summaries that approach proprietary model performance. Additionally, no study has systematically audited sociodemographic bias in oncology-specific LLM outputs.
 
-**Objective:** To evaluate a domain-adapted LLM system (Qwen2.5-32B-Instruct-AWQ with RAG, structured prompt design, and human-in-the-loop refinement) for generating patient-friendly summary letters from oncology clinical notes. The primary aim is to demonstrate significant improvement over the untuned base model. The secondary aim is to characterize the performance gap relative to proprietary commercial LLMs and contextualize it within a cost-privacy-performance tradeoff framework. The study additionally incorporates systematic hallucination detection, clinical safety assessment, and a sociodemographic bias audit.
+**Objective:** To evaluate a domain-adapted LLM harness system (Qwen2.5-32B-Instruct-AWQ with RAG, multi-gate verification pipeline, rule-based safety hooks, and human-in-the-loop refinement) for generating patient-friendly summary letters from oncology clinical notes. The primary aim is to demonstrate significant improvement over the untuned base model. The secondary aim is to characterize the performance gap relative to proprietary commercial LLMs and contextualize it within a cost-privacy-performance tradeoff framework. The study additionally incorporates systematic hallucination detection, clinical safety assessment, and a sociodemographic bias audit.
 
 **Methods:** This observational, survey-based study will use publicly available oncology clinical notes to generate summary letters from four model conditions: (1) the domain-adapted system, (2) GPT-4o, (3) Claude Sonnet, and (4) base Qwen2.5-32B with a standard prompt. Five oncologists blinded to model identity will evaluate accuracy, completeness, clinical safety, appropriate simplification, and overall quality using a 5-point Likert scale and a binary safety checklist. Automated metrics will assess readability (Flesch-Kincaid, SMOG, Dale-Chall, Gunning Fog) and factual consistency (entity-level hallucination detection). A sociodemographic bias audit will test whether model outputs differ across six demographic conditions.
 
@@ -52,7 +52,7 @@ This study addresses three converging gaps: (1) the lack of evidence on whether 
 
 ### 3.1 Primary Objective
 
-To evaluate whether domain adaptation (RAG + structured prompt design + human-in-the-loop iterative refinement) of an open-source LLM (Qwen2.5-32B-Instruct-AWQ) significantly improves the quality of patient-friendly oncology clinical note summaries compared to the untuned base model with a standard prompt, as assessed by oncology specialists.
+To evaluate whether a domain-adapted inference harness (RAG + multi-gate verification + rule-based safety hooks + human-in-the-loop iterative refinement) built around an open-source LLM (Qwen2.5-32B-Instruct-AWQ) significantly improves the quality of patient-friendly oncology clinical note summaries compared to the untuned base model with a standard prompt, as assessed by oncology specialists.
 
 ### 3.2 Secondary Objectives
 
@@ -75,36 +75,71 @@ This is a multi-phase, observational, survey-based study with three integrated e
 
 ## 5. Model System Description and Materials
 
-### 5.1 Intervention System: Domain-Adapted Qwen2.5-32B
+### 5.1 Intervention System: Domain-Adapted LLM Harness
 
-The intervention is an integrated system comprising three synergistic components:
+The intervention is an integrated **inference harness** — a structured orchestration layer built around an unmodified open-source LLM (Qwen2.5-32B-Instruct-AWQ). The model weights are never fine-tuned; all domain adaptation occurs through the harness components described below. This design is intentional: it maximizes reproducibility, portability, and institutional control while avoiding the cost and complexity of model fine-tuning.
+
+The harness comprises five synergistic components:
 
 **Component 1: Retrieval-Augmented Generation (RAG)**
 
-The system incorporates a curated knowledge base constructed from two authoritative open-access sources: the National Cancer Institute (NCI) Dictionary of Cancer Terms and simplified patient-oriented explanations derived from National Comprehensive Cancer Network (NCCN) guidelines. At inference time, the system retrieves relevant definitions and patient-friendly explanations from this knowledge base and injects them into the generation context, ensuring that terminology simplification is grounded in authoritative, peer-reviewed sources rather than relying solely on parametric knowledge. Technical specifications (embedding model, vector store, chunk strategy, top-k retrieval parameter) will be reported in full in the manuscript.
+The system incorporates a curated medical terminology knowledge base constructed from two authoritative open-access sources: the National Cancer Institute (NCI) Dictionary of Cancer Terms (~9,300 entries) and simplified patient-oriented explanations derived from National Comprehensive Cancer Network (NCCN) guidelines. At inference time, the system scans each clinical note for medical terms present in the knowledge base, retrieves their patient-friendly definitions, and injects them into the generation context. A priority term list (~30 high-confusion terms such as "FISH", "IHC", "neoadjuvant", "sentinel lymph node") ensures that the most commonly misunderstood terms are always included when detected. This approach ensures that terminology simplification is grounded in authoritative, peer-reviewed sources rather than relying solely on parametric knowledge.
 
-**Component 2: Structured Prompt Design**
+**Component 2: Structured Extraction and Generation Prompts**
 
-A carefully engineered system prompt and instruction template guides the model's output format, reading level, content structure, safety guardrails, and tone. The prompt encodes explicit requirements including: target reading level (≤6th grade Flesch-Kincaid), mandatory inclusion of diagnosis, treatment plan, and next steps, prohibition of information fabrication, prohibition of specific dosage instructions, required medical term explanations, and a warm and empowering tone. The prompt was iteratively refined across 10 development cycles (see Component 3). The final frozen prompt text is documented in Appendix A.
+The system employs a two-phase structured extraction pipeline before letter generation:
 
-**Component 3: Human-in-the-Loop Iterative Refinement**
+- **Phase 1 — Independent extraction (8 prompts):** Cancer diagnosis, staging, lab results, clinical findings, current medications, treatment changes, treatment goals, and response assessment are each extracted by a dedicated prompt with field-specific schema definitions, examples, and boundary-case rules.
+- **Phase 2 — Dependency-aware extraction (2 prompts):** Treatment goals and response assessment receive cross-injected context from Phase 1 results (e.g., cancer stage informs curative vs. palliative determination).
+- **Plan extraction (10 prompts):** Medication plan, therapy plan, radiotherapy, procedures, imaging, labs, genetic testing, referrals, follow-up, and advance care planning are extracted from the Assessment/Plan section.
+- **Letter generation:** A detailed template prompt guides the model to produce a patient-friendly summary letter at an 8th-grade reading level, with mandatory source attribution, medical term explanations, and section-by-section content mapping from the extracted data.
 
-The system underwent 10 iterative refinement cycles incorporating structured feedback from two sources:
+All prompts encode explicit requirements including: target reading level (≤8th grade Flesch-Kincaid), prohibition of information fabrication, prohibition of specific dosage instructions, required medical term explanations, and a warm and empowering tone. The prompts were iteratively refined across multiple development cycles (see Component 5). The final frozen prompt texts are documented in Appendix A.
 
-- **Expert oncologist review (PI):** A board-certified oncologist reviewed model outputs for clinical accuracy, appropriate simplification, safety, completeness, and patient-appropriateness. Feedback was categorized by type (factual error, terminology issue, readability concern, tone/empathy issue, structural problem) and used to refine the prompt design and RAG knowledge base curation.
-- **AI-assisted review (Claude, Anthropic):** An AI reviewer performed initial quality screening for factual consistency with source notes, readability metric compliance, structural completeness, and formatting standards, allowing the human reviewer to focus on clinical judgment decisions requiring domain expertise.
+**Component 3: Multi-Gate Verification Pipeline**
 
-Each refinement cycle produced a documented changelog recording: issues identified, feedback source (human vs. AI), modification type (prompt revision, RAG knowledge base update, or both), and pre/post comparison of affected outputs. This iterative process represents a reproducible human-AI co-refinement pipeline for clinical LLM systems.
+Every extracted field passes through a 5-gate sequential verification pipeline before inclusion in the final output:
+
+| Gate | Function | Action on Failure |
+|------|----------|-------------------|
+| G1 — FORMAT | Validates JSON parsability | LLM re-formats the output |
+| G2 — SCHEMA | Validates extracted keys match the expected schema | LLM corrects key names |
+| G3 — IMPROVE | Checks for vague terms and semantic alignment (does the value answer the field's question?) | LLM replaces vague terms and re-aligns |
+| G4 — FAITHFUL | Verifies each value is supported by the original clinical note | Unsupported values are pruned (not regenerated, to avoid introducing new errors) |
+| G5 — TEMPORAL | For plan fields, removes past/completed items | Past items deleted |
+
+This verify-then-prune architecture is designed to reduce hallucination without the risk of re-generation drift. Gate 4 (FAITHFUL) implements a "when in doubt, keep" policy: values are only removed when they clearly contradict the source note, preserving reasonable clinical inferences.
+
+**Component 4: Rule-Based Safety Hooks (POST Hooks)**
+
+After LLM extraction and gate verification, 40+ deterministic regex-based post-processing rules ("POST hooks") apply domain-specific corrections. These rules encode clinical knowledge that the LLM frequently misapplies:
+
+- **Medication cross-validation:** Verifies extracted medications against the note's medication list; removes drugs that appear only in literature citations (preventing hallucination from A/P discussion sections).
+- **Staging verification:** For non-breast cancers, verifies that extracted AJCC stage numbers actually appear in the note text; replaces fabricated stages with raw pathologic notation (e.g., pT3N1).
+- **Temporal filtering:** Removes past/completed treatments from current medication and plan fields (e.g., "s/p" = status post = completed).
+- **Cancer-type routing:** Automatically detects cancer type from dataset path or configuration and conditionally activates cancer-specific hooks (e.g., breast cancer receptor status hooks are disabled for pancreatic cancer cases).
+- **Letter post-processing:** Fixes third-person voice leakage ("He responded" → "You responded"), incomplete dose sentences, chemotherapy regimen abbreviation replacement, and dosing detail removal.
+
+POST hooks serve as a deterministic safety net that catches systematic LLM errors. Unlike prompt-based corrections (which the LLM may or may not follow), POST hooks are guaranteed to execute. The hook library is versioned and auditable.
+
+**Component 5: Human-in-the-Loop Iterative Refinement**
+
+The system underwent multiple iterative refinement cycles incorporating structured feedback from two sources:
+
+- **Expert oncologist review (PI):** A board-certified oncologist reviewed model outputs for clinical accuracy, appropriate simplification, safety, completeness, and patient-appropriateness. Feedback was categorized by severity (P0: hallucination, P1: major clinical error, P2: minor issue) and used to refine prompt design, gate behavior, POST hook rules, and RAG knowledge base curation.
+- **AI-assisted review (Claude, Anthropic + automated LLM-based review):** An AI reviewer performed initial quality screening for factual consistency with source notes, readability metric compliance, structural completeness, and formatting standards. Additionally, an automated review system (`auto_review.py`) uses the same local LLM to systematically compare each extraction against the original note, producing structured P0/P1/P2 findings that guide the next refinement cycle.
+
+Each refinement cycle produced a documented changelog recording: issues identified, feedback source (human vs. AI), modification type (prompt/gate/hook/RAG), and pre/post comparison of affected outputs. This iterative process represents a reproducible human-AI co-refinement pipeline for clinical LLM systems. Across breast cancer (15 cycles) and pancreatic cancer (9 cycles), the system achieved convergence to zero P0 (hallucination) and near-zero P1 (major error) rates.
 
 **System Freeze**
 
-The complete system (model weights, RAG knowledge base, system prompt, and all configuration parameters) will be frozen at the start of Phase 0, designated as version 1.0. No modifications will be made after the freeze date. The freeze date, configuration files, prompt text, and RAG knowledge base contents will be archived and made available as supplementary materials.
+The complete system (model weights, RAG knowledge base, all prompts, gate configurations, POST hook rules, and all parameters) will be frozen at the start of Phase 0, designated as version 1.0. No modifications will be made after the freeze date. The freeze date, configuration files, prompt texts, POST hook source code, and RAG knowledge base contents will be archived and made available as supplementary materials.
 
 ### 5.2 Comparator Models
 
 | Model | Role in Study | Prompt Used | Rationale |
 |-------|--------------|-------------|-----------|
-| Base Qwen2.5-32B-Instruct (no RAG, standard prompt) | Primary comparator | Optimized standard prompt (Section 5.3) | Isolates the effect of RAG + prompt design + human-in-the-loop |
+| Base Qwen2.5-32B-Instruct (no harness, standard prompt) | Primary comparator | Optimized standard prompt (Section 5.3) | Isolates the effect of the full harness (RAG + gates + hooks + HITL) |
 | GPT-4o (OpenAI) | Performance ceiling | Same optimized standard prompt | Current proprietary SOTA; upper bound for achievable quality |
 | Claude Sonnet (Anthropic) | Performance ceiling | Same optimized standard prompt | Second proprietary benchmark; strong safety alignment |
 
@@ -114,9 +149,9 @@ The complete system (model weights, RAG knowledge base, system prompt, and all c
 
 All three comparator models (Base Qwen, GPT-4o, Claude Sonnet) will receive the same optimized standard prompt to ensure fair comparison. This prompt represents a best-effort prompt engineering approach without domain-specific fine-tuning or RAG augmentation. Few-shot examples are deliberately excluded; including them would partially replicate the iterative refinement signal and confound the comparison. The complete prompt:
 
-> "You are a medical communication specialist at a cancer center. Your role is to translate complex oncology clinical notes into clear, compassionate summary letters that patients can understand. Read the following oncology clinical note and write a patient-friendly summary letter. Requirements: Write at or below a 6th-grade reading level. Use short sentences and common words. When a medical term must be used, immediately explain it in plain language. Include: diagnosis, treatment plan, next steps, and what to watch for. Do NOT add information not present in the original note. Do NOT provide specific medication dosages. Remind the patient to discuss questions with their care team. Length: 300–500 words. Tone: warm, respectful, empowering. Clinical Note: [INSERT NOTE]"
+> "You are a medical communication specialist at a cancer center. Your role is to translate complex oncology clinical notes into clear, compassionate summary letters that patients can understand. Read the following oncology clinical note and write a patient-friendly summary letter. Requirements: Write at or below an 8th-grade reading level. Use short sentences and common words. When a medical term must be used, immediately explain it in plain language. Include: diagnosis, treatment plan, next steps, and what to watch for. Do NOT add information not present in the original note. Do NOT provide specific medication dosages. Remind the patient to discuss questions with their care team. Length: 300–500 words. Tone: warm, respectful, empowering. Clinical Note: [INSERT NOTE]"
 
-The domain-adapted system will use its own engineered system prompt (Appendix A), the product of 10 iterative refinement cycles. This asymmetry is by design: the study evaluates the complete domain-adapted system (RAG + refined prompt + curated knowledge base) as an integrated intervention.
+The domain-adapted system will use its own engineered system prompt (Appendix A), the product of multiple iterative refinement cycles. This asymmetry is by design: the study evaluates the complete domain-adapted harness (RAG + multi-gate pipeline + POST hooks + refined prompts) as an integrated intervention.
 
 ### 5.4 Inference Parameters
 
@@ -124,14 +159,22 @@ All models will use identical inference parameters: temperature = 0 (greedy deco
 
 ### 5.5 Clinical Note Corpus
 
-Thirty (30) publicly available oncology clinical notes will be selected from open-access medical datasets and educational repositories, ensuring diversity across:
+The study will use the **CORAL (Clinical Oncology Reports to Advance Language model inference)** dataset, a publicly available collection of de-identified medical oncology clinical notes from the University of California, San Francisco (UCSF) Comprehensive Cancer Center. The CORAL dataset comprises:
 
-- **Cancer types:** breast, lung, colorectal, prostate, hematologic malignancies, and other solid tumors (minimum 4 notes per major cancer type)
-- **Clinical stages:** early-stage (I–II), locally advanced (III), and metastatic (IV)
-- **Treatment modalities:** surgery, chemotherapy, immunotherapy, radiation, targeted therapy, and palliative care
-- **Note complexity:** simple (single problem), moderate (2–3 problems), and complex (multi-system)
+- **Unannotated set:** 200 clinical notes (100 breast cancer, 100 pancreatic/pancreatobiliary cancer), used for system development and automated evaluation
+- **Annotated set:** 40 clinical notes (20 breast cancer, 20 pancreatic cancer) with expert entity-level annotations in BRAT format, including labeled spans for diagnoses, medications, procedures, staging, biomarkers, test results, and treatment intent. This annotated set was held out during all system development and will serve as a gold-standard test set for quantitative evaluation.
 
-All notes will be verified to be free of protected health information (PHI). If synthetic notes are required, they will be generated following clinical vignette standards and reviewed by two oncologists for clinical realism.
+The 200 unannotated notes provide diversity across:
+
+- **Cancer types:** breast adenocarcinoma (multiple subtypes including ER+/PR+/HER2-, triple-negative, HER2+), pancreatic ductal adenocarcinoma, pancreatic neuroendocrine tumors, and duodenal/ampullary neuroendocrine tumors
+- **Clinical stages:** early-stage (I–II), locally advanced (III/borderline resectable), and metastatic (IV)
+- **Treatment modalities:** surgery (mastectomy, lumpectomy, Whipple), chemotherapy (FOLFIRINOX, gemcitabine/nab-paclitaxel, AC-T), immunotherapy, radiation, targeted therapy (trastuzumab, everolimus, sunitinib), hormonal therapy, and palliative/hospice care
+- **Clinical scenarios:** new patient consultations, follow-up visits, post-surgical surveillance, treatment progression, goals-of-care discussions, and telehealth visits
+- **Note complexity:** ranging from 3,400 to 33,000 characters, single-problem to multi-system
+
+All notes are de-identified with personal identifiers replaced by redaction markers (*****). No additional PHI removal is required.
+
+For **automated metrics** (Stream A), all 200 notes will be processed across 4 model conditions (800 total outputs). For **oncologist evaluation** (Stream B), a representative subset of 30 notes will be selected for blinded clinician review. For the **gold-standard evaluation**, the 40 annotated notes will enable entity-level precision/recall/F1 computation against expert annotations — providing an objective, quantitative complement to the subjective oncologist ratings.
 
 ---
 
@@ -143,30 +186,32 @@ The study employs a three-stream evaluation framework. Each stream captures dist
 
 #### 6.1.1 Readability Metrics
 
-All summary letters (30 notes × 4 model conditions = 120 outputs) will be assessed using four validated readability indices:
+All summary letters (200 notes × 4 model conditions = 800 outputs) will be assessed using four validated readability indices:
 
 | Metric | Target | Interpretation |
 |--------|--------|----------------|
-| Flesch-Kincaid Grade Level | ≤ 6th grade | US grade level required to comprehend text |
-| SMOG Index | ≤ 6th grade | Estimates years of education needed |
-| Gunning Fog Index | ≤ 8 | Weighted by complex words and sentence length |
-| Dale-Chall Readability Score | ≤ 5.9 | Based on familiar word list; <5.9 = 4th-grade accessible |
+| Flesch-Kincaid Grade Level | ≤ 8th grade | US grade level required to comprehend text |
+| SMOG Index | ≤ 8th grade | Estimates years of education needed |
+| Gunning Fog Index | ≤ 10 | Weighted by complex words and sentence length |
+| Dale-Chall Readability Score | ≤ 7.9 | Based on familiar word list; <5.9 = 4th-grade accessible |
 
 #### 6.1.2 Output Consistency
 
 Intra-model consistency will be measured via Sentence-BERT cosine similarity across 5 repeated runs per note per model. This metric is expected to favor the domain-adapted system (deterministic local inference) over commercial APIs (which may introduce variability).
 
-#### 6.1.3 Automated Hallucination Detection
+#### 6.1.3 Automated Factual Consistency Review
 
-An entity-level factual consistency pipeline will:
+An LLM-based factual consistency review system will assess each generated summary letter against the original clinical note. For each sample, the same local LLM (Qwen2.5-32B) is prompted to:
 
-- Extract medical entities from the original clinical note (diagnoses, medications, procedures, lab values, staging) using a biomedical NER model
-- Extract corresponding entities from the generated summary letter
-- Compute entity-level precision (no fabricated entities), recall (no omitted critical entities), and F1 score
-- Flag entities present in the summary but absent from the original note as potential hallucinations
-- Classify detected hallucinations by clinical severity: benign (no clinical impact), moderate (could cause confusion), or severe (could lead to clinical harm)
+- Compare each extracted field value against the original note for faithfulness
+- Flag values that are fabricated, contradicted by the note, or temporally misattributed
+- Classify findings by clinical severity: P0 (hallucination — fabricated information), P1 (major clinical error — wrong direction or critical omission), P2 (minor issue — imprecise but not wrong)
 
-This automated pipeline will be cross-validated against oncologist binary checklist item C1 (Stream B) to assess human-machine agreement.
+This automated review was validated during system development through manual triple-review audits (extraction × letter × automated review), achieving convergence between automated and human findings after calibration of review prompts. The automated review's false positive rate and concordance with oncologist checklist item C1 (Stream B) will be reported.
+
+Additionally, for the 40 annotated notes in the gold-standard test set, entity-level precision, recall, and F1 will be computed by comparing system-extracted entities against expert BRAT annotations. This provides an objective, annotation-grounded hallucination measure independent of both the LLM reviewer and the oncologist evaluators.
+
+**Limitation:** Using the same LLM architecture for both generation and review introduces potential reviewer-as-judge bias. This is mitigated by (a) the separation of generation and review prompts, (b) cross-validation against human oncologist judgments, and (c) the independent entity-level evaluation against expert annotations.
 
 ### 6.2 Stream B: Oncologist Evaluation (Phase 2)
 
@@ -176,7 +221,7 @@ Five (5) oncology attending physicians or senior fellows at Montefiore Medical C
 
 #### 6.2.2 Sample Size Justification
 
-With 30 clinical notes, 4 model conditions (domain-adapted, base Qwen, GPT-4o, Claude Sonnet), and 5 evaluators, the study will generate 600 individual Likert ratings (30 × 4 × 5). Based on prior LLM evaluation studies in oncology, this sample provides adequate statistical power:
+For the oncologist evaluation, 30 clinical notes (a representative subset of the 200-note corpus) will be evaluated across 4 model conditions by 5 evaluators, generating 600 individual Likert ratings (30 × 4 × 5). Based on prior LLM evaluation studies in oncology, this sample provides adequate statistical power:
 
 - **Primary comparison (domain-adapted vs. base Qwen):** 30 paired observations per evaluator, 5 evaluators. For a paired Wilcoxon signed-rank test, 30 pairs provide >80% power to detect a 0.5-point mean difference on a 5-point Likert scale (effect size d = 0.5, alpha = 0.05).
 - **Inter-rater reliability:** 5 raters × 120 items provides sufficient data for stable ICC estimation. The literature recommends a minimum of 3 raters; 5 ensures robust reliability assessment.
@@ -306,9 +351,10 @@ This table will be a central element of the Discussion, enabling readers and ins
 
 | Component | N | Data Generated | Justification |
 |-----------|---|----------------|---------------|
-| Clinical notes | 30 | 120 AI-generated summaries (30 × 4 models) | Diversity across cancer types, stages, treatments |
-| Oncologist evaluators | 5 | 600 Likert ratings + 600 binary checklists | ICC requires ≥3 raters; 5 provides robust reliability; >80% power for d=0.5 |
-| Consistency runs | 5 per condition | 600 total outputs (30 × 4 × 5) | Sentence-BERT consistency analysis |
+| Clinical notes (full corpus) | 200 | 800 AI-generated summaries (200 × 4 models) | Full CORAL unannotated set; automated metrics on all |
+| Gold-standard test set | 40 | 160 outputs + entity-level F1 vs expert annotations | CORAL annotated set; held out during development |
+| Oncologist evaluation subset | 30 | 600 Likert ratings + 600 binary checklists | ICC requires ≥3 raters; 5 provides robust reliability; >80% power for d=0.5 |
+| Consistency runs | 5 per condition | 4000 total outputs (200 × 4 × 5) | Sentence-BERT consistency analysis |
 | Bias audit | 10 notes × 6 conditions × 4 models | 240 automated outputs | Adequate for repeated-measures ANOVA |
 
 ---
