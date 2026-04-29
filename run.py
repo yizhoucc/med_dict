@@ -2426,6 +2426,21 @@ def main():
                     goals["goals_of_treatment"] = "curative"
                     print(f"    [POST-GOALS] adjuvant → curative (non-metastatic)")
 
+        # POST-GOALS-SURVEILLANCE: If A/P says "surveillance" and no active treatment, override goal [v32]
+        goals_surv = keypoints.get("Treatment_Goals", {})
+        if isinstance(goals_surv, dict):
+            goal_val_s = str(goals_surv.get("goals_of_treatment", "") or "").lower().strip()
+            if goal_val_s in ("curative", "adjuvant"):
+                ap_lower_gs = (assessment_and_plan or "").lower()
+                meds_val_gs = str(keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+                # Check if A/P explicitly says surveillance AND no active cancer meds
+                has_surveillance = bool(re.search(r'continue\s+(?:on\s+)?surveillance|will\s+(?:continue|remain)\s+(?:on\s+)?surveillance', ap_lower_gs))
+                has_active_meds = bool(meds_val_gs)
+                if has_surveillance and not has_active_meds:
+                    old_goal = goals_surv["goals_of_treatment"]
+                    goals_surv["goals_of_treatment"] = "surveillance"
+                    print(f"    [POST-GOALS-SURVEILLANCE] {old_goal} → surveillance (A/P says surveillance, no active meds)")
+
         # POST-DISTMET: Ensure Distant Metastasis field exists [B48]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict) and "Distant Metastasis" not in cancer:
@@ -2968,16 +2983,36 @@ def main():
                         verified.append(med)
                         continue
                     in_med_list = med_clean in med_section
+                    # If drug is in the note's medication list, ALWAYS keep it — it's a verified current med
+                    if in_med_list:
+                        verified.append(med)
+                        continue
+                    # Otherwise check A/P for current-use context
                     in_ap_current = False
                     if med_clean in ap_lower_cc:
                         for m in re.finditer(re.escape(med_clean), ap_lower_cc):
-                            ctx = ap_lower_cc[max(0, m.start()-60):m.end()+60]
-                            if any(w in ctx for w in ['continue', 'currently', 'on ', 'taking', 'resume', 'start']):
+                            ctx = ap_lower_cc[max(0, m.start()-80):m.end()+80]
+                            # Positive: drug is current/planned
+                            if any(w in ctx for w in ['continue', 'currently', 'on ', 'taking', 'resume', 'start',
+                                                       'on treatment', 'treatment with', 'therapy with',
+                                                       'cycle', 'cycles', 'receiving', 'given',
+                                                       'stable on', 'tolerating', 'respond']):
                                 in_ap_current = True
                                 break
-                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al', 'published', 'data confirm']):
+                            # Negative: literature citation — skip this match
+                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al',
+                                                       'published', 'data confirm', 'phase iii', 'phase ii']):
                                 continue
-                    if in_med_list or in_ap_current:
+                    # Also check full note (not just A/P) for "on [drug]" or "currently on [drug]"
+                    if not in_ap_current:
+                        note_lower_cc = (note_text or "").lower()
+                        for m in re.finditer(re.escape(med_clean), note_lower_cc):
+                            ctx = note_lower_cc[max(0, m.start()-40):m.end()+40]
+                            if any(w in ctx for w in ['currently on', 'now on', 'is on ', 'started on',
+                                                       'patient on', 'continue ', 'present:', 'present,']):
+                                in_ap_current = True
+                                break
+                    if in_ap_current:
                         verified.append(med)
                     else:
                         print(f"    [POST-MEDS-CROSSCHECK] Removed '{med}' — not found in medication list or A/P as current")
