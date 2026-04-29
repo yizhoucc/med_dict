@@ -35,8 +35,10 @@ Cancer_Diagnosis: |
   2. Grade (e.g., "grade 2", "G3", "high grade", "well-differentiated", "poorly differentiated") — ALWAYS include if mentioned anywhere in the note
   3. Special features: perineural invasion, lymphovascular invasion, signet ring features, etc.
   4. If this is a recurrence or metastatic disease, mention that (e.g., "with metastatic disease to liver")
+  5. TUMOR ORIGIN: If the note specifies the tumor originates from a non-pancreatic site (e.g., duodenal, ampullary, biliary, gastric), you MUST include the correct origin. Do NOT assume all tumors in this dataset are pancreatic. Example: "Grade 3 neuroendocrine tumor of duodenal origin" NOT "Grade 3 pancreatic neuroendocrine tumor".
   - Example: "Poorly differentiated pancreatic ductal adenocarcinoma with perineural invasion"
   - Example: "Pancreatic neuroendocrine tumor, grade 2, well-differentiated"
+  - Example: "High-grade neuroendocrine tumor of duodenal/ampullary origin"
   Do NOT write just "pancreatic cancer" — always include the subtype and grade when available in the note.
   IMPORTANT: Search the ENTIRE note for diagnosis details — they may appear in PMH, Problem List, Pathology, HPI, Assessment/Plan, or Diagnosis section.
 
@@ -52,8 +54,13 @@ Cancer_Diagnosis: |
     - "Locally advanced" typically means Stage III (unresectable but no distant mets)
     - Vascular involvement (SMA, SMV, celiac axis, portal vein) determines resectability
     - If tumor involves major vessels and is described as "unresectable" or "locally advanced", note this
-  - RESECTED METASTASIS + NED: If a patient had prior metastasis that was surgically resected and current imaging shows NO evidence of disease (NED), do NOT write "now metastatic (Stage IV)". Instead write the CURRENT status: e.g., "Originally Stage IIB, had pulmonary metastasis (resected 2017), currently no evidence of disease". The staging should reflect the CURRENT clinical reality.
-  - Do NOT invent a stage number. If the note never states "Stage IIB" or "Stage III", do NOT write those specific numbers. Write what the note says (e.g., "metastatic disease at diagnosis") or infer from available data.
+  - RESECTED METASTASIS + NED: If a patient had prior metastasis that was surgically resected and current imaging shows NO evidence of disease (NED), do NOT write "now metastatic (Stage IV)". Instead write the CURRENT status: e.g., "Originally Stage IB, had pulmonary metastasis (resected 2017), currently no evidence of disease". The staging should reflect the CURRENT clinical reality.
+  - CRITICAL — DO NOT FABRICATE STAGE NUMBERS:
+    * Only write "Stage IA", "Stage IB", "Stage IIA", "Stage IIB", "Stage III", "Stage IV" if the note EXPLICITLY uses that exact stage designation.
+    * If the note says "Stage IB", write "Stage IB" — do NOT change it to "Stage IIB".
+    * If the note has pTN notation (e.g., "pT3N1") but does NOT state a stage name, write the pTN notation: "pT3N1" — do NOT convert to "Stage IIB" or any AJCC stage name. The conversion from pTN to AJCC stage requires clinical judgment and should NOT be done by extraction.
+    * If the note mentions NO stage and NO pTN, write "Not staged in note" or describe what IS available (e.g., "Metastatic disease at diagnosis", "Borderline resectable").
+    * Common mistake: writing "Originally Stage IIB" when the note never says "IIB". This is FABRICATION.
   - Only write "Not mentioned in note" if there is truly NO staging or tumor information anywhere in the note.
 
   Respond *only* with a JSON object using this exact schema:
@@ -118,6 +125,11 @@ Current_Medications: |
   CROSS-REFERENCE: If a "Current Outpatient Medications" section exists, use it as primary reference.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections, infusions) may NOT be in the outpatient medication list. If the A/P states the patient is CURRENTLY ON a drug, include it.
   IMPORTANT: If the patient SKIPPED or MISSED a single dose/cycle, they are still ON that drug.
+  CRITICAL — DO NOT HALLUCINATE DRUG NAMES: Only list drugs the patient is CURRENTLY TAKING. Do NOT confuse:
+  - Literature citations in the A/P (e.g., "capecitabine/temozolomide was reported to have 70% response rate") — these are NOT the patient's medications
+  - Future treatment options being discussed (e.g., "could consider everolimus") — these are NOT current medications
+  - Past completed medications (e.g., "s/p 6 cycles of FOLFIRINOX") — these are NOT current
+  Always verify: is the drug listed in the Current Medications section OR explicitly stated as currently being administered?
   IMPORTANT: If the A/P section mentions specific chemotherapy drug names being given, continued, or dose-adjusted (e.g., "Oxaliplatin 49 mg/m2", "continue gemcitabine", "irinotecan reduced"), those drugs ARE current cancer medications — include them even if the drug names are not in the outpatient medication list.
   IMPORTANT: If drug names are [REDACTED] or masked (*****), write "[REDACTED]" — do NOT leave current_meds empty when the patient is clearly on active chemotherapy.
 
@@ -167,8 +179,10 @@ Treatment_Goals: |
   - Locally advanced unresectable → often "palliative" but may be "curative" if downstaging is the goal
   - Metastatic/Stage IV cancer → "palliative"
   - Patient COMPLETED all treatment and is now on surveillance/monitoring with NO active therapy → "surveillance"
+    Key clues for surveillance: "continue on surveillance", "will see again in 6 months", "no active treatment", "monitoring", "NED", "no evidence of disease"
   - Do NOT write "neoadjuvant" as a goal — write "curative" instead.
   - Do NOT write "adjuvant" if adjuvant therapy was completed years ago and the patient is now on surveillance.
+  - Do NOT write "curative" if the patient already completed curative-intent treatment and is now in long-term follow-up with no active therapy — write "surveillance" instead.
 
   Respond *only* with a JSON object using this exact schema (NO other keys):
   {
