@@ -1,6 +1,6 @@
 # RESEARCH PROPOSAL
 
-## Evaluation of a Domain-Adapted, Locally-Deployable LLM System for Patient-Friendly Oncology Clinical Note Summarization: Clinician Assessment with Health Equity and Safety Analysis
+## Evaluation of a Domain-Adapted Inference Harness for Locally-Deployable LLM-Based Oncology Patient Letter Generation: Clinician Assessment with Health Equity and Safety Analysis
 
 **Principal Investigator:** [Your Name], MD
 **Co-Investigator (Machine Learning):** [ML Collaborator Name], PhD
@@ -14,13 +14,13 @@
 
 ## 1. Abstract
 
-**Background:** Cancer patients frequently struggle to understand clinical documentation written in medical jargon. Proprietary large language models (LLMs) such as GPT-4o can simplify medical text but require transmitting sensitive data to external servers, incur ongoing API costs, and cannot be customized to institutional needs. There is limited evidence on whether locally-deployable open-source models, enhanced through a structured inference harness comprising retrieval-augmented generation (RAG), multi-gate verification, rule-based safety hooks, and expert-in-the-loop iterative refinement, can produce patient-friendly oncology summaries that approach proprietary model performance. Additionally, no study has systematically audited sociodemographic bias in oncology-specific LLM outputs.
+**Background:** Cancer patients frequently struggle to understand clinical documentation written in medical jargon. Proprietary large language models (LLMs) such as GPT-4o can simplify medical text but require transmitting sensitive data to external servers, incur ongoing API costs, and cannot be customized to institutional needs. There is limited evidence on whether locally-deployable open-source models, enhanced through a structured **inference harness** — an orchestration layer that guides model behavior through prompt engineering, output verification, and deterministic post-processing without altering model weights — can produce patient-friendly oncology summaries that approach proprietary model performance. The harness evaluated here comprises retrieval-augmented generation (RAG), a multi-gate verification cascade, rule-based safety hooks, and expert-in-the-loop iterative refinement. Additionally, no study has systematically audited sociodemographic bias in oncology-specific LLM outputs.
 
-**Objective:** To evaluate a domain-adapted LLM harness system (Qwen2.5-32B-Instruct-AWQ with RAG, multi-gate verification pipeline, rule-based safety hooks, and human-in-the-loop refinement) for generating patient-friendly summary letters from oncology clinical notes. The primary aim is to demonstrate significant improvement over the untuned base model. The secondary aim is to characterize the performance gap relative to proprietary commercial LLMs and contextualize it within a cost-privacy-performance tradeoff framework. The study additionally incorporates systematic hallucination detection, clinical safety assessment, and a sociodemographic bias audit.
+**Objective:** To evaluate a domain-adapted inference harness (Qwen2.5-32B-Instruct-AWQ with knowledge-grounded term injection, a 5-stage verification cascade, a deterministic safety rule layer, and human-AI co-refinement) for generating patient-friendly summary letters from oncology clinical notes. The primary aim is to demonstrate significant improvement over the untuned base model. The secondary aim is to characterize the performance gap relative to proprietary commercial LLMs and contextualize it within a cost-privacy-performance tradeoff framework. The study additionally incorporates systematic hallucination detection, clinical safety assessment, and a sociodemographic bias audit.
 
 **Methods:** This observational, survey-based study will use publicly available oncology clinical notes to generate summary letters from four model conditions: (1) the domain-adapted system, (2) GPT-4o, (3) Claude Sonnet, and (4) base Qwen2.5-32B with a standard prompt. Five oncologists blinded to model identity will evaluate accuracy, completeness, clinical safety, appropriate simplification, and overall quality using a 5-point Likert scale and a binary safety checklist. Automated metrics will assess readability (Flesch-Kincaid, SMOG, Dale-Chall, Gunning Fog) and factual consistency (entity-level hallucination detection). A sociodemographic bias audit will test whether model outputs differ across six demographic conditions.
 
-**Expected Significance:** This study will provide the first equity-informed, safety-audited evaluation of a locally-deployable, domain-adapted open-source LLM system for oncology patient communication. By framing results within a cost-privacy-performance tradeoff, findings will directly inform deployment decisions in resource-constrained and privacy-sensitive clinical environments. A planned follow-up study will incorporate patient-centered evaluation.
+**Expected Significance:** This study will provide the first equity-informed, safety-audited evaluation of a locally-deployable inference harness for open-source LLM-based oncology patient communication. The harness concept — domain adaptation through orchestration rather than fine-tuning — represents a reproducible, low-cost paradigm that other institutions can adopt by deploying the same open-source code with their own hardware. By framing results within a cost-privacy-performance tradeoff, findings will directly inform deployment decisions in resource-constrained and privacy-sensitive clinical environments. A planned follow-up study will incorporate patient-centered evaluation.
 
 ---
 
@@ -44,7 +44,7 @@ A 2025 Nature Medicine study exposed systematic sociodemographic biases across n
 
 ### 2.4 Rationale for This Study
 
-This study addresses three converging gaps: (1) the lack of evidence on whether RAG + prompt design + human-in-the-loop refinement can make open-source models viable for oncology patient communication; (2) the need for systematic hallucination and safety evaluation before clinical deployment; and (3) the absence of sociodemographic bias auditing in oncology-specific LLM applications. By combining rigorous clinician evaluation, automated safety assessment, and equity analysis within a cost-privacy-performance tradeoff framework, this study will produce actionable evidence for clinical deployment decisions.
+This study addresses three converging gaps: (1) the lack of evidence on whether an inference harness — combining RAG, multi-gate verification, deterministic safety rules, and human-AI co-refinement — can make open-source models viable for oncology patient communication without fine-tuning; (2) the need for systematic hallucination and safety evaluation before clinical deployment; and (3) the absence of sociodemographic bias auditing in oncology-specific LLM applications. By combining rigorous clinician evaluation, automated safety assessment, and equity analysis within a cost-privacy-performance tradeoff framework, this study will produce actionable evidence for clinical deployment decisions.
 
 ---
 
@@ -75,17 +75,17 @@ This is a multi-phase, observational, survey-based study with three integrated e
 
 ## 5. Model System Description and Materials
 
-### 5.1 Intervention System: Domain-Adapted LLM Harness
+### 5.1 Intervention System: Domain-Adapted Inference Harness
 
-The intervention is an integrated **inference harness** — a structured orchestration layer built around an unmodified open-source LLM (Qwen2.5-32B-Instruct-AWQ). The model weights are never fine-tuned; all domain adaptation occurs through the harness components described below. This design is intentional: it maximizes reproducibility, portability, and institutional control while avoiding the cost and complexity of model fine-tuning.
+The intervention is an **inference harness** — a structured orchestration layer built around an unmodified open-source LLM (Qwen2.5-32B-Instruct-AWQ) that guides model behavior through prompt engineering, output verification, and deterministic post-processing, without altering the model's weights. This design is intentional: it maximizes reproducibility, portability, and institutional control while avoiding the cost and complexity of model fine-tuning. Any institution with compatible GPU hardware can deploy the identical system by installing the frozen harness code and downloading the public model weights.
 
 The harness comprises five synergistic components:
 
-**Component 1: Retrieval-Augmented Generation (RAG)**
+**Component 1: Knowledge-Grounded Term Injection (RAG)**
 
 The system incorporates a curated medical terminology knowledge base constructed from two authoritative open-access sources: the National Cancer Institute (NCI) Dictionary of Cancer Terms (~9,300 entries) and simplified patient-oriented explanations derived from National Comprehensive Cancer Network (NCCN) guidelines. At inference time, the system scans each clinical note for medical terms present in the knowledge base, retrieves their patient-friendly definitions, and injects them into the generation context. A priority term list (~30 high-confusion terms such as "FISH", "IHC", "neoadjuvant", "sentinel lymph node") ensures that the most commonly misunderstood terms are always included when detected. This approach ensures that terminology simplification is grounded in authoritative, peer-reviewed sources rather than relying solely on parametric knowledge.
 
-**Component 2: Structured Extraction and Generation Prompts**
+**Component 2: Dependency-Aware Structured Extraction Pipeline**
 
 The system employs a two-phase structured extraction pipeline before letter generation:
 
@@ -96,9 +96,9 @@ The system employs a two-phase structured extraction pipeline before letter gene
 
 All prompts encode explicit requirements including: target reading level (≤8th grade Flesch-Kincaid), prohibition of information fabrication, prohibition of specific dosage instructions, required medical term explanations, and a warm and empowering tone. The prompts were iteratively refined across multiple development cycles (see Component 5). The final frozen prompt texts are documented in Appendix A.
 
-**Component 3: Multi-Gate Verification Pipeline**
+**Component 3: Multi-Gate Verification Cascade**
 
-Every extracted field passes through a 5-gate sequential verification pipeline before inclusion in the final output:
+Every extracted field passes through a 5-stage sequential verification cascade before inclusion in the final output:
 
 | Gate | Function | Action on Failure |
 |------|----------|-------------------|
@@ -110,9 +110,9 @@ Every extracted field passes through a 5-gate sequential verification pipeline b
 
 This verify-then-prune architecture is designed to reduce hallucination without the risk of re-generation drift. Gate 4 (FAITHFUL) implements a "when in doubt, keep" policy: values are only removed when they clearly contradict the source note, preserving reasonable clinical inferences.
 
-**Component 4: Rule-Based Safety Hooks (POST Hooks)**
+**Component 4: Deterministic Safety Rule Layer (POST Hooks)**
 
-After LLM extraction and gate verification, 40+ deterministic regex-based post-processing rules ("POST hooks") apply domain-specific corrections. These rules encode clinical knowledge that the LLM frequently misapplies:
+After LLM extraction and verification cascade, 40+ deterministic regex-based post-processing rules apply domain-specific corrections. These rules encode clinical knowledge that the LLM frequently misapplies:
 
 - **Medication cross-validation:** Verifies extracted medications against the note's medication list; removes drugs that appear only in literature citations (preventing hallucination from A/P discussion sections).
 - **Staging verification:** For non-breast cancers, verifies that extracted AJCC stage numbers actually appear in the note text; replaces fabricated stages with raw pathologic notation (e.g., pT3N1).
@@ -120,11 +120,11 @@ After LLM extraction and gate verification, 40+ deterministic regex-based post-p
 - **Cancer-type routing:** Automatically detects cancer type from dataset path or configuration and conditionally activates cancer-specific hooks (e.g., breast cancer receptor status hooks are disabled for pancreatic cancer cases).
 - **Letter post-processing:** Fixes third-person voice leakage ("He responded" → "You responded"), incomplete dose sentences, chemotherapy regimen abbreviation replacement, and dosing detail removal.
 
-POST hooks serve as a deterministic safety net that catches systematic LLM errors. Unlike prompt-based corrections (which the LLM may or may not follow), POST hooks are guaranteed to execute. The hook library is versioned and auditable.
+The deterministic safety layer serves as a guaranteed safety net that catches systematic LLM errors. Unlike prompt-based corrections (which the LLM may or may not follow), these rules always execute. The rule library is versioned, auditable, and cancer-type-specific — a key property for clinical deployment where predictability and explainability are required.
 
-**Component 5: Human-in-the-Loop Iterative Refinement**
+**Component 5: Human-AI Co-Refinement Loop**
 
-The system underwent multiple iterative refinement cycles incorporating structured feedback from two sources:
+The harness underwent multiple iterative refinement cycles incorporating structured feedback from two sources:
 
 - **Expert oncologist review (PI):** A board-certified oncologist reviewed model outputs for clinical accuracy, appropriate simplification, safety, completeness, and patient-appropriateness. Feedback was categorized by severity (P0: hallucination, P1: major clinical error, P2: minor issue) and used to refine prompt design, gate behavior, POST hook rules, and RAG knowledge base curation.
 - **AI-assisted review (Claude, Anthropic + automated LLM-based review):** An AI reviewer performed initial quality screening for factual consistency with source notes, readability metric compliance, structural completeness, and formatting standards. Additionally, an automated review system (`auto_review.py`) uses the same local LLM to systematically compare each extraction against the original note, producing structured P0/P1/P2 findings that guide the next refinement cycle.
@@ -133,7 +133,7 @@ Each refinement cycle produced a documented changelog recording: issues identifi
 
 **System Freeze**
 
-The complete system (model weights, RAG knowledge base, all prompts, gate configurations, POST hook rules, and all parameters) will be frozen at the start of Phase 0, designated as version 1.0. No modifications will be made after the freeze date. The freeze date, configuration files, prompt texts, POST hook source code, and RAG knowledge base contents will be archived and made available as supplementary materials.
+The complete harness (model weights, knowledge base, all prompts, verification cascade configuration, safety rule library, and all parameters) will be frozen at the start of Phase 0, designated as version 1.0. No modifications will be made after the freeze date. The entire harness codebase, configuration files, and knowledge base contents will be archived and made available as open-source supplementary materials, enabling full replication.
 
 ### 5.2 Comparator Models
 
@@ -327,7 +327,7 @@ Intraclass Correlation Coefficient (ICC, two-way random, absolute agreement) wil
 
 A descriptive deployment tradeoff table will be constructed:
 
-| Dimension | Domain-Adapted Qwen | GPT-4o | Claude Sonnet | Base Qwen |
+| Dimension | Harness + Qwen | GPT-4o | Claude Sonnet | Base Qwen |
 |-----------|-------------------|--------|---------------|-----------|
 | Mean Accuracy (Likert) | [result] | [result] | [result] | [result] |
 | Mean Overall Quality (Likert) | [result] | [result] | [result] | [result] |
@@ -340,7 +340,7 @@ A descriptive deployment tradeoff table will be constructed:
 | HIPAA compliance | Full (local) | Requires BAA | Requires BAA | Full (local) |
 | Internet dependency | None | Complete | Complete | None |
 | Vendor lock-in | None (open-source) | High | High | None (open-source) |
-| Customizability | Full (prompt+RAG) | Prompt only | Prompt only | Prompt only |
+| Customizability | Full (harness: prompts+gates+hooks+RAG) | Prompt only | Prompt only | Prompt only |
 | Output reproducibility | Deterministic | May vary | May vary | Deterministic |
 
 This table will be a central element of the Discussion, enabling readers and institutional decision-makers to weigh performance differences against deployment constraints relevant to their context.
