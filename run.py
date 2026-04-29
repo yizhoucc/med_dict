@@ -1630,7 +1630,11 @@ def main():
                                                          'discontinued', 'stopped', 'was on',
                                                          'allergic to', 'allergy',
                                                          'declined', 'refused', 'not taking',
-                                                         'not tolerat', 'intoleran']):
+                                                         'not tolerat', 'intoleran',
+                                                         'concerned about', 'avoid', 'not recommend',
+                                                         'hold ', 'held ', 'risk of', 'toxicity',
+                                                         'response rate', 'et al', 'reported',
+                                                         'trial', 'study', 'published']):
                             found_meds.append(drug)
                             break
             if found_meds:
@@ -3004,13 +3008,18 @@ def main():
                                                        'stable on', 'tolerating', 'respond']):
                                 in_ap_current = True
                                 break
-                    # Also check full note (not just A/P) for "on [drug]" or "currently on [drug]"
+                    # Also check full note (not just A/P) for active treatment context
                     if not in_ap_current:
                         note_lower_cc = (note_text or "").lower()
                         for m in re.finditer(re.escape(med_clean), note_lower_cc):
-                            ctx = note_lower_cc[max(0, m.start()-40):m.end()+40]
+                            ctx = note_lower_cc[max(0, m.start()-60):m.end()+60]
+                            # Skip if literature/historical context
+                            if any(w in ctx for w in ['et al', 'reported', 'study', 'trial', 'published']):
+                                continue
                             if any(w in ctx for w in ['currently on', 'now on', 'is on ', 'started on',
-                                                       'patient on', 'continue ', 'present:', 'present,']):
+                                                       'patient on', 'continue ', 'present:', 'present,',
+                                                       'cycles of', 'cycle of', 'on treatment with',
+                                                       'been through', 'now s/p', 'receiving']):
                                 in_ap_current = True
                                 break
                     if in_ap_current:

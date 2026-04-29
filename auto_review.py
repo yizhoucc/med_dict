@@ -49,7 +49,7 @@ REVIEW EACH FIELD against the original note. For each field, check:
 
 Severity calibration — be strict about these definitions:
 - P0: Hallucination — value contains information NOT in the note (fabricated facts, invented numbers)
-- P1: Major error — ONLY for: wrong clinical direction (curative↔palliative), factual contradiction with the note, critical cancer-related omission that changes clinical meaning. Missing non-cancer medications is NOT P1.
+- P1: Major error — ONLY for: wrong clinical direction (curative↔palliative), factual contradiction with the note, critical cancer-related omission that changes clinical meaning. Missing non-cancer medications is NOT P1. Staging written as pTN notation (e.g., "pT3N1") is NOT inaccurate — it's the raw pathologic staging from the note. Do NOT flag pTN as P1.
 - P2: Minor issue — incomplete but not wrong, slightly imprecise wording, could be better, missing minor details
 
 Output a JSON object with this structure:
