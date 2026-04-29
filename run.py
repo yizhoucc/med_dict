@@ -2218,77 +2218,9 @@ def main():
                 if is_metastatic:
                     cancer["Stage_of_Cancer"] = "Stage IV (metastatic)"
                     print(f"    [POST-STAGE-INFER] Metastatic disease detected → Stage IV")
-                else:
-                    # STEP 2: Search for tumor size (T stage)
-                    tumor_match = re.search(r'(\d+\.?\d*)\s*(?:cm|mm)\s*(?:tumor|mass|IDC|ILC|carcinoma|invasive)',
-                                           note_lower_s, re.IGNORECASE)
-                    if not tumor_match:
-                        tumor_match = re.search(r'(?:tumor|mass|IDC|ILC|carcinoma|invasive)[^.]{0,30}(\d+\.?\d*)\s*(?:cm|mm)',
-                                               note_lower_s, re.IGNORECASE)
-                    # Search for node status — expanded patterns
-                    node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel)', note_lower_s)
-                    node_neg = re.search(r'node[\s-]*neg|sentinel\s*node\s*neg|0/\d+\s*(?:nodes?|LN|sentinel)|'
-                                         r'no\s+(?:positive\s+)?nodes?|negative\s*sentinel|'
-                                         r'(?:sentinel|lymph)\s*nodes?\s*(?:were?\s*)?(?:negative|neg|benign)|'
-                                         r'sn\s*neg|n0',
-                                        note_lower_s)
-                    # Also check pT/pN notation in the note
-                    ptn_match = re.search(r'p?T(\d[a-d]?)\s*,?\s*p?N(\d[a-c]?(?:mi)?)', note_lower_s, re.IGNORECASE)
-
-                    # Exclude "X cm from the nipple" (position description, not tumor size)
-                    if tumor_match:
-                        tm_end_pos = tumor_match.end()
-                        after_tm_text = note_lower_s[tm_end_pos:tm_end_pos+30]
-                        if re.search(r'from\s+(?:the\s+)?nipple', after_tm_text):
-                            tumor_match = None
-
-                    if tumor_match:
-                        size = float(tumor_match.group(1))
-                        if 'mm' in tumor_match.group(0).lower():
-                            size = size / 10  # convert mm to cm
-
-                        # Determine node status
-                        n_positive = 0
-                        if node_match:
-                            n_positive = int(node_match.group(1))
-                        has_positive_nodes = n_positive > 0
-                        is_node_neg = bool(node_neg) and not has_positive_nodes
-
-                        if size <= 2.0 and is_node_neg:
-                            inferred = "Stage I (inferred from tumor ≤2cm, node negative)"
-                        elif size <= 2.0 and has_positive_nodes:
-                            if n_positive >= 4:
-                                inferred = f"Stage IIIA (inferred from tumor ≤2cm with {n_positive} positive nodes)"
-                            else:
-                                inferred = f"Stage IIA (inferred from tumor ≤2cm with {n_positive} positive node{'s' if n_positive > 1 else ''})"
-                        elif size <= 5.0 and is_node_neg:
-                            inferred = "Stage IIA (inferred from tumor 2-5cm, node negative)"
-                        elif size <= 5.0 and has_positive_nodes:
-                            if n_positive >= 4:
-                                inferred = f"Stage IIIA (inferred from tumor 2-5cm with {n_positive} positive nodes)"
-                            else:
-                                inferred = f"Stage IIB (inferred from tumor 2-5cm with {n_positive} positive node{'s' if n_positive > 1 else ''})"
-                        elif size > 5.0:
-                            if has_positive_nodes:
-                                inferred = f"Stage IIIA (inferred from tumor >5cm with positive nodes)"
-                            elif is_node_neg:
-                                inferred = f"Stage IIIA (inferred from tumor >5cm, node negative)"
-                            else:
-                                inferred = f"Stage III (inferred from tumor >5cm)"
-                        elif size <= 2.0:
-                            # No node info, small tumor
-                            inferred = "Stage I (inferred from tumor ≤2cm)"
-                        else:
-                            inferred = f"Stage II (inferred from {size:.1f}cm tumor)"
-
-                        cancer["Stage_of_Cancer"] = inferred
-                        print(f"    [POST-STAGE-INFER] Inferred from note: {inferred}")
-                    elif ptn_match:
-                        # pTN notation found but no tumor size regex match
-                        t_val = ptn_match.group(1)
-                        n_val = ptn_match.group(2)
-                        cancer["Stage_of_Cancer"] = f"(inferred from pT{t_val} N{n_val})"
-                        print(f"    [POST-STAGE-INFER] Inferred from pTN: pT{t_val} N{n_val}")
+                # STEP 2 removed (v32): tumor size → AJCC stage inference was too error-prone
+                # (50% accuracy on test set, including Stage I vs expert IIIC).
+                # If the note doesn't state a stage and isn't metastatic, leave as "Not staged in note".
 
         # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name [breast-only staging table]
         cancer = keypoints.get("Cancer_Diagnosis", {})
