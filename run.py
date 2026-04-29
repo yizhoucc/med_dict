@@ -2665,47 +2665,6 @@ def main():
                 if len(filtered) < len(meds_list):
                     drug_dict_meds["current_meds"] = ", ".join(filtered) if filtered else ""
 
-        # POST-MEDS-CROSSCHECK: Verify current_meds drugs actually appear in note's medication list or A/P as current [v32]
-        drug_dict_cc = keypoints.get("Current_Medications", {})
-        if isinstance(drug_dict_cc, dict):
-            meds_val_cc = (drug_dict_cc.get("current_meds", "") or "").strip()
-            if meds_val_cc:
-                note_lower_cc = note_text.lower() if note_text else ""
-                # Find medication list section
-                med_section = ""
-                med_match = re.search(
-                    r'(?i)(?:Current Outpatient Medications|Current.*?Medications|MEDICATIONS).*?(?:Allergi|PAST|Family|Social|Review of|Physical|Objective|ROS)',
-                    note_text or "", re.DOTALL)
-                if med_match:
-                    med_section = med_match.group(0).lower()
-                ap_lower_cc = (assessment_and_plan or "").lower()
-                meds_list_cc = [m.strip() for m in meds_val_cc.split(",") if m.strip()]
-                verified = []
-                for med in meds_list_cc:
-                    med_clean = med.strip().lower()
-                    if not med_clean or med_clean == "[redacted]":
-                        verified.append(med)
-                        continue
-                    # Check if drug appears in medication list OR in A/P as current
-                    in_med_list = med_clean in med_section
-                    in_ap_current = False
-                    if med_clean in ap_lower_cc:
-                        # Verify it's current, not a literature citation
-                        for m in re.finditer(re.escape(med_clean), ap_lower_cc):
-                            ctx = ap_lower_cc[max(0, m.start()-60):m.end()+60]
-                            if any(w in ctx for w in ['continue', 'currently', 'on ', 'taking', 'resume', 'start']):
-                                in_ap_current = True
-                                break
-                            # Literature citation patterns
-                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al', 'published']):
-                                continue
-                    if in_med_list or in_ap_current:
-                        verified.append(med)
-                    else:
-                        print(f"    [POST-MEDS-CROSSCHECK] Removed '{med}' — not found in medication list or A/P as current")
-                if len(verified) < len(meds_list_cc):
-                    drug_dict_cc["current_meds"] = ", ".join(verified) if verified else ""
-
         # POST-SELF-MANAGED: Clear current_meds if physician disapproves of patient's self-managed drugs [v21]
         self_managed_cleared = False
         drug_dict_sm = keypoints.get("Current_Medications", {})
@@ -2913,6 +2872,44 @@ def main():
                         drug_dict_meds["current_meds"] = ", ".join(meds_list) if meds_list else ""
                         print(f"    [POST-MEDS-STOPPED] Removed {removed} stopped drug(s) from current_meds: {stopped_drugs}")
                         print(f"      current_meds now: '{drug_dict_meds['current_meds']}'")
+
+        # POST-MEDS-CROSSCHECK: Verify current_meds drugs appear in note's medication list or A/P as current [v32]
+        # Runs AFTER IV-CHECK and STOPPED to catch drugs added by other hooks
+        drug_dict_cc = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_cc, dict):
+            meds_val_cc = (drug_dict_cc.get("current_meds", "") or "").strip()
+            if meds_val_cc:
+                # Find medication list section in note
+                med_section = ""
+                med_match = re.search(
+                    r'(?i)(?:Current Outpatient Medications|Current.*?Medications|MEDICATIONS).*?(?:Allergi|PAST|Family|Social|Review of|Physical|Objective|ROS)',
+                    note_text or "", re.DOTALL)
+                if med_match:
+                    med_section = med_match.group(0).lower()
+                ap_lower_cc = (assessment_and_plan or "").lower()
+                meds_list_cc = [m.strip() for m in meds_val_cc.split(",") if m.strip()]
+                verified = []
+                for med in meds_list_cc:
+                    med_clean = med.strip().lower()
+                    if not med_clean or med_clean == "[redacted]":
+                        verified.append(med)
+                        continue
+                    in_med_list = med_clean in med_section
+                    in_ap_current = False
+                    if med_clean in ap_lower_cc:
+                        for m in re.finditer(re.escape(med_clean), ap_lower_cc):
+                            ctx = ap_lower_cc[max(0, m.start()-60):m.end()+60]
+                            if any(w in ctx for w in ['continue', 'currently', 'on ', 'taking', 'resume', 'start']):
+                                in_ap_current = True
+                                break
+                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al', 'published', 'data confirm']):
+                                continue
+                    if in_med_list or in_ap_current:
+                        verified.append(med)
+                    else:
+                        print(f"    [POST-MEDS-CROSSCHECK] Removed '{med}' — not found in medication list or A/P as current")
+                if len(verified) < len(meds_list_cc):
+                    drug_dict_cc["current_meds"] = ", ".join(verified) if verified else ""
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
