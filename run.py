@@ -2992,17 +2992,18 @@ def main():
                     if med_clean in ap_lower_cc:
                         for m in re.finditer(re.escape(med_clean), ap_lower_cc):
                             ctx = ap_lower_cc[max(0, m.start()-80):m.end()+80]
-                            # Positive: drug is current/planned
+                            # FIRST check negative: literature citation — skip this match entirely
+                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al',
+                                                       'published', 'data confirm', 'phase iii', 'phase ii',
+                                                       'patients receiving', 'patients treated']):
+                                continue
+                            # THEN check positive: drug is current/planned
                             if any(w in ctx for w in ['continue', 'currently', 'on ', 'taking', 'resume', 'start',
                                                        'on treatment', 'treatment with', 'therapy with',
                                                        'cycle', 'cycles', 'receiving', 'given',
                                                        'stable on', 'tolerating', 'respond']):
                                 in_ap_current = True
                                 break
-                            # Negative: literature citation — skip this match
-                            if any(w in ctx for w in ['reported', 'trial', 'study', 'response rate', 'et al',
-                                                       'published', 'data confirm', 'phase iii', 'phase ii']):
-                                continue
                     # Also check full note (not just A/P) for "on [drug]" or "currently on [drug]"
                     if not in_ap_current:
                         note_lower_cc = (note_text or "").lower()
