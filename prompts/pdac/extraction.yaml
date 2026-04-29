@@ -61,6 +61,7 @@ Cancer_Diagnosis: |
     * If the note has pTN notation (e.g., "pT3N1") but does NOT state a stage name, write the pTN notation: "pT3N1" — do NOT convert to "Stage IIB" or any AJCC stage name. The conversion from pTN to AJCC stage requires clinical judgment and should NOT be done by extraction.
     * If the note mentions NO stage and NO pTN, write "Not staged in note" or describe what IS available (e.g., "Metastatic disease at diagnosis", "Borderline resectable").
     * Common mistake: writing "Originally Stage IIB" when the note never says "IIB". This is FABRICATION.
+    * Another common mistake: the note says "pT3 N1" and you write "Originally Stage IIB". pT3N1 is NOT the same as "Stage IIB" — do NOT make this conversion. Write "pT3N1" exactly as stated.
   - Only write "Not mentioned in note" if there is truly NO staging or tumor information anywhere in the note.
 
   Respond *only* with a JSON object using this exact schema:
