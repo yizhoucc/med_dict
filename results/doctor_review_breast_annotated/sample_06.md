@@ -1,6 +1,7 @@
-# Sample 6 (coral_idx=New patient)
+# Sample 6
 
-**Cancer Type:** ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma
+**Patient Type:** New patient
+**Cancer Type:** ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma (IDC) grade 2
 **Stage:** Metastatic (Stage IV)
 
 ---
@@ -24,16 +25,16 @@
     "summary": "HR-negative HER2+ breast cancer; here to discuss systemic therapy and management."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma",
+    "Type_of_Cancer": "ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma (IDC) grade 2",
     "Stage_of_Cancer": "Metastatic (Stage IV)",
     "Distant Metastasis": "Yes, to bone (left iliac bone and bilateral sacral ala)",
-    "Metastasis": "Yes, to bone"
+    "Metastasis": "Yes, to bone (left iliac bone and bilateral sacral ala)"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: IDC G2, no LVI, ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%. Right axillary LN FNA: +metastatic breast adenocarcinoma. Imaging findings: Right breast core biopsy shows a 2.2 cm spiculated mass with adjacent architectural distortion and nodularity. Ultrasound shows a 1.6 cm mass at 10:00, another 1 cm mass, and a 0.5 cm adjacent mass. Right axillary LN FNA shows metastatic breast adenocarcinoma. Breast MRI shows multiple right breast masses, enlarged level 1 and level 2 axillary LNs, the largest level 1 node is 3.5 x 1.7 cm. PET CT shows a solitary small focus of hypermetabolism in the left ilium, right breast mass compatible with known primary breast cancer, multiple right axillary and subpectoral lymph nodes consistent with lymph node metastases, and a 3.4 x 2.6 cm hyperattenuating and mildly hypermetabolic lesion around the left carotid artery bifurcation. MRI Pelvis shows at least 3 rounded foci of signal abnormality and enhancement involving the left iliac bone and bilateral sacral ala, measuring up to 12 mm, suspicious for osseous metastatic disease. Physical exam findings: 7x5 cm mass in RUOQ, mobile, inverted right nipple, left breast without dominant mass, multiple right axillary nodes, largest 2.5 cm and mobile."
+    "findings": "Pathology results: IDC G2, no LVI, ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%. Imaging findings: Right breast core biopsy shows a 2.2 cm mass with adjacent architectural distortion and nodularity; ultrasound shows a 1.6 cm mass at 10:00, another 1 cm mass, and a 0.5 cm adjacent mass; suspicious right axillary node; right axillary LN FNA: +metastatic breast adenocarcinoma; Breast MRI shows multiple right breast masses, enlarged level 1 and level 2 axillary LNs; PET CT shows a solitary small focus of hypermetabolism in left ilium, right breast mass, multiple right axillary and subpectoral lymph nodes consistent with lymph node metastases, and a 3.4 x 2.6 cm hyperattenuating and mildly hypermetabolic lesion around the left carotid artery bifurcation; MRI Pelvis shows at least 3 rounded foci of signal abnormality and enhancement involving the left iliac bone and bilateral sacral ala, suspicious for osseous metastatic disease; MR Face/Neck shows an avidly enhancing left carotid bifurcation mass, suggestive of a carotid body paraganglioma. Physical exam findings: 7x5 cm mass in RUOQ, mobile, inverted right nipple, multiple right axillary nodes, largest 2.5 cm and mobile."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -49,10 +50,10 @@
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Chemotherapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
+    "medication_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
   },
   "Therapy_plan": {
-    "therapy_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
+    "therapy_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab. Consider radiation for bone lesions."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "We can radiate bone lesions as well."
@@ -70,7 +71,7 @@
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the given text"
+    "Next clinic visit": "Not specified in the provided note"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -94,11 +95,13 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consultation regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You have a type of breast cancer called invasive ductal carcinoma (cancer that started in the milk ducts). It is HR-negative and has a protein called HER2. The cancer has spread to your bones, which means it is now at stage IV.
+You have a type of breast cancer called invasive ductal carcinoma (IDC), which means the cancer started in the milk ducts. The cancer is HR-negative and HER2-positive, and it has spread to your bones.
 **What treatment or medication changes were made?**
-You will start chemotherapy with paclitaxel, trastuzumab, and pertuzumab. These medications are used to treat cancers with the HER2 protein. You will also take ondansetron to help with nausea.
+You will start new medications: weekly paclitaxel, trastuzumab every three weeks, and pertuzumab every three weeks. These medications are used to treat HER2-positive breast cancer.
 **What is the plan going forward?**
-You will have an MRI of your pelvis and neck to check for any changes in the cancer. You will also have an echocardiogram (a heart ultrasound) to monitor your heart function. A port will be placed to make it easier to give you the chemotherapy. You will have regular blood tests. If needed, you can also receive radiation treatment for the bone lesions.
+You will have an MRI of your pelvis and neck to check for any changes in your cancer. You will also have an echocardiogram (a heart ultrasound) to monitor your heart function. A port will be placed to make it easier to give you medications. You will also have some routine blood tests.
+You are referred to have chemotherapy teaching sessions to prepare you for your treatment.
+If needed, you can receive radiation therapy to treat the cancer in your bones.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

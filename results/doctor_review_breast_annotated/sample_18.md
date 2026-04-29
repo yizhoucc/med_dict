@@ -1,7 +1,8 @@
-# Sample 18 (coral_idx=New patient)
+# Sample 18
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR-/HER2- grade 2 invasive ductal carcinoma
-**Stage:** Stage IIA (inferred from pT2 N0)
+**Stage:** 
 
 ---
 
@@ -25,7 +26,7 @@ HPI:  ***** ***** is a 32 y.o. female here for a discussion of treatment options
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2- grade 2 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage IIA (inferred from pT2 N0)",
+    "Stage_of_Cancer": "",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -49,10 +50,10 @@ HPI:  ***** ***** is a 32 y.o. female here for a discussion of treatment options
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will receive at least five years of adjuvant hormonal therapy due to her estrogen receptor positive status. The patient will have a more thorough discussion regarding the choice of hormonal therapy after surgery. Potential options include tamoxifen, exemestane, and ovarian suppression."
+    "medication_plan": "The patient will receive at least five years of adjuvant hormonal therapy due to her estrogen receptor positive status. The specific hormonal therapy will be discussed after surgery, with potential options including tamoxifen, exemestane, and ovarian suppression. No specific agents or dosages were detailed beyond this general plan."
   },
   "Therapy_plan": {
-    "therapy_plan": "Chemotherapy will be considered based on nodal status at the time of surgery; if node negative, Taxotere and Cytoxan will be recommended, whereas if node positive, AC-Taxol will be recommended. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to tamoxifen in preventing distant recurrence. Exemestane plus ovarian suppression is preferred over tamoxifen plus ovarian suppression. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery."
+    "therapy_plan": "Chemotherapy will be considered based on nodal status at the time of surgery; if node negative, Taxotere and Cytoxan will be recommended, whereas if node positive, AC-Taxol will be recommended. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to tamoxifen in preventing distant recurrence. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -94,11 +95,13 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a second opinion regarding your newly diagnosed left breast cancer.
 **What's new or changed since your last visit?**
-You have been diagnosed with an early-stage (Stage I-II) estrogen receptor positive, progesterone receptor negative, and HER2 negative grade 2 invasive ductal carcinoma. The cancer measures 8mm and has a high risk score according to Mammaprint. Imaging shows a 2.5 cm mass in the left breast and some enlarged lymph nodes in the left armpit area. No cancer was found in the right breast.
+You have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is ER positive, PR negative, and does not have a protein called HER2. The cancer measures 8mm and is considered high risk based on a test called Mammaprint. Imaging shows a 2.5 cm mass in the left breast and some enlarged lymph nodes in the armpit area. No cancer was found in the right breast.
 **What treatment or medication changes were made?**
-Due to your estrogen receptor positive status, you will receive at least five years of adjuvant hormonal therapy. The specific type of hormonal therapy will be discussed after your surgery.
+No specific medications were changed during this visit.
 **What is the plan going forward?**
-You will proceed with a mastectomy to remove the breast. After surgery, you will have a detailed discussion about the choice of hormonal therapy. You are referred to radiation oncology for a consultation. Your next visit will be scheduled after your surgery.
+You will proceed with surgery to remove the breast (mastectomy). After surgery, you will start chemotherapy based on whether the cancer has spread to the lymph nodes. If the cancer has not spread to the lymph nodes, you will receive Taxotere and Cytoxan. If it has spread, you will receive a chemotherapy regimenaxol. You will also receive at least five years of adjuvant hormonal therapy because your cancer is ER positive. The specific type of hormonal therapy will be discussed after surgery.
+You are referred to radiation oncology for a consultation.
+A more thorough discussion regarding the choice of hormonal therapy will occur after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

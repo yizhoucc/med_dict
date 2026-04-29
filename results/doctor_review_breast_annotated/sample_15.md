@@ -1,7 +1,8 @@
-# Sample 15 (coral_idx=New patient)
+# Sample 15
 
-**Cancer Type:** ER+/PR+/HER2 equivocal invasive ductal carcinoma with metastatic recurrence (right cervical LN)
-**Stage:** Stage III
+**Patient Type:** New patient
+**Cancer Type:** ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary
+**Stage:** Metastatic (Stage IV)
 
 ---
 
@@ -24,10 +25,10 @@ ID: ***** ***** is a 33 y.o. premenopausal patient with a recent diagnosis of a 
     "summary": "33 y.o. premenopausal patient with a recent diagnosis of HR+ metastatic breast cancer involving lymph nodes, presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2 equivocal invasive ductal carcinoma with metastatic recurrence (right cervical LN)",
-    "Stage_of_Cancer": "Stage III",
-    "Distant Metastasis": "Not sure",
-    "Metastasis": "right cervical LN"
+    "Type_of_Cancer": "ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary",
+    "Stage_of_Cancer": "Metastatic (Stage IV)",
+    "Distant Metastasis": "Yes, to cervical lymph nodes and possibly to the right breast",
+    "Metastasis": "Yes, to cervical lymph nodes and possibly to the right breast"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -92,13 +93,13 @@ ID: ***** ***** is a 33 y.o. premenopausal patient with a recent diagnosis of a 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a consultation regarding your recent diagnosis of breast cancer and to discuss treatment options.
+You came in for a consultation regarding your recent diagnosis of metastatic breast cancer and to discuss treatment options.
 **What's new or changed since your last visit?**
-You have a type of breast cancer called invasive ductal carcinoma that has spread to your lymph nodes. The cancer tests positive for estrogen and progesterone receptors, and the results for a protein called HER2 are still pending. Imaging tests show that the cancer has spread to lymph nodes in your neck and armpit.
+You have a diagnosis of metastatic breast cancer (Stage IV) that has spread to your cervical lymph nodes and possibly to the right breast. The cancer started in gland cells and is positive for estrogen and progesterone receptors, with uncertain HER2 status.
 **What treatment or medication changes were made?**
-You will start treatment with antiestrogen therapy if the cancer does not have the protein called HER2. If it does have this protein, you will receive anti-HER2 therapy along with chemotherapy.
+You will start treatment with antiestrogen therapy if the cancer does not have the protein called HER2. If the cancer does have this protein, you will receive anti-HER2 therapy along with chemotherapy.
 **What is the plan going forward?**
-You will have a biopsy of the breast mass and a fine needle aspiration of the cervical lymph node. Genetic testing is also recommended. You will return to the clinic once these tests are completed.
+You will have a biopsy of the breast mass and a fine needle aspiration of the cervical lymph node to confirm the diagnosis. Genetic testing is also recommended. You will return to the clinic once these tests are completed.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

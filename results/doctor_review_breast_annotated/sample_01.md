@@ -1,7 +1,8 @@
-# Sample 1 (coral_idx=New patient)
+# Sample 1
 
-**Cancer Type:** ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc  3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma
-**Stage:** Stage IIB (pT2N1a (inferred from 3.6 cm tumor and 1 positive sentinel lymph node))
+**Patient Type:** New patient
+**Cancer Type:** ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma
+**Stage:** Stage IIB (pT2N1a)
 
 ---
 
@@ -24,8 +25,8 @@ ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of b
     "summary": "Postmenopausal patient with a recent diagnosis of Stage II (T2N1) triple negative breast cancer, who presents in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc  3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage IIB (pT2N1a (inferred from 3.6 cm tumor and 1 positive sentinel lymph node))",
+    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage IIB (pT2N1a)",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -92,9 +93,9 @@ ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of b
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a new consultation regarding your recent diagnosis of breast cancer.
+You came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.
 **What's new or changed since your last visit?**
-You have been diagnosed with an early-stage (Stage I-II) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or the protein called HER2. The cancer is a type that started in the milk ducts (ductal carcinoma) and is considered high grade (grade 3). The cancer measured 3.6 cm and was removed with a simple mastectomy. One of the lymph nodes checked also had cancer. No cancer was found in the skin or nipple. You have a history of heart problems and recently had trouble breathing, which was managed with medication.
+You have been diagnosed with an early-stage (Stage I-II) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or the protein HER2. The cancer is a type called invasive ductal carcinoma, which started in the milk ducts. The tumor is 3.6 cm in size and was removed with a simple mastectomy. The edges of the removed tissue are clean, but one of the lymph nodes under your arm had cancer. No cancer was found in the skin or nipple. Your blood tests show low hemoglobin and hematocrit levels, and slightly high glucose and creatinine levels.
 **What treatment or medication changes were made?**
 No specific medication changes were made during this visit.
 **What is the plan going forward?**

@@ -1,7 +1,8 @@
-# Sample 3 (coral_idx=New patient)
+# Sample 3
 
+**Patient Type:** New patient
 **Cancer Type:** ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma
-**Stage:** Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of disease)
+**Stage:** Locally advanced, multifocal
 
 ---
 
@@ -25,7 +26,7 @@
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma",
-    "Stage_of_Cancer": "Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of disease)",
+    "Stage_of_Cancer": "Locally advanced, multifocal",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -92,13 +93,13 @@
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a consultation regarding your newly diagnosed right-sided breast cancer.
+You came in for a new consultation regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You have a rare type of breast cancer called spindle cell metaplastic carcinoma. This cancer does not have proteins called ER, PR, or HER2, which means it doesn't respond to hormones or targeted treatments. The tumor is 3.5 x 3.2 x 2.6 cm in size and has two smaller masses nearby. Imaging shows the cancer is in your right breast but has not spread to other parts of your body.
+You have a rare type of breast cancer called spindle cell metaplastic carcinoma. The cancer does not have proteins called ER, PR, or HER2. The tumor is 3.5 x 3.2 x 2.6 cm and has two smaller masses nearby. Imaging shows a cancerous mass in your right breast, but no signs of the cancer spreading to other parts of your body. Your physical exam shows a mass in your right breast.
 **What treatment or medication changes were made?**
-You will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. You also have the option to join a clinical trial where you might receive an experimental agent along with paclitaxel.
+You will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you join the I-SPY 2 clinical trial, you may also receive an experimental agent along with paclitaxel. You have agreed to have a Medi-port placed for easier chemotherapy administration.
 **What is the plan going forward?**
-You will have a Medi-port placed to make chemotherapy easier. You will start chemotherapy in the first week of February. You will also have a genetic test to learn more about your cancer. Your labs will be checked again to monitor your kidney function and liver enzymes. You will have a follow-up visit after starting chemotherapy to see how you are responding to the treatment.
+You will start chemotherapy in the first week of February. You will have a follow-up after the initial chemotherapy session and further assessments based on how you respond to the treatment. You will also have genetic testing with a gene panel to learn more about your cancer. Your labs will be checked again to monitor your creatinine and Alk phos levels. Depending on your surgical choice and final pathology, you may need radiation therapy.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

@@ -1,5 +1,6 @@
-# Sample 8 (coral_idx=New patient)
+# Sample 8
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS
 **Stage:** Stage IIA (pT2(m)N1a)
 
@@ -33,7 +34,7 @@
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Patient has completed bilateral mastectomies with left axillary lymph node dissection. Pathology results show invasive ductal carcinoma, multifocal, SBR grade 2 and 1, largest focus 3.9 cm, margins negative; ductal carcinoma in situ, intermediate nuclear grade, metastatic carcinoma to two lymph nodes (2/2), 1.5 cm largest deposit, microcalcifications in association with ductal carcinoma in situ and benign ducts. Mammaprint is high-risk. No new imaging findings noted. Physical exam shows well-healing post-mastectomy scars with no erythema or fluctuance, and sensory changes (numbness) near left axilla and left elbow post-operatively."
+    "findings": "Patient has completed bilateral mastectomies with left axillary lymph node dissection. Pathology results show invasive ductal carcinoma, multifocal, SBR grade 2 and 1, largest focus 3.9 cm, margins negative; ductal carcinoma in situ, intermediate nuclear grade, metastatic carcinoma to two lymph nodes (2/2), 1.5 cm largest deposit, microcalcifications in association with ductal carcinoma in situ and benign ducts. No new imaging findings noted. Physical exam shows well-healing post-mastectomy scars with no erythema or fluctuance, and sensory changes (numbness) near left axilla and left elbow post-operatively."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -52,7 +53,7 @@
     "medication_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. Will need a baseline TTE prior to chemotherapy. Port placement ordered for IV access."
   },
   "Therapy_plan": {
-    "therapy_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. Patient will need a baseline TTE prior to chemotherapy. Pre-chemotherapy teaching requested."
+    "therapy_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. Patient will need a baseline TTE prior to chemotherapy due to the potential cardiotoxic side effects of an anthracycline. Pre-chemotherapy teaching requested."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consultation regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You recently had surgery to remove your breast cancer, which included removing both breasts and checking the lymph nodes under your left arm. The cancer was a type called invasive ductal carcinoma, which started in the milk ducts. The cancer was also found in two lymph nodes. The test called Mammaprint showed that you have a high risk of the cancer coming back. No new imaging findings were noted. Your physical exam showed that your surgical scars are healing well, and you have some numbness near your left armpit and elbow.
+You recently had surgery to remove your breast cancer, which included removing both breasts and checking the lymph nodes under your left arm. The cancer was a type that started in the milk ducts and was grade 2. The doctors found that the cancer had spread to two lymph nodes. No new imaging findings were noted. Your surgical wounds are healing well, and you have some numbness near your left armpit and elbow.
 **What treatment or medication changes were made?**
-You agreed to start chemotherapy with a combination of drugs called AC plus paclitaxel. You will need a heart ultrasound called a TTE before starting chemotherapy. A port will be placed for IV access.
+You agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin on October 18, 2017.
 **What is the plan going forward?**
-You are scheduled to start chemotherapy on October 18, 2017. You will have a heart ultrasound called a TTE before starting chemotherapy. You are referred to genetics for counseling and testing due to your family history of breast cancer.
+Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. A port will be placed for IV access. You are referred to genetics for counseling and testing due to your family history of breast cancer. Your next step is to start chemotherapy on October 18, 2017.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

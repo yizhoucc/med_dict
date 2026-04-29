@@ -1,7 +1,8 @@
-# Sample 7 (coral_idx=follow up)
+# Sample 7
 
+**Patient Type:** follow up
 **Cancer Type:** ER-/PR-/HER2- triple negative invasive ductal carcinoma
-**Stage:** Originally Stage IIB (cT2 cN1 cM0) -> ypT1c(m) ypN1a (1/22 LN positive), now metastatic (Stage IV)
+**Stage:** Originally Stage IIB, now metastatic (Stage IV)
 
 ---
 
@@ -25,9 +26,9 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
-    "Stage_of_Cancer": "Originally Stage IIB (cT2 cN1 cM0) -> ypT1c(m) ypN1a (1/22 LN positive), now metastatic (Stage IV)",
-    "Distant Metastasis": "Yes, to liver and nodes",
-    "Metastasis": "Yes, to liver and nodes"
+    "Stage_of_Cancer": "Originally Stage IIB, now metastatic (Stage IV)",
+    "Distant Metastasis": "Yes, to liver, nodes, and caudate lobe",
+    "Metastasis": "Yes, to liver, nodes, and caudate lobe"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -46,7 +47,7 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
     "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The hypoenhancing caudate lobe lesion has markedly increased in size since prior imaging. Additionally, a new hypoattenuating, hypermetabolic segment VII lesion is noted. The right pectoralis soft tissue mass with internal calcifications and the right subpectoral lymph node with hypermetabolic activity indicate disease progression. A lytic S1 vertebral body lesion is also present, further indicating progression of the disease."
+    "response_assessment": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The hypoenhancing caudate lobe lesion has markedly increased in size since prior imaging. Additional hypoattenuating, hypermetabolic segment VII lesion is noted. The right pectoralis soft tissue mass with internal calcifications (1.2 x 2.4 cm) and the right subpectoral lymph node (0.7 cm in short axis) both show increased hypermetabolic activity with SUV values of 4.6 and 4.8 respectively. A lytic S1 vertebral body lesion with a maximum SUV of 6.6 is also present. These findings suggest the cancer is progressing despite treatment with nab paclitaxel and pembrolizumab."
   },
   "Medication_Plan": {
     "medication_plan": "Continue abraxane every week (continuous) and Pembrolizumab every 3 weeks. Continue ativan and compazine prn. Rx prilosec 40mg qd. Rx mag oxide 400mg qhs. Continue MS Contin 15mg BID, oxycodone prn, flexeril, and ativan. Continue stool softener to prevent opioid-induced constipation."
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a follow-up visit regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-The imaging studies show that your cancer has progressed. Specifically, a lesion in your liver has grown larger, and there are new signs of cancer in your chest and spine.
+Imaging studies show that your cancer has progressed. Specifically, a lesion in your liver has grown larger, and there are new areas of cancer activity in other parts of your body.
 **What treatment or medication changes were made?**
-You will continue taking abraxane and pembrolizumab. You will also restart xarelto, which was stopped temporarily for a port placement. You will take prilosec for acid reflux and magnesium oxide for muscle aches.
+You will continue taking abraxane and pembrolizumab. You will also restart xarelto, a blood thinner, after your port placement. You will take medications to manage nausea, pain, and to prevent constipation.
 **What is the plan going forward?**
-You will have a port placed soon to make it easier to receive treatments. You will have a PET/CT scan to monitor your cancer. Your TSH levels will be checked. You will continue your current medications, including MS Contin and oxycodone for pain. You will have a follow-up visit in 2 weeks, then every 3 weeks.
+You will have a port placed soon to make it easier to receive your treatments. You will have a PET/CT scan to monitor your cancer. Your TSH levels will be checked. You will return to the clinic in 2 weeks, then every 3 weeks.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

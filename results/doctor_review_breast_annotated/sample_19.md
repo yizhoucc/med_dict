@@ -1,6 +1,7 @@
-# Sample 19 (coral_idx=Follow up)
+# Sample 19
 
-**Cancer Type:** ER+/PR-/HER2- invasive ductal carcinoma (IDC) with extensive DCIS
+**Patient Type:** Follow up
+**Cancer Type:** ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with DCIS component
 **Stage:** Clinical stage 2-3
 
 ---
@@ -24,7 +25,7 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
     "summary": "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast s/p NAHT, s/p bilateral mastectomies, s/p adjuvant tamoxifen [REDACTED]/[REDACTED]-[REDACTED]/[REDACTED], currently on exemestane for ongoing management."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma (IDC) with extensive DCIS",
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with DCIS component",
     "Stage_of_Cancer": "Clinical stage 2-3",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -61,7 +62,7 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "DEXA scan now and every 2 years. No mention of annual mammogram in the plan."
+    "imaging_plan": "DEXA scan now and every 2 years. No imaging given bilateral mastectomies."
   },
   "Lab_Plan": {
     "lab_plan": "Check estradiol level to ensure ovarian suppression, if suppressed can check q3months."
@@ -102,9 +103,8 @@ You will also continue taking ondansetron (a medication to prevent nausea) and o
 **What is the plan going forward?**
 You will continue taking exemestane.
 You will have a DEXA scan now and every 2 years to check for bone density issues.
-You will check your estradiol level to ensure ovarian suppression, and if suppressed, you can check every 3 months.
-You are considering bilateral surgery to remove the ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression and aromatase inhibitor (AI) therapy.
-You will have 6-monthly exams, and no imaging is needed given the bilateral mastectomies.
+You will check your estradiol level to ensure ovarian suppression. If suppressed, you can check every 3 months.
+You will continue having 6-monthly exams, with no imaging needed due to previous bilateral mastectomies.
 You are referred to local psychology for ongoing support as needed.
 You will have your next visit in 6 months or sooner if you have new or worsening symptoms.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.

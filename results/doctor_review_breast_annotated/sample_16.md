@@ -1,5 +1,6 @@
-# Sample 16 (coral_idx=New patient)
+# Sample 16
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- grade 2-3 invasive lobular carcinoma
 **Stage:** Clinical stage III
 
@@ -33,7 +34,7 @@
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. MRI of bilateral breasts revealed a large abnormality in the left breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm. PET/CT scan showed a hypermetabolic enhancing left breast mass with associated left axillary and left subpectoral nodes. The enhancing lesion in the left breast measured 3.8 x 1.3 cm with a low SUV of 1.9. Left axillary and subpectoral nodes were subcentimeter, with the largest left axillary node measuring 0.6 cm and the largest subpectoral node measuring 0.7 cm. Ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node with abnormal morphology, thickened cortex, and a fine needle aspiration was performed. Physical exam shows a 5 x 5.5 cm mass in the left breast extending under the nipple, originating at 12 o'clock, and a 1 cm palpable left axillary lymph node."
+    "findings": "Pathology results show invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. MRI of bilateral breasts revealed a large abnormality in the left breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm. PET/CT scan showed a hypermetabolic enhancing left breast mass with associated left axillary and left subpectoral nodes. The enhancing lesion in the left breast measured  3.8 x 1.3 cm with a low SUV of 1.9. Ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node with abnormal morphology, thickened cortex, and a fine needle aspiration was performed. Physical exam shows a 5 x 5.5 cm mass in the left breast extending under the nipple, originating at 12 o'clock, and a 1 cm palpable left axillary lymph node. Thyroid nodule was found to be benign."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -49,7 +50,7 @@
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Future adjuvant treatment options will be discussed after surgery."
+    "medication_plan": "Future adjuvant treatment options will be discussed after her surgery."
   },
   "Therapy_plan": {
     "therapy_plan": "[REDACTED] will pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach. After surgery, adjuvant treatment options will be discussed based on the pathology results."
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consult regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You were diagnosed with a clinical stage III lobular carcinoma (cancer that started in the milk-producing glands) of the left breast. The cancer measures at least 1.5 cm and is ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. Imaging tests showed a large abnormality in the left breast and some small lymph nodes in the armpit area.
+You were diagnosed with a type of cancer called invasive lobular carcinoma (cancer that started in the milk-producing glands). The cancer is ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. Imaging tests showed a large abnormality in your left breast and some enlarged lymph nodes. A fine needle aspiration of a lymph node was done and is pending.
 **What treatment or medication changes were made?**
 No changes were made to your current medications.
 **What is the plan going forward?**
-You are scheduled to have a mastectomy (surgery to remove the breast) to treat the cancer. After surgery, you will have a CT scan and an ultrasound to monitor your condition. You will also have a follow-up visit after surgery to discuss further treatment options.
+You are scheduled to have a mastectomy (surgery to remove the breast). After your surgery, you will have a CT scan and an ultrasound. You will also have a follow-up visit after surgery to discuss further treatment options.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

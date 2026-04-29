@@ -1,5 +1,6 @@
-# Sample 11 (coral_idx=New patient)
+# Sample 11
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+ ductal carcinoma in situ (DCIS) with intermediate nuclear grade, solid and cribriform patterns, HER2: not tested
 **Stage:** pTisNx
 

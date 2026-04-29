@@ -1,5 +1,6 @@
-# Sample 5 (coral_idx=New patient)
+# Sample 5
 
+**Patient Type:** New patient
 **Cancer Type:** Left breast: ER+/PR+/HER2- grade 3 invasive ductal carcinoma with suspicion for LVI and focal high-grade DCIS component; Right breast: ER+/PR+/HER2- grade 1 invasive ductal carcinoma with intermediate nuclear grade DCIS
 **Stage:** Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)
 
@@ -33,7 +34,7 @@ ID: ***** ***** is a 55 y.o. ***** with a recent diagnosis of early stage breast
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses. Multiple prominent low-level left axillary lymph nodes with thickened cortex, asymmetric compared to right. Physical exam findings: No palpable masses bilaterally, no lymphadenopathy."
+    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI shows right - irregular homogeneously enhancing mass (2.3 x 1.4 x 1.1 cm) corresponding to right breast index mass (at 8:00 position, 13 cm from nipple); left - irregular homogeneously enhancing mass (2.2 x 3.3 x 2.6 cm) corresponding to left breast index mass (at 2:00 position, 10 cm from nipple); multiple prominent low-level 1 left axillary LN with thickened cortex, asymmetric compared to right. Physical exam findings: No palpable masses bilaterally, no lymphadenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -92,13 +93,13 @@ ID: ***** ***** is a 55 y.o. ***** with a recent diagnosis of early stage breast
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a consultation to discuss treatment options for your recent diagnosis of breast cancer.
+You came in for a consultation to discuss treatment options for your recent diagnosis of bilateral breast cancer.
 **What's new or changed since your last visit?**
-You were diagnosed with two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more advanced and aggressive, while the right breast cancer is less serious. Both cancers are sensitive to hormones and do not have a protein called HER2.
+You were diagnosed with two types of breast cancer: a more aggressive type in your left breast and a less aggressive type in your right breast. The left breast cancer is a grade 3 invasive ductal carcinoma (cancer that started in the milk ducts) with some features suggesting it might have spread slightly beyond the original tumor. The right breast cancer is a grade 1 invasive ductal carcinoma with some abnormal cells around the milk ducts. Both cancers are sensitive to hormones and do not have a protein called HER2.
 **What treatment or medication changes were made?**
-You will start a treatment plan that includes chemotherapy with docetaxel and cyclophosphamide for four cycles. You will also take an aromatase inhibitor (AI) for at least five years to block the production of estrogen in your body. Additionally, you will take calcium and vitamin D supplements to maintain your bone health.
+You will start a treatment plan that includes chemotherapy with docetaxel and cyclophosphamide for four cycles. This is to help reduce the chance of the cancer coming back. You will also take an aromatase inhibitor (a medication that blocks the production of estrogen) for at least five years to further reduce the risk of the cancer returning. Additionally, you will take calcium and vitamin D supplements to help maintain your bone health.
 **What is the plan going forward?**
-You will undergo radiation therapy. You will also continue taking an aromatase inhibitor for at least five years. You will have a DEXA scan to check your bone health. Your tumor will be tested with Oncotype DX RS to help guide further treatment decisions.
+You will undergo radiation therapy to treat the areas where the cancer was removed. You will also continue taking an aromatase inhibitor for at least five years. A DEXA scan (a test to measure bone density) will be done to check your current bone health. Your tumor will be tested using a tool called Oncotype DX RS to help guide your treatment decisions.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

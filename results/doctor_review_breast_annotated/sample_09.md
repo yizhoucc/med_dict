@@ -1,7 +1,8 @@
-# Sample 9 (coral_idx=New patient)
+# Sample 9
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence
-**Stage:** Originally Stage III (T3N2), now Stage III
+**Stage:** Originally Stage III (T3N2), now metastatic (Stage IV)
 
 ---
 
@@ -21,19 +22,19 @@ ID: ***** ***** is a 31 y.o. premenopausal female patient with a history of a St
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Premenopausal female patient with a history of a Stage III HR+/HER2- IDC of the left breast, now with biopsy-proven recurrence, presenting in consultation to discuss treatment options and to establish care."
+    "summary": "31 y.o. premenopausal female patient with a history of a Stage III HR+/HER2- IDC of the left breast, now with biopsy proven recurrence, presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence",
-    "Stage_of_Cancer": "Originally Stage III (T3N2), now Stage III",
-    "Distant Metastasis": "Not sure",
-    "Metastasis": "Not sure"
+    "Stage_of_Cancer": "Originally Stage III (T3N2), now metastatic (Stage IV)",
+    "Distant Metastasis": "Yes, to left cervical lymph node and left breast subcutaneous mass",
+    "Metastasis": "Yes, to left cervical lymph node and left breast subcutaneous mass"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Left breast subcutaneous mass (3.1 x 1.8 x 3.0 cm) with a satellite mass (1.2 x 0.9 x 0.9 cm) at 1:00 position, 7 cm from nipple, involving overlying skin. Biopsy of mass at 2:00 position of left breast: grade 2 IDC ER+(>95%), PR+(>95%), HER2- (IHC 1+), Ki-67 30%-40%. PET/CT shows left breast subcutaneous mass (2.1 x 3.2 cm SUV 8.4), left axillary node (1.3 x 1.4 cm SUV 6.0), left level 5B LN conglomerate (1.8 x 2.5 cm SUV 9.23), left internal mammary LN (1.2 x 2.0 cm SUV 6.8). Left axillary, left supraclavicular, left level VB, and left internal mammary hypermetabolic LNs are suspicious for metastatic disease. Hypermetabolic subcutaneous masses overlying the left breast. Physical exam reveals a 6.5 x 5 cm mass in left upper outer quadrant at 2:00 position, 7 cm from center of nipple; 3.5 x 3.5 cm mass in left lateral anterior neck. Discoloration of skin on left breast. No cervical, supraclavicular, or axillary lymphadenopathy noted."
+    "findings": "Left breast subcutaneous mass (2.1 x 3.2 cm SUV 8.4) and left axillary node (1.3 x 1.4 cm SUV 6.0) with hypermetabolic left level 5B LN conglomerate (1.8 x 2.5 cm SUV 9.23) and left internal mammary LN (1.2 x 2.0 cm SUV 6.8) noted on PET/CT. Hypermetabolic subcutaneous masses overlying the left breast. Palpable 6.5 x 5 cm mass in left upper outer quadrant and 3.5 x 3.5 cm mass in left lateral anterior neck. Discoloration of skin on left breast. No cervical, supraclavicular, or axillary lymphadenopathy noted on physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -46,7 +47,7 @@ ID: ***** ***** is a 31 y.o. premenopausal female patient with a history of a St
     "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "The patient is not yet on treatment — no response to assess."
+    "response_assessment": "The patient has a locally advanced, unresectable recurrence of HR+/HER2- grade 2 IDC with micropapillary features. The current disease status is based on PET/CT imaging performed on 01/27/19, which demonstrates a left breast subcutaneous mass (2.1 x 3.2 cm SUV  8.4) and left axillary node (1.3 x 1.4 cm SUV  6.0). Additionally, there is a hypermetabolic left level 5B LN conglomerate (1.8 x 2.5 cm SUV  9.23) and left internal mammary LN (1.2 x 2.0 cm SUV  6.8). The palpable mass in the left upper outer quadrant (6.5 x 5 cm) and the left lateral anterior neck (3.5 x 3.5 cm) indicate ongoing disease activity. There is no evidence of response to treatment as the patient is not currently on any active cancer treatment."
   },
   "Medication_Plan": {
     "medication_plan": "plan to start goserelin, followed by an aromatase inhibitor (AI)."
@@ -92,13 +93,13 @@ ID: ***** ***** is a 31 y.o. premenopausal female patient with a history of a St
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a new consultation regarding your breast cancer treatment.
+You came in for a consultation to discuss treatment options for your breast cancer and to establish care.
 **What's new or changed since your last visit?**
-You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has recurred and may have spread to other parts of your body. A biopsy showed that the cancer is still present in your left breast. Imaging tests suggest that the cancer might have spread to some lymph nodes. During your physical exam, a mass was found in your left breast and another in your neck. There is also some discoloration of the skin on your left breast.
+You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has now spread to your left breast and left cervical lymph node, making it a stage IV cancer. Imaging showed a mass in your left breast and lymph nodes with increased metabolic activity. You also have a palpable mass in your left breast and another in your left neck. There is discoloration of the skin on your left breast.
 **What treatment or medication changes were made?**
-You are planning to start a medication called goserelin, which stops the ovaries from making hormones. This will be followed by an aromatase inhibitor (AI), which blocks the production of estrogen in the body.
+You will start on goserelin, which suppresses the ovaries, followed by an aromatase inhibitor (AI). These medications help control hormone levels that can fuel the growth of certain types of breast cancer.
 **What is the plan going forward?**
-You will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will start goserelin and then begin an aromatase inhibitor. Your next visit to the clinic will be two weeks after you start goserelin.
+You will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will return to the clinic two weeks after starting goserelin.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

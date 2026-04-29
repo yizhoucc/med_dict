@@ -1,7 +1,8 @@
-# Sample 13 (coral_idx=New patient)
+# Sample 13
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- invasive ductal carcinoma
-**Stage:** Stage IIIB (inferred from 2.2 cm tumor with positive axillary lymph nodes and suspicious additional ductal disease)
+**Stage:** Stage III
 
 ---
 
@@ -25,15 +26,15 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage IIIB (inferred from 2.2 cm tumor with positive axillary lymph nodes and suspicious additional ductal disease)",
+    "Stage_of_Cancer": "Stage III",
     "Distant Metastasis": "No",
-    "Metastasis": "No"
+    "Metastasis": "Yes, to right axillary lymph node"
   },
   "Lab_Results": {
     "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 93 mg/dL"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%. MRI of the breast reveals a dominant 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion and findings suspicious for additional ductal disease and disease within the nipple. Prominent right axillary lymph nodes are noted. PET/CT shows a hypermetabolic right breast mass (2.1 x 1.6 cm) and an enlarged right axillary lymph node (2.8 cm). Other subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are present. A hyperdense 0.7 cm falx lesion is noted, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes."
+    "findings": "Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%. Imaging findings include a 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion, suspicious additional ductal disease, and disease within the nipple. MRI and PET/CT reveal a hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are noted. A hyperdense 0.7 cm falx lesion is present, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -49,10 +50,10 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Patient will start hormonal therapy after radiation. Supportive medications include scalp cooling with Dignicap or Penguin Cold Cap to preserve hair during chemotherapy. Consideration of CDK 4/6 inhibitors such as PALLAS and JPBE for clinical trial participation."
+    "medication_plan": "Patient will start hormonal therapy after radiation. Supportive medications include scalp cooling with Dignicap or Penguin Cold Cap to preserve hair during chemotherapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "Patient will start adjuvant chemotherapy and hormonal therapy after surgery. Hormonal therapy will begin after radiation. Discussed potential use of Mammaprint to guide chemotherapy decisions. Consideration of CDK 4/6 inhibitors in clinical trials. Scalp cooling with Dignicap or Penguin Cold Cap will be used during chemotherapy."
+    "therapy_plan": "Adjuvant chemotherapy and hormonal therapy are likely needed due to young age and lymph node involvement. Final decision about chemotherapy will be made after surgery. Hormonal therapy will start after radiation. Discussed participation in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -67,7 +68,7 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
     "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Mammaprint to be performed after surgery."
+    "genetic_testing_plan": "Mammaprint to be obtained after surgery."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "in-person: after surgery"
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consultation regarding your recently diagnosed breast cancer.
 **What's new or changed since your last visit?**
-You have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer is in the upper central part of your right breast and has spread to some lymph nodes under your arm. Imaging tests show a main tumor in your breast and some smaller areas that might also have cancer. A test of the lymph nodes confirmed that the cancer had spread there. The goal of your treatment is to cure the cancer.
+You have a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your right armpit but has not spread to other parts of your body. Imaging tests show a tumor in your right breast and enlarged lymph nodes. A biopsy of the lymph node confirmed that the cancer had spread there.
 **What treatment or medication changes were made?**
-You will start hormonal therapy after your surgery. To help preserve your hair during chemotherapy, you will use a scalp cooling cap. We also talked about the possibility of joining clinical trials for new treatments.
+You will start hormonal therapy after radiation. To help preserve your hair during chemotherapy, you will use scalp cooling with a Dignicap or Penguin Cold Cap.
 **What is the plan going forward?**
-You are scheduled to have surgery on November 5th. After surgery, you will have a test called Mammaprint to learn more about your cancer. You will also have an MRI of your brain to check for any other signs of cancer. Your next visit will be after your surgery.
+You are scheduled to undergo surgery on November 5th. After surgery, you will have a test called Mammaprint to help decide the best treatment plan. You will start hormonal therapy after radiation. We also discussed the possibility of participating in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE. You are referred to have a brain MRI. Your next visit will be after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

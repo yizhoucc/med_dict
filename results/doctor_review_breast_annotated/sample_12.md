@@ -1,7 +1,8 @@
-# Sample 12 (coral_idx=New patient)
+# Sample 12
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features
-**Stage:** Stage II (inferred from pT2 N0)
+**Stage:** Clinical stage II
 
 ---
 
@@ -25,7 +26,7 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features",
-    "Stage_of_Cancer": "Stage II (inferred from pT2 N0)",
+    "Stage_of_Cancer": "Clinical stage II",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -33,7 +34,7 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%. Imaging findings: Right breast MRI shows an irregularly shaped mass (2.2 x 2.3 x 2.0 cm) with spiculated margins in the lower outer quadrant and an irregular enhancing mass (1.5 x 1.2 x 1.8 cm) in the same region. PET/CT shows no evidence of metastatic disease but reveals  2 hypermetabolic enhancing nodules within the right breast. Physical exam findings: Right breast with a palpable mass (3 x 4 cm) in the lower outer quadrant; no palpable masses in the left breast; no lymphadenopathy noted."
+    "findings": "Pathology results: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%. Imaging findings: Right breast ultrasound shows an irregular solid mass (2.4 x 1.5 x 1.5 cm) with spiculated margins in lower outer right breast at  7:00 position, 5 cm from nipple, and a second smaller irregular solid mass (1.0 x 1.0 x 0.7 cm) with spiculated margins in lower outer right breast at 8:00 position, 5 cm from nipple. Breast MRI reveals an irregularly shaped mass (2.2 x 2.3 x 2.0 cm) with spiculated margins in lower outer right breast corresponding to the 7:00 position mass on ultrasound and a second irregular enhancing mass (1.5 x 1.2 x 1.8 cm) slightly superior and lateral to the biopsy-proven carcinoma. PET/CT shows no evidence of metastatic disease, with 2 hypermetabolic enhancing nodules within the right breast. Physical exam findings: Right breast with a palpable mass (3 x 4 cm) in the lower outer quadrant; no palpable masses in the left breast; no lymphadenopathy noted."
   },
   "Current_Medications": {
     "current_meds": "tc"
@@ -52,7 +53,7 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
     "medication_plan": "The patient will start neoadjuvant chemotherapy with AC/T (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles)."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, specifically AC/T (4 cycles of doxorubicin plus cyclophosphamide every 2 weeks followed by 12 cycles of weekly paclitaxel). The plan is to start chemotherapy ideally in the first week of March (March 19 or March 20)."
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, specifically AC/T (4 cycles of doxorubicin plus cyclophosphamide every 2 weeks followed by 12 cycles of weekly paclitaxel). Hormonal therapy and possibly radiation will follow surgery. The plan is to start chemotherapy ideally in the first week of March (March 19 or March 20)."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -92,13 +93,13 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
 **Why did you come to the clinic?**
-You came in for a consultation to discuss treatment options for your recently diagnosed early stage breast cancer.
+You came in for a consultation to discuss treatment options for your recently diagnosed breast cancer.
 **What's new or changed since your last visit?**
-You were diagnosed with an early stage (Stage I-II) breast cancer that started in the milk-producing glands and milk ducts (mixed ductal and lobular features). The cancer is hormone receptor positive (ER+ and PR+) and does not have a protein called HER2. Imaging showed a mass in your right breast, but no signs of the cancer spreading to other parts of your body.
+You were diagnosed with an early stage breast cancer. The cancer is a type that started in the milk-producing glands and milk ducts (mixed ductal and lobular features). It measures 1.2 cm and is grade 2. The cancer is sensitive to estrogen and progesterone (ER+ and PR+) but does not have a protein called HER2. Imaging shows two small masses in your right breast, but there is no evidence of the cancer spreading to other parts of your body.
 **What treatment or medication changes were made?**
 You will start neoadjuvant chemotherapy with a chemotherapy regimen (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles).
 **What is the plan going forward?**
-Before starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have a port placed to make it easier to receive chemotherapy. You are scheduled to return to the clinic in 2 weeks for a follow-up visit.
+Before starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have a port placed to make it easier to receive chemotherapy. You will return to clinic in 2 weeks for a follow-up visit.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
 Sincerely, Your Care Team

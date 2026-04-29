@@ -1,7 +1,8 @@
-# Sample 4 (coral_idx=New patient)
+# Sample 4
 
+**Patient Type:** New patient
 **Cancer Type:** ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma
-**Stage:** Stage I (inferred from tumor ≤2cm)
+**Stage:** Stage III
 
 ---
 
@@ -25,9 +26,9 @@ ID: 71 year old female    CC:  HR low, HER2 negative cancer of the right breast 
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage I (inferred from tumor ≤2cm)",
-    "Distant Metastasis": "No",
-    "Metastasis": "No"
+    "Stage_of_Cancer": "Stage III",
+    "Distant Metastasis": "",
+    "Metastasis": ""
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -43,10 +44,10 @@ ID: 71 year old female    CC:  HR low, HER2 negative cancer of the right breast 
     "supportive_meds": ""
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "curative"
+    "goals_of_treatment": "palliative"
   },
   "Response_Assessment": {
-    "response_assessment": "Latest PETCT demonstrates growth of right breast lesion from 1.2 x 0.7 cm to 2.7 x 1.7 cm (SUV Max 10.5 for largest component) compatible with recurrent disease. No evidence of hypermetabolic metastatic disease. Right breast mammography shows two masses, both biopsy-proven IDC, with the irregular mass containing the ribbon clip now measuring approximately 14 mm and the more posterior obscured mass containing the heart clip now measuring approximately 15 mm. No sonographic abnormality to the patient-palpated lump in the lower central/slightly outer right breast. Right axillary lymph nodes appear sonographically normal."
+    "response_assessment": "Latest PETCT demonstrates growth of right breast lesion from 1.2 x 0.7 cm to 2.7 x 1.7 cm (SUV Max 10.5 for largest component) compatible with recurrent disease. No evidence of hypermetabolic metastatic disease. Physical exam reveals a firm palpable nodule felt at 11 o'clock between axilla and areola in the right breast. Right breast mammography shows two masses, both biopsy-proven IDC, with the irregular mass containing the ribbon clip now measuring approximately  14 mm and the more posterior obscured mass containing the heart clip now measuring approximately 15 mm. No sonographic abnormality to the patient-palpated lump in the lower central/slightly outer right breast. Right axillary lymph nodes appear sonographically normal."
   },
   "Medication_Plan": {
     "medication_plan": "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new patient visit regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive ductal carcinoma, which means the cancer started in the milk ducts and does not have proteins called estrogen, progesterone, or HER2. The cancer in your right breast has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No cancer has spread to other parts of your body.
+You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive ductal carcinoma, which means the cancer started in the milk ducts and does not have proteins that respond to hormones. The cancer is at stage III. The latest imaging shows that a lump in your right breast has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No cancer has spread to other parts of your body. During the physical exam, a firm lump was found in your right breast.
 **What treatment or medication changes were made?**
-A port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol weekly for 12 weeks.
+A port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which will happen every week for 12 weeks.
 **What is the plan going forward?**
-You will have a mammogram to check the cancer. You will need clinic visits for cycles 1, 2, 5, 8, and 12 of your treatment.
+You will have a port placed soon to prepare for chemotherapy. You will start chemotherapy with Taxol as early as next Wednesday or the following week. You will need to visit the clinic for cycles 1, 2, 5, 8, and 12. You will have a mammogram to check the progress of your treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

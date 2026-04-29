@@ -1,6 +1,6 @@
 # Auto Review: results.txt
 
-Generated: 2026-04-29 14:37
+Generated: 2026-04-29 15:55
 Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 ## Summary
@@ -8,49 +8,49 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 - **Samples**: 20
 - **Clean**: 0/20
 - **P0** (hallucination): 0
-- **P1** (major error): 4
-- **P2** (minor issue): 143
+- **P1** (major error): 6
+- **P2** (minor issue): 141
 
 ### Critical Issues
 
-- **ROW 1** [P1]: Inaccurate staging information. The patient has a Stage IIB (pT2N1a) triple negative breast cancer, not an early-stage (Stage I-II).
+- **ROW 1** [P1]: The stage is inaccurate. The patient has Stage IIB (pT2N1a) triple negative breast cancer, not early-stage (Stage I-II).
 - **ROW 12** [P1]: Incorrectly listed 'tc' as current medication when the patient is not currently on any cancer-related medications.
-- **ROW 16** [P1]: The phrase 'cancer that started in the milk-producing glands' is inaccurate. Lobular carcinoma starts in the lobules, not the milk-producing glands.
-- **ROW 17** [P1]: The note does not mention any current cancer-related medications, but the extracted data incorrectly lists 'ac'.
+- **ROW 16** [P1]: The description 'cancer that started in the milk-producing glands' is not accurate for invasive lobular carcinoma.
+- **ROW 17** [P1]: The note does not mention any current cancer-related medications, but the extracted data incorrectly states 'ac'.
+- **ROW 17** [P1]: The note mentions uncertainty about the type of genetic testing done, but the extracted data incorrectly states 'brca'.
+- **ROW 18** [P1]: The letter does not specify the exact type of breast cancer, which is important for a new patient.
 
 ---
 
 ## ROW 1 — ⚠️ ISSUES
 
-**Type**: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc  3.0 and Cen17 
-**Stage**: Stage IIB (pT2N1a (inferred from 3.6 cm tumor and 1 positive sentinel lymph node
+**Type**: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 s
+**Stage**: Stage IIB (pT2N1a)
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage is inferred from the tumor size and lymph node status, but the note explicitly states 'Stage II (T2N1)', so using 'Stage IIB (pT2N1a)' may be slightly imprecise. | 81 y.o. postmenopausal patient with multiple medical comorbidities, including heart failure with LVE |
-| P2 | Current_Medications.current_meds | The field is empty, but the note mentions no cancer-related medications, so this is technically correct but could be clearer. | No specific medications or future medication plans were detailed in the note. |
-| P2 | Treatment_Changes.recent_changes | The field is empty, but the note mentions no recent treatment changes, so this is technically correct but could be clearer. | No specific medications or future medication plans were detailed in the note. |
-| P2 | Treatment_Changes.supportive_meds | The field is empty, but the note mentions no supportive medications related to cancer treatment, so this is technically correct but could be clearer. | No specific medications or future medication plans were detailed in the note. |
+| P2 | Current_Medications | The field is empty, but the note mentions no cancer-related medications. | No specific medications or future medication plans were detailed in the note. |
+| P2 | Treatment_Changes | The field is empty, but the note mentions no recent treatment changes or supportive medications. | No specific medications or future medication plans were detailed in the note. |
+| P2 | Treatment_Goals | The goal is listed as 'curative', but the note suggests uncertainty and a need for further evaluation before making final treatment recommendations. | We discussed the likelihood of recurrence which is quite difficult to assess, but certainly notable  |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the precision of the cancer stage and clarity around the absence of cancer-related medications and treatment changes.
+*Extraction summary*: Most fields are clean, but there are minor issues with treatment goals and the absence of cancer-related medications.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P1 | Inaccurate staging information. The patient has a Stage IIB (pT2N1a) triple negative breast cancer, not an early-stage (Stage I-II). | You have been diagnosed with an early-stage (Stage I-II) triple negative breast  |
-| P2 | Unnecessary explanation of 'ductal carcinoma'. | The cancer is a type that started in the milk ducts (ductal carcinoma) and is co |
-| P2 | Minor readability issue. It could be clearer. | No cancer was found in the skin or nipple. |
+| P1 | The stage is inaccurate. The patient has Stage IIB (pT2N1a) triple negative breast cancer, not early-stage (Stage I-II). | You have been diagnosed with an early-stage (Stage I-II) triple negative breast  |
+| P2 | The sentence is overly simplified and omits important information about the patient's medical conditions such as congestive heart failure and diabetes. | Your blood tests show low hemoglobin and hematocrit levels, and slightly high gl |
 
-*Letter summary*: The letter contains inaccurate staging information and minor readability issues.
+*Letter summary*: The letter contains inaccuracies regarding the stage of cancer and lacks important context about the patient's medical conditions.
 
 ---
 
 ## ROW 2 — ⚠️ ISSUES
 
-**Type**: ER+/PR- invasive ductal carcinoma, HER2: not tested
+**Type**: ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma
 **Stage**: Originally Stage IIA, now metastatic (Stage IV)
 
 ### Extraction
@@ -58,53 +58,54 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
 | P2 | Reason_for_Visit.summary | The summary does not mention the patient's initial treatment history and the discussion about potential treatment options. | The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive b |
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage is incorrectly stated as 'Originally Stage IIA, now metastatic (Stage IV)', whereas the note suggests the cancer is locally recurrent and unresectable, not necessarily metastatic. | This patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive  |
-| P2 | Cancer_Diagnosis.Distant_Metastasis | The distant metastasis is incorrectly stated as 'Yes, to the right parasternal chest wall and liver', whereas the note indicates that the liver lesion is a cyst and there is no evidence of metastasis in the brain or bone. | Her abdomen shows a small, well-demarcated, low-attenuation lesion in the liver consistent with cyst |
-| P2 | Treatment_Changes.recent_changes | The recent changes state 'Started on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor.' The note mentions starting zoledronic acid but does not specify the exact reason. | On my visit with her on January 09, I started her on zoledronic acid because of her osteoporosis and |
-| P2 | Treatment_Goals.goals_of_treatment | The goal is stated as 'palliative', whereas the note suggests a more complex treatment plan involving hormone therapy and possibly surgery and radiation. | Based on all of this information, it appears that the patient has a local regional recurrence of a s |
-| P2 | radiotherapy_plan.radiotherapy_plan | The radiotherapy plan is speculative and not clearly stated in the note. | Given the limited radiation field that she initially had, I think it would be possible to shrink the |
+| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage is incorrectly stated as 'Originally Stage IIA, now metastatic (Stage IV)', whereas the note does not specify the original stage as IIA. | This patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive  |
+| P2 | Cancer_Diagnosis.Distant_Metastasis | The distant metastasis is incorrectly stated as 'Yes, to the liver and chest wall', whereas the note mentions only the chest wall involvement and a small cyst in the liver. | Her abdomen shows a small, well-demarcated, low-attenuation lesion in the liver consistent with cyst |
+| P2 | Treatment_Changes.recent_changes | The recent changes state 'Started on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor.' The note specifies that the patient was started on zoledronic acid on January 9. | On my visit with her on January 09, I started her on zoledronic acid because of her osteoporosis and |
+| P2 | Treatment_Goals.goals_of_treatment | The goal is stated as 'palliative', whereas the note suggests a more complex treatment plan aiming for long-term disease control. | I think it would be most appropriate to treat this disease with hormone therapy and follow it closel |
+| P2 | Response_Assessment.response_assessment | The response assessment states 'The patient is not yet on treatment — no response to assess.', whereas the note mentions starting zoledronic acid on January 9. | On my visit with her on January 09, I started her on zoledronic acid because of her osteoporosis and |
+| P2 | Medication_Plan.medication_plan | The medication plan states 'Will start aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25.; also: zoledronic'. The note specifies 'on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab'. | She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on C |
+| P2 | radiotherapy_plan.radiotherapy_plan | The radiotherapy plan states 'Given the limited radiation field that she initially had, it would be possible to radiate this area in order to approach the possibility of long-term disease control.' The note suggests this as a future possibility, not a current plan. | Given the limited radiation field that she initially had, I think it would be possible to shrink the |
 
-*Extraction summary*: Several fields contain minor inaccuracies or lack specific details from the note. Overall, the majority of the fields are clean.
+*Extraction summary*: Several fields contain minor inaccuracies or imprecisions, but no major errors.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained medical jargon. | You have a type of breast cancer called ER+/PR- invasive ductal carcinoma. |
-| P2 | Lacks specificity about the imaging modality used. | Recent imaging showed that the cancer in your chest wall has grown, while the ly |
-| P2 | Lacks clarity on the name of the research study. | You will start a medication called an aromatase inhibitor either alone or as par |
+| P2 | Unexplained medical jargon. | You have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ducta |
+| P2 | Unexplained medical jargon. | A recent PET/CT scan showed that a nodule in your chest wall has grown, while so |
+| P2 | Unexplained medical jargon. | An MRI of your brain showed no signs of cancer. |
+| P2 | Unexplained medical jargon. | You started taking zoledronic acid to help with your osteoporosis and to prepare |
+| P2 | Unexplained medical jargon. | You will start an aromatase inhibitor therapy either alone or on a clinical tria |
 
-*Letter summary*: Letter contains minor readability and clarity issues.
+*Letter summary*: The letter contains several instances of unexplained medical jargon that may be confusing to a layperson, but it is otherwise clean.
 
 ---
 
 ## ROW 3 — ⚠️ ISSUES
 
 **Type**: ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma
-**Stage**: Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of
+**Stage**: Locally advanced, multifocal
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Reason_for_Visit.summary | Inaccurate description of the patient's stage. The note mentions 'early stage' but the patient's cancer is described as 'locally advanced, multifocal'. | Patient with early stage breast cancer here to discuss neoadjuvant therapy |
-| P2 | Current_Medications.current_meds | Missing cancer-related medications. The note does not mention any specific cancer-related medications, but the field should be explicitly stated as empty. | No specific cancer-related medications mentioned. |
+| P2 | Reason_for_Visit.summary | Inaccurate description of the patient's stage. The note mentions 'early stage' but the patient has a locally advanced, multifocal cancer. | Patient with early stage breast cancer here to discuss neoadjuvant therapy |
+| P2 | Current_Medications.current_meds | Missing current cancer-related medications. The note does not mention any specific cancer-related medications, but the field should be explicitly stated as empty. | No specific cancer-related medications mentioned. |
 | P2 | Treatment_Changes.recent_changes | Field is empty, but the note does not indicate any recent changes in treatment. | No recent changes in treatment mentioned. |
 | P2 | Treatment_Changes.supportive_meds | Field is empty, but the note does not indicate any supportive medications related to cancer treatment. | No supportive medications related to cancer treatment mentioned. |
-| P2 | Therapy_plan.therapy_plan | Redundant information. The therapy plan is repeated in both 'Medication_Plan' and 'Therapy_plan'. | The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. |
-| P2 | Procedure_Plan.procedure_plan | Incomplete. The note mentions the patient will benefit from a Medi-port, but the procedure plan should also include the placement of the Medi-port. | The patient will benefit from a Medi-port |
-| P2 | Imaging_Plan.imaging_plan | Incomplete. The note mentions that the patient has already done the MRI, research biopsy, and Echo, but the imaging plan only mentions Mammaprint and Echocardiogram. | She has done the MRI, research biopsy, and Echo, mammaprint is pending and the echo looks good. |
-| P2 | Advance_care_planning.Advance care | Inaccurate. The note does not mention advance care planning being discussed, but it also does not state that it was not discussed. | No discussion of advance care planning mentioned. |
+| P2 | Procedure_Plan.procedure_plan | The field only mentions the Medi-port, but the note also discusses the need for a chemo teaching session. | We will arrange for chemo teaching session |
+| P2 | Imaging_Plan.imaging_plan | The field mentions Mammaprint and Echocardiogram, but the note specifies that the Mammaprint is pending and the Echocardiogram has already been done. | Mammaprint is pending.. Echocardiogram |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the description of the patient's stage, missing cancer-related medications, redundant therapy plan information, incomplete procedure and imaging plans, and inaccurate advance care planning.
+*Extraction summary*: Most fields are accurate, but there are minor issues with the description of the patient's stage, current medications, treatment changes, procedure plan, and imaging plan.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon (spindle cell metaplastic carcinoma). | You have a rare type of breast cancer called spindle cell metaplastic carcinoma. |
-| P2 | Unexplained jargon (ER, PR, HER2). | This cancer does not have proteins called ER, PR, or HER2, which means it doesn' |
-| P2 | Unexplained jargon (Medi-port). | You will have a Medi-port placed to make chemotherapy easier. |
+| P2 | Unexplained medical jargon. | You have a rare type of breast cancer called spindle cell metaplastic carcinoma. |
+| P2 | Unexplained medical jargon. | Your labs will be checked again to monitor your creatinine and Alk phos levels. |
 
 *Letter summary*: Letter contains minor readability issues due to unexplained medical jargon.
 
@@ -113,26 +114,26 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 ## ROW 4 — ⚠️ ISSUES
 
 **Type**: ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma
-**Stage**: Stage I (inferred from tumor ≤2cm)
+**Stage**: Stage III
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage is inferred as 'Stage I' based on tumor size, but the note does not specify the stage. | Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm |
-| P2 | Current_Medications.current_meds | The field is empty, but the note mentions no current cancer-related medications. | No current facility-administered medications for this visit. |
-| P2 | Treatment_Changes.supportive_meds | The field is empty, but the note mentions no current cancer-treatment-related supportive care. | No current facility-administered medications for this visit. |
+| P2 | Cancer_Diagnosis.Stage_of_Cancer | The note does not specify the stage of cancer, but the extraction infers 'Stage III'. | The note mentions 'R breast cancer' but does not explicitly state the stage. |
+| P2 | Treatment_Goals.goals_of_treatment | The goal is listed as 'palliative', but the note suggests an intent to treat with curative intent. | Plan includes chemotherapy with taxol x 12 weekly, suggesting a curative approach. |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the inferred stage and the empty supportive medication field.
+*Extraction summary*: Most fields are clean, but there are minor issues with the inferred stage and treatment goals.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The explanation of 'triple-negative' is overly detailed and may be confusing at an 8th-grade reading level. | You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive  |
-| P2 | This statement is not entirely clear and could be misinterpreted. | No cancer has spread to other parts of your body. |
+| P2 | The term 'triple-negative' may be too technical for an 8th-grade reading level. | You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive  |
+| P2 | The term 'stage III' might be confusing without context. | The cancer is at stage III. |
+| P2 | The term 'Taxol' might be unfamiliar to some patients. | You will start chemotherapy with Taxol, which will happen every week for 12 week |
 
-*Letter summary*: Letter contains minor readability issues that could be improved for clarity.
+*Letter summary*: Letter contains minor readability issues that could be improved for better clarity.
 
 ---
 
@@ -148,7 +149,7 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 | P2 | Reason_for_Visit.summary | The summary is slightly imprecise as it does not mention the patient's concern about the benefits of chemotherapy. | She is concerned that the benefits of chemotherapy will not outweigh its long-term risks. |
 | P2 | Treatment_Changes.recent_changes | The field is empty, but the note mentions that the patient has not yet started any treatment, so this is not a major issue. | Not yet on treatment — no response to assess. |
 | P2 | Treatment_Changes.supportive_meds | The field is empty, but the note discusses potential side effects of chemotherapy, implying supportive care may be needed. | We discussed extensively the typical SE associated with TC chemotherapy, including fatigue, myelosup |
-| P2 | Procedure_Plan.procedure_plan | The field incorrectly includes 'AI therapy for at least 5 years', which should be under 'Medication_Plan'. | AI therapy for at least 5 years |
+| P2 | Procedure_Plan.procedure_plan | The field is incorrectly labeled as 'AI therapy for at least 5 years', which is a medication plan, not a procedure. | AI therapy for at least 5 years |
 
 *Extraction summary*: Most fields are clean, but there are minor issues with the summary, treatment changes, and procedure plan classification.
 
@@ -156,16 +157,17 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The term 'protein called HER2' may be confusing to an 8th-grade reader. | Both cancers are sensitive to hormones and do not have a protein called HER2. |
-| P2 | The term 'Oncotype DX RS' may be too technical for an 8th-grade reader. | Your tumor will be tested with Oncotype DX RS to help guide further treatment de |
+| P2 | Unexplained jargon 'invasive ductal carcinoma'. | The left breast cancer is a grade 3 invasive ductal carcinoma (cancer that start |
+| P2 | Unexplained jargon 'protein called HER2'. | Both cancers are sensitive to hormones and do not have a protein called HER2. |
+| P2 | Unexplained jargon 'aromatase inhibitor'. | You will also take an aromatase inhibitor (a medication that blocks the producti |
 
-*Letter summary*: Letter contains minor readability issues that could be improved for better clarity.
+*Letter summary*: Letter contains minor readability issues due to unexplained medical jargon.
 
 ---
 
 ## ROW 6 — ⚠️ ISSUES
 
-**Type**: ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma
+**Type**: ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% invasive ductal carcinoma (I
 **Stage**: Metastatic (Stage IV)
 
 ### Extraction
@@ -173,50 +175,47 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
 | P2 | Current_Medications | The field is empty, but there are no cancer-related medications mentioned in the note. | No cancer-related medications are listed in the note. |
-| P2 | Treatment_Goals | The treatment goal is listed as 'palliative', but the note suggests a more optimistic outlook ('anticipate excellent response and possible long term disease control'). | Given HR-negative HER2+ subtype, I anticipate excellent response and possible long term disease cont |
+| P2 | Treatment_Changes | Supportive medication 'ondansetron' is listed, but it is not specifically mentioned as being used for cancer treatment. | ondansetron (ZOFRAN) 8 mg tablet To be taken as needed for nausea ( see colonoscopy prep instruction |
+| P2 | Treatment_Goals | The goal is listed as 'palliative', but the note suggests anticipation of 'excellent response and possible long term disease control'. This implies a more aggressive treatment approach than purely palliative. | I anticipate excellent response and possible long term disease control. |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the treatment goals and current medications.
+*Extraction summary*: Most fields are clean, but there are minor issues with the classification of treatment goals and the inclusion of supportive medications.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The term 'invasive ductal carcinoma' is not explained in simple terms. | You have a type of breast cancer called invasive ductal carcinoma (cancer that s |
-| P2 | The term 'HR-negative' is not explained in simple terms. | It is HR-negative and has a protein called HER2. |
-| P2 | The term 'stage IV' is not explained in simple terms. | The cancer has spread to your bones, which means it is now at stage IV. |
-| P2 | The term 'ondansetron' is not explained in simple terms. | You will also take ondansetron to help with nausea. |
+| P2 | The term 'invasive ductal carcinoma' is not explained further in simple terms. | You have a type of breast cancer called invasive ductal carcinoma (IDC), which m |
+| P2 | Terms 'HR-negative' and 'HER2-positive' are not explained. | The cancer is HR-negative and HER2-positive, and it has spread to your bones. |
+| P2 | The term 'MRI' is used without context. | You will have an MRI of your pelvis and neck to check for any changes in your ca |
 
-*Letter summary*: The letter contains minor readability issues due to some unexplained medical terms.
+*Letter summary*: Letter is mostly clean but requires minor clarifications for better readability.
 
 ---
 
 ## ROW 7 — ⚠️ ISSUES
 
 **Type**: ER-/PR-/HER2- triple negative invasive ductal carcinoma
-**Stage**: Originally Stage IIB (cT2 cN1 cM0) -> ypT1c(m) ypN1a (1/22 LN positive), now met
+**Stage**: Originally Stage IIB, now metastatic (Stage IV)
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Reason_for_Visit.summary | The summary does not mention the patient's Lynch syndrome and other cancers. | ***** ***** is a 44 y.o. female with Lynch syndrome with early stage colon cancer and endometrial ca |
-| P2 | Cancer_Diagnosis.Type_of_Cancer | The type of cancer is described as 'ER-/PR-/HER2- triple negative invasive ductal carcinoma', but the note mentions 'Metastatic ER negative, HER2 negative breast cancer'. | Impression: Metastatic ER negative, HER2 negative breast cancer on nab paclitaxel and pembrolizumab  |
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage of cancer is described as 'Originally Stage IIB (cT2 cN1 cM0) -> ypT1c(m) ypN1a (1/22 LN positive), now metastatic (Stage IV)', but the note does not provide this specific detail. | Early stage breast cancer 2014  clinical Stage IIB (cT2 cN1 cM0) -> ypT1c(m) ypN1a (1/22 LN positive |
-| P2 | Current_Medications.current_meds | Only 'pembrolizumab' is listed, but the note mentions 'nab paclitaxel and pembrolizumab'. | She started pembrolizumab and abraxane on 03/11/19 and presents today for cycle 1 day 8. |
-| P2 | Treatment_Changes.recent_changes | The note mentions restarting xarelto, but it is not a cancer-related medication. | Restart xarelto, stop for port placement per IR |
-| P2 | Response_Assessment.response_assessment | The response assessment repeats information already mentioned under 'Clinical Findings'. | Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic E |
-| P2 | Imaging_Plan.imaging_plan | The imaging plan is not clearly specified in the note. | Imaging guided by symptoms or every 3-4 months, longer intervals if stable. |
+| P2 | Cancer_Diagnosis | The note mentions multiple cancers (breast, colon, endometrial), but the extracted data only focuses on the breast cancer. | Diagnoses: 1) July 2013: R breast invasive ductal carcinoma, ER-/PR-/Her2- (TNBC), grade 3 2) March  |
+| P2 | Current_Medications | The extracted data only lists 'pembrolizumab', but the note mentions 'nab paclitaxel' and 'pembrolizumab'. | She started pembrolizumab and abraxane on 03/11/19 and presents today for cycle 1 day 8. |
+| P2 | Treatment_Changes | The extracted data mentions restarting Xarelto, but the note indicates it was stopped for port placement. | Restart xarelto, stop for port placement per IR |
+| P2 | Imaging_Plan | The extracted data specifies 'PET/CT', but the note does not mention a specific imaging plan beyond 'imaging guided by symptoms or every 3-4 months'. | Imaging guided by symptoms or every 3-4 months, longer intervals if stable. |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the completeness and classification of cancer-related information.
+*Extraction summary*: Most fields are clean, but there are minor issues related to incomplete cancer diagnoses, medication listing, treatment changes, and imaging plan.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon 'lesion'. | The imaging studies show that your cancer has progressed. Specifically, a lesion |
-| P2 | Unexplained jargon 'port'. | You will have a port placed soon to make it easier to receive treatments. |
+| P2 | The sentence omits specific details about the location and nature of the new areas of cancer activity, which might be important for completeness. | Imaging studies show that your cancer has progressed. Specifically, a lesion in  |
+| P2 | The sentence does not mention that xarelto is stopped temporarily for port placement. | You will continue taking abraxane and pembrolizumab. You will also restart xarel |
 
-*Letter summary*: Letter contains minor readability issues related to unexplained medical jargon.
+*Letter summary*: Letter is mostly clean but could benefit from additional details for completeness.
 
 ---
 
@@ -229,58 +228,57 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Current_Medications | The field is empty, but the note does not explicitly state that there are no current cancer-related medications. | The note does not mention any current cancer-related medications, but it also does not explicitly st |
+| P2 | Current_Medications | The field is empty, but the note does not explicitly state that the patient is not on any cancer-related medications. | The note does not mention any current cancer-related medications. |
+| P2 | Treatment_Changes | The field is empty, but the note discusses upcoming treatment changes. | Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. |
+| P2 | follow_up_next_visit | The field states 'Not specified in the note,' but the note mentions an estimated start date for chemotherapy. | Estimated start date 10/18/2017. |
 
-*Extraction summary*: Most fields are clean, but the absence of current cancer-related medications is marked as a minor issue.
+*Extraction summary*: Most fields are clean, but there are minor issues with missing cancer-related treatment information and follow-up details.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon | The cancer was a type called invasive ductal carcinoma, which started in the mil |
-| P2 | Unexplained jargon | You agreed to start chemotherapy with a combination of drugs called AC plus pacl |
-| P2 | Unexplained jargon | You will need a heart ultrasound called a TTE before starting chemotherapy. |
+| P2 | The term 'checking the lymph nodes' may be unclear to a layperson. | You recently had surgery to remove your breast cancer, which included removing b |
+| P2 | The term 'grade 2' may be unclear to a layperson. | The cancer was a type that started in the milk ducts and was grade 2. |
+| P2 | The term 'AC plus paclitaxel' may be unclear to a layperson. | You agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to  |
 
-*Letter summary*: Letter contains minor readability issues related to unexplained medical jargon.
+*Letter summary*: The letter contains minor readability issues that could be improved for better clarity.
 
 ---
 
 ## ROW 9 — ⚠️ ISSUES
 
 **Type**: ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence
-**Stage**: Originally Stage III (T3N2), now Stage III
+**Stage**: Originally Stage III (T3N2), now metastatic (Stage IV)
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The note mentions the original stage as Stage III (T3N2) but does not specify the current stage as 'now Stage III'. It may be inferred as such, but it is slightly imprecise. | 31 y.o. premenopausal female patient with a history of a Stage III HR+/HER2- grade 2 IDC with microp |
-| P2 | Current_Medications.current_meds | The note indicates the patient is currently prescribed gabapentin and hydrochlorothiazide, but these are general medications and thus excluded. However, the note does not mention any current cancer-related medications, so the field is correct but could be misleading if the patient is expected to be on some form of treatment. | Outpatient Encounter Medications as of 01/28/2019: gabapentin (NEURONTIN) 300 mg capsule, hydroCHLOR |
-| P2 | Treatment_Changes.recent_changes | The note states the plan is to start goserelin followed by an AI, but the field only mentions goserelin and AI without specifying the sequence. | We will plan to start her on OS as soon as possible and then start an AI. |
-| P2 | Genetic_Testing_Plan.genetic_testing_plan | The field incorrectly lists 'plan to FNA the mass on left lateral anterior neck' under genetic testing plan, which is not related to genetic testing. | plan to FNA the mass on left lateral anterior neck |
+| P2 | Current_Medications | Missing current cancer-related medications. | gabapentin (NEURONTIN) 300 mg capsule, hydroCHLOROthiazide (HYDRODIURIL) 25 mg tablet |
+| P2 | Treatment_Changes | Supportive medications not mentioned. | States she was prescribed gabapentin for numbness and a deep sharp pain of her elbow that shoots up/ |
+| P2 | Treatment_Goals | Goals of treatment should be 'palliative' but could be more specific. | if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of li |
+| P2 | Response_Assessment | Mentions no active cancer treatment, but patient is on gabapentin for pain. | The patient has a locally advanced, unresectable recurrence of HR+/HER2- grade 2 IDC with micropapil |
+| P2 | Genetic_Testing_Plan | Incorrectly labeled as genetic testing plan. | plan to FNA the mass on left lateral anterior neck |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the staging, current medications, recent treatment changes, and genetic testing plan.
+*Extraction summary*: Most fields are clean, but there are minor issues with missing current cancer-related medications, supportive medications, and mislabeling of the genetic testing plan.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained medical jargon. | You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapi |
-| P2 | Slightly imprecise wording. | The cancer has recurred and may have spread to other parts of your body. |
-| P2 | Slightly imprecise wording. | During your physical exam, a mass was found in your left breast and another in y |
-| P2 | Slightly imprecise wording. | There is also some discoloration of the skin on your left breast. |
-| P2 | Slightly imprecise wording. | You are planning to start a medication called goserelin, which stops the ovaries |
-| P2 | Slightly imprecise wording. | This will be followed by an aromatase inhibitor (AI), which blocks the productio |
-| P2 | Slightly imprecise wording. | Your next visit to the clinic will be two weeks after you start goserelin. |
+| P2 | Unexplained medical jargon (ER+/PR+/HER2- grade 2 IDC with micropapillary features). | You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapi |
+| P2 | Unexplained medical jargon (left cervical lymph node). | The cancer has now spread to your left breast and left cervical lymph node, maki |
+| P2 | Unexplained medical jargon (FNA). | You will have a fine needle aspiration (FNA) of the mass in your left neck to co |
 
-*Letter summary*: The letter contains minor readability issues and slightly imprecise wording that could be clarified for better understanding.
+*Letter summary*: Letter contains some unexplained medical jargon that could be simplified further.
 
 ---
 
 ## ROW 10 — ⚠️ ISSUES
 
 **Type**: ER+/PR+/HER2- grade 2 invasive ductal carcinoma
-**Stage**: Stage II (inferred from T2N1)
+**Stage**: T2N1, clinical stage II
 
 ### Extraction
 
@@ -297,7 +295,7 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 |----------|-------|----------|
 | P2 | The term 'invasive ductal carcinoma' is not explained in simple terms. | You have been diagnosed with a grade 2 invasive ductal carcinoma (cancer that st |
 | P2 | The term 'lymph node' might be unfamiliar to some readers. | The cancer has spread to one lymph node under your right armpit but has not spre |
-| P2 | Terms like 'neuropathy', 'cardiac toxicity' are not explained. | Antiemetics and other supportive medications will be used to manage side effects |
+| P2 | The term 'cold caps' might be unfamiliar to some readers. | You are also considering the use of cold caps during chemotherapy to reduce hair |
 
 *Letter summary*: Letter contains minor readability issues related to unexplained medical terms.
 
@@ -333,120 +331,118 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 ## ROW 12 — ⚠️ ISSUES
 
 **Type**: ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular f
-**Stage**: Stage II (inferred from pT2 N0)
+**Stage**: Clinical stage II
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
 | P1 | current_meds | Incorrectly listed 'tc' as current medication when the patient is not currently on any cancer-related medications. | The patient is not currently on any cancer-related medications as she has not yet started treatment. |
-| P2 | Lab_Results | Inaccurate summary of lab results. The note mentions several lab results, but the summary incorrectly states 'No labs in note.' | Available labs, pathology, and imaging were reviewed and independently interpreted, as described abo |
+| P2 | Lab_Results | Inaccurate summary. The note mentions several lab results, but the extraction states 'No labs in note.' | Several lab results are mentioned in the note, including WBC count, hemoglobin, hematocrit, platelet |
 
-*Extraction summary*: Major error in current medications and minor issue with lab results summary. Most fields are clean.
+*Extraction summary*: Major error in current_meds and minor issue in Lab_Results. Most fields are clean.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The stage is inaccurately described as 'Stage I-II'. The correct stage is 'Stage II'. | You were diagnosed with an early stage (Stage I-II) breast cancer that started i |
-| P2 | The sentence lacks clarity about the specific regimen name (AC/T). | You will start neoadjuvant chemotherapy with a chemotherapy regimen (doxorubicin |
+| P2 | Unexplained jargon 'mixed ductal and lobular features'. | You were diagnosed with an early stage breast cancer. The cancer is a type that  |
+| P2 | Grade 2 may be confusing to a layperson. | It measures 1.2 cm and is grade 2. |
+| P2 | ER+, PR+, and HER2 are unexplained jargon. | The cancer is sensitive to estrogen and progesterone (ER+ and PR+) but does not  |
+| P2 | Technical terms 'neoadjuvant', 'doxorubicin', 'cyclophosphamide', and 'paclitaxel' are unexplained. | You will start neoadjuvant chemotherapy with a chemotherapy regimen (doxorubicin |
 
-*Letter summary*: There are minor inaccuracies and clarity issues in the letter.
+*Letter summary*: Letter contains some unexplained medical jargon that could be simplified further for better readability.
 
 ---
 
 ## ROW 13 — ⚠️ ISSUES
 
 **Type**: ER+/PR+/HER2- invasive ductal carcinoma
-**Stage**: Stage IIIB (inferred from 2.2 cm tumor with positive axillary lymph nodes and su
-
-### Extraction
-
-| Severity | Field | Issue | Note Evidence |
-|----------|-------|-------|---------------|
-| P2 | Reason_for_Visit.summary | The summary does not mention the patient's concern about taking time off from work during treatment. | She is also concerned about whether she needs to take time off from work during her treatment especi |
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The stage is inferred as IIIB, but the note does not explicitly state the stage. It might be more accurate to leave it unspecified. | Stage IIIB (inferred from 2.2 cm tumor with positive axillary lymph nodes and suspicious additional  |
-| P2 | Clinical_Findings.findings | The physical exam finding of no palpable axillary lymph nodes is not supported by the note. | Physical exam shows no palpable axillary lymph nodes. |
-| P2 | Current_Medications.current_meds | The field is empty, but the note mentions that the patient is scheduled to start hormonal therapy after radiation. | Patient will start hormonal therapy after radiation. |
-| P2 | Treatment_Changes.recent_changes | The field is empty, but the note discusses potential changes in treatment based on Mammaprint results. | We discussed the toxicities associated with Taxotere and Cytoxan including increased risk of infecti |
-| P2 | Treatment_Changes.supportive_meds | The field is empty, but the note mentions the use of scalp cooling with Dignicap or Penguin Cold Cap. | Scalp cooling with Dignicap or Penguin Cold Cap will be used during chemotherapy. |
-| P2 | Treatment_Goals.goals_of_treatment | The goal is listed as 'curative', but the note suggests a more complex approach involving adjuvant chemotherapy and hormonal therapy. | We reviewed her imaging and pathology reports to date. I explained that because of her young age and |
-| P2 | Therapy_plan.therapy_plan | The field does not mention the potential use of CDK 4/6 inhibitors in clinical trials. | We briefly discussed participation in clinical trial trials of CDK 4/6 inhibitors such as the PALLAS |
-| P2 | Procedure_Plan.procedure_plan | The field does not specify the type of surgery planned. | She is scheduled to undergo a partial mastectomy and ALND with Dr ***** on 11/05/17. |
-| P2 | Imaging_Plan.imaging_plan | The field only mentions Brain MRI, but the note also discusses ongoing imaging plans. | MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. |
-
-*Extraction summary*: Most fields are clean, but there are several minor issues related to completeness and precision of the extracted information.
-
-### Letter
-
-| Severity | Issue | Sentence |
-|----------|-------|----------|
-| P2 | Unexplained medical jargon 'lymph nodes'. | The cancer is in the upper central part of your right breast and has spread to s |
-| P2 | Unexplained medical jargon 'test of the lymph nodes'. | A test of the lymph nodes confirmed that the cancer had spread there. |
-| P2 | Unexplained medical jargon 'hormonal therapy'. | You will start hormonal therapy after your surgery. |
-| P2 | Unexplained medical jargon 'scalp cooling cap'. | To help preserve your hair during chemotherapy, you will use a scalp cooling cap |
-| P2 | Unexplained medical jargon 'clinical trials'. | We also talked about the possibility of joining clinical trials for new treatmen |
-| P2 | Unexplained medical jargon 'Mammaprint'. | After surgery, you will have a test called Mammaprint to learn more about your c |
-
-*Letter summary*: The letter contains minor readability issues due to unexplained medical jargon.
-
----
-
-## ROW 14 — ⚠️ ISSUES
-
-**Type**: ER+/PR+/HER2 equivocal grade 1 invasive ductal carcinoma
-**Stage**: Stage IA (inferred from pT1 N0)
-
-### Extraction
-
-| Severity | Field | Issue | Note Evidence |
-|----------|-------|-------|---------------|
-| P2 | Current_Medications | The field is empty, but the note mentions 'lamictal' which is relevant to her condition. | Past Medical History: Bipolar II disorder (HCC) diagnosed mid 20's, controlled on lamictal |
-| P2 | Treatment_Changes | The field mentions 'tamoxifen' but does not specify it as a discussion point only. | We discussed the benefits relatively of shorter duration endocrine therapy, and whether two years wo |
-| P2 | Therapy_plan | The field incorrectly includes 'Continue tamoxifen', which is not part of the plan. | She was curious about the benefits relatively of shorter duration endocrine therapy, and whether two |
-
-*Extraction summary*: Most fields are clean, but there are minor issues with current medications, treatment changes, and therapy plan.
-
-### Letter
-
-| Severity | Issue | Sentence |
-|----------|-------|----------|
-| P2 | The term 'protein' may be considered jargon for an 8th-grade reading level. | You have early-stage breast cancer (Grade 1 invasive ductal carcinoma) that is E |
-| P2 | The term 'stye' may be unfamiliar to some readers. | Additionally, there is a right eyelid stye noted during the physical examination |
-| P2 | The terms 'goserelin' and 'letrozole' are medical jargon. | You will start goserelin today and begin letrozole in about two weeks. |
-
-*Letter summary*: Letter contains minor readability issues related to medical jargon.
-
----
-
-## ROW 15 — ⚠️ ISSUES
-
-**Type**: ER+/PR+/HER2 equivocal invasive ductal carcinoma with metastatic recurrence (rig
 **Stage**: Stage III
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Cancer_Diagnosis.Type_of_Cancer | The note does not specify 'invasive ductal carcinoma', only mentions metastatic adenocarcinoma consistent with breast primary. | US-guided right supraclavicular LN biopsy: metastatic adenocarcinoma, c/w breast primary (CK7, GATA3 |
-| P2 | Cancer_Diagnosis.Stage_of_Cancer | The note does not explicitly state the stage as 'Stage III'. The stage is inferred based on the metastatic nature of the cancer. | She has no other evidence of distant metastasis. |
-| P2 | Cancer_Diagnosis.Distant Metastasis | The note specifies that there is no other evidence of distant metastasis besides lymphadenopathy, so 'Not sure' is imprecise. | She has no other evidence of distant metastasis. |
-| P2 | Current_Medications.current_meds | The field is empty, but the note mentions several medications, though none are cancer-related. | Outpatient Encounter Prescriptions as of 04/13/2017 |
-| P2 | Treatment_Changes.recent_changes | The field is empty, but the note mentions ongoing discussions about future treatment plans. | I explained to ***** that if we confirm the above with breast and cervical LN biopsies, then she wou |
-| P2 | Treatment_Changes.supportive_meds | Only 'docusate sodium (COLACE)' is listed, but the note mentions several other medications, though none are cancer-related. | Outpatient Encounter Prescriptions as of  04/13/2017 |
-| P2 | Imaging_Plan.imaging_plan | The field incorrectly lists 'cervical LN FNA if possible' instead of 'US-guided biopsy of breast mass, cervical LN FNA, core biopsy'. | Recommendations in Brief: - US-guided biopsy of breast mass (possibly calcified nodule in axillary t |
+| P2 | Reason_for_Visit.summary | The summary does not mention the patient's concern about taking time off from work during treatment. | She is also concerned about whether she needs to take time off from work during her treatment especi |
+| P2 | Clinical_Findings.findings | The physical exam finding of no palpable axillary lymph nodes is not supported by the note. | Physical exam shows no palpable axillary lymph nodes. |
+| P2 | Current_Medications.current_meds | The field is empty, but the note mentions SYNTHROID, which is related to hypothyroidism, not cancer treatment. | SYNTHROID 112 mcg tablet, Take 112 mcg by mouth Daily. |
+| P2 | Treatment_Changes.recent_changes | The field is empty, but the note mentions discussing potential treatment options and plans. | We discussed the toxicities associated with Taxotere and Cytoxan including increased risk of infecti |
+| P2 | Treatment_Changes.supportive_meds | The field is empty, but the note mentions discussing scalp cooling with Dignicap or Penguin Cold Cap. | I also explained that we are proponents of scalp cooling including the Dignicap and Penguin Cold Cap |
+| P2 | radiotherapy_plan.radiotherapy_plan | The field states 'None', but the note implies radiotherapy will be part of the treatment plan after surgery. | Patient will start hormonal therapy after radiation. |
+| P2 | Procedure_Plan.procedure_plan | The field only mentions surgery, but the note also discusses the possibility of neoadjuvant chemotherapy and the need for a partial mastectomy and ALND. | She is scheduled to undergo a partial mastectomy and ALND with Dr ***** on 11/05/17. |
+| P2 | Imaging_Plan.imaging_plan | The field only mentions Brain MRI, but the note also discusses ongoing imaging studies. | MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. |
+| P2 | Genetic_Testing_Plan.genetic_testing_plan | The field mentions Mammaprint, but the note also discusses the possibility of other genetic testing. | We discussed the toxicities associated with Taxotere and Cytoxan including increased risk of infecti |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the cancer diagnosis details, treatment changes, and imaging plan.
+*Extraction summary*: Most fields are clean, but there are minor issues with completeness and classification.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The term 'invasive ductal carcinoma' is not explained, which might be confusing for an 8th-grade reading level. | You have a type of breast cancer called invasive ductal carcinoma that has sprea |
-| P2 | The terms 'estrogen and progesterone receptors' and 'protein called HER2' are not explained, which might be confusing for an 8th-grade reading level. | The cancer tests positive for estrogen and progesterone receptors, and the resul |
-| P2 | The term 'fine needle aspiration' is not explained, which might be confusing for an 8th-grade reading level. | You will have a biopsy of the breast mass and a fine needle aspiration of the ce |
+| P2 | The term 'protein' might be considered jargon for an 8th-grade reading level. | You have a type of breast cancer called invasive ductal carcinoma, which is horm |
+| P2 | The term 'biopsy' might be considered jargon for an 8th-grade reading level. | A biopsy of the lymph node confirmed that the cancer had spread there. |
+| P2 | The term 'hormonal therapy' might be considered jargon for an 8th-grade reading level. | You will start hormonal therapy after radiation. |
+| P2 | The terms 'scalp cooling', 'Dignicap', and 'Penguin Cold Cap' might be considered jargon for an 8th-grade reading level. | To help preserve your hair during chemotherapy, you will use scalp cooling with  |
+| P2 | The term 'Mammaprint' might be considered jargon for an 8th-grade reading level. | After surgery, you will have a test called Mammaprint to help decide the best tr |
 
-*Letter summary*: Letter contains some terms that may be confusing for an 8th-grade reading level, but overall it is mostly clean.
+*Letter summary*: The letter contains minor readability issues related to medical jargon that could be simplified further for an 8th-grade reading level.
+
+---
+
+## ROW 14 — ⚠️ ISSUES
+
+**Type**: ER+/PR+/HER2 equivocal grade 1 invasive ductal carcinoma
+**Stage**: 
+
+### Extraction
+
+| Severity | Field | Issue | Note Evidence |
+|----------|-------|-------|---------------|
+| P2 | Cancer_Diagnosis | Missing stage information. | The note mentions 'Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2)', but does not specify a |
+| P2 | Current_Medications | Missing current hormonal therapy (Lamictal). | The note mentions 'controlled on lamictal' under past medical history. |
+| P2 | Treatment_Changes | Inconsistent mention of tamoxifen. | The note discusses tamoxifen but does not plan to start it. The extracted data incorrectly includes  |
+| P2 | Therapy_plan | Incorrectly includes continuing tamoxifen. | The note does not mention continuing tamoxifen, only discussing it as a potential option. |
+
+*Extraction summary*: Most fields are clean, but there are minor issues with missing stage information, inconsistent mention of tamoxifen, and incorrect inclusion of continuing tamoxifen.
+
+### Letter
+
+| Severity | Issue | Sentence |
+|----------|-------|----------|
+| P2 | The term 'invasive ductal carcinoma' is not explained further, which might be confusing. | You have a type of breast cancer called invasive ductal carcinoma (cancer that s |
+| P2 | The terms 'estrogen receptor', 'progesterone receptor', and 'HER2 status' are not explained, which may be confusing. | It is strongly positive for estrogen receptor (ER) and progesterone receptor (PR |
+| P2 | The terms 'Effexor', 'Gabapentin', and 'Lamictal' are not explained, which may be confusing. | Your psychiatrist will also review the interactions between Effexor, Gabapentin, |
+
+*Letter summary*: The letter contains minor readability issues related to unexplained medical terms.
+
+---
+
+## ROW 15 — ⚠️ ISSUES
+
+**Type**: ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary
+**Stage**: Metastatic (Stage IV)
+
+### Extraction
+
+| Severity | Field | Issue | Note Evidence |
+|----------|-------|-------|---------------|
+| P2 | Cancer_Diagnosis.Stage_of_Cancer | The note mentions 'de novo MBC' but does not explicitly state 'Stage IV'. The extraction infers 'Stage IV', which is reasonable but not directly stated. | Presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, a |
+| P2 | Current_Medications.current_meds | The note does not mention any current cancer-related medications, so the field is correctly empty. However, the note mentions 'PNV NO.122/IRON/FOLIC ACID', which might be relevant for a cancer patient, though not strictly cancer-related. | PNV NO.122/IRON/FOLIC ACID (PRENATAL MULTI ORAL) Take by mouth. |
+| P2 | Treatment_Changes.recent_changes | The note does not mention any recent treatment changes, so the field is correctly empty. However, the note implies future treatment plans without mentioning any recent changes. | She has no other evidence of distant metastasis. |
+| P2 | Treatment_Goals.goals_of_treatment | The note does not explicitly state the treatment goal as 'palliative', but it is implied given the metastatic nature of the cancer. The extraction is reasonable but not directly stated. | technically, we do not consider MBC to be curable. |
+| P2 | Imaging_Plan.imaging_plan | The note suggests 'cervical LN FNA if possible', but the extraction incorrectly classifies this under 'Imaging_Plan' instead of 'Procedure_Plan'. | cervical LN FNA if possible |
+
+*Extraction summary*: Most fields are clean, but there are minor issues related to inferred staging, lack of explicit recent treatment changes, and misclassification of FNA under imaging.
+
+### Letter
+
+| Severity | Issue | Sentence |
+|----------|-------|----------|
+| P2 | Unexplained jargon 'gland cells'. | The cancer started in gland cells and is positive for estrogen and progesterone  |
+| P2 | Unexplained jargon 'fine needle aspiration'. | You will have a biopsy of the breast mass and a fine needle aspiration of the ce |
+
+*Letter summary*: Letter contains minor readability issues due to unexplained medical jargon.
 
 ---
 
@@ -459,11 +455,11 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Reason_for_Visit.summary | The summary should include the patient's initial reluctance towards clinical trials. | We discussed this at some length and she was extremely hesitant to consider enrolling in a clinical  |
-| P2 | Current_Medications.current_meds | The field should be marked as 'None' instead of being empty. | None |
-| P2 | Treatment_Changes.recent_changes | The field should be marked as 'None' instead of being empty. | None |
-| P2 | Treatment_Changes.supportive_meds | The field should be marked as 'None' instead of being empty. | None |
-| P2 | Imaging_Plan.imaging_plan | The imaging plan should specify the type of CT scan and ultrasound. | Ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node with abnormal morphology, thickene |
+| P2 | Reason_for_Visit.summary | The summary should include the patient's initial reluctance towards neoadjuvant treatment and preference for upfront mastectomy. | She clearly has surgically accessible disease if she approaches this with a mastectomy. Subsequently |
+| P2 | Current_Medications.current_meds | The field should be marked as 'None' instead of being empty. | There are no cancer-related medications mentioned in the note. |
+| P2 | Treatment_Changes.recent_changes | The field should be marked as 'None' instead of being empty. | There are no recent treatment changes mentioned in the note. |
+| P2 | Treatment_Changes.supportive_meds | The field should be marked as 'None' instead of being empty. | There are no supportive medications mentioned in the note. |
+| P2 | Imaging_Plan.imaging_plan | The imaging plan should specify 'PET/CT scan' and 'MRI' instead of just 'CT scan'. | An MRI of her bilateral breasts was performed... PET/CT scan was performed... |
 
 *Extraction summary*: Most fields are clean, but there are minor issues with the summary, medication fields, and imaging plan.
 
@@ -471,12 +467,11 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P1 | The phrase 'cancer that started in the milk-producing glands' is inaccurate. Lobular carcinoma starts in the lobules, not the milk-producing glands. | You were diagnosed with a clinical stage III lobular carcinoma (cancer that star |
-| P2 | This sentence is somewhat vague and doesn't provide enough detail about the imaging findings. | Imaging tests showed a large abnormality in the left breast and some small lymph |
-| P2 | The sentence is missing the word 'a' before 'mastectomy'. | You are scheduled to have a mastectomy (surgery to remove the breast) to treat t |
-| P2 | The CT scan and ultrasound are not mentioned in the extracted data as part of the follow-up plan. | After surgery, you will have a CT scan and an ultrasound to monitor your conditi |
+| P1 | The description 'cancer that started in the milk-producing glands' is not accurate for invasive lobular carcinoma. | You were diagnosed with a type of cancer called invasive lobular carcinoma (canc |
+| P2 | The term 'enlarged lymph nodes' is not precise enough given the detailed information in the note. | Imaging tests showed a large abnormality in your left breast and some enlarged l |
+| P2 | The sentence lacks the context that this is the preferred treatment option after discussion. | You are scheduled to have a mastectomy (surgery to remove the breast). |
 
-*Letter summary*: The letter contains inaccuracies and lacks some important details. It needs corrections and clarifications.
+*Letter summary*: The letter contains inaccuracies and minor readability issues that need addressing.
 
 ---
 
@@ -489,71 +484,76 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P1 | current_meds | The note does not mention any current cancer-related medications, but the extracted data incorrectly lists 'ac'. | There is no mention of current cancer-related medications in the note. |
-| P2 | genetic_testing_plan | The note mentions uncertainty about the type of genetic testing done, but the extracted data simplifies it to 'brca'. | She does not know if she has had expanded panel testing or BRCA testing only. |
+| P1 | current_meds | The note does not mention any current cancer-related medications, but the extracted data incorrectly states 'ac'. | There is no mention of current cancer-related medications in the note. |
+| P1 | genetic_testing_plan | The note mentions uncertainty about the type of genetic testing done, but the extracted data incorrectly states 'brca'. | She does not know if she has had expanded panel testing or BRCA testing only. |
 
-*Extraction summary*: Two issues identified: incorrect listing of current cancer-related medications and oversimplification of genetic testing plan. Most fields are clean.
+*Extraction summary*: Two major errors identified in 'current_meds' and 'genetic_testing_plan'. All other fields are clean.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon (Ki67). | The cancer has a reported Ki67 of 30%, which tells us how fast the cancer cells  |
-| P2 | Unexplained jargon (peripheral enhancement). | An MRI showed postoperative changes in your left breast with a seroma (a pocket  |
-| P2 | Unexplained jargon (port). | You will have a port placed to make it easier to receive chemotherapy. |
+| P2 | The term 'residual cancer' is somewhat technical and could be simplified further for clarity. | Postoperative MRI shows some areas that might have residual cancer. |
+| P2 | The phrase 'remaining areas of concern' is vague and could be more specific. | You will have radiation therapy to manage the extent of your cancer and any rema |
 
-*Letter summary*: Letter contains minor readability issues due to unexplained medical jargon.
+*Letter summary*: Letter is mostly clean but contains minor readability issues that could be improved for better clarity.
 
 ---
 
 ## ROW 18 — ⚠️ ISSUES
 
 **Type**: ER+/PR-/HER2- grade 2 invasive ductal carcinoma
-**Stage**: Stage IIA (inferred from pT2 N0)
+**Stage**: 
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Reason_for_Visit.summary | Inaccurate summary of PR status. | The cancer is ER positive (>95%), PR positive (<5%), HER2 negative (by FISH) |
-| P2 | Current_Medications.current_meds | Missing current hormonal therapy. | Because her breast cancer is estrogen receptor positive, she understands that she will receive at le |
-| P2 | Treatment_Changes.recent_changes | Missing recent changes in treatment plan. | Because of her ATM mutation, radiation oncology has recommended that she proceed with mastectomy rat |
-| P2 | Genetic_Testing_Plan.genetic_testing_plan | Incorrect genetic testing plan. | Subsequent to the visit, the Mammaprint from her prior core biopsy came back as High Risk (-0.622) |
+| P2 | Reason_for_Visit.summary | Inaccurate summary of the visit reason. It mentions 'newly diagnosed' which is not explicitly stated in the note. | 32 y.o. female here for a discussion of treatment options for recently diagnosed left breast cancer. |
+| P2 | Cancer_Diagnosis.Stage_of_Cancer | Stage of cancer is missing, though it can be reasonably inferred from the note. | Known biopsy proven malignancy (BI-RADS 6). |
+| P2 | Clinical_Findings.findings | Missing mention of the previous FNA being benign. | FNA of a left axillary lymph node was attempted in ***** and the path was benign. |
+| P2 | Treatment_Changes.recent_changes | Missing mention of the recent FNA of the left axillary LNs being benign. | the patient underwent a second FNA of the left axillary LNs and it again showed no cancer. |
+| P2 | Treatment_Goals.goals_of_treatment | Goals of treatment should include both curative and adjuvant aspects. | The patient will receive at least five years of adjuvant hormonal therapy. |
+| P2 | Radiotherapy_plan.radiotherapy_plan | Incorrectly states 'None'. The note indicates radiation oncology did not recommend radiation due to the ATM mutation. | were not enthusiastic about offering this patient radiation based on her ATM mutation, and therefore |
+| P2 | Genetic_Testing_Plan.genetic_testing_plan | Incorrectly states 'mammaprint'. Mammaprint result is already known and not planned. | Subsequent to the visit, the Mammaprint from her prior core biopsy came back as High Risk (-0.622) |
 
-*Extraction summary*: Most fields are accurate, but there are minor issues with the summary of PR status, current medications, recent treatment changes, and genetic testing plan.
+*Extraction summary*: Most fields are clean, but there are minor issues with the summary, staging, clinical findings, treatment goals, radiotherapy plan, and genetic testing plan.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | The staging information is imprecise. The note specifies Stage IIA, which should be mentioned. | You have been diagnosed with an early-stage (Stage I-II) estrogen receptor posit |
-| P2 | The letter does not mention the chemotherapy plan based on nodal status at the time of surgery. | After surgery, you will have a detailed discussion about the choice of hormonal  |
+| P1 | The letter does not specify the exact type of breast cancer, which is important for a new patient. | regarding your newly diagnosed left breast cancer. |
+| P2 | The term 'Mammaprint' may be confusing to a layperson. | The cancer measures 8mm and is considered high risk based on a test called Mamma |
+| P2 | The term 'adjuvant hormonal therapy' might be confusing. | You will also receive at least five years of adjuvant hormonal therapy because y |
 
-*Letter summary*: The letter contains minor inaccuracies and omissions that need clarification.
+*Letter summary*: The letter contains minor issues related to clarity and completeness for a new patient.
 
 ---
 
 ## ROW 19 — ⚠️ ISSUES
 
-**Type**: ER+/PR-/HER2- invasive ductal carcinoma (IDC) with extensive DCIS
+**Type**: ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with DCIS comp
 **Stage**: Clinical stage 2-3
 
 ### Extraction
 
 | Severity | Field | Issue | Note Evidence |
 |----------|-------|-------|---------------|
-| P2 | Cancer_Diagnosis.Type_of_Cancer | The note mentions 'extensive DCIS', but the extracted diagnosis does not specify this. | There is asymmetric non-mass enhancement extending medially from the two index masses, concerning fo |
-| P2 | Treatment_Changes.supportive_meds | The extracted supportive medication includes ondansetron, but it is not specifically related to cancer treatment. | ondansetron (ZOFRAN-ODT) 4 mg rapid dissolve tablet DISSOLVE 1 TAB ON THE TONGUE EVERY 6 HOURS AS NE |
-| P2 | Imaging_Plan.imaging_plan | The plan mentions DEXA scans but does not include any mention of annual mammograms, which might be relevant. | needs DEXA scan now and every 2 years. |
+| P2 | Cancer_Diagnosis.Type_of_Cancer | The extracted type of cancer is slightly imprecise. It should include the specific location (left breast) and mention the presence of LCIS. | LEFT 3:30, 5cm FN (1.8cm mass): IDC. Grade 2. No LVI. l0 mm on core. ER 61-70%. PR negative. Ki-6715 |
+| P2 | Treatment_Changes.supportive_meds | The extracted supportive medication includes ondansetron, which is not specifically related to cancer treatment. It should only include cancer-related supportive care. | ondansetron (ZOFRAN-ODT) 4 mg rapid dissolve tablet DISSOLVE 1 TAB ON THE TONGUE EVERY 6 HOURS AS NE |
+| P2 | Medication_Plan.medication_plan | The extracted medication plan includes general medications (ondansetron, zofran, doxycycline, acetaminophen, hydrocodone) which should be excluded. | Follow up with local psych for ongoing support as needed.; also: ondansetron, zofran, doxycycline, a |
+| P2 | Therapy_plan.therapy_plan | The extracted therapy plan includes general medications (ondansetron, zofran, doxycycline, acetaminophen, hydrocodone) which should be excluded. | Follow up with local psych for ongoing support as needed.; also: ondansetron, zofran, doxycycline, a |
 
-*Extraction summary*: Most fields are clean, but there are minor issues with the completeness of the cancer diagnosis, the classification of supportive medications, and the imaging plan.
+*Extraction summary*: Most fields are clean, but there are minor issues with the specificity of the cancer diagnosis and inclusion of non-cancer-related medications in the medication and therapy plans.
 
 ### Letter
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon (BSO, AI) | You are considering bilateral surgery to remove the ovaries and fallopian tubes  |
-| P2 | Unexplained jargon (bilateral mastectomies) | You will have 6-monthly exams, and no imaging is needed given the bilateral mast |
+| P2 | Unexplained medical jargon (NED). | You are NED (no evidence of disease) on physical exam. |
+| P2 | Unexplained medical jargon (anxiety and emotional lability). | You switched from letrozole to exemestane in December 2018 due to anxiety and em |
+| P2 | Unexplained medical jargon (estradiol level, ovarian suppression). | You will check your estradiol level to ensure ovarian suppression. If suppressed |
 
 *Letter summary*: The letter contains minor readability issues related to unexplained medical jargon.
 
@@ -562,7 +562,7 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 ## ROW 20 — ⚠️ ISSUES
 
 **Type**: Bilateral breast cancer, right breast: ER+/PR+/HER2+ with some lobular different
-**Stage**: Not mentioned in note
+**Stage**: 
 
 ### Extraction
 
@@ -579,11 +579,13 @@ Reviewer: Qwen2.5-32B-Instruct-AWQ (auto_review.py)
 
 | Severity | Issue | Sentence |
 |----------|-------|----------|
-| P2 | Unexplained jargon (lobular differentiation) | The right breast tumor measures 7.3 cm and is ER+, PR+, and HER2 positive with s |
-| P2 | Unexplained jargon (ER+, PR+, HER2 negative) | The left breast tumor measures 6 cm and is ER+, PR+, and HER2 negative. |
-| P2 | Unexplained jargon (Pertuzumab and Trastuzumab) | You will also receive Pertuzumab and Trastuzumab for a total of 1 year. |
+| P2 | Unexplained jargon: 'lobular differentiation'. | The right breast tumor measures 7.3 cm and is ER+, PR+, and HER2 positive with s |
+| P2 | Unexplained jargon: 'protein called HER2'. | The left breast tumor measures 6 cm and is ER+ and PR+ but does not have a prote |
+| P2 | Unexplained jargon: 'anthracycline', 'taxane', 'docetaxel', 'carboplatin'. | Options include either four cycles of an anthracycline followed by four cycles o |
+| P2 | Unexplained jargon: 'Pertuzumab', 'Trastuzumab'. | You will also receive Pertuzumab and Trastuzumab for a total of one year. |
+| P2 | Unexplained jargon: 'port-a-cath'. | After surgery, preparatory studies for chemotherapy will be initiated, which may |
 
-*Letter summary*: Letter contains minor readability issues due to unexplained medical jargon.
+*Letter summary*: The letter contains minor readability issues due to unexplained medical jargon.
 
 ---
 

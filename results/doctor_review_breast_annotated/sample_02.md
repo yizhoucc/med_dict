@@ -1,6 +1,7 @@
-# Sample 2 (coral_idx=New patient)
+# Sample 2
 
-**Cancer Type:** ER+/PR- invasive ductal carcinoma, HER2: not tested
+**Patient Type:** New patient
+**Cancer Type:** ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma
 **Stage:** Originally Stage IIA, now metastatic (Stage IV)
 
 ---
@@ -24,10 +25,10 @@
     "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer. The purpose of this visit is to discuss potential treatment options for her condition."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR- invasive ductal carcinoma, HER2: not tested",
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma",
     "Stage_of_Cancer": "Originally Stage IIA, now metastatic (Stage IV)",
-    "Distant Metastasis": "Yes, to the right parasternal chest wall and liver",
-    "Metastasis": "Yes, to the right parasternal chest wall and liver"
+    "Distant Metastasis": "Yes, to the liver and chest wall",
+    "Metastasis": "Yes, to the liver and chest wall"
   },
   "Lab_Results": {
     "lab_summary": "CBC normal, creatinine normal, electrolytes normal, liver function tests normal, calcium normal, CA27-29 = 15, LDH normal"
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consult regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You have a type of breast cancer called ER+/PR- invasive ductal carcinoma. The cancer has spread to your right chest wall and liver. Recent imaging showed that the cancer in your chest wall has grown, while the lymph nodes in your armpit have gotten smaller. The MRI of your brain did not show any cancer.
+You have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma. The cancer has spread to your liver and chest wall. A recent PET/CT scan showed that a nodule in your chest wall has grown, while some lymph nodes have decreased in size. An MRI of your brain showed no signs of cancer.
 **What treatment or medication changes were made?**
-You started taking zoledronic acid to help with your bone health.
+You started taking zoledronic acid to help with your osteoporosis and to prepare for starting an aromatase inhibitor.
 **What is the plan going forward?**
-You will start a medication called an aromatase inhibitor either alone or as part of a research study on January 25. This treatment aims to control your cancer and improve your quality of life. You will also have a PET/CT scan and an MRI of your brain to check on your falling spells. You are referred to continue monitoring your condition with regular visits.
+You will start an aromatase inhibitor therapy either alone or on a clinical trial called CALGB 4503 randomized to placebo or bevacizumab on January 25. You will also have a PET/CT scan and an MRI of your brain to evaluate your falling spells. You will return to the clinic on January 25 to begin your new treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

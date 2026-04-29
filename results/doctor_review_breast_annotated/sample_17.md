@@ -1,5 +1,6 @@
-# Sample 17 (coral_idx=New patient)
+# Sample 17
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2- grade 2 invasive ductal carcinoma
 **Stage:** Stage IIb (T2N1M0)
 
@@ -33,7 +34,7 @@ HPI:  ***** ***** ***** is a 58 y.o. female here in consultation to discuss trea
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Patient has a T2N1 grade 2 invasive ductal carcinoma (IDC) with a reported Ki67 of 30%. HER2 was retested on the surgical sample and showed no gene amplification by FISH. Pathology from the re-resection sample indicates a possible small area of positivity at the deep margin and additional multifocal disease. MRI findings show postoperative changes in the left breast with a seroma at 12:00, measuring  8.6 x 4.6 cm, with irregular peripheral enhancement suspicious for residual disease. A 4 mm focus of enhancement in the left breast at 6:00 is mildly suspicious (BI-RADS  4A). No axillary or internal mammary lymphadenopathy was observed. Physical exam reveals a left breast with periareolar scar and distortion, no palpable lymphadenopathy, and no masses in the right breast."
+    "findings": "Patient has a T2N1 grade 2 invasive ductal carcinoma (IDC) with a reported Ki67 of 30%. The tumor measures 3.6 cm with + LVI and positive margins. Two out of two lymph nodes are involved, with the largest being 1.8 cm and showing extracapsular extension. Postoperative MRI shows enhancement surrounding the surgical site, suspicious for residual disease, and a 4 mm focus of enhancement in the left breast at 6 o'clock. MRI-guided biopsy of the 4 mm focus revealed proliferative fibrocystic change without atypia. Postoperative seroma in the left breast at 12 o'clock measures 8.6 x 4.6 cm with irregular peripheral enhancement, suspicious for residual disease. No axillary or internal mammary lymphadenopathy is noted. Physical exam reveals a periareolar scar and distortion in the left breast with no palpable masses in the right breast. No palpable lymphadenopathy is present."
   },
   "Current_Medications": {
     "current_meds": "ac"
@@ -55,7 +56,7 @@ HPI:  ***** ***** ***** is a 58 y.o. female here in consultation to discuss trea
     "therapy_plan": "Submit authorization for TC x 6 with ONPRO support. Referral for chemotherapy teaching, port placement."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "Radiation therapy will be managed to address the situation, likely without further node sampling."
+    "radiotherapy_plan": "Radiation therapy will be managed for the extent of her cancer and the possible small area of positivity at the deep margin on the re-resection sample. Likely proceed to radiation without further node sampling."
   },
   "Procedure_Plan": {
     "procedure_plan": "port placement"
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for a new consult regarding your breast cancer treatment.
 **What's new or changed since your last visit?**
-You have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (cancer that started in the milk ducts) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The cancer has a reported Ki67 of 30%, which tells us how fast the cancer cells are growing. An MRI showed postoperative changes in your left breast with a seroma (a pocket of clear fluid that can form after surgery) at 12:00, measuring 8.6 x 4.6 cm, with irregular peripheral enhancement suspicious for residual disease. A 4 mm focus of enhancement in the left breast at 6:00 is mildly suspicious. No cancer has spread to other parts of your body.
+You have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The tumor measures 3.6 cm and has spread to two lymph nodes. Postoperative MRI shows some areas that might have residual cancer.
 **What treatment or medication changes were made?**
-You will start a new treatment plan with TC x 6 with ONPRO support. This will begin on 07/09/17 with dignicap (a device to cool your scalp to help prevent hair loss).
+You will start a new treatment plan with TC x 6, which involves chemotherapy. You will also use ONPRO support and dignicap to help manage side effects.
 **What is the plan going forward?**
-You will have a port placed to make it easier to receive chemotherapy. You will undergo staging with PET/CT (a scan to check for cancer in other parts of your body) and a baseline echo (heart ultrasound) before starting chemotherapy. You will also have radiation therapy to manage the situation, likely without further node sampling. You are referred to a genetic counselor for BRCA testing.
+You will have radiation therapy to manage the extent of your cancer and any remaining areas of concern. A port will be placed to make it easier to receive chemotherapy. You will have a staging PET/CT scan and a baseline echo before starting chemotherapy. You will also undergo genetic testing for BRCA.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.

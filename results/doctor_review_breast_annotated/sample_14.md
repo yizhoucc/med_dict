@@ -1,7 +1,8 @@
-# Sample 14 (coral_idx=New patient)
+# Sample 14
 
+**Patient Type:** New patient
 **Cancer Type:** ER+/PR+/HER2 equivocal grade 1 invasive ductal carcinoma
-**Stage:** Stage IA (inferred from pT1 N0)
+**Stage:** 
 
 ---
 
@@ -25,7 +26,7 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2 equivocal grade 1 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Stage IA (inferred from pT1 N0)",
+    "Stage_of_Cancer": "",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -33,13 +34,13 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
     "lab_summary": "Syphilis Screen by RPR with Reflex to Treponemal Antibody Nonreactive, HIV Ag/Ab Combo NEG (from 03/17/19)"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%, with a focal atypical ductal hyperplasia and pseudoangiomatous stromal hyperplasia. No DCIS present. Imaging findings include a bilateral breast MRI on April 24 with no specific details provided in the note. Physical exam findings reveal a 2 cm mass in the right breast, 8 cm from the nipple. Additionally, there is a right eyelid stye noted during the physical examination."
+    "findings": "Pathology results show Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%, and focal atypical ductal hyperplasia. No DCIS present. Physical exam reveals a 2 cm mass in the right breast,  8 cm from the nipple. No palpable lymphadenopathy noted. Recent bilateral breast MRI findings are not detailed in the note."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "Start goserelin today (no auth required!); Start letrozole in about two weeks",
+    "recent_changes": "Start goserelin today (no auth required!)\nStart letrozole in about two weeks",
     "supportive_meds": ""
   },
   "Treatment_Goals": {
@@ -94,11 +95,11 @@ We hope you are doing well. We are writing this letter to help you understand wh
 **Why did you come to the clinic?**
 You came in for an initial consultation regarding your newly diagnosed breast cancer.
 **What's new or changed since your last visit?**
-You have early-stage breast cancer (Grade 1 invasive ductal carcinoma) that is ER+ and PR+. The cancer does not have a protein called HER2. A physical exam showed a 2 cm mass in your right breast, 8 cm from the nipple. Additionally, there is a right eyelid stye noted during the physical examination.
+You have a type of breast cancer called invasive ductal carcinoma (cancer that started in the milk ducts). It is strongly positive for estrogen receptor (ER) and progesterone receptor (PR), and the HER2 status is uncertain. The cancer is small, measuring about 2 cm, and located 8 cm from the nipple in your right breast. No cancer has spread to other parts of your body.
 **What treatment or medication changes were made?**
-You will start goserelin today and begin letrozole in about two weeks. You will also discuss with your psychiatrist how Effexor and Gabapentin might interact with your current medication, Lamictal, and your bipolar II disorder. Tamoxifen was also discussed as a potential treatment option.
+You will start a medication called goserelin today. In about two weeks, you will begin another medication called letrozole. These medications are used to treat breast cancer. Your psychiatrist will also review the interactions between Effexor, Gabapentin, and Lamictal, which you are taking for your bipolar II disorder.
 **What is the plan going forward?**
-You are scheduled for a bilateral mastectomy with reconstruction. You will have labs today including estradiol. Your next visit is in one month, depending on the plans for your surgery.
+You are scheduled to have a bilateral mastectomy with reconstruction. This means both breasts will be removed and rebuilt. You will have blood tests today to check your estradiol levels. Your next visit will be in one month, depending on the plans for your surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
 Thank you for trusting us with your care.
 Please feel free to contact us if you have any questions.
