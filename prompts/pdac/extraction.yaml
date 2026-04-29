@@ -31,14 +31,16 @@ Cancer_Diagnosis: |
   TASK: Extract cancer diagnosis details.
 
   For Type_of_Cancer, be MAXIMALLY SPECIFIC — include ALL of the following that the note provides:
-  1. Histologic subtype: adenocarcinoma (most common for PDAC), neuroendocrine tumor/carcinoma, acinar cell carcinoma, etc.
+  1. Histologic subtype: adenocarcinoma, neuroendocrine tumor/carcinoma, acinar cell carcinoma, squamous cell carcinoma, melanoma, etc.
   2. Grade (e.g., "grade 2", "G3", "high grade", "well-differentiated", "poorly differentiated") — ALWAYS include if mentioned anywhere in the note
   3. Special features: perineural invasion, lymphovascular invasion, signet ring features, etc.
   4. If this is a recurrence or metastatic disease, mention that (e.g., "with metastatic disease to liver")
-  5. TUMOR ORIGIN: If the note specifies the tumor originates from a non-pancreatic site (e.g., duodenal, ampullary, biliary, gastric), you MUST include the correct origin. Do NOT assume all tumors in this dataset are pancreatic. Example: "Grade 3 neuroendocrine tumor of duodenal origin" NOT "Grade 3 pancreatic neuroendocrine tumor".
+  5. TUMOR ORIGIN: Write the EXACT organ/site of origin as stated in the note. Do NOT assume "pancreatic" — the tumor may originate from: pancreas, duodenum, ampulla, bile duct, stomach, or other sites. Write what the note says.
+  6. MULTIPLE CANCERS: If the patient has more than one cancer (e.g., pancreatic NET AND melanoma), list ALL cancers separated by semicolons. Example: "Pancreatic neuroendocrine tumor; BRAF-mutant metastatic melanoma"
   - Example: "Poorly differentiated pancreatic ductal adenocarcinoma with perineural invasion"
   - Example: "Pancreatic neuroendocrine tumor, grade 2, well-differentiated"
   - Example: "High-grade neuroendocrine tumor of duodenal/ampullary origin"
+  - Example: "Pancreatic NET; BRAF-mutant melanoma (two separate primary cancers)"
   Do NOT write just "pancreatic cancer" — always include the subtype and grade when available in the note.
   IMPORTANT: Search the ENTIRE note for diagnosis details — they may appear in PMH, Problem List, Pathology, HPI, Assessment/Plan, or Diagnosis section.
 

@@ -1425,13 +1425,25 @@ def main():
                 'gemcitabine': ['gemcitabine', 'gemzar'],
             }
             THERAPY_DRUG_LIST = [
-                'letrozole','tamoxifen','anastrozole','exemestane','irinotecan','capecitabine',
-                'taxol','abraxane','carboplatin','palbociclib',
-                'ribociclib','fulvestrant','gemcitabine',
-                'doxorubicin','cyclophosphamide','olaparib','pembrolizumab','abemaciclib',
+                # breast
+                'letrozole','tamoxifen','anastrozole','exemestane',
+                'taxol','carboplatin','palbociclib',
+                'ribociclib','fulvestrant',
+                'doxorubicin','cyclophosphamide','olaparib','abemaciclib',
                 'goserelin','leuprolide','denosumab','epirubicin',
                 'trastuzumab','lapatinib','neratinib','tucatinib',
-                'everolimus','eribulin']
+                'eribulin',
+                # PDAC / GI / pan-cancer
+                'gemcitabine','abraxane','nab-paclitaxel','capecitabine','irinotecan',
+                'oxaliplatin','fluorouracil','5-fu','leucovorin',
+                'cisplatin','temozolomide','streptozocin',
+                'everolimus','sunitinib','erlotinib','sorafenib','regorafenib',
+                'octreotide','lanreotide',
+                'pembrolizumab','nivolumab','atezolizumab','durvalumab','ipilimumab',
+                'bevacizumab','ramucirumab',
+                'rucaparib','niraparib','larotrectinib','entrectinib',
+                'dabrafenib','trametinib',
+            ]
             found_therapies = []
             for drug in THERAPY_DRUG_LIST:
                 if drug not in ap_lower:
@@ -1536,11 +1548,22 @@ def main():
             mp_lower = mp_val.lower()
             ap_lower_mp = (assessment_and_plan or "").lower()
             MEDICATION_DRUG_LIST = [
-                # oncology drugs
+                # oncology drugs (breast)
                 'tamoxifen','letrozole','anastrozole','exemestane','palbociclib','ibrance',
-                'ribociclib','fulvestrant','faslodex','capecitabine','xeloda','denosumab',
+                'ribociclib','fulvestrant','faslodex','denosumab',
                 'prolia','xgeva','zoladex','goserelin','leuprolide','lupron',
                 'trastuzumab','herceptin','pertuzumab','olaparib','abemaciclib',
+                # oncology drugs (PDAC / GI / pan-cancer)
+                'gemcitabine','gemzar','abraxane','nab-paclitaxel','capecitabine','xeloda',
+                'irinotecan','oxaliplatin','fluorouracil','leucovorin','temozolomide',
+                'cisplatin','streptozocin',
+                'everolimus','afinitor','sunitinib','sutent','erlotinib','tarceva',
+                'octreotide','sandostatin','lanreotide','somatuline',
+                'nivolumab','opdivo','pembrolizumab','keytruda','atezolizumab','tecentriq',
+                'durvalumab','ipilimumab','bevacizumab','avastin',
+                'rucaparib','niraparib','larotrectinib','entrectinib',
+                'dabrafenib','trametinib','sorafenib','regorafenib',
+                'creon','pancrelipase',
                 # supportive/symptom meds
                 'gabapentin','pregabalin','duloxetine','cymbalta','venlafaxine','effexor',
                 'ondansetron','zofran','prochlorperazine','compazine',
@@ -2849,15 +2872,33 @@ def main():
                         r'if\s+(\w+)\s+is\s+working',
                     ]
                     KNOWN_CHEMO_IV = [
-                        "ac", "tc", "fec", "caf", "tac", "tchp", "thp", "folfox", "folfiri",
+                        # regimens
+                        "ac", "tc", "fec", "caf", "tac", "tchp", "thp",
+                        "folfox", "folfiri", "folfoxiri", "folfirinox",
+                        # chemo
                         "doxorubicin", "cyclophosphamide", "paclitaxel", "docetaxel", "taxol",
                         "taxotere", "carboplatin", "cisplatin", "gemcitabine", "gemzar",
-                        "capecitabine", "xeloda", "irinotecan", "eribulin", "vinorelbine",
+                        "capecitabine", "xeloda", "irinotecan", "oxaliplatin",
+                        "fluorouracil", "5-fu", "leucovorin",
+                        "eribulin", "vinorelbine", "temozolomide", "streptozocin",
+                        "abraxane", "nab-paclitaxel",
+                        # breast targeted
                         "pertuzumab", "perjeta", "trastuzumab", "herceptin",
-                        "pembrolizumab", "keytruda", "atezolizumab", "tecentriq",
                         "olaparib", "lynparza", "palbociclib", "ibrance",
                         "ribociclib", "kisqali", "abemaciclib", "verzenio",
                         "fulvestrant", "faslodex", "lupron", "leuprolide", "goserelin", "zoladex",
+                        # PDAC / GI / NET targeted
+                        "everolimus", "afinitor", "sunitinib", "sutent",
+                        "erlotinib", "tarceva", "sorafenib", "regorafenib",
+                        "octreotide", "sandostatin", "lanreotide", "somatuline",
+                        "bevacizumab", "avastin", "ramucirumab",
+                        "rucaparib", "niraparib", "larotrectinib", "entrectinib",
+                        # immunotherapy
+                        "pembrolizumab", "keytruda", "atezolizumab", "tecentriq",
+                        "nivolumab", "opdivo", "durvalumab", "imfinzi",
+                        "ipilimumab", "yervoy",
+                        # BRAF/MEK
+                        "dabrafenib", "trametinib",
                     ]
                     PAST_CHEMO = ["previously on", "prior", "completed", "finished", "was on",
                                   "had received", "history of", "s/p"]

@@ -60,10 +60,14 @@ patient_letter: |
   We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]
 
   **Why did you come to the clinic?**
-  [Fill from: summary, Patient type — e.g. "You came in for a follow-up visit regarding your pancreatic cancer treatment."]
+  [Fill from: summary, Patient type — e.g. "You came in for a follow-up visit regarding your cancer treatment."]
   [IMPORTANT: Do NOT use medical jargon in this section.]
   [KEEP THIS SECTION SHORT: 1-2 sentences ONLY. State the visit type and the general reason. Do NOT include tumor details here — save those for "What's new or changed" section.]
-  [CANCER SUBTYPE: If Type_of_Cancer is a neuroendocrine tumor (NET/PNET), say "neuroendocrine tumor of the pancreas" NOT "pancreatic cancer". These are different diseases and patients know the difference.]
+  [CANCER TYPE: Use the ACTUAL cancer type from Type_of_Cancer field. Do NOT default to "pancreatic cancer" — the tumor may be duodenal, ampullary, biliary, or another origin. Examples:
+   - If Type_of_Cancer says "pancreatic adenocarcinoma" → "your pancreatic cancer"
+   - If Type_of_Cancer says "neuroendocrine tumor" → "your neuroendocrine tumor"
+   - If Type_of_Cancer says "neuroendocrine tumor of duodenal origin" → "your duodenal neuroendocrine tumor"
+   - If Type_of_Cancer says "adenocarcinoma of pancreaticobiliary origin" → "your cancer"]
 
   **What's new or changed since your last visit?**
   [Fill from: findings, response_assessment, lab_summary (only if ABNORMAL), goals_of_treatment]
