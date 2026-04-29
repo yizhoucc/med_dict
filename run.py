@@ -2370,7 +2370,11 @@ def main():
                 ap_lower_gs = (assessment_and_plan or "").lower()
                 meds_val_gs = str(keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
                 # Check if A/P explicitly says surveillance AND no active cancer meds
-                has_surveillance = bool(re.search(r'continue\s+(?:on\s+)?surveillance|will\s+(?:continue|remain)\s+(?:on\s+)?surveillance', ap_lower_gs))
+                has_surveillance = bool(re.search(
+                    r'continue\s+(?:on\s+)?surveillance|will\s+(?:continue|remain)\s+(?:on\s+)?surveillance|'
+                    r'plan\s+for\s+(?:\w+\s+)?surveillance|f/?u\s+surveillance|follow.up\s+surveillance|'
+                    r'surveillance\s+(?:imaging|scan|ct|plan|strategy|include|with)',
+                    ap_lower_gs))
                 has_active_meds = bool(meds_val_gs)
                 if has_surveillance and not has_active_meds:
                     old_goal = goals_surv["goals_of_treatment"]
