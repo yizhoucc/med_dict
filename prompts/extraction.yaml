@@ -85,26 +85,10 @@ Cancer_Diagnosis: |
     IMPORTANT: Only write "Originally Stage [X]" if the note EXPLICITLY states the original stage number (e.g., "Stage IIA at diagnosis"). If the note only says "metastatic recurrence" without specifying the original stage, write just "Metastatic (Stage IV)" — do NOT guess or invent the original stage.
   - If distant metastases are documented, the current stage is Stage IV even if not explicitly stated.
   - If the Assessment/Plan states a stage (e.g., "Stage I", "early stage"), extract it — do NOT write "Not mentioned in note".
-  - If tumor size and node status are available, ALWAYS infer the approximate stage — do NOT write "Not mentioned" when you have these data:
-    - ≤2cm (T1) + N0 = Stage I (or Stage IA)
-    - ≤2cm + N1mi (micromet only) = Stage IB or Stage IIA
-    - >2cm ≤5cm (T2) + N0 = Stage IIA
-    - >2cm ≤5cm + N1 (1-3 LN+) = Stage IIB
-    - >5cm (T3) + any N = at least Stage IIIA
-    - 4+ LN+ (N2) = at least Stage IIIA
-    - Distant metastasis (M1) = Stage IV
-    Example: "0.8 cm IDC, 0/5 LN" → write "Stage IA (inferred from pT1b N0)"
-    Example: "2.2 cm, 4/19 LN+" → write "Stage IIIA (inferred from pT2 N2a)"
-  - CRITICAL — N classification is based on the NUMBER OF POSITIVE nodes, NOT total nodes examined:
-    N1 = 1-3 positive nodes (N1a if macrometastases, N1mi if only micrometastases)
-    N2 = 4-9 positive nodes
-    N3 = 10+ positive nodes
-    Example: "3/28 LN positive" = 3 positive out of 28 examined = N1a (NOT N2)
-    Example: "5/12 LN positive" = 5 positive = N2a
-    Do NOT confuse total nodes examined with number positive.
-  - IMPORTANT: Node-negative ("node neg", "0/N LN+") with small tumor (≤2cm) = Stage I, NOT Stage II.
-    Stage II requires either positive lymph nodes OR tumor >2cm. "Early stage node negative" = Stage I.
-  - Only write "Not mentioned in note" if there is truly NO staging, tumor size, or node information anywhere in the note.
+  - If the note has pTN notation (e.g., "pT2N1"), write the pTN notation as-is. Do NOT convert pTN to AJCC stage names — write "pT2N1" not "Stage IIB".
+  - If distant metastasis is documented, write "Stage IV (metastatic)" even if the note does not explicitly say "Stage IV".
+  - Do NOT infer an AJCC stage number from tumor size alone. Staging requires complete clinical assessment including imaging, pathology, and physician judgment. If the note does not state a stage, write "Not staged in note" or report only the available pTN data.
+  - Only write "Not mentioned in note" if there is truly NO staging or tumor information anywhere in the note.
 
   Respond *only* with a JSON object using this exact schema:
   {
