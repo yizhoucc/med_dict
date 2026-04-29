@@ -72,19 +72,24 @@ def post_fix_letter(letter):
             changed = True
     if changed:
         print(f"  [POST-LETTER-VOICE] Fixed third-person voice → second-person")
-    # POST-LETTER-DOSE-GAP: Fix incomplete dose sentences
+    # POST-LETTER-DOSE-GAP: Fix incomplete dose sentences and chemo name artifacts
     dose_gap_patterns = [
         (r'was reduced\s+\.', 'was reduced.'),
         (r'reduced to\s*\.', 'reduced.'),
-        (r'reduced to\s+for\b', 'reduced for'),  # "reduced to for four days" → "reduced for four days"
-        (r'increased to\s+for\b', 'increased for'),  # "increased to for" → "increased for"
+        (r'reduced to\s+for\b', 'reduced for'),
+        (r'increased to\s+for\b', 'increased for'),
         (r'(?:increased?|patch)\s+to\s+and\b', 'and'),
         (r'increased?\s+to\s+and\b', 'increased, and'),
-        (r'taking\s+(\w+)\s+\.', r'taking \1.'),  # "taking Everolimus ." → "taking Everolimus."
+        (r'dose of your fentanyl\s+and\s+added', 'dose of your pain patch, and added'),
+        (r'taking\s+(\w+)\s+\.', r'taking \1.'),
         (r'continue\s+(\w+)\s+\.', r'continue \1.'),
-        (r'with a chemotherapy regimen\s+regimen', 'with a chemotherapy regimen'),  # dedup from FOLFOX replace
-        (r'chemotherapy with a chemotherapy combination', 'chemotherapy'),  # double chemo from FOLFIRINOX replace
-        (r'SOC\)?\s+chemotherapy with a chemotherapy', 'SOC) chemotherapy with a'),  # SOC variant
+        # Chemo regimen replacement artifacts
+        (r'a chemotherapy regimen\s+regimen', 'a chemotherapy regimen'),
+        (r'modified a chemotherapy regimen', 'a modified chemotherapy regimen'),
+        (r'chemotherapy with a chemotherapy combination', 'chemotherapy'),
+        (r'SOC\)?\s+chemotherapy with a chemotherapy', 'SOC) chemotherapy with a'),
+        (r'\bSOC\b', 'standard'),  # "SOC chemotherapy" → "standard chemotherapy"
+        (r'Bolus 5FU', 'one of the chemotherapy drugs'),
     ]
     for pattern, replacement in dose_gap_patterns:
         old_letter = letter
@@ -2087,6 +2092,33 @@ def main():
         # reasonable and removing it causes more harm than keeping it.
         # cancer = keypoints.get("Cancer_Diagnosis", {})
         # ... (disabled)
+
+        # POST-STAGE-VERIFY-NOTE: For non-breast cancers, verify extracted Stage actually appears in note [v32]
+        if cancer_type != "breast":
+            cancer_sv = keypoints.get("Cancer_Diagnosis", {})
+            if isinstance(cancer_sv, dict):
+                stage_sv = str(cancer_sv.get("Stage_of_Cancer", "") or "")
+                # Extract specific stage designations from the extracted value
+                stage_numbers = re.findall(r'Stage\s+(I{1,3}V?[ABC]?|IV|I[AB]|II[AB])', stage_sv, re.IGNORECASE)
+                if stage_numbers:
+                    note_lower_sv = (note_text or "").lower()
+                    ap_lower_sv = (assessment_and_plan or "").lower()
+                    all_text_sv = note_lower_sv + " " + ap_lower_sv
+                    for sn in stage_numbers:
+                        sn_pattern = r'stage\s*' + re.escape(sn.lower())
+                        if not re.search(sn_pattern, all_text_sv):
+                            # Stage number not found in note — likely fabricated
+                            old_stage_sv = stage_sv
+                            # Replace fabricated stage with pTN if available
+                            ptn_in_note = re.search(r'pT\d[a-d]?\s*N\d', all_text_sv, re.IGNORECASE)
+                            if ptn_in_note:
+                                replacement = ptn_in_note.group(0)
+                                stage_sv = re.sub(r'(?i)(?:Originally\s+)?Stage\s+' + re.escape(sn), replacement, stage_sv)
+                            else:
+                                stage_sv = re.sub(r'(?i)(?:Originally\s+)?Stage\s+' + re.escape(sn) + r',?\s*', '', stage_sv).strip()
+                            if stage_sv != old_stage_sv:
+                                cancer_sv["Stage_of_Cancer"] = stage_sv.strip(', ')
+                                print(f"    [POST-STAGE-VERIFY-NOTE] Removed fabricated 'Stage {sn}': '{old_stage_sv}' → '{stage_sv}'")
 
         # POST-STAGE-PLACEHOLDER: clean up [X] placeholders from redacted data [v18]
         cancer = keypoints.get("Cancer_Diagnosis", {})
