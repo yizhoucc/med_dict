@@ -217,6 +217,7 @@ Response_Assessment: |
   - IMPORTANT: "responding" implies MEASURABLE IMPROVEMENT. Use "stable disease" for unchanged findings.
   - Do NOT describe pathology results as a "response" — pathology is a diagnosis.
   - Do NOT describe surgical recovery as a response assessment.
+  - SUSPECTED vs CONFIRMED: If imaging shows "suspicious" or "concerning" findings that are NOT confirmed (e.g., "suspicious for metastases", "concerning for"), do NOT write "cancer is not responding" or "cancer is progressing". Instead write "suspicious findings that need further evaluation" or "findings being monitored closely". Only conclude progression if the physician's assessment explicitly says "progression" or "progressing".
 
   Write your reasoning first, then output the JSON on a new line starting with {
   IMPORTANT: Your JSON must contain ONLY the key "response_assessment". Do NOT add any other keys.

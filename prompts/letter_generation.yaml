@@ -18,6 +18,7 @@ patient_letter: |
      - GOOD: "You will have an echocardiogram (a heart ultrasound) every 6 months."
      - BAD: "You will have a heart test."
   7. Do NOT include exact dosing details (mg, mg/m2, schedules). Just name the treatment.
+     EXCEPTION: If the input says a dose was "reduced from X to Y" or "increased to X", you MUST include the target value. "Your dose was reduced to 7.5 mg" is correct. "Your dose was reduced to" with no number is WRONG — it creates an incomplete sentence.
   8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
   9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
   10. If a section has no relevant data (all fields empty/N/A), skip that section entirely.

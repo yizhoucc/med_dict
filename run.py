@@ -36,11 +36,14 @@ def post_fix_letter(letter):
         print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
         changed = True
     # POST-LETTER-GRAMMAR: Fix common grammar errors
+    old = letter
     letter = re.sub(r'\bYou has\b', 'You have', letter)
     letter = re.sub(r'\byou has\b', 'you have', letter)
-    if 'You have' in letter or 'you have' in letter:
-        # Only print if we actually fixed something (check original)
-        pass  # silent fix — common enough not to log
+    letter = re.sub(r'\bYou was\b', 'You were', letter)
+    letter = re.sub(r'\byou was\b', 'you were', letter)
+    if letter != old:
+        print(f"  [POST-LETTER-GRAMMAR] Fixed grammar errors")
+        changed = True
 
     # POST-LETTER-VOICE: Fix third-person voice ("He/She/The patient" → "You")
     voice_fixes = [
@@ -90,13 +93,26 @@ def post_fix_letter(letter):
         (r'dose of your fentanyl\s+and\s+added', 'dose of your pain patch, and added'),
         (r'taking\s+(\w+)\s+\.', r'taking \1.'),
         (r'continue\s+(\w+)\s+\.', r'continue \1.'),
+        (r'(?:reduced|increased)\s+dose of\s*\.', 'adjusted dose.'),
+        (r'was dose-reduced\s+\.', 'was dose-reduced.'),
+        (r'was dose-reduced\s*(?=\.\s|,\s)', 'was dose-reduced'),
         # Chemo regimen replacement artifacts
         (r'a chemotherapy regimen\s+regimen', 'a chemotherapy regimen'),
         (r'modified a chemotherapy regimen', 'a modified chemotherapy regimen'),
+        (r'dose-modified a (?:chemotherapy )?(?:medication|regimen)', 'dose-modified chemotherapy'),
+        (r'5-a medication bolus', 'one of the chemotherapy drugs'),
         (r'chemotherapy with a chemotherapy combination', 'chemotherapy'),
         (r'SOC\)?\s+chemotherapy with a chemotherapy', 'SOC) chemotherapy with a'),
-        (r'\bSOC\b', 'standard'),  # "SOC chemotherapy" → "standard chemotherapy"
+        (r'\bSOC\b', 'standard'),
         (r'Bolus 5FU', 'one of the chemotherapy drugs'),
+        # Collapse multiple "a medication" repetitions
+        (r'a medication/a medication', 'your medications'),
+        (r'a medication\s*/\s*a medication', 'your medications'),
+        (r'between a medication/a medication', 'between treatment cycles'),
+        (r'such as a medication\b', 'such as an alternative treatment'),
+        # Doctor language leaks
+        (r'regardless of the actual origin of (?:her|his|your|the) malignancy',
+         'while we gather more information about your diagnosis'),
     ]
     for pattern, replacement in dose_gap_patterns:
         old_letter = letter
@@ -104,6 +120,23 @@ def post_fix_letter(letter):
         if letter != old_letter:
             print(f"  [POST-LETTER-DOSE-GAP] Fixed incomplete dose sentence")
             changed = True
+    # POST-LETTER-EMPTY-PLAN: If "What is the plan" section is empty, move content from treatment section
+    plan_match = re.search(r'\*\*What is the plan going forward\?\*\*\s*\n(.*?)(?:Thank you|We understand)', letter, re.DOTALL)
+    if plan_match:
+        plan_content = plan_match.group(1).strip()
+        if not plan_content or len(plan_content) < 10:
+            # Plan is empty — check if treatment section has plan content
+            treat_match = re.search(r'\*\*What treatment.*?\*\*\s*\n(.*?)\*\*What is the plan', letter, re.DOTALL)
+            if treat_match:
+                treat_content = treat_match.group(1).strip()
+                if treat_content and len(treat_content) > 20:
+                    # Copy last sentence(s) from treatment to plan as next steps
+                    print(f"  [POST-LETTER-EMPTY-PLAN] Plan section was empty — added 'Please discuss next steps with your care team.'")
+                    letter = letter.replace(
+                        '**What is the plan going forward?**\n',
+                        '**What is the plan going forward?**\nPlease discuss your next steps and treatment plan with your care team at your next visit.\n'
+                    )
+                    changed = True
     return letter, changed
 
 
