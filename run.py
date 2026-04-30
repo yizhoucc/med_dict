@@ -35,6 +35,13 @@ def post_fix_letter(letter):
         letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
         print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
         changed = True
+    # POST-LETTER-GRAMMAR: Fix common grammar errors
+    letter = re.sub(r'\bYou has\b', 'You have', letter)
+    letter = re.sub(r'\byou has\b', 'you have', letter)
+    if 'You have' in letter or 'you have' in letter:
+        # Only print if we actually fixed something (check original)
+        pass  # silent fix — common enough not to log
+
     # POST-LETTER-VOICE: Fix third-person voice ("He/She/The patient" → "You")
     voice_fixes = [
         (r'\bHe responded\b', 'You responded'),
@@ -1634,7 +1641,9 @@ def main():
                                                          'concerned about', 'avoid', 'not recommend',
                                                          'hold ', 'held ', 'risk of', 'toxicity',
                                                          'response rate', 'et al', 'reported',
-                                                         'trial', 'study', 'published']):
+                                                         'trial', 'study', 'published',
+                                                         'without treatment', 'w/o treatment',
+                                                         'monitoring', 'expectant management']):
                             found_meds.append(drug)
                             break
             if found_meds:
@@ -2640,16 +2649,28 @@ def main():
         ]
         # Oncology whitelist — never remove these even if they appear in blacklist
         ONCO_WHITELIST = [
+            # breast
             "tamoxifen", "letrozole", "anastrozole", "exemestane", "fulvestrant",
-            "trastuzumab", "pertuzumab", "herceptin", "perjeta", "doxorubicin",
-            "cyclophosphamide", "paclitaxel", "docetaxel", "carboplatin",
+            "trastuzumab", "pertuzumab", "herceptin", "perjeta",
+            "palbociclib", "ribociclib", "abemaciclib", "tucatinib", "sacituzumab",
+            # pan-cancer chemo
+            "doxorubicin", "cyclophosphamide", "paclitaxel", "docetaxel", "carboplatin",
             "capecitabine", "xeloda", "gemcitabine", "eribulin", "vinorelbine",
-            "palbociclib", "ribociclib", "abemaciclib", "everolimus",
-            "olaparib", "talazoparib", "sacituzumab", "tucatinib",
+            "cisplatin", "oxaliplatin", "irinotecan", "fluorouracil", "leucovorin",
+            "temozolomide", "streptozocin", "abraxane", "nab-paclitaxel",
+            # targeted / PARP / IO
+            "everolimus", "sunitinib", "erlotinib", "sorafenib", "regorafenib",
+            "olaparib", "talazoparib", "rucaparib", "niraparib",
+            "larotrectinib", "entrectinib", "bevacizumab", "ramucirumab",
+            "pembrolizumab", "nivolumab", "atezolizumab", "durvalumab", "ipilimumab",
+            "dabrafenib", "trametinib",
+            # NET / SSA
+            "octreotide", "sandostatin", "lanreotide", "somatuline",
+            # supportive
             "zoledronic", "zometa", "denosumab", "xgeva", "reclast",
             "ondansetron", "zofran", "granisetron", "prochlorperazine",
             "dexamethasone", "filgrastim", "pegfilgrastim", "neulasta",
-            "epoetin", "darbepoetin",
+            "epoetin", "darbepoetin", "creon", "pancrelipase",
         ]
         drug_dict_meds = keypoints.get("Current_Medications", {})
         if isinstance(drug_dict_meds, dict):
