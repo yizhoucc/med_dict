@@ -2373,7 +2373,9 @@ def main():
                 has_surveillance = bool(re.search(
                     r'continue\s+(?:on\s+)?surveillance|will\s+(?:continue|remain)\s+(?:on\s+)?surveillance|'
                     r'plan\s+for\s+(?:\w+\s+)?surveillance|f/?u\s+surveillance|follow.up\s+surveillance|'
-                    r'surveillance\s+(?:imaging|scan|ct|plan|strategy|include|with)',
+                    r'surveillance\s+(?:imaging|scan|ct|plan|strategy|include|with)|'
+                    r'continue\s+to\s+monitor|monitoring/expectant|expectant\s+management|'
+                    r'course\s+of\s+monitoring|will\s+(?:continue\s+to\s+)?monitor\s+(?:\w+\s+)?with\s+(?:once|annual|regular)',
                     ap_lower_gs))
                 has_active_meds = bool(meds_val_gs)
                 if has_surveillance and not has_active_meds:
