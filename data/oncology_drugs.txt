@@ -88,6 +88,49 @@ truqap
 bevacizumab
 avastin
 
+# PDAC / GI TARGETED THERAPY
+sunitinib
+sutent
+erlotinib
+tarceva
+sorafenib
+nexavar
+regorafenib
+stivarga
+rucaparib
+rubraca
+niraparib
+zejula
+larotrectinib
+vitrakvi
+entrectinib
+rozlytrek
+ramucirumab
+cyramza
+
+# NET / SSA
+octreotide
+sandostatin
+lanreotide
+somatuline
+
+# PDAC CHEMO
+oxaliplatin
+eloxatin
+leucovorin
+temozolomide
+temodar
+streptozocin
+zanosar
+
+# BRAF/MEK
+dabrafenib
+tafinlar
+trametinib
+mekinist
+vemurafenib
+zelboraf
+
 # IMMUNOTHERAPY
 pembrolizumab
 keytruda
@@ -97,6 +140,12 @@ nivolumab
 opdivo
 durvalumab
 imfinzi
+ipilimumab
+yervoy
+
+# SUPPORTIVE ONCOLOGY
+creon
+pancrelipase
 
 # BONE AGENTS
 denosumab
