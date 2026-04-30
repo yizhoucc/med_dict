@@ -41,6 +41,8 @@ def post_fix_letter(letter):
     letter = re.sub(r'\byou has\b', 'you have', letter)
     letter = re.sub(r'\bYou was\b', 'You were', letter)
     letter = re.sub(r'\byou was\b', 'you were', letter)
+    letter = re.sub(r'\bYou is\b', 'You are', letter)
+    letter = re.sub(r'\byou is\b', 'you are', letter)
     if letter != old:
         print(f"  [POST-LETTER-GRAMMAR] Fixed grammar errors")
         changed = True
