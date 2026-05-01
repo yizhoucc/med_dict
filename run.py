@@ -115,6 +115,12 @@ def post_fix_letter(letter):
         # Doctor language leaks
         (r'regardless of the actual origin of (?:her|his|your|the) malignancy',
          'while we gather more information about your diagnosis'),
+        # REDACTED garble fixes — [REDACTED] replaced with "a medication" creates bad compounds
+        (r'a medication-paclitaxel', 'nab-paclitaxel (a chemotherapy drug)'),
+        (r'unspecified agent-paclitaxel', 'nab-paclitaxel (a chemotherapy drug)'),
+        (r'a medication-9', 'CA 19-9 (a tumor marker)'),
+        (r'a medication-a medication', 'a treatment combination'),
+        (r'medication-9 level', 'CA 19-9 level'),
     ]
     for pattern, replacement in dose_gap_patterns:
         old_letter = letter
