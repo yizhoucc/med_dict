@@ -35,19 +35,9 @@ def post_fix_letter(letter):
         letter = re.sub(r'(a\s+)?medication\s+test(ing)?', 'a test', letter, flags=re.IGNORECASE)
         print(f"  [POST-LETTER-FIX] Replaced 'medication test' with 'a test'")
         changed = True
-    # POST-LETTER-GRAMMAR: Fix common grammar errors
-    old = letter
-    letter = re.sub(r'\bYou has\b', 'You have', letter)
-    letter = re.sub(r'\byou has\b', 'you have', letter)
-    letter = re.sub(r'\bYou was\b', 'You were', letter)
-    letter = re.sub(r'\byou was\b', 'you were', letter)
-    letter = re.sub(r'\bYou is\b', 'You are', letter)
-    letter = re.sub(r'\byou is\b', 'you are', letter)
-    if letter != old:
-        print(f"  [POST-LETTER-GRAMMAR] Fixed grammar errors")
-        changed = True
-
     # POST-LETTER-VOICE: Fix third-person voice ("He/She/The patient" → "You")
+    # NOTE: GRAMMAR runs AFTER VOICE because VOICE can create bad grammar
+    # (e.g., "The patient was discussed" → "You was discussed")
     voice_fixes = [
         (r'\bHe responded\b', 'You responded'),
         (r'\bShe responded\b', 'You responded'),
@@ -84,6 +74,19 @@ def post_fix_letter(letter):
             changed = True
     if changed:
         print(f"  [POST-LETTER-VOICE] Fixed third-person voice → second-person")
+    # POST-LETTER-GRAMMAR: Fix grammar errors created by VOICE fix
+    # "The patient was discussed" → VOICE → "You was discussed" → GRAMMAR → "You were discussed"
+    old_gram = letter
+    letter = re.sub(r'\bYou has\b', 'You have', letter)
+    letter = re.sub(r'\byou has\b', 'you have', letter)
+    letter = re.sub(r'\bYou was\b', 'You were', letter)
+    letter = re.sub(r'\byou was\b', 'you were', letter)
+    letter = re.sub(r'\bYou is\b', 'You are', letter)
+    letter = re.sub(r'\byou is\b', 'you are', letter)
+    if letter != old_gram:
+        print(f"  [POST-LETTER-GRAMMAR] Fixed grammar errors")
+        changed = True
+
     # POST-LETTER-DOSE-GAP: Fix incomplete dose sentences and chemo name artifacts
     dose_gap_patterns = [
         (r'was reduced\s+\.', 'was reduced.'),
