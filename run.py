@@ -118,6 +118,8 @@ def post_fix_letter(letter):
         # Doctor language leaks
         (r'regardless of the actual origin of (?:her|his|your|the) malignancy',
          'while we gather more information about your diagnosis'),
+        # Collapse multiple "a medication" — 3+ in one sentence is unreadable
+        # (handled below as a separate pass)
         # REDACTED garble fixes — [REDACTED] replaced with "a medication" creates bad compounds
         (r'a medication-paclitaxel', 'nab-paclitaxel (a chemotherapy drug)'),
         (r'unspecified agent-paclitaxel', 'nab-paclitaxel (a chemotherapy drug)'),
@@ -148,6 +150,23 @@ def post_fix_letter(letter):
                         '**What is the plan going forward?**\nPlease discuss your next steps and treatment plan with your care team at your next visit.\n'
                     )
                     changed = True
+    # POST-LETTER-MEDICATION-COLLAPSE: If "a medication" appears 3+ times, simplify
+    med_count = len(re.findall(r'\ba medication\b', letter, re.IGNORECASE))
+    if med_count >= 3:
+        # Replace from 3rd occurrence onward with "your treatment"
+        # Keep first 2 "a medication", replace rest
+        def replace_nth(match, state={'count': 0}):
+            state['count'] += 1
+            if state['count'] <= 2:
+                return match.group(0)
+            return 'your treatment'
+        state = {'count': 0}
+        def replacer(m):
+            state['count'] += 1
+            return m.group(0) if state['count'] <= 2 else 'your treatment'
+        letter = re.sub(r'\ba medication\b', replacer, letter, flags=re.IGNORECASE)
+        print(f"  [POST-LETTER-MEDICATION-COLLAPSE] Collapsed {med_count} 'a medication' instances")
+        changed = True
     return letter, changed
 
 

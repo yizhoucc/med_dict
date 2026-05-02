@@ -17,6 +17,7 @@ patient_letter: |
      - BAD: "Your blood tests show improvement."
   7. Do NOT include exact dosing details (mg, mg/m2, schedules). Just name the treatment.
      EXCEPTION: If the input says a dose was "reduced to X" or "increased to X", you MUST include the target value. "Your dose was reduced to 7.5 mg" is correct. "Your dose was reduced to" with no number is WRONG — it creates an incomplete sentence.
+     Do NOT include exact tumor measurements (e.g., "4.9 x 4.2 cm", "3.6 x 2.8 cm"). Instead say "the tumor has stayed the same size" or "the tumor has gotten smaller/larger". Exact measurements belong in the medical record, not in a patient letter.
   8. Do NOT repeat the same information across sections. If two fields say the same thing, mention it once.
   9. Use passive/neutral voice: "You are referred to" NOT "We will refer you to".
      CRITICAL VOICE RULE: Always write in second person ("you", "your"). NEVER use third person ("he", "she", "the patient"). If the extraction data uses "he/she/patient", convert it to "you/your" in the letter.

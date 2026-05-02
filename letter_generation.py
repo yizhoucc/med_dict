@@ -468,6 +468,46 @@ def post_check_letter(letter_text):
             )
             warnings.append(f"[POST-LETTER] fixed implausible LN count ({ln_count}) for early stage")
 
+    # 5b. Replace anatomical/medical jargon with plain language
+    _JARGON_MAP = [
+        # Anatomical locations
+        ('mesenteric lymph nodes', 'lymph nodes in the belly area'),
+        ('mesenteric lymph node', 'a lymph node in the belly area'),
+        ('mesenteric nodule', 'a growth in the belly area'),
+        ('retroperitoneal lymph', 'deep abdominal lymph'),
+        ('retroperitoneal', 'deep abdominal'),
+        ('peripancreatic', 'around the pancreas'),
+        ('peritoneal carcinomatosis', 'cancer spread in the abdomen lining'),
+        ('peritoneal implants', 'cancer growths in the abdomen lining'),
+        ('peritoneal metastases', 'cancer spread in the abdomen lining'),
+        ('omental', 'abdominal'),
+        ('hepatic segment', 'liver'),
+        ('hepatic metastases', 'liver tumors'),
+        ('hepatic metastasis', 'liver tumor'),
+        ('hepatic lesion', 'liver lesion'),
+        ('hepatic lesions', 'liver lesions'),
+        ('lymphadenopathy', 'swollen lymph nodes'),
+        ('portacaval', 'near the liver'),
+        # Imaging terms
+        ('hypermetabolic', 'active on the scan'),
+        ('hypoechoic', 'darker area on the scan'),
+        ('hypervascular', 'areas with more blood flow'),
+    ]
+    for jargon, plain in _JARGON_MAP:
+        if jargon in letter_text.lower():
+            letter_text = re.sub(re.escape(jargon), plain, letter_text, flags=re.IGNORECASE)
+            warnings.append(f"[POST-LETTER] replaced jargon '{jargon}' → '{plain}'")
+
+    # 5c. Remove exact tumor measurements (e.g., "4.9 x 4.2 cm")
+    measurement_pattern = re.compile(r'\s*\d+\.?\d*\s*x\s*\d+\.?\d*\s*(?:x\s*\d+\.?\d*\s*)?(?:cm|mm)\b', re.IGNORECASE)
+    new_text = measurement_pattern.sub('', letter_text)
+    if new_text != letter_text:
+        letter_text = re.sub(r' {2,}', ' ', new_text)
+        letter_text = re.sub(r'measuring\s+,', 'measuring,', letter_text)
+        letter_text = re.sub(r'measuring\s+\.', '.', letter_text)
+        letter_text = re.sub(r'measuring\s+and', 'and', letter_text)
+        warnings.append("[POST-LETTER] removed exact tumor measurements from letter")
+
     # 6. Strip inline dosing details (e.g., "1500mg", "10mg daily", "25 mg/m2")
     dosing_pattern = re.compile(
         r'\s*\d+\.?\d*\s*(?:mg(?:/m[²2])?|mcg|units?|mEq)\s*'
