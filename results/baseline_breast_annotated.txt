@@ -1,0 +1,859 @@
+BASELINE GENERATION — No pipeline, single prompt
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv
+Date: 2026-05-02 14:32
+Prompt: Standard baseline (see research proposal Section 5.3)
+============================================================
+
+============================================================
+ROW 1 (coral_idx=20)
+============================================================
+
+--- LETTER ---
+Dear Mrs. *****,
+
+I hope this letter finds you feeling well. I wanted to share some important information about your health with you and your family.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer. The type of cancer you have is called triple-negative breast cancer. This means the cancer does not respond to hormones like estrogen or progesterone, and it also does not have too many HER2 proteins. This makes it harder to treat with certain medicines.
+
+**Treatment Plan:**
+We talked about different ways to treat your cancer. Chemotherapy is the main treatment for triple-negative breast cancer. However, because you have other health problems like heart failure and diabetes, chemotherapy might be very hard for you to handle. 
+
+**Next Steps:**
+To help us decide the best way forward, we need to do more tests. We will do a special scan called a PET/CT. This scan will help us see if the cancer has spread to other parts of your body. After we get the results, we will talk again about the best treatment plan for you.
+
+**What to Watch For:**
+Please let us know if you notice any new symptoms or if anything feels different. It’s important to keep track of how you’re feeling and to tell us if you have any concerns.
+
+**Questions:**
+If you have any questions or need more information, please don’t hesitate to ask your care team. We are here to support you and your family during this time.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.0s
+Letter length: 1486 chars
+
+
+============================================================
+ROW 2 (coral_idx=21)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to see us. I wanted to share what we discussed during your visit on January 9th.
+
+**Diagnosis:**
+You have breast cancer that has come back in the same area where it was first found. This is called a local recurrence. The cancer is sensitive to hormones, which means certain treatments can help.
+
+**Treatment Plan:**
+We talked about starting you on a medicine called an aromatase inhibitor. This type of medicine helps stop the growth of cancer cells by lowering the amount of hormones in your body. We also discussed joining a research study to try a combination of medicines.
+
+**Next Steps:**
+On January 25th, you will come back to our clinic to start taking the aromatase inhibitor. We will decide if you want to join the research study at that time.
+
+**What to Watch For:**
+Please pay attention to any changes in how you feel. Let us know if you notice any new pain or discomfort. Also, keep track of your appetite and any changes in your weight.
+
+**Important Reminders:**
+Remember to take your medicines as directed. If you have any questions or concerns, please talk to your care team. We are here to help you every step of the way.
+
+Thank you for trusting us with your care. We look forward to seeing you soon.
+
+Warm regards,
+
+[Doctor’s Name]  
+UCSF Comprehensive Cancer Center  
+Breast Care Center
+
+Please feel free to reach out to us if you have any questions or need further information.
+
+---
+
+This summary aims to be clear and compassionate while adhering to the guidelines provided.
+
+--- STATS ---
+Generation time: 5.7s
+Letter length: 1536 chars
+
+
+============================================================
+ROW 3 (coral_idx=22)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to share the details of your recent visit and the plan moving forward.
+
+You were diagnosed with a type of breast cancer called spindle cell metaplastic carcinoma. This is a rare form of cancer that can grow quickly. It was found in your right breast. The cancer is not sensitive to estrogen, progesterone, or HER2, which means it is considered "triple negative."
+
+We talked about starting a treatment called neoadjuvant chemotherapy. This means you will get chemotherapy before surgery. The goal is to shrink the tumor so that surgery might be easier and to see how well the cancer responds to the treatment.
+
+The chemotherapy will likely involve two main types of drugs. One is called paclitaxel, and the other is a combination of doxorubicin and cyclophosphamide. These drugs help kill cancer cells and make the tumor smaller.
+
+We also discussed joining a clinical trial called I-SPY2. This trial offers the chance to receive an additional experimental drug along with the standard chemotherapy. You have agreed to join this trial, and we will let you know more details once the trial decides which treatment you will receive.
+
+Before starting chemotherapy, we will place a device called a Medi-port under your skin. This makes it easier to give you the medicine during treatments.
+
+Your next steps are:
+1. Get a Medi-port placed.
+2. Attend a chemotherapy teaching session.
+3. Start chemotherapy in the first week of February.
+
+It’s important to watch for any side effects like feeling tired, tingling in your hands and feet, skin changes, muscle pain, hair loss, and feeling sick to your stomach. Let us know if you notice any of these.
+
+We will also check your blood tests again to make sure everything is okay.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you through this journey.
+
+Best wishes,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1993 chars
+
+
+============================================================
+ROW 4 (coral_idx=23)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to our cancer center. We want to make sure you understand everything about your health and the next steps in your care.
+
+**Diagnosis:**
+You have a type of breast cancer called triple-negative breast cancer. This means the cancer does not respond to hormones like estrogen or progesterone, and it doesn’t have too many HER2 receptors. The cancer is in your right breast.
+
+**Treatment Plan:**
+We recommend starting chemotherapy. Chemotherapy uses strong medicines to kill cancer cells. We will place a small device called a port under your skin to make it easier to give you the medicine. The chemotherapy we will use is called Taxol. You will get this medicine once a week for 12 weeks.
+
+**Next Steps:**
+- We will place the port as soon as possible.
+- You can start chemotherapy as early as next Wednesday, but it’s okay if we wait until the following week.
+- You will come to the clinic for check-ups during weeks 1, 2, 5, 8, and 12.
+
+**What to Watch For:**
+- Let us know if you feel very tired, have any pain, or notice any changes in how you feel.
+- Keep an eye on the area where the port is placed. Tell us if you see any redness, swelling, or if it feels hot.
+
+**Medications:**
+You are already taking several medications for different conditions. Make sure to take them as directed. If you have any questions about your medications, please ask us.
+
+**Questions:**
+It’s important to talk to your care team if you have any questions or concerns. We are here to help you through this process.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+Please remember to discuss any questions or concerns with your care team. We are here to support you every step of the way.
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 1739 chars
+
+
+============================================================
+ROW 5 (coral_idx=24)
+============================================================
+
+--- LETTER ---
+Dear [Patient's First Name],
+
+Thank you for coming to our clinic today. I wanted to share with you the details of your visit and the next steps in your care.
+
+**Diagnosis:**
+You have been diagnosed with early-stage breast cancer in both breasts. This means there are two separate tumors, one in each breast. One tumor is more serious than the other, but both need treatment.
+
+**Treatment Plan:**
+We recommend a few steps to treat your cancer:
+
+1. **Chemotherapy:** This is medicine that helps kill cancer cells. We think it’s important for the more serious tumor in your left breast. It might make you feel tired and cause some joint pain, but it can help stop the cancer from coming back.
+
+2. **Radiation Therapy:** After chemotherapy, we will use radiation to target any remaining cancer cells.
+
+3. **Hormone Therapy:** Since your cancer is sensitive to hormones, we will give you medicine to block the hormones that can feed the cancer. This usually involves taking a pill every day for at least five years.
+
+**Next Steps:**
+- We will start with chemotherapy. You will have four treatments.
+- After chemotherapy, you will have radiation therapy.
+- Once radiation is done, you will start taking the hormone-blocking medicine.
+
+**What to Watch For:**
+- If you feel very tired or have joint pain, let us know.
+- Keep an eye out for any new lumps or changes in your breasts.
+- Stay active and keep up with your daily walking.
+
+**Important Reminders:**
+- Please talk to your care team about any questions or concerns you have.
+- We will check your bone health with a special test called a DEXA scan.
+- To keep your bones strong, you will take calcium and vitamin D supplements.
+
+If you have any questions or need more information, please don’t hesitate to reach out to your care team. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please replace `[Patient's First Name]` and `[Your Name]` with the actual names.
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 1994 chars
+
+
+============================================================
+ROW 6 (coral_idx=25)
+============================================================
+
+--- LETTER ---
+Dear Mrs. *****,
+
+I hope this letter finds you well. I wanted to share some important information about your health with you.
+
+You have been diagnosed with a type of breast cancer called HER2-positive breast cancer. This means the cancer cells have a protein called HER2 that helps them grow faster. We also found some changes in your bones that might be due to the cancer spreading there.
+
+Here’s what we plan to do next:
+
+1. **MRI of the Pelvis**: We will take pictures of your pelvis to check if the cancer has spread to your bones.
+2. **Biopsy**: We will take a small sample from one of the areas in your bones to confirm if it is cancer.
+3. **Medications**: If the tests show that the cancer has spread, we will start you on a treatment plan. This includes three different medicines that help fight the cancer:
+   - Paclitaxel (weekly)
+   - Trastuzumab (every three weeks)
+   - Pertuzumab (every three weeks)
+
+These medicines are very good at fighting this type of cancer and can help keep it under control for a long time.
+
+We will also do some other tests:
+- An echocardiogram to check how your heart is working.
+- We will place a port in your body to make it easier to give you the medicine.
+
+If you have any questions or concerns, please talk to your care team. We are here to support you every step of the way.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 4.9s
+Letter length: 1398 chars
+
+
+============================================================
+ROW 7 (coral_idx=26)
+============================================================
+
+--- LETTER ---
+Dear [Patient’s First Name],
+
+Thank you for coming to your appointment today. I want to share with you what we discussed and what comes next.
+
+**Your Diagnosis:**
+You have a type of breast cancer called metastatic breast cancer. This means the cancer has spread to other parts of your body, like your liver and lymph nodes. It is also called triple-negative breast cancer because it does not respond to certain hormones or proteins.
+
+**Treatment Plan:**
+We are treating your cancer with two medicines: abraxane and pembrolizumab. These are types of chemotherapy and immunotherapy. They help fight the cancer cells in your body.
+
+**Next Steps:**
+- You will keep getting abraxane every week and pembrolizumab every three weeks.
+- We will monitor how you are doing with regular check-ups and tests.
+- You will need a small device called a port to make it easier to give you medicine. We hope to put this in next week.
+- We will also start you on some other medicines to help with side effects like nausea and pain.
+
+**What to Watch For:**
+- Keep an eye out for any new pain or discomfort.
+- Let us know if you feel very tired or have any new symptoms.
+- If you have any questions or concerns, please talk to your care team.
+
+Remember, you are not alone in this journey. Your doctors and nurses are here to support you every step of the way.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 5.7s
+Letter length: 1415 chars
+
+
+============================================================
+ROW 8 (coral_idx=27)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+I hope this letter finds you well. I am writing to summarize your recent visit to our cancer center and to outline the next steps in your care.
+
+**Diagnosis:**
+You have been diagnosed with stage IIA invasive ductal carcinoma (IDC) in your left breast. This means the cancer has spread to nearby lymph nodes. You recently had bilateral mastectomies, which means both breasts were removed to treat the cancer.
+
+**Treatment Plan:**
+Based on your diagnosis and the results of your tests, we recommend that you start chemotherapy. Chemotherapy uses medicines to kill cancer cells. We will use a combination of drugs called AC with paclitaxel. 
+
+**Next Steps:**
+Before starting chemotherapy, we need to do a few things:
+- **Heart Test:** We will do a test called a TTE to check how your heart is working. This is important because some chemotherapy drugs can affect the heart.
+- **Port Placement:** We will place a small device called a port under your skin. This makes it easier to give you the chemotherapy medicine.
+- **Teaching Session:** We will teach you about chemotherapy and what to expect during treatment.
+
+We plan to start chemotherapy around October 18, 2017. This is about two months after your surgery.
+
+**What to Watch For:**
+Chemotherapy can cause some side effects, such as:
+- Feeling very tired (fatigue)
+- Nausea and vomiting
+- Hair loss
+
+If you notice any of these side effects or anything else unusual, please let us know right away.
+
+**Genetic Counseling:**
+Given your family history of breast cancer, we recommend that you see a genetic counselor. They can help you understand if you might have a higher risk of cancer due to your genes.
+
+Please feel free to ask any questions you have about your treatment or care. Our team is here to support you through this journey.
+
+Best wishes,
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 8.3s
+Letter length: 2004 chars
+
+
+============================================================
+ROW 9 (coral_idx=28)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+Thank you for coming to our clinic today. I want to share with you the details of your visit and the next steps in your care.
+
+**Diagnosis:**
+You have a type of breast cancer called hormone receptor positive (HR+)/HER2 negative (HER2-) invasive ductal carcinoma (IDC). This means the cancer cells grow in response to hormones like estrogen and progesterone, but they do not respond to a protein called HER2.
+
+**Treatment Plan:**
+We will start with a treatment called ovarian suppression (OS). This stops your ovaries from making hormones that can help the cancer grow. After that, we will give you a medicine called an aromatase inhibitor (AI). These medicines work together to slow down the growth of the cancer.
+
+**Next Steps:**
+1. **Biopsy:** We will do a fine needle aspiration (FNA) of the lump on your neck to make sure we know exactly what we are dealing with.
+2. **Medications:** We will start with the ovarian suppression medicine and then add the aromatase inhibitor.
+3. **Follow-Up:** You will come back to the clinic two weeks after starting the ovarian suppression medicine.
+
+**What to Watch For:**
+Please let us know if you notice any new lumps or changes in your skin color. Also, tell us if you feel any new pain or discomfort.
+
+**Important Reminders:**
+- If you have any questions or concerns, please talk to your care team.
+- It’s important to follow the treatment plan carefully to manage your condition best.
+
+We are here to support you every step of the way. Please don’t hesitate to reach out if you need anything.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.2s
+Letter length: 1631 chars
+
+
+============================================================
+ROW 10 (coral_idx=29)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to our clinic. I want to share with you the important information about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer in your right breast. This means there is a growth in your breast that is not normal. It is called a grade 2 invasive ductal carcinoma. This type of cancer starts in the milk ducts and spreads to nearby tissues.
+
+**Treatment Plan:**
+We will start with a special kind of treatment called neoadjuvant chemotherapy. This means we will give you medicine before surgery to help shrink the tumor. Here’s what we will do:
+
+1. **Echocardiogram and EKG:** We will check how your heart is working.
+2. **Port Placement:** We will put a small tube (called a port) under your skin to make it easier to give you medicine.
+3. **Chemotherapy:** We will start giving you medicine to fight the cancer. This will happen around May 1st, after we finish collecting your eggs.
+
+**Next Steps:**
+- We will do more tests like a PET scan to make sure the cancer hasn’t spread to other parts of your body.
+- We will keep checking your progress with different tests and scans.
+- We will talk about ways to manage any side effects you might feel, like hair loss or feeling tired.
+
+**What to Watch For:**
+Please let us know if you notice any new symptoms or if you feel very sick. Some things to watch for include:
+- Feeling very tired
+- Nausea or vomiting
+- Changes in your appetite
+- Any unusual pain
+
+**Support:**
+It’s important to take care of yourself. You mentioned wanting to stay active and eat healthier. That’s great! Keep doing what you can to stay strong. If you have any questions or concerns, please talk to your care team. We are here to help you every step of the way.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.4s
+Letter length: 1856 chars
+
+
+============================================================
+ROW 11 (coral_idx=30)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+I hope this letter finds you well. I wanted to share some important information about your recent health check-up and the next steps we will take together.
+
+First, let me explain what we found. You have something called ductal carcinoma in situ (DCIS) in your left breast. DCIS means there are abnormal cells inside the milk ducts of your breast, but they haven't spread outside the ducts yet. This is a very early form of breast cancer.
+
+We did a small operation called a lumpectomy to remove the affected area. The doctors looked closely at the tissue and found that the edges around the removed area still have some of these abnormal cells. This means we need to do more to make sure all the abnormal cells are gone.
+
+The next step is to talk about two main treatments:
+
+1. **Radiation Therapy**: This uses special X-rays to kill any remaining abnormal cells in your breast. We will set up an appointment with a radiation doctor to see if this is right for you.
+
+2. **Hormone Therapy**: This involves taking a medicine called tamoxifen. Tamoxifen helps stop the growth of abnormal cells by blocking the effects of hormones like estrogen. It can cause some side effects, such as making your hot flashes and night sweats worse. We will prescribe tamoxifen, but you should wait until after your radiation appointment before starting it.
+
+It's important to know that these treatments are designed to prevent the abnormal cells from coming back and to reduce the chance of getting new breast cancer in the future.
+
+In the meantime, please keep an eye out for any new symptoms or changes in how you feel. If you notice anything unusual, don’t hesitate to contact us.
+
+Your next visit to our clinic will be 4 to 6 weeks after you start taking tamoxifen. During this visit, we will check how you are doing with the medicine.
+
+If you have any questions or concerns, please talk to your care team. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.7s
+Letter length: 2039 chars
+
+
+============================================================
+ROW 12 (coral_idx=31)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to let you know about your recent diagnosis and our plan moving forward.
+
+You have been diagnosed with early-stage breast cancer. This means the cancer is still in the breast and hasn't spread to other parts of your body. This is good news because it means we can treat it effectively.
+
+The treatment plan includes several steps:
+
+1. **Chemotherapy**: This is medicine that helps kill cancer cells. We will start with a type called AC/T. It will help make the tumor smaller so that we can do a lumpectomy (removing just the tumor) instead of a mastectomy (removing the whole breast).
+
+2. **Surgery**: After the chemotherapy, we will remove the tumor. Our goal is to keep as much of your breast as possible.
+
+3. **Hormonal Therapy**: Since your cancer is hormone-sensitive, you will take medicine to block hormones that might help the cancer grow.
+
+4. **Radiation**: Depending on how things go, you may need radiation to make sure all the cancer is gone.
+
+Before we start, we need to do a few things:
+
+- **Echocardiogram**: This is a test to check how your heart is working.
+- **Chemotherapy Teaching**: We will teach you about the medicines and what to expect.
+- **Port Placement**: A small device will be placed under your skin to make it easier to give you the chemotherapy.
+- **Cold Caps**: These can help prevent hair loss during chemotherapy. We will talk more about this.
+
+We will start the chemotherapy in the first week of March. You will come back to see us in two weeks to check on how you're doing.
+
+Please remember to ask any questions you have. Your care team is here to support you through this journey.
+
+Best wishes,
+
+[Your Name]  
+Medical Communication Specialist  
+Cancer Center
+
+---
+
+Feel free to reach out to your care team if you have any questions or concerns. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 1894 chars
+
+
+============================================================
+ROW 13 (coral_idx=32)
+============================================================
+
+--- LETTER ---
+Dear [Patient’s First Name],
+
+Thank you for coming to our clinic. I want to share with you the important information about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer. The cancer is in your right breast and has spread to some nearby lymph nodes. This type of cancer is called hormone receptor positive and HER2 negative. This means the cancer cells grow in response to hormones like estrogen and progesterone, but they do not have too much of a protein called HER2.
+
+**Treatment Plan:**
+On November 5th, you will have surgery to remove part of your breast and some lymph nodes. After the surgery, we will decide on the best treatment plan for you. This might include:
+
+- **Chemotherapy:** Medicines that kill cancer cells.
+- **Hormonal Therapy:** Medicines that block hormones from helping the cancer grow.
+- **Radiation Therapy:** Using high-energy rays to kill cancer cells.
+
+We will talk more about these treatments after your surgery.
+
+**Next Steps:**
+After your surgery, we will look at the results to decide the best way to treat your cancer. We will also talk about how to protect your fertility if you want to have children in the future.
+
+**What to Watch For:**
+Please watch for any new lumps or changes in your breasts. If you notice anything different, please let us know right away.
+
+**Questions:**
+It’s important to ask questions if you don’t understand something. Your care team is here to help you. Don’t hesitate to reach out to us if you have any concerns or need more information.
+
+Take care and stay strong.
+
+Sincerely,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.2s
+Letter length: 1670 chars
+
+
+============================================================
+ROW 14 (coral_idx=33)
+============================================================
+
+--- LETTER ---
+Dear [Patient's First Name],
+
+Thank you for coming to see us. I want to share some important information about your health with you.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer in your right breast. This type of cancer is called invasive ductal carcinoma (IDC). It means the cancer cells have spread beyond the milk ducts into the surrounding breast tissue.
+
+**Treatment Plan:**
+We have discussed several treatment options with you. Based on your situation, we recommend a bilateral mastectomy with reconstruction. This means removing both breasts and rebuilding them. 
+
+After surgery, you will start a treatment called endocrine therapy. This helps prevent the cancer from coming back. We will begin with a medicine called goserelin, which stops your ovaries from making estrogen. Two weeks later, you will start another medicine called letrozole.
+
+**Next Steps:**
+Your surgery has been delayed because of the current situation with COVID-19. We are working with Dr. [Doctor’s Last Name] to schedule your surgery as soon as possible. We will keep you updated on the timing.
+
+In the meantime, you will start taking goserelin today. Two weeks later, you will start letrozole. We will also check your hormone levels with a blood test.
+
+**What to Watch For:**
+Please watch for any changes in how you feel. Some common side effects of these treatments include hot flashes and mood changes. If you notice anything unusual, please let us know.
+
+**Important Reminders:**
+- Keep all your appointments with your care team.
+- Discuss any questions or concerns with your doctors.
+- Continue to take your medications as prescribed.
+
+We are here to support you through this journey. Please don’t hesitate to reach out if you need anything.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+---
+
+Please remember to discuss any questions or concerns with your care team. They are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 6.6s
+Letter length: 1952 chars
+
+
+============================================================
+ROW 15 (coral_idx=34)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+Thank you for coming to our clinic today. I want to make sure you understand everything we talked about and what will happen next.
+
+**Diagnosis:**
+You have been diagnosed with a type of breast cancer called hormone receptor-positive (HR+) metastatic breast cancer. This means the cancer has spread to your lymph nodes, which are small glands that help fight infections. The cancer cells are sensitive to hormones like estrogen.
+
+**Treatment Plan:**
+To better understand your cancer, we need to do some more tests. These include:
+
+- **Biopsy of a breast mass:** We will take a small sample from a suspicious area in your breast to check if it’s cancer.
+- **Lymph node biopsy:** We will also take a small sample from a lymph node in your neck to see if it has cancer cells.
+- **Genetic testing:** This helps us understand more about your cancer and choose the best treatment.
+
+**Next Steps:**
+Once we have the results from these tests, we will decide on the best treatment plan for you. If the cancer is sensitive to hormones, we might start with medicine that blocks estrogen. If the cancer is also HER2 positive, we might use different medicines that target HER2.
+
+**What to Watch For:**
+Please let us know if you notice any new lumps or changes in your body. Also, tell us if you feel very tired or have any other unusual symptoms.
+
+**Questions:**
+It’s important to talk to your care team if you have any questions or concerns. We are here to help you understand everything and support you through this journey.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1603 chars
+
+
+============================================================
+ROW 16 (coral_idx=35)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to see us. I wanted to share what we found and the next steps in your care.
+
+You have a type of breast cancer called invasive lobular carcinoma. It’s in your left breast and is about 5.5 cm in size. We also found a small lump in the lymph nodes under your left arm. This means the cancer might have spread a little, but not far.
+
+We did tests to learn more about the cancer. The cancer is sensitive to hormones, which means certain medicines can help treat it. We didn’t find any signs that the cancer has spread to other parts of your body.
+
+After talking with you, we decided the best first step is to remove the cancer with surgery. This is called a mastectomy. After the surgery, we will look at the removed tissue to learn more about the cancer and decide on the next steps.
+
+Before the surgery, we will talk again about the best way to treat the cancer. This might include medicines to help control the growth of the cancer.
+
+Please watch for any changes in how you feel. If you notice any new symptoms or if you have any questions, please call your care team. We are here to help you every step of the way.
+
+Take care,
+[Your Doctor's Name]
+
+Please remember to discuss any questions or concerns with your care team. They are here to support you through this journey.
+
+Warm regards,
+
+[Your Doctor's Name]  
+UCSF Comprehensive Cancer Center  
+Breast Care Center
+
+---
+
+This summary aims to convey the key points of the clinical note in a clear and compassionate manner, suitable for a patient to understand.
+
+--- STATS ---
+Generation time: 5.4s
+Letter length: 1553 chars
+
+
+============================================================
+ROW 17 (coral_idx=36)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer in your left breast. The cancer is called invasive ductal carcinoma (IDC), which means it started in the milk ducts and spread to nearby tissues. The cancer is in stage IIb, which means it is a bit bigger and has spread to some lymph nodes.
+
+**Treatment Plan:**
+To treat your cancer, we will use a combination of treatments:
+
+1. **Chemotherapy:** This is medicine that helps kill cancer cells. We will use a treatment called TC, which is given over six cycles. We will also use a special cap to help keep your hair during treatment.
+   
+2. **Radiation Therapy:** After chemotherapy, you will receive radiation to the area where the cancer was. This helps make sure all the cancer cells are gone.
+
+3. **Port Placement:** To make it easier to give you chemotherapy, we will place a small device called a port under your skin. This will help us give you the medicine without needing to find a vein each time.
+
+**Next Steps:**
+- We will start your chemotherapy on July 9, 2017, using the special cap to protect your hair.
+- Before starting treatment, we will do some tests to make sure everything is ready.
+- Once your treatment is done, we will check how well it worked and decide on any further steps.
+
+**What to Watch For:**
+- Let us know if you have any new symptoms or if anything feels different.
+- Keep an eye on your left breast and let us know if you notice any changes.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.6s
+Letter length: 1797 chars
+
+
+============================================================
+ROW 18 (coral_idx=37)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+I hope this letter finds you well. I wanted to share some important information about your recent diagnosis and treatment plan in a way that’s easy to understand.
+
+**Diagnosis:**
+You have been diagnosed with left breast cancer. This means there is a growth in your left breast that is not normal. The cancer is called "invasive ductal carcinoma," which is a type of cancer that starts in the milk ducts and spreads to other parts of the breast.
+
+**Treatment Plan:**
+Based on your situation, the doctors recommend that you have a mastectomy. A mastectomy is a surgery where the entire breast is removed. This is because of a genetic change you have, called an ATM mutation, which makes radiation less effective for you.
+
+Before the surgery, you will need another test called a Fine Needle Aspiration (FNA) to check the lymph nodes in your left armpit. Lymph nodes are small glands that help fight infections. This test will help us know if the cancer has spread to these glands.
+
+After the surgery, you will likely need chemotherapy. Chemotherapy uses strong medicines to kill cancer cells. We will decide on the exact type of chemotherapy after your surgery.
+
+Because your cancer is sensitive to estrogen, you will also need to take medicine to block estrogen for at least five years after your surgery. This helps prevent the cancer from coming back.
+
+**Next Steps:**
+1. You will have a mastectomy soon.
+2. After the surgery, we will talk more about the chemotherapy and hormone treatments.
+3. We will also discuss any questions you might have about these treatments.
+
+**What to Watch For:**
+Please let us know if you experience any unusual symptoms like fever, severe pain, or swelling after your surgery. These could be signs of complications that we need to address.
+
+Remember, you can always ask your care team any questions you have. They are here to support you and answer all your concerns.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please feel free to reach out to your care team if you have any questions or need further clarification.
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 2093 chars
+
+
+============================================================
+ROW 19 (coral_idx=38)
+============================================================
+
+--- LETTER ---
+Dear [Patient’s Name],
+
+Thank you for coming to see us today. Here is a summary of your recent visit and what we discussed:
+
+**Diagnosis:**
+You have been diagnosed with breast cancer. It started in your left breast and has been treated. The type of cancer is called IDC (Invasive Ductal Carcinoma), which means it began in the milk ducts and spread to nearby tissues. 
+
+**Treatment Plan:**
+- **Medication:** You are currently taking a medicine called exemestane. This helps prevent the cancer from coming back. You should continue taking it every day.
+- **Check-ups:** We recommend you get a DEXA scan to check your bones. This is important because the medicine you are taking can affect your bones. We will also check your hormone levels to make sure the medicine is working properly.
+- **Future Options:** We talked about the possibility of having surgery to remove your ovaries (BSO) after you finish taking the medicine. This might help prevent the cancer from returning.
+
+**Next Steps:**
+- Continue taking exemestane as prescribed.
+- Schedule a DEXA scan and check your hormone levels.
+- Keep all your follow-up appointments. We will see you again in 6 months unless you have any new or worsening symptoms.
+
+**What to Watch For:**
+- Any new lumps or changes in your breasts.
+- Bone pain or joint aches.
+- Hot flashes or trouble sleeping.
+- Mood changes or anxiety.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+[Cancer Center Name]
+
+---
+
+Feel free to reach out to us anytime. We are here to support you.
+
+--- STATS ---
+Generation time: 6.3s
+Letter length: 1655 chars
+
+
+============================================================
+ROW 20 (coral_idx=39)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to share the details of your recent visit to our breast cancer center. We talked about your diagnosis and the next steps in your treatment plan.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer. This means there are abnormal cells growing in your breasts. The cancer is in both breasts, and it is called "ER+ and HER2 positive." This tells us how the cancer might grow and what treatments might work best.
+
+**Treatment Plan:**
+We will be using a combination of medicines to treat your cancer. These medicines target the HER2 part of the cancer and also include chemotherapy. Chemotherapy is a type of medicine that helps kill cancer cells. We will give you these medicines over several months.
+
+The first step will be to prepare for the treatment. This includes some tests to make sure you are ready. After that, we will start the treatment. We will also talk more about any side effects you might feel during treatment.
+
+**Next Steps:**
+After starting the treatment, we will check how your body is responding. We will do this with special scans and tests. Depending on how the treatment works, we will decide if you need surgery or radiation later.
+
+**What to Watch For:**
+Please let us know if you notice any new symptoms or if you feel very tired or sick. It’s important to keep track of how you’re feeling and to tell us about any changes.
+
+**Questions:**
+If you have any questions or need more information, please don’t hesitate to call our office. Our team is here to help you through this journey.
+
+We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you understand everything about your treatment and to support you throughout your journey.
+
+--- STATS ---
+Generation time: 6.0s
+Letter length: 1901 chars
+
+

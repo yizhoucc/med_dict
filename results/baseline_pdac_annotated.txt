@@ -1,0 +1,835 @@
+BASELINE GENERATION — No pipeline, single prompt
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/pdac_annotated.csv
+Date: 2026-05-02 14:34
+Prompt: Standard baseline (see research proposal Section 5.3)
+============================================================
+
+============================================================
+ROW 1 (coral_idx=0)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+I hope this letter finds you well. I wanted to share some important information about your health and what we plan to do next.
+
+You have a type of cancer called locally advanced adenocarcinoma of the pancreas. This means the cancer started in your pancreas and has grown quite large. We found this out when you had a CT scan, which is a special kind of X-ray that takes pictures inside your body.
+
+We have been treating you with two medicines called gemcitabine and Abraxane. You have finished six treatments. Recently, we noticed that the cancer might be growing a little bit more. But because you feel much better and have less pain, we think this might not be a big problem.
+
+We also found some small spots in your lungs. These spots could be signs of cancer spreading, but they are very small and probably won’t cause any problems soon.
+
+For now, we think it’s best to take a break from the medicine. We will keep watching you closely to make sure everything stays okay. You will come back to see us in two months for another check-up.
+
+In the meantime, here are a few things to watch for:
+- If you have any new pain or discomfort, let us know.
+- Keep an eye on how you’re feeling overall. If you notice anything different, call us.
+- Remember to take your blood pressure medicine if you need it.
+
+If you have any questions or concerns, please talk to your care team. We are here to help you and support you through this journey.
+
+Best wishes,
+[Your Name]
+Medical Communication Specialist
+
+P.S. Your girlfriend had a baby girl on April 27. That’s wonderful news!
+
+--- STATS ---
+Generation time: 5.8s
+Letter length: 1581 chars
+
+
+============================================================
+ROW 2 (coral_idx=1)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+Thank you for coming to see us today. Here’s a summary of your visit:
+
+**Diagnosis:**
+You have a type of cancer called pancreatic adenocarcinoma. This means the cancer started in your pancreas. The cancer has spread to other parts of your body, which we call metastatic disease.
+
+**Treatment Plan:**
+You are now receiving a new treatment called Gemcitabine plus Abraxane. This treatment helps fight the cancer. We will keep watching how you respond to the treatment.
+
+**Next Steps:**
+You will come back to see us in two weeks. During this time, we will do a CT scan to check how the treatment is working.
+
+**What to Watch For:**
+Please let us know right away if you notice any new symptoms or if you feel worse. Some things to watch out for include:
+- Feeling very tired
+- Any new pain
+- Changes in how you feel
+
+We also talked about some side effects you might have:
+- You might feel a little numb in your hands and feet. If this gets worse, we can adjust your treatment.
+- You might feel sick to your stomach. We gave you medicine to help with this.
+
+**Medicines:**
+You are taking several medicines to help with different issues. Please make sure to take them as directed.
+
+**Travel Plans:**
+You mentioned you plan to visit your sister and brother-in-law from December 30 to January 11. Please let us know if you need any special care during your trip.
+
+If you have any questions or concerns, please talk to your care team. We are here to help you.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
+
+--- STATS ---
+Generation time: 6.1s
+Letter length: 1561 chars
+
+
+============================================================
+ROW 3 (coral_idx=2)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+I hope this letter finds you well. I wanted to share some updates about your health and the next steps in your treatment plan.
+
+You have been diagnosed with metastatic pancreatic cancer. This means the cancer has spread beyond the pancreas to other parts of your body. We have been treating you with different types of chemotherapy to help control the cancer.
+
+Recently, we have been using a treatment called 5-FU/LV plus nanoliposomal irinotecan (Onivyde). This treatment has helped keep the cancer stable, but we have noticed some changes in how you feel. You have had some pain and low energy levels. We also found that you were anemic, which means you didn’t have enough red blood cells. We gave you a blood transfusion to help with this.
+
+We will continue with one more cycle of the current treatment if your lab tests look good. After that, we will do another scan to check how the cancer is doing.
+
+If the cancer continues to grow, we might consider other treatments like joining a clinical trial. These trials test new medicines that might help. We will talk more about these options if needed.
+
+For now, we want to make sure you are comfortable and have a good quality of life. If the cancer gets worse, we might focus more on managing your symptoms and making you feel better.
+
+Please remember to let us know if you have any questions or concerns. We are here to support you and your family.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
+
+--- STATS ---
+Generation time: 5.9s
+Letter length: 1512 chars
+
+
+============================================================
+ROW 4 (coral_idx=3)
+============================================================
+
+--- LETTER ---
+Dear [Patient’s Name],
+
+I hope this letter finds you well. I wanted to share some important information about your health and our plan moving forward.
+
+You have been diagnosed with a type of cancer called adenocarcinoma of the pancreas. This means the cancer started in the pancreas, an organ in your body that helps with digestion. We are monitoring how the cancer is responding to treatment.
+
+Recently, you had some tests done, including scans of your abdomen and chest. These tests showed that the cancer is still under control, but we need to keep watching closely. You also had a procedure called ERCP, where doctors looked at your bile ducts and removed some blockages. This helped improve your symptoms like nausea.
+
+Your treatment plan is to continue being monitored closely. We will see you again in two months for another scan to check on the cancer. In the meantime, if you notice any new symptoms or feel unwell, please let us know right away.
+
+Some things to watch out for include:
+- Persistent nausea or pain
+- Changes in your energy levels
+- Any new lumps or swelling
+
+You mentioned having some questions about future treatments. There are many new treatments being developed, and we will discuss them with you when the time comes. For now, we will focus on keeping you comfortable and managing your symptoms.
+
+Please remember to take your medications as prescribed. If you have any questions or concerns, don’t hesitate to reach out to your care team. We are here to support you.
+
+Take care and stay strong.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Feel free to discuss any questions or concerns with your care team. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 5.5s
+Letter length: 1719 chars
+
+
+============================================================
+ROW 5 (coral_idx=4)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+Thank you for visiting us today. Here’s a summary of your recent appointment:
+
+**Diagnosis:**
+You have a type of cancer called adenocarcinoma of the pancreas. This means there is a tumor in your pancreas. You also have a small amount of cancer spread to your abdominal wall.
+
+**Treatment Plan:**
+You have finished 12 cycles of a chemotherapy treatment called FOLFIRINOX. Now, you are taking a break from chemotherapy. We will check how you are doing with a CT scan on November 19, 2019.
+
+**Next Steps:**
+- You will have a follow-up visit on November 21, 2019, with Dr. *****.
+- If you have any new symptoms or problems, please call the clinic right away.
+
+**What to Watch For:**
+- Keep an eye out for any new pain or bleeding.
+- Let us know if you notice any changes in your health.
+
+**Other Health Issues:**
+- You have a condition called thrush, which is a fungal infection in your mouth. You are taking medicine called fluconazole to treat it.
+- You have a blood clot in your leg. You are taking a medicine called Xarelto to prevent more clots.
+- You may still have some abdominal pain. You are taking medicine to help with this.
+- You have lost some weight, but this has improved. Our nutritionist is helping you with this.
+
+**Medicines:**
+You are taking several medicines to manage your symptoms and keep you comfortable. Please continue to take them as prescribed.
+
+**Important Reminders:**
+- If you have any questions or concerns, please talk to your care team.
+- Remember to come back for your follow-up appointments.
+
+We hope you feel better soon and we look forward to seeing you again.
+
+Warm regards,
+
+Your Care Team
+
+UCSF Comprehensive Cancer Center
+
+--- STATS ---
+Generation time: 6.6s
+Letter length: 1677 chars
+
+
+============================================================
+ROW 6 (coral_idx=5)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+I hope this letter finds you well. I wanted to share some important information about your recent health check-ups and what we plan to do next.
+
+**Diagnosis:**
+You have a type of cancer called adenocarcinoma in your pancreas. This means there are bad cells growing in your pancreas that need to be treated.
+
+**Treatment:**
+We have been treating your cancer with a special medicine called FOLFIRINOX. You finished 12 rounds of this treatment. Then, you had a big operation called a pylorus-preserving pancreatectomy. During the surgery, we removed parts of your pancreas and other nearby areas where the cancer was growing.
+
+**Next Steps:**
+After your surgery, we did some tests to see how you are doing. The tests showed that there might be some cancer coming back. We found some small spots in your liver that could be cancer. To make sure, we will do more tests in two months. If needed, we might take a small piece of tissue to look at it closely.
+
+**What to Watch For:**
+You might still feel some discomfort in your belly, especially on the right side. This is normal as you heal. You should keep eating well and having regular bowel movements. Let us know if you notice any big changes or if you feel very tired.
+
+**Important Reminders:**
+Please talk to your care team if you have any questions or concerns. We are here to help you every step of the way.
+
+Take care and stay strong.
+
+Sincerely,
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Feel free to reach out to your care team if you have any questions or need more information. We are here to support you.
+
+--- STATS ---
+Generation time: 5.9s
+Letter length: 1600 chars
+
+
+============================================================
+ROW 7 (coral_idx=6)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+Thank you for your trust in our care team. Here’s a summary of your recent visit and what we discussed:
+
+**Diagnosis:**
+You have a type of cancer called adenocarcinoma in the tail of your pancreas. This means there is a growth in the pancreas that is not normal. We also found a cyst in your right ovary, which seems to be harmless.
+
+**Treatment Plan:**
+We have been treating you with chemotherapy. Chemotherapy uses special medicines to fight cancer cells. At first, you had some side effects, so we changed how often you get the medicine. Now, you are doing much better.
+
+**Next Steps:**
+You will keep getting the same chemotherapy treatment. We will check how you are doing with another scan in 8 weeks. This scan helps us see if the treatment is working.
+
+**What to Watch For:**
+You might notice some changes in your body. If you feel any new pain or discomfort, let us know. Also, watch for any changes in your appetite or energy levels. You may have a rash, but it should be okay. If it gets worse, please tell us.
+
+**Medications:**
+You are taking several medications to help manage your pain and other health issues. Make sure to take them as directed.
+
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to help you and answer any questions you might have.
+
+Take care and stay strong.
+
+Warm regards,
+
+[Your Care Team]
+
+--- STATS ---
+Generation time: 5.5s
+Letter length: 1386 chars
+
+
+============================================================
+ROW 8 (coral_idx=7)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+Thank you for coming to our clinic today. I wanted to share some important information about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have a type of cancer called pancreatic adenocarcinoma. This means the cancer started in your pancreas. It has spread to other parts of your body, which we call metastatic cancer.
+
+**Treatment Plan:**
+You are currently receiving chemotherapy with two medicines: gemcitabine and nab-paclitaxel. These medicines help fight the cancer. You are doing well with the treatment so far, and the cancer seems to be getting smaller.
+
+**Next Steps:**
+We will continue giving you these medicines every other week. We want to keep treating you until the cancer stops growing or gets smaller. We aim to give you at least six treatments. After that, we might take a break from the medicine to let your body rest.
+
+**What to Watch For:**
+Please watch for any new symptoms like pain, trouble eating, or feeling very tired. If you notice anything different, please let us know right away.
+
+**Important Reminders:**
+- Keep taking your regular medications as prescribed.
+- Stay active and eat well.
+- If you have any questions or concerns, don’t hesitate to talk to your care team.
+
+We are here to support you every step of the way. Please feel free to reach out if you need anything.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+UCSF Comprehensive Cancer Center
+
+--- STATS ---
+Generation time: 5.8s
+Letter length: 1442 chars
+
+
+============================================================
+ROW 9 (coral_idx=8)
+============================================================
+
+--- LETTER ---
+Dear [Patient’s Name],
+
+I hope this letter finds you well. I wanted to share some important information about your recent visit to our cancer center.
+
+**Diagnosis:**
+You have been diagnosed with metastatic pancreatic cancer. This means that the cancer has spread from the pancreas to other parts of your body, mainly your lungs.
+
+**Treatment Plan:**
+We have been treating your cancer with different medications. Recently, we have been using a combination of two drugs called gemcitabine and Abraxane. These medicines help control the growth of cancer cells. However, they can sometimes cause side effects like numbness or tingling in your hands and feet, which is called neuropathy.
+
+To manage these side effects, we have reduced the amount of Abraxane you receive. We will check how you are doing in two weeks.
+
+**Next Steps:**
+In two weeks, you will come back to see us so we can check on your neuropathy. We will also do a CT scan at the end of September to see how the cancer is responding to the treatment.
+
+**What to Watch For:**
+Please keep an eye out for any new symptoms or changes in how you feel. If you notice anything unusual, please let us know right away.
+
+**Medications:**
+You are taking several medications to help manage your symptoms. Please continue to take them as directed by your doctor.
+
+**Important Reminders:**
+If you have any questions or concerns, please talk to your care team. We are here to support you and answer any questions you might have.
+
+Take care and we look forward to seeing you soon.
+
+Sincerely,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.0s
+Letter length: 1604 chars
+
+
+============================================================
+ROW 10 (coral_idx=9)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+Thank you for your visit today. Here’s a summary of our discussion:
+
+**Diagnosis:**
+You have locally advanced pancreatic cancer. This means the cancer is growing in the pancreas and has spread to nearby areas.
+
+**Treatment Plan:**
+We are continuing your chemotherapy treatment with FOLFOX. This includes medicines that help fight the cancer. We stopped using one medicine called irinotecan because it caused some side effects.
+
+**Next Steps:**
+Today, you received another dose of chemotherapy. We will keep monitoring your progress with regular scans and blood tests. We plan to do more scans after your eighth treatment.
+
+**What to Watch For:**
+
+- **Diarrhea:** If you have any diarrhea, especially after eating certain foods, let us know. We have given you medicine to help with this.
+  
+- **Electrolytes:** We need to check your potassium levels. You might feel weak if your potassium is too low. We will give you potassium supplements to help with this.
+  
+- **Weight Loss:** It’s important to try to keep your weight steady. Find foods you enjoy and try to eat them regularly.
+  
+- **Side Effects:** Let us know if you have any new symptoms or if your current ones get worse. This includes feeling tired, having trouble eating, or any other concerns.
+
+**Medications:**
+You have several medications to manage your symptoms. Make sure to take them as directed. If you have any trouble with the size or taste of the pills, let us know.
+
+**Important Reminders:**
+Please call us if you have any questions or if you notice any new symptoms. We are here to support you throughout your treatment.
+
+Take care,
+[Your Doctor's Name]
+Assistant Professor of Clinical Medicine
+Gastrointestinal Oncology Program
+University of California, San Francisco
+
+Office Phone Number: [Phone Number]
+
+---
+
+Feel free to reach out to your care team if you have any questions or concerns. We are here to help you through this journey.
+
+--- STATS ---
+Generation time: 8.0s
+Letter length: 1927 chars
+
+
+============================================================
+ROW 11 (coral_idx=10)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+Thank you for visiting us at the UCSF Comprehensive Cancer Center. I wanted to share some important information about your health and the next steps we will take together.
+
+**Diagnosis:**
+You have been diagnosed with pancreatic cancer that has spread to your liver. This is called stage IV cancer.
+
+**Treatment Plan:**
+We talked about different ways to treat your cancer. One of the best options for people like you is a type of chemotherapy called FOLFIRINOX. This treatment aims to slow down the growth of the cancer and help you feel better.
+
+Another option is to join a special research study called the Precision Promise trial. This study might offer new treatments that could be very helpful. We will do some tests to see if you can join this study.
+
+**Next Steps:**
+Today, you agreed to start the process for joining the Precision Promise trial. We will do some tests to make sure you can join the study. If you cannot join the study, we will start you on the FOLFIRINOX treatment.
+
+You will also have a CT scan and some blood tests done locally at ***** today. These tests will help us understand more about your condition.
+
+**What to Watch For:**
+Please keep an eye on how you feel. Let us know if you notice any changes, such as:
+
+- Yellowing of your eyes or skin (jaundice)
+- Changes in your appetite or energy levels
+- Any new pain or discomfort
+
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to support you and answer any questions you might have.
+
+Best regards,
+
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
+
+Office Phone Number: [Phone Number]
+
+Remember, you are not alone in this journey. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 6.2s
+Letter length: 1752 chars
+
+
+============================================================
+ROW 12 (coral_idx=11)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your care.
+
+**Diagnosis:**
+You have a type of cancer called pancreatic adenocarcinoma. This means there is a growth in your pancreas that is not normal and has spread to other parts of your body.
+
+**Treatment Plan:**
+We have been treating your cancer with medicine, but recently, the cancer has grown again. Because of this, we think it’s best to focus on making you comfortable and managing any pain or other symptoms you might have. This is called palliative care.
+
+**Next Steps:**
+We will keep watching how you’re doing, especially your eating, any blockages in your digestive system, and how your liver is working. We will also check if you can get more stents placed to help with any blockages. If not, we will talk about moving to hospice care, which focuses on comfort and quality of life.
+
+**What to Watch For:**
+Please let us know if you have any new pain, trouble eating, or if you feel very tired or weak. These could be signs that we need to adjust your care.
+
+**Questions:**
+If you have any questions or concerns, please don’t hesitate to call us. We are here to support you and your family.
+
+Sincerely,
+[Your Name]
+Medical Communication Specialist
+UCSF ***** ***** Family Comprehensive Cancer Center
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 7.4s
+Letter length: 1472 chars
+
+
+============================================================
+ROW 13 (coral_idx=12)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+Thank you for coming to our clinic for your recent visit. Here’s a summary of what we discussed:
+
+**Diagnosis:**
+You have been diagnosed with pancreatic cancer. This type of cancer starts in the pancreas, an organ that helps digest food and control blood sugar levels.
+
+**Treatment Plan:**
+We have been treating your cancer with a combination of medicines called Gemcitabine and Capecitabine. Recently, we paused this treatment to consider another option called radiation therapy. Radiation therapy uses high-energy rays to shrink tumors and relieve symptoms.
+
+**Next Steps:**
+We will continue to monitor your health closely. You should keep taking your current medications as prescribed. We recommend that you get regular blood tests to check your red blood cell count. If your red blood cell count gets too low, we may give you a blood transfusion.
+
+**What to Watch For:**
+Please watch for any signs of discomfort or unusual symptoms. Let us know if you experience any pain, difficulty swallowing, or changes in your appetite. It’s important to stay in touch with your care team if you notice anything different.
+
+**Additional Care:**
+Your weight has gone down, so we talked about ways to improve your nutrition. We also discussed managing any pain you might have, even though you don’t have pain right now. We will continue to support you with sleep aids like Remeron and melatonin.
+
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to help you understand your condition and treatment options.
+
+Best regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+Please remember to discuss any questions or concerns with your doctor during your next visit.
+
+--- STATS ---
+Generation time: 7.1s
+Letter length: 1731 chars
+
+
+============================================================
+ROW 14 (coral_idx=13)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+Thank you for joining us for your video visit today. I want to make sure you understand everything we talked about and what will happen next.
+
+**Diagnosis:**
+You have a type of cancer called metastatic pancreatic adenocarcinoma. This means the cancer started in your pancreas and has spread to other parts of your body, like your liver.
+
+**Treatment Plan:**
+The main treatment for your cancer will be chemotherapy. Chemotherapy uses medicines to kill cancer cells. We will start you on a treatment called gemcitabine and nab-paclitaxel. These medicines help slow down the growth of cancer and can improve how you feel.
+
+**Next Steps:**
+We will set up an in-person visit soon so we can check on your health and make sure you’re ready to start chemotherapy. During this visit, we’ll do some tests to make sure everything is okay before starting the treatment.
+
+**What to Watch For:**
+Please watch for any new symptoms or changes in how you feel. If you notice anything unusual, like severe pain, fever, or feeling very tired, let us know right away.
+
+**Medications:**
+You are currently taking several medications for other health issues. Please continue to take them as directed. If you have any side effects from your pain medicine, like constipation, talk to us about ways to manage it.
+
+**Questions:**
+If you have any questions or concerns, please don’t hesitate to reach out to your care team. We are here to support you every step of the way.
+
+Sincerely,
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
+
+---
+
+Remember, you can always ask us to explain anything you don’t understand. We are here to help you and your family through this journey.
+
+--- STATS ---
+Generation time: 6.3s
+Letter length: 1694 chars
+
+
+============================================================
+ROW 15 (coral_idx=14)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to share some important information about your recent visit and your health.
+
+**Diagnosis:**
+You were diagnosed with pancreatic cancer. This means there was a growth in your pancreas that doctors found to be cancerous. After surgery, they removed the cancer, but there is still a chance it could come back.
+
+**Treatment Plan:**
+We need to keep a close eye on your condition because there is a higher chance of the cancer returning. Here’s what we will do:
+
+1. **Check Your Blood Levels:** We will check a special blood marker called CA19-9 this week. This helps us know if the cancer might be coming back.
+   
+2. **Imaging Tests:** We will do a CT scan in two weeks to look inside your body and make sure everything looks okay.
+
+3. **Nutrition:** You will continue taking Creon, which helps your body digest food better.
+
+4. **Diabetes Management:** Your diabetes is not well controlled right now. It would be good to talk to a new doctor who can help manage your diabetes better.
+
+**Next Steps:**
+After the tests, we will meet again to discuss the results and decide what to do next. If you notice anything unusual or have any concerns before then, please call us right away.
+
+**What to Watch For:**
+Please pay attention to how you feel. Let us know if you experience any new symptoms or if anything feels different.
+
+Remember, you can always ask questions or share your concerns with your care team. We are here to support you.
+
+Best wishes,
+[Your Name]
+Medical Communication Specialist
+[Contact Information]
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1576 chars
+
+
+============================================================
+ROW 16 (coral_idx=15)
+============================================================
+
+--- LETTER ---
+Dear [Patient's Name],
+
+Thank you for coming to our clinic for your follow-up visit. I wanted to share some important information with you about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have a type of cancer called pancreatic adenocarcinoma. This means there is a tumor in your pancreas. The pancreas is an organ in your body that helps digest food and control blood sugar.
+
+**Treatment Plan:**
+We have been giving you a medicine called gemcitabine to help treat the cancer. This medicine works to slow down the growth of the cancer cells. Recently, we changed how often you get the medicine to make it easier on your body.
+
+**Next Steps:**
+- We will keep giving you gemcitabine every other week.
+- We will check your progress with tests like blood work and scans every two months.
+- We will also give you a flu shot to help protect you from getting sick.
+
+**What to Watch For:**
+- If you feel very tired or lose weight quickly, let us know.
+- Keep an eye on your appetite and try to eat small meals throughout the day.
+- Stay active as much as you can.
+
+**Other Important Information:**
+- Your dentist checked your teeth and said it’s okay to continue with your treatment.
+- You should keep using the special mouth rinse as directed.
+- We will refer you to a nutritionist to help you with your diet.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you.
+
+Best wishes,
+[Doctor's Name], MD
+UCSF [Family Name] Family Comprehensive Cancer Center
+
+---
+
+Feel free to reach out to us anytime if you need more information or have any questions. We are here to help you through this journey.
+
+--- STATS ---
+Generation time: 6.6s
+Letter length: 1668 chars
+
+
+============================================================
+ROW 17 (coral_idx=16)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to share some important information about your health with you.
+
+You have been diagnosed with a type of cancer called pancreatic adenocarcinoma. This means there is a tumor in your pancreas, which is an organ in your belly that helps digest food. The cancer is considered "locally advanced," which means it has grown but hasn't spread to other parts of your body yet.
+
+We started treating you with a medicine called FOLFIRINOX. This is a mix of different drugs that work together to fight the cancer. You had eight treatments, and the latest scans show that the tumor has gotten smaller and is now staying the same size. This is good news.
+
+Right now, you are taking a break from the chemotherapy. We will keep watching how you are doing. You feel well overall and are able to exercise and eat well. You still have some pain in your upper belly, but it isn’t getting worse.
+
+Here’s what we’ll do next:
+
+- You will come back to see us in June for a check-up.
+- In July, we will do another scan to see how things are going.
+
+It’s important to let us know if you notice any changes, like more pain or feeling very tired. If you have any questions or concerns, please talk to your doctor or nurse. They are here to help you understand everything and answer all your questions.
+
+Take care and stay strong.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+[Contact Information]
+
+--- STATS ---
+Generation time: 5.0s
+Letter length: 1453 chars
+
+
+============================================================
+ROW 18 (coral_idx=17)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+Thank you for sharing your health journey with us. Here’s a summary of what we’ve learned and the next steps:
+
+**Diagnosis:**
+You have a type of cancer called adenocarcinoma. This cancer was found in the tail part of your pancreas. You had surgery to remove the cancer, and the doctors found that the cancer had spread to two lymph nodes.
+
+**Treatment Plan:**
+After your surgery, you started chemotherapy to help prevent the cancer from coming back. However, the chemotherapy made you feel very sick, so we stopped it. Now, we want to try again with a different approach. We will wait until your skin problems get better before starting the chemotherapy again. This time, you will take the medicine for five days out of seven.
+
+**Next Steps:**
+We will keep an eye on your skin and mouth sores. Once these issues improve, we will restart the chemotherapy. We also want to make sure you’re safe while walking. You’ve been using a walker, which is helping you stay steady. We’ll check if the medicine you’re taking could be causing you to lose your balance.
+
+**What to Watch For:**
+Please watch for any new symptoms like dizziness or trouble walking. If you notice anything unusual, let us know right away. Also, keep track of how you’re feeling overall and let us know if you have any new pain or discomfort.
+
+**Medications:**
+You are taking several medicines to manage your conditions. Make sure to follow the instructions carefully. If you have any questions about your medicines, don’t hesitate to ask.
+
+**Important Reminders:**
+Remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
+
+Take care,
+[Your Medical Communication Specialist]
+
+--- STATS ---
+Generation time: 6.7s
+Letter length: 1720 chars
+
+
+============================================================
+ROW 19 (coral_idx=18)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your care.
+
+**Diagnosis:**
+You have a type of cancer called adenocarcinoma in your pancreas. The pancreas is an organ in your belly that helps digest food and control blood sugar. Your cancer is growing and causing some problems.
+
+**Treatment Plan:**
+You are currently receiving a treatment called FOLFIRINOX. This is a mix of medicines that help fight the cancer. We need to check how well the treatment is working.
+
+**Next Steps:**
+We need to do some tests to see how your body is doing. We will take pictures of your belly using a special machine called a CT scan. This will help us see if the cancer is getting bigger or if there are other issues like blockage in your bile ducts.
+
+If the test shows that your bile ducts are blocked, we will ask a doctor who specializes in digestive systems to do a procedure called ERCP. This procedure can help open up the blocked ducts and make you feel better.
+
+**What to Watch For:**
+Please watch for any new symptoms such as:
+- Fever or chills
+- Not being able to eat or drink
+- More swelling in your legs
+
+If you notice any of these, please go to the emergency room right away.
+
+**Medicines:**
+You are taking several medicines to manage your symptoms. If you have trouble with nausea or vomiting, you can use Zofran. It’s okay to take it more often if you need it.
+
+**Support:**
+We also want to help you manage your pain, tiredness, and lack of appetite. We will refer you to a special team that can give you extra support.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+This letter aims to convey the essential information from the clinical note in a clear and compassionate manner, ensuring the patient understands their condition and the next steps in their care.
+
+--- STATS ---
+Generation time: 7.0s
+Letter length: 2008 chars
+
+
+============================================================
+ROW 20 (coral_idx=19)
+============================================================
+
+--- LETTER ---
+Dear Mr. *****,
+
+I hope this letter finds you well. I wanted to share the details of your recent visit to our cancer center and the findings from your tests.
+
+**Diagnosis:**
+You have been diagnosed with metastatic pancreatic adenocarcinoma. This means that the cancer started in your pancreas and has spread to other parts of your body. The pancreas is an organ that helps digest food and control blood sugar levels.
+
+**Treatment Plan:**
+We discussed several treatment options with you. The main goal is to slow down the cancer and improve your quality of life. Here are the options:
+
+1. **Standard Chemotherapy:** There are two main types of chemotherapy we can use. One is called FOLFIRINOX, and the other is a combination of gemcitabine and nab-paclitaxel. Both treatments can help control the cancer, but they might cause some side effects like feeling sick, being tired, and losing hair.
+
+2. **Clinical Trials:** We also talked about joining a clinical trial. These trials test new treatments to see if they work better than the standard ones. You showed interest in the REVOLUTION trial, which combines chemotherapy with other medicines to boost your immune system.
+
+**Next Steps:**
+We will start by getting you signed up for the REVOLUTION trial. Before you begin treatment, we will do some tests to make sure the treatment is right for you. We will also talk more about how to manage any side effects.
+
+**What to Watch For:**
+Please let us know if you notice any changes in how you feel. Some things to watch for include:
+- Feeling very tired
+- Losing weight
+- Having trouble eating
+- Any new pain
+
+**Questions:**
+If you have any questions or concerns, please don't hesitate to reach out to your care team. We are here to support you through this journey.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1857 chars
+
+
