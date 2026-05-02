@@ -1,0 +1,125 @@
+# Sample 15
+
+**Cancer Type:** ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary
+
+---
+
+## Original Clinical Note
+
+```
+ID: ***** ***** is a 33 y.o. premenopausal patient with a recent diagnosis of a HR+ metastatic breast cancer involving lymph nodes, who presents in consultation to discuss treatment options and to establish care.    HPI: The patient was evaluated by her PCP on 10/30/16 at which time she reported a new right lateral neck lump.  Her exam was notable for a hard, mobile mass (1 cm) on her right lateral neck.  She was recommended to return in 2 weeks if not resolved.  She returned on 11/09/16 with concern that the lymph nodes were increasing in size (0.5 cm mobile mass in right anterior chain; 2 x 1 cm mass and subcentimeter masses of right lateral neck).  She was recommended to get a CBC and return in 2 weeks at which time, if persistent, they would obtain imaging.  She returned on 12/27/16 at which time she reported the LN were smaller and sore with palpation.  Her exam at that time was noted to be supple with a 0.5 cm soft, mobile LN in the right mid-cervical chain.  She was reassured the nodes were shotty and to continue to monitor them.  Finally, she returned on 03/26/17 with concern the nodes were grainy and stable in size, but had started to cause pain.  Her exam at that time demonstrated fullness (1.5 to 2 cm) along the right anterior and superior cervical chain as well as a firm round mass (2 x 2 cm) in the right lateral neck.  The following work-up was then initiated.    03/30/17 Neck US: diffuse bilateral submandibular, anterior, and posterior cervical adenopathy (R submandibular 3.6 x 1.7 cm; R anterior cervical chain 1.0 x 0.8 cm; L anterior cervical 2.7 x 1.0 cm; L posterior lateral neck inferiorly 0.9 x 0.7 cm); thyroid unremarkable    04/03/17 US-guided right supraclavicular LN biopsy: metastatic adenocarcinoma, c/w breast primary (CK7, GATA3, ER - positive; CK20, TTF1, thyroglobulin, napsin, mammaglobin - negative); ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending)    04/10/17 bilateral diagnostic \n mammogram: extremely dense breast tissue; no features of primary malignancy in either breast; right axillary lymphadenopathy including an enlarged calcified LN  right breast ultrasound: multiple axillary LN with the cortex (0.8 cm); additionally, enlarged right axillary LN with calcifications    04/11/17 PET/CT: multiple FDG-avid right cervical LN (2.2 x 1.8 cm, SUV 6.0) in jugular chain; left Vb LN (0.8 cm, SUV 2.4); scattered subcentimeter thyroid nodules (non-FDG avid); multiple FDG-avid right axillary LN (2.7 x 1.7 cm, SUV 4.5); right supraclavicular LN (0.9 cm, SUV 3.5); heterogeneous breast tissue bilaterally with heterogeneous FDG-avidity, with slightly nodular area of uptake in upper outer right breast    04/12/17 MRI breast: marked background enhancement with the most confluent area of enhancement (3.5 cm) in right upper outer breast, posterior depth (which is slightly more prominent on right than left); superficial and smaller right axillary tail mass (1.5 x 0.5 x 1.0 cm) that may correspond to area of calcifications seen on mammogram; markedly enlarged right axillary LN with cortical thickness (up to 1 cm)    ***** presents to clinic today by herself.  She states she is aware that she now has a cancer diagnosis.  She asks many questions about how long she will live, repeatedly asking what the average prognosis for a patient with metastatic breast cancer.  The patient underwent menarche at 10 years of age.  She took OCP for 4 years.  She is G1P1.  Her first pregnancy was at 31 years of age.          Past Medical History:   Diagnosis Date   \u0007 Back pain    \u0007 Breast cancer    \u0007 Depression    \u0007 Hypertension    \u0007 Obesity    \u0007 Seasonal allergies        History reviewed. No pertinent surgical history.       Family History   Problem Relation Age of Onset   \u0007 Cerebral aneurysm Father    \u0007 Melanoma Neg Hx    \u0007 Basal cell carcinoma Neg Hx    \u0007 Squamous cell carcinoma Neg Hx    \u0007 Skin ca. unk/oth Neg Hx    \u0007 Cancer Neg \n Hx        Social History     Social History   \u0007 Marital status: Single     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Occupational History   \u0007 ***** *****      Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Not on file   \u0007 Alcohol use 0.6 oz/week     1 Standard drinks or equivalent per week      Comment: 1 per month   \u0007 Drug use: No   \u0007 Sexual activity: Not on file     Other Topics Concern   \u0007 Not on file     Social History Narrative    Grew up in ***** *****, *****.  Family is from ***** *****.    She is a single mother; her male infant was born in April 2016.       Outpatient Encounter Prescriptions as of 04/13/2017   Medication Sig Dispense Refill   \u0007 buPROPion (WELLBUTRIN SR) 150 mg 12 hr tablet Take 150 mg by mouth 2 (two) times daily.     \u0007 cetirizine (ZYRTEC) 10 mg tablet Take 1 tablet (10 mg total) by mouth Daily. 30 tablet 6   \u0007 docusate sodium (COLACE) 250 mg capsule Take 1 capsule (250 mg total) by mouth 2 (two) times daily as needed for Constipation. 60 capsule 1   \u0007 hydrOXYzine (ATARAX) 10 mg tablet Take 10 mg by mouth 3 (three) times daily as needed for Itching.     \u0007 ibuprofen (ADVIL,MOTRIN) 600 mg tablet Take 1 tablet (600 mg total) by mouth every 6 (six) hours as needed for Pain. 60 tablet 1   \u0007 iron 18 mg TAB tablet Take by mouth.     \u0007 labetalol (NORMODYNE) 100 mg tablet Take 100 mg by mouth 2 (two) times daily.     \u0007 PNV NO.122/IRON/FOLIC ACID (PRENATAL MULTI ORAL) Take by mouth.     \u0007 triamcinolone (KENALOG) 0.1 % cream Apply topically 2 (two) times daily. Use as instructed     \u0007 UNABLE TO FIND Med Name: Fluoxetine     \u0007 zolpidem (AMBIEN) 5 mg tablet Take 5 mg by mouth nightly as needed for Sleep.       No facility-administered encounter medications on file as of 04/13/2017.        No Known Allergies       Review of Systems:   General - no fatigue, no weight loss   Eyes - no vision changes   HENT - no change in hearing, no \n nasal discharge or sinus tenderness, no difficulty swallowing, no mouth sores, no sore throat   Breast - no breast pain  Respiratory - no cough, no dyspnea, no wheezing   Cardiovascular - no chest pain, no palpitations, no lower extremity edema   GI - no heartburn, no nausea, no emesis, no abdominal pain, no diarrhea, no constipation, no melena, no hematochezia   GU - no suprapubic pain, no dysuria, no vaginal bleeding   Musculoskeletal - no joint aches, no joint stiffness, no muscle pain, no bone pain   Endocrine - no heat/cold intolerance, no hot flashes  Heme/Lymph - swollen lymph nodes; no easy bruising/bleeding, no lymphedema   Neurological - no headaches, no dizziness, no numbness/tingling, no falls   Psychological - no anxiety, no depression   Skin - no rashes/lesions, no diaphoresis       Physical Exam:   ECOG 0   Vital Signs - BP 134/82 | Pulse 69 | Temp 35.7 C (96.2 F) (Oral)  | Resp 18 | Ht 157.5 cm (5' 2.01\") | Wt 80.8 kg (178 lb 3.2 oz) | LMP 09/03/2015 (Exact Date) | SpO2 98% | BMI 32.58 kg/m2   Constitutional - WDWN, NAD  Eyes - sclera anicteric, PERRL, EOMI  HENT - sinuses nontender, nasal mucosa intact, pharynx without erythema, stomatitis, or thrush   Lymph Nodes -   Respiratory - resonant to percussion throughout, CTA bilaterally; no wheezes, rhonchi, or crackles  Cardiovascular - Normal heart rate, normal rhythm, no murmurs, no edema  Breast - no masses bilaterally  GI - Bowel sounds normal, soft; no tenderness, no distention, no HSM  Musculoskeletal - No tenderness over bones or joints.   Neurologic - Alert & oriented x 3, ambulates w/o difficulty, good strength throughout  Psychiatric - Mood stable; no HI, SI, hallucinations, paranoia, or delusions  Skin - warm without rashes or lesions       Studies:  Available labs, pathology, and imaging were reviewed and independently interpreted, as described above in the HPI.    04/03/17 CYTOPATHOLOGY REPORT  ***** WITH ADDENDUM *****    Patient Name: *****, \n *****  Med. Rec.#: *****  DOB: 08/20/1983 (Age: 33)  Sex: Female  Accession #: *****-*****  Visit #: *****  Service Date: 04/03/2017  Received: 04/03/2017  Location: *****  Client: *****   Physician(s): ***** *****. ***** ((*****) *****-*****)    Source of Specimen:  Right supraclavicular lymph node, US guided fine needle aspiration    FINAL CYTOLOGIC DIAGNOSIS:  Right supraclavicular lymph node, US guided fine needle aspiration:   Metastatic adenoccarcinoma, consistent with breast primary; see comment.       COMMENTS:   The aspirates are moderately cellular and demonstrate clusters of  crowded, malignant epithelial cells arranged in cohesive aggregates and  papillary-like groups. The cells contain enlarged and angulated  hyperchromatic nuclei with coarse chromatin, nuclear grooves, and one to  multiple nucleoli. The cytoplasm is dense and eosinophilic, imparting  and apocrine appearnce. A rare intranuclear pseudoinclusion and  scattered mitotic figures are identified.    To further evaluate the neoplastic cells immunohistochemical stains were  performed and evaluated on the cell block and show the following  results:  - CK7: Positive  - CK20: Negative  - Thyroglobulin: Negative  - TTF1: Negative  - Napsin: Negative  - p40: Negative  - p63: Negative  - Mammaglobin: Negative  - GATA3: Positive  - GCDFP15: Negative  - PAX8: Negative  - ER: Positive     The cytopathologic and immunohistochemical findings are most compatible  with metastatic carcinoma of breast primary. Correlation with clinical  and radiologic findings is recommended.    ***** *****, NP, at ***** ***** was contacted with the diagnosis on  04/06/2017. She relayed an understanding of the diagnosis.    Immunohistochemical tests for estrogen and progesterone receptors, HER2  and Ki-67 were performed by manual morphometry on the cell block.    The test for estrogen receptors is positive. There is 3+ nuclear  staining in >90% of tumor cells. Internal positive \n control is present,  and external positive control is appropriate.    The test for progesterone receptors is positive. There is variable  (weak to strong, November 28+) nuclear staining in 50% of tumor cells. Internal  positive control is present, and external positive control is  appropriate.    Result of HER2 test: This carcinoma is equivocal for HER2 oncoprotein  over-expression. The staining intensity of this carcinoma was 2 on a  scale of 0-3.     ***** *****/Pathology Resident   ***** ***** *****/Pathologist  Electronically signed out on *****/*****/***** *****:*****:19    Addendum   Date Ordered:   04/06/2017   Status:  Signed Out    Date Complete:   04/10/2017   By: ***** *****    Date Reported:   04/10/2017     Addendum Diagnosis    - CA125: Weak patchy staining  - CAIX: Negative   - RCC: Negative  - Calcitonin: Negative    The additional immunohistochemical stains support the morphologic  findings. The previously reported diagnosis remains unchanged.     Exam Date: 04/10/2017  Exam(s): Bilateral diagnostic mammography, right breast ultrasound    Clinical History:  33-year-old woman having diagnostic mammography to evaluate for primary breast malignancy. Patient had recent cervical lymph node FNA positive for breast adenocarcinoma. Receptors are pending per APEX.    Comparison:  There are no prior examinations available for comparison.    Mammographic Findings:  The breasts are extremely dense, which lowers the sensitivity of mammography.  There is right axillary lymphadenopathy including an enlarged calcified lymph node.  No mammographic features of primary malignancy in the right or left breast.    Ultrasound Findings:  There are multiple axillary lymph nodes with the cortex measuring up to 8mm. Additionally there is an enlarged right axillary lymph node with calcifications, which corresponds to the right axillary calcified enlarged lymph node on mammogram.    IMPRESSION:  Right breast: \n Known biopsy proven malignancy (BI-RADS 6).  Left breast: Negative (BI-RADS 1).    Recommendations:  Breast MRI to evaluate for underlying breast primary malignancy which is scheduled for 04/12/17. Patient is also scheduled for PET/CT tomorrow to evaluate for additional sites of disease.    Findings and management plan discussed with patient during the exam by Dr. *****.    A letter explaining this interpretation in lay language has been sent to the patient.    Radiologist  ***** *****. *****, M.D., Ph.D.    <This report was electronically signed by ***** *****. *****, M.D., Ph.D. at *****/*****/***** *****:23:13 AM>    Exam Date: 04/12/2017  Exam(s): MR breast bilateral en + un    Clinical History:  33-year-old woman status post palpation-guided FNA of cervical lymph node demonstrating metastatic adenocarcinoma consistent with breast carcinoma, no definite primary breast lesion identified on mammogram and ultrasound, with PET/CT demonstrating possible increased FDG avidity in the outer right breast, here for evaluation for a primary breast lesion.    Comparison:  Prior examinations dated 04/10/2017 (ultrasound) and 04/10/2017 (mammogram) were reviewed for comparison.    MRI Findings:  This bilateral breast MRI exam demonstrates marked background enhancement.  The breasts are composed of heterogeneous fibroglandular tissue and fat.    RIGHT Breast:  Marked background enhancement is seen, with the most confluent area of enhancement occurring in the right upper outer breast, posterior depth (best seen on post-gadolinium axial image #101, sagittal image #363), measuring up to 3.5 cm in AP dimension. This is only slightly more prominent on the right compared with the left side, and appears to correspond with the area noted on recent PET CT.  A more superficial and smaller right axillary tail mass is seen measuring approximately 1.5 x 0.5 x 1.0 cm (best seen on post-gadolinium axial image #104, sagittal image #369), which \n demonstrates suggestion of susceptibility artifact on T1 imaging and may correspond to the area of calcifications seen on mammogram. This appears to enhance with slightly greater intensity than the breast tissue described above.    LEFT Breast:  Marked background enhancement is seen. No abnormal areas of enhancement or other MRI features of malignancy are identified.    OTHER:  Markedly enlarged right axillary lymph nodes are seen with cortical thickness measuring up to 1 cm. Left axillary lymph nodes are unremarkable. Visualized abdomen and remainder of the chest is unremarkable.    IMPRESSION:  Right breast: Suspicious (BI-RADS 4).  Left breast: Negative (BI-RADS 1).    Recommendations:  1. Recommend second look ultrasound to evaluate 2 areas: (1) the area of more confluent enhancement in the upper outer right breast and (2) the right axillary tail mass which may correspond to the calcification-containing lesion on mammogram, with plan for ultrasound-guided core biopsy of these areas if correlates can be found, else recommend MRI-guided biopsy.    2. Abnormally enlarged right axillary lymph nodes are again seen, compatible with known metastatic disease.    
+```
+
+---
+
+## Extracted Data
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "33 y.o. premenopausal patient with a recent diagnosis of HR+ metastatic breast cancer involving lymph nodes, presenting in consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary",
+    "Stage_of_Cancer": "Metastatic (Stage IV)",
+    "Distant Metastasis": "Yes, to cervical lymph nodes and possibly to the right breast",
+    "Metastasis": "Yes, to cervical lymph nodes and possibly to the right breast"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral extremely dense breast tissue with no primary malignancy features on mammogram. Right axillary lymphadenopathy with enlarged calcified lymph node. PET/CT shows multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) and right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI demonstrates marked background enhancement with a confluent area of enhancement (3.5 cm) in the right upper outer breast. Right axillary tail mass (1.5 x 0.5 x 1.0 cm) with cortical thickness up to 1 cm. No distant metastasis detected except for lymphadenopathy."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "docusate sodium (COLACE)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "If HER2 positive, will need anti-HER2 therapy including chemotherapy initially. If HER2 negative, will initiate treatment with antiestrogen therapy (not chemotherapy)."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "If confirmed to have HER2 positive disease, she would have more treatment options including chemotherapy initially. If HER2 negative, she would initiate treatment with antiestrogen therapy (not chemotherapy)."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "US-guided biopsy of breast mass, cervical LN FNA, core biopsy"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "cervical LN FNA if possible"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "genetic testing"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: after additional testing has been completed"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "genetic testing recommended",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "return to clinic once additional testing has been completed"
+  }
+}
+```
+
+---
+
+## Patient Letter (Pipeline)
+
+Dear Patient,
+We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+**Why did you come to the clinic?**
+You came in for a consultation regarding your recent diagnosis of metastatic breast cancer and to discuss treatment options.
+**What's new or changed since your last visit?**
+You have a diagnosis of metastatic breast cancer (Stage IV) that has spread to your cervical lymph nodes and possibly to the right breast. The cancer started in gland cells and is positive for estrogen and progesterone receptors, with uncertain HER2 status.
+**What treatment or medication changes were made?**
+You will start treatment with antiestrogen therapy if the cancer does not have the protein called HER2. If the cancer does have this protein, you will receive anti-HER2 therapy along with chemotherapy.
+**What is the plan going forward?**
+You will have a biopsy of the breast mass and a fine needle aspiration of the cervical lymph node to confirm the diagnosis. Genetic testing is also recommended. You will return to the clinic once these tests are completed.
+We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+Thank you for trusting us with your care.
+Please feel free to contact us if you have any questions.
+Sincerely, Your Care Team
+
+---
+
+## Rating
+
+| Dimension | Score (1-5) | Comments |
+|-----------|------------|----------|
+| Accuracy |  |  |
+| Completeness |  |  |
+| Safety |  |  |
+| Simplification |  |  |
+| Overall Quality |  |  |
+
+**Fabricated info?** Yes / No
+
+**Missing critical info?** Yes / No
+
+**Harmful content?** Yes / No
+
+**Comments:**
+

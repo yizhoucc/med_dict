@@ -1,0 +1,125 @@
+# Sample 7
+
+**Cancer Type:** Adenocarcinoma of the tail of the pancreas
+
+---
+
+## Original Clinical Note
+
+```
+SUBJECTIVE:    This is a very pleasant 68-year-old woman who presented with symptoms of small bowel obstruction in early June 2020. She was hospitalized and treated conservatively. CT scan of the abdomen during her hospitalization showed a mass in the tail of the pancreas measuring 4.8 x 3.6 x 2.9 cm. She was also noted to have a complex cyst in her right adnexa. An EUS was done but biopsy was not attempted as there was a large blood vessel running through the mass. CT PET was done which showed that the mass in the tail of the pancreas was PET avid. The cystic pelvic mass was not PET avid.    She was then seen and evaluated by Dr. ***** at *****. A pancreas protocol CT scan was done which revealed extension of the mass to the posterior gastric wall as well as abutment and possible invasion of the left adrenal gland and occlusion of the splenic vein. Dr. ***** recommended neoadjuvant chemotherapy.    We started her on standard schedule gemcitabine and Abraxane. She did not tolerate this well with neutropenia and we switched her to alternate week and she has tolerated that much better. She's now had 4 full cycles and returns for CT evaluation.    She is doing well. She has no cancer pain but take oxycodone for chronic back and shoulder pain. Appetite waxes and wanes but weight is stable. Denies symptoms of neuropathy. Energy level recovers after chemotherapy. She has a facil rash which has come on recently. It's tolerable.    She has been seen by Gyn Onc regarding the right adnexal mass. Assuming she does go to surgery, they would like to coordinate and remove this.    Germ line testing showed no pathologic variants. VUS seen in AXIN1, CTC1, ERCC4, MC1R.      PAST MEDICAL HISTORY:       MEDICAL ILLNESSES:  Chronic opioid use  arthritis  chronic back pain  hepatitis C, treated in 2010 with good viable clearance  hypertension  history of renal lithiasis    PRIOR SURGERIES:  Ankle ligament \n reconstruction  bilateral bunionectomy  correction of hammertoe  bilateral knee replacement, 2003  repeat right knee replacement, 2017, lumbar fusion 2000  posterior laminectomy/decompression lumbar spine, 1999  excision of breast cysts, age 18 and 21    INJURIES:  None reported    CURRENT MEDICATIONS:    Current Outpatient Medications on File Prior to Visit   Medication Sig Dispense Refill   \u0007 bisacodyL (DULCOLAX) 5 mg EC tablet Take 5 mg by mouth daily as needed for Constipation     \u0007 cholecalciferol, vitamin D3, 1000 UNITS tablet Take 1,000 Units by mouth daily     \u0007 cloNIDine (CATAPRES) 0.1 mg/24 hr patch Place 1 patch onto the skin every 7 (seven) days Use as instructed     \u0007 cyanocobalamin, Vitamin B12, (VITAMIN B-12) 500 mcg tablet Take 500 mcg by mouth daily     \u0007 diclofenac (VOLTAREN) 1 % gel Apply topically 4 (four) times daily     \u0007 docusate sodium (COLACE) 100 mg capsule Take 100 mg by mouth every morning     \u0007 fexofenadine (ALLEGRA) 60 mg tablet Take 60 mg by mouth every morning     \u0007 fluocinonide (LIDEX) 0.05 % ointment Apply topically Twice a day Use as instructed     \u0007 LORazepam (ATIVAN) 1 mg tablet Take 1 mg by mouth every 8 (eight) hours as needed for Anxiety     \u0007 ondansetron (ZOFRAN) 8 mg tablet Take 1 tablet (8 mg total) by mouth every 8 (eight) hours as needed (nausea and vomiting) (Patient not taking: Reported on 12/07/2020  ) 30 tablet 5   \u0007 oxybutynin (DITROPAN XL) 5 mg 24 hr tablet Take 5 mg by mouth daily     \u0007 oxyCODONE (OXY-IR) 5 mg capsule Take 5 mg by mouth every 4 (four) hours as needed     \u0007 pantoprazole (PROTONIX) 40 mg EC tablet Take 40 mg by mouth every morning     \u0007 prochlorperazine (COMPAZINE) 10 mg tablet Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting) (Patient not taking: Reported on 12/07/2020  ) 30 tablet 5   \u0007 senna (SENOKOT) 8.6 mg tablet Take 1 tablet by mouth 2 (two) times daily     \u0007 UNABLE TO FIND Med Name: Equi-Block topical \n ointment; apply to right shoulder prn       Current Facility-Administered Medications on File Prior to Visit   Medication Dose Route Frequency Provider Last Rate Last Admin   \u0007 [COMPLETED] iohexoL (OMNIPAQUE) 350 mg iodine/mL solution 150 mL  150 mL Intravenous ***** ***** *****, DO   130 mL at 12/08/20 1145     ALLERGIES:  Allergies/Contraindications   Allergen Reactions   \u0007 Penicillins Rash       FAMILY HISTORY:  The only cancer in her family is in maternal aunt with leukemia.    SOCIAL HISTORY:  Her first husband died at  *****. She is married to ***** and has been married to him for ***** ***** yrs. They have one child together. Each has a child from a prior relationship. Both are retired. She previously worked for ***** ***** a   *****  *****. She has not used alcohol since 2010 coincident with her diagnosis and treatment of hepatitis C. She is a former tobacco user and last smoked about 20 years ago.      PE:    Vitals: There were no vitals taken for this visit.   In general, she appears comfortable.      LABORATORY RESULTS:  Results for orders placed or performed during the hospital encounter of 11/25/20   Alkaline Phosphatase   Result Value Ref Range    Alkaline Phosphatase 71 38 - 108 U/L   Bilirubin, Total   Result Value Ref Range    Bilirubin, Total 0.4 0.2 - 1.2 mg/dL   Alanine Transaminase   Result Value Ref Range    Alanine transaminase 31 10 - 61 U/L   Aspartate Transaminase   Result Value Ref Range    Aspartate transaminase 30 5 - 44 U/L   Creatinine, Serum / Plasma   Result Value Ref Range    Creatinine 0.56 0.55 - 1.02 mg/dL    eGFR - low estimate 96 >59 mL/min    eGFR - high estimate 111 >59 mL/min   Urea Nitrogen, Serum / Plasma   Result Value Ref Range    Urea Nitrogen, Serum / Plasma 11 7 - 25 mg/dL   Complete Blood Count with Differential   Result Value Ref Range    WBC Count 5.6 3.4 - 10.0 x10E9/L    RBC Count 4.11 4.00 - 5.20 x10E12/L    Hemoglobin 12.1 12.0 - 15.5 g/dL    Hematocrit 38.3 \n 36.0 - 46.0 %    MCV 93 80 - 100 fL    MCH 29.4 26.0 - 34.0 pg    MCHC 31.6 31.0 - 36.0 g/dL    Platelet Count 138 (L) 140 - 450 x10E9/L    Neutrophil Absolute Count 3.22 1.80 - 6.80 x10E9/L    Lymphocyte Abs Cnt 1.54 1.00 - 3.40 x10E9/L    Monocyte Abs Count 0.58 0.20 - 0.80 x10E9/L    Eosinophil Abs Ct 0.17 0.00 - 0.40 x10E9/L    Basophil Abs Count 0.04 0.00 - 0.10 x10E9/L    Imm Gran, Left Shift 0.01 <0.10 x10E9/L   Cancer Antigen 19-9   Result Value Ref Range    Cancer Antigen 19-9 8 <38 U/mL       IMAGING:  Ct Abdomen /pelvis With And Without Contrast    Result Date: 12/08/2020  CT ABDOMEN/PELVIS WITH AND WITHOUT CONTRAST  *****/*****/***** 11:29 AM CLINICAL HISTORY: Pt with pancreatic cancer and pelvic mass receiving chemo needs restaging scan. needs pancreas protocol imaging COMPARISON:  10/13/2020 Techniques: Contiguous 1.25 mm collimation images were obtained through the abdomen without intravenous contrast. Subsequently, 1.25 mm axial images were acquired through the abdomen during the arterial phase followed by 1.25 mm axial images through the abdomen and pelvis during portal venous phase, and through the abdomen at 5 minutes delay. CONTRAST MEDIA: Intravenous contrast Findings: Pancreatic tumor: 1)  Location:  Pancreatic tail 2)  Size:  Hypoenhancing mass 4.2 x 4 cm (series 304, image 52) 3)  Enhancement relative to pancreas: Hypoenhancing, no definite necrosis. Areas of calcifications. 4)  Biliary obstruction: no 5)  Pancreatic duct obstruction: no The mass abuts the hilum of the spleen and the left adrenal gland. Vascular-arterial:        1) Celiac axis is not involved        2)  SMA is not involved.        3)  CHA is not involved.        4)  Arterial variant: None Splenic artery is involved. Solid tumor contact greater than 180 degrees. Focal narrowing of the splenic artery. Vascular-venous: 1)  MPV is not involved. 2)  SMV is not involved. 3)  Thrombus in vein:  present 4)  Venous collateral:  present. \n Perigastric varices. Splenic vein is involved with occlusion propagation of nonocclusive thrombus towards the central splenic vein. Liver: Unremarkable Gallbladder: Cholelithiasis without evidence of cholecystitis. Peritoneal or omental nodules:  None Ascites: absent Lymph nodes:  No pathologically enlarged nodes Spleen: See above Adrenal: See above Kidney: Pancreatic tail mass abuts the anterior margin of the left upper renal pole. Subcentimeter hypodense lesions in the bilateral kidneys, too small to characterize. GI tract: The pancreatic tail mass abuts the gastric fundus. No bowel obstruction. Visualized lung bases:  Unremarkable Bones:  No suspicious lesions L3-L5 PLIF. Extraperitoneal soft tissues: Unremarkable Reproductive: Cystic pelvic neoplasm measures up to 12 cm, similar compared to prior examination. Fibroid uterus. RADIATION DOSE INDICATORS:Exposure Events: 8 , CTDIvol Max: 23.1 mGy, DLP: 3638.5 mGy.cm. The following accession numbers are related to this dose report *****,*****     1.  Compared to 10/13/2020, slight decrease in size of pancreatic tail mass with persistent extension/abutment of the left adrenal gland, splenic hilum, gastric fundus, and anterior left upper renal pole. 2.  Pancreatic mass encases and narrows the splenic artery. Pancreatic tail mass encases and occludes the distal splenic vein with propagation of nonocclusive thrombus towards the central splenic vein. 3.  Cystic pelvic neoplasm appears to arise from the right adnexa measures up to 12 cm. Report dictated by: ***** *****, MD, signed by: ***** ***** *****, MD Department of Radiology and Biomedical Imaging    Ct Chest With Contrast    Result Date: 12/08/2020  CT CHEST WITH CONTRAST CLINICAL HISTORY:  Pancreatic cancer, adenocarcinoma Pt with pancreatic cancer and pelvic mass receiving chemo needs restaging scan. COMPARISON: CT chest 3 01/10/2021 TECHNIQUE: Serial 1.25 mm axial images through the chest were obtained \n after the administration of intravenous contrast. RADIATION DOSE INDICATORS: Exposure Events: 8 , CTDIvol Max: 23.1 mGy, DLP: 3638.5 mGy.cm. The following accession numbers are related to this dose report *****,***** FINDINGS: LUNGS: Clear lungs. No suspicious pulmonary nodules. PLEURA: No pleural effusion or pneumothorax. MEDIASTINUM: No lymphadenopathy by CT size criteria. HEART/GREAT VESSELS: Normal heart size. Normal caliber thoracic aorta and main pulmonary artery. BONES/SOFT TISSUES: No suspicious soft tissue or osseous lesions. VISIBLE ABDOMEN: Please see dedicated Abdomen and Pelvis CT report.     No evidence of metastatic disease in the chest. Report dictated by: ***** *****, MD, signed by: ***** ***** *****, MD Department of Radiology and Biomedical Imaging      ASSESSMENT:  1. Adenocarcinoma the tail of the pancreas with local extension with radiographic evidence of response to treatment  2. Right cystic adnexal mass, likely benign  3. Chronic opioid use  4. History of hepatitis C, status post successful treatment  5. hypertension  6. history of renal lithiasis  7. ECOG 1    PLAN:    Will continue on with treatment without dose or schedule modification. We will repeat her imaging again in 8 weeks.    I performed this consultation using real-time Telehealth tools, including a live video connection between my location and the patient's location. Prior to initiating the consultation, I obtained informed verbal consent to perform this consultation using Telehealth tools and answered all the questions about the Telehealth interaction.    I spent a total of 40 minutes in face-to-face time with the patient and in non-face-to-face activities conducted today 12/09/2020 directly related to this video visit, including reviewing records and tests, obtaining history and exam, placing orders, communicating with other healthcare professionals, counseling the patient, family or caregiver, documenting in the \n medical record, and/or care coordination for the diagnoses above.              \n
+```
+
+---
+
+## Extracted Data
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Adenocarcinoma of the tail of the pancreas with local extension. Purpose of this visit is to evaluate response to treatment and continue with treatment without dose or schedule modification."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of the tail of the pancreas",
+    "Stage_of_Cancer": "",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alkaline Phosphatase 71 U/L, Bilirubin, Total 0.4 mg/dL, Alanine Transaminase  31 U/L, Aspartate Transaminase 30 U/L, Creatinine 0.56 mg/dL, Urea Nitrogen, Serum / Plasma 11 mg/dL, WBC Count 5.6 x10E9/L, RBC Count  4.11 x10E12/L, Hemoglobin 12.1 g/dL, Hematocrit 38.3 %, MCV 93 fL, MCH 29.4 pg, MCHC 31.6 g/dL, Platelet Count 138 x10E9/L, Neutrophil Absolute Count 3.22 x10E9/L, Lymphocyte Abs Cnt 1.54 x10E9/L, Monocyte Abs Count 0.58 x10E9/L, Eosinophil Abs Ct 0.17 x10E9/L, Basophil Abs Count 0.04 x10E9/L, Cancer Antigen 19-9 8 U/mL"
+  },
+  "Clinical_Findings": {
+    "findings": "Pancreatic tumor in the tail measuring  4.2 x 4 cm, hypoenhancing with areas of calcifications, abutting the hilum of the spleen and the left adrenal gland. Splenic artery involvement with solid tumor contact greater than  180 degrees and focal narrowing. Splenic vein involvement with occlusion propagation of nonocclusive thrombus towards the central splenic vein. No biliary or pancreatic duct obstruction. No pathologically enlarged lymph nodes. Cystic pelvic neoplasm measuring up to 12 cm, arising from the right adnexa. Fibroid uterus. No evidence of metastatic disease in the chest. Patient has a facilitative rash, which is tolerable."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Switched from standard schedule gemcitabine and Abraxane to alternate week due to neutropenia.",
+    "supportive_meds": "ondansetron"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "The cancer is showing radiographic evidence of response to treatment. Specifically, the pancreatic tail mass has slightly decreased in size compared to previous imaging, with persistent extension/abutment of the left adrenal gland, splenic hilum, and gastric fundus. This is based on the CT abdomen/pelvis with and without contrast imaging performed on 12/08/2020."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will continue on with treatment without dose or schedule modification."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "None"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Will repeat her imaging again in 8 weeks."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "telehealth: 8 weeks, to repeat imaging"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "Will continue on with treatment without dose or schedule modification. We will repeat her imaging again in 8 weeks."
+  }
+}
+```
+
+---
+
+## Patient Letter (Pipeline)
+
+Dear Patient,
+We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+**Why did you come to the clinic?**
+You came in for a follow-up visit regarding your cancer treatment.
+**What's new or changed since your last visit?**
+The cancer is showing signs of getting smaller. Specifically, the tumor in your pancreas has slightly decreased in size compared to previous imaging. However, it still touches the left adrenal gland, spleen, and stomach. You also have a rash that is tolerable.
+**What treatment or medication changes were made?**
+Your treatment was switched from a standard schedule of gemcitabine and Abraxane to an alternate week schedule because you experienced neutropenia (low white blood cell count). You are also taking ondansetron to manage nausea.
+**What is the plan going forward?**
+You will continue with the same treatment without changing the dose or schedule. Your imaging will be repeated in 8 weeks. Your next visit will be a telehealth appointment in 8 weeks.
+We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+Thank you for trusting us with your care.
+Please feel free to contact us if you have any questions.
+Sincerely, Your Care Team
+
+---
+
+## Rating
+
+| Dimension | Score (1-5) | Comments |
+|-----------|------------|----------|
+| Accuracy |  |  |
+| Completeness |  |  |
+| Safety |  |  |
+| Simplification |  |  |
+| Overall Quality |  |  |
+
+**Fabricated info?** Yes / No
+
+**Missing critical info?** Yes / No
+
+**Harmful content?** Yes / No
+
+**Comments:**
+

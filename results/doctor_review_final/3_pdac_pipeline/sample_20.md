@@ -1,0 +1,124 @@
+# Sample 20
+
+**Cancer Type:** Pancreatic adenocarcinoma
+
+---
+
+## Original Clinical Note
+
+```
+Mr. ***** is a 51 y.o. male who comes to our GI Oncology practice at the UCSF Comprehensive Cancer Center in consultation for his . The history was obtained from the patient, along with my review of all his outside records.    History of Present Illness  This pleasant gentleman, previously quite healthy overall, began developing intermittent mid/LUQ abdominal discomfort, bloating, and gassiness starting in ***** ***** after returning from some travels to ***** ***** *****. These symptoms increased in frequency prompted the following diagnostic tests over the succeeding months:    - 10/22/2020: EGD (WNL); colonoscopy with 2 tubular adenomas in the rectum and cecum  - 10/22/2020: Stool studies negative for infectious organisms  - December 2020: Trial of metronidazole and rifaximin followed by probiotics, with dietary modifications; minimal relief  - 03/25/2021: Abdominal U/S notable for prominent hepatic steatosis and splenomegaly  - 05/21/2021: Abdominal/pelvic CT scan: pancreatic tail cystic lesion (5 cm) with multiple hepatic lesions concerning for metastases, as well as suggestion of peritoneal carcinomatosis (see formal report below)  - 05/28/2021: EUS (at *****): confirmed pancreatic tail mass (39.4 mm by 22.6 mm) with cystic and necrotic components; fine needle bx c/w adenocarcinoma. MMR proteins all intact by IHC.    The patient's present review of systems was reviewed and notable for the following:  - Appetite fair; some early satiety and postprandial distention/discomfort; 8 lb weight loss  - Uses primarily Tylenol for abdominal discomfort, rarely Percocet  - Semi-regular BMs, no bleeding  - Normally very active, working out 5x/weekly  - Denies fevers/chills/night sweats  - No pre-existing peripheral sensory neuropathy  - No SOB, cough, or respiratory symptoms.  - No jaundice sxs  - (+) modest anxiety         PAST MEDICAL AND SURGICAL HISTORY    Past Medical History:   Diagnosis Date   \u0007 Anxiety     \"sometimes\"   \u0007 \n Environmental allergies    HIV negative.    Medications:  \u0007 oxyCODONE-acetaminophen (Percocet) 5-325 mg tablet Take 2 tablets by mouth every 6 (six) hours if needed for severe pain for up to 10 days. 30 tablet 0   \u0007 valACYclovir (Valtrex) 1 gram tablet prn cold sores  \u0007 Lorazepam PRN      Allergies/Contraindications  No Known Allergies      FAMILY HISTORY:  Family History   Problem Relation Name Age of Onset   \u0007 Ovarian cancer Mother     \u0007 Lung cancer Maternal grandmother     \u0007 Breast cancer Paternal grandmother           PERSONAL AND SOCIAL HISTORY  Married (husband), no children.  Occupational History   \u0007 Previously in *****, now  ***** *****   Tobacco Use   \u0007 Smoking status: Former Smoker     Packs/day: 0.00     Quit date: 1992     Years since quitting: 30.3   \u0007 Smokeless tobacco: Never Used   Substance and Sexual Activity   \u0007 Alcohol use: Yes     Alcohol/week: 5.0 - 8.0 standard drinks     Types: 5 - 8 Standard drinks or equivalent per week     Comment:     5-8/wk   \u0007 Drug use: Yes   \u0007 Sexual activity: Not on file       Physical Exam:  ECOG PS 0  Blood pressure (!) 172/103, pulse 83, temperature 36.4 C (97.6 F), temperature source Temporal, resp. rate 16, height 172.5 cm (5' 7.91\"), weight 82.1 kg (181 lb), SpO2 97 %.  General appearance: No acute distress, conversant, appropriately interactive. Non-toxic, well-appearing.   Eyes: anicteric sclerae, moist conjunctivae; no lid lag.   HEENT: Atraumatic; oropharynx clear with moist mucous membranes and no mucosal ulcerations; normal hard and soft palate  Neck: Full range of motion, supple, no lymphadenopathy  Lungs/respiratory: Clear to auscultation, with normal respiratory effort and no intercostal retractions  Cardiovascular: RRR, normal S1 S2, no murmurs, gallops, or rubs.  Abdomen/GI: Soft, non-tender, nondistended; no masses, ascites, or hepatomegaly. Tympanitic to percussion.  Back: No point spinal tenderness.  Extremities: No peripheral edema or discoloration \n palpated or visualized.  Skin: Normal temperature, turgor and texture; no rash, ulcers or subcutaneous nodules visualized or palpated.  Neuro: Normal bulk, tone, and strength in upper and lower extremities. Intact gait. No focal sensorimotor deficits.  Psych: Appropriate affect, alert and oriented.        Relevant Diagnostic Studies:    Most recent labs notable for the following:    03/25/2021  WBC 6.0, Hct 46.5, plts 207  Creat 1.16  Alb 4.3, AST/ALT 26/61, tot bili 0.6, alk phos 63      I personally reviewed and interpreted the patient's relevant imaging studies in conjunction with the corresponding formal radiology reports, as follows:    CT Abdomen /Pelvis with Contrast   Result Date: 05/21/2021  FINDINGS:    Lines / tubes: None.     Lower Thorax: Normal.      Hepatobiliary:    Liver: Measures 14.9 cm in craniocaudal dimension. Multiple varying sized hypodense lesions   throughout the right and left lobes of the liver are present measuring up to 1.7 x 1.4 cm in   segment March 13 (axial image 19, series 2) and 0.9 x 0.8 cm in segments August 15 (axial image 16,   series 2).    Gallbladder: Normal.    Bile Ducts: Normal.    Hepatic vasculature: Normal.     Spleen: A wedge-shaped hypodense area is noted in the lower part of the spleen most likely   related to an infarct. Spleen is upper limits of normal size measuring 12.6 cm.     Pancreas: A 5 x 4.1 cm cystic lesion with irregular rim enhancement is noted involving the   pancreatic tail and abutting the splenic hilum. No pancreatic duct dilatation is noted.     Adrenals: Normal.     Kidneys/Ureters: Normal.     GI Tract:    GE junction and stomach: Normal.    Small bowel: Normal in diameter    Appendix: Not visualized.    Colon and rectum: Diffuse wall thickening of the descending and sigmoid colon is present.     Peritoneum / Retroperitoneum: Nodular foci of enhancement involving the greater omentum is   present. Small peritoneal free fluid is \n present. Irregular foci of nodular peritoneal   enhancement are present. Example in the left lateral peritoneal line (axial image 42, series   2).     Diffuse mesenteric edema with interspersed fluid is noted.     Lymph Nodes: Multiple retroperitoneal lymph nodes are present in an example left periaortic   lymph node (axial image 42, series 2) measuring 0.9 x 1.1 cm.     Vessels: Moderate atherosclerotic ossification of aorta.     Pelvis:    Prostate: Normal.    Seminal vesicles: Normal.    Bladder: Normal.     Bones and Soft Tissues: Normal.     IMPRESSION:  1. A lobulated cystic lesion with rim enhancement is noted involving the pancreatic tail   measuring 5 x 4.1 cm in size. This may represent a cystic neoplastic process, necrotic   metastatic disease or sequelae of prior inflammation.   2. Multiple hypodense lesions throughout the liver are present suspicious for   metastatic/neoplastic process.   3. Diffuse omental caking and multiple foci of nodular peritoneal enhancement are noted   representing peritoneal carcinomatosis. Small peritoneal free fluid and diffuse mesenteric   edema is present.   4. Wall thickening of the descending and sigmoid colon may be reactive to peritonitis or   related to colitis.   5. Prominent retroperitoneal lymph nodes are present.       Impression and Recommendations:  In summary, Mr. ***** is a 51 y.o. male with newly diagnosed metastatic pancreatic adenocarcinoma, still in robust condition overall.    At today's visit, we discussed his diagnosis, pathology, and investigations to date. We reviewed the details of his diagnosis and why the mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but that treatment was not expected to be curative. As such, it would be important to carefully weigh the risks/benefits of therapy and to prioritize \n QoL considerations in the process. In terms of standard of care treatment options, there are several possible chemotherapy regimens to select from for metastatic pancreatic cancer, with the choice of therapy depending on the patient's age, performance status, co-morbid conditions, and personal preference; phase III evidence supports either FOLFIRINOX (biweekly infusional 5-FU, leucovorin, irinotecan, and oxaliplatin) or the combination of gemcitabine plus nab-paclitaxel as appropriate front-line choices. We discussed the logistics, scheduling, and some of the potential side effects of these respective regimens including but not limited to nausea/vomiting, alopecia, fatigue, cytopenias with resultant immunosuppression and/or anemia, and peripheral sensory neuropathy/cold sensitivity. If he opts for SoC treatment, I generally start with FOLFIRINOX for fit and otherwise healthy individuals like Mr. *****.    From the standpoint of clinical trial options for the first-line treatment of metastatic pancreatic cancer, we have the following trials here at ***** for which the patient could be considered:    - Our Precision Promise clinical trial platform, supported by the Pancreatic Cancer Action Network (PanCAN). In the first-line setting, treatment would entail randomization to either SOC chemotherapy (gemcitabine/nab-paclitaxel or FOLFIRINOX); or to one or more experimental therapy arms (presently, the only open experimental arm consists of gemcitabine/nab-paclitaxel plus pamrevlumab, an anti-CTGF (connective tissue growth factor) monoclonal antibody). Of note,this trial mandates fresh tumor tissue collection both pre- and on-treatment.    - The REVOLUTION (PICI0044) trial, sponsored by the Parker Institute for Cancer Immunotherapy (PICI). This trial also employs a platform design intended to test multiple different chemotherapy/immunotherapy combinations; at present, the one cohort open at ***** (cohort B) consists of \n the combination of gemcitabine/nab-paclitaxel together with hydroxychloroquine (an anti-autophagy agent) and two doses of low-dose ipilimumab. This trial is non-randomized; and also requires either an adequate amount of archived tumor material or a fresh pre-treatment biopsy for correlative analyses.     Irrespective of trial participation, we also talked about the role of somatic tumor testing of the patient's tumor specimen, if there is adequate cellularity, to assess for the presence of any actionable mutations or other genetic alterations that may inform future treatment options, either using already-approved agents or in the context of clinical trials. This has already been ordered using our UCSF500 in-house platform. I did explain that while this information is always good to have, it will not necessarily yield useful clinical information for treatment purposes.  Additionally, the patient should undergo genetic counseling with germline testing to assess for any hereditary predisposition to cancer, as is now recommended for all individuals with a pancreatic cancer diagnosis, irrespective of family history or known risk factors, as this would have screening implications for family members as well as potentially therapeutic implications for the patient.    From a symptom management perspective:  - No present opioid requirements  - Referral made to our Cancer Center nutritionist    Finally, he is also potentially eligible for several non-therapeutic trials we have here at ***** involving novel imaging and blood- and stool-based assays (for ctDNA and microbiome studies, respectively), if he is interested and chooses to receive his care here at *****.    All of the patient's questions were answered to his and his family's satisfaction. As a starting point, he expressed interest in the REVOLUTION trial, and so we will get him an ICF and move in this direction if he wishes to consent and be screened for this \n study.      Medical decision-making:  Problems: His active cancer represents a life-threatening illness.  Risk of complications, morbidity/mortality of patient management: High; the patient's systemic cancer therapy requires regular and intensive monitoring for potential major/life-threatening toxicities.  We discussed the following at today's visit:        Time spent:  I spent 75 minutes reviewing the patient's history and medical records in advance, in F2F time during his visit, and in post-visit charting..    Medical decision-making:  Problems: His active cancer represents a life-threatening illness.  Risk of complications, morbidity/mortality of patient management: High; the patient's systemic cancer therapy requires regular and intensive monitoring for potential major/life-threatening toxicities.    \n
+```
+
+---
+
+## Extracted Data
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Mr. [REDACTED] is a new patient with newly diagnosed metastatic pancreatic adenocarcinoma, coming to our GI Oncology practice at the UCSF Comprehensive Cancer Center for initial consult regarding his diagnosis and treatment options."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic adenocarcinoma",
+    "Stage_of_Cancer": "Metastatic ()",
+    "Distant Metastasis": "Yes, to liver and peritoneum",
+    "Metastasis": "Yes (to liver and peritoneum)"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC 6.0, Hct 46.5, plts 207, Creat 1.16, Alb 4.3, AST 26, ALT 61, tot bili 0.6, alk phos 63"
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology: Fine needle biopsy of pancreatic tail mass confirms adenocarcinoma with intact MMR proteins by IHC. Imaging: CT abdomen/pelvis shows a 5 cm cystic lesion in the pancreatic tail with multiple hepatic lesions concerning for metastases, and suggestion of peritoneal carcinomatosis. Physical Exam: Blood pressure of 172/103, 8 lb weight loss, no jaundice, no ascites, no palpable masses."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "oxyCODONE-acetaminophen (Percocet)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "If the patient opts for standard of care treatment, FOLFIRINOX (biweekly infusional 5-FU, leucovorin, irinotecan, and oxaliplatin) or the combination of gemcitabine plus nab-paclitaxel will be started. If the patient chooses to participate in the REVOLUTION trial, he will receive gemcitabine/nab-paclitaxel together with hydroxychloroquine and two doses of low-dose ipilimumab. Supportive medications for potential side effects such as nausea/vomiting, alopecia, fatigue, cytopenias, and peripheral sensory neuropathy/cold sensitivity will be provided."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Discussed standard of care treatment options including FOLFIRINOX or gemcitabine plus nab-paclitaxel. Also discussed clinical trial options: Precision Promise trial with gemcitabine/nab-paclitaxel or FFOLRINOX, or REVOLUTION trial with gemcitabine/nab-paclitaxel, hydroxychloroquine, and low-dose ipilimumab."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Fresh tumor tissue collection for the Precision Promise clinical trial; potential pre-treatment biopsy for the REVOLUTION trial."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "The patient is potentially eligible for several non-therapeutic trials here at [REDACTED] involving novel imaging and blood- and stool-based assays (for ctDNA and microbiome studies, respectively), if he is interested and chooses to receive his care here at [REDACTED]."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Somatic tumor testing of the patient's tumor specimen to assess for the presence of any actionable mutations or other genetic alterations using the UCSF500 in-house platform. Additionally, the patient should undergo genetic counseling with germline testing to assess for any hereditary predisposition to cancer."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Not specified in the provided note."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "Referral made to our Cancer Center nutritionist",
+    "Genetics": "The patient should undergo genetic counseling with germline testing",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "if he wishes to consent and be screened for this study"
+  }
+}
+```
+
+---
+
+## Patient Letter (Pipeline)
+
+Dear Patient,
+We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+**Why did you come to the clinic?**
+You came in for an initial consult regarding your newly diagnosed metastatic pancreatic adenocarcinoma (cancer that started in gland cells).
+**What's new or changed since your last visit?**
+Your cancer has spread to your liver and peritoneum. A biopsy of a mass in your pancreas confirmed adenocarcinoma (cancer that started in gland cells). Imaging showed a 5 cm cystic lesion in your pancreatic tail with multiple liver lesions and signs of cancer spread in the abdomen lining. Your blood pressure is 172/103, and you've lost 8 pounds. There is no sign of jaundice or ascites.
+**What treatment or medication changes were made?**
+Supportive medications for pain control, such as oxyCODONE-acetaminophen (Percocet), were discussed.
+**What is the plan going forward?**
+We discussed standard of care treatment options, including a chemotherapy combination or gemcitabine plus nab-paclitaxel. Clinical trial options were also discussed, such as the Precision Promise trial or the REVOLUTION trial. Fresh tumor tissue collection for the Precision Promise trial and potential pre-treatment biopsy for the REVOLUTION trial were mentioned. You will undergo genetic counseling and germline testing to assess for any hereditary predisposition to cancer. A referral was made to our Cancer Center nutritionist. If you wish to consent and be screened for the study, further steps will be taken.
+Thank you for trusting us with your care.
+Please feel free to contact us if you have any questions.
+Sincerely, Your Care Team
+
+---
+
+## Rating
+
+| Dimension | Score (1-5) | Comments |
+|-----------|------------|----------|
+| Accuracy |  |  |
+| Completeness |  |  |
+| Safety |  |  |
+| Simplification |  |  |
+| Overall Quality |  |  |
+
+**Fabricated info?** Yes / No
+
+**Missing critical info?** Yes / No
+
+**Harmful content?** Yes / No
+
+**Comments:**
+

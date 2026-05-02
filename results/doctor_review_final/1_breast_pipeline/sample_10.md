@@ -1,0 +1,124 @@
+# Sample 10
+
+**Cancer Type:** ER+/PR+/HER2- grade 2 invasive ductal carcinoma
+
+---
+
+## Original Clinical Note
+
+```
+HPI:  ***** ***** is a 32 y.o. female here in consultation to discuss treatment options for her newly diagnosed breast cancer whose history is as follows:    Patient Active Problem List    Diagnosis Date Noted   \u0007 Breast cancer, right breast 04/11/2017     Found mass in her right breast while in ***** on vacation and pain under her right arm.  03/19/17 diagnostic mammogram and US, core biopsy + for carcinoma  04/11/17 UCSF US right breast: 28 x 16 x 30 mm hypoechoic, irregular mass , upper central breast, at 12 o'clock, 3 cm from nipple.   Right axilla: lymph node with asymmetrically thickened cortex measuring up to 4mm maximum thickness, 11 o'clock, 9cm from the right nipple.  04/11/17 right breast core biopsy and axillary node FNA:  Grade 2 IDC, ER >95%, PR 25%, HER2 neg by IHC, 2.9/1.4 by FISH for average ratio of 2.0, axillary node positive for carcinoma  04/11/17 genetic testing sent  04/15/17 MRI: right breast with 34 x 20 x 25 mm irregularly shaped mass with spiculated margins and heterogeneous enhancement in the upper central to slightly outer quadrant. Enlarged right axillary lymph node with a cortex measuring up to 6 mm, likely corresponding to the recently sample axillary lymph node.  04/16/17 start egg harvesting process  04/17/17 PET/CT: Prominent right axillary lymph node measures up to 9 mm a maximum SUV of 2.1 (series 4, image 66). Hypermetabolic right breast mass is better characterized on recent MRI breast and measures approximately 3.2 cm the maximum SUV of 8.4.       Patient states that she overall feeling well, except for some mild bloating. She has a good support system through her family. ***** has questions regarding her ability to continue exercise including, biking, boogie boarding, and surfing while undergoing treatment. She is trying to improve her diet and eat more healthy.     Past Medical History:   Diagnosis Date   \u0007 Breast cancer, right breast March 2017   \u0007 Closed left ankle fracture 2010   \u0007 Viral \n meningitis 1994     Past Surgical History:   Procedure Laterality Date   \u0007 TRANSFER / TRANSPLANT ANKLE TENDON SUPERFICIAL / DEEP Left February 2010    snow board injury     Family History   Problem Relation Age of Onset   \u0007 Lung cancer Father 68     Heavy smoker, surgery January 2017   \u0007 Melanoma Maternal Grandfather 76     on eyelid   \u0007 Colon cancer Maternal Uncle 85     great uncle   \u0007 Melanoma Paternal Uncle 68     Allergies   Allergen Reactions   \u0007 Sulfa (Sulfonamide Antibiotics)        Social History     Social History Narrative    Single, lesbian without a partner    Marketing director for a ***** ***** ***** company    G0P0    Mother splits her time between ***** and *****    Sister also lives in ***** but has been staying with ***** since her diagnosis with her cat           Current Outpatient Prescriptions:   \u0007  CETRORELIX ACETATE (CETROTIDE SUBCUT), Inject under the skin., Disp: , Rfl:   \u0007  MENOTROPINS (MENOPUR SUBCUT), Inject under the skin., Disp: , Rfl:   \u0007  tamoxifen (NOLVADEX) 20 mg tablet, , Disp: , Rfl:   \u0007  UNABLE TO FIND, Powder vials SQ (Mix with 1cc diluent), Disp: , Rfl:     Review of Systems - All other systems were reviewed and are negative except that outlined above.    BP 120/61 | Pulse 61 | Temp 37.3 C (99.1 F) (Oral)  | Resp 16 | Ht 170.2 cm (5' 7.01\") | Wt 71 kg (156 lb 9.6 oz) | LMP 04/02/2017 (Exact Date) | SpO2 96% | BMI 24.52 kg/m2  Physical Examination: General appearance - alert, well appearing, and in no distress  Mental status - alert, oriented to person, place, and time  Eyes - pupils equal and reactive, extraocular eye movements intact  Mouth - mucous membranes moist, pharynx normal without lesions  Neck - supple, no significant adenopathy  Lymphatics - Right axillary node measuring 1 cm, no other adenopathy   Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm, normal S1, S2, no murmurs, rubs, clicks or \n gallops  Abdomen - soft, nontender, nondistended, no masses or organomegaly  Breasts - There is a 7 x 3 cm mass, centered from 3:00 to 4:00 in the upper outer quadrant of the right breast. Right nipple is slightly pushed upward. Dimpling to the upper outer quadrant of the right breast.   Back exam - full range of motion, no tenderness, palpable spasm or pain on motion  Neurological - alert, oriented, normal speech, no focal findings or movement disorder noted  Musculoskeletal - no joint tenderness, deformity or swelling  Extremities - peripheral pulses normal, no pedal edema, no clubbing or cyanosis  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted    I personally reviewed and interpreted the following results:  Results for orders placed or performed during the hospital encounter of 04/17/17   POCT glucose, Fingerstick   Result Value Ref Range    Glucose, meter download 94 70 - 199 mg/dL     Petct Limited Whole Body Vertex To Mid Thigh    Result Date: 04/18/2017  PET/CT Whole Body (vertex to thighs)    *****/*****/***** *****:***** PM COMPARISON:   None REASON FOR THE STUDY:   Staging. CLINICAL HISTORY:   32 years old Female with right breast carcinoma, evaluate for metastatic disease.  TECHNIQUE:   Patient's fasting time was > 6 hours.  Following intravenous administration of 8.1 mCi of F18-FDG, a contrast enhanced, diagnostic CT was performed. This was followed by an emission PET scan started 52 minutes after FDG injection.  PET images were corrected for attenuation using the CT transmission data.  PET/CT was acquired from vertex to thighs. A rotating 3D MIP, as well as axial, coronal, and sagittal PET images with and without attenuation correction was interpreted.  Acquired and fused PET/CT images were reviewed alongside the PET images.  Patient's random blood glucose at the time of FDG injection was 94 mg/dL.  RADIATION DOSE INDICATORS: ***** ***** received 2 exposure event(s) (excluding scout) \n during this CT study. The range of CTDIvol was 9.04 to 9.04 (mGy) and the TOTAL DLP was 923.24 (mGy-cm). The dose indicators for CT are the volume Computed Tomography Dose Index (CTDIvol) and the Dose Length Product (DLP), and are measured in units of mGy and mGy-cm, respectively. These indicators are not patient dose, but values generated from the CT scanner acquisition factors.  Individual patient doses calculated from these values will depend on patient size and can substantially underestimate or overestimate the actual dose. For additional information on radiation dose, safety, and protection in the UCSF Department of Radiology and Biomedical Imaging, please refer to one of our FAQ leaflets on \"Computed Tomography (CT)\" or go to *****://*****.*****.*****.*****/*****/*****. FINDINGS: Brain:   Unremarkable, symmetric, FDG uptake is seen throughout the cortical gray matter, basal ganglia and the cerebellum.  No mass effect.  While these images appear within normal limits, MRI is recommended to rule out intracranial and/or skull base metastases if clinically indicated. Neck:   No hypermetabolic neck masses or lymphadenopathy. Chest:   Lungs are clear. Prominent right axillary lymph node measures up to 9 mm a maximum SUV of 2.1 (series 4, image 66). Hypermetabolic right breast mass is better characterized on recent MRI breast and measures approximately 3.2 cm the maximum SUV of 8.4. Abdomen/Pelvis:   Unremarkable abdomino-pelvic organs.  No hypermetabolic lymphadenopathy. Musculoskeletal:   No metastatic disease.     1. Hypermetabolic breast mass better characterized on recent breast MRI. 2. Prominent right axillary lymph node with low-level hypermetabolism, corresponding to previously sampled lymph node. No additional hypermetabolic lymph nodes. This study was reviewed by attendings Dr. ***** ***** from ***** ***** and  Dr. ***** *****. ***** of Nuclear Medicine. END OF IMPRESSION:     Breast Ultrasound Core \n Biopsy, Clip/specimen, Right    Addendum Date: 04/18/2017    ===ADDENDUM===Pathology is now available for review, and demonstrates invasive ductal carcinoma. Please see pathology report for full details. These pathology results are concordant with imaging findings. Recommend continued surgical/oncological management.    Result Date: 04/18/2017  Ultrasound Guided Breast Core Biopsy: Spring Loaded with Post Biopsy Clip Placement:   *****/*****/***** *****:***** PM COMPARISON:    Targeted ultrasound performed the same date CLINICAL HISTORY:    Biopsy proven invasive ductal carcinoma of the right breast. Core biopsy for clinical and research purposes. TECHNIQUE: Procedure was explained in detail to patient.  Risks (including risks of pain, infection, bleeding, non-recovery of targeted lesion, possible need for further intervention for diagnostic purposes), benefits, and alternatives discussed.  All questions were answered.  Written and verbal informed consent obtained.  This procedure immediately followed fine-needle aspiration.  Under sterile conditions, the lesion was re-identified at the 12 o'clock position, 3 cm from the nipple in the right breast. Following administration of a 1% Lidocaine with epinephrine, a small dermatotomy was made in the skin with a scalpel and a 14-16 gauge needle was placed under direct sonographic guidance with its tip at the lesion. Pre and post fire images demonstrated transgression of the needle through the lesion. A total of 8 biopsy samples were obtained (4 clinical, 4 research). Sterile Steri-Strips were placed at the incision site. The patient tolerated the procedure well and left the department in satisfactory condition with instructions that if excessive bleeding or oozing should occur, she should contact her health care provider or visit an emergency room. She may obtain the results from her referring physician within 4 working days and if this is not possible, she may contact this department. \n     1.   Ultrasound guided core right breast biopsy for clinical and research purposes. 2.   Pathology pending. 3.   Fine needle aspiration of a right axillary lymph node was performed on the same date. Please see separate report. END OF IMPRESSION:     Mr Breast With And Without Contrast, Bilateral    Result Date: 04/15/2017  Exam Date: 04/15/2017 Exam(s): MR breast bilateral en + un Clinical History: 32-year-old woman with biopsy proven right breast cancer (outside hospital). Patient underwent repeat core biopsy here at ***** (with research cores) and fine needle aspiration of a suspicious right axillary node (results pending at the time of this MRI). Comparison: Prior examinations dated 04/11/2017 (ultrasound) and 03/19/2017 were reviewed for comparison. MRI Technique: Bilateral 1.5T breast MRI without and with contrast was performed with a dedicated breast coil using T1 and T2-weighted sequences including:  axial T2-weighted with fat saturation, high resolution T1 fat-suppressed 3D gradient echo pre-, and dynamic post-contrast sequences. Gadolinium based contrast was injected intravenously at a dose of 0.1 millimole per kilogram body weight without adverse reaction. The study was processed with a Hologic Aegis Sentinelle system to optimize interpretation by generating multiplanar reconstructions (MPRs) and maximum intensity projections (MIPs) in 3 dimensions using raw and generated subtracted images from the dynamic contrast enhanced data set. MRI Findings: This bilateral breast MRI exam demonstrates moderate background enhancement. The breasts are composed of heterogeneous fibroglandular tissue and fat. RIGHT Breast: There is a 34 x 20 x 25 mm irregularly shaped mass with spiculated margins and heterogeneous enhancement in the upper central to slightly outer right breast (axial image 59, sag image 413). Signal intensity/time curve demonstrates rapid initial rise and washout enhancement kinetics. Susceptibility \n artifact within the mass corresponds to the clip within the mass. No other abnormal areas of enhancement or other MRI features of malignancy are identified in the right breast. LEFT Breast: No abnormal areas of enhancement or other MRI features of malignancy are identified. There is an enlarged right axillary lymph node with a cortex measuring up to 6 mm, likely corresponding to the recently sample axillary lymph node. IMPRESSION: Right breast: Known biopsy proven malignancy (BI-RADS 6). Left breast: Negative (BI-RADS 1). Recommendations: Recommend continued surgical and oncologic follow up of the known right breast cancer. Additionally, recommend correlation with cytology results of the recently sampled suspicious right axillary node. Recommend continued annual screening mammography for the left breast, according to American Cancer Society guidelines. Radiologist ***** *****. ***** <This report was electronically signed by ***** *****. ***** at *****/*****/***** *****:*****:53 PM>    Breast Ultrasound Complete, Right    Result Date: 04/11/2017  Exam Date: 04/11/2017 Exam(s): Right breast ultrasound Clinical History: 32-year-old woman for sonographic exam targeted to biopsy proven invasive ductal carcinoma located at the 12 o'clock position, 3 cm from the right nipple prior to ultrasound guided biopsy for clinical and research purposes.  New palpable lump of the right axillary region. Comparison: Prior examination dated 03/19/2017 was reviewed for comparison. Ultrasound Findings: Targeted US of the right breast redemonstrated at 28 x 16 x 30 mm hypoechoic, irregular mass with indistinct margins, in the upper central right breast, at approximately 12 o'clock, 3 cm from nipple. Vascularity is not present. Findings are compatible with biopsy proven malignancy. Targeted US of the right axillary region demonstrated a lymph node with asymmetrically thickened cortex measuring up to 4mm maximum thickness, located at the 11 o'clock position, \n 9cm from the right nipple. IMPRESSION: Right breast: Known biopsy proven malignancy (BI-RADS 6). Recommendations: 1.  Core biopsy will be performed today for the known malignancy in the upper central right breast. 2.  Fine needle aspiration will be performed today for the right axillary lymph node. Radiologist ***** *****, M.D. <This report was electronically signed by ***** *****, M.D. at *****/*****/***** *****:*****:47 PM>    Breast Ultrasound Fna, Right    Addendum Date: 04/18/2017    ===ADDENDUM===Cytology is now available for review, and demonstrates metastatic ductal carcinoma of breast. Please see pathology report for full details. These cytology results are concordant with imaging findings. Recommend continued surgical/oncological management.    Result Date: 04/18/2017  Ultrasound Guided Fine Needle Aspiration: *****/*****/***** *****:***** PM COMPARISON:    Right breast and right axillary ultrasound 04/11/17 and right breast ultrasound 03/19/17 CLINICAL HISTORY: 32 y.o. female with biopsy proven right breast cancer (diagnosed at an outside facility) presents for FNA of an abnormal right axillary lymph node with thickened cortex. TECHNIQUE: Procedure was explained in detail to patient. 
+```
+
+---
+
+## Extracted Data
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient is a 32 y.o. female with newly diagnosed right breast cancer (grade 2 ER+, PR 25%, HER2 negative by IHC, axillary node positive for carcinoma) and is here for initial consultation to discuss treatment options."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma",
+    "Stage_of_Cancer": "T2N1, clinical stage II",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 94 mg/dL"
+  },
+  "Clinical_Findings": {
+    "findings": "Grade 2 invasive ductal carcinoma (IDC) with ER >95%, PR 25%, HER2 negative by IHC, and 2.9/1.4 by FISH for an average ratio of 2.0. Right breast mass measuring 28 x 16 x 30 mm (hypoechoic, irregular) and 34 x 20 x 25 mm (irregularly shaped, spiculated margins) on MRI. Right axillary lymph node with asymmetrically thickened cortex (up to 4mm) and enlarged lymph node with a cortex measuring up to  6mm on MRI. PET/CT shows prominent right axillary lymph node with a maximum SUV of 2.1 and hypermetabolic right breast mass with a maximum SUV of 8.4. Physical exam reveals a 7 x 3 cm mass in the upper outer quadrant of the right breast with slight dimpling and right nipple pushed upward. No additional hypermetabolic lymph nodes or metastatic disease detected on imaging."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative"
+  },
+  "Response_Assessment": {
+    "response_assessment": "On treatment; response assessment not available from current visit."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Hormone therapy after surgery, including ovarian suppression. Cold caps to be considered. Antiemetics and other supportive medications to address side effects such as hair loss, neuropathy, cardiac toxicity, nausea, diarrhea, constipation, and nail changes."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Patient will start neoadjuvant chemotherapy on 05/01/17, including weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Hormone therapy will be required after surgery, including ovarian suppression. The patient is enrolled in the ISPY2 clinical trial, which includes randomization, secondary consent, biopsies, MRI scans, and novel agents. The patient is considering the use of cold caps during chemotherapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port to be placed either on start of therapy or one week later."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Mammo/PET on 05/01/17"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Labs on Thursday."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Mammoprint expected on Thursday of this week."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "planning for start of neoadjuvant chemotherapy on 05/01/17"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "None"
+  }
+}
+```
+
+---
+
+## Patient Letter (Pipeline)
+
+Dear Patient,
+We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+**Why did you come to the clinic?**
+You came in for an initial consultation regarding your newly diagnosed right breast cancer.
+**What's new or changed since your last visit?**
+You have been diagnosed with a grade 2 invasive ductal carcinoma (cancer that started in the milk ducts) in your right breast. The cancer is estrogen receptor positive (ER+), progesterone receptor positive (PR+), and does not have a protein called HER2. The cancer has spread to one lymph node under your right armpit but has not spread to other parts of your body.
+**What treatment or medication changes were made?**
+You will start neoadjuvant chemotherapy (treatment given before surgery to shrink the cancer) on May 1st, 2017. This will include weekly paclitaxel for 12 weeks followed by AC every 2-3 weeks with Neulasta support. After surgery, you will need hormone therapy, which includes suppressing your ovaries. You are also considering the use of cold caps during chemotherapy to reduce hair loss.
+**What is the plan going forward?**
+You will start neoadjuvant chemotherapy on May 1st, 2017. A port will be placed either on the start of therapy or one week later. You will have a mammogram and PET scan on May 1st, 2017. Labs will be done on Thursday. Mammoprint results are expected on Thursday of this week.
+Thank you for trusting us with your care.
+Please feel free to contact us if you have any questions.
+Sincerely, Your Care Team
+
+---
+
+## Rating
+
+| Dimension | Score (1-5) | Comments |
+|-----------|------------|----------|
+| Accuracy |  |  |
+| Completeness |  |  |
+| Safety |  |  |
+| Simplification |  |  |
+| Overall Quality |  |  |
+
+**Fabricated info?** Yes / No
+
+**Missing critical info?** Yes / No
+
+**Harmful content?** Yes / No
+
+**Comments:**
+
