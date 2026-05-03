@@ -1,0 +1,88 @@
+# Sample 1
+
+---
+
+## Original Clinical Note
+
+```
+***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of breast cancer, who presents in consultation to discuss treatment options and to establish care.    HPI: The patient last had a screening mammogram on 11/06/11 (at 76 years) which was notable for heterogeneously dense breast tissue, but no features of malignancy.  The patient felt a painful mass in her right breast in August 2016.  She presented to her PCP (Dr. *****) of 30+ years on 09/11/16 who noted a firm mobile mass (6 cm) in the right upper outer quadrant of her breast with dimpling of overlying skin.      A diagnostic mammogram on 09/17/16 demonstrated heterogeneously dense breast tissue and a round, indistinct, high density mass (4.1 x 3.3 cm) at the site of the palpable lump, which was in the upper outer right breast, posterior depth.  A targeted ultrasound at that time was notable for a hypoechoic irregular solid mass (2.7 x 2.9 x 3.8 cm) in the upper outer right breast, at the 10:00 position, 9 cm from the nipple.  She underwent a right breast fine needle aspiration at the 10:00 position on 09/17/16.  The pathology was consistent with adenocarcinoma with ER negative, PR negative, and HER2 negative (IHC 0; FISH ratio 1.7).    She established care with Dr. ***** ***** on 09/25/16.  She was offered breast conserving surgery, but preferred mastectomy in an effort to avoid radiation.  ***** underwent a right breast simple mastectomy and sentinel lymph node biopsy on 10/25/16 with Dr. *****.  The pathology was notable for 3.6 cm of grade 3 IDC.  The mitotic count was quite elevated at 74/10 hpf.  The final margins were negative.  Features suggestive of lymphovascular invasion were present.  No DCIS was present.  One of the 2 sentinel lymph nodes was positive for adenocarcinoma (1.2 cm, but no extranodal extension).  Biomarkers were notable for estrogen receptor negative, progesterone receptor negative, HER2 positive (IHC 1; FISH ratio 2.1, \n but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5), and variable Ki67 expression (<5% to 25-30%; average ~15%).      ***** developed dyspnea on the evening of 11/20/16 and presented to ***** ***** ***** in the context of her known congestive hart failure with left venrticular dysfunction (LVEF 25%).  She was managed with Lasix in the CDU and discharged earlier today.  She presents to clinic with her daughter (*****) and granddaughter (*****).  She feels much better today, back to her baseline with regards to energy and dyspnea.  She has no pain at the site of her breast surgery.      Past Medical History:   Diagnosis Date   \u0007 Cardiac pacemaker in situ    \u0007 Cataract    \u0007 CHF (congestive heart failure)    \u0007 CKD (chronic kidney disease)     Chronic kidney disease (CKD) stage G3b/A1, moderately decreased glomerular filtration rate (GFR) between 30-44 mL/min/1.73 square meter and albuminuria creatinine ratio less than 30 mg/g   \u0007 Coronary atherosclerosis of unspecified type of vessel, native or graft    \u0007 Diabetes mellitus     115-180s   \u0007 GERD (gastroesophageal reflux disease)    \u0007 Glaucoma     suspect   \u0007 HTN (hypertension)    \u0007 Hypertension    \u0007 Other and unspecified hyperlipidemia    \u0007 Pacemaker    \u0007 SBO (small bowel obstruction)     Partial sbo without history of previous abdominal surgeries. Unclear etiology. DDx includes small occult neoplasm vs focal enteritis. Adhesion less likely with lack of abdominal surgeries. EGD/Colo neg in October 2012   \u0007 Sick sinus syndrome        Past Surgical History:   Procedure Laterality Date   \u0007 BIOPSY / EXCISION BREAST     \u0007 CHOLECYSTECTOMY     \u0007 MASTECTOMY Right 10/25/2016   \u0007 PACEMAKER INSERTION  1998   \u0007 SENTINEL LYMPH NODE BIOPSY Right 10/25/2016        Family History   Problem Relation Age of Onset   \u0007 Stroke Mother    \u0007 Uterine cancer Mother 40     died at 43   \u0007 Stroke Father    \u0007 Diabetes Other    \u0007 Arthritis Other    \u0007 Stroke Sister 68     March 2013   \u0007 Stomach cancer Maternal \n Grandfather    \u0007 Uterine cancer Maternal Aunt 37     died at 39   \u0007 Blindness Neg Hx    \u0007 Amblyopia Neg Hx    \u0007 Cataracts Neg Hx    \u0007 Glaucoma Neg Hx    \u0007 Macular degen Neg Hx    \u0007 Retinal detachment Neg Hx    \u0007 Strabismus Neg Hx        Social History     Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Occupational History   \u0007 Not on file.     Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use No   \u0007 Drug use: No   \u0007 Sexual activity: Not on file     Other Topics Concern   \u0007 Not on file     Social History Narrative    Married; husband still alive. Lives with her daughter.  Originally from *****.     The patient underwent menarche at 11 years of age.  She never took OCP.  She is G7P5.  She underwent menopause at 55.  She has no history of HRT.        Outpatient Encounter Prescriptions as of 11/21/2016   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 1 tablet (500 mg total) by mouth every 6 (six) hours as needed (MILD PAIN).     \u0007 amLODIPine (NORVASC) 5 mg tablet Take 0.5 tablets (2.5 mg total) by mouth Daily. 90 tablet 3   \u0007 aspirin 81 mg EC tablet TAKE 1 TABLET BY MOUTH DAILY 90 tablet 3   \u0007 atorvastatin (LIPITOR) 40 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY 90 tablet 3   \u0007 bisoprolol (ZEBETA) 5 mg tablet TAKE 1/2 TABLET BY MOUTH DAILY 50 tablet 3   \u0007 blood glucose (BLOOD GLUCOSE) test strip Check blood sugar twice daily as directed. 180 each 3   \u0007 blood glucose monitoring kit Check blood sugar as directed 1 each 0   \u0007 brimonidine (ALPHAGAN) 0.1 % ophthalmic solution Place 1 drop into both eyes 2 (two) times daily. 10 mL 11   \u0007 calcium carbonate-vitamin D (OYSCO 500/D) 1,250 mg (500 mg elemental)-200 unit tablet TAKE 1 TABLET BY MOUTH EVERY DAY 90 tablet 3   \u0007 glipiZIDE (GLUCOTROL) 10 mg tablet TAKE 1 TABLET BY MOUTH TWICE DAILY BEFORE MEALS 180 \n tablet 1   \u0007 insulin glargine (LANTUS) 100 unit/mL injection INJECT 5 UNITS INTO THE SKIN EVERY NIGHT AT BEDTIME 10 mL 5   \u0007 insulin syringe-needle U-100 0.3 mL 29 SYRINGE USE DAILY AS DIRECTED 100 Syringe 3   \u0007 lancets lancets Use twice daily as directed. 180 each 3   \u0007 latanoprost (XALATAN) 0.005 % ophthalmic solution Place 1 drop into both eyes nightly at bedtime. 2.5 mL 11   \u0007 metFORMIN (GLUCOPHAGE) 1,000 mg tablet TAKE 1 TABLET BY MOUTH TWICE DAILY TAKE WITH MEALS 200 tablet 3   \u0007 valsartan (DIOVAN) 80 mg tablet TAKE 1 TABLET BY MOUTH DAILY 90 tablet 2   \u0007 ALPHAGAN P 0.1 % ophthalmic solution INSTILL 1 DROP IN BOTH EYES TWICE DAILY 5 mL 0   \u0007 docusate sodium (COLACE) 100 mg capsule Take 1 capsule (100 mg total) by mouth Twice a day. 60 capsule 0   \u0007 loratadine (CLARITIN) 10 mg tablet Take 1 tablet (10 mg total) by mouth Daily. 90 tablet 1   \u0007 mometasone (NASONEX) 50 mcg/actuation spray 2 sprays by Nasal route Daily. 17 g 6   \u0007 nitroGLYCERIN (NITROSTAT) 0.4 mg SL tablet Place 1 tablet (0.4 mg total) under the tongue every 5 (five) minutes as needed for Chest pain. 100 tablet 3   \u0007 olopatadine (PATANOL) 0.1 % ophthalmic solution Place 1 drop into both eyes daily as needed (1 drop as needed). 5 mL 6   \u0007 [DISCONTINUED] doxycycline (MONODOX) 100 mg capsule      \u0007 [DISCONTINUED] furosemide (LASIX) 40 mg tablet Take 0.5 tablets (20 mg total) by mouth Daily. 3 tablet 0   \u0007 [DISCONTINUED] oxyCODONE (ROXICODONE) 5 mg tablet Take 1 tablet (5 mg total) by mouth every 4 (four) hours as needed for Pain. 30 tablet 0     Facility-Administered Encounter Medications as of 11/21/2016   Medication Dose Route Frequency Provider Last Rate Last Dose   \u0007 [COMPLETED] furosemide (LASIX) injection 20 mg  20 mg Intravenous Once ***** *****, MD   20 mg at 11/20/16 1632   \u0007 [DISCONTINUED] 0.9 % sodium chloride flush injection syringe  3 mL Intravenous Q8H SCH ***** ***** *****, *****-C   3 mL at 11/20/16 2138   \u0007 [DISCONTINUED] 0.9 % sodium \n chloride flush injection syringe  3 mL Intravenous PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] acetaminophen (TYLENOL) tablet 500 mg  500 mg Oral Q6H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] acetaminophen (TYLENOL) tablet 500 mg  500 mg Oral Q6H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] amLODIPine (NORVASC) tablet 2.5 mg  2.5 mg Oral Daily (AM) ***** ***** *****, *****-C       \u0007 [DISCONTINUED] aspirin EC tablet 81 mg  81 mg Oral Daily (AM) ***** ***** *****, *****-C       \u0007 [DISCONTINUED] atorvastatin (LIPITOR) tablet 40 mg  40 mg Oral Q PM ***** ***** *****, *****-C   40 mg at 11/20/16 2128   \u0007 [DISCONTINUED] brimonidine (ALPHAGAN) 0.1 % ophthalmic solution 1 drop  1 drop Both Eyes BID ***** ***** *****, *****-C   1 drop at 11/20/16 2128   \u0007 [DISCONTINUED] dextrose 50% injection syringe 12.5 g  25 mL Intravenous Q15 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] docusate sodium (COLACE) capsule 100 mg  100 mg Oral BID ***** ***** *****, *****-C   100 mg at 11/20/16 2128   \u0007 [DISCONTINUED] glipiZIDE (GLUCOTROL) tablet 10 mg  10 mg Oral Daily with Breakfast ***** ***** *****, *****-C       \u0007 [DISCONTINUED] glucose chewable tablet 20 g  20 g Oral Q15 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] insulin aspart (NovoLOG) injection 100 units/mL pen  0-20 Units Subcutaneous TID ***** ***** ***** *****, *****-C   0 Units at 11/20/16 1843   \u0007 [DISCONTINUED] insulin aspart (NovoLOG) injection 100 units/mL pen  0-3 Units Subcutaneous Bedtime and early am ***** ***** *****, *****-C   0 Units at 11/20/16 2134   \u0007 [DISCONTINUED] insulin glargine (LANTUS, BASAGLAR) injection 100 units/mL pen  5 Units Subcutaneous Bedtime ***** ***** *****, *****-C   5 Units at 11/20/16 2136   \u0007 [DISCONTINUED] latanoprost (XALATAN) 0.005 % ophthalmic solution 1 drop  1 drop Both Eyes Bedtime ***** ***** *****, *****-C   1 drop at 11/20/16 2128   \u0007 [DISCONTINUED] loratadine (CLARITIN) tablet 10 mg  10 mg Oral Daily (AM) ***** ***** \n *****, *****-C       \u0007 [DISCONTINUED] metFORMIN (GLUCOPHAGE) tablet 1,000 mg  1,000 mg Oral BID ***** ***** ***** *****, *****-C   1,000 mg at 11/20/16 1845   \u0007 [DISCONTINUED] nitroGLYCERIN (NITROSTAT) SL tablet 0.4 mg  0.4 mg Sublingual Q5 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] ondansetron (ZOFRAN) injection 4 mg  4 mg Intravenous Q8H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] ondansetron (ZOFRAN) tablet 4 mg  4 mg Oral Q8H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] valsartan (DIOVAN) tablet 80 mg  80 mg Oral Daily (AM) ***** ***** *****, *****-C           No Known Allergies       Review of Systems:   General - some fatigue at baseline; stable weight   Eyes - no vision changes   HENT - stable hearing, no nasal discharge or sinus tenderness, no difficulty swallowing, no mouth sores, no sore throat   Breast - no breast pain  Respiratory - dyspnea at baseline; no cough, no wheezing   Cardiovascular - no chest pain, no palpitations, no lower extremity edema   GI - constipation; no heartburn, no nausea, no emesis, no abdominal pain, no diarrhea, no melena, no hematochezia   GU - no suprapubic pain, no dysuria, no vaginal bleeding   Musculoskeletal - joint stiffness; no muscle pain, no bone pain   Endocrine - no heat/cold intolerance, no hot flashes  Heme/Lymph - no easy bruising/bleeding, no lymphedema   Neurological - no headaches, no dizziness, no numbness/tingling, no falls   Psychological - anxious; no depression   Skin - no rashes/lesions, no diaphoresis       Physical Exam:   ECOG 2   Vital Signs - BP 118/67 | Pulse 87 | Temp 36.3 C (97.3 F) (Oral)  | Resp 16 | Ht 150 cm (4' 11.06\") Comment: 11/21/2016 ***** | Wt 53.5 kg (118 lb) | SpO2 98% | BMI 23.79 kg/m2   Constitutional - WDWN, NAD  Eyes - sclera anicteric, PERRL, EOMI  HENT - sinuses nontender, nasal mucosa intact, pharynx without erythema, stomatitis, or thrush   Lymph Nodes - no cervical, supraclavicular, or axillary lymphadenopathy. \n   Respiratory - resonant to percussion throughout, CTA bilaterally; no wheezes, rhonchi, or crackles  Cardiovascular - Normal heart rate, normal rhythm, no murmurs, no edema  Breast - right simple mastectomy; no mass in left breast  GI - Bowel sounds normal, soft; no tenderness, no distention, no HSM  Musculoskeletal - No tenderness over bones or joints.   Neurologic - Alert & oriented x 3, ambulates w/o difficulty, good strength throughout  Psychiatric - Mood stable; no HI, SI, hallucinations, paranoia, or delusions  Skin - warm without rashes or lesions       Studies:  Available labs, pathology, and imaging were reviewed and independently interpreted, as described above in the HPI.  Lab Results   Component Value Date    WBC Count 9.9 11/20/2016    Hemoglobin 9.6 (L) 11/20/2016    Hematocrit 28.9 (L) 11/20/2016    Platelet Count 222 11/20/2016     Lab Results   Component Value Date    Sodium, Serum / Plasma 133 (L) 11/20/2016    Potassium, Serum / Plasma 4.2 11/20/2016    Chloride, Serum / Plasma 102 11/20/2016    Carbon Dioxide, Total 22 11/20/2016    Urea Nitrogen, Serum / Plasma 18 11/20/2016    Creatinine 1.01 (H) 11/20/2016    Glucose, non-fasting 201 (H) 11/20/2016     Lab Results   Component Value Date    Calcium, total, Serum / Plasma 9.4 11/20/2016     Lab Results   Component Value Date    Aspartate transaminase 27 11/20/2016    Alanine transaminase 19 11/20/2016    Alkaline Phosphatase 60 11/20/2016    Bilirubin, Total 0.9 11/20/2016    Albumin, Serum / Plasma 3.0 (L) 06/01/2015     10/25/16 SURGICAL PATHOLOGY REPORT    ***** WITH ADDENDUM *****    Patient Name: *****, *****  *****. Rec.#: *****  DOB: 04/22/1935 (Age: 81)  Sex: Female  Accession #: *****-*****  Visit #: *****  Service Date: 10/25/2016  Received: 10/25/2016  Location: PPE  Client:*****   Physician(s): ***** *****. ***** ((*****) *****-*****)    FINAL PATHOLOGIC DIAGNOSIS    A. Right breast, simple mastectomy:   1. Invasive ductal carcinoma, SBR   grade \n 3, 3.6 cm, negative margins;  see comment.  2. Fibroadenomas.  3. Cystic dilatation of ducts and apocrine metaplasia.  4. Calcifications associated with apocrine metaplasia and benign ducts.    5. Unremarkable skin and nipple.    B. Right axillary sentinel lymph node, #1- ex vivo count 5000, biopsy:   Metastatic carcinoma in one lymph node, 1.2 cm, no extranodal extension  (May 19); see comment.    C. Right axillary palpable non-sentinel lymph node #1, biopsy: No tumor  in one lymph node (0/1).    D. Right new anterior lateral margin, excision: Benign fibroadipose  tissue, no carcinoma.    E. Right breast skin, excision: Benign skin, no carcinoma.    COMMENT:  Breast Tumor Synoptic Comment    - Laterality: Right.  - Tumor site: Upper outer quadrant.    - Position: 10 o'clock.  - Inv
+```
+
+---
+
+## Patient Letter (ChatGPT Baseline)
+
+Dear Patient,
+
+We are writing to help you understand your recent visit and your breast cancer care.
+
+What is your diagnosis?
+You have breast cancer in your right breast. The type is called invasive ductal carcinoma, which means the cancer started in the milk ducts and has grown into nearby breast tissue.
+Your tumor was 3.6 cm in size and is grade 3, which means the cancer cells look more aggressive under the microscope.
+One nearby lymph node (a small gland that helps fight infection) had cancer.
+
+Your cancer is:
+
+ER negative / PR negative: the cancer does not use estrogen or progesterone to grow
+HER2 positive: the cancer has a protein that can help it grow faster
+
+What has been done so far?
+You had surgery on 10/25/2016 to remove the right breast (mastectomy, which means removal of the breast) and to check nearby lymph nodes.
+The surgery removed all visible cancer, and the edges (called margins) were clear, which is good.
+
+Other health issues
+You also have heart failure (the heart does not pump well), with a low heart function (LVEF 25%).
+You recently had shortness of breath but improved with treatment and now feel back to your usual state.
+
+Treatment plan
+You are here to discuss next steps in treatment. These may include medicines to lower the chance of the cancer coming back. Your care team will consider your cancer type and your heart condition when making recommendations.
+
+Key test results
+
+Tumor size: 3.6 cm
+1 of 2 lymph nodes positive
+No cancer at the surgical edges
+Cancer markers: ER/PR negative, HER2 positive
+
+Next steps
+
+Meet with your oncology team to decide on further treatment
+Continue follow-up visits
+Manage your heart condition closely with your doctors
+
+What to watch for
+Call your care team if you notice:
+
+New or worsening shortness of breath
+Chest pain
+Swelling in your legs
+New lumps or pain
+Fever or signs of infection
+
+You are recovering well from surgery and feeling better after your recent symptoms. That is encouraging.
+
+Please remember, you are not alone. If you have questions or concerns, write them down and discuss them with your care team. They are here to support you and help you make the best decisions for your health.
+
+With care and support,
+Your Oncology Team
+
+---
+
+## Rating
+
+| Dimension | Score (1-5) | Comments |
+|-----------|------------|----------|
+| Accuracy |  |  |
+| Completeness |  |  |
+| Safety |  |  |
+| Simplification |  |  |
+| Overall Quality |  |  |
+
+**Fabricated info?** Yes / No
+
+**Missing critical info?** Yes / No
+
+**Harmful content?** Yes / No
+
+**Comments:**
+

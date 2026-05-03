@@ -1,16 +1,17 @@
 # Doctor Review — Baseline vs Pipeline Comparison
 
-**Date:** 2026-05-02
-**Model:** Qwen2.5-32B-Instruct-AWQ (same model for both conditions)
+**Date:** 2026-05-03
+**Models:** Qwen2.5-32B-Instruct-AWQ (Pipeline + Qwen Baseline) and GPT-4o (ChatGPT Baseline)
 
 ## Conditions
 
-| # | Folder | Cancer Type | Condition | Description |
-|---|--------|------------|-----------|-------------|
-| 1 | `1_breast_pipeline/` | Breast Cancer | **Pipeline** | Full harness: 5-gate verification + 40+ POST hooks + RAG |
-| 2 | `2_breast_baseline/` | Breast Cancer | **Baseline** | Same model, single prompt, no processing |
-| 3 | `3_pdac_pipeline/` | Pancreatic Cancer | **Pipeline** | Full harness adapted for PDAC |
-| 4 | `4_pdac_baseline/` | Pancreatic Cancer | **Baseline** | Same model, single prompt, no processing |
+| # | Folder | Cancer Type | Model | Condition | Description |
+|---|--------|------------|-------|-----------|-------------|
+| 1 | `1_breast_pipeline/` | Breast Cancer | Qwen2.5-32B | **Pipeline** | Full harness: 5-gate verification + 40+ POST hooks + RAG |
+| 2 | `2_breast_baseline/` | Breast Cancer | Qwen2.5-32B | **Qwen Baseline** | Same model, single prompt, no processing |
+| 2b | `2_breast_chatgptbaseline/` | Breast Cancer | GPT-4o | **ChatGPT Baseline** | Proprietary model, single prompt, no processing |
+| 3 | `3_pdac_pipeline/` | Pancreatic Cancer | Qwen2.5-32B | **Pipeline** | Full harness adapted for PDAC |
+| 4 | `4_pdac_baseline/` | Pancreatic Cancer | Qwen2.5-32B | **Qwen Baseline** | Same model, single prompt, no processing |
 
 ## Instructions
 
@@ -24,4 +25,4 @@
 
 - 20 annotated breast cancer notes (CORAL dataset, held-out test set)
 - 20 annotated pancreatic cancer notes (CORAL dataset, held-out test set)
-- Total: 80 letters to review (20 × 2 cancers × 2 conditions)
+- Total: 100 letters to review (20 breast × 3 conditions + 20 PDAC × 2 conditions)
