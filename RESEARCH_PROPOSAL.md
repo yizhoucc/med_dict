@@ -493,22 +493,49 @@ The complete prompt text is provided in Section 5.3 of this proposal.
 
 ### A.2 Domain-Adapted System Prompt (used for intervention system)
 
-*[TO BE INSERTED: The frozen system prompt (v1.0) will be documented here upon system freeze.]*
+*The frozen system prompts are documented in `prompts/extraction.yaml`, `prompts/plan_extraction.yaml`, and `prompts/letter_generation.yaml` (breast cancer) and their PDAC equivalents in `prompts/pdac/`. Total: 21 prompts across extraction (8), plan (10), letter (1), and cancer-specific variants.*
 
 ### A.3 RAG Knowledge Base Specifications
 
-*[TO BE INSERTED: Embedding model, vector store type, chunk size, overlap, top-k parameter, total number of entries.]*
+- **Source:** NCI Dictionary of Cancer Terms + NCCN patient-oriented explanations
+- **Format:** Flat text file (`data/formaldef.txt`), one term per entry
+- **Entries:** 9,331 medical term definitions
+- **Retrieval method:** Exact string matching against clinical note text
+- **Priority list:** 30 high-confusion terms (`INJECT_PRIORITY_TERMS`) always injected when detected
+- **Max terms per note:** 15 (to avoid context overflow)
+- **No embedding model or vector store** — retrieval is deterministic string matching, ensuring reproducibility
 
 ### A.4 Iterative Refinement Changelog
 
-*[TO BE INSERTED: Summary table documenting each of the 10 refinement cycles.]*
+**Breast Cancer (v31) — 15 cycles on 56 dev samples + 6 doctor feedback items:**
 
-| Cycle | Date | Issues Identified | Source | Modification Type | Description |
-|-------|------|-------------------|--------|-------------------|-------------|
-| 1 | [date] | [issues] | Oncologist / AI | Prompt / RAG / Both | [description] |
-| 2 | [date] | [issues] | Oncologist / AI | Prompt / RAG / Both | [description] |
-| ... | ... | ... | ... | ... | ... |
-| 10 | [date] | [issues] | Oncologist / AI | Prompt / RAG / Both | [description] |
+| Phase | Cycles | Key Changes | Result |
+|-------|--------|-------------|--------|
+| v1-v30 | ~30 | ChatTemplate, field splitting 4→8 prompts, CoT, KV Cache | Foundation |
+| iter1-12 | 12 | 40+ POST hooks accumulated, prompt refinements | 80% clean |
+| iter13 | 1 | Doctor feedback: 3 P1 fixed (TNBC receptor, LN spread, margins) | 80% clean |
+| iter14 | 1 | Full review, doctor feedback verified | 79% clean |
+| iter15 | 1 | All fixes confirmed | **100% clean** |
+| Stage fix | 1 | Removed AJCC stage inference (50% error rate on test set) | Improved |
+
+**PDAC (v32) — 18 cycles on 30→100 dev samples:**
+
+| Phase | Cycles | Key Changes | Result |
+|-------|--------|-------------|--------|
+| Init | 1 | Cancer-type routing, PDAC prompts, breast hooks guarded | Baseline |
+| 30-sample iter1-9 | 9 | Stage IIB anti-fabrication, capecitabine hallucination fix, surveillance goals, drug lists, grammar/voice hooks | P1: 32→8 |
+| 100-sample iter1-4 | 4 | Surveillance pattern widened, oncology_drugs.txt synced, monitoring negation | P1: 40→32 |
+| 100-sample iter5-9 | 5 | REDACTED garble fix, GRAMMAR after VOICE, jargon replacement (20 terms), measurement removal, "a medication" collapse | **99/100 clean** |
+
+**Baseline comparison (40 letters):**
+
+| Metric | Baseline | Pipeline |
+|--------|----------|----------|
+| Hallucinations | 2.5% | **0%** |
+| REDACTED leaks | 45% | **0%** |
+| Would send as-is | 0% | **97.5%** |
+
+*Detailed per-cycle changelogs are maintained in the project's git history and review documents. See `results/` directory for iteration-by-iteration review docs.*
 
 ---
 

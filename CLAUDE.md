@@ -16,23 +16,30 @@
 - 提取 prompt 中的具体示例和边界情况处理 = 服务原则 1（精确引导模型）
 
 ## 项目概述
-使用 LLM (Llama 3.1 8B Instruct) 从肿瘤科临床笔记中提取结构化信息，并生成面向患者的通俗解释。
+使用 LLM (Qwen2.5-32B-Instruct-AWQ via vLLM) 从肿瘤科临床笔记中提取结构化信息，并生成面向患者的通俗总结信件。系统架构为 **inference harness**（推理编排层），模型权重不做任何修改，所有适配通过 prompt + gate + hook 实现。
 
 ## 数据
-- **CORAL 数据集**：乳腺癌肿瘤科门诊笔记（去标识化）
-- **医学词典**：`data/formaldef.txt`（9369 术语），经 8 年级词汇过滤
+- **CORAL 数据集**：乳腺癌 + 胰腺癌肿瘤科门诊笔记（去标识化，UCSF）
+  - Unannotated (Dev): 100 breast + 100 PDAC = 200 notes（用于开发迭代）
+  - Annotated (Test): 20 breast + 20 PDAC = 40 notes（held-out，有专家 BRAT 标注，用于最终评估）
+- **医学词典**：`data/formaldef.txt`（9,331 术语），经 8 年级词汇过滤
+- **药物白名单**：`data/oncology_drugs.txt`（~140 种肿瘤药物）
 - HuggingFace token 存于 `hf.token`（勿提交）
 
 ## 核心文件
-- `run.py` - 实验入口，根据 config 的 `extraction.pipeline` 选择 v1 或 v2 pipeline
-- `ult.py` - 工具库：模型推理（含 KV Cache 分叉）、JSON 修复、两个 pipeline 实现
-  - `build_base_cache()` - 构建 KV Cache
-  - `extract_and_verify()` - V1 pipeline（3-gate: format, faithfulness 重来, temporal）
-  - `extract_and_verify_v2()` - V2 pipeline（5-gate: format, schema, improve 合并, faithfulness 修剪, temporal）
-  - `extract_schema_keys()` - 从 prompt 的 JSON schema 解析期望 keys
-  - `run_model_with_cache_manual()` - 手动 token-by-token 生成，支持 eos_token_id 列表
-- `notebooks/` - 早期工作：医学术语简化 + 可读性评估
-- `plots/` - 可读性指标对比图（SVG）
+- `run.py` (~3500行) - 主 pipeline + 40+ POST hooks + `post_fix_letter()` + cancer type routing
+- `ult.py` (~1600行) - 模型推理、5-gate verification cascade、filter_current_meds
+- `letter_generation.py` (~550行) - letter 生成 + `post_check_letter()`（术语/尺寸/剂量/重复处理）
+- `vllm_pipeline/vllm_client.py` - vLLM HTTP API 封装
+- `auto_review.py` - LLM-based 自动审查工具（用 Qwen 审查每个 sample）
+- `baseline_generate.py` - baseline 生成（裸模型 + 单 prompt）
+- `prompts/extraction.yaml` - 乳腺癌 extraction prompts (8 fields)
+- `prompts/pdac/extraction.yaml` - PDAC extraction prompts (8 fields)
+- `prompts/letter_generation.yaml` - 乳腺癌 letter template
+- `prompts/pdac/letter_generation.yaml` - PDAC letter template
+- `data/oncology_drugs.txt` - 药物白名单 (~140 drugs)
+- `data/formaldef.txt` - 医学术语定义 (9,331 terms)
+- `RESEARCH_PROPOSAL.md` - 研究 proposal v3.2（inference harness 框架）
 
 ## Pipeline 架构
 
@@ -143,17 +150,17 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **row_index**：CSV 数据集中的行索引（从 0 开始），对应 `row_indices` 配置中的值。
 - **ROW N**：results.txt 中的 "RESULTS FOR ROW N"，N = row_index + 1。
 - **coral_idx**：CORAL 数据集的原始编号。
-- **当前版本**：v31 iter15。使用 Qwen2.5-32B-Instruct-AWQ via vLLM。40+ POST hooks。
-- **数据集**：56 个 targeted sample（CORAL breastca_unannotated.csv 中 46 must-test + 10 regression）。
-- **质量**：**56/56 CLEAN (100%)**。P0=0, P1=0, P2=0。详见 `results/v31_iter14_review.md` 和 `results/v31_iter15_test_results.txt`。
-- **迭代历史**：
-  - iter12e: 80% clean, P1=2 (ROW 30 node-negative误报spread, ROW 72 有癌说没癌)
-  - iter13: 80% clean, P1=1 (ROW 57 TNBC receptor矛盾), 医生反馈3个P1全修
-  - iter14: 79% clean, P1=1, 医生反馈全部验证通过
-  - iter15: **100% clean**, 所有问题修复，零回归
-- **医生反馈**：6 条全部修复验证（ROW 87 重复/Parkinson's/curative/radiation, ROW 88 restaging, ROW 90 cycle timing）
-- **跨域测试**：PDAC（胰腺癌）5 sample 零配置测试全部 CLEAN
-- **架构文档**：`PIPELINE_OVERVIEW.md`（给非技术人员看的完整架构说明）。
+- **当前版本**：v31 (breast) / v32 (PDAC)。使用 Qwen2.5-32B-Instruct-AWQ via vLLM。40+ POST hooks。
+- **乳腺癌 (v31)**：
+  - Dev set: 56/100 unannotated, 15 轮迭代 → **100% clean (P0=0, P1=0)**
+  - Test set: 20 annotated held-out → **P0=0, P1=0, 受体状态 93%, 目标 100%**
+  - 医生反馈 6 条全修（ROW 87/88/90）
+- **PDAC (v32)**：
+  - Dev set: 100/100 unannotated, 9+9 轮迭代 → **99/100 clean (P1=1, ROW 36 dose gap)**
+  - Test set: 20 annotated held-out → 已生成，待医生评审
+- **Baseline 对比**：同一模型单 prompt（无 harness）→ 0/40 可发送，45% REDACTED 泄露，12.5% 幻觉
+- **医生评审包**：`results/doctor_review_final/`（4 folders × 20 samples = 80 letters）
+- **架构文档**：`PIPELINE_OVERVIEW.md` + `RESEARCH_PROPOSAL.md`
 
 ## 代码规范
 - **无实时性要求**：这个项目没有任何延迟/实时性限制，可以自由调用多次 LLM。如果多调用一次能提升质量，就调用。
