@@ -14,32 +14,37 @@ Ms. ***** is a 69 y.o. female who comes to our GI Oncology practice at the UCSF 
 
 Dear Ms. *****,
 
-Thank you for coming to our clinic today. I wanted to share some important information about your health and the next steps in your treatment.
+Thank you for coming to our cancer center. Here is a summary of your recent visit and treatment plan:
 
-**Diagnosis:**
-You have a type of cancer called pancreatic adenocarcinoma. This means the cancer started in your pancreas. It has spread to other parts of your body, which we call metastatic cancer.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic adenocarcinoma. It has come back and spread to other parts of your body. This is called recurrent metastatic pancreatic adenocarcinoma.
 
 **Treatment Plan:**
-You are currently receiving chemotherapy with two medicines: gemcitabine and nab-paclitaxel. These medicines help fight the cancer. You are doing well with the treatment so far, and the cancer seems to be getting smaller.
+You are currently receiving chemotherapy with two medicines: gemcitabine and nab-paclitaxel. These medicines help fight the cancer. You will continue this treatment as long as it works well and you feel okay.
+
+**Key Test Results:**
+Recent tests show that the cancer is getting smaller. This is good news. Your blood tests also show that you are doing well.
 
 **Next Steps:**
-We will continue giving you these medicines every other week. We want to keep treating you until the cancer stops growing or gets smaller. We aim to give you at least six treatments. After that, we might take a break from the medicine to let your body rest.
+We will keep giving you these medicines every other week. We will check how you are doing with more tests in the future. If the cancer starts growing again, we will talk about other treatments like joining a research study.
 
 **What to Watch For:**
-Please watch for any new symptoms like pain, trouble eating, or feeling very tired. If you notice anything different, please let us know right away.
+Please let us know if you have any new symptoms or if you feel very tired. Also, tell us if you have any pain or trouble eating.
 
-**Important Reminders:**
-- Keep taking your regular medications as prescribed.
-- Stay active and eat well.
-- If you have any questions or concerns, don’t hesitate to talk to your care team.
+**Questions:**
+If you have any questions, please talk to your doctor or nurse. They are here to help you.
 
-We are here to support you every step of the way. Please feel free to reach out if you need anything.
+Take care and stay strong.
 
-Warm regards,
+Best regards,
 
-[Your Name]  
-Medical Communication Specialist  
+[Your Name]
+Medical Communication Specialist
 UCSF Comprehensive Cancer Center
+
+---
+
+This summary uses simple language and explains medical terms clearly. It covers the diagnosis, treatment plan, test results, next steps, and what to watch for, all in a warm and respectful tone.
 
 ---
 

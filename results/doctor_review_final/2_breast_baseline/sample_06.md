@@ -12,30 +12,36 @@
 
 ## Patient Letter (Baseline — No Pipeline)
 
-Dear Mrs. *****,
+Dear [Patient's Name],
 
-I hope this letter finds you well. I wanted to share some important information about your health with you.
+I hope this letter finds you well. I wanted to share some important information about your health with you in a way that is easy to understand.
 
-You have been diagnosed with a type of breast cancer called HER2-positive breast cancer. This means the cancer cells have a protein called HER2 that helps them grow faster. We also found some changes in your bones that might be due to the cancer spreading there.
+**Diagnosis:**
+You have been diagnosed with a type of breast cancer called HER2-positive breast cancer. This means the cancer cells have a protein called HER2, which helps them grow faster. Your cancer is also hormone receptor-negative, meaning it doesn’t respond to hormones like estrogen.
 
-Here’s what we plan to do next:
+**Stage:**
+The tests show that your cancer might have spread to your bones. We call this stage IV cancer. To be sure, we need to do more tests, such as an MRI of your pelvis and a biopsy.
 
-1. **MRI of the Pelvis**: We will take pictures of your pelvis to check if the cancer has spread to your bones.
-2. **Biopsy**: We will take a small sample from one of the areas in your bones to confirm if it is cancer.
-3. **Medications**: If the tests show that the cancer has spread, we will start you on a treatment plan. This includes three different medicines that help fight the cancer:
-   - Paclitaxel (weekly)
-   - Trastuzumab (every three weeks)
-   - Pertuzumab (every three weeks)
+**Treatment Plan:**
+We will start you on a treatment plan that includes three different medicines:
+- Paclitaxel: This medicine helps stop the growth of cancer cells.
+- Trastuzumab and Pertuzumab: These medicines target the HER2 protein to help slow down the cancer.
 
-These medicines are very good at fighting this type of cancer and can help keep it under control for a long time.
+We will also check how well your heart is working with a test called an echocardiogram. We will put in a port to make it easier to give you the medicines.
 
-We will also do some other tests:
-- An echocardiogram to check how your heart is working.
-- We will place a port in your body to make it easier to give you the medicine.
+**Next Steps:**
+- We will do an MRI of your pelvis to look closely at your bones.
+- We will also do a biopsy to confirm if the cancer has spread.
+- We will start the treatment plan as soon as we have all the information.
 
-If you have any questions or concerns, please talk to your care team. We are here to support you every step of the way.
+**What to Watch For:**
+Please let us know if you notice any new symptoms or changes in how you feel. It’s important to keep track of any pain or discomfort.
 
-Take care,
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to help you understand everything and support you through this journey.
+
+Warm regards,
+
 [Your Name]
 Medical Communication Specialist
 [Cancer Center Name]

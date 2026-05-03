@@ -14,26 +14,33 @@ New patient Visit  Breast Cancer *****    ***** ***** ***** 07/01/2019        NA
 
 Dear [Patient Name],
 
-I hope this letter finds you well. I wanted to share the details of your recent visit to our breast cancer center. We talked about your diagnosis and the next steps in your treatment plan.
+Thank you for coming to our clinic. We want to make sure you understand your health situation clearly.
 
 **Diagnosis:**
-You have been diagnosed with breast cancer. This means there are abnormal cells growing in your breasts. The cancer is in both breasts, and it is called "ER+ and HER2 positive." This tells us how the cancer might grow and what treatments might work best.
+You have breast cancer. It is in both breasts. The cancer is called "early stage," which means it hasn't spread very far yet.
+
+**Tests:**
+We did some tests like ultrasounds and CT scans. These tests showed that you have lumps in both breasts. There are also some small spots in your lungs and liver, but we don’t know if they are cancer yet.
 
 **Treatment Plan:**
-We will be using a combination of medicines to treat your cancer. These medicines target the HER2 part of the cancer and also include chemotherapy. Chemotherapy is a type of medicine that helps kill cancer cells. We will give you these medicines over several months.
-
-The first step will be to prepare for the treatment. This includes some tests to make sure you are ready. After that, we will start the treatment. We will also talk more about any side effects you might feel during treatment.
+The doctors think you will need several types of treatments:
+- **Surgery:** To remove the cancer from your breasts.
+- **Chemotherapy:** Medicine to kill cancer cells.
+- **Targeted Therapy:** Special medicine to fight the HER2 type of cancer.
+- **Radiation Therapy:** Strong light to kill any remaining cancer cells.
 
 **Next Steps:**
-After starting the treatment, we will check how your body is responding. We will do this with special scans and tests. Depending on how the treatment works, we will decide if you need surgery or radiation later.
+After surgery, we will start preparing for chemotherapy. This might include getting a special tube called a "port" to give you medicine. We will also do more tests to check how well the treatment is working.
 
 **What to Watch For:**
-Please let us know if you notice any new symptoms or if you feel very tired or sick. It’s important to keep track of how you’re feeling and to tell us about any changes.
+Please let us know if you feel very tired, have a fever, or if you notice any new lumps or changes in your body.
 
-**Questions:**
-If you have any questions or need more information, please don’t hesitate to call our office. Our team is here to help you through this journey.
+**Important Reminders:**
+- Keep all your appointments.
+- Eat healthy food and try to stay active.
+- If you have any questions, please talk to your doctor or nurse.
 
-We are here to support you every step of the way.
+We are here to support you every step of the way. Please feel free to reach out to us anytime.
 
 Warm regards,
 
@@ -43,7 +50,7 @@ Cancer Center
 
 ---
 
-Please remember to discuss any questions or concerns with your care team. We are here to help you understand everything about your treatment and to support you throughout your journey.
+This letter aims to convey the essential information from the clinical note in a simple, compassionate manner, ensuring the patient understands their condition and treatment plan without overwhelming them with technical details.
 
 ---
 

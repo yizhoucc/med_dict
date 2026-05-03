@@ -12,30 +12,39 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
 
 ## Patient Letter (Baseline — No Pipeline)
 
-Dear [Patient’s First Name],
+Dear [Patient's First Name],
 
 Thank you for coming to our clinic. I want to share with you the important information about your health and the next steps in your treatment.
 
 **Diagnosis:**
-You have been diagnosed with breast cancer. The cancer is in your right breast and has spread to some nearby lymph nodes. This type of cancer is called hormone receptor positive and HER2 negative. This means the cancer cells grow in response to hormones like estrogen and progesterone, but they do not have too much of a protein called HER2.
+You have been diagnosed with breast cancer. It is a type called hormone receptor positive and HER2 negative. This means the cancer cells grow in response to hormones like estrogen and progesterone, but they do not have too much of a protein called HER2.
+
+The cancer is in your right breast and has spread to some lymph nodes in your armpit. This is called node-positive breast cancer.
 
 **Treatment Plan:**
-On November 5th, you will have surgery to remove part of your breast and some lymph nodes. After the surgery, we will decide on the best treatment plan for you. This might include:
+On November 5th, you will have surgery to remove part of your breast and some lymph nodes. This is called a partial mastectomy and axillary lymph node dissection (ALND).
 
-- **Chemotherapy:** Medicines that kill cancer cells.
-- **Hormonal Therapy:** Medicines that block hormones from helping the cancer grow.
-- **Radiation Therapy:** Using high-energy rays to kill cancer cells.
+After surgery, we will decide on the best treatment for you. This might include chemotherapy and hormone therapy. Chemotherapy uses medicines to kill cancer cells. Hormone therapy stops the hormones that make the cancer grow.
 
-We will talk more about these treatments after your surgery.
+We will talk more about these treatments after your surgery. We will also look at your test results to decide the best plan for you.
+
+**Key Test Results:**
+- A mammogram showed a small lump in your right breast.
+- An ultrasound found a small lump and some swollen lymph nodes.
+- A biopsy confirmed that the lump is cancer.
+- A PET/CT scan showed the cancer in your breast and lymph nodes.
+- An MRI of your brain showed a small growth that is likely not cancer.
 
 **Next Steps:**
-After your surgery, we will look at the results to decide the best way to treat your cancer. We will also talk about how to protect your fertility if you want to have children in the future.
+- You will have surgery on November 5th.
+- After surgery, we will review your test results and decide on the next steps.
+- If you need chemotherapy, we will talk about how to manage side effects like feeling tired and losing hair.
 
 **What to Watch For:**
-Please watch for any new lumps or changes in your breasts. If you notice anything different, please let us know right away.
+- Any new lumps or changes in your breasts.
+- Feeling very tired or having other unusual symptoms.
 
-**Questions:**
-It’s important to ask questions if you don’t understand something. Your care team is here to help you. Don’t hesitate to reach out to us if you have any concerns or need more information.
+Please remember to ask your care team any questions you have. They are here to help you understand everything about your treatment.
 
 Take care and stay strong.
 

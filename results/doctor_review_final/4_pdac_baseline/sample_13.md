@@ -14,25 +14,29 @@
 
 Dear Mr. *****,
 
-Thank you for coming to our clinic for your recent visit. Here’s a summary of what we discussed:
+Thank you for coming to our clinic. Here is a summary of your recent visit:
 
-**Diagnosis:**
-You have been diagnosed with pancreatic cancer. This type of cancer starts in the pancreas, an organ that helps digest food and control blood sugar levels.
+**Diagnosis:** You have a type of cancer called pancreatic adenocarcinoma. It is in a part of your pancreas called the head and has grown into the duodenum (the first part of your small intestine).
 
-**Treatment Plan:**
-We have been treating your cancer with a combination of medicines called Gemcitabine and Capecitabine. Recently, we paused this treatment to consider another option called radiation therapy. Radiation therapy uses high-energy rays to shrink tumors and relieve symptoms.
+**Treatment Plan:** You have been receiving a treatment called Gem/Cape, which is a combination of two medicines. We have paused this treatment for now. We are considering another treatment called radiation therapy to help control the growth of the cancer.
+
+**Key Test Results:**
+- Your recent CT scans show that the size of the cancer has stayed the same.
+- You have a stent in your duodenum and bile duct to help with blockages.
+- Your blood tests show that your red blood cell count is low, so you might need a blood transfusion if it gets too low.
 
 **Next Steps:**
-We will continue to monitor your health closely. You should keep taking your current medications as prescribed. We recommend that you get regular blood tests to check your red blood cell count. If your red blood cell count gets too low, we may give you a blood transfusion.
+- We will keep monitoring your condition closely.
+- You should continue to take your medications as prescribed.
+- You will need to have regular blood tests to check your red blood cell count.
+- You should follow a low-residue diet to help with digestion.
 
 **What to Watch For:**
-Please watch for any signs of discomfort or unusual symptoms. Let us know if you experience any pain, difficulty swallowing, or changes in your appetite. It’s important to stay in touch with your care team if you notice anything different.
+- If you feel very tired or weak, let us know.
+- If you have any pain or discomfort, tell your doctor.
+- Keep track of your appetite and weight.
 
-**Additional Care:**
-Your weight has gone down, so we talked about ways to improve your nutrition. We also discussed managing any pain you might have, even though you don’t have pain right now. We will continue to support you with sleep aids like Remeron and melatonin.
-
-**Questions:**
-If you have any questions or concerns, please talk to your care team. We are here to help you understand your condition and treatment options.
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you.
 
 Best regards,
 
@@ -40,7 +44,9 @@ Best regards,
 Medical Communication Specialist
 Cancer Center
 
-Please remember to discuss any questions or concerns with your doctor during your next visit.
+---
+
+This summary is written in simple terms to make sure you understand your health situation and the steps we are taking to help you.
 
 ---
 

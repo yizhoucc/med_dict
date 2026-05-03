@@ -12,40 +12,40 @@ HPI:  ***** ***** is a 32 y.o. female here for a discussion of treatment options
 
 ## Patient Letter (Baseline — No Pipeline)
 
-Dear *****,
+Dear [Patient's First Name],
 
-I hope this letter finds you well. I wanted to share some important information about your recent diagnosis and treatment plan in a way that’s easy to understand.
+I hope this letter finds you well. I wanted to share some important information about your recent diagnosis and treatment plan in a way that is easy to understand.
 
-**Diagnosis:**
-You have been diagnosed with left breast cancer. This means there is a growth in your left breast that is not normal. The cancer is called "invasive ductal carcinoma," which is a type of cancer that starts in the milk ducts and spreads to other parts of the breast.
+**Diagnosis and Stage:**
+You have been diagnosed with left breast cancer. The cancer is at an early stage, which means it hasn't spread far yet. It is called "stage T2N0" because it is a bit bigger than 2 centimeters but has not spread to the lymph nodes.
 
 **Treatment Plan:**
-Based on your situation, the doctors recommend that you have a mastectomy. A mastectomy is a surgery where the entire breast is removed. This is because of a genetic change you have, called an ATM mutation, which makes radiation less effective for you.
+Based on your situation, the doctors recommend a mastectomy. This means removing the entire left breast to get rid of the cancer. After the surgery, you will likely need chemotherapy to kill any remaining cancer cells. Since your cancer is sensitive to estrogen, you will also need to take medicine to block estrogen for at least five years to help prevent the cancer from coming back.
 
-Before the surgery, you will need another test called a Fine Needle Aspiration (FNA) to check the lymph nodes in your left armpit. Lymph nodes are small glands that help fight infections. This test will help us know if the cancer has spread to these glands.
-
-After the surgery, you will likely need chemotherapy. Chemotherapy uses strong medicines to kill cancer cells. We will decide on the exact type of chemotherapy after your surgery.
-
-Because your cancer is sensitive to estrogen, you will also need to take medicine to block estrogen for at least five years after your surgery. This helps prevent the cancer from coming back.
+**Key Test Results:**
+- **Biopsy:** The cancer is ER positive, which means it uses estrogen to grow. It is PR negative and HER2 negative, which means it doesn’t use progesterone or another protein to grow.
+- **MRI:** The MRI showed a mass in your left breast and some enlarged lymph nodes, but no cancer was found in the lymph nodes.
+- **Genetic Testing:** You have a mutation in the ATM gene, which makes radiation less effective for you.
 
 **Next Steps:**
-1. You will have a mastectomy soon.
-2. After the surgery, we will talk more about the chemotherapy and hormone treatments.
-3. We will also discuss any questions you might have about these treatments.
+- **Surgery:** You will have a mastectomy to remove the cancer.
+- **Chemotherapy:** After surgery, you will start chemotherapy to kill any remaining cancer cells.
+- **Hormonal Therapy:** You will take medicine to block estrogen for at least five years.
 
 **What to Watch For:**
-Please let us know if you experience any unusual symptoms like fever, severe pain, or swelling after your surgery. These could be signs of complications that we need to address.
+After surgery, watch for signs of infection like redness, swelling, or fever. Also, let us know if you have any unusual pain or discomfort.
 
-Remember, you can always ask your care team any questions you have. They are here to support you and answer all your concerns.
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
 
-Take care,
+Warm regards,
+
 [Your Name]
 Medical Communication Specialist
 Cancer Center
 
 ---
 
-Please feel free to reach out to your care team if you have any questions or need further clarification.
+This letter aims to provide clear and compassionate information about the patient’s diagnosis and treatment plan, using simple language and avoiding unnecessary medical jargon.
 
 ---
 

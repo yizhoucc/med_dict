@@ -14,34 +14,33 @@
 
 Dear Patient,
 
-I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your care.
+I hope this letter finds you well. I want to share some important information about your health and the next steps in your care.
 
-**Diagnosis:**
-You have a type of cancer called adenocarcinoma in your pancreas. The pancreas is an organ in your belly that helps digest food and control blood sugar. Your cancer is growing and causing some problems.
+**Diagnosis and Stage:**
+You have a type of cancer called adenocarcinoma in the head of your pancreas. The cancer is advanced and cannot be removed by surgery.
 
 **Treatment Plan:**
-You are currently receiving a treatment called FOLFIRINOX. This is a mix of medicines that help fight the cancer. We need to check how well the treatment is working.
+You are currently receiving a treatment called FOLFIRINOX. This is a combination of medicines to fight the cancer. We need to check how well the treatment is working.
+
+**Key Test Results:**
+Some of your recent tests show that the cancer might be growing again. Your blood tests show high levels of certain substances, which can mean the cancer is causing problems with your bile ducts.
 
 **Next Steps:**
-We need to do some tests to see how your body is doing. We will take pictures of your belly using a special machine called a CT scan. This will help us see if the cancer is getting bigger or if there are other issues like blockage in your bile ducts.
-
-If the test shows that your bile ducts are blocked, we will ask a doctor who specializes in digestive systems to do a procedure called ERCP. This procedure can help open up the blocked ducts and make you feel better.
+We need to do more tests to see exactly what is happening. You will have a special picture taken of your pancreas and bile ducts. If there are any blockages, we will refer you to a doctor who specializes in digestive issues to help open them up.
 
 **What to Watch For:**
-Please watch for any new symptoms such as:
-- Fever or chills
-- Not being able to eat or drink
-- More swelling in your legs
+Please watch for any new symptoms like fever, chills, or trouble eating. If you have any of these, please go to the emergency room right away.
 
-If you notice any of these, please go to the emergency room right away.
+**Other Symptoms:**
+You have been feeling tired and having some swelling in your legs. We will look into these issues and try to make you feel better.
 
 **Medicines:**
-You are taking several medicines to manage your symptoms. If you have trouble with nausea or vomiting, you can use Zofran. It’s okay to take it more often if you need it.
+You are taking several medicines to manage your pain and other symptoms. Please keep taking them as directed.
 
-**Support:**
-We also want to help you manage your pain, tiredness, and lack of appetite. We will refer you to a special team that can give you extra support.
+**Important Reminders:**
+Remember to talk to your care team if you have any questions or concerns. We are here to support you.
 
-Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+Take care and stay strong.
 
 Warm regards,
 
@@ -51,7 +50,7 @@ Cancer Center
 
 ---
 
-This letter aims to convey the essential information from the clinical note in a clear and compassionate manner, ensuring the patient understands their condition and the next steps in their care.
+This letter aims to convey the essential information from the clinical note in a clear and compassionate manner, suitable for a patient to understand.
 
 ---
 

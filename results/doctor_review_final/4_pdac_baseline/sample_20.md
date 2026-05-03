@@ -14,36 +14,41 @@ Mr. ***** is a 51 y.o. male who comes to our GI Oncology practice at the UCSF Co
 
 Dear Mr. *****,
 
-I hope this letter finds you well. I wanted to share the details of your recent visit to our cancer center and the findings from your tests.
+Thank you for coming to our cancer center. I want to share with you what we found and what we plan to do next.
 
-**Diagnosis:**
-You have been diagnosed with metastatic pancreatic adenocarcinoma. This means that the cancer started in your pancreas and has spread to other parts of your body. The pancreas is an organ that helps digest food and control blood sugar levels.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic adenocarcinoma. It has spread to other parts of your body, which means it is at an advanced stage.
+
+**Key Test Results:**
+- We found a growth in your pancreas and some spots in your liver.
+- Tests showed that the growth is cancer.
+- Other tests showed that you have some swelling in your belly and some fluid around your organs.
 
 **Treatment Plan:**
-We discussed several treatment options with you. The main goal is to slow down the cancer and improve your quality of life. Here are the options:
+We talked about different ways to treat your cancer. The main goal is to make the cancer smaller and help you feel better for as long as possible. Here are your options:
 
-1. **Standard Chemotherapy:** There are two main types of chemotherapy we can use. One is called FOLFIRINOX, and the other is a combination of gemcitabine and nab-paclitaxel. Both treatments can help control the cancer, but they might cause some side effects like feeling sick, being tired, and losing hair.
+1. **Standard Treatment:** There are two main types of medicine we can use. One is called FOLFIRINOX, and the other is a mix of gemcitabine and nab-paclitaxel. Both can help slow down the cancer. They might cause some side effects like feeling sick, being tired, or losing hair.
 
-2. **Clinical Trials:** We also talked about joining a clinical trial. These trials test new treatments to see if they work better than the standard ones. You showed interest in the REVOLUTION trial, which combines chemotherapy with other medicines to boost your immune system.
+2. **Clinical Trials:** We also talked about joining a research study. These studies test new medicines to see if they work better than the ones we already have. You mentioned you might want to join a study called REVOLUTION. We can talk more about this if you're interested.
 
 **Next Steps:**
-We will start by getting you signed up for the REVOLUTION trial. Before you begin treatment, we will do some tests to make sure the treatment is right for you. We will also talk more about how to manage any side effects.
+- We will order some tests to look closely at your cancer cells. This helps us know if there are any special treatments that might work best for you.
+- We will also talk to a doctor who knows about genes to check if you have any genes that might make you more likely to get cancer.
+- We will set up an appointment with a dietitian to help you eat well.
 
 **What to Watch For:**
-Please let us know if you notice any changes in how you feel. Some things to watch for include:
-- Feeling very tired
-- Losing weight
-- Having trouble eating
-- Any new pain
+- Keep an eye on how you feel. Let us know if you have any new symptoms or if your current symptoms get worse.
+- If you have any questions or concerns, please talk to your care team.
 
-**Questions:**
-If you have any questions or concerns, please don't hesitate to reach out to your care team. We are here to support you through this journey.
+Remember, you are not alone. We are here to support you every step of the way.
 
-Warm regards,
+Sincerely,
 
 [Your Name]
 Medical Communication Specialist
 UCSF Comprehensive Cancer Center
+
+Please feel free to ask any questions you may have. Your care team is here to help you understand everything clearly.
 
 ---
 

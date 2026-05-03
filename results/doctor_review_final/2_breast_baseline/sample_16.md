@@ -14,32 +14,37 @@
 
 Dear [Patient Name],
 
-Thank you for coming to see us. I wanted to share what we found and the next steps in your care.
+Thank you for coming to see me about your breast cancer. I want to share what we found and what the next steps are.
 
-You have a type of breast cancer called invasive lobular carcinoma. It’s in your left breast and is about 5.5 cm in size. We also found a small lump in the lymph nodes under your left arm. This means the cancer might have spread a little, but not far.
+**Diagnosis and Stage:**
+You have a type of breast cancer called invasive lobular carcinoma. It is in the left breast and is at stage III. This means the cancer has spread to nearby lymph nodes.
 
-We did tests to learn more about the cancer. The cancer is sensitive to hormones, which means certain medicines can help treat it. We didn’t find any signs that the cancer has spread to other parts of your body.
+**Key Test Results:**
+- A biopsy showed the cancer is ER positive and PR positive, which means it might respond well to hormone treatments.
+- The cancer is HER-2 negative, so we won’t use drugs that target HER-2.
+- Tests also showed a large lump in your left breast and some small lumps in the lymph nodes under your arm.
 
-After talking with you, we decided the best first step is to remove the cancer with surgery. This is called a mastectomy. After the surgery, we will look at the removed tissue to learn more about the cancer and decide on the next steps.
+**Treatment Plan:**
+We talked about different ways to treat your cancer. You decided you would like to have a mastectomy first. This means removing the entire left breast. After the surgery, we will look at the tissue removed to decide the best next steps.
 
-Before the surgery, we will talk again about the best way to treat the cancer. This might include medicines to help control the growth of the cancer.
+**Next Steps:**
+- You will have a mastectomy soon. Dr. [Doctor’s Name] will perform the surgery.
+- After the surgery, we will meet again to talk about further treatment options based on the results from the surgery.
 
-Please watch for any changes in how you feel. If you notice any new symptoms or if you have any questions, please call your care team. We are here to help you every step of the way.
+**What to Watch For:**
+Please watch for any changes in your breast or any new symptoms. If you notice anything unusual, please call us right away.
 
-Take care,
-[Your Doctor's Name]
-
-Please remember to discuss any questions or concerns with your care team. They are here to support you through this journey.
+**Questions:**
+If you have any questions or need more information, please talk to your care team. They are here to help you understand everything and support you through this journey.
 
 Warm regards,
 
-[Your Doctor's Name]  
-UCSF Comprehensive Cancer Center  
-Breast Care Center
+[Doctor’s Name], M.D.
+UCSF Comprehensive Cancer Center
 
 ---
 
-This summary aims to convey the key points of the clinical note in a clear and compassionate manner, suitable for a patient to understand.
+Please remember to discuss any concerns or questions with your care team. They are here to help you every step of the way.
 
 ---
 

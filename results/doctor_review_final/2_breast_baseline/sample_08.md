@@ -14,38 +14,36 @@
 
 Dear Ms. *****,
 
-I hope this letter finds you well. I am writing to summarize your recent visit to our cancer center and to outline the next steps in your care.
+I hope this letter finds you well. I am writing to summarize your recent visit to our cancer center and to explain your diagnosis and treatment plan in simple terms.
 
 **Diagnosis:**
-You have been diagnosed with stage IIA invasive ductal carcinoma (IDC) in your left breast. This means the cancer has spread to nearby lymph nodes. You recently had bilateral mastectomies, which means both breasts were removed to treat the cancer.
+You have been diagnosed with stage IIA breast cancer. This means the cancer has spread to some nearby lymph nodes but not to distant parts of your body. The cancer is 3.9 centimeters in size and is called invasive ductal carcinoma (IDC).
 
 **Treatment Plan:**
-Based on your diagnosis and the results of your tests, we recommend that you start chemotherapy. Chemotherapy uses medicines to kill cancer cells. We will use a combination of drugs called AC with paclitaxel. 
+You recently had surgery to remove both breasts (bilateral mastectomies) and some lymph nodes from your left armpit. The cancer was found in two lymph nodes out of twelve that were checked.
+
+After reviewing your case, we believe you would benefit from additional treatments to help prevent the cancer from coming back. These treatments include:
+
+1. **Chemotherapy:** This is medicine that helps kill any remaining cancer cells. We plan to start this treatment around October 18, 2017. Chemotherapy can cause side effects like feeling tired, being sick to your stomach, and losing your hair. We will teach you more about these before you start.
+
+2. **Medicine to block hormones:** Since your cancer uses hormones to grow, you will take a medicine called an aromatase inhibitor. This helps stop the cancer from growing.
 
 **Next Steps:**
-Before starting chemotherapy, we need to do a few things:
-- **Heart Test:** We will do a test called a TTE to check how your heart is working. This is important because some chemotherapy drugs can affect the heart.
-- **Port Placement:** We will place a small device called a port under your skin. This makes it easier to give you the chemotherapy medicine.
-- **Teaching Session:** We will teach you about chemotherapy and what to expect during treatment.
-
-We plan to start chemotherapy around October 18, 2017. This is about two months after your surgery.
+Before starting chemotherapy, you will have a special heart check-up called a TTE. We will also place a small device called a port under your skin to make it easier to give you the chemotherapy medicines.
 
 **What to Watch For:**
-Chemotherapy can cause some side effects, such as:
-- Feeling very tired (fatigue)
-- Nausea and vomiting
-- Hair loss
+Please let us know if you notice any new symptoms or if you feel very tired or sick. It's important to keep your follow-up appointments so we can monitor your progress.
 
-If you notice any of these side effects or anything else unusual, please let us know right away.
+**Genetic Testing:**
+Because of your family history, we think it’s a good idea for you to have genetic testing. This can help us understand more about your risk for cancer and guide future care.
 
-**Genetic Counseling:**
-Given your family history of breast cancer, we recommend that you see a genetic counselor. They can help you understand if you might have a higher risk of cancer due to your genes.
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to support you through this journey.
 
-Please feel free to ask any questions you have about your treatment or care. Our team is here to support you through this journey.
+Warm regards,
 
-Best wishes,
-[Your Name]
-Medical Communication Specialist
+[Your Name]  
+Medical Communication Specialist  
 Cancer Center
 
 ---

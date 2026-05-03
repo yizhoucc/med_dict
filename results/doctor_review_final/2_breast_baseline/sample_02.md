@@ -14,36 +14,39 @@
 
 Dear [Patient Name],
 
-Thank you for coming to see us. I wanted to share what we discussed during your visit on January 9th.
+Thank you for coming to see us. I want to share what we learned about your health and the next steps we will take.
 
-**Diagnosis:**
-You have breast cancer that has come back in the same area where it was first found. This is called a local recurrence. The cancer is sensitive to hormones, which means certain treatments can help.
+**Diagnosis and Stage:**
+You have breast cancer that has come back in the same area where it was before. This is called locally recurrent breast cancer. It is not able to be removed completely with surgery.
 
 **Treatment Plan:**
-We talked about starting you on a medicine called an aromatase inhibitor. This type of medicine helps stop the growth of cancer cells by lowering the amount of hormones in your body. We also discussed joining a research study to try a combination of medicines.
+We talked about using medicine to help control the cancer. One option is to use a type of drug called an aromatase inhibitor. This medicine stops the body from making too much estrogen, which can help slow down the growth of the cancer. We also discussed joining a research study to try a new treatment.
+
+**Key Test Results:**
+- **PET/CT Scan:** This test shows that the cancer is growing in your chest wall. It also shows that you have a small spot in your liver, but this is not cancer.
+- **MRI of Brain:** This test shows no signs of cancer in your brain.
+- **Blood Tests:** Your blood tests show that you are healthy and ready to start treatment.
 
 **Next Steps:**
-On January 25th, you will come back to our clinic to start taking the aromatase inhibitor. We will decide if you want to join the research study at that time.
+- You will start taking an aromatase inhibitor. This medicine will help control the cancer.
+- We will keep watching the cancer closely with regular tests.
+- We may also do more surgery or radiation later if needed.
 
 **What to Watch For:**
-Please pay attention to any changes in how you feel. Let us know if you notice any new pain or discomfort. Also, keep track of your appetite and any changes in your weight.
+- Keep an eye on any new pain or changes in your chest or breasts.
+- Let us know if you have any new symptoms like feeling dizzy or having trouble breathing.
 
-**Important Reminders:**
-Remember to take your medicines as directed. If you have any questions or concerns, please talk to your care team. We are here to help you every step of the way.
-
-Thank you for trusting us with your care. We look forward to seeing you soon.
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
 
 Warm regards,
 
 [Doctor’s Name]  
-UCSF Comprehensive Cancer Center  
-Breast Care Center
-
-Please feel free to reach out to us if you have any questions or need further information.
+[Doctor’s Title]  
+UCSF Comprehensive Cancer Center
 
 ---
 
-This summary aims to be clear and compassionate while adhering to the guidelines provided.
+Feel free to reach out to us anytime. We are here to help you through this journey.
 
 ---
 

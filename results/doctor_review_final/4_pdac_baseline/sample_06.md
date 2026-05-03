@@ -14,33 +14,26 @@ Subjective:    This is a very pleasant 63-year-old African American woman from *
 
 Dear Patient,
 
-I hope this letter finds you well. I wanted to share some important information about your recent health check-ups and what we plan to do next.
+Thank you for trusting us with your care. Here’s a summary of your recent health updates:
 
-**Diagnosis:**
-You have a type of cancer called adenocarcinoma in your pancreas. This means there are bad cells growing in your pancreas that need to be treated.
+**Diagnosis:** You have a type of cancer called adenocarcinoma in your pancreas. This is a serious condition, but we are working hard to help you.
 
-**Treatment:**
-We have been treating your cancer with a special medicine called FOLFIRINOX. You finished 12 rounds of this treatment. Then, you had a big operation called a pylorus-preserving pancreatectomy. During the surgery, we removed parts of your pancreas and other nearby areas where the cancer was growing.
+**Treatment:** You had surgery to remove the cancer. The surgery went well, and there were no signs of cancer left behind. After the surgery, you felt better, but you still had some discomfort in your belly.
 
-**Next Steps:**
-After your surgery, we did some tests to see how you are doing. The tests showed that there might be some cancer coming back. We found some small spots in your liver that could be cancer. To make sure, we will do more tests in two months. If needed, we might take a small piece of tissue to look at it closely.
+**Tests:** We did several tests to check how you are doing. One test showed that a part of your liver might have some swelling. We also found a small spot in your liver that could be cancer coming back. We need to keep watching this closely.
 
-**What to Watch For:**
-You might still feel some discomfort in your belly, especially on the right side. This is normal as you heal. You should keep eating well and having regular bowel movements. Let us know if you notice any big changes or if you feel very tired.
+**Next Steps:** We will do more tests in two months to see if the spots in your liver are growing. If they are, we might need to take a small piece of tissue to look at it more closely.
 
-**Important Reminders:**
-Please talk to your care team if you have any questions or concerns. We are here to help you every step of the way.
+**What to Watch For:** Keep an eye on any new pain or discomfort in your belly. Let us know if you notice anything different.
 
-Take care and stay strong.
+**General Health:** Your blood tests show that you are doing okay overall. You have lost some weight since your surgery, but this is normal.
 
-Sincerely,
-[Your Name]
-Medical Communication Specialist
-Cancer Center
+Please talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
 
----
+Warm regards,
 
-Feel free to reach out to your care team if you have any questions or need more information. We are here to support you.
+[Your Medical Communication Specialist]  
+[Cancer Center]
 
 ---
 

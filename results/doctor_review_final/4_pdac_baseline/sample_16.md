@@ -14,38 +14,37 @@
 
 Dear [Patient's Name],
 
-Thank you for coming to our clinic for your follow-up visit. I wanted to share some important information with you about your health and the next steps in your treatment.
+Thank you for coming to our clinic for your follow-up visit. I want to share some important information about your health and the next steps in your care.
 
-**Diagnosis:**
-You have a type of cancer called pancreatic adenocarcinoma. This means there is a tumor in your pancreas. The pancreas is an organ in your body that helps digest food and control blood sugar.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic adenocarcinoma. It is in stage IIB, which means it has spread to nearby lymph nodes but not to other parts of the body.
 
 **Treatment Plan:**
-We have been giving you a medicine called gemcitabine to help treat the cancer. This medicine works to slow down the growth of the cancer cells. Recently, we changed how often you get the medicine to make it easier on your body.
+Because of your age and other health conditions, surgery is not a good option for you. Instead, we are using a medicine called gemcitabine to help control the cancer and make you feel better. We recently changed the schedule to give you the medicine every two weeks instead of weekly to make it easier on your body.
+
+**Key Test Results:**
+Recent tests show that the tumor in your pancreas has gotten smaller, which is a good sign. There are also some small growths in your lungs and kidney that we will keep an eye on, but right now, they do not seem to be causing any problems.
 
 **Next Steps:**
-- We will keep giving you gemcitabine every other week.
-- We will check your progress with tests like blood work and scans every two months.
-- We will also give you a flu shot to help protect you from getting sick.
+We will continue giving you the gemcitabine medicine. We will also check your blood and do scans every two months to see how the treatment is working. Your next set of scans will be after this cycle of treatment.
 
 **What to Watch For:**
-- If you feel very tired or lose weight quickly, let us know.
-- Keep an eye on your appetite and try to eat small meals throughout the day.
-- Stay active as much as you can.
+Please let us know if you notice any new symptoms or if anything changes. It’s important to stay in touch with your dentist and keep using the special mouth rinse to prevent infections.
 
-**Other Important Information:**
-- Your dentist checked your teeth and said it’s okay to continue with your treatment.
-- You should keep using the special mouth rinse as directed.
-- We will refer you to a nutritionist to help you with your diet.
+**Supportive Care:**
+We ordered a flu shot for you to protect against the flu. We also recommend that you talk to a nutritionist to help you eat better and maintain your weight. Keep taking your medicine for nausea as needed.
 
-Please remember to talk to your care team if you have any questions or concerns. We are here to support you.
+**Follow-Up:**
+Your next appointment is on May 16th with Dr. [Doctor's Name]. If you have any questions or concerns before then, please don’t hesitate to call the clinic.
 
-Best wishes,
-[Doctor's Name], MD
+Remember, you are not alone in this journey. Our team is here to support you every step of the way.
+
+Warm regards,
+
+[Doctor's Name], MD  
 UCSF [Family Name] Family Comprehensive Cancer Center
 
----
-
-Feel free to reach out to us anytime if you need more information or have any questions. We are here to help you through this journey.
+Please discuss any questions you have with your care team.
 
 ---
 

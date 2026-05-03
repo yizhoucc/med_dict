@@ -14,29 +14,30 @@ I had the pleasure of seeing ***** ***** for follow up of pancreatic adenocarcin
 
 Dear Mr. *****,
 
-I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your care.
+I hope this letter finds you well. I wanted to share some important information about your health in a way that’s easy to understand.
 
-**Diagnosis:**
-You have a type of cancer called pancreatic adenocarcinoma. This means there is a growth in your pancreas that is not normal and has spread to other parts of your body.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic adenocarcinoma. This means there is a tumor in your pancreas. The cancer has spread to other parts of your body, which is why we call it metastatic.
 
 **Treatment Plan:**
-We have been treating your cancer with medicine, but recently, the cancer has grown again. Because of this, we think it’s best to focus on making you comfortable and managing any pain or other symptoms you might have. This is called palliative care.
+We have been treating your cancer with a special medicine called mFOLFIRINOX. Recently, we stopped the treatment because the cancer grew bigger and caused some problems. Now, we are focusing on making you comfortable and managing any pain or other symptoms you might have.
+
+**Key Test Results:**
+The latest tests show that the tumor in your pancreas is causing a blockage in your small intestine. This makes it hard for food to pass through normally. We put in special tubes called stents to help open the blockage, but it hasn’t worked as well as we hoped.
 
 **Next Steps:**
-We will keep watching how you’re doing, especially your eating, any blockages in your digestive system, and how your liver is working. We will also check if you can get more stents placed to help with any blockages. If not, we will talk about moving to hospice care, which focuses on comfort and quality of life.
+Right now, we are watching closely to see how you are doing. We will check your bilirubin levels and how well you can eat. If things don’t get better, we will talk about moving to hospice care. Hospice helps people feel as comfortable as possible when they are very sick.
 
 **What to Watch For:**
-Please let us know if you have any new pain, trouble eating, or if you feel very tired or weak. These could be signs that we need to adjust your care.
+Please let us know if you have any new pain, trouble eating, or if you feel very tired. These could be signs that we need to adjust your care.
 
-**Questions:**
-If you have any questions or concerns, please don’t hesitate to call us. We are here to support you and your family.
+Remember, you can always ask me or any member of your care team any questions you have. We are here to support you and your family.
 
-Sincerely,
+Warm regards,
+
 [Your Name]
 Medical Communication Specialist
 UCSF ***** ***** Family Comprehensive Cancer Center
-
-Please remember to discuss any questions or concerns with your care team. We are here to help you every step of the way.
 
 ---
 

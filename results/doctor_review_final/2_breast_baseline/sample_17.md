@@ -14,36 +14,47 @@ HPI:  ***** ***** ***** is a 58 y.o. female here in consultation to discuss trea
 
 Dear *****,
 
-I hope this letter finds you well. I wanted to share some important information about your health and the next steps in your treatment.
+I hope this letter finds you well. I want to share some important information about your health in a way that is easy to understand.
 
 **Diagnosis:**
-You have been diagnosed with breast cancer in your left breast. The cancer is called invasive ductal carcinoma (IDC), which means it started in the milk ducts and spread to nearby tissues. The cancer is in stage IIb, which means it is a bit bigger and has spread to some lymph nodes.
+You have been diagnosed with breast cancer in your left breast. The doctors call this "Stage IIb." This means the cancer is growing but hasn't spread to other parts of your body yet.
 
 **Treatment Plan:**
-To treat your cancer, we will use a combination of treatments:
+We will use a combination of treatments to fight the cancer. First, you will have chemotherapy. Chemotherapy uses special medicines to kill cancer cells. We will use a treatment called "TC x 6," which means you will get six rounds of chemotherapy. 
 
-1. **Chemotherapy:** This is medicine that helps kill cancer cells. We will use a treatment called TC, which is given over six cycles. We will also use a special cap to help keep your hair during treatment.
-   
-2. **Radiation Therapy:** After chemotherapy, you will receive radiation to the area where the cancer was. This helps make sure all the cancer cells are gone.
+To help keep your hair during treatment, we will use a special cooling cap called "Dignicap." This cap helps protect your hair from the effects of chemotherapy.
 
-3. **Port Placement:** To make it easier to give you chemotherapy, we will place a small device called a port under your skin. This will help us give you the medicine without needing to find a vein each time.
+We will also use a small device called a "port" to give you the medicine. This makes it easier to give you the treatment without needing to find a vein each time.
+
+After chemotherapy, you will have radiation therapy. Radiation uses high-energy beams to kill any remaining cancer cells.
+
+**Key Test Results:**
+Tests show that the cancer is sensitive to hormones. This means certain treatments can work well against it. The tests also show that the cancer is not aggressive and doesn’t spread easily.
 
 **Next Steps:**
-- We will start your chemotherapy on July 9, 2017, using the special cap to protect your hair.
-- Before starting treatment, we will do some tests to make sure everything is ready.
-- Once your treatment is done, we will check how well it worked and decide on any further steps.
+Starting July 9, 2017, you will begin chemotherapy using the Dignicap. Before starting, we will teach you more about the treatment and how to use the port.
+
+Once the chemotherapy is done, you will start radiation therapy. We will also check your heart to make sure it stays healthy during treatment.
 
 **What to Watch For:**
-- Let us know if you have any new symptoms or if anything feels different.
-- Keep an eye on your left breast and let us know if you notice any changes.
+Please watch for any new lumps or changes in your breast. Also, let us know if you feel very tired or have any other unusual symptoms.
 
-Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+**Support:**
+You mentioned that you have a strong support system with family and friends nearby. This is very important during your treatment journey.
 
-Warm regards,
+If you have any questions or concerns, please talk to your care team. They are here to help you every step of the way.
 
-[Your Name]  
-Medical Communication Specialist  
-[Cancer Center Name]
+Take care and stay strong.
+
+Best regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Remember, you can always ask your care team any questions you might have. They are here to support you through this process.
 
 ---
 

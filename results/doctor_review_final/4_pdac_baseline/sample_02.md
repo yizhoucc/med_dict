@@ -14,40 +14,40 @@ This is an independent visit    ATTENDING: ***** *****, MD     PATIENT IDENTIFIC
 
 Dear Mr. *****,
 
-Thank you for coming to see us today. Here’s a summary of your visit:
+Thank you for coming to see us today. Here is a summary of your visit:
 
-**Diagnosis:**
-You have a type of cancer called pancreatic adenocarcinoma. This means the cancer started in your pancreas. The cancer has spread to other parts of your body, which we call metastatic disease.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic adenocarcinoma. The cancer has spread to other parts of your body, which we call metastatic disease.
 
 **Treatment Plan:**
-You are now receiving a new treatment called Gemcitabine plus Abraxane. This treatment helps fight the cancer. We will keep watching how you respond to the treatment.
+You are now receiving a new treatment called Gemcitabine plus Abraxane. This treatment helps control the cancer. If you start to feel more numbness in your hands and feet, we might need to adjust the dose of one of these medicines.
+
+**Key Test Results:**
+We checked your blood and found that your levels of a protein called CA 19-9 are high. This protein can show how well the treatment is working. Your levels have gone down, which is good news.
 
 **Next Steps:**
-You will come back to see us in two weeks. During this time, we will do a CT scan to check how the treatment is working.
+You will come back to see us in two weeks. We will do another CT scan after you finish this round of treatment.
 
 **What to Watch For:**
-Please let us know right away if you notice any new symptoms or if you feel worse. Some things to watch out for include:
-- Feeling very tired
-- Any new pain
-- Changes in how you feel
+Please watch for any new symptoms like pain, fever, or feeling very tired. If you notice anything new or different, please call us right away.
 
-We also talked about some side effects you might have:
-- You might feel a little numb in your hands and feet. If this gets worse, we can adjust your treatment.
-- You might feel sick to your stomach. We gave you medicine to help with this.
-
-**Medicines:**
-You are taking several medicines to help with different issues. Please make sure to take them as directed.
+**Medications:**
+You are taking several medications to help with pain, nausea, and other symptoms. Please keep taking them as directed.
 
 **Travel Plans:**
-You mentioned you plan to visit your sister and brother-in-law from December 30 to January 11. Please let us know if you need any special care during your trip.
+It’s great that you’re planning to visit your sister and brother-in-law. Make sure to take all your medications with you and stay in touch with us if you have any concerns.
 
-If you have any questions or concerns, please talk to your care team. We are here to help you.
+If you have any questions or need more information, please talk to your care team. We are here to support you.
 
 Warm regards,
 
 [Your Name]
 Medical Communication Specialist
 UCSF Comprehensive Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you through this journey.
 
 ---
 

@@ -16,32 +16,31 @@ Dear [Patient Name],
 
 I hope this letter finds you well. I wanted to share some important information about your recent visit and your health.
 
-**Diagnosis:**
-You were diagnosed with pancreatic cancer. This means there was a growth in your pancreas that doctors found to be cancerous. After surgery, they removed the cancer, but there is still a chance it could come back.
+**Diagnosis and Stage:**
+You have a type of cancer called pancreatic cancer. It started in the head part of your pancreas. Your doctors say it is at a stage called pT2N3. This means the cancer has spread to some nearby lymph nodes.
 
 **Treatment Plan:**
-We need to keep a close eye on your condition because there is a higher chance of the cancer returning. Here’s what we will do:
+We are watching closely because there is a chance the cancer could come back. We will check your blood tests and do imaging tests to keep track of how you are doing.
 
-1. **Check Your Blood Levels:** We will check a special blood marker called CA19-9 this week. This helps us know if the cancer might be coming back.
-   
-2. **Imaging Tests:** We will do a CT scan in two weeks to look inside your body and make sure everything looks okay.
-
-3. **Nutrition:** You will continue taking Creon, which helps your body digest food better.
-
-4. **Diabetes Management:** Your diabetes is not well controlled right now. It would be good to talk to a new doctor who can help manage your diabetes better.
+**Key Test Results:**
+Some of your blood tests show that certain numbers are higher than they should be. These numbers help us know if the cancer might be coming back. We will check these again soon.
 
 **Next Steps:**
-After the tests, we will meet again to discuss the results and decide what to do next. If you notice anything unusual or have any concerns before then, please call us right away.
+- We will check your blood tests again this week.
+- You will have a CT scan in two weeks.
+- Keep taking your medicine for digestion and diabetes.
+- If you notice any new symptoms or feel worried, please call us.
 
 **What to Watch For:**
-Please pay attention to how you feel. Let us know if you experience any new symptoms or if anything feels different.
+Please let us know if you have any new pain, swelling, or if you feel very tired. Also, keep an eye on your blood sugar levels and make sure they stay within the right range.
 
-Remember, you can always ask questions or share your concerns with your care team. We are here to support you.
+Remember, you can always talk to your care team if you have any questions or concerns. We are here to support you.
 
 Best wishes,
-[Your Name]
-Medical Communication Specialist
-[Contact Information]
+
+[Your Name]  
+Medical Communication Specialist  
+[Cancer Center Name]
 
 ---
 

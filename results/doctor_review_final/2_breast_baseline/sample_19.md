@@ -12,40 +12,40 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
 
 ## Patient Letter (Baseline — No Pipeline)
 
-Dear [Patient’s Name],
+Dear [Patient Name],
 
-Thank you for coming to see us today. Here is a summary of your recent visit and what we discussed:
+Thank you for coming to see us today. Here’s a summary of what we talked about:
 
 **Diagnosis:**
-You have been diagnosed with breast cancer. It started in your left breast and has been treated. The type of cancer is called IDC (Invasive Ductal Carcinoma), which means it began in the milk ducts and spread to nearby tissues. 
+You have breast cancer. It started in your left breast. The type is called IDC, which means invasive ductal carcinoma. It is at a stage where it has spread a little bit but not far. Your cancer is ER+ (estrogen receptor positive), PR- (progesterone receptor negative), and HER2- (human epidermal growth factor receptor 2 negative).
 
-**Treatment Plan:**
-- **Medication:** You are currently taking a medicine called exemestane. This helps prevent the cancer from coming back. You should continue taking it every day.
-- **Check-ups:** We recommend you get a DEXA scan to check your bones. This is important because the medicine you are taking can affect your bones. We will also check your hormone levels to make sure the medicine is working properly.
-- **Future Options:** We talked about the possibility of having surgery to remove your ovaries (BSO) after you finish taking the medicine. This might help prevent the cancer from returning.
+**Treatment:**
+You had surgery to remove both breasts (bilateral mastectomies). After the surgery, you took a medicine called tamoxifen. In November 2018, you started taking another medicine called letrozole. But because you felt anxious and had mood swings, you switched to a different medicine called exemestane in December 2018. You will keep taking exemestane every day.
+
+**Tests:**
+We did tests to check how well the treatment is working. Everything looks good so far. We also checked your bones and they look fine too.
 
 **Next Steps:**
-- Continue taking exemestane as prescribed.
-- Schedule a DEXA scan and check your hormone levels.
-- Keep all your follow-up appointments. We will see you again in 6 months unless you have any new or worsening symptoms.
+- Keep taking exemestane every day.
+- We will check your hormone levels to make sure the medicine is working.
+- You need to get a special X-ray of your bones (DEXA scan) now and every 2 years.
+- You should see your doctor every 6 months for a check-up. We won’t need to do any more scans because you had both breasts removed.
 
 **What to Watch For:**
-- Any new lumps or changes in your breasts.
-- Bone pain or joint aches.
-- Hot flashes or trouble sleeping.
-- Mood changes or anxiety.
+- If you feel very worried or sad, talk to your local mental health provider.
+- Let us know if you have new or worsening symptoms.
 
-Please remember to talk to your care team if you have any questions or concerns. We are here to help you through this journey.
+Remember, you can always ask your care team any questions you have. We are here to help you.
 
-Warm regards,
+Best wishes,
 
-[Your Name]  
-Medical Communication Specialist  
-[Cancer Center Name]
+[Your Name]
+Medical Communication Specialist
+Cancer Center
 
 ---
 
-Feel free to reach out to us anytime. We are here to support you.
+Please let me know if you need any changes or additional details!
 
 ---
 

@@ -14,26 +14,34 @@ ID: ***** ***** is a 33 y.o. premenopausal patient with a recent diagnosis of a 
 
 Dear *****,
 
-Thank you for coming to our clinic today. I want to make sure you understand everything we talked about and what will happen next.
+Thank you for coming to our clinic. I want to share some important information about your health with you.
 
 **Diagnosis:**
-You have been diagnosed with a type of breast cancer called hormone receptor-positive (HR+) metastatic breast cancer. This means the cancer has spread to your lymph nodes, which are small glands that help fight infections. The cancer cells are sensitive to hormones like estrogen.
+You have been diagnosed with a type of breast cancer called hormone receptor-positive (HR+) metastatic breast cancer. This means the cancer has spread to your lymph nodes. Lymph nodes are small glands in your body that help fight infections.
+
+**Tests and Results:**
+We did several tests to understand your condition better. These included:
+
+- **Ultrasound:** This showed enlarged lymph nodes in your neck and underarm.
+- **Biopsy:** A small sample from your lymph node was taken. The test showed cancer cells that likely came from the breast.
+- **Mammogram and Ultrasound:** These tests looked at your breasts and found no signs of cancer in the breast tissue itself.
+- **MRI and PET/CT scans:** These detailed pictures showed areas where the cancer might be growing.
 
 **Treatment Plan:**
-To better understand your cancer, we need to do some more tests. These include:
+To make sure we choose the best treatment for you, we need to do a few more tests. These include:
 
-- **Biopsy of a breast mass:** We will take a small sample from a suspicious area in your breast to check if it’s cancer.
-- **Lymph node biopsy:** We will also take a small sample from a lymph node in your neck to see if it has cancer cells.
-- **Genetic testing:** This helps us understand more about your cancer and choose the best treatment.
+- **Breast Biopsy:** We will take a small piece of tissue from your breast to check for cancer.
+- **Lymph Node Test:** We will also take a small sample from your neck lymph nodes.
+- **Genetic Testing:** This helps us understand more about your cancer and choose the best medicines.
 
 **Next Steps:**
-Once we have the results from these tests, we will decide on the best treatment plan for you. If the cancer is sensitive to hormones, we might start with medicine that blocks estrogen. If the cancer is also HER2 positive, we might use different medicines that target HER2.
+Once we have all the test results, we will decide on the best treatment plan for you. This might include medicines that stop the cancer from growing or other treatments.
 
 **What to Watch For:**
-Please let us know if you notice any new lumps or changes in your body. Also, tell us if you feel very tired or have any other unusual symptoms.
+Please let us know if you notice any new lumps or changes in your body. Also, tell us if you feel very tired or have any pain.
 
 **Questions:**
-It’s important to talk to your care team if you have any questions or concerns. We are here to help you understand everything and support you through this journey.
+It’s important to talk to your doctors if you have any questions or concerns. We are here to help you understand everything about your health.
 
 Take care,
 [Your Name]

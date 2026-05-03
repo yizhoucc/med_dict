@@ -14,25 +14,35 @@ Mr. ***** is a 74 y.o. male who returns to our GI Oncology practice at the UCSF 
 
 Dear Mr. *****,
 
-I hope this letter finds you well. I wanted to share some updates about your health and the next steps in your treatment plan.
+Thank you for coming to our clinic for your follow-up visit. Here is a summary of your current situation and what we discussed:
 
-You have been diagnosed with metastatic pancreatic cancer. This means the cancer has spread beyond the pancreas to other parts of your body. We have been treating you with different types of chemotherapy to help control the cancer.
+**Diagnosis and Stage:**
+You have been diagnosed with metastatic pancreatic cancer. This means the cancer has spread beyond the pancreas to other parts of your body.
 
-Recently, we have been using a treatment called 5-FU/LV plus nanoliposomal irinotecan (Onivyde). This treatment has helped keep the cancer stable, but we have noticed some changes in how you feel. You have had some pain and low energy levels. We also found that you were anemic, which means you didn’t have enough red blood cells. We gave you a blood transfusion to help with this.
+**Treatment Plan:**
+You have been receiving chemotherapy to help control the cancer. Recently, you started a new treatment called 5-FU/LV plus nanoliposomal irinotecan (Onivyde). This treatment has helped keep the cancer stable, but you are experiencing some symptoms like pain and low energy.
 
-We will continue with one more cycle of the current treatment if your lab tests look good. After that, we will do another scan to check how the cancer is doing.
+**Key Test Results:**
+Recent tests show that the cancer is still growing in some places, but it has not changed much overall. Your blood tests show that you are anemic, which means you don’t have enough red blood cells. We gave you a transfusion to help with this.
 
-If the cancer continues to grow, we might consider other treatments like joining a clinical trial. These trials test new medicines that might help. We will talk more about these options if needed.
+**Next Steps:**
+We will continue with one more cycle of the current chemotherapy if your blood tests are okay. We will do another scan soon to check how the cancer is doing.
 
-For now, we want to make sure you are comfortable and have a good quality of life. If the cancer gets worse, we might focus more on managing your symptoms and making you feel better.
+If the cancer continues to grow, we might consider other treatments like joining a clinical trial or using radiation therapy to help with pain.
 
-Please remember to let us know if you have any questions or concerns. We are here to support you and your family.
+**What to Watch For:**
+Please watch for any new or worsening symptoms such as pain, tiredness, or trouble eating. Let us know if you notice anything different.
 
-Warm regards,
+**Important Reminders:**
+Remember to take your medications as prescribed. If you have any questions or concerns, please talk to your care team. We are here to support you.
+
+Sincerely,
 
 [Your Name]
 Medical Communication Specialist
 UCSF Comprehensive Cancer Center
+
+Please feel free to reach out to us anytime. We are here to help you through this journey.
 
 ---
 

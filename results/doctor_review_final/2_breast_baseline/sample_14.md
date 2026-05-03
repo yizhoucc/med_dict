@@ -14,40 +14,37 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
 
 Dear [Patient's First Name],
 
-Thank you for coming to see us. I want to share some important information about your health with you.
+Thank you for coming to see us. Here’s a summary of what we discussed during your visit:
 
 **Diagnosis:**
-You have been diagnosed with breast cancer in your right breast. This type of cancer is called invasive ductal carcinoma (IDC). It means the cancer cells have spread beyond the milk ducts into the surrounding breast tissue.
+You have been diagnosed with breast cancer in your right breast. This type of cancer is called invasive ductal carcinoma (IDC). It is a small tumor, about 1 to 2.2 centimeters in size. The cancer is strongly estrogen receptor (ER) and progesterone receptor (PR) positive, which means it grows in response to these hormones. This is important because it helps us choose the best treatment for you.
 
 **Treatment Plan:**
-We have discussed several treatment options with you. Based on your situation, we recommend a bilateral mastectomy with reconstruction. This means removing both breasts and rebuilding them. 
+We have decided on a treatment plan that includes surgery and medicine to help control the cancer. 
 
-After surgery, you will start a treatment called endocrine therapy. This helps prevent the cancer from coming back. We will begin with a medicine called goserelin, which stops your ovaries from making estrogen. Two weeks later, you will start another medicine called letrozole.
+1. **Surgery:** You will have a bilateral mastectomy, which means both breasts will be removed. This will be followed by reconstruction to rebuild your breasts.
+   
+2. **Medicine:** You will start taking a medicine called goserelin to stop your ovaries from making hormones. This will begin today. About two weeks later, you will start another medicine called letrozole to further control the cancer.
+
+**Key Test Results:**
+- Your recent tests show that the cancer is low risk, which is good news.
+- You had a test called Mammaprint, which showed a low risk score.
 
 **Next Steps:**
-Your surgery has been delayed because of the current situation with COVID-19. We are working with Dr. [Doctor’s Last Name] to schedule your surgery as soon as possible. We will keep you updated on the timing.
-
-In the meantime, you will start taking goserelin today. Two weeks later, you will start letrozole. We will also check your hormone levels with a blood test.
+- We will schedule your surgery as soon as possible. Due to the current situation with COVID-19, there might be some delays.
+- You will need to come back in one month for a follow-up appointment. We will check how you are doing and discuss any questions you may have.
 
 **What to Watch For:**
-Please watch for any changes in how you feel. Some common side effects of these treatments include hot flashes and mood changes. If you notice anything unusual, please let us know.
+- Keep an eye out for any new symptoms or changes in how you feel.
+- If you notice anything unusual, please call us right away.
 
-**Important Reminders:**
-- Keep all your appointments with your care team.
-- Discuss any questions or concerns with your doctors.
-- Continue to take your medications as prescribed.
-
-We are here to support you through this journey. Please don’t hesitate to reach out if you need anything.
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
 
 Warm regards,
 
 [Your Name]
 Medical Communication Specialist
 [Cancer Center Name]
-
----
-
-Please remember to discuss any questions or concerns with your care team. They are here to help you every step of the way.
 
 ---
 

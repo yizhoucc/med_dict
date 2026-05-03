@@ -14,44 +14,43 @@ FOLLOW UP VISIT    Ms. ***** is a 73 y.o. female whom I am seeing as a video vis
 
 Dear Ms. *****,
 
-Thank you for your visit today. Here’s a summary of our discussion:
+Thank you for your visit today. Here is a summary of our discussion:
 
-**Diagnosis:**
-You have locally advanced pancreatic cancer. This means the cancer is growing in the pancreas and has spread to nearby areas.
+**Diagnosis and Stage:**
+You have locally advanced pancreatic cancer. This means the cancer is growing in the pancreas and has spread to nearby blood vessels and lymph nodes.
 
 **Treatment Plan:**
-We are continuing your chemotherapy treatment with FOLFOX. This includes medicines that help fight the cancer. We stopped using one medicine called irinotecan because it caused some side effects.
+We are treating you with a chemotherapy called FOLFOX. This helps control the cancer. We stopped using a part of the treatment called irinotecan because it caused some side effects.
+
+**Key Test Results:**
+- Your blood tests show that your white blood cells are high, and your red blood cells are low. This is common with chemotherapy.
+- Your potassium levels are low, so we need to make sure you get enough potassium.
+- Your CA 19-9, a marker for pancreatic cancer, has gone up. This can happen even when the cancer is being controlled.
 
 **Next Steps:**
-Today, you received another dose of chemotherapy. We will keep monitoring your progress with regular scans and blood tests. We plan to do more scans after your eighth treatment.
+- You will continue to receive FOLFOX chemotherapy.
+- We will check your potassium levels and give you potassium supplements if needed.
+- We will do scans after your eighth treatment to see how the cancer is responding.
+- We will keep checking your CA 19-9 levels each month.
 
 **What to Watch For:**
-
-- **Diarrhea:** If you have any diarrhea, especially after eating certain foods, let us know. We have given you medicine to help with this.
-  
-- **Electrolytes:** We need to check your potassium levels. You might feel weak if your potassium is too low. We will give you potassium supplements to help with this.
-  
-- **Weight Loss:** It’s important to try to keep your weight steady. Find foods you enjoy and try to eat them regularly.
-  
-- **Side Effects:** Let us know if you have any new symptoms or if your current ones get worse. This includes feeling tired, having trouble eating, or any other concerns.
-
-**Medications:**
-You have several medications to manage your symptoms. Make sure to take them as directed. If you have any trouble with the size or taste of the pills, let us know.
+- Keep an eye on your appetite and try to eat foods you enjoy.
+- If you have any new symptoms or if your diarrhea gets worse, let us know.
+- Try to avoid losing more weight. Eating potassium-rich foods like bananas and potatoes can help.
 
 **Important Reminders:**
-Please call us if you have any questions or if you notice any new symptoms. We are here to support you throughout your treatment.
+- Continue to take your medications as prescribed.
+- If you have any questions or concerns, please talk to your care team.
 
-Take care,
-[Your Doctor's Name]
-Assistant Professor of Clinical Medicine
-Gastrointestinal Oncology Program
-University of California, San Francisco
+We are here to support you through this journey. Thank you for trusting us with your care.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+UCSF Comprehensive Cancer Center
 
 Office Phone Number: [Phone Number]
-
----
-
-Feel free to reach out to your care team if you have any questions or concerns. We are here to help you through this journey.
 
 ---
 

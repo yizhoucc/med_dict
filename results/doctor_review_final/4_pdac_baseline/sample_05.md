@@ -14,42 +14,42 @@ This is an independent service.  The available consultant for this service is **
 
 Dear Mr. *****,
 
-Thank you for visiting us today. Here’s a summary of your recent appointment:
+Thank you for visiting us today. Here is a summary of your recent health check-up and treatment plan:
 
-**Diagnosis:**
-You have a type of cancer called adenocarcinoma of the pancreas. This means there is a tumor in your pancreas. You also have a small amount of cancer spread to your abdominal wall.
+**Diagnosis:** You have a type of cancer called adenocarcinoma of the pancreas. This means there is a tumor in your pancreas. It has spread a little bit to your abdominal wall, but not much.
 
-**Treatment Plan:**
-You have finished 12 cycles of a chemotherapy treatment called FOLFIRINOX. Now, you are taking a break from chemotherapy. We will check how you are doing with a CT scan on November 19, 2019.
+**Treatment Plan:** You have finished 12 rounds of a medicine called FOLFIRINOX. Now, you are taking a break from this treatment. We will do another scan on November 19, 2019, to see how things are going.
+
+**Key Test Results:**
+- Your blood tests show that your body is handling the treatment well.
+- The levels of a protein called CA 19-9 have gone down, which is good news. This protein is often higher when there is cancer.
 
 **Next Steps:**
-- You will have a follow-up visit on November 21, 2019, with Dr. *****.
-- If you have any new symptoms or problems, please call the clinic right away.
+- You will have another scan on November 19, 2019.
+- We will keep watching for any new symptoms or problems.
 
 **What to Watch For:**
-- Keep an eye out for any new pain or bleeding.
-- Let us know if you notice any changes in your health.
+- If you have any new pain, bleeding, or other unusual symptoms, please let us know right away.
+- Keep taking your medicines as prescribed.
 
 **Other Health Issues:**
-- You have a condition called thrush, which is a fungal infection in your mouth. You are taking medicine called fluconazole to treat it.
-- You have a blood clot in your leg. You are taking a medicine called Xarelto to prevent more clots.
-- You may still have some abdominal pain. You are taking medicine to help with this.
-- You have lost some weight, but this has improved. Our nutritionist is helping you with this.
-
-**Medicines:**
-You are taking several medicines to manage your symptoms and keep you comfortable. Please continue to take them as prescribed.
+- You have a condition called thrush, which is a yeast infection in your mouth. You are starting a new medicine called fluconazole to treat it.
+- You have a blood clot in your leg. You are taking a medicine called Xarelto to help prevent more clots.
+- You have some pain in your abdomen, but it has improved. You are taking a medicine called Creon to help with digestion.
 
 **Important Reminders:**
 - If you have any questions or concerns, please talk to your care team.
-- Remember to come back for your follow-up appointments.
+- Remember to come back for your next appointment on November 21, 2019.
 
-We hope you feel better soon and we look forward to seeing you again.
+We hope you feel better soon and we look forward to seeing you again soon.
 
 Warm regards,
 
-Your Care Team
-
+[Your Name]
+Medical Communication Specialist
 UCSF Comprehensive Cancer Center
+
+Please remember to discuss any questions or concerns with your care team. They are here to help you.
 
 ---
 

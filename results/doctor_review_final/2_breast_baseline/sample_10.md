@@ -14,36 +14,40 @@ HPI:  ***** ***** is a 32 y.o. female here in consultation to discuss treatment 
 
 Dear [Patient Name],
 
-Thank you for coming to our clinic. I want to share with you the important information about your health and the next steps in your treatment.
+Thank you for coming to our clinic. I want to share with you the important information about your health.
 
 **Diagnosis:**
-You have been diagnosed with breast cancer in your right breast. This means there is a growth in your breast that is not normal. It is called a grade 2 invasive ductal carcinoma. This type of cancer starts in the milk ducts and spreads to nearby tissues.
+You have breast cancer in your right breast. It is called a grade 2 invasive ductal carcinoma. This means the cancer cells are growing and spreading into nearby tissues. The cancer is in the early stages, which is good news.
+
+**Tests:**
+We did several tests to learn more about your cancer. We found a lump in your right breast and a swollen lymph node in your armpit. These tests help us know how to treat you best.
 
 **Treatment Plan:**
-We will start with a special kind of treatment called neoadjuvant chemotherapy. This means we will give you medicine before surgery to help shrink the tumor. Here’s what we will do:
+We will start with chemotherapy to shrink the tumor before surgery. Chemotherapy uses special medicines to kill cancer cells. We will also use a device called a port to give you the medicine easily.
 
-1. **Echocardiogram and EKG:** We will check how your heart is working.
-2. **Port Placement:** We will put a small tube (called a port) under your skin to make it easier to give you medicine.
-3. **Chemotherapy:** We will start giving you medicine to fight the cancer. This will happen around May 1st, after we finish collecting your eggs.
+Here’s what we will do:
+- **Echocardiogram and EKG:** These tests check your heart.
+- **PET Scan:** This test checks if there is any cancer spread.
+- **Cold Cap:** We talked about using a cold cap to try to keep your hair during chemotherapy.
+- **Chemotherapy:** We will start chemotherapy soon. We will use a mix of medicines to fight the cancer.
 
 **Next Steps:**
-- We will do more tests like a PET scan to make sure the cancer hasn’t spread to other parts of your body.
-- We will keep checking your progress with different tests and scans.
-- We will talk about ways to manage any side effects you might feel, like hair loss or feeling tired.
+- We will do more tests on Thursday.
+- We hope to start chemotherapy next week.
+- We will put in a port to make giving you medicine easier.
 
 **What to Watch For:**
-Please let us know if you notice any new symptoms or if you feel very sick. Some things to watch for include:
-- Feeling very tired
-- Nausea or vomiting
-- Changes in your appetite
-- Any unusual pain
+During treatment, you might feel tired, lose your hair, or have other side effects. If you have any problems, please let us know.
 
 **Support:**
-It’s important to take care of yourself. You mentioned wanting to stay active and eat healthier. That’s great! Keep doing what you can to stay strong. If you have any questions or concerns, please talk to your care team. We are here to help you every step of the way.
+You have a strong support system with your family. Keep doing things that make you happy, like exercising and eating healthy food.
 
-Take care,
-[Your Name]
-Medical Communication Specialist
+If you have any questions, please talk to your care team. We are here to help you.
+
+Best wishes,
+
+[Your Name]  
+Medical Communication Specialist  
 [Cancer Center Name]
 
 ---

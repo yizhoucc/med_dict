@@ -1,19 +1,7 @@
 # Pancreatic Cancer — Baseline
 
-**Date:** 2026-05-02
-
-**Model:** Qwen2.5-32B-Instruct-AWQ via vLLM
-
-**Condition:** Baseline
-
-**Samples:** 20 annotated notes (held-out test set)
-
----
-
-
-## Instructions
-
-For each letter, rate 1-5: Accuracy, Completeness, Safety, Simplification, Overall Quality.
+**Date:** 2026-05-03
+**Condition:** Baseline (same model, single prompt, no pipeline)
 
 ---
 

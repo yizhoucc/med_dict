@@ -14,34 +14,33 @@ VIDEO VISIT  I performed this consultation using real-time Telehealth tools, inc
 
 Dear Ms. *****,
 
-Thank you for joining us for your video visit today. I want to make sure you understand everything we talked about and what will happen next.
+Thank you for joining me for your video visit today. I want to make sure you understand everything we talked about and what comes next.
 
-**Diagnosis:**
-You have a type of cancer called metastatic pancreatic adenocarcinoma. This means the cancer started in your pancreas and has spread to other parts of your body, like your liver.
+**Diagnosis and Stage:**
+You have a type of cancer called metastatic pancreatic adenocarcinoma. This means the cancer started in your pancreas and has spread to other parts of your body.
 
 **Treatment Plan:**
-The main treatment for your cancer will be chemotherapy. Chemotherapy uses medicines to kill cancer cells. We will start you on a treatment called gemcitabine and nab-paclitaxel. These medicines help slow down the growth of cancer and can improve how you feel.
+The main treatment for your cancer will be chemotherapy. Chemotherapy uses medicines to kill cancer cells. We will start with a combination of two drugs: gemcitabine and nab-paclitaxel. These drugs help slow down the growth of cancer and can improve how you feel.
+
+**Key Test Results:**
+We looked at some tests that show how your body is working. Some of your blood tests showed that your liver is having a hard time. We also saw that you have a tumor in your pancreas and some spots in your liver that might be cancer too.
 
 **Next Steps:**
-We will set up an in-person visit soon so we can check on your health and make sure you’re ready to start chemotherapy. During this visit, we’ll do some tests to make sure everything is okay before starting the treatment.
+We will set up a time for you to come to the clinic so we can check on you in person. We need to make sure your liver is working better before we start the chemotherapy. Once we see that your liver is okay, we will start the treatment right away.
 
 **What to Watch For:**
-Please watch for any new symptoms or changes in how you feel. If you notice anything unusual, like severe pain, fever, or feeling very tired, let us know right away.
-
-**Medications:**
-You are currently taking several medications for other health issues. Please continue to take them as directed. If you have any side effects from your pain medicine, like constipation, talk to us about ways to manage it.
+Please let us know if you have any new pain, nausea, or if you feel very tired. Also, tell us if you notice any yellowing of your skin or eyes, which is called jaundice.
 
 **Questions:**
-If you have any questions or concerns, please don’t hesitate to reach out to your care team. We are here to support you every step of the way.
+If you have any questions or concerns, please talk to your care team. We are here to help you and answer anything you want to know.
+
+Take care and I look forward to seeing you soon.
 
 Sincerely,
+
 [Your Name]
 Medical Communication Specialist
 UCSF Comprehensive Cancer Center
-
----
-
-Remember, you can always ask us to explain anything you don’t understand. We are here to help you and your family through this journey.
 
 ---
 

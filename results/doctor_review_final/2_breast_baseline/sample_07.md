@@ -12,33 +12,44 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
 
 ## Patient Letter (Baseline — No Pipeline)
 
-Dear [Patient’s First Name],
+Dear [Patient's Name],
 
-Thank you for coming to your appointment today. I want to share with you what we discussed and what comes next.
+Thank you for coming to your appointment today. Here is a summary of what we discussed:
 
-**Your Diagnosis:**
-You have a type of breast cancer called metastatic breast cancer. This means the cancer has spread to other parts of your body, like your liver and lymph nodes. It is also called triple-negative breast cancer because it does not respond to certain hormones or proteins.
+**Diagnosis:**
+You have metastatic breast cancer. This means the cancer has spread to other parts of your body, like your liver and lymph nodes. It is also called triple-negative breast cancer because it does not respond to certain hormones or proteins.
 
 **Treatment Plan:**
-We are treating your cancer with two medicines: abraxane and pembrolizumab. These are types of chemotherapy and immunotherapy. They help fight the cancer cells in your body.
+You are receiving two medicines: abraxane and pembrolizumab. These help fight the cancer. You will keep getting these treatments as long as they are working and you do not have bad side effects.
+
+**Key Test Results:**
+We looked at your latest scans and lab tests. They show that you are doing okay, but there are signs that the cancer is growing a little bit. We will keep watching closely.
 
 **Next Steps:**
-- You will keep getting abraxane every week and pembrolizumab every three weeks.
-- We will monitor how you are doing with regular check-ups and tests.
-- You will need a small device called a port to make it easier to give you medicine. We hope to put this in next week.
-- We will also start you on some other medicines to help with side effects like nausea and pain.
+You will come back in 2 weeks, and then every 3 weeks after that. We will check how you are doing with more scans and tests.
 
 **What to Watch For:**
-- Keep an eye out for any new pain or discomfort.
-- Let us know if you feel very tired or have any new symptoms.
-- If you have any questions or concerns, please talk to your care team.
+Please let us know if you have any new symptoms or if your current ones get worse. Some things to watch out for include:
+- Feeling very tired
+- Pain in your arms, legs, or back
+- Tingling in your fingers or toes
+- Trouble sleeping
 
-Remember, you are not alone in this journey. Your doctors and nurses are here to support you every step of the way.
+**Medicines:**
+You are taking several medicines to help with pain, nausea, and other symptoms. Please take them as directed.
 
-Take care,
+**Important Reminders:**
+- Keep all your appointments.
+- Call us if you have any questions or concerns.
+- Remember to talk to your care team about any worries you might have.
+
+We are here to support you through this journey. Please feel free to reach out anytime.
+
+Warm regards,
+
 [Your Name]
 Medical Communication Specialist
-[Cancer Center Name]
+Cancer Center
 
 ---
 

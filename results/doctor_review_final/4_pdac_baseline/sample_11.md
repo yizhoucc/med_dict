@@ -14,40 +14,46 @@ INITIAL GI MEDICAL ONCOLOGY VISIT     Patient name  ***** ***** *****      DOB 1
 
 Dear Mr. *****,
 
-Thank you for visiting us at the UCSF Comprehensive Cancer Center. I wanted to share some important information about your health and the next steps we will take together.
+Thank you for visiting us at the UCSF Comprehensive Cancer Center. I want to share some important information about your health with you.
 
-**Diagnosis:**
-You have been diagnosed with pancreatic cancer that has spread to your liver. This is called stage IV cancer.
+**Diagnosis and Stage:**
+You have been diagnosed with pancreatic cancer that has spread to your liver. This is called stage IV cancer. It means the cancer has moved beyond where it started.
 
 **Treatment Plan:**
-We talked about different ways to treat your cancer. One of the best options for people like you is a type of chemotherapy called FOLFIRINOX. This treatment aims to slow down the growth of the cancer and help you feel better.
+We talked about different ways to treat your cancer. One option is a special medicine called FOLFIRINOX. This is a mix of four different medicines that can help fight the cancer. Another option is a combination of two medicines: gemcitabine and nab-paclitaxel.
 
-Another option is to join a special research study called the Precision Promise trial. This study might offer new treatments that could be very helpful. We will do some tests to see if you can join this study.
+We also talked about joining a research study called the Precision Promise trial. This study might offer new treatments that could help you. You agreed to join this study and we will do some tests to see if you qualify.
+
+**Key Test Results:**
+- **Imaging Tests:** We did scans of your belly and chest. These showed a growth in your pancreas and some small spots in your liver.
+- **Blood Tests:** Your blood tests showed high levels of a protein called CA 19-9, which can be a sign of pancreatic cancer.
 
 **Next Steps:**
-Today, you agreed to start the process for joining the Precision Promise trial. We will do some tests to make sure you can join the study. If you cannot join the study, we will start you on the FOLFIRINOX treatment.
-
-You will also have a CT scan and some blood tests done locally at ***** today. These tests will help us understand more about your condition.
+Today, you will have another scan and some blood tests done locally. We will use these results to decide the best way to move forward with your treatment.
 
 **What to Watch For:**
-Please keep an eye on how you feel. Let us know if you notice any changes, such as:
+Please watch for any changes in how you feel. Some things to look out for include:
+- Yellowing of your eyes (jaundice)
+- Feeling very tired
+- Changes in your appetite or weight
 
-- Yellowing of your eyes or skin (jaundice)
-- Changes in your appetite or energy levels
-- Any new pain or discomfort
+If you notice any of these, please let us know right away.
 
-**Questions:**
-If you have any questions or concerns, please talk to your care team. We are here to support you and answer any questions you might have.
+Remember, you can always talk to your care team if you have any questions or concerns. We are here to support you.
 
 Best regards,
 
-[Your Name]
-Medical Communication Specialist
-UCSF Comprehensive Cancer Center
+[Your Doctor’s Name]
+Assistant Professor of Clinical Medicine
+Gastrointestinal Oncology and [Specialty]
 
 Office Phone Number: [Phone Number]
 
-Remember, you are not alone in this journey. We are here to help you every step of the way.
+Please feel free to call us if you have any questions or need more information.
+
+Warm regards,
+
+[Your Doctor’s Name]
 
 ---
 

@@ -14,34 +14,40 @@ SUBJECTIVE:    This is a very pleasant 64-year-old woman with a diagnosis of ade
 
 Dear [Patient’s Name],
 
-I hope this letter finds you well. I wanted to share some important information about your health and our plan moving forward.
+I hope this letter finds you well. I wanted to share some important information about your health in a way that is easy to understand.
 
-You have been diagnosed with a type of cancer called adenocarcinoma of the pancreas. This means the cancer started in the pancreas, an organ in your body that helps with digestion. We are monitoring how the cancer is responding to treatment.
+**Diagnosis and Stage:**
+You have a type of cancer called adenocarcinoma of the pancreas. This means the cancer started in the pancreas. We are not sure how far the cancer has spread yet.
 
-Recently, you had some tests done, including scans of your abdomen and chest. These tests showed that the cancer is still under control, but we need to keep watching closely. You also had a procedure called ERCP, where doctors looked at your bile ducts and removed some blockages. This helped improve your symptoms like nausea.
+**Treatment Plan:**
+You have been receiving treatments to fight the cancer. Recently, you had a procedure where a special tube (stent) was placed to help with some blockages in your body. This helped improve your symptoms like nausea.
 
-Your treatment plan is to continue being monitored closely. We will see you again in two months for another scan to check on the cancer. In the meantime, if you notice any new symptoms or feel unwell, please let us know right away.
+**Key Test Results:**
+We did some scans to check how your body is doing. The latest scans show that the cancer is under control, but we need to keep watching closely.
 
-Some things to watch out for include:
-- Persistent nausea or pain
-- Changes in your energy levels
-- Any new lumps or swelling
+**Next Steps:**
+You will continue to be watched carefully. We will see you again in two months for another scan to make sure everything is okay.
 
-You mentioned having some questions about future treatments. There are many new treatments being developed, and we will discuss them with you when the time comes. For now, we will focus on keeping you comfortable and managing your symptoms.
+**What to Watch For:**
+If you notice any new symptoms or if something feels different, please let us know right away. Keep an eye out for any changes in how you feel.
 
-Please remember to take your medications as prescribed. If you have any questions or concerns, don’t hesitate to reach out to your care team. We are here to support you.
+**Medications:**
+You are taking several medications to help manage your symptoms and side effects. Make sure to take them as directed by your doctor.
 
-Take care and stay strong.
+**How You Are Doing:**
+It’s great to hear that you are feeling much better after the stent procedure. Your energy levels are good, and you can walk up to 4 miles a day. Your appetite is improving, and your hair is growing back. Some of the side effects from the chemotherapy, like numbness in your hands and feet, have gotten better.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
 
 Warm regards,
 
-[Your Name]
-Medical Communication Specialist
+[Your Name]  
+Medical Communication Specialist  
 Cancer Center
 
 ---
 
-Feel free to discuss any questions or concerns with your care team. We are here to help you every step of the way.
+Feel free to reach out to me or any member of your care team if you need more information or have any questions. We are here to help you.
 
 ---
 
