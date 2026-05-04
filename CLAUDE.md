@@ -158,8 +158,12 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
 - **PDAC (v32)**：
   - Dev set: 100/100 unannotated, 9+9 轮迭代 → **99/100 clean (P1=1, ROW 36 dose gap)**
   - Test set: 20 annotated held-out → 已生成，待医生评审
-- **Baseline 对比**：同一模型单 prompt（无 harness）→ 0/40 可发送，45% REDACTED 泄露，12.5% 幻觉
-- **医生评审包**：`results/doctor_review_final/`（4 folders × 20 samples = 80 letters）
+- **Baseline 对比（3-way: Pipeline vs Qwen Baseline vs ChatGPT Baseline）**：
+  - Qwen Baseline（同模型裸跑）：0/40 可发送，45% REDACTED 泄露，12.5% 幻觉，FK 6.6
+  - ChatGPT Baseline（GPT-4o 裸跑）：HIPAA 不合规，FK 8.8，更详细但更长（2530 chars），2/20 REDACTED 泄露
+  - **Pipeline 超越 ChatGPT**：零幻觉（vs ChatGPT 有 speculation），零 REDACTED（vs 2/20），零隐私泄露，情感支持 11/20（vs 1/20），97.5% 可发送（vs 0%），数据完全本地化
+  - 核心论点：Qwen 裸模型不如 ChatGPT，但 Qwen + Harness 在临床部署指标上超过 ChatGPT 裸模型
+- **医生评审包**：`results/doctor_review_final/`（5 folders: pipeline + Qwen BL + ChatGPT BL × 2 cancers = 100 letters）
 - **架构文档**：`PIPELINE_OVERVIEW.md` + `RESEARCH_PROPOSAL.md`
 
 ## 代码规范
