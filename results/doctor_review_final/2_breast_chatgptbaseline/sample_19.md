@@ -14,63 +14,52 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
 
 Dear Patient,
 
-We are writing to help you understand your current condition and care plan.
+We are writing to summarize your current health and treatment plan. We are glad to see you are doing well, and we are here to support you.
 
-What is your diagnosis?
-You were diagnosed with breast cancer in your left breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have a history of breast cancer in the left breast, called invasive ductal carcinoma. Your cancer is hormone receptor positive (ER+), meaning it grows with estrogen, and HER2 negative, meaning it does not have extra HER2 protein.
 
-Your cancer is hormone receptor positive (ER+) and HER2 negative. This means it uses estrogen to grow and does not have extra HER2 protein.
+You have already completed:
 
-You have already completed major treatments, including:
+Surgery (bilateral mastectomies)
+Hormone therapy (tamoxifen) in the past
+You are now on ovarian suppression plus an aromatase inhibitor (exemestane)
 
-Bilateral mastectomy (removal of both breasts)
-Hormone therapy
+At your recent visit, there is no evidence of active cancer (NED) on exam, which is very good news.
 
-At this time, there is no evidence of disease (NED), which means no signs of cancer are found on exam.
+Current treatment plan:
 
-What is the current treatment plan?
-You are continuing hormone therapy to lower the chance of cancer coming back.
+Continue exemestane (hormone therapy that lowers estrogen)
+Continue ovarian suppression
+Plan to stay on hormone therapy for at least 5 years
 
-You are taking exemestane, a medicine that lowers estrogen levels
-You are also on ovarian suppression (OS), which stops the ovaries from making estrogen
+Monitoring and next steps:
 
-This combination helps reduce the risk of cancer returning. The plan is to continue this treatment for at least 5 years.
+Check estradiol levels (to make sure estrogen is low)
+Have a DEXA scan (a test to check bone strength) now and every 2 years
+Clinic visits every 6 months for follow-up exams
 
-Key updates from your visit
+How you are feeling:
+You reported:
 
-You had side effects with a previous medication (letrozole), including anxiety and mood changes
-You are now tolerating exemestane better
-You have mild symptoms such as joint aches, hot flashes, trouble sleeping, and vaginal dryness
+Mild joint aches
+Mild hot flashes and trouble sleeping
+Some bone pain and vaginal dryness
 
-These are common side effects of hormone therapy.
+These can be side effects of hormone therapy. Please let your care team know if they get worse.
 
-Next steps
+What to watch for:
+Please contact your care team if you notice:
 
-Continue exemestane daily
-Check estrogen levels (estradiol) to make sure ovarian suppression is working
-Get a DEXA scan (bone strength test) now and every 2 years
-Follow up in clinic every 6 months
-
-What to watch for
-Please tell your care team if you notice:
-
-New or worsening bone pain
-Shortness of breath
+New or worsening pain
 New lumps or swelling
-Any new or concerning symptoms
+Any new or unusual symptoms
 
-Other important care
+We are happy to hear your mood symptoms have improved. Please continue to follow up for emotional support as needed.
 
-Bone health is important during treatment. Your team may recommend medications if bone density is low
-You may consider ovary removal surgery (BSO) in the future as another option
+You are doing well, and we will continue to monitor you closely. Please reach out with any questions or concerns.
 
-Final thoughts
-You are doing well, and there is no sign of cancer right now. Continuing your current treatment helps keep the cancer from coming back.
-
-It is normal to have side effects, and your care team can help manage them. Please share any concerns with your doctors.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

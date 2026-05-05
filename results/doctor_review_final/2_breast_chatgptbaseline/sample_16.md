@@ -5,7 +5,7 @@
 ## Original Clinical Note
 
 ```
-UCSF ***** ***** FAMILY                        COMPREHENSIVE CANCER CENTER                      ***** ***** ***** ***** Care Center                             ***** ***** *****                           Second *****, ***** *****                    ***** *****, ***** *****-*****               Phone: (*****) *****-*****          Fax: (*****) *****-*****    ***** AREA: *****    07/12/2010    *****. ***** (*****-*****) *****, M.D.  ***** *****    ***** *****. *****, M.D.  ***** ***** *****  *****, *****  *****    RE: *****, ***** *****  U#: *****  DATE OF SERVICE: 07/07/10    Dear *****:    I had the pleasure of seeing the above named patient in consultation  regarding treatment of her newly diagnosed breast cancer on July 08,  2011.    As you know, she is a 59-year-old woman who had four benign axillary  lymph nodes resected from her left axilla 10 years ago at ***** *****.  Subsequent to that time, she has had yearly mammograms which were  unremarkable.  In 2007 she had a fine needle aspiration of her right  breast that was read as benign.  In March 2010, an exam was felt to  represent no change in her breast.  In May she had planned on a  screening mammogram; however, two weeks before this mammogram, the  patient felt that her left breast had an area of increased density.  The  mammogram was unremarkable, but an ultrasound performed on June 07  revealed a focal shadowing measuring 2 x 1.5 cm in 10 o'clock that was  suspicious.  A core biopsy on the same day revealed invasive lobular  carcinoma, grade 2-3, measuring at least 1.5 cm.  This lobular cancer  was ER positive with 96% of the cells staining, PR positive with 35% of  cells staining and HER-2/neu negative with 0 cells staining.    An MRI of her bilateral breasts was performed in *****, although the  patient lives in *****; this revealed a large abnormality in her left  breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm.    On \n June 29 the patient saw Dr. ***** ***** at *****.  Dr. *****  palpated a large mass in the left breast and was concerned about the  extent of her disease.  She ordered a PET/CT scan which was performed on  July 06; this revealed hypermetabolic enhancing left breast mass, with  associated left axillary and left subpectoral nodes.  There was no  evidence of distant metastatic disease.  Specifically, the enhancing  lesion in the left breast measured 3.8 x 1.3 cm, but had a low SUV of  1.9; there were subcentimeter left axillary and left subpectoral nodes;  the largest left axillary node measured 0.6 cm and the largest  subpectoral node measured 0.7 cm.  In addition to these findings there  was a 7 mm hypoattenuating nodule on the right lobe of the thyroid gland  that was hypermetabolic with an SUV of 2.4.  Because of this thyroid  nodule, an ultrasound and fine needle aspiration of this lesion was  performed on July 08; this revealed a benign thyroid nodule, colloid  type.    In addition, to the pathology, the core biopsy that was performed in  ***** was reviewed by our pathologist, they agreed with the outside  pathologist that this represented invasive lobular carcinoma, with the  maximum dimension of 1.1 cm; they felt that this was intermediate grade.  There was no lymphovascular invasion.  ER and PR were strongly positive  and HER-2 was negative.    She came to see me to discuss treatment options.    PAST MEDICAL HISTORY:  Her past medical history is remarkable for  hypertension for 30 years, on medications.  She states that her blood  pressure has been well controlled over these last 30 years, but her  hypertension did develop in her late 20s.  She had a hysterectomy and  bilateral salpingo-oophorectomy at age 35 for fibroids with bleeding.  She had a tonsillectomy and she had a right wrist fracture as a child.  Two years ago she slipped and fell and herniated her disk at L3-4; she  was treated with physical \n therapy and ice and has no residual pain at  this time.    GYN HISTORY:  She underwent menarche at 11.  She is G0, P0.  She took  hormone replacement therapy very briefly after menopause and then  stopped.  Her last menstrual period was of course, before her  hysterectomy as noted above.  She took soy and black cohosh for hot  flashes in the past, but these are much improved now.    MEDICATIONS INCLUDE:  Hydrochlorothiazide, potassium and Exforge which  she takes for her blood pressure.    ALLERGIES:  She is allergic to erythromycin with chest pain and sulfa,  with a rash.    SOCIAL HISTORY:  She has been divorced for many years.  She works full  time as a ***** for ***** ***** and ***** ***** in  administration.  She exercises a little bit.  She does not smoke  cigarettes or drink alcohol.    FAMILY HISTORY:  Her mother had Parkinson's disease in her older years  and she does not know anything about her father's history.    REVIEW OF SYSTEMS:  She notes that she has a high tolerance for pain.  She has noted right breast aching that is gradually increasing with a  dull throbbing, this has gotten significantly worse over the last couple  of weeks and has made her very anxious.  She has been using ice packs.  She notes dry eyes.  She has no back pain.  Her energy level is good,  although as noted, she is not very physically active.  She is not  shortness of breath.  She has no cough or abdominal pain and no problems  with her balance.  The rest of her review of systems is negative in  detail.    PHYSICAL EXAMINATION:  GENERAL:  On physical examination, she is a healthy appearing woman in  no acute distress.  VITAL SIGNS:  Her weight is 77 kg, her blood pressure is 123/86, pulse  91, respirations 14 and she is saturating at 99% on room air and is  afebrile.  SKIN:  Her skin reveals no lesions.  HEENT : Her oropharynx is clear.  She is anicteric.  She has no cervical  adenopathy.  She has a 1 cm left \n supraclavicular or anterior cervical  node that feels benign.  LUNGS:  Her lungs are clear to auscultation bilaterally to auscultation  and percussion and she has no bony tenderness.  BREASTS:  Examination of her right breast reveals no masses.  She has a  0.5 cm soft and mobile right axillary lymph node.  Examination of her  left breast reveals a 5 x 5.5 cm mass that extends to underneath the  nipple, but originates at 12 o'clock.  She has a 1 cm palpable left  axillary lymph node.  CARDIAC:  Her cardiac exam is without murmur or gallops.  ABDOMEN:  Her abdomen is soft and nontender, without  hepatosplenomegaly.  EXTREMITIES:  Her extremities reveal no edema.    In summary, ***** ***** is a 59-year-old woman with a new diagnosis of  a clinical stage III lobular carcinoma of the left breast.  On PET/CT  scan there is evidence of local regional node involvement; therefore, we  ordered an ultrasound on the day of her visit, which she accomplished  the following week.  The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left  axillary lymph node which was abnormal in morphology, with a thickened  cortex and a fine needle aspiration was performed on the same day and is  pending.    I had a long discussion with ***** and the friend that accompanied her  to her visit.  We spoke for approximately 60 minutes about her treatment  options.  I had recommended that she consider pursuing neoadjuvant  hormone therapy to try and shrink this tumor before approaching it with  surgery and that this would give us a better idea of the hormone  responsiveness of this very large lobular cancer.  I also discussed with  her the hormone receptors and how they can indicate to us that these  tumors will be very sensitive to hormone therapy.    We talked about the availability of a randomized phase II clinical trial  that randomizes patients to the aromatase inhibitor letrozole, with or  without bevacizumab, the antiangiogenic antibody.  The main \n side effect  of the antibody for Ms. ***** would be hypertension.  We discussed this  at some length and she was extremely hesitant to consider enrolling in a  clinical trial and after receiving additional information and thinking  about it over the weekend, reiterated the fact that although she  appreciated the information that we provided to her, she was not  interested in participating in a clinical trial.  We talked abut  neoadjuvant hormone therapy versus taking an adjuvant approach.  She  clearly has surgically accessible disease if she approaches this with a  mastectomy.  Subsequently, she has responded to us that she would most  like to pursue a mastectomy up front for this cancer and not pursue  neoadjuvant treatment approach.  Therefore, I have referred Ms. *****  back to *****. ***** for consideration for surgery and then I will meet  with her after surgery to discuss adjuvant treatment options.    Thank you very much for allowing me to participate in the care of this  lovely woman.  Please feel free to contact me if you have any questions  regarding my evaluation or recommendations and we will make a final  decision regarding her adjuvant therapy following receipt of her  pathology from her upcoming surgery.    *****,    ***** *****. *****, M.D.  CLINICAL PROFESSOR OF MEDICINE  UCSF COMPREHENSIVE CANCER CENTER  ***** ***** ***** BREAST CARE CENTER    CARBON COPIES:              ***** ***** *****, MD                              ***** ***** *****,***** *****                              ***** ***** *****                                *****-***** *****, MD                              ***** *****          DICTATED BY:                 ***** *****. *****, MD *****                                       ____________________________    ATTENDING PHYSICIAN         ***** *****. *****, MD *****                                   Electronically Signed by                               ***** *****. *****, MD *****/*****/***** *****:***** *****                            \n    ____________________________    D:    *****/*****/***** *****:***** *****  T:    *****/*****/***** *****:***** ***** *****  *****#: *****  \n
+                            UCSF ***** ***** FAMILY                        COMPREHENSIVE CANCER CENTER                      ***** ***** ***** ***** Care Center                             ***** ***** *****                           Second *****, ***** *****                    ***** *****, ***** *****-*****               Phone: (*****) *****-*****          Fax: (*****) *****-*****    ***** AREA: *****    07/12/2010    *****. ***** (*****-*****) *****, M.D.  ***** *****    ***** *****. *****, M.D.  ***** ***** *****  *****, *****  *****    RE: *****, ***** *****  U#: *****  DATE OF SERVICE: 07/07/10    Dear *****:    I had the pleasure of seeing the above named patient in consultation  regarding treatment of her newly diagnosed breast cancer on July 08,  2011.    As you know, she is a 59-year-old woman who had four benign axillary  lymph nodes resected from her left axilla 10 years ago at ***** *****.  Subsequent to that time, she has had yearly mammograms which were  unremarkable.  In 2007 she had a fine needle aspiration of her right  breast that was read as benign.  In March 2010, an exam was felt to  represent no change in her breast.  In May she had planned on a  screening mammogram; however, two weeks before this mammogram, the  patient felt that her left breast had an area of increased density.  The  mammogram was unremarkable, but an ultrasound performed on June 07  revealed a focal shadowing measuring 2 x 1.5 cm in 10 o'clock that was  suspicious.  A core biopsy on the same day revealed invasive lobular  carcinoma, grade 2-3, measuring at least 1.5 cm.  This lobular cancer  was ER positive with 96% of the cells staining, PR positive with 35% of  cells staining and HER-2/neu negative with 0 cells staining.    An MRI of her bilateral breasts was performed in *****, although the  patient lives in *****; this revealed a large abnormality in her left  breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm.    On \n June 29 the patient saw Dr. ***** ***** at *****.  Dr. *****  palpated a large mass in the left breast and was concerned about the  extent of her disease.  She ordered a PET/CT scan which was performed on  July 06; this revealed hypermetabolic enhancing left breast mass, with  associated left axillary and left subpectoral nodes.  There was no  evidence of distant metastatic disease.  Specifically, the enhancing  lesion in the left breast measured 3.8 x 1.3 cm, but had a low SUV of  1.9; there were subcentimeter left axillary and left subpectoral nodes;  the largest left axillary node measured 0.6 cm and the largest  subpectoral node measured 0.7 cm.  In addition to these findings there  was a 7 mm hypoattenuating nodule on the right lobe of the thyroid gland  that was hypermetabolic with an SUV of 2.4.  Because of this thyroid  nodule, an ultrasound and fine needle aspiration of this lesion was  performed on July 08; this revealed a benign thyroid nodule, colloid  type.    In addition, to the pathology, the core biopsy that was performed in  ***** was reviewed by our pathologist, they agreed with the outside  pathologist that this represented invasive lobular carcinoma, with the  maximum dimension of 1.1 cm; they felt that this was intermediate grade.  There was no lymphovascular invasion.  ER and PR were strongly positive  and HER-2 was negative.    She came to see me to discuss treatment options.    PAST MEDICAL HISTORY:  Her past medical history is remarkable for  hypertension for 30 years, on medications.  She states that her blood  pressure has been well controlled over these last 30 years, but her  hypertension did develop in her late 20s.  She had a hysterectomy and  bilateral salpingo-oophorectomy at age 35 for fibroids with bleeding.  She had a tonsillectomy and she had a right wrist fracture as a child.  Two years ago she slipped and fell and herniated her disk at L3-4; she  was treated with physical \n therapy and ice and has no residual pain at  this time.    GYN HISTORY:  She underwent menarche at 11.  She is G0, P0.  She took  hormone replacement therapy very briefly after menopause and then  stopped.  Her last menstrual period was of course, before her  hysterectomy as noted above.  She took soy and black cohosh for hot  flashes in the past, but these are much improved now.    MEDICATIONS INCLUDE:  Hydrochlorothiazide, potassium and Exforge which  she takes for her blood pressure.    ALLERGIES:  She is allergic to erythromycin with chest pain and sulfa,  with a rash.    SOCIAL HISTORY:  She has been divorced for many years.  She works full  time as a ***** for ***** ***** and ***** ***** in  administration.  She exercises a little bit.  She does not smoke  cigarettes or drink alcohol.    FAMILY HISTORY:  Her mother had Parkinson's disease in her older years  and she does not know anything about her father's history.    REVIEW OF SYSTEMS:  She notes that she has a high tolerance for pain.  She has noted right breast aching that is gradually increasing with a  dull throbbing, this has gotten significantly worse over the last couple  of weeks and has made her very anxious.  She has been using ice packs.  She notes dry eyes.  She has no back pain.  Her energy level is good,  although as noted, she is not very physically active.  She is not  shortness of breath.  She has no cough or abdominal pain and no problems  with her balance.  The rest of her review of systems is negative in  detail.    PHYSICAL EXAMINATION:  GENERAL:  On physical examination, she is a healthy appearing woman in  no acute distress.  VITAL SIGNS:  Her weight is 77 kg, her blood pressure is 123/86, pulse  91, respirations 14 and she is saturating at 99% on room air and is  afebrile.  SKIN:  Her skin reveals no lesions.  HEENT : Her oropharynx is clear.  She is anicteric.  She has no cervical  adenopathy.  She has a 1 cm left \n supraclavicular or anterior cervical  node that feels benign.  LUNGS:  Her lungs are clear to auscultation bilaterally to auscultation  and percussion and she has no bony tenderness.  BREASTS:  Examination of her right breast reveals no masses.  She has a  0.5 cm soft and mobile right axillary lymph node.  Examination of her  left breast reveals a 5 x 5.5 cm mass that extends to underneath the  nipple, but originates at 12 o'clock.  She has a 1 cm palpable left  axillary lymph node.  CARDIAC:  Her cardiac exam is without murmur or gallops.  ABDOMEN:  Her abdomen is soft and nontender, without  hepatosplenomegaly.  EXTREMITIES:  Her extremities reveal no edema.    In summary, ***** ***** is a 59-year-old woman with a new diagnosis of  a clinical stage III lobular carcinoma of the left breast.  On PET/CT  scan there is evidence of local regional node involvement; therefore, we  ordered an ultrasound on the day of her visit, which she accomplished  the following week.  The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left  axillary lymph node which was abnormal in morphology, with a thickened  cortex and a fine needle aspiration was performed on the same day and is  pending.    I had a long discussion with ***** and the friend that accompanied her  to her visit.  We spoke for approximately 60 minutes about her treatment  options.  I had recommended that she consider pursuing neoadjuvant  hormone therapy to try and shrink this tumor before approaching it with  surgery and that this would give us a better idea of the hormone  responsiveness of this very large lobular cancer.  I also discussed with  her the hormone receptors and how they can indicate to us that these  tumors will be very sensitive to hormone therapy.    We talked about the availability of a randomized phase II clinical trial  that randomizes patients to the aromatase inhibitor letrozole, with or  without bevacizumab, the antiangiogenic antibody.  The main \n side effect  of the antibody for Ms. ***** would be hypertension.  We discussed this  at some length and she was extremely hesitant to consider enrolling in a  clinical trial and after receiving additional information and thinking  about it over the weekend, reiterated the fact that although she  appreciated the information that we provided to her, she was not  interested in participating in a clinical trial.  We talked abut  neoadjuvant hormone therapy versus taking an adjuvant approach.  She  clearly has surgically accessible disease if she approaches this with a  mastectomy.  Subsequently, she has responded to us that she would most  like to pursue a mastectomy up front for this cancer and not pursue  neoadjuvant treatment approach.  Therefore, I have referred Ms. *****  back to *****. ***** for consideration for surgery and then I will meet  with her after surgery to discuss adjuvant treatment options.    Thank you very much for allowing me to participate in the care of this  lovely woman.  Please feel free to contact me if you have any questions  regarding my evaluation or recommendations and we will make a final  decision regarding her adjuvant therapy following receipt of her  pathology from her upcoming surgery.    *****,    ***** *****. *****, M.D.  CLINICAL PROFESSOR OF MEDICINE  UCSF COMPREHENSIVE CANCER CENTER  ***** ***** ***** BREAST CARE CENTER    CARBON COPIES:              ***** ***** *****, MD                              ***** ***** *****,***** *****                              ***** ***** *****                                *****-***** *****, MD                              ***** *****          DICTATED BY:                 ***** *****. *****, MD *****                                       ____________________________    ATTENDING PHYSICIAN         ***** *****. *****, MD *****                                   Electronically Signed by                               ***** *****. *****, MD *****/*****/***** *****:***** *****                            \n    ____________________________    D:    *****/*****/***** *****:***** *****  T:    *****/*****/***** *****:***** ***** *****  *****#: *****  \n
 ```
 
 ---
@@ -13,90 +13,39 @@ UCSF ***** ***** FAMILY                        COMPREHENSIVE CANCER CENTER      
 ## Patient Letter (ChatGPT Baseline)
 
 Dear Patient,
-We are writing to help you understand your diagnosis and your treatment plan. 
-What is your diagnosis?
-You have breast cancer in your left breast. The type is called invasive lobular carcinoma. This means the cancer started in the milk-producing glands and has spread into nearby breast tissue.
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
-Your cancer is Stage III, which means it is a larger tumor and has spread to nearby lymph nodes, but it has not spread to distant organs.
-Key test results
 
+We are writing to explain your diagnosis and your treatment options. We know this is a lot to take in, and we are here to support you.
 
-Imaging showed a large mass in the left breast (about 5 cm in size).
+You have breast cancer in the left breast, called invasive lobular carcinoma. This means the cancer started in the breast and has spread into nearby tissue. Your cancer is hormone receptor positive (ER+/PR+), which means it grows with hormones like estrogen. It is HER2 negative, meaning it does not have extra HER2 protein.
 
+Your cancer is Stage III, which means it is larger and has spread to nearby lymph nodes (small glands that help fight infection).
 
-A biopsy confirmed breast cancer.
+Good news: your scans did not show cancer spread to distant organs.
 
+Treatment options:
+Your care team discussed two main approaches:
 
-PET scan showed cancer in nearby lymph nodes in the armpit and chest area.
+Surgery first (mastectomy) – to remove the breast tumor
+Hormone therapy before surgery (called neoadjuvant therapy) – to shrink the tumor
 
+You have chosen to move forward with surgery first.
 
-There was no spread to other organs, which is important.
+After surgery, your care team will review the results and discuss additional treatment (adjuvant therapy). This may include:
 
+Hormone therapy to block estrogen and lower the chance of cancer coming back
+Other treatments based on final results
 
-A thyroid nodule was found but was tested and is benign (not cancer).
+What to watch for:
+Please tell your care team if you notice:
 
+New or growing lumps
+Pain or swelling
+Fever or any new symptoms
 
-What is the treatment plan?
-Your doctors discussed different treatment options with you.
+We understand this is a difficult time. Please ask your care team any questions you have. We are here to support you every step of the way.
 
-
-One option was neoadjuvant hormone therapy (treatment before surgery to shrink the tumor).
-
-
-However, you prefer to have surgery first.
-
-
-The plan now is:
-
-
-Proceed with surgery (likely mastectomy) to remove the tumor
-
-
-After surgery, your doctors will recommend additional treatment (adjuvant therapy). This may include:
-
-
-Hormone therapy (medicine that blocks estrogen)
-
-
-Other treatments depending on your final results
-
-
-
-
-Next steps
-
-
-Meet with your surgeon to plan surgery
-
-
-Complete surgery
-
-
-Review final pathology after surgery
-
-
-Decide on further treatments with your oncology team
-
-
-What to watch for
-You reported some breast discomfort. Please tell your care team if you notice:
-
-
-Increased pain or swelling
-
-
-Changes in the breast or skin
-
-
-New symptoms such as fatigue or shortness of breath
-
-
-Final thoughts
-Your cancer has not spread to distant organs, which means treatment is focused on cure.
-You carefully reviewed your options and chose surgery first. Your care team will continue to guide you after surgery to choose the best next steps.
-Please write down any questions and discuss them with your doctors. We are here to support you.
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

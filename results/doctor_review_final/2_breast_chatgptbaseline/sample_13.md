@@ -14,58 +14,40 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to explain your diagnosis and the next steps in your care. We know this is a lot to take in, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have breast cancer in the right breast, called invasive ductal carcinoma. This means the cancer started in the milk ducts and spread into nearby tissue. Your cancer is hormone receptor positive (ER+/PR+), which means it grows with hormones like estrogen, and HER2 negative, meaning it does not have extra HER2 protein.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Tests show a tumor about 2 cm in size in your right breast. The cancer has also spread to nearby lymph nodes (small glands that help fight infection).
 
-The cancer has also spread to lymph nodes in your right armpit (axilla). This means it is node-positive breast cancer.
+Good news: your scans did not show cancer spread to other organs. A small spot in the brain was seen, but it is most likely a meningioma, which is usually a benign (non-cancer) growth.
 
-Key test results
+Next steps:
 
-Imaging showed a tumor about 2 cm in your right breast, with a small nearby area (satellite lesion).
-A biopsy confirmed breast cancer.
-A lymph node biopsy confirmed cancer spread to a lymph node.
-PET scan did not show spread to other organs.
-A brain scan showed a very small mass that is most likely a meningioma (a usually benign, non-cancer growth), and is unlikely to be cancer.
+You are scheduled for surgery (partial mastectomy and lymph node removal)
+After surgery, your care team will plan further treatment
 
-What is the treatment plan?
-You are scheduled for surgery (partial mastectomy and lymph node removal).
-
-After surgery, your treatment will likely include:
+Treatment plan after surgery may include:
 
 Chemotherapy (medicine to kill cancer cells)
-Hormone therapy (medicine that blocks estrogen)
-Possibly radiation therapy, depending on your final results
+Hormone therapy (medicine to block estrogen and reduce the chance of cancer coming back)
+Possibly radiation therapy, depending on final results
 
-These treatments are used together to lower the chance of the cancer coming back.
+You have also completed egg harvesting to help preserve fertility, which is an important step before treatment.
 
-Next steps
+What to watch for:
+Please tell your care team if you notice:
 
-Proceed with planned surgery
-Review final pathology after surgery
-Meet with your oncology team to plan further treatment
-Discuss timing of treatment and work planning
+New or growing lumps
+Pain or swelling in your arm
+Headaches or new symptoms
 
-What to watch for
-Right now, you are feeling well. After surgery and during treatment, please watch for:
+We understand you may be concerned about work and daily life during treatment. Please discuss this with your care team so we can help you plan ahead.
 
-Pain, swelling, or signs of infection
-New symptoms such as fatigue or shortness of breath
-Any changes that concern you
+You are not alone. Please ask any questions you have—we are here to help you every step of the way.
 
-Fertility and planning
-You have already completed an egg harvesting process. You may discuss future fertility options with your care team if needed.
-
-Final thoughts
-Your cancer is being treated with the goal of cure. Your care team will guide you through each step of treatment.
-
-Please write down any questions and discuss them with your doctors. We are here to support you.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

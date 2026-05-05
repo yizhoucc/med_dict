@@ -1,14 +1,16 @@
-# Breast Cancer — ChatGPT Baseline
+# Breast Cancer — ChatGPT Baseline (250-350 words)
+
 
 **Model:** ChatGPT (GPT-4o)
-**Condition:** ChatGPT baseline
-**Samples:** 20
+
+**Condition:** ChatGPT baseline (single prompt, 250-350 word target)
+
+**Samples:** 20 annotated breast cancer notes
 
 ---
 
 
 ### [Sample 1](sample_01.md)
-
 
 ### [Sample 2](sample_02.md)
 
@@ -25,6 +27,9 @@
 ### [Sample 6](sample_06.md)
 
 
+### [Sample 7](sample_07.md)
+
+
 ### [Sample 8](sample_08.md)
 
 
@@ -32,6 +37,9 @@
 
 
 ### [Sample 10](sample_10.md)
+
+
+### [Sample 11](sample_11.md)
 
 
 ### [Sample 12](sample_12.md)

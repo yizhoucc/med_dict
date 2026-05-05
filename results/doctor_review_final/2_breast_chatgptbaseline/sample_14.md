@@ -14,61 +14,44 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to explain your diagnosis and your treatment plan. We know this is a lot of information, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have breast cancer in the right breast, called invasive ductal carcinoma. This means the cancer started in the milk ducts and spread into nearby tissue. Your cancer is hormone receptor positive (ER+/PR+), meaning it grows with hormones like estrogen, and HER2 negative, meaning it does not have extra HER2 protein.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Your tumor is about 1–2 cm in size and is considered low risk based on a special test (MammaPrint).
 
-The tumor is about 1 to 2.2 cm in size and is low grade, which means it tends to grow more slowly. A special test (Mammaprint) shows low risk, meaning a lower chance of the cancer coming back.
+Treatment plan:
+Because your cancer depends on hormones, the main treatment is hormone (endocrine) therapy:
 
-Key test results
+Ovarian suppression (medicine like goserelin to stop the ovaries from making estrogen)
+Followed by an aromatase inhibitor (medicine like letrozole that lowers estrogen levels)
 
-Imaging found a small mass in your right breast.
-Biopsy confirmed breast cancer.
-No cancer was found in lymph nodes on exam.
-Genetic testing was negative.
+These treatments help slow or stop cancer growth.
 
-What is the treatment plan?
-Because surgery has been delayed, your doctors recommend starting hormone therapy first. This helps control the cancer until surgery can be done.
+You are also planning to have surgery (bilateral mastectomy with reconstruction).
 
-The plan includes:
-
-Ovarian suppression (goserelin) – a medicine that stops the ovaries from making estrogen
-Letrozole – a medicine that lowers estrogen levels
-
-These medicines work together to slow or stop cancer growth.
-
-Surgery will still be an important part of your care. You are planning for a bilateral mastectomy with reconstruction when it can be scheduled.
-
-Next steps
+Next steps:
 
 Start ovarian suppression now
-Start letrozole in about 2 weeks
-Check labs, including estrogen levels
-Follow up in about 1 month
-Continue planning for surgery
+Begin hormone therapy about 2 weeks later
+Finalize timing of surgery with your surgical team
 
-What to watch for
-With hormone therapy, you may notice:
+What to watch for:
+With hormone therapy, please tell your care team if you notice:
 
 Hot flashes
 Mood changes
-Joint aches
+Joint or muscle pain
+Changes in your menstrual cycle
 
-Please tell your care team if you have any new or worsening symptoms.
+Your care team also discussed that hormone therapy is usually taken for about 5 years, as shorter treatment may not be as effective.
 
-Other considerations
-You discussed treatment choices in detail with your care team, including options for hormone therapy and surgery. Your doctors will continue to guide you through these decisions.
+We understand this is a stressful time. Please talk with your care team about any concerns, including how treatment may affect your mood and daily life.
 
-Final thoughts
-Your cancer is being treated early, and your care team is working to control it while planning surgery.
+You are not alone. We are here to support you every step of the way.
 
-Please write down any questions and discuss them with your doctors. We are here to support you.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

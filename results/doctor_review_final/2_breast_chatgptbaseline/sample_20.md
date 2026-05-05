@@ -14,68 +14,48 @@ New patient Visit  Breast Cancer *****    ***** ***** ***** 07/01/2019        NA
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to explain your diagnosis and your treatment plan. We know this is a lot to take in, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in both breasts (bilateral breast cancer).
+You have breast cancer in both breasts (bilateral breast cancer). This means cancer is present in the right and left breasts.
 
-Right breast: The cancer is hormone receptor positive (ER+ and PR+) and HER2 positive. HER2 positive means the cancer has a protein that can make it grow faster but can also be treated with special targeted drugs.
-Left breast: The cancer is hormone receptor positive (ER+ and PR+) and HER2 negative.
+In the right breast, the cancer is hormone receptor positive (ER+/PR+) and HER2 positive.
+In the left breast, the cancer is hormone receptor positive (ER+/PR+) and HER2 negative.
 
-The tumors are large, about 7.3 cm on the right and 6 cm on the left.
+The tumors are large, measuring about 7 cm on the right and 6 cm on the left.
 
-There are also findings on scans of small spots in the lungs and liver, but it is not yet confirmed if these are cancer.
+Scans have shown small spots in the lungs and liver, but it is not yet confirmed if these are cancer. More testing is needed.
 
-Key test results
-
-Imaging shows large tumors in both breasts.
-Pathology confirms breast cancer on both sides.
-CT scan shows small nodules in the lungs and liver, but more testing is needed to confirm what they are.
-
-What is the treatment plan?
-Your doctors recommend starting systemic therapy. This means treatment that works throughout your whole body.
-
-The plan includes:
+Treatment plan:
+Your care team recommends starting with systemic therapy (treatment that goes through the whole body):
 
 Chemotherapy (medicine to kill cancer cells)
-Targeted therapy for HER2-positive cancer (such as trastuzumab and pertuzumab)
+Targeted therapy (drugs like trastuzumab and pertuzumab that specifically target HER2 on the right-sided cancer)
 
-These treatments are given together because they work well for HER2-positive cancer.
+These treatments are usually given before surgery to shrink the tumors.
 
-Treatment will likely last for several months. The HER2-targeted therapy may continue for up to 1 year.
+After this, your plan may include:
 
-After this, treatment may include:
-
-Surgery, depending on how the tumors respond
+Surgery, depending on how the cancer responds
 Radiation therapy
-Hormone therapy (medicine that blocks estrogen)
+Hormone therapy (to block estrogen), which will start after chemotherapy and radiation
 
-Next steps
+Next steps:
 
-PET/CT scan to better evaluate the lung and liver spots
-Heart test (echocardiogram) before starting treatment
-Possible placement of a port (a small device under the skin for treatment)
-Start chemotherapy soon
-Follow up after a few cycles to check response
+Repeat imaging (such as PET/CT)
+Heart test (echocardiogram) before treatment
+Possible placement of a port (a small device under the skin to give medicine)
 
-What to watch for
-During treatment, you may notice:
+What to watch for:
+Please tell your care team if you have:
 
-Fatigue (feeling very tired)
-Hair loss
-Nausea (upset stomach)
-Risk of infection
-Possible heart effects from HER2-targeted therapy (your heart will be monitored)
+Fever or signs of infection
+Severe fatigue
+New pain or symptoms
 
-Please tell your care team if you have fever, new pain, shortness of breath, or any new symptoms.
+We understand this is overwhelming. Please ask any questions you have. We are here to support you every step of the way.
 
-Final thoughts
-Your care team is starting treatment to shrink the cancer and control the disease. The next steps will depend on how the cancer responds.
-
-It is normal to feel overwhelmed. Please ask questions and share your concerns with your care team. We are here to support you every step of the way.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

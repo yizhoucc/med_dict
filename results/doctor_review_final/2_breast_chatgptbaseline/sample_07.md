@@ -14,63 +14,47 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
 
 Dear Patient,
 
-We are writing to help you understand your current condition and treatment plan.
+We are writing to explain your current health and treatment plan. We know this is a lot, and we are here to support you.
 
-What is your diagnosis?
-You have metastatic breast cancer. This means the breast cancer has spread to other parts of your body. In your case, it has spread to the liver and lymph nodes (small glands that help fight infection).
-
-Your cancer is triple negative, which means it does not use estrogen (ER), progesterone (PR), or HER2 to grow.
+You have metastatic breast cancer, which means the cancer has spread to other parts of the body, including the liver and lymph nodes (small glands that help fight infection). Your breast cancer is triple negative, meaning it does not use estrogen, progesterone, or HER2 to grow.
 
 You also have a condition called Lynch syndrome, which is a genetic condition that increases the risk of certain cancers.
 
-Key updates from your visit
+Current treatment:
+You are receiving:
 
-Your recent scans show that the cancer has grown (progressed).
-Your lab results are okay to continue treatment.
-You are currently receiving chemotherapy and immunotherapy (treatment that helps your immune system fight cancer).
+Chemotherapy (nab-paclitaxel) – medicine that kills cancer cells
+Immunotherapy (pembrolizumab) – a treatment that helps your immune system fight cancer
 
-What is the treatment plan?
-You will continue your current treatment, which includes:
+Your care team reviewed your recent scans. These show that the cancer has grown or progressed, so your current treatment will continue as long as it is helping and side effects are manageable.
 
-Nab-paclitaxel (Abraxane) – a type of chemotherapy
-Pembrolizumab – an immunotherapy drug
+How you are feeling:
+You have reported:
 
-You will stay on this treatment as long as it is working and side effects are manageable.
-
-You will have repeat scans every 3 to 4 months, or sooner if you have new symptoms.
-
-Next steps
-
-Continue scheduled treatments
-Get imaging scans based on symptoms or at regular intervals
-Follow up with your care team every few weeks
-
-What to watch for
-You reported some symptoms during your visit, including:
-
-Heartburn (GERD), which improves with medication
-Nausea
+Heartburn (GERD), helped by medication
+Nausea, helped by medication
 Fatigue for a few days after treatment
-Pain in your shoulder and lower back (now improved or stable)
-New muscle aches in your arms and legs
-Numbness or tingling in your fingers and toes
-Leg cramps at night
+Some pain, which has improved in places
+Tingling in fingers and toes (nerve irritation from treatment)
 
-These may be side effects of treatment. Please tell your care team if they get worse or if you have new symptoms.
+Next steps:
 
-Other important care
+Continue current treatment
+Repeat scans every 3–4 months, or sooner if needed
+Place a port (a small device under the skin to help give treatment)
 
-You may need a port (a small device under the skin) to help with treatment
-You are being treated for pain with medications as needed
-Your care team is also monitoring for side effects like nerve symptoms (neuropathy)
+What to watch for:
+Please tell your care team if you have:
 
-Final thoughts
-Your care team is closely monitoring your response to treatment. The goal is to control the cancer and help you feel as well as possible.
+New or worsening pain
+Severe nausea or vomiting
+Fever or signs of infection
+Increasing numbness or weakness
 
-Please bring any questions or concerns to your care team. We are here to support you.
+We understand this is challenging. Please talk with your care team about any questions or concerns. We are here to help you every step of the way.
 
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 
