@@ -19,6 +19,8 @@
 
 **Critical rule:** If the letter states a receptor status, staging, or treatment decision that contradicts what the treating physician wrote in the A/P, this is a major error regardless of whether the letter's claim could be technically defensible from raw data. The physician's clinical judgment takes priority.
 
+**Example:** A pathology report states "HER2 positive (IHC 1+; FISH ratio 2.1)" — a borderline result (IHC 1+ is typically negative; FISH 2.1 barely crosses the 2.0 threshold). The physician's treatment plan does not include HER2-targeted therapy (e.g., trastuzumab), indicating a clinical judgment of HER2-negative/triple-negative. A letter that states "HER2 positive" based on the pathology report contradicts the physician's clinical assessment and scores ACC ≤ 2, even though the pathology text literally says "positive." The treating physician's clinical behavior (treatment selection) is the authoritative interpretation of ambiguous test results.
+
 ---
 
 ## Dimension 2: HALLUCINATION-FREE (Weight: Highest)
