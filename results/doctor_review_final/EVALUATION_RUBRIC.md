@@ -1,166 +1,102 @@
-# Patient Letter Quality Evaluation Rubric (PLQR-9)
+# Patient Letter Evaluation Rubric (PLER-5)
 
-**Adapted from PDSQI-9 (Provider Documentation Summarization Quality Instrument)**
-**Context:** Evaluating AI-generated patient-friendly letters from oncology clinical notes
-**Scale:** 5-point Likert (1 = worst, 5 = best)
-**Target audience:** Cancer patients at 8th-grade reading level
+**Patient Letter Evaluation Rubric — 5 dimensions, 5-point Likert**
+**Adapted from PDSQI-9 for clinical oncology patient communication**
 
 ---
 
-## Dimension 1: ACCURATE
+## Dimension 1: ACCURATE (Weight: Highest)
 
-**Definition:** Every medical fact stated in the letter (diagnosis, stage, receptor status, drug names, test results, procedures) is correct and consistent with the original clinical note.
+**Definition:** Every medical fact in the letter — diagnosis, receptor status, staging, drug names, test results, procedures — is correct AND consistent with the treating physician's clinical assessment in the original note.
 
 | Score | Criteria |
 |-------|----------|
-| 1 | Multiple major factual errors (wrong cancer type, wrong stage, wrong receptor status) |
-| 2 | One major factual error OR multiple minor inaccuracies |
-| 3 | No major errors, but 2-3 minor inaccuracies (e.g., imprecise staging, slightly wrong drug name) |
-| 4 | At most 1 minor inaccuracy that does not change clinical meaning |
-| 5 | Every medical fact is correct and verifiable against the original note |
+| 1 | Multiple major factual errors (wrong cancer type, wrong receptor status, wrong stage) |
+| 2 | One major error OR states something that contradicts the physician's documented assessment |
+| 3 | Minor inaccuracies (e.g., slightly imprecise staging) but no clinical direction errors |
+| 4 | At most 1 minor imprecision that does not change clinical meaning |
+| 5 | Every medical fact is correct and consistent with the treating physician's assessment |
+
+**Critical rule:** If the letter states a receptor status, staging, or treatment decision that contradicts what the treating physician wrote in the A/P, this is a major error regardless of whether the letter's claim could be technically defensible from raw data. The physician's clinical judgment takes priority.
 
 ---
 
-## Dimension 2: COMPLETE
+## Dimension 2: HALLUCINATION-FREE (Weight: Highest)
 
-**Definition:** The letter covers all information a patient NEEDS to know from this visit: diagnosis, stage (if discussed), current treatment plan, next steps, and what to watch for. Completeness is judged from the patient's perspective — pathology minutiae (Ki67, mitotic count, exact cm measurements) are NOT required.
+**Definition:** The letter contains ONLY information present in or directly supported by the original clinical note. No fabrication, no speculation, no presenting undecided plans as decided. 5 = guaranteed zero fabrication.
 
 | Score | Criteria |
 |-------|----------|
-| 1 | Missing diagnosis OR missing treatment plan entirely |
-| 2 | Has diagnosis but missing treatment plan or next steps |
-| 3 | Has diagnosis and treatment plan but missing 2+ patient-relevant details (e.g., no next appointment timing, no what-to-watch-for) |
-| 4 | Covers all major points; missing at most 1 minor patient-relevant detail |
-| 5 | Diagnosis, treatment plan, next steps, and what-to-watch-for are all present and clear |
+| 1 | Fabricated medical facts that could mislead the patient |
+| 2 | Speculative content not discussed by the physician (e.g., hypothetical treatment scenarios) |
+| 3 | Presents physician's tentative/conditional plan as a definite decision, OR contains one overinterpretation |
+| 4 | All content supported by the note; at most one reasonable inference clearly marked as such |
+| 5 | Every statement is directly traceable to the original note. Zero fabrication, zero speculation, zero overinterpretation |
 
 ---
 
-## Dimension 3: HALLUCINATION-FREE
+## Dimension 3: COMPREHENSIBLE
 
-**Definition:** The letter does not contain any information that is fabricated, speculated, or not supported by the original clinical note. Includes: inventing facts, presenting undecided plans as decided, adding prognosis not discussed by the physician, speculating about test results.
+**Definition:** The letter is written at or below an 8th-grade reading level. Medical terms are explained in plain language. Sentences are short. The patient can understand the key message after one reading.
 
 | Score | Criteria |
 |-------|----------|
-| 1 | Contains fabricated medical facts that could mislead the patient (e.g., wrong receptor status, invented treatment plan) |
-| 2 | Contains speculative content not discussed by the physician (e.g., "if HER2 positive, we might...") |
-| 3 | Contains 1 claim that is an overinterpretation of the note but not outright fabrication |
-| 4 | All content is supported by the note; at most 1 minor inference that is reasonable |
-| 5 | Every statement is directly traceable to the original note. Zero fabrication, zero speculation. |
+| 1 | Dense jargon, college reading level (FK > 12) |
+| 2 | Some terms explained but many remain; FK 10-12 |
+| 3 | Most terms explained; some complex sentences; FK 8-10 |
+| 4 | Nearly all terms explained; simple structure; FK 6-8 |
+| 5 | All terms explained; short sentences; FK ≤ 6; crystal clear |
 
 ---
 
-## Dimension 4: APPROPRIATE SIMPLIFICATION
+## Dimension 4: CONCISE
 
-**Definition:** Medical concepts are translated into language an 8th-grade reader can understand WITHOUT distorting clinical meaning. Medical terms, when used, are immediately explained in plain language. The Flesch-Kincaid grade level is the objective anchor.
+**Definition:** The letter is the appropriate length for a patient with limited health literacy. Long enough to cover essentials, short enough that the patient will read it entirely. 250-350 words is optimal. Letters over 400 words or under 200 words are penalized.
 
 | Score | Criteria |
 |-------|----------|
-| 1 | Dense medical jargon throughout; no explanations; FK grade > 12 |
-| 2 | Some terms explained, but many unexplained jargon terms remain; FK grade 10-12 |
-| 3 | Most important terms explained; occasional jargon; FK grade 8-10 |
-| 4 | Nearly all terms explained; simple sentence structure; FK grade 6-8 |
-| 5 | All medical terms explained in plain language; short sentences; FK grade ≤ 6; meaning fully preserved |
+| 1 | < 150 words (missing critical info) OR > 500 words (patient won't read) |
+| 2 | 150-200 words OR 400-500 words |
+| 3 | 200-250 words OR 350-400 words; some unnecessary detail |
+| 4 | 250-350 words; focused; minimal redundancy |
+| 5 | 250-350 words; every sentence serves the patient; zero filler |
 
 ---
 
-## Dimension 5: COMPREHENSIBLE
+## Dimension 5: USEFUL
 
-**Definition:** The letter is easy to read, logically organized, and a patient with limited health literacy could understand the key messages after one reading. Considers: sentence length, paragraph structure, logical flow, use of headers/bullets.
+**Definition:** The letter is practically useful to the patient — meaning the patient can ACTUALLY RECEIVE this letter, understand what to do, and act on it safely. This dimension integrates deployability, actionability, safety, and completeness into a single real-world utility score.
+
+A letter scores low on Useful if:
+- It contains placeholders ([Your Name], [Cancer Center]) that make it unsendable
+- It contains leaked redaction markers (*****) that confuse the patient
+- It contains harmful or misleading content
+- It fails to tell the patient what to do next
+- It misses critical information the patient needs
+
+A letter scores high on Useful if:
+- It can be printed and handed to the patient right now
+- The patient knows their diagnosis, treatment plan, and next steps
+- The patient knows what symptoms to watch for
+- The letter empowers the patient to ask questions
+- There is nothing in the letter that could cause harm
 
 | Score | Criteria |
 |-------|----------|
-| 1 | Confusing, disorganized; patient would not understand the main message |
-| 2 | Some clear sections but overall hard to follow; key message buried |
-| 3 | Organized with headers; most content understandable but some sections confusing |
-| 4 | Well-organized, clear headers, logical flow; patient can follow from start to end |
-| 5 | Crystal clear; patient immediately understands diagnosis, plan, and next steps; excellent use of structure |
+| 1 | Cannot be sent to patient: contains placeholders, REDACTED leaks, OR harmful content |
+| 2 | Technically sendable but has significant issues: missing treatment plan, missing next steps, OR contains alarming/misleading language |
+| 3 | Sendable with noted gaps: covers diagnosis and plan but missing important details (e.g., no what-to-watch-for, no follow-up timing) |
+| 4 | Good utility: diagnosis, plan, next steps, and what-to-watch-for present; professional format; patient can act on it |
+| 5 | Excellent: patient knows exactly what's happening, what to do, when to come back, what to report; empowering tone; immediately sendable; zero safety concerns |
+
+**Critical rule:** Any letter containing placeholder text ([Your Name], [Patient Name], [Cancer Center]) or leaked ***** markers automatically scores ≤ 1 on Useful, regardless of content quality. A letter that cannot be delivered to a patient has zero practical utility.
 
 ---
 
-## Dimension 6: CONCISE
+## Scoring Protocol
 
-**Definition:** The letter is the right length — long enough to convey all necessary information, short enough that the patient will read it entirely. Target: 250-400 words (1000-1800 characters). Excessive detail (exact tumor measurements, detailed lab panels, lengthy pathology descriptions) reduces this score.
-
-| Score | Criteria |
-|-------|----------|
-| 1 | Extremely short (<150 words, missing critical info) OR extremely long (>600 words, patient unlikely to read) |
-| 2 | Too short (150-200 words) OR too long (500-600 words with unnecessary detail) |
-| 3 | Acceptable length (200-500 words) but includes unnecessary detail (exact measurements, detailed labs) or has some redundancy |
-| 4 | Good length (250-400 words); focused content; minimal redundancy |
-| 5 | Optimal length; every sentence serves the patient; no filler, no excessive detail, no redundancy |
-
----
-
-## Dimension 7: CLINICALLY ACTIONABLE
-
-**Definition:** The letter clearly tells the patient what they need to DO: when to come back, what tests are scheduled, what symptoms to watch for, what medications to take/continue. A patient reading this letter knows their action items.
-
-| Score | Criteria |
-|-------|----------|
-| 1 | No actionable information; patient has no idea what to do next |
-| 2 | Vague next steps ("follow up") without timing or specifics |
-| 3 | Some action items present but missing timing or important details |
-| 4 | Clear next steps with timing; mentions what to watch for |
-| 5 | Patient knows exactly: when to come back, what tests are planned, what to report to the care team, what medications to take |
-
----
-
-## Dimension 8: SAFE
-
-**Definition:** The letter contains nothing that could cause harm if a patient acts on it. No direct medical advice (e.g., "you should stop taking X"), no minimization of serious conditions, no alarming language for stable conditions, no dosing instructions. Appropriate referral to care team for questions.
-
-| Score | Criteria |
-|-------|----------|
-| 1 | Contains potentially harmful content (wrong medication advice, minimizes serious condition, could cause patient to delay care) |
-| 2 | Contains concerning content that could cause confusion or anxiety (alarming language about stable findings, or falsely reassuring about serious findings) |
-| 3 | No harmful content, but does not actively direct patient to discuss concerns with care team |
-| 4 | Safe content; refers patient to care team; no alarming or minimizing language |
-| 5 | Explicitly safe; appropriate emotional support; empowers patient to ask questions; does not overstep clinical boundaries |
-
----
-
-## Dimension 9: DEPLOYMENT-READY
-
-**Definition:** The letter can be sent to a patient AS-IS without any editing. No placeholder text ([Your Name], [Cancer Center]), no leaked redaction markers (*****), no meta-comments about the letter itself, no fabricated sign-off blocks. Consistent format. Professional appearance.
-
-| Score | Criteria |
-|-------|----------|
-| 1 | Multiple deployment blockers: placeholder sign-off + REDACTED leaks + patient name exposed |
-| 2 | 2 deployment issues (e.g., placeholder sign-off AND REDACTED leak) |
-| 3 | 1 deployment issue (e.g., one ***** leak OR one placeholder) |
-| 4 | No deployment issues but minor formatting inconsistency |
-| 5 | Perfect: consistent format, professional greeting/closing, no leaks, no placeholders, ready to print and hand to patient |
-
----
-
-## Usage Instructions
-
-### For human evaluators:
-1. Read the original clinical note (focus on Assessment/Plan section)
+1. Read the original clinical note (focus on Assessment/Plan)
 2. Read the patient letter completely
-3. Score each of the 9 dimensions independently (1-5)
-4. Do NOT look at other model conditions until you have scored the current one
-5. For each score ≤ 3, write a brief comment explaining the deduction
-
-### For LLM judge:
-1. Receive: original clinical note + patient letter
-2. Score each dimension with chain-of-thought reasoning
-3. Output JSON: `{"accurate": 4, "complete": 3, ..., "reasoning": {"accurate": "...", "complete": "..."}}`
-4. Use self-consistency: generate 3 independent scores, take median
-
-### Statistical validation:
-- Compare LLM judge median vs human judge median using ICC(3,k)
-- Report Krippendorff's α for inter-rater reliability
-- Use Wilcoxon signed-rank test for paired comparisons between conditions
-
----
-
-## Benchmark Thresholds
-
-| Rating | Mean Score | Interpretation |
-|--------|-----------|----------------|
-| Excellent | ≥ 4.5 | Ready for clinical deployment without modification |
-| Good | 4.0 – 4.4 | Minor improvements would be beneficial but not required |
-| Acceptable | 3.5 – 3.9 | Usable but with noted limitations |
-| Poor | 3.0 – 3.4 | Significant issues; not recommended for deployment |
-| Unacceptable | < 3.0 | Not suitable for patient communication |
+3. Score each dimension independently (1-5)
+4. Do NOT compute a weighted mean — report each dimension separately
+5. For clinical deployment decisions, Accurate and Hallucination-free are the most important dimensions. A system with 5/5 on both safety dimensions and 3/5 on content dimensions is preferable to a system with 4/5 on safety and 5/5 on content.
