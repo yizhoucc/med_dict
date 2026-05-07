@@ -110,17 +110,30 @@ Subjective:    This is a very pleasant 63-year-old African American woman from *
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging shows early signs of the cancer coming back. There is a growing spot in your liver and a new small spot, which might mean the cancer is getting worse. Also, there is swelling around some blood vessels in your liver, which could be due to the surgery or the cancer. A small growth in your uterus needs more checking to make sure it’s not cancer. You’ve lost weight since your surgery.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your medications or treatments.
+
 **What is the plan going forward?**
+
 We will repeat your scans in 2 months to check on the spots in your liver and the growth in your uterus. If needed, we will take a sample to confirm if it’s cancer. Your next visit will be in 2 months for these scans.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

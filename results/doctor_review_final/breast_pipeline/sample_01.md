@@ -101,17 +101,30 @@ ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of b
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with an early-stage (Stage I-II) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or the protein HER2. The cancer is a type called invasive ductal carcinoma, which started in the milk ducts. The tumor is 3.6 cm in size and was removed with a simple mastectomy. The edges of the removed tissue are clean, but one of the lymph nodes under your arm had cancer. No cancer was found in the skin or nipple. Your blood tests show low hemoglobin and hematocrit levels, and slightly high glucose and creatinine levels.
+
 **What treatment or medication changes were made?**
+
 No specific medication changes were made during this visit.
+
 **What is the plan going forward?**
+
 You will have a PET/CT scan to check if the cancer has spread to other parts of your body. After the results of the PET/CT, we will discuss the next steps in your treatment plan.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

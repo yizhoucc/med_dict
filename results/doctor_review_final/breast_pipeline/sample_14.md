@@ -90,18 +90,31 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consultation regarding your newly diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma (cancer that started in the milk ducts). It is strongly positive for estrogen receptor (ER) and progesterone receptor (PR), and the HER2 status is uncertain. The cancer is small, measuring about 2 cm, and located 8 cm from the nipple in your right breast. No cancer has spread to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start a medication called goserelin today. In about two weeks, you will begin another medication called letrozole. These medications are used to treat breast cancer. Your psychiatrist will also review the interactions between Effexor, Gabapentin, and Lamictal, which you are taking for your bipolar II disorder.
+
 **What is the plan going forward?**
+
 You are scheduled to have a bilateral mastectomy with reconstruction. This means both breasts will be removed and rebuilt. You will have blood tests today to check your estradiol levels. Your next visit will be in one month, depending on the plans for your surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

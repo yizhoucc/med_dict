@@ -102,17 +102,30 @@ I had the pleasure of seeing ***** ***** for follow up of pancreatic adenocarcin
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 Recent imaging shows that the cancer in your pancreas has grown and spread, causing a blockage in your small intestine and affecting your bile duct. Your bilirubin level is also higher, indicating liver issues.
+
 **What treatment or medication changes were made?**
+
 No specific medication changes were made during this visit. You continue to receive supportive medications like ondansetron and tramadol.
+
 **What is the plan going forward?**
+
 The focus is now on palliative care to manage symptoms and improve your quality of life. We will monitor your condition closely, including checking your bilirubin and liver function. We will also review your small bowel X-ray to see if additional stent placement is possible. You will be followed up with a phone call.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

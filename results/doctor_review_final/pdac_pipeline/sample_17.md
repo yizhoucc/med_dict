@@ -90,17 +90,30 @@ This is an independent visit     Patient ID:  ***** ***** is a 58 y.o. male with
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging results from February 2nd show that your cancer has stayed the same size. Recent lab results show that your Carcinoembryonic Antigen (a tumor marker) and Cancer Antigen 19-9 (another tumor marker) levels are still high but have decreased compared to previous readings. Physically, you are stable with no new issues.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your treatment or medications.
+
 **What is the plan going forward?**
+
 You will have a new CT scan in July 2019 to check on your cancer again. Your next visit is scheduled for June 2019.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -291,17 +291,29 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with an early-stage (Stage I-II) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or the protein HER2. The cancer is a type called invasive ductal carcinoma, which started in the milk ducts. The tumor is 3.6 cm in size and was removed with a simple mastectomy. The edges of the removed tissue are clean, but one of the lymph nodes under your arm had cancer. No cancer was found in the skin or nipple. Your blood tests show low hemoglobin and hematocrit levels, and slightly high glucose and creatinine levels.
+
 **What treatment or medication changes were made?**
+
 No specific medication changes were made during this visit.
+
 **What is the plan going forward?**
+
 You will have a PET/CT scan to check if the cancer has spread to other parts of your body. After the results of the PET/CT, we will discuss the next steps in your treatment plan.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -455,18 +467,30 @@ UCSF Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma. The cancer has spread to your liver and chest wall. A recent PET/CT scan showed that a nodule in your chest wall has grown, while some lymph nodes have decreased in size. An MRI of your brain showed no signs of cancer.
+
 **What treatment or medication changes were made?**
+
 You started taking zoledronic acid to help with your osteoporosis and to prepare for starting an aromatase inhibitor.
+
 **What is the plan going forward?**
+
 You will start an aromatase inhibitor therapy either alone or on a clinical trial called CALGB 4503 randomized to placebo or bevacizumab on January 25. You will also have a PET/CT scan and an MRI of your brain to evaluate your falling spells. You will return to the clinic on January 25 to begin your new treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -629,17 +653,29 @@ Please remember to discuss any questions or concerns with your care team. They a
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a rare type of breast cancer called spindle cell metaplastic carcinoma. The cancer does not have proteins called ER, PR, or HER2. The tumor is 3.5 x 3.2 x 2.6 cm and has two smaller masses nearby. Imaging shows a cancerous mass in your right breast, but no signs of the cancer spreading to other parts of your body. Your physical exam shows a mass in your right breast.
+
 **What treatment or medication changes were made?**
+
 You will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you join the I-SPY 2 clinical trial, you may also receive an experimental agent along with paclitaxel. You have agreed to have a Medi-port placed for easier chemotherapy administration.
+
 **What is the plan going forward?**
+
 You will start chemotherapy in the first week of February. You will have a follow-up after the initial chemotherapy session and further assessments based on how you respond to the treatment. You will also have genetic testing with a gene panel to learn more about your cancer. Your labs will be checked again to monitor your creatinine and Alk phos levels. Depending on your surgical choice and final pathology, you may need radiation therapy.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -798,18 +834,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new patient visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive ductal carcinoma, which means the cancer started in the milk ducts and does not have proteins that respond to hormones. The cancer is at stage III. The latest imaging shows that a lump in your right breast has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No cancer has spread to other parts of your body. During the physical exam, a firm lump was found in your right breast.
+
 **What treatment or medication changes were made?**
+
 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which will happen every week for 12 weeks.
+
 **What is the plan going forward?**
+
 You will have a port placed soon to prepare for chemotherapy. You will start chemotherapy with Taxol as early as next Wednesday or the following week. You will need to visit the clinic for cycles 1, 2, 5, 8, and 12. You will have a mammogram to check the progress of your treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -967,17 +1015,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your recent diagnosis of bilateral breast cancer.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with two types of breast cancer: a more aggressive type in your left breast and a less aggressive type in your right breast. The left breast cancer is a grade 3 invasive ductal carcinoma (cancer that started in the milk ducts) with some features suggesting it might have spread slightly beyond the original tumor. The right breast cancer is a grade 1 invasive ductal carcinoma with some abnormal cells around the milk ducts. Both cancers are sensitive to hormones and do not have a protein called HER2.
+
 **What treatment or medication changes were made?**
+
 You will start a treatment plan that includes chemotherapy with docetaxel and cyclophosphamide for four cycles. This is to help reduce the chance of the cancer coming back. You will also take an aromatase inhibitor (a medication that blocks the production of estrogen) for at least five years to further reduce the risk of the cancer returning. Additionally, you will take calcium and vitamin D supplements to help maintain your bone health.
+
 **What is the plan going forward?**
+
 You will undergo radiation therapy to treat the areas where the cancer was removed. You will also continue taking an aromatase inhibitor for at least five years. A DEXA scan (a test to measure bone density) will be done to check your current bone health. Your tumor will be tested using a tool called Oncotype DX RS to help guide your treatment decisions.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1132,19 +1192,31 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma (IDC), which means the cancer started in the milk ducts. The cancer is HR-negative and HER2-positive, and it has spread to your bones.
+
 **What treatment or medication changes were made?**
+
 You will start new medications: weekly paclitaxel, trastuzumab every three weeks, and pertuzumab every three weeks. These medications are used to treat HER2-positive breast cancer.
+
 **What is the plan going forward?**
+
 You will have an MRI of your pelvis and neck to check for any changes in your cancer. You will also have an echocardiogram (a heart ultrasound) to monitor your heart function. A port will be placed to make it easier to give you medications. You will also have some routine blood tests.
 You are referred to have chemotherapy teaching sessions to prepare you for your treatment.
 If needed, you can receive radiation therapy to treat the cancer in your bones.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1308,18 +1380,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging studies show that your cancer has progressed. Specifically, a lesion in your liver has grown larger, and there are new areas of cancer activity in other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will continue taking abraxane and pembrolizumab. You will also restart xarelto, a blood thinner, after your port placement. You will take medications to manage nausea, pain, and to prevent constipation.
+
 **What is the plan going forward?**
+
 You will have a port placed soon to make it easier to receive your treatments. You will have a PET/CT scan to monitor your cancer. Your TSH levels will be checked. You will return to the clinic in 2 weeks, then every 3 weeks.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1477,17 +1561,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You recently had surgery to remove your breast cancer, which included removing both breasts and checking the lymph nodes under your left arm. The cancer was a type that started in the milk ducts and was grade 2. The doctors found that the cancer had spread to two lymph nodes. No new imaging findings were noted. Your surgical wounds are healing well, and you have some numbness near your left armpit and elbow.
+
 **What treatment or medication changes were made?**
+
 You agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin on October 18, 2017.
+
 **What is the plan going forward?**
+
 Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. A port will be placed for IV access. You are referred to genetics for counseling and testing due to your family history of breast cancer. Your next step is to start chemotherapy on October 18, 2017.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1641,17 +1737,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your breast cancer and to establish care.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has now spread to your left breast and left cervical lymph node, making it a stage IV cancer. Imaging showed a mass in your left breast and lymph nodes with increased metabolic activity. You also have a palpable mass in your left breast and another in your left neck. There is discoloration of the skin on your left breast.
+
 **What treatment or medication changes were made?**
+
 You will start on goserelin, which suppresses the ovaries, followed by an aromatase inhibitor (AI). These medications help control hormone levels that can fuel the growth of certain types of breast cancer.
+
 **What is the plan going forward?**
+
 You will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will return to the clinic two weeks after starting goserelin.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1811,17 +1919,29 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consultation regarding your newly diagnosed right breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with a grade 2 invasive ductal carcinoma (cancer that started in the milk ducts) in your right breast. The cancer is estrogen receptor positive (ER+), progesterone receptor positive (PR+), and does not have a protein called HER2. The cancer has spread to one lymph node under your right armpit but has not spread to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start neoadjuvant chemotherapy (treatment given before surgery to shrink the cancer) on May 1st, 2017. This will include weekly paclitaxel for 12 weeks followed by AC every 2-3 weeks with Neulasta support. After surgery, you will need hormone therapy, which includes suppressing your ovaries. You are also considering the use of cold caps during chemotherapy to reduce hair loss.
+
 **What is the plan going forward?**
+
 You will start neoadjuvant chemotherapy on May 1st, 2017. A port will be placed either on the start of therapy or one week later. You will have a mammogram and PET scan on May 1st, 2017. Labs will be done on Thursday. Mammoprint results are expected on Thursday of this week.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -1967,18 +2087,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a discussion about your left breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ductal carcinoma in situ (DCIS), which means the cancer is confined to the milk ducts and has not spread beyond them. The cancer is ER+ and PR+, meaning it responds to hormones. The cancer is located in the left breast and measures 1.8 cm. The edges of the removed tissue show that some cancer cells might still be present, so further treatment is needed.
+
 **What treatment or medication changes were made?**
+
 A prescription for tamoxifen has been sent to your pharmacy. Tamoxifen is a medication used to reduce the risk of the cancer coming back. You have been instructed to wait until after your radiation oncology assessment before starting the medication.
+
 **What is the plan going forward?**
+
 You are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2138,17 +2270,29 @@ Please discuss any questions you have with your care team.
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your recently diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with an early stage breast cancer. The cancer is a type that started in the milk-producing glands and milk ducts (mixed ductal and lobular features). It measures 1.2 cm and is grade 2. The cancer is sensitive to estrogen and progesterone (ER+ and PR+) but does not have a protein called HER2. Imaging shows two small masses in your right breast, but there is no evidence of the cancer spreading to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start neoadjuvant chemotherapy with a chemotherapy regimen (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles).
+
 **What is the plan going forward?**
+
 Before starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have a port placed to make it easier to receive chemotherapy. You will return to clinic in 2 weeks for a follow-up visit.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2315,18 +2459,30 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your recently diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your right armpit but has not spread to other parts of your body. Imaging tests show a tumor in your right breast and enlarged lymph nodes. A biopsy of the lymph node confirmed that the cancer had spread there.
+
 **What treatment or medication changes were made?**
+
 You will start hormonal therapy after radiation. To help preserve your hair during chemotherapy, you will use scalp cooling with a Dignicap or Penguin Cold Cap.
+
 **What is the plan going forward?**
+
 You are scheduled to undergo surgery on November 5th. After surgery, you will have a test called Mammaprint to help decide the best treatment plan. You will start hormonal therapy after radiation. We also discussed the possibility of participating in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE. You are referred to have a brain MRI. Your next visit will be after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2481,18 +2637,30 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consultation regarding your newly diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma (cancer that started in the milk ducts). It is strongly positive for estrogen receptor (ER) and progesterone receptor (PR), and the HER2 status is uncertain. The cancer is small, measuring about 2 cm, and located 8 cm from the nipple in your right breast. No cancer has spread to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start a medication called goserelin today. In about two weeks, you will begin another medication called letrozole. These medications are used to treat breast cancer. Your psychiatrist will also review the interactions between Effexor, Gabapentin, and Lamictal, which you are taking for your bipolar II disorder.
+
 **What is the plan going forward?**
+
 You are scheduled to have a bilateral mastectomy with reconstruction. This means both breasts will be removed and rebuilt. You will have blood tests today to check your estradiol levels. Your next visit will be in one month, depending on the plans for your surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2651,18 +2819,30 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your recent diagnosis of metastatic breast cancer and to discuss treatment options.
+
 **What's new or changed since your last visit?**
+
 You have a diagnosis of metastatic breast cancer (Stage IV) that has spread to your cervical lymph nodes and possibly to the right breast. The cancer started in gland cells and is positive for estrogen and progesterone receptors, with uncertain HER2 status.
+
 **What treatment or medication changes were made?**
+
 You will start treatment with antiestrogen therapy if the cancer does not have the protein called HER2. If the cancer does have this protein, you will receive anti-HER2 therapy along with chemotherapy.
+
 **What is the plan going forward?**
+
 You will have a biopsy of the breast mass and a fine needle aspiration of the cervical lymph node to confirm the diagnosis. Genetic testing is also recommended. You will return to the clinic once these tests are completed.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2808,18 +2988,30 @@ UCSF Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with a type of cancer called invasive lobular carcinoma (cancer that started in the milk-producing glands). The cancer is ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. Imaging tests showed a large abnormality in your left breast and some enlarged lymph nodes. A fine needle aspiration of a lymph node was done and is pending.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your current medications.
+
 **What is the plan going forward?**
+
 You are scheduled to have a mastectomy (surgery to remove the breast). After your surgery, you will have a CT scan and an ultrasound. You will also have a follow-up visit after surgery to discuss further treatment options.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -2985,18 +3177,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The tumor measures 3.6 cm and has spread to two lymph nodes. Postoperative MRI shows some areas that might have residual cancer.
+
 **What treatment or medication changes were made?**
+
 You will start a new treatment plan with TC x 6, which involves chemotherapy. You will also use ONPRO support and dignicap to help manage side effects.
+
 **What is the plan going forward?**
+
 You will have radiation therapy to manage the extent of your cancer and any remaining areas of concern. A port will be placed to make it easier to receive chemotherapy. You will have a staging PET/CT scan and a baseline echo before starting chemotherapy. You will also undergo genetic testing for BRCA.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3144,20 +3348,32 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a second opinion regarding your newly diagnosed left breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is ER positive, PR negative, and does not have a protein called HER2. The cancer measures 8mm and is considered high risk based on a test called Mammaprint. Imaging shows a 2.5 cm mass in the left breast and some enlarged lymph nodes in the armpit area. No cancer was found in the right breast.
+
 **What treatment or medication changes were made?**
+
 No specific medications were changed during this visit.
+
 **What is the plan going forward?**
+
 You will proceed with surgery to remove the breast (mastectomy). After surgery, you will start chemotherapy based on whether the cancer has spread to the lymph nodes. If the cancer has not spread to the lymph nodes, you will receive Taxotere and Cytoxan. If it has spread, you will receive a chemotherapy regimenaxol. You will also receive at least five years of adjuvant hormonal therapy because your cancer is ER positive. The specific type of hormonal therapy will be discussed after surgery.
 You are referred to radiation oncology for a consultation.
 A more thorough discussion regarding the choice of hormonal therapy will occur after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3319,15 +3535,23 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You are NED (no evidence of disease) on physical exam.
+
 **What treatment or medication changes were made?**
+
 You switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.
 You will continue taking exemestane.
 You will also continue taking ondansetron (a medication to prevent nausea) and other supportive medications as needed.
+
 **What is the plan going forward?**
+
 You will continue taking exemestane.
 You will have a DEXA scan now and every 2 years to check for bone density issues.
 You will check your estradiol level to ensure ovarian suppression. If suppressed, you can check every 3 months.
@@ -3335,9 +3559,13 @@ You will continue having 6-monthly exams, with no imaging needed due to previous
 You are referred to local psychology for ongoing support as needed.
 You will have your next visit in 6 months or sooner if you have new or worsening symptoms.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3498,17 +3726,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a first visit to discuss your newly diagnosed bilateral breast cancer and the treatment options.
+
 **What's new or changed since your last visit?**
+
 You have bilateral breast cancer. The right breast tumor measures 7.3 cm and is ER+, PR+, and HER2 positive with some lobular differentiation (cancer that started in the milk-producing glands). The left breast tumor measures 6 cm and is ER+ and PR+ but does not have a protein called HER2. Imaging shows nodules in the liver and lungs, but it’s not clear if these are cancerous.
+
 **What treatment or medication changes were made?**
+
 You are a candidate for adjuvant therapy (treatment given after surgery to prevent the cancer from coming back). The plan includes a HER2 targeting approach with chemotherapy. Options include either four cycles of an anthracycline followed by four cycles of a taxane or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of one year. Hormonal therapy will start after completing chemotherapy and radiation therapy.
+
 **What is the plan going forward?**
+
 You will have radiation to both breasts. A follow-up PET/CT scan is planned. After surgery, preparatory studies for chemotherapy will be initiated, which may include placing a port-a-cath. Your next clinic visit is after two cycles of treatment.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3604,17 +3844,29 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 There are new nodules in your lungs that might be cancer spread. Your pancreatic tumor has stayed about the same size. You've gained some weight, which is good. You still have some nighttime stomach pain that needs oxycodone.
+
 **What treatment or medication changes were made?**
+
 You asked for and were given a break from chemotherapy because you've had the best response possible from the treatment.
+
 **What is the plan going forward?**
+
 We will watch your condition closely without giving you any more chemotherapy for now. You will come back to the clinic in 2 months for a follow-up visit.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3713,17 +3965,29 @@ UCSF Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is showing signs of disease progression. This is seen in the increase in the size of liver metastases and the rise in CA 19-9 levels.
+
 **What treatment or medication changes were made?**
+
 You switched to Gemcitabine + Abraxane on 11/29/18. You will continue to use supportive medications such as granisetron patches and ondansetron tablets to manage side effects.
+
 **What is the plan going forward?**
+
 You will continue with C2D1 Gemcitabine + Abraxane. If your peripheral neuropathy worsens, the dose of Abraxane may need to be reduced. A CT scan is due after you complete cycle 2. Your next visit is in 2 weeks for follow up.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3824,18 +4088,30 @@ Please feel free to reach out to us anytime. We are here to help you through thi
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is showing stable disease based on imaging and tumor marker evidence. The CT scan shows no significant change in the pancreatic mass, slightly decreased size of liver lesions, and stable to slightly increased cancer growths in the abdomen lining. Your CA 19-9 levels have decreased, indicating a positive trend. However, there are some suspicious findings that need further evaluation.
+
 **What treatment or medication changes were made?**
+
 You will continue with 1 additional cycle of the same chemotherapy (5-FU/LV plus nanoliposomal irinotecan (Onivyde)), contingent upon acceptable laboratory parameters. Supportive medications for pain and nausea have been prescribed.
+
 **What is the plan going forward?**
+
 Short-term follow-up CT scans are planned to assess for any further disease progression. Radiation therapy to your pancreatic primary may be considered for palliative purposes. Your next visit will be in-person to review the results of the follow-up scans.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -3933,21 +4209,33 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 The cancer is currently showing stable disease based on imaging findings.
 CT scans show that the tumor in your pancreas has stayed the same size.
 There is no new evidence of the cancer spreading to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will continue to take ondansetron (Zofran) to manage nausea.
+
 **What is the plan going forward?**
+
 You will continue on surveillance and we will see you back in 2 months with a follow-up CT scan.
 CT scan in 2 months for follow-up.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4052,17 +4340,29 @@ Please remember to discuss any questions or concerns with your care team. They a
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is currently stable in the pancreas and abdominal wall based on recent imaging. The CA 19-9 levels, a tumor marker, have remained high, indicating stable disease.
+
 **What treatment or medication changes were made?**
+
 You will continue taking xarelto daily for blood clots. You will also continue taking Creon to help with digestion. Your pain medications, Oxycontin and Oxycodone, will remain the same. Fluconazole was added to treat thrush.
+
 **What is the plan going forward?**
+
 You will have a restaging CT scan on November 19th to monitor your cancer. You will also have blood tests to check for diabetes. Your next visit is scheduled for November 21st. Palliative radiation therapy was discussed but is not currently recommended.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4151,17 +4451,29 @@ Warm regards,
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging shows early signs of the cancer coming back. There is a growing spot in your liver and a new small spot, which might mean the cancer is getting worse. Also, there is swelling around some blood vessels in your liver, which could be due to the surgery or the cancer. A small growth in your uterus needs more checking to make sure it’s not cancer. You’ve lost weight since your surgery.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your medications or treatments.
+
 **What is the plan going forward?**
+
 We will repeat your scans in 2 months to check on the spots in your liver and the growth in your uterus. If needed, we will take a sample to confirm if it’s cancer. Your next visit will be in 2 months for these scans.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4256,18 +4568,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The cancer is showing signs of getting smaller. Specifically, the tumor in your pancreas has slightly decreased in size compared to previous imaging. However, it still touches the left adrenal gland, spleen, and stomach. You also have a rash that is tolerable.
+
 **What treatment or medication changes were made?**
+
 Your treatment was switched from a standard schedule of gemcitabine and Abraxane to an alternate week schedule because you experienced neutropenia (low white blood cell count). You are also taking ondansetron to manage nausea.
+
 **What is the plan going forward?**
+
 You will continue with the same treatment without changing the dose or schedule. Your imaging will be repeated in 8 weeks. Your next visit will be a telehealth appointment in 8 weeks.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4366,22 +4690,34 @@ UCSF Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 You have a poorly differentiated pancreatic ductal adenocarcinoma (cancer that started in gland cells) with lymphovascular invasion. The cancer is now metastatic (pt2n2) and has spread to lymph nodes.
 Recent imaging shows that the size of the lymph nodes has decreased, indicating a positive response to treatment. Additionally, your CA 19-9 levels, a tumor marker, have decreased, suggesting the treatment is working well.
+
 **What treatment or medication changes were made?**
+
 You are receiving supportive medication, including morphine (MS Contin) for pain relief.
 Your treatment plan includes continuing on gemcitabine/nab-paclitaxel (a combination of chemotherapy drugs) with an every other week dosing schedule.
+
 **What is the plan going forward?**
+
 The goal of your treatment is to manage symptoms and improve quality of life (palliative care).
 You will continue on gemcitabine/nab-paclitaxel until you have completed at least 6 cycles or until the maximum response is achieved.
 A genetic test called FoundationOne has been ordered to learn more about your tumor.
 You will be seen again in person at your request or as needed for further evaluation.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4477,17 +4813,29 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your metastatic pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 Your cancer is currently stable. Imaging shows that the size of the tumors in your lungs has not changed, and the tumor in your pancreas has gotten smaller. However, your blood test for Cancer Antigen 19-9 is still high, indicating that the cancer is still active.
+
 **What treatment or medication changes were made?**
+
 Your dose of abraxane was reduced today due to neuropathy. You also started taking Remeron for depression.
+
 **What is the plan going forward?**
+
 You will continue with gemcitabine and abraxane, but with a reduced dose of abraxane. You will have a CT scan at the end of September to check on the size of the tumors. Your next visit is in 2 weeks to check on your neuropathy.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4598,17 +4946,29 @@ Office Phone Number: [Phone Number]
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The CT scan on 12/10/19 shows a stable pancreatic mass measuring with encasement and severe narrowing of celiac and superior mesenteric arteries, without evidence of distant metastases. Additionally, you's clinical status allows continuation of treatment with a chemotherapy regimen, indicating stable disease. However, the CA 19-9 level has increased from 5000 to 11,000 U/mL, which may suggest disease activity despite stable imaging findings.
+
 **What treatment or medication changes were made?**
+
 You will continue with a chemotherapy regimen only going forward: oxaliplaton and 5FU. Premeds include Aloxi, aprepitant, and dexamethasone. On day 3, you will receive 1L NS, dexamethasone, prn Zofran, and ativan. D3 Fulphila is omitted given ANC >20 today. Potassium management includes + (with 4x Klor Con pills) on D1. Repeat K and Mg on D3: give + (with 4x Klor Con pills) only if K <=3.3. Hold if >3.3. Magnesium: 1g today. Rx for Klor Con: advised to take . Reviewed potassium-rich foods. Consider renal evaluation for RTA if no improvement. Loperamide available prn for diarrhea. Counseled on BRAT diet and avoiding dairy.
+
 **What is the plan going forward?**
+
 After 4-6 months of upfront chemotherapy, consider either (1) readdressing surgical prospects with your doctor or (2) consolidative chemoradiation, either conventionally fractionated therapy with concurrent capecitabine as a radiosensitizer, or SBRT. Plan for scans again after C8. Monthly CA 19-9 monitoring. Next visit is in-person in 2 weeks.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4717,17 +5077,29 @@ Warm regards,
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a second opinion regarding your newly diagnosed metastatic pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 You have a pancreatic neck mass measuring with associated pancreatic atrophy and pancreatic ductal dilatation. The mass affects several blood vessels but remains patent. Multiple small lesions in the right hepatic lobe suggest metastatic disease. Your CA 19-9 level is very high at 13,737, indicating advanced disease.
+
 **What treatment or medication changes were made?**
+
 You have agreed to participate in a clinical trial called the Precision Promise Platform Trial For Metastatic Pancreatic Cancer. The trial will involve a combination of chemotherapy drugs including a chemotherapy combination, which consists of gemcitabine, nab-paclitaxel, irinotecan, oxaliplatin, and leucovorin.
+
 **What is the plan going forward?**
+
 You will have a CT scan and blood tests done locally today to check for signs of jaundice. You also have an appointment scheduled with genetics at your treatment center tomorrow.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4826,17 +5198,29 @@ UCSF ***** ***** Family Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 Recent imaging shows that the cancer in your pancreas has grown and spread, causing a blockage in your small intestine and affecting your bile duct. Your bilirubin level is also higher, indicating liver issues.
+
 **What treatment or medication changes were made?**
+
 No specific medication changes were made during this visit. You continue to receive supportive medications like ondansetron and tramadol.
+
 **What is the plan going forward?**
+
 The focus is now on palliative care to manage symptoms and improve your quality of life. We will monitor your condition closely, including checking your bilirubin and liver function. We will also review your small bowel X-ray to see if additional stent placement is possible. You will be followed up with a phone call.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -4938,17 +5322,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The size of your pancreatic tumor has stayed the same, and there are no new signs of cancer spread. However, there has been an increase in bile flow into the lungs and dilation of the bile ducts.
+
 **What treatment or medication changes were made?**
+
 You will continue taking capecitabine for your cancer. Additionally, you will use ondansetron as needed for nausea. You will also continue taking Remeron and melatonin for insomnia and Creon for pancreatic enzyme replacement.
+
 **What is the plan going forward?**
+
 We will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. You will have a CT scan of your chest to monitor your condition. You will continue to have weekly blood tests to check your red blood cell count and receive a blood transfusion if your hemoglobin level drops below 8.0. A nutrition consultation is needed to address your nutritional needs. Your doctor will see you in person on February 17 and will perform a bronchoscopy in February after following cultures.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5046,17 +5442,29 @@ UCSF Comprehensive Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your metastatic pancreatic cancer (cancer that started in gland cells).
+
 **What's new or changed since your last visit?**
+
 Your cancer has spread to your liver. Imaging shows the primary cancer in your pancreas has grown larger, and there are new small tumors in your liver. There is also some swelling around your pancreas and bile ducts, likely due to blockage. You have lost over 20 pounds recently.
+
 **What treatment or medication changes were made?**
+
 You will start on a combination of gemcitabine and nab-paclitaxel, which are chemotherapy drugs. If you are interested, you could also consider joining a clinical trial that adds extra treatments to this combination.
+
 **What is the plan going forward?**
+
 You will have a short-term in-person follow-up visit to check your liver function tests and make sure they are normal before starting chemotherapy. We will also collect a sample of your tumor tissue for genetic testing to see if there are any specific mutations that can guide your treatment.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5155,18 +5563,30 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your recent blood tests showed an increase in a tumor marker called CA 19-9, which suggests the possibility of cancer returning or growing. However, your latest imaging tests did not show any signs of cancer spread or growth.
+
 **What treatment or medication changes were made?**
+
 Your medication XARELTO (used to prevent blood clots) has been put on hold.
 You will continue to take Creon to help with digestion.
+
 **What is the plan going forward?**
+
 You will have your CA 19-9 levels checked again this week. You will also have a CT scan in 2 weeks to monitor your condition. Your next visit will be in 2 weeks to review these results.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5268,17 +5688,29 @@ Please discuss any questions you have with your care team.
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Recent imaging shows slight improvement in the size of your pancreatic duct. The ill-defined pancreatic mass is no longer visible, likely due to treatment. There is a 1.1 cm left renal lesion that may be cancerous. No new signs of cancer spread were found.
+
 **What treatment or medication changes were made?**
+
 The plan is to continue with gemcitabine but switch to an alternating week schedule for better tolerability. You will continue to use medications for nausea and pain as needed.
+
 **What is the plan going forward?**
+
 You will have monthly CA 19-9 blood tests and restaging CT scans every 2 months to monitor how well the treatment is working. You are being referred to a nutritionist for dietary advice. Your next visit is scheduled for May 16th.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5369,17 +5801,29 @@ Medical Communication Specialist
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging results from February 2nd show that your cancer has stayed the same size. Recent lab results show that your Carcinoembryonic Antigen (a tumor marker) and Cancer Antigen 19-9 (another tumor marker) levels are still high but have decreased compared to previous readings. Physically, you are stable with no new issues.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your treatment or medications.
+
 **What is the plan going forward?**
+
 You will have a new CT scan in July 2019 to check on your cancer again. Your next visit is scheduled for June 2019.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5474,18 +5918,30 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new visit regarding your cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a history of adenocarcinoma (cancer that started in gland cells) of the tail of the pancreas, which was treated with surgery. Imaging shows no new signs of cancer spread. However, you have a pulmonary embolism (a blockage in the lung's blood vessels) and low sodium levels.
+
 **What treatment or medication changes were made?**
+
 We will pause your chemotherapy due to side effects like hand-foot syndrome and mucositis. We will also start you on Lovenox for the pulmonary embolism.
+
 **What is the plan going forward?**
+
 We will restart your chemotherapy once your hand-foot syndrome improves. We will treat you 5 days out of 7. We will also check for deep vein thrombosis (DVT) with Doppler tests.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5586,17 +6042,29 @@ Cancer Center
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new visit regarding your localized adenocarcinoma (cancer that started in gland cells) of the head of the pancreas.
+
 **What's new or changed since your last visit?**
+
 The cancer is not responding to treatment. Recent imaging shows the tumor has grown and is causing blockages in your bile ducts. Lab results also show signs of liver issues, including high levels of bilirubin and enzymes.
+
 **What treatment or medication changes were made?**
+
 Today’s treatment cycle of a chemotherapy combination was postponed because of concerns about disease progression, biliary obstruction, or ascending cholangitis.
+
 **What is the plan going forward?**
+
 You will need urgent imaging to check for biliary ductal dilatation or disease progression in the liver. A bilateral ultrasound will also be done to rule out deep vein thrombosis (DVT). You will be referred to a gastroenterologist for an ERCP (a procedure to unblock the bile ducts).
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 
@@ -5701,17 +6169,29 @@ Please feel free to ask any questions you may have. Your care team is here to he
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consult regarding your newly diagnosed metastatic pancreatic adenocarcinoma (cancer that started in gland cells).
+
 **What's new or changed since your last visit?**
+
 Your cancer has spread to your liver and peritoneum. A biopsy of a mass in your pancreas confirmed adenocarcinoma (cancer that started in gland cells). Imaging showed a 5 cm cystic lesion in your pancreatic tail with multiple liver lesions and signs of cancer spread in the abdomen lining. Your blood pressure is 172/103, and you've lost 8 pounds. There is no sign of jaundice or ascites.
+
 **What treatment or medication changes were made?**
+
 Supportive medications for pain control, such as oxyCODONE-acetaminophen (Percocet), were discussed.
+
 **What is the plan going forward?**
+
 We discussed standard of care treatment options, including a chemotherapy combination or gemcitabine plus nab-paclitaxel. Clinical trial options were also discussed, such as the Precision Promise trial or the REVOLUTION trial. Fresh tumor tissue collection for the Precision Promise trial and potential pre-treatment biopsy for the REVOLUTION trial were mentioned. You will undergo genetic counseling and germline testing to assess for any hereditary predisposition to cancer. A referral was made to our Cancer Center nutritionist. If you wish to consent and be screened for the study, further steps will be taken.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
 
 ### Rating
 

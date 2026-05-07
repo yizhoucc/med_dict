@@ -99,18 +99,31 @@ REASON FOR VISIT/CC:   Chief Complaint   Patient presents with    Follow-up    
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your recent blood tests showed an increase in a tumor marker called CA 19-9, which suggests the possibility of cancer returning or growing. However, your latest imaging tests did not show any signs of cancer spread or growth.
+
 **What treatment or medication changes were made?**
+
 Your medication XARELTO (used to prevent blood clots) has been put on hold.
 You will continue to take Creon to help with digestion.
+
 **What is the plan going forward?**
+
 You will have your CA 19-9 levels checked again this week. You will also have a CT scan in 2 weeks to monitor your condition. Your next visit will be in 2 weeks to review these results.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

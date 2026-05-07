@@ -90,17 +90,30 @@ This is an independent service.  The available consultant for this service is **
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is currently stable in the pancreas and abdominal wall based on recent imaging. The CA 19-9 levels, a tumor marker, have remained high, indicating stable disease.
+
 **What treatment or medication changes were made?**
+
 You will continue taking xarelto daily for blood clots. You will also continue taking Creon to help with digestion. Your pain medications, Oxycontin and Oxycodone, will remain the same. Fluconazole was added to treat thrush.
+
 **What is the plan going forward?**
+
 You will have a restaging CT scan on November 19th to monitor your cancer. You will also have blood tests to check for diabetes. Your next visit is scheduled for November 21st. Palliative radiation therapy was discussed but is not currently recommended.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

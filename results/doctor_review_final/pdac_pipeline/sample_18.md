@@ -90,18 +90,31 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new visit regarding your cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a history of adenocarcinoma (cancer that started in gland cells) of the tail of the pancreas, which was treated with surgery. Imaging shows no new signs of cancer spread. However, you have a pulmonary embolism (a blockage in the lung's blood vessels) and low sodium levels.
+
 **What treatment or medication changes were made?**
+
 We will pause your chemotherapy due to side effects like hand-foot syndrome and mucositis. We will also start you on Lovenox for the pulmonary embolism.
+
 **What is the plan going forward?**
+
 We will restart your chemotherapy once your hand-foot syndrome improves. We will treat you 5 days out of 7. We will also check for deep vein thrombosis (DVT) with Doppler tests.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

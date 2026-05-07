@@ -90,17 +90,30 @@ VIDEO VISIT  I performed this consultation using real-time Telehealth tools, inc
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your metastatic pancreatic cancer (cancer that started in gland cells).
+
 **What's new or changed since your last visit?**
+
 Your cancer has spread to your liver. Imaging shows the primary cancer in your pancreas has grown larger, and there are new small tumors in your liver. There is also some swelling around your pancreas and bile ducts, likely due to blockage. You have lost over 20 pounds recently.
+
 **What treatment or medication changes were made?**
+
 You will start on a combination of gemcitabine and nab-paclitaxel, which are chemotherapy drugs. If you are interested, you could also consider joining a clinical trial that adds extra treatments to this combination.
+
 **What is the plan going forward?**
+
 You will have a short-term in-person follow-up visit to check your liver function tests and make sure they are normal before starting chemotherapy. We will also collect a sample of your tumor tissue for genetic testing to see if there are any specific mutations that can guide your treatment.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -99,22 +99,35 @@ Ms. ***** is a 69 y.o. female who comes to our GI Oncology practice at the UCSF 
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 You have a poorly differentiated pancreatic ductal adenocarcinoma (cancer that started in gland cells) with lymphovascular invasion. The cancer is now metastatic (pt2n2) and has spread to lymph nodes.
 Recent imaging shows that the size of the lymph nodes has decreased, indicating a positive response to treatment. Additionally, your CA 19-9 levels, a tumor marker, have decreased, suggesting the treatment is working well.
+
 **What treatment or medication changes were made?**
+
 You are receiving supportive medication, including morphine (MS Contin) for pain relief.
 Your treatment plan includes continuing on gemcitabine/nab-paclitaxel (a combination of chemotherapy drugs) with an every other week dosing schedule.
+
 **What is the plan going forward?**
+
 The goal of your treatment is to manage symptoms and improve quality of life (palliative care).
 You will continue on gemcitabine/nab-paclitaxel until you have completed at least 6 cycles or until the maximum response is achieved.
 A genetic test called FoundationOne has been ordered to learn more about your tumor.
 You will be seen again in person at your request or as needed for further evaluation.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

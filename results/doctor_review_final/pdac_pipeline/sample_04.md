@@ -90,21 +90,34 @@ SUBJECTIVE:    This is a very pleasant 64-year-old woman with a diagnosis of ade
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 The cancer is currently showing stable disease based on imaging findings.
 CT scans show that the tumor in your pancreas has stayed the same size.
 There is no new evidence of the cancer spreading to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will continue to take ondansetron (Zofran) to manage nausea.
+
 **What is the plan going forward?**
+
 You will continue on surveillance and we will see you back in 2 months with a follow-up CT scan.
 CT scan in 2 months for follow-up.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

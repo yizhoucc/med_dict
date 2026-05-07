@@ -90,17 +90,30 @@ REASON FOR VISIT/CC:   Chief Complaint   Patient presents with   \u0007 Pancreat
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your metastatic pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 Your cancer is currently stable. Imaging shows that the size of the tumors in your lungs has not changed, and the tumor in your pancreas has gotten smaller. However, your blood test for Cancer Antigen 19-9 is still high, indicating that the cancer is still active.
+
 **What treatment or medication changes were made?**
+
 Your dose of abraxane was reduced today due to neuropathy. You also started taking Remeron for depression.
+
 **What is the plan going forward?**
+
 You will continue with gemcitabine and abraxane, but with a reduced dose of abraxane. You will have a CT scan at the end of September to check on the size of the tumors. Your next visit is in 2 weeks to check on your neuropathy.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

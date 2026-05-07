@@ -90,18 +90,31 @@ ID: 71 year old female    CC:  HR low, HER2 negative cancer of the right breast 
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new patient visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called triple-negative (TNBC) grade 3 invasive ductal carcinoma, which means the cancer started in the milk ducts and does not have proteins that respond to hormones. The cancer is at stage III. The latest imaging shows that a lump in your right breast has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No cancer has spread to other parts of your body. During the physical exam, a firm lump was found in your right breast.
+
 **What treatment or medication changes were made?**
+
 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which will happen every week for 12 weeks.
+
 **What is the plan going forward?**
+
 You will have a port placed soon to prepare for chemotherapy. You will start chemotherapy with Taxol as early as next Wednesday or the following week. You will need to visit the clinic for cycles 1, 2, 5, 8, and 12. You will have a mammogram to check the progress of your treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -100,17 +100,30 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The size of your pancreatic tumor has stayed the same, and there are no new signs of cancer spread. However, there has been an increase in bile flow into the lungs and dilation of the bile ducts.
+
 **What treatment or medication changes were made?**
+
 You will continue taking capecitabine for your cancer. Additionally, you will use ondansetron as needed for nausea. You will also continue taking Remeron and melatonin for insomnia and Creon for pancreatic enzyme replacement.
+
 **What is the plan going forward?**
+
 We will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. You will have a CT scan of your chest to monitor your condition. You will continue to have weekly blood tests to check your red blood cell count and receive a blood transfusion if your hemoglobin level drops below 8.0. A nutrition consultation is needed to address your nutritional needs. Your doctor will see you in person on February 17 and will perform a bronchoscopy in February after following cultures.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

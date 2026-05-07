@@ -90,18 +90,31 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Imaging studies show that your cancer has progressed. Specifically, a lesion in your liver has grown larger, and there are new areas of cancer activity in other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will continue taking abraxane and pembrolizumab. You will also restart xarelto, a blood thinner, after your port placement. You will take medications to manage nausea, pain, and to prevent constipation.
+
 **What is the plan going forward?**
+
 You will have a port placed soon to make it easier to receive your treatments. You will have a PET/CT scan to monitor your cancer. Your TSH levels will be checked. You will return to the clinic in 2 weeks, then every 3 weeks.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

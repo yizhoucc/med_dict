@@ -99,18 +99,31 @@ Mr. ***** is a 74 y.o. male who returns to our GI Oncology practice at the UCSF 
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is showing stable disease based on imaging and tumor marker evidence. The CT scan shows no significant change in the pancreatic mass, slightly decreased size of liver lesions, and stable to slightly increased cancer growths in the abdomen lining. Your CA 19-9 levels have decreased, indicating a positive trend. However, there are some suspicious findings that need further evaluation.
+
 **What treatment or medication changes were made?**
+
 You will continue with 1 additional cycle of the same chemotherapy (5-FU/LV plus nanoliposomal irinotecan (Onivyde)), contingent upon acceptable laboratory parameters. Supportive medications for pain and nausea have been prescribed.
+
 **What is the plan going forward?**
+
 Short-term follow-up CT scans are planned to assess for any further disease progression. Radiation therapy to your pancreatic primary may be considered for palliative purposes. Your next visit will be in-person to review the results of the follow-up scans.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

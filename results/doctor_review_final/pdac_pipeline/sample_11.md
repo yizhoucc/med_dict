@@ -90,17 +90,30 @@ INITIAL GI MEDICAL ONCOLOGY VISIT     Patient name  ***** ***** *****      DOB 1
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a second opinion regarding your newly diagnosed metastatic pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 You have a pancreatic neck mass measuring with associated pancreatic atrophy and pancreatic ductal dilatation. The mass affects several blood vessels but remains patent. Multiple small lesions in the right hepatic lobe suggest metastatic disease. Your CA 19-9 level is very high at 13,737, indicating advanced disease.
+
 **What treatment or medication changes were made?**
+
 You have agreed to participate in a clinical trial called the Precision Promise Platform Trial For Metastatic Pancreatic Cancer. The trial will involve a combination of chemotherapy drugs including a chemotherapy combination, which consists of gemcitabine, nab-paclitaxel, irinotecan, oxaliplatin, and leucovorin.
+
 **What is the plan going forward?**
+
 You will have a CT scan and blood tests done locally today to check for signs of jaundice. You also have an appointment scheduled with genetics at your treatment center tomorrow.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -90,17 +90,30 @@ ID: ***** ***** is a 55 y.o. ***** with a recent diagnosis of early stage breast
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your recent diagnosis of bilateral breast cancer.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with two types of breast cancer: a more aggressive type in your left breast and a less aggressive type in your right breast. The left breast cancer is a grade 3 invasive ductal carcinoma (cancer that started in the milk ducts) with some features suggesting it might have spread slightly beyond the original tumor. The right breast cancer is a grade 1 invasive ductal carcinoma with some abnormal cells around the milk ducts. Both cancers are sensitive to hormones and do not have a protein called HER2.
+
 **What treatment or medication changes were made?**
+
 You will start a treatment plan that includes chemotherapy with docetaxel and cyclophosphamide for four cycles. This is to help reduce the chance of the cancer coming back. You will also take an aromatase inhibitor (a medication that blocks the production of estrogen) for at least five years to further reduce the risk of the cancer returning. Additionally, you will take calcium and vitamin D supplements to help maintain your bone health.
+
 **What is the plan going forward?**
+
 You will undergo radiation therapy to treat the areas where the cancer was removed. You will also continue taking an aromatase inhibitor for at least five years. A DEXA scan (a test to measure bone density) will be done to check your current bone health. Your tumor will be tested using a tool called Oncotype DX RS to help guide your treatment decisions.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

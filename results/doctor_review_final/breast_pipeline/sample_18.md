@@ -90,20 +90,33 @@ HPI:  ***** ***** is a 32 y.o. female here for a discussion of treatment options
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a second opinion regarding your newly diagnosed left breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is ER positive, PR negative, and does not have a protein called HER2. The cancer measures 8mm and is considered high risk based on a test called Mammaprint. Imaging shows a 2.5 cm mass in the left breast and some enlarged lymph nodes in the armpit area. No cancer was found in the right breast.
+
 **What treatment or medication changes were made?**
+
 No specific medications were changed during this visit.
+
 **What is the plan going forward?**
+
 You will proceed with surgery to remove the breast (mastectomy). After surgery, you will start chemotherapy based on whether the cancer has spread to the lymph nodes. If the cancer has not spread to the lymph nodes, you will receive Taxotere and Cytoxan. If it has spread, you will receive a chemotherapy regimenaxol. You will also receive at least five years of adjuvant hormonal therapy because your cancer is ER positive. The specific type of hormonal therapy will be discussed after surgery.
 You are referred to radiation oncology for a consultation.
 A more thorough discussion regarding the choice of hormonal therapy will occur after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

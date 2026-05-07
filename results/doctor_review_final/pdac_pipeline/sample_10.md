@@ -101,17 +101,30 @@ FOLLOW UP VISIT    Ms. ***** is a 73 y.o. female whom I am seeing as a video vis
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The CT scan on 12/10/19 shows a stable pancreatic mass measuring with encasement and severe narrowing of celiac and superior mesenteric arteries, without evidence of distant metastases. Additionally, you's clinical status allows continuation of treatment with a chemotherapy regimen, indicating stable disease. However, the CA 19-9 level has increased from 5000 to 11,000 U/mL, which may suggest disease activity despite stable imaging findings.
+
 **What treatment or medication changes were made?**
+
 You will continue with a chemotherapy regimen only going forward: oxaliplaton and 5FU. Premeds include Aloxi, aprepitant, and dexamethasone. On day 3, you will receive 1L NS, dexamethasone, prn Zofran, and ativan. D3 Fulphila is omitted given ANC >20 today. Potassium management includes + (with 4x Klor Con pills) on D1. Repeat K and Mg on D3: give + (with 4x Klor Con pills) only if K <=3.3. Hold if >3.3. Magnesium: 1g today. Rx for Klor Con: advised to take . Reviewed potassium-rich foods. Consider renal evaluation for RTA if no improvement. Loperamide available prn for diarrhea. Counseled on BRAT diet and avoiding dairy.
+
 **What is the plan going forward?**
+
 After 4-6 months of upfront chemotherapy, consider either (1) readdressing surgical prospects with your doctor or (2) consolidative chemoradiation, either conventionally fractionated therapy with concurrent capecitabine as a radiosensitizer, or SBRT. Plan for scans again after C8. Monthly CA 19-9 monitoring. Next visit is in-person in 2 weeks.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

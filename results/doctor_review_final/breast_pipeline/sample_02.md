@@ -90,18 +90,31 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma. The cancer has spread to your liver and chest wall. A recent PET/CT scan showed that a nodule in your chest wall has grown, while some lymph nodes have decreased in size. An MRI of your brain showed no signs of cancer.
+
 **What treatment or medication changes were made?**
+
 You started taking zoledronic acid to help with your osteoporosis and to prepare for starting an aromatase inhibitor.
+
 **What is the plan going forward?**
+
 You will start an aromatase inhibitor therapy either alone or on a clinical trial called CALGB 4503 randomized to placebo or bevacizumab on January 25. You will also have a PET/CT scan and an MRI of your brain to evaluate your falling spells. You will return to the clinic on January 25 to begin your new treatment.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -90,17 +90,30 @@ Mr. ***** is a 51 y.o. male who comes to our GI Oncology practice at the UCSF Co
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consult regarding your newly diagnosed metastatic pancreatic adenocarcinoma (cancer that started in gland cells).
+
 **What's new or changed since your last visit?**
+
 Your cancer has spread to your liver and peritoneum. A biopsy of a mass in your pancreas confirmed adenocarcinoma (cancer that started in gland cells). Imaging showed a 5 cm cystic lesion in your pancreatic tail with multiple liver lesions and signs of cancer spread in the abdomen lining. Your blood pressure is 172/103, and you've lost 8 pounds. There is no sign of jaundice or ascites.
+
 **What treatment or medication changes were made?**
+
 Supportive medications for pain control, such as oxyCODONE-acetaminophen (Percocet), were discussed.
+
 **What is the plan going forward?**
+
 We discussed standard of care treatment options, including a chemotherapy combination or gemcitabine plus nab-paclitaxel. Clinical trial options were also discussed, such as the Precision Promise trial or the REVOLUTION trial. Fresh tumor tissue collection for the Precision Promise trial and potential pre-treatment biopsy for the REVOLUTION trial were mentioned. You will undergo genetic counseling and germline testing to assess for any hereditary predisposition to cancer. A referral was made to our Cancer Center nutritionist. If you wish to consent and be screened for the study, further steps will be taken.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

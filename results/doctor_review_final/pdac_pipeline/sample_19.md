@@ -90,17 +90,30 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new visit regarding your localized adenocarcinoma (cancer that started in gland cells) of the head of the pancreas.
+
 **What's new or changed since your last visit?**
+
 The cancer is not responding to treatment. Recent imaging shows the tumor has grown and is causing blockages in your bile ducts. Lab results also show signs of liver issues, including high levels of bilirubin and enzymes.
+
 **What treatment or medication changes were made?**
+
 Today’s treatment cycle of a chemotherapy combination was postponed because of concerns about disease progression, biliary obstruction, or ascending cholangitis.
+
 **What is the plan going forward?**
+
 You will need urgent imaging to check for biliary ductal dilatation or disease progression in the liver. A bilateral ultrasound will also be done to rule out deep vein thrombosis (DVT). You will be referred to a gastroenterologist for an ERCP (a procedure to unblock the bile ducts).
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

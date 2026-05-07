@@ -90,17 +90,30 @@ SUBJECTIVE:    This is a very pleasant 47-year-old African-American gentleman wi
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer.
+
 **What's new or changed since your last visit?**
+
 There are new nodules in your lungs that might be cancer spread. Your pancreatic tumor has stayed about the same size. You've gained some weight, which is good. You still have some nighttime stomach pain that needs oxycodone.
+
 **What treatment or medication changes were made?**
+
 You asked for and were given a break from chemotherapy because you've had the best response possible from the treatment.
+
 **What is the plan going forward?**
+
 We will watch your condition closely without giving you any more chemotherapy for now. You will come back to the clinic in 2 months for a follow-up visit.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

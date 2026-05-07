@@ -90,17 +90,30 @@ This is an independent visit    ATTENDING: ***** *****, MD     PATIENT IDENTIFIC
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Your cancer is showing signs of disease progression. This is seen in the increase in the size of liver metastases and the rise in CA 19-9 levels.
+
 **What treatment or medication changes were made?**
+
 You switched to Gemcitabine + Abraxane on 11/29/18. You will continue to use supportive medications such as granisetron patches and ondansetron tablets to manage side effects.
+
 **What is the plan going forward?**
+
 You will continue with C2D1 Gemcitabine + Abraxane. If your peripheral neuropathy worsens, the dose of Abraxane may need to be reduced. A CT scan is due after you complete cycle 2. Your next visit is in 2 weeks for follow up.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

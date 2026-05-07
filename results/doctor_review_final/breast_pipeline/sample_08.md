@@ -102,17 +102,30 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You recently had surgery to remove your breast cancer, which included removing both breasts and checking the lymph nodes under your left arm. The cancer was a type that started in the milk ducts and was grade 2. The doctors found that the cancer had spread to two lymph nodes. No new imaging findings were noted. Your surgical wounds are healing well, and you have some numbness near your left armpit and elbow.
+
 **What treatment or medication changes were made?**
+
 You agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin on October 18, 2017.
+
 **What is the plan going forward?**
+
 Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. A port will be placed for IV access. You are referred to genetics for counseling and testing due to your family history of breast cancer. Your next step is to start chemotherapy on October 18, 2017.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

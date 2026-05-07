@@ -90,17 +90,30 @@ New patient Visit  Breast Cancer *****    ***** ***** ***** 07/01/2019        NA
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a first visit to discuss your newly diagnosed bilateral breast cancer and the treatment options.
+
 **What's new or changed since your last visit?**
+
 You have bilateral breast cancer. The right breast tumor measures 7.3 cm and is ER+, PR+, and HER2 positive with some lobular differentiation (cancer that started in the milk-producing glands). The left breast tumor measures 6 cm and is ER+ and PR+ but does not have a protein called HER2. Imaging shows nodules in the liver and lungs, but it’s not clear if these are cancerous.
+
 **What treatment or medication changes were made?**
+
 You are a candidate for adjuvant therapy (treatment given after surgery to prevent the cancer from coming back). The plan includes a HER2 targeting approach with chemotherapy. Options include either four cycles of an anthracycline followed by four cycles of a taxane or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of one year. Hormonal therapy will start after completing chemotherapy and radiation therapy.
+
 **What is the plan going forward?**
+
 You will have radiation to both breasts. A follow-up PET/CT scan is planned. After surgery, preparatory studies for chemotherapy will be initiated, which may include placing a port-a-cath. Your next clinic visit is after two cycles of treatment.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

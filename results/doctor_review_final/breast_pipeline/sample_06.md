@@ -90,19 +90,32 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma (IDC), which means the cancer started in the milk ducts. The cancer is HR-negative and HER2-positive, and it has spread to your bones.
+
 **What treatment or medication changes were made?**
+
 You will start new medications: weekly paclitaxel, trastuzumab every three weeks, and pertuzumab every three weeks. These medications are used to treat HER2-positive breast cancer.
+
 **What is the plan going forward?**
+
 You will have an MRI of your pelvis and neck to check for any changes in your cancer. You will also have an echocardiogram (a heart ultrasound) to monitor your heart function. A port will be placed to make it easier to give you medications. You will also have some routine blood tests.
 You are referred to have chemotherapy teaching sessions to prepare you for your treatment.
 If needed, you can receive radiation therapy to treat the cancer in your bones.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

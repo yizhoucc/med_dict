@@ -90,15 +90,23 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You are NED (no evidence of disease) on physical exam.
+
 **What treatment or medication changes were made?**
+
 You switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.
 You will continue taking exemestane.
 You will also continue taking ondansetron (a medication to prevent nausea) and other supportive medications as needed.
+
 **What is the plan going forward?**
+
 You will continue taking exemestane.
 You will have a DEXA scan now and every 2 years to check for bone density issues.
 You will check your estradiol level to ensure ovarian suppression. If suppressed, you can check every 3 months.
@@ -106,9 +114,14 @@ You will continue having 6-monthly exams, with no imaging needed due to previous
 You are referred to local psychology for ongoing support as needed.
 You will have your next visit in 6 months or sooner if you have new or worsening symptoms.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

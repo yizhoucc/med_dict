@@ -90,17 +90,30 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your recently diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with an early stage breast cancer. The cancer is a type that started in the milk-producing glands and milk ducts (mixed ductal and lobular features). It measures 1.2 cm and is grade 2. The cancer is sensitive to estrogen and progesterone (ER+ and PR+) but does not have a protein called HER2. Imaging shows two small masses in your right breast, but there is no evidence of the cancer spreading to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start neoadjuvant chemotherapy with a chemotherapy regimen (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles).
+
 **What is the plan going forward?**
+
 Before starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have a port placed to make it easier to receive chemotherapy. You will return to clinic in 2 weeks for a follow-up visit.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

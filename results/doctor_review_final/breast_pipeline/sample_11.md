@@ -90,18 +90,31 @@ Subjective:       Patient ID: ***** ***** ***** ***** 51 y.o. female.    HPI  **
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a discussion about your left breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ductal carcinoma in situ (DCIS), which means the cancer is confined to the milk ducts and has not spread beyond them. The cancer is ER+ and PR+, meaning it responds to hormones. The cancer is located in the left breast and measures 1.8 cm. The edges of the removed tissue show that some cancer cells might still be present, so further treatment is needed.
+
 **What treatment or medication changes were made?**
+
 A prescription for tamoxifen has been sent to your pharmacy. Tamoxifen is a medication used to reduce the risk of the cancer coming back. You have been instructed to wait until after your radiation oncology assessment before starting the medication.
+
 **What is the plan going forward?**
+
 You are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

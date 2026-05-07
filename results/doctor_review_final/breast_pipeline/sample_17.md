@@ -90,18 +90,31 @@ HPI:  ***** ***** ***** is a 58 y.o. female here in consultation to discuss trea
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The tumor measures 3.6 cm and has spread to two lymph nodes. Postoperative MRI shows some areas that might have residual cancer.
+
 **What treatment or medication changes were made?**
+
 You will start a new treatment plan with TC x 6, which involves chemotherapy. You will also use ONPRO support and dignicap to help manage side effects.
+
 **What is the plan going forward?**
+
 You will have radiation therapy to manage the extent of your cancer and any remaining areas of concern. A port will be placed to make it easier to receive chemotherapy. You will have a staging PET/CT scan and a baseline echo before starting chemotherapy. You will also undergo genetic testing for BRCA.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

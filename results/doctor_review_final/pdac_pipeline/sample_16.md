@@ -98,17 +98,30 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your pancreatic cancer treatment.
+
 **What's new or changed since your last visit?**
+
 Recent imaging shows slight improvement in the size of your pancreatic duct. The ill-defined pancreatic mass is no longer visible, likely due to treatment. There is a 1.1 cm left renal lesion that may be cancerous. No new signs of cancer spread were found.
+
 **What treatment or medication changes were made?**
+
 The plan is to continue with gemcitabine but switch to an alternating week schedule for better tolerability. You will continue to use medications for nausea and pain as needed.
+
 **What is the plan going forward?**
+
 You will have monthly CA 19-9 blood tests and restaging CT scans every 2 months to monitor how well the treatment is working. You are being referred to a nutritionist for dietary advice. Your next visit is scheduled for May 16th.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

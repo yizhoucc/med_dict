@@ -90,17 +90,30 @@ ID: ***** ***** is a 31 y.o. premenopausal female patient with a history of a St
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a consultation to discuss treatment options for your breast cancer and to establish care.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has now spread to your left breast and left cervical lymph node, making it a stage IV cancer. Imaging showed a mass in your left breast and lymph nodes with increased metabolic activity. You also have a palpable mass in your left breast and another in your left neck. There is discoloration of the skin on your left breast.
+
 **What treatment or medication changes were made?**
+
 You will start on goserelin, which suppresses the ovaries, followed by an aromatase inhibitor (AI). These medications help control hormone levels that can fuel the growth of certain types of breast cancer.
+
 **What is the plan going forward?**
+
 You will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will return to the clinic two weeks after starting goserelin.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

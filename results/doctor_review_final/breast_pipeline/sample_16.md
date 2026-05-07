@@ -90,18 +90,31 @@
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consult regarding your breast cancer treatment.
+
 **What's new or changed since your last visit?**
+
 You were diagnosed with a type of cancer called invasive lobular carcinoma (cancer that started in the milk-producing glands). The cancer is ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. Imaging tests showed a large abnormality in your left breast and some enlarged lymph nodes. A fine needle aspiration of a lymph node was done and is pending.
+
 **What treatment or medication changes were made?**
+
 No changes were made to your current medications.
+
 **What is the plan going forward?**
+
 You are scheduled to have a mastectomy (surgery to remove the breast). After your surgery, you will have a CT scan and an ultrasound. You will also have a follow-up visit after surgery to discuss further treatment options.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

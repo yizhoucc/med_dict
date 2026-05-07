@@ -103,18 +103,31 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a new consultation regarding your recently diagnosed breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your right armpit but has not spread to other parts of your body. Imaging tests show a tumor in your right breast and enlarged lymph nodes. A biopsy of the lymph node confirmed that the cancer had spread there.
+
 **What treatment or medication changes were made?**
+
 You will start hormonal therapy after radiation. To help preserve your hair during chemotherapy, you will use scalp cooling with a Dignicap or Penguin Cold Cap.
+
 **What is the plan going forward?**
+
 You are scheduled to undergo surgery on November 5th. After surgery, you will have a test called Mammaprint to help decide the best treatment plan. You will start hormonal therapy after radiation. We also discussed the possibility of participating in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE. You are referred to have a brain MRI. Your next visit will be after surgery.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

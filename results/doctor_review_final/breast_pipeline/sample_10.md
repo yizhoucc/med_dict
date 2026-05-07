@@ -100,17 +100,30 @@ HPI:  ***** ***** is a 32 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for an initial consultation regarding your newly diagnosed right breast cancer.
+
 **What's new or changed since your last visit?**
+
 You have been diagnosed with a grade 2 invasive ductal carcinoma (cancer that started in the milk ducts) in your right breast. The cancer is estrogen receptor positive (ER+), progesterone receptor positive (PR+), and does not have a protein called HER2. The cancer has spread to one lymph node under your right armpit but has not spread to other parts of your body.
+
 **What treatment or medication changes were made?**
+
 You will start neoadjuvant chemotherapy (treatment given before surgery to shrink the cancer) on May 1st, 2017. This will include weekly paclitaxel for 12 weeks followed by AC every 2-3 weeks with Neulasta support. After surgery, you will need hormone therapy, which includes suppressing your ovaries. You are also considering the use of cold caps during chemotherapy to reduce hair loss.
+
 **What is the plan going forward?**
+
 You will start neoadjuvant chemotherapy on May 1st, 2017. A port will be placed either on the start of therapy or one week later. You will have a mammogram and PET scan on May 1st, 2017. Labs will be done on Thursday. Mammoprint results are expected on Thursday of this week.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 

@@ -90,18 +90,31 @@ SUBJECTIVE:    This is a very pleasant 68-year-old woman who presented with symp
 
 Dear Patient,
 We hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.
+
 **Why did you come to the clinic?**
+
 You came in for a follow-up visit regarding your cancer treatment.
+
 **What's new or changed since your last visit?**
+
 The cancer is showing signs of getting smaller. Specifically, the tumor in your pancreas has slightly decreased in size compared to previous imaging. However, it still touches the left adrenal gland, spleen, and stomach. You also have a rash that is tolerable.
+
 **What treatment or medication changes were made?**
+
 Your treatment was switched from a standard schedule of gemcitabine and Abraxane to an alternate week schedule because you experienced neutropenia (low white blood cell count). You are also taking ondansetron to manage nausea.
+
 **What is the plan going forward?**
+
 You will continue with the same treatment without changing the dose or schedule. Your imaging will be repeated in 8 weeks. Your next visit will be a telehealth appointment in 8 weeks.
 We understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.
+
 Thank you for trusting us with your care.
+
 Please feel free to contact us if you have any questions.
-Sincerely, Your Care Team
+
+Sincerely,
+Your Care Team
+
 
 ---
 
