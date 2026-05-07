@@ -43,22 +43,6 @@ Place a port (a small device under the skin to give medicine)
 Complete staging scans and heart testing before treatment 
 
 
-What to watch for:
-During treatment, please tell your care team if you have:
-
-
-Fever or signs of infection
-
-
-Severe fatigue
-
-
-Numbness or tingling
-
-
-New or worsening pain
-
-
 We understand this is a difficult time, and it is normal to feel upset. You have support around you, and your care team is here to help.
 Please ask any questions you have. We are here for you every step of the way.
 Warmly,

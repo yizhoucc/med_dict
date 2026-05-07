@@ -35,13 +35,6 @@ After surgery, your care team will review the results and discuss additional tre
 Hormone therapy to block estrogen and lower the chance of cancer coming back
 Other treatments based on final results
 
-What to watch for:
-Please tell your care team if you notice:
-
-New or growing lumps
-Pain or swelling
-Fever or any new symptoms
-
 We understand this is a difficult time. Please ask your care team any questions you have. We are here to support you every step of the way.
 
 Warmly,

@@ -41,15 +41,6 @@ Schedule port placement soon
 Attend a chemotherapy teaching session
 Decide on the exact start date for treatment
 Follow up with your oncology team regularly
-What to Watch For
-
-Call your care team if you have:
-
-Fever or signs of infection
-New or worsening pain in the breast
-Severe tiredness
-Nausea or trouble eating
-
 It is normal to feel unsure about starting treatment. Please take time to speak with your doctors and ask any questions you have.
 
 You are not alone. Your care team is here to support you every step of the way. Please bring any concerns to your next visit so we can help you feel confident and cared for.

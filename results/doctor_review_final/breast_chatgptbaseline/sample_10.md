@@ -35,13 +35,6 @@ Chemotherapy (medicine to kill cancer cells)
 
 You have already started egg harvesting, which is a way to help preserve fertility before treatment.
 
-What to watch for:
-Please tell your care team if you notice:
-
-New or growing lumps
-Pain or swelling under your arm
-Fever or other new symptoms
-
 It is great that you are staying active and focusing on healthy habits. Please talk with your care team about exercise during treatment.
 
 You are not alone. Please ask questions and share any concerns. We are here to help you every step of the way.

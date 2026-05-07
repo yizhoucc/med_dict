@@ -34,12 +34,6 @@ Meet with your cancer team to review treatment options
 Continue follow-up for your heart condition
 Monitor your recovery from surgery
 
-Call your care team if you notice:
-
-New swelling, pain, or redness at the surgery site
-Trouble breathing
-Fever or feeling unwell
-
 Please remember, you are not alone. Your care team is here to support you. Bring any questions to your next visit so we can review them together.
 
 Warmly,

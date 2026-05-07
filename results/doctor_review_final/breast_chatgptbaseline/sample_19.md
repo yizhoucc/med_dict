@@ -47,13 +47,6 @@ Some bone pain and vaginal dryness
 
 These can be side effects of hormone therapy. Please let your care team know if they get worse.
 
-What to watch for:
-Please contact your care team if you notice:
-
-New or worsening pain
-New lumps or swelling
-Any new or unusual symptoms
-
 We are happy to hear your mood symptoms have improved. Please continue to follow up for emotional support as needed.
 
 You are doing well, and we will continue to monitor you closely. Please reach out with any questions or concerns.

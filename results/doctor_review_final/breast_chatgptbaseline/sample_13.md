@@ -35,13 +35,6 @@ Possibly radiation therapy, depending on final results
 
 You have also completed egg harvesting to help preserve fertility, which is an important step before treatment.
 
-What to watch for:
-Please tell your care team if you notice:
-
-New or growing lumps
-Pain or swelling in your arm
-Headaches or new symptoms
-
 We understand you may be concerned about work and daily life during treatment. Please discuss this with your care team so we can help you plan ahead.
 
 You are not alone. Please ask any questions you have—we are here to help you every step of the way.

@@ -34,14 +34,6 @@ Because you are still having menstrual periods, tamoxifen is the recommended opt
 
 You will meet with a radiation specialist to decide if radiation is right for you. You should wait to start tamoxifen until after this visit.
 
-What to watch for:
-If you start tamoxifen, tell your care team if you notice:
-
-Worsening hot flashes or night sweats
-Leg swelling or pain
-Shortness of breath
-Any unusual vaginal bleeding
-
 It is normal to have some soreness after surgery, and this should improve with time.
 
 Please talk with your care team about any questions or concerns. We are here to help you every step of the way.

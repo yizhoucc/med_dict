@@ -35,13 +35,6 @@ Next steps:
 Meet with your oncology team to finalize your treatment plan
 Begin therapy as recommended
 
-What to watch for:
-After surgery and during treatment, please tell your care team if you have:
-
-New swelling, redness, or pain
-Fever
-Worsening arm stiffness or numbness
-
 It is good to hear you are healing well from surgery. Some arm stiffness and numbness can happen after lymph node surgery and often improve with time.
 
 You are not alone in this. Please ask your care team any questions you have. We are here to help you every step of the way.

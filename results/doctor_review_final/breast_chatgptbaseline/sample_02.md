@@ -39,15 +39,6 @@ Repeat imaging tests to see how the tumor responds
 
 If the tumor shrinks, surgery and radiation may be possible later.
 
-What to Watch For
-
-Please call your care team if you notice:
-
-New or worsening pain in the chest area
-New lumps or swelling
-Shortness of breath
-Ongoing weight loss or poor appetite
-
 You are not alone in this. Your care team will guide you at every step. Please bring any questions or concerns to your next visit so they can support you fully.
 
 Warmly,

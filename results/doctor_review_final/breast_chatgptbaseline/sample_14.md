@@ -36,14 +36,6 @@ Start ovarian suppression now
 Begin hormone therapy about 2 weeks later
 Finalize timing of surgery with your surgical team
 
-What to watch for:
-With hormone therapy, please tell your care team if you notice:
-
-Hot flashes
-Mood changes
-Joint or muscle pain
-Changes in your menstrual cycle
-
 Your care team also discussed that hormone therapy is usually taken for about 5 years, as shorter treatment may not be as effective.
 
 We understand this is a stressful time. Please talk with your care team about any concerns, including how treatment may affect your mood and daily life.

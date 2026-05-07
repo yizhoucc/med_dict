@@ -43,14 +43,6 @@ Continue current treatment
 Repeat scans every 3–4 months, or sooner if needed
 Place a port (a small device under the skin to help give treatment)
 
-What to watch for:
-Please tell your care team if you have:
-
-New or worsening pain
-Severe nausea or vomiting
-Fever or signs of infection
-Increasing numbness or weakness
-
 We understand this is challenging. Please talk with your care team about any questions or concerns. We are here to help you every step of the way.
 
 Warmly,

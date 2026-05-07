@@ -36,14 +36,6 @@ Echocardiogram (heart test)
 Chemotherapy teaching session
 Placement of a port (a small device under the skin to give treatment)
 
-What to watch for:
-During treatment, please tell your care team if you have:
-
-Fever or signs of infection
-Severe fatigue
-Numbness or tingling in your hands or feet
-Shortness of breath or chest pain
-
 We understand this is a difficult time, but your cancer is being treated with the goal of cure.
 
 Please ask your care team any questions you have. We are here to help you every step of the way.

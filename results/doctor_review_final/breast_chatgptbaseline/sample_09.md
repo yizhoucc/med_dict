@@ -34,14 +34,6 @@ Additional medicines may be added slowly based on how you tolerate treatment
 
 At this time, chemotherapy is not planned first, as hormone-based treatments can work well and may have fewer side effects.
 
-What to watch for:
-Please tell your care team if you notice:
-
-Growth of the breast or neck lumps
-New or worsening pain
-Numbness or weakness
-Any new symptoms
-
 Your care team’s goal is to control the cancer, help you live longer, and maintain your quality of life.
 
 We understand this is difficult. Please ask questions and share any concerns. We are here for you every step of the way.

@@ -45,13 +45,6 @@ Repeat imaging (such as PET/CT)
 Heart test (echocardiogram) before treatment
 Possible placement of a port (a small device under the skin to give medicine)
 
-What to watch for:
-Please tell your care team if you have:
-
-Fever or signs of infection
-Severe fatigue
-New pain or symptoms
-
 We understand this is overwhelming. Please ask any questions you have. We are here to support you every step of the way.
 
 Warmly,

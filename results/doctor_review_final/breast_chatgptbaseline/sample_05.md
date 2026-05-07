@@ -39,9 +39,6 @@ Finalize chemotherapy plan
 Start treatment, followed by radiation
 Begin hormone therapy after these treatments
 
-What to watch for:
-During treatment, please tell your care team if you notice fever, severe fatigue, pain, or any new symptoms.
-
 You are not alone in this. Please bring any questions or concerns to your care team—we are here to help you every step of the way.
 
 Warmly,

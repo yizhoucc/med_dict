@@ -36,13 +36,6 @@ Next steps:
 Complete any remaining testing (such as HER2 results if pending)
 Finalize and start your treatment plan
 
-What to watch for:
-Please tell your care team if you notice:
-
-New or worsening lumps
-Pain or swelling
-Fatigue or any new symptoms
-
 It is normal to have many questions, including about the future. Please talk openly with your care team—they are here to support you and guide you through your care.
 
 You are not alone. We will walk through this together, step by step.

@@ -42,9 +42,6 @@ Targeted therapy (drugs like trastuzumab and pertuzumab that specifically target
 
 Radiation therapy may also be used if there are bone spots causing symptoms.
 
-What to watch for:
-Please tell your care team if you notice new pain (especially bone pain), fatigue, fever, or any new symptoms.
-
 We understand this is overwhelming. Please ask questions and share any concerns with your care team. We are here to help you through every step.
 
 Warmly,

@@ -43,15 +43,6 @@ Start chemotherapy soon
 Attend a teaching session about treatment
 Repeat blood tests to monitor your health
 Review genetic test results when ready
-What to Watch For
-
-Call your care team if you have:
-
-Fever or signs of infection
-Severe fatigue or weakness
-Numbness or tingling in hands or feet
-Nausea that does not improve
-
 You are not alone. Your care team is here to support you through each step. Please bring any questions to your visits so we can help you feel informed and confident.
 
 Warmly,

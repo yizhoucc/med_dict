@@ -34,13 +34,6 @@ Hormone therapy (medicine to block estrogen), usually for at least 5 years
 
 The exact chemotherapy plan will depend on whether cancer is found in the lymph nodes at surgery.
 
-What to watch for:
-Please tell your care team if you notice:
-
-New or growing lumps
-Pain or swelling
-Any new symptoms
-
 We understand this is stressful, and it is normal to feel anxious. Please share your concerns with your care team. We are here to support you and help guide you through each step.
 
 You are not alone in this.
