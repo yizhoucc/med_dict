@@ -2,7 +2,7 @@
 
 Outputs:
   BREAST_REVIEW.html — 20 breast samples × 3 systems (ChatGPT / Baseline / Pipeline)
-  PDAC_REVIEW.html   — 20 PDAC samples × 2 systems (Baseline / Pipeline)
+  PDAC_REVIEW.html   — 20 PDAC samples × 3 systems (ChatGPT / Baseline / Pipeline)
 
 Reads full clinical notes from CORAL CSV (not from sample files which may be truncated).
 
@@ -120,6 +120,7 @@ def build_pdac_md():
         num = f"{i+1:02d}"
         pipeline = read_file(os.path.join(BASE, 'pdac_pipeline', f'sample_{num}.md'))
         baseline = read_file(os.path.join(BASE, 'pdac_baseline', f'sample_{num}.md'))
+        chatgpt = read_file(os.path.join(BASE, 'pdac_chatgptbaseline', f'sample_{num}.md'))
 
         cancer_type = extract_cancer_type(pipeline)
         full_note = pdac_notes[i]
@@ -129,8 +130,9 @@ def build_pdac_md():
             output.append(f"**Cancer Type:** {cancer_type}\n\n")
         output.append("## Original Clinical Note\n\n```\n" + full_note + "\n```\n\n")
 
-        for label, letter_text in [("A", extract_letter(baseline)),
-                                    ("B", extract_letter(pipeline))]:
+        for label, letter_text in [("A", extract_letter(chatgpt)),
+                                    ("B", extract_letter(baseline)),
+                                    ("C", extract_letter(pipeline))]:
             output.append(f"---\n\n## Letter {label}\n\n")
             output.append(letter_text + "\n\n")
         output.append("---\n\n")
@@ -156,7 +158,7 @@ def main():
     sz1 = write_html(breast_md, breast_html_path,
                      "Breast Cancer — Patient Letter Review (20 Samples × 3 Systems)")
     sz2 = write_html(pdac_md, pdac_html_path,
-                     "Pancreatic Cancer — Patient Letter Review (20 Samples × 2 Systems)")
+                     "Pancreatic Cancer — Patient Letter Review (20 Samples × 3 Systems)")
 
     print(f"Breast: {breast_html_path} ({sz1//1024} KB)")
     print(f"PDAC:   {pdac_html_path} ({sz2//1024} KB)")
