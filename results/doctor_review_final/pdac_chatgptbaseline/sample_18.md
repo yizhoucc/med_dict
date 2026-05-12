@@ -26,26 +26,36 @@ You were diagnosed with pancreatic adenocarcinoma (a cancer that starts in the p
 You first received chemotherapy (medicine to treat cancer) before surgery, but you had severe side effects, so this treatment was stopped. You then had surgery on 03/01/22, called a distal pancreatectomy and splenectomy (removal of part of the pancreas and the spleen). The pathology showed that the tumor was removed with negative margins (no cancer cells seen at the edges of the removed tissue), but 2 out of 29 lymph nodes had cancer, which means some spread to nearby lymph nodes. 
 After surgery, you started postoperative chemotherapy with gemcitabine and capecitabine. However, you have had significant side effects, including:
 
+
 Mucositis (painful mouth sores)
+
 
 Hand-foot syndrome (redness, pain, and peeling of the hands and feet)
 
+
 Fatigue and balance problems with falls
+
 
 Because of these symptoms, your care team has decided to pause chemotherapy until your side effects improve. 
 Your most recent CT scans show no evidence of cancer spread in the abdomen or pelvis, which is reassuring. 
 A new finding on your chest scan showed a pulmonary embolism (a blood clot in the lung). This is a serious condition that needs treatment. 
 Plan and Next Steps:
 
+
 Hold chemotherapy until your symptoms improve
+
 
 Restart treatment later with a modified schedule if tolerated
 
+
 Begin blood thinner treatment (Lovenox) for the lung blood clot
+
 
 Use a walker to prevent falls
 
+
 Monitor your symptoms closely, especially balance and fatigue
+
 
 Please contact your care team right away if you have new symptoms, such as worsening shortness of breath, chest pain, or more frequent falls.
 If you have any questions, please discuss them with your care team. We are here to support you through this.
