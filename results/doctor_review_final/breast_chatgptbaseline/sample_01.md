@@ -25,30 +25,57 @@ ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of b
 
 Dear Patient,
 
-I am writing to explain your recent test results and next steps in your care.
+We are writing to help you understand your recent visit and your breast cancer care.
 
-You have been diagnosed with breast cancer in your right breast. The type is called invasive ductal carcinoma, which means the cancer started in the milk ducts and has grown into nearby breast tissue. The tumor was about 3.6 cm in size. It is a grade 3 cancer, which means the cancer cells are growing faster than normal.
+What is your diagnosis?
+You have breast cancer in your right breast. The type is called invasive ductal carcinoma, which means the cancer started in the milk ducts and has grown into nearby breast tissue.
+Your tumor was 3.6 cm in size and is grade 3, which means the cancer cells look more aggressive under the microscope.
+One nearby lymph node (a small gland that helps fight infection) had cancer.
 
-Your cancer was tested for certain markers. It is estrogen receptor (ER) negative and progesterone receptor (PR) negative, meaning it does not use these hormones to grow. It is HER2 positive, which means the cancer has a protein that can make it grow more quickly.
+Your cancer is:
 
-You had surgery on October 25, 2016, called a mastectomy (removal of the breast). The surgeon also checked nearby lymph nodes (small glands that help fight infection). Out of 2 lymph nodes, 1 had cancer cells. The edges of the removed tissue were clear, which means no cancer was seen at the margins.
+ER negative / PR negative: the cancer does not use estrogen or progesterone to grow
+HER2 positive: the cancer has a protein that can help it grow faster
 
-This information suggests the cancer has spread to a nearby lymph node but was fully removed with surgery. Your care team will use this information to decide the stage and the best treatment plan.
+What has been done so far?
+You had surgery on 10/25/2016 to remove the right breast (mastectomy, which means removal of the breast) and to check nearby lymph nodes.
+The surgery removed all visible cancer, and the edges (called margins) were clear, which is good.
 
-Your doctors will now discuss additional treatment options with you. These may include systemic therapy, which is treatment that travels through the body to lower the chance of the cancer coming back.
+Other health issues
+You also have heart failure (the heart does not pump well), with a low heart function (LVEF 25%).
+You recently had shortness of breath but improved with treatment and now feel back to your usual state.
 
-You also have other health conditions, including heart failure (your heart does not pump as well as it should), and you recently had shortness of breath but are now feeling better. This is important when planning treatment.
+Treatment plan
+You are here to discuss next steps in treatment. These may include medicines to lower the chance of the cancer coming back. Your care team will consider your cancer type and your heart condition when making recommendations.
 
-Next steps:
+Key test results
 
-Meet with your cancer team to review treatment options
-Continue follow-up for your heart condition
-Monitor your recovery from surgery
+Tumor size: 3.6 cm
+1 of 2 lymph nodes positive
+No cancer at the surgical edges
+Cancer markers: ER/PR negative, HER2 positive
 
-Please remember, you are not alone. Your care team is here to support you. Bring any questions to your next visit so we can review them together.
+Next steps
 
-Warmly,
-Your Care Team
+Meet with your oncology team to decide on further treatment
+Continue follow-up visits
+Manage your heart condition closely with your doctors
+
+What to watch for
+Call your care team if you notice:
+
+New or worsening shortness of breath
+Chest pain
+Swelling in your legs
+New lumps or pain
+Fever or signs of infection
+
+You are recovering well from surgery and feeling better after your recent symptoms. That is encouraging.
+
+Please remember, you are not alone. If you have questions or concerns, write them down and discuss them with your care team. They are here to support you and help you make the best decisions for your health.
+
+With care and support,
+Your Oncology Team
 
 ---
 

@@ -26,33 +26,57 @@
 
 Dear Patient,
 
-We are writing to explain your recent diagnosis and your treatment plan. We know this can feel overwhelming, and we are here to support you.
+We are writing to help you understand your diagnosis and your treatment plan.
 
-You have breast cancer in the left breast, called invasive ductal carcinoma. This means the cancer started in the milk ducts and spread into nearby breast tissue. Your cancer is Stage IIA, which means it is larger and has spread to nearby lymph nodes (small glands that help fight infection).
+What is your diagnosis?
+You have breast cancer in your left breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
 
-Your tumor is hormone receptor positive (ER+/PR+), which means it grows with hormones like estrogen and progesterone. It is HER2 negative, meaning it does not have extra HER2 protein.
+Your cancer is Stage IIA, which means it is a medium-sized tumor with some spread to nearby lymph nodes (small glands that help fight infection).
 
-You already had surgery (bilateral mastectomies) to remove the breast tissue and lymph nodes. The largest tumor was 3.9 cm, and 2 lymph nodes had cancer. The surgery margins were clear, meaning no cancer was seen at the edges.
+Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
 
-A special test called MammaPrint shows your cancer is high risk, meaning there is a higher chance the cancer could come back.
+Key test results
 
-Treatment plan (adjuvant therapy):
-This means treatment after surgery to lower the risk of the cancer returning. Your care team will discuss:
+Imaging showed several masses in the left breast and abnormal lymph nodes.
+Biopsy confirmed breast cancer.
+Surgery removed the breast tissue and lymph nodes.
+The largest tumor was about 3.9 cm.
+Cancer was found in 2 lymph nodes.
+Special testing (Mammaprint) showed the cancer is high risk, meaning a higher chance of coming back without treatment.
 
-Chemotherapy (medicine to kill cancer cells)
-Hormone therapy (medicine to block estrogen and slow cancer growth)
+What is the treatment plan?
+Your doctors recommend adjuvant therapy. This means treatment given after surgery to lower the chance of the cancer returning.
 
-Next steps:
+The plan includes:
 
-Meet with your oncology team to finalize your treatment plan
-Begin therapy as recommended
+Chemotherapy to kill any remaining cancer cells
+Hormone therapy (medicine that blocks estrogen)
+Possible additional treatments based on your care team’s evaluation
 
-It is good to hear you are healing well from surgery. Some arm stiffness and numbness can happen after lymph node surgery and often improve with time.
+Hormone therapy is very important for your type of cancer and is usually taken for several years.
 
-You are not alone in this. Please ask your care team any questions you have. We are here to help you every step of the way.
+Next steps
 
-Warmly,
-Your Care Team
+Start chemotherapy
+Follow up regularly with your oncology team
+Begin hormone therapy after chemotherapy
+
+What to watch for
+After surgery and during treatment, you may notice:
+
+Arm stiffness or numbness (especially on the side of surgery)
+Fatigue (feeling tired)
+Possible side effects from chemotherapy
+
+Please tell your care team if you have fever, swelling, worsening pain, or any new symptoms.
+
+Final thoughts
+You are healing well after surgery, which is a positive step. The recommended treatments are meant to lower the risk of the cancer coming back.
+
+Please bring any questions or concerns to your care team. We are here to support you every step of the way.
+
+With care,
+Your Cancer Care Team
 
 ---
 

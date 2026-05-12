@@ -24,33 +24,55 @@ HPI:  ***** ***** is a 32 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 
-We are writing to explain your diagnosis and your treatment options. We know this is a lot to take in, and we are here to support you.
+We are writing to help you understand your diagnosis and your treatment options.
 
-You have breast cancer in the right breast, called invasive ductal carcinoma. This means the cancer started in the milk ducts and has spread into nearby breast tissue. Your cancer is hormone receptor positive (ER+ and PR+), which means it grows with hormones like estrogen. It is HER2 negative, meaning it does not have extra HER2 protein.
+What is your diagnosis?
+You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
 
-Tests show a tumor about 3 cm in size in your right breast. A nearby lymph node (a small gland that helps fight infection) also has cancer cells.
+Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
 
-Good news: your PET/CT scan did not show cancer spread to other parts of the body.
+The cancer has also spread to a lymph node in your right armpit (axilla). This means it is a more advanced local stage, but it has not spread to distant organs.
 
-What this means:
-Your cancer is at an early but higher-risk stage because it involves a lymph node.
+Key test results
 
-Next steps:
-Your care team will discuss a treatment plan with you. This may include:
+Imaging showed a tumor about 3 cm in your right breast.
+A biopsy confirmed breast cancer.
+A lymph node biopsy showed cancer spread to that node.
+MRI confirmed the breast tumor and enlarged lymph node.
+PET scan did not show cancer spread to other parts of the body.
+
+What is the treatment plan?
+Your care team will recommend a multimodal treatment approach. This means using several types of treatment together. These may include:
 
 Surgery to remove the tumor
-Systemic therapy (treatment that works throughout the body), such as:
-Hormone therapy (to block estrogen and slow cancer growth)
-Chemotherapy (medicine to kill cancer cells)
+Systemic therapy (medicine that treats the whole body), such as hormone therapy and possibly chemotherapy
+Other treatments based on your final plan
 
-You have already started egg harvesting, which is a way to help preserve fertility before treatment.
+Because your cancer is hormone receptor positive, hormone therapy (medicine that blocks estrogen) will be an important part of your treatment.
 
-It is great that you are staying active and focusing on healthy habits. Please talk with your care team about exercise during treatment.
+Next steps
 
-You are not alone. Please ask questions and share any concerns. We are here to help you every step of the way.
+Complete your egg harvesting process (to preserve fertility before treatment)
+Meet with your oncology team to finalize your treatment plan
+Begin treatment as recommended
 
-Warmly,
-Your Care Team
+What to watch for
+You are currently feeling well overall. Please tell your care team if you notice:
+
+New pain or swelling
+Changes in the breast or underarm area
+Fatigue or other new symptoms
+
+Lifestyle and support
+You asked about exercise. Staying active is usually helpful, but please check with your care team about safe activities during treatment. Eating a healthy diet is also a good step.
+
+Final thoughts
+You have a strong support system, which is very important. Your care team will guide you through each step of treatment.
+
+Please write down any questions and discuss them with your doctors. We are here to support you.
+
+With care,
+Your Cancer Care Team
 
 ---
 
