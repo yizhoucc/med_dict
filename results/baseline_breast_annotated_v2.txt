@@ -1,0 +1,961 @@
+BASELINE GENERATION — No pipeline, single prompt
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv
+Date: 2026-05-11 21:03
+Prompt: Standard baseline (see research proposal Section 5.3)
+============================================================
+
+============================================================
+ROW 1 (coral_idx=20)
+============================================================
+
+--- LETTER ---
+Dear [Patient's Name],
+
+Thank you for coming to our clinic with your family. We want to make sure you understand everything about your health and the next steps.
+
+**Diagnosis:**
+You have breast cancer. It is called "triple negative" because it doesn't have three things that some cancers have: estrogen receptors, progesterone receptors, and HER2 protein. This means we need to use different treatments.
+
+**Stage:**
+The cancer is at Stage II. This means it has grown a bit and has spread to one lymph node. But it hasn’t spread far.
+
+**Treatment Plan:**
+We talked about using chemotherapy to treat the cancer. Chemotherapy uses strong medicines to kill cancer cells. However, because you have other health problems like heart failure and diabetes, these medicines might make you very sick. So, we need to be careful.
+
+**Next Steps:**
+To find out if the cancer has spread to other parts of your body, we will do a special scan called a PET/CT. This will help us decide the best way to treat you.
+
+**What to Watch For:**
+Please let us know if you notice any new lumps or changes in how you feel. Also, keep an eye on your energy levels and breathing. If you feel very tired or have trouble breathing, call us right away.
+
+**Medicines:**
+You are taking several medicines to manage your other health conditions. Please continue to take them as prescribed by your doctor.
+
+**Questions:**
+It’s important to talk to your care team if you have any questions or concerns. We are here to help you understand everything and support you during this time.
+
+Take care and we look forward to seeing you soon.
+
+Sincerely,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.7s
+Letter length: 1672 chars
+
+
+============================================================
+ROW 2 (coral_idx=21)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to see us. I want to share what we learned about your health and the next steps we will take.
+
+**Diagnosis and Stage:**
+You have breast cancer that has come back in the same area where it was before. This is called locally recurrent breast cancer. It is not able to be removed completely with surgery.
+
+**Treatment Plan:**
+We talked about using medicine to help control the cancer. One option is to use a type of drug called an aromatase inhibitor. This medicine stops the body from making too much estrogen, which can help slow down the growth of the cancer. We also discussed joining a research study to try a new treatment.
+
+**Key Test Results:**
+- **PET/CT Scan:** This test shows that the cancer is growing in your chest wall. It also shows that you have a small spot in your liver, but this is not cancer.
+- **MRI of Brain:** This test shows no signs of cancer in your brain.
+- **Blood Tests:** Your blood tests show that you are healthy and ready to start treatment.
+
+**Next Steps:**
+- You will start taking an aromatase inhibitor. This medicine will help control the cancer.
+- We will keep watching the cancer closely with regular tests.
+- We may also do more surgery or radiation later if needed.
+
+**What to Watch For:**
+- Keep an eye on any new pain or changes in your chest or breasts.
+- Let us know if you have any new symptoms like feeling dizzy or having trouble breathing.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
+
+Warm regards,
+
+[Doctor’s Name]  
+[Doctor’s Title]  
+UCSF Comprehensive Cancer Center
+
+---
+
+Feel free to reach out to us anytime. We are here to help you through this journey.
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1738 chars
+
+
+============================================================
+ROW 3 (coral_idx=22)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+I hope this letter finds you well. I wanted to share some important information about your health in a way that is easy to understand.
+
+**Diagnosis and Stage:**
+You have a type of breast cancer called spindle cell metaplastic carcinoma. This is a rare kind of cancer that can grow quickly. It is found in your right breast and is considered locally advanced, which means it is larger and might be in more than one spot. However, it has not spread to other parts of your body.
+
+**Treatment Plan:**
+We recommend starting with a special type of treatment called neoadjuvant chemotherapy. This means you will take medicine before having surgery to remove the cancer. The goal is to make the cancer smaller so that surgery can be easier and more successful. 
+
+The chemotherapy will help us see how well the cancer responds to the treatment. Depending on how you respond, we might also consider surgery, radiation, and possibly other treatments later.
+
+**Key Test Results:**
+- A biopsy showed that the cancer cells are not affected by hormones (ER and PR negative) and do not have too much of a protein called HER2.
+- An MRI scan showed that the cancer is about 3.5 cm in size and there are a few smaller spots nearby.
+- Your blood tests showed that your kidneys and liver are working well, but we will check them again soon.
+
+**Next Steps:**
+- You will start chemotherapy soon. We will put a special tube called a Medi-port in your chest to make it easier to give you the medicine.
+- We will teach you more about the treatment and its possible side effects, like feeling tired, hair loss, and skin changes.
+- You will have regular check-ups to see how the treatment is working.
+
+**What to Watch For:**
+- Let us know if you feel very tired, have pain, or notice any new lumps or changes in your skin.
+- Keep track of any side effects and tell us about them during your visits.
+
+**Important Reminders:**
+- Please talk to your care team if you have any questions or concerns.
+- We will keep you updated on your progress and adjust your treatment plan as needed.
+
+Thank you for trusting us with your care. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+[Cancer Center Name]
+
+Please remember to discuss any questions or concerns with your care team. They are here to help you through this journey.
+
+--- STATS ---
+Generation time: 7.8s
+Letter length: 2377 chars
+
+
+============================================================
+ROW 4 (coral_idx=23)
+============================================================
+
+--- LETTER ---
+Dear Patient,
+
+Thank you for coming to our cancer center. We want to make sure you understand everything about your health and treatment plan.
+
+**Diagnosis and Stage:**
+You have breast cancer in your right breast. The cancer has grown from a small size to a bigger one. We call this "recurrent" because it came back after being treated before.
+
+**Treatment Plan:**
+We recommend chemotherapy to help fight the cancer. Chemotherapy uses strong medicines to kill cancer cells. We will place a special tube called a "port" to give you the medicine. The first treatment can start as early as next Wednesday or the following week.
+
+**Key Test Results:**
+Tests show that the cancer in your right breast has grown. We did not find any cancer in other parts of your body.
+
+**Next Steps:**
+You will come to the clinic for check-ups during your treatment. You will need to visit us for five different times during your treatment.
+
+**What to Watch For:**
+Please let us know if you feel very tired, have a fever, or notice any new lumps or pain. Also, tell us if you have any trouble breathing or chest pain.
+
+**Medications:**
+You take several medicines to manage pain, allergies, and other conditions. Make sure to take them as directed.
+
+**Questions:**
+If you have any questions or concerns, please talk to your doctor or nurse. They are here to help you understand everything about your treatment.
+
+We hope this helps you understand your situation better. Remember, you are not alone in this journey.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your healthcare team. They are here to support you through this process.
+
+--- STATS ---
+Generation time: 6.3s
+Letter length: 1702 chars
+
+
+============================================================
+ROW 5 (coral_idx=24)
+============================================================
+
+--- LETTER ---
+Dear [Patient's Name],
+
+Thank you for coming to our clinic today. I wanted to share with you the details of your recent diagnosis and treatment plan in a way that is easy to understand.
+
+**Diagnosis and Stage:**
+You have been diagnosed with early-stage breast cancer. This means there are two tumors, one in each breast. The left breast tumor is more serious and is considered Stage III. The right breast tumor is less serious and is considered Stage I.
+
+**Treatment Plan:**
+We recommend a few treatments to help manage your condition:
+
+1. **Chemotherapy:** This is a type of medicine that helps kill cancer cells. We will give you four rounds of a treatment called TC. It may cause some side effects like feeling tired, joint pain, and hair loss. But it is important to reduce the chance of the cancer coming back.
+
+2. **Radiation Therapy:** After chemotherapy, you will have radiation therapy. This uses special energy beams to kill any remaining cancer cells.
+
+3. **Anti-Estrogen Therapy:** Since your cancer is sensitive to hormones, we will give you a medicine called an aromatase inhibitor (AI). This medicine stops your body from making too much estrogen, which can help prevent the cancer from growing. You will take this medicine for at least five years.
+
+**Key Test Results:**
+- Your left breast has a larger tumor that is more aggressive.
+- Your right breast has a smaller tumor that is less aggressive.
+- Some lymph nodes in your left armpit show signs of cancer, but not in your right armpit.
+
+**Next Steps:**
+- You will start chemotherapy soon.
+- After chemotherapy, you will begin radiation therapy.
+- Once you finish chemotherapy and radiation, you will start taking the AI medicine.
+
+**What to Watch For:**
+- If you feel very tired or have joint pain, let us know.
+- Keep track of any new lumps or changes in your breasts.
+- Continue to walk every day, as this is good for your health.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+Cancer Center
+
+---
+
+Feel free to reach out to us anytime. We are here to help you through this journey.
+
+--- STATS ---
+Generation time: 7.4s
+Letter length: 2203 chars
+
+
+============================================================
+ROW 6 (coral_idx=25)
+============================================================
+
+--- LETTER ---
+Dear [Patient's Name],
+
+I hope this letter finds you well. I wanted to share some important information about your health with you in a way that is easy to understand.
+
+**Diagnosis:**
+You have been diagnosed with a type of breast cancer called HER2-positive breast cancer. This means the cancer cells have a protein called HER2, which helps them grow faster. Your cancer is also hormone receptor-negative, meaning it doesn’t respond to hormones like estrogen.
+
+**Stage:**
+The tests show that your cancer might have spread to your bones. We call this stage IV cancer. To be sure, we need to do more tests, such as an MRI of your pelvis and a biopsy.
+
+**Treatment Plan:**
+We will start you on a treatment plan that includes three different medicines:
+- Paclitaxel: This medicine helps stop the growth of cancer cells.
+- Trastuzumab and Pertuzumab: These medicines target the HER2 protein to help slow down the cancer.
+
+We will also check how well your heart is working with a test called an echocardiogram. We will put in a port to make it easier to give you the medicines.
+
+**Next Steps:**
+- We will do an MRI of your pelvis to look closely at your bones.
+- We will also do a biopsy to confirm if the cancer has spread.
+- We will start the treatment plan as soon as we have all the information.
+
+**What to Watch For:**
+Please let us know if you notice any new symptoms or changes in how you feel. It’s important to keep track of any pain or discomfort.
+
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to help you understand everything and support you through this journey.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 5.7s
+Letter length: 1703 chars
+
+
+============================================================
+ROW 7 (coral_idx=26)
+============================================================
+
+--- LETTER ---
+Dear [Patient's Name],
+
+Thank you for coming to your appointment today. Here is a summary of what we discussed:
+
+**Diagnosis:**
+You have metastatic breast cancer. This means the cancer has spread to other parts of your body, like your liver and lymph nodes. It is also called triple-negative breast cancer because it does not respond to certain hormones or proteins.
+
+**Treatment Plan:**
+You are receiving two medicines: abraxane and pembrolizumab. These help fight the cancer. You will keep getting these treatments as long as they are working and you do not have bad side effects.
+
+**Key Test Results:**
+We looked at your latest scans and lab tests. They show that you are doing okay, but there are signs that the cancer is growing a little bit. We will keep watching closely.
+
+**Next Steps:**
+You will come back in 2 weeks, and then every 3 weeks after that. We will check how you are doing with more scans and tests.
+
+**What to Watch For:**
+Please let us know if you have any new symptoms or if your current ones get worse. Some things to watch out for include:
+- Feeling very tired
+- Pain in your arms, legs, or back
+- Tingling in your fingers or toes
+- Trouble sleeping
+
+**Medicines:**
+You are taking several medicines to help with pain, nausea, and other symptoms. Please take them as directed.
+
+**Important Reminders:**
+- Keep all your appointments.
+- Call us if you have any questions or concerns.
+- Remember to talk to your care team about any worries you might have.
+
+We are here to support you through this journey. Please feel free to reach out anytime.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+--- STATS ---
+Generation time: 6.5s
+Letter length: 1641 chars
+
+
+============================================================
+ROW 8 (coral_idx=27)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+I hope this letter finds you well. I am writing to summarize your recent visit to our cancer center and to explain your diagnosis and treatment plan in simple terms.
+
+**Diagnosis:**
+You have been diagnosed with stage IIA breast cancer. This means the cancer has spread to some nearby lymph nodes but not to distant parts of your body. The cancer is 3.9 centimeters in size and is called invasive ductal carcinoma (IDC).
+
+**Treatment Plan:**
+You recently had surgery to remove both breasts (bilateral mastectomies) and some lymph nodes from your left armpit. The cancer was found in two lymph nodes out of twelve that were checked.
+
+After reviewing your case, we believe you would benefit from additional treatments to help prevent the cancer from coming back. These treatments include:
+
+1. **Chemotherapy:** This is medicine that helps kill any remaining cancer cells. We plan to start this treatment around October 18, 2017. Chemotherapy can cause side effects like feeling tired, being sick to your stomach, and losing your hair. We will teach you more about these before you start.
+
+2. **Medicine to block hormones:** Since your cancer uses hormones to grow, you will take a medicine called an aromatase inhibitor. This helps stop the cancer from growing.
+
+**Next Steps:**
+Before starting chemotherapy, you will have a special heart check-up called a TTE. We will also place a small device called a port under your skin to make it easier to give you the chemotherapy medicines.
+
+**What to Watch For:**
+Please let us know if you notice any new symptoms or if you feel very tired or sick. It's important to keep your follow-up appointments so we can monitor your progress.
+
+**Genetic Testing:**
+Because of your family history, we think it’s a good idea for you to have genetic testing. This can help us understand more about your risk for cancer and guide future care.
+
+**Questions:**
+If you have any questions or concerns, please talk to your care team. We are here to support you through this journey.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 8.9s
+Letter length: 2227 chars
+
+
+============================================================
+ROW 9 (coral_idx=28)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+Thank you for coming to our clinic today. I want to share with you the important details about your health and the next steps in your care.
+
+**Diagnosis and Stage:**
+You have breast cancer that has come back. It is called Stage III breast cancer. This means the cancer has spread a little bit beyond where it started.
+
+**Treatment Plan:**
+We need to start new treatments to help control the cancer. First, we will do a small test called an FNA to check the lump on your neck. This will help us know more about the cancer.
+
+After that, we will start you on a medicine called goserelin. This medicine stops your ovaries from making hormones that can feed the cancer. Then, we will add another medicine called an aromatase inhibitor. These medicines work together to slow down the growth of the cancer.
+
+**Key Test Results:**
+Your recent tests show that the cancer has grown again in your left breast and some nearby lymph nodes. We found this using special scans like a PET/CT.
+
+**Next Steps:**
+- We will do the FNA test on your neck lump soon.
+- We will start you on goserelin and then add the aromatase inhibitor.
+- You will come back to see us two weeks after starting the goserelin.
+
+**What to Watch For:**
+Please let us know if you notice any changes in how you feel or if the lumps grow bigger. Also, tell us if you have any new pain or discomfort.
+
+**Important Reminders:**
+- Keep all your appointments.
+- Talk to your care team if you have any questions or concerns.
+- Remember, we are here to support you every step of the way.
+
+Take care and stay strong.
+
+Sincerely,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+If you have any questions or need further information, please don't hesitate to contact your care team. We are here to help you.
+
+--- STATS ---
+Generation time: 6.7s
+Letter length: 1782 chars
+
+
+============================================================
+ROW 10 (coral_idx=29)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to our clinic. I want to share with you the important information about your health.
+
+**Diagnosis:**
+You have breast cancer in your right breast. It is called a grade 2 invasive ductal carcinoma. This means the cancer cells are growing and spreading into nearby tissues. The cancer is in the early stages, which is good news.
+
+**Tests:**
+We did several tests to learn more about your cancer. We found a lump in your right breast and a swollen lymph node in your armpit. These tests help us know how to treat you best.
+
+**Treatment Plan:**
+We will start with chemotherapy to shrink the tumor before surgery. Chemotherapy uses special medicines to kill cancer cells. We will also use a device called a port to give you the medicine easily.
+
+Here’s what we will do:
+- **Echocardiogram and EKG:** These tests check your heart.
+- **PET Scan:** This test checks if there is any cancer spread.
+- **Cold Cap:** We talked about using a cold cap to try to keep your hair during chemotherapy.
+- **Chemotherapy:** We will start chemotherapy soon. We will use a mix of medicines to fight the cancer.
+
+**Next Steps:**
+- We will do more tests on Thursday.
+- We hope to start chemotherapy next week.
+- We will put in a port to make giving you medicine easier.
+
+**What to Watch For:**
+During treatment, you might feel tired, lose your hair, or have other side effects. If you have any problems, please let us know.
+
+**Support:**
+You have a strong support system with your family. Keep doing things that make you happy, like exercising and eating healthy food.
+
+If you have any questions, please talk to your care team. We are here to help you.
+
+Best wishes,
+
+[Your Name]  
+Medical Communication Specialist  
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.0s
+Letter length: 1754 chars
+
+
+============================================================
+ROW 11 (coral_idx=30)
+============================================================
+
+--- LETTER ---
+Dear Ms. *****,
+
+I hope this letter finds you well. I wanted to share some important information about your recent health check-up and the next steps we will take together.
+
+**Diagnosis and Stage:**
+You have been diagnosed with ductal carcinoma in situ (DCIS). This means there are abnormal cells in your breast that haven't spread beyond the milk ducts. It's like a small growth inside your breast that needs to be treated to prevent it from getting bigger.
+
+**Treatment Plan:**
+We have already done a lumpectomy, which means we removed the growth from your left breast. Now, we need to decide on the best way to make sure it doesn’t come back. One option is to use medicine called tamoxifen. This medicine helps stop the growth from coming back by changing how your body uses hormones.
+
+**Key Test Results:**
+The tests show that the growth is in the lower part of your left breast. The doctors found that the growth is sensitive to hormones, which is why we think tamoxifen might work well for you.
+
+**Next Steps:**
+We will set up an appointment with a radiation doctor to see if you need radiation therapy. This is another way to make sure the growth doesn’t come back. We will give you a prescription for tamoxifen, but you should wait to start taking it until after you talk with the radiation doctor.
+
+**What to Watch For:**
+Please keep an eye out for any changes in how you feel. If you notice anything unusual, let us know right away. Also, continue to manage your chronic back pain and any other symptoms you have.
+
+**Important Reminders:**
+Remember to follow up with us in 4 to 6 weeks after starting tamoxifen. This will help us make sure the medicine is working well for you.
+
+If you have any questions or concerns, please don’t hesitate to reach out to your care team. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please remember to discuss any questions or concerns with your care team. We are here to help you through this journey.
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 2032 chars
+
+
+============================================================
+ROW 12 (coral_idx=31)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to our clinic today. I am writing to summarize what we discussed about your health.
+
+**Diagnosis:**
+You have been diagnosed with early-stage breast cancer. This means the cancer is still in the breast and has not spread to other parts of your body. Your cancer is called "stage II" because it is a bit bigger than very early cancers.
+
+**Treatment Plan:**
+We talked about several steps to treat your cancer:
+
+1. **Chemotherapy:** This is medicine that helps kill cancer cells. We will start with a type of chemotherapy called AC/T. It will help make the tumor smaller so that a lumpectomy (removing just the tumor) might be possible instead of removing the whole breast.
+   
+2. **Surgery:** After the chemotherapy, we will do surgery to remove the tumor. We hope to do a lumpectomy, but we will decide based on how well the chemotherapy works.
+
+3. **Hormonal Therapy:** Since your cancer is sensitive to hormones, you will take medicine to block these hormones after the surgery.
+
+4. **Radiation:** Depending on the results of your surgery, you may need radiation to make sure all the cancer is gone.
+
+**Key Test Results:**
+- A special X-ray (mammogram) showed a lump in your right breast.
+- An ultrasound found two lumps in your right breast.
+- A small sample (biopsy) confirmed that the lumps are cancerous.
+
+**Next Steps:**
+- You will have an echocardiogram (heart test) to check your heart before starting chemotherapy.
+- We will place a port (a small tube under your skin) to make it easier to give you the chemotherapy.
+- We will talk more about using cold caps to try to prevent hair loss during chemotherapy.
+
+**What to Watch For:**
+- Let us know if you feel very tired, have any pain, or notice any changes in your skin or nails.
+- If you have any questions or concerns, please talk to your care team.
+
+Remember, you are not alone in this journey. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+Please discuss any questions you have with your care team.
+
+--- STATS ---
+Generation time: 7.5s
+Letter length: 2083 chars
+
+
+============================================================
+ROW 13 (coral_idx=32)
+============================================================
+
+--- LETTER ---
+Dear [Patient's First Name],
+
+Thank you for coming to our clinic. I want to share with you the important information about your health and the next steps in your treatment.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer. It is a type called hormone receptor positive and HER2 negative. This means the cancer cells grow in response to hormones like estrogen and progesterone, but they do not have too much of a protein called HER2.
+
+The cancer is in your right breast and has spread to some lymph nodes in your armpit. This is called node-positive breast cancer.
+
+**Treatment Plan:**
+On November 5th, you will have surgery to remove part of your breast and some lymph nodes. This is called a partial mastectomy and axillary lymph node dissection (ALND).
+
+After surgery, we will decide on the best treatment for you. This might include chemotherapy and hormone therapy. Chemotherapy uses medicines to kill cancer cells. Hormone therapy stops the hormones that make the cancer grow.
+
+We will talk more about these treatments after your surgery. We will also look at your test results to decide the best plan for you.
+
+**Key Test Results:**
+- A mammogram showed a small lump in your right breast.
+- An ultrasound found a small lump and some swollen lymph nodes.
+- A biopsy confirmed that the lump is cancer.
+- A PET/CT scan showed the cancer in your breast and lymph nodes.
+- An MRI of your brain showed a small growth that is likely not cancer.
+
+**Next Steps:**
+- You will have surgery on November 5th.
+- After surgery, we will review your test results and decide on the next steps.
+- If you need chemotherapy, we will talk about how to manage side effects like feeling tired and losing hair.
+
+**What to Watch For:**
+- Any new lumps or changes in your breasts.
+- Feeling very tired or having other unusual symptoms.
+
+Please remember to ask your care team any questions you have. They are here to help you understand everything about your treatment.
+
+Take care and stay strong.
+
+Sincerely,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 8.4s
+Letter length: 2064 chars
+
+
+============================================================
+ROW 14 (coral_idx=33)
+============================================================
+
+--- LETTER ---
+Dear [Patient's First Name],
+
+Thank you for coming to see us. Here’s a summary of what we discussed during your visit:
+
+**Diagnosis:**
+You have been diagnosed with breast cancer in your right breast. This type of cancer is called invasive ductal carcinoma (IDC). It is a small tumor, about 1 to 2.2 centimeters in size. The cancer is strongly estrogen receptor (ER) and progesterone receptor (PR) positive, which means it grows in response to these hormones. This is important because it helps us choose the best treatment for you.
+
+**Treatment Plan:**
+We have decided on a treatment plan that includes surgery and medicine to help control the cancer. 
+
+1. **Surgery:** You will have a bilateral mastectomy, which means both breasts will be removed. This will be followed by reconstruction to rebuild your breasts.
+   
+2. **Medicine:** You will start taking a medicine called goserelin to stop your ovaries from making hormones. This will begin today. About two weeks later, you will start another medicine called letrozole to further control the cancer.
+
+**Key Test Results:**
+- Your recent tests show that the cancer is low risk, which is good news.
+- You had a test called Mammaprint, which showed a low risk score.
+
+**Next Steps:**
+- We will schedule your surgery as soon as possible. Due to the current situation with COVID-19, there might be some delays.
+- You will need to come back in one month for a follow-up appointment. We will check how you are doing and discuss any questions you may have.
+
+**What to Watch For:**
+- Keep an eye out for any new symptoms or changes in how you feel.
+- If you notice anything unusual, please call us right away.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 1869 chars
+
+
+============================================================
+ROW 15 (coral_idx=34)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+Thank you for coming to our clinic. I want to share some important information about your health with you.
+
+**Diagnosis:**
+You have been diagnosed with a type of breast cancer called hormone receptor-positive (HR+) metastatic breast cancer. This means the cancer has spread to your lymph nodes. Lymph nodes are small glands in your body that help fight infections.
+
+**Tests and Results:**
+We did several tests to understand your condition better. These included:
+
+- **Ultrasound:** This showed enlarged lymph nodes in your neck and underarm.
+- **Biopsy:** A small sample from your lymph node was taken. The test showed cancer cells that likely came from the breast.
+- **Mammogram and Ultrasound:** These tests looked at your breasts and found no signs of cancer in the breast tissue itself.
+- **MRI and PET/CT scans:** These detailed pictures showed areas where the cancer might be growing.
+
+**Treatment Plan:**
+To make sure we choose the best treatment for you, we need to do a few more tests. These include:
+
+- **Breast Biopsy:** We will take a small piece of tissue from your breast to check for cancer.
+- **Lymph Node Test:** We will also take a small sample from your neck lymph nodes.
+- **Genetic Testing:** This helps us understand more about your cancer and choose the best medicines.
+
+**Next Steps:**
+Once we have all the test results, we will decide on the best treatment plan for you. This might include medicines that stop the cancer from growing or other treatments.
+
+**What to Watch For:**
+Please let us know if you notice any new lumps or changes in your body. Also, tell us if you feel very tired or have any pain.
+
+**Questions:**
+It’s important to talk to your doctors if you have any questions or concerns. We are here to help you understand everything about your health.
+
+Take care,
+[Your Name]
+Medical Communication Specialist
+[Cancer Center Name]
+
+--- STATS ---
+Generation time: 7.4s
+Letter length: 1880 chars
+
+
+============================================================
+ROW 16 (coral_idx=35)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to see me about your breast cancer. I want to share what we found and what the next steps are.
+
+**Diagnosis and Stage:**
+You have a type of breast cancer called invasive lobular carcinoma. It is in the left breast and is at stage III. This means the cancer has spread to nearby lymph nodes.
+
+**Key Test Results:**
+- A biopsy showed the cancer is ER positive and PR positive, which means it might respond well to hormone treatments.
+- The cancer is HER-2 negative, so we won’t use drugs that target HER-2.
+- Tests also showed a large lump in your left breast and some small lumps in the lymph nodes under your arm.
+
+**Treatment Plan:**
+We talked about different ways to treat your cancer. You decided you would like to have a mastectomy first. This means removing the entire left breast. After the surgery, we will look at the tissue removed to decide the best next steps.
+
+**Next Steps:**
+- You will have a mastectomy soon. Dr. [Doctor’s Name] will perform the surgery.
+- After the surgery, we will meet again to talk about further treatment options based on the results from the surgery.
+
+**What to Watch For:**
+Please watch for any changes in your breast or any new symptoms. If you notice anything unusual, please call us right away.
+
+**Questions:**
+If you have any questions or need more information, please talk to your care team. They are here to help you understand everything and support you through this journey.
+
+Warm regards,
+
+[Doctor’s Name], M.D.
+UCSF Comprehensive Cancer Center
+
+---
+
+Please remember to discuss any concerns or questions with your care team. They are here to help you every step of the way.
+
+--- STATS ---
+Generation time: 5.8s
+Letter length: 1664 chars
+
+
+============================================================
+ROW 17 (coral_idx=36)
+============================================================
+
+--- LETTER ---
+Dear *****,
+
+I hope this letter finds you well. I want to share some important information about your health in a way that is easy to understand.
+
+**Diagnosis:**
+You have been diagnosed with breast cancer in your left breast. The doctors call this "Stage IIb." This means the cancer is growing but hasn't spread to other parts of your body yet.
+
+**Treatment Plan:**
+We will use a combination of treatments to fight the cancer. First, you will have chemotherapy. Chemotherapy uses special medicines to kill cancer cells. We will use a treatment called "TC x 6," which means you will get six rounds of chemotherapy. 
+
+To help keep your hair during treatment, we will use a special cooling cap called "Dignicap." This cap helps protect your hair from the effects of chemotherapy.
+
+We will also use a small device called a "port" to give you the medicine. This makes it easier to give you the treatment without needing to find a vein each time.
+
+After chemotherapy, you will have radiation therapy. Radiation uses high-energy beams to kill any remaining cancer cells.
+
+**Key Test Results:**
+Tests show that the cancer is sensitive to hormones. This means certain treatments can work well against it. The tests also show that the cancer is not aggressive and doesn’t spread easily.
+
+**Next Steps:**
+Starting July 9, 2017, you will begin chemotherapy using the Dignicap. Before starting, we will teach you more about the treatment and how to use the port.
+
+Once the chemotherapy is done, you will start radiation therapy. We will also check your heart to make sure it stays healthy during treatment.
+
+**What to Watch For:**
+Please watch for any new lumps or changes in your breast. Also, let us know if you feel very tired or have any other unusual symptoms.
+
+**Support:**
+You mentioned that you have a strong support system with family and friends nearby. This is very important during your treatment journey.
+
+If you have any questions or concerns, please talk to your care team. They are here to help you every step of the way.
+
+Take care and stay strong.
+
+Best regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Remember, you can always ask your care team any questions you might have. They are here to support you through this process.
+
+--- STATS ---
+Generation time: 7.8s
+Letter length: 2258 chars
+
+
+============================================================
+ROW 18 (coral_idx=37)
+============================================================
+
+--- LETTER ---
+Dear [Patient's First Name],
+
+I hope this letter finds you well. I wanted to share some important information about your recent diagnosis and treatment plan in a way that is easy to understand.
+
+**Diagnosis and Stage:**
+You have been diagnosed with left breast cancer. The cancer is at an early stage, which means it hasn't spread far yet. It is called "stage T2N0" because it is a bit bigger than 2 centimeters but has not spread to the lymph nodes.
+
+**Treatment Plan:**
+Based on your situation, the doctors recommend a mastectomy. This means removing the entire left breast to get rid of the cancer. After the surgery, you will likely need chemotherapy to kill any remaining cancer cells. Since your cancer is sensitive to estrogen, you will also need to take medicine to block estrogen for at least five years to help prevent the cancer from coming back.
+
+**Key Test Results:**
+- **Biopsy:** The cancer is ER positive, which means it uses estrogen to grow. It is PR negative and HER2 negative, which means it doesn’t use progesterone or another protein to grow.
+- **MRI:** The MRI showed a mass in your left breast and some enlarged lymph nodes, but no cancer was found in the lymph nodes.
+- **Genetic Testing:** You have a mutation in the ATM gene, which makes radiation less effective for you.
+
+**Next Steps:**
+- **Surgery:** You will have a mastectomy to remove the cancer.
+- **Chemotherapy:** After surgery, you will start chemotherapy to kill any remaining cancer cells.
+- **Hormonal Therapy:** You will take medicine to block estrogen for at least five years.
+
+**What to Watch For:**
+After surgery, watch for signs of infection like redness, swelling, or fever. Also, let us know if you have any unusual pain or discomfort.
+
+Please remember to talk to your care team if you have any questions or concerns. We are here to support you every step of the way.
+
+Warm regards,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+This letter aims to provide clear and compassionate information about the patient’s diagnosis and treatment plan, using simple language and avoiding unnecessary medical jargon.
+
+--- STATS ---
+Generation time: 7.1s
+Letter length: 2122 chars
+
+
+============================================================
+ROW 19 (coral_idx=38)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to see us today. Here’s a summary of what we talked about:
+
+**Diagnosis:**
+You have breast cancer. It started in your left breast. The type is called IDC, which means invasive ductal carcinoma. It is at a stage where it has spread a little bit but not far. Your cancer is ER+ (estrogen receptor positive), PR- (progesterone receptor negative), and HER2- (human epidermal growth factor receptor 2 negative).
+
+**Treatment:**
+You had surgery to remove both breasts (bilateral mastectomies). After the surgery, you took a medicine called tamoxifen. In November 2018, you started taking another medicine called letrozole. But because you felt anxious and had mood swings, you switched to a different medicine called exemestane in December 2018. You will keep taking exemestane every day.
+
+**Tests:**
+We did tests to check how well the treatment is working. Everything looks good so far. We also checked your bones and they look fine too.
+
+**Next Steps:**
+- Keep taking exemestane every day.
+- We will check your hormone levels to make sure the medicine is working.
+- You need to get a special X-ray of your bones (DEXA scan) now and every 2 years.
+- You should see your doctor every 6 months for a check-up. We won’t need to do any more scans because you had both breasts removed.
+
+**What to Watch For:**
+- If you feel very worried or sad, talk to your local mental health provider.
+- Let us know if you have new or worsening symptoms.
+
+Remember, you can always ask your care team any questions you have. We are here to help you.
+
+Best wishes,
+
+[Your Name]
+Medical Communication Specialist
+Cancer Center
+
+---
+
+Please let me know if you need any changes or additional details!
+
+--- STATS ---
+Generation time: 6.8s
+Letter length: 1713 chars
+
+
+============================================================
+ROW 20 (coral_idx=39)
+============================================================
+
+--- LETTER ---
+Dear [Patient Name],
+
+Thank you for coming to our clinic. We want to make sure you understand your health situation clearly.
+
+**Diagnosis:**
+You have breast cancer. It is in both breasts. The cancer is called "early stage," which means it hasn't spread very far yet.
+
+**Tests:**
+We did some tests like ultrasounds and CT scans. These tests showed that you have lumps in both breasts. There are also some small spots in your lungs and liver, but we don’t know if they are cancer yet.
+
+**Treatment Plan:**
+The doctors think you will need several types of treatments:
+- **Surgery:** To remove the cancer from your breasts.
+- **Chemotherapy:** Medicine to kill cancer cells.
+- **Targeted Therapy:** Special medicine to fight the HER2 type of cancer.
+- **Radiation Therapy:** Strong light to kill any remaining cancer cells.
+
+**Next Steps:**
+After surgery, we will start preparing for chemotherapy. This might include getting a special tube called a "port" to give you medicine. We will also do more tests to check how well the treatment is working.
+
+**What to Watch For:**
+Please let us know if you feel very tired, have a fever, or if you notice any new lumps or changes in your body.
+
+**Important Reminders:**
+- Keep all your appointments.
+- Eat healthy food and try to stay active.
+- If you have any questions, please talk to your doctor or nurse.
+
+We are here to support you every step of the way. Please feel free to reach out to us anytime.
+
+Warm regards,
+
+[Your Name]  
+Medical Communication Specialist  
+Cancer Center
+
+---
+
+This letter aims to convey the essential information from the clinical note in a simple, compassionate manner, ensuring the patient understands their condition and treatment plan without overwhelming them with technical details.
+
+--- STATS ---
+Generation time: 5.8s
+Letter length: 1756 chars
+
+
