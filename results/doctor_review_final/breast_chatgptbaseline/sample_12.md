@@ -19,62 +19,41 @@ ID: ***** ***** ***** is a 67 y.o. postmenopausal patient with a recent diagnosi
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+I’m writing to summarize what we discussed about your recent breast cancer diagnosis and next steps.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive mammary carcinoma with both ductal and lobular features. This means the cancer started in the breast tissue and has features of two common types.
+You have stage II breast cancer in your right breast. This is called invasive mammary carcinoma, which means the cancer started in the breast and has grown into nearby tissue. Your cancer is hormone receptor–positive (HR+), meaning it uses hormones like estrogen to grow. It is HER2-negative, which is a common type and helps guide treatment choices.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Your imaging tests (mammogram, ultrasound, and MRI) showed two main masses in the right breast. A biopsy (a tissue sample) confirmed cancer in these areas. A PET/CT scan did not show cancer spread to other parts of your body. This is important and means we can treat your cancer with the goal of cure.
 
-Your cancer is considered Stage II (early stage) and has not spread to distant parts of the body, which is good news.
+Treatment Plan
 
-Key test results
+Your treatment will include several steps:
 
-Imaging showed two tumors in your right breast.
-The main tumor is about 2–2.4 cm, with another smaller nearby tumor.
-Biopsies confirmed breast cancer in these areas.
-Lymph nodes appear normal on imaging.
-PET scan did not show cancer spread to other organs.
-Mammaprint test showed the cancer is high risk, meaning a higher chance of coming back without treatment.
+Chemotherapy (strong medicines to kill cancer cells) given first
+Surgery to remove the tumor
+Hormonal therapy (medicine to block hormones that help cancer grow)
+Possibly radiation therapy
 
-What is the treatment plan?
-Your doctors recommend neoadjuvant chemotherapy. This means treatment is given before surgery to shrink the tumor and improve surgical options.
+You have chosen to start with neoadjuvant chemotherapy, which means treatment before surgery. This can shrink the tumor and may allow for breast-conserving surgery (lumpectomy instead of mastectomy). The planned regimen is called AC/T, a standard combination of chemotherapy drugs.
 
-The plan includes:
+Next Steps
 
-Chemotherapy with drugs such as doxorubicin and cyclophosphamide, followed by paclitaxel
+Before starting treatment, you will need:
 
-After chemotherapy, treatment will include:
+An echocardiogram (heart ultrasound) to check heart function
+A chemotherapy teaching session
+Placement of a port (a small device under the skin to give treatment safely)
 
-Surgery (you hope to have a lumpectomy if possible)
-Hormone therapy (medicine that blocks estrogen)
-Possibly radiation therapy, depending on surgery results
+You will also receive more information about options like scalp cooling (“cold caps”) to help reduce hair loss.
 
-Next steps
+Moving Forward
 
-Heart test (echocardiogram) before starting treatment
-Chemotherapy teaching session
-Placement of a port (a small device under the skin for treatment)
-Plan to start chemotherapy soon
+We plan to begin treatment soon. You will return to clinic in about two weeks.
 
-What to watch for
-During chemotherapy, you may notice:
+Please remember, you are not alone in this. Your care team is here to support you. If you have any questions or concerns, please reach out to your doctors and nurses—they are happy to help.
 
-Fatigue (feeling very tired)
-Hair loss
-Nausea (upset stomach)
-Numbness or tingling in hands or feet
-Increased risk of infection
-
-Please contact your care team if you have fever, new pain, or any concerning symptoms.
-
-Final thoughts
-Your care team believes your cancer can be treated with the goal of cure. Starting treatment before surgery may improve your outcome and give you more surgical options.
-
-Please bring any questions to your care team. We are here to support you every step of the way.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

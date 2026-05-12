@@ -22,57 +22,33 @@ ID: 71 year old female    CC:  HR low, HER2 negative cancer of the right breast 
 
 Dear Patient,
 
-We are writing to help explain your recent visit and your care plan.
+We are writing to summarize your recent visit and discuss your care plan.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC), which means the cancer started in the milk ducts and has grown into nearby breast tissue.
+You have cancer in your right breast, called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and has spread into nearby breast tissue. Your cancer is described as HER2-negative (it does not have extra HER2 protein) and has very low hormone receptor levels. The tumor is also high grade, which means the cancer cells are more active and can grow faster.
 
-Your cancer is HER2 negative (it does not have extra HER2 protein) and hormone receptor–low (very little or no estrogen or progesterone receptors). These features help guide treatment.
+Your imaging tests showed several masses (lumps) in the right breast. Over time, the main mass has grown from about 1.2 cm to about 2.7 cm. A PET/CT scan (a scan that looks for active cancer in the body) showed that the cancer is active in the right breast but did not show any spread to other organs.
 
-There are more than one tumor areas in your right breast. This is called multifocal disease (more than one spot in the same breast).
+On your physical exam, a firm lump could be felt in your right breast. Your lymph nodes (small glands that help fight infection) did not show signs of cancer on imaging.
 
-Key test results
+Treatment Plan
 
-MRI and ultrasound found several small masses in the right breast.
-Biopsies confirmed cancer in at least two areas.
-The tumors are grade 3, which means the cancer cells look more aggressive under the microscope.
-PET scan shows the breast tumor has grown to about 2.7 cm, but there is no sign of spread to other parts of the body.
-Lymph nodes in the armpit look normal on imaging.
+Your care team recommends starting chemotherapy, which is medicine used to kill cancer cells. The plan is to use a drug called Taxol (paclitaxel) once a week for 12 weeks.
 
-What is the treatment plan?
-Your care team recommends chemotherapy. This is medicine that travels through the body to kill cancer cells.
+Before starting treatment:
 
-The plan is to start with weekly chemotherapy (Taxol) for 12 weeks.
+A port (a small device placed under the skin to give medicine safely) will be placed.
+You will have a chemotherapy teaching visit to review the treatment and possible side effects.
 
-A port (small device placed under the skin) will be placed to make it easier to give treatment.
+Treatment can begin as soon as you are ready, even as early as next week. You will have regular clinic visits during treatment to check your progress.
 
-You will have clinic visits during treatment to check how you are doing.
+Next Steps
 
-Next steps
+You shared that you would like to speak with another doctor before starting chemotherapy. That is completely okay. Please take the time you need to make the best decision for yourself.
 
-Schedule port placement as soon as possible
-Attend a chemotherapy teaching session
-Decide on the start date for treatment (as early as next week, or the following week)
-Continue discussing your plan with your doctors before starting
+If you have questions or concerns, please reach out to your care team. We are here to support you every step of the way.
 
-What to watch for
-During chemotherapy, you may notice:
-
-Feeling tired
-Hair loss
-Numbness or tingling in hands or feet
-Nausea (upset stomach)
-Higher risk of infection
-
-Please contact your care team if you have fever, new pain, or any concerning symptoms.
-
-Final thoughts
-It is normal to feel unsure about starting treatment. Take your time to ask questions and talk with your doctors. Your team is here to support you and help you make the best decision for your care.
-
-Please bring any questions to your next visit.
-
-With care,
-Your Cancer Care Team
+With care and support,
+Your Oncology Team
 
 ---
 

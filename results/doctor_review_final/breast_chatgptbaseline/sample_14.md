@@ -20,61 +20,35 @@ HPI:  ***** ***** is a 34 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to summarize your recent visit and to help explain your diagnosis and treatment plan.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have been diagnosed with invasive ductal carcinoma (IDC) of the right breast. This is a common type of breast cancer that starts in the milk ducts and grows into nearby breast tissue. Your tumor is about 1–2.2 cm in size and is grade 1, which means the cancer cells are growing slowly.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Your cancer is hormone receptor–positive (ER-positive and PR-positive). This means the cancer uses hormones like estrogen and progesterone to grow. Your cancer is HER2-negative, which is another protein that can affect treatment.
 
-The tumor is about 1 to 2.2 cm in size and is low grade, which means it tends to grow more slowly. A special test (Mammaprint) shows low risk, meaning a lower chance of the cancer coming back.
+A special test called MammaPrint showed your cancer is low risk, meaning there is a lower chance of it spreading based on this test.
 
-Key test results
+Treatment Plan
 
-Imaging found a small mass in your right breast.
-Biopsy confirmed breast cancer.
-No cancer was found in lymph nodes on exam.
-Genetic testing was negative.
+Because surgery has been delayed, your team recommends starting hormone therapy first. This treatment lowers or blocks estrogen to slow cancer growth.
 
-What is the treatment plan?
-Because surgery has been delayed, your doctors recommend starting hormone therapy first. This helps control the cancer until surgery can be done.
+You will start goserelin, which suppresses the ovaries (reduces estrogen production).
+About 2 weeks later, you will start letrozole, a medication that further lowers estrogen levels.
+You are planning to have a bilateral mastectomy (removal of both breasts) with reconstruction when surgery becomes available.
 
-The plan includes:
+Hormone therapy is usually given for about 5 years, as shorter treatment is not recommended based on current evidence.
 
-Ovarian suppression (goserelin) – a medicine that stops the ovaries from making estrogen
-Letrozole – a medicine that lowers estrogen levels
+Next Steps
+Blood tests (including estrogen levels) will be checked.
+Your care team will continue to coordinate the timing of your surgery.
+You will return for follow-up in about one month.
 
-These medicines work together to slow or stop cancer growth.
+You may have side effects such as hot flashes. Please talk with your care team and your psychiatrist about safe ways to manage these symptoms.
 
-Surgery will still be an important part of your care. You are planning for a bilateral mastectomy with reconstruction when it can be scheduled.
+Please remember, your care team is here to support you. If you have any questions or concerns, do not hesitate to reach out to them.
 
-Next steps
-
-Start ovarian suppression now
-Start letrozole in about 2 weeks
-Check labs, including estrogen levels
-Follow up in about 1 month
-Continue planning for surgery
-
-What to watch for
-With hormone therapy, you may notice:
-
-Hot flashes
-Mood changes
-Joint aches
-
-Please tell your care team if you have any new or worsening symptoms.
-
-Other considerations
-You discussed treatment choices in detail with your care team, including options for hormone therapy and surgery. Your doctors will continue to guide you through these decisions.
-
-Final thoughts
-Your cancer is being treated early, and your care team is working to control it while planning surgery.
-
-Please write down any questions and discuss them with your doctors. We are here to support you.
-
-With care,
-Your Cancer Care Team
+Sincerely,
+Your Care Team
 
 ---
 

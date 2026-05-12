@@ -19,53 +19,31 @@ Subjective:       Patient ID: ***** ***** ***** ***** 51 y.o. female.    HPI  **
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment options.
+I am writing to summarize your recent visit and explain your care plan in clear terms.
 
-What is your diagnosis?
-You have ductal carcinoma in situ (DCIS) in your left breast. DCIS means there are cancer cells inside the milk ducts, but they have not spread outside the ducts. This is considered an early stage (Stage 0) breast cancer.
+You have been diagnosed with ductal carcinoma in situ (DCIS). This means there are abnormal cells inside the milk ducts of your left breast, but they have not spread outside the ducts. Your cancer is considered stage pTisNx, which is an early, non-invasive stage.
 
-Your cancer is estrogen receptor positive (ER+), which means it uses estrogen to grow.
+Your cancer cells tested positive for estrogen receptors, which means they can grow in response to the hormone estrogen.
 
-Key test results
+You already had surgery called a lumpectomy (removal of the tumor and a small area around it). The removed area showed DCIS measuring about 1.8 cm. Some margins (edges of the removed tissue) were very close or involved, meaning there may still be a small risk of remaining abnormal cells.
 
-Your mammogram showed small calcium deposits (calcifications) that led to further testing.
-A biopsy confirmed DCIS in your left breast.
-Surgery (lumpectomy) removed the area of DCIS, which measured about 1.8 cm.
-The edges (margins) of the removed tissue were very close or involved, meaning some cancer cells were near the edge of the removed tissue.
-No invasive cancer was found, and lymph nodes were not involved.
+At this time, your care team is considering the next steps to lower the chance of the cancer coming back:
 
-What is the treatment plan?
-After surgery, we recommend adjuvant therapy. This means treatment given to lower the chance of the cancer coming back.
+Radiation therapy: You will meet with a radiation specialist to see if this treatment is recommended. Radiation uses high-energy rays to kill any remaining abnormal cells in the breast.
+Hormone therapy (tamoxifen): This is a medicine that blocks estrogen’s effect on breast cells. It can reduce the risk of the cancer returning and lower the chance of new breast cancer in the future. You have been prescribed this medication, but you were advised to wait until after your radiation consultation before starting it.
 
-Your options include:
+You are currently recovering from surgery. Mild breast soreness is expected. You also reported hot flashes and night sweats, which may be related to hormonal changes.
 
-Radiation therapy (treatment using high-energy rays to kill remaining cancer cells in the breast)
-Hormone therapy with a drug called tamoxifen
+Next steps:
 
-Tamoxifen is a medicine that blocks estrogen. It can lower the risk of the cancer coming back and reduce the chance of a new breast cancer in the future.
+Attend your radiation oncology appointment
+Start tamoxifen only after discussing with your care team
+Return to clinic 4–6 weeks after starting the medication to check how you are tolerating it
 
-Next steps
+Please remember, your care team is here to support you. If you have any questions or concerns, do not hesitate to reach out and discuss them with your doctors.
 
-Meet with a radiation doctor to decide if radiation is needed
-Start tamoxifen after the radiation plan is decided
-Follow up in clinic about 4–6 weeks after starting tamoxifen
-
-What to watch for
-With tamoxifen, you may notice:
-
-Hot flashes or night sweats
-Risk of blood clots (such as leg swelling or shortness of breath)
-Rare risk of cancer of the uterus
-
-Please contact your care team if you have any concerning symptoms.
-
-Final thoughts
-Your cancer was found early, and treatment is focused on lowering the chance it comes back.
-
-It is normal to have questions about treatment choices. Please discuss them with your care team so you can make the best decision for you.
-
-With care,
-Your Cancer Care Team
+Warm regards,
+Your Care Team
 
 ---
 

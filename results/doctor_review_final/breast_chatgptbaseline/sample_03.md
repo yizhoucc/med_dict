@@ -19,63 +19,34 @@
 
 Dear Patient,
 
-We are writing to help you understand your recent visit and your care plan.
+I’m glad you came in to talk about your new diagnosis and next steps. I want to summarize what we discussed in clear terms.
 
-What is your diagnosis?
-You have breast cancer in your right breast. It is called metaplastic spindle cell carcinoma (a rare type of breast cancer). Your cancer is triple negative, which means it does not have estrogen (ER), progesterone (PR), or HER2 receptors. These are common markers that guide treatment.
+You have a type of breast cancer called invasive spindle cell metaplastic carcinoma in your right breast. This is a rare form of breast cancer. Your cancer is triple negative, which means it does not use estrogen (ER), progesterone (PR), or HER2 to grow. This affects how we treat it. Based on imaging, the tumor is about 3–3.5 cm, with a few nearby smaller spots in the same breast. There is no clear sign that the cancer has spread to other parts of your body, which is very important.
 
-Your cancer is locally advanced (it is in the breast and nearby areas but has not spread far away). Imaging shows a main tumor about 3–3.5 cm, with a few nearby smaller spots. Tests show no spread to distant organs, which is good news.
+Your scans (MRI and PET/CT) confirmed the main tumor and nearby areas in the right breast. A lymph node biopsy from the armpit (axilla) did not show cancer, which is reassuring.
 
-Key test results
+Because of the size and pattern of the tumor, we recommend starting neoadjuvant chemotherapy. This means chemotherapy given before surgery to shrink the tumor and improve surgical options.
 
-Biopsy confirmed breast cancer (malignant spindle cell carcinoma).
-ER, PR, and HER2 tests were negative.
-MRI showed the main tumor and nearby smaller areas in the same breast.
-Lymph node biopsy (FNA) was negative (no cancer found there).
-PET scan did not show spread to other parts of the body.
+The usual plan includes:
 
-What is the treatment plan?
-We recommend starting neoadjuvant chemotherapy. This means treatment is given before surgery to shrink the tumor and improve surgical options.
+Chemotherapy with medicines such as paclitaxel, followed by other drugs (often called AC)
+Then surgery to remove the cancer
+Possibly radiation therapy after surgery, depending on results
 
-Standard treatment includes:
+You have also agreed to join the I-SPY2 clinical trial, which studies new treatments. In this trial, you may receive standard chemotherapy alone or with an added new medication.
 
-Chemotherapy with drugs such as paclitaxel, followed by doxorubicin and cyclophosphamide
+Next steps:
 
-You are also interested in the I-SPY2 clinical trial (a research study testing new treatments). In this trial, you may receive standard chemotherapy with or without an added experimental drug.
+Repeat some blood tests
+Place a medi-port (a small device under the skin to give chemotherapy safely)
+Attend a teaching session about chemotherapy
+Start treatment soon (planned for early February)
+Review pending results, including genetic testing and Mammaprint (a test that looks at cancer risk)
 
-After chemotherapy, treatment will likely include:
+We know this is a lot to take in. Please write down any questions and discuss them with your care team. We are here to support you every step of the way.
 
-Surgery
-Possible radiation therapy
-Other treatments depending on final results
-
-A port (medi-port) will be placed to make it easier to give chemotherapy.
-
-Next steps
-
-Repeat blood tests (to recheck kidney and liver labs)
-Wait for Mammaprint test results (a test that helps guide treatment risk)
-Start chemotherapy in early February
-Attend a chemotherapy teaching session
-
-What to watch for
-During treatment, you may have side effects such as:
-
-Feeling very tired
-Nausea (upset stomach)
-Hair loss
-Numbness or tingling in hands or feet
-Lower blood counts (which can increase infection risk)
-
-Please tell your care team if you notice any new or worsening symptoms.
-
-Final thoughts
-Your care team discussed your case in detail. Because your cancer has not spread, the goal of treatment is to cure the disease.
-
-Please write down any questions you have and discuss them with your doctors. We are here to support you every step of the way.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

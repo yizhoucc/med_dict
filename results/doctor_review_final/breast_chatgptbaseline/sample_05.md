@@ -19,61 +19,37 @@ ID: ***** ***** is a 55 y.o. ***** with a recent diagnosis of early stage breast
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and treatment plan.
+Thank you for coming in to discuss your care. We know this is a lot of information, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in both breasts. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and has grown into nearby breast tissue.
+You have been diagnosed with breast cancer in both breasts. The cancer type is called invasive ductal carcinoma (IDC), which means the cancer started in the milk ducts and spread into nearby breast tissue.
 
-Left breast: Stage III cancer (larger tumor and small spread to a nearby lymph node).
-Right breast: Stage I cancer (smaller tumor with no spread to lymph nodes).
+Left breast: Stage III (T3N1). This means the tumor was larger and some cancer cells were found in nearby lymph nodes (small glands that help fight infection). The tumor is hormone receptor positive (ER+/PR+), meaning it grows with estrogen and progesterone. It is HER2-negative.
+Right breast: Stage I (T1cN0). This is a smaller tumor with no cancer found in the lymph nodes. It is also hormone receptor positive and HER2-negative.
 
-Both cancers are hormone receptor positive (HR+), which means they use estrogen to grow. Both are HER2 negative, meaning they do not have extra HER2 protein.
+You have already had surgery to remove both tumors and lymph nodes. The margins (edges) were clear, which is good.
 
-Key test results
+Treatment Plan
 
-Imaging showed tumors in both breasts.
-Surgery removed both tumors and nearby lymph nodes.
-Left breast tumor was larger (about 6.2 cm) and higher grade (more aggressive).
-A very small amount of cancer was found in one lymph node on the left side.
-Right breast tumor was smaller (about 2.0 cm) and lower grade (less aggressive).
-Special testing (Mammaprint) showed high risk for the left tumor and low risk for the right tumor.
+Because the left breast cancer has higher risk features (larger size and lymph node involvement), your doctors recommend:
 
-What is the treatment plan?
-Your doctors recommend adjuvant chemotherapy. This means treatment is given after surgery to lower the chance of the cancer coming back.
+Chemotherapy (medicine to kill cancer cells), specifically a combination called docetaxel and cyclophosphamide, for 4 cycles
+Radiation therapy (high-energy rays to kill remaining cancer cells)
+Hormone (anti-estrogen) therapy using an aromatase inhibitor. This lowers estrogen levels in your body and helps prevent cancer from coming back. This is planned for at least 5 years.
 
-Chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles
-Radiation therapy after chemotherapy
-Hormone therapy (medicine that blocks estrogen) for at least 5 years
+Chemotherapy is not recommended for the right breast cancer because it is low risk and would not add benefit.
 
-Hormone therapy is very important for your type of cancer. It helps lower the risk of cancer returning.
+Other Important Points
+You may have a test called Oncotype DX, which looks at tumor genes to better understand risk.
+A DEXA scan (bone density test) is recommended before starting hormone therapy.
+Staying active, along with calcium and vitamin D, will help support bone health.
+Next Steps
 
-Next steps
+You will move forward with chemotherapy, followed by radiation and then hormone therapy.
 
-Start chemotherapy
-Plan for radiation after chemotherapy
-Begin hormone therapy after finishing chemotherapy and radiation
-Have a DEXA scan (a test to check bone strength)
-Take calcium and vitamin D to support bone health
+Please remember, you are not alone in this. Write down any questions and discuss them with your care team. We are here to help you make the best decisions for your health.
 
-What to watch for
-During treatment, you may notice:
-
-Feeling tired
-Joint or muscle pain
-Hair loss
-Nail changes
-Lower blood counts (which can increase infection risk)
-Hot flashes or joint stiffness with hormone therapy
-
-Please tell your care team if you have fever, new pain, or any symptoms that worry you.
-
-Final thoughts
-Your doctors recommend chemotherapy mainly because of the higher risk cancer in your left breast. The goal is to lower the chance of the cancer coming back.
-
-It is normal to have concerns about treatment. Please discuss your questions and preferences with your care team. We are here to support you.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

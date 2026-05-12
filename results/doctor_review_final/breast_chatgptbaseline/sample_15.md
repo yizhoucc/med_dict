@@ -24,53 +24,30 @@ ID: ***** ***** is a 33 y.o. premenopausal patient with a recent diagnosis of a 
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+I’m glad you came in to talk about your health. I want to explain your results in a clear and caring way.
 
-What is your diagnosis?
-You have metastatic breast cancer. This means the cancer started in the breast and has spread to other parts of the body. In your case, it has spread to lymph nodes in your neck and under your arm.
+You have been diagnosed with metastatic Breast Cancer. “Metastatic” means the cancer has spread outside the breast. In your case, it has spread to nearby lymph nodes (small glands that help fight infection), especially in your neck and under your arm.
 
-The cancer is hormone receptor positive (HR+), which means it uses estrogen to grow. It is HER2 equivocal, which means the HER2 result is not clearly positive or negative and may need further testing.
+Your biopsy (a test where a small piece of tissue is removed) showed that the cancer likely started in the breast, even though it was not clearly seen on the first breast imaging. The cancer cells tested estrogen receptor (ER) positive (>90%) and progesterone receptor (PR) positive (50%), which means the cancer may respond well to hormone-based treatments. The HER2 test was unclear and may need further clarification.
 
-Even though the cancer has spread, it is still treatable.
+Your imaging tests give us more detail:
 
-Key test results
+Ultrasound and PET/CT scans showed enlarged and active lymph nodes in your neck and under your arm.
+MRI of the breast showed an area in the right breast that may be the original tumor, as well as enlarged lymph nodes.
 
-A biopsy of a lymph node in your neck confirmed cancer coming from the breast.
-Imaging (PET/CT) showed cancer in several lymph nodes in the neck, chest, and under the arm.
-Mammogram and ultrasound did not clearly show a main tumor in the breast, but MRI found areas in the right breast that may be the source.
+At this point, your care team will focus on confirming the exact location of the main tumor in the breast and planning treatment. This may include:
 
-What is the treatment plan?
-You will need systemic therapy, which means treatment that works throughout your whole body.
+Additional imaging or biopsy of the breast area
+Starting treatment that targets hormone-sensitive cancer
 
-Because your cancer is HR+, the main treatment is hormone-based therapy. This may include:
+Next steps will likely include more testing and a detailed discussion about treatment options tailored to you.
 
-Medicines that lower estrogen levels
-Other medications that work with hormone therapy to control the cancer
+I understand that you have questions about what this means for your future. It is completely normal to feel this way. Please know that your care team is here to support you and guide you through each step.
 
-Your doctors explained that chemotherapy is not the first step, because hormone therapy can work well and may have fewer side effects.
+Please write down any questions you have and discuss them with your oncology team at your next visit. You are not alone in this.
 
-Next steps
-
-Complete any needed testing to better define the cancer (such as HER2 results if pending)
-Start hormone therapy
-Follow up regularly with your oncology team
-
-What to watch for
-You have noticed swollen lymph nodes in your neck. Please tell your care team if you notice:
-
-Growth or new swelling
-Pain in new areas
-New symptoms such as fatigue or weight loss
-
-Final thoughts
-It is natural to have many questions, especially about what this diagnosis means for the future. Your care team is here to guide you and support you.
-
-While this cancer cannot be cured, it can be treated, and many people live with it for a long time with good quality of life.
-
-Please write down your questions and discuss them with your doctors. We are here to support you.
-
-With care,
-Your Cancer Care Team
+With care and support,
+Your Care Team
 
 ---
 

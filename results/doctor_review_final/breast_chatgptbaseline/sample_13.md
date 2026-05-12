@@ -27,57 +27,27 @@ HPI:  ***** ***** is a 36 y.o. female with a recently diagnosed hormone receptor
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to summarize your recent visit and test results. We know this is a lot of information, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have been diagnosed with invasive ductal carcinoma, which is a common type of breast cancer that starts in the milk ducts. Your cancer is hormone receptor positive (meaning it uses hormones like estrogen or progesterone to grow) and HER2 negative (a protein not overexpressed in your tumor). The cancer has also spread to at least one lymph node under your arm (called node-positive disease).
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Imaging tests showed a mass in your right breast measuring about 2 cm, along with a small nearby area and some enlarged lymph nodes. A PET/CT scan showed activity in the breast and lymph nodes, which is expected with cancer. Importantly, there was no clear spread to other organs.
 
-The cancer has also spread to lymph nodes in your right armpit (axilla). This means it is node-positive breast cancer.
+A small spot was seen on brain imaging. This is most likely a meningioma, which is usually a benign (non-cancerous) growth. The doctors believe it is unlikely to be cancer.
 
-Key test results
+You are scheduled for partial mastectomy (removal of part of the breast) and axillary lymph node dissection (removal of lymph nodes under the arm) on 11/05/17. After surgery, your care team will discuss additional treatments. These may include chemotherapy (medicine to kill cancer cells), based on final results after surgery.
 
-Imaging showed a tumor about 2 cm in your right breast, with a small nearby area (satellite lesion).
-A biopsy confirmed breast cancer.
-A lymph node biopsy confirmed cancer spread to a lymph node.
-PET scan did not show spread to other organs.
-A brain scan showed a very small mass that is most likely a meningioma (a usually benign, non-cancer growth), and is unlikely to be cancer.
+You have also taken steps for fertility preservation, which is important and thoughtful planning for your future.
 
-What is the treatment plan?
-You are scheduled for surgery (partial mastectomy and lymph node removal).
+Next steps:
 
-After surgery, your treatment will likely include:
+Proceed with your planned surgery
+Review final pathology results after surgery
+Discuss further treatment options with your oncology team
 
-Chemotherapy (medicine to kill cancer cells)
-Hormone therapy (medicine that blocks estrogen)
-Possibly radiation therapy, depending on your final results
+Please write down any questions or concerns you have. Your care team is here to help guide you through each step.
 
-These treatments are used together to lower the chance of the cancer coming back.
-
-Next steps
-
-Proceed with planned surgery
-Review final pathology after surgery
-Meet with your oncology team to plan further treatment
-Discuss timing of treatment and work planning
-
-What to watch for
-Right now, you are feeling well. After surgery and during treatment, please watch for:
-
-Pain, swelling, or signs of infection
-New symptoms such as fatigue or shortness of breath
-Any changes that concern you
-
-Fertility and planning
-You have already completed an egg harvesting process. You may discuss future fertility options with your care team if needed.
-
-Final thoughts
-Your cancer is being treated with the goal of cure. Your care team will guide you through each step of treatment.
-
-Please write down any questions and discuss them with your doctors. We are here to support you.
-
-With care,
+With care and support,
 Your Cancer Care Team
 
 ---

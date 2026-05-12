@@ -25,57 +25,27 @@ ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of b
 
 Dear Patient,
 
-We are writing to help you understand your recent visit and your breast cancer care.
+Thank you for coming in to discuss your care. We are here to support you and help you understand your diagnosis and treatment options.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma, which means the cancer started in the milk ducts and has grown into nearby breast tissue.
-Your tumor was 3.6 cm in size and is grade 3, which means the cancer cells look more aggressive under the microscope.
-One nearby lymph node (a small gland that helps fight infection) had cancer.
+You have been diagnosed with invasive ductal carcinoma (IDC) of the right breast. This is the most common type of breast cancer and means the cancer started in the milk ducts and spread into nearby breast tissue. Your tumor was 3.6 cm in size and classified as grade 3, which means the cancer cells look more abnormal and may grow faster.
 
-Your cancer is:
+The cancer was tested for certain markers. It is estrogen receptor (ER) negative, progesterone receptor (PR) negative, and HER2 positive. These markers help guide treatment choices.
 
-ER negative / PR negative: the cancer does not use estrogen or progesterone to grow
-HER2 positive: the cancer has a protein that can help it grow faster
+You had surgery on 10/25/2016, including a right mastectomy (removal of the breast) and a sentinel lymph node biopsy (testing nearby lymph nodes). The surgery removed all visible cancer with clear margins, meaning no cancer was seen at the edges of the removed tissue.
 
-What has been done so far?
-You had surgery on 10/25/2016 to remove the right breast (mastectomy, which means removal of the breast) and to check nearby lymph nodes.
-The surgery removed all visible cancer, and the edges (called margins) were clear, which is good.
+One out of two lymph nodes tested showed cancer. This means the cancer has spread to a nearby lymph node, but there was no spread outside the node.
 
-Other health issues
-You also have heart failure (the heart does not pump well), with a low heart function (LVEF 25%).
-You recently had shortness of breath but improved with treatment and now feel back to your usual state.
+Your recent lab tests show mild anemia (low red blood cells) and some changes in kidney function, which we will continue to monitor.
 
-Treatment plan
-You are here to discuss next steps in treatment. These may include medicines to lower the chance of the cancer coming back. Your care team will consider your cancer type and your heart condition when making recommendations.
+Next Steps and Treatment Plan:
+We discussed additional (adjuvant) treatment after surgery. This may include systemic therapy, such as medications that travel through the body to reduce the risk of cancer coming back. The exact plan will consider your overall health, including your heart condition.
 
-Key test results
+Please continue to follow up with your care team. If you notice new symptoms such as shortness of breath, pain, or swelling, let us know right away.
 
-Tumor size: 3.6 cm
-1 of 2 lymph nodes positive
-No cancer at the surgical edges
-Cancer markers: ER/PR negative, HER2 positive
+We know this is a lot of information. Please bring any questions to your next visit. We are here to support you every step of the way.
 
-Next steps
-
-Meet with your oncology team to decide on further treatment
-Continue follow-up visits
-Manage your heart condition closely with your doctors
-
-What to watch for
-Call your care team if you notice:
-
-New or worsening shortness of breath
-Chest pain
-Swelling in your legs
-New lumps or pain
-Fever or signs of infection
-
-You are recovering well from surgery and feeling better after your recent symptoms. That is encouraging.
-
-Please remember, you are not alone. If you have questions or concerns, write them down and discuss them with your care team. They are here to support you and help you make the best decisions for your health.
-
-With care and support,
-Your Oncology Team
+Warmly,
+Your Care Team
 
 ---
 

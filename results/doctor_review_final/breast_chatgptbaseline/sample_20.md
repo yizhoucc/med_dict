@@ -19,68 +19,44 @@ New patient Visit  Breast Cancer *****    ***** ***** ***** 07/01/2019        NA
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We are writing to summarize your recent visit and your breast cancer diagnosis. We know this is a lot to take in, and we are here to support you.
 
-What is your diagnosis?
-You have breast cancer in both breasts (bilateral breast cancer).
+You have been diagnosed with breast cancer in both breasts (bilateral breast cancer). This is considered early-stage, meaning the cancer started in the breast. The tumors are large, measuring about 7–10 cm on imaging and exam.
 
-Right breast: The cancer is hormone receptor positive (ER+ and PR+) and HER2 positive. HER2 positive means the cancer has a protein that can make it grow faster but can also be treated with special targeted drugs.
-Left breast: The cancer is hormone receptor positive (ER+ and PR+) and HER2 negative.
+Your cancer has specific features:
 
-The tumors are large, about 7.3 cm on the right and 6 cm on the left.
+ER positive (estrogen receptor positive): the cancer grows in response to estrogen (a hormone in the body).
+PR positive (progesterone receptor positive): also responds to another hormone.
+HER2 positive on the right side: this means the cancer makes extra HER2 protein, which can help it grow faster but can also be treated with targeted medicines.
 
-There are also findings on scans of small spots in the lungs and liver, but it is not yet confirmed if these are cancer.
+Scans showed small spots in the lungs and liver, but it is not yet confirmed if these are cancer.
 
-Key test results
+Treatment Plan
 
-Imaging shows large tumors in both breasts.
-Pathology confirms breast cancer on both sides.
-CT scan shows small nodules in the lungs and liver, but more testing is needed to confirm what they are.
+Your team recommends treatment that includes:
 
-What is the treatment plan?
-Your doctors recommend starting systemic therapy. This means treatment that works throughout your whole body.
+Chemotherapy: strong medicines to kill cancer cells
+HER2-targeted therapy: drugs that specifically block the HER2 protein
+These treatments will be given before or around the time of surgery
+Hormone therapy will be started after chemotherapy and radiation
+Radiation therapy is planned for both breasts after surgery
 
-The plan includes:
+Before treatment starts, you may need:
 
-Chemotherapy (medicine to kill cancer cells)
-Targeted therapy for HER2-positive cancer (such as trastuzumab and pertuzumab)
+A heart ultrasound (echocardiogram) to check heart function
+Placement of a port (a small device under the skin) for treatment
+Additional scans such as a PET/CT
+Next Steps
+Begin treatment after final review of pathology and tests
+Repeat imaging to monitor lung and liver findings
+Follow up after the first cycles of treatment
 
-These treatments are given together because they work well for HER2-positive cancer.
+Please remember, your care team discussed possible side effects and will review them again in detail before treatment starts.
 
-Treatment will likely last for several months. The HER2-targeted therapy may continue for up to 1 year.
+You are not alone in this. Please reach out to your oncology team with any questions or concerns. We are here to guide and support you every step of the way.
 
-After this, treatment may include:
-
-Surgery, depending on how the tumors respond
-Radiation therapy
-Hormone therapy (medicine that blocks estrogen)
-
-Next steps
-
-PET/CT scan to better evaluate the lung and liver spots
-Heart test (echocardiogram) before starting treatment
-Possible placement of a port (a small device under the skin for treatment)
-Start chemotherapy soon
-Follow up after a few cycles to check response
-
-What to watch for
-During treatment, you may notice:
-
-Fatigue (feeling very tired)
-Hair loss
-Nausea (upset stomach)
-Risk of infection
-Possible heart effects from HER2-targeted therapy (your heart will be monitored)
-
-Please tell your care team if you have fever, new pain, shortness of breath, or any new symptoms.
-
-Final thoughts
-Your care team is starting treatment to shrink the cancer and control the disease. The next steps will depend on how the cancer responds.
-
-It is normal to feel overwhelmed. Please ask questions and share your concerns with your care team. We are here to support you every step of the way.
-
-With care,
-Your Cancer Care Team
+Sincerely,
+Your Care Team
 
 ---
 

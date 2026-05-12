@@ -24,55 +24,22 @@ HPI:  ***** ***** is a 32 y.o. female here in consultation to discuss treatment 
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment options.
+We are writing to summarize what we discussed about your recent diagnosis and the next steps in your care.
 
-What is your diagnosis?
-You have breast cancer in your right breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have been diagnosed with invasive ductal carcinoma (IDC) of the right breast. This is the most common type of breast cancer, meaning the cancer started in the milk ducts and has grown into nearby tissue. Your tumor is grade 2, which describes how the cancer cells look under the microscope and how quickly they may grow. Testing shows the cancer is estrogen receptor (ER) positive and progesterone receptor (PR) positive, meaning it may respond to hormone (endocrine) therapy. It is HER2 negative, which helps guide treatment choices.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+Imaging tests, including mammogram, ultrasound, MRI, and PET/CT, showed a mass in your right breast measuring about 3–3.4 cm. A nearby lymph node in your right armpit (axilla) was also tested and contains cancer cells, which means the cancer has spread to that lymph node. No spread to other parts of the body was seen on the PET/CT scan.
 
-The cancer has also spread to a lymph node in your right armpit (axilla). This means it is a more advanced local stage, but it has not spread to distant organs.
+You are currently feeling well overall, with only mild bloating, and you have strong support from your family. You have also started egg harvesting, which is a fertility preservation step before cancer treatment.
 
-Key test results
+At this time, the plan is to continue working with your oncology and surgical teams to decide on the best treatment approach. This may include a combination of treatments such as surgery, medication, and/or other therapies tailored to your cancer type. Genetic testing has also been sent, and those results may help guide further decisions.
 
-Imaging showed a tumor about 3 cm in your right breast.
-A biopsy confirmed breast cancer.
-A lymph node biopsy showed cancer spread to that node.
-MRI confirmed the breast tumor and enlarged lymph node.
-PET scan did not show cancer spread to other parts of the body.
+Next steps include finalizing your treatment plan, reviewing genetic testing results, and continuing discussions about your care goals. You also asked about exercise and diet—please continue to discuss these with your care team so they can guide you safely during treatment.
 
-What is the treatment plan?
-Your care team will recommend a multimodal treatment approach. This means using several types of treatment together. These may include:
+Please remember, you are not alone in this. Write down any questions you have and bring them to your next visit. Your care team is here to support you every step of the way.
 
-Surgery to remove the tumor
-Systemic therapy (medicine that treats the whole body), such as hormone therapy and possibly chemotherapy
-Other treatments based on your final plan
-
-Because your cancer is hormone receptor positive, hormone therapy (medicine that blocks estrogen) will be an important part of your treatment.
-
-Next steps
-
-Complete your egg harvesting process (to preserve fertility before treatment)
-Meet with your oncology team to finalize your treatment plan
-Begin treatment as recommended
-
-What to watch for
-You are currently feeling well overall. Please tell your care team if you notice:
-
-New pain or swelling
-Changes in the breast or underarm area
-Fatigue or other new symptoms
-
-Lifestyle and support
-You asked about exercise. Staying active is usually helpful, but please check with your care team about safe activities during treatment. Eating a healthy diet is also a good step.
-
-Final thoughts
-You have a strong support system, which is very important. Your care team will guide you through each step of treatment.
-
-Please write down any questions and discuss them with your doctors. We are here to support you.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

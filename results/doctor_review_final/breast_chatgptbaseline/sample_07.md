@@ -21,63 +21,38 @@ This is a shared visit for services provided by me, ***** ***** *****, MD. I per
 
 Dear Patient,
 
-We are writing to help you understand your current condition and treatment plan.
+I’m writing to summarize your recent visit and your care plan in clear terms.
 
-What is your diagnosis?
-You have metastatic breast cancer. This means the breast cancer has spread to other parts of your body. In your case, it has spread to the liver and lymph nodes (small glands that help fight infection).
+You have metastatic breast cancer, which means the breast cancer has spread to other parts of the body. In your case, it has spread to the liver and lymph nodes. Your cancer is ER-negative, PR-negative, and HER2-negative (also called triple-negative breast cancer, meaning it does not respond to certain hormone or HER2-targeted treatments).
 
-Your cancer is triple negative, which means it does not use estrogen (ER), progesterone (PR), or HER2 to grow.
+You are currently being treated with:
 
-You also have a condition called Lynch syndrome, which is a genetic condition that increases the risk of certain cancers.
+Chemotherapy (Abraxane/nab-paclitaxel) – a medicine that kills cancer cells
+Immunotherapy (pembrolizumab) – a medicine that helps your immune system fight cancer
 
-Key updates from your visit
+Recent scans show that the cancer has grown (progression), so continuing this combination treatment is recommended for your type of disease. Your lab results are stable and safe to continue therapy.
 
-Your recent scans show that the cancer has grown (progressed).
-Your lab results are okay to continue treatment.
-You are currently receiving chemotherapy and immunotherapy (treatment that helps your immune system fight cancer).
+At your visit, you reported some symptoms from treatment, including:
 
-What is the treatment plan?
-You will continue your current treatment, which includes:
-
-Nab-paclitaxel (Abraxane) – a type of chemotherapy
-Pembrolizumab – an immunotherapy drug
-
-You will stay on this treatment as long as it is working and side effects are manageable.
-
-You will have repeat scans every 3 to 4 months, or sooner if you have new symptoms.
-
-Next steps
-
-Continue scheduled treatments
-Get imaging scans based on symptoms or at regular intervals
-Follow up with your care team every few weeks
-
-What to watch for
-You reported some symptoms during your visit, including:
-
-Heartburn (GERD), which improves with medication
-Nausea
+Heartburn (GERD), helped by medication
+Nausea, improved with medication
 Fatigue for a few days after treatment
-Pain in your shoulder and lower back (now improved or stable)
-New muscle aches in your arms and legs
-Numbness or tingling in your fingers and toes
-Leg cramps at night
+Some pain, which has improved
+Mild numbness or tingling in fingers and toes (a side effect called neuropathy)
 
-These may be side effects of treatment. Please tell your care team if they get worse or if you have new symptoms.
+Your care plan includes:
 
-Other important care
+Continue current chemo-immunotherapy as long as it is helping and side effects are manageable
+Repeat imaging scans every 3–4 months, or sooner if symptoms change
+Manage side effects with medications and supportive care
+Follow up regularly (next visit in about 2–3 weeks)
 
-You may need a port (a small device under the skin) to help with treatment
-You are being treated for pain with medications as needed
-Your care team is also monitoring for side effects like nerve symptoms (neuropathy)
+You also have a history of other cancers (colon and uterine) related to Lynch syndrome (a genetic condition that increases cancer risk), which your team continues to monitor.
 
-Final thoughts
-Your care team is closely monitoring your response to treatment. The goal is to control the cancer and help you feel as well as possible.
+Please keep track of your symptoms and let your care team know about any changes. If you have questions or concerns, do not hesitate to discuss them with your oncology team—they are here to support you.
 
-Please bring any questions or concerns to your care team. We are here to support you.
-
-With care,
-Your Cancer Care Team
+With care and support,
+Your Care Team
 
 ---
 

@@ -21,63 +21,28 @@ SUBJECTIVE    ***** ***** is a 49 y.o. female with ER+/PR-/HER2- left breast can
 
 Dear Patient,
 
-We are writing to help you understand your current condition and care plan.
+I am glad to share an update from your recent visit.
 
-What is your diagnosis?
-You were diagnosed with breast cancer in your left breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+You have a history of left breast cancer called invasive ductal carcinoma (IDC), which is the most common type of breast cancer. Your cancer was hormone receptor positive (ER positive, meaning it grows in response to estrogen) and HER2 negative (meaning it does not have extra HER2 protein). At the time of diagnosis, your cancer was stage 2–3.
 
-Your cancer is hormone receptor positive (ER+) and HER2 negative. This means it uses estrogen to grow and does not have extra HER2 protein.
+You have already completed several important treatments. These include hormone therapy (tamoxifen), surgery to remove both breasts (bilateral mastectomies), and continued hormone-blocking therapy. You are currently taking exemestane, which lowers estrogen levels in the body to reduce the risk of cancer coming back.
 
-You have already completed major treatments, including:
+At your recent exam, there was no evidence of disease, which means there are no signs of cancer at this time.
 
-Bilateral mastectomy (removal of both breasts)
-Hormone therapy
+You shared some side effects from treatment, including mild joint aches, hot flashes, trouble sleeping, bone pain, and vaginal dryness. These are known side effects of hormone therapy. You are tolerating exemestane better than your prior medication.
 
-At this time, there is no evidence of disease (NED), which means no signs of cancer are found on exam.
+The plan moving forward is to continue exemestane for at least 5 years. Your care team will also check your estradiol (estrogen) level to make sure your ovaries are fully suppressed. A bone density scan (DEXA scan) is recommended now and every 2 years to monitor bone health.
 
-What is the current treatment plan?
-You are continuing hormone therapy to lower the chance of cancer coming back.
+You will continue follow-up visits every 6 months. No routine imaging is needed because both breasts have been removed.
 
-You are taking exemestane, a medicine that lowers estrogen levels
-You are also on ovarian suppression (OS), which stops the ovaries from making estrogen
+You are also doing well with your mood overall, and ongoing support is available if needed.
 
-This combination helps reduce the risk of cancer returning. The plan is to continue this treatment for at least 5 years.
+Please continue to stay active and take care of your health. If you notice any new or worsening symptoms, let your care team know right away.
 
-Key updates from your visit
+If you have any questions, please discuss them with your care team. We are here to support you.
 
-You had side effects with a previous medication (letrozole), including anxiety and mood changes
-You are now tolerating exemestane better
-You have mild symptoms such as joint aches, hot flashes, trouble sleeping, and vaginal dryness
-
-These are common side effects of hormone therapy.
-
-Next steps
-
-Continue exemestane daily
-Check estrogen levels (estradiol) to make sure ovarian suppression is working
-Get a DEXA scan (bone strength test) now and every 2 years
-Follow up in clinic every 6 months
-
-What to watch for
-Please tell your care team if you notice:
-
-New or worsening bone pain
-Shortness of breath
-New lumps or swelling
-Any new or concerning symptoms
-
-Other important care
-
-Bone health is important during treatment. Your team may recommend medications if bone density is low
-You may consider ovary removal surgery (BSO) in the future as another option
-
-Final thoughts
-You are doing well, and there is no sign of cancer right now. Continuing your current treatment helps keep the cancer from coming back.
-
-It is normal to have side effects, and your care team can help manage them. Please share any concerns with your doctors.
-
-With care,
-Your Cancer Care Team
+Warmly,
+Your Care Team
 
 ---
 

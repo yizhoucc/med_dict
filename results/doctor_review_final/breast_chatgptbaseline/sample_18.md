@@ -20,56 +20,17 @@ HPI:  ***** ***** is a 32 y.o. female here for a discussion of treatment options
 
 Dear Patient,
 
-We are writing to help you understand your diagnosis and your treatment plan.
+We reviewed your recent tests and discussed treatment options for your left breast cancer. Your biopsy showed an invasive ductal carcinoma, which is a common type of breast cancer. The tumor was grade 2, meaning the cancer cells look moderately different from normal cells. The cancer is estrogen receptor (ER) positive, progesterone receptor (PR) low positive, and HER2 negative. These results help guide treatment choices.
 
-What is your diagnosis?
-You have breast cancer in your left breast. The type is called invasive ductal carcinoma (IDC). This means the cancer started in the milk ducts and spread into nearby breast tissue.
+Your imaging tests showed a mass in the lower outer part of the left breast measuring about 2.5 cm. The MRI also showed some lymph nodes under the left arm that looked abnormal. However, two needle biopsies (FNA biopsies) of the lymph nodes did not show cancer cells. The right breast imaging did not show cancer.
 
-Your cancer is hormone receptor positive (ER+ and PR+), which means it uses estrogen to grow. It is HER2 negative, meaning it does not have extra HER2 protein.
+You also carry an ATM gene mutation. Because of this, the radiation oncology team did not strongly recommend radiation treatment and instead advised mastectomy surgery, which removes the breast.
 
-Your tumor is about 2.5 cm in size. Based on current information, there is no clear cancer found in the lymph nodes, but this will be confirmed at surgery.
+Your Mammaprint test showed that the cancer is “high risk,” which means chemotherapy is recommended after surgery. The exact chemotherapy plan will depend on whether cancer is found in the lymph nodes during surgery. If the lymph nodes are negative, one chemotherapy approach may be used. If lymph nodes contain cancer, a stronger chemotherapy plan may be recommended. Your doctors will discuss these details with you after surgery.
 
-You also carry an ATM gene mutation, which is a genetic change that can affect cancer risk and treatment decisions.
+Because your cancer is ER positive, you will also need hormonal therapy for at least 5 years after treatment. Hormonal therapy helps lower the chance of the cancer returning. Different hormonal treatment options will be discussed in more detail after surgery.
 
-Key test results
-
-Imaging found a mass in your left breast.
-Biopsy confirmed breast cancer.
-MRI showed the tumor and some lymph nodes that look abnormal.
-Two needle biopsies of lymph nodes did not show cancer.
-A special test (Mammaprint) shows the cancer is high risk, meaning a higher chance of coming back without treatment.
-
-What is the treatment plan?
-Your doctors recommend starting with surgery. Because of your ATM mutation, radiation doctors suggested a mastectomy (removal of the breast) instead of breast-conserving surgery.
-
-After surgery, treatment will likely include:
-
-Chemotherapy (type depends on whether lymph nodes have cancer at surgery)
-Hormone therapy (medicine that blocks estrogen for at least 5 years)
-
-Your care team will choose the exact chemotherapy plan after reviewing your final surgery results.
-
-Next steps
-
-Proceed with surgery
-Review final pathology results
-Decide on chemotherapy plan
-Start hormone therapy after chemotherapy
-
-What to watch for
-Right now, you feel generally well. Please tell your care team if you notice:
-
-New pain or swelling
-Changes in the breast or underarm
-Any new or concerning symptoms
-
-Final thoughts
-Your care team is carefully planning your treatment to give you the best outcome. Surgery will provide important information to guide the next steps.
-
-It is normal to feel anxious. Please bring your questions to your care team. We are here to support you every step of the way.
-
-With care,
-Your Cancer Care Team
+Please continue to talk with your cancer care team about any questions or concerns. Your team is here to support you and help guide you through each next step.
 
 ---
 
