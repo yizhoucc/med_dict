@@ -40,10 +40,6 @@ def extract_letter(content):
         return content[start:rating_idx].strip()
     return content[start:].strip()
 
-def extract_cancer_type(content):
-    match = re.search(r'\*\*Cancer Type:\*\*\s*(.*)', content)
-    return match.group(1).strip() if match else ""
-
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <title>{title}</title>
@@ -89,12 +85,9 @@ def build_breast_md():
         baseline = read_file(os.path.join(BASE, 'breast_baseline', f'sample_{num}.md'))
         chatgpt = read_file(os.path.join(BASE, 'breast_chatgptbaseline', f'sample_{num}.md'))
 
-        cancer_type = extract_cancer_type(pipeline)
         full_note = breast_notes[i]
 
         output.append(f"# Breast Cancer — Sample {i+1}\n\n")
-        if cancer_type:
-            output.append(f"**Cancer Type:** {cancer_type}\n\n")
         output.append("## Original Clinical Note\n\n```\n" + full_note + "\n```\n\n")
 
         for label, letter_text in [("A", extract_letter(chatgpt)),
@@ -122,12 +115,9 @@ def build_pdac_md():
         baseline = read_file(os.path.join(BASE, 'pdac_baseline', f'sample_{num}.md'))
         chatgpt = read_file(os.path.join(BASE, 'pdac_chatgptbaseline', f'sample_{num}.md'))
 
-        cancer_type = extract_cancer_type(pipeline)
         full_note = pdac_notes[i]
 
         output.append(f"# Pancreatic Cancer — Sample {i+1}\n\n")
-        if cancer_type:
-            output.append(f"**Cancer Type:** {cancer_type}\n\n")
         output.append("## Original Clinical Note\n\n```\n" + full_note + "\n```\n\n")
 
         for label, letter_text in [("A", extract_letter(chatgpt)),
