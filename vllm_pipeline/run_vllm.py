@@ -32,7 +32,7 @@ from ult import (
     try_parse_json,
     extract_schema_keys,
 )
-from letter_generation import flatten_keypoints, _clean_keypoints_for_letter
+from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm
 
 # Emotion keywords for letter emotional context (from letter_generation.py)
 _EMOTION_KEYWORDS = [
@@ -729,9 +729,17 @@ def main():
             if emotions:
                 flat["emotional_context"] = f"Patient appears {', '.join(emotions[:3])}."
 
-            # 7c. Build letter prompt with flattened keypoints
+            # 7c. Build letter prompt with flattened keypoints + A/P context
             keypoints_json = json.dumps(flat, indent=2, ensure_ascii=False)
             letter_prompt_filled = letter_prompt_template.replace("{keypoints_json}", keypoints_json)
+            # Inject original A/P section for cross-reference
+            ap_section = _extract_ap_section(note_text)
+            if ap_section:
+                letter_prompt_filled += (
+                    "\n\nORIGINAL ASSESSMENT & PLAN (use as factual reference — "
+                    "if the keypoints above conflict with this section, follow this section):\n"
+                    f"--- BEGIN A/P ---\n{ap_section}\n--- END A/P ---\n"
+                )
             letter_task = chat_tmpl.user_assistant(letter_prompt_filled)
             letter_base = build_base_prompt(note_text, chat_tmpl=chat_tmpl)
             letter_config = keypoint_config.copy()
@@ -753,7 +761,14 @@ def main():
                     letter = letter.replace(old_sentence, new_sentence)
                     print(f"  [POST-LETTER-MET] Simplified {count} organs → 'other parts of your body'")
 
-            # 7d. Compute readability metrics
+            # 7d. Letter Faithfulness Gate: verify letter against original note
+            letter, faith_log = verify_letter_faithfulness_vllm(
+                letter, note_text, client, chat_tmpl, letter_config, letter_base,
+            )
+            for fl in faith_log:
+                print(f"  {fl}")
+
+            # 7e. Compute readability metrics
             try:
                 import textstat
                 letter_clean = re.sub(r'\[source:[^\]]*\]', '', letter)

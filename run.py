@@ -258,7 +258,7 @@ from ult import (
     gc,
 )
 from source_attribution import attribute_row, get_attributable_fields
-from letter_generation import generate_tagged_letter, parse_tagged_letter, post_check_letter, flesch_kincaid_grade
+from letter_generation import generate_tagged_letter, parse_tagged_letter, post_check_letter, flesch_kincaid_grade, verify_letter_faithfulness
 
 
 def load_config(yaml_path):
@@ -3439,6 +3439,13 @@ def main():
                         cleaned_lines.append(line)
                 letter = "\n".join(cleaned_lines)
             letter, _ = post_fix_letter(letter)
+            # Letter Faithfulness Gate: verify letter against original note
+            letter, faith_log = verify_letter_faithfulness(
+                letter, note_text, model, tokenizer, chat_tmpl,
+                gen_config, fullnote_cache,
+            )
+            for fl in faith_log:
+                print(f"  {fl}")
             traceability["letter_text"] = letter
             for w in post_warnings:
                 print(f"  {w}")

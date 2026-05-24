@@ -184,6 +184,23 @@ _EMOTION_KEYWORDS = [
 ]
 
 
+def _extract_ap_section(note_text):
+    """Extract Assessment & Plan section from note text for letter context."""
+    if not note_text:
+        return ""
+    patterns = [
+        r'(?:Assessment\s+and\s+(?:Plan|Recommendations?)|Impression\s+and\s+Recommendations?|'
+        r'Assessment/Plan|A/P)[:\s]*\n?(.*)',
+    ]
+    for pat in patterns:
+        m = re.search(pat, note_text, re.IGNORECASE | re.DOTALL)
+        if m:
+            ap = m.group(1).strip()
+            if len(ap) > 100:
+                return ap[:3000]
+    return ""
+
+
 def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
                            gen_config, base_cache, letter_prompt_template,
                            note_text=""):
@@ -196,7 +213,7 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
         gen_config: generation config dict (will override max_new_tokens)
         base_cache: KV cache with the note already encoded
         letter_prompt_template: prompt string with {keypoints_json} placeholder
-        note_text: original note text for emotion detection
+        note_text: original note text for emotion detection and A/P injection
 
     Returns:
         tagged_text: raw LLM output with [source:X] tags
@@ -223,7 +240,18 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
             flat["emotional_context"] = f"Patient appears {', '.join(emotions[:3])}."
 
     keypoints_json = json.dumps(flat, indent=2, ensure_ascii=False)
-    prompt_text = letter_prompt_template.format(keypoints_json=keypoints_json)
+
+    # Inject original A/P section so LLM can cross-reference
+    ap_section = _extract_ap_section(note_text)
+    ap_context = ""
+    if ap_section:
+        ap_context = (
+            "\n\nORIGINAL ASSESSMENT & PLAN (use as factual reference — "
+            "if the keypoints above conflict with this section, follow this section):\n"
+            f"--- BEGIN A/P ---\n{ap_section}\n--- END A/P ---\n"
+        )
+
+    prompt_text = letter_prompt_template.format(keypoints_json=keypoints_json) + ap_context
 
     # Build the chat prompt and generate
     chat_prompt = chat_tmpl.user_assistant(prompt_text)
@@ -399,6 +427,129 @@ def parse_tagged_letter(tagged_text, keypoints, attribution):
             "sentences_full_chain": n_full_chain,
         },
     }
+
+
+def verify_letter_faithfulness(letter_text, note_text, model, tokenizer,
+                               chat_tmpl, gen_config, base_cache):
+    """Gate: verify each claim in the letter against the original note.
+
+    Checks for:
+    - Factual errors (e.g., merging separate treatment options)
+    - Mistranslated medical terms (e.g., pneumobilia ≠ bile in lungs)
+    - Information not supported by the note
+
+    Returns:
+        (corrected_letter, changes_log): corrected text and list of changes made
+    """
+    ap_section = _extract_ap_section(note_text)
+    reference = ap_section if ap_section else note_text[:4000]
+
+    verify_prompt = chat_tmpl.user_assistant(
+        "You are a clinical accuracy reviewer. Compare this patient letter against "
+        "the original clinical note and fix any errors.\n\n"
+        f"--- PATIENT LETTER ---\n{letter_text}\n--- END LETTER ---\n\n"
+        f"--- ORIGINAL NOTE (Assessment & Plan) ---\n{reference}\n--- END NOTE ---\n\n"
+        "Check each sentence in the letter for:\n"
+        "1. FACTUAL ERRORS: Does the letter misrepresent what the note says? "
+        "For example, combining two separate treatment options into one, or "
+        "attributing information to the wrong context.\n"
+        "2. MISTRANSLATED TERMS: When the letter explains a medical term in "
+        "plain language, is the explanation correct? For example, "
+        "'pneumobilia' means air in the bile ducts, NOT bile in the lungs.\n"
+        "3. UNSUPPORTED CLAIMS: Does the letter state something not in the note?\n\n"
+        "Rules:\n"
+        "- If you find an error, fix ONLY that sentence. Keep everything else unchanged.\n"
+        "- If a medical term was mistranslated, either fix the translation or remove "
+        "the sentence if you are not confident in the correct plain-language explanation.\n"
+        "- Do NOT add new information. Do NOT change the letter's structure or tone.\n"
+        "- If the letter is accurate, return it unchanged.\n"
+        "- Preserve all [source:...] tags exactly as they appear.\n\n"
+        "Return the corrected letter text. Nothing else — no commentary, no JSON wrapper."
+    )
+
+    cache = clone_cache(base_cache)
+    verify_config = gen_config.copy()
+    verify_config["max_new_tokens"] = 1024
+
+    corrected, _ = run_model_with_cache_manual(
+        verify_prompt, model, tokenizer, verify_config, cache
+    )
+    corrected = corrected.strip()
+
+    # Log changes
+    changes = []
+    if corrected and len(corrected) > 50 and corrected != letter_text:
+        old_lines = set(letter_text.split('\n'))
+        new_lines = set(corrected.split('\n'))
+        removed = old_lines - new_lines
+        added = new_lines - old_lines
+        for r in removed:
+            r = r.strip()
+            if r and len(r) > 10:
+                changes.append(f"[LETTER-FAITH] removed/changed: '{r[:80]}'")
+        for a in added:
+            a = a.strip()
+            if a and len(a) > 10:
+                changes.append(f"[LETTER-FAITH] added/fixed: '{a[:80]}'")
+        return corrected, changes
+
+    return letter_text, ["[LETTER-FAITH] no changes (letter is faithful)"]
+
+
+def verify_letter_faithfulness_vllm(letter_text, note_text, client, chat_tmpl,
+                                    gen_config, base_prompt):
+    """vLLM version of letter faithfulness verification."""
+    from vllm_pipeline.inference import vllm_generate
+
+    ap_section = _extract_ap_section(note_text)
+    reference = ap_section if ap_section else note_text[:4000]
+
+    verify_prompt = chat_tmpl.user_assistant(
+        "You are a clinical accuracy reviewer. Compare this patient letter against "
+        "the original clinical note and fix any errors.\n\n"
+        f"--- PATIENT LETTER ---\n{letter_text}\n--- END LETTER ---\n\n"
+        f"--- ORIGINAL NOTE (Assessment & Plan) ---\n{reference}\n--- END NOTE ---\n\n"
+        "Check each sentence in the letter for:\n"
+        "1. FACTUAL ERRORS: Does the letter misrepresent what the note says? "
+        "For example, combining two separate treatment options into one, or "
+        "attributing information to the wrong context.\n"
+        "2. MISTRANSLATED TERMS: When the letter explains a medical term in "
+        "plain language, is the explanation correct? For example, "
+        "'pneumobilia' means air in the bile ducts, NOT bile in the lungs.\n"
+        "3. UNSUPPORTED CLAIMS: Does the letter state something not in the note?\n\n"
+        "Rules:\n"
+        "- If you find an error, fix ONLY that sentence. Keep everything else unchanged.\n"
+        "- If a medical term was mistranslated, either fix the translation or remove "
+        "the sentence if you are not confident in the correct plain-language explanation.\n"
+        "- Do NOT add new information. Do NOT change the letter's structure or tone.\n"
+        "- If the letter is accurate, return it unchanged.\n"
+        "- Preserve all [source:...] tags exactly as they appear.\n\n"
+        "Return the corrected letter text. Nothing else — no commentary, no JSON wrapper."
+    )
+
+    verify_config = gen_config.copy()
+    verify_config["max_new_tokens"] = 1024
+
+    corrected, _ = vllm_generate(verify_prompt, client, verify_config, base_prompt)
+    corrected = corrected.strip()
+
+    changes = []
+    if corrected and len(corrected) > 50 and corrected != letter_text:
+        old_lines = set(letter_text.split('\n'))
+        new_lines = set(corrected.split('\n'))
+        removed = old_lines - new_lines
+        added = new_lines - old_lines
+        for r in removed:
+            r = r.strip()
+            if r and len(r) > 10:
+                changes.append(f"[LETTER-FAITH] removed/changed: '{r[:80]}'")
+        for a in added:
+            a = a.strip()
+            if a and len(a) > 10:
+                changes.append(f"[LETTER-FAITH] added/fixed: '{a[:80]}'")
+        return corrected, changes
+
+    return letter_text, ["[LETTER-FAITH] no changes (letter is faithful)"]
 
 
 def post_check_letter(letter_text):
