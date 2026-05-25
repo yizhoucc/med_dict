@@ -871,6 +871,9 @@ def main():
             # Strip thinking tags and source tags
             letter_simple = re.sub(r'<think>.*?</think>', '', letter_simple, flags=re.DOTALL).strip()
             letter_simple = re.sub(r'\s*\[source:[^\]]*\]', '', letter_simple)
+            # Re-apply post hooks on simplified letter (simplify LLM may reintroduce REDACTED etc.)
+            letter_simple, _ = post_check_letter(letter_simple)
+            letter_simple, _ = post_fix_letter(letter_simple)
             f.write(f"--- Column: letter ---\n{json.dumps(letter_simple.strip())}\n\n")
             simple_wc = len(letter_simple.split())
             print(f"  Letter simplified: {len(letter_detailed.split())} → {simple_wc} words")
