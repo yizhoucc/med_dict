@@ -243,6 +243,12 @@ def generate_tagged_letter(keypoints, model, tokenizer, chat_tmpl,
 
     # Inject original A/P section so LLM can cross-reference
     ap_section = _extract_ap_section(note_text)
+    if ap_section:
+        # Sanitize: replace ***** markers with generic terms to prevent leaks
+        ap_section = re.sub(r'Dr\.?\s*\*{3,}(\s*\*{3,})*', 'the doctor', ap_section)
+        ap_section = re.sub(r'Mr\.?\s*\*{3,}', 'the patient', ap_section)
+        ap_section = re.sub(r'Mrs?\.?\s*\*{3,}', 'the patient', ap_section)
+        ap_section = re.sub(r'\*{3,}', '[REDACTED]', ap_section)
     ap_context = ""
     if ap_section:
         ap_context = (
@@ -556,11 +562,17 @@ def post_check_letter(letter_text):
     """Post-generation checks on letter text. Returns (cleaned_text, warnings)."""
     warnings = []
 
-    # 1. Strip [REDACTED] leaks and fix "Dr. a medication"
+    # 1. Strip [REDACTED] and ***** leaks
     if "[REDACTED]" in letter_text:
         letter_text = re.sub(r'Dr\.?\s*\[REDACTED\](\s*\[REDACTED\])*', 'your doctor', letter_text)
         letter_text = re.sub(r'\[REDACTED\](\s*\[REDACTED\])*', 'a medication', letter_text)
         warnings.append("[POST-LETTER] stripped [REDACTED] from letter")
+    if "*****" in letter_text:
+        letter_text = re.sub(r'Dr\.?\s*\*{3,}(\s*\*{3,})*', 'your doctor', letter_text)
+        letter_text = re.sub(r'Mr\.?\s*\*{3,}', 'the patient', letter_text)
+        letter_text = re.sub(r'Mrs?\.?\s*\*{3,}', 'the patient', letter_text)
+        letter_text = re.sub(r'\*{3,}', '', letter_text)
+        warnings.append("[POST-LETTER] stripped ***** markers from letter")
     if "Dr. a medication" in letter_text:
         letter_text = letter_text.replace("Dr. a medication", "your doctor")
         warnings.append("[POST-LETTER] fixed 'Dr. a medication' → 'your doctor'")

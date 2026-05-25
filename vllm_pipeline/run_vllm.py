@@ -736,6 +736,11 @@ def main():
             # Inject original A/P section for cross-reference
             ap_section = _extract_ap_section(note_text)
             if ap_section:
+                # Sanitize: replace ***** markers to prevent leaks into letter
+                ap_section = re.sub(r'Dr\.?\s*\*{3,}(\s*\*{3,})*', 'the doctor', ap_section)
+                ap_section = re.sub(r'Mr\.?\s*\*{3,}', 'the patient', ap_section)
+                ap_section = re.sub(r'Mrs?\.?\s*\*{3,}', 'the patient', ap_section)
+                ap_section = re.sub(r'\*{3,}', '[REDACTED]', ap_section)
                 letter_prompt_filled += (
                     "\n\nORIGINAL ASSESSMENT & PLAN (use as factual reference — "
                     "if the keypoints above conflict with this section, follow this section):\n"
