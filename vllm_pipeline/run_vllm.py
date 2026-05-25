@@ -32,7 +32,8 @@ from ult import (
     try_parse_json,
     extract_schema_keys,
 )
-from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm
+from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm, post_check_letter
+from run import post_fix_letter
 
 # Emotion keywords for letter emotional context (from letter_generation.py)
 _EMOTION_KEYWORDS = [
@@ -761,7 +762,15 @@ def main():
                     letter = letter.replace(old_sentence, new_sentence)
                     print(f"  [POST-LETTER-MET] Simplified {count} organs → 'other parts of your body'")
 
-            # 7d. Letter Faithfulness Gate: verify letter against original note
+            # 7d. POST-LETTER checks (REDACTED, chemo abbreviations, jargon, dosing, etc.)
+            letter, post_warnings = post_check_letter(letter)
+            for w in post_warnings:
+                print(f"  {w}")
+            letter, pf_changed = post_fix_letter(letter)
+            if pf_changed:
+                print(f"  [POST-FIX-LETTER] applied voice/grammar/dose fixes")
+
+            # 7e. Letter Faithfulness Gate: verify letter against original note
             letter, faith_log = verify_letter_faithfulness_vllm(
                 letter, note_text, client, chat_tmpl, letter_config, letter_base,
             )
