@@ -1,0 +1,1797 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: /home/yc/repo/med_dict/data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/pdac_annotated.csv
+Date: 2026-05-25 20:43
+============================================================
+
+============================================================
+ROW 1 (coral_idx=0)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up for locally advanced adenocarcinoma of the pancreas.
+
+#### Cancer Diagnosis:
+- **Type:** Locally advanced adenocarcinoma of the pancreas.
+- **Stage:** Not explicitly stated, but described as locally advanced.
+- **Metastasis:** Possible progression noted in the lungs with new nodules.
+
+#### Lab Results:
+- **Complete Blood Count (CBC):**
+  - WBC: 6.7 x10E9/L
+  - RBC: 3.89 (L) x10E12/L
+  - Hemoglobin: 11.1 (L) g/dL
+  - Hematocrit: 33.5 (L) %
+  - MCV: 86 fL
+  - MCH: 28.5 pg
+  - MCHC: 33.1 g/dL
+  - Platelet Count: 203 x10E9/L
+  - Neutrophil Absolute Count: 4.06 x10E9/L
+  - Lymphocyte Abs Cnt: 1.49 x10E9/L
+  - Monocyte Abs Count: 0.84 (H) x10E9/L
+  - Eosinophil Abs Ct: 0.23 x10E9/L
+  - Basophil Abs Count: 0.02 x10E9/L
+  - Imm Gran, Left Shift: 0.02 <0.1 x10E9/L
+- **Renal Function:**
+  - Urea Nitrogen: 13 mg/dL
+  - Creatinine: 1.06 mg/dL
+  - eGFR (African American): 96 mL/min
+- **Liver Function:**
+  - AST: 20 U/L
+  - ALT: 25 U/L
+  - Bilirubin, Total: 0.9 mg/dL
+  - Alkaline Phosphatase: 60 U/L
+- **Tumor Marker:**
+  - CA 19-9: 3 U/mL
+
+#### Clinical Findings:
+- Lost 43 pounds initially, now gaining weight.
+- Significant pain initially, now intermittent abdominal discomfort managed with oxycodone.
+- Appetite has returned.
+- Numbness and tingling in hands, not interfering with function.
+- Regular bowel movements.
+- No icterus noted on examination.
+- Vital signs: BP 131/90, Pulse 64, Temp 36.9°C, Resp 20, Weight 94.3 kg, SpO2 100%, BMI 28.48 kg/m².
+
+#### Current Medications:
+- Gemcitabine and Abraxane (completed 6 full cycles).
+- Oxycodone for pain.
+- Antibiotics for biliary ductal obstruction.
+
+#### Treatment Changes:
+- Completed 6 full cycles of gemcitabine and Abraxane.
+- Interrupted 5th cycle due to biliary ductal obstruction.
+- Placed on a chemotherapy break due to possible progression and patient preference.
+
+#### Treatment Goals:
+- Surveillance given the sites of disease involvement and lack of symptoms.
+- Addressing patient’s psychological needs and coping mechanisms.
+
+#### Response to Treatment:
+- Initial response was good clinically despite radiological progression.
+- Possible pseudo-progression noted.
+- New lung nodules suggest possible progression.
+
+#### Plan:
+- **Medications:** Continue oxycodone for pain management.
+- **Therapy:** Psycho-oncology referral for coping with disease and social/economic issues.
+- **Radiation:** None planned.
+- **Procedures:** None planned.
+- **Imaging:** Follow-up CT scans in 2 months.
+- **Labs:** Routine monitoring.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** Psycho-oncology.
+- **Follow-Up:** Scheduled for 2 months.
+- **Advance Care Planning:** Not explicitly addressed.
+
+This summary captures the essential clinical details from the provided oncology note.
+
+--- STATS ---
+Time: 19.7s | Output: 2821 chars
+
+
+============================================================
+ROW 2 (coral_idx=1)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up for Adenocarcinoma of the pancreas, status post resection, now with new metastatic disease.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the pancreas.
+- **Stage:** Initially resected with direct invasion into the duodenum and 6 out of 25 lymph nodes positive.
+- **Metastasis:** New liver metastases identified.
+
+#### Lab Results:
+- **WBC Count:** 7.4
+- **Neutrophil Absolute Count:** 4.62
+- **Hemoglobin:** 9.4 (Low)
+- **Hematocrit:** 30.1 (Low)
+- **Platelet Count:** 351
+- **Creatinine:** 0.58 (Low)
+- **Bilirubin, Total:** 0.4
+- **Alkaline Phosphatase:** 305 (High)
+- **Aspartate Transaminase:** 33
+- **Alanine Transaminase:** 31
+- **Albumin, Serum / Plasma:** 3.0 (Low)
+- **Int'l Normaliz Ratio:** 1.1
+- **Sodium, Serum / Plasma:** 137
+- **Potassium, Serum / Plasma:** 3.9
+- **Calcium, total, Serum / Plasma:** 8.7 (Low)
+- **Cancer Antigen 19-9:** 900 (High), 634 (High), 1,625 (High)
+- **Carcinoembryonic Antigen:** 8.3 (High), 8.5 (High), 10.6 (High)
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - **Vital Signs:** BP 133/69, Pulse 79, Resp 18, Temp 36.9°C (98.4°F), SpO2 100%, Weight 55.8 kg (123 lbs), Height 166.6 cm (5' 5.59")
+  - **Pain:** 1 (ECOG 0)
+  - **Constitutional:** Well-developed, well-nourished, no acute distress.
+  - **Skin:** Warm, moist, no rashes or lesions.
+  - **Eyes:** Sclera anicteric, PERRL, EOMI.
+  - **HENT:** No open sores, no erythema/edema, sinuses nontender, nasal mucosa intact, pharynx without erythema, no thrush.
+  - **Lymph Nodes:** No cervical, supraclavicular, or axillary lymphadenopathy.
+  - **Respiratory:** Resonant to percussion throughout, CTA bilaterally, no wheezes, rhonchi, or crackles.
+  - **Cardiovascular:** Normal heart rate, normal rhythm, no murmurs, no rubs, no gallops, no LE edema.
+  - **GI:** Bowel sounds normal, soft, no tenderness or distention, no HSM.
+  - **Musculoskeletal:** No point tenderness at cervical, thoracic, or lumbar spine, muscular strength equal throughout.
+  - **Neurologic:** Right arm with slight resting tremor, alert & oriented x 3, ambulates without difficulty, CN II-XII intact.
+  - **Psychiatric:** Mood stable, no hallucinations, paranoia, or delusions.
+
+#### Current Medications:
+- Alprazolam (Xanax): 0.25 mg nightly as needed for sleep.
+- Atorvastatin (Lipitor): 40 mg daily.
+- Diclofenac (Voltaren) 1% Gel: Apply to affected areas topically PRN for pain.
+- Domperidone: 10 mg twice daily.
+- Granisetron (Sancuso) 3.1 mg/24-hour patch: Apply at least 24 hours prior to chemo, remove minimum of 24 hours after chemo completion.
+- Insulin Aspart: 100 units/mL subcutaneous pen.
+- Lidocaine-Diphenhydramine-Maalox (Magic Mouthwash): 15 mL four times daily as needed for painful mouth sores and throat pain.
+- Lipase-Protease-Amylase (Creon): 2 capsules with each meal, 1 capsule with each snack.
+- Multivitamin with Min-Folic Acid (Omnicap): 0.4 mg.
+- Nitroglycerin: 6.5 mg daily.
+- Ondansetron (Zofran): 8 mg three times daily as needed for nausea and vomiting.
+- Pantoprazole (Protonix): 40 mg daily.
+- Prochlorperazine (Compazine): 10 mg every 6 hours as needed for nausea and vomiting.
+- Tamsulosin (Flomax): 0.4 mg daily.
+
+#### Treatment Changes:
+- Progression noted on FOLFIRINOX; switched to second-line therapy with Gemcitabine + Abraxane on 11/29/18.
+
+#### Treatment Goals:
+- Control metastatic disease.
+- Manage symptoms and side effects.
+- Maintain quality of life.
+
+#### Response to Treatment:
+- Initial response to FOLFIRINOX showed decreasing CA 19-9 levels, but disease progression noted.
+- Switched to Gemcitabine + Abraxane due to disease progression.
+
+#### Plan:
+- **Medications:** Continue current regimen including Gemcitabine + Abraxane.
+- **Therapy:** Continue supportive care measures for nausea, vomiting, and pancreatic enzyme insufficiency.
+- **Radiation:** Not specified.
+- **Procedures:** No specific procedures planned.
+- **Imaging:** CT scan due after completing cycle 2.
+- **Labs:** Monitor lab values regularly.
+- **Genetic Testing:** Patient is a SPINK1 carrier; family screening recommended.
+- **Referrals:** Followed by PCP for tremor and foot drop.
+- **Follow-Up:** Return to clinic in 2 weeks.
+- **Advance Care Planning:** Not specifically addressed in the note.
+
+#### Additional Notes:
+- Patient experienced intermittent fevers and worsening peripheral neuropathy.
+- Patient plans to travel from December 30 to January 11.
+- Patient’s daughter interpreted during the visit.
+
+--- STATS ---
+Time: 30.6s | Output: 4493 chars
+
+
+============================================================
+ROW 3 (coral_idx=2)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up for metastatic pancreatic cancer (PDAC).
+
+#### Cancer Diagnosis:
+- **Type:** Metastatic Pancreatic Ductal Adenocarcinoma (PDAC).
+- **Stage:** Not explicitly stated, but metastatic.
+- **Metastasis:** Evidence of locoregional and distant metastatic disease progression.
+
+#### Lab Results:
+- **WBC Count:** 7.4
+- **Neutrophil Absolute Count:** 5.37
+- **Hemoglobin:** 7.6 (low)
+- **Hematocrit:** 25.1 (low)
+- **Platelet Count:** 227
+- **Creatinine:** 0.66
+- **Bilirubin, Total:** 0.4
+- **Alkaline Phosphatase:** 207 (high)
+- **Aspartate Transaminase:** 24
+- **Alanine Transaminase:** 18
+- **Albumin, Serum / Plasma:** 2.7 (low)
+- **Int'l Normaliz Ratio:** 1.2
+- **Sodium, Serum / Plasma:** 137
+- **Potassium, Serum / Plasma:** 2.8 (low)
+- **Cancer Antigen 19-9:** 142 (high)
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - Blood pressure: 117/73
+  - Pulse: 75
+  - Temperature: 36.7°C (98°F)
+  - Respiratory rate: 16
+  - Height: 164.9 cm (5' 4.92")
+  - Weight: 54.5 kg (120 lb 1.6 oz)
+  - SpO2: 99%
+  - Non-toxic appearance, moderately cachectic, in no acute distress.
+  - Warm and dry skin, non-jaundiced.
+  - No scleral icterus.
+  - Abdomen: Soft, non-tender, tympanic to percussion, no hepatosplenomegaly.
+  - No lower extremity edema.
+  - Normal gait, no focal motor deficits.
+  - Appropriately interactive, no evidence of depression/psychosis.
+
+- **Symptoms:**
+  - Poor appetite.
+  - Occasional bilateral abdominal pain.
+  - Uses Norco twice daily for pain.
+  - Generalized fatigue, with fluctuating energy levels.
+  - No melena or signs of gastrointestinal bleeding.
+  - No fevers or chills.
+
+#### Current Medications:
+- Acetaminophen (TYLENOL ORAL): 200 mg by mouth as needed.
+- Aspirin 81 mg EC tablet: 1 tablet daily.
+- Carvedilol (COREG): 3.125 mg tablet.
+- Hydrocodone-acetaminophen (NORCO): 5-325 mg tablet, 1-2 tablets every 6 hours as needed for pain.
+- Ibuprofen (ADVIL, MOTRIN): 200 mg by mouth as needed.
+- Loperamide (IMODIUM): 2 capsules by mouth at onset of diarrhea, then 1 capsule every 2 hours until diarrhea-free for 12 hours.
+- Lorazepam (ATIVAN): 1 mg tablet by mouth every 12 hours as needed for anxiety (nausea).
+- Pantoprazole (PROTONIX): 20 mg tablet daily.
+- Prochlorperazine (COMPAZINE): 10 mg tablet by mouth every 6 hours as needed for nausea and vomiting.
+- Rosuvastatin (CRESTOR): 20 mg tablet.
+
+#### Treatment Changes:
+- Resumed chemotherapy (cycle #5 of nal-IRI/5-FU/LV) on 03/29/2019 after a break for travel.
+
+#### Treatment Goals:
+- Assess for further disease progression with short-term follow-up CT scans.
+- Consider clinical trials, particularly the combination of trametinib plus hydroxychloroquine.
+- Palliative radiotherapy to the pancreatic primary for quality-of-life improvement.
+
+#### Response to Treatment:
+- Overall stable disease with slightly improving hepatic metastases and stable to minimally enlarging peritoneal metastases.
+- Some evidence of continued clinical/symptomatic decline.
+
+#### Plan:
+- Continue with 1 additional cycle of the same chemotherapy (scheduled for the next day if lab parameters are acceptable).
+- Short-term follow-up CT scans to assess for further disease progression.
+- Consider clinical trials, including the combination of trametinib plus hydroxychloroquine.
+- Palliative radiotherapy to the pancreatic primary.
+- Transition to home hospice if necessary.
+
+#### Imaging:
+- Recent CT scans show stable to slightly increased peritoneal implants, slightly decreased size of hepatic lesions, and unchanged chronic occlusion of the splenic vein and tumor encasement of the splenic artery.
+
+#### Genetic Testing:
+- Tumor harbors KRAS (G12D) and p53 mutations.
+
+#### Referrals:
+- Potential referral to clinical trials, particularly the combination of trametinib plus hydroxychloroquine.
+
+#### Follow-Up:
+- Short-term follow-up CT scans to assess for further disease progression.
+
+#### Advance Care Planning:
+- Discussion about prioritizing quality-of-life considerations and potential transition to home hospice.
+
+--- STATS ---
+Time: 26.6s | Output: 4064 chars
+
+
+============================================================
+ROW 4 (coral_idx=3)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for metastatic adenocarcinoma of the pancreas.
+- Evaluation of symptoms including persistent nausea and recent ERCP findings.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the pancreas.
+- **Stage/Metastasis:** Initially thought to be locally advanced; later found to have metastasis to the liver (segment 7).
+
+#### Lab Results:
+- Does not express CA-19-9.
+
+#### Clinical Findings:
+- Persistent nausea leading to EGD and ERCP.
+- Tumor ingrowth and biliary stone removal during ERCP.
+- Covered metal stent deployment within the existing stent.
+- Improved energy level and reduced nausea post-procedure.
+- Brain fog attributed to chemotherapy.
+- Resolved numbness and tingling in fingers and hands.
+- Ongoing numbness and tingling in feet, not affecting gait.
+- Improved appetite post-ERCP.
+- Bowel movements every 3 days with fiber and MiraLAX.
+- Hair regrowth.
+
+#### Current Medications:
+- BuPROPion (WELLBUTRIN SR) 100 mg daily.
+- Estradiol patch 0.05 mg/24 hr semiweekly.
+- Lorazepam (ATIVAN) 1 mg every 8 hours as needed for anxiety.
+- Ondansetron (ZOFRAN) 8 mg three times a day as needed for nausea.
+- Pantoprazole (PROTONIX) 40 mg daily.
+- PRISTIQ 100 mg daily.
+- Progesterone (PROMETRIUM) 100 mg daily at bedtime.
+
+#### Treatment Changes:
+- Completed six 28-day cycles of gemcitabine and Abraxane.
+- Currently on surveillance.
+
+#### Treatment Goals:
+- Disease control and symptom management.
+- Monitoring for disease progression.
+
+#### Response to Treatment:
+- Good disease control on surveillance.
+- Improved symptoms post-ERCP.
+
+#### Plan:
+- Continue on surveillance.
+- Follow-up in 2 months with a follow-up CT scan.
+- Discussion of future investigational therapies as needed.
+- Use of telehealth tools for evaluation.
+
+#### Imaging:
+- CT Abdomen/Pelvis with Contrast (06/18/2021):
+  - No significant change in pancreatic head/neck mass.
+  - No evidence of metastasis.
+- CT Chest with Contrast (06/18/2021):
+  - No new suspicious nodule.
+  - Unchanged tiny groundglass nodules in the apices.
+- ERCP Cholangiogram Pancreatography (06/25/2021):
+  - Irregular moderate intrahepatic biliary ductal dilation with filling defects.
+  - Deployment of a second metal stent within the existing stent.
+
+#### Other:
+- Patient consented to telehealth evaluation.
+- Total time spent on patient care: 40 minutes.
+
+--- STATS ---
+Time: 14.3s | Output: 2396 chars
+
+
+============================================================
+ROW 5 (coral_idx=4)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up for adenocarcinoma of the pancreas with biopsy-proven oligometastatic disease in the abdominal wall.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the pancreas.
+- **Stage:** Stage IV.
+- **Metastasis:** Oligometastatic disease in the abdominal wall.
+
+#### Lab Results:
+- **WBC Count:** 6.4
+- **Neutrophil Absolute Count:** 4.18
+- **Hemoglobin:** 11.4 (Low)
+- **Hematocrit:** 35.4 (Low)
+- **Platelet Count:** 126 (Low)
+- **Creatinine:** 0.74
+- **Bilirubin, Total:** 0.4
+- **Alkaline Phosphatase:** 160 (High)
+- **Aspartate Transaminase:** 31
+- **Alanine Transaminase:** 30
+- **Albumin, Serum / Plasma:** 3.7
+- **Int'l Normaliz Ratio:** 1.1
+- **Sodium, Serum / Plasma:** 134 (Low)
+- **Potassium, Serum / Plasma:** 3.9
+- **Calcium, total, Serum / Plasma:** 9.1
+- **Cancer Antigen 19-9:** 576 (High), 826 (High), 588 (High)
+- **Carcinoembryonic Antigen:** 16.2 (High), 11.7 (High), 17.0 (High)
+
+#### Clinical Findings:
+- **Vital Signs:** Not recorded.
+- **ECOG Performance Status:** 1 (Symptomatic but completely ambulatory).
+- **Constitutional:** Well-developed, well-nourished, no acute distress.
+- **Eyes:** Sclera anicteric.
+- **Respiratory:** No respiratory distress.
+- **Neurological:** Alert & oriented x 3.
+- **Psychiatric:** Mood stable, no hallucinations, paranoia, or delusions.
+
+#### Current Medications:
+- Butenafine (LOTRIMIN ULTRA) 1% cream
+- Cholecalciferol, Vitamin D3, 1000 UNITS TAB tablet
+- Clotrimazole (MYCELEX) 10 mg troche
+- Fluconazole (DIFLUCAN) 100 mg tablet
+- Hyoscyamine (LEVSIN/SL) 0.125 MG SL tablet (Not currently taking)
+- Kerydin 5% SolA
+- Lactobacillus acidophilus beads oral
+- Lidocaine-prilocaine (EMLA) 2.5-2.5% cream
+- Lipase-protease-amylase (CREON) 24,000-76,000-120,000 unit capsule
+- Loperamide (IMODIUM) 2 mg capsule
+- Medical cannabis
+- Ondansetron (ZOFRAN) 8 mg tablet (Not currently taking)
+- OxyCODONE (OXYCONTIN) 10 mg 12 hr ER tablet (Not currently taking)
+- OxyCODONE (ROXICODONE) 10 mg tablet (Not currently taking)
+- Prochlorperazine (COMPAZINE) 10 mg tablet (Not currently taking)
+- Rivaroxaban (XARELTO) 20 mg tablet
+- Terbinafine HCl (LAMISIL) 1% cream
+- Turmeric Oral
+- Host Defense brand Stamets 7
+- Host Defense brand Turkey Tail extract
+
+#### Treatment Changes:
+- Completed 12 cycles of FOLFIRINOX from February 2019 to August 2019.
+- Currently on chemotherapy break.
+- Thrombocytopenia led to holding treatment temporarily.
+- Continued Xarelto for occlusive thrombi.
+
+#### Treatment Goals:
+- Maintain stable disease status.
+- Manage symptoms and side effects.
+- Monitor for potential complications such as GI bleeding.
+
+#### Response to Treatment:
+- Stable disease in the pancreas and abdominal wall lesion.
+- Decrease in CA 19-9 levels indicating a positive response to treatment.
+
+#### Plan:
+- **Medications:** Continue current medications, including Xarelto for thrombi.
+- **Therapy:** Continue supportive care.
+- **Radiation:** Not recommended at this time due to asymptomatic status.
+- **Procedures:** None planned.
+- **Imaging:** Restaging CT planned for 11/19/19.
+- **Labs:** Complete labs to rule out diabetes.
+- **Genetic Testing:** Foundation Medicine liquid biopsy results show MSI status undetermined and RB1 P26fs*47.
+- **Referrals:** Followed by Cancer Center Nutritionist and dermatologist.
+- **Follow-Up:** Next visit scheduled for 11/21/19.
+- **Advance Care Planning:** Preferences for life-sustaining treatment clarified and POLST completed.
+
+#### Additional Notes:
+- Discussed with the patient the Pancreas Tumor Board's recommendations and the rationale behind not recommending surgical resection or radiation therapy.
+- Reviewed signs and symptoms of potential complications such as GI bleeding.
+- Discussed advance care planning, including surrogate decision-makers and life-sustaining treatment preferences.
+
+--- STATS ---
+Time: 25.8s | Output: 3870 chars
+
+
+============================================================
+ROW 6 (coral_idx=5)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for a 63-year-old African American woman with a history of adenocarcinoma of the pancreas.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the pancreas.
+- **Stage:** Initially borderline resectable/locally advanced.
+- **Metastasis:** Evidence of possible recurrence with new and growing hypodense lesions in the liver.
+
+#### Lab Results:
+- **CBC:** Hemoglobin 9.5 g/dL (low), Hematocrit 30.5% (low).
+- **CA 19-9:** 2250 U/mL (significantly elevated from preoperative value of 44 U/mL).
+- **Bilirubin, Total:** 0.4 mg/dL (within normal range).
+- **Creatinine:** 0.86 mg/dL (within normal range).
+
+#### Clinical Findings:
+- **General Appearance:** Comfortable, no icterus, no clinical adenopathy.
+- **Abdomen:** Somewhat distended, right side tender to palpation, no fluid wave.
+- **Vitals:** BP 148/79, Pulse 84, Temp 36.7°C, Resp 16, SpO2 100%.
+
+#### Current Medications:
+- Not explicitly mentioned in the note.
+
+#### Treatment Changes:
+- Completed 12 cycles of modified FOLFIRINOX chemotherapy.
+- Underwent pylorus-preserving pancreatectomy with open cholecystectomy and resection of the portal vein and hepatic artery with interposition graft.
+
+#### Treatment Goals:
+- To achieve surgical resection of the primary tumor.
+- To manage and monitor for recurrence of disease.
+
+#### Response to Treatment:
+- Surgical pathology showed a 1.7 cm residual tumor mass with 51-90% of tumor cells destroyed, negative margins, and no positive lymph nodes.
+- Postoperatively, the patient is recovering but experiencing continued abdominal discomfort on the right side.
+
+#### Plan:
+- Repeat imaging studies in 2 months to monitor for disease recurrence.
+- Consider confirmatory biopsy if indicated by future imaging.
+- Continue follow-up per clinical oncologic protocol.
+- Face-to-face consultation with the patient and her husband regarding care and management.
+
+#### Imaging:
+- **CT Abdomen/Pelvis with Contrast:** Interval increase in size of a 14 mm hypodense lesion in segment March 14 and new 5 mm hypodense lesion in segment 8/4A, suggestive of worsening metastatic disease.
+- **CT Chest with Contrast:** Few scattered tiny pulmonary nodules unchanged since 09/16/2014.
+
+#### Genetic Testing:
+- Not mentioned in the note.
+
+#### Referrals:
+- Recommend pelvic ultrasound to exclude malignancy in the endometrial canal.
+
+#### Follow-Up:
+- Repeat imaging studies in 2 months.
+
+#### Advance Care Planning:
+- Not specifically addressed in the note.
+
+--- STATS ---
+Time: 14.3s | Output: 2524 chars
+
+
+============================================================
+ROW 7 (coral_idx=6)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Patient presented with symptoms of small bowel obstruction in early June 2020.
+- Follow-up visit for CT evaluation after 4 full cycles of neoadjuvant chemotherapy.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the tail of the pancreas.
+- **Stage:** Local extension with involvement of the posterior gastric wall, left adrenal gland, and splenic vein.
+- **Metastasis:** No evidence of distant metastasis.
+
+#### Lab Results:
+- **Alkaline Phosphatase:** 71 U/L (Ref range: 38 - 108 U/L)
+- **Bilirubin, Total:** 0.4 mg/dL (Ref range: 0.2 - 1.2 mg/dL)
+- **Alanine Transaminase (ALT):** 31 U/L (Ref range: 10 - 61 U/L)
+- **Aspartate Transaminase (AST):** 30 U/L (Ref range: 5 - 44 U/L)
+- **Creatinine:** 0.56 mg/dL (Ref range: 0.55 - 1.02 mg/dL)
+- **eGFR - low estimate:** 96 mL/min (>59 mL/min)
+- **eGFR - high estimate:** 111 mL/min (>59 mL/min)
+- **Urea Nitrogen:** 11 mg/dL (Ref range: 7 - 25 mg/dL)
+- **Complete Blood Count (CBC):**
+  - WBC Count: 5.6 x10E9/L (Ref range: 3.4 - 10.0 x10E9/L)
+  - RBC Count: 4.11 x10E12/L (Ref range: 4.00 - 5.20 x10E12/L)
+  - Hemoglobin: 12.1 g/dL (Ref range: 12.0 - 15.5 g/dL)
+  - Hematocrit: 38.3% (Ref range: 36.0 - 46.0%)
+  - MCV: 93 fL (Ref range: 80 - 100 fL)
+  - MCH: 29.4 pg (Ref range: 26.0 - 34.0 pg)
+  - MCHC: 31.6 g/dL (Ref range: 31.0 - 36.0 g/dL)
+  - Platelet Count: 138 x10E9/L (Ref range: 140 - 450 x10E9/L)
+  - Neutrophil Absolute Count: 3.22 x10E9/L (Ref range: 1.80 - 6.80 x10E9/L)
+  - Lymphocyte Abs Cnt: 1.54 x10E9/L (Ref range: 1.00 - 3.40 x10E9/L)
+  - Monocyte Abs Count: 0.58 x10E9/L (Ref range: 0.20 - 0.80 x10E9/L)
+  - Eosinophil Abs Ct: 0.17 x10E9/L (Ref range: 0.00 - 0.40 x10E9/L)
+  - Basophil Abs Count: 0.04 x10E9/L (Ref range: 0.00 - 0.10 x10E9/L)
+  - Imm Gran, Left Shift: 0.01 x10E9/L (<0.10 x10E9/L)
+- **Cancer Antigen 19-9 (CA 19-9):** 8 U/mL (Ref range: <38 U/mL)
+
+#### Clinical Findings:
+- No cancer pain.
+- Chronic back and shoulder pain managed with oxycodone.
+- Appetite fluctuates but weight is stable.
+- No symptoms of neuropathy.
+- Energy level recovers after chemotherapy.
+- Recent facial rash, tolerable.
+
+#### Current Medications:
+- Bisacodyl (Dulcolax) 5 mg EC tablet: 5 mg PO daily as needed for constipation.
+- Cholecalciferol (Vitamin D3) 1000 UNITS tablet: 1,000 Units PO daily.
+- Clonidine (Catapres) 0.1 mg/24 hr patch: 1 patch every 7 days.
+- Cyanocobalamin (Vitamin B12) 500 mcg tablet: 500 mcg PO daily.
+- Diclofenac (Voltaren) 1% gel: Apply topically 4 times daily.
+- Docusate sodium (Colace) 100 mg capsule: 100 mg PO every morning.
+- Fexofenadine (Allegra) 60 mg tablet: 60 mg PO every morning.
+- Fluocinonide (Lidex) 0.05% ointment: Apply topically twice a day.
+- Lorazepam (Ativan) 1 mg tablet: 1 mg PO every 8 hours as needed for anxiety.
+- Ondansetron (Zofran) 8 mg tablet: 1 tablet (8 mg total) PO every 8 hours as needed (not currently taking).
+- Oxybutynin (Ditropan XL) 5 mg 24 hr tablet: 5 mg PO daily.
+- Oxycodone (Oxy-IR) 5 mg capsule: 5 mg PO every 4 hours as needed.
+- Pantoprazole (Protonix) 40 mg EC tablet: 40 mg PO every morning.
+- Prochlorperazine (Compazine) 10 mg tablet: 1 tablet (10 mg total) PO every 6 hours as needed (not currently taking).
+- Senna (Senokot) 8.6 mg tablet: 1 tablet PO twice daily.
+- Equi-Block topical ointment: Apply to right shoulder PRN.
+
+#### Treatment Changes:
+- Initially started on standard schedule gemcitabine and Abraxane.
+- Switched to alternate-week schedule due to neutropenia.
+
+#### Treatment Goals:
+- Continue neoadjuvant chemotherapy.
+- Monitor response to treatment.
+
+#### Response to Treatment:
+- Radiographic evidence of response to treatment.
+- Slight decrease in size of pancreatic tail mass.
+
+#### Plan:
+- Continue current chemotherapy regimen without dose or schedule modification.
+- Repeat imaging in 8 weeks.
+- Continue management of chronic back and shoulder pain.
+- Continue monitoring for side effects and managing symptoms.
+- Coordination with Gynecologic Oncology for potential surgical removal of right adnexal mass.
+- No new genetic testing planned.
+- Advance care planning not discussed in detail.
+
+#### Imaging:
+- CT Abdomen/Pelvis with and without contrast: Slight decrease in size of pancreatic tail mass with persistent local extension.
+- CT Chest with contrast: No evidence of metastatic disease in the chest.
+
+#### Genetic Testing:
+- Germ line testing showed no pathologic variants.
+- Variants of uncertain significance (VUS) seen in AXIN1, CTC1, ERCC4, MC1R.
+
+#### Referrals:
+- Seen by Gynecologic Oncology regarding the right adnexal mass.
+
+#### Follow-Up:
+- Next imaging in 8 weeks.
+- Continued management of chronic conditions and pain.
+
+#### Advance Care Planning:
+- Not specifically addressed in this note.
+
+--- STATS ---
+Time: 32.8s | Output: 4760 chars
+
+
+============================================================
+ROW 8 (coral_idx=7)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation for recurrent metastatic pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic adenocarcinoma.
+- **Stage:** Initially resectable (May 2019), later staged as pT2N2 (July 2019).
+- **Metastasis:** Recurrent metastatic disease confirmed via EUS-guided FNA (September 2020).
+
+#### Lab Results:
+- **WBC:** 5
+- **Hb:** 10.7
+- **Platelets:** 137
+- **Creatinine:** 0.67
+- **ALT:** 70
+- **AST:** 66
+- **ALP:** 522
+- **Total Bilirubin:** 0.5
+- **Albumin:** 4
+- **CA 19-9 Levels:** 
+  - 11/21/20 = 61
+  - 10/24/20 = 133
+  - 10/10/20 = 433
+  - 09/19/20 = 746
+
+#### Clinical Findings:
+- **Blood Pressure:** 126/65
+- **Pulse:** 52
+- **Temperature:** 36.9°C (98.4°F)
+- **Respiratory Rate:** 16
+- **Height:** 164 cm (5' 4.57")
+- **Weight:** 70 kg (154 lb 4.8 oz)
+- **SpO2:** 98%
+- **ECOG PS:** 0
+- **General Appearance:** No acute distress, conversant, appropriately interactive.
+- **Physical Exam:** No acute distress, no signs of infection, no lymphadenopathy, no ascites, no hepatomegaly, no peripheral edema, no focal sensorimotor deficits.
+
+#### Current Medications:
+- Acetaminophen (Tylenol)
+- Amylase-Lipase-Protease (Creon 24,000)
+- Cholecalciferol (Vitamin D3)
+- Morphine (MS Contin)
+- Polyethylene Glycol (MiraLax)
+- Potassium Chloride (Klor-Con)
+
+#### Treatment Changes:
+- Initial treatment: 1 cycle of FOLFOX (June 2019).
+- Surgery: Whipple resection (July 2019).
+- Adjuvant chemotherapy: 11 cycles of FOLFIRINOX (completed January 2020).
+- Current treatment: Gemcitabine and nab-paclitaxel (every other week dosing).
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible.
+- Prioritize quality of life (QoL) considerations.
+- Consider clinical trials if disease progresses.
+
+#### Response to Treatment:
+- Favorable response to gemcitabine/nab-paclitaxel.
+- Decreased size of intra-abdominal lymph nodes.
+- Stable disease with no new intra-abdominal or intrathoracic disease.
+
+#### Plan:
+- Continue gemcitabine/nab-paclitaxel until maximal response or 6 cycles.
+- Monitor for potential major/life-threatening toxicities.
+- Consider clinical trials if disease progresses.
+- Genetic testing: FoundationOne panel requested for somatic tumor profiling.
+- Future treatment options: Rechallenge with SoC chemotherapy, explore clinical trials.
+
+#### Imaging:
+- Recent CT (10/24/20): Decreased size of intra-abdominal lymph nodes, no new disease.
+- Groundglass opacities in lungs may be related to infectious/inflammatory etiology.
+
+#### Follow-Up:
+- Regular monitoring and follow-up visits.
+- Continued assessment of treatment response and side effects.
+
+#### Advance Care Planning:
+- Discussed risks/benefits of therapy and prioritized QoL considerations.
+- Explained the non-curative nature of treatment and discussed future treatment options.
+
+--- STATS ---
+Time: 15.4s | Output: 2854 chars
+
+
+============================================================
+ROW 9 (coral_idx=8)
+============================================================
+
+### Key Clinical Information Extracted from the Oncology Clinical Note:
+
+#### Reason for Visit/Chief Complaint:
+- **Reason for Visit:** Follow-up for metastatic pancreatic cancer.
+- **Patient:** 71-year-old female.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic cancer.
+- **Stage:** Metastatic.
+- **Metastasis:** Predominantly in the lungs.
+
+#### Lab Results:
+- **WBC Count:** 5.3 (08/12/2018)
+- **Neutrophil Absolute Count:** 3.56 (08/12/2018)
+- **Hemoglobin:** 10.1 (Low) (08/12/2018)
+- **Hematocrit:** 32.1 (Low) (08/12/2018)
+- **Platelet Count:** 159 (08/12/2018)
+- **Creatinine:** 0.51 (08/12/2018)
+- **Sodium, Serum / Plasma:** 136 (07/29/2018)
+- **Potassium, Serum / Plasma:** 4.2 (07/29/2018)
+- **Calcium, total, Serum / Plasma:** 8.3 (Low) (07/29/2018)
+- **Bilirubin, Total:** 0.4 (08/12/2018)
+- **Alkaline Phosphatase:** 61 (08/12/2018)
+- **Aspartate transaminase:** 28 (08/12/2018)
+- **Alanine transaminase:** 25 (08/12/2018)
+- **Albumin, Serum / Plasma:** 3.1 (Low) (07/29/2018)
+- **Int'l Normaliz Ratio:** 1.1 (02/28/2018)
+- **Cancer Antigen 19-9:** 1,109 (High) (07/15/2018), 2,762 (High) (06/17/2018), 3,525 (High) (05/20/2018)
+- **Carcinoembryonic Antigen:** 3.0 (08/04/2015), 2.7 (06/07/2015), 2.5 (04/04/2015)
+
+#### Clinical Findings:
+- **Physical Exam:** 
+  - Oriented to person, place, and time.
+  - Well-developed and well-nourished.
+  - No significant abnormalities noted except for mild neuropathy.
+- **ECOG Performance Status:** 1 (indicating some symptoms but able to carry out most activities).
+
+#### Current Medications:
+- **Albuterol**
+- **Cetirizine (Zyrtec)**
+- **Diphenoxylate-atropine (Lomotil)**
+- **Fluticasone propion-salmeterol (Advair Diskus)**
+- **Lipase-protease-amylase (Creon)**
+- **Lorazepam (Ativan)**
+- **Metoclopramide HCl (Reglan)**
+- **Mirtazapine (Remeron)**
+- **Olanzapine (Zyprexa)**
+- **Olopatadine (Patanol)**
+- **Oxycodone (Roxicodone)**
+- **Ranitidine (Zantac)**
+- **Triamcinolone Acetonide (Nasacort Nasal)**
+
+#### Treatment Changes:
+- **Gemcitabine + Abraxane** dose reduced due to worsening neuropathy.
+- **Recovery of abdominal pain.**
+- **Trouble sleeping.**
+
+#### Treatment Goals:
+- **Maintain stable disease.**
+- **Manage side effects (neuropathy, nausea/vomiting).**
+
+#### Response to Treatment:
+- **Stable disease with intermittent progression.**
+- **Tumor markers (CA 19-9) trending upwards.**
+
+#### Plan:
+- **Medications:** Continue current regimen with adjustments for neuropathy and nausea management.
+- **Therapy:** Continue with reduced dose of Abraxane.
+- **Radiation:** None planned.
+- **Procedures:** None planned.
+- **Imaging:** CT scan scheduled for September 22.
+- **Labs:** Regular monitoring of blood counts and tumor markers.
+- **Genetic Testing:** BRCA variant of unknown significance.
+- **Referrals:** None specified.
+- **Follow-up:** Appointment in 2 weeks for neuropathy assessment.
+- **Advance Care Planning:** Not mentioned.
+
+This summary provides a comprehensive overview of the patient's clinical status, treatment plan, and follow-up schedule.
+
+--- STATS ---
+Time: 18.8s | Output: 3030 chars
+
+
+============================================================
+ROW 10 (coral_idx=9)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for locally advanced pancreatic cancer (PDAC).
+
+#### Cancer Diagnosis:
+- **Type:** Locally advanced pancreatic ductal adenocarcinoma (PDAC).
+- **Stage:** Locally advanced.
+- **Metastasis:** No evidence of distant metastases.
+
+#### Lab Results:
+- **CBC:** WBC 30.6 (high), Hemoglobin 8.7 (low), Hematocrit 27.1 (low), Neutrophil Absolute Count 24.06 (high).
+- **Electrolytes:** Potassium 2.9 (low), Magnesium 1.5 (low), Creatinine 1.09 (high).
+- **Tumor Markers:** CA 19-9 8,274 (high), CEA 4.2 (within normal range).
+
+#### Clinical Findings:
+- **General:** Improved fatigue, decreased appetite, weight loss.
+- **Physical Exam:** No acute distress, no jaundice, no edema, no palpable masses, no skin rash.
+- **ECOG Performance Status:** 1.
+
+#### Current Medications:
+- Diphenoxylate-atropine (Lomotil)
+- Gabapentin (Neurontin)
+- Glucosamine/chondroitin/collagen/hyaluronic acid (Joint Support Oral)
+- Lactobacillus acidophilus (Probiotic Oral)
+- Loperamide (Imodium)
+- Lorazepam (Ativan)
+- Multivitamin
+- Ondansetron (Zofran)
+- Prochlorperazine (Compazine)
+- Acetaminophen (Tylenol)
+- Lidocaine-prilocaine (EMLA) (not currently used)
+- Oxycodone (Roxicodone) (not currently used)
+- Potassium chloride (Klor-Con)
+
+#### Treatment Changes:
+- **Chemotherapy:** Initially treated with mFOLFIRINOX, then switched to FOLFOX due to colitis and poor tolerance.
+- **Growth Factor Support:** Added Fulphila (pegfilgrastim) for neutropenia management.
+- **Diarrhea Management:** Stopped irinotecan with cycle 3 due to colitis, added loperamide as needed.
+
+#### Treatment Goals:
+- Continue with FOLFOX for 4-6 months of upfront chemotherapy.
+- Consider surgical options or consolidative chemoradiation post-induction chemotherapy.
+
+#### Response to Treatment:
+- Stable disease on imaging.
+- Elevated CA 19-9 levels, likely due to colitis.
+- Improved diarrhea symptoms.
+
+#### Plan:
+- **Medications:** Continue FOLFOX, omit irinotecan.
+- **Therapy:** Continue supportive care with anti-nausea and anti-diarrheal medications.
+- **Radiation:** Consider consolidative chemoradiation post-induction chemotherapy.
+- **Procedures:** None planned.
+- **Imaging:** Repeat scans after cycle 8, monthly CA 19-9 monitoring.
+- **Labs:** Monitor electrolytes, particularly potassium and magnesium.
+- **Genetic Testing:** VUS in RECQL4 gene.
+- **Referrals:** Scheduled mammogram for right breast nodule.
+- **Follow-Up:** Next visit in 2 weeks.
+- **Advance Care Planning:** Not mentioned in the note.
+
+#### Additional Notes:
+- Counseled on maintaining weight and dietary modifications.
+- Financial assistance application approved.
+
+--- STATS ---
+Time: 16.7s | Output: 2680 chars
+
+
+============================================================
+ROW 11 (coral_idx=10)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Initial GI Medical Oncology visit for a second opinion and consideration of clinical trials regarding pancreatic cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic cancer
+- **Stage:** Stage IV (cT2, cN1, cM1)
+- **Metastasis:** Metastasized to the liver
+
+#### Lab Results:
+- **CA 19-9:** 13,737 U/mL (significantly elevated)
+- **Electrolytes and Liver Function Tests:** 
+  - Na: 130 mEq/L
+  - K: 3.8 mEq/L
+  - Cl: 92 mEq/L
+  - Cr: 0.92 mg/dL
+  - AST: 28 U/L
+  - ALT: 29 U/L
+  - Total Bilirubin (Tbili): 1.0 mg/dL
+  - Alkaline Phosphatase (Alk Phos): 67 U/L
+- **Complete Blood Count (CBC):**
+  - WBC: 8.8 × 10^9/L
+  - Hemoglobin (Hgb): 14.4 g/dL
+  - Platelets (Plt): 286 × 10^9/L
+
+#### Clinical Findings:
+- **Symptoms:** 
+  - Abdominal pain
+  - Weight loss (35 lbs)
+  - Early satiety
+  - Post-prandial nausea
+  - Loss of appetite
+  - Yellowing of eyes (jaundice)
+  - Lower back pain
+- **Physical Exam:** 
+  - No jaundice observed
+  - No signs of acute distress
+  - No edema
+  - No visible rash or erythema
+  - ECOG performance status 0 (asymptomatic)
+
+#### Current Medications:
+- Acetaminophen (Tylenol) 500 mg tablet: 1,000 mg PRN for pain
+- Ibuprofen (Advil/Motrin) 200 mg tablet: 200 mg PRN for pain
+- Lipase-Protease-Amalyse 5,000-17,000-24,000 units: 1 capsule TID with meals
+- Metformin (Glucophage) 500 mg tablet: 500 mg daily
+- Ondansetron (Zofran) 8 mg tablet: 8 mg every 8 hours PRN for nausea
+- Simvastatin (Zocor) 40 mg tablet: 40 mg daily
+
+#### Treatment Changes:
+- Consideration of clinical trials, specifically the Precision Promise Platform Trial for Metastatic Pancreatic Cancer.
+- If not eligible for the trial, consideration of FOLFIRINOX (infusional 5-FU, leucovorin, irinotecan, and oxaliplatin) or gemcitabine plus nab-paclitaxel.
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible.
+- Prolong life significantly.
+- Not expected to be curative.
+
+#### Response to Treatment:
+- Not yet applicable as treatment has not yet been initiated.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Consider FOLFIRINOX or gemcitabine plus nab-paclitaxel if not eligible for the clinical trial.
+- **Radiation:** Not indicated at this time.
+- **Procedures:** None specified.
+- **Imaging:** Obtain CT scan of the abdomen and pelvis (CT AP) to rule out biliary obstruction.
+- **Labs:** Repeat labs as needed.
+- **Genetic Testing:** Scheduled for genetic consultation.
+- **Referrals:** None specified.
+- **Follow-Up:** Continue monitoring and follow-up visits.
+- **Advance Care Planning:** Not addressed in this note.
+
+#### Additional Notes:
+- The patient has a family history of various cancers, including a BRCA2 mutation in his brother.
+- The patient is currently working and has two twin children.
+- Genetic consultation scheduled for the next day.
+
+--- STATS ---
+Time: 19.8s | Output: 2875 chars
+
+
+============================================================
+ROW 12 (coral_idx=11)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for pancreatic adenocarcinoma with concern for metastatic disease.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic adenocarcinoma
+- **Stage:** Initially diagnosed with T4, N1 disease.
+- **Metastasis:** Metastatic disease with peritoneal and omental implants, and possible metastatic involvement of the lungs and liver.
+
+#### Lab Results:
+- **CBC:** Low hemoglobin (9.6-10.3 g/dL), low hematocrit (28.5-30.5%), low platelets (172-224 x10E9/L).
+- **Basic Metabolic Panel:** Elevated glucose (130-187 mg/dL), low potassium (2.9-3.4 mmol/L), low calcium (7.8-8.2 mg/dL).
+- **Liver Function Tests:** Elevated bilirubin (3.5-3.7 mg/dL), elevated alkaline phosphatase (246-265 U/L), low albumin (2.1 g/dL).
+- **Prothrombin Time:** Elevated (PT 25.5-30.8 s, INR 2.3-3.0).
+- **CA 19-9:** Elevated (up to 4720 U/mL).
+
+#### Clinical Findings:
+- **General:** Weight loss, ECOG performance status 1.
+- **Physical Exam:** No acute distress, non-distended abdomen, palpable hepatic edge, tenderness in LLQ, trace edema in BLE.
+- **Imaging:** 
+  - CT abdomen/pelvis shows new proximal small bowel obstruction, unchanged pancreatic mass, moderate ascites, peritoneal carcinomatosis, and possible metastatic disease in adrenal glands.
+  - X-ray KUB shows interval placement of an NG tube, unchanged appearance of multiple biliary and enteric stents.
+
+#### Current Medications:
+- **Facility-Administered Medications:**
+  - Baclofen (Lioresal) 5 mg, TID
+  - Carvedilol (Coreg) 12.5 mg, daily
+  - Diltiazem (Cardizem CD) 120 mg, daily
+  - Diphenhydramine (Benadryl) 12.5 mg, intravenous, bedtime
+  - Lidocaine (Xylocaine) 2% viscous solution 5 mL, mouth/throat, Q3H
+  - Methyl salicylate-menthol (Bengay) ointment, topical, PRN
+  - Ondansetron (Zofran) 4 mg, intravenous, Q30 min PRN
+  - Phenol (Phenaseptic) 1.4% spray, 1-3 sprays, mouth/throat, Q2H PRN
+  - Tramadol (Ultram) 50 mg, oral, Q6H
+  - Warfarin (Coumadin) 3 mg, oral, Q PM
+
+#### Treatment Changes:
+- Transition to palliative care due to disease progression and complications (small bowel obstruction, elevated bilirubin).
+- Consideration of resuming systemic therapy if obstruction, bilirubin, and oral intake improve (unlikely).
+
+#### Treatment Goals:
+- Palliation of symptoms.
+- Management of complications such as small bowel obstruction and elevated bilirubin.
+- Supportive care and symptom management.
+
+#### Response to Treatment:
+- Initial response to mFOLFIRINOX with decrease in pancreatic mass and hepatic lesions.
+- Disease progression noted during treatment holiday.
+
+#### Plan:
+- **Medications:** Continue current medications as needed for symptom management.
+- **Therapy:** Palliative care focus.
+- **Radiation:** No specific radiation therapy planned.
+- **Procedures:** Continued monitoring of obstruction and bilirubin levels.
+- **Imaging:** Follow-up imaging to monitor disease progression and response to interventions.
+- **Labs:** Regular monitoring of liver function tests, CBC, and metabolic panel.
+- **Genetic Testing:** No specific genetic testing mentioned.
+- **Referrals:** Coordination with palliative care team.
+- **Follow-Up:** Phone follow-up with the patient.
+- **Advance Care Planning:** Discussion with the family regarding prognosis and hospice care.
+
+This comprehensive plan aims to manage the patient’s symptoms and provide supportive care given the advanced stage of the disease.
+
+--- STATS ---
+Time: 25.0s | Output: 3436 chars
+
+
+============================================================
+ROW 13 (coral_idx=12)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic adenocarcinoma located in the pancreatic head/uncinate.
+- **Stage:** Locally advanced, unresectable due to vascular involvement.
+- **Metastasis:** No distant metastasis noted, but there is nodal involvement and invasion of the duodenum.
+
+#### Lab Results:
+- **WBC Count:** 8.3
+- **Abs Neutrophils:** 3.18
+- **Hemoglobin:** 9.7 (low)
+- **Hematocrit:** 30.8 (low)
+- **Platelet Count:** 241
+- **Creatinine:** 0.73
+- **Bilirubin, Total:** 0.3
+- **Alkaline Phosphatase:** 80
+- **AST:** 18
+- **Alanine Transaminase:** 11
+- **Albumin, Serum / Plasma:** 3.0 (low)
+- **INR:** 1.1
+- **Sodium, Serum / Plasma:** 135
+- **Potassium, Serum / Plasma:** 4.0
+- **Calcium, total, Serum / Plasma:** 9.4
+- **Cancer Antigen 19-9:** <2 (normal)
+
+#### Clinical Findings:
+- **ECOG Performance Status:** 2 (Symptomatic, <50% confined to bed).
+- **Respiratory:** No respiratory distress, no cough, no use of accessory muscles.
+- **Lower Extremities:** No edema.
+- **Psychological:** Appropriate, alert, and oriented.
+- **Neck:** Full range of motion.
+- **Pain:** None reported (Pain Score: 0).
+
+#### Current Medications:
+- Acetaminophen (PRN)
+- Bisacodyl (PRN)
+- Budesonide-Glycopyrrolate-Formoterol (2 puffs, 2 times daily)
+- Calcium Carbonate-Vitamin D (PRN)
+- Calcium Citrate (daily)
+- Capecitabine (500 mg, 3 tabs in the morning, 2 tabs in the evening, 7 days on, 7 days off)
+- Creon (6,000-19,000-30,000 units, 1 capsule 3 times daily with meals)
+- Denosumab (60 mg subcutaneous, every 6 months)
+- Dronabinol (2.5 mg, 2 times daily before meals)
+- Famotidine (oral)
+- Glimepiride (5 mg, daily at bedtime)
+- Melatonin (1 mg, daily at bedtime)
+- Mirtazapine (15 mg, daily at bedtime)
+- Multivitamin (daily)
+- Ondansetron (8 mg, every 8 hours PRN)
+- Pantoprazole (40 mg, twice daily)
+- Polyethylene Glycol (17 g, daily)
+- Prochlorperazine (10 mg, every 6 hours PRN)
+- Senna (17.2 mg, daily at bedtime)
+- Sucralfate (1 g, 4 times daily before meals and bedtime)
+
+#### Treatment Changes:
+- Pausing systemic therapy (Gem/Cape) and considering radiation therapy based on patient preference.
+
+#### Treatment Goals:
+- Control of symptoms.
+- Management of anemia.
+- Monitoring and managing biliary obstruction.
+- Nutritional support.
+
+#### Response to Treatment:
+- Stable disease based on imaging.
+- Improved gastrointestinal bleeding (GIB) due to tumor invasion.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Consider radiation therapy.
+- **Radiation:** Evaluate for radiation therapy for bleeding control and tumor control.
+- **Procedures:** No immediate procedures planned.
+- **Imaging:** Continue monitoring with periodic CT scans.
+- **Labs:** Weekly CBC and transfusions PRN for HGB <8.0.
+- **Genetic Testing:** Not done.
+- **Referrals:** Follow-up with ID and Pulmonology.
+- **Follow-Up:** Next visit scheduled for February 17.
+- **Advance Care Planning:** Not addressed in this note.
+
+This summary provides a comprehensive overview of the patient's current condition, treatment plan, and future considerations.
+
+--- STATS ---
+Time: 23.5s | Output: 3176 chars
+
+
+============================================================
+ROW 14 (coral_idx=13)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- **Reason:** New patient video visit at UCSF Comprehensive Cancer Center for consultation regarding metastatic pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Metastatic pancreatic adenocarcinoma.
+- **Stage:** Stage IV (metastatic).
+- **Metastasis:** Multiple hepatic metastases and lymph node involvement.
+
+#### Lab Results:
+- **WBC Count:** 10.8 (High)
+- **Neutrophil Absolute Count:** 8.26 (High)
+- **Hemoglobin:** 9.9 (Low)
+- **Hematocrit:** 32.4 (Low)
+- **Platelet Count:** 315
+- **Creatinine:** 0.54 (Low)
+- **Bilirubin, Total:** 4.5 (High)
+- **Alkaline Phosphatase:** 787 (High)
+- **AST:** 66 (High)
+- **Alanine Transaminase:** 83 (High)
+- **Albumin, Serum / Plasma:** 2.6 (Low)
+- **Int'l Normaliz Ratio:** 1.3 (High)
+- **Sodium, Serum / Plasma:** 136
+- **Potassium, Serum / Plasma:** 3.6
+- **Calcium, total, Serum / Plasma:** 9.3
+- **Cancer Antigen 19-9:** 1,041 (High)
+
+#### Clinical Findings:
+- **Symptoms:** Intermittent epigastric and left-sided abdominal pain, 15 lbs weight loss, bloating, nausea, and later >20 lbs weight loss.
+- **Physical Exam:** Ill-appearing, no diaphoresis, normocephalic, atraumatic, extraocular movements intact, no eye discharge, no scleral icterus, normal range of motion in neck, no respiratory distress, no abdominal distention, no edema, not jaundiced, not pale, no visible erythema or rash, alert and oriented, able to stand and walk, normal mood and affect, normal judgment and thought content.
+- **ECOG Performance Status:** 2
+
+#### Imaging Findings:
+- **CT Abdomen/Pelvis (07/18/2021):**
+  - Increased size of primary malignancy in the pancreaticoduodenal groove.
+  - Increased size and number of hepatic and nodal metastases.
+  - Mild biliary ductal and gallbladder dilatation.
+  - Mild pancreatic ductal dilatation, peripancreatic fat stranding, and pancreatic parenchymal edema.
+- **CT Chest with Contrast (06/28/2021):**
+  - 3 mm lateral left upper lobe nodule.
+  - Scattered patchy perihilar bronchovascular ground-glass opacities in both upper lobes.
+
+#### Current Medications:
+- **amLODIPine (NORVASC):** 5 mg, Oral, Daily Scheduled
+- **atorvastatin (LIPITOR):** 20 mg, Oral, Daily Scheduled
+- **famotidine (PEPCID):** 20 mg, Oral, 2 Times Daily PRN
+- **losartan (COZAAR):** 50 mg, Oral, Daily Scheduled
+- **metFORMIN (GLUCOPHAGE):** 500 mg, Oral, Daily With Breakfast Scheduled
+- **OYSTER SHELL CALCIUM-VIT D3:** 500 mg(1,250mg) -200 unit tablet, 1 tablet, Oral, 2 times daily
+- **polyethylene glycol (MIRALAX):** 17 g, Oral, Daily PRN
+
+#### Treatment Changes:
+- **Recommended Treatment:** Combination of gemcitabine and nab-paclitaxel.
+- **Clinical Trial Options:** Precision Promise, REVOLUTION (currently on hold), and TTX-030 phase 1/1b study.
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible.
+- Prolong life while prioritizing quality of life (QoL).
+
+#### Response to Treatment:
+- Not yet assessed as treatment has not yet been initiated.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Initiate chemotherapy with gemcitabine and nab-paclitaxel.
+- **Radiation:** Not specified.
+- **Procedures:** Endoscopic retrograde cholangiopancreatography (ERCP) with stent placement.
+- **Imaging:** Follow-up imaging to monitor disease progression.
+- **Labs:** Regular monitoring of liver function tests (LFTs) and other relevant lab values.
+- **Genetic Testing:** Request somatic tumor testing through UCSF500 platform.
+- **Referrals:** Short-term in-person follow-up for clinical and laboratory assessment.
+- **Follow-Up:** Schedule in-person follow-up to start chemotherapy as soon as possible.
+- **Advance Care Planning:** Discussed with the patient and family, focusing on quality of life considerations.
+
+This summary provides a comprehensive overview of the patient's condition, treatment plan, and ongoing management strategies.
+
+--- STATS ---
+Time: 25.4s | Output: 3921 chars
+
+
+============================================================
+ROW 15 (coral_idx=14)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- **Follow-up** for resected pancreatic cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic Ductal Adenocarcinoma (PDAC).
+- **Stage:** Initially staged as Stage 3 locally advanced without distant metastasis.
+- **Metastasis:** No evidence of distant metastasis at initial diagnosis.
+
+#### Lab Results:
+- **WBC Count:** 6.4
+- **Neutrophil Absolute Count:** 4.43
+- **Hemoglobin:** 9.5 (Low)
+- **Hematocrit:** 29.0 (Low)
+- **Platelet Count:** 412
+- **Creatinine:** 0.67
+- **Sodium:** 123 (Low)
+- **Potassium:** 4.7
+- **Calcium:** 8.7 (Low)
+- **Bilirubin, Total:** 0.5
+- **Alkaline Phosphatase:** 665 (High)
+- **Aspartate Transaminase:** 101 (High)
+- **Alanine Transaminase:** 58
+- **Albumin:** 3.3 (Low)
+- **Cancer Antigen 19-9 (CA 19-9):** 4,375 (High)
+
+#### Clinical Findings:
+- **Physical Exam:** 
+  - Oriented to person, place, and time.
+  - Well-developed and well-nourished.
+  - No significant abnormalities noted except for mild abdominal distension.
+- **Review of Systems:** 
+  - No significant complaints across all systems.
+- **Vitals:** 
+  - BP: 146/70
+  - Pulse: 88
+  - Temperature: 37.3°C (99.2°F)
+  - Respiratory Rate: 16
+  - Height: 175.5 cm (5' 9.09")
+  - Weight: 70.9 kg (156 lb 3.2 oz)
+  - SpO2: 99%
+  - BMI: 23.00 kg/m²
+- **ECOG Performance Status:** 1
+
+#### Current Medications:
+- Acetaminophen, Alpha-D-galactosidase, Blood glucose test strips, Calcium carbonate, Calcium citrate/vitamin D3, Cholecalciferol, Clotrimazole, Enoxaparin, Famotidine, Folic acid/multivitamin/lutein, Furosemide, Glucose, Insulin aspart, Insulin glargine, Insulin syringe-needle, Lancets, Lipase-protease-amylase, Multivitamin complete chewable, Pantoprazole, Rifaximin, Rivaroxaban, Saccharomyces boulardii, Vancomycin.
+
+#### Treatment Changes:
+- **Recheck CA 19-9 this week.**
+- **CT scan in 2 weeks.**
+
+#### Treatment Goals:
+- Monitor for recurrence due to positive margins and high risk for recurrence.
+- Manage nutritional support and diabetes.
+
+#### Response to Treatment:
+- Improved LE edema and abdominal distension.
+- Poorly controlled diabetes.
+
+#### Plan:
+- **Medications:** Continue Creon for pancreatic insufficiency.
+- **Nutrition:** Continue Creon.
+- **Imaging:** Recheck CA 19-9 this week, CT scan in 2 weeks.
+- **Diabetes Management:** Refer to new primary care physician (PMD) if allowed by health plan.
+- **Follow-up:** Schedule next appointment and instruct patient to contact if any concerning symptoms arise.
+
+#### Advance Care Planning:
+- No specific mention of advance care planning in the note provided.
+
+--- STATS ---
+Time: 19.5s | Output: 2590 chars
+
+
+============================================================
+ROW 16 (coral_idx=15)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic adenocarcinoma.
+- **Stage:** Stage IIB (cT1c, cN1, cM0).
+- **Metastasis:** No evidence of metastatic disease.
+
+#### Lab Results:
+- **Alkaline Phosphatase:** 68 U/L (Ref Range: 31 - 95 U/L)
+- **Total Bilirubin:** 0.9 mg/dL (Ref Range: 0.2 - 1.3 mg/dL)
+- **Alanine Transaminase (ALT):** 20 U/L (Ref Range: 11 - 50 U/L)
+- **Aspartate Transaminase (AST):** 25 U/L (Ref Range: 17 - 42 U/L)
+- **Creatinine:** 0.46 mg/dL (eGFR: 90 mL/min for non-African American, 104 mL/min for African American)
+- **Complete Blood Count (CBC):**
+  - WBC Count: 9.1 x10E9/L
+  - RBC Count: 4.15 x10E12/L
+  - Hemoglobin: 13.0 g/dL
+  - Hematocrit: 37.5%
+  - MCV: 90 fL
+  - MCH: 31.3 pg
+  - MCHC: 34.7 g/dL
+  - Platelet Count: 248 x10E9/L
+  - Neutrophil Absolute Count: 3.79 x10E9/L
+  - Lymphocyte Absolute Count: 4.36 x10E9/L (High)
+  - Monocyte Absolute Count: 0.88 x10E9/L (High)
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - BP: 150/90 (Repeat BP: 136/68)
+  - Pulse: 94
+  - Respiratory Rate: 16
+  - Temperature: 36.8°C (98.2°F)
+  - SpO2: 99%
+  - Weight: 40.5 kg (89 lbs 3.2 oz)
+  - Height: 155.9 cm (5' 1.38")
+  - Pain Score: 0
+  - ECOG Performance Status: 2 (Symptomatic, <50% confined to bed)
+  - No acute distress, no rash, lesions, diaphoresis, or jaundice.
+  - Eyes: PERRL, EOMI, anicteric sclera.
+  - HENT: Poor dentition but no gum bleeding, moist mucous membranes, oropharynx clear.
+  - Lymph Nodes: No cervical, supraclavicular lymphadenopathy.
+  - Respiratory: Clear to auscultation bilaterally, no wheezes, rales, or rhonchi.
+  - Cardiovascular: Regular rate and rhythm, no murmurs, rubs, or gallops.
+  - GI: Non-distended, bowel sounds normal, soft, no tenderness to palpation, no hepatomegaly.
+  - Musculoskeletal: No point tenderness at cervical, thoracic, or lumbar spine.
+  - Extremities: No BLE edema or cyanosis.
+  - Neurological: Alert & oriented x 3, CN III-XII intact, ambulates without difficulty.
+
+#### Current Medications:
+- Acetaminophen (Tylenol Extra Strength) 500 mg tablet: 500 mg PO q6h PRN for pain.
+- Bimatoprost (Lumigan) 0.01% Dropsoln: 1 drop into both eyes daily.
+- Calcium-Vitamin D 500-125 mg-unit tablet: 1 tablet (500 mg total) PO daily.
+- Cholecalciferol, Vitamin D3 (Vitamin D3) 2,000 unit TAB: 1 tablet PO daily.
+- Dorzolamide (Trusopt) 2% ophthalmic solution: 1 drop into both eyes nightly at bedtime.
+- Multivitamin (Theragran) per tablet: 1 tablet PO.
+- Polyethylene Glycol (Miralax) 17 gram packet: 1 packet (17 g total) PO daily as needed for constipation.
+- Prochlorperazine (Compazine) 10 mg tablet: 5 mg PO q6h PRN for nausea.
+- Senna (Senokot) 8.6 mg tablet: 1 tablet PO daily.
+- Tramadol (Ultram) 50 mg tablet: 1 tablet (50 mg total) PO q4h.
+- Omeprazole (Prilosec) 40 mg capsule: 1 capsule (40 mg total) PO daily before breakfast (not currently taking).
+
+#### Treatment Changes:
+- Switching from weekly to alternating week schedule for gemcitabine monotherapy for better tolerability.
+
+#### Treatment Goals:
+- Palliate symptoms.
+- Achieve as deep and durable a remission as possible.
+- Prolong life.
+
+#### Response to Treatment:
+- Scans show the ill-defined pancreatic mass is no longer seen, likely related to treatment.
+- Interval decrease in pancreatic duct dilation.
+- No evidence of metastatic disease.
+
+#### Plan:
+- Continue with gemcitabine monotherapy on an alternating week schedule.
+- Monthly CA 19-9 levels.
+- Restaging CT CAP with contrast every 2 months.
+- Next set of scans due after this cycle.
+- Continue chlorhexidine rinses bid for gum care.
+- Refer to nutritionist.
+- Maintain weight and activity level.
+- Follow-up on 05/16/19 with ***** *****.
+- Counsel patient to contact the clinic or after-hours physician for any new symptoms or complications.
+
+#### Additional Notes:
+- Supportive care: Influenza vaccine ordered for today (to be given at infusion center).
+- Monitor renal lesion and pulmonary nodules closely.
+- Continue with current supportive medications and management strategies.
+
+--- STATS ---
+Time: 30.5s | Output: 4104 chars
+
+
+============================================================
+ROW 17 (coral_idx=16)
+============================================================
+
+### Key Clinical Information Extracted from the Oncology Clinical Note:
+
+#### Reason for Visit:
+Independent visit for follow-up of locally advanced pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Pancreatic adenocarcinoma
+- **Stage:** Locally advanced
+- **Metastasis:** No evidence of metastasis
+
+#### Lab Results:
+- **WBC Count:** 6.0
+- **Hemoglobin:** 13.8
+- **Hematocrit:** 40.4 (L)
+- **Platelet Count:** 151
+- **Neutrophil Absolute Count:** 3.74
+- **Alanine Transaminase (ALT):** 39
+- **Aspartate Transaminase (AST):** 44 (H)
+- **Alkaline Phosphatase:** 80
+- **Bilirubin, Total:** 1.2
+- **Carbohydrate Antigen 19-9 (CA 19-9):**
+  - 289 (H) on 12/23/2018
+  - 2,878 (H) on 11/06/2018
+  - 6,428 (H) on 10/23/2018
+- **Carcinoembryonic Antigen (CEA):**
+  - 15.1 (H) on 12/23/2018
+  - 33.9 (H) on 11/06/2018
+  - 37.6 (H) on 10/23/2018
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - **General:** Not in acute distress, well-developed, thin.
+  - **Abdominal Pain:** Present, located in the stomach/pancreas area.
+  - **Pain Score:** 5 out of 10.
+  - **Performance Status:** ECOG 0 (fully active, able to carry on all pre-disease activities without restriction).
+  - **No significant abnormalities noted in other systems.**
+
+#### Current Medications:
+- **FOLFIRINOX** (completed 8 cycles, last cycle on 11/06/2018).
+
+#### Treatment Changes:
+- **Chemotherapy Break:** Started on 11/06/2018 after completing 8 cycles of FOLFIRINOX.
+
+#### Treatment Goals:
+- Maintain clinical stability and manage symptoms.
+- Monitor disease progression through periodic imaging and lab tests.
+
+#### Response to Treatment:
+- **Initial Response:** Slight interval decrease in tumor size observed on 09/22/18.
+- **Subsequent Response:** Stable disease as of 02/02/19.
+
+#### Plan:
+- **Medications:** None currently prescribed.
+- **Therapy:** None specified.
+- **Radiation:** None specified.
+- **Procedures:** None specified.
+- **Imaging:** New CT CAP scheduled for July 2019.
+- **Labs:** Regular monitoring of blood counts and tumor markers.
+- **Genetic Testing:** Molecular testing results available (KRAS G12V, TP53 I195F, etc.), but no specific plans mentioned.
+- **Referrals:** None specified.
+- **Follow-Up:** Next appointment scheduled for June 2019.
+- **Advance Care Planning:** Not discussed in the note.
+
+#### Additional Notes:
+- The patient has been doing well clinically, exercising, and eating well.
+- The patient prefers to delay additional imaging for now.
+- Counseling was provided regarding symptoms, treatment plan, and therapeutic options.
+
+--- STATS ---
+Time: 15.2s | Output: 2547 chars
+
+
+============================================================
+ROW 18 (coral_idx=17)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up for management of adenocarcinoma of the tail of the pancreas, post-surgery, and ongoing treatment complications.
+
+#### Cancer Diagnosis:
+- **Type:** Adenocarcinoma of the tail of the pancreas.
+- **Stage:** Initially localized to the pancreas, no evidence of metastatic disease.
+- **Metastasis:** None detected.
+
+#### Lab Results:
+- **Comprehensive Metabolic Panel:**
+  - Albumin: 3.4 g/dL (normal range: 3.4 - 4.8 g/dL)
+  - Alkaline Phosphatase: 151 U/L (high; normal range: 38 - 108 U/L)
+  - Alanine transaminase: 29 U/L (normal range: 10 - 61 U/L)
+  - AST: 24 U/L (normal range: 5 - 44 U/L)
+  - Bilirubin, Total: 0.3 mg/dL (normal range: 0.2 - 1.2 mg/dL)
+  - Urea Nitrogen: 12 mg/dL (normal range: 7 - 25 mg/dL)
+  - Calcium, total: 9.3 mg/dL (normal range: 8.4 - 10.5 mg/dL)
+  - Chloride: 99 mmol/L (low; normal range: 101 - 110 mmol/L)
+  - Creatinine: 0.82 mg/dL (normal range: 0.55 - 1.02 mg/dL)
+  - Potassium: 5.3 mmol/L (high; normal range: 3.5 - 5.0 mmol/L)
+  - Sodium: 129 mmol/L (low; normal range: 135 - 145 mmol/L)
+  - Protein, Total: 6.8 g/dL (normal range: 6.3 - 8.6 g/dL)
+  - Carbon Dioxide, Total: 25 mmol/L (normal range: 22 - 29 mmol/L)
+  - Anion Gap: 5 (normal range: 4 - 14)
+  - Glucose, non-fasting: 109 mg/dL (normal range: 70 - 199 mg/dL)
+
+- **Complete Blood Count:**
+  - WBC Count: 11.7 x10E9/L (high; normal range: 3.4 - 10.0 x10E9/L)
+  - RBC Count: 3.34 x10E12/L (low; normal range: 4.00 - 5.20 x10E12/L)
+  - Hemoglobin: 11.5 g/dL (low; normal range: 12.0 - 15.5 g/dL)
+  - Hematocrit: 34.3% (low; normal range: 36.0 - 46.0%)
+  - MCV: 103 fL (high; normal range: 80 - 100 fL)
+  - MCH: 34.4 pg (high; normal range: 26.0 - 34.0 pg)
+  - MCHC: 33.5 g/dL (normal range: 31.0 - 36.0 g/dL)
+  - Platelet Count: 485 x10E9/L (high; normal range: 140 - 450 x10E9/L)
+  - Absolute Neutrophils: 5.24 x10E9/L (normal range: 1.80 - 6.80 x10E9/L)
+  - Absolute Lymphocytes: 2.75 x10E9/L (normal range: 1.00 - 3.40 x10E9/L)
+  - Absolute Monocytes: 2.59 x10E9/L (high; normal range: 0.20 - 0.80 x10E9/L)
+  - Absolute Eosinophils: 0.93 x10E9/L (high; normal range: 0.00 - 0.40 x10E9/L)
+  - Absolute Basophils: 0.04 x10E9/L (normal range: 0.00 - 0.10 x10E9/L)
+  - Absolute Immature Granulocytes: 0.13 x10E9/L (high; normal range: <0.10 x10E9/L)
+
+#### Clinical Findings:
+- Postoperative complications: Infection and abscess requiring ERCP for drainage.
+- Severe hand-foot syndrome and mucositis secondary to chemotherapy.
+- Frequent falls associated with loss of balance.
+- Fatigue: Sleeping about 12 hours in a 24-hour timeframe.
+- Musculoskeletal pain managed with Tylenol, Flexeril, and gabapentin.
+- Good appetite and no weight loss.
+- Loose bowel movements (1-2 per day).
+- Hyponatremia, etiology uncertain.
+- Incidental pulmonary embolism (PE).
+
+#### Current Medications:
+- BuPROPion 450 mg daily.
+- ClonazePAM 1 mg twice daily as needed.
+- Cyclobenzaprine (Flexeril) 10 mg three times daily as needed.
+- Gabapentin 300 mg four times daily.
+- Levocarnitine HCl 1 tablet daily.
+- Lidocaine-diphenhydrAMINE-maalox mouthwash 10 mL four times daily.
+- Lipase-protease-amylase (Creon) 1-2 capsules with meals, 1 capsule with snacks.
+- Montelukast (Singulair) 10 mg daily.
+- Multivitamin 1 tablet daily.
+- ROPINIRole (Requip) 1 mg nightly.
+- Tamsulosin (Flomax) 0.4 mg daily.
+- Thyroid, porcine (Armour) 120 mg daily.
+- Vitamin B-1, mononitrate, 100 mg daily.
+- Zolpidem (Ambien) 10 mg nightly as needed.
+
+#### Treatment Changes:
+- Hold chemotherapy until resolution of hand-foot syndrome.
+- Resume treatment with a modified schedule (5 days out of 7).
+
+#### Treatment Goals:
+- Manage symptoms and side effects of chemotherapy.
+- Monitor and manage potential thromboembolic events.
+- Maintain quality of life while managing cancer treatment.
+
+#### Response to Treatment:
+- Poor tolerance to chemotherapy (gemcitabine and capecitabine), leading to severe adverse events including hand-foot syndrome and mucositis.
+
+#### Plan:
+- **Medications:**
+  - Hold chemotherapy until resolution of hand-foot syndrome.
+  - Continue current medications as listed.
+- **Therapy:**
+  - Continue use of walker for balance issues.
+- **Radiation:**
+  - No specific radiation therapy mentioned.
+- **Procedures:**
+  - Continue monitoring and management of postoperative complications.
+- **Imaging:**
+  - CT of the head was unremarkable.
+  - Doppler studies to assess for deep vein thrombosis (DVT).
+- **Labs:**
+  - Continue monitoring electrolytes and blood counts.
+- **Genetic Testing:**
+  - Known to carry an ATM VUS (variant of uncertain significance).
+- **Referrals:**
+  - No specific referrals mentioned.
+- **Follow-Up:**
+  - Regular follow-up visits to monitor response to treatment and manage side effects.
+- **Advance Care Planning:**
+  - Not specifically addressed in the note.
+
+--- STATS ---
+Time: 29.4s | Output: 4841 chars
+
+
+============================================================
+ROW 19 (coral_idx=18)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Independent visit for ongoing management of locally advanced and unresectable adenocarcinoma of the head of the pancreas.
+
+#### Cancer Diagnosis:
+- **Type:** Locally advanced and unresectable adenocarcinoma of the head of the pancreas.
+- **Stage:** Not explicitly stated, but described as locally advanced and unresectable.
+- **Metastasis:** An 11 mm lesion in the liver was noted but not characterized or biopsied.
+
+#### Lab Results:
+- **Comprehensive Metabolic Panel:**
+  - Albumin: 3.3 g/dL (Low)
+  - Alkaline Phosphatase: 493 U/L (High)
+  - Alanine Transaminase (ALT): 387 U/L (High)
+  - Aspartate Transaminase (AST): 357 U/L (High)
+  - Total Bilirubin: 7.4 mg/dL (High)
+  - Urea Nitrogen: 15 mg/dL
+  - Creatinine: 0.67 mg/dL
+  - eGFR (non-African American): 90 mL/min
+  - eGFR (African American): 104 mL/min
+  - Sodium: 133 mmol/L (Low)
+  - Chloride: 94 mmol/L (Low)
+  - Glucose: 131 mg/dL
+- **Complete Blood Count:**
+  - WBC Count: 15.3 x10E9/L (High)
+  - RBC Count: 3.29 x10E12/L (Low)
+  - Hemoglobin: 10.4 g/dL (Low)
+  - Hematocrit: 30.8% (Low)
+  - Neutrophil Absolute Count: 12.04 x10E9/L (High)
+  - Monocyte Absolute Count: 1.20 x10E9/L (High)
+
+#### Clinical Findings:
+- **Subjective:**
+  - Increased fatigue over the past 3 weeks.
+  - Increased emesis, nausea, and burping; 2-3 episodes of emesis per day.
+  - Upper abdominal pain managed with Methadone and Oxycodone.
+  - Bilateral lower extremity edema.
+  - Poor appetite but has gained some weight.
+  - Dark-colored urine for 3 days.
+- **Objective:**
+  - Vital signs: BP 132/85, Pulse 76, Temp 36.5°C, Resp 18, Weight 45.4 kg, SpO2 100%, BMI 17.05 kg/m².
+  - Physical Exam: Slight jaundice, white/yellowish thick tongue coating, no clinical adenopathy, clear lungs, soft and non-tender abdomen, no hepatosplenomegaly, bilateral +1 LE edema, no rash or petechiae, no gross focal neuro deficits.
+
+#### Current Medications:
+- Aspirin 81 mg EC tablet
+- Atorvastatin (Lipitor) 40 mg tablet
+- Coenzyme Q10 100 mg capsule
+- Creon 36,000-114,000-180,000 unit capsule
+- Metformin (Glucophage) 850 mg tablet
+- Methadone (Dolophine) 10 mg tablet
+- Metoclopramide HCl (Reglan) 10 mg tablet
+- Multivitamin with iron-minerals-folic acid
+- Omeprazole (Prilosec) 20 mg capsule
+- Ondansetron (Zofran) 8 mg tablet
+- Oxycodone (Roxicodone) 5 mg tablet
+- Polyethylene glycol (Miralax) 17 gram packet
+
+#### Treatment Changes:
+- Postponed C3 cycle of FOLFIRINOX due to lab abnormalities suggestive of disease progression or biliary obstruction.
+- Recommended urgent imaging to assess biliary ductal dilatation or disease progression.
+- Urgent referral to GI for ERCP due to biliary obstruction.
+
+#### Treatment Goals:
+- Manage symptoms including pain, fatigue, and anorexia.
+- Evaluate and manage biliary obstruction.
+- Monitor for disease progression and complications such as cholangitis.
+
+#### Response to Treatment:
+- Radiographic progression noted on 06/14/2017, leading to change in treatment to FOLFIRINOX.
+- Recent lab results suggest possible disease progression or biliary obstruction.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Encourage referral to Symptom Management Service (SMS).
+- **Radiation:** Not mentioned.
+- **Procedures:** Urgent referral to GI for ERCP.
+- **Imaging:** Urgent imaging to assess biliary ductal dilatation or disease progression.
+- **Labs:** Repeat comprehensive metabolic panel and complete blood count.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** Referral to SMS for symptom management.
+- **Follow-Up:** Follow-up after imaging and ERCP.
+- **Advance Care Planning:** Not explicitly mentioned, but discussed during counseling.
+
+This summary provides a detailed overview of the patient's clinical status, treatment plan, and next steps based on the provided clinical note.
+
+--- STATS ---
+Time: 20.1s | Output: 3861 chars
+
+
+============================================================
+ROW 20 (coral_idx=19)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation for newly diagnosed metastatic pancreatic adenocarcinoma.
+
+#### Cancer Diagnosis:
+- **Type:** Metastatic pancreatic adenocarcinoma.
+- **Stage:** Advanced/metastatic.
+- **Metastasis:** Multiple hepatic lesions, peritoneal carcinomatosis.
+
+#### Lab Results:
+- **Most Recent Labs (03/25/2021):**
+  - WBC: 6.0
+  - Hct: 46.5
+  - Plts: 207
+  - Creatinine: 1.16
+  - Albumin: 4.3
+  - AST: 26
+  - ALT: 61
+  - Total Bilirubin: 0.6
+  - Alkaline Phosphatase: 63
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - ECOG PS: 0
+  - BP: 172/103
+  - Pulse: 83
+  - Temperature: 36.4°C (97.6°F)
+  - Weight: 82.1 kg (181 lb)
+  - Height: 172.5 cm (5' 7.91")
+  - No acute distress, conversant, appropriately interactive.
+  - Anicteric sclerae, moist conjunctivae.
+  - Atraumatic neck, oropharynx clear.
+  - Lungs clear to auscultation.
+  - Cardiovascular: RRR, normal S1 S2, no murmurs.
+  - Abdomen: Soft, non-tender, nondistended.
+  - No peripheral edema or discoloration.
+  - Normal skin, neurologic function, and gait.
+  - No focal sensorimotor deficits.
+  - No jaundice symptoms.
+  - Modest anxiety.
+
+#### Current Medications:
+- OxyCODONE-acetaminophen (Percocet) 5-325 mg tablet
+- ValACYclovir (Valtrex) 1 gram tablet prn cold sores
+- Lorazepam PRN
+
+#### Treatment Changes:
+- Discussed standard of care treatment options:
+  - FOLFIRINOX (infusional 5-FU, leucovorin, irinotecan, oxaliplatin)
+  - Gemcitabine plus nab-paclitaxel
+- Considered clinical trial options:
+  - Precision Promise clinical trial platform
+  - REVOLUTION (PICI0044) trial
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible.
+- Prioritize quality of life (QoL) considerations.
+- Prolong life, though not expected to be curative.
+
+#### Response to Treatment:
+- Not yet initiated.
+
+#### Plan:
+- **Medications:**
+  - Continue current medications.
+- **Therapy:**
+  - Consider FOLFIRINOX or gemcitabine/nab-paclitaxel.
+  - Potential enrollment in clinical trials (Precision Promise, REVOLUTION).
+- **Radiation:**
+  - Not specified.
+- **Procedures:**
+  - Fresh tumor tissue collection for somatic tumor testing.
+  - Genetic counseling and germline testing.
+- **Imaging:**
+  - Already performed CT abdomen/pelvis with contrast.
+- **Labs:**
+  - Regular monitoring for potential toxicities.
+- **Genetic Testing:**
+  - Somatic tumor testing using UCSF500 platform.
+  - Germline testing for hereditary predisposition.
+- **Referrals:**
+  - Cancer Center nutritionist.
+- **Follow-Up:**
+  - Regular monitoring and follow-up visits.
+- **Advance Care Planning:**
+  - Discussed with the patient and family.
+
+This comprehensive plan addresses the patient’s current condition and future treatment options while considering the patient’s overall health and quality of life.
+
+--- STATS ---
+Time: 18.8s | Output: 2808 chars
+
+

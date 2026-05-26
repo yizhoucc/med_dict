@@ -1,0 +1,1427 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: /home/yc/repo/med_dict/data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv
+Date: 2026-05-25 20:38
+============================================================
+
+============================================================
+ROW 1 (coral_idx=20)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- To discuss treatment options and establish care for recently diagnosed breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Triple-negative breast cancer (TNBC)
+- **Stage:** Stage II (T2N1)
+- **Metastasis:** Not yet confirmed; staging imaging pending
+
+#### Lab Results:
+- **WBC Count:** 9.9
+- **Hemoglobin:** 9.6 (Low)
+- **Hematocrit:** 28.9 (Low)
+- **Platelet Count:** 222
+- **Sodium:** 133 (Low)
+- **Potassium:** 4.2
+- **Chloride:** 102
+- **Carbon Dioxide:** 22
+- **Urea Nitrogen:** 18
+- **Creatinine:** 1.01 (High)
+- **Glucose (non-fasting):** 201 (High)
+- **Albumin:** 3.0 (Low)
+
+#### Clinical Findings:
+- **Physical Exam:** 
+  - ECOG 2
+  - No breast pain
+  - No palpable masses in the left breast
+  - No lymphadenopathy
+  - No edema
+  - No tenderness or distention in the abdomen
+  - No muscle or bone pain
+  - No neurological deficits
+  - No skin lesions or rashes
+- **Review of Systems:**
+  - Some fatigue at baseline; stable weight
+  - Dyspnea at baseline; no cough, no wheezing
+  - No chest pain, no palpitations
+  - Constipation; no heartburn, no nausea, no emesis, no abdominal pain, no diarrhea, no melena, no hematochezia
+  - No suprapubic pain, no dysuria, no vaginal bleeding
+  - Joint stiffness; no muscle pain, no bone pain
+  - No heat/cold intolerance, no hot flashes
+  - No easy bruising/bleeding, no lymphedema
+  - No headaches, no dizziness, no numbness/tingling, no falls
+  - Anxious; no depression
+  - No rashes/lesions, no diaphoresis
+
+#### Current Medications:
+- Acetaminophen (Tylenol) 500 mg
+- Amlodipine (Norvasc) 5 mg
+- Aspirin 81 mg
+- Atorvastatin (Lipitor) 40 mg
+- Bisoprolol (Zebeta) 5 mg
+- Blood glucose test strips
+- Brimonidine (Alphagan) 0.1%
+- Calcium carbonate-vitamin D (Oysco 500/D) 1,250 mg
+- Glipizide (Glucotrol) 10 mg
+- Insulin glargine (Lantus) 100 units/mL
+- Insulin syringe-needle U-100 0.3 mL
+- Lancets
+- Latanoprost (Xalatan) 0.005%
+- Metformin (Glucophage) 1,000 mg
+- Valsartan (Diovan) 80 mg
+- Alphagan P 0.1%
+- Docusate sodium (Colace) 100 mg
+- Loratadine (Claritin) 10 mg
+- Mometasone (Nasonex) 50 mcg/actuation
+- Nitroglycerin (Nitrostat) 0.4 mg
+- Olopatadine (Patanol) 0.1%
+
+#### Treatment Changes:
+- No specific treatment changes mentioned yet.
+- Chemotherapy options discussed but concerns about toxicity given comorbidities.
+
+#### Treatment Goals:
+- Assess for metastasis with PET/CT.
+- Discuss treatment options considering the high-risk nature of TNBC and the patient's comorbidities.
+
+#### Response to Treatment:
+- Not applicable at this point as treatment has not yet been initiated.
+
+#### Plan:
+- Obtain PET/CT to assess for metastasis.
+- Reassess treatment options after PET/CT results.
+- Continue current medications.
+- Follow-up counseling and discussion regarding treatment options and prognosis.
+
+#### Advance Care Planning:
+- Not explicitly addressed in the note provided.
+
+This summary captures the essential elements of the clinical note, focusing on the patient's condition, lab results, clinical findings, current medications, and the planned next steps in her care.
+
+--- STATS ---
+Time: 20.5s | Output: 3103 chars
+
+
+============================================================
+ROW 2 (coral_idx=21)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation regarding the treatment of her locally recurrent breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Locally recurrent, unresectable, hormone-receptor positive breast cancer.
+- **Stage:** Initially Stage I (low-stage) in 1994; now presenting with local regional recurrence.
+- **Metastasis:** Unresectable local recurrence; no distant metastases identified.
+
+#### Lab Results:
+- Normal CBC, creatinine, electrolytes, liver function tests, and calcium.
+- CA27-29: 15 (normal).
+- LDH: Normal.
+
+#### Clinical Findings:
+- Well-healed incision in the 12 o'clock aspect of her right breast with some density just below the incision.
+- 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast.
+- No cervical or axillary adenopathy.
+- Soft, mobile nodes in the left supraclavicular space.
+- Clear lungs bilaterally.
+- No hepatosplenomegaly.
+- No edema in extremities.
+- MRI of brain showed no evidence of malignancy; encephalomalacia and gliosis in the right middle frontal gyrus.
+- PET/CT scan showed increased FDG avidity within a right parasternal chest wall nodule and in a lymph node along the inferior right axillary chain.
+
+#### Current Medications:
+- Zoledronic acid (started due to osteoporosis).
+
+#### Treatment Changes:
+- Started on zoledronic acid.
+- Planned to start on aromatase inhibitor therapy (either alone or on CALGB 4503 randomized to placebo or bevacizumab).
+
+#### Treatment Goals:
+- Hormonal therapy with an aromatase inhibitor to manage the local regional recurrence.
+- Potential surgical resection and radiation therapy to achieve long-term disease control.
+
+#### Response to Treatment:
+- Not applicable as treatment has not yet been fully initiated.
+
+#### Plan:
+- **Medications:** Start on aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab.
+- **Therapy:** Consider surgical resection and radiation therapy.
+- **Imaging:** Follow-up PET/CT scans and MRI of the brain.
+- **Labs:** Regular monitoring of CBC, creatinine, electrolytes, liver function tests, and calcium.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** None specified.
+- **Follow-Up:** Return to clinic on January 25 to begin aromatase inhibitor therapy.
+- **Advance Care Planning:** Not explicitly addressed.
+
+This summary provides a comprehensive overview of the patient's current condition, treatment plan, and future considerations.
+
+--- STATS ---
+Time: 10.6s | Output: 2501 chars
+
+
+============================================================
+ROW 3 (coral_idx=22)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Patient with early-stage breast cancer here to discuss neoadjuvant therapy.
+
+#### Cancer Diagnosis:
+- **Type:** Right-sided invasive spindle cell metaplastic carcinoma.
+- **Stage:** Locally advanced, multifocal.
+- **Metastasis:** No evidence of metastatic disease.
+
+#### Lab Results:
+- Elevated creatinine and alkaline phosphatase.
+- Possible dehydration.
+
+#### Clinical Findings:
+- Mass palpable in the right breast at 9:00, 6cm FN, measuring 4x4cm.
+- No significant adenopathy, no palpable lymphadenopathy, no hepatosplenomegaly.
+- No evidence of metastatic disease on imaging.
+
+#### Current Medications:
+- Clotrimazole-betamethasone (LOTRISENE) 1-0.05% cream: 2 times a day.
+- Ibuprofen (ADVIL, MOTRIN): 800 mg tablet, as needed for pain.
+- Omeprazole (PRILOSEC): 20 mg capsule, as needed after meals.
+- Triamterene-hydrochlorothiazide (DYAZIDE): 37.5-25 mg capsule, daily.
+- Prednisone (DELTASONE): 5 mg tablet.
+
+#### Treatment Changes:
+- Discussion and agreement to participate in the I-SPY2 clinical trial.
+- Potential neoadjuvant chemotherapy regimen: Weekly paclitaxel followed by AC (doxorubicin + cyclophosphamide).
+- Consideration of an experimental agent in the context of the I-SPY2 trial.
+- Placement of a Medi-port for chemotherapy administration.
+
+#### Treatment Goals:
+- Assess response to neoadjuvant chemotherapy.
+- Increase chances of breast-conserving surgery.
+- Treat with curative intent.
+
+#### Response to Treatment:
+- Not yet assessed as treatment has not started.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Neoadjuvant chemotherapy (weekly paclitaxel followed by AC).
+- **Radiation:** Potentially after surgery, depending on final pathology.
+- **Procedures:** Placement of Medi-port.
+- **Imaging:** MRI, research biopsy, mammogram, echocardiogram.
+- **Labs:** Repeat creatinine and alkaline phosphatase levels.
+- **Genetic Testing:** Gene panel results pending.
+- **Referrals:** None specified.
+- **Follow-Up:** Start chemotherapy in the first week of February.
+- **Advance Care Planning:** Discussed genetic predisposition to cancer, to be revisited upon receipt of gene panel results.
+
+#### Additional Notes:
+- Patient is very interested in the I-SPY2 clinical trial and has already consented.
+- Mammaprint test pending to determine eligibility for the therapeutic portion of the trial.
+- Detailed discussion on side effects of chemotherapy.
+- Genetic predisposition to cancer to be discussed further upon receipt of gene panel results.
+
+--- STATS ---
+Time: 10.6s | Output: 2563 chars
+
+
+============================================================
+ROW 4 (coral_idx=23)
+============================================================
+
+### Key Clinical Information
+
+#### Reason for Visit
+- New patient visit for discussion regarding her right breast cancer.
+
+#### Cancer Diagnosis
+- **Type:** Triple-negative invasive ductal carcinoma (IDC) of the right breast.
+- **Stage:** Not explicitly stated, but history includes metastatic papillary carcinoma to lymph nodes and previous ovarian cancer (stage IIIC).
+- **Metastasis:** No evidence of hypermetabolic metastatic disease.
+
+#### Lab Results
+- Not specified in the provided note.
+
+#### Clinical Findings
+- **Constitutional:** No fever, chills, diaphoresis, appetite change, fatigue, or unexpected weight change.
+- **Respiratory:** No chest tightness, shortness of breath, or wheezing; allergic cough present.
+- **Cardiovascular:** No chest pain, palpitations, or leg swelling.
+- **Breast:** Firm palpable nodule felt at 11 o'clock between axilla and areola in the right breast; tenderness at biopsy site and around axilla.
+- **Neurological:** No focal motor or sensory deficits.
+- **Psychiatric:** Anxiety related to disease and potential treatment complications.
+
+#### Current Medications
+- Acetaminophen (Tylenol) 325 mg tablet
+- Alendronate (Fosamax) 70 mg tablet
+- Ascorbate Calcium (Vitamin C Oral)
+- Baclofen (Lioresal) 10 mg tablet
+- Benzonatate (Tessalon) 100 mg capsule
+- Clotrimazole (Lotrimin) 1% cream
+- Cyanocobalamin (Vitamin B-12 Oral)
+- Dextran 70-Hypromellose (Natural Balance Tears) 0.1-0.3% ophthalmic solution
+- Ergocalciferol (Vitamin D2 Oral)
+- Loratadine (Claritin) 10 mg tablet
+- Melatonin 3 mg tablet
+- Mometasone (Nasonex) 50 mcg/actuation spray
+- Multivitamin tablet
+- Omeprazole (Prilosec) 20 mg capsule
+- Promethazine-Dextromethorphan 6.25-15 mg/5 mL syrup
+- Blood pressure monitor
+- Menthol (Bengay Cold Therapy) 5% gel
+- Ventolin HFA 90 mcg/actuation metered dose inhaler
+
+#### Treatment Changes
+- Recommended to start chemotherapy with Taxol (paclitaxel) x 12 weekly.
+- Port placement to be done as soon as possible.
+- Chemotherapy teaching to be conducted before starting treatment.
+
+#### Treatment Goals
+- Control and reduce the size of the right breast lesion.
+- Manage symptoms and side effects associated with chemotherapy.
+
+#### Response to Treatment
+- Not yet started on chemotherapy, hence no response data available.
+
+#### Plan
+- **Medications:** Continue current medications and start chemotherapy with Taxol.
+- **Therapy:** Chemotherapy with Taxol x 12 weekly.
+- **Radiation:** Not mentioned.
+- **Procedures:** Port placement.
+- **Imaging:** Continued monitoring with imaging studies as needed.
+- **Labs:** Not specified.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** To discuss treatment plan with Dr. *****.
+- **Follow-Up:** Clinic visits with cycles 1, 2, 5, 8, and 12.
+- **Advance Care Planning:** Not mentioned.
+
+This summary provides a comprehensive overview of the patient's clinical status, treatment plan, and ongoing management needs.
+
+--- STATS ---
+Time: 13.9s | Output: 2911 chars
+
+
+============================================================
+ROW 5 (coral_idx=24)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options and establish care for recently diagnosed early-stage breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Bilateral breast cancer (left breast: Grade 3 IDC; right breast: Grade 1 IDC)
+- **Stage:** Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)
+- **Metastasis:** Micrometastasis in left axillary lymph nodes (0.7 mm)
+
+#### Lab Results:
+- No specific lab results mentioned in the note.
+- HbA1c of October 20 on 08/09/2017 (related to diabetes).
+
+#### Clinical Findings:
+- No masses bilaterally on physical exam.
+- Mild joint stiffness, particularly in knees.
+- No lymphadenopathy.
+- Normal cardiovascular, respiratory, and gastrointestinal findings.
+- No neurological deficits.
+
+#### Current Medications:
+- None listed.
+
+#### Treatment Changes:
+- Recommended adjuvant chemotherapy (docetaxel/cyclophosphamide x 4 cycles).
+- Radiation therapy.
+- Aromatase inhibitor (AI) therapy for at least 5 years.
+- Consideration of adjuvant trial of a CDK4/6 inhibitor.
+
+#### Treatment Goals:
+- Reduce distant recurrence risk.
+- Provide adjuvant anti-estrogen therapy.
+- Improve bone health through lifestyle modifications and supplements.
+
+#### Response to Treatment:
+- Patient feels healthier since breast surgery.
+- Concerns about long-term risks of chemotherapy.
+
+#### Plan:
+- **Medications:** Docetaxel/cyclophosphamide x 4 cycles, aromatase inhibitor for at least 5 years.
+- **Therapy:** Radiation therapy.
+- **Procedures:** DEXA scan to assess bone health.
+- **Imaging:** Already completed diagnostic mammograms, ultrasounds, MRI, and biopsies.
+- **Labs:** HbA1c monitoring for diabetes management.
+- **Genetic Testing:** Oncotype DX RS test pending.
+- **Referrals:** None specified.
+- **Follow-Up:** Regular follow-ups to monitor response to treatment and manage side effects.
+- **Advance Care Planning:** Not explicitly addressed in the note.
+
+This summary captures the essential elements of the clinical note, providing a comprehensive overview of the patient's condition, treatment plan, and ongoing considerations.
+
+--- STATS ---
+Time: 9.5s | Output: 2132 chars
+
+
+============================================================
+ROW 6 (coral_idx=25)
+============================================================
+
+### Key Clinical Information Extracted:
+
+**Reason for Visit:**
+- Discussion of systemic therapy and management for newly diagnosed HR-negative HER2+ breast cancer.
+
+**Cancer Diagnosis:**
+- **Type:** HR-negative HER2+ breast cancer.
+- **Stage:** Stage IV suspected due to bone metastasis.
+- **Metastasis:** Bone metastasis (left ilium, bilateral sacral ala), and possibly carotid body paraganglioma.
+
+**Lab Results:**
+- Not specifically detailed in the note provided.
+
+**Clinical Findings:**
+- **Physical Exam:**
+  - Alert, well-appearing, no distress.
+  - 7x5 cm mobile mass in right upper outer quadrant (RUOQ).
+  - Inverted right nipple.
+  - Multiple right axillary nodes, largest 2.5 cm and mobile.
+  - No palpable cervical or supraclavicular lymphadenopathy.
+  - No bone pain or other systemic symptoms.
+  - Long-standing, stable neck mass.
+- **Imaging:**
+  - MRI: Multiple masses in right breast, enlarged axillary lymph nodes.
+  - PET/CT: Hypermetabolic lesions in right breast, right axillary/subpectoral lymph nodes, and left ilium.
+  - MRI Pelvis: Foci of signal abnormality and enhancement in left iliac bone and bilateral sacral ala.
+  - MRI Face/Neck: Carotid body paraganglioma.
+
+**Current Medications:**
+- Ergocalciferol (Vitamin D2)
+- Metformin
+- Omega-3 fatty acids (Fish oil)
+- Gavilyte-G
+- Jolivette
+- Ondansetron (Zofran)
+- Prednisone acetate (Pred Forte)
+- Prolensa
+- Vigamox
+
+**Treatment Changes:**
+- Initiation of systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab.
+
+**Treatment Goals:**
+- Achieve excellent response and possible long-term disease control given the HR-negative HER2+ subtype.
+- Manage bone metastasis with radiation if necessary.
+
+**Response to Treatment:**
+- Anticipated excellent response and possible long-term disease control.
+
+**Plan:**
+- **Medications:** Weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab.
+- **Therapy:** Systemic therapy initiation.
+- **Radiation:** Consideration for radiation of bone lesions.
+- **Procedures:** Port placement.
+- **Imaging:** MRI pelvis, MRI neck.
+- **Labs:** Baseline labs.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** None specified.
+- **Follow-Up:** Regular follow-ups to monitor response and manage side effects.
+- **Advance Care Planning:** Not addressed in the note.
+
+This summary provides a comprehensive overview of the patient's clinical situation, treatment plan, and anticipated outcomes based on the provided clinical note.
+
+--- STATS ---
+Time: 13.2s | Output: 2452 chars
+
+
+============================================================
+ROW 7 (coral_idx=26)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for metastatic breast cancer.
+- Evaluation of treatment response and management of side effects.
+
+#### Cancer Diagnosis:
+- **Type:** Metastatic ER negative, HER2 negative breast cancer.
+- **Stage:** Metastatic (with involvement of liver and nodes).
+- **Metastasis:** Confirmed metastasis to liver and nodes.
+
+#### Lab Results:
+- Labs are within normal range for continuation of treatment.
+
+#### Clinical Findings:
+- **Symptoms:**
+  - Worsening GERD (improved with Prilosec).
+  - Nausea (managed with Ativan).
+  - Fatigue lasting 3 days post-treatment.
+  - Right axillary pain to shoulder blade (improved).
+  - Stable right lumbosacral pain.
+  - New aching in arms and legs.
+  - Transient numbness/tingling in toes and fingertips.
+  - Leg cramping at night.
+- **Physical Exam:**
+  - ECOG 0.
+  - No significant abnormalities noted except for mild symptoms related to treatment.
+
+#### Current Medications:
+- **Chemotherapy:**
+  - Nab-paclitaxel (Abraxane) every week.
+  - Pembrolizumab every 3 weeks.
+- **Supportive Care:**
+  - Lorazepam (Ativan) for anxiety.
+  - Cyclobenzaprine (Flexeril) for muscle spasms.
+  - Morphine (MS Contin) 15 mg BID.
+  - Oxycodone (Roxicodone) PRN for pain.
+  - Tramadol (Ultram) PRN for pain.
+  - Esomeprazole (Nexium) 20 mg daily for GERD.
+  - Prochlorperazine (Compazine) PRN for nausea.
+  - Rivaroxaban (Xarelto) 20 mg daily (currently off due to recent biopsy).
+
+#### Treatment Changes:
+- Restart Xarelto after port placement.
+- Continue current chemotherapy regimen (nab-paclitaxel and pembrolizumab).
+- Continue supportive medications for symptoms (Ativan, Compazine, Prilosec, magnesium oxide).
+
+#### Treatment Goals:
+- Control metastatic breast cancer.
+- Manage side effects and maintain quality of life.
+- Monitor for treatment response and toxicity.
+
+#### Response to Treatment:
+- Axillary pain improved, indicating early treatment response.
+- Monitoring for further signs of response and toxicity.
+
+#### Plan:
+- **Medications:**
+  - Continue current chemotherapy and supportive care medications.
+- **Therapy:**
+  - Continue working with pain management team.
+- **Radiation:**
+  - No specific radiation therapy mentioned.
+- **Procedures:**
+  - Placement of a port for better peripheral access.
+- **Imaging:**
+  - Imaging guided by symptoms or every 3-4 months.
+- **Labs:**
+  - Monitor TSH levels.
+- **Genetic Testing:**
+  - No new genetic testing planned.
+- **Referrals:**
+  - Continue working with pain management team.
+- **Follow-Up:**
+  - Follow-up in 2 weeks, then every 3 weeks.
+- **Advance Care Planning:**
+  - No specific mention of advance care planning.
+
+This summary captures the essential elements of the clinical note, providing a clear overview of the patient's condition, treatment, and follow-up plan.
+
+--- STATS ---
+Time: 16.9s | Output: 2835 chars
+
+
+============================================================
+ROW 8 (coral_idx=27)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- To discuss adjuvant therapy for breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Stage IIA pT2(m)N1a Left Breast Invasive Ductal Carcinoma (IDC)
+- **Size:** 3.9 cm
+- **Grade:** Grade 2
+- **Hormone Receptor Status:** ER+/PR+
+- **HER2 Status:** HER2 negative (FISH ratio 1.1)
+- **Mammaprint:** High-risk
+
+#### Lab Results:
+- **HER2 Gene Amplification Testing by FISH:** Negative (HER2:Cent17 ratio 1.1)
+
+#### Clinical Findings:
+- Bilateral mastectomies with left axillary lymph node dissection (LND) on 08/18/17.
+- 2 out of 12 lymph nodes positive for metastatic carcinoma.
+- Post-operative healing well, with slight arm stiffness and numbness near left axilla and elbow.
+- No significant symptoms noted in review of systems.
+
+#### Current Medications:
+- Acetaminophen (for pain)
+- Ascorbic Acid (Vitamin C)
+- Atenolol (for hypertension)
+- Docusate Sodium (for constipation)
+- Gabapentin (for neuropathic pain)
+- Ibuprofen (for pain)
+- Multivitamin
+- Omeprazole (for GERD)
+- Simvastatin (for hyperlipidemia)
+
+#### Treatment Changes:
+- Recommended to start chemotherapy with AC (doxorubicin and cyclophosphamide) followed by paclitaxel.
+- Estimated start date: 10/18/2017.
+
+#### Treatment Goals:
+- Adjuvant chemotherapy to reduce risk of recurrence.
+- Use of an aromatase inhibitor post-chemotherapy.
+
+#### Response to Treatment:
+- Patient agrees to pursue chemotherapy and understands potential side effects.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Chemotherapy:** Start AC + paclitaxel on 10/18/2017.
+- **Imaging:** Order baseline TTE prior to chemotherapy.
+- **Procedures:** Order port placement for IV access.
+- **Genetic Testing:** Refer for genetic counseling and testing due to family history.
+- **Follow-Up:** Scheduled appointment with oncologist on 10/10/2017.
+- **Advance Care Planning:** Not specifically addressed in the note.
+
+#### Additional Notes:
+- Strong family history of breast cancer, particularly on paternal side.
+- Patient's paternal grandmother died of breast cancer in her 60s.
+- Sister had breast cancer and underwent double mastectomy.
+- Patient’s father has Ashkenazi Jewish heritage, increasing likelihood of BRCA mutation.
+
+--- STATS ---
+Time: 16.0s | Output: 2243 chars
+
+
+============================================================
+ROW 9 (coral_idx=28)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options and establish care for a recurrence of breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Hormone Receptor Positive (HR+)/Human Epidermal Growth Factor Receptor 2 Negative (HER2-) Invasive Ductal Carcinoma (IDC) of the left breast.
+- **Stage:** Initially Stage III (T3N2).
+- **Metastasis:** Recurrence with possible metastatic involvement of Level Vb lymph nodes.
+
+#### Lab Results:
+- No specific lab results mentioned in the note.
+
+#### Clinical Findings:
+- **Physical Exam:**
+  - A 6.5 x 5 cm mass in the left upper outer quadrant at 2:00 position, 7 cm from the nipple.
+  - A 3.5 x 3.5 cm mass in the left lateral anterior neck.
+  - No cervical, supraclavicular, or axillary lymphadenopathy.
+  - No tenderness over bones or joints.
+  - No significant abnormalities noted in other systems.
+- **Imaging:**
+  - PET/CT showed hypermetabolic subcutaneous masses overlying the left breast and suspicious lymph nodes.
+  - Previous imaging and biopsies confirmed the presence of metastatic disease.
+
+#### Current Medications:
+- Gabapentin (NEURONTIN) 300 mg capsule (as needed).
+- Hydrochlorothiazide (HYDRODIURIL) 25 mg tablet (daily).
+
+#### Treatment Changes:
+- Discontinued: Polymyxin B-trimethoprim (POLYTRIM) ophthalmic solution.
+- Expired: Iohexol (OMNIPAQUE) 350 mg iodine/mL solution.
+
+#### Treatment Goals:
+- Prolongation of life while maintaining a good quality of life without excessive toxicities.
+- Avoidance of chemotherapy upfront to limit toxicity.
+- Start with ovarian suppression (OS) followed by an aromatase inhibitor (AI).
+
+#### Response to Treatment:
+- Poor tolerance of previous treatments, including chemotherapy and hormonal therapies.
+
+#### Plan:
+- **Medications:**
+  - Start goserelin (ovarian suppression).
+  - Follow with an aromatase inhibitor.
+- **Therapy:**
+  - Avoid chemotherapy initially.
+- **Radiation:**
+  - No specific radiation therapy planned.
+- **Procedures:**
+  - Fine Needle Aspiration (FNA) of the mass in the left lateral anterior neck.
+- **Imaging:**
+  - PET/CT already performed.
+- **Labs:**
+  - No specific lab tests ordered.
+- **Genetic Testing:**
+  - No mention of genetic testing.
+- **Referrals:**
+  - None specified.
+- **Follow-Up:**
+  - Return to clinic two weeks after starting ovarian suppression.
+- **Advance Care Planning:**
+  - Discussed prognosis, treatment plan, and potential risks and benefits.
+
+#### Additional Notes:
+- The patient has a history of irregular menstrual periods and has undergone bilateral skin-sparing mastectomy.
+- She has experienced side effects from previous treatments, including severe nausea, vomiting, and body pain.
+- The patient is currently unemployed and has financial strain.
+- She has a history of smoking (3 cigarettes/day) and occasional alcohol use.
+- She has chronic back pain and occasional aches in her knees and ankles.
+- She has a history of hyperemesis gravidarum and hypertension.
+
+--- STATS ---
+Time: 16.3s | Output: 2986 chars
+
+
+============================================================
+ROW 10 (coral_idx=29)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options for newly diagnosed breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Invasive Ductal Carcinoma (IDC)
+- **Stage:** Clinical Stage II (T2N1)
+- **Metastasis:** No distant metastasis detected; right axillary lymph node involvement.
+
+#### Lab Results:
+- **POCT Glucose:** 94 mg/dL (within normal range)
+
+#### Clinical Findings:
+- **Physical Examination:**
+  - Alert, well-appearing, no distress.
+  - 7 x 3 cm mass in the upper outer quadrant of the right breast.
+  - Right nipple slightly pushed upward.
+  - Dimpling in the upper outer quadrant of the right breast.
+  - Right axillary node measuring 1 cm.
+- **Imaging:**
+  - **MRI:** 34 x 20 x 25 mm irregularly shaped mass with spiculated margins and heterogeneous enhancement in the upper central to slightly outer quadrant of the right breast.
+  - **PET/CT:** Hypermetabolic right breast mass with SUV of 8.4; prominent right axillary lymph node with SUV of  2.1.
+  - **Ultrasound:** Hypoechoic, irregular mass in the upper central right breast; lymph node with thickened cortex in the right axilla.
+
+#### Current Medications:
+- **Cetrorelix Acetate (Cetrotide Subcut)**
+- **Menotropins (Menopur Subcut)**
+- **Tamoxifen (Nolvadex) 20 mg**
+
+#### Treatment Changes:
+- **Neoadjuvant Chemotherapy:** Planning to start on 05/01/2017.
+- **Port Placement:** Scheduled either on start of therapy or one week later.
+- **Cold Cap Coordinator:** To call the patient.
+- **Egg Harvesting:** Planned for Saturday or Monday before starting chemotherapy.
+
+#### Treatment Goals:
+- Neoadjuvant chemotherapy to reduce tumor size and improve surgical outcomes.
+- Hormone therapy post-surgery.
+- Ovarian suppression to manage side effects and potentially improve outcomes.
+
+#### Response to Treatment:
+- Not yet evaluated as treatment has not started.
+
+#### Plan:
+- **Medications:** Continue current medications; start chemotherapy.
+- **Therapy:** Neoadjuvant chemotherapy with weekly paclitaxel x 12 followed by AC every 2-3 weeks.
+- **Radiation:** Not mentioned.
+- **Procedures:** Port placement, echocardiogram, EKG.
+- **Imaging:** Mammoprint and PET scan on 04/29/2017.
+- **Labs:** To be done on Thursday.
+- **Genetic Testing:** Genetic testing sent.
+- **Referrals:** None specified.
+- **Follow-Up:** Regular follow-ups for treatment progress.
+- **Advance Care Planning:** Discussed toxicity, side effects, and nutritional support in detail.
+
+#### Additional Notes:
+- Patient is overall well, except for mild bloating.
+- Questions addressed regarding continuing exercise and improving diet.
+- Support system through family.
+- Genetic testing results pending.
+- Detailed discussion on treatment options, side effects, and future fertility considerations.
+
+--- STATS ---
+Time: 16.2s | Output: 2794 chars
+
+
+============================================================
+ROW 11 (coral_idx=30)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Discussion of potential adjuvant anti-hormonal therapy for left breast DCIS.
+
+#### Cancer Diagnosis:
+- **Type:** Ductal Carcinoma In Situ (DCIS)
+- **Stage:** pTisNx (no lymph node involvement)
+- **Metastasis:** None noted
+
+#### Lab Results:
+- ER (Estrogen Receptor): >90% positive
+- PR (Progesterone Receptor): Pending
+
+#### Clinical Findings:
+- Left breast is somewhat sore post-surgery.
+- Significant hot flashes and night sweats (possibly worsening).
+- Chronic low back pain (unchanged).
+- Appetite, activities, weight, bowel, and bladder function are within normal limits.
+
+#### Current Medications:
+- Amlopidine (Norvasc) 5 mg daily
+- Gabapentin (Neurontin) 300 mg three times daily
+- Acetaminophen (Tylenol) 500 mg as needed for pain or temperature >38.5°C
+- Blood pressure monitor
+- Cetirizine (Zyrtec) 10 mg daily as needed
+- Cyclobenzaprine (Flexeril) 5 mg every 8 hours as needed for muscle spasms
+- Ferrous sulfate 325 mg daily with breakfast
+- Heating pads three times daily
+- Lidocaine (Xylocaine) 5% ointment as needed for pain
+- Naproxen (Naprosyn) 50 500 mg twice daily with meals
+
+#### Treatment Changes:
+- Prescription for tamoxifen to be held until after radiation oncology assessment.
+
+#### Treatment Goals:
+- Decrease risk of local recurrence.
+- Prevent new breast cancer events (50% reduction).
+
+#### Response to Treatment:
+- Not yet initiated on tamoxifen.
+
+#### Plan:
+- Return to clinic 4-6 weeks after beginning tamoxifen to assess therapy tolerance.
+- Pending appointment with radiation oncologist to assess candidacy for radiation therapy.
+
+#### Other Notes:
+- Patient is in the perimenopausal period, experiencing symptoms such as hot flashes and night sweats.
+- Detailed discussion with the patient regarding the nature of DCIS and treatment options, including the use of tamoxifen and its side effects.
+
+--- STATS ---
+Time: 11.2s | Output: 1898 chars
+
+
+============================================================
+ROW 12 (coral_idx=31)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options and establish care for recently diagnosed early-stage breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Invasive ductal carcinoma with mixed ductal and lobular features.
+- **Stage:** Clinical Stage II.
+- **Metastasis:** No evidence of metastatic disease.
+
+#### Lab Results:
+- **WBC Count:** 5.6
+- **Hemoglobin:** 12.6
+- **Hematocrit:** 38.4
+- **Platelet Count:** 202
+- **Sodium:** 139
+- **Potassium:** 4.2
+- **Chloride:** 106
+- **Carbon Dioxide:** 25
+- **Urea Nitrogen:** 18
+- **Creatinine:** 0.76
+- **Glucose (non-fasting):** 120
+- **Calcium:** 9.2
+
+#### Clinical Findings:
+- Right breast mass (3 x 4 cm) in the lower outer quadrant.
+- No cervical, supraclavicular, or axillary lymphadenopathy.
+- No evidence of metastatic disease on PET/CT.
+- No significant abnormalities noted in other systems during physical exam.
+
+#### Current Medications:
+- Simvastatin (ZOCOR) 20 mg tablet.
+- Lorazepam (ATIVAN) 1 mg tablet (not currently taking).
+
+#### Treatment Changes:
+- Initiation of neoadjuvant chemotherapy with AC/T (doxorubicin + cyclophosphamide followed by paclitaxel).
+- Port placement planned for chemotherapy administration.
+- Consideration of cold caps for hair preservation.
+
+#### Treatment Goals:
+- Neoadjuvant chemotherapy to assess response and potentially enable breast-conserving surgery.
+- Curative intent treatment approach.
+
+#### Response to Treatment:
+- Not yet evaluated as treatment has not yet begun.
+
+#### Plan:
+- **Medications:** Start AC/T chemotherapy.
+- **Therapy:** Chemotherapy teaching session.
+- **Radiation:** Not immediately planned; may be considered post-surgery depending on final staging.
+- **Procedures:** Placement of a port for chemotherapy administration.
+- **Imaging:** Echocardiogram before starting chemotherapy.
+- **Labs:** Routine monitoring as needed.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** Contact with cold cap CRC.
+- **Follow-Up:** Return to clinic in 2 weeks.
+- **Advance Care Planning:** Not explicitly addressed.
+
+This summary provides a comprehensive overview of the patient's current clinical status, treatment plan, and future steps.
+
+--- STATS ---
+Time: 13.1s | Output: 2211 chars
+
+
+============================================================
+ROW 13 (coral_idx=32)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Discussion of treatment options and recent imaging findings for recently diagnosed hormone receptor positive/HER2 negative node-positive right breast cancer.
+- Planning of subsequent steps of treatment.
+- Concerns about time off from work during treatment.
+
+#### Cancer Diagnosis:
+- **Type:** Hormone receptor positive (ER+ 80-90%, PR+ 80-90%), HER2 negative (by IHC & FISH), invasive ductal carcinoma (IDC).
+- **Stage:** Node-positive (metastatic to axillary lymph nodes).
+- **Metastasis:** No distant metastasis detected, but hyperdense 0.7 cm falx lesion considered a potential dural metastasis initially, later confirmed as a meningioma.
+
+#### Lab Results:
+- **POCT Glucose:** 93 mg/dL (within normal range).
+
+#### Clinical Findings:
+- **General Appearance:** Alert, well-appearing, no distress.
+- **Physical Exam:** No palpable lymphadenopathy, no abnormalities noted in other systems.
+- **Imaging:**
+  - **MRI Brain:** 5 mm right parafalcine dural-based mass most likely a meningioma.
+  - **PET/CT:** Hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Other subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake.
+  - **Ultrasound:** Enlarged lymph node in the right axilla (7 x 7 x 7 mm).
+
+#### Current Medications:
+- Cholecalciferol (Vitamin D3)
+- Multivitamin
+- Synthroid (Levothyroxine 112 mcg)
+- Acetaminophen (not currently taking)
+- Docusate Sodium (not currently taking)
+- Hydrocodone-Acetaminophen (not currently taking)
+- Ibuprofen (not currently taking)
+- Lorazepam
+- Oxycodone (not currently taking)
+
+#### Treatment Changes:
+- Scheduled for partial mastectomy and axillary lymph node dissection (ALND) on 11/05/17.
+- Post-surgery, adjuvant chemotherapy and hormonal therapy will be considered based on the extent of nodal involvement and Mammaprint results.
+
+#### Treatment Goals:
+- Complete surgical removal of the tumor.
+- Adjuvant chemotherapy and hormonal therapy to reduce recurrence risk.
+- Preservation of fertility through egg harvesting.
+
+#### Response to Treatment:
+- Not yet applicable as treatment has not been initiated.
+
+#### Plan:
+- **Medications:** Continue current medications, adjust as necessary post-surgery.
+- **Therapy:** Consider adjuvant chemotherapy and hormonal therapy post-surgery.
+- **Radiation:** Radiation therapy to be discussed post-surgery.
+- **Procedures:** Partial mastectomy and ALND on 11/05/17.
+- **Imaging:** Follow-up MRI brain in 6 months.
+- **Labs:** Regular monitoring of blood counts and metabolic markers.
+- **Genetic Testing:** Not mentioned in the note.
+- **Referrals:** Coordination with fertility specialist for egg harvesting.
+- **Follow-Up:** Post-surgical follow-up to determine definitive treatment plan.
+- **Advance Care Planning:** Not specifically addressed in the note.
+
+This summary provides a comprehensive overview of the patient's clinical situation, treatment plan, and ongoing considerations.
+
+--- STATS ---
+Time: 18.4s | Output: 3009 chars
+
+
+============================================================
+ROW 14 (coral_idx=33)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options for newly diagnosed breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Invasive Ductal Carcinoma (IDC) of the right breast.
+- **Stage:** Not explicitly stated, but it is described as a 1 to 2.2 cm grade 1 IDC.
+- **Metastasis:** No evidence of metastasis mentioned.
+
+#### Lab Results:
+- **Syphilis Screen by RPR:** Nonreactive.
+- **HIV Ag/Ab Combo:** Negative.
+- **Estradiol:** To be tested during the visit.
+
+#### Clinical Findings:
+- **Breast Mass:** 2 cm mass in the right breast, 8 cm from the nipple.
+- **Pathology:** ER+ (>95%), PR (~90%), HER2 equivocal (IHC 2, FISH non-amplified), Ki-67 ~10%, Grade 1 IDC.
+- **Imaging:** 
+  - **MRI:** Performed on April 24, details not specified.
+  - **Mammaprint:** Low risk (+0.287).
+- **Physical Exam:** 
+  - General appearance: Alert, well-appearing, no distress.
+  - Eyes: Right eyelid stye.
+  - Breasts: 2 cm mass in the right breast.
+  - Other systems: Normal.
+
+#### Current Medications:
+- Ascorbic acid (Vitamin C)
+- B-complex with Vitamin C
+- Clonazepam (Klonopin) 1 mg nightly as needed for anxiety/insomnia
+- Kava root oral
+- Lactobacillus acidophilus (Probiotic)
+- Lamotrigine (Lamictal XR) 200 mg daily
+- Multivitamin
+- Multivitamin-Ca-Iron-Minerals
+- Tretinoin microspheres (Retin-A Micro Pump)
+- Turmeric oral
+- Zolpidem (Ambien) 5 mg nightly as needed for sleep
+
+#### Treatment Changes:
+- **Start goserelin (GnRH agonist)** today for ovarian suppression.
+- **Start letrozole** in about two weeks for aromatase inhibitor therapy.
+
+#### Treatment Goals:
+- Manage the HR+ breast cancer with endocrine therapy.
+- Consider ovarian suppression due to patient’s age (<35).
+- Avoid tamoxifen due to potential depressive effects and preference for an aromatase inhibitor (AI).
+
+#### Response to Treatment:
+- Not yet applicable as treatment has just started.
+
+#### Plan:
+- **Medications:** Start goserelin today, start letrozole in about two weeks.
+- **Surgery:** Discuss timing with Dr. ***** and Dr. ***** for bilateral mastectomy with reconstruction.
+- **Hot soaks:** For the stye.
+- **Labs:** Estradiol levels to be checked.
+- **Follow-Up:** One month, depending on plans for surgery.
+- **Advance Care Planning:** Not specifically addressed in the note.
+
+#### Additional Notes:
+- **Family History:** Includes breast cancer, Alzheimer's disease, and other conditions.
+- **Social History:** Drinking more wine recently (1-3 glasses 5x a week).
+- **Psychiatric History:** Bipolar II disorder managed with lamotrigine.
+- **Genetic Testing:** Negative result from Myriad Genetic Test.
+
+--- STATS ---
+Time: 16.2s | Output: 2639 chars
+
+
+============================================================
+ROW 15 (coral_idx=34)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options and establish care for recently diagnosed metastatic breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Hormone Receptor (HR)+ metastatic breast cancer.
+- **Stage:** Metastatic (MBC).
+- **Metastasis:** Involves lymph nodes (axillary, supraclavicular, and cervical).
+
+#### Lab Results:
+- **CBC:** Not specifically detailed in the note.
+- **Immunohistochemistry (IHC):**
+  - **ER:** Positive (>90%)
+  - **PR:** Positive (50%)
+  - **HER2:** Equivocal (IHC 2+, FISH pending)
+
+#### Clinical Findings:
+- **History of Present Illness (HPI):** Initial presentation with a right lateral neck lump, followed by increasing lymph node sizes and pain.
+- **Physical Examination:**
+  - **Lymph Nodes:** Enlarged and firm lymph nodes in the right anterior and superior cervical chain and right lateral neck.
+  - **Breasts:** No masses bilaterally.
+  - **General:** ECOG 0, no significant constitutional symptoms.
+  
+#### Current Medications:
+- **buPROPion (WELLBUTRIN SR)**: 150 mg BID
+- **cetirizine (ZYRTEC)**: 10 mg daily
+- **docusate sodium (COLACE)**: 250 mg BID as needed
+- **hydrOXYzine (ATARAX)**: 10 mg TID as needed
+- **ibuprofen (ADVIL, MOTRIN)**: 600 mg q6h as needed
+- **iron 18 mg TAB**: As directed
+- **labetalol (NORMODYNE)**: 100 mg BID
+- **PNV NO.122/IRON/FOLIC ACID**: As directed
+- **triamcinolone (KENALOG)**: 0.1% cream BID
+- **UNABLE TO FIND Med Name: Fluoxetine**
+- **zolpidem (AMBIEN)**: 5 mg nightly as needed
+
+#### Treatment Changes:
+- **Pending:** Core biopsy of suspicious breast tissue and FNA of cervical lymph node.
+- **Future:** Genetic testing, follow-up on HER2 FISH result.
+
+#### Treatment Goals:
+- Confirm the presence of primary breast cancer and metastatic disease.
+- Initiate appropriate treatment based on HER2 status (anti-estrogen therapy if HER2 negative, chemotherapy if HER2 positive).
+
+#### Response to Treatment:
+- Not applicable as treatment has not yet been initiated.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Pending confirmation of diagnosis, start anti-estrogen therapy or chemotherapy based on HER2 status.
+- **Radiation:** Not specified.
+- **Procedures:** US-guided biopsy of breast mass, cervical LN FNA.
+- **Imaging:** Follow-up imaging as needed.
+- **Labs:** Monitor blood counts and other relevant labs.
+- **Genetic Testing:** Recommended.
+- **Referrals:** Oncology specialist.
+- **Follow-Up:** Return to clinic once additional testing is completed.
+- **Advance Care Planning:** Discussed with the patient regarding prognosis and treatment options.
+
+#### Summary:
+The patient is a 33-year-old premenopausal female with a recent diagnosis of HR+ metastatic breast cancer involving lymph nodes. Further work-up is required to confirm the extent of disease and guide treatment decisions. The patient is currently being monitored and will undergo additional testing before initiating definitive treatment.
+
+--- STATS ---
+Time: 18.9s | Output: 2987 chars
+
+
+============================================================
+ROW 16 (coral_idx=35)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation regarding treatment of newly diagnosed breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Invasive lobular carcinoma, grade 2-3.
+- **Stage:** Clinical stage III.
+- **Metastasis:** Evidence of local regional node involvement (left axillary and left subpectoral nodes). No distant metastatic disease detected.
+
+#### Lab Results:
+- Core biopsy results: ER positive (96%), PR positive (35%), HER-2/neu negative (0%).
+- PET/CT scan: Hypermetabolic enhancing left breast mass with associated left axillary and left subpectoral nodes.
+- Ultrasound and fine needle aspiration of thyroid nodule: Benign thyroid nodule, colloid type.
+
+#### Clinical Findings:
+- Physical examination: 5 x 5.5 cm mass in left breast extending under the nipple, originating at 12 o'clock.
+- Left axillary lymph node: 1 cm palpable.
+- Right breast: No masses, 0.5 cm soft and mobile right axillary lymph node.
+- General health: Healthy appearing woman in no acute distress.
+
+#### Current Medications:
+- Hydrochlorothiazide, potassium, and Exforge for hypertension.
+
+#### Treatment Changes:
+- Recommended neoadjuvant hormone therapy to shrink the tumor before surgery.
+- Discussed participation in a clinical trial with letrozole and/or bevacizumab.
+- Patient decided against neoadjuvant treatment and opted for upfront mastectomy.
+
+#### Treatment Goals:
+- Shrink the tumor before surgery (initial recommendation).
+- Consider surgical intervention followed by adjuvant treatment options.
+
+#### Response to Treatment:
+- Not yet evaluated as the patient chose upfront surgery over neoadjuvant therapy.
+
+#### Plan:
+- Refer patient back to surgeon for consideration of mastectomy.
+- Post-surgery, meet to discuss adjuvant treatment options based on pathology results.
+- Pending fine needle aspiration of left axillary lymph node.
+- Continue monitoring and follow-up after surgery.
+
+#### Imaging:
+- MRI of bilateral breasts.
+- PET/CT scan.
+- Ultrasound of left axillary lymph node.
+
+#### Labs:
+- Core biopsy results reviewed.
+
+#### Genetic Testing:
+- Not mentioned in the note.
+
+#### Referrals:
+- Referred back to surgeon for consideration of mastectomy.
+
+#### Follow-Up:
+- Post-surgery meeting to discuss adjuvant treatment options.
+- Continued monitoring and follow-up after surgery.
+
+#### Advance Care Planning:
+- Not specifically addressed in the note.
+
+--- STATS ---
+Time: 8.7s | Output: 2398 chars
+
+
+============================================================
+ROW 17 (coral_idx=36)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation to discuss treatment options for newly diagnosed breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Infiltrating Ductal Carcinoma (IDC)
+- **Stage:** Stage IIb (T2N1M0)
+- **Grade:** Grade 2
+- **Hormone Receptor Status:** ER+ (>95%), PR+ (25%)
+- **HER2 Status:** Negative (IHC 1+, FISH not amplified)
+- **Ki-67:** >30%
+- **Metastasis:** None (M0)
+
+#### Lab Results:
+- No specific lab results mentioned in the note.
+
+#### Clinical Findings:
+- **History:** Found a left breast mass measuring 2cm after feeling a pinch.
+- **Imaging:**
+  - **MRI (05/06/2017):** Postoperative changes with seroma and irregular peripheral enhancement suspicious for residual disease.
+  - **MRI (05/20/2017):** Biopsy of a 4mm focus of enhancement revealed proliferative fibrocystic changes without atypia.
+- **Physical Exam:** Left breast with periareolar scar and distortion; no masses in the right breast.
+
+#### Current Medications:
+- Cholecalciferol, Vitamin D3 (2,000 units)
+
+#### Treatment Changes:
+- Recommended adjuvant chemotherapy with TC x 6 (docetaxel and cyclophosphamide).
+- Port placement for chemotherapy administration.
+- Radiation therapy to manage the positive deep margin and multifocal disease.
+- Scalp cooling to minimize hair loss.
+
+#### Treatment Goals:
+- To reduce the risk of distant recurrence.
+- To manage local disease with radiation therapy.
+- To preserve quality of life and cosmesis.
+
+#### Response to Treatment:
+- Not yet assessed as treatment has not started.
+
+#### Plan:
+- **Medications:** TC x 6 with ONPRO support.
+- **Therapy:** Chemotherapy starting 07/09/2017 with dignicap (scalp cooling).
+- **Radiation:** To be determined after healing.
+- **Procedures:** Port placement for chemotherapy administration.
+- **Imaging:** PET/CT for staging.
+- **Labs:** Baseline echocardiogram.
+- **Genetic Testing:** Review of BRCA testing status.
+- **Referrals:** Chemotherapy teaching, potential referral to plastic surgeon for cosmetic concerns.
+- **Follow-Up:** Regular follow-ups to monitor response and manage side effects.
+- **Advance Care Planning:** Discussed treatment options, side effects, and nutritional support in detail.
+
+#### Additional Notes:
+- Patient is very upset about her diagnosis and need for treatment.
+- Concerns about cosmesis and hair loss.
+- Supportive family and friends nearby.
+- Ready and able to be educated about treatment options and instructions.
+
+--- STATS ---
+Time: 10.9s | Output: 2461 chars
+
+
+============================================================
+ROW 18 (coral_idx=37)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Discussion of treatment options for recently diagnosed left breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Left breast invasive ductal carcinoma (IDC).
+- **Stage:** Clinical T2NX.
+- **Metastasis:** No evidence of distant metastasis; however, there are suspicious lymph nodes in the left axilla.
+
+#### Lab Results:
+- **Genetic Testing:** Mutation in the ATM gene (c1109dup (p.Tyr370*) heterozygous).
+- **Pathology:** Grade 2 invasive ductal carcinoma, ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%.
+- **Lymph Node Biopsy:** Initial FNA was benign; subsequent FNA also showed no cancer.
+- **Mammaprint:** High Risk (-0.622).
+
+#### Clinical Findings:
+- **Breast Mass:** Irregularly marginated mass with internal vascularity in the left breast, 4-5 cm from the nipple.
+- **Lymph Nodes:** Multiple lymph nodes in the left axilla, with the largest measuring 1.2 x 1.5 x 0.5 cm.
+- **MRI Findings:** 2.5 cm x 2.2 cm x 2.3 cm oval mass with irregular margins and heterogeneous enhancement in the lower outer left breast. At least two abnormal lymph nodes in the left axilla level I and I/II with cortical thickening.
+
+#### Current Medications:
+- Alprazolam (Xanax) 0.25 mg tablet.
+- Ibuprofen (Advil) 200 mg tablet.
+- Trazodone HCl (Trazodone Oral).
+
+#### Treatment Changes:
+- Recommended mastectomy over breast-conserving surgery due to ATM mutation.
+- Chemotherapy will be considered post-surgery depending on nodal status.
+- Adjuvant hormonal therapy will be initiated post-surgery.
+
+#### Treatment Goals:
+- Remove the primary tumor via mastectomy.
+- Determine nodal status to guide chemotherapy regimen.
+- Initiate adjuvant hormonal therapy post-surgery.
+
+#### Response to Treatment:
+- Not yet applicable as treatment has not been initiated.
+
+#### Plan:
+- **Medications:** Continue current medications.
+- **Therapy:** Mastectomy planned.
+- **Radiation:** Not recommended due to ATM mutation.
+- **Procedures:** Repeat FNA of left axillary lymph nodes.
+- **Imaging:** MRI findings reviewed.
+- **Labs:** Genetic testing results reviewed.
+- **Genetic Testing:** ATM mutation already identified.
+- **Referrals:** Consultation with radiation oncology and surgical oncology.
+- **Follow-Up:** Detailed discussion regarding choice of hormonal therapy and chemotherapy after surgery.
+- **Advance Care Planning:** Discussed treatment options, side effects, and clinical trials.
+
+This summary provides a comprehensive overview of the patient's clinical situation, treatment plan, and future considerations.
+
+--- STATS ---
+Time: 10.7s | Output: 2586 chars
+
+
+============================================================
+ROW 19 (coral_idx=38)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Follow-up visit for management of breast cancer and associated symptoms.
+
+#### Cancer Diagnosis:
+- **Type:** ER+/PR-/HER2- left breast cancer, invasive ductal carcinoma (IDC).
+- **Stage:** Clinical stage 2-3.
+- **Metastasis:** No distant metastases detected.
+
+#### Lab Results:
+- No specific lab results mentioned in the note.
+
+#### Clinical Findings:
+- **Physical Exam:** 
+  - Alert, well appearing, and in no distress.
+  - No suspicious masses, nodules, or rashes bilaterally.
+  - No significant adenopathy.
+  - Clear chest, normal heart sounds, no murmurs.
+  - Soft abdomen, no masses or organomegaly.
+  - Full range of motion in the back, no tenderness.
+  - Normal neurological status.
+  - No joint tenderness, deformity, or swelling.
+  - Peripheral pulses normal, no pedal edema.
+  - Normal skin coloration and turgor.
+- **Symptoms:**
+  - Minimal joint aches.
+  - Mild hot flashes and insomnia.
+  - Bone pain.
+  - Vaginal dryness.
+  - No new or concerning bone pain, shortness of breath, cough, abdominal pain, nausea/vomiting, headache, or visual changes.
+
+#### Current Medications:
+- Exemestane (Aromasin) 25 mg daily.
+- Amoxicillin (Amoxil) 875 mg tablet twice daily until gone.
+- Amoxicillin-clavulanate (Augmentin) 875-125 mg tablet.
+- Benzonatate (Tessalon) 200 mg capsule.
+- Bupropion (Wellbutrin XL) 150 mg 24-hour tablet.
+- Doxycycline (Vibra-Tabs) 100 mg tablet twice daily for 10 days.
+- Hydrocodone-acetaminophen (Norco) 5-325 mg tablet as needed for pain.
+- Ibuprofen 800 mg tablet every 8 hours as needed.
+- Metronidazole (Metrogel) 0.75% gel applied twice daily.
+- Ondansetron (Zofran-ODT) 4 mg rapid dissolve tablet as needed for nausea/vomiting.
+
+#### Treatment Changes:
+- Switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.
+
+#### Treatment Goals:
+- Continue exemestane 25 mg daily for at least 5 years.
+- Ensure ovarian suppression by checking estradiol levels.
+- Consider adding bisphosphonates if osteopenia is detected on DEXA scans.
+- Evaluate the possibility of bilateral salpingo-oophorectomy (BSO).
+
+#### Response to Treatment:
+- Improved depression/anxiety symptoms.
+- Tolerating exemestane better than letrozole.
+
+#### Plan:
+- **Medications:** Continue exemestane 25 mg daily.
+- **Therapy:** Follow up with local psychologist for ongoing support as needed.
+- **Imaging:** No imaging required given bilateral mastectomies.
+- **Labs:** Check estradiol level to ensure ovarian suppression.
+- **Procedures:** Consider DEXA scan now and every 2 years.
+- **Genetic Testing:** Not mentioned.
+- **Referrals:** Follow up with local psychologist.
+- **Follow-Up:** Schedule follow-up in 6 months or sooner if new or worsening symptoms arise.
+- **Advance Care Planning:** Not specifically addressed in the note.
+
+#### Additional Notes:
+- Patient recently graduated from a master’s program and has more time to exercise.
+- Patient has a history of polycystic ovaries, endometriosis, and postoperative nausea and vomiting (PONV).
+- Patient is allergic to latex, honey bee venom, penicillins, and codeine.
+
+--- STATS ---
+Time: 14.5s | Output: 3130 chars
+
+
+============================================================
+ROW 20 (coral_idx=39)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Return visit to the breast cancer center for follow-up of bilateral breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Bilateral breast cancer
+  - Right breast: ER+, PR+, HER2 positive, Ki67 40%
+  - Left breast: ER+, PR+, HER2 0, e-cadherin +
+- **Stage:** Early stage breast cancer
+- **Metastasis:** Liver and lung nodules noted, but no confirmed metastatic disease.
+
+#### Lab Results:
+- Not detailed in the note provided.
+
+#### Clinical Findings:
+- **Right Breast:** 12 x 9 cm mass, slightly red, no longer mobile.
+- **Left Breast:** 10 x 6 cm mass, slightly mobile.
+- **Lymph Nodes:** No cervical, supraclavicular, axillary, or inguinal adenopathy noted.
+- **Other Findings:** No significant constitutional symptoms, normal vital signs, no significant abnormalities on physical exam except for the breast masses.
+
+#### Current Medications:
+- Not specified in the note provided.
+
+#### Treatment Changes:
+- **Adjuvant Therapy:** Candidate for HER2-targeting therapy with a chemotherapy backbone.
+  - Options include:
+    - Anthracycline followed by taxane for 4 cycles each.
+    - Six cycles of docetaxel and carboplatin (preferred).
+  - Pertuzumab and Trastuzumab for 1 year.
+  - Hormonal therapy to start after completion of chemotherapy and radiation therapy.
+
+#### Treatment Goals:
+- To manage and treat bilateral breast cancer effectively.
+- To prevent recurrence and manage metastatic potential.
+
+#### Response to Treatment:
+- Not yet evaluated as the patient is starting treatment.
+
+#### Plan:
+- **Medications:** Initiate chemotherapy regimen post-surgery.
+- **Therapy:** HER2-targeting therapy with chemotherapy backbone.
+- **Radiation:** Post-surgery radiation to both breasts.
+- **Procedures:** Possible insertion of a port-a-cath, echocardiogram.
+- **Imaging:** Follow-up PET/CT scan.
+- **Labs:** Appropriate laboratory and staging studies.
+- **Genetic Testing:** Pending germ line panel.
+- **Referrals:** None specified.
+- **Follow-Up:** After 2 cycles of chemotherapy, further imaging and assessments.
+- **Advance Care Planning:** Discussed risks, side effects, and length of therapy.
+
+#### Additional Notes:
+- The patient and family were counseled regarding the risk of recurrence, treatment side effects, and length of therapy.
+- The patient agreed to the proposed care plan.
+- Time spent face-to-face with the patient was over 80 minutes, with more than half dedicated to counseling.
+
+--- STATS ---
+Time: 9.3s | Output: 2465 chars
+
+
