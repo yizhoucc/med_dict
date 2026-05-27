@@ -1,0 +1,1139 @@
+PIPELINE vs JSON BASELINE — FIELD-BY-FIELD COMPARISON
+======================================================================
+Both use same model (Qwen2.5-32B-Instruct-AWQ), same JSON schema.
+Pipeline: 19 separate prompts + 5 verification gates + 40+ POST hooks
+Baseline: 1 prompt with full schema → one-shot generation, no post-processing
+
+Tags: [PL-WIN] [BL-WIN] [PL-ERR] [BL-ERR] [SAME]
+======================================================================
+
+######################################################################
+  BREAST — 20 SAMPLES
+######################################################################
+
+============================================================
+ROW 1
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma
+  BL: Invasive ductal carcinoma, SBR grade 3, triple negative (ER negative, PR negative, HER2 negative)
+  [PL-WIN] More specific receptor status
+  Metastasis: PL=Not sure | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: palliative
+  [DIFF] Both valid but different: PL=curative vs BL=palliative
+  BL goals_description: Discussing treatment options considering the patient's multiple medical comorbidities and the nature of the triple negative breast cancer.
+
+Genetic_Testing_Results:
+  PL: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins; ER negative, PR negative, HER2 positive (IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5), and variable Ki67 ex...
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+============================================================
+ROW 2
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 1 infiltrating ductal carcinoma
+  BL: Infiltrating ductal carcinoma, hormone-receptor positive (estrogen-receptor positive, progesterone-receptor negative)
+  [PL-WIN] More specific receptor status
+  Stage: PL=Originally Stage IIA, now metastatic (Stage IV) | BL=Not specified in the note
+  Metastasis: PL=Yes, to the right anterior chest wall, right axillary lymph node | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: hormone therapy
+  [PL-WIN] Pipeline uses standard classification; baseline says: 'hormone therapy'
+  BL goals_description: To treat the local regional recurrence of a strongly hormone-receptor positive indolent breast cancer.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note.
+  [SAME] Neither has genetic results
+
+Response_Assessment:
+  PL: The patient has not yet started on the aromatase inhibitor therapy as of the latest visit on January 09. The patient is currently on zoledronic acid due to osteoporosis. No specific evidence of curren...
+  BL: Not assessed in this note.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 3
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER-/PR-/HER2- (TNBC) spindle cell metaplastic carcinoma
+  BL: Invasive spindle cell metaplastic carcinoma breast cancer, ER neg 0%, PR neg 0%, Her2 FISH neg (ratio 1.2)
+  [PL-WIN] More specific receptor status
+  Stage: PL=Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of... | BL=Locally advanced, multifocal
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: curative
+  [SAME]
+  PL goals_description: We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent.
+  BL goals_description: We can treat her with curative intent.
+
+Genetic_Testing_Results:
+  PL: Genetics at ***** - 126 InVitae panel sent, results not reported in note. MammaPrint is pending. No other genetic testing results in note.
+  BL: No genetic testing results in note.
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Genetics=Will discuss further with her when we have the results of th...
+  BL: (none)
+  [PL-WIN] Pipeline captures more referrals
+
+============================================================
+ROW 4
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma
+  BL: Right breast invasive ductal carcinoma (IDC), grade 3, ER 1%, PR negative, Her2 0IHC/FISH negative
+  [PL-WIN] More specific receptor status
+  Stage: PL=Originally Stage IIIC, now metastatic (Stage IV) | BL=Not specified in note
+  Metastasis: PL=Yes, to lymph nodes | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: curative
+  [DIFF] Both valid but different: PL=palliative vs BL=curative
+  BL goals_description: Plan to start chemotherapy with taxol.
+
+Genetic_Testing_Results:
+  PL: BRCA1 genetic carrier with a history of ovarian cancer and triple negative right breast IDC. No other specific genetic or molecular testing results mentioned.
+  BL: BRCA1 genetic carrier.
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: Not yet on treatment — no response to assess.
+  BL: The cancer has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm.
+  [SAME]
+
+============================================================
+ROW 5
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Left breast: ER+/PR+/HER2- grade 3 invasive ductal carcinoma with high-grade DCIS component; Right breast: ER+/PR+/HER2- grade 1 invasive ductal carcinoma
+  BL: Bilateral breast cancer, left breast: Grade 3 IDC with ER+ 99%, PR+ >95%, HER2-; right breast: Grade 1 IDC with ER+ 99%, PR+ 90%, HER2-
+  [SAME]
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: adjuvant
+  [SAME]
+  BL goals_description: Adjuvant chemotherapy and anti-estrogen therapy to reduce distant recurrence risk and manage hormone receptor-positive breast cancer.
+
+Genetic_Testing_Results:
+  PL: Left breast: 0.75 cm grade 3 IDC with ER+ 100%, PR+ 75%, HER2- (IHC 1+; FISH ratio 1.1); Right breast: 0.6 cm grade 1 IDC with ER+ 100%, PR+ 75%, HER2+ (IHC 2+; FISH ratio 2.0 with HER2 copy # per cel...
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+============================================================
+ROW 6
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER-neg, PR neg, HER2 3+ (HER2+) grade 2 invasive ductal carcinoma
+  BL: HR-negative HER2+ breast cancer
+  [PL-WIN] More specific receptor status
+  Stage: PL=Originally Stage [X], now metastatic (Stage IV) | BL=Not definitively staged yet, suspected Stage IV due to bone metastasis.
+  Metastasis: PL=Yes, to bone (left iliac bone and bilateral sacral ala), possibly to the left carotid artery bifurcation (carotid body tumor needs further evaluation) | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab.
+
+Genetic_Testing_Results:
+  PL: HR-negative HER2+ breast cancer; HER2 3+, FISH ratio 13, Ki67 10-15%
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Response_Assessment:
+  PL: Not yet on treatment — no response to assess.
+  BL: Anticipated excellent response and possible long-term disease control.
+  [SAME]
+
+============================================================
+ROW 7
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER-/PR-/HER2- triple negative invasive ductal carcinoma with metastatic recurrence to liver and nodes
+  BL: Metastatic ER negative, HER2 negative breast cancer
+  [PL-WIN] More specific receptor status
+  Stage: PL=Originally Stage IIB, now metastatic (Stage IV) | BL=Not specified
+  Metastasis: PL=Yes, to liver and nodes | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: Palliative
+  [SAME]
+  BL goals_description: Continue therapy until progression or intolerable side effects
+
+Genetic_Testing_Results:
+  PL: Germline mutation testing positive for MSH2 c.1906G>C (p.Ala636Pro). Genetic testing 05/19/18: Negative for BRCA 1/2, ATM, CDH1, CHEK2, PALB2, PTEN, STK11, TP53.
+  BL: Positive for MSH2 mutation
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Specialty=Pain management
+  [BL-WIN] Baseline captures more referrals
+
+Response_Assessment:
+  PL: The cancer is showing clinical or radiological evidence of progression despite treatment with nab paclitaxel and pembrolizumab. Imaging studies reviewed today show a hypermetabolic caudate lobe lesion...
+  BL: Evidence of progression
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 8
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS
+  BL: Invasive ductal carcinoma (IDC) of the left breast, multifocal, SBR grade 2 and 1, ER+/PR+/HER- with FISH ratio 1.1, high-risk mammaprint
+  [SAME]
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: adjuvant
+  [SAME]
+  BL goals_description: To pursue treatment with AC with paclitaxel due to high-risk mammaprint and positive LN involvement.
+
+Genetic_Testing_Results:
+  PL: Mammaprint: High-Risk; HER2 Gene Amplification Testing by FISH: Negative: Tumor cells showing no amplification of HER2 (ERBB2); Avg. Ratio of HER2: Cent17: 1.1
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Genetics=referral placed to Genetics
+  BL: Genetics=Referral placed to Genetics
+  [SAME]
+
+============================================================
+ROW 9
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence (left cervical LN)
+  BL: HR+/HER2- grade 2 IDC with micropapillary features
+  [PL-WIN] More specific receptor status
+  Stage: PL=Originally Stage III (T3N2), now metastatic (Stage IV) | BL=Stage III (T3N2)
+  Metastasis: PL=Yes, to left cervical LN | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life witho...
+  BL goals_description: Primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Response_Assessment:
+  PL: The patient is not yet on treatment for the current recurrence. The last treatment details indicate she was previously on leuprolide plus tamoxifen, which was discontinued after 1-2 years due to loss ...
+  BL: Unresectable recurrence, possibly considered metastatic in context of a level Vb LN.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 10
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2 invasive ductal carcinoma
+  BL: Grade 2 Invasive Ductal Carcinoma (IDC), ER >95%, PR 25%, HER2 negative
+  [PL-WIN] More specific receptor status
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: neoadjuvant chemotherapy
+  [PL-WIN] Pipeline uses standard classification; baseline says: 'neoadjuvant chemotherapy'
+  BL goals_description: To reduce tumor size and prepare for surgery.
+
+Genetic_Testing_Results:
+  PL: Genetic testing sent on 04/11/17; results not specified in note. MammaPrint expected on Thursday of the same week but results not reported in note.
+  BL: Genetic testing sent, results pending
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Nutrition=Discussed nutrition in detail; Specialty=Cold cap coordinator to call
+  [BL-WIN] Baseline captures more referrals
+
+============================================================
+ROW 11
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary patterns
+  BL: Left breast DCIS, intermediate nuclear grade, cribriform and micropapillary patterns, ER positive, PR pending
+  [PL-WIN] More specific receptor status
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: risk reduction
+  BL: risk reduction
+  [SAME]
+  BL goals_description: Decrease risk of local recurrence and new breast cancer events.
+
+Genetic_Testing_Results:
+  PL: Left breast, stereotactic core needle biopsy: Ductal carcinoma in situ, intermediate nuclear grade, cribriform and micropapillary patterns, with focal necrosis; >90% estrogen receptor positive, Proges...
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Specialty=Rad Onc consult
+  BL: Specialty=Radiation oncology
+  [SAME]
+
+============================================================
+ROW 12
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features
+  BL: Invasive ductal carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%
+  [PL-WIN] Pipeline includes grade
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: curative
+  [SAME]
+  PL goals_description: We can therefore treat her with curative intent.
+  BL goals_description: The patient understands that her treatment will include chemotherapy, surgery, hormonal therapy, and possibly radiation.
+
+Genetic_Testing_Results:
+  PL: US-guided core biopsy of right breast mass: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Others=Cold cap CRC referral
+  BL: Others=CRC for cold cap details
+  [SAME]
+
+============================================================
+ROW 13
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- invasive ductal carcinoma
+  BL: Invasive ductal carcinoma, ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, Ki67% 20-30%
+  [SAME]
+  Stage: PL=pT2N1 (node positive) | BL=Not specified in AJCC stage, but node positive
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: adjuvant
+  [DIFF] Both valid but different: PL=curative vs BL=adjuvant
+  BL goals_description: Adjuvant chemotherapy and hormonal therapy post-surgery
+
+Genetic_Testing_Results:
+  PL: Invasive Ductal Carcinoma (ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative; Ki67% 20-30%). MammaPrint Low Risk profile.
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+============================================================
+ROW 14
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2 equivocal (IHC 2+, FISH non-amplified) grade 1 invasive ductal carcinoma
+  BL: Invasive ductal carcinoma (IDC) of the right breast, ER+, PR+, HER2 equivocal
+  [PL-WIN] Pipeline includes grade
+  Stage: PL=Not staged in note | BL=Not specified
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: Curative
+  [SAME]
+  BL goals_description: Discussing surgical options and endocrine therapy.
+
+Genetic_Testing_Results:
+  PL: Myriad Genetic Result: Negative; Mammaprint (Agendia): Low risk: +0.287; Pathology report from 03/30/19 shows ER+/PR+ and HER2 equivocal IDC of the right breast.
+  BL: Myriad Genetic Result: Negative
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Specialty=Dr. ***** for surgery timing discussion
+  [BL-WIN] Baseline captures more referrals
+
+============================================================
+ROW 15
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary
+  BL: HR+ metastatic breast cancer
+  [PL-WIN] More specific receptor status
+  Stage: PL=Metastatic (Stage IV) | BL=Not specified
+  Metastasis: PL=Yes, to cervical lymph nodes and possibly to the right breast | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: curative
+  [DIFF] Both valid but different: PL=palliative vs BL=curative
+  BL goals_description: Discussing treatment options and establishing care for HR+ metastatic breast cancer.
+
+Genetic_Testing_Results:
+  PL: Metastatic adenocarcinoma, consistent with breast primary; ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending); no other specific genetic testing results mentioned.
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: (none)
+  BL: Genetics=Genetics referral
+  [BL-WIN] Baseline captures more referrals
+
+============================================================
+ROW 16
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2-3 invasive lobular carcinoma
+  BL: Invasive lobular carcinoma, grade 2-3, ER positive (96%), PR positive (35%), HER-2/neu negative (0%)
+  [PL-WIN] More specific receptor status
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: Curative
+  [SAME]
+  BL goals_description: Discussing neoadjuvant hormone therapy to shrink the tumor before surgery, but patient prefers upfront mastectomy.
+
+Genetic_Testing_Results:
+  PL: Invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm. This lobular cancer was ER positive with 96% of the cells staining, PR positive with 35% of cells staining and HER-2/neu negative with...
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: (none)
+  BL: Specialty=Referral to surgeon for consideration of mastectomy
+  [BL-WIN] Baseline captures more referrals
+
+============================================================
+ROW 17
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2- grade 2 invasive ductal carcinoma
+  BL: Left breast cancer, Grade 2 IDC (ER positive/PR positive/Her-2/neu negative)
+  [PL-WIN] More specific receptor status
+  Stage: PL=Stage IIb (T2N1M0) | BL=IIb (T2N1M0)
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: adjuvant
+  [SAME]
+  BL goals_description: Adjuvant chemotherapy to reduce the risk of recurrence.
+
+Genetic_Testing_Results:
+  PL: BRCA test negative (Ambry - not sure whether panel or only BRCA); HER2 by IHC 1+, FISH not amplified; no pathogenic variants found.
+  BL: BRCA test negative, unsure if panel or only BRCA tested.
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: Specialty=Radiation oncology consult
+  BL: Specialty=Referral for chemotherapy teaching, port placement, and poss...
+  [SAME]
+
+============================================================
+ROW 18
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR-/HER2- grade 2 invasive ductal carcinoma
+  BL: Invasive ductal carcinoma, ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%
+  [PL-WIN] More specific receptor status
+  Stage: PL=Not staged in note | BL=Clinical T2NX
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: Curative
+  [SAME]
+  BL goals_description: Recommendation for mastectomy and consideration of chemotherapy and adjuvant hormonal therapy.
+
+Genetic_Testing_Results:
+  PL: Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor genomic sequencing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.62...
+  BL: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous)
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: Specialty=Radiation oncology consult
+  BL: Specialty=Radiation Oncology, Surgery
+  [SAME]
+
+============================================================
+ROW 19
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR-/HER2- grade 2 invasive ductal carcinoma with extensive DCIS
+  BL: ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC
+  [PL-WIN] Pipeline includes grade
+  Stage: PL=Clinical stage 2-3 | BL=Not specified in note
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: adjuvant
+  [SAME]
+  BL goals_description: Continue exemestane 25mg daily for at least 5 years.
+
+Genetic_Testing_Results:
+  PL: Mammaprint - low risk IDC; ER 61-70%, PR negative, Ki-67 15-20%, HER2 negative by FISH; ER 41-50%, PR 1-10%, Ki-67 30-40%, HER2 negative by FISH; no pathogenic variants found in germline testing.
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Others=Social work referral
+  BL: Specialty=Follow up with local psych for ongoing support as needed.
+  [SAME]
+
+Response_Assessment:
+  PL: Patient is NED on physical exam. Continue exemestane 25mg daily. Recommend checking estradiol level to ensure ovarian suppression. Needs DEXA scan now and every 2 years. Considering bilateral salpingo...
+  BL: NED on exam
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 20
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: ER+/PR+/HER2+ invasive ductal carcinoma with some lobular differentiation
+  BL: Bilateral breast cancer, ER+, PR+, HER2 positive on the right, and HER2 negative on the left
+  [SAME]
+  Stage: PL=Not staged in note | BL=Not specified
+  Metastasis: PL=Yes, to liver and lungs | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: Adjuvant therapy
+  [PL-WIN] Pipeline uses standard classification; baseline says: 'Adjuvant therapy'
+  BL goals_description: HER2 targeting approach with a chemotherapy backbone, including options such as an anthracycline followed by a taxane or six cycles of docetaxel and c...
+
+Genetic_Testing_Results:
+  PL: Germ line panel pending: *****. Bilateral breast cancer. Right breast: ER+, PR+, HER2 positive Ki67 40%. Left breast: e-cadherin +, ER+, PR+, HER2 0.
+  BL: Germ line panel pending
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: Not yet on treatment — no response to assess.
+  BL: Not yet assessed, awaiting surgery and further preparatory studies
+  [SAME]
+
+######################################################################
+  PDAC — 20 SAMPLES
+######################################################################
+
+============================================================
+ROW 1
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Locally advanced adenocarcinoma of the pancreas
+  BL: Locally advanced adenocarcinoma of the pancreas
+  [SAME]
+  Stage: PL=Locally advanced (Stage III) | BL=Not specified
+  Metastasis: PL=Not sure | BL=No
+
+Treatment_Goals.goals_of_treatment:
+  PL: surveillance
+  BL: surveillance
+  [SAME]
+  BL goals_description: Given the sites of disease involvement and his lack of symptoms, it would be safe to put him on surveillance.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Referral:
+  PL: Others=psycho oncology
+  BL: Specialty=Psycho-oncology referral
+  [SAME]
+
+Response_Assessment:
+  PL: The cancer is showing stable to minimally increased size of the pancreatic mass, as indicated by the CT scan on 06/10/2016. Additionally, there are new nodules measuring up to 7 mm in the lingula and ...
+  BL: Possible progression of disease, but stable clinically.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 2
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Originally Stage IIB, now metastatic (Stage IV) | BL=Not specified in note
+  Metastasis: PL=Yes, to liver | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Continue second-line therapy with Gemcitabine + Abraxane to manage symptoms and control disease progression.
+
+Genetic_Testing_Results:
+  PL: Patient is a SPINK1 carrier. He has variant of unknown significance in FANCG and NF2.
+  BL: Patient is a SPINK1 carrier with variant of unknown significance in FANCG and NF2.
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Genetics=Family members to be screened for SPINK1 mutation.
+  [BL-WIN] Baseline captures more referrals
+
+Response_Assessment:
+  PL: The cancer is showing signs of disease progression. This is evidenced by the CT CAP on 11/24/18 indicating disease progression and the rise in CA 19-9 levels from 789 on 10/03/18 to 1,625 on 11/24/18....
+  BL: Mixed response with initial improvement followed by disease progression.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 3
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic ductal adenocarcinoma with metastatic disease
+  BL: Metastatic Pancreatic Ductal Adenocarcinoma (PDAC)
+  [SAME]
+  Stage: PL=Metastatic (Stage IV) | BL=Not specified in note
+  Metastasis: PL=Yes, peritoneum | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Prioritize quality of life considerations and consider transitioning to home hospice.
+
+Genetic_Testing_Results:
+  PL: Patient's tumor harbors KRAS (G12D) and p53 mutations.
+  BL: Tumor harbors KRAS (G12D) and p53 mutations.
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: Specialty=We could also consider RT to his pancreatic primary, which w...
+  BL: Specialty=Consider clinical trials, particularly the combination of tr...
+  [SAME]
+
+Response_Assessment:
+  PL: The cancer is showing stable disease with slightly decreasing hepatic lesions and stable to slightly increased peritoneal implants. The pancreatic tumor in the tail of the pancreas measures 4.7 x 5.6 ...
+  BL: Some evidence of continued clinical/symptomatic decline despite ongoing treatment.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 4
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Adenocarcinoma of the pancreas
+  [SAME]
+  Stage: PL=Locally advanced; now metastatic (Stage IV) | BL=Extent of disease uncertain, initially thought to have locally advanced disease,...
+  Metastasis: PL=Yes, to liver | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: surveillance
+  BL: surveillance
+  [SAME]
+  BL goals_description: Continued good disease control on surveillance.
+
+Genetic_Testing_Results:
+  PL: Patient does not express CA-19-9.
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Response_Assessment:
+  PL: The cancer is showing stable disease based on imaging findings. CT abdomen/pelvis with contrast shows an ill-defined pancreatic head/neck mass, similar in size to previous MRI measuring 4.2 x 3.6 cm, ...
+  BL: Good disease control on surveillance.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 5
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Adenocarcinoma of the pancreas with biopsy-proven oligo metastatic disease in the abdominal wall
+  BL: adenocarcinoma of the pancreas
+  [SAME]
+  Stage: PL=Stage IV (metastatic) | BL=Stage IV
+  Metastasis: PL=Yes, to abdominal wall | BL=Yes (abdominal wall)
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Patient is on chemotherapy break after completing 12 cycles of FOLFIRINOX. Palliative radiation therapy is not recommended at this time.
+
+Genetic_Testing_Results:
+  PL: MSI Status Undetermined, RB1 P26fs*47
+  BL: MSI Status Undetermined, RB1 P26fs*47
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: Nutrition=Followed by Cancer Center Nutritionist ***** *****; Others=Followed by SMS, Dr. ***** *****
+  BL: Nutrition=Cancer Center Nutritionist ***** *****, *****; Specialty=SMS, Dr. ***** *****
+  [SAME]
+
+Response_Assessment:
+  PL: The cancer is showing stable disease based on recent imaging and tumor marker levels. The CT CAP on 07/06/19 showed a continued response to treatment. Additionally, the Cancer Antigen 19-9 levels have...
+  BL: stable disease in the pancreas and abdominal wall lesion
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 6
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Adenocarcinoma of the pancreas
+  [SAME]
+  Stage: PL=Originally Stage IIB, now metastatic (Stage IV) | BL=Borderline resectable/locally advanced
+  Metastasis: PL=No | BL=Not sure
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: surveillance
+  [DIFF] Both valid but different: PL=palliative vs BL=surveillance
+  BL goals_description: Monitoring for early signs of disease recurrence.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Response_Assessment:
+  PL: The cancer is showing early signs of recurrence based on imaging findings. Specifically, there is an interval increase in size of a 14 mm hypodense lesion in segment March 14 and a new 5 mm hypodense ...
+  BL: Early evidence of disease recurrence based on imaging studies.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 7
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Adenocarcinoma of the tail of the pancreas
+  BL: Adenocarcinoma of the tail of the pancreas
+  [SAME]
+  Stage: PL=Locally advanced (unresectable due to vascular involvement) | BL=Not specified in the note
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: neoadjuvant
+  [PL-WIN] Pipeline uses standard classification; baseline says: 'neoadjuvant'
+  BL goals_description: To reduce the size of the pancreatic tumor before surgical resection.
+
+Genetic_Testing_Results:
+  PL: Germ line testing showed no pathologic variants. VUS seen in AXIN1, CTC1, ERCC4, MC1R.
+  BL: Germ line testing showed no pathologic variants. Variants of uncertain significance (VUS) seen in AXIN1, CTC1, ERCC4, MC1R.
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Specialty=Gynecological oncology for the right adnexal mass
+  [BL-WIN] Baseline captures more referrals
+
+Response_Assessment:
+  PL: The cancer is showing radiographic evidence of response to treatment. Specifically, the CT abdomen/pelvis with and without contrast shows a slight decrease in size of the pancreatic tail mass, which m...
+  BL: Radiographic evidence of response to treatment with slight decrease in size of pancreatic tail mass.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 8
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Poorly differentiated pancreatic ductal adenocarcinoma with lymphovascular invasion
+  BL: Pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Originally Stage IIB, now metastatic (Stage IV) | BL=pT2N2
+  Metastasis: PL=Yes, to lymph nodes | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully transla...
+  BL goals_description: Systemic therapy with the goal of achieving as deep and durable a remission as possible, prioritizing quality of life.
+
+Genetic_Testing_Results:
+  PL: Germline ATM mutation identified. Tumor shows MMR proteins all intact by IHC. No actionable mutations identified from planned FoundationOne panel.
+  BL: No actionable mutations identified
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: The cancer is showing a favorable response to treatment. This is evidenced by the recent restaging CT (10/24/20) which showed mildly decreased size of intra-abdominal lymph nodes which have become les...
+  BL: Favorable treatment response to date
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 9
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma with metastatic disease to lungs
+  BL: Pancreatic cancer, BRCA VUS, K-ras, CDKN2a, APC mutations
+  [SAME]
+  Stage: PL=Metastatic (Stage IV) | BL=Metastatic
+  Metastasis: PL=Yes, to lungs | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Maintain stable disease, manage symptoms, and monitor for treatment side effects.
+
+Genetic_Testing_Results:
+  PL: BRCA variant of unknown significance (VUS); K-ras mutation; CDKN2a mutation; APC mutation
+  BL: BRCA variant of unknown significance, K-ras, CDKN2a, APC mutations.
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: The cancer is currently showing stable disease according to the CT scan on 07/14/2018, which indicated an unchanged size and number of bilateral pulmonary nodules consistent with treated metastases. A...
+  BL: Stable disease with worsening neuropathy.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 10
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic ductal adenocarcinoma
+  [SAME]
+  Stage: PL=Locally advanced (Stage III) | BL=Locally advanced
+
+Treatment_Goals.goals_of_treatment:
+  PL: curative
+  BL: palliative
+  [DIFF] Both valid but different: PL=curative vs BL=palliative
+  BL goals_description: Overall plan is for 4-6 months of upfront chemotherapy with q2mo scans.
+
+Genetic_Testing_Results:
+  PL: VUS in RECQL4 c.*****>G (p.*****)
+  BL: VUS in RECQL4 c.*****>G (p.*****)
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: The cancer is currently showing stable disease. This is evidenced by the CT scan on 12/10/2019 which showed a pancreatic mass measuring 4.4 x 3.5 cm with upstream pancreatic ductal dilatation and pare...
+  BL: Stable disease without evidence of distant metastases.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 11
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic cancer metastasized to liver
+  BL: Pancreatic cancer
+  [SAME]
+  Metastasis: PL=Yes, to liver | BL=Yes (to liver)
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully transla...
+  BL goals_description: Achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life.
+
+Genetic_Testing_Results:
+  PL: Brother found to have a BRCA2 mutation in 2020. No other specific genetic or molecular testing results mentioned in the note.
+  BL: No genetic testing results in note
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Genetics=Has appt with genetics at ***** tomorrow.
+  BL: Genetics=Scheduled for genetics consultation
+  [SAME]
+
+============================================================
+ROW 12
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Metastatic (Stage IV) | BL=Not specified
+  Metastasis: PL=Yes, to liver, peritoneum | BL=Yes (liver, lungs)
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: Given the patient's progression while on chemotherapy holiday and the findings of new partial bowel obstruction, worsening peritoneal carcinomatosis, ...
+  BL goals_description: Discussing the next steps as palliative care given the progression and obstruction.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note.
+  [SAME] Neither has genetic results
+
+Referral:
+  PL: Specialty=Anticipate the need to transition the patient to hospice
+  BL: Others=Anticipate the need to transition the patient to hospice.
+  [SAME]
+
+Response_Assessment:
+  PL: The cancer is not currently responding to treatment. Evidence includes the CT abdomen/pelvis with contrast on 08/25/2016 showing new proximal small bowel obstruction, increased size and infiltration o...
+  BL: Progression of disease with new partial bowel obstruction and biliary obstruction.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 13
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Locally advanced (unresectable due to extensive vascular involvement) | BL=Locally advanced
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Consider radiation therapy for tumor control and symptom management.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Referral:
+  PL: Specialty=Radiation oncology consult
+  BL: Nutrition=Nutrition consultation is needed; Specialty=Followed by ID, Dr. ***** ***** and Pulmonology, Dr. *****
+  [BL-WIN] Baseline captures more referrals
+
+Response_Assessment:
+  PL: Stable disease overall. Evidence from CT Abdomen/Pelvis with Contrast (01/31/2022): Similar size of pancreatic mass centered in the uncinate process and invading the duodenum. Similar peripancreatic l...
+  BL: Stable disease
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 14
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Metastatic pancreatic adenocarcinoma
+  BL: Metastatic pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Metastatic (Stage IV) | BL=Stage IV (metastatic)
+  Metastasis: PL=Yes, to liver | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Systemic therapy (chemotherapy) with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolong...
+
+Genetic_Testing_Results:
+  PL: MMR by IHC pending. No other genetic or molecular testing results mentioned.
+  BL: No genetic testing results in note.
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+============================================================
+ROW 15
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Moderately-differentiated pancreatic ductal adenocarcinoma with perineural invasion
+  BL: Pancreatic ductal adenocarcinoma
+  [SAME]
+  Stage: PL=ypT3N2 | BL=pT2N3
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: surveillance
+  [DIFF] Both valid but different: PL=adjuvant vs BL=surveillance
+  BL goals_description: Monitor for recurrence due to positive margins and high risk of recurrence.
+
+Genetic_Testing_Results:
+  PL: Immunohistochemistry was performed to evaluate the status of DNA mismatch repair protein expression on block F11. The results in the tumor cell nuclei are: MLH1 expression: Present. PMS2 expression: P...
+  BL: Negative for KRAS mutations in exons  2, 3, and 4.
+  [SAME] Both capture genetic info
+
+Referral:
+  PL: (none)
+  BL: Nutrition=continue creon; Specialty=Refer to new PMD if current health plan allows it
+  [BL-WIN] Baseline captures more referrals
+
+Response_Assessment:
+  PL: The cancer is currently showing signs of potential recurrence or post-surgical changes based on the CT scan on 04/15/18, which reported ill-defined stranding in the surgical resection bed with signifi...
+  BL: Rising cancer markers suggest possible recurrence.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 16
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic adenocarcinoma
+  [SAME]
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: Given her age, comorbidities and preference, she is not a candidate for surgical resection. As such, the mainstay of treatment for her would be system...
+  BL goals_description: Goal is to palliate symptoms and achieve as deep and durable a remission as possible, with the aim of significant prolongation of life.
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Referral:
+  PL: Nutrition=refer to nutritionist
+  BL: Nutrition=Referral to nutritionist
+  [SAME]
+
+Response_Assessment:
+  PL: The cancer is showing signs of improvement with treatment. Specifically, imaging findings from a CT abdomen/pelvis with contrast on 05/08/2019 show a slight improvement in pancreatic ductal dilatation...
+  BL: Ill-defined pancreatic mass no longer seen, slight improvement in pancreatic ductal dilatation, no evidence of metastatic disease.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 17
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Pancreatic adenocarcinoma, pMMR
+  [SAME]
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: Palliative
+  [SAME]
+  BL goals_description: To manage symptoms and maintain quality of life during chemotherapy break.
+
+Genetic_Testing_Results:
+  PL: MS-Stable, Tumor mutational burden = 5 Muts/Mb, KRAS G12V, TP53 I195F, VUS: CBL P782L, CDKN2A/B loss, MTOR R2109, NKX2-1 G239_G241del, PDGFRB V523M, PIK3C2G T488A, TNFAIP3 P752S. Tested via Foundation...
+  BL: MS-Stable, Tumor mutational burden = 5 Muts/Mb, KRAS G12V, TP53 I195F, VUS: CBL P782L, CDKN2A/B loss, MTOR R2109, NKX2-1 G239_G241del, PDGFRB V523M, PIK3C2G T488A, TNFAIP3 P752S
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: The cancer is currently showing stable disease. This is evidenced by CT scans on 09/22/18 showing a slight interval decrease in the size of the mass centered in the pancreatic body/tail, followed by C...
+  BL: Stable disease
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 18
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Moderately differentiated adenocarcinoma of the tail of the pancreas
+  BL: Adenocarcinoma of the tail of the pancreas
+  [SAME]
+  Stage: PL=Originally technically resectable, now with positive lymph nodes | BL=Not specified in note
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: adjuvant
+  BL: adjuvant
+  [SAME]
+  BL goals_description: To treat residual disease and prevent recurrence.
+
+Genetic_Testing_Results:
+  PL: The patient is known to carry an ATM VUS.
+  BL: Known to carry an ATM VUS.
+  [SAME] Both capture genetic info
+
+Response_Assessment:
+  PL: The patient has completed neoadjuvant therapy with gemcitabine and Abraxane, which was stopped due to severe adverse events. Post-surgery, the surgical pathology showed a moderately differentiated ade...
+  BL: Severe hand-foot syndrome and mucositis secondary to chemotherapy.
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 19
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Locally advanced and unresectable adenocarcinoma of the head of the pancreas
+  BL: Adenocarcinoma of the head of the pancreas
+  [SAME]
+  Stage: PL=Locally advanced (unresectable) | BL=Locally advanced and unresectable
+  Metastasis: PL=Yes, to liver | BL=Not sure
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  BL goals_description: Management of symptoms and disease control
+
+Genetic_Testing_Results:
+  PL: No genetic testing results in note.
+  BL: No genetic testing results in note
+  [SAME] Neither has genetic results
+
+Referral:
+  PL: Specialty=GI consult; Others=SMS referral
+  BL: Specialty=GI for ERCP, SMS for symptom management
+  [PL-WIN] Pipeline captures more referrals
+
+Response_Assessment:
+  PL: The cancer is showing signs of progression. The patient was initially treated with gemcitabine and Abraxane, but had radiographic progression on 06/14/2017. Subsequently, she was started on dose-modif...
+  BL: Uncertain disease control; possible disease progression or biliary obstruction
+  [PL-WIN] More detailed response assessment
+
+============================================================
+ROW 20
+============================================================
+
+Cancer_Diagnosis.Type_of_Cancer:
+  PL: Pancreatic adenocarcinoma
+  BL: Metastatic pancreatic adenocarcinoma
+  [SAME]
+  Stage: PL=Metastatic (Stage IV) | BL=Not specified in AJCC stage, but described as metastatic with involvement of liv...
+  Metastasis: PL=No | BL=
+
+Treatment_Goals.goals_of_treatment:
+  PL: palliative
+  BL: palliative
+  [SAME]
+  PL goals_description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully transla...
+  BL goals_description: Systemic therapy with the goal of achieving as deep and durable a remission as possible, prioritizing quality of life.
+
+Genetic_Testing_Results:
+  PL: MMR proteins all intact by IHC.
+  BL: No genetic testing results in note.
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+Referral:
+  PL: Nutrition=Referral made to our Cancer Center nutritionist; Genetics=genetic counseling with germline testing to assess for any h...
+  BL: Nutrition=Referral made to Cancer Center nutritionist; Genetics=Genetic counseling with germline testing; Others=Potential eligibility for non-therapeutic trials involving n...
+  [BL-WIN] Baseline captures more referrals
+
+======================================================================
+SUMMARY
+======================================================================
+Total field-level comparisons: 168
+  Pipeline wins:  58
+  Baseline wins:  10
+  Same/equal:     100
+  Pipeline errors: 0
+  Baseline errors: 0
+
+Pipeline win rate: 35%
+Baseline win rate: 6%
