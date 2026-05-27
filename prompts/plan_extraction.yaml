@@ -238,47 +238,18 @@ Genetic_Testing_Plan: |
   }
 
 Referral: |
-  TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
-  Do not mistake the doctor's signature at the end of the note as a referral.
-  Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
-  A "consult" (e.g., "XRT consult", "Rad Onc consult") counts as a Specialty referral.
-  CRITICAL — do NOT include PAST/COMPLETED referrals:
-  - If genetic testing was already DONE and results are back (e.g., "Myriad: Negative", "BRCA negative"), do NOT include genetics as a new referral.
-  - If a referral was made at a PRIOR visit (months/years ago) and the service was already completed, do NOT include it.
-
-  IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
-  - HPI: "referred to genetics", "will refer to social work"
-  - Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
-  - Psychologic/Social section: "I will refer to social work"
-  - A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation"
-  Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work", "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "palliative", "symptom management".
-  Common referrals found OUTSIDE the A/P section:
-  - "Ambulatory Referral to Social Work" (in Diagnosis section) → Others: Social work referral
-  - "Referral to Exercise Counseling" (in Diagnosis section) → Others: Exercise counseling referral
-  - "I will refer to social work" (in Psychologic section) → Others: Social work referral
-
-  CRITICAL — distinguish OUTGOING from INCOMING referrals:
-  - OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "will schedule Rad Onc consult".
-  - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation", "referred for consideration of adjunct therapy".
-  - Do NOT include the current visit's own department. These notes are written by Medical Oncology — do NOT list "Medical Oncology" or "Med Onc" as a referral.
-  - If the note says "referred to Med Onc (today's visit) and also Rad Onc", only include "Rad Onc" — the Med Onc part describes THIS visit, not an outgoing referral.
-
+  TASK: Extract all referrals and consults from this clinical note.
+  Search the ENTIRE note — referrals may appear anywhere (HPI, A/P, Diagnosis section, etc.).
+  Include any mention of referring, consulting, or sending the patient to another provider or service.
+  Only include OUTGOING referrals (this doctor sending patient elsewhere), not INCOMING (patient was sent here).
   If no referral is mentioned for a category, set its value to "None".
-  For Nutrition: only include referrals to a nutritionist or dietitian (e.g., "nutrition consult", "refer to nutritionist", "follow up with nutrition on [date]").
-  The following are NOT nutrition referrals — they are general lifestyle advice from the oncologist:
-  - "I recommend an anti inflammatory/mediterranean diet" → NOT a referral
-  - "I recommend a diabetes risk reducing diet" → NOT a referral
-  - "eat calcium-rich food", "limit alcohol", "exercise" → NOT a referral
-  - "take calcium and vitamin D", "continue vitamin D daily" → NOT a referral (supplement advice)
-  - "discussed lifestyle modifications" → NOT a referral
-  If the oncologist gives diet advice without referring to a nutritionist/dietitian, write "None".
   Respond *only* with a JSON object using this exact schema:
   {
-  "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
-  "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor (e.g., 'refer to genetics', 'genetics consult recommended'). Do NOT list genetic test RESULTS or known mutations here (e.g., 'BRCA1 mutation', 'ATM mutation carrier', 'genetic testing negative' are FINDINGS, not referrals). Write 'None' if no genetics referral is planned.",
-  "Specialty": "eg, Palliative care referral, Radiation oncology consult, surgical oncology, Integrative Medicine, Psychology/psychiatry, Dental evaluation, or 'None'. IMPORTANT: 'treatment is palliative' or 'palliative intent' describes the GOAL of treatment, NOT a referral to palliative care services. Only include 'Palliative care' if the note explicitly says 'refer to palliative care', 'palliative care consult', or similar.",
-  "Others": "Physical or occupational therapy, Exercise counseling referral, Social work, financial counseling, home health, or 'None'. IMPORTANT: General advice about exercise ('continue exercise', 'weight bearing exercise', 'discussed exercise') is NOT an exercise referral. Only include if there is an explicit referral to an exercise counseling program (e.g., 'Referral to Exercise Counseling').",
-  "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
+  "Nutrition": "Nutrition or dietitian referral, or 'None'",
+  "Genetics": "Genetics clinic or counselor referral, or 'None'",
+  "Specialty": "Any specialty consult (Radiation oncology, surgical oncology, palliative care, pain management, psychology, dental, etc.), or 'None'",
+  "Others": "Any other referral (social work, physical therapy, psycho-oncology, exercise counseling, financial counseling, home health, etc.), or 'None'",
+  "follow up": "follow up mentioned in the provided text"
   }
 
 follow_up_next_visit: |
