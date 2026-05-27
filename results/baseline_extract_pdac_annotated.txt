@@ -1,0 +1,358 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: pdac_annotated.csv (20 test samples)
+Date: 2026-05-25 20:43
+
+ANNOTATION KEY:
+  [BL-ERR]  = Baseline error (factually wrong, mislabeled, or confused)
+  [BL-MISS] = Baseline omission (important info missing that pipeline captures)
+  [BL-WIN]  = Baseline captures something pipeline missed or got wrong
+  [DIFF]    = Notable difference in approach (neither clearly better)
+============================================================
+
+============================================================
+ROW 1 (coral_idx=0)
+============================================================
+
+#### Cancer Diagnosis:
+- Type: Locally advanced adenocarcinoma of the pancreas.
+  [SAME as pipeline]
+- Stage: Not explicitly stated, but described as locally advanced.
+  [SAME as pipeline — both leave stage empty/vague]
+- Metastasis: Possible progression noted in the lungs with new nodules.
+  [SAME as pipeline "Not sure" — both appropriately uncertain]
+
+#### Current Medications:
+- Gemcitabine and Abraxane (completed 6 full cycles). Oxycodone for pain. Antibiotics for biliary ductal obstruction.
+  [BL-ERR: "Gemcitabine and Abraxane (completed 6 full cycles)" is NOT a current medication — it's completed chemotherapy. Pipeline correctly returns empty for current_meds and puts "oxycodone" under supportive_meds.]
+
+#### Treatment Goals:
+- Surveillance given the sites of disease involvement and lack of symptoms.
+- Addressing patient's psychological needs and coping mechanisms.
+  [DIFF: First part matches pipeline "surveillance". Second part is a referral need, not a treatment goal.]
+
+#### Plan — Referrals:
+- Psycho-oncology.
+  [BL-WIN: Baseline correctly captures the psycho-oncology referral from the note ("He would like to meet with psycho oncology"). Pipeline MISSES this entirely — all Referral fields = None.]
+
+#### Response to Treatment:
+- Initial response was good clinically despite radiological progression. Possible pseudo-progression noted. New lung nodules suggest possible progression.
+  [DIFF: Good clinical detail. Pipeline's response_assessment focuses on imaging findings. Both perspectives are valid.]
+
+
+============================================================
+ROW 2 (coral_idx=1)
+============================================================
+
+#### Cancer Diagnosis:
+- Type: Adenocarcinoma of the pancreas. Initially resected with direct invasion into duodenum, 6/25 lymph nodes positive. New liver metastases.
+  [SAME as pipeline — both capture the key facts]
+
+#### Treatment Goals:
+- Control metastatic disease. Manage symptoms. Maintain quality of life.
+  [BL-ERR: These are generic statements, not the specific therapeutic intent. Pipeline says "palliative" — correct and precise.]
+
+#### Genetic Testing:
+- SPINK1 carrier; family screening recommended.
+  [BL-WIN: Baseline captures this genetic finding. Pipeline does not mention SPINK1.]
+
+
+============================================================
+ROW 3 (coral_idx=2)
+============================================================
+
+#### Treatment Goals:
+- Assess for further disease progression with short-term follow-up CT scans.
+- Consider clinical trials, particularly trametinib plus hydroxychloroquine.
+- Palliative radiotherapy for QoL improvement.
+  [DIFF: Baseline mixes plans with goals but does capture "palliative" intent in the last point. Pipeline says "palliative" — correct.]
+
+#### Genetic Testing:
+- Tumor harbors KRAS (G12D) and p53 mutations.
+  [BL-WIN: Important molecular information. Pipeline does not capture tumor mutations.]
+
+#### Advance Care Planning:
+- Discussion about prioritizing quality-of-life considerations and potential transition to home hospice.
+  [BL-WIN: Pipeline's advance care planning field says "Not discussed during this visit" which appears incorrect — the baseline captures the hospice discussion.]
+
+
+============================================================
+ROW 4 (coral_idx=3)
+============================================================
+
+#### Lab Results:
+- Does not express CA-19-9.
+  [BL-WIN: Important clinical fact — CA-19-9 non-secretor status. Pipeline says "No labs in note" and does not capture this.]
+
+#### Treatment Goals:
+- Disease control and symptom management. Monitoring for disease progression.
+  [BL-ERR: Vague. Pipeline says "surveillance" — more precise.]
+
+
+============================================================
+ROW 5 (coral_idx=4)
+============================================================
+
+#### Advance Care Planning:
+- Preferences for life-sustaining treatment clarified and POLST completed.
+  [BL-WIN: Important advance directive detail. Pipeline does not capture POLST completion.]
+
+#### Genetic Testing:
+- Foundation Medicine liquid biopsy results: MSI status undetermined and RB1 P26fs*47.
+  [BL-WIN: Pipeline does not capture these genomic findings.]
+
+#### Treatment Goals:
+- Maintain stable disease. Manage symptoms and side effects. Monitor for GI bleeding.
+  [BL-ERR: These are plans/monitoring actions, not goals. Pipeline says "palliative" — correct.]
+
+#### Referrals:
+- Cancer Center Nutritionist and dermatologist.
+  [DIFF: Baseline captures nutritionist and derm referrals. Pipeline does not explicitly list dermatologist.]
+
+
+============================================================
+ROW 6 (coral_idx=5)
+============================================================
+
+#### Treatment Goals:
+- To achieve surgical resection of the primary tumor. To manage and monitor for recurrence.
+  [BL-ERR: Surgery is ALREADY DONE — this is past, not a current goal. Pipeline captures the recurrence concern correctly.]
+
+#### Referrals:
+- Recommend pelvic ultrasound to exclude malignancy in endometrial canal.
+  [BL-WIN: Pipeline does not capture this gynecologic referral/workup.]
+
+
+============================================================
+ROW 7 (coral_idx=6)
+============================================================
+
+#### Treatment Goals:
+- Continue neoadjuvant chemotherapy. Monitor response to treatment.
+  [BL-ERR: These are PLANS, not goals. Pipeline says "curative" — the therapeutic intent for neoadjuvant treatment.]
+
+#### Genetic Testing:
+- Germ line testing showed no pathologic variants. VUS in AXIN1, CTC1, ERCC4, MC1R.
+  [BL-WIN: Pipeline does not capture germline testing results or VUS details.]
+
+#### Referrals:
+- Seen by Gynecologic Oncology regarding right adnexal mass.
+  [BL-WIN: Pipeline does not capture this gyn-onc referral.]
+
+
+============================================================
+ROW 8 (coral_idx=7)
+============================================================
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible. Prioritize QoL. Consider clinical trials if disease progresses.
+  [BL-WIN: Excellent — captures the nuanced palliative intent language from the A/P verbatim. Pipeline says "palliative" which is correct but less descriptive. Baseline provides better context for a reviewer.]
+
+#### Advance Care Planning:
+- Discussed risks/benefits of therapy and prioritized QoL. Explained non-curative nature of treatment.
+  [DIFF: Pipeline captures this under advance_care. Both cover it.]
+
+
+============================================================
+ROW 9 (coral_idx=8)
+============================================================
+
+#### Treatment Goals:
+- Maintain stable disease. Manage side effects (neuropathy, nausea/vomiting).
+  [BL-ERR: Mixes goals with symptom management. Pipeline "palliative" — correct.]
+
+#### Genetic Testing:
+- BRCA variant of unknown significance.
+  [BL-WIN: Pipeline does not capture BRCA VUS.]
+
+
+============================================================
+ROW 10 (coral_idx=9)
+============================================================
+
+#### Treatment Goals:
+- Continue FOLFOX for 4-6 months. Consider surgical options or consolidative chemoradiation.
+  [BL-ERR: These are TREATMENT PLANS, not goals. Pipeline says "curative" — based on locally advanced disease with curative-intent chemoradiation pathway.]
+
+#### Genetic Testing:
+- VUS in RECQL4 gene.
+  [BL-WIN: Pipeline does not capture this genetic finding.]
+
+
+============================================================
+ROW 11 (coral_idx=10)
+============================================================
+
+#### Treatment Goals:
+- Achieve as deep and durable a remission as possible. Prolong life significantly. Not expected to be curative.
+  [BL-WIN: Excellent description — captures the exact language from the A/P. The "not expected to be curative" is important context. Pipeline says "palliative" — correct but less informative.]
+
+#### Genetic Testing:
+- Family history of BRCA2 mutation in brother. Genetic consultation scheduled.
+  [BL-WIN: Pipeline does not capture BRCA2 family history or genetic consult scheduling.]
+
+
+============================================================
+ROW 12 (coral_idx=11)
+============================================================
+
+#### Treatment Goals:
+- Palliation of symptoms. Management of complications. Supportive care.
+  [SAME as pipeline "palliative" — both correct for this advanced case]
+
+
+============================================================
+ROW 13 (coral_idx=12)
+============================================================
+
+#### Treatment Changes:
+- Pausing systemic therapy (Gem/Cape) and considering radiation therapy based on patient preference.
+  [SAME as pipeline — both capture this]
+
+#### Treatment Goals:
+- Control of symptoms. Management of anemia. Nutritional support.
+  [DIFF: Pipeline says "palliative". Both capture the same intent, baseline is more descriptive.]
+
+
+============================================================
+ROW 14 (coral_idx=13)
+============================================================
+
+#### Treatment Goals:
+- Achieve as deep and durable remission. Prolong life while prioritizing QoL.
+  [DIFF: Good description. Pipeline "palliative" — same intent. Baseline captures the patient-communication language.]
+
+#### Genetic Testing:
+- Somatic tumor testing through UCSF500.
+  [SAME — pipeline also captures this]
+
+
+============================================================
+ROW 15 (coral_idx=14)
+============================================================
+
+#### Treatment Goals:
+- Monitor for recurrence due to positive margins and high risk.
+  [DIFF: Pipeline says "curative" — based on resection. Baseline describes the monitoring need. Different perspectives.]
+
+
+============================================================
+ROW 16 (coral_idx=15)
+============================================================
+
+#### Treatment Goals:
+- Palliate symptoms. Achieve remission. Prolong life.
+  [DIFF: Baseline mixes palliative and curative language. Pipeline says "palliative" — consistent.]
+
+#### Response to Treatment:
+- Scans show the ill-defined pancreatic mass is no longer seen, likely related to treatment.
+  [SAME as pipeline — both capture this important finding]
+
+
+============================================================
+ROW 17 (coral_idx=16)
+============================================================
+
+#### Current Medications:
+- FOLFIRINOX (completed 8 cycles, last cycle on 11/06/2018).
+  [BL-ERR: COMPLETED chemotherapy listed as "current" medication. Pipeline correctly has empty current_meds.]
+
+#### Treatment Goals:
+- Maintain clinical stability. Monitor disease progression.
+  [BL-ERR: These are monitoring ACTIONS, not goals. Pipeline says "palliative".]
+
+#### Genetic Testing:
+- Molecular testing results: KRAS G12V, TP53 I195F, etc.
+  [BL-WIN: Pipeline does not capture molecular testing results.]
+
+
+============================================================
+ROW 18 (coral_idx=17)
+============================================================
+
+#### Treatment Goals:
+- Manage symptoms and side effects. Monitor thromboembolic events. Maintain QoL.
+  [BL-ERR: These are management ACTIONS. Pipeline says "curative" — based on resection + adjuvant context.]
+
+#### Genetic Testing:
+- ATM VUS (variant of uncertain significance).
+  [BL-WIN: Pipeline does not capture ATM VUS.]
+
+
+============================================================
+ROW 19 (coral_idx=18)
+============================================================
+
+#### Treatment Goals:
+- Manage symptoms. Evaluate biliary obstruction. Monitor for progression and cholangitis.
+  [BL-ERR: These are DIAGNOSTIC/MANAGEMENT actions, not treatment goals. Pipeline says "palliative".]
+
+
+============================================================
+ROW 20 (coral_idx=19)
+============================================================
+
+#### Treatment Goals:
+- Achieve deep and durable remission. Prioritize QoL. Not expected to be curative.
+  [BL-WIN: Excellent — captures the exact nuanced language. Pipeline says "palliative" — correct but less descriptive.]
+
+
+============================================================
+SUMMARY OF SYSTEMATIC PATTERNS (PDAC)
+============================================================
+
+BASELINE SYSTEMATIC ERRORS:
+
+1. TREATMENT GOALS CONFUSION (12/20 samples):
+   Less severe than breast — PDAC baseline sometimes captures good palliative intent language
+   (ROW 8, 11, 14, 20) but still frequently mixes plans/actions with goals.
+   Affected: ROW 4,5,6,7,9,10,15,17,18,19 (wrong), ROW 1,12,13,16 (partially correct)
+   Pipeline correctly classifies: palliative (11), curative (4), surveillance (2)
+
+2. COMPLETED MEDICATIONS AS CURRENT (2/20 samples):
+   Baseline lists completed chemo as "current" medications.
+   Affected: ROW 1 (gemcitabine/Abraxane completed), ROW 17 (FOLFIRINOX completed)
+
+3. PAST EVENTS AS CURRENT GOALS (1/20 samples):
+   ROW 6: "achieve surgical resection" listed as goal when surgery was already done.
+
+
+BASELINE WINS OVER PIPELINE (specific cases):
+
+1. ROW 1 — Psycho-oncology referral: Baseline captures, pipeline misses entirely.
+2. ROW 2 — SPINK1 carrier status: Baseline captures genetic finding.
+3. ROW 3 — KRAS (G12D) and p53 mutations: Important molecular info.
+4. ROW 3 — Hospice/ACP discussion: Baseline captures, pipeline says "not discussed."
+5. ROW 4 — CA-19-9 non-secretor status: Important clinical fact pipeline misses.
+6. ROW 5 — POLST completion: Advance directive detail.
+7. ROW 5 — Foundation Medicine results (MSI, RB1): Genomic findings.
+8. ROW 6 — Pelvic ultrasound referral: Gynecologic workup.
+9. ROW 7 — Germline testing results + VUS: Genetic testing details.
+10. ROW 7 — Gyn-onc referral: Pipeline misses.
+11. ROW 8, 11, 14, 20 — Nuanced treatment goals: Verbatim A/P language ("deep and durable remission," "not expected to be curative").
+12. ROW 9 — BRCA VUS: Pipeline misses.
+13. ROW 10 — RECQL4 VUS: Pipeline misses.
+14. ROW 11 — BRCA2 family history + genetic consult: Pipeline misses.
+15. ROW 17 — KRAS G12V, TP53 molecular results: Pipeline misses.
+16. ROW 18 — ATM VUS: Pipeline misses.
+
+
+PIPELINE SYSTEMATIC ADVANTAGES:
+
+1. Treatment goals correctly classified (palliative/curative/surveillance)
+2. Current medications filtered — no completed chemo listed as current
+3. Structured 18-field JSON output
+4. Response assessment more detailed (imaging + tumor markers integrated)
+
+
+KEY OBSERVATION (PDAC vs BREAST):
+PDAC baseline performs BETTER than breast baseline:
+- Treatment goals: PDAC baseline captures palliative intent language well (4/20 excellent descriptions vs 0/20 for breast)
+- Genetic testing: PDAC baseline consistently captures molecular/genetic data that pipeline misses
+- This is likely because: (1) PDAC notes have more explicit goals language, (2) PDAC treatment is simpler (no receptor subtyping), (3) PDAC notes have more genetic/molecular data to capture
+
+BIGGEST PIPELINE GAP REVEALED:
+The pipeline systematically MISSES genetic testing results (KRAS, TP53, BRCA, ATM, SPINK1, RECQL4, Foundation Medicine results) and advance care planning details (POLST, hospice discussions). This is because:
+- Genetic_Testing_Plan field only asks about PLANNED testing, not results of completed testing
+- Advance_care_planning field may not capture nuanced ACP discussions
+These are pipeline prompt gaps, not model capability gaps.

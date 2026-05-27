@@ -1,0 +1,510 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: breastca_annotated.csv (20 test samples)
+Date: 2026-05-25 20:38
+
+ANNOTATION KEY:
+  [BL-ERR]  = Baseline error (factually wrong, mislabeled, or confused)
+  [BL-MISS] = Baseline omission (important info missing that pipeline captures)
+  [BL-WIN]  = Baseline captures something pipeline missed or got wrong
+  [DIFF]    = Notable difference in approach (neither clearly better)
+============================================================
+
+============================================================
+ROW 1 (coral_idx=20)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- To discuss treatment options and establish care for recently diagnosed breast cancer.
+  [BL-MISS: Pipeline specifies "Stage II (T2N1) triple negative breast cancer" — baseline omits stage, subtype]
+
+#### Cancer Diagnosis:
+- **Type:** Triple-negative breast cancer (TNBC)
+  [BL-MISS: Pipeline has "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, sig/nuc 3.0, Cen17 1.5) grade 3 invasive ductal carcinoma" — baseline omits grade, histologic subtype (IDC), and IHC/FISH details]
+- **Stage:** Stage II (T2N1)
+  [BL-MISS: Pipeline has "Stage IIB (pT2N1a)" — more precise substage and pathologic notation]
+- **Metastasis:** Not yet confirmed; staging imaging pending
+
+#### Lab Results:
+- WBC Count: 9.9, Hemoglobin: 9.6 (Low), Hematocrit: 28.9 (Low), Platelet Count: 222, Sodium: 133 (Low), Potassium: 4.2, Chloride: 102, Carbon Dioxide: 22, Urea Nitrogen: 18, Creatinine: 1.01 (High), Glucose (non-fasting): 201 (High), Albumin: 3.0 (Low)
+  [BL-WIN: Baseline includes Albumin 3.0 (L) which pipeline omits. Also includes Calcium 9.4 in original note — wait, baseline misses Calcium 9.4, AST 27, ALT 19, Alk Phos 60, Bilirubin 0.9 that pipeline captures]
+  [BL-MISS: Pipeline captures AST, ALT, Alk Phos, Bilirubin, Calcium — baseline misses these 5 values]
+
+#### Clinical Findings:
+- Physical Exam + Review of Systems listed
+  [DIFF: Baseline lists ROS detail (fatigue, dyspnea, constipation, anxiety, etc.). Pipeline focuses on pathology findings (grade 3 IDC, 3.6 cm, LVI, Ki-67 ~15%, LVEF 25%). Pipeline's focus is more clinically actionable for oncology care.]
+
+#### Current Medications:
+- Lists all 20+ medications (acetaminophen, amlodipine, aspirin, atorvastatin, bisoprolol, etc.)
+  [DIFF: Pipeline returns empty — correct for cancer context (no active cancer treatment). Baseline lists ALL medications including non-cancer drugs. These are comorbidity meds, not oncology-relevant.]
+
+#### Treatment Goals:
+- Assess for metastasis with PET/CT.
+- Discuss treatment options considering the high-risk nature of TNBC and the patient's comorbidities.
+  [BL-ERR: These are ACTIONS/PLANS, not treatment goals. The treatment goal is "curative" (pipeline). Baseline confuses "what to do next" with "what is the therapeutic intent."]
+
+#### Response to Treatment:
+- Not applicable at this point as treatment has not yet been initiated.
+  [SAME as pipeline]
+
+#### Plan:
+- Obtain PET/CT to assess for metastasis. Reassess treatment options after PET/CT results. Continue current medications. Follow-up counseling.
+  [DIFF: Pipeline separates into 10 plan categories (Imaging_Plan: "PET/CT", Follow_up: "after PET/CT"). Baseline lumps everything together.]
+
+
+============================================================
+ROW 2 (coral_idx=21)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Reason for Visit:
+- Consultation regarding the treatment of her locally recurrent breast cancer.
+
+#### Cancer Diagnosis:
+- **Type:** Locally recurrent, unresectable, hormone-receptor positive breast cancer.
+  [BL-MISS: Pipeline has "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma" — baseline omits PR- status, grade (1), histologic subtype (IDC)]
+- **Stage:** Initially Stage I (low-stage) in 1994; now presenting with local regional recurrence.
+  [DIFF: Pipeline says "Originally Stage IIA, now metastatic (Stage IV)" — but pipeline is WRONG about liver metastasis (see below)]
+- **Metastasis:** Unresectable local recurrence; no distant metastases identified.
+  [BL-WIN: Baseline CORRECTLY identifies no distant metastases. Pipeline INCORRECTLY says "Yes, to the liver and chest wall" — the original note explicitly says "low-attenuation lesion in the liver consistent with CYST", not cancer. This is a pipeline factual error.]
+
+#### Lab Results:
+- Normal CBC, creatinine, electrolytes, liver function tests, and calcium. CA27-29: 15 (normal). LDH: Normal.
+  [DIFF: Pipeline gives same info in more structured format but no additional values]
+
+#### Treatment Goals:
+- Hormonal therapy with an aromatase inhibitor to manage the local regional recurrence.
+- Potential surgical resection and radiation therapy to achieve long-term disease control.
+  [BL-ERR: These describe TREATMENT PLANS, not treatment goals. The treatment goal is "palliative" (pipeline). Same systematic error as ROW 1.]
+
+#### Plan:
+- Medications: Start AI either alone or on CALGB 4503.
+- Therapy: Consider surgical resection and radiation therapy.
+- Follow-Up: Return to clinic on January 25.
+  [DIFF: Pipeline separates into Medication_Plan, Therapy_plan, radiotherapy_plan, follow_up. Same content, different structure.]
+
+
+============================================================
+ROW 3 (coral_idx=22)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Cancer Diagnosis:
+- **Type:** Right-sided invasive spindle cell metaplastic carcinoma.
+  [BL-MISS: Pipeline has "ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma" — baseline omits all receptor status and FISH ratio]
+- **Stage:** Locally advanced, multifocal.
+- **Metastasis:** No evidence of metastatic disease.
+
+#### Lab Results:
+- Elevated creatinine and alkaline phosphatase. Possible dehydration.
+  [BL-MISS: No specific numeric values given. Pipeline similarly says "Alk phos elevated, creatinine elevated" without values — both equally imprecise.]
+
+#### Treatment Goals:
+- Assess response to neoadjuvant chemotherapy. Increase chances of breast-conserving surgery. Treat with curative intent.
+  [DIFF: Baseline captures "curative intent" — same as pipeline "curative". But also mixes in plan steps (assess response, BCS). Better than most other samples.]
+
+#### Plan:
+- Genetic Testing: Gene panel results pending.
+  [BL-WIN: Baseline captures pending gene panel. Pipeline captures "Mammaprint pending" and "gene panel" — both capture genetic testing.]
+- Advance Care Planning: Discussed genetic predisposition to cancer.
+  [DIFF: Baseline mentions genetic counseling here; pipeline captures it under Genetic_Testing_Plan]
+
+
+============================================================
+ROW 4 (coral_idx=23)
+============================================================
+
+### Key Clinical Information
+
+#### Cancer Diagnosis:
+- **Type:** Triple-negative invasive ductal carcinoma (IDC) of the right breast.
+  [BL-MISS: Pipeline has "ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma" — baseline omits grade 3]
+- **Stage:** Not explicitly stated, but history includes metastatic papillary carcinoma to lymph nodes and previous ovarian cancer (stage IIIC).
+  [BL-ERR: Baseline MIXES different cancer histories into the breast cancer staging. The ovarian cancer (stage IIIC) and "metastatic papillary carcinoma" are SEPARATE prior cancers, not the breast cancer stage. Pipeline correctly identifies breast cancer stage as "Stage III".]
+- **Metastasis:** No evidence of hypermetabolic metastatic disease.
+
+#### Lab Results:
+- Not specified in the provided note.
+  [SAME as pipeline "No labs in note"]
+
+#### Treatment Goals:
+- Control and reduce the size of the right breast lesion.
+- Manage symptoms and side effects associated with chemotherapy.
+  [BL-ERR: These describe treatment ACTIONS, not the therapeutic intent. Pipeline says "palliative" — based on recurrent disease context.]
+
+
+============================================================
+ROW 5 (coral_idx=24)
+============================================================
+
+### Key Clinical Information Extracted:
+
+#### Cancer Diagnosis:
+- **Type:** Bilateral breast cancer (left breast: Grade 3 IDC; right breast: Grade 1 IDC)
+  [BL-MISS: No receptor status! Pipeline has "Left: ER+/PR+/HER2- grade 3 IDC with suspicion for LVI and focal high-grade DCIS; Right: ER+/PR+/HER2- grade 1 IDC with intermediate DCIS" — vastly more specific]
+- **Stage:** Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)
+  [SAME as pipeline]
+- **Metastasis:** Micrometastasis in left axillary lymph nodes (0.7 mm)
+  [DIFF: This is REGIONAL node involvement (micrometastasis), not distant metastasis. Technically correct to report but labeled under "Metastasis" which is confusing.]
+
+#### Lab Results:
+- No specific lab results mentioned in the note.
+- HbA1c of October 20 on 08/09/2017 (related to diabetes).
+  [BL-ERR: "HbA1c of October 20" is confusingly worded — HbA1c of 20 would be impossibly high. Likely a parsing error of a date or value. Pipeline says "No labs in note."]
+
+#### Treatment Goals:
+- Reduce distant recurrence risk.
+- Provide adjuvant anti-estrogen therapy.
+- Improve bone health through lifestyle modifications and supplements.
+  [DIFF: More descriptive than pipeline "curative" but mixes goals with plans]
+
+
+============================================================
+ROW 6 (coral_idx=25)
+============================================================
+
+**Cancer Diagnosis:**
+- **Type:** HR-negative HER2+ breast cancer.
+  [BL-MISS: Pipeline has "ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15% IDC grade 2" — baseline omits grade, Ki-67, FISH ratio, and histologic subtype]
+- **Stage:** Stage IV suspected due to bone metastasis.
+  [SAME as pipeline "Metastatic (Stage IV)"]
+
+**Lab Results:**
+- Not specifically detailed in the note provided.
+  [SAME as pipeline "No labs in note"]
+
+**Response to Treatment:**
+- Anticipated excellent response and possible long-term disease control.
+  [BL-ERR: Treatment hasn't started yet — cannot assess response. This is SPECULATION. Pipeline correctly says "Not yet on treatment — no response to assess."]
+
+
+============================================================
+ROW 7 (coral_idx=26)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Metastatic ER negative, HER2 negative breast cancer.
+  [BL-MISS: Pipeline has "ER-/PR-/HER2- triple negative IDC" — baseline omits PR status and "TNBC" classification and histologic subtype]
+- **Metastasis:** Confirmed metastasis to liver and nodes.
+
+#### Current Medications:
+- Lists nab-paclitaxel, pembrolizumab, lorazepam, cyclobenzaprine, morphine, oxycodone, tramadol, esomeprazole, prochlorperazine, rivaroxaban
+  [DIFF: More complete med list than pipeline. Pipeline captures the key chemo (pembrolizumab) and key supportive (compazine, MS Contin, oxycodone) but misses tramadol and esomeprazole.]
+  [BL-WIN: Baseline provides a more complete medication list for this follow-up patient]
+
+#### Response to Treatment:
+- Axillary pain improved, indicating early treatment response.
+- Monitoring for further signs of response and toxicity.
+  [BL-MISS: CRITICAL — baseline only captures the POSITIVE signal (axillary pain improved) but MISSES the progression! Pipeline captures BOTH: "hypoenhancing caudate lobe lesion has markedly increased in size... additional hypermetabolic segment VII lesion" AND "axillary pain improved." Baseline gives an incomplete and misleadingly optimistic picture.]
+
+
+============================================================
+ROW 8 (coral_idx=27)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Stage IIA pT2(m)N1a Left Breast IDC
+- **Hormone Receptor Status:** ER+/PR+
+- **HER2 Status:** HER2 negative (FISH ratio 1.1)
+- **Mammaprint:** High-risk
+  [DIFF: Baseline is very detailed here — captures staging, pTN, receptors, Mammaprint. Pipeline similarly detailed: "ER+/PR+/HER2- grade 2 IDC with extensive DCIS, Stage IIA (pT2(m)N1a)". Pipeline adds DCIS detail, baseline adds Mammaprint.]
+
+#### Lab Results:
+- **HER2 Gene Amplification Testing by FISH:** Negative (HER2:Cent17 ratio 1.1)
+  [BL-ERR: HER2 FISH is a PATHOLOGY result, not a lab result. Should be under Cancer Diagnosis or Clinical Findings. Pipeline correctly puts this in Cancer_Diagnosis.]
+
+#### Treatment Goals:
+- Adjuvant chemotherapy to reduce risk of recurrence.
+- Use of an aromatase inhibitor post-chemotherapy.
+  [BL-ERR: These are TREATMENT PLANS, not goals. Pipeline says "curative" — the therapeutic intent.]
+
+
+============================================================
+ROW 9 (coral_idx=28)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** HR+/HER2- IDC of the left breast.
+  [BL-MISS: Pipeline has "ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence" — baseline omits grade, micropapillary features, and recurrence context]
+- **Stage:** Initially Stage III (T3N2).
+  [DIFF: Pipeline adds "now metastatic (Stage IV)" — noting the progression to Stage IV]
+- **Metastasis:** Recurrence with possible metastatic involvement of Level Vb lymph nodes.
+
+#### Treatment Goals:
+- Prolongation of life while maintaining a good quality of life without excessive toxicities.
+- Avoidance of chemotherapy upfront to limit toxicity.
+  [BL-WIN: This is actually a GOOD description of palliative treatment goals — captures the patient-centered reasoning. Pipeline just says "palliative" which is correct but less descriptive. Baseline wins on descriptive quality here.]
+
+
+============================================================
+ROW 10 (coral_idx=29)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Invasive Ductal Carcinoma (IDC)
+  [BL-MISS: No receptor status! Pipeline has "ER+/PR+/HER2- grade 2 IDC" — baseline omits all receptor status and grade]
+- **Stage:** Clinical Stage II (T2N1)
+  [SAME as pipeline]
+
+#### Current Medications:
+- Cetrorelix Acetate (Cetrotide), Menotropins (Menopur), Tamoxifen 20 mg
+  [DIFF: These are fertility preservation meds (cetrorelix, menotropins) + tamoxifen. Pipeline has empty current_meds. Baseline captures fertility context.]
+
+#### Treatment Goals:
+- Neoadjuvant chemotherapy to reduce tumor size and improve surgical outcomes.
+  [BL-ERR: This is a PLAN, not a goal. Pipeline says the equivalent concept through the therapy_plan field. Treatment goal should be "curative".]
+
+
+============================================================
+ROW 11 (coral_idx=30)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Ductal Carcinoma In Situ (DCIS)
+  [BL-MISS: Pipeline adds "ER+/PR+ DCIS with intermediate nuclear grade, solid and cribriform patterns, HER2: not tested"]
+- **Stage:** pTisNx
+  [SAME as pipeline]
+
+#### Lab Results:
+- ER (Estrogen Receptor): >90% positive
+- PR (Progesterone Receptor): Pending
+  [BL-ERR: ER and PR status are PATHOLOGY results, not lab results. These belong under Cancer Diagnosis.]
+
+#### Treatment Goals:
+- Decrease risk of local recurrence. Prevent new breast cancer events (50% reduction).
+  [DIFF: Good descriptive detail — captures the 50% reduction benefit of tamoxifen for DCIS. Pipeline says "risk reduction" which is correct but less specific. Baseline is more informative here.]
+
+
+============================================================
+ROW 12 (coral_idx=31)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Invasive ductal carcinoma with mixed ductal and lobular features.
+  [BL-MISS: No receptor status! Pipeline has "ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features"]
+- **Stage:** Clinical Stage II.
+  [SAME as pipeline]
+
+#### Lab Results:
+- Lists WBC 5.6, Hemoglobin 12.6, Hematocrit 38.4, Platelet 202, Sodium 139, Potassium 4.2, Chloride 106, CO2 25, BUN 18, Creatinine 0.76, Glucose 120, Calcium 9.2
+  [BL-WIN: Baseline captures all lab values. Pipeline says "No labs in note" — PIPELINE ERROR, these labs are in the note! Baseline wins here.]
+
+
+============================================================
+ROW 13 (coral_idx=32)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** ER+ 80-90%, PR+ 80-90%, HER2 negative (by IHC & FISH), IDC.
+  [DIFF: Baseline has detailed receptor percentages. Pipeline has "ER+/PR+/HER2- IDC" — less specific. Baseline better here.]
+- **Metastasis:** No distant metastasis detected, but hyperdense 0.7 cm falx lesion considered a potential dural metastasis initially, later confirmed as a meningioma.
+  [BL-ERR: Note says "most likely a meningioma" not "confirmed as a meningioma" — baseline overstates the certainty.]
+
+#### Treatment Goals:
+- Complete surgical removal of the tumor.
+- Adjuvant chemotherapy and hormonal therapy to reduce recurrence risk.
+- Preservation of fertility through egg harvesting.
+  [BL-ERR: First two are PLANS, not goals. Third is a patient preference, not a treatment goal. Pipeline says "curative".]
+
+
+============================================================
+ROW 14 (coral_idx=33)
+============================================================
+
+#### Cancer Diagnosis:
+- ER+ (>95%), PR (~90%), HER2 equivocal (IHC 2, FISH non-amplified), Ki-67 ~10%, Grade 1 IDC.
+  [DIFF: Very detailed — baseline captures Ki-67 and detailed receptor %. Pipeline has "ER+/PR+/HER2 equivocal grade 1 IDC" — less specific. Baseline better here.]
+
+#### Lab Results:
+- Syphilis Screen by RPR: Nonreactive. HIV Ag/Ab Combo: Negative.
+  [DIFF: These ARE lab results — baseline correct to list them. Pipeline also captures these.]
+
+#### Treatment Goals:
+- Manage the HR+ breast cancer with endocrine therapy.
+- Consider ovarian suppression due to patient's age (<35).
+- Avoid tamoxifen due to potential depressive effects.
+  [BL-ERR: These are TREATMENT DECISIONS, not goals. Pipeline says "curative" — the therapeutic intent.]
+
+
+============================================================
+ROW 15 (coral_idx=34)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** HR+ metastatic breast cancer.
+  [BL-MISS: Pipeline has "ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary" — baseline omits HER2 equivocal status]
+- **Stage:** Metastatic (MBC).
+  [SAME as pipeline "Metastatic (Stage IV)"]
+
+#### Lab Results:
+- **Immunohistochemistry (IHC):** ER: Positive (>90%), PR: Positive (50%), HER2: Equivocal (IHC 2+, FISH pending)
+  [BL-ERR: IHC results are PATHOLOGY, not lab results.]
+
+#### Treatment Goals:
+- Confirm the presence of primary breast cancer and metastatic disease.
+- Initiate appropriate treatment based on HER2 status.
+  [BL-ERR: First item is a DIAGNOSTIC step, not a treatment goal. Pipeline says "palliative" for Stage IV — correct.]
+
+
+============================================================
+ROW 16 (coral_idx=35)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Invasive lobular carcinoma, grade 2-3.
+  [DIFF: Baseline mentions receptor status separately in lab section. Pipeline has "ER+/PR+/HER2- grade 2-3 invasive lobular carcinoma" — integrated.]
+
+#### Lab Results:
+- Core biopsy results: ER positive (96%), PR positive (35%), HER-2/neu negative (0%).
+  [BL-ERR: Core biopsy/pathology results are NOT lab results. These belong under Cancer Diagnosis.]
+- PET/CT scan: Hypermetabolic enhancing left breast mass.
+  [BL-ERR: PET/CT is IMAGING, not a lab result.]
+- Ultrasound and FNA of thyroid nodule: Benign.
+  [BL-ERR: This is a PROCEDURE result, not a lab result. Three mislabelings in one section.]
+
+#### Treatment Changes:
+- Patient decided against neoadjuvant treatment and opted for upfront mastectomy.
+  [DIFF: Both baseline and pipeline capture this important patient decision.]
+
+
+============================================================
+ROW 17 (coral_idx=36)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** IDC, **Stage:** IIb (T2N1M0), **Grade:** 2, **ER+** (>95%), **PR+** (25%), **HER2-** (IHC 1+, FISH not amplified), **Ki-67:** >30%
+  [DIFF: Excellent detail — Ki-67 >30%, detailed receptor %, IHC score. Pipeline has "ER+/PR+/HER2- grade 2 IDC, Stage IIb (T2N1M0)" — matches but without Ki-67 in the type field. Baseline is more complete here.]
+
+#### Treatment Changes:
+- Radiation therapy to manage the positive deep margin and multifocal disease.
+  [DIFF: Pipeline captures "Radiation therapy will be managed for the extent of her cancer and the possible small area of positivity at the deep margin" — similar detail]
+
+#### Plan:
+- Labs: Baseline echocardiogram.
+  [BL-ERR: An echocardiogram is an IMAGING/PROCEDURE, not a lab test.]
+
+
+============================================================
+ROW 18 (coral_idx=37)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Left breast invasive ductal carcinoma (IDC).
+  [BL-MISS: Pipeline has "ER+/PR-/HER2- grade 2 IDC" — baseline omits receptor status in the Type field]
+- **Stage:** Clinical T2NX.
+
+#### Lab Results:
+- **Genetic Testing:** Mutation in the ATM gene.
+  [BL-ERR: Genetic testing is NOT a lab result.]
+- **Pathology:** Grade 2 IDC, ER+ (>95%), PR+ (<5%), HER2 negative by FISH, Ki67 44%.
+  [BL-ERR: Pathology is NOT a lab result.]
+  [BL-WIN: Baseline captures PR+ (<5%) — pipeline says "PR-" which oversimplifies. PR at <5% is technically positive. Baseline is more accurate on PR status.]
+- **Mammaprint:** High Risk (-0.622).
+  [DIFF: Pipeline doesn't include Mammaprint score in the Cancer_Diagnosis. Baseline captures it.]
+
+#### Plan:
+- Radiation: Not recommended due to ATM mutation.
+  [BL-WIN: Baseline captures the REASONING behind no radiation (ATM mutation contraindicates radiation). Pipeline just says "None" for radiotherapy_plan without explanation.]
+
+
+============================================================
+ROW 19 (coral_idx=38)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** ER+/PR-/HER2- left breast cancer, IDC.
+  [SAME as pipeline — both correct]
+- **Stage:** Clinical stage 2-3.
+  [SAME as pipeline]
+
+#### Current Medications:
+- Lists exemestane + 9 other medications (amoxicillin, augmentin, benzonatate, bupropion, doxycycline, hydrocodone, ibuprofen, metrogel, ondansetron)
+  [DIFF: Pipeline has only "exemestane" (cancer med) and "ondansetron" (supportive). Baseline lists everything including antibiotics and pain meds.]
+
+#### Response to Treatment:
+- Improved depression/anxiety symptoms. Tolerating exemestane better than letrozole.
+  [DIFF: Pipeline says "NED on exam" — captures clinical response (no evidence of disease). Baseline captures quality-of-life response (tolerating new drug). Both perspectives valid.]
+
+
+============================================================
+ROW 20 (coral_idx=39)
+============================================================
+
+#### Cancer Diagnosis:
+- **Type:** Bilateral breast cancer. Right: ER+, PR+, HER2 positive, Ki67 40%. Left: ER+, PR+, HER2 0, e-cadherin +.
+  [DIFF: Good detail — captures bilateral with different HER2 status. Pipeline similarly detailed.]
+- **Stage:** Early stage breast cancer.
+  [BL-ERR: With liver and lung nodules present, "early stage" may be WRONG. Pipeline leaves stage empty and says "Not sure" for metastasis — more appropriately cautious.]
+- **Metastasis:** Liver and lung nodules noted, but no confirmed metastatic disease.
+  [DIFF: Both baseline and pipeline flag uncertainty about liver/lung nodules]
+
+#### Treatment Goals:
+- To manage and treat bilateral breast cancer effectively.
+- To prevent recurrence and manage metastatic potential.
+  [BL-ERR: Extremely vague — "manage and treat effectively" is not a clinical goal. Pipeline says "curative".]
+
+#### Plan:
+- Medications: Initiate chemotherapy regimen post-surgery.
+  [BL-ERR: The A/P says chemotherapy will start BEFORE surgery (neoadjuvant), not post-surgery. This is the same error the letter faith gate fixed in the letter — "adjuvant" vs "neoadjuvant" confusion.]
+
+
+============================================================
+SUMMARY OF SYSTEMATIC PATTERNS
+============================================================
+
+BASELINE SYSTEMATIC ERRORS (recurring across multiple samples):
+
+1. TREATMENT GOALS CONFUSION (15/20 samples):
+   Baseline consistently describes PLANS, ACTIONS, or DIAGNOSTIC STEPS as "treatment goals"
+   instead of the clinical therapeutic intent (curative/palliative/surveillance/risk reduction).
+   Affected: ROW 1,2,4,5,6,8,10,13,14,15,17,18,19,20
+   Pipeline correctly classifies: curative (11), palliative (5), surveillance (1), risk reduction (1)
+
+2. RECEPTOR STATUS OMISSION (8/20 samples):
+   Baseline gives cancer type without ER/PR/HER2 receptor status.
+   Affected: ROW 1,3,4,5,10,12,15,18
+   Pipeline ALWAYS includes receptor status when available in the note.
+
+3. PATHOLOGY MISLABELED AS LABS (6/20 samples):
+   Baseline puts pathology results (ER%, PR%, HER2 IHC/FISH, genetic testing)
+   under "Lab Results" instead of Cancer Diagnosis.
+   Affected: ROW 8,11,15,16,17,18
+
+4. IMAGING/PROCEDURES MISLABELED AS LABS (2/20 samples):
+   Baseline puts PET/CT, echocardiogram, or FNA results under "Lab Results."
+   Affected: ROW 16,17
+
+5. RESPONSE SPECULATION (1/20 samples):
+   ROW 6: Baseline says "Anticipated excellent response" before treatment started.
+
+6. CANCER HISTORY MIXING (1/20 samples):
+   ROW 4: Baseline mixes ovarian cancer staging with breast cancer staging.
+
+7. NEOADJUVANT/ADJUVANT CONFUSION (1/20 samples):
+   ROW 20: Baseline says "post-surgery" when treatment plan is neoadjuvant (before surgery).
+
+
+BASELINE WINS OVER PIPELINE (specific cases):
+
+1. ROW 2 — Liver cyst: Baseline correctly says "no distant metastases." Pipeline WRONG (calls cyst metastasis).
+2. ROW 12 — Lab values: Baseline captures 12 lab values. Pipeline says "No labs in note" — pipeline error.
+3. ROW 18 — PR status: Baseline says "PR+ (<5%)" which is more accurate than pipeline's "PR-".
+4. ROW 18 — Radiation reasoning: Baseline explains ATM mutation contraindicates radiation. Pipeline just says "None."
+5. ROW 7 — Medication completeness: Baseline lists more supportive medications for this follow-up patient.
+6. ROW 9 — Treatment goal description: Baseline captures patient-centered palliative goal language.
+7. ROW 13 — Receptor percentages: Baseline includes ER 80-90%, PR 80-90% detail.
+8. ROW 17 — Ki-67: Baseline includes Ki-67 >30% in the diagnosis.
+
+
+PIPELINE SYSTEMATIC ADVANTAGES:
+
+1. Receptor status always included (when in note)
+2. Treatment goals correctly classified (curative/palliative/surveillance)
+3. Structured 18-field JSON output
+4. Current medications filtered for cancer-relevant drugs
+5. 10-category plan structure
+6. Response assessment captures both positive and negative signals (ROW 7)
