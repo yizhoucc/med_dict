@@ -189,7 +189,8 @@ Treatment_Goals: |
 
   Respond *only* with a JSON object using this exact schema (NO other keys):
   {
-  "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, surveillance, or symptom management"
+  "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, surveillance, or symptom management",
+  "goals_description": "If the note explicitly states treatment goals or intent in the physician's own words (e.g., 'achieve as deep and durable a remission as possible', 'not expected to be curative', 'prolongation of life while maintaining quality of life', 'primarily for palliative/QoL purposes'), quote or closely paraphrase that language here. If no explicit goals language is found, write 'Not explicitly stated.'"
   }
 
 Response_Assessment: |

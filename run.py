@@ -1042,8 +1042,9 @@ def main():
         print(f"  Total extraction: {time.time() - ext_start:.1f}s")
 
         # Extract plan keypoints from assessment/plan section
-        # Pop Referral — it needs full note context, not just A/P [v14]
+        # Pop fields that need full note context, not just A/P [v14]
         referral_prompt = plan_extraction_prompts.pop("Referral", None)
+        genetic_results_prompt = plan_extraction_prompts.pop("Genetic_Testing_Results", None)
 
         if assessment_and_plan is not None:
             plan_start = time.time()
@@ -1095,6 +1096,18 @@ def main():
             print(f"  Referral extraction (full note): {time.time() - ref_start:.1f}s")
             # Restore the prompt for next iteration
             plan_extraction_prompts["Referral"] = referral_prompt
+
+        if genetic_results_prompt:
+            gr_start = time.time()
+            gr_keypoints = extract_fn(
+                {"Genetic_Testing_Results": genetic_results_prompt},
+                model, tokenizer, keypoint_config, fullnote_cache,
+                verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
+                gate_config=gate_config, supportive_whitelist=supp_whitelist,
+            )
+            keypoints.update(gr_keypoints)
+            print(f"  Genetic_Testing_Results (full note): {time.time() - gr_start:.1f}s")
+            plan_extraction_prompts["Genetic_Testing_Results"] = genetic_results_prompt
 
         # Sanitize keypoints: convert any list values to strings [v32 compat fix]
         for section_key, section_val in keypoints.items():

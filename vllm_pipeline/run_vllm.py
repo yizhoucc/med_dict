@@ -241,7 +241,7 @@ def main():
         if assessment_and_plan:
             ap_base = build_base_prompt(assessment_and_plan, chat_tmpl=chat_tmpl)
             # Fields that need full note context (orders/code status are outside A/P)
-            full_note_keys = {"Advance_care_planning", "Imaging_Plan", "Lab_Plan", "Referral", "Genetic_Testing_Plan"}
+            full_note_keys = {"Advance_care_planning", "Imaging_Plan", "Lab_Plan", "Referral", "Genetic_Testing_Plan", "Genetic_Testing_Results"}
             for key, prompt in plan_extraction_prompts.items():
                 if not prompt:
                     continue

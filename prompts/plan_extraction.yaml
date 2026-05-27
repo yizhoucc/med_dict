@@ -289,6 +289,44 @@ follow_up_next_visit: |
       "Next clinic visit": "(in-person or telehealth): timing and purpose"
   }
 
+Genetic_Testing_Results: |
+  TASK: Extract COMPLETED genetic and molecular testing results from this clinical note.
+  This field captures testing that has ALREADY BEEN DONE and results are available.
+  Do NOT include tests that are PLANNED for the future — those belong in Genetic_Testing_Plan.
+
+  What to INCLUDE:
+  - Germline testing results (BRCA1/2, ATM, PALB2, CHEK2, Lynch syndrome genes, hereditary cancer panel)
+  - Tumor genomic sequencing results (Foundation Medicine, Tempus, UCSF500, NGS panels)
+  - Specific mutations found (KRAS, TP53, PIK3CA, BRAF, NTRK, ESR1, etc.)
+  - Microsatellite instability (MSI) status if from molecular testing
+  - Tumor mutational burden (TMB)
+  - Mismatch repair (MMR) protein status by IHC
+  - Liquid biopsy / ctDNA results (Guardant360, FoundationOne Liquid, etc.)
+  - Oncotype DX recurrence score, MammaPrint risk category and score
+  - Variants of uncertain significance (VUS) — include which gene and variant
+  - Negative/normal results (e.g., "hereditary cancer panel: negative", "no pathogenic variants found")
+  - Non-secretor status (e.g., "patient does not express CA-19-9")
+  - HRD (homologous recombination deficiency) status
+  - PD-L1 expression level (CPS or TPS score)
+
+  What to EXCLUDE:
+  - Standard IHC pathology (ER/PR/HER2 status) — these belong in Cancer_Diagnosis
+  - Routine lab results (CBC, CMP, tumor marker levels like CA 19-9 value) — these belong in Lab_Results
+  - Tests that are PLANNED but not yet done — those belong in Genetic_Testing_Plan
+  - Imaging results (CT, MRI, PET)
+
+  Search the ENTIRE note — results may appear in HPI, pathology reports, genetics consultation notes,
+  problem list, or Assessment/Plan. Look for keywords: "mutation", "variant", "pathogenic", "VUS",
+  "panel", "sequencing", "Oncotype", "MammaPrint", "Foundation", "Guardant", "MSI", "MMR", "TMB",
+  "germline", "somatic", "BRCA", "genetic testing", "molecular", "NGS", "ctDNA".
+
+  If no genetic/molecular testing results are found anywhere in the note, write "No genetic testing results in note."
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "genetic_testing_results": "Summary of completed genetic/molecular test results including mutations found, VUS, negative results, and test platform used. Or 'No genetic testing results in note.'"
+  }
+
 Advance_care_planning: |
   TASK: Extract the 'Advance care planning' from the clinical note.
   Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.

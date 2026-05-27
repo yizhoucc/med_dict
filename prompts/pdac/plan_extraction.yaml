@@ -166,22 +166,33 @@ Genetic_Testing_Plan: |
 Referral: |
   TASK: Extract 'Referral' from the given 'Assessment/Plan' section.
   Do not mistake the doctor's signature at the end of the note as a referral.
-  Include ALL referrals TO OTHER providers/departments.
+  Include ALL referrals TO OTHER providers/departments, including integrative medicine, complementary medicine, or wellness referrals.
+  A "consult" (e.g., "XRT consult", "Rad Onc consult", "GI consult") counts as a Specialty referral.
+  CRITICAL — do NOT include PAST/COMPLETED referrals:
+  - If a referral was made at a PRIOR visit and the service was already completed, do NOT include it.
 
-  CRITICAL — do NOT include PAST/COMPLETED referrals.
-  IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section.
+  IMPORTANT: Look for referrals throughout the ENTIRE note, not just the A/P section. Referrals may appear in:
+  - HPI/SUBJECTIVE: "would like to meet with psycho oncology", "referred to genetics", "will refer to social work"
+  - Diagnosis/Problem List section: "Ambulatory Referral to Social Work", "Referral to Exercise Counseling"
+  - A/P: "consult with Rad Onc", "nutrition consult", "dental evaluation", "SMS referral"
+  Search for ALL of these keywords: "refer", "referral", "consult", "counseling", "social work",
+  "exercise", "dental", "physical therapy", "PT", "OT", "psychiatry", "psychology", "psycho-oncology",
+  "psycho oncology", "palliative", "symptom management", "SMS", "pain management", "hospice",
+  "nutritionist", "dietitian", "gynecology", "gynecologic oncology".
 
   CRITICAL — distinguish OUTGOING from INCOMING referrals:
-  - OUTGOING (include): This note's doctor is SENDING the patient elsewhere.
-  - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else.
+  - OUTGOING (include): This note's doctor is SENDING the patient elsewhere. E.g., "I referred her to Rad Onc", "consult with genetics recommended", "would like to meet with psycho oncology".
+  - INCOMING (do NOT include): The patient was SENT TO this doctor by someone else. E.g., "referred by Dr. Smith", "referred to us for evaluation".
+  - Do NOT include the current visit's own department (Medical Oncology / GI Oncology).
 
   If no referral is mentioned for a category, set its value to "None".
+  For Nutrition: only include referrals to a nutritionist or dietitian. General diet advice from the oncologist is NOT a referral.
   Respond *only* with a JSON object using this exact schema:
   {
   "Nutrition": "any nutrition referrals such as diet optimization, appetite, weight maintenance, or 'None'",
   "Genetics": "ONLY outgoing referrals TO a genetics clinic or counselor. Write 'None' if no genetics referral is planned.",
-  "Specialty": "eg, Palliative care referral, Radiation oncology consult, surgical oncology, GI consultation, Pain management, or 'None'. IMPORTANT: 'treatment is palliative' describes the GOAL, NOT a referral to palliative care services.",
-  "Others": "Physical or occupational therapy, Social work, financial counseling, home health, or 'None'.",
+  "Specialty": "eg, Palliative care referral, Radiation oncology consult, surgical oncology, GI consultation, Pain management, Symptom Management Service (SMS), or 'None'. IMPORTANT: 'treatment is palliative' describes the GOAL, NOT a referral to palliative care services.",
+  "Others": "Psycho-oncology, psychology, psychiatry, physical or occupational therapy, Social work, financial counseling, home health, exercise counseling, or 'None'.",
   "follow up": "follow up mentioned in the provided text. f/up, f/p and fup all mean follow up."
   }
 
@@ -191,6 +202,43 @@ follow_up_next_visit: |
   Respond *only* with a JSON object using this exact schema:
   {
       "Next clinic visit": "(in-person or telehealth): timing and purpose"
+  }
+
+Genetic_Testing_Results: |
+  TASK: Extract COMPLETED genetic and molecular testing results from this clinical note.
+  This field captures testing that has ALREADY BEEN DONE and results are available.
+  Do NOT include tests that are PLANNED for the future — those belong in Genetic_Testing_Plan.
+
+  What to INCLUDE:
+  - Germline testing results (BRCA1/2, ATM, PALB2, CHEK2, Lynch syndrome genes, hereditary cancer panel)
+  - Tumor genomic sequencing results (Foundation Medicine, Tempus, UCSF500, NGS panels)
+  - Specific mutations found (KRAS, TP53, CDKN2A, SMAD4, NTRK, etc.)
+  - Microsatellite instability (MSI) status
+  - Mismatch repair (MMR) protein status by IHC (pMMR or dMMR)
+  - Tumor mutational burden (TMB)
+  - Liquid biopsy / ctDNA results (Guardant360, FoundationOne Liquid, etc.)
+  - Variants of uncertain significance (VUS) — include which gene and variant
+  - Negative/normal results (e.g., "hereditary cancer panel: negative", "no pathogenic variants found")
+  - Non-secretor status (e.g., "patient does not express CA-19-9", "non-secretor")
+  - HRD (homologous recombination deficiency) status
+  - PD-L1 expression level
+  - SPINK1 carrier status or other hereditary pancreatitis gene results
+
+  What to EXCLUDE:
+  - Routine lab results (CBC, CMP, tumor marker levels like CA 19-9 value) — these belong in Lab_Results
+  - Tests that are PLANNED but not yet done — those belong in Genetic_Testing_Plan
+  - Imaging results (CT, MRI, PET)
+
+  Search the ENTIRE note — results may appear in HPI, pathology reports, genetics consultation notes,
+  problem list, or Assessment/Plan. Look for keywords: "mutation", "variant", "pathogenic", "VUS",
+  "panel", "sequencing", "Foundation", "Guardant", "MSI", "MMR", "TMB", "pMMR", "dMMR",
+  "germline", "somatic", "BRCA", "KRAS", "genetic testing", "molecular", "NGS", "ctDNA", "SPINK1".
+
+  If no genetic/molecular testing results are found anywhere in the note, write "No genetic testing results in note."
+
+  Respond *only* with a JSON object using this exact schema:
+  {
+      "genetic_testing_results": "Summary of completed genetic/molecular test results including mutations found, VUS, negative results, and test platform used. Or 'No genetic testing results in note.'"
   }
 
 Advance_care_planning: |
