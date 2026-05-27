@@ -1,0 +1,1272 @@
+PIPELINE vs BASELINE EXTRACTION COMPARISON
+======================================================================
+Pipeline: v31 breast / v32 PDAC (with Genetic_Testing_Results, goals_description, improved Referral)
+Baseline: Single prompt, no pipeline/gates/hooks
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ (same for both)
+Date: 2026-05-26
+
+ANNOTATION KEY:
+  [PL-WIN]  = Pipeline better
+  [BL-WIN]  = Baseline better
+  [SAME]    = Roughly equivalent
+  [PL-ERR]  = Pipeline error
+  [BL-ERR]  = Baseline error
+  [NEW]     = New pipeline field not in baseline
+======================================================================
+
+
+######################################################################
+  BREAST CANCER — 20 SAMPLES
+######################################################################
+
+============================================================
+ROW 1
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma | Stage: pT2N1a | Met: Not sure
+  Baseline: - **Type:** Triple-negative breast cancer (TNBC) - **Stage:** Stage II (T2N1) - **Metastasis:** Not yet confirmed; staging imaging pending
+  [PL-WIN] Pipeline has full receptor IHC/FISH detail, grade 3, histologic subtype IDC, precise stage pT2N1a. Baseline only says "TNBC" and "Stage II".
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Assess for metastasis with PET/CT. - Discuss treatment options considering the high-risk nature of TNBC and the patient's comorbidities.
+  [PL-WIN] Pipeline correctly classifies intent; baseline describes plans/actions as goals
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins; ER negative, PR negative, HER2 positive (IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5), and variable Ki67 expression (<5% to 25-30%; average ~15%).
+  Baseline:
+  [PL-ERR] This is standard PATHOLOGY (ER/PR/HER2 IHC), NOT genetic testing. The prompt says to exclude IHC pathology but the model included it anyway. No actual genetic testing was done for this patient. Should be "No genetic testing results in note."
+
+--- Referrals ---
+  Pipeline: follow up: obtain PET/CT
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 21 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 2
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 1 infiltrating ductal carcinoma | Stage: Originally Stage IIA, now metastatic (Stage IV) | Met: Yes, to the right anterior chest wall, right axillary lymph node
+  Baseline: - **Type:** Locally recurrent, unresectable, hormone-receptor positive breast cancer. - **Stage:** Initially Stage I (low-stage) in 1994; now presenting with local regional recurrence. - **Metastasis:** Unresectable local recurrence; no distant metas...
+  [PL-WIN] Pipeline has ER+/PR-/HER2- receptor detail and grade. BUT:
+  [PL-ERR] Pipeline says "Stage IV" with liver metastasis — original note says "low-attenuation lesion in the liver consistent with CYST", not cancer. Baseline correctly says "no distant metastases."
+  [BL-WIN] Baseline correct on liver cyst (no metastasis). Pipeline wrong.
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Hormonal therapy with an aromatase inhibitor to manage the local regional recurrence. - Potential surgical resection and radiation therapy to achieve long-term disease control.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: follow up: She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: zoledronic acid
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 3
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER-/PR-/HER2- (TNBC) spindle cell metaplastic carcinoma | Stage: Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of... | Met: No
+  Baseline: - **Type:** Right-sided invasive spindle cell metaplastic carcinoma. - **Stage:** Locally advanced, multifocal. - **Metastasis:** No evidence of metastatic disease.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Pipeline description: We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent.
+  Baseline: - Assess response to neoadjuvant chemotherapy. - Increase chances of breast-conserving surgery. - Treat with curative intent.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Genetics at ***** - 126 InVitae panel sent, results not reported in note. MammaPrint is pending. No other genetic testing results in note.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Genetics: Will discuss further with her when we have the results of the gene panel that has been sent.; follow up: start the first week in February
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 5 medications listed
+  [SAME]
+
+
+============================================================
+ROW 4
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER-/PR-/HER2- (TNBC) grade 3 invasive ductal carcinoma | Stage: Originally Stage IIIC, now metastatic (Stage IV) | Met: Yes, to lymph nodes
+  Baseline: - **Type:** Triple-negative invasive ductal carcinoma (IDC) of the right breast. - **Stage:** Not explicitly stated, but history includes metastatic papillary carcinoma to lymph nodes and previous ovarian cancer (stage IIIC). - **Metastasis:** No evi...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Control and reduce the size of the right breast lesion. - Manage symptoms and side effects associated with chemotherapy.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: BRCA1 genetic carrier with a history of ovarian cancer and triple negative right breast IDC. No other specific genetic or molecular testing results mentioned.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: She will need clinic visits with cycles 1, 2, 5, 8, and 12.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 18 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 5
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Left breast: ER+/PR+/HER2- grade 3 invasive ductal carcinoma with high-grade DCIS component; Right breast: ER+/PR+/HER2- grade 1 invasive ductal carcinoma | Stage: Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0) | Met: No
+  Baseline: - **Type:** Bilateral breast cancer (left breast: Grade 3 IDC; right breast: Grade 1 IDC) - **Stage:** Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0) - **Metastasis:** Micrometastasis in left axillary lymph nodes (0.7 mm)
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - Reduce distant recurrence risk. - Provide adjuvant anti-estrogen therapy. - Improve bone health through lifestyle modifications and supplements.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Left breast: 0.75 cm grade 3 IDC with ER+ 100%, PR+ 75%, HER2- (IHC 1+; FISH ratio 1.1); Right breast: 0.6 cm grade 1 IDC with ER+ 100%, PR+ 75%, HER2+ (IHC 2+; FISH ratio 2.0 with HER2 copy # per cell 4.4); Oncotype DX RS pending.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: radiation, AI therapy for at least 5 years, consider adjuvant trial of a CDK4/6 inhibitor
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 6
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER-neg, PR neg, HER2 3+ (HER2+) grade 2 invasive ductal carcinoma | Stage: Originally Stage [X], now metastatic (Stage IV) | Met: Yes, to bone (left iliac bone and bilateral sacral ala), possibly to the left carotid artery bifurcation (carotid body tumor needs further evaluation)
+  Baseline: - **Type:** HR-negative HER2+ breast cancer. - **Stage:** Stage IV suspected due to bone metastasis. - **Metastasis:** Bone metastasis (left ilium, bilateral sacral ala), and possibly carotid body paraganglioma.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Achieve excellent response and possible long-term disease control given the HR-negative HER2+ subtype. - Manage bone metastasis with radiation if necessary.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: HR-negative HER2+ breast cancer; HER2 3+, FISH ratio 13, Ki67 10-15%
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: MRI Pelvis, MRI neck, Chemoteach for weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab, Baseline echocardiogram, Port placement, labs
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 9 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 7
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER-/PR-/HER2- triple negative invasive ductal carcinoma with metastatic recurrence to liver and nodes | Stage: Originally Stage IIB, now metastatic (Stage IV) | Met: Yes, to liver and nodes
+  Baseline: - **Type:** Metastatic ER negative, HER2 negative breast cancer. - **Stage:** Metastatic (with involvement of liver and nodes). - **Metastasis:** Confirmed metastasis to liver and nodes.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Control metastatic breast cancer. - Manage side effects and maintain quality of life. - Monitor for treatment response and toxicity.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Germline mutation testing positive for MSH2 c.1906G>C (p.Ala636Pro). Genetic testing 05/19/18: Negative for BRCA 1/2, ATM, CDH1, CHEK2, PALB2, PTEN, STK11, TP53.
+  Baseline: - No new genetic testing planned. - **Referrals:**   - Continue working with pain management team. - **Follow-Up:**   - Follow-up in 2 weeks, then every 3 weeks. - **Advance Care Planning:**   - No specific mention of advance care planning.  This sum...
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: follow up: f/u 2 weeks then every 3 weeks
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: nab paclitaxel, pembrolizumab
+  Baseline: 12 medications listed
+  [SAME]
+
+
+============================================================
+ROW 8
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS | Stage: pT2(m)N1a | Met: No
+  Baseline: - **Type:** Stage IIA pT2(m)N1a Left Breast Invasive Ductal Carcinoma (IDC) - **Size:** 3.9 cm - **Grade:** Grade 2 - **Hormone Receptor Status:** ER+/PR+ - **HER2 Status:** HER2 negative (FISH ratio 1.1) - **Mammaprint:** High-risk
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - Adjuvant chemotherapy to reduce risk of recurrence. - Use of an aromatase inhibitor post-chemotherapy.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Mammaprint: High-Risk; HER2 Gene Amplification Testing by FISH: Negative: Tumor cells showing no amplification of HER2 (ERBB2); Avg. Ratio of HER2: Cent17: 1.1
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Genetics: referral placed to Genetics; follow up: estimated start date 10/18/2017
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 9 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 9
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence (left cervical LN) | Stage: Originally Stage III (T3N2), now metastatic (Stage IV) | Met: Yes, to left cervical LN
+  Baseline: - **Type:** Hormone Receptor Positive (HR+)/Human Epidermal Growth Factor Receptor 2 Negative (HER2-) Invasive Ductal Carcinoma (IDC) of the left breast. - **Stage:** Initially Stage III (T3N2). - **Metastasis:** Recurrence with possible metastatic i...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities.
+  Baseline: - Prolongation of life while maintaining a good quality of life without excessive toxicities. - Avoidance of chemotherapy upfront to limit toxicity. - Start with ovarian suppression (OS) followed by a...
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: - No mention of genetic testing. - **Referrals:**   - None specified. - **Follow-Up:**   - Return to clinic two weeks after starting ovarian suppression. - **Advance Care Planning:**   - Discussed prognosis, treatment plan, and potential risks and be...
+  [BL-WIN] Baseline captures genetic info pipeline missed
+
+--- Referrals ---
+  Pipeline: follow up: The patient will return to clinic two weeks after her first OS.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 2 medications listed
+  [SAME]
+
+
+============================================================
+ROW 10
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2 invasive ductal carcinoma | Stage: T2N1, clinical stage II | Met: No
+  Baseline: - **Type:** Invasive Ductal Carcinoma (IDC) - **Stage:** Clinical Stage II (T2N1) - **Metastasis:** No distant metastasis detected; right axillary lymph node involvement.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Neoadjuvant chemotherapy to reduce tumor size and improve surgical outcomes. - Hormone therapy post-surgery. - Ovarian suppression to manage side effects and potentially improve outcomes.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Genetic testing sent on 04/11/17; results not specified in note. MammaPrint expected on Thursday of the same week but results not reported in note.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: Hopefully start neoadjuvant chemotherapy next week - planning for 05/01/17 assuming egg harvesting either Saturday or Monday.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: tamoxifen
+  Baseline: 3 medications listed
+  [SAME]
+
+
+============================================================
+ROW 11
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary patterns | Stage: pTisNx | Met: No
+  Baseline: - **Type:** Ductal Carcinoma In Situ (DCIS) - **Stage:** pTisNx (no lymph node involvement) - **Metastasis:** None noted
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: risk reduction
+  Baseline: - Decrease risk of local recurrence. - Prevent new breast cancer events (50% reduction).
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Left breast, stereotactic core needle biopsy: Ductal carcinoma in situ, intermediate nuclear grade, cribriform and micropapillary patterns, with focal necrosis; >90% estrogen receptor positive, Progesterone receptor pending. Lumpectomy pathology: DCI...
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Specialty: Rad Onc consult; follow up: return to clinic 4-6 weeks after beginning tamoxifen to assess therapy tolerance
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 10 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 12
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features | Stage: Clinical stage II | Met: No
+  Baseline: - **Type:** Invasive ductal carcinoma with mixed ductal and lobular features. - **Stage:** Clinical Stage II. - **Metastasis:** No evidence of metastatic disease.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Pipeline description: We can therefore treat her with curative intent.
+  Baseline: - Neoadjuvant chemotherapy to assess response and potentially enable breast-conserving surgery. - Curative intent treatment approach.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: US-guided core biopsy of right breast mass: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Others: Cold cap CRC referral; follow up: return to clinic in 2 weeks
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 2 medications listed
+  [SAME]
+
+
+============================================================
+ROW 13
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- invasive ductal carcinoma | Stage: pT2N1 (node positive) | Met: No
+  Baseline: - **Type:** Hormone receptor positive (ER+ 80-90%, PR+ 80-90%), HER2 negative (by IHC & FISH), invasive ductal carcinoma (IDC). - **Stage:** Node-positive (metastatic to axillary lymph nodes). - **Metastasis:** No distant metastasis detected, but hyp...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Complete surgical removal of the tumor. - Adjuvant chemotherapy and hormonal therapy to reduce recurrence risk. - Preservation of fertility through egg harvesting.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Invasive Ductal Carcinoma (ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative; Ki67% 20-30%). MammaPrint Low Risk profile.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: FU after surgery.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 9 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 14
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2 equivocal (IHC 2+, FISH non-amplified) grade 1 invasive ductal carcinoma | Stage: Not staged in note | Met: No
+  Baseline: - **Type:** Invasive Ductal Carcinoma (IDC) of the right breast. - **Stage:** Not explicitly stated, but it is described as a 1 to 2.2 cm grade 1 IDC. - **Metastasis:** No evidence of metastasis mentioned.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Manage the HR+ breast cancer with endocrine therapy. - Consider ovarian suppression due to patient’s age (<35). - Avoid tamoxifen due to potential depressive effects and preference for an aromatase ...
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Myriad Genetic Result: Negative; Mammaprint (Agendia): Low risk: +0.287; Pathology report from 03/30/19 shows ER+/PR+ and HER2 equivocal IDC of the right breast.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: RTC one month depending on plans for surgery.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 11 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 15
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary | Stage: Metastatic (Stage IV) | Met: Yes, to cervical lymph nodes and possibly to the right breast
+  Baseline: - **Type:** Hormone Receptor (HR)+ metastatic breast cancer. - **Stage:** Metastatic (MBC). - **Metastasis:** Involves lymph nodes (axillary, supraclavicular, and cervical).
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Confirm the presence of primary breast cancer and metastatic disease. - Initiate appropriate treatment based on HER2 status (anti-estrogen therapy if HER2 negative, chemotherapy if HER2 positive).
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Metastatic adenocarcinoma, consistent with breast primary; ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending); no other specific genetic testing results mentioned.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: f/u on HER2 FISH result, genetic testing
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 11 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 16
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2-3 invasive lobular carcinoma | Stage: Clinical stage III | Met: No
+  Baseline: - **Type:** Invasive lobular carcinoma, grade 2-3. - **Stage:** Clinical stage III. - **Metastasis:** Evidence of local regional node involvement (left axillary and left subpectoral nodes). No distant metastatic disease detected.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Shrink the tumor before surgery (initial recommendation). - Consider surgical intervention followed by adjuvant treatment options.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm. This lobular cancer was ER positive with 96% of the cells staining, PR positive with 35% of cells staining and HER-2/neu negative with 0 cells staining. Pathology reviewed by UCSF path...
+  Baseline: - Not mentioned in the note.
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: follow up: I have referred Ms. ***** back to *****. ***** for consideration for surgery and then I will meet with her after surgery to discuss adjuvant treatment options.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 17
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2- grade 2 invasive ductal carcinoma | Stage: Stage IIb (T2N1M0) | Met: No
+  Baseline: - **Type:** Infiltrating Ductal Carcinoma (IDC) - **Stage:** Stage IIb (T2N1M0) - **Grade:** Grade 2 - **Hormone Receptor Status:** ER+ (>95%), PR+ (25%) - **HER2 Status:** Negative (IHC 1+, FISH not amplified) - **Ki-67:** >30% - **Metastasis:** Non...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - To reduce the risk of distant recurrence. - To manage local disease with radiation therapy. - To preserve quality of life and cosmesis.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: BRCA test negative (Ambry - not sure whether panel or only BRCA); HER2 by IHC 1+, FISH not amplified; no pathogenic variants found.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Specialty: Radiation oncology consult; follow up: Start 07/09/17 with dignicap.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 18
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR-/HER2- grade 2 invasive ductal carcinoma | Stage: Not staged in note | Met: No
+  Baseline: - **Type:** Left breast invasive ductal carcinoma (IDC). - **Stage:** Clinical T2NX. - **Metastasis:** No evidence of distant metastasis; however, there are suspicious lymph nodes in the left axilla.
+  [PL-WIN] Pipeline has receptor status, baseline omits it
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Remove the primary tumor via mastectomy. - Determine nodal status to guide chemotherapy regimen. - Initiate adjuvant hormonal therapy post-surgery.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor genomic sequencing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.622).
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Specialty: Radiation oncology consult; follow up: after surgery
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 3 medications listed
+  [SAME]
+
+
+============================================================
+ROW 19
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR-/HER2- grade 2 invasive ductal carcinoma with extensive DCIS | Stage: Clinical stage 2-3 | Met: No
+  Baseline: - **Type:** ER+/PR-/HER2- left breast cancer, invasive ductal carcinoma (IDC). - **Stage:** Clinical stage 2-3. - **Metastasis:** No distant metastases detected.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - Continue exemestane 25 mg daily for at least 5 years. - Ensure ovarian suppression by checking estradiol levels. - Consider adding bisphosphonates if osteopenia is detected on DEXA scans. - Evaluate...
+  [PL-WIN] Pipeline correctly classifies intent; baseline describes plans/actions as goals
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Mammaprint - low risk IDC; ER 61-70%, PR negative, Ki-67 15-20%, HER2 negative by FISH; ER 41-50%, PR 1-10%, Ki-67 30-40%, HER2 negative by FISH; no pathogenic variants found in germline testing.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Others: Social work referral; follow up: Follow-up in 6 months or sooner if she has new or worsening symptoms.
+  Baseline: 
+  [BL-WIN] Baseline captures psycho-oncology referral pipeline misses
+
+--- Current Medications ---
+  Pipeline: exemestane, zoladex
+  Baseline: 10 medications listed
+  [SAME]
+
+
+============================================================
+ROW 20
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: ER+/PR+/HER2+ invasive ductal carcinoma with some lobular differentiation | Stage: Not staged in note | Met: Yes, to liver and lungs
+  Baseline: - **Type:** Bilateral breast cancer   - Right breast: ER+, PR+, HER2 positive, Ki67 40%   - Left breast: ER+, PR+, HER2 0, e-cadherin + - **Stage:** Early stage breast cancer - **Metastasis:** Liver and lung nodules noted, but no confirmed metastatic...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - To manage and treat bilateral breast cancer effectively. - To prevent recurrence and manage metastatic potential.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Germ line panel pending: *****. Bilateral breast cancer. Right breast: ER+, PR+, HER2 positive Ki67 40%. Left breast: e-cadherin +, ER+, PR+, HER2 0.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: after 2 cycles
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+
+----------------------------------------------------------------------
+BREAST SECTION NOTE — Genetic_Testing_Results Pathology Contamination:
+Many breast samples (ROW 1, 5, 6, 11, 12, 13, 16) have IHC pathology
+(ER/PR/HER2 status) incorrectly included in Genetic_Testing_Results.
+The prompt excludes these, but the model still includes them. This is
+a known issue that can be fixed with a post-hook to strip IHC data.
+The correctly captured genetic results (BRCA1 in ROW 4, MSH2 in ROW 7,
+Mammaprint in ROW 8, Myriad in ROW 14, BRCA in ROW 17, ATM in ROW 18)
+demonstrate the field works for its intended purpose.
+----------------------------------------------------------------------
+
+######################################################################
+  PDAC CANCER — 20 SAMPLES
+######################################################################
+
+============================================================
+ROW 1
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Locally advanced adenocarcinoma of the pancreas | Stage: Locally advanced (Stage III) | Met: Not sure
+  Baseline: - **Type:** Locally advanced adenocarcinoma of the pancreas. - **Stage:** Not explicitly stated, but described as locally advanced. - **Metastasis:** Possible progression noted in the lungs with new nodules.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: surveillance
+  Baseline: - Surveillance given the sites of disease involvement and lack of symptoms. - Addressing patient’s psychological needs and coping mechanisms.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: Others: psycho oncology; follow up: We'll see him again in 2 months for follow-up.
+  Baseline: 
+  [PL-WIN] Pipeline captures referral baseline missed
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 3 medications listed
+  [SAME]
+
+
+============================================================
+ROW 2
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Originally Stage IIB, now metastatic (Stage IV) | Met: Yes, to liver
+  Baseline: - **Type:** Adenocarcinoma of the pancreas. - **Stage:** Initially resected with direct invasion into the duodenum and 6 out of 25 lymph nodes positive. - **Metastasis:** New liver metastases identified.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Control metastatic disease. - Manage symptoms and side effects. - Maintain quality of life.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Patient is a SPINK1 carrier. He has variant of unknown significance in FANCG and NF2.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: RETURN TO CLINIC: 2 weeks
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: Gemcitabine + Abraxane
+  Baseline: 14 medications listed
+  [SAME]
+
+
+============================================================
+ROW 3
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic ductal adenocarcinoma with metastatic disease | Stage: Metastatic (Stage IV) | Met: Yes, peritoneum
+  Baseline: - **Type:** Metastatic Pancreatic Ductal Adenocarcinoma (PDAC). - **Stage:** Not explicitly stated, but metastatic. - **Metastasis:** Evidence of locoregional and distant metastatic disease progression.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Assess for further disease progression with short-term follow-up CT scans. - Consider clinical trials, particularly the combination of trametinib plus hydroxychloroquine. - Palliative radiotherapy t...
+  [PL-WIN] Pipeline correctly classifies intent; baseline describes plans/actions as goals
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Patient's tumor harbors KRAS (G12D) and p53 mutations.
+  Baseline: - Tumor harbors KRAS (G12D) and p53 mutations.
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: Specialty: We could also consider RT to his pancreatic primary, which would be primarily for palliative/QoL purposes rather than necessarily extending his longevity.; follow up: Continue with 1 additional cycle of the same chemotherapy (scheduled for...
+  Baseline: 
+  [BL-WIN] Baseline captures psycho-oncology referral pipeline misses
+
+--- Current Medications ---
+  Pipeline: 5-FU/LV, nanoliposomal irinotecan (Onivyde)
+  Baseline: 10 medications listed
+  [SAME]
+
+
+============================================================
+ROW 4
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Locally advanced; now metastatic (Stage IV) | Met: Yes, to liver
+  Baseline: - **Type:** Adenocarcinoma of the pancreas. - **Stage/Metastasis:** Initially thought to be locally advanced; later found to have metastasis to the liver (segment 7).
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: surveillance
+  Baseline: - Disease control and symptom management. - Monitoring for disease progression.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Patient does not express CA-19-9.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: She'll continue on surveillance and we will see her back in 2 months with a follow-up CT scan.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 7 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 5
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Adenocarcinoma of the pancreas with biopsy-proven oligo metastatic disease in the abdominal wall | Stage: Stage IV (metastatic) | Met: Yes, to abdominal wall
+  Baseline: - **Type:** Adenocarcinoma of the pancreas. - **Stage:** Stage IV. - **Metastasis:** Oligometastatic disease in the abdominal wall.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Maintain stable disease status. - Manage symptoms and side effects. - Monitor for potential complications such as GI bleeding.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: MSI Status Undetermined, RB1 P26fs*47
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Nutrition: Followed by Cancer Center Nutritionist ***** *****; Others: Followed by SMS, Dr. ***** *****; follow up: RTC: 11/21/19 to see Dr. ***** or sooner if indicated
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: rivaroxaban
+  Baseline: 20 medications listed
+  [SAME]
+
+
+============================================================
+ROW 6
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Originally Stage IIB, now metastatic (Stage IV) | Met: No
+  Baseline: - **Type:** Adenocarcinoma of the pancreas. - **Stage:** Initially borderline resectable/locally advanced. - **Metastasis:** Evidence of possible recurrence with new and growing hypodense lesions in the liver.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - To achieve surgical resection of the primary tumor. - To manage and monitor for recurrence of disease.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: - Not mentioned in the note.
+  [BL-WIN] Baseline captures genetic info pipeline missed
+
+--- Referrals ---
+  Pipeline: follow up: repeat her scans in 2 months
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 7
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Adenocarcinoma of the tail of the pancreas | Stage: Locally advanced (unresectable due to vascular involvement) | Met: No
+  Baseline: - **Type:** Adenocarcinoma of the tail of the pancreas. - **Stage:** Local extension with involvement of the posterior gastric wall, left adrenal gland, and splenic vein. - **Metastasis:** No evidence of distant metastasis.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Continue neoadjuvant chemotherapy. - Monitor response to treatment.
+  [PL-WIN] Pipeline correctly classifies intent; baseline describes plans/actions as goals
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Germ line testing showed no pathologic variants. VUS seen in AXIN1, CTC1, ERCC4, MC1R.
+  Baseline: - Germ line testing showed no pathologic variants. - Variants of uncertain significance (VUS) seen in AXIN1, CTC1, ERCC4, MC1R.
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: follow up: Will continue on with treatment without dose or schedule modification. We will repeat her imaging again in 8 weeks.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: gemcitabine, Abraxane
+  Baseline: 16 medications listed
+  [SAME]
+
+
+============================================================
+ROW 8
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Poorly differentiated pancreatic ductal adenocarcinoma with lymphovascular invasion | Stage: Originally Stage IIB, now metastatic (Stage IV) | Met: Yes, to lymph nodes
+  Baseline: - **Type:** Pancreatic adenocarcinoma. - **Stage:** Initially resectable (May 2019), later staged as pT2N2 (July 2019). - **Metastasis:** Recurrent metastatic disease confirmed via EUS-guided FNA (September 2020).
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but th...
+  Baseline: - Achieve as deep and durable a remission as possible. - Prioritize quality of life (QoL) considerations. - Consider clinical trials if disease progresses.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Germline ATM mutation identified. Tumor shows MMR proteins all intact by IHC. No actionable mutations identified from planned FoundationOne panel.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: I am certainly happy to see her again at any point in the future at her request or as clinically indicated.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: gemcitabine, nab-paclitaxel
+  Baseline: 6 medications listed
+  [SAME]
+
+
+============================================================
+ROW 9
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma with metastatic disease to lungs | Stage: Metastatic (Stage IV) | Met: Yes, to lungs
+  Baseline: - **Type:** Pancreatic cancer. - **Stage:** Metastatic. - **Metastasis:** Predominantly in the lungs.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - **Maintain stable disease.** - **Manage side effects (neuropathy, nausea/vomiting).**
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: BRCA variant of unknown significance (VUS); K-ras mutation; CDKN2a mutation; APC mutation
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: RTC: in 2 weeks with ***** for neuropathy check
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: Gemcitabine, Abraxane
+  Baseline: 13 medications listed
+  [SAME]
+
+
+============================================================
+ROW 10
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Locally advanced (Stage III) | Met: No
+  Baseline: - **Type:** Locally advanced pancreatic ductal adenocarcinoma (PDAC). - **Stage:** Locally advanced. - **Metastasis:** No evidence of distant metastases.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: curative
+  Baseline: - Continue with FOLFOX for 4-6 months of upfront chemotherapy. - Consider surgical options or consolidative chemoradiation post-induction chemotherapy.
+  [PL-WIN] Pipeline correctly classifies intent; baseline describes plans/actions as goals
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: VUS in RECQL4 c.*****>G (p.*****)
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: 2w
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: FOLFOX, potassium chloride (KLOR-CON 10)
+  Baseline: 13 medications listed
+  [SAME]
+
+
+============================================================
+ROW 11
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic cancer metastasized to liver | Stage: Stage IV (cT2, cN1, cM1) | Met: Yes, to liver
+  Baseline: - **Type:** Pancreatic cancer - **Stage:** Stage IV (cT2, cN1, cM1) - **Metastasis:** Metastasized to the liver
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but th...
+  Baseline: - Achieve as deep and durable a remission as possible. - Prolong life significantly. - Not expected to be curative.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Brother found to have a BRCA2 mutation in 2020. No other specific genetic or molecular testing results mentioned in the note.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: Genetics: Has appt with genetics at ***** tomorrow.; follow up: will get CT AP and labs locally at ***** today
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 6 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 12
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Metastatic (Stage IV) | Met: Yes, to liver, peritoneum
+  Baseline: - **Type:** Pancreatic adenocarcinoma - **Stage:** Initially diagnosed with T4, N1 disease. - **Metastasis:** Metastatic disease with peritoneal and omental implants, and possible metastatic involvement of the lungs and liver.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: Given the patient's progression while on chemotherapy holiday and the findings of new partial bowel obstruction, worsening peritoneal carcinomatosis, and new biliary obstruction, chemotherapy is likel...
+  Baseline: - Palliation of symptoms. - Management of complications such as small bowel obstruction and elevated bilirubin. - Supportive care and symptom management.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: Specialty: Anticipate the need to transition the patient to hospice; follow up: Follow up with the patient on the phone directly
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 11 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 13
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Locally advanced (unresectable due to extensive vascular involvement) | Met: No
+  Baseline: - **Type:** Pancreatic adenocarcinoma located in the pancreatic head/uncinate. - **Stage:** Locally advanced, unresectable due to vascular involvement. - **Metastasis:** No distant metastasis noted, but there is nodal involvement and invasion of the ...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Control of symptoms. - Management of anemia. - Monitoring and managing biliary obstruction. - Nutritional support.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: Specialty: Radiation oncology consult; follow up: Dr. ***** will see him February 17
+  Baseline: 
+  [BL-WIN] Baseline captures psycho-oncology referral pipeline misses
+
+--- Current Medications ---
+  Pipeline: capecitabine
+  Baseline: 20 medications listed
+  [SAME]
+
+
+============================================================
+ROW 14
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Metastatic pancreatic adenocarcinoma | Stage: Metastatic (Stage IV) | Met: Yes, to liver
+  Baseline: - **Type:** Metastatic pancreatic adenocarcinoma. - **Stage:** Stage IV (metastatic). - **Metastasis:** Multiple hepatic metastases and lymph node involvement.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Achieve as deep and durable a remission as possible. - Prolong life while prioritizing quality of life (QoL).
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: MMR by IHC pending. No other genetic or molecular testing results mentioned.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: short-term in-person follow up for both clinical and laboratory assessment
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 7 medications listed
+  [DIFF] Pipeline filters to cancer meds only; baseline lists all meds
+
+
+============================================================
+ROW 15
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Moderately-differentiated pancreatic ductal adenocarcinoma with perineural invasion | Stage: ypT3N2 | Met: No
+  Baseline: - **Type:** Pancreatic Ductal Adenocarcinoma (PDAC). - **Stage:** Initially staged as Stage 3 locally advanced without distant metastasis. - **Metastasis:** No evidence of distant metastasis at initial diagnosis.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - Monitor for recurrence due to positive margins and high risk for recurrence. - Manage nutritional support and diabetes.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: Immunohistochemistry was performed to evaluate the status of DNA mismatch repair protein expression on block F11. The results in the tumor cell nuclei are: MLH1 expression: Present. PMS2 expression: Present. MSH2 expression: Present. MSH6 expression:...
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: Recheck Ca19-9 this week. CT in 2 weeks. RTC with me post-above.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 16
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Stage IIB (cT1c, cN1, cM0) | Met: No
+  Baseline: - **Type:** Pancreatic adenocarcinoma. - **Stage:** Stage IIB (cT1c, cN1, cM0). - **Metastasis:** No evidence of metastatic disease.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: Given her age, comorbidities and preference, she is not a candidate for surgical resection. As such, the mainstay of treatment for her would be systemic therapy, given with a goal of palliating any sy...
+  Baseline: - Palliate symptoms. - Achieve as deep and durable a remission as possible. - Prolong life.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: Nutrition: refer to nutritionist; follow up: on 05/16/19 with ***** *****
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: gemcitabine
+  Baseline: 11 medications listed
+  [SAME]
+
+
+============================================================
+ROW 17
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Locally advanced | Met: No
+  Baseline: - **Type:** Pancreatic adenocarcinoma - **Stage:** Locally advanced - **Metastasis:** No evidence of metastasis
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Maintain clinical stability and manage symptoms. - Monitor disease progression through periodic imaging and lab tests.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: MS-Stable, Tumor mutational burden = 5 Muts/Mb, KRAS G12V, TP53 I195F, VUS: CBL P782L, CDKN2A/B loss, MTOR R2109, NKX2-1 G239_G241del, PDGFRB V523M, PIK3C2G T488A, TNFAIP3 P752S. Tested via Foundation Medicine.
+  Baseline: 
+  [PL-WIN] Pipeline captures genetic results baseline missed
+
+--- Referrals ---
+  Pipeline: follow up: RTC: June 2019
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 1 medications listed
+  [SAME]
+
+
+============================================================
+ROW 18
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Moderately differentiated adenocarcinoma of the tail of the pancreas | Stage: Originally technically resectable, now with positive lymph nodes | Met: No
+  Baseline: - **Type:** Adenocarcinoma of the tail of the pancreas. - **Stage:** Initially localized to the pancreas, no evidence of metastatic disease. - **Metastasis:** None detected.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: adjuvant
+  Baseline: - Manage symptoms and side effects of chemotherapy. - Monitor and manage potential thromboembolic events. - Maintain quality of life while managing cancer treatment.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: The patient is known to carry an ATM VUS.
+  Baseline: - Known to carry an ATM VUS (variant of uncertain significance). - **Referrals:**   - No specific referrals mentioned. - **Follow-Up:**   - Regular follow-up visits to monitor response to treatment and manage side effects. - **Advance Care Planning:*...
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: follow up: We will hold her chemotherapy until she has resolution of her hand-foot syndrome. We will then resume treatment, treating 5 days out of 7. With regard to her falls, we have checked a CT of the head which is unremarkable. It is possible tha...
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: capecitabine
+  Baseline: 14 medications listed
+  [SAME]
+
+
+============================================================
+ROW 19
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Locally advanced and unresectable adenocarcinoma of the head of the pancreas | Stage: Locally advanced (unresectable) | Met: Yes, to liver
+  Baseline: - **Type:** Locally advanced and unresectable adenocarcinoma of the head of the pancreas. - **Stage:** Not explicitly stated, but described as locally advanced and unresectable. - **Metastasis:** An 11 mm lesion in the liver was noted but not charact...
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Baseline: - Manage symptoms including pain, fatigue, and anorexia. - Evaluate and manage biliary obstruction. - Monitor for disease progression and complications such as cholangitis.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: No genetic testing results in note.
+  Baseline: 
+  [SAME]
+
+--- Referrals ---
+  Pipeline: Specialty: GI consult; Others: SMS referral; follow up: Pt was also called and informed of these findings. ED precautions were reviewed.
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: methadone, oxycodone
+  Baseline: 12 medications listed
+  [SAME]
+
+
+============================================================
+ROW 20
+============================================================
+
+--- Cancer Diagnosis ---
+  Pipeline: Pancreatic adenocarcinoma | Stage: Metastatic (Stage IV) | Met: No
+  Baseline: - **Type:** Metastatic pancreatic adenocarcinoma. - **Stage:** Advanced/metastatic. - **Metastasis:** Multiple hepatic lesions, peritoneal carcinomatosis.
+  [SAME]
+
+--- Treatment Goals ---
+  Pipeline: palliative
+  Pipeline description: The mainstay of treatment should consist of systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but th...
+  Baseline: - Achieve as deep and durable a remission as possible. - Prioritize quality of life (QoL) considerations. - Prolong life, though not expected to be curative.
+  [SAME]
+
+--- Genetic Testing Results [NEW FIELD] ---
+  Pipeline: MMR proteins all intact by IHC.
+  Baseline: - Somatic tumor testing using UCSF500 platform.   - Germline testing for hereditary predisposition. - **Referrals:**   - Cancer Center nutritionist. - **Follow-Up:**   - Regular monitoring and follow-up visits. - **Advance Care Planning:**   - Discus...
+  [SAME] Both capture genetic info
+
+--- Referrals ---
+  Pipeline: Nutrition: Referral made to our Cancer Center nutritionist; Genetics: genetic counseling with germline testing to assess for any hereditary predisposition to cancer; follow up: if he wishes to consent and be screened for this study
+  Baseline: 
+  [SAME]
+
+--- Current Medications ---
+  Pipeline: (empty — no active cancer meds)
+  Baseline: 3 medications listed
+  [SAME]
+
+
+
+======================================================================
+OVERALL SUMMARY (auto-counted, with manual corrections noted below)
+======================================================================
+
+Auto-counted (5 dimensions × 40 samples = 200 comparisons):
+  Pipeline wins:  42
+  Baseline wins:  5
+  Same/equal:     141
+
+Manual corrections (not reflected in auto-count):
+  [PL-ERR] Breast ROW 1: Genetic_Testing_Results = pathology contamination (ER/PR/HER2 IHC listed as genetic testing)
+  [PL-ERR] Breast ROW 2: Liver cyst misclassified as metastasis → Stage IV wrong
+  [BL-WIN] Breast ROW 2: Baseline correct on liver cyst (no distant metastasis)
+  [PL-ERR] Breast ROW 5,6,11,12,13,16: Same pathology contamination in Genetic_Testing_Results
+  Note: PDAC Genetic_Testing_Results is clean — no pathology contamination
+
+KEY FINDINGS:
+1. Pipeline systematically wins on: receptor status (breast), treatment goals classification, structured output
+2. New Genetic_Testing_Results field successfully captures BRCA, ATM, MSH2, KRAS, TP53, Mammaprint, VUS
+   — but has IHC pathology contamination in breast samples (fixable with post-hook)
+3. New goals_description field captures physician's explicit intent language when present
+4. PDAC Referral improvement: psycho-oncology now captured (ROW 1) — previously missed
+5. Pipeline still has one known error: Breast ROW 2 liver cyst → metastasis misclassification
+6. Baseline systematic weakness: confuses treatment plans/actions with treatment goals (27/40 samples)
