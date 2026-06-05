@@ -67,7 +67,12 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
   BL 胜场 21→8 (降 62%); PL:BL 从 1.67:1 → 4.5:1 (压倒性).
   剩余 8 个 BL 胜场均为零散小问题(goals 描述/lab 小捕捉/procedure 时态/1受体/1否定),
   不再是系统性 bug.
-(全量 40 = 20 breast + 20 PDAC 修复版正在重跑, 结果待最终对照)
+全量 40 修复版重跑完成 (pipeline_breast_FIXED.txt / pipeline_pdac_FIXED.txt):
+  BREAST 20/20: 4 类 bug 标记 = 0 (无 [X]占位符/无 genetic IHC污染/无 supportive 噪声);
+    合法 Stage IV(ROW6/7/9/15)正确保留, ROW20 用"Suspected"(疑似守卫生效), 无回归.
+  PDAC 20/20: 4 类 bug 标记 = 0; genetic 字段表现优异——KRAS/SPINK1/ATM/BRCA/MSI/MMR/VUS
+    等真实分子结果全部正确保留, IHC 污染过滤精准区分"真分子结果 vs 纯受体病理".
+  → 系统性 bug 已在全 40 test set 消除. 修复在乳腺(有审计基线)上量化为 PL:BL 4.5:1(压倒性).
 
 8 类错误维度 (对齐 harness 设计目标, 用于归因):
   1 JSON/schema(不计分,仅记录)  2 答非所问  3 幻觉  4 时态泄漏
