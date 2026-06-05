@@ -131,9 +131,9 @@ methadone	SUPPORTIVE	analgesic_opioid	opioid for cancer pain
 tramadol	SUPPORTIVE	analgesic_opioid	weak opioid (Ultram)
 hydrocodone	SUPPORTIVE	analgesic_opioid	opioid
 codeine	SUPPORTIVE	analgesic_opioid	weak opioid
-gabapentin	SUPPORTIVE	analgesic_neuropathic	neuropathic pain (chemo neuropathy) — also chronic home use
-pregabalin	SUPPORTIVE	analgesic_neuropathic	neuropathic pain (Lyrica)
-duloxetine	SUPPORTIVE	analgesic_neuropathic	CIPN/neuropathic pain (Cymbalta)
+gabapentin	SUPPORTIVE_OR_HOME	analgesic_neuropathic	chemo neuropathy (CIPN) supportive vs chronic home neuropathic pain — context decides
+pregabalin	SUPPORTIVE_OR_HOME	analgesic_neuropathic	CIPN supportive vs chronic home pain (Lyrica) — context decides
+duloxetine	SUPPORTIVE_OR_HOME	analgesic_neuropathic	CIPN supportive vs home antidepressant (Cymbalta) — context decides
 # ===================== SUPPORTIVE: BONE-MODIFYING =====================
 zoledronic acid	SUPPORTIVE	bone	bisphosphonate (Zometa=bone mets; Reclast=osteoporosis)
 zometa	SUPPORTIVE	bone	zoledronic acid for bone mets
@@ -243,6 +243,8 @@ ventolin	NON_CANCER	respiratory	brand of albuterol
 montelukast	NON_CANCER	respiratory	asthma/allergy (Singulair)
 benzonatate	NON_CANCER	respiratory	cough suppressant (Tessalon)
 guaifenesin	NON_CANCER	respiratory	expectorant
+promethazine-dextromethorphan	NON_CANCER	respiratory	cough syrup combo (antitussive home med; the DM combo is NOT antiemetic promethazine)
+dextromethorphan	NON_CANCER	respiratory	cough suppressant (DM)
 loratadine	NON_CANCER	antihistamine	allergy (Claritin)
 claritin	NON_CANCER	antihistamine	brand of loratadine
 cetirizine	NON_CANCER	antihistamine	allergy (Zyrtec)

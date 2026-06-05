@@ -788,6 +788,11 @@ def main():
                 items2 = [m.strip() for m in re.split(r',(?![^(]*\))|[;\n]', supp_val2) if m.strip()]
                 kept_supp2, removed2 = [], []
                 for m in items2:
+                    # faithfulness: a supportive med must actually appear in the note (drop hallucinations)
+                    first_word = re.split(r'[ (]', m.strip())[0].lower()
+                    if first_word and len(first_word) > 2 and first_word not in note_lower:
+                        removed2.append(m + " [not in note]")
+                        continue
                     cat = classify_drug(m, drug_dict)
                     if cat in ("NON_CANCER", "ONCOLOGY"):
                         removed2.append(m)
