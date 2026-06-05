@@ -775,12 +775,75 @@ def main():
             supp_val2 = (", ".join(supp_raw2) if isinstance(supp_raw2, list) else str(supp_raw2)).strip()
             supp_low2 = supp_val2.lower()
             if supp_val2 and not supp_low2.startswith(("none", "not ", "no ")) and "not taking" not in supp_low2:
-                items2 = [m.strip() for m in re.split(r'[,;\n]', supp_val2) if m.strip()]
-                kept_supp2 = [m for m in items2 if any(d in m.lower() for d in supp_whitelist)]
+                # Blacklist of clearly NON-cancer-supportive home meds (eye drops, nasal spray,
+                # topical creams, vitamins/supplements, allergy antihistamines, glucose supplies).
+                # Blacklist (not whitelist) so legitimate chemo-supportive meds — antiemetics,
+                # PPIs, mag oxide, muscle relaxants, pain meds, neuropathy meds — are PROTECTED.
+                NON_SUPP = [
+                    "ophthalmic", "eye drop", "into both eyes", "brimonidine", "latanoprost", "alphagan",
+                    "xalatan", "patanol", "olopatadine", "prolensa", "vigamox", "timolol", "dorzolamide",
+                    "nasal", "nasonex", "flonase", "fluticasone",
+                    "cream", "ointment", "topical", "clotrimazole", "lotrimin", "lotrisone", "bengay", "menthol",
+                    "multivitamin", "fish oil", "omega-3", "melatonin", "ascorbic", "vitamin c", "vitamin b",
+                    "b-12", "cyanocobalamin", "ergocalciferol",
+                    "loratadine", "claritin", "cetirizine", "zyrtec", "fexofenadine", "allegra",
+                    "blood glucose", "test strip", "lancet", "glucose monitor", "monitor kit", "syringe-needle",
+                ]
+                items2 = [m.strip() for m in re.split(r',(?![^(]*\))|[;\n]', supp_val2) if m.strip()]
+                kept_supp2 = [m for m in items2 if not any(b in m.lower() for b in NON_SUPP)]
                 if len(kept_supp2) < len(items2):
                     removed2 = [m for m in items2 if m not in kept_supp2]
                     tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
-                    print(f"  [POST-SUPP-WHITELIST] Removed non-supportive meds: {removed2}")
+                    print(f"  [POST-SUPP-BLACKLIST] Removed non-supportive home meds: {removed2}")
+
+        # POST-MET-RECONCILE: final stage/met reconciliation AFTER indeterminate/brain removals [audit fix]
+        # Fixes ordering bug where POST-INDETERMINATE-MET removed a distant site (e.g. liver cyst)
+        # AFTER POST-DISTMET-REGIONAL already ran, leaving "Yes, [regional only]" + Stage IV.
+        cancer = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer, dict):
+            # (1) strip benign carotid-body paraganglioma from distant met sites
+            dm = cancer.get("Distant Metastasis", "") or ""
+            if ("paraganglioma" in note_lower or "carotid body" in note_lower) and "carotid" in dm.lower():
+                dm = re.sub(r'(?i)[,;]?\s*(?:and\s+)?(?:possibly\s+)?(?:to\s+)?(?:the\s+)?left?\s*carotid[^,;.]*', '', dm).strip().strip(',;').strip()
+                cancer["Distant Metastasis"] = dm or "Yes"
+                print(f"  [POST-MET-RECONCILE] removed carotid paraganglioma from distant mets")
+            # (2) re-check regional-only → No
+            dml = (cancer.get("Distant Metastasis", "") or "").lower()
+            if dml and not dml.startswith("no") and dml not in ("none", ""):
+                REGIONAL = ["axillary", "axilla", "sentinel", "supraclavicular", "infraclavicular",
+                            "internal mammary", "chest wall", "ipsilateral"]
+                DISTANT = ["liver", "lung", "bone", "brain", "pleural", "peritoneal", "ovary", "adrenal",
+                           "contralateral", "cervical", "distant", "hepatic", "pulmonary", "osseous",
+                           "cerebral", "sternum", "sternal", "spine", "spinal", "rib", "hip", "femur",
+                           "pelvi", "iliac", "sacral", "mediastin", "retroperitoneal", "mesenteric",
+                           "inguinal", "scalene"]
+                if any(r in dml for r in REGIONAL) and not any(d in dml for d in DISTANT):
+                    cancer["Distant Metastasis"] = "No"
+                    print(f"  [POST-MET-RECONCILE] regional-only after removals → DistMet No")
+            # (3) local-recurrence context guard
+            local_rec_context = (("local regional recurrence" in note_lower or "locally recurrent" in note_lower) and
+                                 ("no other sites of disease" in note_lower or "no evidence of metastatic" in note_lower))
+            if local_rec_context:
+                if cancer.get("Distant Metastasis", "").lower().startswith("yes"):
+                    dml2 = cancer.get("Distant Metastasis", "").lower()
+                    if not any(d in dml2 for d in ["liver", "lung", "brain", "bone", "hepatic", "pulmonary", "osseous"]):
+                        cancer["Distant Metastasis"] = "No"
+                        print(f"  [POST-MET-RECONCILE] local regional recurrence, no other sites → DistMet No")
+            # (4) downgrade Stage IV when DistMet now No and Metastasis field has no distant organ
+            stage = cancer.get("Stage_of_Cancer", "") or ""
+            sl = stage.lower()
+            dm2 = (cancer.get("Distant Metastasis", "") or "").lower()
+            met2 = (cancer.get("Metastasis", "") or "").lower()
+            if ("stage iv" in sl or "metastatic" in sl) and dm2.startswith("no"):
+                DIST_ORG = ["liver", "lung", "bone", "brain", "pleural", "peritoneal", "hepatic",
+                            "pulmonary", "osseous", "spine", "sternum", "rib", "femur", "hip",
+                            "adrenal", "iliac", "sacral", "contralateral", "distant"]
+                if (not any(d in met2 for d in DIST_ORG)) or local_rec_context:
+                    new = re.sub(r'(?i),?\s*now\s+metastatic\s*\(?stage iv\)?', ', now locally recurrent', stage)
+                    new = re.sub(r'(?i)\bmetastatic\s*\(?stage iv\)?', 'locally recurrent', new)
+                    new = re.sub(r'(?i)\bstage iv\s*\(?metastatic\)?', 'locally recurrent', new).strip().strip(',').strip()
+                    cancer["Stage_of_Cancer"] = new or "Locally recurrent (not Stage IV)"
+                    print(f"  [POST-MET-RECONCILE] Stage IV → '{cancer['Stage_of_Cancer']}' (no distant met)")
 
         # 7. Letter generation
         letter = ""

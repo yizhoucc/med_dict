@@ -2948,12 +2948,25 @@ def main():
             supp_val2 = (", ".join(supp_raw2) if isinstance(supp_raw2, list) else str(supp_raw2)).strip()
             supp_low2 = supp_val2.lower()
             if supp_val2 and not supp_low2.startswith(("none", "not ", "no ")) and "not taking" not in supp_low2:
-                items2 = [m.strip() for m in re.split(r'[,;\n]', supp_val2) if m.strip()]
-                kept_supp2 = [m for m in items2 if any(d in m.lower() for d in supp_whitelist)]
+                # Blacklist of clearly NON-cancer-supportive home meds. Blacklist (not whitelist)
+                # so legitimate chemo-supportive meds (antiemetics, PPIs, mag oxide, muscle
+                # relaxants, pain/neuropathy meds) are PROTECTED from over-filtering.
+                NON_SUPP = [
+                    "ophthalmic", "eye drop", "into both eyes", "brimonidine", "latanoprost", "alphagan",
+                    "xalatan", "patanol", "olopatadine", "prolensa", "vigamox", "timolol", "dorzolamide",
+                    "nasal", "nasonex", "flonase", "fluticasone",
+                    "cream", "ointment", "topical", "clotrimazole", "lotrimin", "lotrisone", "bengay", "menthol",
+                    "multivitamin", "fish oil", "omega-3", "melatonin", "ascorbic", "vitamin c", "vitamin b",
+                    "b-12", "cyanocobalamin", "ergocalciferol",
+                    "loratadine", "claritin", "cetirizine", "zyrtec", "fexofenadine", "allegra",
+                    "blood glucose", "test strip", "lancet", "glucose monitor", "monitor kit", "syringe-needle",
+                ]
+                items2 = [m.strip() for m in re.split(r',(?![^(]*\))|[;\n]', supp_val2) if m.strip()]
+                kept_supp2 = [m for m in items2 if not any(b in m.lower() for b in NON_SUPP)]
                 if len(kept_supp2) < len(items2):
                     removed2 = [m for m in items2 if m not in kept_supp2]
                     tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
-                    print(f"    [POST-SUPP-WHITELIST] Removed non-supportive meds: {removed2}")
+                    print(f"    [POST-SUPP-BLACKLIST] Removed non-supportive home meds: {removed2}")
 
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
