@@ -95,14 +95,11 @@ Imaging_Plan: |
   Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, EUS (endoscopic ultrasound), bone scan, X-ray, echocardiogram (TTE/Echo).
   Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
 
-  CRITICAL — RESTAGING: Always look for restaging plans. Common patterns:
-  - "restaging after X months", "restaging in X months", "scans again in X months"
-  - "repeat imaging after X months on treatment", "reassess with scans"
-  If restaging is mentioned, ALWAYS include it with timing (e.g., "restaging after 3 months of therapy").
+  RESTAGING: If the A/P explicitly states a restaging plan (e.g., "restaging CT in 3 months", "repeat scans after X cycles"), include it with the stated timing. Do NOT invent a restaging interval (e.g., "restaging after 3 months") that the note does not state. Echocardiogram/TTE: include ONLY if explicitly ordered/mentioned — never assume it just because chemo is planned.
 
   CRITICAL — distinguish PAST from FUTURE:
-  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "EUS showed mass"
-  - FUTURE (include): "will order MRI", "CT in 3 months", "restaging after 3 months"
+  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "EUS showed mass", "scan already done/looks good"
+  - FUTURE (include, ONLY if explicitly stated): "will order MRI", "CT in 3 months for restaging"
 
   CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
   - XRT, RT, SBRT, radiation therapy → these go in radiotherapy_plan, NOT here

@@ -130,19 +130,13 @@ Imaging_Plan: |
   Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray, echocardiogram (TTE/Echo), mammogram.
   Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
 
-  IMPORTANT — look for PRE-TREATMENT IMAGING. When chemotherapy (especially anthracyclines like AC, doxorubicin) is planned, an echocardiogram (TTE/Echo) is often required as a baseline cardiac assessment. Look for phrases like:
-  - "prior to starting", "before initiating", "in order to start", "steps required", "baseline"
-  - "will need TTE", "order echocardiogram", "Echo q6 months"
-  Echocardiogram/TTE IS an imaging study and MUST be included here.
+  IMPORTANT — echocardiogram/TTE IS an imaging study; include it ONLY if the A/P explicitly orders or mentions it (e.g., "baseline TTE ordered", "will need echo before chemo"). Do NOT add a TTE/echo on your own just because chemotherapy or an anthracycline is planned — extract it ONLY if the note actually says so. (A baseline echo is standard before anthracyclines/HER2 agents but is NOT needed for taxane-only or endocrine therapy, so never assume it.)
 
-  CRITICAL — RESTAGING: Always look for restaging plans. Common patterns:
-  - "restaging after X months", "restaging in X months", "scans again in X months"
-  - "repeat imaging after X months on treatment", "reassess with scans"
-  If restaging is mentioned, ALWAYS include it with timing (e.g., "restaging after 3 months of therapy").
+  RESTAGING: If the A/P explicitly states a restaging plan (e.g., "restaging CT in 3 months", "repeat scans after X cycles"), include it with the stated timing. Do NOT invent a restaging interval (e.g., "restaging after 3 months") that the note does not state.
 
   CRITICAL — distinguish PAST from FUTURE:
-  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed...", "Echo was normal" (past result)
-  - FUTURE (include): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening", "needs TTE before starting chemo", "restaging after 3 months"
+  - PAST (DO NOT include): "MRI showed lesions", "CT on 12/24/2019 showed...", "bone density scan last July showed...", "Echo was normal" (past result), "Echo looks good" (echo already done)
+  - FUTURE (include, ONLY if explicitly stated): "will order MRI", "DEXA in 1 year, due July 2019", "scans again in 3 months", "annual mammogram next due July 2019", "consider brain MRI if worsening"
 
   CRITICAL — only include DIAGNOSTIC imaging, not therapeutic radiation or procedures:
   - XRT, RT, radiation therapy, Gamma Knife, SRS, proton therapy → these go in radiotherapy_plan, NOT here

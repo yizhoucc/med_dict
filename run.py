@@ -1109,6 +1109,51 @@ def main():
             print(f"  Genetic_Testing_Results (full note): {time.time() - gr_start:.1f}s")
             plan_extraction_prompts["Genetic_Testing_Results"] = genetic_results_prompt
 
+            # POST-GENETIC-RESULTS-IHC: strip IHC receptor pathology (ER/PR/HER2/Ki67) that
+            # contaminates genetic_testing_results. If no real molecular/genetic test remains,
+            # clear to "No genetic testing results in note." [extraction-audit fix]
+            gtr = keypoints.get("Genetic_Testing_Results", {})
+            if isinstance(gtr, dict):
+                gval = str(gtr.get("genetic_testing_results", "") or "")
+                gval_low = gval.lower().strip().rstrip('.')
+                _no_result = ("no genetic testing results in note", "none", "n/a", "")
+                if gval_low not in _no_result:
+                    GENETIC_KW = [
+                        "brca", "atm", "palb2", "chek2", "mlh1", "msh2", "msh6", "pms2", "epcam",
+                        "lynch", "kras", "tp53", "pik3ca", "braf", "ntrk", "esr1", "egfr", "alk", "ros1",
+                        "cdkn2a", "smad4", "spink1", "msi", "microsatellite", "mmr", "mismatch repair",
+                        "tmb", "tumor mutational", "oncotype", "mammaprint", "foundation", "guardant",
+                        "tempus", "ucsf500", "ngs", "ctdna", "germline", "mutation", "variant",
+                        "pathogenic", "vus", "hrd", "homologous recombination", "pd-l1", "pdl1",
+                        "recurrence score", "non-secretor", "molecular profil", "sequencing", "gene panel",
+                    ]
+                    ihc_re = re.compile(
+                        r'\b(er|pr|her2|her-2|ki-?67|fish|ihc|erbb2)\b|cent\s*17|sig/nuc|copy #|copy number|amplification',
+                        re.IGNORECASE)
+                    if not any(k in gval_low for k in GENETIC_KW):
+                        gtr["genetic_testing_results"] = "No genetic testing results in note."
+                        print(f"    [POST-GENETIC-RESULTS-IHC] Cleared non-genetic (IHC/pathology) value: '{gval[:60]}'")
+                    else:
+                        segs = re.split(r'[;\n]', gval)
+                        kept = []
+                        for s in segs:
+                            s_strip = s.strip().rstrip('.,;')
+                            if not s_strip:
+                                continue
+                            s_low = s_strip.lower()
+                            s_genetic = any(k in s_low for k in GENETIC_KW)
+                            if ihc_re.search(s_strip) and not s_genetic:
+                                continue  # drop IHC-receptor-only segment
+                            kept.append(s_strip)
+                        if not kept:
+                            gtr["genetic_testing_results"] = "No genetic testing results in note."
+                            print(f"    [POST-GENETIC-RESULTS-IHC] All segments were IHC; cleared")
+                        else:
+                            new_val = "; ".join(kept)
+                            if new_val.lower().rstrip('.') != gval_low:
+                                gtr["genetic_testing_results"] = new_val if new_val.endswith(".") else new_val + "."
+                                print(f"    [POST-GENETIC-RESULTS-IHC] Stripped IHC contamination → '{new_val[:60]}'")
+
         # Sanitize keypoints: convert any list values to strings [v32 compat fix]
         for section_key, section_val in keypoints.items():
             if isinstance(section_val, dict):
@@ -2892,6 +2937,23 @@ def main():
                         filtered_supp.append(med)
                     if len(filtered_supp) < len(supp_list):
                         tc_dict["supportive_meds"] = ", ".join(filtered_supp) if filtered_supp else ""
+
+        # POST-SUPP-WHITELIST: keep only cancer-supportive-care drugs in supportive_meds [extraction-audit fix]
+        # Belt-and-suspenders: ensures home/non-cancer meds (eye drops, multivitamin, nasal spray,
+        # melatonin, topical creams) do not leak into supportive_meds even if the gate-level
+        # POST-SUPP filter did not run for this row.
+        tc_dict = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_dict, dict):
+            supp_raw2 = tc_dict.get("supportive_meds", "") or ""
+            supp_val2 = (", ".join(supp_raw2) if isinstance(supp_raw2, list) else str(supp_raw2)).strip()
+            supp_low2 = supp_val2.lower()
+            if supp_val2 and not supp_low2.startswith(("none", "not ", "no ")) and "not taking" not in supp_low2:
+                items2 = [m.strip() for m in re.split(r'[,;\n]', supp_val2) if m.strip()]
+                kept_supp2 = [m for m in items2 if any(d in m.lower() for d in supp_whitelist)]
+                if len(kept_supp2) < len(items2):
+                    removed2 = [m for m in items2 if m not in kept_supp2]
+                    tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
+                    print(f"    [POST-SUPP-WHITELIST] Removed non-supportive meds: {removed2}")
 
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
