@@ -40,13 +40,13 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 20   |   BL 更好: 13   |   打平: 77   (截至 BREAST ROW 5)
+  PL 更好: 25   |   BL 更好: 17   |   打平: 90   (截至 BREAST ROW 6)
   PL 反复强项: current_meds 过滤 / findings 完整性 / therapy 多模态完整 / response 时态 / 用药方案
   PL 反复弱点(可修, 4 类 bug, 几乎是 BL 全部胜场来源):
     (a) stage/met 过度分期+跨癌种串扰 (ROW2 局部复发→IV; ROW4 卵巢癌史→乳腺 IV)
@@ -258,3 +258,43 @@ ROW 5 小结: PL更好 2 | BL更好 3 | 打平 17  (BL 微胜)
   PL 亮点: findings 完整(BL 漏全部病理); therapy 多模态(BL 仅 radiation).
   BL 亮点(诚实记录): PL 老 bug 复现 → imaging TTE 幻觉(同 ROW4); genetic results
            IHC 污染+旧 HER2 值(同 ROW1). 本行 Stage 正确, 说明过度分期非每行必现.
+
+================================================================================
+BREAST ROW 6 (coral_idx=25)
+================================================================================
+原文要点: 53yo F, 新诊断 HR-/HER2+ 乳腺癌. 活检 IDC G2, ER-/PR-/HER2 3+(FISH13).
+  腋窝 LN FNA 转移+. PET/CT 左髂骨灶疑骨转移; 颈动脉体瘤=paraganglioma(良性,
+  长期稳定, 非转移). MRI 盆腔示髂骨/骶骨灶疑骨转移. A/P: "疑似骨转移, 需 MRI+
+  活检确诊 stage IV; 若 IV 则 THP(paclitaxel+trastuzumab+pertuzumab); 可放疗骨灶".
+  计划: MRI 盆腔/颈, chemoteach, baseline echo, port, labs. 当前均非肿瘤药.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          打平      均 "New patient", 正确
+Type_of_Cancer            打平      均 HR-/HER2+, 正确(PL 多 IDC/grade 细节)
+Stage_of_Cancer           BL更好    ★PL "Stage [X]"占位符未修+过度确定 IV; BL 准确"疑似未定" [A 类7+占位bug]
+Distant_Metastasis        BL更好    ★PL 把颈动脉 paraganglioma(良性)当可能转移; BL 仅骨转移对 [A 类7]
+Lab_Results               打平      均 "No labs", 正确
+Clinical_Findings         PL更好    PL 含病理+体检(7x5cm肿块/乳头内陷)更全; 均正确 [B 类6]
+Current_Medications       PL更好    BL 倒 10 种非肿瘤药; PL 过滤为空 [类5]
+Treatment_Changes         打平      均把 ondansetron(实为肠镜准备)当 supp, 同错
+goals_of_treatment        打平      均 "palliative"(IV), 正确
+goals_description         打平      均弱(BL 答治疗/PL 未明示), 非医疗对错
+Response_Assessment       PL更好    ★BL 把"预期excellent response"当现状; PL 正确"尚未治疗" [A 类2]
+Medication_Plan           打平      均 THP, 正确
+Therapy_plan              PL更好    PL 含放疗+"if stage IV"条件; BL 仅"系统治疗"含糊 [B]
+radiotherapy_plan         打平      均"放疗骨灶", 正确
+Procedure_Plan            BL更好    ★PL 混入 MRI/echo(影像)且漏关键 biopsy; BL 正确 biopsy+port [类5+类6]
+Imaging_Plan              PL更好    PL 含真实 baseline echo(本例确在原文); BL 漏 echo [B 类6]
+Lab_Plan                  打平      均 labs, 正确
+Genetic_Testing_Plan      打平      均 None, 正确
+Genetic_Testing_Results   BL更好    PL IHC 污染(HER2/Ki67 标准病理应排除); BL 正确空 [类5]
+Referral                  打平      4 类均 None, 正确
+follow_up_next_visit      打平      均无明确日期, 合理
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 6 小结: PL更好 5 | BL更好 4 | 打平 13  (PL 略胜)
+  PL 亮点: findings 完整; current_meds 过滤; Response 时态正确; Therapy 含条件;
+           Imaging 含真实 echo(注:本例 echo 在原文,PL 对; 区别于 ROW4/5 的 echo 幻觉).
+  BL 亮点(诚实记录): Stage [X]占位符+过度确定; paraganglioma 当转移; procedure 混入
+           影像漏 biopsy; genetic IHC 污染. 四类 bug 中 (a)(c) 再现, procedure 新增子类.
