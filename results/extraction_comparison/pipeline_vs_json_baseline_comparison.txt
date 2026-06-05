@@ -40,13 +40,15 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [x]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 25   |   BL 更好: 17   |   打平: 90   (截至 BREAST ROW 6)
+  PL 更好: 31   |   BL 更好: 20   |   打平: 103   (截至 BREAST ROW 7)
+  关键洞察(ROW7): genetic IHC 污染 bug 只在"无真实基因检测、仅IHC受体"时触发;
+    有真实分子panel(ROW4 BRCA1/ROW7 MSH2)时 PL 正确且更全 → 修复方向明确.
   PL 反复强项: current_meds 过滤 / findings 完整性 / therapy 多模态完整 / response 时态 / 用药方案
   PL 反复弱点(可修, 4 类 bug, 几乎是 BL 全部胜场来源):
     (a) stage/met 过度分期+跨癌种串扰 (ROW2 局部复发→IV; ROW4 卵巢癌史→乳腺 IV)
@@ -298,3 +300,43 @@ ROW 6 小结: PL更好 5 | BL更好 4 | 打平 13  (PL 略胜)
            Imaging 含真实 echo(注:本例 echo 在原文,PL 对; 区别于 ROW4/5 的 echo 幻觉).
   BL 亮点(诚实记录): Stage [X]占位符+过度确定; paraganglioma 当转移; procedure 混入
            影像漏 biopsy; genetic IHC 污染. 四类 bug 中 (a)(c) 再现, procedure 新增子类.
+
+================================================================================
+BREAST ROW 7 (coral_idx=26)
+================================================================================
+原文要点: 44yo F, Lynch 综合征(MSH2 突变), 多原发癌(结肠/子宫内膜/乳腺). 转移性
+  TNBC(ER-/PR-/HER2-, IDC), 2014 原发 Stage IIB→2018 复发→现转移至肝/淋巴结/S1
+  (肝活检 02/25 确诊). 已于 03/11 起 abraxane(nab-paclitaxel)+pembrolizumab,
+  今 cycle1 day8. 腋窝痛好转(早期响应迹象). 基因: MSH2+, BRCA/8基因 panel 阴性.
+  计划: 续 abraxane+pembro, monitor TSH, port, 重启 xarelto, 止吐/止痛支持. f/u 2wk.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          打平      均 "Follow up", 正确
+Type_of_Cancer            PL更好    PL 完整三阴+IDC+转移; BL 省略 PR/组织学 [类8]
+Stage_of_Cancer           PL更好    ★PL 正确 IIB→IV(本例确为转移); BL "未明示"漏 [A 类7] (注:本例PL分期对)
+Distant_Metastasis        打平      均 "Yes 肝+淋巴结", 正确
+Lab_Results               BL更好    BL 抓"in range"; PL 误判"无labs"漏掉 [类6]
+Clinical_Findings         PL更好    ★PL 客观影像/病理发现; BL 列主观症状(答非所问) [类2/类6]
+Current_Medications       PL更好    ★★PL 正确提取抗癌药abraxane+pembro; BL 倒家庭药却漏抗癌药本身! [类5/类6 核心论点]
+Treatment_Changes         打平      supportive 两边均合理
+goals_of_treatment        打平      均 "palliative", 正确
+goals_description         BL更好    BL 抓"until progression"; PL "未明示"漏 [类6]
+Response_Assessment       打平      均不完美(BL仅"progression";PL含腋窝改善但误attribute时序)
+Medication_Plan           PL更好    PL 点名抗癌药+完整支持方案; BL 含糊"continue current meds" [类6]
+Therapy_plan              打平      均捕捉 abraxane+pembro(PL 多混支持药)
+radiotherapy_plan         打平      均 None, 正确
+Procedure_Plan            打平      均 port placement, 正确
+Imaging_Plan              打平      均"症状/3-4月引导", 正确
+Lab_Plan                  BL更好    BL 抓"Monitor TSH"; PL 漏(放了治疗续用文本) [类6]
+Genetic_Testing_Plan      打平      均 None, 正确
+Genetic_Testing_Results   PL更好    ★PL 完整germline(MSH2+ + BRCA/8基因阴); BL 仅 MSH2. 本例无IHC污染 [类6]
+Referral                  打平      均捕捉 pain management, 正确
+follow_up_next_visit      打平      均正确(2wk 后 q3wk)
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 7 小结: PL更好 6 | BL更好 3 | 打平 13  (PL 占优)
+  PL 亮点: ★current_meds 核心论点最强例(PL 抓抗癌药, BL 漏); genetic results 完整
+           germline panel; stage 本例正确; findings 客观 vs BL 主观.
+  BL 亮点(诚实记录): 三处"小而精"的捕捉 PL 漏了(in-range labs / until-progression /
+           Monitor TSH) → 提示 PL 在 plan 类小字段偶有遗漏, 非 bug 级.
