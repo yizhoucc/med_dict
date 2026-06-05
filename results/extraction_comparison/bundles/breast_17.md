@@ -69,7 +69,7 @@
     "follow up": "Start 07/09/17 with dignicap."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "No explicit next clinic visit mentioned in the provided text."
+    "Next clinic visit": "No explicit next clinic visit mentioned in the provided plan."
   },
   "Genetic_Testing_Results": {
     "genetic_testing_results": "BRCA test negative (Ambry - not sure whether panel or only BRCA); no pathogenic variants found."

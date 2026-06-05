@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "We will hold her chemotherapy until she has resolution of her hand-foot syndrome. We will then resume treatment, treating 5 days out of 7.",
-    "supportive_meds": "lipase-protease-amylase (CREON), gabapentin (NEURONTIN), lidocaine-diphenhydrAMINE-maalox (MAGIC MOUTHWASH)"
+    "supportive_meds": "lipase-protease-amylase (CREON), lidocaine-diphenhydrAMINE-maalox (MAGIC MOUTHWASH)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant",

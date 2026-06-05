@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "plan to start goserelin, followed by AI",
-    "supportive_meds": "gabapentin"
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

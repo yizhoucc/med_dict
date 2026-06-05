@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "gabapentin (NEURONTIN) 300 mg capsule"
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant",

@@ -24,7 +24,7 @@
     "lab_summary": "WBC Count 7.4, Neutrophil Absolute Count 4.62, Hemoglobin 9.4 (L), Hematocrit 30.1 (L), Platelet Count 351, Creatinine 0.58 (L), Bilirubin, Total 0.4, Alkaline Phosphatase 305 (H), Aspartate transaminase 33, Alanine transaminase 31, Albumin, Serum / Plasma 3.0 (L), Int'l Normaliz Ratio 1.1, Sodium, Serum / Plasma 137, Potassium, Serum / Plasma 3.9, Calcium, total, Serum / Plasma 8.7 (L), Cancer Antigen 19-9 900 (H), Carcinoembryonic Antigen 8.3 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Patient has new metastatic disease with liver metastases noted on baseline CT CAP on 05/25/18. CT CAP on 08/01/18 shows decrease in size of hepatic mets but interval increase in pancreatic ductal dilatation. CT CAP on 09/26/18 reveals slight increase in the size of liver mets. CT CAP on 11/24/18 indicates disease progression. Labs show fluctuating CA 19-9 levels, with a drop to 789 on 10/03/18 and a rise to 1,625 on 11/24/18. Physical exam shows no palpable masses, jaundice, ascites, or significant weight loss. Patient has grade 1 peripheral neuropathy with numbness in hands and feet."
+    "findings": "Patient has new metastatic disease with liver metastases noted on baseline CT CAP on 05/25/18. CT CAP on 08/01/18 shows decrease in size of hepatic mets but interval increase in pancreatic ductal dilatation. CT CAP on 09/26/18 reveals slight increase in the size of liver mets. CT CAP on 11/24/18 indicates disease progression. Labs show fluctuating CA 19-9 levels, with a drop to 789 on 10/03/18 and then rising to 1,625 on 11/24/18. Physical exam shows patient is thin with no jaundice, ascites, or palpable masses. Peripheral neuropathy is present with numbness in hands and feet."
   },
   "Current_Medications": {
     "current_meds": "Gemcitabine + Abraxane"
@@ -38,7 +38,7 @@
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is showing signs of disease progression. The CT CAP on 11/24/18 indicates disease progression with an increase in the size of liver mets. Additionally, the CA 19-9 levels rose from 789 on 10/03/18 to 1,625 on 11/24/18, indicating a worsening of the disease. The patient has been switched to second-line therapy with Gemcitabine + Abraxane on 11/29/18, and the next CT scan is scheduled after completing cycle 2 of this regimen."
+    "response_assessment": "The cancer is showing signs of disease progression. The CT CAP on 11/24/18 indicates disease progression with an increase in the size of liver mets. Additionally, the CA 19-9 levels have risen to 1,625 on 11/24/18, indicating progression from previous lower levels such as 789 on 10/03/18."
   },
   "Medication_Plan": {
     "medication_plan": "Gemcitabine + Abraxane on C2D1. Continue Creon 2 tab/meal and 1 tab/snacks. Premed with Aloxi & Emend. Apply granisetron patch 3.1 mg/24 hours on day 3, and take compazine PRN. Continue to use cannabis product."

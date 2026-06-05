@@ -53,7 +53,7 @@
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "CT in 8 weeks for restaging"
+    "imaging_plan": "Will repeat her imaging again in 8 weeks."
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
