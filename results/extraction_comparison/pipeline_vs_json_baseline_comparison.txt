@@ -40,13 +40,14 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 5   |   BL 更好: 1   |   打平: 16   (截至 BREAST ROW 1)
+  PL 更好: 8   |   BL 更好: 5   |   打平: 31   (截至 BREAST ROW 2)
+  注: ROW 2 为已知 PL 弱点行(局部复发误判 Stage IV) → 待修 bug, 见下
 
 ================================================================================
 BREAST ROW 1 (coral_idx=20)
@@ -88,3 +89,44 @@ ROW 1 小结: PL更好 5 | BL更好 1 | 打平 16
            findings 保留 LVEF25% 这类决定治疗的关键信息.
   BL 亮点(诚实记录): Genetic_Testing_Results 字段 PL 触发已知 IHC 污染 bug 且 HER2
            表述自相矛盾 → 这是一个真实可修的 PL 缺陷, 指明了后续修复点.
+
+================================================================================
+BREAST ROW 2 (coral_idx=21)  ★PL 弱点行 (BL 略胜)
+================================================================================
+原文要点: 73yo, 1994 年右乳 1cm grade1 IDC, 21 淋巴结阴性(原 Stage I), ER+/PR-,
+  接受放疗+tamoxifen(94-96 停). 2009 年呈"局部区域复发, 不可切除". 当前 PET/CT:
+  右胸骨旁结节(1.9cm,增大)+右腋下淋巴结(局部/区域); 肝病灶当前扫描=囊肿(cyst);
+  骨无异常; 脑 MRI 无恶性. 医生 IMPRESSION 明确: "local regional recurrence...
+  No other sites of disease appear to be present." → 非远处转移/非 Stage IV.
+  计划: 起始 zoledronic acid(骨质疏松)+ AI(letrozole)±bevacizumab(CALGB40503).
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          PL更好    PL "New patient"(新会诊)对; BL "Follow up" 误判 [A]
+Type_of_Cancer            BL更好    ★PL 写 PR+(原文 PR-)+自加 HER2-; BL 正确 PR- [A 类8]
+Stage_of_Cancer           BL更好    ★PL 编造 IIA→Stage IV; 原文为局部复发"no other sites"; BL"未明示"对 [A 类7]
+Distant_Metastasis        BL更好    ★PL 判 Yes(区域结节+肝囊肿当转移); BL 正确判无远处转移 [A 类7]
+Lab_Results               打平      内容一致, 均正确
+Clinical_Findings         打平      均准确; PL 更详(含肝囊肿/脑MRI), 均医疗充分
+Current_Medications       打平      均 zoledronic acid, 正确
+Treatment_Changes         打平      均捕捉 zoledronic acid 起始
+goals_of_treatment        PL更好    PL 给出意图分类(palliative,可辩); BL "hormone therapy"=答非所问 [类2]
+goals_description         打平      均弱/可辩, 非医疗对错差异
+Response_Assessment       打平      均正确(尚未上 AI 治疗, 无响应可评)
+Medication_Plan           打平      均捕捉 AI±bev 计划
+Therapy_plan              打平      均正确
+radiotherapy_plan         PL更好    PL 捕捉潜在手术+放疗(长期控制路径); BL 漏 [B]
+Procedure_Plan            BL更好    ★PL "needs PET/CT and MRI"但二者已做完=时态错误; BL 较稳 [A 类4]
+Imaging_Plan              打平      均以过去时报告已做影像, 无捏造未来
+Lab_Plan                  打平      均报告就诊日labs, 无明确未来labs
+Genetic_Testing_Plan      打平      均 None, 正确
+Genetic_Testing_Results   打平      均"无结果", 正确
+Referral                  打平      4 类均 None, 正确
+follow_up_next_visit      打平      均正确(1/25 复诊)
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 2 小结: PL更好 3 | BL更好 4 | 打平 15  (本行 BL 略胜)
+  ★PL 关键 bug: 把"局部区域复发(医生明说 no other sites, 肝病灶为囊肿)"误判为
+   Stage IV 远处转移, 连带 Stage/Distant_Met/Type(PR) 三字段错; procedure 时态错.
+   → 这是 stage/metastasis hook 的真实失效, 是高优先级可修点. 如实计入 BL 胜场.
+  PL 仍占优处: 治疗意图分类(避免 BL 答非所问)、潜在放疗路径捕捉、Patient type.
