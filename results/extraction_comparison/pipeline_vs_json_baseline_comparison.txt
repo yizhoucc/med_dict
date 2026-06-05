@@ -40,14 +40,15 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 8   |   BL 更好: 5   |   打平: 31   (截至 BREAST ROW 2)
-  注: ROW 2 为已知 PL 弱点行(局部复发误判 Stage IV) → 待修 bug, 见下
+  PL 更好: 12   |   BL 更好: 6   |   打平: 48   (截至 BREAST ROW 3)
+  PL 反复强项: Patient type / current_meds 过滤 / findings 完整性 / 用药方案具体化
+  PL 反复弱点(可修): plan 字段时态错误(已做检查当未来), stage/met 偶发误判
 
 ================================================================================
 BREAST ROW 1 (coral_idx=20)
@@ -130,3 +131,44 @@ ROW 2 小结: PL更好 3 | BL更好 4 | 打平 15  (本行 BL 略胜)
    Stage IV 远处转移, 连带 Stage/Distant_Met/Type(PR) 三字段错; procedure 时态错.
    → 这是 stage/metastasis hook 的真实失效, 是高优先级可修点. 如实计入 BL 胜场.
   PL 仍占优处: 治疗意图分类(避免 BL 答非所问)、潜在放疗路径捕捉、Patient type.
+
+================================================================================
+BREAST ROW 3 (coral_idx=22)
+================================================================================
+原文要点: 60yo F, 右乳 invasive spindle cell metaplastic carcinoma, ER0%/PR0%/
+  HER2 FISH neg = 三阴; locally advanced, multifocal. A/P 明确"no evidence of
+  metastatic disease... treat with curative intent". PET/CT 另见 indeterminate
+  右肾上腺结节 2.3cm(建议进一步评估). Genetics 126 InVitae panel 已送(结果待),
+  MammaPrint pending. 计划: 新辅助化疗(weekly paclitaxel x12→AC x4)±I-SPY2,
+  Medi-port, 2 月初开始; 复查 Cr/Alk phos. 当前用药均为非肿瘤家庭药.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          PL更好    PL "New patient"(新会诊)对; BL "Follow up" 误判 [A]
+Type_of_Cancer            打平      均三阴+完整受体, 正确
+Stage_of_Cancer           打平      均 "locally advanced, multifocal", 正确
+Distant_Metastasis        打平      均 "No"(A/P 明确无转移), 正确
+Lab_Results               打平      均捕捉 Cr/Alk phos 升高, 正确
+Clinical_Findings         PL更好    ★PL 捕捉 indeterminate 肾上腺结节2.3cm(需随访关键发现); BL 仅写体检肿块 [B 类6]
+Current_Medications       PL更好    BL 倒 5 种非肿瘤家庭药; PL 过滤为空(未上肿瘤治疗) [类5]
+Treatment_Changes         打平      recent 均 None; supp 差异不构成医疗对错
+goals_of_treatment        打平      均 curative, 正确(引用 A/P 原话)
+goals_description         打平      均引用"curative intent", 正确
+Response_Assessment       打平      均正确(尚未治疗)
+Medication_Plan           PL更好    PL 给出具体方案(paclitaxel→AC+I-SPY2+Medi-port+时间); BL 仅"AC/T or I-SPY2" [B] (PL 微瑕:加了未明示的antiemetics)
+Therapy_plan              打平      均捕捉新辅助化疗+手术+潜在放疗
+radiotherapy_plan         打平      均"取决于手术/终病理", 正确
+Procedure_Plan            打平      均 Medi-port, 正确
+Imaging_Plan              BL更好    ★PL "Echo needed prior to chemo"但 Echo 已做完(时态错)+ "restaging after 3 months"(原文无,幻觉); BL 正确报告已完成影像 [A 类4/类3]
+Lab_Plan                  打平      均"复查 Cr/Alk phos", 正确
+Genetic_Testing_Plan      打平      均反映 InVitae panel/讨论结果, 正确
+Genetic_Testing_Results   打平      均"无结果"(panel 待回), 正确; PL 多列 pending 项(信息更全但非对错)
+Referral                  打平      BL 全 None; PL Genetics 放了"讨论基因结果"(事实对, 仅归类)
+follow_up_next_visit      打平      均正确(2 月初开始治疗)
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 3 小结: PL更好 4 | BL更好 1 | 打平 17  (PL 占优)
+  PL 亮点: 肾上腺结节这种"需随访的临床关键发现"PL 不漏(完整性=B 维度核心);
+           Patient type 准确; current_meds 过滤; 用药方案具体化.
+  BL 亮点(诚实记录): PL imaging_plan 把已做 Echo 当未来 + 幻觉"restaging" → 时态
+           hook 对 imaging_plan 未生效, 与 ROW2 procedure 时态错同源, 可统一修.
