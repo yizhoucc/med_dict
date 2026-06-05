@@ -40,15 +40,16 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [x]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [x]7 [x]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 31   |   BL 更好: 20   |   打平: 103   (截至 BREAST ROW 7)
+  PL 更好: 35   |   BL 更好: 21   |   打平: 120   (截至 BREAST ROW 8)
   关键洞察(ROW7): genetic IHC 污染 bug 只在"无真实基因检测、仅IHC受体"时触发;
-    有真实分子panel(ROW4 BRCA1/ROW7 MSH2)时 PL 正确且更全 → 修复方向明确.
+    有真实分子panel(ROW4 BRCA1/ROW7 MSH2/ROW8 MammaPrint)时 PL 正确且更全.
+  ROW8: PL Stage 正确(pT2N1a)+TTE 本例为真(AC含蒽环需echo) → bug(a)(b)非每行必现.
   PL 反复强项: current_meds 过滤 / findings 完整性 / therapy 多模态完整 / response 时态 / 用药方案
   PL 反复弱点(可修, 4 类 bug, 几乎是 BL 全部胜场来源):
     (a) stage/met 过度分期+跨癌种串扰 (ROW2 局部复发→IV; ROW4 卵巢癌史→乳腺 IV)
@@ -340,3 +341,41 @@ ROW 7 小结: PL更好 6 | BL更好 3 | 打平 13  (PL 占优)
            germline panel; stage 本例正确; findings 客观 vs BL 主观.
   BL 亮点(诚实记录): 三处"小而精"的捕捉 PL 漏了(in-range labs / until-progression /
            Monitor TSH) → 提示 PL 在 plan 类小字段偶有遗漏, 非 bug 级.
+
+================================================================================
+BREAST ROW 8 (coral_idx=27)
+================================================================================
+原文要点: 70yo F, Stage IIA pT2(m)N1a 左乳 IDC(3.9cm grade2, ER+/PR+/HER2-
+  FISH1.1, MammaPrint High-Risk), s/p 双乳切除+左ALND 2/12 LN+, 建肿瘤科卡讨论
+  辅助治疗. 计划: AC+paclitaxel(~10/18起) + 术前 TTE(蒽环心毒) + port + 化疗教学
+  + Genetics 转诊(BRCA, 德系犹太+家族史). 当前用药均非肿瘤家庭药.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          PL更好    PL "New patient"(建卡)对; BL "Follow up" 误判 [A]
+Type_of_Cancer            打平      均 ER+/PR+/HER2- grade2 IDC 完整, 正确
+Stage_of_Cancer           打平      均 pT2(m)N1a, 正确 (PL 本行分期对 ✓)
+Distant_Metastasis        打平      均 "No", 正确
+Lab_Results               打平      均 "No labs", 正确
+Clinical_Findings         PL更好    PL 含病理(多灶/3.9cm/2-2LN+/DCIS); BL 仅术后体检 [B 类6]
+Current_Medications       PL更好    BL 倒 9 种非肿瘤家庭药; PL 过滤为空 [类5]
+Treatment_Changes         打平      supp 差异微小(PL 列 gabapentin), 非医疗对错
+goals_of_treatment        打平      均 "adjuvant", 正确
+goals_description         打平      均无明确意图语句, 合理
+Response_Assessment       打平      均正确(术后尚未上辅助)
+Medication_Plan           打平      均捕捉 AC+paclitaxel(均漏 AI)
+Therapy_plan              BL更好    ★PL 错称"无激素治疗提及"但原文明推荐 AI; BL 不作此假阴 [A 类3]
+radiotherapy_plan         打平      均 None, 正确
+Procedure_Plan            打平      均 port(PL 多 TTE 归类瑕, 不计)
+Imaging_Plan              打平      均捕捉 TTE(本例 TTE 为真, PL 对; 区别于 ROW4/5 幻觉)
+Lab_Plan                  打平      PL TTE 误入 lab(归类), 事实对不计; BL None 亦可
+Genetic_Testing_Plan      打平      均 Genetics 转诊, 正确
+Genetic_Testing_Results   PL更好    PL 抓 MammaPrint High-Risk(真实基因结果); BL 漏说"无结果" [类6]
+Referral                  打平      均 Genetics 转诊, 正确
+follow_up_next_visit      打平      均正确(10/18 化疗起)
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 8 小结: PL更好 4 | BL更好 1 | 打平 17  (PL 占优)
+  PL 亮点: findings 病理完整; current_meds 过滤; genetic results 抓 MammaPrint;
+           ★本行 Stage 正确 + TTE 为真 → 印证 bug(a)(b) 取决于具体病例不必现.
+  BL 亮点(诚实记录): PL therapy_plan 假阴"无激素治疗"(AI 实被推荐) → 偶发否定错误.
