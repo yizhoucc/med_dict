@@ -306,7 +306,7 @@ RESULTS FOR ROW 3
     "radiotherapy_plan": "We could also consider RT to his pancreatic primary, which would be primarily for palliative/QoL purposes rather than necessarily extending his longevity."
   },
   "Procedure_Plan": {
-    "procedure_plan": "We could also consider RT to his pancreatic primary, which would be primarily for palliative/QoL purposes rather than necessarily extending his longevity."
+    "procedure_plan": "which would be primarily for palliative/QoL purposes rather than necessarily extending his longevity."
   },
   "Imaging_Plan": {
     "imaging_plan": "Continue with 1 additional cycle of the same chemotherapy (scheduled for tomorrow, if laboratory parameters are acceptable), with short-term f/u CT scans to assess for evidence of further disease progression."
@@ -336,38 +336,38 @@ RESULTS FOR ROW 3
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your hemoglobin levels are low, indicating anemia. [source:findings,response_assessment,lab_summary]\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label in the future. Radiation therapy to your pancreatic primary may be considered for palliative purposes. [source:medication_plan,genetic_testing_plan,radiotherapy_plan,follow_up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your blood tests show low hemoglobin and potassium levels, and high alkaline phosphatase. [source:findings,lab_summary,response_assessment]\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label, and considering radiation therapy for palliative purposes. [source:medication_plan,imaging_plan,radiotherapy_plan]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your hemoglobin levels are low, indicating anemia.\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed.\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label in the future. Radiation therapy to your pancreatic primary may be considered for palliative purposes.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your blood tests show low hemoglobin and potassium levels, and high alkaline phosphatase.\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed.\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label, and considering radiation therapy for palliative purposes.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your hemoglobin levels are low, indicating anemia.\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed.\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label in the future. Radiation therapy to your pancreatic primary may be considered for palliative purposes.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYour pancreatic tumor has slightly decreased in size, and some liver lesions have also slightly decreased. However, there is still some disease progression in other areas. Your blood tests show low hemoglobin and potassium levels, and high alkaline phosphatase.\n**What treatment or medication changes were made?**\nYou resumed chemotherapy with the combination of 5-FU/LV plus nanoliposomal irinotecan (Onivyde). Supportive medications for pain and nausea were also prescribed.\n**What is the plan going forward?**\nYou will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label, and considering radiation therapy for palliative purposes.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label in the future. Radiation therapy to your pancreatic primary may be considered for palliative purposes."
+"ACTION ITEMS:\n\u25a1 You will continue with one more cycle of the same chemotherapy, scheduled for tomorrow if your lab results are acceptable. Short-term follow-up CT scans will be done to assess for further disease progression. We also discussed the possibility of trying trametinib plus hydroxychloroquine off-label, and considering radiation therapy for palliative purposes."
 
 --- Column: readability_metrics ---
 {
   "raw": {
     "flesch_kincaid_grade": 9.3,
-    "flesch_reading_ease": 49.4,
-    "gunning_fog": 11.7,
+    "flesch_reading_ease": 50.3,
+    "gunning_fog": 11.6,
     "smog_index": 11.8,
     "dale_chall": 10.1,
-    "coleman_liau": 12.3,
-    "ari": 10.1,
-    "linsear_write": 6.7,
-    "text_standard": "11th and 12th grade",
-    "word_count": 200,
-    "sentence_count": 17,
-    "difficult_words": 59
+    "coleman_liau": 12.7,
+    "ari": 10.6,
+    "linsear_write": 6.6,
+    "text_standard": "9th and 10th grade",
+    "word_count": 198,
+    "sentence_count": 16,
+    "difficult_words": 58
   },
   "adjusted": {
     "flesch_kincaid_grade": 9.3,
-    "flesch_reading_ease": 49.4,
+    "flesch_reading_ease": 50.3,
     "dale_chall": 10.1,
-    "difficult_words": 59
+    "difficult_words": 58
   }
 }
 
@@ -558,7 +558,7 @@ RESULTS FOR ROW 5
     "radiotherapy_plan": "discussed the role of palliative radiation therapy to his pancreas mass and why Dr. ***** has not recommended radiation at this time."
   },
   "Procedure_Plan": {
-    "procedure_plan": "restaging CT planned for 11/19/19"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "CT in 11/19/19 for restaging"
@@ -588,38 +588,38 @@ RESULTS FOR ROW 5
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of FOLFIRINOX (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break. [source:findings]\nRecent imaging and tumor marker levels show that the cancer is stable. [source:response_assessment]\nYou have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins, which continue to be managed. [source:findings]\nAbdominal pain/cramping has improved. [source:findings]\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily. [source:medication_plan]\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack. [source:medication_plan]\nYou will continue taking Oxycontin (a pain reliever) and Oxycodone 5 to 10mg as needed for breakthrough pain. [source:medication_plan]\nFluconazole (an antifungal medication) was recommended to manage your thrush. [source:Specialty]\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019. [source:procedure_plan]\nYou will have your next clinic visit on November 21, 2019, to see your doctor or sooner if needed. [source:follow up]\nYour life-sustaining treatment preferences were clarified and a POLST form was completed. [source:Advance care]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of FOLFIRINOX (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break. [source:findings]\nRecent imaging and tumor marker levels show that the cancer is stable. [source:response_assessment]\nYour CA 19-9 (a tumor marker) levels have fluctuated but remain high, indicating stable disease. [source:findings]\nYou continue to have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins. [source:findings]\nAbdominal pain/cramping has improved. [source:findings]\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily. [source:medication_plan]\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack. [source:medication_plan]\nYou will continue taking Oxycontin (a pain reliever) 10mg PO bid. [source:medication_plan]\nFluconazole (an antifungal medication) was recommended to manage your thrush. [source:therapy_plan]\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019. [source:imaging_plan]\nYou will have your next visit on November 21, 2019, to see your doctor or sooner if needed. [source:follow up]\nPalliative radiation therapy to the pancreas mass is not recommended at this time. [source:radiotherapy_plan]\nYour life-sustaining treatment preferences have been clarified and a POLST form has been completed. [source:Advance care]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of FOLFIRINOX (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break.\nRecent imaging and tumor marker levels show that the cancer is stable.\nYou have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins, which continue to be managed.\nAbdominal pain/cramping has improved.\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily.\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\nYou will continue taking Oxycontin (a pain reliever) and Oxycodone 5 to 10mg as needed for breakthrough pain.\nFluconazole (an antifungal medication) was recommended to manage your thrush.\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019.\nYou will have your next clinic visit on November 21, 2019, to see your doctor or sooner if needed.\nYour life-sustaining treatment preferences were clarified and a POLST form was completed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of FOLFIRINOX (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break.\nRecent imaging and tumor marker levels show that the cancer is stable.\nYour CA 19-9 (a tumor marker) levels have fluctuated but remain high, indicating stable disease.\nYou continue to have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins.\nAbdominal pain/cramping has improved.\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily.\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\nYou will continue taking Oxycontin (a pain reliever) 10mg PO bid.\nFluconazole (an antifungal medication) was recommended to manage your thrush.\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019.\nYou will have your next visit on November 21, 2019, to see your doctor or sooner if needed.\nPalliative radiation therapy to the pancreas mass is not recommended at this time.\nYour life-sustaining treatment preferences have been clarified and a POLST form has been completed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of a chemotherapy combination (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break.\nRecent imaging and tumor marker levels show that the cancer is stable.\nYou have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins, which continue to be managed.\nAbdominal pain/cramping has improved.\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily.\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\nYou will continue taking Oxycontin (a pain reliever) and Oxycodone 5 to as needed for breakthrough pain.\nFluconazole (an antifungal medication) was recommended to manage your thrush.\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019.\nYou will have your next clinic visit on November 21, 2019, to see your doctor or sooner if needed.\nYour life-sustaining treatment preferences were clarified and a POLST form was completed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nYou have completed 12 cycles of a chemotherapy combination (a chemotherapy combination) from February 2019 to August 2019 and are now on a chemotherapy break.\nRecent imaging and tumor marker levels show that the cancer is stable.\nYour CA 19-9 (a tumor marker) levels have fluctuated but remain high, indicating stable disease.\nYou continue to have ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins.\nAbdominal pain/cramping has improved.\n**What treatment or medication changes were made?**\nYou will continue taking xarelto (a blood thinner) daily.\nYou will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\nYou will continue taking Oxycontin (a pain reliever) .\nFluconazole (an antifungal medication) was recommended to manage your thrush.\n**What is the plan going forward?**\nRestaging CT is planned for November 19, 2019.\nYou will have your next visit on November 21, 2019, to see your doctor or sooner if needed.\nPalliative radiation therapy to the pancreas mass is not recommended at this time.\nYour life-sustaining treatment preferences have been clarified and a POLST form has been completed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will continue taking xarelto (a blood thinner) daily.\n\u25a1 You will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\n\u25a1 You will continue taking Oxycontin (a pain reliever) and Oxycodone 5 to 10mg as needed for breakthrough pain.\n\u25a1 Fluconazole (an antifungal medication) was recommended to manage your thrush.\n\u25a1 Restaging CT is planned for November 19, 2019.\n\u25a1 You will have your next clinic visit on November 21, 2019, to see your doctor or sooner if needed."
+"ACTION ITEMS:\n\u25a1 You will continue taking xarelto (a blood thinner) daily.\n\u25a1 You will continue taking Creon (a digestive enzyme supplement) to 2 or 3 tabs/meal and 1 tab/snack.\n\u25a1 You will continue taking Oxycontin (a pain reliever) 10mg PO bid.\n\u25a1 Fluconazole (an antifungal medication) was recommended to manage your thrush.\n\u25a1 Restaging CT is planned for November 19, 2019.\n\u25a1 You will have your next visit on November 21, 2019, to see your doctor or sooner if needed.\n\u25a1 Palliative radiation therapy to the pancreas mass is not recommended at this time."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.5,
-    "flesch_reading_ease": 55.9,
-    "gunning_fog": 10.7,
-    "smog_index": 11.2,
-    "dale_chall": 10.7,
+    "flesch_kincaid_grade": 8.8,
+    "flesch_reading_ease": 53.3,
+    "gunning_fog": 11.3,
+    "smog_index": 11.5,
+    "dale_chall": 10.8,
     "coleman_liau": 10.9,
-    "ari": 9.2,
-    "linsear_write": 7.4,
+    "ari": 9.1,
+    "linsear_write": 8.6,
     "text_standard": "10th and 11th grade",
-    "word_count": 211,
-    "sentence_count": 17,
-    "difficult_words": 59
+    "word_count": 230,
+    "sentence_count": 19,
+    "difficult_words": 62
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.3,
-    "flesch_reading_ease": 56.8,
-    "dale_chall": 10.6,
-    "difficult_words": 55
+    "flesch_kincaid_grade": 8.6,
+    "flesch_reading_ease": 54.0,
+    "dale_chall": 10.7,
+    "difficult_words": 58
   }
 }
 
@@ -1314,7 +1314,7 @@ RESULTS FOR ROW 11
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "will get CT AP and labs locally at ***** today"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "CT AP to r/o biliary obstruction today"
@@ -1344,38 +1344,38 @@ RESULTS FOR ROW 11
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your newly diagnosed metastatic pancreatic cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have pancreatic cancer that has spread to your liver. This is considered stage IV cancer. [source:Type_of_Cancer, Stage_of_Cancer]\nYour blood tests showed high levels of CA 19-9, a tumor marker often elevated in pancreatic cancer. [source:lab_summary]\nImaging showed a mass in your pancreas and multiple small tumors in your liver. [source:findings]\nYou have lost 35 pounds and have signs of jaundice, with yellowing of your eyes. [source:findings]\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron to manage nausea. [source:supportive_meds]\nThe mainstay of treatment for your cancer will be systemic therapy, such as chemotherapy, to achieve the deepest and most durable remission possible. [source:medication_plan]\nYou have agreed to be screened for a clinical trial called the Precision Promise Platform Trial For Metastatic Pancreatic Cancer. [source:medication_plan]\n**What is the plan going forward?**\nToday, you will get a CT scan and blood tests to check for biliary obstruction and other issues. [source:procedure_plan, lab_plan]\nYou have an appointment with genetics tomorrow to discuss your family history and potential genetic testing. [source:Genetics]\nYou will continue to be monitored and evaluated for treatment options, including chemotherapy and clinical trials. [source:medication_plan, genetic_testing_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your pancreatic cancer that has spread to your liver. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with stage IV pancreatic cancer that has metastasized to your liver. [source:Type_of_Cancer, Stage_of_Cancer, Distant Metastasis]\nYour CA 19-9, a tumor marker, is very high at 13,737. [source:lab_summary]\nImaging shows a pancreatic neck mass with associated pancreatic atrophy and ductal dilatation. The mass is causing narrowing of some blood vessels but they remain open. Multiple small liver lesions are also noted. [source:findings]\nYou have experienced weight loss and yellowing of your eyes, indicating jaundice. [source:findings]\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron for nausea. [source:supportive_meds]\nThe mainstay of treatment will be systemic therapy, such as FOLFIRINOX, a combination of chemotherapy drugs, due to your age and overall health. [source:medication_plan]\nYou have agreed to participate in the Precision Promise Platform Trial for metastatic pancreatic cancer. [source:medication_plan]\n**What is the plan going forward?**\nYou will undergo screening procedures for the clinical trial. [source:medication_plan]\nYou will get a CT scan and labs done locally today to rule out biliary obstruction. [source:imaging_plan, lab_plan]\nYou have an appointment with genetics tomorrow. [source:Genetics]\nFurther treatment decisions will depend on the results of the screening and your overall condition. [source:medication_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your newly diagnosed metastatic pancreatic cancer.\n**What's new or changed since your last visit?**\nYou have pancreatic cancer that has spread to your liver. This is considered stage IV cancer.\nYour blood tests showed high levels of CA 19-9, a tumor marker often elevated in pancreatic cancer.\nImaging showed a mass in your pancreas and multiple small tumors in your liver.\nYou have lost 35 pounds and have signs of jaundice, with yellowing of your eyes.\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron to manage nausea.\nThe mainstay of treatment for your cancer will be systemic therapy, such as chemotherapy, to achieve the deepest and most durable remission possible.\nYou have agreed to be screened for a clinical trial called the Precision Promise Platform Trial For Metastatic Pancreatic Cancer.\n**What is the plan going forward?**\nToday, you will get a CT scan and blood tests to check for biliary obstruction and other issues.\nYou have an appointment with genetics tomorrow to discuss your family history and potential genetic testing.\nYou will continue to be monitored and evaluated for treatment options, including chemotherapy and clinical trials.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your pancreatic cancer that has spread to your liver.\n**What's new or changed since your last visit?**\nYou have been diagnosed with stage IV pancreatic cancer that has metastasized to your liver.\nYour CA 19-9, a tumor marker, is very high at 13,737.\nImaging shows a pancreatic neck mass with associated pancreatic atrophy and ductal dilatation. The mass is causing narrowing of some blood vessels but they remain open. Multiple small liver lesions are also noted.\nYou have experienced weight loss and yellowing of your eyes, indicating jaundice.\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron for nausea.\nThe mainstay of treatment will be systemic therapy, such as FOLFIRINOX, a combination of chemotherapy drugs, due to your age and overall health.\nYou have agreed to participate in the Precision Promise Platform Trial for metastatic pancreatic cancer.\n**What is the plan going forward?**\nYou will undergo screening procedures for the clinical trial.\nYou will get a CT scan and labs done locally today to rule out biliary obstruction.\nYou have an appointment with genetics tomorrow.\nFurther treatment decisions will depend on the results of the screening and your overall condition.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your newly diagnosed metastatic pancreatic cancer.\n**What's new or changed since your last visit?**\nYou have pancreatic cancer that has spread to your liver. This is considered stage IV cancer.\nYour blood tests showed high levels of CA 19-9, a tumor marker often elevated in pancreatic cancer.\nImaging showed a mass in your pancreas and multiple small tumors in your liver.\nYou have lost 35 pounds and have signs of jaundice, with yellowing of your eyes.\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron to manage nausea.\nThe mainstay of treatment for your cancer will be systemic therapy, such as chemotherapy, to achieve the deepest and most durable remission possible.\nYou have agreed to be screened for a clinical trial.\n**What is the plan going forward?**\nToday, you will get a CT scan and blood tests to check for biliary obstruction and other issues.\nYou have an appointment with genetics tomorrow to discuss your family history and potential genetic testing.\nYou will continue to be monitored and evaluated for treatment options, including chemotherapy and clinical trials.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a second opinion regarding your pancreatic cancer that has spread to your liver.\n**What's new or changed since your last visit?**\nYou have been diagnosed with stage IV pancreatic cancer that has metastasized to your liver. Your CA 19-9, a tumor marker, is very high. Imaging shows a pancreatic neck mass with associated pancreatic atrophy and ductal dilatation. Multiple small liver lesions are also noted. You have experienced weight loss and yellowing of your eyes, indicating jaundice.\n**What treatment or medication changes were made?**\nYou are currently taking lipase-protease-amylase to aid digestion and ondansetron for nausea. The mainstay of treatment will be systemic therapy, such as a chemotherapy combination, a combination of chemotherapy drugs, due to your age and overall health. You have agreed to participate in a clinical trial for metastatic pancreatic cancer.\n**What is the plan going forward?**\nYou will undergo screening procedures for the clinical trial. You will get a CT scan and labs done locally today to rule out biliary obstruction. You have an appointment with genetics tomorrow. Further treatment decisions will depend on the results of the screening and your overall condition.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 The mainstay of treatment for your cancer will be systemic therapy, such as chemotherapy, to achieve the deepest and most durable remission possible.\n\u25a1 You have agreed to be screened for a clinical trial called the Precision Promise Platform Trial For Metastatic Pancreatic Cancer.\n\u25a1 Today, you will get a CT scan and blood tests to check for biliary obstruction and other issues.\n\u25a1 You have an appointment with genetics tomorrow to discuss your family history and potential genetic testing.\n\u25a1 You will continue to be monitored and evaluated for treatment options, including chemotherapy and clinical trials."
+"ACTION ITEMS:\n\u25a1 The mainstay of treatment will be systemic therapy, such as FOLFIRINOX, a combination of chemotherapy drugs, due to your age and overall health.\n\u25a1 You have agreed to participate in the Precision Promise Platform Trial for metastatic pancreatic cancer.\n\u25a1 You will undergo screening procedures for the clinical trial.\n\u25a1 You will get a CT scan and labs done locally today to rule out biliary obstruction.\n\u25a1 You have an appointment with genetics tomorrow.\n\u25a1 Further treatment decisions will depend on the results of the screening and your overall condition."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 9.0,
-    "flesch_reading_ease": 54.4,
-    "gunning_fog": 11.7,
-    "smog_index": 12.0,
-    "dale_chall": 10.5,
+    "flesch_kincaid_grade": 8.7,
+    "flesch_reading_ease": 54.6,
+    "gunning_fog": 11.8,
+    "smog_index": 11.6,
+    "dale_chall": 10.0,
     "coleman_liau": 11.3,
-    "ari": 9.7,
-    "linsear_write": 6.9,
-    "text_standard": "9th and 10th grade",
-    "word_count": 228,
-    "sentence_count": 17,
-    "difficult_words": 64
+    "ari": 9.2,
+    "linsear_write": 7.1,
+    "text_standard": "8th and 9th grade",
+    "word_count": 231,
+    "sentence_count": 19,
+    "difficult_words": 62
   },
   "adjusted": {
-    "flesch_kincaid_grade": 9.0,
-    "flesch_reading_ease": 54.4,
-    "dale_chall": 10.5,
-    "difficult_words": 64
+    "flesch_kincaid_grade": 8.7,
+    "flesch_reading_ease": 54.6,
+    "dale_chall": 10.0,
+    "difficult_words": 62
   }
 }
 
@@ -1440,7 +1440,7 @@ RESULTS FOR ROW 12
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Follow up on full report of Xray imaging to the small bowel to determine his ability to undergo additional stent placement. Anticipate the need to transition the patient to hospice whether he can undergo further stent placement or not."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "Follow up on full report of Xray imaging to the small bowel to determine his ability to undergo additional stent placement."
@@ -1470,38 +1470,38 @@ RESULTS FOR ROW 12
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer. [source:summary]\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer is progressing despite treatment. There is new partial bowel obstruction, and the cancer in your pancreas has grown larger. Your bilirubin level was also high, indicating worsening biliary obstruction. [source:findings,response_assessment]\n**What treatment or medication changes were made?**\nYou have been on a treatment break since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage side effects. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the latest X-ray imaging to see if additional stent placement is possible. If not, we will discuss transitioning you to hospice care. We will follow up with you by phone. [source:therapy_plan,procedure_plan,follow_up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer. [source:summary]\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer has progressed despite treatment. There is new partial bowel obstruction, and the cancer has grown larger. Your bilirubin level was elevated, indicating worsening biliary obstruction. [source:findings,response_assessment]\n**What treatment or medication changes were made?**\nYou have been on a treatment holiday since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage symptoms. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the X-ray imaging to see if additional stent placement is possible. The plan is to follow up with you over the phone and consider transitioning you to hospice care. [source:therapy_plan,imaging_plan,follow_up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer.\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer is progressing despite treatment. There is new partial bowel obstruction, and the cancer in your pancreas has grown larger. Your bilirubin level was also high, indicating worsening biliary obstruction.\n**What treatment or medication changes were made?**\nYou have been on a treatment break since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage side effects.\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the latest X-ray imaging to see if additional stent placement is possible. If not, we will discuss transitioning you to hospice care. We will follow up with you by phone.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer.\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer has progressed despite treatment. There is new partial bowel obstruction, and the cancer has grown larger. Your bilirubin level was elevated, indicating worsening biliary obstruction.\n**What treatment or medication changes were made?**\nYou have been on a treatment holiday since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage symptoms.\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the X-ray imaging to see if additional stent placement is possible. The plan is to follow up with you over the phone and consider transitioning you to hospice care.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer.\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer is progressing despite treatment. There is new partial bowel obstruction, and the cancer in your pancreas has grown larger. Your bilirubin level was also high, indicating worsening biliary obstruction.\n**What treatment or medication changes were made?**\nYou have been on a treatment break since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage side effects.\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the latest X-ray imaging to see if additional stent placement is possible. If not, we will discuss transitioning you to hospice care. We will follow up with you by phone.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer.\n**What's new or changed since your last visit?**\nRecent imaging shows that your cancer has progressed despite treatment. There is new partial bowel obstruction, and the cancer has grown larger. Your bilirubin level was elevated, indicating worsening biliary obstruction.\n**What treatment or medication changes were made?**\nYou have been on a treatment holiday since May 28, 2016. Supportive medications like ondansetron and tramadol were used to manage symptoms.\n**What is the plan going forward?**\nThe focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the X-ray imaging to see if additional stent placement is possible. The plan is to follow up with you over the phone and consider transitioning you to hospice care.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 The focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the latest X-ray imaging to see if additional stent placement is possible. If not, we will discuss transitioning you to hospice care. We will follow up with you by phone."
+"ACTION ITEMS:\n\u25a1 The focus is now on palliative care. We will continue to monitor your condition, including your bilirubin levels and liver function. We will also review the X-ray imaging to see if additional stent placement is possible. The plan is to follow up with you over the phone and consider transitioning you to hospice care."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 64.2,
-    "gunning_fog": 9.2,
-    "smog_index": 10.0,
-    "dale_chall": 9.6,
-    "coleman_liau": 10.0,
-    "ari": 7.8,
-    "linsear_write": 6.1,
+    "flesch_kincaid_grade": 7.5,
+    "flesch_reading_ease": 61.1,
+    "gunning_fog": 9.5,
+    "smog_index": 10.4,
+    "dale_chall": 9.7,
+    "coleman_liau": 10.5,
+    "ari": 8.2,
+    "linsear_write": 5.6,
     "text_standard": "9th and 10th grade",
-    "word_count": 170,
-    "sentence_count": 16,
-    "difficult_words": 46
+    "word_count": 164,
+    "sentence_count": 15,
+    "difficult_words": 45
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 64.2,
-    "dale_chall": 9.6,
-    "difficult_words": 46
+    "flesch_kincaid_grade": 7.5,
+    "flesch_reading_ease": 61.1,
+    "dale_chall": 9.7,
+    "difficult_words": 45
   }
 }
 
@@ -1566,7 +1566,7 @@ RESULTS FOR ROW 13
     "radiotherapy_plan": "We will consider XRT at this time. We will pause systemic therapy and consider radiation again per patient preference."
   },
   "Procedure_Plan": {
-    "procedure_plan": "We will consider XRT at this time. Dr. ***** will do bronch in February after following cultures."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "Recommended that he continue to do weekly CBC and transfuse PRBCs PRN for HGB <8.0. No specific future imaging planned."
@@ -1596,38 +1596,38 @@ RESULTS FOR ROW 13
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the size of the pancreatic mass has stayed the same, and it continues to invade the duodenum. There is no new growth or spread of the cancer. [source:findings,response_assessment]\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole to help with digestion. You will also continue taking Remeron and melatonin for sleep. If your hemoglobin levels drop below 8.0, you will need a blood transfusion. [source:medication_plan]\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. Your doctor will perform a bronchoscopy in February after reviewing the latest cultures. Your next in-person visit will be with your doctor on February 17. [source:radiotherapy_plan,procedure_plan,follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the size of the pancreatic mass has stayed the same, and there is no new growth. Your hemoglobin levels are slightly low, which means you might need a blood transfusion if they drop below 8.0. [source:findings,lab_summary,response_assessment]\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole. You will also continue taking Remeron and melatonin as prescribed. Blood transfusions will be given if your hemoglobin drops below 8.0. [source:medication_plan,supportive_meds]\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. Systemic therapy will be paused to reconsider radiation options based on your preference. Weekly blood counts will be monitored. A nutrition consultation is needed. Your doctor will see you next Tuesday, and another doctor will see you on February 17. [source:radiotherapy_plan,lab_plan,Nutrition,follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the size of the pancreatic mass has stayed the same, and it continues to invade the duodenum. There is no new growth or spread of the cancer.\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole to help with digestion. You will also continue taking Remeron and melatonin for sleep. If your hemoglobin levels drop below 8.0, you will need a blood transfusion.\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. Your doctor will perform a bronchoscopy in February after reviewing the latest cultures. Your next in-person visit will be with your doctor on February 17.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the size of the pancreatic mass has stayed the same, and there is no new growth. Your hemoglobin levels are slightly low, which means you might need a blood transfusion if they drop below 8.0.\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole. You will also continue taking Remeron and melatonin as prescribed. Blood transfusions will be given if your hemoglobin drops below 8.0.\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. Systemic therapy will be paused to reconsider radiation options based on your preference. Weekly blood counts will be monitored. A nutrition consultation is needed. Your doctor will see you next Tuesday, and another doctor will see you on February 17.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the size of the pancreatic mass has stayed the same, and it continues to invade the duodenum. There is no new growth or spread of the cancer.\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole to help with digestion. You will also continue taking Remeron and melatonin for sleep. If your hemoglobin levels drop below 8.0, you will need a blood transfusion.\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. Your doctor will perform a bronchoscopy in February after reviewing the latest cultures. Your next in-person visit will be with your doctor on February 17.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your pancreatic cancer treatment.\n**What's new or changed since your last visit?**\nThe latest CT scan shows that the pancreatic mass has stayed the same, and there is no new growth. Your hemoglobin levels are slightly low, which means you might need a blood transfusion if they drop below 8.0.\n**What treatment or medication changes were made?**\nYou will continue taking Creon and Pantoprazole. You will also continue taking Remeron and melatonin as prescribed. Blood transfusions will be given if your hemoglobin drops below 8.0.\n**What is the plan going forward?**\nWe will consider radiation therapy at this time. Systemic therapy will be paused to reconsider radiation options based on your preference. Weekly blood counts will be monitored. A nutrition consultation is needed. Your doctor will see you next Tuesday, and another doctor will see you on February 17.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will continue taking Creon and Pantoprazole to help with digestion. You will also continue taking Remeron and melatonin for sleep. If your hemoglobin levels drop below 8.0, you will need a blood transfusion.\n\u25a1 We will consider radiation therapy at this time. We will pause your current systemic therapy and reconsider radiation based on your preference. Your doctor will perform a bronchoscopy in February after reviewing the latest cultures. Your next in-person visit will be with your doctor on February 17."
+"ACTION ITEMS:\n\u25a1 You will continue taking Creon and Pantoprazole. You will also continue taking Remeron and melatonin as prescribed. Blood transfusions will be given if your hemoglobin drops below 8.0.\n\u25a1 We will consider radiation therapy at this time. Systemic therapy will be paused to reconsider radiation options based on your preference. Weekly blood counts will be monitored. A nutrition consultation is needed. Your doctor will see you next Tuesday, and another doctor will see you on February 17."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 7.2,
-    "flesch_reading_ease": 62.6,
+    "flesch_kincaid_grade": 7.1,
+    "flesch_reading_ease": 63.8,
     "gunning_fog": 9.9,
     "smog_index": 10.6,
     "dale_chall": 9.1,
-    "coleman_liau": 9.3,
-    "ari": 7.2,
-    "linsear_write": 6.0,
-    "text_standard": "8th and 9th grade",
-    "word_count": 172,
+    "coleman_liau": 9.6,
+    "ari": 7.5,
+    "linsear_write": 6.8,
+    "text_standard": "6th and 7th grade",
+    "word_count": 175,
     "sentence_count": 16,
-    "difficult_words": 38
+    "difficult_words": 37
   },
   "adjusted": {
-    "flesch_kincaid_grade": 7.2,
-    "flesch_reading_ease": 62.6,
+    "flesch_kincaid_grade": 7.1,
+    "flesch_reading_ease": 63.8,
     "dale_chall": 9.1,
-    "difficult_words": 38
+    "difficult_words": 37
   }
 }
 

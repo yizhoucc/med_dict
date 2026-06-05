@@ -19,10 +19,10 @@ RESULTS FOR ROW 1
     "summary": "postmenopausal patient with a recent diagnosis of breast cancer, who presents in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1) grade 3 invasive ductal carcinoma",
+    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma",
     "Stage_of_Cancer": "pT2N1a",
-    "Distant Metastasis": "Not sure",
-    "Metastasis": "Not sure"
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "WBC Count 9.9, Hemoglobin 9.6 (L), Hematocrit 28.9 (L), Platelet Count 222, Sodium, Serum / Plasma 133 (L), Potassium, Serum / Plasma 4.2, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 22, Urea Nitrogen, Serum / Plasma 18, Creatinine 1.01 (H), Glucose, non-fasting 201 (H), Calcium, total, Serum / Plasma 9.4, Aspartate transaminase 27, Alanine transaminase 19, Alkaline Phosphatase 60, Bilirubin, Total 0.9, Albumin, Serum / Plasma 3.0 (L) (from 06/01/2015)"
@@ -54,7 +54,7 @@ RESULTS FOR ROW 1
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "obtain PET/CT"
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "PET/CT to assess for metastasis."
@@ -84,38 +84,38 @@ RESULTS FOR ROW 1
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with a Stage II (T2N1) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. The cancer is located in the right upper outer quadrant of your breast and measures 3.6 cm. One of the two lymph nodes checked was positive for cancer. You also have a history of congestive heart failure with an LVEF of 25%, and chronic kidney disease stage G3b/A1. [source:findings, Type_of_Cancer, Stage_of_Cancer]\n**What treatment or medication changes were made?**\nThere were no specific changes to your medications or treatments at this visit. The discussion focused on the potential risks and benefits of chemotherapy regimens such as AC/T, TC, and CMF, which are considered unsafe due to your heart failure and diabetes. [source:recent_changes, medication_plan]\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment options. Your next clinic visit will be scheduled after the results of the PET/CT scan are available. [source:procedure_plan, imaging_plan, follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with a stage II triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. The cancer is located in the right upper outer quadrant of your breast and measures 3.6 cm. One of the two lymph nodes checked was positive for cancer. No cancer has spread to other parts of your body. [source:findings,Type_of_Cancer,Stage_of_Cancer,Stage_of_Cancer,findings,findings]\n**What treatment or medication changes were made?**\nThere were no changes to your current medications or treatments. The discussion focused on the potential risks of chemotherapy due to your heart failure and diabetes. Chemotherapy is the only FDA-approved treatment for triple negative breast cancer, but the recommended regimens may not be safe for you. [source:recent_changes,medication_plan,goals_of_treatment]\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment. We will discuss treatment options again after reviewing the results of the PET/CT scan. [source:imaging_plan,follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a Stage II (T2N1) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. The cancer is located in the right upper outer quadrant of your breast and measures 3.6 cm. One of the two lymph nodes checked was positive for cancer. You also have a history of congestive heart failure with an LVEF of 25%, and chronic kidney disease stage G3b/A1.\n**What treatment or medication changes were made?**\nThere were no specific changes to your medications or treatments at this visit. The discussion focused on the potential risks and benefits of chemotherapy regimens such as AC/T, TC, and CMF, which are considered unsafe due to your heart failure and diabetes.\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment options. Your next clinic visit will be scheduled after the results of the PET/CT scan are available.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a stage II triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. The cancer is located in the right upper outer quadrant of your breast and measures 3.6 cm. One of the two lymph nodes checked was positive for cancer. No cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nThere were no changes to your current medications or treatments. The discussion focused on the potential risks of chemotherapy due to your heart failure and diabetes. Chemotherapy is the only FDA-approved treatment for triple negative breast cancer, but the recommended regimens may not be safe for you.\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment. We will discuss treatment options again after reviewing the results of the PET/CT scan.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a Stage II (T2N1) triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. One of the lymph nodes checked was positive for cancer. You also have a history of congestive heart failure with an LVEF of 25%, and chronic kidney disease stage G3b/A1.\n**What treatment or medication changes were made?**\nThere were no specific changes to your medications or treatments at this visit. The discussion focused on the potential risks and benefits of chemotherapy regimens such as a chemotherapy regimen, TC, and CMF, which are considered unsafe due to your heart failure and diabetes.\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment options. Your next clinic visit will be scheduled after the results of the PET/CT scan are available.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a stage II triple negative breast cancer, which means the cancer does not have receptors for estrogen, progesterone, or HER2 proteins. One of the lymph nodes checked was positive for cancer. No cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nThere were no changes to your current medications or treatments. The discussion focused on the potential risks of chemotherapy due to your heart failure and diabetes. Chemotherapy is the only FDA-approved treatment for triple negative breast cancer, but the recommended regimens may not be safe for you.\n**What is the plan going forward?**\nYou will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment. We will discuss treatment options again after reviewing the results of the PET/CT scan.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 There were no specific changes to your medications or treatments at this visit. The discussion focused on the potential risks and benefits of chemotherapy regimens such as AC/T, TC, and CMF, which are considered unsafe due to your heart failure and diabetes.\n\u25a1 You will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment options. Your next clinic visit will be scheduled after the results of the PET/CT scan are available."
+"ACTION ITEMS:\n\u25a1 There were no changes to your current medications or treatments. The discussion focused on the potential risks of chemotherapy due to your heart failure and diabetes. Chemotherapy is the only FDA-approved treatment for triple negative breast cancer, but the recommended regimens may not be safe for you.\n\u25a1 You will have a PET/CT scan to check if the cancer has spread to other parts of your body. This information will help guide decisions about further treatment. We will discuss treatment options again after reviewing the results of the PET/CT scan."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.0,
-    "flesch_reading_ease": 64.9,
-    "gunning_fog": 10.5,
-    "smog_index": 10.8,
-    "dale_chall": 9.9,
-    "coleman_liau": 9.8,
-    "ari": 9.2,
-    "linsear_write": 10.3,
+    "flesch_kincaid_grade": 7.6,
+    "flesch_reading_ease": 64.7,
+    "gunning_fog": 9.9,
+    "smog_index": 10.3,
+    "dale_chall": 9.7,
+    "coleman_liau": 10.1,
+    "ari": 8.7,
+    "linsear_write": 7.9,
     "text_standard": "9th and 10th grade",
-    "word_count": 228,
-    "sentence_count": 15,
-    "difficult_words": 52
+    "word_count": 219,
+    "sentence_count": 16,
+    "difficult_words": 46
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.0,
-    "flesch_reading_ease": 64.9,
-    "dale_chall": 9.9,
-    "difficult_words": 52
+    "flesch_kincaid_grade": 7.6,
+    "flesch_reading_ease": 64.7,
+    "dale_chall": 9.7,
+    "difficult_words": 46
   }
 }
 
@@ -145,10 +145,10 @@ RESULTS FOR ROW 2
     "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer, initially treated in 1994 with surgery and interstitial radiation. The purpose of this visit is to discuss potential treatment options for her locally recurrent and unresectable disease."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- grade 1 infiltrating ductal carcinoma with locally recurrent disease",
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma with locally recurrent disease",
     "Stage_of_Cancer": "Originally Stage IIA, now locally recurrent",
     "Distant Metastasis": "No",
-    "Metastasis": "Yes (to the right anterior chest wall, right axillary lymph nodes, and liver)"
+    "Metastasis": "Yes (right anterior chest wall, right axillary lymph nodes, and liver)"
   },
   "Lab_Results": {
     "lab_summary": "CBC, creatinine, electrolytes, liver function tests, and calcium normal. CA27-29 = 15, LDH normal."
@@ -168,7 +168,7 @@ RESULTS FOR ROW 2
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The patient has not yet started on the aromatase inhibitor therapy as of the latest visit on January 09. The patient is currently on zoledronic acid due to osteoporosis. No specific evidence of current treatment response is provided in the note. The most recent imaging, a PET/CT scan performed on January 16, shows increased FDG avidity within a right parasternal chest wall nodule measuring 1.9 cm and intricately involved with the underlying chest wall. The patient is scheduled to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
+    "response_assessment": "The patient is currently on zoledronic acid due to osteoporosis and is preparing to start aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab. The latest imaging and lab results indicate no evidence of disease recurrence or progression. Specifically, the PET/CT scan performed on January 16 showed increased FDG avidity within a right parasternal chest wall nodule measuring 1.9 cm and intricately involved with the underlying chest wall. An adjacent right inferior axillary lymph node measuring 1.9 cm with an SUV of 2 and an adjacent 0.5 cm lymph node is noted. Compared to previous scans, the parasternal nodule has increased in size while the axillary nodes have decreased in size. Abdominal imaging shows a small, well-demarcated, low-attenuation lesion in the liver consistent with a cyst. Bone imaging reveals no abnormalities. MRI of the brain shows no evidence of malignancy, but does show a right middle frontal gyrus encephalomalacia and gliosis consistent with a prior insult. Laboratory studies reveal a normal CBC, creatinine, electrolytes, liver function tests, and calcium. CA27-29 is 15 and LDH is normal. Based on these findings, the cancer is currently stable with no evidence of disease progression."
   },
   "Medication_Plan": {
     "medication_plan": "The patient will start on zoledronic acid due to osteoporosis and will begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
@@ -180,7 +180,7 @@ RESULTS FOR ROW 2
     "radiotherapy_plan": "It would be possible to shrink the tumor, potentially proceed with a surgical resection, and radiate this area in order to at least approach the possibility of long-term disease control."
   },
   "Procedure_Plan": {
-    "procedure_plan": "The patient needs to undergo a PET/CT scan and MRI of her brain. She will also need to start on an aromatase inhibitor after receiving zoledronic acid for her osteoporosis. There is a plan to potentially proceed with a surgical resection and radiate the area after shrinking the tumor."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "PET/CT scan obtained on January 16. MRI of her brain obtained on the day of her visit."
@@ -210,38 +210,38 @@ RESULTS FOR ROW 2
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma that has come back in the same area. The cancer has not spread to multiple sites throughout your body. Imaging shows a hard lump in your chest wall that has gotten bigger since the last scan. However, the lymph nodes in your armpit have gotten smaller. A scan of your brain shows no signs of cancer but does show damage from a past injury. Blood tests show that your levels are normal. [source:findings,response_assessment,lab_summary]\n**What treatment or medication changes were made?**\nYou started taking a medicine called zoledronic acid because you have osteoporosis. This will help protect your bones while you start another medicine called an aromatase inhibitor. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start an aromatase inhibitor on January 25. The goal is to shrink the tumor and possibly remove it with surgery. After that, you may need radiation to the area to try to control the cancer for a longer time. You will have another scan and an MRI of your brain to check on your condition. You will also have regular blood tests to monitor your health. [source:medication_plan,procedure_plan,imaging_plan,lab_plan,follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma that has come back in the same area. The cancer has spread to multiple sites throughout your body but has not spread to distant organs. Recent imaging shows a hard lump in your chest wall that has grown a bit, but the cancer is currently stable with no signs of getting worse. [source:findings, response_assessment]\n**What treatment or medication changes were made?**\nYou started taking a medication called zoledronic acid because you have osteoporosis and will soon start another medication called an aromatase inhibitor. [source:recent_changes, supportive_meds, medication_plan]\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start aromatase inhibitor therapy either alone or as part of a research study on January 25. The goal is to help manage your cancer and improve your quality of life. We will also monitor your condition closely with regular blood tests and imaging scans. [source:medication_plan, lab_plan, imaging_plan, follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma that has come back in the same area. The cancer has not spread to multiple sites throughout your body. Imaging shows a hard lump in your chest wall that has gotten bigger since the last scan. However, the lymph nodes in your armpit have gotten smaller. A scan of your brain shows no signs of cancer but does show damage from a past injury. Blood tests show that your levels are normal.\n**What treatment or medication changes were made?**\nYou started taking a medicine called zoledronic acid because you have osteoporosis. This will help protect your bones while you start another medicine called an aromatase inhibitor.\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start an aromatase inhibitor on January 25. The goal is to shrink the tumor and possibly remove it with surgery. After that, you may need radiation to the area to try to control the cancer for a longer time. You will have another scan and an MRI of your brain to check on your condition. You will also have regular blood tests to monitor your health.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma that has come back in the same area. The cancer has spread to multiple sites throughout your body but has not spread to distant organs. Recent imaging shows a hard lump in your chest wall that has grown a bit, but the cancer is currently stable with no signs of getting worse.\n**What treatment or medication changes were made?**\nYou started taking a medication called zoledronic acid because you have osteoporosis and will soon start another medication called an aromatase inhibitor.\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start aromatase inhibitor therapy either alone or as part of a research study on January 25. The goal is to help manage your cancer and improve your quality of life. We will also monitor your condition closely with regular blood tests and imaging scans.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- infiltrating ductal carcinoma that has come back in the same area. The cancer has not spread to multiple sites throughout your body. Imaging shows a hard lump in your chest wall that has gotten bigger since the last scan. However, the lymph nodes in your armpit have gotten smaller. A scan of your brain shows no signs of cancer but does show damage from a past injury. Blood tests show that your levels are normal.\n**What treatment or medication changes were made?**\nYou started taking a medicine called zoledronic acid because you have osteoporosis. This will help protect your bones while you start another medicine called an aromatase inhibitor.\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start an aromatase inhibitor on January 25. The goal is to shrink the tumor and possibly remove it with surgery. After that, you may need radiation to the area to try to control the cancer for a longer time. You will have another scan and an MRI of your brain to check on your condition. You will also have regular blood tests to monitor your health.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR-/HER2- infiltrating ductal carcinoma that has come back in the same area. The cancer has spread to multiple sites throughout your body but has not spread to distant organs. Recent imaging shows a hard lump in your chest wall that has grown a bit, but the cancer is currently stable with no signs of getting worse.\n**What treatment or medication changes were made?**\nYou started taking a medication called zoledronic acid because you have osteoporosis and will soon start another medication called an aromatase inhibitor.\n**What is the plan going forward?**\nYou will continue taking zoledronic acid and start aromatase inhibitor therapy either alone or as part of a research study on January 25. The goal is to help manage your cancer and improve your quality of life. We will also monitor your condition closely with regular blood tests and imaging scans.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You started taking a medicine called zoledronic acid because you have osteoporosis. This will help protect your bones while you start another medicine called an aromatase inhibitor.\n\u25a1 You will continue taking zoledronic acid and start an aromatase inhibitor on January 25. The goal is to shrink the tumor and possibly remove it with surgery. After that, you may need radiation to the area to try to control the cancer for a longer time. You will have another scan and an MRI of your brain to check on your condition. You will also have regular blood tests to monitor your health."
+"ACTION ITEMS:\n\u25a1 You started taking a medication called zoledronic acid because you have osteoporosis and will soon start another medication called an aromatase inhibitor.\n\u25a1 You will continue taking zoledronic acid and start aromatase inhibitor therapy either alone or as part of a research study on January 25. The goal is to help manage your cancer and improve your quality of life. We will also monitor your condition closely with regular blood tests and imaging scans."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.6,
-    "flesch_reading_ease": 70.9,
-    "gunning_fog": 8.7,
-    "smog_index": 10.2,
-    "dale_chall": 8.8,
-    "coleman_liau": 8.4,
-    "ari": 7.1,
-    "linsear_write": 6.2,
-    "text_standard": "6th and 7th grade",
-    "word_count": 273,
-    "sentence_count": 21,
-    "difficult_words": 48
+    "flesch_kincaid_grade": 8.1,
+    "flesch_reading_ease": 63.5,
+    "gunning_fog": 10.5,
+    "smog_index": 11.1,
+    "dale_chall": 9.1,
+    "coleman_liau": 9.6,
+    "ari": 8.8,
+    "linsear_write": 8.7,
+    "text_standard": "8th and 9th grade",
+    "word_count": 226,
+    "sentence_count": 15,
+    "difficult_words": 46
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.6,
-    "flesch_reading_ease": 70.9,
-    "dale_chall": 8.8,
-    "difficult_words": 48
+    "flesch_kincaid_grade": 8.1,
+    "flesch_reading_ease": 63.5,
+    "dale_chall": 9.1,
+    "difficult_words": 46
   }
 }
 
@@ -271,7 +271,7 @@ RESULTS FOR ROW 3
     "summary": "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal, here to discuss neoadjuvant therapy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (TNBC) spindle cell metaplastic carcinoma",
+    "Type_of_Cancer": "ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma",
     "Stage_of_Cancer": "Locally advanced, multifocal",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -306,7 +306,7 @@ RESULTS FOR ROW 3
     "radiotherapy_plan": "radiation therapy depending on her surgical choice and final pathology"
   },
   "Procedure_Plan": {
-    "procedure_plan": "will benefit from a Medi-port, will arrange for chemo teaching session"
+    "procedure_plan": "will benefit from a Medi-port"
   },
   "Imaging_Plan": {
     "imaging_plan": "Echocardiogram"
@@ -336,38 +336,38 @@ RESULTS FOR ROW 3
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a discussion about your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called spindle cell metaplastic carcinoma, which does not have the proteins ER, PR, or HER2. The cancer is locally advanced and multifocal, meaning it has multiple areas of growth in the breast. There is no evidence of the cancer spreading to other parts of your body. [source:Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis]\nYour blood tests show slightly elevated levels of creatinine and alkaline phosphatase, which we will monitor closely. [source:lab_summary]\nWe discussed that the goal of your treatment is to cure the cancer. [source:goals_of_treatment, goals_description]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. [source:medication_plan]\nYou will also have a Medi-port placed for easier administration of chemotherapy. [source:procedure_plan]\nFor pain relief, you can take ibuprofen as needed. Omeprazole is prescribed to protect your stomach. [source:supportive_meds]\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to check your heart function before starting chemotherapy. [source:imaging_plan]\nWe will check your creatinine and alkaline phosphatase levels again soon. [source:lab_plan]\nYou will start chemotherapy in the first week of February. [source:medication_plan]\nWe will discuss the results of the gene panel that has been sent once they are available. [source:genetic_testing_plan, follow_up]\nDepending on your surgical choice and final pathology, you may be referred for radiation therapy. [source:radiotherapy_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body. [source:Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis]\nYour treatment goal is to cure the cancer. [source:goals_of_treatment, goals_description]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration. [source:medication_plan]\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals. [source:supportive_meds]\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February. [source:medication_plan]\nYou will have an echocardiogram to monitor your heart function. [source:imaging_plan]\nYour labs will be checked again to monitor your creatinine and Alk phos levels. [source:lab_plan]\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions. [source:genetic_testing_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called spindle cell metaplastic carcinoma, which does not have the proteins ER, PR, or HER2. The cancer is locally advanced and multifocal, meaning it has multiple areas of growth in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour blood tests show slightly elevated levels of creatinine and alkaline phosphatase, which we will monitor closely.\nWe discussed that the goal of your treatment is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel.\nYou will also have a Medi-port placed for easier administration of chemotherapy.\nFor pain relief, you can take ibuprofen as needed. Omeprazole is prescribed to protect your stomach.\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to check your heart function before starting chemotherapy.\nWe will check your creatinine and alkaline phosphatase levels again soon.\nYou will start chemotherapy in the first week of February.\nWe will discuss the results of the gene panel that has been sent once they are available.\nDepending on your surgical choice and final pathology, you may be referred for radiation therapy.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals.\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February.\nYou will have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and Alk phos levels.\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called spindle cell metaplastic carcinoma, which does not have the proteins ER, PR, or HER2. The cancer is locally advanced and multifocal, meaning it has multiple areas of growth in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour blood tests show slightly elevated levels of creatinine and alkaline phosphatase, which we will monitor closely.\nWe discussed that the goal of your treatment is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. A clinical trial was discussed, and if you are randomized to the experimental arm, an additional unspecified agent will be added to paclitaxel.\nYou will also have a Medi-port placed for easier administration of chemotherapy.\nFor pain relief, you can take ibuprofen as needed. Omeprazole is prescribed to protect your stomach.\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to check your heart function before starting chemotherapy.\nWe will check your creatinine and alkaline phosphatase levels again soon.\nYou will start chemotherapy in the first week of February.\nWe will discuss the results of the gene panel that has been sent once they are available.\nDepending on your surgical choice and final pathology, you may be referred for radiation therapy.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. A clinical trial was discussed. You have agreed to have a Medi-port placed for chemotherapy administration.\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals.\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February.\nYou will have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and Alk phos levels.\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel.\n\u25a1 You will also have a Medi-port placed for easier administration of chemotherapy.\n\u25a1 You are referred to have an echocardiogram to check your heart function before starting chemotherapy.\n\u25a1 We will check your creatinine and alkaline phosphatase levels again soon.\n\u25a1 You will start chemotherapy in the first week of February.\n\u25a1 We will discuss the results of the gene panel that has been sent once they are available.\n\u25a1 Depending on your surgical choice and final pathology, you may be referred for radiation therapy."
+"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\n\u25a1 You will start chemotherapy in the first week of February.\n\u25a1 You will have an echocardiogram to monitor your heart function.\n\u25a1 Your labs will be checked again to monitor your creatinine and Alk phos levels.\n\u25a1 A genetic panel has been sent to learn more about your cancer and any genetic predispositions."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.5,
-    "flesch_reading_ease": 58.2,
-    "gunning_fog": 10.7,
-    "smog_index": 11.0,
+    "flesch_kincaid_grade": 8.3,
+    "flesch_reading_ease": 58.1,
+    "gunning_fog": 10.4,
+    "smog_index": 10.9,
     "dale_chall": 10.1,
-    "coleman_liau": 10.7,
-    "ari": 9.1,
-    "linsear_write": 7.9,
-    "text_standard": "10th and 11th grade",
-    "word_count": 293,
-    "sentence_count": 22,
-    "difficult_words": 73
+    "coleman_liau": 10.5,
+    "ari": 8.8,
+    "linsear_write": 6.9,
+    "text_standard": "9th and 10th grade",
+    "word_count": 241,
+    "sentence_count": 19,
+    "difficult_words": 57
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.5,
-    "flesch_reading_ease": 58.2,
+    "flesch_kincaid_grade": 8.3,
+    "flesch_reading_ease": 58.1,
     "dale_chall": 10.1,
-    "difficult_words": 73
+    "difficult_words": 57
   }
 }
 
@@ -397,10 +397,10 @@ RESULTS FOR ROW 4
     "summary": "71 year old female with right breast cancer, HER2 negative, here for discussion for a new patient visit."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER- PR- HER2- (HER2 1+) grade 3 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Not mentioned in note",
-    "Distant Metastasis": "No",
-    "Metastasis": "No"
+    "Type_of_Cancer": "ER-/PR-HER2- grade 3 invasive ductal carcinoma with metastatic recurrence (right lateral breast)",
+    "Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
+    "Distant Metastasis": "Yes, to right lateral breast",
+    "Metastasis": "Yes, to right lateral breast"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -416,7 +416,7 @@ RESULTS FOR ROW 4
     "supportive_meds": "acetaminophen (TYLENOL) 325 mg tablet, baclofen (LIORESAL) 10 mg tablet, omeprazole (PRILOSEC) 20 mg capsule, promethazine-dextromethorphan 6.25-15 mg/5 mL syrup"
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "curative",
+    "goals_of_treatment": "palliative",
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
@@ -432,7 +432,7 @@ RESULTS FOR ROW 4
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Port placement ASAP, Chemo teach ASAP for taxol x 12 weekly"
+    "procedure_plan": "Port placement ASAP"
   },
   "Imaging_Plan": {
     "imaging_plan": "Mammogram"
@@ -462,38 +462,38 @@ RESULTS FOR ROW 4
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your right breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer does not have a protein called HER2, which affects how it is treated. The latest imaging shows that the cancer in your right breast has grown larger. No cancer has spread to other parts of your body. [source:findings,Type_of_Cancer]\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle spasms, acid reflux, and cough. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of chemotherapy. You will also have a mammogram to check on the cancer. [source:procedure_plan,imaging_plan,follow_up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread. [source:findings,Type_of_Cancer,Stage_of_Cancer,Distant_Metastasis]\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer. [source:medication_plan,follow_up,imaging_plan]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your right breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer does not have a protein called HER2, which affects how it is treated. The latest imaging shows that the cancer in your right breast has grown larger. No cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle spasms, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of chemotherapy. You will also have a mammogram to check on the cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your right breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer does not have a protein called HER2, which affects how it is treated. The latest imaging shows that the cancer in your right breast has grown larger. No cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle spasms, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of chemotherapy. You will also have a mammogram to check on the cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle spasms, acid reflux, and cough.\n\u25a1 You will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of chemotherapy. You will also have a mammogram to check on the cancer."
+"ACTION ITEMS:\n\u25a1 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n\u25a1 You will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.1,
-    "flesch_reading_ease": 72.7,
-    "gunning_fog": 7.8,
+    "flesch_kincaid_grade": 6.0,
+    "flesch_reading_ease": 72.9,
+    "gunning_fog": 7.7,
     "smog_index": 8.8,
-    "dale_chall": 8.8,
-    "coleman_liau": 8.4,
-    "ari": 6.9,
-    "linsear_write": 5.9,
-    "text_standard": "7th and 8th grade",
-    "word_count": 218,
-    "sentence_count": 18,
-    "difficult_words": 40
+    "dale_chall": 8.6,
+    "coleman_liau": 8.6,
+    "ari": 7.0,
+    "linsear_write": 5.3,
+    "text_standard": "8th and 9th grade",
+    "word_count": 202,
+    "sentence_count": 17,
+    "difficult_words": 36
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.1,
-    "flesch_reading_ease": 72.7,
-    "dale_chall": 8.8,
-    "difficult_words": 40
+    "flesch_kincaid_grade": 6.0,
+    "flesch_reading_ease": 72.9,
+    "dale_chall": 8.6,
+    "difficult_words": 36
   }
 }
 
@@ -523,7 +523,7 @@ RESULTS FOR ROW 5
     "summary": "Early stage breast cancer, bilateral breast cancer, initial consult to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "Left breast: ER+/PR+/HER2- grade 3 invasive ductal carcinoma with suspicion for LVI and focal high-grade DCIS component; Right breast: ER+/PR+/HER2- grade 1 invasive ductal carcinoma with low-grade DCIS component",
+    "Type_of_Cancer": "ER+/PR+/HER2- grade 3 invasive ductal carcinoma with extensive DCIS in the left breast; ER+/PR+/HER2- grade 1 invasive ductal carcinoma in the right breast",
     "Stage_of_Cancer": "Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -558,7 +558,7 @@ RESULTS FOR ROW 5
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Will need a DEXA to assess her current bone health."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "DEXA to assess current bone health."
@@ -588,38 +588,38 @@ RESULTS FOR ROW 5
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your early stage breast cancer treatment options. [source:summary]\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and has a higher risk of spreading. The right breast cancer is less serious and has a lower risk of spreading. [source:findings,Type_of_Cancer,Stage_of_Cancer]\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This medicine blocks the production of estrogen in your body, which can help stop the cancer from growing. You will also take calcium and vitamin D to help keep your bones strong. [source:medication_plan]\n**What is the plan going forward?**\nYou will have a DEXA scan to check the health of your bones. This is important because the treatments you will receive can sometimes weaken your bones. You will also start chemotherapy with docetaxel and cyclophosphamide (TC) for  4 cycles. This is to reduce the risk of the cancer coming back. After chemotherapy, you will continue with the anti-estrogen therapy. [source:procedure_plan,medication_plan,goals_of_treatment]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your early stage breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and is classified as Stage III. The right breast cancer is less serious and is classified as Stage I. Both cancers are hormone receptor positive (ER+/PR+) and do not have a protein called HER2. [source:Type_of_Cancer,Stage_of_Cancer]\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This treatment blocks the production of estrogen in your body. You will begin this after completing chemotherapy and radiation. You will also take calcium and vitamin D to improve your bone health. [source:medication_plan]\n**What is the plan going forward?**\nYou will undergo chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles. This is to reduce the risk of the cancer coming back. You will also have a DEXA scan to check your bone health. Your tumor will be tested with Oncotype DX RS to help guide further treatment decisions. [source:medication_plan,imaging_plan,genetic_testing_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your early stage breast cancer treatment options.\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and has a higher risk of spreading. The right breast cancer is less serious and has a lower risk of spreading.\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This medicine blocks the production of estrogen in your body, which can help stop the cancer from growing. You will also take calcium and vitamin D to help keep your bones strong.\n**What is the plan going forward?**\nYou will have a DEXA scan to check the health of your bones. This is important because the treatments you will receive can sometimes weaken your bones. You will also start chemotherapy with docetaxel and cyclophosphamide (TC) for  4 cycles. This is to reduce the risk of the cancer coming back. After chemotherapy, you will continue with the anti-estrogen therapy.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your early stage breast cancer.\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and is classified as Stage III. The right breast cancer is less serious and is classified as Stage I. Both cancers are hormone receptor positive (ER+/PR+) and do not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This treatment blocks the production of estrogen in your body. You will begin this after completing chemotherapy and radiation. You will also take calcium and vitamin D to improve your bone health.\n**What is the plan going forward?**\nYou will undergo chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles. This is to reduce the risk of the cancer coming back. You will also have a DEXA scan to check your bone health. Your tumor will be tested with Oncotype DX RS to help guide further treatment decisions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your early stage breast cancer treatment options.\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and has a higher risk of spreading. The right breast cancer is less serious and has a lower risk of spreading.\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This medicine blocks the production of estrogen in your body, which can help stop the cancer from growing. You will also take calcium and vitamin D to help keep your bones strong.\n**What is the plan going forward?**\nYou will have a DEXA scan to check the health of your bones. This is important because the treatments you will receive can sometimes weaken your bones. You will also start chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles. This is to reduce the risk of the cancer coming back. After chemotherapy, you will continue with the anti-estrogen therapy.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your early stage breast cancer.\n**What's new or changed since your last visit?**\nYou have two types of breast cancer: one in your left breast and one in your right breast. The left breast cancer is more serious and is classified as Stage III. The right breast cancer is less serious and is classified as Stage I. Both cancers are hormone receptor positive and do not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This treatment blocks the production of estrogen in your body. You will begin this after completing chemotherapy and radiation. You will also take calcium and vitamin D to improve your bone health.\n**What is the plan going forward?**\nYou will undergo chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles. This is to reduce the risk of the cancer coming back. You will also have a DEXA scan to check your bone health. Your tumor will be tested with Oncotype DX RS to help guide further treatment decisions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This medicine blocks the production of estrogen in your body, which can help stop the cancer from growing. You will also take calcium and vitamin D to help keep your bones strong.\n\u25a1 You will have a DEXA scan to check the health of your bones. This is important because the treatments you will receive can sometimes weaken your bones. You will also start chemotherapy with docetaxel and cyclophosphamide (TC) for  4 cycles. This is to reduce the risk of the cancer coming back. After chemotherapy, you will continue with the anti-estrogen therapy."
+"ACTION ITEMS:\n\u25a1 You will start anti-estrogen therapy with an aromatase inhibitor (AI) for at least 5 years. This treatment blocks the production of estrogen in your body. You will begin this after completing chemotherapy and radiation. You will also take calcium and vitamin D to improve your bone health.\n\u25a1 You will undergo chemotherapy with docetaxel and cyclophosphamide (TC) for 4 cycles. This is to reduce the risk of the cancer coming back. You will also have a DEXA scan to check your bone health. Your tumor will be tested with Oncotype DX RS to help guide further treatment decisions."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.0,
-    "flesch_reading_ease": 74.7,
-    "gunning_fog": 8.4,
-    "smog_index": 9.5,
-    "dale_chall": 8.6,
-    "coleman_liau": 8.5,
-    "ari": 7.1,
-    "linsear_write": 7.1,
-    "text_standard": "8th and 9th grade",
-    "word_count": 214,
-    "sentence_count": 17,
-    "difficult_words": 33
+    "flesch_kincaid_grade": 6.2,
+    "flesch_reading_ease": 71.9,
+    "gunning_fog": 9.4,
+    "smog_index": 10.0,
+    "dale_chall": 9.0,
+    "coleman_liau": 8.4,
+    "ari": 6.9,
+    "linsear_write": 6.6,
+    "text_standard": "6th and 7th grade",
+    "word_count": 215,
+    "sentence_count": 18,
+    "difficult_words": 41
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.0,
-    "flesch_reading_ease": 74.7,
-    "dale_chall": 8.6,
-    "difficult_words": 33
+    "flesch_kincaid_grade": 6.2,
+    "flesch_reading_ease": 71.9,
+    "dale_chall": 9.0,
+    "difficult_words": 41
   }
 }
 
@@ -650,9 +650,9 @@ RESULTS FOR ROW 6
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-neg, PR neg, HER2 3+ (HER2+) grade 2 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Originally not specified, now metastatic (Stage IV)",
-    "Distant Metastasis": "Yes, to left iliac bone, bilateral sacral ala",
-    "Metastasis": "Yes (to left iliac bone, bilateral sacral ala, and possibly left carotid bifurcation)"
+    "Stage_of_Cancer": "Suspected Stage IV (pending confirmation)",
+    "Distant Metastasis": "Suspected to left ilium, bilateral sacral ala",
+    "Metastasis": "Not sure"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
@@ -684,7 +684,7 @@ RESULTS FOR ROW 6
     "radiotherapy_plan": "We can radiate bone lesions as well."
   },
   "Procedure_Plan": {
-    "procedure_plan": "MRI Pelvis, Chemoteach for weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab, Baseline echocardiogram, Port placement"
+    "procedure_plan": "Port placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "MRI Pelvis, MRI neck - like cartoid body, Baseline echocardiogram"
@@ -714,38 +714,38 @@ RESULTS FOR ROW 6
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. The cancer is suspected to have spread to your bones. [source:findings,Type_of_Cancer,Stage_of_Cancer,Metastasis,Distant_Metastasis]\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel, trastuzumab, and pertuzumab. These medications are used to treat HER2-positive breast cancer. [source:medication_plan]\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. You will also have a baseline echocardiogram to monitor your heart function. A port will be placed for easier administration of chemotherapy. You will have labs done before starting chemotherapy. [source:procedure_plan,imaging_plan,lab_plan]\nYou are referred to Chemoteach for education on your new treatment plan. [source:procedure_plan]\nWe can also consider radiation therapy for the bone lesions if needed. [source:radiotherapy_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. This means the cancer started in the milk ducts and has a protein called HER2 on its surface. The cancer may have spread to other parts of your body, including your bones. We need to confirm this with further tests. [source:findings,Type_of_Cancer,Stage_of_Cancer,Distant_Metastasis]\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel and every three weeks with trastuzumab and pertuzumab. These medications are used to treat HER2-positive breast cancer. [source:medication_plan]\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. We will also place a port for easier administration of chemotherapy. Before starting chemotherapy, you will have a baseline echocardiogram to check your heart function. We can also consider radiation for any bone lesions. [source:imaging_plan,procedure_plan,radiotherapy_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. The cancer is suspected to have spread to your bones.\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel, trastuzumab, and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. You will also have a baseline echocardiogram to monitor your heart function. A port will be placed for easier administration of chemotherapy. You will have labs done before starting chemotherapy.\nYou are referred to Chemoteach for education on your new treatment plan.\nWe can also consider radiation therapy for the bone lesions if needed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. This means the cancer started in the milk ducts and has a protein called HER2 on its surface. The cancer may have spread to other parts of your body, including your bones. We need to confirm this with further tests.\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel and every three weeks with trastuzumab and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. We will also place a port for easier administration of chemotherapy. Before starting chemotherapy, you will have a baseline echocardiogram to check your heart function. We can also consider radiation for any bone lesions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. The cancer is suspected to have spread to your bones.\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel, trastuzumab, and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. You will also have a baseline echocardiogram to monitor your heart function. A port will be placed for easier administration of chemotherapy. You will have labs done before starting chemotherapy.\nYou are referred to Chemoteach for education on your new treatment plan.\nWe can also consider radiation therapy for the bone lesions if needed.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called HER2-positive invasive ductal carcinoma. This means the cancer started in the milk ducts and has a protein called HER2 on its surface. The cancer may have spread to other parts of your body, including your bones. We need to confirm this with further tests.\n**What treatment or medication changes were made?**\nYou will start a new treatment plan with weekly paclitaxel and every three weeks with trastuzumab and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n**What is the plan going forward?**\nYou will have an MRI of your pelvis and neck to check for any cancer spread. We will also place a port for easier administration of chemotherapy. Before starting chemotherapy, you will have a baseline echocardiogram to check your heart function. We can also consider radiation for any bone lesions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start a new treatment plan with weekly paclitaxel, trastuzumab, and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n\u25a1 You will have an MRI of your pelvis and neck to check for any cancer spread. You will also have a baseline echocardiogram to monitor your heart function. A port will be placed for easier administration of chemotherapy. You will have labs done before starting chemotherapy.\n\u25a1 You are referred to Chemoteach for education on your new treatment plan.\n\u25a1 We can also consider radiation therapy for the bone lesions if needed."
+"ACTION ITEMS:\n\u25a1 You will start a new treatment plan with weekly paclitaxel and every three weeks with trastuzumab and pertuzumab. These medications are used to treat HER2-positive breast cancer.\n\u25a1 You will have an MRI of your pelvis and neck to check for any cancer spread. We will also place a port for easier administration of chemotherapy. Before starting chemotherapy, you will have a baseline echocardiogram to check your heart function. We can also consider radiation for any bone lesions."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 65.1,
-    "gunning_fog": 9.4,
-    "smog_index": 10.0,
-    "dale_chall": 9.2,
-    "coleman_liau": 10.0,
+    "flesch_kincaid_grade": 6.8,
+    "flesch_reading_ease": 67.4,
+    "gunning_fog": 8.7,
+    "smog_index": 9.7,
+    "dale_chall": 8.9,
+    "coleman_liau": 9.6,
     "ari": 7.7,
-    "linsear_write": 5.9,
+    "linsear_write": 6.5,
     "text_standard": "8th and 9th grade",
-    "word_count": 172,
+    "word_count": 187,
     "sentence_count": 16,
-    "difficult_words": 40
+    "difficult_words": 38
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 65.1,
-    "dale_chall": 9.2,
-    "difficult_words": 40
+    "flesch_kincaid_grade": 6.8,
+    "flesch_reading_ease": 67.4,
+    "dale_chall": 8.9,
+    "difficult_words": 38
   }
 }
 
@@ -902,7 +902,7 @@ RESULTS FOR ROW 8
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS",
-    "Stage_of_Cancer": "Stage IIA (pT2(m)N1a)",
+    "Stage_of_Cancer": "pT2(m)N1a",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -936,7 +936,7 @@ RESULTS FOR ROW 8
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "port placement, chemotherapy teaching session, baseline TTE"
+    "procedure_plan": "port placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "ordered for pre-chemotherapy TTE"
@@ -966,38 +966,38 @@ RESULTS FOR ROW 8
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou were diagnosed with an early stage (Stage IIA) breast cancer, specifically an ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS. The cancer was removed through bilateral mastectomies, and two out of twelve lymph nodes were found to contain cancer. [source:Type_of_Cancer,Stage_of_Cancer,findings]\n**What treatment or medication changes were made?**\nYou are taking gabapentin to help with numbness in your left armpit and elbow. [source:supportive_meds]\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, estimated to begin on October 18, 2017. Before starting chemotherapy, you will have a baseline echocardiogram (heart ultrasound) to monitor for potential side effects. A port will be placed for easier administration of chemotherapy. You will also have a teaching session about chemotherapy. Additionally, you were referred to genetics for further testing. [source:medication_plan,procedure_plan,genetic_testing_plan]\nYou have an appointment with ***** ***** on October 10, 2017. [source:follow_up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou were diagnosed with an early-stage (Stage IIA) breast cancer that started in the milk ducts (invasive ductal carcinoma). The cancer is sensitive to estrogen and progesterone but does not have a protein called HER2. The cancer was removed through surgery, and some lymph nodes were checked. [source:findings,Type_of_Cancer,Stage_of_Cancer]\n**What treatment or medication changes were made?**\nYou will continue taking gabapentin to help with numbness in your left armpit and elbow. [source:supportive_meds]\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin around October 18, 2017. Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. You will also be referred to genetics for further testing. You have an appointment with ***** ***** on October 10, 2017. [source:medication_plan,procedure_plan,imaging_plan,genetic_testing_plan,follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou were diagnosed with an early stage (Stage IIA) breast cancer, specifically an ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS. The cancer was removed through bilateral mastectomies, and two out of twelve lymph nodes were found to contain cancer.\n**What treatment or medication changes were made?**\nYou are taking gabapentin to help with numbness in your left armpit and elbow.\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, estimated to begin on October 18, 2017. Before starting chemotherapy, you will have a baseline echocardiogram (heart ultrasound) to monitor for potential side effects. A port will be placed for easier administration of chemotherapy. You will also have a teaching session about chemotherapy. Additionally, you were referred to genetics for further testing.\nYou have an appointment with ***** ***** on October 10, 2017.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou were diagnosed with an early-stage (Stage IIA) breast cancer that started in the milk ducts (invasive ductal carcinoma). The cancer is sensitive to estrogen and progesterone but does not have a protein called HER2. The cancer was removed through surgery, and some lymph nodes were checked.\n**What treatment or medication changes were made?**\nYou will continue taking gabapentin to help with numbness in your left armpit and elbow.\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin around October 18, 2017. Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. You will also be referred to genetics for further testing. You have an appointment with ***** ***** on October 10, 2017.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou were diagnosed with an early stage (Stage IIA) breast cancer, specifically an ER+/PR+/HER2- invasive ductal carcinoma with extensive DCIS. The cancer was removed through bilateral mastectomies, and cancer was found in a lymph node.\n**What treatment or medication changes were made?**\nYou are taking gabapentin to help with numbness in your left armpit and elbow.\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, estimated to begin on October 18, 2017. Before starting chemotherapy, you will have a baseline echocardiogram (heart ultrasound) to monitor for potential side effects. A port will be placed for easier administration of chemotherapy. You will also have a teaching session about chemotherapy. Additionally, you were referred to genetics for further testing.\nYou have an appointment with   on October 10, 2017.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou were diagnosed with an early-stage (Stage IIA) breast cancer that started in the milk ducts (invasive ductal carcinoma). The cancer is sensitive to estrogen and progesterone but does not have a protein called HER2. The cancer was removed through surgery, and some lymph nodes were checked.\n**What treatment or medication changes were made?**\nYou will continue taking gabapentin to help with numbness in your left armpit and elbow.\n**What is the plan going forward?**\nYou agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin around October 18, 2017. Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. You will also be referred to genetics for further testing. You have an appointment with   on October 10, 2017.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You agreed to start chemotherapy with AC plus paclitaxel, estimated to begin on October 18, 2017. Before starting chemotherapy, you will have a baseline echocardiogram (heart ultrasound) to monitor for potential side effects. A port will be placed for easier administration of chemotherapy. You will also have a teaching session about chemotherapy. Additionally, you were referred to genetics for further testing."
+"ACTION ITEMS:\n\u25a1 You agreed to start chemotherapy with AC plus paclitaxel, which is scheduled to begin around October 18, 2017. Before starting chemotherapy, you will have a heart ultrasound (TTE) to check your heart function. You will also be referred to genetics for further testing. You have an appointment with ***** ***** on October 10, 2017."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.4,
-    "flesch_reading_ease": 56.7,
-    "gunning_fog": 10.3,
-    "smog_index": 10.9,
-    "dale_chall": 9.9,
-    "coleman_liau": 11.3,
-    "ari": 9.5,
-    "linsear_write": 8.0,
-    "text_standard": "9th and 10th grade",
-    "word_count": 183,
-    "sentence_count": 15,
-    "difficult_words": 46
+    "flesch_kincaid_grade": 6.8,
+    "flesch_reading_ease": 68.0,
+    "gunning_fog": 8.9,
+    "smog_index": 10.0,
+    "dale_chall": 9.5,
+    "coleman_liau": 10.0,
+    "ari": 8.4,
+    "linsear_write": 6.6,
+    "text_standard": "8th and 9th grade",
+    "word_count": 172,
+    "sentence_count": 14,
+    "difficult_words": 38
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.4,
-    "flesch_reading_ease": 56.7,
-    "dale_chall": 9.9,
-    "difficult_words": 46
+    "flesch_kincaid_grade": 6.8,
+    "flesch_reading_ease": 68.0,
+    "dale_chall": 9.5,
+    "difficult_words": 38
   }
 }
 
@@ -1027,7 +1027,7 @@ RESULTS FOR ROW 9
     "summary": "Premenopausal female patient with a history of a Stage III HR+/HER2- IDC of the left breast, now with biopsy-proven recurrence, presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma (micropapillary features) with metastatic recurrence (left cervical LN)",
+    "Type_of_Cancer": "ER+/PR+/HER2- grade 2 IDC (micropapillary features) with metastatic recurrence (left cervical LN)",
     "Stage_of_Cancer": "Originally Stage III (T3N2), now metastatic (Stage IV)",
     "Distant Metastasis": "Yes, to left cervical LN",
     "Metastasis": "Yes, to left cervical LN"
@@ -1050,7 +1050,7 @@ RESULTS FOR ROW 9
     "goals_description": "if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
   },
   "Response_Assessment": {
-    "response_assessment": "Not yet on treatment \u2014 no response to assess."
+    "response_assessment": "The patient is not yet on treatment for the current recurrence. The last treatment details indicate she was previously on leuprolide plus tamoxifen, which was discontinued after 1-2 years due to loss of health insurance coverage. The current assessment based on imaging and physical exam does not provide evidence of response to any ongoing treatment. The PET/CT performed on 01/27/19 demonstrates hypermetabolic lymph nodes suspicious for metastatic disease, and physical exam reveals a 6.5 x 5 cm mass in the left upper outer quadrant and a 3.5 x 3.5 cm mass in the left lateral anterior neck. No evidence of response to treatment is mentioned in the note."
   },
   "Medication_Plan": {
     "medication_plan": "plan to start goserelin, followed by an aromatase inhibitor (AI)."
@@ -1092,38 +1092,38 @@ RESULTS FOR ROW 9
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 invasive ductal carcinoma with micropapillary features. The cancer has spread to your left neck area. Imaging shows several enlarged lymph nodes that might contain cancer. During your physical exam, a large mass was found in your left breast and another in your left neck. There is also some discoloration of the skin over the breast mass. [source:findings,Type_of_Cancer,Stage_of_Cancer,Distant_Metastasis,Metastasis]\n**What treatment or medication changes were made?**\nWe plan to start you on a medication called goserelin to suppress your ovaries, followed by an aromatase inhibitor. You are also taking gabapentin to help with pain. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nWe will perform a fine needle aspiration (FNA) on the mass in your left neck to confirm the diagnosis. You will start on goserelin as soon as possible, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin. [source:procedure_plan,medication_plan,follow_up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has spread to your left cervical lymph node, making it a locally advanced, unresectable recurrence (possibly considered metastatic). Imaging shows a mass in your left breast and lymph nodes that might have cancer. [source:findings, Type_of_Cancer, Stage_of_Cancer, Distant Metastasis, Metastasis]\n**What treatment or medication changes were made?**\nWe discussed starting you on a treatment plan that includes ovarian suppression with goserelin and an aromatase inhibitor. This is because the cancer is not curable but can be treated to extend your life and maintain a good quality of life. [source:recent_changes, medication_plan, goals_of_treatment]\n**What is the plan going forward?**\nYou will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will start on goserelin, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin. [source:procedure_plan, medication_plan, follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 invasive ductal carcinoma with micropapillary features. The cancer has spread to your left neck area. Imaging shows several enlarged lymph nodes that might contain cancer. During your physical exam, a large mass was found in your left breast and another in your left neck. There is also some discoloration of the skin over the breast mass.\n**What treatment or medication changes were made?**\nWe plan to start you on a medication called goserelin to suppress your ovaries, followed by an aromatase inhibitor. You are also taking gabapentin to help with pain.\n**What is the plan going forward?**\nWe will perform a fine needle aspiration (FNA) on the mass in your left neck to confirm the diagnosis. You will start on goserelin as soon as possible, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 IDC with micropapillary features. The cancer has spread to your left cervical lymph node, making it a locally advanced, unresectable recurrence (possibly considered metastatic). Imaging shows a mass in your left breast and lymph nodes that might have cancer.\n**What treatment or medication changes were made?**\nWe discussed starting you on a treatment plan that includes ovarian suppression with goserelin and an aromatase inhibitor. This is because the cancer is not curable but can be treated to extend your life and maintain a good quality of life.\n**What is the plan going forward?**\nYou will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will start on goserelin, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- invasive ductal carcinoma with micropapillary features. The cancer has spread to your left neck area. Imaging shows several enlarged lymph nodes that might contain cancer. A mass was found in your left breast and another in your left neck. There is also some discoloration of the skin over the breast mass.\n**What treatment or medication changes were made?**\nWe plan to start you on a medication called goserelin to suppress your ovaries, followed by an aromatase inhibitor. You are also taking gabapentin to help with pain.\n**What is the plan going forward?**\nWe will perform a fine needle aspiration (FNA) on the mass in your left neck to confirm the diagnosis. You will start on goserelin as soon as possible, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- IDC with micropapillary features. The cancer has spread to your left cervical lymph node, making it a locally advanced, unresectable recurrence (possibly considered metastatic).\n**What treatment or medication changes were made?**\nWe discussed starting you on a treatment plan that includes ovarian suppression with goserelin and an aromatase inhibitor. This is because the cancer is not curable but can be treated to extend your life and maintain a good quality of life.\n**What is the plan going forward?**\nYou will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will start on goserelin, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 We plan to start you on a medication called goserelin to suppress your ovaries, followed by an aromatase inhibitor. You are also taking gabapentin to help with pain.\n\u25a1 We will perform a fine needle aspiration (FNA) on the mass in your left neck to confirm the diagnosis. You will start on goserelin as soon as possible, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin."
+"ACTION ITEMS:\n\u25a1 We discussed starting you on a treatment plan that includes ovarian suppression with goserelin and an aromatase inhibitor. This is because the cancer is not curable but can be treated to extend your life and maintain a good quality of life.\n\u25a1 You will have a fine needle aspiration (FNA) of the mass in your left neck to confirm the diagnosis. You will start on goserelin, followed by an aromatase inhibitor. You will return to the clinic two weeks after starting goserelin."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.5,
-    "flesch_reading_ease": 70.2,
-    "gunning_fog": 8.2,
-    "smog_index": 9.4,
-    "dale_chall": 9.0,
-    "coleman_liau": 9.2,
-    "ari": 7.6,
-    "linsear_write": 6.6,
+    "flesch_kincaid_grade": 7.0,
+    "flesch_reading_ease": 69.1,
+    "gunning_fog": 9.2,
+    "smog_index": 9.8,
+    "dale_chall": 9.7,
+    "coleman_liau": 9.8,
+    "ari": 8.6,
+    "linsear_write": 7.9,
     "text_standard": "8th and 9th grade",
-    "word_count": 197,
-    "sentence_count": 16,
-    "difficult_words": 38
+    "word_count": 189,
+    "sentence_count": 14,
+    "difficult_words": 42
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.5,
-    "flesch_reading_ease": 70.2,
-    "dale_chall": 9.0,
-    "difficult_words": 38
+    "flesch_kincaid_grade": 7.0,
+    "flesch_reading_ease": 69.1,
+    "dale_chall": 9.7,
+    "difficult_words": 42
   }
 }
 
@@ -1314,7 +1314,7 @@ RESULTS FOR ROW 11
     "radiotherapy_plan": "Ms. ***** is currently pending an appointment with ***** ***** to assess whether or not she will be a candidate for radiation therapy at this time."
   },
   "Procedure_Plan": {
-    "procedure_plan": "Ms. ***** will need to undergo an assessment with ***** ***** to determine eligibility for radiation therapy. Prescription for tamoxifen has been sent to her pharmacy, but she should delay starting it until after her radiation oncology assessment."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -1344,38 +1344,38 @@ RESULTS FOR ROW 11
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS). [source:summary]\n**What's new or changed since your last visit?**\nThe pathology results show that you have a type of breast cancer called ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary architectural patterns, and a size of 1.8 cm. The cancer was removed, and the edges of the tissue are clean except for the posterior margin. Your left breast is still tender after surgery, but there are no new suspicious masses. [source:findings]\n**What treatment or medication changes were made?**\nA prescription for tamoxifen has been sent to your pharmacy, but you should wait to start taking it until after your radiation oncology assessment. [source:recent_changes, medication_plan]\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will be a candidate for radiation therapy. Once that assessment is done, you can start tamoxifen. You should return to the clinic 4-6 weeks after beginning tamoxifen to check how you are tolerating the medication. [source:procedure_plan, radiotherapy_plan, follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS) and potential treatments to reduce the risk of the cancer returning. [source:summary]\n**What's new or changed since your last visit?**\nThe pathology results show that you have a type of breast cancer called ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary architectural patterns, and a size of 1.8 cm. The cancer was removed, but the edges of the tissue are not completely clean. Your left breast is still tender after surgery, but there are no signs of new cancer. [source:findings]\n**What treatment or medication changes were made?**\nA prescription for tamoxifen was sent to your pharmacy, but you were instructed to wait until after your radiation oncology assessment before starting the medication. Tamoxifen is a drug used to reduce the risk of the cancer coming back. [source:recent_changes,medication_plan]\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication. [source:radiotherapy_plan,follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS).\n**What's new or changed since your last visit?**\nThe pathology results show that you have a type of breast cancer called ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary architectural patterns, and a size of 1.8 cm. The cancer was removed, and the edges of the tissue are clean except for the posterior margin. Your left breast is still tender after surgery, but there are no new suspicious masses.\n**What treatment or medication changes were made?**\nA prescription for tamoxifen has been sent to your pharmacy, but you should wait to start taking it until after your radiation oncology assessment.\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will be a candidate for radiation therapy. Once that assessment is done, you can start tamoxifen. You should return to the clinic 4-6 weeks after beginning tamoxifen to check how you are tolerating the medication.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS) and potential treatments to reduce the risk of the cancer returning.\n**What's new or changed since your last visit?**\nThe pathology results show that you have a type of breast cancer called ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary architectural patterns, and a size of 1.8 cm. The cancer was removed, but the edges of the tissue are not completely clean. Your left breast is still tender after surgery, but there are no signs of new cancer.\n**What treatment or medication changes were made?**\nA prescription for tamoxifen was sent to your pharmacy, but you were instructed to wait until after your radiation oncology assessment before starting the medication. Tamoxifen is a drug used to reduce the risk of the cancer coming back.\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS).\n**What's new or changed since your last visit?**\n**What treatment or medication changes were made?**\nA prescription for tamoxifen has been sent to your pharmacy, but you should wait to start taking it until after your radiation oncology assessment.\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will be a candidate for radiation therapy. Once that assessment is done, you can start tamoxifen. You should return to the clinic 4-6 weeks after beginning tamoxifen to check how you are tolerating the medication.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion regarding your left breast ductal carcinoma in situ (DCIS) and potential treatments to reduce the risk of the cancer returning.\n**What's new or changed since your last visit?**\nThe pathology results show that you have a type of breast cancer called ductal carcinoma in situ (DCIS). The cancer was removed, but the edges of the tissue are not completely clean. Your left breast is still tender after surgery, but there are no signs of new cancer.\n**What treatment or medication changes were made?**\nA prescription for tamoxifen was sent to your pharmacy, but you were instructed to wait until after your radiation oncology assessment before starting the medication. Tamoxifen is a drug used to reduce the risk of the cancer coming back.\n**What is the plan going forward?**\nYou are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 A prescription for tamoxifen has been sent to your pharmacy, but you should wait to start taking it until after your radiation oncology assessment.\n\u25a1 You are referred to radiation oncology to assess whether you will be a candidate for radiation therapy. Once that assessment is done, you can start tamoxifen. You should return to the clinic 4-6 weeks after beginning tamoxifen to check how you are tolerating the medication."
+"ACTION ITEMS:\n\u25a1 A prescription for tamoxifen was sent to your pharmacy, but you were instructed to wait until after your radiation oncology assessment before starting the medication. Tamoxifen is a drug used to reduce the risk of the cancer coming back.\n\u25a1 You are referred to radiation oncology to assess whether you will need radiation therapy. You will return to the clinic 4-6 weeks after starting tamoxifen to check how you are tolerating the medication."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.9,
-    "flesch_reading_ease": 58.0,
-    "gunning_fog": 11.9,
+    "flesch_kincaid_grade": 9.1,
+    "flesch_reading_ease": 57.5,
+    "gunning_fog": 12.1,
     "smog_index": 12.0,
-    "dale_chall": 9.2,
-    "coleman_liau": 10.1,
-    "ari": 9.3,
-    "linsear_write": 10.5,
+    "dale_chall": 9.8,
+    "coleman_liau": 10.2,
+    "ari": 9.6,
+    "linsear_write": 10.7,
     "text_standard": "9th and 10th grade",
-    "word_count": 224,
+    "word_count": 236,
     "sentence_count": 15,
-    "difficult_words": 50
+    "difficult_words": 53
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.9,
-    "flesch_reading_ease": 58.0,
-    "dale_chall": 9.2,
-    "difficult_words": 50
+    "flesch_kincaid_grade": 9.1,
+    "flesch_reading_ease": 57.5,
+    "dale_chall": 9.8,
+    "difficult_words": 53
   }
 }
 
@@ -1440,7 +1440,7 @@ RESULTS FOR ROW 12
     "radiotherapy_plan": "discussed radiation, considering radiation"
   },
   "Procedure_Plan": {
-    "procedure_plan": "echocardiogram, chemo teach, port placement"
+    "procedure_plan": "port placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "echocardiogram"
@@ -1470,38 +1470,38 @@ RESULTS FOR ROW 12
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features. This means the cancer started in the milk-producing glands and the milk ducts. It is in clinical stage II and has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease. [source:findings,Type_of_Cancer,Stage_of_Cancer,Response_assessment]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which means treatment before surgery to shrink the cancer. The plan is to begin with a chemotherapy regimen, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This will help prepare you for surgery and potentially allow for a lumpectomy instead of a mastectomy. [source:recent_changes,medication_plan]\n**What is the plan going forward?**\nBefore starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have chemotherapy teaching and a port placed for easier administration of the medication. The plan is to start chemotherapy in the first week of March (March 19 or March 20). We will also discuss the use of cold caps to help reduce hair loss. You will return to the clinic in 2 weeks for a follow-up visit. [source:procedure_plan,medication_plan,follow_up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features. This is a clinical stage II cancer that has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease. [source:findings,Type_of_Cancer,Stage_of_Cancer,Response_assessment]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This treatment aims to shrink the cancer before surgery. [source:medication_plan,recent_changes]\n**What is the plan going forward?**\nYou will have an echocardiogram (a heart ultrasound) before starting chemotherapy to monitor your heart function. A port will be placed to make it easier to administer chemotherapy. You may also need radiation therapy after surgery. You will return to the clinic in 2 weeks for a follow-up visit. [source:procedure_plan,imaging_plan,follow_up,radiotherapy_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features. This means the cancer started in the milk-producing glands and the milk ducts. It is in clinical stage II and has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which means treatment before surgery to shrink the cancer. The plan is to begin with a chemotherapy regimen, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This will help prepare you for surgery and potentially allow for a lumpectomy instead of a mastectomy.\n**What is the plan going forward?**\nBefore starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have chemotherapy teaching and a port placed for easier administration of the medication. The plan is to start chemotherapy in the first week of March (March 19 or March 20). We will also discuss the use of cold caps to help reduce hair loss. You will return to the clinic in 2 weeks for a follow-up visit.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called ER+/PR+/HER2- grade 2 invasive mammary carcinoma with mixed ductal and lobular features. This is a clinical stage II cancer that has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This treatment aims to shrink the cancer before surgery.\n**What is the plan going forward?**\nYou will have an echocardiogram (a heart ultrasound) before starting chemotherapy to monitor your heart function. A port will be placed to make it easier to administer chemotherapy. You may also need radiation therapy after surgery. You will return to the clinic in 2 weeks for a follow-up visit.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called ER+/PR+/HER2- invasive mammary carcinoma with mixed ductal and lobular features. This means the cancer started in the milk-producing glands and the milk ducts. It is in clinical stage II and has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which means treatment before surgery to shrink the cancer. The plan is to begin with a chemotherapy regimen, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This will help prepare you for surgery and potentially allow for a lumpectomy instead of a mastectomy.\n**What is the plan going forward?**\nBefore starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have chemotherapy teaching and a port placed for easier administration of the medication. The plan is to start chemotherapy in the first week of March (March 19 or March 20). We will also discuss the use of cold caps to help reduce hair loss. You will return to the clinic in 2 weeks for a follow-up visit.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a consultation regarding your recent diagnosis of early stage breast cancer to discuss treatment options and establish care.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called ER+/PR+/HER2- invasive mammary carcinoma with mixed ductal and lobular features. This is a clinical stage II cancer that has not spread to other parts of your body. Imaging shows a mass in your right breast, but there is no evidence of metastatic disease.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This treatment aims to shrink the cancer before surgery.\n**What is the plan going forward?**\nYou will have an echocardiogram (a heart ultrasound) before starting chemotherapy to monitor your heart function. A port will be placed to make it easier to administer chemotherapy. You may also need radiation therapy after surgery. You will return to the clinic in 2 weeks for a follow-up visit.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which means treatment before surgery to shrink the cancer. The plan is to begin with a chemotherapy regimen, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This will help prepare you for surgery and potentially allow for a lumpectomy instead of a mastectomy.\n\u25a1 Before starting chemotherapy, you will have an echocardiogram (a heart ultrasound) to check your heart function. You will also have chemotherapy teaching and a port placed for easier administration of the medication. The plan is to start chemotherapy in the first week of March (March 19 or March 20). We will also discuss the use of cold caps to help reduce hair loss. You will return to the clinic in 2 weeks for a follow-up visit."
+"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which includes 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks followed by 12 cycles of weekly paclitaxel. This treatment aims to shrink the cancer before surgery.\n\u25a1 You will have an echocardiogram (a heart ultrasound) before starting chemotherapy to monitor your heart function. A port will be placed to make it easier to administer chemotherapy. You may also need radiation therapy after surgery. You will return to the clinic in 2 weeks for a follow-up visit."
 
 --- Column: readability_metrics ---
 {
   "raw": {
     "flesch_kincaid_grade": 8.4,
-    "flesch_reading_ease": 61.7,
-    "gunning_fog": 11.0,
-    "smog_index": 11.2,
-    "dale_chall": 9.7,
-    "coleman_liau": 9.9,
+    "flesch_reading_ease": 59.0,
+    "gunning_fog": 11.3,
+    "smog_index": 11.5,
+    "dale_chall": 10.4,
+    "coleman_liau": 10.4,
     "ari": 9.1,
-    "linsear_write": 7.9,
-    "text_standard": "8th and 9th grade",
-    "word_count": 268,
-    "sentence_count": 18,
-    "difficult_words": 56
+    "linsear_write": 10.5,
+    "text_standard": "9th and 10th grade",
+    "word_count": 206,
+    "sentence_count": 15,
+    "difficult_words": 51
   },
   "adjusted": {
     "flesch_kincaid_grade": 8.4,
-    "flesch_reading_ease": 61.6,
-    "dale_chall": 9.8,
-    "difficult_words": 56
+    "flesch_reading_ease": 59.0,
+    "dale_chall": 10.4,
+    "difficult_words": 51
   }
 }
 
@@ -1531,10 +1531,10 @@ RESULTS FOR ROW 13
     "summary": "36 y.o. female with recently diagnosed hormone receptor positive/HER2 negative node positive right breast cancer scheduled for surgery on 11/05/17, here to discuss treatment options and recent imaging findings."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
-    "Stage_of_Cancer": "Originally Stage IIA, now Stage III",
+    "Type_of_Cancer": "ER+/PR+/HER2- (HER2 by IHC & FISH negative) invasive ductal carcinoma",
+    "Stage_of_Cancer": "Not staged in note",
     "Distant Metastasis": "No",
-    "Metastasis": "Yes, to right axillary lymph node and possibly falx lesion"
+    "Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 93 mg/dL"
@@ -1596,38 +1596,38 @@ RESULTS FOR ROW 13
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your armpit. The cancer has not spread to other parts of your body. [source:Type_of_Cancer, Metastasis, Distant Metastasis]\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included the possibility of needing adjuvant chemotherapy and hormonal therapy after surgery, depending on further assessment. [source:medication_plan, therapy_plan]\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017. This will involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. A follow-up imaging study in 6 months will be done to monitor a small growth in your brain that is likely a benign tumor. [source:procedure_plan, imaging_plan, Specialty]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to some lymph nodes under your arm but has not spread to other parts of your body. [source:Type_of_Cancer, Metastasis, Distant Metastasis]\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included potential future treatments like adjuvant chemotherapy and hormonal therapy, depending on further assessment after surgery. [source:medication_plan, therapy_plan]\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017, which will likely involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. Follow-up imaging for a small mass in your brain will be done in 6 months. [source:procedure_plan, therapy_plan, imaging_plan]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your armpit. The cancer has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included the possibility of needing adjuvant chemotherapy and hormonal therapy after surgery, depending on further assessment.\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017. This will involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. A follow-up imaging study in 6 months will be done to monitor a small growth in your brain that is likely a benign tumor.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to some lymph nodes under your arm but has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included potential future treatments like adjuvant chemotherapy and hormonal therapy, depending on further assessment after surgery.\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017, which will likely involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. Follow-up imaging for a small mass in your brain will be done in 6 months.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to the lymph nodes in your armpit. The cancer has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included the possibility of needing adjuvant chemotherapy and hormonal therapy after surgery, depending on further assessment.\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017. This will involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. A follow-up imaging study in 6 months will be done to monitor a small growth in your brain.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with a type of breast cancer called invasive ductal carcinoma, which is hormone receptor positive and does not have a protein called HER2. The cancer has spread to some lymph nodes under your arm but has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nNo specific medication changes were made during this visit. The discussion included potential future treatments like adjuvant chemotherapy and hormonal therapy, depending on further assessment after surgery.\n**What is the plan going forward?**\nYou are scheduled to undergo surgery on November 5th, 2017, which will likely involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. Follow-up imaging for a small mass in your brain will be done in 6 months.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 No specific medication changes were made during this visit. The discussion included the possibility of needing adjuvant chemotherapy and hormonal therapy after surgery, depending on further assessment.\n\u25a1 You are scheduled to undergo surgery on November 5th, 2017. This will involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. A follow-up imaging study in 6 months will be done to monitor a small growth in your brain that is likely a benign tumor."
+"ACTION ITEMS:\n\u25a1 No specific medication changes were made during this visit. The discussion included potential future treatments like adjuvant chemotherapy and hormonal therapy, depending on further assessment after surgery.\n\u25a1 You are scheduled to undergo surgery on November 5th, 2017, which will likely involve removing part of the breast and checking the lymph nodes under your arm. After surgery, decisions about chemotherapy and hormonal therapy will be made based on the results. Follow-up imaging for a small mass in your brain will be done in 6 months."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.2,
-    "flesch_reading_ease": 60.5,
-    "gunning_fog": 11.7,
-    "smog_index": 11.8,
+    "flesch_kincaid_grade": 8.5,
+    "flesch_reading_ease": 60.0,
+    "gunning_fog": 12.2,
+    "smog_index": 12.2,
     "dale_chall": 9.6,
-    "coleman_liau": 10.0,
-    "ari": 8.5,
-    "linsear_write": 7.1,
-    "text_standard": "7th and 8th grade",
-    "word_count": 229,
-    "sentence_count": 17,
-    "difficult_words": 52
+    "coleman_liau": 10.5,
+    "ari": 9.4,
+    "linsear_write": 8.3,
+    "text_standard": "8th and 9th grade",
+    "word_count": 220,
+    "sentence_count": 15,
+    "difficult_words": 49
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.2,
-    "flesch_reading_ease": 60.5,
+    "flesch_kincaid_grade": 8.5,
+    "flesch_reading_ease": 60.0,
     "dale_chall": 9.6,
-    "difficult_words": 52
+    "difficult_words": 49
   }
 }
 
@@ -2070,7 +2070,7 @@ RESULTS FOR ROW 17
     "radiotherapy_plan": "I believe that the fascia was removed, so this will be managed by radiation therapy."
   },
   "Procedure_Plan": {
-    "procedure_plan": "Submit authorization for TC x 6 with ONPRO support, Referral for chemotherapy teaching, port placement"
+    "procedure_plan": "port placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "Baseline echo ordered"
@@ -2100,38 +2100,38 @@ RESULTS FOR ROW 17
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your newly diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. Surgery showed that the cancer was 3.6cm in size and had spread to two lymph nodes. Post-surgery imaging suggested some residual disease, but a biopsy showed no cancer. [source:findings,Type_of_Cancer,Stage_of_Cancer]\n**What treatment or medication changes were made?**\nYou will start a course of chemotherapy called TC x 6 with ONPRO support starting on July 9th, 2017. You will also use a device called dignicap to help preserve your hair during chemotherapy. [source:medication_plan,recent_changes]\n**What is the plan going forward?**\nYou will undergo radiation therapy to manage the cancer. A referral has been made for chemotherapy teaching and port placement. You will have a baseline echo done. A PET/CT scan will be conducted for staging purposes. We will discuss cosmetic options for your left breast once it is fully healed. [source:radiotherapy_plan,procedure_plan,imaging_plan,genetic_testing_plan,Others]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. [source:Type_of_Cancer,Stage_of_Cancer,findings]\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment. [source:medication_plan]\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed. [source:procedure_plan,Specialty,lab_plan,follow_up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. Surgery showed that the cancer was 3.6cm in size and had spread to two lymph nodes. Post-surgery imaging suggested some residual disease, but a biopsy showed no cancer.\n**What treatment or medication changes were made?**\nYou will start a course of chemotherapy called TC x 6 with ONPRO support starting on July 9th, 2017. You will also use a device called dignicap to help preserve your hair during chemotherapy.\n**What is the plan going forward?**\nYou will undergo radiation therapy to manage the cancer. A referral has been made for chemotherapy teaching and port placement. You will have a baseline echo done. A PET/CT scan will be conducted for staging purposes. We will discuss cosmetic options for your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for an initial consult regarding your newly diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) invasive ductal carcinoma (IDC) in your left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. Surgery showed that the cancer had spread to lymph nodes. Post-surgery imaging suggested some residual disease, but a biopsy showed no cancer.\n**What treatment or medication changes were made?**\nYou will start a course of chemotherapy called TC x 6 with ONPRO support starting on July 9th, 2017. You will also use a device called dignicap to help preserve your hair during chemotherapy.\n**What is the plan going forward?**\nYou will undergo radiation therapy to manage the cancer. A referral has been made for chemotherapy teaching and port placement. You will have a baseline echo done. A PET/CT scan will be conducted for staging purposes. We will discuss cosmetic options for your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start a course of chemotherapy called TC x 6 with ONPRO support starting on July 9th, 2017. You will also use a device called dignicap to help preserve your hair during chemotherapy.\n\u25a1 You will undergo radiation therapy to manage the cancer. A referral has been made for chemotherapy teaching and port placement. You will have a baseline echo done. A PET/CT scan will be conducted for staging purposes. We will discuss cosmetic options for your left breast once it is fully healed."
+"ACTION ITEMS:\n\u25a1 You will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n\u25a1 You will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 66.9,
-    "gunning_fog": 10.0,
-    "smog_index": 10.5,
-    "dale_chall": 10.2,
-    "coleman_liau": 9.0,
-    "ari": 7.3,
-    "linsear_write": 7.4,
-    "text_standard": "6th and 7th grade",
-    "word_count": 236,
-    "sentence_count": 20,
-    "difficult_words": 57
+    "flesch_kincaid_grade": 6.1,
+    "flesch_reading_ease": 71.5,
+    "gunning_fog": 8.8,
+    "smog_index": 9.7,
+    "dale_chall": 9.5,
+    "coleman_liau": 8.5,
+    "ari": 6.8,
+    "linsear_write": 6.1,
+    "text_standard": "8th and 9th grade",
+    "word_count": 216,
+    "sentence_count": 19,
+    "difficult_words": 44
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.9,
-    "flesch_reading_ease": 66.7,
-    "dale_chall": 10.1,
-    "difficult_words": 57
+    "flesch_kincaid_grade": 6.1,
+    "flesch_reading_ease": 71.4,
+    "dale_chall": 9.4,
+    "difficult_words": 44
   }
 }
 
@@ -2162,7 +2162,7 @@ RESULTS FOR ROW 18
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2- grade 2 invasive ductal carcinoma",
-    "Stage_of_Cancer": "Not staged in note",
+    "Stage_of_Cancer": "Not mentioned in note",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -2196,7 +2196,7 @@ RESULTS FOR ROW 18
     "radiotherapy_plan": "Radiation oncology has recommended that she proceed with mastectomy rather than breast conserving surgery."
   },
   "Procedure_Plan": {
-    "procedure_plan": "mastectomy, chemotherapy"
+    "procedure_plan": "mastectomy"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -2226,38 +2226,38 @@ RESULTS FOR ROW 18
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a grade 2 invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. The cancer measures 8mm and is considered high risk based on a test called Mammaprint. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes. [source:findings]\n**What treatment or medication changes were made?**\nNo changes were made to your current medications. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on your ATM gene mutation, radiation oncology recommends that you have a mastectomy instead of keeping your breast. After surgery, we will discuss chemotherapy options with you. Depending on whether the lymph nodes contain cancer at the time of surgery, you may receive different types of chemotherapy. You will receive at least five years of adjuvant hormonal therapy after surgery. [source:procedure_plan,medication_plan,follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a grade 2 invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. The tumor measures 8mm and is considered high risk according to a test called Mammaprint. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes. [source:findings]\n**What treatment or medication changes were made?**\nNo changes were made to your current medications. [source:recent_changes,supportive_meds]\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on the results, you will proceed with a mastectomy, which is surgery to remove the breast. After surgery, we will discuss chemotherapy options with you. If you are truly node negative at the time of surgery, we will consider Taxotere and Cytoxan, whereas if you are node positive, you should get AC-Taxol. You will receive at least five years of adjuvant hormonal therapy to prevent the cancer from coming back. [source:procedure_plan,medication_plan,follow up]\nYou are referred to Radiation Oncology and Surgical Oncology for further management. [source:Specialty]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer.\n**What's new or changed since your last visit?**\nYou have a grade 2 invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. The cancer measures 8mm and is considered high risk based on a test called Mammaprint. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes.\n**What treatment or medication changes were made?**\nNo changes were made to your current medications.\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on your ATM gene mutation, radiation oncology recommends that you have a mastectomy instead of keeping your breast. After surgery, we will discuss chemotherapy options with you. Depending on whether the lymph nodes contain cancer at the time of surgery, you may receive different types of chemotherapy. You will receive at least five years of adjuvant hormonal therapy after surgery.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer.\n**What's new or changed since your last visit?**\nYou have a grade 2 invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. The tumor measures 8mm and is considered high risk according to a test called Mammaprint. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes.\n**What treatment or medication changes were made?**\nNo changes were made to your current medications.\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on the results, you will proceed with a mastectomy, which is surgery to remove the breast. After surgery, we will discuss chemotherapy options with you. If you are truly node negative at the time of surgery, we will consider Taxotere and Cytoxan, whereas if you are node positive, you should get AC-Taxol. You will receive at least five years of adjuvant hormonal therapy to prevent the cancer from coming back.\nYou are referred to Radiation Oncology and Surgical Oncology for further management.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer.\n**What's new or changed since your last visit?**\nYou have an invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes.\n**What treatment or medication changes were made?**\nNo changes were made to your current medications.\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on your ATM gene mutation, radiation oncology recommends that you have a mastectomy instead of keeping your breast. After surgery, we will discuss chemotherapy options with you. Depending on whether the lymph nodes contain cancer at the time of surgery, you may receive different types of chemotherapy. You will receive at least five years of adjuvant hormonal therapy after surgery.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a discussion about treatment options for your newly diagnosed left breast cancer.\n**What's new or changed since your last visit?**\nYou have an invasive ductal carcinoma in your left breast. The cancer is ER positive, PR negative, and does not have a protein called HER2. Imaging shows a mass in your left breast and some enlarged lymph nodes in your armpit, but no cancer was found in the lymph nodes.\n**What treatment or medication changes were made?**\nNo changes were made to your current medications.\n**What is the plan going forward?**\nYou will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on the results, you will proceed with a mastectomy, which is surgery to remove the breast. After surgery, we will discuss chemotherapy options with you. If you are truly node negative at the time of surgery, we will consider Taxotere and Cytoxan, whereas if you are node positive, you should get a chemotherapy regimenaxol. You will receive at least five years of adjuvant hormonal therapy to prevent the cancer from coming back.\nYou are referred to Radiation Oncology and Surgical Oncology for further management.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on your ATM gene mutation, radiation oncology recommends that you have a mastectomy instead of keeping your breast. After surgery, we will discuss chemotherapy options with you. Depending on whether the lymph nodes contain cancer at the time of surgery, you may receive different types of chemotherapy. You will receive at least five years of adjuvant hormonal therapy after surgery."
+"ACTION ITEMS:\n\u25a1 You will have a second fine needle aspiration (FNA) of the lymph nodes in your left armpit. Based on the results, you will proceed with a mastectomy, which is surgery to remove the breast. After surgery, we will discuss chemotherapy options with you. If you are truly node negative at the time of surgery, we will consider Taxotere and Cytoxan, whereas if you are node positive, you should get AC-Taxol. You will receive at least five years of adjuvant hormonal therapy to prevent the cancer from coming back.\n\u25a1 You are referred to Radiation Oncology and Surgical Oncology for further management."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 7.2,
-    "flesch_reading_ease": 67.9,
-    "gunning_fog": 10.0,
-    "smog_index": 10.6,
-    "dale_chall": 9.8,
-    "coleman_liau": 9.3,
+    "flesch_kincaid_grade": 7.3,
+    "flesch_reading_ease": 67.3,
+    "gunning_fog": 10.6,
+    "smog_index": 10.9,
+    "dale_chall": 9.6,
+    "coleman_liau": 9.0,
     "ari": 8.0,
-    "linsear_write": 7.4,
-    "text_standard": "9th and 10th grade",
-    "word_count": 244,
-    "sentence_count": 18,
-    "difficult_words": 49
+    "linsear_write": 7.6,
+    "text_standard": "7th and 8th grade",
+    "word_count": 266,
+    "sentence_count": 19,
+    "difficult_words": 56
   },
   "adjusted": {
-    "flesch_kincaid_grade": 7.2,
-    "flesch_reading_ease": 67.9,
-    "dale_chall": 9.8,
-    "difficult_words": 49
+    "flesch_kincaid_grade": 7.3,
+    "flesch_reading_ease": 67.3,
+    "dale_chall": 9.6,
+    "difficult_words": 56
   }
 }
 
@@ -2287,8 +2287,8 @@ RESULTS FOR ROW 19
     "summary": "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast s/p NAHT, s/p bilateral mastectomies, s/p adjuvant tamoxifen [REDACTED]/[REDACTED]-[REDACTED]/[REDACTED], currently on exemestane for ongoing management."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma (IDC) with low-grade component and high-grade component",
-    "Stage_of_Cancer": "Clinical stage 2-3",
+    "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma",
+    "Stage_of_Cancer": "Not mentioned in note",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -2322,7 +2322,7 @@ RESULTS FOR ROW 19
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "needs DEXA scan now and every 2 years. If osteopenia can consider adding bisphosphonate. she is considering BSO which is reasonable since she will likely be in natural menopause after 5 years of OS/AI."
+    "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
     "imaging_plan": "Needs DEXA scan now and every 2 years."
@@ -2352,38 +2352,38 @@ RESULTS FOR ROW 19
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou are NED (no evidence of disease) on physical exam. [source:findings]\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability. [source:recent_changes]\nYou will continue taking exemestane. [source:medication_plan]\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia. [source:procedure_plan]\nIf osteopenia is detected, you may consider adding a bisphosphonate. [source:therapy_plan]\nYou should check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months. [source:lab_plan]\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy. [source:procedure_plan]\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms. [source:follow up]\nYou are referred to local psychology for ongoing support as needed. [source:Others]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou are NED (no evidence of disease) on physical exam. [source:findings]\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability. [source:recent_changes]\nYou will continue taking exemestane. [source:medication_plan]\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia. [source:imaging_plan]\nIf osteopenia is detected, you may consider adding a bisphosphonate. [source:therapy_plan]\nYou will check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months. [source:lab_plan]\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy. [source:findings]\nYou will continue your current mental health support with local psych. [source:Others]\nYou are referred to follow up with local psych for ongoing support as needed. [source:Others]\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms. [source:follow up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou are NED (no evidence of disease) on physical exam.\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.\nYou will continue taking exemestane.\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia.\nIf osteopenia is detected, you may consider adding a bisphosphonate.\nYou should check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy.\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms.\nYou are referred to local psychology for ongoing support as needed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou are NED (no evidence of disease) on physical exam.\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.\nYou will continue taking exemestane.\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia.\nIf osteopenia is detected, you may consider adding a bisphosphonate.\nYou will check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy.\nYou will continue your current mental health support with local psych.\nYou are referred to follow up with local psych for ongoing support as needed.\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.\nYou will continue taking exemestane.\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia.\nIf osteopenia is detected, you may consider adding a bisphosphonate.\nYou should check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy.\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms.\nYou are referred to local psychology for ongoing support as needed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a follow-up visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\n**What treatment or medication changes were made?**\nYou switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.\nYou will continue taking exemestane.\n**What is the plan going forward?**\nYou need a DEXA scan now and every 2 years to check for osteopenia.\nIf osteopenia is detected, you may consider adding a bisphosphonate.\nYou will check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\nYou are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy.\nYou will continue your current mental health support with local psych.\nYou are referred to follow up with local psych for ongoing support as needed.\nYou will have follow-up visits every 6 months or sooner if you have new or worsening symptoms.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will continue taking exemestane.\n\u25a1 You need a DEXA scan now and every 2 years to check for osteopenia.\n\u25a1 If osteopenia is detected, you may consider adding a bisphosphonate.\n\u25a1 You should check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\n\u25a1 You are considering surgery to remove both ovaries and fallopian tubes (BSO) after 5 years of ovarian suppression (OS)/AI therapy.\n\u25a1 You will have follow-up visits every 6 months or sooner if you have new or worsening symptoms.\n\u25a1 You are referred to local psychology for ongoing support as needed."
+"ACTION ITEMS:\n\u25a1 You will continue taking exemestane.\n\u25a1 You need a DEXA scan now and every 2 years to check for osteopenia.\n\u25a1 If osteopenia is detected, you may consider adding a bisphosphonate.\n\u25a1 You will check your estradiol levels to ensure ovarian suppression; if suppressed, check every 3 months.\n\u25a1 You will continue your current mental health support with local psych.\n\u25a1 You are referred to follow up with local psych for ongoing support as needed.\n\u25a1 You will have follow-up visits every 6 months or sooner if you have new or worsening symptoms."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.1,
-    "flesch_reading_ease": 58.4,
-    "gunning_fog": 11.3,
-    "smog_index": 11.8,
-    "dale_chall": 10.0,
+    "flesch_kincaid_grade": 7.9,
+    "flesch_reading_ease": 60.1,
+    "gunning_fog": 10.9,
+    "smog_index": 11.5,
+    "dale_chall": 10.1,
     "coleman_liau": 9.7,
     "ari": 8.0,
     "linsear_write": 6.9,
-    "text_standard": "9th and 10th grade",
-    "word_count": 205,
-    "sentence_count": 17,
-    "difficult_words": 55
+    "text_standard": "7th and 8th grade",
+    "word_count": 219,
+    "sentence_count": 18,
+    "difficult_words": 56
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.1,
-    "flesch_reading_ease": 57.8,
-    "dale_chall": 10.0,
-    "difficult_words": 55
+    "flesch_kincaid_grade": 7.9,
+    "flesch_reading_ease": 59.5,
+    "dale_chall": 10.1,
+    "difficult_words": 56
   }
 }
 
@@ -2415,8 +2415,8 @@ RESULTS FOR ROW 20
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2+ invasive ductal carcinoma with some lobular differentiation",
     "Stage_of_Cancer": "Not mentioned in note",
-    "Distant Metastasis": "Suspected to liver and lungs (pending confirmation)",
-    "Metastasis": "Suspected (to liver and lungs; pending confirmation)"
+    "Distant Metastasis": "Suspected (liver and lung nodules pending confirmation)",
+    "Metastasis": "Not sure"
   },
   "Lab_Results": {
     "lab_summary": "Labs present in note (see full note for values)."
@@ -2448,7 +2448,7 @@ RESULTS FOR ROW 20
     "radiotherapy_plan": "radiation to both breast"
   },
   "Procedure_Plan": {
-    "procedure_plan": "The patient will need to undergo a port placement, baseline ECHO cardiogram, and appropriate laboratory and staging studies prior to starting chemotherapy. Surgery will be determined by the response over the course of the therapy."
+    "procedure_plan": "The patient will need to undergo a port placement"
   },
   "Imaging_Plan": {
     "imaging_plan": "Follow up PET/CT"
@@ -2478,38 +2478,38 @@ RESULTS FOR ROW 20
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a return visit regarding your newly diagnosed bilateral breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The cancer in your right breast is ER+ (estrogen receptor positive), PR+ (progesterone receptor positive), and HER2 positive. The cancer in your left breast is ER+ and PR+ but does not have a protein called HER2. The tumors measure 7.3 cm on the right and 6 cm on the left. Imaging shows possible spread to the liver and lungs, though this is not confirmed yet. [source:findings,Type_of_Cancer]\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which means treatment given after surgery to prevent the cancer from coming back. The plan includes a HER2 targeting approach with chemotherapy. Options include an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will not start until after chemotherapy and radiation therapy. [source:medication_plan]\n**What is the plan going forward?**\nYou will need to have a port placed, a baseline ECHO cardiogram, and appropriate laboratory and staging studies before starting chemotherapy. Surgery will be determined by how the cancer responds to the therapy. You will have radiation to both breasts. A follow-up PET/CT scan is planned. Your next visit will be after 2 cycles of treatment. [source:procedure_plan,radiotherapy_plan,imaging_plan,follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a return visit to the breast cancer center for your ER+ HER2 positive early stage breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The right breast tumor measures 7.3 cm and the left breast tumor measures 6 cm. The cancer in the right breast is ER+, PR+, and HER2 positive, while the left breast cancer is ER+ and HER2 negative. Imaging shows multiple nodules in the lungs and liver, which might indicate that the cancer has spread to other parts of your body. [source:findings]\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which includes a HER2-targeting approach and chemotherapy. The treatment options include either an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will begin after completing chemotherapy and radiation therapy. [source:medication_plan]\n**What is the plan going forward?**\nYou will need to undergo a port placement for chemotherapy administration. You will also receive radiation to both breasts. A follow-up PET/CT scan is planned. After completing surgery, preparatory studies for chemotherapy, including a port placement, an echocardiogram, and appropriate laboratory and staging studies, will be initiated. Genetic testing is pending. Your next clinic visit is scheduled after 2 cycles of treatment. [source:procedure_plan, radiotherapy_plan, imaging_plan, lab_plan, genetic_testing_plan, follow up]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a return visit regarding your newly diagnosed bilateral breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The cancer in your right breast is ER+ (estrogen receptor positive), PR+ (progesterone receptor positive), and HER2 positive. The cancer in your left breast is ER+ and PR+ but does not have a protein called HER2. The tumors measure 7.3 cm on the right and 6 cm on the left. Imaging shows possible spread to the liver and lungs, though this is not confirmed yet.\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which means treatment given after surgery to prevent the cancer from coming back. The plan includes a HER2 targeting approach with chemotherapy. Options include an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will not start until after chemotherapy and radiation therapy.\n**What is the plan going forward?**\nYou will need to have a port placed, a baseline ECHO cardiogram, and appropriate laboratory and staging studies before starting chemotherapy. Surgery will be determined by how the cancer responds to the therapy. You will have radiation to both breasts. A follow-up PET/CT scan is planned. Your next visit will be after 2 cycles of treatment.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a return visit to the breast cancer center for your ER+ HER2 positive early stage breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The right breast tumor measures 7.3 cm and the left breast tumor measures 6 cm. The cancer in the right breast is ER+, PR+, and HER2 positive, while the left breast cancer is ER+ and HER2 negative. Imaging shows multiple nodules in the lungs and liver, which might indicate that the cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which includes a HER2-targeting approach and chemotherapy. The treatment options include either an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will begin after completing chemotherapy and radiation therapy.\n**What is the plan going forward?**\nYou will need to undergo a port placement for chemotherapy administration. You will also receive radiation to both breasts. A follow-up PET/CT scan is planned. After completing surgery, preparatory studies for chemotherapy, including a port placement, an echocardiogram, and appropriate laboratory and staging studies, will be initiated. Genetic testing is pending. Your next clinic visit is scheduled after 2 cycles of treatment.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a return visit regarding your newly diagnosed bilateral breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The cancer in your right breast is ER+ (estrogen receptor positive), PR+ (progesterone receptor positive), and HER2 positive. The cancer in your left breast is ER+ and PR+ but does not have a protein called HER2. Imaging shows possible spread to the liver and lungs, though this is not confirmed yet.\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which means treatment given after surgery to prevent the cancer from coming back. The plan includes a HER2 targeting approach with chemotherapy. Options include an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will not start until after chemotherapy and radiation therapy.\n**What is the plan going forward?**\nYou will need to have a port placed, a baseline ECHO cardiogram, and appropriate laboratory and staging studies before starting chemotherapy. Surgery will be determined by how the cancer responds to the therapy. You will have radiation to both breasts. A follow-up PET/CT scan is planned. Your next visit will be after 2 cycles of treatment.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a return visit to the breast cancer center for your ER+ HER2 positive early stage breast cancer.\n**What's new or changed since your last visit?**\nYou have been diagnosed with bilateral breast cancer. The cancer in the right breast is ER+, PR+, and HER2 positive, while the left breast cancer is ER+ and HER2 negative. Imaging shows multiple nodules in the lungs and liver, which might indicate that the cancer has spread to other parts of your body.\n**What treatment or medication changes were made?**\nYou are a candidate for adjuvant therapy, which includes a HER2-targeting approach and chemotherapy. The treatment options include either an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will begin after completing chemotherapy and radiation therapy.\n**What is the plan going forward?**\nYou will need to undergo a port placement for chemotherapy administration. You will also receive radiation to both breasts. A follow-up PET/CT scan is planned. After completing surgery, preparatory studies for chemotherapy, including a port placement, an echocardiogram, and appropriate laboratory and staging studies, will be initiated. Genetic testing is pending. Your next clinic visit is scheduled after 2 cycles of treatment.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You are a candidate for adjuvant therapy, which means treatment given after surgery to prevent the cancer from coming back. The plan includes a HER2 targeting approach with chemotherapy. Options include an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will not start until after chemotherapy and radiation therapy.\n\u25a1 You will need to have a port placed, a baseline ECHO cardiogram, and appropriate laboratory and staging studies before starting chemotherapy. Surgery will be determined by how the cancer responds to the therapy. You will have radiation to both breasts. A follow-up PET/CT scan is planned. Your next visit will be after 2 cycles of treatment."
+"ACTION ITEMS:\n\u25a1 You are a candidate for adjuvant therapy, which includes a HER2-targeting approach and chemotherapy. The treatment options include either an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. You will also receive Pertuzumab and Trastuzumab for a total of 1 year. Hormonal therapy will begin after completing chemotherapy and radiation therapy.\n\u25a1 You will need to undergo a port placement for chemotherapy administration. You will also receive radiation to both breasts. A follow-up PET/CT scan is planned. After completing surgery, preparatory studies for chemotherapy, including a port placement, an echocardiogram, and appropriate laboratory and staging studies, will be initiated. Genetic testing is pending. Your next clinic visit is scheduled after 2 cycles of treatment."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 7.7,
-    "flesch_reading_ease": 61.2,
-    "gunning_fog": 10.6,
-    "smog_index": 10.8,
-    "dale_chall": 10.2,
-    "coleman_liau": 9.7,
-    "ari": 7.9,
+    "flesch_kincaid_grade": 8.5,
+    "flesch_reading_ease": 55.7,
+    "gunning_fog": 11.0,
+    "smog_index": 11.0,
+    "dale_chall": 10.5,
+    "coleman_liau": 10.8,
+    "ari": 9.0,
     "linsear_write": 6.2,
-    "text_standard": "9th and 10th grade",
-    "word_count": 261,
-    "sentence_count": 22,
-    "difficult_words": 56
+    "text_standard": "10th and 11th grade",
+    "word_count": 256,
+    "sentence_count": 21,
+    "difficult_words": 59
   },
   "adjusted": {
-    "flesch_kincaid_grade": 7.7,
-    "flesch_reading_ease": 61.2,
-    "dale_chall": 10.2,
-    "difficult_words": 56
+    "flesch_kincaid_grade": 8.5,
+    "flesch_reading_ease": 55.7,
+    "dale_chall": 10.5,
+    "difficult_words": 59
   }
 }
 
