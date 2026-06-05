@@ -33,6 +33,19 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
   - 漏掉决定治疗的关键临床信息
   - 幻觉/捏造原文没有的内容
 
+--------------------------------------------------------------------------------
+修复状态 (2026-06-04, 基于 ROW1-8 审计, commit 见 git log)
+--------------------------------------------------------------------------------
+基于前 8 行审出的 4 类 PL bug, 已做针对性修复 (待重跑验证):
+  (a) stage 过度分期/跨癌种串扰 → Cancer_Diagnosis prompt 加 4 守卫
+      (one-cancer-only / local-recurrence≠IV / suspected-vs-confirmed / 禁止[X]占位符)
+  (b) imaging_plan TTE/restaging 幻觉 → 去掉"化疗就主动加TTE/总是加restaging"
+      (breast+PDAC), 改为只提取原文明确写的
+  (c) genetic_testing_results IHC 污染 → 新增 POST-GENETIC-RESULTS-IHC hook
+      (剥离 ER/PR/HER2/Ki67/FISH 受体病理; 无真实分子检测则清空) — 已在 ROW1/5/6/7/8 值上验证正确
+  (d) supportive_meds 家庭药泄漏 → 新增 POST-SUPP-WHITELIST 兜底过滤
+注: (a)(b) 为 prompt 改动, (c)(d) 为 hook, 均需在 WSL/vLLM 上重跑 40 test set 验证.
+
 8 类错误维度 (对齐 harness 设计目标, 用于归因):
   1 JSON/schema(不计分,仅记录)  2 答非所问  3 幻觉  4 时态泄漏
   5 字段串扰(仅当造成医疗误导才计) 6 临床遗漏 7 临床一致性 8 受体状态
