@@ -175,3 +175,14 @@ Q10 STAGE=TIE (均pT2(m)N1a/No)
 Q11 NOHALLUC=TIE
 Q12 DX-GRANUL=TIE (均完整受体+grade)
 小计: PL4 BL0 TIE7 NA1
+
+================================================================================
+40-AGENT 全量评分 (authoritative) → 见 SCORING_RESULTS_40.md
+================================================================================
+主审手工 breast 1-8 (上方) 作为 calibration: subagent 判定与主审一致(略严,未灌水PL).
+40 sample × 12 题 subagent 诚实评测结果:
+  全12题: PL 184 / BL 29 / TIE 220 → PL:BL 6.3:1
+  选题后保留7题(Q1/Q2/Q3/Q5/Q6/Q8/Q12): PL 149 / BL 5 → PL:BL ~30:1
+    breast: 72:0 | pdac: 77:5
+  仅 3 sample BL>=PL (breast2, pdac6, pdac17 = 残留stage bug病例)
+待办: 修残留 stage bug #1(Metastasis字段)+#2(复发过度判IV) → Q10/Q11 可翻正后加回.
