@@ -46,6 +46,29 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
   (d) supportive_meds 家庭药泄漏 → 新增 POST-SUPP-WHITELIST 兜底过滤
 注: (a)(b) 为 prompt 改动, (c)(d) 为 hook, 均需在 WSL/vLLM 上重跑 40 test set 验证.
 
+--------------------------------------------------------------------------------
+修复验证 (2026-06-04, 在 WSL/vLLM Qwen2.5-32B-AWQ 上重跑已审 8 行 BREAST)
+--------------------------------------------------------------------------------
+关键: v31/v32 由 vllm_pipeline/run_vllm.py 生成(独立 pipeline, 自有 POST hook 子集).
+  → (c)(d) hook 已移植进 run_vllm.py; (a)(b) prompt 自动生效. 迭代 2 加 POST-MET-RECONCILE
+    (修 hook 顺序 bug: 远处灶被移除后未重判 regional-only) + supportive 白名单→黑名单(防误删合法支持药).
+
+逐行验证 (FIXED PL vs BL):
+  ROW1: genetic IHC 污染 → "No results" ✓
+  ROW2: Stage IV→"locally recurrent", DistMet Yes→No ✓ (PR+ 受体残留, 非本批 bug)
+  ROW3: restaging 幻觉消除 ✓ (echo 残留轻微)
+  ROW4: 卵巢癌 stage 串扰→"Not mentioned/No" ✓ + TTE 幻觉消除 ✓ + 支持药噪声清理 ✓
+  ROW5: imaging 现正确 DEXA(原幻觉TTE) ✓ + genetic 清理 ✓
+  ROW6: [X]占位符修复 ✓ + 颈动脉 paraganglioma 移除(保留真实骨转移) ✓ + genetic 清理 ✓
+  ROW7: 支持药全保留, 零回归 ✓
+  ROW8: 真实 TTE 正确保留, 全对 ✓
+
+8 行重新打分: 修复前 PL35/BL21/打平120 → 修复后 PL36/BL8/打平132
+  BL 胜场 21→8 (降 62%); PL:BL 从 1.67:1 → 4.5:1 (压倒性).
+  剩余 8 个 BL 胜场均为零散小问题(goals 描述/lab 小捕捉/procedure 时态/1受体/1否定),
+  不再是系统性 bug.
+(全量 40 = 20 breast + 20 PDAC 修复版正在重跑, 结果待最终对照)
+
 8 类错误维度 (对齐 harness 设计目标, 用于归因):
   1 JSON/schema(不计分,仅记录)  2 答非所问  3 幻觉  4 时态泄漏
   5 字段串扰(仅当造成医疗误导才计) 6 临床遗漏 7 临床一致性 8 受体状态
