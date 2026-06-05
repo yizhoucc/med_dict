@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "rivaroxaban (XARELTO) 20 mg tablet Take 20 mg by mouth Daily. On hold by *****. ***** ***** / pt is on Lovenox - SFGH",
-    "supportive_meds": "acetaminophen (TYLENOL) 500 mg tablet, lipase-protease-amylase (CREON) 24,000-76,000 -120,000 unit CAPDREC capsule"
+    "supportive_meds": "lipase-protease-amylase (CREON) 24, 000-76, 000 -120, 000 unit CAPDREC capsule"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant",

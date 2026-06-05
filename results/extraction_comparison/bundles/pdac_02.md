@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Switched to Gemcitabine + Abraxane on 11/29/18.",
-    "supportive_meds": "granisetron (SANCUSO) 3.1 mg/24 hour patch, domperidone, ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), pantoprazole (PROTONIX), pantoprazole, lidocaine-diphenhydramine-maalox (MAGIC MOUTHWASH), creon"
+    "supportive_meds": "granisetron (SANCUSO) 3.1 mg/24 hour patch, domperidone, ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), lidocaine-diphenhydramine-maalox (MAGIC MOUTHWASH), creon"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

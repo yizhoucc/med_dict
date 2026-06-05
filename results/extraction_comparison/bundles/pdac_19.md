@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Postponed today's infusion of FOLFIRINOX due to lab results indicating possible disease progression or biliary obstruction.",
-    "supportive_meds": "ondansetron (ZOFRAN), metoclopramide HCl (REGLAN), CREON, omeprazole (PRILOSEC), methadone (DOLOPHINE), oxyCODONE (ROXICODONE)"
+    "supportive_meds": "ondansetron (ZOFRAN), metoclopramide HCl (REGLAN), CREON, methadone (DOLOPHINE), oxyCODONE (ROXICODONE)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

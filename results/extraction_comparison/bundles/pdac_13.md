@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "Creon, Pantoprazole"
+    "supportive_meds": "Creon"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

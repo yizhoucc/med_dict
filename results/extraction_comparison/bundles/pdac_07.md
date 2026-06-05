@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "switched to alternate week gemcitabine and Abraxane due to neutropenia",
-    "supportive_meds": "ondansetron, lorazepam"
+    "supportive_meds": "ondansetron"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

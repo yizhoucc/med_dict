@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Further reduced abraxane today. Recheck neuropathy in 2 weeks. Remeron started today.",
-    "supportive_meds": "LORazepam (ATIVAN) 1 mg tablet, OLANZapine (ZYPREXA) 5 mg tablet, metoclopramide HCl (REGLAN) 10 mg tablet, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet, lipase-protease-amylase (CREON) 24,000-76,000 -120,000 unit CAPDREC capsule"
+    "supportive_meds": "OLANZapine (ZYPREXA) 5 mg tablet, metoclopramide HCl (REGLAN) 10 mg tablet, diphenoxylate-atropine (LOMOTIL) 2.5-0.025 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet, lipase-protease-amylase (CREON) 24, 000-76, 000 -120, 000 unit CAPDREC capsule"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

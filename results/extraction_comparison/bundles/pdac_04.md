@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet, pantoprazole (PROTONIX) 40 mg EC tablet"
+    "supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "surveillance",

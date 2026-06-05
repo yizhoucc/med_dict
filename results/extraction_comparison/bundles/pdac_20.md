@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "oxyCODONE-acetaminophen (Percocet)"
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

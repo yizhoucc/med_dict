@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Port placement ASAP, Chemo teach ASAP for taxol x 12 weekly",
-    "supportive_meds": "acetaminophen (TYLENOL) 325 mg tablet, baclofen (LIORESAL) 10 mg tablet, omeprazole (PRILOSEC) 20 mg capsule, promethazine-dextromethorphan 6.25-15 mg/5 mL syrup"
+    "supportive_meds": "promethazine-dextromethorphan 6.25-15 mg/5 mL syrup"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

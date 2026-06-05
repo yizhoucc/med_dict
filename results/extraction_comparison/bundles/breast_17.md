@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "cholecalciferol, vitamin D3"
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant",

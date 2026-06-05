@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Omitted irinotecan since C3 (due to colitis on scans, performance status).",
-    "supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), acetaminophen (TYLENOL), loperamide (IMODIUM), diphenoxylate-atropine (LOMOTIL), potassium chloride (KLOR-CON 10)"
+    "supportive_meds": "ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), loperamide (IMODIUM), diphenoxylate-atropine (LOMOTIL), potassium chloride (KLOR-CON 10)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative",

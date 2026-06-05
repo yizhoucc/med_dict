@@ -287,7 +287,7 @@ RESULTS FOR ROW 3
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "ibuprofen (ADVIL,MOTRIN) 800 mg tablet Take 800 mg by mouth once as needed for Pain., omeprazole (PRILOSEC) 20 mg capsule Take 20 mg by mouth As needed after meals."
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative",
@@ -336,38 +336,38 @@ RESULTS FOR ROW 3
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body. [source:Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis]\nYour treatment goal is to cure the cancer. [source:goals_of_treatment, goals_description]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration. [source:medication_plan]\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals. [source:supportive_meds]\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February. [source:medication_plan]\nYou will have an echocardiogram to monitor your heart function. [source:imaging_plan]\nYour labs will be checked again to monitor your creatinine and Alk phos levels. [source:lab_plan]\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions. [source:genetic_testing_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body. [source:Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis]\nYour treatment goal is to cure the cancer. [source:goals_of_treatment, goals_description]\nRecent lab tests show that your creatinine and alkaline phosphatase levels are elevated. [source:lab_summary]\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration. [source:medication_plan]\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to monitor your heart function. [source:imaging_plan]\nYour labs will be checked again to monitor your creatinine and alkaline phosphatase levels. [source:lab_plan]\nYou will start chemotherapy the first week in February. [source:medication_plan]\nYou are referred to have genetic testing with a 126 InVitae panel. We will discuss the results with you when they are available. [source:genetic_testing_plan, follow_up]\nDepending on your surgical choice and final pathology, you may need radiation therapy after surgery. [source:radiotherapy_plan]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals.\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February.\nYou will have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and Alk phos levels.\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\nRecent lab tests show that your creatinine and alkaline phosphatase levels are elevated.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and alkaline phosphatase levels.\nYou will start chemotherapy the first week in February.\nYou are referred to have genetic testing with a 126 InVitae panel. We will discuss the results with you when they are available.\nDepending on your surgical choice and final pathology, you may need radiation therapy after surgery.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called ER-/PR-/HER2- invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. A clinical trial was discussed. You have agreed to have a Medi-port placed for chemotherapy administration.\nYou are also taking ibuprofen for pain relief and omeprazole as needed after meals.\n**What is the plan going forward?**\nYou will start chemotherapy in the first week of February.\nYou will have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and Alk phos levels.\nA genetic panel has been sent to learn more about your cancer and any genetic predispositions.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consultation regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a rare type of breast cancer called triple-negative invasive spindle cell metaplastic carcinoma. The cancer is locally advanced and multifocal, meaning it has multiple growths in the breast. There is no evidence of the cancer spreading to other parts of your body.\nYour treatment goal is to cure the cancer.\nRecent lab tests show that your creatinine and alkaline phosphatase levels are elevated.\n**What treatment or medication changes were made?**\nYou will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. A clinical trial was discussed. You have agreed to have a Medi-port placed for chemotherapy administration.\n**What is the plan going forward?**\nYou are referred to have an echocardiogram to monitor your heart function.\nYour labs will be checked again to monitor your creatinine and alkaline phosphatase levels.\nYou will start chemotherapy the first week in February.\nYou are referred to have genetic testing with a 126 InVitae panel. We will discuss the results with you when they are available.\nDepending on your surgical choice and final pathology, you may need radiation therapy after surgery.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\n\u25a1 You will start chemotherapy in the first week of February.\n\u25a1 You will have an echocardiogram to monitor your heart function.\n\u25a1 Your labs will be checked again to monitor your creatinine and Alk phos levels.\n\u25a1 A genetic panel has been sent to learn more about your cancer and any genetic predispositions."
+"ACTION ITEMS:\n\u25a1 You will start neoadjuvant chemotherapy, which is treatment given before surgery to shrink the cancer. This may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If you are randomized to the experimental arm of the I-SPY2 trial, an additional unspecified agent will be added to paclitaxel. You have agreed to have a Medi-port placed for chemotherapy administration.\n\u25a1 You are referred to have an echocardiogram to monitor your heart function.\n\u25a1 Your labs will be checked again to monitor your creatinine and alkaline phosphatase levels.\n\u25a1 You will start chemotherapy the first week in February.\n\u25a1 You are referred to have genetic testing with a 126 InVitae panel. We will discuss the results with you when they are available.\n\u25a1 Depending on your surgical choice and final pathology, you may need radiation therapy after surgery."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 8.3,
-    "flesch_reading_ease": 58.1,
-    "gunning_fog": 10.4,
-    "smog_index": 10.9,
-    "dale_chall": 10.1,
-    "coleman_liau": 10.5,
-    "ari": 8.8,
+    "flesch_kincaid_grade": 8.6,
+    "flesch_reading_ease": 55.5,
+    "gunning_fog": 11.2,
+    "smog_index": 11.4,
+    "dale_chall": 10.5,
+    "coleman_liau": 11.1,
+    "ari": 9.2,
     "linsear_write": 6.9,
-    "text_standard": "9th and 10th grade",
-    "word_count": 241,
-    "sentence_count": 19,
-    "difficult_words": 57
+    "text_standard": "10th and 11th grade",
+    "word_count": 263,
+    "sentence_count": 21,
+    "difficult_words": 68
   },
   "adjusted": {
-    "flesch_kincaid_grade": 8.3,
-    "flesch_reading_ease": 58.1,
-    "dale_chall": 10.1,
-    "difficult_words": 57
+    "flesch_kincaid_grade": 8.6,
+    "flesch_reading_ease": 55.5,
+    "dale_chall": 10.5,
+    "difficult_words": 68
   }
 }
 
@@ -413,7 +413,7 @@ RESULTS FOR ROW 4
   },
   "Treatment_Changes": {
     "recent_changes": "Port placement ASAP, Chemo teach ASAP for taxol x 12 weekly",
-    "supportive_meds": "acetaminophen (TYLENOL) 325 mg tablet, baclofen (LIORESAL) 10 mg tablet, omeprazole (PRILOSEC) 20 mg capsule, promethazine-dextromethorphan 6.25-15 mg/5 mL syrup"
+    "supportive_meds": "promethazine-dextromethorphan 6.25-15 mg/5 mL syrup"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",
@@ -462,38 +462,38 @@ RESULTS FOR ROW 4
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread. [source:findings,Type_of_Cancer,Stage_of_Cancer,Distant_Metastasis]\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer. [source:medication_plan,follow_up,imaging_plan]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and is HER2 negative. The latest imaging shows that the cancer in your right breast has grown larger. No other parts of your body show signs of cancer spread. [source:findings,Type_of_Cancer,Stage_of_Cancer,Distant_Metastasis]\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which is a medicine used to treat cancer. [source:recent_changes,supportive_meds,medication_plan]\n**What is the plan going forward?**\nYou will start chemotherapy as early as next Wednesday or the following week. You will have clinic visits after the first, second, fifth, eighth, and twelfth treatments. [source:medication_plan,follow_up,imaging_plan]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and is HER2 negative. The latest imaging shows that the cancer in your right breast has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which is a medicine used to treat cancer.\n**What is the plan going forward?**\nYou will start chemotherapy as early as next Wednesday or the following week. You will have clinic visits after the first, second, fifth, eighth, and twelfth treatments.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n**What is the plan going forward?**\nYou will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new patient visit regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a type of breast cancer called invasive ductal carcinoma, which means the cancer started in the milk ducts. The cancer is in your right breast and is HER2 negative. The latest imaging shows that the cancer in your right breast has grown larger. No other parts of your body show signs of cancer spread.\n**What treatment or medication changes were made?**\nA port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which is a medicine used to treat cancer.\n**What is the plan going forward?**\nYou will start chemotherapy as early as next Wednesday or the following week. You will have clinic visits after the first, second, fifth, eighth, and twelfth treatments.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with a drug called Taxol. You will also continue taking medications for pain, muscle relaxation, acid reflux, and cough.\n\u25a1 You will start chemotherapy with Taxol as early as next Wednesday. You will have clinic visits after the first, second, fifth, eighth, and twelfth cycles of treatment. You will also have a mammogram to check on your breast cancer."
+"ACTION ITEMS:\n\u25a1 A port will be placed soon to make chemotherapy easier. You will start chemotherapy with Taxol, which is a medicine used to treat cancer.\n\u25a1 You will start chemotherapy as early as next Wednesday or the following week. You will have clinic visits after the first, second, fifth, eighth, and twelfth treatments."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.0,
-    "flesch_reading_ease": 72.9,
-    "gunning_fog": 7.7,
-    "smog_index": 8.8,
-    "dale_chall": 8.6,
-    "coleman_liau": 8.6,
-    "ari": 7.0,
-    "linsear_write": 5.3,
-    "text_standard": "8th and 9th grade",
-    "word_count": 202,
-    "sentence_count": 17,
-    "difficult_words": 36
+    "flesch_kincaid_grade": 5.9,
+    "flesch_reading_ease": 74.7,
+    "gunning_fog": 7.5,
+    "smog_index": 9.0,
+    "dale_chall": 8.4,
+    "coleman_liau": 8.5,
+    "ari": 6.9,
+    "linsear_write": 6.0,
+    "text_standard": "5th and 6th grade",
+    "word_count": 195,
+    "sentence_count": 16,
+    "difficult_words": 32
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.0,
-    "flesch_reading_ease": 72.9,
-    "dale_chall": 8.6,
-    "difficult_words": 36
+    "flesch_kincaid_grade": 5.9,
+    "flesch_reading_ease": 74.7,
+    "dale_chall": 8.4,
+    "difficult_words": 32
   }
 }
 
@@ -2051,7 +2051,7 @@ RESULTS FOR ROW 17
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "cholecalciferol, vitamin D3"
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "adjuvant",
@@ -2100,37 +2100,37 @@ RESULTS FOR ROW 17
 }
 
 --- Column: letter_tagged ---
-"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer. [source:summary]\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. [source:Type_of_Cancer,Stage_of_Cancer,findings]\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment. [source:medication_plan]\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed. [source:procedure_plan,Specialty,lab_plan,follow_up]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
+"Dear Patient, [source:none]\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit. [source:none]\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment. [source:summary]\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) of the left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The cancer has spread to some lymph nodes but has not spread to other parts of your body. [source:Type_of_Cancer, Stage_of_Cancer, Metastasis, Distant Metastasis]\n**What treatment or medication changes were made?**\nYou will start adjuvant chemotherapy with TC x 6, which means you will receive chemotherapy to prevent the cancer from coming back. You will also use ONPRO support and start treatment on July 9th with dignicap. [source:medication_plan, radiotherapy_plan]\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. We will also perform staging with PET/CT. We will discuss the cosmetic aspects of your left breast once it is fully healed. [source:procedure_plan, imaging_plan, genetic_testing_plan, Others]\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process. [source:emotional_context]\nThank you for trusting us with your care. [source:none]\nPlease feel free to contact us if you have any questions. [source:none]\nSincerely, Your Care Team [source:none]"
 
 --- Column: letter_detailed ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) grade 2 invasive ductal carcinoma (IDC) of the left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The cancer has spread to some lymph nodes but has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nYou will start adjuvant chemotherapy with TC x 6, which means you will receive chemotherapy to prevent the cancer from coming back. You will also use ONPRO support and start treatment on July 9th with dignicap.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. We will also perform staging with PET/CT. We will discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely, Your Care Team"
 
 --- Column: letter ---
-"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your recently diagnosed breast cancer.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) invasive ductal carcinoma (IDC) in your left breast. This type of cancer starts in the milk ducts. It is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2.\n**What treatment or medication changes were made?**\nYou will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
+"Dear Patient,\nWe hope you are doing well. We are writing this letter to help you understand what happened during your recent visit.\n**Why did you come to the clinic?**\nYou came in for a new consult regarding your breast cancer treatment.\n**What's new or changed since your last visit?**\nYou have a stage IIb (T2N1M0) invasive ductal carcinoma (IDC) of the left breast. The cancer is estrogen receptor positive (ER+) and progesterone receptor positive (PR+), but does not have a protein called HER2. The cancer has spread to some lymph nodes but has not spread to other parts of your body.\n**What treatment or medication changes were made?**\nYou will start adjuvant chemotherapy with TC x 6, which means you will receive chemotherapy to prevent the cancer from coming back. You will also use ONPRO support and start treatment on July 9th with dignicap.\n**What is the plan going forward?**\nYou will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. We will also perform staging with PET/CT. We will discuss the cosmetic aspects of your left breast once it is fully healed.\nWe understand that this is a challenging time and that managing these health changes can be stressful. We want to reinforce that you are not alone in this process.\nThank you for trusting us with your care.\nPlease feel free to contact us if you have any questions.\nSincerely,\nYour Care Team"
 
 --- Column: action_items ---
-"ACTION ITEMS:\n\u25a1 You will start a treatment plan with TC x 6 chemotherapy. This will be supported with ONPRO. You will also use dignicap for scalp cooling to help preserve your hair during treatment.\n\u25a1 You will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. You will start your treatment on July 9th, 2017. We will also discuss the cosmetic aspects of your left breast once it is fully healed."
+"ACTION ITEMS:\n\u25a1 You will start adjuvant chemotherapy with TC x 6, which means you will receive chemotherapy to prevent the cancer from coming back. You will also use ONPRO support and start treatment on July 9th with dignicap.\n\u25a1 You will have a port placed for chemotherapy administration. You are referred to a specialist for chemotherapy teaching and port placement. A baseline echo will be done. We will also perform staging with PET/CT. We will discuss the cosmetic aspects of your left breast once it is fully healed."
 
 --- Column: readability_metrics ---
 {
   "raw": {
-    "flesch_kincaid_grade": 6.1,
-    "flesch_reading_ease": 71.5,
-    "gunning_fog": 8.8,
+    "flesch_kincaid_grade": 6.6,
+    "flesch_reading_ease": 69.8,
+    "gunning_fog": 8.9,
     "smog_index": 9.7,
-    "dale_chall": 9.5,
-    "coleman_liau": 8.5,
-    "ari": 6.8,
-    "linsear_write": 6.1,
+    "dale_chall": 9.4,
+    "coleman_liau": 8.8,
+    "ari": 7.4,
+    "linsear_write": 7.9,
     "text_standard": "8th and 9th grade",
-    "word_count": 216,
-    "sentence_count": 19,
+    "word_count": 226,
+    "sentence_count": 18,
     "difficult_words": 44
   },
   "adjusted": {
-    "flesch_kincaid_grade": 6.1,
-    "flesch_reading_ease": 71.4,
-    "dale_chall": 9.4,
+    "flesch_kincaid_grade": 6.6,
+    "flesch_reading_ease": 69.7,
+    "dale_chall": 9.3,
     "difficult_words": 44
   }
 }

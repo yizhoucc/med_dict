@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "Resumed chemotherapy (cycle #5 of nal-IRI/5-FU/LV) on 03/29/2019.",
-    "supportive_meds": "HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet 1-2 tabs q6 hours prn pain, loperamide (IMODIUM) 2 mg capsule, LORazepam (ATIVAN) 1 mg tablet Take 1 tablet (1 mg total) by mouth every 12 (twelve) hours as needed for Anxiety (nausea), prochlorperazine (COMPAZINE) 10 mg tablet Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting)"
+    "supportive_meds": "loperamide (IMODIUM) 2 mg capsule, prochlorperazine (COMPAZINE) 10 mg tablet Take 1 tablet (10 mg total) by mouth every 6 (six) hours as needed (nausea and vomiting)"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",

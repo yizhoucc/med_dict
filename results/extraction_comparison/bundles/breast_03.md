@@ -31,7 +31,7 @@
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "ibuprofen (ADVIL,MOTRIN) 800 mg tablet Take 800 mg by mouth once as needed for Pain., omeprazole (PRILOSEC) 20 mg capsule Take 20 mg by mouth As needed after meals."
+    "supportive_meds": ""
   },
   "Treatment_Goals": {
     "goals_of_treatment": "curative",

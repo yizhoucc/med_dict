@@ -27,7 +27,7 @@
     "findings": "Mr. ***** has completed 12 cycles of FOLFIRINOX from February 2019 to August 2019 and is currently on a chemotherapy break. Restaging CT is planned for 11/19/19. Recent lab results show Cancer Antigen 19-9 levels of 576 (H) on 08/27/2019, 826 (H) on 08/01/2019, and 588 (H) on 07/11/2019. Carcinoembryonic Antigen levels are 16.2 (H) on 08/27/2019, 11.7 (H) on 08/01/2019, and 17.0 (H) on 07/11/2019. Physical exam reveals WDWN, NAD, sclera anicteric, no respiratory distress, alert & oriented x 3, mood stable, and ECOG Performance Status of 1 - symptomatic but completely ambulatory. Ongoing thrush and occlusive thrombi within the superior and mid duplicated left peroneal veins continue to be managed. Abdominal pain/cramping has improved."
   },
   "Current_Medications": {
-    "current_meds": "rivaroxaban"
+    "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "",
