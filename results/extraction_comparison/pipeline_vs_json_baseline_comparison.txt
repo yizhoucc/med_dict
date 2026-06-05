@@ -40,18 +40,19 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [x]3 [x]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [x]4 [x]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 18   |   BL 更好: 10   |   打平: 60   (截至 BREAST ROW 4)
-  PL 反复强项: Patient type / current_meds 过滤 / findings 完整性 / 用药方案具体化 / response 时态判断
-  PL 反复弱点(可修, 3 类):
+  PL 更好: 20   |   BL 更好: 13   |   打平: 77   (截至 BREAST ROW 5)
+  PL 反复强项: current_meds 过滤 / findings 完整性 / therapy 多模态完整 / response 时态 / 用药方案
+  PL 反复弱点(可修, 4 类 bug, 几乎是 BL 全部胜场来源):
     (a) stage/met 过度分期+跨癌种串扰 (ROW2 局部复发→IV; ROW4 卵巢癌史→乳腺 IV)
-    (b) plan 字段时态错/幻觉 (ROW2 PET已做; ROW3 Echo已做+restaging幻觉; ROW4 TTE幻觉)
-    (c) supportive_meds 未过滤家庭药 (ROW4 塞 10 种)
+    (b) imaging_plan 幻觉/时态 (ROW3 Echo已做+restaging幻觉; ROW4/5 TTE幻觉 TC不需echo)
+    (c) Genetic_Testing_Results IHC 污染+用被推翻的旧受体值 (ROW1/5 误报 HER2+)
+    (d) supportive_meds 未过滤家庭药 (ROW4 塞 10 种)
 
 ================================================================================
 BREAST ROW 1 (coral_idx=20)
@@ -217,3 +218,43 @@ ROW 4 小结: PL更好 6 | BL更好 4 | 打平 12  (PL 占优)
   BL 亮点(诚实记录): PL 把卵巢癌史串扰到乳腺分期(同 ROW2 过度分期 bug);
            supportive_meds 未过滤(filter_supportive_meds 失效); TTE 幻觉.
   → bug 模式已清晰: (a)stage/met 串扰 (b)plan 时态/幻觉 (c)supportive 未过滤.
+
+================================================================================
+BREAST ROW 5 (coral_idx=24)
+================================================================================
+原文要点: 55yo 绝经后, 新诊断双侧乳腺癌, 已行双侧部分乳房切除+ALND. 左乳 6.2cm
+  grade3 IDC ER+99/PR+>95/HER2-(终版), MP high risk, Stage III(T3N1); 右乳 2.0cm
+  grade1 IDC ER+99/PR+90/HER2-(终版 IHC0), MP low risk, Stage I(T1cN0).
+  注: 右乳早期 core 活检曾 HER2+(IHC2+ FISH2.0)但终版手术病理为 HER2-.
+  计划: 辅助 TC(docetaxel/cyclophosphamide)x4 + 放疗 + AI x5yr + CDK4/6 试验考虑
+  + DEXA + 钙/维D. Oncotype DX 待回. 当前无用药.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          打平      均 "New patient", 正确
+Type_of_Cancer            打平      均双侧 HR+/HER2- 完整, 正确
+Stage_of_Cancer           打平      均 左III(T3N1)/右I(T1cN0), 正确 (PL 本行未过度分期 ✓)
+Distant_Metastasis        打平      均 "No", 正确
+Lab_Results               打平      均 "No labs", 正确
+Clinical_Findings         PL更好    BL 仅列正常体检, 漏全部双癌病理/影像; PL 完整 [B 类6]
+Current_Medications       打平      均无用药(本行确实无药), 正确
+Treatment_Changes         打平      均 None, 正确
+goals_of_treatment        打平      均 "adjuvant", 正确
+goals_description         BL更好    原文明说"reduce distant recurrence risk"; BL 抓到, PL 说"未明示"漏掉 [B 类6]
+Response_Assessment       打平      均正确(术后尚未上辅助治疗)
+Medication_Plan           打平      均捕捉 TC+AI; PL 多钙/维D
+Therapy_plan              PL更好    BL 仅"radiation"; PL 含 TC+放疗+AI+CDK4/6试验 多模态 [B 类6]
+radiotherapy_plan         打平      均 radiation, 正确
+Procedure_Plan            打平      均字段归类有瑕(BL放DEXA/PL放化疗放疗), 均非医疗误导, 不计
+Imaging_Plan              BL更好    ★PL 幻觉"TTE before chemo"(原文无,TC不需echo)+漏真实DEXA; BL 不捏造 [A 类3]
+Lab_Plan                  打平      均 None, 正确
+Genetic_Testing_Plan      打平      均捕捉 Oncotype DX 待回, 正确
+Genetic_Testing_Results   BL更好    ★PL IHC污染+用被终版推翻的右乳HER2+(与自身Type矛盾); BL 不全但没说错 [A 类3/类7]
+Referral                  打平      4 类均 None, 正确
+follow_up_next_visit      打平      均无明确日期, 合理
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 5 小结: PL更好 2 | BL更好 3 | 打平 17  (BL 微胜)
+  PL 亮点: findings 完整(BL 漏全部病理); therapy 多模态(BL 仅 radiation).
+  BL 亮点(诚实记录): PL 老 bug 复现 → imaging TTE 幻觉(同 ROW4); genetic results
+           IHC 污染+旧 HER2 值(同 ROW1). 本行 Stage 正确, 说明过度分期非每行必现.
