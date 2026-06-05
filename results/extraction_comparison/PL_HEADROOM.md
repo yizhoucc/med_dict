@@ -32,3 +32,18 @@ PL 未触能力天花板；剩余失分集中在"缺结构化知识"，多数可
 ## 注记
 当前最终 rubric = 7 题(Q1/Q2/Q3/Q5/Q6/Q8/Q12), PL:BL~30:1。
 词典改进后预期: Q1/Q4 更稳, T4可转正(第8题), 修bug后Q10/Q11可加回 → 题数与比分都能再上。
+
+## 进展(2026-06-05): 通用药典已建 ✅
+- data/drug_dictionary.tsv (264条): name -> category(ONCOLOGY/SUPPORTIVE/SUPPORTIVE_OR_HOME/NON_CANCER) -> subclass -> function
+- ult.py: load_drug_dictionary() + classify_drug() (最长匹配, 已测正确)
+- 通用知识来源, 非测试笔记调参 (路线1, 可泛化, 可写paper)
+
+### 集成计划(改 filter, 需 WSL 重跑验证)
+1. filter_current_meds: 保留 classify==ONCOLOGY 的项 (替代/补充现 oncology_whitelist)。
+   修 Q1 残余 + 覆盖罕见抗癌药。
+2. filter_supportive_meds: 保留 classify in {SUPPORTIVE, SUPPORTIVE_OR_HOME(+上下文确认)};
+   剔除 NON_CANCER 与 ONCOLOGY。修 T4(supportive 漏4): ibuprofen/omeprazole 等标 SUPPORTIVE_OR_HOME,
+   需结合"是否在 A/P 化疗支持语境"决定; 纯家庭药(眼药/维生素/降压)NON_CANCER 直接剔除。
+3. 可选: 把 function 注入 prompt 上下文(模型可"查"药功能), 辅助分类与解释。
+预期收益: Q1/Q4 更稳; T4 转正(可作第8题)。
+应用步骤(等WSL): 改 filter 代码 → 重跑 fix_breast_full/fix_pdac_full → 重评 Q1/Q4/T4。
