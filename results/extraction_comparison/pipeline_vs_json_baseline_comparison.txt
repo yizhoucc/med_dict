@@ -40,15 +40,18 @@ BL更好 = BL 更准确, 或 PL 有真实医疗错误
 ================================================================================
 进度跟踪 (任务记忆 — 上下文恢复时读这里)
 ================================================================================
-BREAST (20):  [x]1 [x]2 [x]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
+BREAST (20):  [x]1 [x]2 [x]3 [x]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC   (20):  [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10
               [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 累计胜负 (实时更新, 仅计医疗实质差异):
-  PL 更好: 12   |   BL 更好: 6   |   打平: 48   (截至 BREAST ROW 3)
-  PL 反复强项: Patient type / current_meds 过滤 / findings 完整性 / 用药方案具体化
-  PL 反复弱点(可修): plan 字段时态错误(已做检查当未来), stage/met 偶发误判
+  PL 更好: 18   |   BL 更好: 10   |   打平: 60   (截至 BREAST ROW 4)
+  PL 反复强项: Patient type / current_meds 过滤 / findings 完整性 / 用药方案具体化 / response 时态判断
+  PL 反复弱点(可修, 3 类):
+    (a) stage/met 过度分期+跨癌种串扰 (ROW2 局部复发→IV; ROW4 卵巢癌史→乳腺 IV)
+    (b) plan 字段时态错/幻觉 (ROW2 PET已做; ROW3 Echo已做+restaging幻觉; ROW4 TTE幻觉)
+    (c) supportive_meds 未过滤家庭药 (ROW4 塞 10 种)
 
 ================================================================================
 BREAST ROW 1 (coral_idx=20)
@@ -172,3 +175,45 @@ ROW 3 小结: PL更好 4 | BL更好 1 | 打平 17  (PL 占优)
            Patient type 准确; current_meds 过滤; 用药方案具体化.
   BL 亮点(诚实记录): PL imaging_plan 把已做 Echo 当未来 + 幻觉"restaging" → 时态
            hook 对 imaging_plan 未生效, 与 ROW2 procedure 时态错同源, 可统一修.
+
+================================================================================
+BREAST ROW 4 (coral_idx=23)
+================================================================================
+原文要点: 71yo F, 右乳 IDC(两处活检, ER1%/PRneg/HER2neg 与 ERneg/PR1%/HER2neg
+  =三阴/HR低), 复发(从1.2x0.7长到2.7x1.7). PET/CT 明确"No evidence of
+  hypermetabolic metastatic disease". PMH 另有: 1998 卵巢癌(复发,Stage IIIC)+
+  "metastatic papillary carcinoma to lymph node(左盆腔)"=卵巢癌转移, 非乳腺.
+  BRCA1 carrier. 计划: Port placement ASAP + taxol x12 weekly + 周期随访.
+  当前用药均为非肿瘤家庭药.
+
+字段                      判定      理由(医疗维度)
+------------------------- --------- ----------------------------------------
+Reason_for_Visit          打平      均 "New patient", 正确
+Type_of_Cancer            打平      均三阴(BL 给百分比, PL 给 TNBC), 正确
+Stage_of_Cancer           BL更好    ★PL 把卵巢癌 Stage IIIC 串到乳腺并升 Stage IV; BL"未明示"对 [A 类7]
+Distant_Metastasis        BL更好    ★PL "Yes to LN"实为卵巢癌转移史; 乳腺 PET/CT 无转移; BL "No" 对 [A 类7]
+Lab_Results               打平      均 "No labs in note", 正确
+Clinical_Findings         PL更好    PL 含肿瘤生长进展(1.2→2.7)+稳定肺结节(需鉴别非转移); BL 仅一句 [B 类6]
+Current_Medications       PL更好    BL 倒 17 种家庭药; PL 过滤为空 [类5]
+Treatment_Changes         BL更好    ★PL 把 10 种家庭药(眼药/褪黑素/鼻喷)塞进 supportive_meds; BL 较稳 [类5 filter失效]
+goals_of_treatment        打平      复发无转移→意图本身有歧义, 不偏判
+goals_description         PL更好    BL "plan to start taxol"=答非所问; PL "未明示"诚实 [类2]
+Response_Assessment       PL更好    ★BL 把治疗前肿瘤生长当"响应"; PL 正确"尚未治疗无响应" [A 类2/类7]
+Medication_Plan           PL更好    ★BL "无用药计划"完全漏 taxol 化疗! PL 捕捉 taxol x12+周期 [B 类6]
+Therapy_plan              打平      均捕捉 taxol x12, 正确
+radiotherapy_plan         打平      均 None, 正确
+Procedure_Plan            打平      均 Port placement, 正确
+Imaging_Plan              BL更好    ★PL 幻觉"TTE before chemo"(原文无,taxol 不需 echo); BL "None" 对 [A 类3]
+Lab_Plan                  打平      均 None, 正确
+Genetic_Testing_Plan      打平      均 None planned, 正确
+Genetic_Testing_Results   打平      均捕捉 BRCA1 carrier(新字段两边都对!), 正确
+Referral                  PL更好    PL 捕捉外科会诊(specialty consult); BL 全 None 漏 [类6]
+follow_up_next_visit      打平      均正确(周期1,2,5,8,12 随访)
+Advance_care_planning     打平      均 "Not discussed", 正确
+
+ROW 4 小结: PL更好 6 | BL更好 4 | 打平 12  (PL 占优)
+  PL 亮点: ★Medication_Plan 捕捉 taxol(BL 完全漏掉, 致命遗漏); Response 时态正确;
+           current_meds 过滤; findings 进展细节; 外科会诊捕捉.
+  BL 亮点(诚实记录): PL 把卵巢癌史串扰到乳腺分期(同 ROW2 过度分期 bug);
+           supportive_meds 未过滤(filter_supportive_meds 失效); TTE 幻觉.
+  → bug 模式已清晰: (a)stage/met 串扰 (b)plan 时态/幻觉 (c)supportive 未过滤.
