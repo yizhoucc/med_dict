@@ -33,6 +33,8 @@ from ult import (
     extract_schema_keys,
     load_supportive_whitelist,
     filter_procedure_plan,
+    load_drug_dictionary,
+    classify_drug,
 )
 from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm, post_check_letter
 from run import post_fix_letter
@@ -177,9 +179,12 @@ def main():
     print(f"Samples: {len(df)}")
     print()
 
-    # Supportive-care drug whitelist for POST-SUPP-WHITELIST filter [extraction-audit fix]
+    # Supportive-care drug whitelist for POST-SUPP filter [extraction-audit fix]
     supp_whitelist = load_supportive_whitelist()
     print(f"Supportive care whitelist loaded: {len(supp_whitelist)} drugs")
+    # General drug dictionary (name -> category/subclass/function) for medication classification
+    drug_dict = load_drug_dictionary()
+    print(f"Drug dictionary loaded: {len(drug_dict)} drugs")
 
     total_start = time.time()
 
@@ -769,33 +774,50 @@ def main():
                             gtr["genetic_testing_results"] = new_val if new_val.endswith(".") else new_val + "."
                             print(f"  [POST-GENETIC-RESULTS-IHC] Stripped IHC contamination")
 
-        # POST-SUPP-WHITELIST: keep only cancer-supportive-care drugs in supportive_meds [extraction-audit fix]
+        # POST-SUPP-DICT: classify supportive_meds via drug dictionary [drug-dictionary integration]
+        # Keep SUPPORTIVE; drop NON_CANCER and ONCOLOGY (onc drugs belong in current_meds);
+        # for SUPPORTIVE_OR_HOME keep ONLY if the drug appears in the A/P (i.e. actively part of
+        # the chemo-supportive plan, not just a chronic home med). Unknown drugs are kept (no over-deletion).
+        ap_low_for_supp = (assessment_and_plan or "").lower()
         tc_dict = keypoints.get("Treatment_Changes", {})
         if isinstance(tc_dict, dict):
             supp_raw2 = tc_dict.get("supportive_meds", "") or ""
             supp_val2 = (", ".join(supp_raw2) if isinstance(supp_raw2, list) else str(supp_raw2)).strip()
             supp_low2 = supp_val2.lower()
             if supp_val2 and not supp_low2.startswith(("none", "not ", "no ")) and "not taking" not in supp_low2:
-                # Blacklist of clearly NON-cancer-supportive home meds (eye drops, nasal spray,
-                # topical creams, vitamins/supplements, allergy antihistamines, glucose supplies).
-                # Blacklist (not whitelist) so legitimate chemo-supportive meds — antiemetics,
-                # PPIs, mag oxide, muscle relaxants, pain meds, neuropathy meds — are PROTECTED.
-                NON_SUPP = [
-                    "ophthalmic", "eye drop", "into both eyes", "brimonidine", "latanoprost", "alphagan",
-                    "xalatan", "patanol", "olopatadine", "prolensa", "vigamox", "timolol", "dorzolamide",
-                    "nasal", "nasonex", "flonase", "fluticasone",
-                    "cream", "ointment", "topical", "clotrimazole", "lotrimin", "lotrisone", "bengay", "menthol",
-                    "multivitamin", "fish oil", "omega-3", "melatonin", "ascorbic", "vitamin c", "vitamin b",
-                    "b-12", "cyanocobalamin", "ergocalciferol",
-                    "loratadine", "claritin", "cetirizine", "zyrtec", "fexofenadine", "allegra",
-                    "blood glucose", "test strip", "lancet", "glucose monitor", "monitor kit", "syringe-needle",
-                ]
                 items2 = [m.strip() for m in re.split(r',(?![^(]*\))|[;\n]', supp_val2) if m.strip()]
-                kept_supp2 = [m for m in items2 if not any(b in m.lower() for b in NON_SUPP)]
-                if len(kept_supp2) < len(items2):
-                    removed2 = [m for m in items2 if m not in kept_supp2]
+                kept_supp2, removed2 = [], []
+                for m in items2:
+                    cat = classify_drug(m, drug_dict)
+                    if cat in ("NON_CANCER", "ONCOLOGY"):
+                        removed2.append(m)
+                    elif cat == "SUPPORTIVE_OR_HOME":
+                        # keep only if the drug's generic/brand token is in the A/P (active plan context)
+                        first_word = re.split(r'[ (]', m.strip())[0].lower()
+                        if first_word and first_word in ap_low_for_supp:
+                            kept_supp2.append(m)
+                        else:
+                            removed2.append(m)
+                    else:  # SUPPORTIVE or unknown(None) -> keep
+                        kept_supp2.append(m)
+                if removed2:
                     tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
-                    print(f"  [POST-SUPP-BLACKLIST] Removed non-supportive home meds: {removed2}")
+                    print(f"  [POST-SUPP-DICT] Removed non-supportive meds: {removed2}")
+
+        # POST-MEDS-DICT: strip clearly NON_CANCER home meds from current_meds [drug-dictionary integration]
+        # current_meds should be active anticancer therapy; drop dictionary-classified NON_CANCER items.
+        dm_dict = keypoints.get("Current_Medications", {})
+        if isinstance(dm_dict, dict):
+            cm_raw = dm_dict.get("current_meds", "") or ""
+            cm_val = (", ".join(cm_raw) if isinstance(cm_raw, list) else str(cm_raw)).strip()
+            cm_low = cm_val.lower()
+            if cm_val and not cm_low.startswith(("none", "not ", "no ")) and "not taking" not in cm_low:
+                items_cm = [m.strip() for m in re.split(r',(?![^(]*\))|[;\n]', cm_val) if m.strip()]
+                kept_cm = [m for m in items_cm if classify_drug(m, drug_dict) != "NON_CANCER"]
+                if len(kept_cm) < len(items_cm):
+                    removed_cm = [m for m in items_cm if m not in kept_cm]
+                    dm_dict["current_meds"] = ", ".join(kept_cm) if kept_cm else ""
+                    print(f"  [POST-MEDS-DICT] Removed non-cancer home meds from current_meds: {removed_cm}")
 
         # POST-PROC-FILTER: strip imaging/radiation/systemic-therapy from procedure_plan [audit fix]
         # Fixes ROW2 (already-done PET/CT+MRI listed as "needs to undergo"), ROW5/6/8 (DEXA/MRI/TTE
