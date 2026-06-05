@@ -31,6 +31,7 @@ from ult import (
     ChatTemplate,
     try_parse_json,
     extract_schema_keys,
+    load_supportive_whitelist,
 )
 from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm, post_check_letter
 from run import post_fix_letter
@@ -174,6 +175,10 @@ def main():
     print(f"Model: {model_cfg['name']}")
     print(f"Samples: {len(df)}")
     print()
+
+    # Supportive-care drug whitelist for POST-SUPP-WHITELIST filter [extraction-audit fix]
+    supp_whitelist = load_supportive_whitelist()
+    print(f"Supportive care whitelist loaded: {len(supp_whitelist)} drugs")
 
     total_start = time.time()
 
@@ -708,6 +713,74 @@ def main():
                 if len(readable) >= 3:
                     lab_results["lab_summary"] = "Labs present in note (see full note for values)."
                     print(f"  [POST-LAB-REDACTED] Overrode 'Values redacted' (found {len(readable)} readable values)")
+
+        # POST-STAGE-PLACEHOLDER: remove literal [X]/[REDACTED] placeholders from Stage [extraction-audit fix]
+        cancer_pp = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_pp, dict):
+            stage_pp = str(cancer_pp.get("Stage_of_Cancer", "") or "")
+            if re.search(r'\[x\]|\[redacted\]|\[\*+\]', stage_pp, re.IGNORECASE):
+                # Drop the "Originally Stage [X]," fragment, keep the rest (e.g., "metastatic (Stage IV)")
+                cleaned_pp = re.sub(r'(?i)originally stage\s*\[x\][,;]?\s*', '', stage_pp)
+                cleaned_pp = re.sub(r'\[x\]|\[redacted\]|\[\*+\]', '', cleaned_pp, flags=re.IGNORECASE).strip().strip(',;').strip()
+                cleaned_pp = cleaned_pp[0].upper() + cleaned_pp[1:] if cleaned_pp else "Not staged in note"
+                cancer_pp["Stage_of_Cancer"] = cleaned_pp or "Not staged in note"
+                print(f"  [POST-STAGE-PLACEHOLDER] '{stage_pp}' → '{cancer_pp['Stage_of_Cancer']}'")
+
+        # POST-GENETIC-RESULTS-IHC: strip IHC receptor pathology (ER/PR/HER2/Ki67/FISH) that
+        # contaminates genetic_testing_results. If no real molecular/genetic test remains,
+        # clear to "No genetic testing results in note." [extraction-audit fix]
+        gtr = keypoints.get("Genetic_Testing_Results", {})
+        if isinstance(gtr, dict):
+            gval = str(gtr.get("genetic_testing_results", "") or "")
+            gval_low = gval.lower().strip().rstrip('.')
+            if gval_low not in ("no genetic testing results in note", "none", "n/a", ""):
+                GENETIC_KW = [
+                    "brca", "atm", "palb2", "chek2", "mlh1", "msh2", "msh6", "pms2", "epcam",
+                    "lynch", "kras", "tp53", "pik3ca", "braf", "ntrk", "esr1", "egfr", "alk", "ros1",
+                    "cdkn2a", "smad4", "spink1", "msi", "microsatellite", "mmr", "mismatch repair",
+                    "tmb", "tumor mutational", "oncotype", "mammaprint", "foundation", "guardant",
+                    "tempus", "ucsf500", "ngs", "ctdna", "germline", "mutation", "variant",
+                    "pathogenic", "vus", "hrd", "homologous recombination", "pd-l1", "pdl1",
+                    "recurrence score", "non-secretor", "molecular profil", "sequencing", "gene panel",
+                ]
+                ihc_re = re.compile(
+                    r'\b(er|pr|her2|her-2|ki-?67|fish|ihc|erbb2)\b|cent\s*17|sig/nuc|copy #|copy number|amplification',
+                    re.IGNORECASE)
+                if not any(k in gval_low for k in GENETIC_KW):
+                    gtr["genetic_testing_results"] = "No genetic testing results in note."
+                    print(f"  [POST-GENETIC-RESULTS-IHC] Cleared non-genetic (IHC/pathology) value")
+                else:
+                    kept = []
+                    for s in re.split(r'[;\n]', gval):
+                        s_strip = s.strip().rstrip('.,;')
+                        if not s_strip:
+                            continue
+                        s_genetic = any(k in s_strip.lower() for k in GENETIC_KW)
+                        if ihc_re.search(s_strip) and not s_genetic:
+                            continue
+                        kept.append(s_strip)
+                    if not kept:
+                        gtr["genetic_testing_results"] = "No genetic testing results in note."
+                        print(f"  [POST-GENETIC-RESULTS-IHC] All segments were IHC; cleared")
+                    else:
+                        new_val = "; ".join(kept)
+                        if new_val.lower().rstrip('.') != gval_low:
+                            gtr["genetic_testing_results"] = new_val if new_val.endswith(".") else new_val + "."
+                            print(f"  [POST-GENETIC-RESULTS-IHC] Stripped IHC contamination")
+
+        # POST-SUPP-WHITELIST: keep only cancer-supportive-care drugs in supportive_meds [extraction-audit fix]
+        tc_dict = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_dict, dict):
+            supp_raw2 = tc_dict.get("supportive_meds", "") or ""
+            supp_val2 = (", ".join(supp_raw2) if isinstance(supp_raw2, list) else str(supp_raw2)).strip()
+            supp_low2 = supp_val2.lower()
+            if supp_val2 and not supp_low2.startswith(("none", "not ", "no ")) and "not taking" not in supp_low2:
+                items2 = [m.strip() for m in re.split(r'[,;\n]', supp_val2) if m.strip()]
+                kept_supp2 = [m for m in items2 if any(d in m.lower() for d in supp_whitelist)]
+                if len(kept_supp2) < len(items2):
+                    removed2 = [m for m in items2 if m not in kept_supp2]
+                    tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
+                    print(f"  [POST-SUPP-WHITELIST] Removed non-supportive meds: {removed2}")
 
         # 7. Letter generation
         letter = ""
