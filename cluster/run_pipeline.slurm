@@ -19,7 +19,8 @@ echo "=== job $SLURM_JOB_ID on $(hostname); config=$CONFIG ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || true
 
 module load anaconda3-2023.03 cuda-12.4
-source activate medllm
+source /opt/anaconda3-2023.03/etc/profile.d/conda.sh
+conda activate medllm
 
 export HF_HOME=/user_data/yizhouc3/.cache/huggingface
 export HF_HUB_ENABLE_HF_TRANSFER=0
