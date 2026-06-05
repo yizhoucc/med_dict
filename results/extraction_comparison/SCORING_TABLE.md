@@ -28,7 +28,7 @@
 保留：PL 平均 ≥0.65 且 BL 胜出 sample ≤3。其余删除（防 cherry-pick 单例质疑）。
 
 ## 进度跟踪（任务记忆 — 恢复时读这里）
-BREAST(20): [x]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
+BREAST(20): [x]1 [x]2 [x]3 [x]4 [x]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC(20):   [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 ## 累计计数（实时，每题 PL/BL/TIE/NA）
@@ -83,3 +83,36 @@ Q10 STAGE=TIE (均locally advanced/No,一致)
 Q11 NOHALLUC=TIE (PL微加antiemetics,极小)
 Q12 DX-GRANUL=TIE (均三阴+metaplastic组织学)
 小计: PL3 BL0 TIE7 NA2
+
+### BREAST ROW 4 (coral 23) — 71yo 新患者 TNBC 乳腺复发(PET/CT 无转移), 含卵巢癌史, BRCA1+
+Q1 MED-REL=PL (BL17家庭药/PL空)
+Q2 MED-ACTIVE=NA (taxol未起)
+Q3 MED-TEMPORAL=TIE
+Q4 FIND-OBJ=TIE (均客观)
+Q5 FIND-COMPLETE=PL (PL含进展1.2→2.7+稳定肺结节; BL一句)
+Q6 MOLEC=TIE (均BRCA1 carrier)
+Q7 RESP=PL (BL把治疗前生长当疗效; PL正确"未治疗")
+Q8 PLAN-SPEC=PL (BL"无用药计划"漏taxol; PL捕捉taxol x12+周期)
+Q9 PROC-PURE=TIE (均Port)
+Q10 STAGE=BL (PL乳腺复发误判StageIV远处转移[残留bug#2],与自身findings矛盾; BL正确No)
+Q11 NOHALLUC=TIE
+Q12 DX-GRANUL=TIE (均IDC+grade+三受体)
+小计: PL4 BL1 TIE6 NA1
+
+[残留bug #2] note 用"recurrent/metastatic recurrence"时, 乳腺原位复发被过度判 Stage IV 远处转移
+  (ROW4: DistMet"Yes to right lateral breast"=原发灶, 与 findings"no metastatic disease"矛盾) → 待修
+
+### BREAST ROW 5 (coral 24) — 55yo 双侧乳腺癌新患者, s/p双乳切除, MammaPrint高/低危
+Q1 MED-REL=TIE (均无药)
+Q2 MED-ACTIVE=NA (术后辅助未起)
+Q3 MED-TEMPORAL=TIE
+Q4 FIND-OBJ=PL (BL findings只正常查体漏病理; PL客观病理)
+Q5 FIND-COMPLETE=PL (PL双乳病理+MRI+LN; BL仅正常查体)
+Q6 MOLEC=PL (PL捕捉MammaPrint高危结果; BL完全没有)
+Q7 RESP=TIE (均未治疗)
+Q8 PLAN-SPEC=TIE (PL fuller chemo/AI/bone但漏radiation字段; BL有radiation但therapy薄,互抵)
+Q9 PROC-PURE=PL (BL把DEXA影像放procedure; PL干净)
+Q10 STAGE=TIE (均左III/右I一致)
+Q11 NOHALLUC=TIE
+Q12 DX-GRANUL=TIE (均双乳完整受体+grade)
+小计: PL4 BL0 TIE7 NA1 (注:PL漏radiotherapy_plan,不在12题内)
