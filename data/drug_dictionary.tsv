@@ -1,0 +1,291 @@
+# Oncology drug dictionary — GENERAL knowledge (not tuned to any test note)
+# Columns: name<TAB>category<TAB>subclass<TAB>function
+# category: ONCOLOGY (anticancer) | SUPPORTIVE (cancer-supportive care) |
+#           SUPPORTIVE_OR_HOME (depends on context: chemo-supportive vs chronic home use) |
+#           NON_CANCER (unrelated home/chronic medication — exclude from onc med fields)
+# Usage: classify current_meds / supportive_meds; resolve borderline by context for SUPPORTIVE_OR_HOME.
+# Names lowercase; generic and common brand on separate lines.
+name	category	subclass	function
+# ===================== ONCOLOGY: CHEMOTHERAPY (cytotoxic) =====================
+doxorubicin	ONCOLOGY	chemo_anthracycline	cytotoxic anthracycline; cardiotoxic (needs baseline echo)
+adriamycin	ONCOLOGY	chemo_anthracycline	brand of doxorubicin
+liposomal doxorubicin	ONCOLOGY	chemo_anthracycline	liposomal doxorubicin (Doxil)
+doxil	ONCOLOGY	chemo_anthracycline	liposomal doxorubicin
+epirubicin	ONCOLOGY	chemo_anthracycline	anthracycline chemo (Ellence)
+cyclophosphamide	ONCOLOGY	chemo_alkylator	alkylating agent
+cytoxan	ONCOLOGY	chemo_alkylator	brand of cyclophosphamide
+paclitaxel	ONCOLOGY	chemo_taxane	taxane microtubule inhibitor
+taxol	ONCOLOGY	chemo_taxane	brand of paclitaxel
+nab-paclitaxel	ONCOLOGY	chemo_taxane	albumin-bound paclitaxel
+abraxane	ONCOLOGY	chemo_taxane	brand of nab-paclitaxel
+docetaxel	ONCOLOGY	chemo_taxane	taxane chemo
+taxotere	ONCOLOGY	chemo_taxane	brand of docetaxel
+carboplatin	ONCOLOGY	chemo_platinum	platinum agent
+cisplatin	ONCOLOGY	chemo_platinum	platinum agent
+oxaliplatin	ONCOLOGY	chemo_platinum	platinum agent (FOLFIRINOX/FOLFOX)
+capecitabine	ONCOLOGY	chemo_antimetabolite	oral fluoropyrimidine
+xeloda	ONCOLOGY	chemo_antimetabolite	brand of capecitabine
+fluorouracil	ONCOLOGY	chemo_antimetabolite	5-FU fluoropyrimidine
+5-fu	ONCOLOGY	chemo_antimetabolite	5-fluorouracil
+gemcitabine	ONCOLOGY	chemo_antimetabolite	nucleoside analog (pancreatic/breast)
+gemzar	ONCOLOGY	chemo_antimetabolite	brand of gemcitabine
+methotrexate	ONCOLOGY	chemo_antimetabolite	antifolate
+pemetrexed	ONCOLOGY	chemo_antimetabolite	antifolate (Alimta)
+irinotecan	ONCOLOGY	chemo_topoisomerase	topoisomerase I inhibitor
+camptosar	ONCOLOGY	chemo_topoisomerase	brand of irinotecan
+liposomal irinotecan	ONCOLOGY	chemo_topoisomerase	nal-IRI (Onivyde), metastatic pancreatic
+onivyde	ONCOLOGY	chemo_topoisomerase	liposomal irinotecan
+etoposide	ONCOLOGY	chemo_topoisomerase	topoisomerase II inhibitor
+topotecan	ONCOLOGY	chemo_topoisomerase	topoisomerase I inhibitor
+eribulin	ONCOLOGY	chemo_microtubule	microtubule inhibitor (Halaven)
+halaven	ONCOLOGY	chemo_microtubule	brand of eribulin
+ixabepilone	ONCOLOGY	chemo_microtubule	epothilone (Ixempra)
+vinorelbine	ONCOLOGY	chemo_microtubule	vinca alkaloid
+vincristine	ONCOLOGY	chemo_microtubule	vinca alkaloid
+vinblastine	ONCOLOGY	chemo_microtubule	vinca alkaloid
+nab	ONCOLOGY	chemo_taxane	nab-paclitaxel abbreviation
+# ===================== ONCOLOGY: TARGETED THERAPY =====================
+trastuzumab	ONCOLOGY	targeted_her2	anti-HER2 monoclonal antibody
+herceptin	ONCOLOGY	targeted_her2	brand of trastuzumab
+pertuzumab	ONCOLOGY	targeted_her2	anti-HER2 antibody (Perjeta)
+perjeta	ONCOLOGY	targeted_her2	brand of pertuzumab
+ado-trastuzumab emtansine	ONCOLOGY	targeted_her2	T-DM1 antibody-drug conjugate (Kadcyla)
+t-dm1	ONCOLOGY	targeted_her2	ado-trastuzumab emtansine
+kadcyla	ONCOLOGY	targeted_her2	brand of T-DM1
+trastuzumab deruxtecan	ONCOLOGY	targeted_her2	T-DXd ADC (Enhertu)
+t-dxd	ONCOLOGY	targeted_her2	trastuzumab deruxtecan
+enhertu	ONCOLOGY	targeted_her2	brand of T-DXd
+lapatinib	ONCOLOGY	targeted_her2	HER2 tyrosine kinase inhibitor (Tykerb)
+tykerb	ONCOLOGY	targeted_her2	brand of lapatinib
+neratinib	ONCOLOGY	targeted_her2	HER2 TKI (Nerlynx)
+tucatinib	ONCOLOGY	targeted_her2	HER2 TKI (Tukysa)
+palbociclib	ONCOLOGY	targeted_cdk46	CDK4/6 inhibitor (Ibrance)
+ibrance	ONCOLOGY	targeted_cdk46	brand of palbociclib
+ribociclib	ONCOLOGY	targeted_cdk46	CDK4/6 inhibitor (Kisqali)
+kisqali	ONCOLOGY	targeted_cdk46	brand of ribociclib
+abemaciclib	ONCOLOGY	targeted_cdk46	CDK4/6 inhibitor (Verzenio)
+verzenio	ONCOLOGY	targeted_cdk46	brand of abemaciclib
+olaparib	ONCOLOGY	targeted_parp	PARP inhibitor (Lynparza), BRCA+
+lynparza	ONCOLOGY	targeted_parp	brand of olaparib
+talazoparib	ONCOLOGY	targeted_parp	PARP inhibitor (Talzenna)
+rucaparib	ONCOLOGY	targeted_parp	PARP inhibitor
+niraparib	ONCOLOGY	targeted_parp	PARP inhibitor
+bevacizumab	ONCOLOGY	targeted_vegf	anti-VEGF antibody (Avastin)
+avastin	ONCOLOGY	targeted_vegf	brand of bevacizumab
+alpelisib	ONCOLOGY	targeted_pi3k	PIK3CA inhibitor (Piqray)
+everolimus	ONCOLOGY	targeted_mtor	mTOR inhibitor (Afinitor)
+sacituzumab govitecan	ONCOLOGY	targeted_adc	Trop-2 ADC (Trodelvy), TNBC
+trodelvy	ONCOLOGY	targeted_adc	brand of sacituzumab govitecan
+erlotinib	ONCOLOGY	targeted_egfr	EGFR TKI (Tarceva), pancreatic/lung
+olaparib maintenance	ONCOLOGY	targeted_parp	PARP maintenance (pancreatic, gBRCA)
+# ===================== ONCOLOGY: IMMUNOTHERAPY =====================
+pembrolizumab	ONCOLOGY	immunotherapy	anti-PD-1 checkpoint inhibitor (Keytruda)
+keytruda	ONCOLOGY	immunotherapy	brand of pembrolizumab
+nivolumab	ONCOLOGY	immunotherapy	anti-PD-1 (Opdivo)
+opdivo	ONCOLOGY	immunotherapy	brand of nivolumab
+atezolizumab	ONCOLOGY	immunotherapy	anti-PD-L1 (Tecentriq)
+durvalumab	ONCOLOGY	immunotherapy	anti-PD-L1 (Imfinzi)
+ipilimumab	ONCOLOGY	immunotherapy	anti-CTLA-4 (Yervoy)
+dostarlimab	ONCOLOGY	immunotherapy	anti-PD-1 (Jemperli), dMMR
+cemiplimab	ONCOLOGY	immunotherapy	anti-PD-1 (Libtayo)
+# ===================== ONCOLOGY: ENDOCRINE THERAPY (breast) =====================
+tamoxifen	ONCOLOGY	endocrine_serm	selective estrogen receptor modulator
+nolvadex	ONCOLOGY	endocrine_serm	brand of tamoxifen
+toremifene	ONCOLOGY	endocrine_serm	SERM
+anastrozole	ONCOLOGY	endocrine_ai	aromatase inhibitor
+arimidex	ONCOLOGY	endocrine_ai	brand of anastrozole
+letrozole	ONCOLOGY	endocrine_ai	aromatase inhibitor
+femara	ONCOLOGY	endocrine_ai	brand of letrozole
+exemestane	ONCOLOGY	endocrine_ai	aromatase inhibitor
+aromasin	ONCOLOGY	endocrine_ai	brand of exemestane
+fulvestrant	ONCOLOGY	endocrine_serd	selective ER degrader (Faslodex)
+faslodex	ONCOLOGY	endocrine_serd	brand of fulvestrant
+goserelin	ONCOLOGY	endocrine_gnrh	GnRH agonist (Zoladex), ovarian suppression
+zoladex	ONCOLOGY	endocrine_gnrh	brand of goserelin
+leuprolide	ONCOLOGY	endocrine_gnrh	GnRH agonist (Lupron), ovarian suppression
+lupron	ONCOLOGY	endocrine_gnrh	brand of leuprolide
+# ===================== SUPPORTIVE: ANTIEMETIC =====================
+ondansetron	SUPPORTIVE	antiemetic	5-HT3 antiemetic (Zofran)
+zofran	SUPPORTIVE	antiemetic	brand of ondansetron
+granisetron	SUPPORTIVE	antiemetic	5-HT3 antiemetic
+palonosetron	SUPPORTIVE	antiemetic	5-HT3 antiemetic (Aloxi)
+aprepitant	SUPPORTIVE	antiemetic	NK1 antiemetic (Emend)
+fosaprepitant	SUPPORTIVE	antiemetic	NK1 antiemetic IV
+prochlorperazine	SUPPORTIVE	antiemetic	dopamine antagonist antiemetic (Compazine)
+compazine	SUPPORTIVE	antiemetic	brand of prochlorperazine
+promethazine	SUPPORTIVE	antiemetic	antiemetic (Phenergan)
+metoclopramide	SUPPORTIVE	antiemetic	prokinetic antiemetic (Reglan)
+olanzapine	SUPPORTIVE	antiemetic	antiemetic for CINV (also antipsychotic)
+dronabinol	SUPPORTIVE	antiemetic	cannabinoid antiemetic/appetite (Marinol)
+scopolamine	SUPPORTIVE	antiemetic	antiemetic patch
+# ===================== SUPPORTIVE: ANALGESIC (cancer pain) =====================
+morphine	SUPPORTIVE	analgesic_opioid	opioid analgesic
+ms contin	SUPPORTIVE	analgesic_opioid	extended-release morphine
+oxycodone	SUPPORTIVE	analgesic_opioid	opioid analgesic
+roxicodone	SUPPORTIVE	analgesic_opioid	immediate-release oxycodone
+oxycontin	SUPPORTIVE	analgesic_opioid	extended-release oxycodone
+hydromorphone	SUPPORTIVE	analgesic_opioid	opioid (Dilaudid)
+dilaudid	SUPPORTIVE	analgesic_opioid	brand of hydromorphone
+fentanyl	SUPPORTIVE	analgesic_opioid	opioid patch (Duragesic)
+methadone	SUPPORTIVE	analgesic_opioid	opioid for cancer pain
+tramadol	SUPPORTIVE	analgesic_opioid	weak opioid (Ultram)
+hydrocodone	SUPPORTIVE	analgesic_opioid	opioid
+codeine	SUPPORTIVE	analgesic_opioid	weak opioid
+gabapentin	SUPPORTIVE	analgesic_neuropathic	neuropathic pain (chemo neuropathy) — also chronic home use
+pregabalin	SUPPORTIVE	analgesic_neuropathic	neuropathic pain (Lyrica)
+duloxetine	SUPPORTIVE	analgesic_neuropathic	CIPN/neuropathic pain (Cymbalta)
+# ===================== SUPPORTIVE: BONE-MODIFYING =====================
+zoledronic acid	SUPPORTIVE	bone	bisphosphonate (Zometa=bone mets; Reclast=osteoporosis)
+zometa	SUPPORTIVE	bone	zoledronic acid for bone mets
+pamidronate	SUPPORTIVE	bone	bisphosphonate (Aredia)
+denosumab	SUPPORTIVE	bone	RANKL inhibitor (Xgeva=bone mets; Prolia=osteoporosis)
+xgeva	SUPPORTIVE	bone	denosumab for bone mets
+prolia	SUPPORTIVE_OR_HOME	bone	denosumab for osteoporosis
+# ===================== SUPPORTIVE: GROWTH FACTOR =====================
+filgrastim	SUPPORTIVE	growth_factor	G-CSF (Neupogen)
+neupogen	SUPPORTIVE	growth_factor	brand of filgrastim
+pegfilgrastim	SUPPORTIVE	growth_factor	long-acting G-CSF (Neulasta)
+neulasta	SUPPORTIVE	growth_factor	brand of pegfilgrastim
+sargramostim	SUPPORTIVE	growth_factor	GM-CSF (Leukine)
+epoetin	SUPPORTIVE	growth_factor	erythropoietin (Procrit/Epogen)
+darbepoetin	SUPPORTIVE	growth_factor	ESA (Aranesp)
+# ===================== SUPPORTIVE: BOWEL / GI (chemo-related) =====================
+docusate	SUPPORTIVE	bowel	stool softener (opioid-induced constipation)
+colace	SUPPORTIVE	bowel	brand of docusate
+senna	SUPPORTIVE	bowel	stimulant laxative
+polyethylene glycol	SUPPORTIVE	bowel	osmotic laxative (Miralax)
+miralax	SUPPORTIVE	bowel	brand of polyethylene glycol
+bisacodyl	SUPPORTIVE	bowel	stimulant laxative (Dulcolax)
+loperamide	SUPPORTIVE	bowel	antidiarrheal (Imodium)
+diphenoxylate-atropine	SUPPORTIVE	bowel	antidiarrheal (Lomotil)
+# ===================== SUPPORTIVE: OTHER cancer-supportive =====================
+dexamethasone	SUPPORTIVE	steroid	corticosteroid (antiemetic/chemo premed)
+decadron	SUPPORTIVE	steroid	brand of dexamethasone
+diphenhydramine	SUPPORTIVE	premedication	antihistamine premed for infusion reactions (Benadryl)
+benadryl	SUPPORTIVE	premedication	brand of diphenhydramine
+allopurinol	SUPPORTIVE_OR_HOME	other	tumor lysis prophylaxis (also gout home use)
+magnesium oxide	SUPPORTIVE_OR_HOME	electrolyte	Mg repletion (often with chemo/EGFR/platinum)
+pancrelipase	SUPPORTIVE	pancreatic_enzyme	enzyme replacement (pancreatic cancer/insufficiency)
+creon	SUPPORTIVE	pancreatic_enzyme	brand of pancrelipase
+octreotide	SUPPORTIVE	other	for malignant bowel obstruction/secretory diarrhea
+megestrol	SUPPORTIVE	appetite	appetite stimulant (Megace)
+enoxaparin	SUPPORTIVE_OR_HOME	anticoagulant	LMWH (cancer-associated VTE; also general)
+lovenox	SUPPORTIVE_OR_HOME	anticoagulant	brand of enoxaparin
+# ===================== CONTEXT-DEPENDENT (supportive in chemo vs chronic home) =====================
+prednisone	SUPPORTIVE_OR_HOME	steroid	steroid (chemo regimen vs chronic inflammatory home use)
+prednisolone	SUPPORTIVE_OR_HOME	steroid	steroid
+methylprednisolone	SUPPORTIVE_OR_HOME	steroid	steroid (Solu-Medrol)
+lorazepam	SUPPORTIVE_OR_HOME	anxiolytic	anticipatory nausea/anxiety (chemo) vs chronic anxiety
+ativan	SUPPORTIVE_OR_HOME	anxiolytic	brand of lorazepam
+acetaminophen	SUPPORTIVE_OR_HOME	analgesic_nonopioid	pain/fever (cancer pain vs OTC home)
+tylenol	SUPPORTIVE_OR_HOME	analgesic_nonopioid	brand of acetaminophen
+ibuprofen	SUPPORTIVE_OR_HOME	analgesic_nonopioid	NSAID (cancer pain vs OTC home use)
+naproxen	SUPPORTIVE_OR_HOME	analgesic_nonopioid	NSAID
+meloxicam	SUPPORTIVE_OR_HOME	analgesic_nonopioid	NSAID
+celecoxib	SUPPORTIVE_OR_HOME	analgesic_nonopioid	COX-2 NSAID
+omeprazole	SUPPORTIVE_OR_HOME	gi_acid	PPI (chemo GI prophylaxis vs chronic GERD)
+pantoprazole	SUPPORTIVE_OR_HOME	gi_acid	PPI
+esomeprazole	SUPPORTIVE_OR_HOME	gi_acid	PPI (Nexium)
+furosemide	SUPPORTIVE_OR_HOME	diuretic	Lasix (fluid overload management vs chronic CHF home)
+lasix	SUPPORTIVE_OR_HOME	diuretic	brand of furosemide
+cyclobenzaprine	SUPPORTIVE_OR_HOME	muscle_relaxant	muscle spasm/myalgia (Flexeril)
+flexeril	SUPPORTIVE_OR_HOME	muscle_relaxant	brand of cyclobenzaprine
+# ===================== NON_CANCER: antihypertensive / cardiac =====================
+amlodipine	NON_CANCER	antihypertensive	calcium channel blocker (Norvasc)
+norvasc	NON_CANCER	antihypertensive	brand of amlodipine
+lisinopril	NON_CANCER	antihypertensive	ACE inhibitor
+losartan	NON_CANCER	antihypertensive	ARB
+valsartan	NON_CANCER	antihypertensive	ARB (Diovan)
+diovan	NON_CANCER	antihypertensive	brand of valsartan
+metoprolol	NON_CANCER	antihypertensive	beta blocker
+atenolol	NON_CANCER	antihypertensive	beta blocker (Tenormin)
+tenormin	NON_CANCER	antihypertensive	brand of atenolol
+bisoprolol	NON_CANCER	antihypertensive	beta blocker (Zebeta)
+carvedilol	NON_CANCER	antihypertensive	beta blocker
+hydrochlorothiazide	NON_CANCER	antihypertensive	thiazide diuretic
+triamterene-hydrochlorothiazide	NON_CANCER	antihypertensive	diuretic combo (Dyazide)
+dyazide	NON_CANCER	antihypertensive	brand of triamterene-HCTZ
+nitroglycerin	NON_CANCER	cardiac	angina (Nitrostat)
+aspirin	NON_CANCER	cardiac	antiplatelet/cardioprotective
+# ===================== NON_CANCER: antidiabetic =====================
+metformin	NON_CANCER	antidiabetic	biguanide (Glucophage)
+glucophage	NON_CANCER	antidiabetic	brand of metformin
+glipizide	NON_CANCER	antidiabetic	sulfonylurea (Glucotrol)
+glimepiride	NON_CANCER	antidiabetic	sulfonylurea
+insulin glargine	NON_CANCER	antidiabetic	long-acting insulin (Lantus)
+lantus	NON_CANCER	antidiabetic	brand of insulin glargine
+insulin aspart	NON_CANCER	antidiabetic	rapid insulin (Novolog)
+sitagliptin	NON_CANCER	antidiabetic	DPP-4 inhibitor (Januvia)
+# ===================== NON_CANCER: statin / lipid =====================
+atorvastatin	NON_CANCER	statin	lipid-lowering (Lipitor)
+lipitor	NON_CANCER	statin	brand of atorvastatin
+simvastatin	NON_CANCER	statin	statin (Zocor)
+rosuvastatin	NON_CANCER	statin	statin (Crestor)
+pravastatin	NON_CANCER	statin	statin
+# ===================== NON_CANCER: ophthalmic =====================
+latanoprost	NON_CANCER	ophthalmic	glaucoma drops (Xalatan)
+xalatan	NON_CANCER	ophthalmic	brand of latanoprost
+brimonidine	NON_CANCER	ophthalmic	glaucoma drops (Alphagan)
+alphagan	NON_CANCER	ophthalmic	brand of brimonidine
+timolol	NON_CANCER	ophthalmic	glaucoma drops
+dorzolamide	NON_CANCER	ophthalmic	glaucoma drops
+olopatadine	NON_CANCER	ophthalmic	allergy eye drops (Patanol)
+prednisolone acetate	NON_CANCER	ophthalmic	steroid eye drops (Pred Forte)
+bromfenac	NON_CANCER	ophthalmic	NSAID eye drops (Prolensa)
+moxifloxacin	NON_CANCER	ophthalmic	antibiotic eye drops (Vigamox)
+dextran 70-hypromellose	NON_CANCER	ophthalmic	artificial tears
+# ===================== NON_CANCER: nasal / respiratory / allergy =====================
+mometasone	NON_CANCER	nasal	nasal steroid spray (Nasonex)
+nasonex	NON_CANCER	nasal	brand of mometasone nasal
+fluticasone	NON_CANCER	nasal	nasal steroid (Flonase)
+albuterol	NON_CANCER	respiratory	bronchodilator inhaler (Ventolin/ProAir)
+ventolin	NON_CANCER	respiratory	brand of albuterol
+montelukast	NON_CANCER	respiratory	asthma/allergy (Singulair)
+benzonatate	NON_CANCER	respiratory	cough suppressant (Tessalon)
+guaifenesin	NON_CANCER	respiratory	expectorant
+loratadine	NON_CANCER	antihistamine	allergy (Claritin)
+claritin	NON_CANCER	antihistamine	brand of loratadine
+cetirizine	NON_CANCER	antihistamine	allergy (Zyrtec)
+fexofenadine	NON_CANCER	antihistamine	allergy (Allegra)
+# ===================== NON_CANCER: topical =====================
+clotrimazole	NON_CANCER	topical	antifungal cream (Lotrimin)
+clotrimazole-betamethasone	NON_CANCER	topical	antifungal/steroid cream (Lotrisone)
+lotrisone	NON_CANCER	topical	brand of clotrimazole-betamethasone
+menthol	NON_CANCER	topical	topical analgesic rub (Bengay)
+mupirocin	NON_CANCER	topical	topical antibiotic
+# ===================== NON_CANCER: vitamin / supplement =====================
+multivitamin	NON_CANCER	supplement	multivitamin
+vitamin d	NON_CANCER	supplement	vitamin D supplement
+ergocalciferol	NON_CANCER	supplement	vitamin D2
+cholecalciferol	NON_CANCER	supplement	vitamin D3
+cyanocobalamin	NON_CANCER	supplement	vitamin B12
+vitamin b-12	NON_CANCER	supplement	vitamin B12
+ascorbic acid	NON_CANCER	supplement	vitamin C
+vitamin c	NON_CANCER	supplement	vitamin C
+fish oil	NON_CANCER	supplement	omega-3 supplement
+omega-3	NON_CANCER	supplement	omega-3 supplement
+melatonin	NON_CANCER	supplement	sleep supplement
+calcium carbonate	NON_CANCER	supplement	calcium supplement (also bone-support context)
+calcium carbonate-vitamin d	NON_CANCER	supplement	calcium+vitamin D supplement
+coq10	NON_CANCER	supplement	coenzyme Q10 supplement
+folic acid	NON_CANCER	supplement	folate supplement
+# ===================== NON_CANCER: GI / psych / sleep / thyroid / GU / other home =====================
+famotidine	NON_CANCER	gi_acid	H2 blocker (Pepcid)
+sucralfate	NON_CANCER	gi	mucosal protectant
+zolpidem	NON_CANCER	sleep	hypnotic (Ambien)
+ambien	NON_CANCER	sleep	brand of zolpidem
+trazodone	NON_CANCER	psych	sleep/antidepressant
+sertraline	NON_CANCER	psych	SSRI (Zoloft)
+escitalopram	NON_CANCER	psych	SSRI (Lexapro)
+alprazolam	NON_CANCER	psych	benzodiazepine (Xanax)
+levothyroxine	NON_CANCER	thyroid	thyroid hormone (Synthroid)
+synthroid	NON_CANCER	thyroid	brand of levothyroxine
+tamsulosin	NON_CANCER	gu	BPH alpha blocker (Flomax)
+finasteride	NON_CANCER	gu	BPH/5-ARI
+baclofen	NON_CANCER	muscle_relaxant	chronic muscle spasticity (home)
+rivaroxaban	NON_CANCER	anticoagulant	DOAC (Xarelto) — chronic home anticoagulation
+xarelto	NON_CANCER	anticoagulant	brand of rivaroxaban
+apixaban	NON_CANCER	anticoagulant	DOAC (Eliquis)
+warfarin	NON_CANCER	anticoagulant	vitamin K antagonist
+blood glucose test strip	NON_CANCER	device	glucose monitoring supply
+lancets	NON_CANCER	device	glucose monitoring supply

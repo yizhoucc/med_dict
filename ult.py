@@ -64,6 +64,49 @@ def load_genetic_tests(path="data/genetic_tests.txt"):
     return terms
 
 
+def load_drug_dictionary(path="data/drug_dictionary.tsv"):
+    """Load structured drug dictionary: name -> {category, subclass, function}.
+
+    category: ONCOLOGY | SUPPORTIVE | SUPPORTIVE_OR_HOME | NON_CANCER.
+    Built from general oncology pharmacology knowledge (not tuned to any test note).
+    Use to classify current_meds / supportive_meds and to look up a drug's function.
+    """
+    d = {}
+    try:
+        with open(path) as f:
+            for line in f:
+                if not line.strip() or line.startswith("#") or line.startswith("name\t"):
+                    continue
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 4:
+                    continue
+                name, category, subclass, function = parts
+                d[name.strip().lower()] = {
+                    "category": category.strip(),
+                    "subclass": subclass.strip(),
+                    "function": function.strip(),
+                }
+    except FileNotFoundError:
+        return {}
+    return d
+
+
+def classify_drug(med_text, drug_dict):
+    """Return the dictionary category for a medication string, matching the longest
+    dictionary drug name found as a substring. Returns None if no match.
+    Used to classify current_meds / supportive_meds entries by category."""
+    if not med_text or not isinstance(med_text, str):
+        return None
+    t = med_text.lower()
+    best = None
+    best_len = 0
+    for name, info in drug_dict.items():
+        if name in t and len(name) > best_len:
+            best = info["category"]
+            best_len = len(name)
+    return best
+
+
 def filter_current_meds(parsed, whitelist):
     val = parsed.get("current_meds", "")
     if isinstance(val, list):
