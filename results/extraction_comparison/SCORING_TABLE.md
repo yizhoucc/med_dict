@@ -28,11 +28,25 @@
 保留：PL 平均 ≥0.65 且 BL 胜出 sample ≤3。其余删除（防 cherry-pick 单例质疑）。
 
 ## 进度跟踪（任务记忆 — 恢复时读这里）
-BREAST(20): [x]1 [x]2 [x]3 [x]4 [x]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
+BREAST(20): [x]1 [x]2 [x]3 [x]4 [x]5 [x]6 [x]7 [x]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 PDAC(20):   [ ]1 [ ]2 [ ]3 [ ]4 [ ]5 [ ]6 [ ]7 [ ]8 [ ]9 [ ]10 [ ]11 [ ]12 [ ]13 [ ]14 [ ]15 [ ]16 [ ]17 [ ]18 [ ]19 [ ]20
 
 ## 累计计数（实时，每题 PL/BL/TIE/NA）
-(待评测填充)
+截至 BREAST ROW 1-8 (8 行已审, 共 96 格): 总 PL 32 / BL 4 / TIE 49 / NA 11 (PL:BL=8:1)
+每题(breast1-8) PL/BL/TIE/NA:
+  Q1 MED-REL      PL6 BL0 TIE2 NA0  ← 强 PL, 保留
+  Q2 MED-ACTIVE   PL1 BL0 TIE0 NA7  ← 待更多在治疗行 (非NA时全PL)
+  Q3 MED-TEMPORAL PL0 BL0 TIE8 NA0  ← 全TIE, 候删
+  Q4 FIND-OBJ     PL3 BL0 TIE5 NA0  ← PL倾向, 保留
+  Q5 FIND-COMPLETE PL8 BL0 TIE0 NA0 ← 完美PL, 保留
+  Q6 MOLEC        PL3 BL0 TIE1 NA4  ← 有检测时全PL, 保留
+  Q7 RESP         PL2 BL1 TIE5 NA0  ← 弱PL
+  Q8 PLAN-SPEC    PL4 BL0 TIE4 NA0  ← PL倾向, 保留
+  Q9 PROC-PURE    PL1 BL0 TIE7 NA0  ← 弱(BL仅ROW5放DEXA)
+  Q10 STAGE       PL1 BL2 TIE5 NA0  ← 残留stage bug拖累, 修后预期翻正
+  Q11 NOHALLUC    PL0 BL1 TIE7 NA0  ← 弱(ROW2残留), 候删
+  Q12 DX-GRANUL   PL3 BL0 TIE5 NA0  ← PL倾向, 保留
+注: 待审 BREAST 9-20 + PDAC 1-20 (32 行). 残留stage bug #1/#2 修后 Q10/Q11 预期改善.
 
 ================================================================================
 逐 sample 评分
@@ -116,3 +130,48 @@ Q10 STAGE=TIE (均左III/右I一致)
 Q11 NOHALLUC=TIE
 Q12 DX-GRANUL=TIE (均双乳完整受体+grade)
 小计: PL4 BL0 TIE7 NA1 (注:PL漏radiotherapy_plan,不在12题内)
+
+### BREAST ROW 6 (coral 25) — 53yo HR-/HER2+, 疑似骨转移, 颈动脉paraganglioma
+Q1 MED-REL=PL (BL10家庭药/PL空)
+Q2 MED-ACTIVE=NA (THP未起)
+Q3 MED-TEMPORAL=TIE
+Q4 FIND-OBJ=TIE (均客观)
+Q5 FIND-COMPLETE=PL (PL含病理IDC/HER2 3+/Ki67+体检7x5cm; BL略简)
+Q6 MOLEC=NA (仅IHC受体)
+Q7 RESP=PL (BL"预期excellent response"当现状; PL正确"未治疗")
+Q8 PLAN-SPEC=TIE (均THP具体)
+Q9 PROC-PURE=TIE (均纯净;BL多biopsy但Q9仅考纯度)
+Q10 STAGE=TIE (PL"Suspected StageIV"+骨转移,颈动脉已移除,一致; BL亦suspected)
+Q11 NOHALLUC=TIE
+Q12 DX-GRANUL=PL (PL含IDC+grade+ER/PR/HER2 3+; BL仅HR-/HER2+)
+小计: PL4 BL0 TIE6 NA2 (Stage修复:Suspected+carotid移除+字段一致)
+
+### BREAST ROW 7 (coral 26) — 44yo Lynch多癌种, 转移性TNBC在用abraxane+pembro, germline MSH2+
+Q1 MED-REL=PL (PL抓抗癌药; BL 13家庭药)
+Q2 MED-ACTIVE=PL (PL抓abraxane+pembro; BL完全漏抗癌药)
+Q3 MED-TEMPORAL=TIE
+Q4 FIND-OBJ=PL (BL findings=主观症状清单; PL客观影像/病理)
+Q5 FIND-COMPLETE=PL (PL全PET/CT灶+活检确诊; BL仅症状)
+Q6 MOLEC=PL (PL全panel MSH2+BRCA/8基因阴; BL仅MSH2)
+Q7 RESP=TIE (均不完美:PL含腋窝改善但时序微误;BL仅"progression")
+Q8 PLAN-SPEC=PL (PL点名abraxane+pembro+方案; BL"continue current meds"含糊)
+Q9 PROC-PURE=TIE (均Port)
+Q10 STAGE=PL (PL正确IIB→IV一致; BL"not specified")
+Q11 NOHALLUC=TIE
+Q12 DX-GRANUL=PL (PL全三阴+IDC+转移; BL省PR/组织学)
+小计: PL8 BL0 TIE4 NA0
+
+### BREAST ROW 8 (coral 27) — 70yo Stage IIA 新患者, AC+paclitaxel, 真实TTE, MammaPrint高危
+Q1 MED-REL=PL (BL 9家庭药/PL空)
+Q2 MED-ACTIVE=NA (AC+pac未起)
+Q3 MED-TEMPORAL=TIE
+Q4 FIND-OBJ=PL (BL findings术后症状; PL病理IDC/2-2LN/DCIS)
+Q5 FIND-COMPLETE=PL (PL病理完整; BL仅术后查体)
+Q6 MOLEC=PL (PL抓MammaPrint高危; BL漏)
+Q7 RESP=TIE (均未治疗)
+Q8 PLAN-SPEC=TIE (均AC+paclitaxel+日期)
+Q9 PROC-PURE=TIE (TTE已被filter移出procedure)
+Q10 STAGE=TIE (均pT2(m)N1a/No)
+Q11 NOHALLUC=TIE
+Q12 DX-GRANUL=TIE (均完整受体+grade)
+小计: PL4 BL0 TIE7 NA1
