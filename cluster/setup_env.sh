@@ -14,6 +14,7 @@ conda activate medllm
 pip install --upgrade pip
 # vLLM (pins its own torch+cuda runtime; transformers pulled in as dep). Adjust version if incompat.
 pip install "vllm==0.6.6"
+pip install "transformers==4.47.1"   # pin: vllm 0.6.6 breaks with mismatched transformers (ProcessorMixin import error)
 pip install pandas pyyaml requests openai textstat
 
 python -c "import vllm, pandas, yaml, textstat, openai; print('env OK, vllm', vllm.__version__)"
