@@ -42,7 +42,8 @@ Cancer_Diagnosis: |
   - Example with recurrence: "ER+/PR+/HER2- IDC (micropapillary features) with metastatic recurrence (left cervical LN)"
   Do NOT write just "breast cancer" or "MBC" — always include the subtype, receptor status, grade, and special features when available in the note.
   IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, Assessment/Plan, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
-  IMPORTANT: If the Assessment/Plan says "HR+" or "hormone receptor positive", this means ER+ (and usually PR+). If it says "her 2 negative" or "HER2-" or "*****-", this means HER2 NEGATIVE. Do NOT write "not specified" when the A/P explicitly states receptor status.
+  IMPORTANT: If the Assessment/Plan says "HR+" or "hormone receptor positive", this means ER+. If it says "her 2 negative" or "HER2-" or "*****-", this means HER2 NEGATIVE. Do NOT write "not specified" when the A/P explicitly states receptor status.
+  CRITICAL — PR (progesterone receptor): If the note states a SPECIFIC PR result anywhere (e.g., "progesterone-receptor negative", "PR negative", "PR 0%", "PR+ 90%"), USE that exact result. Do NOT assume "PR+" just because the cancer is called "HR+" or "hormone-receptor positive" — a tumor can be ER+/PR- and still be HR+. Only leave PR unstated if no specific PR result appears in the note.
 
   HER2 status rules — follow strictly:
   - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.

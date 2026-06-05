@@ -32,6 +32,7 @@ from ult import (
     try_parse_json,
     extract_schema_keys,
     load_supportive_whitelist,
+    filter_procedure_plan,
 )
 from letter_generation import flatten_keypoints, _clean_keypoints_for_letter, _extract_ap_section, verify_letter_faithfulness_vllm, post_check_letter
 from run import post_fix_letter
@@ -795,6 +796,16 @@ def main():
                     removed2 = [m for m in items2 if m not in kept_supp2]
                     tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
                     print(f"  [POST-SUPP-BLACKLIST] Removed non-supportive home meds: {removed2}")
+
+        # POST-PROC-FILTER: strip imaging/radiation/systemic-therapy from procedure_plan [audit fix]
+        # Fixes ROW2 (already-done PET/CT+MRI listed as "needs to undergo"), ROW5/6/8 (DEXA/MRI/TTE
+        # miscategorized as procedures). Keeps real procedures (port, biopsy, surgery).
+        pp = keypoints.get("Procedure_Plan", {})
+        if isinstance(pp, dict):
+            _proc_log = []
+            filter_procedure_plan(pp, _proc_log)
+            for _line in _proc_log:
+                print(_line.strip())
 
         # POST-MET-RECONCILE: final stage/met reconciliation AFTER indeterminate/brain removals [audit fix]
         # Fixes ordering bug where POST-INDETERMINATE-MET removed a distant site (e.g. liver cyst)
