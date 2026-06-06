@@ -3052,6 +3052,42 @@ def main():
                     cancer["Stage_of_Cancer"] = corrected
                     print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
+        # POST-STAGE-CLINICAL: the note explicitly states "clinical stage X" / "pathologic stage X"
+        # for THIS cancer — that is the physician's own formal stage and must be transcribed
+        # faithfully, overriding an LLM-invented sub-stage or a clinical-vs-pathologic mislabel
+        # (b10: note says "T2N1, clinical stage II" but the model emitted "Stage IIA (pT2N1)" — wrong
+        # sub-letter [T2N1=IIB not IIA] AND clinical mislabeled as pathologic). Capture the stated
+        # stage and its adjacent (correctly-prefixed) TNM. Guard against another primary's stage in PMH.
+        # Runs before NOBASIS so the faithful clinical stage carries an anchor and survives. [round5 #A, b10]
+        cancer_cl = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_cl, dict):
+            hay_cl = (assessment_and_plan or "") + " \n " + (note_text or "")
+            m_cl = re.search(r'(clinical|pathologic|pathological)\s+stage\s+(iv|iii[abc]?|ii[abc]?|i[abc]?)\b',
+                             hay_cl, re.IGNORECASE)
+            if m_cl:
+                ctx_cl = hay_cl[max(0, m_cl.start() - 45):m_cl.start()].lower()
+                OTHER_CA_CL = ('ovarian', 'lung cancer', 'colon', 'colorectal', 'prostate', 'thyroid',
+                               'melanoma', 'lymphoma', 'leukemia', 'endometrial', 'cervical cancer',
+                               'renal cell', 'bladder')
+                if not any(oc in ctx_cl for oc in OTHER_CA_CL):
+                    kind_cl = "Clinical" if m_cl.group(1).lower().startswith("clinic") else "Pathologic"
+                    pref_cl = "c" if kind_cl == "Clinical" else "p"
+                    stg_cl = m_cl.group(2).upper()
+                    win_cl = hay_cl[max(0, m_cl.start() - 30):m_cl.end() + 30]
+                    tnm_cl = re.search(r'((?:c|p|yp|yc)?t[0-4][a-d]?(?:\([a-z]+\))?\s*,?\s*[cp]?n[0-3x][a-c]?)',
+                                       win_cl, re.IGNORECASE)
+                    if tnm_cl:
+                        raw_cl = re.sub(r'\s+', '', tnm_cl.group(1))
+                        mp_cl = re.match(r'(?i)(c|p|yp|yc)(t.*)', raw_cl)
+                        tnm_norm_cl = (mp_cl.group(1).lower() + mp_cl.group(2).upper()) if mp_cl else (pref_cl + raw_cl.upper())
+                        new_cl = f"{kind_cl} stage {stg_cl} ({tnm_norm_cl})"
+                    else:
+                        new_cl = f"{kind_cl} stage {stg_cl}"
+                    old_cl = str(cancer_cl.get("Stage_of_Cancer", "") or "")
+                    if old_cl.strip().lower() != new_cl.lower():
+                        cancer_cl["Stage_of_Cancer"] = new_cl
+                        print(f"    [POST-STAGE-CLINICAL] note states {kind_cl.lower()} stage → '{new_cl}' (was '{old_cl}')")
+
         # POST-STAGE-NOBASIS: a numeric AJCC stage (I-IV) must be anchored to evidence the
         # note actually gives for THIS cancer — otherwise it is fabrication (b4: a cT2N0,
         # non-metastatic breast note whose only "stage" text is an unrelated ovarian-cancer
@@ -3119,6 +3155,26 @@ def main():
                     cancer_ex["Stage_of_Cancer"] = "Early stage"
                     print(f"    [POST-STAGE-EXPLICIT] captured 'Early stage'")
 
+        # POST-STAGE-EARLY-VERIFY: an "Early stage" label (model- or hook-emitted) is contradicted when
+        # the note documents a large primary (>5 cm) or distant lesions (lung/liver/bone/peritoneal
+        # nodules/lesions/mets). b20: the subjective says "early stage breast cancer" but the impression
+        # describes bilateral >10 cm and 9 cm masses with lung/liver lesions — not early. Demote to a
+        # faithful non-staged statement rather than asserting a contradicted "early stage". [round5 #A, b20]
+        cancer_ev = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_ev, dict):
+            stage_ev2 = str(cancer_ev.get("Stage_of_Cancer", "") or "")
+            if re.search(r'(?i)\bearly[- ]stage\b', stage_ev2):
+                hay_ev = ((assessment_and_plan or "") + " \n " + (note_text or "")).lower()
+                big_primary = bool(re.search(r'>?\s*(?:[5-9]|1\d|2\d)(?:\.\d+)?\s*cm', hay_ev)) or '>10' in hay_ev
+                distant_les = bool(re.search(
+                    r'(?:lung|liver|hepatic|pulmonary|bone|osseous|peritoneal)\s+(?:nodule|lesion|metasta|mass|implant)',
+                    hay_ev))
+                if big_primary or distant_les:
+                    new_ev = ("Not staged in note (locally advanced; distant lesions unconfirmed)"
+                              if distant_les else "Not staged in note (locally advanced)")
+                    cancer_ev["Stage_of_Cancer"] = new_ev
+                    print(f"    [POST-STAGE-EARLY-VERIFY] 'early stage' contradicted by large primary/distant lesions → '{new_ev}'")
+
         # POST-STAGE-MBC: de novo / explicit metastatic breast cancer ("de novo MBC", "metastatic breast
         # cancer", physician says "not curable") with distant spread (incl. cervical nodes, which are M1
         # for breast) is Stage IV — the model sometimes under-stages it as III (b15). [2026-06-06, round4 #4]
@@ -3135,8 +3191,15 @@ def main():
                     or bool(re.search(r'metastasi[sz]ed to|distant metasta', hay_mbc))
                 if mbc_sig and distant_present:
                     old_mbc = stage_mbc
-                    cancer_mbc["Stage_of_Cancer"] = "Stage IV (metastatic)"
-                    print(f"    [POST-STAGE-MBC] de novo/explicit MBC + distant → Stage IV (was '{old_mbc}')")
+                    # hedge when the note frames the MBC as presumptive / pending biopsy confirmation
+                    # (b15: "if we confirm ... de novo MBC", "presumptively", "to prove this hypothesis",
+                    # workup "not yet complete") — a confirmed Stage IV would over-call it.
+                    hedge_mbc = bool(re.search(
+                        r'if we confirm|presumptiv|presumed|to prove this|workup is not|not yet complete'
+                        r'|if (?:she|he|the patient) (?:does )?(?:have|has)', hay_mbc))
+                    cancer_mbc["Stage_of_Cancer"] = ("Suspected Stage IV (de novo MBC, pending confirmation)"
+                                                     if hedge_mbc else "Stage IV (metastatic)")
+                    print(f"    [POST-STAGE-MBC] de novo/explicit MBC + distant → '{cancer_mbc['Stage_of_Cancer']}' (was '{old_mbc}')")
 
         # POST-STAGE-LOCALLY-ADVANCED: "locally advanced" pancreatic/breast cancer is, by convention,
         # unresectable Stage III. When the stage field is empty/not-staged but the A/P or note describes
