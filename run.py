@@ -4170,7 +4170,9 @@ def main():
             cm_db = (drug_dict_db.get("current_meds", "") or "").strip()
             if cm_db:
                 cm_low_db = cm_db.lower()
-                ap_low_db = (assessment_and_plan or "").lower()
+                # scan BOTH A/P and note body (the regimen is often named in HPI, e.g. pdac18
+                # "gemcitabine and capecitabine using an alternate week schedule"). [round3 #3]
+                ap_low_db = (assessment_and_plan or "").lower() + " \n " + (note_text or "").lower()
                 DOUBLET_DRUGS = {'abraxane', 'nab-paclitaxel', 'paclitaxel', 'gemcitabine', 'gemzar',
                                  'pembrolizumab', 'carboplatin', 'cisplatin', 'oxaliplatin', 'irinotecan',
                                  'nal-iri', 'nanoliposomal', 'onivyde', '5-fu', 'fluorouracil', 'leucovorin',
@@ -4198,9 +4200,56 @@ def main():
                         label = DB_LABEL.get(d, d)
                         if label.lower() not in (x.lower() for x in added_db):
                             added_db.append(label)
+                # standard adjacent doublets named WITHOUT a clear verb prefix ("gem abraxane",
+                # "gemcitabine and capecitabine", "gem/cape") that conj_re/NONCUR miss. When exactly one
+                # component is already in current_meds (= the regimen is confirmed active), add the
+                # partner. Adjacency (single connector) avoids false cross-sentence pairing.
+                # [round3 #3, pdac9 gem-abraxane / pdac18 gem-cape]
+                STD_PAIRS = [
+                    (r'gem(?:citabine|zar)?', r'(?:abraxane|nab.?paclitaxel)', 'gemcitabine', 'abraxane'),
+                    (r'gem(?:citabine|zar)?', r'(?:capecitabine|xeloda|cape)', 'gemcitabine', 'capecitabine'),
+                ]
+                for pa, pb, na, nb in STD_PAIRS:
+                    paired = re.search(pa + r'\s*(?:and|\+|/|-| )\s*' + pb + r'\b', ap_low_db) \
+                        or re.search(pb + r'\s*(?:and|\+|/|-| )\s*' + pa + r'\b', ap_low_db)
+                    if not paired:
+                        continue
+                    in_a = bool(re.search(r'\b' + pa + r'\b', cm_low_db))
+                    in_b = bool(re.search(r'\b' + pb + r'\b', cm_low_db))
+                    if in_a and not in_b and nb not in (x.lower() for x in added_db):
+                        added_db.append(nb)
+                    if in_b and not in_a and na not in (x.lower() for x in added_db):
+                        added_db.append(na)
                 if added_db:
                     drug_dict_db["current_meds"] = cm_db + ", " + ", ".join(added_db)
                     print(f"    [POST-MEDS-DOUBLET] completed regimen: +{added_db}")
+
+        # POST-MEDS-COMPLETED-CHEMO: current_meds = "actively taking RIGHT NOW". A chemo regimen the
+        # note describes as COMPLETED + on a treatment break/holiday (no active continuation) is not
+        # current — clear it (pdac5 "completed 12 cycles FOLFIRINOX ... currently on chemotherapy break").
+        # Guarded by an active-continuation signal so mid-regimen patients ("presents for C3", "continue
+        # FOLFIRINOX", "resume treatment") are NOT cleared (pdac19/pdac18). Only fires when EVERY
+        # current_meds token is a chemo drug/regimen. [2026-06-06, round3 #3, pdac5/pdac17]
+        drug_dict_cc2 = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_cc2, dict):
+            cm_cc2 = (drug_dict_cc2.get("current_meds", "") or "").strip()
+            if cm_cc2:
+                hay_cc2 = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
+                on_break_cc2 = re.search(
+                    r'chemo(?:therapy)?\s+break|treatment\s+holiday|chemo\s+holiday'
+                    r'|completed\s+(?:all\s+)?\d+\s+(?:full\s+)?cycles|finished\s+(?:all\s+)?\d+\s+cycles'
+                    r'|no\s+(?:current|active)\s+(?:or\s+future\s+)?chemotherapy', hay_cc2)
+                active_cc2 = re.search(
+                    r'presents?\s+for\s+c\d|currently\s+(?:on|receiving)|will\s+continue'
+                    r'|continue\s+(?:with\s+)?(?:chemo|chemotherapy|folfirinox|folfox|folfiri|gem|gemcitabine|abraxane|capecitabine|treatment)'
+                    r'|resume\s+(?:treatment|chemo|therapy)|today\'?s?\s+(?:infusion|cycle)|reduced\s+\w*\s*today', hay_cc2)
+                CHEMO_TOKS_CC2 = {'folfirinox', 'mfolfirinox', 'folfox', 'folfiri', 'gemcitabine', 'gem', 'gemzar',
+                                  'abraxane', 'nab-paclitaxel', 'capecitabine', 'xeloda', '5-fu', '5-fu/lv', 'nal-iri'}
+                toks_cc2 = [t.strip().lower().split('(')[0].strip() for t in cm_cc2.split(",") if t.strip()]
+                all_chemo_cc2 = toks_cc2 and all(t in CHEMO_TOKS_CC2 for t in toks_cc2)
+                if on_break_cc2 and not active_cc2 and all_chemo_cc2:
+                    drug_dict_cc2["current_meds"] = ""
+                    print(f"    [POST-MEDS-COMPLETED-CHEMO] '{cm_cc2}' completed/on-break → cleared current_meds")
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
