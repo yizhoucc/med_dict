@@ -3067,6 +3067,35 @@ def main():
                     cancer_diag["Stage_of_Cancer"] = "Stage IV (metastatic)"
                     print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (Metastasis=Yes)")
 
+        # POST-TYPE-MET-CONSISTENCY: Type_of_Cancer must not assert CONFIRMED "metastatic" when the
+        # Distant Metastasis field says No (→ local/regional only) or only Suspected/pending (→ not
+        # yet confirmed). "metastatic recurrence" on a DistMet=No note is a LOCAL recurrence (b4: PET
+        # "recurrent disease, NO ... metastatic disease"); on a Suspected note it must be softened to
+        # "suspected metastatic" (b9 suspected cervical LN, b15 suspected nodes). Prevents the Type
+        # field from over-calling metastatic disease the met fields don't support. [2026-06-06, fix#12]
+        cancer_tm = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_tm, dict):
+            ty_tm = str(cancer_tm.get("Type_of_Cancer", "") or "")
+            ty_low_tm = ty_tm.lower()
+            if re.search(r'\bmetastatic\b', ty_tm, re.I) and 'suspected metastatic' not in ty_low_tm \
+                    and 'possible metastatic' not in ty_low_tm:
+                dm_tm = str(cancer_tm.get("Distant Metastasis", "") or "").lower().strip()
+                dm_no = dm_tm.startswith(("no", "none", "negative"))
+                dm_suspected = any(w in dm_tm for w in ("suspected", "not sure", "pending", "possible",
+                                                        "possibl", "equivocal", "cannot exclude", "concern for"))
+                dm_confirmed = ("yes" in dm_tm) and not dm_suspected
+                if dm_no:
+                    new_tm = re.sub(r'\bmetastatic\s+recurrence\b', 'local recurrence', ty_tm, flags=re.I)
+                    new_tm = re.sub(r'\bmetastatic\s+', '', new_tm, flags=re.I)
+                    if new_tm != ty_tm:
+                        cancer_tm["Type_of_Cancer"] = new_tm
+                        print(f"    [POST-TYPE-MET-CONSISTENCY] DistMet=No → '{ty_tm[:45]}' → '{new_tm[:45]}'")
+                elif dm_suspected and not dm_confirmed:
+                    new_tm = re.sub(r'\bmetastatic\b', 'suspected metastatic', ty_tm, count=1, flags=re.I)
+                    if new_tm != ty_tm:
+                        cancer_tm["Type_of_Cancer"] = new_tm
+                        print(f"    [POST-TYPE-MET-CONSISTENCY] DistMet suspected → '{ty_tm[:45]}' → '{new_tm[:45]}'")
+
         # POST-MET-RECONCILE: keep the two redundant met fields (Distant Metastasis / Metastasis)
         # internally consistent. A single-field baseline can't contradict itself; the pipeline's
         # two fields can, when an earlier gate (e.g. G4-FAITH) trims one but not the other. These
