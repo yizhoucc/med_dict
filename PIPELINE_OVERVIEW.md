@@ -207,6 +207,19 @@ Each field also has **source attribution** — the exact quote from the note tha
 - Redacted fields (*****/[REDACTED]) lose information
 - Rare temporal confusion (listing historical imaging as current response)
 
+### Extraction Ablation: Pipeline vs Baseline (4 diagnosis dimensions, 40 held-out test notes)
+
+Same base model (Qwen2.5-32B-Instruct-AWQ), same field schema — the **only** variable is the harness (multi-stage extraction + 5 gates + POST hooks + dictionaries). Pipeline (PL) vs single-prompt bare-model baseline (BL), scored per sample as PL / BL / TIE by manual review against the note. 20 breast + 20 PDAC.
+
+| Dimension | PL | BL | TIE | Notes |
+|-----------|----|----|-----|-------|
+| **Stage correctness** | **13** | **0** | 27 | BL often punts to "Not specified"; PL gives metastatic/suspected/recurrent stage, bilateral per-side staging, TNM transcription |
+| **No hallucination** | 1 | **0** | 39 | PL hedges suspected mets; BL sometimes states suspected-as-confirmed ("Yes, bone metastasis") |
+| **Response assessment** | 5 | **0** | 35 | BL answers the wrong question (tumor growth, side effects, genomic score as "response"); PL gives the actual response or "not yet on treatment" |
+| **Distant metastasis** | 6 | **1** | 33 | PL specific + appropriately hedged ("Suspected, to cervical + axillary nodes"); the one BL win is an organ-completeness gap (PL listed liver+peritoneum, missed spleen — correct but incomplete) |
+
+**Result: PL ≥ BL on all four dimensions** (the only BL "win" is one organ-completeness gap, not a correctness error). These four are now defensible as PL-favorable scoring questions. Detail: `results/extraction_comparison/REVIEW_RESCORE_40.md`.
+
 ---
 
 ## 4b. Patient Letter Generation
@@ -353,6 +366,25 @@ POST hooks are rule-based corrections that run after LLM extraction. They fix kn
 | 20 | POST-TYPE-VERIFY-TNBC | Overrides HER2+ when A/P confirms TNBC |
 | 21 | POST-TYPE-UNCLEAR | Corrects fabricated receptor status when note says "biomarker results unclear" |
 | 22 | POST-TYPE-HR-EXPAND | Expands "HR+" to specific "ER+/PR-" using note receptor details |
+
+### Stage / Metastasis / Response consistency hooks (2026-06, PL-vs-BL ablation)
+
+Added to close the dimensions where the baseline was tying or winning. All are **general clinical rules** (regional≠distant, suspected≠confirmed, pending workup≠negative, metastatic⟺Stage IV), scoped to the **current assessment (A/P)** rather than the full note to avoid historical-HPI contamination, and validated against the held-out test notes without being hardcoded to them.
+
+| # | Hook | What It Does |
+|---|------|-------------|
+| 23 | POST-STAGE-BILATERAL | Bilateral breast cancer: reports a stage per side ("Left: Stage III (T3N1); Right: Stage I (T1cN0)") instead of collapsing to one |
+| 24 | POST-STAGE-CTNM | Fills an empty stage from a clinical/pathologic TNM in the note ("clinical T2NX" → "cT2NX") instead of "Not mentioned" |
+| 25 | POST-STAGE-PTNM-VERIFY | Non-breast: transcribes the note's verbatim pTNM when the model transposed it ("ypT 3N2" → note-stated "pT2N3") |
+| 26 | POST-STAGE-CORRECT (guard) | No longer "corrects" a stage the physician explicitly wrote (note states "Stage III" → trust it; only auto-correct inferred stages) |
+| 27 | POST-METASTATIC-UPGRADE | Confirmed distant-met findings the model under-called (peritoneal carcinomatosis / omental caking / biopsy-confirmed) → Stage IV + met "Yes". Negation/hedge-guarded (finditer over all mentions; "possibility of …", "no …" never trigger) |
+| 28 | POST-DISTMET-PENDING | Staging imaging still being obtained to look for mets → "Not sure (staging imaging pending)" instead of a premature "No" |
+| 29 | POST-DISTMET-BENIGN | A lesion the note reads as benign (meningioma/hemangioma/cyst; "metastasis unlikely") doesn't drive a "Not sure" hedge → "No"; strips benign lesion sites (falx/dural) from met fields. Guarded against real "pending confirmation" cases |
+| 30 | POST-MET-RECONCILE (R2 + cervical) | "cervical" added to distant-site list (neck nodes = M1 for breast); R2 preserves named sites when downgrading an unconfirmed claim ("Suspected, to cervical/axillary nodes") |
+| 31 | POST-RESPONSE-SURVEILLANCE | Resected patient on post-surgical surveillance (no active anticancer drug) → states surveillance + rising-marker concern; not "On treatment". Guarded against new-patient/adjuvant-planning consults |
+| — | POST-RESPONSE-TREATMENT / PRETREATMENT (tightened) | "On treatment" now requires real anticancer evidence (cycle / drug name), not a bare "continue" (which matched "continue creon"); PRETREATMENT keyed on a started-treatment signal rather than the inconsistently-cleaned current_meds field |
+
+> A `POST-DISTMET-SITES` hook (auto-append documented met organs) was prototyped and **removed** — it fired on negated radiology lines ("No suspicious osseous lesions" → added bone), manufacturing hallucinated sites. Principle #1 (faithfulness) outranks #2 (completeness): an incomplete-but-correct site list is preferable to a fabricated one. Regression suite: `results/extraction_comparison/test_hooks_regex.py` (18/18, target-fires + negative-controls).
 
 ---
 

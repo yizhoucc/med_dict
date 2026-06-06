@@ -164,6 +164,12 @@ V2 在 `run.log` 中记录每个 gate 的详细行为：
   - **Pipeline 超越 ChatGPT**：零幻觉（vs ChatGPT 有 speculation），零 REDACTED（vs 2/20），零隐私泄露，情感支持 11/20（vs 1/20），97.5% 可发送（vs 0%），数据完全本地化
   - 核心论点：Qwen 裸模型不如 ChatGPT，但 Qwen + Harness 在临床部署指标上超过 ChatGPT 裸模型
 - **医生评审包**：`results/doctor_review_final/`（5 folders: pipeline + Qwen BL + ChatGPT BL × 2 cancers = 100 letters）
+- **Extraction-only ablation（2026-06，当前焦点，letter 已 drop）**：同底座 Qwen2.5-32B-AWQ、同字段 schema，唯一变量=harness。PL(pipeline) vs BL(单 prompt 裸跑)，全 40 held-out 人工逐样本评 4 个诊断维度：
+  - **Stage 13:0:27 · No-hallucination 1:0:39 · Response 5:0:35 · DistMet 6:1:33**（PL:BL:TIE）
+  - PL 四题全部 ≥ BL，唯一 BL 胜=pdac3 一个器官完整性（少列脾，正确但不全；因删除会制造幻觉的 SITES hook 主动取舍"精确>完整"）
+  - 本轮新增 9 个 stage/met/response 通用临床规则 POST hook（见 PIPELINE_OVERVIEW §5 表 23-31），守诚实边界不硬编码测试集；回归套件 `results/extraction_comparison/test_hooks_regex.py`
+  - 关键产物：`results/extraction_comparison/`（pipeline_*_FINAL.txt + baseline_extract_*_json.txt + REVIEW_RESCORE_40.md）
+  - vLLM greedy 跨运行非确定性：靠确定性 hook 锁地板，重跑多次逐一收敛 manifestation
 - **架构文档**：`PIPELINE_OVERVIEW.md` + `RESEARCH_PROPOSAL.md`
 
 ## 代码规范
