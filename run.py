@@ -2882,6 +2882,46 @@ def main():
                                 resp["response_assessment"] = "Post-neoadjuvant pathologic assessment — see findings for surgical pathology details."
                                 print(f"    [POST-RESPONSE-GENOMIC] Replaced genomic test with pathology reference: '{resp_val}'")
 
+        # POST-RESPONSE-COMPRESS: response_assessment should be a concise CONCLUSION about how the
+        # disease is responding — not a copy of the CT/findings report (E, verbose), and not
+        # treatment-plan directives (G, "Continue X / Recommend Y"). Drop plan-directive sentences,
+        # then compress to the conclusion (+ at most one evidence sentence). General rule: the field
+        # answers "how is it responding", the plan fields answer "what's next". [2026-06-05, E/G]
+        resp_cz = keypoints.get("Response_Assessment", {})
+        if isinstance(resp_cz, dict):
+            rv = (resp_cz.get("response_assessment", "") or "").strip()
+            if rv and rv.lower().rstrip(".") not in ("not mentioned", "not available", "n/a", "not assessed at this visit"):
+                sents_cz = [s.strip() for s in re.split(r'(?<=[.;])\s+', rv) if s.strip()]
+                def _is_plan_sentence(s):
+                    sl = s.lower().strip()
+                    if re.match(r'(continue|start|begin|repeat|obtain|recommend|consider|refer|schedule|'
+                                r'plan\b|check|follow[\s-]?up|f/u)\b', sl):
+                        return True
+                    if re.search(r'\brecommend|will\s+(start|begin|repeat|obtain|check|continue|consider|plan|refer|schedule|hold)|'
+                                 r'plan(s|ning)?\s+to|\bf/?u\b|refer(ral)?\s+to|rx\s+given|prescription|'
+                                 r'next\s+(appointment|visit|cycle)|should\s+(start|begin|consider)', sl):
+                        return True
+                    return False
+                kept_cz = [s for s in sents_cz if not _is_plan_sentence(s)]
+                changed_cz = len(kept_cz) < len(sents_cz)
+                RESP_KW = re.compile(r'(?i)(stable|progress|partial response|complete response|respond|'
+                                     r'no evidence of (disease|recurrence)|\bned\b|decreas|increas|improv|'
+                                     r'new (lesion|metast)|resolution|regress|no response|mixed response|'
+                                     r'remission|tolerat)')
+                if len(kept_cz) > 2 or len(" ".join(kept_cz)) > 400:
+                    concl_cz = [s for s in kept_cz if RESP_KW.search(s)]
+                    if concl_cz:
+                        kept_cz = concl_cz[:2]
+                        changed_cz = True
+                if changed_cz:
+                    new_rv = " ".join(kept_cz).strip()
+                    if not new_rv:
+                        new_rv = "Not assessed at this visit."
+                    elif not new_rv.endswith((".", ";")):
+                        new_rv += "."
+                    resp_cz["response_assessment"] = new_rv
+                    print(f"    [POST-RESPONSE-COMPRESS] {len(rv)}→{len(new_rv)} chars (dropped plan/verbose)")
+
         # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
         for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
             drug_dict = keypoints.get(drug_field_key, {})
