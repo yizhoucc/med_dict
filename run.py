@@ -1223,6 +1223,19 @@ def main():
                     rfv["Patient type"] = "New patient"
                     print(f"    [POST-PATIENT-TYPE-CC] CC says new patient/consultation but model said '{pt}' → 'New patient'")
 
+        # POST-PATIENT-TYPE-ONGOING: a patient mid-regimen at THIS clinic ("s/p N cycles", "presents for
+        # C3 today", "C2D1", "Interim History", "meds prior to today's encounter") is a Follow up, not a
+        # New patient — overrides the "when in doubt New patient" default (pdac19). [2026-06-06, round4]
+        if isinstance(rfv, dict):
+            pt2 = str(rfv.get("Patient type", "") or "").lower().strip()
+            if pt2 == "new patient":
+                nap = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
+                ongoing = bool(re.search(r's/p\s+\d+\s+cycles?|presents?\s+for\s+c\d|\bc\d+\s*d\d+\b|interim history|prior to today\'?s encounter|cycle\s+#?\d+\s+(?:of|today)', nap)) \
+                    and not re.search(r'new patient (?:visit|eval|consult)|initial consult|here for (?:a )?(?:new|initial)', nap)
+                if ongoing:
+                    rfv["Patient type"] = "Follow up"
+                    print(f"    [POST-PATIENT-TYPE-ONGOING] mid-regimen at clinic → 'Follow up' (was New patient)")
+
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
         if isinstance(referral, dict):
@@ -2552,6 +2565,49 @@ def main():
                     gen_gc["genetic_testing_plan"] = f"{named_gc} molecular testing ({'results pending' if pending_gc else 'ordered'})"
                     print(f"    [POST-PLAN-GARBAGE-CLEAN] Genetic_Testing_Plan → '{gen_gc['genetic_testing_plan']}'")
 
+        # POST-NONSECRETOR: a CA19-9 non-secretor status ("does not express CA 19-9" / "non-secretor")
+        # is a clinically important molecular fact (the marker can't track disease) the prompt asks for —
+        # record it in Genetic_Testing_Results when missing. [2026-06-06, round4 #11, pdac4/13]
+        note_low_ns = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
+        if re.search(r'does not express ca\s*-?\s*19-?9|non-?secretor|ca\s*19-?9 non', note_low_ns):
+            gr_ns = keypoints.get("Genetic_Testing_Results", {})
+            if isinstance(gr_ns, dict):
+                grv_ns = str(gr_ns.get("genetic_testing_results", "") or "")
+                if 'secretor' not in grv_ns.lower() and 'does not express' not in grv_ns.lower():
+                    note_msg = "CA 19-9 non-secretor (tumor does not express CA 19-9; marker not useful for tracking)"
+                    if grv_ns and grv_ns.lower().strip() not in ("no genetic testing results in note.", "none", ""):
+                        gr_ns["genetic_testing_results"] = grv_ns.rstrip(". ") + ". " + note_msg
+                    else:
+                        gr_ns["genetic_testing_results"] = note_msg
+                    print(f"    [POST-NONSECRETOR] recorded CA 19-9 non-secretor status")
+
+        # POST-GERMLINE-PENDING: "germline/germ line panel pending/sent" → Genetic_Testing_Plan when empty
+        # (b20 "Germ line panel pending"). Handles the spaced "germ line" form POST-GENETIC-PENDING misses.
+        # [2026-06-06, round4 #11, b20]
+        if re.search(r'germ\s*line\s+(?:panel|testing)\s+(?:pending|sent|ordered|in process)', note_low_ns):
+            gp_gl = keypoints.get("Genetic_Testing_Plan", {})
+            if isinstance(gp_gl, dict):
+                gpv_gl = str(gp_gl.get("genetic_testing_plan", "") or "").strip().lower()
+                if (not gpv_gl) or gpv_gl in ("none planned.", "none", "none planned", "no genetic testing planned."):
+                    gp_gl["genetic_testing_plan"] = "Germline panel pending"
+                    print(f"    [POST-GERMLINE-PENDING] Genetic_Testing_Plan → 'Germline panel pending'")
+
+        # POST-REFERRAL-SMS: a referral to SMS / symptom management / palliative-symptom service is an
+        # outgoing referral (pdac19 "Encouraged referral to SMS to help with management of her pain,
+        # fatigue, and anorexia. Pt agrees"). Add to Referral.Specialty/Others when missed. [round4 #11]
+        if re.search(r'referral to sms|\bsms\b.{0,30}(?:symptom|pain|management)|symptom management (?:service|clinic|referral)|refer\w*\s+to\s+(?:palliative|supportive) (?:care|medicine)', note_low_ns):
+            ref_sms = keypoints.get("Referral", {})
+            if isinstance(ref_sms, dict):
+                spec_sms = str(ref_sms.get("Specialty", "") or "")
+                others_sms = str(ref_sms.get("Others", "") or "")
+                if 'sms' not in (spec_sms + others_sms).lower() and 'symptom' not in (spec_sms + others_sms).lower():
+                    add_sms = "SMS (symptom management service) for pain/fatigue/anorexia"
+                    if spec_sms and spec_sms.lower() not in ("none", "none.", ""):
+                        ref_sms["Specialty"] = spec_sms.rstrip(". ") + "; " + add_sms
+                    else:
+                        ref_sms["Specialty"] = add_sms
+                    print(f"    [POST-REFERRAL-SMS] added SMS symptom-management referral")
+
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})
         adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""
@@ -2576,11 +2632,20 @@ def main():
                 note_text, re.IGNORECASE
             )
             living_will = re.search(r'living\s+will', note_text, re.IGNORECASE)
+            # Pattern 5: hospice / goals-of-care transition discussed — this IS advance care planning
+            # (pdac3 "transition to home hospice", pdac12 "anticipate the need to transition to hospice").
+            # [2026-06-06, round4 #11]
+            hospice_match = re.search(
+                r'(?:transition\w*\s+(?:to|the patient to)\s+(?:home\s+)?hospice|home\s+hospice|hospice\s+(?:care|referral|enrollment)|'
+                r'goals\s+(?:of\s+care|on\s+purely\s+palliative)|comfort\s+(?:care|measures)\s+(?:discuss|focus)|discussed\s+(?:the\s+)?prognosis)',
+                note_text, re.IGNORECASE)
             patches = []
             if code_match:
                 patches.append(code_match.group(1).strip())
             elif standalone_dnr:
                 patches.append(standalone_dnr.group(1).strip())
+            if hospice_match:
+                patches.append("Discussed transition to hospice / goals of care")
             if polst_match:
                 patches.append("POLST on file")
             if wishes_match:
@@ -4207,6 +4272,48 @@ def main():
                     tc_dict_su["supportive_meds"] = ", ".join(added_labels_su)
                 print(f"    [POST-SUPP-SUPPLEMENT] recovered supportive meds: {added_labels_su}")
 
+        # POST-SUPP-NOTTAKING: drop supportive_meds the note marks "(Patient not taking...)" — these are
+        # on the med list but the patient is NOT actually taking them, so they fail the "CURRENTLY taking"
+        # definition (pdac7 ondansetron "(Patient not taking: Reported on 12/07/2020)"). [2026-06-06, round4 #8]
+        tc_nt = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_nt, dict):
+            supp_nt = str(tc_nt.get("supportive_meds", "") or "")
+            if supp_nt and supp_nt.lower() not in ("none", "none.", ""):
+                note_low_nt = (note_text or "").lower()
+                items_nt = [m.strip() for m in re.split(r',(?![^(]*\))|;', supp_nt) if m.strip()]
+                kept_nt = []
+                for it in items_nt:
+                    base_nt = re.split(r'[ (]', it.strip())[0].lower()
+                    dropped = False
+                    if base_nt and len(base_nt) > 2:
+                        for mm in re.finditer(re.escape(base_nt), note_low_nt):
+                            ctx = note_low_nt[mm.end():mm.end() + 80]
+                            if 'patient not taking' in ctx or 'not taking:' in ctx:
+                                dropped = True
+                                break
+                    if dropped:
+                        print(f"    [POST-SUPP-NOTTAKING] dropped '{it}' (note: Patient not taking)")
+                    else:
+                        kept_nt.append(it)
+                if len(kept_nt) < len(items_nt):
+                    tc_nt["supportive_meds"] = ", ".join(kept_nt) if kept_nt else ""
+
+        # POST-SUPP-HOMEPAIN: a home analgesic the note says is used for (cancer-related) pain — "using
+        # Tylenol for pain relief at home" (pdac14) — is a supportive med even when it's only in the HPI
+        # narrative, not the structured outpatient list. Add it if supportive_meds misses it. [round4 #8]
+        tc_hp = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_hp, dict):
+            supp_hp = str(tc_hp.get("supportive_meds", "") or "")
+            supp_low_hp = supp_hp.lower()
+            note_ap_hp = (note_text or "").lower() + " \n " + (assessment_and_plan or "").lower()
+            for m_hp in re.finditer(r'(?:using|takes?|taking)\s+(?:primarily\s+)?(tylenol|acetaminophen|oxycodone|morphine|tramadol|hydromorphone|dilaudid|ibuprofen)\b[^.]{0,40}\bpain', note_ap_hp):
+                drug_hp = m_hp.group(1)
+                if drug_hp not in supp_low_hp:
+                    label_hp = drug_hp.capitalize() + " (home pain control)"
+                    tc_hp["supportive_meds"] = (supp_hp + ", " + label_hp) if (supp_hp and supp_low_hp not in ("none", "none.", "")) else label_hp
+                    supp_hp = tc_hp["supportive_meds"]; supp_low_hp = supp_hp.lower()
+                    print(f"    [POST-SUPP-HOMEPAIN] added home pain med: {label_hp}")
+
         # POST-MEDS-ENZYME-STRIP: pancreatic enzymes are SUPPORTIVE care, not anticancer therapy —
         # they belong in supportive_meds (recovered there by POST-SUPP-SUPPLEMENT), not current_meds.
         # Stripping them keeps current_meds = active anticancer therapy AND lets POST-MEDS-IV-CHECK
@@ -4234,7 +4341,7 @@ def main():
                     # v19: patterns that indicate ACTIVE/CURRENT chemo only
                     IV_CHEMO_PATTERNS = [
                         # "continue/continuing [with] [cycle N [of]] DRUG"
-                        r'(?:continue|continuing)\s+(?:with\s+)?(?:cycle\s+\d+\s+(?:of\s+)?)?(\w+(?:\s*/\s*\w+)?)',
+                        r'(?:continue|continuing)\s+(?:on\s+|with\s+)?(?:cycle\s+\d+\s+(?:of\s+)?)?(\w+(?:\s*/\s*\w+)?)',
                         # "currently on DRUG" / "still on DRUG"
                         r'(?:currently\s+on|still\s+on)\s+(\w+(?:\s*/\s*\w+)?)',
                         # "cycle N [day N] of DRUG"
