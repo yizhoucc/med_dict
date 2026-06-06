@@ -2261,7 +2261,15 @@ def main():
                     note_lower_sv = (note_text or "").lower()
                     ap_lower_sv = (assessment_and_plan or "").lower()
                     all_text_sv = note_lower_sv + " " + ap_lower_sv
+                    # Stage IV is definitionally equivalent to metastatic disease; if the
+                    # value asserts metastatic/metastases, "Stage IV" is a valid clinical
+                    # inference (a PL strength over the baseline), NOT a note-quote fabrication.
+                    # Don't strip it, and don't substitute the original local pTN into the
+                    # "now metastatic" slot (that produced nonsense like "metastatic (pT2N2)").
+                    value_is_metastatic = bool(re.search(r'metasta', stage_sv, re.IGNORECASE))
                     for sn in stage_numbers:
+                        if sn.upper().startswith("IV") and value_is_metastatic:
+                            continue
                         sn_pattern = r'stage\s*' + re.escape(sn.lower())
                         if not re.search(sn_pattern, all_text_sv):
                             # Stage number not found in note — likely fabricated
@@ -2270,7 +2278,8 @@ def main():
                             ptn_in_note = re.search(r'pT\d[a-d]?\s*N\d', all_text_sv, re.IGNORECASE)
                             if ptn_in_note:
                                 replacement = ptn_in_note.group(0)
-                                stage_sv = re.sub(r'(?i)(?:Originally\s+)?Stage\s+' + re.escape(sn), replacement, stage_sv)
+                                # keep an "Originally " prefix if present (only swap the stage token)
+                                stage_sv = re.sub(r'(?i)Stage\s+' + re.escape(sn), replacement, stage_sv)
                             else:
                                 stage_sv = re.sub(r'(?i)(?:Originally\s+)?Stage\s+' + re.escape(sn) + r',?\s*', '', stage_sv).strip()
                             if stage_sv != old_stage_sv:
