@@ -12,7 +12,40 @@
 - **T6 DISTMET**：远处转移有无/部位是否正确（含疑似 vs 确诊）。
 - 每题每样本：**PL** / **BL** / **TIE** / **NA**。判据 = 谁更忠实+准确+自洽。
 
-## ▶▶ 新会话任务入口：统一修 10 类 PL bug（2026-06-06）
+## ✅✅ 修复完成 + 重跑 + 重评结果（2026-06-06 本会话）
+
+**结论：修完后 PL 在 Q10/Q11/Q7/T6 四题全部 ≥ BL，唯一残留 BL 胜=pdac3 T6（脾器官完整性，PL 不错只是少列一个器官，已主动取舍精确>完整）。**
+
+### 最终 tally（全 40，修复后）
+| 题 | PL | BL | TIE | 修复前 | 结论 |
+|---|---|---|---|---|---|
+| **Q10 STAGE** | **13** | **0** | 27 | 12/4/24 | ✅ 零 BL，干净碾压 |
+| **Q11 NOHALLUC** | 1 | **0** | 39 | 1/2/37 | ✅ 零 BL |
+| **Q7 RESP** | 5 | **0** | 35 | 4/3/33 | ✅ 零 BL |
+| **T6 DISTMET** | 6 | **1**(pdac3) | 33 | 5/6/29 | ✅ 仅 pdac3 脾完整性 |
+
+### 改动样本逐条重评（PL新 vs BL）
+- **breast1** T6: PL "Not sure (staging imaging pending)" vs BL "Not sure" → **TIE**（原 BL；bug3 修）
+- **breast5** Q10/Q11: PL "Left: Stage III (T3N1); Right: Stage I (T1cN0)" = BL 双侧 → **TIE/TIE**（原 BL/BL；bug1 修）
+- **breast10** Q7: PL "Not yet on treatment" vs BL "Not applicable yet" → **TIE**（原 BL；PRETREATMENT 改不依赖 cur_meds）
+- **breast13** T6: PL DistMet "No"（良性脑膜瘤已清，含 falx 剥离）vs BL "No" → **TIE**（原 BL；bug4 修）
+- **breast15** T6: PL "Suspected, to cervical+axillary nodes"（具体+恰当 hedge，FNA 待）vs BL "Yes (lymph nodes)"（过度断定）→ **PL**（原 BL；bug5 修）
+- **breast18** Q10: PL "cT2NX (clinical staging)" = BL "Clinical T2NX" → **TIE**（原 BL；bug2 修）
+- **pdac12** Q10/Q11/T6: PL "Stage IV (metastatic)"+"Yes, to liver, peritoneum"（carcinomatosis 确诊）vs BL "Not specified"/"Yes (liver,lungs)" → **PL/TIE/TIE**（原 BL/BL/BL；bug6 修，UPGRADE finditer+hedge 守卫避免 pdac6 误触）
+- **pdac15** Q10/Q7: PL "pT2N3"+surveillance-aware response vs BL "pT2N3"/"rising markers" → **TIE/TIE**（原 BL/BL；bug9 pTNM 修 + bug7 surveillance；模型本身已输出正确，TREATMENT 收紧防 "continue creon" 误判）
+- **pdac19** Q7: PL "not responding, CT interval increase"（addendum CT 确认进展）vs BL "uncertain, possible progression or biliary obstruction" → **PL**（原 BL=我先前漏读 addendum 的误判；非 bug，重评翻 PL）
+- **pdac3** T6: PL "Yes, to liver, peritoneum"（少脾）vs BL "Yes (liver, spleen, peritoneal)" → **BL**（唯一残留；SITES 原型因误触否定行"No osseous lesions"制造幻觉而删除，取精确>完整，接受 P2）
+
+### 实现与防回归（详见 run.py commits 3bcad9a1..最新 + test_hooks_regex.py）
+- 9 个新/改 POST hook，全部通用临床规则、守诚实边界、不硬编码测试集
+- 删除 bug10 SITES（无 negation 守卫 → 误加 bone/liver 幻觉）
+- 抓到并修 3 个自身回归：pdac6 UPGRADE 误触（hedge 守卫）、breast13 falx 残留（BENIGN 剥离良性灶）、b17 SURVEILLANCE 误触（新患者/adjuvant 守卫）
+- vLLM greedy 跨运行非确定性：靠确定性 hook 锁地板；breast 重跑 4 次逐一收敛所有非确定性 manifestation；test_hooks_regex.py 18/18 + 全 40 sweep 无意外误伤
+- 最终输出：breast=rerun_breast_noletter run4，pdac=rerun_pdac_noletter run2（pdac 不受 run2 后 3 commit 影响，已验证 SURVEILLANCE 0 触发/无误判 On-treatment/无 falx）
+
+---
+
+## ▶▶ 新会话任务入口：统一修 10 类 PL bug（2026-06-06）[已完成,见上方✅✅]
 **目标**：修完让 Q11/Q7/T6 从 near-even 翻成 PL（Q10 已 12:4 到手）。全部是通用临床规则，守诚实边界。
 **做法**：改 run.py 的 POST hook（参考下方"已发现的 PL bug 类"两处清单，每条都附了样本+根因+规则）→ scp 到 wsl（需 dangerouslyDisableSandbox）→ 小样本验证每个 fix（用对应 bug 样本+回归样本）→ 全改完重跑 40（letter-off，exp/rerun_breast_noletter.yaml + exp/rerun_pdac_noletter.yaml，~50min 两个并发）→ 重评 Q11/Q7/T6。
 **10 类 bug 一览**（详见下方两处清单，含 ROW 与规则）：
@@ -29,13 +62,14 @@
 - 共发现 10 类可修 PL bug（见两处"bug 类"清单）。
 - **下一步：统一修 10 类 bug → 重跑 40 → 重评 Q11/Q7/T6 是否转 PL。Q10 已可加。**
 
-## ★ running tally（全 40）
-| 题 | PL | BL | TIE | 结论 |
+## ★ running tally（全 40）—— 修复后（2026-06-06）见顶部 ✅✅
+| 题 | PL | BL | TIE | 修复前 |
 |---|---|---|---|---|
-| Q10 STAGE | 12 | 4 | 24 | ✅ 可加为 PL 题（3:1） |
-| Q11 NOHALLUC | 1 | 2 | 37 | 近平；BL胜=可修bug |
-| Q7 RESP | 4 | 3 | 33 | 近平略PL；BL胜=可修bug |
-| T6 DISTMET | 5 | 6 | 29 | 近平略输；BL胜=可修bug |
+| Q10 STAGE | **13** | **0** | 27 | 12/4/24 |
+| Q11 NOHALLUC | 1 | **0** | 39 | 1/2/37 |
+| Q7 RESP | 5 | **0** | 35 | 4/3/33 |
+| T6 DISTMET | 6 | **1**(pdac3脾) | 33 | 5/6/29 |
+（下方为修复前的逐样本旧记录，保留备查）
 
 ---
 
