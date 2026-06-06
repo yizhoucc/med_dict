@@ -2148,23 +2148,42 @@ def main():
                 # no A/P order). Longer values with dates/intervals ("PET/CT every 2 months") don't match
                 # the fullmatch and are left untouched. [2026-06-06, round3 #2]
                 if fkey_t == "Imaging_Plan":
-                    mod_m = re.fullmatch(
-                        r'(?:brain\s+|repeat\s+|restaging\s+)?(echocardiogram|echo|tte|muga|pet(?:/ct)?|ct(?:\s+(?:scan|chest|cap|abdomen|a/?p|c/?a/?p))?|mri|ultrasound|us|mammogram|mammi|bone\s+scan|dexa)\.?',
-                        low_t)
-                    if mod_m:
-                        mod_t = mod_m.group(1).split('/')[0].split()[0]
-                        search_tok = _img_alias.get(mod_t, mod_t)
-                        ap_low_t = (assessment_and_plan or "").lower()
-                        future_order_t = False
-                        for mm in re.finditer(re.escape(search_tok), ap_low_t):
-                            ctx_t = ap_low_t[max(0, mm.start() - 45):mm.end() + 45]
-                            if re.search(r'\bwill\b|plan\s+to|order|schedul|repeat|every|\bin\s+\d|months?|weeks?|follow.?up|restaging|obtain|get\s+a?\s*\w*\s*' + re.escape(search_tok) + r'|consider', ctx_t) \
-                                    and not re.search(r'\bunderwent\b|\bperformed\b|\bcompleted\b|\bdone\b|\bobtained\b|\breviewed\b|looks?\s+good|\bshowed\b|\brevealed\b', ctx_t):
-                                future_order_t = True
-                                break
-                        if not future_order_t:
-                            d_t[subkey_t] = default_t
-                            print(f"    [POST-PLAN-TEMPORAL] cleared bare imaging w/o A/P future order: '{v_t[:40]}'")
+                    ap_low_t = (assessment_and_plan or "").lower()
+                    _mod_re = r'(?:brain\s+|repeat\s+|restaging\s+)?(echocardiogram|echo|tte|muga|pet(?:/ct)?|ct(?:\s+(?:scan|chest|cap|abdomen|a/?p|c/?a/?p))?|mri|ultrasound|us|mammogram|mammi|bone\s+scan|dexa)\.?'
+
+                    def _img_future_order(tok):
+                        # examine each occurrence by its PRECEDING context (a future verb right before
+                        # the modality = ordered; a done verb before = completed). Avoids a neighbouring
+                        # clause's "done" (e.g. "...ultrasound. PET/CT done") wrongly blocking. [round3 #2]
+                        for mm in re.finditer(re.escape(tok), ap_low_t):
+                            pre = ap_low_t[max(0, mm.start() - 35):mm.start()]
+                            post = ap_low_t[mm.end():mm.end() + 25]
+                            if re.search(r'\bunderwent\b|\bperformed\b|\bcompleted\b|\bdone\b|\bobtained\b|\breviewed\b|looks?\s+good|\bshowed\b|\brevealed\b|s/p', pre):
+                                continue
+                            if re.search(r'\bwill\b|plan\b|order|schedul|repeat|restaging|obtain|consider|recommend|\bget\b|follow.?up', pre) \
+                                    or re.search(r'\bevery\b|months?|weeks?|\bin\s+\d', post):
+                                return True
+                        return False
+
+                    # split into clauses; drop any clause that is a BARE modality with no A/P future
+                    # order; keep clauses with future order OR any non-bare-modality detail. Handles
+                    # multi-modality values like "CT scan. Ultrasound" (b16: CT past→drop, US ordered→keep).
+                    raw_clauses_t = [c.strip() for c in re.split(r'[.,]', v_t) if c.strip()]
+                    kept_clauses_t = []
+                    for rc in raw_clauses_t:
+                        mm2 = re.fullmatch(_mod_re, rc.lower())
+                        if mm2:
+                            tok2 = _img_alias.get(mm2.group(1).split('/')[0].split()[0], mm2.group(1).split('/')[0].split()[0])
+                            if _img_future_order(tok2):
+                                kept_clauses_t.append(rc)
+                            # else: bare modality w/o future order → drop
+                        else:
+                            kept_clauses_t.append(rc)
+                    new_img_t = ". ".join(kept_clauses_t).strip()
+                    new_img_t = new_img_t if new_img_t else default_t
+                    if new_img_t != v_t:
+                        d_t[subkey_t] = new_img_t
+                        print(f"    [POST-PLAN-TEMPORAL] imaging clause cleanup: '{v_t[:40]}' → '{new_img_t[:40]}'")
 
         # POST-GENETIC-PLAN-COMPLETED: a genomic test that already has a RESULT is not a future plan.
         # (b17 "brca" — note "BRCA test negative"; b18 "mammaprint" — note "MammaPrint High Risk".) Clear
@@ -2254,6 +2273,34 @@ def main():
                     new_val = ", ".join(kept) if kept else "No procedures planned."
                     proc["procedure_plan"] = new_val
                     print(f"    [POST-PROCEDURE-FILTER] removed non-procedure items: {[r[:50] for r in removed]}")
+
+        # POST-PROCEDURE-ENDO-FINAL: final-position recovery of an arranged endoscopic/biliary procedure
+        # (ERCP/EGD/EUS/stent/paracentesis). The earlier ENDO capture can be overwritten downstream; this
+        # runs LAST among procedure hooks so "No procedures planned" never stands when the note/A-P shows
+        # an arranged ERCP (pdac19 "urgent referral to GI for an ERCP was placed"). Past "s/p ERCP"
+        # excluded. [2026-06-06, round3 #6 guard, pdac19]
+        proc_ef = keypoints.get("Procedure_Plan", {})
+        if isinstance(proc_ef, dict):
+            pv_ef = str(proc_ef.get("procedure_plan", "") or "")
+            pl_ef = pv_ef.lower()
+            hay_ef = (note_text or "") + " \n " + (assessment_and_plan or "")
+            for m_ef in re.finditer(r'\b(ercp|egd|eus|biliary stent(?:\s+placement)?|stent placement|paracentesis)\b',
+                                    hay_ef, re.IGNORECASE):
+                ctx_ef = hay_ef[max(0, m_ef.start() - 45):m_ef.end() + 25].lower()
+                if not re.search(r'referral|was placed|will|urgent|pending|plan|arrange|scheduled|recommend', ctx_ef):
+                    continue
+                if re.search(r's/p|status post|already|completed', ctx_ef):
+                    continue
+                em_ef = m_ef.group(1).strip()
+                disp_ef = em_ef.upper() if len(em_ef) <= 5 else em_ef
+                if em_ef.lower() not in pl_ef:
+                    if pl_ef in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
+                        proc_ef["procedure_plan"] = disp_ef
+                    else:
+                        proc_ef["procedure_plan"] = pv_ef + ", " + disp_ef
+                    pv_ef = proc_ef["procedure_plan"]
+                    pl_ef = pv_ef.lower()
+                    print(f"    [POST-PROCEDURE-ENDO-FINAL] recovered '{disp_ef}'")
 
         # POST-IMAGING-FILTER: Remove non-imaging items from Imaging_Plan [v14]
         # Items like biopsy, thoracentesis, lumbar puncture belong in procedure, not imaging
@@ -2346,7 +2393,14 @@ def main():
                                   "mlh1", "msh2", "msh6", "pten", "cdh1", "stk11", "nbn"]
                 RESULT_PHRASES = ["was done", "results reviewed", "results show", "completed",
                                   "result:", "results:", "known mutation", "known carrier",
-                                  "history of", "problem list"]
+                                  "history of", "problem list",
+                                  # explicit result wording — a test reported as +/-/risk/score is a
+                                  # RESULT, not a future plan (b17 "BRCA test negative", b18 "MammaPrint
+                                  # came back as High Risk"). [round3 #2]
+                                  "test negative", "negative by report", "is negative", "was negative",
+                                  "test positive", "is positive", "came back", "high risk", "low risk",
+                                  "no mutation", "wild type", "wild-type", "deleterious", "pathogenic",
+                                  "carrier", "score of", "intermediate risk"]
                 items = [g.strip() for g in gen_val.split(",")]
                 valid_items = []
                 for item in items:
@@ -4293,9 +4347,13 @@ def main():
                     r'chemo(?:therapy)?\s+break|treatment\s+holiday|chemo\s+holiday'
                     r'|completed\s+(?:all\s+)?\d+\s+(?:full\s+)?cycles|finished\s+(?:all\s+)?\d+\s+cycles'
                     r'|no\s+(?:current|active)\s+(?:or\s+future\s+)?chemotherapy', hay_cc2)
+                # active-continuation signals. NB: "currently on/receiving" must be followed by an actual
+                # drug/cycle, NOT "chemotherapy break/holiday" — "currently on chemotherapy break" is the
+                # OPPOSITE of active (pdac5). [round3 #3 guard]
                 active_cc2 = re.search(
-                    r'presents?\s+for\s+c\d|currently\s+(?:on|receiving)|will\s+continue'
-                    r'|continue\s+(?:with\s+)?(?:chemo|chemotherapy|folfirinox|folfox|folfiri|gem|gemcitabine|abraxane|capecitabine|treatment)'
+                    r'presents?\s+for\s+c\d|will\s+continue'
+                    r'|currently\s+(?:on|receiving)\s+(?:chemo(?:therapy)?\b(?!\s+break|\s+holiday)|folfirinox|folfox|folfiri|gem|gemcitabine|abraxane|nab|capecitabine|cycle|c\d|treatment\b(?!\s+break))'
+                    r'|continue\s+(?:with\s+)?(?:chemo|chemotherapy|folfirinox|folfox|folfiri|gem|gemcitabine|abraxane|capecitabine)'
                     r'|resume\s+(?:treatment|chemo|therapy)|today\'?s?\s+(?:infusion|cycle)|reduced\s+\w*\s*today', hay_cc2)
                 CHEMO_TOKS_CC2 = {'folfirinox', 'mfolfirinox', 'folfox', 'folfiri', 'gemcitabine', 'gem', 'gemzar',
                                   'abraxane', 'nab-paclitaxel', 'capecitabine', 'xeloda', '5-fu', '5-fu/lv', 'nal-iri'}
