@@ -108,3 +108,9 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - [x] FIX4 全量重跑 (0错误, 14/17 landed)
 - [x] 3 residual code-fix + 单测
 - [ ] 最终确认重跑 (验证3 residual) + 全40重审 → 待用户决定
+
+## FIX5 最终确认重跑 (0错误)
+- ✅ 2/3 residual 确认修复: pdac12 therapy ipilimumab→"None"; pdac7 supportive→""(ondansetron+oxycodone都去掉).
+- ✅ round4 全主题 re-confirm held: b8 IIA/pdac16 IIB/pdac7 III/b20 Early/b14 no-tamoxifen/pdac6+15 surveillance/b2 curative/pdac14 Tylenol/b19 findings净/pdac19 Follow up/pdac11 lab净.
+- ⚠️ 2 单样本边缘(非确定性/可辩护,留观): b13 "Stage III"(model直输cT2N1,BL也Not-specified); b15 "Stage III"(FIX4=IV/FIX5=III翻动,POST-STAGE-MBC与regional-downgrade竞争).
+- FIX5 已提升为 pipeline_*_FINAL.txt.
