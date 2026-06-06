@@ -13,17 +13,19 @@
 - 每题每样本：**PL** / **BL** / **TIE** / **NA**。判据 = 谁更忠实+准确+自洽。
 
 ## STATUS（上下文满了从这里恢复）
-- [~] breast：已评 2,4,5,7,9（高置信，读全文）；待评 1,3,6,8,10-20
-- [ ] pdac 1-20
-- **关键发现（暂停决策点）**：breast5 暴露 PL stage-inference 过度处理 bug（改错医生明写的 stage + 漏双侧）→ Q10/Q11 仍给 BL 送分。需决定先修这类 bug 还是先评完全部。
+- 决策：**先评完全部 40，再统一修**（用户定）
+- [~] breast：已评 1,2,4,5,7,9（高置信，读全文）；**待评 3,6,8,10-20**
+- [ ] pdac 1-20（待评）
+- 已发现 2 类 PL bug（见上"已发现的 PL bug 类"），评完后统一修。
+- 恢复方法：读本 header → 继续读 pipeline_breast_FINAL.txt 下一个未评 ROW 的 note + BL 对应 block → 打分写入。
 
-## running tally（仅 breast 5 个高置信样本）
+## running tally（breast 6 样本：1,2,4,5,7,9）
 | 题 | PL win | BL win | TIE | NA |
 |---|---|---|---|---|
-| Q10 STAGE | 3 | 1 | 1 | 0 |
-| Q11 NOHALLUC | 0 | 1 | 4 | 0 |
-| Q7 RESP | 2 | 0 | 3 | 0 |
-| T6 DISTMET | 1 | 0 | 4 | 0 |
+| Q10 STAGE | 4 | 1 | 1 | 0 |
+| Q11 NOHALLUC | 0 | 1 | 5 | 0 |
+| Q7 RESP | 2 | 0 | 4 | 0 |
+| T6 DISTMET | 1 | 1 | 4 | 0 |
 
 ---
 
@@ -57,7 +59,20 @@
 - BL: Stage "Stage III (T3N2)" / DistMet "Not sure" / resp "Unresectable recurrence, possibly metastatic"
 - Q10 **PL**（捕捉 original III + 当前 suspected IV 的双重状态；BL 只给 III 漏了 suspected 进展）| Q11 TIE | Q7 **PL**（PL "not on treatment" 对；BL 把诊断陈述塞进 response）| T6 **PL**（"Suspected, to left cervical LN" 具体且恰当 hedge；BL "Not sure" 更含糊）
 
-### 小结（breast 5 个高置信样本）
+### breast ROW1（新患者, 术后 pT2N1a, PET/CT 待做评估转移）
+- PL: Stage "Stage IIB (pT2N1a)"（正确+具体, pT2N1a 在 path 报告）/ DistMet **No** / Met No / resp "Not yet on treatment"
+- BL: Stage "pT2N1a"（原始码）/ DistMet **Not sure** / resp "Not applicable"
+- Q10 **PL**（IIB 是 pT2N1a 的正确分组, 更有用且有原文依据）| Q11 TIE | Q7 TIE | T6 **BL**（A/P 明说 "obtain PET/CT to assess metastasis" 即分期未做完 → BL "Not sure" 对；PL "No" 过早断定）
+- **根因 bug 类2**：POST-DISTMET-DEFAULT 在"分期影像待做"时仍填 "No"。应在 A/P 含 "PET/CT to assess mets"/"staging imaging" 时给 "Not sure / pending staging"。
+
+### ⚠️ 已发现的 PL stage/met bug 类（待全部评完后统一修）
+1. **stage 过度推断**（breast5）：原文已明写 stage（含双侧/Stage X）时，inference hook 不该改写。规则：原文有明确 stage → 忠实采用。
+2. **distmet 过早 No**（breast1）：分期影像待做（PET/CT to assess mets）时 POST-DISTMET-DEFAULT 不该填 No，应 "Not sure"。
+
+### 小结（breast 6 个高置信样本：1,2,4,5,7,9）
+更新 tally：Q10 PL4/BL1/TIE1 · Q11 PL0/BL1/TIE5 · Q7 PL2/TIE4 · T6 PL1/BL1/TIE4
+（原文5个小结见下）
+### 小结（旧·breast 5 个高置信样本）
 - Q10: PL 3（2,7,9） / BL 1（5） / TIE 1（4）
 - Q11: PL 0 / BL 1（5） / TIE 4
 - Q7:  PL 2（4,9） / BL 0 / TIE 3
