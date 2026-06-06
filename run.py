@@ -2286,6 +2286,23 @@ def main():
                                 cancer_sv["Stage_of_Cancer"] = stage_sv.strip(', ')
                                 print(f"    [POST-STAGE-VERIFY-NOTE] Removed fabricated 'Stage {sn}': '{old_stage_sv}' → '{stage_sv}'")
 
+        # POST-STAGE-VERIFY-ORIG: an "Originally Stage X" historical claim must be supported by the
+        # note; an unsupported one is boilerplate fabrication. Targets ONLY the historical prefix,
+        # so current-stage inference (POST-STAGE-INFER, breast staging table) is untouched. Runs
+        # for all cancers — covers the breast path that POST-STAGE-VERIFY-NOTE skips. [2026-06-05, A4]
+        cancer_vo = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_vo, dict):
+            stage_vo = str(cancer_vo.get("Stage_of_Cancer", "") or "")
+            orig_m = re.search(r'originally\s+stage\s+(IV|I{1,3}V?[ABC]?|I[AB]|II[AB])', stage_vo, re.IGNORECASE)
+            if orig_m:
+                orig_sn = orig_m.group(1)
+                all_text_vo = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+                if not re.search(r'stage\s*' + re.escape(orig_sn.lower()), all_text_vo):
+                    new_vo = re.sub(r'(?i)originally\s+stage\s+' + re.escape(orig_sn) + r'\s*,?\s*', '', stage_vo)
+                    new_vo = new_vo.strip().strip(',').strip()
+                    cancer_vo["Stage_of_Cancer"] = new_vo if new_vo else "Not specified"
+                    print(f"    [POST-STAGE-VERIFY-ORIG] unsupported 'Originally Stage {orig_sn}' removed: '{stage_vo}' → '{cancer_vo['Stage_of_Cancer']}'")
+
         # POST-STAGE-PLACEHOLDER: clean up [X] placeholders from redacted data [v18]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
@@ -2622,6 +2639,73 @@ def main():
                 cancer["Distant Metastasis"] = "No"
                 print(f"    [POST-DISTMET-DEFAULT] Filled empty Distant Metastasis → 'No' (curative, non-metastatic)")
 
+        # POST-LOCOREGIONAL: a recurrence at the primary site or regional nodes is NOT distant
+        # metastasis. When the physician's own assessment classifies the disease as a
+        # local-regional recurrence (and no biopsy-confirmed distant met), don't let the model
+        # inflate it to Stage IV / distant met. General oncology rule, applies to all cancers. [2026-06-05, A2]
+        cancer_lr = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_lr, dict):
+            note_ap_lr = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+            stage_lr = str(cancer_lr.get("Stage_of_Cancer", "") or "")
+            dm_lr = str(cancer_lr.get("Distant Metastasis", "") or "")
+            m_lr = str(cancer_lr.get("Metastasis", "") or "")
+            # (b) locoregional-recurrence override: assessment explicitly says local/locoregional recurrence
+            locoregional = re.search(r'local[\s-]*regional recurrence|locoregional recurrence|'
+                                     r'local recurrence(?!\w)', note_ap_lr)
+            stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage_lr, re.IGNORECASE))
+            dm_says_yes = "yes" in dm_lr.lower()
+            if locoregional and (stage_says_iv or dm_says_yes):
+                confirmed_distant = re.search(r'(biopsy[\s-]*proven|biopsy[\s-]*confirmed|confirmed)\s+'
+                                              r'(distant\s+)?metasta|'
+                                              r'metastatic to (the )?(bone|brain|lung|liver)\b', note_ap_lr)
+                if not confirmed_distant:
+                    new_stage_lr = "Locally recurrent (unresectable)" if "unresectable" in note_ap_lr else "Locally recurrent"
+                    cancer_lr["Stage_of_Cancer"] = new_stage_lr
+                    cancer_lr["Distant Metastasis"] = "No"
+                    cancer_lr["Metastasis"] = "No"
+                    print(f"    [POST-LOCOREGIONAL] note says local-regional recurrence → Stage '{stage_lr}'→'{new_stage_lr}', met→No")
+            else:
+                # (c) primary-organ site named as a "metastasis" = local recurrence, not a met.
+                #     Only when DistMet is already an evidence-based No and no true distant organ is listed.
+                primary_organ = "breast" if cancer_type == "breast" else "pancrea"
+                m_low = m_lr.lower()
+                if (dm_lr.strip().lower() in ("no", "no.", "none") and "yes" in m_low
+                        and primary_organ in m_low
+                        and not any(s in m_low for s in ["liver", "hepatic", "lung", "pulmonary", "bone",
+                                                          "osseous", "brain", "cerebral", "peritone", "adrenal",
+                                                          "contralateral", "spine", "spinal"])):
+                    cancer_lr["Metastasis"] = "No"
+                    print(f"    [POST-LOCOREGIONAL] primary-site recurrence, not a met: Metastasis '{m_lr}'→'No' (DistMet already No)")
+
+        # POST-STAGE-SUSPECTED: hedged imaging ("suspicious for"/"suggestive of"/"concerning for"/
+        # "early evidence of"/"cannot exclude") metastatic disease is NOT a confirmed Stage IV.
+        # If the only met evidence is hedged and nothing is biopsy-proven/confirmed, mark it
+        # Suspected rather than confirmed. General radiology/oncology rule. [2026-06-05, A3]
+        cancer_su = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_su, dict):
+            stage_su = str(cancer_su.get("Stage_of_Cancer", "") or "")
+            if re.search(r'stage\s*iv|metastatic', stage_su, re.IGNORECASE) and "suspect" not in stage_su.lower():
+                all_text_su = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+                hedged = re.search(r'(suspicious for|suggestive of|concerning for|worrisome for|'
+                                   r'early evidence of|cannot exclude|cannot be excluded|equivocal|'
+                                   r'may represent|likely represents?)[^.]{0,45}(metasta|recurren|disease|lesion|nodul)',
+                                   all_text_su)
+                confirmed = re.search(r'biopsy[\s-]*(proven|confirmed)|fna[^.]{0,40}(metasta|adenocarc|malignan)|'
+                                      r'(confirmed|known|definite|biopsy)[^.]{0,25}metasta|'
+                                      r'metastatic\s+(adenocarcinoma|carcinoma)\b|'
+                                      r'metastatic\s+(disease\s+)?(confirmed|present)|'
+                                      r'consistent with metastatic', all_text_su)
+                if hedged and not confirmed:
+                    if re.search(r'(?i)stage\s*iv', stage_su):
+                        cancer_su["Stage_of_Cancer"] = re.sub(r'(?i)stage\s*iv', 'Suspected Stage IV (pending confirmation)', stage_su)
+                    else:
+                        cancer_su["Stage_of_Cancer"] = re.sub(r'(?i)metastatic', 'suspected metastatic (pending confirmation)', stage_su)
+                    if "yes" in str(cancer_su.get("Distant Metastasis", "")).lower():
+                        cancer_su["Distant Metastasis"] = "Not sure"
+                    if "yes" in str(cancer_su.get("Metastasis", "")).lower():
+                        cancer_su["Metastasis"] = "Not sure"
+                    print(f"    [POST-STAGE-SUSPECTED] hedged met evidence (no confirmation) → '{stage_su}' → '{cancer_su['Stage_of_Cancer']}'")
+
         # POST-STAGE-METASTATIC: If metastasis=Yes but Stage says "Not available"/"Not mentioned", set Stage IV [v24]
         cancer_diag = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_diag, dict):
@@ -2695,6 +2779,7 @@ def main():
             if isinstance(stage_pc, str) and stage_pc:
                 cleaned_pc = re.sub(r'\(\s*\)', '', stage_pc)            # empty parens
                 cleaned_pc = re.sub(r'^\s*\(([^()]+)\)', r'\1', cleaned_pc)  # unwrap leading parenthetical left after stripping "Originally Stage X (...)"
+                cleaned_pc = re.sub(r'(?i)^\s*(now|currently)\s+', '', cleaned_pc)  # drop leading connective after "Originally ..." prefix was removed
                 cleaned_pc = re.sub(r'\s*,\s*,', ', ', cleaned_pc)       # doubled commas
                 cleaned_pc = re.sub(r'(?i)\b(now|originally|currently)\s*[,;:]?\s*$', '', cleaned_pc)  # dangling connective at end
                 cleaned_pc = re.sub(r'\s{2,}', ' ', cleaned_pc)         # collapse spaces
