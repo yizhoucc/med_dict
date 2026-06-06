@@ -2794,6 +2794,26 @@ def main():
                     goals_surv["goals_of_treatment"] = "surveillance"
                     print(f"    [POST-GOALS-SURVEILLANCE] {old_goal} → surveillance (A/P says surveillance, no active meds)")
 
+        # POST-GOALS-PALLIATIVE-CHECK: palliative intent requires incurable (usually metastatic)
+        # disease. For breast cancer with NO distant metastasis and a non-Stage-IV stage, "palliative"
+        # is the wrong direction — the intent is curative (b2 locally recurrent + DistMet=No; b4 new
+        # T1 + DistMet=No). Scoped to breast (locally-advanced pancreatic can be genuinely palliative);
+        # only flips when DistMet is clearly No/None and the stage asserts no IV/metastatic disease, so
+        # suspected/confirmed Stage IV (b6) keeps palliative. [2026-06-06, fix#11, b2/b4]
+        goals_pc = keypoints.get("Treatment_Goals", {})
+        if cancer_type == "breast" and isinstance(goals_pc, dict):
+            goal_val_pc = str(goals_pc.get("goals_of_treatment", "") or "").lower().strip()
+            if goal_val_pc == "palliative":
+                cancer_pc = keypoints.get("Cancer_Diagnosis", {})
+                dm_pc = str(cancer_pc.get("Distant Metastasis", "") or "").lower().strip() if isinstance(cancer_pc, dict) else ""
+                stage_pc = str(cancer_pc.get("Stage_of_Cancer", "") or "").lower() if isinstance(cancer_pc, dict) else ""
+                dm_clearly_no = dm_pc.startswith(("no", "none", "negative")) and not any(
+                    w in dm_pc for w in ("suspected", "possible", "pending", "not sure"))
+                stage_not_iv = not re.search(r'stage\s*iv|metastatic|stage\s*4', stage_pc)
+                if dm_clearly_no and stage_not_iv:
+                    goals_pc["goals_of_treatment"] = "curative"
+                    print(f"    [POST-GOALS-PALLIATIVE-CHECK] palliative → curative (breast, DistMet=No, non-IV)")
+
         # POST-DISTMET: Ensure Distant Metastasis field exists [B48]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict) and "Distant Metastasis" not in cancer:
