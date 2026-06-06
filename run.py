@@ -2017,9 +2017,9 @@ def main():
                     r'\b(ercp|egd|eus|endoscopic ultrasound|biliary stent(?:\s+placement)?|stent placement|paracentesis)\b',
                     note_text, re.IGNORECASE):
                 ctx_endo = note_text[max(0, endo_m.start() - 45):endo_m.end() + 25].lower()
-                if not re.search(r'referral|was placed|will|urgent|pending|plan|arrange|scheduled|recommend', ctx_endo):
+                if not re.search(r'referral|will\b|urgent|pending|\bplan\b|arrange|scheduled|recommend', ctx_endo):
                     continue
-                if re.search(r's/p|status post|already|completed', ctx_endo):
+                if re.search(r's/p|status post|already|completed|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+20\d\d|20\d\d[.\-/]', ctx_endo):
                     continue
                 em = endo_m.group(1).strip()
                 em_disp = em.upper() if len(em) <= 5 else em
@@ -2287,9 +2287,9 @@ def main():
             for m_ef in re.finditer(r'\b(ercp|egd|eus|biliary stent(?:\s+placement)?|stent placement|paracentesis)\b',
                                     hay_ef, re.IGNORECASE):
                 ctx_ef = hay_ef[max(0, m_ef.start() - 45):m_ef.end() + 25].lower()
-                if not re.search(r'referral|was placed|will|urgent|pending|plan|arrange|scheduled|recommend', ctx_ef):
+                if not re.search(r'referral|will\b|urgent|pending|\bplan\b|arrange|scheduled|recommend', ctx_ef):
                     continue
-                if re.search(r's/p|status post|already|completed', ctx_ef):
+                if re.search(r's/p|status post|already|completed|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+20\d\d|20\d\d[.\-/]', ctx_ef):
                     continue
                 em_ef = m_ef.group(1).strip()
                 disp_ef = em_ef.upper() if len(em_ef) <= 5 else em_ef
