@@ -2089,23 +2089,58 @@ def main():
                     d_t[subkey_t] = default_t
                     print(f"    [POST-PLAN-TEMPORAL] cleared completed {subkey_t}: '{v_t[:50]}'")
                     continue
-                # (2) bare imaging modality the A/P marks as already done
+                # (2) bare imaging modality: a single modality name (optionally prefixed "brain"/"repeat"
+                # and suffixed "scan/chest/cap/abdomen") is a real PLAN only if the A/P actually ORDERS it
+                # for the future. If the modality has no future-order context in the A/P (it only appears
+                # as a completed/past study, or not at all), it is the model echoing a prior scan — clear
+                # it. Covers b4 "Mammogram"/b13 "Brain MRI"/b16 "CT scan"/pdac13 "CT Chest" (all completed,
+                # no A/P order). Longer values with dates/intervals ("PET/CT every 2 months") don't match
+                # the fullmatch and are left untouched. [2026-06-06, round3 #2]
                 if fkey_t == "Imaging_Plan":
-                    mod_m = re.fullmatch(r'(echocardiogram|echo|tte|muga|pet(?:/ct)?|ct|mri|ultrasound|us|mammogram|bone scan|dexa)\.?', low_t)
+                    mod_m = re.fullmatch(
+                        r'(?:brain\s+|repeat\s+|restaging\s+)?(echocardiogram|echo|tte|muga|pet(?:/ct)?|ct(?:\s+(?:scan|chest|cap|abdomen|a/?p|c/?a/?p))?|mri|ultrasound|us|mammogram|mammi|bone\s+scan|dexa)\.?',
+                        low_t)
                     if mod_m:
-                        mod_t = mod_m.group(1).split('/')[0]
+                        mod_t = mod_m.group(1).split('/')[0].split()[0]
                         search_tok = _img_alias.get(mod_t, mod_t)
                         ap_low_t = (assessment_and_plan or "").lower()
-                        done_t = False
+                        future_order_t = False
                         for mm in re.finditer(re.escape(search_tok), ap_low_t):
-                            ctx_t = ap_low_t[max(0, mm.start() - 30):mm.end() + 30]
-                            if re.search(r'looks?\s+good|has\s+done|have\s+done|done\s+the|performed|completed|reviewed|obtained', ctx_t) \
-                                    and not re.search(r'\bwill\b|plan\s+to|order|schedul|repeat|every', ctx_t):
-                                done_t = True
+                            ctx_t = ap_low_t[max(0, mm.start() - 45):mm.end() + 45]
+                            if re.search(r'\bwill\b|plan\s+to|order|schedul|repeat|every|\bin\s+\d|months?|weeks?|follow.?up|restaging|obtain|get\s+a?\s*\w*\s*' + re.escape(search_tok) + r'|consider', ctx_t) \
+                                    and not re.search(r'\bunderwent\b|\bperformed\b|\bcompleted\b|\bdone\b|\bobtained\b|\breviewed\b|looks?\s+good|\bshowed\b|\brevealed\b', ctx_t):
+                                future_order_t = True
                                 break
-                        if done_t:
+                        if not future_order_t:
                             d_t[subkey_t] = default_t
-                            print(f"    [POST-PLAN-TEMPORAL] cleared completed imaging (A/P done): '{v_t[:40]}'")
+                            print(f"    [POST-PLAN-TEMPORAL] cleared bare imaging w/o A/P future order: '{v_t[:40]}'")
+
+        # POST-GENETIC-PLAN-COMPLETED: a genomic test that already has a RESULT is not a future plan.
+        # (b17 "brca" — note "BRCA test negative"; b18 "mammaprint" — note "MammaPrint High Risk".) Clear
+        # to "None planned." Pending/in-process tests (set by POST-GENETIC-PENDING) carry pending/sent
+        # wording and are NOT touched. [2026-06-06, round3 #2]
+        gtp_c = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gtp_c, dict):
+            gv_c = str(gtp_c.get("genetic_testing_plan", "") or "").strip()
+            gl_c = gv_c.lower()
+            if gl_c and gl_c not in ("none planned.", "none", "none planned", "no genetic testing planned.", "") \
+                    and not re.search(r'pending|in process|in progress|sent|request|await|to be|will\b', gl_c):
+                GTESTS = ['brca', 'mammaprint', 'oncotype', 'foundation', 'ucsf500', 'germline', 'strata', 'tempus', 'guardant']
+                named_c = [t for t in GTESTS if t in gl_c]
+                if named_c:
+                    note_low_c = (note_text or "").lower()
+                    resulted_c = False
+                    for t in named_c:
+                        for mm in re.finditer(re.escape(t), note_low_c):
+                            ctx_c = note_low_c[max(0, mm.start() - 15):mm.end() + 45]
+                            if re.search(r'negative|positive|high risk|low risk|intermediate|result|score|detected|no mutation|\bmutation\b|intact|variant|wild.?type|deleterious|pathogenic|carrier', ctx_c):
+                                resulted_c = True
+                                break
+                        if resulted_c:
+                            break
+                    if resulted_c:
+                        gtp_c["genetic_testing_plan"] = "None planned."
+                        print(f"    [POST-GENETIC-PLAN-COMPLETED] already-resulted test '{gv_c[:35]}' → None planned.")
 
         # POST-PROCEDURE-FILTER: Remove non-procedure items from Procedure_Plan [v14]
         # Items like IHC, FISH, Oncotype, BRCA belong in genetic_testing_plan, not procedure
