@@ -65,10 +65,10 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - 不碰 #4/#5/#7/#8/#9/#10/#11(留第 4 轮).
 
 ### STATUS
-- [ ] #1 亚型幻觉
-- [ ] #2 plan 已完成项
-- [ ] #3 current_meds
-- [ ] #6 字段路由
+- [x] #1 亚型幻觉 — POST-SUBTYPE-VERIFY (b20 ductal→invasive carcinoma) ✓单测
+- [x] #2 plan 已完成项 — POST-PLAN-TEMPORAL bare-imaging 须 A/P future-order(b4/b13/b16/pdac13) + POST-GENETIC-PLAN-COMPLETED(b17/b18) ✓单测
+- [x] #3 current_meds — DOUBLET 扫note+标准双药对(pdac9/18) + POST-MEDS-COMPLETED-CHEMO(pdac5/17) ✓单测; pdac4确认非癌药PL空正确(不改)
+- [x] #6 字段路由 — PROC黑名单+激素(b5)/POST-LAB+echo保护lab内容(b17/b20)/POST-PROCEDURE-ENDO ERCP(pdac19)/POST-REFERRAL-INCOMING(pdac18) ✓单测
 - [ ] 全量重跑 FIX3
 - [ ] 全 40 重审
 
