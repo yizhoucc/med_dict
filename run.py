@@ -3064,9 +3064,17 @@ def main():
                 just_prescribed = bool(re.search(
                     r'(?:rx given|prescription (?:sent|ordered)|will start|instructed to begin|ok to start)',
                     recent + " " + summary))
-                if not cur_meds and (is_consultation or just_prescribed):
+                # An ACTUALLY-started-treatment signal in the assessment overrides the consult heuristic.
+                # (cur_meds alone is unreliable here: the model often lists PLANNED chemo as a "current"
+                # med that a later drug-dictionary hook then strips, so by output time cur_meds is empty
+                # but at this point it may be non-empty — don't gate solely on it. [bug7, breast10])
+                started_signal = bool(re.search(
+                    r'c\d+\s*d\d+|cycle\s*\d|s/p\s+\d+\s+(?:cycle|cycles)|received \d+\s+(?:cycle|cycles)|'
+                    r'currently receiving|currently on (?:chemo|cycle|treatment)|on cycle',
+                    (assessment_and_plan or "").lower() + " " + recent))
+                if (is_consultation or just_prescribed) and not started_signal:
                     resp["response_assessment"] = "Not yet on treatment — no response to assess."
-                    print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just prescribed, no current meds)")
+                    print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just-prescribed, no started-treatment signal)")
 
         # POST-RESPONSE-SURVEILLANCE: a patient s/p resection on post-surgical surveillance (no active
         # anticancer drug) is neither "on treatment" nor "not yet on treatment" — treatment is complete
