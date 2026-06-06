@@ -2773,12 +2773,18 @@ def main():
         cancer_la = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_la, dict):
             stage_la = str(cancer_la.get("Stage_of_Cancer", "") or "").lower().strip()
+            # also normalize a bare "locally advanced" the model emitted with no AJCC number (pdac10)
             empty_la = (not stage_la) or stage_la in ("not staged in note", "not mentioned",
-                                                      "not mentioned in note", "not available", "")
+                                                      "not mentioned in note", "not available", "",
+                                                      "locally advanced", "locally-advanced")
             if empty_la:
                 hay_la = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
                 dm_la = str(cancer_la.get("Distant Metastasis", "") or "").lower()
-                is_met_la = ('yes' in dm_la) or bool(re.search(r'stage\s*iv|metastatic', hay_la))
+                # gate on the DistMet FIELD (and an explicit Stage IV in the A/P), NOT on the bare word
+                # "metastatic" anywhere in the note — "no metastatic disease"/"metastatic workup" in an
+                # unrelated section would otherwise wrongly block the Stage III assignment (pdac1).
+                ap_only_la = (assessment_and_plan or "").lower()
+                is_met_la = ('yes' in dm_la) or bool(re.search(r'stage\s*iv', ap_only_la))
                 if not is_met_la and re.search(r'locally[- ]advanced', hay_la):
                     cancer_la["Stage_of_Cancer"] = "Stage III (locally advanced)"
                     print(f"    [POST-STAGE-LOCALLY-ADVANCED] empty stage + locally advanced → Stage III")
@@ -3989,8 +3995,11 @@ def main():
                                        'plan to', 'consider', 'candidate for', 'prefer',
                                        'proceed with', 'not receiving', 'not yet', 'would',
                                        'versus', ' vs ', 'either', 'or ')
+                # NOTE: bare 'receiving' omitted — it is matched inside the negation "not receiving"
+                # (b17 "not receiving AC as planned"); active_sig_rf already covers "currently
+                # receiving". [2026-06-06, fix#2 guard]
                 current_verb_rf = ('continue', 'continuing', 'currently', 'tolerating',
-                                   'receiving', 'on treatment with', 'is on ', 'remains on')
+                                   'on treatment with', 'is on ', 'remains on')
                 kept_rf = []
                 for tok in [m.strip() for m in meds_val_rf.split(",") if m.strip()]:
                     base = tok.lower().split('(')[0].strip()
@@ -3999,18 +4008,22 @@ def main():
                         continue
                     # locate occurrences of the acronym as a whole token in the text
                     tok_re = r'\b' + re.escape(base).replace(r'\-', r'[-/ ]?').replace(r'\/', r'[-/ ]?') + r'\b'
-                    is_current = False
+                    found_noncurrent = False  # an occurrence is explicitly framed as option/plan/refused
+                    found_current = False     # an occurrence has administration/current evidence
                     for occ in re.finditer(tok_re, hay_rf):
                         win = hay_rf[max(0, occ.start() - 90):occ.end() + 90]
-                        if any(nf in win for nf in noncurrent_frame_rf):
-                            continue  # framed as plan/option → this occurrence is not current
                         if active_sig_rf.search(win) or any(cv in win for cv in current_verb_rf):
-                            is_current = True
-                            break
-                    if is_current:
-                        kept_rf.append(tok)
+                            found_current = True
+                        elif any(nf in win for nf in noncurrent_frame_rf):
+                            found_noncurrent = True
+                    # Conservative: remove ONLY when there is explicit non-current framing AND no
+                    # administration evidence. Absence of an admin keyword alone is NOT enough — "on
+                    # mFOLFIRINOX (C1=...)" has neither an option-frame nor a literal cycle keyword but
+                    # is clearly current, so it must be KEPT. [2026-06-06, fix#2 guard, pdac10]
+                    if found_noncurrent and not found_current:
+                        print(f"    [POST-MEDS-REGIMEN-FAB] removed planned/discussed regimen '{tok}' (explicit option/refusal framing, no administration)")
                     else:
-                        print(f"    [POST-MEDS-REGIMEN-FAB] removed planned/discussed regimen '{tok}' (no administration evidence)")
+                        kept_rf.append(tok)
                 if len(kept_rf) < len([m for m in meds_val_rf.split(",") if m.strip()]):
                     drug_dict_rf["current_meds"] = ", ".join(kept_rf)
 
