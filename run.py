@@ -2645,25 +2645,33 @@ def main():
         # inflate it to Stage IV / distant met. General oncology rule, applies to all cancers. [2026-06-05, A2]
         cancer_lr = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_lr, dict):
-            note_ap_lr = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+            ap_only_lr = (assessment_and_plan or "").lower()          # CURRENT assessment only
+            note_ap_lr = ap_only_lr + " " + (note_text or "").lower()  # full text (for distant-met guard)
             stage_lr = str(cancer_lr.get("Stage_of_Cancer", "") or "")
             dm_lr = str(cancer_lr.get("Distant Metastasis", "") or "")
             m_lr = str(cancer_lr.get("Metastasis", "") or "")
-            # (b) locoregional-recurrence override: assessment explicitly says local/locoregional recurrence
+            # (b) locoregional-recurrence override. CRITICAL: detect the recurrence phrase in the
+            # CURRENT assessment (A/P) ONLY — the full note frequently carries a *historical* "local
+            # recurrence" heading for a patient who has since progressed to metastatic disease
+            # (e.g. breast ROW7). Searching the whole note would wrongly downgrade those P0.
             locoregional = re.search(r'local[\s-]*regional recurrence|locoregional recurrence|'
-                                     r'local recurrence(?!\w)', note_ap_lr)
+                                     r'local recurrence(?!\w)', ap_only_lr)
+            # Block the override if ANYWHERE in the note distant/metastatic disease is confirmed.
+            confirmed_distant = re.search(
+                r'biopsy[^.]{0,50}metasta|metasta[^.]{0,30}biopsy|newly diagnosed metastatic|'
+                r'metastatic\s+(\w+\s+){0,3}(to|in)\s+(the\s+)?'
+                r'(bone|brain|lung|liver|node|hepat|pulmon|osseous|vertebr|spine|adrenal|peritone)|'
+                r'metastatic\s+\w+\s+(cancer|carcinoma|adenocarcinoma)\b|'
+                r'(biopsy[\s-]*proven|biopsy[\s-]*confirmed|confirmed)\s+(distant\s+)?metasta',
+                note_ap_lr)
             stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage_lr, re.IGNORECASE))
             dm_says_yes = "yes" in dm_lr.lower()
-            if locoregional and (stage_says_iv or dm_says_yes):
-                confirmed_distant = re.search(r'(biopsy[\s-]*proven|biopsy[\s-]*confirmed|confirmed)\s+'
-                                              r'(distant\s+)?metasta|'
-                                              r'metastatic to (the )?(bone|brain|lung|liver)\b', note_ap_lr)
-                if not confirmed_distant:
-                    new_stage_lr = "Locally recurrent (unresectable)" if "unresectable" in note_ap_lr else "Locally recurrent"
-                    cancer_lr["Stage_of_Cancer"] = new_stage_lr
-                    cancer_lr["Distant Metastasis"] = "No"
-                    cancer_lr["Metastasis"] = "No"
-                    print(f"    [POST-LOCOREGIONAL] note says local-regional recurrence → Stage '{stage_lr}'→'{new_stage_lr}', met→No")
+            if locoregional and (stage_says_iv or dm_says_yes) and not confirmed_distant:
+                new_stage_lr = "Locally recurrent (unresectable)" if "unresectable" in ap_only_lr else "Locally recurrent"
+                cancer_lr["Stage_of_Cancer"] = new_stage_lr
+                cancer_lr["Distant Metastasis"] = "No"
+                cancer_lr["Metastasis"] = "No"
+                print(f"    [POST-LOCOREGIONAL] A/P says local-regional recurrence (no confirmed distant) → Stage '{stage_lr}'→'{new_stage_lr}', met→No")
             else:
                 # (c) primary-organ site named as a "metastasis" = local recurrence, not a met.
                 #     Only when DistMet is already an evidence-based No and no true distant organ is listed.
@@ -2685,7 +2693,11 @@ def main():
         if isinstance(cancer_su, dict):
             stage_su = str(cancer_su.get("Stage_of_Cancer", "") or "")
             if re.search(r'stage\s*iv|metastatic', stage_su, re.IGNORECASE) and "suspect" not in stage_su.lower():
-                all_text_su = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+                # Scope to the CURRENT assessment (A/P), NOT the full note: HPI history often
+                # carries an old "metastatic carcinoma" (e.g. a regional LN biopsy at original dx)
+                # that would wrongly satisfy the 'confirmed' guard and block a valid downgrade of a
+                # currently-only-suspected met (e.g. breast ROW9). [2026-06-05, A3 scope fix]
+                all_text_su = (assessment_and_plan or "").lower()
                 hedged = re.search(r'(suspicious for|suggestive of|concerning for|worrisome for|'
                                    r'early evidence of|cannot exclude|cannot be excluded|equivocal|'
                                    r'may represent|likely represents?)[^.]{0,45}(metasta|recurren|disease|lesion|nodul)',
