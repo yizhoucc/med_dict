@@ -1384,6 +1384,24 @@ def main():
                             print(f"    [POST-REFERRAL-VALIDATE] Removed '{spec_val}': not found in note")
                         break
 
+        # POST-REFERRAL-INCOMING: Referral = OUTGOING only. A service the note describes as already
+        # consulted ("has been seen by GI surgical oncology", "was seen by", "followed by X") is an
+        # INCOMING/past consult, not a referral this visit places. Clear it when the note has NO
+        # outgoing-referral phrasing ("refer to X"/"referral to X"/"will refer") for that service.
+        # [2026-06-06, round3 #6, pdac18]
+        if isinstance(referral, dict):
+            spec_val_in = str(referral.get("Specialty", "") or "").strip()
+            if spec_val_in and spec_val_in.lower() not in ("none", "none.", ""):
+                core_in = spec_val_in.lower().split('.')[0].split(',')[0].strip()[:24]
+                if core_in:
+                    incoming_in = re.search(r'(?:has\s+been|was|been|is\s+being)\s+(?:seen|followed|managed)\s+by[^.]{0,40}'
+                                            + re.escape(core_in[:18]), note_lower)
+                    outgoing_in = re.search(r'refer(?:ral|red|ring|s)?\s+(?:to|her|him|the\s+patient)?[^.]{0,45}'
+                                            + re.escape(core_in[:14]), note_lower)
+                    if incoming_in and not outgoing_in:
+                        referral["Specialty"] = "None"
+                        print(f"    [POST-REFERRAL-INCOMING] '{spec_val_in[:40]}' is incoming (already seen) → None")
+
         # POST-LAB: Remove imaging terms from Lab_Plan [B87]
         # Model sometimes confuses imaging (doppler, ultrasound) with lab tests.
         # Also remove "labs reviewed" type statements which describe past/current status, not future plans.
@@ -1404,6 +1422,7 @@ def main():
                     # cardiac-function imaging abbreviations (pre-anthracycline workup) — these are
                     # imaging/cardiac studies, not labs. [fix#7, b8/b17 "pre-chemotherapy TTE"]
                     "tte", "echocardiography", "muga", " ekg", "ekg ", " ecg", "ecg ", "mugascan",
+                    "echo",  # bare "Baseline echo" (b17) — echo is cardiac imaging, not a lab [round3 #6]
                 ]
                 has_imaging = any(t in lab_lower for t in LAB_IMAGING_TERMS)
                 # "labs reviewed" / "labs adequate" = past/current status, not a future plan
@@ -1419,7 +1438,14 @@ def main():
                         il = item.lower()
                         item_has_imaging = any(t in il for t in LAB_IMAGING_TERMS)
                         item_is_past = any(t in il for t in ["reviewed", "adequate", "were"])
-                        if not item_has_imaging and not item_is_past:
+                        # don't drop an item that ALSO carries real lab content (a run-on like
+                        # "ECHO cardiogram and appropriate laboratory and staging studies" keeps the
+                        # lab part rather than being nuked for the leading echo). [round3 #6, b20]
+                        item_has_lab = any(t in il for t in [
+                            "lab", "cbc", "cmp", "blood", "staging stud", "tumor marker",
+                            "ca 19", "ca19", "cea", "metabolic panel", "complete blood", "creatinine",
+                            "bilirubin", "alk phos", "lft", "estradiol"])
+                        if (not item_has_imaging and not item_is_past) or item_has_lab:
                             kept.append(item)
                     new_val = ", ".join(kept) if kept else "No labs planned."
                     if new_val != lab_val:
@@ -1981,6 +2007,31 @@ def main():
                     proc_lower = proc_val.lower()
                     print(f"    [POST-PROCEDURE] found in full note: '{match_clean}'")
 
+            # endoscopic/biliary procedures (ERCP/EGD/EUS/stent/paracentesis) — often phrased
+            # "(urgent) referral to GI for an ERCP", "ERCP was placed" — not caught by the future-verb
+            # patterns above, and a same-note procedure means "No procedures planned" is wrong/
+            # self-contradictory (pdac19 had ERCP in Referral but "No procedures planned"). Only treat
+            # as PLANNED when in an arranged/future context (referral for / will / urgent / pending /
+            # scheduled), so past "s/p ERCP" is excluded. [2026-06-06, round3 #6, pdac19]
+            for endo_m in re.finditer(
+                    r'\b(ercp|egd|eus|endoscopic ultrasound|biliary stent(?:\s+placement)?|stent placement|paracentesis)\b',
+                    note_text, re.IGNORECASE):
+                ctx_endo = note_text[max(0, endo_m.start() - 45):endo_m.end() + 25].lower()
+                if not re.search(r'referral|was placed|will|urgent|pending|plan|arrange|scheduled|recommend', ctx_endo):
+                    continue
+                if re.search(r's/p|status post|already|completed', ctx_endo):
+                    continue
+                em = endo_m.group(1).strip()
+                em_disp = em.upper() if len(em) <= 5 else em
+                if em.lower() not in proc_lower:
+                    if proc_lower in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
+                        proc["procedure_plan"] = em_disp
+                    else:
+                        proc["procedure_plan"] = proc_val + ", " + em_disp
+                    proc_val = proc["procedure_plan"]
+                    proc_lower = proc_val.lower()
+                    print(f"    [POST-PROCEDURE-ENDO] captured endoscopic/biliary procedure: '{em_disp}'")
+
         # POST-PLAN-ROUTING: field-routing cleanups — keep each plan field semantically pure. [fix#7]
         # (a) FNA / core biopsy / aspiration are PROCEDURES, not imaging studies and not genetic
         #     tests. The model sometimes duplicates "plan to FNA the mass" into Imaging_Plan and
@@ -2173,6 +2224,9 @@ def main():
                     "continue on", "start on", "could use", "could consider",
                     "chemotherapy", "systemic therapy", "hormonal therapy", "immunotherapy",
                     "adjuvant", "neoadjuvant", "chemo", "endocrine therapy",
+                    # Hormonal/endocrine systemic therapy phrasings (b5 "AI therapy for 5 years") [round3 #6]
+                    "ai therapy", "aromatase inhibitor", "anti-hormonal", "antihormonal",
+                    "ovarian suppression", "hormone therapy",
                     # Imaging items that don't belong in procedure_plan [v31 expanded]
                     "ct cap", "ct chest", "ct abdomen", "ct pelvis", "mri", "pet",
                     "dexa", "bone scan", "mammogram", "ultrasound", "echocardiogram",
