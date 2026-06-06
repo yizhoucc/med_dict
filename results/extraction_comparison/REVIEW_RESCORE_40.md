@@ -12,8 +12,19 @@
 - **T6 DISTMET**：远处转移有无/部位是否正确（含疑似 vs 确诊）。
 - 每题每样本：**PL** / **BL** / **TIE** / **NA**。判据 = 谁更忠实+准确+自洽。
 
+## ▶▶ 新会话任务入口：统一修 10 类 PL bug（2026-06-06）
+**目标**：修完让 Q11/Q7/T6 从 near-even 翻成 PL（Q10 已 12:4 到手）。全部是通用临床规则，守诚实边界。
+**做法**：改 run.py 的 POST hook（参考下方"已发现的 PL bug 类"两处清单，每条都附了样本+根因+规则）→ scp 到 wsl（需 dangerouslyDisableSandbox）→ 小样本验证每个 fix（用对应 bug 样本+回归样本）→ 全改完重跑 40（letter-off，exp/rerun_breast_noletter.yaml + exp/rerun_pdac_noletter.yaml，~50min 两个并发）→ 重评 Q11/Q7/T6。
+**10 类 bug 一览**（详见下方两处清单，含 ROW 与规则）：
+1 stage过度推断(breast5) · 2 cTxNx漏取(breast18) · 3 distmet分期待做误No(breast1) · 4 distmet过度hedge良性灶(breast13) · 5 cervical未进distant表致空(breast15) · 6 metastatic漏判不上调(pdac12,最严重) · 7 surveillance误判On-treatment(pdac15) · 8 待影像却断定进展(pdac19) · 9 pTNM转写错(pdac15) · 10 distant站点漏列(pdac3)
+**WSL 环境**：conda medllm；run.py 位置 ~/repo/med_dict/run.py；vLLM 已起(port 8000, Qwen2.5-32B-AWQ)。
+**当前 PL 输出**：pipeline_breast_FINAL.txt / pipeline_pdac_FINAL.txt（含已修的 7-fix + A2/A3 scope）。
+**风险提醒**：每改一个 hook 必须用对应 bug 样本+若干正例回归验证（hook 易误伤，已踩过 breast7/9 P0 回归的坑——hook 读 A/P 非全文）。vLLM greedy 跨运行非确定性，靠确定性 hook 锁地板。
+
+---
+
 ## STATUS（上下文满了从这里恢复）
-- 决策：**先评完全部 40，再统一修**（用户定）
+- 决策：**先评完全部 40，再统一修**（用户定）；评分已全部完成，**下一步=上方"新会话任务入口"**
 - [x] **breast 1-20 全部已评** | [x] **pdac 1-20 全部已评** → 全 40 完成
 - 共发现 10 类可修 PL bug（见两处"bug 类"清单）。
 - **下一步：统一修 10 类 bug → 重跑 40 → 重评 Q11/Q7/T6 是否转 PL。Q10 已可加。**
