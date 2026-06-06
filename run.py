@@ -3594,6 +3594,61 @@ def main():
                         print(f"    [POST-MEDS-STOPPED] Removed {removed} stopped drug(s) from current_meds: {stopped_drugs}")
                         print(f"      current_meds now: '{drug_dict_meds['current_meds']}'")
 
+        # POST-MEDS-REGIMEN-FAB: a chemo REGIMEN acronym (AC/TC/AC-T/FOLFIRINOX/...) in
+        # current_meds is "current" only if the note shows it is actually being administered
+        # (cycle N, C#D#, s/p N cycles, currently on/receiving, continue). When the A/P frames
+        # it as a not-yet-started option/discussion/recommendation/refusal — "options include
+        # AC/weekly T or TC" (b17), "we discussed the regimen ... (TC)" (b12), "not receiving AC
+        # as planned" (b17) — it is a PLAN, not a current med, and belongs nowhere in
+        # current_meds. CROSSCHECK's coarse keyword scan is fooled here (its "start" matched a
+        # neighbouring "start dignicap"), so handle regimen acronyms explicitly. General
+        # oncology rule: you cannot be "currently on" a regimen with no administration evidence.
+        # [2026-06-06, fix#2, b12/b17]
+        REGIMEN_ACRONYMS = {"ac", "tc", "act", "ac-t", "ac/t", "t/ac", "tac", "tch", "tchp",
+                            "thp", "ddac", "ec", "fec", "caf", "cmf", "cef",
+                            "folfirinox", "folfox", "folfiri", "folfoxiri", "capox", "gemox",
+                            "nal-iri", "ac/weekly t"}
+        drug_dict_rf = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_rf, dict):
+            meds_val_rf = (drug_dict_rf.get("current_meds", "") or "").strip()
+            if meds_val_rf:
+                hay_rf = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+                active_sig_rf = re.compile(
+                    r'c\d+\s*d\d+'
+                    r'|cycle\s*#?\s*\d'
+                    r'|on\s+cycle'
+                    r'|s/?p\s+\d+\s+cycles?'
+                    r'|(?:received|completed|currently\s+on|started)\s+(?:\w+\s+){0,3}?\d+\s+cycles?'
+                    r'|currently\s+(?:on|receiving|being\s+treated)')
+                noncurrent_frame_rf = ('option', 'discuss', 'recommend', 'we will need',
+                                       'plan to', 'consider', 'candidate for', 'prefer',
+                                       'proceed with', 'not receiving', 'not yet', 'would',
+                                       'versus', ' vs ', 'either', 'or ')
+                current_verb_rf = ('continue', 'continuing', 'currently', 'tolerating',
+                                   'receiving', 'on treatment with', 'is on ', 'remains on')
+                kept_rf = []
+                for tok in [m.strip() for m in meds_val_rf.split(",") if m.strip()]:
+                    base = tok.lower().split('(')[0].strip()
+                    if base not in REGIMEN_ACRONYMS:
+                        kept_rf.append(tok)
+                        continue
+                    # locate occurrences of the acronym as a whole token in the text
+                    tok_re = r'\b' + re.escape(base).replace(r'\-', r'[-/ ]?').replace(r'\/', r'[-/ ]?') + r'\b'
+                    is_current = False
+                    for occ in re.finditer(tok_re, hay_rf):
+                        win = hay_rf[max(0, occ.start() - 90):occ.end() + 90]
+                        if any(nf in win for nf in noncurrent_frame_rf):
+                            continue  # framed as plan/option → this occurrence is not current
+                        if active_sig_rf.search(win) or any(cv in win for cv in current_verb_rf):
+                            is_current = True
+                            break
+                    if is_current:
+                        kept_rf.append(tok)
+                    else:
+                        print(f"    [POST-MEDS-REGIMEN-FAB] removed planned/discussed regimen '{tok}' (no administration evidence)")
+                if len(kept_rf) < len([m for m in meds_val_rf.split(",") if m.strip()]):
+                    drug_dict_rf["current_meds"] = ", ".join(kept_rf)
+
         # POST-MEDS-CROSSCHECK: Verify current_meds drugs appear in note's medication list or A/P as current [v32]
         # Runs AFTER IV-CHECK and STOPPED to catch drugs added by other hooks
         drug_dict_cc = keypoints.get("Current_Medications", {})
