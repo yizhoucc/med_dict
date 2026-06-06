@@ -69,8 +69,8 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - [x] #2 plan 已完成项 — POST-PLAN-TEMPORAL bare-imaging 须 A/P future-order(b4/b13/b16/pdac13) + POST-GENETIC-PLAN-COMPLETED(b17/b18) ✓单测
 - [x] #3 current_meds — DOUBLET 扫note+标准双药对(pdac9/18) + POST-MEDS-COMPLETED-CHEMO(pdac5/17) ✓单测; pdac4确认非癌药PL空正确(不改)
 - [x] #6 字段路由 — PROC黑名单+激素(b5)/POST-LAB+echo保护lab内容(b17/b20)/POST-PROCEDURE-ENDO ERCP(pdac19)/POST-REFERRAL-INCOMING(pdac18) ✓单测
-- [ ] 全量重跑 FIX3
-- [ ] 全 40 重审
+- [x] 全量重跑 FIX3 — FIX3-final (含5个patch), 0错误, 11/11 targeted fix验证通过
+- [ ] 全 40 重审 (进行中)
 
 ---
 
@@ -80,3 +80,8 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - 审查记录: `REAUDIT_40_v2.md`(Round 2) / 本文档(Round 3)
 - 代码: `run.py`(POST hooks, FINAL 实际路径) / `prompts/extraction.yaml` + `prompts/pdac/extraction.yaml` + `prompts/plan_extraction.yaml` + `prompts/pdac/plan_extraction.yaml`
 - WSL: `ssh wsl`, python=`/home/yc/miniconda3/envs/medllm/bin/python`, 跑法 systemd-run --user(linger已开), vLLM port 8000
+
+
+## FIX3-final 验证 (11/11 OK)
+- #1 b20 ductal→invasive carcinoma ✓ | #2 b4/b16(CT删US留)/b17/b18 imaging+genetic已完成清空 ✓ | #3 pdac9/18 +gemcitabine, pdac5 chemo-break清空 ✓ | #6 b5 AI出procedure, b17 echo出lab, pdac19 ERCP捕获, pdac18 incoming→None ✓
+- 注: FIX3首跑暴露5个'被后置hook覆盖'缺口(b16多modality/b17b18 genetic-SEARCH重填/pdac5 'currently on break'/pdac19 ERCP被覆盖), 已加patch(clause-split/RESULT-CHECK增强/active正则\b/ENDO-FINAL)并最终重跑验证.
