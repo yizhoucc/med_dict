@@ -21,9 +21,10 @@
 Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagnosis(Type/Stage/Distant Met/Metastasis) · Lab_Results(lab_summary) · Clinical_Findings(findings) · Current_Medications(current_meds) · Treatment_Changes(recent_changes/supportive_meds) · Treatment_Goals(goals) · Response_Assessment · Medication_Plan · Therapy_plan · radiotherapy_plan · Procedure_Plan · Imaging_Plan · Lab_Plan · Genetic_Testing_Plan · follow_up · Advance_care · Referral · Genetic_Testing_Results
 
 ## STATUS（上下文满了从这里恢复）
-- [进行中] breast 1-15 ✓ | breast 16-20 待 | pdac 1-20 待
-- 进度：15/40 | 下一步：派 subagent 审 breast 16-20(PL行2942/3097/3261/3413/3574; BL行1148/1224/1300/1376/1452; coral_idx 35-39),再 pdac 1-20
+- [进行中] breast 1-20 ✓全部完成 | pdac 1-20 待
+- 进度：20/40 | 下一步：派 subagent 审 pdac 1-20。PL行(pdac):R1 445,R2 591,R3 761,R4 931,R5 1074,R6 1247,R7 1413,R8 1559,R9 1711,R10 1869,R11 2033,R12 2185,R13 2340,R14 2510,R15 2668,R16 2823,R17 2990,R18 3127,R19 3273,R20 3428(end3584)。BL行(pdac):Rn=8+(n-1)*76。pdac coral_idx=n-1。prompt=prompts/pdac/extraction.yaml+prompts/pdac/plan_extraction.yaml。
 - 模板见上方各 subagent prompt(三重任务:正确性/vs BL/改进; 铁律禁脚本); 主复核P0(亲读原文),P1抽验,P2信任subagent
+- 注意pdac特有:碳水化合物癌(carcinomatosis)、CA19-9、FOLFIRINOX/gem-nab、surveillance、Whipple等
 - 派 subagent 方式：general-purpose，每个审1 sample，给PL行范围+BL行范围+prompt路径+三重任务(正确性/vs BL/改进)。主Claude复核P0/P1。
 - PL行范围(breast): R1 620,R2 760,R3 921,R4 1091,R5 1237,R6 1392,R7 1547,R8 1711,R9 1869,R10 2024,R11 2182,R12 2322,R13 2474,R14 2626,R15 2781,R16 2942,R17 3097,R18 3261,R19 3413,R20 3574(end3715)
 - PL行范围(pdac): R1 445,R2 591,R3 761,R4 931,R5 1074,R6 1247,R7 1413,R8 1559,R9 1711,R10 1869,R11 2033,R12 2185,R13 2340,R14 2510,R15 2668,R16 2823,R17 2990,R18 3127,R19 3273,R20 3428(end3584)
@@ -33,9 +34,12 @@ Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagno
 ## ★ 汇总 tally（实时更新, 主复核后）
 | 严重级 | 计数 | 涉及 sample |
 |---|---|---|
-| P0 | 1 | b4(Stage III幻觉) |
-| P1 | ~28 | b1-b15累计(见各sample)。新增高危类:b12 current_meds="tc"(拒绝方案当现药)、b14"Continue tamoxifen"(否决药当现治疗)、b11 findings截断漏切缘阳性 |
+| P0 | 2 | b4(Stage III幻觉), b17(current_meds="ac"编造现用化疗) |
+| P1 | ~40 | breast 20样本累计(见各sample)。高危类:current_meds化疗方案幻觉(b12 tc/b17 ac)、否决药当现药(b14)、Type亚型幻觉(b20 IDC)、findings塞plan(b19)、Medication_Plan hook-bug追加非癌药(b19) |
 | P2 | 多 | 各sample均有 |
+
+### breast 20样本 vs BL 总览(主复核校准后)
+逐sample PL整体均领先BL(PL胜6-14 vs BL胜0-4),但**没有一个sample做到字段级零失分**——每个都有1-4个字段被BL反超(多为plan字段错配/遗漏、current_meds时态、Type措辞)。即"逐sample PL赢"成立,但"字段级全方位碾压"尚未达到。BL的胜场几乎全来自:①plan字段PL放错/遗漏(FNA/echo/surgery/biopsy/radiotherapy) ②current_meds PL编造化疗(b12/b17,比BL倒灌非癌药更危险) ③Type/goals措辞。BL自身普遍犯:current_meds倒灌非癌药(几乎每个breast)、goals写疗法类型、schema缺second opinion/in-person/Metastasis子键、漏stage/grade/MammaPrint。
 
 ### 反复出现的模式(改进重点, 10/40 已很清晰)
 1. **plan类时态混淆**：已完成(已做影像/已抽labs)当未来计划(b2,b3) → plan时态过滤hook强化
@@ -52,6 +56,19 @@ Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagno
 12. **suspected-as-confirmed stage/Type**(b4,b9,b13,b15)：推断/疑似当确诊或武断 → suspected-stage门 + inferred标注 + FAITHFUL疑似门(已有POST-STAGE-SUSPECTED但仅管stage已IV的情形,需扩到Type字段+stage<IV的"now Stage III"推断)
 13. **plan字段遗漏**：radiotherapy漏隐含"after radiation"(b13)、Procedure泛化丢术式(b13)、findings漏切缘阳性(b11) → 隐含放疗推断+术式全称保留+margin必收
 14. **文本截断bug**(b11 findings "(t.")：排查生成max_tokens/字符串处理
+15. **current_meds化疗方案幻觉**(高危P0类,b12 tc/b17 ac)：讨论/拒绝/未启动的化疗regimen名(AC/TC/AC-T/FOLFIRINOX)进current_meds → G4 FAITHFUL拦"明确矛盾"(note含"not receiving X"/"options include"/"prefer...instead"+无cycle/currently on→清空)
+16. **Medication_Plan hook-bug**(b19)：我方"; also:"拼接逻辑把非癌药(doxycycline)/PRN镇痛/重复药(ondansetron=zofran)塞进plan → 修该hook:仅追加癌相关+去重
+17. **completed-test当plan**(b17 brca/b18 mammaprint)+**germline pending漏**(b20)：已出结果→Results;pending→Plan"sent pending";已完成→不进Plan
+18. **radiotherapy "not recommended"丢失**(b13,b18)：RadOnc不推荐放疗(due to X)写成None → 写"Radiation NOT recommended (reason)"
+19. **Patient type模板表头误导**(b20)：表头"New patient Visit"vs正文"return/follow up"冲突→以正文为准
+20. **Type亚型幻觉**(b20)：病理仅"lobular differentiation"却断言IDC → 仅pathology明写才标IDC/ILC
+21. **Procedure_Plan遗漏**(b16 FNA/b20 surgery+port)：A/P含surgery/port/pending biopsy/FNA→必收
+
+### ⚠️ breast 20/40 阶段结论
+- 2个真P0(b4 stage幻觉/b17 current_meds化疗幻觉)均为我上轮四维审查漏掉的(四维只看诊断字段,没看current_meds/全字段)。
+- 21类改进模式已饱和(后续pdac预计主要印证+少量pdac特异)。
+- **核心修复优先级**(P0/安全优先): A)current_meds化疗方案幻觉门(G4) B)stage数字须note依据否则Not staged C)Medication_Plan hook-bug D)plan字段路由(echo/FNA/biopsy/port/TTE各归位)+时态(已完成不当未来) E)Type疑似/亚型不臆断 F)plan字段必收清单(surgery/port/baseline echo/诊断biopsy/radiotherapy-not-recommended/germline pending) G)Referral去重+只outgoing。
+- 这是新一轮 hook+prompt 迭代的输入。建议:先修A-C(P0+hook-bug)→小样本验证→再批量修D-G→重跑→重审。
 
 ### ⚠️ 阶段性结论(10/40)
 全字段审查证实了用户的担忧：**重跑后非诊断字段(plan类/Type措辞/字段归位/完整性)有大量 P1**，是四维重评完全没覆盖的。诊断四维(stage/met/response/distmet)PL确实强,但plan字段错配+疑似当确诊+完整性遗漏让多个sample被BL在个别字段反超。要"全方位碾压"需基于本审查的改进清单做新一轮 hook+prompt 迭代→重跑→重审。本doc持久化,可跨上下文继续。
@@ -160,4 +177,44 @@ Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagno
 - P2 Type受体块在findings未进Type_of_Cancer;P2 goals palliative(疑似未确诊可条件化)。
 - vs BL: **PL胜13/BL胜0/TIE9**(BL: current_meds倒灌全部非癌药=P0级、goals"curative"方向错、Stage"Not specified"漏)。PL本sample全胜但自身2个P1可修。
 - 改进: ①Distant Met清洗regional节点词(axillary/supraclav/infraclav/sentinel/internal mammary),仅留真distant(cervical/肝肺骨脑/对侧);若只剩regional→"No confirmed distant(regional only)" ②suspected-stage门:A/P含"if we confirm/presumptively/pending/requires workup"+stage=IV→"Suspected Stage IV (pending confirmation)"。
+
+### breast ROW16 (coral_idx=35, Clinical stage III ILC) — 对齐✓
+- **P1** Imaging_Plan "CT scan": PET/CT(07/06)和超声均已完成,A/P无未来影像→应"No imaging planned"(已完成当未来)。
+- **P1** Procedure_Plan: 漏pending左腋窝FNA(应收)。
+- P2 findings重复受体/分期。
+- vs BL: PL胜7/BL胜1(Lab_Plan:BL抓到pending FNA)/TIE13。PL碾压:current_meds(BL倒灌降压药HCTZ/Exforge)、findings全、schema全。
+- 改进: ①imaging已完成(performed/accomplished)清空hook ②Procedure_Plan收pending FNA/biopsy ③findings去重受体。
+
+### breast ROW17 (coral_idx=36, Stage IIb T2N1M0 s/p lumpectomy推荐adjuvant) — 对齐✓ ⚠️P0
+- **P0 [主复核确认]** current_meds "ac": note imaging_plan归因明写"**not receiving AC as planned so far**",患者选TC未启动,current_meds自身归因句讲的是TC讨论——纯编造现用化疗(且是被放弃方案)。同b12模式,确认P0。
+- **P1** goals: 丢失note显式"recommend adjuvant chemotherapy"(goals_description="Not explicitly stated"遗漏)。
+- **P1** Genetic_Testing_Plan "brca": BRCA已做完阴性(属results非plan)。
+- **P1** Lab_Plan "Baseline echo": echo是影像非化验(真实lab plan="Path review Ki67")。
+- **P1** Referral.Specialty空: 漏"chemo teaching/port placement/plastic surgeon"。
+- vs BL: PL胜9/BL胜4(current_meds、goals adjuvant、Lab_Plan、Referral)/TIE9。
+- 改进: ①current_meds: 化疗方案名(AC/TC/AC-T)无"continue/currently on/cycle N"证据→清空(G4 FAITHFUL应拦"明确矛盾")+"not receiving X"检测 ②goals显式adjuvant→写入+description回填 ③已完成检测(BRCA done)→Results不进Plan ④Lab_Plan剔echo ⑤Referral收chemo teaching/port/plastic。
+
+### breast ROW18 (coral_idx=37, cT2NX ATM携带者) — 对齐✓
+- **P1** Genetic_Testing_Plan "mammaprint": MammaPrint已出结果(High Risk -0.622,已在Results)非未来计划。
+- **P1** radiotherapy_plan "None": 漏"RadOnc因ATM突变不推荐放疗"(重要临床决策,BL抓到"Not recommended due to ATM")。
+- P2 PR跨字段不一致(Type用A/P"PR-",Genetic_Results用path"PR+<5%")。
+- vs BL: PL胜14/BL胜2(radiotherapy、Genetic_Plan)/TIE6。PL碾压:second opinion(BL漏)、grade、节点依赖化疗逻辑、findings。
+- 改进: ①已出结果的genomic test(MammaPrint/Oncotype/BRCA)→剔出Plan置"None planned" ②radiotherapy "not recommended/not offering (due to X)"→写"Radiation NOT recommended (reason)"非None ③PR跨字段一致化(A/P优先+加注)。
+
+### breast ROW19 (coral_idx=38, s/p mastectomy NED随访) — 对齐✓ ⚠️hook-bug
+- **P1** current_meds: 漏zoladex/goserelin(卵巢抑制作内分泌治疗,note"cont zoladex locally monthly"),只写exemestane。
+- **P1** Clinical_Findings: 几乎全是治疗PLAN(continue exemestane/DEXA/estradiol/BSO/q6mo)塞进findings,非客观查体/影像。
+- **P1 [hook-bug]** Medication_Plan尾部"; also: ondansetron, zofran, doxycycline, acetaminophen, hydrocodone": **我们自己的supportive/med hook误追加非癌药(doxycycline抗生素)+重复(ondansetron=zofran)+PRN镇痛**。需查该hook。
+- P2 Genetic_Testing_Results含ER/PR/Ki67 IHC(应只留FISH/MammaPrint)。
+- vs BL: PL胜6/BL胜1(Clinical_Findings:BL方向对PL全塞plan)/TIE14。PL碾压:Stage(BL漏"Clinical stage 2-3")、MammaPrint(BL漏)、[REDACTED]处理。
+- 改进: ①current_meds收zoladex/goserelin/leuprolide(endocrine上下文) ②findings剔计划动词句(continue/recommend/needs/consider/check) ③**修Medication_Plan "; also:"拼接hook:过滤抗生素/PRN镇痛+同药去重** ④Genetic_Results剔IHC受体%。
+
+### breast ROW20 (coral_idx=39, 双侧HER2+,liver/lung nodules疑似) — 对齐✓
+- **P1** Patient type "New patient": note正文"presents for a return visit"/"returns for follow up"(模板表头"New patient Visit"误导)→应Follow up。
+- **P1** Type "invasive ductal carcinoma": note病理只说"invasive cancer with some lobular differentiation"+ecadherin+,无ductal→编造IDC亚型。
+- **P1** Procedure_Plan "No procedures planned": 漏手术("surgery will be determined by response")+port-a-cath。
+- **P1** Genetic_Testing_Plan/Results: 漏"Germ line panel pending"(BL抓到)。
+- P2 Stage空(note"early stage"应取);P2 Lab_Plan混入port(procedure)。
+- vs BL: PL胜11/BL胜3(Procedure_Plan手术、Genetic germline pending、Stage)/TIE7。PL碾压:Distant Met(Suspected vs BL答非所问)、goals、方案完整度。
+- 改进: ①Patient type表头vs正文冲突→以正文return/follow up为准 ②Type病理仅"lobular differentiation"禁断言IDC ③Procedure_Plan: A/P含surgery/port→必收 ④germline panel pending→Genetic_Plan"sent pending" ⑤Stage取"early stage" ⑥Lab_Plan剔port。
 
