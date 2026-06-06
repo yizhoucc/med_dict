@@ -14,19 +14,17 @@
 
 ## STATUS（上下文满了从这里恢复）
 - 决策：**先评完全部 40，再统一修**（用户定）
-- [x] **breast 1-20 全部已评**（1-9 高置信读全文；10-20 中置信 BL block+PL字段）
-- [ ] **pdac 1-20（待评，下一批）**
-- 已发现 5 类 PL bug（见"已发现的 PL bug 类"），评完 pdac 后统一修。
-- 恢复方法：读本 header → 读 pipeline_pdac_FINAL.txt 下一未评 ROW 的 note + baseline_extract_pdac_json.txt 对应 ROW block → 判 4 题写入 → 更新 tally。
-- BL 字段名：单 "Distant_Metastasis"（无 Metastasis）。
+- [x] **breast 1-20 全部已评** | [x] **pdac 1-20 全部已评** → 全 40 完成
+- 共发现 10 类可修 PL bug（见两处"bug 类"清单）。
+- **下一步：统一修 10 类 bug → 重跑 40 → 重评 Q11/Q7/T6 是否转 PL。Q10 已可加。**
 
-## running tally（breast 全 20）
-| 题 | PL win | BL win | TIE | 说明 |
+## ★ running tally（全 40）
+| 题 | PL | BL | TIE | 结论 |
 |---|---|---|---|---|
-| Q10 STAGE | 6 (1,2,6,7,8,9) | 2 (5,18) | 12 | PL 明显领先 |
-| Q11 NOHALLUC | 1 (6) | 1 (5) | 18 | 已扳平（fix前BL9） |
-| Q7 RESP | 3 (4,6,9) | 1 (10) | 16 | PL 领先 |
-| T6 DISTMET | 3 (6,9,20) | 4 (1,13,15) | 13 | 仍微输，需修3类distmet bug |
+| Q10 STAGE | 12 | 4 | 24 | ✅ 可加为 PL 题（3:1） |
+| Q11 NOHALLUC | 1 | 2 | 37 | 近平；BL胜=可修bug |
+| Q7 RESP | 4 | 3 | 33 | 近平略PL；BL胜=可修bug |
+| T6 DISTMET | 5 | 6 | 29 | 近平略输；BL胜=可修bug |
 
 ---
 
@@ -102,6 +100,56 @@
 - **Q7 RESP：PL 3 : BL 1 : TIE 16** —— PL 领先。BL 1 胜=breast10(PL "On treatment" 存疑)
 - **T6 DISTMET：PL 3 : BL 4 : TIE 13** —— **仍微输 BL**。BL 胜=breast1(分期待做误 No)、13(良性灶过度 hedge)、15(空 distmet bug)；PL 胜=6,9,20(疑似 hedge 漂亮)
 - 结论：Q10/Q7 可作 PL 评分题（领先）；Q11 已扳平（修 breast5 类后可转 PL）；**T6 仍需修 3 类 distmet bug 才能转正**。
+
+## 逐样本（pdac，中置信：BL block + PL字段；6/8/20 读过全文）
+- ROW1（locally advanced, 肺新结节 possibly met）：Q10 TIE | Q11 TIE | Q7 TIE | T6 **PL**（PL "Not sure" 对应肺结节疑似；BL "No" 漏）
+- ROW2（s/p 切除, now metastatic liver）：Q10 **PL**（"now metastatic Stage IV"；BL "Not specified"）| Q11 TIE | Q7 TIE | T6 TIE
+- ROW3（metastatic liver/spleen/peritoneal）：Q10 **PL**（Stage IV；BL punts）| Q11 TIE | Q7 TIE | T6 **BL**（BL 列全 liver+spleen+peritoneal；PL 漏 spleen）
+- ROW4（locally advanced→liver met, surveillance）：全 TIE
+- ROW5（Stage IV oligomet abdominal wall）：全 TIE
+- ROW6（疑似复发, 肝灶 suggestive）：Q10 **PL**（捕 recurrence trajectory；BL 只原始）| Q11 TIE | Q7 TIE | T6 TIE
+- ROW7（locally advanced tail, neoadj 响应）：全 TIE（PL stage 空 vs BL "Not specified" 都 punt）
+- ROW8（recurrent metastatic, 活检证实 nodal）：Q10 **PL**（now metastatic IV；BL "pT2N2" 漏当前）| Q11 TIE | Q7 TIE | T6 **PL**（PL "Yes nodes"；**BL "No" 错**——活检证实转移）
+- ROW9（metastatic lungs）：全 TIE
+- ROW10（locally advanced, stable）：全 TIE
+- ROW11（newly dx Stage IV liver）：全 TIE
+- ROW12（metastatic liver/lungs/腹膜癌病, 进展）⚠️：Q10 **BL** | Q11 **BL** | Q7 TIE | T6 **BL** —— **PL 大错**：明确转移却输出 "Stage III"+"Not sure"，无 hook 纠正（model 漏判 + 没上调 hook）
+- ROW13（locally advanced unresectable, stable）：全 TIE
+- ROW14（metastatic Stage IV liver, 新患）：全 TIE
+- ROW15（resected pT2N3, surveillance, CA19-9 升=疑复发）⚠️：Q10 **BL**（BL "pT2N3"=原文；PL "ypT 3N2" 错）| Q11 TIE | Q7 **BL**（**PL "On treatment" 错**——患者在 surveillance；BL 抓住"升标志物疑复发"）| T6 TIE
+- ROW16（Stage IIB cT1cN1cM0, 响应；肾/肺另原发）：全 TIE（都没把肾/肺灶误当胰癌转移）
+- ROW17（locally advanced, break, stable）：全 TIE
+- ROW18（s/p 远端胰切除, node+ 2/29, adjuvant）：Q10 **PL**（"resectable→2/29 LN+" 有信息；BL punts）| Q11 TIE | Q7 **PL**（PL "no response data" 较对；**BL 把副作用 hand-foot/mucositis 当 response**）| T6 TIE
+- ROW19（locally adv unresectable, 进展vs胆梗 待影像）：Q10 TIE | Q11 TIE | Q7 **BL**（真值不确定待影像；BL "uncertain...possible progression or biliary obstruction" 对；PL "not responding" 过早断定）| T6 TIE
+- ROW20（newly dx metastatic liver+peritoneum）：Q10 **PL**（干净 Stage IV；BL 冗长 "not specified AJCC"）| Q11 TIE | Q7 TIE | T6 TIE
+
+### pdac 全 20 汇总
+- Q10：PL 6（2,3,6,8,18,20） : BL 2（12,15） : TIE 12
+- Q11：PL 0 : BL 1（12） : TIE 19
+- Q7：PL 1（18） : BL 2（15,19） : TIE 17
+- T6：PL 2（1,8） : BL 2（3,12） : TIE 16
+
+---
+
+## ★ 全 40 最终汇总（breast 20 + pdac 20）
+| 题 | PL | BL | TIE | 结论 |
+|---|---|---|---|---|
+| **Q10 STAGE** | **12** | 4 | 24 | **PL 干净领先 3:1 → 可加为 PL 评分题** ✅ |
+| **Q11 NOHALLUC** | 1 | 2 | 37 | 近平（fix 前 BL 9→现 1:2）；2 个 BL 胜=可修 bug |
+| **Q7 RESP** | 4 | 3 | 33 | 近平略 PL；3 个 BL 胜=可修 bug |
+| **T6 DISTMET** | 5 | 6 | 29 | 近平略输；6 个 BL 胜=可修 bug |
+
+### 关键结论（回答用户"能否加回评分题"）
+- **Q10 STAGE 现在就能加**（PL 12:4 干净领先）——fix 后 PL 在 metastatic/suspected/recurrent 分期全面占优，BL 多 "Not specified"。
+- **Q11/Q7/T6 暂未干净碾压**（near-even），但**全部 BL 胜场都来自已定位的可修 PL bug**（非 BL 本质更强）。修完下列 bug 后预期三题都能翻成 PL：
+
+### ⚠️ 已发现的 PL bug 类（统一修，修完预计 Q11/Q7/T6 转 PL）
+- 全样本新增 bug（pdac）：
+  - **6. metastatic 漏判不上调**（pdac12）：原文明确转移（腹膜癌病/多器官）但 model 输出非IV stage+hedged met，无 hook 上调。需：原文有 carcinomatosis/多远处灶/“metastatic <cancer>” → 强制 Stage IV + DistMet Yes。
+  - **7. surveillance 误判 On treatment**（pdac15）：POST-RESPONSE-TREATMENT 对已切除/监测期患者误填 "On treatment"。需结合 goals=surveillance / 无活动抗癌药判定。
+  - **8. response 过早断定进展**（pdac19）：原文"待影像区分 进展vs胆梗"时 PL 写 "not responding"。需 hedge。
+  - **9. path stage 转写错**（pdac15 "ypT 3N2" vs 原文 pT2N3）：stage 字段忠实抄写 pTNM。
+  - **10. distant 站点漏列**（pdac3 漏 spleen）：met 站点尽量列全。
 
 ### ⚠️ 已发现的 PL stage/met bug 类（待全部评完后统一修）
 1. **stage 过度推断**（breast5）：原文已明写 stage（含双侧/Stage X）时，inference hook 不该改写。规则：原文有明确 stage → 忠实采用。
