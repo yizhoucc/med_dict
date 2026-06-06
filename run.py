@@ -1866,6 +1866,81 @@ def main():
                         med["medication_plan"] = mp_val + "; also: " + ", ".join(unique)
                     print(f"    [POST-MEDICATION-SUPPLEMENT] Added missing meds: {unique}")
 
+        # POST-PLAN-REJECTED-DRUG: a drug the physician DISFAVORED/the patient DECLINED is not a plan.
+        # Remove from therapy_plan/medication_plan any oncology drug whose note context frames it as
+        # rejected — "concerned about using X", "X alone", "prefer Y instead", "chose ... vs beginning
+        # X", "holiday vs ... X", "declined X", "would not advise X" — UNLESS the note also shows it
+        # actively given (started/cycle/currently on). Also drop "Continue X" for a drug never in
+        # current_meds (can't "continue" an unstarted drug). [2026-06-06, round4 #10, b14 tamoxifen / pdac12 ipilimumab]
+        REJECT_DRUGS = ['tamoxifen', 'letrozole', 'anastrozole', 'exemestane', 'ipilimumab',
+                        'pembrolizumab', 'nivolumab', 'olaparib', 'capecitabine', 'gemcitabine',
+                        'folfirinox', 'folfox', 'abraxane', 'paclitaxel', 'docetaxel', 'carboplatin',
+                        'cisplatin', 'oxaliplatin', 'irinotecan', 'trastuzumab', 'pertuzumab',
+                        'fulvestrant', 'palbociclib', 'ribociclib', 'abemaciclib']
+        cur_meds_rj = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").lower()
+        note_low_rj = (note_text or "").lower()
+        ap_low_rj = (assessment_and_plan or "").lower()
+        hay_rj = ap_low_rj + " \n " + note_low_rj
+        for fk_rj, sk_rj in (("Therapy_plan", "therapy_plan"), ("Medication_Plan", "medication_plan")):
+            d_rj = keypoints.get(fk_rj, {})
+            if not isinstance(d_rj, dict):
+                continue
+            v_rj = str(d_rj.get(sk_rj, "") or "")
+            if not v_rj or v_rj.lower() in ("none", "none.", ""):
+                continue
+            removed_rj = []
+            for drug in REJECT_DRUGS:
+                if drug not in v_rj.lower():
+                    continue
+                # is the drug ACTIVE (started/cycle/currently on)? then keep
+                active_rj = bool(re.search(r'(?:started|currently on|cycle\s*\d|c\d+\s*d\d+|s/p\s+\d+\s+cycles?|received\s+\d+\s+cycles?|continuing)\s+(?:\w+\s+){0,3}?' + re.escape(drug), hay_rj)) \
+                    or (drug in cur_meds_rj)
+                if active_rj:
+                    continue
+                # rejection context near the drug in the note?
+                rejected_rj = False
+                for mr in re.finditer(re.escape(drug), hay_rj):
+                    win = hay_rj[max(0, mr.start() - 45):mr.end() + 30]
+                    if re.search(r'concerned about|would not advise|do not advise|not advise|prefer\b|instead|declined|refus|chose .{0,30}vs|holiday vs|vs beginning|\balone\b|risk of', win):
+                        rejected_rj = True
+                        break
+                # "Continue <drug>" but drug never current → fabricated continuation
+                cont_fab = bool(re.search(r'continue\s+' + re.escape(drug), v_rj.lower())) and (drug not in cur_meds_rj) and not active_rj
+                if rejected_rj or cont_fab:
+                    # remove the drug token (and surrounding "continue"/"; also:" connectors)
+                    new_rj = re.sub(r'(?i)\bcontinue\s+' + re.escape(drug) + r'\b\.?', '', v_rj)
+                    new_rj = re.sub(r'(?i)[;,]?\s*also:\s*' + re.escape(drug) + r'\b', '', new_rj)
+                    new_rj = re.sub(r'(?i)[;,]\s*' + re.escape(drug) + r'\b', '', new_rj)
+                    new_rj = re.sub(r'(?i)\b' + re.escape(drug) + r'\b[,;]?\s*', '', new_rj)
+                    new_rj = re.sub(r'\s{2,}', ' ', new_rj).strip().strip(';,. ').strip()
+                    if new_rj != v_rj:
+                        removed_rj.append(drug)
+                        v_rj = new_rj
+            if removed_rj:
+                # strip dangling connector shells left after removal ("Continue/start:", "also:")
+                v_rj = re.sub(r'(?i)^(?:continue/start|continue|start|also)\s*[:.]?\s*$', '', v_rj).strip()
+                v_rj = re.sub(r'(?i)(continue/start|also)\s*[:]\s*$', '', v_rj).strip().strip(';,. ').strip()
+                d_rj[sk_rj] = v_rj if v_rj else "None"
+                print(f"    [POST-PLAN-REJECTED-DRUG] removed disfavored/declined from {sk_rj}: {removed_rj}")
+
+        # POST-THERAPY-NONE-FIX: therapy_plan must NOT be "None" when the patient is actively on / the
+        # A/P says to CONTINUE anticancer therapy (pdac7 "Will continue on with treatment without dose
+        # or schedule modification"). Backfill the active regimen. [2026-06-06, round4 #10, pdac7]
+        th_nf = keypoints.get("Therapy_plan", {})
+        if isinstance(th_nf, dict):
+            tv_nf = str(th_nf.get("therapy_plan", "") or "").strip().lower()
+            if tv_nf in ("none", "none.", ""):
+                ap_nf = (assessment_and_plan or "").lower()
+                cont_nf = re.search(r'continue\s+(?:on\s+with\s+|with\s+)?(?:treatment|therapy|chemo|chemotherapy|the same|current regimen)'
+                                    r'|will continue (?:on )?with treatment|without dose or schedule modification', ap_nf)
+                if cont_nf:
+                    reg_nf = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+                    if not reg_nf:
+                        mreg = re.search(r'(folfirinox|folfox|folfiri|gem(?:citabine)?\s*[-/ ]?\s*abraxane|gemcitabine|abraxane|capecitabine|gem/?abx)', ap_nf)
+                        reg_nf = mreg.group(1) if mreg else "current regimen"
+                    th_nf["therapy_plan"] = f"Continue current treatment ({reg_nf}) without dose or schedule modification." if reg_nf != "current regimen" else "Continue current treatment without dose or schedule modification."
+                    print(f"    [POST-THERAPY-NONE-FIX] therapy_plan was None but A/P continues treatment → '{th_nf['therapy_plan'][:50]}'")
+
         # POST-LAB-SUPPLEMENT: If lab_plan misses palbociclib/ibrance monitoring [breast-only]
         if cancer_type == "breast":
             lab = keypoints.get("Lab_Plan", {})
