@@ -2966,11 +2966,13 @@ def main():
             stage_bn = str(cancer_bn.get("Stage_of_Cancer", "") or "").lower()
             g_bn = keypoints.get("Treatment_Goals", {})
             goals_bn = str(g_bn.get("goals_of_treatment", "") or "").lower() if isinstance(g_bn, dict) else ""
-            dm_unsure = any(k in dm_bn for k in ("not sure", "unsure", "suspect", "possible"))
-            m_unsure = any(k in m_bn for k in ("not sure", "unsure", "suspect", "possible"))
+            dm_unsure = any(k in dm_bn for k in ("not sure", "unsure", "suspect", "possibl"))
+            m_unsure = any(k in m_bn for k in ("not sure", "unsure", "suspect", "possibl"))
+            # the model also sometimes lists the benign lesion itself as a (possible) met site
+            names_benign_site = bool(re.search(r'falx|falcine|parafalcine|dural|meningioma', dm_bn + " " + m_bn))
             is_curative_bn = ("curative" in goals_bn or "adjuvant" in goals_bn or "risk reduction" in goals_bn)
             not_metastatic_bn = ("iv" not in stage_bn and "metastatic" not in stage_bn)
-            if (dm_unsure or m_unsure) and is_curative_bn and not_metastatic_bn:
+            if (dm_unsure or m_unsure or names_benign_site) and is_curative_bn and not_metastatic_bn:
                 note_bn = (note_text or "").lower()
                 ap_bn = (assessment_and_plan or "").lower()
                 benign_read = re.search(
@@ -2983,11 +2985,21 @@ def main():
                     r'suspicious for (?:distant\s+)?metasta|concerning for (?:distant\s+)?metasta|'
                     r'biopsy[^.]{0,30}(?:lesion|nodule|met)|nodules? pending', ap_bn + " " + dm_bn + " " + m_bn)
                 if benign_read and not real_pending:
-                    if dm_unsure:
-                        cancer_bn["Distant Metastasis"] = "No"
-                    if m_unsure:
-                        cancer_bn["Metastasis"] = "No"
-                    print(f"    [POST-DISTMET-BENIGN] benign lesion read + curative + no met concern → distant met 'No'")
+                    for fld_bn in ("Distant Metastasis", "Metastasis"):
+                        v_bn = str(cancer_bn.get(fld_bn, "") or "")
+                        # strip the benign-read lesion site (e.g. "and possibly to falx cerebri") so it is
+                        # not reported as a met; keep any genuine regional/nodal finding alongside it.
+                        v2_bn = re.sub(
+                            r'(?i)[,;]?\s*(?:and\s+)?(?:possibl[ye]\s+)?(?:to\s+)?(?:the\s+)?'
+                            r'(?:parafalcine|falcine|falx(?:\s+cerebri)?|dural[\s-]?based?|meningioma)[^,.;]*',
+                            '', v_bn).strip().strip(',;').strip()
+                        # if nothing concrete remains (empty / bare "Yes," / pure hedge), it is "No"
+                        if (not v2_bn) or v2_bn.lower() in ("yes", "yes,", "suspected", "suspected,") \
+                                or any(k in v2_bn.lower() for k in ("not sure", "unsure", "suspect", "possibl")):
+                            v2_bn = "No"
+                        if v2_bn != v_bn:
+                            cancer_bn[fld_bn] = v2_bn
+                    print(f"    [POST-DISTMET-BENIGN] benign lesion read + curative + no met concern → cleaned met fields")
 
         # POST-STAGE-PARENS-CLEANUP: remove empty "()" and dangling connectives left behind
         # when a prior hook (e.g. POST-STAGE-VERIFY-NOTE) strips a fabricated "Stage X" out of
