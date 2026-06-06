@@ -85,3 +85,26 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 ## FIX3-final 验证 (11/11 OK)
 - #1 b20 ductal→invasive carcinoma ✓ | #2 b4/b16(CT删US留)/b17/b18 imaging+genetic已完成清空 ✓ | #3 pdac9/18 +gemcitabine, pdac5 chemo-break清空 ✓ | #6 b5 AI出procedure, b17 echo出lab, pdac19 ERCP捕获, pdac18 incoming→None ✓
 - 注: FIX3首跑暴露5个'被后置hook覆盖'缺口(b16多modality/b17b18 genetic-SEARCH重填/pdac5 'currently on break'/pdac19 ERCP被覆盖), 已加patch(clause-split/RESULT-CHECK增强/active正则\b/ENDO-FINAL)并最终重跑验证.
+
+---
+
+# Round 4 (deferred 7 主题) — 进行记录
+## 修了什么 (commits d29b0ea1..ed382b2c)
+- #4 Stage: NOBASIS锚点放宽(stage IIA/(m) TNM,b8) + POST-STAGE-EXPLICIT(明写"Stage X(cTNM)",pdac16/b8) + POST-STAGE-MBC(de novo MBC→IV,b15) + LOCALLY-ADVANCED血管包绕(pdac7)+防generic(b13)
+- #10: POST-PLAN-REJECTED-DRUG(b14 tamoxifen/pdac12 ipilimumab) + POST-THERAPY-NONE-FIX(pdac7)
+- #9: POST-PLAN-GARBAGE-CLEAN(pdac11/19 lab乱码, pdac11/13 genetic截断)
+- #5: POST-GOALS-FINAL(pdac6/15 surveillance, b2 ordering) + POST-RESPONSE-SUSPECTED-SOFTEN(pdac6)
+- #8: POST-SUPP-NOTTAKING(pdac7) + POST-SUPP-HOMEPAIN(pdac14)
+- #11: ACP hospice(pdac3/12) + POST-NONSECRETOR(pdac4/13) + POST-GERMLINE-PENDING(b20) + POST-REFERRAL-SMS(pdac19)
+- new: IV-CHECK continue+on(pdac8) + POST-PATIENT-TYPE-ONGOING(pdac19)
+- residual(FIX4验证后补): REJECTED窗口90+trial信号 / NOTTAKING窗口140 / HOMEPAIN非癌痛guard
+
+## FIX4 全量重跑验证 (14/17 spot-check OK)
+✅ b8 IIA / pdac16 IIB / b15 IV / pdac7 III / b20 Early / b14 no-tamoxifen / pdac7 therapy填充 / pdac11 lab清 / pdac6+pdac15+b2 goals / pdac14 Tylenol / b19 findings净 / pdac19 Follow up / ACP hospice / non-secretor / germline pending.
+⚠️ 3个residual(已code-fix+单测,待下次重跑确认): pdac12 ipilimumab(窗口) / pdac7 ondansetron(窗口)+oxycodone(非癌痛误加) / b13 "Stage III"(model直输cT2N1,难/可辩护,留下轮).
+
+## STATUS
+- [x] #4/#5/#7/#8/#9/#10/#11 + new 全部 code 完成 + 单测
+- [x] FIX4 全量重跑 (0错误, 14/17 landed)
+- [x] 3 residual code-fix + 单测
+- [ ] 最终确认重跑 (验证3 residual) + 全40重审 → 待用户决定
