@@ -70,7 +70,7 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - [x] #3 current_meds — DOUBLET 扫note+标准双药对(pdac9/18) + POST-MEDS-COMPLETED-CHEMO(pdac5/17) ✓单测; pdac4确认非癌药PL空正确(不改)
 - [x] #6 字段路由 — PROC黑名单+激素(b5)/POST-LAB+echo保护lab内容(b17/b20)/POST-PROCEDURE-ENDO ERCP(pdac19)/POST-REFERRAL-INCOMING(pdac18) ✓单测
 - [x] 全量重跑 FIX3 — FIX3-final (含5个patch), 0错误, 11/11 targeted fix验证通过
-- [ ] 全 40 重审 (进行中)
+- [x] 全 40 重审完成 — P0=0(从1清零), P1 ~33→~25, round3修复全held(pdac2自伤已修待验,pdac13 imaging 1边缘); 剩余~25 P1全是deferred主题#4/#5/#7/#8/#9/#10/#11 → round4. 详见 REAUDIT_40_v3.md
 
 ---
 
