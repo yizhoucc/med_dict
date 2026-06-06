@@ -2634,6 +2634,57 @@ def main():
                     cancer_diag["Stage_of_Cancer"] = "Stage IV (metastatic)"
                     print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (Metastasis=Yes)")
 
+        # POST-MET-RECONCILE: keep the two redundant met fields (Distant Metastasis / Metastasis)
+        # internally consistent. A single-field baseline can't contradict itself; the pipeline's
+        # two fields can, when an earlier gate (e.g. G4-FAITH) trims one but not the other. These
+        # rules are conservative & general — they never fabricate a brand-new met claim, only sync
+        # or propagate so the two fields agree. [2026-06-05 floor-lock, A1]
+        cancer_rc = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_rc, dict) and "Metastasis" in cancer_rc and "Distant Metastasis" in cancer_rc:
+            dm_rc = str(cancer_rc.get("Distant Metastasis", "") or "").strip()
+            m_rc = str(cancer_rc.get("Metastasis", "") or "").strip()
+            def _met_status(v):
+                v = v.lower()
+                if not v: return "EMPTY"
+                if any(k in v for k in ("not sure", "unsure", "suspect", "suspicious", "possible", "concern")): return "UNSURE"
+                if "yes" in v: return "YES"
+                if v in ("no", "no.", "none") or v.startswith("no ") or v.startswith("no,") or v.startswith("no."): return "NO"
+                return "OTHER"
+            dm_s, m_s = _met_status(dm_rc), _met_status(m_rc)
+            DISTANT_RC = ["liver", "hepatic", "lung", "pulmonary", "bone", "osseous", "brain", "cerebral",
+                          "peritone", "pleural", "adrenal", "distant", "contralateral", "spine", "spinal",
+                          "mediastin", "retroperitone", "mesenteric", "omentum", "omental", "metastatic"]
+            REGIONAL_RC = ["axill", "sentinel", "supraclavicular", "infraclavicular", "internal mammary",
+                           "chest wall", "ipsilateral", "regional", "lymph node", "node"]
+            m_has_distant = any(s in m_rc.lower() for s in DISTANT_RC)
+            m_has_regional = any(s in m_rc.lower() for s in REGIONAL_RC)
+            changed_rc = None
+            # R1: distant met implies general met — if DistMet=Yes but Metastasis is weaker, sync up
+            if dm_s == "YES" and m_s in ("EMPTY", "NO"):
+                cancer_rc["Metastasis"] = dm_rc
+                changed_rc = f"R1 distant→general: Metastasis '{m_rc}' → '{dm_rc}'"
+            # R2: Metastasis claims a distant site but DistMet was trimmed to EMPTY by an earlier
+            #     gate (unconfirmed). Don't keep an asserted claim the gate already removed, and
+            #     don't silently drop it either → mark both 'Not sure' (honest, consistent).
+            elif m_s == "YES" and m_has_distant and dm_s == "EMPTY":
+                cancer_rc["Metastasis"] = "Not sure"
+                cancer_rc["Distant Metastasis"] = "Not sure"
+                changed_rc = f"R2 unconfirmed distant claim → both 'Not sure' (was DistMet empty, Met '{m_rc}')"
+            # R3: DistMet explicitly No but Metastasis claims ONLY distant organs (no nodal/regional)
+            #     → the evidence-based No wins.
+            elif dm_s == "NO" and m_s == "YES" and m_has_distant and not m_has_regional:
+                cancer_rc["Metastasis"] = "No"
+                changed_rc = f"R3 DistMet=No vs distant-only Metastasis '{m_rc}' → 'No'"
+            # R4: mirror an UNSURE across to an EMPTY partner so they don't half-contradict
+            elif dm_s == "UNSURE" and m_s == "EMPTY":
+                cancer_rc["Metastasis"] = dm_rc
+                changed_rc = f"R4 mirror unsure → Metastasis '{dm_rc}'"
+            elif m_s == "UNSURE" and dm_s == "EMPTY":
+                cancer_rc["Distant Metastasis"] = m_rc
+                changed_rc = f"R4 mirror unsure → Distant Metastasis '{m_rc}'"
+            if changed_rc:
+                print(f"    [POST-MET-RECONCILE] {changed_rc}")
+
         # POST-STAGE-PARENS-CLEANUP: remove empty "()" and dangling connectives left behind
         # when a prior hook (e.g. POST-STAGE-VERIFY-NOTE) strips a fabricated "Stage X" out of
         # a phrase like "metastatic (Stage IV)" -> "metastatic ()". Deterministic, content-free
@@ -2643,6 +2694,7 @@ def main():
             stage_pc = cancer_pc.get("Stage_of_Cancer", "")
             if isinstance(stage_pc, str) and stage_pc:
                 cleaned_pc = re.sub(r'\(\s*\)', '', stage_pc)            # empty parens
+                cleaned_pc = re.sub(r'^\s*\(([^()]+)\)', r'\1', cleaned_pc)  # unwrap leading parenthetical left after stripping "Originally Stage X (...)"
                 cleaned_pc = re.sub(r'\s*,\s*,', ', ', cleaned_pc)       # doubled commas
                 cleaned_pc = re.sub(r'(?i)\b(now|originally|currently)\s*[,;:]?\s*$', '', cleaned_pc)  # dangling connective at end
                 cleaned_pc = re.sub(r'\s{2,}', ' ', cleaned_pc)         # collapse spaces
