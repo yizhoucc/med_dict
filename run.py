@@ -3948,6 +3948,37 @@ def main():
                                                       "concerning for early recurrence; not yet confirmed — being monitored with short-interval repeat imaging.")
                     print(f"    [POST-RESPONSE-SUSPECTED-SOFTEN] softened unconfirmed progression → hedged")
 
+        # POST-FINDINGS-PURITY: Clinical_Findings = OBJECTIVE findings (path/imaging/exam), NOT the plan
+        # and NOT a copy of the lab panel. Drop (a) plan-directive sentences ("Continue X / Recommend /
+        # Needs / consider / will / follow up") — those belong in plan fields (b19 findings was all plan);
+        # (b) lab-list sentences that just enumerate lab values already in lab_summary (pdac5/17). Keep
+        # objective imaging/exam/pathology. Never nuke to empty. [2026-06-06, round4 #7]
+        find_pu = keypoints.get("Clinical_Findings", {})
+        if isinstance(find_pu, dict):
+            fv_pu = str(find_pu.get("findings", "") or "")
+            if fv_pu and len(fv_pu) > 40:
+                sents_pu = [s.strip() for s in re.split(r'(?<=[.;])\s+', fv_pu) if s.strip()]
+                LAB_TOKENS = ['wbc', 'hgb', 'hct', 'platelet', 'plt', 'creatinine', '\\balt\\b', '\\bast\\b',
+                              'alk phos', 'alkaline phos', 'bilirubin', 'albumin', 'ca 19', 'ca19', '\\bcea\\b',
+                              'sodium', 'potassium', 'neutrophil', 'inr', 'magnesium', 'calcium']
+                kept_pu, dropped_pu = [], 0
+                for s in sents_pu:
+                    sl = s.lower()
+                    is_plan = bool(re.match(r'(continue|start|begin|recommend|consider|needs?\b|will\b|plan\b|refer|schedule|follow[\s-]?up|check\s+estradiol|continue\s+\d)', sl)) \
+                        or bool(re.search(r'\brecommend checking|needs? (?:a )?(?:dexa|scan|biopsy)|will (?:start|begin|continue|repeat|check|refer|consider)|considering (?:bso|surgery)|continue \d|q\d ?months? exams', sl))
+                    lab_hits = sum(1 for t in LAB_TOKENS if re.search(t, sl))
+                    has_number = bool(re.search(r'\d', sl))
+                    is_lab_dump = (lab_hits >= 3 and has_number)
+                    if is_plan or is_lab_dump:
+                        dropped_pu += 1
+                    else:
+                        kept_pu.append(s)
+                if dropped_pu and kept_pu:
+                    new_pu = " ".join(kept_pu).strip()
+                    if new_pu != fv_pu and len(new_pu) > 15:
+                        find_pu["findings"] = new_pu
+                        print(f"    [POST-FINDINGS-PURITY] dropped {dropped_pu} plan/lab-dump sentence(s) from findings")
+
         # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
         for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
             drug_dict = keypoints.get(drug_field_key, {})
