@@ -14,19 +14,19 @@
 
 ## STATUS（上下文满了从这里恢复）
 - 决策：**先评完全部 40，再统一修**（用户定）
-- [x] breast 1-9 已评（高置信，读全文）；**待评 breast 10-20**
-- [ ] pdac 1-20（待评）
-- 已发现 2 类 PL bug（见"已发现的 PL bug 类"），评完后统一修。
-- 恢复方法：读本 header → 读 pipeline_breast_FINAL.txt 下一未评 ROW（10起）的 note + BL block（baseline_extract_breast_json.txt 对应 ROW）→ 判 4 题写入 → 更新 tally。pdac 同理用 pipeline_pdac_FINAL.txt + baseline_extract_pdac_json.txt。
+- [x] **breast 1-20 全部已评**（1-9 高置信读全文；10-20 中置信 BL block+PL字段）
+- [ ] **pdac 1-20（待评，下一批）**
+- 已发现 5 类 PL bug（见"已发现的 PL bug 类"），评完 pdac 后统一修。
+- 恢复方法：读本 header → 读 pipeline_pdac_FINAL.txt 下一未评 ROW 的 note + baseline_extract_pdac_json.txt 对应 ROW block → 判 4 题写入 → 更新 tally。
 - BL 字段名：单 "Distant_Metastasis"（无 Metastasis）。
 
-## running tally（breast 1-9，共9样本）
-| 题 | PL win | BL win | TIE | NA |
+## running tally（breast 全 20）
+| 题 | PL win | BL win | TIE | 说明 |
 |---|---|---|---|---|
-| Q10 STAGE | 6 (1,2,6,7,8,9) | 1 (5) | 2 (3,4) | 0 |
-| Q11 NOHALLUC | 1 (6) | 1 (5) | 7 | 0 |
-| Q7 RESP | 3 (4,6,9) | 0 | 6 | 0 |
-| T6 DISTMET | 2 (6,9) | 1 (1) | 6 | 0 |
+| Q10 STAGE | 6 (1,2,6,7,8,9) | 2 (5,18) | 12 | PL 明显领先 |
+| Q11 NOHALLUC | 1 (6) | 1 (5) | 18 | 已扳平（fix前BL9） |
+| Q7 RESP | 3 (4,6,9) | 1 (10) | 16 | PL 领先 |
+| T6 DISTMET | 3 (6,9,20) | 4 (1,13,15) | 13 | 仍微输，需修3类distmet bug |
 
 ---
 
@@ -83,9 +83,33 @@
 - Q10 **PL**（给出 stage group 且=原文 IIA；BL 只给码）| Q11 TIE | Q7 TIE | T6 TIE
 - 注：此为 stage 处理的**正例**（原文 IIA → PL IIA）；对比 breast5 反例（原文 III → PL 错成 IIB）。区别：breast5 是双侧+微转移把 hook 搞晕。
 
+### breast ROW10-20（中置信：读 BL block + PL 字段 + 关键 note 段；多为早期病例）
+- ROW10（新患, neoadj 待启, 生育保存中）：Q10 TIE | Q11 TIE | Q7 **BL**（PL "On treatment" 存疑——尚未开始抗癌治疗；BL "Not applicable yet" 更稳）| T6 TIE
+- ROW11（DCIS pTisNx 风险降低）：全 TIE（PL/BL 都 pTisNx + No）
+- ROW12（Clinical Stage II, PET 无 mets）：全 TIE
+- ROW13（node+；脑 parafalcine 灶=meningioma 良性；axillary 区域）：Q10 TIE | Q11 TIE | Q7 TIE | T6 **BL**（真值无远转；BL "No" 准；PL "Not sure" 过度 hedge，被良性 meningioma 吓到）
+- ROW14（cT 未明, no distant met detected）：全 TIE（都 punt stage + No）
+- ROW15（"metastatic ... involving lymph nodes", cervical+axillary, FNA 待）：Q10 TIE | Q11 TIE | Q7 TIE | T6 **BL**（PL DistMet **空**＝bug；BL "Yes (to lymph nodes)" 给了可用答案）
+- ROW16（Clinical stage III ILC）：全 TIE（都 "Clinical stage III" + No）
+- ROW17（Stage IIb T2N1M0）：全 TIE（都给 IIb T2N1M0 + No）
+- ROW18（cT2NX, ATM mut）：Q10 **BL**（原文 cT2NX，BL 捕到，PL "Not mentioned" 漏）| Q11 TIE | Q7 TIE | T6 TIE
+- ROW19（s/p mastectomy, NED, 随访）：全 TIE（PL/BL resp 都 "NED on exam"；stage 都弱）
+- ROW20（双侧 HER2+, "liver and lung nodules present" 未活检）：Q10 TIE（PL stage **空** bug；BL "Not specified" 都不给）| Q11 TIE | Q7 TIE | T6 **PL**（PL "Suspected (liver and lung nodules pending confirmation)" 具体+hedge；BL 冗长 "no confirmation"）
+
+### breast 全 20 汇总
+- **Q10 STAGE：PL 6 : BL 2 : TIE 12** —— PL 明显领先（metastatic/suspected/IIA-IIB 正确分组）。BL 2 胜=breast5(过度推断)+breast18(PL漏cT2NX)
+- **Q11 NOHALLUC：PL 1 : BL 1 : TIE 18** —— 已扳平（fix 前 BL 9）。唯一 BL 胜=breast5
+- **Q7 RESP：PL 3 : BL 1 : TIE 16** —— PL 领先。BL 1 胜=breast10(PL "On treatment" 存疑)
+- **T6 DISTMET：PL 3 : BL 4 : TIE 13** —— **仍微输 BL**。BL 胜=breast1(分期待做误 No)、13(良性灶过度 hedge)、15(空 distmet bug)；PL 胜=6,9,20(疑似 hedge 漂亮)
+- 结论：Q10/Q7 可作 PL 评分题（领先）；Q11 已扳平（修 breast5 类后可转 PL）；**T6 仍需修 3 类 distmet bug 才能转正**。
+
 ### ⚠️ 已发现的 PL stage/met bug 类（待全部评完后统一修）
 1. **stage 过度推断**（breast5）：原文已明写 stage（含双侧/Stage X）时，inference hook 不该改写。规则：原文有明确 stage → 忠实采用。
 2. **distmet 过早 No**（breast1）：分期影像待做（PET/CT to assess mets）时 POST-DISTMET-DEFAULT 不该填 No，应 "Not sure"。
+3. **distmet 过度 hedge**（breast13）：原文明说某灶"most likely meningioma"等良性时，不该因它把 DistMet 写 "Not sure"，应 "No"。
+4. **distmet 空**（breast15）：Met 含 cervical/nodal 但 DistMet 留空。"cervical/supraclavicular" 未进 distant 站点表 → reconcile R2 没触发同步。补站点表 + 同步。
+5. **stage 漏取**（breast18）：原文有 cT2NX 但 PL 写 "Not mentioned"。提取/hook 把 cTxNx 也算作有效 stage，别漏。
+（注：1 和 5 相反——5 是漏、1 是过度改；修时都归到"原文 stage 优先忠实采用"原则）
 
 ### 小结（breast 6 个高置信样本：1,2,4,5,7,9）
 更新 tally：Q10 PL4/BL1/TIE1 · Q11 PL0/BL1/TIE5 · Q7 PL2/TIE4 · T6 PL1/BL1/TIE4
