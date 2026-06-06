@@ -3596,6 +3596,21 @@ def main():
                     tc_dict_su["supportive_meds"] = ", ".join(added_labels_su)
                 print(f"    [POST-SUPP-SUPPLEMENT] recovered supportive meds: {added_labels_su}")
 
+        # POST-MEDS-ENZYME-STRIP: pancreatic enzymes are SUPPORTIVE care, not anticancer therapy —
+        # they belong in supportive_meds (recovered there by POST-SUPP-SUPPLEMENT), not current_meds.
+        # Stripping them keeps current_meds = active anticancer therapy AND lets POST-MEDS-IV-CHECK
+        # below run (it only fires when current_meds is empty). [2026-06-06, fix#6, pdac9]
+        drug_dict_es = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_es, dict):
+            cm_es = (drug_dict_es.get("current_meds", "") or "").strip()
+            if cm_es:
+                toks_es = [t.strip() for t in cm_es.split(",") if t.strip()]
+                kept_es = [t for t in toks_es if not any(e in t.lower() for e in
+                           ['creon', 'pancreli', 'lipase', 'amylase', 'protease', 'zenpep', 'pertzye', 'viokace'])]
+                if len(kept_es) < len(toks_es):
+                    drug_dict_es["current_meds"] = ", ".join(kept_es)
+                    print(f"    [POST-MEDS-ENZYME-STRIP] removed pancreatic enzyme from current_meds (→ supportive)")
+
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
         # Skip if POST-SELF-MANAGED already cleared (physician disapproves — don't re-inject)
@@ -3659,10 +3674,15 @@ def main():
                     ]
                     PAST_CHEMO = ["previously on", "prior", "completed", "finished", "was on",
                                   "had received", "history of", "s/p"]
+                    # alias map: abbreviations / regimen-prefix forms → canonical drug name [fix#6]
+                    CHEMO_ALIAS = {"gem": "gemcitabine", "mfolfirinox": "folfirinox",
+                                   "mfolfox": "folfox", "nab-paclitaxel": "abraxane",
+                                   "5fu": "5-fu", "nal-iri": "irinotecan"}
                     found_chemo = []
                     for pattern in IV_CHEMO_PATTERNS:
                         for m in re.finditer(pattern, ap_lower_iv):
                             drug = m.group(1).strip().lower()
+                            drug = CHEMO_ALIAS.get(drug, drug)
                             if drug in KNOWN_CHEMO_IV:
                                 # Exclude past-tense mentions
                                 start = max(0, m.start() - 30)
@@ -3670,6 +3690,45 @@ def main():
                                 if any(pc in before for pc in PAST_CHEMO):
                                     continue
                                 found_chemo.append(drug)
+
+                    # fix#6 — regimen-aware patterns the (\w+) templates above miss in PDAC notes.
+                    # These notations indicate the patient IS on the regimen; "held"/"postponed"/
+                    # "s/p N cycles" are ONGOING treatment, not discontinuation (held ≠ stopped).
+                    DISCONT_IV = ('discontinued', 'd/c', 'stopped', 'switched off', 'no longer',
+                                  'progressed on', 'progression on', 'completed all', 'off chemo permanently')
+                    REGIMEN_RE = r'm?(folfirinox|folfoxiri|folfox|folfiri|gemcitabine|gemzar|abraxane|nab-paclitaxel|capecitabine|xeloda)'
+                    regimen_patterns = [
+                        # "on mFOLFIRINOX", "PDAC on FOLFOX", "started on gemcitabine"
+                        r'\b(?:on|started on|receiving|treated with)\s+' + REGIMEN_RE,
+                        # "s/p N cycles of FOLFIRINOX" — mid-regimen, ongoing
+                        r'(?:s/p|status\s+post)\s+\d+\s+cycles?\s+of\s+' + REGIMEN_RE,
+                        # "tolerated [subsequent] cycles of FOLFOX"
+                        r'tolerat\w+\s+(?:subsequent\s+)?cycles?\s+of\s+' + REGIMEN_RE,
+                        # "responding to gem abraxane" / "responding to FOLFIRINOX"
+                        r'respond\w*\s+to\s+(?:gem\s+)?' + REGIMEN_RE,
+                    ]
+                    for pattern in regimen_patterns:
+                        for m in re.finditer(pattern, ap_lower_iv):
+                            drug = m.group(1).strip().lower()
+                            drug = CHEMO_ALIAS.get(drug, drug)
+                            ctx = ap_lower_iv[max(0, m.start() - 40):m.end() + 40]
+                            if any(dc in ctx for dc in DISCONT_IV):
+                                continue
+                            found_chemo.append(drug)
+
+                    # "gem abraxane" / "gem/abraxane" doublet → both components [fix#6, pdac9]
+                    if re.search(r'gem\s*[-/ ]\s*abraxane|gemcitabine\s*[-/ ]\s*abraxane|abraxane\s*[-/ ]\s*gem', ap_lower_iv):
+                        found_chemo.extend(['gemcitabine', 'abraxane'])
+
+                    # "we will [then] resume treatment/chemo" + a named chemo drug → held, still current
+                    if re.search(r'resume\s+(?:treatment|therapy|chemo)', ap_lower_iv):
+                        for mr in re.finditer(REGIMEN_RE, ap_lower_iv):
+                            d = CHEMO_ALIAS.get(mr.group(1).lower(), mr.group(1).lower())
+                            ctx = ap_lower_iv[max(0, mr.start() - 40):mr.end() + 40]
+                            if any(dc in ctx for dc in DISCONT_IV):
+                                continue
+                            found_chemo.append(d)
+
                     if found_chemo:
                         found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
