@@ -1401,6 +1401,9 @@ def main():
                     "doppler", "ultrasound", "ct ", "ct,", "mri", "pet", "dexa",
                     "bone scan", "x-ray", "xray", "mammogram", "echocardiogram",
                     "echo ", "scan ",
+                    # cardiac-function imaging abbreviations (pre-anthracycline workup) — these are
+                    # imaging/cardiac studies, not labs. [fix#7, b8/b17 "pre-chemotherapy TTE"]
+                    "tte", "echocardiography", "muga", " ekg", "ekg ", " ecg", "ecg ", "mugascan",
                 ]
                 has_imaging = any(t in lab_lower for t in LAB_IMAGING_TERMS)
                 # "labs reviewed" / "labs adequate" = past/current status, not a future plan
@@ -1977,6 +1980,62 @@ def main():
                     proc_val = proc["procedure_plan"]
                     proc_lower = proc_val.lower()
                     print(f"    [POST-PROCEDURE] found in full note: '{match_clean}'")
+
+        # POST-PLAN-ROUTING: field-routing cleanups — keep each plan field semantically pure. [fix#7]
+        # (a) FNA / core biopsy / aspiration are PROCEDURES, not imaging studies and not genetic
+        #     tests. The model sometimes duplicates "plan to FNA the mass" into Imaging_Plan and
+        #     Genetic_Testing_Plan (b9); strip it there (it is correctly kept in Procedure_Plan).
+        PROC_ONLY_RE = re.compile(r'\b(fna|fine[- ]needle|core\s+biopsy|needle\s+biopsy|biopsy|aspiration|excisional|incisional)\b', re.I)
+        IMG_MODALITY_RE = re.compile(r'\b(ct|mri|pet|ultrasound|us|mammogram|mammi|x-?ray|bone\s+scan|dexa|echo|tte|doppler|imaging|scan)\b', re.I)
+        for fkey, subkey, default_v in (("Imaging_Plan", "imaging_plan", "No imaging planned."),
+                                        ("Genetic_Testing_Plan", "genetic_testing_plan", "None planned.")):
+            d_pr = keypoints.get(fkey, {})
+            if isinstance(d_pr, dict):
+                v_pr = str(d_pr.get(subkey, "") or "")
+                if v_pr and PROC_ONLY_RE.search(v_pr):
+                    parts_pr = [p.strip() for p in re.split(r'[;,]|(?:\.\s)', v_pr) if p.strip()]
+                    kept_pr = []
+                    for p in parts_pr:
+                        if PROC_ONLY_RE.search(p):
+                            if fkey == "Imaging_Plan" and not IMG_MODALITY_RE.search(p):
+                                continue  # bare procedure, no imaging modality → not imaging
+                            if fkey == "Genetic_Testing_Plan" and not re.search(
+                                    r'gene|brca|germline|oncotype|mammaprint|molecular|ngs|panel|genomic', p, re.I):
+                                continue  # bare procedure, no genetic content → not genetic
+                        kept_pr.append(p)
+                    new_pr = ". ".join(kept_pr).strip()
+                    new_pr = new_pr if new_pr else default_v
+                    if new_pr != v_pr:
+                        d_pr[subkey] = new_pr
+                        print(f"    [POST-PLAN-ROUTING] stripped procedure from {subkey}: '{v_pr[:50]}' → '{new_pr}'")
+
+        # (b) a port / Port-a-Cath / mediport placement is a PROCEDURE. When it appears in Lab_Plan
+        #     (b20 "...preparatory studies ... which may include a port...") but Procedure_Plan is
+        #     empty/"No procedures planned", route a clean port statement into Procedure_Plan.
+        proc_pp = keypoints.get("Procedure_Plan", {})
+        lab_pp = keypoints.get("Lab_Plan", {})
+        if isinstance(proc_pp, dict) and isinstance(lab_pp, dict):
+            pv_pp = str(proc_pp.get("procedure_plan", "") or "")
+            lv_pp = str(lab_pp.get("lab_plan", "") or "")
+            proc_empty_pp = (not pv_pp) or pv_pp.lower().strip() in (
+                "no procedures planned.", "no procedures planned", "none", "none planned.", "")
+            if proc_empty_pp and re.search(r'\bport(?:[- ]?a[- ]?cath|acath)?\b', lv_pp, re.I):
+                proc_pp["procedure_plan"] = "Port placement planned."
+                print(f"    [POST-PROC-PORT] routed port placement Lab_Plan → Procedure_Plan")
+
+        # (c) germline/genetic TESTING that was sent/ordered is a genetic test, not a referral. Move
+        #     "genetic testing sent" from Referral.Genetics → Genetic_Testing_Plan when that field is
+        #     empty. (A referral to a genetic COUNSELOR stays in Referral.) [b10]
+        ref_g = keypoints.get("Referral", {})
+        gtp_g = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(ref_g, dict) and isinstance(gtp_g, dict):
+            gen_ref = str(ref_g.get("Genetics", "") or "")
+            if re.search(r'genetic\s+testing\s+(?:sent|ordered|done|completed)|germline\s+(?:sent|ordered|testing)|brca\s+(?:testing\s+)?sent', gen_ref, re.I):
+                cur_gtp = str(gtp_g.get("genetic_testing_plan", "") or "").strip().lower()
+                if (not cur_gtp) or cur_gtp in ("none planned.", "none", "none planned", "no genetic testing planned."):
+                    gtp_g["genetic_testing_plan"] = gen_ref
+                    ref_g["Genetics"] = "None"
+                    print(f"    [POST-REFERRAL-GERMLINE] moved '{gen_ref[:40]}' Referral.Genetics → Genetic_Testing_Plan")
 
         # POST-PROCEDURE-FILTER: Remove non-procedure items from Procedure_Plan [v14]
         # Items like IHC, FISH, Oncotype, BRCA belong in genetic_testing_plan, not procedure
