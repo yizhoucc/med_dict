@@ -2188,17 +2188,53 @@ def main():
                 ASSAYS = [r'ucsf\s?500', r'strata\w*', r'foundation\s?(?:one)?', r'tempus', r'guardant',
                           r'caris', r'molecular\s+(?:testing|profiling)', r'next[- ]generation\s+sequencing',
                           r'\bngs\b', r'germline\s+(?:testing|panel)', r'oncotype', r'mammaprint']
+                # iterate EVERY occurrence of each assay (an earlier mention may be a generic education
+                # line — b5 "tools like MammaPrint and Oncotype" — while the real plan is a later one
+                # "be sent for Oncotype" / "being assessed for Oncotype DX RS"). Pick the first occurrence
+                # with a sent/in-process (→ results pending) or being-assessed/possible/consider/after-surgery
+                # (→ planned) context, skipping any occurrence that already carries a concrete RESULT VALUE
+                # (b18 "MammaPrint High Risk" is a result, not a plan). [round5 #B, b5/b13]
+                RESULT_VAL_RE = (r'high risk|low risk|intermediate|negative|positive|score|detected|carrier'
+                                 r'|\bmutation\b|variant|wild.?type|deleterious|pathogenic|intact|no mutation')
+                found_gp = False
                 for assay in ASSAYS:
-                    m_gp = re.search(assay, hay_gp, re.I)
-                    if not m_gp:
-                        continue
-                    ctx_gp = hay_gp[max(0, m_gp.start() - 30):m_gp.end() + 60].lower()
-                    if re.search(r'in\s+process|pending|sent|ordered|await|is\s+being|will\s+be\s+sent|to\s+be\s+sent|in\s+progress', ctx_gp):
-                        snippet = hay_gp[m_gp.start():m_gp.end() + 60]
-                        snippet = re.split(r'[.\n;]', snippet)[0].strip()
-                        gtp_pp["genetic_testing_plan"] = snippet + " (results pending)"
-                        print(f"    [POST-GENETIC-PENDING] captured pending assay: '{snippet[:50]}'")
+                    for m_gp in re.finditer(assay, hay_gp, re.I):
+                        ctx_gp = hay_gp[max(0, m_gp.start() - 30):m_gp.end() + 60].lower()
+                        if re.search(RESULT_VAL_RE, ctx_gp):
+                            continue  # this occurrence reports a result, not a plan
+                        sent_ctx = re.search(r'in\s+process|pending|\bsent\b|ordered|await|in\s+progress', ctx_gp)
+                        plan_ctx = re.search(r'is\s+being|being\s+(?:assessed|evaluated|done|sent|ordered|run|performed)'
+                                             r'|assess(?:ed|ing)?\s+for|will\s+be\s+sent|to\s+be\s+sent|possibl|consider'
+                                             r'|after\s+surgery|post.?surgery|may\s+(?:do|order|send|consider)', ctx_gp)
+                        if sent_ctx or plan_ctx:
+                            snippet = re.split(r'[.\n;,]', hay_gp[m_gp.start():m_gp.end() + 60])[0].strip()
+                            suffix_gp = " (results pending)" if sent_ctx else " (planned)"
+                            gtp_pp["genetic_testing_plan"] = snippet + suffix_gp
+                            print(f"    [POST-GENETIC-PENDING] captured assay: '{snippet[:50]}'{suffix_gp}")
+                            found_gp = True
+                            break
+                    if found_gp:
                         break
+
+        # POST-GENETIC-PLAN-REFERRAL: a genetics referral / "referred for genetic testing or counseling"
+        # IS the genetic-testing plan the note provides — reflect it into Genetic_Testing_Plan when that
+        # field is empty/"None planned." (b8: "we referred her for genetic testing ... referral placed to
+        # Genetics" was captured only under Referral, so the plan field wrongly read "None planned"). Keeps
+        # the Referral entry intact. Runs after PENDING (a named pending assay takes precedence). [round5 #B, b8]
+        gtp_r = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gtp_r, dict):
+            cur_r = str(gtp_r.get("genetic_testing_plan", "") or "").strip().lower()
+            if (not cur_r) or cur_r in ("none planned.", "none", "none planned", "no genetic testing planned.", ""):
+                hay_r = (assessment_and_plan or "") + " " + (note_text or "")
+                ref_r = keypoints.get("Referral", {})
+                gen_ref_r = str(ref_r.get("Genetics", "") or "") if isinstance(ref_r, dict) else ""
+                refer_sig = (re.search(r'refer\w*\s+(?:her|him|the patient|to)?[^.]{0,40}genetic\s+(?:testing|counsel)', hay_r, re.I)
+                             or re.search(r'genetic\s+(?:testing|counsel\w*)\s+referral', hay_r, re.I)
+                             or re.search(r'referr\w*\s+(?:placed\s+)?(?:to|for)\s+genetic', hay_r, re.I)
+                             or (gen_ref_r and gen_ref_r.lower() not in ("none", "") and re.search(r'genetic|counsel', gen_ref_r, re.I)))
+                if refer_sig:
+                    gtp_r["genetic_testing_plan"] = "Referred for genetic testing/counseling."
+                    print(f"    [POST-GENETIC-PLAN-REFERRAL] genetics referral → Genetic_Testing_Plan")
 
         # POST-PLAN-TEMPORAL: a plan field describes FUTURE actions. A value that reports a study/lab
         # as already DONE (past-completion verbs), or a bare imaging modality the A/P confirms is
@@ -2282,7 +2318,7 @@ def main():
             gv_c = str(gtp_c.get("genetic_testing_plan", "") or "").strip()
             gl_c = gv_c.lower()
             if gl_c and gl_c not in ("none planned.", "none", "none planned", "no genetic testing planned.", "") \
-                    and not re.search(r'pending|in process|in progress|sent|request|await|to be|will\b', gl_c):
+                    and not re.search(r'pending|in process|in progress|sent|request|await|to be|will\b|planned|referred', gl_c):
                 GTESTS = ['brca', 'mammaprint', 'oncotype', 'foundation', 'ucsf500', 'germline', 'strata', 'tempus', 'guardant']
                 named_c = [t for t in GTESTS if t in gl_c]
                 if named_c:
