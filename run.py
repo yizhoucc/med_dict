@@ -2690,16 +2690,20 @@ def main():
                                    r'early evidence of|cannot exclude|cannot be excluded|equivocal|'
                                    r'may represent|likely represents?)[^.]{0,45}(metasta|recurren|disease|lesion|nodul)',
                                    all_text_su)
+                # A confirmed metastatic DIAGNOSIS overrides hedged imaging language. Cover
+                # "metastatic <organ> adenocarcinoma/cancer", carcinomatosis, omental caking,
+                # and biopsy/FNA confirmation.
                 confirmed = re.search(r'biopsy[\s-]*(proven|confirmed)|fna[^.]{0,40}(metasta|adenocarc|malignan)|'
-                                      r'(confirmed|known|definite|biopsy)[^.]{0,25}metasta|'
-                                      r'metastatic\s+(adenocarcinoma|carcinoma)\b|'
+                                      r'(confirmed|known|definite|biopsy|diagnosed)[^.]{0,25}metasta|'
+                                      r'metastatic\s+(\w+\s+){0,2}(adenocarcinoma|carcinoma|cancer)|'
                                       r'metastatic\s+(disease\s+)?(confirmed|present)|'
-                                      r'consistent with metastatic', all_text_su)
+                                      r'consistent with metastatic|carcinomatosis|omental caking', all_text_su)
                 if hedged and not confirmed:
-                    if re.search(r'(?i)stage\s*iv', stage_su):
-                        cancer_su["Stage_of_Cancer"] = re.sub(r'(?i)stage\s*iv', 'Suspected Stage IV (pending confirmation)', stage_su)
-                    else:
-                        cancer_su["Stage_of_Cancer"] = re.sub(r'(?i)metastatic', 'suspected metastatic (pending confirmation)', stage_su)
+                    # Replace the confirmed met/Stage-IV assertion with a clean suspected label,
+                    # preserving any "Originally ..." historical prefix (no nested parentheses).
+                    m_orig_su = re.match(r'(?i)(originally[^,]*,\s*)', stage_su)
+                    prefix_su = m_orig_su.group(1) if m_orig_su else ""
+                    cancer_su["Stage_of_Cancer"] = prefix_su + "Suspected Stage IV (pending confirmation)"
                     if "yes" in str(cancer_su.get("Distant Metastasis", "")).lower():
                         cancer_su["Distant Metastasis"] = "Not sure"
                     if "yes" in str(cancer_su.get("Metastasis", "")).lower():
