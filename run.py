@@ -2303,6 +2303,30 @@ def main():
                     cancer_vo["Stage_of_Cancer"] = new_vo if new_vo else "Not specified"
                     print(f"    [POST-STAGE-VERIFY-ORIG] unsupported 'Originally Stage {orig_sn}' removed: '{stage_vo}' → '{cancer_vo['Stage_of_Cancer']}'")
 
+        # POST-STAGE-BILATERAL: bilateral breast cancer can carry two different stages. When the
+        # physician's assessment spells out a stage per side ("Stage III (T3N1) ... left breast and
+        # a Stage I (T1cN0) ... right breast"), report BOTH verbatim rather than collapsing to one
+        # (and pre-empt the single-stage staging-table hooks from rewriting one of them). General
+        # rule: explicit per-side staging in the note is the ground truth. [2026-06-06, bug1, breast5]
+        cancer_bl = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_bl, dict):
+            ap_bl = assessment_and_plan or ""
+            # capture "Stage <roman> (<TN>) ... <side> breast" — side within ~90 chars of the stage token
+            bl_pairs = re.findall(
+                r'stage\s+(IV|III[ABC]?|II[ABC]?|I[ABC]?)\s*\(([^)]*)\)[^.]{0,90}?\b(left|right)\s+breast',
+                ap_bl, re.IGNORECASE)
+            sides_bl = {}
+            for st_bl, tn_bl, side_bl in bl_pairs:
+                side_key = side_bl.capitalize()
+                if side_key not in sides_bl:  # keep first occurrence per side
+                    sides_bl[side_key] = f"Stage {st_bl.upper()} ({tn_bl.strip()})"
+            if len(sides_bl) >= 2:
+                new_bl = "; ".join(f"{side}: {sides_bl[side]}" for side in ("Left", "Right") if side in sides_bl)
+                old_bl = str(cancer_bl.get("Stage_of_Cancer", "") or "")
+                if new_bl and new_bl != old_bl:
+                    cancer_bl["Stage_of_Cancer"] = new_bl
+                    print(f"    [POST-STAGE-BILATERAL] '{old_bl}' → '{new_bl}'")
+
         # POST-STAGE-PLACEHOLDER: clean up [X] placeholders from redacted data [v18]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
@@ -2378,6 +2402,55 @@ def main():
                 # (50% accuracy on test set, including Stage I vs expert IIIC).
                 # If the note doesn't state a stage and isn't metastatic, leave as "Not staged in note".
 
+        # POST-STAGE-CTNM: when no stage is stated, a clinical/pathologic TNM in the assessment
+        # (e.g. "clinical T2NX", "cT2NX", "pT3N1") IS the staging information the note provides —
+        # capture it instead of punting to "Not mentioned". Runs after metastatic inference (so
+        # Stage IV still wins) and before the pTN→Stage translator. General oncology rule. [2026-06-06, bug2, breast18]
+        cancer_ct = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_ct, dict):
+            stage_ct = str(cancer_ct.get("Stage_of_Cancer", "") or "").strip()
+            sl_ct = stage_ct.lower()
+            empty_ct = (not sl_ct) or sl_ct in ("not mentioned", "not mentioned in note",
+                                                "not available", "not available (redacted)",
+                                                "not specified", "not staged in note",
+                                                "not specified in the note", "")
+            if empty_ct:
+                for src_ct in (assessment_and_plan or "", note_text or ""):
+                    m_ct = re.search(r'\b(?:(clinical|pathologic|path)\s+)?(c|p|yp)?T(\d)([a-d]?)\s*,?\s*N([0-3X])([a-c]?)',
+                                     src_ct, re.IGNORECASE)
+                    if m_ct:
+                        clin_word, pfx_ct, t_ct, tsfx_ct, n_ct, nsfx_ct = m_ct.groups()
+                        pfx_ct = (pfx_ct or "").lower()
+                        if not pfx_ct and clin_word and clin_word.lower().startswith("clinic"):
+                            pfx_ct = "c"
+                        tnm_ct = f"{pfx_ct}T{t_ct}{tsfx_ct or ''}N{n_ct.upper()}{nsfx_ct or ''}"
+                        qual_ct = " (clinical staging)" if pfx_ct == "c" else ""
+                        cancer_ct["Stage_of_Cancer"] = tnm_ct + qual_ct
+                        print(f"    [POST-STAGE-CTNM] filled empty stage from TNM in note: '{tnm_ct}{qual_ct}'")
+                        break
+
+        # POST-STAGE-PTNM-VERIFY: a pTNM/ypTNM in the stage field must match the pathology TNM the
+        # note actually states. The model occasionally transposes digits ("ypT 3N2" for a note-stated
+        # "pT2N3"). When the assessment/note states an explicit p/yp-TNM that differs, transcribe the
+        # note's verbatim. Non-breast only (breast has its own pTN→Stage translator). [2026-06-06, bug9, pdac15]
+        cancer_pv = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type != "breast" and isinstance(cancer_pv, dict):
+            stage_pv = str(cancer_pv.get("Stage_of_Cancer", "") or "")
+            val_tnm = re.search(r'(?:yp|p|c)?T\s*\d[a-d]?\s*N\s*\d[a-c]?', stage_pv, re.IGNORECASE)
+            if val_tnm:
+                src_pv = (assessment_and_plan or "") + " " + (note_text or "")
+                note_tnm = re.search(r'\b(yp|p)T(\d)([a-d]?)\s*,?\s*N(\d)([a-c]?)', src_pv, re.IGNORECASE)
+                if note_tnm:
+                    note_str = (f"{(note_tnm.group(1) or '').lower()}T{note_tnm.group(2)}"
+                                f"{note_tnm.group(3) or ''}N{note_tnm.group(4)}{note_tnm.group(5) or ''}")
+                    norm = lambda s: re.sub(r'\s', '', s).lower()
+                    if norm(val_tnm.group(0)) != norm(note_str):
+                        old_pv = stage_pv
+                        new_pv = re.sub(r'(?:yp|p|c)?T\s*\d[a-d]?\s*N\s*\d[a-c]?', note_str,
+                                        stage_pv, count=1, flags=re.IGNORECASE)
+                        cancer_pv["Stage_of_Cancer"] = new_pv
+                        print(f"    [POST-STAGE-PTNM-VERIFY] '{old_pv}' → '{new_pv}' (note states {note_str})")
+
         # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name [breast-only staging table]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if cancer_type == "breast" and isinstance(cancer, dict):
@@ -2425,7 +2498,13 @@ def main():
             stage = str(cancer.get("Stage_of_Cancer", "") or "")
             stage_lower = stage.lower().strip()
             # Verify "stage iii", "stage 3", or "stage iiia" (possibly with extra text) when node data suggests lower
-            if re.match(r'^stage\s*(iii[a-c]?|3)\b', stage_lower):
+            # GUARD [bug1, breast5]: never "correct" a stage the physician explicitly wrote. If the
+            # note/A/P states "Stage III" (or "Stage 3") verbatim, the LLM is faithfully transcribing
+            # it (e.g. a T3N1 = IIIA the staging table can't reproduce from a misparsed tumor size) —
+            # downgrading it to IIB is over-inference. Only auto-correct when the stage was inferred.
+            note_ap_explicit_v = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+            note_states_iii = bool(re.search(r'stage\s*(iii[a-c]?|3)\b', note_ap_explicit_v))
+            if re.match(r'^stage\s*(iii[a-c]?|3)\b', stage_lower) and not note_states_iii:
                 note_lower_v = note_text.lower() if note_text else ""
                 # Look for node count in note
                 node_match = re.search(r'(\d+)/(\d+)\s*(?:nodes?|LN|sentinel|lymph)', note_lower_v)
@@ -2639,6 +2718,31 @@ def main():
                 cancer["Distant Metastasis"] = "No"
                 print(f"    [POST-DISTMET-DEFAULT] Filled empty Distant Metastasis → 'No' (curative, non-metastatic)")
 
+        # POST-DISTMET-PENDING: when the assessment says staging imaging is still being obtained to
+        # look for metastasis (not yet resulted), distant-met status is genuinely unknown — "No"
+        # overstates a workup that hasn't happened. Mark it pending. General rule: pending workup ≠
+        # negative workup. Runs after DISTMET-DEFAULT so it can correct a premature "No". [2026-06-06, bug3, breast1]
+        cancer_pd = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_pd, dict):
+            dm_pd = str(cancer_pd.get("Distant Metastasis", "") or "").strip().lower()
+            stage_pd = str(cancer_pd.get("Stage_of_Cancer", "") or "").lower()
+            not_metastatic_pd = ("iv" not in stage_pd and "metastatic" not in stage_pd)
+            dm_is_no_or_empty = (dm_pd in ("", "no", "no.", "none") or dm_pd.startswith("no "))
+            if not_metastatic_pd and dm_is_no_or_empty:
+                ap_pd = (assessment_and_plan or "").lower()
+                pending_staging = re.search(
+                    r'staging\s+(imaging|scans?|work[\s-]?up|ct|pet)[^.]{0,50}(metasta|spread|assess|stage|distant)|'
+                    r'(obtain|order|recommend|will\s+(get|obtain|order)|role of|plan(?:ning)?\s+(?:for|to (?:get|obtain)))'
+                    r'[^.]{0,40}(pet[\s/]*ct|ct\s+(?:chest|c/?a/?p|of the chest)|bone scan|staging)[^.]{0,40}(metasta|assess|stage|spread)|'
+                    r'(imaging|pet[\s/]*ct|scans?)\s+to\s+(assess|evaluate|look)[^.]{0,25}(metasta|spread|for distant)',
+                    ap_pd)
+                completed_neg = re.search(
+                    r'no evidence of (distant\s+)?metasta|staging[^.]{0,20}negative|negative for (distant\s+)?metasta|'
+                    r'(w/?u|workup)\s+negative|no distant (disease|metasta)', ap_pd)
+                if pending_staging and not completed_neg:
+                    cancer_pd["Distant Metastasis"] = "Not sure (staging imaging pending)"
+                    print(f"    [POST-DISTMET-PENDING] staging imaging pending → 'Not sure (staging imaging pending)'")
+
         # POST-LOCOREGIONAL: a recurrence at the primary site or regional nodes is NOT distant
         # metastasis. When the physician's own assessment classifies the disease as a
         # local-regional recurrence (and no biopsy-confirmed distant met), don't let the model
@@ -2722,6 +2826,52 @@ def main():
                         cancer_su["Metastasis"] = "Not sure"
                     print(f"    [POST-STAGE-SUSPECTED] hedged met evidence (no confirmation) → '{stage_su}' → '{cancer_su['Stage_of_Cancer']}'")
 
+        # POST-METASTATIC-UPGRADE: the mirror of POST-STAGE-SUSPECTED. The model sometimes UNDER-calls
+        # confirmed metastatic disease (leaves Stage < IV and met "Not sure"/"No") even when the current
+        # assessment states an unambiguous distant-met finding — peritoneal carcinomatosis, omental
+        # caking, or a biopsy-confirmed distant met. Those are definitionally Stage IV; upgrade.
+        # Negation-guarded so "no carcinomatosis" never triggers. General oncology rule. [2026-06-06, bug6, pdac12]
+        cancer_mu = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_mu, dict):
+            stage_mu = str(cancer_mu.get("Stage_of_Cancer", "") or "")
+            dm_mu = str(cancer_mu.get("Distant Metastasis", "") or "")
+            m_mu = str(cancer_mu.get("Metastasis", "") or "")
+            already_iv_mu = bool(re.search(r'stage\s*iv|metastatic|suspected', stage_mu, re.IGNORECASE))
+            txt_mu = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
+            # A hedge/negation ANYWHERE in the ~32 chars before the marker disqualifies that mention
+            # ("possibility of peritoneal carcinomatosis", "concerning for ... carcinomatosis",
+            # "no carcinomatosis"). We scan ALL mentions and upgrade only if at least one is clean —
+            # so pdac12 (note states "unchanged peritoneal carcinomatosis" definitively) upgrades,
+            # while pdac6 (only "possibility of ...", laparoscopy unremarkable) does not. [bug6 guard]
+            HEDGE_MU = re.compile(
+                r'\b(?:no|not|without|negative for|r/o|rule out|resolv\w*|resolution|possib\w*|'
+                r'concern\w*|suspicious|suspect\w*|question\w*|may|might|likely|could|evaluat\w*|'
+                r'assess\w*|differential|cannot exclude|worrisome|if )\b')
+            marker_mu = None
+            for pat_mu, site_mu in [
+                (r'peritoneal carcinomatosis', 'peritoneal carcinomatosis'),
+                (r'\bcarcinomatosis\b', 'carcinomatosis'),
+                (r'omental cak(?:e|ing)', 'omental caking'),
+                (r'biopsy[\s-]*(?:proven|confirmed)[^.]{0,30}metasta', 'biopsy-confirmed metastasis'),
+            ]:
+                for mm_mu in re.finditer(pat_mu, txt_mu):
+                    ctx_mu = txt_mu[max(0, mm_mu.start() - 32):mm_mu.start()]
+                    if not HEDGE_MU.search(ctx_mu):
+                        marker_mu = site_mu
+                        break
+                if marker_mu:
+                    break
+            if marker_mu and not already_iv_mu:
+                old_stage_mu = stage_mu
+                cancer_mu["Stage_of_Cancer"] = "Stage IV (metastatic)"
+                site_label_mu = "Yes (peritoneal carcinomatosis)" if "periton" in marker_mu else \
+                                ("Yes (omental/peritoneal)" if "omental" in marker_mu else "Yes")
+                if "yes" not in dm_mu.lower():
+                    cancer_mu["Distant Metastasis"] = site_label_mu
+                if "yes" not in m_mu.lower():
+                    cancer_mu["Metastasis"] = site_label_mu
+                print(f"    [POST-METASTATIC-UPGRADE] confirmed {marker_mu} → Stage IV, distant met Yes (was '{old_stage_mu}')")
+
         # POST-STAGE-METASTATIC: If metastasis=Yes but Stage says "Not available"/"Not mentioned", set Stage IV [v24]
         cancer_diag = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_diag, dict):
@@ -2753,7 +2903,8 @@ def main():
             dm_s, m_s = _met_status(dm_rc), _met_status(m_rc)
             DISTANT_RC = ["liver", "hepatic", "lung", "pulmonary", "bone", "osseous", "brain", "cerebral",
                           "peritone", "pleural", "adrenal", "distant", "contralateral", "spine", "spinal",
-                          "mediastin", "retroperitone", "mesenteric", "omentum", "omental", "metastatic"]
+                          "mediastin", "retroperitone", "mesenteric", "omentum", "omental", "metastatic",
+                          "cervical"]  # cervical (neck) nodes are distant (M1) for breast [bug5, breast15]
             REGIONAL_RC = ["axill", "sentinel", "supraclavicular", "infraclavicular", "internal mammary",
                            "chest wall", "ipsilateral", "regional", "lymph node", "node"]
             m_has_distant = any(s in m_rc.lower() for s in DISTANT_RC)
@@ -2767,9 +2918,13 @@ def main():
             #     gate (unconfirmed). Don't keep an asserted claim the gate already removed, and
             #     don't silently drop it either → mark both 'Not sure' (honest, consistent).
             elif m_s == "YES" and m_has_distant and dm_s == "EMPTY":
-                cancer_rc["Metastasis"] = "Not sure"
-                cancer_rc["Distant Metastasis"] = "Not sure"
-                changed_rc = f"R2 unconfirmed distant claim → both 'Not sure' (was DistMet empty, Met '{m_rc}')"
+                # keep the named site(s) but mark suspected — the distant claim was never confirmed
+                # (DistMet empty) so don't assert "Yes", but don't lose the site detail either.
+                sites_rc = re.sub(r'(?i)^\s*yes[\s,:.-]*(?:to\s+)?', '', m_rc).strip()
+                susp_rc = f"Suspected, to {sites_rc}" if sites_rc and sites_rc.lower() not in ("", "yes") else "Not sure"
+                cancer_rc["Metastasis"] = susp_rc
+                cancer_rc["Distant Metastasis"] = susp_rc
+                changed_rc = f"R2 unconfirmed distant claim → '{susp_rc}' (was DistMet empty, Met '{m_rc}')"
             # R3: DistMet explicitly No but Metastasis claims ONLY distant organs (no nodal/regional)
             #     → the evidence-based No wins.
             elif dm_s == "NO" and m_s == "YES" and m_has_distant and not m_has_regional:
@@ -2784,6 +2939,48 @@ def main():
                 changed_rc = f"R4 mirror unsure → Distant Metastasis '{m_rc}'"
             if changed_rc:
                 print(f"    [POST-MET-RECONCILE] {changed_rc}")
+
+        # NOTE [bug10, pdac3]: a POST-DISTMET-SITES hook (auto-append documented met organs) was
+        # prototyped and REMOVED — it fired on negated radiology lines ("No suspicious osseous
+        # lesions" → added bone) and ambiguous non-met lesions, manufacturing hallucinated sites.
+        # Principle #1 (精确忠实) outranks #2 (不遗漏): an incomplete-but-correct site list (e.g.
+        # pdac3 "liver, peritoneum" missing spleen) is preferable to a fabricated one. Accepted as P2.
+
+        # POST-DISTMET-BENIGN: a "Not sure" distant-met hedge driven by a lesion the note itself reads
+        # as a BENIGN entity (meningioma, hemangioma, simple cyst, lipoma) — or where metastasis is
+        # called "unlikely" — overstates uncertainty. If the current assessment raises NO metastatic
+        # concern and the intent is curative, the benign read governs → "No". Conservative: requires an
+        # explicit benign qualifier AND no pending/suspected distant-met language, so it never touches
+        # real follow-up cases (e.g. liver/lung nodules "pending confirmation"). [2026-06-06, bug4, breast13]
+        cancer_bn = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_bn, dict):
+            dm_bn = str(cancer_bn.get("Distant Metastasis", "") or "").strip().lower()
+            m_bn = str(cancer_bn.get("Metastasis", "") or "").strip().lower()
+            stage_bn = str(cancer_bn.get("Stage_of_Cancer", "") or "").lower()
+            g_bn = keypoints.get("Treatment_Goals", {})
+            goals_bn = str(g_bn.get("goals_of_treatment", "") or "").lower() if isinstance(g_bn, dict) else ""
+            dm_unsure = any(k in dm_bn for k in ("not sure", "unsure", "suspect", "possible"))
+            m_unsure = any(k in m_bn for k in ("not sure", "unsure", "suspect", "possible"))
+            is_curative_bn = ("curative" in goals_bn or "adjuvant" in goals_bn or "risk reduction" in goals_bn)
+            not_metastatic_bn = ("iv" not in stage_bn and "metastatic" not in stage_bn)
+            if (dm_unsure or m_unsure) and is_curative_bn and not_metastatic_bn:
+                note_bn = (note_text or "").lower()
+                ap_bn = (assessment_and_plan or "").lower()
+                benign_read = re.search(
+                    r'most likely (?:a |an )?(?:meningioma|hemangioma|benign|cyst|lipoma|adenoma)|'
+                    r'(?:consistent with|favor|likely)\s+(?:a |an )?(?:meningioma|hemangioma|benign|cyst|lipoma)|'
+                    r'metasta\w*\s+(?:is|are|remains?)\s+(?:an?\s+)?(?:unlikely|very unlikely)|'
+                    r'unlikely\s+(?:to\s+(?:represent|be)\s+)?(?:a\s+)?metasta', note_bn)
+                real_pending = re.search(
+                    r'pending confirmation|follow[\s-]?up on (?:the )?(?:lung|liver|bone|lesion)|'
+                    r'suspicious for (?:distant\s+)?metasta|concerning for (?:distant\s+)?metasta|'
+                    r'biopsy[^.]{0,30}(?:lesion|nodule|met)|nodules? pending', ap_bn + " " + dm_bn + " " + m_bn)
+                if benign_read and not real_pending:
+                    if dm_unsure:
+                        cancer_bn["Distant Metastasis"] = "No"
+                    if m_unsure:
+                        cancer_bn["Metastasis"] = "No"
+                    print(f"    [POST-DISTMET-BENIGN] benign lesion read + curative + no met concern → distant met 'No'")
 
         # POST-STAGE-PARENS-CLEANUP: remove empty "()" and dangling connectives left behind
         # when a prior hook (e.g. POST-STAGE-VERIFY-NOTE) strips a fabricated "Stage X" out of
@@ -2830,8 +3027,13 @@ def main():
             if "not yet on treatment" in resp_val.lower() or "not on treatment" in resp_val.lower():
                 ap_lower_rt = (assessment_and_plan or '').lower()  # v18: use local var, not row.get
                 # Check if patient IS on treatment
+                # [bug7] require evidence of an ACTIVE anticancer agent — bare "continue" matched
+                # supportive meds ("continue creon") and mislabeled surveillance patients "On treatment".
                 on_treatment = bool(re.search(
-                    r'(?:currently on|continue|continuing|cycle \d|on \w+(?:oxifen|zole|mab|lib|nib))',
+                    r'(?:currently on|on cycle|cycle\s*\d|c\d+\s*d\d+|'
+                    r'(?:continue|continuing|on)\s+(?:\w+\s+){0,2}\w*'
+                    r'(?:oxifen|zole|mab|lib|nib|platin|tabine|rubicin|taxel|fluorouracil|'
+                    r'gemcitabine|capecitabine|folfirinox|folfox|folfiri|pembrolizumab|chemo))',
                     ap_lower_rt))
                 has_meds = bool((keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip())
                 if on_treatment or has_meds:
@@ -2858,6 +3060,31 @@ def main():
                 if not cur_meds and (is_consultation or just_prescribed):
                     resp["response_assessment"] = "Not yet on treatment — no response to assess."
                     print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just prescribed, no current meds)")
+
+        # POST-RESPONSE-SURVEILLANCE: a patient s/p resection on post-surgical surveillance (no active
+        # anticancer drug) is neither "on treatment" nor "not yet on treatment" — treatment is complete
+        # and they are being monitored. State the surveillance, and surface a rising-marker / recurrence
+        # concern when the assessment raises one. General oncology rule. [2026-06-06, bug7, pdac15]
+        resp_sv = keypoints.get("Response_Assessment", {})
+        if isinstance(resp_sv, dict):
+            rv_sv = (resp_sv.get("response_assessment", "") or "").lower()
+            cur_meds_sv = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+            ctx_sv = (assessment_and_plan or "").lower() + " " + (note_text or "").lower()
+            resected_sv = re.search(r'\b(?:resected|s/p\s+(?:resection|whipple|pancrea\w*ectomy|mastectomy|lumpectomy|surgery)|'
+                                    r'status post (?:resection|surgery)|post[\s-]?(?:operative|surgical resection))', ctx_sv)
+            surveillance_sv = re.search(r'surveillance|rising (?:marker|ca\s*19|cea)|high risk for recurrence|'
+                                        r'monitor(?:ing)? for recurrence|recheck (?:ca\s*19|cea|markers)|'
+                                        r'concern\w* for recurrence', ctx_sv)
+            misstated_sv = (("on treatment" in rv_sv and "not" not in rv_sv[:30]) or
+                            "not yet on treatment" in rv_sv or "not on treatment" in rv_sv or not rv_sv.strip())
+            if resected_sv and surveillance_sv and not cur_meds_sv and misstated_sv:
+                rising_sv = re.search(r'rising (?:marker|ca\s*19|cea)|increas\w* (?:ca\s*19|cea|marker)|'
+                                      r'high risk for recurrence|concern\w* for recurrence', ctx_sv)
+                msg_sv = "On post-surgical surveillance; no active cancer treatment at this visit."
+                if rising_sv:
+                    msg_sv += " Rising tumor markers are concerning for possible recurrence."
+                resp_sv["response_assessment"] = msg_sv
+                print(f"    [POST-RESPONSE-SURVEILLANCE] resected + surveillance, no active tx → surveillance statement")
 
         # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29] [breast-only]
         # Oncotype/MammaPrint are prognostic tools, not treatment response assessments
