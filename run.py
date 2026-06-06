@@ -2037,6 +2037,52 @@ def main():
                     ref_g["Genetics"] = "None"
                     print(f"    [POST-REFERRAL-GERMLINE] moved '{gen_ref[:40]}' Referral.Genetics → Genetic_Testing_Plan")
 
+        # POST-PLAN-TEMPORAL: a plan field describes FUTURE actions. A value that reports a study/lab
+        # as already DONE (past-completion verbs), or a bare imaging modality the A/P confirms is
+        # completed ("echo looks good", "she has done the MRI"), is not a plan — clear it. Genuine
+        # future rechecks ("to check ... again", "every N months", "monitor", "will", "plan to",
+        # "repeat", "ordered", "pending") are preserved. [2026-06-06, fix#8, b2 lab/b3 imaging]
+        PAST_DONE_RE = re.compile(
+            r'\b(?:were|was)\s+(?:also\s+)?(?:obtained|done|performed|checked|drawn|completed|reviewed)\b'
+            r'|\blooks?\s+good\b|\bshowed\b|\brevealed\b|\bdemonstrated\b'
+            r'|\b(?:has|have)\s+been\s+(?:done|performed|completed|obtained)\b', re.I)
+        FUTURE_PLAN_RE = re.compile(
+            r'\bwill\b|plan\s+to|to\s+(?:check|obtain|repeat|monitor|recheck|evaluate|assess)|\bagain\b'
+            r'|every\s+\d|\bq\d|monthly|\bmonitor\b|\brepeat\b|upcoming|scheduled|order(?:ed)?|pending', re.I)
+        _img_alias = {'echocardiogram': 'echo', 'tte': 'echo', 'echo': 'echo', 'muga': 'muga',
+                      'pet': 'pet', 'ct': 'ct', 'mri': 'mri', 'ultrasound': 'ultrasound',
+                      'us': 'ultrasound', 'mammogram': 'mammogram', 'bone scan': 'bone scan', 'dexa': 'dexa'}
+        for fkey_t, subkey_t, default_t in (("Lab_Plan", "lab_plan", "No labs planned."),
+                                            ("Imaging_Plan", "imaging_plan", "No imaging planned.")):
+            d_t = keypoints.get(fkey_t, {})
+            if isinstance(d_t, dict):
+                v_t = str(d_t.get(subkey_t, "") or "")
+                low_t = v_t.lower().strip()
+                if not low_t or low_t in (default_t.lower(), "none", "none planned.", ""):
+                    continue
+                # (1) value reports completion and carries no future marker
+                if PAST_DONE_RE.search(v_t) and not FUTURE_PLAN_RE.search(v_t):
+                    d_t[subkey_t] = default_t
+                    print(f"    [POST-PLAN-TEMPORAL] cleared completed {subkey_t}: '{v_t[:50]}'")
+                    continue
+                # (2) bare imaging modality the A/P marks as already done
+                if fkey_t == "Imaging_Plan":
+                    mod_m = re.fullmatch(r'(echocardiogram|echo|tte|muga|pet(?:/ct)?|ct|mri|ultrasound|us|mammogram|bone scan|dexa)\.?', low_t)
+                    if mod_m:
+                        mod_t = mod_m.group(1).split('/')[0]
+                        search_tok = _img_alias.get(mod_t, mod_t)
+                        ap_low_t = (assessment_and_plan or "").lower()
+                        done_t = False
+                        for mm in re.finditer(re.escape(search_tok), ap_low_t):
+                            ctx_t = ap_low_t[max(0, mm.start() - 30):mm.end() + 30]
+                            if re.search(r'looks?\s+good|has\s+done|have\s+done|done\s+the|performed|completed|reviewed|obtained', ctx_t) \
+                                    and not re.search(r'\bwill\b|plan\s+to|order|schedul|repeat|every', ctx_t):
+                                done_t = True
+                                break
+                        if done_t:
+                            d_t[subkey_t] = default_t
+                            print(f"    [POST-PLAN-TEMPORAL] cleared completed imaging (A/P done): '{v_t[:40]}'")
+
         # POST-PROCEDURE-FILTER: Remove non-procedure items from Procedure_Plan [v14]
         # Items like IHC, FISH, Oncotype, BRCA belong in genetic_testing_plan, not procedure
         proc = keypoints.get("Procedure_Plan", {})
