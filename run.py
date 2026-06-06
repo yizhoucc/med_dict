@@ -3165,6 +3165,37 @@ def main():
                         cancer_tm["Type_of_Cancer"] = new_tm
                         print(f"    [POST-TYPE-MET-CONSISTENCY] DistMet suspected → '{ty_tm[:45]}' → '{new_tm[:45]}'")
 
+        # POST-SUBTYPE-VERIFY: the histologic subtype (ductal/IDC) must be supported by the note's
+        # pathology. The model defaults to "invasive ductal carcinoma" even when the note never says
+        # "ductal"/"IDC" (b20: pathology only "invasive cancer with some lobular differentiation").
+        # Strip the fabricated ductal descriptor — keep the note's actual wording (lobular if present)
+        # or a neutral "invasive carcinoma". Receptor-status prefix preserved. [2026-06-06, round3 #1, b20]
+        cancer_sv2 = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_sv2, dict):
+            ty_sv2 = str(cancer_sv2.get("Type_of_Cancer", "") or "")
+            note_low_sv2 = (note_text or "").lower()
+            ap_low_sv2 = (assessment_and_plan or "").lower()
+            value_has_ductal = bool(re.search(r'\bductal\b|\bidc\b', ty_sv2, re.I))
+            note_has_ductal = bool(re.search(r'\bductal\b|\bidc\b', note_low_sv2 + " " + ap_low_sv2))
+            if value_has_ductal and not note_has_ductal:
+                old_sv2 = ty_sv2
+                value_has_lobular = bool(re.search(r'\blobular\b', ty_sv2, re.I))
+                note_has_lobular = bool(re.search(r'\blobular\b|\bilc\b', note_low_sv2))
+                if value_has_lobular:
+                    repl_sv2 = 'invasive carcinoma'        # keep the existing lobular descriptor in the value
+                elif note_has_lobular:
+                    repl_sv2 = 'invasive carcinoma with lobular differentiation'
+                else:
+                    repl_sv2 = 'invasive carcinoma'
+                new_sv2 = re.sub(r'invasive\s+ductal\s+carcinoma(?:\s*\(idc\))?', repl_sv2, ty_sv2, flags=re.I)
+                new_sv2 = re.sub(r'\s*\(idc\)', '', new_sv2, flags=re.I)
+                new_sv2 = re.sub(r'\bidc\b', 'invasive carcinoma', new_sv2, flags=re.I)
+                new_sv2 = re.sub(r'\bductal\b', '', new_sv2, flags=re.I)
+                new_sv2 = re.sub(r'\s{2,}', ' ', new_sv2).strip().strip(',').strip()
+                if new_sv2 != old_sv2:
+                    cancer_sv2["Type_of_Cancer"] = new_sv2
+                    print(f"    [POST-SUBTYPE-VERIFY] unsupported ductal/IDC — '{old_sv2[:45]}' → '{new_sv2[:45]}'")
+
         # POST-MET-RECONCILE: keep the two redundant met fields (Distant Metastasis / Metastasis)
         # internally consistent. A single-field baseline can't contradict itself; the pipeline's
         # two fields can, when an earlier gate (e.g. G4-FAITH) trims one but not the other. These
