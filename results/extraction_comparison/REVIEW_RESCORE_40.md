@@ -14,18 +14,19 @@
 
 ## STATUS（上下文满了从这里恢复）
 - 决策：**先评完全部 40，再统一修**（用户定）
-- [~] breast：已评 1,2,4,5,7,9（高置信，读全文）；**待评 3,6,8,10-20**
+- [x] breast 1-9 已评（高置信，读全文）；**待评 breast 10-20**
 - [ ] pdac 1-20（待评）
-- 已发现 2 类 PL bug（见上"已发现的 PL bug 类"），评完后统一修。
-- 恢复方法：读本 header → 继续读 pipeline_breast_FINAL.txt 下一个未评 ROW 的 note + BL 对应 block → 打分写入。
+- 已发现 2 类 PL bug（见"已发现的 PL bug 类"），评完后统一修。
+- 恢复方法：读本 header → 读 pipeline_breast_FINAL.txt 下一未评 ROW（10起）的 note + BL block（baseline_extract_breast_json.txt 对应 ROW）→ 判 4 题写入 → 更新 tally。pdac 同理用 pipeline_pdac_FINAL.txt + baseline_extract_pdac_json.txt。
+- BL 字段名：单 "Distant_Metastasis"（无 Metastasis）。
 
-## running tally（breast 6 样本：1,2,4,5,7,9）
+## running tally（breast 1-9，共9样本）
 | 题 | PL win | BL win | TIE | NA |
 |---|---|---|---|---|
-| Q10 STAGE | 4 | 1 | 1 | 0 |
-| Q11 NOHALLUC | 0 | 1 | 5 | 0 |
-| Q7 RESP | 2 | 0 | 4 | 0 |
-| T6 DISTMET | 1 | 1 | 4 | 0 |
+| Q10 STAGE | 6 (1,2,6,7,8,9) | 1 (5) | 2 (3,4) | 0 |
+| Q11 NOHALLUC | 1 (6) | 1 (5) | 7 | 0 |
+| Q7 RESP | 3 (4,6,9) | 0 | 6 | 0 |
+| T6 DISTMET | 2 (6,9) | 1 (1) | 6 | 0 |
 
 ---
 
@@ -64,6 +65,23 @@
 - BL: Stage "pT2N1a"（原始码）/ DistMet **Not sure** / resp "Not applicable"
 - Q10 **PL**（IIB 是 pT2N1a 的正确分组, 更有用且有原文依据）| Q11 TIE | Q7 TIE | T6 **BL**（A/P 明说 "obtain PET/CT to assess metastasis" 即分期未做完 → BL "Not sure" 对；PL "No" 过早断定）
 - **根因 bug 类2**：POST-DISTMET-DEFAULT 在"分期影像待做"时仍填 "No"。应在 A/P 含 "PET/CT to assess mets"/"staging imaging" 时给 "Not sure / pending staging"。
+
+### breast ROW3（locally advanced multifocal, A/P 明说 "no evidence of metastatic disease", curative neoadjuvant）
+- PL: Stage "Locally advanced, multifocal" / DistMet No / Met No / resp "Not yet on treatment"
+- BL: Stage "Locally advanced, multifocal" / DistMet No / resp "Not yet assessed, awaiting neoadjuvant"
+- Q10 TIE | Q11 TIE | Q7 TIE | T6 TIE（此处 PL "No" 正确——A/P 明写 no mets，非分期待做）
+
+### breast ROW6（A/P "suspicious for bone met", "biopsy for definitive stage IV", "if stage IV"=疑似）✓PL横扫
+- PL: Stage "Suspected Stage IV (pending confirmation)" / DistMet "Suspected to left ilium and bilateral sacral ala" / Met "Not sure" / resp "Not yet on treatment"
+- BL: Stage "Not definitively staged yet, suspected Stage IV due to bone metastasis" / DistMet "Yes (bone metastasis)" / resp "Anticipated excellent response..."
+- Q10 **PL**（PL 干净 hedge；BL "due to bone metastasis" 把疑似当因果）| Q11 **PL**（BL "Yes (bone metastasis)" 把疑似说成确诊＝overstatement；PL 正确 hedge）| Q7 **PL**（PL "not on treatment" 对；BL 把预后 "anticipated excellent response" 当 response，未治疗就臆测）| T6 **PL**（PL 具体+hedge "Suspected to ilium/sacral ala"；BL "Yes" 过度断定）
+- A3 疑似处理在此完胜 BL。
+
+### breast ROW8（A/P 明写 "stage IIA pT2(m)N1a", 术后 adjuvant）
+- PL: Stage "Stage IIA (pT2(m)N1a)"（与原文逐字一致）/ DistMet No / Met No / resp "Not yet on treatment"
+- BL: Stage "pT2(m)N1a"（原始码）/ DistMet No / resp "Not applicable"
+- Q10 **PL**（给出 stage group 且=原文 IIA；BL 只给码）| Q11 TIE | Q7 TIE | T6 TIE
+- 注：此为 stage 处理的**正例**（原文 IIA → PL IIA）；对比 breast5 反例（原文 III → PL 错成 IIB）。区别：breast5 是双侧+微转移把 hook 搞晕。
 
 ### ⚠️ 已发现的 PL stage/met bug 类（待全部评完后统一修）
 1. **stage 过度推断**（breast5）：原文已明写 stage（含双侧/Stage X）时，inference hook 不该改写。规则：原文有明确 stage → 忠实采用。
