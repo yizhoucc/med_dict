@@ -3104,7 +3104,20 @@ def main():
                                         r'concern\w* for recurrence', ctx_sv)
             misstated_sv = (("on treatment" in rv_sv and "not" not in rv_sv[:30]) or
                             "not yet on treatment" in rv_sv or "not on treatment" in rv_sv or not rv_sv.strip())
-            if resected_sv and surveillance_sv and not cur_meds_sv and misstated_sv:
+            # GUARD [b17 regression]: a post-surgical patient who is here to PLAN/START adjuvant therapy
+            # is pre-treatment, NOT in surveillance. Exclude new-patient / initial consults and any
+            # assessment that recommends starting (neo)adjuvant chemo — those belong to PRETREATMENT.
+            pt_type_sv = (keypoints.get("Reason_for_Visit", {}).get("Patient type", "") or "").strip().lower()
+            summary_sv = (keypoints.get("Reason_for_Visit", {}).get("summary", "") or "").lower()
+            is_new_consult_sv = ("new patient" in pt_type_sv or "consultation" in summary_sv or
+                                 "initial" in summary_sv or "establish care" in summary_sv)
+            planning_adjuvant_sv = re.search(
+                r'recommend\w*\s+(?:\w+\s+){0,2}(?:adjuvant|neoadjuvant|chemo)|'
+                r'will\s+(?:start|begin|recommend|proceed)|proceed with (?:adjuvant|neoadjuvant|chemo)|'
+                r'plan(?:ned|ning)?\s+(?:for\s+)?(?:adjuvant|neoadjuvant)',
+                (assessment_and_plan or "").lower())
+            if (resected_sv and surveillance_sv and not cur_meds_sv and misstated_sv
+                    and not is_new_consult_sv and not planning_adjuvant_sv):
                 rising_sv = re.search(r'rising (?:marker|ca\s*19|cea)|increas\w* (?:ca\s*19|cea|marker)|'
                                       r'high risk for recurrence|concern\w* for recurrence', ctx_sv)
                 msg_sv = "On post-surgical surveillance; no active cancer treatment at this visit."
