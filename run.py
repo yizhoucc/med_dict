@@ -3825,6 +3825,64 @@ def main():
                     resp_cz["response_assessment"] = new_rv
                     print(f"    [POST-RESPONSE-COMPRESS] {len(rv)}→{len(new_rv)} chars (dropped plan/verbose)")
 
+        # POST-GOALS-FINAL: final goals-direction pass, AFTER Stage/DistMet/response are all finalized
+        # (fixes the earlier ordering bug where goals hooks ran before DistMet was set). Two corrections:
+        # (1) s/p curative resection + NO active anticancer therapy (current_meds empty, no continue-chemo)
+        #     + monitoring-only plan → SURVEILLANCE, not curative/palliative (pdac6/pdac15). Cross-checks
+        #     the already-finalized response_assessment ("surveillance"/"no active treatment").
+        # (2) breast palliative with DistMet now clearly No + non-IV stage → curative (b2 ordering). [round4 #5]
+        goals_f = keypoints.get("Treatment_Goals", {})
+        if isinstance(goals_f, dict):
+            gv_f = str(goals_f.get("goals_of_treatment", "") or "").lower().strip()
+            cancer_f = keypoints.get("Cancer_Diagnosis", {})
+            dm_f = str(cancer_f.get("Distant Metastasis", "") or "").lower().strip() if isinstance(cancer_f, dict) else ""
+            stage_f = str(cancer_f.get("Stage_of_Cancer", "") or "").lower() if isinstance(cancer_f, dict) else ""
+            cur_f = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+            th_f = str(keypoints.get("Therapy_plan", {}).get("therapy_plan", "") or "").lower()
+            resp_f = str(keypoints.get("Response_Assessment", {}).get("response_assessment", "") or "").lower()
+            ap_f = (assessment_and_plan or "").lower()
+            note_f = (note_text or "").lower()
+            # (1) resected + no active therapy → surveillance
+            if gv_f in ("curative", "adjuvant", "palliative"):
+                hay_res_f = note_f + " " + ap_f
+                resected_f = bool(re.search(r's/p|status post|underwent', hay_res_f)) and \
+                    bool(re.search(r'\b(resection|whipple|pancreatectomy|lumpectomy|mastectomy|distal panc)\b', hay_res_f))
+                # no ACTIVE anticancer therapy: no current cancer meds AND therapy_plan has no anticancer
+                # drug/radiation (supportive-only like "continue creon" is fine) AND A/P isn't continuing chemo
+                th_has_anticancer = bool(re.search(r'folfirinox|folfox|folfiri|gem(?:citabine)?|abraxane|nab.?paclitaxel|capecitabine|paclitaxel|docetaxel|carboplatin|cisplatin|oxaliplatin|irinotecan|chemo|radiation|xrt|trastuzumab|pertuzumab|tamoxifen|letrozole|anastrozole|exemestane|fulvestrant|palbociclib|pembrolizumab', th_f))
+                no_active_f = (not cur_f) and (not th_has_anticancer) and \
+                    not re.search(r'continue\s+(?:chemo|folfirinox|folfox|gem|abraxane|capecitabine|treatment|systemic)|currently on|cycle\s*\d', ap_f)
+                surv_signal_f = bool(re.search(r'surveillance|no active treatment|monitoring|repeat (?:her )?scans|recheck (?:ca\s*19|markers|labs)|ct in \d', resp_f + " " + ap_f))
+                if resected_f and no_active_f and surv_signal_f and 'yes' not in dm_f:
+                    if gv_f != "surveillance":
+                        goals_f["goals_of_treatment"] = "surveillance"
+                        print(f"    [POST-GOALS-FINAL] resected + no active tx + monitoring → surveillance (was '{gv_f}')")
+                        gv_f = "surveillance"
+            # (2) breast palliative w/ DistMet now clearly No + non-IV → curative (re-check post-DistMet)
+            if cancer_type == "breast" and gv_f == "palliative":
+                dm_no_f = dm_f.startswith(("no", "none", "negative")) and not any(
+                    w in dm_f for w in ("suspected", "possible", "pending", "not sure"))
+                if dm_no_f and not re.search(r'stage\s*iv|metastatic|stage\s*4', stage_f):
+                    goals_f["goals_of_treatment"] = "curative"
+                    print(f"    [POST-GOALS-FINAL] breast palliative + DistMet=No + non-IV → curative")
+
+        # POST-RESPONSE-SUSPECTED-SOFTEN: response must not assert "not responding"/"progressing" when the
+        # note's evidence is only SUSPECTED (suspicious for / suggestive of / too small to evaluate) and
+        # the physician did NOT explicitly say "progression" (pdac6 — recurrence only "suggestive",
+        # lesions "too small to evaluate"). Soften to a hedged statement. [2026-06-06, round4 #5]
+        resp_ss = keypoints.get("Response_Assessment", {})
+        if isinstance(resp_ss, dict):
+            rv_ss = str(resp_ss.get("response_assessment", "") or "")
+            rl_ss = rv_ss.lower()
+            if re.search(r'not responding|progress(?:ing|ion)|worsening metastatic', rl_ss):
+                hay_ss = (assessment_and_plan or "").lower() + " \n " + (note_text or "").lower()
+                only_suspected = bool(re.search(r'suspicious for|suggestive of|too small to (?:evaluate|characterize)|cannot exclude|concerning for|early evidence of (?:disease )?recurrence', hay_ss)) \
+                    and not re.search(r'\bprogression\b|\bprogressed\b|definite (?:progression|increase)|biopsy[\s-]*(?:proven|confirmed)', hay_ss)
+                if only_suspected:
+                    resp_ss["response_assessment"] = ("Imaging shows suspicious findings (e.g., new/enlarging lesion, rising tumor marker) "
+                                                      "concerning for early recurrence; not yet confirmed — being monitored with short-interval repeat imaging.")
+                    print(f"    [POST-RESPONSE-SUSPECTED-SOFTEN] softened unconfirmed progression → hedged")
+
         # POST-DRUG-VERIFY: Remove hallucinated drugs not found in original note text
         for drug_field_key in ["Current_Medications", "Treatment_Changes"]:
             drug_dict = keypoints.get(drug_field_key, {})
