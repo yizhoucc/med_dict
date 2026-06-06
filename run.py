@@ -4054,6 +4054,48 @@ def main():
                 if len(verified) < len(meds_list_cc):
                     drug_dict_cc["current_meds"] = ", ".join(verified) if verified else ""
 
+        # POST-MEDS-DOUBLET: complete a multi-drug regimen in current_meds. When current_meds already
+        # lists one component of a doublet that the A/P gives as "started X and Y" / "X plus Y" /
+        # "combination of X and Y" (b7 "started pembrolizumab and abraxane"; pdac3 "5-FU/LV plus
+        # nanoliposomal irinotecan"), add the missing partner. Runs AFTER CROSSCHECK so the added
+        # partner is not then stripped. Skips option/discussion framing. [2026-06-06, fix#14, b7/pdac3]
+        drug_dict_db = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_db, dict):
+            cm_db = (drug_dict_db.get("current_meds", "") or "").strip()
+            if cm_db:
+                cm_low_db = cm_db.lower()
+                ap_low_db = (assessment_and_plan or "").lower()
+                DOUBLET_DRUGS = {'abraxane', 'nab-paclitaxel', 'paclitaxel', 'gemcitabine', 'gemzar',
+                                 'pembrolizumab', 'carboplatin', 'cisplatin', 'oxaliplatin', 'irinotecan',
+                                 'nal-iri', 'nanoliposomal', 'onivyde', '5-fu', 'fluorouracil', 'leucovorin',
+                                 'docetaxel', 'cyclophosphamide', 'doxorubicin', 'pertuzumab', 'trastuzumab'}
+                DB_LABEL = {'nanoliposomal': 'nal-IRI (nanoliposomal irinotecan)', 'onivyde': 'nal-IRI',
+                            'nal-iri': 'nal-IRI', 'nab-paclitaxel': 'abraxane'}
+                NONCUR_DB = ('option', 'discuss', 'recommend', 'consider', 'candidate', 'would',
+                             'versus', ' vs ', 'prefer', 'proceed with', 'if ')
+                conj_re = re.compile(r'(?:started|start|on|with|combination of|plus)\s+([\w/-]+)\s+(?:and|plus|\+|/)\s+([\w/-]+)')
+                added_db = []
+                for m in re.finditer(conj_re, ap_low_db):
+                    pair = [m.group(1), m.group(2)]
+                    ctx = ap_low_db[max(0, m.start() - 50):m.end() + 20]
+                    if any(nf in ctx for nf in NONCUR_DB):
+                        continue
+                    anchor_present = any(x in cm_low_db for x in pair)
+                    if not anchor_present:
+                        continue
+                    for d in pair:
+                        if d not in DOUBLET_DRUGS:
+                            continue
+                        norm = {'nanoliposomal': 'nal-iri', 'onivyde': 'nal-iri', 'nab-paclitaxel': 'abraxane'}.get(d, d)
+                        if d in cm_low_db or norm in cm_low_db:
+                            continue
+                        label = DB_LABEL.get(d, d)
+                        if label.lower() not in (x.lower() for x in added_db):
+                            added_db.append(label)
+                if added_db:
+                    drug_dict_db["current_meds"] = cm_db + ", " + ", ".join(added_db)
+                    print(f"    [POST-MEDS-DOUBLET] completed regimen: +{added_db}")
+
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
                         "femara", "aromasin", "fulvestrant", "faslodex",
