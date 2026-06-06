@@ -1,4 +1,4 @@
-Source: rerun_pdac_noletter.yaml | Run started: 2026-06-05 21:32:09
+Source: rerun_pdac_noletter.yaml | Run started: 2026-06-05 22:45:53
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -624,7 +624,7 @@ RESULTS FOR ROW 2
     "current_meds": "Gemcitabine + Abraxane"
   },
   "Treatment_Changes": {
-    "recent_changes": "Switched to Gemcitabine + Abraxane on 11/29/18.",
+    "recent_changes": "Switched to Gemcitabine + Abraxane on 11/29/18",
     "supportive_meds": "granisetron (SANCUSO) 3.1 mg/24 hour patch, ondansetron (ZOFRAN)  8 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet"
   },
   "Treatment_Goals": {
@@ -632,7 +632,7 @@ RESULTS FOR ROW 2
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is showing signs of disease progression. This is evidenced by the CT CAP on 11/24/18 indicating disease progression and the rise in CA 19-9 levels from 789 to 1,625 between 10/03/18 and 11/24/18."
+    "response_assessment": "The cancer is showing signs of disease progression. This is evidenced by the CT CAP on 11/24/18 indicating disease progression and the rise in CA 19-9 levels from 789 on 10/03/18 to 1,625 on 11/24/18."
   },
   "Medication_Plan": {
     "medication_plan": "Continue Creon 2 tab/meal and 1 tab/snacks. Premed with Aloxi & Emend. Apply granisetron patch 3.1 mg/24 hours on day 3 and take compazine PRN. IV hydration on additional days 3 & 11 PRN. Continue to use cannabis product."
@@ -1101,7 +1101,7 @@ RESULTS FOR ROW 5
     "lab_summary": "WBC Count 6.4, Neutrophil Absolute Count 4.18, Hemoglobin 11.4 (L), Hematocrit 35.4 (L), Platelet Count 126 (L), Creatinine 0.74, Bilirubin, Total 0.4, Alkaline Phosphatase 160 (H), Aspartate transaminase 31, Alanine transaminase 30, Cancer Antigen 19-9 576 (H), Carcinoembryonic Antigen 16.2 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Laboratory data indicates a WBC count of 6.4, neutrophil absolute count of 4.18, hemoglobin of 11.4 (low), hematocrit of 35.4 (low), platelet count of 126 (low), creatinine of 0.74, total bilirubin of 0.4, alkaline phosphatase of 160 (high), aspartate transaminase of 31, alanine transaminase of 30, and albumin of 3.7. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert & oriented x 3, mood stable, and no psychiatric symptoms noted."
+    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Laboratory data indicates a WBC count of 6.4, neutrophil absolute count of 4.18, hemoglobin of 11.4 (low), hematocrit of 35.4 (low), platelet count of 126 (low), creatinine of 0.74, total bilirubin of 0.4, alkaline phosphatase of 160 (high), aspartate transaminase of 31, alanine transaminase of 30, and albumin of 3.7. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert and oriented x 3, mood stable, and no hallucinations, paranoia, or delusions."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1115,7 +1115,7 @@ RESULTS FOR ROW 5
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19."
+    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Additionally, the CA 19-9 levels have fluctuated but remain elevated, indicating stable disease rather than a clear response or progression."
   },
   "Medication_Plan": {
     "medication_plan": "Continue xarelto QD, Continue Creon to 2 or 3 tab/meal and 1 tab/snack, Cont Oxycontin 10mg PO bid, Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half), SMS recommended fluconazole"
@@ -1195,7 +1195,7 @@ RESULTS FOR ROW 5
     "Not explicitly stated."
   ],
   "response_assessment": [
-    "He is now s/p 12 cycles of FOLFIRINOX."
+    "He is now s/p 12 cycles of FOLFIRINOX.    #Stage IV pancreatic adenocarcinoma"
   ],
   "medication_plan": [
     "- Continue Creon to 2 or 3 tab/meal and 1 tab/snack   - Cont Oxycontin 10mg PO bid  - Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half)    #Weight loss: Improved  - Followed by Cancer Center Nutritionist [REDACTED] [REDACTED], [REDACTED]"
@@ -2204,9 +2204,9 @@ RESULTS FOR ROW 12
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
-    "Stage_of_Cancer": "",
-    "Distant Metastasis": "Yes, to liver, peritoneum",
-    "Metastasis": "Yes (to liver, peritoneum)"
+    "Stage_of_Cancer": "Stage III",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure"
   },
   "Lab_Results": {
     "lab_summary": "WBC Count 9.6, RBC Count 3.09 (L), Hemoglobin 9.6 (L), Hematocrit 28.5 (L), MCV 92, MCH 31.1, MCHC 33.7, Platelet Count 172, Neutrophil Absolute Count 8.55 (H), Lymphocyte Abs Cnt 0.59 (L), Monocyte Abs Count 0.38, Eosinophil Abs Ct 0.01, Basophil Abs Count 0.01, Imm Gran, Left Shift 0.05, Urea Nitrogen 10, Calcium 8.1 (L), Chloride 101, Creatinine  0.56 (L), Glucose 187 (H), Potassium 3.4 (L), Carbon Dioxide 26 (H), Anion Gap 9, pH 7.39, PCO2 47, PO2 32 (LL), Base excess 3, Bicarbonate 28 (H), Oxygen Saturation 55 (L), Hemoglobin, Whole Blood 9.9 (L), Hematocrit from [REDACTED] 31 (L), Lactate 1.1, Glucose, whole blood 190, Aspartate transaminase 30, Alanine transaminase 38, Bilirubin, Total 3.5 (H), Alkaline Phosphatase 265 (H), Lipase 20, Magnesium 1.6 (L), Albumin 2.1 (L), Total Protein 5.1 (L), PT 30.8 (H), INR 3.0 (H), Bilirubin, Total 3.7 (H), CANCER ANTIGEN 19-9 276 (H)"
@@ -2223,7 +2223,7 @@ RESULTS FOR ROW 12
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",
-    "goals_description": ""
+    "goals_description": "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
   },
   "Response_Assessment": {
     "response_assessment": "The cancer is currently not responding to treatment. Recent imaging shows interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
@@ -2284,16 +2284,22 @@ RESULTS FOR ROW 12
   "Type_of_Cancer": [
     "follow-up visit of pancreatic adenocarcinoma with concern for metastatic disease."
   ],
+  "Stage_of_Cancer": [
+    "pancreatic adenocarcinoma with concern for metastatic disease."
+  ],
   "Distant Metastasis": [
-    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;\" \"liver lesions noted"
+    "His restaging scans following 4 cycles of chemotherapy were concerning for metastatic disease that is responding to treatment."
   ],
   "Metastasis": [
-    "new peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
+    "He was started on systemic therapy with [REDACTED] on 12/05/15.  His restaging scans following 4 cycles of chemotherapy were concerning for metastatic disease that is responding to treatment."
   ],
   "findings": [
     "stable disease in the pancreatic mass."
   ],
   "goals_of_treatment": [
+    "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
+  ],
+  "goals_description": [
     "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
   ],
   "response_assessment": [
@@ -2835,7 +2841,7 @@ RESULTS FOR ROW 16
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management of the disease."
+    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management and evaluation of treatment response."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
@@ -2847,7 +2853,7 @@ RESULTS FOR ROW 16
     "lab_summary": "Alkaline Phosphatase 68, Bilirubin, Total 0.9, Alanine Transaminase 20, Aspartate Transaminase 25, Creatinine 0.46, eGFR if non-African American 90 mL/min, eGFR if African Amer  104 mL/min, WBC Count 9.1, RBC Count 4.15, Hemoglobin 13.0, Hematocrit 37.5, MCV 90, MCH 31.3, MCHC 34.7, Platelet Count 248, Neutrophil Absolute Count 3.79, Lymphocyte Abs Cnt 4.36, Monocyte Abs Count 0.88, Eosinophil Abs Ct 0.03, Basophil Abs Count 0.03, Imm Gran, Left Shift 0.02"
   },
   "Clinical_Findings": {
-    "findings": "CT abdomen/pelvis with contrast on 05/08/2019 shows slight improvement in pancreatic ductal dilatation, currently measuring 9 mm, previously measuring 12 mm. The ill-defined pancreatic mass is no longer seen, likely related to treatment. There is a 1.1 cm left renal enhancing lesion concerning for renal cell carcinoma. No evidence of metastatic disease. CT chest with contrast on 05/08/2019 shows no new findings to suggest intrathoracic metastatic disease. Two subsolid left upper lobe nodules likely represent primary lung adenocarcinoma lesions as previously described. The largest nodule is 16 mm with a 3 mm solid component. Physical exam shows no jaundice, no palpable masses, no ascites, and weight of 40.5 kg (89 lb 3.2 oz)."
+    "findings": "CT abdomen/pelvis with contrast on 05/08/2019 shows slight improvement in pancreatic ductal dilatation, currently measuring 9 mm, previously measuring 12 mm. The ill-defined pancreatic mass is no longer seen, likely related to treatment. There is a 1.1 cm left renal enhancing lesion concerning for renal cell carcinoma. No evidence of metastatic disease. CT chest with contrast on 05/08/2019 shows no new findings to suggest intrathoracic metastatic disease. Two subsolid left upper lobe nodules likely represent primary lung adenocarcinoma lesions, with the largest nodule being  16 mm with a 3 mm solid component. Physical exam shows no jaundice, no palpable masses, no ascites, and weight of 40.5 kg (89 lb 3.2 oz)."
   },
   "Current_Medications": {
     "current_meds": "gemcitabine"
@@ -2891,9 +2897,9 @@ RESULTS FOR ROW 16
     "Advance care": "Not discussed during this visit."
   },
   "Referral": {
-    "Nutrition": "Referral to nutritionist",
+    "Nutrition": "We will refer to nutritionist.",
     "Genetics": "None",
-    "Specialty": "Dental evaluation for periodontal inflammation and a deep pocket associated with her last left lower molar",
+    "Specialty": "Evaluated by her dentist; found to have periodontal inflammation and a deep pocket associated with her last left lower molar, which has been a chronic problem for her. Tooth was irrigated and rinsed with chlorhexidine. Patient to continue to use chlorhexidine rinse BID. No infection noted and ok'ed to continue on chemotherapy.",
     "Others": "None",
     "follow up": "on 05/16/19 with [REDACTED] [REDACTED]"
   },
