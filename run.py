@@ -2564,6 +2564,39 @@ def main():
                     cancer["Stage_of_Cancer"] = corrected
                     print(f"    [POST-STAGE-CORRECT] {stage} → {corrected}")
 
+        # POST-STAGE-NOBASIS: a numeric AJCC stage (I-IV) must be anchored to evidence the
+        # note actually gives for THIS cancer — otherwise it is fabrication (b4: a cT2N0,
+        # non-metastatic breast note whose only "stage" text is an unrelated ovarian-cancer
+        # history "stage IIIC", yet the model emitted "Originally unspecified, now Stage III").
+        # Anchors that count: the value is metastatic (Stage IV), the A/P literally states a
+        # stage, or a TNM token (cT/pT/T#N#) appears in the A/P, in the value itself (e.g.
+        # bilateral "Stage III (T3N1)"), or in the note body (TNM is staging-specific and
+        # almost always names the primary under discussion). We deliberately do NOT scan the
+        # full note for "stage X" text — PMH of other cancers (ovarian/lung/etc.) contaminates
+        # that. Runs LAST among the stage hooks so legitimate inferences (metastatic IV, CTNM,
+        # PTN-translate, bilateral, A/P abbrev) — which all carry one of these anchors —
+        # survive. General oncology rule, not test-set-specific. [2026-06-06, fix#1, b4]
+        cancer_nb = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_nb, dict):
+            stage_nb = str(cancer_nb.get("Stage_of_Cancer", "") or "")
+            num_m_nb = re.search(r'stage\s+(IV|III[ABC]?|II[ABC]?|I[ABC]?)\b', stage_nb, re.IGNORECASE)
+            if num_m_nb:
+                val_low_nb = stage_nb.lower()
+                ap_low_nb = (assessment_and_plan or "").lower()
+                note_low_nb = (note_text or "").lower()
+                tnm_re_nb = r'(?:c|p|yp|yc)?t[0-4]x?\s*,?\s*n[0-3x]'
+                supported_nb = (
+                    'metasta' in val_low_nb                                  # Stage IV = metastatic
+                    or bool(re.search(r'stage\s*(?:iv|iii|ii|i|[1-4])\b', ap_low_nb))  # A/P states a stage
+                    or bool(re.search(tnm_re_nb, ap_low_nb))                 # TNM in A/P
+                    or bool(re.search(tnm_re_nb, val_low_nb))               # TNM carried in value
+                    or bool(re.search(tnm_re_nb, note_low_nb))             # TNM in note body
+                )
+                if not supported_nb:
+                    old_nb = stage_nb
+                    cancer_nb["Stage_of_Cancer"] = "Not staged in note"
+                    print(f"    [POST-STAGE-NOBASIS] no stage/TNM/metastatic anchor — '{old_nb}' → 'Not staged in note'")
+
         # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't [iter10]
         # Only for non-metastatic (don't append to Stage IV)
         cancer = keypoints.get("Cancer_Diagnosis", {})
