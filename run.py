@@ -2734,11 +2734,30 @@ def main():
                     or bool(re.search(tnm_re_nb, ap_low_nb))                 # TNM in A/P
                     or bool(re.search(tnm_re_nb, val_low_nb))               # TNM carried in value
                     or bool(re.search(tnm_re_nb, note_low_nb))             # TNM in note body
+                    or 'locally advanced' in val_low_nb or 'locally-advanced' in val_low_nb  # LAPC/LABC = Stage III
+                    or 'unresectable' in val_low_nb or 'borderline resectable' in val_low_nb
                 )
                 if not supported_nb:
                     old_nb = stage_nb
                     cancer_nb["Stage_of_Cancer"] = "Not staged in note"
                     print(f"    [POST-STAGE-NOBASIS] no stage/TNM/metastatic anchor — '{old_nb}' → 'Not staged in note'")
+
+        # POST-STAGE-LOCALLY-ADVANCED: "locally advanced" pancreatic/breast cancer is, by convention,
+        # unresectable Stage III. When the stage field is empty/not-staged but the A/P or note describes
+        # the disease as locally advanced (and it is not metastatic), record Stage III. Runs after
+        # NOBASIS so it isn't stripped. General oncology rule. [2026-06-06, fix#13, pdac1]
+        cancer_la = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_la, dict):
+            stage_la = str(cancer_la.get("Stage_of_Cancer", "") or "").lower().strip()
+            empty_la = (not stage_la) or stage_la in ("not staged in note", "not mentioned",
+                                                      "not mentioned in note", "not available", "")
+            if empty_la:
+                hay_la = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
+                dm_la = str(cancer_la.get("Distant Metastasis", "") or "").lower()
+                is_met_la = ('yes' in dm_la) or bool(re.search(r'stage\s*iv|metastatic', hay_la))
+                if not is_met_la and re.search(r'locally[- ]advanced', hay_la):
+                    cancer_la["Stage_of_Cancer"] = "Stage III (locally advanced)"
+                    print(f"    [POST-STAGE-LOCALLY-ADVANCED] empty stage + locally advanced → Stage III")
 
         # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't [iter10]
         # Only for non-metastatic (don't append to Stage IV)
