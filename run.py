@@ -1651,7 +1651,11 @@ def main():
                     'compression': 'compression stockings',
                     'brace': 'brace',
                     'home health': 'home health',
-                    'physical therapy': 'physical therapy', ' pt ': 'physical therapy',
+                    'physical therapy': 'physical therapy',
+                    # NOTE: ' pt ' removed — it matched "pt" (the patient abbreviation,
+                    # "pt to continue...", "will have pt undergo...") and hallucinated a
+                    # physical-therapy referral that was never in the note (pdac16/pdac19/b19).
+                    # Only the full phrase "physical therapy" is a safe trigger. [fix#3]
                 }
                 added = []
                 for keyword, label in SUPPORTIVE_ITEMS.items():
@@ -1736,9 +1740,35 @@ def main():
                 'docusate': ['docusate','colace'],
                 'morphine': ['morphine','ms contin'],
                 'tramadol': ['tramadol','ultram'],
+                'ondansetron': ['ondansetron','zofran'],
+                'zofran': ['ondansetron','zofran'],
+                'prochlorperazine': ['prochlorperazine','compazine'],
+                'compazine': ['prochlorperazine','compazine'],
+                'duloxetine': ['duloxetine','cymbalta'],
+                'cymbalta': ['duloxetine','cymbalta'],
+                'venlafaxine': ['venlafaxine','effexor'],
+                'effexor': ['venlafaxine','effexor'],
+                'pregabalin': ['pregabalin','lyrica'],
+            }
+            # AUTO_SUPPLEMENT_SKIP: generic non-oncology meds must NOT be force-injected into the
+            # oncology Medication_Plan. A long A/P often pastes prior medication lists / PRN home
+            # meds; auto-adding antibiotics (doxycycline), generic analgesics (acetaminophen,
+            # hydrocodone), antihistamines, statins, etc. dumps note noise into the plan (b19:
+            # "; also: ondansetron, zofran, doxycycline, acetaminophen, hydrocodone"). Only
+            # cancer-specific drugs + clearly chemo-supportive agents are eligible for the
+            # supplement; the model's own extraction still keeps anything genuinely in the plan.
+            # Principle: 精确忠实 > 不遗漏. [2026-06-06, fix#4, b19]
+            AUTO_SUPPLEMENT_SKIP = {
+                'doxycycline', 'acetaminophen', 'ibuprofen', 'naproxen', 'tramadol',
+                'morphine', 'oxycodone', 'hydrocodone', 'lorazepam', 'loratadine',
+                'fexofenadine', 'metformin', 'atorvastatin', 'rosuvastatin', 'levothyroxine',
+                'hydrochlorothiazide', 'lisinopril', 'docusate', 'miralax', 'senna',
+                'potassium', 'calcium', 'magnesium',
             }
             found_meds = []
             for drug in MEDICATION_DRUG_LIST:
+                if drug in AUTO_SUPPLEMENT_SKIP:
+                    continue
                 if drug not in ap_lower_mp:
                     continue
                 # Check if any synonym already in medication_plan
@@ -1791,7 +1821,15 @@ def main():
                         print(f"    [POST-MEDICATION-SUPPLEMENT] Skipping '{drug}' — found as stopped/progressed in extraction fields")
                     else:
                         filtered_meds.append(drug)
-                unique = list(dict.fromkeys(filtered_meds))
+                # synonym-aware dedup: ondansetron/zofran, prochlorperazine/compazine etc. are the
+                # same drug — collapse to one canonical entry so the plan doesn't list both. [fix#4]
+                unique, _seen_canon = [], set()
+                for drug in filtered_meds:
+                    canon = MED_SYNONYMS.get(drug, [drug])[0]
+                    if canon in _seen_canon:
+                        continue
+                    _seen_canon.add(canon)
+                    unique.append(drug)
                 if unique:
                     if mp_lower in ("none", "", "null", "none."):
                         med["medication_plan"] = "Continue/start: " + ", ".join(unique)
