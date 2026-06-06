@@ -2625,6 +2625,23 @@ def main():
                     cancer_diag["Stage_of_Cancer"] = "Stage IV (metastatic)"
                     print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (Metastasis=Yes)")
 
+        # POST-STAGE-PARENS-CLEANUP: remove empty "()" and dangling connectives left behind
+        # when a prior hook (e.g. POST-STAGE-VERIFY-NOTE) strips a fabricated "Stage X" out of
+        # a phrase like "metastatic (Stage IV)" -> "metastatic ()". Deterministic, content-free
+        # cosmetic cleanup; runs last among the stage hooks. [2026-06-05 floor-lock]
+        cancer_pc = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_pc, dict):
+            stage_pc = cancer_pc.get("Stage_of_Cancer", "")
+            if isinstance(stage_pc, str) and stage_pc:
+                cleaned_pc = re.sub(r'\(\s*\)', '', stage_pc)            # empty parens
+                cleaned_pc = re.sub(r'\s*,\s*,', ', ', cleaned_pc)       # doubled commas
+                cleaned_pc = re.sub(r'(?i)\b(now|originally|currently)\s*[,;:]?\s*$', '', cleaned_pc)  # dangling connective at end
+                cleaned_pc = re.sub(r'\s{2,}', ' ', cleaned_pc)         # collapse spaces
+                cleaned_pc = cleaned_pc.strip().strip(',').strip()
+                if cleaned_pc != stage_pc:
+                    cancer_pc["Stage_of_Cancer"] = cleaned_pc
+                    print(f"    [POST-STAGE-PARENS-CLEANUP] '{stage_pc}' → '{cleaned_pc}'")
+
         # POST-RESPONSE: cross-reference response_assessment with findings [B53, B60]
         response = keypoints.get("Response_Assessment", {})
         resp_val = response.get("response_assessment", "") if isinstance(response, dict) else ""
