@@ -20,9 +20,45 @@
 ## 审查字段清单（每个 sample 都要逐个过）
 Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagnosis(Type/Stage/Distant Met/Metastasis) · Lab_Results(lab_summary) · Clinical_Findings(findings) · Current_Medications(current_meds) · Treatment_Changes(recent_changes/supportive_meds) · Treatment_Goals(goals) · Response_Assessment · Medication_Plan · Therapy_plan · radiotherapy_plan · Procedure_Plan · Imaging_Plan · Lab_Plan · Genetic_Testing_Plan · follow_up · Advance_care · Referral · Genetic_Testing_Results
 
-## STATUS（上下文满了从这里恢复）
-- [进行中] breast 1-20 ✓ | pdac 1-10 ✓ | pdac 11-20 待
-- 进度：30/40 | 下一步：派 subagent 审 pdac 11-20。PL行(pdac):R11 2033,R12 2185,R13 2340,R14 2510,R15 2668,R16 2823,R17 2990,R18 3127,R19 3273,R20 3428(end3584)。BL行(pdac):R11 768,R12 844,R13 920,R14 996,R15 1072,R16 1148,R17 1224,R18 1300,R19 1376,R20 1452。pdac coral_idx=n-1。prompt=prompts/pdac/extraction.yaml+prompts/pdac/plan_extraction.yaml。subagent模板见上方pdac1-5。
+## ✅✅✅ 全 40 审查完成（40/40）—— 最终汇总见本节
+- breast 1-20 ✓ | pdac 1-20 ✓ | 全部 subagent 全字段初审 + 主 Claude 复核 P0
+- **P0=2(均breast): b4 Stage III幻觉、b17 current_meds="ac"编造化疗** (pdac 0个P0)
+- **P1≈55+**(全字段;诊断四维之外的plan/字段归位/完整性/时态为主)
+- **逐sample结论**: 每个sample PL整体领先BL(典型胜5-14/负0-4),但**无一sample做到字段级零失分**;BL胜场几乎全来自下列可修类
+- **已修bug全HOLD无回归**: bug6(pdac12/20 Stage IV)、bug7(pdac15 surveillance)、bug8(pdac19 not responding)、bug9(pdac15 pT2N3) 全部仍正确
+
+### 🔧 修复优先级总表(P0/安全 + 高频回归优先)
+1. **[P0]** stage数字幻觉(b4)：stage含I/II/III/IV但note无stage/pT/pN依据→"Not staged in note" hook
+2. **[P0]** current_meds化疗幻觉(b17 ac/b12 tc)：discussed/rejected/not-receiving的regimen→清空(G4 FAITHFUL"明确矛盾"+"not receiving X"检测)
+3. **[hook-bug]** "physical therapy"幻觉注入(b19/pdac16/pdac19)：查run.py注入"; physical therapy"的hook并修
+4. **[hook-bug]** Medication_Plan "; also:"追加非癌药/重复(b19)：仅追加癌相关+去重
+5. **[hook回归,9个pdac]** supportive_meds误删Creon/Xarelto(f0699e8c)：A/P"continue X"的supportive药必保留;PDAC强制查Creon/lipase-protease-amylase
+6. **[系统性,pdac]** current_meds漏active化疗：POST-MEDS-IV-CHECK正则补"C#"/"C#D#"/"s/p N cycles of DRUG"/"presents for C#"记法(run.py~3457);held暂停≠停药
+7. **字段归位(高频)**：TTE/echo→Imaging非Lab(b8/b17);FNA/biopsy→Procedure非Imaging/Genetic(b9);port→Procedure非Lab(b20);germline检测→Genetic_Results/Plan非Referral(b10/b20);RT句残片→radiotherapy非Procedure(pdac3)
+8. **plan时态(已完成当未来)**：已做影像(echo/PET/CT/US "performed/accomplished/done/looks good")清空(b2/b3/pdac1/16);已出结果labs不当lab plan(b2)
+9. **completed-test当plan / pending漏**：已出结果的MammaPrint/BRCA→Results不进Plan(b17/b18);pending分子检测(STRATA/UCSF500)→Plan"sent pending"(pdac11/13);germline pending(b20)
+10. **plan字段必收清单**：surgery+port(b20)、诊断/分期biopsy+FNA(b6/b16)、baseline echo蒽环前(b10)、radiotherapy "not recommended due to X"(b13/b18)、continue化疗(pdac7 Therapy_plan禁None)
+11. **goals方向**：无转移/疑似IV→非palliative(b2/b4/b6);完成neoadj+切除+复发/监测+无active药→surveillance非curative(pdac6/15)
+12. **Type/stage疑似当确诊**：metastatic recurrence措辞(b4/b9)、亚型幻觉IDC(b20)、regional节点当distant(b9 level Vb/b15 axillary)→FAITHFUL疑似门+节点regional hook+亚型须pathology明写
+13. **stage遗漏**：cTxNx(b18)、"early stage"(b20)、locally advanced/血管包绕>180°(pdac1/7/13)→Stage III/取原文
+14. **current_meds化疗doublet漏成分**(b7 abraxane/pdac3 nal-IRI)：从summary/therapy回填多药方案
+15. **"Patient not taking"未过滤**(pdac7) + **否决药当现治疗**(b14 continue tamoxifen)：否定/拒绝语境药移出
+16. **Response stable vs decline/progression**(pdac1/3)：A/P医生整体判断优先于单部位/旧CT
+17. **recent_changes未来当已发生/漏真实事件**(pdac1/4/17)：chemo break/完成化疗→surveillance/本次ERCP-stent算change
+18. **Clinical_Findings**：去重lab/受体(多个)、去纯症状、负性结论须note支撑(pdac2造no-weight-loss)、裸"No evidence of metastasis"加上下文(pdac4)、保留margin status(b11切缘阳性)、保留医生low-suspicion结论(b13)
+19. **Referral**：只outgoing(b4/pdac2/15 incoming误报)、follow up去重plan项(多sample)
+20. **non-secretor CA19-9状态漏**(pdac4/11/13/20 MMR)；**字符串截断bug**(b11/pdac9 CREON乱码)；**OCR乱码**(pdac9/6)；**lab>6月旧值混入**(b12/pdac10)
+
+### 给下一轮迭代的建议
+- 先修 1-6(2个P0+3个hook-bug/回归+1个系统性pdac化疗漏),这些是安全+高频,且多为确定性hook易验证
+- 7-20按字段批量修(多为plan字段归位/时态/必收清单,可共用"plan字段路由hook"+"时态过滤强化")
+- 改完→重跑40(letter-off)→重审(可再用subagent同流程)验证P0清零+各字段BL胜归零
+- 本doc持久化;每条问题都附了sample+note依据+prompt依据+具体改进,可直接作为fix工单
+
+---
+
+## (历史)STATUS
+- 进度：40/40 完成PL行(pdac):R11 2033,R12 2185,R13 2340,R14 2510,R15 2668,R16 2823,R17 2990,R18 3127,R19 3273,R20 3428(end3584)。BL行(pdac):R11 768,R12 844,R13 920,R14 996,R15 1072,R16 1148,R17 1224,R18 1300,R19 1376,R20 1452。pdac coral_idx=n-1。prompt=prompts/pdac/extraction.yaml+prompts/pdac/plan_extraction.yaml。subagent模板见上方pdac1-5。
 - 注:pdac12已知bug6修复样本(carcinomatosis→Stage IV),pdac15已知bug7/9(surveillance+pTNM),pdac19已知bug8(addendum进展),pdac20已知bug6(T4N1→IV)——重点看这些字段是否仍正确+其他字段新问题。
 - 模板见上方各 subagent prompt(三重任务:正确性/vs BL/改进; 铁律禁脚本); 主复核P0(亲读原文),P1抽验,P2信任subagent
 - 注意pdac特有:碳水化合物癌(carcinomatosis)、CA19-9、FOLFIRINOX/gem-nab、surveillance、Whipple等
@@ -169,6 +205,14 @@ Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagno
 - **pdac14**(metastatic新患treatment-naive): 较干净,PL胜6/BL胜1(supportive Tylenol home med)。current_meds正确空(BL误填7种降压降糖药)。零幻觉,试验细节全。**PL优势样本**。
 - **pdac15**(bug7/9样本,resected surveillance): ✅**Stage"pT2N3"保持(bug9未回归,忠实医生Impression;注path synoptic="ypT3N2"冲突,PL选医生定性可辩护) + response surveillance-aware保持(bug7未回归)**。新P1: supportive漏Creon(BL抓到!);goals"curative"应"surveillance";P2 Referral把历史XRT转诊当本次。vs BL:PL胜14/BL胜2(supportive Creon、goals surveillance)。
 - **本批结论**: bug6/7/9 三个修复全部HOLD无回归;但**Creon-drop(f0699e8c回归)现累计7个pdac(2/5/8/9/11/13/15)=pdac头号P1**;goals curative→surveillance(pdac6/15);Genetic_Plan漏pending分子检测(STRATA/UCSF500)+non-secretor(pdac11/13/4)。
+
+### pdac ROW16-20 (coral_idx 15-19) — 全对齐✓ (精炼)
+- **pdac16**(Stage IIB,响应,肾/肺另原发): **P1 Therapy_plan幻觉"; physical therapy"**(全文无PT,hook注入,同b19);P2 Referral过去牙科当referral。**PL胜5/BL胜0**。current_meds="gemcitabine"正确(active),正确区分肾/肺另原发≠胰癌转移。PL优势样本。
+- **pdac17**(locally advanced,chemo break,stable): P1 recent_changes漏"chemo break since 11/06/18"(重大hold);current_meds空(chemo break,可辩护但BL"None active"更可读)。vs BL:PL胜6/BL胜2(current_meds可辩护性、recent_changes chemo break)。
+- **pdac18**(s/p远端胰切除node+2/29,adjuvant): **P1 current_meds漏active辅助gem+cape**(因hand-foot暂hold将resume;cape门诊标"not taking"但A/P在用);**P1 supportive漏Creon**(未标not taking);P1 goals description。vs BL:PL胜5/BL胜2(current_meds、goals)。
+- **pdac19**(bug8样本,进展vs胆梗): ✅**response"not responding"保持正确(bug8未回归,addendum CT确认mass interval increase)**。**P1 current_meds漏FOLFIRINOX**(根因:POST-MEDS-IV-CHECK正则无法匹配"C3"/"s/p 2 cycles of FOLFIRINOX"记法,run.py~3457);P1 supportive漏Creon;P2 Lab_Plan脏文本"PLAN:..."截断;P2 Therapy_plan"; physical therapy"幻觉。vs BL:PL胜11/BL胜2。
+- **pdac20**(bug6样本,newly dx metastatic liver+peritoneum): ✅**Stage IV+liver/peritoneum保持正确(bug6未回归,三字段一致)**。仅P2: supportive误列Percocet(PRN且"no opioid requirements")、Imaging_Plan收研究性trial影像、漏MMR(pMMR)结果、second opinion归因错位。**PL胜8/BL胜0/TIE13**。current_meds正确空(新患未启动)。PL最强样本之一。
+- **本批结论**: bug6/8修复HOLD无回归;**"physical therapy"幻觉=hook bug(b19/pdac16/pdac19三处)**;**current_meds漏active化疗根因=POST-MEDS-IV-CHECK正则不匹配C#D#/s-p-N-cycles记法**(pdac9/10/18/19);Creon-drop现累计9个pdac(2/5/8/9/11/13/15/18/19)。
 
 ### ⚠️ 阶段性结论(10/40)
 全字段审查证实了用户的担忧：**重跑后非诊断字段(plan类/Type措辞/字段归位/完整性)有大量 P1**，是四维重评完全没覆盖的。诊断四维(stage/met/response/distmet)PL确实强,但plan字段错配+疑似当确诊+完整性遗漏让多个sample被BL在个别字段反超。要"全方位碾压"需基于本审查的改进清单做新一轮 hook+prompt 迭代→重跑→重审。本doc持久化,可跨上下文继续。
