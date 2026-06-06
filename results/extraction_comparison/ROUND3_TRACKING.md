@@ -107,7 +107,7 @@ PL(pipeline: 多阶段提取+5 gate+POST hook+词典) 在全 40 held-out sample 
 - [x] #4/#5/#7/#8/#9/#10/#11 + new 全部 code 完成 + 单测
 - [x] FIX4 全量重跑 (0错误, 14/17 landed)
 - [x] 3 residual code-fix + 单测
-- [ ] 最终确认重跑 (验证3 residual) + 全40重审 → 待用户决定
+- [x] FIX5最终确认重跑(2/3 residual修复) + 全40 v4重审完成: P0=0全维持, round4七主题全held, PL残留~9 P1(多stage细节), 1自伤回归(pdac8 ACP)已修. REAUDIT_40_v4.md.
 
 ## FIX5 最终确认重跑 (0错误)
 - ✅ 2/3 residual 确认修复: pdac12 therapy ipilimumab→"None"; pdac7 supportive→""(ondansetron+oxycodone都去掉).
