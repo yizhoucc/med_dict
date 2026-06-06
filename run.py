@@ -2894,10 +2894,11 @@ def main():
                 val_low_nb = stage_nb.lower()
                 ap_low_nb = (assessment_and_plan or "").lower()
                 note_low_nb = (note_text or "").lower()
-                tnm_re_nb = r'(?:c|p|yp|yc)?t[0-4]x?\s*,?\s*n[0-3x]'
+                # TNM token; tolerate a multifocality marker "(m)" between T and N ("pT2(m)N1a") [round4 #4]
+                tnm_re_nb = r'(?:c|p|yp|yc)?t[0-4][a-d]?(?:\([a-z]+\))?\s*,?\s*n[0-3x]'
                 supported_nb = (
                     'metasta' in val_low_nb                                  # Stage IV = metastatic
-                    or bool(re.search(r'stage\s*(?:iv|iii|ii|i|[1-4])\b', ap_low_nb))  # A/P states a stage
+                    or bool(re.search(r'stage\s*(?:iv|iii|ii|i)[abc]?\b|stage\s*[1-4][abc]?\b', ap_low_nb))  # A/P states a stage (incl IIA/IIB)
                     or bool(re.search(tnm_re_nb, ap_low_nb))                 # TNM in A/P
                     or bool(re.search(tnm_re_nb, val_low_nb))               # TNM carried in value
                     or bool(re.search(tnm_re_nb, note_low_nb))             # TNM in note body
@@ -2908,6 +2909,56 @@ def main():
                     old_nb = stage_nb
                     cancer_nb["Stage_of_Cancer"] = "Not staged in note"
                     print(f"    [POST-STAGE-NOBASIS] no stage/TNM/metastatic anchor — '{old_nb}' → 'Not staged in note'")
+
+        # POST-STAGE-EXPLICIT: a FORMAL stage statement the note gives for THIS cancer — "Stage IIB
+        # (cT1c, cN1, cM0)" (pdac16 dedicated "Cancer Staging" section) or "stage IIA pT2(m)N1a" (b8) —
+        # must be captured when the stage field is empty/"Not staged". We require an adjacent TNM token
+        # (the discriminator from a bare cross-cancer history "stage IIIC" with no TNM, e.g. b4's ovarian
+        # PMH) and exclude lines naming another primary. Runs AFTER NOBASIS so the formal stage is the
+        # final word. [2026-06-06, round4 #4, pdac16/b8]
+        cancer_ex = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_ex, dict):
+            stage_ex = str(cancer_ex.get("Stage_of_Cancer", "") or "").lower().strip()
+            empty_ex = (not stage_ex) or stage_ex in ("not staged in note", "not mentioned",
+                                                      "not mentioned in note", "not available", "")
+            if empty_ex:
+                hay_ex = (assessment_and_plan or "") + " \n " + (note_text or "")  # original case
+                OTHER_CA = ('ovarian', 'lung cancer', 'colon', 'colorectal', 'prostate', 'thyroid',
+                            'melanoma', 'lymphoma', 'leukemia', 'endometrial', 'cervical cancer',
+                            'papillary carcinoma', 'renal cell', 'bladder')
+                m_ex = re.search(
+                    r'stage\s+(iv|iii[abc]?|ii[abc]?|i[abc]?)\s*[\(,]?\s*'
+                    r'((?:c|p|yp|yc)?t[0-4][a-d]?(?:\([a-z]+\))?\s*,?\s*[cp]?n[0-3x][a-c]?(?:\s*,?\s*[cp]?m[0-1x])?)',
+                    hay_ex, re.IGNORECASE)
+                if m_ex:
+                    ctx_ex = hay_ex[max(0, m_ex.start() - 40):m_ex.start()].lower()
+                    if not any(oc in ctx_ex for oc in OTHER_CA):
+                        stg = m_ex.group(1).upper()
+                        tnm = re.sub(r'\s+', '', m_ex.group(2))  # preserve note casing (cT1c, cN1, cM0)
+                        cancer_ex["Stage_of_Cancer"] = f"Stage {stg} ({tnm})"
+                        print(f"    [POST-STAGE-EXPLICIT] captured formal stage: 'Stage {stg} ({tnm})'")
+                elif re.search(r'(?i)\bearly[- ]stage\b', hay_ex):
+                    cancer_ex["Stage_of_Cancer"] = "Early stage"
+                    print(f"    [POST-STAGE-EXPLICIT] captured 'Early stage'")
+
+        # POST-STAGE-MBC: de novo / explicit metastatic breast cancer ("de novo MBC", "metastatic breast
+        # cancer", physician says "not curable") with distant spread (incl. cervical nodes, which are M1
+        # for breast) is Stage IV — the model sometimes under-stages it as III (b15). [2026-06-06, round4 #4]
+        cancer_mbc = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_mbc, dict):
+            stage_mbc = str(cancer_mbc.get("Stage_of_Cancer", "") or "")
+            if not re.search(r'stage\s*iv|metastatic', stage_mbc, re.I):
+                ap_low_mbc = (assessment_and_plan or "").lower()
+                note_low_mbc = (note_text or "").lower()
+                hay_mbc = ap_low_mbc + " \n " + note_low_mbc
+                mbc_sig = re.search(r'de novo mbc|\bmbc\b|metastatic breast cancer|do not consider .{0,20}curable|not curable', hay_mbc)
+                dm_mbc = str(cancer_mbc.get("Distant Metastasis", "") or "").lower()
+                distant_present = ('yes' in dm_mbc) or ('cervical' in hay_mbc and 'metasta' in hay_mbc) \
+                    or bool(re.search(r'metastasi[sz]ed to|distant metasta', hay_mbc))
+                if mbc_sig and distant_present:
+                    old_mbc = stage_mbc
+                    cancer_mbc["Stage_of_Cancer"] = "Stage IV (metastatic)"
+                    print(f"    [POST-STAGE-MBC] de novo/explicit MBC + distant → Stage IV (was '{old_mbc}')")
 
         # POST-STAGE-LOCALLY-ADVANCED: "locally advanced" pancreatic/breast cancer is, by convention,
         # unresectable Stage III. When the stage field is empty/not-staged but the A/P or note describes
@@ -2928,9 +2979,26 @@ def main():
                 # unrelated section would otherwise wrongly block the Stage III assignment (pdac1).
                 ap_only_la = (assessment_and_plan or "").lower()
                 is_met_la = ('yes' in dm_la) or bool(re.search(r'stage\s*iv', ap_only_la))
-                if not is_met_la and re.search(r'locally[- ]advanced', hay_la):
+                # (a) "locally advanced" describing THIS patient — exclude generic population phrasing
+                # ("patients with ... or locally advanced", "hormone-receptor-positive or locally
+                # advanced tumors") which is a treatment-criteria statement, not this patient's stage (b13).
+                patient_la = False
+                for mla in re.finditer(r'locally[- ]advanced', hay_la):
+                    pre_la = hay_la[max(0, mla.start() - 14):mla.start()]
+                    if not re.search(r'\bor\s+$|patients with[^.]*$', pre_la):
+                        patient_la = True
+                        break
+                # (b) vessel encasement/occlusion of a major peri-pancreatic vessel = locally advanced
+                # (unresectable) Stage III for pancreatic cancer (pdac7: "mass encases and occludes the
+                # distal splenic artery"; >180° contact). [round4 #4]
+                vessel_la = (cancer_type != "breast") and bool(re.search(
+                    r'(?:encase|encasement|occlu|abut|>?\s*180)[^.]{0,40}'
+                    r'(?:sma\b|superior mesenteric|celiac|splenic (?:artery|vein)|portal vein|smv\b|hepatic artery|mesenteric)'
+                    r'|(?:sma\b|superior mesenteric|celiac|splenic (?:artery|vein)|portal vein|smv\b|hepatic artery)[^.]{0,40}'
+                    r'(?:encase|encasement|occlu|abut|>\s*180|contact greater than 180)', hay_la))
+                if not is_met_la and (patient_la or vessel_la):
                     cancer_la["Stage_of_Cancer"] = "Stage III (locally advanced)"
-                    print(f"    [POST-STAGE-LOCALLY-ADVANCED] empty stage + locally advanced → Stage III")
+                    print(f"    [POST-STAGE-LOCALLY-ADVANCED] empty stage + locally advanced/vessel encasement → Stage III")
 
         # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't [iter10]
         # Only for non-metastatic (don't append to Stage IV)
