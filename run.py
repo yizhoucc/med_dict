@@ -2635,9 +2635,14 @@ def main():
             # Pattern 5: hospice / goals-of-care transition discussed — this IS advance care planning
             # (pdac3 "transition to home hospice", pdac12 "anticipate the need to transition to hospice").
             # [2026-06-06, round4 #11]
+            # Require an EXPLICIT hospice/comfort-care mention — "goals of care"/"discussed prognosis"/
+            # "prioritize QoL" alone are too weak and led to a fabricated "transition to hospice" when
+            # the note never said hospice (pdac8). Only fire on literal hospice or comfort-care wording.
+            # [2026-06-06, round4 fix: tightened, pdac8 regression]
             hospice_match = re.search(
-                r'(?:transition\w*\s+(?:to|the patient to)\s+(?:home\s+)?hospice|home\s+hospice|hospice\s+(?:care|referral|enrollment)|'
-                r'goals\s+(?:of\s+care|on\s+purely\s+palliative)|comfort\s+(?:care|measures)\s+(?:discuss|focus)|discussed\s+(?:the\s+)?prognosis)',
+                r'transition\w*\s+(?:to|the patient to)\s+(?:home\s+)?hospice|\bhome\s+hospice\b|'
+                r'\bhospice\s+(?:care|referral|enrollment|services)|enroll\w*\s+in\s+hospice|'
+                r'comfort\s+care\s+(?:only|measures|focus|transition)',
                 note_text, re.IGNORECASE)
             patches = []
             if code_match:
