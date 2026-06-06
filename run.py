@@ -1913,8 +1913,8 @@ def main():
                 # rejection context near the drug in the note?
                 rejected_rj = False
                 for mr in re.finditer(re.escape(drug), hay_rj):
-                    win = hay_rj[max(0, mr.start() - 45):mr.end() + 30]
-                    if re.search(r'concerned about|would not advise|do not advise|not advise|prefer\b|instead|declined|refus|chose .{0,30}vs|holiday vs|vs beginning|\balone\b|risk of', win):
+                    win = hay_rj[max(0, mr.start() - 90):mr.end() + 30]
+                    if re.search(r'concerned about|would not advise|do not advise|not advise|prefer\b|instead|declined|refus|chose .{0,40}vs|holiday vs|vs beginning|clinical trial|study of|\balone\b|risk of', win):
                         rejected_rj = True
                         break
                 # "Continue <drug>" but drug never current → fabricated continuation
@@ -4318,7 +4318,7 @@ def main():
                     dropped = False
                     if base_nt and len(base_nt) > 2:
                         for mm in re.finditer(re.escape(base_nt), note_low_nt):
-                            ctx = note_low_nt[mm.end():mm.end() + 80]
+                            ctx = note_low_nt[mm.end():mm.end() + 140]
                             if 'patient not taking' in ctx or 'not taking:' in ctx:
                                 dropped = True
                                 break
@@ -4339,6 +4339,10 @@ def main():
             note_ap_hp = (note_text or "").lower() + " \n " + (assessment_and_plan or "").lower()
             for m_hp in re.finditer(r'(?:using|takes?|taking)\s+(?:primarily\s+)?(tylenol|acetaminophen|oxycodone|morphine|tramadol|hydromorphone|dilaudid|ibuprofen)\b[^.]{0,40}\bpain', note_ap_hp):
                 drug_hp = m_hp.group(1)
+                # skip non-cancer pain (chronic back/shoulder/arthritis) or explicit 'no cancer pain' (pdac7 oxycodone)
+                guard_hp = note_ap_hp[max(0, m_hp.start() - 35):m_hp.end() + 35]
+                if re.search(r'no cancer pain|non-?cancer|chronic back|shoulder pain|arthriti|degenerative|musculoskeletal', guard_hp):
+                    continue
                 if drug_hp not in supp_low_hp:
                     label_hp = drug_hp.capitalize() + " (home pain control)"
                     tc_hp["supportive_meds"] = (supp_hp + ", " + label_hp) if (supp_hp and supp_low_hp not in ("none", "none.", "")) else label_hp
