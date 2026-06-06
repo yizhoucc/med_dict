@@ -2519,6 +2519,39 @@ def main():
                 if len(valid_items) < len(items):
                     gen["genetic_testing_plan"] = ", ".join(valid_items) if valid_items else "None planned."
 
+        # POST-PLAN-GARBAGE-CLEAN: a regex over-capture sometimes pulls cross-date HPI/imaging text or an
+        # A/P-header fragment into Lab_Plan or Genetic_Testing_Plan (pdac11 lab="planned)  03/16/21: CT AP:
+        # Pancreatic cystic lesion..."; pdac19 lab="PLAN: 1. Localized adenocarcinoma..."; pdac13 genetic
+        # truncated "...reported separa (results pending)"). Detect and clean. [2026-06-06, round4 #9]
+        # (a) Lab_Plan: if the value is imaging/A-P-header garbage with NO real lab content → recover the
+        # note's actual lab plan ("repeat labs"/"labs locally") or "No labs planned."
+        lab_gc = keypoints.get("Lab_Plan", {})
+        if isinstance(lab_gc, dict):
+            lv_gc = str(lab_gc.get("lab_plan", "") or "")
+            ll_gc = lv_gc.lower()
+            if lv_gc and ll_gc not in ("no labs planned.", "no labs planned", "none", "none planned.", ""):
+                is_garbage = bool(re.search(r'\bct\s+(?:ap|chest|cap|abdomen|a/?p)\b|cystic lesion|^\s*plan\s*:|^\s*\d+\.\s|^\s*planned\)|adenocarcinoma|\bmri\b|pancreatic (?:mass|cystic)', ll_gc))
+                has_lab = bool(re.search(r'\b(?:cbc|cmp|ca\s*19|ca19|cea|labs?|blood|creatinine|bilirubin|alk\s*phos|lft|electrolyte|metabolic panel|a1c|glucose|tsh|estradiol|complete blood)\b', ll_gc))
+                if is_garbage and not has_lab:
+                    ap_lab_gc = (assessment_and_plan or "").lower()
+                    m_rl = re.search(r'(repeat labs?|labs?\s+(?:locally|today)|check\s+(?:cbc|labs?|a1c|glucose)[\w\s,/]{0,40}|complete labs to rule out[\w\s,/]{0,40})', ap_lab_gc)
+                    lab_gc["lab_plan"] = (m_rl.group(1).strip().capitalize() if m_rl else "No labs planned.")
+                    print(f"    [POST-PLAN-GARBAGE-CLEAN] Lab_Plan garbage → '{lab_gc['lab_plan']}'")
+        # (b) Genetic_Testing_Plan: if a pending assay value carries trailing cross-date/imaging garbage
+        # or a mid-word truncation, normalize to "<Assay> molecular testing (results pending)".
+        gen_gc = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gen_gc, dict):
+            gv_gc = str(gen_gc.get("genetic_testing_plan", "") or "")
+            gl_gc = gv_gc.lower()
+            if re.search(r'\bct\s+(?:chest|ap|cap)\b|\d{1,2}/\d{1,2}/\d{2}|separa\b|reported separa', gl_gc):
+                ASSAY_NM = [('ucsf500', 'UCSF500'), ('strata', 'STRATA'), ('foundation', 'FoundationOne'),
+                            ('tempus', 'Tempus'), ('guardant', 'Guardant'), ('caris', 'Caris')]
+                pending_gc = bool(re.search(r'pending|in process|in progress|sent|await', gl_gc))
+                named_gc = next((disp for key, disp in ASSAY_NM if key in gl_gc), None)
+                if named_gc:
+                    gen_gc["genetic_testing_plan"] = f"{named_gc} molecular testing ({'results pending' if pending_gc else 'ordered'})"
+                    print(f"    [POST-PLAN-GARBAGE-CLEAN] Genetic_Testing_Plan → '{gen_gc['genetic_testing_plan']}'")
+
         # POST: Patch Advance_care with code status from full note (A/P may not contain it)
         adv = keypoints.get("Advance_care_planning", {})
         adv_val = adv.get("Advance care", "") if isinstance(adv, dict) else ""
