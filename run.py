@@ -3525,6 +3525,77 @@ def main():
                     tc_dict["supportive_meds"] = ", ".join(kept_supp2) if kept_supp2 else ""
                     print(f"    [POST-SUPP-BLACKLIST] Removed non-supportive home meds: {removed2}")
 
+        # POST-SUPP-SUPPLEMENT: recover high-value cancer-supportive meds the physician is clearly
+        # continuing but the model dropped from supportive_meds. Two classes are core oncology
+        # supportive care and were systematically missed (9 pdac samples in the full-field audit):
+        # pancreatic enzyme replacement (Creon) — standard of care in pancreatic cancer — and
+        # anticoagulation for cancer-associated thrombosis (Xarelto/Lovenox). Add when the drug is
+        # (a) "continue/continues/resume/start X" anywhere in the note or A/P, or (b) a pancreatic
+        # enzyme present in the outpatient medication list and not flagged "not taking". Both satisfy
+        # the field definition ("supportive meds the patient is CURRENTLY TAKING related to cancer
+        # treatment"). General oncology rule, not test-set-specific. [2026-06-06, fix#5, pdac2/5/8/9/13/15/18/19]
+        ENZYME_TOKENS = ['creon', 'pancrelipase', 'zenpep', 'pertzye', 'viokace',
+                         'lipase-protease-amylase', 'amylase-lipase-protease', 'lipase-amylase-protease']
+        ANTICOAG_TOKENS = ['xarelto', 'rivaroxaban', 'eliquis', 'apixaban', 'lovenox', 'enoxaparin',
+                           'warfarin', 'coumadin', 'dalteparin', 'fragmin', 'fondaparinux', 'edoxaba']
+        tc_dict_su = keypoints.get("Treatment_Changes", {})
+        if isinstance(tc_dict_su, dict):
+            supp_raw_su = tc_dict_su.get("supportive_meds", "") or ""
+            supp_val_su = (", ".join(supp_raw_su) if isinstance(supp_raw_su, list) else str(supp_raw_su)).strip()
+            supp_low_su = supp_val_su.lower()
+            note_low_su = (note_text or "").lower()
+            ap_low_su = (assessment_and_plan or "").lower()
+            full_low_su = note_low_su + " \n " + ap_low_su
+            added_labels_su = []
+            enzyme_already_su = ('creon' in supp_low_su or 'pancreli' in supp_low_su
+                                 or 'enzyme' in supp_low_su or 'lipase' in supp_low_su)
+
+            def _already_su(tok):
+                # consider present if the brand/generic OR a pancreatic-enzyme equivalent already listed
+                if tok in supp_low_su:
+                    return True
+                if tok in ENZYME_TOKENS and enzyme_already_su:
+                    return True
+                return False
+
+            for tok in ENZYME_TOKENS + ANTICOAG_TOKENS:
+                if _already_su(tok):
+                    continue
+                # only one pancreatic-enzyme entry total; label faithfully to what the note says
+                if tok in ENZYME_TOKENS:
+                    if any('enzyme' in l.lower() for l in added_labels_su):
+                        continue  # already added one enzyme this pass
+                    if tok == 'creon':
+                        label = "Creon (pancreatic enzyme)"
+                    elif tok in ('pancrelipase', 'zenpep', 'pertzye', 'viokace'):
+                        label = f"{tok.capitalize()} (pancreatic enzyme)"
+                    else:
+                        label = "Pancreatic enzyme replacement"
+                else:
+                    label = tok.capitalize()
+                if label in added_labels_su:
+                    continue
+                # (a) explicit continue/start phrasing anywhere in note or A/P
+                cont_re = (r'(?:continue[sd]?|continuing|resume[sd]?|start(?:ed|ing)?|increase[sd]?)'
+                           r'\s+(?:to\s+take\s+|with\s+)?(?:\w+[\s,]+){0,3}?' + re.escape(tok))
+                hit = bool(re.search(cont_re, full_low_su))
+                # (b) pancreatic enzyme present in the outpatient med list (currently taking)
+                if not hit and tok in ENZYME_TOKENS and cancer_type != "breast":
+                    for m in re.finditer(re.escape(tok), note_low_su):
+                        ctx = note_low_su[max(0, m.start() - 12):m.end() + 60]
+                        if any(neg in ctx for neg in ('not taking', 'discontinued', 'stopped', 'd/c')):
+                            continue
+                        hit = True
+                        break
+                if hit:
+                    added_labels_su.append(label)
+            if added_labels_su:
+                if supp_val_su and not supp_low_su.startswith(("none", "not ", "no ")) and "not taking" not in supp_low_su:
+                    tc_dict_su["supportive_meds"] = supp_val_su + ", " + ", ".join(added_labels_su)
+                else:
+                    tc_dict_su["supportive_meds"] = ", ".join(added_labels_su)
+                print(f"    [POST-SUPP-SUPPLEMENT] recovered supportive meds: {added_labels_su}")
+
         # POST-MEDS-IV-CHECK: detect active IV chemo from A/P if current_meds is empty [v19]
         # v19: positive-match only (no fallback drug name scan — too many false positives in v18)
         # Skip if POST-SELF-MANAGED already cleared (physician disapproves — don't re-inject)
