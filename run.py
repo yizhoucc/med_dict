@@ -2861,16 +2861,23 @@ def main():
                         break
                 if marker_mu:
                     break
-            if marker_mu and not already_iv_mu:
+            if marker_mu:
+                # confirmed metastatic. Upgrade the stage unless it is ALREADY a confirmed (not merely
+                # "suspected") Stage IV, and ALWAYS reconcile the met fields up to "Yes" — the model
+                # sometimes states Stage IV but still hedges the met fields to "Not sure"/"Suspected"
+                # (which a later reconcile rule then mangles). [bug6 + pdac12 met-field fix]
                 old_stage_mu = stage_mu
-                cancer_mu["Stage_of_Cancer"] = "Stage IV (metastatic)"
+                stage_low_mu = stage_mu.lower()
+                is_confirmed_iv = ("suspect" not in stage_low_mu) and bool(re.search(r'stage\s*iv|metastatic', stage_low_mu))
+                if not is_confirmed_iv:
+                    cancer_mu["Stage_of_Cancer"] = "Stage IV (metastatic)"
                 site_label_mu = "Yes (peritoneal carcinomatosis)" if "periton" in marker_mu else \
                                 ("Yes (omental/peritoneal)" if "omental" in marker_mu else "Yes")
                 if "yes" not in dm_mu.lower():
                     cancer_mu["Distant Metastasis"] = site_label_mu
                 if "yes" not in m_mu.lower():
                     cancer_mu["Metastasis"] = site_label_mu
-                print(f"    [POST-METASTATIC-UPGRADE] confirmed {marker_mu} → Stage IV, distant met Yes (was '{old_stage_mu}')")
+                print(f"    [POST-METASTATIC-UPGRADE] confirmed {marker_mu} → Stage IV + distant met Yes (stage was '{old_stage_mu}')")
 
         # POST-STAGE-METASTATIC: If metastasis=Yes but Stage says "Not available"/"Not mentioned", set Stage IV [v24]
         cancer_diag = keypoints.get("Cancer_Diagnosis", {})
@@ -2920,7 +2927,7 @@ def main():
             elif m_s == "YES" and m_has_distant and dm_s == "EMPTY":
                 # keep the named site(s) but mark suspected — the distant claim was never confirmed
                 # (DistMet empty) so don't assert "Yes", but don't lose the site detail either.
-                sites_rc = re.sub(r'(?i)^\s*yes[\s,:.-]*(?:to\s+)?', '', m_rc).strip()
+                sites_rc = re.sub(r'(?i)^\s*(?:yes|suspected|not sure)?[\s,:.()-]*(?:to\s+)?', '', m_rc).strip().strip("()").strip()
                 susp_rc = f"Suspected, to {sites_rc}" if sites_rc and sites_rc.lower() not in ("", "yes") else "Not sure"
                 cancer_rc["Metastasis"] = susp_rc
                 cancer_rc["Distant Metastasis"] = susp_rc
