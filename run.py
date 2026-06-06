@@ -2037,6 +2037,30 @@ def main():
                     ref_g["Genetics"] = "None"
                     print(f"    [POST-REFERRAL-GERMLINE] moved '{gen_ref[:40]}' Referral.Genetics → Genetic_Testing_Plan")
 
+        # POST-GENETIC-PENDING: a molecular/genomic assay that has been sent and is still pending IS
+        # the genetic-testing plan the note provides — capture it instead of "None planned." when the
+        # plan field is empty (pdac13 "UCSF500 molecular testing is in process"). General oncology rule;
+        # only fires on an explicit assay name in a sent/in-process/pending context. [2026-06-06, fix#9]
+        gtp_pp = keypoints.get("Genetic_Testing_Plan", {})
+        if isinstance(gtp_pp, dict):
+            cur_gp = str(gtp_pp.get("genetic_testing_plan", "") or "").strip().lower()
+            if (not cur_gp) or cur_gp in ("none planned.", "none", "none planned", "no genetic testing planned.", ""):
+                hay_gp = (assessment_and_plan or "") + " " + (note_text or "")
+                ASSAYS = [r'ucsf\s?500', r'strata\w*', r'foundation\s?(?:one)?', r'tempus', r'guardant',
+                          r'caris', r'molecular\s+(?:testing|profiling)', r'next[- ]generation\s+sequencing',
+                          r'\bngs\b', r'germline\s+(?:testing|panel)', r'oncotype', r'mammaprint']
+                for assay in ASSAYS:
+                    m_gp = re.search(assay, hay_gp, re.I)
+                    if not m_gp:
+                        continue
+                    ctx_gp = hay_gp[max(0, m_gp.start() - 30):m_gp.end() + 60].lower()
+                    if re.search(r'in\s+process|pending|sent|ordered|await|is\s+being|will\s+be\s+sent|to\s+be\s+sent|in\s+progress', ctx_gp):
+                        snippet = hay_gp[m_gp.start():m_gp.end() + 60]
+                        snippet = re.split(r'[.\n;]', snippet)[0].strip()
+                        gtp_pp["genetic_testing_plan"] = snippet + " (results pending)"
+                        print(f"    [POST-GENETIC-PENDING] captured pending assay: '{snippet[:50]}'")
+                        break
+
         # POST-PLAN-TEMPORAL: a plan field describes FUTURE actions. A value that reports a study/lab
         # as already DONE (past-completion verbs), or a bare imaging modality the A/P confirms is
         # completed ("echo looks good", "she has done the MRI"), is not a plan — clear it. Genuine
