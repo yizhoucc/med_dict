@@ -162,6 +162,14 @@ Reason_for_Visit(Patient type/second opinion/in-person/summary) · Cancer_Diagno
 - vs BL: PL胜8/BL胜3(current_meds、recent_changes、supportive——PL三处空/不全反被BL击败)/TIE11。PL碾压:radiotherapy/procedure/therapy(BL全None)。
 - 改进:①**current_meds: "C#D# [regimen]"/"continue FOLFOX/gem-nab"→强制回填active chemo**(保留过滤非癌药/not-taking,比BL干净) ②recent_changes扫"omitted/held/dose reduced/switched since C#" ③supportive词典分流(loperamide/电解质/止吐镇静)+not-taking过滤 ④Lab剔>6月旧值 ⑤findings剔tumor marker ⑥修计划字段拼接bug。
 
+### pdac ROW11-15 (coral_idx 10-14) — 全对齐✓ (精炼;模式已饱和)
+- **pdac11**(newly dx Stage IV liver,新患二opinion): P1 supportive漏Creon(lipase-protease-amylase);P1 Lab_Plan串入过去影像碎片;P2 Genetic_Plan漏STRATA pending/Procedure漏trial screening。current_meds正确空(未启动化疗)。vs BL:PL胜6/BL胜2(Genetic_Plan STRATA、Procedure trial screening)。
+- **pdac12**(bug6样本,carcinomatosis): ✅**Stage IV保持正确(bug6 fix未回归)**。新P1: Distant Met"liver,peritoneum"——肝未确诊(只腹膜carcinomatosis确诊,肝"hard to interpret"/肺"nonspecific");findings堆原发分期旧基线;Therapy_plan"ipilimumab"=患者**已拒绝**的试验(方向反);Lab CA19-9取276非最新4720。vs BL:PL胜10/BL胜0。
+- **pdac13**(locally advanced unresectable): P1 supportive漏Creon("continue creon");P1 Genetic_Plan漏UCSF500 pending+DPC4;P2 non-secretor漏;P2 current_meds capecitabine暂停未标。vs BL:PL胜9/BL胜3(supportive、radiotherapy BL列全3方案、)。
+- **pdac14**(metastatic新患treatment-naive): 较干净,PL胜6/BL胜1(supportive Tylenol home med)。current_meds正确空(BL误填7种降压降糖药)。零幻觉,试验细节全。**PL优势样本**。
+- **pdac15**(bug7/9样本,resected surveillance): ✅**Stage"pT2N3"保持(bug9未回归,忠实医生Impression;注path synoptic="ypT3N2"冲突,PL选医生定性可辩护) + response surveillance-aware保持(bug7未回归)**。新P1: supportive漏Creon(BL抓到!);goals"curative"应"surveillance";P2 Referral把历史XRT转诊当本次。vs BL:PL胜14/BL胜2(supportive Creon、goals surveillance)。
+- **本批结论**: bug6/7/9 三个修复全部HOLD无回归;但**Creon-drop(f0699e8c回归)现累计7个pdac(2/5/8/9/11/13/15)=pdac头号P1**;goals curative→surveillance(pdac6/15);Genetic_Plan漏pending分子检测(STRATA/UCSF500)+non-secretor(pdac11/13/4)。
+
 ### ⚠️ 阶段性结论(10/40)
 全字段审查证实了用户的担忧：**重跑后非诊断字段(plan类/Type措辞/字段归位/完整性)有大量 P1**，是四维重评完全没覆盖的。诊断四维(stage/met/response/distmet)PL确实强,但plan字段错配+疑似当确诊+完整性遗漏让多个sample被BL在个别字段反超。要"全方位碾压"需基于本审查的改进清单做新一轮 hook+prompt 迭代→重跑→重审。本doc持久化,可跨上下文继续。
 
