@@ -4044,7 +4044,10 @@ def main():
                 meds_list_cc = [m.strip() for m in meds_val_cc.split(",") if m.strip()]
                 verified = []
                 for med in meds_list_cc:
-                    med_clean = med.strip().lower()
+                    # strip any parenthetical qualifier before lookup — "FOLFOX (omit irinotecan)"
+                    # must be verified by its BASE name "folfox", not the full string (which never
+                    # appears verbatim in the note/med-list and so was wrongly dropped). [fix, pdac10]
+                    med_clean = re.split(r'\s*\(', med.strip().lower())[0].strip()
                     if not med_clean or med_clean == "[redacted]":
                         verified.append(med)
                         continue
