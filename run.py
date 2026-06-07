@@ -4738,33 +4738,6 @@ def main():
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
                         print(f"    [POST-MEDS-IV-CHECK] Added from A/P: {', '.join(found_chemo)}")
 
-        # POST-MEDS-OVARIAN-SUPPRESSION: LHRH-agonist / ovarian-suppression injectables (goserelin/Zoladex,
-        # leuprolide/Lupron) are active anticancer endocrine therapy given IN CLINIC (like IV chemo, so they
-        # often aren't on the outpatient pill list and IV-CHECK skips them when current_meds is non-empty).
-        # When the A/P says the patient continues/is on one but current_meds omits it, add it. b19: "cont
-        # zoladex locally monthly" + exemestane, yet PL listed only exemestane. [round5 P2, b19]
-        drug_dict_os = keypoints.get("Current_Medications", {})
-        if isinstance(drug_dict_os, dict):
-            cm_os = (drug_dict_os.get("current_meds", "") or "").strip()
-            cm_os_low = cm_os.lower()
-            # scan note + A/P: OS injectables' "continue monthly" continuation line often sits in the
-            # note's plan section, not the parsed A/P column (b19). Tight trigger avoids the dated
-            # timeline "01/18/17: start zoladex injection".
-            ap_os = (note_text or "").lower() + " \n " + (assessment_and_plan or "").lower()
-            for canon_os, pat_os, syns_os in (
-                    ('goserelin', r'\b(?:goserelin|zoladex)\b', ('goserelin', 'zoladex')),
-                    ('leuprolide', r'\b(?:leuprolide|lupron)\b', ('leuprolide', 'lupron'))):
-                if any(s in cm_os_low for s in syns_os):
-                    continue
-                for mm in re.finditer(pat_os, ap_os):
-                    ctx_os = ap_os[max(0, mm.start() - 30):mm.end() + 25]
-                    if re.search(r'continu|\bcont\b|currently on|monthly|every\s+\d|q\s*\d|maintain|keep on', ctx_os) \
-                       and not re.search(r'stop|discontinu|\bheld\b|\bhold\b|d/c|completed|will start|plan to start|consider starting|recommend starting', ctx_os):
-                        drug_dict_os["current_meds"] = (cm_os + ", " + canon_os.capitalize()) if cm_os else canon_os.capitalize()
-                        cm_os = drug_dict_os["current_meds"]; cm_os_low = cm_os.lower()
-                        print(f"    [POST-MEDS-OVARIAN-SUPPRESSION] added active LHRH agonist '{canon_os}' to current_meds")
-                        break
-
         # POST-MEDS-STOPPED: Remove stopped/discontinued drugs from current_meds [v23]
         # If recent_changes mentions "stopped/discontinued X", remove X from current_meds
         drug_dict_meds = keypoints.get("Current_Medications", {})
@@ -5039,6 +5012,32 @@ def main():
                 if held_oh and not active_oh and any(t in CHEMO_OH for t in toks_oh):
                     drug_dict_oh["current_meds"] = cm_oh + " (systemic therapy currently on hold)"
                     print(f"    [POST-MEDS-ONHOLD-ANNOTATE] '{cm_oh}' + on-hold annotation")
+
+        # POST-MEDS-OVARIAN-SUPPRESSION: LHRH-agonist / ovarian-suppression injectables (goserelin/Zoladex,
+        # leuprolide/Lupron) are active anticancer endocrine therapy given IN CLINIC, so they're often off
+        # the outpatient pill list AND get stripped by POST-MEDS-CROSSCHECK (their "continue monthly" line
+        # sits in the note plan, not the A/P column). Runs LAST — after CROSSCHECK — so it re-adds the agent
+        # when the note/A/P says continue/on/monthly. b19: "cont zoladex locally monthly" + exemestane (CROSSCHECK
+        # had stripped the model's zoladex); also b14 starting goserelin. Tight trigger skips dated timeline
+        # "01/18/17: start zoladex injection". [round5 P2-fu2, b19]
+        drug_dict_os = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_os, dict):
+            cm_os = (drug_dict_os.get("current_meds", "") or "").strip()
+            cm_os_low = cm_os.lower()
+            ap_os = (note_text or "").lower() + " \n " + (assessment_and_plan or "").lower()
+            for canon_os, pat_os, syns_os in (
+                    ('goserelin', r'\b(?:goserelin|zoladex)\b', ('goserelin', 'zoladex')),
+                    ('leuprolide', r'\b(?:leuprolide|lupron)\b', ('leuprolide', 'lupron'))):
+                if any(s in cm_os_low for s in syns_os):
+                    continue
+                for mm in re.finditer(pat_os, ap_os):
+                    ctx_os = ap_os[max(0, mm.start() - 30):mm.end() + 25]
+                    if re.search(r'continu|\bcont\b|currently on|monthly|every\s+\d|q\s*\d|maintain|keep on', ctx_os) \
+                       and not re.search(r'stop|discontinu|\bheld\b|\bhold\b|d/c|completed|will start|plan to start|consider starting|recommend starting', ctx_os):
+                        drug_dict_os["current_meds"] = (cm_os + ", " + canon_os.capitalize()) if cm_os else canon_os.capitalize()
+                        cm_os = drug_dict_os["current_meds"]; cm_os_low = cm_os.lower()
+                        print(f"    [POST-MEDS-OVARIAN-SUPPRESSION] added active LHRH agonist '{canon_os}' to current_meds")
+                        break
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
