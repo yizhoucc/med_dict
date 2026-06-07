@@ -169,3 +169,23 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 
 ## 最终结论 (Round 5 全部完成)
 经 6 轮迭代 + P2 清理 + b5/b11 收尾：**医疗要点上 PL 对 BL 全方位碾压(STRONG-MED ~73:0，无清晰 BL 胜)，零 P0，确定性锁死，所有已知 P0/P1/P2 问题清完**。FINAL = pipeline_{breast,pdac}_FINAL.txt (commit 200f6bd8)。
+
+---
+
+## G. 诚实更正：r7 真正的 8-subagent 全审查 (2026-06-06)
+**背景**：用户质疑 r7(b5/b11 收尾) 只做了脚本抽查、没做 subagent 仔细审查。属实——我之前的"零回归"是基于脚本抽取关键字段，覆盖不全，**夸大了**。现补做 8-subagent×5 全 40 逐字审查。
+
+### 确认成立（headline 不变）
+- **PL ≫ BL 全字段**: STRONG-MED ≈ 85:0（无清晰 BL 胜）。BL 仍系统性 current_meds 倒家用药+漏化疗、stage 放弃、**pdac12 幻觉肺转移**。
+- b5(genetic_results 病理污染已剥离)、b11(PR pending) 修复确认落地正确。
+- b13/b15 stage 确定性保持；pdac3 脾/response、pdac8 ACP、pdac18 on-hold、pdac20 imaging、pdac10 procedure 均确认。
+- **无我 P2/b5/b11 改动引入的新回归**。
+
+### ❗全审查暴露的真实残留 PL 问题（脚本抽查漏掉的；多为既有，非本轮回归）
+- **P1 b19 current_meds 漏 Zoladex**：患者在用 exemestane + **Zoladex(goserelin 卵巢抑制)**("cont zoladex locally monthly")，PL 只列 exemestane。护城河字段的真实遗漏。
+- **P1 pdac10 medication_plan 仍混入 "; also: capecitabine, irinotecan"**：irinotecan 已停("omit irinotecan since C3")、capecitabine 仅未来假设(consolidative chemoradiation)。我的 #1 投机药排除有缺口("omit" 不在排除词)。
+- **P1/可辩 b16/b17 Metastasis="No" 但淋巴结阳性**：b17 "2/2 lymph nodes involved + ECE"(N1)、b16 clinical stage III；而 Metastasis 字段在别处(b13/b15)用于记区域淋巴结受累→此处"No"前后不一致。(DistMet="No" 正确)。字段语义问题。
+- **P2**: b12 lab_summary "No labs in note"(实有 CBC/BMP)；pdac3 procedure_plan 黏 RT 散文碎片；b18 genetic_results 混入肿瘤受体(纯度)；b16/b17/b18 DistMet attribution 错配(值对引用错,A0/A2)；b2 Type "HER2-" 过度断言(1994 肿瘤未测 HER2)；pdac7 Referral 漏 Gyn Onc。
+
+### 教训
+- **"脚本抽查" ≠ "subagent 仔细审查"**：抽查只覆盖预设字段，抓不到 Metastasis/lab/attribution 等未抽的字段，也抓不到 vLLM 漂移。声称"零回归"前必须跑真正的逐字审查。
