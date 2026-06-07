@@ -2653,6 +2653,33 @@ def main():
                 if named_gc:
                     gen_gc["genetic_testing_plan"] = f"{named_gc} molecular testing ({'results pending' if pending_gc else 'ordered'})"
                     print(f"    [POST-PLAN-GARBAGE-CLEAN] Genetic_Testing_Plan → '{gen_gc['genetic_testing_plan']}'")
+        # (c) Imaging_Plan: trial-eligibility / non-imaging prose with NO imaging modality is not an imaging
+        # plan (pdac20: "patient is potentially eligible for several non-therapeutic trials..."). Clean it.
+        img_gc = keypoints.get("Imaging_Plan", {})
+        if isinstance(img_gc, dict):
+            iv_gc = str(img_gc.get("imaging_plan", "") or "")
+            il_gc = iv_gc.lower()
+            if iv_gc and il_gc not in ("no imaging planned.", "no imaging planned", "none", "none planned.", ""):
+                # concrete imaging modalities only — bare "imaging" can appear in research-assay prose
+                # ("novel imaging and blood-/stool-based assays", pdac20) and must not count as a real plan.
+                has_modality = bool(re.search(r'\b(?:ct|mri|pet|u/?s|ultrasound|scan|mammogram|mammi|bone scan|echo|dexa|x-?ray|restaging)\b', il_gc))
+                is_trial_prose = bool(re.search(r'eligible for|non-?therapeutic|clinical trial|enroll|correlative|blood- and stool|ctdna|microbiome', il_gc))
+                if is_trial_prose and not has_modality:
+                    img_gc["imaging_plan"] = "No imaging planned."
+                    print(f"    [POST-PLAN-GARBAGE-CLEAN] Imaging_Plan non-imaging/trial prose → 'No imaging planned.'")
+        # (d) Procedure_Plan: resectability commentary (not a planned procedure) with no FUTURE procedure
+        # verb is not a procedure plan (pdac10: "although ... it may be challenging to achieve an R0
+        # resection, EUS" — EUS was a past diagnostic). Clean it. [round5 P2, pdac10/pdac20]
+        proc_gc = keypoints.get("Procedure_Plan", {})
+        if isinstance(proc_gc, dict):
+            pv_gc = str(proc_gc.get("procedure_plan", "") or "")
+            pl_gc = pv_gc.lower()
+            if pv_gc and pl_gc not in ("no procedures planned.", "no procedures planned", "none", "none planned.", ""):
+                is_resect_prose = bool(re.search(r'challenging to achieve|may be challenging|unresectable|not (?:a )?(?:surgical )?candidate|difficult to achieve|r0 resection', pl_gc))
+                has_future_proc = bool(re.search(r'\b(?:will|plan(?:ned|ning)?|schedul\w*|refer\w*\s+for|arrange|placement|to undergo|recommend\w*)\b', pl_gc))
+                if is_resect_prose and not has_future_proc:
+                    proc_gc["procedure_plan"] = "No procedures planned."
+                    print(f"    [POST-PLAN-GARBAGE-CLEAN] Procedure_Plan resectability prose → 'No procedures planned.'")
 
         # POST-NONSECRETOR: a CA19-9 non-secretor status ("does not express CA 19-9" / "non-secretor")
         # is a clinically important molecular fact (the marker can't track disease) the prompt asks for —
@@ -4944,6 +4971,29 @@ def main():
                 if on_break_cc2 and not active_cc2 and all_chemo_cc2:
                     drug_dict_cc2["current_meds"] = ""
                     print(f"    [POST-MEDS-COMPLETED-CHEMO] '{cm_cc2}' completed/on-break → cleared current_meds")
+
+        # POST-MEDS-ONHOLD-ANNOTATE: when current_meds lists a chemo regimen but the A/P explicitly states
+        # the SYSTEMIC therapy is currently HELD/PAUSED (not a dose-level hold, not an active continuation),
+        # and it was not cleared as completed/on-break above, annotate the tense rather than dropping the
+        # regimen — preserves what regimen the patient is on while being faithful that it is paused.
+        # pdac13 "pause systemic therapy"; pdac18 "hold her chemotherapy until [HFS] resolves". [round5 P2]
+        drug_dict_oh = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_oh, dict):
+            cm_oh = (drug_dict_oh.get("current_meds", "") or "").strip()
+            if cm_oh and "hold" not in cm_oh.lower() and "pause" not in cm_oh.lower():
+                hay_oh = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
+                held_oh = re.search(r'pause\s+(?:the\s+)?systemic\s+therapy|hold\w*\s+(?:her|his|the)?\s*chemo(?:therapy)?\b'
+                                    r'|holding\s+(?:her|his)?\s*chemo|systemic\s+therapy\s+(?:is\s+)?(?:on\s+)?hold'
+                                    r'|chemotherapy\s+(?:is\s+)?(?:currently\s+)?(?:on\s+)?hold', hay_oh)
+                active_oh = re.search(r'presents?\s+for\s+c\d|will\s+continue|continue\s+(?:with\s+)?'
+                                      r'(?:gem|folfir|folfox|abraxane|capecitabine|chemo)|today\'?s?\s+(?:infusion|cycle)'
+                                      r'|proceed with', hay_oh)
+                CHEMO_OH = {'folfirinox', 'mfolfirinox', 'folfox', 'folfiri', 'gemcitabine', 'gem', 'gemzar',
+                            'abraxane', 'nab-paclitaxel', 'capecitabine', 'xeloda', '5-fu', '5-fu/lv', 'nal-iri'}
+                toks_oh = [t.strip().lower().split('(')[0].strip() for t in cm_oh.split(",") if t.strip()]
+                if held_oh and not active_oh and any(t in CHEMO_OH for t in toks_oh):
+                    drug_dict_oh["current_meds"] = cm_oh + " (systemic therapy currently on hold)"
+                    print(f"    [POST-MEDS-ONHOLD-ANNOTATE] '{cm_oh}' + on-hold annotation")
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",
