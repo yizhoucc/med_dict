@@ -109,6 +109,16 @@
 - `POST-PATIENT-TYPE-NEW`: present-tense this-visit 新患者信号(seeing as new patient / presents today for second opinion / INITIAL VISIT 标题) → Follow up→New。**收紧排除时间线里 "MM/DD: Initial consultation" 往期事件**——全 40 仅 pdac11 触发，不误伤真随访 pdac10/13/16/17。
 - `POST-TYPE-RECEPTOR-PCT`: 原文 "ER N%, PR N%" 经典措辞 + Type 仅泛化 ER+ → 追加百分比。b10 "(ER >95%, PR 25%)"。`\bER` 护栏避开 HER2 误匹配。仅 b10。
 
-### 待办
-- [ ] 统一重跑全 40 (WSL, run.py + vLLM)，落地 A/B/C/D + 之前已修但 FINAL 陈旧的 (b13 NOBASIS、b15 MBC、pdac8 ACP hospice)。
-- [ ] 重跑后按好题 lens 再审，确认 BL 的 10 胜点清零 + 无新回归。
+### 重跑暴露的 hook 冲突（live ≠ 单元模拟，逐个修）
+单元模拟通过 ≠ live 通过——live pipeline 有几十个 hook 互相覆盖，逐次重跑暴露：
+1. **theme B 完全没生效（commit 0fb25ec1）**：`POST-GENETIC-PLAN-COMPLETED` + `POST-GENETICS-RESULT-CHECK` 在 note 里测试名附近见结果词就删，把 LLM 正确提取的 b5 "being assessed for Oncotype"、b8 "pursue genetic counseling"、b13 "Mammaprint to be obtained after surgery" 全清成 "None planned."（note 有科普句 "Mammaprint **Low Risk** profile"、"if **high risk** with Oncotype" 误触）。修：两 hook 都加"值本身是未来计划(to be/being assessed/pursue/after surgery)则永不删"护栏 + RESULT-CHECK 加假设语境(if/patients/tools like)排除。
+2. **theme C 被压缩丢弃（commit 5704b251）**：`POST-RESPONSE-AP-DECLINE` 在 pdac3 触发了，但其后的 `POST-RESPONSE-COMPRESS` 把 "decline" 句丢了（decline 不在 RESP_KW）。修：AP-DECLINE 移到 COMPRESS 之后 + RESP_KW 加 declin/deteriorat/worsen。
+3. **b13/b15 stage 非确定性根因（commit 8eb97056，最关键）**：`POST-STAGE-FINAL` Case 1 把"Stage IV 但 DistMet=No"**凭空改成 "Stage III"**（非转移≠III=fabrication，且覆盖 MBC）。b13/b15 随 LLM 当次 emit 的 stage 形态在 Not-staged/IV/III 间翻动。修：FINAL 不再造 III；有正向(非否定)MBC框架→保留/归一(b15→Suspected Stage IV)，否则→诚实 "Not staged in note"(b13)。**两种 LLM 形态都收敛到同一答案**，彻底锁死确定性。
+
+### 关键教训
+- vLLM greedy 跨运行非确定：同代码不同 run 输出不同 stage 形态 → 确定性 hook 必须对**所有可能的上游形态**收敛到同一答案，不能依赖 LLM emit 特定形态。
+- 单元模拟只测单个 hook；必须 live 重跑 + 查 log 才能发现 hook 间覆盖。本轮 breast 跑了 3 次、pdac 跑了 2 次才逐一锁死。
+
+### 最终重跑 (commit 8eb97056, 全 A/B/C/D + 确定性修复)
+- [ ] 进行中：r5fb (breast) + r5fp (pdac) 并行。
+- [ ] 完成后按好题 lens 全 40 再审，确认 BL 10 胜点清零 + 无回归 + b13/b15 稳定。
