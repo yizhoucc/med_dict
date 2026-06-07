@@ -5180,28 +5180,6 @@ def main():
                     cancer_pp["Type_of_Cancer"] = new_pp
                     print(f"    [POST-TYPE-PR-PENDING] PR result pending → 'PR pending' (was '{tv_pp[:40]}')")
 
-        # POST-TYPE-BILATERAL-HER2: bilateral breast cancer with DISCORDANT per-side HER2 must not collapse
-        # to a single HER2 status in Type_of_Cancer (b20: right HER2 positive, left HER2 0, but Type said
-        # "HER2+"). When the note gives per-side HER2 ("Right breast: ... HER2 positive" / "Left breast: ...
-        # HER2 0") and they differ, annotate Type with the laterality. [round5 final, b20]
-        cancer_bh = keypoints.get("Cancer_Diagnosis", {})
-        if cancer_type == "breast" and isinstance(cancer_bh, dict):
-            tv_bh = str(cancer_bh.get("Type_of_Cancer", "") or "")
-            hay_bh = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
-            if "bilateral" in hay_bh and "bilateral" not in tv_bh.lower() and "left her2" not in tv_bh.lower():
-                def _side_her2(side):
-                    m = re.search(side + r'\s+breast\s*:?\s*[^.\n]{0,80}?her2\s*[/-]?\s*(positive|negative|\bneg\b|\bpos\b|0|3\+?)', hay_bh)
-                    if not m:
-                        return None
-                    v = m.group(1)
-                    return 'pos' if v in ('positive', 'pos', '3+', '3') else ('neg' if v in ('negative', 'neg', '0') else None)
-                r_h2 = _side_her2('right')
-                l_h2 = _side_her2('left')
-                if r_h2 and l_h2 and r_h2 != l_h2:
-                    tag_bh = f" (bilateral: right HER2{'+' if r_h2 == 'pos' else '-'}, left HER2{'+' if l_h2 == 'pos' else '-'})"
-                    cancer_bh["Type_of_Cancer"] = tv_bh.rstrip('. ') + tag_bh
-                    print(f"    [POST-TYPE-BILATERAL-HER2] annotated discordant bilateral HER2:{tag_bh}")
-
         # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if cancer_type == "breast" and isinstance(cancer, dict):
