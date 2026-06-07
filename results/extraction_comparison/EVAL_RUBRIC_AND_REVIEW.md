@@ -206,3 +206,21 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 - b7 Xarelto(暂停仍在 supportive)、pdac3 procedure_plan RT 碎片: P2。
 
 **教训重申**: 每次重跑 vLLM 让次要字段小幅漂移(本轮 b5)，确定性 hook 只锁住了重要字段；次要字段的彻底锁定需更多正向捕获 hook，是收益递减的长尾。
+
+---
+
+## I. 最终收尾轮 (rB/FINAL v5, commit cf41ecaa→b335700a) + 我亲自复审 — 停止
+**本轮做的（2 个干净 hook）**：
+- `POST-MET-REGIONAL-NODE`（Metastasis 字段）：node-positive(TNM N1-3 from glued TNM / X-Y nodes positive / 确诊性 node-positive 排除 if-patients-negated) → "Yes, regional lymph node(s)"。**全 8-subagent 审查确认**：b1/5/8/9/10/13/17 正确触发（真 N+），b11(DCIS)/b16/b18(NX) 正确跳过，零假阳性。
+- 撤掉 b20 双侧 HER2 hook（脆弱正则 live 误判 left HER2+）+ b5 MammaPrint hook（科普句过度触发）= 打地鼠，按规则不做。
+
+**全 40 全 8-subagent 最终审查结论**：
+- PL 在核心诊断轴（Stage/Metastasis/Response/molecular/current_meds）全面 ≥ BL；**BL 不赢任何核心好题点**；零 P0 幻觉。
+- current_meds 全 40 系统性碾压（BL 倒家用药+漏化疗；pdac11/14/15 被一个 subagent 判"BL 胜"= 严格完整性视角，**主 Claude 复审推翻**：留空非癌药是 PL 设计护城河，其余 subagent 一致认同 PL 对）。
+- 既往全部修复保持（b19 Goserelin、stage 确定性、b11 PR-pending、pdac3/8/10/18/11、molecular 捕获 BRCA2/CA19-9-nonsecretor/MMR）。
+
+**审查新冒出的次要长尾（= 打地鼠，停止追）**：
+- b6 Metastasis="Not sure"（FNA 证实腋窝转移未被 hook 捕获，新 miss，P2，DistMet 正确）。
+- pdac13 gemcitabine 时态、pdac7 Gyn-Onc 转诊漏、b20 Type 双侧 HER2 未拆分、b5 genetic vLLM 漂移——均次要字段、信息多在 findings、且每轮重跑 vLLM 漂移会持续产生新的此类长尾。
+
+**最终判定（按用户 "如果打地鼠就停止" 规则）**：核心目标已达成且稳固，剩余为次要字段长尾 + vLLM 跨运行漂移的打地鼠。**停止迭代。** FINAL = pipeline_{breast,pdac}_FINAL.txt (commit b335700a)。
