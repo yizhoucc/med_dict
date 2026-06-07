@@ -5180,6 +5180,28 @@ def main():
                     cancer_pp["Type_of_Cancer"] = new_pp
                     print(f"    [POST-TYPE-PR-PENDING] PR result pending → 'PR pending' (was '{tv_pp[:40]}')")
 
+        # POST-TYPE-BILATERAL-HER2: bilateral breast cancer with DISCORDANT per-side HER2 must not collapse
+        # to a single HER2 status in Type_of_Cancer (b20: right HER2 positive, left HER2 0, but Type said
+        # "HER2+"). When the note gives per-side HER2 ("Right breast: ... HER2 positive" / "Left breast: ...
+        # HER2 0") and they differ, annotate Type with the laterality. [round5 final, b20]
+        cancer_bh = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_bh, dict):
+            tv_bh = str(cancer_bh.get("Type_of_Cancer", "") or "")
+            hay_bh = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+            if "bilateral" in hay_bh and "bilateral" not in tv_bh.lower() and "left her2" not in tv_bh.lower():
+                def _side_her2(side):
+                    m = re.search(side + r'\s+breast\s*:?\s*[^.\n]{0,80}?her2\s*[/-]?\s*(positive|negative|\bneg\b|\bpos\b|0|3\+?)', hay_bh)
+                    if not m:
+                        return None
+                    v = m.group(1)
+                    return 'pos' if v in ('positive', 'pos', '3+', '3') else ('neg' if v in ('negative', 'neg', '0') else None)
+                r_h2 = _side_her2('right')
+                l_h2 = _side_her2('left')
+                if r_h2 and l_h2 and r_h2 != l_h2:
+                    tag_bh = f" (bilateral: right HER2{'+' if r_h2 == 'pos' else '-'}, left HER2{'+' if l_h2 == 'pos' else '-'})"
+                    cancer_bh["Type_of_Cancer"] = tv_bh.rstrip('. ') + tag_bh
+                    print(f"    [POST-TYPE-BILATERAL-HER2] annotated discordant bilateral HER2:{tag_bh}")
+
         # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if cancer_type == "breast" and isinstance(cancer, dict):
@@ -5435,6 +5457,33 @@ def main():
                     if cleaned_f != stage_final:
                         cancer_final["Stage_of_Cancer"] = cleaned_f
                         print(f"    [POST-STAGE-FINAL] Stage III but Distant Met=Yes: '{stage_final}' → '{cleaned_f}'")
+
+        # POST-MET-REGIONAL-NODE: the "Metastasis" field (distinct from "Distant Metastasis") records ANY
+        # metastatic involvement INCLUDING regional nodal — b13/b15 populate it with nodal sites. When the
+        # cancer is documented NODE-POSITIVE but Metastasis reads "No"/"Not sure", set it to "Yes, regional
+        # lymph node(s)" for consistency (b16/b17 audit flag). Distant Metastasis is left untouched (regional
+        # ≠ distant). Node-positive = a TNM N1-3 (extracted from the stage TNM, robust to glued "pT2N1a"),
+        # an "X/Y nodes positive/involved" with X>0, or an assertive "node-positive" term (excluding
+        # conditional "if node positive"/"patients with"/negated). N0/NX/DCIS yield no signal → skip. [round5 final]
+        cancer_rn = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_rn, dict):
+            met_rn = str(cancer_rn.get("Metastasis", "") or "").strip().lower()
+            if met_rn in ("no", "none", "no metastasis", "not sure", ""):
+                sl_rn = str(cancer_rn.get("Stage_of_Cancer", "") or "").lower()
+                dm_rn = str(cancer_rn.get("Distant Metastasis", "") or "").lower()
+                hl_rn = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+                n_vals_rn = re.findall(r't\d[a-d]?(?:\([a-z]+\))?\s*,?\s*n([0-3x])', sl_rn)
+                xy_rn = any(int(m.group(1)) > 0 for m in re.finditer(
+                    r'(\d+)\s*(?:/|of)\s*\d+\s*(?:lymph\s*)?(?:nodes?|sln|ln)\b[^.\n]{0,30}(?:positive|involved|metasta|\+)', hl_rn))
+                term_rn = False
+                for mm in re.finditer(r'\bnode[- ]positive\b|\bnode\(s\)\s+positive\b', hl_rn):
+                    pre = hl_rn[max(0, mm.start() - 16):mm.start()]
+                    if not re.search(r'\bno\b|negative for|without|\bif\b|whether|patients?\s+with', pre):
+                        term_rn = True
+                        break
+                if (any(v in ('1', '2', '3') for v in n_vals_rn) or xy_rn or term_rn) and not dm_rn.startswith("yes"):
+                    cancer_rn["Metastasis"] = "Yes, regional lymph node(s)"
+                    print(f"    [POST-MET-REGIONAL-NODE] node-positive → Metastasis 'Yes, regional lymph node(s)'")
 
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
