@@ -1,4 +1,4 @@
-Source: fix_pdac_nl.yaml | Run started: 2026-06-06 19:15:39
+Source: fix_pdac_nl.yaml | Run started: 2026-06-06 20:31:50
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -1107,7 +1107,7 @@ RESULTS FOR ROW 5
     "lab_summary": "WBC Count 6.4, Neutrophil Absolute Count 4.18, Hemoglobin 11.4 (L), Hematocrit 35.4 (L), Platelet Count 126 (L), Creatinine 0.74, Bilirubin, Total 0.4, Alkaline Phosphatase 160 (H), Aspartate transaminase 31, Alanine transaminase 30, Cancer Antigen 19-9 576 (H), Carcinoembryonic Antigen 16.2 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert & oriented x 3, mood stable, and no psychiatric symptoms noted."
+    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert and oriented x 3, mood stable, and no hallucinations, paranoia, or delusions."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1121,7 +1121,7 @@ RESULTS FOR ROW 5
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19."
+    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Additionally, the CA 19-9 levels have fluctuated but remain elevated, indicating stable disease rather than a clear response or progression."
   },
   "Medication_Plan": {
     "medication_plan": "Continue xarelto QD, Continue Creon to 2 or 3 tab/meal and 1 tab/snack, Cont Oxycontin 10mg PO bid, Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half), SMS recommended fluconazole"
@@ -1201,7 +1201,7 @@ RESULTS FOR ROW 5
     "Not explicitly stated."
   ],
   "response_assessment": [
-    "He is now s/p 12 cycles of FOLFIRINOX."
+    "He is now s/p 12 cycles of FOLFIRINOX.    #Stage IV pancreatic adenocarcinoma"
   ],
   "medication_plan": [
     "- Continue Creon to 2 or 3 tab/meal and 1 tab/snack   - Cont Oxycontin 10mg PO bid  - Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half)    #Weight loss: Improved  - Followed by Cancer Center Nutritionist [REDACTED] [REDACTED], [REDACTED]"
@@ -2291,7 +2291,7 @@ RESULTS FOR ROW 12
     "pancreatic adenocarcinoma with concern for metastatic disease."
   ],
   "Distant Metastasis": [
-    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;\" \"liver lesions noted"
+    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;\" \"liver lesions"
   ],
   "Metastasis": [
     "new peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
