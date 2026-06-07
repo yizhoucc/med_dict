@@ -1851,6 +1851,14 @@ def main():
                 synonyms = MED_SYNONYMS.get(drug, [drug])
                 if any(syn in mp_lower for syn in synonyms):
                     continue
+                # GLOBAL discontinuation guard: if the drug is omitted/stopped/discontinued/held anywhere
+                # in the A/P, it is NOT a current plan med even if an earlier (pre-discontinuation) mention
+                # looks active (pdac10: "dose reduced irinotecan to 120mg" ... then "omitted irinotecan
+                # since C3"). The per-occurrence check below misses the clean earlier mention. [round5 P2]
+                if re.search(r'(?:omit|omitted|stopped|discontinu\w*|dropped|d/c)\s+(?:\w+\s+){0,2}' + re.escape(drug)
+                             + r'|' + re.escape(drug) + r'\s+(?:\w+\s+){0,3}(?:omit|omitted|stopped|discontinu\w*|dropped|d/c|held)',
+                             ap_lower_mp):
+                    continue
                 # Check future/current context (wider window, more context words)
                 for m in re.finditer(re.escape(drug), ap_lower_mp):
                     ctx = ap_lower_mp[max(0,m.start()-60):m.end()+60]
@@ -1874,7 +1882,9 @@ def main():
                                                          'response rate', 'et al', 'reported',
                                                          'trial', 'study', 'published',
                                                          'without treatment', 'w/o treatment',
-                                                         'monitoring', 'expectant management']) \
+                                                         'monitoring', 'expectant management',
+                                                         'omit', 'omitted', 'dropped', 'consolidative',
+                                                         'chemoradiation', 'radiosensiti', 'concurrent']) \
                            and not any(sp in ctx_excl for sp in ['possibility', 'conceivably',
                                                          'preliminary data', 'promising', 'limited yield',
                                                          'to consider', 'could consider', 'off-label',
@@ -4727,6 +4737,33 @@ def main():
                         found_chemo = list(dict.fromkeys(found_chemo))  # dedup preserving order
                         drug_dict_meds["current_meds"] = ", ".join(found_chemo)
                         print(f"    [POST-MEDS-IV-CHECK] Added from A/P: {', '.join(found_chemo)}")
+
+        # POST-MEDS-OVARIAN-SUPPRESSION: LHRH-agonist / ovarian-suppression injectables (goserelin/Zoladex,
+        # leuprolide/Lupron) are active anticancer endocrine therapy given IN CLINIC (like IV chemo, so they
+        # often aren't on the outpatient pill list and IV-CHECK skips them when current_meds is non-empty).
+        # When the A/P says the patient continues/is on one but current_meds omits it, add it. b19: "cont
+        # zoladex locally monthly" + exemestane, yet PL listed only exemestane. [round5 P2, b19]
+        drug_dict_os = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_os, dict):
+            cm_os = (drug_dict_os.get("current_meds", "") or "").strip()
+            cm_os_low = cm_os.lower()
+            # scan note + A/P: OS injectables' "continue monthly" continuation line often sits in the
+            # note's plan section, not the parsed A/P column (b19). Tight trigger avoids the dated
+            # timeline "01/18/17: start zoladex injection".
+            ap_os = (note_text or "").lower() + " \n " + (assessment_and_plan or "").lower()
+            for canon_os, pat_os, syns_os in (
+                    ('goserelin', r'\b(?:goserelin|zoladex)\b', ('goserelin', 'zoladex')),
+                    ('leuprolide', r'\b(?:leuprolide|lupron)\b', ('leuprolide', 'lupron'))):
+                if any(s in cm_os_low for s in syns_os):
+                    continue
+                for mm in re.finditer(pat_os, ap_os):
+                    ctx_os = ap_os[max(0, mm.start() - 30):mm.end() + 25]
+                    if re.search(r'continu|\bcont\b|currently on|monthly|every\s+\d|q\s*\d|maintain|keep on', ctx_os) \
+                       and not re.search(r'stop|discontinu|\bheld\b|\bhold\b|d/c|completed|will start|plan to start|consider starting|recommend starting', ctx_os):
+                        drug_dict_os["current_meds"] = (cm_os + ", " + canon_os.capitalize()) if cm_os else canon_os.capitalize()
+                        cm_os = drug_dict_os["current_meds"]; cm_os_low = cm_os.lower()
+                        print(f"    [POST-MEDS-OVARIAN-SUPPRESSION] added active LHRH agonist '{canon_os}' to current_meds")
+                        break
 
         # POST-MEDS-STOPPED: Remove stopped/discontinued drugs from current_meds [v23]
         # If recent_changes mentions "stopped/discontinued X", remove X from current_meds
