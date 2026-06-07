@@ -2344,7 +2344,9 @@ def main():
             gv_c = str(gtp_c.get("genetic_testing_plan", "") or "").strip()
             gl_c = gv_c.lower()
             if gl_c and gl_c not in ("none planned.", "none", "none planned", "no genetic testing planned.", "") \
-                    and not re.search(r'pending|in process|in progress|sent|request|await|to be|will\b|planned|referred', gl_c):
+                    and not re.search(r'pending|in process|in progress|\bsent\b|request|await|to be|will\b|planned|refer'
+                                      r'|being\s+assess|apparently|pursue|agreement|possibl|consider|after\s+surgery'
+                                      r'|\border\b|counsel|expected|scheduled', gl_c):
                 GTESTS = ['brca', 'mammaprint', 'oncotype', 'foundation', 'ucsf500', 'germline', 'strata', 'tempus', 'guardant']
                 named_c = [t for t in GTESTS if t in gl_c]
                 if named_c:
@@ -2557,6 +2559,15 @@ def main():
                     item_lower = item.lower().strip()
                     if not item_lower:
                         continue
+                    # a value that itself describes a FUTURE/PENDING/PLANNED/REFERRAL action is a genuine
+                    # plan — keep it, never treat as a completed result (b13 "Mammaprint to be obtained
+                    # after surgery"; the note's educational "Mammaprint Low Risk profile" must not trigger
+                    # removal). [round5 #B]
+                    if re.search(r'\bto be\b|will\b|being\s+assess|apparently|pursue|agreement|possibl'
+                                 r'|consider|after\s+surgery|\border\b|pending|\bsent\b|refer|\bplan'
+                                 r'|expected|scheduled|in process|await', item_lower):
+                        valid_items.append(item)
+                        continue
                     # Skip long sentences — only check short items (likely test names)
                     # Long LLM-generated sentences are not test names and would cause false matches
                     if len(item_lower.split()) > 6:
@@ -2585,6 +2596,12 @@ def main():
                             print(f"    [POST-GENETICS-RESULT-CHECK] Removed declined test: '{item}'")
                             declined = True
                             break
+                        # skip educational/hypothetical mentions of the test ("patients whose tumors have
+                        # a Mammaprint Low Risk profile", "if she has high risk disease with Oncotype") —
+                        # those are not THIS patient's result. [round5 #B]
+                        pre_h = note_lower_gc[max(0, m.start() - 60):m.start()]
+                        if re.search(r'\bif\b|patients?\b|tools?\s+like|such as|\bwould\b|for example|e\.g\.|guidelines|whose\b', pre_h):
+                            continue
                         if any(rp in ctx for rp in RESULT_PHRASES):
                             print(f"    [POST-GENETICS-RESULT-CHECK] Removed completed/result: '{item}'")
                             declined = True
