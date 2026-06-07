@@ -160,4 +160,12 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 - **深审新浮现 2 个既有问题（非本轮回归）**：
   - **b5（P1）**: genetic_testing_results 混入病理发现(LVI/margins/DCIS/LN/微转移)，只有 MP Low Risk + Oncotype pending 是真基因组内容。字段纯度问题(好题 f 字段)。POST-GENETIC-RESULTS-IHC 因字段含 MP/Oncotype 关键词未剥离病理段。
   - **b11（P2）**: Type "PR+" 但原文 "PR pending"(findings 已正确写 pending)。轻微 over-reach。
-  - 二者均非 round-5/P2 改动引入；是本次彻底再审才暴露的旧问题。待用户决定是否再修一轮。
+  - 二者均非 round-5/P2 改动引入；是本次彻底再审才暴露的旧问题。
+
+### F. b5/b11 收尾 (commit 1ad661da → 200f6bd8 FINAL v3) —— 完成
+- **b5(P1)**: POST-GENETIC-RESULTS-IHC 扩展为也剥离外科病理段(LVI/margins/DCIS/节点数/微转移/grade/tumor size)，只保留含基因/assay 名的段。b5 → "MP Low Risk (+0.321). Oncotype DX RS is pending."(仅基因组内容)。仅 b5 受影响。
+- **b11(P2)**: POST-TYPE-PR-PENDING：note 说 PR pending 且无确定 PR 结果时，把 "PR+" 改 "PR pending"。b11 Type → "ER+/PR pending DCIS"。仅 b11 触发。
+- **最终重跑全 40 + 全字段回归抽查**：b5/b11 修复落地；主题 A/B/C/D + 5 个 P2 + 护城河(pdac2 Gem/Abraxane、b19 exemestane、pdac8 ACP 无 hospice) + b13/b15 确定性 **全部保持，零回归**。
+
+## 最终结论 (Round 5 全部完成)
+经 6 轮迭代 + P2 清理 + b5/b11 收尾：**医疗要点上 PL 对 BL 全方位碾压(STRONG-MED ~73:0，无清晰 BL 胜)，零 P0，确定性锁死，所有已知 P0/P1/P2 问题清完**。FINAL = pipeline_{breast,pdac}_FINAL.txt (commit 200f6bd8)。
