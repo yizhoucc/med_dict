@@ -119,6 +119,26 @@
 - vLLM greedy 跨运行非确定：同代码不同 run 输出不同 stage 形态 → 确定性 hook 必须对**所有可能的上游形态**收敛到同一答案，不能依赖 LLM emit 特定形态。
 - 单元模拟只测单个 hook；必须 live 重跑 + 查 log 才能发现 hook 间覆盖。本轮 breast 跑了 3 次、pdac 跑了 2 次才逐一锁死。
 
-### 最终重跑 (commit 8eb97056, 全 A/B/C/D + 确定性修复)
-- [ ] 进行中：r5fb (breast) + r5fp (pdac) 并行。
-- [ ] 完成后按好题 lens 全 40 再审，确认 BL 10 胜点清零 + 无回归 + b13/b15 稳定。
+### 最终重跑 (commit 8eb97056) + 全 40 再审 —— ✅ 完成
+- 全 40 重跑完成，提升为 FINAL（commit 2bcb371e）。8 subagent 全 40 再审 + 主 Claude 复核。
+
+#### 再审结果：STRONG-MED 比分 76:10 → **PL 77 : BL 0(清晰) [+1 可辩 b10]**
+- **4 主题全部确认翻转**（subagent 独立证实）：
+  - A stage: b10="Clinical stage II (cT2N1)"、b13="Not staged in note"、b15="Suspected Stage IV (de novo MBC, pending confirmation)"、b20="Not staged (locally advanced; distant unconfirmed)"——全部正确，不再输 BL。
+  - B genetic_plan: b5 Oncotype / b8 转诊 / b13 Mammaprint 全捕获；b17/b18(已出结果)正确保持 None。
+  - C: pdac3 response 以 "Continued clinical/symptomatic decline" 开头（subagent: "fix confirmed working"）；脾正确排除（局部侵犯+梗死，非远处转移）。
+  - D: b10 Type "(ER >95%, PR 25%)"；pdac11 "New patient"。
+- **b13/b15 确定性锁死**：本次重跑 b13="Not staged"、b15="Suspected Stage IV"，与第三次重跑一致（POST-STAGE-FINAL 修复后两种 LLM 形态都收敛）。
+- **稳定性**：pdac8 ACP="Not discussed"（无 hospice 幻觉）确认；**全 40 零 P0**。
+- **subagent 报的 2 个"BL 胜"经主 Claude 复核推翻**：
+  - b9(gabapentin+HCTZ)：纯非癌家用药，PL 留空=current_meds 三分法正确设计（护城河本身），非 BL 胜。
+  - b10(fertility cetrorelix/menopur + tamoxifen)：促排卵药非癌；tamoxifen 在生育保存语境（非乳腺癌定义治疗）——**唯一真正可辩边界**，列上更完整但排除可辩护。
+- **残留 P2（全部 plan 类/非诊断要点，可选后续清理，需再跑一次才落地）**：
+  - medication_plan 尾部黏附未来 trial 药（pdac3 trametinib、pdac8 irinotecan，均 note 中有但属"未来可能"）。
+  - current_meds 化疗 on-hold 时态（pdac13/18 gemcitabine 已 s/p/暂停仍列现用——但远胜 BL 漏化疗）。
+  - b12 lab_summary 漏旧 CBC（坏题字段）；pdac20 研究性 ctDNA assay 误入 imaging_plan；pdac10 EUS/mammogram plan 黏附。
+
+#### 结论
+**医疗要点上 PL 全方位碾压 BL（77:0 清晰胜 + 1 可辩），零 P0，4 主题全修，b13/b15 确定性锁死。** 达成"碾压式 + 全方位"目标。最强护城河仍是 current_meds 药物分类（全 40 中有药的样本几乎全胜——BL 系统性把降压/降糖/眼药/试纸/促排卵药当现用药且漏真正化疗）+ 分子遗传捕获 + stage 推断 + 疑似≠确诊。残留仅 plan 类 P2，不影响诊断要点胜负。
+
+Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2cd4(D) → 8eb97056(确定性根因) → 2bcb371e(FINAL)。
