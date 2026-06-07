@@ -189,3 +189,20 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 
 ### 教训
 - **"脚本抽查" ≠ "subagent 仔细审查"**：抽查只覆盖预设字段，抓不到 Metastasis/lab/attribution 等未抽的字段，也抓不到 vLLM 漂移。声称"零回归"前必须跑真正的逐字审查。
+
+---
+
+## H. r9/FINAL v4 真正 8-subagent 全审查 (2026-06-06)
+**b19/pdac10 两个 P1 已修复并确认**:
+- b19 current_meds = "exemestane, Goserelin" ✅ (OS hook 移到 CROSSCHECK 之后；CROSSCHECK 曾剥掉 LLM 提取的 zoladex，现 OS hook 在其后补回 Goserelin)。
+- pdac10 medication_plan 干净 (全局停药护栏 + omit/consolidative 排除)。
+
+**headline 确认**: PL 医疗要点全面 ≥ BL，零 P0，current_meds 5/5 碾压、molecular/stage/疑似≠确诊领先。既往全部修复保持。
+
+**全审查暴露的残留 (抽查会漏的；多为次要字段/vLLM 漂移)**:
+- **b16/b17/b18 Metastasis 字段="No" 但 N+/NX**: 多 subagent 反复 flag (P1/P2)。次要模糊字段(prompt 定义仅"if there is met")，主字段 DistMet 都正确。上次决定不改因广改会误伤 b18(NX+FNA良性→假阳性)。**可加"N0/NX/良性结节"护栏后只翻真 N+ (b1/b8/b9/b10/b17)，与 b13/b15 一致**。
+- **b5 genetic_results="No results"**: 本轮 vLLM 漂移把 MammaPrint(MP high/low risk)丢出该字段(仍在 findings)；BL 同错=TIE。跨运行非确定性，需正向捕获 hook 才能锁。
+- **b20 Type 合并双侧 HER2→"HER2+"**(漏左侧 HER2-；findings 有双侧)。唯一 subagent 记的"BL 略胜"点。
+- b7 Xarelto(暂停仍在 supportive)、pdac3 procedure_plan RT 碎片: P2。
+
+**教训重申**: 每次重跑 vLLM 让次要字段小幅漂移(本轮 b5)，确定性 hook 只锁住了重要字段；次要字段的彻底锁定需更多正向捕获 hook，是收益递减的长尾。
