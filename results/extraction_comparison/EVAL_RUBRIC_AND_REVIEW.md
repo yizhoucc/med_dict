@@ -142,3 +142,22 @@
 **医疗要点上 PL 全方位碾压 BL（77:0 清晰胜 + 1 可辩），零 P0，4 主题全修，b13/b15 确定性锁死。** 达成"碾压式 + 全方位"目标。最强护城河仍是 current_meds 药物分类（全 40 中有药的样本几乎全胜——BL 系统性把降压/降糖/眼药/试纸/促排卵药当现用药且漏真正化疗）+ 分子遗传捕获 + stage 推断 + 疑似≠确诊。残留仅 plan 类 P2，不影响诊断要点胜负。
 
 Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2cd4(D) → 8eb97056(确定性根因) → 2bcb371e(FINAL)。
+
+---
+
+## E. Round 5 P2 残留清理 (2026-06-06) —— 完成
+
+按用户"逐个修 P2 → 重跑全 40 → 再审"。修了 5 个 plan 类/response P2（跳过 #3 b12 lab=坏题、#7 typo=cosmetic）：
+- **#1**（commit d96b90b7）POST-MEDICATION-SUPPLEMENT 加投机性未来 trial 药排除（possibility/conceivably/preliminary data/limited yield…，±110 窗口）→ pdac3 trametinib、pdac8 irinotecan 不再混入 medication_plan。
+- **#6**（commit 84ac25b0）POST-RESPONSE-PRETREATMENT-DESC：未治疗患者 response 是疾病测量描述→"Not yet on treatment"。修 b4，顺带改进 b9。
+- **#2**（commit efbeea4e）POST-MEDS-ONHOLD-ANNOTATE：化疗明确 hold/pause 时加 "(systemic therapy currently on hold)" 标注（不删药，保护护城河）。pdac18；pdac13 因"proceed with FOLFIRINOX"换方案保守跳过。
+- **#4**（efbeea4e）POST-PLAN-GARBAGE-CLEAN(c)：imaging_plan 研究试验文本(无具体 modality)→"No imaging planned"。pdac20 ctDNA/microbiome assay。
+- **#5**（efbeea4e）GARBAGE-CLEAN(d)：procedure_plan 可切除性散文(无未来手术动词)→"No procedures planned"。pdac10。
+
+### 最终重跑(commit efbeea4e→14ac6329 FINAL v2) + 全 40 再审结果
+- **STRONG-MED 比分 PL ~73 : BL 0**（无任何清晰 BL 胜；b16/17/18 的"BL current_meds"是 PL 有意过滤非癌家用药=设计本身，非真胜）。
+- **全部 P2 修复 + round-5 themes 经独立 subagent 再审确认落地、无回归**：pdac3/8 无投机药✓、b4/b9 response✓、pdac18 on-hold✓、pdac20 imaging✓、pdac10 procedure✓；A/B/C/D 全保持；b13/b15 确定性保持；pdac8 ACP 无 hospice✓。**零 P0，零我引入的回归。**
+- **深审新浮现 2 个既有问题（非本轮回归）**：
+  - **b5（P1）**: genetic_testing_results 混入病理发现(LVI/margins/DCIS/LN/微转移)，只有 MP Low Risk + Oncotype pending 是真基因组内容。字段纯度问题(好题 f 字段)。POST-GENETIC-RESULTS-IHC 因字段含 MP/Oncotype 关键词未剥离病理段。
+  - **b11（P2）**: Type "PR+" 但原文 "PR pending"(findings 已正确写 pending)。轻微 over-reach。
+  - 二者均非 round-5/P2 改动引入；是本次彻底再审才暴露的旧问题。待用户决定是否再修一轮。
