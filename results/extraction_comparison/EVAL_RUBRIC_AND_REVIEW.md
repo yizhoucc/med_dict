@@ -83,3 +83,32 @@
 ### C.5 Round 5 行动建议（待用户确认）
 1. 修 stage 过度开火(主题A，最高优先) → 2. 修 genetic_testing_plan(主题B) → 3. 修 pdac3 spleen+response(主题C) → 4. 受体精度(主题D) → 5. **统一重跑全 40**(同时落地已修的 pdac8 ACP) → 6. 再按本 lens 重审，确认 BL 的 10 胜点清零、无新回归。
 目标：医疗要点 STRONG-MED 比分从 76:10 推向接近 全胜:0，且 stage 从负资产转正。
+
+---
+
+## D. Round 5 执行记录 (2026-06-06)
+
+### 已修 (代码 + 单元模拟验证，逐一确认 single-sample scope 无回归)
+**主题 A — stage 忠实 (commit 2b6fcf2f)**:
+- `POST-STAGE-CLINICAL`: 原文 "clinical/pathologic stage X" → 忠实捕获并覆盖 LLM 臆造的亚组/c-p 误标。b10 "Stage IIA (pT2N1)" → "Clinical stage II (cT2N1)"。
+- `POST-STAGE-EARLY-VERIFY`: "early stage" 被巨大原发(>5cm)/远处灶打脸 → 降级。b20 "Early stage" → "Not staged in note (locally advanced; distant lesions unconfirmed)"。
+- `POST-STAGE-MBC` 加 hedge: presumptive de novo MBC → "Suspected Stage IV (de novo MBC, pending confirmation)"。b15。
+- b13 "Stage III"(无依据) 经实测当前 NOBASIS 已会剥离成 "Not staged in note"（FINAL 陈旧故未体现）——重跑自动修复。
+- 回归 b8/pdac16 不变。✅
+
+**主题 B — genetic_testing_plan 捕获 (commit a894384b)**:
+- `POST-GENETIC-PENDING` 改为遍历所有 assay 出现处(跳过科普句、加"已出具体结果"护栏): b5→"Oncotype DX RS (planned)"、b13→"Mammaprint on her tumor (planned)"；b18(已出 High Risk)正确保持 None planned。
+- 新增 `POST-GENETIC-PLAN-REFERRAL`: genetics 转诊反映进 plan(保留 Referral)。b8→"Referred for genetic testing/counseling."。
+- 回归 b17/b18/pdac11/pdac13 不变。✅
+
+**主题 C — pdac3 (commit 060c8362)**:
+- `POST-RESPONSE-AP-DECLINE`: A/P impression 明写 clinical/symptomatic decline → 覆盖锚定单条影像的 "stable"。pdac3。全 40 仅 pdac3 触发，无误触。
+- **脾经主 Claude 读原文复核：不改**。原文是 "direct invasion of spleen"(局部 T4) + "splenic lesions compatible with **infarcts**"(脾梗死非转移)——PL "liver, peritoneum" 才是忠实的远处转移列表；subagent 误判为 BL 胜。精确>完整 成立。
+
+**主题 D — 受体精度 + patient type (commit 682f2cd4)**:
+- `POST-PATIENT-TYPE-NEW`: present-tense this-visit 新患者信号(seeing as new patient / presents today for second opinion / INITIAL VISIT 标题) → Follow up→New。**收紧排除时间线里 "MM/DD: Initial consultation" 往期事件**——全 40 仅 pdac11 触发，不误伤真随访 pdac10/13/16/17。
+- `POST-TYPE-RECEPTOR-PCT`: 原文 "ER N%, PR N%" 经典措辞 + Type 仅泛化 ER+ → 追加百分比。b10 "(ER >95%, PR 25%)"。`\bER` 护栏避开 HER2 误匹配。仅 b10。
+
+### 待办
+- [ ] 统一重跑全 40 (WSL, run.py + vLLM)，落地 A/B/C/D + 之前已修但 FINAL 陈旧的 (b13 NOBASIS、b15 MBC、pdac8 ACP hospice)。
+- [ ] 重跑后按好题 lens 再审，确认 BL 的 10 胜点清零 + 无新回归。
