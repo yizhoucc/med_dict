@@ -1,4 +1,4 @@
-Source: fix_breast_nl.yaml | Run started: 2026-06-06 20:31:50
+Source: fix_breast_nl.yaml | Run started: 2026-06-06 21:55:46
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -685,7 +685,7 @@ RESULTS FOR ROW 1
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "after PET/CT: to resume discussion regarding treatment"
+    "Next clinic visit": "after PET/CT: to resume conversation with regards to treatment"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -732,7 +732,7 @@ RESULTS FOR ROW 1
     "Not explicitly stated."
   ],
   "response_assessment": [
-    "Not yet on treatment — no response to assess."
+    "Not yet"
   ],
   "imaging_plan": [
     "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
@@ -936,7 +936,7 @@ RESULTS FOR ROW 3
     "summary": "Patient with early stage right-sided invasive spindle cell metaplastic carcinoma breast cancer here to discuss neoadjuvant therapy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma",
+    "Type_of_Cancer": "ER-/PR-/HER2- (FISH neg, ratio 1.2) spindle cell metaplastic carcinoma",
     "Stage_of_Cancer": "Locally advanced, multifocal",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -945,7 +945,7 @@ RESULTS FOR ROW 3
     "lab_summary": "Alk phos elevated, creatinine elevated"
   },
   "Clinical_Findings": {
-    "findings": "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and Her2 FISH negative (ratio 1.2). Tumor measures 3.5 x 3.2 x 2.6 cm with two small satellite masses located  12-15 mm anterior/superior to the index mass. Mildly prominent right axillary lymph nodes. PET/CT shows heterogenous hypermetabolic right breast mass consistent with known breast carcinoma and associated minimally hypermetabolic non-enlarged bilateral axillary lymph nodes. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam reveals an abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm. No other significant findings noted."
+    "findings": "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and HER2 FISH negative (ratio 1.2). Tumor size is 3.5 x 3.2 x 2.6 cm with two small satellite masses located 12-15 mm anterior/superior to the index mass. MRI shows a heterogenous hypermetabolic right breast mass consistent with known breast carcinoma. PET/CT reveals minimally hypermetabolic non-enlarged bilateral axillary lymph nodes. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam reveals an abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm. No palpable lymphadenopathy, no hepatosplenomegaly, and no other significant findings on physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -965,7 +965,7 @@ RESULTS FOR ROW 3
     "medication_plan": "The patient will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. Alternatively, if enrolled in the I-SPY 2 clinical trial, the patient may receive an unspecified experimental agent in addition to paclitaxel. The patient has agreed to have a Medi-port placed for chemotherapy administration. The patient prefers to start the first week in February."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. If randomized to the control group, she will receive 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. The patient will also benefit from a Medi-port and will have a chemo teaching session. Hormonal therapy and potentially radiation therapy will be considered based on surgical choice and final pathology."
+    "therapy_plan": "The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. If randomized to the control group, she will receive 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. She will benefit from a Medi-port and will have a chemo teaching session. Hormonal therapy and potentially radiation therapy will be considered based on surgical choice and final pathology."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "radiation therapy depending on her surgical choice and final pathology"
@@ -1012,7 +1012,7 @@ RESULTS FOR ROW 3
     "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
   ],
   "Type_of_Cancer": [
-    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
+    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer"
   ],
   "Stage_of_Cancer": [
     "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
@@ -1027,7 +1027,7 @@ RESULTS FOR ROW 3
     "We will check these again    We explained that if her tumor has a Mammaprint low risk profile, she would not be eligible to participate in the therapeutic portion of the trial, but given the metaplastic aspect I am fairly certain it will be high risk.  If for some reason it is not, we will need to re-assess the diagnosis of metaplastic breast cancer and we could present her case to our multidisciplinary tumor Board.    We specifically discussed the typical and less common side-effects associated with AC/T, such as fatigue, neuropathy, skin and nail changes, myalgias, alopecia, myel"
   ],
   "findings": [
-    "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and Her2 FISH negative (ratio 1.2)."
+    "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and HER2 FISH negative (ratio 1.2)."
   ],
   "goals_of_treatment": [
     "we can therefore treat her with curative intent."
@@ -1203,7 +1203,7 @@ RESULTS FOR ROW 4
     "Patient unsure about starting chemo as we recommended today she would like to speak to Dr. [REDACTED] first."
   ],
   "medication_plan": [
-    "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok."
+    "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
   ],
   "therapy_plan": [
     "Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
@@ -1261,7 +1261,7 @@ RESULTS FOR ROW 5
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses. Multiple prominent low-level left axillary lymph nodes with thickened cortex, asymmetric compared to right. Physical exam findings: No palpable masses bilaterally, no lymphadenopathy."
+    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1312,7 +1312,7 @@ RESULTS FOR ROW 5
     "follow up": "The patient needs a DEXA to assess her current bone health. She is advised to continue her current level of aerobic activity (150 minutes a week)."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "MP Low Risk (+0.321). Oncotype DX RS is pending."
+    "genetic_testing_results": "No genetic testing results in note."
   }
 }
 
@@ -1972,7 +1972,7 @@ RESULTS FOR ROW 9
     "treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
   ],
   "goals_description": [
-    "treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
+    "if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
   ],
   "response_assessment": [
     "who requires additional evaluation prior to starting systemic therapy."
@@ -2474,10 +2474,10 @@ RESULTS FOR ROW 13
     "summary": "A 36 y.o. female with a recently diagnosed hormone receptor positive/HER2 negative node positive right breast cancer is here for discussion of treatment options and recent imaging findings."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- invasive ductal carcinoma",
+    "Type_of_Cancer": "ER+/PR+/HER2- (by IHC & FISH negative) invasive ductal carcinoma (IDC) with Ki67% 20-30%",
     "Stage_of_Cancer": "Not staged in note",
     "Distant Metastasis": "No",
-    "Metastasis": "Yes, to right axillary lymph nodes and possibly to the falx cerebri"
+    "Metastasis": "No"
   },
   "Lab_Results": {
     "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 93 mg/dL"
@@ -2518,7 +2518,7 @@ RESULTS FOR ROW 13
     "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Mammaprint to be obtained after surgery."
+    "genetic_testing_plan": "Mammaprint to be performed after surgery."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "in-person: after surgery"
@@ -2553,10 +2553,13 @@ RESULTS FOR ROW 13
     "36 y.o. female is here for discussion of treatment options of recently diagnosed ER+/HER neg right breast cancer with axillary LN involvement."
   ],
   "Type_of_Cancer": [
-    "ER+/HER neg right breast cancer"
+    "right breast cancer with axillary LN involvement."
   ],
   "Stage_of_Cancer": [
     "because of her young age and lymph node involvement,"
+  ],
+  "Metastasis": [
+    "right breast cancer with axillary LN involvement."
   ],
   "findings": [
     "Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%"
@@ -2623,7 +2626,7 @@ RESULTS FOR ROW 14
     "summary": "34-year-old premenopausal woman with newly diagnosed right breast cancer (Grade 1 IDC, ER+, PR+, HER2 equivocal) seeking initial consultation to discuss treatment options."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2 equivocal(IHC 2), FISH non-amplified grade 1 invasive ductal carcinoma",
+    "Type_of_Cancer": "ER+/PR+/HER2 equivocal (IHC 2+, FISH non-amplified) grade 1 invasive ductal carcinoma",
     "Stage_of_Cancer": "Not mentioned in note",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -2632,10 +2635,10 @@ RESULTS FOR ROW 14
     "lab_summary": "Syphilis Screen by RPR with Reflex to Treponemal Antibody Nonreactive, HIV Ag/Ab Combo NEG (from 03/17/19)"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%, with a 0.55 cm largest dimension in a core; multiple cores involved. No DCIS present. Imaging findings include a bilateral breast MRI on April 24 with no specific details provided in the note. Physical exam findings reveal a 2 cm mass in the right breast, 8 cm from the nipple. Additionally, there is a right eyelid stye noted during the physical examination."
+    "findings": "Pathology results show Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%, and focal atypical ductal hyperplasia. No DCIS present. Physical exam reveals a 2 cm mass in the right breast, 8 cm from the nipple. No other masses or lymphadenopathy noted. Recent imaging includes a bilateral breast MRI on April 24, but specific findings are not detailed in the note. Mammaprint result indicates low risk (+0.287)."
   },
   "Current_Medications": {
-    "current_meds": ""
+    "current_meds": "Goserelin"
   },
   "Treatment_Changes": {
     "recent_changes": "Start goserelin today (no auth required!)\nStart letrozole in about two weeks",
@@ -2696,7 +2699,7 @@ RESULTS FOR ROW 14
     "Patient ready and able to be educated, verbalizes understanding of information/instructions given."
   ],
   "summary": [
-    "34 year old premenopausal woman with 1 to 2.2 cm grade 1 IDC, strongly ER and PR positive,"
+    "34 year old premenopausal woman with 1 to 2.2 cm grade 1 IDC, strongly ER and PR positive, and mammaprint low risk."
   ],
   "Type_of_Cancer": [
     "1 to 2.2 cm grade 1 IDC, strongly ER and PR positive"
@@ -2705,7 +2708,10 @@ RESULTS FOR ROW 14
     "1 to 2.2 cm grade 1 IDC, strongly ER and PR positive, and mammaprint low risk."
   ],
   "findings": [
-    "Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%"
+    "I reviewed the data that supports the use of ovarian suppression in woman with HR+ breast cancer under the age of 35,"
+  ],
+  "current_meds": [
+    "Start goserelin today (no auth required!)"
   ],
   "recent_changes": [
     "Start goserelin today (no auth required!)  Start letrozole in about two weeks"
@@ -2965,7 +2971,7 @@ RESULTS FOR ROW 16
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Future adjuvant treatment options will be discussed after surgery."
+    "medication_plan": "Future adjuvant treatment options will be discussed after her surgery."
   },
   "Therapy_plan": {
     "therapy_plan": "[REDACTED] will pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach. After surgery, adjuvant treatment options will be discussed based on the pathology results."
@@ -3051,7 +3057,7 @@ RESULTS FOR ROW 16
     "she would most like to pursue a mastectomy up front for this cancer"
   ],
   "imaging_plan": [
-    "The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node which was abnormal in morphology,"
+    "The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node which was abnormal in morphology, with a thickened cortex"
   ],
   "Next clinic visit": [
     "Please feel free to contact me if you have any questions regarding my evaluation or recommendations and we will make a final decision regarding her adjuvant therapy following receipt of her pathology from her upcoming surgery."
@@ -3275,10 +3281,10 @@ RESULTS FOR ROW 18
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will receive at least five years of adjuvant hormonal therapy due to her estrogen receptor positive status. The patient will have a more thorough discussion regarding the choice of hormonal therapy after surgery. Potential options include and ovarian suppression"
+    "medication_plan": "The patient will receive at least five years of adjuvant hormonal therapy due to her estrogen receptor positive status. The specific hormonal therapy will be discussed after surgery, with potential options including and ovarian suppression. No specific agents or dosages were detailed beyond this general plan"
   },
   "Therapy_plan": {
-    "therapy_plan": "Chemotherapy will be considered based on nodal status at the time of surgery; if node negative, Taxotere and Cytoxan will be recommended, whereas if node positive, AC-Taxol will be recommended. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to in preventing distant recurrence. plus ovarian suppression is preferred over plus ovarian suppression. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery"
+    "therapy_plan": "Chemotherapy will be considered based on nodal status at the time of surgery; if node negative, Taxotere and Cytoxan will be recommended, whereas if node positive, AC-Taxol will be recommended. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to in preventing distant recurrence. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -3309,7 +3315,7 @@ RESULTS FOR ROW 18
     "follow up": "Patient to undergo a second FNA of the left axillary LNs, proceed with mastectomy, and further surgical/oncological management."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor testing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.622)"
+    "genetic_testing_results": "Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor genomic testing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.622)"
   }
 }
 
@@ -3407,7 +3413,7 @@ RESULTS FOR ROW 19
     "findings": "Patient is NED (no evidence of disease) on physical exam. Patient is considering bilateral salpingo-oophorectomy (BSO) after 5 years of ovarian suppression and aromatase inhibitor (AI) therapy."
   },
   "Current_Medications": {
-    "current_meds": "exemestane"
+    "current_meds": "exemestane, Goserelin"
   },
   "Treatment_Changes": {
     "recent_changes": "Switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability.",
@@ -3486,7 +3492,7 @@ RESULTS FOR ROW 19
     "NED on exam  -Continue exemestane 25mg daily. We discussed continuing AI for at least 5 years.   -Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months  -needs DEXA scan now and every 2 years. If osteopenia can consider adding bisphosphonate. Reviewed adjuvant bisphosphonate data showing reduced distant mets, improved BCSS, and OS for postmenopausal women and bisphosphonate use.   -she is considering BSO which is reasonable since she will likely be in natural men"
   ],
   "current_meds": [
-    "exemestane (AROMASIN) 25 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY FOR 30 DAYS"
+    "exemestane 25 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY FOR 30 DAYS"
   ],
   "recent_changes": [
     "switched to OS/letrozole in November 2018 but switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability."
@@ -3582,7 +3588,7 @@ RESULTS FOR ROW 20
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient is a candidate for adjuvant therapy with a HER2 targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for  4 cycles each or six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy."
+    "medication_plan": "The patient is a candidate for adjuvant therapy with a HER2 targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for  4 cycles each or six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy. Supportive medications and side effect management will be discussed in detail upon final decision."
   },
   "Therapy_plan": {
     "therapy_plan": "The patient is a candidate for adjuvant therapy with a HER2-targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for 4 cycles each or, preferably, six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy. Once the patient has completed surgery, preparatory studies for chemotherapy will be initiated, which may include a port-a-cath, echocardiogram, and appropriate laboratory and staging studies. The patient will receive radiation to both breasts. The patient will be monitored for side effects, including fevers, myelosuppression, cardiac risks, and death. After 2 cycles, the patient will have a follow-up."

@@ -1,4 +1,4 @@
-Source: fix_pdac_nl.yaml | Run started: 2026-06-06 20:31:50
+Source: fix_pdac_nl.yaml | Run started: 2026-06-06 21:55:46
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -472,7 +472,7 @@ RESULTS FOR ROW 1
     "lab_summary": "WBC Count 6.7, RBC Count 3.89, Hemoglobin 11.1, Hematocrit 33.5, MCV 86, MCH 28.5, MCHC 33.1, Platelet Count 203, Neutrophil Absolute Count 4.06, Lymphocyte Abs Cnt 1.49, Monocyte Abs Count 0.84, Eosinophil Abs Ct 0.23, Basophil Abs Count 0.02, Imm Gran, Left Shift 0.02, Urea Nitrogen 13, Creatinine 1.06, eGFR if non-African American 83, eGFR if African Amer 96, Aspartate transaminase 20, Alanine transaminase 25, Bilirubin, Total 0.9, Alkaline Phosphatase 60, Cancer Antigen 19-9 3"
   },
   "Clinical_Findings": {
-    "findings": "Stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma. No evidence of metastatic disease in the abdomen/pelvis. New nodules measuring up to 7 mm in the lingula and left lower lobe, indeterminate but suspicious for metastases in the setting of known pancreatic adenocarcinoma. No other definite evidence of metastatic disease in the chest. Patient has gained weight, with 1 kg increase last month. No jaundice noted on physical exam. No ascites present. No palpable masses. No significant changes in vascular involvement. Small mesenteric and retroperitoneal nodes, none enlarged by size criteria."
+    "findings": "Stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma. No evidence of metastatic disease in the abdomen/pelvis. New nodules measuring up to 7 mm in the lingula and left lower lobe, indeterminate but suspicious for metastases in the setting of known pancreatic adenocarcinoma. No other definite evidence of metastatic disease in the chest. Patient has gained weight, with 1 kg increase last month. No jaundice, ascites, or significant physical exam abnormalities noted. Patient has intermittent abdominal discomfort, usually at night, requiring oxycodone."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1107,7 +1107,7 @@ RESULTS FOR ROW 5
     "lab_summary": "WBC Count 6.4, Neutrophil Absolute Count 4.18, Hemoglobin 11.4 (L), Hematocrit 35.4 (L), Platelet Count 126 (L), Creatinine 0.74, Bilirubin, Total 0.4, Alkaline Phosphatase 160 (H), Aspartate transaminase 31, Alanine transaminase 30, Cancer Antigen 19-9 576 (H), Carcinoembryonic Antigen 16.2 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert and oriented x 3, mood stable, and no hallucinations, paranoia, or delusions."
+    "findings": "Mr. [REDACTED] has stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Imaging findings show no significant changes in the pancreatic mass or the abdominal wall lesion. Cancer antigen 19-9 levels are elevated at 576 (high) on 08/27/19 and 826 (high) on 08/01/19. Carcinoembryonic antigen levels are also elevated at 16.2 (high) on 08/27/19 and 11.7 (high) on 08/01/19. Physical exam findings include WDWN, NAD, sclera anicteric, no respiratory distress, alert & oriented x 3, mood stable, and no psychiatric symptoms noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1121,7 +1121,7 @@ RESULTS FOR ROW 5
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19. Additionally, the CA 19-9 levels have fluctuated but remain elevated, indicating stable disease rather than a clear response or progression."
+    "response_assessment": "The cancer is currently showing stable disease in the pancreas and abdominal wall lesion based on the CT CAP conducted on 09/10/19."
   },
   "Medication_Plan": {
     "medication_plan": "Continue xarelto QD, Continue Creon to 2 or 3 tab/meal and 1 tab/snack, Cont Oxycontin 10mg PO bid, Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half), SMS recommended fluconazole"
@@ -1201,7 +1201,7 @@ RESULTS FOR ROW 5
     "Not explicitly stated."
   ],
   "response_assessment": [
-    "He is now s/p 12 cycles of FOLFIRINOX.    #Stage IV pancreatic adenocarcinoma"
+    "He is now s/p 12 cycles of FOLFIRINOX."
   ],
   "medication_plan": [
     "- Continue Creon to 2 or 3 tab/meal and 1 tab/snack   - Cont Oxycontin 10mg PO bid  - Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half)    #Weight loss: Improved  - Followed by Cancer Center Nutritionist [REDACTED] [REDACTED], [REDACTED]"
@@ -1916,7 +1916,7 @@ RESULTS FOR ROW 10
     "response_assessment": "Stable disease. The CT scan on 12/10/19 shows a stable pancreatic mass measuring 4.4 x 3.5 cm with encasement and severe narrowing of celiac and superior mesenteric arteries, without evidence of distant metastases."
   },
   "Medication_Plan": {
-    "medication_plan": "Continue with FOLFOX only going forward: oxaliplatin 85mg/m2, 5FU 2400mg/m2 over 46h. Premeds: Aloxi, aprepitant, dexamethasone. On D3: 1L NS, 12mg PO dexamethasone, prn Zofran, ativan. Omit D3 Fulphila given ANC >20 today. Potassium management: 20mEq IV +40mEq PO (with 4x Klor Con 10 mEq pills) on D1. Repeat K and Mg on D3: give 20mEq IV +40mEq PO (with 4x Klor Con 10 mEq pills) only if K <=3.3. Hold if >3.3. Magnesium: 1g today. Rx for Klor Con: advised to take 20 mEq daily. Reviewed potassium-rich foods. Consider renal evaluation for RTA if no improvement. Loperamide available prn for diarrhea. Counseled on BRAT diet and avoiding dairy.; also: capecitabine, irinotecan"
+    "medication_plan": "Continue with FOLFOX only going forward: oxaliplatin 85mg/m2, 5FU 2400mg/m2 over 46h. Premeds: Aloxi, aprepitant, dexamethasone. On D3: 1L NS, 12mg PO dexamethasone, prn Zofran, ativan. Omit D3 Fulphila given ANC >20 today. Potassium management: 20mEq IV +40mEq PO (with 4x Klor Con 10 mEq pills) on D1. Repeat K and Mg on D3: give 20mEq IV +40mEq PO (with 4x Klor Con 10 mEq pills) only if K <=3.3. Hold if >3.3. Magnesium: 1g today. Rx for Klor Con: advised to take 20 mEq daily. Reviewed potassium-rich foods. Consider renal evaluation for RTA if no improvement. Loperamide available prn for diarrhea. Counseled on BRAT diet and avoiding dairy."
   },
   "Therapy_plan": {
     "therapy_plan": "Continue with FOLFOX only going forward: oxaliplatin 85mg/m2, 5FU 2400mg/m2 over 46h. After 4-6 months of upfront chemotherapy, consider either (1) readdressing surgical prospects with Dr. [REDACTED] or (2) consolidative chemoradiation, either conventionally fractionated therapy with concurrent capecitabine as a radiosensitizer, or SBRT.; potassium"
@@ -2207,15 +2207,15 @@ RESULTS FOR ROW 12
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
-    "Stage_of_Cancer": "Stage IV (metastatic)",
-    "Distant Metastasis": "Yes, to liver, peritoneum",
+    "Stage_of_Cancer": "Metastatic (Stage IV)",
+    "Distant Metastasis": "Yes (peritoneal carcinomatosis)",
     "Metastasis": "Yes (to liver, peritoneum)"
   },
   "Lab_Results": {
     "lab_summary": "WBC Count 9.6, RBC Count 3.09 (L), Hemoglobin 9.6 (L), Hematocrit 28.5 (L), MCV 92, MCH 31.1, MCHC 33.7, Platelet Count 172, Neutrophil Absolute Count 8.55 (H), Lymphocyte Abs Cnt 0.59 (L), Monocyte Abs Count 0.38, Eosinophil Abs Ct 0.01, Basophil Abs Count 0.01, Imm Gran, Left Shift 0.05, Urea Nitrogen 10, Calcium 8.1 (L), Chloride 101, Creatinine  0.56 (L), Glucose 187 (H), Potassium 3.4 (L), Carbon Dioxide 26 (H), Anion Gap 9, pH 7.39, PCO2 47, PO2 32 (LL), Base excess 3, Bicarbonate 28 (H), Oxygen Saturation 55 (L), Hemoglobin, Whole Blood 9.9 (L), Hematocrit from [REDACTED] 31 (L), Lactate 1.1, Glucose, whole blood 190, Aspartate transaminase 30, Alanine transaminase 38, Bilirubin, Total 3.5 (H), Alkaline Phosphatase 265 (H), Lipase 20, Magnesium 1.6 (L), Albumin 2.1 (L), Total Protein 5.1 (L), PT 30.8 (H), INR 3.0 (H), Bilirubin, Total 3.7 (H), CANCER ANTIGEN 19-9 276 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Patient has a 7.5x3.5x3.7cm mass in the tail of the pancreas with thrombosis of the splenic vein and marked narrowing of the splenic artery. The mass abuts the superior mesenteric artery and shows invasion of the muscularis propria of the stomach (T4 disease). A large lymph node measuring  2.7 cm adjacent to the celiac axis is noted (N1). EUS staging is at least T4, N1. Cytopathology confirms adenocarcinoma. Recent imaging shows a pancreatic body/tail mass causing partial bowel obstruction at the ligament of Treitz, with carcinomatosis involving peritoneal and omental implants. CT scan demonstrates new small bowel obstruction, moderate ascites, and worsening porta hepatis soft tissue infiltration leading to biliary obstruction. Bilirubin is elevated at 3.5mg/dL. Physical exam reveals a non-distended abdomen with normal bowel sounds, tenderness in the LLQ, palpable hepatic edge, and trace edema in the BLE."
+    "findings": "Patient has a 7.5x3.5x3.7cm mass in the tail of the pancreas with thrombosis of the splenic vein and marked narrowing of the splenic artery. The mass abuts the superior mesenteric artery and shows invasion of the muscularis propria of the stomach (T4 disease). A large lymph node measuring 2.7 cm adjacent to the celiac axis is noted (N1). EUS staging is at least T4, N1. Cytopathology confirms adenocarcinoma. Recent CT imaging shows a pancreatic body/tail mass causing partial bowel obstruction at the ligament of Treitz, with carcinomatosis involving peritoneal and omental implants. There is moderate ascites and biliary obstruction with moderate intrahepatic biliary ductal dilatation. Indeterminate 9mm nodules in both adrenal glands are suspicious for metastatic disease. Physical exam reveals a non-distended abdomen with normal bowel sounds, tenderness in the LLQ, and palpable hepatic edge. Trace edema in the BLE is noted. The patient has a bilirubin of 3.5mg/dL and is currently on a treatment holiday. Imaging and lab results suggest disease progression with new partial bowel obstruction and biliary obstruction."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2229,7 +2229,7 @@ RESULTS FOR ROW 12
     "goals_description": ""
   },
   "Response_Assessment": {
-    "response_assessment": "The cancer is currently not responding to treatment. Recent imaging shows interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
+    "response_assessment": "Recent CT imaging shows disease progression with new partial bowel obstruction at the ligament of Treitz and biliary obstruction with moderate intrahepatic biliary ductal dilatation. These findings indicate that the cancer is progressing despite previous treatment."
   },
   "Medication_Plan": {
     "medication_plan": "Palliative care is discussed as the next step, but no specific medications are mentioned for this purpose."
@@ -2291,7 +2291,7 @@ RESULTS FOR ROW 12
     "pancreatic adenocarcinoma with concern for metastatic disease."
   ],
   "Distant Metastasis": [
-    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;\" \"liver lesions"
+    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
   ],
   "Metastasis": [
     "new peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
@@ -2303,7 +2303,7 @@ RESULTS FOR ROW 12
     "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
   ],
   "response_assessment": [
-    "restaging scans which showed interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass"
+    "restaging scans which showed interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
   ],
   "medication_plan": [
     "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
@@ -2853,7 +2853,7 @@ RESULTS FOR ROW 16
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management and evaluation of treatment response."
+    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management of the disease."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
@@ -2909,9 +2909,9 @@ RESULTS FOR ROW 16
     "Advance care": "Not discussed during this visit."
   },
   "Referral": {
-    "Nutrition": "We will refer to nutritionist.",
+    "Nutrition": "Referral to nutritionist",
     "Genetics": "None",
-    "Specialty": "Evaluated by her dentist; found to have periodontal inflammation and a deep pocket associated with her last left lower molar, which has been a chronic problem for her. Tooth was irrigated and rinsed with chlorhexidine. Patient to continue to use chlorhexidine rinse BID. No infection noted and ok'ed to continue on chemotherapy.",
+    "Specialty": "Dental evaluation for periodontal inflammation and a deep pocket associated with her last left lower molar",
     "Others": "None",
     "follow up": "on 05/16/19 with [REDACTED] [REDACTED]"
   },
