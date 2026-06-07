@@ -1846,6 +1846,10 @@ def main():
                 # Check future/current context (wider window, more context words)
                 for m in re.finditer(re.escape(drug), ap_lower_mp):
                     ctx = ap_lower_mp[max(0,m.start()-60):m.end()+60]
+                    # a wider window for exclusions — speculative/trial framing often sits a clause away
+                    # from the drug name (pdac3 "one possibility to consider would be trying ... trametinib";
+                    # pdac8 "nal-IRI ... could conceivably be tried, but would likely be of limited yield").
+                    ctx_excl = ap_lower_mp[max(0,m.start()-110):m.end()+110]
                     if any(fc in ctx for fc in ['continue', 'start', 'begin', 'resume', 'rx ',
                                                  'recommend', 'prescri', 'mg', 'daily', 'bid',
                                                  'tid', 'qd', 'tablet', 'capsule', 'sent',
@@ -1862,7 +1866,13 @@ def main():
                                                          'response rate', 'et al', 'reported',
                                                          'trial', 'study', 'published',
                                                          'without treatment', 'w/o treatment',
-                                                         'monitoring', 'expectant management']):
+                                                         'monitoring', 'expectant management']) \
+                           and not any(sp in ctx_excl for sp in ['possibility', 'conceivably',
+                                                         'preliminary data', 'promising', 'limited yield',
+                                                         'to consider', 'could consider', 'off-label',
+                                                         'salvage', 'investigational', 'phase i', 'phase 1',
+                                                         'one option', 'could be tried', 'hoping to open',
+                                                         'rechalleng']):
                             found_meds.append(drug)
                             break
             if found_meds:
