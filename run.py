@@ -5240,20 +5240,43 @@ def main():
             stage_iv_final = bool(re.search(r'stage\s*iv|metastatic', stage_final, re.IGNORECASE))
             dist_no_final = dist_final.lower().startswith("no") if dist_final else True
 
-            # Case 1: Stage says IV but Distant Met says No — downgrade
+            # Case 1: Stage says IV but Distant Met says No.
+            # Do NOT fabricate "Stage III" — non-metastatic ≠ Stage III, and forcing III both invents a
+            # stage the note never gives and (run-to-run) overrides legitimate de-novo-MBC reasoning,
+            # making the field non-deterministic (b13/b15 flipped between "Not staged"/"Stage IV"/"Stage III"
+            # across reruns purely on which Stage-IV wording the LLM happened to emit). Instead:
+            #   • if the note frames the disease as (de novo) metastatic / MBC, the Stage IV is real and the
+            #     Distant-Metastasis field is just under-filled → keep the stage (don't downgrade);
+            #   • otherwise the Stage IV was an unsupported LLM over-call → demote to an honest
+            #     "Not staged in note" (never a fabricated "Stage III"). [round5 #A fix-v2, b13/b15]
             if stage_iv_final and dist_no_final:
                 met_lower_f = met_final.lower() if met_final else ""
                 DISTANT_SITES_F = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
                                    "ovary", "skin", "distant", "hepatic", "pulmonary", "osseous", "cerebral"]
                 has_distant_f = any(ds in met_lower_f for ds in DISTANT_SITES_F)
-                if not has_distant_f:
-                    cleaned_f = re.sub(r'(?i)\bStage\s*IV\s*\(?\s*metastatic\s*\)?', 'Stage III', stage_final)
-                    cleaned_f = re.sub(r'(?i)\bmetastatic\s*\(?\s*Stage\s*IV\s*\)?', 'Stage III', cleaned_f)
-                    cleaned_f = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III', cleaned_f)
-                    cleaned_f = cleaned_f.strip().rstrip(',').strip()
-                    if cleaned_f and cleaned_f != stage_final:
-                        cancer_final["Stage_of_Cancer"] = cleaned_f
-                        print(f"    [POST-STAGE-FINAL] Stage IV but Distant Met=No (final check): '{stage_final}' → '{cleaned_f}'")
+                note_ap_f = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+                # POSITIVE metastatic framing only — and never a NEGATED mention ("no evidence of metastatic
+                # disease", "r/o metastatic"), which would otherwise wrongly keep an LLM Stage-IV over-call
+                # (b13: localized breast ca whose note mentions metastatic only in negated/educational form).
+                mbc_framing_f = False
+                for _mm in re.finditer(
+                        r'de novo mbc|\bmbc\b|metastasi[sz]ed to|recurrent\s+metastatic'
+                        r'|metastatic\s+(?:breast|pancreatic|recurrent)(?:\s+\w+){0,2}\s*(?:cancer|carcinoma|adenocarcinoma|disease|pdac)?',
+                        note_ap_f):
+                    _pre = note_ap_f[max(0, _mm.start() - 24):_mm.start()]
+                    if re.search(r'\bno\b|without|\br/o\b|rule out|negative for|free of|denies|evidence of no', _pre):
+                        continue
+                    mbc_framing_f = True
+                    break
+                if not has_distant_f and not mbc_framing_f:
+                    cancer_final["Stage_of_Cancer"] = "Not staged in note"
+                    print(f"    [POST-STAGE-FINAL] Stage IV w/o distant-met basis (final): '{stage_final}' → 'Not staged in note'")
+                elif (cancer_type == "breast" and mbc_framing_f and "suspected" not in stage_final.lower()
+                      and re.search(r'if we confirm|presumptiv|presumed|to prove this|workup is not|not yet complete', note_ap_f)):
+                    # presumptive de-novo-MBC kept as Stage IV → normalize to the hedged form so the field is
+                    # deterministic regardless of which Stage-IV wording the LLM emitted (b15). [round5 #A fix-v2]
+                    cancer_final["Stage_of_Cancer"] = "Suspected Stage IV (de novo MBC, pending confirmation)"
+                    print(f"    [POST-STAGE-FINAL] presumptive MBC normalized: '{stage_final}' → 'Suspected Stage IV (de novo MBC, pending confirmation)'")
 
             # Case 2: Stage was downgraded to III but Distant Met says Yes — re-upgrade
             if not stage_iv_final and "stage iii" in stage_final.lower():
