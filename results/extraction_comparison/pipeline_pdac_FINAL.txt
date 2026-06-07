@@ -1,4 +1,4 @@
-Source: fix_pdac_nl.yaml | Run started: 2026-06-06 21:55:46
+Source: fix_pdac_nl.yaml | Run started: 2026-06-06 23:27:06
 ============================================================
 extraction_prompts
 {'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
@@ -472,7 +472,7 @@ RESULTS FOR ROW 1
     "lab_summary": "WBC Count 6.7, RBC Count 3.89, Hemoglobin 11.1, Hematocrit 33.5, MCV 86, MCH 28.5, MCHC 33.1, Platelet Count 203, Neutrophil Absolute Count 4.06, Lymphocyte Abs Cnt 1.49, Monocyte Abs Count 0.84, Eosinophil Abs Ct 0.23, Basophil Abs Count 0.02, Imm Gran, Left Shift 0.02, Urea Nitrogen 13, Creatinine 1.06, eGFR if non-African American 83, eGFR if African Amer 96, Aspartate transaminase 20, Alanine transaminase 25, Bilirubin, Total 0.9, Alkaline Phosphatase 60, Cancer Antigen 19-9 3"
   },
   "Clinical_Findings": {
-    "findings": "Stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma. No evidence of metastatic disease in the abdomen/pelvis. New nodules measuring up to 7 mm in the lingula and left lower lobe, indeterminate but suspicious for metastases in the setting of known pancreatic adenocarcinoma. No other definite evidence of metastatic disease in the chest. Patient has gained weight, with 1 kg increase last month. No jaundice, ascites, or significant physical exam abnormalities noted. Patient has intermittent abdominal discomfort, usually at night, requiring oxycodone."
+    "findings": "Stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma. No evidence of metastatic disease in the abdomen/pelvis. New nodules measuring up to 7 mm in the lingula and left lower lobe, indeterminate but suspicious for metastases in the setting of known pancreatic adenocarcinoma. No other definite evidence of metastatic disease in the chest. Patient has gained weight, with 1 kg increase last month. No jaundice noted on physical exam. No ascites present. No palpable masses. No significant changes in vascular involvement. Small mesenteric and retroperitoneal nodes, none enlarged by size criteria."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2207,15 +2207,15 @@ RESULTS FOR ROW 12
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
-    "Stage_of_Cancer": "Metastatic (Stage IV)",
-    "Distant Metastasis": "Yes (peritoneal carcinomatosis)",
+    "Stage_of_Cancer": "Stage IV (metastatic)",
+    "Distant Metastasis": "Yes, to liver, peritoneum",
     "Metastasis": "Yes (to liver, peritoneum)"
   },
   "Lab_Results": {
     "lab_summary": "WBC Count 9.6, RBC Count 3.09 (L), Hemoglobin 9.6 (L), Hematocrit 28.5 (L), MCV 92, MCH 31.1, MCHC 33.7, Platelet Count 172, Neutrophil Absolute Count 8.55 (H), Lymphocyte Abs Cnt 0.59 (L), Monocyte Abs Count 0.38, Eosinophil Abs Ct 0.01, Basophil Abs Count 0.01, Imm Gran, Left Shift 0.05, Urea Nitrogen 10, Calcium 8.1 (L), Chloride 101, Creatinine  0.56 (L), Glucose 187 (H), Potassium 3.4 (L), Carbon Dioxide 26 (H), Anion Gap 9, pH 7.39, PCO2 47, PO2 32 (LL), Base excess 3, Bicarbonate 28 (H), Oxygen Saturation 55 (L), Hemoglobin, Whole Blood 9.9 (L), Hematocrit from [REDACTED] 31 (L), Lactate 1.1, Glucose, whole blood 190, Aspartate transaminase 30, Alanine transaminase 38, Bilirubin, Total 3.5 (H), Alkaline Phosphatase 265 (H), Lipase 20, Magnesium 1.6 (L), Albumin 2.1 (L), Total Protein 5.1 (L), PT 30.8 (H), INR 3.0 (H), Bilirubin, Total 3.7 (H), CANCER ANTIGEN 19-9 276 (H)"
   },
   "Clinical_Findings": {
-    "findings": "Patient has a 7.5x3.5x3.7cm mass in the tail of the pancreas with thrombosis of the splenic vein and marked narrowing of the splenic artery. The mass abuts the superior mesenteric artery and shows invasion of the muscularis propria of the stomach (T4 disease). A large lymph node measuring 2.7 cm adjacent to the celiac axis is noted (N1). EUS staging is at least T4, N1. Cytopathology confirms adenocarcinoma. Recent CT imaging shows a pancreatic body/tail mass causing partial bowel obstruction at the ligament of Treitz, with carcinomatosis involving peritoneal and omental implants. There is moderate ascites and biliary obstruction with moderate intrahepatic biliary ductal dilatation. Indeterminate 9mm nodules in both adrenal glands are suspicious for metastatic disease. Physical exam reveals a non-distended abdomen with normal bowel sounds, tenderness in the LLQ, and palpable hepatic edge. Trace edema in the BLE is noted. The patient has a bilirubin of 3.5mg/dL and is currently on a treatment holiday. Imaging and lab results suggest disease progression with new partial bowel obstruction and biliary obstruction."
+    "findings": "Patient has a 7.5x3.5x3.7cm mass in the tail of the pancreas with thrombosis of the splenic vein and marked narrowing of the splenic artery. The mass abuts the superior mesenteric artery and shows invasion of the muscularis propria of the stomach (T4 disease). A large lymph node measuring  2.7 cm adjacent to the celiac axis is noted (N1). EUS staging is at least T4, N1. Cytopathology confirms adenocarcinoma. Recent imaging shows a pancreatic body/tail mass causing partial bowel obstruction at the ligament of Treitz, with carcinomatosis involving peritoneal and omental implants. CT scan demonstrates new small bowel obstruction, moderate ascites, and worsening porta hepatis soft tissue infiltration leading to biliary obstruction. Bilirubin is elevated at 3.5mg/dL. Physical exam reveals a non-distended abdomen with normal bowel sounds, tenderness in the LLQ, palpable hepatic edge, and trace edema in the BLE."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2229,7 +2229,7 @@ RESULTS FOR ROW 12
     "goals_description": ""
   },
   "Response_Assessment": {
-    "response_assessment": "Recent CT imaging shows disease progression with new partial bowel obstruction at the ligament of Treitz and biliary obstruction with moderate intrahepatic biliary ductal dilatation. These findings indicate that the cancer is progressing despite previous treatment."
+    "response_assessment": "The cancer is currently not responding to treatment. Recent imaging shows interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
   },
   "Medication_Plan": {
     "medication_plan": "Palliative care is discussed as the next step, but no specific medications are mentioned for this purpose."
@@ -2291,7 +2291,7 @@ RESULTS FOR ROW 12
     "pancreatic adenocarcinoma with concern for metastatic disease."
   ],
   "Distant Metastasis": [
-    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
+    "New peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;\" \"liver lesions"
   ],
   "Metastasis": [
     "new peritoneal and omental nodularity associated with small volume ascites is concerning for progressive peritoneal carcinomatosis;"
@@ -2303,7 +2303,7 @@ RESULTS FOR ROW 12
     "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
   ],
   "response_assessment": [
-    "restaging scans which showed interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
+    "restaging scans which showed interval disease progression since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass"
   ],
   "medication_plan": [
     "Given these findings, chemotherapy will likely do more harm than good. We therefore discussed the next best step as palliative care."
@@ -2584,7 +2584,7 @@ RESULTS FOR ROW 14
     "lab_plan": "LFTs need to sufficiently normalize before starting chemotherapy."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Request somatic tumor testing of the patient's tumor specimen through the UCSF500 platform to assess for actionable mutations or genetic alterations."
+    "genetic_testing_plan": "Request somatic tumor testing of the patient's tumor specimen through the UCSF500 platform to assess for actionable mutations or other genetic alterations."
   },
   "follow_up_next_visit": {
     "Next clinic visit": "in-person: short-term for clinical and laboratory assessment, including normalizing LFTs, to start chemotherapy ASAP"
@@ -2652,7 +2652,7 @@ RESULTS FOR ROW 14
     "We will arrange short-term in-person follow up for both clinical and laboratory assessment (including making sure her LFTs have sufficiently normalized) to get her started on chemotherapy ASAP."
   ],
   "genetic_testing_plan": [
-    "I will also request somatic tumor testing of the patient's tumor specimen, if there is adequate cellularity, through our in-house UCSF500 platform to assess for the presence of any actionable mutations or other genetic alterations that may inform future treatment options, either using already-approved agents or in the context of clinical trials."
+    "I will also request somatic tumor testing of the patient's tumor specimen, if there is adequate cellularity, through our in-house UCSF500 platform"
   ],
   "Next clinic visit": [
     "We will arrange short-term in-person follow up for both clinical and laboratory assessment (including making sure her LFTs have sufficiently normalized) to get her started on chemotherapy ASAP."
@@ -2853,7 +2853,7 @@ RESULTS FOR ROW 16
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management of the disease."
+    "summary": "Pancreatic adenocarcinoma, clinical stage IIB (cT1c, cN1, cM0), follow-up visit for ongoing management and evaluation of treatment response."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "Pancreatic adenocarcinoma",
@@ -2865,7 +2865,7 @@ RESULTS FOR ROW 16
     "lab_summary": "Alkaline Phosphatase 68, Bilirubin, Total 0.9, Alanine Transaminase 20, Aspartate Transaminase 25, Creatinine 0.46, eGFR if non-African American 90 mL/min, eGFR if African Amer  104 mL/min, WBC Count 9.1, RBC Count 4.15, Hemoglobin 13.0, Hematocrit 37.5, MCV 90, MCH 31.3, MCHC 34.7, Platelet Count 248, Neutrophil Absolute Count 3.79, Lymphocyte Abs Cnt 4.36, Monocyte Abs Count 0.88, Eosinophil Abs Ct 0.03, Basophil Abs Count 0.03, Imm Gran, Left Shift 0.02"
   },
   "Clinical_Findings": {
-    "findings": "CT abdomen/pelvis with contrast on 05/08/2019 shows slight improvement in pancreatic ductal dilatation, currently measuring 9 mm, previously measuring 12 mm. The ill-defined pancreatic mass is no longer seen, likely related to treatment. There is a 1.1 cm left renal enhancing lesion concerning for renal cell carcinoma. No evidence of metastatic disease. CT chest with contrast on 05/08/2019 shows no new findings to suggest intrathoracic metastatic disease. Two subsolid left upper lobe nodules likely represent primary lung adenocarcinoma lesions, with the largest nodule being  16 mm with a 3 mm solid component. Physical exam shows no jaundice, no palpable masses, no ascites, and weight of 40.5 kg (89 lb 3.2 oz)."
+    "findings": "CT abdomen/pelvis with contrast on 05/08/2019 shows slight improvement in pancreatic ductal dilatation, currently measuring 9 mm, previously measuring 12 mm. The ill-defined pancreatic mass is no longer seen, likely related to treatment. There is a 1.1 cm left renal enhancing lesion concerning for renal cell carcinoma. No evidence of metastatic disease. CT chest with contrast on 05/08/2019 shows no new findings to suggest intrathoracic metastatic disease. Two subsolid left upper lobe nodules likely represent primary lung adenocarcinoma lesions as previously described. The largest nodule is 16 mm with a 3 mm solid component. Physical exam shows no jaundice, no palpable masses, no ascites, and weight of 40.5 kg (89 lb 3.2 oz)."
   },
   "Current_Medications": {
     "current_meds": "gemcitabine"
@@ -2909,9 +2909,9 @@ RESULTS FOR ROW 16
     "Advance care": "Not discussed during this visit."
   },
   "Referral": {
-    "Nutrition": "Referral to nutritionist",
+    "Nutrition": "We will refer to nutritionist.",
     "Genetics": "None",
-    "Specialty": "Dental evaluation for periodontal inflammation and a deep pocket associated with her last left lower molar",
+    "Specialty": "Evaluated by her dentist; found to have periodontal inflammation and a deep pocket associated with her last left lower molar, which has been a chronic problem for her. Tooth was irrigated and rinsed with chlorhexidine. Patient to continue to use chlorhexidine rinse BID. No infection noted and ok'ed to continue on chemotherapy.",
     "Others": "None",
     "follow up": "on 05/16/19 with [REDACTED] [REDACTED]"
   },
