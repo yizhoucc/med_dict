@@ -3962,29 +3962,6 @@ def main():
                 resp_sv["response_assessment"] = msg_sv
                 print(f"    [POST-RESPONSE-SURVEILLANCE] resected + surveillance, no active tx → surveillance statement")
 
-        # POST-RESPONSE-AP-DECLINE: when the A/P impression explicitly states the patient's current
-        # trajectory as clinical/symptomatic decline (or progression/deterioration despite therapy),
-        # that physician judgment IS the authoritative response — it must not be overridden by a
-        # "stable/improving" read lifted from a single imaging line. pdac3: A/P "metastatic PDAC ...
-        # but with some evidence concerning of continued clinical/symptomatic decline" yet the response
-        # field said "stable disease based on the 02/16 CT." Prepend the physician's trajectory and keep
-        # the imaging nuance. General oncology rule (A/P summary outranks one scan line). [round5 #C, pdac3]
-        ra_d = keypoints.get("Response_Assessment", {})
-        if isinstance(ra_d, dict):
-            rv_d = str(ra_d.get("response_assessment", "") or "")
-            rl_d = rv_d.lower()
-            ap_low_d = (assessment_and_plan or "").lower()
-            decline_m = re.search(
-                r'continued\s+clinical|clinical[/ ]?(?:and\s+)?symptomatic\s+decline|symptomatic\s+decline'
-                r'|clinically\s+declin|progression\s+despite|worsening\s+despite|continued\s+(?:disease\s+)?progression'
-                r'|ongoing\s+(?:clinical\s+)?decline|deteriorat', ap_low_d)
-            says_stable = re.search(r'\bstable\b|\bimprov|\bresponding\b|partial response', rl_d)
-            already_d = re.search(r'declin|deteriorat|progress|worsen', rl_d)
-            if decline_m and says_stable and not already_d:
-                ra_d["response_assessment"] = ("Continued clinical/symptomatic decline despite current therapy "
-                                               "(per the physician's impression). " + rv_d)
-                print(f"    [POST-RESPONSE-AP-DECLINE] prepended physician decline trajectory over '{rv_d[:40]}'")
-
         # POST-RESPONSE-GENOMIC: Remove genomic test results from response_assessment [v29] [breast-only]
         # Oncotype/MammaPrint are prognostic tools, not treatment response assessments
         resp = keypoints.get("Response_Assessment", {})
@@ -4045,7 +4022,7 @@ def main():
                 RESP_KW = re.compile(r'(?i)(stable|progress|partial response|complete response|respond|'
                                      r'no evidence of (disease|recurrence)|\bned\b|decreas|increas|improv|'
                                      r'new (lesion|metast)|resolution|regress|no response|mixed response|'
-                                     r'remission|tolerat)')
+                                     r'remission|tolerat|declin|deteriorat|worsen)')
                 if len(kept_cz) > 2 or len(" ".join(kept_cz)) > 400:
                     concl_cz = [s for s in kept_cz if RESP_KW.search(s)]
                     if concl_cz:
@@ -4059,6 +4036,29 @@ def main():
                         new_rv += "."
                     resp_cz["response_assessment"] = new_rv
                     print(f"    [POST-RESPONSE-COMPRESS] {len(rv)}→{len(new_rv)} chars (dropped plan/verbose)")
+
+        # POST-RESPONSE-AP-DECLINE: when the A/P impression explicitly states the patient's current
+        # trajectory as clinical/symptomatic decline (or progression/deterioration despite therapy), that
+        # physician judgment IS the authoritative response — it must not be overridden by a "stable/
+        # improving" read lifted from a single imaging line. pdac3: A/P "metastatic PDAC ... but with some
+        # evidence concerning of continued clinical/symptomatic decline" yet the response said "stable
+        # disease based on the 02/16 CT." Prepend the physician's trajectory, keep the imaging nuance.
+        # Runs AFTER COMPRESS so the prepend is final (COMPRESS would otherwise drop it). [round5 #C, pdac3]
+        ra_d = keypoints.get("Response_Assessment", {})
+        if isinstance(ra_d, dict):
+            rv_d = str(ra_d.get("response_assessment", "") or "")
+            rl_d = rv_d.lower()
+            ap_low_d = (assessment_and_plan or "").lower()
+            decline_m = re.search(
+                r'continued\s+clinical|clinical[/ ]?(?:and\s+)?symptomatic\s+decline|symptomatic\s+decline'
+                r'|clinically\s+declin|progression\s+despite|worsening\s+despite|continued\s+(?:disease\s+)?progression'
+                r'|ongoing\s+(?:clinical\s+)?decline|deteriorat', ap_low_d)
+            says_stable = re.search(r'\bstable\b|\bimprov|\bresponding\b|partial response', rl_d)
+            already_d = re.search(r'declin|deteriorat|progress|worsen', rl_d)
+            if decline_m and says_stable and not already_d:
+                ra_d["response_assessment"] = ("Continued clinical/symptomatic decline despite current therapy "
+                                               "(per the physician's impression). " + rv_d)
+                print(f"    [POST-RESPONSE-AP-DECLINE] prepended physician decline trajectory over '{rv_d[:40]}'")
 
         # POST-GOALS-FINAL: final goals-direction pass, AFTER Stage/DistMet/response are all finalized
         # (fixes the earlier ordering bug where goals hooks ran before DistMet was set). Two corrections:
