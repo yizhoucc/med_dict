@@ -3934,6 +3934,32 @@ def main():
                     resp["response_assessment"] = "Not yet on treatment — no response to assess."
                     print(f"    [POST-RESPONSE-PRETREATMENT] Corrected 'On treatment' → Not yet on treatment (consultation/just-prescribed, no started-treatment signal)")
 
+        # POST-RESPONSE-PRETREATMENT-DESC: a treatment-naive patient has no response to assess. When the
+        # response field instead holds a disease DESCRIPTION (lesion sizes/SUV/"growth of") and the visit is
+        # clearly pre-treatment (current_meds empty + "recommended/unsure about starting/can start chemo",
+        # no started-treatment signal), replace it with the honest "not yet on treatment" statement. b4:
+        # treatment-naive recurrence, response = PET tumor-growth paragraph while A/P says "unsure about
+        # starting chemo as we recommended today." [round5 P2, b4]
+        resp_pd = keypoints.get("Response_Assessment", {})
+        if isinstance(resp_pd, dict):
+            rl_pd = (resp_pd.get("response_assessment", "") or "").lower()
+            is_desc = (bool(re.search(r'\d+\s*(?:\.\d+)?\s*(?:cm|mm)\b|\bsuv\b|\bmeasures?\b|growth of|\blesion\b|\bmass\b', rl_pd))
+                       and not re.search(r'stable|partial response|complete response|\bresponding\b'
+                                         r'|no evidence of (?:disease|recurrence|residual)'
+                                         r'|progression (?:on|despite|while)|decreas\w* (?:on|after|with)'
+                                         r'|increas\w* (?:on|despite|while)|tolerat', rl_pd))
+            if is_desc and rl_pd.strip() not in ("", "not mentioned", "not assessed at this visit."):
+                cur_meds_pd = (keypoints.get("Current_Medications", {}).get("current_meds", "") or "").strip()
+                ap_pd = (assessment_and_plan or "").lower()
+                pretx_pd = bool(re.search(r'unsure about starting|can start (?:chemo|treatment|her|him)'
+                                          r'|will start (?:chemo|treatment)|recommend\w*\s+(?:today\s+)?'
+                                          r'(?:that\s+)?(?:she|he|we|starting|chemo)|plan to start|ok to start', ap_pd))
+                started_pd = bool(re.search(r'c\d+\s*d\d+|cycle\s*\d|s/p\s+\d+\s+(?:cycle|cycles)'
+                                            r'|currently (?:on|receiving)|continue (?:abraxane|gemcitabine|chemo|treatment)', ap_pd))
+                if not cur_meds_pd and pretx_pd and not started_pd:
+                    resp_pd["response_assessment"] = "Not yet on treatment — no response to assess."
+                    print(f"    [POST-RESPONSE-PRETREATMENT-DESC] pre-tx disease description → 'Not yet on treatment'")
+
         # POST-RESPONSE-SURVEILLANCE: a patient s/p resection on post-surgical surveillance (no active
         # anticancer drug) is neither "on treatment" nor "not yet on treatment" — treatment is complete
         # and they are being monitored. State the surveillance, and surface a rising-marker / recurrence
