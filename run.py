@@ -1236,6 +1236,32 @@ def main():
                     rfv["Patient type"] = "Follow up"
                     print(f"    [POST-PATIENT-TYPE-ONGOING] mid-regimen at clinic → 'Follow up' (was New patient)")
 
+        # POST-PATIENT-TYPE-NEW: explicit new-patient framing — "seeing as a new patient", "INITIAL ...
+        # VISIT", "new patient visit/consult", "establish(ing) care", "second opinion", "presents in/for
+        # consultation" — overrides an LLM "Follow up". The mirror of POST-PATIENT-TYPE-ONGOING; the
+        # phrase "follow-up of his cancer" describes the disease (not the visit) and fools the model
+        # (pdac11: "INITIAL GI MEDICAL ONCOLOGY VISIT ... I am seeing as a new patient ... second opinion
+        # and consultation" was labeled Follow up). Runs last so the explicit signal wins. [round5 #D, pdac11]
+        if isinstance(rfv, dict):
+            pt3 = str(rfv.get("Patient type", "") or "").lower().strip()
+            if pt3 in ("follow up", "follow-up", "followup"):
+                nap3 = (note_text or "") + " " + (assessment_and_plan or "")
+                # require a PRESENT-TENSE this-visit signal. A dated timeline entry "MM/DD/YY: Initial
+                # consultation ..." is a PAST history recap (pdac10/13/16/17 are genuine follow-ups whose
+                # notes recap the initial consult) — must NOT flip those. So the bare "initial consult" is
+                # excluded; we accept only this-visit framing.
+                new_sig = re.search(
+                    r'seeing\s+(?:him|her|the patient|you)?\s*as\s+a\s+new\s+patient'
+                    r'|new\s+patient\s+(?:visit|consult(?:ation)?|evaluation)'
+                    r'|presents?\s+(?:today\s+)?(?:for|in)\s+(?:a\s+)?(?:second\s+opinion|2nd\s+opinion|consultation|new\s+patient)'
+                    r'|here\s+(?:today\s+)?(?:for|as)\s+(?:a\s+)?(?:new\s+patient|second\s+opinion|consultation)',
+                    nap3, re.I)
+                # OR the note opens with an "INITIAL ... VISIT" header (first 80 chars, no preceding date)
+                header_new = bool(re.search(r'^["\s]*initial\b[^.\n]{0,40}\bvisit\b', nap3[:80], re.I))
+                if new_sig or header_new:
+                    rfv["Patient type"] = "New patient"
+                    print(f"    [POST-PATIENT-TYPE-NEW] explicit this-visit new-patient framing → 'New patient' (was Follow up)")
+
         # POST-REFERRAL: Search full note for referral patterns (plan extraction only sees A/P)
         referral = keypoints.get("Referral", {})
         if isinstance(referral, dict):
@@ -4972,6 +4998,22 @@ def main():
                 print(f"    [POST-HER2-CHECK] Appended missing HER2 status: {her2_found}")
                 print(f"      before: '{old_val}'")
                 print(f"      after:  '{type_val}'")
+
+        # POST-TYPE-RECEPTOR-PCT: when the note states quantified ER/PR percentages in the canonical
+        # adjacent pathology phrasing ("ER >95%, PR 25%") and Type_of_Cancer carries only a generic
+        # "ER+", append the percentages — BL surfaced the quantified values and the precision is
+        # clinically useful (b10). The "ER N%, PR N%" pattern is specific enough to be very low-risk. [round5 #D, b10]
+        cancer_rp = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_rp, dict):
+            tv_rp = str(cancer_rp.get("Type_of_Cancer", "") or "")
+            if re.search(r'ER\+', tv_rp) and not re.search(r'\bER\s*[>≥]?\s*\d{1,3}\s*%', tv_rp):
+                hay_rp = (note_text or "") + " " + (assessment_and_plan or "")
+                m_rp = re.search(r'\bER\s*([>≥]?\s*\d{1,3}\s*%)\s*,?\s*PR\s*([>≥]?\s*\d{1,3}\s*%)', hay_rp, re.I)
+                if m_rp:
+                    er_p = re.sub(r'\s+', '', m_rp.group(1))
+                    pr_p = re.sub(r'\s+', '', m_rp.group(2))
+                    cancer_rp["Type_of_Cancer"] = tv_rp.rstrip('. ') + f" (ER {er_p}, PR {pr_p})"
+                    print(f"    [POST-TYPE-RECEPTOR-PCT] appended quantified receptors: ER {er_p}, PR {pr_p}")
 
         # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
