@@ -1130,6 +1130,14 @@ def main():
                     ihc_re = re.compile(
                         r'\b(er|pr|her2|her-2|ki-?67|fish|ihc|erbb2)\b|cent\s*17|sig/nuc|copy #|copy number|amplification',
                         re.IGNORECASE)
+                    # surgical-pathology findings (LVI/margins/DCIS/node counts/micromet/grade/tumor size) also
+                    # contaminate genetic_testing_results — they belong in findings, not the molecular field
+                    # (b5: "LVI, margins negative, focal high grade DCIS ...; 0/8 LN+ (micrometastasis) ..."
+                    # mixed with the real genomic content MammaPrint + Oncotype). Drop these too. [round5 P2, b5]
+                    path_re = re.compile(
+                        r'\blvi\b|lymphovascular|\bmargins?\b|\bdcis\b|\d+\s*/\s*\d+\s*(?:ln\b|lymph|nodes?|sln)'
+                        r'|micromet|extracapsular|extranodal|tumor size|\bgrade\b|invasive\s+(?:ductal|lobular|mammary)'
+                        r'|\bnecrosis\b|in situ|sentinel', re.IGNORECASE)
                     if not any(k in gval_low for k in GENETIC_KW):
                         gtr["genetic_testing_results"] = "No genetic testing results in note."
                         print(f"    [POST-GENETIC-RESULTS-IHC] Cleared non-genetic (IHC/pathology) value: '{gval[:60]}'")
@@ -1142,8 +1150,8 @@ def main():
                                 continue
                             s_low = s_strip.lower()
                             s_genetic = any(k in s_low for k in GENETIC_KW)
-                            if ihc_re.search(s_strip) and not s_genetic:
-                                continue  # drop IHC-receptor-only segment
+                            if (ihc_re.search(s_strip) or path_re.search(s_strip)) and not s_genetic:
+                                continue  # drop IHC-receptor-only OR surgical-pathology-only segment
                             kept.append(s_strip)
                         if not kept:
                             gtr["genetic_testing_results"] = "No genetic testing results in note."
@@ -5117,6 +5125,24 @@ def main():
                     pr_p = re.sub(r'\s+', '', m_rp.group(2))
                     cancer_rp["Type_of_Cancer"] = tv_rp.rstrip('. ') + f" (ER {er_p}, PR {pr_p})"
                     print(f"    [POST-TYPE-RECEPTOR-PCT] appended quantified receptors: ER {er_p}, PR {pr_p}")
+
+        # POST-TYPE-PR-PENDING: the note states PR (progesterone receptor) is PENDING (result not back),
+        # but the model asserted "PR+" in Type_of_Cancer — overstating a not-yet-resulted receptor. When
+        # the note says PR pending and gives NO definitive PR result, correct "PR+/PR positive" to
+        # "PR pending". b11: ">90% ER positive, PR pending" but Type said "ER+/PR+". [round5 P2, b11]
+        cancer_pp = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_pp, dict):
+            tv_pp = str(cancer_pp.get("Type_of_Cancer", "") or "")
+            if re.search(r'\bPR\s*\+|\bPR\s+positive', tv_pp, re.I):
+                hay_pp = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
+                pr_pending = re.search(r'\b(?:pr|progesterone receptor)\b\s*(?:status\s*)?(?:is\s*|:\s*|\(\s*)?pending'
+                                       r'|\bprogesterone\b[^.]{0,20}pending', hay_pp)
+                pr_definitive = re.search(r'\b(?:pr|progesterone receptor)\b\s*(?:status\s*)?(?:is\s*|:\s*)?'
+                                          r'(?:positive|negative|\d{1,3}\s*%|>\s*\d|<\s*\d)', hay_pp)
+                if pr_pending and not pr_definitive:
+                    new_pp = re.sub(r'\bPR\s*\+|\bPR\s+positive', 'PR pending', tv_pp, flags=re.I)
+                    cancer_pp["Type_of_Cancer"] = new_pp
+                    print(f"    [POST-TYPE-PR-PENDING] PR result pending → 'PR pending' (was '{tv_pp[:40]}')")
 
         # POST-HER2-VERIFY: If note mentions HER2+ drugs but extraction says HER2-, override [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
