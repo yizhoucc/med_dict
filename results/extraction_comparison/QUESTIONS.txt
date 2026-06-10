@@ -1,0 +1,35 @@
+PL vs BL 公用题库（19 题）
+====================================
+每个 sample 都用这同一组题；对每个 sample、每道题判：PL更好 / 打平 / PL不如BL。
+深度分级：优=需医学知识才能答对  评=中等  差=普通人凭英语即可答（医生兴趣低）
+
+【优 · 需医学知识】(13 题)
+Q1  现用药 current_meds        当前在用的【抗癌药】是哪些？（须把降压/降糖/止痛等非癌家用药、已停药、计划未用药排除）
+Q2  分期 Stage                 癌症的分期是什么？（可从 T/N/M 或肿瘤大小+淋巴结推断，不轻易写 Not mentioned）
+Q3  远处转移 Distant Metastasis 有无远处转移、转移到哪？（腋窝/锁骨上=区域，不算远处；疑似≠确诊）
+Q4  转移(含区域) Metastasis     有无淋巴结/区域受累？（区分区域淋巴结 vs 远处转移）
+Q5  疗效 Response              当前治疗的疗效如何？（副作用≠疗效；未开始治疗→无可评估）
+Q6  分型/受体 Type (ER/PR/HER2) 病理类型与受体状态（ER/PR/HER2 三项；双侧需分别写）
+Q7  分子/遗传结果 Genetic results 已出的分子/基因检测结果（如 BRCA、MMR/MSI、CA19-9 non-secretor 等）
+Q8  基因检测计划 Genetic plan   计划做哪些基因/分子检测（Oncotype、UCSF500、germline panel 等）
+Q9  支持用药 supportive_meds    支持性用药（止吐、止痛、胰酶、骨改良药等，非抗癌）
+Q10 操作计划 Procedure plan     计划的操作/手术（port、活检、手术等）
+Q11 影像计划 Imaging plan       计划的影像检查（CT/MRI/PET/DEXA 等）
+Q12 化验计划 Lab plan           计划的化验（CA19-9 随访、电解质监测等）
+Q13 用药计划 Medication plan     计划/续用的药物方案
+
+【评 · 中等】(2 题)
+Q14 近期治疗变化 recent_changes  最近治疗方案的变更（起始/停用/换药/暂停）
+Q15 就诊类型 Patient type        新患者 vs 随访（初诊会诊/第二意见=New patient）
+
+【差 · 普通人可答】(4 题)
+Q16 治疗目标 goals（方向）        治疗意图是 curative 还是 palliative
+Q17 就诊原因 summary             本次就诊的概述
+Q18 化验摘要 lab_summary         化验结果摘要（不含影像/病理/基因）
+Q19 检查发现 findings            客观检查发现（不写主观症状）
+
+====================================
+评分约定：
+- PL/BL 值相同 → 打平（值相同）
+- 二者都为空/都不适用 → 该 sample 不计此题（N/A）
+- 否则按临床忠实度/完整度判 PL更好 / 打平 / PL不如BL
