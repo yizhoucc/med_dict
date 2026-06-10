@@ -1,0 +1,689 @@
+PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseline
+判定: PL更好 / 打平 / PL不如BL    深度: 优=需医学知识 评=中 差=普通人可答
+================================================================================
+
+### 乳腺Breast ROW 1 (coral_idx=20)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空——note的med列表全是降压(amlodipine/valsartan)、降糖(metformin/glipizide/insulin)、眼药、阿司匹林等非癌家用药，无任何抗癌药；BL却把这一堆家用药全倒进current_meds，违反'仅列抗癌药'规则。
+      PL: （空）
+      BL: acetaminophen, amLODIPine, aspirin, atorvastatin, bisoprolol, blood glucose test strips, brimonidine, calcium carbonate-vitamin D, glipiZIDE, insulin glargine, insulin syringe-needle, lancets, latanoprost, metFORMIN, valsartan, ALPHAGAN P, docusate sodium, loratadine, mometasone, nitroGLYCERIN, olopatadine
+  Q2 [优] 转移(含区域) Metastasis  —— 判定: PL更好
+      理由: PL'Yes, regional lymph node(s)'正确——病理1/2前哨淋巴结阳性(1.2cm)；BL无独立Metastasis字段。
+      PL: Yes, regional lymph node(s)
+      BL: （空）
+  Q3 [优] 疗效 Response  —— 判定: 打平
+      理由: 两者都正确表达'尚未治疗无可评估'(PL:'Not yet on treatment';BL:'Not applicable at this visit')。
+      PL: Not yet on treatment — no response to assess.
+      BL: Not applicable at this visit
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Stage IIB (pT2N1a)'更完整——note病理AJCC stage pT2N1a且A/P写Stage II；BL只写'pT2N1a'未给分期。
+      PL: Stage IIB (pT2N1a)
+      BL: pT2N1a
+  Q5 [优] 分型/受体 Type (ER/PR/HER2)  —— 判定: 打平
+      理由: 两者都给出ER-/PR-/HER2- triple negative IDC grade 3，与病理一致，实质等价。
+      PL: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma
+      BL: Invasive ductal carcinoma, SBR grade 3, triple negative (ER negative, PR negative, HER2 negative)
+  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL写curative正确——note明确Stage II(T2N1)TNBC，'we generally provide chemotherapy to patients with Stage II TNBC'是根治意图；BL写palliative错误，早期可手术TNBC不是姑息。
+      PL: curative
+      BL: palliative
+
+### 乳腺Breast ROW 2 (coral_idx=21)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: 打平
+      理由: PL留空、BL写zoledronic acid——唑来膦酸是骨改良/支持药非抗癌药，严格说不应进current_meds，判TIE。
+      PL: （空）
+      BL: Zoledronic acid
+  Q2 [优] 影像计划 Imaging plan  —— 判定: PL更好
+      理由: PL'PET/CT scan and MRI of her brain'更完整；BL只提MRI且说成已完成，遗漏PET/CT计划。
+      PL: PET/CT scan and MRI of her brain to evaluate falling spells
+      BL: MRI of the brain was obtained and showed no evidence of malignancy.
+  Q3 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL把zoledronic acid归入supportive_meds正确——'started her on zoledronic acid because of her osteoporosis'；BL写'None mentioned'遗漏。
+      PL: Zoledronic acid
+      BL: None mentioned
+  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: PL'New patient'正确——note开头'I had the pleasure of seeing this patient in consultation'是初诊会诊；BL'Follow up'错误。
+      PL: New patient
+      BL: Follow up
+  Q5 [差] 治疗目标 goals（方向）  —— 判定: 打平
+      理由: PL写curative对局部区域复发不可切病例偏乐观，BL写'hormone therapy'答非所问，两者各有瑕疵。
+      PL: curative
+      BL: hormone therapy
+
+### 乳腺Breast ROW 3 (coral_idx=22)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空——当前用药是clotrimazole-betamethasone(抗真菌)、ibuprofen、omeprazole、dyazide等家用药，无抗癌药；BL把这些全列入current_meds。
+      PL: （空）
+      BL: clotrimazole-betamethasone (LOTRISONE), ibuprofen (ADVIL,MOTRIN), omeprazole (PRILOSEC), triamterene-hydrochlorothiazide (DYAZIDE), prednisone (DELTASONE)
+  Q2 [优] 影像计划 Imaging plan  —— 判定: PL更好
+      理由: PL'No imaging planned'正确；BL把已完成的MRI/research biopsy/Echo和pending mammaprint塞进imaging_plan，混淆既往与计划。
+      PL: No imaging planned.
+      BL: MRI, research biopsy, and Echo completed; mammaprint pending.
+  Q3 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL更完整——除触诊4x4cm肿块外，还纳入MRI 3.5cm主病灶+卫星灶、PET腋窝淋巴结、2.3cm肾上腺结节等客观影像；BL仅一句体检触诊。
+      PL: Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and HER2 FISH negative (ratio 1.2). Tumor size is 3.5 x 3.2 x 2.6 cm with two small satellite masses located 12-15 mm anterior/superior to the index mass. MRI shows a heterogenous hypermetabolic right breast mass consistent with known breast carcinoma. PET/CT reveals minimally hypermetabolic non-enlarged bilateral axillary lymph nodes. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam reveals an abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm. No palpable lymphadenopathy, no hepatosplenomegaly, and no other significant findings on physical exam.
+      BL: Abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm.
+
+### 乳腺Breast ROW 4 (coral_idx=23)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空——当前用药全是acetaminophen、alendronate、维生素、baclofen、benzonatate(止咳)等家用药；BL倒入一长串家用药。
+      PL: （空）
+      BL: Acetaminophen, Alendronate, Baclofen, Benzonatate, Clotrimazole, Cyanocobalamin, Dextran 70-hypromellose, Ergocalciferol, Loratadine, Melatonin, Mometasone, Multivitamin, Omeprazole, Promethazine-dextromethorphan, Blood pressure monitor, Menthol, Ventolin HFA
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL'BRCA1 genetic carrier'+说明无其他突变；BL仅'BRCA1 genetic carrier'，PL略全。
+      PL: BRCA1 genetic carrier. No specific mutations or variants mentioned beyond being a BRCA1 carrier. No other genetic or molecular testing results detailed in the note.
+      BL: BRCA1 genetic carrier.
+  Q3 [优] 转移(含区域) Metastasis  —— 判定: PL更好
+      理由: PL给Metastasis:No和Distant:No('No evidence of hypermetabolic metastatic disease')；BL缺Metastasis字段。
+      PL: No
+      BL: （空）
+  Q4 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL'尚未治疗无可评估'正确；BL把病灶从1.2x0.7增大到2.7x1.7cm当疗效——患者尚未开始化疗，是基线进展非治疗反应，答非所问。
+      PL: Not yet on treatment — no response to assess.
+      BL: The cancer has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm.
+  Q5 [优] 分型/受体 Type (ER/PR/HER2)  —— 判定: PL更好
+      理由: PL'ER-/PR-/HER2- (TNBC)'综合两处活检均三阴，与CLINICAL HISTORY'triple negative right breast IDC'一致；BL只摘一个活检'ER 1%'未点明三阴。
+      PL: ER-/PR-/HER2- (TNBC) invasive ductal carcinoma (IDC) with local recurrence (right lateral breast mass)
+      BL: Right breast invasive ductal carcinoma (IDC), grade 3, ER 1%, PR negative, Her2 0IHC/FISH negative
+
+### 乳腺Breast ROW 5 (coral_idx=24)
+  Q1 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL'MP Low Risk (+0.321), Oncotype DX RS pending'有据；BL'No genetic testing results'遗漏了MammaPrint结果和Oncotype待出。
+      PL: MP Low Risk (+0.321). Oncotype DX RS is pending.
+      BL: No genetic testing results in note
+  Q2 [优] 影像计划 Imaging plan  —— 判定: PL更好
+      理由: PL'DEXA to assess bone health'正确('she would need a DEXA')；BL写None遗漏。
+      PL: DEXA to assess current bone health
+      BL: None
+  Q3 [优] 转移(含区域) Metastasis  —— 判定: PL更好
+      理由: PL'Yes, regional lymph node(s)'正确——'positive LN, even as a micrometastasis'(左腋0.7mm)；BL缺Metastasis字段。
+      PL: Yes, regional lymph node(s)
+      BL: （空）
+  Q4 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL纳入双侧病理+MRI影像，客观全面；BL只列体检阴性所见，遗漏全部病理与影像发现。
+      PL: Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy.
+      BL: No masses bilaterally, no lymphadenopathy, no tenderness, no distention, no HSM, no edema, good strength throughout, no rashes or lesions.
+  Q5 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'正确——早期可切乳腺癌辅助化疗+内分泌是根治意图；BL写'adjuvant'(治疗时机非意图)，答非所问。
+      PL: curative
+      BL: adjuvant
+
+### 乳腺Breast ROW 6 (coral_idx=25)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空；BL把ergocalciferol/metformin/JOLIVETTE/眼药水/ondansetron等家用药全列为current_meds。
+      PL: （空）
+      BL: ergocalciferol, vitamin D2, metFORMIN, omega-3 fatty acids-fish oil, GAVILYTE-G, JOLIVETTE, ondansetron, prednisoLONE acetate, PROLENSA, VIGAMOX
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL更准——PET'suspicious for bone metastasis'、需活检'definitive stage IV'即疑似未确诊，PL写'Suspected'具体到left ilium/sacral ala；BL写'Yes (bone metastasis)'把疑似当确诊。
+      PL: Suspected to left ilium and bilateral sacral ala
+      BL: Yes (bone metastasis)
+  Q3 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL正确'未开始治疗无可评'；BL写'Anticipated excellent response'是对未来的预期而非当前疗效，答非所问。
+      PL: Not yet on treatment — no response to assess.
+      BL: Anticipated excellent response and possible long-term disease control.
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Suspected Stage IV (pending confirmation)'更精确呼应原文'biopsy for definitive stage IV diagnosis'。
+      PL: Suspected Stage IV (pending confirmation)
+      BL: Not definitively staged yet, suspected Stage IV due to bone metastasis.
+  Q5 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL完整列出病理(IDC G2,ER-,PR-,HER2 3+,FISH 13)+各项影像+体检；BL仅一句概括影像。
+      PL: Pathology results: IDC G2, no LVI, ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%. Imaging findings: Right breast core biopsy shows a 2.2 cm mass with adjacent architectural distortion and nodularity; ultrasound shows a 1.6 cm mass at 10:00, another 1 cm mass, and a 0.5 cm adjacent mass; suspicious right axillary node; right axillary LN FNA: +metastatic breast adenocarcinoma; Breast MRI shows multiple right breast masses, enlarged level 1 and level 2 axillary LNs; PET CT shows a solitary small focus of hypermetabolism in left ilium, right breast mass, multiple right axillary and subpectoral lymph nodes consistent with lymph node metastases, and a 3.4 x 2.6 cm hyperattenuating and mildly hypermetabolic lesion around the left carotid artery bifurcation; MRI Pelvis shows at least 3 rounded foci of signal abnormality and enhancement involving the left iliac bone and bilateral sacral ala, suspicious for osseous metastatic disease; MR Face/Neck shows an avidly enhancing left carotid bifurcation mass, suggestive of a carotid body paraganglioma. Physical exam findings: 7x5 cm mass in RUOQ, mobile, inverted right nipple, multiple right axillary nodes, largest 2.5 cm and mobile.
+      BL: Multiple right breast masses, enlarged right axillary and subpectoral lymph nodes, suspicious left iliac bone and bilateral sacral ala foci, and a carotid body paraganglioma.
+
+### 乳腺Breast ROW 7 (coral_idx=26)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL精确仅列抗癌药pembrolizumab+abraxane；BL把albuterol/ambien/morphine/oxycodone/rivaroxaban等十余种支持/家用药全列入。
+      PL: pembrolizumab, abraxane
+      BL: Albuterol, Ambien CR, Brimonidine, Cyclobenzaprine, Lorazepam, Morphine, OxyCodone, Tramadol, Esomeprazole, Prochlorperazine, Rivaroxaban, Simethicone, Naloxone
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL完整列出MSH2突变阳性+BRCA等多基因阴性panel；BL仅'Positive for MSH2 mutation'遗漏阴性panel。
+      PL: Germline mutation testing positive for MSH2 c.1906G>C (p.Ala636Pro). Genetic testing 05/19/18: Negative for BRCA 1/2, ATM, CDH1, CHEK2, PALB2, PTEN, STK11, TP53. Lynch syndrome panel (blood): Positive for MSH2 c.1906G>C (p.Ala636Pro).
+      BL: Positive for MSH2 mutation
+  Q3 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Stage IV (metastatic)'——原文'newly diagnosed metastatic breast cancer to liver and nodes'肝转移即IV期；BL写'Not specified'遗漏。
+      PL: Stage IV (metastatic)
+      BL: Not specified
+  Q4 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL列客观影像/体检发现；BL列的全是主观症状(GERD/恶心/疲劳/疼痛/麻木)，答非所问。
+      PL: Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The patient has a hypoenhancing caudate lobe lesion that has markedly increased in size since prior imaging. Additional hypoattenuating, hypermetabolic segment VII lesion is noted. The patient has a right pectoralis soft tissue mass with internal calcifications and a right subpectoral lymph node with hypermetabolic activity. A lytic S1 vertebral body lesion is also present. Physical exam shows no cervical, supraclavicular, or axillary lymphadenopathy. Axillary pain has improved. No masses are palpable in the breast. Bowel sounds are normal, and there is no distention or organomegaly. No point tenderness over bones or joints is noted. The patient is alert and oriented, with no focal motor or sensory deficits.
+      BL: Worsening GERD, nausea, fatigue, right axillary pain, right lumbosacral pain, new aching in arms and legs, numbness/tingling in toes and fingertips, leg cramping at night.
+
+### 乳腺Breast ROW 8 (coral_idx=27)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空（尚未开始抗癌治疗）；BL把acetaminophen/atenolol/omeprazole/simvastatin等家用药列入。
+      PL: （空）
+      BL: acetaminophen, ascorbic acid, atenolol, docusate sodium, gabapentin, ibuprofen, multivitamin, omeprazole, simvastatin
+  Q2 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: PL'New patient'正确——'presents to establish Oncology care'即首次肿瘤科建卡；BL误判'Follow up'。
+      PL: New patient
+      BL: Follow up
+  Q3 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'符合早期(IIA)辅助治疗决策树；BL写'adjuvant'(治疗时序非意图)，答非所问。
+      PL: curative
+      BL: adjuvant
+
+### 乳腺Breast ROW 9 (coral_idx=28)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空（gabapentin镇痛、HCTZ降压均非抗癌药，当前未用抗癌药）；BL列gabapentin+HCTZ。
+      PL: （空）
+      BL: gabapentin, hydrochlorothiazide
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL'Suspected, to left cervical LN'贴原文'level Vb LN concerning for metastatic disease'(疑似)；BL'Not sure'过于含糊。
+      PL: Suspected, to left cervical LN
+      BL: Not sure
+  Q3 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL'未开始治疗无可评'正确；BL写'Unresectable recurrence...possibly metastatic'是诊断描述非疗效，答非所问。
+      PL: Not yet on treatment — no response to assess.
+      BL: Unresectable recurrence, possibly considered metastatic in context of a level Vb LN.
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Originally Stage III (T3N2), Suspected Stage IV'同时保留原分期与当前疑似升期；BL仅'Stage III (T3N2)'遗漏疑似升级。
+      PL: Originally Stage III (T3N2), Suspected Stage IV (pending confirmation)
+      BL: Stage III (T3N2)
+  Q5 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: PL'New patient'正确——'presenting in consultation...to establish care'；BL误判'Follow up'。
+      PL: New patient
+      BL: Follow up
+
+### 乳腺Breast ROW 10 (coral_idx=29)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空；BL列Cetrorelix/Menotropins(取卵促排)+Tamoxifen——生育保存用药非当前抗癌方案，且尚未开始化疗。
+      PL: （空）
+      BL: Cetrorelix acetate, Menotropins, Tamoxifen
+  Q2 [优] 影像计划 Imaging plan  —— 判定: PL不如BL
+      理由: BL更全，列echo/EKG(04/23)+Mammi/PET(04/29)；PL仅列'Mammi/PET on 05/01/17'遗漏echo/EKG。
+      PL: Mammi/PET on 05/01/17
+      BL: Echocardiogram and EKG on 04/23/17, Mammoprint/PET on 04/29/17
+  Q3 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'符合早期(II期)新辅助治疗意图；BL写'neoadjuvant chemotherapy'(治疗时序非意图)，答非所问。
+      PL: curative
+      BL: neoadjuvant chemotherapy
+
+### 乳腺Breast ROW 11 (coral_idx=30)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：amlodipine/gabapentin/tylenol等均为家用非抗癌药；BL把全部家用药倒进current_meds。
+      PL: （空）
+      BL: amLODIPine (NORVASC), gabapentin (NEURONTIN), acetaminophen (TYLENOL), blood pressure monitor KIT, cetirizine (ZYRTEC), cyclobenzaprine (FLEXERIL), ferrous sulfate, heating pads, lidocaine (XYLOCAINE), naproxen (NAPROSYN)
+  Q2 [优] 基因检测计划 Genetic plan  —— 判定: 打平
+      理由: 两者都写None planned，note确实无基因检测计划，等价。
+      PL: None planned.
+      BL: None
+  Q3 [优] 分型/受体 Type (ER/PR/HER2)  —— 判定: PL更好
+      理由: PL更完整：写ER+/PR pending/HER2 not tested；BL只写ER+/PR pending漏HER2状态。
+      PL: ER+/PR pending ductal carcinoma in situ (DCIS), HER2: not tested
+      BL: Left breast DCIS, intermediate nuclear grade, cribriform and micropapillary patterns, ER positive, PR pending
+  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: PL'New patient'正确——这是首次med onc会诊讨论辅助内分泌治疗('discussion of potential adjuvant anti-hormonal therapy')；BL'Follow up'错误。
+      PL: New patient
+      BL: Follow up
+
+### 乳腺Breast ROW 12 (coral_idx=31)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：原文'No current outpatient prescriptions on file'，所列baclofen/carvedilol/diltiazem/warfarin为住院非癌药；BL倒入。
+      PL: （空）
+      BL: simvastatin (ZOCOR) 20 mg tablet, LORazepam (ATIVAN) 1 mg tablet (not currently taking)
+  Q2 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL更全面：详列US/MRI/PET肿块尺寸与病理ER/PR/HER2/Ki67及体检；BL仅一句概括。
+      PL: Pathology results: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%. Imaging findings: Right breast ultrasound shows an irregular solid mass (2.4 x 1.5 x 1.5 cm) with spiculated margins in lower outer right breast at  7:00 position, 5 cm from nipple, and a second smaller irregular solid mass (1.0 x 1.0 x 0.7 cm) with spiculated margins in lower outer right breast at 8:00 position, 5 cm from nipple. Breast MRI reveals an irregularly shaped mass (2.2 x 2.3 x 2.0 cm) with spiculated margins in lower outer right breast corresponding to the 7:00 position mass on ultrasound and a second irregular enhancing mass (1.5 x 1.2 x 1.8 cm) slightly superior and lateral to the biopsy-proven carcinoma. PET/CT shows no evidence of metastatic disease, with 2 hypermetabolic enhancing nodules within the right breast. Physical exam findings: Right breast with a palpable mass (3 x 4 cm) in the lower outer quadrant; no palpable masses in the left breast; no lymphadenopathy noted.
+      BL: Right breast with mass (3 x 4 cm) in lower outer quadrant; left breast without palpable masses; no evidence of metastatic disease on PET/CT.
+  Q3 [差] 化验摘要 lab_summary  —— 判定: PL不如BL
+      理由: BL更优：note确有10/22/16的CBC与代谢panel，BL如实抓取；PL误写'No labs in note'属遗漏。
+      PL: No labs in note.
+      BL: WBC Count: 5.6, Hemoglobin: 12.6, Hematocrit: 38.4, Platelet Count: 202, Sodium: 139, Potassium:  4.2, Chloride: 106, Carbon Dioxide: 25, Urea Nitrogen: 18, Creatinine: 0.76, Glucose: 120, Calcium: 9.2
+
+### 乳腺Breast ROW 13 (coral_idx=32)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：synthroid/维生素/止痛药为家用药且多标注未服用；BL全部列出。
+      PL: （空）
+      BL: cholecalciferol, vitamin D3, multivitamin, SYNTHROID 112 mcg, acetaminophen, docusate sodium, HYDROcodone-acetaminophen, ibuprofen, LORazepam, oxyCODONE
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL区分distant=No、metastasis=区域淋巴结(腋窝)，PET明确无远处转移仅腋窝LN阳性；分类更准。
+      PL: No
+      BL: No
+  Q3 [优] 影像计划 Imaging plan  —— 判定: PL不如BL
+      理由: BL抓到脑MRI随访建议(6月复查)；PL写'No imaging planned'遗漏。
+      PL: No imaging planned.
+      BL: MRI brain for further evaluation
+  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: PL'New patient'正确——为讨论治疗方案的初次会诊；BL'Follow up'错误。
+      PL: New patient
+      BL: Follow up
+  Q5 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL详列病理+影像+体检；BL把右乳与腋窝LN笼统称'metastatic'，将区域LN受累措辞为转移性，易误导。
+      PL: Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%. Imaging findings include a 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion, suspicious additional ductal disease, and disease within the nipple. MRI and PET/CT reveal a hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are noted. A hyperdense 0.7 cm falx lesion is present, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes.
+      BL: Hypermetabolic right breast mass and axillary lymph node consistent with known metastatic invasive ductal carcinoma. 5 mm right parafalcine dural-based mass is most likely a meningioma.
+  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'正确——早期可手术计划辅助化疗+内分泌；BL'adjuvant'(治疗时机非目标)，答非所问。
+      PL: curative
+      BL: adjuvant
+
+### 乳腺Breast ROW 14 (coral_idx=33)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL'Goserelin'正确——本次开始的抗癌(卵巢抑制)药；BL把维C/姜黄/卡瓦等保健品列入且漏掉goserelin。
+      PL: Goserelin
+      BL: ascorbic acid, vitamin C, B-complex with vitamin C, clonazepam, kava root, lactobacillus acidophilus, lamotrigine, multivitamin, multivitamin-Ca-iron-minerals, tretinoin, turmeric, zolpidem
+  Q2 [优] 基因检测计划 Genetic plan  —— 判定: PL更好
+      理由: PL写已转诊基因咨询(04/24 genetics referral)；BL写None遗漏。
+      PL: Referred for genetic testing/counseling.
+      BL: None
+  Q3 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL同时给Myriad阴性+MammaPrint低危(+0.287)；BL只写Myriad阴性。
+      PL: Myriad Genetic Result: Negative; MammaPrint (Agendia): Low risk: + 0.287
+      BL: Myriad Genetic Result: Negative
+  Q4 [评] 近期治疗变化 recent_changes  —— 判定: PL更好
+      理由: PL抓到今日起goserelin、两周后letrozole；BL写'None'遗漏关键起始用药。
+      PL: Start goserelin today (no auth required!); Start letrozole in about two weeks
+      BL: None
+
+### 乳腺Breast ROW 15 (coral_idx=34)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：bupropion/labetalol/zolpidem均为家用精神/降压/助眠药；BL全部列出。
+      PL: （空）
+      BL: buPROPion (WELLBUTRIN SR), cetirizine (ZYRTEC), docusate sodium (COLACE), hydrOXYzine (ATARAX), ibuprofen (ADVIL,MOTRIN), iron 18 mg TAB, labetalol (NORMODYNE), PNV NO.122/IRON/FOLIC ACID, triamcinolone (KENALOG), UNABLE TO FIND Med Name: Fluoxetine, zolpidem (AMBIEN)
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL'Suspected to cervical/axillary LN'恰当反映'presumptively...metastasized'(推测未确诊)；BL直接断言'Yes'。
+      PL: Suspected, to right cervical lymph nodes, right axillary lymph nodes
+      BL: Yes (to lymph nodes)
+  Q3 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Metastatic(Stage IV)'与note'de novo MBC'一致；BL写'Not specified'遗漏。
+      PL: Metastatic (Stage IV)
+      BL: Not specified
+  Q4 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL抓到docusate；BL写None遗漏。
+      PL: docusate sodium (COLACE)
+      BL: None
+  Q5 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL详列病理免疫组化+多处淋巴结尺寸SUV+乳腺MRI；BL仅一句MRI。
+      PL: Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral extremely dense breast tissue with no primary malignancy features on mammogram. Right axillary lymphadenopathy with calcifications noted. PET/CT shows multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) and right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI reveals marked background enhancement in both breasts, with a more confluent area in the right upper outer breast (3.5 cm). Right axillary tail mass (1.5 x 0.5 x 1.0 cm) with suggestion of susceptibility artifact on T1 imaging. Enlarged right axillary lymph nodes with cortical thickness up to 1 cm. No distant metastasis detected except for lymphadenopathy.
+      BL: Marked background enhancement in the right upper outer breast, posterior depth, and enlarged right axillary lymph nodes with cortical thickness.
+  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'palliative'正确——note明确'we do not consider MBC to be curable'；BL'curative'直接与原文矛盾，方向性错误。
+      PL: palliative
+      BL: curative
+
+### 乳腺Breast ROW 16 (coral_idx=35)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：HCTZ、potassium、Exforge均为降压家用药；BL把三种降压药全列入。
+      PL: （空）
+      BL: Hydrochlorothiazide, potassium, Exforge
+  Q2 [优] 化验计划 Lab plan  —— 判定: PL不如BL
+      理由: BL捕获原文'fine needle aspiration...is pending'的左腋窝FNA计划；PL写'No labs planned'遗漏。
+      PL: No labs planned.
+      BL: Fine needle aspiration of left axillary lymph node
+  Q3 [优] 转移(含区域) Metastasis  —— 判定: PL不如BL
+      理由: 两者都未正确标区域淋巴结：PET/CT示左腋窝及胸肌下淋巴结受累(区域转移)，PL写'No'与原文矛盾；BL无该字段故不出错，相对PL的明确错误更可取。
+      PL: No
+      BL: （空）
+
+### 乳腺Breast ROW 17 (coral_idx=36)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：current prescription仅vitamin D3一种非癌家用药；BL列出cholecalciferol/维D3。
+      PL: （空）
+      BL: cholecalciferol, vitamin D3, (VITAMIN D3) 2,000 unit CAP capsule
+  Q2 [优] 转移(含区域) Metastasis  —— 判定: PL更好
+      理由: PL正确标'Yes, regional lymph node(s)'：T2N1、2/2淋巴结受累伴包膜外侵犯；BL无Metastasis字段。
+      PL: Yes, regional lymph node(s)
+      BL: （空）
+  Q3 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL留空正确：ONPRO是pegfilgrastim给药装置且属未来化疗计划；BL把'ONPRO support'当作当前supportive_med属时态与归类错误。
+      PL: （空）
+      BL: ONPRO support
+  Q4 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'符合治疗意图；BL'adjuvant'是治疗时机非目标，答非所问。
+      PL: curative
+      BL: adjuvant
+
+### 乳腺Breast ROW 18 (coral_idx=37)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：Xanax、ibuprofen、trazodone均为非抗癌家用药；BL全部列入。
+      PL: （空）
+      BL: Alprazolam (Xanax) 0.25 mg tablet, Ibuprofen (Advil) 200 mg tablet, Trazodone HCl (Trazodone Oral)
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL更完整：分列germline(ATM c1109dup)与tumor基因组(ER>95%/PR<5%/HER2-/Ki67 44%/MammaPrint高危)；BL仅给ATM一项。
+      PL: Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor genomic testing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.622)
+      BL: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous)
+
+### 乳腺Breast ROW 19 (coral_idx=38)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL'exemestane, Goserelin'正确：只列抗癌内分泌药；BL把amoxicillin/bupropion/doxycycline/hydrocodone等10种非癌药全倒入。
+      PL: exemestane, Goserelin
+      BL: amoxicillin, amoxicillin-clavulanate, benzonatate, bupropion, doxycycline, exemestane, hydrocodone-acetaminophen, ibuprofen, metronidazole, ondansetron
+  Q2 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL'ondansetron'正确：止吐药属支持用药；BL写'None mentioned'遗漏ZOFRAN-ODT。
+      PL: ondansetron (ZOFRAN-ODT)
+      BL: None mentioned
+  Q3 [优] 分型/受体 Type (ER/PR/HER2)  —— 判定: PL更好
+      理由: PL更完整给出grade 2和grade 3两灶IDC伴DCIS成分；BL仅笼统'mammaprint low risk IDC'。
+      PL: ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with DCIS component
+      BL: ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC
+  Q4 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL只取客观'NED on exam'；BL混入joint aches/hot flashes/insomnia/bone pain等主观症状，答非所问。
+      PL: Patient is NED (no evidence of disease) on physical exam. Patient is considering bilateral salpingo-oophorectomy (BSO) after 5 years of ovarian suppression and aromatase inhibitor (AI) therapy.
+      BL: NED on exam, minimal joint aches, mild hot flashes and insomnia, bone pain, vaginal dryness, no new or concerning bone pain, SOB, cough, abd pain, n/v, headache, visual changes
+
+### 乳腺Breast ROW 20 (coral_idx=39)
+  Q1 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL'Suspected(肝肺结节待确认)'更忠实：原文有多发肝病灶与肺结节仅未活检确认；BL'no confirmation of metastatic disease'淡化了可疑病灶。
+      PL: Suspected (liver and lung nodules pending confirmation)
+      BL: No biopsies and there is no confirmation of metastatic disease
+  Q2 [优] 基因检测计划 Genetic plan  —— 判定: PL更好
+      理由: PL'Germline panel pending'正确捕获原文'Germ line panel pending'；BL写'None mentioned'遗漏。
+      PL: Germline panel pending
+      BL: None mentioned
+  Q3 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL'无结果'正确：germline panel尚pending；BL把'Germ line panel pending'放入results字段属字段错配。
+      PL: No genetic testing results in note.
+      BL: Germ line panel pending
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Not staged(locally advanced; 远处病灶未确认)'补充准确临床背景；BL仅'Not specified'。
+      PL: Not staged in note (locally advanced; distant lesions unconfirmed)
+      BL: Not specified
+  Q5 [优] 分型/受体 Type (ER/PR/HER2)  —— 判定: PL不如BL
+      理由: 双侧乳腺癌：PL只写'HER2+ invasive carcinoma'漏左侧HER2-(0)；BL明确'HER2 positive on the right, HER2 negative on the left'写全双侧。
+      PL: ER+/PR+/HER2+ invasive carcinoma with some lobular differentiation
+      BL: Bilateral breast cancer, ER+, PR+, HER2 positive on the right, and HER2 negative on the left
+  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL'curative'符合治疗意图；BL'Adjuvant therapy'是治疗时机非目标，答非所问。
+      PL: curative
+      BL: Adjuvant therapy
+
+================================================================================
+
+### 胰腺PDAC ROW 1 (coral_idx=0)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空(患者要求chemo break已停化疗)，BL照抄'See intake'(占位文本非药物)；该次访视无现用抗癌药。
+      PL: （空）
+      BL: See intake
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL写'Not sure'，BL写'No'；原文CT chest见5个新肺结节'suspicious for metastases'尚未定论，BL断言'No'过度否定。
+      PL: Not sure
+      BL: No
+  Q3 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL捕捉'Possible cancer family syndrome'，BL写'无'；原文Assessment列有该条。
+      PL: No genetic testing results in note.
+      BL: No genetic testing results in note
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL写Stage III(locally advanced)，BL写'Not specified'；原文明确'locally advanced adenocarcinoma'对应III期。
+      PL: Stage III (locally advanced)
+      BL: Not specified
+  Q5 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL列oxycodone，BL列'Oxycodone, antibiotics'；抗生素是既往输液时短期用药已停，BL混入过去用药。
+      PL: oxycodone
+      BL: Oxycodone for pain, antibiotics for infection
+  Q6 [差] 化验摘要 lab_summary  —— 判定: PL更好
+      理由: PL逐项列出含关键CA19-9=3，BL仅泛泛'CBC低、其余正常'丢失全部具体数值和肿瘤标志物。
+      PL: WBC Count 6.7, RBC Count 3.89, Hemoglobin 11.1, Hematocrit 33.5, MCV 86, MCH 28.5, MCHC 33.1, Platelet Count 203, Neutrophil Absolute Count 4.06, Lymphocyte Abs Cnt 1.49, Monocyte Abs Count 0.84, Eosinophil Abs Ct 0.23, Basophil Abs Count 0.02, Imm Gran, Left Shift 0.02, Urea Nitrogen 13, Creatinine 1.06, eGFR if non-African American 83, eGFR if African Amer 96, Aspartate transaminase 20, Alanine transaminase 25, Bilirubin, Total 0.9, Alkaline Phosphatase 60, Cancer Antigen 19-9 3
+      BL: CBC shows low RBC count, hemoglobin, and hematocrit. Other lab values within normal range.
+
+### 胰腺PDAC ROW 2 (coral_idx=1)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL写'Gemcitabine + Abraxane'(当前2L化疗)，BL把一长串家用药倒入current_meds且完全漏化疗。
+      PL: Gemcitabine + Abraxane
+      BL: Alprazolam, Atorvastatin, Diclofenac Gel, Domperidone, Granisetron Patch, Insulin Aspart, Lidocaine-Diphenhydramine-Maalox Mouthwash, Creon, Multivitamin with Folic Acid, Nitroglycerin, Ondansetron, Pantoprazole, Prochlorperazine, Tamsulosin
+  Q2 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL明确'disease progression'并引CA19-9 789→1625及CT进展，BL笼统'mixed response'；最近影像确为progression。
+      PL: The cancer is showing signs of disease progression. This is evidenced by the CT CAP on 11/24/18 indicating disease progression and the rise in CA 19-9 levels from 789 on 10/03/18 to 1,625 on 11/24/18.
+      BL: Mixed response with initial improvement followed by disease progression.
+  Q3 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL给出客观影像/病理，BL写主观症状(发热、麻木、乏力)答非所问。
+      PL: Patient has new liver metastases noted on baseline CT CAP on 05/25/18. Post-resection pathology showed direct invasion of the tumor into the duodenum and 6 out of 25 lymph nodes were positive. CT CAP on 08/01/18 shows a decrease in size of hepatic metastases but an interval increase in pancreatic ductal dilation. On 09/26/18, CT CAP reveals a slight increase in the size of liver metastases. On 11/24/18, CT CAP indicates disease progression. Physical exam shows no palpable masses, jaundice, ascites, or significant weight loss. The patient has grade 1 peripheral neuropathy.
+      BL: Intermittent fevers, numbness in hands and feet, increased fatigue, no significant physical exam abnormalities noted.
+  Q4 [差] 化验摘要 lab_summary  —— 判定: 打平
+      理由: 两者均逐项列出主要实验室值，差异不构成临床优劣。
+      PL: WBC Count 7.4, Neutrophil Absolute Count 4.62, Hemoglobin 9.4 (L), Hematocrit 30.1 (L), Platelet Count 351, Creatinine 0.58 (L), Bilirubin, Total 0.4, Alkaline Phosphatase 305 (H), Aspartate transaminase 33, Alanine transaminase 31, Albumin, Serum / Plasma 3.0 (L), Calcium, total, Serum / Plasma 8.7 (L), Cancer Antigen 19-9 900 (H), Carcinoembryonic Antigen 8.3 (H)
+      BL: WBC Count: 7.4, Hemoglobin: 9.4 (L), Hematocrit: 30.1 (L), Platelet Count: 351, Creatinine: 0.58 (L), Alkaline Phosphatase: 305 (H), Albumin, Serum / Plasma: 3.0 (L), Calcium, total, Serum / Plasma: 8.7 (L), Cancer Antigen 19-9: 900 (H) on 12/13/2018, 634 (H) on 12/07/2018, 1,625 (H) on 11/24/2018, Carcinoembryonic Antigen: 8.3 (H) on 12/13/2018, 8.5 (H) on 12/07/2018, 10.6 (H) on 11/24/2018
+
+### 胰腺PDAC ROW 3 (coral_idx=2)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL写'5-FU/LV, nal-IRI(Onivyde)'(当前3L化疗)，BL倒入家用药且漏化疗。
+      PL: 5-FU/LV, nanoliposomal irinotecan (Onivyde)
+      BL: acetaminophen, aspirin 81 mg EC tablet, carvedilol, HYDROcodone-acetaminophen, ibuprofen, loperamide, LORazepam, pantoprazole, prochlorperazine, rosuvastatin
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: 打平
+      理由: PL写'liver, peritoneum'，BL写'liver, spleen, peritoneal'；脾受累为肿瘤直接侵犯/梗死非真正远处转移，PL略保守，两者各有取舍。
+      PL: Yes, to liver, peritoneum
+      BL: Yes (liver, spleen, peritoneal implants)
+  Q3 [优] 疗效 Response  —— 判定: PL不如BL
+      理由: BL简洁写'继续临床/症状性衰退'，PL自相矛盾(先说decline又说stable disease)；原文医生impression强调'continued clinical/symptomatic decline'。
+      PL: Continued clinical/symptomatic decline despite current therapy (per the physician's impression). The cancer is showing stable disease based on imaging and tumor marker evidence. Specifically, the CT scan from 02/16/2019 shows no significant change in the multicystic distal pancreas mass, slightly decreased size of hepatic lesions, stable to slightly increased peritoneal implants, and stable intrahepatic biliary dilation.
+      BL: Some evidence of continued clinical/symptomatic decline despite ongoing treatment.
+  Q4 [评] 近期治疗变化 recent_changes  —— 判定: PL不如BL
+      理由: PL留空，BL写'03/29恢复nal-IRI/5-FU/LV cycle#5'；原文确有该时间线事件，PL遗漏。
+      PL: （空）
+      BL: Resumed chemotherapy (cycle #5 of nal-IRI/5-FU/LV) on 03/29/2019.
+
+### 胰腺PDAC ROW 4 (coral_idx=3)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空(患者在surveillance/chemo holiday)，BL倒入家用药(安非他酮/雌激素/PPI/抗抑郁)。
+      PL: （空）
+      BL: buPROPion (WELLBUTRIN SR) 100 mg 12 hr tablet, estradiol twice weekly patch 0.05 mg/24 hr, LORazepam (ATIVAN) 1 mg tablet, ondansetron (ZOFRAN) 8 mg tablet, pantoprazole (PROTONIX) 40 mg EC tablet, PRISTIQ 100 mg 24 hr tablet, progesterone (PROMETRIUM) 100 mg capsule
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL捕捉'CA19-9 non-secretor(肿瘤不表达，标志物无法追踪)'这一重要分子事实('She does not express CA-19-9')；BL写'无遗传结果'。
+      PL: CA 19-9 non-secretor (tumor does not express CA 19-9; marker not useful for tracking)
+      BL: No genetic testing results in note
+  Q3 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL写'Locally advanced; now metastatic(Stage IV)'，BL未给分期；原文最终诊断'Metastatic adenocarcinoma'。
+      PL: Locally advanced; now metastatic (Stage IV)
+      BL: Extent of disease uncertain, initially thought to have locally advanced disease, later found to have a liver metastasis.
+  Q4 [差] 检查发现 findings  —— 判定: PL更好
+      理由: PL详列CT腹盆/胸/ERCP客观影像，BL遗漏主要restaging CT结果(胰头肿块4.2x3.6cm稳定、血管包绕)。
+      PL: CT Abdomen/Pelvis with Contrast (06/18/2021): Ill-defined pancreatic head/neck mass, similar in size to recent MRI (4.2 x 3.6 cm), with unchanged cystic component and ductal dilatation of the main pancreatic duct. No significant change in size of the mass compared to recent MRI. No evidence of metastasis. Similar fat stranding surrounding the SMA and encasement of the common hepatic artery, as well as severe narrowing of the portal vein/SMV confluence. Similar porta hepatis lymphadenopathy measuring up to 1.3 cm. No ascites. CT Chest with Contrast (06/18/2021): No new suspicious nodule. Unchanged tiny groundglass nodules in the apices, most likely inflammation or scar. XR ERCP Cholangiogram Pancreatography (06/25/2021): Irregular moderate intrahepatic biliary ductal dilation with filling defects related to sludge or stones. Irregular narrowing of the common bile duct in the region of the stent. Patient appears comfortable.
+      BL: Tumor ingrowth and biliary stone with blood clots found during EGD and ERCP. Covered metal stent deployed within the existing stent. No ascites, no pleural effusion, no adenopathy, no suspicious lesions in the lungs or bones.
+
+### 胰腺PDAC ROW 5 (coral_idx=4)
+  Q1 [优] 预立医疗计划 Advance care  —— 判定: PL更好
+      理由: PL含DNR/POLST/代理决策人细节，BL仅概括'已讨论代理人和POLST'丢失代码状态。
+      PL: {"Advance care": "Discussed with: [REDACTED] [REDACTED], NP. Surrogate decision maker: Identified and documented: [REDACTED][REDACTED] (1st); [REDACTED][REDACTED] (2nd). Life sustaining treatment preferences (i.e. Code): DNR and Unknown. Preferences for life sustaining treatment clarified and POLST completed."}
+      BL: {"Advance care": "Discussed with: ***** *****, NP. Surrogate decision maker identified and documented. Preferences for life sustaining treatment clarified and POLST completed."}
+  Q2 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空(患者在chemotherapy break)，BL倒入一长串抗真菌/止吐/抗凝/家用药(且含'UNABLE TO FIND'垃圾文本)。
+      PL: （空）
+      BL: butenafine (LOTRIMIN ULTRA) 1 % cream, cholecalciferol, vitamin D3, 1000 UNITS TAB tablet, clotrimazole (MYCELEX) 10 mg troche, fluconazole (DIFLUCAN) 100 mg tablet, hyoscyamine (LEVSIN/SL) 0.125 MG SL tablet, KERYDIN 5 % SolA, L.acidoph/B.long/L.plant/B.lac (PROBIOTIC ACIDOPHILUS BEADS ORAL), lidocaine-prilocaine (EMLA) 2.5-2.5 % cream, lipase-protease-amylase (CREON) 24,000-76,000 -120,000 unit capsule, loperamide (IMODIUM) 2 mg capsule, medical cannabis, ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (OXYCONTIN) 10 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 10 mg tablet, prochlorperazine (COMPAZINE) 10 mg tablet, rivaroxaban (XARELTO) 20 mg tablet, terbinafine HCl (LAMISIL) 1 % cream, TURMERIC ORAL, UNABLE TO FIND, UNABLE TO FIND
+  Q3 [优] 用药计划 Medication plan  —— 判定: PL更好
+      理由: PL详列xarelto/Creon/Oxycontin/oxycodone/fluconazole各项续用，BL仅'continue current meds'笼统。
+      PL: Continue xarelto QD, Continue Creon to 2 or 3 tab/meal and 1 tab/snack, Cont Oxycontin 10mg PO bid, Oxycodone 5 to 10mg PO q4h prn BTP (can cut 10mg tabs in half), SMS recommended fluconazole
+      BL: Continue current medications, review labs to rule out diabetes
+
+### 胰腺PDAC ROW 6 (coral_idx=5)
+  Q1 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL='Suspected, to liver'，BL='Not sure'；note的CT impression写新发及增大肝内低密度灶'suggestive of worsening metastatic disease'。
+      PL: Suspected, to liver
+      BL: Not sure
+  Q2 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL写'now with early evidence of disease recurrence'，BL只写'Borderline resectable/locally advanced'漏掉复发；note明确'with early evidence of disease recurrence'。
+      PL: Originally borderline resectable/locally advanced, now with early evidence of disease recurrence
+      BL: Borderline resectable/locally advanced
+
+### 胰腺PDAC ROW 7 (coral_idx=6)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL正确留空(化疗在recent_changes)，BL把全部家用药(Dulcolax/Colace/Allegra等)倒进current_meds且漏化疗。
+      PL: （空）
+      BL: bisacodyL (DULCOLAX), cholecalciferol, cloNIDine (CATAPRES), cyanocobalamin, diclofenac (VOLTAREN), docusate sodium (COLACE), fexofenadine (ALLEGRA), fluocinonide (LIDEX), LORazepam (ATIVAN), ondansetron (ZOFRAN), oxybutynin (DITROPAN XL), oxyCODONE (OXY-IR), pantoprazole (PROTONIX), prochlorperazine (COMPAZINE), senna (SENOKOT)
+  Q2 [优] 转诊 Referral  —— 判定: PL不如BL
+      理由: note明确'seen by Gyn Onc...they would like to coordinate and remove this'，BL抓到'Gynecological oncology for the right adnexal mass'，PL的Referral.Specialty='None'漏掉。
+      PL: None
+      BL: Gynecological oncology for the right adnexal mass
+  Q3 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL='Stage III (locally advanced)'，BL='Not specified'；note反复称'locally advanced pancreatic cancer'有血管包绕无远转。
+      PL: Stage III (locally advanced)
+      BL: Not specified in the note
+  Q4 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL='curative'是治疗意图，BL='neoadjuvant'只是modality；note新辅助化疗+计划手术切除目标为根治。
+      PL: curative
+      BL: neoadjuvant
+
+### 胰腺PDAC ROW 8 (coral_idx=7)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空并把morphine/Creon归supportive_meds，BL把家用药(acetaminophen/MS Contin/MiraLax/Klor-Con)倒进current_meds且无抗癌药。
+      PL: （空）
+      BL: acetaminophen, Creon 24,000, vitamin D3, MS Contin, MiraLax, Klor-Con
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: PL更好
+      理由: PL='Yes, to lymph nodes'，BL='No'明显错误；note='biopsy-proven mesenteric nodal recurrence'+'recurrent metastatic'。
+      PL: Yes, to lymph nodes
+      BL: No
+  Q3 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL记录'germline ATM mutation present, MMR intact, no actionable mutations'，BL只写'No actionable mutations'漏掉germline ATM。
+      PL: Germline ATM mutation present. Tumor shows MMR proteins all intact by IHC. No actionable mutations identified from planned FoundationOne panel.
+      BL: No actionable mutations identified
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL='now metastatic (Stage IV)'，BL='pT2N2'停留在原分期漏掉复发转移；note标题即'recurrent metastatic pancreatic adenocarcinoma'。
+      PL: Originally pt2n2, now metastatic (Stage IV)
+      BL: pT2N2
+  Q5 [评] 就诊类型 Patient type  —— 判定: PL更好
+      理由: note='comes to our GI Oncology practice...in consultation'为新会诊，PL='New patient'正确，BL='Follow up'错误。
+      PL: New patient
+      BL: Follow up
+
+### 胰腺PDAC ROW 9 (coral_idx=8)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL='abraxane, gemcitabine'正确，BL把全部家用支持药(albuterol/cetirizine/metoclopramide)倒进current_meds漏化疗。
+      PL: abraxane, gemcitabine
+      BL: Albuterol, cetirizine, diphenoxylate-atropine, fluticasone propion-salmeterol, CREON, lorazepam, metoclopramide, mirtazapine, olanzapine, olopatadine, oxycodone, ranitidine, triamcinolone acetate
+
+### 胰腺PDAC ROW 10 (coral_idx=9)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL='FOLFOX (omit irinotecan)'正确列出现用化疗，BL把家用支持药(Lomotil/gabapentin/Imodium)倒进current_meds漏抗癌方案。
+      PL: FOLFOX (omit irinotecan)
+      BL: diphenoxylate-atropine (LOMOTIL), EYEBRIGHT ORAL, gabapentin (NEURONTIN), glucosam/chond/collagen/hyalur (JOINT SUPPORT ORAL), Lactobacillus acidophilus (PROBIOTIC ORAL), loperamide (IMODIUM), lorazepam (ATIVAN), multivitamin, ondansetron (ZOFRAN), prochlorperazine (COMPAZINE), acetaminophen (TYLENOL), lidocaine-prilocaine (EMLA), oxyCODONE (ROXICODONE), potassium chloride (KLOR-CON 10)
+
+### 胰腺PDAC ROW 11 (coral_idx=10)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：acetaminophen/ibuprofen/metformin/simvastatin/ondansetron全是非癌家用药；BL把这6个全倒进current_meds。
+      PL: （空）
+      BL: acetaminophen, ibuprofen, lipase-protease-amylase, metformin, ondansetron, simvastatin
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL捕获'brother found to have BRCA2 mutation in 2020'这一重要遗传线索；BL写'No genetic testing results'。
+      PL: Brother found to have a BRCA2 mutation in 2020. No other specific genetic or molecular testing results mentioned.
+      BL: No genetic testing results in note
+  Q3 [优] 操作计划 Procedure plan  —— 判定: PL不如BL
+      理由: 原文'he provided consent to proceed with screening procedures'，BL写'Screening procedures for clinical trial'反映了该试验筛查事件；PL写'No procedures planned'漏掉(注:试验筛查多为labs/影像而非手术操作，属边界情况)。
+      PL: No procedures planned.
+      BL: Screening procedures for clinical trial
+  Q4 [评] 就诊类型 Patient type  —— 判定: 打平
+      理由: PL与BL都写'New patient'(原文'newly diagnosed metastatic pancreatic cancer presenting for a second opinion')，两者均正确，等价。(subagent曾误读PL为Follow up，已核对FINAL更正为TIE)
+      PL: New patient
+      BL: New patient
+
+### 胰腺PDAC ROW 12 (coral_idx=11)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：原文'No current outpatient prescriptions on file'，所列baclofen/carvedilol/diltiazem/warfarin为facility住院非癌药；BL倒入。
+      PL: （空）
+      BL: baclofen, carvedilol, diltiazem, diphenhydramine, lidocaine, methyl salicylate-menthol, ondansetron, phenol, tramadol, warfarin
+  Q2 [优] 远处转移 Distant Metastasis  —— 判定: 打平
+      理由: PL写peritoneal carcinomatosis(原文明确)；BL写liver,lungs(肝来自肝病灶,肺来自'nonspecific pulmonary nodules')，两者各抓不同转移部位均有依据。
+      PL: Yes, to liver, peritoneum
+      BL: Yes (liver, lungs)
+  Q3 [差] 化验摘要 lab_summary  —— 判定: 打平
+      理由: 两者都只摘部分；PL取CA19-9 276，BL取最新最高4720(07/30)，互有取舍。
+      PL: WBC Count 9.6, RBC Count 3.09 (L), Hemoglobin 9.6 (L), Hematocrit 28.5 (L), MCV 92, MCH 31.1, MCHC 33.7, Platelet Count 172, Neutrophil Absolute Count 8.55 (H), Lymphocyte Abs Cnt 0.59 (L), Monocyte Abs Count 0.38, Eosinophil Abs Ct 0.01, Basophil Abs Count 0.01, Imm Gran, Left Shift 0.05, Urea Nitrogen 10, Calcium 8.1 (L), Chloride 101, Creatinine  0.56 (L), Glucose 187 (H), Potassium 3.4 (L), Carbon Dioxide 26 (H), Anion Gap 9, pH 7.39, PCO2 47, PO2 32 (LL), Base excess 3, Bicarbonate 28 (H), Oxygen Saturation 55 (L), Hemoglobin, Whole Blood 9.9 (L), Hematocrit from [REDACTED] 31 (L), Lactate 1.1, Glucose, whole blood 190, Aspartate transaminase 30, Alanine transaminase 38, Bilirubin, Total 3.5 (H), Alkaline Phosphatase 265 (H), Lipase 20, Magnesium 1.6 (L), Albumin 2.1 (L), Total Protein 5.1 (L), PT 30.8 (H), INR 3.0 (H), Bilirubin, Total 3.7 (H), CANCER ANTIGEN 19-9 276 (H)
+      BL: WBC Count: 9.6, Hemoglobin: 9.6 (L), Bilirubin, Total: 3.5 (H), CA 19-9: 4720 (H)
+
+### 胰腺PDAC ROW 13 (coral_idx=12)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL抓capecitabine/gemcitabine这一抗癌方案('s/p 6 cycles of Gem Cape')；BL把21种含降糖/PPI/泻药等家用药全倒入。
+      PL: capecitabine, gemcitabine
+      BL: acetaminophen, bisacodyl, budesonide-glycopyr-formoterol, calcium carbonate-vitamin D, CALCIUM CITRATE, capecitabine, CREON, denosumab, dronabinol, famotidine, GLIMEPIRIDE, lipase-protease-amylase, melatonin, mirtazapine, multivitamin, ondansetron, pantoprazole, polyethylene glycol, prochlorperazine, senna, sucralfate
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL捕获'CA 19-9 non-secretor'('Patient does not express CA 19-9')；BL写'No genetic testing results'漏掉。
+      PL: CA 19-9 non-secretor (tumor does not express CA 19-9; marker not useful for tracking)
+      BL: No genetic testing results in note
+  Q3 [评] 近期治疗变化 recent_changes  —— 判定: 打平
+      理由: BL写'pause systemic therapy and consider radiation'是真实近期变更；PL留空略保守，两者均不算错。
+      PL: （空）
+      BL: Pause systemic therapy and consider radiation therapy.
+
+### 胰腺PDAC ROW 14 (coral_idx=13)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：用药全是amlodipine/atorvastatin/losartan/metformin等降压降糖家用药(尚未开始化疗)；BL全倒入。
+      PL: （空）
+      BL: amLODIPine (NORVASC) 5 mg, atorvastatin (LIPITOR) 20 mg, famotidine (PEPCID) 20 mg, losartan (COZAAR) 50 mg, metFORMIN (GLUCOPHAGE) 500 mg, OYSTER SHELL CALCIUM-VIT D3 500 mg(1,250mg) -200 unit tablet, polyethylene glycol (MIRALAX) 17 g
+
+### 胰腺PDAC ROW 15 (coral_idx=14)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL留空正确：resected/surveillance无活动化疗，所列insulin/enoxaparin/furosemide/vancomycin等全为非癌家用药；BL倒入23种。
+      PL: （空）
+      BL: acetaminophen, alpha-D-galactosidase, blood glucose test strips, calcium carbonate, calcium citrate/vitamin D3, cholecalciferol, clotrimazole, enoxaparin, famotidine, folic acid/multivit-min/lutein, furosemide, glucose, insulin aspart, insulin glargine, insulin syringe-needle, lancets, lipase-protease-amylase, multivitamin complete chewable, pantoprazole, rifAXIMin, rivaroxaban, Saccharomyces boulardii, vancomycin
+  Q2 [优] 分子/遗传结果 Genetic results  —— 判定: PL更好
+      理由: PL捕获完整MMR/MSI面板(MLH1/PMS2/MSH2/MSH6 present即pMMR/MSS)+KRAS阴性；BL只写KRAS阴性漏MMR。
+      PL: 05/20/18: Ascites cell block interpreted as benign, and negative for KRAS mutations in exons 2, 3 and 4. MLH1 expression: Present. PMS2 expression: Present. MSH2 expression: Present. MSH6 expression: Present.
+      BL: Negative for KRAS mutations in exons  2, 3, and 4.
+  Q3 [评] 近期治疗变化 recent_changes  —— 判定: PL更好
+      理由: PL捕获'rivaroxaban on hold'(原文'On hold...pt is on Lovenox')；BL写None遗漏。
+      PL: rivaroxaban (XARELTO) 20 mg tablet is on hold by [REDACTED].
+      BL: None
+
+### 胰腺PDAC ROW 16 (coral_idx=15)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL写gemcitabine(唯一抗癌药)正确；BL倒了11个家用药(acetaminophen/眼药/泻药)却漏了化疗药gemcitabine。
+      PL: gemcitabine
+      BL: acetaminophen, bimatoprost, calcium-vitamin D, cholecalciferol, dorzolamide, multivitamin, polyethylene glycol, prochlorperazine, senna, tramadol, omeprazole
+  Q2 [优] 化验计划 Lab plan  —— 判定: PL更好
+      理由: PL写'monthly CA 19-9 levels'正确('continue with monthly CA 19-9 levels')；BL写'None'漏掉。
+      PL: Plan to continue with monthly CA 19-9 levels.
+      BL: None
+
+### 胰腺PDAC ROW 17 (coral_idx=16)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: 打平
+      理由: 原文chemo break中无在用抗癌药；PL=''、BL='None active at this visit'均正确。
+      PL: （空）
+      BL: None active at this visit
+  Q2 [差] 治疗目标 goals（方向）  —— 判定: 打平
+      理由: 两者均判palliative；locally advanced unresectable PDAC判palliative合理。
+      PL: palliative
+      BL: Palliative
+
+### 胰腺PDAC ROW 18 (coral_idx=17)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL写'capecitabine, gemcitabine (systemic therapy currently on hold)'正确(术后化疗现暂停)；BL倒20+种家用慢病药却漏两个化疗药。
+      PL: capecitabine, gemcitabine (systemic therapy currently on hold)
+      BL: buPROPion 450 mg, gabapentin 300 mg, cyclobenzaprine 10 mg, famotidine 20 mg, fluoxetine 40 mg, levocarnitine HCl, lidocaine-diphenhydrAMINE-maalox, lipase-protease-amylase, loperamide 2 mg, LORazepam 1 mg, losartan 50 mg, montelukast 10 mg, multivitamin, rOPINIRole 1 mg, tamsulosin 0.4 mg, thyroid, porcine, UNABLE TO FIND, VITAMIN B-1, MONONITRATE, zolpidem 10 mg
+  Q2 [优] 影像计划 Imaging plan  —— 判定: PL更好
+      理由: PL'Dopplers...whether she has DVT'正确(plan明确将做下肢多普勒)；BL'CT of the head'是已做过的(past)，时态混淆。
+      PL: Dopplers will be obtained to understand whether she has DVT
+      BL: CT of the head to rule out cause of falls.
+  Q3 [优] 化验计划 Lab plan  —— 判定: PL不如BL
+      理由: BL'Monitor electrolytes and CBC'方向合理(患者低钠需随访)；PL'No labs planned'偏保守。属可推断，BL略胜。
+      PL: No labs planned.
+      BL: Monitor electrolytes and complete blood count.
+  Q4 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL'no explicit evidence of how cancer is responding'诚实(术后CT为postsurgical changes)；BL'Severe hand-foot syndrome and mucositis'把化疗副作用当疗效，答非所问。
+      PL: Therefore, based on the information provided, there is no explicit evidence of how the cancer is currently responding to treatment.
+      BL: Severe hand-foot syndrome and mucositis secondary to chemotherapy.
+  Q5 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'2 of 29 lymph nodes positive'抓到淋巴结阳性这一关键分期信息；BL'Not specified'遗漏。
+      PL: Originally technically resectable, now with 2 of 29 lymph nodes positive
+      BL: Not specified in note
+  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
+      理由: PL判curative正确：根治性切除(切缘阴性)+术后辅助化疗；BL判adjuvant混淆治疗阶段与意图。
+      PL: curative
+      BL: adjuvant
+
+### 胰腺PDAC ROW 19 (coral_idx=18)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL写folfirinox(唯一抗癌方案)正确；BL倒12种家用药(aspirin/atorvastatin/metformin/methadone)漏FOLFIRINOX。
+      PL: folfirinox
+      BL: Aspirin 81 mg EC tablet, atorvastatin (LIPITOR) 40 mg tablet, coenzyme Q10 100 mg capsule, CREON 36,000-114,000-180,000 unit capsule, metFORMIN (GLUCOPHAGE) 850 mg tablet, methadone (DOLOPHINE) 10 mg tablet, metoclopramide HCl (REGLAN) 10 mg tablet, multivitamin with iron-minerals-folic acid (MULTIVITAMIN-IRON-MINERALS-FOLIC ACID) 3,500-18-0.4 unit-mg-mg chewable tablet, omeprazole (PRILOSEC) 20 mg capsule, ondansetron (ZOFRAN) 8 mg tablet, oxyCODONE (ROXICODONE) 5 mg tablet, polyethylene glycol (MIRALAX) 17 gram packet
+  Q2 [优] 疗效 Response  —— 判定: PL更好
+      理由: PL'cancer is not responding...interval increase in size of mass'抓到进展(addendum CT示肿块增大+胆道梗阻)；BL'Uncertain disease control'偏保守。
+      PL: The cancer is not responding to treatment. Evidence includes the CT scan showing an interval increase in the size of the ill-defined pancreatic head/uncinate process mass, leading to obstruction of the biliary system distally with proximal intrahepatic and extrahepatic biliary ductal dilatation.
+      BL: Uncertain disease control; possible disease progression or biliary obstruction
+  Q3 [优] 支持用药 supportive_meds  —— 判定: PL更好
+      理由: PL列ondansetron/methadone/oxycodone/Creon更全(含胰酶Creon)；BL漏Creon。
+      PL: ondansetron (ZOFRAN), methadone (DOLOPHINE), oxyCODONE (ROXICODONE), Creon (pancreatic enzyme)
+      BL: Zofran, Methadone, OxyCODONE
+
+### 胰腺PDAC ROW 20 (coral_idx=19)
+  Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
+      理由: PL=''正确(新患者尚未开始抗癌治疗,只有Percocet/Valtrex/Lorazepam等非抗癌药)；BL倒入这些非抗癌药。
+      PL: （空）
+      BL: oxyCODONE-acetaminophen (Percocet), valACYclovir (Valtrex), Lorazepam PRN
+  Q2 [优] 基因检测计划 Genetic plan  —— 判定: PL更好
+      理由: PL写'somatic tumor testing(UCSF500)+germline testing'更完整含体细胞与胚系两层。
+      PL: Somatic tumor testing of the patient's tumor specimen to assess for the presence of any actionable mutations or other genetic alterations using the UCSF500 in-house platform. Additionally, the patient should undergo genetic counseling with germline testing to assess for any hereditary predisposition to cancer.
+      BL: Somatic tumor testing and genetic counseling with germline testing.
+  Q3 [优] 影像计划 Imaging plan  —— 判定: PL更好
+      理由: PL'No imaging planned'正确——原文仅提研究性ctDNA/microbiome非治疗性试验，非临床影像计划。
+      PL: No imaging planned.
+      BL: None
+  Q4 [优] 分期 Stage  —— 判定: PL更好
+      理由: PL'Metastatic (Stage IV)'明确给出IV期(metastatic→IV)；BL'Not specified in AJCC stage'未直接给期别。
+      PL: Metastatic (Stage IV)
+      BL: Not specified in AJCC stage, but described as metastatic with involvement of liver and peritoneum.
