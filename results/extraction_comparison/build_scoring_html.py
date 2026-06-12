@@ -82,28 +82,28 @@ def attr_for(att, key):
 
 # 19 shared questions: (field-id, label, tier, section, key, question-text)
 QUESTIONS = [
-    ("current_meds",   "现用药 current_meds", "优", "Current_Medications", "current_meds", "当前在用的【抗癌药】是哪些？（须排除降压/降糖/止痛等非癌家用药、已停药、计划未用药）"),
-    ("stage",          "分期 Stage", "优", "Cancer_Diagnosis", "Stage_of_Cancer", "癌症分期是什么？"),
-    ("distant_met",    "远处转移 Distant Metastasis", "优", "Cancer_Diagnosis", "Distant Metastasis", "有无远处转移、转移到哪？（腋窝/锁骨上=区域，不算远处；疑似≠确诊）"),
-    ("metastasis",     "转移(含区域) Metastasis", "优", "Cancer_Diagnosis", "Metastasis", "有无淋巴结/区域受累？（区分区域淋巴结 vs 远处转移）"),
-    ("response",       "疗效 Response", "优", "Response_Assessment", "response_assessment", "当前治疗的疗效如何？（副作用≠疗效；未开始治疗→无可评估）"),
-    ("type_receptor",  "分型/受体 Type (ER/PR/HER2)", "优", "Cancer_Diagnosis", "Type_of_Cancer", "病理类型与受体状态（ER/PR/HER2；双侧需分别写）"),
-    ("genetic_results","分子/遗传结果 Genetic results", "优", "Genetic_Testing_Results", "genetic_testing_results", "已出的分子/基因检测结果"),
-    ("genetic_plan",   "基因检测计划 Genetic plan", "优", "Genetic_Testing_Plan", "genetic_testing_plan", "计划做哪些基因/分子检测"),
-    ("supportive_meds","支持用药 supportive_meds", "优", "Treatment_Changes", "supportive_meds", "支持性用药（止吐/止痛/胰酶/骨改良药等，非抗癌）"),
-    ("procedure_plan", "操作计划 Procedure plan", "优", "Procedure_Plan", "procedure_plan", "计划的操作/手术"),
-    ("imaging_plan",   "影像计划 Imaging plan", "优", "Imaging_Plan", "imaging_plan", "计划的影像检查"),
-    ("lab_plan",       "化验计划 Lab plan", "优", "Lab_Plan", "lab_plan", "计划的化验"),
-    ("medication_plan","用药计划 Medication plan", "优", "Medication_Plan", "medication_plan", "计划/续用的药物方案"),
-    ("recent_changes", "近期治疗变化 recent_changes", "评", "Treatment_Changes", "recent_changes", "最近治疗方案的变更（起始/停用/换药/暂停）"),
-    ("patient_type",   "就诊类型 Patient type", "评", "Reason_for_Visit", "Patient type", "新患者 vs 随访（初诊会诊/第二意见=New patient）"),
-    ("goals",          "治疗目标 goals（方向）", "差", "Treatment_Goals", "goals_of_treatment", "治疗意图是 curative 还是 palliative"),
-    ("summary",        "就诊原因 summary", "差", "Reason_for_Visit", "summary", "本次就诊的概述"),
-    ("lab_summary",    "化验摘要 lab_summary", "差", "Lab_Results", "lab_summary", "化验结果摘要（不含影像/病理/基因）"),
-    ("findings",       "检查发现 findings", "差", "Clinical_Findings", "findings", "客观检查发现（不写主观症状）"),
+    ("current_meds",   "Current medications", "deep", "Current_Medications", "current_meds", "Which drugs is the patient currently taking that are ANTI-CANCER? (Exclude non-cancer home meds — BP/diabetes/pain — discontinued drugs, and planned-but-not-started drugs.)"),
+    ("stage",          "Cancer stage", "deep", "Cancer_Diagnosis", "Stage_of_Cancer", "What is the cancer stage?"),
+    ("distant_met",    "Distant metastasis", "deep", "Cancer_Diagnosis", "Distant Metastasis", "Is there distant metastasis, and where? (Axillary / supraclavicular = regional, NOT distant; suspected ≠ confirmed.)"),
+    ("metastasis",     "Metastasis (incl. regional)", "deep", "Cancer_Diagnosis", "Metastasis", "Is there nodal / regional involvement? (Distinguish regional lymph nodes vs distant metastasis.)"),
+    ("response",       "Treatment response", "deep", "Response_Assessment", "response_assessment", "How is the cancer responding to current treatment? (Side effects ≠ response; not yet on treatment → nothing to assess.)"),
+    ("type_receptor",  "Type / receptors (ER/PR/HER2)", "deep", "Cancer_Diagnosis", "Type_of_Cancer", "Pathology type and receptor status (ER/PR/HER2; bilateral disease must list each side)."),
+    ("genetic_results","Molecular / genetic results", "deep", "Genetic_Testing_Results", "genetic_testing_results", "Molecular / genetic test results already available."),
+    ("genetic_plan",   "Genetic testing plan", "deep", "Genetic_Testing_Plan", "genetic_testing_plan", "Which genetic / molecular tests are planned."),
+    ("supportive_meds","Supportive medications", "deep", "Treatment_Changes", "supportive_meds", "Supportive meds (antiemetics / analgesics / pancreatic enzymes / bone agents, etc.; non-anticancer)."),
+    ("procedure_plan", "Procedure plan", "deep", "Procedure_Plan", "procedure_plan", "Planned procedures / surgery."),
+    ("imaging_plan",   "Imaging plan", "deep", "Imaging_Plan", "imaging_plan", "Planned imaging."),
+    ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Planned labs."),
+    ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Planned / continued drug regimen."),
+    ("recent_changes", "Recent treatment changes", "med", "Treatment_Changes", "recent_changes", "Recent changes to the treatment regimen (start / stop / switch / hold)."),
+    ("patient_type",   "Patient type", "med", "Reason_for_Visit", "Patient type", "New patient vs follow-up (initial consult / second opinion = New patient)."),
+    ("goals",          "Treatment goals (intent)", "basic", "Treatment_Goals", "goals_of_treatment", "Is the treatment intent curative or palliative?"),
+    ("summary",        "Reason for visit (summary)", "basic", "Reason_for_Visit", "summary", "Summary of the reason for this visit."),
+    ("lab_summary",    "Lab summary", "basic", "Lab_Results", "lab_summary", "Summary of lab results (excluding imaging / pathology / genetics)."),
+    ("findings",       "Clinical findings", "basic", "Clinical_Findings", "findings", "Objective exam / imaging findings (not subjective symptoms)."),
 ]
-TIER_CLASS = {"优": "t-good", "评": "t-mid", "差": "t-low"}
-TIER_LABEL = {"优": "优·需医学知识", "评": "评·中", "差": "一般"}
+TIER_CLASS = {"deep": "t-good", "med": "t-mid", "basic": "t-low"}
+TIER_LABEL = {"deep": "Deep · needs medical knowledge", "med": "Medium", "basic": "Basic · layperson"}
 
 
 def build(cancer, pl, bl):
@@ -112,7 +112,7 @@ def build(cancer, pl, bl):
         rid = f"{cancer}{row}"
         p = pl[row]; b = bl.get(row, {})
         coral = p["coral"]
-        cname = "乳腺 Breast" if cancer == "b" else "胰腺 PDAC"
+        cname = "Breast" if cancer == "b" else "PDAC"
         title = f"{cname} · ROW {row} · coral_idx={coral}"
         toc.append(f'<a href="#{rid}">{cancer.upper()}{row}</a>')
         qhtml = []
@@ -121,10 +121,10 @@ def build(cancer, pl, bl):
             bv = get_val(b, section, key).strip()
             both_empty = (not pv) and (not bv)
             ev = attr_for(p["att"], key).strip()
-            evhtml = (f'<div class="ev"><b>PL 原文归因:</b> {html.escape(ev[:320])}</div>'
+            evhtml = (f'<div class="ev"><b>PL attribution:</b> {html.escape(ev[:320])}</div>'
                       if ev else '')
             name = f"{rid}__{fid}"
-            na_note = ' <span class="na">（PL/BL 都为空，可记 N/A）</span>' if both_empty else ''
+            na_note = ' <span class="na">(both empty — may mark N/A)</span>' if both_empty else ''
             qhtml.append(f'''<div class="q" data-q="{name}">
   <div class="qhead">
     <span class="qnum">Q{qi}</span>
@@ -133,26 +133,26 @@ def build(cancer, pl, bl):
   </div>
   <div class="qtext">{html.escape(qtext)}</div>
   <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">{html.escape(pv) or "<em>（空）</em>"}</div>{evhtml}</div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">{html.escape(bv) or "<em>（空）</em>"}</div></div>
+    <div class="qcol pl"><div class="qtag">PL (our method)</div><div class="qval">{html.escape(pv) or "<em>(empty)</em>"}</div>{evhtml}</div>
+    <div class="qcol bl"><div class="qtag">BL (same model, single prompt)</div><div class="qval">{html.escape(bv) or "<em>(empty)</em>"}</div></div>
   </div>
   <div class="score" role="radiogroup">
-    <label class="opt o-pl"><input type="radio" name="{name}" value="PL"> PL 更好</label>
-    <label class="opt o-tie"><input type="radio" name="{name}" value="TIE"> 打平</label>
-    <label class="opt o-bl"><input type="radio" name="{name}" value="BL"> BL 更好</label>
+    <label class="opt o-pl"><input type="radio" name="{name}" value="PL"> PL better</label>
+    <label class="opt o-tie"><input type="radio" name="{name}" value="TIE"> Tie</label>
+    <label class="opt o-bl"><input type="radio" name="{name}" value="BL"> BL better</label>
     <label class="opt o-na"><input type="radio" name="{name}" value="NA"> N/A</label>
-    <input class="cmt" type="text" name="{name}__c" placeholder="备注（可选）">
+    <input class="cmt" type="text" name="{name}__c" placeholder="Note (optional)">
   </div>
 </div>''')
         block = f'''<section class="sample" id="{rid}">
   <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}">0/19</span></h2>
   <div class="source">
-    <div class="srchead">原文 · Assessment &amp; Plan（评分依据，点开看完整笔记）</div>
-    <pre class="ap">{html.escape(p["ap"]) or "（无 A/P 段）"}</pre>
-    <details><summary>展开完整笔记 note_text</summary><pre class="note">{html.escape(p["note"])}</pre></details>
+    <div class="srchead">Source · Assessment &amp; Plan (basis for scoring; expand for the full note)</div>
+    <pre class="ap">{html.escape(p["ap"]) or "(no A/P section)"}</pre>
+    <details><summary>Expand full note_text</summary><pre class="note">{html.escape(p["note"])}</pre></details>
   </div>
   <div class="qs">{''.join(qhtml)}</div>
-  <a class="top" href="#top">↑ 返回目录</a>
+  <a class="top" href="#top">↑ Back to top</a>
 </section>'''
         blocks.append(block)
     return toc, blocks
@@ -180,7 +180,10 @@ header p{margin:4px 0;font-size:13px;opacity:.93}
 .bar button{font-size:13px;padding:6px 14px;border:1px solid #0b3d63;background:#0b3d63;color:#fff;border-radius:6px;cursor:pointer}
 .bar button.ghost{background:#fff;color:#0b3d63}
 .legend{background:#fff;border:1px solid #d8dde3;border-radius:8px;padding:12px 16px;margin:14px 28px;font-size:13px}
+.legend>div{margin:6px 0}
 .legend b{color:#0b3d63}
+.tiers{background:#f8fafc;border:1px solid #e3e8ee;border-radius:6px;padding:8px 12px}
+.tiers>div{margin:4px 0}
 .toc{margin:8px 28px;font-size:12.5px}
 .toc a{display:inline-block;margin:2px 4px;padding:3px 8px;background:#fff;border:1px solid #cdd5dd;border-radius:5px;color:#0b3d63;text-decoration:none}
 .toc a.done{background:#e3f3e7;border-color:#9ed0ab}
@@ -287,39 +290,45 @@ function exportJSON(){
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
   a.download="doctor_scores.json";a.click();
 }
-function resetAll(){if(confirm("清空所有评分？")){data={};save(data);location.reload();}}
+function resetAll(){if(confirm("Clear all scores?")){data={};save(data);location.reload();}}
 window.addEventListener("DOMContentLoaded",applySaved);
 ''' % total_q
 
-    htmldoc = f'''<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+    htmldoc = f'''<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PL vs BL 医生打分（完整版）</title><style>{css}</style></head>
+<title>PL vs BL — Clinician Scoring (Full)</title><style>{css}</style></head>
 <body><a id="top"></a>
 <header>
-  <h1>肿瘤笔记结构化提取 · PL vs BL 医生打分（完整版）</h1>
-  <p>PL = 我们的方法（多阶段提取 + 5-gate + 词典 + 后处理）。BL = 同一个模型 Qwen2.5-32B 单 prompt 裸跑。唯一变量 = 处理流程。</p>
-  <p>40 个去标识化样本（20 乳腺 + 20 胰腺，UCSF CORAL，已 ***** 脱敏）。每个样本对<b>全部 19 道题</b>逐题打分：PL 更好 / 打平 / BL 更好 / N/A。评分自动存浏览器本地，可随时导出。</p>
+  <h1>Oncology Note Structured Extraction · PL vs BL — Clinician Scoring (Full)</h1>
+  <p>PL = our method (multi-stage extraction + 5-gate verification + drug/term dictionaries + post-processing). BL = the same model (Qwen2.5-32B) run with a single prompt and no post-processing. The only variable is the processing pipeline.</p>
+  <p>40 de-identified samples (20 breast + 20 PDAC, UCSF CORAL, ***** redacted). For each sample, score <b>all 19 questions</b>: PL better / Tie / BL better / N/A. Scores auto-save in your browser and can be exported anytime.</p>
 </header>
 <div class="bar">
-  <span class="stat">进度<span class="s-done" id="c_done">0/{total_q}</span></span>
+  <span class="stat">Progress<span class="s-done" id="c_done">0/{total_q}</span></span>
   <span class="stat">PL<span class="s-pl" id="c_pl">0</span></span>
-  <span class="stat">打平<span class="s-tie" id="c_tie">0</span></span>
+  <span class="stat">Tie<span class="s-tie" id="c_tie">0</span></span>
   <span class="stat">BL<span class="s-bl" id="c_bl">0</span></span>
   <span class="stat">N/A<span class="s-na" id="c_na">0</span></span>
-  <button onclick="exportCSV()">导出 CSV</button>
-  <button class="ghost" onclick="exportJSON()">导出 JSON</button>
-  <button class="ghost" onclick="resetAll()">清空</button>
+  <button onclick="exportCSV()">Export CSV</button>
+  <button class="ghost" onclick="exportJSON()">Export JSON</button>
+  <button class="ghost" onclick="resetAll()">Reset</button>
 </div>
 <div class="legend">
-  <b>怎么打分：</b>每题给出同一字段 PL 与 BL 的提取结果，请对照上方原文（A/P 段，点开可看完整笔记），判断哪个更忠实/更完整/更正确，选 <b>PL 更好 / 打平 / BL 更好</b>；两者都为空且本笔记确无此项时选 N/A。<br>
-  <b>深度分级：</b><span class="tier t-good">优·需医学知识</span> 需专业背景（药物抗癌/支持区分、分期、转移、疗效、受体、分子）；<span class="tier t-mid">评·中</span>；<span class="tier t-low">一般</span>（就诊原因/治疗目标方向/化验数值，普通人可答）。<b>请把精力放在“优”级题。</b><br>
-  <b>PL 原文归因</b> = 模型给出的原文出处，便于核对 PL 是否忠实。<b>本页未预填任何判定，请独立评分。</b>
+  <div><b>How to score:</b> For each question you'll see the same field as extracted by PL and by BL. Using the source note above (A/P section; expand for the full note), decide which is more faithful / complete / correct, and choose <b>PL better / Tie / BL better</b>. If both are empty and the note truly has no such item, choose N/A.</div>
+  <div class="tiers">
+    <div><b>Depth tiers:</b></div>
+    <div><span class="tier t-good">Deep · needs medical knowledge</span> requires clinical background — anticancer-vs-supportive drug distinction, stage, metastasis, response, receptors, molecular.</div>
+    <div><span class="tier t-mid">Medium</span> moderate.</div>
+    <div><span class="tier t-low">Basic · layperson</span> reason for visit, treatment-goal direction, lab values — answerable without medical training.</div>
+    <div><b>Please focus your effort on the Deep questions.</b></div>
+  </div>
+  <div><b>PL attribution</b> = the source span the model cited, to help you check PL's faithfulness. <b>No verdict is pre-filled — please score independently.</b></div>
 </div>
-<div class="toc"><b>乳腺：</b>{''.join(tb)}</div>
-<div class="toc"><b>胰腺：</b>{''.join(tp)}</div>
+<div class="toc"><b>Breast:</b> {''.join(tb)}</div>
+<div class="toc"><b>PDAC:</b> {''.join(tp)}</div>
 {''.join(bb)}
 {''.join(bp)}
-<div style="margin:30px 28px;color:#888;font-size:12px">PL 值来自 pipeline_*_FINAL.txt，BL 值来自 baseline_extract_*_json.txt。题目定义见 QUESTIONS.txt。</div>
+<div style="margin:30px 28px;color:#888;font-size:12px">PL values from pipeline_*_FINAL.txt; BL values from baseline_extract_*_json.txt. Question definitions in QUESTIONS.txt.</div>
 <script>{js}</script>
 </body></html>'''
     outp = os.path.join(HERE, "PL_vs_BL_scoring.html")
