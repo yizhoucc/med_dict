@@ -242,3 +242,20 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 - 因 scoring HTML 题集变化，localStorage key 升 `pl_bl_scoring_v1`→`v2`，避免旧版残留答案串入导出。
 
 **删后口径变化**：scored 题 758→678（减 80 = 2 题×40 −2 NA）；PL 110 / 打平 558 / BL 10（PL 总胜从 126 降至 110，因这两题原各贡献 +6、+10，且 BL 在这两题从未获胜）。核心结论不变：current_meds 仍 35:0 碾压，BL 仍无任何核心高价值题获胜。
+
+---
+
+## 2026-06-16 评审侧改进（医生反馈：题目要体现"我们要 extraction"）
+
+医生指出当前评审有几个会误导人类打分的问题，本轮**只改评审侧**（题目 / rubric / HTML），prompt 改动留 backlog。
+
+**1. Q6 type/receptor 按癌种区分**：胰腺癌没有 ER/PR/HER2（那是乳腺标志物）。`build_scoring_html.py` 新增 `PER_CANCER` 覆盖：乳腺 Q6 = "Type / receptors (ER/PR/HER2)"；胰腺 Q6 = "Histologic type & grade"（导管腺癌 + 分化程度），并注明 PDAC 无 ER/PR/HER2、KRAS/MMR/CA19-9 归 Q7。
+
+**2. 核心评分原则 "extraction ≠ summary" 写进题目（防人类被带偏）**：
+- 问题动机：PL 没信心时把一堆证据/细节罗列出来（= 成功 extract 了细节，让医生判断）= **好**；BL 丢了细节、给一句模糊总结，"碰巧读起来正确无可挑剔" = **跑题**（任务是 extraction，summary/infer 即使对了也不是我们要的）。但人类打分天然会被流畅总结带偏，给 BL 高分。
+- 落地（"离得近不容易忘"）：① `legend` 顶部加醒目 `★ Scoring principle`（三条 bullet 解释）；② sticky 顶栏加一句常驻提醒 `barrule`；③ **每一道题**的打分按钮上方都加一条 `⚑ Reward extraction, not summary` 提示（680 条）；④ **每道题的 qtext 重写**为 extraction 导向，明确"要抽取的具体内容 + We want the actual …, not a vague …"。
+- 典型例子写进 Q13 medication_plan 题面：pdac ROW 1（coral 0）PL 值 = "No specific medications…"（错误的 infer/summary），但其 attribution = "He would really like a chemotherapy break."（chemo break = 有变化）。题面据此明示"想 chemo break 就是一种变化，不能答无变化"。
+
+**3. attribution 标明是模型生成**：HTML 每条 attribution 改标 "(quote the model pulled from the note)"，legend 说明它是**模型二次回合自己摘的原文引文**（`source_attribution.py`，非 pipeline 编写、未程序化校验逐字），需回原文验证。
+
+**[BACKLOG] prompt 改动（本轮未做，待开 WSL/vLLM 重跑全 40）**：让模型多 extract 少 infer——有信心的 infer 用括号括起来，没信心的不硬下结论（直接列证据让医生判断）。目标是消除 Q13 那类"把有变化 infer 成无变化"的错误总结。改 `prompts/pdac/extraction.yaml` + `prompts/extraction.yaml` 后需重跑→重新审查→重生成所有 HTML/图。

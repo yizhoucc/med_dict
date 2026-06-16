@@ -81,31 +81,51 @@ def attr_for(att, key):
 
 
 # 19 shared questions: (field-id, label, tier, section, key, question-text)
+# Every question text states WHAT SPECIFIC THING to extract and explicitly says a vague
+# summary is not what we want — so raters judge on extraction, not on smooth wording.
 QUESTIONS = [
-    ("current_meds",   "Current medications", "deep", "Current_Medications", "current_meds", "Which drugs is the patient currently taking that are ANTI-CANCER? (Exclude non-cancer home meds — BP/diabetes/pain — discontinued drugs, and planned-but-not-started drugs.)"),
-    ("stage",          "Cancer stage", "deep", "Cancer_Diagnosis", "Stage_of_Cancer", "What is the cancer stage?"),
-    ("distant_met",    "Distant metastasis", "deep", "Cancer_Diagnosis", "Distant Metastasis", "Is there distant metastasis, and where? (Axillary / supraclavicular = regional, NOT distant; suspected ≠ confirmed.)"),
-    ("metastasis",     "Metastasis (incl. regional)", "deep", "Cancer_Diagnosis", "Metastasis", "Is there nodal / regional involvement? (Distinguish regional lymph nodes vs distant metastasis.)"),
-    ("response",       "Treatment response", "deep", "Response_Assessment", "response_assessment", "How is the cancer responding to current treatment? (Side effects ≠ response; not yet on treatment → nothing to assess.)"),
-    ("type_receptor",  "Type / receptors (ER/PR/HER2)", "deep", "Cancer_Diagnosis", "Type_of_Cancer", "Pathology type and receptor status (ER/PR/HER2; bilateral disease must list each side)."),
-    ("genetic_results","Molecular / genetic results", "deep", "Genetic_Testing_Results", "genetic_testing_results", "Molecular / genetic test results already available."),
-    ("genetic_plan",   "Genetic testing plan", "deep", "Genetic_Testing_Plan", "genetic_testing_plan", "Which genetic / molecular tests are planned."),
-    ("supportive_meds","Supportive medications", "deep", "Treatment_Changes", "supportive_meds", "Supportive meds (antiemetics / analgesics / pancreatic enzymes / bone agents, etc.; non-anticancer)."),
-    ("procedure_plan", "Procedure plan", "deep", "Procedure_Plan", "procedure_plan", "Planned procedures / surgery."),
-    ("imaging_plan",   "Imaging plan", "deep", "Imaging_Plan", "imaging_plan", "Planned imaging."),
-    ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Planned labs."),
-    ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Planned / continued drug regimen."),
-    ("recent_changes", "Recent treatment changes", "med", "Treatment_Changes", "recent_changes", "Recent changes to the treatment regimen (start / stop / switch / hold)."),
+    ("current_meds",   "Current medications", "deep", "Current_Medications", "current_meds", "Extract the specific ANTI-CANCER drugs the patient is currently ON, by name. Exclude non-cancer home meds (BP / diabetes / pain), discontinued drugs, and not-yet-started drugs. We want the actual drug names — not a vague 'on chemotherapy'."),
+    ("stage",          "Cancer stage", "deep", "Cancer_Diagnosis", "Stage_of_Cancer", "Extract the specific stage / TNM stated or derivable from the note (tumor size + nodes + mets). We want the concrete stage — not 'advanced' hand-waving, and not an unjustified 'not mentioned'."),
+    ("distant_met",    "Distant metastasis", "deep", "Cancer_Diagnosis", "Distant Metastasis", "Extract whether there is distant metastasis AND the specific site(s). Axillary / supraclavicular = regional, NOT distant; suspected ≠ confirmed — say which. We want the specific sites, not a bare yes/no."),
+    ("metastasis",     "Metastasis (incl. regional)", "deep", "Cancer_Diagnosis", "Metastasis", "Extract nodal / regional involvement specifically (which nodes, how many). Distinguish regional lymph nodes from distant metastasis. We want the concrete nodal detail."),
+    ("response",       "Treatment response", "deep", "Response_Assessment", "response_assessment", "Extract how the cancer is responding, WITH the specific evidence (imaging change, marker trend). Side effects ≠ response; not yet on treatment → say so. We want the concrete finding, not a vague 'doing well'."),
+    ("type_receptor",  "Type / receptors", "deep", "Cancer_Diagnosis", "Type_of_Cancer", "Extract the pathology type and the specific receptor / subtype status. We want each value stated, not a vague label. (See per-cancer note.)"),
+    ("genetic_results","Molecular / genetic results", "deep", "Genetic_Testing_Results", "genetic_testing_results", "Extract the specific molecular / genetic results available (gene, variant, status — e.g. BRCA2+, MMR intact, CA19-9 non-secretor). We want each concrete result listed, not 'testing was done'."),
+    ("genetic_plan",   "Genetic testing plan", "deep", "Genetic_Testing_Plan", "genetic_testing_plan", "Extract which specific genetic / molecular tests are planned or sent (Oncotype, UCSF500, germline panel, …). We want the named tests, not 'will test'."),
+    ("supportive_meds","Supportive medications", "deep", "Treatment_Changes", "supportive_meds", "Extract the specific supportive meds by name (antiemetics, analgesics, pancreatic enzymes, bone agents). We want the named drugs, not 'supportive care given'."),
+    ("procedure_plan", "Procedure plan", "deep", "Procedure_Plan", "procedure_plan", "Extract the specific planned procedures / surgery (port, biopsy, resection, …). We want the named procedures, not 'procedure planned'."),
+    ("imaging_plan",   "Imaging plan", "deep", "Imaging_Plan", "imaging_plan", "Extract the specific planned imaging (CT / MRI / PET / DEXA, with timing if stated). We want the named scans, not 'imaging to follow'."),
+    ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Extract the specific planned labs (CA19-9 follow-up, electrolytes, …). We want the named labs, not 'labs to follow'."),
+    ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Extract the specific medication plan — drugs to start / continue / stop, INCLUDING a chemo hold or break. We want the actual planned change extracted; e.g. 'no medications mentioned' is wrong when the note says the patient wants a chemo break (that IS a change)."),
+    ("recent_changes", "Recent treatment changes", "med", "Treatment_Changes", "recent_changes", "Extract the specific recent change to the regimen (started / stopped / switched / held — with the drug). We want the concrete change, not 'treatment ongoing'."),
     # NOTE: 'patient_type' and 'goals (treatment intent)' were dropped 2026-06-15 — a
     # clinician judged both clinically useless to score. Their historical PL-vs-BL
     # verdicts are kept in _audit_v5/verdicts.json; they are removed from scoring/HTML/figs.
-    ("summary",        "Reason for visit (summary)", "basic", "Reason_for_Visit", "summary", "Summary of the reason for this visit."),
-    ("lab_summary",    "Lab summary", "basic", "Lab_Results", "lab_summary", "Summary of lab results (excluding imaging / pathology / genetics)."),
-    ("findings",       "Clinical findings", "basic", "Clinical_Findings", "findings", "Objective exam / imaging findings (not subjective symptoms)."),
+    ("summary",        "Reason for visit (summary)", "basic", "Reason_for_Visit", "summary", "Reason for this visit (low-priority free text)."),
+    ("lab_summary",    "Lab summary", "basic", "Lab_Results", "lab_summary", "Extract the specific lab results / values (excluding imaging / pathology / genetics). We want the actual numbers, not 'labs stable'."),
+    ("findings",       "Clinical findings", "basic", "Clinical_Findings", "findings", "Extract the specific objective exam / imaging findings (sizes, sites) — NOT subjective symptoms. We want the concrete findings listed, not a one-line impression."),
 ]
 TIER_CLASS = {"deep": "t-good", "med": "t-mid", "basic": "t-low"}
 TIER_LABEL = {"deep": "Deep · needs medical knowledge", "med": "Medium", "basic": "Basic · layperson"}
 NQ = len(QUESTIONS)
+
+# Per-cancer overrides of (label, question-text). Breast and PDAC don't share the same
+# biology — e.g. PDAC has no ER/PR/HER2 receptors, so Q6 must be phrased per cancer.
+PER_CANCER = {
+    "type_receptor": {
+        "b": ("Type / receptors (ER/PR/HER2)",
+              "Extract the histologic type AND the specific ER / PR / HER2 status — each value (bilateral disease must list each side). We want each receptor stated, not a vague 'hormone-positive'."),
+        "p": ("Histologic type & grade",
+              "Extract the pancreatic histology and differentiation grade (e.g. ductal adenocarcinoma, well / moderately / poorly differentiated). "
+              "NOTE: PDAC has NO ER/PR/HER2 — those are breast markers; molecular markers (KRAS, MMR/MSI, CA19-9 secretor status) belong under 'Molecular / genetic results'."),
+    },
+}
+
+# Shown next to EVERY question's scoring control so raters don't get misled (see legend).
+SCORING_RULE = ('⚑ Reward <b>extraction</b>, not summary. PL listing more raw detail — even '
+                'without a firm conclusion — is GOOD (you, the clinician, judge it). A vague BL '
+                'summary that happens to be right is <b>off-task</b> (the task is extraction), '
+                '<b>not</b> a reason to pick "BL better".')
 
 
 def build(cancer, pl, bl):
@@ -119,11 +139,13 @@ def build(cancer, pl, bl):
         toc.append(f'<a href="#{rid}">{cancer.upper()}{row}</a>')
         qhtml = []
         for qi, (fid, label, tier, section, key, qtext) in enumerate(QUESTIONS, 1):
+            if fid in PER_CANCER and cancer in PER_CANCER[fid]:
+                label, qtext = PER_CANCER[fid][cancer]
             pv = get_val(p["kp"], section, key).strip()
             bv = get_val(b, section, key).strip()
             both_empty = (not pv) and (not bv)
             ev = attr_for(p["att"], key).strip()
-            evhtml = (f'<div class="ev"><b>PL attribution:</b> {html.escape(ev[:320])}</div>'
+            evhtml = (f'<div class="ev"><b>PL attribution</b> <span class="evsrc">(quote the model pulled from the note)</span>: {html.escape(ev[:320])}</div>'
                       if ev else '')
             name = f"{rid}__{fid}"
             na_note = ' <span class="na">(both empty — may mark N/A)</span>' if both_empty else ''
@@ -138,6 +160,7 @@ def build(cancer, pl, bl):
     <div class="qcol pl"><div class="qtag">PL (our method)</div><div class="qval">{html.escape(pv) or "<em>(empty)</em>"}</div>{evhtml}</div>
     <div class="qcol bl"><div class="qtag">BL (same model, single prompt)</div><div class="qval">{html.escape(bv) or "<em>(empty)</em>"}</div></div>
   </div>
+  <div class="rule">{SCORING_RULE}</div>
   <div class="score" role="radiogroup">
     <label class="opt o-pl"><input type="radio" name="{name}" value="PL"> PL better</label>
     <label class="opt o-tie"><input type="radio" name="{name}" value="TIE"> Tie</label>
@@ -181,9 +204,15 @@ header p{margin:4px 0;font-size:13px;opacity:.93}
 .s-pl{background:#e3f3e7;color:#1b7a36}.s-tie{background:#eee;color:#777}.s-bl{background:#fbe3df;color:#c0392b}.s-na{background:#eef;color:#558}.s-done{background:#0b3d63;color:#fff}
 .bar button{font-size:13px;padding:6px 14px;border:1px solid #0b3d63;background:#0b3d63;color:#fff;border-radius:6px;cursor:pointer}
 .bar button.ghost{background:#fff;color:#0b3d63}
+.barrule{font-size:12px;color:#7a5b00;background:#fff7e0;border:1px solid #f0d79a;border-radius:6px;padding:4px 10px}
+.barrule b{color:#6b4f00}
 .legend{background:#fff;border:1px solid #d8dde3;border-radius:8px;padding:12px 16px;margin:14px 28px;font-size:13px}
 .legend>div{margin:6px 0}
 .legend b{color:#0b3d63}
+.principle{background:#fff7e0;border:1px solid #f0d79a;border-left:4px solid #d9a400;border-radius:6px;padding:9px 13px}
+.principle b{color:#6b4f00}
+.principle ul{margin:6px 0 0;padding-left:20px}
+.principle li{margin:3px 0}
 .tiers{background:#f8fafc;border:1px solid #e3e8ee;border-radius:6px;padding:8px 12px}
 .tiers>div{margin:4px 0}
 .toc{margin:8px 28px;font-size:12.5px}
@@ -215,6 +244,9 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 .qcol.pl .qtag{color:#1b7a36}.qcol.bl .qtag{color:#777}
 .qval{white-space:pre-wrap;word-break:break-word}
 .ev{margin-top:5px;font-size:11px;color:#4a6a6a;border-top:1px dotted #cdd;padding-top:4px}
+.evsrc{color:#8a8f95;font-style:italic}
+.rule{font-size:11.5px;color:#7a5b00;background:#fff7e0;border:1px solid #f0d79a;border-left:4px solid #d9a400;border-radius:5px;padding:5px 9px;margin:0 0 6px}
+.rule b{color:#6b4f00}
 .score{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .opt{font-size:12.5px;font-weight:600;padding:5px 11px;border:1.5px solid #ccd;border-radius:18px;cursor:pointer;user-select:none}
 .opt input{margin-right:4px;vertical-align:middle}
@@ -314,8 +346,16 @@ window.addEventListener("DOMContentLoaded",applySaved);
   <button onclick="exportCSV()">Export CSV</button>
   <button class="ghost" onclick="exportJSON()">Export JSON</button>
   <button class="ghost" onclick="resetAll()">Reset</button>
+  <span class="barrule">⚑ The task is <b>extraction</b>, not summary — a vague summary that happens to be right is off-task, not a win.</span>
 </div>
 <div class="legend">
+  <div class="principle"><b>★ Scoring principle — reward extraction, not summary/inference.</b> Our task is to <b>extract</b> the concrete facts from the note. So:
+    <ul>
+      <li><b>PL listing many raw details</b> (drugs, sizes, nodes, dates) <b>without forcing a tidy conclusion</b> is a <b>good</b> outcome — it means the details were pulled out; you, the clinician, can judge them.</li>
+      <li><b>BL giving a short, vague summary</b> that omits the details but <b>happens to read as correct</b> is <b>off-task</b>. Even if it sounds right, it skipped the extraction job — that is <b>not</b> a reason to mark "BL better".</li>
+      <li>Mark "BL better" only when BL genuinely extracted something <b>true and specific that PL missed or got wrong</b> — not merely when BL's summary is shorter or smoother.</li>
+    </ul>
+  </div>
   <div><b>How to score:</b> For each question you'll see the same field as extracted by PL and by BL. Using the source note above (A/P section; expand for the full note), decide which is more faithful / complete / correct, and choose <b>PL better / Tie / BL better</b>. If both are empty and the note truly has no such item, choose N/A.</div>
   <div class="tiers">
     <div><b>Depth tiers:</b></div>
@@ -324,7 +364,7 @@ window.addEventListener("DOMContentLoaded",applySaved);
     <div><span class="tier t-low">Basic · layperson</span> reason for visit, treatment-goal direction, lab values — answerable without medical training.</div>
     <div><b>Please focus your effort on the Deep questions.</b></div>
   </div>
-  <div><b>PL attribution</b> = the source span the model cited, to help you check PL's faithfulness. <b>No verdict is pre-filled — please score independently.</b></div>
+  <div><b>PL attribution</b> = a quote that <b>the model itself generated</b> (a second model pass was asked to cite the exact phrase from the note that supports the value). It is model-produced, not written by us — use it to check PL's faithfulness, but verify it against the note. <b>No verdict is pre-filled — please score independently.</b></div>
 </div>
 <div class="toc"><b>Breast:</b> {''.join(tb)}</div>
 <div class="toc"><b>PDAC:</b> {''.join(tp)}</div>
