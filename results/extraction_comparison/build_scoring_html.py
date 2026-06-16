@@ -96,14 +96,16 @@ QUESTIONS = [
     ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Planned labs."),
     ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Planned / continued drug regimen."),
     ("recent_changes", "Recent treatment changes", "med", "Treatment_Changes", "recent_changes", "Recent changes to the treatment regimen (start / stop / switch / hold)."),
-    ("patient_type",   "Patient type", "med", "Reason_for_Visit", "Patient type", "New patient vs follow-up (initial consult / second opinion = New patient)."),
-    ("goals",          "Treatment goals (intent)", "basic", "Treatment_Goals", "goals_of_treatment", "Is the treatment intent curative or palliative?"),
+    # NOTE: 'patient_type' and 'goals (treatment intent)' were dropped 2026-06-15 — a
+    # clinician judged both clinically useless to score. Their historical PL-vs-BL
+    # verdicts are kept in _audit_v5/verdicts.json; they are removed from scoring/HTML/figs.
     ("summary",        "Reason for visit (summary)", "basic", "Reason_for_Visit", "summary", "Summary of the reason for this visit."),
     ("lab_summary",    "Lab summary", "basic", "Lab_Results", "lab_summary", "Summary of lab results (excluding imaging / pathology / genetics)."),
     ("findings",       "Clinical findings", "basic", "Clinical_Findings", "findings", "Objective exam / imaging findings (not subjective symptoms)."),
 ]
 TIER_CLASS = {"deep": "t-good", "med": "t-mid", "basic": "t-low"}
 TIER_LABEL = {"deep": "Deep · needs medical knowledge", "med": "Medium", "basic": "Basic · layperson"}
+NQ = len(QUESTIONS)
 
 
 def build(cancer, pl, bl):
@@ -145,7 +147,7 @@ def build(cancer, pl, bl):
   </div>
 </div>''')
         block = f'''<section class="sample" id="{rid}">
-  <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}">0/19</span></h2>
+  <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}">0/{NQ}</span></h2>
   <div class="source">
     <div class="srchead">Source · Assessment &amp; Plan (basis for scoring; expand for the full note)</div>
     <pre class="ap">{html.escape(p["ap"]) or "(no A/P section)"}</pre>
@@ -225,7 +227,7 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 @media print{.bar,.toc,.top,.score{display:none}.sample{break-inside:avoid;box-shadow:none}body{background:#fff}}
 '''
     js = '''
-const KEY="pl_bl_scoring_v1", TOTAL=%d;
+const KEY="pl_bl_scoring_v2", TOTAL=%d, NQ=%d;
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
 function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
 let data=load();
@@ -260,8 +262,8 @@ function recount(){
   document.getElementById("c_done").textContent=done+"/"+TOTAL;
   document.querySelectorAll(".rowprog").forEach(p=>{
     const rid=p.id.replace("prog_","");const n=rowDone[rid]||0;
-    p.textContent=n+"/19";p.classList.toggle("full",n>=19);
-    const a=document.querySelector(`.toc a[href="#${rid}"]`);if(a)a.classList.toggle("done",n>=19);
+    p.textContent=n+"/"+NQ;p.classList.toggle("full",n>=NQ);
+    const a=document.querySelector(`.toc a[href="#${rid}"]`);if(a)a.classList.toggle("done",n>=NQ);
   });
 }
 document.addEventListener("change",e=>{
@@ -292,7 +294,7 @@ function exportJSON(){
 }
 function resetAll(){if(confirm("Clear all scores?")){data={};save(data);location.reload();}}
 window.addEventListener("DOMContentLoaded",applySaved);
-''' % total_q
+''' % (total_q, NQ)
 
     htmldoc = f'''<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -301,7 +303,7 @@ window.addEventListener("DOMContentLoaded",applySaved);
 <header>
   <h1>Oncology Note Structured Extraction · PL vs BL — Clinician Scoring (Full)</h1>
   <p>PL = our method (multi-stage extraction + 5-gate verification + drug/term dictionaries + post-processing). BL = the same model (Qwen2.5-32B) run with a single prompt and no post-processing. The only variable is the processing pipeline.</p>
-  <p>40 de-identified samples (20 breast + 20 PDAC, UCSF CORAL, ***** redacted). For each sample, score <b>all 19 questions</b>: PL better / Tie / BL better / N/A. Scores auto-save in your browser and can be exported anytime.</p>
+  <p>40 de-identified samples (20 breast + 20 PDAC, UCSF CORAL, ***** redacted). For each sample, score <b>all {NQ} questions</b>: PL better / Tie / BL better / N/A. Scores auto-save in your browser and can be exported anytime.</p>
 </header>
 <div class="bar">
   <span class="stat">Progress<span class="s-done" id="c_done">0/{total_q}</span></span>

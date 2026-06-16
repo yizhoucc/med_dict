@@ -224,3 +224,21 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 - pdac13 gemcitabine 时态、pdac7 Gyn-Onc 转诊漏、b20 Type 双侧 HER2 未拆分、b5 genetic vLLM 漂移——均次要字段、信息多在 findings、且每轮重跑 vLLM 漂移会持续产生新的此类长尾。
 
 **最终判定（按用户 "如果打地鼠就停止" 规则）**：核心目标已达成且稳固，剩余为次要字段长尾 + vLLM 跨运行漂移的打地鼠。**停止迭代。** FINAL = pipeline_{breast,pdac}_FINAL.txt (commit b335700a)。
+
+---
+
+## 2026-06-15 删除两题（医生反馈：无评分价值）
+
+临床医生看过题库后，明确指出下面两题**对评估没有价值**，要求删除：
+
+| 题 | 字段 | 医生意见 | 历史 PL vs BL 表现（保留存档） |
+|----|------|----------|-------------------------------|
+| 就诊类型 Patient type | `Reason_for_Visit.Patient type` | 新患者 vs 随访，无临床评分意义 | PL 胜 6 / 打平 34 / BL 胜 0 |
+| 治疗目标 goals（治愈 vs 维持） | `Treatment_Goals.goals_of_treatment` | curative vs palliative 方向，无临床评分意义 | PL 胜 10 / 打平 30 / BL 胜 0 |
+
+**处理方式（保留结果、只删评分载体）**：
+- **保留**：两题逐样本 PL/BL 判定结果完整留在 `_audit_v5/verdicts.json`（共 19 条），及本 doc 上述历史表现，供日后复盘/存档——"我们曾评过这两题、发现没用"这件事本身被记录。
+- **删除**：从公用题库 `QUESTIONS.txt`（19→17 题）、三个 HTML 生成器题库定义（`build_scoring_html.py` / `build_verdict_html.py` / `build_review_html.py`）、所有图（`make_figs.py`，经 `QUESTIONS` 自动排除）中移除这两题。打分载体 `PL_vs_BL_scoring.html` 现为每样本 17 题（40×17=680）。
+- 因 scoring HTML 题集变化，localStorage key 升 `pl_bl_scoring_v1`→`v2`，避免旧版残留答案串入导出。
+
+**删后口径变化**：scored 题 758→678（减 80 = 2 题×40 −2 NA）；PL 110 / 打平 558 / BL 10（PL 总胜从 126 降至 110，因这两题原各贡献 +6、+10，且 BL 在这两题从未获胜）。核心结论不变：current_meds 仍 35:0 碾压，BL 仍无任何核心高价值题获胜。

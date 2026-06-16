@@ -1,5 +1,6 @@
-PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseline
+PL vs BL 逐题对比清单  生成自 verdicts.json + FINAL/baseline
 判定: PL更好 / 打平 / PL不如BL    深度: 优=需医学知识 评=中 差=普通人可答
+注: patient_type 与 goals 两题已于 2026-06-15 删除(医生判定无评分价值),此清单不含;历史判定见 verdicts.json
 ================================================================================
 
 ### 乳腺Breast ROW 1 (coral_idx=20)
@@ -23,10 +24,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: 两者都给出ER-/PR-/HER2- triple negative IDC grade 3，与病理一致，实质等价。
       PL: ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma
       BL: Invasive ductal carcinoma, SBR grade 3, triple negative (ER negative, PR negative, HER2 negative)
-  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL写curative正确——note明确Stage II(T2N1)TNBC，'we generally provide chemotherapy to patients with Stage II TNBC'是根治意图；BL写palliative错误，早期可手术TNBC不是姑息。
-      PL: curative
-      BL: palliative
 
 ### 乳腺Breast ROW 2 (coral_idx=21)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: 打平
@@ -41,14 +38,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL把zoledronic acid归入supportive_meds正确——'started her on zoledronic acid because of her osteoporosis'；BL写'None mentioned'遗漏。
       PL: Zoledronic acid
       BL: None mentioned
-  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: PL'New patient'正确——note开头'I had the pleasure of seeing this patient in consultation'是初诊会诊；BL'Follow up'错误。
-      PL: New patient
-      BL: Follow up
-  Q5 [差] 治疗目标 goals（方向）  —— 判定: 打平
-      理由: PL写curative对局部区域复发不可切病例偏乐观，BL写'hormone therapy'答非所问，两者各有瑕疵。
-      PL: curative
-      BL: hormone therapy
 
 ### 乳腺Breast ROW 3 (coral_idx=22)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -103,10 +92,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL纳入双侧病理+MRI影像，客观全面；BL只列体检阴性所见，遗漏全部病理与影像发现。
       PL: Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy.
       BL: No masses bilaterally, no lymphadenopathy, no tenderness, no distention, no HSM, no edema, good strength throughout, no rashes or lesions.
-  Q5 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'正确——早期可切乳腺癌辅助化疗+内分泌是根治意图；BL写'adjuvant'(治疗时机非意图)，答非所问。
-      PL: curative
-      BL: adjuvant
 
 ### 乳腺Breast ROW 6 (coral_idx=25)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -153,14 +138,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL正确留空（尚未开始抗癌治疗）；BL把acetaminophen/atenolol/omeprazole/simvastatin等家用药列入。
       PL: （空）
       BL: acetaminophen, ascorbic acid, atenolol, docusate sodium, gabapentin, ibuprofen, multivitamin, omeprazole, simvastatin
-  Q2 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: PL'New patient'正确——'presents to establish Oncology care'即首次肿瘤科建卡；BL误判'Follow up'。
-      PL: New patient
-      BL: Follow up
-  Q3 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'符合早期(IIA)辅助治疗决策树；BL写'adjuvant'(治疗时序非意图)，答非所问。
-      PL: curative
-      BL: adjuvant
 
 ### 乳腺Breast ROW 9 (coral_idx=28)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -179,10 +156,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL'Originally Stage III (T3N2), Suspected Stage IV'同时保留原分期与当前疑似升期；BL仅'Stage III (T3N2)'遗漏疑似升级。
       PL: Originally Stage III (T3N2), Suspected Stage IV (pending confirmation)
       BL: Stage III (T3N2)
-  Q5 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: PL'New patient'正确——'presenting in consultation...to establish care'；BL误判'Follow up'。
-      PL: New patient
-      BL: Follow up
 
 ### 乳腺Breast ROW 10 (coral_idx=29)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -193,10 +166,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: BL更全，列echo/EKG(04/23)+Mammi/PET(04/29)；PL仅列'Mammi/PET on 05/01/17'遗漏echo/EKG。
       PL: Mammi/PET on 05/01/17
       BL: Echocardiogram and EKG on 04/23/17, Mammoprint/PET on 04/29/17
-  Q3 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'符合早期(II期)新辅助治疗意图；BL写'neoadjuvant chemotherapy'(治疗时序非意图)，答非所问。
-      PL: curative
-      BL: neoadjuvant chemotherapy
 
 ### 乳腺Breast ROW 11 (coral_idx=30)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -211,10 +180,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL更完整：写ER+/PR pending/HER2 not tested；BL只写ER+/PR pending漏HER2状态。
       PL: ER+/PR pending ductal carcinoma in situ (DCIS), HER2: not tested
       BL: Left breast DCIS, intermediate nuclear grade, cribriform and micropapillary patterns, ER positive, PR pending
-  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: PL'New patient'正确——这是首次med onc会诊讨论辅助内分泌治疗('discussion of potential adjuvant anti-hormonal therapy')；BL'Follow up'错误。
-      PL: New patient
-      BL: Follow up
 
 ### 乳腺Breast ROW 12 (coral_idx=31)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -243,18 +208,10 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: BL抓到脑MRI随访建议(6月复查)；PL写'No imaging planned'遗漏。
       PL: No imaging planned.
       BL: MRI brain for further evaluation
-  Q4 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: PL'New patient'正确——为讨论治疗方案的初次会诊；BL'Follow up'错误。
-      PL: New patient
-      BL: Follow up
-  Q5 [差] 检查发现 findings  —— 判定: PL更好
+  Q4 [差] 检查发现 findings  —— 判定: PL更好
       理由: PL详列病理+影像+体检；BL把右乳与腋窝LN笼统称'metastatic'，将区域LN受累措辞为转移性，易误导。
       PL: Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%. Imaging findings include a 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion, suspicious additional ductal disease, and disease within the nipple. MRI and PET/CT reveal a hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are noted. A hyperdense 0.7 cm falx lesion is present, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes.
       BL: Hypermetabolic right breast mass and axillary lymph node consistent with known metastatic invasive ductal carcinoma. 5 mm right parafalcine dural-based mass is most likely a meningioma.
-  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'正确——早期可手术计划辅助化疗+内分泌；BL'adjuvant'(治疗时机非目标)，答非所问。
-      PL: curative
-      BL: adjuvant
 
 ### 乳腺Breast ROW 14 (coral_idx=33)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -295,10 +252,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL详列病理免疫组化+多处淋巴结尺寸SUV+乳腺MRI；BL仅一句MRI。
       PL: Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral extremely dense breast tissue with no primary malignancy features on mammogram. Right axillary lymphadenopathy with calcifications noted. PET/CT shows multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) and right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI reveals marked background enhancement in both breasts, with a more confluent area in the right upper outer breast (3.5 cm). Right axillary tail mass (1.5 x 0.5 x 1.0 cm) with suggestion of susceptibility artifact on T1 imaging. Enlarged right axillary lymph nodes with cortical thickness up to 1 cm. No distant metastasis detected except for lymphadenopathy.
       BL: Marked background enhancement in the right upper outer breast, posterior depth, and enlarged right axillary lymph nodes with cortical thickness.
-  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'palliative'正确——note明确'we do not consider MBC to be curable'；BL'curative'直接与原文矛盾，方向性错误。
-      PL: palliative
-      BL: curative
 
 ### 乳腺Breast ROW 16 (coral_idx=35)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -327,10 +280,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL留空正确：ONPRO是pegfilgrastim给药装置且属未来化疗计划；BL把'ONPRO support'当作当前supportive_med属时态与归类错误。
       PL: （空）
       BL: ONPRO support
-  Q4 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'符合治疗意图；BL'adjuvant'是治疗时机非目标，答非所问。
-      PL: curative
-      BL: adjuvant
 
 ### 乳腺Breast ROW 18 (coral_idx=37)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -381,10 +330,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: 双侧乳腺癌：PL只写'HER2+ invasive carcinoma'漏左侧HER2-(0)；BL明确'HER2 positive on the right, HER2 negative on the left'写全双侧。
       PL: ER+/PR+/HER2+ invasive carcinoma with some lobular differentiation
       BL: Bilateral breast cancer, ER+, PR+, HER2 positive on the right, and HER2 negative on the left
-  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL'curative'符合治疗意图；BL'Adjuvant therapy'是治疗时机非目标，答非所问。
-      PL: curative
-      BL: Adjuvant therapy
 
 ================================================================================
 
@@ -505,10 +450,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL='Stage III (locally advanced)'，BL='Not specified'；note反复称'locally advanced pancreatic cancer'有血管包绕无远转。
       PL: Stage III (locally advanced)
       BL: Not specified in the note
-  Q4 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL='curative'是治疗意图，BL='neoadjuvant'只是modality；note新辅助化疗+计划手术切除目标为根治。
-      PL: curative
-      BL: neoadjuvant
 
 ### 胰腺PDAC ROW 8 (coral_idx=7)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -527,10 +468,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL='now metastatic (Stage IV)'，BL='pT2N2'停留在原分期漏掉复发转移；note标题即'recurrent metastatic pancreatic adenocarcinoma'。
       PL: Originally pt2n2, now metastatic (Stage IV)
       BL: pT2N2
-  Q5 [评] 就诊类型 Patient type  —— 判定: PL更好
-      理由: note='comes to our GI Oncology practice...in consultation'为新会诊，PL='New patient'正确，BL='Follow up'错误。
-      PL: New patient
-      BL: Follow up
 
 ### 胰腺PDAC ROW 9 (coral_idx=8)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -557,10 +494,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: 原文'he provided consent to proceed with screening procedures'，BL写'Screening procedures for clinical trial'反映了该试验筛查事件；PL写'No procedures planned'漏掉(注:试验筛查多为labs/影像而非手术操作，属边界情况)。
       PL: No procedures planned.
       BL: Screening procedures for clinical trial
-  Q4 [评] 就诊类型 Patient type  —— 判定: 打平
-      理由: PL与BL都写'New patient'(原文'newly diagnosed metastatic pancreatic cancer presenting for a second opinion')，两者均正确，等价。(subagent曾误读PL为Follow up，已核对FINAL更正为TIE)
-      PL: New patient
-      BL: New patient
 
 ### 胰腺PDAC ROW 12 (coral_idx=11)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -625,10 +558,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: 原文chemo break中无在用抗癌药；PL=''、BL='None active at this visit'均正确。
       PL: （空）
       BL: None active at this visit
-  Q2 [差] 治疗目标 goals（方向）  —— 判定: 打平
-      理由: 两者均判palliative；locally advanced unresectable PDAC判palliative合理。
-      PL: palliative
-      BL: Palliative
 
 ### 胰腺PDAC ROW 18 (coral_idx=17)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好
@@ -651,10 +580,6 @@ PL vs BL 逐题对比清单（151 题）  生成自 verdicts.json + FINAL/baseli
       理由: PL'2 of 29 lymph nodes positive'抓到淋巴结阳性这一关键分期信息；BL'Not specified'遗漏。
       PL: Originally technically resectable, now with 2 of 29 lymph nodes positive
       BL: Not specified in note
-  Q6 [差] 治疗目标 goals（方向）  —— 判定: PL更好
-      理由: PL判curative正确：根治性切除(切缘阴性)+术后辅助化疗；BL判adjuvant混淆治疗阶段与意图。
-      PL: curative
-      BL: adjuvant
 
 ### 胰腺PDAC ROW 19 (coral_idx=18)
   Q1 [优] 现用药 current_meds（抗癌 vs 非癌/已停）  —— 判定: PL更好

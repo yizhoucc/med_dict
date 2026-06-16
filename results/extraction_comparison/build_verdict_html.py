@@ -26,8 +26,8 @@ FIELD_MAP = {
     "referral":       ("转诊 Referral", "优", "Referral", "Specialty"),
     "advance_care":   ("预立医疗计划 Advance care", "优", "Advance_care_planning", None),
     "recent_changes": ("近期治疗变化 recent_changes", "评", "Treatment_Changes", "recent_changes"),
-    "patient_type":   ("就诊类型 Patient type", "评", "Reason_for_Visit", "Patient type"),
-    "goals":          ("治疗目标 goals（方向）", "差", "Treatment_Goals", "goals_of_treatment"),
+    # 'patient_type' 和 'goals(治疗目标)' 于 2026-06-15 由临床医生判定无评分价值而删除；
+    # 历史判定仍保留在 _audit_v5/verdicts.json，此处不再展示这两题。
     "summary":        ("就诊原因 summary", "差", "Reason_for_Visit", "summary"),
     "lab_summary":    ("化验摘要 lab_summary", "差", "Lab_Results", "lab_summary"),
     "findings":       ("检查发现 findings", "差", "Clinical_Findings", "findings"),

@@ -74,8 +74,7 @@ FIELDS = [
     ("化验计划 Lab plan", "优", "Lab_Plan", "lab_plan"),
     ("用药计划 Medication plan", "优", "Medication_Plan", "medication_plan"),
     ("近期治疗变化 recent_changes", "评", "Treatment_Changes", "recent_changes"),
-    ("就诊类型 Patient type", "评", "Reason_for_Visit", "Patient type"),
-    ("治疗目标 goals（方向）", "差", "Treatment_Goals", "goals_of_treatment"),
+    # 'Patient type' 和 'goals(治疗目标)' 于 2026-06-15 由临床医生判定无评分价值而删除（历史判定保留在 verdicts.json）。
     ("就诊原因 summary", "差", "Reason_for_Visit", "summary"),
     ("化验摘要 lab_summary", "差", "Lab_Results", "lab_summary"),
     ("检查发现 findings", "差", "Clinical_Findings", "findings"),

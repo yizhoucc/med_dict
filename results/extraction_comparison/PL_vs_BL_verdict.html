@@ -66,11 +66,11 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 <header>
   <h1>肿瘤笔记结构化提取 · PL vs BL 逐题评审判定</h1>
   <p>PL = 我们的方法（多阶段提取 + 5-gate 校验 + 药物/术语词典 + 后处理规则）。BL = 起点（<b>同一个模型</b> Qwen2.5-32B 单 prompt 裸跑）。唯一变量 = 处理流程。</p>
-  <p>仅列出 PL 与 BL <b>有实质差异</b>的小题（共 151 题）。每题先给<b>我的评审判定</b>（PL 更好 / 打平 / PL 不如 BL），再说<b>原文依据与理由</b>，最后并列 PL | BL 实际答案。判定来自 subagent 逐样本初审 + 主审逐条复核 FINAL 文件。</p>
+  <p>仅列出 PL 与 BL <b>有实质差异</b>的小题（共 132 题）。每题先给<b>我的评审判定</b>（PL 更好 / 打平 / PL 不如 BL），再说<b>原文依据与理由</b>，最后并列 PL | BL 实际答案。判定来自 subagent 逐样本初审 + 主审逐条复核 FINAL 文件。</p>
 </header>
 <div class="scoreboard">
-  <div class="score pl"><div class="num">127</div><div class="lbl">PL 更好</div></div>
-  <div class="score tie"><div class="num">13</div><div class="lbl">打平</div></div>
+  <div class="score pl"><div class="num">111</div><div class="lbl">PL 更好</div></div>
+  <div class="score tie"><div class="num">10</div><div class="lbl">打平</div></div>
   <div class="score bl"><div class="num">11</div><div class="lbl">PL 不如 BL</div></div>
 </div>
 <div class="blbox-top">
@@ -145,17 +145,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Invasive ductal carcinoma, SBR grade 3, triple negative (ER negative, PR negative, HER2 negative)</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL写curative正确——note明确Stage II(T2N1)TNBC，&#x27;we generally provide chemotherapy to patients with Stage II TNBC&#x27;是根治意图；BL写palliative错误，早期可手术TNBC不是姑息。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;chemotherapy is the only FDA approved treatment for triple negative breast cancer and that we generally provide chemotherapy to patients with Stage II TNBC.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">palliative</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="b2">
@@ -197,28 +186,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Zoledronic acid</div><div class="ev"><b>PL 原文归因:</b> [&quot;I started her on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor.&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">None mentioned</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL&#x27;New patient&#x27;正确——note开头&#x27;I had the pleasure of seeing this patient in consultation&#x27;是初诊会诊；BL&#x27;Follow up&#x27;错误。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div><div class="ev"><b>PL 原文归因:</b> [&quot;I had a long talk with her today and suggested that she consider treatment with an aromatase inhibitor&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
-  </div>
-</div><div class="q v-tie">
-  <div class="qhead">
-    <span class="vbadge v-tie">= 打平</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL写curative对局部区域复发不可切病例偏乐观，BL写&#x27;hormone therapy&#x27;答非所问，两者各有瑕疵。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;Given the limited radiation field that she initially had, I think it would be possible to shrink the tumor, potentially proceed with a surgical resection, and radiate this area in order to at least approach the possibility of long-term disease control.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">hormone therapy</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -379,17 +346,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ &gt;95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy.</div><div class="ev"><b>PL 原文归因:</b> [&quot;left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ &gt;95%, HER2- (IHC 1+; FISH ratio 1.0)&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">No masses bilaterally, no lymphadenopathy, no tenderness, no distention, no HSM, no edema, good strength throughout, no rashes or lesions.</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;正确——早期可切乳腺癌辅助化疗+内分泌是根治意图；BL写&#x27;adjuvant&#x27;(治疗时机非意图)，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;adjuvant chemotherapy in the context of clinically and genomically high risk disease&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">adjuvant</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="b6">
@@ -527,28 +483,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval"><em>（空）</em></div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">acetaminophen, ascorbic acid, atenolol, docusate sodium, gabapentin, ibuprofen, multivitamin, omeprazole, simvastatin</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL&#x27;New patient&#x27;正确——&#x27;presents to establish Oncology care&#x27;即首次肿瘤科建卡；BL误判&#x27;Follow up&#x27;。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div><div class="ev"><b>PL 原文归因:</b> [&quot;[REDACTED] [REDACTED] is a 70 y.o. female with a h/o HTN, HLD, and a recent diagnosis of stage IIA pT2(m)N1a L breast IDC (3.9 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, high-risk mammaprint) s/p 08/18/17 bilateral mastectomies with left axillary LND with 2/12 LN+, who presents to establish Oncology care.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;符合早期(IIA)辅助治疗决策树；BL写&#x27;adjuvant&#x27;(治疗时序非意图)，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;Given her early stage breast cancer with positive LN involvement, the mammaprint is essential in determining the next steps in her care.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">adjuvant</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="b9">
@@ -602,17 +536,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Originally Stage III (T3N2), Suspected Stage IV (pending confirmation)</div><div class="ev"><b>PL 原文归因:</b> [&quot;Stage III (T3N2) HR+/HER2- grade 2 IDC with micropapillary features of the left breast, now with a locally advanced, unresectable recurrence (possibly considered metastatic in context of a level Vb LN)&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Stage III (T3N2)</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL&#x27;New patient&#x27;正确——&#x27;presenting in consultation...to establish care&#x27;；BL误判&#x27;Follow up&#x27;。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="b10">
@@ -643,17 +566,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Mammi/PET on 05/01/17</div><div class="ev"><b>PL 原文归因:</b> [&quot;Hoping to do Mammi/PET on 05/01/17&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Echocardiogram and EKG on 04/23/17, Mammoprint/PET on 04/29/17</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;符合早期(II期)新辅助治疗意图；BL写&#x27;neoadjuvant chemotherapy&#x27;(治疗时序非意图)，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;Hopefully start neoadjuvant chemotherapy next week&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">neoadjuvant chemotherapy</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -696,17 +608,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">ER+/PR pending ductal carcinoma in situ (DCIS), HER2: not tested</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Left breast DCIS, intermediate nuclear grade, cribriform and micropapillary patterns, ER positive, PR pending</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL&#x27;New patient&#x27;正确——这是首次med onc会诊讨论辅助内分泌治疗(&#x27;discussion of potential adjuvant anti-hormonal therapy&#x27;)；BL&#x27;Follow up&#x27;错误。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -795,17 +696,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 </div><div class="q v-pl">
   <div class="qhead">
     <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL&#x27;New patient&#x27;正确——为讨论治疗方案的初次会诊；BL&#x27;Follow up&#x27;错误。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div><div class="ev"><b>PL 原文归因:</b> [&quot;[REDACTED] is a 36 y.o. female is here for discussion of treatment options of recently diagnosed ER+/HER neg right breast cancer with axillary LN involvement.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
     <span class="tier t-low">一般</span>
     <span class="qlabel">检查发现 findings</span>
   </div>
@@ -813,17 +703,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC &amp; FISH negative, and Ki67% 20-30%. Imaging findings include a 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion, suspicious additional ductal disease, and disease within the nipple. MRI and PET/CT reveal a hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are noted. A hyperdense 0.7 cm falx lesion is present, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes.</div><div class="ev"><b>PL 原文归因:</b> [&quot;Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC &amp; FISH negative, and Ki67% 20-30%&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Hypermetabolic right breast mass and axillary lymph node consistent with known metastatic invasive ductal carcinoma. 5 mm right parafalcine dural-based mass is most likely a meningioma.</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;正确——早期可手术计划辅助化疗+内分泌；BL&#x27;adjuvant&#x27;(治疗时机非目标)，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;she will need adjuvant chemotherapy in addition to hormonal therapy.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">adjuvant</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -942,17 +821,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows ER+ (&gt;90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral extremely dense breast tissue with no primary malignancy features on mammogram. Right axillary lymphadenopathy with calcifications noted. PET/CT shows multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) and right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI reveals marked background enhancement in both breasts, with a more confluent area in the right upper outer breast (3.5 cm). Right axillary tail mass (1.5 x 0.5 x 1.0 cm) with suggestion of susceptibility artifact on T1 imaging. Enlarged right axillary lymph nodes with cortical thickness up to 1 cm. No distant metastasis detected except for lymphadenopathy.</div><div class="ev"><b>PL 原文归因:</b> [&quot;presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, and cervical lymph nodes.&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Marked background enhancement in the right upper outer breast, posterior depth, and enlarged right axillary lymph nodes with cortical thickness.</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;palliative&#x27;正确——note明确&#x27;we do not consider MBC to be curable&#x27;；BL&#x27;curative&#x27;直接与原文矛盾，方向性错误。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">palliative</div><div class="ev"><b>PL 原文归因:</b> [&quot;technically, we do not consider MBC to be curable.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">curative</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="b16">
@@ -1036,17 +904,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval"><em>（空）</em></div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">ONPRO support</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;符合治疗意图；BL&#x27;adjuvant&#x27;是治疗时机非目标，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;Given the extent of her cancer, I would recommend adjuvant chemotherapy.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">adjuvant</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -1195,17 +1052,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">ER+/PR+/HER2+ invasive carcinoma with some lobular differentiation</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Bilateral breast cancer, ER+, PR+, HER2 positive on the right, and HER2 negative on the left</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL&#x27;curative&#x27;符合治疗意图；BL&#x27;Adjuvant therapy&#x27;是治疗时机非目标，答非所问。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;the patient a candidate for adjuvant therapy.&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Adjuvant therapy</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -1557,17 +1403,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Stage III (locally advanced)</div><div class="ev"><b>PL 原文归因:</b> [&quot;Adenocarcinoma the tail of the pancreas with local extension&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Not specified in the note</div></div>
   </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL=&#x27;curative&#x27;是治疗意图，BL=&#x27;neoadjuvant&#x27;只是modality；note新辅助化疗+计划手术切除目标为根治。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div><div class="ev"><b>PL 原文归因:</b> [&quot;Not applicable&quot;]</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">neoadjuvant</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="p8">
@@ -1620,17 +1455,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Originally pt2n2, now metastatic (Stage IV)</div><div class="ev"><b>PL 原文归因:</b> [&quot;pT2N2 disease (11/37 lymph nodes), followed by 11 cycles of adjuvant FOLFIRINOX, completed in 01/09/20. She was subsequently diagnosed with biopsy-proven mesenteric nodal recurrence&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">pT2N2</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">note=&#x27;comes to our GI Oncology practice...in consultation&#x27;为新会诊，PL=&#x27;New patient&#x27;正确，BL=&#x27;Follow up&#x27;错误。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Follow up</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -1713,17 +1537,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">No procedures planned.</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Screening procedures for clinical trial</div></div>
-  </div>
-</div><div class="q v-tie">
-  <div class="qhead">
-    <span class="vbadge v-tie">= 打平</span>
-    <span class="tier t-mid">评·中</span>
-    <span class="qlabel">就诊类型 Patient type</span>
-  </div>
-  <div class="reason">PL与BL都写&#x27;New patient&#x27;(原文&#x27;newly diagnosed metastatic pancreatic cancer presenting for a second opinion&#x27;)，两者均正确，等价。(subagent曾误读PL为Follow up，已核对FINAL更正为TIE)</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">New patient</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">New patient</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
@@ -1922,17 +1735,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval"><em>（空）</em></div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">None active at this visit</div></div>
   </div>
-</div><div class="q v-tie">
-  <div class="qhead">
-    <span class="vbadge v-tie">= 打平</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">两者均判palliative；locally advanced unresectable PDAC判palliative合理。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">palliative</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Palliative</div></div>
-  </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
 </section><section class="sample" id="p18">
@@ -1996,17 +1798,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
   <div class="qcols">
     <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">Originally technically resectable, now with 2 of 29 lymph nodes positive</div><div class="ev"><b>PL 原文归因:</b> [&quot;status post distal pancreatectomy and splenectomy with positive lymph nodes.&quot;]</div></div>
     <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">Not specified in note</div></div>
-  </div>
-</div><div class="q v-pl">
-  <div class="qhead">
-    <span class="vbadge v-pl">✓ PL 更好</span>
-    <span class="tier t-low">一般</span>
-    <span class="qlabel">治疗目标 goals（方向）</span>
-  </div>
-  <div class="reason">PL判curative正确：根治性切除(切缘阴性)+术后辅助化疗；BL判adjuvant混淆治疗阶段与意图。</div>
-  <div class="qcols">
-    <div class="qcol pl"><div class="qtag">PL（我们的方法）</div><div class="qval">curative</div></div>
-    <div class="qcol bl"><div class="qtag">BL（裸跑同模型）</div><div class="qval">adjuvant</div></div>
   </div>
 </div></div>
   <a class="top" href="#top">↑ 返回目录</a>
