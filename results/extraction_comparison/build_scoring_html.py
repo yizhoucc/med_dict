@@ -91,17 +91,17 @@ QUESTIONS = [
     ("response",       "Treatment response", "deep", "Response_Assessment", "response_assessment", "Extract how the cancer is responding, WITH the specific evidence (imaging change, marker trend). Side effects ≠ response; not yet on treatment → say so. We want the concrete finding, not a vague 'doing well'."),
     ("type_receptor",  "Type / receptors", "deep", "Cancer_Diagnosis", "Type_of_Cancer", "Extract the pathology type and the specific receptor / subtype status. We want each value stated, not a vague label. (See per-cancer note.)"),
     ("genetic_results","Molecular / genetic results", "deep", "Genetic_Testing_Results", "genetic_testing_results", "Extract the specific molecular / genetic results available (gene, variant, status — e.g. BRCA2+, MMR intact, CA19-9 non-secretor). We want each concrete result listed, not 'testing was done'."),
-    ("genetic_plan",   "Genetic testing plan", "deep", "Genetic_Testing_Plan", "genetic_testing_plan", "Extract which specific genetic / molecular tests are planned or sent (Oncotype, UCSF500, germline panel, …). We want the named tests, not 'will test'."),
+    ("genetic_plan",   "Genetic testing plan", "deep", "Genetic_Testing_Plan", "genetic_testing_plan", "Extract which specific genetic / molecular tests are planned FOR THE FUTURE — still to be done (e.g. Oncotype, UCSF500, germline panel). Must be future / upcoming, NOT tests already resulted (those belong under molecular results). We want the named upcoming tests, not 'will test'."),
     ("supportive_meds","Supportive medications", "deep", "Treatment_Changes", "supportive_meds", "Extract the specific supportive meds by name (antiemetics, analgesics, pancreatic enzymes, bone agents). We want the named drugs, not 'supportive care given'."),
-    ("procedure_plan", "Procedure plan", "deep", "Procedure_Plan", "procedure_plan", "Extract the specific planned procedures / surgery (port, biopsy, resection, …). We want the named procedures, not 'procedure planned'."),
-    ("imaging_plan",   "Imaging plan", "deep", "Imaging_Plan", "imaging_plan", "Extract the specific planned imaging (CT / MRI / PET / DEXA, with timing if stated). We want the named scans, not 'imaging to follow'."),
-    ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Extract the specific planned labs (CA19-9 follow-up, electrolytes, …). We want the named labs, not 'labs to follow'."),
-    ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Extract the specific medication plan — drugs to start / continue / stop, INCLUDING a chemo hold or break. We want the actual planned change extracted; e.g. 'no medications mentioned' is wrong when the note says the patient wants a chemo break (that IS a change)."),
+    ("procedure_plan", "Procedure plan", "deep", "Procedure_Plan", "procedure_plan", "Extract the specific procedures / surgery planned FOR THE FUTURE — still to be done (port, biopsy, resection, …). Must be future / upcoming, NOT procedures already completed. We want the named upcoming procedures, not 'procedure planned'."),
+    ("imaging_plan",   "Imaging plan", "deep", "Imaging_Plan", "imaging_plan", "Extract the specific imaging planned FOR THE FUTURE — still to be done (CT / MRI / PET / DEXA, with timing if stated). Must be future / upcoming, NOT scans already done. We want the named upcoming scans, not 'imaging to follow'."),
+    ("lab_plan",       "Lab plan", "deep", "Lab_Plan", "lab_plan", "Extract the specific labs planned FOR THE FUTURE — still to be done (CA19-9 follow-up, electrolytes, …). Must be future / upcoming, NOT labs already resulted. We want the named upcoming labs, not 'labs to follow'."),
+    ("medication_plan","Medication plan", "deep", "Medication_Plan", "medication_plan", "Extract the specific medication plan FOR THE FUTURE — drugs to start / continue / stop going forward, INCLUDING a chemo hold or break. Must be the upcoming plan, NOT meds already given and finished. We want the actual planned change; e.g. 'no medications mentioned' is wrong when the note says the patient wants a chemo break (that IS a planned change)."),
     ("recent_changes", "Recent treatment changes", "med", "Treatment_Changes", "recent_changes", "Extract the specific recent change to the regimen (started / stopped / switched / held — with the drug). We want the concrete change, not 'treatment ongoing'."),
-    # NOTE: 'patient_type' and 'goals (treatment intent)' were dropped 2026-06-15 — a
-    # clinician judged both clinically useless to score. Their historical PL-vs-BL
-    # verdicts are kept in _audit_v5/verdicts.json; they are removed from scoring/HTML/figs.
-    ("summary",        "Reason for visit (summary)", "basic", "Reason_for_Visit", "summary", "Reason for this visit (low-priority free text)."),
+    # NOTE: 'patient_type' and 'goals (treatment intent)' were dropped 2026-06-15, and
+    # 'summary (reason for visit)' was dropped 2026-06-16 — a clinician judged them useless
+    # to score. Their historical PL-vs-BL verdicts are kept in _audit_v5/verdicts.json;
+    # they are removed from scoring/HTML/figs.
     ("lab_summary",    "Lab summary", "basic", "Lab_Results", "lab_summary", "Extract the specific lab results / values (excluding imaging / pathology / genetics). We want the actual numbers, not 'labs stable'."),
     ("findings",       "Clinical findings", "basic", "Clinical_Findings", "findings", "Extract the specific objective exam / imaging findings (sizes, sites) — NOT subjective symptoms. We want the concrete findings listed, not a one-line impression."),
 ]
@@ -264,7 +264,7 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 @media print{.bar,.toc,.top,.score{display:none}.sample{break-inside:avoid;box-shadow:none}body{background:#fff}}
 '''
     js = '''
-const KEY="pl_bl_scoring_v3", TOTAL=%d;
+const KEY="pl_bl_scoring_v4", TOTAL=%d;
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
 function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
 let data=load();

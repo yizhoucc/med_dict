@@ -28,7 +28,7 @@ FIELD_MAP = {
     "recent_changes": ("近期治疗变化 recent_changes", "评", "Treatment_Changes", "recent_changes"),
     # 'patient_type' 和 'goals(治疗目标)' 于 2026-06-15 由临床医生判定无评分价值而删除；
     # 历史判定仍保留在 _audit_v5/verdicts.json，此处不再展示这两题。
-    "summary":        ("就诊原因 summary", "差", "Reason_for_Visit", "summary"),
+    # 'summary(就诊原因)' 于 2026-06-16 删除（医生判定无评分价值；历史判定保留在 verdicts.json）。
     "lab_summary":    ("化验摘要 lab_summary", "差", "Lab_Results", "lab_summary"),
     "findings":       ("检查发现 findings", "差", "Clinical_Findings", "findings"),
 }

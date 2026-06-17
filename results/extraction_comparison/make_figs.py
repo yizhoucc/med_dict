@@ -72,6 +72,8 @@ def run(c, pl, bl):
         p = pl[row]; b = bl.get(row, {})
         cell[(c, row)] = {}
         for f in FIELDS:
+            if c == "p" and f == "type_receptor":
+                continue  # Q6 type/receptor is breast-only (PDAC has no ER/PR/HER2)
             sec, key = SEC[f]
             pv = get_val(p["kp"], sec, key).strip()
             bv = get_val(b, sec, key).strip()

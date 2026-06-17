@@ -258,4 +258,10 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 
 **3. attribution 标明是模型生成**：HTML 每条 attribution 改标 "(quote the model pulled from the note)"，legend 说明它是**模型二次回合自己摘的原文引文**（`source_attribution.py`，非 pipeline 编写、未程序化校验逐字），需回原文验证。
 
+**4. 五个 plan 题强调"未来计划"**：Q8 genetic_plan / Q10 procedure_plan / Q11 imaging_plan / Q12 lab_plan / Q13 medication_plan 的题面都加 "planned FOR THE FUTURE — still to be done, NOT already completed/resulted"，与 pipeline G5 TEMPORAL gate 一致，防止把已完成项当计划。
+
+**5. 删除 summary（就诊原因）题**：医生判定无评分价值（基本全打平、低优先自由文本）。从 scoring/verdict/review 三处题库移除（历史判定仍在 verdicts.json）。
+
+**当前题集**：乳腺 16 题（去 patient_type/goals/summary，保留 Q6 受体）；胰腺 15 题（再去 Q6 受体）。scoring 总计 **620 题**（乳腺 16×20 + 胰腺 15×20）。figs 同步排除 PDAC 的 type_receptor（scored 618，PL 110 / 打平 498 / BL 10）。localStorage key 升至 v4。
+
 **[BACKLOG] prompt 改动（本轮未做，待开 WSL/vLLM 重跑全 40）**：让模型多 extract 少 infer——有信心的 infer 用括号括起来，没信心的不硬下结论（直接列证据让医生判断）。目标是消除 Q13 那类"把有变化 infer 成无变化"的错误总结。改 `prompts/pdac/extraction.yaml` + `prompts/extraction.yaml` 后需重跑→重新审查→重生成所有 HTML/图。

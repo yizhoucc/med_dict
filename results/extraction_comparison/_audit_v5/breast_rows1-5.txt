@@ -1,0 +1,1198 @@
+
+
+##########################################################
+########## BREAST SAMPLE — ROW 1 ##########
+##########################################################
+
+=========== PL (PIPELINE) OUTPUT — includes note_text + keypoints + attribution ===========
+RESULTS FOR ROW 1
+
+============================================================
+
+--- Column: coral_idx ---
+20
+
+--- Column: note_text ---
+"ID: ***** ***** is a 81 y.o. postmenopausal patient with a recent diagnosis of breast cancer, who presents in consultation to discuss treatment options and to establish care.    HPI: The patient last had a screening mammogram on 11/06/11 (at 76 years) which was notable for heterogeneously dense breast tissue, but no features of malignancy.  The patient felt a painful mass in her right breast in August 2016.  She presented to her PCP (Dr. *****) of 30+ years on 09/11/16 who noted a firm mobile mass (6 cm) in the right upper outer quadrant of her breast with dimpling of overlying skin.      A diagnostic mammogram on 09/17/16 demonstrated heterogeneously dense breast tissue and a round, indistinct, high density mass (4.1 x 3.3 cm) at the site of the palpable lump, which was in the upper outer right breast, posterior depth.  A targeted ultrasound at that time was notable for a hypoechoic irregular solid mass (2.7 x 2.9 x 3.8 cm) in the upper outer right breast, at the 10:00 position, 9 cm from the nipple.  She underwent a right breast fine needle aspiration at the 10:00 position on 09/17/16.  The pathology was consistent with adenocarcinoma with ER negative, PR negative, and HER2 negative (IHC 0; FISH ratio 1.7).    She established care with Dr. ***** ***** on 09/25/16.  She was offered breast conserving surgery, but preferred mastectomy in an effort to avoid radiation.  ***** underwent a right breast simple mastectomy and sentinel lymph node biopsy on 10/25/16 with Dr. *****.  The pathology was notable for 3.6 cm of grade 3 IDC.  The mitotic count was quite elevated at 74/10 hpf.  The final margins were negative.  Features suggestive of lymphovascular invasion were present.  No DCIS was present.  One of the 2 sentinel lymph nodes was positive for adenocarcinoma (1.2 cm, but no extranodal extension).  Biomarkers were notable for estrogen receptor negative, progesterone receptor negative, HER2 positive (IHC 1; FISH ratio 2.1, \n but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5), and variable Ki67 expression (<5% to 25-30%; average ~15%).      ***** developed dyspnea on the evening of 11/20/16 and presented to ***** ***** ***** in the context of her known congestive hart failure with left venrticular dysfunction (LVEF 25%).  She was managed with Lasix in the CDU and discharged earlier today.  She presents to clinic with her daughter (*****) and granddaughter (*****).  She feels much better today, back to her baseline with regards to energy and dyspnea.  She has no pain at the site of her breast surgery.      Past Medical History:   Diagnosis Date   \u0007 Cardiac pacemaker in situ    \u0007 Cataract    \u0007 CHF (congestive heart failure)    \u0007 CKD (chronic kidney disease)     Chronic kidney disease (CKD) stage G3b/A1, moderately decreased glomerular filtration rate (GFR) between 30-44 mL/min/1.73 square meter and albuminuria creatinine ratio less than 30 mg/g   \u0007 Coronary atherosclerosis of unspecified type of vessel, native or graft    \u0007 Diabetes mellitus     115-180s   \u0007 GERD (gastroesophageal reflux disease)    \u0007 Glaucoma     suspect   \u0007 HTN (hypertension)    \u0007 Hypertension    \u0007 Other and unspecified hyperlipidemia    \u0007 Pacemaker    \u0007 SBO (small bowel obstruction)     Partial sbo without history of previous abdominal surgeries. Unclear etiology. DDx includes small occult neoplasm vs focal enteritis. Adhesion less likely with lack of abdominal surgeries. EGD/Colo neg in October 2012   \u0007 Sick sinus syndrome        Past Surgical History:   Procedure Laterality Date   \u0007 BIOPSY / EXCISION BREAST     \u0007 CHOLECYSTECTOMY     \u0007 MASTECTOMY Right 10/25/2016   \u0007 PACEMAKER INSERTION  1998   \u0007 SENTINEL LYMPH NODE BIOPSY Right 10/25/2016        Family History   Problem Relation Age of Onset   \u0007 Stroke Mother    \u0007 Uterine cancer Mother 40     died at 43   \u0007 Stroke Father    \u0007 Diabetes Other    \u0007 Arthritis Other    \u0007 Stroke Sister 68     March 2013   \u0007 Stomach cancer Maternal \n Grandfather    \u0007 Uterine cancer Maternal Aunt 37     died at 39   \u0007 Blindness Neg Hx    \u0007 Amblyopia Neg Hx    \u0007 Cataracts Neg Hx    \u0007 Glaucoma Neg Hx    \u0007 Macular degen Neg Hx    \u0007 Retinal detachment Neg Hx    \u0007 Strabismus Neg Hx        Social History     Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Occupational History   \u0007 Not on file.     Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use No   \u0007 Drug use: No   \u0007 Sexual activity: Not on file     Other Topics Concern   \u0007 Not on file     Social History Narrative    Married; husband still alive. Lives with her daughter.  Originally from *****.     The patient underwent menarche at 11 years of age.  She never took OCP.  She is G7P5.  She underwent menopause at 55.  She has no history of HRT.        Outpatient Encounter Prescriptions as of 11/21/2016   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 500 mg tablet Take 1 tablet (500 mg total) by mouth every 6 (six) hours as needed (MILD PAIN).     \u0007 amLODIPine (NORVASC) 5 mg tablet Take 0.5 tablets (2.5 mg total) by mouth Daily. 90 tablet 3   \u0007 aspirin 81 mg EC tablet TAKE 1 TABLET BY MOUTH DAILY 90 tablet 3   \u0007 atorvastatin (LIPITOR) 40 mg tablet TAKE 1 TABLET BY MOUTH EVERY DAY 90 tablet 3   \u0007 bisoprolol (ZEBETA) 5 mg tablet TAKE 1/2 TABLET BY MOUTH DAILY 50 tablet 3   \u0007 blood glucose (BLOOD GLUCOSE) test strip Check blood sugar twice daily as directed. 180 each 3   \u0007 blood glucose monitoring kit Check blood sugar as directed 1 each 0   \u0007 brimonidine (ALPHAGAN) 0.1 % ophthalmic solution Place 1 drop into both eyes 2 (two) times daily. 10 mL 11   \u0007 calcium carbonate-vitamin D (OYSCO 500/D) 1,250 mg (500 mg elemental)-200 unit tablet TAKE 1 TABLET BY MOUTH EVERY DAY 90 tablet 3   \u0007 glipiZIDE (GLUCOTROL) 10 mg tablet TAKE 1 TABLET BY MOUTH TWICE DAILY BEFORE MEALS 180 \n tablet 1   \u0007 insulin glargine (LANTUS) 100 unit/mL injection INJECT 5 UNITS INTO THE SKIN EVERY NIGHT AT BEDTIME 10 mL 5   \u0007 insulin syringe-needle U-100 0.3 mL 29 SYRINGE USE DAILY AS DIRECTED 100 Syringe 3   \u0007 lancets lancets Use twice daily as directed. 180 each 3   \u0007 latanoprost (XALATAN) 0.005 % ophthalmic solution Place 1 drop into both eyes nightly at bedtime. 2.5 mL 11   \u0007 metFORMIN (GLUCOPHAGE) 1,000 mg tablet TAKE 1 TABLET BY MOUTH TWICE DAILY TAKE WITH MEALS 200 tablet 3   \u0007 valsartan (DIOVAN) 80 mg tablet TAKE 1 TABLET BY MOUTH DAILY 90 tablet 2   \u0007 ALPHAGAN P 0.1 % ophthalmic solution INSTILL 1 DROP IN BOTH EYES TWICE DAILY 5 mL 0   \u0007 docusate sodium (COLACE) 100 mg capsule Take 1 capsule (100 mg total) by mouth Twice a day. 60 capsule 0   \u0007 loratadine (CLARITIN) 10 mg tablet Take 1 tablet (10 mg total) by mouth Daily. 90 tablet 1   \u0007 mometasone (NASONEX) 50 mcg/actuation spray 2 sprays by Nasal route Daily. 17 g 6   \u0007 nitroGLYCERIN (NITROSTAT) 0.4 mg SL tablet Place 1 tablet (0.4 mg total) under the tongue every 5 (five) minutes as needed for Chest pain. 100 tablet 3   \u0007 olopatadine (PATANOL) 0.1 % ophthalmic solution Place 1 drop into both eyes daily as needed (1 drop as needed). 5 mL 6   \u0007 [DISCONTINUED] doxycycline (MONODOX) 100 mg capsule      \u0007 [DISCONTINUED] furosemide (LASIX) 40 mg tablet Take 0.5 tablets (20 mg total) by mouth Daily. 3 tablet 0   \u0007 [DISCONTINUED] oxyCODONE (ROXICODONE) 5 mg tablet Take 1 tablet (5 mg total) by mouth every 4 (four) hours as needed for Pain. 30 tablet 0     Facility-Administered Encounter Medications as of 11/21/2016   Medication Dose Route Frequency Provider Last Rate Last Dose   \u0007 [COMPLETED] furosemide (LASIX) injection 20 mg  20 mg Intravenous Once ***** *****, MD   20 mg at 11/20/16 1632   \u0007 [DISCONTINUED] 0.9 % sodium chloride flush injection syringe  3 mL Intravenous Q8H SCH ***** ***** *****, *****-C   3 mL at 11/20/16 2138   \u0007 [DISCONTINUED] 0.9 % sodium \n chloride flush injection syringe  3 mL Intravenous PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] acetaminophen (TYLENOL) tablet 500 mg  500 mg Oral Q6H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] acetaminophen (TYLENOL) tablet 500 mg  500 mg Oral Q6H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] amLODIPine (NORVASC) tablet 2.5 mg  2.5 mg Oral Daily (AM) ***** ***** *****, *****-C       \u0007 [DISCONTINUED] aspirin EC tablet 81 mg  81 mg Oral Daily (AM) ***** ***** *****, *****-C       \u0007 [DISCONTINUED] atorvastatin (LIPITOR) tablet 40 mg  40 mg Oral Q PM ***** ***** *****, *****-C   40 mg at 11/20/16 2128   \u0007 [DISCONTINUED] brimonidine (ALPHAGAN) 0.1 % ophthalmic solution 1 drop  1 drop Both Eyes BID ***** ***** *****, *****-C   1 drop at 11/20/16 2128   \u0007 [DISCONTINUED] dextrose 50% injection syringe 12.5 g  25 mL Intravenous Q15 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] docusate sodium (COLACE) capsule 100 mg  100 mg Oral BID ***** ***** *****, *****-C   100 mg at 11/20/16 2128   \u0007 [DISCONTINUED] glipiZIDE (GLUCOTROL) tablet 10 mg  10 mg Oral Daily with Breakfast ***** ***** *****, *****-C       \u0007 [DISCONTINUED] glucose chewable tablet 20 g  20 g Oral Q15 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] insulin aspart (NovoLOG) injection 100 units/mL pen  0-20 Units Subcutaneous TID ***** ***** ***** *****, *****-C   0 Units at 11/20/16 1843   \u0007 [DISCONTINUED] insulin aspart (NovoLOG) injection 100 units/mL pen  0-3 Units Subcutaneous Bedtime and early am ***** ***** *****, *****-C   0 Units at 11/20/16 2134   \u0007 [DISCONTINUED] insulin glargine (LANTUS, BASAGLAR) injection 100 units/mL pen  5 Units Subcutaneous Bedtime ***** ***** *****, *****-C   5 Units at 11/20/16 2136   \u0007 [DISCONTINUED] latanoprost (XALATAN) 0.005 % ophthalmic solution 1 drop  1 drop Both Eyes Bedtime ***** ***** *****, *****-C   1 drop at 11/20/16 2128   \u0007 [DISCONTINUED] loratadine (CLARITIN) tablet 10 mg  10 mg Oral Daily (AM) ***** ***** \n *****, *****-C       \u0007 [DISCONTINUED] metFORMIN (GLUCOPHAGE) tablet 1,000 mg  1,000 mg Oral BID ***** ***** ***** *****, *****-C   1,000 mg at 11/20/16 1845   \u0007 [DISCONTINUED] nitroGLYCERIN (NITROSTAT) SL tablet 0.4 mg  0.4 mg Sublingual Q5 Min PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] ondansetron (ZOFRAN) injection 4 mg  4 mg Intravenous Q8H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] ondansetron (ZOFRAN) tablet 4 mg  4 mg Oral Q8H PRN ***** ***** *****, *****-C       \u0007 [DISCONTINUED] valsartan (DIOVAN) tablet 80 mg  80 mg Oral Daily (AM) ***** ***** *****, *****-C           No Known Allergies       Review of Systems:   General - some fatigue at baseline; stable weight   Eyes - no vision changes   HENT - stable hearing, no nasal discharge or sinus tenderness, no difficulty swallowing, no mouth sores, no sore throat   Breast - no breast pain  Respiratory - dyspnea at baseline; no cough, no wheezing   Cardiovascular - no chest pain, no palpitations, no lower extremity edema   GI - constipation; no heartburn, no nausea, no emesis, no abdominal pain, no diarrhea, no melena, no hematochezia   GU - no suprapubic pain, no dysuria, no vaginal bleeding   Musculoskeletal - joint stiffness; no muscle pain, no bone pain   Endocrine - no heat/cold intolerance, no hot flashes  Heme/Lymph - no easy bruising/bleeding, no lymphedema   Neurological - no headaches, no dizziness, no numbness/tingling, no falls   Psychological - anxious; no depression   Skin - no rashes/lesions, no diaphoresis       Physical Exam:   ECOG 2   Vital Signs - BP 118/67 | Pulse 87 | Temp 36.3 C (97.3 F) (Oral)  | Resp 16 | Ht 150 cm (4' 11.06\") Comment: 11/21/2016 ***** | Wt 53.5 kg (118 lb) | SpO2 98% | BMI 23.79 kg/m2   Constitutional - WDWN, NAD  Eyes - sclera anicteric, PERRL, EOMI  HENT - sinuses nontender, nasal mucosa intact, pharynx without erythema, stomatitis, or thrush   Lymph Nodes - no cervical, supraclavicular, or axillary lymphadenopathy. \n   Respiratory - resonant to percussion throughout, CTA bilaterally; no wheezes, rhonchi, or crackles  Cardiovascular - Normal heart rate, normal rhythm, no murmurs, no edema  Breast - right simple mastectomy; no mass in left breast  GI - Bowel sounds normal, soft; no tenderness, no distention, no HSM  Musculoskeletal - No tenderness over bones or joints.   Neurologic - Alert & oriented x 3, ambulates w/o difficulty, good strength throughout  Psychiatric - Mood stable; no HI, SI, hallucinations, paranoia, or delusions  Skin - warm without rashes or lesions       Studies:  Available labs, pathology, and imaging were reviewed and independently interpreted, as described above in the HPI.  Lab Results   Component Value Date    WBC Count 9.9 11/20/2016    Hemoglobin 9.6 (L) 11/20/2016    Hematocrit 28.9 (L) 11/20/2016    Platelet Count 222 11/20/2016     Lab Results   Component Value Date    Sodium, Serum / Plasma 133 (L) 11/20/2016    Potassium, Serum / Plasma 4.2 11/20/2016    Chloride, Serum / Plasma 102 11/20/2016    Carbon Dioxide, Total 22 11/20/2016    Urea Nitrogen, Serum / Plasma 18 11/20/2016    Creatinine 1.01 (H) 11/20/2016    Glucose, non-fasting 201 (H) 11/20/2016     Lab Results   Component Value Date    Calcium, total, Serum / Plasma 9.4 11/20/2016     Lab Results   Component Value Date    Aspartate transaminase 27 11/20/2016    Alanine transaminase 19 11/20/2016    Alkaline Phosphatase 60 11/20/2016    Bilirubin, Total 0.9 11/20/2016    Albumin, Serum / Plasma 3.0 (L) 06/01/2015     10/25/16 SURGICAL PATHOLOGY REPORT    ***** WITH ADDENDUM *****    Patient Name: *****, *****  *****. Rec.#: *****  DOB: 04/22/1935 (Age: 81)  Sex: Female  Accession #: *****-*****  Visit #: *****  Service Date: 10/25/2016  Received: 10/25/2016  Location: PPE  Client:*****   Physician(s): ***** *****. ***** ((*****) *****-*****)    FINAL PATHOLOGIC DIAGNOSIS    A. Right breast, simple mastectomy:   1. Invasive ductal carcinoma, SBR   grade \n 3, 3.6 cm, negative margins;  see comment.  2. Fibroadenomas.  3. Cystic dilatation of ducts and apocrine metaplasia.  4. Calcifications associated with apocrine metaplasia and benign ducts.    5. Unremarkable skin and nipple.    B. Right axillary sentinel lymph node, #1- ex vivo count 5000, biopsy:   Metastatic carcinoma in one lymph node, 1.2 cm, no extranodal extension  (May 19); see comment.    C. Right axillary palpable non-sentinel lymph node #1, biopsy: No tumor  in one lymph node (0/1).    D. Right new anterior lateral margin, excision: Benign fibroadipose  tissue, no carcinoma.    E. Right breast skin, excision: Benign skin, no carcinoma.    COMMENT:  Breast Tumor Synoptic Comment    - Laterality: Right.  - Tumor site: Upper outer quadrant.    - Position: 10 o'clock.  - Invasive tumor type: Invasive ductal carcinoma.  - Invasive tumor size: 3.6 cm.  - Tumor size determined based on tumor present in 4 consecutive slides  (slice *****-*****, slice thickness 0.9 cm).  - Invasive tumor size after neoadjuvant therapy: N/A.  - Invasive tumor grade (modified Scarff-Bloom-Richardson): Grade 3.    - Nuclear grade: 3 points.    - Mitotic count: 74/10HPF: 3 points.    - Glandular/tubular differentiation: 3 points.    - Total points: 9 points = grade 3.  - EIC (extensive intraductal component): Negative.  - Lymphatic/vascular invasion: Features suggestive of lymphovascular  invasion present (slide A3).  - Skin/nipple: No significant pathologic abnormality.  - Skeletal muscle: No significant pathologic abnormality.  - Margins for invasive tumor: Negative.    - Posterior margin: Negative (tumor is 1.6 cm away, on slide A3).    - Medial margin: Negative (tumor is 12 cm away).    - Lateral margin: Negative (tumor is 2.4 cm away).    - Anterior/superior margin: Negative (tumor is <0.1 cm away, on  slide A4-A5).    - Anterior/inferior margin: Negative (tumor is 0.3 cm away, \n on  slide A6).  - Ductal carcinoma in situ (DCIS): None.  - Microcalcifications: Present associated with apocrine metaplasia and  benign ducts.  - Lobular carcinoma in situ: None.  - Non-neoplastic breast: Cystic dilatation of ducts, apocrine  metaplasia, fibroadenomas.  - Lymph node status: Positive.      - Total number of nodes examined: 2.      - Total number of nodes with micrometastases: 0.      - Total number of nodes with macrometastases: 1.      - Size of largest metastasis in node: 1.2 cm.      - Extranodal extension: None.    - AJCC/UICC stage: pT2N1a.    - Tumor biomarker (ER/PR/HER2) status: Will be reported by addendum.        GROSS ABNORMALITIES: A firm, palpable, pink-white mass with irregular  borders (2.6 cm medial-to-lateral x 3 cm superior-to-inferior x 2.8 cm  anterior-to-posterior; spanning slices 5 through 8) is present at 10  o'clock, approximately 7 cm from the nipple. The inferior tip of slice  9 has a pink, dark-yellow area (1 x 0.7 x 0.8 cm) resembling a prior  biopsy site.    A small (0.5 cm greatest dimension) orange-yellow translucent bead is  identified in slice 10 within white, firm fibrous-appearing tissue. The  bead is wrapped in tissue paper and gauze and placed with the remainder  of slice 10 in the specimen container.    Margins:  -Anterior/superior: Mass is <0.1 cm from margin (slice 6 and 7).  -Anterior/inferior: Mass is 0.1 cm from margin (***** 7).  -Medial: Mass is 12 cm from margin.  -Lateral: Mass is 2.4 cm from margin  -Deep: Mass is 1.5 cm from margin (slice 8).  -Nipple base: Mass is 8.4 cm from nipple base.  -Skin: Mass is 2.5 cm from lateral skin ellipse tip.    There is no nipple retraction or crust. The skin has a blue discolored  area (0.7 cm) immediately adjacent to the areola grossly consistent with  a bruise. No scars are seen. The deep surface is smooth and appears  complete. The anterior surfaces have lobular \n yellow adipose tissue.   The parenchyma uninvolved by the mass consist of mixed yellow adipose  tissue (70%) and white, firm tissue (30%). The specimen is radiographed  in the Pathology Department and a clip is not identified.    ***** *****/Pathology Resident  ***** *****/Pathologist    Electronically signed out on *****/*****/***** *****:*****      Addendum   Date Ordered:   10/31/2016   Status:  Signed Out    Date Complete:   10/31/2016   By: ***** *****    Date Reported:   10/31/2016     Addendum Diagnosis    Addendum Comment    Immunohistochemical tests for estrogen and progesterone receptors, HER2  and Ki-67 were performed by manual morphometry on block A4.    The test for estrogen receptors is negative. There is no nuclear  staining in tumor cells. Internal positive control is present, and  external positive control is appropriate.    The test for progesterone receptors is negative. There is no nuclear  staining in tumor cells. Internal positive control is present, and  external positive control is appropriate.    Result of HER2 test: This carcinoma is negative for HER2 oncoprotein  over-expression. The staining intensity of this carcinoma was 1 on a  scale of 0-3.    Ki-67 proliferation index: Variable expression ranging from <5% to  25-30%. Overall, it is estimated to be ~15%.       Assessment and Recommendations:  81 y.o. postmenopausal patient with multiple medical comorbidities, including heart failure with LVEF 25% and DM II, who has recently been diagnosed with a Stage II (T2N1) triple negative breast cancer who requires additional testing before final recommendations can be made.    I discussed with the patient and her family the natural history of triple negative breast cancer.  We reviewed the available pathology and imaging reports.  I explained that chemotherapy is the only FDA approved treatment for triple negative breast cancer and that we generally provide chemotherapy to \n patients with Stage II TNBC.  We then reviewed her multiple medical comorbidities and I stated great concern that our chemotherapy regimens would likely cause her great harm and that she would have a very difficult time tolerating them.  We discussed in brief the regimens of AC/T (which would not be safe in the context of her heart failure), TC (which would not be safe in the context of her heart failure due to fluid shifts as well as her diabetes due to use of dexamethasone), and finally CMF (although less toxic, still introducing great risk).    We discussed the likelihood of recurrence which is quite difficult to assess, but certainly notable in the context of a high grade, node positive, triple negative breast cancer.  We discussed recurrence as both a local and distant concept.      We discussed the role of staging imaging to assess for metastasis at this time.  She is interested in knowing whether or not her disease has already spread and believes she might want to consider a lower risk chemotherapy were she found to have metastasis.  I think that with regards to her other medical issues, it would be of prognostic value at this time to know whether or not she does have metastases. We will obtain a PET/CT and resume our conversation with regards to treatment at that time.     Recommendations in Brief:  - obtain PET/CT    I spent a total of 90 minutes face-to-face with the patient and 85 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, symptoms and therapeutic options.  \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Recommendations:  81 y.o. postmenopausal patient with multiple medical comorbidities, including heart failure with LVEF 25% and DM II, who has recently been diagnosed with a Stage II (T2N1) triple negative breast cancer who requires additional testing before final recommendations can be made.    I discussed with the patient and her family the natural history of triple negative breast cancer.  We reviewed the available pathology and imaging reports.  I explained that chemotherapy is the only FDA approved treatment for triple negative breast cancer and that we generally provide chemotherapy to \n patients with Stage II TNBC.  We then reviewed her multiple medical comorbidities and I stated great concern that our chemotherapy regimens would likely cause her great harm and that she would have a very difficult time tolerating them.  We discussed in brief the regimens of AC/T (which would not be safe in the context of her heart failure), TC (which would not be safe in the context of her heart failure due to fluid shifts as well as her diabetes due to use of dexamethasone), and finally CMF (although less toxic, still introducing great risk).    We discussed the likelihood of recurrence which is quite difficult to assess, but certainly notable in the context of a high grade, node positive, triple negative breast cancer.  We discussed recurrence as both a local and distant concept.      We discussed the role of staging imaging to assess for metastasis at this time.  She is interested in knowing whether or not her disease has already spread and believes she might want to consider a lower risk chemotherapy were she found to have metastasis.  I think that with regards to her other medical issues, it would be of prognostic value at this time to know whether or not she does have metastases. We will obtain a PET/CT and resume our conversation with regards to treatment at that time.     Recommendations in Brief:  - obtain PET/CT    I spent a total of 90 minutes face-to-face with the patient and 85 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, symptoms and therapeutic options.  \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Postmenopausal patient with a recent diagnosis of Stage II (T2N1) triple negative breast cancer, who presents in consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma",
+    "Stage_of_Cancer": "Stage IIB (pT2N1a)",
+    "Distant Metastasis": "Not sure (staging imaging pending)",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 9.9, Hemoglobin 9.6 (L), Hematocrit 28.9 (L), Platelet Count 222, Sodium, Serum / Plasma 133 (L), Potassium, Serum / Plasma 4.2, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 22, Urea Nitrogen, Serum / Plasma 18, Creatinine 1.01 (H), Glucose, non-fasting 201 (H), Calcium, total, Serum / Plasma 9.4, Aspartate transaminase 27, Alanine transaminase 19, Alkaline Phosphatase 60, Bilirubin, Total 0.9"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast, simple mastectomy: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins. Fibroadenomas, cystic dilatation of ducts, and apocrine metaplasia present. Features suggestive of lymphovascular invasion present. One of the 2 sentinel lymph nodes was positive for adenocarcinoma (1.2 cm, no extranodal extension). Ki-67 proliferation index ranges from <5% to 25-30%, estimated to be ~15%. No significant pathologic abnormalities in skin, nipple, or skeletal muscle. No DCIS or lobular carcinoma in situ. Patient has heterogeneously dense breast tissue on mammography. Diagnostic mammogram showed a round, indistinct, high-density mass (4.1 x 3.3 cm) in the right upper outer quadrant. Targeted ultrasound revealed a hypoechoic irregular solid mass (2.7 x 2.9 x 3.8 cm) in the same location. Fine needle aspiration confirmed adenocarcinoma. Physical exam shows no mass in the left breast, no lymphadenopathy, no tenderness, no distention, no HSM, no edema, no palpitations, no lower extremity edema, no heartburn, no nausea, no emesis, no abdominal pain, no diarrhea, no melena, no hematochezia, no suprapubic pain, no dysuria, no vaginal bleeding, no muscle pain, no bone pain, no heat/cold intolerance, no hot flashes, no easy bruising/bleeding, no lymphedema, no headaches, no dizziness, no numbness/tingling, no falls, no rashes/lesions, no diaphoresis. Patient has a history of congestive heart failure with left ventricular dysfunction (LVEF 25%)."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "Not explicitly stated."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "No specific medications or future medication plans were detailed in the note."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "None"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT to assess for metastasis"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "after PET/CT: to resume conversation with regards to treatment"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "obtain PET/CT"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "obtain PET/CT"
+  ],
+  "in-person": [
+    "I spent a total of 90 minutes face-to-face with the patient and 85 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, symptoms and therapeutic options."
+  ],
+  "summary": [
+    "81 y.o. postmenopausal patient with multiple medical comorbidities, including heart failure with LVEF 25% and DM II, who has recently been diagnosed with a Stage II (T2N1) triple negative breast cancer"
+  ],
+  "Stage_of_Cancer": [
+    "Stage II (T2N1)"
+  ],
+  "Distant Metastasis": [
+    "We discussed the role of staging imaging to assess for metastasis at this time."
+  ],
+  "Metastasis": [
+    "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
+  ],
+  "findings": [
+    "Right breast, simple mastectomy: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins."
+  ],
+  "goals_of_treatment": [
+    "chemotherapy is the only FDA approved treatment for triple negative breast cancer and that we generally provide chemotherapy to patients with Stage II TNBC."
+  ],
+  "goals_description": [
+    "Not explicitly stated."
+  ],
+  "response_assessment": [
+    "Not yet"
+  ],
+  "imaging_plan": [
+    "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
+  ],
+  "Next clinic visit": [
+    "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
+  ],
+  "follow up": [
+    "Recommendations in Brief:  - obtain PET/CT"
+  ]
+}
+
+--- Column: letter ---
+""
+
+--- Column: traceability ---
+{}
+
+
+
+
+
+
+============================================================
+
+=========== BL (BASELINE, single-prompt same model) OUTPUT — JSON keypoints only ===========
+ROW 1 (coral_idx=20)
+
+============================================================
+
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "summary": "An 81-year-old postmenopausal patient with a recent diagnosis of breast cancer, who presents in consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive ductal carcinoma, SBR grade 3, triple negative (ER negative, PR negative, HER2 negative)",
+    "Stage_of_Cancer": "pT2N1a",
+    "Distant_Metastasis": "Not sure"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 9.9, Hemoglobin: 9.6 (L), Hematocrit: 28.9 (L), Platelet Count: 222, Sodium: 133 (L), Potassium: 4.2, Chloride: 102, Carbon Dioxide: 22, Urea Nitrogen: 18, Creatinine: 1.01 (H), Glucose, non-fasting: 201 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast simple mastectomy, no mass in left breast, no lymphadenopathy, no significant pathologic abnormalities in skin and nipple, no skeletal muscle involvement, negative margins, one lymph node with metastatic carcinoma, no extranodal extension."
+  },
+  "Current_Medications": {
+    "current_meds": "acetaminophen, amLODIPine, aspirin, atorvastatin, bisoprolol, blood glucose test strips, brimonidine, calcium carbonate-vitamin D, glipiZIDE, insulin glargine, insulin syringe-needle, lancets, latanoprost, metFORMIN, valsartan, ALPHAGAN P, docusate sodium, loratadine, mometasone, nitroGLYCERIN, olopatadine"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "None",
+    "supportive_meds": "None"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Discussing treatment options considering the patient's multiple medical comorbidities and the nature of the triple negative breast cancer."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not applicable at this visit"
+  },
+  "Medication_Plan": {
+    "medication_plan": "No planned changes"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "To be determined after staging imaging"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "None"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT to assess for metastasis"
+  },
+  "Lab_Plan": {
+    "lab_plan": "None"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "After obtaining PET/CT results to reassess treatment options"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed"
+  }
+}
+
+--- STATS ---
+Time: 15.3s | Output: 2685 chars | JSON: OK
+
+
+============================================================
+
+
+##########################################################
+########## BREAST SAMPLE — ROW 2 ##########
+##########################################################
+
+=========== PL (PIPELINE) OUTPUT — includes note_text + keypoints + attribution ===========
+RESULTS FOR ROW 2
+
+============================================================
+
+--- Column: coral_idx ---
+21
+
+--- Column: note_text ---
+"                        UCSF ***** ***** FAMILY                        COMPREHENSIVE CANCER CENTER                      ***** ***** ***** ***** Care Center                             ***** ***** *****                           Second *****, ***** *****                    ***** *****, ***** *****-*****               Phone: (*****) *****-*****          Fax: (*****) *****-*****    01/24/2009    ***** *****, M.D.  ***** ***** *****, ***** *****  *****, *****  *****    ***** *****, M.D.  ***** ***** ***** #*****  *****, *****  *****    ***** *****, M.D.  ***** ***** *****  *****, *****  *****    ***** *****, M.D.  ***** ***** *****, ***** *****  *****, *****  *****    RE: *****, ***** *****  U#: *****  DATE OF SERVICE: 01/24/09    Dear *****:    I had the pleasure of seeing this patient in consultation regarding the  treatment of her locally recurrent breast cancer on January 09.  As you  know, she is a 73-year-old woman who initially had a right breast mass  removed in February 1994 with an axillary lymph node dissection.  That  surgical procedure revealed a 1 cm, grade 1, infiltrating ductal  carcinoma with clear surgical margins and 21 axillary lymph nodes were  negative for metastatic carcinoma.  S-phase was low at 3.6%.  The tumor  was found to be estrogen-receptor positive and progesterone-receptor  negative.  She received interstitial radiation, which comprised 4500  centigray over a 3 cm diameter.  She received tamoxifen from 1994 to  1996 and stopped due to concern regarding side effects.  At that time,  she was seeing Dr. ***** *****.  In January 1996, a node was  palpated in the left supraclavicular area.  A fine-needle aspiration was  performed and was unremarkable.  A dense area at the 12 o'clock position  in her right breast was tender in 2006 and was felt to be postsurgical  scarring.  This was noted to increase over time in size and density.  Initially, the workup included a PET scan in November 2005 \n that  revealed a 5 x 7 cm area of density consistent with inflammation.  It is  not clear whether she had a CT-guided biopsy at that time or not.  In  February 2008, she noted discomfort in the right anterior chest wall and  again thought that this area might be slightly larger.  She also thought  that she had a new right breast mass.  Workup of that breast mass was  unremarkable.  However, a breast MRI was performed on March 24 that  revealed a bulky irregular mass in the right 8 o'clock posterior breast,  which measured 1.9 x 1.5 cm with heterogenous enhancement.  Concordant  with an area of metabolic uptake on PET/CT scan, there was a second mass  abutting the pectoralis muscle with similar enhancing characteristics  measuring 1.7 x 1.2 cm.  A third nodule was seen along the right lateral  breast measuring 0.6 x 0.3 cm.  The left breast was unremarkable.  The  PET/CT scan had been performed on 02/22/2008, and was compared to a  PET/CT scan in December 2005.  This revealed a 2 cm right axillary  lymph node and a 1.4 cm hypermetabolic soft tissue nodule with an SUV of  4.1 in the right mid anterior chest wall deep in the subcutaneous fat.  A second right axillary lymph node was also noted, which was  hypermetabolic.  Subsequently, Dr. ***** performed a fine-needle  aspiration of the upper medial area, which was positive for carcinoma,  and a core biopsy of the right breast mass, which revealed a reactive  lymph node.    The patient states that at that time there was much discussion about  surgical management of this tumor.  It was felt that she would require  muscle resection and the patient initially decided to move forward with  this, but then did not have the surgery.  A follow-up PET/CT scan in  August 2008 revealed a 2 cm subcutaneous hypermetabolic focus in  the right upper parasternal level with an SUV of 7.4 and an ill-defined  1.3 cm hypermetabolic focus in the posterior segment of the medial \n right  lobe of the liver with an SUV of 4.8.  These findings were felt to be  consistent with metastatic disease.  In November 2008, a follow-up  PET/CT scan was performed.  This revealed a soft tissue mass inferior  and anterior to the right aspect of the manubrium sternum, measuring 1.9  x 1.5 cm, slightly larger than the scan in August and diffuse  heterogenous uptake throughout the liver without the focal lesions seen  in August.  Apparently a right axillary lymph node biopsy had been  performed in February 2008 and revealed benign pathology.  In any case,  she comes here today for a discussion of potential treatment options  having as yet not pursued treatment for her locally recurrent and  unresectable disease.    PAST MEDICAL HISTORY: Her past medical history is remarkable for  osteoarthritis in the left hand, trace emphysema by x-ray,  diverticulosis on colonoscopy, osteopenia, and a benign thyroid nodule.  Her most significant symptom is neuropathy of the right hand associated  with a right brachial plexopathy and loss of muscle mass in her  intrinsic hand muscles.  This history dates back to 1987 when a scalene  rib was removed on the right due to neuropathy thought to be causing a  right thoracic outlet syndrome.  Since that time, her right hand has  been weak.  It occasionally freezes on her and overall her symptoms have  gotten worse with increasing loss of muscle mass.  She has a mild distal  polyneuropathy with tingling and numbness in the feet and hands and  milder in the left hand.  This is improved some with CoQ10.  She notes  that she has short-term memory loss.  She was seen in ***** and Aging  Clinic in January 2008 and was diagnosed with symptoms consistent  with aging and depression.  A right frontal CVA was discovered on  imaging, which is thought embolic, and was very small in 2003.  She has  a history of ocular migraines associated with opaque vision the last 20  minutes.  \n They are episodic, but come in batches.  She has been to the  emergency room approximately five times for dizziness and  lightheadedness.  The last was in 2007.  She started episodic  lightheadedness and dizziness with moving around and falling spells,  which she finds to be disabling.  She has had a thyroid nodule for two  years thought to be benign.  She had surgery on her feet for hammertoes  in the early 1980s and other than being hospitalized for her  pregnancies, she has been hospitalized for migraines in the past as  well.  From her falling spells, she had hairline fractures in her wrists  and elbows about four years ago.  She still has pain in her wrists and  elbows.  She fractured her ankle with a fall more recently requiring a  brace after hitting a hole in the street.    GYN HISTORY: She underwent menarche at age 12.  Her menses stopped in  her mid-50s.  She took oral contraceptives at age 27 for six years and  hormone replacement therapy for 24 months at age 56.  She is G2, P2, and  was 22 at the birth of her first child.    FAMILY HISTORY: She has one maternal aunt with breast cancer at the age  of 70 and she has two maternal cousins with a history of cancer, one  small intestine and one prostate.    SOCIAL HISTORY: She is divorced and lives with her 42-year-old son who  is unemployed.  She worked with the military.  She does not drink  alcohol.  She smoked cigarettes for 75-pack-years stopping more than 12  months ago.    REVIEW OF SYSTEMS: She notes that she has lack of energy and pain in her  right hand.  She has some discomfort associated with the breast mass.  She has pain in her wrists and elbows from where she fractured them.  She is not eating well.  Her appetite has decreased.  She has lost five  pounds over the last few months.  She notes that she has tight breathing  when she has dizziness and this is episodic and it is associated with  panic-like attacks, flushing, and then dizziness.  If \n she is carrying  something heavy, she cannot go up the stairs without stopping.  She  sleeps well.  She has had fatigue since the time of her radiation in  1994, unable to work, which has led to her retirement.  She feels a  pulling sensation in her anterior chest wall down the center of her  right breast with occasional shooting pain and pain occasionally in her  left elbow, which she was told was tennis elbow.  The rest of her review  of systems is in the history of present illness.    PHYSICAL EXAMINATION:  GENERAL: On physical examination, she is a pleasant woman in no acute  distress who appears to have very good recall.  VITAL SIGNS: Her height is 5'6\", weight is 152 pounds, blood pressure  160/82, pulse 82, respirations 18, and her saturation is 98% on room  air.  SKIN: Her skin reveals no lesions.  HEENT: Her oropharynx is clear.  She is anicteric.  LYMPH NODES: She has no cervical or axillary adenopathy.  There are  soft, mobile nodes in the left supraclavicular space.  LUNGS: Her lungs are clear bilaterally to auscultation and percussion.  CARDIAC: Her cardiac exam is without murmur or gallop.  BREASTS: Her left breast is without masses.  Her right breast reveals a  well-healed incision in the 12 o'clock aspect of her right breast with  some density just below the incision.  She has a 2.5 x 2.5 cm, hard,  fixed mass just lateral to the sternal edge in the left superior chest  wall above her breast.  ABDOMEN: Her abdomen is soft and nontender without hepatosplenomegaly.  EXTREMITIES: Her extremities are without edema.  NEUROLOGIC: Neurologic exam is grossly nonfocal, although I did not  evaluate for brachial plexopathy in her right arm.    IMPRESSION: In summary, this patient is a complicated 73-year-old woman  with locally recurrent, unresectable, hormone-receptor positive breast  cancer, which was initially treated at diagnosis in 1994 with surgery  and interstitial radiation.  She has never taken hormone \n therapy for her  recurrence, although she was exposed to tamoxifen for a little under two  years back in 1994.  During our discussion, I went over in detail her  treatment options, including hormonal therapy with an aromatase  inhibitor on or off a clinical trial and certainly we would offer her  letrozole with alendronate as indicated for her bone density.  The  patient states that her bone density in February 2008 revealed a T-score  of -2.8 in her spine, which is consistent with osteoporosis, and -1.9 in  her femur consistent with osteopenia.  Therefore, I think it would be  appropriate even without bone mets to start her on zoledronic acid if  she agrees to start on a course with an aromatase inhibitor.  I also  pointed out to her that she is eligible to participate in CALGB 40503,  which would treat her with letrozole and then randomize to receive  bevacizumab or placebo.  In order to further evaluate her candidacy for  additional treatment, I obtained a PET/CT scan, which was performed on  January 16.  This showed increased FDG avidity within a right  parasternal chest wall nodule as well as in a lymph node along the  inferior right axillary chain.  The right parasternal soft tissue nodule  measured 1.9 cm and was intricately involved with the underlying chest  wall.  The lesion was adjacent to a soft tissue density deep to three  surgical clips in the right upper inner breast without FDG avidity  consistent with scar.  There was a right inferior axillary lymph node  measuring 1.9 cm with an SUV of 2 and an adjacent 0.5 cm lymph node.  Compared to the PET/CT scan first done in February 2008, the parasternal  nodule had increased in size, although interestingly the axillary nodes  which have not been proven to be involved with cancer, have decreased in  size.  Her abdomen shows a small, well-demarcated, low-attenuation  lesion in the liver consistent with cyst and her bones reveal no  abnormalities.    In \n summary, this patient is a 73-year-old woman with a remarkable  history dating back initially to a low-stage cancer in 1994 and now  presenting 14+ years later with a local regional recurrence that is not  resectable and has not yet been treated with hormone therapy due to the  patient's concerns about her treatment options.  I had a long talk with  her today and suggested that she consider treatment with an aromatase  inhibitor either on or off study and that we obtain laboratory studies  as well as PET/CT scan and MRI of her brain because of her falling  spells.  The MRI of her brain showed no evidence of malignancy either in  brain or bone.  She did have a right middle frontal gyrus  encephalomalacia and gliosis consistent with a prior insult.  We  obtained laboratory studies on the day of her visit as well.  These  revealed a normal CBC, creatinine, electrolytes, liver function tests,  and calcium.  Interestingly, a CA27-29 was only 15 and an LDH was normal  as well.  Based on all of this information, it appears that the patient  has a local regional recurrence of a strongly hormone-receptor positive  indolent breast cancer.  No other sites of disease appear to be present.  I think it would be most appropriate to treat this disease with hormone  therapy and follow it closely.  Given the limited radiation field that  she initially had, I think it would be possible to shrink the tumor,  potentially proceed with a surgical resection, and radiate this area in  order to at least approach the possibility of long-term disease control.  On my visit with her on January 09, I started her on zoledronic acid  because of her osteoporosis and need to start her on an aromatase  inhibitor.  She will return to my clinic on January 25 to begin  aromatase inhibitor therapy either alone or on CALGB 4503 randomized to  placebo or bevacizumab.    Thank you very much for allowing me to participate in the care of this  very \n interesting and lovely woman.  Please feel free to contact me if  you have any questions regarding my recommendations or evaluation.    *****,    ***** *****. *****, M.D.  CLINICAL PROFESSOR OF MEDICINE  UCSF COMPREHENSIVE CANCER CENTER  ***** ***** ***** BREAST CARE CENTER    EXTRA COPIES:    CARBON COPIES:    DICTATED BY:                 ***** *****. *****, MD *****                                 Electronically Signed by                               ***** *****. *****, MD *****/*****/***** *****:*****              ______________________________  ATTENDING PHYSICIAN:         ***** *****. *****, MD *****    D:    *****/*****/*****  *****:***** *****  T:    *****/*****/***** *****:***** ***** *****  *****#: *****  \n"
+
+--- Column: assessment_and_plan ---
+"In summary, this patient is a 73-year-old woman with a remarkable history dating back initially to a low-stage cancer in 1994 and now presenting 14+ years later with a local regional recurrence that is not resectable and has not yet been treated with hormone therapy due to the patient's concerns about her treatment options. I had a long talk with her today and suggested that she consider treatment with an aromatase inhibitor either on or off study and that we obtain laboratory studies as well as PET/CT scan and MRI of her brain because of her falling spells. The MRI of her brain showed no evidence of malignancy either in brain or bone. She did have a right middle frontal gyrus encephalomalacia and gliosis consistent with a prior insult. We obtained laboratory studies on the day of her visit as well. These revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. Interestingly, a CA27-29 was only 15 and an LDH was normal as well. Based on all of this information, it appears that the patient has a local regional recurrence of a strongly hormone-receptor positive indolent breast cancer. No other sites of disease appear to be present. I think it would be most appropriate to treat this disease with hormone therapy and follow it closely. Given the limited radiation field that she initially had, I think it would be possible to shrink the tumor, potentially proceed with a surgical resection, and radiate this area in order to at least approach the possibility of long-term disease control. On my visit with her on January 09, I started her on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor. She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab.\n\nThank you very much for allowing me to participate in the care of this very interesting and lovely woman. Please feel free to contact me if you have any questions regarding my recommendations or evaluation.\n\n*****,\n\n***** *****. *****, M.D.\nCLINICAL PROFESSOR OF MEDICINE\nUCSF COMPREHENSIVE CANCER CENTER\n***** ***** ***** BREAST CARE CENTER\n\nEXTRA COPIES:\n\nCARBON COPIES:\n\nDICTATED BY:                 ***** *****. *****, MD *****                                 Electronically Signed by                               ***** *****. *****, MD *****/*****/***** *****:*****\n\n______________________________\nATTENDING PHYSICIAN:         ***** *****. *****, MD *****\n\nD:    *****/*****/*****  *****:***** *****  T:    *****/*****/***** *****:***** ***** *****  *****#: *****"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer. The purpose of this visit is to discuss potential treatment options for her condition."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma with locally recurrent disease",
+    "Stage_of_Cancer": "Locally recurrent",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "CBC normal, creatinine normal, electrolytes normal, liver function tests normal, calcium normal, CA27-29 = 15, LDH normal"
+  },
+  "Clinical_Findings": {
+    "findings": "PET/CT scan on January 16 showed increased FDG avidity within a right parasternal chest wall nodule and in a lymph node along the inferior right axillary chain. The right parasternal soft tissue nodule measured 1.9 cm and was intricately involved with the underlying chest wall. The lesion was adjacent to a soft tissue density deep to three surgical clips in the right upper inner breast without FDG avidity consistent with scar. There was a right inferior axillary lymph node measuring 1.9 cm with an SUV of 2 and an adjacent 0.5 cm lymph node. Compared to the PET/CT scan first done in February 2008, the parasternal nodule had increased in size, although the axillary nodes, which have not been proven to be involved with cancer, have decreased in size. Her abdomen showed a small, well-demarcated, low-attenuation lesion in the liver consistent with cyst and her bones revealed no abnormalities. MRI of the brain showed no evidence of malignancy either in brain or bone. She did have a right middle frontal gyrus encephalomalacia and gliosis consistent with a prior insult. Physical exam revealed a 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast. Laboratory studies revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. CA27-29 was 15 and LDH was normal."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor.",
+    "supportive_meds": "Zoledronic acid"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "Not explicitly stated."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will start aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25.; also: zoledronic"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Will begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Given the limited radiation field that she initially had, it would be possible to radiate this area in order to approach the possibility of long-term disease control."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "PET/CT scan and MRI of her brain to evaluate falling spells"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "I had a long talk with her today and suggested that she consider treatment with an aromatase inhibitor"
+  ],
+  "second opinion": [
+    "Please feel free to contact me if you have any questions regarding my recommendations or evaluation."
+  ],
+  "in-person": [
+    "I had a long talk with her today"
+  ],
+  "summary": [
+    "The patient has a local regional recurrence of a strongly hormone-receptor positive indolent breast cancer."
+  ],
+  "Stage_of_Cancer": [
+    "local regional recurrence that is not resectable"
+  ],
+  "Distant Metastasis": [
+    "No other sites of disease appear to be present."
+  ],
+  "Metastasis": [
+    "No other sites of disease appear to be present."
+  ],
+  "lab_summary": [
+    "These revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. Interestingly, a CA27-29 was only 15 and an LDH was normal as well."
+  ],
+  "recent_changes": [
+    "started her on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor."
+  ],
+  "supportive_meds": [
+    "I started her on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor."
+  ],
+  "goals_of_treatment": [
+    "Given the limited radiation field that she initially had, I think it would be possible to shrink the tumor, potentially proceed with a surgical resection, and radiate this area in order to at least approach the possibility of long-term disease control."
+  ],
+  "goals_description": [
+    "Not explicitly stated."
+  ],
+  "response_assessment": [
+    "Not yet been treated with hormone therapy"
+  ],
+  "medication_plan": [
+    "she will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  ],
+  "therapy_plan": [
+    "she will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  ],
+  "radiotherapy_plan": [
+    "Given the limited radiation field that she initially had, I think it would be possible to shrink the tumor, potentially proceed with a surgical resection, and radiate this area in order to at least approach the possibility of long-term disease control."
+  ],
+  "imaging_plan": [
+    "obtain laboratory studies as well as PET/CT scan and MRI of her brain because of her falling spells."
+  ],
+  "Next clinic visit": [
+    "She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  ],
+  "follow up": [
+    "She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  ]
+}
+
+--- Column: letter ---
+""
+
+--- Column: traceability ---
+{}
+
+
+
+
+
+
+============================================================
+
+=========== BL (BASELINE, single-prompt same model) OUTPUT — JSON keypoints only ===========
+ROW 2 (coral_idx=21)
+
+============================================================
+
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer, initially treated in 1994 with surgery and interstitial radiation. The purpose of this visit is to discuss potential treatment options."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Infiltrating ductal carcinoma, hormone-receptor positive (estrogen-receptor positive, progesterone-receptor negative)",
+    "Stage_of_Cancer": "Not specified in the note",
+    "Distant_Metastasis": "No distant metastasis mentioned in the note"
+  },
+  "Lab_Results": {
+    "lab_summary": "CBC, creatinine, electrolytes, liver function tests, and calcium were normal. CA27-29 was 15, and LDH was normal."
+  },
+  "Clinical_Findings": {
+    "findings": "Physical examination revealed a 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast. PET/CT scan showed increased FDG avidity within a right parasternal chest wall nodule and in a lymph node along the inferior right axillary chain. MRI of the brain showed no evidence of malignancy."
+  },
+  "Current_Medications": {
+    "current_meds": "Zoledronic acid"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started on zoledronic acid due to osteoporosis.",
+    "supportive_meds": "None mentioned"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "hormone therapy",
+    "goals_description": "To treat the local regional recurrence of a strongly hormone-receptor positive indolent breast cancer."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not assessed in this note."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Consider treatment with an aromatase inhibitor either on or off study."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None planned in this note."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "None planned in this note."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI of the brain was obtained and showed no evidence of malignancy."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Laboratory studies were obtained on the day of the visit."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned in this note."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "January 25 to begin aromatase inhibitor therapy."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed"
+  }
+}
+
+--- STATS ---
+Time: 12.6s | Output: 2819 chars | JSON: OK
+
+
+============================================================
+
+
+##########################################################
+########## BREAST SAMPLE — ROW 3 ##########
+##########################################################
+
+=========== PL (PIPELINE) OUTPUT — includes note_text + keypoints + attribution ===========
+RESULTS FOR ROW 3
+
+============================================================
+
+--- Column: coral_idx ---
+22
+
+--- Column: note_text ---
+"*****  60 yo F    Chief complaint: Patient with early stage breast cancer here to discuss neoadjuvant therapy    History of Present Illness:  ***** ***** is a 60 y.o. female with a recently diagnosed right sided invasive  spindle cell metaplastic carcinoma breast cancer.    The patient's history began in October 2016 when she felt a mass in her right breast, she sought care at ***** ***** with a breast surgeon 11/30/16, who felt a 3cm mass at 9:00 6cm FN and in the office an US showed a complex cystic mass, she performed a CNB in her clinic    11/30/16: US guided CNB performed: malignant spindle cell carcinoma of the breast, ER neg 0%, PR neg 0%, Her2 FISH neg (ratio 1.2)  12/17/16 Bilateral diagnostic mammo:  L: benign, R: 2.7 cm focal rounded nodular density in the lateral aspect of the right breast, BIRADS 0  12/17/16: US R breast: rounded 2.8 x 1.9 cm area of decreased echogenicity with somewhat variegated internal echotexture. The overall appearance is consistent with a probable postbiopsy hematoma  12/17/16: CXR - nml  12/30/16:MRI breasts performed in *****: irregular mass with heterogenous enhancement and central necrosis (with clip) in 9:00 6cmFN measures 2.9x2.5x3.3. Prominent nodes in Right axillary tail   Left breast with lobulated mass in upper outer quadrant, 7mm    01/15/17: Genetics at ***** - 126 InVitae panel sent  01/15/17: Visit with Dr *****  01/18/17: MRI at *****: 3.5 x 3.2 x 2.6 cm round mass with irregular, slightly spiculated margins and rim enhancement in the outer central right breast, middle depth. Approximately 15 mm anterior to the index mass there is a 12 mm irregular mass enhancing mass. In addition there is another similar 8 mm enhancing mass located 18 mm anterosuperior to the index lesion at the 10 o'clock position.  Taken together the index right breast mass and associated satellite masses span approximately 5.5 cm in AP extent.    IMPRESSION:   Right breast: Known biopsy proven \n malignancy (BI-RADS 6).  Left breast: Negative (BI-RADS 1).Recommendations:  1) Right outer central breast index malignancy measures 3.5 cm. Two small satellite masses are located 12-15 mm anterior/superior to the index mass.  2) Mildly prominent right axillary lymph nodes. Recommend further evaluation with ultrasound.    02/02/17: PETCT 1. Heterogenous hypermetabolic right breast mass consistent with patient's known breast carcinoma. Associated minimally hypermetabolic non-enlarged bilateral axillary lymph nodes, nonspecific and better evaluated on same day breast MRI. 2. Indeterminate right adrenal nodule measuring up to 2.3 cm. Further evaluation can be obtained with adrenal protocol CT/MRI.     02/02/17: UCSF review of outside path agreed spindle cell metaplastic carcinoma, did not repeat markers, no grade    02/03/17: R US with research cores and placement of clip, FNA axillary node with clip    02/03/17: FNA negative    02/11/17 MRI guided CNB for extent of disease      Cr 1.0 in 2011      The patient has been referred to discuss neoadjuvant treatment.          Past Medical History:   Diagnosis Date   \u0007 Abnormal liver enzymes 2012    Hyperbilirubinemia   \u0007 Common bile duct (CBD) stricture 2012    post-chole CBD stricture, presented with acholic stool and dark urine   \u0007 GERD (gastroesophageal reflux disease)     mild, tums occasionally   \u0007 HTN (hypertension)    \u0007 Plantar fasciitis         Gynecologic History:   Menarche was at age 12. Patient is gravida 0 para 0. Patient used oral contraceptives for 0 years. Menopause was at age 57 (3 years of hot flashes). Never used hormone replacement therapy           Past Surgical History:   Procedure Laterality Date   \u0007 CHOLECYSTECTOMY, LAPAROSCOPIC  2007   \u0007 Common bile duct stenting  2012    post- Lap chole, placed August 2011, removed 2012   \u0007 HYSTERECTOMY  1987    for a large fibroid         Current Medications           Current Outpatient \n Prescriptions   Medication Sig Dispense Refill   \u0007 clotrimazole-betamethasone (LOTRISONE) 1-0.05 % cream 2 (two) times a day.     \u0007 ibuprofen (ADVIL,MOTRIN) 800 mg tablet Take 800 mg by mouth once as needed for Pain.     \u0007 omeprazole (PRILOSEC) 20 mg capsule Take 20 mg by mouth As needed after meals.     \u0007 triamterene-hydrochlorothiazide (DYAZIDE) 37.5-25 mg capsule Take 1 capsule by mouth Daily.     \u0007 predniSONE (DELTASONE) 5 mg tablet        No current facility-administered medications for this visit.            Social History:  Social History           Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A           Occupational History   \u0007 ***** ***** ***** *****     *****         Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: None   \u0007 Alcohol use No   \u0007 Drug use: No   \u0007 Sexual activity: No          Other Topics Concern   \u0007 None         Social History Narrative    Recently divorced    Raised step son from age 3          family history includes Breast cancer in her sister; Cancer (age of onset: 40) in her father; Lung cancer in her paternal grandfather; Stomach cancer in her paternal grandmother.     Review of Systems:   Negative   ROS      Physical Examination:   General appearance - alert, well appearing, and in no distress  Mental status - alert, oriented to person, place, and time  Eyes - sclera anicteric  Neck - supple, no significant adenopathy  Lymphatics - no palpable lymphadenopathy, no hepatosplenomegaly  Chest - clear to auscultation, no wheezes, rales or rhonchi, symmetric air entry  Heart - normal rate, regular rhythm, normal S1, S2, no murmurs, rubs, clicks or gallops  Abdomen - soft, nontender, nondistended, no masses or organomegaly  lap chole scars  Breasts - left breast normal without mass, skin or nipple changes or axillary nodes, abnormal mass palpable in \n the right breast at 9:00 6cm FN that measures 4x4cm  Neurological - alert, oriented, normal speech, no focal findings or movement disorder noted  Musculoskeletal - no joint tenderness, deformity or swelling  Extremities - peripheral pulses normal, no pedal edema, no clubbing or cyanosis  Skin - normal coloration and turgor, no rashes, no suspicious skin lesions noted    Assessment / Plan:   60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal (possibly awaiting bippsy confirmation of extent of disease). Based on the tumor size and multifocal nature, the patient was referred to discuss neoadjuvant chemotherapy.     We discussed that the metaplastic aspect of her cancer is rare and portends a more aggressive biology - therefore we strongly encouraged neoadjuvant therapy and consideration of the trial with the potential benefit of receiving a promising experimental agent.    We discussed with ***** in great detail the natural history and treatment of locally advanced triple negative breast cancer.  We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent.  We reviewed the pathology report and discussed the multimodality approach of breast cancer treatment.  The patient understands that treatment will include chemotherapy, surgery, hormonal therapy, and potentially radiation therapy depending on her surgical choice and final pathology.  We discussed the advantages of offering chemotherapy in the neoadjuvant setting in order to assess response to treatment, and to increase the chances of breast conserving surgery.     We discussed the chemotherapy regimens that would be recommended as the standard of care, and discussed how these regimens would be different in the context of the I-SPY2 clinical trial.  We explained that in the context of her higher risk triple \n negative metaplastic disease we would typically recommend that she receive either 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks.  We explained that in the context of I-SPY2, patients are randomized to a control or to receive an experimental agent in addition to paclitaxel.   If she is randomized to an experimental therapy, then we will discuss that drug in more detail at that time.    The patient is very interested in the I-SPY2 clinical trial and has already consented. She has done the MRI, research biopsy, and Echo, mammaprint is pending and the echo looks good.  Her labs revealed an elevated creatinine and Alk phos, and she may have been dehydrated.  We will check these again    We explained that if her tumor has a Mammaprint low risk profile, she would not be eligible to participate in the therapeutic portion of the trial, but given the metaplastic aspect I am fairly certain it will be high risk.  If for some reason it is not, we will need to re-assess the diagnosis of metaplastic breast cancer and we could present her case to our multidisciplinary tumor Board.    We specifically discussed the typical and less common side-effects associated with AC/T, such as fatigue, neuropathy, skin and nail changes, myalgias, alopecia, myelosuppression, nausea.      She will benefit from a Medi-port, which was explained to her and to which she has agreed.  We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent.     Pt visit was 55 min, with >50% of the time spent on counseling.     \n"
+
+--- Column: assessment_and_plan ---
+"Assessment / Plan:   60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal (possibly awaiting bippsy confirmation of extent of disease). Based on the tumor size and multifocal nature, the patient was referred to discuss neoadjuvant chemotherapy.     We discussed that the metaplastic aspect of her cancer is rare and portends a more aggressive biology - therefore we strongly encouraged neoadjuvant therapy and consideration of the trial with the potential benefit of receiving a promising experimental agent.    We discussed with ***** in great detail the natural history and treatment of locally advanced triple negative breast cancer.  We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent.  We reviewed the pathology report and discussed the multimodality approach of breast cancer treatment.  The patient understands that treatment will include chemotherapy, surgery, hormonal therapy, and potentially radiation therapy depending on her surgical choice and final pathology.  We discussed the advantages of offering chemotherapy in the neoadjuvant setting in order to assess response to treatment, and to increase the chances of breast conserving surgery.     We discussed the chemotherapy regimens that would be recommended as the standard of care, and discussed how these regimens would be different in the context of the I-SPY2 clinical trial.  We explained that in the context of her higher risk triple \n negative metaplastic disease we would typically recommend that she receive either 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks.  We explained that in the context of I-SPY2, patients are randomized to a control or to receive an experimental agent in addition to paclitaxel.   If she is randomized to an experimental therapy, then we will discuss that drug in more detail at that time.    The patient is very interested in the I-SPY2 clinical trial and has already consented. She has done the MRI, research biopsy, and Echo, mammaprint is pending and the echo looks good.  Her labs revealed an elevated creatinine and Alk phos, and she may have been dehydrated.  We will check these again    We explained that if her tumor has a Mammaprint low risk profile, she would not be eligible to participate in the therapeutic portion of the trial, but given the metaplastic aspect I am fairly certain it will be high risk.  If for some reason it is not, we will need to re-assess the diagnosis of metaplastic breast cancer and we could present her case to our multidisciplinary tumor Board.    We specifically discussed the typical and less common side-effects associated with AC/T, such as fatigue, neuropathy, skin and nail changes, myalgias, alopecia, myelosuppression, nausea.      She will benefit from a Medi-port, which was explained to her and to which she has agreed.  We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent.     Pt visit was 55 min, with >50% of the time spent on counseling.     \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient with early stage right-sided invasive spindle cell metaplastic carcinoma breast cancer here to discuss neoadjuvant therapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2- (HER2 FISH neg, ratio 1.2) spindle cell metaplastic carcinoma",
+    "Stage_of_Cancer": "Locally advanced, multifocal",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alk phos elevated, creatinine elevated"
+  },
+  "Clinical_Findings": {
+    "findings": "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and Her2 FISH negative (ratio 1.2). Tumor measures 3.5 x 3.2 x 2.6 cm with two small satellite masses located  12-15 mm anterior/superior to the index mass. Mildly prominent right axillary lymph nodes. PET/CT shows heterogenous hypermetabolic right breast mass consistent with known breast carcinoma and associated minimally hypermetabolic non-enlarged bilateral axillary lymph nodes. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam reveals an abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm. No other significant findings noted."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "The patient will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. Alternatively, if enrolled in the I-SPY 2 clinical trial, the patient may receive an unspecified experimental agent in addition to paclitaxel. The patient has agreed to have a Medi-port placed for chemotherapy administration. The patient prefers to start the first week in February."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. If randomized to the control group, she will receive 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. The patient will also benefit from a Medi-port and will have a chemo teaching session. Hormonal therapy and potentially radiation therapy will be considered based on surgical choice and final pathology."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "radiation therapy depending on her surgical choice and final pathology"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "The patient will benefit from a Medi-port"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Labs to check creatinine and Alk phos again."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "The patient will undergo genetic testing with a gene panel that has been sent."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "start the first week in February to begin chemotherapy"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "Genetics at [REDACTED] - 126 InVitae panel sent",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "We will check these again. We will arrange for chemo teaching session, and the patient prefers to start the first week in February."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "We discussed with [REDACTED] in great detail the natural history and treatment of locally advanced triple negative breast cancer."
+  ],
+  "in-person": [
+    "Pt visit was 55 min, with >50% of the time spent on counseling."
+  ],
+  "summary": [
+    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
+  ],
+  "Type_of_Cancer": [
+    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
+  ],
+  "Stage_of_Cancer": [
+    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
+  ],
+  "Distant Metastasis": [
+    "we currently have no evidence of metastatic disease"
+  ],
+  "Metastasis": [
+    "she currently has no evidence of metastatic disease"
+  ],
+  "lab_summary": [
+    "We will check these again    We explained that if her tumor has a Mammaprint low risk profile, she would not be eligible to participate in the therapeutic portion of the trial, but given the metaplastic aspect I am fairly certain it will be high risk.  If for some reason it is not, we will need to re-assess the diagnosis of metaplastic breast cancer and we could present her case to our multidisciplinary tumor Board.    We specifically discussed the typical and less common side-effects associated with AC/T, such as fatigue, neuropathy, skin and nail changes, myalgias, alopecia, myel"
+  ],
+  "findings": [
+    "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and Her2 FISH negative (ratio 1.2)."
+  ],
+  "goals_of_treatment": [
+    "we can therefore treat her with curative intent."
+  ],
+  "goals_description": [
+    "We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent."
+  ],
+  "response_assessment": [
+    "Not yet on treatment — no response to assess."
+  ],
+  "medication_plan": [
+    "The patient will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosph"
+  ],
+  "therapy_plan": [
+    "The patient is very interested in the I-SPY2 clinical trial and has already consented."
+  ],
+  "radiotherapy_plan": [
+    "and potentially radiation therapy depending on her surgical choice and final pathology."
+  ],
+  "procedure_plan": [
+    "We explained that she will benefit from a Medi-port, which was explained to her and to which she has agreed."
+  ],
+  "lab_plan": [
+    "We will check these again"
+  ],
+  "genetic_testing_plan": [
+    "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
+  ],
+  "Next clinic visit": [
+    "She will benefit from a Medi-port, which was explained to her and to which she has agreed.  We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
+  ],
+  "Genetics": [
+    "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
+  ],
+  "follow up": [
+    "We will check these again. We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
+  ],
+  "genetic_testing_results": [
+    "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
+  ]
+}
+
+--- Column: letter ---
+""
+
+--- Column: traceability ---
+{}
+
+
+
+
+
+
+============================================================
+
+=========== BL (BASELINE, single-prompt same model) OUTPUT — JSON keypoints only ===========
+ROW 3 (coral_idx=22)
+
+============================================================
+
+{
+  "Reason_for_Visit": {
+    "Patient type": "Follow up",
+    "summary": "Patient with early stage breast cancer here to discuss neoadjuvant therapy."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive spindle cell metaplastic carcinoma breast cancer, ER neg 0%, PR neg 0%, Her2 FISH neg (ratio 1.2)",
+    "Stage_of_Cancer": "Locally advanced, multifocal",
+    "Distant_Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Elevated creatinine and Alk phos, possibly due to dehydration."
+  },
+  "Clinical_Findings": {
+    "findings": "Abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm."
+  },
+  "Current_Medications": {
+    "current_meds": "clotrimazole-betamethasone (LOTRISONE), ibuprofen (ADVIL,MOTRIN), omeprazole (PRILOSEC), triamterene-hydrochlorothiazide (DYAZIDE), prednisone (DELTASONE)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "We can treat her with curative intent."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet assessed, awaiting neoadjuvant therapy."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will start chemotherapy with AC/T regimen or I-SPY2 trial."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Neoadjuvant chemotherapy, surgery, and potentially radiation therapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Potentially, depending on surgical choice and final pathology."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Medi-port insertion."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI, research biopsy, and Echo completed; mammaprint pending."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Check creatinine and Alk phos again."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Discuss further when results of the gene panel are available."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Plan to start therapy the first week in February."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed."
+  }
+}
+
+--- STATS ---
+Time: 10.7s | Output: 2304 chars | JSON: OK
+
+
+============================================================
+
+
+##########################################################
+########## BREAST SAMPLE — ROW 4 ##########
+##########################################################
+
+=========== PL (PIPELINE) OUTPUT — includes note_text + keypoints + attribution ===========
+RESULTS FOR ROW 4
+
+============================================================
+
+--- Column: coral_idx ---
+23
+
+--- Column: note_text ---
+"ID: 71 year old female    CC:  HR low, HER2 negative cancer of the right breast    HPI:    ***** ***** ***** is a 71 y.o. female with R breast cancer here for discussion for a new patient visit.     10/04/2017- Bilateral Breast MRI .  Found 1.2 x 0.7 x 0.7 cm mass in the upper outer right breast.  A 2nd mass is seen posterior and lateral to the index mass measuring 0.6 x 0.6 x 0.7 cm. A 3rd 9 mm mass is also seen posterior and superior to the larger mass.   10/04/2017 R Breast Ultrasound: At 10 o'clock 7 cm from the nipple a 0.7 x 0.9 x 0.9 cm mass. A mass is also seen at 10 o'clock 10 cm from the nipple measuring 1 x 0.5 x 0.6 cm.   10/11/2017-   Core needle biopsy:  #1mass at 10o'clock 10 cm from nipple x 0.6 cm grade 3 ER 1% PR negative Her2 1+ IHC/FISH negative IDC with a Ki67 of 70%.   Biopsy of the mass at 10 o'clock 7 cm from the nipple 0.9cm of IDC showed a grade 3 ER negative PR 1% Her2 0IHC/FISH negative with a Ki67 of 30-40%.   10/19/2017- Initial consult with surgery team  12/27/2017- Follow up consult with surgery team  01/10/2018- PET CT Limited Whole Body- right lateral breast mass measures 2.7 x 1.7 cm compatible with recurrent disease. No evidence of hypermetabolic metastatic disease    ROS  Constitutional: Negative for fever, chills, diaphoresis, appetite change, fatigue and unexpected weight change.  + chronic headaches  HENT: Negative for hearing loss, nosebleeds, congestion, sore throat, mouth sores, neck pain, sinus pressure, or tinnitus.    Eyes: Negative for photophobia, pain, discharge, redness, itching and visual disturbance.   Respiratory: Negative for apnea, chest tightness, shortness of breath, wheezing. + allergic cough  Cardiovascular: Negative for chest pain, palpitations and leg swelling.   Gastrointestinal: Negative for nausea, vomiting, abdominal pain, diarrhea, constipation, blood in stool, or abdominal distention.   Genitourinary: Negative for dysuria, urgency, frequency, hematuria, vaginal \n bleeding or discharge or difficulty urinating.   Musculoskeletal: Negative for myalgias,  joint swelling, or arthralgias. + chronic back and shoulder pain x 2 years.  Skin: Negative for itching, rash  Breast: + tenderness at biopsy site and around axilla  Neurological: Negative for neuropathy, dizziness, tremors, seizures, syncope, speech difficulty, weakness, light-headedness, numbness or  headaches.   Hematological: Negative for adenopathy. Does not bruise/bleed easily.   Psychiatric/Behavioral: Negative for suicidal ideas, sleep disturbance, decreased concentration. + anxiety r/t disease and potential for treatment complications.    MEDICATIONS  Current Outpatient Prescriptions   Medication Sig Dispense Refill   \u0007 acetaminophen (TYLENOL) 325 mg tablet Take 1 tablet (325 mg total) by mouth every 6 (six) hours as needed for Pain. Dose, strength, route or frequency not available. 180 tablet 3   \u0007 alendronate (FOSAMAX) 70 mg tablet TAKE 1 TABLET BY MOUTH EVERY 7 DAYS 12 tablet 3   \u0007 ascorbate calcium (VITAMIN C ORAL) Take by mouth.     \u0007 baclofen (LIORESAL) 10 mg tablet Take 1 tablet (10 mg total) by mouth nightly as needed (Muscle pain, use at night only). 90 tablet 3   \u0007 benzonatate (TESSALON) 100 mg capsule Take 1 capsule (100 mg total) by mouth 3 (three) times daily as needed for Cough. 90 capsule 3   \u0007 clotrimazole (LOTRIMIN) 1 % cream APPLY EXTERNALLY TO THE AFFECTED AREA TWICE DAILY 60 g 0   \u0007 cyanocobalamin, vitamin B-12, (VITAMIN B-12 ORAL) Take by mouth.     \u0007 dextran 70-hypromellose (NATURAL BALANCE TEARS) 0.1-0.3 % DROPSOLN ophthalmic solution Place 2 drops into both eyes 2 (two) times daily. 30 mL 3   \u0007 ergocalciferol, vitamin D2, (VITAMIN D ORAL) Take by mouth.     \u0007 loratadine (CLARITIN) 10 mg tablet Take 1 tablet (10 mg total) by mouth Daily. 90 tablet 3   \u0007 melatonin 3 mg TAB tablet Take 1 tablet (3 mg total) by mouth nightly at bedtime. 90 tablet 3   \u0007 mometasone (NASONEX) 50 mcg/actuation spray 2 \n sprays by Nasal route Daily. 17 g 1   \u0007 multivitamin tablet Take 1 tablet by mouth Daily.       \u0007 omeprazole (PRILOSEC) 20 mg capsule TAKE 1 CAPSULE BY MOUTH DAILY 90 capsule 1   \u0007 promethazine-dextromethorphan 6.25-15 mg/5 mL syrup Take 5 mLs by mouth 4 (four) times daily as needed for Cough. 473 mL 3   \u0007 blood pressure monitor KIT Please check your blood pressure daily and record (Patient not taking: Reported on 01/24/2018) 1 kit 0   \u0007 menthol (BENGAY COLD THERAPY) 5 % GEL Apply 1 Application topically 2 (two) times daily. (Patient not taking: Reported on 01/24/2018) 85 g prn   \u0007 VENTOLIN HFA 90 mcg/actuation metered dose inhaler INHALE 1 PUFF INTO THE LUNGS EVERY 4 HOURS AS NEEDED FOR WHEEZING OR SHORTNESS OF BREATH (Patient not taking: Reported on 10/24/2017) 54 g 0     No current facility-administered medications for this visit.          ALLERGIES  Allergies/Contraindications   Allergen Reactions   \u0007 Iodinated Contrast- Oral And Iv Dye Itching and Rash     Patient takes pre-meds prior to CT Scans. She will continue to need the pre-meds for future scans   \u0007 Contrast [Gadolinium-Containing Contrast Media] Itching     Patient not sure if she is allergic to GAD.   Will add to allergy list: She is allergic to NON-Ionic Contrast (CT,etc.) She takes pre - meds for this.    \u0007 Hydrocodone-Acetaminophen Nausea Only   \u0007 Penicillins Unknown   \u0007 Pollen Extracts      Runny nose and dizziness           PAST, FAMILY, and SOCIAL HISTORY  Past Medical History:   Diagnosis Date   \u0007 Cataract    \u0007 Elevated CA-125    \u0007 GERD (gastroesophageal reflux disease)    \u0007 Kidney stones    \u0007 Metastatic papillary carcinoma to lymph node     involving left pelvic lymph nodes   \u0007 NSVD (normal spontaneous vaginal delivery)     x2   \u0007 Ovarian cancer 1998    recurrent, stage IIIC; with platinum-sensitive disease       Family History   Problem Relation Age of Onset   \u0007 Cancer Mother 35     breast cancer   \u0007 Hypertension Father    \u0007 Stroke Father 88   \u0007 \n Diabetes Other    \u0007 Cancer Sister      liver cancer   \u0007 Diabetes Brother    \u0007 Hypertension Brother    \u0007 Glaucoma Brother    \u0007 Hypertension Sister    \u0007 Diabetes Sister    \u0007 Glaucoma Sister    \u0007 Cancer Sister 62     Breast cancer, bilateral mastectomy   \u0007 Amblyopia Neg Hx    \u0007 Blindness Neg Hx    \u0007 Cataracts Neg Hx    \u0007 Keratoconus Neg Hx    \u0007 Macular degen Neg Hx    \u0007 Retinal detachment Neg Hx    \u0007 Strabismus Neg Hx    \u0007 Anesth problems Neg Hx    \u0007 Bleeding disorder Neg Hx    \u0007 Anesthesia problems Neg Hx    \u0007 Autoimmune disease Neg Hx    \u0007 Congenital Anomalies Neg Hx    \u0007 Hyperthyroidism Neg Hx    \u0007 Hypothyroidism Neg Hx    \u0007 Melanoma Neg Hx    \u0007 Neurofibromatosis Neg Hx    \u0007 Ptosis Neg Hx        Social History     Social History   \u0007 Marital status: Single     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use No   \u0007 Drug use: No   \u0007 Sexual activity: Not on file     Other Topics Concern   \u0007 Not on file     Social History Narrative    2 sons 51, 46 yrs old, 2 miscarriages, 2 abortion    Divorced    Living alone, lives in ***** *****, ***** *****.     2 sons live in ***** *****       PHYSICAL EXAM  ECOG 0  Vital Signs:  BP 127/66  | Pulse 69  | Temp 36.3 C (97.4 F) (Oral)  | Resp 16  | Ht 158 cm (5' 2.21\") Comment: 01/24/2018 @ ***** | Wt 59.1 kg (130 lb 6.4 oz)  | LMP 01/09/1998  | SpO2 98%  | Breastfeeding? No  | BMI 23.69 kg/m     Constitutional:  WDWN, NAD.  Skin: warm, moist. No rashes or lesions.  Eyes: sclera anicteric, PERRL, EOMI.   HENT: sinuses nontender, nasal mucosa intact, pharynx without erythema, no thrush.   Lymph Nodes: no cervical, supraclavicular, or axillary lymphadenopathy.    Respiratory: BL lungs CTA, resonant to percussion, no wheezes, rhonchi, or crackles  Cardiovascular: normal heart rate, normal rhythm, no murmurs, no edema  Breast:: firm palpable \n nodule felt at 11 o'clock between axilla and areola in R breast.   GI: bowel sounds normal, soft, nontender, no distention, no organomegaly   Musculoskeletal: no point tenderness over bones or joints   Neurologic: alert & oriented x 3, no focal motor or sensory deficits  Psychiatric: mood stable    RESULTS  I have personally reviewed and interpreted the following:     PETCT Limited Whole Body Vertex to Mid Thigh 01/10/2018  COMPARISON (including at least the prior year or since last change in therapy):   08/18/2014    CLINICAL HISTORY:   71 years old Female with history of BRCA1 genetic carrier with a history of ovarian cancer and triple negative right breast IDC with new masses on mammogram 12/22/2017.    FINDINGS:  Lymph nodes: No hypermetabolic lymphadenopathy.  Lungs: No metastases.  Abdominal and pelvic organs: No metastases.  Bones: No metastases.  Other: Right lateral breast dumbbell shaped enhancing hypermetabolic mass measures 2.7 x 1.7 cm (SUV Max 10.5 for largest component).    Non-oncologic findings:  Brain:   Unremarkable, symmetric, FDG uptake is seen throughout the cortical gray matter, basal ganglia and the cerebellum.  No mass effect.  While these images appear within normal limits, MRI is recommended to rule out intracranial and/or skull base metastases if clinically indicated.  Neck:   Otherwise unremarkable.  Chest:   Unchanged right upper lobe pleural-based mass measuring 2.4 cm x 1.0 cm, dating back to 08/18/2014, without significant FDG avidity. Unchanged left upper and lower lobe pulmonary nodules measuring up to 6 mm in the left lower lobe (series 3, image 121 and image 32).  Abdomen/Pelvis:   Otherwise unremarkable.  Musculoskeletal:   Scattered bone islands in the pelvis are unchanged compared to 08/18/2014. Multilevel degenerative changes of the cervical and lumbar spine. Unchanged 3.4 cm lipomatous lesion in the right tensor fascia lata. Midline abdominal staples.    IMPRESSION: \n   Hypermetabolic  (FDG avid) right lateral breast mass measures 2.7 x 1.7 cm compatible with recurrent disease. No evidence of hypermetabolic metastatic disease.     Right breast diagnostic mammography, Limited R breast US 12/22/2017  Comparison:  Prior examinations dated 10/11/2017, 10/11/2017, 10/04/2017 (MRI) and 01/23/2017 were reviewed for comparison.    Mammographic Findings:  There are scattered areas of fibroglandular density.  BB marker on the upper outer right breast indicating patient-palpated lump corresponds to two masses, both biopsy-proven IDC (ribbon clip and heart clip). The irregular mass containing the ribbon clip now measures approximately 14 mm, previously 11 mm, and the more posterior obscured mass containing the heart clip now measures approximately 15 mm, previously 9 mm.  BB marker on the lower central/slightly outer right breast indicates second patient-palpated lump, for which there is no mammographic correlate.  Ultrasound Findings:  There is no sonographic abnormality (no correlate) to patient-palpated lump in the lower central/slightly outer right breast, at approximately 7 o'clock, 4 cm from nipple.  Limited ultrasound of the right axilla demonstrates lymph nodes with normal cortical thickness and morphology.    IMPRESSION:   Right breast: Known biopsy proven malignancy (BI-RADS 6).    Recommendations:  1. Recommend continued surgical/oncologic management of two-site biopsy-proven right breast malignancy. Of note, right axillary lymph nodes appear sonographically normal at today's examination.    2. Recommend clinical follow up for patient-palpated lump in the lower central/slightly outer right breast, for which there is no mammographic nor sonographic correlate. If indicated, palpation-guided FNA could be pursued.    Bilateral MRI of Breasts 10/04/2017  Comparison:  Prior examinations dated 01/23/2017 (mammogram), 07/08/2016 and 11/10/2015 were reviewed for comparison.  MRI \n Findings:  This bilateral breast MRI exam demonstrates minimum background enhancement.  There are scattered areas of fibroglandular tissue.    RIGHT Breast:  There is a new 12 x 7 x 7 mm (ML x AP x CC) irregularly shaped mass with spiculated margins in the upper outer quadrant of the right breast. Signal intensity/time curve demonstrates rapid initial rise and washout enhancement kinetics.  This lesion is best seen on axial postcontrast image # 90 and sagittal reformation #341.  More posteriorly and laterally in the right breast, there is a second new 6 x 6 x 7 mm (ML x AP x CC) irregularly shaped mass with irregular margins. Signal intensity/time curve demonstrates rapid initial rise and washout enhancement kinetics.  This lesion is best seen on image # 90 and sagittal reformation #363.    LEFT Breast:  The previously described area of non-mass enhancement with linear distribution and clumped internal enhancement in the lower outer left breast is significantly less conspicuous than on MRI dated 07/08/2016, and can no longer be accurately measured. No new abnormal areas of enhancement or other MRI features of malignancy are identified.    IMPRESSION:   Right breast: Suspicious (BI-RADS 4).  Left breast: Benign (BI-RADS 2).    Recommendations:  1. Two new irregular masses demonstrating rapid enhancement with washout are noted in the upper outer quadrant of the right breast. Recommend diagnostic right breast mammogram with targeted ultrasound for further evaluation and biopsy planning, with possible stereotactic or ultrasound-guided biopsy to follow. If no correlate is identified by mammogram or ultrasound, then recommend MR-guided core biopsy.    2. Significant interval decrease in conspicuity of the previously described area of non-mass enhancement in the lower outer quadrant of the left breast, compatible with a benign etiology. Annual mammography in addition to MRI is recommended in patients undergoing \n high-risk screening.        ASSESSMENT & PLAN  ***** ***** ***** is a 71 y.o. female with R breast cancer here for discussion for a new patient visit.       Breast Cancer  - Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm  - Patient unsure about starting chemo as we recommended today she would like to speak to Dr. ***** first.     Plan:  Port placement ASAP  Chemo teach ASAP for taxol x 12 weekly  Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12.        I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 60 minutes face-to-face with the patient and 45 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.          \n"
+
+--- Column: assessment_and_plan ---
+"ASSESSMENT & PLAN  ***** ***** ***** is a 71 y.o. female with R breast cancer here for discussion for a new patient visit.       Breast Cancer  - Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm  - Patient unsure about starting chemo as we recommended today she would like to speak to Dr. ***** first.     Plan:  Port placement ASAP  Chemo teach ASAP for taxol x 12 weekly  Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12.        I have reviewed and updated the patient's past medical history, medications, allergies, family and social histories. I spent a total of 60 minutes face-to-face with the patient and 45 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options. Patient expresses understanding and agrees with the plan.          \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "71 y.o. female with right breast cancer, stage not specified, here for discussion for a new patient visit."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER-/PR-/HER2- (TNBC) invasive ductal carcinoma (IDC) with local recurrence (right lateral breast mass)",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Latest PETCT demonstrates growth of right breast lesion from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No hypermetabolic lymphadenopathy, lung metastases, abdominal/pelvic metastases, or bone metastases detected. Right lateral breast mass is hypermetabolic (SUV Max 10.5) and compatible with recurrent disease. No evidence of hypermetabolic metastatic disease. Physical exam reveals a firm palpable nodule at 11 o'clock between axilla and areola in the right breast. No cervical, supraclavicular, or axillary lymphadenopathy noted. Right breast mammography shows two masses, both biopsy-proven IDC, with the irregular mass containing the ribbon clip measuring approximately 14 mm and the more posterior obscured mass containing the heart clip measuring approximately 15 mm. No sonographic abnormality to the patient-palpated lump in the lower central/slightly outer right breast. Right axillary lymph nodes appear sonographically normal."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Port placement ASAP, Chemo teach ASAP for taxol x 12 weekly",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "Not explicitly stated."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Start chemotherapy with taxol x 12 weekly, beginning as early as next Wednesday or the following week. Clinic visits scheduled with cycles 1, 2, 5, 8, and 12."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement ASAP"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging planned."
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "in-person: clinic visits with cycles 1, 2, 5, 8, and 12"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "Initial consult with surgery team, Follow up consult with surgery team",
+    "Others": "None",
+    "follow up": "She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "BRCA1 genetic carrier. No specific mutations or variants mentioned beyond being a BRCA1 carrier. No other genetic or molecular testing results detailed in the note."
+  }
+}
+
+--- Column: attribution ---
+{
+  "Patient type": [
+    "here for discussion for a new patient visit."
+  ],
+  "second opinion": [
+    "Patient unsure about starting chemo as we recommended today she would like to speak to Dr. [REDACTED] first."
+  ],
+  "in-person": [
+    "I spent a total of 60 minutes face-to-face with the patient and 45 minutes of that time was spent counseling regarding the treatment plan, symptoms and therapeutic options."
+  ],
+  "summary": [
+    "71 y.o. female with R breast cancer here for discussion for a new patient visit."
+  ],
+  "Stage_of_Cancer": [
+    "Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm"
+  ],
+  "Distant Metastasis": [
+    "Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm"
+  ],
+  "Metastasis": [
+    "Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm"
+  ],
+  "findings": [
+    "Latest PETCT demonstrates growth of R breast lesion from 1.2 x 0.7 to 2.7 x 1.7 cm"
+  ],
+  "recent_changes": [
+    "Port placement ASAP  Chemo teach ASAP for taxol x 12 weekly"
+  ],
+  "goals_description": [
+    "Not explicitly stated."
+  ],
+  "response_assessment": [
+    "Patient unsure about starting chemo as we recommended today she would like to speak to Dr. [REDACTED] first."
+  ],
+  "medication_plan": [
+    "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok."
+  ],
+  "therapy_plan": [
+    "Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+  ],
+  "procedure_plan": [
+    "Port placement ASAP"
+  ],
+  "Next clinic visit": [
+    "Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+  ],
+  "follow up": [
+    "She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+  ]
+}
+
+--- Column: letter ---
+""
+
+--- Column: traceability ---
+{}
+
+
+
+
+
+
+============================================================
+
+=========== BL (BASELINE, single-prompt same model) OUTPUT — JSON keypoints only ===========
+ROW 4 (coral_idx=23)
+
+============================================================
+
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "summary": "71-year-old female with right breast cancer, here for discussion of a new patient visit."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Right breast invasive ductal carcinoma (IDC), grade 3, ER 1%, PR negative, Her2 0IHC/FISH negative",
+    "Stage_of_Cancer": "Not specified in note",
+    "Distant_Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note"
+  },
+  "Clinical_Findings": {
+    "findings": "PET CT shows a right lateral breast mass measuring 2.7 x 1.7 cm compatible with recurrent disease. No evidence of hypermetabolic metastatic disease."
+  },
+  "Current_Medications": {
+    "current_meds": "Acetaminophen, Alendronate, Baclofen, Benzonatate, Clotrimazole, Cyanocobalamin, Dextran 70-hypromellose, Ergocalciferol, Loratadine, Melatonin, Mometasone, Multivitamin, Omeprazole, Promethazine-dextromethorphan, Blood pressure monitor, Menthol, Ventolin HFA"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "None",
+    "supportive_meds": "None"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "Plan to start chemotherapy with taxol."
+  },
+  "Response_Assessment": {
+    "response_assessment": "The cancer has grown from 1.2 x 0.7 cm to 2.7 x 1.7 cm."
+  },
+  "Medication_Plan": {
+    "medication_plan": "No planned medication changes mentioned."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Chemotherapy with taxol x 12 weekly."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "None"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement ASAP."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "None"
+  },
+  "Lab_Plan": {
+    "lab_plan": "None"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "BRCA1 genetic carrier."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Clinic visits with cycles 1, 2, 5, 8, and 12."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed"
+  }
+}
+
+--- STATS ---
+Time: 11.9s | Output: 2175 chars | JSON: OK
+
+
+============================================================
+
+
+##########################################################
+########## BREAST SAMPLE — ROW 5 ##########
+##########################################################
+
+=========== PL (PIPELINE) OUTPUT — includes note_text + keypoints + attribution ===========
+RESULTS FOR ROW 5
+
+============================================================
+
+--- Column: coral_idx ---
+24
+
+--- Column: note_text ---
+"ID: ***** ***** is a 55 y.o. ***** with a recent diagnosis of early stage breast cancer, who presents in consultation to discuss treatment options and to establish care.    Date of Service: 10/21/17    HPI: The patient has not had screening mammograms.  She felt a lump in her left breast in February 2017.  She did not immediately seek care, but did start an evaluation (through ***** *****) in June 2017.  Her work-up and treatment to date are as follows:    February 2017 Felt lump in her left breast    06/14/17 Diagnostic mammogram: irregular spiculated mass in left upper outer quadrant corresponding to palpable abnormality; irregular mass in posterior, inferior, subareolar region of right breast  Targeted left breast ultrasound: irregular hypoechoic mass (1.8 x 2.3 x 2.7 cm) at 1:30 position, 10 cm from nipple  Targeted right breast ultrasound: lobulated hypoechoic mass (1 x 1.1 x 1.2 cm) at 8:00 position, 6 cm from nipple    06/17/17 US-guided left breast core biopsy at 8:00 position, 6 cm from nipple: 0.75 cm grade 3 IDC with ER+ 100%, PR+ 75%, HER2- (IHC 1+; FISH ratio 1.1)   US-guided right breast core biopsy at 1:30 position, 10 cm from nipple: 0.6 cm grade 1 IDC with ER+ 100%, PR+ 75%, HER2+ (IHC 2+; FISH ratio 2.0 with HER2 copy # per cell 4.4); intermediate nuclear grade DCIS     07/02/17 Breast MRI: right - irregular homgeneously enhancing mass (2.3 x 1.4 x 1.1 cm) corresponding to right breast index mass (at 8:00 position, 13 cm from nipple); left - irregular homgeneously enhancing mass (2.2 x 3.3 x 2.6 cm) corresponding to left breast index mass (at 2:00 position, 10 cm from nipple); multiple prominent low level 1 left axillary LN with thickened cortex, asymmetric compared to right    07/11/17 US-guided left axillary LN core biopsy (3:00 position, 19 cm from nipple): multiple foci of metastatic adenocarcinoma (largest 1.5 mm) with tumor cells present in adipose tissue adjacent to fibrous tissue, unclear whether this \n represents extracapsular invasion; HER2- (IHC 1+; FISH ratio 1.2)    08/13/17 Left breast partial mastectomy and axillary lymph node dissection: 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614)  Right breast partial mastectomy and axillary lymph node dissection: 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321)  (Surgeon: Dr. ***** *****)    Presents to clinic with her husband and sister (*****).  She reports that she has felt a lot healthier since having her breast surgery.  She has some mld joint stiffness, in particular in her knees.      ***** has met with Dr. ***** ***** and Dr. ***** ***** who have both recommended adjuvant chemotherapy (she states that they have specifically recommended TC).  She states that when she saw Dr. ***** he recommended that her tumor (presumptively left) be sent for Oncotype.  She is not yet aware of a result.    She is concerned that the benefits of chemotherapy will not outweigh its long-term risks.      Past Medical History:   Diagnosis Date   \u0007 Breast cancer    \u0007 Diabetes 08/09/2017    HbA1c of October 20 on 08/09/17    \u0007 Obesity        Past Surgical History:   Procedure Laterality Date   \u0007 AXILLARY LYMPH NODE DISSECTION Bilateral 10/09/2017    8 LN ON RIGHT; 12 LN ON LEFT   \u0007 MASTECTOMY, PARTIAL Bilateral 08/13/2017    WITH BILATERAL REDUCTION        Family History   Problem Relation Name Age of Onset   \u0007 Breast cancer Maternal Grandmother  58       Social History     Social History   \u0007 Marital status: Married     Spouse name: N/A   \u0007 Number of children: N/A   \u0007 Years of education: N/A     Occupational History   \u0007 Not on file.     Social History Main Topics   \u0007 Smoking status: Never Smoker   \u0007 Smokeless tobacco: Never Used   \u0007 Alcohol use No   \u0007 Drug \n use: No   \u0007 Sexual activity: Yes     Other Topics Concern   \u0007 Not on file     Social History Narrative    The patient underwent menarche at 12 years of age.  She took OCP for < 1 year.  She is G0P0.  She states she underwent menopause at 51 years of age.  No HRT.    States she worked at ***** ***** ***** for a long time.    She walks 4-5 miles a day.       No outpatient encounter prescriptions on file as of 10/21/2017.     No facility-administered encounter medications on file as of 10/21/2017.    No Medications    Allergies/Contraindications  Allergies not on file      ROS     Physical Exam:   Vital Signs - Pulse 51  | Temp 36.1 C (97 F) (Oral)  | Resp 16  | Ht 165.5 cm (5' 5.16\") Comment: 10/21/2017 @ ***** | Wt (!) 105.7 kg (233 lb)  | SpO2 97%  | BMI 38.59 kg/m    Constitutional - WDWN, NAD  Eyes - sclera anicteric, PERRL, EOMI  HENT - sinuses nontender, nasal mucosa intact, pharynx without erythema, stomatitis, or thrush   Lymph Nodes - no cervical, supraclavicular, or axillary lymphadenopathy  Respiratory - resonant to percussion throughout, CTA bilaterally; no wheezes, rhonchi, or crackles  Cardiovascular - Normal heart rate, normal rhythm, no murmurs, no edema  Breast - no masses bilaterally  GI - Bowel sounds normal, soft; no tenderness, no distention, no HSM  Musculoskeletal - No tenderness over bones or joints.   Neurologic - Alert & oriented x 3, ambulates w/o difficulty, good strength throughout  Psychiatric - Mood stable; no HI, SI, hallucinations, paranoia, or delusions  Skin - warm without rashes or lesions     Studies:  Available labs, pathology, and imaging were reviewed and independently interpreted, as described above in the HPI.    Assessment and Recommendations:  55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer who should proceed with adjuvant chemotherapy in the context of clinically and genomically high risk disease in the left breast.       I discussed with \n the patient in great detail the natural history and treatment of early stage HR+/HER2- breast cancer.  We reviewed the available imaging and pathology reports.  I noted that she had 2 breast cancers with very different features.  Specifically, she has a Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast (MP high risk -0.614) and a Stage I (T1cN0) HR+/HER2- grade 1 IDC of the right breast (MP low risk).    With regards to her left breast cancer, I noted the high clinical risk features, including tumor size, lymph node status, and grade.  I explained that with the above clinical characteristics, patients would historically be recommended chemotherapy. I then introduced the utility of genomic profiling of the tumor (with tools like MammaPrint and Oncotype) to predict recurrence risk and benefit from chemotherapy. I noted that in the MINDACT clinical trial all patients with both high clinical risk and high genomic risk were recommended chemotherapy and that patients with such characteristics have not been studied with randomization to receive or not receive chemotherapy.  I stated that the addition of chemotherapy was important to reduce distant recurrence risk and that I would expect that benefit to be an absolute reduction in DFS of ~8%.  Her tumor is apparently being assessed for Oncotype DX RS.  I stated that I have seen some discordance between these two tests, and that were she found to have intermediate or high risk disease with Oncotype I would still recommend chemotherapy, but if she had low risk disease it would be both unexpected and difficult to reconcile - I would want to discuss the result at that time.  I noted that TAILORx does not apply to her given her positive LN, even as a micrometastasis.    I stated that with regards to chemotherapy regimens, I would recommend TC x 4 cycles over AC/T in the context of the ABC clinical trials and that she had only 1 positive LN.  We discussed extensively the \n typical SE associated with TC chemotherapy, including fatigue, myelosuppression, joint pain, myalgias, fluid retention, finger nail changes, alopecia, and cognitive dysfunction.    With regards to her right breast cancer, I noted the low clinical risk features, including tumor size, clear LN status, grade, and biomarker status.  I noted that chemotherapy would not be recommended for this tumor as it would not provide benefit.    I explained in the context of HR+/HER2- breast cancers, regardless of other therapy decisions, anti-estrogen therapy was the most important part of treatment her moving forward.  I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with HR+/HER2- breast cancer is an aromatase inhibitor (AI), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an AI for at least 5 years and that this would not start until after chemotherapy, and radiation.    I stated she would need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.      Recommendations in Brief:  - docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years  - consider adjuvant trial of a CDK4/6 inhibitor    I spent a total of 120 minutes face-to-face with the patient and 115 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, lifestyle modification, symptoms and therapeutic options.  \n"
+
+--- Column: assessment_and_plan ---
+"Assessment and Recommendations:  55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer who should proceed with adjuvant chemotherapy in the context of clinically and genomically high risk disease in the left breast.       I discussed with \n the patient in great detail the natural history and treatment of early stage HR+/HER2- breast cancer.  We reviewed the available imaging and pathology reports.  I noted that she had 2 breast cancers with very different features.  Specifically, she has a Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast (MP high risk -0.614) and a Stage I (T1cN0) HR+/HER2- grade 1 IDC of the right breast (MP low risk).    With regards to her left breast cancer, I noted the high clinical risk features, including tumor size, lymph node status, and grade.  I explained that with the above clinical characteristics, patients would historically be recommended chemotherapy. I then introduced the utility of genomic profiling of the tumor (with tools like MammaPrint and Oncotype) to predict recurrence risk and benefit from chemotherapy. I noted that in the MINDACT clinical trial all patients with both high clinical risk and high genomic risk were recommended chemotherapy and that patients with such characteristics have not been studied with randomization to receive or not receive chemotherapy.  I stated that the addition of chemotherapy was important to reduce distant recurrence risk and that I would expect that benefit to be an absolute reduction in DFS of ~8%.  Her tumor is apparently being assessed for Oncotype DX RS.  I stated that I have seen some discordance between these two tests, and that were she found to have intermediate or high risk disease with Oncotype I would still recommend chemotherapy, but if she had low risk disease it would be both unexpected and difficult to reconcile - I would want to discuss the result at that time.  I noted that TAILORx does not apply to her given her positive LN, even as a micrometastasis.    I stated that with regards to chemotherapy regimens, I would recommend TC x 4 cycles over AC/T in the context of the ABC clinical trials and that she had only 1 positive LN.  We discussed extensively the \n typical SE associated with TC chemotherapy, including fatigue, myelosuppression, joint pain, myalgias, fluid retention, finger nail changes, alopecia, and cognitive dysfunction.    With regards to her right breast cancer, I noted the low clinical risk features, including tumor size, clear LN status, grade, and biomarker status.  I noted that chemotherapy would not be recommended for this tumor as it would not provide benefit.    I explained in the context of HR+/HER2- breast cancers, regardless of other therapy decisions, anti-estrogen therapy was the most important part of treatment her moving forward.  I explained that the standard, first-line recommendation for adjuvant anti-estrogen therapy in a post-menopausal patient with HR+/HER2- breast cancer is an aromatase inhibitor (AI), which blocks the conversion of androgen to estrogen, reducing the total body estrogen supply. I discussed the typical side-effects, including hot flashes, arthralgias, vaginal dryness, and bone density loss. I recommend that she take an AI for at least 5 years and that this would not start until after chemotherapy, and radiation.    I stated she would need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking.      Recommendations in Brief:  - docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years  - consider adjuvant trial of a CDK4/6 inhibitor    I spent a total of 120 minutes face-to-face with the patient and 115 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, lifestyle modification, symptoms and therapeutic options.  \n"
+
+--- Column: keypoints ---
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer presenting in consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR+/HER2- grade 3 invasive ductal carcinoma with suspicion for LVI and focal high grade DCIS component in the left breast; ER+/PR+/HER2- grade 1 invasive ductal carcinoma with intermediate nuclear grade DCIS in the right breast",
+    "Stage_of_Cancer": "Left: Stage III (T3N1); Right: Stage I (T1cN0)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note."
+  },
+  "Clinical_Findings": {
+    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "curative",
+    "goals_description": "Not explicitly stated."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "docetaxel/cyclophosphamide x 4 cycles, AI therapy for at least 5 years, calcium and vitamin D supplementation"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "docetaxel/cyclophosphamide x 4 cycles, radiation, AI therapy for at least 5 years, consider adjuvant trial of a CDK4/6 inhibitor, DEXA to assess current bone health, take calcium and vitamin D to improve bone health"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "radiation"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "No procedures planned."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "DEXA to assess current bone health"
+  },
+  "Lab_Plan": {
+    "lab_plan": "No labs planned."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "None planned."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Not specified in the given note"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None",
+    "follow up": "The patient needs a DEXA to assess her current bone health. She is advised to continue her current level of aerobic activity (150 minutes a week)."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  }
+}
+
+--- Column: attribution ---
+{
+  "second opinion": [
+    "consider adjuvant trial of a CDK4/6 inhibitor"
+  ],
+  "in-person": [
+    "I spent a total of 120 minutes face-to-face with the patient and 115 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, lifestyle modification, symptoms and therapeutic options."
+  ],
+  "summary": [
+    "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer"
+  ],
+  "Type_of_Cancer": [
+    "Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast"
+  ],
+  "Stage_of_Cancer": [
+    "Specifically, she has a Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast ... and a Stage I (T1cN0) HR+/HER2- grade 1 IDC of the right breast"
+  ],
+  "Distant Metastasis": [
+    "clear LN status"
+  ],
+  "Metastasis": [
+    "chemotherapy would not be recommended for this tumor as it would not provide benefit."
+  ],
+  "findings": [
+    "left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0)"
+  ],
+  "goals_of_treatment": [
+    "adjuvant chemotherapy in the context of clinically and genomically high risk disease"
+  ],
+  "goals_description": [
+    "Not explicitly stated."
+  ],
+  "medication_plan": [
+    "- docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years"
+  ],
+  "therapy_plan": [
+    "Recommendations in Brief:  - docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years  - consider adjuvant trial of a CDK4/6 inhibitor"
+  ],
+  "radiotherapy_plan": [
+    "radiation"
+  ],
+  "imaging_plan": [
+    "I stated she would need a DEXA to assess her current bone health."
+  ],
+  "follow up": [
+    "I stated she would need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking."
+  ],
+  "genetic_testing_results": [
+    "Her tumor is apparently being assessed for Oncotype DX RS."
+  ]
+}
+
+--- Column: letter ---
+""
+
+--- Column: traceability ---
+{}
+
+
+
+
+
+
+============================================================
+
+=========== BL (BASELINE, single-prompt same model) OUTPUT — JSON keypoints only ===========
+ROW 5 (coral_idx=24)
+
+============================================================
+
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "summary": "A 55-year-old female with a recent diagnosis of bilateral breast cancer presenting for discussion of treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Bilateral breast cancer, left breast: Grade 3 IDC with ER+ 99%, PR+ >95%, HER2-; right breast: Grade 1 IDC with ER+ 99%, PR+ 90%, HER2-",
+    "Stage_of_Cancer": "Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)",
+    "Distant Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "No labs in note"
+  },
+  "Clinical_Findings": {
+    "findings": "No masses bilaterally, no lymphadenopathy, no tenderness, no distention, no HSM, no edema, good strength throughout, no rashes or lesions."
+  },
+  "Current_Medications": {
+    "current_meds": "None"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "None",
+    "supportive_meds": "None"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "adjuvant",
+    "goals_description": "Adjuvant chemotherapy and anti-estrogen therapy to reduce distant recurrence risk and manage hormone receptor-positive breast cancer."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not applicable"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Docetaxel/cyclophosphamide x 4 cycles followed by aromatase inhibitor therapy for at least 5 years."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Radiation therapy"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Radiation therapy"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "DEXA scan to assess bone health"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "None"
+  },
+  "Lab_Plan": {
+    "lab_plan": "None"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Oncotype DX RS"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note"
+  },
+  "Referral": {
+    "Nutrition": "None",
+    "Genetics": "None",
+    "Specialty": "None",
+    "Others": "None"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "To be determined based on treatment schedule and response."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed"
+  }
+}
+
+--- STATS ---
+Time: 10.4s | Output: 2192 chars | JSON: OK
+
+
+============================================================
