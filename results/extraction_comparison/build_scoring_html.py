@@ -118,12 +118,13 @@ PER_CANCER = {
     },
 }
 
-# The reminder so raters don't get misled (see legend). The full amber box shows every 5th
-# question; the rest just get a short hint folded into the end of the question text.
-SCORING_RULE = ('⚑ We are grading <b>extraction</b>, not summary. If PL pulls out more raw detail '
-                'without forcing a conclusion, that is good, and you are the one who judges it. If BL '
-                'gives a vague summary that happens to read as correct, it still skipped the job, so '
-                'that is <b>not</b> a reason to mark "BL better".')
+# The reminder so raters don't get misled (see legend). Both versions are folded into the end
+# of the question text as muted italic hints (no separate box). The fuller version shows every
+# 5th question; the rest get the short one.
+SCORING_RULE = ('We are grading <b>extraction</b>, not summary. If PL pulls out more raw detail '
+                'without forcing a conclusion, that is good, and you judge it; if BL gives a vague '
+                'summary that happens to read as correct, it still skipped the job, so that is '
+                '<b>not</b> a reason to mark "BL better".')
 SCORING_RULE_SHORT = 'We are grading <b>extraction</b> here, not summary.'
 
 
@@ -155,15 +156,11 @@ def build(cancer, pl, bl):
                       if ev else '')
             name = f"{rid}__{fid}"
             na_note = ' <span class="na">(both empty, you can mark N/A)</span>' if both_empty else ''
-            # Full amber reminder every 5th question (Q1, Q6, Q11, Q16); for the rest, fold a
-            # short hint into the end of the question text so there's no separate box.
+            # Fuller hint every 5th question (Q1, Q6, Q11, Q16), short hint otherwise; both are
+            # folded into the end of the question text as a muted italic span (no separate box).
             full_rule = (qi - 1) % 5 == 0
-            if full_rule:
-                qtext_html = f'<div class="qtext">{html.escape(qtext)}</div>'
-                rule_html = f'<div class="rule">{SCORING_RULE}</div>'
-            else:
-                qtext_html = f'<div class="qtext">{html.escape(qtext)} <span class="qhint">{SCORING_RULE_SHORT}</span></div>'
-                rule_html = ''
+            hint = SCORING_RULE if full_rule else SCORING_RULE_SHORT
+            qtext_html = f'<div class="qtext">{html.escape(qtext)} <span class="qhint">{hint}</span></div>'
             qhtml.append(f'''<div class="q" data-q="{name}">
   <div class="qhead">
     <span class="qnum">Q{qi}</span>
@@ -175,7 +172,6 @@ def build(cancer, pl, bl):
     <div class="qcol pl"><div class="qtag">PL (our method)</div><div class="qval">{html.escape(pv) or "<em>(empty)</em>"}</div>{evhtml}</div>
     <div class="qcol bl"><div class="qtag">BL (same model, single prompt)</div><div class="qval">{html.escape(bv) or "<em>(empty)</em>"}</div></div>
   </div>
-  {rule_html}
   <div class="score" role="radiogroup">
     <label class="opt o-pl"><input type="radio" name="{name}" value="PL"> PL better</label>
     <label class="opt o-tie"><input type="radio" name="{name}" value="TIE"> Tie</label>
@@ -261,8 +257,6 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 .qval{white-space:pre-wrap;word-break:break-word}
 .ev{margin-top:5px;font-size:11px;color:#4a6a6a;border-top:1px dotted #cdd;padding-top:4px}
 .evsrc{color:#8a8f95;font-style:italic}
-.rule{font-size:11.5px;color:#7a5b00;background:#fff7e0;border:1px solid #f0d79a;border-left:4px solid #d9a400;border-radius:5px;padding:5px 9px;margin:0 0 6px}
-.rule b{color:#6b4f00}
 .qhint{color:#9a7b2a;font-style:italic}
 .qhint b{color:#7a5b00;font-style:normal}
 .score{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
