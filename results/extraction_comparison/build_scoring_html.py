@@ -107,17 +107,14 @@ QUESTIONS = [
 ]
 TIER_CLASS = {"deep": "t-good", "med": "t-mid", "basic": "t-low"}
 TIER_LABEL = {"deep": "Deep · needs medical knowledge", "med": "Medium", "basic": "Basic · layperson"}
-NQ = len(QUESTIONS)
 
 # Per-cancer overrides of (label, question-text). Breast and PDAC don't share the same
 # biology — e.g. PDAC has no ER/PR/HER2 receptors, so Q6 must be phrased per cancer.
+# Q6 (type/receptor) is breast-only (see qset_for) — PDAC has no ER/PR/HER2 markers.
 PER_CANCER = {
     "type_receptor": {
         "b": ("Type / receptors (ER/PR/HER2)",
               "Extract the histologic type AND the specific ER / PR / HER2 status — each value (bilateral disease must list each side). We want each receptor stated, not a vague 'hormone-positive'."),
-        "p": ("Histologic type & grade",
-              "Extract the pancreatic histology and differentiation grade (e.g. ductal adenocarcinoma, well / moderately / poorly differentiated). "
-              "NOTE: PDAC has NO ER/PR/HER2 — those are breast markers; molecular markers (KRAS, MMR/MSI, CA19-9 secretor status) belong under 'Molecular / genetic results'."),
     },
 }
 
@@ -128,8 +125,15 @@ SCORING_RULE = ('⚑ Reward <b>extraction</b>, not summary. PL listing more raw 
                 '<b>not</b> a reason to pick "BL better".')
 
 
+def qset_for(cancer):
+    # Q6 (type/receptor) is breast-only: PDAC has no ER/PR/HER2 markers, so we drop it.
+    return [q for q in QUESTIONS if not (cancer == "p" and q[0] == "type_receptor")]
+
+
 def build(cancer, pl, bl):
     blocks, toc = [], []
+    qset = qset_for(cancer)
+    nq = len(qset)
     for row in sorted(pl):
         rid = f"{cancer}{row}"
         p = pl[row]; b = bl.get(row, {})
@@ -138,7 +142,7 @@ def build(cancer, pl, bl):
         title = f"{cname} · ROW {row} · coral_idx={coral}"
         toc.append(f'<a href="#{rid}">{cancer.upper()}{row}</a>')
         qhtml = []
-        for qi, (fid, label, tier, section, key, qtext) in enumerate(QUESTIONS, 1):
+        for qi, (fid, label, tier, section, key, qtext) in enumerate(qset, 1):
             if fid in PER_CANCER and cancer in PER_CANCER[fid]:
                 label, qtext = PER_CANCER[fid][cancer]
             pv = get_val(p["kp"], section, key).strip()
@@ -170,7 +174,7 @@ def build(cancer, pl, bl):
   </div>
 </div>''')
         block = f'''<section class="sample" id="{rid}">
-  <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}">0/{NQ}</span></h2>
+  <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}" data-nq="{nq}">0/{nq}</span></h2>
   <div class="source">
     <div class="srchead">Source · Assessment &amp; Plan (basis for scoring; expand for the full note)</div>
     <pre class="ap">{html.escape(p["ap"]) or "(no A/P section)"}</pre>
@@ -190,7 +194,8 @@ def main():
     blp = parse_bl(os.path.join(HERE, "baseline_extract_pdac_json.txt"))
     tb, bb = build("b", plb, blb)
     tp, bp = build("p", plp, blp)
-    total_q = (len(plb) + len(plp)) * len(QUESTIONS)
+    NQ_B = len(qset_for("b")); NQ_P = len(qset_for("p"))
+    total_q = len(plb) * NQ_B + len(plp) * NQ_P
 
     css = '''
 *{box-sizing:border-box}
@@ -259,7 +264,7 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 @media print{.bar,.toc,.top,.score{display:none}.sample{break-inside:avoid;box-shadow:none}body{background:#fff}}
 '''
     js = '''
-const KEY="pl_bl_scoring_v2", TOTAL=%d, NQ=%d;
+const KEY="pl_bl_scoring_v3", TOTAL=%d;
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
 function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
 let data=load();
@@ -294,8 +299,9 @@ function recount(){
   document.getElementById("c_done").textContent=done+"/"+TOTAL;
   document.querySelectorAll(".rowprog").forEach(p=>{
     const rid=p.id.replace("prog_","");const n=rowDone[rid]||0;
-    p.textContent=n+"/"+NQ;p.classList.toggle("full",n>=NQ);
-    const a=document.querySelector(`.toc a[href="#${rid}"]`);if(a)a.classList.toggle("done",n>=NQ);
+    const nq=+p.dataset.nq||0;
+    p.textContent=n+"/"+nq;p.classList.toggle("full",nq>0&&n>=nq);
+    const a=document.querySelector(`.toc a[href="#${rid}"]`);if(a)a.classList.toggle("done",nq>0&&n>=nq);
   });
 }
 document.addEventListener("change",e=>{
@@ -326,7 +332,7 @@ function exportJSON(){
 }
 function resetAll(){if(confirm("Clear all scores?")){data={};save(data);location.reload();}}
 window.addEventListener("DOMContentLoaded",applySaved);
-''' % (total_q, NQ)
+''' % total_q
 
     htmldoc = f'''<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -335,7 +341,7 @@ window.addEventListener("DOMContentLoaded",applySaved);
 <header>
   <h1>Oncology Note Structured Extraction · PL vs BL — Clinician Scoring (Full)</h1>
   <p>PL = our method (multi-stage extraction + 5-gate verification + drug/term dictionaries + post-processing). BL = the same model (Qwen2.5-32B) run with a single prompt and no post-processing. The only variable is the processing pipeline.</p>
-  <p>40 de-identified samples (20 breast + 20 PDAC, UCSF CORAL, ***** redacted). For each sample, score <b>all {NQ} questions</b>: PL better / Tie / BL better / N/A. Scores auto-save in your browser and can be exported anytime.</p>
+  <p>40 de-identified samples (20 breast + 20 PDAC, UCSF CORAL, ***** redacted). Score every question per sample (<b>17 for breast, 16 for PDAC</b> — Q6 type/receptor is breast-only, since PDAC has no ER/PR/HER2 markers): PL better / Tie / BL better / N/A. Scores auto-save in your browser and can be exported anytime.</p>
 </header>
 <div class="bar">
   <span class="stat">Progress<span class="s-done" id="c_done">0/{total_q}</span></span>

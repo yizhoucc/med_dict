@@ -249,7 +249,7 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 
 医生指出当前评审有几个会误导人类打分的问题，本轮**只改评审侧**（题目 / rubric / HTML），prompt 改动留 backlog。
 
-**1. Q6 type/receptor 按癌种区分**：胰腺癌没有 ER/PR/HER2（那是乳腺标志物）。`build_scoring_html.py` 新增 `PER_CANCER` 覆盖：乳腺 Q6 = "Type / receptors (ER/PR/HER2)"；胰腺 Q6 = "Histologic type & grade"（导管腺癌 + 分化程度），并注明 PDAC 无 ER/PR/HER2、KRAS/MMR/CA19-9 归 Q7。
+**1. Q6 type/receptor 按癌种区分 →（同日进一步）PDAC 直接删除 Q6**：胰腺癌没有 ER/PR/HER2（那是乳腺标志物）。最初用 `PER_CANCER` 把胰腺 Q6 改成"Histologic type & grade"，但医生表示 PDAC 根本没有 marker，**这道题对 PDAC 没意义，直接不做**。最终：`qset_for(cancer)` 对 PDAC 过滤掉 type_receptor，**乳腺 17 题 / 胰腺 16 题**（共 660）。进度条改为按每样本题数 `data-nq` 计算；localStorage key 升 v2→v3。乳腺 Q6 仍用 `PER_CANCER['b']` 强调要逐项 ER/PR/HER2。
 
 **2. 核心评分原则 "extraction ≠ summary" 写进题目（防人类被带偏）**：
 - 问题动机：PL 没信心时把一堆证据/细节罗列出来（= 成功 extract 了细节，让医生判断）= **好**；BL 丢了细节、给一句模糊总结，"碰巧读起来正确无可挑剔" = **跑题**（任务是 extraction，summary/infer 即使对了也不是我们要的）。但人类打分天然会被流畅总结带偏，给 BL 高分。
