@@ -46,6 +46,11 @@ def parse_bl(path):
 def norm(k): return re.sub(r'[^a-z0-9]', '', k.lower())
 
 
+def emph(text):
+    """Escape text but keep our intentional <b>...</b> emphasis in question prompts."""
+    return html.escape(text).replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
+
+
 def s(v):
     if v is None: return ""
     if isinstance(v, (dict, list)): return json.dumps(v, ensure_ascii=False)
@@ -85,7 +90,7 @@ def attr_for(att, key):
 # and the repetitive "Extract the specific X ... We want Y, not a vague Z" template replaced
 # with plain questions a clinician would actually ask.
 QUESTIONS = [
-    ("current_meds",   "Current medications", "deep", "Current_Medications", "current_meds", "Which anticancer drugs is the patient on right now? List them by name. Leave out the home meds for things like blood pressure, diabetes, or pain, anything they have stopped, and anything that is only being considered. A vague 'on chemo' is not enough."),
+    ("current_meds",   "Current medications", "deep", "Current_Medications", "current_meds", "Which <b>anticancer</b> drugs is the patient on right now? List them by name. <b>Ordinary non-cancer meds do not count</b>: leave out home meds for blood pressure, diabetes, or pain, anything they have stopped, and anything that is only being considered. A vague 'on chemo' is not enough."),
     ("stage",          "Cancer stage", "deep", "Cancer_Diagnosis", "Stage_of_Cancer", "What stage is the cancer? Give the actual stage or TNM, either stated in the note or worked out from tumor size, nodes, and spread. Do not settle for 'advanced', and do not write 'not mentioned' if the note gives you enough to stage it."),
     ("distant_met",    "Distant metastasis", "deep", "Cancer_Diagnosis", "Distant Metastasis", "Is there distant spread, and to where? Name the sites. Axillary and supraclavicular nodes count as regional, not distant, and flag anything that is only suspected rather than confirmed. A bare yes or no does not cut it."),
     ("metastasis",     "Metastasis (incl. regional)", "deep", "Cancer_Diagnosis", "Metastasis", "Is there nodal or regional involvement? Say which nodes and how many. Keep regional nodes separate from distant spread."),
@@ -160,7 +165,7 @@ def build(cancer, pl, bl):
             # folded into the end of the question text as a muted italic span (no separate box).
             full_rule = (qi - 1) % 5 == 0
             hint = SCORING_RULE if full_rule else SCORING_RULE_SHORT
-            qtext_html = f'<div class="qtext">{html.escape(qtext)} <span class="qhint">{hint}</span></div>'
+            qtext_html = f'<div class="qtext">{emph(qtext)} <span class="qhint">{hint}</span></div>'
             qhtml.append(f'''<div class="q" data-q="{name}">
   <div class="qhead">
     <span class="qnum">Q{qi}</span>

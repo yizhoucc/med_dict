@@ -15,8 +15,8 @@ difference the rater sees.
 Scores are stored as A/B; map back with A=PL, B=BL when analyzing.
 """
 import html, os
-from build_scoring_html import (parse_pl, parse_bl, get_val, attr_for, QUESTIONS, PER_CANCER,
-                                qset_for, TIER_CLASS, TIER_LABEL)
+from build_scoring_html import (parse_pl, parse_bl, get_val, attr_for, emph, QUESTIONS,
+                                PER_CANCER, qset_for, TIER_CLASS, TIER_LABEL)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -53,7 +53,7 @@ def build(cancer, pl, bl):
             na_note = ' <span class="na">(both empty, you can mark N/A)</span>' if both_empty else ''
             full_rule = (qi - 1) % 5 == 0
             hint = RULE_FULL if full_rule else RULE_SHORT
-            qtext_html = f'<div class="qtext">{html.escape(qtext)} <span class="qhint">{hint}</span></div>'
+            qtext_html = f'<div class="qtext">{emph(qtext)} <span class="qhint">{hint}</span></div>'
             qhtml.append(f'''<div class="q" data-q="{name}">
   <div class="qhead">
     <span class="qnum">Q{qi}</span>
