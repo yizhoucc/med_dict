@@ -31,7 +31,7 @@ RULE_SHORT = 'We are grading <b>extraction</b> here, not summary.'
 def build(cancer, pl, bl):
     blocks, toc = [], []
     qset = qset_for(cancer)
-    nq = len(qset)
+    nq = sum(1 for q in qset if q[2] != "basic")  # required = deep + med (progress denominator)
     for row in sorted(pl):
         rid = f"{cancer}{row}"
         p = pl[row]; b = bl.get(row, {})
@@ -39,7 +39,7 @@ def build(cancer, pl, bl):
         cname = "Breast" if cancer == "b" else "PDAC"
         title = f"{cname} · ROW {row} · coral_idx={coral}"
         toc.append(f'<a href="#{rid}">{cancer.upper()}{row}</a>')
-        qhtml = []
+        req_html, opt_html = [], []
         for qi, (fid, label, tier, section, key, qtext) in enumerate(qset, 1):
             if fid in PER_CANCER and cancer in PER_CANCER[fid]:
                 label, qtext = PER_CANCER[fid][cancer]
@@ -50,15 +50,17 @@ def build(cancer, pl, bl):
             evhtml = (f'<div class="ev"><b>Cited source</b> <span class="evsrc">(quote the model pulled from the note)</span>: {html.escape(ev[:320])}</div>'
                       if ev else '')
             name = f"{rid}__{fid}"
-            na_note = ' <span class="na">(both empty, you can mark N/A)</span>' if both_empty else ''
+            both_note = ' <span class="na">(both empty)</span>' if both_empty else ''
+            optional = tier == "basic"
+            opt_tag = ' <span class="opttag">optional</span>' if optional else ''
             full_rule = (qi - 1) % 5 == 0
             hint = RULE_FULL if full_rule else RULE_SHORT
             qtext_html = f'<div class="qtext">{emph(qtext)} <span class="qhint">{hint}</span></div>'
-            qhtml.append(f'''<div class="q" data-q="{name}">
+            q_html = f'''<div class="q{' opt-q' if optional else ''}" data-q="{name}">
   <div class="qhead">
     <span class="qnum">Q{qi}</span>
     <span class="tier {TIER_CLASS[tier]}">{TIER_LABEL[tier]}</span>
-    <span class="qlabel">{html.escape(label)}</span>{na_note}
+    <span class="qlabel">{html.escape(label)}</span>{opt_tag}{both_note}
   </div>
   {qtext_html}
   <div class="qcols">
@@ -69,10 +71,15 @@ def build(cancer, pl, bl):
     <label class="opt o-a"><input type="radio" name="{name}" value="A"> A better</label>
     <label class="opt o-tie"><input type="radio" name="{name}" value="TIE"> Tie</label>
     <label class="opt o-b"><input type="radio" name="{name}" value="B"> B better</label>
-    <label class="opt o-na"><input type="radio" name="{name}" value="NA"> N/A</label>
     <input class="cmt" type="text" name="{name}__c" placeholder="Note (optional)">
   </div>
-</div>''')
+</div>'''
+            (opt_html if optional else req_html).append(q_html)
+        qs = ''.join(req_html)
+        if opt_html:
+            qs += (f'<details class="optblock"><summary>Optional questions ({len(opt_html)}): lab summary, findings. '
+                   f'Score these only if you want; they do not count toward progress.</summary>'
+                   f'<div class="optbody">{"".join(opt_html)}</div></details>')
         block = f'''<section class="sample" id="{rid}">
   <h2>{html.escape(title)} <span class="rowprog" id="prog_{rid}" data-nq="{nq}">0/{nq}</span></h2>
   <div class="source">
@@ -80,7 +87,7 @@ def build(cancer, pl, bl):
     <pre class="ap">{html.escape(p["ap"]) or "(no A/P section)"}</pre>
     <details><summary>Expand full note_text</summary><pre class="note">{html.escape(p["note"])}</pre></details>
   </div>
-  <div class="qs">{''.join(qhtml)}</div>
+  <div class="qs">{qs}</div>
   <a class="top" href="#top">↑ Back to top</a>
 </section>'''
         blocks.append(block)
@@ -94,7 +101,8 @@ def main():
     blp = parse_bl(os.path.join(HERE, "baseline_extract_pdac_json.txt"))
     tb, bb = build("b", plb, blb)
     tp, bp = build("p", plp, blp)
-    NQ_B = len(qset_for("b")); NQ_P = len(qset_for("p"))
+    NQ_B = sum(1 for q in qset_for("b") if q[2] != "basic")  # required (deep+med)
+    NQ_P = sum(1 for q in qset_for("p") if q[2] != "basic")
     total_q = len(plb) * NQ_B + len(plp) * NQ_P
 
     css = '''
@@ -159,11 +167,16 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 .o-b.sel{background:#6a5acd;color:#fff;border-color:#6a5acd}
 .o-na.sel{background:#557;color:#fff;border-color:#557}
 .cmt{flex:1;min-width:140px;font-size:12px;padding:5px 8px;border:1px solid #d3d8de;border-radius:6px}
+.optblock{margin:8px 0 2px;border:1px dashed #c8d0d8;border-radius:8px;background:#fafbfc}
+.optblock>summary{cursor:pointer;padding:9px 12px;font-size:12.5px;color:#667;font-weight:600}
+.optbody{padding:4px 10px 8px}
+.opttag{display:inline-block;font-size:10px;font-weight:700;color:#7a8089;background:#eef1f4;border:1px solid #d7dde3;border-radius:9px;padding:1px 7px;text-transform:uppercase;letter-spacing:.3px}
 .top{display:inline-block;margin-top:8px;font-size:12px;color:#0b3d63;text-decoration:none}
 @media print{.bar,.toc,.top,.score{display:none}.sample{break-inside:avoid;box-shadow:none}body{background:#fff}}
 '''
     js = '''
-const KEY="blind_scoring_v1", TOTAL=%d;
+const KEY="blind_scoring_v2", TOTAL=%d;
+const OPT=new Set(["lab_summary","findings"]);  // optional (basic-tier) questions, not counted in progress
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
 function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
 let data=load();
@@ -182,22 +195,23 @@ function markSel(el){
   el.closest(".q").classList.add("answered");
 }
 function recount(){
-  let c={A:0,TIE:0,B:0,NA:0};
-  const rowDone={};
+  let c={A:0,TIE:0,B:0};
+  const rowReq={}; let reqDone=0;
   for(const [k,v] of Object.entries(data)){
     if(k.endsWith("__c"))continue;
-    if(c[v]!==undefined)c[v]++;
+    if(c[v]!==undefined)c[v]++;            // tally counts all answers (incl optional)
+    const fid=k.split("__")[1];
+    if(OPT.has(fid))continue;              // optional questions do not count toward progress
+    reqDone++;
     const rid=k.split("__")[0];
-    rowDone[rid]=(rowDone[rid]||0)+1;
+    rowReq[rid]=(rowReq[rid]||0)+1;
   }
-  const done=c.A+c.TIE+c.B+c.NA;
   document.getElementById("c_a").textContent=c.A;
   document.getElementById("c_tie").textContent=c.TIE;
   document.getElementById("c_b").textContent=c.B;
-  document.getElementById("c_na").textContent=c.NA;
-  document.getElementById("c_done").textContent=done+"/"+TOTAL;
+  document.getElementById("c_done").textContent=reqDone+"/"+TOTAL;
   document.querySelectorAll(".rowprog").forEach(p=>{
-    const rid=p.id.replace("prog_","");const n=rowDone[rid]||0;
+    const rid=p.id.replace("prog_","");const n=rowReq[rid]||0;
     const nq=+p.dataset.nq||0;
     p.textContent=n+"/"+nq;p.classList.toggle("full",nq>0&&n>=nq);
     const a=document.querySelector(`.toc a[href="#${rid}"]`);if(a)a.classList.toggle("done",nq>0&&n>=nq);
@@ -240,14 +254,13 @@ window.addEventListener("DOMContentLoaded",applySaved);
 <header>
   <h1>Oncology Note Structured Extraction · Blind Scoring (A vs B)</h1>
   <p>Two automated systems, <b>A</b> and <b>B</b>, each extracted structured fields from the same clinical note. They are shown side by side without revealing which system is which. Please judge, for each field, which extraction is better.</p>
-  <p>There are 40 de-identified samples (20 breast and 20 PDAC, from UCSF CORAL, with ***** redacted). Score every question on each sample (<b>16 for breast, 15 for PDAC</b>; the type/receptor question is breast-only, since PDAC has no ER/PR/HER2 markers) as A better, Tie, B better, or N/A. Your scores save in the browser as you go, and you can export them anytime.</p>
+  <p>There are 40 de-identified samples (20 breast and 20 PDAC, from UCSF CORAL, with ***** redacted). For each question choose <b>A better, Tie, or B better</b>. The required questions are the clinically important ones (<b>14 for breast, 13 for PDAC</b>); a couple of low-value questions (lab summary, findings) are folded into a collapsed "Optional" block at the end of each sample and do not count toward progress. Your scores save in the browser as you go, and you can export them anytime.</p>
 </header>
 <div class="bar">
   <span class="stat">Progress<span class="s-done" id="c_done">0/{total_q}</span></span>
   <span class="stat">A<span class="s-a" id="c_a">0</span></span>
   <span class="stat">Tie<span class="s-tie" id="c_tie">0</span></span>
   <span class="stat">B<span class="s-b" id="c_b">0</span></span>
-  <span class="stat">N/A<span class="s-na" id="c_na">0</span></span>
   <button onclick="exportCSV()">Export CSV</button>
   <button class="ghost" onclick="exportJSON()">Export JSON</button>
   <button class="ghost" onclick="resetAll()">Reset</button>
@@ -261,7 +274,7 @@ window.addEventListener("DOMContentLoaded",applySaved);
       <li>Prefer the other side only when it actually extracted something <b>true and specific that the first missed or got wrong</b>, not just because it reads shorter or smoother.</li>
     </ul>
   </div>
-  <div><b>How to score:</b> For each question you see the same field as extracted by System A and by System B. Using the source note above (the A/P section, or expand for the full note), decide which is more faithful, more complete, and more correct, then choose <b>A better, Tie, or B better</b>. If both are empty and the note really has no such item, choose N/A.</div>
+  <div><b>How to score:</b> For each question you see the same field as extracted by System A and by System B. Using the source note above (the A/P section, or expand for the full note), decide which is more faithful, more complete, and more correct, then choose <b>A better, Tie, or B better</b>. If both are empty and the note really has no such item, just mark Tie.</div>
   <div class="tiers">
     <div><b>Depth tiers:</b></div>
     <div><span class="tier t-good">Deep · needs medical knowledge</span> needs clinical background: telling anticancer drugs from supportive ones, stage, metastasis, response, receptors, molecular results.</div>
