@@ -4,16 +4,18 @@ extractions are shown only as System A (left) and System B (right) — the rater
 which is which. A = PL (our method), B = BL (baseline), fixed left/right (not randomized),
 but this mapping is NOT shown anywhere in the page.
 
-Leak points removed vs the normal page:
+Identity labels removed vs the normal page (the *content* is shown verbatim):
 - column labels PL/BL -> A/B; option labels -> "A better / B better"
-- attribution is DROPPED entirely (only PL had it, so showing it would reveal A)
 - header / legend / hints carry no "PL/BL/our method/baseline/pipeline" wording
 - A and B columns use identical neutral styling (no green=good hint)
 - output filename and localStorage key carry no PL/BL
+Attribution IS kept (it is part of the model output being judged); its label is made
+neutral. Note: only A (PL) produces attribution, so its presence is itself a real output
+difference the rater sees.
 Scores are stored as A/B; map back with A=PL, B=BL when analyzing.
 """
 import html, os
-from build_scoring_html import (parse_pl, parse_bl, get_val, QUESTIONS, PER_CANCER,
+from build_scoring_html import (parse_pl, parse_bl, get_val, attr_for, QUESTIONS, PER_CANCER,
                                 qset_for, TIER_CLASS, TIER_LABEL)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +46,9 @@ def build(cancer, pl, bl):
             av = get_val(p["kp"], section, key).strip()   # A = PL
             bv = get_val(b, section, key).strip()          # B = BL
             both_empty = (not av) and (not bv)
+            ev = attr_for(p["att"], key).strip()           # model-produced attribution (A only)
+            evhtml = (f'<div class="ev"><b>Cited source</b> <span class="evsrc">(quote the model pulled from the note)</span>: {html.escape(ev[:320])}</div>'
+                      if ev else '')
             name = f"{rid}__{fid}"
             na_note = ' <span class="na">(both empty, you can mark N/A)</span>' if both_empty else ''
             full_rule = (qi - 1) % 5 == 0
@@ -57,8 +62,8 @@ def build(cancer, pl, bl):
   </div>
   {qtext_html}
   <div class="qcols">
-    <div class="qcol a"><div class="qtag">System A</div><div class="qval">{html.escape(av) or "<em>(empty)</em>"}</div></div>
-    <div class="qcol b"><div class="qtag">System B</div><div class="qval">{html.escape(bv) or "<em>(empty)</em>"}</div></div>
+    <div class="qcol a"><div class="qtag">A</div><div class="qval">{html.escape(av) or "<em>(empty)</em>"}</div>{evhtml}</div>
+    <div class="qcol b"><div class="qtag">B</div><div class="qval">{html.escape(bv) or "<em>(empty)</em>"}</div></div>
   </div>
   <div class="score" role="radiogroup">
     <label class="opt o-a"><input type="radio" name="{name}" value="A"> A better</label>
@@ -142,6 +147,8 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 .qtag{font-weight:700;font-size:11px;margin-bottom:3px;color:#555}
 .qcol.a .qtag{color:#3b6ea5}.qcol.b .qtag{color:#6a5acd}
 .qval{white-space:pre-wrap;word-break:break-word}
+.ev{margin-top:5px;font-size:11px;color:#4a6a6a;border-top:1px dotted #cdd;padding-top:4px}
+.evsrc{color:#8a8f95;font-style:italic}
 .qhint{color:#9a7b2a;font-style:italic}
 .qhint b{color:#7a5b00;font-style:normal}
 .score{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
