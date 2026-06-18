@@ -1,7 +1,12 @@
-Source: fix_breast_nl.yaml | Run started: 2026-06-06 23:27:06
+Source: fix_breast_nl.yaml | Run started: 2026-06-18 08:55:13
 ============================================================
 extraction_prompts
-{'Reason_for_Visit': 'TASK: Extract 'Reason for Visit'.
+{'Reason_for_Visit': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract 'Reason for Visit'.
 Be SPECIFIC — include the patient's diagnosis, cancer type, and the purpose of this visit.
 Do NOT give vague answers like "new symptoms" or "follow up visit". Instead, state what cancer,
 what stage (if known), and what specifically brought them in (e.g., "initial consult for newly
@@ -28,7 +33,12 @@ Respond *only* with a JSON object using this exact schema:
 "in-person": "either Televisit or in-person. (note, video consult, televisit, telehealth are the same thing)",
 "summary": "A specific summary including cancer type, stage if known, and purpose of this visit."
 }
-', 'Cancer_Diagnosis': 'TASK: Extract cancer diagnosis details.
+', 'Cancer_Diagnosis': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract cancer diagnosis details.
 
 For Type_of_Cancer, be MAXIMALLY SPECIFIC — include ALL of the following that the note provides:
 1. Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
@@ -101,7 +111,12 @@ Respond *only* with a JSON object using this exact schema:
 "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. CRITICAL: For breast cancer, these are REGIONAL nodes (NOT distant): axillary, sentinel, supraclavicular, infraclavicular, internal mammary. Chest wall involvement in METASTATIC disease IS a distant metastasis site — include it. Bone (including sternum, spine, ribs, femur) IS distant. Only list confirmed malignant sites. If imaging describes lesions as 'cysts', 'indeterminate', 'probably benign', do NOT classify as confirmed distant metastasis. Benign or separate tumors (e.g., carotid body paraganglioma, lipoma, thyroid nodule) are NOT breast cancer metastases. Do NOT count ANOTHER cancer's metastases (e.g., a prior ovarian cancer's nodal spread) as the breast cancer's distant met. If a site is only 'suspicious for'/'concerning for' metastasis and not confirmed, say 'Suspected' rather than 'Yes'. CRITICAL: If BIOPSIED lymph nodes showed NON-MALIGNANT findings (granulomatous, sarcoidosis, reactive), they are NOT cancer metastases.",
 "Metastasis": "if there is met, Yes (to where), No, or Not sure. IMPORTANT: Verify biopsy results — sarcoidosis and granulomatous disease in lymph nodes are NOT cancer metastases."
 }
-', 'Lab_Results': 'TASK: Extract lab results from this medical note.
+', 'Lab_Results': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract lab results from this medical note.
 
 List SPECIFIC lab values with numbers (e.g., "Hgb 7.7, Albumin 2.1, Alk Phos 183, CA 27.29 = 48").
 Include tumor markers (CA 15-3, CA 27.29, CEA) — these ARE lab values.
@@ -125,7 +140,12 @@ Respond *only* with a JSON object using this exact schema:
 {
 "lab_summary": "Summary of key lab results with specific values from THIS VISIT ONLY. Only include blood work and tumor markers, NOT imaging/pathology/genomic tests. Do NOT include old results from prior years or prior visits. If none found, write 'No labs in note.'"
 }
-', 'Clinical_Findings': 'TASK: Extract clinical findings and current disease status from this visit.
+', 'Clinical_Findings': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract clinical findings and current disease status from this visit.
 
 Summarize NEW clinical findings or current disease status. Include:
 - Key pathology results: tumor size, margins, node status, grade
@@ -139,7 +159,12 @@ Respond *only* with a JSON object using this exact schema:
 {
 "findings": "Summary of new findings or disease status including pathology results, imaging findings, and exam findings."
 }
-', 'Current_Medications': 'TASK: Extract current oncologic medications the patient is ACTIVELY taking now.
+', 'Current_Medications': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract current oncologic medications the patient is ACTIVELY taking now.
 
 CRITICAL — distinguish CURRENT from PLANNED from PAST:
 - CURRENT (include): medications the patient is ACTIVELY taking right now.
@@ -176,7 +201,12 @@ Respond *only* with a JSON object using this exact schema:
 {
 "current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
 }
-', 'Treatment_Changes': 'TASK: Extract recent treatment changes and supportive medications.
+', 'Treatment_Changes': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract recent treatment changes and supportive medications.
 
 For recent_changes: Any holds, dose reductions, switches, or newly started medications RELATED TO THIS VISIT.
 Do NOT include changes from months or years ago.
@@ -204,7 +234,12 @@ Respond *only* with a JSON object using this exact schema:
 "recent_changes": "Any holds, dose reductions, or switches at or near this visit.",
 "supportive_meds": "List of cancer-treatment-related supportive medications."
 }
-', 'Treatment_Goals': 'TASK: Extract the goal/intent of cancer treatment.
+', 'Treatment_Goals': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the goal/intent of cancer treatment.
 
 Write the INTENT of the cancer treatment itself: "curative", "palliative", "risk reduction", "adjuvant", or "symptom management".
 Do NOT write the purpose of this visit (e.g., "follow-up", "discuss treatment options", "review treatment plan").
@@ -229,7 +264,12 @@ Respond *only* with a JSON object using this exact schema (NO other keys):
 "goals_of_treatment": "curative, palliative, adjuvant, risk reduction, or symptom management",
 "goals_description": "If the note explicitly states treatment goals or intent in the physician's own words (e.g., 'achieve as deep and durable a remission as possible', 'not expected to be curative', 'prolongation of life while maintaining quality of life'), quote or closely paraphrase that language here. If no explicit goals language is found, write 'Not explicitly stated.'"
 }
-', 'Response_Assessment': 'TASK: Extract how the cancer is CURRENTLY responding to treatment.
+', 'Response_Assessment': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract how the cancer is CURRENTLY responding to treatment.
 
 Think step by step before answering:
 1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
@@ -316,9 +356,15 @@ Respond with a JSON object using this exact schema (NO other keys):
 '}
 ============================================================
 plan_extraction_prompts
-{'Medication_Plan': 'TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
+{'Medication_Plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
 CRITICAL: Do NOT add, assume, or generalize details not in the original note. If a drug name is redacted (*****), write "[REDACTED]" or "unspecified agent". Do NOT guess what test or drug it might be. Only extract what is explicitly written.
 Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan (e.g., "1 unit pRBC", "2 units packed red blood cells", "transfusion today"). Do not include past medications.
+CRITICAL — a chemotherapy HOLD, BREAK, or PAUSE is a medication-plan CHANGE, extract it: if the note says the patient wants or will take a "chemo break", or the plan is to "hold / pause / stop systemic therapy", capture that (e.g., "Hold chemotherapy (patient requests a chemo break)"). Do NOT answer "no medications mentioned / no change" when the note discusses pausing, holding, or stopping treatment — that pause IS the plan.
 CRITICAL — distinguish PAST from CURRENT/FUTURE:
 - "s/p weekly taxol x 12" means taxol is COMPLETED. "S/p" or "status post" ALWAYS means COMPLETED/PAST — do NOT list these as current or future.
 - Only include drugs explicitly current (continue, currently on) or future (will start, plan to begin).
@@ -335,7 +381,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "medication_plan": "A summary of the complete medication plan with specific drug names and doses."
 }
-', 'Therapy_plan': 'TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
+', 'Therapy_plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'therapy Plan' from the given 'Assessment/Plan' section.
 Include ONLY current or future therapy: chemotherapy, radiotherapy, hormonal therapy, and bone-therapy.
 Include future plans, changes to current therapy (start, stop, continue).
 
@@ -372,7 +423,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "therapy_plan": "A summary of the current and future therapy plan with specific details."
 }
-', 'radiotherapy_plan': 'TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
+', 'radiotherapy_plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'radiotherapy Plan' from the given 'Assessment/Plan' section.
 For radiotherapy, include ANY statement that indicates
 it is being considered, recommended, or may be used, even if no explicit
 start/continue/plan keywords are present.
@@ -389,7 +445,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "radiotherapy_plan": "A summary of any planned or discussed radiotherapy, or 'None' if not mentioned."
 }
-', 'Procedure_Plan': 'TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
+', 'Procedure_Plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'Procedure Plan' from the given 'Assessment/Plan' section.
 Include ONLY future/planned procedures: surgery, biopsy, lumbar puncture, Chemo Port Insertion, or other interventional procedures.
 
 IMPORTANT — look for PRE-TREATMENT PREREQUISITES. When chemotherapy is planned, there are often preparatory steps mentioned with phrases like:
@@ -435,7 +496,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "procedure_plan": "A summary of any planned procedures, or 'No procedures planned.'"
 }
-', 'Imaging_Plan': 'TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
+', 'Imaging_Plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'Imaging Plan' from the given 'Assessment/Plan' section.
 Include ONLY future/planned imaging: CT, MRI, PET/CT, ultrasound, DEXA scans, bone scan, X-ray, echocardiogram (TTE/Echo), mammogram.
 Include timing and rationale if mentioned (e.g., "CT in 3 months for restaging").
 
@@ -466,7 +532,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "imaging_plan": "A summary of any planned imaging with specific test names, or 'No imaging planned.'"
 }
-', 'Lab_Plan': 'TASK: Extract the 'lab Plan' from the clinical note.
+', 'Lab_Plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'lab Plan' from the clinical note.
 Look for lab orders in the Assessment/Plan section AND in any order sets listed elsewhere in the note (e.g., "Complete Blood Count with Differential" listed as an order near the top of the note).
 Include ONLY future/planned BLOOD TESTS: CBC, CMP, tumor markers (CA 15-3, CEA, CA-125, PSA), coagulation profile, hepatitis markers, etc.
 Also include pre-chemo blood draws (e.g., "blood draw prior to cycle", "labs before chemo", "draw and visit").
@@ -489,7 +560,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "lab_plan": "A summary of the future lab plan with specific test names, or 'No labs planned.'"
 }
-', 'Genetic_Testing_Plan': 'TASK: Extract the 'Genetic Testing Plan' from the given 'Assessment/Plan' section.
+', 'Genetic_Testing_Plan': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'Genetic Testing Plan' from the given 'Assessment/Plan' section.
 
 1. Scope of section:
 - First, find the 'Assessment/Plan' section of the note (usually the final section).
@@ -535,7 +611,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "genetic_testing_plan": "A summary of any future planned genetic or molecular tests, or a clear statement that none are planned."
 }
-', 'Referral': 'TASK: Extract all referrals and consults from this clinical note.
+', 'Referral': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract all referrals and consults from this clinical note.
 Search the ENTIRE note — referrals may appear anywhere (HPI, A/P, Diagnosis section, etc.).
 Include any mention of referring, consulting, or sending the patient to another provider or service.
 Only include OUTGOING referrals (this doctor sending patient elsewhere), not INCOMING (patient was sent here).
@@ -548,13 +629,23 @@ Respond *only* with a JSON object using this exact schema:
 "Others": "Any other referral (social work, physical therapy, psycho-oncology, exercise counseling, financial counseling, home health, etc.), or 'None'",
 "follow up": "follow up mentioned in the provided text"
 }
-', 'follow_up_next_visit': 'TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
+', 'follow_up_next_visit': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'follow up/next visit' from the given 'Assessment/Plan' section.
 Be SPECIFIC about timing (e.g., "2 weeks", "after biopsy results", "3 months").
 Respond *only* with a JSON object using this exact schema:
 {
     "Next clinic visit": "(in-person or telehealth): timing and purpose"
 }
-', 'Genetic_Testing_Results': 'TASK: Extract COMPLETED genetic and molecular testing results from this clinical note.
+', 'Genetic_Testing_Results': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract COMPLETED genetic and molecular testing results from this clinical note.
 This field captures testing that has ALREADY BEEN DONE and results are available.
 Do NOT include tests that are PLANNED for the future — those belong in Genetic_Testing_Plan.
 
@@ -590,7 +681,12 @@ Respond *only* with a JSON object using this exact schema:
 {
     "genetic_testing_results": "Summary of completed genetic/molecular test results including mutations found, VUS, negative results, and test platform used. Or 'No genetic testing results in note.'"
 }
-', 'Advance_care_planning': 'TASK: Extract the 'Advance care planning' from the clinical note.
+', 'Advance_care_planning': 'EXTRACTION OVER INFERENCE — read before the task below:
+1. Extract what the note actually states for this field. Do not summarize it away or infer a conclusion the note does not support.
+2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' answer. If the note contains anything relevant to this field, extract and list that concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when the note genuinely contains nothing for this field.
+3. When you do make an inference you are confident about, put it in (parentheses) so it is clearly marked as inferred rather than stated in the note.
+
+TASK: Extract the 'Advance care planning' from the clinical note.
 Include Advance directives, health-care proxy, code status (e.g., Full code, DNR/DNI), living will.
 IMPORTANT: Code status is often found OUTSIDE the Assessment/Plan section — look in the FULL NOTE for:
 - "Code status: Full code" or "Full code"
@@ -635,7 +731,7 @@ RESULTS FOR ROW 1
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Postmenopausal patient with a recent diagnosis of Stage II (T2N1) triple negative breast cancer, who presents in consultation to discuss treatment options and to establish care."
+    "summary": "Postmenopausal patient with a recent diagnosis of breast cancer, specifically a Stage II (T2N1) triple negative breast cancer, presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER-/PR-/HER2- (HER2 IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5) grade 3 invasive ductal carcinoma",
@@ -647,7 +743,7 @@ RESULTS FOR ROW 1
     "lab_summary": "WBC Count 9.9, Hemoglobin 9.6 (L), Hematocrit 28.9 (L), Platelet Count 222, Sodium, Serum / Plasma 133 (L), Potassium, Serum / Plasma 4.2, Chloride, Serum / Plasma 102, Carbon Dioxide, Total 22, Urea Nitrogen, Serum / Plasma 18, Creatinine 1.01 (H), Glucose, non-fasting 201 (H), Calcium, total, Serum / Plasma 9.4, Aspartate transaminase 27, Alanine transaminase 19, Alkaline Phosphatase 60, Bilirubin, Total 0.9"
   },
   "Clinical_Findings": {
-    "findings": "Right breast, simple mastectomy: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins. Fibroadenomas, cystic dilatation of ducts, and apocrine metaplasia present. Features suggestive of lymphovascular invasion present. One of the 2 sentinel lymph nodes was positive for adenocarcinoma (1.2 cm, no extranodal extension). No DCIS present. Ki-67 proliferation index ranges from <5% to 25-30%, estimated to be ~15%. No significant pathologic abnormalities in skin, nipple, or skeletal muscle. No palpable masses, skin changes, or lymphadenopathy noted on physical exam. Patient has a history of congestive heart failure with LVEF 25%, and recently experienced dyspnea managed with Lasix."
+    "findings": "Right breast, simple mastectomy: Invasive ductal carcinoma, SBR grade 3, 3.6 cm, negative margins. Fibroadenomas, cystic dilatation of ducts, and apocrine metaplasia present. Unremarkable skin and nipple. Right axillary sentinel lymph node, #1- ex vivo count 5000, biopsy: Metastatic carcinoma in one lymph node, 1.2 cm, no extranodal extension. Right axillary palpable non-sentinel lymph node #1, biopsy: No tumor in one lymph node (0/1). Right new anterior lateral margin, excision: Benign fibroadipose tissue, no carcinoma. Right breast skin, excision: Benign skin, no carcinoma. Features suggestive of lymphovascular invasion present. No DCIS. No skeletal muscle involvement. AJCC/UICC stage: pT2N1a. Tumor biomarker status: ER negative, PR negative, HER2 positive (IHC 1; FISH ratio 2.1, but with HER2 sig/nuc 3.0 and Cen17 sig/nuc 1.5), and variable Ki67 expression (<5% to 25-30%; average ~15%)."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -664,7 +760,7 @@ RESULTS FOR ROW 1
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "No specific medications or future medication plans were detailed in the note."
+    "medication_plan": "No specific medications or changes to current medications are mentioned in the note. The discussion revolves around potential chemotherapy regimens (AC/T, TC, CMF) which are not planned to be initiated due to the patient's comorbidities. No current medications are listed as continued or changed."
   },
   "Therapy_plan": {
     "therapy_plan": "None"
@@ -685,7 +781,7 @@ RESULTS FOR ROW 1
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "after PET/CT: to resume conversation with regards to treatment"
+    "Next clinic visit": "in-person: after obtaining PET/CT to resume discussion regarding treatment"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -695,7 +791,7 @@ RESULTS FOR ROW 1
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "obtain PET/CT"
+    "follow up": "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
   },
   "Genetic_Testing_Results": {
     "genetic_testing_results": "No genetic testing results in note."
@@ -731,6 +827,9 @@ RESULTS FOR ROW 1
   "response_assessment": [
     "Not yet"
   ],
+  "medication_plan": [
+    "Not specific medications or changes to current medications are mentioned in the note. The discussion revolves around potential chemotherapy regimens ("
+  ],
   "imaging_plan": [
     "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
   ],
@@ -738,7 +837,7 @@ RESULTS FOR ROW 1
     "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
   ],
   "follow up": [
-    "Recommendations in Brief:  - obtain PET/CT"
+    "We will obtain a PET/CT and resume our conversation with regards to treatment at that time."
   ]
 }
 
@@ -772,19 +871,19 @@ RESULTS FOR ROW 2
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer. The purpose of this visit is to discuss potential treatment options for her condition."
+    "summary": "The patient is a 73-year-old woman with locally recurrent, unresectable, hormone-receptor positive breast cancer. She was initially treated in 1994 with surgery and interstitial radiation. The purpose of this visit is to discuss potential treatment options for her locally recurrent and unresectable disease."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma with locally recurrent disease",
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 1 infiltrating ductal carcinoma with local recurrence",
     "Stage_of_Cancer": "Locally recurrent",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "CBC normal, creatinine normal, electrolytes normal, liver function tests normal, calcium normal, CA27-29 = 15, LDH normal"
+    "lab_summary": "CA27-29 = 15, LDH normal"
   },
   "Clinical_Findings": {
-    "findings": "PET/CT scan on January 16 showed increased FDG avidity within a right parasternal chest wall nodule and in a lymph node along the inferior right axillary chain. The right parasternal soft tissue nodule measured 1.9 cm and was intricately involved with the underlying chest wall. The lesion was adjacent to a soft tissue density deep to three surgical clips in the right upper inner breast without FDG avidity consistent with scar. There was a right inferior axillary lymph node measuring 1.9 cm with an SUV of 2 and an adjacent 0.5 cm lymph node. Compared to the PET/CT scan first done in February 2008, the parasternal nodule had increased in size, although the axillary nodes, which have not been proven to be involved with cancer, have decreased in size. Her abdomen showed a small, well-demarcated, low-attenuation lesion in the liver consistent with cyst and her bones revealed no abnormalities. MRI of the brain showed no evidence of malignancy either in brain or bone. She did have a right middle frontal gyrus encephalomalacia and gliosis consistent with a prior insult. Physical exam revealed a 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast. Laboratory studies revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. CA27-29 was 15 and LDH was normal."
+    "findings": "PET/CT scan on January 16 showed increased FDG avidity within a right parasternal chest wall nodule and in a lymph node along the inferior right axillary chain. The right parasternal soft tissue nodule measured 1.9 cm and was intricately involved with the underlying chest wall. The lesion was adjacent to a soft tissue density deep to three surgical clips in the right upper inner breast without FDG avidity consistent with scar. There was a right inferior axillary lymph node measuring 1.9 cm with an SUV of 2 and an adjacent 0.5 cm lymph node. Compared to the PET/CT scan first done in February 2008, the parasternal nodule had increased in size, although the axillary nodes, which have not been proven to be involved with cancer, have decreased in size. Her abdomen shows a small, well-demarcated, low-attenuation lesion in the liver consistent with cyst and her bones reveal no abnormalities. MRI of the brain showed no evidence of malignancy either in brain or bone. She did have a right middle frontal gyrus encephalomalacia and gliosis consistent with a prior insult. Physical exam revealed a 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast. Laboratory studies revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. CA27-29 was only 15 and LDH was normal."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -801,7 +900,7 @@ RESULTS FOR ROW 2
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Will start aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
+    "medication_plan": "Will begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
   },
   "Therapy_plan": {
     "therapy_plan": "Will begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab on January 25."
@@ -816,7 +915,7 @@ RESULTS FOR ROW 2
     "imaging_plan": "PET/CT scan and MRI of her brain to evaluate falling spells"
   },
   "Lab_Plan": {
-    "lab_plan": "No labs planned."
+    "lab_plan": "obtain laboratory studies including CBC, creatinine, electrolytes, liver function tests, and calcium."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "None planned."
@@ -830,7 +929,7 @@ RESULTS FOR ROW 2
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "None",
+    "Specialty": "",
     "Others": "None",
     "follow up": "She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
   },
@@ -851,7 +950,7 @@ RESULTS FOR ROW 2
     "I had a long talk with her today"
   ],
   "summary": [
-    "The patient has a local regional recurrence of a strongly hormone-receptor positive indolent breast cancer."
+    "the patient has a local regional recurrence of a strongly hormone-receptor positive indolent breast cancer."
   ],
   "Stage_of_Cancer": [
     "local regional recurrence that is not resectable"
@@ -863,7 +962,7 @@ RESULTS FOR ROW 2
     "No other sites of disease appear to be present."
   ],
   "lab_summary": [
-    "These revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium. Interestingly, a CA27-29 was only 15 and an LDH was normal as well."
+    "Interestingly, a CA27-29 was only 15 and an LDH was normal as well."
   ],
   "recent_changes": [
     "started her on zoledronic acid because of her osteoporosis and need to start her on an aromatase inhibitor."
@@ -891,6 +990,9 @@ RESULTS FOR ROW 2
   ],
   "imaging_plan": [
     "obtain laboratory studies as well as PET/CT scan and MRI of her brain because of her falling spells."
+  ],
+  "lab_plan": [
+    "These revealed a normal CBC, creatinine, electrolytes, liver function tests, and calcium."
   ],
   "Next clinic visit": [
     "She will return to my clinic on January 25 to begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab."
@@ -933,16 +1035,16 @@ RESULTS FOR ROW 3
     "summary": "Patient with early stage right-sided invasive spindle cell metaplastic carcinoma breast cancer here to discuss neoadjuvant therapy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (FISH neg, ratio 1.2) spindle cell metaplastic carcinoma",
-    "Stage_of_Cancer": "Locally advanced, multifocal",
+    "Type_of_Cancer": "ER Negative, PR Negative, HER2 Negative (FISH ratio 1.2) right sided invasive spindle cell metaplastic carcinoma",
+    "Stage_of_Cancer": "Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of disease)",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
   "Lab_Results": {
-    "lab_summary": "Alk phos elevated, creatinine elevated"
+    "lab_summary": "Elevated creatinine and Alk phos"
   },
   "Clinical_Findings": {
-    "findings": "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and HER2 FISH negative (ratio 1.2). Tumor size is 3.5 x 3.2 x 2.6 cm with two small satellite masses located 12-15 mm anterior/superior to the index mass. MRI shows a heterogenous hypermetabolic right breast mass consistent with known breast carcinoma. PET/CT reveals minimally hypermetabolic non-enlarged bilateral axillary lymph nodes. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam reveals an abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm. No palpable lymphadenopathy, no hepatosplenomegaly, and no other significant findings on physical exam."
+    "findings": "Right-sided invasive spindle cell metaplastic carcinoma breast cancer. Tumor size: 3.5 x 3.2 x 2.6 cm with two small satellite masses (12-15 mm anterior/superior to the index mass). Pathology: ER negative (0%), PR negative (0%), HER2 FISH negative (ratio 1.2). Imaging: MRI shows a 3.5 x 3.2 x 2.6 cm round mass with irregular, slightly spiculated margins and rim enhancement in the outer central right breast. PET/CT reveals heterogenous hypermetabolic right breast mass consistent with known breast carcinoma. Indeterminate right adrenal nodule measuring up to 2.3 cm. Physical exam: Palpable mass in the right breast at 9:00 6cm FN that measures 4x4cm. No palpable lymphadenopathy, no hepatosplenomegaly."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -959,28 +1061,28 @@ RESULTS FOR ROW 3
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. Alternatively, if enrolled in the I-SPY 2 clinical trial, the patient may receive an unspecified experimental agent in addition to paclitaxel. The patient has agreed to have a Medi-port placed for chemotherapy administration. The patient prefers to start the first week in February."
+    "medication_plan": "The patient will be offered neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. Alternatively, the patient is enrolled in the I-SPY2 clinical trial where she may receive an unspecified experimental agent in addition to paclitaxel. The patient will start therapy in the first week of February."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. If randomized to the control group, she will receive 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. Chemotherapy will begin in the first week of February. A Medi-port will be placed for chemotherapy administration. Hormonal therapy and potentially radiation therapy will be considered based on surgical choice and final pathology. The patient will undergo a chemo teaching session prior to starting therapy."
+    "therapy_plan": "The patient will start neoadjuvant chemotherapy, possibly as part of the I-SPY2 clinical trial. Standard of care would involve 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosphamide (AC) every 2 weeks. If randomized to the experimental arm of I-SPY2, she will receive an unspecified agent in addition to paclitaxel. The patient will benefit from a Medi-port and will have a chemotherapy teaching session. Hormonal therapy and potentially radiation therapy will be considered based on surgical choice and final pathology."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "radiation therapy depending on her surgical choice and final pathology"
+    "radiotherapy_plan": "Potentially radiation therapy depending on her surgical choice and final pathology."
   },
   "Procedure_Plan": {
     "procedure_plan": "The patient will benefit from a Medi-port"
   },
   "Imaging_Plan": {
-    "imaging_plan": "No imaging planned."
+    "imaging_plan": "Mammaprint pending"
   },
   "Lab_Plan": {
-    "lab_plan": "Labs to check creatinine and Alk phos again."
+    "lab_plan": "We will check her labs again, which previously revealed an elevated creatinine and Alk phos, and she may have been dehydrated."
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "The patient will undergo genetic testing with a gene panel that has been sent."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "start the first week in February to begin chemotherapy"
+    "Next clinic visit": "start the first week in February for chemotherapy"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -990,10 +1092,10 @@ RESULTS FOR ROW 3
     "Genetics": "Genetics at [REDACTED] - 126 InVitae panel sent",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "We will check these again. We will arrange for chemo teaching session, and the patient prefers to start the first week in February."
+    "follow up": "We will check these again [referring to labs], We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "No genetic testing results in note."
+    "genetic_testing_results": "Genetics at [REDACTED] - 126 InVitae panel sent. UCSF review of outside path did not repeat markers, no grade. MammaPrint is pending."
   }
 }
 
@@ -1012,7 +1114,7 @@ RESULTS FOR ROW 3
     "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer"
   ],
   "Stage_of_Cancer": [
-    "60 year old female with ER Negative, PR Negative, HER2 Negative right sided breast cancer that is locally advanced, multifocal"
+    "Locally advanced, multifocal (possibly awaiting bippsy confirmation of extent of disease)."
   ],
   "Distant Metastasis": [
     "we currently have no evidence of metastatic disease"
@@ -1021,10 +1123,10 @@ RESULTS FOR ROW 3
     "she currently has no evidence of metastatic disease"
   ],
   "lab_summary": [
-    "We will check these again    We explained that if her tumor has a Mammaprint low risk profile, she would not be eligible to participate in the therapeutic portion of the trial, but given the metaplastic aspect I am fairly certain it will be high risk.  If for some reason it is not, we will need to re-assess the diagnosis of metaplastic breast cancer and we could present her case to our multidisciplinary tumor Board.    We specifically discussed the typical and less common side-effects associated with AC/T, such as fatigue, neuropathy, skin and nail changes, myalgias, alopecia, myel"
+    "We will check these again"
   ],
   "findings": [
-    "Right-sided invasive spindle cell metaplastic carcinoma breast cancer with ER negative (0%), PR negative (0%), and HER2 FISH negative (ratio 1.2)."
+    "Right-sided invasive spindle cell metaplastic carcinoma breast cancer. Tumor size: 3.5 x 3.2 x 2.6 cm with two small satellite masses (12-15 mm)"
   ],
   "goals_of_treatment": [
     "we can therefore treat her with curative intent."
@@ -1036,16 +1138,19 @@ RESULTS FOR ROW 3
     "Not yet on treatment — no response to assess."
   ],
   "medication_plan": [
-    "The patient will start neoadjuvant chemotherapy, which may include 12 cycles of weekly paclitaxel followed by 4 cycles of doxorubicin plus cyclophosph"
+    "The patient was referred to discuss neoadjuvant chemotherapy."
   ],
   "therapy_plan": [
     "The patient is very interested in the I-SPY2 clinical trial and has already consented."
   ],
   "radiotherapy_plan": [
-    "and potentially radiation therapy depending on her surgical choice and final pathology."
+    "Potentially radiation therapy depending on her surgical choice and final pathology."
   ],
   "procedure_plan": [
     "We explained that she will benefit from a Medi-port, which was explained to her and to which she has agreed."
+  ],
+  "imaging_plan": [
+    "Mammaprint is pending"
   ],
   "lab_plan": [
     "We will check these again"
@@ -1054,13 +1159,13 @@ RESULTS FOR ROW 3
     "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
   ],
   "Next clinic visit": [
-    "She will benefit from a Medi-port, which was explained to her and to which she has agreed.  We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
+    "the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
   ],
   "Genetics": [
     "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
   ],
   "follow up": [
-    "We will check these again. We will arrange for chemo teaching session, and while we could start therapy as early as next week the patient is needing a little more time to arrange things with work and would prefer to start the first week in February which we will plan for."
+    "We will check these again"
   ],
   "genetic_testing_results": [
     "Pt visit was 55 min, with >50% of the time spent on counseling.     The patient asked about her genetic predisposition to this cancer - and we will discuss this further with her when we have the results of the gene panel that has been sent."
@@ -1100,7 +1205,7 @@ RESULTS FOR ROW 4
     "summary": "71 y.o. female with right breast cancer, stage not specified, here for discussion for a new patient visit."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- (TNBC) invasive ductal carcinoma (IDC) with local recurrence (right lateral breast mass)",
+    "Type_of_Cancer": "ER-/PR-/HER2- grade 3 invasive ductal carcinoma with local recurrence (right lateral breast)",
     "Stage_of_Cancer": "Not staged in note",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -1109,7 +1214,7 @@ RESULTS FOR ROW 4
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Latest PETCT demonstrates growth of right breast lesion from 1.2 x 0.7 cm to 2.7 x 1.7 cm. Right lateral breast mass measures 2.7 x 1.7 cm (SUV Max 10.5 for largest component) compatible with recurrent disease. No evidence of hypermetabolic metastatic disease. Physical exam reveals a firm palpable nodule felt at 11 o'clock between axilla and areola in the right breast. No cervical, supraclavicular, or axillary lymphadenopathy noted. Right breast mammography shows two masses, both biopsy-proven IDC, with the irregular mass containing the ribbon clip now measuring approximately 14 mm and the more posterior obscured mass containing the heart clip now measuring approximately 15 mm. No sonographic abnormality to the patient-palpated lump in the lower central/slightly outer right breast. Right axillary lymph nodes appear sonographically normal."
+    "findings": "Latest PETCT demonstrates growth of right breast lesion from 1.2 x 0.7 cm to 2.7 x 1.7 cm. No hypermetabolic lymphadenopathy, lung metastases, abdominal/pelvic metastases, or bone metastases detected. Right lateral breast mass measures 2.7 x 1.7 cm (SUV Max 10.5 for largest component) compatible with recurrent disease. No evidence of hypermetabolic metastatic disease. Physical exam reveals a firm palpable nodule at 11 o'clock between axilla and areola in the right breast. Right axillary lymph nodes appear sonographically normal."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1126,10 +1231,10 @@ RESULTS FOR ROW 4
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+    "medication_plan": "Taxol x 12 weekly; port placement and chemotherapy teaching to be done as soon as possible; initial chemotherapy start date could be next Wednesday or the following week; scheduled clinic visits during cycles 1, 2, 5, 8, and 12"
   },
   "Therapy_plan": {
-    "therapy_plan": "Start chemotherapy with taxol x 12 weekly, beginning as early as next Wednesday or the following week. Clinic visits scheduled with cycles 1, 2, 5, 8, and 12."
+    "therapy_plan": "Chemo teach ASAP for taxol x 12 weekly; Can start chemo as early as next Wednesday, but the following week also ok; She will need clinic visits with cycles 1, 2, 5, 8, and 12."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -1160,7 +1265,7 @@ RESULTS FOR ROW 4
     "follow up": "She will need clinic visits with cycles 1, 2, 5, 8, and 12."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "BRCA1 genetic carrier. No specific mutations or variants mentioned beyond being a BRCA1 carrier. No other genetic or molecular testing results detailed in the note."
+    "genetic_testing_results": "BRCA1 genetic carrier. No specific mutations, VUS, or negative results mentioned beyond being a BRCA1 carrier. Test platform not specified."
   }
 }
 
@@ -1200,10 +1305,10 @@ RESULTS FOR ROW 4
     "Patient unsure about starting chemo as we recommended today she would like to speak to Dr. [REDACTED] first."
   ],
   "medication_plan": [
-    "Chemo teach ASAP for taxol x 12 weekly. Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+    "Port placement ASAP  Chemo teach ASAP for taxol x 12 weekly  Can start chemo as early as next Wednesday, but the following week also ok."
   ],
   "therapy_plan": [
-    "Can start chemo as early as next Wednesday, but the following week also ok. She will need clinic visits with cycles 1, 2, 5, 8, and 12."
+    "Chemo teach ASAP for taxol x 12 weekly; Can start chemo as early as next Wednesday, but the following week also ok; She will need clinic visits with cycles 1, 2, 5, 8, and 12."
   ],
   "procedure_plan": [
     "Port placement ASAP"
@@ -1246,10 +1351,10 @@ RESULTS FOR ROW 5
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer presenting in consultation to discuss treatment options and to establish care."
+    "summary": "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer (left breast: Stage III, T3N1, HR+/HER2-, grade 3 IDC; right breast: Stage I, T1cN0, HR+/HER2-, grade 1 IDC) presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2- grade 3 invasive ductal carcinoma with suspicion for LVI and focal high grade DCIS component in the left breast; ER+/PR+/HER2- grade 1 invasive ductal carcinoma with intermediate nuclear grade DCIS in the right breast",
+    "Type_of_Cancer": "Left breast: ER+/PR+/HER2- grade 3 invasive ductal carcinoma with suspicion for LVI and focal high grade DCIS component; Right breast: ER+/PR+/HER2- grade 1 invasive ductal carcinoma with intermediate nuclear grade DCIS component",
     "Stage_of_Cancer": "Left: Stage III (T3N1); Right: Stage I (T1cN0)",
     "Distant Metastasis": "No",
     "Metastasis": "Yes, regional lymph node(s)"
@@ -1258,7 +1363,7 @@ RESULTS FOR ROW 5
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast - 2.0 cm grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Imaging findings: Breast MRI showed irregular homogeneously enhancing masses in both breasts corresponding to the index masses; multiple prominent low-level left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: No palpable masses bilaterally, no lymphadenopathy."
+    "findings": "Left breast partial mastectomy and axillary lymph node dissection: 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0); suspicion for LVI, margins negative, focal high grade DCIS within tumor; 0/8 LN+ (0.7 mm micrometastasis with no extracapsular extension); MP high risk (-0.614). Right breast partial mastectomy and axillary lymph node dissection: 2.0 cm grade 1 IDC with ER+ 99%, PR+  90%, HER2- (IHC 0; FISH ratio 1.5); 0/8 LN+; MP Low Risk (+0.321). Breast MRI: right - irregular homogeneously enhancing mass (2.3 x 1.4 x 1.1 cm) corresponding to right breast index mass (at 8:00 position, 13 cm from nipple); left - irregular homogeneously enhancing mass (2.2 x 3.3 x 2.6 cm) corresponding to left breast index mass (at 2:00 position, 10 cm from nipple); multiple prominent low level 1 left axillary LN with thickened cortex, asymmetric compared to right. Physical exam: no masses bilaterally, no cervical, supraclavicular, or axillary lymphadenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1275,10 +1380,10 @@ RESULTS FOR ROW 5
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "docetaxel/cyclophosphamide x 4 cycles, AI therapy for at least 5 years, calcium and vitamin D supplementation"
+    "medication_plan": "docetaxel/cyclophosphamide x 4 cycles, AI therapy for at least 5 years, consider adjuvant trial of a CDK4/6 inhibitor"
   },
   "Therapy_plan": {
-    "therapy_plan": "docetaxel/cyclophosphamide x 4 cycles, radiation, AI therapy for at least 5 years, consider adjuvant trial of a CDK4/6 inhibitor, DEXA to assess current bone health, take calcium and vitamin D to improve bone health"
+    "therapy_plan": "docetaxel/cyclophosphamide x 4 cycles, radiation, AI therapy for at least 5 years, consider adjuvant trial of a CDK4/6 inhibitor"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "radiation"
@@ -1287,7 +1392,7 @@ RESULTS FOR ROW 5
     "procedure_plan": "No procedures planned."
   },
   "Imaging_Plan": {
-    "imaging_plan": "DEXA to assess current bone health"
+    "imaging_plan": "DEXA to assess her current bone health"
   },
   "Lab_Plan": {
     "lab_plan": "No labs planned."
@@ -1296,7 +1401,7 @@ RESULTS FOR ROW 5
     "genetic_testing_plan": "Her tumor is apparently being assessed for Oncotype DX RS."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the given note"
+    "Next clinic visit": "Not mentioned"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1309,7 +1414,7 @@ RESULTS FOR ROW 5
     "follow up": "The patient needs a DEXA to assess her current bone health. She is advised to continue her current level of aerobic activity (150 minutes a week)."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "MP Low Risk (+0.321). Oncotype DX RS is pending."
+    "genetic_testing_results": "No genetic testing results in note."
   }
 }
 
@@ -1319,13 +1424,13 @@ RESULTS FOR ROW 5
     "consider adjuvant trial of a CDK4/6 inhibitor"
   ],
   "in-person": [
-    "I spent a total of 120 minutes face-to-face with the patient"
+    "I spent a total of 120 minutes face-to-face with the patient and 115 minutes of that time was spent counseling regarding the diagnosis, the treatment plan, the prognosis, medication risks, lifestyle modification, symptoms and therapeutic options."
   ],
   "summary": [
-    "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer"
+    "55 y.o. postmenopausal patient with a recent diagnosis of bilateral breast cancer who should proceed with adjuvant chemotherapy"
   ],
   "Type_of_Cancer": [
-    "Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast"
+    "left breast (MP high risk -0.614) and a Stage I (T1cN0) HR+/HER2- grade 1 IDC of the right breast"
   ],
   "Stage_of_Cancer": [
     "Specifically, she has a Stage III (T3N1) HR+/HER2- grade 3 IDC of the left breast ... and a Stage I (T1cN0) HR+/HER2- grade 1 IDC of the right breast"
@@ -1337,7 +1442,7 @@ RESULTS FOR ROW 5
     "positive LN, even as a micrometastasis."
   ],
   "findings": [
-    "left breast - 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0)"
+    "left breast partial mastectomy and axillary lymph node dissection: 6.2 cm grade 3 IDC; ER+ 99%, PR+ >95%, HER2- (IHC 1+; FISH ratio 1.0)"
   ],
   "goals_of_treatment": [
     "adjuvant chemotherapy in the context of clinically and genomically high risk disease"
@@ -1346,7 +1451,7 @@ RESULTS FOR ROW 5
     "Not explicitly stated."
   ],
   "medication_plan": [
-    "- docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years"
+    "- docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years  - consider adjuvant trial of a CDK4/6 inhibitor"
   ],
   "therapy_plan": [
     "Recommendations in Brief:  - docetaxel/cyclophosphamide x 4 cycles  - radiation  - AI therapy for at least 5 years  - consider adjuvant trial of a CDK4/6 inhibitor"
@@ -1355,10 +1460,13 @@ RESULTS FOR ROW 5
     "radiation"
   ],
   "imaging_plan": [
-    "I stated she would need a DEXA to assess her current bone health."
+    "she would need a DEXA to assess her current bone health."
   ],
   "genetic_testing_plan": [
     "Her tumor is apparently being assessed for Oncotype DX RS."
+  ],
+  "Next clinic visit": [
+    "Not mentioned"
   ],
   "follow up": [
     "I stated she would need a DEXA to assess her current bone health. We discussed ways to improve her bone health, such as weight bearing exercise. She will also take calcium and vitamin D. We also discussed the importance of aerobic activity (150 minutes a week), which she does appear to currently achieve through daily walking."
@@ -1398,26 +1506,26 @@ RESULTS FOR ROW 6
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "HR-negative HER2+ breast cancer; here to discuss systemic therapy and management."
+    "summary": "The patient is a 53-year-old female with newly diagnosed HR-negative HER2+ breast cancer here to discuss systemic therapy and management."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-neg, PR neg, HER2 3+ (HER2+) grade 2 invasive ductal carcinoma",
+    "Type_of_Cancer": "ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%, grade 2 invasive ductal carcinoma",
     "Stage_of_Cancer": "Suspected Stage IV (pending confirmation)",
-    "Distant Metastasis": "Suspected to left ilium and bilateral sacral ala",
+    "Distant Metastasis": "Suspected to left ilium, bilateral sacral ala",
     "Metastasis": "Not sure"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: IDC G2, no LVI, ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%. Imaging findings: Right breast core biopsy shows a 2.2 cm mass with adjacent architectural distortion and nodularity; ultrasound shows a 1.6 cm mass at 10:00, another 1 cm mass, and a 0.5 cm adjacent mass; suspicious right axillary node; right axillary LN FNA: +metastatic breast adenocarcinoma; Breast MRI shows multiple right breast masses, enlarged level 1 and level 2 axillary LNs; PET CT shows a solitary small focus of hypermetabolism in left ilium, right breast mass, multiple right axillary and subpectoral lymph nodes consistent with lymph node metastases, and a 3.4 x 2.6 cm hyperattenuating and mildly hypermetabolic lesion around the left carotid artery bifurcation; MRI Pelvis shows at least 3 rounded foci of signal abnormality and enhancement involving the left iliac bone and bilateral sacral ala, suspicious for osseous metastatic disease; MR Face/Neck shows an avidly enhancing left carotid bifurcation mass, suggestive of a carotid body paraganglioma. Physical exam findings: 7x5 cm mass in RUOQ, mobile, inverted right nipple, multiple right axillary nodes, largest 2.5 cm and mobile."
+    "findings": "Right breast core biopsy - IDC G2, no LVI, ER-neg, PR neg, HER2 3+, FISH ratio 13, Ki67 10-15%. Right axillary LN FNA: +metastatic breast adenoca. Breast MRI shows multiple right breast masses, largest 2.4 x 1.7 cm with clip, and enlarged level 1 and level 2 axillary LNs, largest  3.5 x 1.7 cm. PET CT shows right breast mass, multiple right axillary and subpectoral lymph nodes consistent with lymph node metastases, and a solitary small focus of hypermetabolism in left ilium of unclear significance. MRI Pelvis shows at least 3 rounded foci of signal abnormality and enhancement involving the left iliac bone and bilateral sacral ala, measuring up to 12 mm, suspicious for osseous metastatic disease. Physical exam: 7x5 cm mass in RUOQ, mobile, inverted right nipple, left breast without dominant mass, multiple right axillary nodes, largest 2.5 cm and mobile."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
     "recent_changes": "",
-    "supportive_meds": "ondansetron"
+    "supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet To be taken as needed for nausea"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",
@@ -1430,7 +1538,7 @@ RESULTS FOR ROW 6
     "medication_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
   },
   "Therapy_plan": {
-    "therapy_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab. Consider radiation for bone lesions."
+    "therapy_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab if stage IV."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "We can radiate bone lesions as well."
@@ -1439,7 +1547,7 @@ RESULTS FOR ROW 6
     "procedure_plan": "Port placement"
   },
   "Imaging_Plan": {
-    "imaging_plan": "MRI Pelvis. MRI neck. Baseline echocardiogram"
+    "imaging_plan": "MRI Pelvis. MRI neck - like cartoid body. Baseline echocardiogram"
   },
   "Lab_Plan": {
     "lab_plan": "labs"
@@ -1448,7 +1556,7 @@ RESULTS FOR ROW 6
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the provided note"
+    "Next clinic visit": "Not mentioned"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1492,7 +1600,7 @@ RESULTS FOR ROW 6
     "suspicious for bone metastasis."
   ],
   "findings": [
-    "HER2+ breast cancer"
+    "HR-negative HER2+ breast cancer"
   ],
   "goals_of_treatment": [
     "suspicious for bone metastasis.\" \"If stage IV will initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
@@ -1504,10 +1612,10 @@ RESULTS FOR ROW 6
     "Not yet on treatment — no response to assess."
   ],
   "medication_plan": [
-    "will initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
+    "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
   ],
   "therapy_plan": [
-    "To complete her staging work up we will need MRI of pelvis and biopsy for definitive stage IV diagnosis. If stage IV will initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
+    "To complete her staging work up we will need MRI of pelvis and biopsy for definitive stage IV diagnosis.  If stage IV will initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab."
   ],
   "radiotherapy_plan": [
     "We can radiate bone lesions as well."
@@ -1517,6 +1625,9 @@ RESULTS FOR ROW 6
   ],
   "imaging_plan": [
     "Plan:  MRI Pelvis  MRI neck - like cartoid body, longstanding  Baseline echocardiogram"
+  ],
+  "Next clinic visit": [
+    "Not mentioned"
   ],
   "follow up": [
     "Plan:  MRI Pelvis  MRI neck - like cartoid body, longstanding  Chemoteach for weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab  Baseline echocardiogram  Port placement  labs"
@@ -1553,10 +1664,10 @@ RESULTS FOR ROW 7
     "Patient type": "follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Metastatic ER negative, HER2 negative breast cancer on nab paclitaxel and pembrolizumab for follow up, presenting with clinical or radiological evidence of progression."
+    "summary": "Metastatic ER negative, HER2 negative breast cancer on nab paclitaxel and pembrolizumab for follow up, with clinical or radiological evidence of progression. The patient is to be treated with chemo-immunotherapy for her MSI high metastatic disease."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma",
+    "Type_of_Cancer": "ER-/PR-/HER2- triple negative invasive ductal carcinoma (TNBC)",
     "Stage_of_Cancer": "Stage IV (metastatic)",
     "Distant Metastasis": "Yes, to liver and nodes",
     "Metastasis": "Yes, to liver and nodes"
@@ -1565,21 +1676,21 @@ RESULTS FOR ROW 7
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The patient has a hypoenhancing caudate lobe lesion that has markedly increased in size since prior imaging. Additional hypoattenuating, hypermetabolic segment VII lesion is noted. The patient has a right pectoralis soft tissue mass with internal calcifications and a right subpectoral lymph node with hypermetabolic activity. A lytic S1 vertebral body lesion is also present. Physical exam shows no cervical, supraclavicular, or axillary lymphadenopathy. Axillary pain has improved. No masses are palpable in the breast. Bowel sounds are normal, and there is no distention or organomegaly. No point tenderness over bones or joints is noted. The patient is alert and oriented, with no focal motor or sensory deficits."
+    "findings": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The hypermetabolic caudate lobe lesion is markedly increased in size when compared to prior CT abdomen/pelvis from 09/29/2018. Additional hypoattenuating, hypermetabolic segment VII lesion is noted."
   },
   "Current_Medications": {
     "current_meds": "pembrolizumab, abraxane"
   },
   "Treatment_Changes": {
-    "recent_changes": "Restart xarelto, stop for port placement per IR",
-    "supportive_meds": "MS Contin, oxycodone, Xarelto"
+    "recent_changes": "Restart xarelto, stop for port placement per IR; Rx prilosec 40mg qd; Rx mag oxide 400mg qhs",
+    "supportive_meds": "tramadol 50 mg tablet, morphine (MS CONTIN) 15 mg 12 hr ER tablet, oxyCODONE (ROXICODONE) 5 mg tablet, Xarelto"
   },
   "Treatment_Goals": {
     "goals_of_treatment": "palliative",
     "goals_description": "Not explicitly stated."
   },
   "Response_Assessment": {
-    "response_assessment": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. The hypoenhancing caudate lobe lesion has markedly increased in size since prior imaging."
+    "response_assessment": "Imaging studies reviewed today show clinical or radiological evidence of progression of metastatic ER negative, HER2 negative breast cancer. Specifically, the hypermetabolic caudate lobe lesion has increased in size when compared to prior CT abdomen/pelvis from 09/29/2018."
   },
   "Medication_Plan": {
     "medication_plan": "Continue abraxane every week (continuous) and Pembrolizumab every 3 weeks. Continue ativan and compazine prn. Rx prilosec 40mg qd. Rx mag oxide 400mg qhs. Continue MS Contin 15mg BID, oxycodone prn, flexeril, and ativan. Continue stool softener to prevent opioid-induced constipation."
@@ -1603,7 +1714,7 @@ RESULTS FOR ROW 7
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: 2 weeks, then every 3 weeks"
+    "Next clinic visit": "in-person: 2 weeks then every 3 weeks"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1616,7 +1727,7 @@ RESULTS FOR ROW 7
     "follow up": "F/u 2 weeks then every 3 weeks"
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "Germline mutation testing positive for MSH2 c.1906G>C (p.Ala636Pro). Genetic testing 05/19/18: Negative for BRCA 1/2, ATM, CDH1, CHEK2, PALB2, PTEN, STK11, TP53. Lynch syndrome panel (blood): Positive for MSH2 c.1906G>C (p.Ala636Pro)."
+    "genetic_testing_results": "Germline mutation testing positive for MSH2 c.1906G>C (p.Ala636Pro). Genetic testing 05/19/18: Negative for BRCA 1/2, ATM, CDH1, CHEK2, PALB2, PTEN, STK11, TP53. Lynch syndrome panel (blood): 5 genes were analyzed: EPCAM, MLH1, MSH2, MSH6, and PMS2. Positive for: MSH2 c.1906G>C (p.Ala636Pro). Loss of MSH2, MSH6 in tumor samples."
   }
 }
 
@@ -1650,10 +1761,10 @@ RESULTS FOR ROW 7
     "Metastatic breast cancer  - axillary pain improved which is hopeful for early treatment response  - Continue abraxane every week (continuous) and Pembrolizumab every 3 weeks."
   ],
   "recent_changes": [
-    "Jugular clot  - restart xarelto, stop for port placement per IR"
+    "Jugular clot  - restart xarelto, stop for port placement per IR    ...  - Rx prilosec 40mg qd    ...  - Rx mag oxide 400mg qhs"
   ],
   "supportive_meds": [
-    "Continue MS Contin 15mg BID, oxycodone prn, flexeril, and ativan  - continue stool softener to prevent opioid induced constipation    F/u 2 weeks then every 3 weeks\" \"restart xarelto, stop for port placement per IR"
+    "Continue MS Contin 15mg BID, oxycodone prn, flexeril, and ativan  - continue stool softener to prevent opioid induced constipation    F/u 2 weeks then every 3 weeks"
   ],
   "goals_of_treatment": [
     "newly diagnosed metastatic breast cancer to liver and nodes."
@@ -1717,7 +1828,7 @@ RESULTS FOR ROW 8
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient with stage IIA left breast invasive ductal carcinoma (IDC) post bilateral mastectomies presenting to establish medical oncology care to discuss adjuvant therapy."
+    "summary": "Patient with stage IIA left breast IDC (3.9 cm, grade 2, ER+/PR+/HER-, high-risk mammaprint) s/p bilateral mastectomies with left axillary LND with 2/12 LN+. Presents to establish medical oncology care and discuss adjuvant therapy."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS",
@@ -1729,7 +1840,7 @@ RESULTS FOR ROW 8
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Post-mastectomy scars are healing well with no erythema or fluctuance. No tenderness, rebound, or guarding noted on physical examination. No palpable masses, skin changes, or lymphadenopathy observed. No significant imaging findings mentioned in the current visit."
+    "findings": "Post-mastectomy scars healing well. No erythema or fluctuance noted. No tenderness, rebound, or guarding on abdominal examination. No edema, tenderness, or deformity on musculoskeletal examination. Sensory change (numbness) noted in left axilla and left elbow. No murmur, gallop, or friction rub on cardiovascular examination. No respiratory distress, wheezes, or rales on pulmonary examination. No lymphadenopathy or palpable masses on physical exam. No mammographic evidence of malignancy on previous screening mammogram (01/25/2017)."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1746,7 +1857,7 @@ RESULTS FOR ROW 8
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. Will need a baseline TTE prior to chemotherapy. Port placement ordered for IV access."
+    "medication_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017"
   },
   "Therapy_plan": {
     "therapy_plan": "Patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017. Patient will need a baseline TTE prior to chemotherapy due to the potential cardiotoxic side effects of an anthracycline. Pre-chemotherapy teaching requested."
@@ -1764,10 +1875,10 @@ RESULTS FOR ROW 8
     "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Patient is in agreement to pursue genetic counseling and testing due to her strong family history of breast cancer and potential BRCA positivity."
+    "genetic_testing_plan": "Patient is in agreement to pursue genetic counseling, and a referral has been placed for genetic testing."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the note."
+    "Next clinic visit": "estimated start date 10/18/2017 for the initiation of chemotherapy with AC + paclitaxel"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -1796,7 +1907,7 @@ RESULTS FOR ROW 8
     "who presents to establish Oncology care."
   ],
   "summary": [
-    "70 y.o. female with a h/o HTN, HLD, and a recent diagnosis of stage IIA pT2(m)N1a L breast IDC (3.9 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, high-risk mammaprint) s/p 08/18/17 bilateral mastectomies"
+    "stage IIA pT2(m)N1a L breast IDC (3.9 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, high-risk mammaprint) s/p 08/18/17 bilateral mastectomies with left axillary LND with 2/12 LN+"
   ],
   "Type_of_Cancer": [
     "stage IIA pT2(m)N1a L breast IDC (3.9 cm, grade 2, ER+/PR+/HER- with FISH ratio 1.1, high-risk mammaprint)"
@@ -1807,11 +1918,14 @@ RESULTS FOR ROW 8
   "Metastasis": [
     "stage IIA IDC with known lymph node involvement (2 out of 12 nodes)"
   ],
+  "findings": [
+    "Not applicable"
+  ],
   "goals_of_treatment": [
     "Given her early stage breast cancer with positive LN involvement, the mammaprint is essential in determining the next steps in her care."
   ],
   "response_assessment": [
-    "Today we discussed in detail the options for the next steps in chemotherapy, and our recommendation to pursue treatment with AC with paclitaxel."
+    "Not yet on treatment — no response to assess."
   ],
   "medication_plan": [
     "patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017"
@@ -1827,6 +1941,9 @@ RESULTS FOR ROW 8
   ],
   "genetic_testing_plan": [
     "Of note is her strong family history of breast cancer along her paternal side, which is also of [REDACTED] Jewish heritage making her a potentially BRCA positive. She is in agreement to pursue genetic counseling, and we referred her for genetic testing."
+  ],
+  "Next clinic visit": [
+    "patient agreed to start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017"
   ],
   "Genetics": [
     "referral placed to Genetics"
@@ -1881,7 +1998,7 @@ RESULTS FOR ROW 9
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Left breast subcutaneous mass (3.1 x 1.8 x 3.0 cm) with a satellite mass (1.2 x 0.9 x 0.9 cm) involving overlying skin. Biopsy of left breast mass shows grade 2 IDC ER+(>95%), PR+(>95%), HER2- (IHC 1+), Ki-67 30%-40%. PET/CT demonstrates left breast subcutaneous mass (2.1 x 3.2 cm SUV 8.4), left axillary node (1.3 x 1.4 cm SUV  6.0), left level 5B LN conglomerate (1.8 x 2.5 cm SUV 9.23), left internal mammary LN (1.2 x 2.0 cm SUV 6.8). Hypermetabolic subcutaneous masses overlying the left breast and left axillary, left supraclavicular, left level VB and left internal mammary hypermetabolic LAD are suspicious for metastatic disease. Palpable 6.5 x 5 cm mass in left upper outer quadrant and 3.5 x 3.5 cm mass in left lateral anterior neck. Discoloration of skin on left breast. No cervical, supraclavicular, or axillary lymphadenopathy noted on physical exam."
+    "findings": "Left breast subcutaneous mass (2.1 x 3.2 cm SUV 8.4), left axillary node (1.3 x 1.4 cm SUV 6.0), left level 5B LN conglomerate (1.8 x 2.5 cm SUV 9.23), left internal mammary LN (1.2 x 2.0 cm SUV 6.8). Hypermetabolic subcutaneous masses overlying the left breast. Palpable 6.5 x  5 cm mass in left upper outer quadrant, 3.5 x 3.5 cm mass in left lateral anterior neck. Discoloration of skin on left breast. No cervical, supraclavicular or axillary lymphadenopathy noted on physical exam. PET/CT shows uptake in a level Vb lymph node, concerning for metastatic disease."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -1895,13 +2012,13 @@ RESULTS FOR ROW 9
     "goals_description": "if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
   },
   "Response_Assessment": {
-    "response_assessment": "Not yet on treatment — no response to assess."
+    "response_assessment": "The patient is not currently on any cancer treatment. The note indicates that the patient has a locally advanced, unresectable recurrence (possibly considered metastatic in context of a level Vb LN) and requires additional evaluation prior to starting systemic therapy. No current response to treatment can be assessed as no treatment has been initiated."
   },
   "Medication_Plan": {
-    "medication_plan": "plan to start goserelin, followed by an aromatase inhibitor (AI)."
+    "medication_plan": "plan to start goserelin, followed by an aromatase inhibitor"
   },
   "Therapy_plan": {
-    "therapy_plan": "plan to FNA the mass on left lateral anterior neck, plan to start goserelin, followed by an aromatase inhibitor (AI), and then consider adding a CDK 4/6 inhibitor slowly due to past poor tolerance of therapy."
+    "therapy_plan": "plan to start goserelin, followed by an aromatase inhibitor (AI). The patient will return to clinic two weeks after her first goserelin."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -1960,7 +2077,7 @@ RESULTS FOR ROW 9
     "her PET/CT demonstrated uptake in a level Vb lymph nodes, which is concerning for metastatic disease;"
   ],
   "findings": [
-    "Left breast subcutaneous mass (3.1 x 1.8 x 3.0 cm) with a satellite mass (1.2 x 0.9 x 0.9 cm) involving overlying skin."
+    "Her PET/CT demonstrated uptake in a level Vb lymph nodes, which is concerning for metastatic disease;"
   ],
   "recent_changes": [
     "plan to start goserelin, followed by AI"
@@ -1972,13 +2089,13 @@ RESULTS FOR ROW 9
     "if she has HR+/HER2- MBC, it is not curable, but treatable, with primary goals of prolongation of life, while maintaining a good quality of life without excessive toxicities."
   ],
   "response_assessment": [
-    "Not yet"
+    "her disease is currently unresectable and she needs to start systemic therapy."
   ],
   "medication_plan": [
     "plan to start goserelin, followed by AI."
   ],
   "therapy_plan": [
-    "plan to FNA the mass on left lateral anterior neck  - plan to start goserelin, followed by AI"
+    "plan to start goserelin, followed by AI.  She has had poor tolerance of therapy in the past and we will need to take this process of adding on additional medications slowly."
   ],
   "procedure_plan": [
     "plan to FNA the mass on left lateral anterior neck"
@@ -2021,7 +2138,7 @@ RESULTS FOR ROW 10
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Patient is a 32 y.o. female with newly diagnosed right breast cancer (grade 2 ER+, PR 25%, HER2 negative by IHC, axillary node positive for carcinoma) and is here for initial consultation to discuss treatment options."
+    "summary": "A 32 y.o. female with newly diagnosed right breast cancer (grade 2, ER+, PR+, HER2 negative by IHC, HER2 negative by FISH) and positive axillary lymph node, here in consultation to discuss treatment options."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma (ER >95%, PR 25%)",
@@ -2033,7 +2150,7 @@ RESULTS FOR ROW 10
     "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 94 mg/dL"
   },
   "Clinical_Findings": {
-    "findings": "Grade 2 invasive ductal carcinoma (IDC) with ER >95%, PR 25%, HER2 negative by IHC, and 2.9/1.4 by FISH for an average ratio of 2.0. Right breast mass measuring 28 x 16 x 30 mm (hypoechoic, irregular) and 34 x 20 x 25 mm (irregularly shaped, spiculated margins) on MRI. Right axillary lymph node with asymmetrically thickened cortex (up to 4mm) and enlarged lymph node with a cortex measuring up to  6mm on MRI. PET/CT shows prominent right axillary lymph node with a maximum SUV of 2.1 and hypermetabolic right breast mass with a maximum SUV of 8.4. Physical exam reveals a 7 x 3 cm mass in the upper outer quadrant of the right breast with slight dimpling and right nipple pushed upward. No additional hypermetabolic lymph nodes or metastatic disease detected on imaging."
+    "findings": "Grade 2 invasive ductal carcinoma (IDC) with ER >95%, PR 25%, HER2 negative by IHC, and 2.9/1.4 by FISH for an average ratio of 2.0. Tumor size is 34 x 20 x 25 mm with spiculated margins and heterogeneous enhancement in the upper central to slightly outer quadrant of the right breast. Right axillary lymph node with a cortex measuring up to 6 mm, likely corresponding to the recently sampled axillary lymph node. PET/CT shows a prominent right axillary lymph node with a maximum SUV of  2.1 and a hypermetabolic right breast mass with a maximum SUV of 8.4. Physical exam reveals a 7 x 3 cm mass in the upper outer quadrant of the right breast with slight dimpling and a right axillary node measuring 1 cm. No other significant abnormalities noted on physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2050,10 +2167,10 @@ RESULTS FOR ROW 10
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Hormone therapy after surgery, including ovarian suppression. Cold caps to be considered. Antiemetics and other supportive medications to address side effects such as hair loss, neuropathy, cardiac toxicity, nausea, diarrhea, constipation, and nail changes."
+    "medication_plan": "Weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Port to be placed either on start of therapy or one week later. Hopefully start neoadjuvant chemotherapy next week - planning for 05/01/17 assuming egg harvesting either Saturday or Monday."
   },
   "Therapy_plan": {
-    "therapy_plan": "Patient will start neoadjuvant chemotherapy on 05/01/17, including weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Hormone therapy will be required after surgery, including ovarian suppression. The patient is enrolled in the ISPY2 clinical trial, which includes randomization, secondary consent, biopsies, MRI scans, and novel agents. The patient is considering the use of cold caps during chemotherapy."
+    "therapy_plan": "Patient will start neoadjuvant chemotherapy on 05/01/17, including weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support. Hormone therapy will be required after surgery, including the use of ovarian suppression. The patient is also considering participation in the ISPY2 clinical trial."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -2062,7 +2179,7 @@ RESULTS FOR ROW 10
     "procedure_plan": "Port to be placed either on start of therapy or one week later."
   },
   "Imaging_Plan": {
-    "imaging_plan": "Mammi/PET on 05/01/17"
+    "imaging_plan": "Mammi/PET scan on 04/29/17"
   },
   "Lab_Plan": {
     "lab_plan": "Labs on Thursday."
@@ -2071,17 +2188,17 @@ RESULTS FOR ROW 10
     "genetic_testing_plan": "Mammoprint expected on Thursday of this week."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "planning for start of neoadjuvant chemotherapy on 05/01/17"
+    "Next clinic visit": "in-person: 04/23/17 for echocardiogram and EKG"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
   },
   "Referral": {
     "Nutrition": "None",
-    "Genetics": "genetic testing sent",
+    "Genetics": "04/11/17 genetic testing sent",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "04/23/17 echocardiogram and EKG, hoping to do Mammi/PET on 05/01/17, port to be placed either on start of therapy or one week later, labs on Thursday, hopefully start neoadjuvant chemotherapy next week - planning for 05/01/17 assuming egg harvesting either Saturday or Monday."
+    "follow up": "04/23/17 echocardiogram and EKG, hoping to do Mammi/PET on 05/01/17, labs on Thursday, start neoadjuvant chemotherapy next week, planning for 05/01/17 assuming egg harvesting either Saturday or Monday."
   },
   "Genetic_Testing_Results": {
     "genetic_testing_results": "No genetic testing results in note."
@@ -2100,7 +2217,7 @@ RESULTS FOR ROW 10
     "Patient Active Problem List   Diagnosis   \u0007 Breast cancer, right breast"
   ],
   "summary": [
-    "new diagnosis of a grade 2 ER+ breast cancer, T2N1, clinical stage II  HER2 reviewed and is clinically not amplified so will treat as HER2 negative."
+    "HER2 reviewed and is clinically not amplified so will treat as HER2 negative."
   ],
   "Type_of_Cancer": [
     "grade 2 ER+ breast cancer, T2N1, clinical stage II  HER2 reviewed and is clinically not amplified so will treat as HER2 negative."
@@ -2121,7 +2238,7 @@ RESULTS FOR ROW 10
     "Hopefully start neoadjuvant chemotherapy next week"
   ],
   "medication_plan": [
-    "Weekly paclitaxel x 12 followed by AC every 2-3 weeks with neulasta support, and including the short and long term toxicities with these therapies."
+    "Weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support."
   ],
   "therapy_plan": [
     "Hopefully start neoadjuvant chemotherapy next week - planning for 05/01/17 assuming egg harvesting either Saturday or Monday."
@@ -2130,7 +2247,7 @@ RESULTS FOR ROW 10
     "Port to be placed either on start of therapy or one week later."
   ],
   "imaging_plan": [
-    "Hoping to do Mammi/PET on 05/01/17"
+    "Hope to do Mammi/PET on 05/01/7 - since we hope to start chemotherapy then, we have worked with the imaging group and they were able to move her scan to April 29.."
   ],
   "lab_plan": [
     "Labs on Thursday."
@@ -2139,10 +2256,10 @@ RESULTS FOR ROW 10
     "Mammoprint expected on Thursday of this week."
   ],
   "Next clinic visit": [
-    "Hopefully start neoadjuvant chemotherapy next week - planning for 05/01/17"
+    "04/23/17 echocardiogram and EKG"
   ],
   "follow up": [
-    "04/23/17 echocardiogram and EKG  Hoping to do Mammi/PET on 05/01/17 - since we hope to start"
+    "04/23/17 echocardiogram and EKG  Hoping to do Mammi/PET on 05/01/17 - since we hope to start  chemotherapy then,"
   ],
   "genetic_testing_results": [
     "Mammoprint expected on Thursday of this week."
@@ -2179,10 +2296,10 @@ RESULTS FOR ROW 11
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "A 51 y.o. female with biopsy-proven left breast DCIS comes to our clinic for a discussion of potential adjuvant anti-hormonal therapy."
+    "summary": "51 y.o. female with biopsy-proven left breast DCIS comes to our clinic today for a discussion of potential adjuvant anti-hormonal therapy."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR pending ductal carcinoma in situ (DCIS), HER2: not tested",
+    "Type_of_Cancer": "ER+/PR pending ductal carcinoma in situ (DCIS) with intermediate nuclear grade, cribriform and micropapillary patterns, with focal necrosis; HER2: not tested",
     "Stage_of_Cancer": "pTisNx",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -2191,27 +2308,27 @@ RESULTS FOR ROW 11
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Left breast DCIS with intermediate nuclear grade, cribriform and micropapillary patterns, and focal necrosis. Tumor size spans  1.8 cm in 5 contiguous slices. Posterior margin is positive (tumor is at ink, on slide A8). Additional margin submitted in part B is <0.1 cm from the new margin. Anterior medial margin is negative (tumor is <0.1 cm away, on slide A7, A9, A10). Anterior lateral, superior, and inferior margins are negative (t. Left breast is bandaged and tender to palpation post-surgery. No suspicious masses noted on physical exam. Right breast and axillary areas are clear."
+    "findings": "Left breast, stereotactic core needle biopsy: Ductal carcinoma in situ (DCIS), intermediate nuclear grade, cribriform and micropapillary patterns, with focal necrosis; >90% estrogen receptor positive, progesterone receptor pending. Lumpectomy pathology: DCIS present in 5 contiguous slices spanning 1.8 cm, posterior margin positive (tumor is at ink, on slide A8), additional margin submitted in part B is <0.1 from the new margin. Physical exam: Left breast bandaged in the dependent portion and very tender to palpation, no suspicious mass other than expected postsurgical firmness. Left axilla, left supraclavicular, and left infraclavicular areas clear. Right breast and corresponding areas without suspicious mass."
   },
   "Current_Medications": {
     "current_meds": ""
   },
   "Treatment_Changes": {
-    "recent_changes": "Prescription for tamoxifen sent to pharmacy but instructed to hold off on taking until after radiation oncology assessment.",
+    "recent_changes": "Prescription for tamoxifen sent to her pharmacy but instructed to hold off on taking it until after radiation oncology assessment.",
     "supportive_meds": ""
   },
   "Treatment_Goals": {
-    "goals_of_treatment": "risk reduction",
-    "goals_description": ""
+    "goals_of_treatment": "adjuvant, risk reduction",
+    "goals_description": "The note discusses the use of surgery and/or radiation to remove the growth from the breast so that it does not recur locally and the use of adjuvant systemic anti-hormonal therapy to decrease the risk of local recurrence and prevent new breast cancer events. Not explicitly stated."
   },
   "Response_Assessment": {
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Prescription for tamoxifen sent to pharmacy; patient instructed to hold off on taking the drug until after radiation oncology assessment."
+    "medication_plan": "Prescription for tamoxifen sent to pharmacy; patient instructed to hold off on taking tamoxifen until after radiation oncology assessment."
   },
   "Therapy_plan": {
-    "therapy_plan": "Prescription for tamoxifen sent to pharmacy; patient instructed to hold off on taking tamoxifen until after radiation oncology assessment. Plan to assess therapy tolerance 4-6 weeks after beginning tamoxifen."
+    "therapy_plan": "Prescription for tamoxifen sent to pharmacy; patient instructed to hold off on taking tamoxifen until after radiation oncology assessment. Plan to begin tamoxifen after radiation oncology assessment. Return to clinic 4-6 weeks after beginning tamoxifen to assess therapy tolerance."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "Ms. [REDACTED] is currently pending an appointment with [REDACTED] [REDACTED] to assess whether or not she will be a candidate for radiation therapy at this time."
@@ -2255,16 +2372,19 @@ RESULTS FOR ROW 11
     "I had a detailed discussion with Mrs. [REDACTED] about the nature of ductal carcinoma in situ"
   ],
   "summary": [
-    "I had a detailed discussion with Mrs. [REDACTED] about the nature of ductal carcinoma in situ and our general approach to treatment of ductal carcinoma in situ"
+    "I had a detailed discussion with Mrs. [REDACTED] about the nature of ductal carcinoma in situ and our general approach to treatment of ductal carcinoma in situ including the use of surgery and/or radiation to remove the growth from the breast so that it does not recur locally and the use of adjuvant systemic anti-hormonal therapy"
   ],
   "findings": [
-    "Left breast DCIS with intermediate nuclear grade, cribriform and micropapillary patterns, and focal necrosis."
+    "ductal carcinoma in situ and our general approach to treatment of ductal carcinoma in situ"
   ],
   "recent_changes": [
-    "I will send a prescription for tamoxifen into her pharmacy but have told her to hold off on taking this drug until after she has her radiation oncology assessment."
+    "Ms. [REDACTED] to assess whether or not she will be a candidate for radiation therapy at this time. I will send a prescription for tamoxifen into her pharmacy but have told her to hold off on taking this drug until after she has her radiation oncology assessment."
   ],
   "goals_of_treatment": [
-    "decrease the risk of local recurrence"
+    "the use of adjuvant systemic anti-hormonal therapy which also would help to decrease the risk of local recurrence."
+  ],
+  "goals_description": [
+    "surgery and/or radiation to remove the growth from the breast so that it does not recur locally"
   ],
   "response_assessment": [
     "Not yet"
@@ -2273,7 +2393,7 @@ RESULTS FOR ROW 11
     "I will send a prescription for tamoxifen into her pharmacy but have told her to hold off on taking this drug until after she has her radiation oncology assessment."
   ],
   "therapy_plan": [
-    "I will send a prescription for tamoxifen into her pharmacy but have told her to hold off on taking this drug until after she has her radiation oncology assessment."
+    "return to clinic 4-6 weeks after beginning tamoxifen to assess therapy tolerance"
   ],
   "radiotherapy_plan": [
     "Ms. [REDACTED] is currently pending an appointment with [REDACTED] [REDACTED] to assess whether or not she will be a candidate for radiation therapy at this time."
@@ -2331,7 +2451,7 @@ RESULTS FOR ROW 12
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: 1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%. Imaging findings: Right breast ultrasound shows an irregular solid mass (2.4 x 1.5 x 1.5 cm) with spiculated margins in lower outer right breast at  7:00 position, 5 cm from nipple, and a second smaller irregular solid mass (1.0 x 1.0 x 0.7 cm) with spiculated margins in lower outer right breast at 8:00 position, 5 cm from nipple. Breast MRI reveals an irregularly shaped mass (2.2 x 2.3 x 2.0 cm) with spiculated margins in lower outer right breast corresponding to the 7:00 position mass on ultrasound and a second irregular enhancing mass (1.5 x 1.2 x 1.8 cm) slightly superior and lateral to the biopsy-proven carcinoma. PET/CT shows no evidence of metastatic disease, with 2 hypermetabolic enhancing nodules within the right breast. Physical exam findings: Right breast with a palpable mass (3 x 4 cm) in the lower outer quadrant; no palpable masses in the left breast; no lymphadenopathy noted."
+    "findings": "Right breast with mass (3 x 4 cm) in lower outer quadrant; left breast without palpable masses. No cervical, supraclavicular, or axillary lymphadenopathy. Irregular mass with spiculated margins in lower slightly outer right breast, posterior depth; heterogeneously dense breast tissue. Irregular solid mass (2.4 x 1.5 x 1.5 cm) with spiculated margins in lower outer right breast at 7:00 position, 5 cm from nipple (at site of palpable lump); irregular solid mass (1.0 x 1.0 x 0.7 cm) with spiculated margins in lower outer right breast at  8:00 position, 5 cm from nipple (a 2nd smaller palpable lump). Non-enlarged morphologically normal appearing LN in right axilla. Grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%. No evidence of metastatic disease on PET/CT. Sclerotic foci within left ileum, right pubic symphysis, and left ischium likely representing bone islands. Mild uptake along distal esophagus (likely esophagitis)."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2348,13 +2468,13 @@ RESULTS FOR ROW 12
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will start neoadjuvant chemotherapy with AC/T (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles)."
+    "medication_plan": "The patient will proceed with neoadjuvant chemotherapy, specifically AC/T (4 cycles of doxorubicin plus cyclophosphamide every 2 weeks followed by 12 cycles of weekly paclitaxel)."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, specifically AC/T (4 cycles of doxorubicin plus cyclophosphamide every 2 weeks followed by 12 cycles of weekly paclitaxel). Hormonal therapy and possibly radiation will follow surgery. The plan is to start chemotherapy ideally in the first week of March (March 19 or March 20)."
+    "therapy_plan": "The patient will proceed with neoadjuvant chemotherapy, specifically AC/T (doxorubicin plus cyclophosphamide every 2 weeks for 4 cycles followed by weekly paclitaxel for 12 cycles). She will also require chemotherapy teaching and an echocardiogram before starting treatment. Additionally, a port will be placed for chemotherapy administration. Hormonal therapy and possibly radiation will be included in the treatment plan after chemotherapy and surgery."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "None"
+    "radiotherapy_plan": "possibly radiation"
   },
   "Procedure_Plan": {
     "procedure_plan": "port placement"
@@ -2407,7 +2527,7 @@ RESULTS FOR ROW 12
     "she currently has no evidence of metastatic disease"
   ],
   "findings": [
-    "1.2 cm grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65"
+    "Right breast with mass (3 x 4 cm) in lower outer quadrant; left breast without palpable masses."
   ],
   "goals_of_treatment": [
     "we can therefore treat her with curative intent."
@@ -2423,6 +2543,9 @@ RESULTS FOR ROW 12
   ],
   "therapy_plan": [
     "The patient states that she understands the rationale for neoadjuvant treatment and will proceed with neoadjuvant chemotherapy, specifically AC/T."
+  ],
+  "radiotherapy_plan": [
+    "her treatment will include chemotherapy, surgery, hormonal therapy, and possibly radiation."
   ],
   "procedure_plan": [
     "Recommendations in Brief:  - echocardiogram  - chemo teach  - port placement"
@@ -2468,19 +2591,19 @@ RESULTS FOR ROW 13
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "A 36 y.o. female with a recently diagnosed hormone receptor positive/HER2 negative node positive right breast cancer is here for discussion of treatment options and recent imaging findings."
+    "summary": "A 36 y.o. female with a recently diagnosed hormone receptor positive/HER2 negative node positive right breast cancer is here to discuss treatment options and recent imaging findings. She is scheduled to proceed to surgery on 11/05/17."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- (by IHC & FISH negative) invasive ductal carcinoma (IDC) with Ki67% 20-30%",
     "Stage_of_Cancer": "Not staged in note",
     "Distant Metastasis": "No",
-    "Metastasis": "Yes, regional lymph node(s)"
+    "Metastasis": "Yes, to right axillary lymph nodes"
   },
   "Lab_Results": {
     "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 93 mg/dL"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%. Imaging findings include a 2.2 cm mass in the upper central right breast with a 0.4 cm anterior satellite lesion, suspicious additional ductal disease, and disease within the nipple. MRI and PET/CT reveal a hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake are noted. A hyperdense 0.7 cm falx lesion is present, which could represent a partially calcified falcine meningioma or dural metastasis. MRI brain shows a 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound-guided fine needle aspiration of the right axillary lymph node confirms metastatic carcinoma. Physical exam shows no palpable axillary lymph nodes."
+    "findings": "Pathology results: Invasive ductal carcinoma (ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative; Ki67% 20-30%). Tumor size: 1.8 cm irregular hyperdense mass in the right breast at 11:00. MRI findings: Dominant biopsy-proven malignancy in the upper central right breast measuring 2.2 cm with a 0.4 cm anterior satellite lesion. PET/CT findings: Hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm). Additional subcentimeter, asymmetric right subpectoral lymph nodes with low-level uptake. MRI brain findings: 5 mm right parafalcine dural-based mass most likely a meningioma. Ultrasound findings: Enlarged lymph node measuring 7 x 7 x 7 mm in the right axilla, at approximately 10 o'clock, 14 cm from nipple. Axillary FNA: Metastatic carcinoma. Physical exam findings: No palpable axillary lymph nodes."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2497,10 +2620,10 @@ RESULTS FOR ROW 13
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Patient will start hormonal therapy after radiation. Supportive medications include scalp cooling with Dignicap or Penguin Cold Cap to preserve hair during chemotherapy."
+    "medication_plan": "Start hormonal therapy after radiation. Discuss selection of hormonal therapy and side effects at a later visit."
   },
   "Therapy_plan": {
-    "therapy_plan": "Adjuvant chemotherapy and hormonal therapy are likely needed due to young age and lymph node involvement. Final decision about chemotherapy will be made after surgery. Hormonal therapy will start after radiation. Discussed participation in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE."
+    "therapy_plan": "Likely to need adjuvant chemotherapy and hormonal therapy post-surgery. Decision about chemotherapy will be made after surgery. Will start hormonal therapy after radiation. Discussed participation in clinical trials of CDK 4/6 inhibitors such as PALLAS and JPBE."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -2526,7 +2649,7 @@ RESULTS FOR ROW 13
   "Referral": {
     "Nutrition": "None",
     "Genetics": "None",
-    "Specialty": "Neuroradiologist for MRI brain evaluation",
+    "Specialty": "None",
     "Others": "None",
     "follow up": "FU after surgery."
   },
@@ -2559,7 +2682,7 @@ RESULTS FOR ROW 13
     "right breast cancer with axillary LN involvement."
   ],
   "findings": [
-    "Pathology results show invasive ductal carcinoma (IDC) with ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative, and Ki67% 20-30%"
+    "Invasive ductal carcinoma (ER+ (80-90%), PR+ (80-90%), HER2 by IHC & FISH negative; Ki67% 20-30%)."
   ],
   "goals_of_treatment": [
     "she will need adjuvant chemotherapy in addition to hormonal therapy."
@@ -2574,7 +2697,7 @@ RESULTS FOR ROW 13
     "she would start this after radiation and we will discuss selection of hormonal therapy and side effects at a later visit."
   ],
   "therapy_plan": [
-    "it is very likely that she will need adjuvant chemotherapy in addition to hormonal therapy."
+    "We reviewed several options and trials which may be appropriate for her.     I reviewed the meaning of the Mammaprint result... We discussed the toxicities associated with Taxotere and Cytoxan... Lastly, [REDACTED] and her husband asked about when she would begin treatment with hormonal therapy. I explained that she would start this after radiation..."
   ],
   "procedure_plan": [
     "scheduled to undergo surgery on 11/05/17."
@@ -2620,10 +2743,10 @@ RESULTS FOR ROW 14
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "34-year-old premenopausal woman with newly diagnosed right breast cancer (Grade 1 IDC, ER+, PR+, HER2 equivocal) seeking initial consultation to discuss treatment options."
+    "summary": "34-year-old female with newly diagnosed right breast cancer (Grade 1 IDC, ER+, PR+, HER2 equivocal) seeking consultation to discuss treatment options."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2 equivocal(IHC 2), FISH non-amplified grade 1 invasive ductal carcinoma",
+    "Type_of_Cancer": "ER+/PR+ (~90%) and HER2 equivocal (IHC 2+, FISH non-amplified) grade 1 invasive ductal carcinoma (IDC) with focal atypical ductal hyperplasia and pseudoangiomatous stromal hyperplasia, DCIS not present",
     "Stage_of_Cancer": "Not mentioned in note",
     "Distant Metastasis": "No",
     "Metastasis": "No"
@@ -2632,13 +2755,13 @@ RESULTS FOR ROW 14
     "lab_summary": "Syphilis Screen by RPR with Reflex to Treponemal Antibody Nonreactive, HIV Ag/Ab Combo NEG (from 03/17/19)"
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2), FISH non-amplified, Ki-67: ~10%, and focal atypical ductal hyperplasia. No DCIS present. Physical exam reveals a 2 cm mass in the right breast,  8 cm from the nipple. No significant lymphadenopathy noted. Recent bilateral breast MRI findings are not detailed in the note."
+    "findings": "Pathology report from 03/30/19 shows ER+/PR+ and HER2 equivocal IDC of the right breast. Tumor size is 0.55 cm largest dimension in a core; multiple cores involved. Grade 1 IDC. Focal atypical ductal hyperplasia and pseudoangiomatous stromal hyperplasia present. DCIS not present. Bilateral breast MRI on April 24 not detailed in the note. Physical exam reveals a 2 cm R breast mass 8 cm from the nipple. No significant adenopathy or palpable lymphadenopathy noted. No masses or organomegaly in the abdomen. No suspicious skin lesions noted."
   },
   "Current_Medications": {
     "current_meds": "Goserelin"
   },
   "Treatment_Changes": {
-    "recent_changes": "Start goserelin today (no auth required!); Start letrozole in about two weeks",
+    "recent_changes": "Start goserelin today (no auth required!), Start letrozole in about two weeks",
     "supportive_meds": ""
   },
   "Treatment_Goals": {
@@ -2658,7 +2781,7 @@ RESULTS FOR ROW 14
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "bilateral mastectomy with reconstruction"
+    "procedure_plan": "Bilateral mastectomy with reconstruction"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -2678,7 +2801,7 @@ RESULTS FOR ROW 14
   "Referral": {
     "Nutrition": "None",
     "Genetics": "Dr. [REDACTED] at [REDACTED]. genetics referral",
-    "Specialty": "Dr. [REDACTED] at [REDACTED]: discussed bilateral TSSM with expander/implant reconstruction",
+    "Specialty": "Discussed bilateral TSSM with expander/implant reconstruction with Dr. [REDACTED] [REDACTED] ([REDACTED]), Dr. [REDACTED] (Surgeon) discussed surgical options lumpectomy vs bilateral mastectomy, recommended genetic testing, planned double mastectomy with reconstruction with Dr. [REDACTED] [REDACTED] ([REDACTED])",
     "Others": "None",
     "follow up": "RTC one month depending on plans for surgery."
   },
@@ -2696,7 +2819,7 @@ RESULTS FOR ROW 14
     "Patient ready and able to be educated, verbalizes understanding of information/instructions given."
   ],
   "summary": [
-    "34 year old premenopausal woman with 1 to 2.2 cm grade 1 IDC, strongly ER and PR positive,"
+    "34 year old premenopausal woman with 1 to 2.2 cm grade 1 IDC, strongly ER and PR positive, and mammaprint low risk."
   ],
   "Type_of_Cancer": [
     "1 to 2.2 cm grade 1 IDC, strongly ER and PR positive"
@@ -2705,13 +2828,13 @@ RESULTS FOR ROW 14
     "1 to 2.2 cm grade 1 IDC, strongly ER and PR positive, and mammaprint low risk."
   ],
   "findings": [
-    "I reviewed the data that supports the use of ovarian suppression in woman with HR+ breast cancer under the age of 35,"
+    "1 to 2.2 cm grade 1 IDC, strongly ER and PR positive, and mammaprint low risk."
   ],
   "current_meds": [
     "Start goserelin today (no auth required!)"
   ],
   "recent_changes": [
-    "Start goserelin today (no auth required!); Start letrozole in about two weeks"
+    "Start goserelin today (no auth required!)  Start letrozole in about two weeks"
   ],
   "goals_of_treatment": [
     "We discussed the biology of her cancer, and the prevalence."
@@ -2781,16 +2904,16 @@ RESULTS FOR ROW 15
     "summary": "33 y.o. premenopausal patient with a recent diagnosis of HR+ metastatic breast cancer involving lymph nodes, presenting in consultation to discuss treatment options and to establish care."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2 equivocal metastatic adenocarcinoma, consistent with breast primary",
-    "Stage_of_Cancer": "Metastatic (Stage IV)",
-    "Distant Metastasis": "Suspected, to right cervical lymph nodes, right axillary lymph nodes",
-    "Metastasis": "Suspected, to right cervical lymph nodes, right axillary lymph nodes"
+    "Type_of_Cancer": "ER+/PR+/HER2 equivocal (IHC 2; FISH pending) adenocarcinoma, consistent with breast primary",
+    "Stage_of_Cancer": "Suspected Stage IV (de novo MBC, pending confirmation)",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "axillary, supraclavicular, and cervical lymph nodes"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral extremely dense breast tissue with no primary malignancy features on mammogram. Right axillary lymphadenopathy with calcifications noted. PET/CT shows multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) and right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI reveals marked background enhancement in both breasts, with a more confluent area in the right upper outer breast (3.5 cm). Right axillary tail mass (1.5 x 0.5 x 1.0 cm) with suggestion of susceptibility artifact on T1 imaging. Enlarged right axillary lymph nodes with cortical thickness up to 1 cm. No distant metastasis detected except for lymphadenopathy."
+    "findings": "Metastatic adenocarcinoma consistent with breast primary identified in right supraclavicular lymph node. Pathology shows CK7, GATA3, ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending). Bilateral diagnostic mammogram reveals extremely dense breast tissue with no primary malignancy features but right axillary lymphadenopathy including an enlarged calcified lymph node. Right breast ultrasound shows multiple axillary lymph nodes with cortex up to  8mm and an enlarged right axillary lymph node with calcifications. PET/CT demonstrates multiple FDG-avid right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0) in jugular chain, left Vb lymph node (0.8 cm, SUV 2.4), and multiple FDG-avid right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5). MRI breast shows marked background enhancement with the most confluent area of enhancement (3.5 cm) in right upper outer breast, posterior depth, and a superficial and smaller right axillary tail mass (1.5 x 0.5 x 1.0 cm) that may correspond to area of calcifications seen on mammogram. Markedly enlarged right axillary lymph nodes with cortical thickness up to 1 cm. Physical exam shows no masses bilaterally, no tenderness, no distention, no HSM, no tenderness over bones or joints, and no rashes or lesions."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2810,7 +2933,7 @@ RESULTS FOR ROW 15
     "medication_plan": "If HER2 positive, will need anti-HER2 therapy including chemotherapy initially. If HER2 negative, will initiate treatment with antiestrogen therapy (not chemotherapy)."
   },
   "Therapy_plan": {
-    "therapy_plan": "If confirmed to have HER2 positive disease, she would have more treatment options including chemotherapy initially. If HER2 negative, she would initiate treatment with antiestrogen therapy (not chemotherapy)."
+    "therapy_plan": "If HER2 positive, she would have more treatment options including chemotherapy initially. If HER2 negative, she would initiate treatment with antiestrogen therapy (not chemotherapy)."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -2828,7 +2951,7 @@ RESULTS FOR ROW 15
     "genetic_testing_plan": "genetic testing"
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: after additional testing has been completed"
+    "Next clinic visit": "in-person: once additional testing has been completed"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -2860,13 +2983,13 @@ RESULTS FOR ROW 15
     "33 y.o. premenopausal patient with a recent diagnosis of HR+ breast cancer metastasized to a supraclavicular lymph node, and presumptively to cervical nodes,"
   ],
   "Type_of_Cancer": [
-    "presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, and cervical lymph nodes."
+    "HER2 equivocal by IHC and the FISH is not yet resulted."
   ],
   "Stage_of_Cancer": [
     "presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, and cervical lymph nodes."
   ],
   "Distant Metastasis": [
-    "presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, and cervical lymph nodes."
+    "she has no other evidence of distant metastasis."
   ],
   "Metastasis": [
     "presumptively, she has a primary breast cancer that has metastasized to axillary, supraclavicular, and cervical lymph nodes."
@@ -2951,7 +3074,7 @@ RESULTS FOR ROW 16
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results show invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive with 96% of cells staining, PR positive with 35% of cells staining, and HER-2/neu negative with 0 cells staining. MRI of bilateral breasts revealed a large abnormality in the left breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm. PET/CT scan showed a hypermetabolic enhancing left breast mass with associated left axillary and left subpectoral nodes. The enhancing lesion in the left breast measured  3.8 x 1.3 cm with a low SUV of 1.9. Ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node with abnormal morphology, thickened cortex, and a fine needle aspiration was performed. Physical exam shows a 5 x 5.5 cm mass in the left breast extending under the nipple, originating at 12 o'clock, and a 1 cm palpable left axillary lymph node. Thyroid nodule was found to be benign."
+    "findings": "Invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive (96%), PR positive (35%), HER-2/neu negative (0%). MRI of bilateral breasts revealed a large abnormality in the left breast, over 5.3 cm in AP extent by 1.8 x 3.6 cm. PET/CT scan showed a hypermetabolic enhancing left breast mass measuring 3.8 x 1.3 cm with a low SUV of 1.9, and subcentimeter left axillary and left subpectoral nodes (largest left axillary node 0.6 cm, largest subpectoral node 0.7 cm). Ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node with abnormal morphology, thickened cortex, and a fine needle aspiration was performed. Physical exam showed a 5 x 5.5 cm mass in the left breast extending under the nipple, originating at 12 o'clock, and a 1 cm palpable left axillary lymph node. A 1 cm left supraclavicular or anterior cervical node was also noted."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -2968,10 +3091,10 @@ RESULTS FOR ROW 16
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "Future adjuvant treatment options will be discussed after her surgery."
+    "medication_plan": "Ms. [REDACTED] prefers to pursue a mastectomy up front and will discuss adjuvant treatment options after surgery."
   },
   "Therapy_plan": {
-    "therapy_plan": "[REDACTED] will pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach. After surgery, adjuvant treatment options will be discussed based on the pathology results."
+    "therapy_plan": "[REDACTED] is most likely to pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach. After surgery, adjuvant treatment options will be discussed."
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
@@ -3030,10 +3153,10 @@ RESULTS FOR ROW 16
     "Not in the note."
   ],
   "Metastasis": [
-    "On PET/CT scan there is evidence of local regional node involvement;"
+    "there is evidence of local regional node involvement"
   ],
   "findings": [
-    "Pathology results show invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive with 96% of cells staining, PR positive with 35%"
+    "Invasive lobular carcinoma, grade 2-3, measuring at least 1.5 cm, ER positive (96%), PR positive (35%), HER-2/neu negative (0%)."
   ],
   "goals_of_treatment": [
     "we will make a final decision regarding her adjuvant therapy following receipt of her pathology from her upcoming surgery."
@@ -3045,7 +3168,7 @@ RESULTS FOR ROW 16
     "Not yet on treatment — no response to assess."
   ],
   "medication_plan": [
-    "Please feel free to contact me if you have any questions regarding my evaluation or recommendations and we will make a final decision regarding her adjuvant therapy following receipt of her pathology from her upcoming surgery."
+    "she would most like to pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach."
   ],
   "therapy_plan": [
     "she would most like to pursue a mastectomy up front for this cancer and not pursue neoadjuvant treatment approach."
@@ -3054,7 +3177,7 @@ RESULTS FOR ROW 16
     "she would most like to pursue a mastectomy up front for this cancer"
   ],
   "imaging_plan": [
-    "The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node which was abnormal in morphology, with a thickened cortex"
+    "The ultrasound revealed a 1.3 x 0.7 x 1.2 cm left axillary lymph node which was abnormal in morphology,"
   ],
   "Next clinic visit": [
     "Please feel free to contact me if you have any questions regarding my evaluation or recommendations and we will make a final decision regarding her adjuvant therapy following receipt of her pathology from her upcoming surgery."
@@ -3094,7 +3217,7 @@ RESULTS FOR ROW 17
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "58 year old female with newly diagnosed stage IIb (T2N1M0) Grade 2 invasive ductal carcinoma (IDC) of the left breast, estrogen receptor positive (ER+), progesterone receptor positive (PR+), HER2 negative (HER2-). Purpose of this visit is to discuss treatment options."
+    "summary": "58 year old female with newly diagnosed stage IIb (T2N1M0) Grade 2 invasive ductal carcinoma (IDC) of the left breast, estrogen receptor positive (ER+)/progesterone receptor positive (PR+)/HER2 negative (HER2-), seeking consultation to discuss treatment options."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR+/HER2- grade 2 invasive ductal carcinoma",
@@ -3106,7 +3229,7 @@ RESULTS FOR ROW 17
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Patient has a T2N1 grade 2 invasive ductal carcinoma (IDC) with a reported Ki67 of 30%. The tumor measures 3.6 cm with + LVI and positive margins. Two out of two lymph nodes are involved, with the largest being 1.8 cm and showing extracapsular extension. Postoperative MRI shows enhancement surrounding the surgical site, suspicious for residual disease, and a 4 mm focus of enhancement in the left breast at 6 o'clock. MRI-guided biopsy of the 4 mm focus revealed proliferative fibrocystic change without atypia. Postoperative seroma in the left breast at 12 o'clock measures 8.6 x 4.6 cm with irregular peripheral enhancement, suspicious for residual disease. No axillary or internal mammary lymphadenopathy is noted. Physical exam reveals a periareolar scar and distortion in the left breast with no palpable masses in the right breast. No palpable lymphadenopathy is present."
+    "findings": "Patient has a T2N1 grade 2 IDC with a reported Ki67 of 30%. HER2 was retested on the surgical sample and showed no gene amplification by FISH. Left breast pathology after re-resection shows a possible small area of positivity at the deep margin and additional multifocal disease. MRI findings show postoperative changes in the left breast with a seroma at 12:00 extending from the nipple areolar complex to the pectoralis muscle, measuring 8.6 x 4.6 cm (AP, transverse). There is irregular peripheral enhancement along the anterolateral superior margin and posterolateral aspect of the anterior portion of the seroma, suspicious for residual disease. A 4 mm focus of enhancement in the posterior left breast at 6:00 is mildly suspicious (BI-RADS 4A). MRI-guided biopsy of this area revealed proliferative fibrocystic changes without atypia. Physical exam shows left breast with periareolar scar and distortion, no palpable lymphadenopathy."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -3129,7 +3252,7 @@ RESULTS FOR ROW 17
     "therapy_plan": "Submit authorization for TC x 6 with ONPRO support. Referral for chemotherapy teaching, port placement."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "Radiation therapy will be managed for the extent of her cancer and the possible small area of positivity at the deep margin on the re-resection sample. Likely proceed to radiation without further node sampling."
+    "radiotherapy_plan": "The patient will proceed to radiation without further node sampling."
   },
   "Procedure_Plan": {
     "procedure_plan": "port placement"
@@ -3141,10 +3264,10 @@ RESULTS FOR ROW 17
     "lab_plan": "No labs planned."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "None planned."
+    "genetic_testing_plan": "No future genetic or molecular tests are planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the document"
+    "Next clinic visit": "not mentioned"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -3154,10 +3277,10 @@ RESULTS FOR ROW 17
     "Genetics": "None",
     "Specialty": "",
     "Others": "None",
-    "follow up": "Start 07/09/17 with dignicap."
+    "follow up": "Start 07/09/17 with dignicap. Path review (review Ki67). Discuss cosmetics when the left breast is better healed."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "BRCA test negative (Ambry - not sure whether panel or only BRCA)."
+    "genetic_testing_results": "BRCA test negative (Ambry - not sure whether panel or only BRCA). HER2 was retested on the surgical sample and showed no gene amplification by FISH."
   }
 }
 
@@ -3185,10 +3308,10 @@ RESULTS FOR ROW 17
     "T2N1 grade 2 IDC"
   ],
   "findings": [
-    "Patient Active Problem List   Diagnosis   \u0007 Breast cancer, left breast   58 year old postmenopausal woman with a T2N1 grade 2 IDC with a reported Ki67 of 30%"
+    "58 year old postmenopausal woman with a T2N1 grade 2 IDC with a reported Ki67 of 30% on her core biopsy.  HER2 was retested on the surgical sample and showed no gene amplification by FISH."
   ],
   "goals_of_treatment": [
-    "Given the extent of her cancer, I would recommend adjuvant chemotherapy."
+    "We discussed types of chemotherapy, her options include AC/weekly T or TC x 4 chemotherapy."
   ],
   "goals_description": [
     "Not explicitly stated."
@@ -3203,7 +3326,7 @@ RESULTS FOR ROW 17
     "Submit authorization for TC x 6 with ONPRO support  Referral for chemotherapy teaching, port placement"
   ],
   "radiotherapy_plan": [
-    "I believe that the fascia was removed, so this will be managed by radiation therapy."
+    "Given the fact that she needs radiation already, the best approach will be radiation without further node sampling."
   ],
   "procedure_plan": [
     "We reviewed the port placement and what it will look like."
@@ -3211,11 +3334,14 @@ RESULTS FOR ROW 17
   "imaging_plan": [
     "Staging with PET/CT  Baseline echo"
   ],
+  "Next clinic visit": [
+    "Total face to face time: 70  Total counseling time: 55"
+  ],
   "follow up": [
-    "Start 07/09/17 with dignicap."
+    "Start 07/09/17 with dignicap. Path review (review Ki67). Discuss cosmetics when the left breast is better healed."
   ],
   "genetic_testing_results": [
-    "She does not know if she has had expanded panel testing or BRCA testing only."
+    "HER2 was retested on the surgical sample and showed no gene amplification by FISH."
   ]
 }
 
@@ -3249,7 +3375,7 @@ RESULTS FOR ROW 18
     "Patient type": "New patient",
     "second opinion": "yes",
     "in-person": "in-person",
-    "summary": "32 y.o. female with newly diagnosed left breast cancer (ER positive, PR negative, HER2 negative) seeking a discussion of treatment options and a second opinion."
+    "summary": "[REDACTED] [REDACTED] is a 32 y.o. female here for a discussion of treatment options for recently diagnosed left breast cancer. The cancer is ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), and Ki67 44%. She was seen in [REDACTED] today for a second opinion with Dr. [REDACTED]."
   },
   "Cancer_Diagnosis": {
     "Type_of_Cancer": "ER+/PR-/HER2- grade 2 invasive ductal carcinoma",
@@ -3261,7 +3387,7 @@ RESULTS FOR ROW 18
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Pathology results: Grade 2 invasive ductal carcinoma measuring 8mm, ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, Mammaprint High Risk (-0.622). Imaging findings: MRI of the left breast shows a 2.5 cm x 2.2 cm x 2.3 cm oval mass with irregular margins and heterogeneous enhancement in the lower outer quadrant. At least two abnormal lymph nodes in the left axilla level I and I/II with cortical thickening, measuring up to 6 mm. Right breast MRI shows a 9 mm oval mass with smooth margins and dark internal septation, consistent with fibroadenoma. No abnormal areas of enhancement or other MRI features of malignancy identified in the right breast. Physical exam findings: No palpable lymphadenopathy noted during physical exam."
+    "findings": "Left breast mass measuring 2.5 cm x 2.2 cm x 2.3 cm with irregular margins and heterogeneous enhancement. At least two abnormal lymph nodes in the left axilla level I and I/II with cortical thickening, measuring up to  6 mm. Right breast MRI shows a 9 mm oval mass with smooth margins and dark internal septation, consistent with fibroadenoma. No abnormal areas of enhancement or other MRI features of malignancy identified in the right breast. Core biopsy of the left breast mass revealed a grade 2 invasive ductal carcinoma measuring 8mm, ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%. Repeat FNA of the left axillary lymph node showed benign results with no malignant cells identified. Bilateral breast MRI demonstrates mild background enhancement. No palpable lymphadenopathy noted on physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -3278,16 +3404,16 @@ RESULTS FOR ROW 18
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient will receive at least five years of adjuvant hormonal therapy due to her estrogen receptor positive status. The specific hormonal therapy will be discussed after surgery, with potential options including and ovarian suppression. No specific agents or dosages were detailed beyond this general plan"
+    "medication_plan": "Patient will receive at least five years of adjuvant hormonal therapy. The patient will have a more thorough discussion regarding the choice of hormonal therapy after surgery. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to in preventing distant recurrence. The patient will be educated further on the choice of hormonal therapy after surgery"
   },
   "Therapy_plan": {
-    "therapy_plan": "Chemotherapy will be considered based on nodal status at the time of surgery; if node negative, Taxotere and Cytoxan will be recommended, whereas if node positive, AC-Taxol will be recommended. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to in preventing distant recurrence. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery"
+    "therapy_plan": "Chemotherapy will be recommended; if the patient is node negative at the time of surgery, Taxotere and Cytoxan will be considered, whereas if she is node positive, she should get AC-Taxol. The patient will receive at least five years of adjuvant hormonal therapy. The updated data from the SOFT and TEXT trials suggests that for premenopausal patients who recover ovarian function after chemotherapy, the combination of ovarian suppression and an aromatase inhibitor is superior to in terms of preventing distant recurrence. A more thorough discussion regarding the choice of hormonal therapy will occur after surgery"
   },
   "radiotherapy_plan": {
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "Patient will proceed with mastectomy."
+    "procedure_plan": "mastectomy"
   },
   "Imaging_Plan": {
     "imaging_plan": "No imaging planned."
@@ -3299,7 +3425,7 @@ RESULTS FOR ROW 18
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "Not specified in the given note"
+    "Next clinic visit": "Not explicitly mentioned"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -3309,10 +3435,10 @@ RESULTS FOR ROW 18
     "Genetics": "None",
     "Specialty": "None",
     "Others": "None",
-    "follow up": "Patient to undergo a second FNA of the left axillary LNs, proceed with mastectomy, and further surgical/oncological management."
+    "follow up": "Treatment options, side effects, clinical trials, and follow up plan were reviewed in detail."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "Germline testing: ATM gene mutation (c1109dup (p.Tyr370*) heterozygous). Tumor genomic testing: ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%, MammaPrint High Risk (-0.622)"
+    "genetic_testing_results": "Myriad myRisk panel identified a mutation in the ATM gene (c1109dup (p.Tyr370*) heterozygous). MammaPrint from prior core biopsy came back as High Risk (-0.622)."
   }
 }
 
@@ -3322,7 +3448,7 @@ RESULTS FOR ROW 18
     "Total face to face time: 60 minutes  Total counseling time: 45 minutes"
   ],
   "summary": [
-    "32 y.o. female ATM mutation carrier with a clinical T2NX ER+/PR-/HER2 negative left breast."
+    "[REDACTED] [REDACTED] is a 32 y.o. female ATM mutation carrier with a clinical T2NX ER+/PR-/HER2 negative left breast."
   ],
   "Type_of_Cancer": [
     "clinical T2NX ER+/PR-/HER2 negative left breast"
@@ -3335,9 +3461,6 @@ RESULTS FOR ROW 18
   ],
   "Metastasis": [
     "the patient underwent a second FNA of the left axillary LNs and it again showed no cancer."
-  ],
-  "findings": [
-    "clinical T2NX ER+/PR-/HER2 negative"
   ],
   "goals_of_treatment": [
     "Because her breast cancer is estrogen receptor positive, she understands that she will receive at least five years of adjuvant hormonal therapy."
@@ -3357,11 +3480,14 @@ RESULTS FOR ROW 18
   "procedure_plan": [
     "Because of her ATM mutation, radiation oncology has recommended that she proceed with mastectomy rather than breast conserving surgery."
   ],
+  "Next clinic visit": [
+    "Total face to face time: 60 minutes  Total counseling time: 45 minutes"
+  ],
   "follow up": [
-    "the patient underwent a second FNA of the left axillary LNs and it again showed no cancer. Because of her ATM mutation, radiation oncology has recommended that she proceed with mastectomy"
+    "Treatment options, side effects, clinical trials, and follow up plan were reviewed in detail."
   ],
   "genetic_testing_results": [
-    "ATM mutation carrier with a clinical T2NX ER+/PR-/HER2 negative left breast."
+    "Because of her ATM mutation, radiation oncology has recommended that she proceed with mastectomy rather than breast conserving surgery."
   ]
 }
 
@@ -3395,11 +3521,11 @@ RESULTS FOR ROW 19
     "Patient type": "Follow up",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast s/p NAHT, s/p bilateral mastectomies, s/p adjuvant tamoxifen [REDACTED]/[REDACTED]-[REDACTED]/[REDACTED], currently on exemestane for ongoing management."
+    "summary": "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast s/p NAHT, s/p bilateral mastectomies, s/p adjuvant tamoxifen [REDACTED]/[REDACTED]-[REDACTED]/[REDACTED], currently on exemestane. Purpose of this visit is to continue management and discuss ongoing treatment plan."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with DCIS component",
-    "Stage_of_Cancer": "Clinical stage 2-3",
+    "Type_of_Cancer": "ER+/PR-/HER2- grade 2 and grade 3 invasive ductal carcinoma (IDC) with LCIS focally. HER2 negative by FISH.",
+    "Stage_of_Cancer": "Originally Clinical stage 2-3",
     "Distant Metastasis": "No",
     "Metastasis": "No"
   },
@@ -3407,7 +3533,7 @@ RESULTS FOR ROW 19
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Patient is NED (no evidence of disease) on physical exam. Patient is considering bilateral salpingo-oophorectomy (BSO) after 5 years of ovarian suppression and aromatase inhibitor (AI) therapy."
+    "findings": "Patient is NED (no evidence of disease) on physical exam. Patient is considering bilateral salpingo-oophorectomy (BSO) after 5 years of ovarian suppression (OS)/AI therapy."
   },
   "Current_Medications": {
     "current_meds": "exemestane, Goserelin"
@@ -3424,7 +3550,7 @@ RESULTS FOR ROW 19
     "response_assessment": "NED on exam"
   },
   "Medication_Plan": {
-    "medication_plan": "Continue exemestane 25mg daily. Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months. Continue q6months exams, no imaging given bilateral mastectomies. Follow up with local psych for ongoing support as needed.; also: ondansetron"
+    "medication_plan": "Continue exemestane 25mg daily. Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months. needs DEXA scan now and every 2 years. If osteopenia can consider adding bisphosphonate. Follow up with local psych for ongoing support as needed.; also: ondansetron"
   },
   "Therapy_plan": {
     "therapy_plan": "Continue exemestane 25mg daily. Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months."
@@ -3433,19 +3559,19 @@ RESULTS FOR ROW 19
     "radiotherapy_plan": "None"
   },
   "Procedure_Plan": {
-    "procedure_plan": "No procedures planned."
+    "procedure_plan": "Cyst aspiration of the larger cyst could be performed if pain persists."
   },
   "Imaging_Plan": {
     "imaging_plan": "DEXA scan now and every 2 years"
   },
   "Lab_Plan": {
-    "lab_plan": "Check estradiol level to ensure ovarian suppression, if suppressed can check q3months."
+    "lab_plan": "Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months"
   },
   "Genetic_Testing_Plan": {
     "genetic_testing_plan": "None planned."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: 6 months or sooner if she has new or worsening symptoms"
+    "Next clinic visit": "in-person: Follow-up in 6 months or sooner if she has new or worsening symptoms."
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -3458,7 +3584,7 @@ RESULTS FOR ROW 19
     "follow up": "Follow-up in 6 months or sooner if she has new or worsening symptoms."
   },
   "Genetic_Testing_Results": {
-    "genetic_testing_results": "HER2 negative by FISH, MammaPrint low risk IDC of the left breast, ER 61-70%, PR negative, Ki-67 15-20%, ER 41-50%, PR 1-10%, Ki-67 30-40%, +LCIS focally."
+    "genetic_testing_results": "HER2 negative by FISH. ER 61-70%, PR negative, Ki-67 15-20%. ER 41-50%, PR 1-10%, Ki-67 30-40%. +LCIS focally. Mammaprint - low risk IDC of the left breast."
   }
 }
 
@@ -3477,7 +3603,7 @@ RESULTS FOR ROW 19
     "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast s/p NAHT, s/p bilateral mastectomies, s/p adjuvant tamoxifen"
   ],
   "Type_of_Cancer": [
-    "ER+/PR-/HER2- left breast cancer, mammaprint low risk IDC of the left breast"
+    "ER+/PR-/HER2- left breast cancer"
   ],
   "Distant Metastasis": [
     "she is considering BSO which is reasonable since she will likely be in natural menopause after 5 years of OS/AI."
@@ -3508,6 +3634,9 @@ RESULTS FOR ROW 19
   ],
   "therapy_plan": [
     "Continue exemestane 25mg daily. We discussed continuing AI for at least 5 years.   -Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months"
+  ],
+  "procedure_plan": [
+    "Cyst aspiration of the larger cyst could be performed if pain persists."
   ],
   "imaging_plan": [
     "needs DEXA scan now and every 2 years."
@@ -3556,19 +3685,19 @@ RESULTS FOR ROW 20
     "Patient type": "New patient",
     "second opinion": "no",
     "in-person": "in-person",
-    "summary": "Premenopausal female with recently diagnosed bilateral breast cancer (right breast ER+, PR+, HER2 positive; left breast ER+, PR+, HER2 negative) presenting for initial consult to discuss treatment options and management plan."
+    "summary": "44 y.o. female with bilateral breast cancer (right breast ER+, PR+, HER2 positive, Ki67 40%; left breast ER+, PR+, HER2  0) presenting for a return visit to the breast cancer center for initial consult regarding her recently diagnosed early stage breast cancer."
   },
   "Cancer_Diagnosis": {
-    "Type_of_Cancer": "ER+/PR+/HER2+ invasive carcinoma with some lobular differentiation",
+    "Type_of_Cancer": "ER+/PR+/HER2 positive invasive carcinoma with some lobular differentiation (right breast); ER+/PR+ HER2 0 (left breast)",
     "Stage_of_Cancer": "Not staged in note (locally advanced; distant lesions unconfirmed)",
-    "Distant Metastasis": "Suspected (liver and lung nodules pending confirmation)",
-    "Metastasis": "Not sure"
+    "Distant Metastasis": "Suspected (liver and lung nodules, no confirmation of metastatic disease)",
+    "Metastasis": "Suspected (liver and lung nodules, no confirmation of metastatic disease)"
   },
   "Lab_Results": {
     "lab_summary": "No labs in note."
   },
   "Clinical_Findings": {
-    "findings": "Bilateral breast cancer with right breast tumor measuring 7.3 cm and left breast tumor measuring 6 cm. Pathology shows right breast: ER+, PR+, HER2 positive, Ki67 40%; left breast: e-cadherin +, ER+, PR+, HER2  0. Physical exam reveals right breast mass 12 x 9 cm, slightly red, no longer mobile; left breast mass 10 x 6 cm, slightly mobile. Imaging shows liver and lung nodules of unclear significance, no confirmed metastatic disease. No cervical, supraclavicular, axillary, or inguinal adenopathy noted."
+    "findings": "Bilateral breast cancer with right breast tumor measuring 7.3 cm and left breast tumor measuring 6 cm. Right breast mass is now fixed and slightly red. Left breast mass is slightly mobile. Pathology shows right breast: ER+, PR+, HER2 positive, Ki67 40%. Left breast: e-cadherin +, ER+, PR+, HER2  0. Imaging shows liver and lung nodules of unclear significance. No biopsies and no confirmation of metastatic disease. No cervical, supraclavicular, axillary, or inguinal adenopathy noted on physical exam."
   },
   "Current_Medications": {
     "current_meds": ""
@@ -3585,16 +3714,16 @@ RESULTS FOR ROW 20
     "response_assessment": "Not yet on treatment — no response to assess."
   },
   "Medication_Plan": {
-    "medication_plan": "The patient is a candidate for adjuvant therapy with a HER2 targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for 4 cycles each or six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy. Supportive medications and side effect management will be discussed in detail upon final decision."
+    "medication_plan": "The patient is a candidate for adjuvant therapy with a HER2 targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for  4 cycles each or six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy."
   },
   "Therapy_plan": {
-    "therapy_plan": "The patient is a candidate for adjuvant therapy with a HER2-targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for 4 cycles each or, preferably, six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy. Once the patient has completed surgery, preparatory studies for chemotherapy will be initiated, which may include a port-a-cath, echocardiogram, and appropriate laboratory and staging studies. The patient will receive radiation to both breasts. The patient will be monitored for side effects, including fevers, myelosuppression, cardiac risks, and death. After 2 cycles, the patient will have a follow-up."
+    "therapy_plan": "The patient is a candidate for adjuvant therapy with a HER2-targeting approach and a chemotherapy backbone. Options include an anthracycline followed by a taxane for  4 cycles each or, preferably, six cycles of docetaxel and carboplatin. Pertuzumab and Trastuzumab will be given for a total of 1 year. Hormonal therapy will not start until completion of chemotherapy and radiation therapy. Once the patient has completed surgery, preparatory studies for chemotherapy will be initiated, which may include a port-a-cath, echocardiogram, and appropriate laboratory and staging studies. Radiation to both breasts is planned. After 2 cycles, the patient will have a follow-up visit."
   },
   "radiotherapy_plan": {
-    "radiotherapy_plan": "radiation to both breasts"
+    "radiotherapy_plan": "Radiation to both breasts is planned after the patient completes surgery and other therapies."
   },
   "Procedure_Plan": {
-    "procedure_plan": "Port placement planned."
+    "procedure_plan": "Once the patient has completed surgery"
   },
   "Imaging_Plan": {
     "imaging_plan": "Follow up PET/CT"
@@ -3603,10 +3732,10 @@ RESULTS FOR ROW 20
     "lab_plan": "Once the patient has completed surgery we will initiate all preparatory studies for chemotherapy which may include a port a cath, ECHO cardiogram and appropriate laboratory and staging studies."
   },
   "Genetic_Testing_Plan": {
-    "genetic_testing_plan": "Germline panel pending"
+    "genetic_testing_plan": "FISH assessment is planned to confirm the current diagnosis."
   },
   "follow_up_next_visit": {
-    "Next clinic visit": "in-person: after 2 cycles"
+    "Next clinic visit": "after 2 cycles: to review treatment options and side effects in detail"
   },
   "Advance_care_planning": {
     "Advance care": "Not discussed during this visit."
@@ -3629,7 +3758,10 @@ RESULTS FOR ROW 20
     "TIME SPENT FACE TO FACE WITH PATIENT: >80 min"
   ],
   "summary": [
-    "This is a premenopausal patient with a recent diagnosis of a bilateral breast cancer measuring >10 and 9 cam  cm and involving unknown number lymph nodes: The tumor is ER-+ on both sides and HER2 positive on the right."
+    "44 y.o. premenopausal female who returns to clinic for follow up of her breast cancer"
+  ],
+  "Type_of_Cancer": [
+    "The tumor is ER-+ on both sides and HER2 positive on the right."
   ],
   "Stage_of_Cancer": [
     "Follow up on lung and liver lesions"
@@ -3641,7 +3773,7 @@ RESULTS FOR ROW 20
     "Follow up on lung and liver lesions"
   ],
   "findings": [
-    "This is a premenopausal patient with a recent diagnosis of a bilateral breast cancer measuring >10 and 9 cam  cm and involving unknown number lymph nodes: The tumor is ER-+ on both sides and HER2 positive on the right."
+    "Bilateral breast cancer measuring >10 and 9 cam  cm"
   ],
   "goals_of_treatment": [
     "the patient a candidate for adjuvant therapy."
@@ -3662,7 +3794,7 @@ RESULTS FOR ROW 20
     "radiation to both breast"
   ],
   "procedure_plan": [
-    "Once the patient has completed surgery we will initiate all preparatory studies for chemotherapy which may include a port a cath,"
+    "Once the patient has completed surgery we will initiate all preparatory studies for chemotherapy"
   ],
   "imaging_plan": [
     "Follow up PET/CT"
@@ -3670,8 +3802,11 @@ RESULTS FOR ROW 20
   "lab_plan": [
     "Once the patient has completed surgery we will initiate all preparatory studies for chemotherapy which may include a port a cath, ECHO cardiogram and"
   ],
+  "genetic_testing_plan": [
+    "All recommendation will be adjusted after final pathology diagnosis, review of path from her original tumor, FISH assessment and final size and lymph node involvement as well as the ultimate surgical approach."
+  ],
   "Next clinic visit": [
-    "Follow up: after 2 cycles"
+    "Follow up: after 2 cycles  Reviewed treatment options, treatment side effects in detail."
   ],
   "follow up": [
     "The patient should have a follow up PET/CT. Follow up: after 2 cycles."
