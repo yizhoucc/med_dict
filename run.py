@@ -281,6 +281,29 @@ def load_config(yaml_path):
         with open(full_path, "r") as f:
             config["_prompts"][key] = yaml.safe_load(f)
 
+    # Shared EXTRACTION-OVER-INFERENCE principle, prepended to every extraction and plan
+    # field prompt (user intent 2026-06-18). One injection point keeps it uniform and easy
+    # to revert. Goal: prefer extracting what the note states; when unsure, do NOT force a
+    # tidy "none/no change" conclusion (list the relevant detail instead); mark confident
+    # inferences with (parentheses) so they are not mistaken for stated facts.
+    _EXTRACTION_PRINCIPLE = (
+        "EXTRACTION OVER INFERENCE — read before the task below:\n"
+        "1. Extract what the note actually states for this field. Do not summarize it away or "
+        "infer a conclusion the note does not support.\n"
+        "2. When you are NOT confident, do NOT force a tidy 'none / no / not mentioned / no change' "
+        "answer. If the note contains anything relevant to this field, extract and list that "
+        "concrete detail and let the reader judge. Only use a 'none'/'not mentioned' fallback when "
+        "the note genuinely contains nothing for this field.\n"
+        "3. When you do make an inference you are confident about, put it in (parentheses) so it is "
+        "clearly marked as inferred rather than stated in the note.\n\n"
+    )
+    for _grp in ("extraction", "plan_extraction"):
+        grp_prompts = config["_prompts"].get(_grp)
+        if isinstance(grp_prompts, dict):
+            for _k, _v in grp_prompts.items():
+                if isinstance(_v, str):
+                    grp_prompts[_k] = _EXTRACTION_PRINCIPLE + _v
+
     return config
 
 

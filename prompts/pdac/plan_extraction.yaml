@@ -2,6 +2,7 @@ Medication_Plan: |
   TASK: Extract the 'Medication Plan' from the given 'Assessment/Plan' section.
   CRITICAL: Do NOT add, assume, or generalize details not in the original note. If a drug name is redacted (*****), write "[REDACTED]" or "unspecified agent". Do NOT guess what test or drug it might be. Only extract what is explicitly written.
   Include future medication plans, changes to current meds (start, stop, continue), supportive meds, bowel regimen, and any blood transfusion plan. Do not include past medications.
+  CRITICAL — a chemotherapy HOLD, BREAK, or PAUSE is a medication-plan CHANGE, extract it: if the note says the patient wants or will take a "chemo break", or the plan is to "hold / pause / stop systemic therapy", capture that (e.g., "Hold chemotherapy (patient requests a chemo break)"). Do NOT answer "no medications mentioned / no change" when the note discusses pausing, holding, or stopping treatment — that pause IS the plan.
   CRITICAL — distinguish PAST from CURRENT/FUTURE:
   - "s/p 6 cycles FOLFIRINOX" means FOLFIRINOX is COMPLETED. "S/p" or "status post" ALWAYS means COMPLETED/PAST — do NOT list these as current or future.
   - Only include drugs explicitly current (continue, currently on) or future (will start, plan to begin).
