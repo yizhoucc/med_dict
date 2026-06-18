@@ -265,3 +265,21 @@ Round 5 commits: 2b6fcf2f(A) → a894384b/0fb25ec1(B) → 5704b251(C) → 682f2c
 **当前题集**：乳腺 16 题（去 patient_type/goals/summary，保留 Q6 受体）；胰腺 15 题（再去 Q6 受体）。scoring 总计 **620 题**（乳腺 16×20 + 胰腺 15×20）。figs 同步排除 PDAC 的 type_receptor（scored 618，PL 110 / 打平 498 / BL 10）。localStorage key 升至 v4。
 
 **[BACKLOG] prompt 改动（本轮未做，待开 WSL/vLLM 重跑全 40）**：让模型多 extract 少 infer——有信心的 infer 用括号括起来，没信心的不硬下结论（直接列证据让医生判断）。目标是消除 Q13 那类"把有变化 infer 成无变化"的错误总结。改 `prompts/pdac/extraction.yaml` + `prompts/extraction.yaml` 后需重跑→重新审查→重生成所有 HTML/图。
+
+---
+
+## 2026-06-18 完成 prompt 改动 + 全 40 重跑 + 重审（上面 BACKLOG → DONE）
+
+**改动**：
+1. `run.py`：在 prompt 加载处统一注入"EXTRACTION OVER INFERENCE"原则到**每个** extraction + plan 字段 prompt（单注入点）：优先抽取原文事实；没信心时不硬下"none/no change"结论、改列相关细节；有信心的 infer 用(括号)标注。
+2. `prompts/plan_extraction.yaml` + `prompts/pdac/plan_extraction.yaml` 的 `Medication_Plan`：chemo hold/break/pause 是一种 plan 变化，必须抽取，不许答"no medications"。
+
+**重跑**：WSL（RTX 5090）启 vLLM(Qwen2.5-32B-AWQ) → `exp/fix_breast_nl.yaml` + `exp/fix_pdac_nl.yaml` 全 40 重跑（~30 分钟）→ 新 FINAL 覆盖 `pipeline_{breast,pdac}_FINAL.txt`。
+
+**验证关键修复**：pdac ROW1 medication_plan 从 "No specific medications…"（错误 infer）→ **"Hold chemotherapy (patient requests a chemo break)"**（正确 extract）。
+
+**重审**：8 个 subagent 重审新提取（`_audit_v6/verdicts.json`），主审复核：
+- pdac15 type "Poorly differentiated" 与术后病理 "moderately-differentiated" 矛盾（PL grade 误）= 残留 P1；但**胰腺不评 type/受体题**，故不计入评分集，仅记录。
+- b1 type PL 值正确(三阴/HER2-)但附 FISH 明细略啰嗦 → 校准为 TIE（非 BL）。
+
+**重审结果（当前 16/15 题集）**：scored 618，**PL 131 / 打平 475 / BL 12**；verdict HTML 计 PL 138 / 打平 2 / BL 12。BL 12 题均为次要计划/摘要字段的零星遗漏或边界判断，无幻觉。核心护城河（current_meds 抗癌识别、分期、分子结果）PL 无一败。已重生成 scoring/verdict/review HTML + 6 图。

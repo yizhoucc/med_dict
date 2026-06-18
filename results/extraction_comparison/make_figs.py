@@ -51,7 +51,7 @@ plb = parse_pl(os.path.join(HERE, "pipeline_breast_FINAL.txt"))
 plp = parse_pl(os.path.join(HERE, "pipeline_pdac_FINAL.txt"))
 blb = parse_bl(os.path.join(HERE, "baseline_extract_breast_json.txt"))
 blp = parse_bl(os.path.join(HERE, "baseline_extract_pdac_json.txt"))
-V = json.load(open(os.path.join(HERE, "_audit_v5", "verdicts.json")))
+V = json.load(open(os.path.join(HERE, "_audit_v6", "verdicts.json")))
 vd = {}
 for c in ("b", "p"):
     for v in V[c]:

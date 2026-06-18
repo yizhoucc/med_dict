@@ -144,7 +144,7 @@ def main():
     plp = parse_pl(os.path.join(HERE, "pipeline_pdac_FINAL.txt"))
     blb = parse_bl(os.path.join(HERE, "baseline_extract_breast_json.txt"))
     blp = parse_bl(os.path.join(HERE, "baseline_extract_pdac_json.txt"))
-    V = json.load(open(os.path.join(HERE, "_audit_v5", "verdicts.json")))
+    V = json.load(open(os.path.join(HERE, "_audit_v6", "verdicts.json")))
     tb, bb, ta, bwa = build("b", plb, blb, V["b"])
     tp, bp, tpa, bwp = build("p", plp, blp, V["p"])
 
@@ -235,7 +235,7 @@ pre.note{white-space:pre-wrap;word-break:break-word;background:#f7f7f7;border:1p
 <div class="blbox-top">
   <b>诚实披露 · 全部 {TOT['BL']} 个 “PL 不如 BL” 的题（PL 待改进点）：</b>
   <ul>{bl_list}</ul>
-  <div style="margin-top:8px;color:#555">说明：这 {TOT['BL']} 题里，多数是<b>次要计划字段</b>的遗漏（影像/化验子计划 B10/B13/B16/P18、化验摘要 B12），另有 5 个<b>边界临床判断</b>：B20 双侧乳腺 PL 只标了右侧 HER2+（漏左侧 HER2−）、B16 区域淋巴结 PL 漏标、P3 疗效 PL 措辞自相矛盾、P7 PL 漏 Gyn-Onc 转诊、P11 试验筛查程序。<b>全部 11 题均非幻觉</b>（无凭空编造）。<br>最强护城河字段——<b>现用药“抗癌 vs 非癌家用药”识别（PL 全胜，BL 几乎每例都把降压/降糖/止痛家用药误当抗癌药）、分期、远处转移、分子/遗传结果、治疗目标方向</b>——PL 无一败于 BL。</div>
+  <div style="margin-top:8px;color:#555">说明：这 {TOT['BL']} 题里，多数是<b>次要计划/摘要字段</b>的零星遗漏（影像/化验/操作子计划、化验摘要、支持用药），另有几个<b>边界临床判断</b>（如区域淋巴结措辞、疗效是否点出进展、远处转移是否列全脾）。<b>全部均非幻觉</b>（无凭空编造）。详见下方每条具体理由。<br>最强护城河字段——<b>现用药“抗癌 vs 非癌家用药”识别（PL 全胜，BL 几乎每例都把降压/降糖/止痛家用药误当抗癌药）、分期、分子/遗传结果</b>——PL 无一败于 BL。</div>
 </div>
 <div class="legend">
   <b>深度分级：</b><span class="tier t-good">优·需医学知识</span> 需专业背景才能答对（药物抗癌/支持区分、分期、转移、疗效、受体、分子）；<span class="tier t-mid">评·中</span>；<span class="tier t-low">一般</span>（就诊原因/治疗目标方向/化验数值，普通人可答，医生兴趣低）。<b>评审重点放在“优”级题。</b>
