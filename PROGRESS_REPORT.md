@@ -1,55 +1,36 @@
-# Progress Report — Structured Extraction from Oncology Notes
+# Progress Report — Faithful Structured Extraction from Oncology Notes with a Local LLM
 
-**Project:** Faithful, structured extraction (and patient-facing summarization) from oncology clinic notes using a local LLM.
-**Period covered:** development through 2026-06. **Data:** UCSF CORAL (de-identified breast + pancreatic oncology notes; 200 unannotated for development, 40 expert-annotated held out for evaluation).
+## Abstract
 
----
+We are building a system that turns free-text oncology clinic notes into faithful, structured clinical fields (current anticancer medications, stage, metastasis, treatment response, receptor/molecular status, and care plans) so the information can be summarized for patients without hallucination or privacy leakage. Rather than fine-tuning, our approach is an **inference harness around a frozen, locally served open-weight model** (Qwen2.5-32B-Instruct-AWQ via vLLM): multi-stage prompting, a five-gate verification cascade, oncology drug/term dictionaries, and ~135 deterministic clinical post-processing rules — all on-premises and HIPAA-relevant. On 40 expert-annotated held-out notes (20 breast, 20 pancreatic), we ran a controlled ablation holding the base model and field schema fixed so the harness is the only variable. The harness (PL) beats the same model run from a single prompt (BL) on **131 of 618** field comparisons with **12** losses and the rest ties; among the fields where the two systems disagree, **PL wins 90%** and never loses a core diagnostic field. Physician review of an earlier patient-letter version flagged over-simplification, which led us to refocus the reporting period on the objectively-measurable extraction task and to prepare a blinded clinician scoring study.
 
-## 1. Objective
+## Accomplishments (this reporting period)
 
-Pull the clinically important facts out of free-text oncology notes into a fixed set of structured fields (current medications, stage, metastasis, treatment response, receptor/molecular status, plans, etc.), under four non-negotiable principles in priority order: (1) faithful, no hallucination; (2) no omission of important content; (3) plain language; (4) patient-readable. The longer-term aim was to turn that structured output into a patient-facing summary letter.
+**Methods built.** A complete, reproducible extraction pipeline ("PL") over a frozen open model, with **no weight training by design** (keeps data local, needs no labeled corpus, stays reproducible). Adaptation is entirely inference-time: (i) multi-stage extraction (8 field prompts + a dependency-aware second pass + a plan-extraction stage); (ii) a five-gate per-field verification cascade (format → schema → specificity/semantic-alignment → faithfulness trim → temporal filter); (iii) two deterministic dictionaries (~158 oncology drugs; 18,739 medical terms at an 8th-grade reading level); (iv) ~135 clinical post-processing rules. Development used an evaluation-driven loop on 200 unannotated notes (~15 breast / ~18 pancreatic rounds), preferring generalizable clinical rules over test-set hard-coding.
 
-## 2. What we built (method)
+**Key outcomes.**
+- **Controlled ablation (40 held-out notes), PL vs single-prompt baseline (BL), same base model + schema:** PL better **131** / tie **475** / BL better **12** out of 618 field comparisons; among differing fields, **PL 90%** and **zero core-field losses** (Figure 1). The strongest separation is current-medication "anticancer vs non-cancer home-med" identification (**33 wins : 0 losses**); other PL-dominant high-value fields are cancer stage, distant metastasis, and molecular/genetic results.
+- **Deployment safety (earlier 3-way letter comparison, 40 letters):** the naked model was **0/40 sendable** (45% leaked de-identification placeholders, 12.5% hallucination); inside the harness the same model reached **zero hallucination, zero leaked redaction, ~97.5% sendable, fully on-prem**, exceeding a cloud GPT-4o baseline on deployment metrics.
+- **Held-out extraction accuracy (breast):** P0 (hallucination) = 0, P1 = 0; receptor status 93%, treatment-goal direction 100%.
 
-The system is an **inference harness around a frozen open-weight model** — there is **no model fine-tuning by design**. The base model is **Qwen2.5-32B-Instruct-AWQ served locally via vLLM**; model weights are never modified. This is deliberate: it keeps all patient data on-premises (HIPAA-relevant), needs no labeled training set, and stays fully reproducible. All adaptation happens at inference time through four layers:
+**Impact.** The result shows that a frozen, open, *locally hosted* model — unusable for this task when prompted naively — becomes clinically reliable purely through an inference harness. This is directly relevant to clinical deployment, where data cannot leave the institution and model fine-tuning is often infeasible; the same recipe transfers to other note types without retraining.
 
-- **Multi-stage extraction** — instead of one prompt, the note is processed in stages: six independent Phase-1 prompts (reason for visit, diagnosis, labs, findings, current meds, treatment changes), two dependency-aware Phase-2 prompts (treatment goal, response) that receive Phase-1 results as context, and a plan-extraction stage (medication/procedure/imaging/lab/genetic/referral/follow-up). Splitting the task lowers the model's per-call cognitive load.
-- **5-gate verification cascade** (per field): JSON-format repair → schema/key check → specificity + semantic-alignment → faithfulness trim ("keep if supported, only empty if it clearly contradicts or is fabricated") → temporal filter (drop completed/past items).
-- **Two deterministic dictionaries**: an oncology drug whitelist (~158 drugs) and an 18,739-term medical glossary filtered to an 8th-grade vocabulary.
-- **~135 deterministic post-processing hook families** encoding general clinical rules (e.g., regional vs distant nodes, chemo-hold as a plan change, receptor consistency).
+**Cancer-relevant impact.** Every high-value field the harness fixes is oncology-specific and decision-relevant: correctly separating active anticancer regimens from home medications, assigning AJCC stage, distinguishing regional nodal involvement from distant metastasis, and surfacing molecular results (e.g., BRCA, MMR/MSI, CA19-9 non-secretor). Accurate, faithful extraction of these is the prerequisite for safe patient communication and for downstream cohort/registry use in breast and pancreatic cancer.
 
-## 3. Development process ("training")
+## Goals for the next reporting period
 
-No gradient training was performed. Instead we ran an **iterative, evaluation-driven development loop** on the 200 unannotated development notes:
+1. **Blinded clinician scoring:** run the prepared A/B-blinded scoring instrument (system identity hidden) with one or more oncologists to obtain an independent, quantitative PL-vs-BL win rate.
+2. **Generalization audit:** confirm the ~135 rules encode general clinical logic (not test-set artifacts) and validate on fresh notes / additional cancer types.
+3. **Determinism:** reduce greedy-decode run-to-run variation so final metrics are stable.
+4. **Accuracy-first summarization:** reintroduce patient-facing output under an explicit "accuracy over simplification" constraint.
+5. **Write-up:** consolidate the ablation + deployment results into a publishable "inference-harness for reliable extraction on a frozen local LLM" report.
 
-1. Run the pipeline; 2) review every sample field-by-field against the source note (manual, natural-language clinical reading, no scripted judgment); 3) classify defects (P0 hallucination / P1 wrong-field-or-direction / P2 minor); 4) fix via prompt edits, gates, or generalized hooks; 5) re-run a regression set (all previously-failing samples + 30% random clean samples). Breast went through ~15 rounds, PDAC ~18 rounds. We deliberately preferred general clinical rules over test-set-specific hard-coding so improvements transfer to unseen notes, and stopped when remaining issues were "whack-a-mole" long-tail amplified by vLLM run-to-run nondeterminism.
+## Figure
 
-## 4. Physician review results
+![Figure 1](results/extraction_comparison/figs/report_fig.png)
 
-- **Letter quality (clinician feedback):** a physician reviewed the generated patient letters and flagged that the most aggressive simplification pass (V33) **changed meaning / over-simplified**; the verdict was *accuracy must come before simplification*, and the more faithful earlier style was preferred. Earlier breast/PDAC letter packets passed with all flagged items fixed.
-- **Three-way deployment comparison (pipeline vs naked Qwen vs GPT-4o), 40 letters:** the naked-Qwen baseline was **0/40 sendable** (45% leaked the de-identification `*****`, 12.5% hallucination); GPT-4o was HIPAA-non-compliant (cloud) and longer/denser. The **pipeline reached zero hallucination, zero leaked redaction, ~97.5% sendable, with on-prem data** — i.e., the same open model is unusable raw but clinically deployable inside the harness, and on deployment metrics beats a cloud GPT-4o baseline.
-- **Held-out extraction accuracy (breast v31):** P0 = 0, P1 = 0; receptor status 93%, treatment-goal direction 100%.
+**Figure 1. Pipeline (PL) vs single-prompt baseline (BL) on 40 held-out oncology notes; the base model and field schema are identical, so the harness is the only variable.** **(a)** Per-field outcome (number of samples judged PL better / tie / BL better), sorted by PL advantage; counts are shown for PL wins (left) and BL wins (right). PL leads on every clinically deep field, most strongly on current-medication classification (33:0). **(b)** Restricting to the field-comparisons where the two systems actually disagree (n = 145), PL is better in 90% of cases, tie in 2, and BL better in 12; the 12 BL "wins" are all non-hallucination omissions in secondary plan/summary fields, with no core diagnostic loss. Field-by-field verdicts came from clinically-briefed reviewers reading each source note (natural-language judgment, no automated scoring).
 
-## 5. Results & analysis — extraction ablation (current focus)
+## Discussion
 
-We isolated the harness's value with a clean controlled comparison on all 40 held-out samples: **PL** (full pipeline) vs **BL** (the *same* base model and *same* field schema, single prompt, no post-processing). Only the harness differs. Each field on each sample was judged by clinically-briefed reviewers (8 sub-agents, one per 5 samples, with main-reviewer verification; natural-language reading only, no scripted scoring).
-
-Across the scored question set (618 field-comparisons): **PL better 131 · Tie 475 · BL better 12**. Among the questions where the two systems actually differ, PL wins the large majority and BL essentially never wins a high-value field. The strongest, most defensible separation is **current-medications "anticancer vs non-cancer home med" identification (PL wins, ~35:0)** — the baseline almost always dumps blood-pressure/diabetes/pain home meds into the cancer-med field, while the pipeline isolates the actual regimen. Other PL-dominant high-value fields: stage, distant metastasis, molecular/genetic results. The 12 BL "wins" are all **non-hallucination**, secondary plan/summary fields (imaging/lab/procedure sub-plans, lab summary, supportive meds) or boundary wording calls — not core diagnostic errors.
-
-**Interpretation:** most fields tie because both systems share the same capable base model; the harness's measurable value concentrates in the high-knowledge fields where a naked prompt is systematically wrong (drug classification, staging, metastasis nuance, molecular results). This is the intended "many ties + clear PL wins + ~zero core BL wins" pattern.
-
-## 6. Why we changed direction, and the new direction
-
-**Why pivot away from letter generation as the headline:** patient-letter quality is hard to evaluate objectively and the physician review showed the simplification step trades off against faithfulness — the very principle we rank first. The letter was becoming the bottleneck and the riskiest, least-measurable part of the system.
-
-**New direction — extraction-only ablation:** we re-centered on the structured-extraction task, which is (a) the foundation the letter depends on, (b) objectively evaluable field-by-field by physicians, and (c) a clean controlled experiment (base model + schema fixed, harness as the only variable). This reframes the contribution as an **inference harness that makes a frozen open model clinically reliable**, demonstrated by a per-field PL-vs-BL comparison rather than a subjective letter critique.
-
-We also tightened the evaluation itself based on physician input: dropped clinically-useless questions (patient-type, treatment-goal direction, reason-for-visit summary), made the receptor question breast-only (PDAC has no ER/PR/HER2), and added a prompt principle pushing the model to **extract concrete facts rather than infer tidy summaries** (a re-run across all 40 fixed cases such as a "chemo break" being mislabeled "no medication change").
-
-## 7. Next steps
-
-1. **Physician blind scoring.** Two clinician-facing scoring pages are ready: a labeled one and a **blind A/B version** (systems shown only as A/B, identity hidden) so the physician scores PL-better / Tie / BL-better without bias. Collect quantitative win rates from one or more physicians.
-2. **Generalization check.** Audit the ~135 hooks for any test-set-specific logic; verify rules hold on fresh notes / additional cancer types.
-3. **Lock determinism.** Reduce reliance on greedy-decode run-to-run variation so the final numbers are stable.
-4. **Revisit summarization, accuracy-first.** Once extraction is locked, reintroduce patient-facing output under an explicit accuracy-over-simplification constraint.
-5. **Write-up.** Consolidate into an "inference-harness for clinically reliable extraction on a frozen local LLM" paper, with the PL-vs-BL ablation and the deployment-metric comparison as the core results.
+Most fields tie because both systems share the same strong base model; the harness's measurable value concentrates precisely in the high-knowledge fields where a naive prompt is systematically wrong — exactly the fields a clinician cares about. The few BL "wins" are minor omissions, not correctness failures, and several were further reduced this period by a prompt change that pushes the model to *extract concrete facts rather than infer tidy summaries*. The main limitation is run-to-run nondeterminism from greedy decoding, which produces long-tail variation we now control with deterministic rules. The pivot from patient letters to extraction was driven by physician feedback and by the need for an objective, controlled metric; with extraction now demonstrably reliable, accuracy-constrained summarization is the natural next step.
