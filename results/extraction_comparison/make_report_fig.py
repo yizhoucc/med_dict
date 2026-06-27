@@ -109,6 +109,10 @@ for s in ("top", "right"): ax2.spines[s].set_visible(False)
 
 fig.suptitle("Pipeline (PL) vs single-prompt baseline (BL) on 40 held-out oncology notes — same base model, harness as the only variable",
              fontsize=12.5, fontweight="bold", y=1.01)
+fig.text(0.5, -0.02,
+         "Verdicts from an LLM-as-judge protocol (rubric-briefed reviewer agents + orchestrator verification); "
+         "automated, pre-physician estimates. Blinded physician scoring pending.",
+         ha="center", va="top", fontsize=8.5, color="#666", style="italic")
 fig.savefig(os.path.join(FIG, "report_fig.png"))
 fig.savefig(os.path.join(FIG, "report_fig.pdf"))
 print("wrote figs/report_fig.png (+ .pdf)")
