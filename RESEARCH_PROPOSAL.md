@@ -491,7 +491,7 @@ Paper 1 explicitly acknowledges the absence of patient evaluation as a limitatio
 19. JNCI Cancer Spectrum (2025). LLMs to enhance cancer clinical trial educational materials (BROADBAND).
 20. Frontiers in Oncology (2026). Brain tumor patient education and LLM applications.
 21. Li L, Li D, Chen C, et al. (2026). LLM-as-a-Judge in Healthcare: A Scoping Analysis of Applications, Methods, and Human Alignment. arXiv:2605.25273. *(methodological basis for our LLM-as-judge review protocol)*
-22. Croxford E, Gao Y, First E, et al. (2025). Evaluating clinical AI summaries with large language models as judges. npj Digital Medicine 8:640. doi:10.1038/s41746-025-02005-2. *(LLM-judge validated against the human PDSQI instrument)*
+22. Croxford E, Gao Y, First E, et al. (2025). Evaluating clinical AI summaries with large language models as judges. npj Digit. Med. 8, 640. doi:10.1038/s41746-025-02005-2. *(LLM-judge validated against the human PDSQI instrument)*
 
 ---
 

@@ -40,4 +40,4 @@
 ## 参考文献（References）
 
 1. Li L, Li D, Chen C, et al. *LLM-as-a-Judge in Healthcare: A Scoping Analysis of Applications, Methods, and Human Alignment.* arXiv:2605.25273 (2026).
-2. Croxford E, Gao Y, First E, et al. *Evaluating clinical AI summaries with large language models as judges.* npj Digital Medicine 8:640 (2025). doi:10.1038/s41746-025-02005-2.
+2. Croxford E, Gao Y, First E, et al. *Evaluating clinical AI summaries with large language models as judges.* npj Digit. Med. 8, 640 (2025). doi:10.1038/s41746-025-02005-2.
