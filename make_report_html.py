@@ -64,7 +64,8 @@ def md_to_html(md_path):
 
 
 for src, out in [("PROGRESS_REPORT.md", "PROGRESS_REPORT.html"),
-                 ("PROGRESS_REPORT_zh.md", "PROGRESS_REPORT_zh.html")]:
+                 ("PROGRESS_REPORT_zh.md", "PROGRESS_REPORT_zh.html"),
+                 ("MECCC_Progress_Report.md", "MECCC_Progress_Report.html")]:
     html = md_to_html(os.path.join(HERE, src))
     with open(os.path.join(HERE, out), "w") as f:
         f.write(html)
