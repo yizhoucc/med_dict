@@ -1,7 +1,7 @@
 # Cluster vs WSL — 可行性 & 可复现性 (2026-06-05)
 
 ## 推理引擎
-用 **vLLM**(快), 不是 transformers。pipeline = run_vllm.py → vLLM HTTP server (Qwen2.5-32B-Instruct-AWQ)。
+用 **vLLM**（快），不是 transformers 本地推理。完整实验路径是 `run.py` → vLLM HTTP server (`Qwen2.5-32B-Instruct-AWQ`)。`vllm_pipeline/run_vllm.py` 是早期简化 runner，不用于复现论文结果。
 (cluster 上 `transformers==4.47.1` 只是 vLLM 内部依赖, 非 transformers 推理路径)
 
 ## WSL (当前主用)
@@ -12,7 +12,7 @@
 - 登录: ssh -l yizhouc3 mind.cs.cmu.edu (免密)。anaconda/cuda 在**计算节点**, 登录节点没有 → 环境/作业都在计算节点。
 - 关键环境坑(已解): vllm 0.6.6 与 transformers 不配会 `ProcessorMixin` 崩 → pin `transformers==4.47.1`。
   脚本: cluster/setup_env.sh (经 srun 在 CPU 节点建 conda env `medllm`)。
-- 运行: cluster/run_pipeline.slurm —— 一个 sbatch 内: 起 vLLM 后台→健康检查→跑 run_vllm.py→teardown。
+- 运行: cluster/run_pipeline.slurm —— 一个 sbatch 内: 起 vLLM 后台→健康检查→跑完整 `run.py`→teardown。
   `sbatch cluster/run_pipeline.slurm exp/xxx.yaml`。
 - GPU 适配: L40S 48GB 稳装 32B-AWQ+16k 长 note; 24GB 卡(a5000/titanrtx/3090)偏紧(OOM/截断风险); 12GB(titanxp/2080Ti)装不下。
 
@@ -29,7 +29,7 @@ cluster 的"随时"= 提交作业排队; 小作业(~25min)投到不挤的卡通�
 ## 用法建议
 - 快速迭代 → WSL。
 - 最终可复现归档跑 → cluster mode A。想缩短等待: 把 --gres 从 L40S 放宽(分别投 L40S/a5000/titanrtx), 落到先空的卡。
-- 两者共用同一 run_vllm.py, 互不冲突。
+- 两者共用同一 `run.py` 主 pipeline 和实验 YAML；仅 vLLM server 的部署方式不同。
 
 ## 文件
 - cluster/setup_env.sh (一次性环境, 经 srun 跑)

@@ -1,6 +1,6 @@
-# med_dict — Oncology Patient Letter Generation via Inference Harness
+# med_dict — Oncology Information Extraction via Inference Harness
 
-Generate patient-friendly summary letters from oncology clinical notes using an open-source LLM (Qwen2.5-32B-Instruct-AWQ via vLLM), enhanced by a structured inference harness — prompt engineering, multi-gate verification, and rule-based safety hooks — without modifying model weights.
+Extract structured facts from oncology clinical notes using an open-weight LLM (Qwen2.5-32B-Instruct-AWQ via vLLM), enhanced by a structured inference harness — prompt engineering, multi-gate verification, and rule-based safety hooks — without modifying model weights. Patient-letter generation remains available but is not part of the current extraction-only ablation.
 
 ## Core Principles
 
@@ -20,7 +20,7 @@ Generate patient-friendly summary letters from oncology clinical notes using an 
 
 | | Breast Cancer (v31) | PDAC (v32) |
 |---|---|---|
-| **Dev set** | 100 unannotated, 15 iterations → 100% clean | 100 unannotated, 18 iterations → 99% clean |
+| **Dev set** | 56 selected unannotated notes, 15 iterations → 100% clean | 100 unannotated notes, 18 iterations → 99% clean |
 | **Test set** | 20 annotated held-out → P0=0, P1=0 | 20 annotated held-out → generated |
 | **Optimization** | Physician-guided (15 rounds) | Model-only (no physician feedback) |
 
@@ -48,7 +48,7 @@ Clinical Note
       3. IMPROVE — specificity + semantic alignment
       4. FAITHFUL — hallucination pruning ("keep if supported")
       5. TEMPORAL — filter past/completed items from plans
-  → Rule-Based POST Hooks (40+ corrections)
+  → Rule-Based POST Hooks (100+ narrow deterministic corrections)
   → Source Attribution
   → Patient Letter Generation
   → Letter POST Checks (terminology, dosage, voice, grammar)
@@ -57,43 +57,54 @@ Clinical Note
 ## Quick Start
 
 ```bash
-# Start vLLM server (on GPU machine)
-bash vllm_pipeline/start_vllm.sh
+# Install client/pipeline dependencies
+pip install -r requirements.txt
 
-# Run pipeline
-python run.py exp/default_qwen.yaml
+# Start the reported Qwen2.5 model on a Linux/CUDA machine
+bash vllm_pipeline/start_vllm.sh qwen2.5
 
-# Run with vLLM (remote inference)
-python vllm_pipeline/run_vllm.py exp/v32_vllm.yaml
+# Reproduce the extraction-only held-out pipeline runs
+python run.py exp/fix_breast_nl.yaml
+python run.py exp/fix_pdac_nl.yaml
+
+# Run the matched single-call baseline (same fields/operational definitions;
+# still no stages, gates, hooks, or dictionaries)
+python baseline_extraction.py data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv \
+  --output results/baseline_extract_breast_matched.txt --matched --cancer-type breast
+python baseline_extraction.py data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/pdac_annotated.csv \
+  --output results/baseline_extract_pdac_matched.txt --matched --cancer-type pdac
 
 # Resume an interrupted run
-python run.py exp/default_qwen.yaml --resume results/<run_dir>/
+python run.py exp/fix_breast_nl.yaml --resume results/<run_dir>/
 ```
+
+`vllm_pipeline/run_vllm.py` is an earlier simplified runner and does not contain the full evaluated POST-hook pipeline. Use `run.py` for reported experiments. Install `requirements-vllm.txt` only in the Linux/CUDA vLLM service environment.
 
 ## Project Structure
 
 ```
 med_dict/
-├── run.py                     # Main pipeline + POST hooks (3500 lines)
-├── ult.py                     # Model inference, 5-gate cascade (1600 lines)
-├── letter_generation.py       # Letter generation + post-checks (550 lines)
+├── run.py                     # Main pipeline + POST hooks
+├── ult.py                     # Model inference and 5-gate cascade
+├── letter_generation.py       # Optional letter generation and post-checks
 ├── source_attribution.py      # Source attribution to original note
 ├── auto_review.py             # LLM-based automated review
-├── baseline_generate.py       # Baseline generation (bare model + single prompt)
+├── baseline_extraction.py     # Extraction baseline (legacy + matched single-prompt modes)
 ├── prompts/
 │   ├── extraction.yaml        # Breast cancer extraction (8 fields)
-│   ├── plan_extraction.yaml   # Plan extraction (7 fields)
+│   ├── plan_extraction.yaml   # Plan/referral/follow-up extraction (11 sections)
+│   ├── matched_baseline_contract.yaml # Auditable single-prompt baseline contract
 │   ├── letter_generation.yaml # Breast letter template
 │   └── pdac/                  # PDAC-specific prompts (same structure)
 ├── vllm_pipeline/
 │   ├── vllm_client.py         # vLLM HTTP API client
-│   ├── run_vllm.py            # vLLM-based pipeline runner
+│   ├── run_vllm.py            # Legacy simplified vLLM runner (not the evaluated path)
 │   └── start_vllm.sh          # vLLM server launch script
 ├── exp/                       # Experiment configs (YAML)
 ├── data/
 │   ├── CORAL/                 # Clinical notes dataset (UCSF, de-identified)
-│   ├── formaldef.txt           # Medical term dictionary (9,331 terms)
-│   ├── oncology_drugs.txt      # Drug whitelist (~140 drugs)
+│   ├── formaldef.txt           # Medical term dictionary (9,331 loaded entries)
+│   ├── oncology_drugs.txt      # Drug whitelist (136 loaded entries)
 │   └── supportive_care_drugs.txt
 ├── results/
 │   └── doctor_review_final/   # Physician evaluation package

@@ -3,7 +3,7 @@
 # waits until ready, runs the pipeline against localhost:8000, then tears down.
 # Fully reproducible: one `sbatch cluster/run_pipeline.slurm [exp/config.yaml]`.
 #
-# Usage:  sbatch cluster/run_pipeline.slurm exp/test_fix_breast8.yaml
+# Usage:  sbatch cluster/run_pipeline.slurm exp/fix_breast_nl.yaml
 #
 #SBATCH --job-name=meddict
 #SBATCH --partition=gpu
@@ -14,7 +14,7 @@
 #SBATCH --output=cluster/slurm_%j.out
 
 set -euo pipefail
-CONFIG="${1:-exp/test_fix_breast8.yaml}"
+CONFIG="${1:-exp/fix_breast_nl.yaml}"
 echo "=== job $SLURM_JOB_ID on $(hostname); config=$CONFIG ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || true
 
@@ -52,8 +52,8 @@ if [ "$READY" -ne 1 ]; then
   echo "ERROR: vLLM did not become ready; see cluster/vllm_${SLURM_JOB_ID}.log"; tail -40 "cluster/vllm_${SLURM_JOB_ID}.log"; exit 1
 fi
 
-# --- run the extraction pipeline ---
+# --- run the full evaluated extraction pipeline ---
 echo "=== running pipeline: $CONFIG ==="
-python -u vllm_pipeline/run_vllm.py "$CONFIG"
+python -u run.py "$CONFIG"
 
 echo "=== done; results under results/ ==="

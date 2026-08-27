@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
-# Deterministic regex validation for the 9 bug-fix hooks (no GPU). Parses the FINAL PL outputs to
-# get the REAL note_text / assessment_and_plan / keypoint values, then runs each hook's trigger
-# logic (copied verbatim from run.py) against its target sample + negative-control samples.
+"""CPU-only smoke test for the final extraction-hook regexes.
+
+This is intentionally a lightweight logic mirror, not an import-level unit test of the
+monolithic ``run.py`` pipeline. Archived FINAL outputs are used for idempotence/negative
+controls, while small synthetic pre-hook cases verify that the five formerly stale target
+triggers still fire. Run from any working directory with:
+
+    python results/extraction_comparison/test_hooks_regex.py
+"""
 import re, json, sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
 
 def parse_rows(path):
     txt = open(path, encoding="utf-8").read()
@@ -30,8 +39,8 @@ def parse_rows(path):
         rows[rid] = {"note_text": nt, "assessment_and_plan": ap, "keypoints": kp}
     return rows
 
-B = parse_rows("pipeline_breast_FINAL.txt")
-P = parse_rows("pipeline_pdac_FINAL.txt")
+B = parse_rows(ROOT / "results/extraction_comparison/pipeline_breast_FINAL.txt")
+P = parse_rows(ROOT / "results/extraction_comparison/pipeline_pdac_FINAL.txt")
 
 results = []
 def check(label, got, want):
@@ -55,7 +64,10 @@ def upgrade_fires(ap, nt, stage):
                 marker = site; break
         if marker: break
     return bool(marker and not already)
-r = P[12]; check("bug6 pdac12 upgrade", upgrade_fires(r["assessment_and_plan"], r["note_text"], r["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"]), True)
+# Archived FINAL is already upgraded, so the hook must now be idempotent.
+r = P[12]; check("bug6 pdac12 final-idempotent", upgrade_fires(r["assessment_and_plan"], r["note_text"], r["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"]), False)
+check("bug6 synthetic confirmed-carcinomatosis fires",
+      upgrade_fires("unchanged peritoneal carcinomatosis", "", "Stage II"), True)
 for neg in (9, 20, 3):  # already-IV pdac → should NOT upgrade (guard already_iv)
     r = P[neg]; st = r["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"]
     check(f"bug6 pdac{neg} no-upgrade(alreadyIV)", upgrade_fires(r["assessment_and_plan"], r["note_text"], st), False)
@@ -85,7 +97,9 @@ def benign_fires(ap, nt, dm, m, stage, goals):
 def cd(row):
     c = row["keypoints"].get("Cancer_Diagnosis",{}); g = row["keypoints"].get("Treatment_Goals",{})
     return (c.get("Distant Metastasis","") or "", c.get("Metastasis","") or "", c.get("Stage_of_Cancer","") or "", (g.get("goals_of_treatment","") or "").lower())
-r=B[13]; dm,m,st,g=cd(r); check("bug4 breast13 benign-fires", benign_fires(r["assessment_and_plan"],r["note_text"],dm,m,st,g), True)
+r=B[13]; dm,m,st,g=cd(r); check("bug4 breast13 final-idempotent", benign_fires(r["assessment_and_plan"],r["note_text"],dm,m,st,g), False)
+check("bug4 synthetic benign-lesion fires",
+      benign_fires("", "The lesion is most likely a meningioma.", "Not sure", "Not sure", "Stage II", "curative"), True)
 r=B[20]; dm,m,st,g=cd(r); check("bug4 breast20 NO-fire(real pending)", benign_fires(r["assessment_and_plan"],r["note_text"],dm,m,st,g), False)
 r=B[6]; dm,m,st,g=cd(r); check("bug4 breast6 NO-fire(palliative)", benign_fires(r["assessment_and_plan"],r["note_text"],dm,m,st,g), False)
 
@@ -102,7 +116,9 @@ def pending_fires(ap, dm, stage):
     cn=re.search(r'no evidence of (distant\s+)?metasta|staging[^.]{0,20}negative|negative for (distant\s+)?metasta|'
         r'(w/?u|workup)\s+negative|no distant (disease|metasta)', a)
     return bool(ps and not cn)
-r=B[1]; dm,m,st,g=cd(r); check("bug3 breast1 pending-fires", pending_fires(r["assessment_and_plan"],dm,st), True)
+r=B[1]; dm,m,st,g=cd(r); check("bug3 breast1 final-idempotent", pending_fires(r["assessment_and_plan"],dm,st), False)
+check("bug3 synthetic pending-staging fires",
+      pending_fires("We will obtain PET/CT to assess for distant metastasis.", "No", "Stage II"), True)
 r=B[3]; dm,m,st,g=cd(r); check("bug3 breast3 NO-fire(no-mets stated)", pending_fires(r["assessment_and_plan"],dm,st), False)
 
 # ---- bug7 POST-RESPONSE-TREATMENT tightened on_treatment + SURVEILLANCE ----
@@ -122,7 +138,9 @@ def surv_fires(ap, nt, cur_meds, rv):
     return bool(res and sv and not cur_meds and mis)
 r=P[15]; c=r["keypoints"]["Cancer_Diagnosis"]; rv=r["keypoints"]["Response_Assessment"]["response_assessment"]
 cm=(r["keypoints"]["Current_Medications"]["current_meds"] or "").strip()
-check("bug7 pdac15 surveillance-fires", surv_fires(r["assessment_and_plan"],r["note_text"],cm,rv), True)
+check("bug7 pdac15 archived-final trigger state", surv_fires(r["assessment_and_plan"],r["note_text"],cm,rv), False)
+check("bug7 synthetic surveillance fires",
+      surv_fires("Continue surveillance; recheck CA 19-9.", "s/p Whipple.", "", "Not yet on treatment"), True)
 
 # ---- bug9 POST-STAGE-PTNM-VERIFY ----
 def ptnm_fix(ap, nt, stage):
@@ -175,7 +193,9 @@ def r2(dm, m):
         return f"Suspected, to {sites}" if sites and sites.lower() not in ("","yes") else "Not sure"
     return None
 r=B[15]; c=r["keypoints"]["Cancer_Diagnosis"]
-check("bug5 breast15 R2 suspected-sites", r2(c.get("Distant Metastasis","") or "", c.get("Metastasis","") or ""),
+check("bug5 breast15 final-idempotent", r2(c.get("Distant Metastasis","") or "", c.get("Metastasis","") or ""), None)
+check("bug5 synthetic R2 preserves sites",
+      r2("", "Yes, to right cervical lymph nodes, right axillary lymph nodes"),
       "Suspected, to right cervical lymph nodes, right axillary lymph nodes")
 
 # ---- bug10 POST-DISTMET-SITES: REMOVED (fired on negated "No osseous lesions" → hallucination). ----

@@ -1,0 +1,5 @@
+# GPU service environment used for the reported Qwen2.5 experiments.
+# Install on Linux/CUDA only: pip install -r requirements-vllm.txt
+-r requirements.txt
+vllm==0.6.6
+transformers==4.47.1

@@ -2,7 +2,7 @@
 
 ## What This System Does
 
-This pipeline takes **oncology clinical notes** (free-text physician notes from breast cancer patient visits) and extracts **structured, machine-readable information** covering diagnosis, treatment, medications, and plans.
+This pipeline takes **oncology clinical notes** (free-text breast cancer and pancreatic cancer visits) and extracts **structured, machine-readable information** covering diagnosis, treatment, medications, and plans.
 
 ---
 
@@ -43,7 +43,7 @@ Assessment & Plan (A/P)
 
 ## 2. Output: What Comes Out
 
-A structured JSON with 15 sections, each containing specific clinical fields:
+A structured JSON with 19 sections, each containing specific clinical fields:
 
 ```json
 {
@@ -99,8 +99,8 @@ Each field also has **source attribution** — the exact quote from the note tha
                        v                                 v
         +-------------------------+       +---------------------------+
         |   PHASE 1: Independent  |       |   PLAN EXTRACTION         |
-        |   Extraction (6 prompts)|       |   (from A/P only)         |
-        |                         |       |   8 prompts:              |
+        |   Extraction (6 prompts)|       |   (mostly from A/P)       |
+        |                         |       |   11 prompts:             |
         |   From FULL note:       |       |   - Medication Plan       |
         |   - Reason for Visit    |       |   - Therapy Plan          |
         |   - Cancer Diagnosis    |       |   - Radiotherapy Plan     |
@@ -141,7 +141,7 @@ Each field also has **source attribution** — the exact quote from the note tha
                                         |
                                         v
                     +-----------------------------------+
-                    |   22 POST HOOKS                   |
+                    |   100+ POST HOOKS                 |
                     |   (rule-based corrections)         |
                     |                                    |
                     |   Fix known LLM failure patterns   |
@@ -207,18 +207,18 @@ Each field also has **source attribution** — the exact quote from the note tha
 - Redacted fields (*****/[REDACTED]) lose information
 - Rare temporal confusion (listing historical imaging as current response)
 
-### Extraction Ablation: Pipeline vs Baseline (4 diagnosis dimensions, 40 held-out test notes)
+### Extraction Ablation: Pipeline vs Baseline (40 held-out test notes)
 
-Same base model (Qwen2.5-32B-Instruct-AWQ), same field schema — the **only** variable is the harness (multi-stage extraction + 5 gates + POST hooks + dictionaries). Pipeline (PL) vs single-prompt bare-model baseline (BL), scored per sample as PL / BL / TIE by manual review against the note. 20 breast + 20 PDAC.
+The archived comparison used the same base model (Qwen2.5-32B-Instruct-AWQ) for Pipeline (PL) and a single-prompt bare-model baseline (BL), with 20 breast + 20 PDAC notes. A later audit found that the legacy baseline prompt did **not** fully match the evaluated contract: it omitted the general `Metastasis` field and defined `current_meds` more broadly than the scorer. These counts are therefore preliminary; the matched baseline in `baseline_extraction.py --matched` must be rerun before using the ablation as final evidence.
 
 | Dimension | PL | BL | TIE | Notes |
 |-----------|----|----|-----|-------|
 | **Stage correctness** | **13** | **0** | 27 | BL often punts to "Not specified"; PL gives metastatic/suspected/recurrent stage, bilateral per-side staging, TNM transcription |
 | **No hallucination** | 1 | **0** | 39 | PL hedges suspected mets; BL sometimes states suspected-as-confirmed ("Yes, bone metastasis") |
-| **Response assessment** | 5 | **0** | 35 | BL answers the wrong question (tumor growth, side effects, genomic score as "response"); PL gives the actual response or "not yet on treatment" |
-| **Distant metastasis** | 6 | **1** | 33 | PL specific + appropriately hedged ("Suspected, to cervical + axillary nodes"); the one BL win is an organ-completeness gap (PL listed liver+peritoneum, missed spleen — correct but incomplete) |
+| **Response assessment** | 7 | **2** | 31 | PL has a positive net advantage, but BL does win individual samples. |
+| **Distant metastasis** | 7 | **1** | 32 | PL has a positive net advantage; one BL win is an organ-completeness gap. |
 
-**Result: PL ≥ BL on all four dimensions** (the only BL "win" is one organ-completeness gap, not a correctness error). These four are now defensible as PL-favorable scoring questions. Detail: `results/extraction_comparison/REVIEW_RESCORE_40.md`.
+**Careful interpretation:** in the legacy preliminary run, PL had more wins than BL within every predefined core field category. This is an aggregate category-level claim, not a claim that BL never wins an individual core-field comparison. Final numbers will be replaced after the matched-baseline rerun. Detail: `results/extraction_comparison/REVIEW_RESCORE_40.md`.
 
 ---
 
@@ -384,7 +384,7 @@ Added to close the dimensions where the baseline was tying or winning. All are *
 | 31 | POST-RESPONSE-SURVEILLANCE | Resected patient on post-surgical surveillance (no active anticancer drug) → states surveillance + rising-marker concern; not "On treatment". Guarded against new-patient/adjuvant-planning consults |
 | — | POST-RESPONSE-TREATMENT / PRETREATMENT (tightened) | "On treatment" now requires real anticancer evidence (cycle / drug name), not a bare "continue" (which matched "continue creon"); PRETREATMENT keyed on a started-treatment signal rather than the inconsistently-cleaned current_meds field |
 
-> A `POST-DISTMET-SITES` hook (auto-append documented met organs) was prototyped and **removed** — it fired on negated radiology lines ("No suspicious osseous lesions" → added bone), manufacturing hallucinated sites. Principle #1 (faithfulness) outranks #2 (completeness): an incomplete-but-correct site list is preferable to a fabricated one. Regression suite: `results/extraction_comparison/test_hooks_regex.py` (18/18, target-fires + negative-controls).
+> A `POST-DISTMET-SITES` hook (auto-append documented met organs) was prototyped and **removed** — it fired on negated radiology lines ("No suspicious osseous lesions" → added bone), manufacturing hallucinated sites. Principle #1 (faithfulness) outranks #2 (completeness): an incomplete-but-correct site list is preferable to a fabricated one. The CPU smoke test at `results/extraction_comparison/test_hooks_regex.py` checks archived-final idempotence plus synthetic trigger/negative-control cases; it is a regex-logic mirror, not an end-to-end pipeline test.
 
 ---
 
