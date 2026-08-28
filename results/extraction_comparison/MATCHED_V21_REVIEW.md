@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 29/40 (breast 20/20, PDAC 9/20)
-- Next: PDAC sample 10
-- PL findings: P0=12, P1=161, P2=95
-- Attribution findings: A0=68, A1=140, A2=178
-- Core verdict totals (PL / BL / TIE): 42 / 39 / 113
+- Completed: 32/40 (breast 20/20, PDAC 12/20)
+- Next: PDAC sample 13
+- PL findings: P0=16, P1=190, P2=99
+- Attribution findings: A0=75, A1=155, A2=202
+- Core verdict totals (PL / BL / TIE): 42 / 44 / 126
 
 ## Results
 
@@ -301,3 +301,31 @@ Date: 2026-08-27
 - Attribution: A0 for second opinion and findings; A1 for labs, supportive medication, goals description, Genetics referral, and genetic results; A2 for summary, Distant, Metastasis, goals, response, and medication plan.
 - Core verdicts: current_meds TIE; Stage PL; Distant TIE; Metastasis TIE; response PL; genetic results TIE. Total PL 2 / BL 0 / TIE 4.
 - Main verification: confirmed biopsy-proven lung progression, active Gem/Abrax, current dose reduction, stable treated lung disease, shrinking pancreatic primary, downward marker trend, and all reported variants.
+
+### PDAC sample 10 — coral_idx 9
+
+- Case: locally advanced unresectable pancreatic ductal adenocarcinoma initially treated with mFOLFIRINOX. Irinotecan was permanently omitted from cycle 3 because of colitis and poor tolerance; the active cycle-6 regimen is FOLFOX only. The December scan predates the switch and shows stable local disease, no definite distant spread, and an indeterminate right-upper-lobe nodule. RECQL4 has a VUS.
+- PL P0: general Metastasis fabricates `confirmed regional nodes` and a `suspicious liver lesion pending biopsy`; current medications incorrectly retains FOLFIRINOX alongside active FOLFOX, falsely implying ongoing irinotecan.
+- PL P1: summary likewise mixes the old and active regimens; findings omits the unresolved lung-nodule differential; supportive medications omit several explicitly active electrolyte, antiemetic, steroid, anxiolytic, and hydration measures; palliative intent conflicts with induction/downstaging treatment and possible surgery or consolidative chemoradiation; response attributes a pre-switch scan to the current FOLFOX period; therapy mixes potassium and scans into systemic therapy; imaging mixes CA19-9 and a cancelled mammogram into the scan plan; lab plan includes imaging; next-visit mode is invented; a conditional future surgical reassessment is upgraded to a current Specialty referral.
+- PL P2: lab summary mixes older albumin/protein values into the current panel without dates.
+- Attribution: A0 for Patient type and second opinion; A1 for Televisit, Metastasis, findings, and goals; A2 for summary, Stage, labs, current/supportive medications, response, medication/therapy plans, imaging, next visit, and Specialty.
+- Core verdicts: current_meds BL; Stage TIE; Distant TIE; Metastasis BL; response TIE; genetic results TIE. Total PL 0 / BL 2 / TIE 4.
+- Main verification: confirmed `Omitted irinotecan since C3`, `Will continue with FOLFOX only going forward`, no liver lesion or biopsy plan, no proven regional node, the unresolved lung differential, the scan-before-regimen-change timing, and the possible post-induction surgery/chemoradiation pathways.
+
+### PDAC sample 11 — coral_idx 10
+
+- Case: new second-opinion telehealth consultation for clinically staged IV pancreatic cancer, cT2 cN1 cM1, documented as metastatic to liver. No anticancer treatment has begun. The patient consented only to Precision Promise screening; FOLFIRINOX and gemcitabine/nab-paclitaxel are treatment options. STRATA is pending, and the BRCA2 mutation belongs to the patient's brother.
+- PL P1: Metastasis upgrades clinical cN1 to `confirmed regional nodes`; medication plan blurs trial screening with a selected regimen and mechanically appends alternative drugs; therapy says the patient consented to trial participation rather than screening; imaging and lab fields copy the combined CT-plus-labs sentence without separating modalities; an existing genetics appointment and the incoming UCSF referral are mislabeled as outgoing referrals; follow-up is populated with same-day tests rather than a return visit; genetic results assigns the brother's BRCA2 result and pending STRATA to the patient.
+- Attribution: A0 for second opinion, Specialty, and follow-up; A1 for Patient type, supportive medications, response, genetic plan/results, Genetics referral, and next-visit fallback; A2 for summary, Metastasis, findings, goals description, and medication/therapy plans.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response TIE; genetic results BL. Total PL 0 / BL 2 / TIE 4.
+- Main verification: confirmed the explicit Stage IV/cT2/cN1/cM1 and liver-metastasis labels, absence of started treatment, `consent to proceed with screening procedures`, parallel standard-of-care options, `Strata pending`, and that the BRCA2 carrier is the brother rather than the patient.
+
+### PDAC sample 12 — coral_idx 11
+
+- Case: pancreatic adenocarcinoma initially staged by EUS as at least T4/cN1, after 12 cycles of mFOLFIRINOX and a treatment holiday. The latest course shows clear progression with enlarging/infiltrative primary disease, bowel and biliary obstruction, and peritoneal/omental carcinomatosis. Liver findings remain hard to interpret and bilateral adrenal nodules remain suspicious. No anticancer drug is active; chemotherapy is considered more harmful than beneficial unless the patient's condition improves substantially, and hospice is anticipated.
+- PL P0: Distant Metastasis treats the uncertain liver lesions as confirmed while omitting suspicious adrenal disease; general Metastasis also upgrades clinical N1 to `confirmed regional nodes` and the uncertain liver lesions to confirmed metastasis.
+- PL P1: Lab Results is a truncated JSON string rather than the required object; supportive medications omit active symptom-control drugs; goals description is blank despite explicit palliative/hospice language; response reports only old stable disease and omits the subsequent, current progression; medication and therapy plans omit the explicit decision against chemotherapy and the narrow condition for possible resumption; procedure plan misses conditional additional stenting; lab plan mixes oral intake and obstruction with blood tests; Advance Care incorrectly maps hospice discussion into a field restricted to directive/proxy/code-status/living-will content; Specialty turns palliative-care discussion into a referral.
+- PL P2: summary understates definite current peritoneal carcinomatosis as generalized concern; recent changes includes a current treatment judgment; imaging reports follow-up of an already completed same-day X-ray as future imaging.
+- Attribution: A0 for second opinion and Specialty; A1 for Lab Results, findings, supportive medications, and genetic-results fallback; A2 for summary, Stage, both metastasis fields, recent changes, response, and Referral follow-up.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response BL; genetic results TIE. Total PL 0 / BL 1 / TIE 5.
+- Main verification: confirmed definite peritoneal/omental carcinomatosis, unresolved liver findings, clinical rather than pathologically confirmed N1, suspicious adrenal nodules, explicit progression during the chemotherapy holiday, the current no-chemotherapy judgment, conditional stent consideration, and lack of a formal advance-directive/code-status entry.
