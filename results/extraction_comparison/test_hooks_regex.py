@@ -2,7 +2,7 @@
 """CPU-only smoke test for the final extraction hooks.
 
 Shared pure helpers are imported directly from ``extraction_post_hooks.py`` so these tests
-exercise the same M1, cleanup, reconciliation, and regional-evidence logic as ``run.py``.
+exercise the same M1, response, cleanup, reconciliation, and regional-evidence logic as ``run.py``.
 Archived FINAL outputs provide idempotence/negative controls, and synthetic pre-hook cases
 cover the targeted edge cases. Run from any working directory with:
 
@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from extraction_post_hooks import (
+    clear_held_anticancer_meds,
     clean_breast_distant,
     compose_general_metastasis,
     has_affirmative_m1_site,
@@ -26,6 +27,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
 
@@ -146,6 +148,211 @@ cm=(r["keypoints"]["Current_Medications"]["current_meds"] or "").strip()
 check("bug7 pdac15 archived-final trigger state", surv_fires(r["assessment_and_plan"],r["note_text"],cm,rv), False)
 check("bug7 synthetic surveillance fires",
       surv_fires("Continue surveillance; recheck CA 19-9.", "s/p Whipple.", "", "Not yet on treatment"), True)
+
+# ---- POST-RESPONSE-FINAL shared sanitizer ----
+def sanitize_row(row):
+    kp = row["keypoints"]
+    return sanitize_response_assessment(
+        kp.get("Response_Assessment", {}).get("response_assessment", ""),
+        row["note_text"],
+        row["assessment_and_plan"],
+        current_meds=kp.get("Current_Medications", {}).get("current_meds", ""),
+        recent_changes=kp.get("Treatment_Changes", {}).get("recent_changes", ""),
+        findings=kp.get("Clinical_Findings", {}).get("findings", ""),
+    )[0]
+
+fixed = sanitize_row(B[4])
+check("response breast4 recurrence/growth replaces untreated", "not yet on treatment" in fixed.lower(), False)
+check("response breast4 preserves measured growth", "growth" in fixed.lower() and "2.7" in fixed, True)
+
+fixed = sanitize_row(B[14])
+check("response breast14 same-day goserelin has started", fixed,
+      "Anticancer treatment started today; too early to assess its response.")
+
+fixed = sanitize_row(P[7])
+check("response pdac7 slight decrease is not upgraded to PR", "partial response" in fixed.lower(), False)
+check("response pdac7 preserves slight decrease", "slight" in fixed.lower() and "decreas" in fixed.lower(), True)
+
+fixed = sanitize_row(P[13])
+check("response pdac13 keeps stable disease", "stable disease" in fixed.lower(), True)
+check("response pdac13 removes isolated biliary findings",
+      bool(re.search(r"pneumobilia|biliary duct", fixed, re.I)), False)
+
+fixed = sanitize_row(P[16])
+check("response pdac16 preserves treatment-linked mass disappearance",
+      "mass is no longer seen" in fixed.lower() and "treatment" in fixed.lower(), True)
+
+fixed = sanitize_row(P[18])
+check("response pdac18 removes pure postoperative vascular/fluid changes",
+      bool(re.search(r"portal vein|superior mesenteric vein|free fluid|cut edge", fixed, re.I)), False)
+check("response pdac18 falls back to direct tumor status",
+      "no evidence of metastatic disease" in fixed.lower(), True)
+
+for row_id in (13, 18):
+    row = P[row_id]
+    current = row["keypoints"]["Current_Medications"]["current_meds"]
+    check(
+        f"current meds pdac{row_id} held regimen clears",
+        clear_held_anticancer_meds(
+            current, row["note_text"], row["assessment_and_plan"]
+        )[0],
+        "",
+    )
+
+# affected temporal-window case remains prompt-owned: the conservative helper must not invent
+# a replacement from ambiguous pre-regimen imaging.
+check("response breast7 cross-regimen ambiguity unchanged by regex", sanitize_row(B[7]),
+      B[7]["keypoints"]["Response_Assessment"]["response_assessment"])
+
+# 30% clean controls plus an extra truly-untreated guard.
+for cancer, row_id, row in (
+    ("breast", 11, B[11]),
+    ("pdac", 5, P[5]),
+    ("pdac", 9, P[9]),
+    ("pdac", 14, P[14]),
+):
+    original = row["keypoints"]["Response_Assessment"]["response_assessment"]
+    check(f"response clean control {cancer}{row_id} unchanged", sanitize_row(row), original)
+
+check(
+    "response same-day future prescription does not fire",
+    sanitize_response_assessment(
+        "Not yet on treatment — no response to assess.",
+        "",
+        "We will start gemcitabine today after authorization.",
+        current_meds="",
+        recent_changes="Gemcitabine prescribed today",
+    )[0],
+    "Not yet on treatment — no response to assess.",
+)
+check(
+    "response tumor-linked biliary change is retained",
+    sanitize_response_assessment(
+        "Biliary duct dilation worsened because the pancreatic tumor increased in size.",
+        "",
+        "The pancreatic tumor increased in size and caused worsening biliary duct dilation.",
+        current_meds="gemcitabine",
+    )[0],
+    "Biliary duct dilation worsened because the pancreatic tumor increased in size.",
+)
+check(
+    "response explicit formal PR is retained",
+    sanitize_response_assessment(
+        "Partial response on restaging CT.",
+        "Restaging CT documents a partial response.",
+        "Partial response after four cycles.",
+        current_meds="gemcitabine",
+    )[0],
+    "Partial response on restaging CT.",
+)
+check(
+    "response mass disappearance does not overwrite simultaneous progression",
+    sanitize_response_assessment(
+        "New liver metastasis indicates progression.",
+        "",
+        "New liver metastasis indicates progression. The pancreatic mass is no longer seen, likely related to treatment.",
+        current_meds="gemcitabine",
+    )[0],
+    "New liver metastasis indicates progression. The pancreatic mass is no longer seen, likely related to treatment.",
+)
+historical_pr = sanitize_response_assessment(
+    "This suggests a partial response to treatment.",
+    "Last year the patient had a partial response on FOLFIRINOX.",
+    "Current CT shows a slight decrease in the pancreatic mass.",
+    current_meds="gemcitabine",
+    findings="Current CT shows a slight decrease in the pancreatic mass.",
+)[0]
+check("response historical PR does not authorize current formal PR",
+      "partial response" in historical_pr.lower(), False)
+check("response historical PR downgrade preserves current slight decrease",
+      "slight decrease" in historical_pr.lower(), True)
+check(
+    "response organ-qualified new metastasis preserves progression beside disappearance",
+    sanitize_response_assessment(
+        "A new liver metastasis developed, indicating progression.",
+        "",
+        "A new liver metastasis developed. The pancreatic mass is no longer seen, likely related to treatment.",
+        current_meds="gemcitabine",
+    )[0],
+    "A new liver metastasis developed, indicating progression. The pancreatic mass is no longer seen, likely related to treatment.",
+)
+mixed_pr = sanitize_response_assessment(
+    "Mixed response: partial response in the pancreatic mass, but a new liver metastasis developed.",
+    "Last year the patient had a partial response on FOLFIRINOX.",
+    "Current CT shows a slight decrease in the pancreatic mass but a new liver metastasis developed.",
+    current_meds="gemcitabine",
+    findings="Current CT shows a slight decrease in the pancreatic mass but a new liver metastasis developed.",
+)[0]
+check("response mixed PR downgrade retains new-organ progression",
+      "new liver metastasis" in mixed_pr.lower(), True)
+check("response mixed PR downgrade is local, not whole-field replacement",
+      "mixed response" in mixed_pr.lower() and "slight decrease" in mixed_pr.lower()
+      and "partial response" not in mixed_pr.lower(), True)
+check(
+    "response empty meds plus planned-only treatment is not current treatment",
+    sanitize_response_assessment(
+        "Currently on treatment; response is not yet available.",
+        "",
+        "Plan to start gemcitabine next week.",
+        current_meds="",
+        recent_changes="Gemcitabine planned for next week",
+    )[0],
+    "Not yet on treatment — no response to assess.",
+)
+check(
+    "response empty meds plus held treatment uses direct tumor status",
+    sanitize_response_assessment(
+        "Currently receiving chemotherapy; response not available.",
+        "",
+        "Chemotherapy is currently on hold. CT shows stable disease.",
+        current_meds="",
+        recent_changes="Chemotherapy held for toxicity",
+        findings="CT shows stable disease.",
+    )[0],
+    "CT shows stable disease.",
+)
+check(
+    "response toxicity clause with explicit response is retained",
+    sanitize_response_assessment(
+        "Partial response with grade 2 neuropathy.",
+        "",
+        "CT documents a partial response with grade 2 neuropathy.",
+        current_meds="FOLFIRINOX",
+    )[0],
+    "Partial response with grade 2 neuropathy.",
+)
+check(
+    "response treatment-linked portal-vein resolution is retained",
+    sanitize_response_assessment(
+        "Portal vein encasement resolved after chemotherapy, consistent with treatment response.",
+        "Status post diagnostic laparoscopy.",
+        "Portal vein encasement resolved after chemotherapy, consistent with treatment response.",
+        current_meds="gemcitabine",
+    )[0],
+    "Portal vein encasement resolved after chemotherapy, consistent with treatment response.",
+)
+check(
+    "response received cycle one today counts as started",
+    sanitize_response_assessment(
+        "Not yet on treatment — no response to assess.",
+        "",
+        "Received cycle 1 today.",
+        current_meds="gemcitabine",
+        recent_changes="Received cycle 1 today",
+    )[0],
+    "Anticancer treatment started today; too early to assess its response.",
+)
+check(
+    "response short drug name started today counts as started",
+    sanitize_response_assessment(
+        "Not yet on treatment — no response to assess.",
+        "",
+        "5-FU started today.",
+        current_meds="5-FU",
+        recent_changes="5-FU started today",
+    )[0],
+    "Anticancer treatment started today; too early to assess its response.",
+)
 
 # ---- bug9 POST-STAGE-PTNM-VERIFY ----
 r=P[15]; check("bug9 pdac15 formal pathology wins → ypT3N2", verify_unique_pathologic_tnm(r["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"],r["note_text"]), "ypT3N2")

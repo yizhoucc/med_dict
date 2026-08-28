@@ -27,6 +27,7 @@ import pandas as pd
 from transformers import BitsAndBytesConfig
 
 from extraction_post_hooks import (
+    clear_held_anticancer_meds,
     clean_breast_distant,
     has_affirmative_m1_site,
     has_explicit_m1_evidence,
@@ -36,6 +37,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
 
@@ -601,13 +603,16 @@ def _build_cross_context(keypoints):
     if isinstance(cancer, dict):
         toc = cancer.get("Type_of_Cancer", "")
         stage = cancer.get("Stage_of_Cancer", "")
+        distant_met = cancer.get("Distant Metastasis", "")
         met = cancer.get("Metastasis", "")
         if toc:
             parts.append(f"- Cancer type: {toc}")
         if stage:
             parts.append(f"- Stage: {stage}")
+        if distant_met:
+            parts.append(f"- Distant metastasis: {distant_met}")
         if met:
-            parts.append(f"- Metastasis: {met}")
+            parts.append(f"- General metastasis (regional and/or distant): {met}")
 
     meds = keypoints.get("Current_Medications", {})
     if isinstance(meds, dict):
@@ -622,6 +627,12 @@ def _build_cross_context(keypoints):
         f = findings.get("findings", "")
         if f:
             parts.append(f"- Clinical findings: {f}")
+
+    changes = keypoints.get("Treatment_Changes", {})
+    if isinstance(changes, dict):
+        recent = changes.get("recent_changes", "")
+        if recent:
+            parts.append(f"- Recent treatment changes: {recent}")
 
     if len(parts) <= 1:
         return ""  # no useful context
@@ -4910,28 +4921,18 @@ def main():
                     drug_dict_cc2["current_meds"] = ""
                     print(f"    [POST-MEDS-COMPLETED-CHEMO] '{cm_cc2}' completed/on-break → cleared current_meds")
 
-        # POST-MEDS-ONHOLD-ANNOTATE: when current_meds lists a chemo regimen but the A/P explicitly states
-        # the SYSTEMIC therapy is currently HELD/PAUSED (not a dose-level hold, not an active continuation),
-        # and it was not cleared as completed/on-break above, annotate the tense rather than dropping the
-        # regimen — preserves what regimen the patient is on while being faithful that it is paused.
-        # pdac13 "pause systemic therapy"; pdac18 "hold her chemotherapy until [HFS] resolves". [round5 P2]
+        # POST-MEDS-ONHOLD: current_meds contains active anticancer drugs only. A regimen that is
+        # explicitly held/paused is cleared here; the hold itself remains in recent_changes.
+        # Shared helper keeps production and regression tests on the same implementation.
         drug_dict_oh = keypoints.get("Current_Medications", {})
         if isinstance(drug_dict_oh, dict):
             cm_oh = (drug_dict_oh.get("current_meds", "") or "").strip()
-            if cm_oh and "hold" not in cm_oh.lower() and "pause" not in cm_oh.lower():
-                hay_oh = (note_text or "").lower() + " " + (assessment_and_plan or "").lower()
-                held_oh = re.search(r'pause\s+(?:the\s+)?systemic\s+therapy|hold\w*\s+(?:her|his|the)?\s*chemo(?:therapy)?\b'
-                                    r'|holding\s+(?:her|his)?\s*chemo|systemic\s+therapy\s+(?:is\s+)?(?:on\s+)?hold'
-                                    r'|chemotherapy\s+(?:is\s+)?(?:currently\s+)?(?:on\s+)?hold', hay_oh)
-                active_oh = re.search(r'presents?\s+for\s+c\d|will\s+continue|continue\s+(?:with\s+)?'
-                                      r'(?:gem|folfir|folfox|abraxane|capecitabine|chemo)|today\'?s?\s+(?:infusion|cycle)'
-                                      r'|proceed with', hay_oh)
-                CHEMO_OH = {'folfirinox', 'mfolfirinox', 'folfox', 'folfiri', 'gemcitabine', 'gem', 'gemzar',
-                            'abraxane', 'nab-paclitaxel', 'capecitabine', 'xeloda', '5-fu', '5-fu/lv', 'nal-iri'}
-                toks_oh = [t.strip().lower().split('(')[0].strip() for t in cm_oh.split(",") if t.strip()]
-                if held_oh and not active_oh and any(t in CHEMO_OH for t in toks_oh):
-                    drug_dict_oh["current_meds"] = cm_oh + " (systemic therapy currently on hold)"
-                    print(f"    [POST-MEDS-ONHOLD-ANNOTATE] '{cm_oh}' + on-hold annotation")
+            cm_after_hold, hold_reason = clear_held_anticancer_meds(
+                cm_oh, note_text, assessment_and_plan
+            )
+            if cm_after_hold != cm_oh:
+                drug_dict_oh["current_meds"] = cm_after_hold
+                print(f"    [POST-MEDS-ONHOLD] cleared '{cm_oh}' — {hold_reason}")
 
         # POST-MEDS-OVARIAN-SUPPRESSION: LHRH-agonist / ovarian-suppression injectables (goserelin/Zoladex,
         # leuprolide/Lupron) are active anticancer endocrine therapy given IN CLINIC, so they're often off
@@ -4958,6 +4959,38 @@ def main():
                         cm_os = drug_dict_os["current_meds"]; cm_os_low = cm_os.lower()
                         print(f"    [POST-MEDS-OVARIAN-SUPPRESSION] added active LHRH agonist '{canon_os}' to current_meds")
                         break
+
+        # POST-RESPONSE-FINAL: response depends on the FINAL medication state, so this shared
+        # conservative sanitizer must run after all current_meds cleanup/addition hooks. It only
+        # fixes source-grounded, high-confidence cases; cross-regimen date attribution stays in
+        # the extraction prompt rather than brittle regex. [2026-08-27 matched-baseline review]
+        response_final = keypoints.get("Response_Assessment", {})
+        if isinstance(response_final, dict):
+            response_before = response_final.get("response_assessment", "") or ""
+            current_meds_final = (
+                keypoints.get("Current_Medications", {}).get("current_meds", "") or ""
+            )
+            recent_changes_final = (
+                keypoints.get("Treatment_Changes", {}).get("recent_changes", "") or ""
+            )
+            findings_final = (
+                keypoints.get("Clinical_Findings", {}).get("findings", "") or ""
+            )
+            response_after, response_reasons = sanitize_response_assessment(
+                response_before,
+                note_text,
+                assessment_and_plan,
+                current_meds=current_meds_final,
+                recent_changes=recent_changes_final,
+                findings=findings_final,
+            )
+            if response_after != response_before:
+                response_final["response_assessment"] = response_after
+                print(
+                    "    [POST-RESPONSE-FINAL] "
+                    f"{'; '.join(response_reasons)}: '{response_before[:80]}' → "
+                    f"'{response_after[:100]}'"
+                )
 
         # POST-ER-CHECK: Infer ER status from medications when Type_of_Cancer lacks it [v16] [breast-only]
         ER_POS_DRUGS = ["tamoxifen", "letrozole", "anastrozole", "exemestane", "arimidex",

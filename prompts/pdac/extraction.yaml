@@ -120,10 +120,12 @@ Current_Medications: |
   - PAST/COMPLETED (do NOT include): medications already finished or stopped.
     Look for: "completed", "s/p", "stopped", "discontinued", "held", "finished [N] cycles"
 
-  Focus on CANCER-RELATED medications: chemotherapy, targeted therapy, immunotherapy, supportive care.
+  Focus ONLY on ACTIVE ANTICANCER medications: chemotherapy, targeted therapy, immunotherapy, and endocrine therapy when applicable.
   Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy medications.
-  IMPORTANT: Only include medications DIRECTLY related to cancer care.
-  If no cancer-related medications are currently active, write empty string "".
+  IMPORTANT: Supportive medications are NOT current_meds. Put anti-nausea drugs, pain medicines,
+  pancreatic enzymes, growth factors, anticoagulants, and similar supportive drugs in
+  Treatment_Changes.supportive_meds instead.
+  If no anticancer medications are currently active, write empty string "".
 
   CROSS-REFERENCE: If a "Current Outpatient Medications" section exists, use it as primary reference.
   IMPORTANT EXCEPTION: Clinic-administered drugs (IV chemotherapy, injections, infusions) may NOT be in the outpatient medication list. If the A/P states the patient is CURRENTLY ON a drug, include it.
@@ -138,7 +140,7 @@ Current_Medications: |
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
+  "current_meds": "List of active anticancer medications the patient is taking or receiving now, or empty string if none. Supportive medications belong in supportive_meds."
   }
 
 Treatment_Changes: |
@@ -198,9 +200,10 @@ Response_Assessment: |
 
   Think step by step before answering:
   1. Has this patient started any cancer treatment yet? (surgery alone does not count as "treatment" for response assessment purposes)
-     CRITICAL EXCEPTION — POST-SURGERY: If the patient received neoadjuvant therapy BEFORE surgery, the surgical pathology IS the response assessment.
+     CRITICAL EXCEPTION — POST-NEOADJUVANT SURGERY: If the patient received neoadjuvant therapy BEFORE surgery, treatment-effect pathology (residual tumor/cellularity, treated nodes, pCR, Ryan/Evans score) IS the response assessment. Ordinary diagnostic pathology and routine postoperative changes are not.
      IMPORTANT: Completed radiation therapy COUNTS as treatment.
      IMPORTANT: A patient who was on PREVIOUS treatment and now shows disease PROGRESSION or RECURRENCE — that IS a response assessment.
+     Even if the next regimen has not started, report the recurrence/progression factually rather than writing only "Not yet on treatment."
   2. If yes, what treatment are they on?
   3. Is there any evidence of how the cancer is responding? Search the ENTIRE note for ANY of these:
      - Imaging: CT stable, PET response, scan results
@@ -209,14 +212,24 @@ Response_Assessment: |
      - Clinical status: "labs okay to proceed" (implies stable enough to continue)
   4. If no treatment started yet, write "Not yet on treatment — no response to assess."
   5. If on treatment but no response data in the note, write "Not mentioned in note."
+  6. CURRENT-REGIMEN TIME WINDOW — identify the current regimen and when it began, switched, stopped, or was held before assigning response evidence.
+     - Imaging or marker results from BEFORE the current regimen started describe the PRIOR regimen, not the current regimen.
+     - If prior therapy progressed and the patient is now early in a new regimen with no post-start assessment, state the prior progression and explicitly say response to the current regimen is not yet assessed.
+  7. DISTINGUISH PRESCRIBED FROM ACTUALLY STARTED TODAY:
+     - "will start", "plan to start", "prescribed", "ordered", or "recommend starting" means NOT started.
+     - "received", "administered", "was given", or "started today" means treatment HAS started, but it is too early to assess response.
+  8. A/P ASSESSMENT TAKES PRIORITY: an explicit current physician assessment in the A/P outranks older imaging or historical problem-list text. Preserve nuances such as mixed response, possible progression, or stable-to-minimally increased disease.
 
   STRICT RULES — do NOT violate:
   - Do NOT include future plans ("will start", "plan to").
   - Do NOT use generic boilerplate phrases.
   - Do NOT write "tolerating therapy well" unless the note EXPLICITLY uses those exact words.
+  - Toxicity or tolerability alone (hand-foot syndrome, mucositis, nausea, neuropathy, fatigue, dose hold) is NOT tumor response.
+  - Postoperative/anatomic changes (healing, postoperative fluid resolving, vascular narrowing resolving) and isolated biliary changes (pneumobilia, biliary-duct dilation) are NOT tumor response unless the physician explicitly links them to tumor change.
   - Do NOT use the word "responding" unless you can cite SPECIFIC imaging or tumor marker evidence.
   - IMPORTANT: "responding" implies MEASURABLE IMPROVEMENT. Use "stable disease" for unchanged findings.
-  - Do NOT describe pathology results as a "response" — pathology is a diagnosis.
+  - Use formal categories such as "partial response" or "complete response" ONLY when the note explicitly states that category. If the source says only "slight decrease" or "minimal decrease", preserve that exact degree; do not upgrade it to "partial response".
+  - Do NOT describe ordinary diagnostic pathology results as a "response". The only pathology exception is post-neoadjuvant treatment-effect assessment described above.
   - Do NOT describe surgical recovery as a response assessment.
   - SUSPECTED vs CONFIRMED: If imaging shows "suspicious" or "concerning" findings that are NOT confirmed (e.g., "suspicious for metastases", "concerning for"), do NOT write "cancer is not responding" or "cancer is progressing". Instead write "suspicious findings that need further evaluation" or "findings being monitored closely". Only conclude progression if the physician's assessment explicitly says "progression" or "progressing".
 

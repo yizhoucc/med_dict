@@ -508,3 +508,373 @@ def locally_advanced_stage(text, cancer_type):
     if cancer_type != "breast" and ("unresectable" in text or vessel):
         return "Locally advanced (unresectable)"
     return "Locally advanced"
+
+
+UNTREATED_RESPONSE_RE = re.compile(
+    r"\bnot yet on treatment\b|\bnot on treatment\b|\bno response to assess\b",
+    re.IGNORECASE,
+)
+
+TUMOR_RESPONSE_ANCHOR_RE = re.compile(
+    r"\b(?:cancer|disease|tumou?r|mass|lesion|metasta\w*|recurr\w*|carcinoma|"
+    r"lymph[\s-]*node|nodule|ca\s*19[\s-]*9|cea|respond\w*|response|progress\w*|"
+    r"stable disease|progressive disease|partial response|complete response)\b",
+    re.IGNORECASE,
+)
+
+NON_RESPONSE_FINDING_RE = re.compile(
+    r"hand[\s-]*foot|mucositis|neuropath|nausea|vomit|diarrhea|fatigue|toxicit|"
+    r"side effect|pneumobilia|biliary duct|bile duct|cholangit|jaundice|"
+    r"post[\s-]*(?:operative|surgical)|surgical recovery|healing|seroma|hematoma|"
+    r"free fluid|cut edge of (?:the )?pancreas",
+    re.IGNORECASE,
+)
+
+
+def _clinical_sentences(text):
+    """Split prose conservatively while preserving measurement-rich source wording."""
+    return [
+        sentence.strip(" \t-*\u2022")
+        for sentence in re.split(r"(?<=[.!?])\s+|[\r\n]+|\s{2,}-\s+", str(text or ""))
+        if sentence.strip(" \t-*\u2022")
+    ]
+
+
+def _first_supported_sentence(sources, predicate):
+    for source in sources:
+        for sentence in _clinical_sentences(source):
+            if predicate(sentence):
+                return sentence if sentence.endswith((".", "!", "?")) else sentence + "."
+    return ""
+
+
+def _positive_recurrence_or_growth_sentence(assessment_and_plan, findings, note_text):
+    """Find a current, affirmative recurrence/growth statement, excluding risk and uncertainty."""
+    excluded = re.compile(
+        r"no evidence of (?:disease )?recurrence|without recurrence|free of recurrence|"
+        r"risk (?:of|for) recurrence|high risk for recurrence|concern\w* for recurrence|"
+        r"possible recurrence|suspect\w* recurrence|if (?:the )?(?:cancer|disease) recur|"
+        r"whether (?:the )?(?:cancer|disease) (?:has )?recur|"
+        r"does not recur|do not recur|prevent\w* recurrence|decreas\w* the risk of recurrence",
+        re.IGNORECASE,
+    )
+    recurrence = re.compile(
+        r"local[\s-]*regional recurrence|locoregional recurrence|local recurrence|"
+        r"recurrent (?:cancer|disease|carcinoma)|compatible with recurrent disease|"
+        r"biopsy[^.;]{0,80}\brecurr\w*",
+        re.IGNORECASE,
+    )
+    growth = re.compile(
+        r"(?:growth|grew|enlarged|interval increase|increas\w* (?:in )?size)[^.;]{0,100}"
+        r"(?:cancer|tumou?r|mass|lesion)|"
+        r"(?:cancer|tumou?r|mass|lesion)[^.;]{0,100}"
+        r"(?:growth|grew|enlarged|interval increase|increas\w* (?:in )?size)",
+        re.IGNORECASE,
+    )
+    current_source = "\n".join(
+        str(value or "") for value in (assessment_and_plan, findings)
+    )
+    all_source = f"{current_source}\n{note_text or ''}"
+    source_sentences = _clinical_sentences(current_source)
+    confirmed_recurrence = any(
+        recurrence.search(sentence) and not excluded.search(sentence)
+        for sentence in source_sentences
+    )
+    prior_treatment = bool(
+        re.search(
+            r"\b(?:progressed|progression) on\b|\brecurr\w* after\b|"
+            r"\b(?:completed|finished|received)\b[^.;\n]{0,60}"
+            r"(?:chemo|radiation|therapy|treatment|cycle)|"
+            r"\b(?:previously|prior) (?:treated|therapy|treatment|chemo|radiation)|"
+            r"\bs/p\s+[^.;\n]{0,45}(?:chemo|radiation|therapy|treatment)",
+            all_source,
+            re.IGNORECASE,
+        )
+    )
+
+    def supported(sentence):
+        return not excluded.search(sentence) and bool(
+            recurrence.search(sentence)
+            or ((prior_treatment or confirmed_recurrence) and growth.search(sentence))
+        )
+
+    return _first_supported_sentence((assessment_and_plan, findings), supported)
+
+
+def _same_day_treatment_started(assessment_and_plan, recent_changes, current_meds):
+    """Recognize actual same-day treatment starts, not prescriptions or future plans."""
+    context = f"{recent_changes or ''}\n{assessment_and_plan or ''}"
+    current_meds = str(current_meds or "").strip()
+    if not current_meds:
+        return False
+    med_tokens = [
+        token.lower()
+        for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]{1,}", current_meds)
+        if token.lower() not in {"systemic", "therapy", "currently", "hold", "on"}
+    ]
+    for sentence in _clinical_sentences(context):
+        explicit_administration = re.search(
+            r"\b(?:received|administered|was given|given|began|initiated|started)\b"
+            r"[^.;\n]{0,80}\b(?:today|this visit)\b|"
+            r"\b(?:today|this visit)\b[^.;\n]{0,50}\b(?:received|administered|was given)\b|"
+            r"^start\s+[^.;\n]{1,80}\btoday\b",
+            sentence,
+            re.IGNORECASE,
+        )
+        future_only = re.search(
+            r"\b(?:will|plan(?:ned)? to|recommend(?:ed)?|consider|may|can|prescri\w*|order\w*)\b"
+            r"[^.;\n]{0,20}\b(?:start|begin|initiat)",
+            sentence,
+            re.IGNORECASE,
+        )
+        treatment_named = bool(
+            re.search(
+                r"\b(?:chemo(?:therapy)?|treatment|infusion|injection|cycle\s*\d+)\b",
+                sentence,
+                re.I,
+            )
+            or any(
+                re.search(rf"(?<!\w){re.escape(token)}(?!\w)", sentence, re.IGNORECASE)
+                for token in med_tokens
+            )
+        )
+        if explicit_administration and not future_only and treatment_named:
+            return True
+    return False
+
+
+def _explicit_treatment_linked_mass_disappearance(assessment_and_plan, findings, note_text):
+    def supported(sentence):
+        lower = sentence.lower()
+        return bool(
+            re.search(r"\b(?:mass|tumou?r|lesion)\b", lower)
+            and re.search(r"\bno longer (?:well )?(?:seen|visible)\b", lower)
+            and re.search(r"\b(?:likely|consistent(?:ly)?) (?:related|due) to treatment\b", lower)
+        )
+
+    return _first_supported_sentence((assessment_and_plan, findings), supported)
+
+
+def _direct_tumor_status_sentence(assessment_and_plan, findings, note_text):
+    direct_status = re.compile(
+        r"\bno evidence of (?:metastatic disease|disease|recurrence)\b|"
+        r"\b(?:stable|progressive) disease\b",
+        re.IGNORECASE,
+    )
+    return _first_supported_sentence(
+        (assessment_and_plan, findings),
+        lambda sentence: bool(direct_status.search(sentence)),
+    )
+
+
+def _has_affirmative_progression(response):
+    for sentence in _clinical_sentences(response):
+        if not re.search(
+            r"\bprogress(?:ion|ed|ing)\b|\bmixed response\b|"
+            r"\bnew (?:[a-z][\w/-]*\s+){0,3}(?:metasta\w*|tumou?r|mass|lesion)\b",
+            sentence,
+            re.IGNORECASE,
+        ):
+            continue
+        if re.search(
+            r"\bno (?:evidence of )?progression\b|\bwithout progression\b|"
+            r"\bnot progressing\b|"
+            r"\bno new (?:[a-z][\w/-]*\s+){0,3}(?:metasta\w*|tumou?r|mass|lesion)\b",
+            sentence,
+            re.IGNORECASE,
+        ):
+            continue
+        return True
+    return False
+
+
+def clear_held_anticancer_meds(current_meds, note_text, assessment_and_plan):
+    """Clear a chemotherapy regimen when the source explicitly says it is held/paused."""
+    current_meds = str(current_meds or "").strip()
+    if not current_meds:
+        return current_meds, None
+    source = f"{note_text or ''}\n{assessment_and_plan or ''}".lower()
+    held = re.search(
+        r"pause\s+(?:the\s+)?systemic\s+therapy|"
+        r"hold\w*\s+(?:her|his|the)?\s*chemo(?:therapy)?\b|"
+        r"holding\s+(?:her|his)?\s*chemo|"
+        r"systemic\s+therapy\s+(?:is\s+)?(?:currently\s+)?(?:on\s+)?hold|"
+        r"chemotherapy\s+(?:is\s+)?(?:currently\s+)?(?:on\s+)?hold",
+        source,
+    )
+    active_now = re.search(
+        r"presents?\s+for\s+c\d|today'?s?\s+(?:infusion|cycle)|"
+        r"proceed with\s+(?:today'?s?\s+)?(?:chemo|treatment|cycle)|"
+        r"continue\s+(?:with\s+)?(?:gem|folfir|folfox|abraxane|capecitabine|chemo)",
+        source,
+    )
+    chemotherapy = re.search(
+        r"folfirinox|mfolfirinox|folfox|folfiri|gemcitabine|\bgem\b|gemzar|"
+        r"abraxane|nab-paclitaxel|capecitabine|xeloda|5-fu|nal-iri|chemotherapy",
+        current_meds,
+        re.IGNORECASE,
+    )
+    if held and chemotherapy and not active_now:
+        return "", "systemic anticancer therapy explicitly held/paused"
+    return current_meds, None
+
+
+def sanitize_response_assessment(
+    response,
+    note_text,
+    assessment_and_plan,
+    current_meds="",
+    recent_changes="",
+    findings="",
+):
+    """Apply only high-confidence, source-grounded response-assessment corrections.
+
+    Returns ``(cleaned_response, reasons)``.  The helper deliberately does not attempt
+    general regimen/date reasoning; ambiguous cross-regimen attribution remains a prompt task.
+    """
+    original = str(response or "").strip()
+    cleaned = original
+    reasons = []
+    current_response_source = "\n".join(
+        str(value or "") for value in (assessment_and_plan, findings)
+    )
+    source = f"{current_response_source}\n{note_text or ''}"
+
+    claims_current_treatment = bool(
+        re.search(
+            r"\b(?:currently\s+)?(?:on|receiving|undergoing)\s+"
+            r"(?:current\s+)?(?:treatment|therapy|chemotherapy)\b",
+            cleaned,
+            re.IGNORECASE,
+        )
+    )
+    if claims_current_treatment and not str(current_meds or "").strip():
+        state_source = f"{recent_changes or ''}\n{assessment_and_plan or ''}"
+        planned = re.search(
+            r"\b(?:will|plan(?:ned)? to|recommend(?:ed)?|consider|may|can|prescri\w*|order\w*)\b"
+            r"[^.;\n]{0,35}\b(?:start|begin|initiat)|"
+            r"\b(?:start|begin|initiat)\b[^.;\n]{0,50}\b(?:next|after|once|when)\b",
+            state_source,
+            re.IGNORECASE,
+        )
+        held_or_completed = re.search(
+            r"\b(?:hold|held|holding|pause|paused|completed|finished)\b[^.;\n]{0,60}"
+            r"(?:chemo|treatment|therapy|cycle)|"
+            r"\b(?:chemo(?:therapy)?|systemic therapy|treatment)\s+"
+            r"(?:is\s+)?(?:currently\s+)?(?:on\s+)?(?:hold|paused)|"
+            r"\b(?:chemo(?:therapy)?|treatment)\s+(?:break|holiday)\b",
+            state_source,
+            re.IGNORECASE,
+        )
+        if planned and not held_or_completed:
+            cleaned = "Not yet on treatment — no response to assess."
+            reasons.append("empty final meds plus planned-only treatment")
+        elif held_or_completed:
+            cleaned = _direct_tumor_status_sentence(
+                assessment_and_plan, findings, note_text
+            ) or "Not mentioned in note."
+            reasons.append("empty final meds plus held/completed treatment")
+
+    was_untreated = bool(UNTREATED_RESPONSE_RE.search(cleaned))
+    recurrence_sentence = ""
+    if was_untreated:
+        recurrence_sentence = _positive_recurrence_or_growth_sentence(
+            assessment_and_plan, findings, note_text
+        )
+        if recurrence_sentence:
+            cleaned = recurrence_sentence
+            reasons.append("affirmative recurrence/growth replaces untreated response")
+
+    if was_untreated and _same_day_treatment_started(
+        assessment_and_plan, recent_changes, current_meds
+    ):
+        start_statement = "Anticancer treatment started today; too early to assess its response."
+        cleaned = f"{cleaned} {start_statement}" if recurrence_sentence else start_statement
+        reasons.append("same-day treatment start")
+
+    if re.search(r"\bpartial response\b", cleaned, re.IGNORECASE) and not re.search(
+        r"\bpartial (?:radiographic |pathologic )?response\b",
+        current_response_source,
+        re.IGNORECASE,
+    ):
+        decrease_sentence = _first_supported_sentence(
+            (assessment_and_plan, findings, note_text),
+            lambda sentence: bool(
+                re.search(r"\b(?:slight|minimal|mild)(?:ly)?\b", sentence, re.IGNORECASE)
+                and re.search(r"\b(?:decreas\w*|reduc\w*|smaller|shrink\w*)\b", sentence, re.IGNORECASE)
+                and TUMOR_RESPONSE_ANCHOR_RE.search(sentence)
+            ),
+        )
+        if decrease_sentence:
+            if _has_affirmative_progression(cleaned):
+                degree = re.search(
+                    r"\b(slight|minimal|mild)(?:ly)?\s+(decreas\w*|reduc\w*|shrink\w*)",
+                    decrease_sentence,
+                    re.IGNORECASE,
+                )
+                replacement = (
+                    f"{degree.group(1).lower()} decrease" if degree else "documented decrease"
+                )
+                cleaned = re.sub(
+                    r"\b(?:a\s+)?partial response\b",
+                    replacement,
+                    cleaned,
+                    flags=re.IGNORECASE,
+                )
+            else:
+                cleaned = decrease_sentence
+            reasons.append("unsupported formal partial-response label removed")
+
+    disappearance = _explicit_treatment_linked_mass_disappearance(
+        assessment_and_plan, findings, note_text
+    )
+    if disappearance and "no longer" not in cleaned.lower():
+        if _has_affirmative_progression(cleaned):
+            cleaned = f"{cleaned.rstrip()} {disappearance}"
+            reasons.append("progression and treatment-linked mass disappearance both preserved")
+        else:
+            cleaned = disappearance
+            reasons.append("explicit treatment-linked mass disappearance preserved")
+
+    sentences = _clinical_sentences(cleaned)
+    if sentences:
+        surgery_context = bool(
+            re.search(
+                r"\b(?:status post|s/p|underwent|prior)\b[^.;\n]{0,45}"
+                r"(?:resection|surgery|whipple|pancreatectomy|mastectomy|lumpectomy)|"
+                r"post[\s-]*(?:operative|surgical)|postsurgical changes",
+                source,
+                re.IGNORECASE,
+            )
+        )
+        kept = []
+        dropped = False
+        for sentence in sentences:
+            lower = sentence.lower()
+            pure_non_response = bool(
+                NON_RESPONSE_FINDING_RE.search(sentence)
+                and not TUMOR_RESPONSE_ANCHOR_RE.search(sentence)
+            )
+            pure_postop_vascular = bool(
+                surgery_context
+                and re.search(
+                    r"portal vein|superior mesenteric vein|vascular narrowing|vascular occlusion",
+                    lower,
+                )
+                and not TUMOR_RESPONSE_ANCHOR_RE.search(sentence)
+            )
+            if pure_non_response or pure_postop_vascular:
+                dropped = True
+                continue
+            kept.append(sentence)
+        if dropped:
+            if kept:
+                cleaned = " ".join(kept)
+            else:
+                cleaned = _direct_tumor_status_sentence(
+                    assessment_and_plan, findings, note_text
+                ) or "Not assessed at this visit."
+            reasons.append("pure toxicity/postoperative/biliary finding removed")
+
+    cleaned = cleaned.strip()
+    return cleaned, tuple(reasons)

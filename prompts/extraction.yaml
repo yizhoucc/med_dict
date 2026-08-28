@@ -162,14 +162,13 @@ Current_Medications: |
   - STOPPED/DROPPED (do NOT include): medications recently discontinued.
     Look for: "recently dropped", "stopped due to", "discontinued", "held", "self D/C", "D/Ced"
 
-  Focus on CANCER-RELATED medications: chemotherapy, hormonal therapy, targeted therapy, immunotherapy, bone-protecting agents.
+  Focus ONLY on ACTIVE ANTICANCER medications: chemotherapy, hormonal/endocrine therapy, targeted therapy, and immunotherapy.
   Do NOT include general medications like blood pressure, diabetes, psychiatric, allergy, antibiotic, vitamin, or supplement medications.
-  IMPORTANT: Only include medications DIRECTLY related to cancer care. This includes:
-  - Oncology drugs (chemo, hormonal, targeted, immunotherapy)
-  - Supportive care for cancer treatment (anti-nausea, growth factors, bone agents)
-  - Pain medications for cancer-related pain
+  IMPORTANT: Supportive medications are NOT current_meds. Put anti-nausea drugs, pain medicines,
+  growth factors, bone-protecting agents, steroids used only for supportive care, and similar drugs
+  in Treatment_Changes.supportive_meds instead.
   Do NOT include: eye drops, blood pressure meds, diabetes meds, vitamins, allergy meds, or other non-cancer medications — even if they appear in the medication list.
-  If no cancer-related medications are currently active, write empty string "".
+  If no anticancer medications are currently active, write empty string "".
 
   CROSS-REFERENCE: If a "Current Outpatient Medications" or "Current Medications" section exists in the note, use it as your primary reference for verifying which drugs are current. If a drug is in the medication list but described elsewhere as stopped/held, do NOT include it.
   - SELF-MANAGED/UNAUTHORIZED: If the patient obtained medications outside the clinical system (e.g., from another country, alternative medicine clinic, self-administered at home without physician supervision), and the treating physician does NOT endorse or manage these drugs (look for skeptical language like "apparently", "so-called", "claims to be taking", or "discontinue our medications"), do NOT list them in current_meds. Instead, these should go in recent_changes with appropriate context.
@@ -180,7 +179,7 @@ Current_Medications: |
 
   Respond *only* with a JSON object using this exact schema:
   {
-  "current_meds": "List of current cancer-related medications the patient is ACTIVELY taking now, or empty string if none."
+  "current_meds": "List of active anticancer medications the patient is taking or receiving now, or empty string if none. Supportive medications belong in supportive_meds."
   }
 
 Treatment_Changes: |
@@ -283,10 +282,10 @@ Response_Assessment: |
      When citing imaging (PET, CT, MRI, bone scan), verify the scan was done AFTER the current treatment regimen started.
      If the patient switched treatments (e.g., from letrozole to Faslodex), a scan done BEFORE the switch reflects the PRIOR treatment's response, not the current one.
      Example: PET on 10/10 showed progression → patient switched to Faslodex on 10/16 → current visit exam says "stable" → the response on CURRENT treatment is "exam stable", NOT "PET showed progression on Faslodex."
-  7. "JUST PRESCRIBED" ≠ "ON TREATMENT":
+  7. DISTINGUISH PRESCRIBED FROM ACTUALLY STARTED TODAY:
      If a medication was PRESCRIBED or ORDERED at THIS visit (e.g., "Rx for letrozole given", "prescription ordered", "will start", "instructed to begin"), the patient has NOT yet started treatment. Write "Not yet on treatment — no response to assess."
-     "On treatment" requires the patient to have ACTUALLY BEEN TAKING the medication for some time.
      Clues that treatment has NOT started: "will begin", "Rx given today", "instructed to start", "prescription ordered", "ok to start", "she can start immediately"
+     In contrast, if the note documents that treatment was ACTUALLY GIVEN or STARTED today (e.g., "received", "administered", "was given", "started today", or a same-day clinic injection), treatment HAS started. State: "Treatment started today; too early to assess response." Do not call this "not yet on treatment."
   8. A/P ASSESSMENT TAKES PRIORITY:
      If the A/P section contains an explicit current assessment like "Exam stable", "doing well", "NED", "no evidence of recurrence", or "no evidence of disease", prioritize THIS over historical imaging data from earlier in the note.
      The A/P represents the physician's CURRENT assessment at this visit. Historical imaging in the HPI/Problem List may be from BEFORE the current treatment regimen.
@@ -296,9 +295,12 @@ Response_Assessment: |
   - Do NOT include treatment discussions or recommendations.
   - Do NOT use generic boilerplate phrases. Every claim must be traceable to a specific sentence in the note.
   - Do NOT write "tolerating therapy well" or "symptoms improved" unless the note EXPLICITLY uses those exact words.
+  - Toxicity or tolerability alone (hand-foot syndrome, mucositis, nausea, neuropathy, fatigue, dose hold) is NOT tumor response.
+  - Postoperative/anatomic changes (healing, postoperative fluid resolving, vascular narrowing resolving) and isolated biliary changes (pneumobilia, biliary-duct dilation) are NOT tumor response unless the physician explicitly links them to tumor change.
   - Do NOT use the word "responding" or "response" unless you can cite SPECIFIC imaging or tumor marker evidence. "Labs okay" or "stable on exam" alone does NOT mean the cancer is "responding" — it means the cancer status is unknown or stable.
   - IMPORTANT: "responding" implies MEASURABLE IMPROVEMENT. Use "stable disease" for unchanged findings, "no evidence of disease" for no measurable disease, and "responding" ONLY when there is documented tumor shrinkage or marker decrease.
-  - Do NOT describe pathology results (tumor size, grade, margins) as a "response" — pathology is a diagnosis, not a treatment response.
+  - Use formal categories such as "partial response" or "complete response" ONLY when the note explicitly states that category. If the source says only "slight decrease" or "minimal decrease", preserve that exact degree; do not upgrade it to "partial response".
+  - Do NOT describe ordinary diagnostic pathology results (tumor size, grade, margins) as a "response". The only pathology exception is post-neoadjuvant treatment-effect assessment described above.
   - Do NOT describe surgical recovery ("healing well", "recovering from surgery") as a response assessment.
   - Do NOT describe risk estimates or Oncotype scores as a response — those are prognostic tools, not treatment responses.
   - Do NOT write "Not applicable" or "Not specified".
