@@ -14,11 +14,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 38/40 (breast 20/20, PDAC 18/20)
-- PL findings: P0=4, P1=218, P2=148
-- Attribution findings: A0=125, A1=143, A2=244
-- Core verdict totals (PL / BL / TIE): 60 / 28 / 160
-- Current phase: PDAC manual review
+- Completed: 40/40 (breast 20/20, PDAC 20/20)
+- PL findings: P0=4, P1=227, P2=157
+- Attribution findings: A0=134, A1=150, A2=258
+- Core verdict totals (PL / BL / TIE): 65 / 28 / 167
+- Current phase: review complete; failure-pattern synthesis and targeted repair
 
 ## Results
 
@@ -396,3 +396,23 @@ Date: 2026-08-27
 - Core verdicts: current_meds PL; Stage BL; Distant TIE; Metastasis PL; response PL; genetic results TIE. Total PL 3 / BL 1 / TIE 2.
 - v2.1 change: general Metastasis and response improve while current medication remains correctly empty during a full regimen hold; Stage remains unresolved.
 - Main verification: read the complete note and confirmed two-dose neoadjuvant exposure, definitive surgery with 2/29 positive nodes, postoperative Gem/Cape, current complete hold, planned five-of-seven-day restart, capecitabine marked not taking, no distant disease, current supportive drugs, future Lovenox/Doppler plan, and ATM VUS.
+
+### PDAC sample 19 — coral_idx 18
+
+- Case: locally advanced unresectable pancreatic head/uncinate adenocarcinoma with prior progression on Gem/Abrax and current dose-modified FOLFIRINOX. Cycle 3 was held once for marked cholestasis. The same-day CT addendum confirms local primary progression with biliary obstruction and possible partial duodenal obstruction; the historical 11 mm liver lesion remains uncharacterized. Same-day leg ultrasound was negative for DVT, and an urgent GI referral for ERCP was placed.
+- PL P1: findings omits the negative leg ultrasound and contains a damaged alkaline-phosphatase value; recent changes still describes the already-completed CT as future; Imaging lists the completed CT and ultrasound as future plans; Specialty retains SMS but omits the urgent GI/ERCP referral; Referral follow-up misroutes that GI referral as ordinary follow-up.
+- PL P2: summary does not integrate the confirming addendum; Type omits the uncinate location; response retains `possible` after definite interval local growth; Procedure omits the urgent-referral context.
+- Attribution: A0 second opinion, Distant, Metastasis, next visit, and follow-up; A1 supportive medication and both goal fields; A2 summary, Type, Stage, labs, findings, current medication, recent changes, Imaging, and Specialty.
+- Core verdicts: current_meds PL; Stage TIE; Distant PL; Metastasis TIE; response PL; genetic results TIE. Total PL 3 / BL 0 / TIE 3.
+- v2.1 change: general Metastasis no longer fabricates confirmed regional nodes, and all former BL core wins are eliminated.
+- Main verification: read the complete note and confirmed active FOLFIRINOX with a single-cycle hold, addendum-confirmed local progression/obstruction, persistent uncertainty of the old liver lesion, completed CT and negative leg ultrasound, and urgent GI/ERCP referral.
+
+### PDAC sample 20 — coral_idx 19
+
+- Case: newly diagnosed metastatic pancreatic-tail adenocarcinoma. Formal imaging shows definite peritoneal carcinomatosis and omental caking; multiple liver lesions are suspicious but unconfirmed, and retroperitoneal nodes are only prominent. No therapy has started. Standard regimens and trials are under discussion; the patient is merely interested in REVOLUTION and has not consented or screened. UCSF500 is ordered, germline counseling/testing is recommended, and MMR is intact by IHC.
+- PL P1: Type omits the explicit metastatic state; Procedure upgrades conditional trial tissue collection/biopsy requirements into current procedures; Referral follow-up treats conditional nontherapeutic-research eligibility as a follow-up arrangement; genetic results incorrectly says none and omits completed intact MMR.
+- PL P2: general Metastasis could retain prominent but unconfirmed retroperitoneal nodes; findings weakens definite carcinomatosis and omits omental caking/nodes; supportive medication omits the mainly used Tylenol; medication plan underemphasizes REVOLUTION interest and lack of consent; Genetics wording is a recommendation rather than a clearly placed referral.
+- Attribution: A0 second opinion, Procedure, follow-up, and genetic results; A1 labs, supportive medication, response, and next visit; A2 Patient type, Distant, Metastasis, findings, and genetic plan.
+- Core verdicts: current_meds TIE; Stage TIE; Distant PL; Metastasis PL; response TIE; genetic results TIE. Total PL 2 / BL 0 / TIE 4.
+- v2.1 change: both metastasis fields now preserve mixed certainty and remove fabricated confirmed nodes; completed MMR remains omitted.
+- Main verification: read the complete note and confirmed definite peritoneal/omental disease, only-suspicious liver lesions, unconfirmed retroperitoneal nodes, no active therapy, discussion-only systemic options, conditional REVOLUTION interest/screening, planned UCSF500/germline work, and completed intact MMR.
