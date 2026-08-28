@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 23/40 (breast 20/20, PDAC 3/20)
-- PL findings: P0=3, P1=129, P2=101
-- Attribution findings: A0=73, A1=82, A2=161
-- Core verdict totals (PL / BL / TIE): 36 / 20 / 102
+- Completed: 26/40 (breast 20/20, PDAC 6/20)
+- PL findings: P0=4, P1=141, P2=111
+- Attribution findings: A0=82, A1=94, A2=173
+- Core verdict totals (PL / BL / TIE): 41 / 21 / 114
 - Current phase: PDAC manual review
 
 ## Results
@@ -250,3 +250,33 @@ Date: 2026-08-27
 - Attribution: A0 second opinion, recent changes, procedure, next visit, advance care, and follow-up; A1 Patient type, findings, and supportive medication; A2 Distant, Metastasis, labs, goals description, response, and lab plan.
 - Core verdicts: current_meds PL; Stage TIE; Distant PL; Metastasis PL; response PL; genetic results TIE. Total PL 4 / BL 0 / TIE 2.
 - Main verification: read the complete note and confirmed the March 7.2 cm pancreatic-tail mass, direct spleen/posterior-stomach invasion, possible invasion of adjacent organs, partial gastric-outlet obstruction, ascites, current clinical decline, conditional chemotherapy based on labs, possible—not completed—future hospice transition, and the absence of a specified next clinic appointment.
+
+### PDAC sample 4 — coral_idx 3
+
+- Case: initially locally advanced/unresectable pancreatic adenocarcinoma. A historical segment-7 liver lesion had conflicting interpretations, while current CT describes liver hemangiomas and no suspicious lesions. After FOLFIRINOX and six cycles of gemcitabine/nab-paclitaxel, the patient is on surveillance with stable disease and good control. She is a CA19-9 non-secretor.
+- PL P0: response fabricates new/enlarging lesions, a rising tumor marker, and suspected early recurrence, directly contradicting the current imaging and assessment.
+- PL P1: findings omits the vascular encasement/narrowing that explains unresectability; recent changes is empty despite completion of six gemcitabine/nab-paclitaxel cycles followed by surveillance; goals description omits explicit continued good disease control.
+- PL P2: Type omits the mucinous descriptor found in imaging history; Stage omits unresectable status; supportive-medication coverage is incomplete; Therapy `None` does not convey the intentional chemotherapy break/surveillance state.
+- Attribution: A0 second opinion and response; A1 findings, supportive medication, and genetic results; A2 Stage, Distant, and Metastasis.
+- Core verdicts: current_meds TIE; Stage PL; Distant TIE; Metastasis TIE; response BL; genetic results PL. Total PL 2 / BL 1 / TIE 3.
+- v2.1 change: Distant uncertainty and removal of fabricated regional nodes improve two metastasis fields, but response severely regresses from stable disease to a fabricated recurrence template.
+- Main verification: read the complete note and confirmed `no significant change`, `No evidence of metastasis`, `No new suspicious nodule`, `continued good disease control on surveillance`, six completed gemcitabine/nab-paclitaxel cycles, and `She does not express CA-19-9`. The PDAC prompt explicitly includes non-secretor status under completed molecular results.
+
+### PDAC sample 5 — coral_idx 4
+
+- Case: Stage IV pancreatic adenocarcinoma with biopsy-proven oligometastatic abdominal-wall disease. After 12 cycles of FOLFIRINOX, pancreatic and abdominal-wall disease is stable and the patient is on a chemotherapy break. Foundation liquid biopsy reports MSI undetermined and RB1 P26fs*47.
+- PL P1: Type omits the biopsy-proven oligometastatic context; recent changes selects an older cycle-10 thrombocytopenia hold instead of the current completion of 12 cycles and chemotherapy break; supportive medication includes ondansetron marked `Patient not taking` while omitting current fluconazole and A/P opioids; Therapy misroutes Creon/opioids as cancer therapy and omits the chemotherapy-break state; existing Nutrition and SMS/tumor-board care are mislabeled as new referrals.
+- PL P2: findings is overlong and mixes treatment/laboratory/supportive content; future visit mode is not explicit.
+- Attribution: A0 second opinion, Therapy, Nutrition, and Specialty; A1 labs, recent changes, and goals description; A2 summary, findings, supportive medication, response, medication plan, next visit, and advance care.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; genetic results TIE. Total PL 0 / BL 0 / TIE 6.
+- Main verification: read the complete note and confirmed biopsy-proven abdominal-wall metastasis, stable pancreas/abdominal-wall disease, completed 12-cycle FOLFIRINOX course, current chemotherapy break, `Patient not taking` ondansetron, current fluconazole/opioid plan, existing supportive services, and Foundation liquid-biopsy results.
+
+### PDAC sample 6 — coral_idx 5
+
+- Case: initially borderline-resectable/locally advanced pancreatic adenocarcinoma treated with 12 cycles of modified FOLFIRINOX and resection. Pathology shows a 1.7 cm residual tumor with 51–90% treatment effect, negative margins, and negative nodes. Postoperative CT and CA19-9 raise concern for early liver recurrence, but lesions are too small to confirm; repeat imaging and possible biopsy are planned.
+- PL P1: response captures suspected recurrence but omits the documented pathologic treatment response; Procedure incorrectly includes the future scan instead of isolating the conditional biopsy; Next visit invents a definite in-person clinic appointment from the imaging interval.
+- PL P2: Stage omits the original borderline-resectable/locally advanced status; lab output violates the string schema, contains an ALT spacing error, and misses the key CA19-9 trend; goals description leaves the explicit surveillance rationale unstated; Referral follow-up mixes imaging/biopsy planning into referral semantics.
+- Attribution: A0 Patient type, second opinion, and next visit; A1 Distant, Metastasis, labs, findings, goals description, and genetic fallback; A2 Stage and response.
+- Core verdicts: current_meds TIE; Stage PL; Distant PL; Metastasis TIE; response PL; genetic results TIE. Total PL 3 / BL 0 / TIE 3.
+- v2.1 change: Distant now names the liver while preserving uncertainty, and general Metastasis no longer fabricates confirmed nodes or confirmed liver disease.
+- Main verification: read the complete note and confirmed the 51–90% treatment effect with negative margins/nodes, new and enlarging tiny liver lesions, CA19-9 rise from 44 to 2250, `too small to evaluate further`, two-month repeat scans, conditional biopsy, and no explicit future clinic mode.
