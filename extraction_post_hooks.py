@@ -1793,8 +1793,8 @@ def sanitize_response_assessment(
         early_response_sentence = _first_supported_sentence(
             (assessment_and_plan,),
             lambda sentence: bool(re.search(
-                r"\b(?:pain|mass|symptoms?)\b[^.;\n]{0,80}\bimprov\w*\b"
-                r"[^.;\n]{0,100}\b(?:early\s+)?treatment\s+response\b|"
+                r"\b(?:pain|mass|symptoms?)\b[^.;]{0,80}\bimprov\w*\b"
+                r"[^.;]{0,100}\b(?:early\s+)?treatment\s+response\b|"
                 r"\bhopeful\s+for\s+(?:an?\s+)?(?:early\s+)?treatment\s+response\b",
                 sentence,
                 re.IGNORECASE,
@@ -1983,7 +1983,7 @@ def sanitize_breast_recurrence_receptors(value, assessment_and_plan, note_text="
     her2_supported = bool(re.search(
         r"\bHER\s*-?\s*2\b|\bERBB2\b|\btriple[\s-]*negative\b|\bTNBC\b|"
         r"\bFISH\b|\b(?:trastuzumab|pertuzumab|herceptin|perjeta|kadcyla|enhertu)\b|"
-        r"\*{3,}\s*-",
+        r"\b(?:ER|PR|receptor)\b[^.;\n]{0,30}\*{3,}\s*-",
         source,
         re.IGNORECASE,
     ))

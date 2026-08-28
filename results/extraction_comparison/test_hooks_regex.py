@@ -623,6 +623,16 @@ check(
     "Axillary pain improved, which is hopeful for early treatment response.",
 )
 check(
+    "response early improvement survives line wrap",
+    sanitize_response_assessment(
+        "The liver lesion increased before treatment, indicating progression.",
+        "The patient started pembrolizumab and Abraxane and now presents for cycle 1 day 8.",
+        "Axillary pain improved, which is hopeful for early treatment\nresponse.",
+        current_meds="pembrolizumab, abraxane",
+    )[0],
+    "Axillary pain improved, which is hopeful for early treatment\nresponse.",
+)
+check(
     "response current progression prevents stable override",
     sanitize_response_assessment(
         "Current imaging shows progression.",
@@ -1254,6 +1264,15 @@ check(
         "The original tumor was estrogen-receptor positive and progesterone-receptor negative.",
     )[0],
     "ER+/PR- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrent disease)",
+)
+check(
+    "generic redaction punctuation does not support HER2",
+    sanitize_breast_recurrence_receptors(
+        "ER+/PR-/HER2- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrence)",
+        "Locally recurrent hormone-receptor positive breast cancer.",
+        "Phone: *****-*****. Original tumor was estrogen-receptor positive and progesterone-receptor negative.",
+    )[0],
+    "ER+/PR- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrence)",
 )
 check(
     "recurrent explicit receptor profile remains unchanged",
