@@ -1791,7 +1791,7 @@ def sanitize_response_assessment(
     # a pre-treatment progression sentence copied from the longitudinal history/header.
     if _has_affirmative_progression(cleaned):
         early_response_sentence = _first_supported_sentence(
-            (assessment_and_plan,),
+            (re.sub(r"\s+", " ", str(assessment_and_plan or "")).strip(),),
             lambda sentence: bool(re.search(
                 r"\b(?:pain|mass|symptoms?)\b[^.;]{0,80}\bimprov\w*\b"
                 r"[^.;]{0,100}\b(?:early\s+)?treatment\s+response\b|"

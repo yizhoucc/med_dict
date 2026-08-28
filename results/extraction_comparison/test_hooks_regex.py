@@ -630,7 +630,7 @@ check(
         "Axillary pain improved, which is hopeful for early treatment\nresponse.",
         current_meds="pembrolizumab, abraxane",
     )[0],
-    "Axillary pain improved, which is hopeful for early treatment\nresponse.",
+    "Axillary pain improved, which is hopeful for early treatment response.",
 )
 check(
     "response current progression prevents stable override",
