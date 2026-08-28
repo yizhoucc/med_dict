@@ -32,42 +32,49 @@ Cancer_Diagnosis: |
 
   For Type_of_Cancer, be MAXIMALLY SPECIFIC — include ALL of the following that the note provides:
   1. Histologic subtype: IDC (invasive ductal carcinoma), ILC (invasive lobular carcinoma), DCIS, mixed, etc.
-  2. Receptor status — ER, PR, and HER2. e.g., "ER+/PR+/HER2-"
+  2. Receptor status — ER, PR, and HER2, preserving exact percentages and low-positive results. e.g., "ER 95%/PR 5%/HER2-"
   3. Grade (e.g., "grade 2", "G3", "high grade") — ALWAYS include if mentioned anywhere in the note
   4. Special features: micropapillary, mucinous, neuroendocrine differentiation, squamous differentiation, etc.
   5. Associated DCIS if present (e.g., "with extensive DCIS", "with high-grade DCIS component")
-  6. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH.
+  6. If receptor status changed between original diagnosis and metastatic/recurrent biopsy, note BOTH with clear timepoint/site labels.
   7. If this is a recurrence or metastatic disease, mention that (e.g., "with metastatic recurrence to [site]")
   - Example: "ER+/PR+/HER2- grade 2 invasive ductal carcinoma with extensive DCIS" NOT just "ER+/PR+/HER2- IDC"
   - Example with recurrence: "ER+/PR+/HER2- IDC (micropapillary features) with metastatic recurrence (left cervical LN)"
   Do NOT write just "breast cancer" or "MBC" — always include the subtype, receptor status, grade, and special features when available in the note.
-  IMPORTANT: Search the ENTIRE note for receptor status — it may appear in PMH, Problem List, Pathology, HPI, Assessment/Plan, or Diagnosis section, not just the Assessment. If ER/PR/HER2 status is stated ANYWHERE, include it. Do NOT omit HER2 status just because it appears only in the Past Medical History.
+  CRITICAL — KEEP EVERY RECEPTOR PROFILE SCOPED TO ITS OWN TUMOR/SPECIMEN:
+  - First identify the laterality, lesion/site, and timepoint for each pathology result. Never combine ER from one lesion with PR or HER2 from another lesion.
+  - For bilateral or multifocal disease, report each distinct tumor separately with its side and lesion/site label, separated by semicolons. Example: "Left lesion: ER+/PR+/HER2- IDC; Right lesion: ER-/PR-/HER2+ IDC."
+  - For longitudinal disease, report the current recurrent/metastatic biopsy first and label the original result separately. Example: "Current liver metastasis: ER-/PR-/HER2-; original breast primary: ER+/PR+/HER2-."
+  - "Most recent pathology takes priority" applies only to repeated specimens from the SAME tumor lineage. It must never erase or merge simultaneous bilateral/multifocal tumors.
+  - If a receptor result cannot be confidently linked to a particular lesion or timepoint, leave that receptor unstated for that lesion rather than guessing or borrowing another profile.
+  IMPORTANT: Search the ENTIRE note for receptor status, but include each result only with the breast tumor/specimen it actually describes. A receptor mentioned in PMH or older pathology must be labeled historical unless the note clearly establishes it as current.
   IMPORTANT: If the Assessment/Plan says "HR+" or "hormone receptor positive", this means ER+. If it says "her 2 negative" or "HER2-" or "*****-", this means HER2 NEGATIVE. Do NOT write "not specified" when the A/P explicitly states receptor status.
-  CRITICAL — PR (progesterone receptor): If the note states a SPECIFIC PR result anywhere (e.g., "progesterone-receptor negative", "PR negative", "PR 0%", "PR+ 90%"), USE that exact result. Do NOT assume "PR+" just because the cancer is called "HR+" or "hormone-receptor positive" — a tumor can be ER+/PR- and still be HR+. Only leave PR unstated if no specific PR result appears in the note.
+  CRITICAL — ER/PR PRECISION: Preserve the exact reported result, including percentages, ranges, and "low-positive" wording (e.g., "ER 1%", "PR <5%", "PR 1-10%"). Do NOT round a low-positive result down to negative or collapse it to a generic "+". Do NOT assume PR+ merely because the cancer is called HR+; only report a receptor result that is explicitly supported for that specimen.
 
   HER2 status rules — follow strictly:
-  - If the note explicitly states HER2 result (positive, negative, equivocal, IHC score, FISH result), write it.
-  - If HER2 was NOT tested or NOT mentioned in the note, write "HER2: not tested" — do NOT guess or assume HER2- or HER2+.
+  - If the note explicitly states a HER2 result, bind it to the correct lesion/timepoint and report the FINAL interpretation, not merely the preliminary IHC score.
+  - If HER2 was NOT tested or NOT mentioned for that lesion, write "HER2: not tested" — never invent HER2-negative or HER2-positive and never borrow another lesion's result.
   - DCIS (ductal carcinoma in situ) often does NOT have HER2 testing. Do NOT assume HER2- for DCIS unless explicitly stated.
   - HER2 IHC scoring — use this table to determine HER2 status:
     IHC 0     = HER2 NEGATIVE
     IHC 1+    = HER2 NEGATIVE
-    IHC 2+    = EQUIVOCAL — must check FISH/ISH result:
-      IHC 2+ with FISH ratio ≥ 2.0 (or gene copies ≥ 6) = HER2 POSITIVE
-      IHC 2+ with FISH ratio < 2.0 (or "FISH negative")  = HER2 NEGATIVE
+    IHC 2+    = EQUIVOCAL — must check the linked FISH/ISH result:
+      IHC 2+ with FISH amplified, ratio ≥ 2.0, or gene copies ≥ 6 = HER2 POSITIVE
+      IHC 2+ with FISH non-amplified/negative or ratio < 2.0       = HER2 NEGATIVE
+      IHC 2+ with FISH pending/not resulted                        = HER2 EQUIVOCAL (FISH pending)
     IHC 3+    = HER2 POSITIVE
   - FISH interpretation (when reported without IHC):
     FISH ratio ≥ 2.0 = amplified = HER2 POSITIVE
     FISH ratio < 2.0 = not amplified = HER2 NEGATIVE
-  - IMPORTANT: If treatment includes Herceptin/trastuzumab/pertuzumab/T-DM1/T-DXd/Tykerb/lapatinib/TCHP/THP/ado-trastuzumab, the cancer is HER2+. Do NOT write HER2-.
+  - IMPORTANT: Anti-HER2 treatment supports HER2+ only when it is explicitly current and clearly linked to this breast tumor. Never use a historical, conditional, or other-cancer drug mention to assign HER2 status.
   - IMPORTANT: If the note says "triple negative" ANYWHERE (HPI, A/P, diagnosis), that means ER-/PR-/HER2-. Write HER2 as NEGATIVE even if the HER2 IHC/FISH data is [REDACTED] or masked. "Triple negative" is a definitive classification.
   - IMPORTANT: If HER2 IHC/FISH data is [REDACTED] but the Assessment/Plan writes "[REDACTED] negative" in the receptor status line, infer HER2 = negative.
   - IMPORTANT: goserelin (Zoladex) / leuprolide (Lupron) used DURING CHEMOTHERAPY for fertility preservation does NOT indicate ER+. These drugs suppress ovaries to protect eggs during chemo. Only infer ER+ from goserelin/Lupron when it is used as ENDOCRINE THERAPY (adjuvant or palliative, continuous long-term use for hormone suppression). If the note says "goserelin for fertility preservation" or "goserelin during chemotherapy", do NOT add "ER+ (inferred from goserelin)".
   - IMPORTANT: If the patient has MULTIPLE primary cancers (e.g., gastric cancer AND breast cancer), report receptor status ONLY for the BREAST cancer. Do NOT mix receptor status from other cancers. For example, if gastric cancer is HER2+ but breast cancer is HER2-, write HER2- for the breast cancer.
   - TNBC CONSISTENCY CHECK: If you classify the cancer as "TNBC" or "triple negative", the receptor status MUST be ER-/PR-/HER2-. Do NOT write "TNBC" together with "ER+" or "PR+" — that is a contradiction. If the cancer was reclassified from HER2+ to TNBC after surgery, the FINAL classification (TNBC) takes priority. Write: "ER-/PR-/HER2- (TNBC; initially classified as HER2+ but reclassified after surgical pathology)"
   - RECEPTOR STATUS PRIORITY — when multiple biopsies exist:
-    If the patient has had MULTIPLE pathology results (core biopsy, surgical specimen, metastatic biopsy), the MOST RECENT pathology takes priority for current receptor status.
-    Always report the CURRENT receptor status first, then note the original if different.
+    For serial pathology from the SAME tumor lineage (core biopsy, later surgical specimen, recurrent/metastatic biopsy), the MOST RECENT completed pathology takes priority for current receptor status.
+    Always report the CURRENT receptor status first, then note the original if different. A pending result never overrides a completed result.
     Example: If core biopsy was ER+/PR+/HER2- but surgical specimen after neoadjuvant shows ER+/PR-/HER2-, write: "ER+/PR-/HER2- (post-neoadjuvant; originally PR+)"
     If metastatic biopsy shows different receptors from the primary, the metastatic biopsy is the CURRENT status.
   - HISTOLOGIC SUBTYPE — do NOT confuse imaging with pathology:
