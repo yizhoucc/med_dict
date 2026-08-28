@@ -5,7 +5,8 @@ import re
 
 M1_SITE_RE = re.compile(
     r"liver|hepatic|lung|pulmonary|bone|osseous|brain|cerebral|pleur\w*|peritone\w*|"
-    r"adrenal|spine|vertebr\w*|omentum|omental|abdominal[\s-]*wall|contralateral|"
+    r"adrenal|spine|vertebr\w*|ilium|iliac|sacrum|sacral|omentum|omental|"
+    r"abdominal[\s-]*wall|contralateral|"
     r"cervical\s+(?:lymph\s*)?nodes?",
     re.IGNORECASE,
 )
@@ -424,6 +425,320 @@ def merge_regional_metastasis(distant, general, evidence, detail, cancer_type):
     if not needs_update:
         return general, False
     return compose_general_metastasis(distant, evidence, detail, cancer_type), True
+
+
+def _general_mentions_regional_nodes(value, cancer_type):
+    """Return whether the broad Metastasis value makes a regional-node claim."""
+    value = str(value or "").lower()
+    value = re.sub(
+        r"(?:contralateral(?:\s+(?:right|left))?\s+(?:axill\w*|supraclavicular)|"
+        r"cervical|mediastinal)(?:\s+(?:lymph\s*)?nodes?)?",
+        "",
+        value,
+    )
+    if cancer_type == "breast":
+        site_pattern = (
+            r"regional|ipsilateral|axill\w*|sentinel|subpectoral|supraclavicular|"
+            r"infraclavicular|internal mammary"
+        )
+    else:
+        site_pattern = (
+            r"regional|peripancreatic|periportal|porta hepatis|portacaval|upper abdominal|"
+            r"mesenteric|perigastric|"
+            r"common hepatic|celiac"
+        )
+    return bool(
+        re.search(rf"(?:{site_pattern})[^.;]{{0,35}}(?:lymph[\s-]*node|\bnodal\b|\bnodes?\b)", value)
+        or re.search(r"(?:lymph[\s-]*node|\bnodal\b)[^.;]{0,35}\bregional\b", value)
+        or re.search(r"\b(?:confirmed|suspected|involved)\s+regional\s+(?:lymph[\s-]*)?nodes?\b", value)
+    )
+
+
+def _regional_node_context_allowed(context, cancer_type):
+    """Reject negative, nonregional, or clearly other-primary node evidence."""
+    context = str(context or "").lower()
+    if re.search(
+        r"\b(?:0\s*(?:/|of)\s*\d+|n0|nx)\b|negative for (?:carcinoma|malignancy|metastasis)|"
+        r"\b(?:benign|reactive|granulomatous|sarcoid)\b|"
+        r"no (?:evidence of )?(?:regional )?(?:nodal|lymph[\s-]*node) (?:disease|involvement|metastasis)",
+        context,
+    ):
+        return False
+    current_terms = (("breast", "mammary") if cancer_type == "breast"
+                     else ("pancrea", "pdac", "whipple", "pancreaticoduoden"))
+    other_terms = _other_primary_terms(cancer_type)
+    if any(term in context for term in other_terms):
+        return False
+    if cancer_type == "breast":
+        if re.search(r"\bcontralateral\b[^.;]{0,30}(?:axill\w*|supraclavicular)", context):
+            return False
+        return bool(re.search(
+            r"\b(?:regional|ipsilateral|axill\w*|sentinel|subpectoral|supraclavicular|"
+            r"infraclavicular|internal mammary|slns?)\b",
+            context,
+        ))
+    if re.search(r"\b(?:cervical|mediastinal|supraclavicular)\b[^.;]{0,25}(?:lymph[\s-]*node|nodes?|nodal)", context):
+        return False
+    return bool(
+        re.search(
+            r"\b(?:regional|peripancreatic|periportal|porta hepatis|portacaval|upper abdominal|"
+            r"mesenteric|perigastric|"
+            r"common hepatic|celiac)\b",
+            context,
+        )
+        or (
+            re.search(r"\b(?:lymph[\s-]*nodes?|nodal)\b", context)
+            and any(term in context for term in current_terms)
+        )
+    )
+
+
+def _historical_node_context(context):
+    return bool(re.search(
+        r"\b(?:history of|historical|previously|prior|originally|at diagnosis|status post|s/p|"
+        r"underwent|resected|resection|surgical pathology|in 20\d{2})\b|\b20\d{2}[-/]\d{1,2}",
+        str(context or "").lower(),
+    ))
+
+
+def _regional_evidence_context(text, start, end, lookback=220):
+    """Include the immediately preceding imaging/pathology context for terse result sentences."""
+    sentence_start, sentence_end = _sentence_bounds(text, start, end)
+    return text[max(0, sentence_start - lookback):sentence_end]
+
+
+def final_regional_node_evidence(cancer_type, stage, note_text, assessment_and_plan):
+    """Classify regional-node evidence for the final broad-Metastasis sanitizer.
+
+    Pathologic TN/count/biopsy evidence is distinguished from explicit radiographic nodal
+    metastases and from cN/imaging suspicion. Full-note pathology may be historical; current
+    A/P evidence is considered first.
+    """
+    stage = str(stage or "")
+    path_tn = re.search(
+        r"\b((?:yp|p)T\d[a-d]?(?:\([^)]*\))?\s*,?\s*(?:yp|p)?N([1-3])([a-c]?))\b",
+        stage,
+        re.IGNORECASE,
+    )
+    standalone_pn = re.search(r"\b((?:yp|p)N([1-3])([a-c]?))\b", stage, re.IGNORECASE)
+    if path_tn or standalone_pn:
+        match = path_tn or standalone_pn
+        detail_match = re.search(r"(?:yp|p)?N[1-3][a-c]?", match.group(1), re.IGNORECASE)
+        return "HISTORICAL_PATHOLOGIC", detail_match.group(0) if detail_match else match.group(1)
+
+    count_patterns = (
+        re.compile(
+            r"\b([1-9]\d*)\s*(?:/|of)\s*(\d+)\s*(?:regional\s+)?(?:lymph[\s-]*)?"
+            r"(?:nodes?|lns?|slns?)?\s*(?:were\s+)?(?:positive|involved|metastatic|"
+            r"with\s+(?:micro|macro)?metasta\w*)\b",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            r"\b([1-9]\d*)\s*(?:/|of)\s*(\d+)\s*(?:positive|involved|metastatic)\s+"
+            r"(?:regional\s+)?(?:lymph[\s-]*)?(?:nodes?|lns?|slns?)\b",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            r"\b([1-9]\d*)\s*(?:/|of)\s*(\d+)\s*(?:slns?|lns?|sentinel\s+(?:lymph\s*)?nodes?|"
+            r"lymph[\s-]*nodes?)\s*\+\s*(?:\([^)]*(?:micro|macro)?metasta\w*[^)]*\))?",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            r"\b([1-9]\d*)\s*(?:/|of)\s*(\d+)\s*(?:sentinel\s+)?(?:lymph[\s-]*)?nodes?\s+"
+            r"(?:were\s+)?with\s+(?:micro|macro)?metasta\w*",
+            re.IGNORECASE,
+        ),
+    )
+    biopsy_malignancy = re.compile(
+        r"(?:fna|fine needle aspiration|core biopsy|biopsy)[^.;\n]{0,120}"
+        r"(?:lymph[\s-]*node|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
+        r"(?:metastatic|positive for|involved by|malignan\w*|adenocarcinoma|carcinoma)|"
+        r"(?:lymph[\s-]*node|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
+        r"(?:fna|fine needle aspiration|core biopsy|biopsy|positive for|involved by)[^.;\n]{0,100}"
+        r"(?:metastatic|malignan\w*|adenocarcinoma|carcinoma)",
+        re.IGNORECASE,
+    )
+    note_pathologic_n = re.compile(
+        r"\b((?:(?:yp|p)T\d[a-d]?(?:\([^)]*\))?\s*,?\s*(?:yp|p)?N[1-3][a-c]?)|"
+        r"(?:(?:yp|p)N[1-3][a-c]?))\b",
+        re.IGNORECASE,
+    )
+
+    if cancer_type == "breast":
+        micro_positive_node = re.compile(
+            r"\bpositive\s+(?:lns?|lymph[\s-]*nodes?|nodes?)\b[^.;\n]{0,80}"
+            r"\bmicrometasta\w*\b|"
+            r"\bmicrometasta\w*\b[^.;\n]{0,80}\bpositive\s+"
+            r"(?:lns?|lymph[\s-]*nodes?|nodes?)\b",
+            re.IGNORECASE,
+        )
+        ap_text = str(assessment_and_plan or "")
+        for match in micro_positive_node.finditer(ap_text):
+            start, end = _sentence_bounds(ap_text, match.start(), match.end())
+            context = ap_text[start:end]
+            pre = ap_text[max(start, match.start() - 50):match.start()]
+            if any(term in context.lower() for term in _other_primary_terms(cancer_type)):
+                continue
+            if re.search(r"\b(?:if|whether|patients?\s+with)\b", pre, re.IGNORECASE):
+                continue
+            return "HISTORICAL_PATHOLOGIC", "micrometastatic regional node"
+
+    for source_name, source in (("ap", assessment_and_plan), ("note", note_text)):
+        text = str(source or "")
+        for match in note_pathologic_n.finditer(text):
+            start, end = _sentence_bounds(text, match.start(), match.end())
+            context = text[start:end].lower()
+            if any(term in context for term in _other_primary_terms(cancer_type)):
+                continue
+            detail_match = re.search(r"(?:yp|p)?N[1-3][a-c]?", match.group(1), re.IGNORECASE)
+            return "HISTORICAL_PATHOLOGIC", detail_match.group(0) if detail_match else match.group(1)
+        for pattern in count_patterns:
+            for match in pattern.finditer(text):
+                context = _regional_evidence_context(text, match.start(), match.end())
+                if not _regional_node_context_allowed(context, cancer_type):
+                    continue
+                evidence = "HISTORICAL_PATHOLOGIC" if _historical_node_context(context) else "PATHOLOGIC"
+                if source_name == "note" and not str(assessment_and_plan or "").strip():
+                    evidence = "HISTORICAL_PATHOLOGIC"
+                detail = f"{match.group(1)}/{match.group(2)} nodes positive"
+                if re.search(r"micrometasta", match.group(0), re.IGNORECASE):
+                    detail += " (micrometastasis)"
+                return evidence, detail
+        for match in biopsy_malignancy.finditer(text):
+            start, end = _sentence_bounds(text, match.start(), match.end())
+            context = text[start:end]
+            if not _regional_node_context_allowed(context, cancer_type):
+                continue
+            evidence = "HISTORICAL_PATHOLOGIC" if _historical_node_context(context) else "PATHOLOGIC"
+            site = re.search(
+                r"(?:regional|ipsilateral|axill\w*|sentinel|subpectoral|supraclavicular|"
+                r"infraclavicular|internal mammary|slns?|peripancreatic|periportal|porta hepatis|portacaval|"
+                r"upper abdominal|"
+                r"mesenteric|perigastric)[^.;\n]{0,25}(?:lymph[\s-]*node|nodes?|nodal)",
+                context,
+                re.IGNORECASE,
+            )
+            return evidence, site.group(0) if site else "positive regional node biopsy"
+
+    clinical_n = re.search(r"\bcN([1-3])([a-c]?)\b", stage, re.IGNORECASE)
+    texts = (str(assessment_and_plan or ""), str(note_text or ""))
+    explicit_nodal_metastasis = re.compile(
+        r"\b(?:nodal|lymph[\s-]*node) metastas\w*\b|"
+        r"\bmetastatic\s+(?:regional\s+)?(?:lymph[\s-]*)?nodes?\b|"
+        r"\b(?:lymph[\s-]*nodes?|nodal disease)\b[^.;\n]{0,55}"
+        r"(?:consistent with|involved by|positive for)\s+(?:nodal\s+)?metastas\w*",
+        re.IGNORECASE,
+    )
+    suspected_nodes = re.compile(
+        r"\b(?:suspicious|concerning|indeterminate|possible|equivocal)\b[^.;\n]{0,60}"
+        r"(?:lymph[\s-]*nodes?|nodal disease)|"
+        r"(?:lymph[\s-]*nodes?|nodal disease)[^.;\n]{0,60}"
+        r"\b(?:suspicious|concerning|indeterminate|possible|equivocal)\b",
+        re.IGNORECASE,
+    )
+    imaging_anchor = re.compile(r"\b(?:ct|mri|pet(?:/ct)?|scan|imaging|radiograph\w*)\b", re.IGNORECASE)
+    for text in texts:
+        for match in explicit_nodal_metastasis.finditer(text):
+            context = _regional_evidence_context(text, match.start(), match.end(), lookback=320)
+            if not _regional_node_context_allowed(context, cancer_type):
+                continue
+            if UNCERTAINTY_RE.search(context):
+                return "SUSPECTED", "imaging-suspicious regional nodes"
+            evidence = "RADIOGRAPHIC" if imaging_anchor.search(context) else "DOCUMENTED_MALIGNANT"
+            return evidence, "regional nodal metastases"
+        for match in suspected_nodes.finditer(text):
+            start, end = _sentence_bounds(text, match.start(), match.end())
+            context = text[start:end]
+            if _regional_node_context_allowed(context, cancer_type):
+                return "SUSPECTED", "imaging-suspicious regional nodes"
+    if clinical_n:
+        return "SUSPECTED", clinical_n.group(0)
+    return None, ""
+
+
+def _supported_locoregional_clause(general, note_text, assessment_and_plan, cancer_type):
+    """Preserve a true breast locoregional/chest-wall recurrence through final rebuilding."""
+    if cancer_type != "breast":
+        return ""
+    general = str(general or "")
+    requested = re.search(
+        r"loc(?:al[\s-]*)?regional(?:\s+chest[\s-]*wall)? recurrence|"
+        r"chest[\s-]*wall recurrence",
+        general,
+        re.IGNORECASE,
+    )
+    if not requested:
+        return ""
+    source = f"{assessment_and_plan or ''}\n{note_text or ''}"
+    supported = re.search(
+        r"loc(?:al[\s-]*)?regional(?:\s+chest[\s-]*wall)? recurrence|"
+        r"chest[\s-]*wall recurrence",
+        source,
+        re.IGNORECASE,
+    )
+    if not supported:
+        return ""
+    return "locoregional chest-wall recurrence" if "chest" in supported.group(0).lower() \
+        else "locoregional recurrence"
+
+
+def sanitize_general_metastasis(
+    distant, general, stage, note_text, assessment_and_plan, cancer_type
+):
+    """Rebuild broad Metastasis from supported regional claims and the Distant ceiling."""
+    distant = str(distant or "").strip()
+    general = str(general or "").strip()
+    reasons = []
+    clauses = []
+
+    locoregional = _supported_locoregional_clause(
+        general, note_text, assessment_and_plan, cancer_type
+    )
+    if locoregional:
+        clauses.append(locoregional)
+
+    regional_requested = _general_mentions_regional_nodes(general, cancer_type)
+    evidence, detail = final_regional_node_evidence(
+        cancer_type, stage, note_text, assessment_and_plan
+    )
+    strong_regional_evidence = evidence in (
+        "HISTORICAL_PATHOLOGIC", "PATHOLOGIC", "RADIOGRAPHIC", "DOCUMENTED_MALIGNANT"
+    )
+    if regional_requested or strong_regional_evidence:
+        suffix = f" ({detail})" if detail else ""
+        if evidence == "HISTORICAL_PATHOLOGIC":
+            clauses.append(f"historical pathologically confirmed regional lymph-node involvement{suffix}")
+        elif evidence == "PATHOLOGIC":
+            clauses.append(f"pathologically confirmed regional lymph-node involvement{suffix}")
+        elif evidence == "RADIOGRAPHIC":
+            clauses.append("radiographically involved regional lymph nodes")
+        elif evidence == "DOCUMENTED_MALIGNANT":
+            clauses.append("documented malignant regional lymph-node involvement")
+        elif evidence == "SUSPECTED":
+            clauses.append(f"clinically suspected regional lymph-node involvement{suffix}")
+            reasons.append("downgraded unsupported confirmed regional claim")
+        else:
+            reasons.append("removed unsupported regional claim")
+
+    if is_confirmed_distant_value(distant, cancer_type):
+        rebuilt = "; ".join([distant] + clauses) if clauses else distant
+    else:
+        distant_status = met_status(distant)
+        if distant_status in ("UNSURE", "MIXED"):
+            rebuilt = (
+                f"Yes, {'; '.join(clauses)}; distant disease uncertain — {distant}"
+                if clauses else distant
+            )
+        elif distant_status == "NO":
+            rebuilt = f"Yes, {'; '.join(clauses)}; no distant metastasis" if clauses else "No"
+        elif distant_status == "EMPTY":
+            rebuilt = f"Yes, {'; '.join(clauses)}" if clauses else "Not sure"
+        else:
+            rebuilt = f"Yes, {'; '.join(clauses)}" if clauses else distant
+
+    if rebuilt != general and not reasons:
+        reasons.append("rebuilt from regional evidence and Distant ceiling")
+    return rebuilt, reasons
 
 
 def normalize_stage_iv(stage, distant, assessment_and_plan, cancer_type):

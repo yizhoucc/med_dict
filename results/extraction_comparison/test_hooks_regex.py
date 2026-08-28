@@ -27,6 +27,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    sanitize_general_metastasis,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -658,6 +659,172 @@ check("regional archived pdac16 cN1 is not auto-promoted",
 r=P[18]; c=r["keypoints"]["Cancer_Diagnosis"]
 check("regional archived pdac18 historical A/P node statement is not auto-promoted",
       regional_node_evidence("pdac",c.get("Stage_of_Cancer","") or "",r["assessment_and_plan"])[0], None)
+
+# ---- Final broad-Metastasis sanitizer: synthetic evidence/certainty cases only ----
+template_general = (
+    "Yes — confirmed regional nodes; distant disease uncertain — suspicious organ lesion pending biopsy"
+)
+for label, note in (
+    ("breast no nodal evidence", "Breast cancer follow-up. No axillary adenopathy on examination."),
+    ("breast negative node biopsy", "Breast cancer. Axillary lymph-node biopsy was negative for carcinoma."),
+    ("breast reactive nodes", "Breast cancer. Axillary lymph nodes showed benign reactive granulomatous change."),
+):
+    check(
+        f"final Metastasis removes template regional claim: {label}",
+        sanitize_general_metastasis("No", template_general, "Stage II", note, "", "breast")[0],
+        "No",
+    )
+
+for label, note in (
+    ("local invasion only", "Pancreatic adenocarcinoma directly invades the duodenum and encases the SMA."),
+    ("nonspecific porta hepatis nodes", "Pancreatic adenocarcinoma with similar porta hepatis lymphadenopathy measuring 1.3 cm."),
+    ("negative nodal staging", "Pancreatic adenocarcinoma. No pathologically enlarged lymph nodes."),
+    ("inflammatory chest nodes", "Pancreatic cancer with mediastinal nodes favored reactive to pneumonia."),
+    ("another primary node disease", "Pancreatic cancer follow-up. Prior prostate cancer had metastatic pelvic lymph nodes."),
+    ("benign node pathology", "Pancreatic adenocarcinoma. Lymph-node biopsy showed benign tissue."),
+    ("no nodes mentioned", "Pancreatic adenocarcinoma remains locally advanced and unresectable."),
+):
+    check(
+        f"final Metastasis removes unsupported confirmed nodes: {label}",
+        sanitize_general_metastasis("No", template_general, "Locally advanced", note, "", "pdac")[0],
+        "No",
+    )
+
+check(
+    "final Metastasis cN1 downgrades to clinically suspected",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "Stage IIB (cT1c cN1 cM0)",
+        "Pancreatic adenocarcinoma with no distant metastasis.", "", "pdac",
+    )[0],
+    "Yes, clinically suspected regional lymph-node involvement (cN1); no distant metastasis",
+)
+check(
+    "final Metastasis preserves historical 11/46 pathologic nodes",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "",
+        "History of pancreatic adenocarcinoma resection in 2020; pancreatic surgical pathology showed 11/46 lymph nodes positive.",
+        "", "pdac",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (11/46 nodes positive); no distant metastasis",
+)
+check(
+    "final Metastasis preserves historical 2/29 pathologic nodes",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "",
+        "Prior Whipple resection for pancreatic adenocarcinoma showed 2/29 lymph nodes positive.",
+        "", "pdac",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (2/29 nodes positive); no distant metastasis",
+)
+check(
+    "final Metastasis supports SLN-plus micrometastasis notation",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "",
+        "Breast surgical pathology showed 1/2 SLN+ (micrometastasis).", "", "breast",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (1/2 nodes positive (micrometastasis)); no distant metastasis",
+)
+check(
+    "final Metastasis supports sentinel nodes with micrometastasis wording",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "",
+        "Breast surgical pathology found 1 of 2 sentinel nodes with micrometastasis.", "", "breast",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (1/2 nodes positive (micrometastasis)); no distant metastasis",
+)
+check(
+    "final Metastasis supports current A/P positive-LN micrometastasis wording",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed ipsilateral axillary node", "Left: Stage III (T3N1); Right: Stage I (T1cN0)",
+        "", "TAILORx does not apply to her given her positive LN, even as a micrometastasis.", "breast",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (micrometastatic regional node); no distant metastasis",
+)
+check(
+    "final Metastasis restores omitted pathologic regional disease",
+    sanitize_general_metastasis(
+        "No", "No", "",
+        "Pancreatic adenocarcinoma surgical pathology: ypT3N2.", "", "pdac",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (N2); no distant metastasis",
+)
+check(
+    "final Metastasis labels imaging-explicit nodal metastases as radiographic",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "Locally advanced",
+        "", "CT shows peripancreatic nodal metastases from pancreatic adenocarcinoma.", "pdac",
+    )[0],
+    "Yes, radiographically involved regional lymph nodes; no distant metastasis",
+)
+check(
+    "final Metastasis uses preceding mesenteric context for terse nodal-metastases impression",
+    sanitize_general_metastasis(
+        "Yes, to liver", "Yes, confirmed regional nodes; confirmed liver metastases", "Stage IV",
+        "", "CT abdomen shows increased size of multiple upper abdominal and mesenteric lymph nodes, some centrally necrotic. Impression: increased size and number of hepatic and nodal metastases.",
+        "pdac",
+    )[0],
+    "Yes, to liver; radiographically involved regional lymph nodes",
+)
+check(
+    "final Metastasis does not relabel distant nodal metastases as regional",
+    sanitize_general_metastasis(
+        "Yes, to cervical lymph nodes", "Yes, confirmed regional nodes", "Stage IV",
+        "", "CT shows enlarging cervical lymph nodes and nodal metastases from pancreatic adenocarcinoma.",
+        "pdac",
+    )[0],
+    "Yes, to cervical lymph nodes",
+)
+check(
+    "final Metastasis does not borrow another primary's nodal metastases",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "Stage II",
+        "", "Breast cancer follow-up. CT for ovarian cancer shows pelvic nodal metastases.", "breast",
+    )[0],
+    "No",
+)
+check(
+    "final Metastasis Distant No retains biopsy-confirmed regional disease",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes; confirmed liver metastasis", "Stage III",
+        "", "Core biopsy of the ipsilateral axillary lymph node was positive for metastatic breast carcinoma.",
+        "breast",
+    )[0],
+    "Yes, pathologically confirmed regional lymph-node involvement (ipsilateral axillary lymph node); no distant metastasis",
+)
+check(
+    "final Metastasis preserves suspected distant site certainty",
+    sanitize_general_metastasis(
+        "Not sure, suspicious liver lesion", "Yes, confirmed regional nodes; confirmed liver metastasis", "",
+        "Pancreatic adenocarcinoma with an indeterminate liver lesion. No regional nodal disease is described.",
+        "", "pdac",
+    )[0],
+    "Not sure, suspicious liver lesion",
+)
+check(
+    "final Metastasis recognizes named pelvic bone sites as M1",
+    sanitize_general_metastasis(
+        "Yes, to left ilium, bilateral sacral ala", "No", "Stage IV",
+        "Breast MRI shows lesions in the left iliac bone and bilateral sacral ala.", "", "breast",
+    )[0],
+    "Yes, to left ilium, bilateral sacral ala",
+)
+check(
+    "final Metastasis preserves two-of-twenty-nine original pathology wording",
+    sanitize_general_metastasis(
+        "No", "Yes, confirmed regional nodes", "",
+        "On 03/01/22, she underwent a distal pancreatectomy and splenectomy. She was found to have moderately differentiated pancreatic adenocarcinoma with negative margins and 2 of 29 lymph nodes were positive.",
+        "", "pdac",
+    )[0],
+    "Yes, historical pathologically confirmed regional lymph-node involvement (2/29 nodes positive); no distant metastasis",
+)
+check(
+    "final Metastasis preserves true locoregional chest-wall recurrence",
+    sanitize_general_metastasis(
+        "No", "Yes, locoregional chest-wall recurrence; no distant metastasis", "",
+        "Biopsy confirms locoregional chest-wall recurrence of breast cancer.", "", "breast",
+    )[0],
+    "Yes, locoregional chest-wall recurrence; no distant metastasis",
+)
 
 # ---- bug10 POST-DISTMET-SITES: REMOVED (fired on negated "No osseous lesions" → hallucination). ----
 

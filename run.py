@@ -37,6 +37,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    sanitize_general_metastasis,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -5389,6 +5390,28 @@ def main():
             if changed_rn:
                 cancer_rn["Metastasis"] = new_met_rn
                 print(f"    [POST-MET-REGIONAL-NODE] '{met_rn}' → '{new_met_rn}'")
+
+        # POST-MET-FINAL: rebuild the broad regional+distant field from source-supported regional
+        # evidence and the already-sanitized Distant Metastasis value. This final pass removes
+        # prompt-template leakage, downgrades cN/imaging suspicion, and prevents general Metastasis
+        # from asserting a more certain or additional M1 site than the dedicated Distant field.
+        cancer_mf = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_mf, dict):
+            old_met_mf = str(cancer_mf.get("Metastasis", "") or "").strip()
+            new_met_mf, reasons_mf = sanitize_general_metastasis(
+                cancer_mf.get("Distant Metastasis", ""),
+                old_met_mf,
+                cancer_mf.get("Stage_of_Cancer", ""),
+                note_text,
+                assessment_and_plan,
+                cancer_type,
+            )
+            if new_met_mf != old_met_mf:
+                cancer_mf["Metastasis"] = new_met_mf
+                print(
+                    f"    [POST-MET-FINAL] '{old_met_mf}' → '{new_met_mf}' "
+                    f"({'; '.join(reasons_mf)})"
+                )
 
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
