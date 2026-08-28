@@ -12,14 +12,33 @@ Recommended framing:
 
 The current physician review remains the confirmatory evaluation. LLM-assisted review is an internal quality screen before material is sent to physicians.
 
-## Decisions frozen before the matched-baseline rerun
+## Matched-baseline result
+
+The 40-sample matched single-prompt baseline rerun is complete and has been manually reviewed against the source notes. Across 260 applicable sample-field comparisons:
+
+| Core category | PL | BL | Tie | Net PL−BL |
+|---|---:|---:|---:|---:|
+| Active anticancer treatment | 7 | 2 | 31 | +5 |
+| Stage | 17 | 4 | 19 | +13 |
+| Distant metastasis | 30 | 1 | 9 | +29 |
+| Overall/regional metastasis | 14 | 16 | 10 | −2 |
+| Treatment response | 5 | 6 | 29 | −1 |
+| Breast cancer type/receptors | 7 | 5 | 8 | +2 |
+| Completed molecular/genetic results | 9 | 4 | 27 | +5 |
+| **Overall** | **89** | **38** | **133** | **+51** |
+
+The corrected result supports a strong overall advantage and positive net advantage in five of seven categories. It does **not** yet support the claim that PL wins every core category: the general `Metastasis` field and `response_assessment` remain slightly behind BL. The detailed audit is in `results/extraction_comparison/MATCHED_BASELINE_CORE_REVIEW.md`.
+
+The review also exposed one contract inconsistency: the production PDAC prompt currently treats CA 19-9 non-secretor status as a genetic result, while the matched baseline contract limits that field to completed molecular/genetic tests. This should be aligned before the final ablation is reported.
+
+## Decisions frozen for the matched-baseline rerun
 
 1. The primary comparison is the full pipeline (PL) versus a single-call baseline (BL) using the same Qwen2.5-32B-Instruct-AWQ model and the same target field contract.
 2. BL remains a true baseline: one prompt and one model call, with no task decomposition, gates, hooks, dictionaries, retries, or post-processing.
 3. The original baseline results are exploratory because its prompt omitted the general `Metastasis` field and defined `current_meds` more broadly than the evaluator.
 4. The corrected baseline is implemented as `baseline_extraction.py --matched`, with its auditable contract in `prompts/matched_baseline_contract.yaml`.
 5. The primary claim is category-level: PL should have a positive net advantage in each prespecified core category. This does not mean that BL cannot win an individual sample-field comparison.
-6. WSL rerunning is pending and will begin only when the user confirms that the machine is available.
+6. The matched run uses all 20 breast and 20 PDAC held-out samples.
 
 ## Prespecified core questions
 
@@ -33,7 +52,7 @@ These categories are fixed before inspecting the matched-baseline results:
 6. What is the cancer type and receptor status? (Breast cancer only.)
 7. What completed molecular or genetic results are documented?
 
-The old, non-matched comparison had a positive aggregate PL advantage in all seven categories, but it included individual BL wins in response and metastasis. Those numbers must not be presented as the final matched ablation.
+The old, non-matched comparison had a positive aggregate PL advantage in all seven categories, but those numbers must not be presented as the final matched ablation. The matched audit currently shows two categories with small negative margins, which are concrete targets for the next pipeline revision.
 
 ## Where this project is strongest
 
@@ -92,10 +111,11 @@ These citations were checked against Crossref/Europe PMC/arXiv by a read-only Co
 
 Required:
 
-1. Run the 20 breast and 20 PDAC matched baselines on WSL.
-2. Apply the same field-level comparison rubric to the new outputs.
-3. Regenerate the PL-versus-BL figure and replace all legacy counts.
-4. Incorporate the real physician scores when available.
+1. Fix the general-metastasis evidence/state representation and rerun affected samples plus the required clean-sample regression set.
+2. Fix response temporal/evidence selection and rerun affected samples plus the required clean-sample regression set.
+3. Align the production and matched-baseline field semantics, especially current anticancer medication and CA 19-9 non-secretor handling.
+4. Regenerate the PL-versus-BL figure and replace all legacy counts after the corrected rerun.
+5. Incorporate the real physician scores when available.
 
 Useful if time permits:
 
@@ -117,6 +137,6 @@ Before the rerun:
 
 > Preliminary review against the original, non-matched baseline showed a positive aggregate advantage for the harness in each of seven prespecified core clinical categories. Because the original baseline did not use an identical field contract, the primary comparison is being repeated with a matched single-prompt baseline.
 
-After the rerun, if supported:
+Current accurate wording:
 
-> Using the same frozen Qwen2.5-32B model and an identical target field contract, the inference harness achieved a positive net advantage over the single-pass baseline in all seven prespecified core clinical categories, although the baseline remained better on some individual sample-field comparisons.
+> Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 89–38 advantage over a single-pass baseline across 260 manually reviewed core-field comparisons, with 133 ties. The harness led in five of seven categories, most strongly in distant-metastasis status (+29) and stage (+13), while general metastasis (−2) and treatment response (−1) remained targets for refinement.
