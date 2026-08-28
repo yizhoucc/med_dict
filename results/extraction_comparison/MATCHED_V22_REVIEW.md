@@ -17,7 +17,7 @@ Date: 2026-08-27
 - Completed: 40/40 (breast 20/20, PDAC 20/20)
 - PL findings: P0=4, P1=227, P2=157
 - Attribution findings: A0=134, A1=150, A2=258
-- Core verdict totals (PL / BL / TIE): 65 / 28 / 167
+- Core verdict totals (PL / BL / TIE): 66 / 28 / 166
 - Current phase: review complete; failure-pattern synthesis and targeted repair
 
 ## Results
