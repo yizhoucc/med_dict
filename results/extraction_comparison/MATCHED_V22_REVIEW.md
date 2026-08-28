@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 3/40 (breast 3/20, PDAC 0/20)
-- PL findings: P0=1, P1=16, P2=15
-- Attribution findings: A0=8, A1=11, A2=29
-- Core verdict totals (PL / BL / TIE): 7 / 3 / 11
+- Completed: 6/40 (breast 6/20, PDAC 0/20)
+- PL findings: P0=3, P1=34, P2=26
+- Attribution findings: A0=19, A1=24, A2=48
+- Core verdict totals (PL / BL / TIE): 11 / 8 / 23
 - Current phase: breast review while the PDAC v2.2 run is in progress
 
 ## Results
@@ -52,3 +52,34 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type PL; genetic results TIE. Total PL 1 / BL 0 / TIE 6.
 - v2.1 regression: genetic results is correctly repaired from pending tests/pathology to no completed result, but Distant and Metastasis regress from preserving the adrenal uncertainty to `No` because the new generation omitted the site before the conservative hook ran.
 - Main verification: read the complete note and confirmed `locally advanced, multifocal`, `Indeterminate right adrenal nodule measuring up to 2.3 cm`, `FNA negative`, `126 InVitae panel sent`, `mammaprint is pending`, Medi-port, and `arrange for chemo teaching session`.
+
+### Breast sample 4 — coral_idx 23
+
+- Case: two distinct right-breast grade-3 IDC lesions: one ER 1%/PR−/HER2− with Ki-67 70%, the other ER−/PR 1%/HER2− with Ki-67 30–40%. PET/CT shows local breast growth but no regional or distant metastasis. Weekly paclitaxel, port, and teaching are recommended, but the patient remains undecided. BRCA1 carrier status is documented.
+- PL P1: summary merges the two receptor/Ki-67 profiles; response treats pretreatment local growth as treatment response; medication and therapy plans omit the patient's undecided status and mix visits/teaching into treatment fields; historical surgical consultations are mislabeled as a new Specialty referral; Referral follow-up copies historical imaging advice instead of the current cycle schedule; genetic results mixes correct BRCA1 carrier status with ovarian-cancer history and an inaccurate TNBC label.
+- PL P2: Type now separates two profiles but does not bind them to distinct lesion locations; findings omit the decisive biopsy-level differences; curative intent is an unmarked inference; future visit mode and certainty are over-specified.
+- Attribution: A0 second opinion, both metastasis fields, response, and Referral follow-up; A1 Type, Stage, goals, goals description, Specialty, and genetic results; A2 summary, findings, medication/therapy plans, and next visit.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response BL; Type PL; genetic results BL. Total PL 1 / BL 2 / TIE 4.
+- v2.1 regression: Type improves from a merged profile to two profiles and Metastasis no longer treats local breast growth as spread; however, summary still merges profiles, referral follow-up regresses, and genetic results is newly polluted.
+- Main verification: read the complete note and confirmed the separate `ER 1% PR negative ... Ki67 70%` and `ER negative PR 1% ... Ki67 30-40%` lesions, no metastatic disease, `Patient unsure about starting chemo`, historical dated surgery consults, current cycle-visit schedule, and that only BRCA1 carrier status belongs in genetic results.
+
+### Breast sample 5 — coral_idx 24
+
+- Case: bilateral resected IDC. Left: Stage III T3N1 grade-3 ER 99%/PR >95%/HER2− with regional micrometastasis and high-risk MammaPrint. Right: Stage I T1cN0 grade-1 ER 99%/PR 90%/HER2− with low-risk MammaPrint. Oncotype is pending; TC×4, radiation, then AI are planned.
+- PL P1: Type incorrectly turns the right `MammaPrint low risk` result into a `low risk DCIS component`; genetic results misses both completed MammaPrint results; Referral follow-up contains DEXA/exercise/calcium advice rather than a return appointment.
+- PL P2: findings mixes MammaPrint into the objective pathology/imaging field; goals category includes `adjuvant` and its description omits the explicit recurrence-risk rationale; medication and therapy fields incompletely represent the CDK4/6-trial option and treatment sequence.
+- Attribution: A0 second opinion, Distant, Referral follow-up, and genetic results; A1 Patient type and response; A2 summary, Type, Metastasis, findings, goals, and medication plan.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis PL; response TIE; Type BL; genetic results TIE. Total PL 1 / BL 1 / TIE 5.
+- v2.1 regression: laterality/profile separation is substantially better and Metastasis is now internally consistent, but the new `low risk DCIS` error leaves Type behind BL; completed MammaPrint omission remains.
+- Main verification: read the complete note and confirmed left/right pathology, `focal high grade DCIS` only on the left, separate MammaPrint scores `−0.614` and `+0.321`, pending Oncotype, and the explicit TC→radiation→AI sequence.
+
+### Breast sample 6 — coral_idx 25
+
+- Case: untreated right grade-2 ER−/PR−, HER2-amplified IDC with FNA-confirmed regional axillary disease. Left iliac and bilateral sacral lesions are suspicious and require biopsy for a definitive Stage IV diagnosis. The longstanding carotid-body paraganglioma is separate. THP is conditional on Stage IV confirmation.
+- PL P0: Stage is upgraded to definite Stage IV; Distant is upgraded to definite `Yes`, although the bone lesions remain suspicious and biopsy is required.
+- PL P1: general Metastasis collapses confirmed regional nodes and suspected bone sites into a site-free `Yes`; findings omits the carotid-body lesion that resolves a competing metastatic concern; colonoscopy-prep ondansetron is mislabeled as oncology supportive medication; palliative intent is too certain and goals description misses explicit long-term-control wording; medication plan drops `If stage IV`; procedure plan omits bone biopsy and chemotherapy teaching; Referral follow-up is a plan dump rather than a follow-up appointment.
+- PL P2: summary omits confirmed regional and unresolved distant status; Type omits laterality; MRI-neck purpose is vague.
+- Attribution: A0 second opinion and Referral follow-up; A1 goals description, response, lab plan, next visit, and genetic results; A2 Patient type, Type, Stage, both metastasis fields, findings, goals, and medication plan.
+- Core verdicts: current_meds TIE; Stage BL; Distant BL; Metastasis PL; response TIE; Type PL; genetic results TIE. Total PL 2 / BL 2 / TIE 3.
+- v2.1 regression: Stage/Distant P0s remain; general Metastasis regresses from a useful regional-plus-suspected-site description to bare `Yes`, while therapy-plan completeness improves.
+- Main verification: read the complete note and confirmed `suspicious for bone metastasis`, `biopsy for definitive stage IV diagnosis`, conditional `If stage IV` THP, FNA-confirmed right axillary disease, likely carotid-body paraganglioma, colonoscopy-only ondansetron, and explicit `excellent response and possible long term disease control`.
