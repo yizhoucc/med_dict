@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 6/40
-- Next: Breast sample 7
-- PL findings: P0=4, P1=31, P2=18
-- Attribution findings: A0=12, A1=29, A2=43
-- Core verdict totals (PL / BL / TIE): 11 / 10 / 21
+- Completed: 12/40
+- Next: Breast sample 13
+- PL findings: P0=4, P1=64, P2=41
+- Attribution findings: A0=23, A1=61, A2=79
+- Core verdict totals (PL / BL / TIE): 17 / 15 / 52
 
 ## Results
 
@@ -75,3 +75,57 @@ Date: 2026-08-27
 - Attribution: A0 for second opinion and Referral follow-up; A1 for the unsupported genetic-results fallback; A2 for Type, definite Stage, definite Distant, the incomplete combined Metastasis support, broad findings, palliative goal, generated goals/response fallbacks, condition-stripped medication plan, and generated next-visit wording.
 - Core verdicts: current_meds TIE; Stage BL; Distant BL; Metastasis PL; response TIE; Type PL; genetic results TIE. Total PL 2 / BL 2 / TIE 3.
 - Main verification: confirmed the source says `suspicious for bone metastasis`, requires `biopsy for definitive stage IV diagnosis`, and conditions paclitaxel/trastuzumab/pertuzumab on `If stage IV`; the carotid lesion is described separately as a longstanding paraganglioma.
+
+### Breast sample 7 — coral_idx 26
+
+- Case: recurrent grade-3 TNBC with biopsy-confirmed liver metastasis, historical regional N1a disease, current regional nodes and a suspicious lytic S1 lesion; currently cycle 1 day 8 of pembrolizumab plus nab-paclitaxel. Current A/P notes improved axillary pain as a possible early response; the January PET predates this regimen. Germline MSH2 pathogenic variant and a negative breast-cancer gene panel are documented.
+- PL P1: general Metastasis mixes historical regional disease and current nodes into an unclear confirmed-distant statement; lab summary omits that labs are adequate for treatment; findings omit the S1, chest-wall/pectoralis, and regional-node findings and present pretreatment imaging as current status; `recent_changes` contains supportive/anticoagulation adjustments while omitting the newly started anticancer regimen; supportive medications omit multiple current A/P drugs; response incorrectly treats pretreatment PET progression as response to the current regimen and misses the explicit early clinical improvement; medication plan omits restart/temporary-stop conditions for rivaroxaban; imaging plan says none despite explicit symptom-guided or 3–4-month surveillance.
+- PL P2: summary makes pretreatment progression sound current; Type omits grade/recurrent-metastatic context; Distant omits the suspicious S1 lesion; genetic results should distinguish the colon-tumor MMR finding from germline and breast-panel results.
+- Attribution: A0 for second opinion and current response; A1 for summary, Type, labs, findings, goals description, imaging plan, and genetic results; A2 for Patient type, Distant, Metastasis, supportive medications, and medication plan.
+- Core verdicts: current_meds TIE; Stage PL; Distant PL; Metastasis TIE; response BL; Type PL; genetic results PL. Total PL 4 / BL 1 / TIE 2.
+- Main verification: confirmed `02/25/19 Liver biopsy: triple negative metastatic breast cancer`, current treatment start on `03/11/19`, current `cycle 1 day 8`, `axillary pain improved which is hopeful for early treatment response`, and the explicit imaging/lab/rivaroxaban plans. The enlarging liver lesions belong to the pre-regimen PET, not a current-treatment response scan.
+
+### Breast sample 8 — coral_idx 27
+
+- Case: newly diagnosed multifocal left IDC after bilateral mastectomies, largest focus 3.9 cm, mainly grade 2 with a small grade-1 focus, ER+/PR+/HER2−, extensive DCIS, Stage IIA pT2(m)N1a with 2/12 regional nodes positive; MammaPrint is completed and high risk; AC→paclitaxel, later AI, baseline TTE, chemotherapy teaching, port, and genetics referral are planned.
+- PL P1: general Metastasis correctly identifies regional disease but adds a contradictory unsupported `distant disease uncertain — no distant disease confirmed`; findings focus on postoperative exam and stale imaging while omitting the defining current pathology and positive nodes; therapy plan mixes TTE and chemotherapy teaching into treatment and omits the planned AI; genetic results falsely say none despite completed high-risk MammaPrint.
+- PL P2: Type omits multifocality, 3.9 cm size, and the small grade-1 focus; goals description is blank; estimated chemotherapy start is presented as a confirmed next clinic visit; Referral follow-up carries a pre-existing outside appointment whose relation to this plan is unclear.
+- Attribution: A0 for Referral follow-up; A1 for Distant, findings, and response; A2 for Type, Metastasis, medication plan, therapy plan, genetic results, and indirect second-opinion, in-person, and curative-goal support.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response TIE; Type TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
+- Main verification: confirmed `Stage IIA pT2(m)N1a`, 2/12 positive regional nodes, multifocal mixed-grade IDC with DCIS, `Mammaprint: High-Risk`, and the separate chemotherapy, TTE, teaching, port, and genetics plans. Both systems miss MammaPrint in genetic results.
+
+### Breast sample 9 — coral_idx 28
+
+- Case: original left Stage III T3N2 grade-2 ER+/PR+/HER2− micropapillary IDC treated with mastectomy, incomplete ddAC, and later endocrine therapy; now biopsy-confirmed locally advanced unresectable breast recurrence. Current regional nodes are suspicious and a level Vb cervical node may represent distant disease, pending FNA. No new systemic regimen has begun; goserelin followed by AI is planned.
+- PL P1: Stage gives only suspected Stage IV and omits the original Stage III plus current locally advanced unresectable state; Metastasis fails to mark the confirmed axillary node as historical and omits several current suspicious regional nodes; findings omit the current recurrence biopsy and biomarkers; planned goserelin/AI is mislabeled as a recent completed change; palliative intent drops the clinician's explicit `if ... MBC` condition; response says never treated/no response despite prior treatment followed by biopsy-proven recurrence.
+- PL P2: summary omits the current unresectable and suspected-metastatic status; Type omits current Ki-67 30–40%; the FNA clinic could also be represented as a specialty pathway, although the procedure itself is captured.
+- Attribution: A0 for second opinion, recent changes, and the unconditional palliative goal; A1 for Patient type, findings, and response; A2 for summary, Type, Stage, Metastasis, and the compound therapy value.
+- Core verdicts: current_meds TIE; Stage BL; Distant TIE; Metastasis TIE; response TIE; Type PL; genetic results TIE. Total PL 1 / BL 1 / TIE 5.
+- Main verification: confirmed the original `Stage III (T3N2)`, current `locally advanced, unresectable recurrence`, conditional `possibly considered metastatic` level Vb node, planned FNA, future goserelin/AI, and prior systemic/endocrine therapy followed by recurrence. The current palliative framing is conditional until distant disease is confirmed.
+
+### Breast sample 10 — coral_idx 29
+
+- Case: newly diagnosed right grade-2 IDC, ER >95%, PR 25%, clinically HER2 non-amplified, clinical Stage II cT2N1 with FNA-confirmed regional axillary disease and PET-negative distant staging; undergoing egg harvesting, with no current anticancer therapy; conditional plan for neoadjuvant paclitaxel→AC, port, cardiac testing, MammaPrint, and already-sent genetic testing.
+- PL P1: medication plan includes port placement, which belongs under procedures; therapy plan turns `hopefully ... assuming egg harvesting` into a definite 05/01 start; imaging plan omits the scheduled echocardiogram/EKG; genetic plan retains MammaPrint but omits the already-sent genetic test; the echocardiogram/EKG date is mislabeled as a clinic visit; already-sent testing is mislabeled as a Genetics referral.
+- PL P2: findings do not state the PET-negative distant result directly; fertility-preservation medications are omitted from supportive context; Referral follow-up mixes tests and treatment logistics; cold-cap coordinator contact is not represented cleanly.
+- Attribution: A0 for second opinion, in-person, and next clinic visit; A1 for labs, findings, goals description, response, and Genetics referral; A2 for Patient type, summary, Type, Metastasis, goals, medication plan, therapy plan, genetic-results fallback, and mixed follow-up support.
+- Core verdicts: current_meds PL; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type TIE; genetic results TIE. Total PL 1 / BL 0 / TIE 6.
+- Main verification: confirmed positive axillary FNA, clear PET, no started anticancer regimen, active egg-harvesting drugs, `Hopefully start ... assuming egg harvesting`, echocardiogram/EKG, MammaPrint pending, and `genetic testing sent`. BL incorrectly promotes fertility drugs and unconfirmed tamoxifen to current anticancer treatment.
+
+### Breast sample 11 — coral_idx 30
+
+- Case: pure left-breast DCIS after lumpectomy, final excision pathology intermediate grade, 1.8 cm, solid/cribriform, no necrosis, positive/very close posterior margin, pTisNx, ER/PR positive, HER2 untested. Tamoxifen was prescribed but explicitly held until radiation-oncology assessment.
+- PL P1: Type uses the earlier core-biopsy profile (`PR pending`, micropapillary pattern, focal necrosis) instead of prioritizing final excision pathology; Stage is blank despite explicit `pTisNx`; the held future tamoxifen plan is mislabeled as a recent treatment change.
+- PL P2: findings should explicitly state no invasive cancer and use final pathology architecture/necrosis; goals description contradicts its explicit content by appending `Not explicitly stated`; therapy wording slightly overstates a conditional decision; future visit mode is not stated; radiation-oncology appointment is not clearly a new outgoing referral from this encounter.
+- Attribution: A0 for second opinion; A1 for Patient type, Type, Distant, Metastasis, and response; A2 for in-person, summary, findings, goals description, and therapy plan.
+- Core verdicts: current_meds TIE; Stage BL; Distant TIE; Metastasis TIE; response TIE; Type TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
+- Main verification: confirmed final pathology `pTisNx`, ER/PR positive, no invasive tumor, solid/cribriform architecture and no necrosis. Both systems retain the earlier `PR pending`; only BL captures stage. The tamoxifen prescription is explicitly on hold pending radiation assessment.
+
+### Breast sample 12 — coral_idx 31
+
+- Case: untreated right clinical Stage II, node-negative grade-2 invasive mammary carcinoma with mixed ductal/lobular features, ER >95%, PR ~70%, HER2−, Ki-67 ~20%, PET-negative distant staging, and completed high-risk MammaPrint; curative neoadjuvant AC/T plus later surgery/endocrine treatment is planned.
+- PL P1: lab summary incorrectly says none despite a complete recent numeric panel; therapy plan mixes echo, port, and chemotherapy teaching into treatment; procedure plan omits chemotherapy teaching required by its schema; lab plan misses explicit `labs`; Referral.Others omits cold-cap CRC contact; genetic results misses completed `MP high risk`.
+- PL P2: Type omits ER percentage and Ki-67; findings omit a third 0.5 cm MRI lesion/NME and absence of chest-wall involvement; medication plan omits the intended start window.
+- Attribution: A0 for second opinion; A1 for Patient type, Type, labs, findings, response, therapy, lab plan, cold-cap coordination, and genetic results; A2 for summary, goals description, medication plan, and procedure plan.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type BL; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
+- Main verification: confirmed the dated laboratory panel, mixed ductal/lobular pathology with receptor percentages and Ki-67, node-negative/PET-negative staging, `MP high risk`, explicit labs, cold-cap coordination, and separate echo/teaching/port preparations. BL is more complete only on Type; both systems miss MammaPrint in genetic results.
