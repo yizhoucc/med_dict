@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 38/40 (breast 20/20, PDAC 18/20)
-- Next: PDAC sample 19
-- PL findings: P0=19, P1=220, P2=115
-- Attribution findings: A0=96, A1=183, A2=239
-- Core verdict totals (PL / BL / TIE): 50 / 51 / 147
+- Completed: 40/40 (breast 20/20, PDAC 20/20)
+- Next: targeted core-field repairs, PL rerun, and regression review
+- PL findings: P0=22, P1=226, P2=123
+- Attribution findings: A0=103, A1=190, A2=256
+- Core verdict totals (PL / BL / TIE): 53 / 53 / 154
 
 ## Results
 
@@ -385,3 +385,35 @@ Date: 2026-08-27
 - Attribution: A0 for Patient type, Distant, and Referral follow-up; A1 for second opinion, labs, findings, goals, goals-description fallback, response, next-visit fallback, and genetic results; A2 for summary, Type, Metastasis, supportive medications, and medication plan.
 - Core verdicts: current_meds PL; Stage BL; Distant TIE; Metastasis PL; response TIE; genetic results TIE. Total PL 2 / BL 1 / TIE 3.
 - Main verification: confirmed capecitabine is marked not taking and chemotherapy is explicitly held, original resectability and 2/29 positive regional nodes, current negative distant imaging, conditional five-of-seven resumption, completed rather than future head CT, planned Dopplers, and ATM VUS.
+
+### PDAC sample 19 — coral_idx 18
+
+- Case: locally advanced unresectable pancreatic-head/uncinate adenocarcinoma that progressed on gemcitabine/nab-paclitaxel and is now treated with modified FOLFIRINOX. Cycle 3 was postponed for severe cholestatic/hepatocellular abnormalities. The same-day CT subsequently confirmed local primary growth with biliary and likely partial duodenal obstruction, but did not establish liver metastasis; an older 11 mm liver lesion remained uncharacterized. FOLFIRINOX remains the active regimen despite the single hold.
+- PL P0: Metastasis preserves the supported uncertain liver concern but fabricates `confirmed regional nodes`.
+- PL P1: findings omits the same-day negative bilateral-DVT ultrasound; imaging continues to list the CT and leg ultrasound as future even though the addendum contains their results; Specialty captures SMS but omits the urgent outgoing GI/ERCP referral.
+- PL P2: summary omits the completed addendum CT and urgent ERCP; response correctly captures growth but calls confirmed local enlargement only `possible progression`; procedure says ERCP without the urgent referral context; Referral follow-up misroutes GI/ERCP into follow-up. The findings field also corrupts alkaline phosphatase 493 as `49[REDACTED]`.
+- Attribution: A0 for second opinion, Distant, Metastasis, and next visit; A1 for Metastasis, supportive medications, and palliative goal; A2 for summary, Type, Stage, labs, findings, current medications, response, and Imaging.
+- Core verdicts: current_meds PL; Stage TIE; Distant PL; Metastasis BL; response PL; genetic results TIE. Total PL 3 / BL 1 / TIE 2.
+- Main verification: confirmed historical Gem/Abraxane progression, active FOLFIRINOX with only the current infusion postponed, definite local progression/obstruction in the addendum, unresolved rather than confirmed liver spread, no regional-node evidence, completed CT/ultrasound, and urgent GI referral.
+
+### PDAC sample 20 — coral_idx 19
+
+- Case: newly diagnosed pancreatic-tail adenocarcinoma with radiographically definite peritoneal carcinomatosis, multiple liver lesions that remain suspicious rather than confirmed, and prominent but unproven retroperitoneal nodes. No treatment has started; FOLFIRINOX or trial participation is being considered, UCSF500 is ordered, and germline counseling/testing is recommended.
+- PL P0: Distant Metastasis combines confirmed peritoneal spread with merely suspicious liver lesions as if both were confirmed; general Metastasis repeats that liver-certainty error and additionally fabricates `confirmed regional nodes` from nonspecific prominent retroperitoneal nodes.
+- PL P1: Type omits the explicitly metastatic status; procedure promotes trial-dependent tissue collection/biopsy requirements into current scheduled procedures before consent or screening; Referral follow-up substitutes possible nontherapeutic-study eligibility for an actual follow-up plan.
+- PL P2: findings omits the prominent retroperitoneal nodes and mixes some symptoms into objective findings; supportive medications omits the primarily used Tylenol; medication plan does not foreground the patient's interest in REVOLUTION screening or the still-unselected regimen; Genetics records a recommendation as though an outgoing referral were definitively placed.
+- Attribution: A0 for second opinion, Referral follow-up, and genetic-results fallback; A1 for labs, supportive medications, response, and next-visit fallback; A2 for Patient type, Stage, Distant, Metastasis, findings, goals description, medication plan, therapy plan, and genetic plan.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 5.
+- Main verification: confirmed definite peritoneal carcinomatosis, only suspicious liver lesions, no malignant confirmation of retroperitoneal nodes, untreated status, conditional treatment/trial choices, ordered UCSF500, recommended germline testing, and intact MMR that both systems omit from genetic results.
+
+## PDAC interim summary
+
+- Core verdicts across 20 samples: PL 25 / BL 25 / TIE 70. Like breast, the matched v2.1 PDAC comparison is tied.
+- Repeated high-impact patterns: copied `confirmed regional nodes` and unsupported organ clauses; clinical/radiographic suspicion upgraded to confirmation; old regimens retained as current or genuinely active regimens omitted; old stable scans overriding newer progression; current and historical stage/node status flattened; completed or relative molecular results misclassified as patient genetic results.
+- Repeated non-core patterns: plans crossed among medication, therapy, procedure, imaging, lab, referral, and follow-up fields; completed tests persisted as future plans after an addendum; historical/incoming consultations became outgoing referrals; attribution frequently supported only part of a compound value.
+
+## Matched v2.1 conclusion before targeted repairs
+
+- Across 40 held-out samples and 260 manually adjudicated core comparisons, the result is exactly tied: PL 53 / BL 53 / TIE 154.
+- Therefore the current matched-v2.1 artifacts do **not** support the paper's desired claim that the pipeline is better than the matched single-prompt baseline on the defined core questions.
+- The result does identify a concentrated repair opportunity: many PL losses arise from a few deterministic failure families rather than broad model weakness, especially copied metastasis clauses, current-regimen state, latest-response precedence, and completed/pending genetic-result separation.
