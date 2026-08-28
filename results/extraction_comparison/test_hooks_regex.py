@@ -602,6 +602,27 @@ check(
     "Metastatic pancreatic adenocarcinoma with continued good disease control on surveillance.",
 )
 check(
+    "response stable control ignores unrelated things in progress",
+    sanitize_response_assessment(
+        "Imaging findings raise concern for possible recurrence or progression, but this is not confirmed.",
+        "Known liver hemangiomas. No suspicious lesions.",
+        "Metastatic pancreatic adenocarcinoma with continued good disease control on surveillance. "
+        "There are many investigational therapies in progress.",
+        current_meds="",
+    )[0],
+    "Metastatic pancreatic adenocarcinoma with continued good disease control on surveillance.",
+)
+check(
+    "response current early improvement overrides pretreatment progression",
+    sanitize_response_assessment(
+        "The liver lesion increased before treatment, indicating progression.",
+        "The patient started pembrolizumab and Abraxane and now presents for cycle 1 day 8.",
+        "Axillary pain improved, which is hopeful for early treatment response.",
+        current_meds="pembrolizumab, abraxane",
+    )[0],
+    "Axillary pain improved, which is hopeful for early treatment response.",
+)
+check(
     "response current progression prevents stable override",
     sanitize_response_assessment(
         "Current imaging shows progression.",
@@ -799,6 +820,14 @@ check("suspected-stage guard rejects biopsy to confirm Stage IV",
 check(
     "stage confirmed distant updates historical pTN stage",
     align_stage_with_confirmed_distant("pT2N2", "Yes, to liver", "pdac"),
+    ("Originally pT2N2; now Stage IV (metastatic)",
+     "confirmed distant disease updates historical/nonmetastatic stage"),
+)
+check(
+    "stage confirmed nonregional abdominal nodes updates historical pTN stage",
+    align_stage_with_confirmed_distant(
+        "pT2N2", "Yes, to intra-abdominal lymph nodes", "pdac"
+    ),
     ("Originally pT2N2; now Stage IV (metastatic)",
      "confirmed distant disease updates historical/nonmetastatic stage"),
 )
@@ -1222,13 +1251,15 @@ check(
     sanitize_breast_recurrence_receptors(
         "ER+/PR-/HER2- grade 1 IDC (initial diagnosis); ER+/PR-/HER2- (current recurrent disease)",
         "Locally recurrent, unresectable, strongly hormone-receptor positive breast cancer.",
+        "The original tumor was estrogen-receptor positive and progesterone-receptor negative.",
     )[0],
-    "ER+/PR-/HER2- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrent disease)",
+    "ER+/PR- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrent disease)",
 )
 check(
     "recurrent explicit receptor profile remains unchanged",
     sanitize_breast_recurrence_receptors(
         "Original ER+/PR-/HER2- IDC; current recurrent disease ER+/PR+/HER2-",
+        "Current recurrent biopsy: ER positive, PR positive, HER2 negative.",
         "Current recurrent biopsy: ER positive, PR positive, HER2 negative.",
     )[0],
     "Original ER+/PR-/HER2- IDC; current recurrent disease ER+/PR+/HER2-",
@@ -1353,6 +1384,38 @@ check(
         cancer="breast",
     ),
     "No",
+)
+check(
+    "distant breast excludes carotid-body alternative diagnosis",
+    dm_fix(
+        "Not sure/Suspected, to left ilium, left carotid artery bifurcation, left iliac bone and bilateral sacral ala",
+        note="MRI pelvis shows suspicious lesions in the left iliac bone and bilateral sacral ala. "
+             "The longstanding left carotid bifurcation mass is suggestive of a carotid body paraganglioma.",
+        cancer="breast",
+    ),
+    "Not sure/Suspected, to bone",
+)
+
+check(
+    "final Metastasis recognizes axillary LN FNA positive",
+    sanitize_general_metastasis(
+        "Not sure/Suspected, to bone", "Yes, clinically suspected regional lymph-node involvement", "",
+        "Right axillary LN FNA: +metastatic breast adenocarcinoma. MRI pelvis shows suspicious bone lesions.",
+        "Biopsy is planned to confirm Stage IV disease.", "breast",
+    )[0],
+    "Yes, pathologically confirmed regional lymph-node involvement (positive regional node biopsy); "
+    "distant disease uncertain — Not sure/Suspected, to bone",
+)
+
+check(
+    "final Metastasis restores A/P-explicit locoregional recurrence from No",
+    sanitize_general_metastasis(
+        "No", "No", "Not staged in note",
+        "Breast cancer history.",
+        "The patient has an unresectable local regional recurrence and no other sites of disease.",
+        "breast",
+    )[0],
+    "Yes, locoregional recurrence; no distant metastasis",
 )
 check(
     "distant benign falx meningioma is cleared",

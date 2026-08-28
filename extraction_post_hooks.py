@@ -110,6 +110,16 @@ def is_confirmed_distant_value(value, cancer_type):
         return True
     if re.search(r"^yes\b[^.;]*\bhistorically confirmed to\b", value):
         return True
+    # Pancreatic cancer can recur in explicitly nonregional abdominal nodal basins.
+    # These values have already passed the dedicated Distant-field sanitizer, so a
+    # plain affirmative result here should remain confirmed for Stage reconciliation.
+    if cancer_type == "pdac" and re.search(
+        r"^yes\b[^.;]*(?:intra[ -]?abdominal|mesenteric|gastrohepatic|"
+        r"retroperitoneal|aortocaval|periaortic)\s+(?:lymph\s*)?nodes?\b",
+        value,
+        re.IGNORECASE,
+    ):
+        return True
     if has_affirmative_m1_site(value, cancer_type):
         return True
     return bool(re.search(r"\b(?:confirmed\s+)?distant\s+(?:metasta\w*|disease)\b", value))
@@ -584,9 +594,9 @@ def final_regional_node_evidence(cancer_type, stage, note_text, assessment_and_p
     )
     biopsy_malignancy = re.compile(
         r"(?:fna|fine needle aspiration|core biopsy|biopsy)[^.;\n]{0,120}"
-        r"(?:lymph[\s-]*node|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
+        r"(?:lymph[\s-]*node|\bln\b|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
         r"(?:metastatic|positive for|involved by|malignan\w*|adenocarcinoma|carcinoma)|"
-        r"(?:lymph[\s-]*node|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
+        r"(?:lymph[\s-]*node|\bln\b|\bnodal\b|\bnodes?\b)[^.;\n]{0,100}"
         r"(?:fna|fine needle aspiration|core biopsy|biopsy|positive for|involved by)[^.;\n]{0,100}"
         r"(?:metastatic|malignan\w*|adenocarcinoma|carcinoma)",
         re.IGNORECASE,
@@ -700,13 +710,21 @@ def _supported_locoregional_clause(general, note_text, assessment_and_plan, canc
         general,
         re.IGNORECASE,
     )
+    ap_supported = re.search(
+        r"loc(?:al[\s-]*)?regional(?:\s+chest[\s-]*wall)? recurrence|"
+        r"chest[\s-]*wall recurrence",
+        str(assessment_and_plan or ""),
+        re.IGNORECASE,
+    )
+    if ap_supported:
+        return "locoregional chest-wall recurrence" if "chest" in ap_supported.group(0).lower() \
+            else "locoregional recurrence"
     if not requested:
         return ""
-    source = f"{assessment_and_plan or ''}\n{note_text or ''}"
     supported = re.search(
         r"loc(?:al[\s-]*)?regional(?:\s+chest[\s-]*wall)? recurrence|"
         r"chest[\s-]*wall recurrence",
-        source,
+        str(note_text or ""),
         re.IGNORECASE,
     )
     if not supported:
@@ -904,6 +922,25 @@ def sanitize_distant_metastasis_by_site(
 ):
     _ = stage
     distant, general = str(distant or "").strip(), str(general or "").strip()
+    reasons, changed = [], False
+    if cancer_type == "breast" and re.search(
+        r"carotid\s+(?:body\s+)?(?:tumou?r|paraganglioma)|"
+        r"carotid\s+bifurcation\s+mass[^.;]{0,100}(?:longstanding|stable|paraganglioma)",
+        f"{assessment_and_plan or ''}\n{note_text or ''}",
+        re.IGNORECASE,
+    ):
+        cleaned_distant = re.sub(
+            r"(?i)(?:,\s*|\band\s+)?(?:left\s+|right\s+)?carotid\s+artery\s+bifurcation",
+            "",
+            distant,
+        )
+        cleaned_distant = re.sub(r"\s+,", ",", cleaned_distant)
+        cleaned_distant = re.sub(r",\s*,+", ",", cleaned_distant)
+        cleaned_distant = re.sub(r"\s{2,}", " ", cleaned_distant).strip(" ,;")
+        if cleaned_distant != distant:
+            distant = cleaned_distant
+            changed = True
+            reasons.append("removed carotid-body/paraganglioma alternative diagnosis")
     field_status, claims = met_status(distant), _dm_claims(distant)
     had_distant_sites = bool(claims)
     by_key = {claim["key"]: claim for claim in claims}
@@ -918,7 +955,7 @@ def sanitize_distant_metastasis_by_site(
             claims.append(claim)
             by_key[claim["key"]] = claim
 
-    states, reasons, changed = [], [], False
+    states = []
     for claim in claims:
         evidence = _dm_site_evidence(
             claim["key"], note_text, assessment_and_plan, cancer_type
@@ -1745,17 +1782,27 @@ def sanitize_response_assessment(
                 )
             ),
         )
-        current_ap_has_progression = bool(
-            re.search(
-                r"\b(?:progress(?:ed|ion|ing)?|worsen\w*|clinical[/ ]?symptomatic\s+decline|"
-                r"new\s+metasta\w*)\b",
-                assessment_and_plan or "",
-                re.IGNORECASE,
-            )
-        )
+        current_ap_has_progression = _has_affirmative_progression(assessment_and_plan)
         if stable_sentence and not current_ap_has_progression:
             cleaned = stable_sentence
             reasons.append("current A/P stable-control statement overrides unsupported progression")
+
+    # A treatment-era, explicitly favorable current assessment is more relevant than
+    # a pre-treatment progression sentence copied from the longitudinal history/header.
+    if _has_affirmative_progression(cleaned):
+        early_response_sentence = _first_supported_sentence(
+            (assessment_and_plan,),
+            lambda sentence: bool(re.search(
+                r"\b(?:pain|mass|symptoms?)\b[^.;\n]{0,80}\bimprov\w*\b"
+                r"[^.;\n]{0,100}\b(?:early\s+)?treatment\s+response\b|"
+                r"\bhopeful\s+for\s+(?:an?\s+)?(?:early\s+)?treatment\s+response\b",
+                sentence,
+                re.IGNORECASE,
+            )),
+        )
+        if early_response_sentence and str(current_meds or "").strip():
+            cleaned = early_response_sentence
+            reasons.append("current treatment-era improvement overrides pre-treatment progression")
 
     claims_current_treatment = bool(
         re.search(
@@ -1926,10 +1973,33 @@ def recover_completed_genetic_results(value, note_text):
     return merged, tuple(dict.fromkeys((*reasons, "recovered completed MMR result from source")))
 
 
-def sanitize_breast_recurrence_receptors(value, assessment_and_plan):
-    """Prevent historical PR/HER2 values from being copied onto an HR-only recurrence."""
+def sanitize_breast_recurrence_receptors(value, assessment_and_plan, note_text=""):
+    """Prevent unsupported HER2 claims and cross-timepoint receptor borrowing."""
     original = str(value or "").strip()
     ap = str(assessment_and_plan or "")
+    source = f"{ap}\n{note_text or ''}"
+    reasons = []
+
+    her2_supported = bool(re.search(
+        r"\bHER\s*-?\s*2\b|\bERBB2\b|\btriple[\s-]*negative\b|\bTNBC\b|"
+        r"\bFISH\b|\b(?:trastuzumab|pertuzumab|herceptin|perjeta|kadcyla|enhertu)\b|"
+        r"\*{3,}\s*-",
+        source,
+        re.IGNORECASE,
+    ))
+    if original and not her2_supported:
+        stripped = re.sub(
+            r"(?i)(?:\s*[/,]\s*)?HER\s*-?\s*2\s*(?:status\s*)?"
+            r"(?:[:=]?\s*)?(?:positive|negative|pos\b|neg\b|[+-])",
+            "",
+            original,
+        )
+        stripped = re.sub(r"/{2,}", "/", stripped)
+        stripped = re.sub(r"\s{2,}", " ", stripped).strip(" /,;")
+        if stripped != original:
+            original = stripped
+            reasons.append("removed HER2 claim absent from source")
+
     if not original or not re.search(
         r"\b(?:local(?:ly)?\s+)?recurr\w*\b[^.;]{0,120}\b(?:strongly\s+)?"
         r"hormone[\s-]*receptor\s+positive\b|"
@@ -1937,7 +2007,7 @@ def sanitize_breast_recurrence_receptors(value, assessment_and_plan):
         ap,
         re.IGNORECASE,
     ):
-        return original, ()
+        return original, tuple(reasons)
 
     # If the current recurrence sentence itself gives PR or HER2, retain the generated profile.
     current_sentences = [
@@ -1951,7 +2021,7 @@ def sanitize_breast_recurrence_receptors(value, assessment_and_plan):
         current_context,
         re.IGNORECASE,
     ):
-        return original, ()
+        return original, tuple(reasons)
 
     clauses = [part.strip() for part in original.split(";")]
     changed = False
@@ -1966,8 +2036,9 @@ def sanitize_breast_recurrence_receptors(value, assessment_and_plan):
             clauses[index] = f"HR+ (PR/HER2 not specified; {label})"
             changed = True
     if not changed:
-        return original, ()
-    return "; ".join(clauses), ("removed unsupported recurrent-lesion PR/HER2 borrowed from history",)
+        return original, tuple(reasons)
+    reasons.append("removed unsupported recurrent-lesion PR/HER2 borrowed from history")
+    return "; ".join(clauses), tuple(reasons)
 
 
 GENETIC_RESULTS_FALLBACK = "No genetic testing results in note."

@@ -5439,7 +5439,7 @@ def main():
         if cancer_type == "breast" and isinstance(cancer_rr, dict):
             old_type_rr = str(cancer_rr.get("Type_of_Cancer", "") or "")
             new_type_rr, reasons_rr = sanitize_breast_recurrence_receptors(
-                old_type_rr, assessment_and_plan
+                old_type_rr, assessment_and_plan, note_text
             )
             if new_type_rr != old_type_rr:
                 cancer_rr["Type_of_Cancer"] = new_type_rr
@@ -5521,6 +5521,30 @@ def main():
                 note_text, keypoints, model, tokenizer,
                 chat_tmpl, attr_gen_config, base_cache
             )
+            genetic_value = str(
+                keypoints.get("Genetic_Testing_Results", {}).get("genetic_testing_results", "")
+                or ""
+            )
+            if re.search(r"\b(?:MMR|pMMR|MLH1|PMS2|MSH2|MSH6)\b", genetic_value, re.I):
+                mmr_quote = re.search(
+                    r"[^.\n]{0,100}\bMMR\s+proteins?\s+(?:all\s+)?intact\b"
+                    r"(?:\s+by\s+IHC)?[^.\n]*\.?'?",
+                    note_text,
+                    re.IGNORECASE,
+                )
+                if mmr_quote:
+                    attribution["genetic_testing_results"] = [mmr_quote.group(0).strip()]
+                else:
+                    protein_quotes = [
+                        match.group(0).strip()
+                        for match in re.finditer(
+                            r"\b(?:MLH1|PMS2|MSH2|MSH6)\s+expression\s*:\s*Present\b\.?'?",
+                            note_text,
+                            re.IGNORECASE,
+                        )
+                    ]
+                    if len(protein_quotes) == 4:
+                        attribution["genetic_testing_results"] = protein_quotes
             attributable = get_attributable_fields(keypoints)
             print(f"  [ATTRIBUTION] {len(attribution)}/{len(attributable)} fields sourced ({time.time() - attr_start:.1f}s)")
 
