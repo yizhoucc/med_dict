@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 instructions: |
   Read the complete oncology clinical note and extract the requested information faithfully.
@@ -8,24 +8,26 @@ instructions: |
   Never invent a diagnosis, medication, test, result, stage, metastasis, or plan. Preserve
   uncertainty: suspected or pending findings are not confirmed findings. Treat current,
   completed, stopped, and future care as different time states. Use specific names, sites,
-  values, doses, and timing when the note provides them. Redacted text must remain [REDACTED].
+  values, doses, and timing when the note provides them. Follow each field's stated fallback;
+  do not replace an explicit negative or unknown category with an empty string. Redacted text
+  must remain [REDACTED].
 
 common_fields:
   Reason_for_Visit.Patient type: "New patient only for a first visit/consultation with this clinic; otherwise follow up."
   Reason_for_Visit.second opinion: "Yes only when the note explicitly describes a second opinion or independent consultation; otherwise no."
   Reason_for_Visit.in-person: "Televisit for video/telehealth visits; otherwise in-person when supported."
   Reason_for_Visit.summary: "Specific reason for this visit, including cancer and stage when known; do not use a vague 'follow-up' alone."
-  Cancer_Diagnosis.Stage_of_Cancer: "Report the stated AJCC stage or TNM. Confirmed distant disease is Stage IV; suspected distant disease must remain suspected. Do not manufacture an AJCC stage when the note lacks enough information."
-  Cancer_Diagnosis.Distant Metastasis: "State whether confirmed distant spread exists and name every supported distant site. Keep suspected/indeterminate sites explicitly uncertain. Regional nodes are not distant disease."
-  Cancer_Diagnosis.Metastasis: "Describe supported metastatic involvement including regional/nodal disease and its sites; distinguish regional from distant spread and suspected from confirmed disease."
+  Cancer_Diagnosis.Stage_of_Cancer: "Report the explicitly stated AJCC stage, TNM, and/or resectability status. If original and current status differ, report both with their time context. Do not convert TNM into a named AJCC stage unless that stage is explicitly stated. Confirmed distant disease is Stage IV; suspected distant disease must remain 'Suspected Stage IV (pending confirmation)'. Local or regional recurrence alone is not Stage IV. If no stage, TNM, or resectability information is present, write 'Not staged in note'."
+  Cancer_Diagnosis.Distant Metastasis: "Use 'Yes, to [all confirmed sites]' when distant spread is established; 'No' only when the clinician or staging work-up supports absence; and 'Not sure—suspected [site]' for unresolved suspicious or indeterminate findings. Regional nodes, benign lesions, biopsy-negative lesions, and direct extension into an adjacent organ are not confirmed distant metastases."
+  Cancer_Diagnosis.Metastasis: "Describe every supported site of metastatic involvement and label it regional or distant, current or historical, and confirmed or suspected. Biopsy results take priority over imaging suspicion. A biopsy-negative lesion is not metastasis, and direct extension into an adjacent organ is local invasion rather than metastasis. Use 'No' only when absence is supported and 'Not sure—suspected [site]' when uncertainty remains."
   Lab_Results.lab_summary: "Report current/relevant blood and tumor-marker results with actual values. Exclude imaging, pathology, and molecular/genetic results."
   Clinical_Findings.findings: "Report objective pathology, imaging, and examination findings with sizes and sites when available; do not substitute symptoms or repeat only the diagnosis."
-  Current_Medications.current_meds: "List only anticancer drugs the patient is actively receiving now. Exclude ordinary home medications, supportive medications, completed/stopped drugs, and drugs that are only planned or discussed."
+  Current_Medications.current_meds: "List only anticancer drugs the patient is actively receiving now. The current Assessment/Plan overrides a stale medication list. Include clinic-administered therapy even if absent from outpatient medications, and keep a regimen active after only a missed dose or normal between-cycle break. Exclude supportive or ordinary home medications, drugs described as s/p/completed/stopped/held/paused, and drugs only planned, recommended, or discussed. If no anticancer drug is active, use an empty string."
   Treatment_Changes.recent_changes: "Name recent anticancer-treatment starts, stops, switches, holds, or dose changes near this visit; exclude unchanged treatment and future-only plans."
   Treatment_Changes.supportive_meds: "List named supportive medications actively used for cancer care, such as antiemetics, cancer-pain medicines, growth factors, bone-support agents, or pancreatic enzymes. Do not list anticancer drugs or ordinary unrelated home medicines."
   Treatment_Goals.goals_of_treatment: "Treatment intent only: curative, palliative, adjuvant, risk reduction, surveillance, or symptom management. This is not the visit purpose."
   Treatment_Goals.goals_description: "Quote or closely paraphrase explicit physician language about treatment intent; otherwise say Not explicitly stated."
-  Response_Assessment.response_assessment: "State how cancer is currently responding and the evidence, such as imaging or tumor-marker change. Side effects, prognosis, tumor description, and future plans are not response. If therapy has not started, say no response can yet be assessed."
+  Response_Assessment.response_assessment: "State the cancer's response to the current or most recently completed treatment and cite concrete imaging, tumor-marker, examination, or pathology evidence. Attribute scans and changes to the regimen that preceded them, not to a newly prescribed regimen. Progression or recurrence after prior treatment counts as response information, and surgical pathology after neoadjuvant therapy counts as response. Do not infer response from tolerability, side effects, prognosis, generic laboratory clearance, tumor description, or future plans. Use 'responding' only for measurable improvement and 'stable disease' for unchanged findings. If no anticancer treatment has started, write 'Not yet on treatment — no response to assess.' If treatment has started but the note provides no response evidence, write 'Not mentioned in note.'"
   Medication_Plan.medication_plan: "List future/current medication actions: start, continue, stop, hold, switch, dose, frequency, and contingencies. Exclude completed drugs. A chemotherapy break is a medication-plan change."
   Therapy_plan.therapy_plan: "Summarize current or future chemotherapy, endocrine, targeted, immunotherapy, and radiotherapy plans. Exclude completed therapy, imaging, and lab plans."
   radiotherapy_plan.radiotherapy_plan: "Report current, planned, discussed, or referred radiation therapy; exclude completed past radiation."
@@ -33,7 +35,7 @@ common_fields:
   Imaging_Plan.imaging_plan: "Report imaging still to come, including test name, timing, and reason when stated; exclude scans already completed and therapeutic radiation."
   Lab_Plan.lab_plan: "Report future blood tests with names, timing, and rationale when stated; exclude imaging and molecular tests."
   Genetic_Testing_Plan.genetic_testing_plan: "Report named germline, tumor-genomic, molecular, biomarker, or ctDNA tests that are ordered/planned but not yet resulted."
-  Genetic_Testing_Results.genetic_testing_results: "Report completed molecular/genetic results with genes, variants, status, and platform when given; exclude pending tests and routine tumor-marker values."
+  Genetic_Testing_Results.genetic_testing_results: "Report all completed germline and somatic molecular results, including named variants or VUS, negative/no-actionable findings, MSI/TMB, MMR protein status by IHC, HRD, PD-L1, liquid-biopsy results, and completed recurrence-score or risk assays such as Oncotype DX or MammaPrint. CA 19-9 values are routine labs, but an explicitly stated CA 19-9 non-secretor status is a molecular/biologic result and belongs here. Exclude pending or merely ordered tests. If no completed result is present, write 'No genetic testing results in note.'"
   Referral.Nutrition: "Outgoing nutrition/dietitian referral only."
   Referral.Genetics: "Outgoing genetics clinic/counselor referral only."
   Referral.Specialty: "Outgoing specialty referrals such as surgical oncology, radiation oncology, palliative care, GI, pain, or dental."
@@ -44,9 +46,15 @@ common_fields:
 
 cancer_fields:
   breast:
-    Cancer_Diagnosis.Type_of_Cancer: "Report breast histology plus ER, PR, and HER2 individually, grade and special features when available. Use the most recent/current pathology first, preserve receptor changes, and report bilateral tumors separately."
+    Cancer_Diagnosis.Type_of_Cancer: "Report breast histology plus ER, PR, and HER2 individually, grade, associated DCIS, and special features when available; include recurrence/metastatic status. Use the most recent pathology first, preserve receptor changes, and report bilateral tumors separately. Specific pathology values override shorthand summaries: preserve an explicitly reported low-positive PR result rather than converting it to PR-negative. Interpret HER2 IHC 0/1+ as negative, 2+ as equivocal unless FISH/ISH resolves it, and 3+ as positive; explicit triple-negative means ER-/PR-/HER2-. Do not infer histology from imaging shape."
+    Cancer_Diagnosis.Stage_of_Cancer: "For breast cancer, axillary, sentinel, ipsilateral supraclavicular/infraclavicular, and internal mammary nodes are regional, not distant. Do not use another primary cancer's stage. A local or regional recurrence without confirmed distant disease is not Stage IV."
+    Cancer_Diagnosis.Distant Metastasis: "Apply breast-specific anatomy: axillary, sentinel, ipsilateral supraclavicular/infraclavicular, and internal mammary nodes are regional. Do not count another primary cancer, a separate benign tumor, or a biopsy-negative node as breast-cancer distant metastasis."
+    Genetic_Testing_Results.genetic_testing_results: "Do not treat routine breast pathology receptors ER, PR, or HER2 as genetic-testing results."
   pdac:
-    Cancer_Diagnosis.Type_of_Cancer: "Report the exact pancreatic cancer histology and primary site, including recurrence or metastatic status when supported; do not add breast receptor fields."
+    Cancer_Diagnosis.Type_of_Cancer: "Report the exact primary organ/site and pancreatic cancer histology, grade, special features such as lymphovascular or perineural invasion, and recurrence/metastatic status when supported. List separate primary cancers separately; do not add breast receptor fields."
+    Cancer_Diagnosis.Stage_of_Cancer: "Preserve resectable, borderline resectable, locally advanced, and unresectable status. Do not convert 'locally advanced' to Stage III unless the note explicitly states Stage III. If a prior metastasis was resected and current imaging shows no evidence of disease, report that current NED status rather than simply saying 'now Stage IV'."
+    Cancer_Diagnosis.Distant Metastasis: "Common distant sites include liver, peritoneum, and lung, but list only sites supported as malignant and preserve uncertainty for suspicious lesions."
+    Genetic_Testing_Results.genetic_testing_results: "Include SPINK1 carrier status and other completed hereditary-pancreatitis gene results when present."
 
 output_schema:
   Reason_for_Visit:

@@ -3,8 +3,8 @@
 baseline_extraction.py — Extract clinical info with NO pipeline, NO gates, NO hooks.
 Just raw note → one model call with one prompt → extraction.
 
-The preferred ``--matched`` mode uses the same output fields and operational
-field definitions as the pipeline evaluation while deliberately retaining the
+The preferred ``--matched`` mode uses the same output fields and canonical
+field semantics as the pipeline evaluation while deliberately retaining the
 single-pass baseline design.  The historical ``--json`` and free-text modes
 remain available so previously generated results stay reproducible.
 
@@ -150,7 +150,11 @@ def load_matched_contract(path, cancer_type):
 def build_matched_prompt(contract, cancer_type, note_text):
     """Build one prompt for one baseline call; no staged prompting or repair is used."""
     field_definitions = dict(contract.get("common_fields", {}))
-    field_definitions.update(contract["cancer_fields"][cancer_type])
+    for field_path, cancer_specific in contract["cancer_fields"][cancer_type].items():
+        common = field_definitions.get(field_path)
+        field_definitions[field_path] = (
+            f"{common} Cancer-specific rule: {cancer_specific}" if common else cancer_specific
+        )
     definitions = "\n".join(
         f"- {field_path}: {description}" for field_path, description in field_definitions.items()
     )
@@ -161,7 +165,7 @@ def build_matched_prompt(contract, cancer_type, note_text):
         "FIELD DEFINITIONS (use these exact meanings):\n"
         f"{definitions}\n\n"
         "Return ONLY one JSON object with exactly this nested schema. "
-        "Use an empty string when the note contains no supported value; do not omit keys.\n"
+        "Follow each field's explicit fallback value and do not omit keys.\n"
         f"{schema}\n\n"
         "CLINICAL NOTE:\n"
         f"{note_text}\n\n"
