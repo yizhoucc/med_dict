@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 26/40 (breast 20/20, PDAC 6/20)
-- PL findings: P0=4, P1=141, P2=111
-- Attribution findings: A0=82, A1=94, A2=173
-- Core verdict totals (PL / BL / TIE): 41 / 21 / 114
+- Completed: 29/40 (breast 20/20, PDAC 9/20)
+- PL findings: P0=4, P1=156, P2=119
+- Attribution findings: A0=90, A1=108, A2=191
+- Core verdict totals (PL / BL / TIE): 47 / 23 / 124
 - Current phase: PDAC manual review
 
 ## Results
@@ -280,3 +280,31 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage PL; Distant PL; Metastasis TIE; response PL; genetic results TIE. Total PL 3 / BL 0 / TIE 3.
 - v2.1 change: Distant now names the liver while preserving uncertainty, and general Metastasis no longer fabricates confirmed nodes or confirmed liver disease.
 - Main verification: read the complete note and confirmed the 51–90% treatment effect with negative margins/nodes, new and enlarging tiny liver lesions, CA19-9 rise from 44 to 2250, `too small to evaluate further`, two-month repeat scans, conditional biopsy, and no explicit future clinic mode.
+
+### PDAC sample 7 — coral_idx 6
+
+- Case: pancreatic-tail adenocarcinoma with local extension but no distant disease. Gemcitabine/nab-paclitaxel was changed to every-other-week dosing after neutropenia; four cycles are complete and treatment continues. CT shows slight primary-tumor shrinkage. The right adnexal cystic mass is considered likely benign. Germline testing is negative for pathogenic variants with AXIN1, CTC1, ERCC4, and MC1R VUS findings.
+- PL P1: Stage upgrades local extension to definite `unresectable` despite continuing discussion of possible surgery; findings calls the adnexal lesion a `cystic pelvic neoplasm` but drops `likely benign`; medication and therapy plans omit the gemcitabine/nab-paclitaxel name and every-other-week schedule; Next visit converts an eight-week imaging interval into a definite telehealth appointment.
+- Attribution: A0 second opinion, Distant, and Metastasis; A1 Patient type, labs, current medication, recent changes, goals, goals description, and genetic results; A2 summary, Stage, findings, response, and next visit.
+- Core verdicts: current_meds TIE; Stage BL; Distant TIE; Metastasis TIE; response TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 5.
+- v2.1 change: current medication is repaired from empty to the active gemcitabine/nab-paclitaxel regimen; the remaining stage, certainty, plan-detail, and inferred-visit problems persist.
+- Main verification: read the complete note and confirmed local extension/abutment, possible future surgery, no distant metastasis, `likely benign` adnexal mass, every-other-week gemcitabine/nab-paclitaxel, slight tumor shrinkage, and only an eight-week imaging plan—not a scheduled telehealth visit.
+
+### PDAC sample 8 — coral_idx 7
+
+- Case: initially resectable PDAC with Whipple pathology showing poorly differentiated ductal adenocarcinoma, LVI, pT2N2, 11/37 positive regional nodes, negative margins, and intact MMR. A gastrohepatic/mesenteric node later proved metastatic recurrence. The patient is now on every-other-week gemcitabine/nab-paclitaxel with nodal shrinkage and CA19-9 reduction. Germline ATM is documented; formal FoundationOne results remain pending, although no actionable mutation was communicated.
+- PL P1: Type omits the current recurrent-metastatic state; Stage reports only historical pT2N2 and loses current metastatic recurrence; general Metastasis keeps only historical regional N2 and omits the current biopsy-proven nonregional nodal recurrence; recent changes is empty despite the new active regimen and three completed cycles; Specialty mislabels this incoming consultation as an outgoing referral; Referral follow-up contains the chemotherapy recommendation rather than the actual as-needed return arrangement.
+- PL P2: findings contains an incorrect biopsy date and excessive normal examination detail; Therapy is incomplete in its future-trial list; future visit mode is inferred; genetic results omits the communicated no-actionable-mutation status.
+- Attribution: A0 second opinion, Specialty, and follow-up; A1 Patient type, Type, and labs; A2 findings, goal, response, Therapy, next visit, and genetic results.
+- Core verdicts: current_meds TIE; Stage BL; Distant PL; Metastasis PL; response PL; genetic results PL. Total PL 4 / BL 1 / TIE 1.
+- v2.1 change: current meds, Distant, and response are substantially repaired; historical-only Stage and incomplete metastasis merging remain.
+- Main verification: read the complete note and confirmed historical pT2N2/11-of-37 regional disease, later biopsy-proven gastrohepatic/mesenteric nodal recurrence, three cycles of current gemcitabine/nab-paclitaxel, favorable nodal and CA19-9 response, germline ATM/MMR results, pending formal FoundationOne report, and as-requested follow-up.
+
+### PDAC sample 9 — coral_idx 8
+
+- Case: lung-predominant biopsy-proven metastatic pancreatic cancer, currently treated with gemcitabine/nab-paclitaxel. CT shows stable treated lung metastases and a smaller pancreatic primary; CA19-9 fell from 3525 to 2762 to 1109. Abraxane was further dose-reduced today for neuropathy. Completed molecular results include a BRCA VUS and KRAS, CDKN2A, and APC mutations.
+- PL P1: findings reverses the dated CA19-9 trend and calls the clear decline an increase; supportive medication omits several current symptom-control drugs and misspells olanzapine; medication plan omits the core gemcitabine/Abraxane continuation and dose reduction while treating the existing GOO stent as a medication action; Genetics misroutes a historical Phase-I trial consultation as a genetics referral.
+- PL P2: summary overemphasizes nausea/vomiting despite a negative current review; recent changes mixes the two-week neuropathy follow-up into the dose-change field; goals description is generic; Therapy should explicitly say the reduced-dose combined regimen continues.
+- Attribution: A0 second opinion and findings; A1 supportive medication, goals description, Genetics, and genetic results; A2 summary, Distant, Metastasis, current medication, goal, response, and medication plan.
+- Core verdicts: current_meds TIE; Stage PL; Distant TIE; Metastasis TIE; response PL; genetic results TIE. Total PL 2 / BL 0 / TIE 4.
+- Main verification: read the complete note and confirmed biopsy-proven lung disease, stable treated pulmonary metastases, shrinking pancreatic primary, CA19-9 decline by date, current gemcitabine/Abraxane, same-day Abraxane reduction, active supportive drugs, and that the Phase-I consultation is unrelated to genetics.
