@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 12/40 (breast 12/20, PDAC 0/20)
-- PL findings: P0=3, P1=64, P2=58
-- Attribution findings: A0=33, A1=49, A2=92
-- Core verdict totals (PL / BL / TIE): 19 / 12 / 53
+- Completed: 15/40 (breast 15/20, PDAC 0/20)
+- PL findings: P0=3, P1=86, P2=67
+- Attribution findings: A0=42, A1=64, A2=113
+- Core verdict totals (PL / BL / TIE): 24 / 15 / 66
 - Current phase: breast review while the PDAC v2.2 run is in progress
 
 ## Results
@@ -143,3 +143,33 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type BL; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
 - v2.1 regression: Type gains exact ER/PR values and therapy routing improves, but completed MammaPrint, recent labs, teaching, and cold-cap coordination remain missing.
 - Main verification: read the complete note and confirmed the 2016-10-22 panel, mixed ductal/lobular pathology with Ki-67, third MRI lesion/NME, PET-negative/bone-island staging, completed `MP high risk`, chemotherapy teaching, cold-cap CRC contact, and chemo→surgery→endocrine sequence.
+
+### Breast sample 13 — coral_idx 32
+
+- Case: untreated right IDC, ER/PR 80–90%, HER2−, Ki-67 20–30%, grade unreported; current right axillary FNA confirms regional disease. Lung, abdomen/pelvis, and bone staging are negative. A small falx/dural lesion strongly favors meningioma but retains an unlikely dural-metastasis differential. Surgery is planned; chemotherapy/MammaPrint decisions remain postoperative and conditional.
+- PL P1: Distant overstates `No` and deletes the documented low-probability dural uncertainty; general Metastasis labels the current positive axillary FNA as historical and also omits the dural differential; medication plan omits the postoperative chemotherapy decision and mislabels cold-cap devices as supportive medication; radiotherapy invents a Rad Onc consult; genetic plan upgrades `possibly a MammaPrint` to definite testing.
+- PL P2: curative intent is an unmarked inference; procedure omits intended second egg-harvest round.
+- Attribution: A0 second opinion and Stage; A1 Patient type, Type, Distant, labs, findings, and goals description; A2 summary, Metastasis, goal, response, medication/radiotherapy plans, and next visit.
+- Core verdicts: current_meds TIE; Stage TIE; Distant BL; Metastasis BL; response TIE; Type TIE; genetic results TIE. Total PL 0 / BL 2 / TIE 5.
+- v2.1 regression: Type and negative-organ findings improve, and the regional node is no longer put in a distant clause; Distant still drops the dural differential and the current FNA is newly mislabeled historical.
+- Main verification: read the complete note and confirmed the MRI wording `most likely a meningioma, although dural-based metastasis remains an unlikely possibility`, current positive 10/28 axillary FNA, postoperative chemotherapy decision, only-possible MammaPrint, and absence of an explicit Rad Onc consult.
+
+### Breast sample 14 — coral_idx 33
+
+- Case: untreated right grade-1 IDC, ER >95%, PR ~90%, HER2 IHC 2+ but FISH non-amplified and therefore HER2-negative, Ki-67 ~10%; no regional/distant disease. Myriad is negative and MammaPrint low risk. Goserelin starts today; letrozole is planned in about two weeks; surgery timing is unknown.
+- PL P1: summary, Type, and findings all retain `HER2 equivocal` instead of resolving linked negative FISH; lab summary uses RPR/HIV results over six months old; recent changes treats future letrozole as already started; medication plan presents Effexor/gabapentin discussion as a definite plan; genetic plan and Genetics referral revive a historical completed referral; Specialty revives historical surgical consultations instead of the current message to an existing team.
+- PL P2: Stage fallback wording is nonstandard; curative intent is unmarked and its description is empty; procedure omits that the surgery date remains unknown.
+- Attribution: A0 second opinion, Metastasis, labs, and goals; A1 Patient type, Stage, Distant, findings, goals description, genetic plan, Genetics, and Specialty; A2 in-person, summary, Type, medication plan, and genetic results.
+- Core verdicts: current_meds PL; Stage TIE; Distant TIE; Metastasis TIE; response PL; Type TIE; genetic results TIE. Total PL 2 / BL 0 / TIE 5.
+- v2.1 regression: core verdicts are unchanged; the strengthened Type prompt still fails to apply the FISH-final HER2 rule in this case, while current meds and response remain PL advantages.
+- Main verification: read the complete note and confirmed `IHC 2`, `FISH non-amplified`, old 03/17/19 RPR/HIV in a later COVID-era visit, `Start goserelin today`, `Start letrozole in about two weeks`, historical 2019 genetics/surgical visits, completed Myriad/MammaPrint, and unknown surgery date.
+
+### Breast sample 15 — coral_idx 34
+
+- Case: the only pathologically confirmed disease is breast-origin adenocarcinoma in a right supraclavicular node, ER >90%, PR 50%, HER2 IHC 2+ with FISH pending. Right axillary/right cervical/left level-Vb nodes and the breast primary remain presumptive or unbiopsied. Additional biopsies are required before a de novo MBC diagnosis; treatment depends on HER2 and biopsy results.
+- PL P1: summary prematurely declares metastatic breast cancer; Stage says only `Not staged` and omits conditional possible de novo MBC; Distant is empty and omits suspected nonregional cervical disease; general Metastasis omits suspected axillary/cervical nodes and mixed certainty; docusate lacks an oncology-support indication; palliative goal and description drop `if confirmed`; genetic testing is mislabeled as a Genetics referral.
+- PL P2: Type should label the supraclavicular specimen and unconfirmed breast primary; findings does not clearly separate evidence levels; procedures duplicate biopsy wording and include HER2-result follow-up; next-visit mode is inferred.
+- Attribution: A0 second opinion, Genetics referral, and genetic-results fallback; A1 missing Distant support; A2 Patient type, summary, Type, Stage, Metastasis, findings, goals, and response.
+- Core verdicts: current_meds TIE; Stage PL; Distant BL; Metastasis PL; response TIE; Type PL; genetic results TIE. Total PL 3 / BL 1 / TIE 3.
+- v2.1 regression: fabricated confirmed axillary disease is removed and treatment plans retain HER2-dependent conditions; Distant regresses to empty, while summary/stage/goals still mishandle conditional MBC.
+- Main verification: read the complete note and confirmed biopsy-proven right supraclavicular disease only, suspicious right axillary/right cervical/left level-Vb nodes, absent definite breast primary, `if we confirm ... de novo MBC`, conditional goals/treatment, and no explicit Genetics referral.
