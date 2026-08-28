@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 15/40 (breast 15/20, PDAC 0/20)
-- PL findings: P0=3, P1=86, P2=67
-- Attribution findings: A0=42, A1=64, A2=113
-- Core verdict totals (PL / BL / TIE): 24 / 15 / 66
+- Completed: 18/40 (breast 18/20, PDAC 0/20)
+- PL findings: P0=3, P1=103, P2=78
+- Attribution findings: A0=55, A1=70, A2=127
+- Core verdict totals (PL / BL / TIE): 25 / 17 / 84
 - Current phase: breast review while the PDAC v2.2 run is in progress
 
 ## Results
@@ -173,3 +173,33 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage PL; Distant BL; Metastasis PL; response TIE; Type PL; genetic results TIE. Total PL 3 / BL 1 / TIE 3.
 - v2.1 regression: fabricated confirmed axillary disease is removed and treatment plans retain HER2-dependent conditions; Distant regresses to empty, while summary/stage/goals still mishandle conditional MBC.
 - Main verification: read the complete note and confirmed biopsy-proven right supraclavicular disease only, suspicious right axillary/right cervical/left level-Vb nodes, absent definite breast primary, `if we confirm ... de novo MBC`, conditional goals/treatment, and no explicit Genetics referral.
+
+### Breast sample 16 — coral_idx 35
+
+- Case: untreated left clinical Stage III grade 2–3 invasive lobular carcinoma, ER 96%, PR 35%, HER2−. PET/CT is negative for distant disease but left axillary/subpectoral nodes are radiographically suspicious; axillary FNA is pending. The patient declines neoadjuvant letrozole±bevacizumab and prefers surgical evaluation first.
+- PL P1: general Metastasis says `No` and loses the suspicious regional nodes/pending FNA; findings omits the pending status and a clinically benign supraclavicular/anterior-cervical node; medication and therapy fields are dominated by surgery and omit the offered neoadjuvant endocrine trial/decline decision; mastectomy is made definite rather than a preference for consideration; completed ultrasound is called future imaging; Specialty misses the explicit return referral to surgery.
+- PL P2: curative intent is unmarked inference; next-visit mode is inferred.
+- Attribution: A0 second opinion, Distant, Metastasis, medication plan, therapy, and imaging; A1 Type, goals description, and response; A2 in-person, findings, goal, and next visit.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response TIE; Type TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
+- v2.1 regression: fabricated confirmed regional nodes and nonexistent bone lesions are removed, reducing severity from P0 to P1, but the field now over-cleans real suspected regional disease.
+- Main verification: read the complete note and confirmed PET-negative distant staging, abnormal left axillary/subpectoral nodes, FNA pending, benign-feeling cervical node, offered letrozole±bevacizumab, trial refusal, preference for upfront mastectomy, completed ultrasound, and explicit surgical referral.
+
+### Breast sample 17 — coral_idx 36
+
+- Case: left Stage IIB T2N1M0 grade-2 IDC, ER >95%, PR 25%, HER2−, with LVI, positive margins, 2/2 positive regional nodes, 1.8 cm nodal deposit/extracapsular extension, and multifocal residual disease including a small positive deep margin after re-excision. TC×6, ONPRO, port, teaching, staging PET/CT, echo, and later radiation are planned; BRCA is reported negative.
+- PL P1: general Metastasis says `No` and omits pathologically confirmed regional nodes; findings emphasizes postoperative MRI while omitting decisive pathology burden; therapy mixes teaching/port and omits radiation; Specialty invents definite radiation/surgical referrals; Referral.Others misses chemotherapy teaching; follow-up is a task list rather than an appointment.
+- PL P2: Type omits laterality and exact receptor values; radiation certainty is slightly overstated; procedure omits teaching; genetic plan mixes historical uncertainty into a no-plan answer.
+- Attribution: A0 second opinion, Distant, Metastasis, next visit, Specialty, and follow-up; A1 Patient type, goals description, and response; A2 summary, Type, Stage, findings, goal, radiation, and genetic results.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type BL; genetic results TIE. Total PL 0 / BL 1 / TIE 6.
+- v2.1 regression: fabricated bone disease is removed and genetic results now excludes HER2 FISH, but Metastasis over-cleans the real regional node burden; Type still loses to BL.
+- Main verification: read the complete note and confirmed T2N1M0, 2/2 positive nodes with 1.8 cm deposit/ECE, LVI, residual multifocal IDC/positive margin, planned TC×6/ONPRO, explicit teaching referral, and BRCA-negative report.
+
+### Breast sample 18 — coral_idx 37
+
+- Case: left grade-2 IDC, ER >95%, PR low-positive <5%, HER2−, Ki-67 44%, cT2NX. MRI shows suspicious axillary nodes, but two FNAs are benign and final nodal status awaits surgery. ATM germline mutation and completed high-risk MammaPrint are documented. Surgery precedes node-dependent TC versus AC-T and long-term endocrine therapy.
+- PL P1: Distant asserts `No` without explicit systemic staging/M0 evidence; medication plan omits the clear node-dependent chemotherapy plan; radiotherapy `None` loses the explicit decision to avoid radiation because of ATM and choose mastectomy; procedure omits planned mastectomy.
+- PL P2: Metastasis compresses suspicious imaging plus two benign FNAs to `No`; goals description is blank; follow-up is not a real future arrangement; genetic results keeps ATM but omits high-risk MammaPrint.
+- Attribution: A0 Distant; A2 Type, Metastasis, and genetic results.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type PL; genetic results TIE. Total PL 1 / BL 0 / TIE 6.
+- v2.1 regression: exact low-positive PR and ATM result improve; MammaPrint omission and Distant overconfidence remain, while medication/radiotherapy/procedure omissions are unchanged.
+- Main verification: read the complete note and confirmed PR <5%, suspicious axillary MRI, two benign FNAs, absent explicit whole-body staging, ATM mutation, MammaPrint −0.622, radiation-oncology recommendation for mastectomy, and node-dependent chemotherapy plan.
