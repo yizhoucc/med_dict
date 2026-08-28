@@ -14,10 +14,10 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 18/40 (breast 18/20, PDAC 0/20)
-- PL findings: P0=3, P1=103, P2=78
-- Attribution findings: A0=55, A1=70, A2=127
-- Core verdict totals (PL / BL / TIE): 25 / 17 / 84
+- Completed: 20/40 (breast 20/20, PDAC 0/20)
+- PL findings: P0=3, P1=116, P2=89
+- Attribution findings: A0=60, A1=74, A2=143
+- Core verdict totals (PL / BL / TIE): 29 / 20 / 91
 - Current phase: breast review while the PDAC v2.2 run is in progress
 
 ## Results
@@ -203,3 +203,23 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response TIE; Type PL; genetic results TIE. Total PL 1 / BL 0 / TIE 6.
 - v2.1 regression: exact low-positive PR and ATM result improve; MammaPrint omission and Distant overconfidence remain, while medication/radiotherapy/procedure omissions are unchanged.
 - Main verification: read the complete note and confirmed PR <5%, suspicious axillary MRI, two benign FNAs, absent explicit whole-body staging, ATM mutation, MammaPrint −0.622, radiation-oncology recommendation for mastectomy, and node-dependent chemotherapy plan.
+
+### Breast sample 19 — coral_idx 38
+
+- Case: two distinct left-breast IDC lesions: grade 2 ER 61–70%/PR−/HER2−/Ki-67 15–20%, and grade 3 ER 41–50%/PR 1–10%/HER2−/Ki-67 30–40% with focal LCIS. Original clinical stage is 2–3. After NAHT, bilateral mastectomies, and tamoxifen, she is now on exemestane plus monthly goserelin and is NED on exam. MammaPrint is completed/low risk.
+- PL P1: Type still merges both lesions into one ER+/PR− profile; Stage answers with response status `NED on exam` instead of clinical stage 2–3; findings puts future BSO consideration into current findings; supportive meds includes unlinked ondansetron; medication/therapy fields mix estradiol and DEXA and omit active goserelin; procedure misses BSO consideration; genetic results misses completed low-risk MammaPrint.
+- PL P2: summary omits active goserelin and distinct lesions; curative is less precise than adjuvant/risk reduction; DEXA plan omits that routine breast imaging is unnecessary after bilateral mastectomy.
+- Attribution: A0 second opinion, Stage, and Distant; A1 genetic results; A2 summary, Type, current meds, goal, medication plan, and therapy.
+- Core verdicts: current_meds PL; Stage BL; Distant TIE; Metastasis TIE; response PL; Type PL; genetic results TIE. Total PL 3 / BL 1 / TIE 3.
+- v2.1 regression: unsupported extensive DCIS is removed and current meds/response remain strong; Stage regresses from the explicit clinical stage to response language, and genetic results loses MammaPrint after cleaning unrelated pathology.
+- Main verification: read the complete note and confirmed two separate lesion profiles, `Clinical stage 2-3`, current exemestane plus monthly goserelin, NED exam, BSO consideration, estradiol/DEXA routing, and completed `Mammaprint - low`.
+
+### Breast sample 20 — coral_idx 39
+
+- Case: synchronous very large bilateral breast cancers. Right is ER+/PR+/HER2+ with Ki-67 40%; left is ER+/PR+/HER2 0 with some lobular differentiation. Lung nodules and tiny liver lesions are unbiopsied with no confirmed metastasis. Treatment and surgery remain conditional on final pathology/FISH, size, nodes, and response. Germline panel is pending.
+- PL P1: summary makes bilateral disease sound uniformly HER2+ and calls it early stage; Stage adds unsupported `locally advanced`; response says `Not mentioned` despite clearly untreated disease; therapy removes the global conditionality and mixes port, echo, labs, staging, and follow-up; procedure is a sentence fragment and misses conditional port/surgical uncertainty; lab plan copies non-lab preparation content.
+- PL P2: Distant calls lesions suspected rather than neutrally unconfirmed; general Metastasis omits unknown regional-node status; redacted labs are called absent; curative intent lacks its dependency on final staging; goals description is empty; medication plan is too definite; next visit and follow-up include unsupported purpose or mixed imaging content.
+- Attribution: A0 second opinion and Stage; A1 Patient type, response, and genetic plan; A2 summary, Type, both metastasis fields, findings, goal, medication/procedure/lab plans, and next visit.
+- Core verdicts: current_meds TIE; Stage BL; Distant PL; Metastasis TIE; response BL; Type TIE; genetic results TIE. Total PL 1 / BL 2 / TIE 4.
+- v2.1 regression: Type now correctly separates right HER2+ from left HER2 0 and findings restores current tumor sizes; unsupported stage, untreated-response fallback, and conditional-plan routing remain.
+- Main verification: read the complete note and confirmed side-specific receptors, lack of metastatic confirmation, recommendations contingent on pathology/FISH/nodes/surgery, no treatment started, surgery determined by response, and only-possible port/echo/lab/staging preparation after surgery.
