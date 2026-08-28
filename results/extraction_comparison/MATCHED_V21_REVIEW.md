@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 32/40 (breast 20/20, PDAC 12/20)
-- Next: PDAC sample 13
-- PL findings: P0=16, P1=190, P2=99
-- Attribution findings: A0=75, A1=155, A2=202
-- Core verdict totals (PL / BL / TIE): 42 / 44 / 126
+- Completed: 35/40 (breast 20/20, PDAC 15/20)
+- Next: PDAC sample 16
+- PL findings: P0=17, P1=210, P2=104
+- Attribution findings: A0=87, A1=167, A2=223
+- Core verdict totals (PL / BL / TIE): 47 / 48 / 135
 
 ## Results
 
@@ -329,3 +329,30 @@ Date: 2026-08-27
 - Attribution: A0 for second opinion and Specialty; A1 for Lab Results, findings, supportive medications, and genetic-results fallback; A2 for summary, Stage, both metastasis fields, recent changes, response, and Referral follow-up.
 - Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response BL; genetic results TIE. Total PL 0 / BL 1 / TIE 5.
 - Main verification: confirmed definite peritoneal/omental carcinomatosis, unresolved liver findings, clinical rather than pathologically confirmed N1, suspicious adrenal nodules, explicit progression during the chemotherapy holiday, the current no-chemotherapy judgment, conditional stent consideration, and lack of a formal advance-directive/code-status entry.
+
+### PDAC sample 13 — coral_idx 12
+
+- Case: locally advanced, unresectable pancreatic head/uncinate adenocarcinoma with direct duodenal invasion and no established distant metastasis. Six cycles of gemcitabine/capecitabine and December radiation are complete; systemic therapy is now paused while radiation is reconsidered. The January CT shows stable local disease. The patient is a CA19-9 non-secretor.
+- PL P1: Metastasis upgrades radiographic mesenteric/peripancreatic nodal involvement to `confirmed regional nodes`; findings imports an older increase in pneumobilia despite the latest scan reporting decreased pneumobilia; recent changes omits both the systemic-therapy pause and recently completed radiation; response mixes nonmalignant organizing-pneumonia improvement into cancer response; medication plan omits the systemic-therapy pause and Creon; procedure misses the planned February bronchoscopy; imaging gives an underspecified CT plan whose citation is actually about XRT; lab plan mixes PRBC transfusion into a blood-test-only field; genetic plan carries forward an old `UCSF500 in process` state despite the current `Genomics Not done`; next visit treats another specialist's February appointment as the oncology return; Specialty lists historical consultations rather than a new referral.
+- PL P2: Type omits head/uncinate location and direct duodenal invasion; supportive medications omit Norco and other active symptom/nutrition support; radiotherapy includes the systemic-therapy pause in the radiation-only field.
+- Attribution: A0 for Patient type, second opinion, Imaging, and Specialty; A1 for Metastasis; A2 for Stage, Distant, findings, supportive medications, goals, response, medication plan, next visit, and genetic plan.
+- Core verdicts: current_meds PL; Stage TIE; Distant PL; Metastasis BL; response BL; genetic results PL. Total PL 3 / BL 2 / TIE 1.
+- Main verification: confirmed active systemic therapy is paused despite stale capecitabine in the medication list, latest stable pancreatic mass, no definite distant disease, only radiographic nodal involvement, completed radiation, planned bronchoscopy, current `Genomics Not done`, and explicit CA19-9 non-expression. The nodal overstatement is calibrated as P1 rather than P0 because the note does describe imaging-based nodal involvement, but not pathologic confirmation.
+
+### PDAC sample 14 — coral_idx 13
+
+- Case: new telehealth consultation for Stage IV pancreatic-origin adenocarcinoma with biopsy-supported liver metastasis, radiographically metastatic upper-abdominal/mesenteric nodes, malignant biliary obstruction, and a newly placed common-bile-duct stent. No treatment has started; gemcitabine/nab-paclitaxel is favored pending in-person reassessment, and UCSF500 is planned.
+- PL P1: procedure plan misroutes UCSF500 into procedures and promotes merely conditional trial-biopsy requirements into current plans; Specialty mislabels the incoming UCSF consultation as an outgoing referral.
+- PL P2: Metastasis should name the upper-abdominal/mesenteric nodal sites and their imaging basis; medication plan says gemcitabine/nab-paclitaxel is planned rather than favored pending reassessment.
+- Attribution: A0 for second opinion, procedure, and Specialty; A1 for Patient type, lab summary, supportive medication, and response; A2 for Distant, Metastasis, findings, goals description, medication/therapy plans, and genetic-results fallback.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis PL; response TIE; genetic results TIE. Total PL 1 / BL 0 / TIE 5.
+- Main verification: confirmed liver-biopsy adenocarcinoma, radiology's explicit `hepatic and nodal metastases`, Stage IV status, absence of started treatment, conditional preference for Gem/Abrax, planned UCSF500, and absence of a new outgoing specialty referral.
+
+### PDAC sample 15 — coral_idx 14
+
+- Case: resected pancreatic ductal adenocarcinoma after neoadjuvant FOLFIRINOX and Whipple. Final pathology is a 4.6 cm moderately differentiated pancreatic-head tumor with PNI, positive margins, 11/46 regional nodes, ypT3N2, and poor/no treatment effect. Current imaging has no distant metastasis, but CA19-9 rose from 48 to 4,375; repeat marker and CT are planned. No anticancer drug is active. MMR proteins are intact, and benign ascites fluid was KRAS-negative.
+- PL P0: Type says `poorly differentiated`, directly contradicting the final pathology's `moderately-differentiated` grade.
+- PL P1: Metastasis fails to label the positive regional nodes as historical/resected and uses contradictory `distant disease uncertain — no evidence` wording; recent changes misroutes a rivaroxaban hold as anticancer treatment; response misses explicit Evans grade I/Ryan score 3 poor-or-no pathologic response and falsely says no marker comparison exists; therapy lists Creon as anticancer therapy; next visit turns test timing into a definite in-person visit; Specialty repeats a historical radiation/systemic-therapy consultation and misses the current PMD referral; genetic results omits intact MLH1/PMS2/MSH2/MSH6 expression.
+- Attribution: A0 for second opinion, Stage, Distant, therapy, and next visit; A1 for labs, findings, recent changes, goals-description fallback, response, Specialty, and genetic results; A2 for summary, Type, Metastasis, goals, and Referral follow-up.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis PL; response BL; genetic results BL. Total PL 1 / BL 2 / TIE 3.
+- Main verification: confirmed the final moderate grade, ypT3N2 and 11/46 positive nodes, no established distant spread, poor/no neoadjuvant pathologic response, sharply rising CA19-9, current absence of anticancer medication, intact MMR proteins, KRAS-negative benign ascites, and explicit conditional PMD referral.
