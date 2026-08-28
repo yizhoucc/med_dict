@@ -1,0 +1,1649 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing (matched-json)
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/pdac_annotated.csv
+Cancer type: pdac
+Task contract: /home/yc/repo/med_dict/prompts/matched_baseline_contract.yaml
+Task contract SHA256: cfd15fe03290a43e13f21375dd8a46e4955ff2f968f11b36365db77a27fe424c
+Date: 2026-08-27 20:34
+============================================================
+
+============================================================
+ROW 1 (coral_idx=0)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Locally advanced adenocarcinoma of the pancreas, with possible progression; new lung nodules concerning but unlikely to become a problem; request for chemotherapy break"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Locally advanced adenocarcinoma of the pancreas",
+    "Stage_of_Cancer": "Locally advanced",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected lung"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 6.7, RBC Count 3.89 (L), Hemoglobin 11.1 (L), Hematocrit 33.5 (L), MCV 86, MCH 28.5, MCHC 33.1, Platelet Count 203, Neutrophil Absolute Count 4.06, Lymphocyte Abs Cnt 1.49, Monocyte Abs Count 0.84 (H), Eosinophil Abs Ct 0.23, Basophil Abs Count 0.02, Imm Gran, Left Shift 0.02, Urea Nitrogen 13, Creatinine 1.06, eGFR if non-African American 83, eGFR if African Amer 96, Aspartate transaminase 20, Alanine transaminase 25, Bilirubin, Total 0.9, Alkaline Phosphatase 60, Cancer Antigen 19-9 3"
+  },
+  "Clinical_Findings": {
+    "findings": "Stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma. No evidence of metastatic disease in the abdomen/pelvis. 5 new nodules measuring up to 7 mm in the lingula and left lower lobe. These are indeterminate but are suspicious for metastases in the setting of known pancreatic adenocarcinoma."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped gemcitabine and Abraxane",
+    "supportive_meds": "oxycodone"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "surveillance",
+    "goals_description": "Given the sites of disease involvement and his lack of symptoms, I think it would be safe to put him on surveillance."
+  },
+  "Response_Assessment": {
+    "response_assessment": "stable disease — stable to minimally increased size of pancreatic mass compatible with known pancreatic adenocarcinoma"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Stop gemcitabine and Abraxane"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Surveillance"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up in 2 months"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "psycho oncology",
+    "Others": "",
+    "follow up": "See him again in 2 months for follow-up"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 months, in-person, for follow-up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 24.2s | Output: 2947 chars | JSON: OK
+
+
+============================================================
+ROW 2 (coral_idx=1)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up of Adenocarcinoma of the pancreas, status post resection, now with new metastatic disease"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of the pancreas, status post resection, now with new metastatic disease",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Yes, to liver",
+    "Metastasis": "Distant: liver (confirmed)"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 7.4, Neutrophil Absolute Count: 4.62, Hemoglobin: 9.4 (L), Hematocrit: 30.1 (L), Platelet Count: 351, Creatinine: 0.58 (L), Bilirubin, Total: 0.4, Alkaline Phosphatase: 305 (H), Aspartate transaminase: 33, Alanine transaminase: 31, Albumin, Serum / Plasma: 3.0 (L), Int'l Normaliz Ratio: 1.1, Sodium, Serum / Plasma: 137, Potassium, Serum / Plasma: 3.9, Calcium, total, Serum / Plasma: 8.7 (L), Cancer Antigen 19-9: 900 (H), Carcinoembryonic Antigen: 8.3 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Hemoglobin: 9.4 (L), Hematocrit: 30.1 (L), Alkaline Phosphatase: 305 (H), Albumin, Serum / Plasma: 3.0 (L), Calcium, total, Serum / Plasma: 8.7 (L), Cancer Antigen 19-9: 900 (H), Carcinoembryonic Antigen: 8.3 (H)"
+  },
+  "Current_Medications": {
+    "current_meds": "Gemcitabine + Abraxane"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started 2nd line therapy with Gemcitabine + Abraxane on 11/29/18",
+    "supportive_meds": "Granisetron patch 3.1 mg/24 hours, Compazine PRN, Aloxi, Emend, Cannabis product, Creon 2 tab/meal and 1 tab/snacks"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Progression on FOLFIRINOX, now on 2nd line therapy with Gemcitabine + Abraxane"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue Gemcitabine + Abraxane, consider reducing Abraxane dose if neuropathy worsens"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue 2nd line therapy with Gemcitabine + Abraxane"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT scan due after he completes cycle 2"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Patient is a SPINK1 carrier, variant of unknown significance in FANCG and NF2"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "Family needs to be screened for SPINK1",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Return to clinic in 2 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 weeks, in-person, for follow-up of pancreatic adenocarcinoma treatment"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 26.2s | Output: 2996 chars | JSON: OK
+
+
+============================================================
+ROW 3 (coral_idx=2)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up of metastatic pancreatic cancer, originally diagnosed in 2018"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic Ductal Adenocarcinoma (PDAC)",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Yes, to liver, spleen, peritoneum",
+    "Metastasis": "Distant: liver, spleen, peritoneum; Confirmed"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 7.4, Hemoglobin: 7.6 (L), Platelet Count: 227, Creatinine: 0.66, Bilirubin, Total: 0.4, Alkaline Phosphatase: 207 (H), Albumin, Serum / Plasma: 2.7 (L), Sodium, Serum / Plasma: 137, Potassium, Serum / Plasma: 2.8 (LL), Cancer Antigen 19-9: 142 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Multicystic, ill-defined pancreatic mass measuring 7.2 x 5.4 x 5.6 cm, direct invasion of spleen and posterior stomach, multiple splenic infarcts, diffuse wall edema of the transverse, descending, and sigmoid colon, small left pleural effusion, patchy ground-glass and airspace opacities in the inferior right middle lobe and left lung base, ill-defined contour deforming hypodense lesion within the inferior right hepatic lobe measuring 1.4 cm, small volume diffuse abdominal ascites."
+  },
+  "Current_Medications": {
+    "current_meds": "5-FU/LV, nanoliposomal irinotecan (Onivyde)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Resumed chemotherapy (cycle #5 of nal-IRI/5-FU/LV) on 03/29/2019.",
+    "supportive_meds": "Norco, Loperamide, Lorazepam, Pantoprazole, Prochlorperazine"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Continue with 1 additional cycle of the same chemotherapy, with short-term f/u CT scans to assess for evidence of further disease progression. Consider clinical trials or RT to pancreatic primary for palliative/QoL purposes."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease, with slightly improving hepatic metastases and simultaneously stable to minimally enlarging peritoneal metastases."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue with 1 additional cycle of the same chemotherapy (scheduled for tomorrow, if laboratory parameters are acceptable)."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue with 1 additional cycle of the same chemotherapy (scheduled for tomorrow, if laboratory parameters are acceptable)."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Consider RT to pancreatic primary for palliative/QoL purposes."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Short-term f/u CT scans to assess for evidence of further disease progression."
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "KRAS (G12D) and p53 mutations."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Continue with 1 additional cycle of the same chemotherapy (scheduled for tomorrow, if laboratory parameters are acceptable)."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose: follow-up after additional cycle of chemotherapy."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 26.6s | Output: 3482 chars | JSON: OK
+
+
+============================================================
+ROW 4 (coral_idx=3)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow-up visit for metastatic adenocarcinoma of the pancreas with continued good disease control on surveillance"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "adenocarcinoma of the pancreas",
+    "Stage_of_Cancer": "unresectable",
+    "Distant Metastasis": "Not sure—suspected liver",
+    "Metastasis": "Not sure—suspected liver"
+  },
+  "Lab_Results": {
+    "lab_summary": "Does not express CA-19-9"
+  },
+  "Clinical_Findings": {
+    "findings": "Ill-defined pancreatic head/neck mass measuring 4.2 x 3.6 cm, unchanged in size since recent MRI. No evidence of metastasis on imaging. Tumor ingrowth and biliary stone with blood clots in the stent, removed and replaced with a covered metal stent."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped FOLFIRINOX, switched to gemcitabine and Abraxane, completed six 28-day cycles",
+    "supportive_meds": "ondansetron, lorazepam, pantoprazole, miralax"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "surveillance",
+    "goals_description": "Continued good disease control on surveillance"
+  },
+  "Response_Assessment": {
+    "response_assessment": "stable disease - no significant change in size of ill-defined pancreatic head/neck mass on imaging"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue supportive medications"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Surveillance"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up CT scan in 2 months"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "See back in 2 months with a follow-up CT scan"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 months, Televisit, for follow-up CT scan"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 16.8s | Output: 2327 chars | JSON: OK
+
+
+============================================================
+ROW 5 (coral_idx=4)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow-up of adenocarcinoma of the pancreas with biopsy-proven oligo metastatic disease in the abdominal wall"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "adenocarcinoma of the pancreas with biopsy-proven oligo metastatic disease in the abdominal wall",
+    "Stage_of_Cancer": "Stage IV",
+    "Distant Metastasis": "Yes, to abdominal wall",
+    "Metastasis": "Confirmed distant metastasis to abdominal wall"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 6.4, Neutrophil Absolute Count: 4.18, Hemoglobin: 11.4 (L), Hematocrit: 35.4 (L), Platelet Count: 126 (L), Creatinine: 0.74, Bilirubin, Total: 0.4, Alkaline Phosphatase: 160 (H), Aspartate transaminase: 31, Alanine transaminase: 30, Cancer Antigen 19-9: 576 (H), Carcinoembryonic Antigen: 16.2 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Pancreatic mass and abdominal wall lesion stable on CT CAP, hypermetabolically active large pancreatic tail mass abutting adjacent structures, segmental occlusive thrombi within the superior and mid duplicated left peroneal veins"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped FOLFIRINOX due to completion of 12 cycles",
+    "supportive_meds": "fluconazole, clotrimazole, rivaroxaban, oxyCODONE (OXYCONTIN), oxyCODONE (ROXICODONE), Creon"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "stable disease in the pancreas and abdominal wall lesion"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue rivaroxaban, fluconazole, clotrimazole, Creon, oxyCODONE (OXYCONTIN), oxyCODONE (ROXICODONE)"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Currently on chemotherapy break"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Not recommended at this time"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Restaging CT planned for 11/19/19"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Complete labs to rule out diabetes: blood glucose and Hemoglobin A1C"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "MSI Status Undetermined, RB1 P26fs*47"
+  },
+  "Referral": {
+    "Nutrition": "followed by Cancer Center Nutritionist",
+    "Genetics": "",
+    "Specialty": "followed by SMS, Dr. ***** *****",
+    "Others": "",
+    "follow up": "RTC: 11/21/19 to see Dr. ***** or sooner if indicated"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "11/21/19, Televisit, for follow-up of adenocarcinoma of the pancreas with biopsy-proven oligo metastatic disease in the abdominal wall"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Discussed with: ***** *****, NP, Surrogate decision maker identified and documented, Life sustaining treatment preferences: DNR and Unknown, Preferences for life sustaining treatment clarified and POLST completed"
+  }
+}
+```
+
+--- STATS ---
+Time: 24.7s | Output: 3151 chars | JSON: OK
+
+
+============================================================
+ROW 6 (coral_idx=5)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up visit for a 63-year-old female with borderline resectable/locally advanced adenocarcinoma of the pancreas, post-neoadjuvant chemotherapy and resection, with early evidence of disease recurrence."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of the pancreas",
+    "Stage_of_Cancer": "Borderline resectable/locally advanced",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected liver"
+  },
+  "Lab_Results": {
+    "lab_summary": "CA 19-9: 2250 U/mL (reference range <36 U/mL); Hemoglobin: 9.5 g/dL (reference range 12.0-15.5 g/dL)"
+  },
+  "Clinical_Findings": {
+    "findings": "Small ascites in the pelvic region, small amount of fluid and stranding around the central mesentery, interval increase in size of a 14 mm hypodense lesion in segment March 14 and new 5 mm hypodense lesion in segment 8/4A, suggestive of worsening metastatic disease, enhancing mass in the endometrial canal, periportal edema involving the lateral segment of the left hepatic lobe with associated mild biliary dilatation."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped modified FOLFIRINOX after 12 cycles.",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Surveillance",
+    "goals_description": "Repeat scans in 2 months to monitor for disease recurrence."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Progression - new and growing lesions in the liver."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue monitoring without active anticancer treatment."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "None currently planned; repeat imaging in 2 months."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Consider confirmatory biopsy if indicated."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Repeat imaging studies in 2 months."
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Repeat imaging studies in 2 months."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 months for follow-up imaging and assessment."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 18.9s | Output: 2663 chars | JSON: OK
+
+
+============================================================
+ROW 7 (coral_idx=6)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Adenocarcinoma of the tail of the pancreas with local extension, returning for CT evaluation after 4 full cycles of neoadjuvant chemotherapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of the tail of the pancreas",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alkaline Phosphatase: 71 U/L, Bilirubin, Total: 0.4 mg/dL, Alanine Transaminase: 31 U/L, Aspartate Transaminase:  30 U/L, Creatinine: 0.56 mg/dL, Urea Nitrogen, Serum / Plasma: 11 mg/dL, WBC Count: 5.6 x10E9/L, RBC Count: 4.11 x10E12/L, Hemoglobin: 12.1 g/dL, Hematocrit: 38.3%, MCV: 93 fL, MCH: 29.4 pg, MCHC: 31.6 g/dL, Platelet Count: 138 x10E9/L, Cancer Antigen 19-9: 8 U/mL"
+  },
+  "Clinical_Findings": {
+    "findings": "Pancreatic tail mass measuring 4.2 x 4 cm, hypoenhancing, abutting the hilum of the spleen and the left adrenal gland, encasing and narrowing the splenic artery, occluding the distal splenic vein with propagation of nonocclusive thrombus towards the central splenic vein. No evidence of metastatic disease in the chest."
+  },
+  "Current_Medications": {
+    "current_meds": "gemcitabine, Abraxane"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Switched from standard schedule gemcitabine and Abraxane to alternate week schedule due to neutropenia",
+    "supportive_meds": "oxycodone for chronic back and shoulder pain"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "neoadjuvant chemotherapy",
+    "goals_description": "Will continue on with treatment without dose or schedule modification."
+  },
+  "Response_Assessment": {
+    "response_assessment": "responding to treatment with slight decrease in size of pancreatic tail mass"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue on with gemcitabine and Abraxane without dose or schedule modification"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue on with neoadjuvant chemotherapy using gemcitabine and Abraxane"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Repeat imaging in 8 weeks"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Germ line testing showed no pathologic variants. VUS seen in AXIN1, CTC1, ERCC4, MC1R."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Gyn Onc regarding the right adnexal mass",
+    "Others": "",
+    "follow up": "Repeat imaging in 8 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 8 weeks for imaging follow-up, Televisit"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 24.7s | Output: 2977 chars | JSON: OK
+
+
+============================================================
+ROW 8 (coral_idx=7)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation for recurrent metastatic pancreatic adenocarcinoma"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic adenocarcinoma, poorly differentiated, with lymphovascular invasion, no perineural invasion, recurrent metastatic",
+    "Stage_of_Cancer": "pT2N2, previously resectable, now recurrent metastatic",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Regional lymph nodes (confirmed)"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC 5, Hb 10.7, plt 137, Cr 0.67, ALT 70, AST 66, ALP 522, Total bili 0.5, alb 4, CA 19-9 levels decreasing (11/21/20=61, 10/24/20=133, 10/10/20=433, 09/19/20=746)"
+  },
+  "Clinical_Findings": {
+    "findings": "Postoperative changes from Whipple's, no significant change of peripancreatic stranding, mildly decreased size of intra-abdominal lymph nodes, no new intra-abdominal or intrathoracic disease, new subtle groundglass opacities in the lungs"
+  },
+  "Current_Medications": {
+    "current_meds": "gemcitabine, nab-paclitaxel"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started gemcitabine/nab-paclitaxel on 09/19/20",
+    "supportive_meds": "morphine (MS Contin) 15 mg controlled release tablet, amylase-lipase-protease (Creon 24,000)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease - recent restaging CT showed mildly decreased size of intra-abdominal lymph nodes which have become less defined, no new intra-abdominal or intrathoracic disease."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue gemcitabine/nab-paclitaxel with an every other week dosing schedule while tolerating it adequately, aim to treat to maximal radiographic/biochemical response or at least 6 cycles in total before considering a chemotherapy holiday."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue gemcitabine/nab-paclitaxel with an every other week dosing schedule"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Consideration of palliative radiation for residual disease if needed"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up imaging as clinically indicated"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Regular monitoring of blood counts and liver function tests"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "FoundationOne panel requested for somatic tumor profiling"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No actionable mutations identified"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Consider referral to palliative care if needed",
+    "Others": "",
+    "follow up": "Follow-up as clinically indicated"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "To be scheduled as clinically indicated"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 25.3s | Output: 3243 chars | JSON: OK
+
+
+============================================================
+ROW 9 (coral_idx=8)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up for metastatic pancreatic cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic cancer",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Yes, to lung",
+    "Metastasis": "Distant, to lung (confirmed)"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 5.3, Neutrophil Absolute Count: 3.56, Hemoglobin: 10.1 (L), Hematocrit: 32.1 (L), Platelet Count: 159, Creatinine: 0.51, Sodium, Serum / Plasma: 136, Potassium, Serum / Plasma:  4.2, Calcium, total, Serum / Plasma: 8.3 (L), Bilirubin, Total: 0.4, Alkaline Phosphatase: 61, Aspartate transaminase: 28, Alanine transaminase: 25, Albumin, Serum / Plasma: 3.1 (L), Cancer Antigen 19-9: 1,109 (H), 2,762 (H), 3,525 (H), Carcinoembryonic Antigen: 3.0, 2.7, 2.5"
+  },
+  "Clinical_Findings": {
+    "findings": "BP 105/59, Pulse 80, Temp 36.8 C (98.2 F), Resp 18, Ht 154.9 cm (5' 0.98\"), Wt 53.9 kg (118 lb 14.4 oz), SpO2 100%, BMI 22.48 kg/m, ECOG: 1, Physical Exam: Oriented, well-developed, well-nourished, normocephalic, normal pupils, supple neck, normal rate, regular rhythm, intact distal pulses, normal breath sounds, soft abdomen, normal bowel sounds, normal range of motion, warm and dry skin, normal mood and affect, thought content normal."
+  },
+  "Current_Medications": {
+    "current_meds": "Gemcitabine, Abraxane"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Further reduced abraxane today.",
+    "supportive_meds": "Lorazepam, Metoclopramide, Mirtazapine, Olanzapine, Ranitidine, Triamcinolone Acetonide"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Responding to gem abraxane with stable disease but neuropathy."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease with gemcitabine + Abraxane"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Recheck neuropathy in 2 weeks, Remeron started today"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue gemcitabine + Abraxane with reduced abraxane dose"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT scan on next end of September 22"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "BRCA variant of unknown significance, K-ras and CDKN2a and APC mutations"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Neuropathy check in 2 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 weeks with ***** for neuropathy check"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 26.1s | Output: 2930 chars | JSON: OK
+
+
+============================================================
+ROW 10 (coral_idx=9)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow-up of locally advanced pancreatic cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Locally advanced pancreatic ductal adenocarcinoma",
+    "Stage_of_Cancer": "Locally advanced",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count 30.6 (H), Hemoglobin 8.7 (L), Hematocrit 27.1 (L), MCV 99, Platelet Count 192, Neutrophil Absolute Count 24.06 (H), Albumin 4.4, Alkaline Phosphatase 204 (H), Alanine transaminase 22, Aspartate transaminase 39, Bilirubin, Total 0.4, Urea Nitrogen 13, Calcium, total 8.9, Chloride 104, Carbon Dioxide, Total 25, Anion Gap 12, Creatinine 1.09 (H), eGFR if non-African American 50, eGFR if African Amer 58, Glucose, non-fasting 107, Potassium 2.9 (LL), Sodium 141, Protein, Total 7.7, Cancer Antigen 19-9 8,274 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "4.4 x 3.5 cm mass in pancreatic body with upstream pancreatic ductal dilatation and parenchymal atrophy, encasement and severe narrowing of celiac and superior mesenteric arteries, colitis, stable disease without evidence of distant metastases"
+  },
+  "Current_Medications": {
+    "current_meds": "FOLFOX (oxaliplatin 85mg/m2, 5FU 2400mg/m2 over 46h)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Omitted irinotecan since C3 due to colitis on scans, performance status",
+    "supportive_meds": "ondansetron, loperamide, potassium chloride, dexamethasone, aloxi, aprepitant, Zofran, ativan"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Overall plan is for 4-6 months of upfront chemotherapy with q2mo scans."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease without evidence of distant metastases"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue with FOLFOX only going forward: oxaliplatin 85mg/m2, 5FU 2400mg/m2 over 46h, Aloxi, aprepitant, dexamethasone as premeds, with prn ativan D1, 1L NS, 12mg PO dexamethasone, prn Zofran, ativan on D3, omit D3 Fulphila given ANC >20 today"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue with FOLFOX only going forward"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Consider consolidative chemoradiation, either conventionally fractionated therapy with concurrent capecitabine as a radiosensitizer, or SBRT"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Scheduled for mammogram 11/26/19 (cancelled, will revisit)"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Plan for scans again after C8, monthly CA 19-9"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Monthly CA 19-9"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "VUS in RECQL4 c.*****>G (p.*****)"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Radiation oncology",
+    "Others": "",
+    "follow up": "2 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 weeks via televisit for follow-up"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 29.9s | Output: 3234 chars | JSON: OK
+
+
+============================================================
+ROW 11 (coral_idx=10)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "Yes",
+    "in-person": "Televisit",
+    "summary": "Second opinion and consideration of clinical trials for newly diagnosed metastatic pancreatic cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic cancer, metastasized to liver",
+    "Stage_of_Cancer": "Stage IV (cT2, cN1, cM1)",
+    "Distant Metastasis": "Yes, to liver",
+    "Metastasis": "Distant: liver (confirmed)"
+  },
+  "Lab_Results": {
+    "lab_summary": "CA 19-9: 13,737"
+  },
+  "Clinical_Findings": {
+    "findings": "2.8x4.2 cm pancreatic neck hypodense mass with associated upstream pancreatic atrophy and pancreatic ductal dilatation. Encompasses the superior mesenteric vein and main portal vein by <180 degrees, splenic vein near the confluence of the SMV by <180 degrees, and gastroduodenal artery which remains fully patent. 1.3 cm peripherally enhancing anterior right hepatic lobe lesion and additional subtle peripherally enhancing inferior right hepatic lobe lesions including a 7 mm lesion and 5 mm lesion."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "lipase-protease-amylase, ondansetron"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but treatment is not expected to be curative."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue supportive medications: lipase-protease-amylase, ondansetron"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Consideration of clinical trials, notably Precision Promise Platform Trial For Metastatic Pancreatic Cancer. If not a trial candidate, consider mFOLFIRINOX."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Screening procedures for clinical trial participation"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT AP and labs locally at ***** today"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Pending STRATA"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "Has appt with genetics at ***** tomorrow.",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Will get CT AP and labs locally at ***** today"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing, visit mode, and purpose not specified in note."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 19.4s | Output: 2848 chars | JSON: OK
+
+
+============================================================
+ROW 12 (coral_idx=11)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up visit for pancreatic adenocarcinoma with concern for metastatic disease"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic adenocarcinoma",
+    "Stage_of_Cancer": "Locally advanced, with metastatic disease",
+    "Distant Metastasis": "Yes, to liver, peritoneum",
+    "Metastasis": "Distant: liver, peritoneum; Regional: peritoneal and omental nodularity"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 9.6, Hemoglobin: 9.6 (L), Bilirubin, Total: 3.5 (H), CANCER ANTIGEN 19-9: 4720 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Ill-defined infiltrative pancreatic mass, moderate ascites, peritoneal carcinomatosis, small bowel obstruction, moderate intrahepatic ductal dilatation, biliary stents with pneumobilia"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Stopped mFOLFIRINOX due to disease progression and small bowel obstruction",
+    "supportive_meds": "ondansetron, baclofen, carvedilol, diltiazem, diphenhydramine, lidocaine, methyl salicylate-menthol, tramadol, warfarin"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Discuss the next best step as palliative care."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Progression of disease since 05/27/2016, with increased size and infiltration of the pancreatic body/tail mass resulting in new partial bowel obstruction at the ligament of Treitz."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue supportive medications as needed."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "No current chemotherapy plan; palliative care considered."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Follow up on full report of X-ray imaging to determine ability to undergo additional stent placement."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow up with the patient on the phone directly to discuss imaging results."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Monitor bilirubin, liver function, and PO status."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "Anticipate the need to transition the patient to hospice.",
+    "follow up": "Follow up with the patient on the phone directly."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Phone follow-up with the patient."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 24.0s | Output: 2818 chars | JSON: OK
+
+
+============================================================
+ROW 13 (coral_idx=12)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow-up visit for pancreatic adenocarcinoma, locally advanced in nature, with discussion on considering XRT and pausing systemic therapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic adenocarcinoma, located in pancreatic head/uncinate, locally advanced",
+    "Stage_of_Cancer": "Unresectable due to extensive vascular involvement at the root of the mesentery",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 8.3, Abs Neutrophils: 3.18, Hemoglobin: 9.7 (L), Hematocrit: 30.8 (L), Platelet Count: 241, Albumin, Serum / Plasma: 3.0 (L)"
+  },
+  "Clinical_Findings": {
+    "findings": "Similar size of pancreatic mass centered in the uncinate process and invading the duodenum. Similar peripancreatic lymph nodes. Interval placement of gastrojejunal stent. No findings of proximal obstruction."
+  },
+  "Current_Medications": {
+    "current_meds": "capecitabine (XELODA), CREON, denosumab (PROLIA), dronabinol (MARINOL), pantoprazole (PROTONIX), polyethylene glycol (MIRALAX), senna (SENOKOT), sucralfate (CARAFATE)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Pause systemic therapy and consider radiation again per patient preference",
+    "supportive_meds": "acetaminophen (TYLENOL), bisacodyl (DULCOLAX), budesonide-glycopyr-formoterol (BREZTRI AEROSPHERE), calcium carbonate-vitamin D (OSCAL D), CALCIUM CITRATE ORAL, CREON, denosumab (PROLIA), dronabinol (MARINOL), famotidine (PEPCID ORAL), GLIMEPIRIDE ORAL, lipase-protease-amylase (CREON), melatonin, mirtazapine (REMERON), multivitamin, ondansetron (ZOFRAN), pantoprazole (PROTONIX), polyethylene glycol (MIRALAX), prochlorperazine (COMPAZINE), senna (SENOKOT), sucralfate (CARAFATE)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "We will consider XRT at this time. We will pause systemic therapy and consider radiation again per patient preference."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue current medications, pause systemic therapy"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Consider radiation therapy"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Discuss options for radiation therapy, including 5 fraction low dose radiation, 5 fraction SBRT, or 25 fraction capecitabine-radiotherapy"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Bronchoscopy in February"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Recommended repeat CT scan at some point"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Weekly CBC and transfuse PRBCs PRN for HGB <8.0"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Not done"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "nutrition consultation is needed",
+    "Genetics": "",
+    "Specialty": "followed by ID, Dr. ***** *****; followed by Pulm, Dr. *****; followed by SMS, Dr. *****",
+    "Others": "",
+    "follow up": "Dr. ***** will see him February 17"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "February 17, Televisit, follow-up for pancreatic adenocarcinoma"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 29.4s | Output: 3473 chars | JSON: OK
+
+
+============================================================
+ROW 14 (coral_idx=13)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Consultation for metastatic pancreatic adenocarcinoma"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Metastatic pancreatic adenocarcinoma",
+    "Stage_of_Cancer": "Stage IV (metastatic)",
+    "Distant Metastasis": "Yes, to liver",
+    "Metastasis": "Distant: liver (confirmed)"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 10.8 (H), Neutrophil Absolute Count: 8.26 (H), Hemoglobin: 9.9 (L), Hematocrit: 32.4 (L), Platelet Count: 315, Creatinine: 0.54 (L), Bilirubin, Total: 4.5 (H), Alkaline Phosphatase: 787 (H), AST: 66 (H), Alanine transaminase: 83 (H), Albumin, Serum / Plasma: 2.6 (L), Int'l Normaliz Ratio: 1.3 (H), Sodium, Serum / Plasma: 136, Potassium, Serum / Plasma: 3.6, Calcium, total, Serum / Plasma: 9.3, Cancer Antigen 19-9: 1,041 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Increased size of the primary malignancy centered at the pancreaticoduodenal groove. Increased size and number of hepatic and nodal metastases. New mild biliary ductal and gallbladder dilatation. New mild pancreatic ductal dilatation, mild peripancreatic fat stranding, and mild pancreatic parenchymal edema. Similar small left adrenal nodule."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "Tylenol for pain relief"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Systemic therapy (chemotherapy) with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but not expected to be curative."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will arrange short-term in-person follow up for both clinical and laboratory assessment to get her started on chemotherapy ASAP."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Standard of care chemotherapy with gemcitabine and nab-paclitaxel, or consideration of clinical trial options."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Short-term in-person follow up for clinical and laboratory assessment."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "To be determined after starting chemotherapy."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Monitor LFTs to ensure normalization before starting chemotherapy."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Request somatic tumor testing of the patient's tumor specimen through the UCSF500 platform."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Surgical oncology, palliative care",
+    "Others": "",
+    "follow up": "Arrange short-term in-person follow up for both clinical and laboratory assessment."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Short-term in-person follow up for both clinical and laboratory assessment."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 24.9s | Output: 3314 chars | JSON: OK
+
+
+============================================================
+ROW 15 (coral_idx=14)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up for resected pancreatic cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic ductal adenocarcinoma",
+    "Stage_of_Cancer": "ypT3N2",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 6.4, Hemoglobin: 9.5 (L), Hematocrit: 29.0 (L), Platelet Count: 412, Creatinine: 0.67, Sodium: 123 (LL), Calcium: 8.7 (L), Bilirubin, Total: 0.5, Alkaline Phosphatase: 665 (H), Aspartate transaminase: 101 (H), Alanine transaminase: 58, Albumin: 3.3 (L), Cancer Antigen 19-9: 4,375 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Hematocrit: 29.0 (L), Hemoglobin: 9.5 (L), Alkaline Phosphatase: 665 (H), Aspartate transaminase: 101 (H), Albumin: 3.3 (L), Cancer Antigen 19-9: 4,375 (H), Bilirubin, Total: 0.5, Calcium: 8.7 (L), Sodium: 123 (LL), Hematocrit: 29.0 (L), Hemoglobin: 9.5 (L), Alkaline Phosphatase: 665 (H), Aspartate transaminase: 101 (H), Albumin: 3.3 (L), Cancer Antigen 19-9: 4,375 (H)"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "Creon"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "surveillance",
+    "goals_description": "Recheck Ca19-9 this week."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan": {
+    "medication_plan": "continue Creon"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Recheck Ca19-9 this week."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT in 2 weeks"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Recheck Ca19-9 this week."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "MLH1 expression: Present, PMS2 expression: Present, MSH2 expression: Present, MSH6 expression: Present, Ascites cell block interpreted as benign, and negative for KRAS mutations in exons 2, 3 and 4."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Refer to new PMD if current health plan allows it",
+    "Others": "",
+    "follow up": "Contact me before next scheduled visit should any concerning symptoms arise"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "RTC with me post-above"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 24.7s | Output: 2602 chars | JSON: OK
+
+
+============================================================
+ROW 16 (coral_idx=15)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "follow-up visit of pancreatic adenocarcinoma"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "pancreatic adenocarcinoma",
+    "Stage_of_Cancer": "Stage IIB (cT1c, cN1, cM0)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Alkaline Phosphatase: 68 U/L, Bilirubin, Total: 0.9 mg/dL, Alanine Transaminase: 20 U/L, Aspartate Transaminase: 25 U/L, Creatinine: 0.46 mg/dL, eGFR: 90 mL/min, WBC Count: 9.1 x10E9/L, RBC Count: 4.15 x10E12/L, Hemoglobin: 13.0 g/dL, Hematocrit: 37.5%, MCV: 90 fL, MCH: 31.3 pg, MCHC: 34.7 g/dL, Platelet Count: 248 x10E9/L, Neutrophil Absolute Count: 3.79 x10E9/L, Lymphocyte Abs Cnt: 4.36 x10E9/L, Monocyte Abs Count: 0.88 x10E9/L, Eosinophil Abs Ct: 0.03 x10E9/L, Basophil Abs Count: 0.03 x10E9/L"
+  },
+  "Clinical_Findings": {
+    "findings": "Visualized lung bases: For chest findings, please see the separately dictated report from the CT of the chest of the same date. Liver: Mild intrahepatic biliary ductal dilatation and pneumobilia, stable. Gallbladder: Unchanged position of biliary stent. Gallbladder is unremarkable. Spleen: Unremarkable. Pancreas: Slight improvement in pancreatic ductal dilatation, currently measuring 9 mm, previously measuring 12 mm. Ill-defined pancreatic mass not clearly seen. Unchanged appearance of bilobed hypoattenuating cystic lesion in the anterior pancreatic head measuring 8 mm which can represent a sidebranch IPMN. Adrenal Glands: Unremarkable. Kidneys: Similar appearance of left kidney interpolar exophytic 1.1 x 1 cm lesion which is hypodense on noncontrast imaging and hyperenhancing on postcontrast images. Right kidney interpole simple cyst measuring 1.5 x 1.1 cm, unchanged. GI Tract: Diverticulosis of the sigmoid colon. Vasculature: Stable in size mildly prominent subcentimeter periportal and peripancreatic lymph nodes measuring up to 0.7 cm in short axis. Lymphadenopathy: Absent. Peritoneum: Unchanged pelvic free fluid. Bladder: Unremarkable. Reproductive organs: Unremarkable. Bones: No suspicious lesions. Extraperitoneal soft tissues: Unremarkable. Lines/drains/medical devices: Biliary stent as above."
+  },
+  "Current_Medications": {
+    "current_meds": "gemcitabine"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Gemcitabine monotherapy changed to alternating week schedule for better tolerability.",
+    "supportive_meds": "acetaminophen, bimatoprost, calcium-vitamin D, cholecalciferol, dorzolamide, multivitamin, polyethylene glycol, prochlorperazine, senna, tramadol, omeprazole"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "goal of palliating any symptoms she may have, and achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life, but this treatment was not expected to be curative."
+  },
+  "Response_Assessment": {
+    "response_assessment": "responding - ill-defined pancreatic mass is no longer seen, likely related to treatment. Interval decrease in pancreatic duct dilation. No evidence of metastatic disease."
+  },
+  "Medication_Plan": {
+    "medication_plan": "continue with gemcitabine monotherapy on alternating week schedule"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "continue with gemcitabine monotherapy on alternating week schedule"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "restaging CT cap with contrast every 2 months to monitor treatment response"
+  },
+  "Lab_Plan": {
+    "lab_plan": "monthly CA 19-9 levels"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "yes",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "on 05/16/19 with ***** *****"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "05/16/19, in-person, for follow-up of pancreatic adenocarcinoma"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 32.9s | Output: 4295 chars | JSON: OK
+
+
+============================================================
+ROW 17 (coral_idx=16)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "yes",
+    "in-person": "in-person",
+    "summary": "Independent visit for a 58 y.o. male with locally advanced pancreatic adenocarcinoma, discussing treatment plan and therapeutic options."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Locally advanced pancreatic adenocarcinoma, pMMR",
+    "Stage_of_Cancer": "Locally advanced",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 6.0, Hemoglobin: 13.8, Hematocrit: 40.4 (L), Platelet Count: 151, Neutrophil Absolute Count: 3.74, Alanine transaminase: 39, Aspartate transaminase: 44 (H), Alkaline Phosphatase: 80, Bilirubin, Total: 1.2, Carcinoembryonic Antigen: 15.1 (H), Cancer Antigen 19-9: 289 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Pancreatic body/tail mass measuring 4.8 x 2.5 x 2.8 cm, slight interval decrease in size of mass, stable disease on CT, no distant metastasis, no significant tenderness or guarding on abdominal exam."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Chemotherapy break since 11/06/18",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Stable disease on CT scan as of 11/06/18"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue chemotherapy break"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "No additional chemotherapy planned at this time"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Complete a new CT CAP in July 2019"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "MS-Stable, Tumor mutational burden = 5 Muts/Mb, KRAS G12V, TP53 I195F, VUS: CBL P782L, CDKN2A/B loss, MTOR R2109, NKX2-1 G239_G241del, PDGFRB V523M, PIK3C2G T488A, TNFAIP3 P752S"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Agrees to return to see the provider in June 2019"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "June 2019, in-person, for follow-up and discussion of treatment plan"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 21.1s | Output: 2560 chars | JSON: OK
+
+
+============================================================
+ROW 18 (coral_idx=17)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "Televisit",
+    "summary": "Follow-up visit for adenocarcinoma of the tail of the pancreas, status post distal pancreatectomy and splenectomy with positive lymph nodes, severe hand-foot syndrome and mucositis secondary to chemotherapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Adenocarcinoma of the tail of the pancreas, status post distal pancreatectomy and splenectomy with positive lymph nodes",
+    "Stage_of_Cancer": "Technically resectable, treated with neoadjuvant therapy",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Albumin 3.4 g/dL, Alkaline Phosphatase 151 U/L, Alanine transaminase 29 U/L, AST 24 U/L, Bilirubin, Total 0.3 mg/dL, Urea Nitrogen 12 mg/dL, Calcium 9.3 mg/dL, Chloride 99 mmol/L, Creatinine 0.82 mg/dL, eGFR 79 mL/min/1.73m2, Potassium 5.3 mmol/L, Sodium 129 mmol/L, Protein, Total 6.8 g/dL, Carbon Dioxide 25 mmol/L, Anion Gap 5, Glucose 109 mg/dL, WBC Count 11.7 x10E9/L, RBC Count 3.34 x10E12/L, Hemoglobin 11.5 g/dL, Hematocrit 34.3%, MCV 103 fL, MCH 34.4 pg, MCHC 33.5 g/dL, Platelet Count 485 x10E9/L, Abs Neutrophils 5.24 x10E9/L, Abs Lymphocytes 2.75 x10E9/L, Abs Monocytes 2.59 x10E9/L, Abs Eosinophils 0.93 x10E9/L, Abs Basophils 0.04 x10E9/L, Abs Imm Granulocytes 0.13 x10E9/L"
+  },
+  "Clinical_Findings": {
+    "findings": "Expected postsurgical changes related to prior distal pancreatectomy of the body and tail, no evidence of metastatic disease in the abdomen or pelvis, interval resolution of previously noted narrowing of the junction of the portal vein and superior mesenteric vein, mild atherosclerotic disease of the abdominal aorta and its branches, unchanged gastrohepatic lymph node measuring 9 x 7 mm, no ascites, interval resolution of previously seen trace free fluid adjacent to the cut edge of pancreas, no suspicious lesions in bones, bilateral pars defects at L5, and degenerative disc disease at L5/S1 with grade 1 anterolisthesis."
+  },
+  "Current_Medications": {
+    "current_meds": "capecitabine (XELODA)"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Hold chemotherapy due to hand-foot syndrome",
+    "supportive_meds": "Tylenol, Flexeril, gabapentin"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "We will hold her chemotherapy until she has resolution of her hand-foot syndrome. We will then resume treatment, treating 5 days out of 7."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Hold capecitabine until resolution of hand-foot syndrome, then resume treatment 5 days out of 7"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Hold chemotherapy until resolution of hand-foot syndrome, then resume treatment 5 days out of 7"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "CT of the head to rule out cause of falls"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Known to carry an ATM VUS"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Continue to use a walker"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose is to follow up on cancer treatment and management of hand-foot syndrome"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 29.3s | Output: 3721 chars | JSON: OK
+
+
+============================================================
+ROW 19 (coral_idx=18)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "yes",
+    "in-person": "in-person",
+    "summary": "Independent visit for a 69-year-old woman with locally advanced and unresectable adenocarcinoma of the head of the pancreas, presenting with abdominal pain, weight loss, and other symptoms."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Locally advanced and unresectable adenocarcinoma of the head of the pancreas",
+    "Stage_of_Cancer": "Unresectable",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected liver"
+  },
+  "Lab_Results": {
+    "lab_summary": "Albumin 3.3 g/dL (L), Alkaline Phosphatase 493 U/L (H), Alanine transaminase 387 U/L (H), Aspartate transaminase 357 U/L (H), Total Bilirubin 7.4 mg/dL (H), WBC Count 15.3 x10E9/L (H), RBC Count 3.29 x10E12/L (L), Hemoglobin 10.4 g/dL (L), Hematocrit 30.8% (L), Neutrophil Absolute Count 12.04 x10E9/L (H), Monocyte Abs Count 1.20 x10E9/L (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Conjunctiva with slight jaundice, tongue with white/yellowish thick coating, soft and nontender abdomen, no hepatosplenomegaly, no fluid wave, no masses, bilateral +1 LE edema from feet to ankles, no rash or petechiae, no gross focal deficit."
+  },
+  "Current_Medications": {
+    "current_meds": "gemcitabine, Abraxane, FOLFIRINOX"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Postponed today's infusion of FOLFIRINOX due to lab abnormalities suggestive of disease progression or biliary obstruction.",
+    "supportive_meds": "ondansetron, methadone, oxyCODONE, CREON"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Palliative",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Postpone today's infusion of FOLFIRINOX until further imaging is obtained."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue FOLFIRINOX after imaging confirms no disease progression or biliary obstruction."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Urgent referral to GI for ERCP, lower extremity ultrasound to rule out DVT."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Urgent imaging to rule out biliary ductal dilatation versus disease progression in the liver."
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "GI for ERCP, palliative care for pain, fatigue, and anorexia management",
+    "Others": "",
+    "follow up": "Follow-up with urgent imaging and possible ERCP."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose is to review imaging results and determine next steps in treatment."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 23.3s | Output: 3102 chars | JSON: OK
+
+
+============================================================
+ROW 20 (coral_idx=19)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation for newly diagnosed metastatic pancreatic adenocarcinoma"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Pancreatic adenocarcinoma",
+    "Stage_of_Cancer": "Stage IV",
+    "Distant Metastasis": "Yes, to liver, peritoneum",
+    "Metastasis": "Distant: liver, peritoneum"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC 6.0, Hct 46.5, plts 207, Creat 1.16, Alb 4.3, AST/ALT 26/61, tot bili 0.6, alk phos 63"
+  },
+  "Clinical_Findings": {
+    "findings": "Pancreatic tail mass (39.4 mm by 22.6 mm) with cystic and necrotic components; multiple hepatic lesions; peritoneal carcinomatosis; diffuse omental caking; prominent retroperitoneal lymph nodes"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "Tylenol, Lorazepam"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Systemic therapy with the goal of achieving as deep and durable a remission as possible, hopefully translating into significant prolongation of life."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Discuss chemotherapy options including FOLFIRINOX or gemcitabine plus nab-paclitaxel; consider clinical trial participation."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Consider first-line chemotherapy with FOLFIRINOX or gemcitabine plus nab-paclitaxel; discuss clinical trial options."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Potential biopsy for tumor testing."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Consider novel imaging and blood- and stool-based assays for ctDNA and microbiome studies."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Somatic tumor testing using UCSF500 in-house platform."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Order somatic tumor testing and genetic counseling with germline testing."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "yes",
+    "Genetics": "yes",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Follow-up for clinical trial screening and treatment planning."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified; purpose is clinical trial screening and treatment planning."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 19.9s | Output: 2715 chars | JSON: OK
+
+

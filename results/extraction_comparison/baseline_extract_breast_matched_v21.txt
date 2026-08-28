@@ -1,0 +1,1649 @@
+BASELINE EXTRACTION — No pipeline, single prompt, no post-processing (matched-json)
+Model: Qwen/Qwen2.5-32B-Instruct-AWQ
+Source: data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv
+Cancer type: breast
+Task contract: /home/yc/repo/med_dict/prompts/matched_baseline_contract.yaml
+Task contract SHA256: cfd15fe03290a43e13f21375dd8a46e4955ff2f968f11b36365db77a27fe424c
+Date: 2026-08-27 20:28
+============================================================
+
+============================================================
+ROW 1 (coral_idx=20)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Postmenopausal patient with a recent diagnosis of breast cancer, presenting for consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive ductal carcinoma, SBR grade 3, ER negative, PR negative, HER2 positive (IHC 1; FISH ratio 2.1)",
+    "Stage_of_Cancer": "pT2N1a",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected distant"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 9.9, Hemoglobin: 9.6 (L), Hematocrit: 28.9 (L), Platelet Count: 222, Sodium: 133 (L), Potassium: 4.2, Chloride: 102, Carbon Dioxide: 22, Urea Nitrogen: 18, Creatinine: 1.01 (H), Glucose, non-fasting: 201 (H)"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast simple mastectomy with no mass in left breast, no cervical, supraclavicular, or axillary lymphadenopathy, resonant to percussion throughout, CTA bilaterally, no wheezes, rhonchi, or crackles, normal heart rate and rhythm, no murmurs, no edema, bowel sounds normal, soft abdomen, no tenderness, no distention, no HSM, no tenderness over bones or joints, alert & oriented x 3, ambulates w/o difficulty, good strength throughout, no rashes or lesions."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "brimonidine (ALPHAGAN) 0.1 % ophthalmic solution, latanoprost (XALATAN) 0.005 % ophthalmic solution, loratadine (CLARITIN) 10 mg tablet, mometasone (NASONEX) 50 mcg/actuation spray, nitroGLYCERIN (NITROSTAT) 0.4 mg SL tablet, olopatadine (PATANOL) 0.1 % ophthalmic solution"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Not explicitly stated",
+    "goals_description": "We discussed the likelihood of recurrence which is quite difficult to assess, but certainly notable in the context of a high grade, node positive, triple negative breast cancer. We discussed recurrence as both a local and distant concept."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": ""
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Further discussion on treatment options after obtaining PET/CT."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Obtain PET/CT to assess for metastasis."
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Immunohistochemical tests for estrogen and progesterone receptors, HER2 and Ki-67 were performed. The test for estrogen receptors is negative. The test for progesterone receptors is negative. Result of HER2 test: This carcinoma is negative for HER2 oncoprotein over-expression. The staining intensity of this carcinoma was 1 on a scale of  0-3. Ki-67 proliferation index: Variable expression ranging from <5% to 25-30%. Overall, it is estimated to be ~15%."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Resume conversation with regards to treatment after obtaining PET/CT."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and purpose not specified in note."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 31.3s | Output: 3583 chars | JSON: OK
+
+
+============================================================
+ROW 2 (coral_idx=21)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation regarding the treatment of her locally recurrent breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Infiltrating ductal carcinoma, ER-positive, PR-negative, HER2 status not specified, grade 1, with local regional recurrence",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected right parasternal chest wall nodule and right axillary lymph node"
+  },
+  "Lab_Results": {
+    "lab_summary": "CBC, creatinine, electrolytes, liver function tests, and calcium normal; CA27-29: 15; LDH: normal"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast: 2.5 x 2.5 cm, hard, fixed mass just lateral to the sternal edge in the left superior chest wall above her breast. Right parasternal chest wall nodule measuring 1.9 cm with FDG avidity. Right inferior axillary lymph node measuring 1.9 cm with SUV of 2."
+  },
+  "Current_Medications": {
+    "current_meds": "Zoledronic acid"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started on zoledronic acid",
+    "supportive_meds": "Zoledronic acid"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Hormonal therapy",
+    "goals_description": "Treatment with an aromatase inhibitor either on or off study"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Begin aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizumab"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Start aromatase inhibitor therapy either alone or on CALGB 4503 randomized to placebo or bevacizum"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI of brain"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Laboratory studies"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Follow-up in clinic on January 25 to begin aromatase inhibitor therapy"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "January 25, in-person, to begin aromatase inhibitor therapy"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 19.0s | Output: 2584 chars | JSON: OK
+
+
+============================================================
+ROW 3 (coral_idx=22)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient with early stage breast cancer here to discuss neoadjuvant therapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Right-sided invasive spindle cell metaplastic carcinoma, ER Negative, PR Negative, HER2 Negative",
+    "Stage_of_Cancer": "Locally advanced, multifocal (possibly awaiting biopsy confirmation of extent of disease)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Elevated creatinine and Alk phos, possibly due to dehydration"
+  },
+  "Clinical_Findings": {
+    "findings": "Abnormal mass palpable in the right breast at 9:00 6cm FN that measures 4x4cm, no palpable lymphadenopathy, no hepatosplenomegaly"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Curative",
+    "goals_description": "We informed the patient that she currently has no evidence of metastatic disease and that we can therefore treat her with curative intent."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start chemotherapy with AC/T regimen, possibly within the I-SPY2 clinical trial, and arrange for Medi-port insertion."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Neoadjuvant chemotherapy with AC/T regimen, possibly within the I-SPY2 clinical trial, followed by surgery and potentially radiation therapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Potential radiation therapy depending on surgical choice and final pathology."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Arrange for Medi-port insertion."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Pending Mammaprint test results."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Check creatinine and Alk phos levels again."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Gene panel testing has been sent."
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "Discuss further with patient when gene panel results are available.",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Follow-up discussion regarding genetic predisposition to cancer."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "First week in February for starting chemotherapy."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 17.8s | Output: 2706 chars | JSON: OK
+
+
+============================================================
+ROW 4 (coral_idx=23)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Discussion for a new patient visit regarding right breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 3 ER 1%, PR negative, HER2 1+ IHC/FISH negative IDC with Ki67 of 70% and 30-40%",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast: Firm palpable nodule felt at 11 o'clock between axilla and areola in R breast. PETCT shows a hypermetabolic right lateral breast mass measures 2.7 x 1.7 cm compatible with recurrent disease."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "acetaminophen, baclofen, benzonatate, clotrimazole, dextran 70-hypromellose, loratadine, melatonin, mometasone, multivitamin, omeprazole, promethazine-dextromethorphan"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Curative",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Port placement ASAP, Chemo teach ASAP for taxol x 12 weekly"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Taxol x 12 weekly"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement ASAP"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Annual mammography in addition to MRI recommended"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "BRCA1 genetic carrier"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "surgical oncology",
+    "Others": "",
+    "follow up": "clinic visits with cycles 1, 2, 5, 8, and 12"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Next Wednesday or the following week for cycle 1, then cycles 2, 5, 8, and 12"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 18.7s | Output: 2266 chars | JSON: OK
+
+
+============================================================
+ROW 5 (coral_idx=24)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options and establish care for recently diagnosed early stage bilateral breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Left breast: Grade 3 IDC with ER+ 99%, PR+ >95%, HER2- (IHC 1+, FISH ratio 1.0); Right breast: Grade 1 IDC with ER+ 99%, PR+ 90%, HER2- (IHC 0, FISH ratio 1.5)",
+    "Stage_of_Cancer": "Left breast: Stage III (T3N1); Right breast: Stage I (T1cN0)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "HbA1c of October 20 on 08/09/17"
+  },
+  "Clinical_Findings": {
+    "findings": "Vital signs: Pulse 51, Temp 36.1 C (97 F), Resp 16, Ht 165.5 cm (5' 5.16\"), Wt 105.7 kg (233 lb), SpO2 97%, BMI 38.59 kg/m^2; No cervical, supraclavicular, or axillary lymphadenopathy; No masses bilaterally; No tenderness over bones or joints; Alert & oriented x 3, ambulates w/o difficulty, good strength throughout; Mood stable; No HI, SI, hallucinations, paranoia, or delusions; Warm skin without rashes or lesions"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Proceed with adjuvant chemotherapy in the context of clinically and genomically high risk disease in the left breast."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start docetaxel/cyclophosphamide x 4 cycles; Start AI therapy for at least 5 years after chemotherapy and radiation; Consider adjuvant trial of a CDK4/6 inhibitor"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Docetaxel/cyclophosphamide x 4 cycles; Radiation; AI therapy for at least 5 years"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Radiation therapy planned"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": ""
+  },
+  "Lab_Plan": {
+    "lab_plan": "DEXA to assess current bone health"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Oncotype DX RS test ordered"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Discuss the result of Oncotype DX RS test at the next visit."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and purpose not specified in note."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 21.4s | Output: 2798 chars | JSON: OK
+
+
+============================================================
+ROW 6 (coral_idx=25)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Newly diagnosed HR-negative HER2+ breast cancer; discussing systemic therapy and management"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive ductal carcinoma (IDC) G2, ER-negative, PR-negative, HER2 3+, FISH ratio 13, Ki67 10-15%, metastatic to right axillary lymph nodes and possibly to bone and left carotid artery",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Not sure—suspected bone and left carotid artery",
+    "Metastasis": "Not sure—suspected bone and left carotid artery"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "7x5 cm mass in right upper outer quadrant, mobile, inverted right nipple, multiple right axillary nodes, largest 2.5 cm and mobile, no palpable cervical or supraclavicular lymphadenopathy, no bone pain or other systemic concerns"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "ondansetron (ZOFRAN) 8 mg tablet To be taken as needed for nausea"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "adjuvant",
+    "goals_description": "Given HR-negative HER2+ subtype, I anticipate excellent response and possible long term disease control."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Initiate systemic therapy with weekly paclitaxel, q3wk trastuzumab, q3wk pertuzumab"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Consider radiation for bone lesions"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "MRI Pelvis, MRI neck"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Baseline echocardiogram, labs"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Discuss treatment options and side effects in detail"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose to follow up on systemic therapy and management"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 17.3s | Output: 2620 chars | JSON: OK
+
+
+============================================================
+ROW 7 (coral_idx=26)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow up for metastatic ER negative, HER2 negative breast cancer on nab paclitaxel and pembrolizumab with clinical or radiological evidence of progression."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Metastatic ER negative, HER2 negative breast cancer",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Yes, to liver and nodes",
+    "Metastasis": "Liver and nodes (distant)"
+  },
+  "Lab_Results": {
+    "lab_summary": "Labs are in range for continuation of treatment"
+  },
+  "Clinical_Findings": {
+    "findings": "Ill-defined right pectoralis soft tissue mass with internal calcifications, right subpectoral lymph node, hypoenhancing caudate lobe lesion, lytic S1 vertebral body lesion, additional hypermetabolic right internal mammary node, hypermetabolic caudate lobe lesion markedly increased in size, additional hypoattenuating, hypermetabolic segment VII lesion."
+  },
+  "Current_Medications": {
+    "current_meds": "nab paclitaxel, pembrolizumab"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Restart xarelto, stop for port placement per IR",
+    "supportive_meds": "ativan, compazine, prilosec, magnesium oxide, MS Contin, oxycodone, flexeril"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "palliative",
+    "goals_description": "Continue therapy until progression or intolerable side effects"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue nab paclitaxel every week and pembrolizumab every 3 weeks, monitor TSH, restart xarelto after port placement, continue supportive medications"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue nab paclitaxel and pembrolizumab"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement next week"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Imaging guided by symptoms or every 3-4 months, longer intervals if stable"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Monitor TSH"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Germline mutation testing positive for MSH2 mutation."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "pain management",
+    "Others": "",
+    "follow up": "Follow up in 2 weeks then every 3 weeks"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 weeks, in-person, for follow-up of metastatic breast cancer treatment"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 20.2s | Output: 2768 chars | JSON: OK
+
+
+============================================================
+ROW 8 (coral_idx=27)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Patient with breast cancer here to discuss adjuvant therapy"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive ductal carcinoma, multifocal, SBR grade 2 and 1, 3.9 cm, ER+/PR+/HER2-, high-risk Mammaprint",
+    "Stage_of_Cancer": "pT2(m)N1a",
+    "Distant Metastasis": "No",
+    "Metastasis": "Regional metastasis to 2 out of 12 lymph nodes"
+  },
+  "Lab_Results": {
+    "lab_summary": "Ki-67 proliferation index: 20 to 30%"
+  },
+  "Clinical_Findings": {
+    "findings": "Post-mastectomy scars healing well, no erythema or fluctuance, no TTP, sensory change (numbness of L axilla and L elbow)"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "acetaminophen, gabapentin, docusate sodium, omeprazole"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Supportive care and adjuvant chemotherapy with AC with paclitaxel"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start chemotherapy with AC + paclitaxel, estimated start date 10/18/2017, pre-chemotherapy teaching, port placement"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Adjuvant chemotherapy with AC + paclitaxel, estimated start date 10/18/2017"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Baseline TTE prior to chemotherapy"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Referral placed to Genetics"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "Referral placed to Genetics",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "Follow-up with medical oncology care"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Estimated start date for chemotherapy 10/18/2017"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 20.1s | Output: 2327 chars | JSON: OK
+
+
+============================================================
+ROW 9 (coral_idx=28)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options and to establish care for a Stage III HR+/HER2- IDC of the left breast with biopsy-proven recurrence"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "HR+/HER2- grade 2 IDC with micropapillary features of the left breast, now with a locally advanced, unresectable recurrence (possibly considered metastatic in context of a level Vb LN)",
+    "Stage_of_Cancer": "Stage III (T3N2) at initial diagnosis; now with a locally advanced, unresectable recurrence (possibly considered metastatic in context of a level Vb LN)",
+    "Distant Metastasis": "Not sure—suspected distant disease (level Vb LN)",
+    "Metastasis": "Not sure—suspected distant disease (level Vb LN)"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "6.5 x 5 cm mass located on her left upper outer quadrant at 2:00 position 7cm from center of nipple; 3.5 x 3.5 cm mass in left lateral anterior neck; hypermetabolic subcutaneous masses overlying the left breast; hypermetabolic left axillary, left supraclavicular, left level VB and left internal mammary lymph nodes"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "gabapentin"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "adjuvant, palliative",
+    "goals_description": "prolongation of life, while maintaining a good quality of life without excessive toxicities"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note"
+  },
+  "Medication_Plan": {
+    "medication_plan": "plan to start goserelin, followed by an aromatase inhibitor"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "start goserelin, followed by an aromatase inhibitor"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "plan to FNA the mass on left lateral anterior neck"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": ""
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "encouraged to reach out with any concerns"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "two weeks after her first goserelin"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 19.6s | Output: 2673 chars | JSON: OK
+
+
+============================================================
+ROW 10 (coral_idx=29)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options for newly diagnosed breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 2 invasive ductal carcinoma, right breast, ER >95%, PR 25%, HER2 negative",
+    "Stage_of_Cancer": "T2N1, clinical stage II",
+    "Distant Metastasis": "No",
+    "Metastasis": "Regional metastasis to right axillary lymph node"
+  },
+  "Lab_Results": {
+    "lab_summary": "Glucose, meter download: 94 mg/dL"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast: 7 x 3 cm mass in the upper outer quadrant, dimpling to the upper outer quadrant. Right axillary node measuring 1 cm."
+  },
+  "Current_Medications": {
+    "current_meds": "Cetrorelix acetate, Menotropins, Tamoxifen"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Started egg harvesting process",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Neoadjuvant chemotherapy",
+    "goals_description": "Discussing treatment options including ISPY2 trial and standard of care therapy"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start neoadjuvant chemotherapy next week, planning for 05/01/17, including weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Neoadjuvant chemotherapy with weekly paclitaxel x 12 followed by AC every 2-3 weeks with Neulasta support"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement either on start of therapy or one week later"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Echocardiogram and EKG on 04/23/17, Mammoprint on Thursday of this week, PET scan on 04/29/17"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Labs on Thursday"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Mammoprint expected on Thursday of this week"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Cold cap coordinator to call her",
+    "Others": "",
+    "follow up": "Follow-up imaging and labs scheduled"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose to monitor treatment progress"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 21.3s | Output: 2619 chars | JSON: OK
+
+
+============================================================
+ROW 11 (coral_idx=30)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Discussion of potential adjuvant anti-hormonal therapy for left breast DCIS"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Left breast DCIS, intermediate nuclear grade, ER positive, PR pending",
+    "Stage_of_Cancer": "pTisNx",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast bandaged and tender to palpation, no suspicious masses noted, left axilla, supraclavicular, and infraclavicular areas clear, right breast and corresponding areas clear"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "acetaminophen, gabapentin, cyclobenzaprine, lidocaine ointment, naproxen"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "risk reduction",
+    "goals_description": "decrease the risk of local recurrence and prevent new breast cancer events"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "prescription for tamoxifen sent to pharmacy, to be held until after radiation oncology assessment"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "consideration of tamoxifen for adjuvant anti-hormonal therapy"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "pending assessment with ***** ***** for potential candidacy for radiation therapy"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": ""
+  },
+  "Imaging_Plan": {
+    "imaging_plan": ""
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "radiation oncology",
+    "Others": "",
+    "follow up": "return to clinic 4-6 weeks after beginning tamoxifen to assess therapy tolerance"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "4-6 weeks after beginning tamoxifen to assess therapy tolerance, in-person"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 16.0s | Output: 2353 chars | JSON: OK
+
+
+============================================================
+ROW 12 (coral_idx=31)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Postmenopausal patient with a recent diagnosis of early stage breast cancer presenting for consultation to discuss treatment options and to establish care."
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 2 invasive mammary carcinoma with mixed ductal and lobular features, ER+ >95%, PR+ ~70%, HER2- (IHC 0; FISH ratio 0.65), Ki-67 ~20%",
+    "Stage_of_Cancer": "Clinical Stage II",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "WBC Count: 5.6, Hemoglobin: 12.6, Hematocrit: 38.4, Platelet Count: 202, Sodium: 139, Potassium:  4.2, Chloride: 106, Carbon Dioxide: 25, Urea Nitrogen: 18, Creatinine: 0.76, Glucose: 120, Calcium: 9.2"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast with mass (3 x 4 cm) in lower outer quadrant; left breast without palpable masses; no cervical, supraclavicular, or axillary lymphadenopathy; irregular mass with spiculated margins in lower slightly outer right breast, posterior depth; heterogeneously dense breast tissue; irregular solid mass (2.4 x 1.5 x 1.5 cm) with spiculated margins in lower outer right breast at 7:00 position, 5 cm from nipple; irregular solid mass (1.0 x 1.0 x 0.7 cm) with spiculated margins in lower outer right breast at 8:00 position, 5 cm from nipple; non-enlarged morphologically normal appearing LN in right axilla; no evidence of metastatic disease on PET/CT."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Curative",
+    "goals_description": "We can therefore treat her with curative intent."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start AC/T (doxorubicin plus cyclophosphamide followed by weekly paclitaxel)"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Neoadjuvant chemotherapy with AC/T (doxorubicin plus cyclophosphamide followed by weekly paclitaxel)"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "echocardiogram"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "CRC for cold cap details",
+    "follow up": "The patient will return to clinic in 2 weeks."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 2 weeks, in-person, to follow up on treatment progress."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 22.6s | Output: 3009 chars | JSON: OK
+
+
+============================================================
+ROW 13 (coral_idx=32)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Discuss treatment options and recent imaging findings for recently diagnosed hormone receptor positive/HER2 negative node positive right breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive ductal carcinoma, ER+ (80-90%), PR+ (80-90%), HER2 negative, Ki67% 20-30%",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Not sure—suspected dural metastasis (pending confirmation)",
+    "Metastasis": "Regional metastasis to right axillary lymph nodes; Not sure—suspected dural metastasis (pending confirmation)"
+  },
+  "Lab_Results": {
+    "lab_summary": "POCT glucose, Fingerstick: Glucose, meter download 93 mg/dL"
+  },
+  "Clinical_Findings": {
+    "findings": "Hypermetabolic right breast mass (2.1 x 1.6 cm) and enlarged right axillary lymph node (2.8 cm) on PET/CT. 5 mm right parafalcine dural-based mass most likely a meningioma."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Adjuvant chemotherapy and hormonal therapy after surgery"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": ""
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Adjuvant chemotherapy and hormonal therapy after surgery, depending on Mammaprint results and extent of nodal involvement"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Partial mastectomy and ALND scheduled for 11/05/17"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up imaging in 6 months for dural-based mass"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Mammaprint test to be performed post-surgery"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Surgical oncology",
+    "Others": "",
+    "follow up": "FU after surgery"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "After surgery"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 20.2s | Output: 2472 chars | JSON: OK
+
+
+============================================================
+ROW 14 (coral_idx=33)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options for newly diagnosed right breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 1 IDC, ER+(>95%), PR(~90%), HER2 equivocal (IHC 2+, FISH non-amplified), Ki-67: ~10%, focal atypical ductal hyperplasia, pseudoangiomatous stromal hyperplasia, DCIS not present",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Syphilis Screen by RPR with Reflex to Treponemal Antibody: Nonreactive, HIV Ag/Ab Combo: NEG"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast mass 2 cm, 8 cm from nipple, right eyelid stye"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Start goserelin today, start letrozole in about two weeks",
+    "supportive_meds": "Hot soaks to stye"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Use of ovarian suppression and AI for HR+ breast cancer under the age of 35"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Start goserelin today, start letrozole in about two weeks"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Ovarian suppression with goserelin and AI with letrozole"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Bilateral mastectomy with reconstruction"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": ""
+  },
+  "Lab_Plan": {
+    "lab_plan": "Estradiol labs today"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Myriad Genetic Result: Negative, Mammaprint (Agendia): Low risk: +0.287"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Surgical oncology",
+    "Others": "",
+    "follow up": "RTC one month depending on plans for surgery"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "One month, in-person, to review plans for surgery"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 17.8s | Output: 2363 chars | JSON: OK
+
+
+============================================================
+ROW 15 (coral_idx=34)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options and establish care for HR+ metastatic breast cancer involving lymph nodes"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "HR+ metastatic breast cancer, ER+ (>90%), PR+ (50%), HER2 equivocal (IHC 2; FISH pending)",
+    "Stage_of_Cancer": "Stage IV",
+    "Distant Metastasis": "Not sure—suspected cervical nodes",
+    "Metastasis": "Regional: right supraclavicular, right axillary, and right cervical lymph nodes; Not sure—suspected distant cervical nodes"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "Multiple hypermetabolic right cervical lymph nodes (2.2 x 1.8 cm, SUV 6.0), right axillary lymph nodes (2.7 x 1.7 cm, SUV 4.5), and right supraclavicular lymph node (0.9 cm, SUV 3.5); heterogenous breast tissue with nodular area of increased FDG avidity in the upper outer right breast."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "buPROPion (WELLBUTRIN SR) 150 mg 12 hr tablet, cetirizine (ZYRTEC) 10 mg tablet, docusate sodium (COLACE) 250 mg capsule, hydrOXYzine (ATARAX) 10 mg tablet, ibuprofen (ADVIL,MOTRIN) 600 mg tablet, iron 18 mg TAB tablet, labetalol (NORMODYNE) 100 mg tablet, PNV NO.122/IRON/FOLIC ACID (PRENATAL MULTI ORAL), triamcinolone (KENALOG) 0.1 % cream, zolpidem (AMBIEN) 5 mg tablet"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Not explicitly stated"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": ""
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Pending completion of additional testing, treatment will be initiated with antiestrogen therapy or chemotherapy based on HER2 status."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "US-guided biopsy of breast mass, cervical LN FNA if possible"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up on HER2 FISH result"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Genetic testing"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "Genetic testing",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "The patient will return to clinic once additional testing has been completed."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and purpose of the next clinic visit will be determined after additional testing is completed."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 23.9s | Output: 2936 chars | JSON: OK
+
+
+============================================================
+ROW 16 (coral_idx=35)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "Yes",
+    "in-person": "in-person",
+    "summary": "Consultation regarding treatment of newly diagnosed breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Invasive lobular carcinoma, grade 2-3, ER positive (96%), PR positive (35%), HER-2 negative",
+    "Stage_of_Cancer": "Clinical stage III",
+    "Distant Metastasis": "No",
+    "Metastasis": "Regional - left axillary and left subpectoral nodes"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast mass measuring 5 x 5.5 cm, 1 cm palpable left axillary lymph node, 1 cm left supraclavicular node, 0.5 cm soft and mobile right axillary lymph node"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Discuss adjuvant treatment options following surgery"
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": ""
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Consider neoadjuvant hormone therapy, but patient prefers upfront mastectomy"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Refer back to surgeon for consideration of mastectomy"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Ultrasound of left axillary lymph node (completed)"
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Surgeon",
+    "Others": "",
+    "follow up": "Meet with patient after surgery to discuss adjuvant treatment options"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "After surgery to discuss adjuvant treatment options"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 15.6s | Output: 2204 chars | JSON: OK
+
+
+============================================================
+ROW 17 (coral_idx=36)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Consultation to discuss treatment options for newly diagnosed breast cancer, Stage IIb (T2N1M0), Gr 2 IDC (ER pos/PR pos/Her-2-neu neg)"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 2 Invasive Ductal Carcinoma (IDC) in left breast, ER positive (>95%), PR positive (25%), HER2 negative (IHC 1+, FISH not amplified)",
+    "Stage_of_Cancer": "Stage IIb (T2N1M0)",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast with periareolar scar and distortion, no masses in right breast, postoperative changes in left breast with seroma, no axillary or internal mammary lymphadenopathy."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Discuss types of chemotherapy, options include TC x 6 with ONPRO support and scalp cooling."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Submit authorization for TC x 6 with ONPRO support, start 07/09/17 with dignicap."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Adjuvant chemotherapy with TC x 6, radiation therapy."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Radiation therapy to be determined after chemotherapy."
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port placement for chemotherapy administration."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Staging with PET/CT, baseline echo."
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "BRCA test negative (Ambry - not sure whether panel or only BRCA)"
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Chemotherapy teaching, port placement, plastic surgeon for cosmetic evaluation",
+    "Others": "",
+    "follow up": "Discuss cosmetics when the left breast is better healed."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose to discuss treatment progress and side effects."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 18.4s | Output: 2539 chars | JSON: OK
+
+
+============================================================
+ROW 18 (coral_idx=37)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "Yes",
+    "in-person": "in-person",
+    "summary": "Discussion of treatment options for recently diagnosed left breast cancer"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Grade 2 invasive ductal carcinoma, ER positive (>95%), PR positive (<5%), HER2 negative (by FISH), Ki67 44%",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": "Mammaprint from prior core biopsy: High Risk (-0.622)"
+  },
+  "Clinical_Findings": {
+    "findings": "Left breast mass with irregular margins and heterogeneous enhancement, 2.5 cm x 2.2 cm x 2.3 cm. At least two abnormal lymph nodes in the left axilla level I and I/II with cortical thickening, measuring up to 6 mm."
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": "ALPRAZolam (XANAX) 0.25 mg tablet, ibuprofen (ADVIL) 200 mg tablet, trazodone HCl (TRAZODONE ORAL)"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Recommend continued surgical/oncological management for known left breast malignancy."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Will discuss choice of hormonal therapy after surgery."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Recommend chemotherapy after surgery. If node negative, consider Taxotere and Cytoxan; if node positive, consider AC-Taxol. Adjuvant hormonal therapy for at least five years."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Recommended mastectomy rather than breast conserving surgery."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": ""
+  },
+  "Lab_Plan": {
+    "lab_plan": ""
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "Myriad myRisk panel identified a mutation in the ATM gene (c1109dup (p.Tyr370*) heterozygous)."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Radiation Oncology, Surgical Oncology",
+    "Others": "",
+    "follow up": "Follow up after surgery to discuss chemotherapy and hormonal therapy options."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "Timing and mode not specified, purpose is to discuss chemotherapy and hormonal therapy options after surgery."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 18.3s | Output: 2684 chars | JSON: OK
+
+
+============================================================
+ROW 19 (coral_idx=38)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "follow up",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "ER+/PR-/HER2- left breast cancer, s/p bilateral mastectomies, s/p adjuvant tamoxifen, currently on exemestane due to anxiety and emotional lability"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "ER+/PR-/HER2- invasive ductal carcinoma (IDC) of the left breast, s/p bilateral mastectomies, s/p adjuvant tamoxifen, currently on exemestane",
+    "Stage_of_Cancer": "Clinical stage 2-3",
+    "Distant Metastasis": "No",
+    "Metastasis": "No"
+  },
+  "Lab_Results": {
+    "lab_summary": ""
+  },
+  "Clinical_Findings": {
+    "findings": "NED on exam, minimal joint aches, mild hot flashes and insomnia, bone pain, vaginal dryness"
+  },
+  "Current_Medications": {
+    "current_meds": "exemestane 25mg daily"
+  },
+  "Treatment_Changes": {
+    "recent_changes": "Switched from letrozole to exemestane in December 2018 due to anxiety and emotional lability",
+    "supportive_meds": "ondansetron 4 mg rapid dissolve tablet as needed for nausea/vomiting"
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant",
+    "goals_description": "Continue exemestane 25mg daily for at least 5 years."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not mentioned in note."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Continue exemestane 25mg daily. Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months."
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Continue exemestane 25mg daily for at least 5 years."
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": ""
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Consider BSO if in natural menopause after 5 years of OS/AI."
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "No imaging given bilateral mastectomies."
+  },
+  "Lab_Plan": {
+    "lab_plan": "Recommend checking estradiol level to ensure ovarian suppression, if suppressed can check q3months."
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": ""
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "Follow up with local psych for ongoing support as needed.",
+    "Others": "",
+    "follow up": "Follow-up in 6 months or sooner if she has new or worsening symptoms."
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "In 6 months, in-person, for follow-up of breast cancer treatment and symptoms."
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit."
+  }
+}
+```
+
+--- STATS ---
+Time: 19.7s | Output: 2655 chars | JSON: OK
+
+
+============================================================
+ROW 20 (coral_idx=39)
+============================================================
+
+```json
+{
+  "Reason_for_Visit": {
+    "Patient type": "New patient",
+    "second opinion": "no",
+    "in-person": "in-person",
+    "summary": "Follow-up visit for bilateral breast cancer, ER+, PR+, HER2 positive on the right, and HER2 0 on the left"
+  },
+  "Cancer_Diagnosis": {
+    "Type_of_Cancer": "Bilateral breast cancer, right breast: ER+, PR+, HER2 positive, Ki67 40%, left breast: ER+, PR+, HER2 0, invasive cancer with some lobular differentiation",
+    "Stage_of_Cancer": "Not staged in note",
+    "Distant Metastasis": "Not sure",
+    "Metastasis": "Not sure—suspected liver and lung nodules"
+  },
+  "Lab_Results": {
+    "lab_summary": "Reviewed today, no specific values provided"
+  },
+  "Clinical_Findings": {
+    "findings": "Right breast 12 x 9 cm slightly red, no longer mobile; left breast 10 x 6 cm slightly mobile; liver and lung nodules noted on imaging"
+  },
+  "Current_Medications": {
+    "current_meds": ""
+  },
+  "Treatment_Changes": {
+    "recent_changes": "",
+    "supportive_meds": ""
+  },
+  "Treatment_Goals": {
+    "goals_of_treatment": "Adjuvant therapy",
+    "goals_description": "A HER2 targeting approach with a chemotherapy backbone, including docetaxel and carboplatin, Pertuzumab, and Trastuzumab for 1 year."
+  },
+  "Response_Assessment": {
+    "response_assessment": "Not yet on treatment — no response to assess."
+  },
+  "Medication_Plan": {
+    "medication_plan": "Initiate chemotherapy with docetaxel and carboplatin, Pertuzumab, and Trastuzumab; hormonal therapy to start after completion of chemotherapy and radiation therapy"
+  },
+  "Therapy_plan": {
+    "therapy_plan": "Chemotherapy with docetaxel and carboplatin, Pertuzumab, and Trastuzumab for 1 year; hormonal therapy to start after completion of chemotherapy and radiation therapy"
+  },
+  "radiotherapy_plan": {
+    "radiotherapy_plan": "Radiation to both breasts planned"
+  },
+  "Procedure_Plan": {
+    "procedure_plan": "Port-a-cath placement, echocardiogram, and appropriate laboratory and staging studies"
+  },
+  "Imaging_Plan": {
+    "imaging_plan": "Follow-up PET/CT scan"
+  },
+  "Lab_Plan": {
+    "lab_plan": "Appropriate laboratory and staging studies"
+  },
+  "Genetic_Testing_Plan": {
+    "genetic_testing_plan": "Germ line panel pending"
+  },
+  "Genetic_Testing_Results": {
+    "genetic_testing_results": "No genetic testing results in note."
+  },
+  "Referral": {
+    "Nutrition": "",
+    "Genetics": "",
+    "Specialty": "",
+    "Others": "",
+    "follow up": "After 2 cycles"
+  },
+  "follow_up_next_visit": {
+    "Next clinic visit": "After 2 cycles, in-person, to review treatment progress"
+  },
+  "Advance_care_planning": {
+    "Advance care": "Not discussed during this visit"
+  }
+}
+```
+
+--- STATS ---
+Time: 18.6s | Output: 2702 chars | JSON: OK
+
+
