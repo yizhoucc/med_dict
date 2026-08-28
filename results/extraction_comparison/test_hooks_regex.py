@@ -29,6 +29,7 @@ from extraction_post_hooks import (
     regional_node_evidence,
     resolve_current_anticancer_meds,
     sanitize_general_metastasis,
+    sanitize_genetic_testing_results,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -62,6 +63,7 @@ def parse_rows(path):
 B = parse_rows(ROOT / "results/extraction_comparison/pipeline_breast_FINAL.txt")
 P = parse_rows(ROOT / "results/extraction_comparison/pipeline_pdac_FINAL.txt")
 PV21 = parse_rows(ROOT / "results/extraction_comparison/pipeline_pdac_matched_v21.txt")
+BV21 = parse_rows(ROOT / "results/extraction_comparison/pipeline_breast_matched_v21.txt")
 
 results = []
 def check(label, got, want):
@@ -1056,6 +1058,102 @@ check(
     )[0],
     "Yes, locoregional chest-wall recurrence; no distant metastasis",
 )
+
+# ---- POST-GENETIC-RESULTS-FINAL shared value sanitizer ----
+def clean_genetic(value):
+    return sanitize_genetic_testing_results(value)[0]
+
+
+GENETIC_FALLBACK = "No genetic testing results in note."
+
+check("genetic relative BRCA2 removed",
+      clean_genetic("BRCA2 mutation found in brother."), GENETIC_FALLBACK)
+check("genetic relative clause removed but patient result retained",
+      clean_genetic("Patient's brother has a BRCA2 mutation; patient germline panel was negative."),
+      "patient germline panel was negative.")
+check("genetic pending STRATA removed",
+      clean_genetic("STRATA pending."), GENETIC_FALLBACK)
+check("genetic ordered germline panel removed",
+      clean_genetic("Germline panel ordered."), GENETIC_FALLBACK)
+check("genetic sent Invitae panel removed",
+      clean_genetic("Invitae 126-gene panel sent."), GENETIC_FALLBACK)
+check("genetic in-process FoundationOne removed",
+      clean_genetic("FoundationOne testing is in process."), GENETIC_FALLBACK)
+check("genetic completed MammaPrint retained",
+      clean_genetic("MammaPrint high risk (-0.622)."), "MammaPrint high risk (-0.622).")
+check("genetic completed Oncotype retained",
+      clean_genetic("Oncotype DX recurrence score 23."), "Oncotype DX recurrence score 23.")
+check("genetic completed germline negative retained",
+      clean_genetic("Germline panel was negative for pathogenic variants."),
+      "Germline panel was negative for pathogenic variants.")
+check("genetic completed pathogenic panel retained",
+      clean_genetic("Invitae panel identified a pathogenic ATM variant."),
+      "Invitae panel identified a pathogenic ATM variant.")
+check("genetic Foundation mutation retained",
+      clean_genetic("FoundationOne detected KRAS G12D and TP53 mutations."),
+      "FoundationOne detected KRAS G12D and TP53 mutations.")
+check("genetic STRATA mutation retained",
+      clean_genetic("STRATA showed a KRAS G12V mutation."),
+      "STRATA showed a KRAS G12V mutation.")
+check("genetic UCSF500 VUS retained",
+      clean_genetic("UCSF500 found a VUS in RECQL4."),
+      "UCSF500 found a VUS in RECQL4.")
+check("genetic Tempus MSI TMB retained",
+      clean_genetic("Tempus: MSS, TMB 5 muts/Mb."), "Tempus: MSS, TMB 5 muts/Mb.")
+check("genetic Guardant ctDNA retained",
+      clean_genetic("Guardant ctDNA detected PIK3CA H1047R."),
+      "Guardant ctDNA detected PIK3CA H1047R.")
+check("genetic MMR IHC retained",
+      clean_genetic("MMR proteins intact by IHC."), "MMR proteins intact by IHC.")
+check("genetic PD-L1 IHC retained",
+      clean_genetic("PD-L1 CPS 10 by IHC."), "PD-L1 CPS 10 by IHC.")
+check("genetic Foundation ERBB2 amplification retained",
+      clean_genetic("FoundationOne: ERBB2 amplification."),
+      "FoundationOne: ERBB2 amplification.")
+check("genetic CA19-9 non-secretor retained",
+      clean_genetic("CA 19-9 non-secretor (marker not useful for tracking)"),
+      "CA 19-9 non-secretor (marker not useful for tracking)")
+check("genetic routine breast receptors removed",
+      clean_genetic("ER 95%, PR 80%, HER2 negative, Ki-67 20%."), GENETIC_FALLBACK)
+check("genetic HER2 FISH removed",
+      clean_genetic("HER2 negative by FISH."), GENETIC_FALLBACK)
+check("genetic pure surgical pathology removed",
+      clean_genetic("Grade 2 IDC with negative margins and 0/8 lymph nodes."), GENETIC_FALLBACK)
+check("genetic mixed completed plus pending keeps completed clause",
+      clean_genetic("MammaPrint high risk; Oncotype DX ordered."), "MammaPrint high risk.")
+check("genetic mixed MMR IHC plus HER2 IHC keeps MMR only",
+      clean_genetic("MMR intact by IHC; HER2 IHC 2+ with FISH non-amplified."),
+      "MMR intact by IHC.")
+check("genetic fallback normalization",
+      clean_genetic("None"), GENETIC_FALLBACK)
+check("genetic completed result after sent remains",
+      clean_genetic("Germline panel was sent and resulted negative."),
+      "Germline panel was sent and resulted negative.")
+
+check("genetic matched breast3 removes sent/pending/pathology",
+      clean_genetic(BV21[3]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+      GENETIC_FALLBACK)
+check("genetic matched breast17 keeps BRCA and removes HER2 FISH",
+      clean_genetic(BV21[17]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+      "BRCA test negative by report (Ambry - not sure whether panel or only BRCA).")
+check("genetic matched breast19 keeps MammaPrint only",
+      clean_genetic(BV21[19]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+      "Mammaprint - low risk IDC of the left breast.")
+check("genetic matched pdac11 removes brother plus pending STRATA",
+      clean_genetic(PV21[11]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+      GENETIC_FALLBACK)
+check("genetic matched pdac13 preserves CA19-9 non-secretor",
+      clean_genetic(PV21[13]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+      PV21[13]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"])
+
+for label, value in (
+    ("breast7 MSH2 completed", BV21[7]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+    ("breast14 Myriad plus MammaPrint", BV21[14]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+    ("breast18 ATM plus MammaPrint", BV21[18]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+    ("pdac8 ATM plus MMR IHC", PV21[8]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+    ("pdac16 Foundation profile", PV21[16]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
+):
+    check(f"genetic clean control unchanged: {label}", clean_genetic(value), value)
 
 # ---- bug10 POST-DISTMET-SITES: REMOVED (fired on negated "No osseous lesions" → hallucination). ----
 

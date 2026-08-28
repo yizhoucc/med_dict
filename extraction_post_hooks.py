@@ -1580,3 +1580,163 @@ def sanitize_response_assessment(
 
     cleaned = cleaned.strip()
     return cleaned, tuple(reasons)
+
+
+GENETIC_RESULTS_FALLBACK = "No genetic testing results in note."
+
+_GENETIC_RESULT_ANCHOR_RE = re.compile(
+    r"\b(?:mammaprint|oncotype(?:\s+dx)?|recurrence\s+score|"
+    r"foundation(?:one)?|strata|ucsf\s*500|tempus|guardant|invitae|ambry|"
+    r"germ\s*line|germline|somatic|molecular\s+profil\w*|gene(?:tic)?\s+panel|"
+    r"sequenc\w*|ngs|ctdna|liquid\s+biopsy|"
+    r"mmr|mismatch\s+repair|msi|mss|microsatellite|tmb|tumou?r\s+mutational|"
+    r"hrd|homologous\s+recombination|pd[\s-]?l1|cps|"
+    r"mutation|mutated|variant|vus|pathogenic|carrier|"
+    r"brca\s*[12]?|atm|palb2|chek2|mlh1|msh2|msh6|pms2|epcam|lynch|"
+    r"kras|k-ras|tp53|p53|pik3ca|braf|ntrk|esr1|egfr|alk|ros1|"
+    r"cdkn2a|cdkn2b|smad4|spink1|rb1|fan[ca-z0-9]+|nf2|axin1|ctc1|"
+    r"ercc4|mc1r|recql4|apc|mtor|nkx2-1|pdgfrb|pik3c2g|tnfaip3|cbl|"
+    r"erbb2\s+(?:amplification|amplified|mutation|variant)|"
+    r"ca\s*19-?9\s+non-?secretor|non-?secretor)\b",
+    re.IGNORECASE,
+)
+
+_GENETIC_PENDING_RE = re.compile(
+    r"\b(?:pending|ordered|sent|submitted|planned|in[\s-]*process|"
+    r"awaiting(?:\s+results?)?|not\s+yet\s+resulted|to\s+be\s+(?:sent|ordered|done)|"
+    r"will\s+be\s+(?:sent|ordered|done))\b",
+    re.IGNORECASE,
+)
+
+_GENETIC_COMPLETED_RE = re.compile(
+    r"\b(?:result(?:ed|s)?|show(?:ed|s)|found|identified|detected|harbou?rs?|"
+    r"positive|negative|pathogenic|benign|likely\s+pathogenic|variant|vus|mutation|"
+    r"carrier|amplified|amplification|intact|deficient|loss\s+of|stable|unstable|"
+    r"high[\s-]*risk|low[\s-]*risk|score\s*[:=]?\s*\d|cps\s*[:=]?\s*\d|"
+    r"tmb\s*[:=]?\s*\d|\d+\s*muts?/?mb|undetermined|no\s+actionable)\b",
+    re.IGNORECASE,
+)
+
+_RELATIVE_RE = re.compile(
+    r"\b(?:mother|father|brother|sister|daughter|son|aunt|uncle|cousin|"
+    r"grandmother|grandfather|relative|family\s+member)\b",
+    re.IGNORECASE,
+)
+
+_PATIENT_SELF_RE = re.compile(
+    r"\b(?:patient(?!['’]s)|she|he|her\s+(?:germline|tumou?r|testing)|"
+    r"his\s+(?:germline|tumou?r|testing))\b",
+    re.IGNORECASE,
+)
+
+_ROUTINE_BREAST_RECEPTOR_RE = re.compile(
+    r"\b(?:er|estrogen\s+receptors?|pr|progesterone\s+receptors?|"
+    r"her\s*-?\s*2|ki\s*-?\s*67)\b",
+    re.IGNORECASE,
+)
+
+_SURGICAL_PATHOLOGY_RE = re.compile(
+    r"\b(?:surgical\s+pathology|outside\s+path|pathology|did\s+not\s+repeat\s+markers|"
+    r"no\s+grade|invasive\s+(?:ductal|lobular|mammary)|"
+    r"ductal\s+carcinoma|lobular\s+carcinoma|dcis|lcis|lymphovascular|lvi|"
+    r"margin(?:s)?|sentinel|micrometasta\w*|extranodal|extracapsular|"
+    r"lymph\s+nodes?|\d+\s*/\s*\d+\s+(?:nodes?|ln)|tumou?r\s+size|"
+    r"grade\s*[1-3]|necrosis|p[ty]?t\d|p[ny]?n\d)\b",
+    re.IGNORECASE,
+)
+
+
+def _split_genetic_result_clauses(value):
+    """Split only on strong independent-clause boundaries, not commas or decimals."""
+    text = str(value or "").strip()
+    text = re.sub(r"\s*[•▪]\s*", "\n", text)
+    clauses = re.split(
+        r"\s*(?:;|\n+)\s*|(?<=[.!?])\s+(?=(?:[A-Z+\[]|\d{1,2}/\d{1,2}/\d{2,4}))",
+        text,
+    )
+    return [clause.strip() for clause in clauses if clause.strip()]
+
+
+def sanitize_genetic_testing_results(value):
+    """Remove only high-confidence non-results from ``genetic_testing_results``.
+
+    The helper deliberately does not search the source note or add missing results.  It removes
+    independently delimited family-member results, unfinished tests, routine breast receptor
+    pathology, and pure surgical pathology while preserving completed molecular assays.  In
+    particular, MMR/PD-L1 IHC, molecular ERBB2 amplification, and CA 19-9 non-secretor status are
+    valid results and must survive.
+
+    Returns ``(cleaned_value, reasons)``.
+    """
+    original = str(value or "").strip()
+    normalized_empty = original.lower().rstrip(". ")
+    if normalized_empty in (
+        "", "none", "n/a", "na", "not available", "not mentioned",
+        "no genetic testing results in note",
+    ):
+        if original == GENETIC_RESULTS_FALLBACK:
+            return original, ()
+        return GENETIC_RESULTS_FALLBACK, ("normalized empty fallback",)
+
+    kept = []
+    reasons = []
+    changed = False
+    for clause in _split_genetic_result_clauses(original):
+        bare = clause.strip().rstrip(".; ")
+        if not bare:
+            continue
+        has_genetic_anchor = bool(_GENETIC_RESULT_ANCHOR_RE.search(bare))
+
+        # A family member's result is not the patient's result.  If the same clause explicitly
+        # contains a patient result too, preserve it rather than risk deleting valid information;
+        # the extraction prompt must separate such mixed prose into independent clauses.
+        if _RELATIVE_RE.search(bare) and has_genetic_anchor \
+                and not _PATIENT_SELF_RE.search(bare):
+            reasons.append("removed family-member result")
+            changed = True
+            continue
+
+        # Sent/ordered/pending assays are plans, not completed results.  A clause that also contains
+        # an explicit completed-result marker is retained conservatively.
+        if _GENETIC_PENDING_RE.search(bare) and not _GENETIC_COMPLETED_RE.search(bare):
+            reasons.append("removed pending or ordered test")
+            changed = True
+            continue
+
+        valid_ihc_context = bool(re.search(
+            r"\b(?:mmr|mismatch\s+repair|mlh1|msh2|msh6|pms2|pd[\s-]?l1|cps)\b",
+            bare,
+            re.IGNORECASE,
+        ))
+        valid_erbb2_context = bool(re.search(
+            r"\b(?:foundation(?:one)?|strata|ucsf\s*500|tempus|guardant|ngs|"
+            r"sequenc\w*|molecular\s+profil\w*)\b[^.;]*\berbb2\b|"
+            r"\berbb2\b[^.;]*\b(?:amplification|amplified|mutation|variant)\b",
+            bare,
+            re.IGNORECASE,
+        ))
+        routine_receptor = bool(_ROUTINE_BREAST_RECEPTOR_RE.search(bare))
+        if routine_receptor and not valid_ihc_context and not valid_erbb2_context:
+            reasons.append("removed routine ER/PR/HER2/Ki-67 pathology")
+            changed = True
+            continue
+
+        if _SURGICAL_PATHOLOGY_RE.search(bare) and not has_genetic_anchor:
+            reasons.append("removed pure surgical pathology")
+            changed = True
+            continue
+
+        # Exact duplicate clauses are harmless but common in model output; normalize them only when
+        # another cleanup has already made the value change.
+        if bare.lower() not in {item.lower() for item in kept}:
+            kept.append(bare)
+        else:
+            reasons.append("removed duplicate result")
+            changed = True
+
+    if not kept:
+        return GENETIC_RESULTS_FALLBACK, tuple(dict.fromkeys(reasons))
+    if not changed:
+        return original, ()
+    cleaned = "; ".join(kept).rstrip(".; ") + "."
+    return cleaned, tuple(dict.fromkeys(reasons))

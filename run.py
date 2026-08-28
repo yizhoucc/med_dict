@@ -39,6 +39,7 @@ from extraction_post_hooks import (
     regional_node_evidence,
     resolve_current_anticancer_meds,
     sanitize_general_metastasis,
+    sanitize_genetic_testing_results,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -5435,6 +5436,23 @@ def main():
                 print(
                     f"    [POST-MET-FINAL] '{old_met_mf}' → '{new_met_mf}' "
                     f"({'; '.join(reasons_mf)})"
+                )
+
+        # POST-GENETIC-RESULTS-FINAL: final value-only precision pass after all result additions,
+        # including CA 19-9 non-secretor.  It removes family-member results, unfinished tests,
+        # routine breast receptors/HER2 FISH, and pure surgical pathology clause-by-clause without
+        # inventing missing results.  Valid MMR/PD-L1 IHC, molecular ERBB2, and non-secretor status
+        # are explicitly preserved.
+        genetic_final = keypoints.get("Genetic_Testing_Results", {})
+        if isinstance(genetic_final, dict):
+            genetic_before = str(genetic_final.get("genetic_testing_results", "") or "")
+            genetic_after, genetic_reasons = sanitize_genetic_testing_results(genetic_before)
+            if genetic_after != genetic_before:
+                genetic_final["genetic_testing_results"] = genetic_after
+                print(
+                    "    [POST-GENETIC-RESULTS-FINAL] "
+                    f"{'; '.join(genetic_reasons)}: '{genetic_before[:80]}' → "
+                    f"'{genetic_after[:100]}'"
                 )
 
         # Source attribution — find evidence quotes for each extracted field
