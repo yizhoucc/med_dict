@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from extraction_post_hooks import (
+    align_stage_with_confirmed_distant,
     clear_held_anticancer_meds,
     clean_breast_distant,
     compose_general_metastasis,
@@ -26,11 +27,13 @@ from extraction_post_hooks import (
     merge_regional_metastasis,
     normalize_stage_iv,
     reconcile_metastasis_fields,
+    recover_completed_genetic_results,
     regional_node_evidence,
     resolve_current_anticancer_meds,
     sanitize_distant_metastasis_by_site,
     sanitize_general_metastasis,
     sanitize_genetic_testing_results,
+    sanitize_breast_recurrence_receptors,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -588,6 +591,26 @@ check(
     )[0],
     "Anticancer treatment started today; too early to assess its response.",
 )
+check(
+    "response explicit current stable control overrides fabricated progression",
+    sanitize_response_assessment(
+        "Imaging findings raise concern for possible recurrence or progression, but this is not confirmed.",
+        "A historical liver lesion was once considered suspicious for metastasis.",
+        "Metastatic pancreatic adenocarcinoma with continued good disease control on surveillance.",
+        current_meds="",
+    )[0],
+    "Metastatic pancreatic adenocarcinoma with continued good disease control on surveillance.",
+)
+check(
+    "response current progression prevents stable override",
+    sanitize_response_assessment(
+        "Current imaging shows progression.",
+        "",
+        "Previously stable disease, but the current scan shows progression.",
+        current_meds="gemcitabine",
+    )[0],
+    "Current imaging shows progression.",
+)
 
 # ---- bug9 POST-STAGE-PTNM-VERIFY ----
 r=P[15]; check("bug9 pdac15 formal pathology wins → ypT3N2", verify_unique_pathologic_tnm(r["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"],r["note_text"]), "ypT3N2")
@@ -762,6 +785,28 @@ check("suspected-stage guard rejects 'Not Stage IV'",
       has_explicit_m1_evidence("Not Stage IV; no distant disease.","breast"), False)
 check("suspected-stage guard rejects 'No peritoneal carcinomatosis'",
       has_explicit_m1_evidence("No peritoneal carcinomatosis.","breast"), False)
+check("suspected-stage guard rejects biopsy for definitive Stage IV diagnosis",
+      has_explicit_m1_evidence(
+          "Bone lesions are suspicious; biopsy is planned for a definitive Stage IV diagnosis.",
+          "breast",
+      ), False)
+check("suspected-stage guard rejects biopsy to confirm Stage IV",
+      has_explicit_m1_evidence(
+          "We will biopsy the iliac lesion to confirm Stage IV disease.",
+          "breast",
+      ), False)
+
+check(
+    "stage confirmed distant updates historical pTN stage",
+    align_stage_with_confirmed_distant("pT2N2", "Yes, to liver", "pdac"),
+    ("Originally pT2N2; now Stage IV (metastatic)",
+     "confirmed distant disease updates historical/nonmetastatic stage"),
+)
+check(
+    "stage suspected distant does not upgrade",
+    align_stage_with_confirmed_distant("Stage III", "Not sure/Suspected, to bone", "breast"),
+    ("Stage III", None),
+)
 
 # ---- Distant field strips breast-regional sites but retains true M1 sites ----
 check("Distant regional-only breast nodes → No",
@@ -1146,6 +1191,48 @@ check("genetic matched pdac11 removes brother plus pending STRATA",
 check("genetic matched pdac13 preserves CA19-9 non-secretor",
       clean_genetic(PV21[13]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
       PV21[13]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"])
+
+check(
+    "genetic source recovery adds completed MMR to empty result",
+    recover_completed_genetic_results(
+        "No genetic testing results in note.",
+        "Fine needle biopsy confirmed adenocarcinoma. MMR proteins all intact by IHC.",
+    )[0],
+    "MMR proteins intact by IHC (pMMR).",
+)
+check(
+    "genetic source recovery recognizes four intact proteins",
+    recover_completed_genetic_results(
+        "No genetic testing results in note.",
+        "MLH1 expression: Present. PMS2 expression: Present. MSH2 expression: Present. MSH6 expression: Present.",
+    )[0],
+    "MMR proteins intact by IHC (pMMR).",
+)
+check(
+    "genetic source recovery ignores pending MMR",
+    recover_completed_genetic_results(
+        "No genetic testing results in note.",
+        "MMR by IHC pending.",
+    )[0],
+    "No genetic testing results in note.",
+)
+
+check(
+    "recurrent HR-only disease does not borrow historical PR HER2",
+    sanitize_breast_recurrence_receptors(
+        "ER+/PR-/HER2- grade 1 IDC (initial diagnosis); ER+/PR-/HER2- (current recurrent disease)",
+        "Locally recurrent, unresectable, strongly hormone-receptor positive breast cancer.",
+    )[0],
+    "ER+/PR-/HER2- grade 1 IDC (initial diagnosis); HR+ (PR/HER2 not specified; current recurrent disease)",
+)
+check(
+    "recurrent explicit receptor profile remains unchanged",
+    sanitize_breast_recurrence_receptors(
+        "Original ER+/PR-/HER2- IDC; current recurrent disease ER+/PR+/HER2-",
+        "Current recurrent biopsy: ER positive, PR positive, HER2 negative.",
+    )[0],
+    "Original ER+/PR-/HER2- IDC; current recurrent disease ER+/PR+/HER2-",
+)
 
 for label, value in (
     ("breast7 MSH2 completed", BV21[7]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),

@@ -152,8 +152,38 @@ def has_explicit_m1_evidence(text, cancer_type):
             context,
         ):
             continue
+        # A proposed biopsy/work-up "for a definitive Stage IV diagnosis" means the M1
+        # diagnosis is still conditional.  The bare words "Stage IV" must not turn that
+        # sentence into affirmative metastatic evidence.
+        if re.search(
+            r"\b(?:biopsy|work[\s-]?up|staging|imaging)\b[^.;]{0,90}"
+            r"\b(?:for|to)\b[^.;]{0,20}\b(?:confirm\w*|establish\w*|definitive)\b"
+            r"[^.;]{0,40}\bstage\s*(?:iv|4)\b|"
+            r"\bstage\s*(?:iv|4)\b[^.;]{0,70}"
+            r"\b(?:pending|awaiting|confirmation|confirmatory|biopsy)\b",
+            context,
+        ):
+            continue
         return True
     return False
+
+
+def align_stage_with_confirmed_distant(stage, distant, cancer_type):
+    """Make a non-IV stage longitudinally consistent with confirmed current M1 disease."""
+    stage = str(stage or "").strip()
+    if not is_confirmed_distant_value(distant, cancer_type):
+        return stage, None
+    if re.search(r"\bstage\s*(?:iv|4)\b|\bmetastatic\b", stage, re.IGNORECASE):
+        return stage, None
+    if not stage or stage.lower() in {
+        "not staged", "not staged in note", "not mentioned", "not available",
+        "not specified", "unknown",
+    }:
+        return "Stage IV (metastatic)", "confirmed distant disease fills Stage IV"
+    return (
+        f"Originally {stage}; now Stage IV (metastatic)",
+        "confirmed distant disease updates historical/nonmetastatic stage",
+    )
 
 
 def met_status(value):
@@ -1693,6 +1723,40 @@ def sanitize_response_assessment(
     )
     source = f"{current_response_source}\n{note_text or ''}"
 
+    # The current A/P is the highest-priority response statement.  Do not let an old
+    # suspicious lesion elsewhere in the note turn an explicit stable/good-control
+    # assessment into progression (notably in surveillance notes).
+    if _has_affirmative_progression(cleaned):
+        stable_sentence = _first_supported_sentence(
+            (assessment_and_plan,),
+            lambda sentence: bool(
+                re.search(
+                    r"\b(?:continued\s+good\s+disease\s+control|good\s+disease\s+control|"
+                    r"stable\s+disease|favorable\s+treatment\s+response|"
+                    r"radiographic\s+evidence\s+of\s+response|responding\s+to\b|"
+                    r"no\s+evidence\s+of\s+(?:recurrence|metastatic\s+disease))\b",
+                    sentence,
+                    re.IGNORECASE,
+                )
+                and not re.search(
+                    r"\b(?:progress(?:ed|ion|ing)?|worsen\w*|declin\w*|new\s+metasta\w*)\b",
+                    sentence,
+                    re.IGNORECASE,
+                )
+            ),
+        )
+        current_ap_has_progression = bool(
+            re.search(
+                r"\b(?:progress(?:ed|ion|ing)?|worsen\w*|clinical[/ ]?symptomatic\s+decline|"
+                r"new\s+metasta\w*)\b",
+                assessment_and_plan or "",
+                re.IGNORECASE,
+            )
+        )
+        if stable_sentence and not current_ap_has_progression:
+            cleaned = stable_sentence
+            reasons.append("current A/P stable-control statement overrides unsupported progression")
+
     claims_current_treatment = bool(
         re.search(
             r"\b(?:currently\s+)?(?:on|receiving|undergoing)\s+"
@@ -1831,6 +1895,79 @@ def sanitize_response_assessment(
 
     cleaned = cleaned.strip()
     return cleaned, tuple(reasons)
+
+
+def recover_completed_genetic_results(value, note_text):
+    """Add only unmistakably completed MMR/MSI results omitted by generation."""
+    cleaned, reasons = sanitize_genetic_testing_results(value)
+    note = str(note_text or "")
+    recovered = []
+
+    mmr_intact = bool(re.search(
+        r"\bMMR\s+proteins?\s+(?:all\s+)?intact\b(?:\s+by\s+IHC)?",
+        note,
+        re.IGNORECASE,
+    ))
+    if not mmr_intact:
+        mmr_intact = all(re.search(
+            rf"\b{gene}\s+expression\s*:\s*Present\b", note, re.IGNORECASE
+        ) for gene in ("MLH1", "PMS2", "MSH2", "MSH6"))
+    if mmr_intact and not re.search(
+        r"\b(?:MMR|mismatch\s+repair|pMMR|MLH1|PMS2|MSH2|MSH6)\b",
+        cleaned,
+        re.IGNORECASE,
+    ):
+        recovered.append("MMR proteins intact by IHC (pMMR)")
+
+    if not recovered:
+        return cleaned, reasons
+    existing = "" if cleaned == GENETIC_RESULTS_FALLBACK else cleaned.rstrip(". ")
+    merged = "; ".join(part for part in (existing, *recovered) if part).rstrip(". ") + "."
+    return merged, tuple(dict.fromkeys((*reasons, "recovered completed MMR result from source")))
+
+
+def sanitize_breast_recurrence_receptors(value, assessment_and_plan):
+    """Prevent historical PR/HER2 values from being copied onto an HR-only recurrence."""
+    original = str(value or "").strip()
+    ap = str(assessment_and_plan or "")
+    if not original or not re.search(
+        r"\b(?:local(?:ly)?\s+)?recurr\w*\b[^.;]{0,120}\b(?:strongly\s+)?"
+        r"hormone[\s-]*receptor\s+positive\b|"
+        r"\b(?:strongly\s+)?hormone[\s-]*receptor\s+positive\b[^.;]{0,120}\brecurr\w*\b",
+        ap,
+        re.IGNORECASE,
+    ):
+        return original, ()
+
+    # If the current recurrence sentence itself gives PR or HER2, retain the generated profile.
+    current_sentences = [
+        sentence for sentence in _clinical_sentences(ap)
+        if re.search(r"\brecurr\w*\b", sentence, re.IGNORECASE)
+    ]
+    current_context = " ".join(current_sentences)
+    if re.search(
+        r"\b(?:PR|progesterone\s+receptor|HER\s*-?\s*2)\b\s*"
+        r"(?:[:=]?\s*(?:positive|negative|pos\b|neg\b|[+-]|\d{1,3}\s*%))",
+        current_context,
+        re.IGNORECASE,
+    ):
+        return original, ()
+
+    clauses = [part.strip() for part in original.split(";")]
+    changed = False
+    for index, clause in enumerate(clauses):
+        if re.search(r"\b(?:current|recurrent|recurrence)\b", clause, re.IGNORECASE) and re.search(
+            r"\b(?:ER|PR|HER\s*-?\s*2)\b", clause, re.IGNORECASE
+        ):
+            label = "current recurrent disease"
+            match = re.search(r"\(([^)]*\b(?:current|recurrent|recurrence)\b[^)]*)\)", clause, re.IGNORECASE)
+            if match:
+                label = match.group(1)
+            clauses[index] = f"HR+ (PR/HER2 not specified; {label})"
+            changed = True
+    if not changed:
+        return original, ()
+    return "; ".join(clauses), ("removed unsupported recurrent-lesion PR/HER2 borrowed from history",)
 
 
 GENETIC_RESULTS_FALLBACK = "No genetic testing results in note."

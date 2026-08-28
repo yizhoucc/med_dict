@@ -27,6 +27,7 @@ import pandas as pd
 from transformers import BitsAndBytesConfig
 
 from extraction_post_hooks import (
+    align_stage_with_confirmed_distant,
     clear_held_anticancer_meds,
     clean_breast_distant,
     has_affirmative_m1_site,
@@ -36,11 +37,13 @@ from extraction_post_hooks import (
     merge_regional_metastasis,
     normalize_stage_iv,
     reconcile_metastasis_fields,
+    recover_completed_genetic_results,
     regional_node_evidence,
     resolve_current_anticancer_meds,
     sanitize_distant_metastasis_by_site,
     sanitize_general_metastasis,
     sanitize_genetic_testing_results,
+    sanitize_breast_recurrence_receptors,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
 )
@@ -4130,8 +4133,8 @@ def main():
                 only_suspected = bool(re.search(r'suspicious for|suggestive of|too small to (?:evaluate|characterize)|cannot exclude|concerning for|early evidence of (?:disease )?recurrence', hay_ss)) \
                     and not re.search(r'\bprogression\b|\bprogressed\b|definite (?:progression|increase)|biopsy[\s-]*(?:proven|confirmed)', hay_ss)
                 if only_suspected:
-                    resp_ss["response_assessment"] = ("Imaging shows suspicious findings (e.g., new/enlarging lesion, rising tumor marker) "
-                                                      "concerning for early recurrence; not yet confirmed — being monitored with short-interval repeat imaging.")
+                    resp_ss["response_assessment"] = ("Imaging findings raise concern for possible recurrence or progression, "
+                                                      "but this is not confirmed.")
                     print(f"    [POST-RESPONSE-SUSPECTED-SOFTEN] softened unconfirmed progression → hedged")
 
         # POST-FINDINGS-PURITY: Clinical_Findings = OBJECTIVE findings (path/imaging/exam), NOT the plan
@@ -5417,6 +5420,34 @@ def main():
                         cancer_final["Stage_of_Cancer"] = cleaned_f
                         print(f"    [POST-STAGE-FINAL] Stage III but Distant Met=Yes: '{stage_final}' → '{cleaned_f}'")
 
+            # Case 3: the dedicated Distant field has confirmed current M1 disease, but the
+            # stage still contains only an earlier/local pathologic stage. Preserve that history
+            # while adding the current Stage IV state.
+            latest_stage, latest_stage_reason = align_stage_with_confirmed_distant(
+                cancer_final.get("Stage_of_Cancer", ""),
+                dist_final,
+                cancer_type,
+            )
+            if latest_stage_reason and latest_stage != cancer_final.get("Stage_of_Cancer", ""):
+                old_stage_latest = cancer_final.get("Stage_of_Cancer", "")
+                cancer_final["Stage_of_Cancer"] = latest_stage
+                print(f"    [POST-STAGE-FINAL] {latest_stage_reason}: '{old_stage_latest}' → '{latest_stage}'")
+
+        # POST-TYPE-RECURRENCE-RECEPTORS: an HR-only recurrent-disease statement cannot borrow
+        # PR/HER2 values from the historical primary. Conservative deletion is safer than guessing.
+        cancer_rr = keypoints.get("Cancer_Diagnosis", {})
+        if cancer_type == "breast" and isinstance(cancer_rr, dict):
+            old_type_rr = str(cancer_rr.get("Type_of_Cancer", "") or "")
+            new_type_rr, reasons_rr = sanitize_breast_recurrence_receptors(
+                old_type_rr, assessment_and_plan
+            )
+            if new_type_rr != old_type_rr:
+                cancer_rr["Type_of_Cancer"] = new_type_rr
+                print(
+                    f"    [POST-TYPE-RECURRENCE-RECEPTORS] '{old_type_rr}' → '{new_type_rr}' "
+                    f"({'; '.join(reasons_rr)})"
+                )
+
         # POST-MET-REGIONAL-NODE: conservatively append only high-confidence regional disease.
         # Accepted evidence is limited to current extracted p/ypN1-3 (including standalone pN/ypN)
         # or a locally scoped positive node count/biopsy for this cancer. Ambiguous cN/imaging-only
@@ -5469,7 +5500,9 @@ def main():
         genetic_final = keypoints.get("Genetic_Testing_Results", {})
         if isinstance(genetic_final, dict):
             genetic_before = str(genetic_final.get("genetic_testing_results", "") or "")
-            genetic_after, genetic_reasons = sanitize_genetic_testing_results(genetic_before)
+            genetic_after, genetic_reasons = recover_completed_genetic_results(
+                genetic_before, note_text
+            )
             if genetic_after != genetic_before:
                 genetic_final["genetic_testing_results"] = genetic_after
                 print(
