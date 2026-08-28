@@ -53,9 +53,9 @@ Cancer_Diagnosis: |
   - If the Assessment/Plan states a stage, extract it — do NOT write "Not mentioned in note".
   - Pancreatic cancer staging considerations:
     - Resectable vs borderline resectable vs locally advanced vs metastatic is a key classification
-    - "Locally advanced" typically means Stage III (unresectable but no distant mets)
+    - "Locally advanced" is a resectability/extent description, NOT automatically an AJCC Stage III label. Preserve it as "Locally advanced" or "Locally advanced (unresectable)" when supported. Write "Stage III" only if the note explicitly states Stage III.
     - Vascular involvement (SMA, SMV, celiac axis, portal vein) determines resectability
-    - If tumor involves major vessels and is described as "unresectable" or "locally advanced", note this
+    - If tumor involves major vessels and is described as "unresectable" or "locally advanced", record that descriptive status without inventing a numeric stage.
   - RESECTED METASTASIS + NED: If a patient had prior metastasis that was surgically resected and current imaging shows NO evidence of disease (NED), do NOT write "now metastatic (Stage IV)". Instead write the CURRENT status: e.g., "Originally Stage IB, had pulmonary metastasis (resected 2017), currently no evidence of disease". The staging should reflect the CURRENT clinical reality.
   - CRITICAL — DO NOT FABRICATE STAGE NUMBERS:
     * Only write "Stage IA", "Stage IB", "Stage IIA", "Stage IIB", "Stage III", "Stage IV" if the note EXPLICITLY uses that exact stage designation.
@@ -70,8 +70,8 @@ Cancer_Diagnosis: |
   {
   "Type_of_Cancer": "Specific cancer type with histologic subtype and grade when available. e.g., 'Poorly differentiated pancreatic ductal adenocarcinoma'",
   "Stage_of_Cancer": "AJCC stage, resectability status, or original + current if recurred/progressed. e.g., 'Stage IIB (borderline resectable)' or 'Stage IV (metastatic to liver)'",
-  "Distant Metastasis": "if there is distant metastasis (met). Yes, to where; No; or Not sure. Common PDAC met sites: liver, peritoneum, lung. Only list confirmed malignant sites.",
-  "Metastasis": "if there is met, Yes (to where), No, or Not sure. IMPORTANT: Verify biopsy results when available."
+  "Distant Metastasis": "DISTANT (M1) disease only. Answer 'Yes, to [confirmed distant site(s)]', 'No', or 'Not sure/Suspected, to [site(s)]'. Common PDAC distant sites include liver, peritoneum/omentum, lung, and nonregional nodes. Regional nodes and direct contiguous invasion/abutment/encasement of stomach, duodenum, spleen, adrenal, kidney, or vessels are NOT distant metastases. Preserve certainty separately for every site: suspicious/concerning/indeterminate/pending-biopsy sites must remain 'Not sure' or 'Suspected', never 'Yes'. Do not include benign/negative/reactive findings or another primary cancer's spread.",
+  "Metastasis": "COMPREHENSIVE spread status: include regional nodal involvement PLUS distant (M1) disease. Direct contiguous invasion/abutment/encasement of adjacent organs or vessels is local extension, not metastasis. Treat regional nodes as confirmed only when pathology, a positive node count, pN/ypN1-3, or explicit malignant nodal disease supports them; cN1-3 or suspicious/concerning nodes remain clinically suspected unless pathology confirms them. Preserve certainty by site: for example, 'Yes — confirmed regional nodes; distant disease uncertain — suspicious liver lesion pending biopsy'. Copy distant sites with the SAME certainty used in 'Distant Metastasis'; this field must never make a distant site more certain than the Distant field. Exclude N0/NX, negative/benign/reactive nodes, conditional statements, and another cancer's spread."
   }
 
 Lab_Results: |

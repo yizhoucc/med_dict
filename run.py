@@ -26,6 +26,19 @@ import pandas as pd
 
 from transformers import BitsAndBytesConfig
 
+from extraction_post_hooks import (
+    clean_breast_distant,
+    has_affirmative_m1_site,
+    has_explicit_m1_evidence,
+    is_confirmed_distant_value,
+    locally_advanced_stage,
+    merge_regional_metastasis,
+    normalize_stage_iv,
+    reconcile_metastasis_fields,
+    regional_node_evidence,
+    verify_unique_pathologic_tnm,
+)
+
 
 def post_fix_letter(letter):
     """Apply POST letter fixes: voice, dose gaps, medication test. Returns (fixed_letter, changed)."""
@@ -2818,6 +2831,9 @@ def main():
                 keypoints["Advance_care_planning"] = {"Advance care": ". ".join(patches) + "."}
                 print(f"    [POST-ADV] patched from full note: {patches}")
 
+        # Shared M1 and regional-node predicates live in extraction_post_hooks.py so production and
+        # the CPU regression suite execute the same logic.
+
         # POST-STAGE: Cross-validate Stage vs Metastasis [B49]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict):
@@ -2837,27 +2853,14 @@ def main():
                     print(f"    [POST-STAGE] contradiction fixed: '{stage}' → '{cleaned}'")
 
             # POST-STAGE-DISTMET: Stage IV but Distant Metastasis explicitly says "No" [v28]
-            # If extraction says Stage IV but also says Distant Met = No, this is a contradiction.
-            # Downgrade Stage IV to remove "metastatic" designation.
-            if stage_says_iv and dist_met_says_no:
-                # Check if Metastasis field only has regional sites
-                met_lower = met.lower() if met else ""
-                REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",
-                                  "infraclavicular", "internal mammary", "chest wall",
-                                  "ipsilateral"]
-                DISTANT_SITES = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
-                                 "ovary", "skin", "contralateral", "cervical", "distant",
-                                 "hepatic", "pulmonary", "osseous", "cerebral"]
-                has_distant = any(ds in met_lower for ds in DISTANT_SITES) if met_lower else False
-                if not has_distant:
-                    # Downgrade: replace Stage IV with Stage III or remove metastatic
-                    cleaned = re.sub(r'(?i)\bStage\s*IV\s*\(?\s*metastatic\s*\)?', 'Stage III', stage)
-                    cleaned = re.sub(r'(?i)\bmetastatic\s*\(?\s*Stage\s*IV\s*\)?', 'Stage III', cleaned)
-                    cleaned = re.sub(r'(?i)\bStage\s*IV\b', 'Stage III', cleaned)
-                    cleaned = cleaned.strip().rstrip(',').strip()
-                    if cleaned and cleaned != stage:
-                        cancer["Stage_of_Cancer"] = cleaned
-                        print(f"    [POST-STAGE-DISTMET] Stage IV but Distant Met=No: '{stage}' → '{cleaned}'")
+            # Remove the unsupported Stage-IV claim without inventing a Stage-III label.
+            if stage_says_iv:
+                normalized_stage, stage_reason = normalize_stage_iv(
+                    stage, dist_met, assessment_and_plan or "", cancer_type
+                )
+                if stage_reason:
+                    cancer["Stage_of_Cancer"] = normalized_stage
+                    print(f"    [POST-STAGE-DISTMET] {stage_reason}: '{stage}' → '{normalized_stage}'")
 
             # POST-STAGE-REGIONAL: Stage IV with only regional LN metastasis [v16] [breast-only]
             # Axillary, sentinel, supraclavicular, infraclavicular, internal mammary LN
@@ -2869,11 +2872,8 @@ def main():
                 REGIONAL_SITES = ["axillary", "axilla", "sentinel", "supraclavicular",
                                   "infraclavicular", "internal mammary", "chest wall",
                                   "ipsilateral"]
-                DISTANT_SITES = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
-                                 "ovary", "skin", "contralateral", "cervical", "distant",
-                                 "hepatic", "pulmonary", "osseous", "cerebral"]
                 has_regional = any(rs in met_lower for rs in REGIONAL_SITES)
-                has_distant = any(ds in met_lower for ds in DISTANT_SITES)
+                has_distant = has_affirmative_m1_site(met_lower, cancer_type)
                 # Also check if note explicitly says "no distant metastasis"
                 note_lower_stage = note_text.lower()
                 note_no_distant = bool(re.search(
@@ -2911,7 +2911,10 @@ def main():
                     # inference (a PL strength over the baseline), NOT a note-quote fabrication.
                     # Don't strip it, and don't substitute the original local pTN into the
                     # "now metastatic" slot (that produced nonsense like "metastatic (pT2N2)").
-                    value_is_metastatic = bool(re.search(r'metasta', stage_sv, re.IGNORECASE))
+                    value_is_metastatic = bool(
+                        re.search(r'metasta', stage_sv, re.IGNORECASE)
+                        or re.search(r'suspected\s+stage\s*iv', stage_sv, re.IGNORECASE)
+                    )
                     for sn in stage_numbers:
                         if sn.upper().startswith("IV") and value_is_metastatic:
                             continue
@@ -3018,27 +3021,11 @@ def main():
             stage_empty = not stage_lower or stage_lower in ("not mentioned", "not mentioned in note",
                                                               "not available", "not available (redacted)", "")
             if stage_empty:
-                note_lower_s = note_text.lower() if note_text else ""
-
-                # STEP 1: Check if metastatic disease → Stage IV (highest priority)
+                # STEP 1: Check if CONFIRMED DISTANT disease → Stage IV (highest priority).
+                # General Metastasis=Yes may mean regional nodes only and is not an M1 signal.
                 dist_met = str(cancer.get("Distant Metastasis", "") or "").lower()
-                met_field = str(cancer.get("Metastasis", "") or "").lower()
-                # Check Distant Met field first (most reliable)
-                has_distant_met = "yes" in dist_met or "yes" in met_field
-                # If Distant Met explicitly says No/None, do NOT use note text to override
-                dist_met_is_no = any(neg in dist_met for neg in ["no", "none", "negative"])
-                is_metastatic = has_distant_met
-                if not has_distant_met and not dist_met_is_no:
-                    # Only check note if Distant Met is empty/unspecified
-                    note_met_match = re.search(r'(?<!micro)metastatic|widely metastatic|metastases|stage\s*iv|stage\s*4',
-                                               note_lower_s)
-                    if note_met_match:
-                        met_ctx = note_lower_s[max(0, note_met_match.start()-20):note_met_match.end()+20]
-                        if any(excl in met_ctx for excl in ['micrometa', 'biopsy', 'originally', 'no evidence',
-                                                             'negative for', 'without', 'no ', 'no definite',
-                                                             'rule out', 'r/o', 'unlikely', 'not consistent']):
-                            note_met_match = None
-                    is_metastatic = note_met_match is not None
+                is_metastatic = (is_confirmed_distant_value(dist_met, cancer_type)
+                                 or has_explicit_m1_evidence(assessment_and_plan or "", cancer_type))
 
                 if is_metastatic:
                     cancer["Stage_of_Cancer"] = "Stage IV (metastatic)"
@@ -3074,27 +3061,19 @@ def main():
                         print(f"    [POST-STAGE-CTNM] filled empty stage from TNM in note: '{tnm_ct}{qual_ct}'")
                         break
 
-        # POST-STAGE-PTNM-VERIFY: a pTNM/ypTNM in the stage field must match the pathology TNM the
-        # note actually states. The model occasionally transposes digits ("ypT 3N2" for a note-stated
-        # "pT2N3"). When the assessment/note states an explicit p/yp-TNM that differs, transcribe the
-        # note's verbatim. Non-breast only (breast has its own pTN→Stage translator). [2026-06-06, bug9, pdac15]
+        # POST-STAGE-PTNM-VERIFY: a pTNM/ypTNM in the stage field must match the formal pathology TNM.
+        # Prefer an AJCC/pathology-table value in the full note over a shorthand A/P value: summaries
+        # can contain transcription errors (pdac15 says pT2N3 in the A/P, while the signed pathology
+        # states AJCC ypT3N2). Non-breast only (breast has its own pTN→Stage translator).
         cancer_pv = keypoints.get("Cancer_Diagnosis", {})
         if cancer_type != "breast" and isinstance(cancer_pv, dict):
             stage_pv = str(cancer_pv.get("Stage_of_Cancer", "") or "")
-            val_tnm = re.search(r'(?:yp|p|c)?T\s*\d[a-d]?\s*N\s*\d[a-c]?', stage_pv, re.IGNORECASE)
+            val_tnm = re.search(r'(?:yp|p)T\s*\d[a-d]?\s*N\s*\d[a-c]?', stage_pv, re.IGNORECASE)
             if val_tnm:
-                src_pv = (assessment_and_plan or "") + " " + (note_text or "")
-                note_tnm = re.search(r'\b(yp|p)T(\d)([a-d]?)\s*,?\s*N(\d)([a-c]?)', src_pv, re.IGNORECASE)
-                if note_tnm:
-                    note_str = (f"{(note_tnm.group(1) or '').lower()}T{note_tnm.group(2)}"
-                                f"{note_tnm.group(3) or ''}N{note_tnm.group(4)}{note_tnm.group(5) or ''}")
-                    norm = lambda s: re.sub(r'\s', '', s).lower()
-                    if norm(val_tnm.group(0)) != norm(note_str):
-                        old_pv = stage_pv
-                        new_pv = re.sub(r'(?:yp|p|c)?T\s*\d[a-d]?\s*N\s*\d[a-c]?', note_str,
-                                        stage_pv, count=1, flags=re.IGNORECASE)
-                        cancer_pv["Stage_of_Cancer"] = new_pv
-                        print(f"    [POST-STAGE-PTNM-VERIFY] '{old_pv}' → '{new_pv}' (note states {note_str})")
+                new_pv = verify_unique_pathologic_tnm(stage_pv, note_text or "")
+                if new_pv != stage_pv:
+                    cancer_pv["Stage_of_Cancer"] = new_pv
+                    print(f"    [POST-STAGE-PTNM-VERIFY] '{stage_pv}' → '{new_pv}' (unique formal pathology TN)")
 
         # POST-STAGE-PTN-TRANSLATE: If Stage field contains only pTN notation, translate to Stage name [breast-only staging table]
         cancer = keypoints.get("Cancer_Diagnosis", {})
@@ -3273,8 +3252,6 @@ def main():
                     or bool(re.search(tnm_re_nb, ap_low_nb))                 # TNM in A/P
                     or bool(re.search(tnm_re_nb, val_low_nb))               # TNM carried in value
                     or bool(re.search(tnm_re_nb, note_low_nb))             # TNM in note body
-                    or 'locally advanced' in val_low_nb or 'locally-advanced' in val_low_nb  # LAPC/LABC = Stage III
-                    or 'unresectable' in val_low_nb or 'borderline resectable' in val_low_nb
                 )
                 if not supported_nb:
                     old_nb = stage_nb
@@ -3340,12 +3317,14 @@ def main():
             stage_mbc = str(cancer_mbc.get("Stage_of_Cancer", "") or "")
             if not re.search(r'stage\s*iv|metastatic', stage_mbc, re.I):
                 ap_low_mbc = (assessment_and_plan or "").lower()
-                note_low_mbc = (note_text or "").lower()
-                hay_mbc = ap_low_mbc + " \n " + note_low_mbc
-                mbc_sig = re.search(r'de novo mbc|\bmbc\b|metastatic breast cancer|do not consider .{0,20}curable|not curable', hay_mbc)
+                mbc_sig = re.search(
+                    r'de novo mbc|\bmbc\b|metastatic breast cancer|'
+                    r'do not consider .{0,20}curable|not curable',
+                    ap_low_mbc,
+                )
                 dm_mbc = str(cancer_mbc.get("Distant Metastasis", "") or "").lower()
-                distant_present = ('yes' in dm_mbc) or ('cervical' in hay_mbc and 'metasta' in hay_mbc) \
-                    or bool(re.search(r'metastasi[sz]ed to|distant metasta', hay_mbc))
+                distant_present = (is_confirmed_distant_value(dm_mbc, cancer_type)
+                                   or has_explicit_m1_evidence(ap_low_mbc, cancer_type))
                 if mbc_sig and distant_present:
                     old_mbc = stage_mbc
                     # hedge when the note frames the MBC as presumptive / pending biopsy confirmation
@@ -3353,15 +3332,14 @@ def main():
                     # workup "not yet complete") — a confirmed Stage IV would over-call it.
                     hedge_mbc = bool(re.search(
                         r'if we confirm|presumptiv|presumed|to prove this|workup is not|not yet complete'
-                        r'|if (?:she|he|the patient) (?:does )?(?:have|has)', hay_mbc))
+                        r'|if (?:she|he|the patient) (?:does )?(?:have|has)', ap_low_mbc))
                     cancer_mbc["Stage_of_Cancer"] = ("Suspected Stage IV (de novo MBC, pending confirmation)"
                                                      if hedge_mbc else "Stage IV (metastatic)")
                     print(f"    [POST-STAGE-MBC] de novo/explicit MBC + distant → '{cancer_mbc['Stage_of_Cancer']}' (was '{old_mbc}')")
 
-        # POST-STAGE-LOCALLY-ADVANCED: "locally advanced" pancreatic/breast cancer is, by convention,
-        # unresectable Stage III. When the stage field is empty/not-staged but the A/P or note describes
-        # the disease as locally advanced (and it is not metastatic), record Stage III. Runs after
-        # NOBASIS so it isn't stripped. General oncology rule. [2026-06-06, fix#13, pdac1]
+        # POST-STAGE-LOCALLY-ADVANCED: preserve the source's descriptive resectability category without
+        # inventing a numeric AJCC stage. In PDAC, "locally advanced" or vascular encasement does not by
+        # itself authorize "Stage III"; use Stage III only when the note explicitly says it.
         cancer_la = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_la, dict):
             stage_la = str(cancer_la.get("Stage_of_Cancer", "") or "").lower().strip()
@@ -3376,27 +3354,12 @@ def main():
                 # "metastatic" anywhere in the note — "no metastatic disease"/"metastatic workup" in an
                 # unrelated section would otherwise wrongly block the Stage III assignment (pdac1).
                 ap_only_la = (assessment_and_plan or "").lower()
-                is_met_la = ('yes' in dm_la) or bool(re.search(r'stage\s*iv', ap_only_la))
-                # (a) "locally advanced" describing THIS patient — exclude generic population phrasing
-                # ("patients with ... or locally advanced", "hormone-receptor-positive or locally
-                # advanced tumors") which is a treatment-criteria statement, not this patient's stage (b13).
-                patient_la = False
-                for mla in re.finditer(r'locally[- ]advanced', hay_la):
-                    pre_la = hay_la[max(0, mla.start() - 14):mla.start()]
-                    if not re.search(r'\bor\s+$|patients with[^.]*$', pre_la):
-                        patient_la = True
-                        break
-                # (b) vessel encasement/occlusion of a major peri-pancreatic vessel = locally advanced
-                # (unresectable) Stage III for pancreatic cancer (pdac7: "mass encases and occludes the
-                # distal splenic artery"; >180° contact). [round4 #4]
-                vessel_la = (cancer_type != "breast") and bool(re.search(
-                    r'(?:encase|encasement|occlu|abut|>?\s*180)[^.]{0,40}'
-                    r'(?:sma\b|superior mesenteric|celiac|splenic (?:artery|vein)|portal vein|smv\b|hepatic artery|mesenteric)'
-                    r'|(?:sma\b|superior mesenteric|celiac|splenic (?:artery|vein)|portal vein|smv\b|hepatic artery)[^.]{0,40}'
-                    r'(?:encase|encasement|occlu|abut|>\s*180|contact greater than 180)', hay_la))
-                if not is_met_la and (patient_la or vessel_la):
-                    cancer_la["Stage_of_Cancer"] = "Stage III (locally advanced)"
-                    print(f"    [POST-STAGE-LOCALLY-ADVANCED] empty stage + locally advanced/vessel encasement → Stage III")
+                is_met_la = (is_confirmed_distant_value(dm_la, cancer_type)
+                             or has_explicit_m1_evidence(ap_only_la, cancer_type))
+                new_stage_la = locally_advanced_stage(hay_la, cancer_type)
+                if not is_met_la and new_stage_la:
+                    cancer_la["Stage_of_Cancer"] = new_stage_la
+                    print(f"    [POST-STAGE-LOCALLY-ADVANCED] descriptive extent retained → '{new_stage_la}'")
 
         # POST-STAGE-RECURRENCE: If A/P mentions local recurrence but Stage doesn't [iter10]
         # Only for non-metastatic (don't append to Stage IV)
@@ -3424,9 +3387,11 @@ def main():
             goal_val = str(goals.get("goals_of_treatment", "") or "").lower().strip()
             if goal_val == "adjuvant":
                 cancer = keypoints.get("Cancer_Diagnosis", {})
-                met = str(cancer.get("Metastasis", "")).lower() if isinstance(cancer, dict) else ""
+                dist_met = str(cancer.get("Distant Metastasis", "")) if isinstance(cancer, dict) else ""
                 stage = str(cancer.get("Stage_of_Cancer", "")).lower() if isinstance(cancer, dict) else ""
-                is_metastatic = "yes" in met or "stage iv" in stage or "metastatic" in stage
+                confirmed_stage_iv = (bool(re.search(r'stage\s*iv|metastatic', stage))
+                                      and not any(k in stage for k in ("suspect", "possible", "pending")))
+                is_metastatic = is_confirmed_distant_value(dist_met, cancer_type) or confirmed_stage_iv
                 if not is_metastatic:
                     goals["goals_of_treatment"] = "curative"
                     print(f"    [POST-GOALS] adjuvant → curative (non-metastatic)")
@@ -3475,9 +3440,8 @@ def main():
         # POST-DISTMET: Ensure Distant Metastasis field exists [B48]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer, dict) and "Distant Metastasis" not in cancer:
-            met = cancer.get("Metastasis", "")
-            cancer["Distant Metastasis"] = met
-            print(f"    [POST-DISTMET] added Distant Metastasis: '{met}'")
+            cancer["Distant Metastasis"] = ""
+            print(f"    [POST-DISTMET] added empty Distant Metastasis field (general Metastasis is not an M1 proxy)")
 
         # POST-DISTMET-NOMET: If imaging says "no metastatic disease" but LLM extracted "Yes", correct [iter8]
         # ONLY trigger when goals=curative/adjuvant (palliative = likely truly metastatic)
@@ -3517,50 +3481,23 @@ def main():
                 if no_met_evidence:
                     old_dm = cancer.get("Distant Metastasis", "")
                     cancer["Distant Metastasis"] = "No"
-                    if cancer.get("Metastasis"):
-                        cancer["Metastasis"] = "No"
-                    print(f"    [POST-DISTMET-NOMET] A/P says '{no_met_evidence.group(0)}' — corrected: '{old_dm}' → 'No'")
+                    # Do not clear the comprehensive Metastasis field: a negative M1 workup is fully
+                    # compatible with confirmed/suspected regional nodal disease.
+                    print(f"    [POST-DISTMET-NOMET] A/P says '{no_met_evidence.group(0)}' — Distant corrected: '{old_dm}' → 'No'")
 
         # POST-DISTMET-REGIONAL: correct Distant Metastasis if only regional sites [v17] [breast-only]
         cancer = keypoints.get("Cancer_Diagnosis", {})
         if cancer_type == "breast" and isinstance(cancer, dict):
             dist_met = cancer.get("Distant Metastasis", "") or ""
             if dist_met and dist_met.lower() not in ("no", "no.", "none", ""):
-                dist_lower = dist_met.lower()
-                REGIONAL_SITES_DM = ["axillary", "axilla", "sentinel", "supraclavicular",
-                                     "infraclavicular", "internal mammary", "chest wall", "ipsilateral"]
-                DISTANT_SITES_DM = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
-                                    "ovary", "skin", "adrenal", "contralateral",
-                                    "cervical", "distant", "hepatic", "pulmonary",
-                                    "osseous", "cerebral", "sternum", "sternal",
-                                    "spine", "spinal", "rib", "hip", "femur", "pelvi",
-                                    "mediastin", "retroperitoneal", "paraaortic", "para-aortic",
-                                    "mesenteric", "inguinal", "scalene"]
-                has_regional = any(rs in dist_lower for rs in REGIONAL_SITES_DM)
-                has_distant = any(ds in dist_lower for ds in DISTANT_SITES_DM)
-                if has_regional and not has_distant:
-                    cancer["Distant Metastasis"] = "No"
-                    print(f"    [POST-DISTMET-REGIONAL] Corrected Distant Metastasis: regional only → No (was: '{dist_met}')")
+                cleaned_dm = clean_breast_distant(dist_met)
+                if cleaned_dm != dist_met:
+                    cancer["Distant Metastasis"] = cleaned_dm
+                    print(f"    [POST-DISTMET-REGIONAL] '{dist_met}' → '{cleaned_dm}'")
 
-        # POST-DISTMET-SUPPLEMENT: If Distant Met says "Yes" but misses lymph nodes from A/P [iter10]
-        cancer = keypoints.get("Cancer_Diagnosis", {})
-        if isinstance(cancer, dict):
-            dist_met = str(cancer.get("Distant Metastasis", "") or "")
-            if "yes" in dist_met.lower() and "lymph" not in dist_met.lower() and "node" not in dist_met.lower():
-                ap_lower_dm = (assessment_and_plan or "").lower()
-                note_lower_dm = note_text.lower() if note_text else ""
-                # Check if A/P or note mentions lymph node metastasis
-                ln_met = re.search(r'(?:metastatic?\s+(?:to\s+)?(?:.*?)?lymph\s*nodes?|'
-                                   r'lymph\s*node\s+metastas|'
-                                   r'disease\s+in\s+(?:the\s+)?(?:bone\s+and\s+)?lymph\s*nodes?|'
-                                   r'metastatic\s+(?:recurrence|disease)\s+(?:.*?)?(?:lymph|nodes)|'
-                                   r'(?:bone|liver)\s+and\s+lymph\s*nodes?|'
-                                   r'lymph\s*nodes?\s+(?:and|,)\s+(?:bone|liver|lung))',
-                                   ap_lower_dm)
-                if ln_met:
-                    old_dm = dist_met
-                    cancer["Distant Metastasis"] = dist_met.rstrip('.') + " and lymph nodes"
-                    print(f"    [POST-DISTMET-SUPPLEMENT] Added lymph nodes: '{old_dm}' → '{cancer['Distant Metastasis']}'")
+        # POST-DISTMET-SUPPLEMENT was removed: appending an unclassified "lymph nodes" phrase to
+        # Distant Metastasis polluted this M1-only field with regional nodes. Regional disease is
+        # represented only in the comprehensive Metastasis field by POST-MET-REGIONAL-NODE.
 
         # POST-DISTMET-DEFAULT: fill empty Distant Metastasis with "No" when goals=curative [v22]
         cancer = keypoints.get("Cancer_Diagnosis", {})
@@ -3597,14 +3534,13 @@ def main():
                     cancer_pd["Distant Metastasis"] = "Not sure (staging imaging pending)"
                     print(f"    [POST-DISTMET-PENDING] staging imaging pending → 'Not sure (staging imaging pending)'")
 
-        # POST-LOCOREGIONAL: a recurrence at the primary site or regional nodes is NOT distant
-        # metastasis. When the physician's own assessment classifies the disease as a
-        # local-regional recurrence (and no biopsy-confirmed distant met), don't let the model
-        # inflate it to Stage IV / distant met. General oncology rule, applies to all cancers. [2026-06-05, A2]
+        # POST-LOCOREGIONAL: local/regional recurrence is never distant M1 disease. The broad
+        # Metastasis field is not identical to Distant Metastasis, however: it retains an explicit
+        # regional/locoregional component (including breast chest-wall recurrence), while a recurrence
+        # confined to the primary organ and direct contiguous invasion remain non-metastatic.
         cancer_lr = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_lr, dict):
             ap_only_lr = (assessment_and_plan or "").lower()          # CURRENT assessment only
-            note_ap_lr = ap_only_lr + " " + (note_text or "").lower()  # full text (for distant-met guard)
             stage_lr = str(cancer_lr.get("Stage_of_Cancer", "") or "")
             dm_lr = str(cancer_lr.get("Distant Metastasis", "") or "")
             m_lr = str(cancer_lr.get("Metastasis", "") or "")
@@ -3613,23 +3549,30 @@ def main():
             # recurrence" heading for a patient who has since progressed to metastatic disease
             # (e.g. breast ROW7). Searching the whole note would wrongly downgrade those P0.
             locoregional = re.search(r'local[\s-]*regional recurrence|locoregional recurrence|'
-                                     r'local recurrence(?!\w)', ap_only_lr)
-            # Block the override if ANYWHERE in the note distant/metastatic disease is confirmed.
-            confirmed_distant = re.search(
-                r'biopsy[^.]{0,50}metasta|metasta[^.]{0,30}biopsy|newly diagnosed metastatic|'
-                r'metastatic\s+(\w+\s+){0,3}(to|in)\s+(the\s+)?'
-                r'(bone|brain|lung|liver|node|hepat|pulmon|osseous|vertebr|spine|adrenal|peritone)|'
-                r'metastatic\s+\w+\s+(cancer|carcinoma|adenocarcinoma)\b|'
-                r'(biopsy[\s-]*proven|biopsy[\s-]*confirmed|confirmed)\s+(distant\s+)?metasta',
-                note_ap_lr)
+                                     r'local recurrence(?!\w)|chest[\s-]*wall recurrence', ap_only_lr)
+            regional_component_lr = bool(re.search(
+                r'local[\s-]*regional recurrence|locoregional recurrence|chest[\s-]*wall recurrence',
+                ap_only_lr))
+            # Block the override only for documented M1 evidence. A positive regional node must not
+            # masquerade as the distant-met confirmation that prevents this correction.
+            confirmed_distant = (
+                is_confirmed_distant_value(dm_lr, cancer_type)
+                or has_explicit_m1_evidence(ap_only_lr, cancer_type)
+            )
             stage_says_iv = bool(re.search(r'stage\s*iv|metastatic', stage_lr, re.IGNORECASE))
             dm_says_yes = "yes" in dm_lr.lower()
             if locoregional and (stage_says_iv or dm_says_yes) and not confirmed_distant:
                 new_stage_lr = "Locally recurrent (unresectable)" if "unresectable" in ap_only_lr else "Locally recurrent"
                 cancer_lr["Stage_of_Cancer"] = new_stage_lr
                 cancer_lr["Distant Metastasis"] = "No"
-                cancer_lr["Metastasis"] = "No"
-                print(f"    [POST-LOCOREGIONAL] A/P says local-regional recurrence (no confirmed distant) → Stage '{stage_lr}'→'{new_stage_lr}', met→No")
+                if regional_component_lr:
+                    regional_label_lr = "locoregional chest-wall recurrence" if "chest" in locoregional.group(0) \
+                                        else "locoregional recurrence"
+                    cancer_lr["Metastasis"] = f"Yes, {regional_label_lr}; no distant metastasis"
+                else:
+                    cancer_lr["Metastasis"] = "No"
+                print(f"    [POST-LOCOREGIONAL] no confirmed M1: Stage '{stage_lr}'→'{new_stage_lr}', "
+                      f"Distant→No, Metastasis→'{cancer_lr['Metastasis']}'")
             else:
                 # (c) primary-organ site named as a "metastasis" = local recurrence, not a met.
                 #     Only when DistMet is already an evidence-based No and no true distant organ is listed.
@@ -3642,6 +3585,19 @@ def main():
                                                           "contralateral", "spine", "spinal"])):
                     cancer_lr["Metastasis"] = "No"
                     print(f"    [POST-LOCOREGIONAL] primary-site recurrence, not a met: Metastasis '{m_lr}'→'No' (DistMet already No)")
+                # PDAC invasion/abutment/encasement of an adjacent organ or vessel is local extension,
+                # not regional or distant spread. Clear a general-met value only when Distant is
+                # already No and the value contains no nodal or distant-organ claim.
+                elif (cancer_type != "breast" and dm_lr.strip().lower() in ("no", "no.", "none")
+                      and "yes" in m_low
+                      and re.search(r'\b(invasi\w*|invad\w*|abut\w*|encas\w*|involv\w*)\b', m_low)
+                      and any(s in m_low for s in ("stomach", "gastric", "duoden", "spleen", "splenic",
+                                                   "adrenal", "kidney", "renal", "artery", "vein",
+                                                   "vessel", "sma", "smv", "portal"))
+                      and not re.search(r'lymph|\bnode\b|liver|hepatic|lung|pulmonary|bone|osseous|'
+                                        r'brain|cerebral|peritone|omentum|pleur|distant', m_low)):
+                    cancer_lr["Metastasis"] = "No"
+                    print(f"    [POST-LOCOREGIONAL] direct local extension, not metastasis: '{m_lr}'→'No'")
 
         # POST-STAGE-SUSPECTED: hedged imaging ("suspicious for"/"suggestive of"/"concerning for"/
         # "early evidence of"/"cannot exclude") metastatic disease is NOT a confirmed Stage IV.
@@ -3660,24 +3616,28 @@ def main():
                                    r'early evidence of|cannot exclude|cannot be excluded|equivocal|'
                                    r'may represent|likely represents?)[^.]{0,45}(metasta|recurren|disease|lesion|nodul)',
                                    all_text_su)
-                # A confirmed metastatic DIAGNOSIS overrides hedged imaging language. Cover
-                # "metastatic <organ> adenocarcinoma/cancer", carcinomatosis, omental caking,
-                # and biopsy/FNA confirmation.
-                confirmed = re.search(r'biopsy[\s-]*(proven|confirmed)|fna[^.]{0,40}(metasta|adenocarc|malignan)|'
-                                      r'(confirmed|known|definite|biopsy|diagnosed)[^.]{0,25}metasta|'
-                                      r'metastatic\s+(\w+\s+){0,2}(adenocarcinoma|carcinoma|cancer)|'
-                                      r'metastatic\s+(disease\s+)?(confirmed|present)|'
-                                      r'consistent with metastatic|carcinomatosis|omental caking', all_text_su)
-                if hedged and not confirmed:
+                # Only a confirmed DISTANT diagnosis overrides hedged M1 imaging. A positive regional
+                # node is real metastasis for the broad field, but must not upgrade a suspicious distant
+                # site to confirmed Stage IV.
+                confirmed_distant_su = has_explicit_m1_evidence(all_text_su, cancer_type)
+                if hedged and not confirmed_distant_su:
                     # Replace the confirmed met/Stage-IV assertion with a clean suspected label,
                     # preserving any "Originally ..." historical prefix (no nested parentheses).
                     m_orig_su = re.match(r'(?i)(originally[^,]*,\s*)', stage_su)
                     prefix_su = m_orig_su.group(1) if m_orig_su else ""
                     cancer_su["Stage_of_Cancer"] = prefix_su + "Suspected Stage IV (pending confirmation)"
+                    def _suspected_with_sites(value_su):
+                        value_su = str(value_su or "").strip()
+                        sites_su = re.sub(
+                            r'(?i)^\s*yes\s*[,;:.-]*\s*(?:\(?\s*to\s+)?', '', value_su
+                        ).strip().strip("() ")
+                        return f"Suspected, to {sites_su}" if sites_su else "Not sure"
                     if "yes" in str(cancer_su.get("Distant Metastasis", "")).lower():
-                        cancer_su["Distant Metastasis"] = "Not sure"
+                        cancer_su["Distant Metastasis"] = _suspected_with_sites(
+                            cancer_su.get("Distant Metastasis", ""))
                     if "yes" in str(cancer_su.get("Metastasis", "")).lower():
-                        cancer_su["Metastasis"] = "Not sure"
+                        cancer_su["Metastasis"] = _suspected_with_sites(
+                            cancer_su.get("Metastasis", ""))
                     print(f"    [POST-STAGE-SUSPECTED] hedged met evidence (no confirmation) → '{stage_su}' → '{cancer_su['Stage_of_Cancer']}'")
 
         # POST-METASTATIC-UPGRADE: the mirror of POST-STAGE-SUSPECTED. The model sometimes UNDER-calls
@@ -3690,32 +3650,8 @@ def main():
             stage_mu = str(cancer_mu.get("Stage_of_Cancer", "") or "")
             dm_mu = str(cancer_mu.get("Distant Metastasis", "") or "")
             m_mu = str(cancer_mu.get("Metastasis", "") or "")
-            already_iv_mu = bool(re.search(r'stage\s*iv|metastatic|suspected', stage_mu, re.IGNORECASE))
-            txt_mu = ((assessment_and_plan or "") + " " + (note_text or "")).lower()
-            # A hedge/negation ANYWHERE in the ~32 chars before the marker disqualifies that mention
-            # ("possibility of peritoneal carcinomatosis", "concerning for ... carcinomatosis",
-            # "no carcinomatosis"). We scan ALL mentions and upgrade only if at least one is clean —
-            # so pdac12 (note states "unchanged peritoneal carcinomatosis" definitively) upgrades,
-            # while pdac6 (only "possibility of ...", laparoscopy unremarkable) does not. [bug6 guard]
-            HEDGE_MU = re.compile(
-                r'\b(?:no|not|without|negative for|r/o|rule out|resolv\w*|resolution|possib\w*|'
-                r'concern\w*|suspicious|suspect\w*|question\w*|may|might|likely|could|evaluat\w*|'
-                r'assess\w*|differential|cannot exclude|worrisome|if )\b')
-            marker_mu = None
-            for pat_mu, site_mu in [
-                (r'peritoneal carcinomatosis', 'peritoneal carcinomatosis'),
-                (r'\bcarcinomatosis\b', 'carcinomatosis'),
-                (r'omental cak(?:e|ing)', 'omental caking'),
-                (r'biopsy[\s-]*(?:proven|confirmed)[^.]{0,30}metasta', 'biopsy-confirmed metastasis'),
-            ]:
-                for mm_mu in re.finditer(pat_mu, txt_mu):
-                    ctx_mu = txt_mu[max(0, mm_mu.start() - 32):mm_mu.start()]
-                    if not HEDGE_MU.search(ctx_mu):
-                        marker_mu = site_mu
-                        break
-                if marker_mu:
-                    break
-            if marker_mu:
+            txt_mu = (assessment_and_plan or "").lower()
+            if has_explicit_m1_evidence(txt_mu, cancer_type):
                 # confirmed metastatic. Upgrade the stage unless it is ALREADY a confirmed (not merely
                 # "suspected") Stage IV, and ALWAYS reconcile the met fields up to "Yes" — the model
                 # sometimes states Stage IV but still hedges the met fields to "Not sure"/"Suspected"
@@ -3725,25 +3661,29 @@ def main():
                 is_confirmed_iv = ("suspect" not in stage_low_mu) and bool(re.search(r'stage\s*iv|metastatic', stage_low_mu))
                 if not is_confirmed_iv:
                     cancer_mu["Stage_of_Cancer"] = "Stage IV (metastatic)"
-                site_label_mu = "Yes (peritoneal carcinomatosis)" if "periton" in marker_mu else \
-                                ("Yes (omental/peritoneal)" if "omental" in marker_mu else "Yes")
+                if re.search(r'peritoneal carcinomatosis', txt_mu):
+                    site_label_mu = "Yes (peritoneal carcinomatosis)"
+                elif re.search(r'omental cak(?:e|ing)', txt_mu):
+                    site_label_mu = "Yes (omental/peritoneal)"
+                else:
+                    site_label_mu = "Yes"
                 if "yes" not in dm_mu.lower():
                     cancer_mu["Distant Metastasis"] = site_label_mu
                 if "yes" not in m_mu.lower():
                     cancer_mu["Metastasis"] = site_label_mu
-                print(f"    [POST-METASTATIC-UPGRADE] confirmed {marker_mu} → Stage IV + distant met Yes (stage was '{old_stage_mu}')")
+                print(f"    [POST-METASTATIC-UPGRADE] confirmed current M1 evidence → Stage IV + distant met Yes (stage was '{old_stage_mu}')")
 
-        # POST-STAGE-METASTATIC: If metastasis=Yes but Stage says "Not available"/"Not mentioned", set Stage IV [v24]
+        # POST-STAGE-METASTATIC: fill Stage IV only from confirmed Distant Metastasis or explicit
+        # current M1 evidence. General Metastasis=Yes may be regional-only and is not sufficient.
         cancer_diag = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_diag, dict):
             stage_val = cancer_diag.get("Stage_of_Cancer", "")
-            met_val = cancer_diag.get("Metastasis", "")
             dist_met_val = cancer_diag.get("Distant Metastasis", "")
             if stage_val and any(x in stage_val.lower() for x in ["not available", "not mentioned"]):
-                if (isinstance(met_val, str) and "yes" in met_val.lower()) or \
-                   (isinstance(dist_met_val, str) and "yes" in dist_met_val.lower()):
+                explicit_m1_diag = has_explicit_m1_evidence(assessment_and_plan or "", cancer_type)
+                if is_confirmed_distant_value(dist_met_val, cancer_type) or explicit_m1_diag:
                     cancer_diag["Stage_of_Cancer"] = "Stage IV (metastatic)"
-                    print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (Metastasis=Yes)")
+                    print(f"    [POST-STAGE-METASTATIC] '{stage_val}' → 'Stage IV (metastatic)' (confirmed M1)")
 
         # POST-TYPE-MET-CONSISTENCY: Type_of_Cancer must not assert CONFIRMED "metastatic" when the
         # Distant Metastasis field says No (→ local/regional only) or only Suspected/pending (→ not
@@ -3805,61 +3745,18 @@ def main():
                     cancer_sv2["Type_of_Cancer"] = new_sv2
                     print(f"    [POST-SUBTYPE-VERIFY] unsupported ductal/IDC — '{old_sv2[:45]}' → '{new_sv2[:45]}'")
 
-        # POST-MET-RECONCILE: keep the two redundant met fields (Distant Metastasis / Metastasis)
-        # internally consistent. A single-field baseline can't contradict itself; the pipeline's
-        # two fields can, when an earlier gate (e.g. G4-FAITH) trims one but not the other. These
-        # rules are conservative & general — they never fabricate a brand-new met claim, only sync
-        # or propagate so the two fields agree. [2026-06-05 floor-lock, A1]
+        # POST-MET-RECONCILE: Distant Metastasis is the M1-only subset of the comprehensive
+        # Metastasis field (regional + distant). They are intentionally NOT redundant. Reconcile
+        # certainty for explicitly distant sites without copying regional-only claims into Distant.
         cancer_rc = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_rc, dict) and "Metastasis" in cancer_rc and "Distant Metastasis" in cancer_rc:
             dm_rc = str(cancer_rc.get("Distant Metastasis", "") or "").strip()
             m_rc = str(cancer_rc.get("Metastasis", "") or "").strip()
-            def _met_status(v):
-                v = v.lower()
-                if not v: return "EMPTY"
-                if any(k in v for k in ("not sure", "unsure", "suspect", "suspicious", "possible", "concern")): return "UNSURE"
-                if "yes" in v: return "YES"
-                if v in ("no", "no.", "none") or v.startswith("no ") or v.startswith("no,") or v.startswith("no."): return "NO"
-                return "OTHER"
-            dm_s, m_s = _met_status(dm_rc), _met_status(m_rc)
-            DISTANT_RC = ["liver", "hepatic", "lung", "pulmonary", "bone", "osseous", "brain", "cerebral",
-                          "peritone", "pleural", "adrenal", "distant", "contralateral", "spine", "spinal",
-                          "mediastin", "retroperitone", "mesenteric", "omentum", "omental", "metastatic",
-                          "cervical"]  # cervical (neck) nodes are distant (M1) for breast [bug5, breast15]
-            REGIONAL_RC = ["axill", "sentinel", "supraclavicular", "infraclavicular", "internal mammary",
-                           "chest wall", "ipsilateral", "regional", "lymph node", "node"]
-            m_has_distant = any(s in m_rc.lower() for s in DISTANT_RC)
-            m_has_regional = any(s in m_rc.lower() for s in REGIONAL_RC)
-            changed_rc = None
-            # R1: distant met implies general met — if DistMet=Yes but Metastasis is weaker, sync up
-            if dm_s == "YES" and m_s in ("EMPTY", "NO"):
-                cancer_rc["Metastasis"] = dm_rc
-                changed_rc = f"R1 distant→general: Metastasis '{m_rc}' → '{dm_rc}'"
-            # R2: Metastasis claims a distant site but DistMet was trimmed to EMPTY by an earlier
-            #     gate (unconfirmed). Don't keep an asserted claim the gate already removed, and
-            #     don't silently drop it either → mark both 'Not sure' (honest, consistent).
-            elif m_s == "YES" and m_has_distant and dm_s == "EMPTY":
-                # keep the named site(s) but mark suspected — the distant claim was never confirmed
-                # (DistMet empty) so don't assert "Yes", but don't lose the site detail either.
-                sites_rc = re.sub(r'(?i)^\s*(?:yes|suspected|not sure)?[\s,:.()-]*(?:to\s+)?', '', m_rc).strip().strip("()").strip()
-                susp_rc = f"Suspected, to {sites_rc}" if sites_rc and sites_rc.lower() not in ("", "yes") else "Not sure"
-                cancer_rc["Metastasis"] = susp_rc
-                cancer_rc["Distant Metastasis"] = susp_rc
-                changed_rc = f"R2 unconfirmed distant claim → '{susp_rc}' (was DistMet empty, Met '{m_rc}')"
-            # R3: DistMet explicitly No but Metastasis claims ONLY distant organs (no nodal/regional)
-            #     → the evidence-based No wins.
-            elif dm_s == "NO" and m_s == "YES" and m_has_distant and not m_has_regional:
-                cancer_rc["Metastasis"] = "No"
-                changed_rc = f"R3 DistMet=No vs distant-only Metastasis '{m_rc}' → 'No'"
-            # R4: mirror an UNSURE across to an EMPTY partner so they don't half-contradict
-            elif dm_s == "UNSURE" and m_s == "EMPTY":
-                cancer_rc["Metastasis"] = dm_rc
-                changed_rc = f"R4 mirror unsure → Metastasis '{dm_rc}'"
-            elif m_s == "UNSURE" and dm_s == "EMPTY":
-                cancer_rc["Distant Metastasis"] = m_rc
-                changed_rc = f"R4 mirror unsure → Distant Metastasis '{m_rc}'"
+            new_dm_rc, new_m_rc, changed_rc = reconcile_metastasis_fields(dm_rc, m_rc, cancer_type)
             if changed_rc:
-                print(f"    [POST-MET-RECONCILE] {changed_rc}")
+                cancer_rc["Distant Metastasis"] = new_dm_rc
+                cancer_rc["Metastasis"] = new_m_rc
+                print(f"    [POST-MET-RECONCILE] {changed_rc}: Distant='{new_dm_rc}', Metastasis='{new_m_rc}'")
 
         # NOTE [bug10, pdac3]: a POST-DISTMET-SITES hook (auto-append documented met organs) was
         # prototyped and REMOVED — it fired on negated radiology lines ("No suspicious osseous
@@ -5406,12 +5303,11 @@ def main():
         cancer_final = keypoints.get("Cancer_Diagnosis", {})
         if isinstance(cancer_final, dict):
             stage_final = cancer_final.get("Stage_of_Cancer", "") or ""
-            met_final = cancer_final.get("Metastasis", "") or ""
             dist_final = cancer_final.get("Distant Metastasis", "") or ""
             stage_iv_final = bool(re.search(r'stage\s*iv|metastatic', stage_final, re.IGNORECASE))
-            dist_no_final = dist_final.lower().startswith("no") if dist_final else True
 
-            # Case 1: Stage says IV but Distant Met says No.
+            # Case 1: a confirmed Stage-IV label must have confirmed M1 support. If the only
+            # distant evidence is uncertain, keep that uncertainty rather than scalarizing it.
             # Do NOT fabricate "Stage III" — non-metastatic ≠ Stage III, and forcing III both invents a
             # stage the note never gives and (run-to-run) overrides legitimate de-novo-MBC reasoning,
             # making the field non-deterministic (b13/b15 flipped between "Not staged"/"Stage IV"/"Stage III"
@@ -5420,38 +5316,18 @@ def main():
             #     Distant-Metastasis field is just under-filled → keep the stage (don't downgrade);
             #   • otherwise the Stage IV was an unsupported LLM over-call → demote to an honest
             #     "Not staged in note" (never a fabricated "Stage III"). [round5 #A fix-v2, b13/b15]
-            if stage_iv_final and dist_no_final:
-                met_lower_f = met_final.lower() if met_final else ""
-                DISTANT_SITES_F = ["liver", "lung", "bone", "brain", "pleural", "peritoneal",
-                                   "ovary", "skin", "distant", "hepatic", "pulmonary", "osseous", "cerebral"]
-                has_distant_f = any(ds in met_lower_f for ds in DISTANT_SITES_F)
-                note_ap_f = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
-                # POSITIVE metastatic framing only — and never a NEGATED mention ("no evidence of metastatic
-                # disease", "r/o metastatic"), which would otherwise wrongly keep an LLM Stage-IV over-call
-                # (b13: localized breast ca whose note mentions metastatic only in negated/educational form).
-                mbc_framing_f = False
-                for _mm in re.finditer(
-                        r'de novo mbc|\bmbc\b|metastasi[sz]ed to|recurrent\s+metastatic'
-                        r'|metastatic\s+(?:breast|pancreatic|recurrent)(?:\s+\w+){0,2}\s*(?:cancer|carcinoma|adenocarcinoma|disease|pdac)?',
-                        note_ap_f):
-                    _pre = note_ap_f[max(0, _mm.start() - 24):_mm.start()]
-                    if re.search(r'\bno\b|without|\br/o\b|rule out|negative for|free of|denies|evidence of no', _pre):
-                        continue
-                    mbc_framing_f = True
-                    break
-                if not has_distant_f and not mbc_framing_f:
-                    cancer_final["Stage_of_Cancer"] = "Not staged in note"
-                    print(f"    [POST-STAGE-FINAL] Stage IV w/o distant-met basis (final): '{stage_final}' → 'Not staged in note'")
-                elif (cancer_type == "breast" and mbc_framing_f and "suspected" not in stage_final.lower()
-                      and re.search(r'if we confirm|presumptiv|presumed|to prove this|workup is not|not yet complete', note_ap_f)):
-                    # presumptive de-novo-MBC kept as Stage IV → normalize to the hedged form so the field is
-                    # deterministic regardless of which Stage-IV wording the LLM emitted (b15). [round5 #A fix-v2]
-                    cancer_final["Stage_of_Cancer"] = "Suspected Stage IV (de novo MBC, pending confirmation)"
-                    print(f"    [POST-STAGE-FINAL] presumptive MBC normalized: '{stage_final}' → 'Suspected Stage IV (de novo MBC, pending confirmation)'")
+            if stage_iv_final:
+                note_ap_f = (assessment_and_plan or "").lower()
+                normalized_stage, stage_reason = normalize_stage_iv(
+                    stage_final, dist_final, note_ap_f, cancer_type
+                )
+                if stage_reason:
+                    cancer_final["Stage_of_Cancer"] = normalized_stage
+                    print(f"    [POST-STAGE-FINAL] {stage_reason}: '{stage_final}' → '{normalized_stage}'")
 
             # Case 2: Stage was downgraded to III but Distant Met says Yes — re-upgrade
             if not stage_iv_final and "stage iii" in stage_final.lower():
-                dist_yes = dist_final.lower().startswith("yes") if dist_final else False
+                dist_yes = is_confirmed_distant_value(dist_final, cancer_type)
                 if dist_yes:
                     # Distant Met says Yes but Stage says III — this is inconsistent, upgrade back
                     cleaned_f = re.sub(r'(?i)\bStage\s*III\b', 'Stage IV', stage_final)
@@ -5459,32 +5335,27 @@ def main():
                         cancer_final["Stage_of_Cancer"] = cleaned_f
                         print(f"    [POST-STAGE-FINAL] Stage III but Distant Met=Yes: '{stage_final}' → '{cleaned_f}'")
 
-        # POST-MET-REGIONAL-NODE: the "Metastasis" field (distinct from "Distant Metastasis") records ANY
-        # metastatic involvement INCLUDING regional nodal — b13/b15 populate it with nodal sites. When the
-        # cancer is documented NODE-POSITIVE but Metastasis reads "No"/"Not sure", set it to "Yes, regional
-        # lymph node(s)" for consistency (b16/b17 audit flag). Distant Metastasis is left untouched (regional
-        # ≠ distant). Node-positive = a TNM N1-3 (extracted from the stage TNM, robust to glued "pT2N1a"),
-        # an "X/Y nodes positive/involved" with X>0, or an assertive "node-positive" term (excluding
-        # conditional "if node positive"/"patients with"/negated). N0/NX/DCIS yield no signal → skip. [round5 final]
+        # POST-MET-REGIONAL-NODE: conservatively append only high-confidence regional disease.
+        # Accepted evidence is limited to current extracted p/ypN1-3 (including standalone pN/ypN)
+        # or a locally scoped positive node count/biopsy for this cancer. Ambiguous cN/imaging-only
+        # nodes are left to the model prompt rather than promoted by regex.
         cancer_rn = keypoints.get("Cancer_Diagnosis", {})
-        if cancer_type == "breast" and isinstance(cancer_rn, dict):
-            met_rn = str(cancer_rn.get("Metastasis", "") or "").strip().lower()
-            if met_rn in ("no", "none", "no metastasis", "not sure", ""):
-                sl_rn = str(cancer_rn.get("Stage_of_Cancer", "") or "").lower()
-                dm_rn = str(cancer_rn.get("Distant Metastasis", "") or "").lower()
-                hl_rn = ((note_text or "") + " " + (assessment_and_plan or "")).lower()
-                n_vals_rn = re.findall(r't\d[a-d]?(?:\([a-z]+\))?\s*,?\s*n([0-3x])', sl_rn)
-                xy_rn = any(int(m.group(1)) > 0 for m in re.finditer(
-                    r'(\d+)\s*(?:/|of)\s*\d+\s*(?:lymph\s*)?(?:nodes?|sln|ln)\b[^.\n]{0,30}(?:positive|involved|metasta|\+)', hl_rn))
-                term_rn = False
-                for mm in re.finditer(r'\bnode[- ]positive\b|\bnode\(s\)\s+positive\b', hl_rn):
-                    pre = hl_rn[max(0, mm.start() - 16):mm.start()]
-                    if not re.search(r'\bno\b|negative for|without|\bif\b|whether|patients?\s+with', pre):
-                        term_rn = True
-                        break
-                if (any(v in ('1', '2', '3') for v in n_vals_rn) or xy_rn or term_rn) and not dm_rn.startswith("yes"):
-                    cancer_rn["Metastasis"] = "Yes, regional lymph node(s)"
-                    print(f"    [POST-MET-REGIONAL-NODE] node-positive → Metastasis 'Yes, regional lymph node(s)'")
+        if isinstance(cancer_rn, dict):
+            stage_rn = str(cancer_rn.get("Stage_of_Cancer", "") or "")
+            dm_rn = str(cancer_rn.get("Distant Metastasis", "") or "").strip()
+            met_rn = str(cancer_rn.get("Metastasis", "") or "").strip()
+            # Textual evidence is restricted to the current A/P. Historical pathology in the full
+            # note can describe prior nodal disease that is no longer the patient's current state.
+            text_rn = (assessment_and_plan or "").lower()
+            evidence_rn, detail_rn = regional_node_evidence(
+                cancer_type, stage_rn, text_rn
+            )
+            new_met_rn, changed_rn = merge_regional_metastasis(
+                dm_rn, met_rn, evidence_rn, detail_rn, cancer_type
+            )
+            if changed_rn:
+                cancer_rn["Metastasis"] = new_met_rn
+                print(f"    [POST-MET-REGIONAL-NODE] '{met_rn}' → '{new_met_rn}'")
 
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
