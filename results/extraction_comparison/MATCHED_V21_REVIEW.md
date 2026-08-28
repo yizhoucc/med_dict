@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 35/40 (breast 20/20, PDAC 15/20)
-- Next: PDAC sample 16
-- PL findings: P0=17, P1=210, P2=104
-- Attribution findings: A0=87, A1=167, A2=223
-- Core verdict totals (PL / BL / TIE): 47 / 48 / 135
+- Completed: 38/40 (breast 20/20, PDAC 18/20)
+- Next: PDAC sample 19
+- PL findings: P0=19, P1=220, P2=115
+- Attribution findings: A0=96, A1=183, A2=239
+- Core verdict totals (PL / BL / TIE): 50 / 51 / 147
 
 ## Results
 
@@ -356,3 +356,32 @@ Date: 2026-08-27
 - Attribution: A0 for second opinion, Stage, Distant, therapy, and next visit; A1 for labs, findings, recent changes, goals-description fallback, response, Specialty, and genetic results; A2 for summary, Type, Metastasis, goals, and Referral follow-up.
 - Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis PL; response BL; genetic results BL. Total PL 1 / BL 2 / TIE 3.
 - Main verification: confirmed the final moderate grade, ypT3N2 and 11/46 positive nodes, no established distant spread, poor/no neoadjuvant pathologic response, sharply rising CA19-9, current absence of anticancer medication, intact MMR proteins, KRAS-negative benign ascites, and explicit conditional PMD referral.
+
+### PDAC sample 16 — coral_idx 15
+
+- Case: clinical Stage IIB cT1c cN1 cM0 pancreatic-head adenocarcinoma on dose-reduced gemcitabine monotherapy. One dose was delayed for a possible dental abscess; the patient is now cleared and the schedule will change to alternate weeks. The May CT shows the pancreatic mass no longer visible, improved duct dilation, and no distant metastasis. Separate renal and lung lesions are favored to be other primaries rather than pancreatic metastases.
+- PL P0: Metastasis upgrades clinical/radiographic regional-node concern to `confirmed regional nodes` and fabricates a suspicious liver lesion with pending biopsy despite cM0 and explicit absence of distant disease.
+- PL P1: next visit invents an in-person mode; Specialty turns a completed dentist evaluation into a current referral.
+- PL P2: summary omits the C2D15 decision and schedule change; Type omits pancreatic-head location; findings adds `no palpable masses` without a matching source statement; recent changes misses the one-dose dental delay; supportive medications misses recommended daily senna; imaging omits that the next scan is due after this cycle.
+- Attribution: A0 for second opinion, Metastasis, and Specialty; A1 for Stage and labs; A2 for summary, findings, current/supportive medications, goals description, medication plan, and next visit.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response TIE; genetic results TIE. Total PL 0 / BL 1 / TIE 5.
+- Main verification: confirmed cN1 is clinical rather than pathologic, PET described regional nodes only as concerning, the current scan reports no metastatic disease and contains no liver-lesion/biopsy plan, gemcitabine is active, and the response/schedule/referral timing stated above.
+
+### PDAC sample 17 — coral_idx 16
+
+- Case: locally advanced pMMR pancreatic body/tail adenocarcinoma with extensive local vascular involvement but no distant spread. After eight FOLFIRINOX cycles the patient entered a chemotherapy break in November 2018; February 2019 CT remained stable. No anticancer drug is active, with June follow-up and July CT CAP planned. Foundation testing reports MSS, TMB 5, KRAS G12V, TP53 I195F, and listed VUS/alterations.
+- PL P0: Metastasis fabricates both confirmed regional nodes and a suspicious liver lesion pending biopsy; neither is present anywhere in the note.
+- PL P1: lab summary omits CA19-9 289 while retaining an older CEA without its date; therapy says `None` rather than continuing the chemotherapy-break state.
+- PL P2: Type omits pMMR; findings mixes laboratory results into the objective-imaging/exam field; palliative intent is reasonable but not explicit; response correctly uses the latest stable CT but appends isolated labs without dates or a supported trend.
+- Attribution: A0 for second opinion, in-person, and findings; A1 for Distant, Metastasis, labs, goals, goals-description fallback, and genetic results; A2 for Patient type, Stage, response, and next visit.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis BL; response PL; genetic results TIE. Total PL 1 / BL 1 / TIE 4.
+- Main verification: confirmed no node or liver-metastasis evidence, the chemotherapy break, the latest February stable scan, no active anticancer drug, and the molecular results. Although `unresectable` is not quoted verbatim, it is accepted here as consistent with the locally advanced label plus SMA/SMV-portal-confluence involvement; Stage is therefore a tie rather than a BL win.
+
+### PDAC sample 18 — coral_idx 17
+
+- Case: initially resectable pancreatic-tail adenocarcinoma after only two poorly tolerated neoadjuvant Gem/Abraxane doses, distal pancreatectomy/splenectomy, and two postoperative Gem/Cape cycles. Pathology shows moderate differentiation, negative margins, and 2/29 positive regional nodes. Chemotherapy is now held for severe hand-foot syndrome/mucositis and is to resume five days of seven after recovery. Current scans show no distant disease; capecitabine is explicitly not being taken. ATM has a VUS.
+- PL P1: Stage is blank and loses the initially resectable, now resected node-positive status; Metastasis correctly captures 2/29 positive nodes but omits their historical/resected context and contradicts Distant=`No` with `distant disease uncertain`; findings copies many laboratory values and omits the decisive surgical pathology; medication plan mixes future Doppler imaging into medications and does not name the held Gem/Cape regimen; therapy omits the planned five-days-on/two-days-off resumption and regimen name; Referral follow-up merely repeats the treatment hold/resumption rather than a return instruction.
+- PL P2: response reasonably says there is no specific treatment response to assess, but omits the current no-evidence-of-metastatic-disease scan context.
+- Attribution: A0 for Patient type, Distant, and Referral follow-up; A1 for second opinion, labs, findings, goals, goals-description fallback, response, next-visit fallback, and genetic results; A2 for summary, Type, Metastasis, supportive medications, and medication plan.
+- Core verdicts: current_meds PL; Stage BL; Distant TIE; Metastasis PL; response TIE; genetic results TIE. Total PL 2 / BL 1 / TIE 3.
+- Main verification: confirmed capecitabine is marked not taking and chemotherapy is explicitly held, original resectability and 2/29 positive regional nodes, current negative distant imaging, conditional five-of-seven resumption, completed rather than future head CT, planned Dopplers, and ATM VUS.
