@@ -437,10 +437,14 @@ for row_id, expected in (
     )
     check(f"meds matched-v21 pdac{row_id}", got, expected)
 
-# affected temporal-window case remains prompt-owned: the conservative helper must not invent
-# a replacement from ambiguous pre-regimen imaging.
-check("response breast7 cross-regimen ambiguity unchanged by regex", sanitize_row(B[7]),
-      B[7]["keypoints"]["Response_Assessment"]["response_assessment"])
+# Current treatment-era symptom improvement is a safer response statement than the
+# pre-regimen progression text copied from the longitudinal history/header.
+check(
+    "response breast7 uses current early-treatment improvement",
+    sanitize_row(B[7]),
+    "Metastatic breast cancer - axillary pain improved which is hopeful for early treatment response - "
+    "Continue abraxane every week (continuous) and Pembrolizumab every 3 weeks.",
+)
 
 # 30% clean controls plus an extra truly-untreated guard.
 for cancer, row_id, row in (
