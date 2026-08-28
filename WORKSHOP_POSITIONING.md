@@ -1,6 +1,6 @@
 # Workshop / Poster Positioning Memo
 
-Updated: 2026-08-27
+Updated: 2026-08-28
 
 ## Working conclusion
 
@@ -14,22 +14,35 @@ The current physician review remains the confirmatory evaluation. LLM-assisted r
 
 ## Matched-baseline result
 
-The 40-sample matched single-prompt baseline rerun is complete and has been manually reviewed against the source notes. Across 260 applicable sample-field comparisons:
+The current fully rerun and manually audited comparison is matched v2.2. Across 260 applicable sample-field comparisons:
 
 | Core category | PL | BL | Tie | Net PL−BL |
 |---|---:|---:|---:|---:|
-| Active anticancer treatment | 7 | 2 | 31 | +5 |
-| Stage | 17 | 4 | 19 | +13 |
-| Distant metastasis | 30 | 1 | 9 | +29 |
-| Overall/regional metastasis | 14 | 16 | 10 | −2 |
-| Treatment response | 5 | 6 | 29 | −1 |
-| Breast cancer type/receptors | 7 | 5 | 8 | +2 |
-| Completed molecular/genetic results | 9 | 4 | 27 | +5 |
-| **Overall** | **89** | **38** | **133** | **+51** |
+| Active anticancer treatment | 8 | 0 | 32 | +8 |
+| Stage | 6 | 8 | 26 | −2 |
+| Distant metastasis | 11 | 3 | 26 | +8 |
+| Overall/regional metastasis | 14 | 4 | 22 | +10 |
+| Treatment response | 13 | 6 | 21 | +7 |
+| Breast cancer type/receptors | 8 | 5 | 7 | +3 |
+| Completed molecular/genetic results | 6 | 2 | 32 | +4 |
+| **Overall** | **66** | **28** | **166** | **+38** |
 
-The corrected result supports a strong overall advantage and positive net advantage in five of seven categories. It does **not** yet support the claim that PL wins every core category: the general `Metastasis` field and `response_assessment` remain slightly behind BL. The detailed audit is in `results/extraction_comparison/MATCHED_BASELINE_CORE_REVIEW.md`.
+The fully rerun v2.2 result supports a clear overall advantage and positive net advantage in six of seven categories. Stage is the only category still behind in that frozen table. The detailed sample-level audit is in `results/extraction_comparison/MATCHED_V22_REVIEW.md`.
 
-The review also exposed one contract inconsistency: the production PDAC prompt currently treats CA 19-9 non-secretor status as a genetic result, while the matched baseline contract limits that field to completed molecular/genetic tests. This should be aligned before the final ablation is reported.
+The production and matched-baseline contracts now both include explicit CA 19-9 non-secretor status in completed molecular/biologic results.
+
+## Targeted v2.3.x repair check
+
+The four P0 failures found in v2.2 were repaired and rerun together with the required clean controls. Across the 51 applicable core comparisons in this 8-sample targeted set, PL scored **29 / 0 / 22** (PL / BL / tie), with **P0=0**. The rerun specifically verified:
+
+- historical and recurrent breast receptor profiles no longer borrow unsupported HER2/PR values;
+- suspicious bone disease pending biopsy remains suspected rather than confirmed Stage IV/M1;
+- an explicit stable/good-control assessment overrides unsupported progression language;
+- confirmed nonregional abdominal nodal recurrence remains consistent with current metastatic stage;
+- completed MMR-intact/pMMR results are recovered with source attribution;
+- the two controls did not develop a core regression.
+
+This is targeted validation, not a replacement full-40 run. Use 66/28/166 as the formal complete-run table until the revised pipeline is rerun on all 40 samples. The targeted evidence supports the claim that the remaining high-impact errors are narrow, auditable, and repairable.
 
 ## Decisions frozen for the matched-baseline rerun
 
@@ -52,7 +65,7 @@ These categories are fixed before inspecting the matched-baseline results:
 6. What is the cancer type and receptor status? (Breast cancer only.)
 7. What completed molecular or genetic results are documented?
 
-The old, non-matched comparison had a positive aggregate PL advantage in all seven categories, but those numbers must not be presented as the final matched ablation. The matched audit currently shows two categories with small negative margins, which are concrete targets for the next pipeline revision.
+The old, non-matched comparison had a positive aggregate PL advantage in all seven categories, but those numbers must not be presented as the final matched ablation. The complete v2.2 audit has one negative category, Stage. The targeted v2.3.x repair resolves the reviewed Stage failures, but a full-40 rerun is still required before claiming every category is net-positive in the final table.
 
 ## Where this project is strongest
 
@@ -111,11 +124,9 @@ These citations were checked against Crossref/Europe PMC/arXiv by a read-only Co
 
 Required:
 
-1. Fix the general-metastasis evidence/state representation and rerun affected samples plus the required clean-sample regression set.
-2. Fix response temporal/evidence selection and rerun affected samples plus the required clean-sample regression set.
-3. Align the production and matched-baseline field semantics, especially current anticancer medication and CA 19-9 non-secretor handling.
-4. Regenerate the PL-versus-BL figure and replace all legacy counts after the corrected rerun.
-5. Incorporate the real physician scores when available.
+1. Rerun the revised pipeline on all 40 matched samples if the final poster will claim per-category v2.3.x totals; otherwise report the complete v2.2 table plus the targeted repair check separately.
+2. Regenerate the PL-versus-BL figure using the chosen frozen result table and remove legacy 89/38 numbers.
+3. Incorporate the real physician scores when available.
 
 Useful if time permits:
 
@@ -139,4 +150,4 @@ Before the rerun:
 
 Current accurate wording:
 
-> Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 89–38 advantage over a single-pass baseline across 260 manually reviewed core-field comparisons, with 133 ties. The harness led in five of seven categories, most strongly in distant-metastasis status (+29) and stage (+13), while general metastasis (−2) and treatment response (−1) remained targets for refinement.
+> Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 66–28 advantage over a single-pass baseline across 260 manually reviewed core-field comparisons, with 166 ties. The harness led in six of seven categories; Stage remained slightly behind in the complete v2.2 run. A subsequent affected-sample-plus-control regression eliminated all four identified P0 failures and scored 29–0–22 on 51 applicable core comparisons, but has not yet been repeated across all 40 samples.

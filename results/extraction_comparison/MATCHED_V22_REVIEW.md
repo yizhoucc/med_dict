@@ -18,7 +18,9 @@ Date: 2026-08-27
 - PL findings: P0=4, P1=227, P2=157
 - Attribution findings: A0=134, A1=150, A2=258
 - Core verdict totals (PL / BL / TIE): 66 / 28 / 166
-- Current phase: review complete; failure-pattern synthesis and targeted repair
+- Current phase: review complete; targeted v2.3.x repair validated on affected samples plus controls
+
+Follow-up: `V23_TARGETED_REVIEW.md` documents the targeted repair. The four v2.2 P0 failures were eliminated, and the 8-sample regression set scored PL 29 / BL 0 / TIE 22 on the prespecified core fields. These targeted numbers do not replace the full-40 v2.2 table.
 
 ## Results
 
