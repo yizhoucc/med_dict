@@ -14,11 +14,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 20/40 (breast 20/20, PDAC 0/20)
-- PL findings: P0=3, P1=116, P2=89
-- Attribution findings: A0=60, A1=74, A2=143
-- Core verdict totals (PL / BL / TIE): 29 / 20 / 91
-- Current phase: breast review while the PDAC v2.2 run is in progress
+- Completed: 23/40 (breast 20/20, PDAC 3/20)
+- PL findings: P0=3, P1=129, P2=101
+- Attribution findings: A0=73, A1=82, A2=161
+- Core verdict totals (PL / BL / TIE): 36 / 20 / 102
+- Current phase: PDAC manual review
 
 ## Results
 
@@ -223,3 +223,30 @@ Date: 2026-08-27
 - Core verdicts: current_meds TIE; Stage BL; Distant PL; Metastasis TIE; response BL; Type TIE; genetic results TIE. Total PL 1 / BL 2 / TIE 4.
 - v2.1 regression: Type now correctly separates right HER2+ from left HER2 0 and findings restores current tumor sizes; unsupported stage, untreated-response fallback, and conditional-plan routing remain.
 - Main verification: read the complete note and confirmed side-specific receptors, lack of metastatic confirmation, recommendations contingent on pathology/FISH/nodes/surgery, no treatment started, surgery determined by response, and only-possible port/echo/lab/staging preparation after surgery.
+
+### PDAC sample 1 — coral_idx 0
+
+- Case: metastatic pancreatic adenocarcinoma after six cycles of gemcitabine/cisplatin; treatment is now paused for a break and surveillance. A prior biliary stent issue belongs to cycle 5. Current imaging raises concern for new pulmonary nodules and possible progression. The patient expresses interest in psycho-oncology support, but no completed referral is documented.
+- PL P1: `recent_changes` foregrounds the stale cycle-5 biliary-stent event rather than the current completion of six cycles and treatment break; goals description is materially incomplete; response omits the new suspicious lung nodules and possible progression; Specialty converts a desire for psycho-oncology support into a definite referral.
+- PL P2: summary and laboratory coverage are incomplete.
+- Attribution: A0 goals and genetic-results fallback; A1 laboratory summary, recent changes, supportive medication, and Specialty; A2 summary, findings, response, next visit, and follow-up.
+- Core verdicts: current_meds TIE; Stage TIE; Distant TIE; Metastasis TIE; response PL; genetic results TIE. Total PL 1 / BL 0 / TIE 5.
+- Main verification: read the complete note and confirmed six completed cycles followed by a break/surveillance, the historical timing of the cycle-5 stent event, new suspicious pulmonary nodules with possible progression, and interest in psycho-oncology without a documented referral order.
+
+### PDAC sample 2 — coral_idx 1
+
+- Case: resected pancreatic adenocarcinoma with 6/25 regional nodes, later confirmed liver metastases, progression after FOLFIRINOX, and current second-line C2D1 gemcitabine/nab-paclitaxel. Germline testing shows SPINK1 carrier status plus FANCG and NF2 VUS findings.
+- PL P1: findings omits the defining resection pathology, liver metastases, prior progression, and the current assessment; Genetic Testing Plan misroutes family SPINK1 screening as testing planned for the patient; Specialty labels the existing GI Oncology clinic as a new referral.
+- PL P2: Type is nonspecific; laboratory dates are mixed; supportive medication coverage is incomplete; response misses the treatment-change context; medication plan and next-visit wording are incomplete.
+- Attribution: A0 second opinion, Metastasis, findings, genetic plan, and Specialty; A1 goals description; A2 summary, Stage, Distant, labs, response, medication plan, next visit, and genetic results.
+- Core verdicts: current_meds TIE; Stage PL; Distant PL; Metastasis TIE; response PL; genetic results TIE. Total PL 2 / BL 0 / TIE 4.
+- Main verification: read the complete note and confirmed Whipple pathology with 6/25 positive nodes, subsequent liver metastases, progression on FOLFIRINOX, current C2D1 gemcitabine/nab-paclitaxel, and that the SPINK1 recommendation concerns relatives rather than a new patient test.
+
+### PDAC sample 3 — coral_idx 2
+
+- Case: metastatic PDAC on third-line 5-FU/LV plus nanoliposomal irinotecan. Liver and peritoneal metastases are established. February imaging was mixed/stable, but March imaging and the current assessment show a larger pancreatic-tail mass with direct local invasion, partial gastric-outlet obstruction, ascites, and clinical decline. KRAS G12D and TP53 mutations are documented.
+- PL P1: findings is anchored to older February imaging and omits the newer larger mass, direct invasion, gastric-outlet obstruction, and ascites; Procedure contains a stray radiotherapy fragment; Lab Plan copies a chemotherapy condition rather than an actual laboratory plan; Next visit invents a clinic visit from the CT plan; Advance care turns possible future hospice into a completed goals-of-care discussion; Referral follow-up again copies the CT plan rather than a return arrangement.
+- PL P2: current medication has broken punctuation; supportive medication coverage is incomplete; goals description and response omit important recent detail, including the clinical decline and infectious-versus-atelectatic lung findings.
+- Attribution: A0 second opinion, recent changes, procedure, next visit, advance care, and follow-up; A1 Patient type, findings, and supportive medication; A2 Distant, Metastasis, labs, goals description, response, and lab plan.
+- Core verdicts: current_meds PL; Stage TIE; Distant PL; Metastasis PL; response PL; genetic results TIE. Total PL 4 / BL 0 / TIE 2.
+- Main verification: read the complete note and confirmed the March 7.2 cm pancreatic-tail mass, direct spleen/posterior-stomach invasion, possible invasion of adjacent organs, partial gastric-outlet obstruction, ascites, current clinical decline, conditional chemotherapy based on labs, possible—not completed—future hospice transition, and the absence of a specified next clinic appointment.
