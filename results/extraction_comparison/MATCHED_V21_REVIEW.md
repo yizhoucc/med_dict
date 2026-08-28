@@ -13,11 +13,11 @@ Date: 2026-08-27
 
 ## Status
 
-- Completed: 18/40
-- Next: Breast sample 19
-- PL findings: P0=7, P1=101, P2=55
-- Attribution findings: A0=41, A1=90, A2=113
-- Core verdict totals (PL / BL / TIE): 24 / 24 / 78
+- Completed: 20/40 (breast 20/20 complete)
+- Next: PDAC sample 1
+- PL findings: P0=8, P1=117, P2=62
+- Attribution findings: A0=45, A1=101, A2=126
+- Core verdict totals (PL / BL / TIE): 28 / 28 / 84
 
 ## Results
 
@@ -186,3 +186,28 @@ Date: 2026-08-27
 - Attribution: A0 for Distant, response, and next visit; A1 for Patient type, second opinion, findings, and goals description; A2 for summary, Type, Metastasis, goals, medication plan, therapy plan, follow-up, and incomplete genetic-results support.
 - Core verdicts: current_meds TIE; Stage PL; Distant TIE; Metastasis PL; response TIE; Type BL; genetic results PL. Total PL 3 / BL 1 / TIE 3.
 - Main verification: confirmed exact `PR positive (<5%)`, cT2NX, two benign axillary FNAs despite suspicious imaging, ATM mutation, MammaPrint high risk, node-dependent chemotherapy choice, and radiation-oncology recommendation for mastectomy rather than radiation.
+
+### Breast sample 19 — coral_idx 38
+
+- Case: two distinct left-breast IDC foci (grade 2 ER 61–70%/PR−/HER2−/Ki-67 15–20%, and grade 3 ER 41–50%/PR 1–10%/HER2−/Ki-67 30–40% with focal LCIS), original clinical Stage 2–3 and low-risk MammaPrint; after neoadjuvant endocrine therapy, bilateral mastectomies, and adjuvant tamoxifen, she is currently on exemestane plus monthly goserelin and is NED on exam.
+- PL P0: Type fabricates `extensive DCIS` and collapses two biologically distinct foci into one profile; the source has only imaging concern for DCIS and pathology showing focal LCIS.
+- PL P1: findings treats a future possible BSO as a current finding; PRN ondansetron without a current oncology/toxicity link is labeled supportive; medication plan mixes estradiol testing, DEXA, psychiatry follow-up, and inactive ondansetron; therapy plan includes estradiol testing; procedure plan resurrects a 2015 cyst-aspiration contingency and misses current possible BSO; Specialty misses explicit local psychiatry follow-up; genetic results correctly includes MammaPrint but is polluted by routine ER/PR/HER2/Ki-67 pathology and LCIS.
+- PL P2: goals description leaves explicit adjuvant/risk-reduction context blank.
+- Attribution: A0 for second opinion and Distant; A1 for Stage, incomplete current-medication support, goals description, medication plan, Specialty, and genetic results; A2 for Type, findings, goals, and therapy.
+- Core verdicts: current_meds PL; Stage TIE; Distant TIE; Metastasis TIE; response PL; Type BL; genetic results PL. Total PL 3 / BL 1 / TIE 3.
+- Main verification: confirmed monthly goserelin plus exemestane, `NED on exam`, low-risk MammaPrint, two different tumor profiles, focal LCIS rather than confirmed DCIS, current consideration of BSO, and that the cyst-aspiration language came from a historical embedded `Last Assessment & Plan`.
+
+### Breast sample 20 — coral_idx 39
+
+- Case: large bilateral breast cancers, right ER+/PR+/HER2+ with Ki-67 40%, left ER+/PR+/HER2 0 with some lobular differentiation; current exam measures about 12 × 9 cm right and 10 × 6 cm left. Reported lung nodules and tiny liver lesions are unbiopsied and explicitly unconfirmed. No treatment has started; systemic and surgical decisions remain conditional on pathology/FISH/staging; germline panel is pending.
+- PL P1: summary and Type wrongly convert the left HER2 0 tumor to HER2+ and conflict with PL's own summary details; Stage adds unsupported `locally advanced`; findings uses older 7.3/6 cm measurements and omits the much larger current exam; response says merely not mentioned despite clear untreated status; therapy drops the stated contingencies and mixes procedure/imaging/lab/visit logistics; procedure output is an incomplete clause and misses conditional surgery/port; lab plan copies multiple non-lab items; genetic plan misroutes HER2 FISH and misses the pending germline panel.
+- PL P2: Metastasis omits unclear nodal involvement; hidden/redacted lab values should be acknowledged rather than called absent; goal should retain pending-staging qualification; medication plan overstates a still-conditional regimen; radiation timing is not fully specified; next-visit purpose is inferred.
+- Attribution: A0 for Stage and genetic plan; A1 for Patient type, second opinion, response, goals-description fallback, and genetic-results fallback; A2 for summary, Type, Distant, Metastasis, findings, medication/therapy plans, lab plan, and next visit.
+- Core verdicts: current_meds TIE; Stage BL; Distant PL; Metastasis TIE; response BL; Type BL; genetic results TIE. Total PL 1 / BL 3 / TIE 3.
+- Main verification: confirmed separate laterality-specific HER2 status, current versus historical sizes, unconfirmed lung/liver findings, no started treatment, explicit dependence on final pathology/FISH/staging, and pending germline panel. The PL's left-HER2 error is a cross-field consistency failure because its own surrounding output contains the correct HER2 0 fact.
+
+## Breast interim summary
+
+- Core verdicts across 20 samples: PL 28 / BL 28 / TIE 84. The matched v2.1 breast comparison is therefore tied, not a demonstrated PL win.
+- Repeated high-impact patterns: unsupported bone-metastasis template completion; confirmed/suspected and regional/distant node mixing; conditional Stage IV or palliative language becoming definite; bilateral/multifocal receptor profiles collapsing across lesions; prior-treatment recurrence being replaced by an untreated fallback; completed MammaPrint omitted or standard HER2 pathology misrouted into genetic results.
+- Repeated non-core patterns: historical embedded A/P contaminating current plans; drug/procedure/imaging/lab/referral content crossing field boundaries; planned treatment labeled as recent change; proposed or conditional actions upgraded to definite plans.
