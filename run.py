@@ -37,6 +37,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    resolve_current_anticancer_meds,
     sanitize_general_metastasis,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
@@ -4960,6 +4961,29 @@ def main():
                         cm_os = drug_dict_os["current_meds"]; cm_os_low = cm_os.lower()
                         print(f"    [POST-MEDS-OVARIAN-SUPPRESSION] added active LHRH agonist '{canon_os}' to current_meds")
                         break
+
+        # POST-MEDS-FINAL: make one conservative final decision about the active anticancer
+        # regimen after all legacy medication filters/additions. This shared pure helper can
+        # recover a clearly active clinic regimen omitted from current_meds, remove a superseded
+        # regimen, and distinguish a whole-regimen hold from one delayed dose/cycle.
+        drug_dict_final = keypoints.get("Current_Medications", {})
+        if isinstance(drug_dict_final, dict):
+            cm_before_final = (drug_dict_final.get("current_meds", "") or "").strip()
+            treatment_changes_final = keypoints.get("Treatment_Changes", {})
+            recent_final = treatment_changes_final.get("recent_changes", "") \
+                if isinstance(treatment_changes_final, dict) else ""
+            cm_after_final, meds_final_reasons = resolve_current_anticancer_meds(
+                cm_before_final,
+                note_text,
+                assessment_and_plan,
+                recent_changes=recent_final,
+            )
+            if cm_after_final != cm_before_final:
+                drug_dict_final["current_meds"] = cm_after_final
+                print(
+                    f"    [POST-MEDS-FINAL] '{cm_before_final}' → '{cm_after_final}' "
+                    f"({'; '.join(meds_final_reasons)})"
+                )
 
         # POST-RESPONSE-FINAL: response depends on the FINAL medication state, so this shared
         # conservative sanitizer must run after all current_meds cleanup/addition hooks. It only

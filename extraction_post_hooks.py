@@ -1034,6 +1034,393 @@ def clear_held_anticancer_meds(current_meds, note_text, assessment_and_plan):
     return current_meds, None
 
 
+_CURRENT_MED_PATTERNS = (
+    ("FOLFIRINOX", re.compile(r"\bm?folfirinox\b", re.IGNORECASE)),
+    ("FOLFOX", re.compile(r"\bm?folfox\b", re.IGNORECASE)),
+    ("FOLFIRI", re.compile(r"\bm?folfiri\b", re.IGNORECASE)),
+    ("gemcitabine", re.compile(r"\b(?:gemcitabine|gemzar|gem)\b", re.IGNORECASE)),
+    ("abraxane", re.compile(r"\b(?:abraxane|nab[\s-]?paclitaxel)\b", re.IGNORECASE)),
+    ("capecitabine", re.compile(r"\b(?:capecitabine|xeloda|cape)\b", re.IGNORECASE)),
+    ("irinotecan", re.compile(r"\birinotecan\b", re.IGNORECASE)),
+    ("oxaliplatin", re.compile(r"\boxaliplatin\b", re.IGNORECASE)),
+    ("5-FU", re.compile(r"\b(?:5[\s-]?fu|fluorouracil)\b", re.IGNORECASE)),
+    ("leucovorin", re.compile(r"\bleucovorin\b", re.IGNORECASE)),
+)
+
+_CHEMOTHERAPY_MED_IDS = {
+    "FOLFIRINOX", "FOLFOX", "FOLFIRI", "gemcitabine", "abraxane",
+    "capecitabine", "irinotecan", "oxaliplatin", "5-FU", "leucovorin",
+}
+
+
+def _current_med_hits(text):
+    """Return ``(start, end, canonical)`` medication hits in textual order."""
+    text = str(text or "")
+    hits = []
+    for canonical, pattern in _CURRENT_MED_PATTERNS:
+        for match in pattern.finditer(text):
+            hits.append((match.start(), match.end(), canonical))
+    hits.sort(key=lambda item: item[0])
+    return hits
+
+
+def _current_med_ids(text):
+    """Return supported canonical regimen/drug names in textual order."""
+    return list(dict.fromkeys(canonical for _, _, canonical in _current_med_hits(text)))
+
+
+def _current_med_items(current_meds):
+    """Normalize known regimens while conservatively retaining unknown extracted items."""
+    items = []
+    for raw in re.split(r"[,;\n]", str(current_meds or "")):
+        raw = raw.strip()
+        if not raw:
+            continue
+        known = _current_med_ids(raw)
+        if known:
+            items.extend((name, name, True) for name in known)
+        else:
+            items.append((raw.lower(), raw, False))
+    deduped = []
+    seen = set()
+    for identity, label, known in items:
+        key = identity.lower()
+        if key not in seen:
+            seen.add(key)
+            deduped.append((identity, label, known))
+    return deduped
+
+
+def resolve_current_anticancer_meds(
+    current_meds,
+    note_text,
+    assessment_and_plan,
+    recent_changes="",
+):
+    """Conservatively reconcile the final active anticancer regimen.
+
+    This helper is intentionally narrower than a medication extractor.  It can recover a
+    small set of standard regimens from strong current-administration language, remove a
+    clearly superseded/held/completed/planned regimen, and otherwise preserves unknown
+    extracted drug names.  A one-dose or one-cycle delay does not end an active regimen.
+    """
+    note_text = str(note_text or "")
+    assessment_and_plan = str(assessment_and_plan or "")
+    recent_changes = str(recent_changes or "")
+    current_meds = str(current_meds or "").strip()
+    reasons = []
+
+    items = _current_med_items(current_meds)
+    unknown_items = [(identity, label) for identity, label, known in items if not known]
+
+    sources = (
+        ("ap", assessment_and_plan),
+        ("changes", recent_changes),
+        ("note", note_text),
+    )
+    active_ids = []
+    tentative_ids = []
+    planned_ids = set()
+    past_ids = set()
+    stopped_ids = set()
+
+    literature_re = re.compile(
+        r"\b(?:patients? (?:receiving|treated)|study|trial|phase [i1-3]+|"
+        r"response rate|published|et al)\b",
+        re.IGNORECASE,
+    )
+    plan_re = re.compile(
+        r"\b(?:recommend(?:ed)?|consider(?:ed|ing)?|option(?:s)?|candidate|could|may|"
+        r"plan(?:ned)? to|will start|would start|if (?:she|he|the patient)|if .* opts?)\b",
+        re.IGNORECASE,
+    )
+    past_re = re.compile(
+        r"\b(?:previously|prior|histor(?:y|ical)|completed|finished|s/p|status post|"
+        r"progress(?:ed|ion) on|after completing|had received)\b",
+        re.IGNORECASE,
+    )
+    stopped_re = re.compile(
+        r"\b(?:stopped|discontinued|d/c(?:'d|ed)?|no longer|hold|held|holding|permanently omitted|"
+        r"not taking|omitted(?:\s+\w+){0,3}\s+since|switched off)\b",
+        re.IGNORECASE,
+    )
+    strong_active_re = re.compile(
+        r"\b(?:currently|now|still)\s+(?:on|receiving|treated with)|"
+        r"\b(?:continue(?:s|d|ing)?|remain(?:s|ed)? on|receiving|being given|"
+        r"on treatment with|on therapy with)\b|"
+        r"\b(?:cycle\s*#?\s*\d+|c\d+\s*d\d+|presents? for\s+c\d+)|"
+        r"\b(?:received|administered|was given|began|initiated|started)\b[^.;\n]{0,80}"
+        r"\b(?:today|this visit)\b|"
+        r"\b(?:today|this visit)\b[^.;\n]{0,50}\b(?:received|administered|was given)\b",
+        re.IGNORECASE,
+    )
+    started_re = re.compile(r"\b(?:started|began|initiated)\b", re.IGNORECASE)
+    schedule_switch_re = re.compile(
+        r"\bswitch(?:ed)?\b[^.;\n]{0,100}\b(?:alternate|every other|weekly|biweekly)\b",
+        re.IGNORECASE,
+    )
+    note_current_anchor_re = re.compile(
+        r"\b(?:current(?:ly)?|today|this visit|presents? for|continues?|continuing|"
+        r"most recently|now (?:on|receiving|treated|at|had)|remains? on)\b",
+        re.IGNORECASE,
+    )
+
+    # Sentence-level classification prevents an active keyword elsewhere in a long note from
+    # converting historical or trial regimens into current medication.
+    for source_name, source_text in sources:
+        clauses = re.split(
+            r"[;\n]+|(?<=[.!?])\s+|\s{2,}(?=[#-])",
+            str(source_text or ""),
+        )
+        for sentence in (clause.strip() for clause in clauses if clause.strip()):
+            ids = _current_med_ids(sentence)
+            if not ids or literature_re.search(sentence):
+                continue
+            is_planned = bool(plan_re.search(sentence))
+            is_past = bool(past_re.search(sentence))
+            is_stopped = bool(stopped_re.search(sentence))
+            is_active = bool(strong_active_re.search(sentence))
+            if source_name == "note" and is_active and not note_current_anchor_re.search(sentence):
+                # A bare C1D1/C2D1 in a longitudinal treatment timeline is historical, not proof
+                # that the regimen is active at this visit.
+                is_active = False
+            if is_planned and not re.search(r"\bwill continue\b", sentence, re.IGNORECASE):
+                for match in plan_re.finditer(sentence):
+                    planned_ids.update(
+                        _current_med_ids(sentence[max(0, match.start() - 45):match.end() + 80])
+                    )
+            if is_past:
+                past_ids.update(ids)
+            if is_stopped:
+                for match in stopped_re.finditer(sentence):
+                    nearby = _current_med_hits(
+                        sentence[max(0, match.start() - 35):match.end() + 45]
+                    )
+                    if nearby:
+                        window_start = max(0, match.start() - 35)
+                        local_start = match.start() - window_start
+                        local_end = match.end() - window_start
+                        nearest = min(
+                            nearby,
+                            key=lambda hit: min(
+                                abs(hit[0] - local_end), abs(local_start - hit[1])
+                            ),
+                        )
+                        stopped_ids.add(nearest[2])
+            if is_active and not is_planned and not is_stopped and not is_past:
+                active_ids.extend(ids)
+            elif (started_re.search(sentence) or schedule_switch_re.search(sentence)) \
+                    and not is_planned and not is_stopped and not is_past:
+                tentative_ids.extend(ids)
+
+    active_ids = list(dict.fromkeys(active_ids))
+    tentative_ids = list(dict.fromkeys(tentative_ids))
+
+    combined_current = f"{assessment_and_plan}\n{recent_changes}"
+    all_source = f"{combined_current}\n{note_text}"
+    generic_continue = re.search(
+        r"\b(?:will\s+)?continue(?:\s+on|\s+with)?\s+(?:the\s+)?(?:current\s+)?treatment\b|"
+        r"\bpresents?\s+for\s+c\d+(?:d\d+)?\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+    note_generic_continue = re.search(
+        r"\btolerat(?:e|es|ed|ing)\s+(?:the\s+)?current\s+chemo(?:therapy)?\b|"
+        r"\bnow\s+(?:has|had)\s+\d+\s+(?:full\s+)?cycles?\b|"
+        r"\bmost recently (?:received|completed)\b[^.;\n]{0,40}\bcycle\b",
+        note_text,
+        re.IGNORECASE,
+    )
+    generic_continue = generic_continue or note_generic_continue
+    if generic_continue and not active_ids:
+        viable = [
+            name for name in tentative_ids
+            if name not in stopped_ids and name not in past_ids
+        ]
+        # Bind an unnamed "continue current treatment" only to one unambiguous regimen family.
+        # Gemcitabine + Abraxane and Gemcitabine + capecitabine count as one standard doublet.
+        viable_set = set(viable)
+        known_doublet = (
+            viable_set in ({"gemcitabine", "abraxane"}, {"gemcitabine", "capecitabine"})
+        )
+        if len(viable_set) == 1 or known_doublet:
+            active_ids.extend(viable)
+            reasons.append("bound unnamed continuation to the only viable recent regimen")
+
+    # In a current A/P, "s/p N cycles of X" immediately followed by "presents for C(N+1)"
+    # or "continue current treatment" describes an ongoing course.  The same phrase in the
+    # full-note longitudinal timeline is intentionally not used.
+    ap_sentences = _clinical_sentences(assessment_and_plan)
+    for index, sentence in enumerate(ap_sentences):
+        if not re.search(r"\b(?:presents? for\s+c\d+|continue(?:s|d|ing)?\s+(?:the\s+)?current treatment)\b", sentence, re.I):
+            continue
+        for prior in ap_sentences[max(0, index - 1):index + 1]:
+            if re.search(r"\bs/p\s+\d+\s+cycles?\b", prior, re.I) \
+                    and not re.search(r"\b(?:completed|finished|holiday|break)\b", prior, re.I):
+                active_ids.extend(_current_med_ids(prior))
+    active_ids = list(dict.fromkeys(active_ids))
+
+    # A named current regimen followed by "only" or "going forward" supersedes older regimens.
+    exclusive_ids = []
+    for canonical, pattern in _CURRENT_MED_PATTERNS:
+        current_only = re.search(
+            r"\b(?:continue(?:s|d|ing)?|currently\s+(?:on|receiving)|remain(?:s|ed)? on)\b"
+            r"[^.;\n]{0,35}" + pattern.pattern + r"[^.;\n]{0,15}\b(?:only|going forward)\b",
+            combined_current,
+            re.IGNORECASE,
+        )
+        switched_to = re.search(
+            r"\bswitch(?:ed|ing)?\s+to\b[^.;\n]{0,25}" + pattern.pattern,
+            combined_current,
+            re.IGNORECASE,
+        )
+        if current_only or switched_to:
+            exclusive_ids.append(canonical)
+    exclusive_ids = list(dict.fromkeys(exclusive_ids))
+    if exclusive_ids:
+        active_ids = list(dict.fromkeys(exclusive_ids + active_ids))
+        reasons.append("current exclusive regimen overrides historical regimen")
+
+    # Irinotecan omission is the clinically decisive distinction between historical
+    # FOLFIRINOX and current FOLFOX in a common toxicity-driven switch.
+    irinotecan_omitted = re.search(
+        r"\b(?:omit(?:ted|ting)?|stop(?:ped|ping)?|discontinu(?:ed|ing))\b"
+        r"[^.;\n]{0,35}\birinotecan\b|"
+        r"\birinotecan\b[^.;\n]{0,35}\b(?:omit(?:ted)?|stop(?:ped)?|discontinu(?:ed)?)\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+    if irinotecan_omitted:
+        stopped_ids.add("irinotecan")
+        if "FOLFOX" in active_ids or "FOLFOX" in exclusive_ids:
+            stopped_ids.add("FOLFIRINOX")
+
+    single_delay = re.search(
+        r"\b(?:today'?s?|this)\s+(?:infusion|dose|cycle)\b[^.;\n]{0,55}"
+        r"\b(?:postpon(?:e|ed)|delay(?:ed)?|cancel(?:led|ed)?|skip(?:ped)?|hold|held)\b|"
+        r"\b(?:postpon(?:e|ed)|delay(?:ed)?|cancel(?:led|ed)?|skip(?:ped)?)\b"
+        r"[^.;\n]{0,55}\b(?:today'?s?|this)\s+(?:infusion|dose|cycle)\b|"
+        r"\b(?:day\s*\d+|c\d+(?:d\d+)?|cycle\s*#?\s*\d+)\b[^.;\n]{0,55}"
+        r"\b(?:postpon(?:e|ed)|delay(?:ed)?|cancel(?:led|ed)?|skip(?:ped)?)\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+    actual_today = re.search(
+        r"\b(?:received|administered|was given|proceed(?:ed)? with)\b[^.;\n]{0,80}"
+        r"\b(?:today|this visit)\b|"
+        r"\b(?:today|this visit)\b[^.;\n]{0,50}\b(?:received|administered|was given)\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+    global_hold = re.search(
+        r"\b(?:hold|held|holding|pause|paused)\b[^.;\n]{0,35}"
+        r"\b(?:all\s+)?(?:chemo(?:therapy)?|systemic therapy|treatment|regimen)\b|"
+        r"\b(?:chemo(?:therapy)?|systemic therapy|treatment|regimen)\b[^.;\n]{0,35}"
+        r"\b(?:on hold|held|paused)\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+    completed_break = False
+    for sentence in _clinical_sentences(all_source):
+        if plan_re.search(sentence) and not re.search(r"\bcurrently|\bnow\b", sentence, re.I):
+            continue
+        completed_course = re.search(
+            r"\b(?:completed|finished)\b[^.;\n]{0,55}\b(?:cycles?|chemo(?:therapy)?|treatment)\b",
+            sentence,
+            re.IGNORECASE,
+        )
+        inactive_state = re.search(
+            r"\b(?:now|currently)\b[^.;\n]{0,30}\b(?:on|under)\b[^.;\n]{0,15}"
+            r"\b(?:chemo(?:therapy)?|treatment)?\s*(?:break|holiday|surveillance|observation)\b|"
+            r"\b(?:chemo(?:therapy)?|treatment)\s+(?:break|holiday)\b|"
+            r"\bno\s+(?:current|active)\s+(?:or\s+future\s+)?chemo(?:therapy)?\b",
+            sentence,
+            re.IGNORECASE,
+        )
+        if completed_course and re.search(r"\b(?:break|holiday|surveillance|observation)\b", sentence, re.I):
+            completed_break = True
+            break
+        if inactive_state:
+            completed_break = True
+            break
+    never_started = re.search(
+        r"\b(?:no treatment has (?:yet )?started|has not started (?:any )?(?:cancer )?treatment|"
+        r"not yet (?:on|started) (?:any )?(?:cancer )?treatment|treatment[- ]naive)\b",
+        combined_current,
+        re.IGNORECASE,
+    )
+
+    kept_known = []
+    existing_ids = [identity for identity, _, known in items if known]
+    existing_id_set = set(existing_ids)
+    for identity in existing_ids:
+        if identity in stopped_ids and identity not in active_ids:
+            reasons.append(f"removed stopped/superseded {identity}")
+            continue
+        if exclusive_ids and identity not in exclusive_ids:
+            reasons.append(f"removed non-current regimen {identity}")
+            continue
+        if never_started and identity not in active_ids:
+            reasons.append(f"removed planned-only {identity}")
+            continue
+        if identity in planned_ids and identity not in active_ids:
+            reasons.append(f"removed planned-only {identity}")
+            continue
+        if completed_break and identity in _CHEMOTHERAPY_MED_IDS and identity not in active_ids:
+            reasons.append(f"removed completed/on-break {identity}")
+            continue
+        if global_hold and not single_delay and not actual_today \
+                and identity in _CHEMOTHERAPY_MED_IDS:
+            reasons.append(f"removed held {identity}")
+            continue
+        kept_known.append(identity)
+
+    # When the prior output was empty or incomplete, add only source-grounded active regimens.
+    if not (global_hold and not single_delay and not actual_today) and not completed_break and not never_started:
+        for identity in active_ids:
+            if identity in stopped_ids and identity not in active_ids:
+                continue
+            if exclusive_ids and identity not in exclusive_ids:
+                continue
+            if existing_id_set and identity not in existing_id_set and not exclusive_ids:
+                # With a non-empty extracted regimen, do not append a different regimen merely
+                # because a long note contains another active-looking historical passage.  The
+                # sole exception is completing a source-confirmed standard doublet.
+                pair_completion = any(
+                    identity in pair and bool(existing_id_set.intersection(pair))
+                    for pair in (
+                        {"gemcitabine", "abraxane"},
+                        {"gemcitabine", "capecitabine"},
+                    )
+                )
+                if not pair_completion:
+                    continue
+            if identity not in kept_known:
+                kept_known.append(identity)
+                reasons.append(f"added active {identity}")
+
+    # Planned-only known drugs can be removed, but unfamiliar extracted names are preserved unless
+    # the source gives a global no-treatment/hold state.  This is the main anti-overreach guard.
+    kept_unknown = [label for _, label in unknown_items]
+    if never_started:
+        kept_unknown = []
+        if unknown_items:
+            reasons.append("cleared unrecognized medication because treatment has not started")
+    elif global_hold and not single_delay and not actual_today:
+        # "chemotherapy held" does not justify deleting a concurrent endocrine/targeted drug whose
+        # class is unknown to this deliberately small resolver.
+        pass
+
+    if set(kept_known) == existing_id_set \
+            and kept_unknown == [label for _, label in unknown_items]:
+        # Preserve the model's harmless casing, ordering, and regimen wording when the semantic
+        # medication set did not change (e.g. "Gemcitabine + Abraxane" or "nal-IRI").
+        resolved = current_meds
+    else:
+        resolved = ", ".join(kept_known + kept_unknown)
+    return resolved, tuple(dict.fromkeys(reasons))
+
+
 def sanitize_response_assessment(
     response,
     note_text,

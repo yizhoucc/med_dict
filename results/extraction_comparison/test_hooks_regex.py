@@ -27,6 +27,7 @@ from extraction_post_hooks import (
     normalize_stage_iv,
     reconcile_metastasis_fields,
     regional_node_evidence,
+    resolve_current_anticancer_meds,
     sanitize_general_metastasis,
     sanitize_response_assessment,
     verify_unique_pathologic_tnm,
@@ -60,6 +61,7 @@ def parse_rows(path):
 
 B = parse_rows(ROOT / "results/extraction_comparison/pipeline_breast_FINAL.txt")
 P = parse_rows(ROOT / "results/extraction_comparison/pipeline_pdac_FINAL.txt")
+PV21 = parse_rows(ROOT / "results/extraction_comparison/pipeline_pdac_matched_v21.txt")
 
 results = []
 def check(label, got, want):
@@ -199,6 +201,235 @@ for row_id in (13, 18):
         )[0],
         "",
     )
+
+# ---- POST-MEDS-FINAL shared current-regimen resolver ----
+def resolve_meds(current_meds, note="", ap="", changes=""):
+    return resolve_current_anticancer_meds(
+        current_meds, note, ap, recent_changes=changes
+    )[0]
+
+check(
+    "meds active Gem/Abrax from explicit current treatment",
+    resolve_meds(
+        "",
+        "She started gemcitabine and Abraxane and is currently receiving the alternate-week regimen.",
+        "Will continue on with treatment without dose or schedule modification.",
+    ),
+    "gemcitabine, abraxane",
+)
+check(
+    "meds active Gem/Abrax after cycles plus continuation",
+    resolve_meds(
+        "",
+        "She started gemcitabine/nab-paclitaxel and is tolerating current chemotherapy well.",
+        "Continue current treatment.",
+    ),
+    "gemcitabine, abraxane",
+)
+check(
+    "meds FOLFOX only removes historical FOLFIRINOX",
+    resolve_meds(
+        "folfox, folfirinox",
+        "Initially treated with mFOLFIRINOX.",
+        "Omitted irinotecan since C3. Will continue with FOLFOX only going forward.",
+    ),
+    "FOLFOX",
+)
+check(
+    "meds omitted irinotecan component removed",
+    resolve_meds(
+        "folfox, irinotecan",
+        "",
+        "Omitted irinotecan since C3. Will continue with FOLFOX only going forward.",
+    ),
+    "FOLFOX",
+)
+check(
+    "meds whole chemotherapy hold clears Gem/Cape",
+    resolve_meds(
+        "gemcitabine, capecitabine",
+        "Postoperative treatment has used gemcitabine and capecitabine.",
+        "We will hold her chemotherapy until the hand-foot syndrome resolves, then resume treatment.",
+    ),
+    "",
+)
+check(
+    "meds explicit not-taking clears capecitabine",
+    resolve_meds(
+        "capecitabine",
+        "Capecitabine (Patient not taking: reported today).",
+        "",
+    ),
+    "",
+)
+check(
+    "meds one postponed cycle remains active",
+    resolve_meds(
+        "FOLFIRINOX",
+        "She is on dose-modified FOLFIRINOX.",
+        "She presents for C3 today; postpone today's infusion because of abnormal liver tests.",
+    ),
+    "FOLFIRINOX",
+)
+check(
+    "meds one cancelled dose remains active",
+    resolve_meds(
+        "gemcitabine, abraxane",
+        "Currently receiving gemcitabine and Abraxane on an alternate-week schedule.",
+        "Day 8 was cancelled for neutropenia; continue the regimen.",
+    ),
+    "gemcitabine, abraxane",
+)
+check(
+    "meds normal off-week remains active",
+    resolve_meds(
+        "capecitabine",
+        "She is currently on capecitabine and this is her scheduled week off.",
+        "Continue capecitabine.",
+    ),
+    "capecitabine",
+)
+check(
+    "meds completed course plus holiday clears",
+    resolve_meds(
+        "FOLFIRINOX",
+        "Completed 12 cycles of FOLFIRINOX and is now on a treatment holiday.",
+        "Continue surveillance.",
+    ),
+    "",
+)
+check(
+    "meds completed course plus surveillance clears",
+    resolve_meds(
+        "gemcitabine, abraxane",
+        "Finished all six cycles of gemcitabine and Abraxane; now under surveillance.",
+        "No active chemotherapy is planned.",
+    ),
+    "",
+)
+check(
+    "meds planned-only regimen clears",
+    resolve_meds(
+        "FOLFIRINOX",
+        "No treatment has started.",
+        "Recommend starting FOLFIRINOX next week.",
+    ),
+    "",
+)
+check(
+    "meds treatment options only clear",
+    resolve_meds(
+        "gemcitabine, abraxane",
+        "The patient is treatment-naive.",
+        "Options include FOLFIRINOX versus gemcitabine/nab-paclitaxel.",
+    ),
+    "",
+)
+check(
+    "meds current AP overrides stale historical regimen",
+    resolve_meds(
+        "FOLFIRINOX, FOLFOX",
+        "Previously received FOLFIRINOX.",
+        "The patient is currently receiving FOLFOX only.",
+    ),
+    "FOLFOX",
+)
+check(
+    "meds current cycle-day recovers doublet",
+    resolve_meds(
+        "",
+        "The patient presents for C4D1 gemcitabine/nab-paclitaxel today.",
+        "Proceed with today's cycle.",
+    ),
+    "gemcitabine, abraxane",
+)
+check(
+    "meds bare status-post cycles do not become current",
+    resolve_meds("", "Status post 6 cycles of FOLFIRINOX.", ""),
+    "",
+)
+check(
+    "meds current AP bridges status-post cycles to next cycle",
+    resolve_meds(
+        "",
+        "",
+        "Patient is now s/p 2 cycles of FOLFIRINOX. She presents for C3 today.",
+    ),
+    "FOLFIRINOX",
+)
+check(
+    "meds hold one drug preserves concurrent targeted therapy",
+    resolve_meds(
+        "trastuzumab, capecitabine",
+        "",
+        "Hold capecitabine for toxicity; continue trastuzumab.",
+    ),
+    "trastuzumab",
+)
+check(
+    "meds conditional future switch does not replace current regimen",
+    resolve_meds(
+        "FOLFIRINOX",
+        "",
+        "Continue FOLFIRINOX; consider FOLFOX if toxicity worsens.",
+    ),
+    "FOLFIRINOX",
+)
+check(
+    "meds actual same-day administration is active",
+    resolve_meds("", "", "Received cycle 1 gemcitabine/Abraxane today."),
+    "gemcitabine, abraxane",
+)
+check(
+    "meds conditional same-day plan is not active",
+    resolve_meds("", "", "Will start gemcitabine/Abraxane today if labs permit."),
+    "",
+)
+check(
+    "meds supportive-only source does not populate current meds",
+    resolve_meds("", "Continue Creon and ondansetron.", ""),
+    "",
+)
+check(
+    "meds literature regimen does not populate current meds",
+    resolve_meds("", "A trial reported outcomes in patients receiving gemcitabine.", ""),
+    "",
+)
+check(
+    "meds historical multi-regimen timeline remains empty",
+    resolve_meds(
+        "",
+        "06/05/18 C1D1 FOLFIRINOX. 11/29/18 C1D1 gemcitabine/Abraxane. Both courses were completed.",
+        "Continue surveillance.",
+    ),
+    "",
+)
+check(
+    "meds AP-current regimen wins over historical multi-regimen timeline",
+    resolve_meds(
+        "FOLFIRINOX, gemcitabine, abraxane",
+        "06/05/18 C1D1 FOLFIRINOX. 11/29/18 C1D1 gemcitabine/Abraxane.",
+        "The patient is currently receiving FOLFOX only.",
+    ),
+    "FOLFOX",
+)
+
+for row_id, expected in (
+    (7, "gemcitabine, abraxane"),
+    (8, "gemcitabine, abraxane"),
+    (10, "FOLFOX"),
+    (18, ""),
+    (19, "folfirinox"),
+):
+    row = PV21[row_id]
+    kp = row["keypoints"]
+    got = resolve_meds(
+        kp.get("Current_Medications", {}).get("current_meds", ""),
+        row["note_text"],
+        row["assessment_and_plan"],
+        kp.get("Treatment_Changes", {}).get("recent_changes", ""),
+    )
+    check(f"meds matched-v21 pdac{row_id}", got, expected)
 
 # affected temporal-window case remains prompt-owned: the conservative helper must not invent
 # a replacement from ambiguous pre-regimen imaging.
