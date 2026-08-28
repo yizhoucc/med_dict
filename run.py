@@ -38,6 +38,7 @@ from extraction_post_hooks import (
     reconcile_metastasis_fields,
     regional_node_evidence,
     resolve_current_anticancer_meds,
+    sanitize_distant_metastasis_by_site,
     sanitize_general_metastasis,
     sanitize_genetic_testing_results,
     sanitize_response_assessment,
@@ -5354,6 +5355,28 @@ def main():
                 if is_recheck and not has_genetic_keyword:
                     gen_test["genetic_testing_plan"] = "None planned."
                     print(f"    [POST-GENETICS-RECHECK] Cleared non-genetic recheck: '{gen_val[:60]}'")
+
+        # POST-DISTMET-SITE-CERTAINTY: final site-by-site evidence ceiling.  This may only
+        # preserve, downgrade, or remove sites already emitted in Distant/Metastasis; it never
+        # discovers a new organ from the note.  It must run before final stage normalization and
+        # before the broad Metastasis rebuild so both consumers see the corrected mixed certainty.
+        cancer_dsc = keypoints.get("Cancer_Diagnosis", {})
+        if isinstance(cancer_dsc, dict):
+            old_dist_dsc = str(cancer_dsc.get("Distant Metastasis", "") or "").strip()
+            new_dist_dsc, reasons_dsc = sanitize_distant_metastasis_by_site(
+                old_dist_dsc,
+                cancer_dsc.get("Metastasis", ""),
+                cancer_dsc.get("Stage_of_Cancer", ""),
+                note_text,
+                assessment_and_plan,
+                cancer_type,
+            )
+            if new_dist_dsc != old_dist_dsc:
+                cancer_dsc["Distant Metastasis"] = new_dist_dsc
+                print(
+                    f"    [POST-DISTMET-SITE-CERTAINTY] '{old_dist_dsc}' → "
+                    f"'{new_dist_dsc}' ({'; '.join(reasons_dsc)})"
+                )
 
         # POST-STAGE-FINAL: Final consistency check — Stage IV must agree with Distant Metastasis [v29]
         # This runs AFTER all other POST hooks to catch cases where earlier hooks

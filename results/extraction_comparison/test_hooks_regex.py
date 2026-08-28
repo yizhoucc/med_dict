@@ -28,6 +28,7 @@ from extraction_post_hooks import (
     reconcile_metastasis_fields,
     regional_node_evidence,
     resolve_current_anticancer_meds,
+    sanitize_distant_metastasis_by_site,
     sanitize_general_metastasis,
     sanitize_genetic_testing_results,
     sanitize_response_assessment,
@@ -1154,6 +1155,263 @@ for label, value in (
     ("pdac16 Foundation profile", PV21[16]["keypoints"]["Genetic_Testing_Results"]["genetic_testing_results"]),
 ):
     check(f"genetic clean control unchanged: {label}", clean_genetic(value), value)
+
+# ---- POST-DISTMET-SITE-CERTAINTY: monotonic per-site evidence ceiling ----
+def dm_fix(distant, general="", note="", ap="", cancer="pdac", stage=""):
+    return sanitize_distant_metastasis_by_site(
+        distant, general, stage, note, ap, cancer
+    )[0]
+
+
+for cancer, row_id, row, expected in (
+    ("breast", 2, BV21[2], "No"),
+    ("breast", 3, BV21[3], "Not sure/Suspected, to right adrenal nodule"),
+    ("breast", 6, BV21[6], "Not sure/Suspected, to bone"),
+    ("breast", 13, BV21[13], "No"),
+    ("breast", 15, BV21[15], "Not sure/Suspected, to right cervical lymph nodes"),
+    ("breast", 18, BV21[18], "No"),
+    ("pdac", 4, PV21[4], "Not sure/Suspected, to liver"),
+    ("pdac", 6, PV21[6], "Not sure/Suspected, to liver"),
+    ("pdac", 12, PV21[12], "Yes, to peritoneum and omentum; Not sure/Suspected, to liver"),
+    ("pdac", 20, PV21[20], "Yes, to peritoneum; Not sure/Suspected, to liver"),
+):
+    diagnosis = row["keypoints"]["Cancer_Diagnosis"]
+    check(
+        f"distant matched-v21 {cancer}{row_id}",
+        dm_fix(
+            diagnosis.get("Distant Metastasis", ""),
+            diagnosis.get("Metastasis", ""),
+            row["note_text"],
+            row["assessment_and_plan"],
+            cancer,
+            diagnosis.get("Stage_of_Cancer", ""),
+        ),
+        expected,
+    )
+
+for cancer, row_id, row in (
+    ("breast", 1, BV21[1]),
+    ("breast", 9, BV21[9]),
+    ("pdac", 3, PV21[3]),
+    ("pdac", 9, PV21[9]),
+    ("pdac", 14, PV21[14]),
+):
+    diagnosis = row["keypoints"]["Cancer_Diagnosis"]
+    original = diagnosis.get("Distant Metastasis", "")
+    check(
+        f"distant matched-v21 clean control {cancer}{row_id}",
+        dm_fix(
+            original,
+            diagnosis.get("Metastasis", ""),
+            row["note_text"],
+            row["assessment_and_plan"],
+            cancer,
+            diagnosis.get("Stage_of_Cancer", ""),
+        ),
+        original,
+    )
+
+check(
+    "distant confirmed liver control unchanged",
+    dm_fix("Yes, to liver", note="Liver biopsy confirmed metastatic pancreatic adenocarcinoma."),
+    "Yes, to liver",
+)
+check(
+    "distant suspected liver control unchanged",
+    dm_fix("Not sure/Suspected, to liver", note="A liver lesion is suspicious for metastasis."),
+    "Not sure/Suspected, to liver",
+)
+check(
+    "distant peritoneum confirmed liver suspected stays mixed",
+    dm_fix(
+        "Yes, to peritoneum and liver",
+        note="CT demonstrates peritoneal carcinomatosis. Liver lesions are suspicious for metastases.",
+    ),
+    "Yes, to peritoneum; Not sure/Suspected, to liver",
+)
+check(
+    "distant confirmed liver does not upgrade suspicious lung",
+    dm_fix(
+        "Yes, to liver and lung",
+        note="Liver biopsy confirmed metastatic adenocarcinoma. Pulmonary nodules are indeterminate.",
+    ),
+    "Yes, to liver; Not sure/Suspected, to lung",
+)
+check(
+    "distant No never imports a general-field liver",
+    dm_fix(
+        "No", "Yes, to liver", note="No evidence of distant metastatic disease."
+    ),
+    "No",
+)
+check(
+    "distant unsupported named liver is removed to unknown",
+    dm_fix("Yes, to liver", note="Pancreatic adenocarcinoma without completed staging."),
+    "Not sure",
+)
+check(
+    "distant breast regional axillary node is removed",
+    dm_fix(
+        "Yes, to right axillary lymph nodes",
+        note="Right axillary node biopsy was positive. No distant metastatic disease.",
+        cancer="breast",
+    ),
+    "No",
+)
+check(
+    "distant breast chest-wall recurrence is local",
+    dm_fix(
+        "Suspected, to parasternal chest wall",
+        note="Biopsy confirms a locoregional parasternal chest-wall recurrence. No other sites of disease.",
+        cancer="breast",
+    ),
+    "No",
+)
+check(
+    "distant benign falx meningioma is cleared",
+    dm_fix(
+        "Not sure/Suspected, to falx cerebri",
+        note="MRI shows a parafalcine lesion most likely a meningioma. No evidence of distant metastasis.",
+        cancer="breast",
+    ),
+    "No",
+)
+check(
+    "distant other-primary lung disease is not borrowed",
+    dm_fix(
+        "Yes, to lung",
+        note="History of renal cell carcinoma metastatic to lung. Current pancreatic cancer staging is incomplete.",
+    ),
+    "Not sure",
+)
+check(
+    "distant confirmed abdominal-wall control unchanged",
+    dm_fix(
+        "Yes, to abdominal wall",
+        note="Abdominal wall biopsy confirmed metastatic pancreatic adenocarcinoma.",
+    ),
+    "Yes, to abdominal wall",
+)
+check(
+    "distant omental caking remains confirmed",
+    dm_fix("Yes, to omentum", note="CT demonstrates diffuse omental caking."),
+    "Yes, to omentum",
+)
+check(
+    "distant generic Yes borrows only existing suspicious bone site",
+    dm_fix(
+        "Yes", "Distant disease uncertain — suspicious bone lesions pending biopsy",
+        note="PET/CT shows osseous lesions suspicious for metastatic disease.",
+    ),
+    "Not sure/Suspected, to bone",
+)
+check(
+    "distant generic Not sure cannot upgrade general confirmed liver",
+    dm_fix(
+        "Not sure", "Yes, to liver",
+        note="A liver lesion is suspicious for metastasis and biopsy is planned.",
+    ),
+    "Not sure/Suspected, to liver",
+)
+check(
+    "distant cystic liver metastasis is not treated as benign cyst",
+    dm_fix("Yes, to liver", note="CT shows known cystic liver metastases."),
+    "Yes, to liver",
+)
+check(
+    "distant neutral adrenal description remains unchanged",
+    dm_fix("Yes, to adrenal gland", note="An adrenal lesion is described; characterization is unavailable."),
+    "Yes, to adrenal gland",
+)
+check(
+    "distant explicit indeterminate adrenal survives generic no-definite statement",
+    dm_fix(
+        "Not sure/Suspected, to adrenal gland",
+        note="There is an indeterminate adrenal nodule. No definite distant metastatic disease.",
+        cancer="breast",
+    ),
+    "Not sure/Suspected, to adrenal gland",
+)
+check(
+    "distant generic established M1 remains generic Yes",
+    dm_fix("Yes", ap="Metastatic adenocarcinoma of the pancreas remains under treatment."),
+    "Yes",
+)
+check(
+    "distant explicit M0 control remains No",
+    dm_fix("No", note="Clinical staging is cT2N1M0."),
+    "No",
+)
+check(
+    "distant unsupported No remains unchanged under conservative policy",
+    dm_fix("No", note="Breast MRI shows the primary tumor and regional axillary nodes.", cancer="breast"),
+    "No",
+)
+check(
+    "distant historical biopsy-proven lung site retained as historical",
+    dm_fix(
+        "Yes, to lung",
+        note="History of lung biopsy positive for metastatic pancreatic adenocarcinoma.",
+    ),
+    "Yes, historically confirmed to lung",
+)
+check(
+    "distant historical confirmed value remains scalar-confirmed",
+    is_confirmed_distant_value("Yes, historically confirmed to lung", "pdac"),
+    True,
+)
+breast2_distant = dm_fix(
+    BV21[2]["keypoints"]["Cancer_Diagnosis"]["Distant Metastasis"],
+    BV21[2]["keypoints"]["Cancer_Diagnosis"]["Metastasis"],
+    BV21[2]["note_text"],
+    BV21[2]["assessment_and_plan"],
+    "breast",
+)
+check(
+    "distant breast2 cleanup preserves locoregional recurrence downstream",
+    sanitize_general_metastasis(
+        breast2_distant,
+        BV21[2]["keypoints"]["Cancer_Diagnosis"]["Metastasis"],
+        BV21[2]["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"],
+        BV21[2]["note_text"],
+        BV21[2]["assessment_and_plan"],
+        "breast",
+    )[0],
+    "Yes, locoregional recurrence; no distant metastasis",
+)
+pdac4_distant = dm_fix(
+    PV21[4]["keypoints"]["Cancer_Diagnosis"]["Distant Metastasis"],
+    PV21[4]["keypoints"]["Cancer_Diagnosis"]["Metastasis"],
+    PV21[4]["note_text"],
+    PV21[4]["assessment_and_plan"],
+    "pdac",
+)
+check(
+    "distant pdac4 downgrade retains physician-explicit metastatic stage",
+    normalize_stage_iv(
+        PV21[4]["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"],
+        pdac4_distant,
+        PV21[4]["assessment_and_plan"],
+        "pdac",
+    ),
+    (PV21[4]["keypoints"]["Cancer_Diagnosis"]["Stage_of_Cancer"], None),
+)
+mixed_distant = dm_fix(
+    "Yes, to peritoneum and liver",
+    note="CT demonstrates peritoneal carcinomatosis. Liver lesions are suspicious for metastases.",
+)
+check(
+    "distant mixed certainty survives final general sanitizer",
+    sanitize_general_metastasis(
+        mixed_distant,
+        "Yes, confirmed liver and peritoneal metastases",
+        "Stage IV",
+        "CT demonstrates peritoneal carcinomatosis. Liver lesions are suspicious for metastases.",
+        "",
+        "pdac",
+    )[0],
+    mixed_distant,
+)
 
 # ---- bug10 POST-DISTMET-SITES: REMOVED (fired on negated "No osseous lesions" → hallucination). ----
 

@@ -108,6 +108,8 @@ def is_confirmed_distant_value(value, cancer_type):
         return False
     if value.rstrip(" .,;:") == "yes":
         return True
+    if re.search(r"^yes\b[^.;]*\bhistorically confirmed to\b", value):
+        return True
     if has_affirmative_m1_site(value, cancer_type):
         return True
     return bool(re.search(r"\b(?:confirmed\s+)?distant\s+(?:metasta\w*|disease)\b", value))
@@ -120,6 +122,7 @@ def has_explicit_m1_evidence(text, cancer_type):
     pattern = re.compile(
         r"\bstage\s*(?:iv|4)\b|\bde novo mbc\b|"
         r"\bmetastatic\s+(?:breast\s+cancer|pancreatic\s+cancer|pdac)\b|"
+        r"\bmetastatic\s+(?:adenocarcinoma|carcinoma)\s+of\s+(?:the\s+)?(?:breast|pancreas)\b|"
         r"peritoneal carcinomatosis|omental cak(?:e|ing)|"
         r"metastatic[^.]{0,35}(?:to|in)\s+(?:the\s+)?"
         r"(?:liver|hepatic|lung|pulmonary|bone|osseous|brain|cerebral|pleur|peritone|"
@@ -663,7 +666,7 @@ def _supported_locoregional_clause(general, note_text, assessment_and_plan, canc
     general = str(general or "")
     requested = re.search(
         r"loc(?:al[\s-]*)?regional(?:\s+chest[\s-]*wall)? recurrence|"
-        r"chest[\s-]*wall recurrence",
+        r"chest[\s-]*wall (?:recurrence|lesion)|parasternal",
         general,
         re.IGNORECASE,
     )
@@ -680,6 +683,254 @@ def _supported_locoregional_clause(general, note_text, assessment_and_plan, canc
         return ""
     return "locoregional chest-wall recurrence" if "chest" in supported.group(0).lower() \
         else "locoregional recurrence"
+
+
+_DM_SITE_PATTERNS = {
+    "cervical_nodes": r"\b(?:(?:right|left|bilateral)\s+)?(?:cervical|level\s+v\s*b)\s+(?:lymph\s*)?nodes?\b",
+    "contralateral_nodes": r"\bcontralateral[^.;,]{0,30}(?:axill\w*|supraclavicular)(?:\s+(?:lymph\s*)?nodes?)?\b",
+    "regional_nodes": r"\b(?:(?:right|left|ipsilateral)\s+)?(?:axill\w*|supraclavicular|sentinel|subpectoral|infraclavicular|internal mammary|regional)(?:\s+(?:lymph\s*)?nodes?)?\b",
+    "peritoneum": r"\b(?:peritoneum|peritoneal)(?:\s+(?:disease|implants?|carcinomatosis|metasta\w*))?\b",
+    "omentum": r"\b(?:omentum|omental)(?:\s+(?:disease|implants?|caking|metasta\w*))?\b",
+    "liver": r"\b(?:liver|hepatic)(?!\s+(?:artery|vein|duct|function))(?:\s+(?:lesions?|metasta\w*))?\b",
+    "lung": r"\b(?:lungs?|pulmonary)(?!\s+(?:artery|embol\w*|function))(?:\s+(?:nodules?|lesions?|metasta\w*))?\b",
+    "bone": r"\b(?:bone|osseous|ilium|iliac|sacrum|sacral|spine|vertebr\w*|ribs?|sternum|femur)(?:\s+(?:lesions?|metasta\w*|disease|ala))?\b",
+    "brain": r"\b(?:brain|cerebral|intracranial|falx(?:\s+cerebri)?|falcine|parafalcine|dural(?:-based)?)\b",
+    "pleura": r"\bpleur\w*(?:\s+(?:disease|metasta\w*))?\b",
+    "adrenal": r"\badrenal(?:\s+(?:glands?|nodules?|lesions?|metasta\w*))?\b",
+    "abdominal_wall": r"\babdominal[ -]*wall(?:\s+(?:lesion|metasta\w*))?\b",
+    "chest_wall": r"\b(?:parasternal|chest[ -]*wall)(?:\s+(?:lesion|nodule|recurrence|metasta\w*))?\b",
+}
+_DM_UNCERTAIN_RE = re.compile(
+    r"\b(?:not sure|unsure|suspect\w*|suspicious|possible|uncertain|equivocal|pending|"
+    r"cannot exclude|concern\w*|indeterminate|suggestive|likely|presumptiv\w*|"
+    r"differential|too small|hard to interpret|non[- ]avid|not pet[- ]avid)\b|"
+    r"\bconsistent with\b", re.IGNORECASE,
+)
+_DM_HISTORY_RE = re.compile(
+    r"\b(?:history of|historical|previously|prior|originally|at diagnosis|status post|s/p)\b",
+    re.IGNORECASE,
+)
+_DM_NO_RE = re.compile(
+    r"(?:^|[^A-Za-z])(?:c|p|yp)?M0\b|\bno (?:other )?(?:sites? of )?(?:distant |systemic )?"
+    r"(?:metasta\w*|disease)\b|\bno evidence of (?:distant |systemic )?"
+    r"(?:metasta\w*|disease)\b|\bwithout (?:evidence of )?(?:distant |systemic )?"
+    r"(?:metasta\w*|disease)\b", re.IGNORECASE,
+)
+def _dm_mentions(value):
+    value = str(value or "")
+    found, occupied = [], []
+    for key, pattern in _DM_SITE_PATTERNS.items():
+        for match in re.finditer(pattern, value, re.IGNORECASE):
+            if any(match.start() < end and start < match.end() for start, end in occupied):
+                continue
+            occupied.append(match.span())
+            found.append((match.start(), match.end(), key, match.group(0)))
+    return sorted(found)
+def _dm_claims(value):
+    value, claims, seen = str(value or "").strip(), [], set()
+    field_status = met_status(value)
+    labels = {
+        "peritoneum": "peritoneum", "omentum": "omentum", "liver": "liver",
+        "lung": "lung", "bone": "bone", "pleura": "pleura",
+        "adrenal": "adrenal gland", "abdominal_wall": "abdominal wall",
+        "chest_wall": "parasternal/chest-wall disease",
+        "regional_nodes": "regional lymph nodes",
+    }
+    for start, end, key, raw in _dm_mentions(value):
+        if key in seen:
+            continue
+        seen.add(key)
+        s, e = _sentence_bounds(value, start, end)
+        uncertain = field_status == "UNSURE" or bool(_DM_UNCERTAIN_RE.search(value[s:e]))
+        label = labels.get(key, raw.lower())
+        if key == "brain" and re.search(r"falx|falcine|parafalcine|dural", raw, re.I):
+            label = "falx/dural lesion"
+        claims.append({"key": key, "label": label,
+                       "certainty": "SUSPECTED" if uncertain else "CONFIRMED"})
+    return claims
+def _dm_contexts(text, key, cancer_type):
+    text, contexts = str(text or ""), []
+    for match in re.finditer(_DM_SITE_PATTERNS[key], text, re.IGNORECASE):
+        start, end = _sentence_bounds(text, match.start(), match.end())
+        context = text[start:end].strip()
+        other = any(term in context.lower() for term in _other_primary_terms(cancer_type))
+        target = ("breast", "mammary", "ductal", "lobular") if cancer_type == "breast" \
+            else ("pancrea", "pdac", "whipple")
+        if context and not (other and not any(term in context.lower() for term in target)):
+            contexts.append(context)
+    if key == "liver":
+        for match in re.finditer(r"\bliver\s*:", text, re.IGNORECASE):
+            contexts.append(text[match.start():min(len(text), match.end() + 650)])
+    return list(dict.fromkeys(contexts))
+def _dm_flags(contexts, key):
+    texts = [context.lower() for context in contexts]
+    text = "\n".join(texts)
+    path = any(
+        re.search(r"\b(?:biopsy|fna|cytolog\w*|patholog\w*)\b", context)
+        and re.search(r"\b(?:positive for|confirmed|metastatic|malignan\w*|adenocarcinoma|carcinoma)\b", context)
+        and not re.search(r"\b(?:negative for|no evidence of|benign|reactive)\b", context)
+        for context in texts
+    )
+    uncertain = any(_DM_UNCERTAIN_RE.search(context) for context in texts)
+    benign = bool(re.search(r"\b(?:benign|reactive|granulomatous|sarcoid)\b", text))
+    if key == "liver":
+        benign |= bool(re.search(r"\b(?:hemangioma|simple cyst|consistent with (?:a )?cyst)\b", text))
+    elif key == "brain":
+        benign |= bool(re.search(r"\b(?:meningioma|encephalomalacia|gliosis)\b", text))
+    negative = bool(
+        re.search(r"\bno (?:new )?(?:suspicious )?(?:lesions?|nodules?|metastases|abnormalities)\b", text)
+        or re.search(r"\bno evidence of (?:malignan\w*|metasta\w*)\b", text)
+        or re.search(r"\bnegative for (?:malignan\w*|carcinoma|metasta\w*)\b", text)
+    )
+    special = {
+        "peritoneum": r"peritoneal carcinomatosis|carcinomatosis with peritoneal|peritoneal implants?",
+        "omentum": r"omental cak(?:e|ing)|carcinomatosis with [^.;]{0,30}omental|omental implants?",
+        "lung": r"lung predominant disease|pulmonary nodules consistent with treated metastases",
+    }
+    site = _DM_SITE_PATTERNS[key]
+    definite = any(
+        not _DM_UNCERTAIN_RE.search(context) and (
+            (key in special and re.search(special[key], context))
+            or re.search(rf"(?:known|treated|confirmed|biopsy[- ]proven)[^.;]{{0,45}}{site}[^.;]{{0,35}}metasta\w*", context)
+            or re.search(rf"{site}[^.;]{{0,45}}(?:metastases|metastatic disease|carcinomatosis)", context)
+            or re.search(rf"metasta\w*[^.;]{{0,40}}(?:to|in|involving)\s+(?:the\s+)?{site}", context)
+        ) for context in texts
+    )
+    direct = bool(
+        re.search(r"\b(?:invad\w*|extension|abut\w*|encas\w*|inseparable from)\b", text)
+        and not re.search(r"\bmetasta\w*\b", text)
+    )
+    return path, uncertain, definite, benign, negative, bool(_DM_HISTORY_RE.search(text)), direct
+def _dm_current_no(note_text, assessment_and_plan):
+    for text in (str(assessment_and_plan or ""), str(note_text or "")):
+        for match in _DM_NO_RE.finditer(text):
+            start, end = _sentence_bounds(text, match.start(), match.end())
+            if not _DM_HISTORY_RE.search(text[start:end]):
+                return True
+    return False
+def _dm_generic_m1(assessment_and_plan, cancer_type):
+    text = str(assessment_and_plan or "")
+    if has_explicit_m1_evidence(text, cancer_type):
+        return True
+    pattern = r"\bmetastatic\s+(?:adenocarcinoma|carcinoma)(?:\s+of\s+the\s+(?:pancreas|breast))?\b"
+    return any(
+        not _DM_UNCERTAIN_RE.search(text[s:e]) and not _DM_HISTORY_RE.search(text[s:e])
+        for match in re.finditer(pattern, text, re.IGNORECASE)
+        for s, e in [_sentence_bounds(text, match.start(), match.end())]
+    )
+
+def _dm_site_evidence(key, note_text, assessment_and_plan, cancer_type):
+    if cancer_type == "breast" and key in ("regional_nodes", "chest_wall"):
+        return "REMOVE"
+    ap = _dm_contexts(assessment_and_plan, key, cancer_type)
+    note = _dm_contexts(note_text, key, cancer_type)
+    if not ap and not note:
+        return "REMOVE"
+    af, nf = _dm_flags(ap, key), _dm_flags(note, key)
+    ap_path, ap_uncertain, ap_definite, ap_benign, ap_negative, _, ap_direct = af
+    no_path, no_uncertain, no_definite, no_benign, no_negative, no_history, no_direct = nf
+    current_no = _dm_current_no(note_text, assessment_and_plan)
+    if ap_path:
+        return "CONFIRMED"
+    if ap_uncertain:
+        return "CONFIRMED" if key in ("peritoneum", "omentum") and no_definite else "SUSPECTED"
+    if ap_definite:
+        return "CONFIRMED"
+    if ap_benign or ap_negative or ap_direct:
+        return "HISTORICAL" if no_path else "REMOVE"
+    if no_path:
+        return "HISTORICAL" if no_history else "CONFIRMED"
+    if no_definite:
+        return "CONFIRMED"
+    if no_uncertain:
+        if (
+            current_no
+            and not _dm_generic_m1(assessment_and_plan, cancer_type)
+            and (no_benign or no_negative)
+        ):
+            return "REMOVE"
+        return "SUSPECTED"
+    if no_benign or no_negative or no_direct or current_no:
+        return "REMOVE"
+    return "KEEP"
+
+def _dm_render(states):
+    groups = {
+        status: list(dict.fromkeys(s["label"] for s in states if s["status"] == status))
+        for status in ("CONFIRMED", "HISTORICAL", "SUSPECTED")
+    }
+    join = lambda xs: xs[0] if len(xs) == 1 else f"{', '.join(xs[:-1])} and {xs[-1]}"
+    clauses = []
+    if groups["CONFIRMED"]:
+        clauses.append(f"Yes, to {join(groups['CONFIRMED'])}")
+    if groups["HISTORICAL"]:
+        clauses.append(f"{'Yes, ' if not clauses else ''}historically confirmed to {join(groups['HISTORICAL'])}")
+    if groups["SUSPECTED"]:
+        clauses.append(f"Not sure/Suspected, to {join(groups['SUSPECTED'])}")
+    return "; ".join(clauses)
+
+def sanitize_distant_metastasis_by_site(
+    distant, general, stage, note_text, assessment_and_plan, cancer_type
+):
+    _ = stage
+    distant, general = str(distant or "").strip(), str(general or "").strip()
+    field_status, claims = met_status(distant), _dm_claims(distant)
+    had_distant_sites = bool(claims)
+    by_key = {claim["key"]: claim for claim in claims}
+    if field_status not in ("NO", "EMPTY"):
+        ceiling = "CONFIRMED" if field_status == "YES" else "SUSPECTED"
+        for claim in _dm_claims(general):
+            if claim["key"] in by_key:
+                continue
+            if ceiling == "SUSPECTED":
+                claim["certainty"] = "SUSPECTED"
+            claim["from_general"] = True
+            claims.append(claim)
+            by_key[claim["key"]] = claim
+
+    states, reasons, changed = [], [], False
+    for claim in claims:
+        evidence = _dm_site_evidence(
+            claim["key"], note_text, assessment_and_plan, cancer_type
+        )
+        from_general = claim.get("from_general", False)
+        if evidence == "REMOVE":
+            if not from_general:
+                changed = True
+                reasons.append(f"removed unsupported/negative {claim['label']}")
+            continue
+        if evidence == "KEEP":
+            if from_general:
+                continue
+            status = claim["certainty"]
+        elif evidence == "SUSPECTED":
+            status = "SUSPECTED"
+            if claim["certainty"] == "CONFIRMED":
+                changed = True
+                reasons.append(f"downgraded {claim['label']} to suspected")
+        elif evidence == "HISTORICAL":
+            status = "HISTORICAL" if claim["certainty"] == "CONFIRMED" else "SUSPECTED"
+            changed |= status != claim["certainty"]
+        else:
+            status = claim["certainty"]
+        if from_general:
+            changed = True
+            reasons.append(f"preserved existing general-field site {claim['label']}")
+        states.append({"label": claim["label"], "status": status})
+
+    if states:
+        return (_dm_render(states), reasons) if changed else (distant, [])
+    if not had_distant_sites:
+        return distant, []
+    if field_status == "YES" and _dm_generic_m1(assessment_and_plan, cancer_type):
+        fallback = "Yes"
+    elif _dm_current_no(note_text, assessment_and_plan):
+        fallback = "No"
+    else:
+        fallback = "Not sure"
+    if fallback != distant:
+        reasons.append("recalibrated site-free distant status")
+    return fallback, reasons
 
 
 def sanitize_general_metastasis(
