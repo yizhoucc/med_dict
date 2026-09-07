@@ -16,6 +16,12 @@ The scoring interface uses a fixed blind mapping:
 
 This mapping is verified in `build_scoring_blind.py`; it was hidden from the clinician in the scoring interface.
 
+## Evaluation provenance
+
+The project owner confirmed that the oncologist reviewed the **newer PL and BL outputs**. The scoring page/template retained stale filenames and was not renamed when its displayed results were updated. Therefore, the legacy filenames referenced by the page-building code must not be used to infer which output version the clinician saw.
+
+The exported CSV contains judgments but does not embed the hashes or version identifiers of the displayed PL and BL artifacts. Those identifiers should be recorded separately before final manuscript submission so the evaluated run can be reproduced exactly.
+
 ## Main result
 
 On the 14 required breast-cancer extraction fields, the oncologist recorded:
