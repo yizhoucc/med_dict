@@ -1,7 +1,9 @@
 # Oncologist 01 blind-rating analysis
 
-Date received: 2026-09-07  
-Raw export: `oncologist_01_breast_blind_scores_20260907.csv`  
+Date received: 2026-09-07
+
+Raw export: `oncologist_01_breast_blind_scores_20260907.csv`
+
 SHA-256: `6484eb1d3c1ac9f8d4ff5f19e1eecbd628f0e7599e1c4a29fe6d574e1baeae33`
 
 ## Interpretation of labels
@@ -90,4 +92,3 @@ Only two ratings contain written comments:
 ## Suggested paper-ready summary
 
 > In a blinded comparison by one oncologist, the inference harness was preferred over the same-model single-prompt baseline in 84 of 106 decisive comparisons across required extraction fields (79.2%), with 172 additional ties. Aggregated by case, the harness won 18 of 20 cases, tied one, and lost one. These results are preliminary pending additional clinician ratings.
-
