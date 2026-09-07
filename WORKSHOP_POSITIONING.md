@@ -1,6 +1,6 @@
 # Workshop / Poster Positioning Memo
 
-Updated: 2026-08-28
+Updated: 2026-09-07
 
 ## Working conclusion
 
@@ -10,11 +10,11 @@ Recommended framing:
 
 > A failure-mode-driven inference harness improves a frozen local open-weight model on prespecified, clinically important extraction categories from longitudinal oncology notes, especially active-treatment temporal disambiguation and stage/metastasis consistency.
 
-The current physician review remains the confirmatory evaluation. LLM-assisted review is an internal quality screen before material is sent to physicians.
+The first identity-masked oncologist evaluation has now been completed on the 20 breast-cancer samples and supports the direction of the internal evaluation. Additional clinicians and PDAC scoring remain confirmatory next steps. LLM-assisted review should be presented as a development and technical-audit measure rather than the primary clinical evidence.
 
 ## Matched-baseline result
 
-The current fully rerun and manually audited comparison is matched v2.2. Across 260 applicable sample-field comparisons:
+The current fully rerun, source-grounded LLM-assisted comparison is matched v2.2. Across 260 applicable sample-field comparisons:
 
 | Core category | PL | BL | Tie | Net PL−BL |
 |---|---:|---:|---:|---:|
@@ -43,6 +43,14 @@ The four P0 failures found in v2.2 were repaired and rerun together with the req
 - the two controls did not develop a core regression.
 
 This is targeted validation, not a replacement full-40 run. Use 66/28/166 as the formal complete-run table until the revised pipeline is rerun on all 40 samples. The targeted evidence supports the claim that the remaining high-impact errors are narrow, auditable, and repairable.
+
+## Preliminary oncologist evaluation
+
+One oncologist completed an identity-masked A/B evaluation of newer PL and BL outputs for all 20 breast-cancer samples. Of 278 completed required-field comparisons, PL was preferred 84 times, BL 22 times, and 172 were ties. Among the 106 directional comparisons, 79.2% favored PL. In an exploratory per-sample aggregation, PL won 18 of 20 samples, BL won one, and one was tied.
+
+Across the seven prespecified core categories, PL scored 51 / 12 / 77 (PL / BL / tie). Six categories favored PL and one, tumor type/receptor status, was even. The largest core advantage was active anticancer medications (17 / 1 / 2); medication planning also strongly favored PL (13 / 0 / 7).
+
+This is preliminary single-rater, breast-only evidence. The score export does not contain the hashes or version identifiers of the displayed outputs; the project owner confirmed that the clinician saw the newer outputs even though the scoring template retained stale filenames. Record the exact evaluated artifact identifiers before submission.
 
 ## Decisions frozen for the matched-baseline rerun
 
@@ -126,7 +134,7 @@ Required:
 
 1. Rerun the revised pipeline on all 40 matched samples if the final poster will claim per-category v2.3.x totals; otherwise report the complete v2.2 table plus the targeted repair check separately.
 2. Regenerate the PL-versus-BL figure using the chosen frozen result table and remove legacy 89/38 numbers.
-3. Incorporate the real physician scores when available.
+3. Record the exact artifact identifiers used for the completed oncologist evaluation, then incorporate additional oncologist and PDAC scores as they arrive.
 
 Useful if time permits:
 
@@ -150,4 +158,8 @@ Before the rerun:
 
 Current accurate wording:
 
-> Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 66–28 advantage over a single-pass baseline across 260 manually reviewed core-field comparisons, with 166 ties. The harness led in six of seven categories; Stage remained slightly behind in the complete v2.2 run. A subsequent affected-sample-plus-control regression eliminated all four identified P0 failures and scored 29–0–22 on 51 applicable core comparisons, but has not yet been repeated across all 40 samples.
+> Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 66–28 advantage over a single-pass baseline across 260 source-grounded, LLM-assisted core-field comparisons, with 166 ties. The harness led in six of seven categories; Stage remained slightly behind in the complete v2.2 run. A subsequent affected-sample-plus-control regression eliminated all four identified P0 failures and scored 29–0–22 on 51 applicable core comparisons, but has not yet been repeated across all 40 samples.
+
+Preliminary clinician wording:
+
+> In an identity-masked evaluation of 20 breast-cancer notes, one oncologist preferred the inference harness in 84 of 278 completed required-field comparisons, preferred the single-prompt baseline in 22, and rated 172 as ties. Among the seven prespecified core categories, the harness recorded 51 wins versus 12 baseline wins and was at least as good as the baseline in every category. These findings are preliminary pending additional clinicians and pancreatic-cancer evaluation.
