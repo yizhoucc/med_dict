@@ -92,6 +92,31 @@ Among the 95 decisive PDAC comparisons, PL won **86/95 (90.5%)**. At the sample 
 | medication_plan | 11 | 0 | 9 | +11 |
 | recent_changes | 4 | 4 | 12 | 0 |
 
+## All completed clinician ratings
+
+Across the three completed clinician-by-cancer evaluations, there are 817 required-field judgments:
+
+| Evaluation | PL | BL | Tie | PL share among decisive judgments |
+|---|---:|---:|---:|---:|
+| Oncologist 01, breast | 84 | 22 | 172 | 79.2% |
+| Oncologist 02, breast | 79 | 8 | 193 | 90.8% |
+| Oncologist 02, PDAC | 86 | 9 | 164 | 90.5% |
+| **All available ratings** | **249** | **39** | **529** | **86.5%** |
+
+The seven prespecified categories contribute 400 ratings across their applicable cancer types. They total PL 156 / BL 18 / TIE 226, so PL accounts for **89.7% of the 174 decisive core judgments**.
+
+| Core category | PL | BL | Tie | Net PL-BL |
+|---|---:|---:|---:|---:|
+| Active anticancer medications | 50 | 1 | 9 | +49 |
+| Stage | 24 | 2 | 34 | +22 |
+| Distant metastasis | 8 | 2 | 50 | +6 |
+| Regional or overall metastasis | 35 | 1 | 24 | +34 |
+| Treatment response | 18 | 1 | 41 | +17 |
+| Breast type and receptor status | 8 | 6 | 26 | +2 |
+| Completed molecular or genetic results | 13 | 5 | 42 | +8 |
+
+All seven core categories have a positive aggregate PL margin in the available clinician data. The most stable advantages are active anticancer medication and regional or overall metastatic involvement. Breast type and receptor status remains the weakest category because its pooled margin is only 8 to 6.
+
 ## Agreement with Oncologist 01
 
 The inter-rater comparison uses the 278 required breast ratings present in both exports. It excludes the first file's optional `findings` and `lab_summary` rows and its stray `p8 / supportive_meds` row.
@@ -119,7 +144,7 @@ Field-level exact agreement ranged from 60% to 100%:
 
 The lower agreement for receptor extraction and medication planning is a useful target for adjudication and clearer scoring guidance.
 
-## Combined descriptive result
+## Breast-cancer combined result
 
 Pooling the two clinicians' recorded required breast ratings gives 558 rating decisions:
 
@@ -129,6 +154,8 @@ Pooling the two clinicians' recorded required breast ratings gives 558 rating de
 - PL share among decisive judgments: **163/193 (84.5%)**
 
 This pooled count is descriptive. Ratings are clustered within samples, fields, and clinicians, so the 558 rows should not be treated as independent observations in a naive significance test. The final analysis should use a paired or hierarchical method and should preserve clinician identity as a grouping variable.
+
+As an exploratory sample-level check, the combined PL-minus-BL field margin was positive for all 20 breast notes. A two-sided exact sign test at the note level gives `p=1.9e-6`. For the second oncologist's PDAC review, 18 note-level margins were positive and two were tied, giving `p=7.6e-6` after excluding ties. These tests avoid treating every field as independent, but they were not the prespecified final model and do not resolve the limited number of clinicians. They should support internal interpretation, not replace the planned evaluator-note-field analysis.
 
 ## Data-quality notes
 

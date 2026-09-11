@@ -1,6 +1,6 @@
 # Workshop / Poster Positioning Memo
 
-Updated: 2026-09-07
+Updated: 2026-09-11
 
 ## Working conclusion
 
@@ -10,7 +10,7 @@ Recommended framing:
 
 > A failure-mode-driven inference harness improves a frozen local open-weight model on prespecified, clinically important extraction categories from longitudinal oncology notes, especially active-treatment temporal disambiguation and stage/metastasis consistency.
 
-The first identity-masked oncologist evaluation has now been completed on the 20 breast-cancer samples and supports the direction of the internal evaluation. Additional clinicians and PDAC scoring remain confirmatory next steps. LLM-assisted review should be presented as a development and technical-audit measure rather than the primary clinical evidence.
+Two identity-masked oncologist evaluations have now been completed on the 20 breast-cancer samples, and the second oncologist also completed the 20 PDAC samples. Both clinicians independently favored PL on breast cancer, and the PDAC result showed the same direction. Additional clinicians remain necessary for the prespecified multi-rater model. LLM-assisted review should be presented as a development and technical-audit measure rather than the primary clinical evidence.
 
 ## Matched-baseline result
 
@@ -44,13 +44,17 @@ The four P0 failures found in v2.2 were repaired and rerun together with the req
 
 This is targeted validation, not a replacement full-40 run. Use 66/28/166 as the formal complete-run table until the revised pipeline is rerun on all 40 samples. The targeted evidence supports the claim that the remaining high-impact errors are narrow, auditable, and repairable.
 
-## Preliminary oncologist evaluation
+## Current oncologist evaluation
 
-One oncologist completed an identity-masked A/B evaluation of newer PL and BL outputs for all 20 breast-cancer samples. Of 278 completed required-field comparisons, PL was preferred 84 times, BL 22 times, and 172 were ties. Among the 106 directional comparisons, 79.2% favored PL. In an exploratory per-sample aggregation, PL won 18 of 20 samples, BL won one, and one was tied.
+Two oncologists completed identity-masked A/B evaluation of newer PL and BL outputs for all 20 breast-cancer samples. The first recorded PL 84 / BL 22 / TIE 172 across 278 required judgments. The second recorded PL 79 / BL 8 / TIE 193 across all 280 required judgments. Pooled across breast cancer, the result is PL 163 / BL 30 / TIE 365, and 84.5% of directional judgments favor PL. The combined within-note margin favors PL in all 20 breast cases.
 
-Across the seven prespecified core categories, PL scored 51 / 12 / 77 (PL / BL / tie). Six categories favored PL and one, tumor type/receptor status, was even. The largest core advantage was active anticancer medications (17 / 1 / 2); medication planning also strongly favored PL (13 / 0 / 7).
+The two oncologists agreed on 230 of 278 shared breast ratings, for 82.7% exact agreement and Cohen's kappa of 0.645. Only nine disagreements were direct PL-versus-BL reversals; most disagreements were between a directional preference and a tie. Agreement was lowest for tumor type/receptor status and medication planning, both 60%. Medication planning nevertheless favored PL for both clinicians and had no BL wins, so the disagreement there concerns effect magnitude rather than direction.
 
-This is preliminary single-rater, breast-only evidence. The score export does not contain the hashes or version identifiers of the displayed outputs; the project owner confirmed that the clinician saw the newer outputs even though the scoring template retained stale filenames. Record the exact evaluated artifact identifiers before submission.
+The second oncologist also completed 259 of 260 required PDAC judgments: PL 86 / BL 9 / TIE 164. PL accounted for 90.5% of directional judgments and won 18 of 20 samples by within-note margin, with two ties. The only missing item is `p7 / lab_plan`.
+
+Across all completed clinician evaluations, the current total is PL 249 / BL 39 / TIE 529 over 817 required judgments. Across the prespecified core categories, it is PL 156 / BL 18 / TIE 226. Every core category has a positive aggregate PL margin. The most reliable strengths are active anticancer medications and regional or overall metastatic involvement. Breast type/receptor status remains the weakest core claim.
+
+This is now replicated breast-cancer evidence plus a first PDAC evaluation, but it is not the final planned multi-rater result. Only one oncologist has evaluated PDAC, the A/B positions were fixed, and preference ties can include cases in which both outputs are wrong. The score exports also do not contain the hashes or version identifiers of the displayed outputs; record the exact evaluated artifact identifiers before submission.
 
 ## Decisions frozen for the matched-baseline rerun
 
@@ -142,7 +146,7 @@ Required:
 
 1. Rerun the revised pipeline on all 40 matched samples if the final poster will claim per-category v2.3.x totals; otherwise report the complete v2.2 table plus the targeted repair check separately.
 2. Regenerate the PL-versus-BL figure using the chosen frozen result table and remove legacy 89/38 numbers.
-3. Record the exact artifact identifiers used for the completed oncologist evaluation, then incorporate additional oncologist and PDAC scores as they arrive.
+3. Record the exact artifact identifiers used for both completed oncologist evaluations, collect the remaining planned oncologist ratings, and adjudicate the clinically important inter-rater disagreements.
 
 Useful if time permits:
 
@@ -168,6 +172,6 @@ Current accurate wording:
 
 > Using the same frozen Qwen2.5-32B model and target output schema, the inference harness achieved an overall 66–28 advantage over a single-pass baseline across 260 source-grounded, LLM-assisted core-field comparisons, with 166 ties. The harness led in six of seven categories; Stage remained slightly behind in the complete v2.2 run. A subsequent affected-sample-plus-control regression eliminated all four identified P0 failures and scored 29–0–22 on 51 applicable core comparisons, but has not yet been repeated across all 40 samples.
 
-Preliminary clinician wording:
+Current clinician wording:
 
-> In an identity-masked evaluation of 20 breast-cancer notes, one oncologist preferred the inference harness in 84 of 278 completed required-field comparisons, preferred the single-prompt baseline in 22, and rated 172 as ties. Among the seven prespecified core categories, the harness recorded 51 wins versus 12 baseline wins and was at least as good as the baseline in every category. These findings are preliminary pending additional clinicians and pancreatic-cancer evaluation.
+> In identity-masked evaluations, two oncologists independently favored the inference harness on 20 breast-cancer notes. Across 558 pooled breast judgments, the harness was preferred 163 times, the single-prompt baseline 30 times, and 365 comparisons were ties; exact inter-rater agreement was 82.7% with Cohen's kappa of 0.645. One oncologist also evaluated 20 pancreatic-cancer notes, recording 86 harness preferences, 9 baseline preferences, and 164 ties. Across all currently completed evaluations, 86.5% of directional judgments favored the harness. These findings remain preliminary pending additional oncologists and the prespecified clustered analysis.
