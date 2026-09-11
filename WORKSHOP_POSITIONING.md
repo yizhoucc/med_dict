@@ -117,6 +117,14 @@ The proof of concept uses breast and pancreatic oncology progress notes, which r
 
 These citations were checked against Crossref/Europe PMC/arXiv by a read-only Codex research pass; titles and claims should be rechecked when the manuscript bibliography is assembled.
 
+### Clinician evaluation and workflow distinction
+
+The oncology extraction literature often includes clinicians upstream as annotators, adjudicators, or terminology experts. That is different from asking practicing oncologists to compare the final outputs of two complete systems. The supplemental methodology table in Chen et al.'s 24-study scoping review is dominated by automatic metrics against labels; only two studies explicitly report Likert-style human ratings of model outputs, and both concern radiology tasks. We did not identify a field-level, identity-masked comparison of complete extraction workflows by practicing oncologists in that review.
+
+The dataset claim also needs precision. CORAL is public, but it contains real deidentified longitudinal oncology notes with expert annotation. Its advantage is clinical realism and temporal complexity, not exclusivity or scale. Some related studies use larger multi-institution cohorts, while others use synthetic notes or narrower pathology and procedure reports.
+
+The workflow contribution is the evaluated combination rather than any single component. Prompt engineering, retrieval, guardrails, retries, and hybrid rules all have precedents. Among the closest studies reviewed, none evaluated the full combination used here: field-specific routing, selective dependency transfer, five verification stages, oncology drug and terminology resources, deterministic clinical hooks, cross-field consistency checks, action logging, source attribution, a same-model baseline, and direct oncologist comparison.
+
 ## Claims to avoid
 
 - “There are no competitors.”
