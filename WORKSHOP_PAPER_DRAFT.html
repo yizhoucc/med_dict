@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workshop Paper Draft</title>
+  <style>
+:root {
+  --ink: #17212b;
+  --muted: #5f6b76;
+  --navy: #123b5d;
+  --blue: #2b8cbe;
+  --blue-soft: #eaf5fb;
+  --orange: #d95f0e;
+  --paper: #ffffff;
+  --page: #edf1f5;
+  --line: #d8e0e7;
+  --violet: #6750a4;
+  --violet-soft: #f4f0fb;
+  --warning: #8a5a00;
+  --warning-soft: #fff7df;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--page);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.62;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 920px);
+  gap: 28px;
+  width: min(1240px, calc(100% - 36px));
+  margin: 24px auto 70px;
+  align-items: start;
+}
+.toc {
+  position: sticky;
+  top: 18px;
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 18px rgba(20, 43, 64, 0.06);
+}
+.toc-title { margin: 0 0 10px; color: var(--navy); font-size: 15px; font-weight: 750; }
+.toc a { display: block; color: #34495a; text-decoration: none; padding: 4px 6px; border-radius: 6px; font-size: 12.5px; }
+.toc a:hover { color: var(--navy); background: var(--blue-soft); }
+.toc a.level-3 { padding-left: 18px; color: var(--muted); font-size: 11.5px; }
+.toc-actions { display: flex; gap: 8px; margin: 0 0 14px; }
+.toc button {
+  border: 1px solid #aab8c4;
+  border-radius: 7px;
+  background: white;
+  color: var(--navy);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 650;
+}
+article {
+  min-width: 0;
+  padding: 46px 54px 70px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 12px 35px rgba(20, 43, 64, 0.08);
+}
+h1 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 35px;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+h2 {
+  margin: 40px 0 14px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid #dce8f0;
+  color: var(--navy);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  line-height: 1.25;
+}
+h3 {
+  margin: 28px 0 10px;
+  color: #214f70;
+  font-size: 18px;
+  line-height: 1.3;
+}
+p { margin: 10px 0; }
+ul, ol { margin: 9px 0 14px; padding-left: 26px; }
+li { margin: 5px 0; }
+strong { color: #102f47; }
+em { color: #34495a; }
+code {
+  padding: 1px 5px;
+  border: 1px solid #dce4ea;
+  border-radius: 5px;
+  background: #f4f7f9;
+  color: #23465e;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.88em;
+}
+a { color: #176a9a; }
+.draft-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #e8f2f8;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+}
+.render-note {
+  margin: 18px 0 26px;
+  padding: 12px 15px;
+  border-left: 4px solid var(--violet);
+  border-radius: 7px;
+  background: var(--violet-soft);
+  color: #433767;
+  font-size: 13px;
+}
+.abstract-section {
+  margin: 26px -18px 32px;
+  padding: 8px 18px 22px;
+  border: 1px solid #cfe0ec;
+  border-left: 5px solid var(--blue);
+  border-radius: 10px;
+  background: #f7fbfd;
+}
+.abstract-section h2 { margin-top: 14px; border-bottom: 0; }
+.review-section {
+  margin: 24px 0 30px;
+  padding: 2px 18px 12px;
+  border: 1px solid #eadfc3;
+  border-radius: 10px;
+  background: #fffaf0;
+}
+.table-wrap {
+  width: 100%;
+  margin: 18px 0 24px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 9px 11px; border-bottom: 1px solid #e4eaef; text-align: left; vertical-align: top; }
+th { background: #eef5f9; color: var(--navy); font-weight: 750; }
+tbody tr:nth-child(even) { background: #fafcfd; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.figure-placeholder {
+  position: relative;
+  margin: 22px 0 28px;
+  padding: 20px 20px 14px;
+  border: 2px dashed #9a87c7;
+  border-radius: 11px;
+  background: var(--violet-soft);
+  color: #342a50;
+}
+.figure-placeholder::before {
+  content: "FIGURE SPECIFICATION";
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--violet);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.figure-placeholder p { margin: 8px 0; }
+.figure-placeholder p:first-of-type { font-size: 16px; }
+.rough-figure {
+  margin: 25px 0 8px;
+  padding: 14px;
+  border: 1px solid #cad7df;
+  border-radius: 10px;
+  background: #fbfdfe;
+  text-align: center;
+}
+.rough-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
+.rough-figure figcaption { margin-top: 9px; color: var(--muted); font-size: 12px; }
+.rough-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #e6eef3;
+  color: #3c5262;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.todo {
+  padding: 11px 14px;
+  border: 1px solid #eed48a;
+  border-radius: 8px;
+  background: var(--warning-soft);
+  color: var(--warning);
+  font-weight: 650;
+}
+.references-section { color: #44515c; font-size: 13px; }
+.references-section h2 { font-size: 22px; }
+@media (max-width: 980px) {
+  .layout { display: block; width: min(920px, calc(100% - 22px)); margin-top: 11px; }
+  .toc { position: relative; top: 0; max-height: none; margin-bottom: 12px; }
+  .toc a { display: none; }
+  article { padding: 30px 24px 55px; }
+  h1 { font-size: 29px; }
+}
+@media print {
+  @page { size: letter; margin: 16mm; }
+  body { background: white; font-size: 10.5pt; }
+  .layout { display: block; width: auto; margin: 0; }
+  .toc { display: none; }
+  article { border: 0; box-shadow: none; padding: 0; }
+  h1 { font-size: 22pt; }
+  h2 { page-break-after: avoid; font-size: 16pt; }
+  h3 { page-break-after: avoid; font-size: 13pt; }
+  .figure-placeholder, .rough-figure, .table-wrap { break-inside: avoid; }
+  .rough-figure img { max-height: 650px; object-fit: contain; }
+}
+</style>
+</head>
+<body>
+  <div class="layout">
+    <nav class="toc">
+<div class="toc-title">Workshop draft</div>
+<div class="toc-actions"><button onclick="window.print()">Print / Save PDF</button></div>
+<a class="level-2" href="#questions-for-the-clinical-collaborator">Questions for the clinical collaborator</a>
+<a class="level-2" href="#abstract">Abstract</a>
+<a class="level-3" href="#background">Background</a>
+<a class="level-3" href="#objective">Objective</a>
+<a class="level-3" href="#methods">Methods</a>
+<a class="level-3" href="#results">Results</a>
+<a class="level-3" href="#conclusions">Conclusions</a>
+<a class="level-2" href="#1-introduction">1. Introduction</a>
+<a class="level-2" href="#2-methods">2. Methods</a>
+<a class="level-3" href="#2-1-study-design">2.1 Study design</a>
+<a class="level-3" href="#2-2-dataset">2.2 Dataset</a>
+<a class="level-3" href="#2-3-base-model-and-baseline">2.3 Base model and baseline</a>
+<a class="level-3" href="#2-4-inference-harness">2.4 Inference harness</a>
+<a class="level-3" href="#2-5-development-and-regression-testing">2.5 Development and regression testing</a>
+<a class="level-3" href="#2-6-prespecified-clinical-fields">2.6 Prespecified clinical fields</a>
+<a class="level-3" href="#2-7-technical-evaluation">2.7 Technical evaluation</a>
+<a class="level-3" href="#2-8-oncologist-evaluation">2.8 Oncologist evaluation</a>
+<a class="level-2" href="#3-results">3. Results</a>
+<a class="level-3" href="#3-1-current-oncologist-evaluation">3.1 Current oncologist evaluation</a>
+<a class="level-3" href="#3-2-inter-rater-agreement-and-core-fields">3.2 Inter-rater agreement and core fields</a>
+<a class="level-3" href="#3-3-complete-matched-technical-audit">3.3 Complete matched technical audit</a>
+<a class="level-3" href="#3-4-targeted-repair-evaluation">3.4 Targeted repair evaluation</a>
+<a class="level-3" href="#3-5-qualitative-comments">3.5 Qualitative comments</a>
+<a class="level-2" href="#4-discussion">4. Discussion</a>
+<a class="level-3" href="#4-1-main-interpretation">4.1 Main interpretation</a>
+<a class="level-3" href="#4-2-which-questions-were-difficult-for-the-model">4.2 Which questions were difficult for the model?</a>
+<a class="level-3" href="#4-3-how-the-observed-pattern-relates-to-the-harness">4.3 How the observed pattern relates to the harness</a>
+<a class="level-3" href="#4-4-comparison-with-related-work">4.4 Comparison with related work</a>
+<a class="level-3" href="#4-5-clinical-and-technical-implications">4.5 Clinical and technical implications</a>
+<a class="level-3" href="#4-6-pilot-status-and-next-steps">4.6 Pilot status and next steps</a>
+<a class="level-2" href="#5-limitations">5. Limitations</a>
+<a class="level-2" href="#6-conclusion">6. Conclusion</a>
+<a class="level-2" href="#references">References</a>
+</nav>
+    <article><!-- After editing this draft, run: python3 render_workshop_draft.py -->
+<h1>A failure-mode-driven inference harness for oncology note extraction</h1>
+<div class="draft-meta">
+  <span class="chip">Version 0.4, September 2026</span>
+  <span class="chip">2 oncologists</span>
+  <span class="chip">817 required-field judgments</span>
+  <span class="chip">HTML review copy</span>
+</div>
+<div class="render-note">Figure specification cards describe the intended publication graphics. Embedded SVGs are internal trend checks and are not final artwork.</div>
+<p><strong>Pilot report draft for clinical collaborator review</strong></p>
+<p>Version 0.4, September 2026</p>
+<p>Authors: [TODO]</p>
+<p>Affiliations: [TODO]</p>
+<p>Target venue and format: [TODO]</p>
+<p>This draft includes two completed oncologist submissions. Both oncologists evaluated the breast-cancer cases, and the second also evaluated the pancreatic-cancer cases. The planned final multi-oncologist model and bracketed inferential results remain placeholders and must be completed before submission. Figure placeholders specify the intended visual design and current trend; they are not final artwork.</p>
+<p>Short version for clinical review: both systems use the same language model. The baseline asks the model to extract everything in one pass. The harness divides the task into smaller clinical questions, checks the answers, applies narrow oncology rules to recurring errors, and links each result to supporting text from the note.</p>
+<section class="review-section"><h2 id="questions-for-the-clinical-collaborator">Questions for the clinical collaborator</h2>
+<p>Please focus on the following points during this review. These questions will be removed from the submitted manuscript.</p>
+<ol>
+<li>Are the seven core clinical fields the right ones to call clinically important?</li>
+<li>Are our interpretations of active therapy, stage, regional versus distant metastasis, treatment response, receptor status, and molecular results clinically sound?</li>
+<li>Does the Discussion explain the observed strengths and weaknesses without claiming more than the study shows?</li>
+<li>Which examples would be most persuasive to an oncology audience?</li>
+<li>Are any clinical statements inaccurate, overstated, or missing necessary context?</li>
+<li>Is our distinction between clinician-created ground truth and clinician evaluation of final outputs fair and clinically meaningful?</li>
+</ol>
+</section><section class="abstract-section"><h2 id="abstract">Abstract</h2>
+<h3 id="background">Background</h3>
+<p>Large language models can extract structured information from clinical notes, but a single prompt often confuses current and historical treatment, suspected and confirmed disease, and completed findings and future plans. These errors are difficult to detect because the resulting text remains fluent. Oncology notes are a demanding test case because they combine pathology, imaging, treatment history, current therapy, response assessment, and conditional plans across a long clinical timeline.</p>
+<h3 id="objective">Objective</h3>
+<p>To test whether an inference harness can improve oncology information extraction from a frozen, locally served open-weight language model without fine-tuning.</p>
+<h3 id="methods">Methods</h3>
+<p>We built a failure-mode-driven inference harness around Qwen2.5-32B-Instruct-AWQ. The harness decomposes extraction into field-specific tasks, passes selected information between dependent tasks, applies a five-stage verification cascade, uses deterministic oncology rules for recurring high-confidence errors, and returns supporting source text. We compared the full harness with a single-prompt baseline using the same model and target field contract on 40 held-out CORAL notes, including 20 breast cancer and 20 pancreatic cancer notes. CORAL contains real, deidentified longitudinal oncology notes with expert annotations rather than synthetic cases or internet vignettes. Two oncologists have completed identity-masked A/B comparisons to date. Both evaluated breast cancer, and one also evaluated pancreatic cancer. The planned final analysis will account for repeated judgments by evaluator, note, and field.</p>
+<h3 id="results">Results</h3>
+<p>In the completed matched technical audit, the harness was preferred in 66 core comparisons, the baseline in 28, and 166 were ties. Across the currently completed clinical evaluations, the harness was preferred in 249 of 817 required-field judgments, the baseline in 39, and 529 were ties. Among the 288 directional judgments, 86.5% favored the harness. The two breast-cancer evaluations together contributed 163 harness preferences, 30 baseline preferences, and 365 ties; exact agreement between oncologists was 82.7% with Cohen's kappa of 0.645. In the pancreatic-cancer evaluation, the harness was preferred 86 times, the baseline 9 times, and 164 comparisons were ties.</p>
+<p class="todo">[FINAL MULTI-RATER RESULT: Across FINAL N oncologists and FINAL N evaluable judgments, the harness was preferred in FINAL X, the baseline in FINAL Y, and FINAL Z were ties. The adjusted analysis showed a significant preference for the harness, effect estimate FINAL, 95% CI FINAL, p=FINAL.]</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Two oncologists independently favored the inference harness on breast-cancer extraction, and the first pancreatic-cancer evaluation showed the same direction. These pilot findings support inference engineering as a practical way to improve a frozen local model, while additional oncologists and a prespecified clustered analysis remain necessary for the final claim.</p>
+</section><h2 id="1-introduction">1. Introduction</h2>
+<p>Most clinically useful information in oncology is still recorded in free text. A progress note may contain the diagnosis, pathology, receptor status, treatment history, toxicities, response, and next steps, but these facts are spread across sections and timepoints. Manual review is slow, and conventional extraction systems require substantial annotation and task-specific development. The attraction of large language models is straightforward: one model can read many note styles and return structured fields without a new supervised model for every question.</p>
+<p>Research activity has moved faster than routine clinical adoption. A 2025 scoping review identified 24 studies of language-model-based oncology information extraction, but also found that external validation and real-world workflow integration remained limited [1]. Clinical deployment has a higher bar than a demonstration on a benchmark. A useful system must preserve uncertainty, distinguish current care from historical events, avoid unsupported facts, and produce results that a clinician can trace back to the note.</p>
+<p>Longitudinal oncology notes expose weaknesses that are easy to miss in simpler extraction tasks. A medication list can contain anticancer therapy, supportive treatment, chronic home medications, discontinued drugs, and therapies that are only being discussed. Regional lymph nodes must not be labeled as distant metastases. A suspicious lesion awaiting biopsy must not become confirmed stage IV disease. Tumor growth before treatment is not evidence of failure of a regimen that has just started. A model can mention medically relevant information and still place it in the wrong field or timepoint.</p>
+<p>Several strategies have been used to improve clinical extraction. Large proprietary models can perform zero-shot extraction but still omit note-specific details and hallucinate [2]. Local open-weight models reduce dependence on external services, but performance varies with model size and prompt design [3,8]. Fine-tuned hybrid systems can achieve strong performance and external validation, although they require large labeled datasets and model training [5]. Hierarchical prompting, validation layers, and retry mechanisms also improve extraction without conventional fine-tuning [6,7]. These studies establish prior work for the individual techniques used in modern extraction systems.</p>
+<p>Human involvement also differs across studies. Clinicians or medical experts often create gold-standard annotations, resolve disagreements, or guide terminology selection. That work establishes whether a model matches a reference label. It does not answer whether a practicing oncologist considers one complete system output more faithful, complete, and clinically useful than another when both contain partly correct information. In the supplemental methods table of the 24-study scoping review, most papers reported automatic performance metrics against labels. Only two explicitly reported Likert-style human ratings of model outputs, and both evaluated radiology tasks [1]. We did not identify a field-level, identity-masked comparison of complete extraction systems by practicing oncologists in that review.</p>
+<p>Our approach treats recurring model errors as engineering targets. We use the term inference harness for the software layer that controls how a frozen model is prompted, checked, corrected, and linked to evidence. The model itself is unchanged. When review identifies a repeated failure, such as importing a stopped drug into current therapy or turning suspected metastasis into confirmed disease, the system receives a narrow correction through prompt instructions, verification logic, or a deterministic clinical rule. Each correction can be logged and regression-tested.</p>
+<p>The harness is more than a long prompt or retrieval step. Different fields follow different extraction routes. Selected outputs pass into later tasks only when they provide relevant clinical context. Verification stages run after generation, and deterministic hooks enforce narrow oncology constraints across related fields. The system records these interventions and links final values to note evidence. Among the closest studies we reviewed, we did not identify an evaluation of this full combination on real longitudinal oncology notes with a same-model baseline and direct oncologist comparison.</p>
+<p>We tested whether this approach improves extraction under a controlled comparison. The harness and baseline use the same Qwen2.5-32B model and the same target schema. The main difference is the inference process surrounding the model. We focus on seven clinical questions that require more than surface entity recognition: active anticancer therapy, stage, distant metastasis, regional or overall metastatic involvement, treatment response, breast cancer type and receptor status, and completed molecular or genetic results.</p>
+<p>We hypothesized that the harness would outperform the single-prompt baseline overall and that the largest gains would occur in fields directly addressed by temporal checks, clinical classification rules, and cross-field consistency checks. We also expected many ties because the same base model should answer straightforward questions similarly in both conditions.</p>
+<h2 id="2-methods">2. Methods</h2>
+<h3 id="2-1-study-design">2.1 Study design</h3>
+<p>This is a pilot evaluation of a structured inference workflow for oncology information extraction. The study includes a same-model technical comparison on 40 held-out notes and an ongoing multi-oncologist A/B evaluation. At the time of this draft, two oncologists have completed the breast-cancer evaluation, and one of them has also completed the pancreatic-cancer evaluation.</p>
+<h3 id="2-2-dataset">2.2 Dataset</h3>
+<p>We used CORAL, an expert-curated dataset of deidentified breast and pancreatic cancer progress notes [2]. The dataset contains 200 unannotated development notes and 40 expert-annotated test notes. The held-out comparison used all 40 test notes: 20 breast cancer notes and 20 pancreatic cancer notes.</p>
+<p>CORAL is publicly available, but the records are real clinical notes rather than web-derived questions, synthetic cases, or model-generated narratives. They retain the repeated histories, copied-forward content, uncertain findings, and conditional plans that make longitudinal oncology extraction difficult. The value of this dataset is clinical realism and expert annotation, not size. Several related studies use much larger institutional cohorts, while others use narrower procedure or pathology reports or synthetic oncology notes.</p>
+<p>Development and evaluation had separate roles. Development notes were used to identify recurrent error patterns and refine the harness. The 40 test notes were used for the matched comparison. No model-weight training or fine-tuning was performed.</p>
+<h3 id="2-3-base-model-and-baseline">2.3 Base model and baseline</h3>
+<p>Both conditions used Qwen2.5-32B-Instruct-AWQ served locally through vLLM [9]. The baseline made one model call per note and returned the complete target schema. It did not use task decomposition, verification gates, retries, dictionaries, or deterministic post-processing. The matched baseline and harness used the same field definitions and output contract.</p>
+<h3 id="2-4-inference-harness">2.4 Inference harness</h3>
+<p>The harness uses several stages because the target fields do not all require the same context or reasoning.</p>
+<p>First, field-specific prompts independently extract visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Dependent prompts then receive selected earlier results. For example, stage and metastatic status provide context for treatment intent, while current therapy and clinical findings provide context for response assessment. Plan fields are extracted primarily from the Assessment and Plan section.</p>
+<p>Each model output passes through five verification stages:</p>
+<ol>
+<li>JSON formatting repair when parsing fails.</li>
+<li>Schema validation to detect incorrect or leaked keys.</li>
+<li>Specificity and semantic alignment checks to identify vague or off-task answers.</li>
+<li>Faithfulness trimming that removes clearly unsupported or contradictory content while retaining supported information.</li>
+<li>Temporal filtering that removes completed or historical events from future-plan fields.</li>
+</ol>
+<p>The deterministic layer addresses recurrent errors with high-confidence clinical rules. These rules distinguish regional nodes from distant disease, suspected from confirmed metastasis, active anticancer therapy from supportive or home medication, and current response from pretreatment change. The system also returns note excerpts that support each extracted value.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Harness component</th>
+<th>Failure mode addressed</th>
+<th>Example</th>
+</tr></thead><tbody>
+<tr>
+<td>Field-specific extraction</td>
+<td>One large prompt drops or mixes fields</td>
+<td>Separate active medication extraction from treatment plans</td>
+</tr>
+<tr>
+<td>Dependency-aware context</td>
+<td>Related fields contradict one another</td>
+<td>Use metastatic status when interpreting stage and response</td>
+</tr>
+<tr>
+<td>Semantic verification</td>
+<td>A medically related answer does not answer the field</td>
+<td>Remove a future treatment plan from current response</td>
+</tr>
+<tr>
+<td>Faithfulness trimming</td>
+<td>The model adds an unsupported conclusion</td>
+<td>Preserve a lesion as suspected when biopsy is pending</td>
+</tr>
+<tr>
+<td>Temporal filtering</td>
+<td>Completed results appear as future plans</td>
+<td>Remove a completed scan from imaging plan</td>
+</tr>
+<tr>
+<td>Drug and context rules</td>
+<td>Medication names are classified without clinical context</td>
+<td>Separate anticancer drugs from home and supportive medications</td>
+</tr>
+<tr>
+<td>Cross-field clinical rules</td>
+<td>Stage, nodes, and distant disease become inconsistent</td>
+<td>Keep axillary nodes regional rather than distant</td>
+</tr>
+<tr>
+<td>Source attribution</td>
+<td>A reviewer cannot trace an extracted value</td>
+<td>Return the supporting sentence from the note</td>
+</tr>
+</tbody></table></div>
+<aside class="figure-placeholder"><p><strong>Figure 1 placeholder: Study design and inference-harness architecture.</strong></p>
+<p><strong>Format:</strong> Two-lane flow diagram without numeric axes. The upper lane shows the full harness; the lower lane shows the matched single-prompt baseline.</p>
+<p><strong>Harness lane:</strong> deidentified oncology note → Assessment/Plan extraction → independent field-specific prompts → selective transfer of stage, metastasis, medication, and finding context → five verification gates → deterministic oncology hooks and cross-field consistency checks → structured fields with supporting note excerpts.</p>
+<p><strong>Baseline lane:</strong> the same note → one matched-schema prompt → structured fields. A bracket spanning both lanes should state that both conditions use the same frozen Qwen2.5-32B-Instruct-AWQ model. The right side should show identity-masked A/B presentation to oncologists.</p>
+<p><strong>Visual emphasis:</strong> Color only the components unique to the harness. Keep the shared model, note set, schema, and evaluation interface neutral so the controlled comparison is immediately visible.</p>
+<p><strong>Draft caption:</strong> <em>Figure 1. Overview of the controlled comparison. The inference harness and baseline used the same frozen local language model and target schema. The harness added field routing, selective context transfer, verification, deterministic oncology rules, cross-field checks, logging, and source attribution before identity-masked clinician evaluation.</em></p>
+</aside>
+<h3 id="2-5-development-and-regression-testing">2.5 Development and regression testing</h3>
+<p>Development followed a repeated error-review cycle. Reviewers compared each extracted field with the complete source note, classified the error, and identified whether it arose from the prompt, verification stage, or deterministic layer. Corrections were written as general rules rather than sample-specific answers. Each high-impact change was tested on the affected samples and additional previously correct controls.</p>
+<p>The pipeline logs the original model output, the action of each verification stage, and deterministic corrections. This makes the behavior more inspectable than a single final model response, although it does not make the language model itself fully explainable.</p>
+<h3 id="2-6-prespecified-clinical-fields">2.6 Prespecified clinical fields</h3>
+<p>The seven core fields were selected before the matched comparison:</p>
+<ol>
+<li>Which anticancer drugs is the patient actively receiving?</li>
+<li>What is the current cancer stage?</li>
+<li>Is distant metastatic disease present, absent, or uncertain, and where?</li>
+<li>What regional or overall metastatic involvement is supported?</li>
+<li>How is the cancer responding to the current treatment?</li>
+<li>What is the breast cancer type and ER/PR/HER2 status?</li>
+<li>What completed molecular or genetic results are documented?</li>
+</ol>
+<p>The oncologist instrument also included genetic testing plans, supportive medications, procedure plans, imaging plans, laboratory plans, medication plans, and recent treatment changes. Laboratory summary and general clinical findings were optional and excluded from the primary clinician analysis.</p>
+<h3 id="2-7-technical-evaluation">2.7 Technical evaluation</h3>
+<p>The complete matched audit contained 260 applicable note-field comparisons. A source-grounded LLM-assisted review process read the source note and both outputs for each comparison. Each result was classified as harness better, baseline better, or tie. All reported harness losses and contested high-severity findings were rechecked against the source note. This audit was used for development and technical error analysis. It was not treated as a replacement for clinician evaluation.</p>
+<p>Four high-impact failures found during the complete v2.2 audit were subsequently repaired. The affected cases and clean controls were rerun as a targeted regression set. These results are reported separately because the targeted set is not a new full-cohort estimate.</p>
+<h3 id="2-8-oncologist-evaluation">2.8 Oncologist evaluation</h3>
+<p>The clinical evaluation presents the source note and two structured outputs through an identity-masked A/B interface. The evaluator selects A better, B better, or tie for each field. The interface does not reveal which output came from the harness.</p>
+<p>The first oncologist completed the 20 breast-cancer cases. The export contained 278 of 280 required judgments. Two ratings were missing and one extraneous pancreatic entry was excluded. The second oncologist completed all 280 required breast-cancer judgments and 259 of 260 pancreatic-cancer judgments; <code>p7 / lab_plan</code> was missing. Both raw exports were preserved unchanged. The scoring template retained stale filenames after the displayed results were updated. The project owner confirmed that both clinicians reviewed the newer outputs, but the exact hashes of the displayed PL and BL artifacts must be inserted before submission: [TODO].</p>
+<p>For the 278 required breast-cancer judgments available from both oncologists, we calculated exact agreement and Cohen's kappa. We also summarized each clinician-by-cancer evaluation separately, because only one oncologist has completed the pancreatic-cancer set. Pooled counts are descriptive and do not treat field-level judgments as independent observations.</p>
+<p>The planned final study will include [TARGET: 5] oncologists. The primary analysis will compare harness and baseline preference among directional ratings with a mixed-effects logistic model that includes evaluator, note, and field as grouping factors. Ties will be reported separately and included in a sensitivity analysis. We will report the effect estimate, 95% confidence interval, two-sided p value, and agreement across evaluators. The current two-oncologist summaries are interim descriptive analyses; the final statistical specification should be frozen before the remaining ratings are aggregated.</p>
+<h2 id="3-results">3. Results</h2>
+<h3 id="3-1-current-oncologist-evaluation">3.1 Current oncologist evaluation</h3>
+<p>The available clinical evidence comprises three completed clinician-by-cancer evaluations: breast cancer from both oncologists and pancreatic cancer from the second oncologist. Across 817 required-field judgments, the harness was preferred 249 times, the baseline 39 times, and 529 comparisons were ties. The harness received 86.5% of the 288 directional judgments.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Completed evaluation</th>
+<th>Required judgments</th>
+<th>Harness</th>
+<th>Baseline</th>
+<th>Tie</th>
+<th>Harness share among directional judgments</th>
+</tr></thead><tbody>
+<tr>
+<td>Oncologist 01, breast cancer</td>
+<td class="num">278</td>
+<td class="num">84</td>
+<td class="num">22</td>
+<td class="num">172</td>
+<td class="num">79.2%</td>
+</tr>
+<tr>
+<td>Oncologist 02, breast cancer</td>
+<td class="num">280</td>
+<td class="num">79</td>
+<td class="num">8</td>
+<td class="num">193</td>
+<td class="num">90.8%</td>
+</tr>
+<tr>
+<td>Oncologist 02, pancreatic cancer</td>
+<td class="num">259</td>
+<td class="num">86</td>
+<td class="num">9</td>
+<td class="num">164</td>
+<td class="num">90.5%</td>
+</tr>
+<tr>
+<td><strong>All completed evaluations</strong></td>
+<td class="num"><strong>817</strong></td>
+<td class="num"><strong>249</strong></td>
+<td class="num"><strong>39</strong></td>
+<td class="num"><strong>529</strong></td>
+<td class="num"><strong>86.5%</strong></td>
+</tr>
+</tbody></table></div>
+<figure class="rough-figure">
+<div class="rough-label">INTERNAL ROUGH PLOT</div>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjM2MCIgdmlld0JveD0iMCAwIDEwMDAgMzYwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI1MDAuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPkNsaW5pY2lhbiBwcmVmZXJlbmNlIGJ5IGV2YWx1YXRpb248L3RleHQ+Cjx0ZXh0IHg9IjUwMC4wIiB5PSI1MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzU1NTU1NSI+UmVxdWlyZWQtZmllbGQganVkZ21lbnRzOyByYXcgY291bnRzIHNob3duIGluc2lkZSBzZWdtZW50czwvdGV4dD4KPHJlY3QgeD0iMjI1IiB5PSI2OCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjEyIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjI0NyIgeT0iNzgiIGZvbnQtc2l6ZT0iMTIiPlBMIGJldHRlcjwvdGV4dD4KPHJlY3QgeD0iMzMwIiB5PSI2OCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjEyIiBmaWxsPSIjQkRCREJEIi8+Cjx0ZXh0IHg9IjM1MiIgeT0iNzgiIGZvbnQtc2l6ZT0iMTIiPlRpZTwvdGV4dD4KPHJlY3QgeD0iNDM1IiB5PSI2OCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjEyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9IjQ1NyIgeT0iNzgiIGZvbnQtc2l6ZT0iMTIiPkJMIGJldHRlcjwvdGV4dD4KPGxpbmUgeDE9IjIyNS4wIiB5MT0iOTIiIHgyPSIyMjUuMCIgeTI9IjMwMCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjIyNS4wIiB5PSIzMjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTEiPjAlPC90ZXh0Pgo8bGluZSB4MT0iMzY2LjAiIHkxPSI5MiIgeDI9IjM2Ni4wIiB5Mj0iMzAwIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iMzY2LjAiIHk9IjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+MjAlPC90ZXh0Pgo8bGluZSB4MT0iNTA3LjAiIHkxPSI5MiIgeDI9IjUwNy4wIiB5Mj0iMzAwIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNTA3LjAiIHk9IjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+NDAlPC90ZXh0Pgo8bGluZSB4MT0iNjQ4LjAiIHkxPSI5MiIgeDI9IjY0OC4wIiB5Mj0iMzAwIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjQ4LjAiIHk9IjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+NjAlPC90ZXh0Pgo8bGluZSB4MT0iNzg5LjAiIHkxPSI5MiIgeDI9Ijc4OS4wIiB5Mj0iMzAwIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNzg5LjAiIHk9IjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+ODAlPC90ZXh0Pgo8bGluZSB4MT0iOTMwLjAiIHkxPSI5MiIgeDI9IjkzMC4wIiB5Mj0iMzAwIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iOTMwLjAiIHk9IjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+MTAwJTwvdGV4dD4KPHRleHQgeD0iMjEzIiB5PSIxMzEiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPk9uY29sb2dpc3QgMDEsIGJyZWFzdDwvdGV4dD4KPHJlY3QgeD0iMjI1LjAiIHk9IjEwMCIgd2lkdGg9IjIxMy4wIiBoZWlnaHQ9IjUyIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjMzMS41IiB5PSIxMzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMyMjIyMjIiPjg0PC90ZXh0Pgo8cmVjdCB4PSI0MzguMCIgeT0iMTAwIiB3aWR0aD0iNDM2LjIiIGhlaWdodD0iNTIiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iNjU2LjEiIHk9IjEzMSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzIyMjIyMiI+MTcyPC90ZXh0Pgo8cmVjdCB4PSI4NzQuMiIgeT0iMTAwIiB3aWR0aD0iNTUuOCIgaGVpZ2h0PSI1MiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSI5MDIuMSIgeT0iMTMxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMjIyMjIyIj4yMjwvdGV4dD4KPHRleHQgeD0iMjEzIiB5PSIyMTciIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPk9uY29sb2dpc3QgMDIsIGJyZWFzdDwvdGV4dD4KPHJlY3QgeD0iMjI1LjAiIHk9IjE4NiIgd2lkdGg9IjE5OC45IiBoZWlnaHQ9IjUyIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjMyNC41IiB5PSIyMTciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMyMjIyMjIiPjc5PC90ZXh0Pgo8cmVjdCB4PSI0MjMuOSIgeT0iMTg2IiB3aWR0aD0iNDg1LjkiIGhlaWdodD0iNTIiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iNjY2LjkiIHk9IjIxNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzIyMjIyMiI+MTkzPC90ZXh0Pgo8cmVjdCB4PSI5MDkuOSIgeT0iMTg2IiB3aWR0aD0iMjAuMSIgaGVpZ2h0PSI1MiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSIyMTMiIHk9IjMwMyIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+T25jb2xvZ2lzdCAwMiwgUERBQzwvdGV4dD4KPHJlY3QgeD0iMjI1LjAiIHk9IjI3MiIgd2lkdGg9IjIzNC4xIiBoZWlnaHQ9IjUyIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjM0Mi4wIiB5PSIzMDMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMyMjIyMjIiPjg2PC90ZXh0Pgo8cmVjdCB4PSI0NTkuMSIgeT0iMjcyIiB3aWR0aD0iNDQ2LjQiIGhlaWdodD0iNTIiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iNjgyLjMiIHk9IjMwMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzIyMjIyMiI+MTY0PC90ZXh0Pgo8cmVjdCB4PSI5MDUuNSIgeT0iMjcyIiB3aWR0aD0iMjQuNSIgaGVpZ2h0PSI1MiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSI1NzcuNSIgeT0iMzQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5TaGFyZSBvZiByZXF1aXJlZCBqdWRnbWVudHM8L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Clinician preference by evaluation">
+<figcaption>Clinician preference by evaluation. Trend-check rendering only; replace with publication artwork.</figcaption>
+</figure>
+<aside class="figure-placeholder"><p><strong>Figure 2 placeholder: Clinician preference distributions by evaluator and cancer type.</strong></p>
+<p><strong>Plot:</strong> Three 100% stacked horizontal bars.</p>
+<p><strong>x-axis:</strong> Share of required-field judgments, from 0% to 100%.</p>
+<p><strong>y-axis:</strong> Oncologist 01 breast cancer, Oncologist 02 breast cancer, and Oncologist 02 pancreatic cancer.</p>
+<p><strong>Encoding:</strong> Blue for harness preferred, light gray for tie, and orange for baseline preferred. Print raw counts inside segments and the harness share among directional judgments at the right of each bar.</p>
+<p><strong>Observed trend:</strong> Ties are the largest category in every evaluation, but harness preferences substantially exceed baseline preferences. The baseline share falls from 7.9% for the first breast evaluation to 2.9% for the second breast evaluation and 3.5% for pancreatic cancer.</p>
+<p><strong>Draft caption:</strong> <em>Figure 2. Distribution of identity-masked clinician preferences across the three completed clinician-by-cancer evaluations. Most judgments were ties, as expected for systems using the same base model, but directional judgments consistently favored the inference harness.</em></p>
+</aside>
+<p>Both clinicians independently favored the harness on the breast-cancer set. Their pooled breast result was 163 harness preferences, 30 baseline preferences, and 365 ties. The first oncologist's per-note result was 18 harness wins, one baseline win, and one tie. The second oncologist's result was 20 harness wins. When both breast ratings were combined within each note, all 20 notes had a positive harness-minus-baseline margin.</p>
+<p>The second oncologist's pancreatic-cancer evaluation produced 86 harness preferences, 9 baseline preferences, and 164 ties. The harness won 18 of 20 notes by within-note field margin, and two notes were tied. One required judgment, <code>p7 / lab_plan</code>, was missing.</p>
+<p>The final mixed-effects result remains pending:</p>
+<blockquote>
+<p class="todo">[FINAL MULTI-RATER RESULT: Across FINAL N oncologists and FINAL N evaluable judgments, the adjusted analysis showed a significant preference for the harness, effect estimate FINAL, 95% CI FINAL, p=FINAL.]</p>
+</blockquote>
+<h3 id="3-2-inter-rater-agreement-and-core-fields">3.2 Inter-rater agreement and core fields</h3>
+<p>The two oncologists shared 278 required breast-cancer comparisons. They gave the same verdict on 230, for 82.7% exact agreement and Cohen's kappa of 0.645. Of the 48 disagreements, only nine were direct reversals between harness and baseline: seven changed from a baseline preference by the first oncologist to a harness preference by the second, and two changed in the opposite direction. The remaining disagreements involved a tie from one evaluator.</p>
+<figure class="rough-figure">
+<div class="rough-label">INTERNAL ROUGH PLOT</div>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NjAiIGhlaWdodD0iNTcwIiB2aWV3Qm94PSIwIDAgNjYwIDU3MCI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IndoaXRlIi8+CjxnIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmaWxsPSIjMjIyMjIyIj4KPHRleHQgeD0iMzMwLjAiIHk9IjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIj5CcmVhc3QtY2FuY2VyIGludGVyLXJhdGVyIGFncmVlbWVudDwvdGV4dD4KPHRleHQgeD0iMzMwLjAiIHk9IjUyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNTU1NTU1Ij5FeGFjdCBhZ3JlZW1lbnQgMjMwLzI3OCAoODIuNyUpOyBDb2hlbiYjeDI3O3Mga2FwcGEgPSAwLjY0NTwvdGV4dD4KPHRleHQgeD0iMzQ1LjAiIHk9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIj5PbmNvbG9naXN0IDAyIHZlcmRpY3Q8L3RleHQ+Cjx0ZXh0IHg9IjQ1IiB5PSIyODAuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDQ1IDI4MC4wKSI+T25jb2xvZ2lzdCAwMSB2ZXJkaWN0PC90ZXh0Pgo8dGV4dCB4PSIyMzUuMCIgeT0iMTA4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5QTCBiZXR0ZXI8L3RleHQ+Cjx0ZXh0IHg9IjE2OCIgeT0iMTc1LjUiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTIiPlBMIGJldHRlcjwvdGV4dD4KPHRleHQgeD0iMzQ1LjAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiI+VGllPC90ZXh0Pgo8dGV4dCB4PSIxNjgiIHk9IjI4NS41IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEyIj5UaWU8L3RleHQ+Cjx0ZXh0IHg9IjQ1NS4wIiB5PSIxMDgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiPkJMIGJldHRlcjwvdGV4dD4KPHRleHQgeD0iMTY4IiB5PSIzOTUuNSIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMiI+QkwgYmV0dGVyPC90ZXh0Pgo8cmVjdCB4PSIxODAiIHk9IjExNSIgd2lkdGg9IjExMCIgaGVpZ2h0PSIxMTAiIGZpbGw9InJnYigxODksMTk5LDI1NSkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8dGV4dCB4PSIyMzUuMCIgeT0iMTc3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPjYyPC90ZXh0Pgo8cmVjdCB4PSIyOTAiIHk9IjExNSIgd2lkdGg9IjExMCIgaGVpZ2h0PSIxMTAiIGZpbGw9InJnYigyMjcsMjM3LDI1NSkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8dGV4dCB4PSIzNDUuMCIgeT0iMTc3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPjIwPC90ZXh0Pgo8cmVjdCB4PSI0MDAiIHk9IjExNSIgd2lkdGg9IjExMCIgaGVpZ2h0PSIxMTAiIGZpbGw9InJnYigyNDMsMjUzLDI1NSkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8dGV4dCB4PSI0NTUuMCIgeT0iMTc3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPjI8L3RleHQ+CjxyZWN0IHg9IjE4MCIgeT0iMjI1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjExMCIgZmlsbD0icmdiKDIzNiwyNDYsMjU1KSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjIzNS4wIiB5PSIyODcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCI+MTA8L3RleHQ+CjxyZWN0IHg9IjI5MCIgeT0iMjI1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjExMCIgZmlsbD0icmdiKDEwMCwxMTAsMjU1KSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjM0NS4wIiB5PSIyODcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCI+MTYyPC90ZXh0Pgo8cmVjdCB4PSI0MDAiIHk9IjIyNSIgd2lkdGg9IjExMCIgaGVpZ2h0PSIxMTAiIGZpbGw9InJnYigyNDUsMjU1LDI1NSkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8dGV4dCB4PSI0NTUuMCIgeT0iMjg3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPjA8L3RleHQ+CjxyZWN0IHg9IjE4MCIgeT0iMzM1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjExMCIgZmlsbD0icmdiKDIzOCwyNDgsMjU1KSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjIzNS4wIiB5PSIzOTcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCI+NzwvdGV4dD4KPHJlY3QgeD0iMjkwIiB5PSIzMzUiIHdpZHRoPSIxMTAiIGhlaWdodD0iMTEwIiBmaWxsPSJyZ2IoMjM2LDI0NiwyNTUpIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiLz4KPHRleHQgeD0iMzQ1LjAiIHk9IjM5Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIj45PC90ZXh0Pgo8cmVjdCB4PSI0MDAiIHk9IjMzNSIgd2lkdGg9IjExMCIgaGVpZ2h0PSIxMTAiIGZpbGw9InJnYigyMzksMjQ5LDI1NSkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8dGV4dCB4PSI0NTUuMCIgeT0iMzk3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPjY8L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Breast-cancer inter-rater agreement">
+<figcaption>Breast-cancer inter-rater agreement. Trend-check rendering only; replace with publication artwork.</figcaption>
+</figure>
+<aside class="figure-placeholder"><p><strong>Figure 3 placeholder: Inter-rater agreement matrix for breast-cancer judgments.</strong></p>
+<p><strong>Plot:</strong> A 3 × 3 heatmap or confusion matrix.</p>
+<p><strong>x-axis:</strong> Oncologist 02 verdict: harness preferred, tie, baseline preferred.</p>
+<p><strong>y-axis:</strong> Oncologist 01 verdict in the same order.</p>
+<p><strong>Encoding:</strong> Cell color intensity represents the number of shared judgments; each cell displays its count. Add exact agreement and Cohen's kappa above the matrix.</p>
+<p><strong>Observed trend:</strong> The diagonal contains 230 of 278 judgments, dominated by 162 tie-tie decisions and 62 harness-harness decisions. Direct reversals are uncommon: 7 baseline-to-harness and 2 harness-to-baseline.</p>
+<p><strong>Draft caption:</strong> <em>Figure 3. Agreement between the two oncologists on 278 shared breast-cancer field comparisons. Agreement was 82.7% with Cohen's kappa of 0.645. Most disagreements involved a tie from one evaluator rather than opposite directional preferences.</em></p>
+</aside>
+<p>Across all completed evaluations, the seven prespecified core categories contributed 400 applicable judgments. The harness received 156 preferences, the baseline 18, and 226 were ties. The harness therefore accounted for 89.7% of the 174 directional core judgments, and every core category had a positive aggregate margin.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Core field</th>
+<th>Harness</th>
+<th>Baseline</th>
+<th>Tie</th>
+<th>Net advantage</th>
+</tr></thead><tbody>
+<tr>
+<td>Active anticancer medications</td>
+<td class="num">50</td>
+<td class="num">1</td>
+<td class="num">9</td>
+<td class="num">+49</td>
+</tr>
+<tr>
+<td>Stage</td>
+<td class="num">24</td>
+<td class="num">2</td>
+<td class="num">34</td>
+<td class="num">+22</td>
+</tr>
+<tr>
+<td>Distant metastasis</td>
+<td class="num">8</td>
+<td class="num">2</td>
+<td class="num">50</td>
+<td class="num">+6</td>
+</tr>
+<tr>
+<td>Regional or overall metastasis</td>
+<td class="num">35</td>
+<td class="num">1</td>
+<td class="num">24</td>
+<td class="num">+34</td>
+</tr>
+<tr>
+<td>Treatment response</td>
+<td class="num">18</td>
+<td class="num">1</td>
+<td class="num">41</td>
+<td class="num">+17</td>
+</tr>
+<tr>
+<td>Breast cancer type and receptors</td>
+<td class="num">8</td>
+<td class="num">6</td>
+<td class="num">26</td>
+<td class="num">+2</td>
+</tr>
+<tr>
+<td>Completed molecular or genetic results</td>
+<td class="num">13</td>
+<td class="num">5</td>
+<td class="num">42</td>
+<td class="num">+8</td>
+</tr>
+<tr>
+<td><strong>Overall</strong></td>
+<td class="num"><strong>156</strong></td>
+<td class="num"><strong>18</strong></td>
+<td class="num"><strong>226</strong></td>
+<td class="num"><strong>+138</strong></td>
+</tr>
+</tbody></table></div>
+<figure class="rough-figure">
+<div class="rough-label">INTERNAL ROUGH PLOT</div>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTIwIiBoZWlnaHQ9IjU5MCIgdmlld0JveD0iMCAwIDExMjAgNTkwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI1NjAuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPkNsaW5pY2lhbiBwcmVmZXJlbmNlIGJ5IGNvcmUgY2xpbmljYWwgY2F0ZWdvcnk8L3RleHQ+Cjx0ZXh0IHg9IjU2MC4wIiB5PSI1MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzU1NTU1NSI+QWxsIGNvbXBsZXRlZCBjbGluaWNpYW4gZXZhbHVhdGlvbnM7IHBlcmNlbnRhZ2VzIHVzZSBhcHBsaWNhYmxlIHJhdGluZ3MgcGVyIGNhdGVnb3J5PC90ZXh0Pgo8cmVjdCB4PSIyNzUiIHk9IjcwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMjk3IiB5PSI4MCIgZm9udC1zaXplPSIxMiI+UEwgYmV0dGVyPC90ZXh0Pgo8cmVjdCB4PSIzODAiIHk9IjcwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTIiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iNDAyIiB5PSI4MCIgZm9udC1zaXplPSIxMiI+VGllPC90ZXh0Pgo8cmVjdCB4PSI0ODUiIHk9IjcwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTIiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iNTA3IiB5PSI4MCIgZm9udC1zaXplPSIxMiI+QkwgYmV0dGVyPC90ZXh0Pgo8bGluZSB4MT0iMjc1LjAiIHkxPSI5NSIgeDI9IjI3NS4wIiB5Mj0iNTM1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iMjc1LjAiIHk9IjU2MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+MCU8L3RleHQ+CjxsaW5lIHgxPSI0MDYuMCIgeTE9Ijk1IiB4Mj0iNDA2LjAiIHkyPSI1MzUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI0MDYuMCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj4yMCU8L3RleHQ+CjxsaW5lIHgxPSI1MzcuMCIgeTE9Ijk1IiB4Mj0iNTM3LjAiIHkyPSI1MzUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI1MzcuMCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj40MCU8L3RleHQ+CjxsaW5lIHgxPSI2NjguMCIgeTE9Ijk1IiB4Mj0iNjY4LjAiIHkyPSI1MzUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI2NjguMCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj42MCU8L3RleHQ+CjxsaW5lIHgxPSI3OTkuMCIgeTE9Ijk1IiB4Mj0iNzk5LjAiIHkyPSI1MzUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI3OTkuMCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj44MCU8L3RleHQ+CjxsaW5lIHgxPSI5MzAuMCIgeTE9Ijk1IiB4Mj0iOTMwLjAiIHkyPSI1MzUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI5MzAuMCIgeT0iNTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj4xMDAlPC90ZXh0Pgo8dGV4dCB4PSIyNjMiIHk9IjEzMiIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+QWN0aXZlIGFudGljYW5jZXIgbWVkaWNhdGlvbnM8L3RleHQ+CjxyZWN0IHg9IjI3NS4wIiB5PSIxMDUiIHdpZHRoPSI1NDUuOCIgaGVpZ2h0PSI0MiIgZmlsbD0iIzJCOENCRSIvPgo8cmVjdCB4PSI4MjAuOCIgeT0iMTA1IiB3aWR0aD0iOTguMiIgaGVpZ2h0PSI0MiIgZmlsbD0iI0JEQkRCRCIvPgo8cmVjdCB4PSI5MTkuMSIgeT0iMTA1IiB3aWR0aD0iMTAuOSIgaGVpZ2h0PSI0MiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSI5NDIiIHk9IjEzMiIgZm9udC1zaXplPSIxMiI+UEwvQkwvVGllIDUwLzEvOTwvdGV4dD4KPHRleHQgeD0iMjYzIiB5PSIxOTQiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPlN0YWdlPC90ZXh0Pgo8cmVjdCB4PSIyNzUuMCIgeT0iMTY3IiB3aWR0aD0iMjYyLjAiIGhlaWdodD0iNDIiIGZpbGw9IiMyQjhDQkUiLz4KPHJlY3QgeD0iNTM3LjAiIHk9IjE2NyIgd2lkdGg9IjM3MS4yIiBoZWlnaHQ9IjQyIiBmaWxsPSIjQkRCREJEIi8+CjxyZWN0IHg9IjkwOC4yIiB5PSIxNjciIHdpZHRoPSIyMS44IiBoZWlnaHQ9IjQyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijk0MiIgeT0iMTk0IiBmb250LXNpemU9IjEyIj5QTC9CTC9UaWUgMjQvMi8zNDwvdGV4dD4KPHRleHQgeD0iMjYzIiB5PSIyNTYiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPkRpc3RhbnQgbWV0YXN0YXNpczwvdGV4dD4KPHJlY3QgeD0iMjc1LjAiIHk9IjIyOSIgd2lkdGg9Ijg3LjMiIGhlaWdodD0iNDIiIGZpbGw9IiMyQjhDQkUiLz4KPHJlY3QgeD0iMzYyLjMiIHk9IjIyOSIgd2lkdGg9IjU0NS44IiBoZWlnaHQ9IjQyIiBmaWxsPSIjQkRCREJEIi8+CjxyZWN0IHg9IjkwOC4yIiB5PSIyMjkiIHdpZHRoPSIyMS44IiBoZWlnaHQ9IjQyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijk0MiIgeT0iMjU2IiBmb250LXNpemU9IjEyIj5QTC9CTC9UaWUgOC8yLzUwPC90ZXh0Pgo8dGV4dCB4PSIyNjMiIHk9IjMxOCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+UmVnaW9uYWwgLyBvdmVyYWxsIG1ldGFzdGFzaXM8L3RleHQ+CjxyZWN0IHg9IjI3NS4wIiB5PSIyOTEiIHdpZHRoPSIzODIuMSIgaGVpZ2h0PSI0MiIgZmlsbD0iIzJCOENCRSIvPgo8cmVjdCB4PSI2NTcuMSIgeT0iMjkxIiB3aWR0aD0iMjYyLjAiIGhlaWdodD0iNDIiIGZpbGw9IiNCREJEQkQiLz4KPHJlY3QgeD0iOTE5LjEiIHk9IjI5MSIgd2lkdGg9IjEwLjkiIGhlaWdodD0iNDIiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iOTQyIiB5PSIzMTgiIGZvbnQtc2l6ZT0iMTIiPlBML0JML1RpZSAzNS8xLzI0PC90ZXh0Pgo8dGV4dCB4PSIyNjMiIHk9IjM4MCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+VHJlYXRtZW50IHJlc3BvbnNlPC90ZXh0Pgo8cmVjdCB4PSIyNzUuMCIgeT0iMzUzIiB3aWR0aD0iMTk2LjUiIGhlaWdodD0iNDIiIGZpbGw9IiMyQjhDQkUiLz4KPHJlY3QgeD0iNDcxLjUiIHk9IjM1MyIgd2lkdGg9IjQ0Ny42IiBoZWlnaHQ9IjQyIiBmaWxsPSIjQkRCREJEIi8+CjxyZWN0IHg9IjkxOS4xIiB5PSIzNTMiIHdpZHRoPSIxMC45IiBoZWlnaHQ9IjQyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijk0MiIgeT0iMzgwIiBmb250LXNpemU9IjEyIj5QTC9CTC9UaWUgMTgvMS80MTwvdGV4dD4KPHRleHQgeD0iMjYzIiB5PSI0NDIiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPkJyZWFzdCB0eXBlIC8gcmVjZXB0b3JzPC90ZXh0Pgo8cmVjdCB4PSIyNzUuMCIgeT0iNDE1IiB3aWR0aD0iMTMxLjAiIGhlaWdodD0iNDIiIGZpbGw9IiMyQjhDQkUiLz4KPHJlY3QgeD0iNDA2LjAiIHk9IjQxNSIgd2lkdGg9IjQyNS44IiBoZWlnaHQ9IjQyIiBmaWxsPSIjQkRCREJEIi8+CjxyZWN0IHg9IjgzMS44IiB5PSI0MTUiIHdpZHRoPSI5OC4yIiBoZWlnaHQ9IjQyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijk0MiIgeT0iNDQyIiBmb250LXNpemU9IjEyIj5QTC9CTC9UaWUgOC82LzI2PC90ZXh0Pgo8dGV4dCB4PSIyNjMiIHk9IjUwNCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+TW9sZWN1bGFyIC8gZ2VuZXRpYyByZXN1bHRzPC90ZXh0Pgo8cmVjdCB4PSIyNzUuMCIgeT0iNDc3IiB3aWR0aD0iMTQxLjkiIGhlaWdodD0iNDIiIGZpbGw9IiMyQjhDQkUiLz4KPHJlY3QgeD0iNDE2LjkiIHk9IjQ3NyIgd2lkdGg9IjQ1OC41IiBoZWlnaHQ9IjQyIiBmaWxsPSIjQkRCREJEIi8+CjxyZWN0IHg9Ijg3NS40IiB5PSI0NzciIHdpZHRoPSI1NC42IiBoZWlnaHQ9IjQyIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijk0MiIgeT0iNTA0IiBmb250LXNpemU9IjEyIj5QTC9CTC9UaWUgMTMvNS80MjwvdGV4dD4KPHRleHQgeD0iNjAyLjUiIHk9IjU4NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiI+U2hhcmUgb2YgYXBwbGljYWJsZSBqdWRnbWVudHM8L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Clinician preference by core category">
+<figcaption>Clinician preference by core category. Trend-check rendering only; replace with publication artwork.</figcaption>
+</figure>
+<aside class="figure-placeholder"><p><strong>Figure 4 placeholder: Preference profile across core clinical categories.</strong></p>
+<p><strong>Plot:</strong> Seven 100% stacked horizontal bars, ordered by net harness advantage.</p>
+<p><strong>x-axis:</strong> Share of applicable clinician judgments, from 0% to 100%.</p>
+<p><strong>y-axis:</strong> Active anticancer medications, regional or overall metastasis, stage, treatment response, completed molecular or genetic results, distant metastasis, and breast type or receptors.</p>
+<p><strong>Encoding:</strong> Blue for harness preferred, light gray for tie, and orange for baseline preferred. Show <code>PL / BL / TIE</code> counts at the right of each bar. Because receptor status applies only to breast cancer, use percentages for visual comparison and retain raw denominators in the labels or caption.</p>
+<p><strong>Observed trend:</strong> Active anticancer medications and regional or overall metastatic involvement show the largest margins. Stage and response also favor the harness. Distant metastasis is dominated by ties, and breast type or receptor status is close to even.</p>
+<p><strong>Draft caption:</strong> <em>Figure 4. Clinician preference by prespecified core clinical category. The largest harness advantages occurred in active-treatment identification and metastatic-involvement classification. Breast type and receptor status showed the smallest margin.</em></p>
+</aside>
+<p>Active anticancer medication and regional or overall metastatic involvement produced the largest and most consistent margins. Medication planning, outside the seven core categories, totaled 31 harness preferences, no baseline preferences, and 29 ties across the completed evaluations. Procedure planning was closer at 8 harness preferences, 5 baseline preferences, and 47 ties. Breast type and receptor status remained the weakest core category, with only a 2-rating net advantage and 60% exact agreement between oncologists.</p>
+<p>Exploratory note-level sign tests support the same direction without treating every field as an independent observation. The combined breast margin was positive in all 20 notes (<code>p=1.9e-6</code>, two-sided exact sign test). In the pancreatic set, 18 note-level margins were positive and two were tied (<code>p=7.6e-6</code> after excluding ties). These tests were not the prespecified final model and should not replace the planned evaluator-note-field analysis.</p>
+<figure class="rough-figure">
+<div class="rough-label">INTERNAL ROUGH PLOT</div>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjYwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDEyNjAgNTAwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI2MzAuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPlBlci1ub3RlIGNsaW5pY2lhbiBwcmVmZXJlbmNlIG1hcmdpbnM8L3RleHQ+Cjx0ZXh0IHg9IjYzMC4wIiB5PSI1MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzU1NTU1NSI+KFBMIGJldHRlciAtIEJMIGJldHRlcikgLyBjb21wbGV0ZWQgcmF0aW5nczsgYnJlYXN0IHBvb2xzIHR3byBvbmNvbG9naXN0czwvdGV4dD4KPHRleHQgeD0iMzIwLjAiIHk9IjkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIj5CcmVhc3QgY2FuY2VyPC90ZXh0Pgo8bGluZSB4MT0iNjUiIHkxPSI0MTcuMCIgeDI9IjYwNSIgeTI9IjQxNy4wIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNTgiIHk9IjQyMS4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4tMjAlPC90ZXh0Pgo8bGluZSB4MT0iNjUiIHkxPSIzNTUuMiIgeDI9IjYwNSIgeTI9IjM1NS4yIiBzdHJva2U9IiM4ODg4ODgiLz4KPHRleHQgeD0iNTgiIHk9IjM1OS4yIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4wJTwvdGV4dD4KPGxpbmUgeDE9IjY1IiB5MT0iMjkzLjQiIHgyPSI2MDUiIHkyPSIyOTMuNCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjU4IiB5PSIyOTcuNCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+MjAlPC90ZXh0Pgo8bGluZSB4MT0iNjUiIHkxPSIyMzEuNiIgeDI9IjYwNSIgeTI9IjIzMS42IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNTgiIHk9IjIzNS42IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj40MCU8L3RleHQ+CjxsaW5lIHgxPSI2NSIgeTE9IjE2OS44IiB4Mj0iNjA1IiB5Mj0iMTY5LjgiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI1OCIgeT0iMTczLjgiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTAiPjYwJTwvdGV4dD4KPGxpbmUgeDE9IjY1IiB5MT0iMTA4LjAiIHgyPSI2MDUiIHkyPSIxMDguMCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjU4IiB5PSIxMTIuMCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+ODAlPC90ZXh0Pgo8cmVjdCB4PSI2OC44IiB5PSIyNjYuOSIgd2lkdGg9IjE5LjQiIGhlaWdodD0iODguMyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI3OC41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE8L3RleHQ+CjxyZWN0IHg9Ijk1LjgiIHk9IjI4OS4wIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSI2Ni4yIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjEwNS41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjI8L3RleHQ+CjxyZWN0IHg9IjEyMi44IiB5PSIzMDAuMCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNTUuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIxMzIuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIzPC90ZXh0Pgo8cmVjdCB4PSIxNDkuOCIgeT0iMjU1LjkiIHdpZHRoPSIxOS40IiBoZWlnaHQ9Ijk5LjMiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTU5LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iNDwvdGV4dD4KPHJlY3QgeD0iMTc2LjgiIHk9IjI2Ni45IiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSI4OC4zIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjE4Ni41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjU8L3RleHQ+CjxyZWN0IHg9IjIwMy44IiB5PSIyODkuMCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNjYuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIyMTMuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI2PC90ZXh0Pgo8cmVjdCB4PSIyMzAuOCIgeT0iMjIyLjgiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjEzMi40IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjI0MC41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+Yjc8L3RleHQ+CjxyZWN0IHg9IjI1Ny44IiB5PSIyODkuMCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNjYuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIyNjcuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI4PC90ZXh0Pgo8cmVjdCB4PSIyODQuOCIgeT0iMjY2LjkiIHdpZHRoPSIxOS40IiBoZWlnaHQ9Ijg4LjMiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMjk0LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iOTwvdGV4dD4KPHJlY3QgeD0iMzExLjgiIHk9IjMzMy4xIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIyMi4xIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjMyMS41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjEwPC90ZXh0Pgo8cmVjdCB4PSIzMzguOCIgeT0iMzAwLjAiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjU1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMzQ4LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTE8L3RleHQ+CjxyZWN0IHg9IjM2NS44IiB5PSIzMjAuOSIgd2lkdGg9IjE5LjQiIGhlaWdodD0iMzQuMyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIzNzUuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxMjwvdGV4dD4KPHJlY3QgeD0iMzkyLjgiIHk9IjM0NC4yIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIxMS4wIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjQwMi41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjEzPC90ZXh0Pgo8cmVjdCB4PSI0MTkuOCIgeT0iMjQ0LjgiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjExMC40IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjQyOS41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE0PC90ZXh0Pgo8cmVjdCB4PSI0NDYuOCIgeT0iMjIyLjgiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjEzMi40IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjQ1Ni41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE1PC90ZXh0Pgo8cmVjdCB4PSI0NzMuOCIgeT0iMzAwLjAiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjU1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNDgzLjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTY8L3RleHQ+CjxyZWN0IHg9IjUwMC44IiB5PSIzMDAuMCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNTUuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI1MTAuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxNzwvdGV4dD4KPHJlY3QgeD0iNTI3LjgiIHk9IjI2Ni45IiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSI4OC4zIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjUzNy41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE4PC90ZXh0Pgo8cmVjdCB4PSI1NTQuOCIgeT0iMjI5LjMiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjEyNS45IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjU2NC41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE5PC90ZXh0Pgo8cmVjdCB4PSI1ODEuOCIgeT0iMzIyLjEiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjMzLjEiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNTkxLjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMjA8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSIyNjIuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDMyIDI2Mi41KSI+Tm9ybWFsaXplZCBQTC1CTCBtYXJnaW48L3RleHQ+Cjx0ZXh0IHg9Ijk0MC4wIiB5PSI5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCI+UERBQzwvdGV4dD4KPGxpbmUgeDE9IjY4NSIgeTE9IjQxNy4wIiB4Mj0iMTIyNSIgeTI9IjQxNy4wIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjc4IiB5PSI0MjEuMCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+LTIwJTwvdGV4dD4KPGxpbmUgeDE9IjY4NSIgeTE9IjM1NS4yIiB4Mj0iMTIyNSIgeTI9IjM1NS4yIiBzdHJva2U9IiM4ODg4ODgiLz4KPHRleHQgeD0iNjc4IiB5PSIzNTkuMiIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+MCU8L3RleHQ+CjxsaW5lIHgxPSI2ODUiIHkxPSIyOTMuNCIgeDI9IjEyMjUiIHkyPSIyOTMuNCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjY3OCIgeT0iMjk3LjQiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTAiPjIwJTwvdGV4dD4KPGxpbmUgeDE9IjY4NSIgeTE9IjIzMS42IiB4Mj0iMTIyNSIgeTI9IjIzMS42IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjc4IiB5PSIyMzUuNiIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+NDAlPC90ZXh0Pgo8bGluZSB4MT0iNjg1IiB5MT0iMTY5LjgiIHgyPSIxMjI1IiB5Mj0iMTY5LjgiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI2NzgiIHk9IjE3My44IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj42MCU8L3RleHQ+CjxsaW5lIHgxPSI2ODUiIHkxPSIxMDguMCIgeDI9IjEyMjUiIHkyPSIxMDguMCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjY3OCIgeT0iMTEyLjAiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTAiPjgwJTwvdGV4dD4KPHJlY3QgeD0iNjg4LjgiIHk9IjM1NS4yIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIyLjAiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iNjk4LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5wMTwvdGV4dD4KPHJlY3QgeD0iNzE1LjgiIHk9IjI2MC4xIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSI5NS4xIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjcyNS41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDI8L3RleHQ+CjxyZWN0IHg9Ijc0Mi44IiB5PSIyNjAuMSIgd2lkdGg9IjE5LjQiIGhlaWdodD0iOTUuMSIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI3NTIuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnAzPC90ZXh0Pgo8cmVjdCB4PSI3NjkuOCIgeT0iMjYwLjEiIHdpZHRoPSIxOS40IiBoZWlnaHQ9Ijk1LjEiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNzc5LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5wNDwvdGV4dD4KPHJlY3QgeD0iNzk2LjgiIHk9IjIzNi40IiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIxMTguOCIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI4MDYuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnA1PC90ZXh0Pgo8cmVjdCB4PSI4MjMuOCIgeT0iMjM2LjQiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjExOC44IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjgzMy41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDY8L3RleHQ+CjxyZWN0IHg9Ijg1MC44IiB5PSIyNzguMCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNzcuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI4NjAuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnA3PC90ZXh0Pgo8cmVjdCB4PSI4NzcuOCIgeT0iMTQxLjMiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjIxMy45IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9Ijg4Ny41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDg8L3RleHQ+CjxyZWN0IHg9IjkwNC44IiB5PSIyODMuOSIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNzEuMyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI5MTQuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnA5PC90ZXh0Pgo8cmVjdCB4PSI5MzEuOCIgeT0iMzA3LjciIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjQ3LjUiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iOTQxLjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5wMTA8L3RleHQ+CjxyZWN0IHg9Ijk1OC44IiB5PSIzMDcuNyIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNDcuNSIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI5NjguNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnAxMTwvdGV4dD4KPHJlY3QgeD0iOTg1LjgiIHk9IjIxMi42IiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIxNDIuNiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI5OTUuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnAxMjwvdGV4dD4KPHJlY3QgeD0iMTAxMi44IiB5PSIyMTIuNiIgd2lkdGg9IjE5LjQiIGhlaWdodD0iMTQyLjYiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTAyMi41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDEzPC90ZXh0Pgo8cmVjdCB4PSIxMDM5LjgiIHk9IjI2MC4xIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSI5NS4xIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjEwNDkuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnAxNDwvdGV4dD4KPHJlY3QgeD0iMTA2Ni44IiB5PSIzMDcuNyIgd2lkdGg9IjE5LjQiIGhlaWdodD0iNDcuNSIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIxMDc2LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5wMTU8L3RleHQ+CjxyZWN0IHg9IjEwOTMuOCIgeT0iMzA3LjciIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjQ3LjUiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTEwMy41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDE2PC90ZXh0Pgo8cmVjdCB4PSIxMTIwLjgiIHk9IjM1NS4yIiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIyLjAiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iMTEzMC41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDE3PC90ZXh0Pgo8cmVjdCB4PSIxMTQ3LjgiIHk9IjIxMi42IiB3aWR0aD0iMTkuNCIgaGVpZ2h0PSIxNDIuNiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIxMTU3LjUiIHk9IjQzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5wMTg8L3RleHQ+CjxyZWN0IHg9IjExNzQuOCIgeT0iMjM2LjQiIHdpZHRoPSIxOS40IiBoZWlnaHQ9IjExOC44IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjExODQuNSIgeT0iNDMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPnAxOTwvdGV4dD4KPHJlY3QgeD0iMTIwMS44IiB5PSIyMzYuNCIgd2lkdGg9IjE5LjQiIGhlaWdodD0iMTE4LjgiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTIxMS41IiB5PSI0MzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+cDIwPC90ZXh0Pgo8dGV4dCB4PSI2NTIiIHk9IjI2Mi41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgNjUyIDI2Mi41KSI+Tm9ybWFsaXplZCBQTC1CTCBtYXJnaW48L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Per-note normalized preference margins">
+<figcaption>Per-note normalized preference margins. Trend-check rendering only; replace with publication artwork.</figcaption>
+</figure>
+<aside class="figure-placeholder"><p><strong>Figure 5 placeholder: Per-note clinician preference margins.</strong></p>
+<p><strong>Plot:</strong> Two aligned bar-chart panels, one for breast cancer and one for pancreatic cancer, with a horizontal zero reference line.</p>
+<p><strong>x-axis:</strong> Sample identifier, <code>b1</code> through <code>b20</code> in the breast panel and <code>p1</code> through <code>p20</code> in the pancreatic panel.</p>
+<p><strong>y-axis:</strong> Normalized net preference margin per note, calculated as <code>(harness-preferred fields - baseline-preferred fields) / completed required-field judgments for that note</code>, on a shared scale. The breast panel pools the two oncologists; the pancreatic panel currently contains Oncologist 02 only.</p>
+<p><strong>Encoding:</strong> Blue bars above zero favor the harness, orange bars below zero favor the baseline, and gray markers at zero indicate tied note-level margins.</p>
+<p><strong>Observed trend:</strong> All 20 pooled breast margins are positive. Eighteen pancreatic margins are positive and two are zero; none are negative.</p>
+<p><strong>Draft caption:</strong> <em>Figure 5. Distribution of normalized clinician preference margins across individual notes. The harness had a positive pooled margin in every breast-cancer note and in 18 of 20 pancreatic-cancer notes; the remaining two pancreatic notes were tied.</em></p>
+</aside>
+<aside class="figure-placeholder"><p><strong>Figure 6 placeholder: Adjusted multi-rater effect estimates.</strong></p>
+<p><strong>Plot:</strong> Forest plot to be populated after the planned final clinician sample is complete.</p>
+<p><strong>x-axis:</strong> Adjusted odds ratio for a directional judgment favoring the harness rather than the baseline, displayed on a logarithmic scale with a vertical reference line at 1.0.</p>
+<p><strong>y-axis:</strong> Overall effect, breast cancer, pancreatic cancer, and the seven prespecified core categories. Include only strata supported by the final sample size.</p>
+<p><strong>Encoding:</strong> Point estimate with 95% confidence interval. Use a filled marker for the primary adjusted analysis and open markers for sensitivity analyses that handle ties differently.</p>
+<p><strong>Expected interpretation:</strong> This figure will replace reliance on pooled field counts by showing estimates that account for repeated judgments by evaluator, note, and field. No trend should be asserted until the final model is fit.</p>
+<p><strong>Draft caption:</strong> <em>Figure 6. Adjusted association between evaluation condition and clinician preference. Odds ratios greater than 1 favor the inference harness. Estimates will come from the prespecified clustered multi-rater analysis.</em></p>
+</aside>
+<h3 id="3-3-complete-matched-technical-audit">3.3 Complete matched technical audit</h3>
+<p>Across 260 applicable core comparisons, the harness was preferred 66 times, the baseline 28 times, and 166 were ties. The harness had a positive margin in six of seven categories. Stage was the only category with a negative margin in the complete v2.2 audit.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Core field</th>
+<th>Harness</th>
+<th>Baseline</th>
+<th>Tie</th>
+<th>Net advantage</th>
+</tr></thead><tbody>
+<tr>
+<td>Active anticancer treatment</td>
+<td class="num">8</td>
+<td class="num">0</td>
+<td class="num">32</td>
+<td class="num">+8</td>
+</tr>
+<tr>
+<td>Stage</td>
+<td class="num">6</td>
+<td class="num">8</td>
+<td class="num">26</td>
+<td class="num">-2</td>
+</tr>
+<tr>
+<td>Distant metastasis</td>
+<td class="num">11</td>
+<td class="num">3</td>
+<td class="num">26</td>
+<td class="num">+8</td>
+</tr>
+<tr>
+<td>Regional or overall metastasis</td>
+<td class="num">14</td>
+<td class="num">4</td>
+<td class="num">22</td>
+<td class="num">+10</td>
+</tr>
+<tr>
+<td>Treatment response</td>
+<td class="num">13</td>
+<td class="num">6</td>
+<td class="num">21</td>
+<td class="num">+7</td>
+</tr>
+<tr>
+<td>Breast cancer type and receptors</td>
+<td class="num">8</td>
+<td class="num">5</td>
+<td class="num">7</td>
+<td class="num">+3</td>
+</tr>
+<tr>
+<td>Completed molecular or genetic results</td>
+<td class="num">6</td>
+<td class="num">2</td>
+<td class="num">32</td>
+<td class="num">+4</td>
+</tr>
+<tr>
+<td><strong>Overall</strong></td>
+<td class="num"><strong>66</strong></td>
+<td class="num"><strong>28</strong></td>
+<td class="num"><strong>166</strong></td>
+<td class="num"><strong>+38</strong></td>
+</tr>
+</tbody></table></div>
+<figure class="rough-figure">
+<div class="rough-label">INTERNAL ROUGH PLOT</div>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDMwIiBoZWlnaHQ9IjU3MCIgdmlld0JveD0iMCAwIDEwMzAgNTcwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI1MTUuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPlRlY2huaWNhbCBhdWRpdCBhbmQgY2xpbmljaWFuIG5ldCBwcmVmZXJlbmNlIHJhdGVzPC90ZXh0Pgo8dGV4dCB4PSI1MTUuMCIgeT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1NTU1NTUiPkRlc2NyaXB0aXZlIGNvbXBhcmlzb24gb25seTsgcmV2aWV3ZXJzIGFuZCBldmFsdWF0ZWQgcGlwZWxpbmUgdmVyc2lvbnMgZGlmZmVyPC90ZXh0Pgo8bGluZSB4MT0iMjkwLjAiIHkxPSI5MCIgeDI9IjI5MC4wIiB5Mj0iNTE1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iMjkwLjAiIHk9IjU0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+LTEwJTwvdGV4dD4KPGxpbmUgeDE9IjM1Ni4wIiB5MT0iOTAiIHgyPSIzNTYuMCIgeTI9IjUxNSIgc3Ryb2tlPSIjODg4ODg4Ii8+Cjx0ZXh0IHg9IjM1Ni4wIiB5PSI1NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTEiPjAlPC90ZXh0Pgo8bGluZSB4MT0iNDg4LjAiIHkxPSI5MCIgeDI9IjQ4OC4wIiB5Mj0iNTE1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNDg4LjAiIHk9IjU0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+MjAlPC90ZXh0Pgo8bGluZSB4MT0iNjIwLjAiIHkxPSI5MCIgeDI9IjYyMC4wIiB5Mj0iNTE1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjIwLjAiIHk9IjU0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+NDAlPC90ZXh0Pgo8bGluZSB4MT0iNzUyLjAiIHkxPSI5MCIgeDI9Ijc1Mi4wIiB5Mj0iNTE1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNzUyLjAiIHk9IjU0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+NjAlPC90ZXh0Pgo8bGluZSB4MT0iODg0LjAiIHkxPSI5MCIgeDI9Ijg4NC4wIiB5Mj0iNTE1IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iODg0LjAiIHk9IjU0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+ODAlPC90ZXh0Pgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSI3MyIgcj0iNiIgZmlsbD0iIzc1NkJCMSIvPjx0ZXh0IHg9IjMxMiIgeT0iNzciIGZvbnQtc2l6ZT0iMTIiPlRlY2huaWNhbCBhdWRpdDwvdGV4dD4KPGNpcmNsZSBjeD0iNDM1IiBjeT0iNzMiIHI9IjYiIGZpbGw9IiMyQjhDQkUiLz48dGV4dCB4PSI0NDciIHk9Ijc3IiBmb250LXNpemU9IjEyIj5DbGluaWNpYW4gcmF0aW5nczwvdGV4dD4KPHRleHQgeD0iMjc4IiB5PSIxMTkiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPkFjdGl2ZSBhbnRpY2FuY2VyIG1lZGljYXRpb25zPC90ZXh0Pgo8bGluZSB4MT0iNDg4LjAiIHkxPSIxMTUiIHgyPSI4OTUuMCIgeTI9IjExNSIgc3Ryb2tlPSIjOTk5OTk5IiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iNDg4LjAiIGN5PSIxMTUiIHI9IjciIGZpbGw9IiM3NTZCQjEiLz4KPGNpcmNsZSBjeD0iODk1LjAiIGN5PSIxMTUiIHI9IjciIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMjc4IiB5PSIxNzYiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPlN0YWdlPC90ZXh0Pgo8bGluZSB4MT0iMzIzLjAiIHkxPSIxNzIiIHgyPSI1OTguMCIgeTI9IjE3MiIgc3Ryb2tlPSIjOTk5OTk5IiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMzIzLjAiIGN5PSIxNzIiIHI9IjciIGZpbGw9IiM3NTZCQjEiLz4KPGNpcmNsZSBjeD0iNTk4LjAiIGN5PSIxNzIiIHI9IjciIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMjc4IiB5PSIyMzMiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiPkRpc3RhbnQgbWV0YXN0YXNpczwvdGV4dD4KPGxpbmUgeDE9IjQ4OC4wIiB5MT0iMjI5IiB4Mj0iNDIyLjAiIHkyPSIyMjkiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjQ4OC4wIiBjeT0iMjI5IiByPSI3IiBmaWxsPSIjNzU2QkIxIi8+CjxjaXJjbGUgY3g9IjQyMi4wIiBjeT0iMjI5IiByPSI3IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjI3OCIgeT0iMjkwIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEzIj5SZWdpb25hbCAvIG92ZXJhbGwgbWV0YXN0YXNpczwvdGV4dD4KPGxpbmUgeDE9IjUyMS4wIiB5MT0iMjg2IiB4Mj0iNzMwLjAiIHkyPSIyODYiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjUyMS4wIiBjeT0iMjg2IiByPSI3IiBmaWxsPSIjNzU2QkIxIi8+CjxjaXJjbGUgY3g9IjczMC4wIiBjeT0iMjg2IiByPSI3IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjI3OCIgeT0iMzQ3IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEzIj5UcmVhdG1lbnQgcmVzcG9uc2U8L3RleHQ+CjxsaW5lIHgxPSI0NzEuNSIgeTE9IjM0MyIgeDI9IjU0My4wIiB5Mj0iMzQzIiBzdHJva2U9IiM5OTk5OTkiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSI0NzEuNSIgY3k9IjM0MyIgcj0iNyIgZmlsbD0iIzc1NkJCMSIvPgo8Y2lyY2xlIGN4PSI1NDMuMCIgY3k9IjM0MyIgcj0iNyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIyNzgiIHk9IjQwNCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+QnJlYXN0IHR5cGUgLyByZWNlcHRvcnM8L3RleHQ+CjxsaW5lIHgxPSI0NTUuMCIgeTE9IjQwMCIgeDI9IjM4OS4wIiB5Mj0iNDAwIiBzdHJva2U9IiM5OTk5OTkiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSI0NTUuMCIgY3k9IjQwMCIgcj0iNyIgZmlsbD0iIzc1NkJCMSIvPgo8Y2lyY2xlIGN4PSIzODkuMCIgY3k9IjQwMCIgcj0iNyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIyNzgiIHk9IjQ2MSIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMyI+TW9sZWN1bGFyIC8gZ2VuZXRpYyByZXN1bHRzPC90ZXh0Pgo8bGluZSB4MT0iNDIyLjAiIHkxPSI0NTciIHgyPSI0NDQuMCIgeTI9IjQ1NyIgc3Ryb2tlPSIjOTk5OTk5IiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iNDIyLjAiIGN5PSI0NTciIHI9IjciIGZpbGw9IiM3NTZCQjEiLz4KPGNpcmNsZSBjeD0iNDQ0LjAiIGN5PSI0NTciIHI9IjciIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNjIwLjAiIHk9IjU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiI+TmV0IHByZWZlcmVuY2UgcmF0ZTogKFBMIGJldHRlciAtIEJMIGJldHRlcikgLyBhcHBsaWNhYmxlIGp1ZGdtZW50czwvdGV4dD4KPC9nPgo8L3N2Zz4K" alt="Technical-audit and clinician net preference rates">
+<figcaption>Technical-audit and clinician net preference rates. Trend-check rendering only; replace with publication artwork.</figcaption>
+</figure>
+<aside class="figure-placeholder"><p><strong>Supplementary Figure S1 placeholder: Technical-audit and clinician net preference rates.</strong></p>
+<p><strong>Plot:</strong> Horizontal dumbbell plot with one row per core category.</p>
+<p><strong>x-axis:</strong> Net preference rate, calculated as <code>(harness better - baseline better) / applicable judgments</code>, with a vertical reference line at zero.</p>
+<p><strong>y-axis:</strong> The seven core clinical categories.</p>
+<p><strong>Encoding:</strong> One marker for the complete v2.2 source-grounded technical audit and one marker for the currently completed clinician ratings; connect the markers within each category.</p>
+<p><strong>Observed trend:</strong> Both evidence sources favor the harness overall. The clinician ratings show especially large margins for active anticancer medication and regional or overall metastatic involvement. Stage changes from a small negative technical-audit margin to a positive clinician margin, while distant metastasis and receptor status show smaller clinician margins.</p>
+<p><strong>Interpretive warning:</strong> The reviewers and evaluated pipeline versions differ, so this is a descriptive comparison of patterns, not an agreement test or causal before-and-after estimate.</p>
+<p><strong>Draft caption:</strong> <em>Supplementary Figure S1. Category-level net preference rates in the complete technical audit and current clinician evaluation. Differences between series should be interpreted descriptively because the review processes and pipeline versions were not identical.</em></p>
+</aside>
+<h3 id="3-4-targeted-repair-evaluation">3.4 Targeted repair evaluation</h3>
+<p>Four high-impact failures identified in the v2.2 audit were repaired with conservative rules. Across 51 applicable comparisons in six affected samples and two controls, the repaired harness recorded 29 wins, no baseline wins, and 22 ties. No P0 error remained in this targeted set, and neither control developed a detected core regression. These targeted results show that the identified errors were repairable. They do not replace the full 40-note result.</p>
+<h3 id="3-5-qualitative-comments">3.5 Qualitative comments</h3>
+<p>The two exports contained 12 written comments. These comments add useful context but also show why preference counts should not be treated as a complete correctness assessment. For one breast imaging-plan item, the first oncologist preferred the harness because the baseline summarized completed findings rather than the planned PET/CT. The second oncologist rated the same comparison as a tie and wrote that neither answer correctly captured the absence of a new imaging plan. This disagreement should be adjudicated before the case is used as a manuscript example.</p>
+<p>Other comments identified unsupported receptor status, a regional-node omission, uncertainty about response after a newly started second-line regimen, and cases in which both outputs were inaccurate. These observations support the value of specialist review and identify concrete targets for final error analysis. They also show that a tie can mean either that both outputs are adequate or that both are wrong.</p>
+<aside class="figure-placeholder"><p><strong>Supplementary Figure S2 placeholder: Adjudicated interpretation of tie judgments.</strong></p>
+<p><strong>Plot:</strong> Stacked bars or a compact alluvial diagram after manual adjudication of a prespecified sample of ties.</p>
+<p><strong>x-axis:</strong> Tie interpretation category: both outputs clinically adequate, both partly correct but incomplete, both incorrect, or indeterminate from the note.</p>
+<p><strong>y-axis:</strong> Number or percentage of adjudicated ties.</p>
+<p><strong>Encoding:</strong> Split bars by cancer type or core field. A secondary annotation may show whether the two outputs failed for the same reason or different reasons.</p>
+<p><strong>Data status:</strong> Not yet available. The current rating interface records only <code>TIE</code>, so this figure requires manual review rather than inference from the existing CSV files.</p>
+<p><strong>Draft caption:</strong> <em>Supplementary Figure S2. Clinical interpretation of tie judgments after manual adjudication. This analysis distinguishes equivalent correct outputs from comparisons in which both systems are incomplete or incorrect.</em></p>
+</aside>
+<h2 id="4-discussion">4. Discussion</h2>
+<h3 id="4-1-main-interpretation">4.1 Main interpretation</h3>
+<p class="todo">[FINAL OPENING: The multi-oncologist evaluation showed a statistically significant preference for the inference harness over the same-model single-prompt baseline.]</p>
+<p>The current pilot now shows the same directional pattern in two oncologists and both cancer domains represented in CORAL. Most comparisons were ties, which is expected when both systems use the same strong base model. Across the completed evaluations, when an oncologist identified a meaningful difference, the harness was preferred more than six times as often as the baseline. The gains were concentrated in fields that require temporal interpretation and clinical classification rather than simple copying.</p>
+<p>This pattern matters more than a broad improvement across every field. The harness was designed to preserve correct base-model answers and intervene when a known failure mode appears. A high tie rate with a strong directional advantage is consistent with that design. It suggests selective correction rather than wholesale rewriting of the model output.</p>
+<p>The second evaluation materially strengthens the evidence. It reproduced the breast-cancer advantage, with 8 baseline preferences compared with 22 in the first evaluation of the same 20 notes, and extended the direction of effect to pancreatic cancer. Agreement between the two oncologists was good enough to show a shared signal, but not so high that the second file appears duplicative or that clinician judgment can be treated as interchangeable. The remaining disagreements are informative targets for adjudication.</p>
+<h3 id="4-2-which-questions-were-difficult-for-the-model">4.2 Which questions were difficult for the model?</h3>
+<p>The combined clinician ratings separate relatively direct extraction from questions that require clinical context.</p>
+<p>Straightforward facts often produced ties. Both systems could usually identify an explicitly stated imaging result, procedure, or receptor value. The harder problems involved deciding what the fact meant in the current clinical context.</p>
+<p>Active anticancer medication showed the largest and most stable difference: 50 harness preferences, one baseline preference, and nine ties across the completed evaluations. This field requires the model to distinguish treatment from chronic home medications, supportive drugs, discontinued regimens, and future options. Medication planning also strongly favored the harness, 31 to zero with 29 ties, because future actions must remain separate from current treatment and recent changes.</p>
+<p>Stage and metastatic involvement require related decisions. The model must distinguish regional lymph nodes from distant spread, preserve uncertainty for lesions awaiting confirmation, and reconcile metastatic status with stage. Across the available ratings, regional or overall metastatic involvement favored the harness 35 to one, while stage favored it 24 to two. The harness was built to check these relationships across fields rather than extract each label in isolation.</p>
+<p>Treatment response remained conceptually difficult, but the clinical result was directionally consistent: 18 harness preferences, one baseline preference, and 41 ties. A note may include old progression, current symptoms, stable imaging, tumor-marker trends, and a newly started regimen. Determining which evidence reflects response to the current treatment requires a timeline, not keyword recognition. A second-oncologist comment that response was not yet clear after starting second-line therapy illustrates this temporal boundary.</p>
+<p>Tumor type and receptor status remains the weakest core category. Across the two breast evaluations it favored the harness only 8 to 6, with 26 ties, and had the lowest inter-rater agreement at 60%. These values are often stated explicitly, so the baseline can perform well. The field also becomes difficult when a note contains bilateral disease, historical and recurrent specimens, or discordant receptor results. This remains an area for clinical review rather than a claimed strength.</p>
+<h3 id="4-3-how-the-observed-pattern-relates-to-the-harness">4.3 How the observed pattern relates to the harness</h3>
+<p>The current study does not include a complete component ablation, so it cannot assign each improvement to one module with certainty. The field-level pattern is nevertheless consistent with the intended function of several components.</p>
+<p>The active-medication result is consistent with the dedicated medication prompt, the oncology drug dictionary, contextual classification of supportive versus home medications, and temporal filtering. The medication-plan result is consistent with extracting plans from the Assessment and Plan section and removing already completed actions. The stage and metastasis results are consistent with cross-field context and deterministic rules that separate regional from distant disease and suspected from confirmed findings.</p>
+<p>The high number of ties provides a useful counterpoint. Deterministic rules did not produce a large advantage in every field. Procedure planning was close to even across the completed evaluations, and recent treatment changes were even in the pancreatic-cancer subset. This makes a simple explanation based on output length or a global preference for the harness less convincing. The strongest differences occurred where the system had explicit safeguards.</p>
+<p>These associations support the proposed mechanism, but they do not prove it. A future component study should compare a single prompt, decomposed prompts alone, prompts plus verification, and the complete harness. That experiment would show how much each layer contributes.</p>
+<h3 id="4-4-comparison-with-related-work">4.4 Comparison with related work</h3>
+<p>The closest studies use different combinations of data, model adaptation, and human review. Several include clinicians, but their role is usually to create a reference standard or guide model development. Fewer studies ask oncology specialists to compare final system outputs directly.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Study</th>
+<th>Data and task</th>
+<th>Role of clinical experts</th>
+<th>Main approach</th>
+<th>Difference from this study</th>
+</tr></thead><tbody>
+<tr>
+<td>Sushil et al., CORAL [2]</td>
+<td>40 real breast and pancreatic cancer notes; broad oncology schema</td>
+<td>Expert annotation and manual evaluation of a subset</td>
+<td>Zero-shot GPT-4, GPT-3.5-turbo, and FLAN-UL2</td>
+<td>Same dataset and clinical scope. It established the benchmark and documented omissions and hallucinations. It did not test a failure-mode-driven harness against the same frozen model.</td>
+</tr>
+<tr>
+<td>Wiest et al. [3]</td>
+<td>500 MIMIC histories; five binary clinical features</td>
+<td>Three blinded medical experts created consensus ground truth</td>
+<td>Local Llama 2 with constrained JSON and prompt variants</td>
+<td>Strong expert validation and local deployment, but the targets were five mostly binary features outside oncology. Experts supplied ground truth rather than comparative preference ratings of two full systems.</td>
+</tr>
+<tr>
+<td>Bhattarai et al. [4]</td>
+<td>13,646 notes from 63 patients with lung cancer; four longitudinal phenotypes</td>
+<td>Two subject-matter experts annotated the cohort and adjudicated disagreements</td>
+<td>GPT, open-model, and rule-based comparison</td>
+<td>Larger longitudinal corpus with expert labels, but fewer target phenotypes and no same-model comparison isolating the surrounding workflow.</td>
+</tr>
+<tr>
+<td>Tariq et al. [5]</td>
+<td>26,692 breast cancer patients internally and 162 externally; treatment timelines</td>
+<td>Cancer-registry labels supplied the outcome; clinical experts curated treatment concepts and codes</td>
+<td>UMLS parser plus a fine-tuned question-answering model</td>
+<td>Much stronger scale and external validation. It requires supervised fine-tuning and focuses on five treatment pathways rather than broad field-level extraction.</td>
+</tr>
+<tr>
+<td>Dao et al. [6]</td>
+<td>220 development and 200 validation right-heart-catheterization notes</td>
+<td>One pulmonary vascular disease expert created the validation ground truth and guided development</td>
+<td>Local open model, structured preload, validation, and retry</td>
+<td>The closest workflow architecture. The task was numerical extraction from procedure notes, and the system did not include oncology-specific field routing and cross-field clinical hooks.</td>
+</tr>
+<tr>
+<td>Zhang et al., mCODEGPT [7]</td>
+<td>1,000 synthetic oncology notes; 49 mCODE entities</td>
+<td>Human reviewers checked automated matches after generation</td>
+<td>Hierarchical prompting versus single-step prompting</td>
+<td>Direct evidence that prompt hierarchy helps, but the notes were synthetic and the study did not use blinded oncologist comparison of final outputs.</td>
+</tr>
+<tr>
+<td>Grothey et al. [8]</td>
+<td>579 prostate pathology reports in German and English</td>
+<td>A medical doctoral researcher annotated reports under an attending pathologist&#x27;s supervision</td>
+<td>Multiple open and proprietary models, prompt and quantization tests</td>
+<td>Larger expert-labeled benchmark, but pathology reports are more regular than longitudinal clinic notes and evaluation relied on reference labels rather than end-user preference.</td>
+</tr>
+</tbody></table></div>
+<p>These papers show that clinician involvement is not absent from the field. The distinction is where that involvement occurs. Annotation, adjudication, and terminology design provide a reference answer before evaluation. The 24-study scoping review was dominated by precision, recall, F1, AUC, and accuracy comparisons. Its methodology table listed only two studies with explicit Likert-style output ratings, both in radiology [1]. Our planned study adds downstream review by practicing oncologists, who inspect the source note and compare the final outputs field by field without seeing system identity. This captures clinical preference when both outputs are partly correct, when uncertainty matters, or when one answer is more complete without being less faithful.</p>
+<p>The data contribution also needs precise wording. CORAL is public, but it contains real deidentified longitudinal oncology notes with expert annotation. This differs from web questions, synthetic notes, and narrow report templates. It does not exceed the scale or external validation of the largest institutional studies. Its advantage for this experiment is that the notes preserve the clinical ambiguity our harness is designed to address.</p>
+<p>Our technical claim concerns the combination. Prompt engineering, retrieval, guardrails, retries, and hybrid rules already exist in the literature. In the closest studies reviewed here, we did not find the full evaluated combination used in this project: field-specific routing, selective dependency transfer, five verification stages, oncology drug and terminology resources, deterministic clinical hooks, cross-field consistency checks, action logging, source attribution, and a same-model baseline that removes model capability as the main explanation. The contribution is this integrated inference harness and its evaluation, not any one component in isolation.</p>
+<p>Several related studies have larger datasets, more annotators, or external validation. Our pilot should not be presented as the first clinical extraction system or the largest evaluation. It can be presented as a focused test of whether a structured, auditable workflow can make the same frozen model more reliable on difficult oncology fields, with direct review by the clinicians who understand those distinctions.</p>
+<h3 id="4-5-clinical-and-technical-implications">4.5 Clinical and technical implications</h3>
+<p>The findings suggest that some LLM failures in oncology extraction are repeatable enough to address outside the model weights. This is useful when labeled training data are scarce or when a clinical team needs to change a field definition without retraining. A rule that preserves biopsy-pending disease as suspected can be inspected and tested. A prompt-only system offers less control because a wording change may affect unrelated fields.</p>
+<p>The term inference harness is appropriate for this system because it includes more than a prompt sequence. It manages task routing, dependencies, verification, deterministic corrections, logging, and source attribution around a frozen model. Clinical workflow is also understandable, but it can imply integration into routine care, which this pilot has not tested. We therefore use inference harness for the technical contribution and evaluation workflow for the study procedure.</p>
+<p>The system is also compatible with local deployment. Local operation does not by itself establish privacy compliance or clinical safety, but it allows an institution to retain control of note processing and system updates. The present work evaluates extraction quality, not readiness for autonomous clinical use.</p>
+<h3 id="4-6-pilot-status-and-next-steps">4.6 Pilot status and next steps</h3>
+<p>This pilot is intended to establish whether the effect is large enough and clinically coherent enough to justify a larger study. The second oncologist independently reproduced the breast-cancer direction, and the pancreatic-cancer evaluation showed a similar preference pattern. The next step is no longer to establish whether any replication exists. It is to determine how stable the effect remains across additional evaluators and to fit the prespecified clustered analysis with enough clinicians to estimate evaluator variation credibly.</p>
+<p>External validation remains important. CORAL notes come from one institution and represent two cancer domains. The most informative next dataset would contain longitudinal oncology notes from a different health system, with independent clinical annotation and a field contract fixed before evaluation.</p>
+<h2 id="5-limitations">5. Limitations</h2>
+<p>The current clinical result comes from two oncologists. Both evaluated breast cancer, but only one evaluated pancreatic cancer. The breast subset supports an initial inter-rater estimate, but two evaluators are insufficient to characterize variability across oncologists, and the pancreatic result does not yet have independent replication. The final manuscript should replace the interim descriptive analysis with the planned multi-rater model.</p>
+<p>The A/B interface concealed system identity but used fixed left and right positions, with the harness always shown as A. Agreement across two reviewers and the presence of many ties reduce concern about indiscriminate selection of A, but they do not remove possible position bias. The harness output also included source attribution while the baseline did not. Attribution is part of the system being evaluated, but it may influence preference. A future study should randomize side assignment and separately test the effect of attribution.</p>
+<p>The preference labels do not distinguish “both correct” from “both incorrect.” Written comments in the second export explicitly identify some ties in which neither output was satisfactory. Final reporting should therefore pair preference counts with adjudicated error categories rather than interpret every tie as success.</p>
+<p>The technical audit used LLM-assisted reviewers and repeated error analysis. It is useful for identifying failures but is not independent clinical validation. The complete 40-note table represents v2.2, while later high-impact repairs were tested on affected samples and controls rather than a new full run.</p>
+<p>The dataset is small and comes from one institution. The harness contains clinical rules derived from observed errors, and some may capture documentation conventions specific to CORAL. The study does not yet include a complete component ablation, another model family, or external notes.</p>
+<p>Finally, this study evaluates structured extraction. It does not test patient understanding, treatment decisions, workflow efficiency, or clinical outcomes.</p>
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p class="todo">[FINAL CONCLUSION: In a multi-oncologist identity-masked evaluation, the failure-mode-driven inference harness significantly outperformed a same-model single-prompt baseline for structured extraction from longitudinal oncology notes.]</p>
+<p>The current pilot shows concordant preference for the harness across two oncologists on breast cancer and an additional positive result from one oncologist on pancreatic cancer. The largest gains occur when extraction requires temporal reasoning and clinical classification, especially active therapy, medication planning, and metastatic status. The model weights remained frozen. The improvement came from the inference process around the model: narrower tasks, verification, conservative clinical rules, and source attribution. Additional evaluators and the prespecified clustered analysis are still required before converting this pilot pattern into the final confirmatory claim.</p>
+<section class="references-section"><h2 id="references">References</h2>
+<ol>
+<li>Chen D, Alnassar SA, Avison KE, Huang RS, Raman S. Large Language Model Applications for Health Information Extraction in Oncology: Scoping Review. <em>JMIR Cancer</em>. 2025. doi:10.2196/65984.</li>
+<li>Sushil M, Kennedy VE, Mandair D, Miao BY, Zack T, Butte AJ. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. <em>NEJM AI</em>. 2024. doi:10.1056/AIdbp2300110.</li>
+<li>Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. <em>npj Digital Medicine</em>. 2024. doi:10.1038/s41746-024-01233-2.</li>
+<li>Bhattarai K, Oh IY, Sierra JM, et al. Leveraging GPT-4 for identifying cancer phenotypes in electronic health records: a performance comparison between GPT-4, GPT-3.5-turbo, Flan-T5, Llama-3-8B, and spaCy's rule-based and machine learning-based methods. <em>JAMIA Open</em>. 2024. doi:10.1093/jamiaopen/ooae060.</li>
+<li>Tariq A, Sikha M, Kurian AW, et al. Open-Source Hybrid Large Language Model Integrated System for Extraction of Breast Cancer Treatment Pathway From Free-Text Clinical Notes. <em>JCO Clinical Cancer Informatics</em>. 2025. doi:10.1200/CCI-25-00002.</li>
+<li>Dao N, Quesada L, Hassan SM, et al. Generative artificial intelligence for automated data extraction from unstructured medical text. <em>JAMIA Open</em>. 2025. doi:10.1093/jamiaopen/ooaf097.</li>
+<li>Zhang K, Huang T, Malin BA, et al. Introducing mCODEGPT as a zero-shot information extraction from clinical free text data tool for cancer research. <em>Communications Medicine</em>. 2025. doi:10.1038/s43856-025-01116-x.</li>
+<li>Grothey B, Odenkirchen J, Brkic A, et al. Comprehensive testing of large language models for extraction of structured data in pathology. <em>Communications Medicine</em>. 2025. doi:10.1038/s43856-025-00808-8.</li>
+<li>Qwen Team. Qwen2.5 Technical Report. arXiv:2412.15115.</li>
+</ol>
+</section></article>
+  </div>
+</body>
+</html>

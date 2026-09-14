@@ -1,3 +1,5 @@
+<!-- After editing this draft, run: python3 render_workshop_draft.py -->
+
 # A failure-mode-driven inference harness for oncology note extraction
 
 **Pilot report draft for clinical collaborator review**
