@@ -277,14 +277,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
     <article><!-- After editing this draft, run: python3 render_workshop_draft.py -->
 <h1>A failure-mode-driven inference harness for oncology note extraction</h1>
 <div class="draft-meta">
-  <span class="chip">Version 0.4, September 2026</span>
+  <span class="chip">Version 0.5, September 2026</span>
   <span class="chip">2 oncologists</span>
   <span class="chip">817 required-field judgments</span>
   <span class="chip">HTML review copy</span>
 </div>
 <div class="render-note">Figure specification cards describe the intended publication graphics. Embedded SVGs are internal trend checks and are not final artwork.</div>
 <p><strong>Pilot report draft for clinical collaborator review</strong></p>
-<p>Version 0.4, September 2026</p>
+<p>Version 0.5, September 2026</p>
 <p>Authors: [TODO]</p>
 <p>Affiliations: [TODO]</p>
 <p>Target venue and format: [TODO]</p>
@@ -317,7 +317,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <p>Research activity has moved faster than routine clinical adoption. A 2025 scoping review identified 24 studies of language-model-based oncology information extraction, but also found that external validation and real-world workflow integration remained limited [1]. Clinical deployment has a higher bar than a demonstration on a benchmark. A useful system must preserve uncertainty, distinguish current care from historical events, avoid unsupported facts, and produce results that a clinician can trace back to the note.</p>
 <p>Longitudinal oncology notes expose weaknesses that are easy to miss in simpler extraction tasks. A medication list can contain anticancer therapy, supportive treatment, chronic home medications, discontinued drugs, and therapies that are only being discussed. Regional lymph nodes must not be labeled as distant metastases. A suspicious lesion awaiting biopsy must not become confirmed stage IV disease. Tumor growth before treatment is not evidence of failure of a regimen that has just started. A model can mention medically relevant information and still place it in the wrong field or timepoint.</p>
 <p>Several strategies have been used to improve clinical extraction. Large proprietary models can perform zero-shot extraction but still omit note-specific details and hallucinate [2]. Local open-weight models reduce dependence on external services, but performance varies with model size and prompt design [3,8]. Fine-tuned hybrid systems can achieve strong performance and external validation, although they require large labeled datasets and model training [5]. Hierarchical prompting, validation layers, and retry mechanisms also improve extraction without conventional fine-tuning [6,7]. These studies establish prior work for the individual techniques used in modern extraction systems.</p>
-<p>Human involvement also differs across studies. Clinicians or medical experts often create gold-standard annotations, resolve disagreements, or guide terminology selection. That work establishes whether a model matches a reference label. It does not answer whether a practicing oncologist considers one complete system output more faithful, complete, and clinically useful than another when both contain partly correct information. In the supplemental methods table of the 24-study scoping review, most papers reported automatic performance metrics against labels. Only two explicitly reported Likert-style human ratings of model outputs, and both evaluated radiology tasks [1]. We did not identify a field-level, identity-masked comparison of complete extraction systems by practicing oncologists in that review.</p>
+<p>Human involvement also differs across studies. Clinicians or medical experts often create gold-standard annotations, resolve disagreements, or guide terminology selection. That work establishes whether a model matches a reference label. It does not answer whether a practicing oncologist considers one complete system output more faithful, complete, and clinically useful than another when both contain partly correct information. In our audit of the supplemental methods table for the 24-study scoping review, most papers reported automatic performance metrics against labels. Only two entries explicitly described five-point Likert ratings of generated outputs, and both involved radiology reports [1]. We did not identify a field-level, identity-masked comparison of complete extraction systems by practicing oncologists in that review.</p>
 <p>Our approach treats recurring model errors as engineering targets. We use the term inference harness for the software layer that controls how a frozen model is prompted, checked, corrected, and linked to evidence. The model itself is unchanged. When review identifies a repeated failure, such as importing a stopped drug into current therapy or turning suspected metastasis into confirmed disease, the system receives a narrow correction through prompt instructions, verification logic, or a deterministic clinical rule. Each correction can be logged and regression-tested.</p>
 <p>The harness is more than a long prompt or retrieval step. Different fields follow different extraction routes. Selected outputs pass into later tasks only when they provide relevant clinical context. Verification stages run after generation, and deterministic hooks enforce narrow oncology constraints across related fields. The system records these interventions and links final values to note evidence. Among the closest studies we reviewed, we did not identify an evaluation of this full combination on real longitudinal oncology notes with a same-model baseline and direct oncologist comparison.</p>
 <p>We tested whether this approach improves extraction under a controlled comparison. The harness and baseline use the same Qwen2.5-32B model and the same target schema. The main difference is the inference process surrounding the model. We focus on seven clinical questions that require more than surface entity recognition: active anticancer therapy, stage, distant metastasis, regional or overall metastatic involvement, treatment response, breast cancer type and receptor status, and completed molecular or genetic results.</p>
@@ -326,11 +326,11 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <h3 id="2-1-study-design">2.1 Study design</h3>
 <p>This is a pilot evaluation of a structured inference workflow for oncology information extraction. The study includes a same-model technical comparison on 40 held-out notes and an ongoing multi-oncologist A/B evaluation. At the time of this draft, two oncologists have completed the breast-cancer evaluation, and one of them has also completed the pancreatic-cancer evaluation.</p>
 <h3 id="2-2-dataset">2.2 Dataset</h3>
-<p>We used CORAL, an expert-curated dataset of deidentified breast and pancreatic cancer progress notes [2]. The dataset contains 200 unannotated development notes and 40 expert-annotated test notes. The held-out comparison used all 40 test notes: 20 breast cancer notes and 20 pancreatic cancer notes.</p>
+<p>We used CORAL, an expert-curated dataset of deidentified breast and pancreatic cancer progress notes [2]. The release used in this project contains 200 additional notes without expert annotations, 100 per cancer type, and 40 expert-annotated notes, 20 per cancer type. We used the additional notes for development and all 40 expert-annotated notes for the held-out comparison.</p>
 <p>CORAL is publicly available, but the records are real clinical notes rather than web-derived questions, synthetic cases, or model-generated narratives. They retain the repeated histories, copied-forward content, uncertain findings, and conditional plans that make longitudinal oncology extraction difficult. The value of this dataset is clinical realism and expert annotation, not size. Several related studies use much larger institutional cohorts, while others use narrower procedure or pathology reports or synthetic oncology notes.</p>
 <p>Development and evaluation had separate roles. Development notes were used to identify recurrent error patterns and refine the harness. The 40 test notes were used for the matched comparison. No model-weight training or fine-tuning was performed.</p>
 <h3 id="2-3-base-model-and-baseline">2.3 Base model and baseline</h3>
-<p>Both conditions used Qwen2.5-32B-Instruct-AWQ served locally through vLLM [9]. The baseline made one model call per note and returned the complete target schema. It did not use task decomposition, verification gates, retries, dictionaries, or deterministic post-processing. The matched baseline and harness used the same field definitions and output contract.</p>
+<p>Both conditions used Qwen2.5-32B-Instruct-AWQ [9], served locally through vLLM. The baseline made one model call per note and returned the complete target schema. It did not use task decomposition, verification gates, retries, dictionaries, or deterministic post-processing. The matched baseline and harness used the same field definitions and output contract.</p>
 <h3 id="2-4-inference-harness">2.4 Inference harness</h3>
 <p>The harness uses several stages because the target fields do not all require the same context or reasoning.</p>
 <p>First, field-specific prompts independently extract visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Dependent prompts then receive selected earlier results. For example, stage and metastatic status provide context for treatment intent, while current therapy and clinical findings provide context for response assessment. Plan fields are extracted primarily from the Assessment and Plan section.</p>
@@ -721,7 +721,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <tr>
 <td>Sushil et al., CORAL [2]</td>
 <td>40 real breast and pancreatic cancer notes; broad oncology schema</td>
-<td>Expert annotation and manual evaluation of a subset</td>
+<td>Expert annotation; an independent oncologist manually evaluated GPT-4 on 10 notes per cancer type</td>
 <td>Zero-shot GPT-4, GPT-3.5-turbo, and FLAN-UL2</td>
 <td>Same dataset and clinical scope. It established the benchmark and documented omissions and hallucinations. It did not test a failure-mode-driven harness against the same frozen model.</td>
 </tr>
@@ -729,46 +729,46 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <td>Wiest et al. [3]</td>
 <td>500 MIMIC histories; five binary clinical features</td>
 <td>Three blinded medical experts created consensus ground truth</td>
-<td>Local Llama 2 with constrained JSON and prompt variants</td>
-<td>Strong expert validation and local deployment, but the targets were five mostly binary features outside oncology. Experts supplied ground truth rather than comparative preference ratings of two full systems.</td>
+<td>Local Llama 2 with grammar-constrained JSON and prompt variants</td>
+<td>Strong expert validation and local deployment, but the targets were five binary features outside oncology. Experts supplied ground truth rather than comparative preference ratings of two full systems.</td>
 </tr>
 <tr>
 <td>Bhattarai et al. [4]</td>
 <td>13,646 notes from 63 patients with lung cancer; four longitudinal phenotypes</td>
-<td>Two subject-matter experts annotated the cohort and adjudicated disagreements</td>
+<td>Two subject-matter experts supplied gold-standard manual annotations</td>
 <td>GPT, open-model, and rule-based comparison</td>
 <td>Larger longitudinal corpus with expert labels, but fewer target phenotypes and no same-model comparison isolating the surrounding workflow.</td>
 </tr>
 <tr>
 <td>Tariq et al. [5]</td>
 <td>26,692 breast cancer patients internally and 162 externally; treatment timelines</td>
-<td>Cancer-registry labels supplied the outcome; clinical experts curated treatment concepts and codes</td>
+<td>Cancer-registry data supplied treatment labels; clinical experts curated treatment concepts and codes</td>
 <td>UMLS parser plus a fine-tuned question-answering model</td>
-<td>Much stronger scale and external validation. It requires supervised fine-tuning and focuses on five treatment pathways rather than broad field-level extraction.</td>
+<td>Much stronger scale and external validation. It requires supervised fine-tuning and focuses on five treatment categories rather than broad field-level extraction.</td>
 </tr>
 <tr>
 <td>Dao et al. [6]</td>
 <td>220 development and 200 validation right-heart-catheterization notes</td>
 <td>One pulmonary vascular disease expert created the validation ground truth and guided development</td>
-<td>Local open model, structured preload, validation, and retry</td>
+<td>Local open model, engineered preload, validation, and retry</td>
 <td>The closest workflow architecture. The task was numerical extraction from procedure notes, and the system did not include oncology-specific field routing and cross-field clinical hooks.</td>
 </tr>
 <tr>
 <td>Zhang et al., mCODEGPT [7]</td>
 <td>1,000 synthetic oncology notes; 49 mCODE entities</td>
-<td>Human reviewers checked automated matches after generation</td>
+<td>Programmatic matching was supplemented by manual validation from human reviewers</td>
 <td>Hierarchical prompting versus single-step prompting</td>
 <td>Direct evidence that prompt hierarchy helps, but the notes were synthetic and the study did not use blinded oncologist comparison of final outputs.</td>
 </tr>
 <tr>
 <td>Grothey et al. [8]</td>
 <td>579 prostate pathology reports in German and English</td>
-<td>A medical doctoral researcher annotated reports under an attending pathologist&#x27;s supervision</td>
+<td>A trained medical doctoral student annotated reports under an attending pathologist&#x27;s supervision</td>
 <td>Multiple open and proprietary models, prompt and quantization tests</td>
-<td>Larger expert-labeled benchmark, but pathology reports are more regular than longitudinal clinic notes and evaluation relied on reference labels rather than end-user preference.</td>
+<td>Larger expert-labeled benchmark, but it evaluated one report type and 11 predefined parameters rather than heterogeneous longitudinal clinic notes. Evaluation relied on reference labels rather than end-user preference.</td>
 </tr>
 </tbody></table></div>
-<p>These papers show that clinician involvement is not absent from the field. The distinction is where that involvement occurs. Annotation, adjudication, and terminology design provide a reference answer before evaluation. The 24-study scoping review was dominated by precision, recall, F1, AUC, and accuracy comparisons. Its methodology table listed only two studies with explicit Likert-style output ratings, both in radiology [1]. Our planned study adds downstream review by practicing oncologists, who inspect the source note and compare the final outputs field by field without seeing system identity. This captures clinical preference when both outputs are partly correct, when uncertainty matters, or when one answer is more complete without being less faithful.</p>
+<p>These papers show that clinician involvement is not absent from the field. The distinction is where that involvement occurs. Annotation, adjudication, and terminology design provide a reference answer before evaluation. The 24-study scoping review was dominated by precision, recall, F1, AUC, and accuracy comparisons. In our audit of its supplemental methodology table, only two entries explicitly described five-point Likert ratings of generated outputs, both involving radiology reports [1]. Our planned study adds downstream review by practicing oncologists, who inspect the source note and compare the final outputs field by field without seeing system identity. This captures clinical preference when both outputs are partly correct, when uncertainty matters, or when one answer is more complete without being less faithful.</p>
 <p>The data contribution also needs precise wording. CORAL is public, but it contains real deidentified longitudinal oncology notes with expert annotation. This differs from web questions, synthetic notes, and narrow report templates. It does not exceed the scale or external validation of the largest institutional studies. Its advantage for this experiment is that the notes preserve the clinical ambiguity our harness is designed to address.</p>
 <p>Our technical claim concerns the combination. Prompt engineering, retrieval, guardrails, retries, and hybrid rules already exist in the literature. In the closest studies reviewed here, we did not find the full evaluated combination used in this project: field-specific routing, selective dependency transfer, five verification stages, oncology drug and terminology resources, deterministic clinical hooks, cross-field consistency checks, action logging, source attribution, and a same-model baseline that removes model capability as the main explanation. The contribution is this integrated inference harness and its evaluation, not any one component in isolation.</p>
 <p>Several related studies have larger datasets, more annotators, or external validation. Our pilot should not be presented as the first clinical extraction system or the largest evaluation. It can be presented as a focused test of whether a structured, auditable workflow can make the same frozen model more reliable on difficult oncology fields, with direct review by the clinicians who understand those distinctions.</p>
@@ -791,15 +791,15 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <p>The current pilot shows concordant preference for the harness across two oncologists on breast cancer and an additional positive result from one oncologist on pancreatic cancer. The largest gains occur when extraction requires temporal reasoning and clinical classification, especially active therapy, medication planning, and metastatic status. The model weights remained frozen. The improvement came from the inference process around the model: narrower tasks, verification, conservative clinical rules, and source attribution. Additional evaluators and the prespecified clustered analysis are still required before converting this pilot pattern into the final confirmatory claim.</p>
 <section class="references-section"><h2 id="references">References</h2>
 <ol>
-<li>Chen D, Alnassar SA, Avison KE, Huang RS, Raman S. Large Language Model Applications for Health Information Extraction in Oncology: Scoping Review. <em>JMIR Cancer</em>. 2025. doi:10.2196/65984.</li>
-<li>Sushil M, Kennedy VE, Mandair D, Miao BY, Zack T, Butte AJ. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. <em>NEJM AI</em>. 2024. doi:10.1056/AIdbp2300110.</li>
-<li>Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. <em>npj Digital Medicine</em>. 2024. doi:10.1038/s41746-024-01233-2.</li>
-<li>Bhattarai K, Oh IY, Sierra JM, et al. Leveraging GPT-4 for identifying cancer phenotypes in electronic health records: a performance comparison between GPT-4, GPT-3.5-turbo, Flan-T5, Llama-3-8B, and spaCy's rule-based and machine learning-based methods. <em>JAMIA Open</em>. 2024. doi:10.1093/jamiaopen/ooae060.</li>
-<li>Tariq A, Sikha M, Kurian AW, et al. Open-Source Hybrid Large Language Model Integrated System for Extraction of Breast Cancer Treatment Pathway From Free-Text Clinical Notes. <em>JCO Clinical Cancer Informatics</em>. 2025. doi:10.1200/CCI-25-00002.</li>
-<li>Dao N, Quesada L, Hassan SM, et al. Generative artificial intelligence for automated data extraction from unstructured medical text. <em>JAMIA Open</em>. 2025. doi:10.1093/jamiaopen/ooaf097.</li>
-<li>Zhang K, Huang T, Malin BA, et al. Introducing mCODEGPT as a zero-shot information extraction from clinical free text data tool for cancer research. <em>Communications Medicine</em>. 2025. doi:10.1038/s43856-025-01116-x.</li>
-<li>Grothey B, Odenkirchen J, Brkic A, et al. Comprehensive testing of large language models for extraction of structured data in pathology. <em>Communications Medicine</em>. 2025. doi:10.1038/s43856-025-00808-8.</li>
-<li>Qwen Team. Qwen2.5 Technical Report. arXiv:2412.15115.</li>
+<li>Chen D, Alnassar SA, Avison KE, Huang RS, Raman S. Large Language Model Applications for Health Information Extraction in Oncology: Scoping Review. <em>JMIR Cancer</em>. 2025;11:e65984. <a href="https://doi.org/10.2196/65984">https://doi.org/10.2196/65984</a>.</li>
+<li>Sushil M, Kennedy VE, Mandair D, Miao BY, Zack T, Butte AJ. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. <em>NEJM AI</em>. 2024;1(4). <a href="https://doi.org/10.1056/AIdbp2300110">https://doi.org/10.1056/AIdbp2300110</a>.</li>
+<li>Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. <em>npj Digital Medicine</em>. 2024;7:257. <a href="https://doi.org/10.1038/s41746-024-01233-2">https://doi.org/10.1038/s41746-024-01233-2</a>.</li>
+<li>Bhattarai K, Oh IY, Sierra JM, et al. Leveraging GPT-4 for identifying cancer phenotypes in electronic health records: a performance comparison between GPT-4, GPT-3.5-turbo, Flan-T5, Llama-3-8B, and spaCy's rule-based and machine learning-based methods. <em>JAMIA Open</em>. 2024;7(3):ooae060. <a href="https://doi.org/10.1093/jamiaopen/ooae060">https://doi.org/10.1093/jamiaopen/ooae060</a>.</li>
+<li>Tariq A, Sikha M, Kurian AW, et al. Open-Source Hybrid Large Language Model Integrated System for Extraction of Breast Cancer Treatment Pathway From Free-Text Clinical Notes. <em>JCO Clinical Cancer Informatics</em>. 2025;9:e2500002. <a href="https://doi.org/10.1200/CCI-25-00002">https://doi.org/10.1200/CCI-25-00002</a>.</li>
+<li>Dao N, Quesada L, Hassan SM, et al. Generative artificial intelligence for automated data extraction from unstructured medical text. <em>JAMIA Open</em>. 2025;8(5):ooaf097. <a href="https://doi.org/10.1093/jamiaopen/ooaf097">https://doi.org/10.1093/jamiaopen/ooaf097</a>.</li>
+<li>Zhang K, Huang T, Malin BA, et al. Introducing mCODEGPT as a zero-shot information extraction from clinical free text data tool for cancer research. <em>Communications Medicine</em>. 2025;5:422. <a href="https://doi.org/10.1038/s43856-025-01116-x">https://doi.org/10.1038/s43856-025-01116-x</a>.</li>
+<li>Grothey B, Odenkirchen J, Brkic A, et al. Comprehensive testing of large language models for extraction of structured data in pathology. <em>Communications Medicine</em>. 2025;5:96. <a href="https://doi.org/10.1038/s43856-025-00808-8">https://doi.org/10.1038/s43856-025-00808-8</a>.</li>
+<li>Qwen, Yang A, Yang B, et al. Qwen2.5 Technical Report. arXiv:2412.15115. 2025. <a href="https://arxiv.org/abs/2412.15115">https://arxiv.org/abs/2412.15115</a>.</li>
 </ol>
 </section></article>
   </div>

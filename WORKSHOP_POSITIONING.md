@@ -1,6 +1,6 @@
 # Workshop / Poster Positioning Memo
 
-Updated: 2026-09-11
+Updated: 2026-09-14
 
 ## Working conclusion
 
@@ -134,11 +134,11 @@ The proof of concept uses breast and pancreatic oncology progress notes, which r
 | Zhang et al., mCODEGPT (2025), DOI: [10.1038/s43856-025-01116-x](https://doi.org/10.1038/s43856-025-01116-x) | Shows hierarchical prompting for zero-shot cancer information extraction. | Multi-stage prompting is not itself novel; real-note error control and deterministic clinical invariants are the useful distinction. |
 | Grothey et al. (2025), DOI: [10.1038/s43856-025-00808-8](https://doi.org/10.1038/s43856-025-00808-8) | Compares open and proprietary models for structured oncology pathology extraction. | The present task uses heterogeneous longitudinal clinic notes rather than a narrow pathology template. |
 
-These citations were checked against Crossref/Europe PMC/arXiv by a read-only Codex research pass; titles and claims should be rechecked when the manuscript bibliography is assembled.
+These citations were re-audited on 2026-09-14 against Crossref, Europe PMC/PMC full text, the Chen et al. supplemental methods table, and arXiv. The detailed claim-by-claim record is in `WORKSHOP_REFERENCE_AUDIT.md`.
 
 ### Clinician evaluation and workflow distinction
 
-The oncology extraction literature often includes clinicians upstream as annotators, adjudicators, or terminology experts. That is different from asking practicing oncologists to compare the final outputs of two complete systems. The supplemental methodology table in Chen et al.'s 24-study scoping review is dominated by automatic metrics against labels; only two studies explicitly report Likert-style human ratings of model outputs, and both concern radiology tasks. We did not identify a field-level, identity-masked comparison of complete extraction workflows by practicing oncologists in that review.
+The oncology extraction literature often includes clinicians upstream as annotators, adjudicators, or terminology experts. That is different from asking practicing oncologists to compare the final outputs of two complete systems. In our audit of the supplemental methodology table for Chen et al.'s 24-study scoping review, most entries used automatic metrics against labels; only two entries explicitly described five-point Likert ratings of generated outputs, and both involved radiology reports. We did not identify a field-level, identity-masked comparison of complete extraction workflows by practicing oncologists in that review.
 
 The dataset claim also needs precision. CORAL is public, but it contains real deidentified longitudinal oncology notes with expert annotation. Its advantage is clinical realism and temporal complexity, not exclusivity or scale. Some related studies use larger multi-institution cohorts, while others use synthetic notes or narrower pathology and procedure reports.
 
