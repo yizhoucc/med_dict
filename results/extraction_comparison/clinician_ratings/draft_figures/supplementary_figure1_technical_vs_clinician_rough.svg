@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1030" height="570" viewBox="0 0 1030 570">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<text x="515.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Technical audit and clinician net preference rates</text>
+<text x="515.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Descriptive comparison only; reviewers and evaluated pipeline versions differ</text>
+<line x1="290.0" y1="90" x2="290.0" y2="515" stroke="#E5E5E5"/>
+<text x="290.0" y="540" text-anchor="middle" font-size="11">-10%</text>
+<line x1="356.0" y1="90" x2="356.0" y2="515" stroke="#888888"/>
+<text x="356.0" y="540" text-anchor="middle" font-size="11">0%</text>
+<line x1="488.0" y1="90" x2="488.0" y2="515" stroke="#E5E5E5"/>
+<text x="488.0" y="540" text-anchor="middle" font-size="11">20%</text>
+<line x1="620.0" y1="90" x2="620.0" y2="515" stroke="#E5E5E5"/>
+<text x="620.0" y="540" text-anchor="middle" font-size="11">40%</text>
+<line x1="752.0" y1="90" x2="752.0" y2="515" stroke="#E5E5E5"/>
+<text x="752.0" y="540" text-anchor="middle" font-size="11">60%</text>
+<line x1="884.0" y1="90" x2="884.0" y2="515" stroke="#E5E5E5"/>
+<text x="884.0" y="540" text-anchor="middle" font-size="11">80%</text>
+<circle cx="300" cy="73" r="6" fill="#756BB1"/><text x="312" y="77" font-size="12">Technical audit</text>
+<circle cx="435" cy="73" r="6" fill="#2B8CBE"/><text x="447" y="77" font-size="12">Clinician ratings</text>
+<text x="278" y="119" text-anchor="end" font-size="13">Active anticancer medications</text>
+<line x1="488.0" y1="115" x2="895.0" y2="115" stroke="#999999" stroke-width="2"/>
+<circle cx="488.0" cy="115" r="7" fill="#756BB1"/>
+<circle cx="895.0" cy="115" r="7" fill="#2B8CBE"/>
+<text x="278" y="176" text-anchor="end" font-size="13">Stage</text>
+<line x1="323.0" y1="172" x2="598.0" y2="172" stroke="#999999" stroke-width="2"/>
+<circle cx="323.0" cy="172" r="7" fill="#756BB1"/>
+<circle cx="598.0" cy="172" r="7" fill="#2B8CBE"/>
+<text x="278" y="233" text-anchor="end" font-size="13">Distant metastasis</text>
+<line x1="488.0" y1="229" x2="422.0" y2="229" stroke="#999999" stroke-width="2"/>
+<circle cx="488.0" cy="229" r="7" fill="#756BB1"/>
+<circle cx="422.0" cy="229" r="7" fill="#2B8CBE"/>
+<text x="278" y="290" text-anchor="end" font-size="13">Regional / overall metastasis</text>
+<line x1="521.0" y1="286" x2="730.0" y2="286" stroke="#999999" stroke-width="2"/>
+<circle cx="521.0" cy="286" r="7" fill="#756BB1"/>
+<circle cx="730.0" cy="286" r="7" fill="#2B8CBE"/>
+<text x="278" y="347" text-anchor="end" font-size="13">Treatment response</text>
+<line x1="471.5" y1="343" x2="543.0" y2="343" stroke="#999999" stroke-width="2"/>
+<circle cx="471.5" cy="343" r="7" fill="#756BB1"/>
+<circle cx="543.0" cy="343" r="7" fill="#2B8CBE"/>
+<text x="278" y="404" text-anchor="end" font-size="13">Breast type / receptors</text>
+<line x1="455.0" y1="400" x2="389.0" y2="400" stroke="#999999" stroke-width="2"/>
+<circle cx="455.0" cy="400" r="7" fill="#756BB1"/>
+<circle cx="389.0" cy="400" r="7" fill="#2B8CBE"/>
+<text x="278" y="461" text-anchor="end" font-size="13">Molecular / genetic results</text>
+<line x1="422.0" y1="457" x2="444.0" y2="457" stroke="#999999" stroke-width="2"/>
+<circle cx="422.0" cy="457" r="7" fill="#756BB1"/>
+<circle cx="444.0" cy="457" r="7" fill="#2B8CBE"/>
+<text x="620.0" y="566" text-anchor="middle" font-size="12">Net preference rate: (PL better - BL better) / applicable judgments</text>
+</g>
+</svg>

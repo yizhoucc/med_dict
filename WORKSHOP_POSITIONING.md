@@ -56,6 +56,21 @@ Across all completed clinician evaluations, the current total is PL 249 / BL 39 
 
 This is now replicated breast-cancer evidence plus a first PDAC evaluation, but it is not the final planned multi-rater result. Only one oncologist has evaluated PDAC, the A/B positions were fixed, and preference ties can include cases in which both outputs are wrong. The score exports also do not contain the hashes or version identifiers of the displayed outputs; record the exact evaluated artifact identifiers before submission.
 
+## Recommended figure set
+
+The paper draft now contains detailed placeholders for the following figures:
+
+1. **System architecture:** two-lane diagram contrasting the full inference harness with the matched single-prompt baseline while holding the model and schema constant.
+2. **Evaluation-level outcomes:** 100% stacked bars for Oncologist 01 breast, Oncologist 02 breast, and Oncologist 02 PDAC.
+3. **Inter-rater agreement:** 3 × 3 heatmap of breast-cancer verdicts with exact agreement and Cohen's kappa.
+4. **Core clinical categories:** stacked horizontal bars showing PL, tie, and BL shares for each prespecified category.
+5. **Per-note margins:** breast and PDAC panels showing PL-preferred fields minus BL-preferred fields for each note.
+6. **Final adjusted effects:** forest plot of mixed-effects estimates after the remaining oncologist ratings are complete.
+7. **Supplementary pattern comparison:** technical-audit versus clinician net preference rates, explicitly labeled descriptive because the review processes and pipeline versions differ.
+8. **Supplementary tie adjudication:** categories separating equivalent correct ties from cases in which both outputs are incomplete or wrong.
+
+Simple SVG versions of the currently computable data plots are stored under `results/extraction_comparison/clinician_ratings/draft_figures/`. They are trend-check artifacts, not final publication graphics.
+
 ## Decisions frozen for the matched-baseline rerun
 
 1. The primary comparison is the full pipeline (PL) versus a single-call baseline (BL) using the same Qwen2.5-32B-Instruct-AWQ model and the same target field contract.
