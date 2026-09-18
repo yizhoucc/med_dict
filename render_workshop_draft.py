@@ -165,6 +165,26 @@ a { color: #176a9a; }
   color: #433767;
   font-size: 13px;
 }
+.language-nav {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+.language-nav a {
+  padding: 5px 11px;
+  border: 1px solid #b8cad6;
+  border-radius: 999px;
+  background: #f7fbfd;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.language-break {
+  margin: 70px -20px 42px;
+  border-top: 4px solid var(--navy);
+  padding-top: 34px;
+}
 .abstract-section {
   margin: 26px -18px 32px;
   padding: 8px 18px 22px;
@@ -346,9 +366,19 @@ def convert_tables(markdown_text: str) -> str:
 def add_rough_markers(markdown_text: str) -> str:
     output: list[str] = []
     for line in markdown_text.splitlines():
-        match = re.match(r"> \*\*(Figure [23457]|Supplementary Figure S1) placeholder:", line)
+        english_match = re.match(
+            r"> \*\*(Figure [23457]|Supplementary Figure S1) placeholder:", line
+        )
+        chinese_match = re.match(r"> \*\*(图 [23457]|补充图 S1) 占位：", line)
+        match = english_match or chinese_match
         if match:
-            key = match.group(1).replace("Figure ", "").replace("Supplementary ", "")
+            key = (
+                match.group(1)
+                .replace("Figure ", "")
+                .replace("Supplementary ", "")
+                .replace("补充图 ", "")
+                .replace("图 ", "")
+            )
             output.append(f'<div data-rough-figure="{key}"></div>')
             output.append("")
         output.append(line)
@@ -375,7 +405,7 @@ def run_cmark(markdown_text: str) -> str:
 
 def slugify(text: str) -> str:
     plain = html.unescape(re.sub(r"<[^>]+>", "", text)).lower()
-    plain = re.sub(r"[^a-z0-9]+", "-", plain).strip("-")
+    plain = re.sub(r"[_\W]+", "-", plain, flags=re.UNICODE).strip("-")
     return plain or "section"
 
 
@@ -416,13 +446,13 @@ def inject_rough_figures(body: str) -> str:
 <img src="{embed_svg(path)}" alt="{html.escape(title)}">
 <figcaption>{html.escape(title)}. Trend-check rendering only; replace with publication artwork.</figcaption>
 </figure>'''
-        body = body.replace(marker, figure, 1)
+        body = body.replace(marker, figure)
     return body
 
 
 def style_sections(body: str) -> str:
     body = re.sub(
-        r"<blockquote>\s*(?=<p><strong>(?:Figure|Supplementary Figure).*?placeholder:)(.*?)</blockquote>",
+        r"<blockquote>\s*(?=<p><strong>(?:Figure|Supplementary Figure|图|补充图).*?(?:placeholder:|占位：))(.*?)</blockquote>",
         r'<aside class="figure-placeholder">\1</aside>',
         body,
         flags=re.S,
@@ -440,17 +470,54 @@ def style_sections(body: str) -> str:
         flags=re.S,
     )
     body = re.sub(
-        r"(<h2 id=\"references\">.*)$",
+        r"(<h2 id=\"references\">.*?)(?=<div class=\"language-break\" id=\"chinese-version\"></div>)",
         r'<section class="references-section">\1</section>',
         body,
         flags=re.S,
     )
-    body = re.sub(r"<p>(\[FINAL[^<]+\])</p>", r'<p class="todo">\1</p>', body)
+    body = re.sub(
+        r"(<h2 id=\"供临床合作者审阅的问题\">.*?)(?=<h2 id=\"摘要\">)",
+        r'<section class="review-section">\1</section>',
+        body,
+        flags=re.S,
+    )
+    body = re.sub(
+        r"(<h2 id=\"摘要\">.*?)(?=<h2 id=\"1-引言\">)",
+        r'<section class="abstract-section">\1</section>',
+        body,
+        flags=re.S,
+    )
+    body = re.sub(
+        r"(<h2 id=\"参考文献\">.*)$",
+        r'<section class="references-section">\1</section>',
+        body,
+        flags=re.S,
+    )
+    body = re.sub(
+        r"<p>(\[(?:FINAL|TODO|最终|投稿前)[^<]+\])</p>",
+        r'<p class="todo">\1</p>',
+        body,
+    )
     return body
 
 
 def render() -> str:
     markdown_text = SOURCE.read_text(encoding="utf-8")
+    chinese_marker = '<div class="language-break" id="chinese-version"></div>'
+    if chinese_marker not in markdown_text:
+        raise RuntimeError("The bilingual draft is missing the Chinese-version marker.")
+    english_text, chinese_text = markdown_text.split(chinese_marker, 1)
+    paired_counts = {
+        "level-2 headings": (english_text.count("\n## "), chinese_text.count("\n## ")),
+        "level-3 headings": (english_text.count("\n### "), chinese_text.count("\n### ")),
+        "tables": (english_text.count("|---"), chinese_text.count("|---")),
+        "figure placeholders": (english_text.count("placeholder:"), chinese_text.count("占位：")),
+    }
+    mismatched = {
+        label: counts for label, counts in paired_counts.items() if counts[0] != counts[1]
+    }
+    if mismatched:
+        raise RuntimeError(f"English and Chinese structures do not match: {mismatched}")
     version_match = re.search(r"Version ([^\n]+)", markdown_text)
     version = version_match.group(1) if version_match else "draft"
     prepared = add_rough_markers(convert_tables(markdown_text))
@@ -468,6 +535,11 @@ def render() -> str:
   <span class="chip">HTML review copy</span>
 </div>
 <div class="render-note">Figure specification cards describe the intended publication graphics. Embedded SVGs are internal trend checks and are not final artwork.</div>''',
+        1,
+    )
+    body = body.replace(
+        '<div id="english-version"></div>',
+        '<div id="english-version"></div><div class="language-nav"><a href="#english-version">English</a><a href="#chinese-version">中文</a></div>',
         1,
     )
     return f'''<!doctype html>
@@ -497,6 +569,9 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa of 0.645",
         "817 required-field judgments",
+        'id="chinese-version"',
+        "供临床合作者审阅的问题",
+        "参考文献",
     ]
     missing = [value for value in required if value not in output]
     if missing:
