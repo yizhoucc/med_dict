@@ -30,6 +30,7 @@ ROUGH_FIGURES = {
     "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Breast-cancer inter-rater agreement"),
     "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
+    "7": (FIGURE_DIR / "figure7_letter_differences_rough.svg", "Exploratory patient-letter score differences"),
     "S1": (
         FIGURE_DIR / "supplementary_figure1_technical_vs_clinician_rough.svg",
         "Technical-audit and clinician net preference rates",
@@ -345,7 +346,7 @@ def convert_tables(markdown_text: str) -> str:
 def add_rough_markers(markdown_text: str) -> str:
     output: list[str] = []
     for line in markdown_text.splitlines():
-        match = re.match(r"> \*\*(Figure [2345]|Supplementary Figure S1) placeholder:", line)
+        match = re.match(r"> \*\*(Figure [23457]|Supplementary Figure S1) placeholder:", line)
         if match:
             key = match.group(1).replace("Figure ", "").replace("Supplementary ", "")
             output.append(f'<div data-rough-figure="{key}"></div>')

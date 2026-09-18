@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="510" viewBox="0 0 1260 510">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<text x="630.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Exploratory patient-letter score differences</text>
+<text x="630.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Mean of accuracy, completeness, comprehensibility, and usefulness across one oncologist</text>
+<text x="320.0" y="86" text-anchor="middle" font-size="14" font-weight="700">Harness-based letter vs ChatGPT</text>
+<text x="320.0" y="106" text-anchor="middle" font-size="11">Wins/ties/losses 14/2/4; mean difference +0.24</text>
+<line x1="75" y1="426.0" x2="600" y2="426.0" stroke="#E5E5E5"/>
+<text x="67" y="430.0" text-anchor="end" font-size="10">-2.8</text>
+<line x1="75" y1="350.5" x2="600" y2="350.5" stroke="#E5E5E5"/>
+<text x="67" y="354.5" text-anchor="end" font-size="10">-1.4</text>
+<line x1="75" y1="275.0" x2="600" y2="275.0" stroke="#777777"/>
+<text x="67" y="279.0" text-anchor="end" font-size="10">0.0</text>
+<line x1="75" y1="199.5" x2="600" y2="199.5" stroke="#E5E5E5"/>
+<text x="67" y="203.5" text-anchor="end" font-size="10">1.4</text>
+<line x1="75" y1="124.0" x2="600" y2="124.0" stroke="#E5E5E5"/>
+<text x="67" y="128.0" text-anchor="end" font-size="10">2.8</text>
+<rect x="79.2" y="137.7" width="17.9" height="137.3" fill="#2B8CBE"/>
+<text x="88.1" y="442" text-anchor="middle" font-size="8">b1</text>
+<rect x="105.5" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="114.4" y="442" text-anchor="middle" font-size="8">b2</text>
+<rect x="131.7" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="140.6" y="442" text-anchor="middle" font-size="8">b3</text>
+<rect x="157.9" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="166.9" y="442" text-anchor="middle" font-size="8">b4</text>
+<rect x="184.2" y="233.8" width="17.9" height="41.2" fill="#2B8CBE"/>
+<text x="193.1" y="442" text-anchor="middle" font-size="8">b5</text>
+<rect x="210.4" y="275.0" width="17.9" height="68.6" fill="#D95F0E"/>
+<text x="219.4" y="442" text-anchor="middle" font-size="8">b6</text>
+<rect x="236.7" y="247.5" width="17.9" height="27.5" fill="#2B8CBE"/>
+<text x="245.6" y="442" text-anchor="middle" font-size="8">b7</text>
+<rect x="262.9" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="271.9" y="442" text-anchor="middle" font-size="8">b8</text>
+<rect x="289.2" y="275.0" width="17.9" height="82.4" fill="#D95F0E"/>
+<text x="298.1" y="442" text-anchor="middle" font-size="8">b9</text>
+<rect x="315.4" y="220.1" width="17.9" height="54.9" fill="#2B8CBE"/>
+<text x="324.4" y="442" text-anchor="middle" font-size="8">b10</text>
+<rect x="341.7" y="247.5" width="17.9" height="27.5" fill="#2B8CBE"/>
+<text x="350.6" y="442" text-anchor="middle" font-size="8">b11</text>
+<rect x="367.9" y="275.0" width="17.9" height="41.2" fill="#D95F0E"/>
+<text x="376.9" y="442" text-anchor="middle" font-size="8">b12</text>
+<rect x="394.2" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="403.1" y="442" text-anchor="middle" font-size="8">b13</text>
+<rect x="420.4" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="429.4" y="442" text-anchor="middle" font-size="8">b14</text>
+<rect x="446.7" y="275.0" width="17.9" height="41.2" fill="#D95F0E"/>
+<text x="455.6" y="442" text-anchor="middle" font-size="8">b15</text>
+<rect x="472.9" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="481.9" y="442" text-anchor="middle" font-size="8">b16</text>
+<rect x="499.2" y="206.4" width="17.9" height="68.6" fill="#2B8CBE"/>
+<text x="508.1" y="442" text-anchor="middle" font-size="8">b17</text>
+<rect x="525.5" y="247.5" width="17.9" height="27.5" fill="#2B8CBE"/>
+<text x="534.4" y="442" text-anchor="middle" font-size="8">b18</text>
+<rect x="551.7" y="247.5" width="17.9" height="27.5" fill="#2B8CBE"/>
+<text x="560.6" y="442" text-anchor="middle" font-size="8">b19</text>
+<rect x="578.0" y="261.3" width="17.9" height="13.7" fill="#2B8CBE"/>
+<text x="586.9" y="442" text-anchor="middle" font-size="8">b20</text>
+<text x="34" y="275.0" text-anchor="middle" font-size="11" transform="rotate(-90 34 275.0)">Harness minus comparator</text>
+<text x="940.0" y="86" text-anchor="middle" font-size="14" font-weight="700">Harness-based letter vs Qwen baseline</text>
+<text x="940.0" y="106" text-anchor="middle" font-size="11">Wins/ties/losses 9/5/6; mean difference -0.06</text>
+<line x1="695" y1="426.0" x2="1220" y2="426.0" stroke="#E5E5E5"/>
+<text x="687" y="430.0" text-anchor="end" font-size="10">-1.5</text>
+<line x1="695" y1="350.5" x2="1220" y2="350.5" stroke="#E5E5E5"/>
+<text x="687" y="354.5" text-anchor="end" font-size="10">-0.8</text>
+<line x1="695" y1="275.0" x2="1220" y2="275.0" stroke="#777777"/>
+<text x="687" y="279.0" text-anchor="end" font-size="10">0.0</text>
+<line x1="695" y1="199.5" x2="1220" y2="199.5" stroke="#E5E5E5"/>
+<text x="687" y="203.5" text-anchor="end" font-size="10">0.8</text>
+<line x1="695" y1="124.0" x2="1220" y2="124.0" stroke="#E5E5E5"/>
+<text x="687" y="128.0" text-anchor="end" font-size="10">1.5</text>
+<rect x="699.2" y="275.0" width="17.9" height="25.2" fill="#D95F0E"/>
+<text x="708.1" y="442" text-anchor="middle" font-size="8">b1</text>
+<rect x="725.5" y="199.5" width="17.9" height="75.5" fill="#2B8CBE"/>
+<text x="734.4" y="442" text-anchor="middle" font-size="8">b2</text>
+<rect x="751.7" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="760.6" y="442" text-anchor="middle" font-size="8">b3</text>
+<rect x="778.0" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="786.9" y="442" text-anchor="middle" font-size="8">b4</text>
+<rect x="804.2" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="813.1" y="442" text-anchor="middle" font-size="8">b5</text>
+<rect x="830.5" y="275.0" width="17.9" height="100.7" fill="#D95F0E"/>
+<text x="839.4" y="442" text-anchor="middle" font-size="8">b6</text>
+<rect x="856.7" y="275.0" width="17.9" height="125.8" fill="#D95F0E"/>
+<text x="865.6" y="442" text-anchor="middle" font-size="8">b7</text>
+<rect x="883.0" y="275.0" width="17.9" height="75.5" fill="#D95F0E"/>
+<text x="891.9" y="442" text-anchor="middle" font-size="8">b8</text>
+<rect x="909.2" y="275.0" width="17.9" height="25.2" fill="#D95F0E"/>
+<text x="918.1" y="442" text-anchor="middle" font-size="8">b9</text>
+<rect x="935.5" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="944.4" y="442" text-anchor="middle" font-size="8">b10</text>
+<rect x="961.7" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="970.6" y="442" text-anchor="middle" font-size="8">b11</text>
+<rect x="988.0" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="996.9" y="442" text-anchor="middle" font-size="8">b12</text>
+<rect x="1014.2" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="1023.1" y="442" text-anchor="middle" font-size="8">b13</text>
+<rect x="1040.5" y="224.7" width="17.9" height="50.3" fill="#2B8CBE"/>
+<text x="1049.4" y="442" text-anchor="middle" font-size="8">b14</text>
+<rect x="1066.7" y="275.0" width="17.9" height="75.5" fill="#D95F0E"/>
+<text x="1075.6" y="442" text-anchor="middle" font-size="8">b15</text>
+<rect x="1093.0" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="1101.9" y="442" text-anchor="middle" font-size="8">b16</text>
+<rect x="1119.2" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="1128.1" y="442" text-anchor="middle" font-size="8">b17</text>
+<rect x="1145.5" y="275.0" width="17.9" height="2.0" fill="#BDBDBD"/>
+<text x="1154.4" y="442" text-anchor="middle" font-size="8">b18</text>
+<rect x="1171.7" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="1180.6" y="442" text-anchor="middle" font-size="8">b19</text>
+<rect x="1198.0" y="249.8" width="17.9" height="25.2" fill="#2B8CBE"/>
+<text x="1206.9" y="442" text-anchor="middle" font-size="8">b20</text>
+<text x="654" y="275.0" text-anchor="middle" font-size="11" transform="rotate(-90 654 275.0)">Harness minus comparator</text>
+</g>
+</svg>

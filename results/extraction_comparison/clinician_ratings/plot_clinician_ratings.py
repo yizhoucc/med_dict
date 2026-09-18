@@ -17,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "draft_figures"
 RATER_1 = HERE / "oncologist_01_breast_blind_scores_20260907.csv"
 RATER_2 = HERE / "oncologist_02_breast_pdac_blind_scores_20260911.csv"
+LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
 
 PL = "#2B8CBE"
 BL = "#D95F0E"
@@ -355,6 +356,64 @@ def plot_technical_vs_clinician(r1: list[dict[str, str]], r2: list[dict[str, str
     svg_end(out, OUTPUT / "supplementary_figure1_technical_vs_clinician_rough.svg")
 
 
+def draw_letter_difference_panel(
+    out: list[str],
+    x0: int,
+    y0: int,
+    width: int,
+    height: int,
+    title: str,
+    differences: list[float],
+) -> None:
+    limit = max(1.5, max(abs(value) for value in differences) + 0.25)
+    left, right, top, bottom = 55, 20, 58, 60
+    plot_w, plot_h = width - left - right, height - top - bottom
+    zero_y = y0 + top + plot_h / 2
+    wins = sum(value > 0 for value in differences)
+    ties = sum(value == 0 for value in differences)
+    losses = sum(value < 0 for value in differences)
+    mean_difference = sum(differences) / len(differences)
+    out.append(f'<text x="{x0 + width / 2:.1f}" y="{y0 + 20}" text-anchor="middle" font-size="14" font-weight="700">{esc(title)}</text>')
+    out.append(f'<text x="{x0 + width / 2:.1f}" y="{y0 + 40}" text-anchor="middle" font-size="11">Wins/ties/losses {wins}/{ties}/{losses}; mean difference {mean_difference:+.2f}</text>')
+    for tick in [-limit, -limit / 2, 0, limit / 2, limit]:
+        y = y0 + top + plot_h * (limit - tick) / (2 * limit)
+        stroke = "#777777" if tick == 0 else GRID
+        out.append(f'<line x1="{x0 + left}" y1="{y:.1f}" x2="{x0 + left + plot_w}" y2="{y:.1f}" stroke="{stroke}"/>')
+        out.append(f'<text x="{x0 + left - 8}" y="{y + 4:.1f}" text-anchor="end" font-size="10">{tick:.1f}</text>')
+    bar_w = plot_w / len(differences) * 0.68
+    for index, value in enumerate(differences):
+        x = x0 + left + (index + 0.5) * plot_w / len(differences) - bar_w / 2
+        value_y = y0 + top + plot_h * (limit - value) / (2 * limit)
+        fill = PL if value > 0 else TIE if value == 0 else BL
+        out.append(f'<rect x="{x:.1f}" y="{min(zero_y, value_y):.1f}" width="{bar_w:.1f}" height="{max(abs(zero_y - value_y), 2):.1f}" fill="{fill}"/>')
+        out.append(f'<text x="{x + bar_w / 2:.1f}" y="{y0 + top + plot_h + 16}" text-anchor="middle" font-size="8">b{index + 1}</text>')
+    out.append(f'<text x="{x0 + 14}" y="{y0 + top + plot_h / 2:.1f}" text-anchor="middle" font-size="11" transform="rotate(-90 {x0 + 14} {y0 + top + plot_h / 2:.1f})">Harness minus comparator</text>')
+
+
+def plot_letter_differences() -> None:
+    scores = {int(row["note"]): row for row in load(LETTER_SCORES)}
+    if sorted(scores) != list(range(1, 21)):
+        raise ValueError("Expected 20 complete breast-cancer letter-rating summaries")
+    harness_vs_chatgpt = [
+        float(scores[note]["harness_mean"]) - float(scores[note]["chatgpt_mean"])
+        for note in range(1, 21)
+    ]
+    harness_vs_qwen = [
+        float(scores[note]["harness_mean"]) - float(scores[note]["qwen_baseline_mean"])
+        for note in range(1, 21)
+    ]
+    width, height = 1260, 510
+    out = svg_start(
+        width,
+        height,
+        "Exploratory patient-letter score differences",
+        "Mean of accuracy, completeness, comprehensibility, and usefulness across one oncologist",
+    )
+    draw_letter_difference_panel(out, 20, 66, 600, 420, "Harness-based letter vs ChatGPT", harness_vs_chatgpt)
+    draw_letter_difference_panel(out, 640, 66, 600, 420, "Harness-based letter vs Qwen baseline", harness_vs_qwen)
+    svg_end(out, OUTPUT / "figure7_letter_differences_rough.svg")
+
+
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     r1 = load(RATER_1)
@@ -364,7 +423,8 @@ def main() -> None:
     plot_core_fields(r1, r2)
     plot_note_margins(r1, r2)
     plot_technical_vs_clinician(r1, r2)
-    print(f"Wrote 5 rough SVG figures to {OUTPUT}")
+    plot_letter_differences()
+    print(f"Wrote 6 rough SVG figures to {OUTPUT}")
 
 
 if __name__ == "__main__":
