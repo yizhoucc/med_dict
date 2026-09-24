@@ -187,7 +187,7 @@ def plot_development_pathway() -> None:
     out = svg_start(
         width,
         height,
-        "Development, transfer, and independent evaluation",
+        "Development, adaptation, and independent evaluation",
         "Model weights remained frozen; investigators controlled all workflow changes",
     )
     out.append(
@@ -200,7 +200,7 @@ def plot_development_pathway() -> None:
     panel_xs = [25, 460, 895]
     panel_titles = [
         "A. Breast-cancer development",
-        "B. Pancreatic-cancer transfer",
+        "B. Pancreatic-cancer adaptation",
         "C. Independent evaluation",
     ]
     panel_colors = ["#EAF5FB", "#F4F0FB", "#F7F7F7"]

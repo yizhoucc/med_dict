@@ -12,6 +12,8 @@ The analysis uses the current complete exports listed in `CLINICIAN_RATINGS_MANI
 
 The blind mapping is fixed: `A` is the inference harness (PL), `B` is the same-model single-prompt baseline (BL), and `TIE` records no preference.
 
+The project owner confirmed that all three exports were completed against the intended finalized baseline package. Evaluators were not told the system identities, whether the outputs shared a base model, or which side was expected to perform better. Source attribution was displayed with PL as part of the complete harness output. The comparison therefore evaluates the presented systems as a whole and does not isolate attribution as a component.
+
 ## Main result
 
 | Scope | Judgments | PL | BL | Tie | PL share among directional judgments |
@@ -26,6 +28,8 @@ The blind mapping is fixed: `A` is the inference harness (PL), `B` is the same-m
 The breast-cancer subtotal is PL 282, BL 54, and 504 ties across 840 judgments. PL received 83.9% of the 336 directional breast judgments.
 
 The PDAC subtotal is PL 161, BL 23, and 335 ties across 519 judgments. PL received 87.5% of the 184 directional PDAC judgments.
+
+Across all 1,359 judgments, PL preference, BL preference, and tie account for 32.6%, 5.7%, and 61.7%, respectively. The 85.2% figure is conditional on a directional judgment.
 
 ## Replication across clinicians and cancer types
 
@@ -73,7 +77,7 @@ Agreement is substantial enough to show that the direction is not driven by one 
 
 ## Field-level pattern
 
-The seven prespecified core fields contribute 660 judgments.
+The seven clinician-prioritized core fields contribute 660 judgments.
 
 | Core field | PL | BL | Tie | Net PL-BL |
 |---|---:|---:|---:|---:|

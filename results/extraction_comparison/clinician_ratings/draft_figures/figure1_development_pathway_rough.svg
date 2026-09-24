@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1320" height="665" viewBox="0 0 1320 665">
 <rect width="100%" height="100%" fill="white"/>
 <g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<text x="660.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Development, transfer, and independent evaluation</text>
+<text x="660.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Development, adaptation, and independent evaluation</text>
 <text x="660.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Model weights remained frozen; investigators controlled all workflow changes</text>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#587083"/></marker></defs>
 <rect x="25" y="80" width="400" height="520" rx="14" fill="#EAF5FB" stroke="#2B8CBE" stroke-width="2"/>
 <text x="225.0" y="112" text-anchor="middle" font-size="16" font-weight="700">A. Breast-cancer development</text>
 <rect x="460" y="80" width="400" height="520" rx="14" fill="#F4F0FB" stroke="#756BB1" stroke-width="2"/>
-<text x="660.0" y="112" text-anchor="middle" font-size="16" font-weight="700">B. Pancreatic-cancer transfer</text>
+<text x="660.0" y="112" text-anchor="middle" font-size="16" font-weight="700">B. Pancreatic-cancer adaptation</text>
 <rect x="895" y="80" width="400" height="520" rx="14" fill="#F7F7F7" stroke="#65727C" stroke-width="2"/>
 <text x="1095.0" y="112" text-anchor="middle" font-size="16" font-weight="700">C. Independent evaluation</text>
 <rect x="65" y="135" width="320" height="62" rx="10" fill="#FFFFFF" stroke="#2B8CBE" stroke-width="1.5"/>

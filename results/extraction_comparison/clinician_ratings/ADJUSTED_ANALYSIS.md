@@ -14,6 +14,8 @@ The primary analysis excludes ties and models whether a directional rating favor
 
 The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.
 
+Across all 1,359 required judgments, 32.6% favored the harness, 5.7% favored the baseline, and 61.7% were ties. Because a tie can mean either that both outputs were acceptable or that both were inadequate, the primary model should be interpreted together with the full three-category distribution.
+
 ## Note-level sensitivity analysis
 
 For each evaluator-cancer combination, field ratings were reduced to one harness-minus-baseline margin per note. Tied note margins were excluded from the exact two-sided sign test.

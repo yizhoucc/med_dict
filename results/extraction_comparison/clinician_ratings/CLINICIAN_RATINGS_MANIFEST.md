@@ -6,6 +6,8 @@ Current combined results are documented in `THREE_CLINICIAN_ANALYSIS.md`. The ea
 
 The project owner confirmed the evaluator names below. Raw rating files are preserved byte-for-byte. In the blind scoring interface, `A` denotes PL, `B` denotes BL, and `TIE` denotes no preference.
 
+The project owner also confirmed that all three exports were completed against the intended finalized clinician-review package and baseline version. Evaluators were not told which output was the harness, whether the systems shared a base model, or which side was expected to perform better. The harness side included source attribution as part of the complete system output being evaluated. The exported score files do not embed the HTML or input-file hashes, so this confirmation is recorded here as study provenance rather than cryptographic verification.
+
 ## Current files
 
 | Evaluator | File | Breast coverage | PDAC coverage | SHA-256 | Notes |
