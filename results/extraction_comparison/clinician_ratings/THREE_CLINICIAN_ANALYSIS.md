@@ -37,6 +37,24 @@ Every completed evaluator-by-cancer analysis favored PL among directional judgme
 
 After pooling ratings within each note, all 20 breast notes and all 20 PDAC notes have a positive PL-minus-BL margin. This is descriptive because ratings from the same note and clinician are correlated.
 
+## Current significance status
+
+Two-sided exact sign tests on within-note PL-minus-BL margins give the following results:
+
+| Evaluation | Positive notes | Negative notes | Tied notes | Exact p value |
+|---|---:|---:|---:|---:|
+| Oncologist 1, breast | 18 | 1 | 1 | 0.000076 |
+| Oncologist 1, PDAC | 19 | 1 | 0 | 0.000040 |
+| Oncologist 2, breast | 20 | 0 | 0 | 0.0000019 |
+| Oncologist 2, PDAC | 18 | 0 | 2 | 0.0000076 |
+| Oncologist 3, breast | 20 | 0 | 0 | 0.0000019 |
+
+Thus, the result is statistically significant for the observed notes within every completed evaluator-by-cancer analysis. Pooling clinicians within each cancer type also gives 20 positive and 0 negative note margins for both breast cancer and PDAC (`p=0.0000019` for each exact sign test).
+
+This does not provide the same level of evidence for generalization across oncologists. If each clinician is reduced to one independent directional result, all three breast oncologists favor PL, but a two-sided exact sign test with 3 of 3 positive gives `p=0.25`. The two PDAC oncologists give `p=0.50`. A mixed-effects model can use the repeated note and field observations, but the clinician-level variance estimate will remain unstable with only three clinicians.
+
+For a simple clinician-level two-sided sign test, 6 of 6 clinicians favoring PL is the smallest result below 0.05 (`p=0.03125`). If one clinician favors BL, 8 of 9 clinicians are required (`p=0.0391`). These calculations discard effect size and are conservative, but they show why three clinicians support a pilot result more strongly than a broad claim about oncologists in general.
+
 ## Breast-cancer agreement across three oncologists
 
 Each pair shares all 280 required breast comparisons.

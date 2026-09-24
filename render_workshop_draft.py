@@ -508,8 +508,6 @@ def render() -> str:
         raise RuntimeError("The bilingual draft is missing the Chinese-version marker.")
     english_text, chinese_text = markdown_text.split(chinese_marker, 1)
     paired_counts = {
-        "level-2 headings": (english_text.count("\n## "), chinese_text.count("\n## ")),
-        "level-3 headings": (english_text.count("\n### "), chinese_text.count("\n### ")),
         "tables": (english_text.count("|---"), chinese_text.count("|---")),
         "figure placeholders": (english_text.count("placeholder:"), chinese_text.count("占位：")),
     }
@@ -534,7 +532,7 @@ def render() -> str:
   <span class="chip">1,359 required-field judgments</span>
   <span class="chip">HTML review copy</span>
 </div>
-<div class="render-note">Figure specification cards describe the intended publication graphics. Embedded SVGs are internal trend checks and are not final artwork.</div>''',
+<div class="render-note">The English figure cards contain concise manuscript captions. The Chinese section retains detailed review notes. Embedded SVGs are internal trend checks and are not final artwork.</div>''',
         1,
     )
     body = body.replace(

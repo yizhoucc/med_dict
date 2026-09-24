@@ -1,39 +1,25 @@
 <!--
 BILINGUAL MAINTENANCE RULE:
 1. Keep the complete English manuscript first and the complete Chinese manuscript second in this same file.
-2. The two versions must match in structure, claims, numbers, tables, placeholders, and references.
-3. After changing either version, update the other version in the same edit and run: python3 render_workshop_draft.py
-4. Apply the humanizer pass to both versions. Chinese should read as natural academic prose, not as a literal machine translation.
+2. The two versions must match in scientific claims, numbers, result tables, figure numbering, and references.
+3. Keep the English version close to submission prose. The Chinese version may retain collaborator questions, figure-design notes, and explanatory annotations.
+4. After changing either version, update the other version in the same edit and run: python3 render_workshop_draft.py
+5. Apply the humanizer pass to both versions. Chinese should read as natural academic prose, not as a literal machine translation.
 -->
 
 <div id="english-version"></div>
 
 # From clinician-guided error analysis to cross-cancer transfer: an inference harness for oncology note extraction
 
-**Pilot report draft for clinical collaborator review**
+**Pilot report**
 
-Version 0.8, September 2026
+Version 0.9, September 2026
 
 Authors: [TODO]
 
 Affiliations: [TODO]
 
 Target venue and format: [TODO]
-
-This draft includes three completed oncologist submissions. All three oncologists evaluated the breast-cancer cases, and two also evaluated the pancreatic-cancer cases. The central account follows the actual development sequence: clinician-guided error analysis in breast cancer, codification of those lessons in an inference harness, model-in-the-loop refinement in pancreatic cancer without physician input during development, and blinded clinician evaluation. The clustered multi-rater model and bracketed inferential results remain placeholders and must be completed before submission. Figure placeholders specify the intended visual design and current trend; they are not final artwork.
-
-Short version for clinical review: both systems use the same language model. The baseline asks the model to extract everything in one pass. The harness divides the task into smaller clinical questions, checks the answers, applies narrow oncology rules to recurring errors, and links each result to supporting text from the note.
-
-## Questions for the clinical collaborator
-
-Please focus on the following points during this review. These questions will be removed from the submitted manuscript.
-
-1. Are the seven core clinical fields the right ones to call clinically important?
-2. Are our interpretations of active therapy, stage, regional versus distant metastasis, treatment response, receptor status, and molecular results clinically sound?
-3. Does the Discussion explain the observed strengths and weaknesses without claiming more than the study shows?
-4. Which examples would be most persuasive to an oncology audience?
-5. Are any clinical statements inaccurate, overstated, or missing necessary context?
-6. Is our distinction between clinician-created ground truth and clinician evaluation of final outputs fair and clinically meaningful?
 
 ## Abstract
 
@@ -128,16 +114,6 @@ The deterministic layer addresses recurrent errors with high-confidence clinical
 
 > **Figure 1 placeholder: Development, transfer, and evaluation pathway.**
 >
-> **Format:** A three-panel horizontal flow diagram with a smaller controlled-comparison inset.
->
-> **Panel A, breast-cancer development:** breast note → harness output → oncologist review → recurrent failure category → prompt, gate, or deterministic rule revision → regression test. Label this stage "clinician-guided rule induction."
->
-> **Panel B, pancreatic-cancer transfer:** transferred harness → pancreatic note → rubric-informed Qwen review → external development LLM synthesis and proposed revision → human acceptance or editing → regression test. Mark clearly that no physician reviewed pancreatic outputs during this stage and that model weights remained frozen.
->
-> **Panel C, final evaluation:** 20 breast and 20 pancreatic benchmark notes → full harness and matched single-prompt baseline → identity-masked A/B presentation to oncologists.
->
-> **Controlled-comparison inset:** show the shared frozen Qwen2.5-32B-Instruct-AWQ model and target schema above two branches. The harness branch adds field routing, selective context transfer, five verification gates, deterministic oncology hooks, cross-field checks, logging, and source attribution. The baseline branch uses one matched-schema prompt.
->
 > **Draft caption:** *Figure 1. Development and evaluation pathway. Recurrent breast-cancer errors identified with an oncologist were converted into explicit harness components. The harness was then adapted to pancreatic cancer through AI-assisted, human-supervised review without physician input during development. Final outputs were compared with a same-model single-prompt baseline in an identity-masked oncologist evaluation.*
 
 ### 2.5 Clinician-guided breast-cancer development
@@ -217,16 +193,6 @@ The available clinical evidence comprises five completed clinician-by-cancer eva
 
 > **Figure 2 placeholder: Clinician preference distributions by evaluator and cancer type.**
 >
-> **Plot:** Five 100% stacked horizontal bars.
->
-> **x-axis:** Share of required-field judgments, from 0% to 100%.
->
-> **y-axis:** One row for each completed evaluator-by-cancer combination: three breast-cancer evaluations and two pancreatic-cancer evaluations.
->
-> **Encoding:** Blue for harness preferred, light gray for tie, and orange for baseline preferred. Print raw counts inside segments and the harness share among directional judgments at the right of each bar.
->
-> **Observed trend:** Ties are the largest category in every evaluation. In all five evaluations, harness preferences substantially exceed baseline preferences, and the harness receives 79.2% to 90.8% of directional judgments.
->
 > **Draft caption:** *Figure 2. Distribution of identity-masked clinician preferences across five completed clinician-by-cancer evaluations. Most judgments were ties, as expected for systems using the same base model, but directional judgments consistently favored the inference harness.*
 
 All three clinicians independently favored the harness on the breast-cancer set. Their pooled breast result was 282 harness preferences, 54 baseline preferences, and 504 ties. The first oncologist's per-note result was 18 harness wins, one baseline win, and one tie. The second and third oncologists each recorded a harness win in all 20 notes. When the three breast evaluations were combined within each note, all 20 notes had a positive harness-minus-baseline margin.
@@ -242,16 +208,6 @@ The final mixed-effects result remains pending:
 All three oncologists rated the same 280 required breast-cancer comparisons. Pairwise exact agreement was 82.9% between oncologists 01 and 02, 80.0% between oncologists 01 and 03, and 73.6% between oncologists 02 and 03. The corresponding Cohen's kappa values were 0.646, 0.644, and 0.511. All three oncologists gave the same verdict on 192 comparisons (68.6%). A simple majority favored the harness in 95 comparisons, the baseline in 15, and a tie in 168. Two comparisons had one vote in each category and therefore no majority.
 
 > **Figure 3 placeholder: Pairwise inter-rater agreement for breast-cancer judgments.**
->
-> **Plot:** A symmetric 3 × 3 matrix for the three oncologists.
->
-> **Upper triangle:** Pairwise exact agreement.
->
-> **Lower triangle:** Pairwise Cohen's kappa.
->
-> **Encoding:** Cell color intensity represents agreement strength. Each off-diagonal cell displays the percentage or kappa value. Diagonal cells state that each clinician completed 280 breast comparisons.
->
-> **Observed trend:** Pairwise exact agreement ranges from 73.6% to 82.9%, and kappa ranges from 0.511 to 0.646. The direction of the overall result is shared across all three clinicians despite variation in how often each uses the tie category.
 >
 > **Draft caption:** *Figure 3. Pairwise agreement among three oncologists on 280 shared breast-cancer field comparisons. Exact agreement ranged from 73.6% to 82.9%, with Cohen's kappa from 0.511 to 0.646.*
 
@@ -270,16 +226,6 @@ Across all completed evaluations, the seven prespecified core categories contrib
 
 > **Figure 4 placeholder: Preference profile across core clinical categories.**
 >
-> **Plot:** Seven 100% stacked horizontal bars, ordered by net harness advantage.
->
-> **x-axis:** Share of applicable clinician judgments, from 0% to 100%.
->
-> **y-axis:** Active anticancer medications, regional or overall metastasis, stage, treatment response, completed molecular or genetic results, distant metastasis, and breast type or receptors.
->
-> **Encoding:** Blue for harness preferred, light gray for tie, and orange for baseline preferred. Show `PL / BL / TIE` counts at the right of each bar. Because receptor status applies only to breast cancer, use percentages for visual comparison and retain raw denominators in the labels or caption.
->
-> **Observed trend:** Active anticancer medications and regional or overall metastatic involvement show the largest margins. Stage and response also favor the harness. Distant metastasis is dominated by ties, and breast type or receptor status is close to even.
->
 > **Draft caption:** *Figure 4. Clinician preference by prespecified core clinical category. The largest harness advantages occurred in active-treatment identification and metastatic-involvement classification. Breast type and receptor status showed the smallest margin.*
 
 Active anticancer medication and regional or overall metastatic involvement produced the largest and most consistent core-field margins. Medication planning, outside the seven core categories, totaled 59 harness preferences, no baseline preferences, and 41 ties. Procedure planning was much closer at 14 harness preferences, 12 baseline preferences, and 74 ties. Breast type and receptor status remained the weakest core category, with a 6-rating net advantage.
@@ -288,29 +234,9 @@ Exploratory note-level summaries support the same direction without treating eve
 
 > **Figure 5 placeholder: Per-note clinician preference margins.**
 >
-> **Plot:** Two aligned bar-chart panels, one for breast cancer and one for pancreatic cancer, with a horizontal zero reference line.
->
-> **x-axis:** Sample identifier, `b1` through `b20` in the breast panel and `p1` through `p20` in the pancreatic panel.
->
-> **y-axis:** Normalized net preference margin per note, calculated as `(harness-preferred fields - baseline-preferred fields) / completed required-field judgments for that note`, on a shared scale. The breast panel pools three oncologists, and the pancreatic panel pools two.
->
-> **Encoding:** Blue bars above zero favor the harness, orange bars below zero favor the baseline, and gray markers at zero indicate tied note-level margins.
->
-> **Observed trend:** All 20 pooled breast margins and all 20 pooled pancreatic margins are positive.
->
 > **Draft caption:** *Figure 5. Distribution of normalized clinician preference margins across individual notes. After pooling the available clinicians within each cancer type, the harness had a positive margin in every breast-cancer and pancreatic-cancer note.*
 
 > **Figure 6 placeholder: Adjusted multi-rater effect estimates.**
->
-> **Plot:** Forest plot to be populated after the planned final clinician sample is complete.
->
-> **x-axis:** Adjusted odds ratio for a directional judgment favoring the harness rather than the baseline, displayed on a logarithmic scale with a vertical reference line at 1.0.
->
-> **y-axis:** Overall effect, breast cancer, pancreatic cancer, and the seven prespecified core categories. Include only strata supported by the final sample size.
->
-> **Encoding:** Point estimate with 95% confidence interval. Use a filled marker for the primary adjusted analysis and open markers for sensitivity analyses that handle ties differently.
->
-> **Expected interpretation:** This figure will replace reliance on pooled field counts by showing estimates that account for repeated judgments by evaluator, note, and field. No trend should be asserted until the final model is fit.
 >
 > **Draft caption:** *Figure 6. Adjusted association between evaluation condition and clinician preference. Odds ratios greater than 1 favor the inference harness. Estimates will come from the prespecified clustered multi-rater analysis.*
 
@@ -331,18 +257,6 @@ Across 260 applicable core comparisons, the harness was preferred 66 times, the 
 
 > **Supplementary Figure S1 placeholder: Technical-audit and clinician net preference rates.**
 >
-> **Plot:** Horizontal dumbbell plot with one row per core category.
->
-> **x-axis:** Net preference rate, calculated as `(harness better - baseline better) / applicable judgments`, with a vertical reference line at zero.
->
-> **y-axis:** The seven core clinical categories.
->
-> **Encoding:** One marker for the complete v2.2 source-grounded technical audit and one marker for the currently completed clinician ratings; connect the markers within each category.
->
-> **Observed trend:** Both evidence sources favor the harness overall. The clinician ratings show especially large margins for active anticancer medication and regional or overall metastatic involvement. Stage changes from a small negative technical-audit margin to a positive clinician margin, while distant metastasis and receptor status show smaller clinician margins.
->
-> **Interpretive warning:** The reviewers and evaluated pipeline versions differ, so this is a descriptive comparison of patterns, not an agreement test or causal before-and-after estimate.
->
 > **Draft caption:** *Supplementary Figure S1. Category-level net preference rates in the complete technical audit and current clinician evaluation. Differences between series should be interpreted descriptively because the review processes and pipeline versions were not identical.*
 
 ### 3.5 Targeted repair evaluation
@@ -356,16 +270,6 @@ Two of the three exports contained 12 written comments. These comments add usefu
 Other comments identified unsupported receptor status, a regional-node omission, uncertainty about response after a newly started second-line regimen, and cases in which both outputs were inaccurate. These observations support the value of specialist review and identify concrete targets for final error analysis. They also show that a tie can mean either that both outputs are adequate or that both are wrong.
 
 > **Supplementary Figure S2 placeholder: Adjudicated interpretation of tie judgments.**
->
-> **Plot:** Stacked bars or a compact alluvial diagram after manual adjudication of a prespecified sample of ties.
->
-> **x-axis:** Tie interpretation category: both outputs clinically adequate, both partly correct but incomplete, both incorrect, or indeterminate from the note.
->
-> **y-axis:** Number or percentage of adjudicated ties.
->
-> **Encoding:** Split bars by cancer type or core field. A secondary annotation may show whether the two outputs failed for the same reason or different reasons.
->
-> **Data status:** Not yet available. The current rating interface records only `TIE`, so this figure requires manual review rather than inference from the existing CSV files.
 >
 > **Draft caption:** *Supplementary Figure S2. Clinical interpretation of tie judgments after manual adjudication. This analysis distinguishes equivalent correct outputs from comparisons in which both systems are incomplete or incorrect.*
 
@@ -382,16 +286,6 @@ The earlier patient-letter evaluation did not show a uniform advantage for the h
 The paired per-note comparison gives a more useful view of the trend. The harness-based letter had a higher four-item mean than the ChatGPT letter in 14 cases, tied in 2, and scored lower in 4, for a mean paired difference of 0.24 points. An unadjusted exact sign test excluding ties gave `p=0.031`; this was exploratory, not prespecified, and several correlated outcomes were examined. Against the same-model Qwen baseline, the harness won 9 cases, tied in 5, and lost 6, with a mean paired difference of -0.06 points. Structured extraction can therefore serve as input to patient communication, but these results do not show that the current letter generator is better than the same model prompted directly.
 
 > **Figure 7 placeholder: Paired patient-letter score differences.**
->
-> **Plot:** Two paired-difference panels, one comparing the harness-based letter with ChatGPT and one comparing it with the Qwen single-prompt baseline.
->
-> **x-axis:** Breast-cancer sample identifier, `b1` through `b20`.
->
-> **y-axis:** Difference in the mean of accuracy, completeness, comprehensibility, and usefulness. Positive values favor the harness-based letter.
->
-> **Encoding:** Blue points above zero, gray points at zero, and orange points below zero. Add a horizontal zero line and annotate each panel with the win, tie, and loss count.
->
-> **Observed trend:** Harness-based letters are descriptively better than ChatGPT for most notes, but the distribution is close to the same-model Qwen baseline and includes both wins and losses.
 >
 > **Draft caption:** *Figure 7. Exploratory paired differences in oncologist-rated patient-letter quality across 20 breast-cancer notes. Harness-based letters more often outscored ChatGPT, but did not show a clear advantage over the same-model single-prompt baseline.*
 
@@ -533,7 +427,7 @@ The current pilot supports a development strategy in which a clinician identifie
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.8，2026 年 9 月
+版本 0.9，2026 年 9 月
 
 作者：[TODO]
 
