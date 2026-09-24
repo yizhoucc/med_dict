@@ -1,5 +1,7 @@
 # Oncologist 02 and inter-rater blind-rating analysis
 
+> Historical two-clinician analysis. For the current three-clinician result, use `THREE_CLINICIAN_ANALYSIS.md`.
+
 Date received: 2026-09-11
 
 Download source filename: `Result_Kevin.csv`

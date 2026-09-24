@@ -1,6 +1,8 @@
 # Clinician rating files
 
-Last updated: 2026-09-21
+Last updated: 2026-09-23
+
+Current combined results are documented in `THREE_CLINICIAN_ANALYSIS.md`. The earlier `ONCOLOGIST_01_ANALYSIS.md` and `ONCOLOGIST_02_AND_INTER_RATER_ANALYSIS.md` files are retained as dated intermediate analyses.
 
 The project owner confirmed the evaluator names below. Raw rating files are preserved byte-for-byte. In the blind scoring interface, `A` denotes PL, `B` denotes BL, and `TIE` denotes no preference.
 

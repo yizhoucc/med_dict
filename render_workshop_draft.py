@@ -27,7 +27,7 @@ FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figur
 
 ROUGH_FIGURES = {
     "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Clinician preference by evaluation"),
-    "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Breast-cancer inter-rater agreement"),
+    "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Pairwise breast-cancer agreement"),
     "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
     "7": (FIGURE_DIR / "figure7_letter_differences_rough.svg", "Exploratory patient-letter score differences"),
@@ -530,8 +530,8 @@ def render() -> str:
         f'''</h1>
 <div class="draft-meta">
   <span class="chip">Version {html.escape(version)}</span>
-  <span class="chip">2 oncologists</span>
-  <span class="chip">817 required-field judgments</span>
+  <span class="chip">3 oncologists</span>
+  <span class="chip">1,359 required-field judgments</span>
   <span class="chip">HTML review copy</span>
 </div>
 <div class="render-note">Figure specification cards describe the intended publication graphics. Embedded SVGs are internal trend checks and are not final artwork.</div>''',
@@ -567,8 +567,8 @@ def main() -> None:
         "figure-placeholder",
         "table-wrap",
         "data:image/svg+xml;base64",
-        "Cohen's kappa of 0.645",
-        "817 required-field judgments",
+        "Cohen's kappa from 0.511 to 0.646",
+        "1,359 required-field judgments",
         'id="chinese-version"',
         "供临床合作者审阅的问题",
         "参考文献",

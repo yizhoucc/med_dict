@@ -10,13 +10,19 @@ from __future__ import annotations
 import csv
 import html
 from collections import Counter, defaultdict
+from itertools import combinations
 from pathlib import Path
+
+from openpyxl import load_workbook
 
 
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "draft_figures"
-RATER_1 = HERE / "oncologist_01_breast_blind_scores_20260907.csv"
-RATER_2 = HERE / "oncologist_02_breast_pdac_blind_scores_20260911.csv"
+RATER_FILES = {
+    "Simo": HERE / "simo_breast_pdac_blind_scores_20260921.csv",
+    "Kevin": HERE / "kevin_breast_pdac_blind_scores_20260911.csv",
+    "Bolun": HERE / "bolun_breast_blind_scores_20260921.xlsx",
+}
 LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
 
 PL = "#2B8CBE"
@@ -63,13 +69,38 @@ FIELD_LABELS = {
 }
 
 
-def load(path: Path) -> list[dict[str, str]]:
+def load_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8-sig") as handle:
         rows = list(csv.DictReader(handle))
     return [
         {key: (value or "").strip() for key, value in row.items()}
         for row in rows
     ]
+
+
+def load_xlsx(path: Path) -> list[dict[str, str]]:
+    workbook = load_workbook(path, read_only=True, data_only=True)
+    sheet = workbook["blind_scores"]
+    values = sheet.iter_rows(values_only=True)
+    headers = [str(value) for value in next(values)]
+    rows = []
+    for values_row in values:
+        if not values_row[0]:
+            continue
+        rows.append(
+            {
+                key: "" if value is None else str(value).strip()
+                for key, value in zip(headers, values_row)
+            }
+        )
+    return rows
+
+
+def load_raters() -> dict[str, list[dict[str, str]]]:
+    return {
+        name: load_xlsx(path) if path.suffix == ".xlsx" else load_csv(path)
+        for name, path in RATER_FILES.items()
+    }
 
 
 def subset(
@@ -114,14 +145,17 @@ def legend(out: list[str], x: int, y: int) -> None:
         x += 105
 
 
-def plot_evaluator_distribution(r1: list[dict[str, str]], r2: list[dict[str, str]]) -> None:
-    groups = [
-        ("Oncologist 01, breast", subset(r1, "b", BREAST_FIELDS)),
-        ("Oncologist 02, breast", subset(r2, "b", BREAST_FIELDS)),
-        ("Oncologist 02, PDAC", subset(r2, "p", PDAC_FIELDS)),
-    ]
-    width, height = 1000, 360
-    left, right, top, bar_h, gap = 225, 70, 100, 52, 34
+def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None:
+    groups = []
+    for index, rows in enumerate(raters.values(), start=1):
+        breast = subset(rows, "b", BREAST_FIELDS)
+        pdac = subset(rows, "p", PDAC_FIELDS)
+        if breast:
+            groups.append((f"Oncologist {index}, breast", breast))
+        if pdac:
+            groups.append((f"Oncologist {index}, PDAC", pdac))
+    width, height = 1000, 510
+    left, right, top, bar_h, gap = 225, 195, 100, 52, 20
     plot_w = width - left - right
     out = svg_start(
         width,
@@ -132,8 +166,8 @@ def plot_evaluator_distribution(r1: list[dict[str, str]], r2: list[dict[str, str
     legend(out, left, 78)
     for tick in range(0, 101, 20):
         x = left + plot_w * tick / 100
-        out.append(f'<line x1="{x:.1f}" y1="92" x2="{x:.1f}" y2="300" stroke="{GRID}"/>')
-        out.append(f'<text x="{x:.1f}" y="325" text-anchor="middle" font-size="11">{tick}%</text>')
+        out.append(f'<line x1="{x:.1f}" y1="92" x2="{x:.1f}" y2="450" stroke="{GRID}"/>')
+        out.append(f'<text x="{x:.1f}" y="475" text-anchor="middle" font-size="11">{tick}%</text>')
     for index, (label, rows) in enumerate(groups):
         counts = Counter(row["score"] for row in rows)
         total = len(rows)
@@ -149,13 +183,23 @@ def plot_evaluator_distribution(r1: list[dict[str, str]], r2: list[dict[str, str
                     f'<text x="{x + segment / 2:.1f}" y="{y + 31}" text-anchor="middle" font-size="12" fill="{TEXT}">{value}</text>'
                 )
             x += segment
-    out.append(f'<text x="{left + plot_w / 2:.1f}" y="348" text-anchor="middle" font-size="12">Share of required judgments</text>')
+        directional = counts["A"] + counts["B"]
+        pl_share = counts["A"] / directional
+        out.append(
+            f'<text x="{left + plot_w + 12}" y="{y + 23}" font-size="11">'
+            f'PL/BL/Tie {counts["A"]}/{counts["B"]}/{counts["TIE"]}</text>'
+        )
+        out.append(
+            f'<text x="{left + plot_w + 12}" y="{y + 41}" font-size="10" fill="#555555">'
+            f'{pl_share:.1%} of directional</text>'
+        )
+    out.append(f'<text x="{left + plot_w / 2:.1f}" y="502" text-anchor="middle" font-size="12">Share of required judgments</text>')
     svg_end(out, OUTPUT / "figure2_evaluator_distribution_rough.svg")
 
 
-def kappa_matrix(
+def pairwise_agreement(
     r1: list[dict[str, str]], r2: list[dict[str, str]]
-) -> tuple[list[list[int]], float, int, int]:
+) -> tuple[float, float, int]:
     m1 = {
         (row["sample"], row["field"]): row["score"]
         for row in subset(r1, "b", BREAST_FIELDS)
@@ -165,50 +209,72 @@ def kappa_matrix(
         for row in subset(r2, "b", BREAST_FIELDS)
     }
     keys = sorted(set(m1) & set(m2))
-    order = ["A", "TIE", "B"]
-    matrix = [[0 for _ in order] for _ in order]
-    for key in keys:
-        matrix[order.index(m1[key])][order.index(m2[key])] += 1
     total = len(keys)
-    same = sum(matrix[i][i] for i in range(3))
-    row_totals = [sum(row) for row in matrix]
-    col_totals = [sum(matrix[i][j] for i in range(3)) for j in range(3)]
+    same = sum(m1[key] == m2[key] for key in keys)
+    order = ["A", "TIE", "B"]
+    counts_1 = Counter(m1[key] for key in keys)
+    counts_2 = Counter(m2[key] for key in keys)
     observed = same / total
-    expected = sum(row_totals[i] * col_totals[i] for i in range(3)) / total**2
+    expected = sum(counts_1[value] * counts_2[value] for value in order) / total**2
     kappa = (observed - expected) / (1 - expected)
-    return matrix, kappa, same, total
+    return observed, kappa, total
 
 
-def plot_interrater_matrix(r1: list[dict[str, str]], r2: list[dict[str, str]]) -> None:
-    matrix, kappa, same, total = kappa_matrix(r1, r2)
-    labels = ["PL better", "Tie", "BL better"]
-    width, height = 660, 570
-    left, top, cell = 180, 115, 110
-    max_count = max(max(row) for row in matrix)
+def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
+    internal_names = list(raters)
+    display_names = {
+        name: f"Oncologist {index}"
+        for index, name in enumerate(internal_names, start=1)
+    }
+    values: dict[tuple[str, str], tuple[float, float, int]] = {}
+    for name_1, name_2 in combinations(internal_names, 2):
+        values[(name_1, name_2)] = pairwise_agreement(raters[name_1], raters[name_2])
+    width, height = 720, 600
+    left, top, cell = 190, 130, 125
     out = svg_start(
         width,
         height,
-        "Breast-cancer inter-rater agreement",
-        f"Exact agreement {same}/{total} ({same / total:.1%}); Cohen's kappa = {kappa:.3f}",
+        "Pairwise breast-cancer agreement",
+        "Upper triangle: exact agreement; lower triangle: Cohen's kappa; n = 280 per pair",
     )
-    out.append(f'<text x="{left + 1.5 * cell:.1f}" y="88" text-anchor="middle" font-size="13" font-weight="700">Oncologist 02 verdict</text>')
-    out.append(f'<text x="45" y="{top + 1.5 * cell:.1f}" text-anchor="middle" font-size="13" font-weight="700" transform="rotate(-90 45 {top + 1.5 * cell:.1f})">Oncologist 01 verdict</text>')
-    for index, label in enumerate(labels):
-        out.append(f'<text x="{left + (index + 0.5) * cell:.1f}" y="108" text-anchor="middle" font-size="12">{esc(label)}</text>')
-        out.append(f'<text x="{left - 12}" y="{top + (index + 0.55) * cell:.1f}" text-anchor="end" font-size="12">{esc(label)}</text>')
-    for i, row in enumerate(matrix):
-        for j, value in enumerate(row):
-            intensity = value / max_count
-            shade = int(245 - 145 * intensity)
-            fill = f"rgb({shade},{shade + 10},{255})"
+    for index, name in enumerate(internal_names):
+        label = display_names[name]
+        out.append(f'<text x="{left + (index + 0.5) * cell:.1f}" y="112" text-anchor="middle" font-size="13">{esc(label)}</text>')
+        out.append(f'<text x="{left - 14}" y="{top + (index + 0.55) * cell:.1f}" text-anchor="end" font-size="13">{esc(label)}</text>')
+    for i, row_name in enumerate(internal_names):
+        for j, column_name in enumerate(internal_names):
             x, y = left + j * cell, top + i * cell
+            if i == j:
+                fill, label, sublabel = "#EEF3F6", "Same rater", "280 ratings"
+            else:
+                pair = (row_name, column_name) if (row_name, column_name) in values else (column_name, row_name)
+                agreement, kappa, _ = values[pair]
+                value = agreement if i < j else kappa
+                intensity = min(max((value - 0.45) / 0.55, 0), 1)
+                shade = int(245 - 115 * intensity)
+                fill = f"rgb({shade},{shade + 12},255)"
+                label = f"{agreement:.1%}" if i < j else f"κ = {kappa:.3f}"
+                sublabel = "exact agreement" if i < j else "chance-adjusted"
             out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{fill}" stroke="white" stroke-width="3"/>')
-            out.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + 7:.1f}" text-anchor="middle" font-size="24" font-weight="700">{value}</text>')
+            out.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2:.1f}" text-anchor="middle" font-size="20" font-weight="700">{esc(label)}</text>')
+            out.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + 22:.1f}" text-anchor="middle" font-size="10" fill="#555555">{esc(sublabel)}</text>')
     svg_end(out, OUTPUT / "figure3_interrater_matrix_rough.svg")
 
 
-def plot_core_fields(r1: list[dict[str, str]], r2: list[dict[str, str]]) -> None:
-    rows = subset(r1, "b", CORE_BREAST) + subset(r2, "b", CORE_BREAST) + subset(r2, "p", CORE_PDAC)
+def completed_rows(
+    raters: dict[str, list[dict[str, str]]],
+    breast_fields: list[str],
+    pdac_fields: list[str],
+) -> list[dict[str, str]]:
+    rows = []
+    for rater_rows in raters.values():
+        rows.extend(subset(rater_rows, "b", breast_fields))
+        rows.extend(subset(rater_rows, "p", pdac_fields))
+    return rows
+
+
+def plot_core_fields(raters: dict[str, list[dict[str, str]]]) -> None:
+    rows = completed_rows(raters, CORE_BREAST, CORE_PDAC)
     by_field: dict[str, Counter[str]] = defaultdict(Counter)
     for row in rows:
         by_field[row["field"]][row["score"]] += 1
@@ -293,22 +359,24 @@ def draw_margin_panel(
     out.append(f'<text x="{x0 + 12}" y="{y0 + top + plot_h / 2:.1f}" text-anchor="middle" font-size="11" transform="rotate(-90 {x0 + 12} {y0 + top + plot_h / 2:.1f})">Normalized PL-BL margin</text>')
 
 
-def plot_note_margins(r1: list[dict[str, str]], r2: list[dict[str, str]]) -> None:
-    breast = note_margins(r1 + r2, "b", BREAST_FIELDS)
-    pdac = note_margins(r2, "p", PDAC_FIELDS)
+def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
+    breast_rows = [row for rows in raters.values() for row in rows]
+    pdac_rows = [row for rows in raters.values() for row in rows]
+    breast = note_margins(breast_rows, "b", BREAST_FIELDS)
+    pdac = note_margins(pdac_rows, "p", PDAC_FIELDS)
     width, height = 1260, 500
     out = svg_start(
         width,
         height,
         "Per-note clinician preference margins",
-        "(PL better - BL better) / completed ratings; breast pools two oncologists",
+        "(PL better - BL better) / completed ratings; breast pools 3 clinicians and PDAC pools 2",
     )
     draw_margin_panel(out, 20, 72, 600, 400, "Breast cancer", breast)
     draw_margin_panel(out, 640, 72, 600, 400, "PDAC", pdac)
     svg_end(out, OUTPUT / "figure5_note_margins_rough.svg")
 
 
-def plot_technical_vs_clinician(r1: list[dict[str, str]], r2: list[dict[str, str]]) -> None:
+def plot_technical_vs_clinician(raters: dict[str, list[dict[str, str]]]) -> None:
     technical = {
         "current_meds": (8, 0, 40),
         "stage": (6, 8, 40),
@@ -318,7 +386,7 @@ def plot_technical_vs_clinician(r1: list[dict[str, str]], r2: list[dict[str, str
         "type_receptor": (8, 5, 20),
         "genetic_results": (6, 2, 40),
     }
-    clinician_rows = subset(r1, "b", CORE_BREAST) + subset(r2, "b", CORE_BREAST) + subset(r2, "p", CORE_PDAC)
+    clinician_rows = completed_rows(raters, CORE_BREAST, CORE_PDAC)
     by_field: dict[str, Counter[str]] = defaultdict(Counter)
     for row in clinician_rows:
         by_field[row["field"]][row["score"]] += 1
@@ -391,7 +459,7 @@ def draw_letter_difference_panel(
 
 
 def plot_letter_differences() -> None:
-    scores = {int(row["note"]): row for row in load(LETTER_SCORES)}
+    scores = {int(row["note"]): row for row in load_csv(LETTER_SCORES)}
     if sorted(scores) != list(range(1, 21)):
         raise ValueError("Expected 20 complete breast-cancer letter-rating summaries")
     harness_vs_chatgpt = [
@@ -416,13 +484,12 @@ def plot_letter_differences() -> None:
 
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    r1 = load(RATER_1)
-    r2 = load(RATER_2)
-    plot_evaluator_distribution(r1, r2)
-    plot_interrater_matrix(r1, r2)
-    plot_core_fields(r1, r2)
-    plot_note_margins(r1, r2)
-    plot_technical_vs_clinician(r1, r2)
+    raters = load_raters()
+    plot_evaluator_distribution(raters)
+    plot_interrater_matrix(raters)
+    plot_core_fields(raters)
+    plot_note_margins(raters)
+    plot_technical_vs_clinician(raters)
     plot_letter_differences()
     print(f"Wrote 6 rough SVG figures to {OUTPUT}")
 
