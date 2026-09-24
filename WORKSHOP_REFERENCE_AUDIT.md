@@ -33,6 +33,17 @@ For each journal article, bibliographic metadata were checked through the Crossr
 
 All nine DOI/arXiv links resolved to the intended record during this audit. Automated requests to the NEJM AI, Oxford Academic, and ASCO publisher landing pages returned HTTP 403 after DOI redirection because those sites block automated clients. This does not indicate a broken DOI: Crossref returned the matching record, and the corresponding PubMed/PMC pages were accessible with HTTP 200.
 
+## Ablation and component-comparison audit, 2026-09-23
+
+- **Wiest et al. [3]:** compared plain zero-shot, one-shot, definition-enhanced, and grammar-constrained prompting. This is a prompt-level component comparison, although not an ablation of a multi-stage oncology harness.
+- **Tariq et al. [5]:** compared the complete UMLS-plus-fine-tuned-LLM system with zero-shot LLM, structured-code, and rule-based baselines. It did not remove the two hybrid phases one at a time.
+- **Dao et al. [6]:** reported the errors detected and corrected by its validation and retry loop, including correction of 6 of 15 notes with initially detected errors. It did not report a full factorial ablation of the engineered preload, model, validation, and retry components.
+- **Zhang et al., mCODEGPT [7]:** directly compared a single-step baseline with BFOP and 2POP hierarchical prompting. This is the closest explicit prompting ablation among the reviewed oncology studies.
+- **Grothey et al. [8]:** compared five prompting strategies as well as model and quantization configurations. This is a broad configuration comparison rather than a removal study of one integrated pipeline.
+- **CORAL [2] and Bhattarai et al. [4]:** primarily compared model families or complete methods and did not report a component ablation comparable to the one proposed for the present harness.
+
+Conclusion: component comparisons are common enough that a staged technical ablation would strengthen the paper, but a full clinician-rated ablation is not standard across all related work. An LLM-reviewed ablation should be labeled as mechanistic technical evidence rather than clinical validation.
+
 ## Remaining boundary
 
 The statement that we did not identify a field-level, identity-masked, practicing-oncologist comparison is limited to the 24 studies included in Chen et al.'s review and the closest additional studies listed in the draft. It is not a claim that no such study exists anywhere in the entire literature. The manuscript keeps this bounded wording.

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="620" viewBox="0 0 1060 620">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<text x="530.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Human-model complementarity across extraction tasks</text>
+<text x="530.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Conceptual map motivated by rating patterns and task structure; workload was not measured</text>
+<rect x="155.0" y="95.0" width="425.0" height="215.0" fill="#FCE8DE"/>
+<rect x="580.0" y="95.0" width="425.0" height="215.0" fill="#F4F0FB"/>
+<rect x="155.0" y="310.0" width="425.0" height="215.0" fill="#F3F6F8"/>
+<rect x="580.0" y="310.0" width="425.0" height="215.0" fill="#EAF5FB"/>
+<rect x="155" y="95" width="850" height="430" fill="none" stroke="#526471" stroke-width="1.5"/>
+<line x1="580.0" y1="95" x2="580.0" y2="525" stroke="#AAB4BC"/>
+<line x1="155" y1="310.0" x2="1005" y2="310.0" stroke="#AAB4BC"/>
+<text x="183" y="129" font-size="15" font-weight="700" fill="#9C3D14">Rapid clinician verification</text>
+<text x="191" y="159" font-size="13">• Explicit stage</text>
+<text x="191" y="184" font-size="13">• Confirmed vs suspected disease</text>
+<text x="608.0" y="129" font-size="15" font-weight="700" fill="#5C4694">Assist, then verify</text>
+<text x="616.0" y="159" font-size="13">• Treatment response</text>
+<text x="616.0" y="184" font-size="13">• Uncertain metastasis</text>
+<text x="183" y="344.0" font-size="15" font-weight="700" fill="#53636E">Routine automation</text>
+<text x="191" y="374.0" font-size="13">• Explicit receptor status</text>
+<text x="191" y="399.0" font-size="13">• Explicit test result</text>
+<text x="608.0" y="344.0" font-size="15" font-weight="700" fill="#176B91">High-value automation</text>
+<text x="616.0" y="374.0" font-size="13">• Active medications</text>
+<text x="616.0" y="399.0" font-size="13">• Medication plans</text>
+<text x="616.0" y="424.0" font-size="13">• Long treatment history</text>
+<text x="580.0" y="592" text-anchor="middle" font-size="13">Human review burden: low → high</text>
+<text x="34" y="310.0" text-anchor="middle" font-size="13" transform="rotate(-90 34 310.0)">Model error risk: low → high</text>
+</g>
+</svg>

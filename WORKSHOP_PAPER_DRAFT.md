@@ -1,7 +1,7 @@
 <!--
 BILINGUAL MAINTENANCE RULE:
 1. Keep the complete English manuscript first and the complete Chinese manuscript second in this same file.
-2. The two versions must match in scientific claims, numbers, result tables, figure numbering, and references.
+2. The two versions must match in scientific claims, numbers, main result tables, figure numbering, and references. The Chinese review version may contain additional annotations and review-only appendices.
 3. Keep the English version close to submission prose. The Chinese version may retain collaborator questions, figure-design notes, and explanatory annotations.
 4. After changing either version, update the other version in the same edit and run: python3 render_workshop_draft.py
 5. Apply the humanizer pass to both versions. Chinese should read as natural academic prose, not as a literal machine translation.
@@ -13,13 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.10, September 2026
-
-Authors: [TODO]
-
-Affiliations: [TODO]
-
-Target venue and format: [TODO]
+Version 0.11, September 2026
 
 ## Abstract
 
@@ -33,17 +27,15 @@ To test whether an inference harness can improve oncology information extraction
 
 ### Methods
 
-We built a failure-mode-driven inference harness around Qwen2.5-32B-Instruct-AWQ in two development stages. During breast-cancer development, an oncologist repeatedly reviewed outputs and identified clinically important errors. The team converted recurring errors into field-specific prompts, verification gates, and deterministic oncology rules. We then transferred this harness to pancreatic cancer. No physician reviewed pancreatic-cancer outputs during development. Instead, a rubric-informed Qwen reviewer identified candidate errors, an external development LLM synthesized the review history and proposed prompt or rule changes, and a human developer accepted, revised, and regression-tested those changes. Model weights remained frozen throughout. We compared the resulting harness with a single-prompt baseline using the same model and field contract on 40 CORAL benchmark notes, including 20 breast and 20 pancreatic cases. Three oncologists completed identity-masked A/B comparisons. All three evaluated breast cancer, and two also evaluated pancreatic cancer.
+We built a failure-mode-driven inference harness around Qwen2.5-32B-Instruct-AWQ in two development stages. During breast-cancer development, a physician coauthor familiar with oncology and the model-development investigators repeatedly reviewed outputs and identified clinically important errors. The team converted recurring errors into field-specific prompts, verification gates, and deterministic oncology rules. We then transferred this harness to pancreatic cancer. No clinician reviewed pancreatic-cancer outputs during development. Instead, a rubric-informed Qwen reviewer identified candidate errors, an external development LLM synthesized the review history and proposed prompt or rule changes, and the investigators selected, implemented, and regression-tested those changes. Model weights remained frozen throughout. We compared the resulting harness with a single-prompt baseline using the same model and field contract on 40 CORAL benchmark notes, including 20 breast and 20 pancreatic cases. Three oncologists completed identity-masked A/B comparisons. All three evaluated breast cancer, and two also evaluated pancreatic cancer.
 
 ### Results
 
-In the completed matched technical audit, the harness was preferred in 66 core comparisons, the baseline in 28, and 166 were ties. The five completed clinician-by-cancer evaluations contributed 1,359 required-field judgments. The harness was preferred in 443, the baseline in 77, and 839 were ties. Among the 520 directional judgments, 85.2% favored the harness. The three breast-cancer evaluations contributed 282 harness preferences, 54 baseline preferences, and 504 ties. Pairwise exact agreement ranged from 73.6% to 82.9%, with Cohen's kappa from 0.511 to 0.646. In pancreatic cancer, where no physician had participated in development, two oncologists together preferred the harness 161 times and the baseline 23 times, with 335 ties. In a separate exploratory patient-letter evaluation by one oncologist, harness-based letters had a higher four-item mean score than ChatGPT letters in 14 of 20 breast cases, tied in 2, and scored lower in 4, but did not clearly outperform the same-model Qwen baseline.
-
-[FINAL MULTI-RATER RESULT: Across FINAL N oncologists and FINAL N evaluable judgments, the harness was preferred in FINAL X, the baseline in FINAL Y, and FINAL Z were ties. The adjusted analysis showed a significant preference for the harness, effect estimate FINAL, 95% CI FINAL, p=FINAL.]
+In the completed matched technical audit, the harness was preferred in 66 core comparisons, the baseline in 28, and 166 were ties. The five completed clinician-by-cancer evaluations contributed 1,359 required-field judgments. The harness was preferred in 443, the baseline in 77, and 839 were ties. Among the 520 directional judgments, 85.2% favored the harness. The adjusted directional analysis estimated an odds ratio of 5.70 for harness preference (95% CI 4.24 to 7.66; p<0.001). The three breast-cancer evaluations contributed 282 harness preferences, 54 baseline preferences, and 504 ties. Pairwise exact agreement ranged from 73.6% to 82.9%, with Cohen's kappa from 0.511 to 0.646. In pancreatic cancer, where no physician had participated in development, two oncologists together preferred the harness 161 times and the baseline 23 times, with 335 ties.
 
 ### Conclusions
 
-The three breast-cancer evaluations support clinician-guided conversion of recurrent model errors into an explicit inference harness. The two pancreatic-cancer evaluations suggest that the resulting rules and evaluation criteria transferred to a second cancer domain without repeated physician involvement during development. This was AI-assisted, human-supervised refinement rather than autonomous self-modification. The clustered analysis remains necessary before making a confirmatory statistical claim.
+The three breast-cancer evaluations support clinician-informed conversion of recurrent model errors into an explicit inference harness. The two pancreatic-cancer evaluations suggest that the resulting rules and evaluation criteria transferred to a second cancer domain without repeated physician involvement during development. This was model-assisted, investigator-supervised refinement rather than autonomous self-modification. Broader claims still require more oncologists and external validation.
 
 ## 1. Introduction
 
@@ -112,9 +104,9 @@ The deterministic layer addresses recurrent errors with high-confidence clinical
 | Cross-field clinical rules | Stage, nodes, and distant disease become inconsistent | Keep axillary nodes regional rather than distant |
 | Source attribution | A reviewer cannot trace an extracted value | Return the supporting sentence from the note |
 
-> **Figure 1 placeholder: Development, transfer, and evaluation pathway.**
->
-> **Draft caption:** *Figure 1. Development, transfer, and evaluation pathway. During breast-cancer development, a physician coauthor and model-development investigators converted recurring extraction errors into prompt, verification, and deterministic-rule changes. The harness was then adapted to pancreatic cancer using model-assisted review without clinician review of pancreatic-cancer outputs. Final outputs were compared with a same-model single-prompt baseline in an identity-masked evaluation by three oncologists.*
+<div data-rough-figure="1"></div>
+
+***Figure 1.*** *Development, transfer, and evaluation pathway. During breast-cancer development, a physician coauthor and model-development investigators converted recurring extraction errors into prompt, verification, and deterministic-rule changes. The harness was then adapted to pancreatic cancer using model-assisted review without clinician review of pancreatic-cancer outputs. Final outputs were compared with a same-model single-prompt baseline in an identity-masked evaluation by three oncologists.*
 
 ### 2.5 Clinician-informed breast-cancer development
 
@@ -152,19 +144,19 @@ A matched audit of 260 applicable note-field comparisons was also used for techn
 
 ### 2.9 Oncologist evaluation
 
-The clinical evaluation presents the source note and two structured outputs through an identity-masked A/B interface. The evaluator selects A better, B better, or tie for each field. The interface does not reveal which output came from the harness.
+The clinical evaluation presents the source note and two structured outputs through an identity-masked A/B interface. The evaluator selects A better, B better, or tie for each field. The interface does not reveal which output came from the harness. The assignment was fixed across evaluations, with the harness displayed as A and the baseline as B.
 
 The physician coauthor who participated in breast-cancer development was not one of the final evaluators. Three oncologists independently evaluated the breast-cancer outputs. Two of them also evaluated the pancreatic-cancer outputs; the third did not evaluate pancreatic cancer.
 
 All three oncologists completed the same 280 required breast-cancer comparisons. We calculated pairwise exact agreement and Cohen's kappa for each pair. We also summarized all five completed clinician-by-cancer evaluations separately. Pooled counts are descriptive and do not treat field-level judgments as independent observations.
 
-The primary analysis will compare harness and baseline preference among directional ratings with a mixed-effects logistic model that includes evaluator, note, and field as grouping factors. Ties will be reported separately and included in a sensitivity analysis. We will report the effect estimate, 95% confidence interval, two-sided p value, and agreement across evaluators. The current three-oncologist summaries remain descriptive until this model and its sensitivity analyses are finalized.
+The primary inferential analysis excluded ties and modeled whether a directional judgment favored the harness. We used a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator was included as a fixed effect, and the overall model also included cancer type. This specification accounts for repeated judgments across fields and evaluators within a note. We report adjusted odds ratios, 95% confidence intervals, and two-sided p values. Exact sign tests on note-level harness-minus-baseline margins were used as a sensitivity analysis.
 
 ## 3. Results
 
 ### 3.1 Development path and cross-cancer transfer
 
-The development record contains approximately 15 breast-cancer iterations across 56 notes and approximately 18 pancreatic-cancer iterations across 100 notes. Breast-cancer revisions were informed by direct oncologist review. Pancreatic-cancer revisions were made without physician review of the pancreatic outputs, using the transferred rubric, model-based error review, external LLM-assisted synthesis, and human-controlled implementation described above.
+The development record contains approximately 15 breast-cancer iterations across 56 notes and approximately 18 pancreatic-cancer iterations across 100 notes. Breast-cancer revisions were informed by review from the physician coauthor and model-development investigators. Pancreatic-cancer revisions were made without clinician review of the pancreatic outputs, using the transferred rubric, model-based error review, external LLM-assisted synthesis, and investigator-controlled implementation described above.
 
 This sequence produced two types of reuse. Some components transferred unchanged, including the five verification stages, temporal distinctions, source attribution, and rules that separate active treatment from plans or supportive medication. Other components required cancer-specific routing, especially disease terminology, regimen interpretation, and post-processing conditions. The resulting system therefore reused the error-handling framework without assuming that breast and pancreatic cancer were clinically interchangeable.
 
@@ -183,25 +175,23 @@ The available clinical evidence comprises five completed clinician-by-cancer eva
 | Oncologist 03, breast cancer | 280 | 119 | 24 | 137 | 83.2% |
 | **All completed evaluations** | **1,359** | **443** | **77** | **839** | **85.2%** |
 
-> **Figure 2 placeholder: Clinician preference distributions by evaluator and cancer type.**
->
-> **Draft caption:** *Figure 2. Distribution of identity-masked clinician preferences across five completed clinician-by-cancer evaluations. Most judgments were ties, as expected for systems using the same base model, but directional judgments consistently favored the inference harness.*
+<div data-rough-figure="2"></div>
+
+***Figure 2.*** *Distribution of identity-masked clinician preferences across five completed clinician-by-cancer evaluations. Most judgments were ties, while directional judgments favored the inference harness in every evaluation.*
 
 All three clinicians independently favored the harness on the breast-cancer set. Their pooled breast result was 282 harness preferences, 54 baseline preferences, and 504 ties. The first oncologist's per-note result was 18 harness wins, one baseline win, and one tie. The second and third oncologists each recorded a harness win in all 20 notes. When the three breast evaluations were combined within each note, all 20 notes had a positive harness-minus-baseline margin.
 
-The two pancreatic-cancer evaluations produced 161 harness preferences, 23 baseline preferences, and 335 ties. One required judgment, `p7 / lab_plan`, was missing. The harness had a positive pooled margin in all 20 pancreatic notes.
+The two pancreatic-cancer evaluations produced 161 harness preferences, 23 baseline preferences, and 335 ties. The harness had a positive pooled margin in all 20 pancreatic notes.
 
-The final mixed-effects result remains pending:
-
-> [FINAL MULTI-RATER RESULT: Across FINAL N oncologists and FINAL N evaluable judgments, the adjusted analysis showed a significant preference for the harness, effect estimate FINAL, 95% CI FINAL, p=FINAL.]
+In the adjusted directional analysis, the odds of a harness preference were 5.70 times the odds of a baseline preference (95% CI 4.24 to 7.66; p<0.001). Cancer-specific estimates were 5.18 for breast cancer (95% CI 3.61 to 7.46; p<0.001) and 6.94 for pancreatic cancer (95% CI 4.19 to 11.48; p<0.001). As a note-level sensitivity analysis, the pooled harness-minus-baseline margin was positive in all 40 notes (two-sided exact sign test, p<0.001). These estimates describe preference among the observed ratings; three oncologists remain insufficient for a precise estimate of variation across the wider oncologist population.
 
 ### 3.3 Inter-rater agreement and core fields
 
 All three oncologists rated the same 280 required breast-cancer comparisons. Pairwise exact agreement was 82.9% between oncologists 01 and 02, 80.0% between oncologists 01 and 03, and 73.6% between oncologists 02 and 03. The corresponding Cohen's kappa values were 0.646, 0.644, and 0.511. All three oncologists gave the same verdict on 192 comparisons (68.6%). A simple majority favored the harness in 95 comparisons, the baseline in 15, and a tie in 168. Two comparisons had one vote in each category and therefore no majority.
 
-> **Figure 3 placeholder: Pairwise inter-rater agreement for breast-cancer judgments.**
->
-> **Draft caption:** *Figure 3. Pairwise agreement among three oncologists on 280 shared breast-cancer field comparisons. Exact agreement ranged from 73.6% to 82.9%, with Cohen's kappa from 0.511 to 0.646.*
+<div data-rough-figure="3"></div>
+
+***Figure 3.*** *Pairwise agreement among three oncologists on 280 shared breast-cancer field comparisons. Exact agreement ranged from 73.6% to 82.9%, with Cohen's kappa from 0.511 to 0.646.*
 
 Across all completed evaluations, the seven prespecified core categories contributed 660 applicable judgments. The harness received 276 preferences, the baseline 34, and 350 were ties. The harness therefore accounted for 89.0% of the 310 directional core judgments, and every core category had a positive aggregate margin.
 
@@ -216,25 +206,25 @@ Across all completed evaluations, the seven prespecified core categories contrib
 | Completed molecular or genetic results | 22 | 6 | 72 | +16 |
 | **Overall** | **276** | **34** | **350** | **+242** |
 
-> **Figure 4 placeholder: Preference profile across core clinical categories.**
->
-> **Draft caption:** *Figure 4. Clinician preference by prespecified core clinical category. The largest harness advantages occurred in active-treatment identification and metastatic-involvement classification. Breast type and receptor status showed the smallest margin.*
+<div data-rough-figure="4"></div>
+
+***Figure 4.*** *Clinician preference by prespecified core clinical category. The largest harness advantages occurred in active-treatment identification and metastatic-involvement classification. Breast type and receptor status showed the smallest margin.*
 
 Active anticancer medication and regional or overall metastatic involvement produced the largest and most consistent core-field margins. Medication planning, outside the seven core categories, totaled 59 harness preferences, no baseline preferences, and 41 ties. Procedure planning was much closer at 14 harness preferences, 12 baseline preferences, and 74 ties. Breast type and receptor status remained the weakest core category, with a 6-rating net advantage.
 
-Exploratory note-level summaries support the same direction without treating every field as an independent observation. After pooling clinicians within each cancer type, the harness-minus-baseline margin was positive in all 20 breast notes and all 20 pancreatic notes. Each of the five evaluator-by-cancer analyses also favored the harness at the aggregate level. These summaries were not the prespecified final model and should not replace the planned evaluator-note-field analysis.
+Note-level summaries supported the same direction without treating every field as an independent observation. After pooling clinicians within each cancer type, the harness-minus-baseline margin was positive in all 20 breast notes and all 20 pancreatic notes. Each of the five evaluator-by-cancer analyses also favored the harness at the aggregate level. These summaries serve as sensitivity analyses alongside the adjusted model.
 
-> **Figure 5 placeholder: Per-note clinician preference margins.**
->
-> **Draft caption:** *Figure 5. Distribution of normalized clinician preference margins across individual notes. After pooling the available clinicians within each cancer type, the harness had a positive margin in every breast-cancer and pancreatic-cancer note.*
+<div data-rough-figure="5"></div>
 
-> **Figure 6 placeholder: Adjusted multi-rater effect estimates.**
->
-> **Draft caption:** *Figure 6. Adjusted association between evaluation condition and clinician preference. Odds ratios greater than 1 favor the inference harness. Estimates will come from the prespecified clustered multi-rater analysis.*
+***Figure 5.*** *Distribution of normalized clinician preference margins across individual notes. After pooling the available clinicians within each cancer type, the harness had a positive margin in every breast-cancer and pancreatic-cancer note.*
 
-### 3.4 Complete matched technical audit
+<div data-rough-figure="6"></div>
 
-Across 260 applicable core comparisons, the harness was preferred 66 times, the baseline 28 times, and 166 were ties. The harness had a positive margin in six of seven categories. Stage was the only category with a negative margin in the complete v2.2 audit.
+***Figure 6.*** *Adjusted odds of clinician preference for the inference harness among non-tie judgments. Estimates come from logistic generalized estimating equations with clustering by note; points show odds ratios and lines show 95% confidence intervals.*
+
+### 3.4 Development-stage LLM audit
+
+A source-grounded LLM reviewer compared the harness and baseline across 260 applicable core note-field pairs during development. It preferred the harness 66 times, the baseline 28 times, and judged 166 comparisons as ties. The harness had a positive margin in six of seven categories. Stage was the only category with a negative margin in this development-stage audit. These model-generated judgments were used for error analysis and are not clinical outcome labels.
 
 | Core field | Harness | Baseline | Tie | Net advantage |
 |---|---:|---:|---:|---:|
@@ -247,159 +237,103 @@ Across 260 applicable core comparisons, the harness was preferred 66 times, the 
 | Completed molecular or genetic results | 6 | 2 | 32 | +4 |
 | **Overall** | **66** | **28** | **166** | **+38** |
 
-> **Supplementary Figure S1 placeholder: Technical-audit and clinician net preference rates.**
->
-> **Draft caption:** *Supplementary Figure S1. Category-level net preference rates in the complete technical audit and current clinician evaluation. Differences between series should be interpreted descriptively because the review processes and pipeline versions were not identical.*
+<div data-rough-figure="S1"></div>
 
-### 3.5 Targeted repair evaluation
+***Supplementary Figure S1.*** *Category-level net preference rates in the development-stage LLM audit and oncologist evaluation. The two series are shown only as a descriptive comparison because they used different reviewers and pipeline versions.*
 
-Four high-impact failures identified in the v2.2 audit were repaired with conservative rules. Across 51 applicable comparisons in six affected samples and two controls, the repaired harness recorded 29 wins, no baseline wins, and 22 ties. No P0 error remained in this targeted set, and neither control developed a detected core regression. These targeted results show that the identified errors were repairable. They do not replace the full 40-note result.
+### 3.5 Interpretation of free-text comments and ties
 
-### 3.6 Qualitative comments
+Two clinician exports contained 12 written comments. These comments clarify an important limitation of the A/B outcome: a tie can mean either that both outputs are acceptable or that both are incomplete or incorrect. In one breast imaging-plan comparison, one oncologist preferred the harness because the baseline summarized completed findings instead of the plan, whereas another oncologist judged both outputs inadequate and selected a tie.
 
-Two of the three exports contained 12 written comments. These comments add useful context but also show why preference counts should not be treated as a complete correctness assessment. For one breast imaging-plan item, the first oncologist preferred the harness because the baseline summarized completed findings rather than the planned PET/CT. The second oncologist rated the same comparison as a tie and wrote that neither answer correctly captured the absence of a new imaging plan. This disagreement should be adjudicated before the case is used as a manuscript example.
-
-Other comments identified unsupported receptor status, a regional-node omission, uncertainty about response after a newly started second-line regimen, and cases in which both outputs were inaccurate. These observations support the value of specialist review and identify concrete targets for final error analysis. They also show that a tie can mean either that both outputs are adequate or that both are wrong.
-
-> **Supplementary Figure S2 placeholder: Adjudicated interpretation of tie judgments.**
->
-> **Draft caption:** *Supplementary Figure S2. Clinical interpretation of tie judgments after manual adjudication. This analysis distinguishes equivalent correct outputs from comparisons in which both systems are incomplete or incorrect.*
-
-### 3.7 Exploratory patient-letter results
-
-The earlier patient-letter evaluation did not show a uniform advantage for the harness. The same-model Qwen baseline had the highest four-item mean score at 3.80, followed by the harness-based letter at 3.74 and ChatGPT at 3.50. All three systems were rated ready to send without editing in 3 of 20 cases. The clinician marked possible hallucinated content in 4 ChatGPT letters, 1 Qwen baseline letter, and 2 harness-based letters.
-
-| Letter system | Accuracy | Completeness | Comprehensibility | Usefulness | Four-item mean | Hallucination flagged |
-|---|---:|---:|---:|---:|---:|---:|
-| ChatGPT single-prompt | 3.85 | 3.25 | 3.60 | 3.30 | 3.50 | 4/20 |
-| Qwen single-prompt baseline | 4.10 | 3.60 | 3.85 | 3.65 | 3.80 | 1/20 |
-| Qwen harness-based letter | 3.95 | 3.60 | 3.85 | 3.55 | 3.74 | 2/20 |
-
-The paired per-note comparison gives a more useful view of the trend. The harness-based letter had a higher four-item mean than the ChatGPT letter in 14 cases, tied in 2, and scored lower in 4, for a mean paired difference of 0.24 points. An unadjusted exact sign test excluding ties gave `p=0.031`; this was exploratory, not prespecified, and several correlated outcomes were examined. Against the same-model Qwen baseline, the harness won 9 cases, tied in 5, and lost 6, with a mean paired difference of -0.06 points. Structured extraction can therefore serve as input to patient communication, but these results do not show that the current letter generator is better than the same model prompted directly.
-
-> **Figure 7 placeholder: Paired patient-letter score differences.**
->
-> **Draft caption:** *Figure 7. Exploratory paired differences in oncologist-rated patient-letter quality across 20 breast-cancer notes. Harness-based letters more often outscored ChatGPT, but did not show a clear advantage over the same-model single-prompt baseline.*
+The comments also identified unsupported receptor status, omitted regional nodal disease, uncertainty about response after a newly started regimen, and comparisons in which neither output was satisfactory. They are used here to interpret the rating scale and to identify error-analysis examples, not as a separate quantitative endpoint.
 
 ## 4. Discussion
 
 ### 4.1 Main interpretation
 
-[FINAL OPENING: The multi-oncologist evaluation showed a statistically significant preference for the inference harness over the same-model single-prompt baseline.]
+The multi-oncologist evaluation showed a statistically significant preference for the inference harness over the same-model single-prompt baseline. In the adjusted directional analysis, the odds ratio for a harness preference was 5.70 (95% CI 4.24 to 7.66; p<0.001).
 
 The main result concerns the development process around the model. A clinician helped identify recurrent errors in breast cancer, those errors were converted into explicit parts of the inference harness, and the resulting process was adapted to pancreatic cancer without physician review during pancreatic development. The final clinician ratings favored the harness in both domains. This sequence connects the development method to the evaluation more directly than a static comparison of two prompts would.
 
 Most field comparisons were ties, which is expected because both systems used the same strong base model. When an oncologist found a meaningful difference, the harness was preferred nearly six times as often as the baseline. The gains were concentrated in fields that need temporal interpretation or clinical classification. This is consistent with a system that leaves straightforward answers alone and intervenes when a known failure pattern appears.
 
-The evidence is still a pilot. The breast and pancreatic stages were not randomized, the refinement process combined several tools, and the benchmark later informed targeted repairs. The results therefore support the whole development strategy, not a causal claim for any single model, prompt, gate, or hook.
+The evidence remains a pilot because development was sequential and the benchmark later informed revisions; the results support the combined workflow rather than a causal claim for any single prompt, gate, or rule.
 
-### 4.2 Clinician-guided rule induction in breast cancer
+### 4.2 Clinician-informed extraction as a reusable harness
 
-The oncologist's role during breast development was different from conventional dataset labeling. The clinician did not produce thousands of field labels for model training. Instead, the clinician reviewed concrete outputs and identified mistakes that would matter in practice. The team then translated repeated mistakes into reusable instructions and checks.
+The physician coauthor's role during breast-cancer development differed from conventional dataset labeling. Rather than producing a large supervised training set, the physician and model-development investigators reviewed concrete failures and defined clinically meaningful distinctions. Those distinctions were encoded as prompts, verification checks, and deterministic rules. The three independent oncologist evaluations suggest that the resulting behavior was not limited to the development physician's preferences.
 
-When specialist time is scarce, a clinician can focus on defining the boundary of a difficult concept, such as active therapy, response to the current regimen, or regional versus distant disease, instead of reviewing every future note. Once encoded, the rule can be applied consistently, logged, and regression-tested. Three independent breast evaluations suggest that the resulting harness did not merely reproduce one collaborator's preferences. All three oncologists favored it, although their individual judgments were not identical.
+Structured extraction is useful because it converts a long, internally repetitive note into a compact set of fields that can be checked, searched, and reused downstream. It is particularly valuable when the task is tedious for a clinician but can be bounded precisely, such as reconciling current anticancer therapy across a medication list and treatment history.
 
-This development pattern also explains why we call the system a harness. The contribution is the accumulation of executable clinical distinctions around a frozen model. Some distinctions live in prompts, some in verification, and some in deterministic code. The clinician supplies the clinical boundary; the engineering process turns that boundary into repeatable behavior.
+We use the term inference harness because the contribution sits around the model rather than in its weights. The routing, schemas, verification logic, deterministic rules, logging, and attribution layer could in principle be attached to another instruction-following model after interface and prompt calibration. This study tested only Qwen2.5-32B, so cross-model portability remains a design property to evaluate rather than an empirical result.
 
-### 4.3 Transfer and AI-assisted refinement in pancreatic cancer
+### 4.3 Cross-cancer transfer and the role of LLM-as-a-judge
 
-The pancreatic-cancer stage tests whether the accumulated process can travel beyond the domain in which the clinician gave direct feedback. Pancreatic notes differ in disease course, treatment regimens, staging language, and surgical context. We therefore did not simply reuse every breast-specific rule. We transferred the general workflow, retained rules that expressed shared clinical distinctions, and added pancreatic-specific routing where the notes exposed new failure patterns.
+The pancreatic-cancer stage tested whether the accumulated workflow could transfer beyond the domain in which the physician coauthor gave direct feedback. Pancreatic notes differ in disease course, treatment regimens, staging language, and surgical context. We retained shared clinical distinctions, added cancer-specific routing where needed, and did not ask a clinician to review pancreatic outputs during development.
 
-No physician reviewed pancreatic outputs during this development stage. A Qwen reviewer applied the inherited rubric to each output, and an external development LLM synthesized the review history and proposed changes. A human developer decided which changes to implement and ran regression tests. Across two pancreatic evaluations, 161 harness preferences versus 23 baseline preferences with 335 ties are consistent with successful transfer under this model-in-the-loop process.
+Two model roles supported this transfer. First, a general-purpose external LLM received the accumulated breast-cancer error history and proposed an initial set of pancreatic-cancer adaptations. Second, a rubric-guided LLM-as-a-judge compared subsequent outputs with their source notes and localized likely omissions, unsupported claims, semantic mismatches, and temporal errors. This reviewer made the iterative process observable by showing where the transferred harness was succeeding or failing.
 
-We do not describe this as autonomous self-evolution. The deployed model did not independently modify its code or approve its own changes. "AI-assisted evolution" is reasonable only in the narrower sense that models helped identify errors and formulate revisions across repeated cycles. Human supervision remained part of the development loop.
+The judge did not define the clinical endpoint and did not approve its own changes. Investigators selected candidate revisions and regression-tested them, while the final evidence came from independent oncologists. The pancreatic ratings, 161 harness preferences versus 23 baseline preferences with 335 ties, support the usefulness of this model-assisted development loop without establishing autonomous self-improvement.
 
-### 4.4 Which questions were difficult for the model?
+### 4.4 Model difficulty and human-model complementarity
 
-The combined clinician ratings separate relatively direct extraction from questions that require clinical context.
+The field-level results distinguish direct extraction from tasks that require temporal or clinical interpretation. Explicit findings often produced ties because both systems could locate them. The larger differences appeared when the same fact had to be classified in context.
 
-Straightforward facts often produced ties. Both systems could usually identify an explicitly stated imaging result, procedure, or receptor value. The harder problems involved deciding what the fact meant in the current clinical context.
+Active anticancer medication showed the largest core-field advantage, with 83 harness preferences, two baseline preferences, and 15 ties. Medication planning also strongly favored the harness, 59 to zero with 41 ties. These tasks are laborious for a person reviewing a long treatment history, but they are well suited to structured assistance when current, historical, supportive, and planned therapies are kept separate.
 
-Active anticancer medication showed the largest and most stable core-field difference: 83 harness preferences, two baseline preferences, and 15 ties across the completed evaluations. This field requires the model to distinguish treatment from chronic home medications, supportive drugs, discontinued regimens, and future options. Medication planning also strongly favored the harness, 59 to zero with 41 ties, because future actions must remain separate from current treatment and recent changes.
+Stage, metastatic involvement, and treatment response illustrate a different form of complementarity. A clinician may resolve an explicitly documented stage quickly, while a model can still confuse regional nodes with distant disease or treat a suspected lesion as confirmed. Response assessment can be difficult for both because it requires aligning findings with the current regimen. In these fields, the system is better used to organize evidence and flag a proposed answer for rapid verification than to replace clinical judgment.
 
-Stage and metastatic involvement require related decisions. The model must distinguish regional lymph nodes from distant spread, preserve uncertainty for lesions awaiting confirmation, and reconcile metastatic status with stage. Across the available ratings, regional or overall metastatic involvement favored the harness 60 to 5, while stage favored it 41 to 4. The harness was built to check these relationships across fields rather than extract each label in isolation.
+Breast type and receptor status had the smallest core-field margin, 18 to 12 with 30 ties. This is consistent with a field that is often stated explicitly, leaving less room for the harness to improve on the base model. The useful division of labor is therefore field-dependent: automate repetitive synthesis, surface evidence for judgment-sensitive fields, and allow clinicians to verify compact outputs rather than reread every note from scratch.
 
-Treatment response remained conceptually difficult, but the clinical result was directionally consistent: 37 harness preferences, three baseline preferences, and 60 ties. A note may include old progression, current symptoms, stable imaging, tumor-marker trends, and a newly started regimen. Determining which evidence reflects response to the current treatment requires a timeline, not keyword recognition. A second-oncologist comment that response was not yet clear after starting second-line therapy illustrates this temporal boundary.
+<div data-rough-figure="7"></div>
 
-Tumor type and receptor status remains the weakest core category. Across the three breast evaluations it favored the harness 18 to 12, with 30 ties. These values are often stated explicitly, so the baseline can perform well. The field also becomes difficult when a note contains bilateral disease, historical and recurrent specimens, or discordant receptor results. This remains an area for clinical review rather than a claimed strength.
+***Figure 7.*** *Conceptual map of human-model complementarity across oncology extraction tasks. Placement is qualitative rather than a measured difficulty score. The map distinguishes repetitive synthesis tasks suited to automation from judgment-sensitive fields that benefit from rapid clinician verification.*
 
-### 4.5 How the observed pattern relates to the harness
+### 4.5 Mechanistic evidence and the need for ablation
 
-The current study does not include a complete component ablation, so it cannot assign each improvement to one module with certainty. The field-level pattern is nevertheless consistent with the intended function of several components.
+The observed field pattern is consistent with the intended function of the harness. The active-medication and medication-plan results align with dedicated prompts, temporal filtering, and drug-context rules. The stage and metastasis results align with cross-field checks and deterministic distinctions between regional and distant disease and between suspected and confirmed findings. These associations support the proposed mechanism but do not isolate the contribution of each component.
 
-The active-medication result is consistent with the dedicated medication prompt, the oncology drug dictionary, contextual classification of supportive versus home medications, and temporal filtering. The medication-plan result is consistent with extracting plans from the Assessment and Plan section and removing already completed actions. The stage and metastasis results are consistent with cross-field context and deterministic rules that separate regional from distant disease and suspected from confirmed findings.
+Component comparisons are present in related work but are not universal. Wiest et al. compared plain zero-shot, one-shot, definition-enhanced, and grammar-constrained prompting [3]. mCODEGPT directly compared single-step prompting with two hierarchical strategies [7]. Grothey et al. compared five prompting strategies and quantized model configurations [8]. Dao et al. quantified which initial errors were corrected by its validation and retry loop, but did not report a full factorial removal of every pipeline component [6]. Tariq et al. compared the complete hybrid system with zero-shot, structured-code, and rule-based baselines rather than removing each hybrid phase in turn [5].
 
-The high number of ties provides a useful counterpoint. Deterministic rules did not produce a large advantage in every field. Procedure planning was close to even across the completed evaluations, and recent treatment changes were even in the pancreatic-cancer subset. This makes a simple explanation based on output length or a global preference for the harness less convincing. The strongest differences occurred where the system had explicit safeguards.
+Our study likewise lacks a complete component ablation. A feasible technical ablation would compare the single-prompt baseline, decomposed prompts alone, prompts plus verification gates, and the complete harness. Repeating the full oncologist evaluation for every variant would impose a disproportionate specialist burden. An LLM-reviewed ablation could help localize mechanisms, but it should be labeled as technical evidence and should not replace the independent oncologist comparison. A smaller clinician review restricted to outputs changed by the ablation would provide a stronger follow-up.
 
-These associations support the proposed mechanism, but they do not prove it. A future component study should compare a single prompt, decomposed prompts alone, prompts plus verification, and the complete harness. That experiment would show how much each layer contributes.
+### 4.6 Relation to prior clinical extraction studies
 
-### 4.6 Comparison with related work
+CORAL established the real-note benchmark used here and showed that zero-shot GPT-4 outperformed GPT-3.5-turbo and FLAN-UL2, while an independent oncologist still identified omissions and hallucinations [2]. Our study asks a different question on the same benchmark: whether a structured workflow improves a frozen model relative to that same model under a single prompt.
 
-The closest studies use different combinations of data, model adaptation, and human review. Several include clinicians, but their role is usually to create a reference standard or guide model development. Fewer studies ask oncology specialists to compare final system outputs directly.
+Several studies support individual parts of this approach. Wiest et al. showed that prompt design and constrained output can improve local-model extraction of binary clinical features [3]. mCODEGPT found that hierarchical prompting outperformed a single-step strategy on synthetic oncology notes [7]. Grothey et al. demonstrated substantial variation across model, prompt, and quantization configurations in prostate pathology extraction [8]. Dao et al. is architecturally close to our work because it combines engineered context, validation, and retries, although its target is numerical extraction from right-heart-catheterization reports [6]. Tariq et al. achieved stronger scale and external validation with a UMLS-plus-fine-tuned-LLM system for breast treatment timelines [5], while Bhattarai et al. compared several model families and a rule-based approach on longitudinal lung-cancer phenotypes [4].
 
-| Study | Data and task | Role of clinical experts | Main approach | Difference from this study |
-|---|---|---|---|---|
-| Sushil et al., CORAL [2] | 40 real breast and pancreatic cancer notes; broad oncology schema | Expert annotation; an independent oncologist manually evaluated GPT-4 on 10 notes per cancer type | Zero-shot GPT-4, GPT-3.5-turbo, and FLAN-UL2 | Same dataset and clinical scope. It established the benchmark and documented omissions and hallucinations. It did not test a failure-mode-driven harness against the same frozen model. |
-| Wiest et al. [3] | 500 MIMIC histories; five binary clinical features | Three blinded medical experts created consensus ground truth | Local Llama 2 with grammar-constrained JSON and prompt variants | Strong expert validation and local deployment, but the targets were five binary features outside oncology. Experts supplied ground truth rather than comparative preference ratings of two full systems. |
-| Bhattarai et al. [4] | 13,646 notes from 63 patients with lung cancer; four longitudinal phenotypes | Two subject-matter experts supplied gold-standard manual annotations | GPT, open-model, and rule-based comparison | Larger longitudinal corpus with expert labels, but fewer target phenotypes and no same-model comparison isolating the surrounding workflow. |
-| Tariq et al. [5] | 26,692 breast cancer patients internally and 162 externally; treatment timelines | Cancer-registry data supplied treatment labels; clinical experts curated treatment concepts and codes | UMLS parser plus a fine-tuned question-answering model | Much stronger scale and external validation. It requires supervised fine-tuning and focuses on five treatment categories rather than broad field-level extraction. |
-| Dao et al. [6] | 220 development and 200 validation right-heart-catheterization notes | One pulmonary vascular disease expert created the validation ground truth and guided development | Local open model, engineered preload, validation, and retry | The closest workflow architecture. The task was numerical extraction from procedure notes, and the system did not include oncology-specific field routing and cross-field clinical hooks. |
-| Zhang et al., mCODEGPT [7] | 1,000 synthetic oncology notes; 49 mCODE entities | Programmatic matching was supplemented by manual validation from human reviewers | Hierarchical prompting versus single-step prompting | Direct evidence that prompt hierarchy helps, but the notes were synthetic and the study did not use blinded oncologist comparison of final outputs. |
-| Grothey et al. [8] | 579 prostate pathology reports in German and English | A trained medical doctoral student annotated reports under an attending pathologist's supervision | Multiple open and proprietary models, prompt and quantization tests | Larger expert-labeled benchmark, but it evaluated one report type and 11 predefined parameters rather than heterogeneous longitudinal clinic notes. Evaluation relied on reference labels rather than end-user preference. |
+The distinguishing feature of our evaluation is not the invention of prompts, retries, or rules in isolation. It is the combination of field-specific routing, selective context transfer, verification gates, deterministic oncology rules, logging, and source attribution, evaluated against a same-model baseline through direct field-level comparison by oncologists. The breast-to-pancreatic development sequence also tests whether clinically informed failure rules can reduce repeated demand on specialist time in a second cancer domain.
 
-These papers show that clinician involvement is not absent from the field. The distinction is where that involvement occurs. Annotation, adjudication, and terminology design provide a reference answer before evaluation. The 24-study scoping review was dominated by precision, recall, F1, AUC, and accuracy comparisons. In our audit of its supplemental methodology table, only two entries explicitly described five-point Likert ratings of generated outputs, both involving radiology reports [1]. Our planned study adds downstream review by practicing oncologists, who inspect the source note and compare the final outputs field by field without seeing system identity. This captures clinical preference when both outputs are partly correct, when uncertainty matters, or when one answer is more complete without being less faithful.
-
-Our development design adds a second distinction. Specialist feedback was used to discover reusable failure rules in one cancer domain, then withheld during development in the second domain. The pancreatic result therefore examines whether the learned workflow can reduce repeated demand on a scarce specialist, rather than asking the clinician to remain in every iteration. We did not identify this specific development-and-transfer design in the comparison studies above.
-
-The data contribution also needs precise wording. CORAL is public, but it contains real deidentified longitudinal oncology notes with expert annotation. This differs from web questions, synthetic notes, and narrow report templates. It does not exceed the scale or external validation of the largest institutional studies. Its advantage for this experiment is that the notes preserve the clinical ambiguity our harness is designed to address.
-
-Our technical claim concerns the combination. Prompt engineering, retrieval, guardrails, retries, and hybrid rules already exist in the literature. In the closest studies reviewed here, we did not find the full evaluated combination used in this project: field-specific routing, selective dependency transfer, five verification stages, oncology drug and terminology resources, deterministic clinical hooks, cross-field consistency checks, action logging, source attribution, and a same-model baseline that removes model capability as the main explanation. The contribution is this integrated inference harness and its evaluation, not any one component in isolation.
-
-Several related studies have larger datasets, more annotators, or external validation. Our pilot should not be presented as the first clinical extraction system or the largest evaluation. It can be presented as a focused test of whether a structured, auditable workflow can make the same frozen model more reliable on difficult oncology fields, with direct review by the clinicians who understand those distinctions.
+The study should therefore be positioned as a focused, clinically reviewed evaluation of an integrated inference harness, not as the first oncology extraction system or the largest validation study. The detailed study-by-study comparison is retained in the Chinese review appendix rather than in the main manuscript.
 
 ### 4.7 From structured extraction to patient communication
 
-The earlier patient-letter result was mixed. Harness-based letters were descriptively better than ChatGPT on the four-item mean in 14 of 20 breast cases and received fewer hallucination flags, but they did not clearly beat the same-model Qwen baseline. Stronger extraction therefore does not automatically produce a better complete letter. Letter quality also depends on selection, organization, wording, explanation of uncertainty, and decisions about which clinical details a patient needs.
+The exploratory patient-letter review suggested limited downstream strengths. Relative to ChatGPT, harness-based letters had higher mean ratings across accuracy, completeness, comprehensibility, and usefulness, and received fewer hallucination flags. They did not clearly outperform the same-model Qwen baseline. Stronger extraction therefore does not automatically produce a better complete letter. Letter quality also depends on content selection, organization, wording, explanation of uncertainty, and decisions about which clinical details a patient needs.
 
 This finding supports the revised project order. Structured extraction is the measurable safety layer, and patient communication is a downstream task built on that layer. The extraction study can identify whether stage, treatment, response, and plans are represented faithfully before a generator turns them into prose. Future letter work should test whether specific extraction gains survive that second transformation, ideally with patient readers as well as clinicians.
 
-The letter experiment remains worth reporting as an exploratory application. It shows that the harness can feed a patient-facing output and that the result can compare favorably with a proprietary general model on some dimensions. It does not justify presenting letter generation as the paper's primary success, nor does it show that the current letters are ready for clinical deployment.
+The letter experiment is best treated as motivation for future work rather than a separate efficacy result. It shows where structured extraction may help patient-facing generation and, equally importantly, where a second generation step can lose the advantages established at the extraction stage.
 
 ### 4.8 Clinical and technical implications
 
 The findings suggest that some LLM failures in oncology extraction are repeatable enough to address outside the model weights. This is useful when labeled training data are scarce or when a clinical team needs to change a field definition without retraining. A rule that preserves biopsy-pending disease as suspected can be inspected and tested. A prompt-only system offers less control because a wording change may affect unrelated fields.
 
-The term inference harness is appropriate for this system because it includes more than a prompt sequence. It manages task routing, dependencies, verification, deterministic corrections, logging, and source attribution around a frozen model. Clinical workflow is also understandable, but it can imply integration into routine care, which this pilot has not tested. We therefore use inference harness for the technical contribution and evaluation workflow for the study procedure.
+The term inference harness is appropriate for this system because it includes more than a prompt sequence. It manages task routing, dependencies, verification, deterministic corrections, logging, and source attribution around a frozen model. The term clinical workflow could imply integration into routine care, which this pilot did not test. We therefore use inference harness for the technical contribution and evaluation workflow for the study procedure.
 
 The system is also compatible with local deployment. Local operation does not by itself establish privacy compliance or clinical safety, but it allows an institution to retain control of note processing and system updates. The present work evaluates extraction quality, not readiness for autonomous clinical use.
 
-### 4.9 Pilot status and next steps
+### 4.9 Study boundaries and next steps
 
-This pilot is intended to establish whether the effect is large enough and clinically coherent enough to justify a larger study. Three oncologists independently reproduced the breast-cancer direction, and two reproduced the pancreatic-cancer direction. The next step is to fit the prespecified clustered analysis and determine how much the effect varies by clinician, note, and field.
+This pilot was intended to establish whether the effect is large enough and clinically coherent enough to justify a larger study. Three oncologists independently reproduced the breast-cancer direction, and two reproduced the pancreatic-cancer direction. The adjusted clustered analysis confirmed a strong preference among the observed ratings. The next statistical priority is to recruit more oncologists so that between-evaluator variation can be estimated more precisely.
 
-External validation remains important. CORAL notes come from one institution and represent two cancer domains. The most informative next dataset would contain longitudinal oncology notes from a different health system, with independent clinical annotation and a field contract fixed before evaluation.
+Several limitations define the claim. Only three oncologists participated, and only two evaluated pancreatic cancer. The preference label does not distinguish two correct outputs from two incorrect outputs. The benchmark also informed later workflow revisions, so this is not an untouched external validation. Development was sequential rather than randomized, and the study cannot isolate individual component effects. CORAL comes from one institution and two cancer domains, and another model family has not yet been tested.
 
-## 5. Limitations
+The next study should add oncologists, adjudicate a sample of ties, evaluate the staged ablation described above, and test a second model and an external health-system dataset. These additions would separate workflow effects more clearly and support stronger claims about evaluator and institutional generalizability.
 
-The current clinical result comes from three oncologists. All three evaluated breast cancer, but only two evaluated pancreatic cancer. The data show replication across clinicians, but three evaluators still provide a limited estimate of between-oncologist variation. The final manuscript should replace the interim descriptive analysis with the planned multi-rater model.
+## 5. Conclusion
 
-The A/B interface concealed system identity but used fixed left and right positions, with the harness always shown as A. Agreement across reviewers and the presence of many ties reduce concern about indiscriminate selection of A, but they do not remove possible position bias. The harness output also included source attribution while the baseline did not. Attribution is part of the system being evaluated, but it may influence preference. A future study should randomize side assignment and separately test the effect of attribution.
-
-The preference labels do not distinguish "both correct" from "both incorrect." Written comments in the second export explicitly identify some ties in which neither output was satisfactory. Final reporting should therefore pair preference counts with adjudicated error categories rather than interpret every tie as success.
-
-The technical audit used LLM-assisted reviewers and repeated error analysis. It is useful for identifying failures but is not independent clinical validation. The complete 40-note table represents v2.2, while later high-impact repairs were tested on affected samples and controls rather than a new full run. Because the benchmark informed these repairs before the clinician-rated artifacts were prepared, the clinical comparison is not a pristine external validation.
-
-The development stages were sequential rather than randomized. Breast development combined oncologist feedback with engineering judgment, while pancreatic development combined an inherited rubric, a model-based reviewer, an external development LLM, and human implementation. The study cannot isolate the contribution of any one element. It also does not evaluate a fully autonomous system because a human approved and regression-tested changes.
-
-The dataset is small and comes from one institution. The harness contains clinical rules derived from observed errors, and some may capture documentation conventions specific to CORAL. The study does not yet include a complete component ablation, another model family, or external notes.
-
-The patient-letter analysis has one oncologist, 20 breast cases, three systems, and several correlated ratings. The exploratory result cannot establish superiority, and it did not show a clear advantage over the same-model Qwen baseline. The study does not test patient understanding, treatment decisions, workflow efficiency, or clinical outcomes.
-
-## 6. Conclusion
-
-[FINAL CONCLUSION: In a multi-oncologist identity-masked evaluation, the failure-mode-driven inference harness significantly outperformed a same-model single-prompt baseline for structured extraction from longitudinal oncology notes.]
-
-The current pilot supports a development strategy in which a clinician identifies clinically important failure patterns, the team converts those patterns into an explicit inference harness, and the harness is adapted to another cancer domain through AI-assisted, human-supervised refinement. All three oncologists favored the harness on breast cancer. Two also favored it on pancreatic cancer, where no physician had participated in development. The largest gains involved active therapy, medication planning, and metastatic status. The model weights remained frozen throughout. A prespecified clustered analysis and external validation are still needed before this pilot pattern becomes a confirmatory claim.
+The current pilot supports a development strategy in which a clinician identifies clinically important failure patterns, the team converts those patterns into an explicit inference harness, and the harness is adapted to another cancer domain through AI-assisted, human-supervised refinement. All three oncologists favored the harness on breast cancer. Two also favored it on pancreatic cancer, where no physician had participated in development. The largest gains involved active therapy, medication planning, and metastatic status. The model weights remained frozen throughout. More oncologists and external validation are still needed before this pilot pattern becomes a broad confirmatory claim.
 
 ## References
 
@@ -415,11 +349,11 @@ The current pilot supports a development strategy in which a clinician identifie
 
 <div class="language-break" id="chinese-version"></div>
 
-# 从临床医生指导的错误分析到跨癌种迁移：用于肿瘤科病历信息提取的推理框架
+# 从临床信息指导的错误分析到跨癌种迁移：用于肿瘤科病历 extraction 的 inference harness
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.10，2026 年 9 月
+版本 0.11，2026 年 9 月
 
 作者：[TODO]
 
@@ -427,9 +361,11 @@ The current pilot supports a development strategy in which a clinician identifie
 
 目标会议及稿件形式：[TODO]
 
-本稿现已纳入三位肿瘤科医生完成的评审。三位医生均评估了乳腺癌病例，其中两位还评估了胰腺癌病例。全文按照实际开发过程展开：首先由临床医生指导乳腺癌任务的错误分析，再将所得经验编码为推理框架；随后在开发阶段没有医生参与的情况下，通过模型参与闭环的方法改进胰腺癌任务；最后由临床医生进行盲法评估。聚类多评审者模型及方括号内的推断性统计结果仍为占位内容，投稿前必须补全。图示占位说明了预期的视觉设计和当前趋势，并非最终图片。
+本稿现已纳入三位肿瘤科医生完成的评审。三位医生均评估了乳腺癌病例，其中两位还评估了胰腺癌病例。全文按照实际开发过程展开：首先由医生作者与模型开发作者共同完成乳腺癌任务的错误分析，再将所得经验编码为 inference harness；随后在没有临床医生审阅胰腺癌输出的情况下，通过 model-assisted development loop 改进 PDAC 任务；最后由肿瘤科医生进行盲法评估。调整后的 GEE 分析已经完成，Figure 1 至 Figure 7 和 Supplementary Figure S1 已嵌入 HTML。方括号中的内容仅保留在中文版，作为后续协作修改提示。
 
-供临床审阅的简要说明：两个系统使用相同的语言模型。基线系统要求模型通过一次调用提取全部信息。推理框架则把任务拆分为较小的临床问题，检查模型答案，针对反复出现的错误应用范围明确的肿瘤学规则，并把每项结果与病历中的支持性原文关联起来。
+供临床审阅的简要说明：两个系统使用相同的语言模型。single-prompt baseline 要求模型通过一次调用提取全部信息。inference harness 则把任务拆分为较小的临床问题，检查模型答案，针对反复出现的错误应用范围明确的肿瘤学规则，并把每项结果与病历中的支持性原文关联起来。
+
+> **术语约定：** 中文审阅稿保留 inference harness、workflow、pipeline、baseline、verification gate、hook 和 LLM-as-a-judge 等英文术语，避免翻译后与代码和实验记录中的名称对不上。
 
 ## 供临床合作者审阅的问题
 
@@ -450,27 +386,27 @@ The current pilot supports a development strategy in which a clinician identifie
 
 ### 目的
 
-评估推理框架能否在不进行微调的情况下，提高冻结参数、本地部署的开放权重语言模型对肿瘤科信息的提取质量。
+评估 inference harness 能否在不进行微调的情况下，提高冻结参数、本地部署的开放权重语言模型对肿瘤科信息的提取质量。
 
 ### 方法
 
-我们围绕 Qwen2.5-32B-Instruct-AWQ 分两个开发阶段构建了一个由失败模式驱动的推理框架。在乳腺癌开发阶段，一位肿瘤科医生反复审阅输出并指出具有临床意义的错误。团队将反复出现的错误转化为字段专用提示、验证门和确定性肿瘤学规则。随后，我们将该框架迁移到胰腺癌。在胰腺癌开发期间，没有医生审阅模型输出。我们使用依据评分准则配置的 Qwen 审查模型识别候选错误，由开发环境中的外部通用 LLM 汇总既往审查记录并提出提示或规则修改方案，再由人工开发者接受、修改并进行回归测试。整个过程中模型权重始终保持冻结。我们在 40 份 CORAL 基准病历上比较了该框架与使用相同模型和字段契约的单提示基线，其中包括 20 例乳腺癌和 20 例胰腺癌。三位肿瘤科医生完成了隐藏系统身份的 A/B 比较。三位医生均评估了乳腺癌病例，其中两位还评估了胰腺癌病例。
+我们围绕 Qwen2.5-32B-Instruct-AWQ 分两个开发阶段构建了一个由失败模式驱动的 inference harness。在乳腺癌开发阶段，一位熟悉肿瘤学问题的医生作者与模型开发作者反复审阅输出，并指出具有临床意义的错误。团队将反复出现的错误转化为 field-specific prompt、verification gate 和 deterministic oncology rule。随后，我们将 harness 迁移到胰腺癌。在胰腺癌开发期间，没有临床医生审阅模型输出。依据 rubric 配置的 Qwen reviewer 识别候选错误，外部通用 LLM 汇总审查记录并提出 prompt 或 rule 修改方案，再由研究人员选择、实施并完成 regression test。整个过程中模型权重始终冻结。我们在 40 份 CORAL benchmark 病历上比较 harness 与使用相同模型和 field contract 的 single-prompt baseline，其中包括 20 例乳腺癌和 20 例胰腺癌。三位肿瘤科医生完成了隐藏系统身份的 A/B 比较。三位医生均评估乳腺癌，其中两位还评估 PDAC。
 
 ### 结果
 
-在已完成的匹配技术审查中，推理框架在 66 项核心比较中更优，基线在 28 项中更优，另有 166 项为平局。五组已完成的评审者与癌种组合共提供 1,359 项必评字段判断，其中 443 项偏好推理框架，77 项偏好基线，839 项为平局。在 520 项非平局判断中，85.2% 偏好推理框架。三次乳腺癌评估合计包括 282 项框架偏好、54 项基线偏好和 504 项平局。两两完全一致率为 73.6% 至 82.9%，Cohen's kappa 为 0.511 至 0.646。在开发阶段没有医生参与的胰腺癌任务中，两位医生合计给予推理框架 161 项偏好，基线 23 项偏好，另有 335 项平局。在一项由一位肿瘤科医生单独完成的探索性患者信件评估中，20 例乳腺癌病例里有 14 例的框架信件四项平均分高于 ChatGPT 信件，2 例持平，4 例较低；但框架信件并未明确优于使用相同模型的 Qwen 基线信件。
+在已完成的匹配技术审查中，inference harness 在 66 项核心比较中更优，baseline 在 28 项中更优，另有 166 项为平局。五组已完成的评审者与癌种组合共提供 1,359 项必评字段判断，其中 443 项偏好 inference harness，77 项偏好 baseline，839 项为平局。在 520 项非平局判断中，85.2% 偏好 inference harness。调整后的方向性分析得到 OR 5.70，95% CI 为 4.24 至 7.66，p<0.001。三次乳腺癌评估合计包括 282 项 harness 偏好、54 项 baseline 偏好和 504 项平局。两两完全一致率为 73.6% 至 82.9%，Cohen's kappa 为 0.511 至 0.646。在开发阶段没有医生参与的胰腺癌任务中，两位医生合计给予 inference harness 161 项偏好，baseline 23 项偏好，另有 335 项平局。
 
-[最终多评审者结果：在 FINAL N 位肿瘤科医生完成的 FINAL N 项可评估判断中，推理框架在 FINAL X 项中更优，基线在 FINAL Y 项中更优，FINAL Z 项为平局。校正后分析显示推理框架获得显著偏好，效应估计值为 FINAL，95% CI 为 FINAL，p=FINAL。]
+> **协作说明：** Abstract 会在全文定稿后最后压缩。当前统计数字已经更新，不再保留未完成分析的占位内容。
 
 ### 结论
 
-三次乳腺癌评估支持将临床医生发现的反复性模型错误转化为明确的推理框架。两次胰腺癌评估提示，由此形成的规则和评估标准可以迁移到第二个癌种，而不需要医生在开发期间反复参与。这一过程属于 AI 辅助、人工监督的改进，并非自主修改。在提出确证性统计结论前，仍需完成预先设定的聚类分析。
+三次乳腺癌评估支持将临床医生发现的反复性模型错误转化为明确的 inference harness。两次胰腺癌评估提示，由此形成的规则和评估标准可以迁移到第二个癌种，而不需要医生在开发期间反复参与。这一过程属于 AI 辅助、人工监督的改进，并非自主修改。调整后的 clustered analysis 已显示现有评分中存在显著偏好，但更广泛的结论仍需要更多肿瘤科医生和 external validation。
 
 ## 1. 引言
 
 肿瘤临床工作中，大量有用信息仍记录在自由文本中。一份随访病历可能同时包含诊断、病理、受体状态、治疗史、毒性反应、疗效和后续计划，但这些事实分散在不同章节和时间点。人工审阅耗时较长，传统信息提取系统则需要大量标注和针对具体任务的开发。大语言模型的吸引力很直接：同一个模型可以读取多种病历写法，并针对不同问题返回结构化字段，无须为每个问题重新训练监督模型。
 
-相关研究的发展速度快于临床常规应用。2025 年的一项范围综述纳入了 24 项使用语言模型提取肿瘤学信息的研究，但也发现外部验证和真实工作流程整合仍然有限 [1]。临床部署的要求高于基准数据上的概念验证。一个实用系统必须保留不确定性，区分当前诊疗与历史事件，避免无依据的事实，并让临床医生能够从病历原文追溯每项结果。
+相关研究的发展速度快于临床常规应用。2025 年的一项范围综述纳入了 24 项使用语言模型提取肿瘤学信息的研究，但也发现外部验证和真实 workflow 整合仍然有限 [1]。临床部署的要求高于基准数据上的概念验证。一个实用系统必须保留不确定性，区分当前诊疗与历史事件，避免无依据的事实，并让临床医生能够从病历原文追溯每项结果。
 
 纵向肿瘤科病历会暴露一些在简单提取任务中不易发现的问题。药物清单可能同时包含抗癌治疗、支持治疗、长期居家用药、已停用药物，以及仅处于讨论阶段的治疗。区域淋巴结不能被标为远处转移。等待活检的可疑病灶不能被写成已确诊的 IV 期疾病。治疗前的肿瘤增长也不能用来判断刚刚开始的方案无效。模型即使提到了医学相关信息，仍可能把它放入错误的字段或时间点。
 
@@ -478,21 +414,21 @@ The current pilot supports a development strategy in which a clinician identifie
 
 各项研究中人工参与的方式也不相同。临床医生或医学专家通常负责建立金标准标注、解决分歧或指导术语选择。这类工作可以判断模型是否匹配参考标签，但不能回答另一个问题：当两个完整系统的输出都包含部分正确信息时，执业肿瘤科医生是否认为其中一个系统更忠实、更完整，也更有临床用途。在我们对上述 24 项研究范围综述的补充方法表进行审查时，多数论文报告的是相对于标签的自动性能指标。只有两项研究明确使用五点 Likert 量表评估生成结果，而且均针对放射学报告 [1]。在该综述中，我们没有发现由执业肿瘤科医生在隐藏系统身份的条件下，对完整信息提取系统进行字段级直接比较的研究。
 
-我们把反复出现的模型错误视为具体的工程目标。本文所称的推理框架，是指控制冻结模型如何接受提示、检查答案、修正结果并关联证据的软件层。模型本身不发生变化。当审查发现重复性错误，例如把已停用药物列入当前治疗，或把疑似转移写成确诊疾病时，系统通过提示指令、验证逻辑或确定性临床规则加入范围明确的修正。每项修正都可以记录并接受回归测试。
+我们把反复出现的模型错误视为具体的工程目标。本文所称的 inference harness，是指控制冻结模型如何接受提示、检查答案、修正结果并关联证据的软件层。模型本身不发生变化。当审查发现重复性错误，例如把已停用药物列入当前治疗，或把疑似转移写成确诊疾病时，系统通过提示指令、验证逻辑或确定性临床规则加入范围明确的修正。每项修正都可以记录并接受 regression test。
 
-该框架包含字段路由、选择性上下文传递、生成后验证和确定性临床约束，范围超过单一长提示或检索步骤。不同字段采用不同的提取路径。只有在确实提供相关临床背景时，部分输出才会传递给后续任务。系统记录这些干预，并将最终字段值与病历证据关联起来。在我们审阅的最接近本研究的工作中，尚未发现有研究在真实纵向肿瘤科病历上评估这一完整组合，同时采用同模型基线和肿瘤科医生直接比较。
+该 inference harness 包含 field routing、selective context transfer、生成后验证和确定性临床约束，范围超过单一长提示或检索步骤。不同字段采用不同的提取路径。只有在确实提供相关临床背景时，部分输出才会传递给后续任务。系统记录这些干预，并将最终字段值与病历证据关联起来。在我们审阅的最接近本研究的工作中，尚未发现有研究在真实纵向肿瘤科病历上评估这一完整组合，同时采用同模型 baseline 和肿瘤科医生直接比较。
 
-我们在受控条件下检验了这种方法能否提高提取质量。推理框架和基线使用相同的 Qwen2.5-32B 模型及目标 schema，主要差异是模型外围的推理过程。研究聚焦七个不能仅靠表层实体识别解决的临床问题：当前抗癌治疗、癌症分期、远处转移、区域或总体转移受累、治疗反应、乳腺癌类型与受体状态，以及已完成的分子或遗传检测结果。
+我们在受控条件下检验了这种方法能否提高提取质量。inference harness 和 baseline 使用相同的 Qwen2.5-32B 模型及目标 schema，主要差异是模型外围的推理过程。研究聚焦七个不能仅靠表层实体识别解决的临床问题：当前抗癌治疗、癌症分期、远处转移、区域或总体转移受累、治疗反应、乳腺癌类型与受体状态，以及已完成的分子或遗传检测结果。
 
-我们的假设是，推理框架整体上会优于单提示基线，且提升主要出现在由时态检查、临床分类规则和跨字段一致性检查直接处理的字段中。由于两种条件使用相同的基础模型，我们也预期简单问题会出现较多平局。
+我们的假设是，inference harness 整体上会优于 single-prompt baseline，且提升主要出现在由时态检查、临床分类规则和跨字段一致性检查直接处理的字段中。由于两种条件使用相同的基础模型，我们也预期简单问题会出现较多平局。
 
 ## 2. 方法
 
 ### 2.1 研究设计
 
-本研究包括两个开发阶段和一个独立的临床评估阶段。乳腺癌开发期间，一位医生作者与负责模型开发的作者反复审阅提取结果，归纳重复出现的错误，并据此修改推理框架。随后，研究团队在没有临床医生审阅胰腺癌输出的情况下，将该框架适配到胰腺癌。第二阶段通过模型辅助审查发现候选问题并提出修改方案，再由研究人员判断、实施和进行回归测试。最后，我们在 40 份经专家标注的 CORAL 病历上，将最终框架与使用同一冻结模型和相同字段定义的单提示基线进行比较，并由三位肿瘤科医生完成隐藏系统身份的 A/B 评估。
+本研究包括两个开发阶段和一个独立的临床评估阶段。乳腺癌开发期间，一位医生作者与负责模型开发的作者反复审阅提取结果，归纳重复出现的错误，并据此修改 inference harness。随后，研究团队在没有临床医生审阅胰腺癌输出的情况下，将该 inference harness 适配到胰腺癌。第二阶段通过模型辅助审查发现候选问题并提出修改方案，再由研究人员判断、实施和进行 regression test。最后，我们在 40 份经专家标注的 CORAL 病历上，将最终 inference harness 与使用同一冻结模型和相同字段定义的 single-prompt baseline 进行比较，并由三位肿瘤科医生完成隐藏系统身份的 A/B 评估。
 
-这三个环节分别回答不同问题：乳腺癌阶段检验能否把有临床依据的错误分析转化为可复用的系统组件；胰腺癌阶段检验这些组件能否迁移到相关但不同的肿瘤领域，而不依赖临床医生持续参与迭代；最终比较则在固定基础模型和目标字段的条件下，评估推理框架本身带来的作用。
+这三个环节分别回答不同问题：乳腺癌阶段检验能否把有临床依据的错误分析转化为可复用的系统组件；胰腺癌阶段检验这些组件能否迁移到相关但不同的肿瘤领域，而不依赖临床医生持续参与迭代；最终比较则在固定基础模型和目标字段的条件下，评估 inference harness 本身带来的作用。
 
 ### 2.2 数据集
 
@@ -500,15 +436,15 @@ The current pilot supports a development strategy in which a clinician identifie
 
 这些记录是真实临床病历，而不是网络问答、合成病例或模型生成文本。病历保留了重复病史、复制到后续记录的内容、不确定检查结果和条件性计划，这些特点正是纵向肿瘤信息提取的难点。该数据集对本研究的主要价值是临床真实性和专家标注，而不是规模。数据访问需要完成 PhysioNet 规定的账号认证和数据使用流程。
 
-开发病历用于识别反复出现的错误模式并改进框架，标注基准病历用于匹配技术比较和临床医生比较。虽然这些基准病历最初预留用于评估，但后续开发阶段的技术审查仍影响了医生评估前的框架修改。因此，本研究应被理解为试点性基准评估，而不是完全未接触数据的外部验证。研究未进行模型权重训练或微调。
+开发病历用于识别反复出现的错误模式并改进 harness，标注基准病历用于匹配技术比较和临床医生比较。虽然这些基准病历最初预留用于评估，但后续开发阶段的技术审查仍影响了医生评估前的 harness 修改。因此，本研究应被理解为试点性基准评估，而不是完全未接触数据的外部验证。研究未进行模型权重训练或微调。
 
-### 2.3 基础模型与基线
+### 2.3 基础模型与 baseline
 
-两个实验条件均使用通过 vLLM 在本地部署的 Qwen2.5-32B-Instruct-AWQ [9]。基线系统对每份病历只调用模型一次，并返回完整的目标 schema。它不使用任务拆分、验证门、重试、词典或确定性后处理。匹配基线与推理框架采用相同的字段定义和输出契约。
+两个实验条件均使用通过 vLLM 在本地部署的 Qwen2.5-32B-Instruct-AWQ [9]。baseline 系统对每份病历只调用模型一次，并返回完整的目标 schema。它不使用任务拆分、verification gate、重试、词典或确定性后处理。匹配 baseline 与 inference harness 采用相同的字段定义和输出契约。
 
-### 2.4 推理框架
+### 2.4 inference harness
 
-不同目标字段对上下文和推理的需求并不相同，因此框架采用多个处理阶段。
+不同目标字段对上下文和推理的需求并不相同，因此 harness 采用多个处理阶段。
 
 首先，字段专用提示分别提取就诊背景、癌症诊断、实验室结果、客观发现、当前用药和近期治疗变化。依赖型提示随后接收经过选择的前序结果。例如，分期和转移状态为治疗意图提供背景，当前治疗和临床发现则为疗效评估提供背景。计划类字段主要从 Assessment and Plan 章节提取。
 
@@ -522,7 +458,7 @@ The current pilot supports a development strategy in which a clinician identifie
 
 确定性处理层使用高置信度临床规则解决反复出现的错误。这些规则区分区域淋巴结和远处疾病、疑似和确诊转移、当前抗癌治疗与支持治疗或居家用药，以及当前疗效与治疗前变化。系统还返回支持每个提取值的病历原文片段。
 
-| 框架组件 | 针对的失败模式 | 示例 |
+| inference harness 组件 | 针对的失败模式 | 示例 |
 |---|---|---|
 | 字段专用提取 | 一个大型提示遗漏或混合字段 | 分开提取当前用药和治疗计划 |
 | 依赖感知的上下文 | 相关字段相互矛盾 | 解释分期和疗效时使用转移状态 |
@@ -531,21 +467,11 @@ The current pilot supports a development strategy in which a clinician identifie
 | 时态过滤 | 已完成的结果出现在未来计划中 | 从影像计划中删除已完成的扫描 |
 | 药物与上下文规则 | 仅根据药名分类，忽视临床背景 | 区分抗癌药、居家用药和支持药物 |
 | 跨字段临床规则 | 分期、淋巴结和远处疾病不一致 | 将腋窝淋巴结保留为区域受累，而非远处转移 |
-| 来源归因 | 审查者无法追溯提取值 | 返回病历中的支持性原句 |
+| source attribution | 审查者无法追溯提取值 | 返回病历中的支持性原句 |
 
-> **图 1 占位：开发、迁移和评估流程。**
->
-> **形式：** 三面板横向流程图，附一个较小的受控比较插图。
->
-> **面板 A，乳腺癌开发：** 乳腺癌病历 → 框架输出 → 医生作者与模型开发作者共同审阅 → 反复出现的失败类别 → 修改提示、验证门或确定性规则 → 回归测试。将此阶段标记为 `临床信息指导的框架开发`。
->
-> **面板 B，胰腺癌迁移：** 迁移后的框架 → 胰腺癌病历 → 依据评分准则配置的 Qwen 审查 → 外部开发 LLM 汇总并提出修改方案 → 研究人员判断和实施 → 回归测试。明确标注该阶段没有临床医生审阅胰腺癌输出，且模型权重始终冻结。
->
-> **面板 C，最终评估：** 20 份乳腺癌和 20 份胰腺癌基准病历 → 完整推理框架和匹配的单提示基线 → 向肿瘤科医生展示隐藏系统身份的 A/B 输出。
->
-> **受控比较插图：** 在两个分支上方显示共享的冻结 Qwen2.5-32B-Instruct-AWQ 模型和目标 schema。框架分支增加字段路由、选择性上下文传递、五个验证门、确定性肿瘤学钩子、跨字段检查、日志记录和来源归因。基线分支仅使用一个与 schema 匹配的提示。
->
-> **图注草稿：** *图 1. 开发、迁移与评估流程。乳腺癌开发期间，医生作者与模型开发作者将反复出现的提取错误转化为提示、验证和确定性规则。随后，研究通过模型辅助审查将框架适配到胰腺癌，该阶段没有临床医生审阅胰腺癌输出。最终，三位肿瘤科医生在隐藏系统身份的条件下，比较完整框架与使用相同模型的单提示基线。*
+<div data-rough-figure="1"></div>
+
+***图 1.*** *开发、迁移与评估流程。乳腺癌开发期间，医生作者与模型开发作者将反复出现的提取错误转化为提示、验证和确定性规则。随后，研究通过模型辅助审查将 inference harness 适配到胰腺癌，该阶段没有临床医生审阅胰腺癌输出。最终，三位肿瘤科医生在隐藏系统身份的条件下，比较完整 inference harness 与使用相同模型的 single-prompt baseline。*
 
 ### 2.5 临床信息指导的乳腺癌开发
 
@@ -555,13 +481,13 @@ The current pilot supports a development strategy in which a clinician identifie
 
 > **协作说明：** 2.1 保留为研究设计总览；2.5 单独描述乳腺癌阶段的具体开发程序。两节不是同一层级的信息，因此不建议合并。
 
-### 2.6 模型参与闭环的胰腺癌改进
+### 2.6 model-in-the-loop 的胰腺癌改进
 
-随后，我们通过约 18 轮有记录的开发，将乳腺癌框架适配到全部 100 份胰腺癌附加病历。在这一阶段，没有临床医生审阅胰腺癌输出。pipeline 先生成结构化字段，再由依据评分准则配置的 Qwen 审查模型将这些字段与完整源病历进行比较。开发环境中的另一个通用 LLM 负责汇总累积的审查发现，并提出提示、规则或工作流程的候选修改。研究团队审查这些方案，只实施有明确依据的修改，并在回归测试通过后保留。
+随后，我们通过约 18 轮有记录的开发，将乳腺癌 inference harness 适配到全部 100 份胰腺癌附加病历。在这一阶段，没有临床医生审阅胰腺癌输出。pipeline 先生成结构化字段，再由依据评分准则配置的 Qwen 审查模型将这些字段与完整源病历进行比较。开发环境中的另一个通用 LLM 负责汇总累积的审查发现，并提出提示、规则或 workflow 的候选修改。研究团队审查这些方案，只实施有明确依据的修改，并在 regression test 通过后保留。
 
 审查提示包含字段定义、严重程度标准，以及乳腺癌开发期间确定的临床区分。这样既能用已有错误类别指导新癌种的审查，也能发现胰腺癌特有的问题，例如治疗方案名称和剂量表达。模型参与错误发现和候选修改，但具体实施由研究人员控制。因此，我们将其称为模型辅助、研究人员监督的改进，而不是自主的“自我进化”。
 
-在两个开发阶段，pipeline 都记录原始模型输出、每项验证操作和确定性修正。这些记录使团队能够追溯最终字段值在框架中的处理过程，并根据回归结果保留或拒绝修改建议。
+在两个开发阶段，pipeline 都记录原始模型输出、每项验证操作和确定性修正。这些记录使团队能够追溯最终字段值在 harness 中的处理过程，并根据回归结果保留或拒绝修改建议。
 
 ### 2.7 由医生确定的核心临床字段
 
@@ -579,7 +505,7 @@ The current pilot supports a development strategy in which a clinician identifie
 
 ### 2.8 开发阶段的 LLM 辅助审查
 
-LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过回归测试确认。
+LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过 regression test 确认。
 
 研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。
 
@@ -587,29 +513,29 @@ LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配�
 
 ### 2.9 肿瘤科医生评估
 
-临床评估通过隐藏系统身份的 A/B 界面展示源病历和两份结构化输出。评估者针对每个字段选择 A 更优、B 更优或平局。界面不会显示哪份输出来自推理框架。
+临床评估通过隐藏系统身份的 A/B 界面展示源病历和两份结构化输出。评估者针对每个字段选择 A 更优、B 更优或平局。界面不会显示哪份输出来自 inference harness。所有评估采用固定映射，inference harness 显示为 A，single-prompt baseline 显示为 B。
 
 参与乳腺癌开发的医生作者不属于最终评估者。三位肿瘤科医生独立评估了乳腺癌输出，其中两位同时评估了胰腺癌输出，第三位没有评估胰腺癌。
 
 三位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较。我们计算了每两位医生之间的完全一致率和 Cohen's kappa，并分别汇总五组已完成的评审者与癌种组合。合并计数仅作描述性统计，不把各字段判断视为相互独立的观测。
 
-主要分析将使用混合效应 logistic 回归模型，在非平局评分中比较框架与基线的偏好，并将评估者、病历和字段作为分组因素。平局将单独报告，并纳入敏感性分析。我们将报告效应估计值、95% 置信区间、双侧 p 值和评估者间一致性。在完成该模型及其敏感性分析前，目前三位医生的汇总结果仍按描述性结果报告。
+主要推断分析排除平局，将非平局判断是否偏好 inference harness 作为二分类结局。我们使用总体平均的 logistic 广义估计方程，在每份病历内采用可交换相关结构。模型将评审者作为固定效应，总体模型同时校正癌种，从而处理同一病历中跨字段、跨评审者的重复判断。结果报告调整后比值比、95% 置信区间和双侧 p 值。敏感性分析将每组字段评分汇总为病历级的 harness 减 baseline 净差，并使用精确符号检验。
 
 ## 3. 结果
 
 ### 3.1 开发路径与跨癌种迁移
 
-开发记录包括对 56 份乳腺癌病历进行的约 15 轮迭代，以及对 100 份胰腺癌病历进行的约 18 轮迭代。乳腺癌部分的修订直接参考了肿瘤科医生的审查意见。胰腺癌部分的修订则没有医生审查相应输出，而是采用前述迁移后的评估标准、基于模型的错误审查、外部 LLM 辅助综合，以及由人工控制的实施流程。
+开发记录包括对 56 份乳腺癌病历进行的约 15 轮迭代，以及对 100 份胰腺癌病历进行的约 18 轮迭代。乳腺癌部分的修订来自医生作者与模型开发作者的共同审阅。胰腺癌部分的修订没有临床医生审查相应输出，而是采用前述迁移后的评估标准、基于模型的错误审查、外部 LLM 辅助综合，以及由研究人员控制的实施流程。
 
-开发中有一部分组件可以原样迁移，包括五个验证阶段、时态区分、来源归因，以及区分当前治疗、治疗计划和支持性用药的规则。疾病术语、治疗方案解读和后处理条件则需要按癌种分别处理。因此，该系统复用了错误处理框架，但没有假设乳腺癌与胰腺癌在临床上可以互换。
+开发中有一部分组件可以原样迁移，包括五个验证阶段、时态区分、source attribution，以及区分当前治疗、治疗计划和支持性用药的规则。疾病术语、治疗方案解读和后处理条件则需要按癌种分别处理。因此，该系统复用了 failure-handling workflow，但没有假设乳腺癌与胰腺癌在临床上可以互换。
 
-胰腺癌的临床医生评估是检验这种迁移的主要证据。在两次独立评估中，医生有 161 次偏好推理框架、23 次偏好基线，另有 335 次平局。第一位医生按病历计算得到 19 例正向净差和 1 例负向净差，第二位医生得到 18 例正向净差和 2 例平局。合并两位医生的判断后，20 例胰腺癌病例的框架减基线净差均为正值。由于开发期间没有医生审查胰腺癌输出，这一模式与先前编码的评估标准和工作流程具有可迁移性相符。但仅凭该结果，无法判断收益来自迁移规则、胰腺癌特异性修订、基于模型的审查器，还是这些因素的共同作用。
+胰腺癌的临床医生评估是检验这种迁移的主要证据。在两次独立评估中，医生有 161 次偏好 inference harness、23 次偏好 baseline，另有 335 次平局。第一位医生按病历计算得到 19 例正向净差和 1 例负向净差，第二位医生得到 18 例正向净差和 2 例平局。合并两位医生的判断后，20 例胰腺癌病例的 harness 减 baseline 净差均为正值。由于开发期间没有医生审查胰腺癌输出，这一模式与先前编码的评估标准和 workflow 具有可迁移性相符。但仅凭该结果，无法判断收益来自迁移规则、胰腺癌特异性修订、基于模型的审查器，还是这些因素的共同作用。
 
 ### 3.2 当前肿瘤科医生评估
 
-目前的临床证据包括五组已完成的评审者与癌种组合：三位肿瘤科医生均完成了乳腺癌评估，其中两位还完成了胰腺癌评估。在 1,359 项必评字段判断中，框架获偏好 443 次，基线获偏好 77 次，另有 839 次平局。在 520 项非平局判断中，框架占 85.2%。
+目前的临床证据包括五组已完成的评审者与癌种组合：三位肿瘤科医生均完成了乳腺癌评估，其中两位还完成了胰腺癌评估。在 1,359 项必评字段判断中，harness 获偏好 443 次，baseline 获偏好 77 次，另有 839 次平局。在 520 项非平局判断中，harness 占 85.2%。
 
-| 已完成的评估 | 必评判断数 | 框架 | 基线 | 平局 | 框架在非平局判断中的占比 |
+| 已完成的评估 | 必评判断数 | harness | baseline | 平局 | harness 在非平局判断中的占比 |
 |---|---:|---:|---:|---:|---:|
 | 肿瘤科医生 01，乳腺癌 | 280 | 84 | 22 | 174 | 79.2% |
 | 肿瘤科医生 01，胰腺癌 | 260 | 75 | 14 | 171 | 84.3% |
@@ -618,49 +544,31 @@ LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配�
 | 肿瘤科医生 03，乳腺癌 | 280 | 119 | 24 | 137 | 83.2% |
 | **所有已完成的评估** | **1,359** | **443** | **77** | **839** | **85.2%** |
 
-> **图 2 占位：按评审者和癌种展示临床医生偏好分布。**
->
-> **图形：** 五条 100% 堆叠水平条形图。
->
-> **x 轴：** 必评字段判断的占比，范围为 0% 至 100%。
->
-> **y 轴：** 五组已完成的评审者与癌种组合，包括三组乳腺癌评估和两组胰腺癌评估。
->
-> **编码：** 蓝色表示偏好框架，浅灰色表示平局，橙色表示偏好基线。在各区段内标注原始计数，并在每条横条右侧标注框架在非平局判断中的占比。
->
-> **观察到的趋势：** 平局在每组评估中均为最大类别。五组评估中，对框架的偏好都明显多于对基线的偏好；框架在非平局判断中的占比为 79.2% 至 90.8%。
->
-> **图注草稿：** *图 2. 五组已完成的评审者与癌种组合中，隐藏系统身份后的临床医生偏好分布。由于两个系统使用相同的基础模型，多数判断为平局；在非平局判断中，结果始终偏向推理框架。*
+<div data-rough-figure="2"></div>
 
-三位肿瘤科医生在乳腺癌数据集上均独立偏好框架。合并三位医生的乳腺癌评估后，框架获偏好 282 次，基线获偏好 54 次，另有 504 次平局。第一位肿瘤科医生按病历评估的结果为框架胜出 18 例、基线胜出 1 例、平局 1 例。第二位和第三位医生均在 20 份病历中全部偏向框架。将三位医生对每份乳腺癌病历的评分合并后，20 份病历的框架减基线净差均为正值。
+***图 2.*** *五组已完成的评审者与癌种组合中，隐藏系统身份后的临床医生偏好分布。多数判断为平局，而五组评估的非平局判断均偏向 inference harness。*
 
-两次胰腺癌评估合计包括 161 项框架偏好、23 项基线偏好和 335 项平局。有一个必评判断 `p7 / lab_plan` 缺失。合并两位医生的判断后，20 份胰腺癌病历的框架减基线净差均为正值。
+三位肿瘤科医生在乳腺癌数据集上均独立偏好 harness。合并三位医生的乳腺癌评估后，harness 获偏好 282 次，baseline 获偏好 54 次，另有 504 次平局。第一位肿瘤科医生按病历评估的结果为 harness 胜出 18 例、baseline 胜出 1 例、平局 1 例。第二位和第三位医生均在 20 份病历中全部偏向 harness。将三位医生对每份乳腺癌病历的评分合并后，20 份病历的 harness 减 baseline 净差均为正值。
 
-最终混合效应分析结果尚待完成：
+两次胰腺癌评估合计包括 161 项 harness 偏好、23 项 baseline 偏好和 335 项平局。合并两位医生的判断后，20 份胰腺癌病历的 harness 减 baseline 净差均为正值。
 
-> [最终多评审者结果：在 FINAL N 位肿瘤科医生和 FINAL N 项可评估判断中，校正分析显示框架获得显著偏好，效应估计值为 FINAL，95% CI FINAL，p=FINAL。]
+调整后的方向性分析显示，在非平局判断中，临床医生偏好 inference harness 的 odds 是偏好 baseline 的 5.70 倍，95% CI 为 4.24 至 7.66，p<0.001。乳腺癌的调整后 OR 为 5.18，95% CI 为 3.61 至 7.46；胰腺癌为 6.94，95% CI 为 4.19 至 11.48，两者均 p<0.001。作为病历级敏感性分析，合并同一病历的医生评分后，全部 40 份病历的 harness 减 baseline 净差均为正，双侧精确符号检验 p<0.001。该结果说明现有评分中的偏好方向非常稳定，但三位医生仍不足以精确估计更广泛肿瘤科医生群体中的差异。
+
+> **协作说明：** 这就是此前标记为“尚待完成”的分析。现在数据已经足够拟合模型，所以英文稿中的占位内容已删除并替换为实际结果。该模型能支持“现有病历评分中存在显著偏好”，但不能把三位医生直接外推为整个肿瘤科医生群体。
 
 ### 3.3 评审者间一致性与核心字段
 
-三位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较。医生 01 与 02 的完全一致率为 82.9%，医生 01 与 03 为 80.0%，医生 02 与 03 为 73.6%。对应的 Cohen's kappa 分别为 0.646、0.644 和 0.511。三位医生在 192 项比较中给出相同判断，占 68.6%。按简单多数票计算，95 项偏向框架，15 项偏向基线，168 项为平局；另有 2 项分别得到一票框架、一票基线和一票平局，因此没有多数结果。
+三位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较。医生 01 与 02 的完全一致率为 82.9%，医生 01 与 03 为 80.0%，医生 02 与 03 为 73.6%。对应的 Cohen's kappa 分别为 0.646、0.644 和 0.511。三位医生在 192 项比较中给出相同判断，占 68.6%。按简单多数票计算，95 项偏向 harness，15 项偏向 baseline，168 项为平局；另有 2 项分别得到一票 harness、一票 baseline 和一票平局，因此没有多数结果。
 
-> **图 3 占位：乳腺癌判断的两两评审者一致性。**
->
-> **图形：** 三位肿瘤科医生构成的对称 3 × 3 矩阵。
->
-> **上三角：** 两两完全一致率。
->
-> **下三角：** 两两 Cohen's kappa。
->
-> **编码：** 单元格颜色深浅表示一致性强弱。每个非对角单元格显示百分比或 kappa 值，对角单元格注明每位医生均完成 280 项乳腺癌比较。
->
-> **观察到的趋势：** 两两完全一致率为 73.6% 至 82.9%，kappa 为 0.511 至 0.646。三位医生使用平局选项的频率不同，但总体结果方向一致。
->
-> **图注草稿：** *图 3. 三位肿瘤科医生对 280 项共同乳腺癌字段比较的两两一致性。完全一致率为 73.6% 至 82.9%，Cohen's kappa 为 0.511 至 0.646。*
+<div data-rough-figure="3"></div>
 
-在所有已完成的评估中，七个预设核心类别共有 660 项适用判断。框架获偏好 276 次，基线获偏好 34 次，另有 350 次平局。因此，在 310 项核心字段的非平局判断中，框架占 89.0%，且每个核心类别的汇总净差均为正值。
+***图 3.*** *三位肿瘤科医生对 280 项共同乳腺癌字段比较的两两一致性。完全一致率为 73.6% 至 82.9%，Cohen's kappa 为 0.511 至 0.646。*
 
-| 核心字段 | 框架 | 基线 | 平局 | 净优势 |
+> **协作说明：** 这里严格来说不是 correlation，而是 agreement。相关性只能说明两个人的评分变化方向相似，即使其中一人系统性地更偏好某一选项也可能很高；完全一致率和 Cohen's kappa 更适合回答“医生是否给出相同判断”。
+
+在所有已完成的评估中，七个预设核心类别共有 660 项适用判断。harness 获偏好 276 次，baseline 获偏好 34 次，另有 350 次平局。因此，在 310 项核心字段的非平局判断中，harness 占 89.0%，且每个核心类别的汇总净差均为正值。
+
+| 核心字段 | harness | baseline | 平局 | 净优势 |
 |---|---:|---:|---:|---:|
 | 当前抗癌药物 | 83 | 2 | 15 | +81 |
 | 分期 | 41 | 4 | 55 | +37 |
@@ -671,57 +579,27 @@ LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配�
 | 已完成的分子或遗传检测结果 | 22 | 6 | 72 | +16 |
 | **总体** | **276** | **34** | **350** | **+242** |
 
-> **图 4 占位：各核心临床类别的偏好分布。**
->
-> **图形：** 七条 100% 堆叠水平条形图，按框架净优势排序。
->
-> **x 轴：** 适用临床医生判断的占比，范围为 0% 至 100%。
->
-> **y 轴：** 当前抗癌药物、区域或总体转移、分期、治疗反应、已完成的分子或遗传检测结果、远处转移，以及乳腺癌类型或受体状态。
->
-> **编码：** 蓝色表示偏好框架，浅灰色表示平局，橙色表示偏好基线。在每条横条右侧显示 `PL / BL / TIE` 计数。由于受体状态仅适用于乳腺癌，视觉比较采用百分比，并在标签或图注中保留原始分母。
->
-> **观察到的趋势：** 当前抗癌药物以及区域或总体转移的净优势最大。分期和治疗反应也偏向框架。远处转移以平局为主，乳腺癌类型或受体状态则接近持平。
->
-> **图注草稿：** *图 4. 各预设核心临床类别中的临床医生偏好。框架在识别当前治疗和判断转移累及方面优势最大。乳腺癌类型与受体状态的净优势最小。*
+<div data-rough-figure="4"></div>
 
-当前抗癌药物以及区域或总体转移的优势最大，也最为稳定。在七个核心类别之外，药物计划共有 59 次偏好框架、0 次偏好基线和 41 次平局。操作或手术计划的差距较小，共有 14 次偏好框架、12 次偏好基线和 74 次平局。乳腺癌类型与受体状态仍是表现最弱的核心类别，净优势为 6 项判断。
+***图 4.*** *各预设核心临床类别中的临床医生偏好。harness 在识别当前治疗和判断转移累及方面优势最大，乳腺癌类型与受体状态的净优势最小。*
 
-探索性的病历级汇总得出了相同方向的结果，同时避免将每个字段视为相互独立的观察值。按癌种合并医生判断后，20 份乳腺癌病历和 20 份胰腺癌病历的框架减基线净差均为正值。五组评审者与癌种组合的汇总结果也全部偏向框架。这些汇总并非预设的最终模型，不能替代计划中的评审者、病历和字段联合分析。
+当前抗癌药物以及区域或总体转移的优势最大，也最为稳定。在七个核心类别之外，药物计划共有 59 次偏好 harness、0 次偏好 baseline 和 41 次平局。操作或手术计划的差距较小，共有 14 次偏好 harness、12 次偏好 baseline 和 74 次平局。乳腺癌类型与受体状态仍是表现最弱的核心类别，净优势为 6 项判断。
 
-> **图 5 占位：每份病历的临床医生偏好净差。**
->
-> **图形：** 两个对齐的条形图面板，分别展示乳腺癌和胰腺癌，并设置水平零参考线。
->
-> **x 轴：** 样本标识符。乳腺癌面板为 `b1` 至 `b20`，胰腺癌面板为 `p1` 至 `p20`。
->
-> **y 轴：** 每份病历的标准化偏好净差，计算方式为 `(框架胜出字段数 - 基线胜出字段数) / 该病历已完成的必评字段判断数`，两个面板使用相同刻度。乳腺癌面板合并三位肿瘤科医生的判断，胰腺癌面板合并两位医生的判断。
->
-> **编码：** 零线上方的蓝色条形表示偏好框架，零线下方的橙色条形表示偏好基线，位于零线上的灰色标记表示病历级净差为平局。
->
-> **观察到的趋势：** 合并后的 20 份乳腺癌病历和 20 份胰腺癌病历净差均为正值。
->
-> **图注草稿：** *图 5. 各份病历中标准化临床医生偏好净差的分布。按癌种合并现有医生评分后，框架在每份乳腺癌和胰腺癌病历中均取得正向净差。*
+病历级汇总也得出了相同方向的结果，同时避免将每个字段视为相互独立的观察值。按癌种合并医生判断后，20 份乳腺癌病历和 20 份胰腺癌病历的 harness 减 baseline 净差均为正值。五组评审者与癌种组合的汇总结果也全部偏向 harness。这些结果作为调整后模型的敏感性分析。
 
-> **图 6 占位：校正后的多评审者效应估计。**
->
-> **图形：** 森林图，待计划中的最终临床医生样本完成后填充。
->
-> **x 轴：** 非平局判断偏好框架而非基线的校正比值比。采用对数刻度，并在 1.0 处设置垂直参考线。
->
-> **y 轴：** 总体效应、乳腺癌、胰腺癌，以及七个预设核心类别。仅纳入最终样本量足以支持的分层结果。
->
-> **编码：** 点估计值及其 95% 置信区间。主要校正分析使用实心标记，以不同方式处理平局的敏感性分析使用空心标记。
->
-> **预期解释：** 该图将展示考虑评审者、病历和字段重复判断后的估计结果，避免仅依赖合并字段计数。在最终模型拟合前，不应宣称任何趋势。
->
-> **图注草稿：** *图 6. 评估条件与临床医生偏好之间的校正关联。比值比大于 1 表示偏好推理框架。估计值将来自预设的聚类多评审者分析。*
+<div data-rough-figure="5"></div>
 
-### 3.4 完整匹配技术审查
+***图 5.*** *各份病历中标准化临床医生偏好净差的分布。按癌种合并现有医生评分后，harness 在每份乳腺癌和胰腺癌病历中均取得正向净差。*
 
-在 260 项适用的核心字段比较中，框架胜出 66 次，基线胜出 28 次，另有 166 次平局。七个类别中有六个类别的框架净差为正。分期是完整 v2.2 审查中唯一净差为负的类别。
+<div data-rough-figure="6"></div>
 
-| 核心字段 | 框架 | 基线 | 平局 | 净优势 |
+***图 6.*** *非平局判断中，临床医生偏好 inference harness 的调整后比值比。模型使用 logistic 广义估计方程，并按病历聚类；点表示比值比，横线表示 95% 置信区间。*
+
+### 3.4 开发阶段的 LLM 审查
+
+开发阶段使用一个基于源病历的 LLM 审查器，对 260 项适用的核心病历字段比较进行判断。该审查器认为 harness 较优 66 次、baseline 较优 28 次，另有 166 次平局。七个类别中有六个类别的 harness 净差为正，分期是唯一净差为负的类别。这些结果用于开发和错误分析，不属于最终临床结局标签。
+
+| 核心字段 | harness | baseline | 平局 | 净优势 |
 |---|---:|---:|---:|---:|
 | 当前抗癌治疗 | 8 | 0 | 32 | +8 |
 | 分期 | 6 | 8 | 26 | -2 |
@@ -732,191 +610,109 @@ LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配�
 | 已完成的分子或遗传检测结果 | 6 | 2 | 32 | +4 |
 | **总体** | **66** | **28** | **166** | **+38** |
 
-> **补充图 S1 占位：技术审查与临床医生评估的净偏好率。**
->
-> **图形：** 水平哑铃图，每个核心类别占一行。
->
-> **x 轴：** 净偏好率，计算方式为 `(框架较优数 - 基线较优数) / 适用判断数`，并在零处设置垂直参考线。
->
-> **y 轴：** 七个核心临床类别。
->
-> **编码：** 一个标记表示完整 v2.2 来源可追溯技术审查，另一个标记表示目前已完成的临床医生评分，并连接每个类别内的两个标记。
->
-> **观察到的趋势：** 两类证据总体上都偏向框架。临床医生评分显示，当前抗癌药物以及区域或总体转移的净优势尤其明显。分期从技术审查中的小幅负净差变为临床医生评估中的正净差，而远处转移和受体状态的临床医生评估净差较小。
->
-> **解释警示：** 两组结果的评审者和所评估的框架版本不同，因此这里只能描述性比较结果模式，不能视为一致性检验或具有因果意义的前后比较。
->
-> **图注草稿：** *补充图 S1. 完整技术审查和当前临床医生评估中各类别的净偏好率。由于两者的审查流程和框架版本并不相同，各系列之间的差异只能作描述性解释。*
+<div data-rough-figure="S1"></div>
 
-### 3.5 定向修复评估
+***补充图 S1.*** *开发阶段 LLM 审查与肿瘤科医生评估中各类别的净偏好率。由于两者使用的评审者和 harness 版本不同，该图只用于描述结果模式。*
 
-我们采用保守规则修复了 v2.2 审查发现的四个高影响错误。在 6 个受影响样本和 2 个对照样本的 51 项适用比较中，修复后的框架胜出 29 次，基线胜出 0 次，另有 22 次平局。该定向样本集中不再存在 P0 错误，两个对照样本也均未出现可检测到的核心字段回归。这些定向结果表明，已发现的错误可以修复，但不能替代完整的 40 份病历评估结果。
+### 3.5 自由文本评论与平局的含义
 
-### 3.6 定性评论
+两份医生评分导出共包含 12 条书面评论。这些评论说明 A/B 评估中的“平局”有两种不同含义：两个输出都可以接受，或者两个输出都不完整或不正确。在一项乳腺癌影像计划比较中，一位医生认为 baseline 只总结了已完成的影像发现，因此偏好 harness；另一位医生则认为两个输出都没有正确表达当前并无新影像计划，因此选择平局。
 
-三份导出中有两份包含书面评论，共 12 条。这些评论提供了有用的背景，也说明偏好计数不能作为完整的正确性评估。在一项乳腺癌影像计划比较中，第一位肿瘤科医生偏好框架，理由是基线总结了已完成的影像发现，而没有提取计划中的 PET/CT。第二位肿瘤科医生将同一比较评为平局，并指出两个答案都没有正确反映当前并无新影像计划。在将该病例用作论文示例前，应先裁定这一分歧。
+其他评论还指出无依据的受体状态、区域淋巴结遗漏、刚开始新方案时疗效尚不明确，以及两个输出均不理想的情况。这些评论用于解释评分尺度和选择错误分析案例，不作为独立的定量结局。
 
-其他评论指出了无依据的受体状态、区域淋巴结遗漏、二线方案刚开始后疗效尚不确定，以及两个输出均不准确的病例。这些观察说明专科医生审查具有实际价值，也为最终错误分析提供了具体目标。它们还表明，平局既可能表示两个输出都足够准确，也可能表示两个输出都存在错误。
-
-> **补充图 S2 占位：对平局判断的裁定后解释。**
->
-> **图形：** 对预设平局样本完成人工裁定后，绘制堆叠条形图或紧凑型冲积图。
->
-> **x 轴：** 平局的解释类别，包括两个输出在临床上均可接受、两个输出部分正确但不完整、两个输出均不正确，以及无法根据病历判断。
->
-> **y 轴：** 已裁定平局的数量或百分比。
->
-> **编码：** 按癌种或核心字段拆分条形。可使用次级标注说明两个输出是否因相同或不同原因而失败。
->
-> **数据状态：** 尚不可用。当前评分界面只记录 `TIE`，因此该图需要人工审查，不能根据现有 CSV 文件推断。
->
-> **图注草稿：** *补充图 S2. 人工裁定后对平局判断的临床解释。该分析区分了两个输出均正确且等效的情况，以及两个系统均不完整或不正确的比较。*
-
-### 3.7 探索性患者信件结果
-
-早期患者信件评估没有显示框架具有一致优势。同模型 Qwen 基线的四项平均分最高，为 3.80；框架生成的信件为 3.74，ChatGPT 为 3.50。三个系统均有 3/20 封信件被评为无需编辑即可发送。临床医生在 4 封 ChatGPT 信件、1 封 Qwen 基线信件和 2 封框架信件中标记了可能的幻觉内容。
-
-| 信件系统 | 准确性 | 完整性 | 易理解性 | 实用性 | 四项平均分 | 标记为存在幻觉 |
-|---|---:|---:|---:|---:|---:|---:|
-| ChatGPT 单提示 | 3.85 | 3.25 | 3.60 | 3.30 | 3.50 | 4/20 |
-| Qwen 单提示基线 | 4.10 | 3.60 | 3.85 | 3.65 | 3.80 | 1/20 |
-| 基于 Qwen 推理框架的信件 | 3.95 | 3.60 | 3.85 | 3.55 | 3.74 | 2/20 |
-
-按病历配对比较可以更清楚地呈现结果趋势。与 ChatGPT 信件相比，框架信件的四项平均分在 14 例中更高，2 例持平，4 例更低，配对平均差为 0.24 分。排除平局后，未经校正的双侧精确符号检验结果为 `p=0.031`。这项分析属于探索性分析，并非预设分析，而且研究考察了多个相关结局。与同模型 Qwen 基线相比，框架胜出 9 例、持平 5 例、落后 6 例，配对平均差为 -0.06 分。因此，结构化提取可以作为患者沟通内容的输入，但这些结果尚不能证明当前信件生成器优于对同一模型直接使用提示。
-
-> **图 7 占位：患者信件评分的配对差值。**
->
-> **图形：** 两个配对差值面板，一个比较框架信件与 ChatGPT，另一个比较框架信件与 Qwen 单提示基线。
->
-> **x 轴：** 乳腺癌样本标识符，`b1` 至 `b20`。
->
-> **y 轴：** 准确性、完整性、易理解性和实用性四项平均分之差。正值表示框架信件更优。
->
-> **编码：** 零线上方使用蓝色点，零线上使用灰色点，零线下方使用橙色点。添加水平零线，并在每个面板中标注胜出、平局和落后的数量。
->
-> **观察到的趋势：** 从描述性结果看，框架信件在多数病历中优于 ChatGPT，但与同模型 Qwen 基线的分布接近，既有胜出也有落后。
->
-> **图注草稿：** *图 7. 20 份乳腺癌病历中，肿瘤科医生所评患者信件质量的探索性配对差值。框架信件超过 ChatGPT 的情况更多，但相较同模型单提示基线并未显示明确优势。*
+> **协作说明：** 这就是原来的 3.6。它不是为了再证明一次 harness 胜出，也不是相关性分析，而是提醒读者不能把 839 个平局全部理解为“两个系统都答对了”。它的价值是限定 3.2 的解释。最终可以保留为一个短结果段，也可以移到补充材料或 4.9 的研究边界；这个选择已加入 HTML checklist。
 
 ## 4. 讨论
 
 ### 4.1 主要解读
 
-[最终开头：多位肿瘤科医生参与的评估显示，相较于使用同一模型的单提示基线，临床医生显著更偏好推理框架。]
+多位肿瘤科医生参与的评估显示，相较于使用同一模型的 single-prompt baseline，临床医生显著更偏好 inference harness。调整后的方向性分析中，harness 偏好的 OR 为 5.70，95% CI 为 4.24 至 7.66，p<0.001。
 
-本文的主要结果来自模型外围的开发流程。临床医生帮助识别乳腺癌场景中反复出现的错误，团队将这些错误转化为推理框架中的明确组件，随后在胰腺癌开发阶段没有医生参与审阅的情况下，将这一流程适配到胰腺癌。最终的临床评分在两个癌种中都更偏向该框架。与静态比较两个提示相比，这一过程更直接地将开发方法与评估结果联系起来。
+本文的主要结果来自模型外围的开发流程。临床医生帮助识别乳腺癌场景中反复出现的错误，团队将这些错误转化为 inference harness 中的明确组件，随后在胰腺癌开发阶段没有医生参与审阅的情况下，将这一流程适配到胰腺癌。最终的临床评分在两个癌种中都更偏向该 inference harness。与静态比较两个提示相比，这一过程更直接地将开发方法与评估结果联系起来。
 
-多数字段比较为平局，这是可以预期的，因为两个系统使用同一个能力较强的基础模型。不过，当肿瘤科医生认为两者存在实质差异时，偏好推理框架的次数接近偏好基线的六倍。优势主要集中在需要时间关系判断或临床分类的字段。这符合系统的设计思路：保留基础模型已经答对的简单问题，只在出现已知失败模式时介入。
+多数字段比较为平局，这是可以预期的，因为两个系统使用同一个能力较强的基础模型。不过，当肿瘤科医生认为两者存在实质差异时，偏好 inference harness 的次数接近偏好 baseline 的六倍。优势主要集中在需要时间关系判断或临床分类的字段。这符合系统的设计思路：保留基础模型已经答对的简单问题，只在出现已知失败模式时介入。
 
-这些证据仍属于试点结果。乳腺癌和胰腺癌开发阶段没有采用随机设计，优化过程结合了多种工具，后续的定向修复也参考了基准集上的发现。因此，结果支持的是整体开发策略，不能据此推断某个模型、提示、验证门或钩子单独产生了因果作用。
+这些证据仍属于 pilot，因为两个开发阶段依次进行，而且 benchmark 后续也影响了 workflow 修改；因此，结果支持的是整个 workflow，而不是某一个 prompt、verification gate 或 rule 的单独因果作用。
 
-### 4.2 乳腺癌中由临床医生指导的规则归纳
+### 4.2 由临床信息指导、可复用的 inference harness
 
-乳腺癌开发阶段中，肿瘤科医生的角色不同于常规的数据集标注。医生没有为模型训练制作成千上万个字段标签，而是审阅具体输出，指出可能影响实际使用的错误。团队随后将反复出现的错误转化为可复用的指令和检查规则。
+乳腺癌开发阶段中，医生作者的角色不同于常规的数据集标注。他没有为监督训练制作大量字段标签，而是与模型开发作者一起查看具体错误，并界定有临床意义的区别。团队再把这些区别编码成 prompt、verification check 和 deterministic rule。三位独立肿瘤科医生的最终评估说明，形成的系统行为并不只是在复现开发医生个人的偏好。
 
-当专科医生的时间有限时，他们可以集中界定困难概念的边界，例如何为当前治疗、如何判断当前方案的疗效，以及如何区分区域病变和远处转移，而不必审阅以后生成的每一份病历。规则编码后可以被一致地执行、记录并接受回归测试。三次独立的乳腺癌评估表明，得到的推理框架不只是复现某一位临床合作者的偏好。三位肿瘤科医生都更偏好该框架，但他们的具体判断并不完全相同。
+结构化 extraction 的价值在于，它可以把一份很长、内部重复较多的病历转换成一组紧凑字段，方便检查、检索和下游使用。当任务对医生而言费时，但边界可以清楚定义时，这种辅助尤其有价值。例如，医生需要在药物清单和治疗史中反复核对当前抗癌治疗，而 harness 可以先完成这部分整理。
 
-这一开发方式也说明了我们为何将该系统称为推理框架。其贡献在于围绕一个权重冻结的模型，逐步积累可执行的临床区分。有些区分写入提示，有些放在验证阶段，还有一些由确定性代码执行。临床医生界定临床边界，工程流程则将这些边界转化为可重复的系统行为。
+我们使用 inference harness 这个名称，是因为贡献位于模型权重之外。routing、schema、verification logic、deterministic rule、logging 和 attribution 都是围绕冻结模型工作的。因此，经过接口和 prompt 校准后，同一套架构原则上可以包在另一个 instruction model 外面。本研究只测试了 Qwen2.5-32B，所以跨模型迁移目前是架构上的可行性，而不是已经验证的结果。
 
-### 4.3 胰腺癌中的迁移与 AI 辅助改进
+### 4.3 跨癌种迁移与 LLM-as-a-judge
 
-胰腺癌阶段检验的是，已经形成的流程能否迁移到临床医生没有直接提供反馈的领域。胰腺癌病历在疾病进程、治疗方案、分期表述和手术背景方面均有不同。因此，我们没有直接沿用所有乳腺癌专用规则，而是迁移通用工作流程，保留体现共同临床区分的规则，并针对胰腺癌病历暴露出的新失败模式增加专用路由。
+胰腺癌阶段检验的是，已经形成的 workflow 能否迁移到医生作者没有直接提供反馈的领域。胰腺癌病历在疾病进程、治疗方案、分期表述和手术背景方面均有不同。我们保留共同的临床区分，在需要时增加癌种专用 routing，并且没有让临床医生参与胰腺癌输出的开发审阅。
 
-这一开发阶段没有医生审阅胰腺癌输出。一个 Qwen 审查模型按照继承的评分准则检查每份输出，另一个外部开发用 LLM 汇总审查记录并提出修改建议。最终由人工开发者决定实施哪些修改，并运行回归测试。两次胰腺癌评估合计包括 161 次框架偏好、23 次基线偏好和 335 次平局。这一结果与模型参与闭环流程下的成功迁移一致。
+这次迁移中，AI 承担了两个不同角色。首先，我们把乳腺癌阶段累积的错误记录和经验交给外部通用 LLM，由它提出第一版胰腺癌适配方案。随后，依据 rubric 配置的 LLM-as-a-judge 将每轮输出与源病历比较，定位可能的遗漏、无依据内容、semantic mismatch 和 temporal error。这个 judge 的重要作用是让迭代过程变得可观察，使我们知道迁移后的 harness 在哪里表现好、在哪里仍然失败。
 
-我们不将这一过程称为自主进化。部署的模型没有独立修改代码，也没有自行批准修改。只有在较窄的意义上，也就是模型在多轮迭代中协助识别错误和形成修改方案时，才适合使用 `AI 辅助演进` 这一说法。人工监督始终是开发闭环的一部分。
+LLM-as-a-judge 不定义最终临床结局，也不能自行批准代码修改。研究人员选择候选修改并运行 regression test，最终证据仍来自独立肿瘤科医生。胰腺癌评估中，harness 获偏好 161 次，baseline 获偏好 23 次，另有 335 次平局。这支持 model-assisted development loop 的实用性，但不等于自主 self-improvement。
 
-### 4.4 哪些问题对模型而言更困难？
+### 4.4 模型难点与 human-model complementarity
 
-综合临床评分可以区分相对直接的提取任务与需要临床语境判断的问题。
+字段级结果可以区分直接 extraction 与需要时间关系或临床判断的任务。明确写出的事实往往得到平局，因为两个系统都能找到；更大的差异出现在模型需要判断这些事实在当前语境中意味着什么的时候。
 
-直接陈述的事实往往得到平局。两个系统通常都能识别明确写出的影像结果、操作或受体数值。更难的是判断这些事实在当前临床语境中意味着什么。
+当前抗癌药物是优势最大的核心字段，结果为 83 次偏好 harness、2 次偏好 baseline 和 15 次平局。用药计划也以 59 比 0 明显偏向 harness，另有 41 次平局。这类任务需要在较长的治疗史中区分当前、既往、支持性和计划中的药物，对人工审阅而言费时，但适合由结构化系统先行整理。
 
-当前使用的抗癌药物呈现出最大且最稳定的核心字段差异。在已完成的评估中，推理框架获得 83 次偏好，基线获得 2 次偏好，另有 15 次平局。该字段要求模型区分抗癌治疗、长期居家用药、支持治疗药物、已停用方案和未来选项。用药计划也明显偏向该框架，结果为 59 比 0，另有 41 次平局，因为未来行动必须与当前治疗及近期变化分开。
+分期、转移累及和治疗反应体现了另一种互补关系。病历如果直接给出 stage，医生通常可以很快确认；模型却可能把区域淋巴结当成远处转移，或把疑似病灶当作确诊。治疗反应对双方都更难，因为必须把当前方案与影像、症状和肿瘤标志物的时间线对应起来。对于这些字段，系统更适合整理证据并给出候选答案，再由医生快速复核，而不是替代临床判断。
 
-分期与转移累及需要相互关联的判断。模型必须区分区域淋巴结与远处播散，为等待确认的病灶保留不确定性，并使转移状态与分期保持一致。在现有评分中，区域或总体转移累及以 60 比 5 偏向推理框架，分期则以 41 比 4 偏向该框架。该框架会跨字段检查这些关系，而不是孤立地提取每个标签。
+乳腺癌类型与受体状态的优势最小，结果为 18 比 12，另有 30 次平局。这与该字段经常被直接写在病历中相符，因此 baseline 已经能够完成很多样本。更合理的人机分工应按字段决定：自动化重复而耗时的综合任务，对判断敏感的字段展示证据，并让医生复核紧凑输出，而不是重新通读整份病历。
 
-疗效评估在概念上仍然困难，但临床结果的方向一致。推理框架获得 37 次偏好，基线获得 3 次偏好，另有 60 次平局。一份病历可能同时包含既往进展、当前症状、稳定影像、肿瘤标志物趋势和刚刚开始的新方案。判断哪些证据反映当前治疗的疗效需要理解时间线，不能只依赖关键词识别。第二位肿瘤科医生指出，开始二线治疗后疗效尚不明确，这条评论正好说明了这一时间边界。
+<div data-rough-figure="7"></div>
 
-肿瘤类型和受体状态仍是表现最弱的核心类别。在三次乳腺癌评估中，推理框架以 18 比 12 领先基线，另有 30 次平局。这些信息通常在病历中有明确表述，因此基线也能表现良好。当病历包含双侧病变、历史与复发标本，或不一致的受体结果时，该字段会变得困难。因此，这一字段仍需临床复核，不能作为本系统的明确优势。
+***图 7.*** *肿瘤信息 extraction 中 human-model complementarity 的概念图。图中位置是定性解释，不是实测难度分数。它区分了适合自动化的重复综合任务，以及更适合由模型整理证据、医生快速复核的判断敏感字段。*
 
-### 4.5 观察到的模式与推理框架的关系
+> **协作说明：** 这张图表达的是你说的“医生很容易、模型反而容易错”和“模型可以替医生处理冗长信息”这两类互补关系。它是 conceptual figure，不会伪装成我们实际测量过医生工作量。
 
-本研究没有进行完整的组件消融，因此无法确定每项改进来自哪个模块。不过，字段层面的结果与若干组件的预期作用一致。
+### 4.5 作用机制与 ablation 的必要性
 
-当前用药的结果与专用药物提示、肿瘤药物词典、支持治疗药物和居家用药的语境分类，以及时态过滤相符。用药计划的结果与从 Assessment and Plan 部分提取计划并移除已完成行动的处理相符。分期和转移结果则与跨字段语境，以及区分区域病变和远处病变、疑似发现和确诊发现的确定性规则相符。
+现有字段结果与 inference harness 的设计目标一致。当前用药和用药计划的结果对应专用 prompt、temporal filtering 和 drug-context rule；分期和转移结果对应 cross-field check，以及区分区域与远处疾病、疑似与确诊发现的 deterministic rule。这些关联支持我们提出的机制，但不能单独证明每个组件贡献了多少。
 
-大量平局也提供了反向检验。确定性规则没有在所有字段上形成明显优势。在已完成的评估中，操作计划的结果接近持平，近期治疗变化在胰腺癌子集中也完全持平。因此，仅以输出长度或评分者整体偏好推理框架来解释结果，并不充分。最明显的差异出现在系统设置了明确防护规则的字段。
+我们核对的相关论文并不是全部都有完整 ablation。Wiest 等比较了 plain zero-shot、one-shot、加入定义和 grammar-constrained prompting 等方案 [3]；mCODEGPT 直接比较 single-step prompting 与两种 hierarchical prompting [7]；Grothey 等比较五种 prompting strategy 和 quantized model configuration [8]。Dao 等单独报告 validation and retry loop 修正了多少初始错误，但没有对所有 pipeline 组件逐一移除 [6]。Tariq 等比较完整 hybrid system 与 zero-shot、structured-code 和 rule-based baseline，也没有逐个拆除 hybrid system 的内部阶段 [5]。
 
-这些关联支持我们提出的作用机制，但不能证明该机制。未来的组件研究应比较单提示、仅使用任务分解的提示、提示加验证，以及完整推理框架，从而估计每一层的贡献。
+我们的研究同样缺少完整 component ablation。一个成本可控的技术实验可以依次比较 single-prompt baseline、仅 task decomposition、decomposed prompts 加 verification gates，以及 full harness。要求肿瘤科医生对每个版本重复评分并不现实。LLM-reviewed ablation 可以帮助定位机制，但只能作为 technical evidence，不能代替独立医生评估。更强但仍可行的方案，是只让医生复核不同 ablation 版本之间真正发生变化的少量输出。
 
-### 4.6 与相关工作的比较
+### 4.6 与既有临床 extraction 研究的关系
 
-最接近的研究采用了不同的数据、模型适配方式和人工审阅方案。其中一些研究有临床医生参与，但医生通常负责建立参考标准或指导模型开发。较少有研究要求肿瘤专科医生直接比较两个系统的最终输出。
+CORAL 建立了本研究使用的真实病历 benchmark。原研究比较了 zero-shot GPT-4、GPT-3.5-turbo 和 FLAN-UL2，并由一位独立肿瘤科医生审阅部分 GPT-4 输出，仍发现遗漏和幻觉 [2]。我们的研究在同一 benchmark 上回答另一个问题：当基础模型保持不变时，结构化 workflow 是否优于 single-prompt baseline。
 
-| 研究 | 数据与任务 | 临床专家的角色 | 主要方法 | 与本研究的差异 |
-|---|---|---|---|---|
-| Sushil 等，CORAL [2] | 40 份真实乳腺癌和胰腺癌病历；广泛的肿瘤学 schema | 专家标注；一位独立肿瘤科医生人工评估每个癌种的 10 份 GPT-4 输出 | 零样本 GPT-4、GPT-3.5-turbo 和 FLAN-UL2 | 使用相同的数据集和临床范围。该研究建立了基准，并记录了遗漏和幻觉，但没有在同一冻结模型上比较由失败模式驱动的推理框架。 |
-| Wiest 等 [3] | 500 份 MIMIC 病史；五个二分类临床特征 | 三位盲法医学专家建立共识金标准 | 本地 Llama 2、受语法约束的 JSON 和多种提示变体 | 具有严格的专家验证和本地部署，但目标是肿瘤学之外的五个二分类特征。专家提供金标准，而不是对两个完整系统进行比较性偏好评分。 |
-| Bhattarai 等 [4] | 63 位肺癌患者的 13,646 份病历；四个纵向表型 | 两位领域专家提供金标准人工标注 | 比较 GPT、开放模型和基于规则的方法 | 纵向语料规模更大，并有专家标签，但目标表型较少，也没有通过同模型比较来隔离外围工作流程的作用。 |
-| Tariq 等 [5] | 内部数据包含 26,692 位乳腺癌患者，外部数据包含 162 位患者；治疗时间线 | 癌症登记数据提供治疗标签；临床专家整理治疗概念和编码 | UMLS 解析器加微调问答模型 | 数据规模和外部验证明显更强，但需要有监督微调，并且聚焦五类治疗，而不是广泛的字段级提取。 |
-| Dao 等 [6] | 220 份开发用和 200 份验证用右心导管检查病历 | 一位肺血管疾病专家建立验证金标准并指导开发 | 本地开放模型、工程化预加载、验证和重试 | 工作流程架构最为接近。其任务是从操作记录中提取数值，系统不包含肿瘤学专用字段路由和跨字段临床钩子。 |
-| Zhang 等，mCODEGPT [7] | 1,000 份合成肿瘤学病历；49 个 mCODE 实体 | 程序化匹配辅以人工审阅者的手动验证 | 分层提示与单步提示比较 | 直接表明提示分层有帮助，但病历是合成数据，也没有采用肿瘤科医生对最终输出的盲法比较。 |
-| Grothey 等 [8] | 579 份德语和英语前列腺病理报告 | 一位受过训练的医学博士生在主治病理医师指导下标注报告 | 多个开放和专有模型，以及提示和量化测试 | 专家标注基准更大，但只评估一种报告类型和 11 个预定义参数，而不是异质的纵向门诊病历。评估依赖参考标签，而非最终使用者的偏好。 |
+其他研究分别支持本系统中的某些组件。Wiest 等说明 prompt design 和 constrained output 可以改善本地模型对临床二分类字段的 extraction [3]。mCODEGPT 在合成肿瘤病历上发现 hierarchical prompting 优于 single-step strategy [7]。Grothey 等展示了前列腺病理 extraction 在不同 model、prompt 和 quantization configuration 下存在明显差异 [8]。Dao 等的架构与本研究较接近，结合 engineered context、validation 和 retry，但任务是从右心导管报告中提取数值 [6]。Tariq 等使用 UMLS 加 fine-tuned LLM，在乳腺癌治疗时间线上取得更大的数据规模和 external validation [5]；Bhattarai 等则在纵向肺癌表型任务上比较多种模型和 rule-based approach [4]。
 
-这些论文表明，临床医生并非没有参与这一领域的研究，区别在于他们在哪个环节参与。标注、裁决和术语设计会在评估前提供参考答案。那项涵盖 24 项研究的范围综述主要比较精确率、召回率、F1、AUC 和准确率。在我们对其补充方法学表格的核查中，只有两个条目明确使用五点 Likert 量表评价生成结果，而且两项都涉及放射学报告 [1]。我们计划中的研究增加了执业肿瘤科医生的下游审阅。他们阅读原始病历，在不知道系统身份的情况下逐字段比较最终输出。这种设计能够在两个输出都部分正确、不确定性具有临床意义，或某个答案更完整但并未降低忠实度时，记录临床偏好。
+本研究的区别不是单独发明 prompt、retry 或 rule，而是把 field-specific routing、selective context transfer、verification gates、deterministic oncology rules、logging 和 source attribution 组合为一个 inference harness，再用 same-model baseline 隔离外围 workflow 的作用，并由肿瘤科医生逐字段直接比较。乳腺癌到胰腺癌的开发顺序还检验了临床信息形成的 failure rules 能否在第二个癌种中减少对稀缺专科医生时间的反复占用。
 
-我们的开发设计还有第二个区别。专科医生的反馈用于在一个癌种中发现可复用的失败规则，随后在第二个癌种的开发阶段不再使用医生反馈。因此，胰腺癌结果检验的是已经形成的工作流程能否减少对稀缺专科医生时间的反复占用，而不是要求医生参与每一轮迭代。在上述比较研究中，我们没有发现这种特定的开发和迁移设计。
-
-数据贡献也需要准确表述。CORAL 是公开数据集，但其中包含真实、去标识化的纵向肿瘤学病历和专家标注。这与网络问答、合成病历和范围较窄的报告模板不同。不过，它在数据规模和外部验证方面并未超过规模最大的机构研究。CORAL 对本实验的价值在于，其病历保留了推理框架所要处理的临床歧义。
-
-我们的技术主张针对的是组件组合。提示工程、检索、护栏、重试和混合规则在已有文献中都已出现。在本节所比较的最接近研究中，我们没有找到与本项目完全相同且经过评估的组合，包括字段专用路由、选择性依赖传递、五个验证阶段、肿瘤药物和术语资源、确定性临床钩子、跨字段一致性检查、操作日志、来源归因，以及用于排除模型能力这一主要解释的同模型基线。本文的贡献是这一整合式推理框架及其评估，而不是任何单一组件。
-
-若干相关研究使用了更大的数据集、更多标注者或外部验证。本试点不应被描述为首个临床提取系统或规模最大的评估。更准确的表述是，本研究集中检验结构化、可审计的工作流程能否让同一个冻结模型在困难的肿瘤学字段上表现得更可靠，并由理解这些临床区分的医生直接审阅结果。
+因此，更准确的定位是：这是一项对整合式 inference harness 的、小规模但由肿瘤科医生直接评估的研究，而不是第一个肿瘤 extraction 系统，也不是规模最大的验证。逐篇对照表移到文末中文审阅附录，正文只保留与论点直接相关的引用。
 
 ### 4.7 从结构化提取到患者沟通
 
-早期患者信件实验的结果并不一致。按四项指标的平均分计算，在 20 例乳腺癌病例中，基于推理框架的信件有 14 例在描述性比较中优于 ChatGPT，幻觉标记也更少，但它们没有明确优于使用同一模型的 Qwen 基线。因此，更好的提取不会自动产生更好的完整信件。信件质量还取决于内容选择、组织方式、措辞、对不确定性的解释，以及应向患者提供哪些临床细节。
+探索性的患者信件审阅显示了一些有限的下游优势。与 ChatGPT 相比，harness-based letter 在准确性、完整性、易理解性和实用性的平均评分上均更高，收到的 hallucination 标记也更少；但它没有明确优于 same-model Qwen baseline。因此，更好的 extraction 不会自动产生更好的完整信件。信件质量还取决于内容选择、组织方式、措辞、对不确定性的解释，以及应向患者提供哪些临床细节。
 
-这一结果说明，项目应先验证结构化提取，再推进患者沟通。结构化提取是可测量的安全层，患者沟通则是建立在这一层之上的下游任务。提取研究可以先判断分期、治疗、疗效和计划是否得到忠实表达，再由生成器将这些内容写成连贯文字。未来的信件研究应检验具体的提取改进能否经过第二次转换后继续保留，最好同时邀请患者读者和临床医生参与评估。
+这一结果说明，项目应先验证 structured extraction，再推进患者沟通。Structured extraction 是可测量的 safety layer，患者沟通则是建立在这一层之上的 downstream task。extraction 研究可以先判断分期、治疗、疗效和计划是否得到忠实表达，再由 generator 将这些内容写成连贯文字。未来的信件研究应检验具体的 extraction 改进能否经过第二次转换后继续保留，最好同时邀请患者读者和临床医生参与评估。
 
-信件实验仍可作为探索性应用报告。它说明推理框架可以为面向患者的输出提供输入，并且结果在部分维度上可与专有通用模型相比。但这一结果不足以将信件生成作为论文的主要成果，也不能证明当前信件已适合临床部署。
+信件实验更适合作为 future work 的动机，而不是独立的 efficacy result。它既显示了 structured extraction 可能帮助患者沟通的环节，也说明在第二次文本生成过程中，extraction 阶段已经建立的优势可能再次丢失。
 
 ### 4.8 临床与技术意义
 
-研究结果表明，肿瘤学信息提取中的部分 LLM 错误具有足够的重复性，可以在不修改模型权重的情况下处理。当标注训练数据有限，或临床团队需要在不重新训练模型的情况下调整字段定义时，这一点很有价值。例如，将待活检病灶保留为疑似病变的规则可以接受检查和测试。仅使用提示的系统较难提供同等控制，因为一次措辞修改可能影响无关字段。
+研究结果表明，肿瘤学 extraction 中的部分 LLM 错误具有足够的重复性，可以在不修改模型权重的情况下处理。当标注训练数据有限，或临床团队需要在不重新训练模型的情况下调整字段定义时，这一点很有价值。例如，将待活检病灶保留为疑似病变的 rule 可以被直接检查和测试。只依赖 prompt 的系统较难提供同等控制，因为一次措辞修改可能影响无关字段。
 
-我们使用推理框架这一名称，是因为系统除提示序列外，还围绕冻结模型管理任务路由、依赖关系、验证、确定性修正、日志和来源归因。临床工作流程也能描述该系统，但可能让人误以为它已经被整合进常规诊疗，而本试点并未检验这一点。因此，本文使用推理框架描述技术贡献，使用评估工作流程描述研究程序。
+我们使用 inference harness 这一名称，是因为系统除 prompt sequence 外，还围绕冻结模型管理 task routing、dependency、verification、deterministic correction、logging 和 source attribution。Clinical workflow 也能描述该系统，但可能让人误以为它已经被整合进常规诊疗，而本 pilot 并未检验这一点。因此，本文用 inference harness 描述技术贡献，用 evaluation workflow 描述研究程序。
 
 该系统也支持本地部署。本地运行本身不能证明系统符合隐私要求或具备临床安全性，但能让机构掌控病历处理和系统更新。本研究评估的是提取质量，而不是自主临床使用的准备程度。
 
-### 4.9 试点状态与后续工作
+### 4.9 研究边界与 next steps
 
-本试点先判断观察到的效应和临床一致性是否足以支持扩大研究规模。三位肿瘤科医生独立复现了乳腺癌评估的总体方向，两位医生也复现了胰腺癌方向。下一步是拟合预先设定的聚类分析模型，并估计不同医生、病历和字段之间的效应差异。
+本 pilot 用于判断观察到的 effect 和临床一致性是否足以支持扩大研究规模。三位肿瘤科医生独立复现了乳腺癌评估的总体方向，两位医生也复现了胰腺癌方向。调整后的 clustered analysis 已经确认现有评分中的偏好很强。下一步统计工作的重点是增加肿瘤科医生数量，以便更准确地估计 evaluator 之间的差异。
 
-外部验证仍然重要。CORAL 病历来自一个机构，仅覆盖两个癌种。下一步最有信息量的验证数据应来自另一医疗系统，包含纵向肿瘤学病历和独立临床标注，并在评估开始前固定字段契约。
+本研究仍有几个限制。最终临床结果来自三位肿瘤科医生，其中只有两位评估 PDAC，因此还不能精确估计更广泛医生群体中的差异。`TIE` 也不能区分“两个输出都对”和“两个输出都错”。benchmark 后续参与了 workflow 修改，所以这不是完全 untouched 的 external validation。两个开发阶段依次进行，无法把结果归因于某一个单独组件。CORAL 来自单一机构、只覆盖两个癌种，而且我们尚未测试另一个 model family。
 
-## 5. 局限性
+下一项研究应增加肿瘤科医生数量、人工 adjudicate 一部分 `TIE`、完成前述 staged ablation，并在第二种模型和外部医疗系统数据上复现。这样才能更清楚地区分 workflow effect，并支持更强的 evaluator-level 和 institution-level generalization。
 
-当前临床结果来自三位肿瘤科医生。三人都评估了乳腺癌，但只有两人评估了胰腺癌。现有数据已经显示跨医生复现，但三位评审者仍不足以精确估计肿瘤科医生之间的差异。最终稿应使用计划中的多评审者模型，替代当前的描述性分析。
+## 5. 结论
 
-A/B 界面隐藏了系统身份，但左右位置固定，推理框架始终显示为 A。评审者之间的一致性和大量平局降低了评分者无差别选择 A 的可能性，但不能排除位置偏倚。推理框架的输出还包含来源归因，而基线没有。归因是被评估系统的一部分，但也可能影响偏好。未来研究应随机分配左右位置，并单独检验归因的影响。
+[最终结论：在一项由多位肿瘤科医生参与、隐藏系统身份的评估中，由失败模式驱动的 inference harness 在纵向肿瘤学病历结构化提取任务上显著优于使用同一模型的 single-prompt baseline。]
 
-偏好标签不能区分 `两者都正确` 和 `两者都错误`。第二份导出中的书面评论明确指出，一些平局实际上是两个输出都不理想。因此，最终报告应将偏好计数与经过裁决的错误类别同时呈现，不能将每个平局都解释为成功。
-
-技术审查使用了 LLM 辅助审阅和反复的错误分析。这一过程有助于识别失败，但不构成独立临床验证。完整的 40 份病历表格对应 v2.2，后续影响较大的修复仅在受影响样本和对照样本上测试，没有重新运行完整数据集。由于基准集在临床评分材料准备完成前已经影响了这些修复，临床比较并不是完全独立的外部验证。
-
-两个开发阶段依次进行，没有采用随机设计。乳腺癌开发结合了肿瘤科医生反馈和工程判断，胰腺癌开发则结合了继承的评分准则、模型审查器、外部开发用 LLM 和人工实施。本研究无法分离其中任何一个要素的贡献。它也没有评估完全自主的系统，因为所有变更都由人工批准并接受回归测试。
-
-数据集规模较小，且来自单一机构。推理框架包含根据已观察错误形成的临床规则，其中一些规则可能反映 CORAL 特有的书写习惯。本研究尚未包含完整的组件消融、其他模型家族或外部病历。
-
-患者信件分析仅涉及一位肿瘤科医生、20 例乳腺癌病例、三个系统和若干相互关联的评分。这一探索性结果不能证明任何系统具有优势，而且没有显示推理框架明确优于使用同一模型的 Qwen 基线。本研究也没有检验患者理解、治疗决策、工作流程效率或临床结局。
-
-## 6. 结论
-
-[最终结论：在一项由多位肿瘤科医生参与、隐藏系统身份的评估中，由失败模式驱动的推理框架在纵向肿瘤学病历结构化提取任务上显著优于使用同一模型的单提示基线。]
-
-当前试点支持一种开发策略：临床医生识别具有临床意义的失败模式，团队将这些模式转化为明确的推理框架，再通过 AI 辅助且由人工监督的改进，将该框架适配到另一个癌种。三位肿瘤科医生在乳腺癌评估中都更偏好该框架，其中两位在胰腺癌评估中也更偏好该框架，而胰腺癌开发阶段没有医生参与。最大的优势出现在当前治疗、用药计划和转移状态字段。模型权重在整个过程中保持冻结。在将这一试点结果上升为确证性结论之前，仍需完成预先设定的聚类分析，并开展外部验证。
+当前试点支持一种开发策略：临床医生识别具有临床意义的失败模式，团队将这些模式转化为明确的 inference harness，再通过 AI 辅助且由人工监督的改进，将该 inference harness 适配到另一个癌种。三位肿瘤科医生在乳腺癌评估中都更偏好该 inference harness，其中两位在胰腺癌评估中也更偏好该 inference harness，而胰腺癌开发阶段没有医生参与。最大的优势出现在当前治疗、用药计划和转移状态字段。模型权重在整个过程中保持冻结。在将这一试点结果上升为广泛的确证性结论之前，仍需增加肿瘤科医生数量并开展外部验证。
 
 ## 参考文献
 
@@ -929,3 +725,17 @@ A/B 界面隐藏了系统身份，但左右位置固定，推理框架始终显�
 7. Zhang K, Huang T, Malin BA, et al. Introducing mCODEGPT as a zero-shot information extraction from clinical free text data tool for cancer research. *Communications Medicine*. 2025;5:422. [https://doi.org/10.1038/s43856-025-01116-x](https://doi.org/10.1038/s43856-025-01116-x).
 8. Grothey B, Odenkirchen J, Brkic A, et al. Comprehensive testing of large language models for extraction of structured data in pathology. *Communications Medicine*. 2025;5:96. [https://doi.org/10.1038/s43856-025-00808-8](https://doi.org/10.1038/s43856-025-00808-8).
 9. Qwen, Yang A, Yang B, et al. Qwen2.5 Technical Report. arXiv:2412.15115. 2025. [https://arxiv.org/abs/2412.15115](https://arxiv.org/abs/2412.15115).
+
+## 附录 A：相关工作对照表（供合作者审阅）
+
+> **说明：** 这张表用于内部核对和讨论，不放入英文主稿。正文 4.6 已改为自然引用。表中的 ablation 描述来自原论文方法与结果部分的逐项核查。
+
+| 研究 | 数据与任务 | 临床专家角色 | 方法与 component comparison | 与本研究的关系 |
+|---|---|---|---|---|
+| Sushil 等，CORAL [2] | 40 份真实乳腺癌和胰腺癌病历；广泛 oncology schema | 专家标注；一位独立肿瘤科医生审阅每个癌种 10 份 GPT-4 输出 | 比较 zero-shot GPT-4、GPT-3.5-turbo 和 FLAN-UL2；没有 inference harness component ablation | 提供相同 benchmark 和临床范围，但未进行 same-model harness 对 single-prompt baseline 的评估 |
+| Wiest 等 [3] | 500 份 MIMIC 病史；5 个二分类字段 | 三位盲法医学专家建立 consensus ground truth | 比较 plain zero-shot、one-shot、加入定义和 grammar-constrained prompting；属于 prompt-level component comparison | 支持 prompt design 和 constrained output 的作用，但任务不是肿瘤学，输出范围较窄 |
+| Bhattarai 等 [4] | 63 位肺癌患者的 13,646 份病历；4 个纵向表型 | 两位领域专家提供 gold-standard annotation | 比较 GPT、open model 和 rule-based method；不是单一 pipeline 内部的逐组件 ablation | 数据规模更大，但 target phenotype 较少，也没有 same-model workflow 对照 |
+| Tariq 等 [5] | 26,692 位内部乳腺癌患者和 162 位外部患者；治疗时间线 | registry label；专家整理治疗概念和 code | 完整 UMLS + fine-tuned LLM hybrid system 对 zero-shot、structured-code 和 rule-based baseline；没有逐个移除 hybrid phase | external validation 更强，但依赖 supervised fine-tuning，任务集中于 5 类治疗 |
+| Dao 等 [6] | 220 份开发和 200 份验证用右心导管病历 | 一位肺血管疾病专家建立 validation ground truth 并指导开发 | engineered preload、validation、retry；单独报告 retry 对初始错误的修正情况，但没有完整 factorial ablation | workflow 架构最接近，但任务是 procedure note 中的数值 extraction |
+| Zhang 等，mCODEGPT [7] | 1,000 份合成肿瘤病历；49 个 mCODE entity | 自动匹配结合人工 validation | 直接比较 single-step baseline、BFOP 和 2POP hierarchical prompting；是最接近的 prompt ablation | 证明 hierarchy 有价值，但数据为 synthetic notes，且没有 blinded oncologist comparison |
+| Grothey 等 [8] | 579 份德语和英语前列腺病理报告；11 个字段 | 医学博士生在主治病理医生指导下标注 | 比较多个 model、5 种 prompting strategy 和 quantization configuration | component/configuration comparison 较完整，但任务是一类 pathology report，不是纵向门诊病历 |

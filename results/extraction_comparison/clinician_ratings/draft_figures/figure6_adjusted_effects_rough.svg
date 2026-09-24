@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="390" viewBox="0 0 940 390">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<text x="470.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Adjusted odds of clinician preference for the harness</text>
+<text x="470.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Directional judgments; logistic GEE clustered by note</text>
+<line x1="210.0" y1="90" x2="210.0" y2="326" stroke="#6B7780"/>
+<text x="210.0" y="350" text-anchor="middle" font-size="11">1</text>
+<line x1="337.5" y1="90" x2="337.5" y2="326" stroke="#E5E5E5"/>
+<text x="337.5" y="350" text-anchor="middle" font-size="11">2</text>
+<line x1="465.0" y1="90" x2="465.0" y2="326" stroke="#E5E5E5"/>
+<text x="465.0" y="350" text-anchor="middle" font-size="11">4</text>
+<line x1="592.5" y1="90" x2="592.5" y2="326" stroke="#E5E5E5"/>
+<text x="592.5" y="350" text-anchor="middle" font-size="11">8</text>
+<line x1="720.0" y1="90" x2="720.0" y2="326" stroke="#E5E5E5"/>
+<text x="720.0" y="350" text-anchor="middle" font-size="11">16</text>
+<text x="192" y="130" text-anchor="end" font-size="14">Overall</text>
+<line x1="475.9" y1="125" x2="584.5" y2="125" stroke="#2B8CBE" stroke-width="4"/>
+<line x1="475.9" y1="117" x2="475.9" y2="133" stroke="#2B8CBE" stroke-width="2"/>
+<line x1="584.5" y1="117" x2="584.5" y2="133" stroke="#2B8CBE" stroke-width="2"/>
+<circle cx="530.2" cy="125" r="8" fill="#2B8CBE"/>
+<text x="738" y="130" font-size="13">OR 5.70 (95% CI 4.24-7.66)</text>
+<text x="192" y="200" text-anchor="end" font-size="14">Breast cancer</text>
+<line x1="445.9" y1="195" x2="579.5" y2="195" stroke="#2B8CBE" stroke-width="4"/>
+<line x1="445.9" y1="187" x2="445.9" y2="203" stroke="#2B8CBE" stroke-width="2"/>
+<line x1="579.5" y1="187" x2="579.5" y2="203" stroke="#2B8CBE" stroke-width="2"/>
+<circle cx="512.7" cy="195" r="8" fill="#2B8CBE"/>
+<text x="738" y="200" font-size="13">OR 5.18 (95% CI 3.61-7.46)</text>
+<text x="192" y="270" text-anchor="end" font-size="14">PDAC</text>
+<line x1="473.6" y1="265" x2="658.9" y2="265" stroke="#2B8CBE" stroke-width="4"/>
+<line x1="473.6" y1="257" x2="473.6" y2="273" stroke="#2B8CBE" stroke-width="2"/>
+<line x1="658.9" y1="257" x2="658.9" y2="273" stroke="#2B8CBE" stroke-width="2"/>
+<circle cx="566.2" cy="265" r="8" fill="#2B8CBE"/>
+<text x="738" y="270" font-size="13">OR 6.94 (95% CI 4.19-11.48)</text>
+<text x="465.0" y="379" text-anchor="middle" font-size="12">Odds ratio for harness preference among non-tie judgments (log scale)</text>
+</g>
+</svg>

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import html
+import math
 from collections import Counter, defaultdict
 from itertools import combinations
 from pathlib import Path
@@ -24,6 +25,7 @@ RATER_FILES = {
     "Bolun": HERE / "bolun_breast_blind_scores_20260921.xlsx",
 }
 LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
+ADJUSTED_RESULTS = HERE / "adjusted_gee_results.csv"
 
 PL = "#2B8CBE"
 BL = "#D95F0E"
@@ -493,6 +495,121 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     svg_end(out, OUTPUT / "figure5_note_margins_rough.svg")
 
 
+def plot_adjusted_effects() -> None:
+    rows = load_csv(ADJUSTED_RESULTS)
+    width, height = 940, 390
+    left, right, top, row_gap = 210, 220, 125, 70
+    plot_w = width - left - right
+    xmin, xmax = 1.0, 16.0
+    out = svg_start(
+        width,
+        height,
+        "Adjusted odds of clinician preference for the harness",
+        "Directional judgments; logistic GEE clustered by note",
+    )
+    for tick in [1, 2, 4, 8, 16]:
+        x = left + plot_w * math.log(tick / xmin) / math.log(xmax / xmin)
+        stroke = "#6B7780" if tick == 1 else GRID
+        out.append(
+            f'<line x1="{x:.1f}" y1="90" x2="{x:.1f}" y2="326" stroke="{stroke}"/>'
+        )
+        out.append(
+            f'<text x="{x:.1f}" y="350" text-anchor="middle" font-size="11">{tick}</text>'
+        )
+
+    for index, row in enumerate(rows):
+        y = top + index * row_gap
+        estimate = float(row["odds_ratio"])
+        low = float(row["ci_low"])
+        high = float(row["ci_high"])
+
+        def xpos(value: float) -> float:
+            return left + plot_w * math.log(value / xmin) / math.log(xmax / xmin)
+
+        out.append(
+            f'<text x="{left - 18}" y="{y + 5}" text-anchor="end" font-size="14">{esc(row["scope"])}</text>'
+        )
+        out.append(
+            f'<line x1="{xpos(low):.1f}" y1="{y}" x2="{xpos(high):.1f}" y2="{y}" '
+            f'stroke="{PL}" stroke-width="4"/>'
+        )
+        out.append(
+            f'<line x1="{xpos(low):.1f}" y1="{y - 8}" x2="{xpos(low):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>'
+        )
+        out.append(
+            f'<line x1="{xpos(high):.1f}" y1="{y - 8}" x2="{xpos(high):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>'
+        )
+        out.append(
+            f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}"/>'
+        )
+        out.append(
+            f'<text x="{left + plot_w + 18}" y="{y + 5}" font-size="13">'
+            f'OR {estimate:.2f} (95% CI {low:.2f}-{high:.2f})</text>'
+        )
+    out.append(
+        f'<text x="{left + plot_w / 2:.1f}" y="379" text-anchor="middle" font-size="12">'
+        'Odds ratio for harness preference among non-tie judgments (log scale)</text>'
+    )
+    svg_end(out, OUTPUT / "figure6_adjusted_effects_rough.svg")
+
+
+def plot_human_model_complementarity() -> None:
+    width, height = 1060, 620
+    left, right, top, bottom = 155, 55, 95, 95
+    plot_w, plot_h = width - left - right, height - top - bottom
+    mid_x = left + plot_w / 2
+    mid_y = top + plot_h / 2
+    out = svg_start(
+        width,
+        height,
+        "Human-model complementarity across extraction tasks",
+        "Conceptual map motivated by rating patterns and task structure; workload was not measured",
+    )
+    quadrants = [
+        (left, top, plot_w / 2, plot_h / 2, "#FCE8DE"),
+        (mid_x, top, plot_w / 2, plot_h / 2, "#F4F0FB"),
+        (left, mid_y, plot_w / 2, plot_h / 2, "#F3F6F8"),
+        (mid_x, mid_y, plot_w / 2, plot_h / 2, "#EAF5FB"),
+    ]
+    for x, y, w, h, fill in quadrants:
+        out.append(
+            f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{fill}"/>'
+        )
+    out.append(
+        f'<rect x="{left}" y="{top}" width="{plot_w}" height="{plot_h}" fill="none" stroke="#526471" stroke-width="1.5"/>'
+    )
+    out.append(
+        f'<line x1="{mid_x:.1f}" y1="{top}" x2="{mid_x:.1f}" y2="{top + plot_h}" stroke="#AAB4BC"/>'
+    )
+    out.append(
+        f'<line x1="{left}" y1="{mid_y:.1f}" x2="{left + plot_w}" y2="{mid_y:.1f}" stroke="#AAB4BC"/>'
+    )
+
+    labels = [
+        (left + 28, top + 34, "Rapid clinician verification", ["Explicit stage", "Confirmed vs suspected disease"], "#9C3D14"),
+        (mid_x + 28, top + 34, "Assist, then verify", ["Treatment response", "Uncertain metastasis"], "#5C4694"),
+        (left + 28, mid_y + 34, "Routine automation", ["Explicit receptor status", "Explicit test result"], "#53636E"),
+        (mid_x + 28, mid_y + 34, "High-value automation", ["Active medications", "Medication plans", "Long treatment history"], "#176B91"),
+    ]
+    for x, y, title, items, color in labels:
+        out.append(
+            f'<text x="{x}" y="{y}" font-size="15" font-weight="700" fill="{color}">{esc(title)}</text>'
+        )
+        for index, item in enumerate(items):
+            out.append(
+                f'<text x="{x + 8}" y="{y + 30 + index * 25}" font-size="13">• {esc(item)}</text>'
+            )
+
+    out.append(
+        f'<text x="{left + plot_w / 2:.1f}" y="{height - 28}" text-anchor="middle" font-size="13">Human review burden: low → high</text>'
+    )
+    out.append(
+        f'<text x="34" y="{top + plot_h / 2:.1f}" text-anchor="middle" font-size="13" '
+        f'transform="rotate(-90 34 {top + plot_h / 2:.1f})">Model error risk: low → high</text>'
+    )
+    svg_end(out, OUTPUT / "figure7_human_model_complementarity_rough.svg")
+
+
 def plot_technical_vs_clinician(raters: dict[str, list[dict[str, str]]]) -> None:
     technical = {
         "current_meds": (8, 0, 40),
@@ -607,9 +724,10 @@ def main() -> None:
     plot_interrater_matrix(raters)
     plot_core_fields(raters)
     plot_note_margins(raters)
+    plot_adjusted_effects()
+    plot_human_model_complementarity()
     plot_technical_vs_clinician(raters)
-    plot_letter_differences()
-    print(f"Wrote 7 rough SVG figures to {OUTPUT}")
+    print(f"Wrote 8 rough SVG figures to {OUTPUT}")
 
 
 if __name__ == "__main__":

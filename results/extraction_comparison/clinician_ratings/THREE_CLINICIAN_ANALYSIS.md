@@ -39,6 +39,8 @@ After pooling ratings within each note, all 20 breast notes and all 20 PDAC note
 
 ## Current significance status
 
+The adjusted primary analysis is now complete. Among 520 directional judgments, a population-averaged logistic generalized estimating equation clustered by note and adjusted for evaluator and cancer type estimated an odds ratio of 5.70 for harness preference (95% CI 4.24-7.66; `p<0.001`). Cancer-specific estimates were 5.18 for breast cancer (95% CI 3.61-7.46) and 6.94 for PDAC (95% CI 4.19-11.48), both `p<0.001`. Full reproducible output is in `ADJUSTED_ANALYSIS.md` and `adjusted_gee_results.csv`.
+
 Two-sided exact sign tests on within-note PL-minus-BL margins give the following results:
 
 | Evaluation | Positive notes | Negative notes | Tied notes | Exact p value |
@@ -51,7 +53,7 @@ Two-sided exact sign tests on within-note PL-minus-BL margins give the following
 
 Thus, the result is statistically significant for the observed notes within every completed evaluator-by-cancer analysis. Pooling clinicians within each cancer type also gives 20 positive and 0 negative note margins for both breast cancer and PDAC (`p=0.0000019` for each exact sign test).
 
-This does not provide the same level of evidence for generalization across oncologists. If each clinician is reduced to one independent directional result, all three breast oncologists favor PL, but a two-sided exact sign test with 3 of 3 positive gives `p=0.25`. The two PDAC oncologists give `p=0.50`. A mixed-effects model can use the repeated note and field observations, but the clinician-level variance estimate will remain unstable with only three clinicians.
+This does not provide the same level of evidence for generalization across oncologists. If each clinician is reduced to one independent directional result, all three breast oncologists favor PL, but a two-sided exact sign test with 3 of 3 positive gives `p=0.25`. The two PDAC oncologists give `p=0.50`. The completed GEE uses repeated note-field observations without treating them as independent, but it does not remove the uncertainty caused by having only three clinicians.
 
 For a simple clinician-level two-sided sign test, 6 of 6 clinicians favoring PL is the smallest result below 0.05 (`p=0.03125`). If one clinician favors BL, 8 of 9 clinicians are required (`p=0.0391`). These calculations discard effect size and are conservative, but they show why three clinicians support a pilot result more strongly than a broad claim about oncologists in general.
 
@@ -67,7 +69,7 @@ Each pair shares all 280 required breast comparisons.
 
 Across the 280 breast note-field comparisons, all three oncologists gave the same verdict on 192 (68.6%). A simple three-rater majority favored PL in 95 comparisons, BL in 15, and tie in 168. Two comparisons had one PL, one BL, and one tie, so no majority existed.
 
-Agreement is substantial enough to show that the direction is not driven by one evaluator, but it is not perfect. The final model should retain clinician identity and repeated judgments by note and field.
+Agreement is substantial enough to show that the direction is not driven by one evaluator, but it is not perfect. The adjusted model retains evaluator identity and clusters repeated field and evaluator judgments within each note.
 
 ## Field-level pattern
 
@@ -100,7 +102,7 @@ The three-clinician data support stronger pilot wording than the previous two-cl
 4. The strongest gains match the intended safeguards for treatment status, metastatic classification, temporal reasoning, and medication plans.
 5. Receptor status and several plan fields remain useful negative controls because the advantage is smaller.
 
-The draft should still avoid a confirmatory significance claim until the clustered multi-rater analysis is finalized. Field-level ratings are repeated within clinicians, notes, and fields, so a naive test that treats all 1,359 judgments as independent would overstate precision.
+The draft can report a statistically significant preference among the observed ratings. It should still avoid claiming precise generalization to the wider oncologist population because only three oncologists participated. A naive test that treats all 1,359 judgments as independent would overstate precision.
 
 ## Figure updates
 

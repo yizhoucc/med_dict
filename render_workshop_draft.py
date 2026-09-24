@@ -5,8 +5,8 @@ Run from the repository root:
     python3 render_workshop_draft.py
 
 The renderer uses the locally installed CommonMark ``cmark`` command, adds GFM-like
-table handling, styles figure placeholders as design cards, and embeds available
-rough SVG plots as data URIs. No network access is required.
+table handling, and embeds available draft SVG plots as data URIs. No network
+access is required.
 """
 
 from __future__ import annotations
@@ -34,7 +34,14 @@ ROUGH_FIGURES = {
     "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Pairwise breast-cancer agreement"),
     "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
-    "7": (FIGURE_DIR / "figure7_letter_differences_rough.svg", "Exploratory patient-letter score differences"),
+    "6": (
+        FIGURE_DIR / "figure6_adjusted_effects_rough.svg",
+        "Adjusted odds of clinician preference for the harness",
+    ),
+    "7": (
+        FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
+        "Conceptual human-model complementarity across extraction tasks",
+    ),
     "S1": (
         FIGURE_DIR / "supplementary_figure1_technical_vs_clinician_rough.svg",
         "Technical-audit and clinician net preference rates",
@@ -75,6 +82,23 @@ body {
   margin: 24px auto 70px;
   align-items: start;
 }
+.review-checklist {
+  margin: 20px 0 30px;
+  padding: 18px 20px;
+  border: 1px solid #d7c8ee;
+  border-left: 5px solid var(--violet);
+  border-radius: 10px;
+  background: var(--violet-soft);
+}
+.review-checklist h2 {
+  margin: 0 0 10px;
+  color: #4f3b7d;
+  font-size: 1.08rem;
+}
+.review-checklist ul { margin: 0; padding-left: 1.4rem; }
+.review-checklist li { margin: 0.35rem 0; }
+.review-checklist .done { color: #24613b; }
+.review-checklist .open { color: #825600; }
 .toc {
   position: sticky;
   top: 18px;
@@ -218,29 +242,6 @@ th { background: #eef5f9; color: var(--navy); font-weight: 750; }
 tbody tr:nth-child(even) { background: #fafcfd; }
 tbody tr:last-child td { border-bottom: 0; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.figure-placeholder {
-  position: relative;
-  margin: 22px 0 28px;
-  padding: 20px 20px 14px;
-  border: 2px dashed #9a87c7;
-  border-radius: 11px;
-  background: var(--violet-soft);
-  color: #342a50;
-}
-.figure-placeholder::before {
-  content: "FIGURE SPECIFICATION";
-  display: inline-block;
-  margin-bottom: 8px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--violet);
-  color: white;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-.figure-placeholder p { margin: 8px 0; }
-.figure-placeholder p:first-of-type { font-size: 16px; }
 .rough-figure {
   margin: 25px 0 8px;
   padding: 14px;
@@ -288,7 +289,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h1 { font-size: 22pt; }
   h2 { page-break-after: avoid; font-size: 16pt; }
   h3 { page-break-after: avoid; font-size: 13pt; }
-  .figure-placeholder, .rough-figure, .table-wrap { break-inside: avoid; }
+  .rough-figure, .table-wrap { break-inside: avoid; }
   .rough-figure img { max-height: 650px; object-fit: contain; }
 }
 """
@@ -367,28 +368,6 @@ def convert_tables(markdown_text: str) -> str:
     return "\n".join(output) + "\n"
 
 
-def add_rough_markers(markdown_text: str) -> str:
-    output: list[str] = []
-    for line in markdown_text.splitlines():
-        english_match = re.match(
-            r"> \*\*(Figure [123457]|Supplementary Figure S1) placeholder:", line
-        )
-        chinese_match = re.match(r"> \*\*(图 [123457]|补充图 S1) 占位：", line)
-        match = english_match or chinese_match
-        if match:
-            key = (
-                match.group(1)
-                .replace("Figure ", "")
-                .replace("Supplementary ", "")
-                .replace("补充图 ", "")
-                .replace("图 ", "")
-            )
-            output.append(f'<div data-rough-figure="{key}"></div>')
-            output.append("")
-        output.append(line)
-    return "\n".join(output) + "\n"
-
-
 def run_cmark(markdown_text: str) -> str:
     command = shutil.which("cmark")
     if command is None:
@@ -446,21 +425,13 @@ def inject_rough_figures(body: str) -> str:
         if marker not in body or not path.exists():
             continue
         figure = f'''<figure class="rough-figure">
-<div class="rough-label">INTERNAL ROUGH PLOT</div>
 <img src="{embed_svg(path)}" alt="{html.escape(title)}">
-<figcaption>{html.escape(title)}. Trend-check rendering only; replace with publication artwork.</figcaption>
 </figure>'''
         body = body.replace(marker, figure)
     return body
 
 
 def style_sections(body: str) -> str:
-    body = re.sub(
-        r"<blockquote>\s*(?=<p><strong>(?:Figure|Supplementary Figure|图|补充图).*?(?:placeholder:|占位：))(.*?)</blockquote>",
-        r'<aside class="figure-placeholder">\1</aside>',
-        body,
-        flags=re.S,
-    )
     body = re.sub(
         r"(<h2 id=\"questions-for-the-clinical-collaborator\">.*?)(?=<h2 id=\"abstract\">)",
         r'<section class="review-section">\1</section>',
@@ -512,8 +483,10 @@ def render() -> str:
         raise RuntimeError("The bilingual draft is missing the Chinese-version marker.")
     english_text, chinese_text = markdown_text.split(chinese_marker, 1)
     paired_counts = {
-        "tables": (english_text.count("|---"), chinese_text.count("|---")),
-        "figure placeholders": (english_text.count("placeholder:"), chinese_text.count("占位：")),
+        "embedded figure markers": (
+            english_text.count('data-rough-figure="'),
+            chinese_text.count('data-rough-figure="'),
+        ),
     }
     mismatched = {
         label: counts for label, counts in paired_counts.items() if counts[0] != counts[1]
@@ -522,7 +495,7 @@ def render() -> str:
         raise RuntimeError(f"English and Chinese structures do not match: {mismatched}")
     version_match = re.search(r"Version ([^\n]+)", markdown_text)
     version = version_match.group(1) if version_match else "draft"
-    prepared = add_rough_markers(convert_tables(markdown_text))
+    prepared = convert_tables(markdown_text)
     body = run_cmark(prepared)
     body, toc = add_heading_ids(body)
     body = inject_rough_figures(body)
@@ -536,7 +509,18 @@ def render() -> str:
   <span class="chip">1,359 required-field judgments</span>
   <span class="chip">HTML review copy</span>
 </div>
-<div class="render-note">The English figure cards contain concise manuscript captions. The Chinese section retains detailed review notes. Embedded SVGs are internal trend checks and are not final artwork.</div>''',
+<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>
+<section class="review-checklist">
+  <h2>合作者审阅 Checklist</h2>
+  <ul>
+    <li class="done">✓ Figure 1 至 Figure 7 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
+    <li class="done">✓ 3.2 的调整后主分析已完成：GEE OR 5.70，95% CI 4.24–7.66，p&lt;0.001。</li>
+    <li class="open">□ 决定“原 3.6：自由文本评论与平局含义”保留在主结果、移到补充材料，还是并入 4.9 的研究边界。</li>
+    <li class="open">□ 决定是否补做四级 staged ablation；LLM 评分只能作为 technical evidence，不能替代医生评估。</li>
+    <li class="done">✓ Related-work 对照表已移到中文版文末审阅附录，Discussion 改为自然引用。</li>
+    <li class="open">□ 全文确定后最后重写 Abstract。</li>
+  </ul>
+</section>''',
         1,
     )
     body = body.replace(
@@ -566,7 +550,7 @@ def main() -> None:
     output = render()
     OUTPUT.write_text(output, encoding="utf-8")
     required = [
-        "figure-placeholder",
+        '<figure class="rough-figure">',
         "table-wrap",
         "data:image/svg+xml;base64",
         "Cohen's kappa from 0.511 to 0.646",
@@ -578,6 +562,8 @@ def main() -> None:
     missing = [value for value in required if value not in output]
     if missing:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
+    if output.count('<figure class="rough-figure">') != 16:
+        raise RuntimeError("Expected eight embedded figures in each language version.")
     print(f"Wrote {OUTPUT.name} ({len(output):,} characters)")
 
 
