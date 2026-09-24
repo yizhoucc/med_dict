@@ -12,6 +12,7 @@ python3 results/extraction_comparison/clinician_ratings/plot_clinician_ratings.p
 
 Files:
 
+- `figure1_development_pathway_rough.svg`: breast-cancer development, pancreatic-cancer transfer, and independent clinical evaluation pathway.
 - `figure2_evaluator_distribution_rough.svg`: outcome distribution for the five completed clinician-by-cancer evaluations.
 - `figure3_interrater_matrix_rough.svg`: pairwise breast-cancer exact agreement and Cohen's kappa for the three oncologists.
 - `figure4_core_fields_rough.svg`: pooled preference distribution across the seven core clinical categories.

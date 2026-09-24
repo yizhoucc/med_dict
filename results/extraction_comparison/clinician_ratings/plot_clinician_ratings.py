@@ -145,6 +145,123 @@ def legend(out: list[str], x: int, y: int) -> None:
         x += 105
 
 
+def flow_box(
+    out: list[str],
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+    lines: list[str],
+    fill: str,
+    stroke: str,
+    font_size: int = 13,
+) -> None:
+    out.append(
+        f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="10" '
+        f'fill="{fill}" stroke="{stroke}" stroke-width="1.5"/>'
+    )
+    line_height = font_size + 5
+    start_y = y + height / 2 - (len(lines) - 1) * line_height / 2 + 5
+    for index, line in enumerate(lines):
+        weight = ' font-weight="700"' if index == 0 and len(lines) > 1 else ""
+        out.append(
+            f'<text x="{x + width / 2:.1f}" y="{start_y + index * line_height:.1f}" '
+            f'text-anchor="middle" font-size="{font_size}"{weight}>{esc(line)}</text>'
+        )
+
+
+def flow_arrow(
+    out: list[str], x1: float, y1: float, x2: float, y2: float, dashed: bool = False
+) -> None:
+    dash = ' stroke-dasharray="6 5"' if dashed else ""
+    out.append(
+        f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
+        f'stroke="#587083" stroke-width="2" marker-end="url(#arrow)"{dash}/>'
+    )
+
+
+def plot_development_pathway() -> None:
+    width, height = 1320, 665
+    out = svg_start(
+        width,
+        height,
+        "Development, transfer, and independent evaluation",
+        "Model weights remained frozen; investigators controlled all workflow changes",
+    )
+    out.append(
+        '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" '
+        'markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+        '<path d="M 0 0 L 10 5 L 0 10 z" fill="#587083"/></marker></defs>'
+    )
+
+    panel_y, panel_h, panel_w = 80, 520, 400
+    panel_xs = [25, 460, 895]
+    panel_titles = [
+        "A. Breast-cancer development",
+        "B. Pancreatic-cancer transfer",
+        "C. Independent evaluation",
+    ]
+    panel_colors = ["#EAF5FB", "#F4F0FB", "#F7F7F7"]
+    panel_strokes = ["#2B8CBE", "#756BB1", "#65727C"]
+    for x, title, fill, stroke in zip(
+        panel_xs, panel_titles, panel_colors, panel_strokes
+    ):
+        out.append(
+            f'<rect x="{x}" y="{panel_y}" width="{panel_w}" height="{panel_h}" '
+            f'rx="14" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+        out.append(
+            f'<text x="{x + panel_w / 2}" y="112" text-anchor="middle" '
+            f'font-size="16" font-weight="700">{esc(title)}</text>'
+        )
+
+    box_w = 320
+    ax = panel_xs[0] + 40
+    flow_box(out, ax, 135, box_w, 62, ["56 additional breast notes", "Harness extraction outputs"], "#FFFFFF", "#2B8CBE")
+    flow_arrow(out, ax + box_w / 2, 197, ax + box_w / 2, 220)
+    flow_box(out, ax, 220, box_w, 76, ["Joint review", "Physician coauthor + model investigators"], "#FFFFFF", "#2B8CBE")
+    flow_arrow(out, ax + box_w / 2, 296, ax + box_w / 2, 319)
+    flow_box(out, ax, 319, box_w, 76, ["Recurring clinical error classes", "identified from source-note comparison"], "#FFFFFF", "#2B8CBE")
+    flow_arrow(out, ax + box_w / 2, 395, ax + box_w / 2, 418)
+    flow_box(out, ax, 418, box_w, 78, ["Candidate harness revisions", "prompts, gates, and deterministic rules"], "#FFFFFF", "#2B8CBE")
+    flow_arrow(out, ax + box_w / 2, 496, ax + box_w / 2, 519)
+    flow_box(out, ax, 519, box_w, 52, ["Regression testing"], "#DDF0F8", "#2B8CBE")
+    flow_arrow(out, ax + 18, 545, ax - 18, 258, dashed=True)
+
+    bx = panel_xs[1] + 40
+    flow_box(out, bx, 135, box_w, 62, ["100 additional PDAC notes", "Transferred harness outputs"], "#FFFFFF", "#756BB1")
+    flow_arrow(out, bx + box_w / 2, 197, bx + box_w / 2, 220)
+    flow_box(out, bx, 220, box_w, 76, ["Rubric-guided Qwen review", "source-grounded candidate error flags"], "#FFFFFF", "#756BB1")
+    flow_arrow(out, bx + box_w / 2, 296, bx + box_w / 2, 319)
+    flow_box(out, bx, 319, box_w, 76, ["General-purpose LLM synthesis", "candidate workflow revisions"], "#FFFFFF", "#756BB1")
+    flow_arrow(out, bx + box_w / 2, 395, bx + box_w / 2, 418)
+    flow_box(out, bx, 418, box_w, 78, ["Investigator review", "selective implementation and testing"], "#FFFFFF", "#756BB1")
+    flow_arrow(out, bx + box_w / 2, 496, bx + box_w / 2, 519)
+    flow_box(out, bx, 519, box_w, 52, ["No clinician review of PDAC outputs"], "#E8E0F5", "#756BB1", 12)
+
+    cx = panel_xs[2] + 40
+    flow_box(out, cx, 135, box_w, 62, ["40 expert-annotated CORAL notes", "20 breast + 20 PDAC"], "#FFFFFF", "#65727C")
+    flow_arrow(out, cx + box_w / 2, 197, cx + box_w / 2, 220)
+    flow_box(out, cx, 220, box_w, 62, ["Shared frozen Qwen2.5-32B", "Shared target field schema"], "#FFFFFF", "#65727C")
+    flow_arrow(out, cx + box_w / 2, 282, cx + box_w / 2, 310)
+    branch_w, branch_gap = 150, 20
+    flow_box(out, cx, 310, branch_w, 86, ["Inference", "harness"], "#DDF0F8", "#2B8CBE")
+    flow_box(out, cx + branch_w + branch_gap, 310, branch_w, 86, ["Single-prompt", "baseline"], "#FCE8DE", "#D95F0E")
+    flow_arrow(out, cx + box_w / 2, 282, cx + branch_w / 2, 310)
+    flow_arrow(out, cx + box_w / 2, 282, cx + branch_w + branch_gap + branch_w / 2, 310)
+    flow_arrow(out, cx + branch_w / 2, 396, cx + box_w / 2, 430)
+    flow_arrow(out, cx + branch_w + branch_gap + branch_w / 2, 396, cx + box_w / 2, 430)
+    flow_box(out, cx, 430, box_w, 62, ["Identity-masked A/B comparison", "field-level A better / B better / tie"], "#FFFFFF", "#65727C", 12)
+    flow_arrow(out, cx + box_w / 2, 492, cx + box_w / 2, 519)
+    flow_box(out, cx, 519, box_w, 52, ["3 oncologists: breast; 2: PDAC"], "#E9EEF1", "#65727C", 12)
+
+    out.append(
+        '<text x="660" y="635" text-anchor="middle" font-size="13" fill="#465761">'
+        'Development physician was not an oncology specialist and was not a final evaluator</text>'
+    )
+    svg_end(out, OUTPUT / "figure1_development_pathway_rough.svg")
+
+
 def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None:
     groups = []
     for index, rows in enumerate(raters.values(), start=1):
@@ -485,13 +602,14 @@ def plot_letter_differences() -> None:
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     raters = load_raters()
+    plot_development_pathway()
     plot_evaluator_distribution(raters)
     plot_interrater_matrix(raters)
     plot_core_fields(raters)
     plot_note_margins(raters)
     plot_technical_vs_clinician(raters)
     plot_letter_differences()
-    print(f"Wrote 6 rough SVG figures to {OUTPUT}")
+    print(f"Wrote 7 rough SVG figures to {OUTPUT}")
 
 
 if __name__ == "__main__":

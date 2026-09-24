@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.9, September 2026
+Version 0.10, September 2026
 
 Authors: [TODO]
 
@@ -69,17 +69,17 @@ We hypothesized that the harness would outperform the single-prompt baseline ove
 
 ### 2.1 Study design
 
-This pilot has three linked stages. First, we developed the extraction workflow on breast-cancer notes through repeated review with an oncologist collaborator. Second, we adapted the resulting harness to pancreatic cancer without physician review during that development stage, using a model-in-the-loop error-review cycle with human supervision. Third, we compared the final harness with a single-prompt baseline built on the same frozen model. The comparison used 40 expert-annotated CORAL benchmark notes and an identity-masked oncologist A/B evaluation.
+The study comprised two development stages followed by an independent clinical evaluation. During breast-cancer development, a physician coauthor and the model-development investigators iteratively reviewed extraction outputs, identified recurring error classes, and revised the inference harness. The framework was then adapted to pancreatic cancer without clinician review of pancreatic-cancer outputs. In this second stage, model-assisted review identified candidate errors and proposed revisions, which the investigators assessed and regression-tested. The final harness was compared with a single-prompt baseline using the same frozen model and field schema on 40 expert-annotated CORAL notes. Three oncologists completed identity-masked A/B evaluations.
 
-The three stages answer different questions. Breast-cancer development asks whether specialist feedback can be converted into reusable prompts and rules. Pancreatic-cancer development asks whether those lessons can guide adaptation to a related but clinically different domain without requiring the specialist to inspect every iteration. The final comparison asks whether the resulting system is preferred to the same model used without the harness.
+The breast-cancer stage examined whether clinically informed error analysis could be converted into reusable system components. The pancreatic-cancer stage examined transfer to a related but distinct oncology domain without repeated clinician involvement. The final comparison isolated the contribution of the inference harness while holding the base model and target fields constant.
 
 ### 2.2 Dataset
 
-We used CORAL, an expert-curated dataset of deidentified breast and pancreatic cancer progress notes [2]. The release used in this project contains 200 additional notes without expert annotations, 100 per cancer type, and 40 expert-annotated benchmark notes, 20 per cancer type. Documented development iterations covered 56 breast-cancer notes and all 100 pancreatic-cancer notes from the unannotated pool. The 40 annotated notes were initially reserved for comparison.
+We used CORAL, a controlled-access PhysioNet dataset of deidentified medical oncology progress notes from the University of California, San Francisco [2]. Its expert-annotated benchmark contains 20 breast-cancer and 20 pancreatic-cancer notes. The release also includes 100 additional notes for each cancer type with GPT-4-generated labels rather than expert human annotations. Documented development iterations covered 56 of the additional breast-cancer notes and all 100 additional pancreatic-cancer notes. The 40 expert-annotated notes were initially reserved for comparison.
 
-CORAL is publicly available, but the records are real clinical notes rather than web-derived questions, synthetic cases, or model-generated narratives. They retain the repeated histories, copied-forward content, uncertain findings, and conditional plans that make longitudinal oncology extraction difficult. The value of this dataset is clinical realism and expert annotation, not size. Several related studies use much larger institutional cohorts, while others use narrower procedure or pathology reports or synthetic oncology notes.
+The records are real clinical notes rather than web-derived questions, synthetic cases, or model-generated narratives. They retain repeated histories, copied-forward content, uncertain findings, and conditional plans that make longitudinal oncology extraction difficult. The value of this dataset is clinical realism and expert annotation rather than scale. Access requires the PhysioNet credentialing and data-use process described by the dataset authors.
 
-Development notes were used to identify recurrent error patterns and refine the harness. The annotated benchmark notes were used for matched technical and clinician comparisons. A later technical audit of the benchmark set also prompted targeted repairs before the clinician-rated version, so the clinician comparison should be read as a pilot benchmark rather than a pristine one-shot external validation. No model-weight training or fine-tuning was performed.
+Development notes were used to identify recurrent error patterns and refine the harness. The annotated benchmark notes were used for matched technical and clinician comparisons. Although these notes were initially reserved for evaluation, a later development-stage audit informed further harness revisions before clinician review. The comparison should therefore be interpreted as a pilot benchmark rather than an untouched external validation. No model-weight training or fine-tuning was performed.
 
 ### 2.3 Base model and baseline
 
@@ -114,25 +114,25 @@ The deterministic layer addresses recurrent errors with high-confidence clinical
 
 > **Figure 1 placeholder: Development, transfer, and evaluation pathway.**
 >
-> **Draft caption:** *Figure 1. Development and evaluation pathway. Recurrent breast-cancer errors identified with an oncologist were converted into explicit harness components. The harness was then adapted to pancreatic cancer through AI-assisted, human-supervised review without physician input during development. Final outputs were compared with a same-model single-prompt baseline in an identity-masked oncologist evaluation.*
+> **Draft caption:** *Figure 1. Development, transfer, and evaluation pathway. During breast-cancer development, a physician coauthor and model-development investigators converted recurring extraction errors into prompt, verification, and deterministic-rule changes. The harness was then adapted to pancreatic cancer using model-assisted review without clinician review of pancreatic-cancer outputs. Final outputs were compared with a same-model single-prompt baseline in an identity-masked evaluation by three oncologists.*
 
-### 2.5 Clinician-guided breast-cancer development
+### 2.5 Clinician-informed breast-cancer development
 
-Breast-cancer development used approximately 15 documented iterations across 56 unannotated notes. An oncologist collaborator reviewed generated outputs and identified mistakes that mattered clinically, including errors in treatment status, receptor interpretation, staging, metastatic classification, and response. The development team compared each flagged output with the complete note, grouped recurring failures, and converted them into general changes to prompts, verification logic, or deterministic hooks. The oncologist did not annotate a conventional supervised training set, and the model weights were not updated.
+Breast-cancer development used approximately 15 documented iterations across 56 additional notes. A physician coauthor familiar with oncology reviewed selected outputs with the model-development investigators. This physician was not an oncology specialist and did not participate in the final oncologist evaluation. The investigators compared flagged outputs with the complete source notes, grouped recurring errors, and translated them into general changes to prompts, verification logic, or deterministic rules. This process did not produce a conventional supervised training set, and the model weights were not updated.
 
-This process is best described as clinician-guided rule induction. The durable artifact was not a collection of corrected answers. It was an explicit set of instructions and checks derived from repeated failure patterns. For example, a review finding that axillary nodal disease had been treated as distant metastasis became a general regional-node rule. A finding that a planned drug had been listed as active therapy became a temporal medication rule. Each high-impact change was rerun on the affected cases and on previously correct controls.
+Candidate changes were retained only after testing on affected examples and previously correct controls. The objective was to encode recurring clinical distinctions rather than case-specific corrections. For example, an error in which axillary nodal disease was classified as distant metastasis motivated a general regional-node rule. An error in which a planned drug was listed as active therapy motivated a temporal medication rule.
 
 ### 2.6 Model-in-the-loop pancreatic-cancer refinement
 
-The breast-cancer harness was then adapted to pancreatic cancer through approximately 18 documented development rounds covering all 100 unannotated pancreatic notes. No physician reviewed pancreatic-cancer outputs during this stage. The cycle had four steps: the pipeline generated structured fields; a rubric-informed Qwen reviewer compared those fields with the complete source note; an external general-purpose LLM used in the development environment summarized the accumulated errors and proposed prompt, hook, or workflow changes; and a human developer inspected, accepted, revised, and regression-tested those changes.
+The breast-cancer harness was then adapted to pancreatic cancer through approximately 18 documented development rounds covering all 100 additional pancreatic notes. No clinician reviewed pancreatic-cancer outputs during this stage. The pipeline generated structured fields, and a rubric-informed Qwen reviewer compared them with the complete source note. A separate general-purpose LLM summarized accumulated review findings and proposed candidate prompt, rule, or workflow changes. The study investigators assessed these proposals, implemented selected changes, and retained them only after regression testing.
 
-The reviewer prompt included the field definitions, severity criteria, and clinical preferences learned during breast-cancer development. This allowed earlier error categories to guide review in the new domain while still exposing pancreatic-specific problems such as regimen names and dose representation. The process did not allow the deployed model to rewrite its own code, and it was not autonomous self-evolution. We refer to it as AI-assisted, human-supervised refinement because models participated in both error detection and change proposal while a human controlled implementation.
+The reviewer prompt included the field definitions, severity criteria, and clinical distinctions established during breast-cancer development. This allowed earlier error categories to guide review in the new domain while still exposing pancreatic-specific problems such as regimen names and dose representation. Models contributed to error detection and candidate revision, but the investigators controlled implementation. We therefore describe this stage as model-assisted, investigator-supervised refinement rather than autonomous self-improvement.
 
 Throughout both development stages, the pipeline logged the original model output, each verification action, and deterministic corrections. This record allowed the team to trace a final value back through the harness and to retain or reject proposed changes based on regression results.
 
-### 2.7 Prespecified clinical fields
+### 2.7 Clinician-prioritized clinical fields
 
-The seven core fields were selected before the matched comparison:
+Before the matched comparison, the physician coauthor designated seven fields as clinically important for understanding disease status and current management:
 
 1. Which anticancer drugs is the patient actively receiving?
 2. What is the current cancer stage?
@@ -142,31 +142,23 @@ The seven core fields were selected before the matched comparison:
 6. What is the breast cancer type and ER/PR/HER2 status?
 7. What completed molecular or genetic results are documented?
 
-The oncologist instrument also included genetic testing plans, supportive medications, procedure plans, imaging plans, laboratory plans, medication plans, and recent treatment changes. Laboratory summary and general clinical findings were optional and excluded from the primary clinician analysis.
+The oncologist evaluation instrument also included genetic testing plans, supportive medications, procedure plans, imaging plans, laboratory plans, medication plans, and recent treatment changes. Laboratory summary and general clinical findings were optional and excluded from the primary clinician analysis.
 
-### 2.8 Technical evaluation
+### 2.8 Development-stage LLM-assisted review
 
-The complete matched audit contained 260 applicable note-field comparisons. A source-grounded LLM-assisted review process read the source note and both outputs for each comparison. Each result was classified as harness better, baseline better, or tie. All reported harness losses and contested high-severity findings were rechecked against the source note. This audit was used for development and technical error analysis. It was not treated as a replacement for clinician evaluation.
+LLM-assisted review was used as a development instrument, particularly during adaptation to pancreatic cancer. For each candidate output, the reviewer model compared the extracted fields with the source note using the prespecified field definitions and severity criteria. It flagged possible omissions, unsupported claims, semantic mismatches, and temporal errors. These findings informed candidate revisions that the investigators reviewed and regression-tested.
 
-Four high-impact failures found during the complete v2.2 audit were subsequently repaired. The affected cases and clean controls were rerun as a targeted regression set. These results are reported separately because the targeted set is not a new full-cohort estimate.
+A matched audit of 260 applicable note-field comparisons was also used for technical error analysis. LLM judgments were not used as final clinical outcome labels and did not replace the independent oncologist evaluation.
 
 ### 2.9 Oncologist evaluation
 
 The clinical evaluation presents the source note and two structured outputs through an identity-masked A/B interface. The evaluator selects A better, B better, or tie for each field. The interface does not reveal which output came from the harness.
 
-[TODO BEFORE SUBMISSION: State whether the oncologist who participated in breast-cancer development was also one of the final evaluators. If so, distinguish masking of system identity from independence from the development process.]
-
-The first oncologist completed all 280 required breast-cancer judgments and all 260 required pancreatic-cancer judgments. The second completed all 280 breast-cancer judgments and 259 of 260 pancreatic-cancer judgments; `p7 / lab_plan` was missing. The third completed all 280 breast-cancer judgments and did not evaluate pancreatic cancer. All raw exports were preserved unchanged. The scoring template retained stale filenames after the displayed results were updated. The project owner confirmed that the clinicians reviewed the newer outputs, but the exact hashes of the displayed PL and BL artifacts must be inserted before submission: [TODO].
+The physician coauthor who participated in breast-cancer development was not one of the final evaluators. Three oncologists independently evaluated the breast-cancer outputs. Two of them also evaluated the pancreatic-cancer outputs; the third did not evaluate pancreatic cancer.
 
 All three oncologists completed the same 280 required breast-cancer comparisons. We calculated pairwise exact agreement and Cohen's kappa for each pair. We also summarized all five completed clinician-by-cancer evaluations separately. Pooled counts are descriptive and do not treat field-level judgments as independent observations.
 
 The primary analysis will compare harness and baseline preference among directional ratings with a mixed-effects logistic model that includes evaluator, note, and field as grouping factors. Ties will be reported separately and included in a sensitivity analysis. We will report the effect estimate, 95% confidence interval, two-sided p value, and agreement across evaluators. The current three-oncologist summaries remain descriptive until this model and its sensitivity analyses are finalized.
-
-### 2.10 Exploratory patient-letter evaluation
-
-Patient-letter generation preceded the extraction-only study and motivated the shift toward a more controlled task. One oncologist evaluated 20 breast-cancer notes with three patient letters per note. The systems were shown as A, B, and C: a single-prompt GPT-4o letter, a single-prompt Qwen2.5-32B letter, and a Qwen2.5-32B letter generated from the harness output. The evaluator scored accuracy, completeness, comprehensibility, and usefulness on five-point scales, marked possible hallucinations, and rated deployment readiness.
-
-This evaluation was not powered or designed as a primary three-system trial. We therefore report it descriptively as evidence about a downstream use of structured extraction. It should not be combined with the extraction preference counts or used to claim that the complete letter system is superior.
 
 ## 3. Results
 
@@ -427,7 +419,7 @@ The current pilot supports a development strategy in which a clinician identifie
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.9，2026 年 9 月
+版本 0.10，2026 年 9 月
 
 作者：[TODO]
 
@@ -498,17 +490,17 @@ The current pilot supports a development strategy in which a clinician identifie
 
 ### 2.1 研究设计
 
-本试点研究包含三个相互衔接的阶段。第一阶段通过一位肿瘤科医生合作者的反复审阅，在乳腺癌病历上开发信息提取流程。第二阶段在没有医生参与该阶段审阅的情况下，将所得框架适配到胰腺癌，并采用人工监督的模型参与错误审查循环。第三阶段将最终框架与基于同一冻结模型的单提示基线进行比较。比较使用 40 份经专家标注的 CORAL 基准病历，并由肿瘤科医生完成隐藏系统身份的 A/B 评估。
+本研究包括两个开发阶段和一个独立的临床评估阶段。乳腺癌开发期间，一位医生作者与负责模型开发的作者反复审阅提取结果，归纳重复出现的错误，并据此修改推理框架。随后，研究团队在没有临床医生审阅胰腺癌输出的情况下，将该框架适配到胰腺癌。第二阶段通过模型辅助审查发现候选问题并提出修改方案，再由研究人员判断、实施和进行回归测试。最后，我们在 40 份经专家标注的 CORAL 病历上，将最终框架与使用同一冻结模型和相同字段定义的单提示基线进行比较，并由三位肿瘤科医生完成隐藏系统身份的 A/B 评估。
 
-三个阶段回答不同的问题。乳腺癌开发阶段检验能否把专科医生反馈转化为可复用的提示和规则。胰腺癌开发阶段检验这些经验能否指导框架适配到一个相关但临床特征不同的领域，而不要求专科医生检查每一轮迭代。最终比较则检验加入推理框架后，系统是否优于未使用该框架的同一模型。
+这三个环节分别回答不同问题：乳腺癌阶段检验能否把有临床依据的错误分析转化为可复用的系统组件；胰腺癌阶段检验这些组件能否迁移到相关但不同的肿瘤领域，而不依赖临床医生持续参与迭代；最终比较则在固定基础模型和目标字段的条件下，评估推理框架本身带来的作用。
 
 ### 2.2 数据集
 
-我们使用 CORAL 数据集，其中包含经专家整理和去标识化的乳腺癌及胰腺癌随访病历 [2]。本项目所用版本包含 200 份没有专家标注的附加病历，每个癌种各 100 份；另有 40 份经专家标注的基准病历，每个癌种各 20 份。有记录的开发迭代覆盖了 56 份乳腺癌未标注病历和全部 100 份胰腺癌未标注病历。最初预留 40 份标注病历用于系统比较。
+我们使用 CORAL 数据集。该数据集通过 PhysioNet 受控开放，包含来自加州大学旧金山分校、经过去标识化处理的肿瘤内科随访病历 [2]。其专家标注基准包括 20 份乳腺癌病历和 20 份胰腺癌病历。公开版本还分别提供每个癌种 100 份附加病历，这些附加病历带有 GPT-4 自动生成的标签，但没有人工专家标注。有记录的开发迭代使用了其中 56 份乳腺癌附加病历和全部 100 份胰腺癌附加病历。40 份专家标注病历最初预留用于系统比较。
 
-CORAL 可以公开获取，但其中的记录是真实临床病历，并非来自网页的问题、合成病例或模型生成的叙述。这些病历保留了重复病史、复制到后续记录的内容、不确定检查结果和条件性计划，而这些特征正是纵向肿瘤信息提取的难点。该数据集的价值在于临床真实性和专家标注，而非样本规模。部分相关研究使用规模更大的机构队列，另一些研究则使用范围更窄的操作记录、病理报告或合成肿瘤病历。
+这些记录是真实临床病历，而不是网络问答、合成病例或模型生成文本。病历保留了重复病史、复制到后续记录的内容、不确定检查结果和条件性计划，这些特点正是纵向肿瘤信息提取的难点。该数据集对本研究的主要价值是临床真实性和专家标注，而不是规模。数据访问需要完成 PhysioNet 规定的账号认证和数据使用流程。
 
-开发病历用于识别反复出现的错误模式并改进框架。标注基准病历用于匹配技术比较和临床医生比较。之后对基准集进行的一次技术审查还促成了临床评估版本之前的定向修复，因此临床比较应被视为试点性基准评估，而不是完全未接触数据的一次性外部验证。研究未进行模型权重训练或微调。
+开发病历用于识别反复出现的错误模式并改进框架，标注基准病历用于匹配技术比较和临床医生比较。虽然这些基准病历最初预留用于评估，但后续开发阶段的技术审查仍影响了医生评估前的框架修改。因此，本研究应被理解为试点性基准评估，而不是完全未接触数据的外部验证。研究未进行模型权重训练或微调。
 
 ### 2.3 基础模型与基线
 
@@ -545,33 +537,35 @@ CORAL 可以公开获取，但其中的记录是真实临床病历，并非来�
 >
 > **形式：** 三面板横向流程图，附一个较小的受控比较插图。
 >
-> **面板 A，乳腺癌开发：** 乳腺癌病历 → 框架输出 → 肿瘤科医生审阅 → 反复出现的失败类别 → 修改提示、验证门或确定性规则 → 回归测试。将此阶段标记为 `临床医生指导的规则归纳`。
+> **面板 A，乳腺癌开发：** 乳腺癌病历 → 框架输出 → 医生作者与模型开发作者共同审阅 → 反复出现的失败类别 → 修改提示、验证门或确定性规则 → 回归测试。将此阶段标记为 `临床信息指导的框架开发`。
 >
-> **面板 B，胰腺癌迁移：** 迁移后的框架 → 胰腺癌病历 → 依据评分准则配置的 Qwen 审查 → 外部开发 LLM 汇总并提出修改方案 → 人工接受或编辑 → 回归测试。明确标注该阶段没有医生审阅胰腺癌输出，且模型权重始终冻结。
+> **面板 B，胰腺癌迁移：** 迁移后的框架 → 胰腺癌病历 → 依据评分准则配置的 Qwen 审查 → 外部开发 LLM 汇总并提出修改方案 → 研究人员判断和实施 → 回归测试。明确标注该阶段没有临床医生审阅胰腺癌输出，且模型权重始终冻结。
 >
 > **面板 C，最终评估：** 20 份乳腺癌和 20 份胰腺癌基准病历 → 完整推理框架和匹配的单提示基线 → 向肿瘤科医生展示隐藏系统身份的 A/B 输出。
 >
 > **受控比较插图：** 在两个分支上方显示共享的冻结 Qwen2.5-32B-Instruct-AWQ 模型和目标 schema。框架分支增加字段路由、选择性上下文传递、五个验证门、确定性肿瘤学钩子、跨字段检查、日志记录和来源归因。基线分支仅使用一个与 schema 匹配的提示。
 >
-> **图注草稿：** *图 1. 开发与评估流程。由肿瘤科医生发现的乳腺癌反复性错误被转化为明确的框架组件。随后，研究通过 AI 辅助、人工监督的审查，将框架适配到胰腺癌；该开发阶段没有医生参与。最终，在隐藏系统身份的肿瘤科医生评估中，将框架输出与使用相同模型的单提示基线进行比较。*
+> **图注草稿：** *图 1. 开发、迁移与评估流程。乳腺癌开发期间，医生作者与模型开发作者将反复出现的提取错误转化为提示、验证和确定性规则。随后，研究通过模型辅助审查将框架适配到胰腺癌，该阶段没有临床医生审阅胰腺癌输出。最终，三位肿瘤科医生在隐藏系统身份的条件下，比较完整框架与使用相同模型的单提示基线。*
 
-### 2.5 临床医生指导的乳腺癌开发
+### 2.5 临床信息指导的乳腺癌开发
 
-乳腺癌开发在 56 份未标注病历上进行了约 15 轮有记录的迭代。一位肿瘤科医生合作者审阅生成结果，并指出具有临床意义的错误，包括治疗状态、受体解释、分期、转移分类和疗效判断错误。开发团队将每项标记结果与完整病历对照，对反复出现的失败进行归类，并将其转化为适用于一般情况的提示、验证逻辑或确定性钩子。肿瘤科医生没有建立传统的监督训练集，模型权重也没有更新。
+乳腺癌开发在 56 份附加病历上进行了约 15 轮有记录的迭代。一位熟悉肿瘤学问题的医生作者与模型开发作者共同审阅部分输出。这位医生不是肿瘤专科医生，也没有参与最终的肿瘤科医生评估。研究团队将发现的问题与完整源病历逐项核对，对反复出现的错误进行归类，并把它们转化为可推广的提示修改、验证逻辑或确定性规则。该过程没有建立传统的监督训练集，也没有更新模型权重。
 
-这一过程可称为临床医生指导的规则归纳。最终保留下来的是一套从重复失败模式中总结出的明确指令和检查，而不是逐例修正后的答案。例如，审查发现腋窝淋巴结受累被当作远处转移后，团队将其转化为通用的区域淋巴结规则；发现计划使用的药物被列为当前治疗后，则形成了药物时态规则。每项高影响修改都会在受影响病例和此前正确的对照病例上重新运行。
+候选修改只有在受影响样本和此前正确的对照样本上通过测试后才会保留。这里的目标不是修正单个病例，而是编码反复出现的临床区分。例如，腋窝淋巴结受累被误判为远处转移后，团队加入了通用的区域淋巴结规则；计划使用的药物被误列为当前治疗后，则加入了药物时态规则。
+
+> **协作说明：** 2.1 保留为研究设计总览；2.5 单独描述乳腺癌阶段的具体开发程序。两节不是同一层级的信息，因此不建议合并。
 
 ### 2.6 模型参与闭环的胰腺癌改进
 
-随后，我们通过约 18 轮有记录的开发，将乳腺癌框架适配到全部 100 份未标注胰腺癌病历。在这一阶段，没有医生审阅胰腺癌输出。每轮包含四个步骤：pipeline 生成结构化字段；依据评分准则配置的 Qwen 审查模型将这些字段与完整源病历进行比较；开发环境中的外部通用 LLM 汇总累积错误，并提出提示、钩子或工作流程修改方案；人工开发者检查、接受或修改这些方案，并进行回归测试。
+随后，我们通过约 18 轮有记录的开发，将乳腺癌框架适配到全部 100 份胰腺癌附加病历。在这一阶段，没有临床医生审阅胰腺癌输出。pipeline 先生成结构化字段，再由依据评分准则配置的 Qwen 审查模型将这些字段与完整源病历进行比较。开发环境中的另一个通用 LLM 负责汇总累积的审查发现，并提出提示、规则或工作流程的候选修改。研究团队审查这些方案，只实施有明确依据的修改，并在回归测试通过后保留。
 
-审查提示包含字段定义、严重程度标准，以及乳腺癌开发期间形成的临床偏好。这样既能让已有错误类别指导新癌种的审查，也能发现胰腺癌特有的问题，例如治疗方案名称和剂量表达。该流程不允许部署模型自行改写代码，也不属于自主自我演化。我们将其称为 AI 辅助、人工监督的改进，因为模型同时参与了错误发现和修改建议，而具体实施仍由人工控制。
+审查提示包含字段定义、严重程度标准，以及乳腺癌开发期间确定的临床区分。这样既能用已有错误类别指导新癌种的审查，也能发现胰腺癌特有的问题，例如治疗方案名称和剂量表达。模型参与错误发现和候选修改，但具体实施由研究人员控制。因此，我们将其称为模型辅助、研究人员监督的改进，而不是自主的“自我进化”。
 
 在两个开发阶段，pipeline 都记录原始模型输出、每项验证操作和确定性修正。这些记录使团队能够追溯最终字段值在框架中的处理过程，并根据回归结果保留或拒绝修改建议。
 
-### 2.7 预先设定的临床字段
+### 2.7 由医生确定的核心临床字段
 
-匹配比较前预先选定了七个核心字段：
+匹配比较开始前，参与开发的医生作者根据理解疾病状态和当前治疗决策的重要性，指定了七个核心临床字段：
 
 1. 患者当前正在接受哪些抗癌药物？
 2. 当前癌症分期是什么？
@@ -581,31 +575,25 @@ CORAL 可以公开获取，但其中的记录是真实临床病历，并非来�
 6. 乳腺癌类型及 ER/PR/HER2 状态是什么？
 7. 病历记录了哪些已经完成的分子或遗传检测结果？
 
-肿瘤科医生评估工具还包括遗传检测计划、支持用药、操作计划、影像计划、实验室检查计划、用药计划和近期治疗变化。实验室结果摘要和一般临床发现为选评字段，不纳入主要临床分析。
+最终的肿瘤科医生评估工具还包括遗传检测计划、支持用药、操作计划、影像计划、实验室检查计划、用药计划和近期治疗变化。实验室结果摘要和一般临床发现为选评字段，不纳入主要临床分析。
 
-### 2.8 技术评估
+### 2.8 开发阶段的 LLM 辅助审查
 
-完整匹配审查包含 260 项适用的病历字段比较。基于源文本的 LLM 辅助审查流程读取每项比较对应的源病历和两个系统输出。每项结果被归类为框架更优、基线更优或平局。所有报告为框架落后的项目，以及存在争议的高严重程度问题，都再次与源病历核对。该审查用于开发和技术错误分析，不能替代临床医生评估。
+LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过回归测试确认。
 
-完整 v2.2 审查发现的四项高影响失败随后得到修复。研究对受影响病例和无问题对照病例重新运行了定向回归集。由于该定向数据集并非对完整队列的新一轮估计，其结果单独报告。
+研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。
+
+> **协作说明：** 这里不再罗列“发现了哪些错误、之后修了什么”。这些内容更像开发报告。Methods 只说明 LLM 审查的用途、边界和它与最终医生评估的区别。
 
 ### 2.9 肿瘤科医生评估
 
 临床评估通过隐藏系统身份的 A/B 界面展示源病历和两份结构化输出。评估者针对每个字段选择 A 更优、B 更优或平局。界面不会显示哪份输出来自推理框架。
 
-[投稿前 TODO：说明参与乳腺癌开发的肿瘤科医生是否也是最终评估者之一。如果是，应区分对系统身份实施盲法和评估者独立于开发过程这两个概念。]
-
-第一位肿瘤科医生完成了全部 280 项乳腺癌必评判断和全部 260 项胰腺癌必评判断。第二位医生完成了全部 280 项乳腺癌判断和 260 项胰腺癌判断中的 259 项；缺少的是 `p7 / lab_plan`。第三位医生完成了全部 280 项乳腺癌判断，没有评估胰腺癌。三份原始导出均原样保留。更新界面中显示的结果后，评分模板仍保留了旧文件名。项目负责人确认三位医生评估的都是较新输出，但投稿前仍须填入界面所展示 PL 和 BL 文件的准确哈希值：[TODO]。
+参与乳腺癌开发的医生作者不属于最终评估者。三位肿瘤科医生独立评估了乳腺癌输出，其中两位同时评估了胰腺癌输出，第三位没有评估胰腺癌。
 
 三位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较。我们计算了每两位医生之间的完全一致率和 Cohen's kappa，并分别汇总五组已完成的评审者与癌种组合。合并计数仅作描述性统计，不把各字段判断视为相互独立的观测。
 
 主要分析将使用混合效应 logistic 回归模型，在非平局评分中比较框架与基线的偏好，并将评估者、病历和字段作为分组因素。平局将单独报告，并纳入敏感性分析。我们将报告效应估计值、95% 置信区间、双侧 p 值和评估者间一致性。在完成该模型及其敏感性分析前，目前三位医生的汇总结果仍按描述性结果报告。
-
-### 2.10 探索性患者信件评估
-
-患者信件生成研究早于仅评估信息提取的研究，并促使我们转向控制更严格的任务。一位肿瘤科医生评估了 20 份乳腺癌病历，每份病历对应三封患者信件。三个系统分别显示为 A、B 和 C：由单提示 GPT-4o 生成的信件、由单提示 Qwen2.5-32B 生成的信件，以及根据推理框架输出由 Qwen2.5-32B 生成的信件。评估者使用五点量表对准确性、完整性、可理解性和实用性评分，同时标记可能存在的幻觉，并评价部署就绪程度。
-
-该评估的样本量和设计均不足以作为主要的三系统比较试验。因此，我们仅将其作为结构化信息提取下游用途的描述性证据进行报告。该结果不应与信息提取偏好计数合并，也不能用于声称完整患者信件系统具有优势。
 
 ## 3. 结果
 

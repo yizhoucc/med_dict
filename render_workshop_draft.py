@@ -26,6 +26,10 @@ OUTPUT = ROOT / "WORKSHOP_PAPER_DRAFT.html"
 FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figures"
 
 ROUGH_FIGURES = {
+    "1": (
+        FIGURE_DIR / "figure1_development_pathway_rough.svg",
+        "Development, transfer, and independent evaluation",
+    ),
     "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Clinician preference by evaluation"),
     "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Pairwise breast-cancer agreement"),
     "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
@@ -367,9 +371,9 @@ def add_rough_markers(markdown_text: str) -> str:
     output: list[str] = []
     for line in markdown_text.splitlines():
         english_match = re.match(
-            r"> \*\*(Figure [23457]|Supplementary Figure S1) placeholder:", line
+            r"> \*\*(Figure [123457]|Supplementary Figure S1) placeholder:", line
         )
-        chinese_match = re.match(r"> \*\*(图 [23457]|补充图 S1) 占位：", line)
+        chinese_match = re.match(r"> \*\*(图 [123457]|补充图 S1) 占位：", line)
         match = english_match or chinese_match
         if match:
             key = (
