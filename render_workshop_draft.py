@@ -170,6 +170,12 @@ code {
   font-size: 0.88em;
 }
 a { color: #176a9a; }
+.citation-link {
+  color: #125d89;
+  font-weight: 700;
+  text-decoration: none;
+}
+.citation-link:hover { text-decoration: underline; }
 .draft-meta {
   display: flex;
   flex-wrap: wrap;
@@ -273,6 +279,22 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 }
 .references-section { color: #44515c; font-size: 13px; }
 .references-section h2 { font-size: 22px; }
+.references-section li {
+  margin: 0 0 13px;
+  padding-left: 3px;
+  scroll-margin-top: 20px;
+}
+.references-section li:target {
+  padding: 8px 10px 8px 3px;
+  border-radius: 7px;
+  background: var(--blue-soft);
+}
+.reference-note {
+  display: block;
+  margin-top: 4px;
+  color: #5b6670;
+  line-height: 1.5;
+}
 @media (max-width: 980px) {
   .layout { display: block; width: min(920px, calc(100% - 22px)); margin-top: 11px; }
   .toc { position: relative; top: 0; max-height: none; margin-bottom: 12px; }
@@ -431,6 +453,72 @@ def inject_rough_figures(body: str) -> str:
     return body
 
 
+def link_citation_markers(text: str, reference_prefix: str) -> str:
+    """Link numeric citation groups such as [2] and [3,8] to reference entries."""
+
+    def replace(match: re.Match[str]) -> str:
+        numbers = [value.strip() for value in match.group(1).split(",")]
+        links = [
+            f'<a class="citation-link" href="#{reference_prefix}-{number}">{number}</a>'
+            for number in numbers
+        ]
+        return "[" + ",".join(links) + "]"
+
+    return re.sub(r"\[(\d+(?:\s*,\s*\d+)*)\]", replace, text)
+
+
+def add_reference_ids(reference_section: str, reference_prefix: str) -> tuple[str, int]:
+    """Assign stable anchors to the first ordered list in a reference section."""
+
+    list_match = re.search(r"<ol>(.*?)</ol>", reference_section, flags=re.S)
+    if list_match is None:
+        raise RuntimeError(f"Reference list not found for {reference_prefix}.")
+
+    count = 0
+
+    def replace_item(match: re.Match[str]) -> str:
+        nonlocal count
+        count += 1
+        return f'<li id="{reference_prefix}-{count}">{match.group(1)}</li>'
+
+    numbered_list = re.sub(r"<li>(.*?)</li>", replace_item, list_match.group(0), flags=re.S)
+    return (
+        reference_section[: list_match.start()]
+        + numbered_list
+        + reference_section[list_match.end() :],
+        count,
+    )
+
+
+def link_citations_and_references(body: str) -> tuple[str, tuple[int, int]]:
+    """Add language-specific reference anchors and citation hyperlinks."""
+
+    english_heading = '<h2 id="references">References</h2>'
+    chinese_marker = '<div class="language-break" id="chinese-version"></div>'
+    chinese_heading = '<h2 id="参考文献">参考文献</h2>'
+
+    english_reference_start = body.index(english_heading)
+    chinese_start = body.index(chinese_marker)
+    chinese_reference_start = body.index(chinese_heading, chinese_start)
+
+    english_body = link_citation_markers(body[:english_reference_start], "ref-en")
+    english_references, english_count = add_reference_ids(
+        body[english_reference_start:chinese_start], "ref-en"
+    )
+    chinese_body = link_citation_markers(
+        body[chinese_start:chinese_reference_start], "ref-zh"
+    )
+    chinese_references, chinese_count = add_reference_ids(
+        body[chinese_reference_start:], "ref-zh"
+    )
+    chinese_references = link_citation_markers(chinese_references, "ref-zh")
+
+    return (
+        english_body + english_references + chinese_body + chinese_references,
+        (english_count, chinese_count),
+    )
+
+
 def style_sections(body: str) -> str:
     body = re.sub(
         r"(<h2 id=\"questions-for-the-clinical-collaborator\">.*?)(?=<h2 id=\"abstract\">)",
@@ -499,6 +587,11 @@ def render() -> str:
     body = run_cmark(prepared)
     body, toc = add_heading_ids(body)
     body = inject_rough_figures(body)
+    body, reference_counts = link_citations_and_references(body)
+    if reference_counts[0] != reference_counts[1]:
+        raise RuntimeError(
+            f"English and Chinese reference counts differ: {reference_counts}"
+        )
     body = style_sections(body)
     body = body.replace(
         "</h1>",
@@ -517,6 +610,7 @@ def render() -> str:
     <li class="done">✓ 3.2 的调整后主分析已完成：GEE OR 5.70，95% CI 4.24–7.66，p&lt;0.001。</li>
     <li class="done">✓ 已确认医生评审使用最终 baseline；Methods 明确评估的是含 source attribution 的完整 harness 输出，不把 attribution 单独归因。</li>
     <li class="done">✓ 已在 Results 保留自由文本评论对 `TIE` 含义的解释，并在 Discussion 将其列为主要 limitation。</li>
+    <li class="done">✓ Literature review 已更新至 20 篇主稿引用；文内编号可跳转到带一句话简评的中英文参考文献条目。</li>
     <li class="open">□ 对预先选定的一部分 `TIE` 做人工 adjudication，区分“两边都对”和“两边都错”。</li>
     <li class="open">□ 决定是否补做四级 staged ablation；LLM 评分只能作为 technical evidence，不能替代医生评估。</li>
     <li class="done">✓ Related-work 对照表已移到中文版文末审阅附录，Discussion 改为自然引用。</li>
