@@ -203,6 +203,10 @@ def main():
     )
     parser.add_argument("--cancer-type", choices=("breast", "pdac"), help="Required by --matched unless inferable from CSV filename")
     parser.add_argument("--contract", default=str(DEFAULT_MATCHED_CONTRACT), help="Matched-baseline contract YAML")
+    parser.add_argument(
+        "--jsonl-output",
+        help="Optional machine-readable JSONL output used by staged ablation tooling",
+    )
     args = parser.parse_args()
 
     from vllm_pipeline.vllm_client import VLLMClient
@@ -242,6 +246,9 @@ def main():
     json_ok = 0
     json_fail = 0
     json_errors = []
+    if args.jsonl_output:
+        Path(args.jsonl_output).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.jsonl_output).write_text("")
 
     with open(args.output, 'w') as out:
         mode = "matched-json" if args.matched else ("legacy-json" if args.json else "legacy-free-text")
@@ -272,6 +279,7 @@ def main():
             elapsed = time.time() - t0
 
             json_valid = False
+            parsed = None
             json_err_msg = ""
             if structured_output:
                 text = extraction.strip()
@@ -315,6 +323,19 @@ def main():
             if structured_output:
                 out.write(f" | JSON: {'OK' if json_valid else 'FAIL - ' + json_err_msg}")
             out.write(f"\n\n\n")
+
+            if args.jsonl_output:
+                record = {
+                    "row_index": idx,
+                    "coral_idx": coral_id,
+                    "note_text": note_text,
+                    "keypoints": parsed if isinstance(parsed, dict) else extraction,
+                    "raw_output": extraction,
+                    "json_valid": json_valid,
+                    "json_error": json_err_msg or None,
+                }
+                with open(args.jsonl_output, "a") as jsonl_out:
+                    jsonl_out.write(json.dumps(record, ensure_ascii=False) + "\n")
 
     total = time.time() - total_start
     print(f"\nDone! {len(indices)} samples in {total:.0f}s ({total/60:.1f}min)")

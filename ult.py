@@ -1145,7 +1145,20 @@ def _has_vague_terms(text):
     return any(term in text_lower for term in VAGUE_TERMS)
 
 
-def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, verify=True, chat_tmpl=None, oncology_whitelist=None, gate_config=None, supportive_whitelist=None, tool_context=None):
+def extract_and_verify_v2(
+    prompts,
+    model,
+    tokenizer,
+    gen_config,
+    base_cache,
+    verify=True,
+    chat_tmpl=None,
+    oncology_whitelist=None,
+    gate_config=None,
+    supportive_whitelist=None,
+    tool_context=None,
+    enable_postprocessing=True,
+):
     """
     V2 extraction pipeline with 5 gates (v7abc: merged improve gates).
     Each gate fixes one specific issue (trim, don't redo).
@@ -1171,6 +1184,9 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
         tool_context: optional dict with tool calling support (v26):
             full_note: str - complete note text for SEARCH_NOTE tool
             med_dict: dict - medical dictionary for DEFINE tool
+        enable_postprocessing: run deterministic filters after Gates 1-5.
+            Ablation variants B/C disable these filters while retaining Gates
+            1-2 as JSON serialization safeguards.
 
     Returns:
         dict of {key: extracted_value (dict if JSON parseable, string otherwise)}
@@ -1527,7 +1543,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                     gate_log.append(f"      [G5-TEMPORAL] parse FAILED")
 
         # --- POST-1: Strip extra keys ---
-        if parsed is not None and expected_keys:
+        if enable_postprocessing and parsed is not None and expected_keys:
             extra = set(parsed.keys()) - expected_keys
             if extra:
                 for k in extra:
@@ -1536,7 +1552,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 flags.append("stripped")
 
         # --- POST-2: Filter current_meds by whitelist ---
-        if parsed is not None and key == "Current_Medications" and oncology_whitelist:
+        if enable_postprocessing and parsed is not None and key == "Current_Medications" and oncology_whitelist:
             before = parsed.get("current_meds", "")
             parsed = filter_current_meds(parsed, oncology_whitelist)
             after = parsed.get("current_meds", "")
@@ -1545,7 +1561,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 flags.append("meds-filtered")
 
         # --- POST-3: Filter supportive_meds by whitelist ---
-        if parsed is not None and key == "Treatment_Changes" and supportive_whitelist and oncology_whitelist:
+        if enable_postprocessing and parsed is not None and key == "Treatment_Changes" and supportive_whitelist and oncology_whitelist:
             before = parsed.get("supportive_meds", "")
             parsed = filter_supportive_meds(parsed, supportive_whitelist, oncology_whitelist)
             after = parsed.get("supportive_meds", "")
@@ -1554,7 +1570,7 @@ def extract_and_verify_v2(prompts, model, tokenizer, gen_config, base_cache, ver
                 flags.append("supp-filtered")
 
         # --- POST-4: Filter procedure_plan (remove imaging/radiotherapy) ---
-        if parsed is not None and key == "Procedure_Plan":
+        if enable_postprocessing and parsed is not None and key == "Procedure_Plan":
             filter_procedure_plan(parsed, gate_log)
 
         # --- Store result ---

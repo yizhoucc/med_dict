@@ -797,6 +797,11 @@ def main():
         default=None,
         help="Generate letters from existing progress.json files (skip extraction)",
     )
+    parser.add_argument(
+        "--run-dir",
+        default=None,
+        help="Write this run to an explicit directory (used by reproducible ablation runs)",
+    )
     args = parser.parse_args()
 
     # 0. Letter-only mode: generate letters from existing progress files
@@ -816,6 +821,9 @@ def main():
     chash = config_hash(config)
     run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    if args.resume and args.run_dir:
+        parser.error("--resume and --run-dir cannot be used together")
+
     if args.resume:
         run_dir = args.resume.rstrip("/")
         progress = load_progress(run_dir)
@@ -831,6 +839,18 @@ def main():
         print(f"Resuming from {run_dir}")
         completed_indices = set(progress.get("completed_indices", []))
         saved_results = progress.get("results", {})
+    elif args.run_dir:
+        run_dir = os.path.abspath(args.run_dir)
+        if os.path.exists(os.path.join(run_dir, "progress.json")):
+            parser.error(
+                f"--run-dir already contains progress.json: {run_dir}. "
+                "Use --resume for an interrupted run."
+            )
+        os.makedirs(run_dir, exist_ok=True)
+        print(f"Starting new run in explicit directory: {run_dir}")
+        completed_indices = set()
+        saved_results = {}
+        progress = None
     else:
         # Auto-search for resumable run
         found_dir = find_resumable_run(config)
@@ -950,12 +970,22 @@ def main():
     keypoint_config["eos_token_id"] = tokenizer.eos_token_id
 
     verify = config.get("extraction", {}).get("verify", True)
+    inline_postprocessing = config.get("extraction", {}).get(
+        "inline_postprocessing", True
+    )
+    post_hooks_enabled = config.get("extraction", {}).get("post_hooks", True)
 
     # Select pipeline version
     pipeline = config.get("extraction", {}).get("pipeline", "v1")
     extract_fn = extract_and_verify_v2 if pipeline == "v2" else extract_and_verify
     gate_config = config.get("extraction", {}).get("gate_config", {})
     print(f"Using pipeline: {pipeline}")
+    print(f"Semantic verification gates (G3-G5): {'on' if verify else 'off'}")
+    print(
+        "Inline deterministic post-processing: "
+        f"{'on' if inline_postprocessing else 'off'}"
+    )
+    print(f"Run-level POST hooks: {'on' if post_hooks_enabled else 'off'}")
     if gate_config:
         print(f"Gate config: {gate_config}")
 
@@ -1064,6 +1094,7 @@ def main():
             verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
             gate_config=gate_config, supportive_whitelist=supp_whitelist,
             tool_context=global_tool_ctx,
+            enable_postprocessing=inline_postprocessing,
         )
         print(f"  Phase 1 extraction ({len(phase1_prompts)} prompts): {time.time() - ext_start:.1f}s")
 
@@ -1089,6 +1120,7 @@ def main():
                 verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
                 gate_config=gate_config, supportive_whitelist=supp_whitelist,
                 tool_context=global_tool_ctx,
+                enable_postprocessing=inline_postprocessing,
             )
             keypoints.update(phase2_keypoints)
             print(f"  Phase 2 extraction ({len(phase2_prompts)} prompts): {time.time() - phase2_start:.1f}s")
@@ -1131,6 +1163,7 @@ def main():
                 gate_config=gate_config,
                 supportive_whitelist=supp_whitelist,
                 tool_context=plan_tool_ctx,
+                enable_postprocessing=inline_postprocessing,
             )
             keypoints.update(plan_keypoints)
             print(f"  Plan extraction prompts: {time.time() - plan_start:.1f}s")
@@ -1145,6 +1178,7 @@ def main():
                 verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
                 gate_config=gate_config, supportive_whitelist=supp_whitelist,
                 tool_context=global_tool_ctx,
+                enable_postprocessing=inline_postprocessing,
             )
             keypoints.update(ref_keypoints)
             print(f"  Referral extraction (full note): {time.time() - ref_start:.1f}s")
@@ -1158,6 +1192,7 @@ def main():
                 model, tokenizer, keypoint_config, fullnote_cache,
                 verify=verify, chat_tmpl=chat_tmpl, oncology_whitelist=whitelist,
                 gate_config=gate_config, supportive_whitelist=supp_whitelist,
+                enable_postprocessing=inline_postprocessing,
             )
             keypoints.update(gr_keypoints)
             print(f"  Genetic_Testing_Results (full note): {time.time() - gr_start:.1f}s")
@@ -1167,7 +1202,7 @@ def main():
             # contaminates genetic_testing_results. If no real molecular/genetic test remains,
             # clear to "No genetic testing results in note." [extraction-audit fix]
             gtr = keypoints.get("Genetic_Testing_Results", {})
-            if isinstance(gtr, dict):
+            if post_hooks_enabled and isinstance(gtr, dict):
                 gval = str(gtr.get("genetic_testing_results", "") or "")
                 gval_low = gval.lower().strip().rstrip('.')
                 _no_result = ("no genetic testing results in note", "none", "n/a", "")
@@ -1215,6 +1250,15 @@ def main():
                             if new_val.lower().rstrip('.') != gval_low:
                                 gtr["genetic_testing_results"] = new_val if new_val.endswith(".") else new_val + "."
                                 print(f"    [POST-GENETIC-RESULTS-IHC] Stripped IHC contamination → '{new_val[:60]}'")
+
+        # The historical POST hooks are inline below. Variants B/C temporarily
+        # present that block with an empty mapping and restore the raw gate output
+        # before attribution. This keeps the validated hook code unchanged while
+        # guaranteeing that it cannot mutate those ablation outputs.
+        keypoints_before_post_hooks = None
+        if not post_hooks_enabled:
+            keypoints_before_post_hooks = keypoints
+            keypoints = {}
 
         # Sanitize keypoints: convert any list values to strings [v32 compat fix]
         for section_key, section_val in keypoints.items():
@@ -5511,6 +5555,9 @@ def main():
                     f"'{genetic_after[:100]}'"
                 )
 
+        if keypoints_before_post_hooks is not None:
+            keypoints = keypoints_before_post_hooks
+
         # Source attribution — find evidence quotes for each extracted field
         attribution = {}
         if config.get("extraction", {}).get("attribution", False):
@@ -5645,10 +5692,14 @@ def main():
     total_time = time.time() - global_start
     print(f"\nTotal processing time: {total_time:.1f}s ({total_time/60:.1f}min)")
 
-    # 13. Copy results.txt to project root
-    project_root = os.path.dirname(os.path.abspath(__file__))
-    shutil.copy2(results_path, os.path.join(project_root, "results.txt"))
-    print(f"Done! Results copied to ./results.txt")
+    # 13. Copy results.txt to project root for historical workflows. Reproducible
+    # ablation runs disable this side effect and keep outputs inside their run dir.
+    if config.get("extraction", {}).get("copy_results_to_root", True):
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        shutil.copy2(results_path, os.path.join(project_root, "results.txt"))
+        print("Done! Results copied to ./results.txt")
+    else:
+        print("Done! Root-level results.txt copy disabled for this run")
     print(f"Full results in: {run_dir}/")
 
 
