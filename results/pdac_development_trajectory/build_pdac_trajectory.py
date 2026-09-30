@@ -58,8 +58,6 @@ CHECKPOINTS = [
                "results/v32_pdac_full_iter3_results.txt", "results/v32_pdac_full_iter3_review.md"),
     Checkpoint(12, "100-sample development set", 4, "F4", 100,
                "results/v32_pdac_full_iter4_results.txt", "results/v32_pdac_full_iter4_review.md"),
-    Checkpoint(13, "100-sample development set", 5, "F5", 100,
-               "results/v32_pdac_full_iter5_results.txt", "results/v32_pdac_full_iter5_review.md"),
 ]
 
 
@@ -473,7 +471,7 @@ def main() -> None:
         raise ValueError("D1-D9 do not share one review ROW set")
     full_review_sets = {row["review_row_ids"] for row in main_rows[9:]}
     if len(full_review_sets) != 1:
-        raise ValueError("F2-F5 do not share one review ROW set")
+        raise ValueError("F2-F4 do not share one review ROW set")
     schema_signatures = {
         row.get("result_schema_signature", "")
         for row in main_rows

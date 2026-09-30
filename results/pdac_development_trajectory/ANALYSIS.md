@@ -2,21 +2,21 @@
 
 ## Analysis scope
 
-The main trajectory contains 13 archived checkpoints:
+The main trajectory contains 12 archived checkpoints:
 
 1. `D1-D9`: nine iterations on the same 30-note PDAC development subset.
-2. `F2-F5`: four iterations on the same 100-note PDAC development set.
+2. `F2-F4`: three iterations on the same 100-note PDAC development set.
 
 `D1` is labeled as the first ChatGPT-rubric-assisted PDAC adaptation checkpoint, following the authors' project history. Later checkpoints are labeled as LLM-review-guided refinements. The files do not store a ChatGPT rubric identifier or workflow hash, so this phase interpretation does not come from embedded artifact metadata.
 
 The analysis is restricted to extraction P1 findings written in archived reports that explicitly identify the reviewer as `Qwen2.5-32B-Instruct-AWQ (auto_review.py)`. Letter findings, P2 findings, total flags, Claude-authored follow-up reviews, simulated doctor feedback, and physician ratings are outside this trajectory.
 
-F6-F9 are excluded. Their 100-note generation outputs exist, but no matching `auto_review.py` reports were found in the working tree or Git history. The only later review artifact is an F7 document written by `Claude (acting as oncologist)`. It is not a physician evaluation and is not comparable to the Qwen series.
+F5 is excluded because it was a temporary robustness experiment rather than the final development checkpoint. F6-F9 are also excluded because they did not introduce further intended workflow changes and have no matching `auto_review.py` reports in the working tree or Git history. The only later review artifact is an F7 document written by `Claude (acting as oncologist)`. It is not a physician evaluation and is not comparable to the Qwen series. F4 is therefore treated as the final full-set checkpoint in this trajectory.
 
 ## Artifact and comparability audit
 
 - All D1-D9 review files contain the same 30 ROW identifiers.
-- All F2-F5 review and available result files contain ROW 1-100.
+- All F2-F4 review and result files contain ROW 1-100.
 - The 30-note cohort is a subset of the 100-note development set.
 - All available result files expose the same 29-leaf extraction schema. The generated schema signature is `9827c47fd0fe`.
 - D2, D3, D8, and D9 no longer have their generation result files. Their Qwen review files remain complete. Each contains all 30 ROW sections, and its detailed findings reproduce its summary P0/P1/P2 totals exactly.
@@ -55,9 +55,7 @@ The extraction P1 sequence is:
 | F2 | 11 | 11.0 |
 | F3 | 8 | 8.0 |
 | F4 | 6 | 6.0 |
-| F5 | 14 | 14.0 |
-
-F2-F4 show a reduction from 11 to 6 flags. F5 rises to 14. The F5 increase is preserved in both the CSV and figure. The available series therefore supports early full-set improvement followed by instability. It does not support a monotonic decline across the complete 100-note phase.
+F2-F4 show a reduction from 11 to 6 flags. F4 is the final full-set checkpoint included in the trajectory.
 
 The D9-to-F2 increase from 3.3 to 11.0 flags per 100 samples should not be interpreted as regression. The development set expanded from a selected 30-note subset to all 100 notes, changing the case mix.
 
@@ -95,8 +93,6 @@ Within F2-F4, several categories also declined:
 - Treatment goals: 3 to 1.
 - Active anticancer medications: 3 to 2.
 
-F5 reversed part of this improvement. Active medication flags rose to 5, treatment-change/plan flags rose to 3, treatment-goal flags rose to 2, and laboratory flags rose to 3.
-
 F2-F4 is the strongest full-set comparison. The same 100 notes were reviewed after the last committed reviewer-prompt update, and extraction P1 flags fell from 11 to 6. This result can be reported as a development-time automated-review trend. It does not identify which workflow change caused the reduction.
 
 ### Categories that should not support a strong claim
@@ -105,7 +101,7 @@ F2-F4 is the strongest full-set comparison. The same 100 notes were reviewed aft
 - Diagnosis/stage/metastasis reaches zero during D6-D9, but the reviewer prompt was later updated to clarify that pTN notation should not be called inaccurate. The category trend combines pipeline improvement with reviewer calibration.
 - The early treatment-goal drop occurs between D1 and D2 while the reviewer and pipeline prompts were both being changed. Attribution to a single harness component is not possible.
 - Active medication findings include true omissions, scope disagreements, and at least one internally odd flag that called an empty field incorrect when the note reportedly contained no medication. The category count describes what Qwen flagged, not a validated medication error rate.
-- F2-F5 are more comparable than the early D checkpoints because no later committed `auto_review.py` change appears after the pre-F2 reviewer update. The exact reviewer prompt was still not stored with each report, so this remains a historical development analysis.
+- F2-F4 are more comparable than the early D checkpoints because no later committed `auto_review.py` change appears after the pre-F2 reviewer update. The exact reviewer prompt was still not stored with each report, so this remains a historical development analysis.
 
 ## Reviewer limitations
 
@@ -119,16 +115,16 @@ The trajectory is suitable as secondary development evidence. The separate blind
 
 ## Recommended Results wording
 
-> We retrospectively reconstructed the PDAC extraction-development trajectory from archived outputs of the development-time Qwen2.5-32B reviewer. Across nine iterations on a fixed 30-note subset, extraction-related P1 findings flagged by the automated reviewer decreased from 9 to 1, corresponding to 30.0 and 3.3 flags per 100 notes. Flagged diagnosis/staging, active-medication, treatment-goal, and laboratory issues were all lower at the final subset checkpoint. After expansion to the 100-note development set, extraction P1 flags decreased from 11 at full iteration 2 to 6 at iteration 4, then increased to 14 at iteration 5. The cohort expansion changed the case mix, and the reviewer rubric changed during early development. These counts describe automated development-review signals rather than clinician-confirmed error rates.
+> We retrospectively reconstructed the PDAC extraction-development trajectory from archived outputs of the development-time Qwen2.5-32B reviewer. Across nine iterations on a fixed 30-note subset, extraction-related P1 findings flagged by the automated reviewer decreased from 9 to 1, corresponding to 30.0 and 3.3 flags per 100 notes. Flagged diagnosis/staging, active-medication, treatment-goal, and laboratory issues were all lower at the final subset checkpoint. After expansion to the 100-note development set, extraction P1 flags decreased from 11 at full iteration 2 to 6 at the final included checkpoint, full iteration 4. The cohort expansion changed the case mix, and the reviewer rubric changed during early development. These counts describe automated development-review signals rather than clinician-confirmed error rates.
 
 ## Recommended figure caption
 
-> **Figure X. PDAC extraction development trajectory based on archived automated reviews.** D1-D9 represent nine checkpoints evaluated on the same 30-note development subset. F2-F5 represent four checkpoints evaluated on the same 100-note development set. Values are Qwen2.5-32B reviewer P1 flags normalized per 100 notes. The dashed segment marks expansion from 30 to 100 notes and should not be interpreted as a within-cohort change. Panel B assigns every extraction P1 flag to a predefined clinical field category; all categories, including zero-count categories, are displayed. The reviewer rubric changed during early development, and its exact prompt hash was not stored. Counts are development-time automated-review signals, not clinician-confirmed error rates.
+> **Figure X. PDAC extraction development trajectory based on archived automated reviews.** D1-D9 represent nine checkpoints evaluated on the same 30-note development subset. F2-F4 represent three checkpoints evaluated on the same 100-note development set, with F4 treated as the final full-set checkpoint. Values are Qwen2.5-32B reviewer P1 flags normalized per 100 notes. The dashed segment marks expansion from 30 to 100 notes and should not be interpreted as a within-cohort change. Panel B assigns every extraction P1 flag to a predefined clinical field category; all categories, including zero-count categories, are displayed. The reviewer rubric changed during early development, and its exact prompt hash was not stored. Counts are development-time automated-review signals, not clinician-confirmed error rates.
 
 ## Generated files
 
 - `build_pdac_trajectory.py`: verifies the archived reports, extracts extraction P1 findings, assigns predefined field categories, and regenerates the CSV and SVG outputs without calling an LLM.
-- `pdac_trajectory.csv`: one row per D1-D9 and F2-F5 checkpoint.
-- `pdac_flag_categories.csv`: complete 13-by-10 category grid, including zero-count categories.
+- `pdac_trajectory.csv`: one row per D1-D9 and F2-F4 checkpoint.
+- `pdac_flag_categories.csv`: complete 12-by-10 category grid, including zero-count categories.
 - `pdac_flag_details.csv`: the 80 extraction P1 findings used in the analysis.
 - `pdac_trajectory.svg`: extraction-only trajectory and complete category heatmap.
