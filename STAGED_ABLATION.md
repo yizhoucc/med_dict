@@ -45,3 +45,58 @@ export does not bind the study to Qwen, ChatGPT, Claude, or another judge.
 
 This is a technical ablation. Without new clinician ratings, automated judging
 must not be described as clinical validation or as a clinician-rated ablation.
+
+## Long WSL run from the Mac
+
+The submitter auto-detects a WSL checkout using `.git` plus `run.py`, runs
+`git pull --ff-only` by default, and then launches the worker. Therefore a
+normal invocation only requires that the committed changes are available from
+the WSL checkout's configured remote. Use `--no-sync` only when that checkout
+has already been updated by another mechanism.
+
+The project path can also be supplied explicitly:
+
+```bash
+bash scripts/submit_staged_ablation_wsl.sh \
+  --project-dir /path/inside/wsl/to/med_dict
+```
+
+The remote worker performs a preflight for the project, `medllm` conda env,
+disk, GPU, and `${BASE_URL}/models`. If the expected Qwen2.5 endpoint is absent,
+it checks the single GPU every 60 seconds, waits while another compute process
+owns it, then launches vLLM with the project's established settings. It records
+the server PID/log and shuts down only that PID after success or failure. Pass
+`--no-start-vllm` to require a separately managed endpoint instead.
+
+After preflight, the worker runs A-D sequentially for breast and PDAC;
+records per-task logs, PID files, status, and manifests; stops on the first
+failure; and finally creates blinded pairwise exports. It polls progress and
+GPU status every 60 seconds. An optional WSL-side file containing the Bark base
+URL can be supplied with `--bark-url-file`.
+
+## Runtime estimate for 40 annotated notes
+
+The estimate is based on existing Qwen2.5-32B-AWQ vLLM artifacts:
+
+- Matched single-prompt baseline: 40 notes took about 9.4 minutes in the newer
+  run and 14.8 minutes in the v21 run.
+- Full v22 pipeline: breast took 24.8 minutes and PDAC took 27.1 minutes. Those
+  runs also enabled LLM source attribution, which commonly added 6-11 seconds
+  per note; this ablation disables attribution.
+- B makes about 19 field-generation calls per note. C/D can make up to about
+  `19 initial + 19 G3 + 19 G4 + 6 G5 = 63` calls per note, with some gates
+  skipped for empty values. D's deterministic hooks add little GPU time.
+
+Working estimate:
+
+| Variant | 40-note estimate |
+|---|---:|
+| A | 9-17 min |
+| B | 15-30 min |
+| C | 40-60 min |
+| D | 40-60 min |
+| Total generation | 104-167 min |
+
+Allow roughly 2-4 hours wall time for endpoint contention, long outputs,
+format repair, retries, export, and startup overhead. External judge execution
+is not included.

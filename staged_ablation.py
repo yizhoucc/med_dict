@@ -378,6 +378,8 @@ def normalize_pipeline_outputs(progress_path: Path, output_path: Path) -> None:
 def run_variant(args: argparse.Namespace, variant: str) -> Path:
     config_path = Path(args.base_config).resolve() if args.base_config else BASE_CONFIGS[(args.cancer, args.sample_set)]
     base_config = yaml.safe_load(config_path.read_text())
+    if args.base_url:
+        base_config.setdefault("model", {}).setdefault("vllm", {})["base_url"] = args.base_url
     dataset_path = (PROJECT_ROOT / base_config["data"]["dataset_path"]).resolve()
     rows = load_rows(dataset_path)
     indices = resolve_indices(base_config, rows, parse_indices(args.indices))
@@ -568,6 +570,7 @@ def build_parser() -> argparse.ArgumentParser:
     generate.add_argument("--variant", choices=("A", "B", "C", "D", "all"), required=True)
     generate.add_argument("--output-dir", required=True)
     generate.add_argument("--base-config", help="Override the canonical cancer/sample-set config")
+    generate.add_argument("--base-url", help="Override the vLLM OpenAI-compatible base URL")
     generate.add_argument("--indices", help="Optional comma-separated dataset row indices")
     generate.add_argument("--dry-run", action="store_true", help="Write configs/manifests without loading a model")
 
