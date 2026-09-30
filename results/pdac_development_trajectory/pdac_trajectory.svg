@@ -1,0 +1,468 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1120" viewBox="0 0 1500 1120">
+<rect x="0" y="0" width="1500" height="1120" fill="#FFFFFF"/>
+<text x="48.0" y="38.0" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="bold" text-anchor="start" fill="#202124">PDAC development trajectory from archived automated reviews</text>
+<text x="48.0" y="62.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#4B5563">Rates are automated reviewer flags per 100 samples. They are not clinician-confirmed error rates.</text>
+<text x="48.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#202124">A. Major flags recorded by Qwen reviewer</text>
+<line x1="104" y1="437.0" x2="722" y2="437.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="441.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">0</text>
+<line x1="104" y1="373.6" x2="722" y2="373.6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="377.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">22</text>
+<line x1="104" y1="310.2" x2="722" y2="310.2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="314.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">44</text>
+<line x1="104" y1="246.8" x2="722" y2="246.8" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="250.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">66</text>
+<line x1="104" y1="183.4" x2="722" y2="183.4" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="187.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">88</text>
+<line x1="104" y1="120.0" x2="722" y2="120.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="124.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">110</text>
+<line x1="432.3" y1="120" x2="432.3" y2="437" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="5 5"/>
+<text x="104.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D1</text>
+<text x="142.6" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D2</text>
+<text x="181.2" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D3</text>
+<text x="219.9" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D4</text>
+<text x="258.5" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D5</text>
+<text x="297.1" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D6</text>
+<text x="335.8" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D7</text>
+<text x="374.4" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D8</text>
+<text x="413.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D9</text>
+<text x="451.6" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F2</text>
+<text x="490.2" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F3</text>
+<text x="528.9" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F4</text>
+<text x="567.5" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F5</text>
+<text x="606.1" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F6</text>
+<text x="644.8" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F7</text>
+<text x="683.4" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F8</text>
+<text x="722.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F9</text>
+<text x="258.5" y="479.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">30-sample subset</text>
+<text x="586.8" y="479.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">100-sample set</text>
+<text x="57.0" y="278.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#4B5563" transform="rotate(-90 57.0 278.5)">Flags per 100 samples</text>
+<line x1="594" y1="96" x2="616" y2="96" stroke="#B91C1C" stroke-width="3"/>
+<text x="622.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="start" fill="#374151">P1</text>
+<circle cx="104.0" cy="129.6" r="3.5" fill="#B91C1C"/>
+<circle cx="142.6" cy="168.0" r="3.5" fill="#B91C1C"/>
+<circle cx="181.2" cy="158.4" r="3.5" fill="#B91C1C"/>
+<circle cx="219.9" cy="148.8" r="3.5" fill="#B91C1C"/>
+<circle cx="258.5" cy="196.8" r="3.5" fill="#B91C1C"/>
+<circle cx="297.1" cy="331.3" r="3.5" fill="#B91C1C"/>
+<circle cx="335.8" cy="321.7" r="3.5" fill="#B91C1C"/>
+<circle cx="374.4" cy="340.9" r="3.5" fill="#B91C1C"/>
+<circle cx="413.0" cy="360.2" r="3.5" fill="#B91C1C"/>
+<polyline points="104.0,129.6 142.6,168.0 181.2,158.4 219.9,148.8 258.5,196.8 297.1,331.3 335.8,321.7 374.4,340.9 413.0,360.2" fill="none" stroke="#B91C1C" stroke-width="2.5"/>
+<circle cx="451.6" cy="327.5" r="3.5" fill="#B91C1C"/>
+<circle cx="490.2" cy="339.0" r="3.5" fill="#B91C1C"/>
+<circle cx="528.9" cy="344.8" r="3.5" fill="#B91C1C"/>
+<circle cx="567.5" cy="298.7" r="3.5" fill="#B91C1C"/>
+<polyline points="451.6,327.5 490.2,339.0 528.9,344.8 567.5,298.7" fill="none" stroke="#B91C1C" stroke-width="2.5"/>
+<line x1="602.1" y1="128.0" x2="610.1" y2="136.0" stroke="#9CA3AF"/>
+<line x1="610.1" y1="128.0" x2="602.1" y2="136.0" stroke="#9CA3AF"/>
+<line x1="640.8" y1="128.0" x2="648.8" y2="136.0" stroke="#9CA3AF"/>
+<line x1="648.8" y1="128.0" x2="640.8" y2="136.0" stroke="#9CA3AF"/>
+<line x1="679.4" y1="128.0" x2="687.4" y2="136.0" stroke="#9CA3AF"/>
+<line x1="687.4" y1="128.0" x2="679.4" y2="136.0" stroke="#9CA3AF"/>
+<line x1="718.0" y1="128.0" x2="726.0" y2="136.0" stroke="#9CA3AF"/>
+<line x1="726.0" y1="128.0" x2="718.0" y2="136.0" stroke="#9CA3AF"/>
+<text x="768.0" y="105.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#202124">B. Minor flags recorded by Qwen reviewer</text>
+<line x1="824" y1="437.0" x2="1442" y2="437.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="441.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">0</text>
+<line x1="824" y1="373.6" x2="1442" y2="373.6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="377.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">110</text>
+<line x1="824" y1="310.2" x2="1442" y2="310.2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="314.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">220</text>
+<line x1="824" y1="246.8" x2="1442" y2="246.8" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="250.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">330</text>
+<line x1="824" y1="183.4" x2="1442" y2="183.4" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="187.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">440</text>
+<line x1="824" y1="120.0" x2="1442" y2="120.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="816.0" y="124.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">550</text>
+<line x1="1152.3" y1="120" x2="1152.3" y2="437" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="5 5"/>
+<text x="824.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D1</text>
+<text x="862.6" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D2</text>
+<text x="901.2" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D3</text>
+<text x="939.9" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D4</text>
+<text x="978.5" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D5</text>
+<text x="1017.1" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D6</text>
+<text x="1055.8" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D7</text>
+<text x="1094.4" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D8</text>
+<text x="1133.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D9</text>
+<text x="1171.6" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F2</text>
+<text x="1210.2" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F3</text>
+<text x="1248.9" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F4</text>
+<text x="1287.5" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F5</text>
+<text x="1326.1" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F6</text>
+<text x="1364.8" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F7</text>
+<text x="1403.4" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F8</text>
+<text x="1442.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F9</text>
+<text x="978.5" y="479.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">30-sample subset</text>
+<text x="1306.8" y="479.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">100-sample set</text>
+<text x="777.0" y="278.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#4B5563" transform="rotate(-90 777.0 278.5)">Flags per 100 samples</text>
+<line x1="1314" y1="96" x2="1336" y2="96" stroke="#D97706" stroke-width="3"/>
+<text x="1342.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="start" fill="#374151">P2</text>
+<circle cx="824.0" cy="219.9" r="3.5" fill="#D97706"/>
+<circle cx="862.6" cy="202.6" r="3.5" fill="#D97706"/>
+<circle cx="901.2" cy="175.7" r="3.5" fill="#D97706"/>
+<circle cx="939.9" cy="175.7" r="3.5" fill="#D97706"/>
+<circle cx="978.5" cy="162.3" r="3.5" fill="#D97706"/>
+<circle cx="1017.1" cy="156.5" r="3.5" fill="#D97706"/>
+<circle cx="1055.8" cy="160.3" r="3.5" fill="#D97706"/>
+<circle cx="1094.4" cy="150.7" r="3.5" fill="#D97706"/>
+<circle cx="1133.0" cy="171.9" r="3.5" fill="#D97706"/>
+<polyline points="824.0,219.9 862.6,202.6 901.2,175.7 939.9,175.7 978.5,162.3 1017.1,156.5 1055.8,160.3 1094.4,150.7 1133.0,171.9" fill="none" stroke="#D97706" stroke-width="2.5"/>
+<circle cx="1171.6" cy="128.6" r="3.5" fill="#D97706"/>
+<circle cx="1210.2" cy="126.9" r="3.5" fill="#D97706"/>
+<circle cx="1248.9" cy="126.9" r="3.5" fill="#D97706"/>
+<circle cx="1287.5" cy="123.5" r="3.5" fill="#D97706"/>
+<polyline points="1171.6,128.6 1210.2,126.9 1248.9,126.9 1287.5,123.5" fill="none" stroke="#D97706" stroke-width="2.5"/>
+<line x1="1322.1" y1="128.0" x2="1330.1" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1330.1" y1="128.0" x2="1322.1" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1360.8" y1="128.0" x2="1368.8" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1368.8" y1="128.0" x2="1360.8" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1399.4" y1="128.0" x2="1407.4" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1407.4" y1="128.0" x2="1399.4" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1438.0" y1="128.0" x2="1446.0" y2="136.0" stroke="#9CA3AF"/>
+<line x1="1446.0" y1="128.0" x2="1438.0" y2="136.0" stroke="#9CA3AF"/>
+<text x="48.0" y="538.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#202124">C. P1 flags by output section</text>
+<line x1="104" y1="870.0" x2="722" y2="870.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="874.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">0</text>
+<line x1="104" y1="806.6" x2="722" y2="806.6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="810.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">18</text>
+<line x1="104" y1="743.2" x2="722" y2="743.2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="747.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">36</text>
+<line x1="104" y1="679.8" x2="722" y2="679.8" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="683.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">54</text>
+<line x1="104" y1="616.4" x2="722" y2="616.4" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="620.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">72</text>
+<line x1="104" y1="553.0" x2="722" y2="553.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="96.0" y="557.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="end" fill="#5F6368">90</text>
+<line x1="432.3" y1="553" x2="432.3" y2="870" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="5 5"/>
+<text x="104.0" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D1</text>
+<text x="142.6" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D2</text>
+<text x="181.2" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D3</text>
+<text x="219.9" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D4</text>
+<text x="258.5" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D5</text>
+<text x="297.1" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D6</text>
+<text x="335.8" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D7</text>
+<text x="374.4" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D8</text>
+<text x="413.0" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D9</text>
+<text x="451.6" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F2</text>
+<text x="490.2" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F3</text>
+<text x="528.9" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F4</text>
+<text x="567.5" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F5</text>
+<text x="606.1" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F6</text>
+<text x="644.8" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F7</text>
+<text x="683.4" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F8</text>
+<text x="722.0" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F9</text>
+<text x="258.5" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">30-sample subset</text>
+<text x="586.8" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">100-sample set</text>
+<text x="57.0" y="711.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#4B5563" transform="rotate(-90 57.0 711.5)">Flags per 100 samples</text>
+<line x1="594" y1="529" x2="616" y2="529" stroke="#7C3AED" stroke-width="3"/>
+<text x="622.0" y="533.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="start" fill="#374151">Letter</text>
+<circle cx="104.0" cy="600.0" r="3.5" fill="#7C3AED"/>
+<circle cx="142.6" cy="576.5" r="3.5" fill="#7C3AED"/>
+<circle cx="181.2" cy="588.2" r="3.5" fill="#7C3AED"/>
+<circle cx="219.9" cy="588.2" r="3.5" fill="#7C3AED"/>
+<circle cx="258.5" cy="646.9" r="3.5" fill="#7C3AED"/>
+<circle cx="297.1" cy="787.8" r="3.5" fill="#7C3AED"/>
+<circle cx="335.8" cy="776.1" r="3.5" fill="#7C3AED"/>
+<circle cx="374.4" cy="787.8" r="3.5" fill="#7C3AED"/>
+<circle cx="413.0" cy="787.8" r="3.5" fill="#7C3AED"/>
+<polyline points="104.0,600.0 142.6,576.5 181.2,588.2 219.9,588.2 258.5,646.9 297.1,787.8 335.8,776.1 374.4,787.8 413.0,787.8" fill="none" stroke="#7C3AED" stroke-width="2.5"/>
+<circle cx="451.6" cy="774.9" r="3.5" fill="#7C3AED"/>
+<circle cx="490.2" cy="778.4" r="3.5" fill="#7C3AED"/>
+<circle cx="528.9" cy="778.4" r="3.5" fill="#7C3AED"/>
+<circle cx="567.5" cy="750.2" r="3.5" fill="#7C3AED"/>
+<polyline points="451.6,774.9 490.2,778.4 528.9,778.4 567.5,750.2" fill="none" stroke="#7C3AED" stroke-width="2.5"/>
+<line x1="594" y1="546" x2="616" y2="546" stroke="#2563EB" stroke-width="3"/>
+<text x="622.0" y="550.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="start" fill="#374151">Extraction</text>
+<circle cx="104.0" cy="764.3" r="3.5" fill="#2563EB"/>
+<circle cx="142.6" cy="834.8" r="3.5" fill="#2563EB"/>
+<circle cx="181.2" cy="811.3" r="3.5" fill="#2563EB"/>
+<circle cx="219.9" cy="799.6" r="3.5" fill="#2563EB"/>
+<circle cx="258.5" cy="799.6" r="3.5" fill="#2563EB"/>
+<circle cx="297.1" cy="823.0" r="3.5" fill="#2563EB"/>
+<circle cx="335.8" cy="823.0" r="3.5" fill="#2563EB"/>
+<circle cx="374.4" cy="834.8" r="3.5" fill="#2563EB"/>
+<circle cx="413.0" cy="858.3" r="3.5" fill="#2563EB"/>
+<polyline points="104.0,764.3 142.6,834.8 181.2,811.3 219.9,799.6 258.5,799.6 297.1,823.0 335.8,823.0 374.4,834.8 413.0,858.3" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="451.6" cy="831.3" r="3.5" fill="#2563EB"/>
+<circle cx="490.2" cy="841.8" r="3.5" fill="#2563EB"/>
+<circle cx="528.9" cy="848.9" r="3.5" fill="#2563EB"/>
+<circle cx="567.5" cy="820.7" r="3.5" fill="#2563EB"/>
+<polyline points="451.6,831.3 490.2,841.8 528.9,848.9 567.5,820.7" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<line x1="602.1" y1="561.0" x2="610.1" y2="569.0" stroke="#9CA3AF"/>
+<line x1="610.1" y1="561.0" x2="602.1" y2="569.0" stroke="#9CA3AF"/>
+<line x1="640.8" y1="561.0" x2="648.8" y2="569.0" stroke="#9CA3AF"/>
+<line x1="648.8" y1="561.0" x2="640.8" y2="569.0" stroke="#9CA3AF"/>
+<line x1="679.4" y1="561.0" x2="687.4" y2="569.0" stroke="#9CA3AF"/>
+<line x1="687.4" y1="561.0" x2="679.4" y2="569.0" stroke="#9CA3AF"/>
+<line x1="718.0" y1="561.0" x2="726.0" y2="569.0" stroke="#9CA3AF"/>
+<line x1="726.0" y1="561.0" x2="718.0" y2="569.0" stroke="#9CA3AF"/>
+<text x="768.0" y="538.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#202124">D. P1 flags by reviewed output area</text>
+<text x="927.0" y="587.9" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">diagnosis stage metastasis</text>
+<rect x="935.0" y="559.0" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="964.8" y="559.0" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="994.6" y="559.0" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1024.5" y="559.0" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1054.3" y="559.0" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1084.1" y="559.0" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1113.9" y="559.0" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1143.8" y="559.0" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1173.6" y="559.0" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1203.4" y="559.0" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1233.2" y="559.0" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1263.1" y="559.0" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1292.9" y="559.0" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1322.7" y="559.0" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="559.0" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="559.0" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="559.0" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="588.3" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="632.3" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">medications treatment</text>
+<rect x="935.0" y="603.4" width="29.8" height="44.4" fill="#dfddec" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">13</text>
+<rect x="964.8" y="603.4" width="29.8" height="44.4" fill="#e8e9f2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">7</text>
+<rect x="994.6" y="603.4" width="29.8" height="44.4" fill="#dfddec" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">13</text>
+<rect x="1024.5" y="603.4" width="29.8" height="44.4" fill="#dbd7e9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">17</text>
+<rect x="1054.3" y="603.4" width="29.8" height="44.4" fill="#dbd7e9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">17</text>
+<rect x="1084.1" y="603.4" width="29.8" height="44.4" fill="#e3e3ef" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">10</text>
+<rect x="1113.9" y="603.4" width="29.8" height="44.4" fill="#dfddec" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">13</text>
+<rect x="1143.8" y="603.4" width="29.8" height="44.4" fill="#e3e3ef" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">10</text>
+<rect x="1173.6" y="603.4" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1203.4" y="603.4" width="29.8" height="44.4" fill="#e9eaf3" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">6</text>
+<rect x="1233.2" y="603.4" width="29.8" height="44.4" fill="#eaecf4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">5</text>
+<rect x="1263.1" y="603.4" width="29.8" height="44.4" fill="#edeff6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1292.9" y="603.4" width="29.8" height="44.4" fill="#e6e6f1" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">8</text>
+<rect x="1322.7" y="603.4" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="603.4" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="603.4" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="603.4" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="632.8" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="676.7" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">goals response</text>
+<rect x="935.0" y="647.9" width="29.8" height="44.4" fill="#e3e3ef" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">10</text>
+<rect x="964.8" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="994.6" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1024.5" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1054.3" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1084.1" y="647.9" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1113.9" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1143.8" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1173.6" y="647.9" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1203.4" y="647.9" width="29.8" height="44.4" fill="#edeff6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1233.2" y="647.9" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1263.1" y="647.9" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1292.9" y="647.9" width="29.8" height="44.4" fill="#eef1f7" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">2</text>
+<rect x="1322.7" y="647.9" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="647.9" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="647.9" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="647.9" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="721.2" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">follow up plans</text>
+<rect x="935.0" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="964.8" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="994.6" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1024.5" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1054.3" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1084.1" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1113.9" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1143.8" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1173.6" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1203.4" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1233.2" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1263.1" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1292.9" y="692.3" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1322.7" y="692.3" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="692.3" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="692.3" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="692.3" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="721.6" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="765.6" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">visit labs findings</text>
+<rect x="935.0" y="736.7" width="29.8" height="44.4" fill="#eceff5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="964.8" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="994.6" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1024.5" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1054.3" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1084.1" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1113.9" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1143.8" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1173.6" y="736.7" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1203.4" y="736.7" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1233.2" y="736.7" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1263.1" y="736.7" width="29.8" height="44.4" fill="#eff3f8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">1</text>
+<rect x="1292.9" y="736.7" width="29.8" height="44.4" fill="#edeff6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">3</text>
+<rect x="1322.7" y="736.7" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="736.7" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="736.7" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="736.7" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="766.0" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="810.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">letter output</text>
+<rect x="935.0" y="781.1" width="29.8" height="44.4" fill="#8b6aaf" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">77</text>
+<rect x="964.8" y="781.1" width="29.8" height="44.4" fill="#835fa9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">83</text>
+<rect x="994.6" y="781.1" width="29.8" height="44.4" fill="#8765ac" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">80</text>
+<rect x="1024.5" y="781.1" width="29.8" height="44.4" fill="#8765ac" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">80</text>
+<rect x="1054.3" y="781.1" width="29.8" height="44.4" fill="#9d83bc" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">63</text>
+<rect x="1084.1" y="781.1" width="29.8" height="44.4" fill="#d2cbe2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">23</text>
+<rect x="1113.9" y="781.1" width="29.8" height="44.4" fill="#cdc5df" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">27</text>
+<rect x="1143.8" y="781.1" width="29.8" height="44.4" fill="#d2cbe2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">23</text>
+<rect x="1173.6" y="781.1" width="29.8" height="44.4" fill="#d2cbe2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">23</text>
+<rect x="1203.4" y="781.1" width="29.8" height="44.4" fill="#cdc4df" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">27</text>
+<rect x="1233.2" y="781.1" width="29.8" height="44.4" fill="#cec6e0" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">26</text>
+<rect x="1263.1" y="781.1" width="29.8" height="44.4" fill="#cec6e0" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">26</text>
+<rect x="1292.9" y="781.1" width="29.8" height="44.4" fill="#c4b7d8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">34</text>
+<rect x="1322.7" y="781.1" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="781.1" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="781.1" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="781.1" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="810.5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="927.0" y="854.4" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="end" fill="#4B5563">other extraction</text>
+<rect x="935.0" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="949.9" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="964.8" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="979.7" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="994.6" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1009.6" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1024.5" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1039.4" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1054.3" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1069.2" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1084.1" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1099.0" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1113.9" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.9" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1143.8" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1158.7" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1173.6" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1188.5" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1203.4" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1218.3" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1233.2" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1248.1" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1263.1" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1278.0" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1292.9" y="825.6" width="29.8" height="44.4" fill="#f1f5f9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1307.8" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">0</text>
+<rect x="1322.7" y="825.6" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1337.6" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1352.5" y="825.6" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1367.4" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1382.4" y="825.6" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1397.3" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<rect x="1412.2" y="825.6" width="29.8" height="44.4" fill="#F3F4F6" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1427.1" y="854.9" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111827">NA</text>
+<text x="949.9" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D1</text>
+<text x="979.7" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D2</text>
+<text x="1009.6" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D3</text>
+<text x="1039.4" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D4</text>
+<text x="1069.2" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D5</text>
+<text x="1099.0" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D6</text>
+<text x="1128.9" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D7</text>
+<text x="1158.7" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D8</text>
+<text x="1188.5" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">D9</text>
+<text x="1218.3" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F2</text>
+<text x="1248.1" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F3</text>
+<text x="1278.0" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F4</text>
+<text x="1307.8" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F5</text>
+<text x="1337.6" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F6</text>
+<text x="1367.4" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F7</text>
+<text x="1397.3" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F8</text>
+<text x="1427.1" y="889.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#4B5563">F9</text>
+<line x1="1203.4" y1="559" x2="1203.4" y2="870" stroke="#111827" stroke-width="2"/>
+<text x="1069.2" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">30-sample subset</text>
+<text x="1322.7" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#6B7280">100-sample set</text>
+<text x="48.0" y="972.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#374151">D1-D9: same 30-row subset. F2-F9: same 100-row development set; F6-F9 have no archived auto_review.py summary and are shown as NA.</text>
+<text x="48.0" y="994.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#374151">The auto-review rubric changed during early iterations and no rubric hash was stored. Compare the series as historical development logs, not as a fixed-validator benchmark.</text>
+<text x="48.0" y="1016.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#374151">P0 was 0 in every archived Qwen review. Manual or Claude-authored follow-up reviews are excluded from these curves.</text>
+</svg>
