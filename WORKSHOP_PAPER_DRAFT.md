@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.14, September 2026
+Version 0.15, September 2026
 
 ## Abstract
 
@@ -120,7 +120,7 @@ Candidate changes were retained only after testing on affected examples and prev
 
 ### 2.6 Model-assisted pancreatic-cancer adaptation
 
-The breast-cancer harness was adapted to pancreatic cancer through approximately 18 documented development rounds covering all 100 additional pancreatic notes. No clinician reviewed pancreatic-cancer outputs during this stage. The team used ChatGPT to synthesize the accumulated breast-cancer error history and clinical distinctions into a transferable review rubric and candidate pancreatic-cancer adaptations. The Qwen pipeline generated structured fields, and a rubric-guided Qwen reviewer compared each output with the complete source note. Investigators assessed the resulting error flags and proposals, implemented selected changes, and retained them only after regression testing.
+The breast-cancer harness was adapted to pancreatic cancer across 12 archived development checkpoints: nine on a fixed 30-note subset and three on the full 100-note development set. No clinician reviewed pancreatic-cancer outputs during this stage. The team used ChatGPT to synthesize the accumulated breast-cancer error history and clinical distinctions into a transferable review rubric and candidate pancreatic-cancer adaptations. The Qwen pipeline generated structured fields, and a rubric-guided Qwen reviewer compared each output with the complete source note. Investigators assessed the resulting error flags and proposals, implemented selected changes, and retained them only after regression testing.
 
 The reviewer prompt included the field definitions, severity criteria, and clinical distinctions established during breast-cancer development. Earlier error categories could therefore guide review in the new domain while the reviewer still detected pancreatic-specific problems such as regimen names and dose representation. This agent-assisted loop changed prompts, rules, and workflow code rather than model weights. Investigators controlled implementation, so we describe the process as model-assisted and investigator-supervised.
 
@@ -144,7 +144,7 @@ The oncologist evaluation instrument also included genetic testing plans, suppor
 
 LLM-assisted review was used as a development instrument, particularly during adaptation to pancreatic cancer. For each candidate output, the reviewer model compared the extracted fields with the source note using the prespecified field definitions and severity criteria. It flagged possible omissions, unsupported claims, semantic mismatches, and temporal errors. Prior work shows that LLM judges can approximate human preferences but can also exhibit position, verbosity, and self-preference biases [16,17]. The review findings therefore informed candidate revisions that the investigators reviewed and regression-tested rather than serving as clinical outcome labels.
 
-A matched audit of 260 applicable note-field comparisons was also used for technical error analysis. LLM judgments were not used as final clinical outcome labels and did not replace the independent oncologist evaluation.
+A matched audit of 260 applicable note-field comparisons was also used for technical error analysis. This total comprised six cross-cancer fields across all 40 evaluation notes, plus one breast-specific type and receptor field across the 20 breast-cancer notes: 40 x 6 + 20 x 1 = 260. LLM judgments were not used as final clinical outcome labels and did not replace the independent oncologist evaluation.
 
 ### 2.9 Oncologist evaluation
 
@@ -166,7 +166,7 @@ One oncologist completed an exploratory review of 20 breast-cancer cases across 
 
 ### 3.1 Development path, cross-cancer adaptation, and downstream use
 
-The development record contains approximately 15 breast-cancer iterations across 56 notes and approximately 18 pancreatic-cancer iterations across 100 notes. Breast-cancer revisions were informed by review from the physician coauthor and model-development investigators. Pancreatic-cancer revisions were made without clinician review of the pancreatic outputs, using ChatGPT-assisted rubric synthesis, Qwen-based error review, and investigator-controlled implementation.
+The development record contains approximately 15 breast-cancer iterations across 56 notes and 12 archived pancreatic-cancer checkpoints. The pancreatic sequence comprised nine checkpoints on a fixed 30-note subset and three on the full 100-note development set. Breast-cancer revisions were informed by review from the physician coauthor and model-development investigators. Pancreatic-cancer revisions were made without clinician review of the pancreatic outputs, using ChatGPT-assisted rubric synthesis, Qwen-based error review, and investigator-controlled implementation.
 
 This sequence produced two types of reuse. Some components were retained unchanged, including the five verification stages, temporal distinctions, source attribution, and rules that separate active treatment from plans or supportive medication. Other components required cancer-specific routing, especially disease terminology, regimen interpretation, and post-processing conditions. The resulting system therefore reused the error-handling framework without assuming that breast and pancreatic cancer were clinically interchangeable.
 
@@ -394,7 +394,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.14，2026 年 9 月
+版本 0.15，2026 年 9 月
 
 作者：[TODO]
 
@@ -529,7 +529,7 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 ### 2.6 AI-assisted 的胰腺癌适配
 
-随后，我们通过约 18 轮有记录的开发，将乳腺癌 inference harness 适配到全部 100 份 PDAC 附加病历。在这一阶段，没有临床医生审阅 PDAC 输出。团队先用 ChatGPT 汇总乳腺癌阶段累积的错误记录和临床区分，形成可迁移的 review rubric 和候选 PDAC 适配方案。Qwen pipeline 生成 structured fields，再由 rubric-guided Qwen reviewer 将每项输出与完整源病历比较。研究人员审查 error flag 和候选方案，只实施有依据的修改，并在 regression test 通过后保留。
+随后，我们通过 12 个已归档的开发 checkpoints 将乳腺癌 inference harness 适配到 PDAC，其中 9 个 checkpoints 使用固定的 30 份病历子集，另外 3 个使用完整的 100 份开发病历。在这一阶段，没有临床医生审阅 PDAC 输出。团队先用 ChatGPT 汇总乳腺癌阶段累积的错误记录和临床区分，形成可迁移的 review rubric 和候选 PDAC 适配方案。Qwen pipeline 生成 structured fields，再由 rubric-guided Qwen reviewer 将每项输出与完整源病历比较。研究人员审查 error flag 和候选方案，只实施有依据的修改，并在 regression test 通过后保留。
 
 审查提示包含字段定义、严重程度标准，以及乳腺癌开发期间确定的临床区分。已有错误类别因此可以指导新癌种的审查，reviewer 也能发现 PDAC 特有的问题，例如治疗方案名称和剂量表达。这个 agent-assisted loop 修改的是 prompt、rule 和 workflow code，模型权重没有变化。研究人员控制具体实施，所以本文将其称为 model-assisted、investigator-supervised adaptation。
 
@@ -555,7 +555,7 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。已有研究表明，LLM judge 可以在一定程度上接近人工偏好，但也会受到 position、verbosity 和 self-preference bias 的影响 [16,17]。因此，这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过 regression test 确认，不能作为临床结局标签。
 
-研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。
+研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。这个数字来自 40 份评估病历共有的 6 个跨癌种字段，再加上 20 份乳腺癌病历特有的 type 和 receptor 字段，即 40 x 6 + 20 x 1 = 260。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。
 
 > **协作说明：** 这里不再罗列“发现了哪些错误、之后修了什么”。这些内容更像开发报告。Methods 只说明 LLM 审查的用途、边界和它与最终医生评估的区别。
 
@@ -579,7 +579,7 @@ Harness-based letter route 先生成 structured extraction，再使用清理后�
 
 ### 3.1 开发路径、跨癌种适配与下游应用
 
-开发记录包括对 56 份乳腺癌病历进行的约 15 轮迭代，以及对 100 份 PDAC 病历进行的约 18 轮迭代。乳腺癌部分的修订来自医生作者与模型开发作者的共同审阅。PDAC 部分没有临床医生审查相应输出，采用 ChatGPT-assisted rubric synthesis、Qwen-based error review，以及由研究人员控制的实施流程。
+开发记录包括对 56 份乳腺癌病历进行的约 15 轮迭代，以及 12 个已归档的 PDAC checkpoints。PDAC 序列包括固定 30 份病历子集上的 9 个 checkpoints，以及完整 100 份开发病历上的 3 个 checkpoints。乳腺癌部分的修订来自医生作者与模型开发作者的共同审阅。PDAC 部分没有临床医生审查相应输出，采用 ChatGPT-assisted rubric synthesis、Qwen-based error review，以及由研究人员控制的实施流程。
 
 开发中有一部分组件可以原样迁移，包括五个验证阶段、时态区分、source attribution，以及区分当前治疗、治疗计划和支持性用药的规则。疾病术语、治疗方案解读和后处理条件则需要按癌种分别处理。因此，该系统复用了 failure-handling workflow，但没有假设乳腺癌与胰腺癌在临床上可以互换。
 

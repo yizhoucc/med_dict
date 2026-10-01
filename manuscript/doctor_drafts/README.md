@@ -3,8 +3,10 @@
 ## 文件状态
 
 - 原稿：[`20260929_Manuscript_JAMA.docx`](20260929_Manuscript_JAMA.docx)
+- 带答复副本：[`20260929_Manuscript_JAMA_with_responses.docx`](20260929_Manuscript_JAMA_with_responses.docx)
 - 来源：`/Users/yizhoucc/Downloads/20260929_Manuscript_JAMA.docx`
 - 归档方式：原文件已移动到本目录，Downloads 中的副本已删除。原稿内容未修改。
+- 答复副本保留了全部 11 条原批注，并在每条批注中追加了核验结果或问题答复。正文中的数据集、开发 checkpoints、评审人数和结果数字已按项目记录纠正。
 - 文档作者元数据：Yuqing Wang。文档包含 11 条批注，没有 tracked changes。
 - 渲染结果：7 页，约 2,327 个英文单词。正文有 1 个表格，没有正式插图。
 
@@ -53,7 +55,7 @@
 ## 对 11 条批注的处理建议
 
 - 关于 56 个 breast development notes：可以保留。项目记录为约 15 个 cycles、56 个 dev samples。
-- 关于 18 个 PDAC rounds：项目历史记录为 18 个 development cycles，但可比较的 trajectory 目前只保留 D1-D9 和 F2-F4，共 12 个 checkpoints。正文可以写项目开发记录中的 18 cycles；如果配 trajectory 图，需要明确图只展示有同口径 archived review 的 12 个 checkpoints。依据见 [`results/pdac_development_trajectory/ANALYSIS.md`](../../results/pdac_development_trajectory/ANALYSIS.md)。
+- 关于 PDAC rounds：按项目最终写作口径，正文统一报告 12 个有同口径 archived review 的 checkpoints，即 D1-D9 和 F2-F4。早期无可比 review 的临时测试不计入论文中的 development sequence。依据见 [`results/pdac_development_trajectory/ANALYSIS.md`](../../results/pdac_development_trajectory/ANALYSIS.md)。
 - 关于 `260`：这是 260 个 applicable note-field comparisons，不是 260 个 notes。应始终写完整单位。
 - 关于 plan fields 是否只看 Assessment and Plan：大多数 plan prompts 以提取出的 A/P 为主要输入。启用 tool calling 时可以搜索完整 note；Referral 和 Genetic_Testing_Results 固定从完整 note 提取。因此 `primarily from the Assessment and Plan section` 是准确说法，不应改成绝对限定。
 - 关于 statistical analysis：共有 5 份 clinician-by-cancer evaluations。Pooled counts 只作描述。主要推断分析排除 ties，使用按 note 聚类的 logistic GEE，并调整 evaluator 和 cancer type。OR 表示 non-tie judgment 中偏好 harness 的 odds，不表示临床正确性的 odds。

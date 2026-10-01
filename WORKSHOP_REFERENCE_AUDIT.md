@@ -67,3 +67,16 @@ The search was extended through 2026 using Europe PMC, Crossref, official publis
 | 20 | Estevez et al., *JCO Clinical Cancer Informatics* 2026. [DOI](https://doi.org/10.1200/CCI-25-00215) · [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC13001894/) | VALID framework recommending variable-level expert-reference benchmarking, internal consistency and plausibility checks, and replication analyses | Supported by Europe PMC metadata, abstract, and full text |
 
 All eleven new DOI links resolved to the intended publisher record on 2026-09-26. The ASCO landing pages returned HTTP 403 to the automated client after correct DOI redirection; Crossref and PubMed/Europe PMC independently confirmed the title, authors, year, journal, and DOI for each.
+
+## Clinician-provided sources, 2026-09-30
+
+Six sources embedded in the clinician coauthor's Word comments were checked against Crossref, DataCite, Europe PMC, or the PMC full text.
+
+| Source | Verification result | Manuscript role |
+|---|---|---|
+| Kong HJ. *Healthcare Informatics Research*. 2019;25(1):1. DOI `10.4258/hir.2019.25.1.1` | Crossref confirms the citation. PMC `PMC6372467` contains the statement that about 80% of medical data remain unstructured and untapped. | Candidate Introduction citation for the broad unstructured-data estimate. The underlying estimate is broad and not oncology specific. |
+| Wiest IC, Ferber D, Zhu J, et al. *npj Digital Medicine*. 2024;7:257. DOI `10.1038/s41746-024-01233-2` | Already verified as working reference 3. | Supports local open-weight clinical extraction and inference-time constraints. |
+| Rule A, Bedrick S, Chiang MF, Hribar MR. *JAMA Network Open*. 2021;4(7):e2115334. DOI `10.1001/jamanetworkopen.2021.15334` | Crossref and Europe PMC confirm the identity. PMC `PMC8290305` reports nearly 3 million notes, a 60.1% increase in median length, and increased redundancy from 2009 to 2018. | Strong source for note length, redundancy, templates, and copy-forward content. |
+| Huang J, Yang DM, Rong R, et al. *npj Digital Medicine*. 2024;7:106. DOI `10.1038/s41746-024-01079-8` | Already verified as working reference 10. | Supports iterative prompt refinement and oncology-specific extraction errors. |
+| Hein D, Christie A, Holcomb M, et al. *npj Digital Medicine*. 2025;8:301. DOI `10.1038/s41746-025-01686-z` | Crossref and Europe PMC confirm the title, authors, journal, article number, DOI, PMID `40410408`, and PMC `PMC12102345`. | New close comparator for human-in-the-loop refinement, error ontology development, and avoiding case-specific rules. |
+| Sushil M, Kennedy VE, Mandair D, et al. CORAL dataset, PhysioNet version 1.0. DOI `10.13026/v69y-xa45` | DataCite confirms the dataset title, six creators, PhysioNet publisher, 2024 publication year, and dataset type. | Dataset citation to accompany the existing CORAL article citation. |

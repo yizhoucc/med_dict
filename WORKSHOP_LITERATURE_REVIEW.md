@@ -2,6 +2,8 @@
 
 Review date: 2026-09-26
 
+Clinician-source update: 2026-09-30
+
 ## Scope and method
 
 This review updates the literature base for `WORKSHOP_PAPER_DRAFT.md`. It covers:
@@ -44,6 +46,19 @@ Tam et al. reviewed 142 healthcare LLM human-evaluation studies and proposed QUE
 ### 7. The paper's reporting should remain explicit
 
 TRIPOD-LLM calls for transparent reporting of model identity, prompt and evaluation procedures, human oversight, and task-specific performance. The current draft should preserve the details about the frozen model, benchmark-informed development, evaluator roles, fixed A/B mapping, source attribution, tie handling, and the limits of the directional odds ratio.
+
+## Sources supplied by the clinician coauthor
+
+The clinician draft supplied six literature comments. All six sources are valid. Three were already in the working bibliography, and three are new additions to this literature review.
+
+| Source | Verification and contribution | Use in this paper |
+|---|---|---|
+| Kong HJ. Managing Unstructured Big Data in Healthcare System. *Healthcare Informatics Research*. 2019;25(1):1. [DOI](https://doi.org/10.4258/hir.2019.25.1.1) | The article states that about 80% of medical data remain unstructured and untapped. Crossref and the PMC full text confirm the citation and wording. | Supports the Introduction statement about the scale of unstructured medical data. This is a broad healthcare estimate rather than an oncology-specific measurement. |
+| Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. *npj Digital Medicine*. 2024;7:257. [DOI](https://doi.org/10.1038/s41746-024-01233-2) | Already included as reference 3. It evaluates locally deployed Llama 2 models, prompt variants, and grammar-constrained structured output on five clinical features. | Supports local open-weight deployment and the claim that inference design affects extraction quality. Local operation should not be equated with automatic HIPAA compliance. |
+| Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. *JAMA Network Open*. 2021;4(7):e2115334. [DOI](https://doi.org/10.1001/jamanetworkopen.2021.15334) | Across nearly 3 million outpatient notes, median length increased 60.1% and median redundancy increased from 47.9% to 58.8% between 2009 and 2018. Copied or templated text was associated with longer and more redundant notes. | Provides direct evidence for the Introduction discussion of longer notes, copy-forward content, and extraction difficulty. |
+| Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. *npj Digital Medicine*. 2024;7:106. [DOI](https://doi.org/10.1038/s41746-024-01079-8) | Already included as reference 10. It uses iterative prompt engineering on oncology pathology reports and documents persistent TNM and terminology errors. | Supports failure-mode-driven prompt refinement and the need for clinical checks. |
+| Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. *npj Digital Medicine*. 2025;8:301. [DOI](https://doi.org/10.1038/s41746-025-01686-z) | The paper reports six human-in-the-loop refinement cycles for extracting structured information from pathology reports. It uses an error ontology, prompt refinement, and generalizable instructions rather than one-off case rules. | A close conceptual comparator for our clinician-informed development loop. Its task is pathology extraction and it validates against structured reference data, while our study evaluates a multi-field longitudinal-note harness against a same-model baseline. |
+| Sushil M, Kennedy VE, Mandair D, et al. CORAL: expert-Curated medical Oncology Reports to Advance Language model inference. PhysioNet. Version 1.0. 2024. [Dataset DOI](https://doi.org/10.13026/v69y-xa45) | Already represented by the CORAL article as reference 2. DataCite confirms the dataset title, authors, version-level PhysioNet record, and DOI. | The paper should cite both the CORAL article for benchmark methods and the PhysioNet dataset record for the data release used in this project. |
 
 ## References added to the main draft
 
