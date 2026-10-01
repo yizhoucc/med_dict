@@ -111,6 +111,9 @@ git -C "$PROJECT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 [[ -f "$PROJECT_DIR/staged_ablation.py" ]] || { echo "Missing staged_ablation.py in $PROJECT_DIR"; exit 1; }
 [[ -f "$PROJECT_DIR/scripts/run_staged_ablation_wsl.sh" ]] || { echo "Missing worker script"; exit 1; }
 command -v curl >/dev/null 2>&1 || { echo "curl is not available"; exit 1; }
+if ! command -v nvidia-smi >/dev/null 2>&1 && [[ -x /usr/lib/wsl/lib/nvidia-smi ]]; then
+  export PATH="/usr/lib/wsl/lib:$PATH"
+fi
 command -v nvidia-smi >/dev/null 2>&1 || { echo "nvidia-smi is not available"; exit 1; }
 command -v flock >/dev/null 2>&1 || { echo "flock is not available"; exit 1; }
 
