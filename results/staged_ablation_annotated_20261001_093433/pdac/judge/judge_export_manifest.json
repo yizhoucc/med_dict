@@ -1,0 +1,15 @@
+{
+  "created_at_utc": "2026-10-01T18:33:39.570187+00:00",
+  "seed": 42,
+  "comparisons": [
+    "A_vs_B",
+    "B_vs_C",
+    "C_vs_D"
+  ],
+  "pair_count": 60,
+  "public_file": "judge_pairs.blinded.jsonl",
+  "public_sha256": "183ca6b13d7bfa81ddcbf7e1dbb61c42fb12f445a780b00db0c8f0bb4fc5f519",
+  "private_mapping_file": "judge_pairs.private_mapping.jsonl",
+  "private_mapping_sha256": "ad4bf77336fc0a8e56fc95a7bac9296cc4c73538d5501c68eaf49ec3e1686264",
+  "judge_provider": null
+}

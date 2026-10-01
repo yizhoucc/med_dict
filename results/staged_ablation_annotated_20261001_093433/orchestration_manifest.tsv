@@ -1,0 +1,7 @@
+created_at	2026-10-01T09:34:34-07:00
+project_dir	/home/yc/repo/med_dict_ablation_20261001
+output_dir	/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433
+base_url	http://localhost:8000/v1
+conda_env	medllm
+model	Qwen/Qwen2.5-32B-Instruct-AWQ
+seed	42

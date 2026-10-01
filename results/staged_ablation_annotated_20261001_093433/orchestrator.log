@@ -1,0 +1,289 @@
+[2026-10-01T09:34:34-07:00] Preflight
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  227G  729G  24% /
+0, NVIDIA GeForce RTX 5090, 32607 MiB, 333 MiB, 0 %
+curl: (7) Failed to connect to localhost port 8000 after 0 ms: Connection refused
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+curl: (7) Failed to connect to localhost port 8000 after 0 ms: Connection refused
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[2026-10-01T09:34:34-07:00] GPU is free; starting Qwen/Qwen2.5-32B-Instruct-AWQ on port 8000
+curl: (7) Failed to connect to localhost port 8000 after 0 ms: Connection refused
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/yc/miniconda3/envs/medllm/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[2026-10-01T09:34:34-07:00] Waiting for vLLM endpoint: http://localhost:8000/v1 (server startup)
+[2026-10-01T09:35:38-07:00] vLLM endpoint ready: http://localhost:8000/v1
+[2026-10-01T09:35:39-07:00] Starting variant=A cancer=breast
+[2026-10-01T09:35:39-07:00] variant=A cancer=breast pid=1583 completed=0/20
+0, 29290 MiB, 0 %
+[2026-10-01T09:36:43-07:00] variant=A cancer=breast pid=1583 completed=4/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:37:47-07:00] variant=A cancer=breast pid=1583 completed=9/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:38:51-07:00] variant=A cancer=breast pid=1583 completed=14/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:39:54-07:00] Completed variant=A cancer=breast
+[2026-10-01T09:39:54-07:00] Starting variant=A cancer=pdac
+[2026-10-01T09:39:54-07:00] variant=A cancer=pdac pid=1785 completed=0/20
+0, 29506 MiB, 0 %
+[2026-10-01T09:40:56-07:00] variant=A cancer=pdac pid=1785 completed=4/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:41:57-07:00] variant=A cancer=pdac pid=1785 completed=8/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:43:00-07:00] variant=A cancer=pdac pid=1785 completed=12/20
+0, 29506 MiB, 99 %
+[2026-10-01T09:44:02-07:00] variant=A cancer=pdac pid=1785 completed=16/20
+0, 29669 MiB, 99 %
+[2026-10-01T09:45:05-07:00] Completed variant=A cancer=pdac
+[2026-10-01T09:45:05-07:00] Starting variant=B cancer=breast
+[2026-10-01T09:45:05-07:00] variant=B cancer=breast pid=1862 completed=0/20
+0, 29671 MiB, 0 %
+[2026-10-01T09:46:07-07:00] variant=B cancer=breast pid=1862 completed=1/20
+0, 29671 MiB, 99 %
+[2026-10-01T09:47:10-07:00] variant=B cancer=breast pid=1862 completed=4/20
+0, 29703 MiB, 56 %
+[2026-10-01T09:48:11-07:00] variant=B cancer=breast pid=1862 completed=6/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:49:14-07:00] variant=B cancer=breast pid=1862 completed=9/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:50:17-07:00] variant=B cancer=breast pid=1862 completed=12/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:51:19-07:00] variant=B cancer=breast pid=1862 completed=15/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:52:23-07:00] variant=B cancer=breast pid=1862 completed=17/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:53:26-07:00] Completed variant=B cancer=breast
+[2026-10-01T09:53:26-07:00] Starting variant=B cancer=pdac
+[2026-10-01T09:53:26-07:00] variant=B cancer=pdac pid=1954 completed=0/20
+0, 29703 MiB, 0 %
+[2026-10-01T09:54:30-07:00] variant=B cancer=pdac pid=1954 completed=2/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:55:31-07:00] variant=B cancer=pdac pid=1954 completed=5/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:56:35-07:00] variant=B cancer=pdac pid=1954 completed=8/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:57:38-07:00] variant=B cancer=pdac pid=1954 completed=10/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:58:41-07:00] variant=B cancer=pdac pid=1954 completed=11/20
+0, 29703 MiB, 99 %
+[2026-10-01T09:59:45-07:00] variant=B cancer=pdac pid=1954 completed=13/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:00:48-07:00] variant=B cancer=pdac pid=1954 completed=15/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:01:51-07:00] variant=B cancer=pdac pid=1954 completed=18/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:02:53-07:00] Completed variant=B cancer=pdac
+[2026-10-01T10:02:53-07:00] Starting variant=C cancer=breast
+[2026-10-01T10:02:53-07:00] variant=C cancer=breast pid=2053 completed=0/20
+0, 29703 MiB, 0 %
+[2026-10-01T10:03:56-07:00] variant=C cancer=breast pid=2053 completed=0/20
+0, 29703 MiB, 81 %
+[2026-10-01T10:05:00-07:00] variant=C cancer=breast pid=2053 completed=1/20
+0, 29703 MiB, 100 %
+[2026-10-01T10:06:03-07:00] variant=C cancer=breast pid=2053 completed=2/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:07:07-07:00] variant=C cancer=breast pid=2053 completed=3/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:08:10-07:00] variant=C cancer=breast pid=2053 completed=4/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:09:14-07:00] variant=C cancer=breast pid=2053 completed=5/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:10:15-07:00] variant=C cancer=breast pid=2053 completed=6/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:11:19-07:00] variant=C cancer=breast pid=2053 completed=7/20
+0, 29703 MiB, 54 %
+[2026-10-01T10:12:24-07:00] variant=C cancer=breast pid=2053 completed=8/20
+0, 29703 MiB, 93 %
+[2026-10-01T10:13:28-07:00] variant=C cancer=breast pid=2053 completed=9/20
+0, 29703 MiB, 66 %
+[2026-10-01T10:14:32-07:00] variant=C cancer=breast pid=2053 completed=10/20
+0, 29703 MiB, 73 %
+[2026-10-01T10:15:36-07:00] variant=C cancer=breast pid=2053 completed=12/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:16:39-07:00] variant=C cancer=breast pid=2053 completed=13/20
+0, 29703 MiB, 99 %
+[2026-10-01T10:17:43-07:00] variant=C cancer=breast pid=2053 completed=14/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:18:45-07:00] variant=C cancer=breast pid=2053 completed=15/20
+0, 29735 MiB, 74 %
+[2026-10-01T10:19:49-07:00] variant=C cancer=breast pid=2053 completed=16/20
+0, 29735 MiB, 70 %
+[2026-10-01T10:20:53-07:00] variant=C cancer=breast pid=2053 completed=17/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:21:54-07:00] variant=C cancer=breast pid=2053 completed=18/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:22:58-07:00] variant=C cancer=breast pid=2053 completed=19/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:24:01-07:00] Completed variant=C cancer=breast
+[2026-10-01T10:24:01-07:00] Starting variant=C cancer=pdac
+[2026-10-01T10:24:01-07:00] variant=C cancer=pdac pid=2675 completed=0/20
+0, 29735 MiB, 0 %
+[2026-10-01T10:25:04-07:00] variant=C cancer=pdac pid=2675 completed=1/20
+0, 29735 MiB, 100 %
+[2026-10-01T10:26:06-07:00] variant=C cancer=pdac pid=2675 completed=1/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:27:09-07:00] variant=C cancer=pdac pid=2675 completed=2/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:28:13-07:00] variant=C cancer=pdac pid=2675 completed=3/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:29:16-07:00] variant=C cancer=pdac pid=2675 completed=4/20
+0, 29735 MiB, 53 %
+[2026-10-01T10:30:19-07:00] variant=C cancer=pdac pid=2675 completed=5/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:31:23-07:00] variant=C cancer=pdac pid=2675 completed=6/20
+0, 29735 MiB, 82 %
+[2026-10-01T10:32:26-07:00] variant=C cancer=pdac pid=2675 completed=7/20
+0, 29735 MiB, 80 %
+[2026-10-01T10:33:28-07:00] variant=C cancer=pdac pid=2675 completed=8/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:34:31-07:00] variant=C cancer=pdac pid=2675 completed=9/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:35:35-07:00] variant=C cancer=pdac pid=2675 completed=10/20
+0, 29735 MiB, 92 %
+[2026-10-01T10:36:39-07:00] variant=C cancer=pdac pid=2675 completed=11/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:37:43-07:00] variant=C cancer=pdac pid=2675 completed=11/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:38:46-07:00] variant=C cancer=pdac pid=2675 completed=12/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:39:50-07:00] variant=C cancer=pdac pid=2675 completed=13/20
+0, 29735 MiB, 71 %
+[2026-10-01T10:40:52-07:00] variant=C cancer=pdac pid=2675 completed=14/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:41:56-07:00] variant=C cancer=pdac pid=2675 completed=14/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:42:59-07:00] variant=C cancer=pdac pid=2675 completed=15/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:44:03-07:00] variant=C cancer=pdac pid=2675 completed=16/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:45:07-07:00] variant=C cancer=pdac pid=2675 completed=17/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:46:10-07:00] variant=C cancer=pdac pid=2675 completed=18/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:47:14-07:00] variant=C cancer=pdac pid=2675 completed=19/20
+0, 29735 MiB, 100 %
+[2026-10-01T10:48:17-07:00] Completed variant=C cancer=pdac
+[2026-10-01T10:48:17-07:00] Starting variant=D cancer=breast
+[2026-10-01T10:48:17-07:00] variant=D cancer=breast pid=2860 completed=0/20
+0, 29735 MiB, 0 %
+[2026-10-01T10:49:19-07:00] variant=D cancer=breast pid=2860 completed=0/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:50:23-07:00] variant=D cancer=breast pid=2860 completed=1/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:51:26-07:00] variant=D cancer=breast pid=2860 completed=2/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:52:30-07:00] variant=D cancer=breast pid=2860 completed=3/20
+0, 29735 MiB, 51 %
+[2026-10-01T10:53:33-07:00] variant=D cancer=breast pid=2860 completed=4/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:54:37-07:00] variant=D cancer=breast pid=2860 completed=5/20
+0, 29735 MiB, 66 %
+[2026-10-01T10:55:41-07:00] variant=D cancer=breast pid=2860 completed=6/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:56:43-07:00] variant=D cancer=breast pid=2860 completed=7/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:57:47-07:00] variant=D cancer=breast pid=2860 completed=8/20
+0, 29735 MiB, 62 %
+[2026-10-01T10:58:51-07:00] variant=D cancer=breast pid=2860 completed=9/20
+0, 29735 MiB, 99 %
+[2026-10-01T10:59:54-07:00] variant=D cancer=breast pid=2860 completed=10/20
+0, 29735 MiB, 99 %
+[2026-10-01T11:00:58-07:00] variant=D cancer=breast pid=2860 completed=12/20
+0, 29735 MiB, 100 %
+[2026-10-01T11:02:02-07:00] variant=D cancer=breast pid=2860 completed=13/20
+0, 29775 MiB, 3 %
+[2026-10-01T11:03:06-07:00] variant=D cancer=breast pid=2860 completed=14/20
+0, 29787 MiB, 100 %
+[2026-10-01T11:04:07-07:00] variant=D cancer=breast pid=2860 completed=15/20
+0, 29787 MiB, 100 %
+[2026-10-01T11:05:11-07:00] variant=D cancer=breast pid=2860 completed=16/20
+0, 29787 MiB, 99 %
+[2026-10-01T11:06:15-07:00] variant=D cancer=breast pid=2860 completed=17/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:07:18-07:00] variant=D cancer=breast pid=2860 completed=18/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:08:22-07:00] variant=D cancer=breast pid=2860 completed=19/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:09:26-07:00] Completed variant=D cancer=breast
+[2026-10-01T11:09:26-07:00] Starting variant=D cancer=pdac
+[2026-10-01T11:09:26-07:00] variant=D cancer=pdac pid=3025 completed=0/20
+0, 29818 MiB, 0 %
+[2026-10-01T11:10:29-07:00] variant=D cancer=pdac pid=3025 completed=1/20
+0, 29818 MiB, 100 %
+[2026-10-01T11:11:31-07:00] variant=D cancer=pdac pid=3025 completed=1/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:12:35-07:00] variant=D cancer=pdac pid=3025 completed=2/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:13:38-07:00] variant=D cancer=pdac pid=3025 completed=3/20
+0, 29818 MiB, 52 %
+[2026-10-01T11:14:42-07:00] variant=D cancer=pdac pid=3025 completed=4/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:15:46-07:00] variant=D cancer=pdac pid=3025 completed=5/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:16:50-07:00] variant=D cancer=pdac pid=3025 completed=6/20
+0, 29818 MiB, 95 %
+[2026-10-01T11:17:53-07:00] variant=D cancer=pdac pid=3025 completed=7/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:18:57-07:00] variant=D cancer=pdac pid=3025 completed=8/20
+0, 29818 MiB, 60 %
+[2026-10-01T11:19:59-07:00] variant=D cancer=pdac pid=3025 completed=9/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:21:02-07:00] variant=D cancer=pdac pid=3025 completed=10/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:22:04-07:00] variant=D cancer=pdac pid=3025 completed=11/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:23:08-07:00] variant=D cancer=pdac pid=3025 completed=11/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:24:11-07:00] variant=D cancer=pdac pid=3025 completed=12/20
+0, 29818 MiB, 74 %
+[2026-10-01T11:25:14-07:00] variant=D cancer=pdac pid=3025 completed=13/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:26:18-07:00] variant=D cancer=pdac pid=3025 completed=14/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:27:20-07:00] variant=D cancer=pdac pid=3025 completed=14/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:28:23-07:00] variant=D cancer=pdac pid=3025 completed=15/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:29:26-07:00] variant=D cancer=pdac pid=3025 completed=16/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:30:29-07:00] variant=D cancer=pdac pid=3025 completed=17/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:31:32-07:00] variant=D cancer=pdac pid=3025 completed=18/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:32:35-07:00] variant=D cancer=pdac pid=3025 completed=19/20
+0, 29818 MiB, 99 %
+[2026-10-01T11:33:39-07:00] Completed variant=D cancer=pdac
+Blinded judge input: /home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/judge/judge_pairs.blinded.jsonl
+Private mapping: /home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/judge/judge_pairs.private_mapping.jsonl
+Blinded judge input: /home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/judge/judge_pairs.blinded.jsonl
+Private mapping: /home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/judge/judge_pairs.private_mapping.jsonl
+[2026-10-01T11:33:40-07:00] All staged ablation runs completed
+[2026-10-01T11:33:40-07:00] Stopping vLLM server started by this worker (pid=1278)

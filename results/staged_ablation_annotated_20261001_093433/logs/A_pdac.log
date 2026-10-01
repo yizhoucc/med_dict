@@ -1,0 +1,29 @@
+Connected to vLLM at http://localhost:8000/v1
+Loaded 20 rows, processing 20
+ROW 1 (coral=0, 10643 chars)... 13.5s, 2947 chars, JSON_OK
+ROW 2 (coral=1, 11305 chars)... 15.2s, 2996 chars, JSON_OK
+ROW 3 (coral=2, 16624 chars)... 18.0s, 3482 chars, JSON_OK
+ROW 4 (coral=3, 8429 chars)... 10.9s, 2327 chars, JSON_OK
+ROW 5 (coral=4, 10815 chars)... 13.9s, 3151 chars, JSON_OK
+ROW 6 (coral=5, 10901 chars)... 10.8s, 2663 chars, JSON_OK
+ROW 7 (coral=6, 11730 chars)... 13.8s, 2977 chars, JSON_OK
+ROW 8 (coral=7, 16407 chars)... 17.8s, 3243 chars, JSON_OK
+ROW 9 (coral=8, 11849 chars)... 14.5s, 2930 chars, JSON_OK
+ROW 10 (coral=9, 20160 chars)... 18.1s, 3234 chars, JSON_OK
+ROW 11 (coral=10, 12053 chars)... 12.1s, 2848 chars, JSON_OK
+ROW 12 (coral=11, 24231 chars)... 15.6s, 2818 chars, JSON_OK
+ROW 13 (coral=12, 21473 chars)... 17.1s, 3473 chars, JSON_OK
+ROW 14 (coral=13, 14517 chars)... 16.0s, 3314 chars, JSON_OK
+ROW 15 (coral=14, 17257 chars)... 15.5s, 2602 chars, JSON_OK
+ROW 16 (coral=15, 15188 chars)... 21.7s, 4295 chars, JSON_OK
+ROW 17 (coral=16, 6698 chars)... 12.2s, 2560 chars, JSON_OK
+ROW 18 (coral=17, 14852 chars)... 19.4s, 3721 chars, JSON_OK
+ROW 19 (coral=18, 8492 chars)... 13.7s, 3102 chars, JSON_OK
+ROW 20 (coral=19, 12493 chars)... 13.3s, 2715 chars, JSON_OK
+
+Done! 20 samples in 303s (5.1min)
+Output: /home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/A/results.txt
+
+--- JSON VALIDATION SUMMARY ---
+  Valid:   20/20 (100%)
+  Invalid: 0/20 (0%)

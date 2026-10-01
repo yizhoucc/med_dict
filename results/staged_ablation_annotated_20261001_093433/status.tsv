@@ -1,0 +1,21 @@
+2026-10-01T09:34:33-07:00	STARTED	worker_pid=1233
+2026-10-01T09:34:34-07:00	VLLM_STARTING	pid=1278 log=/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/vllm_server.log
+2026-10-01T09:35:38-07:00	VLLM_READY	pid=1278
+2026-10-01T09:35:38-07:00	PREFLIGHT_OK	project=/home/yc/repo/med_dict_ablation_20261001 endpoint=http://localhost:8000/v1 env=medllm
+2026-10-01T09:35:39-07:00	RUNNING	variant=A cancer=breast
+2026-10-01T09:39:54-07:00	COMPLETED	variant=A cancer=breast
+2026-10-01T09:39:54-07:00	RUNNING	variant=A cancer=pdac
+2026-10-01T09:45:05-07:00	COMPLETED	variant=A cancer=pdac
+2026-10-01T09:45:05-07:00	RUNNING	variant=B cancer=breast
+2026-10-01T09:53:26-07:00	COMPLETED	variant=B cancer=breast
+2026-10-01T09:53:26-07:00	RUNNING	variant=B cancer=pdac
+2026-10-01T10:02:53-07:00	COMPLETED	variant=B cancer=pdac
+2026-10-01T10:02:53-07:00	RUNNING	variant=C cancer=breast
+2026-10-01T10:24:01-07:00	COMPLETED	variant=C cancer=breast
+2026-10-01T10:24:01-07:00	RUNNING	variant=C cancer=pdac
+2026-10-01T10:48:17-07:00	COMPLETED	variant=C cancer=pdac
+2026-10-01T10:48:17-07:00	RUNNING	variant=D cancer=breast
+2026-10-01T11:09:26-07:00	COMPLETED	variant=D cancer=breast
+2026-10-01T11:09:26-07:00	RUNNING	variant=D cancer=pdac
+2026-10-01T11:33:39-07:00	COMPLETED	variant=D cancer=pdac
+2026-10-01T11:33:39-07:00	COMPLETED	all variants and blinded exports

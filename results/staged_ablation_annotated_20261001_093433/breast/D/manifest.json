@@ -1,0 +1,217 @@
+{
+  "manifest_version": 1,
+  "status": "completed",
+  "created_at_utc": "2026-10-01T17:48:17.760761+00:00",
+  "variant": "D",
+  "variant_name": "full_inference_harness",
+  "variant_flags": {
+    "name": "full_inference_harness",
+    "runner": "run.py",
+    "single_prompt": false,
+    "field_decomposition": true,
+    "cross_field_routing": true,
+    "g1_format": true,
+    "g2_schema": true,
+    "g3_improve": true,
+    "g4_faithful": true,
+    "g5_temporal": true,
+    "inline_postprocessing": true,
+    "post_hooks": true
+  },
+  "evidence_scope": "technical_ablation_not_clinical_validation",
+  "cancer": "breast",
+  "sample_set": "annotated",
+  "base_config": "exp/v31_breast_annotated_test.yaml",
+  "base_config_sha256": "994e75b73316faa194d5d6d6641f34c772935052830085ead49d1227972e8f05",
+  "effective_config_sha256": "2d8632fe4bb19ab5156b029a301b56cff624a3cd0ed2918bd7e675cf1a10819b",
+  "seed": 42,
+  "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+  "chat_template": "qwen2",
+  "model_endpoint": "http://localhost:8000/v1",
+  "generation": {
+    "keypoint": {
+      "max_new_tokens": 1024,
+      "do_sample": false
+    },
+    "assessment_plan": {
+      "max_new_tokens": 2048,
+      "do_sample": false
+    },
+    "retry": {
+      "max_new_tokens": 2048,
+      "do_sample": false
+    }
+  },
+  "decoding_policy": "greedy_for_all_variants",
+  "dataset": {
+    "path": "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/breastca_annotated.csv",
+    "sha256": "aca7ffd4a9d4b73f51f4d531f4959c1f736c39c3f38e585c43e57d90ca7dc7a7"
+  },
+  "samples": [
+    {
+      "row_index": 0,
+      "coral_idx": "20"
+    },
+    {
+      "row_index": 1,
+      "coral_idx": "21"
+    },
+    {
+      "row_index": 2,
+      "coral_idx": "22"
+    },
+    {
+      "row_index": 3,
+      "coral_idx": "23"
+    },
+    {
+      "row_index": 4,
+      "coral_idx": "24"
+    },
+    {
+      "row_index": 5,
+      "coral_idx": "25"
+    },
+    {
+      "row_index": 6,
+      "coral_idx": "26"
+    },
+    {
+      "row_index": 7,
+      "coral_idx": "27"
+    },
+    {
+      "row_index": 8,
+      "coral_idx": "28"
+    },
+    {
+      "row_index": 9,
+      "coral_idx": "29"
+    },
+    {
+      "row_index": 10,
+      "coral_idx": "30"
+    },
+    {
+      "row_index": 11,
+      "coral_idx": "31"
+    },
+    {
+      "row_index": 12,
+      "coral_idx": "32"
+    },
+    {
+      "row_index": 13,
+      "coral_idx": "33"
+    },
+    {
+      "row_index": 14,
+      "coral_idx": "34"
+    },
+    {
+      "row_index": 15,
+      "coral_idx": "35"
+    },
+    {
+      "row_index": 16,
+      "coral_idx": "36"
+    },
+    {
+      "row_index": 17,
+      "coral_idx": "37"
+    },
+    {
+      "row_index": 18,
+      "coral_idx": "38"
+    },
+    {
+      "row_index": 19,
+      "coral_idx": "39"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "prompts/extraction.yaml",
+      "sha256": "d9b4a1829b115361a79a1b4b6d680989f049afffa128318f650c74d32322ee8b"
+    },
+    {
+      "path": "prompts/plan_extraction.yaml",
+      "sha256": "ddfa471735a2636d66cb0d500d98371ce8bdd7b0363dc7ae9fdcc7e4801411f9"
+    },
+    {
+      "path": "prompts/letter_generation.yaml",
+      "sha256": "1af4c277dc47dc396a8df08acef4361f2e76169d4560913c5edb691564208259"
+    }
+  ],
+  "schema_contract": {
+    "path": "prompts/matched_baseline_contract.yaml",
+    "sha256": "cfd15fe03290a43e13f21375dd8a46e4955ff2f968f11b36365db77a27fe424c",
+    "exact_field_path_match": true,
+    "field_count": 31,
+    "field_paths": [
+      "Advance_care_planning.Advance care",
+      "Cancer_Diagnosis.Distant Metastasis",
+      "Cancer_Diagnosis.Metastasis",
+      "Cancer_Diagnosis.Stage_of_Cancer",
+      "Cancer_Diagnosis.Type_of_Cancer",
+      "Clinical_Findings.findings",
+      "Current_Medications.current_meds",
+      "Genetic_Testing_Plan.genetic_testing_plan",
+      "Genetic_Testing_Results.genetic_testing_results",
+      "Imaging_Plan.imaging_plan",
+      "Lab_Plan.lab_plan",
+      "Lab_Results.lab_summary",
+      "Medication_Plan.medication_plan",
+      "Procedure_Plan.procedure_plan",
+      "Reason_for_Visit.Patient type",
+      "Reason_for_Visit.in-person",
+      "Reason_for_Visit.second opinion",
+      "Reason_for_Visit.summary",
+      "Referral.Genetics",
+      "Referral.Nutrition",
+      "Referral.Others",
+      "Referral.Specialty",
+      "Referral.follow up",
+      "Response_Assessment.response_assessment",
+      "Therapy_plan.therapy_plan",
+      "Treatment_Changes.recent_changes",
+      "Treatment_Changes.supportive_meds",
+      "Treatment_Goals.goals_description",
+      "Treatment_Goals.goals_of_treatment",
+      "follow_up_next_visit.Next clinic visit",
+      "radiotherapy_plan.radiotherapy_plan"
+    ]
+  },
+  "git": {
+    "commit": "8518eebf41a240b6dc9f226d76a28000f56917ef",
+    "dirty": true,
+    "changed_paths": [
+      "_pycache__/ult.cpython-310.pyc",
+      "results/staged_ablation_annotated_20261001_090000/",
+      "results/staged_ablation_annotated_20261001_093320/",
+      "results/staged_ablation_annotated_20261001_093433/"
+    ]
+  },
+  "code": {
+    "staged_ablation.py": "84a337a00aee403a4ca033226dc881a64d601dd7a0d2dcccd5b4272c70e8fc3e",
+    "baseline_extraction.py": "7e054b2b7fba439959c754ebb51b06c884c45ca5efa751392843f77075d238cc",
+    "run.py": "69a876761b4a18f3a4f93261e0d236cc135288bafcf3f6c6eccb75d67eacbab6",
+    "ult.py": "6a0c6d574586ef986ad7910cd3bd5ec6a16dd3ad49370c26ba957659deefba27",
+    "extraction_post_hooks.py": "86848ef6141c0fd82c9b762af722e19d72c1d7b555be1502dea6e96913f1e8e1"
+  },
+  "python": "3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]",
+  "command": [
+    "/home/yc/miniconda3/envs/medllm/bin/python",
+    "/home/yc/repo/med_dict_ablation_20261001/run.py",
+    "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/D/runner_config.yaml",
+    "--run-dir",
+    "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/D"
+  ],
+  "started_at_utc": "2026-10-01T17:48:17.786754+00:00",
+  "completed_at_utc": "2026-10-01T18:08:40.525837+00:00",
+  "outputs": {
+    "jsonl": "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/D/outputs.jsonl",
+    "jsonl_sha256": "ec45b5ce5467f5f3d74dddf0a40c6a52e12828a741c350fda981dc73eacad8f2",
+    "results": "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/breast/D/results.txt"
+  }
+}

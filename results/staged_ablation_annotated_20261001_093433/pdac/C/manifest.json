@@ -1,0 +1,217 @@
+{
+  "manifest_version": 1,
+  "status": "completed",
+  "created_at_utc": "2026-10-01T17:24:01.387074+00:00",
+  "variant": "C",
+  "variant_name": "decomposition_plus_verification",
+  "variant_flags": {
+    "name": "decomposition_plus_verification",
+    "runner": "run.py",
+    "single_prompt": false,
+    "field_decomposition": true,
+    "cross_field_routing": true,
+    "g1_format": true,
+    "g2_schema": true,
+    "g3_improve": true,
+    "g4_faithful": true,
+    "g5_temporal": true,
+    "inline_postprocessing": false,
+    "post_hooks": false
+  },
+  "evidence_scope": "technical_ablation_not_clinical_validation",
+  "cancer": "pdac",
+  "sample_set": "annotated",
+  "base_config": "exp/v32_pdac_annotated_test.yaml",
+  "base_config_sha256": "6aeee044c67c8fd526f2ffde51c90c8f2fe5749453e9ce6b66b2db4b9c3799d2",
+  "effective_config_sha256": "0391345819836f06c649fad96707b0ff15fba32061b74f681bc01eb180866fa7",
+  "seed": 42,
+  "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+  "chat_template": "qwen2",
+  "model_endpoint": "http://localhost:8000/v1",
+  "generation": {
+    "keypoint": {
+      "max_new_tokens": 1024,
+      "do_sample": false
+    },
+    "assessment_plan": {
+      "max_new_tokens": 2048,
+      "do_sample": false
+    },
+    "retry": {
+      "max_new_tokens": 2048,
+      "do_sample": false
+    }
+  },
+  "decoding_policy": "greedy_for_all_variants",
+  "dataset": {
+    "path": "data/CORAL/coral-expert-curated-medical-oncology-reports-to-advance-language-model-inference-1.0/coral/annotated/pdac_annotated.csv",
+    "sha256": "ebe84e3af26f573ccaebbbd2144c5085db58de8ce588533d260299ac4507d7d7"
+  },
+  "samples": [
+    {
+      "row_index": 0,
+      "coral_idx": "0"
+    },
+    {
+      "row_index": 1,
+      "coral_idx": "1"
+    },
+    {
+      "row_index": 2,
+      "coral_idx": "2"
+    },
+    {
+      "row_index": 3,
+      "coral_idx": "3"
+    },
+    {
+      "row_index": 4,
+      "coral_idx": "4"
+    },
+    {
+      "row_index": 5,
+      "coral_idx": "5"
+    },
+    {
+      "row_index": 6,
+      "coral_idx": "6"
+    },
+    {
+      "row_index": 7,
+      "coral_idx": "7"
+    },
+    {
+      "row_index": 8,
+      "coral_idx": "8"
+    },
+    {
+      "row_index": 9,
+      "coral_idx": "9"
+    },
+    {
+      "row_index": 10,
+      "coral_idx": "10"
+    },
+    {
+      "row_index": 11,
+      "coral_idx": "11"
+    },
+    {
+      "row_index": 12,
+      "coral_idx": "12"
+    },
+    {
+      "row_index": 13,
+      "coral_idx": "13"
+    },
+    {
+      "row_index": 14,
+      "coral_idx": "14"
+    },
+    {
+      "row_index": 15,
+      "coral_idx": "15"
+    },
+    {
+      "row_index": 16,
+      "coral_idx": "16"
+    },
+    {
+      "row_index": 17,
+      "coral_idx": "17"
+    },
+    {
+      "row_index": 18,
+      "coral_idx": "18"
+    },
+    {
+      "row_index": 19,
+      "coral_idx": "19"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "prompts/pdac/extraction.yaml",
+      "sha256": "d6c65a445793c324879a5923859fc0a07d5be1f43be1e9d72cef2fac59b6075e"
+    },
+    {
+      "path": "prompts/pdac/plan_extraction.yaml",
+      "sha256": "2ef06c8aea75163b3b7f1cd17f09049a43904ec19cd6ab9b20d55be08b7bd097"
+    },
+    {
+      "path": "prompts/pdac/letter_generation.yaml",
+      "sha256": "582deadf7455788fb2653088618afda6a9bdd6910ce536328fb3fe5eb4c8dcff"
+    }
+  ],
+  "schema_contract": {
+    "path": "prompts/matched_baseline_contract.yaml",
+    "sha256": "cfd15fe03290a43e13f21375dd8a46e4955ff2f968f11b36365db77a27fe424c",
+    "exact_field_path_match": true,
+    "field_count": 31,
+    "field_paths": [
+      "Advance_care_planning.Advance care",
+      "Cancer_Diagnosis.Distant Metastasis",
+      "Cancer_Diagnosis.Metastasis",
+      "Cancer_Diagnosis.Stage_of_Cancer",
+      "Cancer_Diagnosis.Type_of_Cancer",
+      "Clinical_Findings.findings",
+      "Current_Medications.current_meds",
+      "Genetic_Testing_Plan.genetic_testing_plan",
+      "Genetic_Testing_Results.genetic_testing_results",
+      "Imaging_Plan.imaging_plan",
+      "Lab_Plan.lab_plan",
+      "Lab_Results.lab_summary",
+      "Medication_Plan.medication_plan",
+      "Procedure_Plan.procedure_plan",
+      "Reason_for_Visit.Patient type",
+      "Reason_for_Visit.in-person",
+      "Reason_for_Visit.second opinion",
+      "Reason_for_Visit.summary",
+      "Referral.Genetics",
+      "Referral.Nutrition",
+      "Referral.Others",
+      "Referral.Specialty",
+      "Referral.follow up",
+      "Response_Assessment.response_assessment",
+      "Therapy_plan.therapy_plan",
+      "Treatment_Changes.recent_changes",
+      "Treatment_Changes.supportive_meds",
+      "Treatment_Goals.goals_description",
+      "Treatment_Goals.goals_of_treatment",
+      "follow_up_next_visit.Next clinic visit",
+      "radiotherapy_plan.radiotherapy_plan"
+    ]
+  },
+  "git": {
+    "commit": "8518eebf41a240b6dc9f226d76a28000f56917ef",
+    "dirty": true,
+    "changed_paths": [
+      "_pycache__/ult.cpython-310.pyc",
+      "results/staged_ablation_annotated_20261001_090000/",
+      "results/staged_ablation_annotated_20261001_093320/",
+      "results/staged_ablation_annotated_20261001_093433/"
+    ]
+  },
+  "code": {
+    "staged_ablation.py": "84a337a00aee403a4ca033226dc881a64d601dd7a0d2dcccd5b4272c70e8fc3e",
+    "baseline_extraction.py": "7e054b2b7fba439959c754ebb51b06c884c45ca5efa751392843f77075d238cc",
+    "run.py": "69a876761b4a18f3a4f93261e0d236cc135288bafcf3f6c6eccb75d67eacbab6",
+    "ult.py": "6a0c6d574586ef986ad7910cd3bd5ec6a16dd3ad49370c26ba957659deefba27",
+    "extraction_post_hooks.py": "86848ef6141c0fd82c9b762af722e19d72c1d7b555be1502dea6e96913f1e8e1"
+  },
+  "python": "3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]",
+  "command": [
+    "/home/yc/miniconda3/envs/medllm/bin/python",
+    "/home/yc/repo/med_dict_ablation_20261001/run.py",
+    "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/C/runner_config.yaml",
+    "--run-dir",
+    "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/C"
+  ],
+  "started_at_utc": "2026-10-01T17:24:01.409250+00:00",
+  "completed_at_utc": "2026-10-01T17:47:50.635196+00:00",
+  "outputs": {
+    "jsonl": "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/C/outputs.jsonl",
+    "jsonl_sha256": "233fcabbc33c25176248ee13a890c62612486db3813105a4d98858065c43f3c6",
+    "results": "/home/yc/repo/med_dict_ablation_20261001/results/staged_ablation_annotated_20261001_093433/pdac/C/results.txt"
+  }
+}
