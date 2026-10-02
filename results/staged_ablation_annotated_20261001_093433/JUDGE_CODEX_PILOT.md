@@ -1,5 +1,7 @@
 # Codex blinded judge calibration pilot
 
+> Audit note: the counts below are the original calibration output. The same judge later re-read all 12 pairs using the final TIE rubric and changed three PDAC verdicts to TIE. The final pilot totals are A 5, B 4, TIE 3. See `JUDGE_CODEX_PILOT_RECALIBRATION.md` and `JUDGE_CODEX_DECODED_ANALYSIS.md` for the locked results.
+
 ## Scope and result
 
 Manually reviewed source lines 1, 2, 21, 22, 41, and 42 from each public blinded judge file (12 pairs total). Each selected clinical note and both outputs were read in full. No private mapping was accessed.

@@ -6,7 +6,7 @@
 - A、B、C、D 四个 variant 在 breast 和 PDAC 上均完成，共 8 组，每组 20 个 held-out samples。
 - 所有组均使用 `Qwen/Qwen2.5-32B-Instruct-AWQ`、greedy decoding 和同一套 31-field schema。
 - 已生成 breast 60 个、PDAC 60 个盲评 pair，共 120 个，覆盖 A vs B、B vs C、C vs D。
-- 本次 runner 不调用 external judge；`judge_provider` 为 `null`。因此目前只能确认生成完整，尚不能据此判断各 variant 的质量排序或增益。
+- Runner 本身不调用 external judge；随后使用一个不读取项目说明或 private mapping 的独立 Codex 子会话完成了全部 120 个 blinded pairs。解盲分析见 `JUDGE_CODEX_DECODED_ANALYSIS.md`。
 
 ## Variant 定义
 
@@ -19,7 +19,7 @@
 
 ## 证据边界
 
-这批结果是 technical ablation 的生成材料，不是新的 clinician evaluation。正式报告 component contribution 前，需要由独立 external judge 对 120 个盲评 pair 进行评分，再按癌种、比较阶段和字段汇总。
+这批结果是 technical ablation，不是新的 clinician evaluation。Codex judge 的结果可以作为 secondary technical evidence，但不能替代医生评审或 absolute clinical validation。
 
 ## Provenance
 
