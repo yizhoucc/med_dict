@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+  <text x="590" y="32" text-anchor="middle" font-size="21" font-weight="700">Blinded staged technical ablation</text>
+  <text x="590" y="56" text-anchor="middle" font-size="12" fill="#555555">Same Qwen2.5-32B model and 31-field schema; 40 annotated benchmark notes per adjacent comparison</text>
+
+  <rect x="305" y="76" width="18" height="12" fill="#D95F0E"/>
+  <text x="330" y="87" font-size="12">Earlier stage better</text>
+  <rect x="470" y="76" width="18" height="12" fill="#BDBDBD"/>
+  <text x="495" y="87" font-size="12">Tie</text>
+  <rect x="555" y="76" width="18" height="12" fill="#2B8CBE"/>
+  <text x="580" y="87" font-size="12">Later stage better</text>
+  <text x="835" y="87" font-size="11" fill="#555555">Labels at right: earlier / tie / later</text>
+
+  <line x1="350" y1="112" x2="350" y2="640" stroke="#E5E5E5"/>
+  <line x1="500" y1="112" x2="500" y2="640" stroke="#E5E5E5"/>
+  <line x1="650" y1="112" x2="650" y2="640" stroke="#E5E5E5"/>
+  <line x1="800" y1="112" x2="800" y2="640" stroke="#E5E5E5"/>
+  <line x1="950" y1="112" x2="950" y2="640" stroke="#E5E5E5"/>
+
+  <text x="70" y="124" font-size="15" font-weight="700" fill="#123B5D">A to B: add decomposition and shared safeguards</text>
+  <text x="1080" y="124" text-anchor="end" font-size="12" fill="#555555">overall p=1.000</text>
+  <text x="335" y="160" text-anchor="end" font-size="12">Overall</text>
+  <rect x="350" y="140" width="255" height="28" fill="#D95F0E"/>
+  <rect x="605" y="140" width="90" height="28" fill="#BDBDBD"/>
+  <rect x="695" y="140" width="255" height="28" fill="#2B8CBE"/>
+  <text x="972" y="159" font-size="12">17 / 6 / 17</text>
+  <text x="335" y="204" text-anchor="end" font-size="12">Breast</text>
+  <rect x="350" y="184" width="330" height="28" fill="#D95F0E"/>
+  <rect x="680" y="184" width="90" height="28" fill="#BDBDBD"/>
+  <rect x="770" y="184" width="180" height="28" fill="#2B8CBE"/>
+  <text x="972" y="203" font-size="12">11 / 3 / 6</text>
+  <text x="335" y="248" text-anchor="end" font-size="12">PDAC</text>
+  <rect x="350" y="228" width="180" height="28" fill="#D95F0E"/>
+  <rect x="530" y="228" width="90" height="28" fill="#BDBDBD"/>
+  <rect x="620" y="228" width="330" height="28" fill="#2B8CBE"/>
+  <text x="972" y="247" font-size="12">6 / 3 / 11</text>
+
+  <line x1="70" y1="282" x2="1090" y2="282" stroke="#D8E0E7"/>
+  <text x="70" y="314" font-size="15" font-weight="700" fill="#123B5D">B to C: add semantic, faithfulness, and temporal verification</text>
+  <text x="1080" y="314" text-anchor="end" font-size="12" fill="#555555">overall p=0.0000105</text>
+  <text x="335" y="350" text-anchor="end" font-size="12">Overall</text>
+  <rect x="350" y="330" width="30" height="28" fill="#D95F0E"/>
+  <rect x="380" y="330" width="210" height="28" fill="#BDBDBD"/>
+  <rect x="590" y="330" width="360" height="28" fill="#2B8CBE"/>
+  <text x="972" y="349" font-size="12">2 / 14 / 24</text>
+  <text x="335" y="394" text-anchor="end" font-size="12">Breast</text>
+  <rect x="350" y="374" width="0" height="28" fill="#D95F0E"/>
+  <rect x="350" y="374" width="240" height="28" fill="#BDBDBD"/>
+  <rect x="590" y="374" width="360" height="28" fill="#2B8CBE"/>
+  <text x="972" y="393" font-size="12">0 / 8 / 12</text>
+  <text x="335" y="438" text-anchor="end" font-size="12">PDAC</text>
+  <rect x="350" y="418" width="60" height="28" fill="#D95F0E"/>
+  <rect x="410" y="418" width="180" height="28" fill="#BDBDBD"/>
+  <rect x="590" y="418" width="360" height="28" fill="#2B8CBE"/>
+  <text x="972" y="437" font-size="12">2 / 6 / 12</text>
+
+  <line x1="70" y1="472" x2="1090" y2="472" stroke="#D8E0E7"/>
+  <text x="70" y="504" font-size="15" font-weight="700" fill="#123B5D">C to D: add deterministic processing and full POST hooks</text>
+  <text x="1080" y="504" text-anchor="end" font-size="12" fill="#555555">overall p=0.736</text>
+  <text x="335" y="540" text-anchor="end" font-size="12">Overall</text>
+  <rect x="350" y="520" width="285" height="28" fill="#D95F0E"/>
+  <rect x="635" y="520" width="75" height="28" fill="#BDBDBD"/>
+  <rect x="710" y="520" width="240" height="28" fill="#2B8CBE"/>
+  <text x="972" y="539" font-size="12">19 / 5 / 16</text>
+  <text x="335" y="584" text-anchor="end" font-size="12">Breast</text>
+  <rect x="350" y="564" width="180" height="28" fill="#D95F0E"/>
+  <rect x="530" y="564" width="90" height="28" fill="#BDBDBD"/>
+  <rect x="620" y="564" width="330" height="28" fill="#2B8CBE"/>
+  <text x="972" y="583" font-size="12">6 / 3 / 11</text>
+  <text x="335" y="628" text-anchor="end" font-size="12">PDAC</text>
+  <rect x="350" y="608" width="390" height="28" fill="#D95F0E"/>
+  <rect x="740" y="608" width="60" height="28" fill="#BDBDBD"/>
+  <rect x="800" y="608" width="150" height="28" fill="#2B8CBE"/>
+  <text x="972" y="627" font-size="12">13 / 2 / 5</text>
+
+  <text x="350" y="662" text-anchor="middle" font-size="11">0%</text>
+  <text x="500" y="662" text-anchor="middle" font-size="11">25%</text>
+  <text x="650" y="662" text-anchor="middle" font-size="11">50%</text>
+  <text x="800" y="662" text-anchor="middle" font-size="11">75%</text>
+  <text x="950" y="662" text-anchor="middle" font-size="11">100%</text>
+  <text x="650" y="690" text-anchor="middle" font-size="12">Share of blinded pairwise judgments</text>
+
+  <rect x="70" y="710" width="1040" height="32" rx="6" fill="#F4F0FB" stroke="#D7C8EE"/>
+  <text x="590" y="731" text-anchor="middle" font-size="11.5" fill="#4F3B7D">One non-clinician Codex judge; ties excluded from exact sign tests; secondary technical evidence, not clinician validation</text>
+</g>
+</svg>

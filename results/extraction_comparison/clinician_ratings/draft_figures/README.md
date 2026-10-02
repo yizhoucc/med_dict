@@ -4,6 +4,8 @@ These SVG files are internal trend-check plots generated from the three current 
 
 The exploratory letter plot uses `../patient_letter_scores_oncologist_01_summary.csv`, a deidentified per-note summary derived from the original oncologist scoring workbook.
 
+The staged-ablation plot uses the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. It is separate from the clinician-rating plotting scripts below.
+
 Generate them with:
 
 ```bash
@@ -19,8 +21,9 @@ Files:
 - `figure4_core_fields_rough.svg`: pooled preference distribution across the seven core clinical categories.
 - `figure5_note_margins_rough.svg`: note-level PL-minus-BL field margins for breast cancer and PDAC.
 - `figure6_adjusted_effects_rough.svg`: adjusted overall and cancer-specific odds ratios from the directional-rating GEE.
-- `figure7_human_model_complementarity_rough.svg`: conceptual map of human review burden and model error risk across extraction tasks.
-- `figure7_letter_differences_rough.svg`: retained internal exploratory patient-letter plot; no longer embedded in the main manuscript.
+- `figure7_staged_ablation_rough.svg`: blinded A-B, B-C, and C-D technical-ablation judgments overall and by cancer.
+- `figure7_human_model_complementarity_rough.svg`: conceptual map of human review burden and model error risk across extraction tasks, embedded as Figure 9.
+- `figure7_letter_differences_rough.svg`: exploratory patient-letter plot, embedded as Figure 8.
 - `supplementary_figure1_technical_vs_clinician_rough.svg`: descriptive comparison of technical-audit and clinician net preference rates.
 
 The current manuscript embeds these SVGs as draft figures with formal captions. Regenerate them whenever another clinician export is added or the analysis specification changes.

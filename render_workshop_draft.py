@@ -39,12 +39,16 @@ ROUGH_FIGURES = {
         "Adjusted odds of clinician preference for the harness",
     ),
     "7": (
-        FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
-        "Conceptual human-model complementarity across extraction tasks",
+        FIGURE_DIR / "figure7_staged_ablation_rough.svg",
+        "Blinded staged technical ablation overall and by cancer",
     ),
     "8": (
         FIGURE_DIR / "figure7_letter_differences_rough.svg",
         "Exploratory patient-letter score differences",
+    ),
+    "9": (
+        FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
+        "Conceptual human-model complementarity across extraction tasks",
     ),
     "S1": (
         FIGURE_DIR / "supplementary_figure1_technical_vs_clinician_rough.svg",
@@ -604,20 +608,22 @@ def render() -> str:
   <span class="chip">Version {html.escape(version)}</span>
   <span class="chip">3 oncologists</span>
   <span class="chip">1,359 required-field judgments</span>
+  <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
 </div>
 <div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>
 <section class="review-checklist">
   <h2>合作者审阅 Checklist</h2>
   <ul>
-    <li class="done">✓ Figure 1 至 Figure 8 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
-    <li class="done">✓ 3.2 的调整后主分析已完成：GEE OR 5.70，95% CI 4.24–7.66，p&lt;0.001。</li>
+    <li class="done">✓ Figure 1 至 Figure 9 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
+    <li class="done">✓ 3.2 的调整后主分析已完成：GEE OR 5.70，95% CI 4.24 to 7.66，p&lt;0.001。</li>
     <li class="done">✓ 已确认医生评审使用最终 baseline；Methods 明确评估的是含 source attribution 的完整 harness 输出，不把 attribution 单独归因。</li>
     <li class="done">✓ 已在 Results 保留自由文本评论对 `TIE` 含义的解释，并在 Discussion 将其列为主要 limitation。</li>
     <li class="done">✓ Literature review 已更新至 20 篇主稿引用；文内编号可跳转到带一句话简评的中英文参考文献条目。</li>
     <li class="done">✓ 论文主线已按临床合作者建议重排为 breast human-in-the-loop、PDAC agent-assisted adaptation、独立 extraction evaluation 和 downstream letter generation。</li>
     <li class="open">□ 对预先选定的一部分 `TIE` 做人工 adjudication，区分“两边都对”和“两边都错”。</li>
-    <li class="open">□ 决定是否补做四级 staged ablation；LLM 评分只能作为 technical evidence，不能替代医生评估。</li>
+    <li class="done">✓ 四级 staged ablation 已完成：A-B 17:17:6，B-C 2:24:14，C-D 19:16:5；结果明确标为 single-LLM secondary technical evidence。</li>
+    <li class="open">□ 决定是否补做直接 randomized blinded A-vs-D comparison，并对 C-vs-D 改变的少量输出做医生复核。</li>
     <li class="done">✓ Related-work 对照表已移到中文版文末审阅附录，Discussion 改为自然引用。</li>
     <li class="open">□ 全文确定后最后重写 Abstract。</li>
   </ul>
@@ -656,6 +662,7 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa from 0.511 to 0.646",
         "1,359 required-field judgments",
+        "120 blinded ablation pairs",
         'id="chinese-version"',
         "供临床合作者审阅的问题",
         "参考文献",
@@ -663,8 +670,8 @@ def main() -> None:
     missing = [value for value in required if value not in output]
     if missing:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
-    if output.count('<figure class="rough-figure">') != 18:
-        raise RuntimeError("Expected nine embedded figures in each language version.")
+    if output.count('<figure class="rough-figure">') != 20:
+        raise RuntimeError("Expected ten embedded figures in each language version.")
     print(f"Wrote {OUTPUT.name} ({len(output):,} characters)")
 
 
