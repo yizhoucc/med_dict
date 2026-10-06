@@ -24,8 +24,9 @@ OUTPUT_MD = HERE / "ADJUSTED_ANALYSIS.md"
 
 RATER_FILES = {
     "Oncologist 01": HERE / "simo_breast_pdac_blind_scores_20260921.csv",
-    "Oncologist 02": HERE / "kevin_breast_pdac_blind_scores_20260911.csv",
+    "Oncologist 02": HERE / "kevin_breast_pdac_blind_scores_20261005.csv",
     "Oncologist 03": HERE / "bolun_breast_blind_scores_20260921.xlsx",
+    "Oncologist 04": HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv",
 }
 
 BREAST_FIELDS = [
@@ -193,11 +194,11 @@ def write_results(
     lines = [
         "# Adjusted clinician-preference analysis",
         "",
-        "Updated: 2026-09-23",
+        "Updated: 2026-10-05",
         "",
         "## Primary model",
         "",
-        "The primary analysis excludes ties and models whether a directional rating favors the inference harness. It uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. This approach accounts for repeated ratings of fields and evaluators within a note without treating all 520 directional ratings as independent.",
+        "The primary analysis excludes ties and models whether a directional rating favors the inference harness. It uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. This approach accounts for repeated ratings of fields and evaluators within a note without treating all directional ratings as independent.",
         "",
         "| Scope | Directional judgments | Harness | Baseline | Clusters | Adjusted harness probability | Odds ratio | 95% CI | p value |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
@@ -234,7 +235,7 @@ def write_results(
             "",
             "## Interpretation boundary",
             "",
-            "The observed-note result is statistically strong, but three oncologists remain too few for a precise estimate of variation across the broader oncologist population. Evaluator-level generalization should therefore remain a pilot claim.",
+            "The observed-note result is statistically strong, but four oncologists remain too few for a precise estimate of variation across the broader oncologist population. Evaluator-level generalization should therefore remain a pilot claim.",
             "",
         ]
     )

@@ -1,20 +1,18 @@
 # Adjusted clinician-preference analysis
 
-Updated: 2026-09-23
+Updated: 2026-10-05
 
 ## Primary model
 
-The primary analysis excludes ties and models whether a directional rating favors the inference harness. It uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. This approach accounts for repeated ratings of fields and evaluators within a note without treating all 520 directional ratings as independent.
+The primary analysis excludes ties and models whether a directional rating favors the inference harness. It uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. This approach accounts for repeated ratings of fields and evaluators within a note without treating all directional ratings as independent.
 
 | Scope | Directional judgments | Harness | Baseline | Clusters | Adjusted harness probability | Odds ratio | 95% CI | p value |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Overall | 520 | 443 | 77 | 40 | 85.1% | 5.70 | 4.24-7.66 | 6.79e-31 |
-| Breast cancer | 336 | 282 | 54 | 20 | 83.8% | 5.18 | 3.61-7.46 | 6.58e-19 |
-| PDAC | 184 | 161 | 23 | 20 | 87.4% | 6.94 | 4.19-11.48 | 4.87e-14 |
+| Overall | 737 | 596 | 141 | 40 | 80.6% | 4.15 | 3.25-5.29 | 2.56e-30 |
+| Breast cancer | 443 | 363 | 80 | 20 | 81.7% | 4.45 | 3.17-6.25 | 7.04e-18 |
+| PDAC | 294 | 233 | 61 | 20 | 78.8% | 3.71 | 2.64-5.23 | 5.97e-14 |
 
 The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.
-
-Across all 1,359 required judgments, 32.6% favored the harness, 5.7% favored the baseline, and 61.7% were ties. Because a tie can mean either that both outputs were acceptable or that both were inadequate, the primary model should be interpreted together with the full three-category distribution.
 
 ## Note-level sensitivity analysis
 
@@ -27,8 +25,10 @@ For each evaluator-cancer combination, field ratings were reduced to one harness
 | Oncologist 02, Breast cancer | 20 | 0 | 0 | 1.91e-06 |
 | Oncologist 02, PDAC | 18 | 0 | 2 | 7.63e-06 |
 | Oncologist 03, Breast cancer | 20 | 0 | 0 | 1.91e-06 |
-| All clinicians pooled within note | 40 | 0 | 0 | 1.82e-12 |
+| Oncologist 04, Breast cancer | 16 | 2 | 2 | 0.00131 |
+| Oncologist 04, PDAC | 13 | 4 | 3 | 0.049 |
+| All clinicians pooled within note | 39 | 0 | 1 | 3.64e-12 |
 
 ## Interpretation boundary
 
-The observed-note result is statistically strong, but three oncologists remain too few for a precise estimate of variation across the broader oncologist population. Evaluator-level generalization should therefore remain a pilot claim.
+The observed-note result is statistically strong, but four oncologists remain too few for a precise estimate of variation across the broader oncologist population. Evaluator-level generalization should therefore remain a pilot claim.

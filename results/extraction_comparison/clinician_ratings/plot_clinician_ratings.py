@@ -21,8 +21,9 @@ HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "draft_figures"
 RATER_FILES = {
     "Simo": HERE / "simo_breast_pdac_blind_scores_20260921.csv",
-    "Kevin": HERE / "kevin_breast_pdac_blind_scores_20260911.csv",
+    "Kevin": HERE / "kevin_breast_pdac_blind_scores_20261005.csv",
     "Bolun": HERE / "bolun_breast_blind_scores_20260921.xlsx",
+    "Zhengrui": HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv",
 }
 LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
 ADJUSTED_RESULTS = HERE / "adjusted_gee_results.csv"
@@ -255,7 +256,7 @@ def plot_development_pathway() -> None:
     flow_arrow(out, cx + branch_w + branch_gap + branch_w / 2, 396, cx + box_w / 2, 430)
     flow_box(out, cx, 430, box_w, 62, ["Identity-masked A/B comparison", "field-level A better / B better / tie"], "#FFFFFF", "#65727C", 12)
     flow_arrow(out, cx + box_w / 2, 492, cx + box_w / 2, 519)
-    flow_box(out, cx, 519, box_w, 52, ["3 oncologists: breast; 2: PDAC"], "#E9EEF1", "#65727C", 12)
+    flow_box(out, cx, 519, box_w, 52, ["4 oncologists: breast; 3: PDAC"], "#E9EEF1", "#65727C", 12)
 
     out.append(
         '<text x="660" y="635" text-anchor="middle" font-size="13" fill="#465761">'
@@ -273,8 +274,10 @@ def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None
             groups.append((f"Oncologist {index}, breast", breast))
         if pdac:
             groups.append((f"Oncologist {index}, PDAC", pdac))
-    width, height = 1000, 510
     left, right, top, bar_h, gap = 225, 195, 100, 52, 20
+    width = 1000
+    plot_bottom = top + (len(groups) - 1) * (bar_h + gap) + bar_h
+    height = plot_bottom + 60
     plot_w = width - left - right
     out = svg_start(
         width,
@@ -285,8 +288,8 @@ def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None
     legend(out, left, 78)
     for tick in range(0, 101, 20):
         x = left + plot_w * tick / 100
-        out.append(f'<line x1="{x:.1f}" y1="92" x2="{x:.1f}" y2="450" stroke="{GRID}"/>')
-        out.append(f'<text x="{x:.1f}" y="475" text-anchor="middle" font-size="11">{tick}%</text>')
+        out.append(f'<line x1="{x:.1f}" y1="92" x2="{x:.1f}" y2="{plot_bottom}" stroke="{GRID}"/>')
+        out.append(f'<text x="{x:.1f}" y="{plot_bottom + 25}" text-anchor="middle" font-size="11">{tick}%</text>')
     for index, (label, rows) in enumerate(groups):
         counts = Counter(row["score"] for row in rows)
         total = len(rows)
@@ -312,7 +315,7 @@ def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None
             f'<text x="{left + plot_w + 12}" y="{y + 41}" font-size="10" fill="#555555">'
             f'{pl_share:.1%} of directional</text>'
         )
-    out.append(f'<text x="{left + plot_w / 2:.1f}" y="502" text-anchor="middle" font-size="12">Share of required judgments</text>')
+    out.append(f'<text x="{left + plot_w / 2:.1f}" y="{height - 8}" text-anchor="middle" font-size="12">Share of required judgments</text>')
     svg_end(out, OUTPUT / "figure2_evaluator_distribution_rough.svg")
 
 
@@ -348,8 +351,9 @@ def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
     values: dict[tuple[str, str], tuple[float, float, int]] = {}
     for name_1, name_2 in combinations(internal_names, 2):
         values[(name_1, name_2)] = pairwise_agreement(raters[name_1], raters[name_2])
-    width, height = 720, 600
     left, top, cell = 190, 130, 125
+    width = max(720, left + len(internal_names) * cell + 35)
+    height = max(600, top + len(internal_names) * cell + 40)
     out = svg_start(
         width,
         height,
@@ -488,7 +492,7 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
         width,
         height,
         "Per-note clinician preference margins",
-        "(PL better - BL better) / completed ratings; breast pools 3 clinicians and PDAC pools 2",
+        "(PL better - BL better) / completed ratings; breast pools 4 clinicians and PDAC pools 3",
     )
     draw_margin_panel(out, 20, 72, 600, 400, "Breast cancer", breast)
     draw_margin_panel(out, 640, 72, 600, 400, "PDAC", pdac)

@@ -606,8 +606,8 @@ def render() -> str:
         f'''</h1>
 <div class="draft-meta">
   <span class="chip">Version {html.escape(version)}</span>
-  <span class="chip">3 oncologists</span>
-  <span class="chip">1,359 required-field judgments</span>
+  <span class="chip">4 oncologists</span>
+  <span class="chip">1,900 required-field judgments</span>
   <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
 </div>
@@ -616,7 +616,7 @@ def render() -> str:
   <h2>合作者审阅 Checklist</h2>
   <ul>
     <li class="done">✓ Figure 1 至 Figure 9 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
-    <li class="done">✓ 3.2 的调整后主分析已完成：GEE OR 5.70，95% CI 4.24 to 7.66，p&lt;0.001。</li>
+    <li class="done">✓ 3.2 的四医生调整后主分析已完成：GEE OR 4.15，95% CI 3.25 to 5.29，p&lt;0.001。</li>
     <li class="done">✓ 已确认医生评审使用最终 baseline；Methods 明确评估的是含 source attribution 的完整 harness 输出，不把 attribution 单独归因。</li>
     <li class="done">✓ 已在 Results 保留自由文本评论对 `TIE` 含义的解释，并在 Discussion 将其列为主要 limitation。</li>
     <li class="done">✓ Literature review 已更新至 20 篇主稿引用；文内编号可跳转到带一句话简评的中英文参考文献条目。</li>
@@ -661,7 +661,7 @@ def main() -> None:
         "table-wrap",
         "data:image/svg+xml;base64",
         "Cohen's kappa from 0.511 to 0.646",
-        "1,359 required-field judgments",
+        "1,900 required-field judgments",
         "120 blinded ablation pairs",
         'id="chinese-version"',
         "供临床合作者审阅的问题",
