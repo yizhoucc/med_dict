@@ -2,7 +2,7 @@
 """Generate the eight vector figures embedded in the workshop-paper draft.
 
 SVG primitives keep the output deterministic across machines. The lightweight
-XLSX reader is sufficient for the two clinician workbooks and avoids requiring
+XLSX reader is sufficient for the two physician workbooks and avoids requiring
 openpyxl for figure regeneration.
 """
 
@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import csv
 import html
-import math
 import re
 import zipfile
 from collections import Counter, defaultdict
@@ -38,17 +37,19 @@ ADJUSTED_RESULTS = HERE / "adjusted_gee_results.csv"
 PL = "#0072B2"
 BL = "#D55E00"
 TIE = "#B8B8B8"
-CLINICIAN = "#009E73"
+PHYSICIAN = "#009E73"
 LLM = "#7A5FA8"
 TEXT = "#222222"
 MUTED = "#5E6870"
+NEUTRAL = "#65737E"
 GRID = "#E6E6E6"
 PANEL_FILL = "#FAFBFC"
 PANEL_STROKE = "#D7DEE3"
 HARNESS_SOFT = "#E7F2F8"
 BASELINE_SOFT = "#FBECE5"
-CLINICIAN_SOFT = "#E6F5F0"
+PHYSICIAN_SOFT = "#E6F5F0"
 LLM_SOFT = "#F0ECF5"
+NEUTRAL_SOFT = "#F0F2F3"
 
 BREAST_FIELDS = [
     "current_meds",
@@ -194,7 +195,7 @@ def esc(value: object) -> str:
 def svg_start(width: int, height: int) -> list[str]:
     return [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        '<rect width="100%" height="100%" fill="white"/>',
+        f'<rect x="0" y="0" width="{width}" height="{height}" fill="#FFFFFF"/>',
         '<defs>',
         '<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>',
         '<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>',
@@ -247,7 +248,7 @@ def box(out: list[str], x: float, y: float, width: float, height: float, lines: 
 
 def arrow(out: list[str], x1: float, y1: float, x2: float, y2: float, *, color: str = "#65737E", dashed: bool = False, curved: bool = False) -> None:
     dash = ' stroke-dasharray="8 7"' if dashed else ""
-    markers = {LLM: "arrow-purple", PL: "arrow-blue", CLINICIAN: "arrow-green", BL: "arrow-orange"}
+    markers = {LLM: "arrow-purple", PL: "arrow-blue", PHYSICIAN: "arrow-green", BL: "arrow-orange"}
     marker = markers.get(color, "arrow")
     if curved:
         midpoint = min(y1, y2) - 28
@@ -262,28 +263,28 @@ def plot_development_pathway() -> None:
     out = svg_start(width, height)
     panel(out, 30, 25, 1440, 200, "A", "Data partitions and isolation")
     data_cards = [
-        (90, "Breast development", ["100 unannotated notes", "Harness development"], PL, HARNESS_SOFT, "B"),
-        (545, "PDAC development", ["100 unannotated notes", "Cross-cancer adaptation"], LLM, LLM_SOFT, "C"),
-        (1000, "Locked holdout", ["20 breast + 20 PDAC", "No development use"], CLINICIAN, CLINICIAN_SOFT, "D"),
+        (90, "Breast development", ["100 unannotated notes", "Harness development"], NEUTRAL, NEUTRAL_SOFT, "B"),
+        (545, "PDAC development", ["100 unannotated notes", "Cross-cancer adaptation"], NEUTRAL, NEUTRAL_SOFT, "C"),
+        (1000, "Locked holdout", ["20 breast + 20 PDAC", "No development use"], NEUTRAL, NEUTRAL_SOFT, "D"),
     ]
     for x, heading, lines, color, fill, route in data_cards:
         box(out, x, 78, 390, 92, [heading] + lines, fill=fill, stroke=color, size=16)
         text(out, x + 195, 197, f"to panel {route}", 13, anchor="middle", weight=700, fill=color)
 
-    panel(out, 30, 250, 700, 480, "B", "Clinician-informed breast-cancer development")
+    panel(out, 30, 250, 700, 480, "B", "Physician-informed breast-cancer development")
     bx, by, bw, bh, gap = 70, 322, 140, 82, 27
     breast_nodes = [
         (["Development", "note"], "white", PANEL_STROKE),
         (["Frozen model", "+ harness"], HARNESS_SOFT, PL),
         (["Structured", "outputs"], "white", PL),
-        (["Physician +", "investigator", "source review"], CLINICIAN_SOFT, CLINICIAN),
+        (["Physician +", "investigator", "source review"], PHYSICIAN_SOFT, PHYSICIAN),
     ]
     for index, (lines, fill, stroke) in enumerate(breast_nodes):
         x = bx + index * (bw + gap)
         box(out, x, by, bw, bh, lines, fill=fill, stroke=stroke, size=13)
         if index:
             arrow(out, x - gap + 5, by + bh / 2, x - 5, by + bh / 2)
-    box(out, 500, 486, 190, 82, ["Failure taxonomy", "+ clinical rubric"], fill=CLINICIAN_SOFT, stroke=CLINICIAN, size=14)
+    box(out, 500, 486, 190, 82, ["Failure taxonomy", "+ clinical rubric"], fill=PHYSICIAN_SOFT, stroke=PHYSICIAN, size=14)
     box(out, 285, 486, 190, 82, ["Prompt, gate, hook", "revision"], fill=HARNESS_SOFT, stroke=PL, size=14)
     box(out, 70, 486, 190, 82, ["Regression testing"], fill="white", stroke=PL, size=15)
     arrow(out, 641, 404, 595, 486)
@@ -317,11 +318,13 @@ def plot_development_pathway() -> None:
         f'C880,648 873,640 873,630 V494" fill="none" stroke="{PL}" '
         'stroke-width="2.2" marker-end="url(#arrow-blue)"/>'
     )
-    round_rect(out, 840, 663, 560, 40, fill="#FFF7ED", stroke="#C37A2A", radius=7)
-    text(out, 1120, 689, "No target-domain physician review of PDAC outputs", 14, anchor="middle", weight=700, fill="#8A520F")
+    round_rect(out, 840, 658, 560, 48, fill="white", stroke=NEUTRAL, radius=7)
+    out.append(f'<circle cx="870" cy="682" r="15" fill="{PHYSICIAN}"/>')
+    text(out, 870, 688, "P", 16, anchor="middle", weight=700, fill="white")
+    text(out, 1125, 688, "No target-domain physician review of PDAC outputs", 14, anchor="middle", weight=700, fill=PHYSICIAN)
 
     panel(out, 30, 755, 1440, 390, "D", "Independent holdout evaluation")
-    box(out, 75, 842, 230, 88, ["40 locked notes", "20 breast + 20 PDAC"], fill=CLINICIAN_SOFT, stroke=CLINICIAN, size=15)
+    box(out, 75, 842, 230, 88, ["40 locked notes", "20 breast + 20 PDAC"], fill=NEUTRAL_SOFT, stroke=NEUTRAL, size=15)
     box(out, 365, 825, 260, 120, ["Same frozen", "Qwen2.5-32B", "+ same schema"], fill="white", stroke="#65737E", size=15)
     arrow(out, 305, 886, 365, 886)
     box(out, 705, 795, 235, 100, ["Inference harness", "+ supporting excerpts"], fill=HARNESS_SOFT, stroke=PL, size=15)
@@ -331,10 +334,10 @@ def plot_development_pathway() -> None:
     box(out, 1010, 842, 220, 112, ["Identity-masked", "fixed A/B", "field comparison"], fill="white", stroke="#65737E", size=15)
     arrow(out, 940, 845, 1010, 885, color=PL)
     arrow(out, 940, 985, 1010, 915, color=BL)
-    box(out, 1290, 795, 130, 100, ["4", "oncologists"], fill=CLINICIAN_SOFT, stroke=CLINICIAN, size=15)
-    box(out, 1290, 935, 130, 100, ["2,160 field", "judgments"], fill="white", stroke=CLINICIAN, size=14)
-    arrow(out, 1230, 898, 1290, 845, color=CLINICIAN)
-    arrow(out, 1355, 895, 1355, 935, color=CLINICIAN)
+    box(out, 1290, 795, 130, 100, ["4", "physicians"], fill=PHYSICIAN_SOFT, stroke=PHYSICIAN, size=15)
+    box(out, 1290, 935, 130, 100, ["2,160 field", "judgments"], fill="white", stroke=PHYSICIAN, size=14)
+    arrow(out, 1230, 898, 1290, 845, color=PHYSICIAN)
+    arrow(out, 1355, 895, 1355, 935, color=PHYSICIAN)
     text(out, 750, 1110, "Primary analysis: logistic GEE on non-tie judgments, clustered by note", 15, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "figure1_development_pathway_rough.svg")
 
@@ -349,8 +352,8 @@ def legend(out: list[str], x: float, y: float, items: list[tuple[str, str]], *, 
 def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None:
     groups: list[tuple[str, list[dict[str, str]]]] = []
     for index, rows in enumerate(raters.values(), start=1):
-        groups.append((f"Oncologist {index}  |  Breast", subset(rows, "b", BREAST_FIELDS)))
-        groups.append((f"Oncologist {index}  |  PDAC", subset(rows, "p", PDAC_FIELDS)))
+        groups.append((f"Physician {index}  |  Breast", subset(rows, "b", BREAST_FIELDS)))
+        groups.append((f"Physician {index}  |  PDAC", subset(rows, "p", PDAC_FIELDS)))
     width, height = 1500, 720
     out = svg_start(width, height)
     panel(out, 25, 20, 900, 655, "A", "All required judgments")
@@ -431,7 +434,7 @@ def draw_agreement_matrix(out: list[str], raters: dict[str, list[dict[str, str]]
     text(out, x0 + 370, y0 + 42, title, 20, anchor="middle", weight=700)
     text(out, x0 + 370, y0 + 70, f"n={n_per_pair} shared field judgments per pair", 13, anchor="middle", fill=MUTED)
     for index in range(4):
-        label = f"Oncologist {index + 1}"
+        label = f"Physician {index + 1}"
         text(out, left + (index + 0.5) * cell, top - 18, label, 13, anchor="middle")
         text(out, left - 16, top + (index + 0.55) * cell, label, 13, anchor="end")
     for row in range(4):
@@ -443,7 +446,7 @@ def draw_agreement_matrix(out: list[str], raters: dict[str, list[dict[str, str]]
             elif column > row:
                 agreement, kappa, _ = values[(names[row], names[column])]
                 fraction = (kappa + 0.10) / 0.80
-                fill = interpolate_hex("#F5F2F8", LLM, fraction)
+                fill = interpolate_hex(PHYSICIAN_SOFT, PHYSICIAN, fraction)
                 ink = "white" if fraction > 0.58 else TEXT
                 out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{fill}" stroke="white" stroke-width="3"/>')
                 text(out, x + cell / 2, y + 46, f"{agreement:.1%}", 18, anchor="middle", weight=700, fill=ink)
@@ -461,7 +464,7 @@ def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
     draw_agreement_matrix(out, raters, 755, 55, "Pairwise agreement", "p", PDAC_FIELDS, 260)
     gradient_x, gradient_y, gradient_w = 520, 715, 460
     for index in range(100):
-        out.append(f'<rect x="{gradient_x + gradient_w * index / 100:.1f}" y="{gradient_y}" width="{gradient_w / 100 + 1:.1f}" height="15" fill="{interpolate_hex("#F5F2F8", LLM, index / 99)}"/>')
+        out.append(f'<rect x="{gradient_x + gradient_w * index / 100:.1f}" y="{gradient_y}" width="{gradient_w / 100 + 1:.1f}" height="15" fill="{interpolate_hex(PHYSICIAN_SOFT, PHYSICIAN, index / 99)}"/>')
     text(out, gradient_x - 12, gradient_y + 13, "κ -0.10", 12, anchor="end", fill=MUTED)
     text(out, gradient_x + gradient_w + 12, gradient_y + 13, "κ 0.70", 12, fill=MUTED)
     text(out, 750, 755, "Color encodes Cohen's κ; each populated cell also reports exact agreement", 13, anchor="middle", fill=MUTED)
@@ -567,31 +570,26 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     svg_end(out, OUTPUT / "figure5_note_margins_rough.svg")
 
 
-def p_label(value: float) -> str:
-    return f"{value:.2e}" if value < 0.001 else f"{value:.3f}"
-
-
 def plot_adjusted_effects() -> None:
     rows = load_csv(ADJUSTED_RESULTS)
-    width, height = 1650, 640
+    width, height = 1500, 590
     out = svg_start(width, height)
 
-    panel(out, 20, 20, 800, 570, "A", "Adjusted preference probability")
-    text(out, 75, 82, "P(harness preference | directional judgment)", 16, fill=MUTED)
-    probability_left, probability_width = 180, 320
-    probability_top, row_gap = 190, 120
+    round_rect(out, 20, 20, 1460, 520, fill=PANEL_FILL, stroke=PANEL_STROKE, radius=13)
+    text(out, 55, 62, "Adjusted physician preference probability", 23, weight=700)
+    text(out, 55, 92, "P(harness preference | directional judgment)", 16, fill=MUTED)
+    probability_left, probability_width = 270, 540
+    probability_top, row_gap = 185, 115
     probability_min, probability_max = 0.45, 0.90
     for tick in [0.5, 0.6, 0.7, 0.8, 0.9]:
         x = probability_left + probability_width * (tick - probability_min) / (probability_max - probability_min)
         stroke = "#59656D" if tick == 0.5 else GRID
         dash = "6 5" if tick == 0.5 else "0"
-        out.append(f'<line x1="{x:.1f}" y1="130" x2="{x:.1f}" y2="490" stroke="{stroke}" stroke-dasharray="{dash}"/>')
-        text(out, x, 522, f"{tick:.0%}", 16, anchor="middle", fill=MUTED)
-    text(out, probability_left + probability_width / 2, 563, "Adjusted probability", 16, anchor="middle", fill=MUTED)
-    text(out, 558, 113, "Probability", 16, anchor="middle", weight=700)
-    text(out, 558, 135, "(95% CI)", 16, anchor="middle", weight=700)
-    text(out, 722, 113, "Difference from 50%", 16, anchor="middle", weight=700)
-    text(out, 722, 135, "percentage points", 16, anchor="middle", weight=700)
+        out.append(f'<line x1="{x:.1f}" y1="125" x2="{x:.1f}" y2="445" stroke="{stroke}" stroke-dasharray="{dash}"/>')
+        text(out, x, 475, f"{tick:.0%}", 16, anchor="middle", fill=MUTED)
+    text(out, probability_left + probability_width / 2, 510, "Adjusted probability", 16, anchor="middle", fill=MUTED)
+    text(out, 1020, 125, "Adjusted probability (95% CI)", 16, anchor="middle", weight=700)
+    text(out, 1325, 125, "Difference from 50% (95% CI)", 16, anchor="middle", weight=700)
     for index, row in enumerate(rows):
         y = probability_top + index * row_gap
         estimate = float(row["adjusted_probability"])
@@ -603,43 +601,15 @@ def plot_adjusted_effects() -> None:
         out.append(f'<line x1="{xpos(low):.1f}" y1="{y - 9}" x2="{xpos(low):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<line x1="{xpos(high):.1f}" y1="{y - 9}" x2="{xpos(high):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}" stroke="white" stroke-width="2"/>')
-        text(out, 558, y - 3, f"{estimate:.2%}", 16, anchor="middle", weight=700 if index == 0 else 400)
-        text(out, 558, y + 20, f"({low:.2%}-{high:.2%})", 16, anchor="middle", fill=MUTED)
+        text(out, 1020, y - 3, f"{estimate:.2%}", 17, anchor="middle", weight=700 if index == 0 else 400)
+        text(out, 1020, y + 21, f"({low:.2%}-{high:.2%})", 16, anchor="middle", fill=MUTED)
         difference = float(row["difference_from_50"]) * 100
         difference_low = float(row["difference_ci_low"]) * 100
         difference_high = float(row["difference_ci_high"]) * 100
-        text(out, 722, y - 3, f"{difference:+.2f} pp", 16, anchor="middle", weight=700 if index == 0 else 400)
-        text(out, 722, y + 20, f"({difference_low:+.2f} to {difference_high:+.2f})", 16, anchor="middle", fill=MUTED)
-    text(out, probability_left + 10, 151, "Equal preference", 16, fill=MUTED)
-
-    panel(out, 840, 20, 790, 570, "B", "Adjusted odds ratio")
-    text(out, 895, 82, "Same standardized GEE estimates on the odds scale", 16, fill=MUTED)
-    left, plot_w, top, gap, xmin, xmax = 1000, 275, 190, 120, 0.8, 8.0
-    for tick in [0.8, 1, 2, 4, 8]:
-        x = left + plot_w * math.log(tick / xmin) / math.log(xmax / xmin)
-        stroke = "#59656D" if tick == 1 else GRID
-        dash = "6 5" if tick == 1 else "0"
-        out.append(f'<line x1="{x:.1f}" y1="130" x2="{x:.1f}" y2="490" stroke="{stroke}" stroke-dasharray="{dash}"/>')
-        text(out, x, 522, str(tick), 16, anchor="middle", fill=MUTED)
-    text(out, left + plot_w / 2, 563, "Odds ratio (log scale)", 16, anchor="middle", fill=MUTED)
-    text(out, 1305, 126, "OR (95% CI)", 16, weight=700)
-    text(out, 1495, 126, "p", 16, weight=700)
-    text(out, 1580, 126, "n", 16, anchor="middle", weight=700)
-    for index, row in enumerate(rows):
-        y = top + index * gap
-        estimate, low, high = (float(row[key]) for key in ("odds_ratio", "ci_low", "ci_high"))
-        xpos = lambda value: left + plot_w * math.log(value / xmin) / math.log(xmax / xmin)
-        text(out, left - 20, y + 6, row["scope"], 16, anchor="end", weight=700 if index == 0 else 400)
-        out.append(f'<line x1="{xpos(low):.1f}" y1="{y}" x2="{xpos(high):.1f}" y2="{y}" stroke="{PL}" stroke-width="4"/>')
-        out.append(f'<line x1="{xpos(low):.1f}" y1="{y - 8}" x2="{xpos(low):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>')
-        out.append(f'<line x1="{xpos(high):.1f}" y1="{y - 8}" x2="{xpos(high):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>')
-        out.append(f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}" stroke="white" stroke-width="2"/>')
-        text(out, 1305, y + 6, f"{estimate:.3f} ({low:.3f}-{high:.3f})", 16)
-        text(out, 1495, y + 6, p_label(float(row["p_value"])), 16)
-        text(out, 1580, y + 6, row["directional_judgments"], 16, anchor="middle")
-    text(out, left + 4, 151, "Baseline", 16, fill=MUTED)
-    text(out, left + plot_w - 5, 151, "Harness", 16, anchor="end", fill=PL)
-    text(out, 825, 620, "Ties excluded; GEE clustered by note and standardized over observed covariates", 16, anchor="middle", fill=MUTED)
+        text(out, 1325, y - 3, f"{difference:+.2f} pp", 17, anchor="middle", weight=700 if index == 0 else 400)
+        text(out, 1325, y + 21, f"({difference_low:+.2f} to {difference_high:+.2f})", 16, anchor="middle", fill=MUTED)
+    text(out, probability_left + 10, 150, "Equal preference", 16, fill=MUTED)
+    text(out, 750, 572, "Ties excluded; GEE clustered by note and standardized over observed physician values; overall model also adjusts for cancer type", 16, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "figure6_adjusted_effects_rough.svg")
 
 
@@ -673,11 +643,11 @@ def draw_diverging_counts(out: list[str], x0: float, y: float, width: float, cou
     center = x0 + width / 2
     scale = width / 2 / total
     left_edge = center - (earlier + ties / 2) * scale
-    out.append(f'<rect x="{left_edge:.1f}" y="{y}" width="{earlier * scale:.1f}" height="34" fill="{BL}"/>')
+    out.append(f'<rect x="{left_edge:.1f}" y="{y}" width="{earlier * scale:.1f}" height="34" fill="{NEUTRAL}"/>')
     out.append(f'<rect x="{center - ties / 2 * scale:.1f}" y="{y}" width="{ties * scale:.1f}" height="34" fill="{TIE}"/>')
     out.append(f'<rect x="{center + ties / 2 * scale:.1f}" y="{y}" width="{later * scale:.1f}" height="34" fill="{PL}"/>')
     if earlier:
-        text(out, left_edge + earlier * scale / 2, y + 23 if earlier * scale > 28 else y - 5, str(earlier), 12, anchor="middle", weight=700, fill="white" if earlier * scale > 28 else BL)
+        text(out, left_edge + earlier * scale / 2, y + 23 if earlier * scale > 28 else y - 5, str(earlier), 12, anchor="middle", weight=700, fill="white" if earlier * scale > 28 else NEUTRAL)
     if ties:
         text(out, center, y + 23 if ties * scale > 25 else y - 5, str(ties), 12, anchor="middle", weight=700)
     if later:
@@ -700,16 +670,22 @@ def plot_staged_ablation() -> None:
         box(out, x, 35, 230, 76, stage, fill=HARNESS_SOFT if index else BASELINE_SOFT, stroke=PL if index else BL, size=14)
         if index:
             arrow(out, stage_xs[index - 1] + 230, 73, x, 73, color=PL)
-    text(out, 750, 143, "Adjacent-stage blinded comparisons", 15, anchor="middle", fill=MUTED)
-    legend(out, 530, 178, [(BL, "Earlier stage"), (TIE, "Tie"), (PL, "Later stage")], gap=150)
+    text(out, 750, 143, "Each panel tests whether one added layer improves the immediately preceding condition", 15, anchor="middle", fill=MUTED)
+    legend(out, 500, 178, [(NEUTRAL, "Earlier condition"), (TIE, "Tie"), (PL, "Condition with added layer")], gap=190)
     stage_keys = ["A→B", "B→C", "C→D"]
+    added_layers = {
+        "A→B": "+ decomposition and orchestration",
+        "B→C": "+ verification gates",
+        "C→D": "+ deterministic rules",
+    }
     panel_xs = [35, 520, 1005]
     for key, px in zip(stage_keys, panel_xs):
         round_rect(out, px, 205, 460, 455, fill=PANEL_FILL, stroke=PL if key == "B→C" else PANEL_STROKE, radius=12, stroke_width=2.2 if key == "B→C" else 1.5)
         text(out, px + 25, 242, key.replace("→", " → "), 20, weight=700)
+        text(out, px + 25, 270, added_layers[key], 16, weight=700 if key == "B→C" else 400, fill=PL if key == "B→C" else MUTED)
         text(out, px + 435, 240, f"overall p={pvalues[key]:.6g}", 13, anchor="end", weight=700 if key == "B→C" else 400, fill=PL if key == "B→C" else MUTED)
         for row_index, scope in enumerate(("Overall", "Breast", "PDAC")):
-            y = 295 + row_index * 102
+            y = 315 + row_index * 95
             counts = data[key][scope]
             total = 40 if scope == "Overall" else 20
             text(out, px + 25, y + 23, scope, 14, weight=700 if scope == "Overall" else 400)
@@ -720,7 +696,7 @@ def plot_staged_ablation() -> None:
         if key == "B→C":
             round_rect(out, px + 85, 600, 290, 35, fill=HARNESS_SOFT, stroke=PL, radius=17)
             text(out, px + 230, 623, "Clear overall verification gain", 13, anchor="middle", weight=700, fill=PL)
-    text(out, 750, 705, "One blinded non-clinician Codex judge; secondary technical evidence", 14, anchor="middle", weight=700, fill=LLM)
+    text(out, 750, 705, "One blinded non-physician Codex judge; secondary technical evidence", 14, anchor="middle", weight=700, fill=LLM)
     text(out, 750, 732, "Exact two-sided sign tests exclude ties; overall p values are exploratory and unadjusted", 12, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "figure7_staged_ablation_rough.svg")
 
@@ -736,14 +712,14 @@ def plot_human_model_complementarity(raters: dict[str, list[dict[str, str]]]) ->
     width, height = 1500, 720
     out = svg_start(width, height)
     text(out, 40, 44, "Results-informed clinical handoff", 22, weight=700)
-    text(out, 40, 70, "A conceptual interpretation of how structured outputs can enter clinician review", 13, fill=MUTED)
+    text(out, 40, 70, "A conceptual interpretation of how structured outputs can enter physician review", 13, fill=MUTED)
     box(out, 50, 290, 175, 105, ["Source", "oncology note"], fill="white", stroke="#65737E", size=17)
     box(out, 285, 275, 225, 135, ["Inference harness", "structured fields", "+ supporting excerpts"], fill=HARNESS_SOFT, stroke=PL, size=16)
     arrow(out, 225, 342, 285, 342, color=PL)
     lanes = [
         (125, "1", "Directly structure", ["Explicit receptor status", "Completed test result"], HARNESS_SOFT, PL),
-        (295, "2", "Reconcile and surface evidence", ["Active medications and plans", "Long histories; stage and metastasis"], LLM_SOFT, LLM),
-        (465, "3", "Escalate for clinical interpretation", ["Treatment response", "Uncertain metastatic disease"], CLINICIAN_SOFT, CLINICIAN),
+        (295, "2", "Reconcile and surface evidence", ["Active medications and plans", "Long histories; stage and metastasis"], NEUTRAL_SOFT, NEUTRAL),
+        (465, "3", "Escalate for clinical interpretation", ["Treatment response", "Uncertain metastatic disease"], PHYSICIAN_SOFT, PHYSICIAN),
     ]
     for y, number, heading, examples, fill, stroke in lanes:
         round_rect(out, 575, y, 700, 125, fill=fill, stroke=stroke, radius=12, stroke_width=2)
@@ -753,9 +729,9 @@ def plot_human_model_complementarity(raters: dict[str, list[dict[str, str]]]) ->
         text(out, 650, y + 71, examples[0], 14)
         text(out, 650, y + 97, examples[1], 14)
         arrow(out, 510, 342, 575, y + 62, color=stroke)
-    out.append(f'<path d="M1325,130 h28 v455 h-28" fill="none" stroke="{CLINICIAN}" stroke-width="4"/>')
-    text(out, 1385, 330, "Clinician", 17, anchor="middle", weight=700, fill=CLINICIAN)
-    text(out, 1385, 354, "oversight", 17, anchor="middle", weight=700, fill=CLINICIAN)
+    out.append(f'<path d="M1325,130 h28 v455 h-28" fill="none" stroke="{PHYSICIAN}" stroke-width="4"/>')
+    text(out, 1385, 330, "Physician", 17, anchor="middle", weight=700, fill=PHYSICIAN)
+    text(out, 1385, 354, "oversight", 17, anchor="middle", weight=700, fill=PHYSICIAN)
     text(out, 1385, 383, "across all", 13, anchor="middle", fill=MUTED)
     text(out, 1385, 402, "handoff lanes", 13, anchor="middle", fill=MUTED)
     round_rect(out, 150, 600, 515, 72, fill="#F7F9FA", stroke=PANEL_STROKE, radius=9)
@@ -775,7 +751,7 @@ def main() -> None:
     required_counts = Counter(row["score"] for row in required)
     expected = Counter({"A": 699, "B": 171, "TIE": 1290})
     if required_counts != expected:
-        raise ValueError(f"Clinician-rating totals changed: {required_counts} != {expected}")
+        raise ValueError(f"Physician-rating totals changed: {required_counts} != {expected}")
     if sum(sum(values.values()) for values in core_field_counts(raters).values()) != 1040:
         raise ValueError("Core-field judgment total must remain 1,040")
     plot_development_pathway()

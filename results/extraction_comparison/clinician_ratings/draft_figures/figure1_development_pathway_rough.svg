@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1180" viewBox="0 0 1500 1180">
-<rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1500" height="1180" fill="#FFFFFF"/>
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
 <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
@@ -12,25 +12,25 @@
 <circle cx="57.0" cy="53.0" r="17" fill="#263C4A"/>
 <text x="57.0" y="60.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">A</text>
 <text x="85.0" y="60.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Data partitions and isolation</text>
-<rect x="90.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
+<rect x="90.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
 <text x="285.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Breast development</text>
 <text x="285.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">100 unannotated notes</text>
 <text x="285.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Harness development</text>
-<text x="285.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0072B2">to panel B</text>
-<rect x="545.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0ECF5" stroke="#7A5FA8" stroke-width="1.5"/>
+<text x="285.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel B</text>
+<rect x="545.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
 <text x="740.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">PDAC development</text>
 <text x="740.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">100 unannotated notes</text>
 <text x="740.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Cross-cancer adaptation</text>
-<text x="740.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#7A5FA8">to panel C</text>
-<rect x="1000.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
+<text x="740.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel C</text>
+<rect x="1000.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
 <text x="1195.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Locked holdout</text>
 <text x="1195.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">20 breast + 20 PDAC</text>
 <text x="1195.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">No development use</text>
-<text x="1195.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#009E73">to panel D</text>
+<text x="1195.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel D</text>
 <rect x="30.0" y="250.0" width="700.0" height="480.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
 <circle cx="57.0" cy="278.0" r="17" fill="#263C4A"/>
 <text x="57.0" y="285.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">B</text>
-<text x="85.0" y="285.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Clinician-informed breast-cancer development</text>
+<text x="85.0" y="285.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Physician-informed breast-cancer development</text>
 <rect x="70.0" y="322.0" width="140.0" height="82.0" rx="9" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
 <text x="140.0" y="358.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Development</text>
 <text x="140.0" y="378.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">note</text>
@@ -92,13 +92,15 @@
 <line x1="1315.0" y1="494.0" x2="1110.0" y2="560.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
 <line x1="1180.0" y1="598.0" x2="1240.0" y2="598.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
 <path d="M1330,635 C1330,645 1320,648 1310,648 H890 C880,648 873,640 873,630 V494" fill="none" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<rect x="840.0" y="663.0" width="560.0" height="40.0" rx="7" fill="#FFF7ED" stroke="#C37A2A" stroke-width="1.5"/>
-<text x="1120.0" y="689.0" text-anchor="middle" font-size="16" font-weight="700" fill="#8A520F">No target-domain physician review of PDAC outputs</text>
+<rect x="840.0" y="658.0" width="560.0" height="48.0" rx="7" fill="white" stroke="#65737E" stroke-width="1.5"/>
+<circle cx="870" cy="682" r="15" fill="#009E73"/>
+<text x="870.0" y="688.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">P</text>
+<text x="1125.0" y="688.0" text-anchor="middle" font-size="16" font-weight="700" fill="#009E73">No target-domain physician review of PDAC outputs</text>
 <rect x="30.0" y="755.0" width="1440.0" height="390.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
 <circle cx="57.0" cy="783.0" r="17" fill="#263C4A"/>
 <text x="57.0" y="790.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">D</text>
 <text x="85.0" y="790.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Independent holdout evaluation</text>
-<rect x="75.0" y="842.0" width="230.0" height="88.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
+<rect x="75.0" y="842.0" width="230.0" height="88.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
 <text x="190.0" y="881.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">40 locked notes</text>
 <text x="190.0" y="901.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">20 breast + 20 PDAC</text>
 <rect x="365.0" y="825.0" width="260.0" height="120.0" rx="9" fill="white" stroke="#65737E" stroke-width="1.5"/>
@@ -122,7 +124,7 @@
 <line x1="940.0" y1="985.0" x2="1010.0" y2="915.0" stroke="#D55E00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
 <rect x="1290.0" y="795.0" width="130.0" height="100.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
 <text x="1355.0" y="840.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">4</text>
-<text x="1355.0" y="860.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">oncologists</text>
+<text x="1355.0" y="860.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">physicians</text>
 <rect x="1290.0" y="935.0" width="130.0" height="100.0" rx="9" fill="white" stroke="#009E73" stroke-width="1.5"/>
 <text x="1355.0" y="980.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">2,160 field</text>
 <text x="1355.0" y="1000.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">judgments</text>

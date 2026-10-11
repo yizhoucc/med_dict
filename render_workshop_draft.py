@@ -30,16 +30,16 @@ FIGURES = {
         FIGURE_DIR / "figure1_development_pathway_rough.svg",
         "Physician-guided development, model-assisted adaptation, and extraction evaluation",
     ),
-    "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Clinician preference by evaluation"),
+    "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Physician preference by evaluation"),
     "3": (
         FIGURE_DIR / "figure3_interrater_matrix_rough.svg",
-        "Pairwise oncologist agreement in breast and pancreatic cancer",
+        "Pairwise physician agreement in breast and pancreatic cancer",
     ),
-    "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
+    "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Physician preference by core category"),
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
     "6": (
         FIGURE_DIR / "figure6_adjusted_effects_rough.svg",
-        "Adjusted clinician preference on probability and odds scales",
+        "Adjusted physician preference on the probability scale",
     ),
     "7": (
         FIGURE_DIR / "figure7_staged_ablation_rough.svg",
@@ -47,7 +47,7 @@ FIGURES = {
     ),
     "8": (
         FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
-        "Conceptual human-model complementarity across extraction tasks",
+        "Conceptual physician-model complementarity across extraction tasks",
     ),
 }
 
@@ -606,7 +606,7 @@ def format_prompt_appendices(body: str) -> str:
     appendix_pattern = re.compile(
         r"(<h2>Appendix S1\. General blinded Codex judge protocol</h2>)"
         r"(.*?)"
-        r"(?=<h2>(?:References|参考文献)</h2>)",
+        r"(?=<h2>(?:Appendix S2\.[^<]*|References|参考文献)</h2>)",
         flags=re.S,
     )
 
@@ -884,7 +884,7 @@ def render() -> str:
         f'''</h1>
 <div class="draft-meta">
   <span class="chip">Version {html.escape(version)}</span>
-  <span class="chip">4 oncologists</span>
+  <span class="chip">4 physicians</span>
   <span class="chip">2,160 required note-field judgments</span>
   <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
@@ -925,7 +925,7 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa",
         "2,160 required note-field judgments",
-        "Version 0.20, October 2026",
+        "Version 0.21, October 2026",
         "79.98%",
         "tie-inclusive net preference margin",
         "120 blinded ablation pairs",
@@ -948,6 +948,16 @@ def main() -> None:
         raise RuntimeError("Expected eight embedded figures in each language version.")
     if output.count('<details class="prompt-stage">') != 2:
         raise RuntimeError("Expected one folded judge protocol in each language version.")
+    appendix_s2_headings = len(re.findall(r'<h2 id="appendix-s2-[^"]+">', output))
+    if appendix_s2_headings != 2:
+        raise RuntimeError("Expected one Appendix S2 heading in each language version.")
+    if re.search(r"\boncologists?\b", output, flags=re.I):
+        raise RuntimeError("Rendered study terminology must not use oncologist(s).")
+    clinician_count = len(re.findall(r"\bclinicians?\b", output, flags=re.I))
+    if clinician_count != 2:
+        raise RuntimeError(
+            "Clinician must occur only in the unchanged Corso reference title, once per language."
+        )
     obsolete_judge_labels = [
         "Initial 12-pair calibration instruction",
         "Remaining 108-pair instruction",

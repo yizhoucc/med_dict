@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fit the adjusted clinician-preference analysis used in the workshop draft."""
+"""Fit the adjusted physician-preference analysis used in the workshop draft."""
 
 from __future__ import annotations
 
@@ -23,13 +23,13 @@ OUTPUT_CSV = HERE / "adjusted_gee_results.csv"
 OUTPUT_MD = HERE / "ADJUSTED_ANALYSIS.md"
 
 RATER_FILES = {
-    "Oncologist 01": [HERE / "simo_breast_pdac_blind_scores_20260921.csv"],
-    "Oncologist 02": [HERE / "kevin_breast_pdac_blind_scores_20261005.csv"],
-    "Oncologist 03": [
+    "Physician 01": [HERE / "simo_breast_pdac_blind_scores_20260921.csv"],
+    "Physician 02": [HERE / "kevin_breast_pdac_blind_scores_20261005.csv"],
+    "Physician 03": [
         HERE / "bolun_breast_blind_scores_20260921.xlsx",
         HERE / "bolun_pdac_blind_scores_and_letter_selection_20261006.xlsx",
     ],
-    "Oncologist 04": [HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv"],
+    "Physician 04": [HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv"],
 }
 
 BREAST_FIELDS = [
@@ -248,7 +248,7 @@ def note_sign_summaries(ratings: pd.DataFrame) -> list[dict[str, object]]:
         tied = int((pooled == 0).sum())
         summaries.append(
             {
-                "evaluation": f"All clinicians pooled, {cancer}",
+                "evaluation": f"All physicians pooled, {cancer}",
                 "positive": positive,
                 "negative": negative,
                 "tied": tied,
@@ -262,7 +262,7 @@ def note_sign_summaries(ratings: pd.DataFrame) -> list[dict[str, object]]:
     tied = int((pooled == 0).sum())
     summaries.append(
         {
-            "evaluation": "All clinicians pooled, both cancers",
+            "evaluation": "All physicians pooled, both cancers",
             "positive": positive,
             "negative": negative,
             "tied": tied,
@@ -288,7 +288,7 @@ def write_results(
             writer.writerow(result.__dict__)
 
     lines = [
-        "# Adjusted clinician-preference analysis",
+        "# Adjusted physician-preference analysis",
         "",
         "Updated: 2026-10-11",
         "",
@@ -341,7 +341,7 @@ def write_results(
             "",
             "## Interpretation boundary",
             "",
-            "The observed-note result is statistically strong, but four oncologists remain too few for a precise estimate of variation across the broader oncologist population. Evaluator-level generalization should therefore remain a pilot claim.",
+            "The observed-note result is statistically strong, but four physicians remain too few for a precise estimate of variation across the broader physician population. Evaluator-level generalization should therefore remain a pilot claim.",
             "",
         ]
     )
