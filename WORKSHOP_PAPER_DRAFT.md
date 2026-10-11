@@ -152,7 +152,7 @@ We ran a secondary technical ablation on the same 20 breast-cancer and 20 pancre
 3. C, condition B plus the semantic, faithfulness, and temporal verification gates.
 4. D, condition C plus deterministic inline processing and the complete POST-hook layer used by the full inference harness.
 
-The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The initial 12-pair calibration set was re-read under the final rubric before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The full judge instructions are reproduced in Appendix S1. The run occurred on October 1, 2026 (PDT). The Codex judge used `gpt-5.6-sol` with `xhigh` reasoning effort and the `default` service tier.
+The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The same final rubric was applied to all blinded pairs before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The consolidated judge protocol is provided in Appendix S1. The run occurred on October 1, 2026 (PDT). The Codex judge used `gpt-5.6-sol` with `xhigh` reasoning effort and the `default` service tier.
 
 ## 3. Results
 
@@ -347,13 +347,13 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 - **v0.17:** Added the first four-oncologist breast analysis, three-oncologist pancreatic analysis, staged technical ablation, and Chinese author-confirmation annotations.
 - **v0.18:** Replaced the Introduction with the physician-led clinical framing; clarified the development and untouched holdout cohorts; updated all extraction results and figures for four oncologists across both cancers; removed the final test-set LLM audit and quantitative letter results; and added the blinded Codex judge instructions.
-- **v0.19:** Folded the Chinese review metadata, reorganized Appendix S1, and redrew Figures 1-8 with one clinical-AI visual system.
+- **v0.19:** Folded the Chinese review metadata, consolidated Appendix S1 into one general judge protocol, and redrew Figures 1-8 with one clinical-AI visual system.
 
-## Appendix S1. Blinded Codex judge instructions
+## Appendix S1. General blinded Codex judge protocol
 
-The ablation judge ran on October 1, 2026 (PDT) with model `gpt-5.6-sol`, `xhigh` reasoning effort, and the `default` service tier. The following four instructions are reproduced verbatim from the judge task record, except that the local path prefix `/Users/yizhoucc/repo/med_dict` has been replaced with `<REPO_ROOT>`. No other text has been changed.
+The ablation judge ran on October 1, 2026 (PDT) with model `gpt-5.6-sol`, `xhigh` reasoning effort, and the `default` service tier. The consolidated protocol below records the instructions applied across the full judging run. It preserves the blinding rules, clinical rubric, and output schema while omitting operational file-management language.
 
-### Initial 12-pair calibration instruction
+### General blinded judging protocol
 
 ```text
 Act as an independent blinded judge for a medical information-extraction ablation. Do NOT read or use AGENTS.md, CLAUDE.md, any session log, manuscript, analysis file, git history, or any `judge_pairs.private_mapping.jsonl`. Do not try to identify the systems. Use only the public blinded input files listed below and the clinical note contained in each record.
@@ -362,40 +362,16 @@ Inputs:
 - `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/breast/judge/judge_pairs.blinded.jsonl`
 - `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/pdac/judge/judge_pairs.blinded.jsonl`
 
-This is a calibration pilot, not the full 120-pair run. Manually judge exactly lines 1, 2, 21, 22, 41, and 42 from EACH file, for 12 pairs total. Read each selected note and both outputs completely. Do not use scripts, regex, automated scoring, or another model to make the clinical judgments. Shell commands such as `sed -n 'Np'` are allowed only to display one selected JSONL record at a time.
+Review every record in the blinded input files. Read each note and both outputs completely, one pair at a time. Do not use scripts, regex, automated scoring, or another model to make the clinical judgments. Shell commands may be used only to display one record at a time and to validate or write the output.
 
-For every pair, compare Output A and Output B field by field against the note. Evaluate unsupported claims/hallucination, important omissions, semantic or field mismatch, temporal errors, and clinically misleading wording. Prefer faithfulness first, then completeness. Choose one overall verdict: `A`, `B`, or `TIE`. TIE means neither output has a meaningful overall advantage, not merely that both contain some correct material.
+For every pair, compare Output A and Output B field by field against the note. Evaluate unsupported claims or hallucination, important omissions, semantic or field mismatch, temporal errors, and clinically misleading wording. Prioritize faithfulness, then completeness. Choose `A` or `B` only when one output has a clinically meaningful overall advantage. Use `TIE` when differences are minor, offsetting, limited to formatting or field placement without clinical consequence, or when neither output is meaningfully better. Do not select a winner merely because the outputs differ.
 
-Write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/judge_codex_pilot.jsonl`, one valid JSON object per pair with keys:
+Write one valid JSON object per pair with keys:
 `cancer`, `source_line`, `pair_id`, `verdict`, `confidence` (`high|medium|low`), `a_errors`, `b_errors`, `decisive_fields`, `reason`.
-Errors should be short arrays of concrete field-level findings grounded in the note. Also write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_PILOT.md` summarizing counts by cancer and source-line block, recurring judgment issues, and any ambiguity in the rubric. Do not access the private mapping even after judging. Do not commit or push. Send me a concise completion report.
+Errors should be short arrays of concrete field-level findings grounded in the note. Preserve blinding throughout the review and do not access the private mapping after judging. After all records have been reviewed, validate the JSON and summarize counts by cancer and comparison, confidence levels, recurring errors, and limitations of the rubric. Do not commit or push.
 ```
 
-### Remaining 108-pair instruction
-
-```text
-Continue as the same independent blinded judge and complete the remaining 108 pairs. Keep all prior blinding restrictions: do NOT read AGENTS.md, CLAUDE.md, session logs, manuscripts, prior analyses, git history, or either private mapping file. Use only the two public `judge_pairs.blinded.jsonl` files. Do not infer system identity.
-
-Judge every source line except 1, 2, 21, 22, 41, and 42 in each cancer file. That is 54 remaining lines per file, 108 total. Read each note and both outputs completely, one pair at a time. No scripts, regex, automated scoring, or other models for clinical judgment. You may use shell commands only to display one selected record and to validate/write output.
-
-Rubric refinement: choose A or B only if it has a clinically meaningful overall advantage after prioritizing faithfulness, then completeness. Use TIE when differences are minor, offsetting, mostly formatting/field placement without clinical consequence, or when neither is meaningfully better. Do not manufacture a winner merely because outputs differ.
-
-Write each completed judgment immediately to `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/judge_codex_remaining.jsonl`, one JSON object per pair with the same keys as the pilot: `cancer`, `source_line`, `pair_id`, `verdict`, `confidence`, `a_errors`, `b_errors`, `decisive_fields`, `reason`. Maintain `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_REMAINING_PROGRESS.md` with completed counts and current raw A/B/TIE totals so progress survives context compaction. Do not include or inspect decoded variant identities. When all 108 are done, validate JSON and write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md` summarizing the combined 120 blinded verdicts, confidence, recurring errors, and rubric limitations. Do not commit or push. Send me progress messages at meaningful milestones and a final completion report.
-```
-
-### Minor progress-file correction
-
-```text
-Minor progress-file formatting issue: `JUDGE_CODEX_REMAINING_PROGRESS.md` currently has two `Remaining PDAC source lines` bullets. Please keep only the current one on your next update. Judgment JSON looks valid; continue normally.
-```
-
-### Final recalibration instruction
-
-```text
-Final calibration consistency check. You still must remain blinded and must not read private mappings, project instructions, decoded analyses, session logs, or git history. Re-review the original 12 pilot pairs (lines 1, 2, 21, 22, 41, 42 from each public blinded file) using the exact final rubric applied to the remaining 108: choose A/B only for a clinically meaningful overall advantage; use TIE when differences are minor, offsetting, mostly non-clinical field placement/formatting, or neither is meaningfully better. Read each note and both outputs again. Update `judge_codex_pilot.jsonl` in place only if a verdict, confidence, or reasoning should change; preserve valid JSONL and 12 records. Write `JUDGE_CODEX_PILOT_RECALIBRATION.md` listing every changed record, or explicitly state no changes. Then regenerate `JUDGE_CODEX_FULL_BLINDED_SUMMARY.md` from the final 12 + 108 blinded judgments. Do not inspect private mappings and do not commit.
-```
-
-Audit artifacts: [full blinded summary](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md), [pilot recalibration record](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_PILOT_RECALIBRATION.md), [final 12-pair judgments](results/staged_ablation_annotated_20261001_093433/judge_codex_pilot.jsonl), and [remaining 108 judgments](results/staged_ablation_annotated_20261001_093433/judge_codex_remaining.jsonl).
+Audit artifact: [full blinded summary](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md).
 
 ## References
 
@@ -593,7 +569,7 @@ LLM 辅助审查只用于开发阶段，尤其服务于 PDAC adaptation。针对
 3. C：在 B 上增加 semantic、faithfulness 和 temporal verification gates。
 4. D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。
 
-实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。完整 judge instructions 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。
+实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。解盲前，全部 blinded pairs 均使用同一版最终 rubric。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。合并后的 judge protocol 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。
 
 > **协作说明：** B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。
 
@@ -800,13 +776,13 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非临
 
 - **v0.17：** 加入四位肿瘤科医生的首版 breast 分析、三位医生的 PDAC 分析、staged technical ablation，以及中文版作者确认批注。
 - **v0.18：** 使用 physician-led clinical framing 重写 Introduction；明确 development data 和 untouched holdout test set；用四位肿瘤科医生对两个癌种的完整结果和新图统一更新全文；删除 final test-set LLM audit 和定量 letter results；加入 blinded Codex judge instructions。
-- **v0.19：** 折叠中文版草稿信息与作者确认，整理 Appendix S1，并以统一的临床 AI 视觉语言重绘 Figure 1 至 Figure 8。
+- **v0.19：** 折叠中文版草稿信息与作者确认，将 Appendix S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘 Figure 1 至 Figure 8。
 
-## Appendix S1. Blinded Codex judge instructions
+## Appendix S1. General blinded Codex judge protocol
 
-Ablation judge 于 2026 年 10 月 1 日（PDT）运行，model 为 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。下面四段文字来自 judge task record。除把本地路径前缀 `/Users/yizhoucc/repo/med_dict` 替换为 `<REPO_ROOT>` 外，其余文字均按原文收录。
+Ablation judge 于 2026 年 10 月 1 日（PDT）运行，model 为 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。下面的 general protocol 汇总了整次评审采用的指令，保留 blinding rules、clinical rubric 和 output schema，省略运行过程中的文件管理文字。
 
-### Initial 12-pair calibration instruction
+### General blinded judging protocol
 
 ```text
 Act as an independent blinded judge for a medical information-extraction ablation. Do NOT read or use AGENTS.md, CLAUDE.md, any session log, manuscript, analysis file, git history, or any `judge_pairs.private_mapping.jsonl`. Do not try to identify the systems. Use only the public blinded input files listed below and the clinical note contained in each record.
@@ -815,40 +791,16 @@ Inputs:
 - `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/breast/judge/judge_pairs.blinded.jsonl`
 - `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/pdac/judge/judge_pairs.blinded.jsonl`
 
-This is a calibration pilot, not the full 120-pair run. Manually judge exactly lines 1, 2, 21, 22, 41, and 42 from EACH file, for 12 pairs total. Read each selected note and both outputs completely. Do not use scripts, regex, automated scoring, or another model to make the clinical judgments. Shell commands such as `sed -n 'Np'` are allowed only to display one selected JSONL record at a time.
+Review every record in the blinded input files. Read each note and both outputs completely, one pair at a time. Do not use scripts, regex, automated scoring, or another model to make the clinical judgments. Shell commands may be used only to display one record at a time and to validate or write the output.
 
-For every pair, compare Output A and Output B field by field against the note. Evaluate unsupported claims/hallucination, important omissions, semantic or field mismatch, temporal errors, and clinically misleading wording. Prefer faithfulness first, then completeness. Choose one overall verdict: `A`, `B`, or `TIE`. TIE means neither output has a meaningful overall advantage, not merely that both contain some correct material.
+For every pair, compare Output A and Output B field by field against the note. Evaluate unsupported claims or hallucination, important omissions, semantic or field mismatch, temporal errors, and clinically misleading wording. Prioritize faithfulness, then completeness. Choose `A` or `B` only when one output has a clinically meaningful overall advantage. Use `TIE` when differences are minor, offsetting, limited to formatting or field placement without clinical consequence, or when neither output is meaningfully better. Do not select a winner merely because the outputs differ.
 
-Write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/judge_codex_pilot.jsonl`, one valid JSON object per pair with keys:
+Write one valid JSON object per pair with keys:
 `cancer`, `source_line`, `pair_id`, `verdict`, `confidence` (`high|medium|low`), `a_errors`, `b_errors`, `decisive_fields`, `reason`.
-Errors should be short arrays of concrete field-level findings grounded in the note. Also write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_PILOT.md` summarizing counts by cancer and source-line block, recurring judgment issues, and any ambiguity in the rubric. Do not access the private mapping even after judging. Do not commit or push. Send me a concise completion report.
+Errors should be short arrays of concrete field-level findings grounded in the note. Preserve blinding throughout the review and do not access the private mapping after judging. After all records have been reviewed, validate the JSON and summarize counts by cancer and comparison, confidence levels, recurring errors, and limitations of the rubric. Do not commit or push.
 ```
 
-### Remaining 108-pair instruction
-
-```text
-Continue as the same independent blinded judge and complete the remaining 108 pairs. Keep all prior blinding restrictions: do NOT read AGENTS.md, CLAUDE.md, session logs, manuscripts, prior analyses, git history, or either private mapping file. Use only the two public `judge_pairs.blinded.jsonl` files. Do not infer system identity.
-
-Judge every source line except 1, 2, 21, 22, 41, and 42 in each cancer file. That is 54 remaining lines per file, 108 total. Read each note and both outputs completely, one pair at a time. No scripts, regex, automated scoring, or other models for clinical judgment. You may use shell commands only to display one selected record and to validate/write output.
-
-Rubric refinement: choose A or B only if it has a clinically meaningful overall advantage after prioritizing faithfulness, then completeness. Use TIE when differences are minor, offsetting, mostly formatting/field placement without clinical consequence, or when neither is meaningfully better. Do not manufacture a winner merely because outputs differ.
-
-Write each completed judgment immediately to `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/judge_codex_remaining.jsonl`, one JSON object per pair with the same keys as the pilot: `cancer`, `source_line`, `pair_id`, `verdict`, `confidence`, `a_errors`, `b_errors`, `decisive_fields`, `reason`. Maintain `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_REMAINING_PROGRESS.md` with completed counts and current raw A/B/TIE totals so progress survives context compaction. Do not include or inspect decoded variant identities. When all 108 are done, validate JSON and write `<REPO_ROOT>/results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md` summarizing the combined 120 blinded verdicts, confidence, recurring errors, and rubric limitations. Do not commit or push. Send me progress messages at meaningful milestones and a final completion report.
-```
-
-### Minor progress-file correction
-
-```text
-Minor progress-file formatting issue: `JUDGE_CODEX_REMAINING_PROGRESS.md` currently has two `Remaining PDAC source lines` bullets. Please keep only the current one on your next update. Judgment JSON looks valid; continue normally.
-```
-
-### Final recalibration instruction
-
-```text
-Final calibration consistency check. You still must remain blinded and must not read private mappings, project instructions, decoded analyses, session logs, or git history. Re-review the original 12 pilot pairs (lines 1, 2, 21, 22, 41, 42 from each public blinded file) using the exact final rubric applied to the remaining 108: choose A/B only for a clinically meaningful overall advantage; use TIE when differences are minor, offsetting, mostly non-clinical field placement/formatting, or neither is meaningfully better. Read each note and both outputs again. Update `judge_codex_pilot.jsonl` in place only if a verdict, confidence, or reasoning should change; preserve valid JSONL and 12 records. Write `JUDGE_CODEX_PILOT_RECALIBRATION.md` listing every changed record, or explicitly state no changes. Then regenerate `JUDGE_CODEX_FULL_BLINDED_SUMMARY.md` from the final 12 + 108 blinded judgments. Do not inspect private mappings and do not commit.
-```
-
-审计 artifacts：[full blinded summary](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md)、[pilot recalibration record](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_PILOT_RECALIBRATION.md)、[final 12-pair judgments](results/staged_ablation_annotated_20261001_093433/judge_codex_pilot.jsonl) 和 [remaining 108 judgments](results/staged_ablation_annotated_20261001_093433/judge_codex_remaining.jsonl)。
+审计 artifact：[full blinded summary](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md)。
 
 ## 参考文献
 

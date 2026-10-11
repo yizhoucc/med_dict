@@ -596,7 +596,7 @@ def run_cmark(markdown_text: str) -> str:
 
 
 def format_prompt_appendices(body: str) -> str:
-    """Turn the four verbatim judge prompts into compact native disclosures.
+    """Turn the general judge protocol into a compact native disclosure.
 
     This runs before heading IDs and TOC construction, so prompt labels do not
     appear as manuscript sections in the navigation. The ``pre`` contents are
@@ -604,7 +604,7 @@ def format_prompt_appendices(body: str) -> str:
     """
 
     appendix_pattern = re.compile(
-        r"(<h2>Appendix S1\. Blinded Codex judge instructions</h2>)"
+        r"(<h2>Appendix S1\. General blinded Codex judge protocol</h2>)"
         r"(.*?)"
         r"(?=<h2>(?:References|参考文献)</h2>)",
         flags=re.S,
@@ -630,15 +630,15 @@ def format_prompt_appendices(body: str) -> str:
             flags=re.S,
         )
         prompts_and_links = re.sub(
-            r"<p>(Audit artifacts:|审计 artifacts：)(.*?)</p>",
+            r"<p>(Audit artifacts?:|审计 artifacts?：)(.*?)</p>",
             r'<p class="audit-artifacts"><strong>\1</strong>\2</p>',
             prompts_and_links,
             flags=re.S,
         )
         prompt_count = prompts_and_links.count('<details class="prompt-stage">')
-        if prompt_count != 4:
+        if prompt_count != 1:
             raise RuntimeError(
-                f"Expected four folded judge prompts in Appendix S1, found {prompt_count}."
+                f"Expected one folded judge protocol in Appendix S1, found {prompt_count}."
             )
         return (
             '<section class="judge-appendix">'
@@ -943,8 +943,17 @@ def main() -> None:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
     if output.count('<figure class="manuscript-figure">') != 16:
         raise RuntimeError("Expected eight embedded figures in each language version.")
-    if output.count('<details class="prompt-stage">') != 8:
-        raise RuntimeError("Expected four folded judge prompts in each language version.")
+    if output.count('<details class="prompt-stage">') != 2:
+        raise RuntimeError("Expected one folded judge protocol in each language version.")
+    obsolete_judge_labels = [
+        "Initial 12-pair calibration instruction",
+        "Remaining 108-pair instruction",
+        "Minor progress-file correction",
+        "Final recalibration instruction",
+    ]
+    stale_labels = [label for label in obsolete_judge_labels if label in output]
+    if stale_labels:
+        raise RuntimeError(f"Rendered HTML retains obsolete judge-stage labels: {stale_labels}")
     if output.count('<details class="chinese-review-meta">') != 1:
         raise RuntimeError("Expected one folded Chinese draft-information block.")
     if output.count("Clinical accuracy 与医学措辞") != 1:
