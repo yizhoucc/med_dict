@@ -28,10 +28,13 @@ FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figur
 ROUGH_FIGURES = {
     "1": (
         FIGURE_DIR / "figure1_development_pathway_rough.svg",
-        "Clinician-guided development, model-assisted adaptation, extraction evaluation, and downstream patient letters",
+        "Physician-guided development, model-assisted adaptation, and extraction evaluation",
     ),
     "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Clinician preference by evaluation"),
-    "3": (FIGURE_DIR / "figure3_interrater_matrix_rough.svg", "Pairwise breast-cancer agreement"),
+    "3": (
+        FIGURE_DIR / "figure3_interrater_matrix_rough.svg",
+        "Pairwise oncologist agreement in breast and pancreatic cancer",
+    ),
     "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Clinician preference by core category"),
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
     "6": (
@@ -43,16 +46,8 @@ ROUGH_FIGURES = {
         "Blinded staged technical ablation overall and by cancer",
     ),
     "8": (
-        FIGURE_DIR / "figure7_letter_differences_rough.svg",
-        "Exploratory patient-letter score differences",
-    ),
-    "9": (
         FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
         "Conceptual human-model complementarity across extraction tasks",
-    ),
-    "S1": (
-        FIGURE_DIR / "supplementary_figure1_technical_vs_clinician_rough.svg",
-        "Technical-audit and clinician net preference rates",
     ),
 }
 
@@ -716,7 +711,7 @@ def render() -> str:
 <div class="draft-meta">
   <span class="chip">Version {html.escape(version)}</span>
   <span class="chip">4 oncologists</span>
-  <span class="chip">1,900 required-field judgments</span>
+  <span class="chip">2,160 required note-field judgments</span>
   <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
 </div>
@@ -754,8 +749,8 @@ def main() -> None:
         '<figure class="rough-figure">',
         "table-wrap",
         "data:image/svg+xml;base64",
-        "Cohen's kappa from 0.511 to 0.646",
-        "1,900 required-field judgments",
+        "Cohen's kappa",
+        "2,160 required note-field judgments",
         "120 blinded ablation pairs",
         'id="chinese-version"',
         'class="manuscript-language english-version" lang="en"',
@@ -767,10 +762,10 @@ def main() -> None:
     missing = [value for value in required if value not in output]
     if missing:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
-    if output.count('<figure class="rough-figure">') != 20:
-        raise RuntimeError("Expected ten embedded figures in each language version.")
-    if output.count('<aside class="author-note ') != 17:
-        raise RuntimeError("Expected 17 author-confirmation cards in the Chinese version.")
+    if output.count('<figure class="rough-figure">') != 16:
+        raise RuntimeError("Expected eight embedded figures in each language version.")
+    if output.count('<aside class="author-note ') != 2:
+        raise RuntimeError("Expected two author-confirmation cards in the Chinese version.")
     chinese_start = output.index('id="chinese-version"')
     if '<aside class="author-note ' in output[:chinese_start]:
         raise RuntimeError("Author-confirmation cards must not appear in the English version.")
