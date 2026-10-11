@@ -25,7 +25,7 @@ SOURCE = ROOT / "WORKSHOP_PAPER_DRAFT.md"
 OUTPUT = ROOT / "WORKSHOP_PAPER_DRAFT.html"
 FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figures"
 
-ROUGH_FIGURES = {
+FIGURES = {
     "1": (
         FIGURE_DIR / "figure1_development_pathway_rough.svg",
         "Physician-guided development, model-assisted adaptation, and extraction evaluation",
@@ -116,11 +116,13 @@ body {
   border-radius: 11px;
   background: #f7fafc;
 }
-.chinese-version .author-confirmation-index h2 {
+.chinese-version .author-confirmation-index h2,
+.chinese-version .author-confirmation-index .author-confirmation-title {
   margin: 0 0 8px;
   padding: 0;
   border: 0;
   font-size: 1.3rem;
+  font-weight: 750;
 }
 .chinese-version .author-confirmation-index > p {
   margin: 6px 0 14px;
@@ -317,12 +319,25 @@ a { color: #176a9a; }
   background: #f7fbfd;
 }
 .abstract-section h2 { margin-top: 14px; border-bottom: 0; }
-.review-section {
-  margin: 24px 0 30px;
-  padding: 2px 18px 12px;
-  border: 1px solid #eadfc3;
+.chinese-review-meta {
+  margin: 18px 0 32px;
+  border: 1px solid #c9d6e0;
   border-radius: 10px;
-  background: #fffaf0;
+  background: #f8fbfd;
+}
+.chinese-review-meta > summary {
+  padding: 14px 17px;
+  color: var(--navy);
+  cursor: pointer;
+  font-weight: 750;
+}
+.chinese-review-meta[open] > summary { border-bottom: 1px solid #d5e0e8; }
+.chinese-review-meta:not([open]) .details-label-open,
+.chinese-review-meta[open] .details-label-closed { display: none; }
+.chinese-review-meta-body { padding: 4px 18px 18px; }
+.chinese-review-meta .author-confirmation-index {
+  margin: 18px 0 0;
+  background: white;
 }
 .table-wrap {
   width: 100%;
@@ -337,7 +352,7 @@ th { background: #eef5f9; color: var(--navy); font-weight: 750; }
 tbody tr:nth-child(even) { background: #fafcfd; }
 tbody tr:last-child td { border-bottom: 0; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.rough-figure {
+.manuscript-figure {
   margin: 25px 0 8px;
   padding: 14px;
   border: 1px solid #cad7df;
@@ -345,18 +360,61 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   background: #fbfdfe;
   text-align: center;
 }
-.rough-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
-.rough-figure figcaption { margin-top: 9px; color: var(--muted); font-size: 12px; }
-.rough-label {
-  display: inline-block;
-  margin-bottom: 8px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #e6eef3;
-  color: #3c5262;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+.manuscript-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
+.judge-appendix {
+  margin-top: 34px;
+  padding-top: 2px;
+}
+.judge-metadata {
+  margin: 14px 0 18px;
+  padding: 13px 15px;
+  border: 1px solid #d7c8ee;
+  border-left: 5px solid var(--violet);
+  border-radius: 8px;
+  background: var(--violet-soft);
+}
+.judge-metadata p { margin: 0; }
+.prompt-stage {
+  margin: 10px 0;
+  border: 1px solid #d8e0e7;
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+.prompt-stage > summary {
+  padding: 11px 14px;
+  color: #314a5d;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 720;
+}
+.prompt-stage[open] > summary { border-bottom: 1px solid #e1e7eb; }
+.prompt-stage .prompt-body { padding: 0 13px 13px; }
+.prompt-stage pre {
+  max-width: 100%;
+  margin: 12px 0 0;
+  padding: 13px 14px;
+  overflow-x: hidden;
+  border: 1px solid #e0e5e9;
+  border-radius: 7px;
+  background: white;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-size: 0.78rem;
+  line-height: 1.48;
+}
+.prompt-stage pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  white-space: inherit;
+}
+.audit-artifacts {
+  margin: 16px 0 0;
+  padding: 10px 13px;
+  border-radius: 7px;
+  background: #f3f6f8;
+  font-size: 0.86rem;
 }
 .todo {
   padding: 11px 14px;
@@ -426,13 +484,20 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h1 { font-size: 22pt; }
   h2 { page-break-after: avoid; font-size: 16pt; }
   h3 { page-break-after: avoid; font-size: 13pt; }
-  .rough-figure, .table-wrap { break-inside: avoid; }
-  .rough-figure img { max-height: 650px; object-fit: contain; }
+  .manuscript-figure, .table-wrap { break-inside: avoid; }
+  .manuscript-figure img { max-height: 650px; object-fit: contain; }
   .english-manuscript-details { margin: 0; border: 0; background: white; }
   .english-manuscript-details > summary { display: none; }
   .english-manuscript-details:not([open]) > .english-version {
     display: block !important;
   }
+  .chinese-review-meta { margin: 0; border: 0; background: white; }
+  .chinese-review-meta > summary,
+  .prompt-stage > summary { display: none; }
+  .chinese-review-meta:not([open]) > .chinese-review-meta-body,
+  .prompt-stage:not([open]) > .prompt-body { display: block !important; }
+  .prompt-stage { border: 0; break-inside: auto; }
+  .prompt-stage .prompt-body { padding: 0; }
   .chinese-version .author-confirmation-index,
   .chinese-version .author-note { width: 100%; break-inside: avoid; }
 }
@@ -530,6 +595,67 @@ def run_cmark(markdown_text: str) -> str:
     return completed.stdout
 
 
+def format_prompt_appendices(body: str) -> str:
+    """Turn the four verbatim judge prompts into compact native disclosures.
+
+    This runs before heading IDs and TOC construction, so prompt labels do not
+    appear as manuscript sections in the navigation. The ``pre`` contents are
+    moved without editing their text.
+    """
+
+    appendix_pattern = re.compile(
+        r"(<h2>Appendix S1\. Blinded Codex judge instructions</h2>)"
+        r"(.*?)"
+        r"(?=<h2>(?:References|参考文献)</h2>)",
+        flags=re.S,
+    )
+
+    def format_appendix(match: re.Match[str]) -> str:
+        heading, content = match.groups()
+        first_prompt = content.find("<h3>")
+        if first_prompt < 0:
+            raise RuntimeError("Appendix S1 prompt headings were not found.")
+        metadata = content[:first_prompt].strip()
+        prompts_and_links = content[first_prompt:]
+        prompts_and_links = re.sub(
+            r"<h3>(.*?)</h3>\s*(<pre>.*?</pre>)",
+            lambda prompt: (
+                '<details class="prompt-stage"><summary>'
+                + prompt.group(1)
+                + '</summary><div class="prompt-body">'
+                + prompt.group(2)
+                + "</div></details>"
+            ),
+            prompts_and_links,
+            flags=re.S,
+        )
+        prompts_and_links = re.sub(
+            r"<p>(Audit artifacts:|审计 artifacts：)(.*?)</p>",
+            r'<p class="audit-artifacts"><strong>\1</strong>\2</p>',
+            prompts_and_links,
+            flags=re.S,
+        )
+        prompt_count = prompts_and_links.count('<details class="prompt-stage">')
+        if prompt_count != 4:
+            raise RuntimeError(
+                f"Expected four folded judge prompts in Appendix S1, found {prompt_count}."
+            )
+        return (
+            '<section class="judge-appendix">'
+            + heading
+            + '<div class="judge-metadata">'
+            + metadata
+            + "</div>"
+            + prompts_and_links
+            + "</section>"
+        )
+
+    formatted, count = appendix_pattern.subn(format_appendix, body)
+    if count != 2:
+        raise RuntimeError(f"Expected English and Chinese Appendix S1 sections, found {count}.")
+    return formatted
+
+
 def slugify(text: str) -> str:
     plain = html.unescape(re.sub(r"<[^>]+>", "", text)).lower()
     plain = re.sub(r"[_\W]+", "-", plain, flags=re.UNICODE).strip("-")
@@ -567,12 +693,12 @@ def embed_svg(path: Path) -> str:
     return f"data:image/svg+xml;base64,{encoded}"
 
 
-def inject_rough_figures(body: str) -> str:
-    for key, (path, title) in ROUGH_FIGURES.items():
+def inject_figures(body: str) -> str:
+    for key, (path, title) in FIGURES.items():
         marker = f'<div data-rough-figure="{key}"></div>'
         if marker not in body or not path.exists():
             continue
-        figure = f'''<figure class="rough-figure">
+        figure = f'''<figure class="manuscript-figure">
 <img src="{embed_svg(path)}" alt="{html.escape(title)}">
 </figure>'''
         body = body.replace(marker, figure)
@@ -691,9 +817,23 @@ def style_sections(body: str) -> str:
 
 
 def wrap_language_sections(body: str) -> str:
-    """Collapse English on screen and keep Chinese review notes separately scoped."""
+    """Collapse English and the Chinese review metadata independently."""
     marker = '<div class="language-break" id="chinese-version"></div>'
     english_body, chinese_body = body.split(marker, 1)
+    title_end = chinese_body.index("</h1>") + len("</h1>")
+    subtitle_end = chinese_body.index("</p>", title_end) + len("</p>")
+    abstract_start = chinese_body.index('<section class="abstract-section">', subtitle_end)
+    review_metadata = chinese_body[subtitle_end:abstract_start]
+    chinese_body = (
+        chinese_body[:subtitle_end]
+        + '<details class="chinese-review-meta"><summary>'
+        + '<span class="details-label-closed">草稿信息与作者确认（点击展开）</span>'
+        + '<span class="details-label-open">草稿信息与作者确认（点击收起）</span>'
+        + '</summary><div class="chinese-review-meta-body">'
+        + review_metadata
+        + "</div></details>"
+        + chinese_body[abstract_start:]
+    )
     return (
         '<details class="english-manuscript-details">'
         '<summary>'
@@ -731,8 +871,9 @@ def render() -> str:
     version = version_match.group(1) if version_match else "draft"
     prepared = convert_tables(markdown_text)
     body = run_cmark(prepared)
+    body = format_prompt_appendices(body)
     body, toc = add_heading_ids(body)
-    body = inject_rough_figures(body)
+    body = inject_figures(body)
     body, reference_counts = link_citations_and_references(body)
     if reference_counts[0] != reference_counts[1]:
         raise RuntimeError(
@@ -749,7 +890,7 @@ def render() -> str:
   <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
 </div>
-<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>''',
+<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Figures are embedded as reproducible vector graphics.</div>''',
         1,
     )
     body = body.replace(
@@ -780,7 +921,7 @@ def main() -> None:
     output = render()
     OUTPUT.write_text(output, encoding="utf-8")
     required = [
-        '<figure class="rough-figure">',
+        '<figure class="manuscript-figure">',
         "table-wrap",
         "data:image/svg+xml;base64",
         "Cohen's kappa",
@@ -790,22 +931,32 @@ def main() -> None:
         'class="manuscript-language english-version" lang="en"',
         'class="manuscript-language chinese-version language-break"',
         '<details class="english-manuscript-details">',
+        '<details class="chinese-review-meta">',
+        '<details class="prompt-stage">',
         'English manuscript (click to expand)',
         'English manuscript (click to collapse)',
+        '草稿信息与作者确认（点击展开）',
         'id="author-confirmation-index"',
-        "供临床合作者审阅的问题",
         "参考文献",
     ]
     missing = [value for value in required if value not in output]
     if missing:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
-    if output.count('<figure class="rough-figure">') != 16:
+    if output.count('<figure class="manuscript-figure">') != 16:
         raise RuntimeError("Expected eight embedded figures in each language version.")
-    if output.count('<aside class="author-note ') != 1:
-        raise RuntimeError("Expected one author-confirmation card in the Chinese version.")
+    if output.count('<details class="prompt-stage">') != 8:
+        raise RuntimeError("Expected four folded judge prompts in each language version.")
+    if output.count('<details class="chinese-review-meta">') != 1:
+        raise RuntimeError("Expected one folded Chinese draft-information block.")
+    if output.count("Clinical accuracy 与医学措辞") != 1:
+        raise RuntimeError("Expected one final physician-review reminder.")
+    if "供临床合作者审阅的问题" in output:
+        raise RuntimeError("The duplicate yellow clinical-review block must be removed.")
+    if '<aside class="author-note ' in output:
+        raise RuntimeError("The duplicate conclusion author note must be removed.")
     details_start = output.index('<details class="english-manuscript-details">')
-    details_end = output.index('</details>', details_start)
     english_start = output.index('class="manuscript-language english-version"')
+    details_end = output.index('</section></details>', english_start) + len('</section></details>')
     chinese_start = output.index('id="chinese-version"')
     if not (details_start < english_start < details_end < chinese_start):
         raise RuntimeError("English must be inside details and Chinese must remain outside it.")
@@ -815,9 +966,9 @@ def main() -> None:
     if '.english-manuscript-details > summary { display: none; }' not in output:
         raise RuntimeError("Print CSS must hide the English details summary.")
     if 'display: block !important;' not in output:
-        raise RuntimeError("Print CSS must expose the closed English manuscript.")
-    if '<aside class="author-note ' in output[:chinese_start]:
-        raise RuntimeError("Author-confirmation cards must not appear in the English version.")
+        raise RuntimeError("Print CSS must expose closed disclosure content.")
+    if '.prompt-stage:not([open]) > .prompt-body { display: block !important; }' not in output:
+        raise RuntimeError("Print CSS must expose folded Appendix S1 prompts.")
     if "onclick=" in output or "<script" in output:
         raise RuntimeError("The review copy must remain JavaScript-free.")
     element_ids = re.findall(r'\bid="([^"]+)"', output)

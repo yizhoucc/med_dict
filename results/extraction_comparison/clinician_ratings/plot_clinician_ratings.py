@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Generate simple internal SVG plots for checking clinician-rating trends.
+"""Compatibility entry point for the manuscript figure generator.
 
-These figures are intentionally plain. They support manuscript figure planning and
-are not publication-ready artwork.
+New figure work lives in ``plot_manuscript_figures.py``. Running this legacy
+entry point delegates to the publication-layout generator.
 """
 
 from __future__ import annotations
@@ -14,7 +14,8 @@ from collections import Counter, defaultdict
 from itertools import combinations
 from pathlib import Path
 
-from openpyxl import load_workbook
+from plot_manuscript_figures import load_xlsx as load_xlsx_stdlib
+from plot_manuscript_figures import main as manuscript_figure_main
 
 
 HERE = Path(__file__).resolve().parent
@@ -83,22 +84,7 @@ def load_csv(path: Path) -> list[dict[str, str]]:
 
 
 def load_xlsx(path: Path) -> list[dict[str, str]]:
-    workbook = load_workbook(path, read_only=True, data_only=True)
-    sheet = workbook["blind_scores"]
-    values = sheet.iter_rows(values_only=True)
-    headers = [str(value) for value in next(values)]
-    rows = []
-    for values_row in values:
-        if not values_row[0]:
-            continue
-        rows.append(
-            {
-                key: "" if value is None else str(value).strip()
-                for key, value in zip(headers, values_row)
-            }
-        )
-    workbook.close()
-    return rows
+    return load_xlsx_stdlib(path)
 
 
 def load_raters() -> dict[str, list[dict[str, str]]]:
@@ -664,4 +650,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    manuscript_figure_main()

@@ -1,36 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="940" height="390" viewBox="0 0 940 390">
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="450" viewBox="0 0 1320 450">
 <rect width="100%" height="100%" fill="white"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
+</defs>
 <g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<text x="470.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Adjusted odds of clinician preference for the harness</text>
-<text x="470.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Directional judgments; logistic GEE clustered by note</text>
-<line x1="210.0" y1="90" x2="210.0" y2="326" stroke="#6B7780"/>
-<text x="210.0" y="350" text-anchor="middle" font-size="11">1</text>
-<line x1="337.5" y1="90" x2="337.5" y2="326" stroke="#E5E5E5"/>
-<text x="337.5" y="350" text-anchor="middle" font-size="11">2</text>
-<line x1="465.0" y1="90" x2="465.0" y2="326" stroke="#E5E5E5"/>
-<text x="465.0" y="350" text-anchor="middle" font-size="11">4</text>
-<line x1="592.5" y1="90" x2="592.5" y2="326" stroke="#E5E5E5"/>
-<text x="592.5" y="350" text-anchor="middle" font-size="11">8</text>
-<line x1="720.0" y1="90" x2="720.0" y2="326" stroke="#E5E5E5"/>
-<text x="720.0" y="350" text-anchor="middle" font-size="11">16</text>
-<text x="192" y="130" text-anchor="end" font-size="14">Overall</text>
-<line x1="419.5" y1="125" x2="510.0" y2="125" stroke="#2B8CBE" stroke-width="4"/>
-<line x1="419.5" y1="117" x2="419.5" y2="133" stroke="#2B8CBE" stroke-width="2"/>
-<line x1="510.0" y1="117" x2="510.0" y2="133" stroke="#2B8CBE" stroke-width="2"/>
-<circle cx="464.8" cy="125" r="8" fill="#2B8CBE"/>
-<text x="738" y="130" font-size="13">OR 4.00 (95% CI 3.12-5.11)</text>
-<text x="192" y="200" text-anchor="end" font-size="14">Breast cancer</text>
-<line x1="422.2" y1="195" x2="547.2" y2="195" stroke="#2B8CBE" stroke-width="4"/>
-<line x1="422.2" y1="187" x2="422.2" y2="203" stroke="#2B8CBE" stroke-width="2"/>
-<line x1="547.2" y1="187" x2="547.2" y2="203" stroke="#2B8CBE" stroke-width="2"/>
-<circle cx="484.7" cy="195" r="8" fill="#2B8CBE"/>
-<text x="738" y="200" font-size="13">OR 4.45 (95% CI 3.17-6.25)</text>
-<text x="192" y="270" text-anchor="end" font-size="14">PDAC</text>
-<line x1="378.9" y1="265" x2="509.9" y2="265" stroke="#2B8CBE" stroke-width="4"/>
-<line x1="378.9" y1="257" x2="378.9" y2="273" stroke="#2B8CBE" stroke-width="2"/>
-<line x1="509.9" y1="257" x2="509.9" y2="273" stroke="#2B8CBE" stroke-width="2"/>
-<circle cx="444.4" cy="265" r="8" fill="#2B8CBE"/>
-<text x="738" y="270" font-size="13">OR 3.58 (95% CI 2.50-5.10)</text>
-<text x="465.0" y="379" text-anchor="middle" font-size="12">Odds ratio for harness preference among non-tie judgments (log scale)</text>
+<text x="35.0" y="40.0" text-anchor="start" font-size="22" font-weight="700" fill="#222222">Adjusted preference estimates</text>
+<text x="35.0" y="66.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Logistic GEE among non-tie judgments, clustered by note</text>
+<line x1="230.0" y1="95" x2="230.0" y2="350" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="230.0" y="381.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0.8</text>
+<line x1="282.3" y1="95" x2="282.3" y2="350" stroke="#59656D" stroke-dasharray="6 5"/>
+<text x="282.3" y="381.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">1</text>
+<line x1="444.9" y1="95" x2="444.9" y2="350" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="444.9" y="381.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">2</text>
+<line x1="607.4" y1="95" x2="607.4" y2="350" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="607.4" y="381.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">4</text>
+<line x1="770.0" y1="95" x2="770.0" y2="350" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="770.0" y="381.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">8</text>
+<text x="500.0" y="425.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Odds ratio for harness preference (log scale)</text>
+<text x="820.0" y="97.0" text-anchor="start" font-size="16" font-weight="700" fill="#222222">OR (95% CI)</text>
+<text x="1045.0" y="97.0" text-anchor="start" font-size="16" font-weight="700" fill="#222222">p</text>
+<text x="1165.0" y="97.0" text-anchor="start" font-size="16" font-weight="700" fill="#222222">Directional n</text>
+<text x="210.0" y="141.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">Overall</text>
+<line x1="549.5" y1="135" x2="664.9" y2="135" stroke="#0072B2" stroke-width="4"/>
+<line x1="549.5" y1="127" x2="549.5" y2="143" stroke="#0072B2" stroke-width="2"/>
+<line x1="664.9" y1="127" x2="664.9" y2="143" stroke="#0072B2" stroke-width="2"/>
+<circle cx="607.2" cy="135" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="820.0" y="141.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">4.00 (3.12-5.11)</text>
+<text x="1045.0" y="141.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">2.67e-28</text>
+<text x="1198.0" y="141.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">870</text>
+<text x="210.0" y="223.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast cancer</text>
+<line x1="552.9" y1="217" x2="712.2" y2="217" stroke="#0072B2" stroke-width="4"/>
+<line x1="552.9" y1="209" x2="552.9" y2="225" stroke="#0072B2" stroke-width="2"/>
+<line x1="712.2" y1="209" x2="712.2" y2="225" stroke="#0072B2" stroke-width="2"/>
+<circle cx="632.5" cy="217" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="820.0" y="223.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">4.45 (3.17-6.25)</text>
+<text x="1045.0" y="223.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">7.04e-18</text>
+<text x="1198.0" y="223.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">443</text>
+<text x="210.0" y="305.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">PDAC</text>
+<line x1="497.7" y1="299" x2="664.6" y2="299" stroke="#0072B2" stroke-width="4"/>
+<line x1="497.7" y1="291" x2="497.7" y2="307" stroke="#0072B2" stroke-width="2"/>
+<line x1="664.6" y1="291" x2="664.6" y2="307" stroke="#0072B2" stroke-width="2"/>
+<circle cx="581.2" cy="299" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="820.0" y="305.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">3.58 (2.50-5.10)</text>
+<text x="1045.0" y="305.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">2.30e-12</text>
+<text x="1198.0" y="305.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">427</text>
+<text x="234.0" y="111.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Baseline</text>
+<text x="765.0" y="111.0" text-anchor="end" font-size="16" font-weight="400" fill="#0072B2">Harness</text>
 </g>
 </svg>

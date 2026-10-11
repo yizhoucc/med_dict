@@ -1,95 +1,139 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="716" viewBox="0 0 1000 716">
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="720" viewBox="0 0 1500 720">
 <rect width="100%" height="100%" fill="white"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
+</defs>
 <g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<text x="500.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Clinician preference by evaluation</text>
-<text x="500.0" y="52" text-anchor="middle" font-size="12" fill="#555555">Required-field judgments; raw counts shown inside segments</text>
-<rect x="225" y="68" width="16" height="12" fill="#2B8CBE"/>
-<text x="247" y="78" font-size="12">PL better</text>
-<rect x="330" y="68" width="16" height="12" fill="#BDBDBD"/>
-<text x="352" y="78" font-size="12">Tie</text>
-<rect x="435" y="68" width="16" height="12" fill="#D95F0E"/>
-<text x="457" y="78" font-size="12">BL better</text>
-<line x1="225.0" y1="92" x2="225.0" y2="656" stroke="#E5E5E5"/>
-<text x="225.0" y="681" text-anchor="middle" font-size="11">0%</text>
-<line x1="341.0" y1="92" x2="341.0" y2="656" stroke="#E5E5E5"/>
-<text x="341.0" y="681" text-anchor="middle" font-size="11">20%</text>
-<line x1="457.0" y1="92" x2="457.0" y2="656" stroke="#E5E5E5"/>
-<text x="457.0" y="681" text-anchor="middle" font-size="11">40%</text>
-<line x1="573.0" y1="92" x2="573.0" y2="656" stroke="#E5E5E5"/>
-<text x="573.0" y="681" text-anchor="middle" font-size="11">60%</text>
-<line x1="689.0" y1="92" x2="689.0" y2="656" stroke="#E5E5E5"/>
-<text x="689.0" y="681" text-anchor="middle" font-size="11">80%</text>
-<line x1="805.0" y1="92" x2="805.0" y2="656" stroke="#E5E5E5"/>
-<text x="805.0" y="681" text-anchor="middle" font-size="11">100%</text>
-<text x="213" y="131" text-anchor="end" font-size="13">Oncologist 1, breast</text>
-<rect x="225.0" y="100" width="174.0" height="52" fill="#2B8CBE"/>
-<text x="312.0" y="131" text-anchor="middle" font-size="12" fill="#222222">84</text>
-<rect x="399.0" y="100" width="360.4" height="52" fill="#BDBDBD"/>
-<text x="579.2" y="131" text-anchor="middle" font-size="12" fill="#222222">174</text>
-<rect x="759.4" y="100" width="45.6" height="52" fill="#D95F0E"/>
-<text x="782.2" y="131" text-anchor="middle" font-size="12" fill="#222222">22</text>
-<text x="817" y="123" font-size="11">PL/BL/Tie 84/22/174</text>
-<text x="817" y="141" font-size="10" fill="#555555">79.2% of directional</text>
-<text x="213" y="203" text-anchor="end" font-size="13">Oncologist 1, PDAC</text>
-<rect x="225.0" y="172" width="167.3" height="52" fill="#2B8CBE"/>
-<text x="308.7" y="203" text-anchor="middle" font-size="12" fill="#222222">75</text>
-<rect x="392.3" y="172" width="381.5" height="52" fill="#BDBDBD"/>
-<text x="583.0" y="203" text-anchor="middle" font-size="12" fill="#222222">171</text>
-<rect x="773.8" y="172" width="31.2" height="52" fill="#D95F0E"/>
-<text x="817" y="195" font-size="11">PL/BL/Tie 75/14/171</text>
-<text x="817" y="213" font-size="10" fill="#555555">84.3% of directional</text>
-<text x="213" y="275" text-anchor="end" font-size="13">Oncologist 2, breast</text>
-<rect x="225.0" y="244" width="163.6" height="52" fill="#2B8CBE"/>
-<text x="306.8" y="275" text-anchor="middle" font-size="12" fill="#222222">79</text>
-<rect x="388.6" y="244" width="399.8" height="52" fill="#BDBDBD"/>
-<text x="588.5" y="275" text-anchor="middle" font-size="12" fill="#222222">193</text>
-<rect x="788.4" y="244" width="16.6" height="52" fill="#D95F0E"/>
-<text x="817" y="267" font-size="11">PL/BL/Tie 79/8/193</text>
-<text x="817" y="285" font-size="10" fill="#555555">90.8% of directional</text>
-<text x="213" y="347" text-anchor="end" font-size="13">Oncologist 2, PDAC</text>
-<rect x="225.0" y="316" width="191.8" height="52" fill="#2B8CBE"/>
-<text x="320.9" y="347" text-anchor="middle" font-size="12" fill="#222222">86</text>
-<rect x="416.8" y="316" width="368.1" height="52" fill="#BDBDBD"/>
-<text x="600.9" y="347" text-anchor="middle" font-size="12" fill="#222222">165</text>
-<rect x="784.9" y="316" width="20.1" height="52" fill="#D95F0E"/>
-<text x="817" y="339" font-size="11">PL/BL/Tie 86/9/165</text>
-<text x="817" y="357" font-size="10" fill="#555555">90.5% of directional</text>
-<text x="213" y="419" text-anchor="end" font-size="13">Oncologist 3, breast</text>
-<rect x="225.0" y="388" width="246.5" height="52" fill="#2B8CBE"/>
-<text x="348.2" y="419" text-anchor="middle" font-size="12" fill="#222222">119</text>
-<rect x="471.5" y="388" width="283.8" height="52" fill="#BDBDBD"/>
-<text x="613.4" y="419" text-anchor="middle" font-size="12" fill="#222222">137</text>
-<rect x="755.3" y="388" width="49.7" height="52" fill="#D95F0E"/>
-<text x="780.1" y="419" text-anchor="middle" font-size="12" fill="#222222">24</text>
-<text x="817" y="411" font-size="11">PL/BL/Tie 119/24/137</text>
-<text x="817" y="429" font-size="10" fill="#555555">83.2% of directional</text>
-<text x="213" y="491" text-anchor="end" font-size="13">Oncologist 3, PDAC</text>
-<rect x="225.0" y="460" width="229.8" height="52" fill="#2B8CBE"/>
-<text x="339.9" y="491" text-anchor="middle" font-size="12" fill="#222222">103</text>
-<rect x="454.8" y="460" width="283.3" height="52" fill="#BDBDBD"/>
-<text x="596.4" y="491" text-anchor="middle" font-size="12" fill="#222222">127</text>
-<rect x="738.1" y="460" width="66.9" height="52" fill="#D95F0E"/>
-<text x="771.5" y="491" text-anchor="middle" font-size="12" fill="#222222">30</text>
-<text x="817" y="483" font-size="11">PL/BL/Tie 103/30/127</text>
-<text x="817" y="501" font-size="10" fill="#555555">77.4% of directional</text>
-<text x="213" y="563" text-anchor="end" font-size="13">Oncologist 4, breast</text>
-<rect x="225.0" y="532" width="167.8" height="52" fill="#2B8CBE"/>
-<text x="308.9" y="563" text-anchor="middle" font-size="12" fill="#222222">81</text>
-<rect x="392.8" y="532" width="358.4" height="52" fill="#BDBDBD"/>
-<text x="572.0" y="563" text-anchor="middle" font-size="12" fill="#222222">173</text>
-<rect x="751.1" y="532" width="53.9" height="52" fill="#D95F0E"/>
-<text x="778.1" y="563" text-anchor="middle" font-size="12" fill="#222222">26</text>
-<text x="817" y="555" font-size="11">PL/BL/Tie 81/26/173</text>
-<text x="817" y="573" font-size="10" fill="#555555">75.7% of directional</text>
-<text x="213" y="635" text-anchor="end" font-size="13">Oncologist 4, PDAC</text>
-<rect x="225.0" y="604" width="160.6" height="52" fill="#2B8CBE"/>
-<text x="305.3" y="635" text-anchor="middle" font-size="12" fill="#222222">72</text>
-<rect x="385.6" y="604" width="334.6" height="52" fill="#BDBDBD"/>
-<text x="552.9" y="635" text-anchor="middle" font-size="12" fill="#222222">150</text>
-<rect x="720.2" y="604" width="84.8" height="52" fill="#D95F0E"/>
-<text x="762.6" y="635" text-anchor="middle" font-size="12" fill="#222222">38</text>
-<text x="817" y="627" font-size="11">PL/BL/Tie 72/38/150</text>
-<text x="817" y="645" font-size="10" fill="#555555">65.5% of directional</text>
-<text x="515.0" y="708" text-anchor="middle" font-size="12">Share of required judgments</text>
+<rect x="25.0" y="20.0" width="900.0" height="655.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<circle cx="52.0" cy="48.0" r="17" fill="#263C4A"/>
+<text x="52.0" y="55.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">A</text>
+<text x="80.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">All required judgments</text>
+<rect x="950.0" y="20.0" width="525.0" height="655.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<circle cx="977.0" cy="48.0" r="17" fill="#263C4A"/>
+<text x="977.0" y="55.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">B</text>
+<text x="1005.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Harness share among directional judgments</text>
+<rect x="380.0" y="70.0" width="18" height="13" rx="2" fill="#0072B2"/>
+<text x="405.0" y="82.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Harness</text>
+<rect x="500.0" y="70.0" width="18" height="13" rx="2" fill="#B8B8B8"/>
+<text x="525.0" y="82.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Tie</text>
+<rect x="620.0" y="70.0" width="18" height="13" rx="2" fill="#D55E00"/>
+<text x="645.0" y="82.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Baseline</text>
+<line x1="240.0" y1="102" x2="240.0" y2="609" stroke="#E6E6E6"/>
+<text x="240.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0%</text>
+<line x1="362.0" y1="102" x2="362.0" y2="609" stroke="#E6E6E6"/>
+<text x="362.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
+<line x1="484.0" y1="102" x2="484.0" y2="609" stroke="#E6E6E6"/>
+<text x="484.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
+<line x1="606.0" y1="102" x2="606.0" y2="609" stroke="#E6E6E6"/>
+<text x="606.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
+<line x1="728.0" y1="102" x2="728.0" y2="609" stroke="#E6E6E6"/>
+<text x="728.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<line x1="850.0" y1="102" x2="850.0" y2="609" stroke="#E6E6E6"/>
+<text x="850.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">100%</text>
+<text x="225.0" y="139.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 1  |  Breast</text>
+<rect x="240.0" y="112" width="183.0" height="42" fill="#0072B2"/>
+<text x="331.5" y="139.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">84</text>
+<rect x="423.0" y="112" width="379.1" height="42" fill="#B8B8B8"/>
+<text x="612.5" y="139.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">174</text>
+<rect x="802.1" y="112" width="47.9" height="42" fill="#D55E00"/>
+<text x="826.0" y="139.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">22</text>
+<text x="867.0" y="139.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=280</text>
+<text x="225.0" y="204.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 1  |  PDAC</text>
+<rect x="240.0" y="177" width="176.0" height="42" fill="#0072B2"/>
+<text x="328.0" y="204.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">75</text>
+<rect x="416.0" y="177" width="401.2" height="42" fill="#B8B8B8"/>
+<text x="616.6" y="204.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">171</text>
+<rect x="817.2" y="177" width="32.8" height="42" fill="#D55E00"/>
+<text x="833.6" y="204.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">14</text>
+<text x="867.0" y="204.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=260</text>
+<text x="225.0" y="269.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 2  |  Breast</text>
+<rect x="240.0" y="242" width="172.1" height="42" fill="#0072B2"/>
+<text x="326.1" y="269.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">79</text>
+<rect x="412.1" y="242" width="420.5" height="42" fill="#B8B8B8"/>
+<text x="622.3" y="269.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">193</text>
+<rect x="832.6" y="242" width="17.4" height="42" fill="#D55E00"/>
+<text x="841.3" y="237.0" text-anchor="middle" font-size="16" font-weight="700" fill="#D55E00">8</text>
+<text x="867.0" y="269.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=280</text>
+<text x="225.0" y="334.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 2  |  PDAC</text>
+<rect x="240.0" y="307" width="201.8" height="42" fill="#0072B2"/>
+<text x="340.9" y="334.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">86</text>
+<rect x="441.8" y="307" width="387.1" height="42" fill="#B8B8B8"/>
+<text x="635.3" y="334.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">165</text>
+<rect x="828.9" y="307" width="21.1" height="42" fill="#D55E00"/>
+<text x="839.4" y="302.0" text-anchor="middle" font-size="16" font-weight="700" fill="#D55E00">9</text>
+<text x="867.0" y="334.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=260</text>
+<text x="225.0" y="399.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 3  |  Breast</text>
+<rect x="240.0" y="372" width="259.2" height="42" fill="#0072B2"/>
+<text x="369.6" y="399.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">119</text>
+<rect x="499.2" y="372" width="298.5" height="42" fill="#B8B8B8"/>
+<text x="648.5" y="399.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">137</text>
+<rect x="797.7" y="372" width="52.3" height="42" fill="#D55E00"/>
+<text x="823.9" y="399.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">24</text>
+<text x="867.0" y="399.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=280</text>
+<text x="225.0" y="464.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 3  |  PDAC</text>
+<rect x="240.0" y="437" width="241.7" height="42" fill="#0072B2"/>
+<text x="360.8" y="464.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">103</text>
+<rect x="481.7" y="437" width="298.0" height="42" fill="#B8B8B8"/>
+<text x="630.6" y="464.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">127</text>
+<rect x="779.6" y="437" width="70.4" height="42" fill="#D55E00"/>
+<text x="814.8" y="464.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">30</text>
+<text x="867.0" y="464.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=260</text>
+<text x="225.0" y="529.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 4  |  Breast</text>
+<rect x="240.0" y="502" width="176.5" height="42" fill="#0072B2"/>
+<text x="328.2" y="529.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">81</text>
+<rect x="416.5" y="502" width="376.9" height="42" fill="#B8B8B8"/>
+<text x="604.9" y="529.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">173</text>
+<rect x="793.4" y="502" width="56.6" height="42" fill="#D55E00"/>
+<text x="821.7" y="529.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">26</text>
+<text x="867.0" y="529.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=280</text>
+<text x="225.0" y="594.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 4  |  PDAC</text>
+<rect x="240.0" y="567" width="168.9" height="42" fill="#0072B2"/>
+<text x="324.5" y="594.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">72</text>
+<rect x="408.9" y="567" width="351.9" height="42" fill="#B8B8B8"/>
+<text x="584.9" y="594.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">150</text>
+<rect x="760.8" y="567" width="89.2" height="42" fill="#D55E00"/>
+<text x="805.4" y="594.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">38</text>
+<text x="867.0" y="594.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=260</text>
+<line x1="1040.0" y1="102" x2="1040.0" y2="620" stroke="#818C94" stroke-dasharray="4 4"/>
+<text x="1040.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50%</text>
+<line x1="1115.0" y1="102" x2="1115.0" y2="620" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1115.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
+<line x1="1190.0" y1="102" x2="1190.0" y2="620" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1190.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">70%</text>
+<line x1="1265.0" y1="102" x2="1265.0" y2="620" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1265.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<line x1="1340.0" y1="102" x2="1340.0" y2="620" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1340.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">90%</text>
+<line x1="1415.0" y1="102" x2="1415.0" y2="620" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1415.0" y="655.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">100%</text>
+<line x1="1040" y1="133.0" x2="1259.3" y2="133.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1259.3" cy="133.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1273.3" y="138.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">79.2%</text>
+<line x1="1040" y1="198.0" x2="1297.0" y2="198.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1297.0" cy="198.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1311.0" y="203.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">84.3%</text>
+<line x1="1040" y1="263.0" x2="1346.0" y2="263.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1346.0" cy="263.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1360.0" y="268.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">90.8%</text>
+<line x1="1040" y1="328.0" x2="1343.9" y2="328.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1343.9" cy="328.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1357.9" y="333.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">90.5%</text>
+<line x1="1040" y1="393.0" x2="1289.1" y2="393.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1289.1" cy="393.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1303.1" y="398.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">83.2%</text>
+<line x1="1040" y1="458.0" x2="1245.8" y2="458.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1245.8" cy="458.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1259.8" y="463.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">77.4%</text>
+<line x1="1040" y1="523.0" x2="1232.8" y2="523.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1232.8" cy="523.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1246.8" y="528.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">75.7%</text>
+<line x1="1040" y1="588.0" x2="1155.9" y2="588.0" stroke="#AEB7BD" stroke-width="3"/>
+<circle cx="1155.9" cy="588.0" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1169.9" y="593.0" text-anchor="start" font-size="16" font-weight="700" fill="#0072B2">65.5%</text>
+<text x="1228.0" y="92.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50% = no directional preference</text>
 </g>
 </svg>

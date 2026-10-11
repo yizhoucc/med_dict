@@ -82,7 +82,7 @@ The seven clinician-prioritized core fields contribute 1,040 judgments.
 
 PL received 84.4% of the 495 directional core judgments. Every core field has a positive aggregate margin. Active anticancer medications remain the clearest strength. Medication planning, outside the seven core fields, also has a large margin: PL 98, BL 2, and 60 ties.
 
-Breast type and receptor status remains the weakest core result. Procedure planning is nearly balanced at PL 21 versus BL 20, and laboratory planning has a modest margin at PL 24 versus BL 19. These fields should not be presented as major strengths.
+Distant metastasis has the smallest normalized core-field margin, followed by breast type and receptor status. Procedure planning is nearly balanced at PL 21 versus BL 20, and laboratory planning has a modest margin at PL 24 versus BL 19. These fields should not be presented as major strengths.
 
 ## Manuscript implications
 
@@ -92,10 +92,12 @@ The new review also adds a useful negative observation. The pooled PDAC margin i
 
 ## Figure updates
 
-- Figure 1 records four breast evaluators and four PDAC evaluators.
-- Figure 2 contains eight evaluator-by-cancer distributions.
-- Figure 3 presents pairwise agreement for breast cancer and PDAC across all four oncologists.
-- Figure 4 pools 1,040 core-field judgments.
-- Figure 5 pools four evaluators for each cancer type at the note level.
-- Figure 6 uses the four-clinician adjusted model.
-- The v0.18 manuscript does not use the former technical-audit versus clinician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.
+- Figure 1 separates data partitions, breast development, PDAC adaptation, and locked holdout evaluation in four panels.
+- Figure 2 retains all eight evaluator-by-cancer distributions and adds directional harness share as a second panel.
+- Figure 3 reports exact agreement and Cohen's kappa together in each populated evaluator-pair cell.
+- Figure 4 pools 1,040 core-field judgments in a diverging preference profile.
+- Figure 5 ranks note-level margins after pooling four evaluators within each cancer type.
+- Figure 6 uses the four-clinician adjusted model and reports the estimate, p value, and directional sample size in aligned columns.
+- Figure 7 places the locked staged-ablation counts in the same visual system.
+- Figure 8 is a results-informed clinical handoff concept. It does not use unmeasured workload, time, or risk axes.
+- The v0.19 manuscript does not use the former technical-audit versus clinician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.

@@ -1,61 +1,98 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590">
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="680" viewBox="0 0 1420 680">
 <rect width="100%" height="100%" fill="white"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
+</defs>
 <g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<text x="560.0" y="30" text-anchor="middle" font-size="20" font-weight="700">Clinician preference by core clinical category</text>
-<text x="560.0" y="52" text-anchor="middle" font-size="12" fill="#555555">All completed clinician evaluations; percentages use applicable ratings per category</text>
-<rect x="275" y="70" width="16" height="12" fill="#2B8CBE"/>
-<text x="297" y="80" font-size="12">PL better</text>
-<rect x="380" y="70" width="16" height="12" fill="#BDBDBD"/>
-<text x="402" y="80" font-size="12">Tie</text>
-<rect x="485" y="70" width="16" height="12" fill="#D95F0E"/>
-<text x="507" y="80" font-size="12">BL better</text>
-<line x1="275.0" y1="95" x2="275.0" y2="535" stroke="#E5E5E5"/>
-<text x="275.0" y="562" text-anchor="middle" font-size="11">0%</text>
-<line x1="406.0" y1="95" x2="406.0" y2="535" stroke="#E5E5E5"/>
-<text x="406.0" y="562" text-anchor="middle" font-size="11">20%</text>
-<line x1="537.0" y1="95" x2="537.0" y2="535" stroke="#E5E5E5"/>
-<text x="537.0" y="562" text-anchor="middle" font-size="11">40%</text>
-<line x1="668.0" y1="95" x2="668.0" y2="535" stroke="#E5E5E5"/>
-<text x="668.0" y="562" text-anchor="middle" font-size="11">60%</text>
-<line x1="799.0" y1="95" x2="799.0" y2="535" stroke="#E5E5E5"/>
-<text x="799.0" y="562" text-anchor="middle" font-size="11">80%</text>
-<line x1="930.0" y1="95" x2="930.0" y2="535" stroke="#E5E5E5"/>
-<text x="930.0" y="562" text-anchor="middle" font-size="11">100%</text>
-<text x="263" y="132" text-anchor="end" font-size="13">Active anticancer medications</text>
-<rect x="275.0" y="105" width="540.4" height="42" fill="#2B8CBE"/>
-<rect x="815.4" y="105" width="102.3" height="42" fill="#BDBDBD"/>
-<rect x="917.7" y="105" width="12.3" height="42" fill="#D95F0E"/>
-<text x="942" y="132" font-size="12">PL/BL/Tie 132/3/25</text>
-<text x="263" y="194" text-anchor="end" font-size="13">Stage</text>
-<rect x="275.0" y="167" width="282.5" height="42" fill="#2B8CBE"/>
-<rect x="557.5" y="167" width="343.9" height="42" fill="#BDBDBD"/>
-<rect x="901.3" y="167" width="28.7" height="42" fill="#D95F0E"/>
-<text x="942" y="194" font-size="12">PL/BL/Tie 69/7/84</text>
-<text x="263" y="256" text-anchor="end" font-size="13">Distant metastasis</text>
-<rect x="275.0" y="229" width="94.2" height="42" fill="#2B8CBE"/>
-<rect x="369.2" y="229" width="540.4" height="42" fill="#BDBDBD"/>
-<rect x="909.5" y="229" width="20.5" height="42" fill="#D95F0E"/>
-<text x="942" y="256" font-size="12">PL/BL/Tie 23/5/132</text>
-<text x="263" y="318" text-anchor="end" font-size="13">Regional / overall metastasis</text>
-<rect x="275.0" y="291" width="302.9" height="42" fill="#2B8CBE"/>
-<rect x="577.9" y="291" width="245.6" height="42" fill="#BDBDBD"/>
-<rect x="823.6" y="291" width="106.4" height="42" fill="#D95F0E"/>
-<text x="942" y="318" font-size="12">PL/BL/Tie 74/26/60</text>
-<text x="263" y="380" text-anchor="end" font-size="13">Treatment response</text>
-<rect x="275.0" y="353" width="253.8" height="42" fill="#2B8CBE"/>
-<rect x="528.8" y="353" width="352.1" height="42" fill="#BDBDBD"/>
-<rect x="880.9" y="353" width="49.1" height="42" fill="#D95F0E"/>
-<text x="942" y="380" font-size="12">PL/BL/Tie 62/12/86</text>
-<text x="263" y="442" text-anchor="end" font-size="13">Breast type / receptors</text>
-<rect x="275.0" y="415" width="196.5" height="42" fill="#2B8CBE"/>
-<rect x="471.5" y="415" width="343.9" height="42" fill="#BDBDBD"/>
-<rect x="815.4" y="415" width="114.6" height="42" fill="#D95F0E"/>
-<text x="942" y="442" font-size="12">PL/BL/Tie 24/14/42</text>
-<text x="263" y="504" text-anchor="end" font-size="13">Molecular / genetic results</text>
-<rect x="275.0" y="477" width="139.2" height="42" fill="#2B8CBE"/>
-<rect x="414.2" y="477" width="474.9" height="42" fill="#BDBDBD"/>
-<rect x="889.1" y="477" width="40.9" height="42" fill="#D95F0E"/>
-<text x="942" y="504" font-size="12">PL/BL/Tie 34/10/116</text>
-<text x="602.5" y="585" text-anchor="middle" font-size="12">Share of applicable judgments</text>
+<text x="32.0" y="37.0" text-anchor="start" font-size="22" font-weight="700" fill="#222222">Core-field preference profile</text>
+<text x="32.0" y="62.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Fields sorted by normalized harness-minus-baseline margin</text>
+<rect x="930.0" y="40.0" width="18" height="13" rx="2" fill="#D55E00"/>
+<text x="955.0" y="52.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Baseline</text>
+<rect x="1050.0" y="40.0" width="18" height="13" rx="2" fill="#B8B8B8"/>
+<text x="1075.0" y="52.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Tie</text>
+<rect x="1170.0" y="40.0" width="18" height="13" rx="2" fill="#0072B2"/>
+<text x="1195.0" y="52.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Harness</text>
+<line x1="386.0" y1="88" x2="386.0" y2="612" stroke="#E6E6E6"/>
+<text x="386.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<line x1="452.0" y1="88" x2="452.0" y2="612" stroke="#E6E6E6"/>
+<text x="452.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
+<line x1="518.0" y1="88" x2="518.0" y2="612" stroke="#E6E6E6"/>
+<text x="518.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
+<line x1="584.0" y1="88" x2="584.0" y2="612" stroke="#E6E6E6"/>
+<text x="584.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
+<line x1="650.0" y1="88" x2="650.0" y2="612" stroke="#7A858D"/>
+<text x="650.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0</text>
+<line x1="716.0" y1="88" x2="716.0" y2="612" stroke="#E6E6E6"/>
+<text x="716.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
+<line x1="782.0" y1="88" x2="782.0" y2="612" stroke="#E6E6E6"/>
+<text x="782.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
+<line x1="848.0" y1="88" x2="848.0" y2="612" stroke="#E6E6E6"/>
+<text x="848.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
+<line x1="914.0" y1="88" x2="914.0" y2="612" stroke="#E6E6E6"/>
+<text x="914.0" y="645.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<text x="480.0" y="672.0" text-anchor="middle" font-size="16" font-weight="400" fill="#D55E00">Baseline preferred</text>
+<text x="820.0" y="672.0" text-anchor="middle" font-size="16" font-weight="400" fill="#0072B2">Harness preferred</text>
+<text x="280.0" y="134.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Active anticancer medications</text>
+<rect x="618.0" y="105" width="6.2" height="44" fill="#D55E00"/>
+<rect x="624.2" y="105" width="51.6" height="44" fill="#B8B8B8"/>
+<rect x="675.8" y="105" width="272.2" height="44" fill="#0072B2"/>
+<text x="650.0" y="133.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">25</text>
+<text x="811.9" y="133.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">132</text>
+<text x="1025.0" y="126.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 132/3/25</text>
+<text x="1025.0" y="145.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +80.6%</text>
+<text x="280.0" y="212.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Stage</text>
+<rect x="548.9" y="183" width="14.4" height="44" fill="#D55E00"/>
+<rect x="563.4" y="183" width="173.2" height="44" fill="#B8B8B8"/>
+<rect x="736.6" y="183" width="142.3" height="44" fill="#0072B2"/>
+<text x="650.0" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">84</text>
+<text x="807.8" y="211.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">69</text>
+<text x="1025.0" y="204.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 69/7/84</text>
+<text x="1025.0" y="223.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +38.8%</text>
+<text x="280.0" y="290.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Treatment response</text>
+<rect x="536.6" y="261" width="24.8" height="44" fill="#D55E00"/>
+<rect x="561.3" y="261" width="177.4" height="44" fill="#B8B8B8"/>
+<rect x="738.7" y="261" width="127.9" height="44" fill="#0072B2"/>
+<text x="650.0" y="289.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">86</text>
+<text x="802.6" y="289.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">62</text>
+<text x="1025.0" y="282.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 62/12/86</text>
+<text x="1025.0" y="301.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +31.2%</text>
+<text x="280.0" y="368.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Regional / overall metastasis</text>
+<rect x="534.5" y="339" width="53.6" height="44" fill="#D55E00"/>
+<rect x="588.1" y="339" width="123.8" height="44" fill="#B8B8B8"/>
+<rect x="711.9" y="339" width="152.6" height="44" fill="#0072B2"/>
+<text x="561.3" y="367.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">26</text>
+<text x="650.0" y="367.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">60</text>
+<text x="788.2" y="367.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">74</text>
+<text x="1025.0" y="360.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 74/26/60</text>
+<text x="1025.0" y="379.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +30.0%</text>
+<text x="280.0" y="446.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Molecular / genetic results</text>
+<rect x="509.8" y="417" width="20.6" height="44" fill="#D55E00"/>
+<rect x="530.4" y="417" width="239.2" height="44" fill="#B8B8B8"/>
+<rect x="769.6" y="417" width="70.1" height="44" fill="#0072B2"/>
+<text x="650.0" y="445.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">116</text>
+<text x="804.7" y="445.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">34</text>
+<text x="1025.0" y="438.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 34/10/116</text>
+<text x="1025.0" y="457.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +15.0%</text>
+<text x="280.0" y="524.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast type / receptors</text>
+<rect x="505.6" y="495" width="57.8" height="44" fill="#D55E00"/>
+<rect x="563.4" y="495" width="173.2" height="44" fill="#B8B8B8"/>
+<rect x="736.6" y="495" width="99.0" height="44" fill="#0072B2"/>
+<text x="534.5" y="523.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">14</text>
+<text x="650.0" y="523.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">42</text>
+<text x="786.1" y="523.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">24</text>
+<text x="1025.0" y="516.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 24/14/42</text>
+<text x="1025.0" y="535.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=80; net +12.5%</text>
+<text x="280.0" y="602.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Distant metastasis</text>
+<rect x="503.6" y="573" width="10.3" height="44" fill="#D55E00"/>
+<rect x="513.9" y="573" width="272.2" height="44" fill="#B8B8B8"/>
+<rect x="786.1" y="573" width="47.4" height="44" fill="#0072B2"/>
+<text x="650.0" y="601.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">132</text>
+<text x="809.8" y="601.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">23</text>
+<text x="1025.0" y="594.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">PL/BL/Tie 23/5/132</text>
+<text x="1025.0" y="613.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +11.2%</text>
 </g>
 </svg>
