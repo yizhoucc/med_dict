@@ -312,7 +312,11 @@ def plot_development_pathway() -> None:
     box(out, 1240, 560, 180, 75, ["Regression", "testing"], fill=HARNESS_SOFT, stroke=PL, size=15)
     arrow(out, 1315, 494, 1110, 560)
     arrow(out, 1180, 598, 1240, 598)
-    arrow(out, 1330, 560, 920, 500, color=PL, curved=True)
+    out.append(
+        f'<path d="M1330,635 C1330,645 1320,648 1310,648 H890 '
+        f'C880,648 873,640 873,630 V494" fill="none" stroke="{PL}" '
+        'stroke-width="2.2" marker-end="url(#arrow-blue)"/>'
+    )
     round_rect(out, 840, 663, 560, 40, fill="#FFF7ED", stroke="#C37A2A", radius=7)
     text(out, 1120, 689, "No target-domain physician review of PDAC outputs", 14, anchor="middle", weight=700, fill="#8A520F")
 
@@ -438,7 +442,7 @@ def draw_agreement_matrix(out: list[str], raters: dict[str, list[dict[str, str]]
                 text(out, x + cell / 2, y + cell / 2 + 6, "self", 14, anchor="middle", fill=MUTED)
             elif column > row:
                 agreement, kappa, _ = values[(names[row], names[column])]
-                fraction = (kappa + 0.10) / 0.70
+                fraction = (kappa + 0.10) / 0.80
                 fill = interpolate_hex("#F5F2F8", LLM, fraction)
                 ink = "white" if fraction > 0.58 else TEXT
                 out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{fill}" stroke="white" stroke-width="3"/>')
@@ -459,7 +463,7 @@ def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
     for index in range(100):
         out.append(f'<rect x="{gradient_x + gradient_w * index / 100:.1f}" y="{gradient_y}" width="{gradient_w / 100 + 1:.1f}" height="15" fill="{interpolate_hex("#F5F2F8", LLM, index / 99)}"/>')
     text(out, gradient_x - 12, gradient_y + 13, "κ -0.10", 12, anchor="end", fill=MUTED)
-    text(out, gradient_x + gradient_w + 12, gradient_y + 13, "κ 0.60", 12, fill=MUTED)
+    text(out, gradient_x + gradient_w + 12, gradient_y + 13, "κ 0.70", 12, fill=MUTED)
     text(out, 750, 755, "Color encodes Cohen's κ; each populated cell also reports exact agreement", 13, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "figure3_interrater_matrix_rough.svg")
 
@@ -488,7 +492,7 @@ def plot_core_fields(raters: dict[str, list[dict[str, str]]]) -> None:
     text(out, 32, 62, "Fields sorted by normalized harness-minus-baseline margin", 13, fill=MUTED)
     legend(out, 930, 52, [(BL, "Baseline"), (TIE, "Tie"), (PL, "Harness")], gap=120)
     center, scale, top, row_gap, bar_h = 650, 3.3, 105, 78, 44
-    for tick in [-80, -60, -40, -20, 0, 20, 40, 60, 80]:
+    for tick in [-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100]:
         x = center + tick * scale
         stroke = "#7A858D" if tick == 0 else GRID
         out.append(f'<line x1="{x:.1f}" y1="88" x2="{x:.1f}" y2="612" stroke="{stroke}"/>')
@@ -554,10 +558,10 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     all_rows = [row for rows in raters.values() for row in rows]
     breast = note_margins(all_rows, "b", BREAST_FIELDS)
     pdac = note_margins(all_rows, "p", PDAC_FIELDS)
-    width, height = 1500, 800
+    width, height = 1500, 850
     out = svg_start(width, height)
-    panel(out, 25, 20, 710, 735, "A", "Breast cancer")
-    panel(out, 765, 20, 710, 735, "B", "PDAC")
+    panel(out, 25, 20, 710, 805, "A", "Breast cancer")
+    panel(out, 765, 20, 710, 805, "B", "PDAC")
     draw_margin_panel(out, 35, 68, 680, "Notes ranked by preference margin", breast, "20/20 positive")
     draw_margin_panel(out, 775, 68, 680, "Notes ranked by preference margin", pdac, "19/20 positive; 1 negative")
     svg_end(out, OUTPUT / "figure5_note_margins_rough.svg")

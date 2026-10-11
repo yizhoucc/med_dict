@@ -28,29 +28,29 @@
 <text x="154.0" y="582.6" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 4</text>
 <rect x="170" y="185" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="226.0" y="247.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="282" y="185" width="112" height="112" fill="#7A5FA8" stroke="white" stroke-width="3"/>
+<rect x="282" y="185" width="112" height="112" fill="#8269AD" stroke="white" stroke-width="3"/>
 <text x="338.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">82.9%</text>
 <text x="338.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.65</text>
-<rect x="394" y="185" width="112" height="112" fill="#7A5FA8" stroke="white" stroke-width="3"/>
+<rect x="394" y="185" width="112" height="112" fill="#8369AE" stroke="white" stroke-width="3"/>
 <text x="450.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">80.0%</text>
 <text x="450.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.64</text>
-<rect x="506" y="185" width="112" height="112" fill="#7A5FA8" stroke="white" stroke-width="3"/>
+<rect x="506" y="185" width="112" height="112" fill="#8369AE" stroke="white" stroke-width="3"/>
 <text x="562.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">81.4%</text>
 <text x="562.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.64</text>
 <rect x="170" y="297" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="282" y="297" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="338.0" y="359.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="394" y="297" width="112" height="112" fill="#8A72B2" stroke="white" stroke-width="3"/>
+<rect x="394" y="297" width="112" height="112" fill="#9782BB" stroke="white" stroke-width="3"/>
 <text x="450.0" y="343.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">73.6%</text>
 <text x="450.0" y="369.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.51</text>
-<rect x="506" y="297" width="112" height="112" fill="#866DB0" stroke="white" stroke-width="3"/>
+<rect x="506" y="297" width="112" height="112" fill="#947EB9" stroke="white" stroke-width="3"/>
 <text x="562.0" y="343.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">77.1%</text>
 <text x="562.0" y="369.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.53</text>
 <rect x="170" y="409" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="282" y="409" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="394" y="409" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="450.0" y="471.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="506" y="409" width="112" height="112" fill="#876EB0" stroke="white" stroke-width="3"/>
+<rect x="506" y="409" width="112" height="112" fill="#957FB9" stroke="white" stroke-width="3"/>
 <text x="562.0" y="455.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">73.2%</text>
 <text x="562.0" y="481.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.53</text>
 <rect x="170" y="521" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
@@ -70,29 +70,29 @@
 <text x="894.0" y="582.6" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Oncologist 4</text>
 <rect x="910" y="185" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="966.0" y="247.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="1022" y="185" width="112" height="112" fill="#7C62A9" stroke="white" stroke-width="3"/>
+<rect x="1022" y="185" width="112" height="112" fill="#8B74B3" stroke="white" stroke-width="3"/>
 <text x="1078.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">80.0%</text>
 <text x="1078.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.59</text>
-<rect x="1134" y="185" width="112" height="112" fill="#866DB0" stroke="white" stroke-width="3"/>
+<rect x="1134" y="185" width="112" height="112" fill="#947EB9" stroke="white" stroke-width="3"/>
 <text x="1190.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">73.8%</text>
 <text x="1190.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.53</text>
-<rect x="1246" y="185" width="112" height="112" fill="#846BAE" stroke="white" stroke-width="3"/>
+<rect x="1246" y="185" width="112" height="112" fill="#927BB7" stroke="white" stroke-width="3"/>
 <text x="1302.0" y="231.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">75.8%</text>
 <text x="1302.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.55</text>
 <rect x="910" y="297" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="1022" y="297" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="1078.0" y="359.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="1134" y="297" width="112" height="112" fill="#876EB0" stroke="white" stroke-width="3"/>
+<rect x="1134" y="297" width="112" height="112" fill="#947EB9" stroke="white" stroke-width="3"/>
 <text x="1190.0" y="343.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">73.8%</text>
 <text x="1190.0" y="369.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.53</text>
-<rect x="1246" y="297" width="112" height="112" fill="#8870B1" stroke="white" stroke-width="3"/>
+<rect x="1246" y="297" width="112" height="112" fill="#9680BA" stroke="white" stroke-width="3"/>
 <text x="1302.0" y="343.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">74.2%</text>
 <text x="1302.0" y="369.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.52</text>
 <rect x="910" y="409" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="1022" y="409" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
 <rect x="1134" y="409" width="112" height="112" fill="#F0F2F3" stroke="white" stroke-width="3"/>
 <text x="1190.0" y="471.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">self</text>
-<rect x="1246" y="409" width="112" height="112" fill="#846BAE" stroke="white" stroke-width="3"/>
+<rect x="1246" y="409" width="112" height="112" fill="#927BB8" stroke="white" stroke-width="3"/>
 <text x="1302.0" y="455.0" text-anchor="middle" font-size="18" font-weight="700" fill="white">73.1%</text>
 <text x="1302.0" y="481.0" text-anchor="middle" font-size="16" font-weight="400" fill="white">κ 0.54</text>
 <rect x="910" y="521" width="112" height="112" fill="#FBFBFB" stroke="white" stroke-width="3"/>
@@ -201,7 +201,7 @@
 <rect x="970.8" y="715" width="5.6" height="15" fill="#7B60A9"/>
 <rect x="975.4" y="715" width="5.6" height="15" fill="#7A5FA8"/>
 <text x="508.0" y="728.0" text-anchor="end" font-size="16" font-weight="400" fill="#5E6870">κ -0.10</text>
-<text x="992.0" y="728.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">κ 0.60</text>
+<text x="992.0" y="728.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">κ 0.70</text>
 <text x="750.0" y="755.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Color encodes Cohen&#x27;s κ; each populated cell also reports exact agreement</text>
 </g>
 </svg>

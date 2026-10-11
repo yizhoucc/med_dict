@@ -821,11 +821,10 @@ def wrap_language_sections(body: str) -> str:
     marker = '<div class="language-break" id="chinese-version"></div>'
     english_body, chinese_body = body.split(marker, 1)
     title_end = chinese_body.index("</h1>") + len("</h1>")
-    subtitle_end = chinese_body.index("</p>", title_end) + len("</p>")
-    abstract_start = chinese_body.index('<section class="abstract-section">', subtitle_end)
-    review_metadata = chinese_body[subtitle_end:abstract_start]
+    abstract_start = chinese_body.index('<section class="abstract-section">', title_end)
+    review_metadata = chinese_body[title_end:abstract_start]
     chinese_body = (
-        chinese_body[:subtitle_end]
+        chinese_body[:title_end]
         + '<details class="chinese-review-meta"><summary>'
         + '<span class="details-label-closed">草稿信息与作者确认（点击展开）</span>'
         + '<span class="details-label-open">草稿信息与作者确认（点击收起）</span>'

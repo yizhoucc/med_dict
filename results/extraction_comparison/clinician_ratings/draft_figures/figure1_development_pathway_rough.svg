@@ -91,7 +91,7 @@
 <text x="1330.0" y="612.7" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">testing</text>
 <line x1="1315.0" y1="494.0" x2="1110.0" y2="560.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
 <line x1="1180.0" y1="598.0" x2="1240.0" y2="598.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M1330.0,560.0 C1330.0,472.0 920.0,472.0 920.0,500.0" fill="none" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+<path d="M1330,635 C1330,645 1320,648 1310,648 H890 C880,648 873,640 873,630 V494" fill="none" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
 <rect x="840.0" y="663.0" width="560.0" height="40.0" rx="7" fill="#FFF7ED" stroke="#C37A2A" stroke-width="1.5"/>
 <text x="1120.0" y="689.0" text-anchor="middle" font-size="16" font-weight="700" fill="#8A520F">No target-domain physician review of PDAC outputs</text>
 <rect x="30.0" y="755.0" width="1440.0" height="390.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
