@@ -23,10 +23,13 @@ OUTPUT_CSV = HERE / "adjusted_gee_results.csv"
 OUTPUT_MD = HERE / "ADJUSTED_ANALYSIS.md"
 
 RATER_FILES = {
-    "Oncologist 01": HERE / "simo_breast_pdac_blind_scores_20260921.csv",
-    "Oncologist 02": HERE / "kevin_breast_pdac_blind_scores_20261005.csv",
-    "Oncologist 03": HERE / "bolun_breast_blind_scores_20260921.xlsx",
-    "Oncologist 04": HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv",
+    "Oncologist 01": [HERE / "simo_breast_pdac_blind_scores_20260921.csv"],
+    "Oncologist 02": [HERE / "kevin_breast_pdac_blind_scores_20261005.csv"],
+    "Oncologist 03": [
+        HERE / "bolun_breast_blind_scores_20260921.xlsx",
+        HERE / "bolun_pdac_blind_scores_and_letter_selection_20261006.xlsx",
+    ],
+    "Oncologist 04": [HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv"],
 }
 
 BREAST_FIELDS = [
@@ -64,15 +67,18 @@ class GeeResult:
 
 def read_ratings() -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
-    for evaluator, path in RATER_FILES.items():
-        if path.suffix == ".xlsx":
-            workbook = load_workbook(path, read_only=True, data_only=True)
-            rows = list(workbook["blind_scores"].values)
-            frame = pd.DataFrame(rows[1:], columns=rows[0])
-        else:
-            frame = pd.read_csv(path)
-        frame["evaluator"] = evaluator
-        frames.append(frame)
+    for evaluator, paths in RATER_FILES.items():
+        for path in paths:
+            if path.suffix == ".xlsx":
+                workbook = load_workbook(path, read_only=True, data_only=True)
+                rows = list(workbook["blind_scores"].values)
+                frame = pd.DataFrame(rows[1:], columns=rows[0])
+                workbook.close()
+            else:
+                frame = pd.read_csv(path)
+            frame["evaluator"] = evaluator
+            frame["source_file"] = path.name
+            frames.append(frame)
 
     ratings = pd.concat(frames, ignore_index=True)
     ratings["cancer"] = ratings["sample"].str[0].map(
@@ -83,6 +89,12 @@ def read_ratings() -> pd.DataFrame:
         & ratings["field"].isin(BREAST_FIELDS)
     ) | ((ratings["cancer"] == "PDAC") & ratings["field"].isin(PDAC_FIELDS))
     ratings = ratings[required].copy()
+    duplicate = ratings.duplicated(["evaluator", "sample", "field"], keep=False)
+    if duplicate.any():
+        conflicts = ratings.loc[
+            duplicate, ["evaluator", "sample", "field", "source_file"]
+        ].to_dict("records")
+        raise ValueError(f"Duplicate required judgments across source files: {conflicts}")
     ratings["cluster"] = ratings["sample"]
     ratings["preference_value"] = ratings["score"].map(
         {"A": 1, "B": -1, "TIE": 0}
@@ -162,13 +174,28 @@ def note_sign_summaries(ratings: pd.DataFrame) -> list[dict[str, object]]:
             }
         )
 
+    for cancer, group in ratings.groupby("cancer"):
+        pooled = group.groupby("sample")["preference_value"].sum()
+        positive = int((pooled > 0).sum())
+        negative = int((pooled < 0).sum())
+        tied = int((pooled == 0).sum())
+        summaries.append(
+            {
+                "evaluation": f"All clinicians pooled, {cancer}",
+                "positive": positive,
+                "negative": negative,
+                "tied": tied,
+                "p_value": two_sided_sign_p(positive, negative),
+            }
+        )
+
     pooled = ratings.groupby(["cancer", "sample"])["preference_value"].sum()
     positive = int((pooled > 0).sum())
     negative = int((pooled < 0).sum())
     tied = int((pooled == 0).sum())
     summaries.append(
         {
-            "evaluation": "All clinicians pooled within note",
+            "evaluation": "All clinicians pooled, both cancers",
             "positive": positive,
             "negative": negative,
             "tied": tied,
@@ -194,7 +221,7 @@ def write_results(
     lines = [
         "# Adjusted clinician-preference analysis",
         "",
-        "Updated: 2026-10-05",
+        "Updated: 2026-10-10",
         "",
         "## Primary model",
         "",

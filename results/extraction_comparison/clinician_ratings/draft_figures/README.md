@@ -1,6 +1,6 @@
 # Draft clinician-rating figures
 
-These SVG files are internal trend-check plots generated from the three current clinician-rating exports. They are intentionally plain and are not publication-ready figures.
+These SVG files are internal trend-check plots generated from the four current clinician datasets. Bolun's breast and PDAC ratings are stored in separate source workbooks. The figures are intentionally plain and are not publication-ready artwork.
 
 The exploratory letter plot uses `../patient_letter_scores_oncologist_01_summary.csv`, a deidentified per-note summary derived from the original oncologist scoring workbook.
 
@@ -16,10 +16,10 @@ python3 results/extraction_comparison/clinician_ratings/plot_clinician_ratings.p
 Files:
 
 - `figure1_development_pathway_rough.svg`: breast-cancer development, pancreatic-cancer transfer, and independent clinical evaluation pathway.
-- `figure2_evaluator_distribution_rough.svg`: outcome distribution for the five completed clinician-by-cancer evaluations.
-- `figure3_interrater_matrix_rough.svg`: pairwise breast-cancer exact agreement and Cohen's kappa for the three oncologists.
+- `figure2_evaluator_distribution_rough.svg`: outcome distribution for the eight completed clinician-by-cancer evaluations.
+- `figure3_interrater_matrix_rough.svg`: pairwise exact agreement and Cohen's kappa for all four oncologists, shown separately for breast cancer and PDAC.
 - `figure4_core_fields_rough.svg`: pooled preference distribution across the seven core clinical categories.
-- `figure5_note_margins_rough.svg`: note-level PL-minus-BL field margins for breast cancer and PDAC.
+- `figure5_note_margins_rough.svg`: note-level PL-minus-BL field margins for breast cancer and PDAC, each pooled across four oncologists.
 - `figure6_adjusted_effects_rough.svg`: adjusted overall and cancer-specific odds ratios from the directional-rating GEE.
 - `figure7_staged_ablation_rough.svg`: blinded A-B, B-C, and C-D technical-ablation judgments overall and by cancer.
 - `figure7_human_model_complementarity_rough.svg`: conceptual map of human review burden and model error risk across extraction tasks, embedded as Figure 9.

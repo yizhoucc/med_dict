@@ -20,10 +20,13 @@ from openpyxl import load_workbook
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "draft_figures"
 RATER_FILES = {
-    "Simo": HERE / "simo_breast_pdac_blind_scores_20260921.csv",
-    "Kevin": HERE / "kevin_breast_pdac_blind_scores_20261005.csv",
-    "Bolun": HERE / "bolun_breast_blind_scores_20260921.xlsx",
-    "Zhengrui": HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv",
+    "Simo": [HERE / "simo_breast_pdac_blind_scores_20260921.csv"],
+    "Kevin": [HERE / "kevin_breast_pdac_blind_scores_20261005.csv"],
+    "Bolun": [
+        HERE / "bolun_breast_blind_scores_20260921.xlsx",
+        HERE / "bolun_pdac_blind_scores_and_letter_selection_20261006.xlsx",
+    ],
+    "Zhengrui": [HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv"],
 }
 LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
 ADJUSTED_RESULTS = HERE / "adjusted_gee_results.csv"
@@ -96,14 +99,21 @@ def load_xlsx(path: Path) -> list[dict[str, str]]:
                 for key, value in zip(headers, values_row)
             }
         )
+    workbook.close()
     return rows
 
 
 def load_raters() -> dict[str, list[dict[str, str]]]:
-    return {
-        name: load_xlsx(path) if path.suffix == ".xlsx" else load_csv(path)
-        for name, path in RATER_FILES.items()
-    }
+    raters: dict[str, list[dict[str, str]]] = {}
+    for name, paths in RATER_FILES.items():
+        rows = []
+        for path in paths:
+            rows.extend(load_xlsx(path) if path.suffix == ".xlsx" else load_csv(path))
+        keys = [(row["sample"], row["field"]) for row in rows]
+        if len(keys) != len(set(keys)):
+            raise ValueError(f"Duplicate sample-field judgments for {name}")
+        raters[name] = rows
+    return raters
 
 
 def subset(
@@ -220,7 +230,7 @@ def plot_development_pathway() -> None:
 
     box_w = 320
     ax = panel_xs[0] + 40
-    flow_box(out, ax, 135, box_w, 62, ["56 additional breast notes", "Harness extraction outputs"], "#FFFFFF", "#2B8CBE")
+    flow_box(out, ax, 135, box_w, 62, ["100 breast development notes", "Harness extraction outputs"], "#FFFFFF", "#2B8CBE")
     flow_arrow(out, ax + box_w / 2, 197, ax + box_w / 2, 220)
     flow_box(out, ax, 220, box_w, 76, ["Joint review", "Physician coauthor + model investigators"], "#FFFFFF", "#2B8CBE")
     flow_arrow(out, ax + box_w / 2, 296, ax + box_w / 2, 319)
@@ -232,7 +242,7 @@ def plot_development_pathway() -> None:
     flow_arrow(out, ax + 18, 545, ax - 18, 258, dashed=True)
 
     bx = panel_xs[1] + 40
-    flow_box(out, bx, 135, box_w, 62, ["100 additional PDAC notes", "Transferred harness outputs"], "#FFFFFF", "#756BB1")
+    flow_box(out, bx, 135, box_w, 62, ["100 PDAC development notes", "Transferred harness outputs"], "#FFFFFF", "#756BB1")
     flow_arrow(out, bx + box_w / 2, 197, bx + box_w / 2, 220)
     flow_box(out, bx, 220, box_w, 76, ["Rubric-guided Qwen review", "source-grounded candidate error flags"], "#FFFFFF", "#756BB1")
     flow_arrow(out, bx + box_w / 2, 296, bx + box_w / 2, 319)
@@ -243,7 +253,7 @@ def plot_development_pathway() -> None:
     flow_box(out, bx, 519, box_w, 52, ["No clinician review of PDAC outputs"], "#E8E0F5", "#756BB1", 12)
 
     cx = panel_xs[2] + 40
-    flow_box(out, cx, 135, box_w, 62, ["40 expert-annotated CORAL notes", "20 breast + 20 PDAC"], "#FFFFFF", "#65727C")
+    flow_box(out, cx, 135, box_w, 62, ["40 held-out expert-annotated notes", "20 breast + 20 PDAC"], "#FFFFFF", "#65727C")
     flow_arrow(out, cx + box_w / 2, 197, cx + box_w / 2, 220)
     flow_box(out, cx, 220, box_w, 62, ["Shared frozen Qwen2.5-32B", "Shared target field schema"], "#FFFFFF", "#65727C")
     flow_arrow(out, cx + box_w / 2, 282, cx + box_w / 2, 310)
@@ -256,7 +266,7 @@ def plot_development_pathway() -> None:
     flow_arrow(out, cx + branch_w + branch_gap + branch_w / 2, 396, cx + box_w / 2, 430)
     flow_box(out, cx, 430, box_w, 62, ["Identity-masked A/B comparison", "field-level A better / B better / tie"], "#FFFFFF", "#65727C", 12)
     flow_arrow(out, cx + box_w / 2, 492, cx + box_w / 2, 519)
-    flow_box(out, cx, 519, box_w, 52, ["4 oncologists: breast; 3: PDAC"], "#E9EEF1", "#65727C", 12)
+    flow_box(out, cx, 519, box_w, 52, ["4 oncologists: breast and PDAC"], "#E9EEF1", "#65727C", 12)
 
     out.append(
         '<text x="660" y="635" text-anchor="middle" font-size="13" fill="#465761">'
@@ -320,15 +330,18 @@ def plot_evaluator_distribution(raters: dict[str, list[dict[str, str]]]) -> None
 
 
 def pairwise_agreement(
-    r1: list[dict[str, str]], r2: list[dict[str, str]]
+    r1: list[dict[str, str]],
+    r2: list[dict[str, str]],
+    prefix: str,
+    fields: list[str],
 ) -> tuple[float, float, int]:
     m1 = {
         (row["sample"], row["field"]): row["score"]
-        for row in subset(r1, "b", BREAST_FIELDS)
+        for row in subset(r1, prefix, fields)
     }
     m2 = {
         (row["sample"], row["field"]): row["score"]
-        for row in subset(r2, "b", BREAST_FIELDS)
+        for row in subset(r2, prefix, fields)
     }
     keys = sorted(set(m1) & set(m2))
     total = len(keys)
@@ -342,7 +355,16 @@ def pairwise_agreement(
     return observed, kappa, total
 
 
-def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
+def add_interrater_matrix(
+    out: list[str],
+    raters: dict[str, list[dict[str, str]]],
+    x0: int,
+    y0: int,
+    title: str,
+    prefix: str,
+    fields: list[str],
+    n_per_pair: int,
+) -> None:
     internal_names = list(raters)
     display_names = {
         name: f"Oncologist {index}"
@@ -350,25 +372,27 @@ def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
     }
     values: dict[tuple[str, str], tuple[float, float, int]] = {}
     for name_1, name_2 in combinations(internal_names, 2):
-        values[(name_1, name_2)] = pairwise_agreement(raters[name_1], raters[name_2])
-    left, top, cell = 190, 130, 125
-    width = max(720, left + len(internal_names) * cell + 35)
-    height = max(600, top + len(internal_names) * cell + 40)
-    out = svg_start(
-        width,
-        height,
-        "Pairwise breast-cancer agreement",
-        "Upper triangle: exact agreement; lower triangle: Cohen's kappa; n = 280 per pair",
+        values[(name_1, name_2)] = pairwise_agreement(
+            raters[name_1], raters[name_2], prefix, fields
+        )
+    left, top, cell = x0 + 145, y0 + 80, 110
+    out.append(
+        f'<text x="{x0 + 365}" y="{y0 + 25}" text-anchor="middle" '
+        f'font-size="15" font-weight="700">{esc(title)} (n = {n_per_pair} per pair)</text>'
     )
     for index, name in enumerate(internal_names):
         label = display_names[name]
-        out.append(f'<text x="{left + (index + 0.5) * cell:.1f}" y="112" text-anchor="middle" font-size="13">{esc(label)}</text>')
+        out.append(f'<text x="{left + (index + 0.5) * cell:.1f}" y="{top - 14}" text-anchor="middle" font-size="12">{esc(label)}</text>')
         out.append(f'<text x="{left - 14}" y="{top + (index + 0.55) * cell:.1f}" text-anchor="end" font-size="13">{esc(label)}</text>')
     for i, row_name in enumerate(internal_names):
         for j, column_name in enumerate(internal_names):
             x, y = left + j * cell, top + i * cell
             if i == j:
-                fill, label, sublabel = "#EEF3F6", "Same rater", "280 ratings"
+                fill, label, sublabel = (
+                    "#EEF3F6",
+                    "Same rater",
+                    f"{n_per_pair} ratings",
+                )
             else:
                 pair = (row_name, column_name) if (row_name, column_name) in values else (column_name, row_name)
                 agreement, kappa, _ = values[pair]
@@ -381,6 +405,20 @@ def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
             out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{fill}" stroke="white" stroke-width="3"/>')
             out.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2:.1f}" text-anchor="middle" font-size="20" font-weight="700">{esc(label)}</text>')
             out.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + 22:.1f}" text-anchor="middle" font-size="10" fill="#555555">{esc(sublabel)}</text>')
+
+
+def plot_interrater_matrix(raters: dict[str, list[dict[str, str]]]) -> None:
+    width, height = 1500, 660
+    out = svg_start(
+        width,
+        height,
+        "Pairwise clinician agreement",
+        "Upper triangle: exact agreement; lower triangle: Cohen's kappa",
+    )
+    add_interrater_matrix(
+        out, raters, 10, 70, "A. Breast cancer", "b", BREAST_FIELDS, 280
+    )
+    add_interrater_matrix(out, raters, 760, 70, "B. PDAC", "p", PDAC_FIELDS, 260)
     svg_end(out, OUTPUT / "figure3_interrater_matrix_rough.svg")
 
 
@@ -492,7 +530,7 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
         width,
         height,
         "Per-note clinician preference margins",
-        "(PL better - BL better) / completed ratings; breast pools 4 clinicians and PDAC pools 3",
+        "(PL better - BL better) / completed ratings; both cancers pool 4 clinicians",
     )
     draw_margin_panel(out, 20, 72, 600, 400, "Breast cancer", breast)
     draw_margin_panel(out, 640, 72, 600, 400, "PDAC", pdac)
@@ -731,7 +769,7 @@ def main() -> None:
     plot_adjusted_effects()
     plot_human_model_complementarity()
     plot_technical_vs_clinician(raters)
-    print(f"Wrote 8 rough SVG figures to {OUTPUT}")
+    print(f"Wrote 9 rough SVG figures to {OUTPUT}")
 
 
 if __name__ == "__main__":

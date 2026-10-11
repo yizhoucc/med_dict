@@ -1,6 +1,6 @@
 # Adjusted clinician-preference analysis
 
-Updated: 2026-10-05
+Updated: 2026-10-10
 
 ## Primary model
 
@@ -8,9 +8,9 @@ The primary analysis excludes ties and models whether a directional rating favor
 
 | Scope | Directional judgments | Harness | Baseline | Clusters | Adjusted harness probability | Odds ratio | 95% CI | p value |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Overall | 737 | 596 | 141 | 40 | 80.6% | 4.15 | 3.25-5.29 | 2.56e-30 |
+| Overall | 870 | 699 | 171 | 40 | 80.0% | 4.00 | 3.12-5.11 | 2.67e-28 |
 | Breast cancer | 443 | 363 | 80 | 20 | 81.7% | 4.45 | 3.17-6.25 | 7.04e-18 |
-| PDAC | 294 | 233 | 61 | 20 | 78.8% | 3.71 | 2.64-5.23 | 5.97e-14 |
+| PDAC | 427 | 336 | 91 | 20 | 78.1% | 3.58 | 2.50-5.10 | 2.3e-12 |
 
 The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.
 
@@ -25,9 +25,12 @@ For each evaluator-cancer combination, field ratings were reduced to one harness
 | Oncologist 02, Breast cancer | 20 | 0 | 0 | 1.91e-06 |
 | Oncologist 02, PDAC | 18 | 0 | 2 | 7.63e-06 |
 | Oncologist 03, Breast cancer | 20 | 0 | 0 | 1.91e-06 |
+| Oncologist 03, PDAC | 17 | 1 | 2 | 0.000145 |
 | Oncologist 04, Breast cancer | 16 | 2 | 2 | 0.00131 |
 | Oncologist 04, PDAC | 13 | 4 | 3 | 0.049 |
-| All clinicians pooled within note | 39 | 0 | 1 | 3.64e-12 |
+| All clinicians pooled, Breast cancer | 20 | 0 | 0 | 1.91e-06 |
+| All clinicians pooled, PDAC | 19 | 1 | 0 | 4.01e-05 |
+| All clinicians pooled, both cancers | 39 | 1 | 0 | 7.46e-11 |
 
 ## Interpretation boundary
 

@@ -14,11 +14,11 @@
 <line x1="720.0" y1="90" x2="720.0" y2="326" stroke="#E5E5E5"/>
 <text x="720.0" y="350" text-anchor="middle" font-size="11">16</text>
 <text x="192" y="130" text-anchor="end" font-size="14">Overall</text>
-<line x1="426.9" y1="125" x2="516.6" y2="125" stroke="#2B8CBE" stroke-width="4"/>
-<line x1="426.9" y1="117" x2="426.9" y2="133" stroke="#2B8CBE" stroke-width="2"/>
-<line x1="516.6" y1="117" x2="516.6" y2="133" stroke="#2B8CBE" stroke-width="2"/>
-<circle cx="471.7" cy="125" r="8" fill="#2B8CBE"/>
-<text x="738" y="130" font-size="13">OR 4.15 (95% CI 3.25-5.29)</text>
+<line x1="419.5" y1="125" x2="510.0" y2="125" stroke="#2B8CBE" stroke-width="4"/>
+<line x1="419.5" y1="117" x2="419.5" y2="133" stroke="#2B8CBE" stroke-width="2"/>
+<line x1="510.0" y1="117" x2="510.0" y2="133" stroke="#2B8CBE" stroke-width="2"/>
+<circle cx="464.8" cy="125" r="8" fill="#2B8CBE"/>
+<text x="738" y="130" font-size="13">OR 4.00 (95% CI 3.12-5.11)</text>
 <text x="192" y="200" text-anchor="end" font-size="14">Breast cancer</text>
 <line x1="422.2" y1="195" x2="547.2" y2="195" stroke="#2B8CBE" stroke-width="4"/>
 <line x1="422.2" y1="187" x2="422.2" y2="203" stroke="#2B8CBE" stroke-width="2"/>
@@ -26,11 +26,11 @@
 <circle cx="484.7" cy="195" r="8" fill="#2B8CBE"/>
 <text x="738" y="200" font-size="13">OR 4.45 (95% CI 3.17-6.25)</text>
 <text x="192" y="270" text-anchor="end" font-size="14">PDAC</text>
-<line x1="388.4" y1="265" x2="514.4" y2="265" stroke="#2B8CBE" stroke-width="4"/>
-<line x1="388.4" y1="257" x2="388.4" y2="273" stroke="#2B8CBE" stroke-width="2"/>
-<line x1="514.4" y1="257" x2="514.4" y2="273" stroke="#2B8CBE" stroke-width="2"/>
-<circle cx="451.4" cy="265" r="8" fill="#2B8CBE"/>
-<text x="738" y="270" font-size="13">OR 3.71 (95% CI 2.64-5.23)</text>
+<line x1="378.9" y1="265" x2="509.9" y2="265" stroke="#2B8CBE" stroke-width="4"/>
+<line x1="378.9" y1="257" x2="378.9" y2="273" stroke="#2B8CBE" stroke-width="2"/>
+<line x1="509.9" y1="257" x2="509.9" y2="273" stroke="#2B8CBE" stroke-width="2"/>
+<circle cx="444.4" cy="265" r="8" fill="#2B8CBE"/>
+<text x="738" y="270" font-size="13">OR 3.58 (95% CI 2.50-5.10)</text>
 <text x="465.0" y="379" text-anchor="middle" font-size="12">Odds ratio for harness preference among non-tie judgments (log scale)</text>
 </g>
 </svg>
