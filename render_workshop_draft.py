@@ -384,6 +384,30 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   color: #5b6670;
   line-height: 1.5;
 }
+.english-manuscript-details {
+  margin: 0 0 44px;
+  border: 1px solid #b9c9d6;
+  border-radius: 10px;
+  background: #f8fbfd;
+}
+.english-manuscript-details > summary {
+  padding: 15px 18px;
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 750;
+}
+.english-manuscript-details[open] > summary {
+  border-bottom: 1px solid #d5e0e8;
+}
+.english-manuscript-details:not([open]) .details-label-open,
+.english-manuscript-details[open] .details-label-closed {
+  display: none;
+}
+.english-manuscript-details > .english-version {
+  padding: 0 18px 20px;
+  background: white;
+}
 @media (max-width: 980px) {
   .layout { display: block; width: min(920px, calc(100% - 22px)); margin-top: 11px; }
   .toc { position: relative; top: 0; max-height: none; margin-bottom: 12px; }
@@ -404,6 +428,11 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h3 { page-break-after: avoid; font-size: 13pt; }
   .rough-figure, .table-wrap { break-inside: avoid; }
   .rough-figure img { max-height: 650px; object-fit: contain; }
+  .english-manuscript-details { margin: 0; border: 0; background: white; }
+  .english-manuscript-details > summary { display: none; }
+  .english-manuscript-details:not([open]) > .english-version {
+    display: block !important;
+  }
   .chinese-version .author-confirmation-index,
   .chinese-version .author-note { width: 100%; break-inside: avoid; }
 }
@@ -662,13 +691,18 @@ def style_sections(body: str) -> str:
 
 
 def wrap_language_sections(body: str) -> str:
-    """Scope review-only annotations to the Chinese manuscript."""
+    """Collapse English on screen and keep Chinese review notes separately scoped."""
     marker = '<div class="language-break" id="chinese-version"></div>'
     english_body, chinese_body = body.split(marker, 1)
     return (
+        '<details class="english-manuscript-details">'
+        '<summary>'
+        '<span class="details-label-closed">English manuscript (click to expand) / 英文稿（点击展开）</span>'
+        '<span class="details-label-open">English manuscript (click to collapse) / 英文稿（点击收起）</span>'
+        '</summary>'
         '<section class="manuscript-language english-version" lang="en">'
         + english_body
-        + '</section>'
+        + '</section></details>'
         + '<section class="manuscript-language chinese-version language-break" '
         + 'id="chinese-version" lang="zh-CN">'
         + chinese_body
@@ -755,6 +789,9 @@ def main() -> None:
         'id="chinese-version"',
         'class="manuscript-language english-version" lang="en"',
         'class="manuscript-language chinese-version language-break"',
+        '<details class="english-manuscript-details">',
+        'English manuscript (click to expand)',
+        'English manuscript (click to collapse)',
         'id="author-confirmation-index"',
         "供临床合作者审阅的问题",
         "参考文献",
@@ -764,13 +801,47 @@ def main() -> None:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
     if output.count('<figure class="rough-figure">') != 16:
         raise RuntimeError("Expected eight embedded figures in each language version.")
-    if output.count('<aside class="author-note ') != 2:
-        raise RuntimeError("Expected two author-confirmation cards in the Chinese version.")
+    if output.count('<aside class="author-note ') != 1:
+        raise RuntimeError("Expected one author-confirmation card in the Chinese version.")
+    details_start = output.index('<details class="english-manuscript-details">')
+    details_end = output.index('</details>', details_start)
+    english_start = output.index('class="manuscript-language english-version"')
     chinese_start = output.index('id="chinese-version"')
+    if not (details_start < english_start < details_end < chinese_start):
+        raise RuntimeError("English must be inside details and Chinese must remain outside it.")
+    details_tag = output[details_start : output.index('>', details_start) + 1]
+    if " open" in details_tag:
+        raise RuntimeError("The English manuscript details element must be closed by default.")
+    if '.english-manuscript-details > summary { display: none; }' not in output:
+        raise RuntimeError("Print CSS must hide the English details summary.")
+    if 'display: block !important;' not in output:
+        raise RuntimeError("Print CSS must expose the closed English manuscript.")
     if '<aside class="author-note ' in output[:chinese_start]:
         raise RuntimeError("Author-confirmation cards must not appear in the English version.")
     if "onclick=" in output or "<script" in output:
         raise RuntimeError("The review copy must remain JavaScript-free.")
+    element_ids = re.findall(r'\bid="([^"]+)"', output)
+    duplicate_ids = sorted({value for value in element_ids if element_ids.count(value) > 1})
+    if duplicate_ids:
+        raise RuntimeError(f"Rendered HTML contains duplicate IDs: {duplicate_ids}")
+    hrefs = re.findall(r'\bhref="([^"]+)"', output)
+    missing_anchors = sorted(
+        {href for href in hrefs if href.startswith("#") and href[1:] not in element_ids}
+    )
+    if missing_anchors:
+        raise RuntimeError(f"Rendered HTML contains missing anchors: {missing_anchors}")
+    local_targets = {
+        href
+        for href in hrefs
+        if not href.startswith("#") and "://" not in href and not href.startswith("mailto:")
+    }
+    missing_local_targets = sorted(
+        href for href in local_targets if not (ROOT / href).exists()
+    )
+    if missing_local_targets:
+        raise RuntimeError(
+            f"Rendered HTML contains missing local resources: {missing_local_targets}"
+        )
     print(f"Wrote {OUTPUT.name} ({len(output):,} characters)")
 
 

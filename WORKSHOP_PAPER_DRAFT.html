@@ -336,6 +336,30 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   color: #5b6670;
   line-height: 1.5;
 }
+.english-manuscript-details {
+  margin: 0 0 44px;
+  border: 1px solid #b9c9d6;
+  border-radius: 10px;
+  background: #f8fbfd;
+}
+.english-manuscript-details > summary {
+  padding: 15px 18px;
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 750;
+}
+.english-manuscript-details[open] > summary {
+  border-bottom: 1px solid #d5e0e8;
+}
+.english-manuscript-details:not([open]) .details-label-open,
+.english-manuscript-details[open] .details-label-closed {
+  display: none;
+}
+.english-manuscript-details > .english-version {
+  padding: 0 18px 20px;
+  background: white;
+}
 @media (max-width: 980px) {
   .layout { display: block; width: min(920px, calc(100% - 22px)); margin-top: 11px; }
   .toc { position: relative; top: 0; max-height: none; margin-bottom: 12px; }
@@ -356,6 +380,11 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h3 { page-break-after: avoid; font-size: 13pt; }
   .rough-figure, .table-wrap { break-inside: avoid; }
   .rough-figure img { max-height: 650px; object-fit: contain; }
+  .english-manuscript-details { margin: 0; border: 0; background: white; }
+  .english-manuscript-details > summary { display: none; }
+  .english-manuscript-details:not([open]) > .english-version {
+    display: block !important;
+  }
   .chinese-version .author-confirmation-index,
   .chinese-version .author-note { width: 100%; break-inside: avoid; }
 }
@@ -455,7 +484,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <a class="level-2" href="#附录-a-相关工作对照表-供合作者审阅">附录 A：相关工作对照表（供合作者审阅）</a>
 <a class="level-2" href="#附录-b-评估方法文献-供合作者审阅">附录 B：评估方法文献（供合作者审阅）</a>
 </nav>
-    <article><section class="manuscript-language english-version" lang="en"><!--
+    <article><details class="english-manuscript-details"><summary><span class="details-label-closed">English manuscript (click to expand) / 英文稿（点击展开）</span><span class="details-label-open">English manuscript (click to collapse) / 英文稿（点击收起）</span></summary><section class="manuscript-language english-version" lang="en"><!--
 BILINGUAL MAINTENANCE RULE:
 1. Keep the complete English manuscript first and the complete Chinese manuscript second in this same file.
 2. The two versions must match in scientific claims, numbers, main result tables, figure numbering, and references. The Chinese review version may contain additional annotations and review-only appendices.
@@ -603,7 +632,7 @@ BILINGUAL MAINTENANCE RULE:
 <li>C, condition B plus the semantic, faithfulness, and temporal verification gates.</li>
 <li>D, condition C plus deterministic inline processing and the complete POST-hook layer used by the full inference harness.</li>
 </ol>
-<p>The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The initial 12-pair calibration set was re-read under the final rubric before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The full judge instructions are reproduced in Appendix S1. The run occurred on October 1, 2026 (PDT). The backend model/version, reasoning effort, and service tier could not be recovered from the preserved study artifacts and remain an author-confirmation item.</p>
+<p>The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The initial 12-pair calibration set was re-read under the final rubric before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The full judge instructions are reproduced in Appendix S1. The run occurred on October 1, 2026 (PDT). The Codex judge used <code>gpt-5.6-sol</code> with <code>xhigh</code> reasoning effort and the <code>default</code> service tier.</p>
 <h2 id="3-results">3. Results</h2>
 <h3 id="3-1-development-path-and-cross-cancer-adaptation">3.1 Development path and cross-cancer adaptation</h3>
 <p>The development pool contained 100 notes per cancer type. Smaller subsets were used for faster targeted iterations, while major and final runs covered all 100 notes. The pancreatic sequence comprised nine checkpoints on a fixed 30-note subset and three on the full 100-note development set. Breast-cancer revisions were informed by the physician author and model-development authors. Pancreatic-cancer revisions were made without physician review of the target-domain outputs, using an externally synthesized written rubric, source-grounded Qwen review, and author-controlled implementation.</p>
@@ -878,7 +907,7 @@ BILINGUAL MAINTENANCE RULE:
 <li><strong>v0.18:</strong> Replaced the Introduction with the physician-led clinical framing; clarified the development and untouched holdout cohorts; updated all extraction results and figures for four oncologists across both cancers; removed the final test-set LLM audit and quantitative letter results; and added the blinded Codex judge instructions.</li>
 </ul>
 <h2 id="appendix-s1-blinded-codex-judge-instructions">Appendix S1. Blinded Codex judge instructions</h2>
-<p>The ablation judge ran on October 1, 2026 (PDT). The following four instructions are reproduced verbatim from the judge task record, except that the local path prefix <code>/Users/yizhoucc/repo/med_dict</code> has been replaced with <code>&lt;REPO_ROOT&gt;</code>. No other text has been changed. Backend model/version, reasoning effort, and service tier: <strong>[AUTHOR CONFIRMATION REQUIRED: not recoverable from the preserved study artifacts.]</strong></p>
+<p>The ablation judge ran on October 1, 2026 (PDT) with model <code>gpt-5.6-sol</code>, <code>xhigh</code> reasoning effort, and the <code>default</code> service tier. The following four instructions are reproduced verbatim from the judge task record, except that the local path prefix <code>/Users/yizhoucc/repo/med_dict</code> has been replaced with <code>&lt;REPO_ROOT&gt;</code>. No other text has been changed.</p>
 <h3 id="initial-12-pair-calibration-instruction">Initial 12-pair calibration instruction</h3>
 <pre><code class="language-text">Act as an independent blinded judge for a medical information-extraction ablation. Do NOT read or use AGENTS.md, CLAUDE.md, any session log, manuscript, analysis file, git history, or any `judge_pairs.private_mapping.jsonl`. Do not try to identify the systems. Use only the public blinded input files listed below and the clinical note contained in each record.
 
@@ -937,7 +966,7 @@ Write each completed judgment immediately to `&lt;REPO_ROOT&gt;/results/staged_a
 <li id="ref-en-22">Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. <em>JAMA Network Open</em>. 2021;4(7):e2115334. <a href="https://doi.org/10.1001/jamanetworkopen.2021.15334">https://doi.org/10.1001/jamanetworkopen.2021.15334</a>. <span class="reference-note"><strong>Draft relevance:</strong> This study of nearly 3 million outpatient notes documents increasing note length and redundancy and the contribution of copied and templated text.</span></li>
 <li id="ref-en-23">Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. <em>npj Digital Medicine</em>. 2025;8:301. <a href="https://doi.org/10.1038/s41746-025-01686-z">https://doi.org/10.1038/s41746-025-01686-z</a>. <span class="reference-note"><strong>Draft relevance:</strong> This study provides a close precedent for human-in-the-loop refinement, error ontology development, and general instructions rather than case-specific fixes.</span></li>
 </ol>
-</section></section><section class="manuscript-language chinese-version language-break" id="chinese-version" lang="zh-CN">
+</section></section></details><section class="manuscript-language chinese-version language-break" id="chinese-version" lang="zh-CN">
 <h1>从医生指导的 extraction 到 AI 辅助的跨癌种适配：面向肿瘤病历与患者沟通的 inference harness</h1>
 <p><strong>供临床合作者审阅的试点报告草稿</strong></p>
 <p>版本 0.18，2026 年 10 月</p>
@@ -951,10 +980,9 @@ Write each completed judgment immediately to `&lt;REPO_ROOT&gt;/results/staged_a
 </blockquote>
 <section class="author-confirmation-index" id="author-confirmation-index">
 <h2 id="作者确认清单">作者确认清单</h2>
-<p>共 2 项。方法与结果口径问题已经按作者确认更新。当前只保留无法从 artifact 恢复的 Codex backend metadata，以及最终 clinical accuracy 和措辞需由 physician author 复核的提醒。</p>
+<p>共 1 项。方法、结果和 Codex judge 配置已经按作者确认更新。当前只保留最终 clinical accuracy 和措辞需由 physician author 复核的提醒。</p>
 <ol>
-<li><a href="#author-note-01"><span class="status-badge badge-critical">必须确认</span>Codex ablation judge 的 backend metadata</a></li>
-<li><a href="#author-note-02"><span class="status-badge badge-suggested">最终复核</span>clinical accuracy 与医学措辞</a></li>
+<li><a href="#author-note-01"><span class="status-badge badge-suggested">最终复核</span>clinical accuracy 与医学措辞</a></li>
 </ol>
 </section>
 <section class="review-section"><h2 id="供临床合作者审阅的问题">供临床合作者审阅的问题</h2>
@@ -1096,14 +1124,7 @@ Write each completed judgment immediately to `&lt;REPO_ROOT&gt;/results/staged_a
 <li>C：在 B 上增加 semantic、faithfulness 和 temporal verification gates。</li>
 <li>D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。</li>
 </ol>
-<p>实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。完整 judge instructions 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。</p>
-<aside class="author-note severity-critical" id="author-note-01">
-<span class="status-badge badge-critical">必须确认</span>
-<h4>Codex ablation judge 的 backend metadata</h4>
-<p><strong>已确认：</strong>运行日期和四段原始 instructions 已恢复并收录于 Appendix S1。</p>
-<p><strong>仍需确认：</strong>backend model/version、reasoning effort 和 service tier 无法从现有 artifact 恢复。若作者无法补齐，投稿稿应明确报告这一缺失。</p>
-<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
-</aside>
+<p>实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。完整 judge instructions 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 <code>gpt-5.6-sol</code>，reasoning effort 为 <code>xhigh</code>，service tier 为 <code>default</code>。</p>
 <blockquote>
 <p><strong>协作说明：</strong> B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。</p>
 </blockquote>
@@ -1388,7 +1409,7 @@ Write each completed judgment immediately to `&lt;REPO_ROOT&gt;/results/staged_a
 <h2 id="5-结论">5. 结论</h2>
 <p class="todo">[最终结论：在一项由多位肿瘤科医生参与、隐藏系统标签的评估中，由失败模式驱动的 inference harness 相较于使用同一模型的 single-prompt baseline 获得了显著的临床医生偏好。]</p>
 <p>当前 pilot 支持一条分阶段开发路线。Human-in-the-loop review 把乳腺癌 extraction error 转化为明确的 inference harness。General-purpose external LLM 和 source-grounded Qwen reviewer 随后支持 PDAC adaptation，期间没有 target-domain physician 审阅，workflow 修改仍由模型开发作者控制，模型权重始终冻结。独立肿瘤科医生在两个癌种中都更偏好 inference harness。Technical ablation 将最清楚的 component-level gain 定位在 verification gates，并发现 deterministic hook layer 存在癌种相关的取舍。在提出广泛的确证性结论前，仍需区分不同类型的 <code>TIE</code>，针对 component changes 做医生复核，并增加肿瘤科医生和 external validation。</p>
-<aside class="author-note severity-suggested" id="author-note-02">
+<aside class="author-note severity-suggested" id="author-note-01">
 <span class="status-badge badge-suggested">最终复核</span>
 <h4>Clinical accuracy 与医学措辞</h4>
 <p>方法与结果口径已经按作者确认更新。投稿前请 physician author 复核 clinical accuracy、临床术语和 Discussion 中的医学 interpretation。</p>
@@ -1400,7 +1421,7 @@ Write each completed judgment immediately to `&lt;REPO_ROOT&gt;/results/staged_a
 <li><strong>v0.18：</strong> 使用 physician-led clinical framing 重写 Introduction；明确 development data 和 untouched holdout test set；用四位肿瘤科医生对两个癌种的完整结果和新图统一更新全文；删除 final test-set LLM audit 和定量 letter results；加入 blinded Codex judge instructions。</li>
 </ul>
 <h2 id="appendix-s1-blinded-codex-judge-instructions-2">Appendix S1. Blinded Codex judge instructions</h2>
-<p>Ablation judge 于 2026 年 10 月 1 日（PDT）运行。下面四段文字来自 judge task record。除把本地路径前缀 <code>/Users/yizhoucc/repo/med_dict</code> 替换为 <code>&lt;REPO_ROOT&gt;</code> 外，其余文字均按原文收录。Backend model/version、reasoning effort 和 service tier：<strong>[需要作者确认：现有 study artifacts 无法恢复。]</strong></p>
+<p>Ablation judge 于 2026 年 10 月 1 日（PDT）运行，model 为 <code>gpt-5.6-sol</code>，reasoning effort 为 <code>xhigh</code>，service tier 为 <code>default</code>。下面四段文字来自 judge task record。除把本地路径前缀 <code>/Users/yizhoucc/repo/med_dict</code> 替换为 <code>&lt;REPO_ROOT&gt;</code> 外，其余文字均按原文收录。</p>
 <h3 id="initial-12-pair-calibration-instruction-2">Initial 12-pair calibration instruction</h3>
 <pre><code class="language-text">Act as an independent blinded judge for a medical information-extraction ablation. Do NOT read or use AGENTS.md, CLAUDE.md, any session log, manuscript, analysis file, git history, or any `judge_pairs.private_mapping.jsonl`. Do not try to identify the systems. Use only the public blinded input files listed below and the clinical note contained in each record.
 

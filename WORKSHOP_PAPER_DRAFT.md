@@ -152,7 +152,7 @@ We ran a secondary technical ablation on the same 20 breast-cancer and 20 pancre
 3. C, condition B plus the semantic, faithfulness, and temporal verification gates.
 4. D, condition C plus deterministic inline processing and the complete POST-hook layer used by the full inference harness.
 
-The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The initial 12-pair calibration set was re-read under the final rubric before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The full judge instructions are reproduced in Appendix S1. The run occurred on October 1, 2026 (PDT). The backend model/version, reasoning effort, and service tier could not be recovered from the preserved study artifacts and remain an author-confirmation item.
+The comparison used adjacent stages, A versus B, B versus C, and C versus D, for 120 blinded pairs. A fresh Codex judge was given only the source note and the two outputs. It did not receive the project instructions, manuscript, prior analyses, Git history, or the private condition mapping. The judge prioritized source faithfulness, then completeness, and used TIE when differences were minor or offsetting. The initial 12-pair calibration set was re-read under the final rubric before decoding. We report exact two-sided sign tests after excluding ties. These model-generated labels are secondary technical evidence and do not replace oncologist evaluation. The full judge instructions are reproduced in Appendix S1. The run occurred on October 1, 2026 (PDT). The Codex judge used `gpt-5.6-sol` with `xhigh` reasoning effort and the `default` service tier.
 
 ## 3. Results
 
@@ -350,7 +350,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Appendix S1. Blinded Codex judge instructions
 
-The ablation judge ran on October 1, 2026 (PDT). The following four instructions are reproduced verbatim from the judge task record, except that the local path prefix `/Users/yizhoucc/repo/med_dict` has been replaced with `<REPO_ROOT>`. No other text has been changed. Backend model/version, reasoning effort, and service tier: **[AUTHOR CONFIRMATION REQUIRED: not recoverable from the preserved study artifacts.]**
+The ablation judge ran on October 1, 2026 (PDT) with model `gpt-5.6-sol`, `xhigh` reasoning effort, and the `default` service tier. The following four instructions are reproduced verbatim from the judge task record, except that the local path prefix `/Users/yizhoucc/repo/med_dict` has been replaced with `<REPO_ROOT>`. No other text has been changed.
 
 ### Initial 12-pair calibration instruction
 
@@ -446,10 +446,9 @@ Audit artifacts: [full blinded summary](results/staged_ablation_annotated_202610
 
 <section class="author-confirmation-index" id="author-confirmation-index">
 <h2>作者确认清单</h2>
-<p>共 2 项。方法与结果口径问题已经按作者确认更新。当前只保留无法从 artifact 恢复的 Codex backend metadata，以及最终 clinical accuracy 和措辞需由 physician author 复核的提醒。</p>
+<p>共 1 项。方法、结果和 Codex judge 配置已经按作者确认更新。当前只保留最终 clinical accuracy 和措辞需由 physician author 复核的提醒。</p>
 <ol>
-<li><a href="#author-note-01"><span class="status-badge badge-critical">必须确认</span>Codex ablation judge 的 backend metadata</a></li>
-<li><a href="#author-note-02"><span class="status-badge badge-suggested">最终复核</span>clinical accuracy 与医学措辞</a></li>
+<li><a href="#author-note-01"><span class="status-badge badge-suggested">最终复核</span>clinical accuracy 与医学措辞</a></li>
 </ol>
 </section>
 
@@ -600,15 +599,7 @@ LLM 辅助审查只用于开发阶段，尤其服务于 PDAC adaptation。针对
 3. C：在 B 上增加 semantic、faithfulness 和 temporal verification gates。
 4. D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。
 
-实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。完整 judge instructions 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。
-
-<aside class="author-note severity-critical" id="author-note-01">
-<span class="status-badge badge-critical">必须确认</span>
-<h4>Codex ablation judge 的 backend metadata</h4>
-<p><strong>已确认：</strong>运行日期和四段原始 instructions 已恢复并收录于 Appendix S1。</p>
-<p><strong>仍需确认：</strong>backend model/version、reasoning effort 和 service tier 无法从现有 artifact 恢复。若作者无法补齐，投稿稿应明确报告这一缺失。</p>
-<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
-</aside>
+实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。完整 judge instructions 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。
 
 > **协作说明：** B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。
 
@@ -811,7 +802,7 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非临
 
 当前 pilot 支持一条分阶段开发路线。Human-in-the-loop review 把乳腺癌 extraction error 转化为明确的 inference harness。General-purpose external LLM 和 source-grounded Qwen reviewer 随后支持 PDAC adaptation，期间没有 target-domain physician 审阅，workflow 修改仍由模型开发作者控制，模型权重始终冻结。独立肿瘤科医生在两个癌种中都更偏好 inference harness。Technical ablation 将最清楚的 component-level gain 定位在 verification gates，并发现 deterministic hook layer 存在癌种相关的取舍。在提出广泛的确证性结论前，仍需区分不同类型的 `TIE`，针对 component changes 做医生复核，并增加肿瘤科医生和 external validation。
 
-<aside class="author-note severity-suggested" id="author-note-02">
+<aside class="author-note severity-suggested" id="author-note-01">
 <span class="status-badge badge-suggested">最终复核</span>
 <h4>Clinical accuracy 与医学措辞</h4>
 <p>方法与结果口径已经按作者确认更新。投稿前请 physician author 复核 clinical accuracy、临床术语和 Discussion 中的医学 interpretation。</p>
@@ -825,7 +816,7 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非临
 
 ## Appendix S1. Blinded Codex judge instructions
 
-Ablation judge 于 2026 年 10 月 1 日（PDT）运行。下面四段文字来自 judge task record。除把本地路径前缀 `/Users/yizhoucc/repo/med_dict` 替换为 `<REPO_ROOT>` 外，其余文字均按原文收录。Backend model/version、reasoning effort 和 service tier：**[需要作者确认：现有 study artifacts 无法恢复。]**
+Ablation judge 于 2026 年 10 月 1 日（PDT）运行，model 为 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。下面四段文字来自 judge task record。除把本地路径前缀 `/Users/yizhoucc/repo/med_dict` 替换为 `<REPO_ROOT>` 外，其余文字均按原文收录。
 
 ### Initial 12-pair calibration instruction
 
