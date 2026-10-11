@@ -19,6 +19,12 @@
   --violet-soft: #f4f0fb;
   --warning: #8a5a00;
   --warning-soft: #fff7df;
+  --confirm: #a23b3b;
+  --confirm-soft: #fff1f0;
+  --suggest: #8a5a00;
+  --suggest-soft: #fff8e6;
+  --verified: #24613b;
+  --verified-soft: #edf8f0;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -54,6 +60,86 @@ body {
 .review-checklist li { margin: 0.35rem 0; }
 .review-checklist .done { color: #24613b; }
 .review-checklist .open { color: #825600; }
+.chinese-version .author-confirmation-index {
+  margin: 24px 0 34px;
+  padding: 20px 22px;
+  border: 1px solid #c9d6e0;
+  border-left: 6px solid var(--navy);
+  border-radius: 11px;
+  background: #f7fafc;
+}
+.chinese-version .author-confirmation-index h2 {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  font-size: 1.3rem;
+}
+.chinese-version .author-confirmation-index > p {
+  margin: 6px 0 14px;
+  color: var(--muted);
+}
+.chinese-version .author-confirmation-index ol { margin: 0; padding-left: 1.6rem; }
+.chinese-version .author-confirmation-index li { margin: 0.48rem 0; }
+.chinese-version .author-confirmation-index a {
+  color: var(--navy);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.chinese-version .status-badge {
+  display: inline-block;
+  min-width: 5.8em;
+  margin-right: 0.45em;
+  padding: 1px 7px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 750;
+  line-height: 1.55;
+  text-align: center;
+  vertical-align: 0.08em;
+}
+.chinese-version .badge-critical { color: var(--confirm); background: var(--confirm-soft); }
+.chinese-version .badge-suggested { color: var(--suggest); background: var(--suggest-soft); }
+.chinese-version .badge-verified { color: var(--verified); background: var(--verified-soft); }
+.chinese-version .author-note {
+  width: 100%;
+  margin: 18px 0 24px;
+  padding: 15px 17px;
+  border: 1px solid #d7dee5;
+  border-left: 5px solid var(--navy);
+  border-radius: 9px;
+  background: #fbfcfd;
+  scroll-margin-top: 18px;
+  break-inside: avoid;
+}
+.chinese-version .author-note.severity-critical {
+  border-left-color: var(--confirm);
+  background: var(--confirm-soft);
+}
+.chinese-version .author-note.severity-suggested {
+  border-left-color: var(--suggest);
+  background: var(--suggest-soft);
+}
+.chinese-version .author-note.severity-verified {
+  border-left-color: var(--verified);
+  background: var(--verified-soft);
+}
+.chinese-version .author-note:target {
+  outline: 3px solid rgba(43, 140, 190, 0.28);
+  outline-offset: 3px;
+}
+.chinese-version .author-note h4 {
+  margin: 7px 0 8px;
+  color: #20394d;
+  font-size: 1rem;
+}
+.chinese-version .author-note p { margin: 6px 0; }
+.chinese-version .author-note .back-link {
+  display: inline-block;
+  margin-top: 5px;
+  color: #4a6071;
+  font-size: 0.8rem;
+}
 .toc {
   position: sticky;
   top: 18px;
@@ -256,6 +342,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   .toc a { display: none; }
   article { padding: 30px 24px 55px; }
   h1 { font-size: 29px; }
+  .chinese-version .author-confirmation-index,
+  .chinese-version .author-note { width: 100%; }
 }
 @media print {
   @page { size: letter; margin: 16mm; }
@@ -268,6 +356,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h3 { page-break-after: avoid; font-size: 13pt; }
   .rough-figure, .table-wrap { break-inside: avoid; }
   .rough-figure img { max-height: 650px; object-fit: contain; }
+  .chinese-version .author-confirmation-index,
+  .chinese-version .author-note { width: 100%; break-inside: avoid; }
 }
 </style>
 </head>
@@ -275,7 +365,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   <div class="layout">
     <nav class="toc">
 <div class="toc-title">Workshop draft</div>
-<div class="toc-actions"><button onclick="window.print()">Print / Save PDF</button></div>
+<div class="toc-actions">Use the browser print command to save a PDF.</div>
 <a class="level-2" href="#abstract">Abstract</a>
 <a class="level-3" href="#background">Background</a>
 <a class="level-3" href="#objective">Objective</a>
@@ -315,6 +405,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <a class="level-3" href="#4-9-study-boundaries-and-next-steps">4.9 Study boundaries and next steps</a>
 <a class="level-2" href="#5-conclusion">5. Conclusion</a>
 <a class="level-2" href="#references">References</a>
+<a class="level-2" href="#作者确认清单">作者确认清单</a>
 <a class="level-2" href="#供临床合作者审阅的问题">供临床合作者审阅的问题</a>
 <a class="level-2" href="#摘要">摘要</a>
 <a class="level-3" href="#背景">背景</a>
@@ -358,7 +449,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 <a class="level-2" href="#附录-a-相关工作对照表-供合作者审阅">附录 A：相关工作对照表（供合作者审阅）</a>
 <a class="level-2" href="#附录-b-评估方法文献-供合作者审阅">附录 B：评估方法文献（供合作者审阅）</a>
 </nav>
-    <article><!--
+    <article><section class="manuscript-language english-version" lang="en"><!--
 BILINGUAL MAINTENANCE RULE:
 1. Keep the complete English manuscript first and the complete Chinese manuscript second in this same file.
 2. The two versions must match in scientific claims, numbers, main result tables, figure numbering, and references. The Chinese review version may contain additional annotations and review-only appendices.
@@ -376,22 +467,6 @@ BILINGUAL MAINTENANCE RULE:
   <span class="chip">HTML review copy</span>
 </div>
 <div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>
-<section class="review-checklist">
-  <h2>合作者审阅 Checklist</h2>
-  <ul>
-    <li class="done">✓ Figure 1 至 Figure 9 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
-    <li class="done">✓ 3.2 的四医生调整后主分析已完成：GEE OR 4.15，95% CI 3.25 to 5.29，p&lt;0.001。</li>
-    <li class="done">✓ 已确认医生评审使用最终 baseline；Methods 明确评估的是含 source attribution 的完整 harness 输出，不把 attribution 单独归因。</li>
-    <li class="done">✓ 已在 Results 保留自由文本评论对 `TIE` 含义的解释，并在 Discussion 将其列为主要 limitation。</li>
-    <li class="done">✓ Literature review 已更新至 20 篇主稿引用；文内编号可跳转到带一句话简评的中英文参考文献条目。</li>
-    <li class="done">✓ 论文主线已按临床合作者建议重排为 breast human-in-the-loop、PDAC agent-assisted adaptation、独立 extraction evaluation 和 downstream letter generation。</li>
-    <li class="open">□ 对预先选定的一部分 `TIE` 做人工 adjudication，区分“两边都对”和“两边都错”。</li>
-    <li class="done">✓ 四级 staged ablation 已完成：A-B 17:17:6，B-C 2:24:14，C-D 19:16:5；结果明确标为 single-LLM secondary technical evidence。</li>
-    <li class="open">□ 决定是否补做直接 randomized blinded A-vs-D comparison，并对 C-vs-D 改变的少量输出做医生复核。</li>
-    <li class="done">✓ Related-work 对照表已移到中文版文末审阅附录，Discussion 改为自然引用。</li>
-    <li class="open">□ 全文确定后最后重写 Abstract。</li>
-  </ul>
-</section>
 <p><strong>Pilot report</strong></p>
 <p>Version 0.17, October 2026</p>
 <section class="abstract-section"><h2 id="abstract">Abstract</h2>
@@ -897,7 +972,7 @@ BILINGUAL MAINTENANCE RULE:
 <li id="ref-en-19">Tam TYC, Sivarajkumar S, Kapoor S, et al. A framework for human evaluation of large language models in healthcare derived from literature review. <em>npj Digital Medicine</em>. 2024;7:258. <a href="https://doi.org/10.1038/s41746-024-01258-7">https://doi.org/10.1038/s41746-024-01258-7</a>. <span class="reference-note"><strong>Draft relevance:</strong> Its review of 142 studies and QUEST framework directly inform evaluator selection, rating dimensions, reliability assessment, and adjudication for a stronger follow-up study.</span></li>
 <li id="ref-en-20">Estevez M, Singh N, Dyson L, et al. Ensuring Reliability of Curated Electronic Health Record-Derived Data: The Validation of Accuracy for Large Language Model-/Machine Learning-Extracted Information and Data (VALID) Framework. <em>JCO Clinical Cancer Informatics</em>. 2026;10:e2500215. <a href="https://doi.org/10.1200/CCI-25-00215">https://doi.org/10.1200/CCI-25-00215</a>. <span class="reference-note"><strong>Draft relevance:</strong> VALID requires variable-level expert-reference benchmarking, internal consistency and plausibility checks, and replication, clarifying why our preference endpoint is not yet an absolute correctness assessment.</span></li>
 </ol>
-</section><div class="language-break" id="chinese-version"></div>
+</section></section><section class="manuscript-language chinese-version language-break" id="chinese-version" lang="zh-CN">
 <h1>从医生指导的 extraction 到 AI 辅助的跨癌种适配：面向肿瘤病历与患者沟通的 inference harness</h1>
 <p><strong>供临床合作者审阅的试点报告草稿</strong></p>
 <p>版本 0.16，2026 年 10 月</p>
@@ -909,6 +984,29 @@ BILINGUAL MAINTENANCE RULE:
 <blockquote>
 <p><strong>术语约定：</strong> 中文审阅稿保留 inference harness、workflow、pipeline、baseline、verification gate、hook 和 LLM-as-a-judge 等英文术语，避免翻译后与代码和实验记录中的名称对不上。</p>
 </blockquote>
+<section class="author-confirmation-index" id="author-confirmation-index">
+<h2 id="作者确认清单">作者确认清单</h2>
+<p>共 17 项，状态均为待确认。点击条目可跳到正文批注。红色项目会改变方法或结果口径，黄色项目需要作者判断，绿色项目已有项目记录支持，待确认后改正文。</p>
+<ol>
+<li><a href="#author-note-01"><span class="status-badge badge-critical">必须确认</span>是否纳入 Bolun 的 PDAC 评审</a></li>
+<li><a href="#author-note-02"><span class="status-badge badge-critical">必须确认</span>annotation 的实际用途与边界</a></li>
+<li><a href="#author-note-03"><span class="status-badge badge-suggested">建议确认</span>是否统一使用 benchmark-informed pilot evaluation</a></li>
+<li><a href="#author-note-04"><span class="status-badge badge-verified">已查证待修正</span>乳腺癌和 PDAC 开发病历数量</a></li>
+<li><a href="#author-note-05"><span class="status-badge badge-critical">必须确认</span>两个 260 的单位、来源与 technical audit 版本</a></li>
+<li><a href="#author-note-06"><span class="status-badge badge-critical">必须确认</span>七个 core fields 的定义与冻结时间</a></li>
+<li><a href="#author-note-07"><span class="status-badge badge-critical">必须确认</span>开发阶段医生作者的资历表述</a></li>
+<li><a href="#author-note-08"><span class="status-badge badge-critical">必须确认</span>final scoring version 的 attribution 覆盖范围</a></li>
+<li><a href="#author-note-09"><span class="status-badge badge-critical">必须确认</span>ChatGPT rubric 的 model、日期和角色</a></li>
+<li><a href="#author-note-10"><span class="status-badge badge-verified">已查证待修正</span>auto_review 的长病历截断</a></li>
+<li><a href="#author-note-11"><span class="status-badge badge-critical">必须确认</span>letter exploration 的正文位置和报告范围</a></li>
+<li><a href="#author-note-12"><span class="status-badge badge-suggested">建议确认</span>human-model complementarity 是解释还是实证结果</a></li>
+<li><a href="#author-note-13"><span class="status-badge badge-suggested">建议确认</span>regression test 的覆盖范围</a></li>
+<li><a href="#author-note-14"><span class="status-badge badge-critical">必须确认</span>Codex ablation judge 的 model、日期和配置</a></li>
+<li><a href="#author-note-15"><span class="status-badge badge-verified">已查证待修正</span>five gates 只对适用输出执行</a></li>
+<li><a href="#author-note-16"><span class="status-badge badge-suggested">建议确认</span>novelty claim 保持限定语</a></li>
+<li><a href="#author-note-17"><span class="status-badge badge-critical">必须确认</span>版本号、统计数字和图表同步更新</a></li>
+</ol>
+</section>
 <section class="review-section"><h2 id="供临床合作者审阅的问题">供临床合作者审阅的问题</h2>
 <p>本轮审阅请重点关注以下问题。投稿时将删除本节。</p>
 <ol>
@@ -954,6 +1052,27 @@ BILINGUAL MAINTENANCE RULE:
 <p>我们使用 CORAL 数据集。该数据集通过 PhysioNet 受控开放，包含来自加州大学旧金山分校、经过去标识化处理的肿瘤内科随访病历 [<a class="citation-link" href="#ref-zh-2">2</a>]。其专家标注基准包括 20 份乳腺癌病历和 20 份胰腺癌病历。公开版本还分别提供每个癌种 100 份附加病历，这些附加病历带有 GPT-4 自动生成的标签，但没有人工专家标注。有记录的开发迭代使用了其中 56 份乳腺癌附加病历和全部 100 份胰腺癌附加病历。40 份专家标注病历最初预留用于系统比较。</p>
 <p>这些记录是真实临床病历，而不是网络问答、合成病例或模型生成文本。病历保留了重复病史、复制到后续记录的内容、不确定检查结果和条件性计划，这些特点正是纵向肿瘤信息提取的难点。该数据集对本研究的主要价值是临床真实性和专家标注，而不是规模。数据访问需要完成 PhysioNet 规定的账号认证和数据使用流程。</p>
 <p>开发病历用于识别反复出现的错误模式并改进 harness，标注基准病历用于匹配技术比较和临床医生比较。虽然这些基准病历最初预留用于评估，但后续开发阶段的技术审查仍影响了医生评估前的 harness 修改。因此，本研究应被理解为试点性基准评估，而不是完全未接触数据的外部验证。研究未进行模型权重训练或微调。</p>
+<aside class="author-note severity-critical" id="author-note-02">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Annotation 到底怎样使用</h4>
+<p><strong>我目前知道：</strong>annotation 没有输入 model、LLM judge 或医生使用的 A/B 界面。项目记录显示，研究团队曾人工对照 breast annotation，其中一个 staging discrepancy 影响了后续 stage rule。</p>
+<p><strong>请你确认：</strong>是否有人线下看过 PDAC annotation，以及是否曾用 annotation 裁决医生评分。确认前，正文不能写“annotation 完全没用”，也不能写“医生评分时可以参考 annotation”。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+<aside class="author-note severity-suggested" id="author-note-03">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Benchmark 的定位</h4>
+<p><strong>我目前知道：</strong>breast benchmark review 曾影响 workflow 修改，因此这 40 份病历不再属于 untouched held-out validation。</p>
+<p><strong>请你确认：</strong>是否在全文统一称为 benchmark-informed pilot evaluation。这样既保留 benchmark 的角色，也不会暗示完全独立的 external validation。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+<aside class="author-note severity-verified" id="author-note-04">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>Development notes 的数量</h4>
+<p><strong>我目前知道：</strong>100 份 breast development notes 都至少运行过，后期集中在 56 份 error-enriched 和 regression subset 上。PDAC 先使用 30 份，之后扩大到 100 份。</p>
+<p><strong>请你确认：</strong>是否按这个口径改写 2.2、2.5 和 3.1，避免把 56 份写成全部 breast development data。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <h3 id="2-3-基础模型与-baseline">2.3 基础模型与 baseline</h3>
 <p>两个实验条件均使用通过 vLLM 在本地部署的 Qwen2.5-32B-Instruct-AWQ [<a class="citation-link" href="#ref-zh-9">9</a>]。baseline 系统对每份病历只调用模型一次，并返回完整的目标 schema。它不使用任务拆分、verification gate、重试、词典或确定性后处理。医生评审包中使用的是最终确定的 baseline 版本，它与 inference harness 采用相同的字段定义和输出契约。</p>
 <h3 id="2-4-inference-harness-2">2.4 inference harness</h3>
@@ -967,6 +1086,13 @@ BILINGUAL MAINTENANCE RULE:
 <li>进行忠实度修剪，删除明确无依据或相互矛盾的内容，同时保留有支持的信息。</li>
 <li>进行时态过滤，从未来计划字段中删除已完成或历史事件。</li>
 </ol>
+<aside class="author-note severity-verified" id="author-note-15">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>Five gates 的触发条件</h4>
+<p><strong>我目前知道：</strong>five gates 不是对每项输出无条件执行。部分 gate 只在解析失败、schema 不符、verify 开启或字段属于 plan 类时触发。</p>
+<p><strong>请你确认：</strong>是否把正文改为 eligible outputs passed the applicable gates，并在表中保留各 gate 的触发条件。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <p>确定性处理层使用高置信度临床规则解决反复出现的错误。这些规则区分区域淋巴结和远处疾病、疑似和确诊转移、当前抗癌治疗与支持治疗或居家用药，以及当前疗效与治疗前变化。系统还返回支持每个提取值的病历原文片段。</p>
 <div class="table-wrap"><table><thead><tr>
 <th>inference harness 组件</th>
@@ -1025,7 +1151,21 @@ BILINGUAL MAINTENANCE RULE:
 <p><em><strong>图 1.</strong></em> <em>开发与下游应用流程。乳腺癌阶段通过 human-in-the-loop review 形成 inference harness。PDAC 阶段由 ChatGPT-assisted synthesis 和 rubric-guided Qwen reviewer 支持适配，期间没有 target-domain clinician 审阅，所有保留的修改仍由研究人员控制。之后由肿瘤科医生评估 structured extraction，并在探索性 letter study 中比较 structured route 与 direct note-to-letter baseline。</em></p>
 <h3 id="2-5-临床信息指导的乳腺癌开发">2.5 临床信息指导的乳腺癌开发</h3>
 <p>乳腺癌开发在 56 份附加病历上进行了约 15 轮有记录的迭代。一位熟悉肿瘤学问题的医生作者与模型开发作者共同审阅部分输出。这位医生不是肿瘤专科医生，也没有参与最终的肿瘤科医生评估。研究团队将发现的问题与完整源病历逐项核对，对反复出现的错误进行归类，并把它们转化为可推广的提示修改、验证逻辑或确定性规则。该过程没有建立传统的监督训练集，也没有更新模型权重。</p>
+<aside class="author-note severity-critical" id="author-note-07">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>开发阶段医生作者的资历</h4>
+<p><strong>我目前知道：</strong>这位合作者是普通医生，熟悉肿瘤学并计划进入该领域，但不能正式称为 oncologist。他也不是最终评估者。</p>
+<p><strong>请你确认：</strong>论文中应使用的正式资历，例如 physician coauthor、general physician 或其他准确职称，以及是否需要写明其培训阶段。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <p>候选修改只有在受影响样本和此前正确的对照样本上通过测试后才会保留。这里的目标不是修正单个病例，而是编码反复出现的临床区分。例如，腋窝淋巴结受累被误判为远处转移后，团队加入了通用的区域淋巴结规则；计划使用的药物被误列为当前治疗后，则加入了药物时态规则。</p>
+<aside class="author-note severity-suggested" id="author-note-13">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Regression test 的覆盖范围</h4>
+<p><strong>我目前知道：</strong>项目有针对受影响样本和部分既有正确样本的 regression test，但我没有看到足以支持“所有修改都经过完整回归测试”的统一审计记录。</p>
+<p><strong>请你确认：</strong>是否确实覆盖 all retained changes。若不能确认，正文可改成 selected retained changes were regression-tested。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <blockquote>
 <p><strong>协作说明：</strong> 2.1 保留为研究设计总览；2.5 单独描述乳腺癌阶段的具体开发程序。两节不是同一层级的信息，因此不建议合并。</p>
 </blockquote>
@@ -1035,7 +1175,21 @@ BILINGUAL MAINTENANCE RULE:
 <blockquote>
 <p><strong>协作说明：</strong> 当前按医生口述将外部通用 LLM 写为 ChatGPT。正式投稿前需要补齐当时使用的具体 model/version 和访问日期。</p>
 </blockquote>
+<aside class="author-note severity-critical" id="author-note-09">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>ChatGPT rubric 的可复现信息</h4>
+<p><strong>我目前知道：</strong>ChatGPT 的作用是整理 breast failure history，形成初版 review rubric 和候选 PDAC adaptation，不是训练基础模型。</p>
+<p><strong>请你确认：</strong>具体 model、访问日期和交互方式。若无法恢复，正文应写 general-purpose external LLM，并明确它只提供建议。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <p>在两个开发阶段，pipeline 都记录原始模型输出、每项验证操作和确定性修正。这些记录使团队能够追溯最终字段值在 harness 中的处理过程，并根据回归结果保留或拒绝修改建议。</p>
+<aside class="author-note severity-verified" id="author-note-10">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>LLM review 并非总能看到完整病历</h4>
+<p><strong>我目前知道：</strong>auto_review.py 会把超过 12,000 个字符的 note 截为开头和结尾，中间插入截断标记。</p>
+<p><strong>请你确认：</strong>是否把“与完整源病历比较”改为“与提供给 reviewer 的源病历文本比较”，并在 Methods 报告 12,000-character limit。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <h3 id="2-7-由医生确定的核心临床字段">2.7 由医生确定的核心临床字段</h3>
 <p>匹配比较开始前，参与开发的医生作者根据理解疾病状态和当前治疗决策的重要性，指定了七个核心临床字段：</p>
 <ol>
@@ -1048,14 +1202,35 @@ BILINGUAL MAINTENANCE RULE:
 <li>病历记录了哪些已经完成的分子或遗传检测结果？</li>
 </ol>
 <p>最终的肿瘤科医生评估工具还包括遗传检测计划、支持用药、操作计划、影像计划、实验室检查计划、用药计划和近期治疗变化。实验室结果摘要和一般临床发现为选评字段，不纳入主要临床分析。</p>
+<aside class="author-note severity-critical" id="author-note-06">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>七个 core fields 的定义</h4>
+<p><strong>我目前知道：</strong>当前七类为 active anticancer therapy、stage、distant metastasis、regional or overall metastatic involvement、response、breast type plus receptor status，以及 completed molecular or genetic results。</p>
+<p><strong>请你确认：</strong>这些类别由哪位医生、在何时、是否在查看结果前冻结。还请确认 metastasis 与 distant metastasis 分开，以及 breast type 与 receptor status 合并，都是有意的设计。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <h3 id="2-8-开发阶段的-llm-辅助审查">2.8 开发阶段的 LLM 辅助审查</h3>
 <p>LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。已有研究表明，LLM judge 可以在一定程度上接近人工偏好，但也会受到 position、verbosity 和 self-preference bias 的影响 [<a class="citation-link" href="#ref-zh-16">16</a>,<a class="citation-link" href="#ref-zh-17">17</a>]。因此，这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过 regression test 确认，不能作为临床结局标签。</p>
 <p>研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。这个数字来自 40 份评估病历共有的 6 个跨癌种字段，再加上 20 份乳腺癌病历特有的 type 和 receptor 字段，即 40 x 6 + 20 x 1 = 260。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。</p>
+<aside class="author-note severity-critical" id="author-note-05">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>文中两个 260 不是 260 份 notes</h4>
+<p><strong>我目前知道：</strong>每位医生的 PDAC 评估是 20 notes x 13 fields，共 260 个 note-field judgments。Technical audit 的另一个 260 是 40 x 6 + 20 x 1，66/28/166 来自较早 v2.2 的 LLM-assisted manual-style audit，不能直接写成与当前 Qwen auto_review 相同的流程。</p>
+<p><strong>请你确认：</strong>是否保留旧 technical audit。若保留，需要补齐 reviewer、harness version 和 procedure，并把两个表的单位都写清楚。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <blockquote>
 <p><strong>协作说明：</strong> 这里不再罗列“发现了哪些错误、之后修了什么”。这些内容更像开发报告。Methods 只说明 LLM 审查的用途、边界和它与最终医生评估的区别。</p>
 </blockquote>
 <h3 id="2-9-肿瘤科医生评估">2.9 肿瘤科医生评估</h3>
 <p>临床评估通过隐藏系统标签的 A/B 界面展示源病历和两份结构化输出。评估者针对每个字段选择 A 更优、B 更优或平局。他们不知道哪份输出来自 inference harness，也不知道两个系统是否使用同一基础模型或研究预期哪一侧更好。所有评估采用固定映射，inference harness 显示为 A，single-prompt baseline 显示为 B。source attribution 作为完整 harness 输出的一部分随 A 展示。因此，本研究比较的是呈现给医生的完整系统输出，没有单独隔离 attribution 的作用。</p>
+<aside class="author-note severity-critical" id="author-note-08">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Source attribution 的完整性</h4>
+<p><strong>我目前知道：</strong>harness 可以返回 model-selected supporting excerpts，医生界面也展示了 attribution，但我没有找到 final scoring version 的逐字段完整性审计。</p>
+<p><strong>请你确认：</strong>final scoring package 是否每个字段都有经过核对的 attribution。若没有，正文应写 model-selected supporting excerpts when available，避免绝对表述。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <p>参与乳腺癌开发的医生作者不属于最终评估者。四位肿瘤科医生独立评估了乳腺癌输出，其中三位同时评估了胰腺癌输出，一位没有评估胰腺癌。</p>
 <p>四位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较。我们计算了每两位医生之间的完全一致率和 Cohen's kappa，并分别汇总七组评审者与癌种组合。合并计数仅作描述性统计，不把各字段判断视为相互独立的观测。</p>
 <p>主要推断分析排除平局，将非平局判断是否偏好 inference harness 作为二分类结局。我们使用总体平均的 logistic 广义估计方程，在每份病历内采用可交换相关结构。模型将评审者作为固定效应，总体模型同时校正癌种，从而处理同一病历中跨字段、跨评审者的重复判断。结果报告调整后比值比、95% 置信区间和双侧 p 值。敏感性分析将每组字段评分汇总为病历级的 harness 减 baseline 净差，并使用精确符号检验。</p>
@@ -1068,6 +1243,13 @@ BILINGUAL MAINTENANCE RULE:
 <li>D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。</li>
 </ol>
 <p>实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。</p>
+<aside class="author-note severity-critical" id="author-note-14">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Codex ablation judge 的身份与配置</h4>
+<p><strong>我目前知道：</strong>这次 ablation 使用一个没有项目上下文的 fresh Codex judge，并按统一 rubric 审阅 120 对输出。稿件尚未报告可复现的 model、运行日期和配置。</p>
+<p><strong>请你确认：</strong>是否能从运行记录恢复这些信息。若不能，正文应明确无法恢复的部分，并避免把 fresh 当成可复现的 model specification。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <blockquote>
 <p><strong>协作说明：</strong> B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。</p>
 </blockquote>
@@ -1081,6 +1263,20 @@ BILINGUAL MAINTENANCE RULE:
 <p>胰腺癌的临床医生评估是检验这种适配的主要证据。在三次独立评估中，医生有 233 次偏好 inference harness、61 次偏好 baseline，另有 486 次平局。三位医生按病历计算分别得到 19、18 和 13 例正向净差；其余结果分别为 1 例负向、2 例平局，以及 4 例负向加 3 例平局。合并三位医生的判断后，19 例胰腺癌病例的 harness 减 baseline 净差为正值，1 例为平局。由于开发期间没有医生审查胰腺癌输出，这一模式说明先前编码的评估标准和 workflow 可以跨癌种复用。但仅凭该结果，无法判断收益来自共享规则、胰腺癌特异性修订、基于模型的审查器，还是这些因素的共同作用。</p>
 <p>Extraction 完成后，同一组 structured fields 可以与源病历一起传给 patient-letter generator。这样形成从 clinician-informed extraction 到患者沟通的明确路径。Direct Qwen 和 GPT-4o comparator 跳过 extraction stage，直接通过一个 prompt 从 raw note 生成 letter。</p>
 <h3 id="3-2-当前肿瘤科医生评估">3.2 当前肿瘤科医生评估</h3>
+<aside class="author-note severity-critical" id="author-note-01">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Bolun 的 PDAC 评审是否进入正式分析</h4>
+<p><strong>我目前知道：</strong>新文件包含 Bolun 的 260 项完整 PDAC judgments。若纳入，四位医生都评了两个癌种，总数变为 2,160，PL 699，BL 171，TIE 1,290，非平局中 PL 为 80.3%，总体 GEE OR 约 4.00，95% CI 约 3.12 至 5.11。</p>
+<p><strong>请你确认：</strong>这份评分是否属于正式最终数据。确认纳入后，需要重跑分析并更新 Figure 2、4、5、6、相关表格和全部结果文字。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+<aside class="author-note severity-critical" id="author-note-17">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>版本号、数字和图表需要同批更新</h4>
+<p><strong>我目前知道：</strong>英文标题页是 v0.17，中文仍写 v0.16。正文还保留 1,900 judgments、旧 OR，以及 3.6 中已经过时的 839 ties。</p>
+<p><strong>请你确认：</strong>先决定是否纳入 Bolun PDAC。随后用同一次分析输出更新版本号、数字、表格和图，避免混用两版结果。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <p>目前的临床证据包括七组评审者与癌种组合：四位肿瘤科医生均完成了乳腺癌评估，其中三位还完成了胰腺癌评估。在 1,900 项必评字段判断中，harness 获偏好 596 次，baseline 获偏好 141 次，另有 1,163 次平局，分别占全部判断的 31.4%、7.4% 和 61.2%。在 737 项非平局判断中，harness 占 80.9%。</p>
 <div class="table-wrap"><table><thead><tr>
 <th>已完成的评估</th>
@@ -1375,6 +1571,13 @@ BILINGUAL MAINTENANCE RULE:
 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjYwIiBoZWlnaHQ9IjUxMCIgdmlld0JveD0iMCAwIDEyNjAgNTEwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI2MzAuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPkV4cGxvcmF0b3J5IHBhdGllbnQtbGV0dGVyIHNjb3JlIGRpZmZlcmVuY2VzPC90ZXh0Pgo8dGV4dCB4PSI2MzAuMCIgeT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1NTU1NTUiPk1lYW4gb2YgYWNjdXJhY3ksIGNvbXBsZXRlbmVzcywgY29tcHJlaGVuc2liaWxpdHksIGFuZCB1c2VmdWxuZXNzIGFjcm9zcyBvbmUgb25jb2xvZ2lzdDwvdGV4dD4KPHRleHQgeD0iMzIwLjAiIHk9Ijg2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIj5IYXJuZXNzLWJhc2VkIGxldHRlciB2cyBDaGF0R1BUPC90ZXh0Pgo8dGV4dCB4PSIzMjAuMCIgeT0iMTA2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIj5XaW5zL3RpZXMvbG9zc2VzIDE0LzIvNDsgbWVhbiBkaWZmZXJlbmNlICswLjI0PC90ZXh0Pgo8bGluZSB4MT0iNzUiIHkxPSI0MjYuMCIgeDI9IjYwMCIgeTI9IjQyNi4wIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjciIHk9IjQzMC4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4tMi44PC90ZXh0Pgo8bGluZSB4MT0iNzUiIHkxPSIzNTAuNSIgeDI9IjYwMCIgeTI9IjM1MC41IiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjciIHk9IjM1NC41IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4tMS40PC90ZXh0Pgo8bGluZSB4MT0iNzUiIHkxPSIyNzUuMCIgeDI9IjYwMCIgeTI9IjI3NS4wIiBzdHJva2U9IiM3Nzc3NzciLz4KPHRleHQgeD0iNjciIHk9IjI3OS4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4wLjA8L3RleHQ+CjxsaW5lIHgxPSI3NSIgeTE9IjE5OS41IiB4Mj0iNjAwIiB5Mj0iMTk5LjUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI2NyIgeT0iMjAzLjUiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTAiPjEuNDwvdGV4dD4KPGxpbmUgeDE9Ijc1IiB5MT0iMTI0LjAiIHgyPSI2MDAiIHkyPSIxMjQuMCIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjY3IiB5PSIxMjguMCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+Mi44PC90ZXh0Pgo8cmVjdCB4PSI3OS4yIiB5PSIxMzcuNyIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMTM3LjMiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iODguMSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxPC90ZXh0Pgo8cmVjdCB4PSIxMDUuNSIgeT0iMjYxLjMiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjEzLjciIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTE0LjQiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMjwvdGV4dD4KPHJlY3QgeD0iMTMxLjciIHk9IjI2MS4zIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIxMy43IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjE0MC42IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjM8L3RleHQ+CjxyZWN0IHg9IjE1Ny45IiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMi4wIiBmaWxsPSIjQkRCREJEIi8+Cjx0ZXh0IHg9IjE2Ni45IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjQ8L3RleHQ+CjxyZWN0IHg9IjE4NC4yIiB5PSIyMzMuOCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iNDEuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIxOTMuMSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI1PC90ZXh0Pgo8cmVjdCB4PSIyMTAuNCIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjY4LjYiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iMjE5LjQiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iNjwvdGV4dD4KPHJlY3QgeD0iMjM2LjciIHk9IjI0Ny41IiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIyNy41IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjI0NS42IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+Yjc8L3RleHQ+CjxyZWN0IHg9IjI2Mi45IiB5PSIyNjEuMyIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMTMuNyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIyNzEuOSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI4PC90ZXh0Pgo8cmVjdCB4PSIyODkuMiIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjgyLjQiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iMjk4LjEiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iOTwvdGV4dD4KPHJlY3QgeD0iMzE1LjQiIHk9IjIyMC4xIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSI1NC45IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjMyNC40IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjEwPC90ZXh0Pgo8cmVjdCB4PSIzNDEuNyIgeT0iMjQ3LjUiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI3LjUiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMzUwLjYiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTE8L3RleHQ+CjxyZWN0IHg9IjM2Ny45IiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iNDEuMiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSIzNzYuOSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxMjwvdGV4dD4KPHJlY3QgeD0iMzk0LjIiIHk9IjI2MS4zIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIxMy43IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjQwMy4xIiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjEzPC90ZXh0Pgo8cmVjdCB4PSI0MjAuNCIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjIuMCIgZmlsbD0iI0JEQkRCRCIvPgo8dGV4dCB4PSI0MjkuNCIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxNDwvdGV4dD4KPHJlY3QgeD0iNDQ2LjciIHk9IjI3NS4wIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSI0MS4yIiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9IjQ1NS42IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE1PC90ZXh0Pgo8cmVjdCB4PSI0NzIuOSIgeT0iMjYxLjMiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjEzLjciIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNDgxLjkiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTY8L3RleHQ+CjxyZWN0IHg9IjQ5OS4yIiB5PSIyMDYuNCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iNjguNiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI1MDguMSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxNzwvdGV4dD4KPHJlY3QgeD0iNTI1LjUiIHk9IjI0Ny41IiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIyNy41IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjUzNC40IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE4PC90ZXh0Pgo8cmVjdCB4PSI1NTEuNyIgeT0iMjQ3LjUiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI3LjUiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iNTYwLjYiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTk8L3RleHQ+CjxyZWN0IHg9IjU3OC4wIiB5PSIyNjEuMyIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMTMuNyIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI1ODYuOSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIyMDwvdGV4dD4KPHRleHQgeD0iMzQiIHk9IjI3NS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMzQgMjc1LjApIj5IYXJuZXNzIG1pbnVzIGNvbXBhcmF0b3I8L3RleHQ+Cjx0ZXh0IHg9Ijk0MC4wIiB5PSI4NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCI+SGFybmVzcy1iYXNlZCBsZXR0ZXIgdnMgUXdlbiBiYXNlbGluZTwvdGV4dD4KPHRleHQgeD0iOTQwLjAiIHk9IjEwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMSI+V2lucy90aWVzL2xvc3NlcyA5LzUvNjsgbWVhbiBkaWZmZXJlbmNlIC0wLjA2PC90ZXh0Pgo8bGluZSB4MT0iNjk1IiB5MT0iNDI2LjAiIHgyPSIxMjIwIiB5Mj0iNDI2LjAiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI2ODciIHk9IjQzMC4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4tMS41PC90ZXh0Pgo8bGluZSB4MT0iNjk1IiB5MT0iMzUwLjUiIHgyPSIxMjIwIiB5Mj0iMzUwLjUiIHN0cm9rZT0iI0U1RTVFNSIvPgo8dGV4dCB4PSI2ODciIHk9IjM1NC41IiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4tMC44PC90ZXh0Pgo8bGluZSB4MT0iNjk1IiB5MT0iMjc1LjAiIHgyPSIxMjIwIiB5Mj0iMjc1LjAiIHN0cm9rZT0iIzc3Nzc3NyIvPgo8dGV4dCB4PSI2ODciIHk9IjI3OS4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmb250LXNpemU9IjEwIj4wLjA8L3RleHQ+CjxsaW5lIHgxPSI2OTUiIHkxPSIxOTkuNSIgeDI9IjEyMjAiIHkyPSIxOTkuNSIgc3Ryb2tlPSIjRTVFNUU1Ii8+Cjx0ZXh0IHg9IjY4NyIgeT0iMjAzLjUiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTAiPjAuODwvdGV4dD4KPGxpbmUgeDE9IjY5NSIgeTE9IjEyNC4wIiB4Mj0iMTIyMCIgeTI9IjEyNC4wIiBzdHJva2U9IiNFNUU1RTUiLz4KPHRleHQgeD0iNjg3IiB5PSIxMjguMCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxMCI+MS41PC90ZXh0Pgo8cmVjdCB4PSI2OTkuMiIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI1LjIiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iNzA4LjEiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTwvdGV4dD4KPHJlY3QgeD0iNzI1LjUiIHk9IjE5OS41IiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSI3NS41IiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjczNC40IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjI8L3RleHQ+CjxyZWN0IHg9Ijc1MS43IiB5PSIyNDkuOCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMjUuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSI3NjAuNiIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIzPC90ZXh0Pgo8cmVjdCB4PSI3NzguMCIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjIuMCIgZmlsbD0iI0JEQkRCRCIvPgo8dGV4dCB4PSI3ODYuOSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI0PC90ZXh0Pgo8cmVjdCB4PSI4MDQuMiIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjIuMCIgZmlsbD0iI0JEQkRCRCIvPgo8dGV4dCB4PSI4MTMuMSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI1PC90ZXh0Pgo8cmVjdCB4PSI4MzAuNSIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjEwMC43IiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9IjgzOS40IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjY8L3RleHQ+CjxyZWN0IHg9Ijg1Ni43IiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMTI1LjgiIGZpbGw9IiNEOTVGMEUiLz4KPHRleHQgeD0iODY1LjYiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iNzwvdGV4dD4KPHJlY3QgeD0iODgzLjAiIHk9IjI3NS4wIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSI3NS41IiBmaWxsPSIjRDk1RjBFIi8+Cjx0ZXh0IHg9Ijg5MS45IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+Yjg8L3RleHQ+CjxyZWN0IHg9IjkwOS4yIiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMjUuMiIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSI5MTguMSIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmI5PC90ZXh0Pgo8cmVjdCB4PSI5MzUuNSIgeT0iMjQ5LjgiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iOTQ0LjQiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTA8L3RleHQ+CjxyZWN0IHg9Ijk2MS43IiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMi4wIiBmaWxsPSIjQkRCREJEIi8+Cjx0ZXh0IHg9Ijk3MC42IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjExPC90ZXh0Pgo8cmVjdCB4PSI5ODguMCIgeT0iMjQ5LjgiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iOTk2LjkiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTI8L3RleHQ+CjxyZWN0IHg9IjEwMTQuMiIgeT0iMjQ5LjgiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTAyMy4xIiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjEzPC90ZXh0Pgo8cmVjdCB4PSIxMDQwLjUiIHk9IjIyNC43IiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSI1MC4zIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjEwNDkuNCIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxNDwvdGV4dD4KPHJlY3QgeD0iMTA2Ni43IiB5PSIyNzUuMCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iNzUuNSIgZmlsbD0iI0Q5NUYwRSIvPgo8dGV4dCB4PSIxMDc1LjYiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTU8L3RleHQ+CjxyZWN0IHg9IjEwOTMuMCIgeT0iMjc1LjAiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjIuMCIgZmlsbD0iI0JEQkRCRCIvPgo8dGV4dCB4PSIxMTAxLjkiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMTY8L3RleHQ+CjxyZWN0IHg9IjExMTkuMiIgeT0iMjQ5LjgiIHdpZHRoPSIxNy45IiBoZWlnaHQ9IjI1LjIiIGZpbGw9IiMyQjhDQkUiLz4KPHRleHQgeD0iMTEyOC4xIiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE3PC90ZXh0Pgo8cmVjdCB4PSIxMTQ1LjUiIHk9IjI3NS4wIiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIyLjAiIGZpbGw9IiNCREJEQkQiLz4KPHRleHQgeD0iMTE1NC40IiB5PSI0NDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iOCI+YjE4PC90ZXh0Pgo8cmVjdCB4PSIxMTcxLjciIHk9IjI0OS44IiB3aWR0aD0iMTcuOSIgaGVpZ2h0PSIyNS4yIiBmaWxsPSIjMkI4Q0JFIi8+Cjx0ZXh0IHg9IjExODAuNiIgeT0iNDQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjgiPmIxOTwvdGV4dD4KPHJlY3QgeD0iMTE5OC4wIiB5PSIyNDkuOCIgd2lkdGg9IjE3LjkiIGhlaWdodD0iMjUuMiIgZmlsbD0iIzJCOENCRSIvPgo8dGV4dCB4PSIxMjA2LjkiIHk9IjQ0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI4Ij5iMjA8L3RleHQ+Cjx0ZXh0IHg9IjY1NCIgeT0iMjc1LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTEiIHRyYW5zZm9ybT0icm90YXRlKC05MCA2NTQgMjc1LjApIj5IYXJuZXNzIG1pbnVzIGNvbXBhcmF0b3I8L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Exploratory patient-letter score differences">
 </figure>
 <p><em><strong>图 8.</strong></em> <em>一位肿瘤科医生对每个病例的 accuracy、completeness、comprehensibility 和 usefulness 平均分差。正值表示 harness-based letter 得分更高。该比较仅作描述，不属于正式 superiority test。</em></p>
+<aside class="author-note severity-critical" id="author-note-11">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Letter exploration 怎样报告</h4>
+<p><strong>我目前知道：</strong>letter 是 downstream exploration，不是 extraction 主结论。Bolun 的 PDAC forced-choice result 也不偏向 pipeline。当前 Figure 8 只画四个维度，漏了 hallucination-related concern，正文继续只报旧 breast 精确值会有选择性汇报风险。</p>
+<p><strong>请你确认：</strong>是从主 Results 移除，只在 Discussion 做定性总结，还是按不同评估 instrument 完整报告全部 letter data。确认前先保留现状，不新增图或显著性结论。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <h2 id="4-讨论">4. 讨论</h2>
 <h3 id="4-1-主要解读">4.1 主要解读</h3>
 <p>多位肿瘤科医生参与的评估显示，相较于使用同一模型的 single-prompt baseline，临床医生显著更偏好 inference harness。调整后的方向性分析中，harness 偏好的 OR 为 4.15，95% CI 为 3.25 至 5.29，p&lt;0.001。</p>
@@ -1398,6 +1601,13 @@ BILINGUAL MAINTENANCE RULE:
 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDYwIiBoZWlnaHQ9IjYyMCIgdmlld0JveD0iMCAwIDEwNjAgNjIwIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPGcgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZpbGw9IiMyMjIyMjIiPgo8dGV4dCB4PSI1MzAuMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiPkh1bWFuLW1vZGVsIGNvbXBsZW1lbnRhcml0eSBhY3Jvc3MgZXh0cmFjdGlvbiB0YXNrczwvdGV4dD4KPHRleHQgeD0iNTMwLjAiIHk9IjUyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNTU1NTU1Ij5Db25jZXB0dWFsIG1hcCBtb3RpdmF0ZWQgYnkgcmF0aW5nIHBhdHRlcm5zIGFuZCB0YXNrIHN0cnVjdHVyZTsgd29ya2xvYWQgd2FzIG5vdCBtZWFzdXJlZDwvdGV4dD4KPHJlY3QgeD0iMTU1LjAiIHk9Ijk1LjAiIHdpZHRoPSI0MjUuMCIgaGVpZ2h0PSIyMTUuMCIgZmlsbD0iI0ZDRThERSIvPgo8cmVjdCB4PSI1ODAuMCIgeT0iOTUuMCIgd2lkdGg9IjQyNS4wIiBoZWlnaHQ9IjIxNS4wIiBmaWxsPSIjRjRGMEZCIi8+CjxyZWN0IHg9IjE1NS4wIiB5PSIzMTAuMCIgd2lkdGg9IjQyNS4wIiBoZWlnaHQ9IjIxNS4wIiBmaWxsPSIjRjNGNkY4Ii8+CjxyZWN0IHg9IjU4MC4wIiB5PSIzMTAuMCIgd2lkdGg9IjQyNS4wIiBoZWlnaHQ9IjIxNS4wIiBmaWxsPSIjRUFGNUZCIi8+CjxyZWN0IHg9IjE1NSIgeT0iOTUiIHdpZHRoPSI4NTAiIGhlaWdodD0iNDMwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MjY0NzEiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjxsaW5lIHgxPSI1ODAuMCIgeTE9Ijk1IiB4Mj0iNTgwLjAiIHkyPSI1MjUiIHN0cm9rZT0iI0FBQjRCQyIvPgo8bGluZSB4MT0iMTU1IiB5MT0iMzEwLjAiIHgyPSIxMDA1IiB5Mj0iMzEwLjAiIHN0cm9rZT0iI0FBQjRCQyIvPgo8dGV4dCB4PSIxODMiIHk9IjEyOSIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzlDM0QxNCI+UmFwaWQgY2xpbmljaWFuIHZlcmlmaWNhdGlvbjwvdGV4dD4KPHRleHQgeD0iMTkxIiB5PSIxNTkiIGZvbnQtc2l6ZT0iMTMiPuKAoiBFeHBsaWNpdCBzdGFnZTwvdGV4dD4KPHRleHQgeD0iMTkxIiB5PSIxODQiIGZvbnQtc2l6ZT0iMTMiPuKAoiBDb25maXJtZWQgdnMgc3VzcGVjdGVkIGRpc2Vhc2U8L3RleHQ+Cjx0ZXh0IHg9IjYwOC4wIiB5PSIxMjkiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM1QzQ2OTQiPkFzc2lzdCwgdGhlbiB2ZXJpZnk8L3RleHQ+Cjx0ZXh0IHg9IjYxNi4wIiB5PSIxNTkiIGZvbnQtc2l6ZT0iMTMiPuKAoiBUcmVhdG1lbnQgcmVzcG9uc2U8L3RleHQ+Cjx0ZXh0IHg9IjYxNi4wIiB5PSIxODQiIGZvbnQtc2l6ZT0iMTMiPuKAoiBVbmNlcnRhaW4gbWV0YXN0YXNpczwvdGV4dD4KPHRleHQgeD0iMTgzIiB5PSIzNDQuMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzUzNjM2RSI+Um91dGluZSBhdXRvbWF0aW9uPC90ZXh0Pgo8dGV4dCB4PSIxOTEiIHk9IjM3NC4wIiBmb250LXNpemU9IjEzIj7igKIgRXhwbGljaXQgcmVjZXB0b3Igc3RhdHVzPC90ZXh0Pgo8dGV4dCB4PSIxOTEiIHk9IjM5OS4wIiBmb250LXNpemU9IjEzIj7igKIgRXhwbGljaXQgdGVzdCByZXN1bHQ8L3RleHQ+Cjx0ZXh0IHg9IjYwOC4wIiB5PSIzNDQuMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE3NkI5MSI+SGlnaC12YWx1ZSBhdXRvbWF0aW9uPC90ZXh0Pgo8dGV4dCB4PSI2MTYuMCIgeT0iMzc0LjAiIGZvbnQtc2l6ZT0iMTMiPuKAoiBBY3RpdmUgbWVkaWNhdGlvbnM8L3RleHQ+Cjx0ZXh0IHg9IjYxNi4wIiB5PSIzOTkuMCIgZm9udC1zaXplPSIxMyI+4oCiIE1lZGljYXRpb24gcGxhbnM8L3RleHQ+Cjx0ZXh0IHg9IjYxNi4wIiB5PSI0MjQuMCIgZm9udC1zaXplPSIxMyI+4oCiIExvbmcgdHJlYXRtZW50IGhpc3Rvcnk8L3RleHQ+Cjx0ZXh0IHg9IjU4MC4wIiB5PSI1OTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiPkh1bWFuIHJldmlldyBidXJkZW46IGxvdyDihpIgaGlnaDwvdGV4dD4KPHRleHQgeD0iMzQiIHk9IjMxMC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzIiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMzQgMzEwLjApIj5Nb2RlbCBlcnJvciByaXNrOiBsb3cg4oaSIGhpZ2g8L3RleHQ+CjwvZz4KPC9zdmc+Cg==" alt="Conceptual human-model complementarity across extraction tasks">
 </figure>
 <p><em><strong>图 9.</strong></em> <em>肿瘤信息 extraction 中 human-model complementarity 的概念图。图中位置是定性解释，不是实测难度分数。它区分了适合自动化的重复综合任务，以及更适合由模型整理证据、医生快速复核的判断敏感字段。</em></p>
+<aside class="author-note severity-suggested" id="author-note-12">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Human-model complementarity 的证据边界</h4>
+<p><strong>我目前知道：</strong>项目测了字段偏好，没有测医生完成任务的时间、认知负担或效率。图 9 因此只能是 clinical interpretation 和 future hypothesis。</p>
+<p><strong>请你确认：</strong>临床作者是否认可这套解释。正文应继续标明 conceptual，不能把它写成已验证的 workflow benefit。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <blockquote>
 <p><strong>协作说明：</strong> 这张图表达的是你说的“医生很容易、模型反而容易错”和“模型可以替医生处理冗长信息”这两类互补关系。它是 conceptual figure，不会伪装成我们实际测量过医生工作量。</p>
 </blockquote>
@@ -1413,6 +1623,13 @@ BILINGUAL MAINTENANCE RULE:
 <p>第三类研究支持不同的工程组件。Wiest 等说明 prompt design 和 constrained output 可以改善本地模型对临床二分类字段的 extraction [<a class="citation-link" href="#ref-zh-3">3</a>]。mCODEGPT 在合成肿瘤病历上比较 hierarchical prompting 与 single-step strategy [<a class="citation-link" href="#ref-zh-7">7</a>]。Grothey 等展示了不同 model、prompt 和 quantization configuration 在前列腺病理 extraction 中的差异 [<a class="citation-link" href="#ref-zh-8">8</a>]。Dao 等结合 engineered context、validation 和 retry，但任务是右心导管报告中的数值 extraction [<a class="citation-link" href="#ref-zh-6">6</a>]。Tariq 等使用 UMLS 加 fine-tuned LLM，在乳腺癌治疗时间线上获得更大规模和 external validation [<a class="citation-link" href="#ref-zh-5">5</a>]；Bhattarai 等则在纵向肺癌表型任务上比较多种模型和 rule-based approach [<a class="citation-link" href="#ref-zh-4">4</a>]。</p>
 <p>本研究的区别不是单独发明 prompt、retry 或 rule，而是把 field-specific routing、selective context transfer、verification gates、deterministic oncology rules、logging 和 source attribution 组合为一个 inference harness，再用 same-model baseline 隔离外围 workflow 的作用，并由肿瘤科医生逐字段直接比较。乳腺癌到胰腺癌的开发顺序还检验了临床信息形成的 failure rules 能否在第二个癌种中减少对稀缺专科医生时间的反复占用。</p>
 <p>因此，更准确的定位是：这是一项对整合式 inference harness 的、小规模但由肿瘤科医生直接评估的研究，而不是第一个肿瘤 extraction 系统，也不是规模最大的验证。更具体的贡献是把 field-specific routing、selective context transfer、verification gate、deterministic oncology rule、logging 和 source attribution 组合起来，再用 same-model baseline 和医生逐字段比较评估完整系统。逐篇对照表保留在文末中文审阅附录，正文只放与论点直接相关的引用。</p>
+<aside class="author-note severity-suggested" id="author-note-16">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Novelty claim 保持限定</h4>
+<p><strong>我目前知道：</strong>literature review 支持“在我们审阅的最接近研究中，没有发现相同完整组合”。它不支持 first、no prior study 或唯一系统这类绝对说法。</p>
+<p><strong>请你确认：</strong>是否保留 in the studies we reviewed 这一限定语，并让 contribution 聚焦于组合方式、same-model comparison 和医生逐字段评估。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 <h3 id="4-7-structured-extraction-连接患者沟通">4.7 Structured extraction 连接患者沟通</h3>
 <p>Letter comparison 检验了两条患者沟通路线。Direct route 把 raw note 通过一个 prompt 交给 Qwen 或 GPT-4o。Structured route 先运行 inference harness，再用 structured keypoints 和源病历 context 生成 letter。这样，临床事实可以在被改写为 prose 前单独检查。</p>
 <p>探索性评估显示，harness-based route 相对 GPT-4o 的四维平均分差为 +0.24，但相对 direct same-model Qwen generation 的平均分差为 -0.06。Letter quality 仍取决于内容选择、组织、措辞、不确定性表达，以及患者真正需要哪些临床细节。</p>
@@ -1589,7 +1806,7 @@ BILINGUAL MAINTENANCE RULE:
 <td>说明当前 preference study 不能替代 absolute correctness validation，并给出补强路径</td>
 </tr>
 </tbody></table></div>
-</section></article>
+</section></section></article>
   </div>
 </body>
 </html>

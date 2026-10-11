@@ -72,6 +72,12 @@ CSS = r"""
   --violet-soft: #f4f0fb;
   --warning: #8a5a00;
   --warning-soft: #fff7df;
+  --confirm: #a23b3b;
+  --confirm-soft: #fff1f0;
+  --suggest: #8a5a00;
+  --suggest-soft: #fff8e6;
+  --verified: #24613b;
+  --verified-soft: #edf8f0;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -107,6 +113,86 @@ body {
 .review-checklist li { margin: 0.35rem 0; }
 .review-checklist .done { color: #24613b; }
 .review-checklist .open { color: #825600; }
+.chinese-version .author-confirmation-index {
+  margin: 24px 0 34px;
+  padding: 20px 22px;
+  border: 1px solid #c9d6e0;
+  border-left: 6px solid var(--navy);
+  border-radius: 11px;
+  background: #f7fafc;
+}
+.chinese-version .author-confirmation-index h2 {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  font-size: 1.3rem;
+}
+.chinese-version .author-confirmation-index > p {
+  margin: 6px 0 14px;
+  color: var(--muted);
+}
+.chinese-version .author-confirmation-index ol { margin: 0; padding-left: 1.6rem; }
+.chinese-version .author-confirmation-index li { margin: 0.48rem 0; }
+.chinese-version .author-confirmation-index a {
+  color: var(--navy);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.chinese-version .status-badge {
+  display: inline-block;
+  min-width: 5.8em;
+  margin-right: 0.45em;
+  padding: 1px 7px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 750;
+  line-height: 1.55;
+  text-align: center;
+  vertical-align: 0.08em;
+}
+.chinese-version .badge-critical { color: var(--confirm); background: var(--confirm-soft); }
+.chinese-version .badge-suggested { color: var(--suggest); background: var(--suggest-soft); }
+.chinese-version .badge-verified { color: var(--verified); background: var(--verified-soft); }
+.chinese-version .author-note {
+  width: 100%;
+  margin: 18px 0 24px;
+  padding: 15px 17px;
+  border: 1px solid #d7dee5;
+  border-left: 5px solid var(--navy);
+  border-radius: 9px;
+  background: #fbfcfd;
+  scroll-margin-top: 18px;
+  break-inside: avoid;
+}
+.chinese-version .author-note.severity-critical {
+  border-left-color: var(--confirm);
+  background: var(--confirm-soft);
+}
+.chinese-version .author-note.severity-suggested {
+  border-left-color: var(--suggest);
+  background: var(--suggest-soft);
+}
+.chinese-version .author-note.severity-verified {
+  border-left-color: var(--verified);
+  background: var(--verified-soft);
+}
+.chinese-version .author-note:target {
+  outline: 3px solid rgba(43, 140, 190, 0.28);
+  outline-offset: 3px;
+}
+.chinese-version .author-note h4 {
+  margin: 7px 0 8px;
+  color: #20394d;
+  font-size: 1rem;
+}
+.chinese-version .author-note p { margin: 6px 0; }
+.chinese-version .author-note .back-link {
+  display: inline-block;
+  margin-top: 5px;
+  color: #4a6071;
+  font-size: 0.8rem;
+}
 .toc {
   position: sticky;
   top: 18px;
@@ -309,6 +395,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   .toc a { display: none; }
   article { padding: 30px 24px 55px; }
   h1 { font-size: 29px; }
+  .chinese-version .author-confirmation-index,
+  .chinese-version .author-note { width: 100%; }
 }
 @media print {
   @page { size: letter; margin: 16mm; }
@@ -321,6 +409,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   h3 { page-break-after: avoid; font-size: 13pt; }
   .rough-figure, .table-wrap { break-inside: avoid; }
   .rough-figure img { max-height: 650px; object-fit: contain; }
+  .chinese-version .author-confirmation-index,
+  .chinese-version .author-note { width: 100%; break-inside: avoid; }
 }
 """
 
@@ -437,7 +527,11 @@ def add_heading_ids(body: str) -> tuple[str, str]:
         return f'<h{level} id="{slug}">{label}</h{level}>'
 
     body = re.sub(r"<h([23])>(.*?)</h\1>", replace, body, flags=re.S)
-    toc_lines = ['<nav class="toc">', '<div class="toc-title">Workshop draft</div>', '<div class="toc-actions"><button onclick="window.print()">Print / Save PDF</button></div>']
+    toc_lines = [
+        '<nav class="toc">',
+        '<div class="toc-title">Workshop draft</div>',
+        '<div class="toc-actions">Use the browser print command to save a PDF.</div>',
+    ]
     for level, slug, label in headings:
         toc_lines.append(f'<a class="level-{level}" href="#{slug}">{html.escape(label)}</a>')
     toc_lines.append("</nav>")
@@ -572,6 +666,21 @@ def style_sections(body: str) -> str:
     return body
 
 
+def wrap_language_sections(body: str) -> str:
+    """Scope review-only annotations to the Chinese manuscript."""
+    marker = '<div class="language-break" id="chinese-version"></div>'
+    english_body, chinese_body = body.split(marker, 1)
+    return (
+        '<section class="manuscript-language english-version" lang="en">'
+        + english_body
+        + '</section>'
+        + '<section class="manuscript-language chinese-version language-break" '
+        + 'id="chinese-version" lang="zh-CN">'
+        + chinese_body
+        + '</section>'
+    )
+
+
 def render() -> str:
     markdown_text = SOURCE.read_text(encoding="utf-8")
     chinese_marker = '<div class="language-break" id="chinese-version"></div>'
@@ -611,23 +720,7 @@ def render() -> str:
   <span class="chip">120 blinded ablation pairs</span>
   <span class="chip">HTML review copy</span>
 </div>
-<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>
-<section class="review-checklist">
-  <h2>合作者审阅 Checklist</h2>
-  <ul>
-    <li class="done">✓ Figure 1 至 Figure 9 及补充图 S1 已生成并嵌入；正文不再把已有图称为“占位图”。</li>
-    <li class="done">✓ 3.2 的四医生调整后主分析已完成：GEE OR 4.15，95% CI 3.25 to 5.29，p&lt;0.001。</li>
-    <li class="done">✓ 已确认医生评审使用最终 baseline；Methods 明确评估的是含 source attribution 的完整 harness 输出，不把 attribution 单独归因。</li>
-    <li class="done">✓ 已在 Results 保留自由文本评论对 `TIE` 含义的解释，并在 Discussion 将其列为主要 limitation。</li>
-    <li class="done">✓ Literature review 已更新至 20 篇主稿引用；文内编号可跳转到带一句话简评的中英文参考文献条目。</li>
-    <li class="done">✓ 论文主线已按临床合作者建议重排为 breast human-in-the-loop、PDAC agent-assisted adaptation、独立 extraction evaluation 和 downstream letter generation。</li>
-    <li class="open">□ 对预先选定的一部分 `TIE` 做人工 adjudication，区分“两边都对”和“两边都错”。</li>
-    <li class="done">✓ 四级 staged ablation 已完成：A-B 17:17:6，B-C 2:24:14，C-D 19:16:5；结果明确标为 single-LLM secondary technical evidence。</li>
-    <li class="open">□ 决定是否补做直接 randomized blinded A-vs-D comparison，并对 C-vs-D 改变的少量输出做医生复核。</li>
-    <li class="done">✓ Related-work 对照表已移到中文版文末审阅附录，Discussion 改为自然引用。</li>
-    <li class="open">□ 全文确定后最后重写 Abstract。</li>
-  </ul>
-</section>''',
+<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Embedded SVGs are internal draft figures.</div>''',
         1,
     )
     body = body.replace(
@@ -635,6 +728,7 @@ def render() -> str:
         '<div id="english-version"></div><div class="language-nav"><a href="#english-version">English</a><a href="#chinese-version">中文</a></div>',
         1,
     )
+    body = wrap_language_sections(body)
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -664,6 +758,9 @@ def main() -> None:
         "1,900 required-field judgments",
         "120 blinded ablation pairs",
         'id="chinese-version"',
+        'class="manuscript-language english-version" lang="en"',
+        'class="manuscript-language chinese-version language-break"',
+        'id="author-confirmation-index"',
         "供临床合作者审阅的问题",
         "参考文献",
     ]
@@ -672,6 +769,13 @@ def main() -> None:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
     if output.count('<figure class="rough-figure">') != 20:
         raise RuntimeError("Expected ten embedded figures in each language version.")
+    if output.count('<aside class="author-note ') != 17:
+        raise RuntimeError("Expected 17 author-confirmation cards in the Chinese version.")
+    chinese_start = output.index('id="chinese-version"')
+    if '<aside class="author-note ' in output[:chinese_start]:
+        raise RuntimeError("Author-confirmation cards must not appear in the English version.")
+    if "onclick=" in output or "<script" in output:
+        raise RuntimeError("The review copy must remain JavaScript-free.")
     print(f"Wrote {OUTPUT.name} ({len(output):,} characters)")
 
 

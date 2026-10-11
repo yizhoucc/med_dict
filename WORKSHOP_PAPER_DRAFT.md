@@ -442,6 +442,30 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 > **术语约定：** 中文审阅稿保留 inference harness、workflow、pipeline、baseline、verification gate、hook 和 LLM-as-a-judge 等英文术语，避免翻译后与代码和实验记录中的名称对不上。
 
+<section class="author-confirmation-index" id="author-confirmation-index">
+<h2>作者确认清单</h2>
+<p>共 17 项，状态均为待确认。点击条目可跳到正文批注。红色项目会改变方法或结果口径，黄色项目需要作者判断，绿色项目已有项目记录支持，待确认后改正文。</p>
+<ol>
+<li><a href="#author-note-01"><span class="status-badge badge-critical">必须确认</span>是否纳入 Bolun 的 PDAC 评审</a></li>
+<li><a href="#author-note-02"><span class="status-badge badge-critical">必须确认</span>annotation 的实际用途与边界</a></li>
+<li><a href="#author-note-03"><span class="status-badge badge-suggested">建议确认</span>是否统一使用 benchmark-informed pilot evaluation</a></li>
+<li><a href="#author-note-04"><span class="status-badge badge-verified">已查证待修正</span>乳腺癌和 PDAC 开发病历数量</a></li>
+<li><a href="#author-note-05"><span class="status-badge badge-critical">必须确认</span>两个 260 的单位、来源与 technical audit 版本</a></li>
+<li><a href="#author-note-06"><span class="status-badge badge-critical">必须确认</span>七个 core fields 的定义与冻结时间</a></li>
+<li><a href="#author-note-07"><span class="status-badge badge-critical">必须确认</span>开发阶段医生作者的资历表述</a></li>
+<li><a href="#author-note-08"><span class="status-badge badge-critical">必须确认</span>final scoring version 的 attribution 覆盖范围</a></li>
+<li><a href="#author-note-09"><span class="status-badge badge-critical">必须确认</span>ChatGPT rubric 的 model、日期和角色</a></li>
+<li><a href="#author-note-10"><span class="status-badge badge-verified">已查证待修正</span>auto_review 的长病历截断</a></li>
+<li><a href="#author-note-11"><span class="status-badge badge-critical">必须确认</span>letter exploration 的正文位置和报告范围</a></li>
+<li><a href="#author-note-12"><span class="status-badge badge-suggested">建议确认</span>human-model complementarity 是解释还是实证结果</a></li>
+<li><a href="#author-note-13"><span class="status-badge badge-suggested">建议确认</span>regression test 的覆盖范围</a></li>
+<li><a href="#author-note-14"><span class="status-badge badge-critical">必须确认</span>Codex ablation judge 的 model、日期和配置</a></li>
+<li><a href="#author-note-15"><span class="status-badge badge-verified">已查证待修正</span>five gates 只对适用输出执行</a></li>
+<li><a href="#author-note-16"><span class="status-badge badge-suggested">建议确认</span>novelty claim 保持限定语</a></li>
+<li><a href="#author-note-17"><span class="status-badge badge-critical">必须确认</span>版本号、统计数字和图表同步更新</a></li>
+</ol>
+</section>
+
 ## 供临床合作者审阅的问题
 
 本轮审阅请重点关注以下问题。投稿时将删除本节。
@@ -518,6 +542,30 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 开发病历用于识别反复出现的错误模式并改进 harness，标注基准病历用于匹配技术比较和临床医生比较。虽然这些基准病历最初预留用于评估，但后续开发阶段的技术审查仍影响了医生评估前的 harness 修改。因此，本研究应被理解为试点性基准评估，而不是完全未接触数据的外部验证。研究未进行模型权重训练或微调。
 
+<aside class="author-note severity-critical" id="author-note-02">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Annotation 到底怎样使用</h4>
+<p><strong>我目前知道：</strong>annotation 没有输入 model、LLM judge 或医生使用的 A/B 界面。项目记录显示，研究团队曾人工对照 breast annotation，其中一个 staging discrepancy 影响了后续 stage rule。</p>
+<p><strong>请你确认：</strong>是否有人线下看过 PDAC annotation，以及是否曾用 annotation 裁决医生评分。确认前，正文不能写“annotation 完全没用”，也不能写“医生评分时可以参考 annotation”。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
+<aside class="author-note severity-suggested" id="author-note-03">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Benchmark 的定位</h4>
+<p><strong>我目前知道：</strong>breast benchmark review 曾影响 workflow 修改，因此这 40 份病历不再属于 untouched held-out validation。</p>
+<p><strong>请你确认：</strong>是否在全文统一称为 benchmark-informed pilot evaluation。这样既保留 benchmark 的角色，也不会暗示完全独立的 external validation。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
+<aside class="author-note severity-verified" id="author-note-04">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>Development notes 的数量</h4>
+<p><strong>我目前知道：</strong>100 份 breast development notes 都至少运行过，后期集中在 56 份 error-enriched 和 regression subset 上。PDAC 先使用 30 份，之后扩大到 100 份。</p>
+<p><strong>请你确认：</strong>是否按这个口径改写 2.2、2.5 和 3.1，避免把 56 份写成全部 breast development data。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 ### 2.3 基础模型与 baseline
 
 两个实验条件均使用通过 vLLM 在本地部署的 Qwen2.5-32B-Instruct-AWQ [9]。baseline 系统对每份病历只调用模型一次，并返回完整的目标 schema。它不使用任务拆分、verification gate、重试、词典或确定性后处理。医生评审包中使用的是最终确定的 baseline 版本，它与 inference harness 采用相同的字段定义和输出契约。
@@ -535,6 +583,14 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 3. 检查具体性和语义一致性，识别含糊或答非所问的答案。
 4. 进行忠实度修剪，删除明确无依据或相互矛盾的内容，同时保留有支持的信息。
 5. 进行时态过滤，从未来计划字段中删除已完成或历史事件。
+
+<aside class="author-note severity-verified" id="author-note-15">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>Five gates 的触发条件</h4>
+<p><strong>我目前知道：</strong>five gates 不是对每项输出无条件执行。部分 gate 只在解析失败、schema 不符、verify 开启或字段属于 plan 类时触发。</p>
+<p><strong>请你确认：</strong>是否把正文改为 eligible outputs passed the applicable gates，并在表中保留各 gate 的触发条件。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 确定性处理层使用高置信度临床规则解决反复出现的错误。这些规则区分区域淋巴结和远处疾病、疑似和确诊转移、当前抗癌治疗与支持治疗或居家用药，以及当前疗效与治疗前变化。系统还返回支持每个提取值的病历原文片段。
 
@@ -558,7 +614,23 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 乳腺癌开发在 56 份附加病历上进行了约 15 轮有记录的迭代。一位熟悉肿瘤学问题的医生作者与模型开发作者共同审阅部分输出。这位医生不是肿瘤专科医生，也没有参与最终的肿瘤科医生评估。研究团队将发现的问题与完整源病历逐项核对，对反复出现的错误进行归类，并把它们转化为可推广的提示修改、验证逻辑或确定性规则。该过程没有建立传统的监督训练集，也没有更新模型权重。
 
+<aside class="author-note severity-critical" id="author-note-07">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>开发阶段医生作者的资历</h4>
+<p><strong>我目前知道：</strong>这位合作者是普通医生，熟悉肿瘤学并计划进入该领域，但不能正式称为 oncologist。他也不是最终评估者。</p>
+<p><strong>请你确认：</strong>论文中应使用的正式资历，例如 physician coauthor、general physician 或其他准确职称，以及是否需要写明其培训阶段。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 候选修改只有在受影响样本和此前正确的对照样本上通过测试后才会保留。这里的目标不是修正单个病例，而是编码反复出现的临床区分。例如，腋窝淋巴结受累被误判为远处转移后，团队加入了通用的区域淋巴结规则；计划使用的药物被误列为当前治疗后，则加入了药物时态规则。
+
+<aside class="author-note severity-suggested" id="author-note-13">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Regression test 的覆盖范围</h4>
+<p><strong>我目前知道：</strong>项目有针对受影响样本和部分既有正确样本的 regression test，但我没有看到足以支持“所有修改都经过完整回归测试”的统一审计记录。</p>
+<p><strong>请你确认：</strong>是否确实覆盖 all retained changes。若不能确认，正文可改成 selected retained changes were regression-tested。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 > **协作说明：** 2.1 保留为研究设计总览；2.5 单独描述乳腺癌阶段的具体开发程序。两节不是同一层级的信息，因此不建议合并。
 
@@ -570,7 +642,23 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 > **协作说明：** 当前按医生口述将外部通用 LLM 写为 ChatGPT。正式投稿前需要补齐当时使用的具体 model/version 和访问日期。
 
+<aside class="author-note severity-critical" id="author-note-09">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>ChatGPT rubric 的可复现信息</h4>
+<p><strong>我目前知道：</strong>ChatGPT 的作用是整理 breast failure history，形成初版 review rubric 和候选 PDAC adaptation，不是训练基础模型。</p>
+<p><strong>请你确认：</strong>具体 model、访问日期和交互方式。若无法恢复，正文应写 general-purpose external LLM，并明确它只提供建议。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 在两个开发阶段，pipeline 都记录原始模型输出、每项验证操作和确定性修正。这些记录使团队能够追溯最终字段值在 harness 中的处理过程，并根据回归结果保留或拒绝修改建议。
+
+<aside class="author-note severity-verified" id="author-note-10">
+<span class="status-badge badge-verified">已查证待修正</span>
+<h4>LLM review 并非总能看到完整病历</h4>
+<p><strong>我目前知道：</strong>auto_review.py 会把超过 12,000 个字符的 note 截为开头和结尾，中间插入截断标记。</p>
+<p><strong>请你确认：</strong>是否把“与完整源病历比较”改为“与提供给 reviewer 的源病历文本比较”，并在 Methods 报告 12,000-character limit。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 ### 2.7 由医生确定的核心临床字段
 
@@ -586,17 +674,41 @@ Extraction 评估聚焦七个不能仅靠表层实体识别解决的临床问题
 
 最终的肿瘤科医生评估工具还包括遗传检测计划、支持用药、操作计划、影像计划、实验室检查计划、用药计划和近期治疗变化。实验室结果摘要和一般临床发现为选评字段，不纳入主要临床分析。
 
+<aside class="author-note severity-critical" id="author-note-06">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>七个 core fields 的定义</h4>
+<p><strong>我目前知道：</strong>当前七类为 active anticancer therapy、stage、distant metastasis、regional or overall metastatic involvement、response、breast type plus receptor status，以及 completed molecular or genetic results。</p>
+<p><strong>请你确认：</strong>这些类别由哪位医生、在何时、是否在查看结果前冻结。还请确认 metastasis 与 distant metastasis 分开，以及 breast type 与 receptor status 合并，都是有意的设计。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 ### 2.8 开发阶段的 LLM 辅助审查
 
 LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配。针对每个候选输出，审查模型依据预先设定的字段定义和严重程度标准，将提取结果与源病历进行比较，并标记可能的遗漏、无依据内容、语义错配和时态错误。已有研究表明，LLM judge 可以在一定程度上接近人工偏好，但也会受到 position、verbosity 和 self-preference bias 的影响 [16,17]。因此，这些发现只用于形成候选修改，最终是否实施仍由研究人员判断，并通过 regression test 确认，不能作为临床结局标签。
 
 研究还用同一流程完成了 260 项适用病历字段比较的匹配审查，用于技术错误分析。这个数字来自 40 份评估病历共有的 6 个跨癌种字段，再加上 20 份乳腺癌病历特有的 type 和 receptor 字段，即 40 x 6 + 20 x 1 = 260。LLM 的判断不作为最终临床结局标签，也不能替代独立的肿瘤科医生评估。
 
+<aside class="author-note severity-critical" id="author-note-05">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>文中两个 260 不是 260 份 notes</h4>
+<p><strong>我目前知道：</strong>每位医生的 PDAC 评估是 20 notes x 13 fields，共 260 个 note-field judgments。Technical audit 的另一个 260 是 40 x 6 + 20 x 1，66/28/166 来自较早 v2.2 的 LLM-assisted manual-style audit，不能直接写成与当前 Qwen auto_review 相同的流程。</p>
+<p><strong>请你确认：</strong>是否保留旧 technical audit。若保留，需要补齐 reviewer、harness version 和 procedure，并把两个表的单位都写清楚。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 > **协作说明：** 这里不再罗列“发现了哪些错误、之后修了什么”。这些内容更像开发报告。Methods 只说明 LLM 审查的用途、边界和它与最终医生评估的区别。
 
 ### 2.9 肿瘤科医生评估
 
 临床评估通过隐藏系统标签的 A/B 界面展示源病历和两份结构化输出。评估者针对每个字段选择 A 更优、B 更优或平局。他们不知道哪份输出来自 inference harness，也不知道两个系统是否使用同一基础模型或研究预期哪一侧更好。所有评估采用固定映射，inference harness 显示为 A，single-prompt baseline 显示为 B。source attribution 作为完整 harness 输出的一部分随 A 展示。因此，本研究比较的是呈现给医生的完整系统输出，没有单独隔离 attribution 的作用。
+
+<aside class="author-note severity-critical" id="author-note-08">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Source attribution 的完整性</h4>
+<p><strong>我目前知道：</strong>harness 可以返回 model-selected supporting excerpts，医生界面也展示了 attribution，但我没有找到 final scoring version 的逐字段完整性审计。</p>
+<p><strong>请你确认：</strong>final scoring package 是否每个字段都有经过核对的 attribution。若没有，正文应写 model-selected supporting excerpts when available，避免绝对表述。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 参与乳腺癌开发的医生作者不属于最终评估者。四位肿瘤科医生独立评估了乳腺癌输出，其中三位同时评估了胰腺癌输出，一位没有评估胰腺癌。
 
@@ -614,6 +726,14 @@ LLM 辅助审查是开发阶段使用的工具，尤其服务于胰腺癌适配�
 4. D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。
 
 实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。最初 12 对 calibration samples 在解盲前按最终 rubric 重新审阅。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代肿瘤科医生评估。
+
+<aside class="author-note severity-critical" id="author-note-14">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Codex ablation judge 的身份与配置</h4>
+<p><strong>我目前知道：</strong>这次 ablation 使用一个没有项目上下文的 fresh Codex judge，并按统一 rubric 审阅 120 对输出。稿件尚未报告可复现的 model、运行日期和配置。</p>
+<p><strong>请你确认：</strong>是否能从运行记录恢复这些信息。若不能，正文应明确无法恢复的部分，并避免把 fresh 当成可复现的 model specification。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 > **协作说明：** B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。
 
@@ -636,6 +756,22 @@ Harness-based letter route 先生成 structured extraction，再使用清理后�
 Extraction 完成后，同一组 structured fields 可以与源病历一起传给 patient-letter generator。这样形成从 clinician-informed extraction 到患者沟通的明确路径。Direct Qwen 和 GPT-4o comparator 跳过 extraction stage，直接通过一个 prompt 从 raw note 生成 letter。
 
 ### 3.2 当前肿瘤科医生评估
+
+<aside class="author-note severity-critical" id="author-note-01">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Bolun 的 PDAC 评审是否进入正式分析</h4>
+<p><strong>我目前知道：</strong>新文件包含 Bolun 的 260 项完整 PDAC judgments。若纳入，四位医生都评了两个癌种，总数变为 2,160，PL 699，BL 171，TIE 1,290，非平局中 PL 为 80.3%，总体 GEE OR 约 4.00，95% CI 约 3.12 至 5.11。</p>
+<p><strong>请你确认：</strong>这份评分是否属于正式最终数据。确认纳入后，需要重跑分析并更新 Figure 2、4、5、6、相关表格和全部结果文字。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
+<aside class="author-note severity-critical" id="author-note-17">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>版本号、数字和图表需要同批更新</h4>
+<p><strong>我目前知道：</strong>英文标题页是 v0.17，中文仍写 v0.16。正文还保留 1,900 judgments、旧 OR，以及 3.6 中已经过时的 839 ties。</p>
+<p><strong>请你确认：</strong>先决定是否纳入 Bolun PDAC。随后用同一次分析输出更新版本号、数字、表格和图，避免混用两版结果。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 目前的临床证据包括七组评审者与癌种组合：四位肿瘤科医生均完成了乳腺癌评估，其中三位还完成了胰腺癌评估。在 1,900 项必评字段判断中，harness 获偏好 596 次，baseline 获偏好 141 次，另有 1,163 次平局，分别占全部判断的 31.4%、7.4% 和 61.2%。在 737 项非平局判断中，harness 占 80.9%。
 
@@ -756,6 +892,14 @@ Judge 的文字理由提示，最后一步存在 fidelity 与 completeness 的�
 
 ***图 8.*** *一位肿瘤科医生对每个病例的 accuracy、completeness、comprehensibility 和 usefulness 平均分差。正值表示 harness-based letter 得分更高。该比较仅作描述，不属于正式 superiority test。*
 
+<aside class="author-note severity-critical" id="author-note-11">
+<span class="status-badge badge-critical">必须确认</span>
+<h4>Letter exploration 怎样报告</h4>
+<p><strong>我目前知道：</strong>letter 是 downstream exploration，不是 extraction 主结论。Bolun 的 PDAC forced-choice result 也不偏向 pipeline。当前 Figure 8 只画四个维度，漏了 hallucination-related concern，正文继续只报旧 breast 精确值会有选择性汇报风险。</p>
+<p><strong>请你确认：</strong>是从主 Results 移除，只在 Discussion 做定性总结，还是按不同评估 instrument 完整报告全部 letter data。确认前先保留现状，不新增图或显著性结论。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 ## 4. 讨论
 
 ### 4.1 主要解读
@@ -798,6 +942,14 @@ LLM-as-a-judge 不定义最终临床结局，也不直接修改部署中的 work
 
 ***图 9.*** *肿瘤信息 extraction 中 human-model complementarity 的概念图。图中位置是定性解释，不是实测难度分数。它区分了适合自动化的重复综合任务，以及更适合由模型整理证据、医生快速复核的判断敏感字段。*
 
+<aside class="author-note severity-suggested" id="author-note-12">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Human-model complementarity 的证据边界</h4>
+<p><strong>我目前知道：</strong>项目测了字段偏好，没有测医生完成任务的时间、认知负担或效率。图 9 因此只能是 clinical interpretation 和 future hypothesis。</p>
+<p><strong>请你确认：</strong>临床作者是否认可这套解释。正文应继续标明 conceptual，不能把它写成已验证的 workflow benefit。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
+
 > **协作说明：** 这张图表达的是你说的“医生很容易、模型反而容易错”和“模型可以替医生处理冗长信息”这两类互补关系。它是 conceptual figure，不会伪装成我们实际测量过医生工作量。
 
 ### 4.5 Staged ablation 提供的机制证据
@@ -823,6 +975,14 @@ CORAL 建立了本研究使用的真实病历 benchmark。原研究比较了 zer
 本研究的区别不是单独发明 prompt、retry 或 rule，而是把 field-specific routing、selective context transfer、verification gates、deterministic oncology rules、logging 和 source attribution 组合为一个 inference harness，再用 same-model baseline 隔离外围 workflow 的作用，并由肿瘤科医生逐字段直接比较。乳腺癌到胰腺癌的开发顺序还检验了临床信息形成的 failure rules 能否在第二个癌种中减少对稀缺专科医生时间的反复占用。
 
 因此，更准确的定位是：这是一项对整合式 inference harness 的、小规模但由肿瘤科医生直接评估的研究，而不是第一个肿瘤 extraction 系统，也不是规模最大的验证。更具体的贡献是把 field-specific routing、selective context transfer、verification gate、deterministic oncology rule、logging 和 source attribution 组合起来，再用 same-model baseline 和医生逐字段比较评估完整系统。逐篇对照表保留在文末中文审阅附录，正文只放与论点直接相关的引用。
+
+<aside class="author-note severity-suggested" id="author-note-16">
+<span class="status-badge badge-suggested">建议确认</span>
+<h4>Novelty claim 保持限定</h4>
+<p><strong>我目前知道：</strong>literature review 支持“在我们审阅的最接近研究中，没有发现相同完整组合”。它不支持 first、no prior study 或唯一系统这类绝对说法。</p>
+<p><strong>请你确认：</strong>是否保留 in the studies we reviewed 这一限定语，并让 contribution 聚焦于组合方式、same-model comparison 和医生逐字段评估。</p>
+<a class="back-link" href="#author-confirmation-index">返回作者确认清单</a>
+</aside>
 
 ### 4.7 Structured extraction 连接患者沟通
 
