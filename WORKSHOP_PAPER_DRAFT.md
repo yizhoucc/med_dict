@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.19, October 2026
+Version 0.20, October 2026
 
 ## Abstract
 
@@ -31,7 +31,7 @@ We built an inference harness around Qwen2.5-32B-Instruct-AWQ in two development
 
 ### Results
 
-Eight evaluator-by-cancer evaluations contributed 2,160 required note-field judgments. The harness was preferred in 699, the baseline in 171, and 1,290 were ties. Ties accounted for 59.7% of all judgments. Among the 870 directional judgments, 80.34% favored the harness. The adjusted directional analysis estimated an odds ratio of 3.995 for harness preference (95% CI 3.124 to 5.110; p=2.67 x 10^-28). The corresponding estimates were 4.452 for breast cancer (95% CI 3.169 to 6.253; p=7.04 x 10^-18) and 3.576 for pancreatic cancer (95% CI 2.505 to 5.105; p=2.30 x 10^-12). In the technical ablation, decomposition with shared orchestration safeguards produced no overall preference difference (17 versus 17, with 6 ties). Adding verification gates favored the verified condition 24 to 2, with 14 ties (exact p=0.0000105). Adding the complete deterministic hook layer produced no overall advantage (16 versus 19, with 5 ties), with opposite directions in breast and pancreatic cancer.
+Eight evaluator-by-cancer evaluations contributed 2,160 required note-field judgments: 699 harness preferences (32.36%), 1,290 ties (59.72%), and 171 baseline preferences (7.92%). Among 870 directional judgments, the crude harness share was 80.34% (note-cluster robust 95% CI 76.14% to 83.96%). The adjusted probability of a harness preference was 79.98% (95% CI 75.75% to 83.63%), an absolute difference of +29.98 percentage points from 50% (95% CI +25.75 to +33.63). The corresponding adjusted probabilities were 81.66% for breast cancer (95% CI 76.02% to 86.21%) and 78.15% for pancreatic cancer (95% CI 71.47% to 83.62%). The secondary odds-scale estimate was 3.995 overall (95% CI 3.124 to 5.110; p=2.67 x 10^-28). The tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47). Thirty-nine of 40 pooled note margins were positive (exact sign-test p=7.46 x 10^-11). In the technical ablation, only the addition of verification gates produced a clear overall preference (24 versus 2, with 14 ties; exact p=0.0000105).
 
 ### Conclusions
 
@@ -141,7 +141,9 @@ The physician author who participated in breast-cancer development was not one o
 
 All four oncologists completed the same 280 required breast-cancer comparisons and 260 required pancreatic-cancer comparisons. We calculated pairwise exact agreement and Cohen's kappa for each pair within each cancer type. We also summarized all eight evaluator-by-cancer analyses separately. Pooled counts are descriptive and do not treat field-level judgments as independent observations.
 
-The primary inferential analysis excluded ties and modeled whether a directional judgment favored the harness. We used a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator was included as a fixed effect, and the overall model also included cancer type. This specification accounts for repeated judgments across fields and evaluators within a note. We report adjusted odds ratios, 95% confidence intervals, and two-sided p values. Exact sign tests on note-level harness-minus-baseline margins were used as a sensitivity analysis.
+The primary estimand was P(harness preference | directional judgment). Ties were excluded only from this directional analysis. We fitted a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator was included as a fixed effect, and the overall model also included cancer type. Cancer-specific models adjusted for evaluator. We standardized fitted probabilities over the observed covariate distribution and used the delta method on the logit scale for 95% confidence intervals. The adjusted probability was the primary effect; its difference from 50% was the absolute effect, and the corresponding odds ratio was a secondary model-scale effect. Passweg et al. used a related report-cluster robust logistic and delta-method marginal-effects analysis for oncology extraction [14]. Other clinician comparisons have retained an equivalent response category [24], reported preference proportions with confidence intervals [25], or modeled repeated observations across cases and participants [26].
+
+We retained the complete three-category distribution for descriptive analysis. A crude directional proportion received a sandwich confidence interval clustered by note. For a tie-inclusive sensitivity measure, harness, tie, and baseline judgments were coded as 1, 0, and -1; their mean is the net preference margin. Its normal 95% confidence interval used a sandwich standard error clustered by note, not bootstrap resampling. We also pooled field judgments within each note and used an exact two-sided sign test on positive versus negative note margins.
 
 ### 2.10 Staged technical ablation
 
@@ -166,7 +168,7 @@ The pancreatic-cancer clinician result is the most relevant evidence for this ad
 
 ### 3.2 Current oncologist evaluation
 
-The clinical evidence comprises eight evaluator-by-cancer analyses. All four oncologists evaluated both cancer types. Across 2,160 required note-field judgments, the harness was preferred 699 times, the baseline 171 times, and 1,290 comparisons were ties. These correspond to 32.4%, 7.9%, and 59.7% of all judgments. Among the 870 directional judgments, the harness received 80.34%.
+The clinical evidence comprises eight evaluator-by-cancer analyses. All four oncologists evaluated both cancer types. Across 2,160 required note-field judgments, the harness was preferred 699 times, 1,290 comparisons were ties, and the baseline was preferred 171 times. These correspond to 32.36%, 59.72%, and 7.92% of all judgments. Among the 870 directional judgments, the crude harness share was 80.34% (note-cluster robust 95% CI 76.14% to 83.96%).
 
 | Completed evaluation | Required judgments | Harness | Baseline | Tie | Harness share among directional judgments |
 |---|---:|---:|---:|---:|---:|
@@ -182,13 +184,15 @@ The clinical evidence comprises eight evaluator-by-cancer analyses. All four onc
 
 <div data-rough-figure="2"></div>
 
-***Figure 2.*** *Clinician preferences across eight evaluator-by-cancer analyses. Panel A shows raw harness, baseline, and tie counts as proportions of all required judgments. Panel B shows the harness share after restricting to directional judgments. Every analysis favored the harness among non-tie judgments.*
+***Figure 2.*** *Clinician preferences across eight evaluator-by-cancer analyses. Panel A shows the raw three-category distribution among all required judgments: 699 harness preferences (32.36%), 1,290 ties (59.72%), and 171 baseline preferences (7.92%). Panel B shows the harness share after restricting to directional judgments. Across all judgments, the tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47).*
 
 All four clinicians independently favored the harness on the breast-cancer set. Their pooled breast result was 363 harness preferences, 80 baseline preferences, and 677 ties. The first oncologist's per-note result was 18 harness wins, one baseline win, and one tie. The second and third oncologists each recorded a harness win in all 20 notes. The fourth recorded 16 harness wins, two baseline wins, and two ties. When the four breast evaluations were combined within each note, all 20 notes had a positive harness-minus-baseline margin.
 
 The four pancreatic-cancer evaluations produced 336 harness preferences, 91 baseline preferences, and 613 ties. The harness had a positive pooled margin in 19 pancreatic notes and a negative margin in one.
 
-In the adjusted directional analysis, the odds of a harness preference were 3.995 times the odds of a baseline preference (95% CI 3.124 to 5.110; p=2.67 x 10^-28). Cancer-specific estimates were 4.452 for breast cancer (95% CI 3.169 to 6.253; p=7.04 x 10^-18) and 3.576 for pancreatic cancer (95% CI 2.505 to 5.105; p=2.30 x 10^-12). As a note-level sensitivity analysis, the pooled harness-minus-baseline margin was positive in 39 notes and negative in one (two-sided exact sign test, p=7.46 x 10^-11). These estimates describe preference among the observed ratings; four oncologists remain insufficient for a precise estimate of variation across the wider oncologist population.
+The adjusted probability of a harness preference among directional judgments was 79.98% (95% CI 75.75% to 83.63%). This is an absolute difference of +29.98 percentage points from equal preference (95% CI +25.75 to +33.63). The breast-cancer estimate was 81.66% (95% CI 76.02% to 86.21%), or +31.66 percentage points (95% CI +26.02 to +36.21). The pancreatic-cancer estimate was 78.15% (95% CI 71.47% to 83.62%), or +28.15 percentage points (95% CI +21.47 to +33.62). The same standardized estimates on the odds scale were 3.995 overall (95% CI 3.124 to 5.110; p=2.67 x 10^-28), 4.452 for breast cancer (95% CI 3.169 to 6.253; p=7.04 x 10^-18), and 3.576 for pancreatic cancer (95% CI 2.505 to 5.105; p=2.30 x 10^-12).
+
+The tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47). This measure retains all 2,160 judgments and treats a tie as zero contribution to either system. At the note level, pooled harness-minus-baseline margins were positive in 39 notes and negative in one (two-sided exact sign test, p=7.46 x 10^-11). This is a replication and sensitivity summary, not a separate accuracy endpoint. Four oncologists remain insufficient for a precise estimate of variation across the wider oncologist population.
 
 ### 3.3 Inter-rater agreement and core fields
 
@@ -225,7 +229,7 @@ Note-level summaries supported the same direction without treating every field a
 
 <div data-rough-figure="6"></div>
 
-***Figure 6.*** *Adjusted odds of clinician preference for the inference harness among non-tie judgments. Points and lines show odds ratios and 95% confidence intervals from logistic generalized estimating equations clustered by note. The right columns report estimates, p values, and directional sample sizes; ties were excluded.*
+***Figure 6.*** *Adjusted clinician preference among non-tie judgments. Panel A shows the adjusted probability of a harness preference and its absolute difference from 50%. Panel B shows the same standardized estimates on the odds scale with p values and directional sample sizes. Both panels use logistic generalized estimating equations clustered by note; ties are excluded from this model. Estimates are standardized over observed evaluator values and, for the overall model, cancer type.*
 
 ### 3.4 Staged technical ablation
 
@@ -255,11 +259,11 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 ### 4.1 Main interpretation
 
-The multi-oncologist evaluation showed a statistically significant preference for the inference harness over the same-model single-prompt baseline. In the adjusted directional analysis, the odds ratio for a harness preference was 3.995 (95% CI 3.124 to 5.110; p=2.67 x 10^-28).
+The multi-oncologist evaluation favored the inference harness over the same-model single-prompt baseline. Among directional judgments, the adjusted probability of a harness preference was 79.98% (95% CI 75.75% to 83.63%), which is +29.98 percentage points above equal preference (95% CI +25.75 to +33.63). The corresponding odds ratio was 3.995 (95% CI 3.124 to 5.110; p=2.67 x 10^-28).
 
 The main result concerns the development path around the model. A physician author helped identify recurrent errors in breast cancer. The team converted those errors into an explicit inference harness. A general-purpose external LLM organized the failure history into a written rubric, and a source-grounded Qwen reviewer then supported adaptation to pancreatic cancer without target-domain physician review. The model-development author controlled each retained change. Final oncologist ratings favored the harness in both domains.
 
-Most field comparisons were ties, which is expected because both systems used the same base model. When an oncologist found a meaningful difference, the adjusted odds favored the harness by about four to one. The gains were concentrated in fields that need temporal interpretation or clinical classification. This is consistent with a system that leaves straightforward answers alone and intervenes when a known failure pattern appears.
+Most field comparisons were ties, which is expected because both systems used the same base model. The raw result was therefore reported in two complementary ways. The directional estimand asks which system was preferred when an oncologist selected a winner. The tie-inclusive net margin was +24.44 percentage points (95% CI +20.42 to +28.47), so the conclusion did not depend on removing ties. The gains were concentrated in fields that need temporal interpretation or clinical classification. This pattern is consistent with a system that leaves straightforward answers alone and intervenes when a known failure pattern appears.
 
 The staged ablation adds mechanistic evidence but does not replace clinical component evaluation. It used one non-clinician LLM judge, adjacent rather than full-versus-baseline comparisons, and no independent replicate judge. The clinician outcome also retains an ambiguity: a tie can represent either two acceptable outputs or two inadequate outputs. The results therefore support clinician preference for the complete presented harness and a technical contribution from verification gates, but not absolute correctness or a clinical causal claim for every individual rule.
 
@@ -311,6 +315,8 @@ The closest recent oncology studies show three complementary directions. First, 
 
 Second, other studies provide stronger evidence for scale or absolute correctness. Abhyankar et al. used 700 annotated notes for model development and testing, then applied the resulting staging system to more than two million notes across five cancers [13]. Van Koevorden et al. compared 29 extracted categories from 60 head and neck oncology patients against physician consensus, with six clinical experts assigning error types and impact [11]. Passweg et al. compared five local models with duplicate human extraction and senior-oncologist adjudication on 400 imaging reports [14]. These designs answer whether extraction agrees with a clinical reference. Our A/B study instead estimates clinician preference between a complete harness and a same-model single-prompt baseline, so it does not replace absolute accuracy assessment.
 
+The statistical presentation also follows precedents from clinical AI comparison studies. Passweg et al. used logistic models with report-cluster robust standard errors and delta-method marginal effects [14]. Van Veen et al. retained an equivalent category in blinded clinical summary comparisons rather than forcing a winner [24]. Ayers et al. reported a preference proportion with a confidence interval [25], while Goh et al. modeled repeated cases and participants with mixed effects [26]. These choices support reporting an interpretable adjusted probability, preserving ties in descriptive analyses, and accounting for repeated judgments.
+
 Third, prior systems support individual engineering components. Wiest et al. evaluated local models and constrained output for binary clinical features [3]. mCODEGPT tested hierarchical prompting on synthetic oncology notes [7]. Grothey et al. compared model, prompt, and quantization configurations in prostate pathology extraction [8]. Dao et al. combined engineered context, validation, and retries for numerical extraction from right-heart-catheterization reports [6]. Tariq et al. achieved larger scale and external validation with a UMLS-plus-fine-tuned-LLM system for breast treatment timelines [5], while Bhattarai et al. compared model families and rule-based methods on longitudinal lung-cancer phenotypes [4].
 
 The distinguishing feature of our evaluation is not the invention of prompts, retries, or rules in isolation. It is the combination of field-specific routing, selective context transfer, verification gates, deterministic oncology rules, logging, and source attribution, evaluated against a same-model baseline through direct field-level comparison by oncologists. The breast-to-pancreatic development sequence also tests whether clinically informed failure rules can reduce repeated demand on specialist time in a second cancer domain.
@@ -331,7 +337,7 @@ The system is also compatible with local deployment. Local operation does not by
 
 ### 4.9 Study boundaries and next steps
 
-This pilot was intended to establish whether the observed effect is large and clinically coherent enough to justify a larger study. Four oncologists independently reproduced the direction in both breast and pancreatic cancer. The adjusted clustered analysis confirmed a strong preference among these ratings.
+This pilot was intended to establish whether the observed effect is large and clinically coherent enough to justify a larger study. Four oncologists independently reproduced the direction in both breast and pancreatic cancer. The adjusted probability estimate was 79.98%, with its confidence interval remaining well above equal preference.
 
 The technical ablation separates broad stages but remains limited to one non-clinician LLM judge. It does not isolate every component within B, C, or D, does not estimate source attribution, and compares adjacent stages rather than D directly with A. The clinician preference scale also combines two meanings of a tie: both outputs may be acceptable, or both may be inadequate. These limitations restrict mechanism and absolute-correctness claims even though the direction of the primary clinician result is consistent.
 
@@ -345,6 +351,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Version history
 
+- **v0.20:** Made the standardized adjusted preference probability the primary effect, added absolute and tie-inclusive effects with note-cluster robust confidence intervals, and redrew Figure 6 on probability and odds scales.
 - **v0.17:** Added the first four-oncologist breast analysis, three-oncologist pancreatic analysis, staged technical ablation, and Chinese author-confirmation annotations.
 - **v0.18:** Replaced the Introduction with the physician-led clinical framing; clarified the development and untouched holdout cohorts; updated all extraction results and figures for four oncologists across both cancers; removed the final test-set LLM audit and quantitative letter results; and added the blinded Codex judge instructions.
 - **v0.19:** Folded the Chinese review metadata, consolidated Appendix S1 into one general judge protocol, and redrew Figures 1-8 with one clinical-AI visual system.
@@ -400,6 +407,9 @@ Audit artifact: [full blinded summary](results/staged_ablation_annotated_2026100
 21. Kong HJ. Managing Unstructured Big Data in Healthcare System. *Healthcare Informatics Research*. 2019;25(1):1. [https://doi.org/10.4258/hir.2019.25.1.1](https://doi.org/10.4258/hir.2019.25.1.1). <span class="reference-note"><strong>Draft relevance:</strong> This article supports the broad estimate that much healthcare information remains unstructured; the estimate is not oncology-specific.</span>
 22. Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. *JAMA Network Open*. 2021;4(7):e2115334. [https://doi.org/10.1001/jamanetworkopen.2021.15334](https://doi.org/10.1001/jamanetworkopen.2021.15334). <span class="reference-note"><strong>Draft relevance:</strong> This study of nearly 3 million outpatient notes documents increasing note length and redundancy and the contribution of copied and templated text.</span>
 23. Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. *npj Digital Medicine*. 2025;8:301. [https://doi.org/10.1038/s41746-025-01686-z](https://doi.org/10.1038/s41746-025-01686-z). <span class="reference-note"><strong>Draft relevance:</strong> This study provides a close precedent for human-in-the-loop refinement, error ontology development, and general instructions rather than case-specific fixes.</span>
+24. Van Veen D, Van Uden C, Blankemeier L, et al. Adapted large language models can outperform medical experts in clinical text summarization. *Nature Medicine*. 2024;30:1134-1142. [https://doi.org/10.1038/s41591-024-02855-5](https://doi.org/10.1038/s41591-024-02855-5). <span class="reference-note"><strong>Draft relevance:</strong> Its blinded reader study used a scale with an equivalent midpoint, supporting retention of ties in comparative clinical evaluation.</span>
+25. Ayers JW, Poliak A, Dredze M, et al. Comparing Physician and Artificial Intelligence Chatbot Responses to Patient Questions Posted to a Public Social Media Forum. *JAMA Internal Medicine*. 2023;183(6):589-596. [https://doi.org/10.1001/jamainternmed.2023.1838](https://doi.org/10.1001/jamainternmed.2023.1838). <span class="reference-note"><strong>Draft relevance:</strong> This clinician-rated comparison reported the preference proportion with a confidence interval, providing a clear precedent for probability-scale reporting.</span>
+26. Goh E, Gallo R, Hom J, et al. Large Language Model Influence on Diagnostic Reasoning. *JAMA Network Open*. 2024;7(10):e2440969. [https://doi.org/10.1001/jamanetworkopen.2024.40969](https://doi.org/10.1001/jamanetworkopen.2024.40969). <span class="reference-note"><strong>Draft relevance:</strong> Its mixed-effects analysis included participant and case effects, illustrating how repeated clinical observations should be modeled rather than treated as independent.</span>
 
 <div class="language-break" id="chinese-version"></div>
 
@@ -407,7 +417,7 @@ Audit artifact: [full blinded summary](results/staged_ablation_annotated_2026100
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.19，2026 年 10 月
+版本 0.20，2026 年 10 月
 
 作者：[TODO]
 
@@ -442,7 +452,7 @@ Audit artifact: [full blinded summary](results/staged_ablation_annotated_2026100
 
 ### 结果
 
-八组 evaluator-by-cancer 分析共提供 2,160 项必评 note-field judgments，其中 699 项偏好 inference harness，171 项偏好 baseline，1,290 项为平局。平局占全部判断的 59.7%；在 870 项非平局判断中，80.34% 偏好 inference harness。调整后的方向性分析得到 OR 3.995，95% CI 为 3.124 至 5.110，p=2.67 x 10^-28。乳腺癌的 OR 为 4.452，95% CI 为 3.169 至 6.253，p=7.04 x 10^-18；PDAC 的 OR 为 3.576，95% CI 为 2.505 至 5.105，p=2.30 x 10^-12。Technical ablation 中，task decomposition 加共享 orchestration safeguards 没有形成整体优势，结果为 17 比 17，另有 6 个 TIE。加入 verification gates 后，C 以 24 比 2 胜过 B，另有 14 个 TIE，exact p=0.0000105。加入完整 deterministic hook layer 后没有整体提升，D 与 C 为 16 比 19，另有 5 个 TIE，而且 breast 与 PDAC 的方向相反。
+八组 evaluator-by-cancer 分析共提供 2,160 项必评 note-field judgments：699 项偏好 inference harness（32.36%），1,290 项为 TIE（59.72%），171 项偏好 baseline（7.92%）。在 870 项非平局判断中，偏好 inference harness 的粗比例为 80.34%，note-cluster robust 95% CI 为 76.14% 至 83.96%。调整后的 harness 偏好概率为 79.98%（95% CI 75.75% 至 83.63%），相对 50% 的 absolute difference 为 +29.98 个百分点（95% CI +25.75 至 +33.63）。Breast 的调整后概率为 81.66%（95% CI 76.02% 至 86.21%），PDAC 为 78.15%（95% CI 71.47% 至 83.62%）。次要的 odds-scale estimate 为 3.995（95% CI 3.124 至 5.110；p=2.67 x 10^-28）。保留 TIE 的 net preference margin 为 +24.44 个百分点，note-cluster robust 95% CI 为 +20.42 至 +28.47。合并医生评分后，40 份病历中 39 份的净差为正（exact sign-test p=7.46 x 10^-11）。Technical ablation 中，只有加入 verification gates 后形成清楚的整体偏好，结果为 24 比 2，另有 14 个 TIE，exact p=0.0000105。
 
 > **协作说明：** Abstract 会在全文定稿后最后压缩。当前统计数字已经更新，不再保留未完成分析的占位内容。
 
@@ -558,7 +568,9 @@ LLM 辅助审查只用于开发阶段，尤其服务于 PDAC adaptation。针对
 
 四位肿瘤科医生均完成了同样的 280 项乳腺癌必评比较和 260 项 PDAC 必评比较。我们按癌种计算每两位医生之间的完全一致率和 Cohen's kappa，并分别汇总八组 evaluator-by-cancer analyses。合并计数仅作描述性统计，不把各字段判断视为相互独立的观测。
 
-主要推断分析排除平局，将非平局判断是否偏好 inference harness 作为二分类结局。我们使用总体平均的 logistic 广义估计方程，在每份病历内采用可交换相关结构。模型将评审者作为固定效应，总体模型同时校正癌种，从而处理同一病历中跨字段、跨评审者的重复判断。结果报告调整后比值比、95% 置信区间和双侧 p 值。敏感性分析将每组字段评分汇总为病历级的 harness 减 baseline 净差，并使用精确符号检验。
+Primary estimand 定义为 P(harness preference | directional judgment)。只有该方向性分析排除 TIE。我们使用总体平均的 logistic GEE，并在每份病历内采用 exchangeable working correlation。模型将 evaluator 作为固定效应，总体模型同时校正 cancer type；癌种分层模型只校正 evaluator。我们在观测到的 covariate distribution 上标准化 fitted probabilities，并在 logit scale 上用 delta method 计算 95% CI。调整后偏好概率是 primary effect；它相对 50% 的差值是 absolute effect，对应的 OR 是次要 model-scale effect。Passweg 等在 oncology extraction 中使用了相近的 report-cluster robust logistic model 和 delta-method marginal effects [14]。其他临床比较研究保留了 equivalent response category [24]、报告带 CI 的 preference proportion [25]，或用 mixed-effects model 处理 case 和 participant 的重复观测 [26]。
+
+描述性分析保留完整的三分类结果。粗方向性比例使用按病历聚类的 sandwich CI。Tie-inclusive sensitivity analysis 将 harness、TIE 和 baseline 分别编码为 1、0 和 -1，其均值即 net preference margin。该指标的 normal 95% CI 使用按病历聚类的 sandwich standard error，不使用 bootstrap。我们还把字段判断合并到病历层面，并对正向与负向 note margin 使用双侧 exact sign test。
 
 ### 2.10 Staged technical ablation
 
@@ -585,7 +597,7 @@ PDAC 的医生评估是检验这种适配的主要证据。在四次独立评估
 
 ### 3.2 当前肿瘤科医生评估
 
-目前的临床证据包括八组 evaluator-by-cancer analyses，四位肿瘤科医生均完成两个癌种的评估。在 2,160 项必评 note-field judgments 中，harness 获偏好 699 次，baseline 获偏好 171 次，另有 1,290 次平局，分别占全部判断的 32.4%、7.9% 和 59.7%。在 870 项非平局判断中，harness 占 80.34%。
+目前的临床证据包括八组 evaluator-by-cancer analyses，四位肿瘤科医生均完成两个癌种的评估。在 2,160 项必评 note-field judgments 中，harness 获偏好 699 次，1,290 次为 TIE，baseline 获偏好 171 次，分别占全部判断的 32.36%、59.72% 和 7.92%。在 870 项非平局判断中，偏好 harness 的粗比例为 80.34%，note-cluster robust 95% CI 为 76.14% 至 83.96%。
 
 | 已完成的评估 | 必评判断数 | harness | baseline | 平局 | harness 在非平局判断中的占比 |
 |---|---:|---:|---:|---:|---:|
@@ -601,13 +613,15 @@ PDAC 的医生评估是检验这种适配的主要证据。在四次独立评估
 
 <div data-rough-figure="2"></div>
 
-***图 2.*** *八组 evaluator-by-cancer analyses 的临床医生偏好。（A）全部必评 judgments 中 inference harness、baseline 和 TIE 的原始计数及比例。（B）只保留非平局 judgments 后，偏好 inference harness 的比例。八组方向性结果均偏向 inference harness。*
+***图 2.*** *八组 evaluator-by-cancer analyses 的临床医生偏好。（A）全部必评 judgments 中的原始三分类分布：699 项偏好 inference harness（32.36%），1,290 项为 TIE（59.72%），171 项偏好 baseline（7.92%）。（B）只保留非平局 judgments 后，偏好 inference harness 的比例。保留全部判断时，tie-inclusive net preference margin 为 +24.44 个百分点，note-cluster robust 95% CI 为 +20.42 至 +28.47。*
 
 四位肿瘤科医生在乳腺癌数据集上均独立偏好 harness。合并四位医生的乳腺癌评估后，harness 获偏好 363 次，baseline 获偏好 80 次，另有 677 次平局。第一位肿瘤科医生按病历评估的结果为 harness 胜出 18 例、baseline 胜出 1 例、平局 1 例。第二位和第三位医生均在 20 份病历中全部偏向 harness。第四位医生为 harness 胜出 16 例、baseline 胜出 2 例、平局 2 例。将四位医生对每份乳腺癌病历的评分合并后，20 份病历的 harness 减 baseline 净差均为正值。
 
 四次 PDAC 评估合计包括 336 项 harness 偏好、91 项 baseline 偏好和 613 项平局。合并四位医生的判断后，19 份 PDAC 病历的 harness 减 baseline 净差为正值，1 份为负值。
 
-调整后的方向性分析显示，在非平局判断中，临床医生偏好 inference harness 的 odds 是偏好 baseline 的 3.995 倍，95% CI 为 3.124 至 5.110，p=2.67 x 10^-28。乳腺癌的调整后 OR 为 4.452，95% CI 为 3.169 至 6.253，p=7.04 x 10^-18；PDAC 为 3.576，95% CI 为 2.505 至 5.105，p=2.30 x 10^-12。作为病历级敏感性分析，合并同一病历的医生评分后，39 份病历的 harness 减 baseline 净差为正，1 份为负，双侧 exact sign test p=7.46 x 10^-11。该结果说明现有评分中的偏好方向稳定，但四位医生仍不足以精确估计更广泛肿瘤科医生群体中的差异。
+在非平局判断中，调整后 harness 偏好概率为 79.98%（95% CI 75.75% 至 83.63%）。它相对 equal preference 的 absolute difference 为 +29.98 个百分点（95% CI +25.75 至 +33.63）。Breast 的调整后概率为 81.66%（95% CI 76.02% 至 86.21%），absolute difference 为 +31.66 个百分点（95% CI +26.02 至 +36.21）。PDAC 的调整后概率为 78.15%（95% CI 71.47% 至 83.62%），absolute difference 为 +28.15 个百分点（95% CI +21.47 至 +33.62）。同一组标准化结果在 odds scale 上分别为总体 OR 3.995（95% CI 3.124 至 5.110；p=2.67 x 10^-28）、breast OR 4.452（95% CI 3.169 至 6.253；p=7.04 x 10^-18）和 PDAC OR 3.576（95% CI 2.505 至 5.105；p=2.30 x 10^-12）。
+
+保留全部 2,160 项判断时，tie-inclusive net preference margin 为 +24.44 个百分点，note-cluster robust 95% CI 为 +20.42 至 +28.47；TIE 对两个系统的贡献均记为零。病历级敏感性分析中，合并医生评分后 39 份病历的 harness-minus-baseline margin 为正，1 份为负，双侧 exact sign test p=7.46 x 10^-11。这是 replication 和 sensitivity summary，不是独立的 accuracy endpoint。四位医生仍不足以精确估计更广泛肿瘤科医生群体中的差异。
 
 ### 3.3 评审者间一致性与核心字段
 
@@ -646,7 +660,7 @@ PDAC 的医生评估是检验这种适配的主要证据。在四次独立评估
 
 <div data-rough-figure="6"></div>
 
-***图 6.*** *非平局判断中，临床医生偏好 inference harness 的调整后比值比。点和横线表示按病历聚类的 logistic GEE 所得 OR 和 95% CI；右侧列出 estimate、p value 和 directional n。TIE 不进入该模型。*
+***图 6.*** *非平局判断中的调整后临床医生偏好。（A）调整后的 harness 偏好概率，以及它相对 50% 的 absolute difference。（B）同一组标准化结果在 odds scale 上的 estimate、p value 和 directional n。两部分均来自按病历聚类的 logistic GEE；TIE 不进入该模型。结果在观测到的 evaluator values 上标准化，总体模型还包括 cancer type。*
 
 ### 3.4 Staged technical ablation
 
@@ -680,11 +694,11 @@ Judge 的文字理由提示，最后一步存在 fidelity 与 completeness 的�
 
 ### 4.1 主要解读
 
-多位肿瘤科医生参与的评估显示，相较于使用同一模型的 single-prompt baseline，临床医生显著更偏好 inference harness。调整后的方向性分析中，harness 偏好的 OR 为 3.995，95% CI 为 3.124 至 5.110，p=2.67 x 10^-28。
+多位肿瘤科医生参与的评估中，inference harness 相对于 same-model single-prompt baseline 获得更高偏好。在非平局判断中，调整后 harness 偏好概率为 79.98%（95% CI 75.75% 至 83.63%），相对 equal preference 高 +29.98 个百分点（95% CI +25.75 至 +33.63）。对应 OR 为 3.995（95% CI 3.124 至 5.110；p=2.67 x 10^-28）。
 
 本文的主要结果来自模型外围的开发路径。Physician author 先帮助识别乳腺癌中反复出现的错误，团队再把这些错误转成明确的 inference harness。之后，general-purpose external LLM 把 failure history 整理成书面 rubric，source-grounded Qwen reviewer 支持 PDAC adaptation，期间没有 target-domain physician 审阅，具体修改由模型开发作者控制。两个癌种的最终医生评分都更偏向 inference harness。
 
-多数字段比较为平局，这是可以预期的，因为两个系统使用同一个能力较强的基础模型。不过，当肿瘤科医生认为两者存在实质差异时，调整后的 odds 约为四比一，方向偏向 inference harness。优势主要集中在需要时间关系判断或临床分类的字段。这符合系统的设计思路：保留基础模型已经答对的简单问题，只在出现已知失败模式时介入。
+多数字段比较为平局，这是可以预期的，因为两个系统使用同一个能力较强的基础模型。因此，我们用两种互补口径报告原始结果。Directional estimand 回答医生明确选出一侧时更偏好哪个系统；保留所有判断的 net preference margin 为 +24.44 个百分点（95% CI +20.42 至 +28.47），说明结论不依赖删除 TIE。优势主要集中在需要时间关系判断或临床分类的字段。这符合系统的设计思路：保留基础模型已经答对的简单问题，只在出现已知失败模式时介入。
 
 Staged ablation 增加了机制证据，但不能代替医生对各组件的临床评估。该实验只有一位非临床 LLM judge，比较的是相邻阶段，也没有独立的第二位 judge。医生评估中的 `TIE` 仍有两种含义：两个输出都可以接受，或者两个输出都不理想。因此，现有结果支持医生对完整 harness 输出的相对偏好，也支持 verification gates 的 technical contribution，但不能直接证明绝对正确率或每条 rule 的临床因果作用。
 
@@ -738,6 +752,8 @@ CORAL 建立了本研究使用的真实病历 benchmark。原研究比较了 zer
 
 第二类研究更重视规模或 absolute correctness。Abhyankar 等用 700 份标注病历完成 model development 和 testing，之后把 staging system 应用于五个癌种、超过两百万份病历 [13]。Van Koevorden 等在 60 位头颈肿瘤患者的 29 类字段上比较 LLM 和医生 consensus，并由六位临床专家判断 error type 与 impact [11]。Passweg 等在 400 份 oncology imaging report 上比较五个本地模型，ground truth 来自双人提取和高级肿瘤科医生 adjudication [14]。这些设计回答 extraction 是否符合临床 reference。我们的 A/B 研究回答的是完整 harness 相对于同模型 single-prompt baseline 是否更受医生偏好，因此不能代替 absolute accuracy evaluation。
 
+统计呈现也有相近的临床 AI 研究先例。Passweg 等使用 logistic model、按 report 聚类的 robust standard error 和 delta-method marginal effects [14]。Van Veen 等在 blinded clinical summary comparison 中保留 equivalent category，没有强迫评审者选出一侧 [24]。Ayers 等报告带 CI 的 preference proportion [25]；Goh 等则用 mixed-effects model 同时处理 case 和 participant 的重复观测 [26]。这些方法支持本文报告直观的 adjusted probability、在描述性分析中保留 TIE，并处理同一病历内的重复判断。
+
 第三类研究支持不同的工程组件。Wiest 等说明 prompt design 和 constrained output 可以改善本地模型对临床二分类字段的 extraction [3]。mCODEGPT 在合成肿瘤病历上比较 hierarchical prompting 与 single-step strategy [7]。Grothey 等展示了不同 model、prompt 和 quantization configuration 在前列腺病理 extraction 中的差异 [8]。Dao 等结合 engineered context、validation 和 retry，但任务是右心导管报告中的数值 extraction [6]。Tariq 等使用 UMLS 加 fine-tuned LLM，在乳腺癌治疗时间线上获得更大规模和 external validation [5]；Bhattarai 等则在纵向肺癌表型任务上比较多种模型和 rule-based approach [4]。
 
 本研究的区别不是单独发明 prompt、retry 或 rule，而是把 field-specific routing、selective context transfer、verification gates、deterministic oncology rules、logging 和 source attribution 组合为一个 inference harness，再用 same-model baseline 隔离外围 workflow 的作用，并由肿瘤科医生逐字段直接比较。乳腺癌到胰腺癌的开发顺序还检验了临床信息形成的 failure rules 能否在第二个癌种中减少对稀缺专科医生时间的反复占用。
@@ -758,7 +774,7 @@ CORAL 建立了本研究使用的真实病历 benchmark。原研究比较了 zer
 
 ### 4.9 研究边界与 next steps
 
-本 pilot 用于判断观察到的 effect 和临床一致性是否足以支持扩大研究规模。四位肿瘤科医生在 breast 和 PDAC 中都独立复现了总体方向。调整后的 clustered analysis 已经确认这些评分中的偏好很强。
+本 pilot 用于判断观察到的 effect 和临床一致性是否足以支持扩大研究规模。四位肿瘤科医生在 breast 和 PDAC 中都独立复现了总体方向。调整后偏好概率为 79.98%，其 CI 整体高于 equal preference。
 
 Technical ablation 已经区分了几个 broad stages，但仍只有一位非临床 LLM judge。它没有继续拆开 B、C 或 D 内部的全部组件，也没有估计 source attribution 的作用；相邻阶段比较还不能直接回答 D vs A。医生评分中的 `TIE` 也仍然无法区分“两个输出都对”和“两个输出都错”。这些限制约束了机制解释和绝对正确性结论，但不改变 primary clinician result 的方向。
 
@@ -774,6 +790,7 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非临
 
 ## 版本历史
 
+- **v0.20：** 将标准化调整后偏好概率作为 primary effect，补充 absolute effect 和保留 TIE 的 net preference margin 及其 note-cluster robust CI，并将 Figure 6 重绘为 probability 与 odds 双尺度图。
 - **v0.17：** 加入四位肿瘤科医生的首版 breast 分析、三位医生的 PDAC 分析、staged technical ablation，以及中文版作者确认批注。
 - **v0.18：** 使用 physician-led clinical framing 重写 Introduction；明确 development data 和 untouched holdout test set；用四位肿瘤科医生对两个癌种的完整结果和新图统一更新全文；删除 final test-set LLM audit 和定量 letter results；加入 blinded Codex judge instructions。
 - **v0.19：** 折叠中文版草稿信息与作者确认，将 Appendix S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘 Figure 1 至 Figure 8。
@@ -829,6 +846,9 @@ Errors should be short arrays of concrete field-level findings grounded in the n
 21. Kong HJ. Managing Unstructured Big Data in Healthcare System. *Healthcare Informatics Research*. 2019;25(1):1. [https://doi.org/10.4258/hir.2019.25.1.1](https://doi.org/10.4258/hir.2019.25.1.1). <span class="reference-note"><strong>草稿简评：</strong>该文支持医疗数据中大量信息仍为非结构化数据的宽泛估计；这个估计不是肿瘤专科测量。</span>
 22. Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. *JAMA Network Open*. 2021;4(7):e2115334. [https://doi.org/10.1001/jamanetworkopen.2021.15334](https://doi.org/10.1001/jamanetworkopen.2021.15334). <span class="reference-note"><strong>草稿简评：</strong>该研究覆盖近 300 万份门诊病历，记录了病历长度和冗余增加，以及复制内容和模板内容的影响。</span>
 23. Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. *npj Digital Medicine*. 2025;8:301. [https://doi.org/10.1038/s41746-025-01686-z](https://doi.org/10.1038/s41746-025-01686-z). <span class="reference-note"><strong>草稿简评：</strong>该研究是 human-in-the-loop refinement、error ontology 和通用规则替代病例特异性修补的近似先例。</span>
+24. Van Veen D, Van Uden C, Blankemeier L, et al. Adapted large language models can outperform medical experts in clinical text summarization. *Nature Medicine*. 2024;30:1134-1142. [https://doi.org/10.1038/s41591-024-02855-5](https://doi.org/10.1038/s41591-024-02855-5). <span class="reference-note"><strong>草稿简评：</strong>该 blinded reader study 的评分保留 equivalent midpoint，支持 comparative clinical evaluation 不强迫评审者选出一侧。</span>
+25. Ayers JW, Poliak A, Dredze M, et al. Comparing Physician and Artificial Intelligence Chatbot Responses to Patient Questions Posted to a Public Social Media Forum. *JAMA Internal Medicine*. 2023;183(6):589-596. [https://doi.org/10.1001/jamainternmed.2023.1838](https://doi.org/10.1001/jamainternmed.2023.1838). <span class="reference-note"><strong>草稿简评：</strong>该 clinician-rated comparison 报告 preference proportion 及其 CI，为 probability-scale presentation 提供直接先例。</span>
+26. Goh E, Gallo R, Hom J, et al. Large Language Model Influence on Diagnostic Reasoning. *JAMA Network Open*. 2024;7(10):e2440969. [https://doi.org/10.1001/jamanetworkopen.2024.40969](https://doi.org/10.1001/jamanetworkopen.2024.40969). <span class="reference-note"><strong>草稿简评：</strong>其 mixed-effects analysis 同时加入 participant 和 case effect，说明临床研究中的重复观测不应作为独立数据处理。</span>
 
 ## 附录 A：相关工作对照表（供合作者审阅）
 

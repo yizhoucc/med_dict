@@ -1,6 +1,6 @@
 # Four-clinician extraction analysis
 
-Updated: 2026-10-10
+Updated: 2026-10-11
 
 ## Data included
 
@@ -31,7 +31,7 @@ Bolun's new workbook also contains 20 forced-choice patient-letter selections. T
 
 The breast subtotal is PL 363, BL 80, and 677 ties across 1,120 judgments. PL received 81.9% of the 443 directional breast judgments. The PDAC subtotal is PL 336, BL 91, and 613 ties across 1,040 judgments. PL received 78.7% of the 427 directional PDAC judgments.
 
-Across all judgments, PL preference, BL preference, and tie account for 32.4%, 7.9%, and 59.7%, respectively. The 80.3% figure is conditional on a directional judgment.
+Across all judgments, PL preference, tie, and BL preference account for 32.36%, 59.72%, and 7.92%, respectively. The 80.34% figure is conditional on a directional judgment.
 
 ## Replication across clinicians and cancer types
 
@@ -46,7 +46,9 @@ After pooling the four ratings within each note, all 20 breast notes have a posi
 
 ## Adjusted analysis
 
-Among 870 directional judgments, a population-averaged logistic generalized estimating equation clustered by note and adjusted for evaluator and cancer type estimated an odds ratio of 4.00 for harness preference (95% CI 3.12-5.11; `p=2.67e-28`). Cancer-specific estimates were 4.45 for breast cancer (95% CI 3.17-6.25; `p=7.04e-18`) and 3.58 for PDAC (95% CI 2.50-5.10; `p=2.30e-12`). Full output is in `ADJUSTED_ANALYSIS.md` and `adjusted_gee_results.csv`.
+Among 870 directional judgments, a population-averaged logistic generalized estimating equation clustered by note and adjusted for evaluator and cancer type estimated an adjusted harness-preference probability of 79.98% (95% CI 75.75%-83.63%). This is +29.98 percentage points above equal preference (95% CI +25.75 to +33.63). Cancer-specific probabilities were 81.66% for breast cancer (95% CI 76.02%-86.21%) and 78.15% for PDAC (95% CI 71.47%-83.62%). The same standardized estimates on the odds scale were 3.995 overall (95% CI 3.124-5.110; `p=2.67e-28`), 4.452 for breast cancer (95% CI 3.169-6.253; `p=7.04e-18`), and 3.576 for PDAC (95% CI 2.505-5.105; `p=2.30e-12`). Full output is in `ADJUSTED_ANALYSIS.md` and `adjusted_gee_results.csv`.
+
+The crude directional share was 699/870, or 80.34% (note-cluster robust 95% CI 76.14%-83.96%). Across all 2,160 judgments, PL, tie, and BL accounted for 32.36%, 59.72%, and 7.92%. The tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47). These are preference effects, not accuracy estimates.
 
 Bolun's PDAC review lowers the overall adjusted odds ratio from 4.15 to 4.00 and the PDAC estimate from 3.71 to 3.58. The direction and statistical conclusion remain unchanged. The result is statistically strong for the observed notes. Four clinicians are still too few for a precise estimate of variation across the broader oncologist population.
 
@@ -97,7 +99,7 @@ The new review also adds a useful negative observation. The pooled PDAC margin i
 - Figure 3 reports exact agreement and Cohen's kappa together in each populated evaluator-pair cell.
 - Figure 4 pools 1,040 core-field judgments in a diverging preference profile.
 - Figure 5 ranks note-level margins after pooling four evaluators within each cancer type.
-- Figure 6 uses the four-clinician adjusted model and reports the estimate, p value, and directional sample size in aligned columns.
+- Figure 6 shows the four-clinician adjusted effect on both probability and odds scales. Panel A reports adjusted probabilities and absolute differences from 50%; Panel B reports the corresponding ORs, p values, and directional sample sizes.
 - Figure 7 places the locked staged-ablation counts in the same visual system.
 - Figure 8 is a results-informed clinical handoff concept. It does not use unmeasured workload, time, or risk axes.
-- The v0.19 manuscript does not use the former technical-audit versus clinician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.
+- The v0.20 manuscript does not use the former technical-audit versus clinician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.

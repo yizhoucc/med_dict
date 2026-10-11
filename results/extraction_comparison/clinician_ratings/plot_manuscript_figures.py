@@ -573,21 +573,58 @@ def p_label(value: float) -> str:
 
 def plot_adjusted_effects() -> None:
     rows = load_csv(ADJUSTED_RESULTS)
-    width, height = 1320, 450
+    width, height = 1650, 640
     out = svg_start(width, height)
-    text(out, 35, 40, "Adjusted preference estimates", 22, weight=700)
-    text(out, 35, 66, "Logistic GEE among non-tie judgments, clustered by note", 13, fill=MUTED)
-    left, plot_w, top, gap, xmin, xmax = 230, 540, 135, 82, 0.8, 8.0
+
+    panel(out, 20, 20, 800, 570, "A", "Adjusted preference probability")
+    text(out, 75, 82, "P(harness preference | directional judgment)", 16, fill=MUTED)
+    probability_left, probability_width = 180, 320
+    probability_top, row_gap = 190, 120
+    probability_min, probability_max = 0.45, 0.90
+    for tick in [0.5, 0.6, 0.7, 0.8, 0.9]:
+        x = probability_left + probability_width * (tick - probability_min) / (probability_max - probability_min)
+        stroke = "#59656D" if tick == 0.5 else GRID
+        dash = "6 5" if tick == 0.5 else "0"
+        out.append(f'<line x1="{x:.1f}" y1="130" x2="{x:.1f}" y2="490" stroke="{stroke}" stroke-dasharray="{dash}"/>')
+        text(out, x, 522, f"{tick:.0%}", 16, anchor="middle", fill=MUTED)
+    text(out, probability_left + probability_width / 2, 563, "Adjusted probability", 16, anchor="middle", fill=MUTED)
+    text(out, 558, 113, "Probability", 16, anchor="middle", weight=700)
+    text(out, 558, 135, "(95% CI)", 16, anchor="middle", weight=700)
+    text(out, 722, 113, "Difference from 50%", 16, anchor="middle", weight=700)
+    text(out, 722, 135, "percentage points", 16, anchor="middle", weight=700)
+    for index, row in enumerate(rows):
+        y = probability_top + index * row_gap
+        estimate = float(row["adjusted_probability"])
+        low = float(row["probability_ci_low"])
+        high = float(row["probability_ci_high"])
+        xpos = lambda value: probability_left + probability_width * (value - probability_min) / (probability_max - probability_min)
+        text(out, probability_left - 20, y + 6, row["scope"], 16, anchor="end", weight=700 if index == 0 else 400)
+        out.append(f'<line x1="{xpos(low):.1f}" y1="{y}" x2="{xpos(high):.1f}" y2="{y}" stroke="{PL}" stroke-width="4"/>')
+        out.append(f'<line x1="{xpos(low):.1f}" y1="{y - 9}" x2="{xpos(low):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
+        out.append(f'<line x1="{xpos(high):.1f}" y1="{y - 9}" x2="{xpos(high):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
+        out.append(f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}" stroke="white" stroke-width="2"/>')
+        text(out, 558, y - 3, f"{estimate:.2%}", 16, anchor="middle", weight=700 if index == 0 else 400)
+        text(out, 558, y + 20, f"({low:.2%}-{high:.2%})", 16, anchor="middle", fill=MUTED)
+        difference = float(row["difference_from_50"]) * 100
+        difference_low = float(row["difference_ci_low"]) * 100
+        difference_high = float(row["difference_ci_high"]) * 100
+        text(out, 722, y - 3, f"{difference:+.2f} pp", 16, anchor="middle", weight=700 if index == 0 else 400)
+        text(out, 722, y + 20, f"({difference_low:+.2f} to {difference_high:+.2f})", 16, anchor="middle", fill=MUTED)
+    text(out, probability_left + 10, 151, "Equal preference", 16, fill=MUTED)
+
+    panel(out, 840, 20, 790, 570, "B", "Adjusted odds ratio")
+    text(out, 895, 82, "Same standardized GEE estimates on the odds scale", 16, fill=MUTED)
+    left, plot_w, top, gap, xmin, xmax = 1000, 275, 190, 120, 0.8, 8.0
     for tick in [0.8, 1, 2, 4, 8]:
         x = left + plot_w * math.log(tick / xmin) / math.log(xmax / xmin)
         stroke = "#59656D" if tick == 1 else GRID
         dash = "6 5" if tick == 1 else "0"
-        out.append(f'<line x1="{x:.1f}" y1="95" x2="{x:.1f}" y2="350" stroke="{stroke}" stroke-dasharray="{dash}"/>')
-        text(out, x, 381, str(tick), 12, anchor="middle", fill=MUTED)
-    text(out, left + plot_w / 2, 425, "Odds ratio for harness preference (log scale)", 13, anchor="middle", fill=MUTED)
-    text(out, 820, 97, "OR (95% CI)", 14, weight=700)
-    text(out, 1045, 97, "p", 14, weight=700)
-    text(out, 1165, 97, "Directional n", 14, weight=700)
+        out.append(f'<line x1="{x:.1f}" y1="130" x2="{x:.1f}" y2="490" stroke="{stroke}" stroke-dasharray="{dash}"/>')
+        text(out, x, 522, str(tick), 16, anchor="middle", fill=MUTED)
+    text(out, left + plot_w / 2, 563, "Odds ratio (log scale)", 16, anchor="middle", fill=MUTED)
+    text(out, 1305, 126, "OR (95% CI)", 16, weight=700)
+    text(out, 1495, 126, "p", 16, weight=700)
+    text(out, 1580, 126, "n", 16, anchor="middle", weight=700)
     for index, row in enumerate(rows):
         y = top + index * gap
         estimate, low, high = (float(row[key]) for key in ("odds_ratio", "ci_low", "ci_high"))
@@ -597,11 +634,12 @@ def plot_adjusted_effects() -> None:
         out.append(f'<line x1="{xpos(low):.1f}" y1="{y - 8}" x2="{xpos(low):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<line x1="{xpos(high):.1f}" y1="{y - 8}" x2="{xpos(high):.1f}" y2="{y + 8}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}" stroke="white" stroke-width="2"/>')
-        text(out, 820, y + 6, f"{estimate:.2f} ({low:.2f}-{high:.2f})", 15)
-        text(out, 1045, y + 6, p_label(float(row["p_value"])), 14)
-        text(out, 1198, y + 6, row["directional_judgments"], 14, anchor="middle")
-    text(out, left + 4, 111, "Baseline", 11, fill=MUTED)
-    text(out, left + plot_w - 5, 111, "Harness", 11, anchor="end", fill=PL)
+        text(out, 1305, y + 6, f"{estimate:.3f} ({low:.3f}-{high:.3f})", 16)
+        text(out, 1495, y + 6, p_label(float(row["p_value"])), 16)
+        text(out, 1580, y + 6, row["directional_judgments"], 16, anchor="middle")
+    text(out, left + 4, 151, "Baseline", 16, fill=MUTED)
+    text(out, left + plot_w - 5, 151, "Harness", 16, anchor="end", fill=PL)
+    text(out, 825, 620, "Ties excluded; GEE clustered by note and standardized over observed covariates", 16, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "figure6_adjusted_effects_rough.svg")
 
 

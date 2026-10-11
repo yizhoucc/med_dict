@@ -39,7 +39,7 @@ FIGURES = {
     "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
     "6": (
         FIGURE_DIR / "figure6_adjusted_effects_rough.svg",
-        "Adjusted odds of clinician preference for the harness",
+        "Adjusted clinician preference on probability and odds scales",
     ),
     "7": (
         FIGURE_DIR / "figure7_staged_ablation_rough.svg",
@@ -925,6 +925,9 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa",
         "2,160 required note-field judgments",
+        "Version 0.20, October 2026",
+        "79.98%",
+        "tie-inclusive net preference margin",
         "120 blinded ablation pairs",
         'id="chinese-version"',
         'class="manuscript-language english-version" lang="en"',

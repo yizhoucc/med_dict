@@ -80,3 +80,15 @@ Six sources embedded in the clinician coauthor's Word comments were checked agai
 | Huang J, Yang DM, Rong R, et al. *npj Digital Medicine*. 2024;7:106. DOI `10.1038/s41746-024-01079-8` | Already verified as working reference 10. | Supports iterative prompt refinement and oncology-specific extraction errors. |
 | Hein D, Christie A, Holcomb M, et al. *npj Digital Medicine*. 2025;8:301. DOI `10.1038/s41746-025-01686-z` | Crossref and Europe PMC confirm the title, authors, journal, article number, DOI, PMID `40410408`, and PMC `PMC12102345`. | New close comparator for human-in-the-loop refinement, error ontology development, and avoiding case-specific rules. |
 | Sushil M, Kennedy VE, Mandair D, et al. CORAL dataset, PhysioNet version 1.0. DOI `10.13026/v69y-xa45` | DataCite confirms the dataset title, six creators, PhysioNet publisher, 2024 publication year, and dataset type. | Dataset citation to accompany the existing CORAL article citation. |
+
+## Statistical reporting update, 2026-10-11
+
+The three references added for v0.20 were checked against Crossref and PubMed or PMC. DOI links resolve to the cited records.
+
+| Ref. | Identity and source | Claim checked | Audit result |
+|---:|---|---|---|
+| 24 | Van Veen et al., *Nature Medicine* 2024. [DOI](https://doi.org/10.1038/s41591-024-02855-5) · [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11479659/) | Blinded medical-summary reader study; five-point preference scale with 0 denoting equivalence | Supported by the full-text reader-study and statistical-analysis sections. |
+| 25 | Ayers et al., *JAMA Internal Medicine* 2023. [DOI](https://doi.org/10.1001/jamainternmed.2023.1838) | Clinician preference proportion reported with a 95% confidence interval; citation 183(6):589-596 | Supported by Crossref and PubMed PMID `37115527`. |
+| 26 | Goh et al., *JAMA Network Open* 2024. [DOI](https://doi.org/10.1001/jamanetworkopen.2024.40969) · [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11519755/) | Mixed-effects analysis with random effects for participants and cases to account for repeated observations | Supported by the full-text Statistical Analysis section. |
+
+Passweg et al. [14] was rechecked for the methods citation introduced in v0.20. Its full text specifies logistic regression, cluster-robust standard errors at the report level, delta-method standard errors for the primary marginal contrasts, and the `marginaleffects` package. The draft does not describe the present study's cluster-robust intervals as bootstrap intervals.

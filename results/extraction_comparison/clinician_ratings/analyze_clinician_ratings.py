@@ -59,10 +59,30 @@ class GeeResult:
     baseline_preferences: int
     clusters: int
     adjusted_probability: float
+    probability_ci_low: float
+    probability_ci_high: float
+    difference_from_50: float
+    difference_ci_low: float
+    difference_ci_high: float
     odds_ratio: float
     ci_low: float
     ci_high: float
     p_value: float
+
+
+@dataclass(frozen=True)
+class DescriptiveResult:
+    total_judgments: int
+    harness_preferences: int
+    baseline_preferences: int
+    ties: int
+    directional_judgments: int
+    crude_directional_probability: float
+    crude_directional_ci_low: float
+    crude_directional_ci_high: float
+    net_preference_margin: float
+    net_margin_ci_low: float
+    net_margin_ci_high: float
 
 
 def read_ratings() -> pd.DataFrame:
@@ -135,6 +155,8 @@ def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
     )
     log_odds = math.log(adjusted_probability / (1 - adjusted_probability))
     z_score = log_odds / log_odds_se
+    probability_ci_low = float(expit(log_odds - 1.96 * log_odds_se))
+    probability_ci_high = float(expit(log_odds + 1.96 * log_odds_se))
 
     return GeeResult(
         scope=scope,
@@ -143,10 +165,55 @@ def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
         baseline_preferences=int((directional["score"] == "B").sum()),
         clusters=directional["cluster"].nunique(),
         adjusted_probability=adjusted_probability,
+        probability_ci_low=probability_ci_low,
+        probability_ci_high=probability_ci_high,
+        difference_from_50=adjusted_probability - 0.5,
+        difference_ci_low=probability_ci_low - 0.5,
+        difference_ci_high=probability_ci_high - 0.5,
         odds_ratio=math.exp(log_odds),
         ci_low=math.exp(log_odds - 1.96 * log_odds_se),
         ci_high=math.exp(log_odds + 1.96 * log_odds_se),
         p_value=float(2 * norm.sf(abs(z_score))),
+    )
+
+
+def descriptive_results(ratings: pd.DataFrame) -> DescriptiveResult:
+    directional = ratings[ratings["score"].isin(["A", "B"])].copy()
+    directional["harness_preferred"] = (directional["score"] == "A").astype(int)
+
+    crude_model = smf.glm(
+        "harness_preferred ~ 1",
+        data=directional,
+        family=sm.families.Binomial(),
+    ).fit(
+        cov_type="cluster",
+        cov_kwds={"groups": directional["cluster"], "use_correction": False},
+    )
+    crude_log_odds = float(crude_model.params.iloc[0])
+    crude_log_odds_se = float(crude_model.bse.iloc[0])
+
+    net_model = smf.ols("preference_value ~ 1", data=ratings).fit(
+        cov_type="cluster",
+        cov_kwds={"groups": ratings["cluster"], "use_correction": False},
+    )
+    net_ci_low, net_ci_high = (float(value) for value in net_model.conf_int().iloc[0])
+
+    return DescriptiveResult(
+        total_judgments=len(ratings),
+        harness_preferences=int((ratings["score"] == "A").sum()),
+        baseline_preferences=int((ratings["score"] == "B").sum()),
+        ties=int((ratings["score"] == "TIE").sum()),
+        directional_judgments=len(directional),
+        crude_directional_probability=float(directional["harness_preferred"].mean()),
+        crude_directional_ci_low=float(
+            expit(crude_log_odds - 1.96 * crude_log_odds_se)
+        ),
+        crude_directional_ci_high=float(
+            expit(crude_log_odds + 1.96 * crude_log_odds_se)
+        ),
+        net_preference_margin=float(net_model.params.iloc[0]),
+        net_margin_ci_low=net_ci_low,
+        net_margin_ci_high=net_ci_high,
     )
 
 
@@ -206,7 +273,9 @@ def note_sign_summaries(ratings: pd.DataFrame) -> list[dict[str, object]]:
 
 
 def write_results(
-    gee_results: list[GeeResult], sign_results: list[dict[str, object]]
+    gee_results: list[GeeResult],
+    descriptive: DescriptiveResult,
+    sign_results: list[dict[str, object]],
 ) -> None:
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(
@@ -221,21 +290,25 @@ def write_results(
     lines = [
         "# Adjusted clinician-preference analysis",
         "",
-        "Updated: 2026-10-10",
+        "Updated: 2026-10-11",
         "",
         "## Primary model",
         "",
-        "The primary analysis excludes ties and models whether a directional rating favors the inference harness. It uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. This approach accounts for repeated ratings of fields and evaluators within a note without treating all directional ratings as independent.",
+        "The primary estimand is P(harness preference | directional judgment). The analysis excludes ties and uses a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator is included as a fixed effect, and the overall model also includes cancer type. Adjusted probabilities are standardized over the observed covariate distribution. Delta-method confidence limits are calculated on the logit scale and transformed back to probabilities. The absolute effect is the adjusted probability minus 50 percentage points; the odds ratio is the same standardized estimate on the odds scale.",
         "",
-        "| Scope | Directional judgments | Harness | Baseline | Clusters | Adjusted harness probability | Odds ratio | 95% CI | p value |",
+        "| Scope | Directional judgments | Harness | Baseline | Clusters | Adjusted probability (95% CI) | Difference from 50% (95% CI), pp | Odds ratio (95% CI) | p value |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for result in gee_results:
         lines.append(
             f"| {result.scope} | {result.directional_judgments} | "
             f"{result.harness_preferences} | {result.baseline_preferences} | "
-            f"{result.clusters} | {result.adjusted_probability:.1%} | "
-            f"{result.odds_ratio:.2f} | {result.ci_low:.2f}-{result.ci_high:.2f} | "
+            f"{result.clusters} | {result.adjusted_probability:.2%} "
+            f"({result.probability_ci_low:.2%}-{result.probability_ci_high:.2%}) | "
+            f"{result.difference_from_50 * 100:+.2f} "
+            f"({result.difference_ci_low * 100:+.2f} to "
+            f"{result.difference_ci_high * 100:+.2f}) | "
+            f"{result.odds_ratio:.3f} ({result.ci_low:.3f}-{result.ci_high:.3f}) | "
             f"{result.p_value:.3g} |"
         )
 
@@ -243,6 +316,12 @@ def write_results(
         [
             "",
             "The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.",
+            "",
+            "## Descriptive and tie-inclusive effects",
+            "",
+            f"The raw three-category distribution was {descriptive.harness_preferences}/{descriptive.total_judgments} harness preferences ({descriptive.harness_preferences / descriptive.total_judgments:.2%}), {descriptive.ties}/{descriptive.total_judgments} ties ({descriptive.ties / descriptive.total_judgments:.2%}), and {descriptive.baseline_preferences}/{descriptive.total_judgments} baseline preferences ({descriptive.baseline_preferences / descriptive.total_judgments:.2%}).",
+            "",
+            f"The crude harness share was {descriptive.crude_directional_probability:.2%} among {descriptive.directional_judgments} directional judgments (note-cluster robust 95% CI {descriptive.crude_directional_ci_low:.2%}-{descriptive.crude_directional_ci_high:.2%}). The tie-inclusive net preference margin, calculated as the mean of harness=1, tie=0, and baseline=-1 over all required judgments, was {descriptive.net_preference_margin * 100:+.2f} percentage points (note-cluster robust 95% CI {descriptive.net_margin_ci_low * 100:+.2f} to {descriptive.net_margin_ci_high * 100:+.2f}). Both intervals use sandwich standard errors clustered by note; they are not bootstrap intervals.",
             "",
             "## Note-level sensitivity analysis",
             "",
@@ -272,19 +351,30 @@ def write_results(
 def main() -> None:
     ratings = read_ratings()
     directional = ratings[ratings["score"].isin(["A", "B"])].copy()
+    descriptive = descriptive_results(ratings)
     gee_results = [
         fit_gee("Overall", directional),
         fit_gee("Breast cancer", directional[directional["cancer"] == "Breast cancer"]),
         fit_gee("PDAC", directional[directional["cancer"] == "PDAC"]),
     ]
     sign_results = note_sign_summaries(ratings)
-    write_results(gee_results, sign_results)
+    write_results(gee_results, descriptive, sign_results)
     for result in gee_results:
         print(
-            f"{result.scope}: OR {result.odds_ratio:.2f}, "
-            f"95% CI {result.ci_low:.2f}-{result.ci_high:.2f}, "
+            f"{result.scope}: adjusted probability {result.adjusted_probability:.2%} "
+            f"({result.probability_ci_low:.2%}-{result.probability_ci_high:.2%}), "
+            f"OR {result.odds_ratio:.3f} "
+            f"({result.ci_low:.3f}-{result.ci_high:.3f}), "
             f"p={result.p_value:.3g}"
         )
+    print(
+        f"Crude directional: {descriptive.crude_directional_probability:.2%} "
+        f"({descriptive.crude_directional_ci_low:.2%}-"
+        f"{descriptive.crude_directional_ci_high:.2%}); "
+        f"tie-inclusive net margin {descriptive.net_preference_margin * 100:+.2f} pp "
+        f"({descriptive.net_margin_ci_low * 100:+.2f} to "
+        f"{descriptive.net_margin_ci_high * 100:+.2f})"
+    )
     print(f"Wrote {OUTPUT_CSV.name} and {OUTPUT_MD.name}")
 
 
