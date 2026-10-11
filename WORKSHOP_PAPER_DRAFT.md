@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.21, October 2026
+Version 0.22, October 2026
 
 ## Abstract
 
@@ -221,21 +221,15 @@ Across all completed evaluations, the seven physician-prioritized core categorie
 | Completed molecular or genetic results | 34 | 10 | 116 | +24 |
 | **Overall** | **418** | **77** | **545** | **+341** |
 
-<div data-rough-figure="4"></div>
-
-***Figure 4.*** *Preference profile for seven physician-prioritized core clinical categories, ordered by normalized harness-minus-baseline margin. Diverging bars retain harness, baseline, and tie counts; the receptor category applies only to breast-cancer notes. These are comparative preferences, not absolute accuracy estimates.*
-
 Active anticancer medication produced the largest and most consistent core-field margin. Medication planning, outside the seven core categories, totaled 98 harness preferences, 2 baseline preferences, and 60 ties. Procedure planning was nearly balanced at 21 harness preferences and 20 baseline preferences. Laboratory planning had a modest margin at 24 versus 19. Within the core set, distant metastasis had the smallest normalized margin, followed by breast type and receptor status.
 
 Note-level summaries supported the same direction without treating every field as an independent observation. After pooling physicians within each cancer type, the harness-minus-baseline margin was positive in all 20 breast notes and 19 pancreatic notes; the remaining pancreatic note had a negative margin. Each of the eight evaluator-by-cancer analyses also favored the harness at the aggregate level. These summaries serve as sensitivity analyses alongside the adjusted model.
 
-<div data-rough-figure="5"></div>
+<div data-rough-figure="4"></div>
 
-***Figure 5.*** *Note-level normalized preference margins after pooling all four physicians within each cancer type. Notes are ranked within each panel. The harness had a positive margin in all 20 breast-cancer notes and 19 of 20 PDAC notes; one PDAC note had a negative margin.*
+***Figure 4.*** *Effect profile across fields, cancers, and notes. (A) The seven physician-prioritized core fields are ordered by normalized harness-minus-baseline margin; bars retain harness, baseline, and tie counts, and the receptor category applies only to breast-cancer notes. (B) Adjusted harness-preference probabilities and 95% confidence intervals are shown for all directional judgments and by cancer, with 50% as equal preference. The right side reports each probability and its absolute difference from 50%. Ties were excluded from the GEE, which was clustered by note and standardized over observed evaluator values; the overall model also included cancer type. (C) Each point is one note-level normalized margin after pooling four physicians, without note identifiers. These panels use different analysis units and report preference, not accuracy. Odds ratios, p values, and directional sample sizes remain in the table and text.*
 
-<div data-rough-figure="6"></div>
-
-***Figure 6.*** *Adjusted physician preference among non-tie judgments on the probability scale. Points and intervals show the adjusted probability of a harness preference; the right columns report the same probability and its absolute difference from 50%. The logistic generalized estimating equations were clustered by note and standardized over observed evaluator values and, for the overall model, cancer type. Ties were excluded from this model. Odds ratios, p values, and directional sample sizes are reported in the accompanying table and text as secondary model-scale results.*
+Detailed note-level margins are shown in Supplementary Figure S1.
 
 ### 3.4 Staged ablation isolates the gain from verification
 
@@ -251,9 +245,9 @@ Adding deterministic rules produced no overall gain. C was preferred in 19 cases
 | B decomposed extraction vs C verification | 2 | 24 | 14 | 0.0000105 |
 | C verification vs D full deterministic layer | 19 | 16 | 5 | 0.736 |
 
-<div data-rough-figure="7"></div>
+<div data-rough-figure="5"></div>
 
-***Figure 7.*** *Blinded staged technical ablation across three cumulative transitions. The stage strip defines A as the single prompt, B as A plus decomposition and orchestration, C as B plus verification, and D as C plus deterministic rules. Each panel shows the added layer and its observed change relative to the immediately preceding condition. Only verification produced a clear overall gain. The deterministic layer favored D in breast cancer and C in PDAC. One non-physician Codex judge produced these secondary technical judgments; exact two-sided sign tests exclude ties.*
+***Figure 5.*** *Blinded staged technical ablation across three cumulative transitions. The stage strip defines A as the single prompt, B as A plus decomposition and orchestration, C as B plus verification, and D as C plus deterministic rules. Each panel shows the added layer and its observed change relative to the immediately preceding condition. Only verification produced a clear overall gain. The deterministic layer favored D in breast cancer and C in PDAC. One non-physician Codex judge produced these secondary technical judgments; exact two-sided sign tests exclude ties.*
 
 The judge's explanations suggested a fidelity-completeness tradeoff in the final transition. The D layer often improved caution around stage and metastatic sites, particularly in breast cancer. In pancreatic cancer it more often omitted current medications, response assessments, or therapy plans. These findings identify targets for hook-level audit rather than establishing that any variant is clinically superior.
 
@@ -297,9 +291,9 @@ Stage, metastatic involvement, and treatment response illustrate a different for
 
 Distant metastasis had the smallest normalized core-field margin, 23 to 5 with 132 ties; breast type and receptor status was next, at 24 to 14 with 42 ties. The large tie fractions are consistent with fields that are often stated explicitly, leaving less room for the harness to improve on the base model. The proposed division of labor is field-dependent: automate repetitive synthesis, surface evidence for judgment-sensitive fields, and let physicians verify compact outputs. This is an interpretation of the preference pattern, not a measured workflow benefit.
 
-<div data-rough-figure="8"></div>
+<div data-rough-figure="6"></div>
 
-***Figure 8.*** *Results-informed conceptual handoff for structured oncology extraction. Source-linked harness outputs can be routed to direct structuring, evidence reconciliation, or escalation for medical interpretation, with physician oversight across all three lanes. The observed core-field margin range provides context only; the study did not measure time, workload, risk, or clinical acceptability.*
+***Figure 6.*** *Results-informed conceptual handoff for structured oncology extraction. Source-linked harness outputs can be routed to direct structuring, evidence reconciliation, or escalation for medical interpretation, with physician oversight across all three lanes. The observed core-field margin range provides context only; the study did not measure time, workload, risk, or clinical acceptability.*
 
 ### 4.5 Mechanistic evidence from the staged ablation
 
@@ -355,9 +349,10 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Version history
 
-- **v0.21:** Standardized study personnel as physicians, moved qualitative comments to Appendix S2, clarified that verification was the only staged addition with a clear overall gain, and aligned all figures to fixed color semantics with a probability-only Figure 6.
-- **v0.20:** Made the standardized adjusted preference probability the primary effect, added absolute and tie-inclusive effects with note-cluster robust confidence intervals, and redrew Figure 6 on probability and odds scales.
-- **v0.19:** Folded the Chinese review metadata, consolidated Appendix S1 into one general judge protocol, and redrew Figures 1-8 with one clinical-AI visual system.
+- **v0.22:** Consolidated the core-field, adjusted-effect, and compact note-distribution results into one main figure, reduced the main figure set to six, and moved the fully labeled note-level plot to Supplementary Figure S1.
+- **v0.21:** Standardized study personnel as physicians, moved qualitative comments to Appendix S2, clarified that verification was the only staged addition with a clear overall gain, and aligned all figures to fixed color semantics with a probability-only adjusted-effect graphic.
+- **v0.20:** Made the standardized adjusted preference probability the primary effect, added absolute and tie-inclusive effects with note-cluster robust confidence intervals, and redrew the adjusted-effect graphic on probability and odds scales.
+- **v0.19:** Folded the Chinese review metadata, consolidated Appendix S1 into one general judge protocol, and redrew the complete figure set with one clinical-AI visual system.
 - **v0.18:** Replaced the Introduction with the physician-led medical framing; clarified the development and untouched holdout cohorts; updated all extraction results and figures for four physicians across both cancers; removed the final test-set LLM audit and quantitative letter results; and added the blinded Codex judge instructions.
 - **v0.17:** Added the first four-physician breast analysis, three-physician pancreatic analysis, staged technical ablation, and Chinese author-confirmation annotations.
 
@@ -390,6 +385,12 @@ Audit artifact: [full blinded summary](results/staged_ablation_annotated_2026100
 Three physician exports contained 14 written comments. These comments clarify a limitation of the A/B outcome: a TIE can mean either that both outputs are acceptable or that both are incomplete or incorrect. In one breast imaging-plan comparison, one physician preferred the harness because the baseline summarized completed findings instead of the plan, whereas another physician judged both outputs inadequate and selected a TIE. A fourth physician marked one medication comparison as a TIE because both outputs were poor and preferred the baseline in one procedure-plan comparison because the harness omitted part of the source sentence.
 
 The comments also identified unsupported receptor status, omitted regional nodal disease, uncertainty about response after a newly started regimen, and comparisons in which neither output was satisfactory. They help interpret the rating scale and provide examples for error analysis. They are not a separate quantitative endpoint, and the small, non-systematic set of comments cannot estimate how often either meaning of TIE occurred.
+
+## Appendix S3. Note-level sensitivity analysis
+
+<div data-supplementary-figure="S1"></div>
+
+***Supplementary Figure S1.*** *Detailed note-level normalized preference margins after pooling all four physicians within each cancer type. Each label identifies one held-out note. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. This is a supporting sensitivity analysis, not an accuracy estimate.*
 
 ## References
 
@@ -428,7 +429,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.21，2026 年 10 月
+版本 0.22，2026 年 10 月
 
 作者：[TODO]
 
@@ -436,7 +437,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 目标会议及稿件形式：[TODO]
 
-本稿现已纳入四位医生对两个癌种的完整评审。全文按医生建议采用一条主线：先通过 human-in-the-loop 开发乳腺癌 inference harness，再把乳腺癌阶段的 failure history 和 clinical rubric 用于 PDAC，并在没有 target-domain physician 审阅输出的情况下完成 LLM-assisted adaptation。最终由四位医生比较 inference harness 与同模型 single-prompt baseline。调整后的 GEE、四级 staged technical ablation、Figure 1 至 Figure 8、Appendix S1 和 Appendix S2 已纳入 HTML。方括号内容仅用于中文版协作审阅。
+本稿现已纳入四位医生对两个癌种的完整评审。全文按医生建议采用一条主线：先通过 human-in-the-loop 开发乳腺癌 inference harness，再把乳腺癌阶段的 failure history 和 clinical rubric 用于 PDAC，并在没有 target-domain physician 审阅输出的情况下完成 LLM-assisted adaptation。最终由四位医生比较 inference harness 与同模型 single-prompt baseline。调整后的 GEE、四级 staged technical ablation、Figure 1 至 Figure 6、Appendix S1 至 Appendix S3 已纳入 HTML。方括号内容仅用于中文版协作审阅。
 
 供临床审阅的简要说明：两个系统使用相同的语言模型。single-prompt baseline 要求模型通过一次调用提取全部信息。inference harness 则把任务拆分为较小的临床问题，检查模型答案，针对反复出现的错误应用范围明确的肿瘤学规则，并把每项结果与病历中的支持性原文关联起来。
 
@@ -663,21 +664,15 @@ PDAC 的医生评估是检验这种适配的主要证据。在四次独立评估
 | 已完成的分子或遗传检测结果 | 34 | 10 | 116 | +24 |
 | **总体** | **418** | **77** | **545** | **+341** |
 
-<div data-rough-figure="4"></div>
-
-***图 4.*** *七个由医生确定的核心临床类别的偏好分布，按标准化 harness-minus-baseline margin 排序。Diverging bars 保留 inference harness、baseline 和 TIE 的计数；受体类别只适用于 breast notes。这些结果是相对偏好，不是 absolute accuracy。*
-
 当前抗癌药物的优势最大，也最为稳定。在七个核心类别之外，药物计划共有 98 次偏好 harness、2 次偏好 baseline 和 60 次平局。操作或手术计划接近平衡，为 21 比 20。检验计划的差距也较小，为 24 比 19。七个核心类别中，distant metastasis 的标准化净差最小，其次是乳腺癌类型与受体状态。
 
 病历级汇总也得出了相同方向的结果，同时避免将每个字段视为相互独立的观察值。按癌种合并医生判断后，20 份乳腺癌病历和 19 份 PDAC 病历的 harness 减 baseline 净差为正值，另有 1 份 PDAC 病历为负值。八组 evaluator-by-cancer analyses 的汇总结果也全部偏向 harness。这些结果作为调整后模型的敏感性分析。
 
-<div data-rough-figure="5"></div>
+<div data-rough-figure="4"></div>
 
-***图 5.*** *按癌种合并四位医生评分后的 note-level normalized preference margin，各 panel 内按净差排序。Inference harness 在全部 20 份 breast notes 和 20 份 PDAC notes 中的 19 份取得正向净差，另有 1 份 PDAC note 为负值。*
+***图 4.*** *字段、癌种与病历三个层面的 effect profile。（A）七个由医生确定的核心字段按标准化 harness-minus-baseline margin 排序；bar 保留 harness、baseline 和 TIE 的计数，受体类别只适用于 breast notes。（B）总体及分癌种的非平局判断显示调整后 harness 偏好概率及 95% CI，50% 表示 equal preference；右侧报告各概率及其相对 50% 的 absolute difference。GEE 按病历聚类，并在观测到的 evaluator values 上标准化；总体模型还包括 cancer type。（C）每个点表示合并四位医生评分后的一份 note-level normalized margin，不显示 note ID。三个 panel 的分析单位不同，结果均表示偏好而不是 accuracy。OR、p value 和 directional n 保留在相邻表格与正文。*
 
-<div data-rough-figure="6"></div>
-
-***图 6.*** *非平局判断中的调整后医生偏好，只显示 probability scale。点和区间表示调整后的 harness 偏好概率，右侧两列报告同一概率及其相对 50% 的 absolute difference。结果来自按病历聚类的 logistic GEE，并在观测到的 evaluator values 上标准化；总体模型还包括 cancer type。TIE 不进入该模型。OR、p value 和 directional n 作为次要 model-scale results 保留在相邻表格与正文。*
+完整的 note-level margins 见 Supplementary Figure S1。
 
 ### 3.4 Staged ablation 将清楚增益定位在 verification
 
@@ -693,9 +688,9 @@ Blinded staged ablation 检验每一项新增层相对于紧邻前一条件是�
 | B decomposed extraction vs C verification | 2 | 24 | 14 | 0.0000105 |
 | C verification vs D full deterministic layer | 19 | 16 | 5 | 0.736 |
 
-<div data-rough-figure="7"></div>
+<div data-rough-figure="5"></div>
 
-***图 7.*** *三个累积 transition 的 blinded staged technical ablation。顶部 stage strip 定义 A 为 single prompt，B 为 A 加 decomposition 和 orchestration，C 为 B 加 verification，D 为 C 加 deterministic rules。每个 panel 都显示新增层及其相对于紧邻前一条件的变化。Verification 是唯一具有清楚总体优势的 transition。Deterministic layer 在 breast 中偏向 D，在 PDAC 中偏向 C。全部判断来自一位非医生 Codex judge，只能作为 secondary technical evidence；双侧 exact sign test 排除 TIE。*
+***图 5.*** *三个累积 transition 的 blinded staged technical ablation。顶部 stage strip 定义 A 为 single prompt，B 为 A 加 decomposition 和 orchestration，C 为 B 加 verification，D 为 C 加 deterministic rules。每个 panel 都显示新增层及其相对于紧邻前一条件的变化。Verification 是唯一具有清楚总体优势的 transition。Deterministic layer 在 breast 中偏向 D，在 PDAC 中偏向 C。全部判断来自一位非医生 Codex judge，只能作为 secondary technical evidence；双侧 exact sign test 排除 TIE。*
 
 Judge 的文字理由提示，最后一步存在 fidelity 与 completeness 的取舍。D 在 breast 中更常改善 stage 和 metastatic site 的谨慎表达；在 PDAC 中，它更常遗漏 current medications、response assessment 或 therapy plan。这个结果适合用于定位需要审计的 hooks，不能证明任何 variant 在临床上更优。
 
@@ -741,11 +736,11 @@ LLM reviewer 不定义最终医学结局，也不直接修改部署中的 workfl
 
 Distant metastasis 的标准化核心字段净差最小，结果为 23 比 5，另有 132 次平局；乳腺癌类型与受体状态紧随其后，为 24 比 14，另有 42 次平局。较高的 TIE 比例与这些字段经常被直接写在病历中相符，因此 baseline 已经能够完成很多样本。我们据此提出一种 field-dependent 分工假设：系统处理重复综合任务，对判断敏感的字段展示证据，再由医生复核紧凑输出。这是对结果的 interpretation，不是已经测量的 workflow benefit。
 
-<div data-rough-figure="8"></div>
+<div data-rough-figure="6"></div>
 
-***图 8.*** *根据结果提出的 structured oncology extraction 医学 handoff 概念图。带 source evidence 的 harness 输出可进入直接结构化、证据核对或医学解释升级三条路径，三者都保留医生监督。图中引用的核心字段净差只提供结果背景；本研究没有测量时间、工作负担、风险或医学可接受性。*
+***图 6.*** *根据结果提出的 structured oncology extraction 医学 handoff 概念图。带 source evidence 的 harness 输出可进入直接结构化、证据核对或医学解释升级三条路径，三者都保留医生监督。图中引用的核心字段净差只提供结果背景；本研究没有测量时间、工作负担、风险或医学可接受性。*
 
-> **协作说明：** 图 8 现在改成三条 clinical handoff lane，不再使用未测量的 workload 或 risk 坐标。它表达的仍是同一个互补关系：系统整理明确或冗长的信息，对需要判断的字段展示证据，再由医生复核或解释。
+> **协作说明：** 图 6 使用三条 clinical handoff lane，不采用未测量的 workload 或 risk 坐标。它表达的互补关系是：系统整理明确或冗长的信息，对需要判断的字段展示证据，再由医生复核或解释。
 
 ### 4.5 Staged ablation 提供的机制证据
 
@@ -803,9 +798,10 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非医
 
 ## 版本历史
 
-- **v0.21：** 统一用 physician 描述本研究人员，将定性评论移到 Appendix S2，明确 verification 是唯一产生清楚总体增益的 staged addition，并统一图中颜色语义，将 Figure 6 简化为 probability-only presentation。
-- **v0.20：** 将标准化调整后偏好概率作为 primary effect，补充 absolute effect 和保留 TIE 的 net preference margin 及其 note-cluster robust CI，并将 Figure 6 重绘为 probability 与 odds 双尺度图。
-- **v0.19：** 折叠中文版草稿信息与作者确认，将 Appendix S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘 Figure 1 至 Figure 8。
+- **v0.22：** 将核心字段、调整后 effect 和紧凑的病历级分布整合为一张主图，把主文图组收敛为六张，并将带完整病历标签的图移至 Supplementary Figure S1。
+- **v0.21：** 统一用 physician 描述本研究人员，将定性评论移到 Appendix S2，明确 verification 是唯一产生清楚总体增益的 staged addition，并统一图中颜色语义，将 adjusted-effect graphic 简化为 probability-only presentation。
+- **v0.20：** 将标准化调整后偏好概率作为 primary effect，补充 absolute effect 和保留 TIE 的 net preference margin 及其 note-cluster robust CI，并将 adjusted-effect graphic 重绘为 probability 与 odds 双尺度图。
+- **v0.19：** 折叠中文版草稿信息与作者确认，将 Appendix S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘完整图组。
 - **v0.18：** 使用 physician-led clinical framing 重写 Introduction；明确 development data 和 untouched holdout test set；用四位医生对两个癌种的完整结果和新图统一更新全文；删除 final test-set LLM audit 和定量 letter results；加入 blinded Codex judge instructions。
 - **v0.17：** 加入四位医生的首版 breast 分析、三位医生的 PDAC 分析、staged technical ablation，以及中文版作者确认批注。
 
@@ -838,6 +834,12 @@ Errors should be short arrays of concrete field-level findings grounded in the n
 三份医生评分导出共包含 14 条书面评论。这些评论说明 A/B outcome 的一个限制：`TIE` 既可能表示两个输出都可接受，也可能表示两个输出都不完整或不正确。在一项乳腺影像计划比较中，一位医生偏好 harness，因为 baseline 总结了已经完成的检查结果，而不是后续计划；另一位医生则认为两个输出都不充分，因此选择 `TIE`。第四位医生在一项用药比较中选择 `TIE`，理由是两个输出都很差；在一项操作计划比较中，该医生偏好 baseline，因为 harness 漏掉了原句的一部分。
 
 这些评论还指出了缺少支持证据的 receptor status、遗漏的区域淋巴结病变、刚开始新方案后无法确定 response，以及两个输出都不理想的比较。它们有助于解释评分量表，并为 error analysis 提供案例，但不构成单独的 quantitative endpoint。评论数量少，且并非系统收集，因此不能估计两种 `TIE` 含义各自出现的频率。
+
+## Appendix S3. 病历级敏感性分析
+
+<div data-supplementary-figure="S1"></div>
+
+***Supplementary Figure S1.*** *按癌种合并四位医生评分后的完整 note-level normalized preference margins。每个标签对应一份 held-out note。Margin 定义为该病历的 harness preferences 减 baseline preferences，再除以 completed judgments。20 份 breast notes 的 margin 全部为正；20 份 PDAC notes 中 19 份为正，1 份为负。该图属于 supporting sensitivity analysis，不是 accuracy estimate。*
 
 ## 参考文献
 

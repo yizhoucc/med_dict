@@ -35,19 +35,24 @@ FIGURES = {
         FIGURE_DIR / "figure3_interrater_matrix_rough.svg",
         "Pairwise physician agreement in breast and pancreatic cancer",
     ),
-    "4": (FIGURE_DIR / "figure4_core_fields_rough.svg", "Physician preference by core category"),
-    "5": (FIGURE_DIR / "figure5_note_margins_rough.svg", "Per-note normalized preference margins"),
-    "6": (
-        FIGURE_DIR / "figure6_adjusted_effects_rough.svg",
-        "Adjusted physician preference on the probability scale",
+    "4": (
+        FIGURE_DIR / "figure4_effect_profile.svg",
+        "Effect profile across fields, cancers, and notes",
     ),
-    "7": (
-        FIGURE_DIR / "figure7_staged_ablation_rough.svg",
+    "5": (
+        FIGURE_DIR / "figure5_staged_ablation.svg",
         "Blinded staged technical ablation overall and by cancer",
     ),
-    "8": (
-        FIGURE_DIR / "figure7_human_model_complementarity_rough.svg",
+    "6": (
+        FIGURE_DIR / "figure6_clinical_handoff.svg",
         "Conceptual physician-model complementarity across extraction tasks",
+    ),
+}
+
+SUPPLEMENTARY_FIGURES = {
+    "S1": (
+        FIGURE_DIR / "supplementary_figure_s1_note_margins.svg",
+        "Detailed note-level preference margins pooled across four physicians",
     ),
 }
 
@@ -361,6 +366,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   text-align: center;
 }
 .manuscript-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
+.supplementary-figure { background: #f8fafb; }
 .judge-appendix {
   margin-top: 34px;
   padding-top: 2px;
@@ -702,6 +708,14 @@ def inject_figures(body: str) -> str:
 <img src="{embed_svg(path)}" alt="{html.escape(title)}">
 </figure>'''
         body = body.replace(marker, figure)
+    for key, (path, title) in SUPPLEMENTARY_FIGURES.items():
+        marker = f'<div data-supplementary-figure="{key}"></div>'
+        if marker not in body or not path.exists():
+            continue
+        figure = f'''<figure class="manuscript-figure supplementary-figure">
+<img src="{embed_svg(path)}" alt="{html.escape(title)}">
+</figure>'''
+        body = body.replace(marker, figure)
     return body
 
 
@@ -856,9 +870,13 @@ def render() -> str:
         raise RuntimeError("The bilingual draft is missing the Chinese-version marker.")
     english_text, chinese_text = markdown_text.split(chinese_marker, 1)
     paired_counts = {
-        "embedded figure markers": (
+        "main figure markers": (
             english_text.count('data-rough-figure="'),
             chinese_text.count('data-rough-figure="'),
+        ),
+        "supplementary figure markers": (
+            english_text.count('data-supplementary-figure="'),
+            chinese_text.count('data-supplementary-figure="'),
         ),
     }
     mismatched = {
@@ -925,7 +943,7 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa",
         "2,160 required note-field judgments",
-        "Version 0.21, October 2026",
+        "Version 0.22, October 2026",
         "79.98%",
         "tie-inclusive net preference margin",
         "120 blinded ablation pairs",
@@ -944,13 +962,18 @@ def main() -> None:
     missing = [value for value in required if value not in output]
     if missing:
         raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
-    if output.count('<figure class="manuscript-figure">') != 16:
-        raise RuntimeError("Expected eight embedded figures in each language version.")
+    if output.count('<figure class="manuscript-figure">') != 12:
+        raise RuntimeError("Expected six main figures in each language version.")
+    if output.count('<figure class="manuscript-figure supplementary-figure">') != 2:
+        raise RuntimeError("Expected one supplementary figure in each language version.")
     if output.count('<details class="prompt-stage">') != 2:
         raise RuntimeError("Expected one folded judge protocol in each language version.")
     appendix_s2_headings = len(re.findall(r'<h2 id="appendix-s2-[^"]+">', output))
     if appendix_s2_headings != 2:
         raise RuntimeError("Expected one Appendix S2 heading in each language version.")
+    appendix_s3_headings = len(re.findall(r'<h2 id="appendix-s3-[^"]+">', output))
+    if appendix_s3_headings != 2:
+        raise RuntimeError("Expected one Appendix S3 heading in each language version.")
     if re.search(r"\boncologists?\b", output, flags=re.I):
         raise RuntimeError("Rendered study terminology must not use oncologist(s).")
     clinician_count = len(re.findall(r"\bclinicians?\b", output, flags=re.I))

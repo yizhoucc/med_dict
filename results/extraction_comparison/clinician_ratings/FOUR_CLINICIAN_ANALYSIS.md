@@ -97,9 +97,7 @@ The new review also adds a useful negative observation. The pooled PDAC margin i
 - Figure 1 separates data partitions, breast development, PDAC adaptation, and locked holdout evaluation in four panels.
 - Figure 2 retains all eight evaluator-by-cancer distributions and adds directional harness share as a second panel.
 - Figure 3 reports exact agreement and Cohen's kappa together in each populated evaluator-pair cell.
-- Figure 4 pools 1,040 core-field judgments in a diverging preference profile.
-- Figure 5 ranks note-level margins after pooling four evaluators within each cancer type.
-- Figure 6 shows the four-physician adjusted effect on the probability scale. It reports adjusted probabilities and absolute differences from 50%; the corresponding ORs, p values, and directional sample sizes remain in the table and text.
-- Figure 7 places the locked staged-ablation counts in the same visual system.
-- Figure 8 is a results-informed clinical handoff concept. It does not use unmeasured workload, time, or risk axes.
-- The v0.21 manuscript does not use the former technical-audit versus physician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.
+- Figure 4 combines the 1,040 core-field judgments, adjusted probability estimates, and a compact distribution of all 40 pooled note-level margins. The three panels use field, directional-judgment, and note analysis units, respectively.
+- Figure 5 places the locked staged-ablation counts in the same visual system.
+- Figure 6 is a results-informed clinical handoff concept. It does not use unmeasured workload, time, or risk axes.
+- Supplementary Figure S1 retains the fully labeled note-level margin plot for sensitivity analysis. The v0.22 manuscript does not report the former final test-set LLM audit as a result.

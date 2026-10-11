@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the eight vector figures embedded in the workshop-paper draft.
+"""Generate six main figures and one supplementary figure for the workshop draft.
 
 SVG primitives keep the output deterministic across machines. The lightweight
 XLSX reader is sufficient for the two physician workbooks and avoids requiring
@@ -486,27 +486,32 @@ def core_field_counts(raters: dict[str, list[dict[str, str]]]) -> dict[str, Coun
     return counts
 
 
-def plot_core_fields(raters: dict[str, list[dict[str, str]]]) -> None:
+def draw_core_field_profile(
+    out: list[str], raters: dict[str, list[dict[str, str]]]
+) -> None:
     by_field = core_field_counts(raters)
-    fields = sorted(CORE_BREAST, key=lambda field: (by_field[field]["A"] - by_field[field]["B"]) / sum(by_field[field].values()), reverse=True)
-    width, height = 1420, 680
-    out = svg_start(width, height)
-    text(out, 32, 37, "Core-field preference profile", 22, weight=700)
-    text(out, 32, 62, "Fields sorted by normalized harness-minus-baseline margin", 13, fill=MUTED)
-    legend(out, 930, 52, [(BL, "Baseline"), (TIE, "Tie"), (PL, "Harness")], gap=120)
-    center, scale, top, row_gap, bar_h = 650, 3.3, 105, 78, 44
+    fields = sorted(
+        CORE_BREAST,
+        key=lambda field: (by_field[field]["A"] - by_field[field]["B"])
+        / sum(by_field[field].values()),
+        reverse=True,
+    )
+    text(out, 65, 92, "Fields sorted by normalized harness-minus-baseline margin", 14, fill=MUTED)
+    legend(out, 300, 124, [(BL, "Baseline"), (TIE, "Tie"), (PL, "Harness")], gap=115)
+    center, scale, top, row_gap, bar_h = 450, 1.75, 170, 91, 42
     for tick in [-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100]:
         x = center + tick * scale
         stroke = "#7A858D" if tick == 0 else GRID
-        out.append(f'<line x1="{x:.1f}" y1="88" x2="{x:.1f}" y2="612" stroke="{stroke}"/>')
-        text(out, x, 645, f"{abs(tick)}%" if tick else "0", 12, anchor="middle", fill=MUTED)
-    text(out, center - 170, 672, "Baseline preferred", 13, anchor="middle", fill=BL)
-    text(out, center + 170, 672, "Harness preferred", 13, anchor="middle", fill=PL)
+        out.append(f'<line x1="{x:.1f}" y1="145" x2="{x:.1f}" y2="795" stroke="{stroke}"/>')
+        text(out, x, 824, f"{abs(tick)}%" if tick else "0", 12, anchor="middle", fill=MUTED)
+    text(out, center - 112, 862, "Baseline preferred", 13, anchor="middle", fill=BL)
+    text(out, center + 112, 862, "Harness preferred", 13, anchor="middle", fill=PL)
+    text(out, 656, 150, "Harness / baseline / tie", 13, weight=700)
     for index, field in enumerate(fields):
         counts = by_field[field]
         total = sum(counts.values())
         y = top + index * row_gap
-        text(out, 280, y + 29, FIELD_LABELS[field], 15, anchor="end")
+        text(out, 250, y + 27, FIELD_LABELS[field], 14, anchor="end")
         bl_pct, tie_pct, pl_pct = (counts[key] / total * 100 for key in ("B", "TIE", "A"))
         tie_half = tie_pct / 2
         bl_x = center - (bl_pct + tie_half) * scale
@@ -520,9 +525,8 @@ def plot_core_fields(raters: dict[str, list[dict[str, str]]]) -> None:
         if pl_pct * scale > 38:
             text(out, center + tie_half * scale + pl_pct * scale / 2, y + 28, str(counts["A"]), 13, anchor="middle", weight=700, fill="white")
         margin = (counts["A"] - counts["B"]) / total
-        text(out, 1025, y + 21, f"PL/BL/Tie {counts['A']}/{counts['B']}/{counts['TIE']}", 13)
-        text(out, 1025, y + 40, f"n={total}; net {margin:+.1%}", 12, fill=MUTED)
-    svg_end(out, OUTPUT / "figure4_core_fields_rough.svg")
+        text(out, 656, y + 20, f"{counts['A']} / {counts['B']} / {counts['TIE']}", 13)
+        text(out, 656, y + 41, f"n={total}; net {margin:+.1%}", 12, fill=MUTED)
 
 
 def note_margins(rows: list[dict[str, str]], prefix: str, fields: list[str]) -> dict[str, tuple[int, int]]:
@@ -557,7 +561,7 @@ def draw_margin_panel(out: list[str], x0: int, y0: int, width: int, title: str, 
     text(out, x0 + width / 2, top + 19 * row_gap + 67, "Normalized margin: (harness preferences - baseline preferences) / completed judgments", 12, anchor="middle", fill=MUTED)
 
 
-def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
+def plot_supplementary_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     all_rows = [row for rows in raters.values() for row in rows]
     breast = note_margins(all_rows, "b", BREAST_FIELDS)
     pdac = note_margins(all_rows, "p", PDAC_FIELDS)
@@ -567,50 +571,91 @@ def plot_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     panel(out, 765, 20, 710, 805, "B", "PDAC")
     draw_margin_panel(out, 35, 68, 680, "Notes ranked by preference margin", breast, "20/20 positive")
     draw_margin_panel(out, 775, 68, 680, "Notes ranked by preference margin", pdac, "19/20 positive; 1 negative")
-    svg_end(out, OUTPUT / "figure5_note_margins_rough.svg")
+    svg_end(out, OUTPUT / "supplementary_figure_s1_note_margins.svg")
 
 
-def plot_adjusted_effects() -> None:
+def draw_adjusted_probability(out: list[str]) -> None:
     rows = load_csv(ADJUSTED_RESULTS)
-    width, height = 1500, 590
-    out = svg_start(width, height)
-
-    round_rect(out, 20, 20, 1460, 520, fill=PANEL_FILL, stroke=PANEL_STROKE, radius=13)
-    text(out, 55, 62, "Adjusted physician preference probability", 23, weight=700)
-    text(out, 55, 92, "P(harness preference | directional judgment)", 16, fill=MUTED)
-    probability_left, probability_width = 270, 540
-    probability_top, row_gap = 185, 115
+    text(out, 880, 92, "P(harness preference | directional judgment)", 14, fill=MUTED)
+    probability_left, probability_width = 1010, 205
+    probability_top, row_gap = 180, 90
     probability_min, probability_max = 0.45, 0.90
     for tick in [0.5, 0.6, 0.7, 0.8, 0.9]:
         x = probability_left + probability_width * (tick - probability_min) / (probability_max - probability_min)
         stroke = "#59656D" if tick == 0.5 else GRID
         dash = "6 5" if tick == 0.5 else "0"
-        out.append(f'<line x1="{x:.1f}" y1="125" x2="{x:.1f}" y2="445" stroke="{stroke}" stroke-dasharray="{dash}"/>')
-        text(out, x, 475, f"{tick:.0%}", 16, anchor="middle", fill=MUTED)
-    text(out, probability_left + probability_width / 2, 510, "Adjusted probability", 16, anchor="middle", fill=MUTED)
-    text(out, 1020, 125, "Adjusted probability (95% CI)", 16, anchor="middle", weight=700)
-    text(out, 1325, 125, "Difference from 50% (95% CI)", 16, anchor="middle", weight=700)
+        out.append(f'<line x1="{x:.1f}" y1="130" x2="{x:.1f}" y2="385" stroke="{stroke}" stroke-dasharray="{dash}"/>')
+        text(out, x, 417, f"{tick:.0%}", 12, anchor="middle", fill=MUTED)
+    text(out, 1355, 135, "Adjusted estimate", 13, anchor="middle", weight=700)
     for index, row in enumerate(rows):
         y = probability_top + index * row_gap
         estimate = float(row["adjusted_probability"])
         low = float(row["probability_ci_low"])
         high = float(row["probability_ci_high"])
         xpos = lambda value: probability_left + probability_width * (value - probability_min) / (probability_max - probability_min)
-        text(out, probability_left - 20, y + 6, row["scope"], 16, anchor="end", weight=700 if index == 0 else 400)
+        text(out, probability_left - 18, y + 6, row["scope"], 15, anchor="end", weight=700 if index == 0 else 400)
         out.append(f'<line x1="{xpos(low):.1f}" y1="{y}" x2="{xpos(high):.1f}" y2="{y}" stroke="{PL}" stroke-width="4"/>')
         out.append(f'<line x1="{xpos(low):.1f}" y1="{y - 9}" x2="{xpos(low):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<line x1="{xpos(high):.1f}" y1="{y - 9}" x2="{xpos(high):.1f}" y2="{y + 9}" stroke="{PL}" stroke-width="2"/>')
         out.append(f'<circle cx="{xpos(estimate):.1f}" cy="{y}" r="8" fill="{PL}" stroke="white" stroke-width="2"/>')
-        text(out, 1020, y - 3, f"{estimate:.2%}", 17, anchor="middle", weight=700 if index == 0 else 400)
-        text(out, 1020, y + 21, f"({low:.2%}-{high:.2%})", 16, anchor="middle", fill=MUTED)
+        text(out, 1355, y - 13, f"{estimate:.2%} ({low:.2%}-{high:.2%})", 13, anchor="middle", weight=700 if index == 0 else 400)
         difference = float(row["difference_from_50"]) * 100
         difference_low = float(row["difference_ci_low"]) * 100
         difference_high = float(row["difference_ci_high"]) * 100
-        text(out, 1325, y - 3, f"{difference:+.2f} pp", 17, anchor="middle", weight=700 if index == 0 else 400)
-        text(out, 1325, y + 21, f"({difference_low:+.2f} to {difference_high:+.2f})", 16, anchor="middle", fill=MUTED)
-    text(out, probability_left + 10, 150, "Equal preference", 16, fill=MUTED)
-    text(out, 750, 572, "Ties excluded; GEE clustered by note and standardized over observed physician values; overall model also adjusts for cancer type", 16, anchor="middle", fill=MUTED)
-    svg_end(out, OUTPUT / "figure6_adjusted_effects_rough.svg")
+        text(out, 1355, y + 11, f"Δ50% {difference:+.2f} pp", 13, anchor="middle", weight=700 if index == 0 else 400)
+        text(out, 1355, y + 34, f"({difference_low:+.2f} to {difference_high:+.2f})", 12, anchor="middle", fill=MUTED)
+    text(out, probability_left + 4, 162, "Equal", 12, fill=MUTED)
+
+
+def draw_note_margin_distribution(
+    out: list[str], raters: dict[str, list[dict[str, str]]]
+) -> None:
+    all_rows = [row for rows in raters.values() for row in rows]
+    groups = [
+        ("Breast", note_margins(all_rows, "b", BREAST_FIELDS), "20/20 positive"),
+        ("PDAC", note_margins(all_rows, "p", PDAC_FIELDS), "19/20 positive; 1 negative"),
+    ]
+    left, right, xmin, xmax = 1000, 1435, -0.2, 0.8
+    top, bottom = 600, 855
+    for tick in [-0.2, 0.0, 0.2, 0.4, 0.6, 0.8]:
+        x = left + (tick - xmin) / (xmax - xmin) * (right - left)
+        stroke = "#59656D" if tick == 0 else GRID
+        dash = "6 5" if tick == 0 else "0"
+        out.append(f'<line x1="{x:.1f}" y1="{top}" x2="{x:.1f}" y2="{bottom}" stroke="{stroke}" stroke-dasharray="{dash}"/>')
+        text(out, x, 883, f"{tick:.0%}", 12, anchor="middle", fill=MUTED)
+    for group_index, (label, margins, summary) in enumerate(groups):
+        y = 665 + group_index * 125
+        values = [net / total for net, total in margins.values()]
+        frequencies = Counter(values)
+        used: Counter[float] = Counter()
+        text(out, left - 22, y + 5, label, 15, anchor="end", weight=700)
+        text(out, right, y - 43, summary, 13, anchor="end", weight=700, fill=PL)
+        out.append(f'<line x1="{left}" y1="{y}" x2="{right}" y2="{y}" stroke="#AEB7BD" stroke-width="2"/>')
+        for value in sorted(values):
+            rank = used[value]
+            count = frequencies[value]
+            used[value] += 1
+            jitter = (rank - (count - 1) / 2) * 12
+            x = left + (value - xmin) / (xmax - xmin) * (right - left)
+            color = PL if value > 0 else BL if value < 0 else TIE
+            out.append(
+                f'<circle cx="{x:.1f}" cy="{y + jitter:.1f}" r="7" fill="{color}" '
+                'stroke="white" stroke-width="1.5"/>'
+            )
+    text(out, 1218, 912, "Normalized note margin", 13, anchor="middle", fill=MUTED)
+
+
+def plot_effect_profile(raters: dict[str, list[dict[str, str]]]) -> None:
+    width, height = 1500, 940
+    out = svg_start(width, height)
+    panel(out, 20, 20, 795, 900, "A", "Core-field preference profile")
+    panel(out, 835, 20, 645, 430, "B", "Adjusted preference probability")
+    panel(out, 835, 470, 645, 450, "C", "Pooled note-level margins")
+    draw_core_field_profile(out, raters)
+    draw_adjusted_probability(out)
+    text(out, 880, 542, "Each dot is one note after pooling four physicians", 14, fill=MUTED)
+    draw_note_margin_distribution(out, raters)
+    svg_end(out, OUTPUT / "figure4_effect_profile.svg")
 
 
 def load_ablation_counts() -> tuple[dict[str, dict[str, tuple[int, int, int]]], dict[str, float]]:
@@ -698,7 +743,7 @@ def plot_staged_ablation() -> None:
             text(out, px + 230, 623, "Clear overall verification gain", 13, anchor="middle", weight=700, fill=PL)
     text(out, 750, 705, "One blinded non-physician Codex judge; secondary technical evidence", 14, anchor="middle", weight=700, fill=LLM)
     text(out, 750, 732, "Exact two-sided sign tests exclude ties; overall p values are exploratory and unadjusted", 12, anchor="middle", fill=MUTED)
-    svg_end(out, OUTPUT / "figure7_staged_ablation_rough.svg")
+    svg_end(out, OUTPUT / "figure5_staged_ablation.svg")
 
 
 def plot_human_model_complementarity(raters: dict[str, list[dict[str, str]]]) -> None:
@@ -741,7 +786,7 @@ def plot_human_model_complementarity(raters: dict[str, list[dict[str, str]]]) ->
     text(out, 720, 628, "Observed core-field range", 14, weight=700)
     text(out, 720, 653, f"Smallest net margin: {FIELD_LABELS[smallest]} ({margins[smallest]:+.1%})", 13, fill=MUTED)
     text(out, 750, 704, "Conceptual interpretation only; time, workload, and risk were not measured", 13, anchor="middle", fill=MUTED)
-    svg_end(out, OUTPUT / "figure7_human_model_complementarity_rough.svg")
+    svg_end(out, OUTPUT / "figure6_clinical_handoff.svg")
 
 
 def main() -> None:
@@ -754,15 +799,50 @@ def main() -> None:
         raise ValueError(f"Physician-rating totals changed: {required_counts} != {expected}")
     if sum(sum(values.values()) for values in core_field_counts(raters).values()) != 1040:
         raise ValueError("Core-field judgment total must remain 1,040")
+    expected_core = {
+        "current_meds": Counter({"A": 132, "B": 3, "TIE": 25}),
+        "stage": Counter({"A": 69, "B": 7, "TIE": 84}),
+        "distant_met": Counter({"A": 23, "B": 5, "TIE": 132}),
+        "metastasis": Counter({"A": 74, "B": 26, "TIE": 60}),
+        "response": Counter({"A": 62, "B": 12, "TIE": 86}),
+        "type_receptor": Counter({"A": 24, "B": 14, "TIE": 42}),
+        "genetic_results": Counter({"A": 34, "B": 10, "TIE": 116}),
+    }
+    if core_field_counts(raters) != expected_core:
+        raise ValueError("Core-field counts changed")
+    all_rows = [row for rows in raters.values() for row in rows]
+    breast_margins = note_margins(all_rows, "b", BREAST_FIELDS)
+    pdac_margins = note_margins(all_rows, "p", PDAC_FIELDS)
+    if (len(breast_margins), len(pdac_margins)) != (20, 20):
+        raise ValueError("Expected 20 notes in each cancer cohort")
+    if sum(net > 0 for net, _ in breast_margins.values()) != 20:
+        raise ValueError("Breast note-level margins changed")
+    if (
+        sum(net > 0 for net, _ in pdac_margins.values()),
+        sum(net < 0 for net, _ in pdac_margins.values()),
+    ) != (19, 1):
+        raise ValueError("PDAC note-level margins changed")
+    adjusted = load_csv(ADJUSTED_RESULTS)
+    adjusted_expected = {
+        "Overall": (0.7998, 0.7575, 0.8363),
+        "Breast cancer": (0.8166, 0.7602, 0.8621),
+        "PDAC": (0.7815, 0.7147, 0.8362),
+    }
+    for row in adjusted:
+        observed = tuple(
+            round(float(row[key]), 4)
+            for key in ("adjusted_probability", "probability_ci_low", "probability_ci_high")
+        )
+        if observed != adjusted_expected[row["scope"]]:
+            raise ValueError(f"Adjusted probability changed for {row['scope']}: {observed}")
     plot_development_pathway()
     plot_evaluator_distribution(raters)
     plot_interrater_matrix(raters)
-    plot_core_fields(raters)
-    plot_note_margins(raters)
-    plot_adjusted_effects()
+    plot_effect_profile(raters)
     plot_staged_ablation()
     plot_human_model_complementarity(raters)
-    print(f"Wrote 8 publication-layout SVG figures to {OUTPUT}")
+    plot_supplementary_note_margins(raters)
+    print(f"Wrote 6 main SVG figures and 1 supplementary SVG figure to {OUTPUT}")
 
 
 if __name__ == "__main__":
