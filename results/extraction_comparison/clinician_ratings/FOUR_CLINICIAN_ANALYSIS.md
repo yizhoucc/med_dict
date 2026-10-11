@@ -98,4 +98,4 @@ The new review also adds a useful negative observation. The pooled PDAC margin i
 - Figure 4 pools 1,040 core-field judgments.
 - Figure 5 pools four evaluators for each cancer type at the note level.
 - Figure 6 uses the four-clinician adjusted model.
-- Supplementary Figure S1 uses the updated clinician field margins.
+- The v0.18 manuscript does not use the former technical-audit versus clinician Supplementary Figure S1 because the final test-set LLM audit is not reported as a result.

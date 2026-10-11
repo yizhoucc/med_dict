@@ -28,7 +28,6 @@ RATER_FILES = {
     ],
     "Zhengrui": [HERE / "zhengrui_breast_pdac_blind_scores_20261005.csv"],
 }
-LETTER_SCORES = HERE / "patient_letter_scores_oncologist_01_summary.csv"
 ADJUSTED_RESULTS = HERE / "adjusted_gee_results.csv"
 
 PL = "#2B8CBE"
@@ -36,7 +35,6 @@ BL = "#D95F0E"
 TIE = "#BDBDBD"
 GRID = "#E5E5E5"
 TEXT = "#222222"
-PURPLE = "#756BB1"
 
 BREAST_FIELDS = [
     "current_meds",
@@ -652,112 +650,6 @@ def plot_human_model_complementarity() -> None:
     svg_end(out, OUTPUT / "figure7_human_model_complementarity_rough.svg")
 
 
-def plot_technical_vs_clinician(raters: dict[str, list[dict[str, str]]]) -> None:
-    technical = {
-        "current_meds": (8, 0, 40),
-        "stage": (6, 8, 40),
-        "distant_met": (11, 3, 40),
-        "metastasis": (14, 4, 40),
-        "response": (13, 6, 40),
-        "type_receptor": (8, 5, 20),
-        "genetic_results": (6, 2, 40),
-    }
-    clinician_rows = completed_rows(raters, CORE_BREAST, CORE_PDAC)
-    by_field: dict[str, Counter[str]] = defaultdict(Counter)
-    for row in clinician_rows:
-        by_field[row["field"]][row["score"]] += 1
-    fields = CORE_BREAST
-    width, height = 1030, 570
-    left, right, top, row_gap = 290, 80, 115, 57
-    plot_w = width - left - right
-    xmin, xmax = -0.1, 0.9
-    out = svg_start(
-        width,
-        height,
-        "Technical audit and clinician net preference rates",
-        "Descriptive comparison only; reviewers and evaluated pipeline versions differ",
-    )
-    for tick in [-0.1, 0.0, 0.2, 0.4, 0.6, 0.8]:
-        x = left + plot_w * (tick - xmin) / (xmax - xmin)
-        stroke = "#888888" if tick == 0 else GRID
-        out.append(f'<line x1="{x:.1f}" y1="90" x2="{x:.1f}" y2="515" stroke="{stroke}"/>')
-        out.append(f'<text x="{x:.1f}" y="540" text-anchor="middle" font-size="11">{tick:.0%}</text>')
-    out.append(f'<circle cx="{left + 10}" cy="73" r="6" fill="{PURPLE}"/><text x="{left + 22}" y="77" font-size="12">Technical audit</text>')
-    out.append(f'<circle cx="{left + 145}" cy="73" r="6" fill="{PL}"/><text x="{left + 157}" y="77" font-size="12">Clinician ratings</text>')
-    for index, field in enumerate(fields):
-        y = top + index * row_gap
-        ta, tb, tn = technical[field]
-        tech_rate = (ta - tb) / tn
-        cc = by_field[field]
-        clinician_rate = (cc["A"] - cc["B"]) / sum(cc.values())
-        x1 = left + plot_w * (tech_rate - xmin) / (xmax - xmin)
-        x2 = left + plot_w * (clinician_rate - xmin) / (xmax - xmin)
-        out.append(f'<text x="{left - 12}" y="{y + 4}" text-anchor="end" font-size="13">{esc(FIELD_LABELS[field])}</text>')
-        out.append(f'<line x1="{x1:.1f}" y1="{y}" x2="{x2:.1f}" y2="{y}" stroke="#999999" stroke-width="2"/>')
-        out.append(f'<circle cx="{x1:.1f}" cy="{y}" r="7" fill="{PURPLE}"/>')
-        out.append(f'<circle cx="{x2:.1f}" cy="{y}" r="7" fill="{PL}"/>')
-    out.append(f'<text x="{left + plot_w / 2:.1f}" y="566" text-anchor="middle" font-size="12">Net preference rate: (PL better - BL better) / applicable judgments</text>')
-    svg_end(out, OUTPUT / "supplementary_figure1_technical_vs_clinician_rough.svg")
-
-
-def draw_letter_difference_panel(
-    out: list[str],
-    x0: int,
-    y0: int,
-    width: int,
-    height: int,
-    title: str,
-    differences: list[float],
-) -> None:
-    limit = max(1.5, max(abs(value) for value in differences) + 0.25)
-    left, right, top, bottom = 55, 20, 58, 60
-    plot_w, plot_h = width - left - right, height - top - bottom
-    zero_y = y0 + top + plot_h / 2
-    wins = sum(value > 0 for value in differences)
-    ties = sum(value == 0 for value in differences)
-    losses = sum(value < 0 for value in differences)
-    mean_difference = sum(differences) / len(differences)
-    out.append(f'<text x="{x0 + width / 2:.1f}" y="{y0 + 20}" text-anchor="middle" font-size="14" font-weight="700">{esc(title)}</text>')
-    out.append(f'<text x="{x0 + width / 2:.1f}" y="{y0 + 40}" text-anchor="middle" font-size="11">Wins/ties/losses {wins}/{ties}/{losses}; mean difference {mean_difference:+.2f}</text>')
-    for tick in [-limit, -limit / 2, 0, limit / 2, limit]:
-        y = y0 + top + plot_h * (limit - tick) / (2 * limit)
-        stroke = "#777777" if tick == 0 else GRID
-        out.append(f'<line x1="{x0 + left}" y1="{y:.1f}" x2="{x0 + left + plot_w}" y2="{y:.1f}" stroke="{stroke}"/>')
-        out.append(f'<text x="{x0 + left - 8}" y="{y + 4:.1f}" text-anchor="end" font-size="10">{tick:.1f}</text>')
-    bar_w = plot_w / len(differences) * 0.68
-    for index, value in enumerate(differences):
-        x = x0 + left + (index + 0.5) * plot_w / len(differences) - bar_w / 2
-        value_y = y0 + top + plot_h * (limit - value) / (2 * limit)
-        fill = PL if value > 0 else TIE if value == 0 else BL
-        out.append(f'<rect x="{x:.1f}" y="{min(zero_y, value_y):.1f}" width="{bar_w:.1f}" height="{max(abs(zero_y - value_y), 2):.1f}" fill="{fill}"/>')
-        out.append(f'<text x="{x + bar_w / 2:.1f}" y="{y0 + top + plot_h + 16}" text-anchor="middle" font-size="8">b{index + 1}</text>')
-    out.append(f'<text x="{x0 + 14}" y="{y0 + top + plot_h / 2:.1f}" text-anchor="middle" font-size="11" transform="rotate(-90 {x0 + 14} {y0 + top + plot_h / 2:.1f})">Harness minus comparator</text>')
-
-
-def plot_letter_differences() -> None:
-    scores = {int(row["note"]): row for row in load_csv(LETTER_SCORES)}
-    if sorted(scores) != list(range(1, 21)):
-        raise ValueError("Expected 20 complete breast-cancer letter-rating summaries")
-    harness_vs_chatgpt = [
-        float(scores[note]["harness_mean"]) - float(scores[note]["chatgpt_mean"])
-        for note in range(1, 21)
-    ]
-    harness_vs_qwen = [
-        float(scores[note]["harness_mean"]) - float(scores[note]["qwen_baseline_mean"])
-        for note in range(1, 21)
-    ]
-    width, height = 1260, 510
-    out = svg_start(
-        width,
-        height,
-        "Exploratory patient-letter score differences",
-        "Mean of accuracy, completeness, comprehensibility, and usefulness across one oncologist",
-    )
-    draw_letter_difference_panel(out, 20, 66, 600, 420, "Harness-based letter vs ChatGPT", harness_vs_chatgpt)
-    draw_letter_difference_panel(out, 640, 66, 600, 420, "Harness-based letter vs Qwen baseline", harness_vs_qwen)
-    svg_end(out, OUTPUT / "figure7_letter_differences_rough.svg")
-
-
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     raters = load_raters()
@@ -768,8 +660,7 @@ def main() -> None:
     plot_note_margins(raters)
     plot_adjusted_effects()
     plot_human_model_complementarity()
-    plot_technical_vs_clinician(raters)
-    print(f"Wrote 9 rough SVG figures to {OUTPUT}")
+    print(f"Wrote 7 rough SVG figures to {OUTPUT}")
 
 
 if __name__ == "__main__":
