@@ -557,7 +557,24 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
     display: block !important;
   }
   .top-level-section { margin: 22px 0 0; border: 0; background: white; }
-  .top-level-section > summary { display: none; }
+  .top-level-section > summary {
+    display: block;
+    padding: 0 0 7px;
+    border-bottom: 2px solid #dce8f0;
+    cursor: default;
+    list-style: none;
+    page-break-after: avoid;
+    break-after: avoid-page;
+  }
+  .top-level-section > summary::marker { content: ""; }
+  .top-level-section > summary::-webkit-details-marker { display: none; }
+  .top-level-section > summary h2 {
+    display: block;
+    margin: 0;
+    color: var(--navy);
+    font-size: 16pt;
+  }
+  .top-level-section > summary .section-state { display: none !important; }
   .top-level-section:not([open]) > .section-body {
     display: block !important;
   }
@@ -1215,15 +1232,29 @@ def main() -> None:
     details_tag = output[details_start : output.index('>', details_start) + 1]
     if " open" in details_tag:
         raise RuntimeError("The English manuscript details element must be closed by default.")
+    print_css = CSS.split("@media print {", 1)[1]
     print_requirements = [
         '.english-manuscript-details > summary { display: none; }',
-        '.top-level-section > summary { display: none; }',
+        '.top-level-section > summary {',
+        'display: block;',
+        'cursor: default;',
+        'list-style: none;',
+        'page-break-after: avoid;',
+        'break-after: avoid-page;',
+        '.top-level-section > summary::marker { content: ""; }',
+        '.top-level-section > summary::-webkit-details-marker { display: none; }',
+        '.top-level-section > summary h2 {',
+        '.top-level-section > summary .section-state { display: none !important; }',
         '.top-level-section:not([open]) > .section-body',
+        '.chinese-review-meta > summary,',
+        '.prompt-stage > summary { display: none; }',
         '.prompt-stage:not([open]) > .prompt-body { display: block !important; }',
     ]
-    missing_print_rules = [rule for rule in print_requirements if rule not in output]
+    missing_print_rules = [rule for rule in print_requirements if rule not in print_css]
     if missing_print_rules:
         raise RuntimeError(f"Print CSS is incomplete: {missing_print_rules}")
+    if '.top-level-section > summary { display: none; }' in print_css:
+        raise RuntimeError("Print CSS must retain top-level summaries as static headings.")
     if 'display: block !important;' not in output:
         raise RuntimeError("Print CSS must expose closed disclosure content.")
     if "onclick=" in output or output.count("<script>") != 1:
