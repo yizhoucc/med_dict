@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.22, October 2026
+Version 0.23, October 2026
 
 ## Abstract
 
@@ -349,6 +349,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Version history
 
+- **v0.23:** Made every top-level manuscript section independently collapsible, kept scientific sections open by default, and closed appendices, references, and version history by default while preserving anchor navigation and complete print output.
 - **v0.22:** Consolidated the core-field, adjusted-effect, and compact note-distribution results into one main figure, reduced the main figure set to six, and moved the fully labeled note-level plot to Supplementary Figure S1.
 - **v0.21:** Standardized study personnel as physicians, moved qualitative comments to Appendix S2, clarified that verification was the only staged addition with a clear overall gain, and aligned all figures to fixed color semantics with a probability-only adjusted-effect graphic.
 - **v0.20:** Made the standardized adjusted preference probability the primary effect, added absolute and tie-inclusive effects with note-cluster robust confidence intervals, and redrew the adjusted-effect graphic on probability and odds scales.
@@ -429,7 +430,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.22，2026 年 10 月
+版本 0.23，2026 年 10 月
 
 作者：[TODO]
 
@@ -437,7 +438,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 目标会议及稿件形式：[TODO]
 
-本稿现已纳入四位医生对两个癌种的完整评审。全文按医生建议采用一条主线：先通过 human-in-the-loop 开发乳腺癌 inference harness，再把乳腺癌阶段的 failure history 和 clinical rubric 用于 PDAC，并在没有 target-domain physician 审阅输出的情况下完成 LLM-assisted adaptation。最终由四位医生比较 inference harness 与同模型 single-prompt baseline。调整后的 GEE、四级 staged technical ablation、Figure 1 至 Figure 6、Appendix S1 至 Appendix S3 已纳入 HTML。方括号内容仅用于中文版协作审阅。
+本稿现已纳入四位医生对两个癌种的完整评审。全文按医生建议采用一条主线：先通过 human-in-the-loop 开发乳腺癌 inference harness，再把乳腺癌阶段的 failure history 和 clinical rubric 用于 PDAC，并在没有 target-domain physician 审阅输出的情况下完成 LLM-assisted adaptation。最终由四位医生比较 inference harness 与同模型 single-prompt baseline。调整后的 GEE、四级 staged technical ablation、Figure 1 至 Figure 6、附录 S1 至附录 S3 已纳入 HTML。方括号内容仅用于中文版协作审阅。
 
 供临床审阅的简要说明：两个系统使用相同的语言模型。single-prompt baseline 要求模型通过一次调用提取全部信息。inference harness 则把任务拆分为较小的临床问题，检查模型答案，针对反复出现的错误应用范围明确的肿瘤学规则，并把每项结果与病历中的支持性原文关联起来。
 
@@ -593,7 +594,7 @@ Primary estimand 定义为 P(harness preference | directional judgment)。只有
 3. C：在 B 上增加 semantic、faithfulness 和 temporal verification gates。
 4. D：在 C 上增加 deterministic inline processing 和 full inference harness 使用的完整 POST-hook layer。
 
-实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。解盲前，全部 blinded pairs 均使用同一版最终 rubric。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代医生评估。合并后的 judge protocol 收录于 Appendix S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。
+实验比较相邻阶段 A vs B、B vs C 和 C vs D，共形成 120 个 blinded pairs。一个全新 Codex judge 只能看到源病历与两份隐藏条件标签的输出，不能读取项目说明、稿件、既有分析、Git history 或 private mapping。判断优先考虑 source faithfulness，其次考虑 completeness；差异较小或相互抵消时判为 TIE。解盲前，全部 blinded pairs 均使用同一版最终 rubric。统计使用排除 TIE 后的双侧 exact sign test。该结果属于 secondary technical evidence，不能替代医生评估。合并后的 judge protocol 收录于附录 S1。运行日期为 2026 年 10 月 1 日（PDT）。Codex judge 使用 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。
 
 > **协作说明：** B 不能严格写成纯粹的 decomposition-only。它已经包含 A/P 的三次 bounded retry、cross-field routing 和 G1/G2 format/schema safeguards。因此，A vs B 衡量的是 decomposition 加基础 orchestration 的组合，不是单独一个 prompt 拆分动作。
 
@@ -696,7 +697,7 @@ Judge 的文字理由提示，最后一步存在 fidelity 与 completeness 的�
 
 > **协作说明：** 这张图最重要的不是证明 D 一定最好，而是把故事收紧：真正稳定的 component gain 来自 verification gates。完整 hooks 在 breast 和 PDAC 上方向相反，说明 rules 需要按癌种审计，不能把 rule 越多直接等同于系统越好。
 
-医生自由文本评论显示，TIE 既可能表示两个输出都可接受，也可能表示两个输出都不充分；具体案例和谨慎解释见 Appendix S2。
+医生自由文本评论显示，TIE 既可能表示两个输出都可接受，也可能表示两个输出都不充分；具体案例和谨慎解释见附录 S2。
 
 ## 4. 讨论
 
@@ -798,14 +799,15 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非医
 
 ## 版本历史
 
+- **v0.23：** 将主稿的每个顶层章节设为独立折叠项。科学正文默认展开，附录、参考文献和版本历史默认折叠，同时保留锚点跳转与完整打印输出。
 - **v0.22：** 将核心字段、调整后 effect 和紧凑的病历级分布整合为一张主图，把主文图组收敛为六张，并将带完整病历标签的图移至 Supplementary Figure S1。
-- **v0.21：** 统一用 physician 描述本研究人员，将定性评论移到 Appendix S2，明确 verification 是唯一产生清楚总体增益的 staged addition，并统一图中颜色语义，将 adjusted-effect graphic 简化为 probability-only presentation。
+- **v0.21：** 统一用 physician 描述本研究人员，将定性评论移到附录 S2，明确 verification 是唯一产生清楚总体增益的 staged addition，并统一图中颜色语义，将 adjusted-effect graphic 简化为 probability-only presentation。
 - **v0.20：** 将标准化调整后偏好概率作为 primary effect，补充 absolute effect 和保留 TIE 的 net preference margin 及其 note-cluster robust CI，并将 adjusted-effect graphic 重绘为 probability 与 odds 双尺度图。
-- **v0.19：** 折叠中文版草稿信息与作者确认，将 Appendix S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘完整图组。
+- **v0.19：** 折叠中文版草稿信息与作者确认，将附录 S1 合并为一个 general judge protocol，并以统一的临床 AI 视觉语言重绘完整图组。
 - **v0.18：** 使用 physician-led clinical framing 重写 Introduction；明确 development data 和 untouched holdout test set；用四位医生对两个癌种的完整结果和新图统一更新全文；删除 final test-set LLM audit 和定量 letter results；加入 blinded Codex judge instructions。
 - **v0.17：** 加入四位医生的首版 breast 分析、三位医生的 PDAC 分析、staged technical ablation，以及中文版作者确认批注。
 
-## Appendix S1. General blinded Codex judge protocol
+## 附录 S1. General blinded Codex judge protocol
 
 Ablation judge 于 2026 年 10 月 1 日（PDT）运行，model 为 `gpt-5.6-sol`，reasoning effort 为 `xhigh`，service tier 为 `default`。下面的 general protocol 汇总了整次评审采用的指令，保留 blinding rules、clinical rubric 和 output schema，省略运行过程中的文件管理文字。
 
@@ -829,13 +831,13 @@ Errors should be short arrays of concrete field-level findings grounded in the n
 
 审计 artifact：[full blinded summary](results/staged_ablation_annotated_20261001_093433/JUDGE_CODEX_FULL_BLINDED_SUMMARY.md)。
 
-## Appendix S2. 医生自由文本评论与 TIE 的解释
+## 附录 S2. 医生自由文本评论与 TIE 的解释
 
 三份医生评分导出共包含 14 条书面评论。这些评论说明 A/B outcome 的一个限制：`TIE` 既可能表示两个输出都可接受，也可能表示两个输出都不完整或不正确。在一项乳腺影像计划比较中，一位医生偏好 harness，因为 baseline 总结了已经完成的检查结果，而不是后续计划；另一位医生则认为两个输出都不充分，因此选择 `TIE`。第四位医生在一项用药比较中选择 `TIE`，理由是两个输出都很差；在一项操作计划比较中，该医生偏好 baseline，因为 harness 漏掉了原句的一部分。
 
 这些评论还指出了缺少支持证据的 receptor status、遗漏的区域淋巴结病变、刚开始新方案后无法确定 response，以及两个输出都不理想的比较。它们有助于解释评分量表，并为 error analysis 提供案例，但不构成单独的 quantitative endpoint。评论数量少，且并非系统收集，因此不能估计两种 `TIE` 含义各自出现的频率。
 
-## Appendix S3. 病历级敏感性分析
+## 附录 S3. 病历级敏感性分析
 
 <div data-supplementary-figure="S1"></div>
 

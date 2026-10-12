@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 from collections import Counter
+from html.parser import HTMLParser
 from pathlib import Path
 
 
@@ -317,13 +318,74 @@ a { color: #176a9a; }
 }
 .abstract-section {
   margin: 26px -18px 32px;
-  padding: 8px 18px 22px;
   border: 1px solid #cfe0ec;
   border-left: 5px solid var(--blue);
   border-radius: 10px;
   background: #f7fbfd;
 }
-.abstract-section h2 { margin-top: 14px; border-bottom: 0; }
+.top-level-section {
+  margin: 34px 0 0;
+  scroll-margin-top: 18px;
+}
+.top-level-section > summary {
+  padding: 9px 4px 10px;
+  color: var(--navy);
+  cursor: pointer;
+}
+.top-level-section > summary::marker { color: #6a7f8f; }
+.top-level-section > summary:hover h2 { color: #176a9a; }
+.top-level-section > summary:focus-visible {
+  border-radius: 6px;
+  outline: 3px solid rgba(43, 140, 190, 0.32);
+  outline-offset: 3px;
+}
+.top-level-section > summary h2 {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: 25px;
+}
+.section-state {
+  float: right;
+  margin: 7px 2px 0 14px;
+  color: #6b7882;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+.top-level-section:not([open]) > summary .section-state-open,
+.top-level-section[open] > summary .section-state-closed { display: none; }
+.main-section {
+  border-top: 1px solid #dce5eb;
+}
+.main-section[open] > summary {
+  border-bottom: 2px solid #dce8f0;
+}
+.main-section > .section-body { padding-top: 4px; }
+.abstract-section > summary { padding: 14px 18px 10px; }
+.abstract-section[open] > summary { border-bottom: 0; }
+.abstract-section > .section-body { padding: 0 18px 18px; }
+.appendix-section,
+.references-section,
+.auxiliary-section {
+  border: 1px solid #d5dee5;
+  border-radius: 9px;
+  background: #fafcfd;
+}
+.appendix-section > summary,
+.references-section > summary,
+.auxiliary-section > summary { padding: 12px 15px; }
+.appendix-section[open] > summary,
+.references-section[open] > summary,
+.auxiliary-section[open] > summary { border-bottom: 1px solid #dde5ea; }
+.appendix-section > .section-body,
+.references-section > .section-body,
+.auxiliary-section > .section-body { padding: 3px 16px 18px; }
+.references-section { color: #44515c; font-size: 13px; }
+.references-section > summary h2 { font-size: 22px; }
+.judge-appendix { padding-top: 0; }
 .chinese-review-meta {
   margin: 18px 0 32px;
   border: 1px solid #c9d6e0;
@@ -367,10 +429,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
 }
 .manuscript-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
 .supplementary-figure { background: #f8fafb; }
-.judge-appendix {
-  margin-top: 34px;
-  padding-top: 2px;
-}
 .judge-metadata {
   margin: 14px 0 18px;
   padding: 13px 15px;
@@ -430,8 +488,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   color: var(--warning);
   font-weight: 650;
 }
-.references-section { color: #44515c; font-size: 13px; }
-.references-section h2 { font-size: 22px; }
 .references-section li {
   margin: 0 0 13px;
   padding-left: 3px;
@@ -478,6 +534,9 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   .toc a { display: none; }
   article { padding: 30px 24px 55px; }
   h1 { font-size: 29px; }
+  .top-level-section > summary h2 { font-size: 22px; }
+  .section-state { margin-top: 5px; }
+  .abstract-section { margin-left: -8px; margin-right: -8px; }
   .chinese-version .author-confirmation-index,
   .chinese-version .author-note { width: 100%; }
 }
@@ -495,6 +554,11 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: now
   .english-manuscript-details { margin: 0; border: 0; background: white; }
   .english-manuscript-details > summary { display: none; }
   .english-manuscript-details:not([open]) > .english-version {
+    display: block !important;
+  }
+  .top-level-section { margin: 22px 0 0; border: 0; background: white; }
+  .top-level-section > summary { display: none; }
+  .top-level-section:not([open]) > .section-body {
     display: block !important;
   }
   .chinese-review-meta { margin: 0; border: 0; background: white; }
@@ -610,9 +674,10 @@ def format_prompt_appendices(body: str) -> str:
     """
 
     appendix_pattern = re.compile(
-        r"(<h2>Appendix S1\. General blinded Codex judge protocol</h2>)"
+        r"(<h2>(?:Appendix S1\. General blinded Codex judge protocol|"
+        r"附录 S1\. General blinded Codex judge protocol)</h2>)"
         r"(.*?)"
-        r"(?=<h2>(?:Appendix S2\.[^<]*|References|参考文献)</h2>)",
+        r"(?=<h2>(?:Appendix S2\.[^<]*|附录 S2\.[^<]*|References|参考文献)</h2>)",
         flags=re.S,
     )
 
@@ -647,13 +712,11 @@ def format_prompt_appendices(body: str) -> str:
                 f"Expected one folded judge protocol in Appendix S1, found {prompt_count}."
             )
         return (
-            '<section class="judge-appendix">'
-            + heading
+            heading
             + '<div class="judge-metadata">'
             + metadata
             + "</div>"
             + prompts_and_links
-            + "</section>"
         )
 
     formatted, count = appendix_pattern.subn(format_appendix, body)
@@ -787,42 +850,6 @@ def link_citations_and_references(body: str) -> tuple[str, tuple[int, int]]:
 
 def style_sections(body: str) -> str:
     body = re.sub(
-        r"(<h2 id=\"questions-for-the-clinical-collaborator\">.*?)(?=<h2 id=\"abstract\">)",
-        r'<section class="review-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
-        r"(<h2 id=\"abstract\">.*?)(?=<h2 id=\"1-introduction\">)",
-        r'<section class="abstract-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
-        r"(<h2 id=\"references\">.*?)(?=<div class=\"language-break\" id=\"chinese-version\"></div>)",
-        r'<section class="references-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
-        r"(<h2 id=\"供临床合作者审阅的问题\">.*?)(?=<h2 id=\"摘要\">)",
-        r'<section class="review-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
-        r"(<h2 id=\"摘要\">.*?)(?=<h2 id=\"1-引言\">)",
-        r'<section class="abstract-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
-        r"(<h2 id=\"参考文献\">.*)$",
-        r'<section class="references-section">\1</section>',
-        body,
-        flags=re.S,
-    )
-    body = re.sub(
         r"<p>(\[(?:FINAL|TODO|最终|投稿前)[^<]+\])</p>",
         r'<p class="todo">\1</p>',
         body,
@@ -830,12 +857,136 @@ def style_sections(body: str) -> str:
     return body
 
 
+def fold_top_level_sections(body: str) -> str:
+    """Wrap every manuscript h2 section in an accessible native disclosure."""
+
+    marker = '<div class="language-break" id="chinese-version"></div>'
+    english_body, chinese_body = body.split(marker, 1)
+
+    def fold_language(language_body: str, language: str) -> str:
+        headings = list(
+            re.finditer(r'<h2 id="([^"]+)">(.*?)</h2>', language_body, flags=re.S)
+        )
+        if not headings:
+            raise RuntimeError(f"No top-level headings found for {language}.")
+
+        output = [language_body[: headings[0].start()]]
+        for index, heading in enumerate(headings):
+            end = headings[index + 1].start() if index + 1 < len(headings) else len(language_body)
+            section_id, heading_html = heading.groups()
+            label = html.unescape(re.sub(r"<[^>]+>", "", heading_html)).strip()
+            content = language_body[heading.end() : end]
+
+            is_main = label in {"Abstract", "摘要"} or bool(re.match(r"^\d+\.", label))
+            is_appendix = label.startswith("Appendix ") or label.startswith("附录 ")
+            is_references = label in {"References", "参考文献"}
+            is_version_history = label in {"Version history", "版本历史"}
+
+            if is_main:
+                kind = "main"
+                classes = ["top-level-section", "main-section"]
+                if label in {"Abstract", "摘要"}:
+                    classes.append("abstract-section")
+            elif is_appendix:
+                kind = "appendix"
+                classes = ["top-level-section", "appendix-section"]
+                if re.match(r"^(?:Appendix|附录) S1\.", label):
+                    classes.append("judge-appendix")
+            elif is_references:
+                kind = "references"
+                classes = ["top-level-section", "references-section"]
+            elif is_version_history:
+                kind = "auxiliary"
+                classes = [
+                    "top-level-section",
+                    "auxiliary-section",
+                    "version-history-section",
+                ]
+            else:
+                kind = "auxiliary"
+                classes = ["top-level-section", "auxiliary-section"]
+
+            open_attribute = " open" if is_main else ""
+            closed_label, open_label = (
+                ("Show", "Hide") if language == "en" else ("展开", "收起")
+            )
+            output.append(
+                f'<details class="{" ".join(classes)}" '
+                f'data-section-kind="{kind}" data-section-key="{section_id}"{open_attribute}>'
+                '<summary>'
+                f'<h2 id="{section_id}">{heading_html}'
+                f'<span class="section-state section-state-closed" aria-hidden="true">{closed_label}</span>'
+                f'<span class="section-state section-state-open" aria-hidden="true">{open_label}</span>'
+                '</h2></summary><div class="section-body">'
+                + content
+                + "</div></details>"
+            )
+        return "".join(output)
+
+    return fold_language(english_body, "en") + marker + fold_language(chinese_body, "zh")
+
+
+ANCHOR_SCRIPT = r"""
+<script>
+(function () {
+  "use strict";
+
+  function targetFromHash(hash) {
+    if (!hash || hash.length < 2) return null;
+    var identifier = hash.slice(1);
+    try { identifier = decodeURIComponent(identifier); } catch (error) { /* use raw id */ }
+    return document.getElementById(identifier);
+  }
+
+  function openAncestorDetails(target) {
+    var ancestors = [];
+    for (var node = target.parentElement; node; node = node.parentElement) {
+      if (node.tagName === "DETAILS") ancestors.push(node);
+    }
+    ancestors.reverse().forEach(function (details) { details.open = true; });
+  }
+
+  function revealTarget(target, moveFocus) {
+    if (!target) return;
+    openAncestorDetails(target);
+    if (moveFocus) {
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+    }
+    window.requestAnimationFrame(function () {
+      target.scrollIntoView({ block: "start" });
+    });
+  }
+
+  function revealCurrentHash(moveFocus) {
+    revealTarget(targetFromHash(window.location.hash), moveFocus);
+  }
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    revealTarget(targetFromHash(link.getAttribute("href")), true);
+  }, true);
+  window.addEventListener("hashchange", function () { revealCurrentHash(true); });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { revealCurrentHash(true); });
+  } else {
+    revealCurrentHash(true);
+  }
+}());
+</script>
+"""
+
+
 def wrap_language_sections(body: str) -> str:
     """Collapse English and the Chinese review metadata independently."""
     marker = '<div class="language-break" id="chinese-version"></div>'
     english_body, chinese_body = body.split(marker, 1)
     title_end = chinese_body.index("</h1>") + len("</h1>")
-    abstract_start = chinese_body.index('<section class="abstract-section">', title_end)
+    abstract_start = chinese_body.index(
+        '<details class="top-level-section main-section abstract-section"',
+        title_end,
+    )
     review_metadata = chinese_body[title_end:abstract_start]
     chinese_body = (
         chinese_body[:title_end]
@@ -897,6 +1048,7 @@ def render() -> str:
             f"English and Chinese reference counts differ: {reference_counts}"
         )
     body = style_sections(body)
+    body = fold_top_level_sections(body)
     body = body.replace(
         "</h1>",
         f'''</h1>
@@ -929,9 +1081,48 @@ def render() -> str:
     {toc}
     <article>{body}</article>
   </div>
+{ANCHOR_SCRIPT}
 </body>
 </html>
 '''
+
+
+class BalancedHTMLParser(HTMLParser):
+    """Minimal structural check for the renderer's explicit HTML tags."""
+
+    VOID_TAGS = {
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    }
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.stack: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag not in self.VOID_TAGS:
+            self.stack.append(tag)
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        return
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self.stack or self.stack[-1] != tag:
+            current = self.stack[-1] if self.stack else "none"
+            raise RuntimeError(f"Unbalanced HTML: closing {tag} while {current} is open.")
+        self.stack.pop()
 
 
 def main() -> None:
@@ -943,7 +1134,7 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa",
         "2,160 required note-field judgments",
-        "Version 0.22, October 2026",
+        "Version 0.23, October 2026",
         "79.98%",
         "tie-inclusive net preference margin",
         "120 blinded ablation pairs",
@@ -953,6 +1144,10 @@ def main() -> None:
         '<details class="english-manuscript-details">',
         '<details class="chinese-review-meta">',
         '<details class="prompt-stage">',
+        '<details class="top-level-section main-section"',
+        'data-section-kind="appendix"',
+        'data-section-kind="references"',
+        'data-section-kind="auxiliary"',
         'English manuscript (click to expand)',
         'English manuscript (click to collapse)',
         '草稿信息与作者确认（点击展开）',
@@ -968,12 +1163,25 @@ def main() -> None:
         raise RuntimeError("Expected one supplementary figure in each language version.")
     if output.count('<details class="prompt-stage">') != 2:
         raise RuntimeError("Expected one folded judge protocol in each language version.")
-    appendix_s2_headings = len(re.findall(r'<h2 id="appendix-s2-[^"]+">', output))
-    if appendix_s2_headings != 2:
-        raise RuntimeError("Expected one Appendix S2 heading in each language version.")
-    appendix_s3_headings = len(re.findall(r'<h2 id="appendix-s3-[^"]+">', output))
-    if appendix_s3_headings != 2:
-        raise RuntimeError("Expected one Appendix S3 heading in each language version.")
+    rendered_prompts = re.findall(
+        r'<details class="prompt-stage"><summary>.*?</summary>'
+        r'<div class="prompt-body"><pre><code[^>]*>(.*?)</code></pre></div></details>',
+        output,
+        flags=re.S,
+    )
+    if len(rendered_prompts) != 2 or rendered_prompts[0] != rendered_prompts[1]:
+        raise RuntimeError("Appendix S1 must preserve one identical judge prompt per language.")
+    for appendix_key in ("s1", "s2", "s3"):
+        appendix_headings = len(
+            re.findall(
+                rf'<h2 id="(?:appendix|附录)-{appendix_key}-[^"]+">',
+                output,
+            )
+        )
+        if appendix_headings != 2:
+            raise RuntimeError(
+                f"Expected independent English and Chinese Appendix {appendix_key.upper()} sections."
+            )
     if re.search(r"\boncologists?\b", output, flags=re.I):
         raise RuntimeError("Rendered study terminology must not use oncologist(s).")
     clinician_count = len(re.findall(r"\bclinicians?\b", output, flags=re.I))
@@ -1007,14 +1215,57 @@ def main() -> None:
     details_tag = output[details_start : output.index('>', details_start) + 1]
     if " open" in details_tag:
         raise RuntimeError("The English manuscript details element must be closed by default.")
-    if '.english-manuscript-details > summary { display: none; }' not in output:
-        raise RuntimeError("Print CSS must hide the English details summary.")
+    print_requirements = [
+        '.english-manuscript-details > summary { display: none; }',
+        '.top-level-section > summary { display: none; }',
+        '.top-level-section:not([open]) > .section-body',
+        '.prompt-stage:not([open]) > .prompt-body { display: block !important; }',
+    ]
+    missing_print_rules = [rule for rule in print_requirements if rule not in output]
+    if missing_print_rules:
+        raise RuntimeError(f"Print CSS is incomplete: {missing_print_rules}")
     if 'display: block !important;' not in output:
         raise RuntimeError("Print CSS must expose closed disclosure content.")
-    if '.prompt-stage:not([open]) > .prompt-body { display: block !important; }' not in output:
-        raise RuntimeError("Print CSS must expose folded Appendix S1 prompts.")
-    if "onclick=" in output or "<script" in output:
-        raise RuntimeError("The review copy must remain JavaScript-free.")
+    if "onclick=" in output or output.count("<script>") != 1:
+        raise RuntimeError("The review copy must use one unobtrusive anchor script and no inline handlers.")
+    script_requirements = [
+        "openAncestorDetails",
+        'window.addEventListener("hashchange"',
+        'a[href^="#"]',
+        "target.scrollIntoView",
+    ]
+    missing_script_features = [value for value in script_requirements if value not in output]
+    if missing_script_features:
+        raise RuntimeError(f"Anchor disclosure script is incomplete: {missing_script_features}")
+
+    top_level_tags = re.findall(
+        r'<details class="([^"]*\btop-level-section\b[^"]*)" '
+        r'data-section-kind="([^"]+)" data-section-key="([^"]+)"( open)?>',
+        output,
+    )
+    if len(top_level_tags) != 24:
+        raise RuntimeError(
+            f"Expected 24 bilingual top-level disclosures, found {len(top_level_tags)}."
+        )
+    kind_counts = Counter(kind for _, kind, _, _ in top_level_tags)
+    if kind_counts != Counter({"main": 12, "appendix": 8, "references": 2, "auxiliary": 2}):
+        raise RuntimeError(f"Unexpected top-level disclosure classes: {kind_counts}")
+    for classes, kind, section_id, open_attribute in top_level_tags:
+        should_open = kind == "main"
+        if bool(open_attribute) != should_open:
+            raise RuntimeError(
+                f"Top-level section {section_id} has the wrong default disclosure state."
+            )
+        if kind == "references" and "appendix-section" in classes:
+            raise RuntimeError("References must remain independent from appendices.")
+    if output.count('<h2 id="') != len(top_level_tags):
+        raise RuntimeError("Every h2 must be the heading of one top-level disclosure.")
+
+    parser = BalancedHTMLParser()
+    parser.feed(output)
+    parser.close()
+    if parser.stack:
+        raise RuntimeError(f"Rendered HTML has unclosed tags: {parser.stack}")
     element_ids = re.findall(r'\bid="([^"]+)"', output)
     duplicate_ids = sorted({value for value in element_ids if element_ids.count(value) > 1})
     if duplicate_ids:
