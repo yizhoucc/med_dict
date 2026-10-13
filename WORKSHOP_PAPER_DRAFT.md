@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.23, October 2026
+Version 0.24, October 2026
 
 ## Abstract
 
@@ -43,7 +43,7 @@ Large language models (LLMs) are increasingly used for clinical language tasks, 
 
 Although EHRs contain structured fields, much clinically useful information remains in free-text notes [21]. Oncology notes are particularly difficult because they combine diagnoses, pathology, prior and planned treatments, changing disease status, and uncertainty across long timelines. Relevant facts may appear in several sections or be carried forward from earlier encounters. In a study of nearly 3 million outpatient notes, note length and redundancy increased substantially over a decade, with copied and templated text contributing to both trends [22]. An extraction system must determine which statements describe the patient's current disease and treatment, not simply locate medically relevant phrases.
 
-LLMs can assist with extraction, but fluent outputs may still omit facts, confuse historical and current findings, or add unsupported conclusions. Commercially hosted models also raise governance and privacy concerns when protected health information leaves institutional infrastructure. A locally deployed open-weight model can keep note processing within local infrastructure, but local deployment does not by itself prevent extraction errors or establish privacy compliance [3].
+LLMs can assist with extraction, but fluent outputs may still omit facts, confuse historical and current findings, or add unsupported conclusions. Because such outputs can remain fluent and clinically plausible, these errors may be difficult to recognize during routine review. Commercially hosted models also raise governance and privacy concerns when protected health information leaves institutional infrastructure. A locally deployed open-weight model can keep note processing within local infrastructure, but local deployment does not by itself prevent extraction errors or establish privacy compliance [3].
 
 Extraction performance depends on how a model is used as well as on the model itself. Fine-tuning can adapt a model to a clinical task but requires labeled data and model updates. Prompt design, task decomposition, validation, and retry logic provide another route for improving a frozen model. Iterative prompting has improved oncology extraction, although staging and specialist terminology remain difficult [10]. Human-in-the-loop studies also show that recurring errors can be organized into an error ontology and converted into general instructions rather than case-specific fixes [23]. The oncology literature contains strong examples of individual components, but evidence remains limited for an integrated inference workflow evaluated against a same-model baseline by practicing physicians [1].
 
@@ -349,6 +349,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Version history
 
+- **v0.24:** Restored the physician-authored point that fluent, clinically plausible outputs can conceal extraction errors during routine review.
 - **v0.23:** Made every top-level manuscript section independently collapsible, kept scientific sections open by default, and closed appendices, references, and version history by default while preserving anchor navigation and complete print output.
 - **v0.22:** Consolidated the core-field, adjusted-effect, and compact note-distribution results into one main figure, reduced the main figure set to six, and moved the fully labeled note-level plot to Supplementary Figure S1.
 - **v0.21:** Standardized study personnel as physicians, moved qualitative comments to Appendix S2, clarified that verification was the only staged addition with a clear overall gain, and aligned all figures to fixed color semantics with a probability-only adjusted-effect graphic.
@@ -430,7 +431,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.23，2026 年 10 月
+版本 0.24，2026 年 10 月
 
 作者：[TODO]
 
@@ -479,7 +480,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 虽然 EHR 包含结构化字段，大量有临床价值的信息仍保留在 free-text note 中 [21]。肿瘤病历尤其困难，因为同一份病历会把诊断、病理、既往治疗、未来计划、疾病状态变化和不确定信息放在一条很长的时间线上。相关事实可能分散在多个 section，也可能从早期就诊记录 copy forward 到当前病历。一项覆盖近 300 万份门诊病历的研究发现，十年间病历长度和冗余度明显增加，复制内容和模板内容都与这种增长有关 [22]。因此，extraction system 不能只找到医学相关词句，还要判断哪些内容描述患者当前的疾病和治疗。
 
-LLM 可以辅助 extraction，但流畅的输出仍可能遗漏事实、混淆历史与当前发现，或加入原文不支持的结论。若 protected health information 被发送到外部托管服务，commercial model 还会带来数据治理和隐私问题。本地部署的 open-weight model 可以让病历处理留在机构控制的基础设施内，但本地部署本身不能消除 extraction error，也不能自动证明系统符合隐私要求 [3]。
+LLM 可以辅助 extraction，但流畅的输出仍可能遗漏事实、混淆历史与当前发现，或加入原文不支持的结论。由于这类输出仍可能读起来流畅，并且在临床上看似合理，日常审阅时不容易发现这些错误。若 protected health information 被发送到外部托管服务，commercial model 还会带来数据治理和隐私问题。本地部署的 open-weight model 可以让病历处理留在机构控制的基础设施内，但本地部署本身不能消除 extraction error，也不能自动证明系统符合隐私要求 [3]。
 
 Extraction performance 取决于模型本身，也取决于模型的使用方式。Fine-tuning 可以让模型适应临床任务，但需要标注数据并修改模型权重。Prompt design、task decomposition、validation 和 retry logic 则可以在冻结权重的前提下改进模型。迭代式 prompting 已经改善了 oncology extraction，但 staging 和专科术语仍是常见难点 [10]。Human-in-the-loop 研究也表明，研究者可以把重复错误整理成 error ontology，再转化为通用规则，而不是只修某一个病例 [23]。现有肿瘤研究已经验证了不少单独组件，但对于 integrated inference workflow，以及 practicing physician 对 integrated workflow 和 same-model baseline 的直接比较，现有证据仍然有限 [1]。
 
@@ -799,6 +800,7 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非医
 
 ## 版本历史
 
+- **v0.24：** 恢复医生原稿中的临床观点：流畅且看似合理的输出可能掩盖 extraction error，使日常审阅难以及时发现。
 - **v0.23：** 将主稿的每个顶层章节设为独立折叠项。科学正文默认展开，附录、参考文献和版本历史默认折叠，同时保留锚点跳转与完整打印输出。
 - **v0.22：** 将核心字段、调整后 effect 和紧凑的病历级分布整合为一张主图，把主文图组收敛为六张，并将带完整病历标签的图移至 Supplementary Figure S1。
 - **v0.21：** 统一用 physician 描述本研究人员，将定性评论移到附录 S2，明确 verification 是唯一产生清楚总体增益的 staged addition，并统一图中颜色语义，将 adjusted-effect graphic 简化为 probability-only presentation。

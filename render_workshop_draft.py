@@ -1151,7 +1151,7 @@ def main() -> None:
         "data:image/svg+xml;base64",
         "Cohen's kappa",
         "2,160 required note-field judgments",
-        "Version 0.23, October 2026",
+        "Version 0.24, October 2026",
         "79.98%",
         "tie-inclusive net preference margin",
         "120 blinded ablation pairs",
