@@ -1,6 +1,6 @@
 # Four-physician extraction analysis
 
-Updated: 2026-10-11
+Updated: 2026-10-13
 
 ## Data included
 
@@ -47,6 +47,8 @@ After pooling the four ratings within each note, all 20 breast notes have a posi
 ## Adjusted analysis
 
 Among 870 directional judgments, a population-averaged logistic generalized estimating equation clustered by note and adjusted for evaluator and cancer type estimated an adjusted harness-preference probability of 79.98% (95% CI 75.75%-83.63%). This is +29.98 percentage points above equal preference (95% CI +25.75 to +33.63). Cancer-specific probabilities were 81.66% for breast cancer (95% CI 76.02%-86.21%) and 78.15% for PDAC (95% CI 71.47%-83.62%). The same standardized estimates on the odds scale were 3.995 overall (95% CI 3.124-5.110; `p=2.67e-28`), 4.452 for breast cancer (95% CI 3.169-6.253; `p=7.04e-18`), and 3.576 for PDAC (95% CI 2.505-5.105; `p=2.30e-12`). Full output is in `ADJUSTED_ANALYSIS.md` and `adjusted_gee_results.csv`.
+
+The leave-one-physician-out sensitivity analysis rebuilt the overall GEE after each exclusion. All four fits converged. Adjusted probabilities ranged from 77.08% to 83.53%, and every 95% confidence interval remained above 50%. Complete results are in `leave_one_physician_out_gee.csv`.
 
 The crude directional share was 699/870, or 80.34% (note-cluster robust 95% CI 76.14%-83.96%). Across all 2,160 judgments, PL, tie, and BL accounted for 32.36%, 59.72%, and 7.92%. The tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47). These are preference effects, not accuracy estimates.
 

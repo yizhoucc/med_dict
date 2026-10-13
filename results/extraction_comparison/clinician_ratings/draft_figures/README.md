@@ -11,6 +11,11 @@ python3 results/extraction_comparison/clinician_ratings/analyze_clinician_rating
 python3 results/extraction_comparison/clinician_ratings/plot_manuscript_figures.py
 ```
 
+The analysis command also writes `adjusted_gee_results.csv`,
+`leave_one_physician_out_gee.csv`, and `ADJUSTED_ANALYSIS.md`. The second CSV
+contains the four leave-one-physician-out GEE sensitivity fits reported in
+Supplementary Table S1.
+
 Files:
 
 - `figure1_development_pathway_rough.svg`: four-panel data-isolation, breast development, PDAC adaptation, and holdout-evaluation schematic.

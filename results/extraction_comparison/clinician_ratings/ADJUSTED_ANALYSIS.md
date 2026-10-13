@@ -1,6 +1,6 @@
 # Adjusted physician-preference analysis
 
-Updated: 2026-10-11
+Updated: 2026-10-13
 
 ## Primary model
 
@@ -11,6 +11,17 @@ The primary estimand is P(harness preference | directional judgment). The analys
 | Overall | 870 | 699 | 171 | 40 | 79.98% (75.75%-83.63%) | +29.98 (+25.75 to +33.63) | 3.995 (3.124-5.110) | 2.67e-28 |
 | Breast cancer | 443 | 363 | 80 | 20 | 81.66% (76.02%-86.21%) | +31.66 (+26.02 to +36.21) | 4.452 (3.169-6.253) | 7.04e-18 |
 | PDAC | 427 | 336 | 91 | 20 | 78.15% (71.47%-83.62%) | +28.15 (+21.47 to +33.62) | 3.576 (2.505-5.105) | 2.3e-12 |
+
+## Leave-one-physician-out sensitivity analysis
+
+The overall model was refitted four times after excluding one physician at a time. Each fit rebuilt the fixed-effect coding for the three remaining physicians. All fits converged. Adjusted harness-preference probabilities ranged from 77.08% to 83.53%, and every 95% confidence interval remained above 50%.
+
+| Excluded physician | Directional judgments | Harness | Baseline | Notes | Adjusted probability (95% CI) | Difference from 50% (95% CI), pp | Odds ratio (95% CI) | p value | Converged |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Physician 01 | 675 | 540 | 135 | 40 | 79.72% (75.62%-83.28%) | +29.72 (+25.62 to +33.28) | 3.930 (3.101-4.981) | 1.06e-29 | Yes |
+| Physician 02 | 688 | 534 | 154 | 40 | 77.08% (72.19%-81.33%) | +27.08 (+22.19 to +31.33) | 3.363 (2.596-4.357) | 4.12e-20 | Yes |
+| Physician 03 | 594 | 477 | 117 | 40 | 80.01% (75.72%-83.70%) | +30.01 (+25.72 to +33.70) | 4.002 (3.119-5.136) | 1.2e-27 | Yes |
+| Physician 04 | 653 | 546 | 107 | 40 | 83.53% (79.37%-87.00%) | +33.53 (+29.37 to +37.00) | 5.073 (3.847-6.690) | 1.22e-30 | Yes |
 
 The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.
 

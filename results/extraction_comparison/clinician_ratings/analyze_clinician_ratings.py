@@ -20,6 +20,7 @@ from statsmodels.genmod.cov_struct import Exchangeable
 
 HERE = Path(__file__).resolve().parent
 OUTPUT_CSV = HERE / "adjusted_gee_results.csv"
+LOO_OUTPUT_CSV = HERE / "leave_one_physician_out_gee.csv"
 OUTPUT_MD = HERE / "ADJUSTED_ANALYSIS.md"
 
 RATER_FILES = {
@@ -85,6 +86,28 @@ class DescriptiveResult:
     net_margin_ci_high: float
 
 
+@dataclass(frozen=True)
+class LeaveOnePhysicianOutResult:
+    excluded_physician: str
+    remaining_physicians: int
+    directional_judgments: int
+    harness_preferences: int
+    baseline_preferences: int
+    clusters: int
+    adjusted_probability: float
+    probability_ci_low: float
+    probability_ci_high: float
+    difference_from_50: float
+    difference_ci_low: float
+    difference_ci_high: float
+    odds_ratio: float
+    ci_low: float
+    ci_high: float
+    p_value: float
+    converged: bool
+    iterations: int
+
+
 def read_ratings() -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
     for evaluator, paths in RATER_FILES.items():
@@ -122,7 +145,9 @@ def read_ratings() -> pd.DataFrame:
     return ratings
 
 
-def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
+def _fit_gee(
+    scope: str, directional: pd.DataFrame
+) -> tuple[GeeResult, bool, int, tuple[str, ...]]:
     directional = directional.copy()
     directional["harness_preferred"] = (directional["score"] == "A").astype(int)
     formula = "harness_preferred ~ C(evaluator, Sum)"
@@ -139,6 +164,11 @@ def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
     fitted = model.fit(maxiter=200)
 
     design = model.exog
+    if np.linalg.matrix_rank(design) != design.shape[1]:
+        raise AssertionError(
+            f"Rank-deficient design for {scope}: "
+            f"rank {np.linalg.matrix_rank(design)} of {design.shape[1]}."
+        )
     coefficients = fitted.params.to_numpy()
     covariance = fitted.cov_params().to_numpy()
     probabilities = expit(design @ coefficients)
@@ -158,7 +188,7 @@ def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
     probability_ci_low = float(expit(log_odds - 1.96 * log_odds_se))
     probability_ci_high = float(expit(log_odds + 1.96 * log_odds_se))
 
-    return GeeResult(
+    result = GeeResult(
         scope=scope,
         directional_judgments=len(directional),
         harness_preferences=int((directional["score"] == "A").sum()),
@@ -175,6 +205,104 @@ def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
         ci_high=math.exp(log_odds + 1.96 * log_odds_se),
         p_value=float(2 * norm.sf(abs(z_score))),
     )
+    iterations = max(0, len(fitted.fit_history.get("params", [])) - 1)
+    columns = tuple(model.exog_names)
+    return result, bool(fitted.converged), iterations, columns
+
+
+def fit_gee(scope: str, directional: pd.DataFrame) -> GeeResult:
+    result, _, _, _ = _fit_gee(scope, directional)
+    return result
+
+
+def leave_one_physician_out_results(
+    ratings: pd.DataFrame,
+) -> list[LeaveOnePhysicianOutResult]:
+    physicians = sorted(ratings["evaluator"].dropna().unique())
+    if len(physicians) != 4:
+        raise AssertionError(f"Expected four physicians, found {len(physicians)}.")
+
+    full_directional = ratings[ratings["score"].isin(["A", "B"])].copy()
+    results: list[LeaveOnePhysicianOutResult] = []
+    for excluded in physicians:
+        directional = full_directional[
+            full_directional["evaluator"] != excluded
+        ].copy()
+        remaining = sorted(directional["evaluator"].unique())
+        if len(remaining) != 3:
+            raise AssertionError(
+                f"Excluding {excluded} should leave three physicians, found {remaining}."
+            )
+        if set(directional["cancer"].unique()) != {"Breast cancer", "PDAC"}:
+            raise AssertionError(f"Both cancer types must remain after excluding {excluded}.")
+
+        gee, converged, iterations, columns = _fit_gee(
+            f"Excluding {excluded}", directional
+        )
+        expected_columns = 1 + (len(remaining) - 1) + 1
+        if len(columns) != expected_columns:
+            raise AssertionError(
+                f"Unexpected design for {excluded}: {columns}; expected "
+                f"{expected_columns} columns."
+            )
+        if not converged:
+            raise RuntimeError(f"GEE did not converge after excluding {excluded}.")
+        if gee.directional_judgments != (
+            gee.harness_preferences + gee.baseline_preferences
+        ):
+            raise AssertionError(f"Directional counts do not reconcile for {excluded}.")
+        if gee.clusters != ratings["cluster"].nunique():
+            raise AssertionError(f"A note cluster was lost after excluding {excluded}.")
+        if not (
+            0
+            < gee.probability_ci_low
+            < gee.adjusted_probability
+            < gee.probability_ci_high
+            < 1
+        ):
+            raise AssertionError(f"Invalid probability interval for {excluded}.")
+        if not math.isclose(
+            gee.odds_ratio,
+            gee.adjusted_probability / (1 - gee.adjusted_probability),
+            rel_tol=1e-12,
+        ):
+            raise AssertionError(f"Probability and odds disagree for {excluded}.")
+        if not math.isclose(
+            gee.difference_from_50,
+            gee.adjusted_probability - 0.5,
+            rel_tol=0,
+            abs_tol=1e-12,
+        ):
+            raise AssertionError(f"Difference from 50% is inconsistent for {excluded}.")
+
+        results.append(
+            LeaveOnePhysicianOutResult(
+                excluded_physician=excluded,
+                remaining_physicians=len(remaining),
+                directional_judgments=gee.directional_judgments,
+                harness_preferences=gee.harness_preferences,
+                baseline_preferences=gee.baseline_preferences,
+                clusters=gee.clusters,
+                adjusted_probability=gee.adjusted_probability,
+                probability_ci_low=gee.probability_ci_low,
+                probability_ci_high=gee.probability_ci_high,
+                difference_from_50=gee.difference_from_50,
+                difference_ci_low=gee.difference_ci_low,
+                difference_ci_high=gee.difference_ci_high,
+                odds_ratio=gee.odds_ratio,
+                ci_low=gee.ci_low,
+                ci_high=gee.ci_high,
+                p_value=gee.p_value,
+                converged=converged,
+                iterations=iterations,
+            )
+        )
+
+    if len(results) != 4 or {result.excluded_physician for result in results} != set(
+        physicians
+    ):
+        raise AssertionError("Leave-one-physician-out analysis is incomplete.")
+    return results
 
 
 def descriptive_results(ratings: pd.DataFrame) -> DescriptiveResult:
@@ -276,6 +404,7 @@ def write_results(
     gee_results: list[GeeResult],
     descriptive: DescriptiveResult,
     sign_results: list[dict[str, object]],
+    loo_results: list[LeaveOnePhysicianOutResult],
 ) -> None:
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(
@@ -287,10 +416,20 @@ def write_results(
         for result in gee_results:
             writer.writerow(result.__dict__)
 
+    with LOO_OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(LeaveOnePhysicianOutResult.__annotations__),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        for result in loo_results:
+            writer.writerow(result.__dict__)
+
     lines = [
         "# Adjusted physician-preference analysis",
         "",
-        "Updated: 2026-10-11",
+        "Updated: 2026-10-13",
         "",
         "## Primary model",
         "",
@@ -310,6 +449,30 @@ def write_results(
             f"{result.difference_ci_high * 100:+.2f}) | "
             f"{result.odds_ratio:.3f} ({result.ci_low:.3f}-{result.ci_high:.3f}) | "
             f"{result.p_value:.3g} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Leave-one-physician-out sensitivity analysis",
+            "",
+            "The overall model was refitted four times after excluding one physician at a time. Each fit rebuilt the fixed-effect coding for the three remaining physicians. All fits converged. Adjusted harness-preference probabilities ranged from 77.08% to 83.53%, and every 95% confidence interval remained above 50%.",
+            "",
+            "| Excluded physician | Directional judgments | Harness | Baseline | Notes | Adjusted probability (95% CI) | Difference from 50% (95% CI), pp | Odds ratio (95% CI) | p value | Converged |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for result in loo_results:
+        lines.append(
+            f"| {result.excluded_physician} | {result.directional_judgments} | "
+            f"{result.harness_preferences} | {result.baseline_preferences} | "
+            f"{result.clusters} | {result.adjusted_probability:.2%} "
+            f"({result.probability_ci_low:.2%}-{result.probability_ci_high:.2%}) | "
+            f"{result.difference_from_50 * 100:+.2f} "
+            f"({result.difference_ci_low * 100:+.2f} to "
+            f"{result.difference_ci_high * 100:+.2f}) | "
+            f"{result.odds_ratio:.3f} ({result.ci_low:.3f}-{result.ci_high:.3f}) | "
+            f"{result.p_value:.3g} | {'Yes' if result.converged else 'No'} |"
         )
 
     lines.extend(
@@ -352,13 +515,14 @@ def main() -> None:
     ratings = read_ratings()
     directional = ratings[ratings["score"].isin(["A", "B"])].copy()
     descriptive = descriptive_results(ratings)
+    loo_results = leave_one_physician_out_results(ratings)
     gee_results = [
         fit_gee("Overall", directional),
         fit_gee("Breast cancer", directional[directional["cancer"] == "Breast cancer"]),
         fit_gee("PDAC", directional[directional["cancer"] == "PDAC"]),
     ]
     sign_results = note_sign_summaries(ratings)
-    write_results(gee_results, descriptive, sign_results)
+    write_results(gee_results, descriptive, sign_results, loo_results)
     for result in gee_results:
         print(
             f"{result.scope}: adjusted probability {result.adjusted_probability:.2%} "
@@ -375,7 +539,18 @@ def main() -> None:
         f"({descriptive.net_margin_ci_low * 100:+.2f} to "
         f"{descriptive.net_margin_ci_high * 100:+.2f})"
     )
-    print(f"Wrote {OUTPUT_CSV.name} and {OUTPUT_MD.name}")
+    for result in loo_results:
+        print(
+            f"Excluding {result.excluded_physician}: "
+            f"adjusted probability {result.adjusted_probability:.2%} "
+            f"({result.probability_ci_low:.2%}-{result.probability_ci_high:.2%}), "
+            f"OR {result.odds_ratio:.3f} "
+            f"({result.ci_low:.3f}-{result.ci_high:.3f}), "
+            f"p={result.p_value:.3g}, converged={result.converged}"
+        )
+    print(
+        f"Wrote {OUTPUT_CSV.name}, {LOO_OUTPUT_CSV.name}, and {OUTPUT_MD.name}"
+    )
 
 
 if __name__ == "__main__":

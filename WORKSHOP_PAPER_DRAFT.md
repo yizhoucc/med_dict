@@ -13,7 +13,7 @@ BILINGUAL MAINTENANCE RULE:
 
 **Pilot report**
 
-Version 0.24, October 2026
+Version 0.25, October 2026
 
 ## Abstract
 
@@ -143,6 +143,8 @@ All four physicians completed the same 280 required breast-cancer comparisons an
 
 The primary estimand was P(harness preference | directional judgment). Ties were excluded only from this directional analysis. We fitted a population-averaged logistic generalized estimating equation with an exchangeable working correlation within each note. Evaluator was included as a fixed effect, and the overall model also included cancer type. Cancer-specific models adjusted for evaluator. We standardized fitted probabilities over the observed covariate distribution and used the delta method on the logit scale for 95% confidence intervals. The adjusted probability was the primary effect; its difference from 50% was the absolute effect, and the corresponding odds ratio was a secondary model-scale effect. Passweg et al. used a related report-cluster robust logistic and delta-method marginal-effects analysis for oncology extraction [14]. Other physician comparisons have retained an equivalent response category [24], reported preference proportions with confidence intervals [25], or modeled repeated observations across cases and participants [26].
 
+As a sensitivity analysis, we refitted the overall model four times after excluding one physician at a time. Each fit rebuilt the fixed-effect coding for the three remaining physicians.
+
 We retained the complete three-category distribution for descriptive analysis. A crude directional proportion received a sandwich confidence interval clustered by note. For a tie-inclusive sensitivity measure, harness, tie, and baseline judgments were coded as 1, 0, and -1; their mean is the net preference margin. Its normal 95% confidence interval used a sandwich standard error clustered by note, not bootstrap resampling. We also pooled field judgments within each note and used an exact two-sided sign test on positive versus negative note margins.
 
 ### 2.10 Staged technical ablation
@@ -197,6 +199,8 @@ The adjusted probability of a harness preference among directional judgments was
 | Overall | 79.98% (75.75%-83.63%) | +29.98 (+25.75 to +33.63) | 3.995 (3.124-5.110) | 2.67 x 10^-28 | 870 |
 | Breast cancer | 81.66% (76.02%-86.21%) | +31.66 (+26.02 to +36.21) | 4.452 (3.169-6.253) | 7.04 x 10^-18 | 443 |
 | Pancreatic cancer | 78.15% (71.47%-83.62%) | +28.15 (+21.47 to +33.62) | 3.576 (2.505-5.105) | 2.30 x 10^-12 | 427 |
+
+In the leave-one-physician-out analysis, adjusted probabilities ranged from 77.08% to 83.53%. All four 95% confidence intervals remained above 50% (Supplementary Table S1).
 
 The tie-inclusive net preference margin was +24.44 percentage points (note-cluster robust 95% CI +20.42 to +28.47). This measure retains all 2,160 judgments and treats a tie as zero contribution to either system. At the note level, pooled harness-minus-baseline margins were positive in 39 notes and negative in one (two-sided exact sign test, p=7.46 x 10^-11). This is a replication and sensitivity summary, not a separate accuracy endpoint. Four physicians remain insufficient for a precise estimate of variation across the wider physician population.
 
@@ -349,6 +353,7 @@ The current pilot supports a staged development strategy. Human-in-the-loop revi
 
 ## Version history
 
+- **v0.25:** Added a leave-one-physician-out GEE sensitivity analysis and Supplementary Table S1.
 - **v0.24:** Restored the physician-authored point that fluent, clinically plausible outputs can conceal extraction errors during routine review.
 - **v0.23:** Made every top-level manuscript section independently collapsible, kept scientific sections open by default, and closed appendices, references, and version history by default while preserving anchor navigation and complete print output.
 - **v0.22:** Consolidated the core-field, adjusted-effect, and compact note-distribution results into one main figure, reduced the main figure set to six, and moved the fully labeled note-level plot to Supplementary Figure S1.
@@ -394,6 +399,15 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 ***Supplementary Figure S1.*** *Detailed note-level normalized preference margins after pooling all four physicians within each cancer type. Each label identifies one held-out note. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. This is a supporting sensitivity analysis, not an accuracy estimate.*
 
+***Supplementary Table S1.*** *Leave-one-physician-out sensitivity analysis of the overall directional GEE. Each model was rebuilt after excluding one physician, adjusted for cancer type and fixed effects for the three remaining physicians, clustered by note, and standardized over the observed covariate distribution. All four fits converged.*
+
+| Excluded physician | Directional n | Notes | Adjusted probability (95% CI) | Difference from 50% (95% CI), pp | OR (95% CI) | p |
+|---|---:|---:|---:|---:|---:|---:|
+| Physician 01 | 675 | 40 | 79.72% (75.62%-83.28%) | +29.72 (+25.62 to +33.28) | 3.930 (3.101-4.981) | 1.06 x 10^-29 |
+| Physician 02 | 688 | 40 | 77.08% (72.19%-81.33%) | +27.08 (+22.19 to +31.33) | 3.363 (2.596-4.357) | 4.12 x 10^-20 |
+| Physician 03 | 594 | 40 | 80.01% (75.72%-83.70%) | +30.01 (+25.72 to +33.70) | 4.002 (3.119-5.136) | 1.20 x 10^-27 |
+| Physician 04 | 653 | 40 | 83.53% (79.37%-87.00%) | +33.53 (+29.37 to +37.00) | 5.073 (3.847-6.690) | 1.22 x 10^-30 |
+
 ## References
 
 *Draft note: The one-sentence relevance annotations are for collaborator review and should be removed before submission.*
@@ -431,7 +445,7 @@ The comments also identified unsupported receptor status, omitted regional nodal
 
 **供临床合作者审阅的试点报告草稿**
 
-版本 0.24，2026 年 10 月
+版本 0.25，2026 年 10 月
 
 作者：[TODO]
 
@@ -584,6 +598,8 @@ LLM 辅助审查只用于开发阶段，尤其服务于 PDAC adaptation。针对
 
 Primary estimand 定义为 P(harness preference | directional judgment)。只有该方向性分析排除 TIE。我们使用总体平均的 logistic GEE，并在每份病历内采用 exchangeable working correlation。模型将 evaluator 作为固定效应，总体模型同时校正 cancer type；癌种分层模型只校正 evaluator。我们在观测到的 covariate distribution 上标准化 fitted probabilities，并在 logit scale 上用 delta method 计算 95% CI。调整后偏好概率是 primary effect；它相对 50% 的差值是 absolute effect，对应的 OR 是次要 model-scale effect。Passweg 等在 oncology extraction 中使用了相近的 report-cluster robust logistic model 和 delta-method marginal effects [14]。其他临床比较研究保留了 equivalent response category [24]、报告带 CI 的 preference proportion [25]，或用 mixed-effects model 处理 case 和 participant 的重复观测 [26]。
 
+Sensitivity analysis 逐次排除一位医生并重新拟合总体模型，共完成四次。每次拟合都根据剩余三位医生重新建立 fixed-effect coding。
+
 描述性分析保留完整的三分类结果。粗方向性比例使用按病历聚类的 sandwich CI。Tie-inclusive sensitivity analysis 将 harness、TIE 和 baseline 分别编码为 1、0 和 -1，其均值即 net preference margin。该指标的 normal 95% CI 使用按病历聚类的 sandwich standard error，不使用 bootstrap。我们还把字段判断合并到病历层面，并对正向与负向 note margin 使用双侧 exact sign test。
 
 ### 2.10 Staged technical ablation
@@ -640,6 +656,8 @@ PDAC 的医生评估是检验这种适配的主要证据。在四次独立评估
 | 总体 | 79.98%（75.75%-83.63%） | +29.98（+25.75 至 +33.63） | 3.995（3.124-5.110） | 2.67 x 10^-28 | 870 |
 | Breast | 81.66%（76.02%-86.21%） | +31.66（+26.02 至 +36.21） | 4.452（3.169-6.253） | 7.04 x 10^-18 | 443 |
 | PDAC | 78.15%（71.47%-83.62%） | +28.15（+21.47 至 +33.62） | 3.576（2.505-5.105） | 2.30 x 10^-12 | 427 |
+
+Leave-one-physician-out analysis 的调整后概率为 77.08% 至 83.53%，四个 95% CI 的下限均高于 50%（Supplementary Table S1）。
 
 保留全部 2,160 项判断时，tie-inclusive net preference margin 为 +24.44 个百分点，note-cluster robust 95% CI 为 +20.42 至 +28.47；TIE 对两个系统的贡献均记为零。病历级敏感性分析中，合并医生评分后 39 份病历的 harness-minus-baseline margin 为正，1 份为负，双侧 exact sign test p=7.46 x 10^-11。这是 replication 和 sensitivity summary，不是独立的 accuracy endpoint。四位医生仍不足以精确估计更广泛医生群体中的差异。
 
@@ -800,6 +818,7 @@ Technical ablation 已经区分了几个 broad stages，但仍只有一位非医
 
 ## 版本历史
 
+- **v0.25：** 增加 leave-one-physician-out GEE sensitivity analysis 和 Supplementary Table S1。
 - **v0.24：** 恢复医生原稿中的临床观点：流畅且看似合理的输出可能掩盖 extraction error，使日常审阅难以及时发现。
 - **v0.23：** 将主稿的每个顶层章节设为独立折叠项。科学正文默认展开，附录、参考文献和版本历史默认折叠，同时保留锚点跳转与完整打印输出。
 - **v0.22：** 将核心字段、调整后 effect 和紧凑的病历级分布整合为一张主图，把主文图组收敛为六张，并将带完整病历标签的图移至 Supplementary Figure S1。
@@ -844,6 +863,15 @@ Errors should be short arrays of concrete field-level findings grounded in the n
 <div data-supplementary-figure="S1"></div>
 
 ***Supplementary Figure S1.*** *按癌种合并四位医生评分后的完整 note-level normalized preference margins。每个标签对应一份 held-out note。Margin 定义为该病历的 harness preferences 减 baseline preferences，再除以 completed judgments。20 份 breast notes 的 margin 全部为正；20 份 PDAC notes 中 19 份为正，1 份为负。该图属于 supporting sensitivity analysis，不是 accuracy estimate。*
+
+***Supplementary Table S1.*** *总体 directional GEE 的 leave-one-physician-out sensitivity analysis。每次排除一位医生后重新建立模型，校正 cancer type 和剩余三位医生的 fixed effects，按病历聚类，并在观测到的 covariate distribution 上标准化。四次拟合均收敛。*
+
+| 排除的医生 | Directional n | 病历数 | 调整后概率 (95% CI) | 相对 50% 的差值 (95% CI)，百分点 | OR (95% CI) | p |
+|---|---:|---:|---:|---:|---:|---:|
+| 医生 01 | 675 | 40 | 79.72% (75.62%-83.28%) | +29.72 (+25.62 至 +33.28) | 3.930 (3.101-4.981) | 1.06 x 10^-29 |
+| 医生 02 | 688 | 40 | 77.08% (72.19%-81.33%) | +27.08 (+22.19 至 +31.33) | 3.363 (2.596-4.357) | 4.12 x 10^-20 |
+| 医生 03 | 594 | 40 | 80.01% (75.72%-83.70%) | +30.01 (+25.72 至 +33.70) | 4.002 (3.119-5.136) | 1.20 x 10^-27 |
+| 医生 04 | 653 | 40 | 83.53% (79.37%-87.00%) | +33.53 (+29.37 至 +37.00) | 5.073 (3.847-6.690) | 1.22 x 10^-30 |
 
 ## 参考文献
 
