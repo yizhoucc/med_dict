@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.1 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
+These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.2 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
 
 Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. The same script generates four main figures and two supplementary figures.
 
@@ -34,3 +34,12 @@ screen and the PNG only under `@media print`; this avoids Safari's excessive
 inline-SVG print spooling without reducing screen clarity. The six PNGs total
 less than 1 MiB, and the renderer rejects any fallback larger than 5 MiB or
 with dimensions that do not match its source figure.
+
+Normal Safari printing relies on `break-inside: avoid` for each figure and
+table. The bounded WebKit regression in `tests/verify_workshop_print.sh` uses
+fixed-height `createPDF` rectangles instead of Safari's print compositor. The
+HTML's `preparePrintExport()` function therefore inserts transient, print-only
+spacers before any figure or table that would cross one of those test
+boundaries. It does not alter the screen document or normal Safari print
+layout, and the verifier requires all six figures and eight tables to remain
+within a single test page before it creates the PDF.
