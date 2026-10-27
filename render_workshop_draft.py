@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.2).
+"""Build the English-only physician-authored manuscript HTML (version 1.2.1).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -14,6 +14,7 @@ import html
 import importlib.util
 import json
 import re
+import struct
 import subprocess
 import sys
 from html.parser import HTMLParser
@@ -40,6 +41,18 @@ MAIN_FIGURES = {
 SUPPLEMENTARY_FIGURES = {
     "S1": FIGURE_DIR / "supplementary_figure_s1_note_margins.svg",
     "S2": FIGURE_DIR / "supplementary_figure_s2_staged_ablation.svg",
+}
+PRINT_FIGURES = {
+    "1": FIGURE_DIR / "figure1_development_pathway_print.png",
+    "2": FIGURE_DIR / "figure2_evaluator_distribution_print.png",
+    "3": FIGURE_DIR / "figure3_interrater_matrix_print.png",
+    "4": FIGURE_DIR / "figure4_effect_profile_print.png",
+    "S1": FIGURE_DIR / "supplementary_figure_s1_note_margins_print.png",
+    "S2": FIGURE_DIR / "supplementary_figure_s2_staged_ablation_print.png",
+}
+PRINT_FIGURE_DIMENSIONS = {
+    "1": (1500, 1180), "2": (1500, 720), "3": (1500, 760),
+    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 760),
 }
 
 SECTION_HEADINGS = {
@@ -104,10 +117,10 @@ article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-r
 details{border:0}summary{cursor:pointer}.fold>summary{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
-.figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
+.figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
 @media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}}
-@media print{body{background:#fff}.layout{display:block;width:auto;margin:0}.toc,.fold>summary::before,.version-entry>summary::before{display:none!important}article{padding:0;border:0;box-shadow:none}.fold:not([open])>.fold-body,.version-entry:not([open])>.version-entry-body{display:block!important}.fold>summary,.version-entry>summary{display:block!important;padding:20px 0 8px;list-style:none}.figure,.table-wrap,.comment{break-inside:avoid}}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement:not([open])>.fold-body{display:block!important}.main-section>summary,.supplement>summary{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>summary::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}}
 """
 
 SCRIPT = r"""
@@ -154,6 +167,17 @@ def svg_data_uri(path: Path) -> str:
     if len(data) >= 209_715_200:
         raise ValueError(f"Figure exceeds 200 MiB limit: {path}")
     return "data:image/svg+xml;base64," + base64.b64encode(data).decode("ascii")
+
+
+def validate_print_png(number: str, path: Path) -> None:
+    data = path.read_bytes()
+    if len(data) >= 5_242_880:
+        raise ValueError(f"Print figure exceeds 5 MiB limit: {path}")
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError(f"Print figure is not PNG: {path}")
+    dimensions = struct.unpack(">II", data[16:24])
+    if dimensions != PRINT_FIGURE_DIMENSIONS[number]:
+        raise ValueError(f"Unexpected print figure dimensions for {number}: {dimensions}")
 
 
 def link_crossrefs(text: str) -> str:
@@ -257,11 +281,15 @@ def result_table(label: str, title: str, headers: list[str], rows: list[list[str
 
 def figure(number: str, title: str, caption: str, *, supplementary: bool = False) -> str:
     path = SUPPLEMENTARY_FIGURES[number] if supplementary else MAIN_FIGURES[number]
+    print_path = PRINT_FIGURES[number]
+    validate_print_png(number, print_path)
+    print_src = print_path.relative_to(ROOT).as_posix()
     label = f"Supplementary Figure {number}" if supplementary else f"Figure {number}"
     attr = "data-supplementary-figure" if supplementary else "data-main-figure"
     return (
         f'<figure class="figure" id="figure-{number.lower()}" data-origin="technical-insert" {attr}="{number}">'
-        f'<img src="{svg_data_uri(path)}" alt="{esc(title)}">'
+        f'<img class="figure-screen" src="{svg_data_uri(path)}" alt="{esc(title)}">'
+        f'<img class="figure-print" src="{esc(print_src)}" alt="" aria-hidden="true">'
         f'<figcaption class="figure-caption"><strong>{esc(label)}.</strong> {esc(caption)}</figcaption></figure>'
     )
 
@@ -494,6 +522,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.2.1", "2026-10-27", "Restricted print output to the clean manuscript and formal supplement, excluded author-only workspaces and comments from print, and added bounded WebKit print regression coverage."),
         ("v1.2", "2026-10-26", "Converted the review draft into a clean manuscript view, made the main tables sequential, corrected all approved table and figure cross-references, retained the 12 Word comments in a neutral end section, and restored the 26-entry author literature-review workspace."),
         ("v1.1", "2026-10-26", "Removed the draft-information panel, consolidated six open author queries with bidirectional review links, retained only the approved note-distribution panel in Supplementary Figure S1, and made each version-history entry independently collapsible."),
         ("v1.0", "2026-10-26", "Replaced the prior bilingual draft with an English-only rendering of the physician Word manuscript as the sole prose source, added exact source-preservation checks, split the cancer-specific result tables, and rebuilt the main and supplementary figure set."),
@@ -526,9 +555,9 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     sections, markdown_body = build_scientific_sections(data)
     article = f"""
 <article>
-  <h1>Physician-authored manuscript draft</h1>
-  <p class="subtitle">English working manuscript · Version 1.2 · October 26, 2026</p>
-  <p class="current-change"><strong>Current change:</strong> clean manuscript view with sequential table numbering, approved cross-reference corrections, neutral Word-comment navigation, and the restored author literature-review workspace.</p>
+  <h1 class="screen-only">Physician-authored manuscript draft</h1>
+  <p class="subtitle screen-only">English working manuscript · Version 1.2.1 · October 27, 2026</p>
+  <p class="current-change screen-only"><strong>Current change:</strong> bounded print output now contains only the clean manuscript and formal supplement; screen comments and author workspaces remain available but are excluded from print.</p>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Comments</summary><div class="fold-body">{render_comments(data)}</div></details>
@@ -536,13 +565,13 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.2</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.2.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.2, October 26, 2026.
+English working manuscript. Version 1.2.1, October 27, 2026.
 
-Current change: clean manuscript view with sequential table numbering, approved cross-reference corrections, neutral Word-comment navigation, and the restored author literature-review workspace.
+Current change: bounded print output now contains only the clean manuscript and formal supplement; screen comments and author workspaces remain available but are excluded from print.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -665,14 +694,29 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if '<details class="fold literature-workspace" id="literature-workspace">' not in document: raise AssertionError("Literature workspace is missing")
     if "if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true" not in document or "target.focus({preventScroll:true})" not in document:
         raise AssertionError("Closed-details target reveal behavior is missing")
-    if "@media print" not in document or ".fold:not([open])>.fold-body,.version-entry:not([open])>.version-entry-body{display:block!important}" not in document:
-        raise AssertionError("Print view does not force closed manuscript content to render")
+    print_requirements = [
+        "@media print", ".main-section:not([open])>.fold-body,.supplement:not([open])>.fold-body{display:block!important}",
+        ".toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}",
+        ".figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}",
+    ]
+    if any(rule not in document for rule in print_requirements):
+        raise AssertionError("Print view does not isolate and constrain the clean manuscript")
+    if document.count('class="figure-print"') != 6 or document.count('class="figure-screen"') != 6:
+        raise AssertionError("Print-safe figure fallbacks are incomplete")
+    for print_path in PRINT_FIGURES.values():
+        source = print_path.relative_to(ROOT).as_posix()
+        if document.count(f'src="{source}"') != 1:
+            raise AssertionError(f"Print-safe figure is not linked exactly once: {source}")
+    for closed_id in ["supplementary-material", "physician-comments", "version-history", "literature-workspace"]:
+        opening = re.search(rf'<details[^>]*id="{closed_id}"[^>]*>', document)
+        if not opening or re.search(r"\sopen(?:\s|=|>)", opening.group(0)):
+            raise AssertionError(f"Screen-only fold is not default-closed: {closed_id}")
     expected_comment_anchors = [f"comment-anchor-{item['id']}" for item in data["comments"]]
     if parser.comment_anchor_ids != expected_comment_anchors: raise AssertionError("Comment anchors are incomplete")
     if parser.comment_backlinks != [f"#comment-anchor-{item['id']}" for item in data["comments"]]: raise AssertionError("Comment backlinks are incomplete")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.2 · October 26, 2026" not in document or "draft v1.2" not in document: raise AssertionError("Version 1.2 metadata is missing")
-    if document.count('class="version-entry"') != 12 or any(f'id="version-{item}"' not in document for item in ["1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.2.1 · October 27, 2026" not in document or "draft v1.2.1" not in document: raise AssertionError("Version 1.2.1 metadata is missing")
+    if document.count('class="version-entry"') != 13 or any(f'id="version-{item}"' not in document for item in ["1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
     if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
     visible_text_lower = parser.visible_text.lower()

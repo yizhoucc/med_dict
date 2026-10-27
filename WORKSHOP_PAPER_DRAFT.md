@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.2, October 26, 2026.
+English working manuscript. Version 1.2.1, October 27, 2026.
 
-Current change: clean manuscript view with sequential table numbering, approved cross-reference corrections, neutral Word-comment navigation, and the restored author literature-review workspace.
+Current change: bounded print output now contains only the clean manuscript and formal supplement; screen comments and author workspaces remain available but are excluded from print.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

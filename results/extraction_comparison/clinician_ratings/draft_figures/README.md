@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These vector figures use one publication layout and fixed semantic color system across the English-only version 1.1 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
+These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.1 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
 
 Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. The same script generates four main figures and two supplementary figures.
 
@@ -27,3 +27,10 @@ Files:
 - `supplementary_figure_s2_staged_ablation.svg`: A-D stage strip and adjacent-stage ablation results overall and by cancer.
 
 The `rough` suffix remains only on the three unchanged legacy paths. The content is regenerated from source data and the locked ablation summary whenever physician exports or analysis specifications change. Across all figures, blue identifies the harness, orange the baseline, gray ties or neutral elements, green physicians, and purple LLM review.
+
+Each SVG has a correspondingly named `_print.png` fallback rendered from that
+SVG at the same 1500-pixel width and aspect ratio. The HTML uses the SVG on
+screen and the PNG only under `@media print`; this avoids Safari's excessive
+inline-SVG print spooling without reducing screen clarity. The six PNGs total
+less than 1 MiB, and the renderer rejects any fallback larger than 5 MiB or
+with dimensions that do not match its source figure.
